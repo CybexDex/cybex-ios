@@ -1,0 +1,309 @@
+PODS:
+  - Alamofire (4.7.2)
+  - Atributika (4.4.2)
+  - AwaitKit (5.0.0):
+    - PromiseKit (~> 6)
+  - BeareadToast (0.0.3)
+  - BigInt (3.0.1):
+    - SipHash (~> 1.2)
+  - BiometricAuthentication (1.0.5)
+  - Cache (4.2.0)
+  - ChainableAnimations (3.0.1)
+  - Crashlytics (3.10.1):
+    - Fabric (~> 1.7.5)
+  - CryptoSwift (0.9.0)
+  - DNSPageView (1.0.1)
+  - EasyAnimation (2.0.2)
+  - ESTabBarController-swift (2.6.2)
+  - EZSwiftExtensions (1.11)
+  - Fabric (1.7.6)
+  - FBRetainCycleDetector (0.1.4)
+  - FCUUID (1.3.1):
+    - UICKeyChainStore (~> 2.1.0)
+  - GRDB.swift (2.10.0)
+  - IHKeyboardAvoiding (4.2)
+  - JSONRPCKit (3.0.0):
+    - Result (~> 3.2.0)
+  - KeychainAccess (3.1.1)
+  - Kingfisher (4.7.0)
+  - KMNavigationBarTransition (1.1.5)
+  - LifetimeTracker (1.4.0)
+  - Localize-Swift (2.0.0)
+  - Locksmith (4.0.0)
+  - MJRefresh (3.1.15.3)
+  - MLeaksFinder (1.0.0):
+    - FBRetainCycleDetector
+  - Moya (11.0.2):
+    - Moya/Core (= 11.0.2)
+  - Moya/Core (11.0.2):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
+  - NVActivityIndicatorView (4.2.1):
+    - NVActivityIndicatorView/Presenter (= 4.2.1)
+  - NVActivityIndicatorView/Presenter (4.2.1)
+  - ObjectMapper (3.1.0)
+  - PromiseKit (6.2.6):
+    - PromiseKit/CorePromise (= 6.2.6)
+    - PromiseKit/Foundation (= 6.2.6)
+    - PromiseKit/UIKit (= 6.2.6)
+  - PromiseKit/CorePromise (6.2.6)
+  - PromiseKit/Foundation (6.2.6):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.2.6):
+    - PromiseKit/CorePromise
+  - Proposer (1.2.0)
+  - R.swift (4.0.0):
+    - R.swift.Library (~> 4.0.0)
+  - R.swift.Library (4.0.0)
+  - RealReachability (1.2.0):
+    - RealReachability/Connection (= 1.2.0)
+    - RealReachability/Ping (= 1.2.0)
+  - RealReachability/Connection (1.2.0)
+  - RealReachability/Ping (1.2.0)
+  - Result (3.2.4)
+  - ReSwift (4.0.1)
+  - Reveal-SDK (14)
+  - RxCocoa (4.1.2):
+    - RxSwift (~> 4.0)
+  - RxGesture (1.2.1):
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+  - RxGRDB (0.10.0):
+    - RxGRDB/default (= 0.10.0)
+    - RxSwift (~> 4.0)
+  - RxGRDB/default (0.10.0):
+    - GRDB.swift (~> 2.6)
+    - RxSwift (~> 4.0)
+  - RxSwift (4.1.2)
+  - SDCAlertView (8.0.2)
+  - SipHash (1.2.0)
+  - Siren (3.4.0)
+  - Starscream (3.0.5)
+  - SwifterSwift (4.3.0):
+    - SwifterSwift/AppKit (= 4.3.0)
+    - SwifterSwift/CoreGraphics (= 4.3.0)
+    - SwifterSwift/CoreLocation (= 4.3.0)
+    - SwifterSwift/Foundation (= 4.3.0)
+    - SwifterSwift/MapKit (= 4.3.0)
+    - SwifterSwift/SwiftStdlib (= 4.3.0)
+    - SwifterSwift/UIKit (= 4.3.0)
+  - SwifterSwift/AppKit (4.3.0)
+  - SwifterSwift/CoreGraphics (4.3.0)
+  - SwifterSwift/CoreLocation (4.3.0)
+  - SwifterSwift/Foundation (4.3.0)
+  - SwifterSwift/MapKit (4.3.0)
+  - SwifterSwift/SwiftStdlib (4.3.0)
+  - SwifterSwift/UIKit (4.3.0)
+  - SwiftHash (2.0.1)
+  - SwiftTheme (0.4.1)
+  - SwiftyJSON (4.1.0)
+  - SwiftyUserDefaults (3.0.1)
+  - TableFlip (1.2)
+  - TextFieldEffects (1.4.0)
+  - Then (2.3.0)
+  - TinyConstraints (3.1.0)
+  - Typist (1.2.1)
+  - UICKeyChainStore (2.1.1)
+  - UIFontComplete (3.0.0)
+  - Zephyr (3.1.2)
+  - ZLaunchAd (2.0.2):
+    - SwiftHash (>= 2.0.1)
+
+DEPENDENCIES:
+  - Atributika
+  - AwaitKit
+  - BeareadToast (from `https://github.com/phpmaple/BeareadToast`)
+  - BigInt
+  - BiometricAuthentication
+  - Cache
+  - ChainableAnimations
+  - Crashlytics
+  - CryptoSwift
+  - DNSPageView
+  - EasyAnimation
+  - ESTabBarController-swift
+  - EZSwiftExtensions (from `https://github.com/Steven-Cheung/EZSwiftExtensions`, branch `swift4`)
+  - Fabric
+  - FCUUID
+  - GRDB.swift
+  - IHKeyboardAvoiding
+  - JSONRPCKit
+  - KeychainAccess
+  - Kingfisher
+  - KMNavigationBarTransition
+  - LifetimeTracker
+  - Localize-Swift
+  - Locksmith
+  - MJRefresh
+  - MLeaksFinder
+  - Moya
+  - NVActivityIndicatorView
+  - ObjectMapper
+  - Proposer
+  - R.swift
+  - RealReachability
+  - ReSwift
+  - Reveal-SDK
+  - RxCocoa
+  - RxGesture
+  - RxGRDB
+  - RxSwift
+  - SDCAlertView
+  - Siren
+  - Starscream
+  - SwifterSwift
+  - SwiftTheme
+  - SwiftyJSON
+  - SwiftyUserDefaults
+  - TableFlip
+  - TextFieldEffects
+  - Then
+  - TinyConstraints
+  - Typist
+  - UIFontComplete
+  - Zephyr
+  - ZLaunchAd
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - Atributika
+    - AwaitKit
+    - BigInt
+    - BiometricAuthentication
+    - Cache
+    - ChainableAnimations
+    - Crashlytics
+    - CryptoSwift
+    - DNSPageView
+    - EasyAnimation
+    - ESTabBarController-swift
+    - Fabric
+    - FBRetainCycleDetector
+    - FCUUID
+    - GRDB.swift
+    - IHKeyboardAvoiding
+    - JSONRPCKit
+    - KeychainAccess
+    - Kingfisher
+    - KMNavigationBarTransition
+    - LifetimeTracker
+    - Localize-Swift
+    - Locksmith
+    - MJRefresh
+    - MLeaksFinder
+    - Moya
+    - NVActivityIndicatorView
+    - ObjectMapper
+    - PromiseKit
+    - Proposer
+    - R.swift
+    - R.swift.Library
+    - RealReachability
+    - Result
+    - ReSwift
+    - Reveal-SDK
+    - RxCocoa
+    - RxGesture
+    - RxGRDB
+    - RxSwift
+    - SDCAlertView
+    - SipHash
+    - Siren
+    - Starscream
+    - SwifterSwift
+    - SwiftHash
+    - SwiftTheme
+    - SwiftyJSON
+    - SwiftyUserDefaults
+    - TableFlip
+    - TextFieldEffects
+    - Then
+    - TinyConstraints
+    - Typist
+    - UICKeyChainStore
+    - UIFontComplete
+    - Zephyr
+    - ZLaunchAd
+
+EXTERNAL SOURCES:
+  BeareadToast:
+    :git: https://github.com/phpmaple/BeareadToast
+  EZSwiftExtensions:
+    :branch: swift4
+    :git: https://github.com/Steven-Cheung/EZSwiftExtensions
+
+CHECKOUT OPTIONS:
+  BeareadToast:
+    :commit: 1e82fc7338e9ab176168af234900f5fc61ade947
+    :git: https://github.com/phpmaple/BeareadToast
+  EZSwiftExtensions:
+    :commit: 2daa79e708df5793d191c95ad4fae6d7f9347533
+    :git: https://github.com/Steven-Cheung/EZSwiftExtensions
+
+SPEC CHECKSUMS:
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  Atributika: 61cf7794646bd033cd19aad1b8f7e1cae8daa877
+  AwaitKit: d8a6e30eeb2da916630270b44636b31033388bd8
+  BeareadToast: 17ff7f5ac9609b186543d6a45df8f15f78c9ca7a
+  BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
+  BiometricAuthentication: e80e99bf1fe871ab624172eb91f1ddbbc47499b5
+  Cache: f28f8dd64b632155aabf9b3906b036a659048251
+  ChainableAnimations: 12e0a88e72fb554ad4cda38c40474e4d65c972a2
+  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  CryptoSwift: bca8c5b653dcc2d9734409242a070ff53bafac86
+  DNSPageView: 93b0f9c9ab0e2f8c1d9aa5b0d44740bd2d775d78
+  EasyAnimation: 977ef673efe8ce62447807eedb380a77b189dc80
+  ESTabBarController-swift: f0a8679e43df1e60b7b36bbcaf1dc98ba6273c7d
+  EZSwiftExtensions: 9d3dc8a51818e2fbfd11099b38a2c47d0ca693d0
+  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
+  FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
+  FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
+  GRDB.swift: 9859cab1b990eac62ee550d3d2208ec1b44f76af
+  IHKeyboardAvoiding: 9fbf816b7c3c84911964802ff110d12caf40ebef
+  JSONRPCKit: 50e0dc5e7f873e87f81562feb8836b7d1974da6d
+  KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
+  Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
+  KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
+  LifetimeTracker: 51b52d559ffd4570584996b4b94b8779e525ee62
+  Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
+  Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
+  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
+  MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
+  Moya: a725035953bc1c0eb1be505ab903984501d82440
+  NVActivityIndicatorView: 8068ba3ad39cb44cbaab25d89ff2546b3f092681
+  ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
+  PromiseKit: 8245cb2e3a8fe00453e580bd4aafb57e1671f501
+  Proposer: 722fe61822b89f551ae10afe8314067f98c39c28
+  R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
+  R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
+  RealReachability: 5e4759f821ecc1c03f6e1db0baf682ef59468b5f
+  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  ReSwift: f4012c613e13da7398827fe5aebdb938eaed40a3
+  Reveal-SDK: 55b5c5545233b680c2f8da734f202acc15d422b7
+  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
+  RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
+  RxGRDB: 6a62783c9559f9b1d87c52abd1c331e469765903
+  RxSwift: e49536837d9901277638493ea537394d4b55f570
+  SDCAlertView: 289481e983c60abc5b4b5f4c7241fec9c7a853d5
+  SipHash: c6e9e43e9c531b5bc6602545130c26194a6d31ce
+  Siren: 5b8be41b5cd05aa3528303325966e919bd53e412
+  Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
+  SwifterSwift: f3fce2b9fc5b9d8fda6eec33825e5243c60aebba
+  SwiftHash: c805de5a434eacfa0dac7210745a50c55d7fe33d
+  SwiftTheme: 36d71c4eed4b2c401c782cf036e4586c749a8173
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
+  TableFlip: 2ae22773412b295a7cbc54d95b44085bb28092f6
+  TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
+  Then: ee21c97b85ff6062b9b0080c9abb1eea46743345
+  TinyConstraints: 4721a4b303c799328867078ade6560e152df54d1
+  Typist: 88b462c1c5adc6d4e8601773fcb0b7d7113d18af
+  UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
+  UIFontComplete: 5b0f59a83308816c610164b79a2540b3520f9b72
+  Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
+  ZLaunchAd: 33386c55fe481f6c2b40250324798d4199469b46
+
+PODFILE CHECKSUM: 7e2d834a1b7cf4dedce4c2859a50263bc8af769f
+
+COCOAPODS: 1.5.0

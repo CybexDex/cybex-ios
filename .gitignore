@@ -90,3 +90,4 @@ fastlane/test_output
 
 *.generated.swift
 .DS_Store
+*.a

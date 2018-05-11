@@ -1,0 +1,13 @@
+/* 
+  InfoPlist.strings
+  cybexMobile
+
+  Created by koofrank on 2018/4/11.
+  Copyright © 2018年 Cybex. All rights reserved.
+*/
+
+NSLocationWhenInUseUsageDescription = "需要位置";
+NSMicrophoneUsageDescription = "需要麦克风";
+NSCameraUsageDescription = "需要相机";
+NSPhotoLibraryUsageDescription = "需要照片";
+CFBundleDisplayName = "CybexDex";

@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  cybexMobile
+
+  Created by koofrank on 2018/3/12.
+  Copyright © 2018年 Cybex. All rights reserved.
+*/
+
+"nav.watchlist" = "行情";
+"nav.faq" = "FAQ";
+"nav.apply" = "申请";
+"nav.account" = "账号";
+"nav.setting" = "设置";
+"market" = "交易中心";
+"language" = "语言";
+"theme" = "主题";
+"dark" = "黑色";
+"light" = "白色";
+"version" = "版本";
+
+"login.hint" = "登录您的云钱包账户";
+"register.hint" = "创建您的云钱包账户";
+"account" = "账户名";
+"password" = "密码";

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="CMk-3S-9Ik" customClass="AccessoryCollectionViewCell" customModule="cybexMobile" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="64" height="24"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="64" height="24"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xib-BU-GcS" customClass="AccessoryCollectionView" customModule="cybexMobile" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="64" height="24"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Xib-BU-GcS" firstAttribute="top" secondItem="CMk-3S-9Ik" secondAttribute="top" id="1l0-dK-dqA"/>
+                <constraint firstAttribute="trailing" secondItem="Xib-BU-GcS" secondAttribute="trailing" id="44s-mj-g4a"/>
+                <constraint firstItem="Xib-BU-GcS" firstAttribute="leading" secondItem="CMk-3S-9Ik" secondAttribute="leading" id="MPy-ZZ-cxO"/>
+                <constraint firstAttribute="bottom" secondItem="Xib-BU-GcS" secondAttribute="bottom" id="fuZ-m2-r0Q"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="PWw-Qd-Gih"/>
+            <size key="customSize" width="176" height="95"/>
+            <connections>
+                <outlet property="accessoryView" destination="Xib-BU-GcS" id="nMU-XG-8Fc"/>
+            </connections>
+            <point key="canvasLocation" x="-149" y="66"/>
+        </collectionViewCell>
+    </objects>
+</document>
