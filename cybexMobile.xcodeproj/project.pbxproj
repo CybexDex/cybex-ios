@@ -109,7 +109,6 @@
 		730FDABD20A314F900CFBF24 /* utility in Resources */ = {isa = PBXBuildFile; fileRef = 730FD5E320A314F200CFBF24 /* utility */; };
 		730FDABE20A314F900CFBF24 /* valarray in Resources */ = {isa = PBXBuildFile; fileRef = 730FD5E420A314F200CFBF24 /* valarray */; };
 		730FDABF20A314F900CFBF24 /* vector in Resources */ = {isa = PBXBuildFile; fileRef = 730FD5E520A314F200CFBF24 /* vector */; };
-		731A0E1820A42D4800507D1E /* secp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 731A0E1720A42D4700507D1E /* secp256k1.a */; };
 		731A0E9720A4408B00507D1E /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A0E6D20A4408900507D1E /* UITextField+Extensions.swift */; };
 		731A0E9D20A4409900507D1E /* EntryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A0E9920A4409800507D1E /* EntryActions.swift */; };
 		731A0E9E20A4409900507D1E /* EntryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A0E9A20A4409800507D1E /* EntryCoordinator.swift */; };
@@ -117,10 +116,6 @@
 		731A0EA020A4409900507D1E /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A0E9C20A4409800507D1E /* EntryViewController.swift */; };
 		731A0EA220A440A700507D1E /* EntryRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A0EA120A440A600507D1E /* EntryRootCoordinator.swift */; };
 		731A0EA420A440D000507D1E /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A0EA320A440CF00507D1E /* UIColor+Additions.swift */; };
-		731A0F3220A460F300507D1E /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 731A0F3120A460F300507D1E /* libboost.a */; };
-		731A0FC620A4614F00507D1E /* libfc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 731A0FC520A4614E00507D1E /* libfc.a */; };
-		731A101720A4621A00507D1E /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 731A101520A4621A00507D1E /* libcrypto.a */; };
-		731A101820A4621A00507D1E /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 731A101620A4621A00507D1E /* libssl.a */; };
 		7320D656205A90FD00C3F579 /* NSObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320D655205A90FD00C3F579 /* NSObject+Extensions.swift */; };
 		7320D658205A942C00C3F579 /* NSNotification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320D657205A942C00C3F579 /* NSNotification+Extensions.swift */; };
 		7320D69D205B8C1E00C3F579 /* KLineConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320D69C205B8C1E00C3F579 /* KLineConfiguration.swift */; };
@@ -153,6 +148,11 @@
 		73A0CC41206A3DDA00463ADE /* AssetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0CC40206A3DDA00463ADE /* AssetInfo.swift */; };
 		73A571692067FD1900921781 /* MarketCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A571682067FD1800921781 /* MarketCache.swift */; };
 		73AAD11D20A55951002DEFED /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AAD11C20A55951002DEFED /* R.generated.swift */; };
+		73AAD12E20A577C4002DEFED /* libfc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12920A577C1002DEFED /* libfc.a */; };
+		73AAD12F20A577C4002DEFED /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12A20A577C2002DEFED /* libssl.a */; };
+		73AAD13020A577C4002DEFED /* secp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12B20A577C3002DEFED /* secp256k1.a */; };
+		73AAD13120A577C4002DEFED /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12C20A577C3002DEFED /* libboost.a */; };
+		73AAD13220A577C4002DEFED /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12D20A577C4002DEFED /* libcrypto.a */; };
 		73ACD80720721B5E00592E69 /* SettingDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ACD80320721B5E00592E69 /* SettingDetailActions.swift */; };
 		73ACD80820721B5E00592E69 /* SettingDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ACD80420721B5E00592E69 /* SettingDetailCoordinator.swift */; };
 		73ACD80920721B5E00592E69 /* SettingDetailReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ACD80520721B5E00592E69 /* SettingDetailReducers.swift */; };
@@ -11261,7 +11261,6 @@
 		730FDA5A20A314F400CFBF24 /* xpressive_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xpressive_fwd.hpp; sourceTree = "<group>"; };
 		730FDA5B20A314F400CFBF24 /* xpressive_static.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xpressive_static.hpp; sourceTree = "<group>"; };
 		730FDA5C20A314F400CFBF24 /* xpressive_typeof.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xpressive_typeof.hpp; sourceTree = "<group>"; };
-		731A0E1720A42D4700507D1E /* secp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = secp256k1.a; sourceTree = "<group>"; };
 		731A0E6D20A4408900507D1E /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		731A0E9920A4409800507D1E /* EntryActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryActions.swift; sourceTree = "<group>"; };
 		731A0E9A20A4409800507D1E /* EntryCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryCoordinator.swift; sourceTree = "<group>"; };
@@ -11269,7 +11268,6 @@
 		731A0E9C20A4409800507D1E /* EntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		731A0EA120A440A600507D1E /* EntryRootCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryRootCoordinator.swift; sourceTree = "<group>"; };
 		731A0EA320A440CF00507D1E /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
-		731A0F3120A460F300507D1E /* libboost.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libboost.a; sourceTree = "<group>"; };
 		731A0F3520A4614E00507D1E /* actor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = actor.hpp; sourceTree = "<group>"; };
 		731A0F3620A4614E00507D1E /* aligned.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = aligned.hpp; sourceTree = "<group>"; };
 		731A0F3720A4614E00507D1E /* any.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = any.hpp; sourceTree = "<group>"; };
@@ -11401,7 +11399,6 @@
 		731A0FC120A4614E00507D1E /* vector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vector.hpp; sourceTree = "<group>"; };
 		731A0FC220A4614E00507D1E /* vector_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vector_fwd.hpp; sourceTree = "<group>"; };
 		731A0FC320A4614E00507D1E /* wait_any.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = wait_any.hpp; sourceTree = "<group>"; };
-		731A0FC520A4614E00507D1E /* libfc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfc.a; sourceTree = "<group>"; };
 		731A0FC920A4621900507D1E /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
 		731A0FCA20A4621900507D1E /* asn1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn1.h; sourceTree = "<group>"; };
 		731A0FCB20A4621900507D1E /* asn1_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn1_mac.h; sourceTree = "<group>"; };
@@ -11477,8 +11474,6 @@
 		731A101120A4621900507D1E /* x509.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509.h; sourceTree = "<group>"; };
 		731A101220A4621900507D1E /* x509_vfy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509_vfy.h; sourceTree = "<group>"; };
 		731A101320A4621900507D1E /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
-		731A101520A4621A00507D1E /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
-		731A101620A4621A00507D1E /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		7320D655205A90FD00C3F579 /* NSObject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
 		7320D657205A942C00C3F579 /* NSNotification+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extensions.swift"; sourceTree = "<group>"; };
 		7320D69C205B8C1E00C3F579 /* KLineConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KLineConfiguration.swift; sourceTree = "<group>"; };
@@ -11512,6 +11507,11 @@
 		73A0CC40206A3DDA00463ADE /* AssetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInfo.swift; sourceTree = "<group>"; };
 		73A571682067FD1800921781 /* MarketCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCache.swift; sourceTree = "<group>"; };
 		73AAD11C20A55951002DEFED /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		73AAD12920A577C1002DEFED /* libfc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfc.a; path = library/libfc.a; sourceTree = "<group>"; };
+		73AAD12A20A577C2002DEFED /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = library/libssl.a; sourceTree = "<group>"; };
+		73AAD12B20A577C3002DEFED /* secp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = secp256k1.a; path = library/secp256k1.a; sourceTree = "<group>"; };
+		73AAD12C20A577C3002DEFED /* libboost.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost.a; path = library/libboost.a; sourceTree = "<group>"; };
+		73AAD12D20A577C4002DEFED /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = library/libcrypto.a; sourceTree = "<group>"; };
 		73ACD80320721B5E00592E69 /* SettingDetailActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailActions.swift; sourceTree = "<group>"; };
 		73ACD80420721B5E00592E69 /* SettingDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailCoordinator.swift; sourceTree = "<group>"; };
 		73ACD80520721B5E00592E69 /* SettingDetailReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailReducers.swift; sourceTree = "<group>"; };
@@ -11623,12 +11623,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				731A101820A4621A00507D1E /* libssl.a in Frameworks */,
-				731A0FC620A4614F00507D1E /* libfc.a in Frameworks */,
-				731A0E1820A42D4800507D1E /* secp256k1.a in Frameworks */,
-				731A0F3220A460F300507D1E /* libboost.a in Frameworks */,
+				73AAD12E20A577C4002DEFED /* libfc.a in Frameworks */,
+				73AAD12F20A577C4002DEFED /* libssl.a in Frameworks */,
+				73AAD13020A577C4002DEFED /* secp256k1.a in Frameworks */,
+				73AAD13120A577C4002DEFED /* libboost.a in Frameworks */,
+				73AAD13220A577C4002DEFED /* libcrypto.a in Frameworks */,
 				78F9F85527183B9AAEBF202D /* Pods_cybexMobile.framework in Frameworks */,
-				731A101720A4621A00507D1E /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11682,6 +11682,11 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73AAD12C20A577C3002DEFED /* libboost.a */,
+				73AAD12D20A577C4002DEFED /* libcrypto.a */,
+				73AAD12920A577C1002DEFED /* libfc.a */,
+				73AAD12A20A577C2002DEFED /* libssl.a */,
+				73AAD12B20A577C3002DEFED /* secp256k1.a */,
 				72C4E6233ACD8199E4F2C647 /* Pods_cybexMobile.framework */,
 				28C733506B85D343A1BC003A /* Pods_cybexMobileTests.framework */,
 			);
@@ -30291,14 +30296,6 @@
 			path = detail;
 			sourceTree = "<group>";
 		};
-		731A0E1620A422D500507D1E /* secp256k1-zkp */ = {
-			isa = PBXGroup;
-			children = (
-				731A0E1720A42D4700507D1E /* secp256k1.a */,
-			);
-			path = "secp256k1-zkp";
-			sourceTree = "<group>";
-		};
 		731A0E9820A4409800507D1E /* Entry */ = {
 			isa = PBXGroup;
 			children = (
@@ -30314,17 +30311,8 @@
 			isa = PBXGroup;
 			children = (
 				731A0FC720A4621900507D1E /* include */,
-				731A101420A4621A00507D1E /* lib */,
 			);
 			path = openssl;
-			sourceTree = "<group>";
-		};
-		731A0F3020A460F300507D1E /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				731A0F3120A460F300507D1E /* libboost.a */,
-			);
-			path = lib;
 			sourceTree = "<group>";
 		};
 		731A0F3320A4614E00507D1E /* include */ = {
@@ -30569,14 +30557,6 @@
 			path = thread;
 			sourceTree = "<group>";
 		};
-		731A0FC420A4614E00507D1E /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				731A0FC520A4614E00507D1E /* libfc.a */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
 		731A0FC720A4621900507D1E /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -30665,15 +30645,6 @@
 				731A101320A4621900507D1E /* x509v3.h */,
 			);
 			path = openssl;
-			sourceTree = "<group>";
-		};
-		731A101420A4621A00507D1E /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				731A101520A4621A00507D1E /* libcrypto.a */,
-				731A101620A4621A00507D1E /* libssl.a */,
-			);
-			path = lib;
 			sourceTree = "<group>";
 		};
 		7320D669205B7DED00C3F579 /* Services */ = {
@@ -30800,7 +30771,6 @@
 			isa = PBXGroup;
 			children = (
 				731A0F3320A4614E00507D1E /* include */,
-				731A0FC420A4614E00507D1E /* lib */,
 			);
 			path = libfc;
 			sourceTree = "<group>";
@@ -31097,7 +31067,6 @@
 				731A0EDE20A4609500507D1E /* openssl */,
 				73EA9BAE2086F8300045A88B /* boost */,
 				7370E2D920A2F0C0001F6C3F /* libfc */,
-				731A0E1620A422D500507D1E /* secp256k1-zkp */,
 			);
 			path = addons;
 			sourceTree = "<group>";
@@ -31105,7 +31074,6 @@
 		73EA9BAE2086F8300045A88B /* boost */ = {
 			isa = PBXGroup;
 			children = (
-				731A0F3020A460F300507D1E /* lib */,
 				730FABB620A314E000CFBF24 /* include */,
 			);
 			path = boost;
@@ -31847,13 +31815,6 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-randombytes",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
 					"$(SRCROOT)/cybexMobile/addons/libfc/include",
 					"$(SRCROOT)/cybexMobile/addons/boost/include",
 					"$(SRCROOT)/cybexMobile/addons/openssl/include",
@@ -31862,10 +31823,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/cybexMobile/addons/secp256k1-zkp",
-					"$(SRCROOT)/cybexMobile/addons/libfc/lib",
-					"$(PROJECT_DIR)/cybexMobile/addons/boost/lib",
-					"$(PROJECT_DIR)/cybexMobile/addons/openssl/lib",
+					"$(PROJECT_DIR)/library/",
+					"$(PROJECT_DIR)/library",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -31897,13 +31856,6 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-randombytes",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
 					"$(SRCROOT)/cybexMobile/addons/libfc/include",
 					"$(SRCROOT)/cybexMobile/addons/boost/include",
 					"$(SRCROOT)/cybexMobile/addons/openssl/include",
@@ -31912,10 +31864,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/cybexMobile/addons/secp256k1-zkp",
-					"$(SRCROOT)/cybexMobile/addons/libfc/lib",
-					"$(PROJECT_DIR)/cybexMobile/addons/boost/lib",
-					"$(PROJECT_DIR)/cybexMobile/addons/openssl/lib",
+					"$(PROJECT_DIR)/library/",
+					"$(PROJECT_DIR)/library",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
