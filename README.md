@@ -10,7 +10,7 @@
 ## Next Steps
 
 1. Download Libraries from <a href="https://drive.google.com/drive/u/2/folders/141xrtWskMxgbe_lQnkSTedL3C-M3xdKP">Google Drive</a>
-2. Add Libraries to Xcode 
+2. Add /Library to Project Root Folder, Not Xcode Project 
 3. Pod Install and chmod -R 777 Pods/
 
 ## Tips
