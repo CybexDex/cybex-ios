@@ -153,6 +153,8 @@
 		73AAD13020A577C4002DEFED /* secp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12B20A577C3002DEFED /* secp256k1.a */; };
 		73AAD13120A577C4002DEFED /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12C20A577C3002DEFED /* libboost.a */; };
 		73AAD13220A577C4002DEFED /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12D20A577C4002DEFED /* libcrypto.a */; };
+		73AAD13620A57C2E002DEFED /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AAD13520A57C2E002DEFED /* UserManager.swift */; };
+		73AAD13820A57F48002DEFED /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AAD13720A57F48002DEFED /* Crypto.swift */; };
 		73ACD80720721B5E00592E69 /* SettingDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ACD80320721B5E00592E69 /* SettingDetailActions.swift */; };
 		73ACD80820721B5E00592E69 /* SettingDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ACD80420721B5E00592E69 /* SettingDetailCoordinator.swift */; };
 		73ACD80920721B5E00592E69 /* SettingDetailReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ACD80520721B5E00592E69 /* SettingDetailReducers.swift */; };
@@ -239,7 +241,7 @@
 		73E49E50207A08BE003B14D2 /* OrderBookCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E49E4F207A08BE003B14D2 /* OrderBookCellView.swift */; };
 		73E49E52207A08CB003B14D2 /* OrderBookCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73E49E51207A08CB003B14D2 /* OrderBookCellView.xib */; };
 		73E49E54207A12E4003B14D2 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E49E53207A12E4003B14D2 /* Launch Screen.storyboard */; };
-		73E6B2B9208D911D00B015E5 /* test_boost_json.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B28E208D911A00B015E5 /* test_boost_json.cpp */; };
+		73E6B2B9208D911D00B015E5 /* fc_bridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B28E208D911A00B015E5 /* fc_bridge.cpp */; };
 		73E6B2BE208D92AB00B015E5 /* BitShareCoordinator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B2BD208D92AB00B015E5 /* BitShareCoordinator.mm */; };
 		73E6B3B42091A81F00B015E5 /* SimpleHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B3B32091A81F00B015E5 /* SimpleHTTPService.swift */; };
 		73EA6D942085C3AC0045A88B /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA6D932085C3AC0045A88B /* Demo.swift */; };
@@ -11512,6 +11514,8 @@
 		73AAD12B20A577C3002DEFED /* secp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = secp256k1.a; path = library/secp256k1.a; sourceTree = "<group>"; };
 		73AAD12C20A577C3002DEFED /* libboost.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost.a; path = library/libboost.a; sourceTree = "<group>"; };
 		73AAD12D20A577C4002DEFED /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = library/libcrypto.a; sourceTree = "<group>"; };
+		73AAD13520A57C2E002DEFED /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		73AAD13720A57F48002DEFED /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		73ACD80320721B5E00592E69 /* SettingDetailActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailActions.swift; sourceTree = "<group>"; };
 		73ACD80420721B5E00592E69 /* SettingDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailCoordinator.swift; sourceTree = "<group>"; };
 		73ACD80520721B5E00592E69 /* SettingDetailReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailReducers.swift; sourceTree = "<group>"; };
@@ -11600,8 +11604,8 @@
 		73E49E4F207A08BE003B14D2 /* OrderBookCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookCellView.swift; sourceTree = "<group>"; };
 		73E49E51207A08CB003B14D2 /* OrderBookCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderBookCellView.xib; sourceTree = "<group>"; };
 		73E49E53207A12E4003B14D2 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		73E6B28E208D911A00B015E5 /* test_boost_json.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_boost_json.cpp; sourceTree = "<group>"; };
-		73E6B2B8208D911B00B015E5 /* test_boost_json.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = test_boost_json.hpp; sourceTree = "<group>"; };
+		73E6B28E208D911A00B015E5 /* fc_bridge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fc_bridge.cpp; sourceTree = "<group>"; };
+		73E6B2B8208D911B00B015E5 /* fc_bridge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = fc_bridge.hpp; sourceTree = "<group>"; };
 		73E6B2BC208D91C100B015E5 /* BitShareCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitShareCoordinator.h; sourceTree = "<group>"; };
 		73E6B2BD208D92AB00B015E5 /* BitShareCoordinator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BitShareCoordinator.mm; sourceTree = "<group>"; };
 		73E6B3B32091A81F00B015E5 /* SimpleHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHTTPService.swift; sourceTree = "<group>"; };
@@ -11655,6 +11659,7 @@
 		13B07FAE1A68108700A75B9A /* cybexMobile */ = {
 			isa = PBXGroup;
 			children = (
+				73AAD13320A57C0B002DEFED /* Managers */,
 				73D977A42056592300CB7DE1 /* Base */,
 				73D977A0205657BB00CB7DE1 /* Constants */,
 				73D977DC20565E2500CB7DE1 /* Coordinator */,
@@ -30665,6 +30670,7 @@
 				73BDCA4D20626C09009E67A3 /* Bucket.swift */,
 				73EA6D932085C3AC0045A88B /* Demo.swift */,
 				73D8B0AF207CB6EC001A2232 /* OrderBook.swift */,
+				73AAD13720A57F48002DEFED /* Crypto.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -30781,6 +30787,22 @@
 				7373AE2C20720BB2002DC01F /* UserDefaults.swift */,
 			);
 			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		73AAD13320A57C0B002DEFED /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				73AAD13420A57C1C002DEFED /* User */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		73AAD13420A57C1C002DEFED /* User */ = {
+			isa = PBXGroup;
+			children = (
+				73AAD13520A57C2E002DEFED /* UserManager.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		73ACD83420721B6500592E69 /* Detail */ = {
@@ -31084,8 +31106,8 @@
 			children = (
 				73E6B2BC208D91C100B015E5 /* BitShareCoordinator.h */,
 				73E6B2BD208D92AB00B015E5 /* BitShareCoordinator.mm */,
-				73E6B2B8208D911B00B015E5 /* test_boost_json.hpp */,
-				73E6B28E208D911A00B015E5 /* test_boost_json.cpp */,
+				73E6B2B8208D911B00B015E5 /* fc_bridge.hpp */,
+				73E6B28E208D911A00B015E5 /* fc_bridge.cpp */,
 			);
 			path = "bitshare-core";
 			sourceTree = "<group>";
@@ -31655,17 +31677,19 @@
 				73D977E420565EA600CB7DE1 /* FAQRootCoordinator.swift in Sources */,
 				73D34E3B2063A65A008C7507 /* FAQCoordinator.swift in Sources */,
 				73D97801205660F200CB7DE1 /* HomeCoordinator.swift in Sources */,
+				73AAD13620A57C2E002DEFED /* UserManager.swift in Sources */,
 				73D977DE20565E3600CB7DE1 /* AppCoordinator.swift in Sources */,
 				73D34E4E2063A697008C7507 /* SettingViewController.swift in Sources */,
 				73ACD80720721B5E00592E69 /* SettingDetailActions.swift in Sources */,
 				73D34E4B2063A697008C7507 /* SettingActions.swift in Sources */,
 				739B6166207F325A00B61152 /* Collection+Extensions.swift in Sources */,
 				7320D6B1205BB14800C3F579 /* CBMACDModel.swift in Sources */,
+				73AAD13820A57F48002DEFED /* Crypto.swift in Sources */,
 				73E49E292078C17A003B14D2 /* AccessoryCollectionView.swift in Sources */,
 				73E6B3B42091A81F00B015E5 /* SimpleHTTPService.swift in Sources */,
 				731A0EA020A4409900507D1E /* EntryViewController.swift in Sources */,
 				73D977E220565E9700CB7DE1 /* ExplorerRootCoordinator.swift in Sources */,
-				73E6B2B9208D911D00B015E5 /* test_boost_json.cpp in Sources */,
+				73E6B2B9208D911D00B015E5 /* fc_bridge.cpp in Sources */,
 				73A0CC41206A3DDA00463ADE /* AssetInfo.swift in Sources */,
 				73D9789F20579EE200CB7DE1 /* MarketViewController.swift in Sources */,
 				73E49E4C207A0865003B14D2 /* TradeHistoryCellView.swift in Sources */,

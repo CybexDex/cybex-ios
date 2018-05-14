@@ -27,9 +27,8 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     setupUI()
     
     handlerUpdateVersion(nil)
-        
-    BitShareCoordinator.callMethod("abcactive123456")
     
+    UserManager.shared.login("abc", password: "123456")
     app_coodinator.showLogin()
   }
   

@@ -8,18 +8,16 @@
 #import <Foundation/Foundation.h>
 #import "BitShareCoordinator.h"
 
-#include <iostream>
-#include "test_boost_json.hpp"
-
-using namespace std;
+#include "fc_bridge.hpp"
 
 @implementation BitShareCoordinator
 
-+ (void)callMethod:(NSString *)str {
-  string parse_result = get_dev_key([str UTF8String]);
++ (NSString *)getUserKeys:(NSString *)username password:(NSString *)password {
+  string keys = get_user_key([username UTF8String], [password UTF8String]);
  
-  NSString *result = @(parse_result.c_str());
+  NSString *result = @(keys.c_str());
   
+  return result;
 }
 
 @end

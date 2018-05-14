@@ -39,7 +39,7 @@ std::string key_to_wif(const fc::sha256& secret )
   return fc::to_base58(data, sizeof(data));
 }
 
-string get_dev_key(string secret)
+fc::mutable_variant_object get_dev_key(string secret)
 {
   fc::ecc::private_key priv_key = fc::ecc::private_key::regenerate(fc::sha256::hash(string(secret)));
   string private_key = key_to_wif( priv_key );
@@ -65,6 +65,15 @@ string get_dev_key(string secret)
   ( "public_key", public_key)
   ( "address", address)
   ;
-  return fc::json::to_string(mvo);
+  return mvo;
 }
 
+string get_user_key(string user_name, string password)
+{
+  fc::mutable_variant_object mvo;
+  mvo("active-key", get_dev_key(user_name + "active" + password))
+  ("owner-key", get_dev_key(user_name + "owner" + password))
+  ("memo-key", get_dev_key(user_name + "memo" + password))
+  ;
+  return fc::json::to_string(mvo);
+}

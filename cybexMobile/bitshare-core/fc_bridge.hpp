@@ -4,6 +4,6 @@
 #include <iostream>
 using namespace std;
 
-string get_dev_key(string secret);
+string get_user_key(string user_name, string password);
 
 #endif
