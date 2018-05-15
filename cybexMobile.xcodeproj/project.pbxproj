@@ -146,6 +146,8 @@
 		73A0CC042068E23400463ADE /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0CC032068E23400463ADE /* BaseWebViewController.swift */; };
 		73A0CC2F2068EB5E00463ADE /* AppCoordinator+StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0CC2E2068EB5E00463ADE /* AppCoordinator+StateManager.swift */; };
 		73A0CC41206A3DDA00463ADE /* AssetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0CC40206A3DDA00463ADE /* AssetInfo.swift */; };
+		73A2936F20AA853600893053 /* Theme_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2936E20AA853600893053 /* Theme_Extensions.swift */; };
+		73A2937120AA855100893053 /* Localization_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2937020AA855100893053 /* Localization_Extensions.swift */; };
 		73A571692067FD1900921781 /* MarketCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A571682067FD1800921781 /* MarketCache.swift */; };
 		73AAD11D20A55951002DEFED /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AAD11C20A55951002DEFED /* R.generated.swift */; };
 		73AAD12E20A577C4002DEFED /* libfc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12920A577C1002DEFED /* libfc.a */; };
@@ -11506,6 +11508,8 @@
 		73A0CC032068E23400463ADE /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		73A0CC2E2068EB5E00463ADE /* AppCoordinator+StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppCoordinator+StateManager.swift"; sourceTree = "<group>"; };
 		73A0CC40206A3DDA00463ADE /* AssetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInfo.swift; sourceTree = "<group>"; };
+		73A2936E20AA853600893053 /* Theme_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme_Extensions.swift; sourceTree = "<group>"; };
+		73A2937020AA855100893053 /* Localization_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization_Extensions.swift; sourceTree = "<group>"; };
 		73A571682067FD1800921781 /* MarketCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCache.swift; sourceTree = "<group>"; };
 		73AAD11C20A55951002DEFED /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		73AAD12920A577C1002DEFED /* libfc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfc.a; path = library/libfc.a; sourceTree = "<group>"; };
@@ -30849,6 +30853,8 @@
 				7396B5EC2067EA7D008051E5 /* UIResponder+Route.swift */,
 				731A0E6D20A4408900507D1E /* UITextField+Extensions.swift */,
 				73D9779E205652BA00CB7DE1 /* UIView+Extensions.swift */,
+				73A2936E20AA853600893053 /* Theme_Extensions.swift */,
+				73A2937020AA855100893053 /* Localization_Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -31671,6 +31677,7 @@
 				731A0EA220A440A700507D1E /* EntryRootCoordinator.swift in Sources */,
 				73E49E352079FFAF003B14D2 /* OrderBookReducers.swift in Sources */,
 				73D34E502063C4C5008C7507 /* Optional+Extensions.swift in Sources */,
+				73A2937120AA855100893053 /* Localization_Extensions.swift in Sources */,
 				73D634692062009C000EB324 /* NetworkService.swift in Sources */,
 				73D9789D20579EE200CB7DE1 /* MarketCoordinator.swift in Sources */,
 				73D977E420565EA600CB7DE1 /* FAQRootCoordinator.swift in Sources */,
@@ -31699,6 +31706,7 @@
 				73D9789220577CDC00CB7DE1 /* BaseTableViewCell.swift in Sources */,
 				73D34E432063A675008C7507 /* AccountCoordinator.swift in Sources */,
 				73D9788E20577C8F00CB7DE1 /* HomePairCell.swift in Sources */,
+				73A2936F20AA853600893053 /* Theme_Extensions.swift in Sources */,
 				7320D6AD205BB13300C3F579 /* CBMAModel.swift in Sources */,
 				73E49E41207A0273003B14D2 /* TradeHistoryCell.swift in Sources */,
 				73E49E3C2079FFBF003B14D2 /* TradeHistoryCoordinator.swift in Sources */,
