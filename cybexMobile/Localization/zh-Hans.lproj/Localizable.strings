@@ -22,4 +22,10 @@
 "register.hint" = "创建您的云钱包账户";
 "account" = "账户名";
 "password" = "密码";
+
+"opened.all" = "全部";
+"opened.buy" = "买入";
+"opened.sell" = "卖出";
+"opened.allMoney" = "卖单总额:";
 "login" = "登录";
+"opened.title"    = "委单";

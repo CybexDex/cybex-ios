@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-extension NSObject {
+sextension NSObject {
   // Swift extensions *can* add stored properties
   // https://medium.com/@ttikitu/swift-extensions-can-add-stored-properties-92db66bce6cd
   func associatedObject<ValueType: AnyObject>(

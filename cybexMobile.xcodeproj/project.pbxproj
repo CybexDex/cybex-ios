@@ -10,6 +10,16 @@
 		00E356F31AD99517003FC87E /* cybexMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* cybexMobileTests.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		35C7B22E41C704D7B976BB8A /* Pods_cybexMobileTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C733506B85D343A1BC003A /* Pods_cybexMobileTests.framework */; };
+		72889EE820A9964A007D9E7A /* OpenedOrdersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72889EE620A9964A007D9E7A /* OpenedOrdersCell.swift */; };
+		72889EE920A9964A007D9E7A /* OpenedOrdersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72889EE720A9964A007D9E7A /* OpenedOrdersCell.xib */; };
+		72889EEC20A996E0007D9E7A /* OpenedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */; };
+		72889EEE20A996ED007D9E7A /* OpenedOrdersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72889EED20A996ED007D9E7A /* OpenedOrdersView.xib */; };
+		72C100F420A981EF0059FEE8 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C100F320A981EE0059FEE8 /* R.generated.swift */; };
+		72C100FA20A984F70059FEE8 /* OpenedOrdersCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C100F620A984F70059FEE8 /* OpenedOrdersCoordinator.swift */; };
+		72C100FB20A984F70059FEE8 /* OpenedOrdersActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C100F720A984F70059FEE8 /* OpenedOrdersActions.swift */; };
+		72C100FC20A984F70059FEE8 /* OpenedOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C100F820A984F70059FEE8 /* OpenedOrdersViewController.swift */; };
+		72C100FD20A984F70059FEE8 /* OpenedOrdersReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C100F920A984F70059FEE8 /* OpenedOrdersReducers.swift */; };
+		72C100FF20A985A20059FEE8 /* OpenedOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72C100FE20A985A20059FEE8 /* OpenedOrder.storyboard */; };
 		730FDA5D20A314F600CFBF24 /* cassert in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC420A314E200CFBF24 /* cassert */; };
 		730FDA5E20A314F600CFBF24 /* cctype in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC520A314E200CFBF24 /* cctype */; };
 		730FDA5F20A314F600CFBF24 /* cerrno in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC620A314E200CFBF24 /* cerrno */; };
@@ -149,7 +159,6 @@
 		73A2936F20AA853600893053 /* Theme_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2936E20AA853600893053 /* Theme_Extensions.swift */; };
 		73A2937120AA855100893053 /* Localization_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2937020AA855100893053 /* Localization_Extensions.swift */; };
 		73A571692067FD1900921781 /* MarketCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A571682067FD1800921781 /* MarketCache.swift */; };
-		73AAD11D20A55951002DEFED /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AAD11C20A55951002DEFED /* R.generated.swift */; };
 		73AAD12E20A577C4002DEFED /* libfc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12920A577C1002DEFED /* libfc.a */; };
 		73AAD12F20A577C4002DEFED /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12A20A577C2002DEFED /* libssl.a */; };
 		73AAD13020A577C4002DEFED /* secp256k1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12B20A577C3002DEFED /* secp256k1.a */; };
@@ -270,6 +279,16 @@
 		261AF37338F0DE3741046D57 /* Pods-cybexMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile.release.xcconfig"; sourceTree = "<group>"; };
 		28C733506B85D343A1BC003A /* Pods_cybexMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cybexMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53E47CED13665315AA467C93 /* Pods-cybexMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests.release.xcconfig"; sourceTree = "<group>"; };
+		72889EE620A9964A007D9E7A /* OpenedOrdersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersCell.swift; sourceTree = "<group>"; };
+		72889EE720A9964A007D9E7A /* OpenedOrdersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenedOrdersCell.xib; sourceTree = "<group>"; };
+		72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersView.swift; sourceTree = "<group>"; };
+		72889EED20A996ED007D9E7A /* OpenedOrdersView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenedOrdersView.xib; sourceTree = "<group>"; };
+		72C100F320A981EE0059FEE8 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		72C100F620A984F70059FEE8 /* OpenedOrdersCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersCoordinator.swift; sourceTree = "<group>"; };
+		72C100F720A984F70059FEE8 /* OpenedOrdersActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersActions.swift; sourceTree = "<group>"; };
+		72C100F820A984F70059FEE8 /* OpenedOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersViewController.swift; sourceTree = "<group>"; };
+		72C100F920A984F70059FEE8 /* OpenedOrdersReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersReducers.swift; sourceTree = "<group>"; };
+		72C100FE20A985A20059FEE8 /* OpenedOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OpenedOrder.storyboard; sourceTree = "<group>"; };
 		72C4E6233ACD8199E4F2C647 /* Pods_cybexMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cybexMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		730FABB920A314E000CFBF24 /* accumulators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators.hpp; sourceTree = "<group>"; };
 		730FABBA20A314E000CFBF24 /* accumulators_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators_fwd.hpp; sourceTree = "<group>"; };
@@ -11511,7 +11530,6 @@
 		73A2936E20AA853600893053 /* Theme_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme_Extensions.swift; sourceTree = "<group>"; };
 		73A2937020AA855100893053 /* Localization_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization_Extensions.swift; sourceTree = "<group>"; };
 		73A571682067FD1800921781 /* MarketCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCache.swift; sourceTree = "<group>"; };
-		73AAD11C20A55951002DEFED /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		73AAD12920A577C1002DEFED /* libfc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfc.a; path = library/libfc.a; sourceTree = "<group>"; };
 		73AAD12A20A577C2002DEFED /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = library/libssl.a; sourceTree = "<group>"; };
 		73AAD12B20A577C3002DEFED /* secp256k1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = secp256k1.a; path = library/secp256k1.a; sourceTree = "<group>"; };
@@ -11676,8 +11694,8 @@
 				73EAC9142086FCD50045A88B /* bitshare-core */,
 				733557D12052642700C5ADD4 /* AppDelegate.swift */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				72C100F320A981EE0059FEE8 /* R.generated.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				73AAD11C20A55951002DEFED /* R.generated.swift */,
 				73D8B0DE207E1354001A2232 /* InfoPlist.strings */,
 				73E49E53207A12E4003B14D2 /* Launch Screen.storyboard */,
 				733557D22052642700C5ADD4 /* Main.storyboard */,
@@ -11709,6 +11727,38 @@
 				53E47CED13665315AA467C93 /* Pods-cybexMobileTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		72889EE320A995A5007D9E7A /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				72889EE620A9964A007D9E7A /* OpenedOrdersCell.swift */,
+				72889EE720A9964A007D9E7A /* OpenedOrdersCell.xib */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		72889EEA20A9968C007D9E7A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */,
+				72889EED20A996ED007D9E7A /* OpenedOrdersView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		72C100F520A984BF0059FEE8 /* OpenedOrders */ = {
+			isa = PBXGroup;
+			children = (
+				72889EEA20A9968C007D9E7A /* View */,
+				72889EE320A995A5007D9E7A /* cell */,
+				72C100F620A984F70059FEE8 /* OpenedOrdersCoordinator.swift */,
+				72C100F720A984F70059FEE8 /* OpenedOrdersActions.swift */,
+				72C100F820A984F70059FEE8 /* OpenedOrdersViewController.swift */,
+				72C100F920A984F70059FEE8 /* OpenedOrdersReducers.swift */,
+				72C100FE20A985A20059FEE8 /* OpenedOrder.storyboard */,
+			);
+			path = OpenedOrders;
 			sourceTree = "<group>";
 		};
 		730FABB620A314E000CFBF24 /* include */ = {
@@ -30944,6 +30994,7 @@
 		73D977F22056601F00CB7DE1 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				72C100F520A984BF0059FEE8 /* OpenedOrders */,
 				73D34E462063A689008C7507 /* Setting */,
 				73D34E3E2063A675008C7507 /* AccountActions.swift */,
 				73D34E3F2063A675008C7507 /* AccountCoordinator.swift */,
@@ -31302,6 +31353,7 @@
 				730FDAA020A314F900CFBF24 /* map.SUNWCCh in Resources */,
 				730FDA6220A314F600CFBF24 /* clocale in Resources */,
 				73D8B0DC207E1354001A2232 /* InfoPlist.strings in Resources */,
+				72889EE920A9964A007D9E7A /* OpenedOrdersCell.xib in Resources */,
 				730FDA8720A314F900CFBF24 /* set in Resources */,
 				730FDAB420A314F900CFBF24 /* unordered_set.SUNWCCh in Resources */,
 				730FDA5F20A314F600CFBF24 /* cerrno in Resources */,
@@ -31354,6 +31406,7 @@
 				730FDA6020A314F600CFBF24 /* cfloat in Resources */,
 				730FDA9620A314F900CFBF24 /* fstream.SUNWCCh in Resources */,
 				73E49E52207A08CB003B14D2 /* OrderBookCellView.xib in Resources */,
+				72C100FF20A985A20059FEE8 /* OpenedOrder.storyboard in Resources */,
 				730FDAA120A314F900CFBF24 /* memory.SUNWCCh in Resources */,
 				730FDAA520A314F900CFBF24 /* queue.SUNWCCh in Resources */,
 				730FDA7920A314F900CFBF24 /* iostream in Resources */,
@@ -31362,6 +31415,7 @@
 				730FDA7D20A314F900CFBF24 /* list in Resources */,
 				730FDA9820A314F900CFBF24 /* iomanip.SUNWCCh in Resources */,
 				730FDAB120A314F900CFBF24 /* type_traits.SUNWCCh in Resources */,
+				72889EEE20A996ED007D9E7A /* OpenedOrdersView.xib in Resources */,
 				73D978AD2057A48500CB7DE1 /* PairCardCell.xib in Resources */,
 				73E49E232078BFD5003B14D2 /* TimeGapView.xib in Resources */,
 				730FDA6B20A314F600CFBF24 /* ctime in Resources */,
@@ -31601,8 +31655,10 @@
 				73E49E3E2079FFBF003B14D2 /* TradeHistoryViewController.swift in Sources */,
 				731A0E9D20A4409900507D1E /* EntryActions.swift in Sources */,
 				73D34E3A2063A65A008C7507 /* FAQActions.swift in Sources */,
+				72889EE820A9964A007D9E7A /* OpenedOrdersCell.swift in Sources */,
 				7320D6A1205B9A8B00C3F579 /* CBKLineView.swift in Sources */,
 				73D977EB20565EFD00CB7DE1 /* BaseNavigationController.swift in Sources */,
+				72889EEC20A996E0007D9E7A /* OpenedOrdersView.swift in Sources */,
 				73D977A2205657CE00CB7DE1 /* Constants.swift in Sources */,
 				733557D42052642800C5ADD4 /* AppDelegate.swift in Sources */,
 				73D97806205661B400CB7DE1 /* AppReducer.swift in Sources */,
@@ -31631,9 +31687,11 @@
 				7320D6B7205FA93600C3F579 /* CBKLineAccessoryView.swift in Sources */,
 				731A0EA420A440D000507D1E /* UIColor+Additions.swift in Sources */,
 				73E49E50207A08BE003B14D2 /* OrderBookCellView.swift in Sources */,
+				72C100FB20A984F70059FEE8 /* OpenedOrdersActions.swift in Sources */,
 				7324FDCB206CFC37004296E7 /* SettingCell.swift in Sources */,
 				73E6B2BE208D92AB00B015E5 /* BitShareCoordinator.mm in Sources */,
 				73BDCA21206266CE009E67A3 /* HistoryApi.swift in Sources */,
+				72C100FA20A984F70059FEE8 /* OpenedOrdersCoordinator.swift in Sources */,
 				73D97802205660F200CB7DE1 /* HomeReducers.swift in Sources */,
 				73D34E4D2063A697008C7507 /* SettingReducers.swift in Sources */,
 				73BDCA4E20626C09009E67A3 /* Bucket.swift in Sources */,
@@ -31643,7 +31701,6 @@
 				73A571692067FD1900921781 /* MarketCache.swift in Sources */,
 				7320D6A5205B9C0D00C3F579 /* CBKLineMainView.swift in Sources */,
 				73E49E1F2078BF77003B14D2 /* TimeGapView.swift in Sources */,
-				73AAD11D20A55951002DEFED /* R.generated.swift in Sources */,
 				73E49E3D2079FFBF003B14D2 /* TradeHistoryReducers.swift in Sources */,
 				73ACD80920721B5E00592E69 /* SettingDetailReducers.swift in Sources */,
 				73D9789E20579EE200CB7DE1 /* MarketReducers.swift in Sources */,
@@ -31659,6 +31716,7 @@
 				733402272067DB00000F78B3 /* DemoCache.swift in Sources */,
 				7320D69D205B8C1E00C3F579 /* KLineConfiguration.swift in Sources */,
 				73D978A52057A45500CB7DE1 /* PairCardCell.swift in Sources */,
+				72C100FC20A984F70059FEE8 /* OpenedOrdersViewController.swift in Sources */,
 				73BDCA4C206269A7009E67A3 /* Tools.swift in Sources */,
 				73D63496206208D8000EB324 /* JsonRPCGenerator.swift in Sources */,
 				73A0CC2F2068EB5E00463ADE /* AppCoordinator+StateManager.swift in Sources */,
@@ -31682,6 +31740,7 @@
 				73D9789D20579EE200CB7DE1 /* MarketCoordinator.swift in Sources */,
 				73D977E420565EA600CB7DE1 /* FAQRootCoordinator.swift in Sources */,
 				73D34E3B2063A65A008C7507 /* FAQCoordinator.swift in Sources */,
+				72C100F420A981EF0059FEE8 /* R.generated.swift in Sources */,
 				73D97801205660F200CB7DE1 /* HomeCoordinator.swift in Sources */,
 				73AAD13620A57C2E002DEFED /* UserManager.swift in Sources */,
 				73D977DE20565E3600CB7DE1 /* AppCoordinator.swift in Sources */,
@@ -31703,6 +31762,7 @@
 				73E49E44207A0294003B14D2 /* OrderBookCell.swift in Sources */,
 				7341BB39205A5E11007387FE /* UIColor+Cybexblack.swift in Sources */,
 				73ACD80A20721B5E00592E69 /* SettingDetailViewController.swift in Sources */,
+				72C100FD20A984F70059FEE8 /* OpenedOrdersReducers.swift in Sources */,
 				73D9789220577CDC00CB7DE1 /* BaseTableViewCell.swift in Sources */,
 				73D34E432063A675008C7507 /* AccountCoordinator.swift in Sources */,
 				73D9788E20577C8F00CB7DE1 /* HomePairCell.swift in Sources */,
