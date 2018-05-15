@@ -36,9 +36,59 @@ extension UIButton {
   }
 }
 
+extension UISegmentedControl {
+  @IBInspectable
+  var locali0:String {
+    set {
+      localized_text0 = newValue.localizedContainer()
+    }
+    
+    get {
+      return ""
+    }
+  }
+  
+  @IBInspectable
+  var locali1:String {
+    set {
+      localized_text1 = newValue.localizedContainer()
+    }
+    
+    get {
+      return ""
+    }
+  }
+  
+  @IBInspectable
+  var locali2:String {
+    set {
+      localized_text2 = newValue.localizedContainer()
+    }
+    
+    get {
+      return ""
+    }
+  }
+}
+
+extension UISegmentedControl {
+  var localized_text0: LocalizedValueContainer? {
+    get { return nil }
+    set { setOperation(self, #selector(UISegmentedControl.setTitle(_:forSegmentAt:)), SegmentValueContainer(picker: newValue, withIndex: 0)) }
+  }
+  var localized_text1: LocalizedValueContainer? {
+    get { return nil }
+    set { setOperation(self, #selector(UISegmentedControl.setTitle(_:forSegmentAt:)), SegmentValueContainer(picker: newValue, withIndex: 1)) }
+  }
+  var localized_text2: LocalizedValueContainer? {
+    get { return nil }
+    set { setOperation(self, #selector(UISegmentedControl.setTitle(_:forSegmentAt:)), SegmentValueContainer(picker: newValue, withIndex: 2)) }
+  }
+}
+
 extension UIButton {
   var localized_text: LocalizedValueContainer? {
-    get { return getOperation(self, #selector(getter: UIButton.currentTitle)) as? LocalizedValueContainer }
+    get { return nil }
     set { setOperation(self, #selector(UIButton.setTitle(_:for:)), StateValueContainer(picker: newValue, withState: .normal)) }
   }
 }
@@ -127,6 +177,25 @@ final class StateValueContainer: ValueContainer {
   }
 }
 
+final class SegmentValueContainer: ValueContainer {
+  
+  typealias ValuesType = [Int: ValueContainer]
+  
+  var values = ValuesType()
+  
+  convenience init?(picker: ValueContainer?, withIndex index: Int) {
+    guard let picker = picker else { return nil }
+    
+    self.init(v: { 0 })
+    values[index] = picker
+  }
+  
+  func setPicker(_ picker: ValueContainer?, withIndex index: Int) -> Self {
+    values[index] = picker
+    return self
+  }
+}
+
 final class LocalizedValueContainer: ValueContainer,ExpressibleByStringLiteral {
   public required convenience init(stringLiteral value: String) {
     self.init(v: { value })
@@ -176,12 +245,18 @@ extension NSObject {
       let setState = unsafeBitCast(method(for: sel), to: setLocalizedTextForStateIMP.self)
       statePicker.values.forEach { setState(self, sel, ($1.value()! as! String).localized(), UIControlState(rawValue: $0)) }
     }
+    else if let statePicker = picker as? SegmentValueContainer {
+      let setState = unsafeBitCast(method(for: sel), to: setLocalizedTextForSegmentIMP.self)
+      statePicker.values.forEach { setState(self, sel, ($1.value()! as! String).localized(), $0) }
+    }
+    
       
     else { perform(sel, with: value) }
     
   }
   fileprivate typealias setLocalizedTextIMP        = @convention(c) (NSObject, Selector, String) -> Void
   fileprivate typealias setLocalizedTextForStateIMP       = @convention(c) (NSObject, Selector, String, UIControlState) -> Void
+  fileprivate typealias setLocalizedTextForSegmentIMP       = @convention(c) (NSObject, Selector, String, Int) -> Void
 
 }
 
