@@ -165,7 +165,7 @@ DEPENDENCIES:
   - ZLaunchAd
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - Atributika
     - AwaitKit
@@ -306,4 +306,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7e2d834a1b7cf4dedce4c2859a50263bc8af769f
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2

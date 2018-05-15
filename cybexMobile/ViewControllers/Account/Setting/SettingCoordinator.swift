@@ -11,6 +11,7 @@ import ReSwift
 
 protocol SettingCoordinatorProtocol {
   func openSettingDetail(type:settingPage)
+  func openOpenedOrders()
 }
 
 protocol SettingStateManagerProtocol {
@@ -40,6 +41,13 @@ extension SettingCoordinator: SettingCoordinatorProtocol {
     let vc = R.storyboard.main.settingDetailViewController()!
     vc.pageType = type
     let coordinator = SettingDetailCoordinator(rootVC: self.rootVC)
+    vc.coordinator = coordinator
+    self.rootVC.pushViewController(vc, animated: true)
+  }
+  
+  func openOpenedOrders(){
+    let vc = R.storyboard.openedOrder.openedOrdersViewController()!
+    let coordinator = OpenedOrdersCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator
     self.rootVC.pushViewController(vc, animated: true)
   }

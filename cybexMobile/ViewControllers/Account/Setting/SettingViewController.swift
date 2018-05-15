@@ -111,6 +111,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    // test
+//    self.coordinator?.openOpenedOrders()
+//    return
+    
     if indexPath.section == 2 {
       self.startLoading()
       handlerUpdateVersion({

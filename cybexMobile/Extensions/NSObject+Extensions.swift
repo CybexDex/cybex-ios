@@ -54,6 +54,7 @@ extension UILabel {
   }
 }
 
+
 extension UITextField {
   var localized_text: LocalizedValueContainer? {
     get { return getOperation(self, #selector(getter: UITextField.placeholder)) as? LocalizedValueContainer }

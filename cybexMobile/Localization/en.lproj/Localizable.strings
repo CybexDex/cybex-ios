@@ -23,3 +23,9 @@
 "register.hint" = "Use Cloud Wallet mode to create Account";
 "account" = "Account Name";
 "password" = "Password";
+
+"opened.all" = "All";
+"opened.buy" = "Buy";
+"opened.sell" = "Sell";
+"opened.allMoney" = "Total Value:";
+"opened.title"    = "Opened Orders";

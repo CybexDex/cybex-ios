@@ -11,6 +11,7 @@ import SwiftTheme
 import EZSwiftExtensions
 import Localize_Swift
 
+
 extension UILabel {
   @IBInspectable
   var locali:String {
