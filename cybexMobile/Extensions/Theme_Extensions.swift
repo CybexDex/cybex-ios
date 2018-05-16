@@ -47,6 +47,44 @@ extension UILabel {
   }
 }
 
+extension UITextView {
+  @IBInspectable
+  var theme1TitleColor:UIColor {
+    set {
+      if let theme2 = self.store["label_theme2"] as? String {
+        theme_textColor = [newValue.hexString(true), theme2]
+      }
+      else {
+        self.store["label_theme1"] = newValue.hexString(true)
+      }
+    }
+    
+    get {
+      return theme_textColor?.value() as! UIColor
+    }
+  }
+  
+  var themeTitleColor:UIColor {
+    return theme_textColor?.value() as! UIColor
+  }
+  
+  @IBInspectable
+  var theme2TitleColor:UIColor {
+    set {
+      if let theme1 = self.store["label_theme1"] as? String {
+        theme_textColor = [theme1, newValue.hexString(true)]
+      }
+      else {
+        self.store["label_theme2"] = newValue.hexString(true)
+      }
+    }
+    
+    get {
+      return theme_textColor?.value() as! UIColor
+    }
+  }
+}
+
 extension UIView {
   @IBInspectable
   var theme1BgColor:UIColor {
