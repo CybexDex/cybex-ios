@@ -44,6 +44,12 @@ class ImageTextField: UITextField {
     }
   }
   
+  @IBInspectable var tailImage: UIImage? = nil {
+    didSet {
+      updateView()
+    }
+  }
+  
   @IBInspectable var padding: CGFloat = 0
   @IBInspectable var color: UIColor = UIColor.gray {
     didSet {
@@ -65,7 +71,7 @@ class ImageTextField: UITextField {
     
     if let image = fieldImage {
       leftViewMode = UITextFieldViewMode.always
-      let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+      let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
       imageView.image = image
       // Note: In order for your image to use the tint color, you have to select the image in the Assets.xcassets and change the "Render As" property to "Template Image".
       imageView.tintColor = color
@@ -73,6 +79,18 @@ class ImageTextField: UITextField {
     } else {
       leftViewMode = UITextFieldViewMode.never
       leftView = nil
+    }
+    
+    if let image = tailImage {
+      rightViewMode = UITextFieldViewMode.always
+      let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+      imageView.image = image
+      // Note: In order for your image to use the tint color, you have to select the image in the Assets.xcassets and change the "Render As" property to "Template Image".
+      imageView.tintColor = color
+      rightView = imageView
+    } else {
+      rightViewMode = UITextFieldViewMode.never
+      rightView = nil
     }
     // Placeholder text color
     

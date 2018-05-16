@@ -1,8 +1,8 @@
 //
-//  EntryViewController.swift
+//  RegisterViewController.swift
 //  cybexMobile
 //
-//  Created koofrank on 2018/5/8.
+//  Created koofrank on 2018/5/15.
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
@@ -12,41 +12,34 @@ import RxCocoa
 import ReSwift
 import SwiftTheme
 
-class EntryViewController: BaseViewController {
-
-  var coordinator: (EntryCoordinatorProtocol & EntryStateManagerProtocol)?
-
+class RegisterViewController: BaseViewController {
+  
+  var coordinator: (RegisterCoordinatorProtocol & RegisterStateManagerProtocol)?
+  
   @IBOutlet weak var accountTextField: ImageTextField!
   @IBOutlet weak var passwordTextField: ImageTextField!
-  
-  @IBOutlet weak var createTitle: UILabel!
-  @IBOutlet weak var loginButton: UIButton!
+  @IBOutlet weak var confirmPasswordTextField: ImageTextField!
+
+  @IBOutlet weak var loginTitle: UILabel!
+  @IBOutlet weak var tip: UIImageView!
+  @IBOutlet weak var registerButton: UIButton!
     
   override func viewDidLoad() {
     super.viewDidLoad()
     
     configLeftNavButton(#imageLiteral(resourceName: "ic_close_24_px"))
-    
     setupUI()
     setupEvent()
-    
-    
-    let gradientLayer: LinearGradientLayer = {
-      let gradientLayer = LinearGradientLayer()
-      gradientLayer.colors = [UIColor(red: 255/255, green: 196/255, blue: 120/255, alpha: 1).cgColor, UIColor(red: 255/255, green: 145/255, blue: 67/255, alpha: 1).cgColor]
-      return gradientLayer
-    }()
-  
-    gradientLayer.frame = self.loginButton.bounds
-
-    self.loginButton.layer.addSublayer(gradientLayer)
   }
-
+  
   func setupUI() {
     accountTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
     passwordTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
+    confirmPasswordTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
+
     accountTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
     passwordTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
+    confirmPasswordTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
   }
   
   @objc override func leftAction(_ sender: UIButton) {
@@ -59,26 +52,33 @@ class EntryViewController: BaseViewController {
         return false
       })
     }
-
+    
     coordinator?.subscribe(loadingSubscriber) { sub in
       return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
         return false
       })
     }
   }
-
+  
   override func configureObserveState() {
     commonObserveState()
-
+    
   }
 }
 
-extension EntryViewController {
+extension RegisterViewController {
   func setupEvent() {
-    self.createTitle.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+    self.loginTitle.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
       guard let `self` = self else { return }
       
-      self.coordinator?.switchToRegister()
-    })
+      self.coordinator?.switchToLogin()
+    }).disposed(by: disposeBag)
+    
+    self.tip.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+      guard let `self` = self else { return }
+      
+      self.coordinator?.pushCreateTip()
+    }).disposed(by: disposeBag)
   }
 }
+

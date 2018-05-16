@@ -143,6 +143,7 @@
 		7320D6B7205FA93600C3F579 /* CBKLineAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320D6B6205FA93600C3F579 /* CBKLineAccessoryView.swift */; };
 		7320D6B9205FBC4B00C3F579 /* CBMAVOLUMEModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320D6B8205FBC4B00C3F579 /* CBMAVOLUMEModel.swift */; };
 		7320D6BB205FBC5800C3F579 /* CBEMAVOLUMEModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320D6BA205FBC5800C3F579 /* CBEMAVOLUMEModel.swift */; };
+		7324A91920AB01FA005BCFF8 /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7324A91820AB01FA005BCFF8 /* GradientLayer.swift */; };
 		7324FDCB206CFC37004296E7 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7324FDCA206CFC37004296E7 /* SettingCell.swift */; };
 		733402242067DA05000F78B3 /* LocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733402232067DA05000F78B3 /* LocalCache.swift */; };
 		733402272067DB00000F78B3 /* DemoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733402262067DB00000F78B3 /* DemoCache.swift */; };
@@ -158,6 +159,10 @@
 		73A0CC41206A3DDA00463ADE /* AssetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0CC40206A3DDA00463ADE /* AssetInfo.swift */; };
 		73A2936F20AA853600893053 /* Theme_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2936E20AA853600893053 /* Theme_Extensions.swift */; };
 		73A2937120AA855100893053 /* Localization_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2937020AA855100893053 /* Localization_Extensions.swift */; };
+		73A2937720AAED3F00893053 /* RegisterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2937320AAED3F00893053 /* RegisterActions.swift */; };
+		73A2937820AAED3F00893053 /* RegisterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2937420AAED3F00893053 /* RegisterCoordinator.swift */; };
+		73A2937920AAED3F00893053 /* RegisterReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2937520AAED3F00893053 /* RegisterReducers.swift */; };
+		73A2937A20AAED3F00893053 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A2937620AAED3F00893053 /* RegisterViewController.swift */; };
 		73A571692067FD1900921781 /* MarketCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A571682067FD1800921781 /* MarketCache.swift */; };
 		73AAD12E20A577C4002DEFED /* libfc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12920A577C1002DEFED /* libfc.a */; };
 		73AAD12F20A577C4002DEFED /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73AAD12A20A577C2002DEFED /* libssl.a */; };
@@ -11513,6 +11518,7 @@
 		7320D6B6205FA93600C3F579 /* CBKLineAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBKLineAccessoryView.swift; sourceTree = "<group>"; };
 		7320D6B8205FBC4B00C3F579 /* CBMAVOLUMEModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBMAVOLUMEModel.swift; sourceTree = "<group>"; };
 		7320D6BA205FBC5800C3F579 /* CBEMAVOLUMEModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBEMAVOLUMEModel.swift; sourceTree = "<group>"; };
+		7324A91820AB01FA005BCFF8 /* GradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
 		7324FDCA206CFC37004296E7 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		733402232067DA05000F78B3 /* LocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCache.swift; sourceTree = "<group>"; };
 		733402262067DB00000F78B3 /* DemoCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCache.swift; sourceTree = "<group>"; };
@@ -11529,6 +11535,10 @@
 		73A0CC40206A3DDA00463ADE /* AssetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInfo.swift; sourceTree = "<group>"; };
 		73A2936E20AA853600893053 /* Theme_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme_Extensions.swift; sourceTree = "<group>"; };
 		73A2937020AA855100893053 /* Localization_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization_Extensions.swift; sourceTree = "<group>"; };
+		73A2937320AAED3F00893053 /* RegisterActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterActions.swift; sourceTree = "<group>"; };
+		73A2937420AAED3F00893053 /* RegisterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCoordinator.swift; sourceTree = "<group>"; };
+		73A2937520AAED3F00893053 /* RegisterReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterReducers.swift; sourceTree = "<group>"; };
+		73A2937620AAED3F00893053 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		73A571682067FD1800921781 /* MarketCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCache.swift; sourceTree = "<group>"; };
 		73AAD12920A577C1002DEFED /* libfc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfc.a; path = library/libfc.a; sourceTree = "<group>"; };
 		73AAD12A20A577C2002DEFED /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = library/libssl.a; sourceTree = "<group>"; };
@@ -30360,6 +30370,8 @@
 				731A0E9A20A4409800507D1E /* EntryCoordinator.swift */,
 				731A0E9B20A4409800507D1E /* EntryReducers.swift */,
 				731A0E9C20A4409800507D1E /* EntryViewController.swift */,
+				73A2937220AAED2B00893053 /* Register */,
+				7324A91820AB01FA005BCFF8 /* GradientLayer.swift */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -30839,6 +30851,17 @@
 				7373AE2C20720BB2002DC01F /* UserDefaults.swift */,
 			);
 			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		73A2937220AAED2B00893053 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				73A2937320AAED3F00893053 /* RegisterActions.swift */,
+				73A2937420AAED3F00893053 /* RegisterCoordinator.swift */,
+				73A2937520AAED3F00893053 /* RegisterReducers.swift */,
+				73A2937620AAED3F00893053 /* RegisterViewController.swift */,
+			);
+			path = Register;
 			sourceTree = "<group>";
 		};
 		73AAD13320A57C0B002DEFED /* Managers */ = {
@@ -31587,7 +31610,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    python scripts/named_colors_compat.py\n#fi";
+			shellScript = "#if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    chmod -R 777 Pods/SDCAlertView &\n    python scripts/named_colors_compat.py\n#fi";
 		};
 		73D9776E20562E3400CB7DE1 /* R.swift */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -31670,6 +31693,7 @@
 				731A0E9720A4408B00507D1E /* UITextField+Extensions.swift in Sources */,
 				73E49E332079FFAF003B14D2 /* OrderBookActions.swift in Sources */,
 				733402242067DA05000F78B3 /* LocalCache.swift in Sources */,
+				73A2937820AAED3F00893053 /* RegisterCoordinator.swift in Sources */,
 				7320D6AF205BB13C00C3F579 /* CBEMAModel.swift in Sources */,
 				73D977F42056603800CB7DE1 /* HomeViewController.swift in Sources */,
 				73D977ED20565F0600CB7DE1 /* BaseViewController.swift in Sources */,
@@ -31690,6 +31714,7 @@
 				72C100FB20A984F70059FEE8 /* OpenedOrdersActions.swift in Sources */,
 				7324FDCB206CFC37004296E7 /* SettingCell.swift in Sources */,
 				73E6B2BE208D92AB00B015E5 /* BitShareCoordinator.mm in Sources */,
+				73A2937A20AAED3F00893053 /* RegisterViewController.swift in Sources */,
 				73BDCA21206266CE009E67A3 /* HistoryApi.swift in Sources */,
 				72C100FA20A984F70059FEE8 /* OpenedOrdersCoordinator.swift in Sources */,
 				73D97802205660F200CB7DE1 /* HomeReducers.swift in Sources */,
@@ -31713,6 +31738,7 @@
 				73D9779F205652BA00CB7DE1 /* UIView+Extensions.swift in Sources */,
 				73E49E342079FFAF003B14D2 /* OrderBookCoordinator.swift in Sources */,
 				7320D6A9205B9E5B00C3F579 /* CBKLineBrush.swift in Sources */,
+				7324A91920AB01FA005BCFF8 /* GradientLayer.swift in Sources */,
 				733402272067DB00000F78B3 /* DemoCache.swift in Sources */,
 				7320D69D205B8C1E00C3F579 /* KLineConfiguration.swift in Sources */,
 				73D978A52057A45500CB7DE1 /* PairCardCell.swift in Sources */,
@@ -31734,6 +31760,7 @@
 				7320D6AB205B9E7500C3F579 /* CBMALineBrush.swift in Sources */,
 				731A0EA220A440A700507D1E /* EntryRootCoordinator.swift in Sources */,
 				73E49E352079FFAF003B14D2 /* OrderBookReducers.swift in Sources */,
+				73A2937720AAED3F00893053 /* RegisterActions.swift in Sources */,
 				73D34E502063C4C5008C7507 /* Optional+Extensions.swift in Sources */,
 				73A2937120AA855100893053 /* Localization_Extensions.swift in Sources */,
 				73D634692062009C000EB324 /* NetworkService.swift in Sources */,
@@ -31751,6 +31778,7 @@
 				7320D6B1205BB14800C3F579 /* CBMACDModel.swift in Sources */,
 				73AAD13820A57F48002DEFED /* Crypto.swift in Sources */,
 				73E49E292078C17A003B14D2 /* AccessoryCollectionView.swift in Sources */,
+				73A2937920AAED3F00893053 /* RegisterReducers.swift in Sources */,
 				73E6B3B42091A81F00B015E5 /* SimpleHTTPService.swift in Sources */,
 				731A0EA020A4409900507D1E /* EntryViewController.swift in Sources */,
 				73D977E220565E9700CB7DE1 /* ExplorerRootCoordinator.swift in Sources */,
