@@ -36,3 +36,6 @@
 "register" = "注册";
 
 "opened.title"    = "委单";
+
+
+"lockupAssets.title"    = "锁定期资产";

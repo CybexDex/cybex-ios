@@ -36,3 +36,6 @@
 
 "register" = "Sign Up";
 "opened.title"    = "Opened Orders";
+
+
+"lockupAssets.title"    = "Opened Orders";

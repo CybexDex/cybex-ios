@@ -33,7 +33,7 @@ class SettingViewController: BaseViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
+
   }
   
   func setupNotification() {
@@ -113,7 +113,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
     // test
-//    self.coordinator?.openOpenedOrders()
+    if indexPath.section == 1 {
+      self.coordinator?.openOpenedOrders()
+    }else if indexPath.section == 2{
+      self.coordinator?.openLockupAssets()
+    }
 //    return
     
     if indexPath.section == 2 {

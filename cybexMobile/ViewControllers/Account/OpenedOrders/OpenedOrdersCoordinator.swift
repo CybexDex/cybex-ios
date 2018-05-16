@@ -11,6 +11,7 @@ import ReSwift
 
 // 跳转
 protocol OpenedOrdersCoordinatorProtocol {
+  func jumpToOtherVCAction()
 }
 // 业务处理
 protocol OpenedOrdersStateManagerProtocol {
@@ -34,6 +35,9 @@ class OpenedOrdersCoordinator: SettingRootCoordinator {
 }
 
 extension OpenedOrdersCoordinator: OpenedOrdersCoordinatorProtocol {
+  func jumpToOtherVCAction(){
+    print("jump")
+  }
     
 }
 
