@@ -28,6 +28,7 @@
 "opened.buy" = "Buy";
 "opened.sell" = "Sell";
 "opened.allMoney" = "Total Value:";
+"login" = "LOGIN";
 "opened.title"    = "Opened Orders";
 
 

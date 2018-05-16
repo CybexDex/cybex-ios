@@ -27,6 +27,7 @@
 "opened.buy" = "买入";
 "opened.sell" = "卖出";
 "opened.allMoney" = "卖单总额:";
+"login" = "登录";
 "opened.title"    = "委单";
 
 
