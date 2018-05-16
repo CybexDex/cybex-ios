@@ -13,6 +13,7 @@ protocol SettingCoordinatorProtocol {
   func openSettingDetail(type:settingPage)
   func openOpenedOrders()
   func openLockupAssets()
+  func openYourProtfolio()
 }
 
 protocol SettingStateManagerProtocol {
@@ -66,6 +67,13 @@ extension SettingCoordinator: SettingCoordinatorProtocol {
     self.rootVC.pushViewController(vc, animated: true)
   }
   
+  // MARK: 可用资产
+  func openYourProtfolio(){
+    let vc = R.storyboard.yourPortfolio.yourProtfolioViewController()!
+    let coordinator = YourPortfolioCoordinator(rootVC: self.rootVC)
+    vc.coordinator  = coordinator
+    self.rootVC.pushViewController(vc, animated: true)
+  }
 }
 
 extension SettingCoordinator: SettingStateManagerProtocol {

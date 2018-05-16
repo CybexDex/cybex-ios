@@ -39,3 +39,11 @@
 
 
 "lockupAssets.title"    = "锁定期资产";
+
+
+"portfolio.title"       = "可用资产";
+"portfolio.price"       = "价格(CYB):";
+"portfolio.time"       = "24h涨跌幅:";
+
+
+

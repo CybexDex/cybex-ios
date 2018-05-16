@@ -28,19 +28,9 @@ class OpenedOrdersViewController: BaseViewController {
     tableView.tableHeaderView = headerView
     self.localized_text = R.string.localizable.openedTitle.key.localizedContainer()
     let cell = String.init(describing:OpenedOrdersCell.self)
-    tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
-
+    tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)    
+    tableView.separatorColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
     
-    
-    
-    
-//    ThemeManager.currentThemeIndex  0 black  1 white
-    if ThemeManager.currentThemeIndex == 1{
-      // test
-//      self.segment.setTitleTextAttributes([], for: .selected)
-    }else{
-      
-    }
   }
   
     func commonObserveState() {

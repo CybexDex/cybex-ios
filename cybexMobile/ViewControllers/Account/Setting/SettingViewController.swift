@@ -117,6 +117,8 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
       self.coordinator?.openOpenedOrders()
     }else if indexPath.section == 2{
       self.coordinator?.openLockupAssets()
+    }else{
+      self.coordinator?.openYourProtfolio()
     }
 //    return
     

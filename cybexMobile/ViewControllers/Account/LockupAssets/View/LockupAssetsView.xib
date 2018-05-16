@@ -25,23 +25,36 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="t2y-ji-cBM">
-                    <rect key="frame" x="303" y="0.0" width="72" height="90"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="t2y-ji-cBM">
+                    <rect key="frame" x="235.5" y="0.0" width="127.5" height="90"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018/06/02" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGj-sE-KvR">
-                            <rect key="frame" x="0.0" y="0.0" width="66.5" height="45"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5CX-Fp-PbE">
+                            <rect key="frame" x="0.0" y="0.0" width="127.5" height="38"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGj-sE-KvR">
+                                    <rect key="frame" x="0.0" y="18" width="127.5" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="38" id="4nt-gh-PKx"/>
+                                <constraint firstItem="GGj-sE-KvR" firstAttribute="top" secondItem="5CX-Fp-PbE" secondAttribute="top" constant="18" id="N5I-Lf-kI3"/>
+                                <constraint firstAttribute="bottom" secondItem="GGj-sE-KvR" secondAttribute="bottom" id="aQe-iS-NfP"/>
+                                <constraint firstAttribute="trailing" secondItem="GGj-sE-KvR" secondAttribute="trailing" id="hxs-mp-rDY"/>
+                                <constraint firstItem="GGj-sE-KvR" firstAttribute="leading" secondItem="5CX-Fp-PbE" secondAttribute="leading" id="u8K-EW-FYy"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdL-bN-iyd">
-                            <rect key="frame" x="0.0" y="45" width="72" height="45"/>
+                            <rect key="frame" x="55.5" y="45" width="72" height="45"/>
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWO-yz-swP" customClass="LockupProgressView" customModule="cybexMobile" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="19.5" width="72" height="3"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="72" id="PQM-w7-rY9"/>
                                         <constraint firstAttribute="height" constant="3" id="g2x-I5-fKa"/>
+                                        <constraint firstAttribute="width" constant="72" id="m40-8Q-3Ko"/>
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="progress">
@@ -144,7 +157,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="t2y-ji-cBM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ERn-N5-QmW"/>
-                <constraint firstItem="t2y-ji-cBM" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Fsq-rF-RxH"/>
+                <constraint firstItem="t2y-ji-cBM" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" constant="-12" id="Fsq-rF-RxH"/>
                 <constraint firstItem="1Uz-ml-J71" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Lrw-hF-Pps"/>
                 <constraint firstItem="1Uz-ml-J71" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="bg8-Ye-igZ"/>
                 <constraint firstItem="t2y-ji-cBM" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="keF-b4-Ktx"/>

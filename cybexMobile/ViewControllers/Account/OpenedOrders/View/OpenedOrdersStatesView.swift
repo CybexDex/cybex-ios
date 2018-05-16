@@ -14,7 +14,7 @@ class OpenedOrdersStatesView: UIView {
     label.textColor = UIColor.white
     label.textAlignment = .center
     label.cornerRadius = 2.0
-    label.font = UIFont.systemFont(ofSize: 12.0)
+    label.font = UIFont.systemFont(ofSize: 9.0)
     label.clipsToBounds = true
     return label
   }()

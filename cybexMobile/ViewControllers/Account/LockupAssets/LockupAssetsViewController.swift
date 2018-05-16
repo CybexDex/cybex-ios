@@ -10,8 +10,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import TinyConstraints
 
 class LockupAssetsViewController: BaseViewController {
+  
+  struct define {
+    static let sectionHeaderHeight : CGFloat = 44.0
+   }
   
   @IBOutlet weak var tableView: UITableView!
   var coordinator: (LockupAssetsCoordinatorProtocol & LockupAssetsStateManagerProtocol)?
@@ -61,8 +66,12 @@ extension LockupAssetsViewController : UITableViewDataSource ,UITableViewDelegat
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let lockupAssetsSectionView = LockupAssetsSectionView()
+    let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, w: self.view.width, h: define.sectionHeaderHeight))
     
     return lockupAssetsSectionView
   }
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+      return define.sectionHeaderHeight
+  }
+  
 }
