@@ -29,3 +29,6 @@
 "opened.sell" = "Sell";
 "opened.allMoney" = "Total Value:";
 "opened.title"    = "Opened Orders";
+
+
+"lockupAssets.title"    = "Opened Orders";

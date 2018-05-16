@@ -22,55 +22,64 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0AZ-5m-XXP">
                             <rect key="frame" x="0.0" y="0.0" width="110" height="36"/>
                             <subviews>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BUY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NY8-6g-Z1h">
-                                    <rect key="frame" x="0.0" y="17" width="29" height="14"/>
-                                    <color key="backgroundColor" red="0.42699999999999999" green="0.73299999999999998" blue="0.28599999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3J-Yu-Gkq" customClass="OpenedOrdersStatesView" customModule="cybexMobile" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="17" width="32" height="14"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="29" id="atK-KQ-792"/>
-                                        <constraint firstAttribute="height" constant="14" id="wBr-Lm-Ig0"/>
+                                        <constraint firstAttribute="height" constant="14" id="I3o-vG-wMV"/>
+                                        <constraint firstAttribute="width" constant="32" id="gcU-YF-zVf"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                    <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
                                     <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                            <real key="value" value="0.0"/>
-                                        </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                             <real key="value" value="2"/>
                                         </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="buy_color">
+                                            <color key="value" red="0.42699999999999999" green="0.73299999999999998" blue="0.28599999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="sell_color">
+                                            <color key="value" red="0.745" green="0.27500000000000002" blue="0.20399999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="opened_status">
+                                            <integer key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ma0-Sv-PdY">
+                                    <rect key="frame" x="40" y="12" width="15.5" height="24"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24" id="T7g-i5-xs3"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="--"/>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                            <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Su-g4-ddR">
-                                    <rect key="frame" x="37" y="12" width="77" height="24"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1X-lg-vN7">
+                                    <rect key="frame" x="55.5" y="12" width="21" height="24"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="24" id="0r8-eN-73f"/>
-                                        <constraint firstAttribute="width" constant="77" id="29U-bM-zoa"/>
+                                        <constraint firstAttribute="height" constant="24" id="jBi-6L-40P"/>
                                     </constraints>
-                                    <attributedString key="attributedText">
-                                        <fragment content="--">
-                                            <attributes>
-                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" metaFont="system" size="17"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                        <fragment content="/--">
-                                            <attributes>
-                                                <color key="NSColor" red="0.47058823529411764" green="0.50588235294117645" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" metaFont="system" size="17"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="5Su-g4-ddR" firstAttribute="leading" secondItem="NY8-6g-Z1h" secondAttribute="trailing" constant="8" id="1Of-tu-NPU"/>
-                                <constraint firstItem="NY8-6g-Z1h" firstAttribute="leading" secondItem="0AZ-5m-XXP" secondAttribute="leading" id="POs-kp-rG6"/>
-                                <constraint firstItem="5Su-g4-ddR" firstAttribute="top" secondItem="0AZ-5m-XXP" secondAttribute="top" constant="12" id="eNc-Hz-1wN"/>
-                                <constraint firstItem="NY8-6g-Z1h" firstAttribute="top" secondItem="0AZ-5m-XXP" secondAttribute="top" constant="17" id="tvx-au-I4E"/>
+                                <constraint firstItem="h1X-lg-vN7" firstAttribute="centerY" secondItem="Ma0-Sv-PdY" secondAttribute="centerY" id="7cA-sR-I6A"/>
+                                <constraint firstItem="h1X-lg-vN7" firstAttribute="leading" secondItem="Ma0-Sv-PdY" secondAttribute="trailing" id="9kG-nA-V37"/>
+                                <constraint firstItem="X3J-Yu-Gkq" firstAttribute="leading" secondItem="0AZ-5m-XXP" secondAttribute="leading" id="KuX-tp-25F"/>
+                                <constraint firstItem="Ma0-Sv-PdY" firstAttribute="leading" secondItem="X3J-Yu-Gkq" secondAttribute="trailing" constant="8" id="Vgm-tL-3G4"/>
+                                <constraint firstItem="Ma0-Sv-PdY" firstAttribute="top" secondItem="0AZ-5m-XXP" secondAttribute="top" constant="12" id="WIT-Ag-JAa"/>
+                                <constraint firstItem="h1X-lg-vN7" firstAttribute="height" secondItem="Ma0-Sv-PdY" secondAttribute="height" id="YIN-t8-cyO"/>
+                                <constraint firstItem="X3J-Yu-Gkq" firstAttribute="top" secondItem="0AZ-5m-XXP" secondAttribute="top" constant="17" id="kOL-2D-REq"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qth-z4-8PY">
@@ -125,13 +134,13 @@
             <viewLayoutGuide key="safeArea" id="iOf-Ba-GCy"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                    <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                     <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="-20.5" y="-132"/>
+            <point key="canvasLocation" x="-373" y="-155"/>
         </view>
     </objects>
     <resources>

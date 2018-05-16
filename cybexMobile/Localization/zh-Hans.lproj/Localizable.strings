@@ -28,3 +28,6 @@
 "opened.sell" = "卖出";
 "opened.allMoney" = "卖单总额:";
 "opened.title"    = "委单";
+
+
+"lockupAssets.title"    = "锁定期资产";

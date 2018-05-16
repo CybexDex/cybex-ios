@@ -10,6 +10,11 @@
 		00E356F31AD99517003FC87E /* cybexMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* cybexMobileTests.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		35C7B22E41C704D7B976BB8A /* Pods_cybexMobileTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C733506B85D343A1BC003A /* Pods_cybexMobileTests.framework */; };
+		721F5C6C20AAE7C80042488F /* LockupAssetsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C6B20AAE7C80042488F /* LockupAssetsSectionView.swift */; };
+		721F5C6E20AAE7EF0042488F /* LockupAssetsSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721F5C6D20AAE7EF0042488F /* LockupAssetsSectionView.xib */; };
+		721F5C7020AAF1400042488F /* OpenedOrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */; };
+		721F5C7220AAF15F0042488F /* OpenedOrdersHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721F5C7120AAF15F0042488F /* OpenedOrdersHeaderView.xib */; };
+		721F5C7420AAF7290042488F /* OpenedOrdersStatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C7320AAF7290042488F /* OpenedOrdersStatesView.swift */; };
 		72889EE820A9964A007D9E7A /* OpenedOrdersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72889EE620A9964A007D9E7A /* OpenedOrdersCell.swift */; };
 		72889EE920A9964A007D9E7A /* OpenedOrdersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72889EE720A9964A007D9E7A /* OpenedOrdersCell.xib */; };
 		72889EEC20A996E0007D9E7A /* OpenedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */; };
@@ -20,6 +25,16 @@
 		72C100FC20A984F70059FEE8 /* OpenedOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C100F820A984F70059FEE8 /* OpenedOrdersViewController.swift */; };
 		72C100FD20A984F70059FEE8 /* OpenedOrdersReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C100F920A984F70059FEE8 /* OpenedOrdersReducers.swift */; };
 		72C100FF20A985A20059FEE8 /* OpenedOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72C100FE20A985A20059FEE8 /* OpenedOrder.storyboard */; };
+		72C30C7920AA8AA000F4DCEC /* LockupAssetsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C7520AA8AA000F4DCEC /* LockupAssetsCoordinator.swift */; };
+		72C30C7A20AA8AA000F4DCEC /* LockupAssetsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C7620AA8AA000F4DCEC /* LockupAssetsActions.swift */; };
+		72C30C7B20AA8AA000F4DCEC /* LockupAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C7720AA8AA000F4DCEC /* LockupAssetsViewController.swift */; };
+		72C30C7C20AA8AA000F4DCEC /* LockupAssetsReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C7820AA8AA000F4DCEC /* LockupAssetsReducers.swift */; };
+		72C30C7E20AA8B5D00F4DCEC /* LockupAssets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72C30C7D20AA8B5D00F4DCEC /* LockupAssets.storyboard */; };
+		72C30C8320AA8DAD00F4DCEC /* LockupAssetsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C8120AA8DAD00F4DCEC /* LockupAssetsCell.swift */; };
+		72C30C8420AA8DAD00F4DCEC /* LockupAssetsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C30C8220AA8DAD00F4DCEC /* LockupAssetsCell.xib */; };
+		72C30C8620AA8DBD00F4DCEC /* LockupAssetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C8520AA8DBD00F4DCEC /* LockupAssetsView.swift */; };
+		72C30C8820AA8DC600F4DCEC /* LockupAssetsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C30C8720AA8DC600F4DCEC /* LockupAssetsView.xib */; };
+		72C30C8A20AAAF7700F4DCEC /* LockupProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C8920AAAF7700F4DCEC /* LockupProgressView.swift */; };
 		730FDA5D20A314F600CFBF24 /* cassert in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC420A314E200CFBF24 /* cassert */; };
 		730FDA5E20A314F600CFBF24 /* cctype in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC520A314E200CFBF24 /* cctype */; };
 		730FDA5F20A314F600CFBF24 /* cerrno in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC620A314E200CFBF24 /* cerrno */; };
@@ -277,6 +292,11 @@
 		261AF37338F0DE3741046D57 /* Pods-cybexMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile.release.xcconfig"; sourceTree = "<group>"; };
 		28C733506B85D343A1BC003A /* Pods_cybexMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cybexMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53E47CED13665315AA467C93 /* Pods-cybexMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests.release.xcconfig"; sourceTree = "<group>"; };
+		721F5C6B20AAE7C80042488F /* LockupAssetsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsSectionView.swift; sourceTree = "<group>"; };
+		721F5C6D20AAE7EF0042488F /* LockupAssetsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsSectionView.xib; sourceTree = "<group>"; };
+		721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersHeaderView.swift; sourceTree = "<group>"; };
+		721F5C7120AAF15F0042488F /* OpenedOrdersHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenedOrdersHeaderView.xib; sourceTree = "<group>"; };
+		721F5C7320AAF7290042488F /* OpenedOrdersStatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersStatesView.swift; sourceTree = "<group>"; };
 		72889EE620A9964A007D9E7A /* OpenedOrdersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersCell.swift; sourceTree = "<group>"; };
 		72889EE720A9964A007D9E7A /* OpenedOrdersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenedOrdersCell.xib; sourceTree = "<group>"; };
 		72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersView.swift; sourceTree = "<group>"; };
@@ -287,6 +307,16 @@
 		72C100F820A984F70059FEE8 /* OpenedOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersViewController.swift; sourceTree = "<group>"; };
 		72C100F920A984F70059FEE8 /* OpenedOrdersReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersReducers.swift; sourceTree = "<group>"; };
 		72C100FE20A985A20059FEE8 /* OpenedOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OpenedOrder.storyboard; sourceTree = "<group>"; };
+		72C30C7520AA8AA000F4DCEC /* LockupAssetsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsCoordinator.swift; sourceTree = "<group>"; };
+		72C30C7620AA8AA000F4DCEC /* LockupAssetsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsActions.swift; sourceTree = "<group>"; };
+		72C30C7720AA8AA000F4DCEC /* LockupAssetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsViewController.swift; sourceTree = "<group>"; };
+		72C30C7820AA8AA000F4DCEC /* LockupAssetsReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsReducers.swift; sourceTree = "<group>"; };
+		72C30C7D20AA8B5D00F4DCEC /* LockupAssets.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LockupAssets.storyboard; sourceTree = "<group>"; };
+		72C30C8120AA8DAD00F4DCEC /* LockupAssetsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsCell.swift; sourceTree = "<group>"; };
+		72C30C8220AA8DAD00F4DCEC /* LockupAssetsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsCell.xib; sourceTree = "<group>"; };
+		72C30C8520AA8DBD00F4DCEC /* LockupAssetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsView.swift; sourceTree = "<group>"; };
+		72C30C8720AA8DC600F4DCEC /* LockupAssetsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsView.xib; sourceTree = "<group>"; };
+		72C30C8920AAAF7700F4DCEC /* LockupProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupProgressView.swift; sourceTree = "<group>"; };
 		72C4E6233ACD8199E4F2C647 /* Pods_cybexMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cybexMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		730FABB920A314E000CFBF24 /* accumulators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators.hpp; sourceTree = "<group>"; };
 		730FABBA20A314E000CFBF24 /* accumulators_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators_fwd.hpp; sourceTree = "<group>"; };
@@ -11739,6 +11769,9 @@
 			children = (
 				72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */,
 				72889EED20A996ED007D9E7A /* OpenedOrdersView.xib */,
+				721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */,
+				721F5C7120AAF15F0042488F /* OpenedOrdersHeaderView.xib */,
+				721F5C7320AAF7290042488F /* OpenedOrdersStatesView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -11755,6 +11788,41 @@
 				72C100FE20A985A20059FEE8 /* OpenedOrder.storyboard */,
 			);
 			path = OpenedOrders;
+			sourceTree = "<group>";
+		};
+		72C30C7420AA8A7500F4DCEC /* LockupAssets */ = {
+			isa = PBXGroup;
+			children = (
+				72C30C8020AA8D8800F4DCEC /* View */,
+				72C30C7F20AA8D7F00F4DCEC /* cell */,
+				72C30C7520AA8AA000F4DCEC /* LockupAssetsCoordinator.swift */,
+				72C30C7620AA8AA000F4DCEC /* LockupAssetsActions.swift */,
+				72C30C7720AA8AA000F4DCEC /* LockupAssetsViewController.swift */,
+				72C30C7820AA8AA000F4DCEC /* LockupAssetsReducers.swift */,
+				72C30C7D20AA8B5D00F4DCEC /* LockupAssets.storyboard */,
+			);
+			path = LockupAssets;
+			sourceTree = "<group>";
+		};
+		72C30C7F20AA8D7F00F4DCEC /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				72C30C8120AA8DAD00F4DCEC /* LockupAssetsCell.swift */,
+				72C30C8220AA8DAD00F4DCEC /* LockupAssetsCell.xib */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		72C30C8020AA8D8800F4DCEC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				72C30C8520AA8DBD00F4DCEC /* LockupAssetsView.swift */,
+				72C30C8720AA8DC600F4DCEC /* LockupAssetsView.xib */,
+				72C30C8920AAAF7700F4DCEC /* LockupProgressView.swift */,
+				721F5C6B20AAE7C80042488F /* LockupAssetsSectionView.swift */,
+				721F5C6D20AAE7EF0042488F /* LockupAssetsSectionView.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		730FABB620A314E000CFBF24 /* include */ = {
@@ -30988,6 +31056,7 @@
 		73D977F22056601F00CB7DE1 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				72C30C7420AA8A7500F4DCEC /* LockupAssets */,
 				72C100F520A984BF0059FEE8 /* OpenedOrders */,
 				73D34E462063A689008C7507 /* Setting */,
 				73D34E3E2063A675008C7507 /* AccountActions.swift */,
@@ -31301,6 +31370,7 @@
 				730FDA6420A314F600CFBF24 /* csetjmp in Resources */,
 				730FDA9120A314F900CFBF24 /* bitset.SUNWCCh in Resources */,
 				733557D52052642800C5ADD4 /* Main.storyboard in Resources */,
+				72C30C7E20AA8B5D00F4DCEC /* LockupAssets.storyboard in Resources */,
 				730FDA8820A314F900CFBF24 /* sstream in Resources */,
 				730FDA7820A314F900CFBF24 /* ios in Resources */,
 				73E49E4E207A0873003B14D2 /* TradeHistoryCellView.xib in Resources */,
@@ -31339,7 +31409,10 @@
 				730FDA9C20A314F900CFBF24 /* iterator.SUNWCCh in Resources */,
 				730FDA9A20A314F900CFBF24 /* iostream.SUNWCCh in Resources */,
 				730FDA6920A314F600CFBF24 /* cstdlib in Resources */,
+				72C30C8820AA8DC600F4DCEC /* LockupAssetsView.xib in Resources */,
 				730FDA7520A314F900CFBF24 /* fstream in Resources */,
+				721F5C6E20AAE7EF0042488F /* LockupAssetsSectionView.xib in Resources */,
+				721F5C7220AAF15F0042488F /* OpenedOrdersHeaderView.xib in Resources */,
 				730FDA9920A314F900CFBF24 /* ios.SUNWCCh in Resources */,
 				730FDA6F20A314F900CFBF24 /* array in Resources */,
 				730FDA6E20A314F900CFBF24 /* algorithm in Resources */,
@@ -31352,6 +31425,7 @@
 				730FDAB420A314F900CFBF24 /* unordered_set.SUNWCCh in Resources */,
 				730FDA5F20A314F600CFBF24 /* cerrno in Resources */,
 				730FDAA220A314F900CFBF24 /* new.SUNWCCh in Resources */,
+				72C30C8420AA8DAD00F4DCEC /* LockupAssetsCell.xib in Resources */,
 				730FDABD20A314F900CFBF24 /* utility in Resources */,
 				730FDA6120A314F600CFBF24 /* climits in Resources */,
 				730FDA7E20A314F900CFBF24 /* locale in Resources */,
@@ -31650,6 +31724,7 @@
 				731A0E9D20A4409900507D1E /* EntryActions.swift in Sources */,
 				73D34E3A2063A65A008C7507 /* FAQActions.swift in Sources */,
 				72889EE820A9964A007D9E7A /* OpenedOrdersCell.swift in Sources */,
+				721F5C7420AAF7290042488F /* OpenedOrdersStatesView.swift in Sources */,
 				7320D6A1205B9A8B00C3F579 /* CBKLineView.swift in Sources */,
 				73D977EB20565EFD00CB7DE1 /* BaseNavigationController.swift in Sources */,
 				72889EEC20A996E0007D9E7A /* OpenedOrdersView.swift in Sources */,
@@ -31665,8 +31740,10 @@
 				73E49E332079FFAF003B14D2 /* OrderBookActions.swift in Sources */,
 				733402242067DA05000F78B3 /* LocalCache.swift in Sources */,
 				7320D6AF205BB13C00C3F579 /* CBEMAModel.swift in Sources */,
+				72C30C7920AA8AA000F4DCEC /* LockupAssetsCoordinator.swift in Sources */,
 				73D977F42056603800CB7DE1 /* HomeViewController.swift in Sources */,
 				73D977ED20565F0600CB7DE1 /* BaseViewController.swift in Sources */,
+				72C30C8620AA8DBD00F4DCEC /* LockupAssetsView.swift in Sources */,
 				7373AE2D20720BB2002DC01F /* UserDefaults.swift in Sources */,
 				73ACD80820721B5E00592E69 /* SettingDetailCoordinator.swift in Sources */,
 				7320D6B3205BB16400C3F579 /* CBBOLLModel.swift in Sources */,
@@ -31679,6 +31756,7 @@
 				73B44E302057ECD000759863 /* PairDetailView.swift in Sources */,
 				7320D6B9205FBC4B00C3F579 /* CBMAVOLUMEModel.swift in Sources */,
 				7320D6B7205FA93600C3F579 /* CBKLineAccessoryView.swift in Sources */,
+				721F5C7020AAF1400042488F /* OpenedOrdersHeaderView.swift in Sources */,
 				731A0EA420A440D000507D1E /* UIColor+Additions.swift in Sources */,
 				73E49E50207A08BE003B14D2 /* OrderBookCellView.swift in Sources */,
 				72C100FB20A984F70059FEE8 /* OpenedOrdersActions.swift in Sources */,
@@ -31701,6 +31779,7 @@
 				733CD33120623F47002AD0E0 /* DataBaseApi.swift in Sources */,
 				73D978042056614900CB7DE1 /* AppActions.swift in Sources */,
 				7396B5ED2067EA7D008051E5 /* UIResponder+Route.swift in Sources */,
+				72C30C8320AA8DAD00F4DCEC /* LockupAssetsCell.swift in Sources */,
 				73D978082056625600CB7DE1 /* UIImage+Extensions.swift in Sources */,
 				73E49E3B2079FFBF003B14D2 /* TradeHistoryActions.swift in Sources */,
 				73D34E442063A675008C7507 /* AccountReducers.swift in Sources */,
@@ -31711,6 +31790,7 @@
 				7320D69D205B8C1E00C3F579 /* KLineConfiguration.swift in Sources */,
 				73D978A52057A45500CB7DE1 /* PairCardCell.swift in Sources */,
 				72C100FC20A984F70059FEE8 /* OpenedOrdersViewController.swift in Sources */,
+				721F5C6C20AAE7C80042488F /* LockupAssetsSectionView.swift in Sources */,
 				73BDCA4C206269A7009E67A3 /* Tools.swift in Sources */,
 				73D63496206208D8000EB324 /* JsonRPCGenerator.swift in Sources */,
 				73A0CC2F2068EB5E00463ADE /* AppCoordinator+StateManager.swift in Sources */,
@@ -31726,6 +31806,7 @@
 				73E49E252078C134003B14D2 /* AccessoryCollectionViewCell.swift in Sources */,
 				73D978A32057A44100CB7DE1 /* PairListHorizantalView.swift in Sources */,
 				7320D6AB205B9E7500C3F579 /* CBMALineBrush.swift in Sources */,
+				72C30C7A20AA8AA000F4DCEC /* LockupAssetsActions.swift in Sources */,
 				731A0EA220A440A700507D1E /* EntryRootCoordinator.swift in Sources */,
 				73E49E352079FFAF003B14D2 /* OrderBookReducers.swift in Sources */,
 				73D34E502063C4C5008C7507 /* Optional+Extensions.swift in Sources */,
@@ -31739,6 +31820,7 @@
 				73D977DE20565E3600CB7DE1 /* AppCoordinator.swift in Sources */,
 				73D34E4E2063A697008C7507 /* SettingViewController.swift in Sources */,
 				73ACD80720721B5E00592E69 /* SettingDetailActions.swift in Sources */,
+				72C30C8A20AAAF7700F4DCEC /* LockupProgressView.swift in Sources */,
 				73D34E4B2063A697008C7507 /* SettingActions.swift in Sources */,
 				739B6166207F325A00B61152 /* Collection+Extensions.swift in Sources */,
 				7320D6B1205BB14800C3F579 /* CBMACDModel.swift in Sources */,
@@ -31750,6 +31832,7 @@
 				73E6B2B9208D911D00B015E5 /* fc_bridge.cpp in Sources */,
 				73A0CC41206A3DDA00463ADE /* AssetInfo.swift in Sources */,
 				73D9789F20579EE200CB7DE1 /* MarketViewController.swift in Sources */,
+				72C30C7C20AA8AA000F4DCEC /* LockupAssetsReducers.swift in Sources */,
 				73E49E4C207A0865003B14D2 /* TradeHistoryCellView.swift in Sources */,
 				7320D6A3205B9BAF00C3F579 /* CBKLineDrawView.swift in Sources */,
 				73E49E44207A0294003B14D2 /* OrderBookCell.swift in Sources */,
@@ -31760,6 +31843,7 @@
 				73D34E432063A675008C7507 /* AccountCoordinator.swift in Sources */,
 				73D9788E20577C8F00CB7DE1 /* HomePairCell.swift in Sources */,
 				7320D6AD205BB13300C3F579 /* CBMAModel.swift in Sources */,
+				72C30C7B20AA8AA000F4DCEC /* LockupAssetsViewController.swift in Sources */,
 				73E49E41207A0273003B14D2 /* TradeHistoryCell.swift in Sources */,
 				73E49E3C2079FFBF003B14D2 /* TradeHistoryCoordinator.swift in Sources */,
 				7320D658205A942C00C3F579 /* NSNotification+Extensions.swift in Sources */,

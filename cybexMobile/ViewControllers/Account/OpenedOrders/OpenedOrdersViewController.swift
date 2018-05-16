@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
-
+import SwiftTheme
 class OpenedOrdersViewController: BaseViewController {
     @IBOutlet weak var segment: UISegmentedControl!
   
@@ -24,9 +24,23 @@ class OpenedOrdersViewController: BaseViewController {
     }
   
   func setupUI(){
+    let headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 93.5))
+    tableView.tableHeaderView = headerView
     self.localized_text = R.string.localizable.openedTitle.key.localizedContainer()
     let cell = String.init(describing:OpenedOrdersCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
+
+    
+    
+    
+    
+//    ThemeManager.currentThemeIndex  0 black  1 white
+    if ThemeManager.currentThemeIndex == 1{
+      // test
+//      self.segment.setTitleTextAttributes([], for: .selected)
+    }else{
+      
+    }
   }
   
     func commonObserveState() {
