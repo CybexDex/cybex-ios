@@ -35,6 +35,15 @@
 		72C30C8620AA8DBD00F4DCEC /* LockupAssetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C8520AA8DBD00F4DCEC /* LockupAssetsView.swift */; };
 		72C30C8820AA8DC600F4DCEC /* LockupAssetsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C30C8720AA8DC600F4DCEC /* LockupAssetsView.xib */; };
 		72C30C8A20AAAF7700F4DCEC /* LockupProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C8920AAAF7700F4DCEC /* LockupProgressView.swift */; };
+		72F6DEFE20AC03FA00BBF105 /* YourPorfolioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DEFD20AC03F900BBF105 /* YourPorfolioView.xib */; };
+		72F6DF0320AC0C6300BBF105 /* YourPortfolioCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DEFF20AC0C6300BBF105 /* YourPortfolioCoordinator.swift */; };
+		72F6DF0420AC0C6300BBF105 /* YourPortfolioActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF0020AC0C6300BBF105 /* YourPortfolioActions.swift */; };
+		72F6DF0520AC0C6300BBF105 /* YourPortfolioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF0120AC0C6300BBF105 /* YourPortfolioViewController.swift */; };
+		72F6DF0620AC0C6300BBF105 /* YourPortfolioReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF0220AC0C6300BBF105 /* YourPortfolioReducers.swift */; };
+		72F6DF0820AC0C7700BBF105 /* YourPortfolio.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF0720AC0C7700BBF105 /* YourPortfolio.storyboard */; };
+		72F6DF0A20AC0CF100BBF105 /* YourPorfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF0920AC0CF100BBF105 /* YourPorfolioView.swift */; };
+		72F6DF0D20AC0D3700BBF105 /* YourPortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF0B20AC0D3700BBF105 /* YourPortfolioCell.swift */; };
+		72F6DF0E20AC0D3700BBF105 /* YourPortfolioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF0C20AC0D3700BBF105 /* YourPortfolioCell.xib */; };
 		730FDA5D20A314F600CFBF24 /* cassert in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC420A314E200CFBF24 /* cassert */; };
 		730FDA5E20A314F600CFBF24 /* cctype in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC520A314E200CFBF24 /* cctype */; };
 		730FDA5F20A314F600CFBF24 /* cerrno in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC620A314E200CFBF24 /* cerrno */; };
@@ -325,6 +334,15 @@
 		72C30C8720AA8DC600F4DCEC /* LockupAssetsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsView.xib; sourceTree = "<group>"; };
 		72C30C8920AAAF7700F4DCEC /* LockupProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupProgressView.swift; sourceTree = "<group>"; };
 		72C4E6233ACD8199E4F2C647 /* Pods_cybexMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cybexMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		72F6DEFD20AC03F900BBF105 /* YourPorfolioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YourPorfolioView.xib; sourceTree = "<group>"; };
+		72F6DEFF20AC0C6300BBF105 /* YourPortfolioCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioCoordinator.swift; sourceTree = "<group>"; };
+		72F6DF0020AC0C6300BBF105 /* YourPortfolioActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioActions.swift; sourceTree = "<group>"; };
+		72F6DF0120AC0C6300BBF105 /* YourPortfolioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioViewController.swift; sourceTree = "<group>"; };
+		72F6DF0220AC0C6300BBF105 /* YourPortfolioReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioReducers.swift; sourceTree = "<group>"; };
+		72F6DF0720AC0C7700BBF105 /* YourPortfolio.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = YourPortfolio.storyboard; sourceTree = "<group>"; };
+		72F6DF0920AC0CF100BBF105 /* YourPorfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPorfolioView.swift; sourceTree = "<group>"; };
+		72F6DF0B20AC0D3700BBF105 /* YourPortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioCell.swift; sourceTree = "<group>"; };
+		72F6DF0C20AC0D3700BBF105 /* YourPortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YourPortfolioCell.xib; sourceTree = "<group>"; };
 		730FABB920A314E000CFBF24 /* accumulators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators.hpp; sourceTree = "<group>"; };
 		730FABBA20A314E000CFBF24 /* accumulators_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators_fwd.hpp; sourceTree = "<group>"; };
 		730FABBC20A314E000CFBF24 /* accumulator_base.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulator_base.hpp; sourceTree = "<group>"; };
@@ -11837,6 +11855,38 @@
 				721F5C6D20AAE7EF0042488F /* LockupAssetsSectionView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		72F6DEEA20AC02E400BBF105 /* Portfolio */ = {
+			isa = PBXGroup;
+			children = (
+				72F6DEF620AC03B300BBF105 /* Views */,
+				72F6DEF520AC03A400BBF105 /* Cells */,
+				72F6DEFF20AC0C6300BBF105 /* YourPortfolioCoordinator.swift */,
+				72F6DF0020AC0C6300BBF105 /* YourPortfolioActions.swift */,
+				72F6DF0120AC0C6300BBF105 /* YourPortfolioViewController.swift */,
+				72F6DF0220AC0C6300BBF105 /* YourPortfolioReducers.swift */,
+				72F6DF0720AC0C7700BBF105 /* YourPortfolio.storyboard */,
+			);
+			path = Portfolio;
+			sourceTree = "<group>";
+		};
+		72F6DEF520AC03A400BBF105 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				72F6DF0B20AC0D3700BBF105 /* YourPortfolioCell.swift */,
+				72F6DF0C20AC0D3700BBF105 /* YourPortfolioCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		72F6DEF620AC03B300BBF105 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72F6DEFD20AC03F900BBF105 /* YourPorfolioView.xib */,
+				72F6DF0920AC0CF100BBF105 /* YourPorfolioView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		730FABB620A314E000CFBF24 /* include */ = {
@@ -31085,6 +31135,7 @@
 		73D977F22056601F00CB7DE1 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				72F6DEEA20AC02E400BBF105 /* Portfolio */,
 				72C30C7420AA8A7500F4DCEC /* LockupAssets */,
 				72C100F520A984BF0059FEE8 /* OpenedOrders */,
 				73D34E462063A689008C7507 /* Setting */,
@@ -31392,6 +31443,8 @@
 			files = (
 				730FDAAF20A314F900CFBF24 /* sun.SUNWCCh in Resources */,
 				730FDA7020A314F900CFBF24 /* bitset in Resources */,
+				72F6DF0820AC0C7700BBF105 /* YourPortfolio.storyboard in Resources */,
+				72F6DF0E20AC0D3700BBF105 /* YourPortfolioCell.xib in Resources */,
 				730FDA9F20A314F900CFBF24 /* locale.SUNWCCh in Resources */,
 				730FDAB920A314F900CFBF24 /* type_traits in Resources */,
 				730FDAA820A314F900CFBF24 /* set.SUNWCCh in Resources */,
@@ -31436,6 +31489,7 @@
 				730FDA8420A314F900CFBF24 /* queue in Resources */,
 				73D978AB2057A47C00CB7DE1 /* PairCardView.xib in Resources */,
 				730FDA9C20A314F900CFBF24 /* iterator.SUNWCCh in Resources */,
+				72F6DEFE20AC03FA00BBF105 /* YourPorfolioView.xib in Resources */,
 				730FDA9A20A314F900CFBF24 /* iostream.SUNWCCh in Resources */,
 				730FDA6920A314F600CFBF24 /* cstdlib in Resources */,
 				72C30C8820AA8DC600F4DCEC /* LockupAssetsView.xib in Resources */,
@@ -31753,6 +31807,7 @@
 				731A0E9D20A4409900507D1E /* EntryActions.swift in Sources */,
 				73D34E3A2063A65A008C7507 /* FAQActions.swift in Sources */,
 				72889EE820A9964A007D9E7A /* OpenedOrdersCell.swift in Sources */,
+				72F6DF0320AC0C6300BBF105 /* YourPortfolioCoordinator.swift in Sources */,
 				721F5C7420AAF7290042488F /* OpenedOrdersStatesView.swift in Sources */,
 				7320D6A1205B9A8B00C3F579 /* CBKLineView.swift in Sources */,
 				73D977EB20565EFD00CB7DE1 /* BaseNavigationController.swift in Sources */,
@@ -31787,6 +31842,7 @@
 				7320D6B9205FBC4B00C3F579 /* CBMAVOLUMEModel.swift in Sources */,
 				7320D6B7205FA93600C3F579 /* CBKLineAccessoryView.swift in Sources */,
 				721F5C7020AAF1400042488F /* OpenedOrdersHeaderView.swift in Sources */,
+				72F6DF0A20AC0CF100BBF105 /* YourPorfolioView.swift in Sources */,
 				731A0EA420A440D000507D1E /* UIColor+Additions.swift in Sources */,
 				73E49E50207A08BE003B14D2 /* OrderBookCellView.swift in Sources */,
 				72C100FB20A984F70059FEE8 /* OpenedOrdersActions.swift in Sources */,
@@ -31795,12 +31851,14 @@
 				73A2937A20AAED3F00893053 /* RegisterViewController.swift in Sources */,
 				73BDCA21206266CE009E67A3 /* HistoryApi.swift in Sources */,
 				72C100FA20A984F70059FEE8 /* OpenedOrdersCoordinator.swift in Sources */,
+				72F6DF0620AC0C6300BBF105 /* YourPortfolioReducers.swift in Sources */,
 				73D97802205660F200CB7DE1 /* HomeReducers.swift in Sources */,
 				73D34E4D2063A697008C7507 /* SettingReducers.swift in Sources */,
 				73BDCA4E20626C09009E67A3 /* Bucket.swift in Sources */,
 				73D977A62056594800CB7DE1 /* BaseTabbarViewController.swift in Sources */,
 				73D8B0B0207CB6EC001A2232 /* OrderBook.swift in Sources */,
 				73D978AF2057A59000CB7DE1 /* BaseCollectionViewCell.swift in Sources */,
+				72F6DF0D20AC0D3700BBF105 /* YourPortfolioCell.swift in Sources */,
 				73A571692067FD1900921781 /* MarketCache.swift in Sources */,
 				7320D6A5205B9C0D00C3F579 /* CBKLineMainView.swift in Sources */,
 				73E49E1F2078BF77003B14D2 /* TimeGapView.swift in Sources */,
@@ -31871,7 +31929,9 @@
 				73E49E4C207A0865003B14D2 /* TradeHistoryCellView.swift in Sources */,
 				7320D6A3205B9BAF00C3F579 /* CBKLineDrawView.swift in Sources */,
 				73E49E44207A0294003B14D2 /* OrderBookCell.swift in Sources */,
+				72F6DF0420AC0C6300BBF105 /* YourPortfolioActions.swift in Sources */,
 				7341BB39205A5E11007387FE /* UIColor+Cybexblack.swift in Sources */,
+				72F6DF0520AC0C6300BBF105 /* YourPortfolioViewController.swift in Sources */,
 				73ACD80A20721B5E00592E69 /* SettingDetailViewController.swift in Sources */,
 				72C100FD20A984F70059FEE8 /* OpenedOrdersReducers.swift in Sources */,
 				73D9789220577CDC00CB7DE1 /* BaseTableViewCell.swift in Sources */,
