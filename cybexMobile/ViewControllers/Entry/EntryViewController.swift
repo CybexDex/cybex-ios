@@ -20,7 +20,7 @@ class EntryViewController: BaseViewController {
   @IBOutlet weak var passwordTextField: ImageTextField!
   
   @IBOutlet weak var createTitle: UILabel!
-  @IBOutlet weak var loginButton: UIButton!
+  @IBOutlet weak var loginButton: Button!
     
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,17 +29,6 @@ class EntryViewController: BaseViewController {
     
     setupUI()
     setupEvent()
-    
-    
-    let gradientLayer: LinearGradientLayer = {
-      let gradientLayer = LinearGradientLayer()
-      gradientLayer.colors = [UIColor(red: 255/255, green: 196/255, blue: 120/255, alpha: 1).cgColor, UIColor(red: 255/255, green: 145/255, blue: 67/255, alpha: 1).cgColor]
-      return gradientLayer
-    }()
-  
-    gradientLayer.frame = self.loginButton.bounds
-
-    self.loginButton.layer.addSublayer(gradientLayer)
   }
 
   func setupUI() {

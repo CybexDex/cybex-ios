@@ -285,6 +285,8 @@
 		73E6B2BE208D92AB00B015E5 /* BitShareCoordinator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B2BD208D92AB00B015E5 /* BitShareCoordinator.mm */; };
 		73E6B3B42091A81F00B015E5 /* SimpleHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B3B32091A81F00B015E5 /* SimpleHTTPService.swift */; };
 		73EA6D942085C3AC0045A88B /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA6D932085C3AC0045A88B /* Demo.swift */; };
+		73F58FC920AC04EF008A1F79 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F58FC820AC04EF008A1F79 /* Button.swift */; };
+		73F58FCB20AC0589008A1F79 /* Button.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F58FCA20AC0589008A1F79 /* Button.xib */; };
 		78F9F85527183B9AAEBF202D /* Pods_cybexMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C4E6233ACD8199E4F2C647 /* Pods_cybexMobile.framework */; };
 /* End PBXBuildFile section */
 
@@ -11689,6 +11691,8 @@
 		73E6B2BD208D92AB00B015E5 /* BitShareCoordinator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BitShareCoordinator.mm; sourceTree = "<group>"; };
 		73E6B3B32091A81F00B015E5 /* SimpleHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHTTPService.swift; sourceTree = "<group>"; };
 		73EA6D932085C3AC0045A88B /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
+		73F58FC820AC04EF008A1F79 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		73F58FCA20AC0589008A1F79 /* Button.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Button.xib; sourceTree = "<group>"; };
 		A72666D4E9406D5A50C8D67C /* Pods-cybexMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		BE4FB0A485A5C5FE82DF0C50 /* Pods-cybexMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -11738,6 +11742,7 @@
 		13B07FAE1A68108700A75B9A /* cybexMobile */ = {
 			isa = PBXGroup;
 			children = (
+				73F58FC720AC04DC008A1F79 /* UI */,
 				73AAD13320A57C0B002DEFED /* Managers */,
 				73D977A42056592300CB7DE1 /* Base */,
 				73D977A0205657BB00CB7DE1 /* Constants */,
@@ -31310,6 +31315,15 @@
 			path = "bitshare-core";
 			sourceTree = "<group>";
 		};
+		73F58FC720AC04DC008A1F79 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				73F58FC820AC04EF008A1F79 /* Button.swift */,
+				73F58FCA20AC0589008A1F79 /* Button.xib */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
@@ -31513,6 +31527,7 @@
 				730FDA6120A314F600CFBF24 /* climits in Resources */,
 				730FDA7E20A314F900CFBF24 /* locale in Resources */,
 				73E49E272078C15B003B14D2 /* AccessoryCollectionViewCell.xib in Resources */,
+				73F58FCB20AC0589008A1F79 /* Button.xib in Resources */,
 				730FDA5E20A314F600CFBF24 /* cctype in Resources */,
 				730FDABE20A314F900CFBF24 /* valarray in Resources */,
 				730FDA8120A314F900CFBF24 /* new in Resources */,
@@ -31612,6 +31627,7 @@
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Proposer/Proposer.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
@@ -31673,6 +31689,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Proposer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
@@ -31809,6 +31826,7 @@
 				72889EE820A9964A007D9E7A /* OpenedOrdersCell.swift in Sources */,
 				72F6DF0320AC0C6300BBF105 /* YourPortfolioCoordinator.swift in Sources */,
 				721F5C7420AAF7290042488F /* OpenedOrdersStatesView.swift in Sources */,
+				73F58FC920AC04EF008A1F79 /* Button.swift in Sources */,
 				7320D6A1205B9A8B00C3F579 /* CBKLineView.swift in Sources */,
 				73D977EB20565EFD00CB7DE1 /* BaseNavigationController.swift in Sources */,
 				72889EEC20A996E0007D9E7A /* OpenedOrdersView.swift in Sources */,

@@ -72,6 +72,7 @@ def ui
     pod 'Atributika'
     pod 'ZLaunchAd'
     pod 'SDCAlertView'
+    pod 'Presentr'
 end
 
 def other

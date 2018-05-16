@@ -50,6 +50,8 @@ class ImageTextField: UITextField {
     }
   }
   
+  var activityView: UIActivityIndicatorView? = nil
+  
   @IBInspectable var padding: CGFloat = 0
   @IBInspectable var color: UIColor = UIColor.gray {
     didSet {
@@ -88,6 +90,13 @@ class ImageTextField: UITextField {
       // Note: In order for your image to use the tint color, you have to select the image in the Assets.xcassets and change the "Render As" property to "Template Image".
       imageView.tintColor = color
       rightView = imageView
+      
+      let activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+      activityView.frame = imageView.bounds
+      activityView.startAnimating()
+      rightView?.addSubview(activityView)
+      self.activityView = activityView
+      self.activityView?.isHidden = true
     } else {
       rightViewMode = UITextFieldViewMode.never
       rightView = nil
