@@ -20,7 +20,7 @@ protocol SettingDetailStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
 }
 
-class SettingDetailCoordinator: SettingRootCoordinator {
+class SettingDetailCoordinator: AccountRootCoordinator {
     
     lazy var creator = SettingDetailPropertyActionCreate()
     

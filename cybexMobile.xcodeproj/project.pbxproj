@@ -15,6 +15,7 @@
 		721F5C7020AAF1400042488F /* OpenedOrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */; };
 		721F5C7220AAF15F0042488F /* OpenedOrdersHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721F5C7120AAF15F0042488F /* OpenedOrdersHeaderView.xib */; };
 		721F5C7420AAF7290042488F /* OpenedOrdersStatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C7320AAF7290042488F /* OpenedOrdersStatesView.swift */; };
+		7246670D20AD730B006A918B /* QuotesTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7246670C20AD730B006A918B /* QuotesTitleView.swift */; };
 		72889EE820A9964A007D9E7A /* OpenedOrdersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72889EE620A9964A007D9E7A /* OpenedOrdersCell.swift */; };
 		72889EE920A9964A007D9E7A /* OpenedOrdersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72889EE720A9964A007D9E7A /* OpenedOrdersCell.xib */; };
 		72889EEC20A996E0007D9E7A /* OpenedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */; };
@@ -24,12 +25,10 @@
 		72C100FB20A984F70059FEE8 /* OpenedOrdersActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C100F720A984F70059FEE8 /* OpenedOrdersActions.swift */; };
 		72C100FC20A984F70059FEE8 /* OpenedOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C100F820A984F70059FEE8 /* OpenedOrdersViewController.swift */; };
 		72C100FD20A984F70059FEE8 /* OpenedOrdersReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C100F920A984F70059FEE8 /* OpenedOrdersReducers.swift */; };
-		72C100FF20A985A20059FEE8 /* OpenedOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72C100FE20A985A20059FEE8 /* OpenedOrder.storyboard */; };
 		72C30C7920AA8AA000F4DCEC /* LockupAssetsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C7520AA8AA000F4DCEC /* LockupAssetsCoordinator.swift */; };
 		72C30C7A20AA8AA000F4DCEC /* LockupAssetsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C7620AA8AA000F4DCEC /* LockupAssetsActions.swift */; };
 		72C30C7B20AA8AA000F4DCEC /* LockupAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C7720AA8AA000F4DCEC /* LockupAssetsViewController.swift */; };
 		72C30C7C20AA8AA000F4DCEC /* LockupAssetsReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C7820AA8AA000F4DCEC /* LockupAssetsReducers.swift */; };
-		72C30C7E20AA8B5D00F4DCEC /* LockupAssets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72C30C7D20AA8B5D00F4DCEC /* LockupAssets.storyboard */; };
 		72C30C8320AA8DAD00F4DCEC /* LockupAssetsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C8120AA8DAD00F4DCEC /* LockupAssetsCell.swift */; };
 		72C30C8420AA8DAD00F4DCEC /* LockupAssetsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C30C8220AA8DAD00F4DCEC /* LockupAssetsCell.xib */; };
 		72C30C8620AA8DBD00F4DCEC /* LockupAssetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C8520AA8DBD00F4DCEC /* LockupAssetsView.swift */; };
@@ -40,10 +39,21 @@
 		72F6DF0420AC0C6300BBF105 /* YourPortfolioActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF0020AC0C6300BBF105 /* YourPortfolioActions.swift */; };
 		72F6DF0520AC0C6300BBF105 /* YourPortfolioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF0120AC0C6300BBF105 /* YourPortfolioViewController.swift */; };
 		72F6DF0620AC0C6300BBF105 /* YourPortfolioReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF0220AC0C6300BBF105 /* YourPortfolioReducers.swift */; };
-		72F6DF0820AC0C7700BBF105 /* YourPortfolio.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF0720AC0C7700BBF105 /* YourPortfolio.storyboard */; };
 		72F6DF0A20AC0CF100BBF105 /* YourPorfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF0920AC0CF100BBF105 /* YourPorfolioView.swift */; };
 		72F6DF0D20AC0D3700BBF105 /* YourPortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF0B20AC0D3700BBF105 /* YourPortfolioCell.swift */; };
 		72F6DF0E20AC0D3700BBF105 /* YourPortfolioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF0C20AC0D3700BBF105 /* YourPortfolioCell.xib */; };
+		72F6DF1920AC1C1200BBF105 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF1820AC1C1200BBF105 /* Account.storyboard */; };
+		72F6DF1C20AC204300BBF105 /* AccountPortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF1B20AC204300BBF105 /* AccountPortfolioView.swift */; };
+		72F6DF1E20AC206100BBF105 /* AccountPortfolioCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF1D20AC206100BBF105 /* AccountPortfolioCellView.xib */; };
+		72F6DF2420AC266B00BBF105 /* AccountPortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF2220AC266B00BBF105 /* AccountPortfolioCell.swift */; };
+		72F6DF2520AC266B00BBF105 /* AccountPortfolioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF2320AC266B00BBF105 /* AccountPortfolioCell.xib */; };
+		72F6DF2720AC27A500BBF105 /* AccountPortfolioCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF2620AC27A500BBF105 /* AccountPortfolioCellView.swift */; };
+		72F6DF2920AC27C200BBF105 /* AccountPortfolioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF2820AC27C200BBF105 /* AccountPortfolioView.xib */; };
+		72F6DF2B20AC2EE600BBF105 /* AccountAssetOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF2A20AC2EE600BBF105 /* AccountAssetOperationView.swift */; };
+		72F6DF2D20AC2EF100BBF105 /* AccountAssetOperationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF2C20AC2EF100BBF105 /* AccountAssetOperationView.xib */; };
+		72F6DF2F20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF2E20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift */; };
+		72F6DF3120AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF3020AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib */; };
+		72F6DF3320AC385E00BBF105 /* AccountStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF3220AC385E00BBF105 /* AccountStatusView.swift */; };
 		730FDA5D20A314F600CFBF24 /* cassert in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC420A314E200CFBF24 /* cassert */; };
 		730FDA5E20A314F600CFBF24 /* cctype in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC520A314E200CFBF24 /* cctype */; };
 		730FDA5F20A314F600CFBF24 /* cerrno in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC620A314E200CFBF24 /* cerrno */; };
@@ -204,7 +214,7 @@
 		73BDCA21206266CE009E67A3 /* HistoryApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDCA20206266CE009E67A3 /* HistoryApi.swift */; };
 		73BDCA4C206269A7009E67A3 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDCA4B206269A7009E67A3 /* Tools.swift */; };
 		73BDCA4E20626C09009E67A3 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDCA4D20626C09009E67A3 /* Bucket.swift */; };
-		73D34E352063A603008C7507 /* SettingRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D34E342063A603008C7507 /* SettingRootCoordinator.swift */; };
+		73D34E352063A603008C7507 /* AccountRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D34E342063A603008C7507 /* AccountRootCoordinator.swift */; };
 		73D34E3A2063A65A008C7507 /* FAQActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D34E362063A65A008C7507 /* FAQActions.swift */; };
 		73D34E3B2063A65A008C7507 /* FAQCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D34E372063A65A008C7507 /* FAQCoordinator.swift */; };
 		73D34E3C2063A65A008C7507 /* FAQReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D34E382063A65A008C7507 /* FAQReducers.swift */; };
@@ -313,6 +323,7 @@
 		721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersHeaderView.swift; sourceTree = "<group>"; };
 		721F5C7120AAF15F0042488F /* OpenedOrdersHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenedOrdersHeaderView.xib; sourceTree = "<group>"; };
 		721F5C7320AAF7290042488F /* OpenedOrdersStatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersStatesView.swift; sourceTree = "<group>"; };
+		7246670C20AD730B006A918B /* QuotesTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesTitleView.swift; sourceTree = "<group>"; };
 		72889EE620A9964A007D9E7A /* OpenedOrdersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersCell.swift; sourceTree = "<group>"; };
 		72889EE720A9964A007D9E7A /* OpenedOrdersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenedOrdersCell.xib; sourceTree = "<group>"; };
 		72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersView.swift; sourceTree = "<group>"; };
@@ -322,12 +333,10 @@
 		72C100F720A984F70059FEE8 /* OpenedOrdersActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersActions.swift; sourceTree = "<group>"; };
 		72C100F820A984F70059FEE8 /* OpenedOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersViewController.swift; sourceTree = "<group>"; };
 		72C100F920A984F70059FEE8 /* OpenedOrdersReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersReducers.swift; sourceTree = "<group>"; };
-		72C100FE20A985A20059FEE8 /* OpenedOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OpenedOrder.storyboard; sourceTree = "<group>"; };
 		72C30C7520AA8AA000F4DCEC /* LockupAssetsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsCoordinator.swift; sourceTree = "<group>"; };
 		72C30C7620AA8AA000F4DCEC /* LockupAssetsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsActions.swift; sourceTree = "<group>"; };
 		72C30C7720AA8AA000F4DCEC /* LockupAssetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsViewController.swift; sourceTree = "<group>"; };
 		72C30C7820AA8AA000F4DCEC /* LockupAssetsReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsReducers.swift; sourceTree = "<group>"; };
-		72C30C7D20AA8B5D00F4DCEC /* LockupAssets.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LockupAssets.storyboard; sourceTree = "<group>"; };
 		72C30C8120AA8DAD00F4DCEC /* LockupAssetsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsCell.swift; sourceTree = "<group>"; };
 		72C30C8220AA8DAD00F4DCEC /* LockupAssetsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsCell.xib; sourceTree = "<group>"; };
 		72C30C8520AA8DBD00F4DCEC /* LockupAssetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsView.swift; sourceTree = "<group>"; };
@@ -339,10 +348,21 @@
 		72F6DF0020AC0C6300BBF105 /* YourPortfolioActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioActions.swift; sourceTree = "<group>"; };
 		72F6DF0120AC0C6300BBF105 /* YourPortfolioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioViewController.swift; sourceTree = "<group>"; };
 		72F6DF0220AC0C6300BBF105 /* YourPortfolioReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioReducers.swift; sourceTree = "<group>"; };
-		72F6DF0720AC0C7700BBF105 /* YourPortfolio.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = YourPortfolio.storyboard; sourceTree = "<group>"; };
 		72F6DF0920AC0CF100BBF105 /* YourPorfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPorfolioView.swift; sourceTree = "<group>"; };
 		72F6DF0B20AC0D3700BBF105 /* YourPortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioCell.swift; sourceTree = "<group>"; };
 		72F6DF0C20AC0D3700BBF105 /* YourPortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YourPortfolioCell.xib; sourceTree = "<group>"; };
+		72F6DF1820AC1C1200BBF105 /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
+		72F6DF1B20AC204300BBF105 /* AccountPortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPortfolioView.swift; sourceTree = "<group>"; };
+		72F6DF1D20AC206100BBF105 /* AccountPortfolioCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountPortfolioCellView.xib; sourceTree = "<group>"; };
+		72F6DF2220AC266B00BBF105 /* AccountPortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPortfolioCell.swift; sourceTree = "<group>"; };
+		72F6DF2320AC266B00BBF105 /* AccountPortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountPortfolioCell.xib; sourceTree = "<group>"; };
+		72F6DF2620AC27A500BBF105 /* AccountPortfolioCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPortfolioCellView.swift; sourceTree = "<group>"; };
+		72F6DF2820AC27C200BBF105 /* AccountPortfolioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountPortfolioView.xib; sourceTree = "<group>"; };
+		72F6DF2A20AC2EE600BBF105 /* AccountAssetOperationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetOperationView.swift; sourceTree = "<group>"; };
+		72F6DF2C20AC2EF100BBF105 /* AccountAssetOperationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountAssetOperationView.xib; sourceTree = "<group>"; };
+		72F6DF2E20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetOperationsItemView.swift; sourceTree = "<group>"; };
+		72F6DF3020AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountAssetOperationsItemView.xib; sourceTree = "<group>"; };
+		72F6DF3220AC385E00BBF105 /* AccountStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStatusView.swift; sourceTree = "<group>"; };
 		730FABB920A314E000CFBF24 /* accumulators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators.hpp; sourceTree = "<group>"; };
 		730FABBA20A314E000CFBF24 /* accumulators_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators_fwd.hpp; sourceTree = "<group>"; };
 		730FABBC20A314E000CFBF24 /* accumulator_base.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulator_base.hpp; sourceTree = "<group>"; };
@@ -11604,7 +11624,7 @@
 		73BDCA20206266CE009E67A3 /* HistoryApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryApi.swift; sourceTree = "<group>"; };
 		73BDCA4B206269A7009E67A3 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		73BDCA4D20626C09009E67A3 /* Bucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bucket.swift; sourceTree = "<group>"; };
-		73D34E342063A603008C7507 /* SettingRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRootCoordinator.swift; sourceTree = "<group>"; };
+		73D34E342063A603008C7507 /* AccountRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRootCoordinator.swift; sourceTree = "<group>"; };
 		73D34E362063A65A008C7507 /* FAQActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQActions.swift; sourceTree = "<group>"; };
 		73D34E372063A65A008C7507 /* FAQCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQCoordinator.swift; sourceTree = "<group>"; };
 		73D34E382063A65A008C7507 /* FAQReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQReducers.swift; sourceTree = "<group>"; };
@@ -11817,7 +11837,6 @@
 				72C100F720A984F70059FEE8 /* OpenedOrdersActions.swift */,
 				72C100F820A984F70059FEE8 /* OpenedOrdersViewController.swift */,
 				72C100F920A984F70059FEE8 /* OpenedOrdersReducers.swift */,
-				72C100FE20A985A20059FEE8 /* OpenedOrder.storyboard */,
 			);
 			path = OpenedOrders;
 			sourceTree = "<group>";
@@ -11831,7 +11850,6 @@
 				72C30C7620AA8AA000F4DCEC /* LockupAssetsActions.swift */,
 				72C30C7720AA8AA000F4DCEC /* LockupAssetsViewController.swift */,
 				72C30C7820AA8AA000F4DCEC /* LockupAssetsReducers.swift */,
-				72C30C7D20AA8B5D00F4DCEC /* LockupAssets.storyboard */,
 			);
 			path = LockupAssets;
 			sourceTree = "<group>";
@@ -11866,7 +11884,6 @@
 				72F6DF0020AC0C6300BBF105 /* YourPortfolioActions.swift */,
 				72F6DF0120AC0C6300BBF105 /* YourPortfolioViewController.swift */,
 				72F6DF0220AC0C6300BBF105 /* YourPortfolioReducers.swift */,
-				72F6DF0720AC0C7700BBF105 /* YourPortfolio.storyboard */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -11887,6 +11904,31 @@
 				72F6DF0920AC0CF100BBF105 /* YourPorfolioView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		72F6DF1A20AC202500BBF105 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72F6DF1B20AC204300BBF105 /* AccountPortfolioView.swift */,
+				72F6DF2820AC27C200BBF105 /* AccountPortfolioView.xib */,
+				72F6DF2620AC27A500BBF105 /* AccountPortfolioCellView.swift */,
+				72F6DF1D20AC206100BBF105 /* AccountPortfolioCellView.xib */,
+				72F6DF2A20AC2EE600BBF105 /* AccountAssetOperationView.swift */,
+				72F6DF2C20AC2EF100BBF105 /* AccountAssetOperationView.xib */,
+				72F6DF2E20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift */,
+				72F6DF3020AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib */,
+				72F6DF3220AC385E00BBF105 /* AccountStatusView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		72F6DF1F20AC261F00BBF105 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				72F6DF2220AC266B00BBF105 /* AccountPortfolioCell.swift */,
+				72F6DF2320AC266B00BBF105 /* AccountPortfolioCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		730FABB620A314E000CFBF24 /* include */ = {
@@ -31081,7 +31123,7 @@
 				73D977E120565E9700CB7DE1 /* ExplorerRootCoordinator.swift */,
 				73D977E320565EA600CB7DE1 /* FAQRootCoordinator.swift */,
 				73D977DF20565E6900CB7DE1 /* HomeRootCoordinator.swift */,
-				73D34E342063A603008C7507 /* SettingRootCoordinator.swift */,
+				73D34E342063A603008C7507 /* AccountRootCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -31103,6 +31145,7 @@
 				73D977EF2056600700CB7DE1 /* Home */,
 				73D978032056614900CB7DE1 /* AppActions.swift */,
 				73D97805205661B400CB7DE1 /* AppReducer.swift */,
+				7246670C20AD730B006A918B /* QuotesTitleView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -31143,6 +31186,9 @@
 				73D34E3F2063A675008C7507 /* AccountCoordinator.swift */,
 				73D34E402063A675008C7507 /* AccountReducers.swift */,
 				73D34E412063A675008C7507 /* AccountViewController.swift */,
+				72F6DF1F20AC261F00BBF105 /* Cells */,
+				72F6DF1A20AC202500BBF105 /* Views */,
+				72F6DF1820AC1C1200BBF105 /* Account.storyboard */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -31443,7 +31489,6 @@
 			files = (
 				730FDAAF20A314F900CFBF24 /* sun.SUNWCCh in Resources */,
 				730FDA7020A314F900CFBF24 /* bitset in Resources */,
-				72F6DF0820AC0C7700BBF105 /* YourPortfolio.storyboard in Resources */,
 				72F6DF0E20AC0D3700BBF105 /* YourPortfolioCell.xib in Resources */,
 				730FDA9F20A314F900CFBF24 /* locale.SUNWCCh in Resources */,
 				730FDAB920A314F900CFBF24 /* type_traits in Resources */,
@@ -31452,7 +31497,6 @@
 				730FDA6420A314F600CFBF24 /* csetjmp in Resources */,
 				730FDA9120A314F900CFBF24 /* bitset.SUNWCCh in Resources */,
 				733557D52052642800C5ADD4 /* Main.storyboard in Resources */,
-				72C30C7E20AA8B5D00F4DCEC /* LockupAssets.storyboard in Resources */,
 				730FDA8820A314F900CFBF24 /* sstream in Resources */,
 				730FDA7820A314F900CFBF24 /* ios in Resources */,
 				73E49E4E207A0873003B14D2 /* TradeHistoryCellView.xib in Resources */,
@@ -31474,6 +31518,7 @@
 				730FDA8B20A314F900CFBF24 /* streambuf in Resources */,
 				730FDABC20A314F900CFBF24 /* unordered_set in Resources */,
 				730FDAAD20A314F900CFBF24 /* string.SUNWCCh in Resources */,
+				72F6DF2520AC266B00BBF105 /* AccountPortfolioCell.xib in Resources */,
 				730FDA9B20A314F900CFBF24 /* istream.SUNWCCh in Resources */,
 				730FDAA920A314F900CFBF24 /* sstream.SUNWCCh in Resources */,
 				730FDAB020A314F900CFBF24 /* tuple.SUNWCCh in Resources */,
@@ -31485,11 +31530,13 @@
 				730FDA7220A314F900CFBF24 /* complex in Resources */,
 				730FDA6820A314F600CFBF24 /* cstdio in Resources */,
 				73E49E48207A02C6003B14D2 /* TradeHistoryCell.xib in Resources */,
+				72F6DF2920AC27C200BBF105 /* AccountPortfolioView.xib in Resources */,
 				730FDA8620A314F900CFBF24 /* regex in Resources */,
 				730FDA8420A314F900CFBF24 /* queue in Resources */,
 				73D978AB2057A47C00CB7DE1 /* PairCardView.xib in Resources */,
 				730FDA9C20A314F900CFBF24 /* iterator.SUNWCCh in Resources */,
 				72F6DEFE20AC03FA00BBF105 /* YourPorfolioView.xib in Resources */,
+				72F6DF1E20AC206100BBF105 /* AccountPortfolioCellView.xib in Resources */,
 				730FDA9A20A314F900CFBF24 /* iostream.SUNWCCh in Resources */,
 				730FDA6920A314F600CFBF24 /* cstdlib in Resources */,
 				72C30C8820AA8DC600F4DCEC /* LockupAssetsView.xib in Resources */,
@@ -31530,6 +31577,7 @@
 				730FDA7C20A314F900CFBF24 /* limits in Resources */,
 				730FDA8020A314F900CFBF24 /* memory in Resources */,
 				730FDA7720A314F900CFBF24 /* iomanip in Resources */,
+				72F6DF3120AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib in Resources */,
 				730FDA7620A314F900CFBF24 /* functional in Resources */,
 				730FDA5D20A314F600CFBF24 /* cassert in Resources */,
 				73D9789020577CA000CB7DE1 /* HomePairCell.xib in Resources */,
@@ -31557,11 +31605,12 @@
 				730FDA6020A314F600CFBF24 /* cfloat in Resources */,
 				730FDA9620A314F900CFBF24 /* fstream.SUNWCCh in Resources */,
 				73E49E52207A08CB003B14D2 /* OrderBookCellView.xib in Resources */,
-				72C100FF20A985A20059FEE8 /* OpenedOrder.storyboard in Resources */,
 				730FDAA120A314F900CFBF24 /* memory.SUNWCCh in Resources */,
 				730FDAA520A314F900CFBF24 /* queue.SUNWCCh in Resources */,
 				730FDA7920A314F900CFBF24 /* iostream in Resources */,
+				72F6DF2D20AC2EF100BBF105 /* AccountAssetOperationView.xib in Resources */,
 				730FDA8920A314F900CFBF24 /* stack in Resources */,
+				72F6DF1920AC1C1200BBF105 /* Account.storyboard in Resources */,
 				730FDAA420A314F900CFBF24 /* ostream.SUNWCCh in Resources */,
 				730FDA7D20A314F900CFBF24 /* list in Resources */,
 				730FDA9820A314F900CFBF24 /* iomanip.SUNWCCh in Resources */,
@@ -31817,6 +31866,7 @@
 				73D97806205661B400CB7DE1 /* AppReducer.swift in Sources */,
 				7320D69F205B93D500C3F579 /* CBKLineModel.swift in Sources */,
 				73D978A72057A46100CB7DE1 /* PairCardView.swift in Sources */,
+				72F6DF2420AC266B00BBF105 /* AccountPortfolioCell.swift in Sources */,
 				73EA6D942085C3AC0045A88B /* Demo.swift in Sources */,
 				73D34E3D2063A65A008C7507 /* FAQViewController.swift in Sources */,
 				7320D656205A90FD00C3F579 /* NSObject+Extensions.swift in Sources */,
@@ -31828,6 +31878,7 @@
 				72C30C7920AA8AA000F4DCEC /* LockupAssetsCoordinator.swift in Sources */,
 				73D977F42056603800CB7DE1 /* HomeViewController.swift in Sources */,
 				73D977ED20565F0600CB7DE1 /* BaseViewController.swift in Sources */,
+				72F6DF2720AC27A500BBF105 /* AccountPortfolioCellView.swift in Sources */,
 				72C30C8620AA8DBD00F4DCEC /* LockupAssetsView.swift in Sources */,
 				7373AE2D20720BB2002DC01F /* UserDefaults.swift in Sources */,
 				73ACD80820721B5E00592E69 /* SettingDetailCoordinator.swift in Sources */,
@@ -31838,21 +31889,25 @@
 				73D34E3C2063A65A008C7507 /* FAQReducers.swift in Sources */,
 				7320D6B5205FA92400C3F579 /* CBKLineVolumeView.swift in Sources */,
 				731A0E9E20A4409900507D1E /* EntryCoordinator.swift in Sources */,
+				72F6DF2B20AC2EE600BBF105 /* AccountAssetOperationView.swift in Sources */,
 				73B44E302057ECD000759863 /* PairDetailView.swift in Sources */,
 				7320D6B9205FBC4B00C3F579 /* CBMAVOLUMEModel.swift in Sources */,
 				7320D6B7205FA93600C3F579 /* CBKLineAccessoryView.swift in Sources */,
 				721F5C7020AAF1400042488F /* OpenedOrdersHeaderView.swift in Sources */,
 				72F6DF0A20AC0CF100BBF105 /* YourPorfolioView.swift in Sources */,
 				731A0EA420A440D000507D1E /* UIColor+Additions.swift in Sources */,
+				72F6DF3320AC385E00BBF105 /* AccountStatusView.swift in Sources */,
 				73E49E50207A08BE003B14D2 /* OrderBookCellView.swift in Sources */,
 				72C100FB20A984F70059FEE8 /* OpenedOrdersActions.swift in Sources */,
 				7324FDCB206CFC37004296E7 /* SettingCell.swift in Sources */,
+				7246670D20AD730B006A918B /* QuotesTitleView.swift in Sources */,
 				73E6B2BE208D92AB00B015E5 /* BitShareCoordinator.mm in Sources */,
 				73A2937A20AAED3F00893053 /* RegisterViewController.swift in Sources */,
 				73BDCA21206266CE009E67A3 /* HistoryApi.swift in Sources */,
 				72C100FA20A984F70059FEE8 /* OpenedOrdersCoordinator.swift in Sources */,
 				72F6DF0620AC0C6300BBF105 /* YourPortfolioReducers.swift in Sources */,
 				73D97802205660F200CB7DE1 /* HomeReducers.swift in Sources */,
+				72F6DF2F20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift in Sources */,
 				73D34E4D2063A697008C7507 /* SettingReducers.swift in Sources */,
 				73BDCA4E20626C09009E67A3 /* Bucket.swift in Sources */,
 				73D977A62056594800CB7DE1 /* BaseTabbarViewController.swift in Sources */,
@@ -31878,6 +31933,7 @@
 				7324A91920AB01FA005BCFF8 /* GradientLayer.swift in Sources */,
 				733402272067DB00000F78B3 /* DemoCache.swift in Sources */,
 				7320D69D205B8C1E00C3F579 /* KLineConfiguration.swift in Sources */,
+				72F6DF1C20AC204300BBF105 /* AccountPortfolioView.swift in Sources */,
 				73D978A52057A45500CB7DE1 /* PairCardCell.swift in Sources */,
 				72C100FC20A984F70059FEE8 /* OpenedOrdersViewController.swift in Sources */,
 				721F5C6C20AAE7C80042488F /* LockupAssetsSectionView.swift in Sources */,
@@ -31889,7 +31945,7 @@
 				73D9789C20579EE200CB7DE1 /* MarketActions.swift in Sources */,
 				73E49DF42078BF5B003B14D2 /* AccessoryHorizentalView.swift in Sources */,
 				731A0E9F20A4409900507D1E /* EntryReducers.swift in Sources */,
-				73D34E352063A603008C7507 /* SettingRootCoordinator.swift in Sources */,
+				73D34E352063A603008C7507 /* AccountRootCoordinator.swift in Sources */,
 				7320D6BB205FBC5800C3F579 /* CBEMAVOLUMEModel.swift in Sources */,
 				73E49E362079FFAF003B14D2 /* OrderBookViewController.swift in Sources */,
 				73D977E920565EE000CB7DE1 /* NavCoordinator.swift in Sources */,

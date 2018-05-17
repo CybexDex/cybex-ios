@@ -23,7 +23,7 @@ protocol OpenedOrdersStateManagerProtocol {
  
 }
 
-class OpenedOrdersCoordinator: SettingRootCoordinator {
+class OpenedOrdersCoordinator: AccountRootCoordinator {
     
     lazy var creator = OpenedOrdersPropertyActionCreate()
     

@@ -98,12 +98,12 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" name="white80" red="1.000" green="1.000" blue="1.000" alpha="0.800" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="PKR-1Z-MGA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="O9H-52-3B9"/>
                 <constraint firstItem="PKR-1Z-MGA" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="TLt-QI-CGI"/>
-                <constraint firstItem="PKR-1Z-MGA" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="ain-Vb-jWX"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="PKR-1Z-MGA" secondAttribute="trailing" id="gwM-IB-bg3"/>
+                <constraint firstItem="PKR-1Z-MGA" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="mlQ-S6-MOa"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -112,10 +112,21 @@
                     <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                    <color key="value" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="value" name="white80" red="1.000" green="1.000" blue="1.000" alpha="0.800" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                    <size key="value" width="0.0" height="0.0"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="74" y="59"/>
         </view>
     </objects>
+    <resources>
+    </resources>
 </document>

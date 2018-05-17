@@ -10,6 +10,8 @@ import UIKit
 import ReSwift
 
 protocol AccountCoordinatorProtocol {
+  func openOpenedOrders()
+  
 }
 
 protocol AccountStateManagerProtocol {
@@ -19,7 +21,7 @@ protocol AccountStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
 }
 
-class AccountCoordinator: NavCoordinator {
+class AccountCoordinator: AccountRootCoordinator {
     
     lazy var creator = AccountPropertyActionCreate()
     
@@ -35,7 +37,17 @@ class AccountCoordinator: NavCoordinator {
 }
 
 extension AccountCoordinator: AccountCoordinatorProtocol {
-    
+  func openOpenedOrders(){
+    // 跳转到其他页面的时候
+    // 1 创建跳转的页面
+    // 2 创建跳转页面的路由coordinator。而且根路由要转换成当前VC
+    // 3 路由赋值 然后跳转
+    // 解释： 路由的赋值是相当于NavinationC的跳转路由栈的队列
+    let vc = R.storyboard.account.openedOrdersViewController()!
+    let coordinator = OpenedOrdersCoordinator(rootVC: self.rootVC)
+    vc.coordinator = coordinator
+    self.rootVC.pushViewController(vc, animated: true)
+  }
 }
 
 extension AccountCoordinator: AccountStateManagerProtocol {

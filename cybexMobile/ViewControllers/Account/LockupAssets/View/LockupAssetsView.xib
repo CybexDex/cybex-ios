@@ -61,16 +61,16 @@
                                             <integer key="value" value="50"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="beginColor">
-                                            <color key="value" red="1" green="0.56899999999999995" blue="0.26300000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="value" red="1" green="0.76900000000000002" blue="0.47099999999999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                            <color key="value" red="0.42699999999999999" green="0.73299999999999998" blue="0.28599999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="value" red="1" green="0.56899999999999995" blue="0.26300000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="theme1NormalColor">
                                             <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="theme2NormalColor">
-                                            <color key="value" red="0.71764705880000002" green="0.73725490199999999" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="value" name="blueyGrey" red="0.718" green="0.737" blue="0.788" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                             <real key="value" value="3"/>
@@ -183,4 +183,6 @@
             <point key="canvasLocation" x="281" y="-59"/>
         </view>
     </objects>
+    <resources>
+    </resources>
 </document>

@@ -19,7 +19,7 @@ protocol YourPortfolioStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
 }
 
-class YourPortfolioCoordinator: SettingRootCoordinator {
+class YourPortfolioCoordinator: AccountRootCoordinator {
     
     lazy var creator = YourPortfolioPropertyActionCreate()
     

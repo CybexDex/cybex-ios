@@ -7,19 +7,30 @@
 //
 
 import UIKit
+import SwiftTheme
 
 class AccountPortfolioView:UIView{
   
+  @IBOutlet weak var openPortfolioView: UIView!
+  @IBOutlet weak var collectionView: UICollectionView!
   var data: Any? {
     didSet {
       
     }
   }
-  
-  
-  
+  enum event:String {
+    case openPortfolio
+  }
   fileprivate func setup() {
+    let cell = String.init(describing: AccountPortfolioCell.self)
+    collectionView.register(UINib.init(nibName: cell, bundle: nil), forCellWithReuseIdentifier: cell)
+    openPortfolioView.isUserInteractionEnabled = true
+    let gesture = UITapGestureRecognizer.init(target: self, action: #selector(openPortfolio))
+    openPortfolioView.addGestureRecognizer(gesture)
     
+  }
+  @objc func openPortfolio(){
+    openPortfolioView.next?.sendEventWith(event.openPortfolio.rawValue, userinfo: [:])
   }
   
   override var intrinsicContentSize: CGSize {
@@ -64,5 +75,17 @@ class AccountPortfolioView:UIView{
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
+  
+}
+
+extension AccountPortfolioView : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return 10
+  }
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String.init(describing: AccountPortfolioCell.self), for: indexPath) as! AccountPortfolioCell
+    return cell
+  }
+  
   
 }

@@ -7,20 +7,28 @@
 //
 
 import UIKit
+import SwiftTheme
 
 class AccountAssetOperationView: UIView{
+  
+ 
   
   var data: Any? {
     didSet {
       
     }
   }
-  
+
+    
+  @IBOutlet var itemViews: [AccountAssetOperationsItemView]!
   
   
   fileprivate func setup() {
     
   }
+  
+  
+  
   
   override var intrinsicContentSize: CGSize {
     return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
@@ -59,7 +67,6 @@ class AccountAssetOperationView: UIView{
     let nibName = String(describing: type(of: self))
     let nib = UINib.init(nibName: nibName, bundle: bundle)
     let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
-    
     addSubview(view)
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]

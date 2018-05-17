@@ -40,7 +40,7 @@ class AppCoordinator {
   var homeCoordinator: HomeRootCoordinator!
   var explorerCoordinator: ExplorerRootCoordinator!
   var faqCoordinator: FAQRootCoordinator!
-  var settingCoordinator: SettingRootCoordinator!
+  var accountCoordinator: AccountRootCoordinator!
   var entryCoordinator: EntryRootCoordinator!
 
   var currentPresentedRootCoordinator: NavCoordinator?
@@ -64,9 +64,9 @@ class AppCoordinator {
     faqCoordinator = FAQRootCoordinator(rootVC: faq)
     faq.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navApply.key.localized(), image: R.image.icon_apply(), selectedImage: R.image.icon_apply_active())
     
-    let setting = BaseNavigationController()
-    settingCoordinator = SettingCoordinator(rootVC: setting)
-    setting.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navSetting.key.localized(), image: R.image.ic_settings_24px(), selectedImage: R.image.ic_settings_active_24px())
+    let account = BaseNavigationController()
+    accountCoordinator = AccountCoordinator(rootVC: account)
+    account.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navAccount.key.localized(), image: R.image.ic_account_box_24px(), selectedImage: R.image.ic_account_box_active_24px())
     
   
     //        home.tabBarItem.badgeValue = ""
@@ -74,9 +74,9 @@ class AppCoordinator {
     
     homeCoordinator.start()
     faqCoordinator.start()
-    settingCoordinator.start()
+    accountCoordinator.start()
     
-    rootVC.viewControllers = [home, faq, setting]
+    rootVC.viewControllers = [home, faq, account]
    
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] notification in
       guard let `self` = self else { return }
@@ -86,7 +86,7 @@ class AppCoordinator {
   }
   
   func curDisplayingCoordinator() -> NavCoordinator {
-    let container = [homeCoordinator, faqCoordinator, settingCoordinator] as [NavCoordinator]
+    let container = [homeCoordinator, faqCoordinator, accountCoordinator] as [NavCoordinator]
     return container[self.rootVC.selectedIndex]
   }
   

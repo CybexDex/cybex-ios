@@ -371,21 +371,6 @@
             </objects>
             <point key="canvasLocation" x="4161" y="462"/>
         </scene>
-        <!--Account View Controller-->
-        <scene sceneID="SPy-rK-1Sa">
-            <objects>
-                <viewController storyboardIdentifier="AccountViewController" id="AtA-4W-p2q" customClass="AccountViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="K4f-Yx-Pee">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="z5d-DM-hxw"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Jk-Gq-BHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="161" y="1439"/>
-        </scene>
         <!--Entry-->
         <scene sceneID="J9I-0r-bad">
             <objects>

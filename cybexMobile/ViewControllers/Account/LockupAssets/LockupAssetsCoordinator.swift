@@ -20,7 +20,7 @@ protocol LockupAssetsStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
 }
 
-class LockupAssetsCoordinator: SettingRootCoordinator {
+class LockupAssetsCoordinator: AccountRootCoordinator {
     lazy var creator = LockupAssetsPropertyActionCreate()
     
     var store = Store<LockupAssetsState>(
