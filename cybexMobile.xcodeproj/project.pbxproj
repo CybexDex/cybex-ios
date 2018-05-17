@@ -175,6 +175,8 @@
 		733557D52052642800C5ADD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 733557D22052642700C5ADD4 /* Main.storyboard */; };
 		733CD33120623F47002AD0E0 /* DataBaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733CD33020623F47002AD0E0 /* DataBaseApi.swift */; };
 		7341BB39205A5E11007387FE /* UIColor+Cybexblack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341BB0F205A5E11007387FE /* UIColor+Cybexblack.swift */; };
+		735D8EB220AD2A67008DAAAC /* NoticeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */; };
+		735D8EB420AD2A74008DAAAC /* NoticeBoardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */; };
 		7373AE2D20720BB2002DC01F /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373AE2C20720BB2002DC01F /* UserDefaults.swift */; };
 		7396B5ED2067EA7D008051E5 /* UIResponder+Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7396B5EC2067EA7D008051E5 /* UIResponder+Route.swift */; };
 		739B6166207F325A00B61152 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739B6165207F325A00B61152 /* Collection+Extensions.swift */; };
@@ -11577,6 +11579,8 @@
 		733557D72052644800C5ADD4 /* cybexMobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cybexMobile-Bridging-Header.h"; sourceTree = "<group>"; };
 		733CD33020623F47002AD0E0 /* DataBaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseApi.swift; sourceTree = "<group>"; };
 		7341BB0F205A5E11007387FE /* UIColor+Cybexblack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Cybexblack.swift"; sourceTree = "<group>"; };
+		735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardView.swift; sourceTree = "<group>"; };
+		735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeBoardView.xib; sourceTree = "<group>"; };
 		7373AE2C20720BB2002DC01F /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		7396B5EC2067EA7D008051E5 /* UIResponder+Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Route.swift"; sourceTree = "<group>"; };
 		739B6165207F325A00B61152 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
@@ -30494,7 +30498,6 @@
 				731A0E9B20A4409800507D1E /* EntryReducers.swift */,
 				731A0E9C20A4409800507D1E /* EntryViewController.swift */,
 				73A2937220AAED2B00893053 /* Register */,
-				7324A91820AB01FA005BCFF8 /* GradientLayer.swift */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -31318,8 +31321,11 @@
 		73F58FC720AC04DC008A1F79 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				7324A91820AB01FA005BCFF8 /* GradientLayer.swift */,
 				73F58FC820AC04EF008A1F79 /* Button.swift */,
 				73F58FCA20AC0589008A1F79 /* Button.xib */,
+				735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */,
+				735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -31562,6 +31568,7 @@
 				730FDAA320A314F900CFBF24 /* numeric.SUNWCCh in Resources */,
 				730FDAAA20A314F900CFBF24 /* stack.SUNWCCh in Resources */,
 				73E49E2B2078C1A6003B14D2 /* AccessoryCollectionView.xib in Resources */,
+				735D8EB420AD2A74008DAAAC /* NoticeBoardView.xib in Resources */,
 				730FDA9420A314F900CFBF24 /* deque.SUNWCCh in Resources */,
 				730FDA7B20A314F900CFBF24 /* iterator in Resources */,
 				730FDABA20A314F900CFBF24 /* typeinfo in Resources */,
@@ -31614,6 +31621,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBRetainCycleDetector/FBRetainCycleDetector.framework",
 				"${BUILT_PRODUCTS_DIR}/FCUUID/FCUUID.framework",
 				"${BUILT_PRODUCTS_DIR}/GRDB.swift/GRDB.framework",
+				"${BUILT_PRODUCTS_DIR}/IGIdenticon/IGIdenticon.framework",
 				"${BUILT_PRODUCTS_DIR}/IHKeyboardAvoiding/IHKeyboardAvoiding.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONRPCKit/JSONRPCKit.framework",
 				"${BUILT_PRODUCTS_DIR}/KMNavigationBarTransition/KMNavigationBarTransition.framework",
@@ -31624,6 +31632,7 @@
 				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/MLeaksFinder/MLeaksFinder.framework",
+				"${BUILT_PRODUCTS_DIR}/Macaw/Macaw.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
@@ -31640,6 +31649,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDCAlertView/SDCAlertView.framework",
+				"${BUILT_PRODUCTS_DIR}/SWXMLHash/SWXMLHash.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/Siren/Siren.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
@@ -31676,6 +31686,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBRetainCycleDetector.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FCUUID.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGIdenticon.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IHKeyboardAvoiding.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONRPCKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMNavigationBarTransition.framework",
@@ -31686,6 +31697,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLeaksFinder.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Macaw.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
@@ -31702,6 +31714,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCAlertView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWXMLHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Siren.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
@@ -31887,6 +31900,7 @@
 				73D978042056614900CB7DE1 /* AppActions.swift in Sources */,
 				7396B5ED2067EA7D008051E5 /* UIResponder+Route.swift in Sources */,
 				72C30C8320AA8DAD00F4DCEC /* LockupAssetsCell.swift in Sources */,
+				735D8EB220AD2A67008DAAAC /* NoticeBoardView.swift in Sources */,
 				73D978082056625600CB7DE1 /* UIImage+Extensions.swift in Sources */,
 				73E49E3B2079FFBF003B14D2 /* TradeHistoryActions.swift in Sources */,
 				73D34E442063A675008C7507 /* AccountReducers.swift in Sources */,

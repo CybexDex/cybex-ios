@@ -73,6 +73,8 @@ def ui
     pod 'ZLaunchAd'
     pod 'SDCAlertView'
     pod 'Presentr'
+    pod 'Macaw'
+    pod 'IGIdenticon'
 end
 
 def other

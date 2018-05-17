@@ -36,7 +36,8 @@
 
 "register" = "Sign Up";
 "opened.title"    = "Opened Orders";
-
+"confirm" = "CONFIRM";
+"attention" = "ATTENTIONS";
 
 "lockupAssets.title"    = "Lockup Assets";
 

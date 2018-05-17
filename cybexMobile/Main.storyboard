@@ -371,21 +371,6 @@
             </objects>
             <point key="canvasLocation" x="4161" y="462"/>
         </scene>
-        <!--Account View Controller-->
-        <scene sceneID="SPy-rK-1Sa">
-            <objects>
-                <viewController storyboardIdentifier="AccountViewController" id="AtA-4W-p2q" customClass="AccountViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="K4f-Yx-Pee">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="z5d-DM-hxw"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Jk-Gq-BHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="161" y="1439"/>
-        </scene>
         <!--Entry-->
         <scene sceneID="J9I-0r-bad">
             <objects>
@@ -827,29 +812,112 @@
             </objects>
             <point key="canvasLocation" x="-506.39999999999998" y="2163.8680659670167"/>
         </scene>
-        <!--View Controller-->
+        <!--Base View Controller-->
         <scene sceneID="HmV-8b-lNI">
             <objects>
-                <viewController id="wci-Cz-ooK" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterTipViewController" id="wci-Cz-ooK" customClass="BaseViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tr6-RG-0S1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8xX-OG-TBQ">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="94d-47-SGC">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <subviews>
+                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="448" translatesAutoresizingMaskIntoConstraints="NO" id="pSm-YK-gF2">
+                                        <rect key="frame" x="25" y="20" width="325" height="448"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="云钱包模式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84b-Ph-ISG">
+                                                <rect key="frame" x="0.0" y="0.0" width="325" height="19.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sju-Z1-wMB">
+                                                <rect key="frame" x="0.0" y="35.5" width="325" height="153"/>
+                                                <string key="text">Cybex移动端仅支持注册云钱包模式账户。云钱包模式使用密码和账户名衍生出私钥，这使您可以从不同的电脑、移动终端或浏览器登录。但此模式存在面对黑客暴力破解攻击的风险。因此，我们强烈推荐您使用长密码！
+
+</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                                        <color key="value" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloud Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VD4-ZC-1ID">
+                                                <rect key="frame" x="0.0" y="200.5" width="325" height="19.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1J-X6-NSm">
+                                                <rect key="frame" x="0.0" y="236" width="325" height="172"/>
+                                                <string key="text">You can register using a cloud wallet. It uses a password in combination with your account name to generate your private keys on the fly. It restricts you to only logging in with one account at a time, in return for ease of use and convenience. But your password is vulnerable to brute-force attacks which means it is important to use a very long password, ideally 20+ characters!</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                                        <color key="value" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="VD4-ZC-1ID" firstAttribute="leading" secondItem="84b-Ph-ISG" secondAttribute="leading" id="2si-uF-Ye5"/>
+                                            <constraint firstItem="VD4-ZC-1ID" firstAttribute="top" secondItem="Sju-Z1-wMB" secondAttribute="bottom" constant="12" id="6Xt-0t-cJY"/>
+                                            <constraint firstItem="F1J-X6-NSm" firstAttribute="top" secondItem="VD4-ZC-1ID" secondAttribute="bottom" constant="16" id="As9-jd-Euh"/>
+                                            <constraint firstAttribute="trailing" secondItem="84b-Ph-ISG" secondAttribute="trailing" id="K9R-sv-ZcR"/>
+                                            <constraint firstItem="84b-Ph-ISG" firstAttribute="leading" secondItem="pSm-YK-gF2" secondAttribute="leading" id="Lto-JP-eIh"/>
+                                            <constraint firstItem="VD4-ZC-1ID" firstAttribute="trailing" secondItem="84b-Ph-ISG" secondAttribute="trailing" id="RE4-kI-r0R"/>
+                                            <constraint firstItem="F1J-X6-NSm" firstAttribute="leading" secondItem="84b-Ph-ISG" secondAttribute="leading" id="ap5-Xw-KrI"/>
+                                            <constraint firstItem="Sju-Z1-wMB" firstAttribute="leading" secondItem="84b-Ph-ISG" secondAttribute="leading" id="d2T-Uy-PxL"/>
+                                            <constraint firstItem="F1J-X6-NSm" firstAttribute="trailing" secondItem="84b-Ph-ISG" secondAttribute="trailing" id="g8f-aB-EU9"/>
+                                            <constraint firstItem="84b-Ph-ISG" firstAttribute="top" secondItem="pSm-YK-gF2" secondAttribute="top" id="iFF-qu-45I"/>
+                                            <constraint firstItem="Sju-Z1-wMB" firstAttribute="trailing" secondItem="84b-Ph-ISG" secondAttribute="trailing" id="o44-6h-gxY"/>
+                                            <constraint firstItem="Sju-Z1-wMB" firstAttribute="top" secondItem="84b-Ph-ISG" secondAttribute="bottom" constant="16" id="y0t-0y-ojI"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="pSm-YK-gF2" firstAttribute="top" secondItem="94d-47-SGC" secondAttribute="top" constant="20" id="asu-X4-bEG"/>
+                                    <constraint firstAttribute="trailing" secondItem="pSm-YK-gF2" secondAttribute="trailing" constant="25" id="gGF-2v-9Ut"/>
+                                    <constraint firstAttribute="bottom" secondItem="pSm-YK-gF2" secondAttribute="bottom" id="ltK-Wy-KN6"/>
+                                    <constraint firstItem="pSm-YK-gF2" firstAttribute="leading" secondItem="94d-47-SGC" secondAttribute="leading" constant="25" id="sq5-pS-tWm"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="b7e-3O-D5t" firstAttribute="trailing" secondItem="8xX-OG-TBQ" secondAttribute="trailing" id="OIl-BA-D59"/>
-                            <constraint firstItem="8xX-OG-TBQ" firstAttribute="top" secondItem="b7e-3O-D5t" secondAttribute="top" id="gQw-k9-Vf7"/>
-                            <constraint firstItem="8xX-OG-TBQ" firstAttribute="leading" secondItem="b7e-3O-D5t" secondAttribute="leading" id="ifS-Mn-htz"/>
-                            <constraint firstItem="b7e-3O-D5t" firstAttribute="bottom" secondItem="8xX-OG-TBQ" secondAttribute="bottom" id="pei-gb-cXZ"/>
+                            <constraint firstItem="b7e-3O-D5t" firstAttribute="trailing" secondItem="94d-47-SGC" secondAttribute="trailing" id="Dvp-u8-Xdn"/>
+                            <constraint firstItem="b7e-3O-D5t" firstAttribute="bottom" secondItem="94d-47-SGC" secondAttribute="bottom" id="H1b-oj-FDL"/>
+                            <constraint firstItem="94d-47-SGC" firstAttribute="top" secondItem="b7e-3O-D5t" secondAttribute="top" id="My3-0l-MoV"/>
+                            <constraint firstItem="94d-47-SGC" firstAttribute="leading" secondItem="b7e-3O-D5t" secondAttribute="leading" id="Rzp-HU-3de"/>
+                            <constraint firstItem="pSm-YK-gF2" firstAttribute="width" secondItem="Tr6-RG-0S1" secondAttribute="width" constant="-50" id="tlF-yB-zGM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b7e-3O-D5t"/>
                     </view>
@@ -857,6 +925,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghi-v2-DbO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-529" y="2878"/>
+        </scene>
+        <!--Base View Controller-->
+        <scene sceneID="NxD-DC-FlH">
+            <objects>
+                <viewController storyboardIdentifier="AttentionViewController" id="xbz-WG-CQd" customClass="BaseViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Gcx-Co-Jrj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="viB-8W-lUx" customClass="NoticeBoardView" customModule="cybexMobile" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="viB-8W-lUx" firstAttribute="top" secondItem="Dly-Li-GXM" secondAttribute="top" id="122-Jf-2XR"/>
+                            <constraint firstItem="viB-8W-lUx" firstAttribute="leading" secondItem="Dly-Li-GXM" secondAttribute="leading" id="CWp-Fs-bSq"/>
+                            <constraint firstItem="Dly-Li-GXM" firstAttribute="bottom" secondItem="viB-8W-lUx" secondAttribute="bottom" id="Wiu-Uq-Xmq"/>
+                            <constraint firstItem="Dly-Li-GXM" firstAttribute="trailing" secondItem="viB-8W-lUx" secondAttribute="trailing" id="ZoM-Cv-arY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Dly-Li-GXM"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IUh-eB-BOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="278" y="2888"/>
         </scene>
         <!--Market View Controller-->
         <scene sceneID="NmZ-95-YkT">

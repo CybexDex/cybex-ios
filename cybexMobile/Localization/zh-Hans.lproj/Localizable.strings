@@ -36,7 +36,8 @@
 "register" = "注册";
 
 "opened.title"    = "委单";
-
+"confirm" = "我记住了";
+"attention" = "注意事项";
 
 "lockupAssets.title"    = "锁定期资产";
 
