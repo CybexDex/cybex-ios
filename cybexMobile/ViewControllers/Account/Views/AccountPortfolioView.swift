@@ -1,0 +1,91 @@
+//
+//  AccountPortfolioView.swift
+//  cybexMobile
+//
+//  Created by DKM on 2018/5/16.
+//  Copyright © 2018年 Cybex. All rights reserved.
+//
+
+import UIKit
+import SwiftTheme
+
+class AccountPortfolioView:UIView{
+  
+  @IBOutlet weak var openPortfolioView: UIView!
+  @IBOutlet weak var collectionView: UICollectionView!
+  var data: Any? {
+    didSet {
+      
+    }
+  }
+  enum event:String {
+    case openPortfolio
+  }
+  fileprivate func setup() {
+    let cell = String.init(describing: AccountPortfolioCell.self)
+    collectionView.register(UINib.init(nibName: cell, bundle: nil), forCellWithReuseIdentifier: cell)
+    openPortfolioView.isUserInteractionEnabled = true
+    let gesture = UITapGestureRecognizer.init(target: self, action: #selector(openPortfolio))
+    openPortfolioView.addGestureRecognizer(gesture)
+    
+  }
+  @objc func openPortfolio(){
+    openPortfolioView.next?.sendEventWith(event.openPortfolio.rawValue, userinfo: [:])
+  }
+  
+  override var intrinsicContentSize: CGSize {
+    return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
+  }
+  
+  fileprivate func updateHeight() {
+    layoutIfNeeded()
+    self.height = dynamicHeight()
+    invalidateIntrinsicContentSize()
+  }
+  
+  fileprivate func dynamicHeight() -> CGFloat {
+    let lastView = self.subviews.last?.subviews.last
+    return lastView!.bottom
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    layoutIfNeeded()
+  }
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    loadViewFromNib()
+    setup()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    loadViewFromNib()
+    setup()
+  }
+  
+  fileprivate func loadViewFromNib() {
+    let bundle = Bundle(for: type(of: self))
+    let nibName = String(describing: type(of: self))
+    let nib = UINib.init(nibName: nibName, bundle: bundle)
+    let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+    
+    addSubview(view)
+    view.frame = self.bounds
+    view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+  }
+  
+}
+
+extension AccountPortfolioView : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return 10
+  }
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String.init(describing: AccountPortfolioCell.self), for: indexPath) as! AccountPortfolioCell
+    return cell
+  }
+  
+  
+}

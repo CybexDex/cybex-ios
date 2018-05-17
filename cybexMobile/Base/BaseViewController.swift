@@ -141,9 +141,10 @@ class BaseViewController: UIViewController {
     navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftNavButton!)
   }
   
-  func configRightNavButton() {
+  func configRightNavButton(_ image:UIImage? = nil) {
     rightNavButton = UIButton.init(type: .custom)
     rightNavButton?.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+    rightNavButton?.setImage(image ?? #imageLiteral(resourceName: "icSettings24Px"), for: .normal)
     rightNavButton?.addTarget(self, action: #selector(rightAction(_:)), for: .touchUpInside)
     rightNavButton?.isHidden = false
     navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightNavButton!)

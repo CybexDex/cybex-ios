@@ -8,11 +8,11 @@
 
 import Foundation
 
-class SettingRootCoordinator: NavCoordinator {
+class AccountRootCoordinator: NavCoordinator {
   override func start() {
-    let vc = R.storyboard.main.settingViewController()!
+    let vc = R.storyboard.account.accountViewController()!
     
-    let coordinator = SettingCoordinator(rootVC: self.rootVC)
+    let coordinator = AccountCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator
     self.rootVC.pushViewController(vc, animated: true)
   }

@@ -114,13 +114,13 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     // test
     if indexPath.section == 1 {
-      self.coordinator?.openOpenedOrders()
+      self.coordinator?.openAccount()
     }else if indexPath.section == 2{
       self.coordinator?.openLockupAssets()
     }else{
       self.coordinator?.openYourProtfolio()
     }
-//    return
+    return
     
     if indexPath.section == 2 {
       self.startLoading()

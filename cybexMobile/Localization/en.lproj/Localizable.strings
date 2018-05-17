@@ -35,11 +35,22 @@
 "login.already" = "Already have an account? ";
 
 "register" = "Sign Up";
-"opened.title"    = "Opened Orders";
+"opened.title"                 = "Opened Orders";
 
 
-"lockupAssets.title"    = "Lockup Assets";
+"lockupAssets.title"           = "Lockup Assets";
 
-"portfolio.title"       = "Your Portfolio";
-"portfolio.price"       = "Price (CYB):";
-"portfolio.time"       = "24h Change:";
+"portfolio.title"              = "Your Portfolio";
+"portfolio.price"              = "Price (CYB):";
+"portfolio.time"               = "24h Change:";
+
+"account.title"                = "Dashboard";
+"account.yourPortfolio"        = "Your Portfolio";
+"account.viewAll"              = "View All";
+"account.yourTotalBalance"     = "Your Total Balance (CYB):";
+"account.assetOperations"      = "Asset Operations";
+"account.basicMember"          = "Basic Member";
+"account.login"                = "Log in Cybex";
+"account.introduce"            = "CYBEX is a decentralized exchange that seeks to improve the liquidity of crypto-assets that’s more transparent, highly efficient and secure.";
+
+
