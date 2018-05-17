@@ -29,6 +29,8 @@ class Key: Mappable {
   var private_key = ""
   var public_key = ""
   var address = ""
+  var compressed = ""
+  var uncompressed = ""
 
   required init?(map: Map) {
 
@@ -38,5 +40,7 @@ class Key: Mappable {
     private_key <- map["private_key"]
     public_key <- map["public_key"]
     address <- map["address"]
+    compressed <- map["compressed"]
+    uncompressed <- map["uncompressed"]
   }
 }

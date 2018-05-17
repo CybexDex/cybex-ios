@@ -35,8 +35,10 @@
 "login.already" = "Already have an account? ";
 
 "register" = "Sign Up";
-"opened.title"                 = "Opened Orders";
 
+"opened.title"    = "Opened Orders";
+"confirm" = "CONFIRM";
+"attention" = "ATTENTIONS";
 
 "lockupAssets.title"           = "Lockup Assets";
 

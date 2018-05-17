@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import CryptoSwift
 
 extension UserManager {
   
@@ -29,6 +30,7 @@ class UserManager {
   static let shared = UserManager()
   
   var keys:AccountKeys?
+  var avatarString:String?
   
   private init() {
     
@@ -39,6 +41,9 @@ class UserManager {
     
     if let keys = AccountKeys(JSONString: keysString) {
       self.keys = keys
+      
+      self.avatarString = username.sha256()
+      
     }
     
   }

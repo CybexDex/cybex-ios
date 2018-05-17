@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import Presentr
 
 protocol RegisterCoordinatorProtocol {
   func pushCreateTip()
@@ -16,26 +17,39 @@ protocol RegisterCoordinatorProtocol {
 }
 
 protocol RegisterStateManagerProtocol {
-    var state: RegisterState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<RegisterState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
+  var state: RegisterState { get }
+  func subscribe<SelectedState, S: StoreSubscriber>(
+    _ subscriber: S, transform: ((Subscription<RegisterState>) -> Subscription<SelectedState>)?
+  ) where S.StoreSubscriberStateType == SelectedState
 }
 
 class RegisterCoordinator: EntryRootCoordinator {
+  let presenter: Presentr = {
+    let width = ModalSize.custom(size: 272)
+    let height = ModalSize.custom(size: 340)
+    let center = ModalCenterPosition.center
+    let customType = PresentationType.custom(width: width, height: height, center: center)
     
-    lazy var creator = RegisterPropertyActionCreate()
-    
-    var store = Store<RegisterState>(
-        reducer: RegisterReducer,
-        state: nil,
-        middleware:[TrackingMiddleware]
-    )
+    let customPresenter = Presentr(presentationType: customType)
+    customPresenter.roundCorners = true
+    return customPresenter
+  }()
+  
+  
+  lazy var creator = RegisterPropertyActionCreate()
+  
+  var store = Store<RegisterState>(
+    reducer: RegisterReducer,
+    state: nil,
+    middleware:[TrackingMiddleware]
+  )
 }
 
 extension RegisterCoordinator: RegisterCoordinatorProtocol {
   func pushCreateTip() {
-    self.openWebVC(url: URL(string: "http://www.baidu.com")!)
+    let vc = R.storyboard.main.attentionViewController()!
+    self.rootVC.topViewController?.customPresentViewController(presenter, viewController: vc, animated: true, completion: nil)
+    //    self.rootVC.pushViewController(vc, animated: true)
   }
   
   func switchToLogin() {
@@ -53,14 +67,14 @@ extension RegisterCoordinator: RegisterCoordinatorProtocol {
 }
 
 extension RegisterCoordinator: RegisterStateManagerProtocol {
-    var state: RegisterState {
-        return store.state
-    }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<RegisterState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-    
+  var state: RegisterState {
+    return store.state
+  }
+  
+  func subscribe<SelectedState, S: StoreSubscriber>(
+    _ subscriber: S, transform: ((Subscription<RegisterState>) -> Subscription<SelectedState>)?
+    ) where S.StoreSubscriberStateType == SelectedState {
+    store.subscribe(subscriber, transform: transform)
+  }
+  
 }
