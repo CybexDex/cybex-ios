@@ -11,7 +11,9 @@ import ReSwift
 
 protocol AccountCoordinatorProtocol {
   func openOpenedOrders()
-  
+  func openLockupAssets()
+  func openYourProtfolio()
+  func openSetting()
 }
 
 protocol AccountStateManagerProtocol {
@@ -46,6 +48,30 @@ extension AccountCoordinator: AccountCoordinatorProtocol {
     let vc = R.storyboard.account.openedOrdersViewController()!
     let coordinator = OpenedOrdersCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator
+    self.rootVC.pushViewController(vc, animated: true)
+  }
+  
+  // MARK: 锁定期资产
+  func openLockupAssets(){
+    let vc = R.storyboard.account.lockupAssetsViewController()!
+    let coordinator = LockupAssetsCoordinator(rootVC: self.rootVC)
+    vc.coordinator  = coordinator
+    self.rootVC.pushViewController(vc, animated: true)
+  }
+  
+  // MARK: 可用资产
+  func openYourProtfolio(){
+    let vc = R.storyboard.account.yourProtfolioViewController()!
+    let coordinator = YourPortfolioCoordinator(rootVC: self.rootVC)
+    vc.coordinator  = coordinator
+    self.rootVC.pushViewController(vc, animated: true)
+  }
+  
+  // MARK: 设置
+  func openSetting(){
+    let vc = R.storyboard.main.settingViewController()!
+    let coordinator = SettingCoordinator(rootVC: self.rootVC)
+    vc.coordinator  = coordinator
     self.rootVC.pushViewController(vc, animated: true)
   }
 }

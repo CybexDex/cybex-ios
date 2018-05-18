@@ -112,16 +112,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
-    // test
-    if indexPath.section == 1 {
-      self.coordinator?.openAccount()
-    }else if indexPath.section == 2{
-      self.coordinator?.openLockupAssets()
-    }else{
-      self.coordinator?.openYourProtfolio()
-    }
-    return
-    
     if indexPath.section == 2 {
       self.startLoading()
       handlerUpdateVersion({
@@ -129,9 +119,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
       }, showNoUpdate: true)
       return
     }
-    
-    self.coordinator?.openSettingDetail(type: indexPath.section == 0 ? .language : .theme)
-   
+    self.coordinator?.openSettingDetail(type: indexPath.section == 0 ? .language : .theme)   
   }
 
 }

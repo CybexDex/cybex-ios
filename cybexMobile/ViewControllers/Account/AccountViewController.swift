@@ -46,7 +46,7 @@ class AccountViewController: BaseViewController {
   }
   // 跳转到设置界面
   override func rightAction(_ sender: UIButton) {
-    
+    self.coordinator?.openSetting()
   }
   
   fileprivate func setupUIWithStatus(_ sender : user_type){
@@ -92,8 +92,16 @@ class AccountViewController: BaseViewController {
   }
 }
 
+
+
 extension AccountViewController{
   @objc func openPortfolio(_ data:[String: Any]){
+    self.coordinator?.openYourProtfolio()
+  }
+  @objc func openOpenedOrders(_ data:[String: Any]){
     self.coordinator?.openOpenedOrders()
+  }
+  @objc func openLockupAssets(_ data:[String: Any]){
+    self.coordinator?.openLockupAssets()
   }
 }

@@ -11,24 +11,38 @@ import SwiftTheme
 
 class AccountAssetOperationView: UIView{
   
- 
+  @IBOutlet weak var openedOrdersView: AccountAssetOperationsItemView!
+  
+  @IBOutlet weak var lockupAssetsView: AccountAssetOperationsItemView!
   
   var data: Any? {
     didSet {
       
     }
   }
+  enum event:String{
+    case openOpenedOrders
+    case openLockupAssets
+  }
 
-    
-  @IBOutlet var itemViews: [AccountAssetOperationsItemView]!
-  
-  
   fileprivate func setup() {
+    openedOrdersView.view_type = 0
+    lockupAssetsView.view_type = 1
     
+    
+    let openedGesture = UITapGestureRecognizer.init(target: self, action: #selector(openOpenedOrders))
+    openedOrdersView.addGestureRecognizer(openedGesture)
+    
+    let lockupAssets = UITapGestureRecognizer.init(target: self, action: #selector(openLockupAssets))
+    lockupAssetsView.addGestureRecognizer(lockupAssets)
   }
   
-  
-  
+  @objc func openOpenedOrders(){
+    openedOrdersView.next?.sendEventWith(event.openOpenedOrders.rawValue, userinfo: [:])
+  }
+  @objc func openLockupAssets(){
+    lockupAssetsView.next?.sendEventWith(event.openLockupAssets.rawValue, userinfo: [:])
+  }
   
   override var intrinsicContentSize: CGSize {
     return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())

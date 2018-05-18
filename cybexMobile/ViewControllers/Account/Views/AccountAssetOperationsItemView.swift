@@ -12,12 +12,13 @@ import SwiftTheme
 
 class AccountAssetOperationsItemView: UIView{
   // 当前页面stackView有三个Lable 前两个是英文。后面是中文
-  // lable的tag按照顺序。0  1  2
-  enum label_type : NSInteger {
-    case first_en = 0
-    case last_en  = 1
-    case all_cn   = 2
+  // lable的tag按照顺序。 1  2   3
+  enum label_type : Int {
+    case first_en = 1
+    case last_en  = 2
+    case all_cn   = 3
   }
+  
   @IBOutlet weak var stackView: UIStackView!
   var data: Any? {
     didSet {
@@ -25,18 +26,35 @@ class AccountAssetOperationsItemView: UIView{
     }
   }
   
+  
   fileprivate func setup() {
     if Localize.currentLanguage() == "zh-Hans" {
-      stackView.viewWithTag(0)?.isHidden = true
-      stackView.viewWithTag(1)?.isHidden = true
+      stackView.viewWithTag(label_type.first_en.rawValue)?.isHidden = true
+      stackView.viewWithTag(label_type.last_en.rawValue)?.isHidden = true
     }else{
-      stackView.viewWithTag(2)?.isHidden = true
+      stackView.viewWithTag(label_type.all_cn.rawValue)?.isHidden = true
     }
     self.subviews.last?.shadowColor   = ThemeManager.currentThemeIndex == 0 ? .black10 : .steel20
     self.subviews.last?.shadowOffset  = CGSize(width: 0, height: 8.0)
     self.subviews.last?.shadowRadius  = 4.0
     self.subviews.last?.shadowOpacity = 1.0
-    
+  }
+  var view_type : Int = 0 {
+    didSet{
+      changeViewType()
+    }
+  }
+  
+  func changeViewType(){
+      if let firstL : UILabel = stackView.viewWithTag(label_type.first_en.rawValue) as? UILabel{
+        firstL.text = view_type == 0 ? "Opened" : "Lockup"
+      }
+      if let lastL : UILabel = stackView.viewWithTag(label_type.last_en.rawValue) as? UILabel{
+        lastL.text =  view_type == 0 ? "Orders" : "Assets"
+      }
+      if let chL : UILabel = stackView.viewWithTag(label_type.all_cn.rawValue) as? UILabel{
+        chL.text = view_type == 0 ? "委单" : "锁定资产"
+      }
   }
   
   override var intrinsicContentSize: CGSize {

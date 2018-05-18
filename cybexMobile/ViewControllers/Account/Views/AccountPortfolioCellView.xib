@@ -98,7 +98,7 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" name="white80" red="1.000" green="1.000" blue="1.000" alpha="0.800" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="PKR-1Z-MGA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="O9H-52-3B9"/>
                 <constraint firstItem="PKR-1Z-MGA" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="TLt-QI-CGI"/>
@@ -112,7 +112,7 @@
                     <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                    <color key="value" name="white80" red="1.000" green="1.000" blue="1.000" alpha="0.800" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="value" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
                     <real key="value" value="0.0"/>
@@ -127,6 +127,4 @@
             <point key="canvasLocation" x="74" y="59"/>
         </view>
     </objects>
-    <resources>
-    </resources>
 </document>
