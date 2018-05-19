@@ -48,6 +48,7 @@ class AccountViewController: BaseViewController {
   func setupUI(){
     self.localized_text = R.string.localizable.accountTitle.key.localizedContainer()
     configRightNavButton()
+    setupUIWithStatus(user_type.unLogin)
   }
   
   func setupEvent() {
