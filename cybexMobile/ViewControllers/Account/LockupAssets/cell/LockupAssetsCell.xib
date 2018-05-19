@@ -47,7 +47,9 @@
                     <constraint firstAttribute="trailing" secondItem="kHk-ft-cTr" secondAttribute="trailing" constant="13" id="ss3-rt-oka"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="lockupCellView" destination="kHk-ft-cTr" id="7wZ-pF-FYL"/>
+            </connections>
             <point key="canvasLocation" x="108.5" y="24"/>
         </tableViewCell>
     </objects>

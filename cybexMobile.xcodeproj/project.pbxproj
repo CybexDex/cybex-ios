@@ -54,6 +54,7 @@
 		72F6DF2F20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF2E20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift */; };
 		72F6DF3120AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF3020AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib */; };
 		72F6DF3320AC385E00BBF105 /* AccountStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF3220AC385E00BBF105 /* AccountStatusView.swift */; };
+		72F8C77320AEA9F200454187 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8C77220AEA9F200454187 /* Balance.swift */; };
 		730FDA5D20A314F600CFBF24 /* cassert in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC420A314E200CFBF24 /* cassert */; };
 		730FDA5E20A314F600CFBF24 /* cctype in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC520A314E200CFBF24 /* cctype */; };
 		730FDA5F20A314F600CFBF24 /* cerrno in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC620A314E200CFBF24 /* cerrno */; };
@@ -367,6 +368,7 @@
 		72F6DF2E20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetOperationsItemView.swift; sourceTree = "<group>"; };
 		72F6DF3020AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountAssetOperationsItemView.xib; sourceTree = "<group>"; };
 		72F6DF3220AC385E00BBF105 /* AccountStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStatusView.swift; sourceTree = "<group>"; };
+		72F8C77220AEA9F200454187 /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		730FABB920A314E000CFBF24 /* accumulators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators.hpp; sourceTree = "<group>"; };
 		730FABBA20A314E000CFBF24 /* accumulators_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators_fwd.hpp; sourceTree = "<group>"; };
 		730FABBC20A314E000CFBF24 /* accumulator_base.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulator_base.hpp; sourceTree = "<group>"; };
@@ -30903,6 +30905,7 @@
 				73EA6D932085C3AC0045A88B /* Demo.swift */,
 				73D8B0AF207CB6EC001A2232 /* OrderBook.swift */,
 				73AAD13720A57F48002DEFED /* Crypto.swift */,
+				72F8C77220AEA9F200454187 /* Balance.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -31942,6 +31945,7 @@
 				73D34E4D2063A697008C7507 /* SettingReducers.swift in Sources */,
 				73BDCA4E20626C09009E67A3 /* Bucket.swift in Sources */,
 				73D977A62056594800CB7DE1 /* BaseTabbarViewController.swift in Sources */,
+				72F8C77320AEA9F200454187 /* Balance.swift in Sources */,
 				73D8B0B0207CB6EC001A2232 /* OrderBook.swift in Sources */,
 				73D978AF2057A59000CB7DE1 /* BaseCollectionViewCell.swift in Sources */,
 				72F6DF0D20AC0D3700BBF105 /* YourPortfolioCell.swift in Sources */,

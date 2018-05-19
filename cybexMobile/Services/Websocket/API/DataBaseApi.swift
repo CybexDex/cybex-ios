@@ -15,6 +15,7 @@ enum dataBaseCatogery:String {
   case get_objects
   case subscribe_to_market
   case get_limit_orders
+  case get_balance_objects
 }
 
 struct GetChainIDRequest: JSONRPCKit.Request, JSONRPCResponse {
@@ -118,4 +119,33 @@ struct getLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
       return []
     }
   }
+}
+
+
+struct getBalanceObjectsRequest : JSONRPCKit.Request , JSONRPCResponse{
+  var address : [String]
+  var response: RPCSResponse
+  
+  var method:String{
+    return "call"
+  }
+  
+  var parameters : Any? {
+      return [WebsocketService.shared.ids[apiCategory.database] ?? 0 , dataBaseCatogery.get_balance_objects.rawValue,[address]]
+  }
+  
+  func transferResponse(from resultObject: Any) throws -> Any {
+    let result = JSON(resultObject).arrayValue
+    if result.count > 0 {
+      var data:[LockUpAssetsMData] = []
+      for i in result{
+        guard let dic = i.dictionaryObject else{ return [] }
+        guard let lockup = LockUpAssetsMData(JSON: dic) else{ return[] }
+        data.append(lockup)
+      }
+      return data
+    }
+    return []
+  }
+  
 }

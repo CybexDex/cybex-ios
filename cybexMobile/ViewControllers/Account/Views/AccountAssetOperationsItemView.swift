@@ -19,26 +19,22 @@ class AccountAssetOperationsItemView: UIView{
     case all_cn   = 3
   }
   
-  @IBOutlet weak var stackView: UIStackView!
   var data: Any? {
     didSet {
       
     }
   }
   
+  @IBOutlet weak var nameL: UILabel!
   
-  fileprivate func setup() {
-    if Localize.currentLanguage() == "zh-Hans" {
-      stackView.viewWithTag(label_type.first_en.rawValue)?.isHidden = true
-      stackView.viewWithTag(label_type.last_en.rawValue)?.isHidden = true
-    }else{
-      stackView.viewWithTag(label_type.all_cn.rawValue)?.isHidden = true
-    }
+  
+  func setup() {
     self.subviews.last?.shadowColor   = ThemeManager.currentThemeIndex == 0 ? .black10 : .steel20
     self.subviews.last?.shadowOffset  = CGSize(width: 0, height: 8.0)
     self.subviews.last?.shadowRadius  = 4.0
     self.subviews.last?.shadowOpacity = 1.0
   }
+  
   var view_type : Int = 0 {
     didSet{
       changeViewType()
@@ -46,15 +42,7 @@ class AccountAssetOperationsItemView: UIView{
   }
   
   func changeViewType(){
-      if let firstL : UILabel = stackView.viewWithTag(label_type.first_en.rawValue) as? UILabel{
-        firstL.text = view_type == 0 ? "Opened" : "Lockup"
-      }
-      if let lastL : UILabel = stackView.viewWithTag(label_type.last_en.rawValue) as? UILabel{
-        lastL.text =  view_type == 0 ? "Orders" : "Assets"
-      }
-      if let chL : UILabel = stackView.viewWithTag(label_type.all_cn.rawValue) as? UILabel{
-        chL.text = view_type == 0 ? "委单" : "锁定资产"
-      }
+    nameL.localized_text = view_type == 0 ? R.string.localizable.openedTitle.key.localizedContainer() : R.string.localizable.lockupAssetsTitle.key.localizedContainer()
   }
   
   override var intrinsicContentSize: CGSize {
