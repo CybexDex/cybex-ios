@@ -50,7 +50,7 @@ class BaseViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//    self.automaticallyAdjustsScrollViewInsets = false
+    self.automaticallyAdjustsScrollViewInsets = false
     
     self.extendedLayoutIncludesOpaqueBars = true
     
@@ -143,6 +143,7 @@ class BaseViewController: UIViewController {
   
   func configRightNavButton(_ image:UIImage? = nil) {
     rightNavButton = UIButton.init(type: .custom)
+    rightNavButton?.frame = CGRect(x: 0, y: 0, w: 24, h: 24)
     rightNavButton?.titleLabel?.font = UIFont.systemFont(ofSize: 16)
     rightNavButton?.setImage(image ?? #imageLiteral(resourceName: "icSettings24Px"), for: .normal)
     rightNavButton?.addTarget(self, action: #selector(rightAction(_:)), for: .touchUpInside)

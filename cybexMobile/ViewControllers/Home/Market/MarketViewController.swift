@@ -26,6 +26,8 @@ class MarketViewController: BaseViewController {
   @IBOutlet weak var detailView: PairDetailView!
   @IBOutlet weak var kLineView: CBKLineView!
   
+  var currentBaseIndex:Int = 0
+  
   var timeGap:candlesticks = .one_day {
     didSet {
       kLineView.timeGap = timeGap
@@ -59,16 +61,26 @@ class MarketViewController: BaseViewController {
   var coordinator: (MarketCoordinatorProtocol & MarketStateManagerProtocol)?
   
   lazy var pair:Pair = {
-    let markets = app_data.data.value
-    let market = markets[self.curIndex]
-    
-    return Pair(base: market.base, quote: market.quote)
+    return Pair(base: self.homeBucket.base, quote: self.homeBucket.quote)
+  }()
+  
+  lazy var homeBucket:HomeBucket = {
+    let market = self.buckets[self.curIndex]
+    return market
+  }()
+  
+  lazy var buckets:[HomeBucket] = {
+    let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex])
+    return markets
   }()
 
 	override func viewDidLoad() {
     super.viewDidLoad()
+//    self.localized_text = R.string.localizable.market.key.localizedContainer()
+    let quote_name = homeBucket.quote_info.symbol.filterJade
+    let base_name = homeBucket.base_info.symbol.filterJade
     
-    self.localized_text = R.string.localizable.market.key.localizedContainer()
+      self.title = quote_name + "/" + base_name
     self.view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
     automaticallyAdjustsScrollViewInsets = false
 
@@ -126,11 +138,9 @@ class MarketViewController: BaseViewController {
   }
   
   func refreshDetailView() {
-    let markets = app_data.data.value
-    let data = markets[self.curIndex]
-    detailView.data = data
+    detailView.data = homeBucket
     
-    pairListView.data = [self.curIndex, markets]
+    pairListView.data = [self.curIndex, self.buckets]
   }
   
   func refreshView(_ hiddenKLine:Bool = true) {
@@ -149,17 +159,13 @@ class MarketViewController: BaseViewController {
   }
   
   func updateIndex() {
-    let markets = app_data.data.value.map( { Pair(base: $0.base, quote: $0.quote) })
+    let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).map( { Pair(base: $0.base, quote: $0.quote) })
     self.curIndex = markets.index(of: pair)!
     pair = markets[self.curIndex]
   }
   
   @objc func refreshKLine() {
-    let markets = app_data.data.value
-
-    let bucket = markets[self.curIndex]
-    
-    if bucket.bucket.count == 0 {
+    if homeBucket.bucket.count == 0 {
       endLoading()
       return
     }
@@ -266,8 +272,7 @@ extension MarketViewController {
   @objc func cellClicked(_ data:[String: Any]) {
     if let index = data["index"] as? Int {
       self.curIndex = index
-      
-      let markets = app_data.data.value.map( { Pair(base: $0.base, quote: $0.quote) })
+      let markets = buckets.map( { Pair(base: $0.base, quote: $0.quote) })
       pair = markets[self.curIndex]
       
       startLoading()

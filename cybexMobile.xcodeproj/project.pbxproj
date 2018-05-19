@@ -53,8 +53,9 @@
 		72F6DF2F20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF2E20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift */; };
 		72F6DF3120AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF3020AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib */; };
 		72F6DF3320AC385E00BBF105 /* AccountStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF3220AC385E00BBF105 /* AccountStatusView.swift */; };
-		72F8C77320AEA9F200454187 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8C77220AEA9F200454187 /* Balance.swift */; };
 		72F8C77520AFE36600454187 /* QuotesTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F8C77420AFE36600454187 /* QuotesTitleView.xib */; };
+		72F8C77720B0068B00454187 /* HomeTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F8C77620B0068B00454187 /* HomeTitleView.xib */; };
+		72F8C77920B009B100454187 /* HomeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8C77820B009B100454187 /* HomeTitleView.swift */; };
 		730FDA5D20A314F600CFBF24 /* cassert in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC420A314E200CFBF24 /* cassert */; };
 		730FDA5E20A314F600CFBF24 /* cctype in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC520A314E200CFBF24 /* cctype */; };
 		730FDA5F20A314F600CFBF24 /* cerrno in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC620A314E200CFBF24 /* cerrno */; };
@@ -375,8 +376,9 @@
 		72F6DF2E20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetOperationsItemView.swift; sourceTree = "<group>"; };
 		72F6DF3020AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountAssetOperationsItemView.xib; sourceTree = "<group>"; };
 		72F6DF3220AC385E00BBF105 /* AccountStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStatusView.swift; sourceTree = "<group>"; };
-		72F8C77220AEA9F200454187 /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		72F8C77420AFE36600454187 /* QuotesTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuotesTitleView.xib; sourceTree = "<group>"; };
+		72F8C77620B0068B00454187 /* HomeTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTitleView.xib; sourceTree = "<group>"; };
+		72F8C77820B009B100454187 /* HomeTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleView.swift; sourceTree = "<group>"; };
 		730FABB920A314E000CFBF24 /* accumulators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators.hpp; sourceTree = "<group>"; };
 		730FABBA20A314E000CFBF24 /* accumulators_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators_fwd.hpp; sourceTree = "<group>"; };
 		730FABBC20A314E000CFBF24 /* accumulator_base.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulator_base.hpp; sourceTree = "<group>"; };
@@ -31181,8 +31183,6 @@
 				73D977EF2056600700CB7DE1 /* Home */,
 				73D978032056614900CB7DE1 /* AppActions.swift */,
 				73D97805205661B400CB7DE1 /* AppReducer.swift */,
-				7246670C20AD730B006A918B /* QuotesTitleView.swift */,
-				72F8C77420AFE36600454187 /* QuotesTitleView.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -31233,6 +31233,10 @@
 		73D9788B20577C5600CB7DE1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7246670C20AD730B006A918B /* QuotesTitleView.swift */,
+				72F8C77420AFE36600454187 /* QuotesTitleView.xib */,
+				72F8C77820B009B100454187 /* HomeTitleView.swift */,
+				72F8C77620B0068B00454187 /* HomeTitleView.xib */,
 				73D9789320577D2600CB7DE1 /* HomePairView.swift */,
 				73D9789520577D3100CB7DE1 /* HomePairView.xib */,
 			);
@@ -31615,6 +31619,7 @@
 				730FDA5E20A314F600CFBF24 /* cctype in Resources */,
 				730FDABE20A314F900CFBF24 /* valarray in Resources */,
 				730FDA8120A314F900CFBF24 /* new in Resources */,
+				72F8C77720B0068B00454187 /* HomeTitleView.xib in Resources */,
 				730FDA9320A314F900CFBF24 /* complex.SUNWCCh in Resources */,
 				730FDA8E20A314F900CFBF24 /* algorithm.SUNWCCh in Resources */,
 				730FDAAC20A314F900CFBF24 /* streambuf.SUNWCCh in Resources */,
@@ -32025,6 +32030,7 @@
 				73E49E292078C17A003B14D2 /* AccessoryCollectionView.swift in Sources */,
 				73A2937920AAED3F00893053 /* RegisterReducers.swift in Sources */,
 				73E6B3B42091A81F00B015E5 /* SimpleHTTPService.swift in Sources */,
+				72F8C77920B009B100454187 /* HomeTitleView.swift in Sources */,
 				731A0EA020A4409900507D1E /* EntryViewController.swift in Sources */,
 				735D8EB820AEACE7008DAAAC /* Balance.swift in Sources */,
 				73D977E220565E9700CB7DE1 /* ExplorerRootCoordinator.swift in Sources */,

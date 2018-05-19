@@ -46,9 +46,9 @@ class SimpleHTTPService {
 }
 
 extension SimpleHTTPService {
-  static func requestMarketList() -> Promise<[Pair]> {
+  static func requestMarketList(base : String) -> Promise<[Pair]> {
     return Promise<[Pair]> { seal in
-      var request = URLRequest(url: URL(string: AppConfiguration.SERVER_MARKETLIST_URLString)!)
+      var request = URLRequest(url: URL(string: AppConfiguration.SERVER_MARKETLIST_URLString + base)!)
       request.cachePolicy = .reloadIgnoringCacheData
       
       Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments, completionHandler: { (response) in
@@ -58,11 +58,11 @@ extension SimpleHTTPService {
         }
         
         guard let data = JSON(value).dictionaryValue["data"] else {
-          seal.reject(SimpleHttpError.NotExistData)
+          seal.fulfill([])
           return
         }
         
-        let pairs = data.arrayValue.map({ Pair(base: $0.arrayValue[0].stringValue, quote: $0.arrayValue[1].stringValue) })
+        let pairs = data.arrayValue.map({ Pair(base:base, quote: $0.stringValue) })
         seal.fulfill(pairs)
       })
     }

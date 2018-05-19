@@ -32,23 +32,30 @@ class AccountViewController: BaseViewController {
     case normalState = 2
   }
   
-  @IBOutlet weak var stackView: UIStackView!
+  @IBOutlet weak var nameL: UILabel!
+  
+    @IBOutlet weak var memberLevelView: UIView!
+    @IBOutlet weak var memberLevel: UILabel!
+  
+    @IBOutlet weak var totalBalance: UILabel!
+    @IBOutlet weak var stackView: UIStackView!
   
   @IBOutlet weak var loginArrowImgView: UIImageView!
   var coordinator: (AccountCoordinatorProtocol & AccountStateManagerProtocol)?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     setupUI()
     setupEvent()
   }
   
   // UI的初始化设置
   func setupUI(){
+    self.automaticallyAdjustsScrollViewInsets = false
     self.localized_text = R.string.localizable.accountTitle.key.localizedContainer()
     configRightNavButton()
-    setupUIWithStatus(user_type.unLogin)
+    setupUIWithStatus(user_type.normalState)
   }
   
   func setupEvent() {
@@ -101,9 +108,53 @@ class AccountViewController: BaseViewController {
     }
   }
   
+  func updataView(){
+    nameL.text =  UserManager.shared.account.value?.name
+    
+    let isSuper = UserManager.shared.account.value?.superMember ?? false
+    memberLevel.localized_text = isSuper ? R.string.localizable.accountSuperMember.key.localizedContainer() :  R.string.localizable.accountBasicMember.key.localizedContainer()
+    totalBalance.text = UserManager.shared.balance.toString
+    
+    
+    
+  }
+  
+  
+  
+  func updataStatus(){
+    defer {
+      updataView()
+    }
+    //  判断是否有name来断定是否登陆
+    guard let _ =  UserManager.shared.account.value else {
+      setupUIWithStatus(user_type.unLogin)
+      return
+    }
+    //  判断是否有可用资产来断定是否显示可用资产
+    guard let _ =  UserManager.shared.balances.value else {
+      setupUIWithStatus(user_type.unPortfolio)
+      return
+    }
+    setupUIWithStatus(user_type.normalState)
+  }
+  
   override func configureObserveState() {
     commonObserveState()
     
+    UserManager.shared.account.asObservable().subscribe(onNext: { [weak self](account) in
+      guard let `self` = self else{ return }
+      self.updataStatus()
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+     UserManager.shared.limitOrder.asObservable().subscribe(onNext: { [weak self](account) in
+      guard let `self` = self else{ return }
+      self.updataStatus()
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+     UserManager.shared.balances.asObservable().subscribe(onNext: { [weak self](account) in
+      guard let `self` = self else{ return }
+      self.updataStatus()
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
 }
 

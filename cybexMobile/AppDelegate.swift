@@ -45,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     RealReachability.sharedInstance().startNotifier()
     NotificationCenter.default.addObserver(forName: NSNotification.Name.realReachabilityChanged, object: nil, queue: nil) { (notifi) in
       self.handlerNetworkChanged()
+      
     }
     
     configApplication()
@@ -134,6 +135,7 @@ extension AppDelegate {
         }
         WebsocketService.shared.reConnect()
       }
+    
     }
   }
 }

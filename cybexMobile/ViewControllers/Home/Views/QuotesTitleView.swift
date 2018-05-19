@@ -1,42 +1,55 @@
 //
-//  LockupAssetsView.swift
+//  QuotesTitleView.swift
 //  cybexMobile
 //
-//  Created by DKM on 2018/5/15.
+//  Created by DKM on 2018/5/17.
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
 import UIKit
 
-class LockupAssetsView: UIView{
+
+class QuotesTitleView: UIView {
   
-  var data: Any? {
-    didSet {
-      guard let data = data as? LockupAssteData else{ return }
-//      iconImgV.image        = UIImage(named: data.icon)
-      nameL.text            = data.name.filterJade
-      progressL.text        = "\(Int(data.progress.toDouble()! * 100.0))%"
-      if let progress = data.progress.toDouble(){
-        progressView.progress = progress
-      }else{
-        progressView.progress = 0
-      }
-      amountL.text          = data.amount
-      RMBCountL.text        = data.RMBCount
-      endTimeL.text         = data.endTime
-    }
+  enum event : String{
+    case tagDidSelected
   }
-  @IBOutlet weak var iconImgV: UIImageView!
-  @IBOutlet weak var nameL: UILabel!
-  @IBOutlet weak var progressL: UILabel!
-  @IBOutlet weak var progressView: LockupProgressView!
-  @IBOutlet weak var amountL: UILabel!
-  @IBOutlet weak var RMBCountL: UILabel!
-  @IBOutlet weak var endTimeL: UILabel!
+  
+  @IBOutlet var titleViews: [UIView]!
   
   fileprivate func setup() {
-    
+    for titleView in titleViews {
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickViewAction))
+      titleView.addGestureRecognizer(tapGesture)
+    }
   }
+  
+  @objc func clickViewAction(_ sender : UITapGestureRecognizer){
+    guard let titleView = sender.view else {
+      return
+    }
+    changeToHighStatus(titleView.tag)
+  }
+  
+  func changeToHighStatus(_ index : Int){
+    for titleView in titleViews {
+      if titleView.tag  == index{
+        titleView.viewWithTag(10)?.isHidden = false
+        if let titleL =  titleView.viewWithTag(9) as? UILabel{
+          titleL.theme1TitleColor = .white
+          titleL.theme2TitleColor = .darkTwo
+          self.next?.sendEventWith(event.tagDidSelected.rawValue, userinfo: ["selectedIndex": index - 1])
+        }
+      }else{
+        titleView.viewWithTag(10)?.isHidden = true
+        if let titleL =  titleView.viewWithTag(9) as? UILabel{
+          titleL.theme1TitleColor = .steel
+          titleL.theme2TitleColor = .steel
+        }
+      }
+    }
+  }
+  
   
   override var intrinsicContentSize: CGSize {
     return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
@@ -80,5 +93,6 @@ class LockupAssetsView: UIView{
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
+  
   
 }

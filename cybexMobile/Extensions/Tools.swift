@@ -191,6 +191,10 @@ extension String {
   var dateFromISO8601: Date? {
     return Formatter.iso8601.date(from: self) // "Mar 22, 2017, 10:22 AM"
   }
+  
+  var filterJade:String {
+    return self.replacingOccurrences(of: "JADE.", with: "")
+  }
 
   func formatCurrency(digitNum: Int) -> String {
     String.numberformatter.numberStyle = .currency

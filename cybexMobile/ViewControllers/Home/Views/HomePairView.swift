@@ -17,40 +17,35 @@ class HomePairView: UIView {
   enum event:String {
     case cellClicked
   }
-
-  @IBOutlet weak var icon: UIImageView!
   
-  @IBOutlet weak var asset1: UILabel!
+  
   @IBOutlet weak var asset2: UILabel!
   
   @IBOutlet weak var volume: UILabel!
   
-  @IBOutlet weak var high_low: UILabel!
   @IBOutlet weak var price: UILabel!
   
-  @IBOutlet weak var bulkingIcon: UIImageView!
   @IBOutlet weak var bulking: UILabel!
-  @IBOutlet weak var total_time: UILabel!
-
+  
+    @IBOutlet weak var asset1: UILabel!
+    @IBOutlet weak var rbmL: UILabel!
+  @IBOutlet weak var high_lowContain: UIView!
+  
   var base:String!
   var quote:String!
   var data: Any? {
     didSet {
       guard let markets = data as? HomeBucket else { return }
       
-      self.asset1.text = markets.base_info.symbol
-      self.asset2.text = "/" + markets.quote_info.symbol
-      
-      let iconString = AppConfiguration.SERVER_ICONS_BASE_URLString + markets.quote.replacingOccurrences(of: ".", with: "_") + "_grey.png"
-      self.icon.kf.setImage(with: URL(string: iconString))
-      
+      self.asset2.text =  markets.quote_info.symbol.filterJade
+      self.asset1.text = "/" + markets.base_info.symbol.filterJade
       if markets.bucket.count == 0 {
         self.volume.text = "V: -"
-        self.high_low.text = "H: - L: -"
         self.price.text = "-"
         self.bulking.text = "-"
-        self.bulkingIcon.image = #imageLiteral(resourceName: "ic_arrow_grey2.pdf")
-        self.bulking.textColor = #colorLiteral(red: 0.9999966025, green: 0.9999999404, blue: 0.9999999404, alpha: 0.5)
+        self.bulking.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        self.high_lowContain.backgroundColor = .coolGrey
+        self.rbmL.text  = "-"
         return
       }
       
@@ -59,11 +54,17 @@ class HomePairView: UIView {
         
         DispatchQueue.main.async {
           self.volume.text = "V: " + matrix.base_volume
-          self.high_low.text = "H: " + matrix.high + " L: " + matrix.low
           self.price.text = matrix.price
           self.bulking.text = (matrix.incre == .greater ? "+" : "") + matrix.change + "%"
-          self.bulking.textColor = matrix.incre.color()
-          self.bulkingIcon.image = matrix.incre.icon()
+          if matrix.incre == .greater{
+            self.high_lowContain.backgroundColor = .turtleGreen
+          }else if matrix.incre == .less {
+            self.high_lowContain.backgroundColor = .reddish
+          }else{
+            self.high_lowContain.backgroundColor = .coolGrey
+          }
+          let (eth,_) = changeToETHAndCYB(markets.quote_info.id)
+          self.rbmL.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).toString.formatCurrency(digitNum: 2)
         }
       }
     }
@@ -122,5 +123,5 @@ class HomePairView: UIView {
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
-
+  
 }

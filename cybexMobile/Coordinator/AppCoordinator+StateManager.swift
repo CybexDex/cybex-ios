@@ -46,6 +46,8 @@ extension AppCoordinator: AppStateManagerProtocol {
           self.store.dispatch(AssetInfoAction(assetID: info.id, info: info))
         }
       }
+      
+      
     }
     WebsocketService.shared.send(request: request)
   }
@@ -93,11 +95,15 @@ extension AppCoordinator {
 
   func getLatestData() {
     if AssetConfiguration.shared.asset_ids.isEmpty {
-      let pairs = try! await(SimpleHTTPService.requestMarketList())
+      var pairs:[Pair] = []
+      AssetConfiguration.market_base_assets.forEach { (base) in
+        let pair = try! await(SimpleHTTPService.requestMarketList(base:base))
+        pairs += pair
+      }
 
       AssetConfiguration.shared.asset_ids = pairs
       self.fetchAsset()
-      self.request24hMarkets(pairs)
+      self.request24hMarkets(AssetConfiguration.shared.asset_ids)
     }
     else {
       if app_data.assetInfo.count != AssetConfiguration.shared.asset_ids.count {

@@ -47,14 +47,19 @@
 "portfolio.price"       = "价格(CYB):";
 "portfolio.time"        = "24h涨跌幅:";
 
-"account.title"                 = "个人中心";
+"account.title"                 = "账户";
 "account.yourPortfolio"         = "可用资产";
 "account.viewAll"               = "查看全部";
 "account.yourTotalBalance"      = "账户总余额(CYB):";
 "account.assetOperations"       = "其他资产";
 "account.basicMember"           = "普通会员";
+"account.superMember"           = "终生会员";
 "account.login"                 = "您好，请登录";
-"account.introduce"            = "CYBEX是一个旨在提高加密资产流动性的去中心化交易所，能够提供更多的透明性、更高的效率性和更好的安全性。";
+"account.introduce"             = "CYBEX是一个旨在提高加密资产流动性的去中心化交易所，能够提供更多的透明性、更高的效率性和更好的安全性。";
+
+"home_name_vol"                 = "名称/成交量";
+"home_last_price"               = "最新价格";
+"home_change"                   = "24h涨跌幅";
 
 
 

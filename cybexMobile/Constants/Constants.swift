@@ -27,7 +27,7 @@ struct AppConfiguration {
   static let SERVER_ICONS_BASE_URLString = "https://app.cybex.io/icons/"
 
   static let SERVER_VERSION_URLString = SERVER_BASE_URLString + "iOS_update.json"
-  static let SERVER_MARKETLIST_URLString = SERVER_BASE_URLString + "market_list.json"
+  static let SERVER_MARKETLIST_URLString = SERVER_BASE_URLString + "market_list?base="
   
   static let FAQ_NIGHT_THEME            = "https://cybex.io/token_applications/new?style=night"
   static let FAQ_LIGHT_THEME            = "https://cybex.io/token_applications/new"
@@ -97,6 +97,11 @@ class AssetConfiguration {
   var asset_ids:[Pair] = []
   
   static let CYB = "1.3.0"
+  static let BTC = "1.3.3"
+  static let EOS = ""
+  static let ETH = "1.3.2"
+  
+  static let market_base_assets = [AssetConfiguration.CYB,AssetConfiguration.BTC,AssetConfiguration.EOS,AssetConfiguration.ETH]
   
   var unique_ids:[String] {
     return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).unique()

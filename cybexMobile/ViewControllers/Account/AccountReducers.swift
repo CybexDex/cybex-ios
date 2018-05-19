@@ -17,6 +17,7 @@ func AccountPropertyReducer(_ state: AccountPropertyState?, action: Action) -> A
     var state = state ?? AccountPropertyState()
     
     switch action {
+    
     default:
         break
     }

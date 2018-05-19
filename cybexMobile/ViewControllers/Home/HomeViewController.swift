@@ -21,6 +21,13 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
   @IBOutlet weak var tableView: UITableView!
   
+  var currentBaseIndex = 0 {
+    didSet{
+      self.tableView.reloadData()
+      self.tableView.isHidden = false
+    }
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -37,7 +44,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
       navigationItem.largeTitleDisplayMode = .always
     }
     
-    
+    self.automaticallyAdjustsScrollViewInsets = false
     self.localized_text = R.string.localizable.navWatchlist.key.localizedContainer()
     
     let cell = String.init(describing: HomePairCell.self)
@@ -84,12 +91,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return app_data.data.value.count
+    return app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: HomePairCell.self), for: indexPath) as! HomePairCell
-    let markets = app_data.data.value
+    let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex])
     let data = markets[indexPath.row]
     cell.setup(data, indexPath: indexPath)
     
@@ -104,11 +111,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 extension HomeViewController {
   @objc func cellClicked(_ data:[String: Any]) {
     if let index = data["index"] as? Int {
-      self.coordinator?.openMarket(index:index)
+      self.coordinator?.openMarket(index:index, currentBaseIndex:currentBaseIndex)
 
     }
   }
-
+  
+  @objc func tagDidSelected(_ data : [String : Any]){
+    if let index = data["selectedIndex"] as? Int {
+      currentBaseIndex = index
+    }
+  }
 }
 
 

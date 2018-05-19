@@ -47,13 +47,17 @@
 "portfolio.price"              = "Price (CYB):";
 "portfolio.time"               = "24h Change:";
 
-"account.title"                = "Dashboard";
+"account.title"                = "Account";
 "account.yourPortfolio"        = "Your Portfolio";
 "account.viewAll"              = "View All";
 "account.yourTotalBalance"     = "Your Total Balance (CYB):";
 "account.assetOperations"      = "Asset Operations";
 "account.basicMember"          = "Basic Member";
+"account.superMember"          = "Lifetime Member";
 "account.login"                = "Log in Cybex";
 "account.introduce"            = "CYBEX is a decentralized exchange that seeks to improve the liquidity of crypto-assets that’s more transparent, highly efficient and secure.";
 
+"home_name_vol"                 = "Name/Vol";
+"home_last_price"               = "Last Price";
+"home_change"                   = "24h Chg%";
 

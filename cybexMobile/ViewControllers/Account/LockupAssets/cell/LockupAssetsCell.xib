@@ -20,7 +20,6 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kHk-ft-cTr" customClass="LockupAssetsView" customModule="cybexMobile" customModuleProvider="target">
                         <rect key="frame" x="13" y="0.0" width="349" height="51.5"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
                                 <size key="value" width="0.0" height="8"/>
@@ -47,6 +46,7 @@
                     <constraint firstAttribute="trailing" secondItem="kHk-ft-cTr" secondAttribute="trailing" constant="13" id="ss3-rt-oka"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="lockupCellView" destination="kHk-ft-cTr" id="7wZ-pF-FYL"/>
             </connections>

@@ -33,7 +33,7 @@ class SettingDetailViewController: BaseViewController {
 
     self.localized_text = self.pageType == .language ? R.string.localizable.language.key.localizedContainer() : R.string.localizable.theme.key.localizedContainer()
     self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, w: self.tableView.bounds.size.width, h: 0.01))
-
+    self.tableView.contentInset = UIEdgeInsetsMake(self.tableView.contentInset.top + 10, 0, 0, 0)
   }
 
   func commonObserveState() {

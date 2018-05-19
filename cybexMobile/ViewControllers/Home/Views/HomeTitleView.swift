@@ -1,53 +1,18 @@
 //
-//  QuotesTitleView.swift
+//  HomeTitleView.swift
 //  cybexMobile
 //
-//  Created by DKM on 2018/5/17.
+//  Created by DKM on 2018/5/19.
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
 import UIKit
 
-
-class QuotesTitleView: UIView {
+class HomeTitleView: UIView {
   
-  enum event : String{
-    case tagDidSelected
+  func setup() {
+    
   }
-  
-  @IBOutlet var titleViews: [UIView]!
-  
-  fileprivate func setup() {
-    for titleView in titleViews {
-      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickViewAction))
-      titleView.addGestureRecognizer(tapGesture)
-    }
-  }
-  
-  @objc func clickViewAction(_ sender : UITapGestureRecognizer){
-    guard let titleView = sender.view else {
-      return
-    }
-    changeToHighStatus(titleView.tag)
-  }
-  
-  func changeToHighStatus(_ index : Int){
-    for titleView in titleViews {
-      if titleView.tag  == (index + 1){
-        titleView.viewWithTag(1)?.isHidden = false
-        if let titleL =  titleView.viewWithTag(2) as? UILabel{
-          titleL.textColor = .darkTwo
-          self.next?.sendEventWith(event.tagDidSelected.rawValue, userinfo: ["selectedIndex": index])
-        }
-      }else{
-        titleView.viewWithTag(1)?.isHidden = true
-        if let titleL =  titleView.viewWithTag(2) as? UILabel{
-          titleL.textColor = .steel
-        }
-      }
-    }
-  }
-  
   
   override var intrinsicContentSize: CGSize {
     return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
@@ -91,6 +56,5 @@ class QuotesTitleView: UIView {
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
-  
   
 }

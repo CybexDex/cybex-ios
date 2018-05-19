@@ -18,13 +18,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="90" estimatedRowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YG2-cC-ujG">
-                                <rect key="frame" x="15" y="0.0" width="345" height="667"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f3s-gg-wsl" customClass="QuotesTitleView" customModule="cybexMobile" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="EvH-HC-tdR"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0C-co-uG1" customClass="HomeTitleView" customModule="cybexMobile" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="52" width="375" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="nRl-Ot-dfN"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="68" estimatedRowHeight="68" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YG2-cC-ujG">
+                                <rect key="frame" x="0.0" y="93" width="375" height="574"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="13" minY="0.0" maxX="13" maxY="0.0"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -35,10 +53,16 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="YG2-cC-ujG" firstAttribute="top" secondItem="vJe-9e-fZa" secondAttribute="top" id="H3g-W7-LBO"/>
+                            <constraint firstItem="C0C-co-uG1" firstAttribute="top" secondItem="f3s-gg-wsl" secondAttribute="bottom" id="Bul-eM-zOt"/>
+                            <constraint firstItem="f3s-gg-wsl" firstAttribute="leading" secondItem="dJ0-Wg-64h" secondAttribute="leading" id="Gfo-Au-fUW"/>
                             <constraint firstItem="dJ0-Wg-64h" firstAttribute="bottom" secondItem="YG2-cC-ujG" secondAttribute="bottom" id="HI0-9W-07F"/>
-                            <constraint firstItem="YG2-cC-ujG" firstAttribute="leading" secondItem="dJ0-Wg-64h" secondAttribute="leading" constant="15" id="JXA-Wx-aMS"/>
-                            <constraint firstItem="YG2-cC-ujG" firstAttribute="trailing" secondItem="dJ0-Wg-64h" secondAttribute="trailing" constant="-15" id="be4-Qq-fbC"/>
+                            <constraint firstItem="YG2-cC-ujG" firstAttribute="leading" secondItem="dJ0-Wg-64h" secondAttribute="leading" id="JXA-Wx-aMS"/>
+                            <constraint firstItem="dJ0-Wg-64h" firstAttribute="trailing" secondItem="f3s-gg-wsl" secondAttribute="trailing" id="Ka2-fA-sjp"/>
+                            <constraint firstItem="YG2-cC-ujG" firstAttribute="top" secondItem="C0C-co-uG1" secondAttribute="bottom" id="P2n-nQ-dPB"/>
+                            <constraint firstItem="YG2-cC-ujG" firstAttribute="trailing" secondItem="dJ0-Wg-64h" secondAttribute="trailing" id="be4-Qq-fbC"/>
+                            <constraint firstItem="f3s-gg-wsl" firstAttribute="top" secondItem="dJ0-Wg-64h" secondAttribute="top" id="fe3-fW-jf9"/>
+                            <constraint firstItem="C0C-co-uG1" firstAttribute="leading" secondItem="dJ0-Wg-64h" secondAttribute="leading" id="pRL-7o-k4a"/>
+                            <constraint firstItem="dJ0-Wg-64h" firstAttribute="trailing" secondItem="C0C-co-uG1" secondAttribute="trailing" id="uvg-AR-s80"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dJ0-Wg-64h"/>
                     </view>
@@ -48,7 +72,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JX1-NA-R1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="167" y="8"/>
+            <point key="canvasLocation" x="108" y="-207"/>
         </scene>
         <!--faq-->
         <scene sceneID="Ruo-wW-7L0">
@@ -74,7 +98,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="48" estimatedRowHeight="-1" sectionHeaderHeight="12" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="JKk-ba-DaR">
-                                <rect key="frame" x="15" y="0.0" width="345" height="667"/>
+                                <rect key="frame" x="15" y="20" width="345" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingCell" textLabel="LZ7-vd-sRO" detailTextLabel="aPs-Sy-E2G" rowHeight="48" style="IBUITableViewCellStyleValue1" id="8Md-Vd-i2k" customClass="SettingCell" customModule="cybexMobile" customModuleProvider="target">
@@ -113,10 +137,10 @@
                                         </tableViewCellContentView>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                                <color key="value" red="0.10588235408067703" green="0.13333334028720856" blue="0.18823529779911041" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
@@ -131,7 +155,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="JKk-ba-DaR" firstAttribute="leading" secondItem="biv-q9-gRW" secondAttribute="leading" constant="15" id="1Wl-hN-LC0"/>
-                            <constraint firstItem="JKk-ba-DaR" firstAttribute="top" secondItem="dWc-w7-RYo" secondAttribute="top" id="GO6-7y-6rI"/>
+                            <constraint firstItem="JKk-ba-DaR" firstAttribute="top" secondItem="biv-q9-gRW" secondAttribute="top" id="GO6-7y-6rI"/>
                             <constraint firstItem="biv-q9-gRW" firstAttribute="bottom" secondItem="JKk-ba-DaR" secondAttribute="bottom" id="JSv-TJ-stU"/>
                             <constraint firstItem="biv-q9-gRW" firstAttribute="trailing" secondItem="JKk-ba-DaR" secondAttribute="trailing" constant="15" id="oTT-H2-25e"/>
                         </constraints>
@@ -154,7 +178,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="48" estimatedRowHeight="-1" sectionHeaderHeight="12" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="DEY-bT-I3T">
-                                <rect key="frame" x="15" y="0.0" width="345" height="667"/>
+                                <rect key="frame" x="15" y="20" width="345" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingCell" textLabel="g20-vo-4mY" rowHeight="48" style="IBUITableViewCellStyleDefault" id="tdJ-nX-VNu" customClass="SettingCell" customModule="cybexMobile" customModuleProvider="target">
@@ -185,10 +209,10 @@
                                         </tableViewCellContentView>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                                <color key="value" red="0.10588235410000001" green="0.13333334029999999" blue="0.18823529780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
@@ -203,7 +227,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gqo-VZ-6hr" firstAttribute="trailing" secondItem="DEY-bT-I3T" secondAttribute="trailing" constant="15" id="6bj-mS-pvc"/>
-                            <constraint firstItem="DEY-bT-I3T" firstAttribute="top" secondItem="giP-Sx-5XP" secondAttribute="top" id="6l4-6p-lqp"/>
+                            <constraint firstItem="DEY-bT-I3T" firstAttribute="top" secondItem="gqo-VZ-6hr" secondAttribute="top" id="6l4-6p-lqp"/>
                             <constraint firstItem="DEY-bT-I3T" firstAttribute="bottom" secondItem="gqo-VZ-6hr" secondAttribute="bottom" id="7GV-9a-LTK"/>
                             <constraint firstItem="DEY-bT-I3T" firstAttribute="leading" secondItem="gqo-VZ-6hr" secondAttribute="leading" constant="15" id="Fvl-LL-qPO"/>
                         </constraints>
@@ -989,13 +1013,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sGL-Rt-Thy">
-                                <rect key="frame" x="0.0" y="20" width="375" height="154"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="104"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWv-Bu-lgd" customClass="PairListHorizantalView" customModule="cybexMobile" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="0.0" width="345" height="50"/>
+                                        <rect key="frame" x="15" y="0.0" width="345" height="0.0"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="ITl-1Q-YGT"/>
+                                            <constraint firstAttribute="height" id="ITl-1Q-YGT"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
@@ -1007,22 +1031,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdl-dg-mGm" customClass="PairDetailView" customModule="cybexMobile" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="50" width="345" height="104"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="15" y="0.0" width="345" height="104"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="104" id="E1u-hK-wct"/>
                                         </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                                <color key="value" red="0.11764705882352941" green="0.15294117647058825" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                                <color key="value" red="0.97647058823529409" green="0.97647058823529409" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="EWv-Bu-lgd" firstAttribute="top" secondItem="sGL-Rt-Thy" secondAttribute="top" id="999-mu-xiw"/>
                                     <constraint firstItem="EWv-Bu-lgd" firstAttribute="leading" secondItem="sGL-Rt-Thy" secondAttribute="leading" constant="15" id="C1r-kc-gp2"/>
@@ -1034,15 +1049,15 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                        <color key="value" red="0.97647058823529409" green="0.97647058823529409" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                        <color key="value" red="0.11764705882352941" green="0.15294117647058825" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WE-o2-bsL">
-                                <rect key="frame" x="0.0" y="174" width="375" height="493"/>
+                                <rect key="frame" x="0.0" y="124" width="375" height="543"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7lw-Ew-2wL" customClass="CBKLineView" customModule="cybexMobile" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="388"/>

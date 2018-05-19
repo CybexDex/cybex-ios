@@ -24,6 +24,12 @@ struct AppPropertyState {
   var assetInfo:[String:AssetInfo] = [:]
   
   var eth_rmb_price : Double  = 0
+  
+  func filterQuoteAsset(_ base:String) -> [HomeBucket] {
+    return data.value.filter({ (bucket) -> Bool in
+      return bucket.base == base
+    })
+  }
 }
 
 struct HomeBucket:Equatable,Hashable {
@@ -38,7 +44,7 @@ struct HomeBucket:Equatable,Hashable {
   }
   
   var hashValue: Int {
-    return base.hashValue ^ quote.hashValue
+    return (base.hashValue < quote.hashValue).toInt + base.hashValue ^ quote.hashValue
   }
 }
 
