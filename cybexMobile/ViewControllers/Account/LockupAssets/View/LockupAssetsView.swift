@@ -12,21 +12,27 @@ class LockupAssetsView: UIView{
   
   var data: Any? {
     didSet {
-      
+      guard let data = data as? LockupAssteData else{ return }
+//      iconImgV.image        = UIImage(named: data.icon)
+      nameL.text            = data.name
+      progressL.text        = "\(Int(data.progress.toDouble()! * 100.0))%"
+      if let progress = data.progress.toDouble(){
+        progressView.progress = progress
+      }else{
+        progressView.progress = 0
+      }
+      amountL.text          = data.amount
+      RMBCountL.text        = data.RMBCount
+      endTimeL.text         = data.endTime
     }
   }
-  
-  @IBOutlet weak var imageView: UIImageView!
-  
+  @IBOutlet weak var iconImgV: UIImageView!
+  @IBOutlet weak var nameL: UILabel!
   @IBOutlet weak var progressL: UILabel!
-  
   @IBOutlet weak var progressView: LockupProgressView!
-  
-  @IBOutlet weak var timeL: UILabel!
-  
-  @IBOutlet weak var titleL: UILabel!
-  
-  @IBOutlet weak var countL: UILabel!
+  @IBOutlet weak var amountL: UILabel!
+  @IBOutlet weak var RMBCountL: UILabel!
+  @IBOutlet weak var endTimeL: UILabel!
   
   fileprivate func setup() {
     

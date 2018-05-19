@@ -12,9 +12,8 @@ import SwiftTheme
 class LockupProgressView: UIView {
   
   @IBInspectable
-  var progress : Int = 0{
+  var progress : Double = 0{
     didSet{
-      
       self.setNeedsDisplay()
     }
   }
@@ -72,7 +71,7 @@ class LockupProgressView: UIView {
     self.layer.insertSublayer(gradient, at: 0)
     
     let path = UIBezierPath()
-    path.move(to: CGPoint(x: CGFloat(self.progress)*0.01*rect.width, y: rect.height * 0.5))
+    path.move(to: CGPoint(x: CGFloat(self.progress)*rect.width, y: rect.height * 0.5))
     path.addLine(to: CGPoint(x: rect.width, y: rect.height * 0.5))
     path.lineWidth = rect.height
     let shapeLayer = CAShapeLayer()

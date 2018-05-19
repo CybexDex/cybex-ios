@@ -8,6 +8,9 @@
 
 import Foundation
 import ReSwift
+import SwiftyJSON
+import RxCocoa
+import RxSwift
 
 //MARK: - State
 struct LockupAssetsState: StateType {
@@ -17,8 +20,28 @@ struct LockupAssetsState: StateType {
     var property: LockupAssetsPropertyState
 }
 
-struct LockupAssetsPropertyState {
+
+struct FetchedLockupAssetsData:Action {
+  let data:[LockUpAssetsMData]
 }
+
+
+struct LockupAssetsPropertyState {
+  var data:BehaviorRelay<LockUpAssetsVMData> = BehaviorRelay(value: LockUpAssetsVMData(datas: []))
+}
+
+struct LockUpAssetsVMData :Equatable{
+  var datas : [LockupAssteData]
+}
+struct LockupAssteData:Equatable{
+  var icon : String = ""
+  var name : String = ""
+  var amount : String = ""
+  var RMBCount : String = ""
+  var progress : String = ""
+  var endTime  : String = ""
+}
+
 
 //MARK: - Action Creator
 class LockupAssetsPropertyActionCreate: LoadingActionCreator {
@@ -29,4 +52,18 @@ class LockupAssetsPropertyActionCreate: LoadingActionCreator {
         _ store: Store <LockupAssetsState>,
         _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
         ) -> Void
+  
+  
+  func fetchLockupAssets(with address:[String],callback:CommonAnyCallback?) -> ActionCreator{
+    return { state,store in
+      
+      let request = getBalanceObjectsRequest(address:address) { response in
+        if let callback = callback{
+          callback(response)
+        }
+      }
+      WebsocketService.shared.send(request: request)
+      return nil
+    }
+  }
 }

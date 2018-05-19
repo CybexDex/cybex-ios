@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountAssetOperationsItemView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
-                <outlet property="stackView" destination="CDa-Ve-3Ch" id="MwA-YR-UKD"/>
+                <outlet property="nameL" destination="ieL-eK-jQl" id="G40-mw-VLK"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -30,62 +30,23 @@
                                 <constraint firstAttribute="width" constant="16" id="kGJ-Ec-rW4"/>
                             </constraints>
                         </imageView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="CDa-Ve-3Ch">
-                            <rect key="frame" x="12" y="14" width="62" height="48"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opened" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddm-SX-Mqc">
-                                    <rect key="frame" x="0.0" y="0.0" width="58" height="16"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTE-bO-KS6">
-                                    <rect key="frame" x="0.0" y="16" width="50" height="16"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="委单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieS-1j-UkH">
-                                    <rect key="frame" x="0.0" y="32" width="33" height="16"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </label>
-                            </subviews>
-                        </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lockup Assets" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieL-eK-jQl">
+                            <rect key="frame" x="12" y="14" width="94" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="94" id="AYa-YG-5i1"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="CDa-Ve-3Ch" firstAttribute="leading" secondItem="4JG-3L-cwa" secondAttribute="leading" constant="12" id="0av-Fi-t31"/>
-                        <constraint firstItem="9hi-DL-L9R" firstAttribute="leading" relation="lessThanOrEqual" secondItem="CDa-Ve-3Ch" secondAttribute="trailing" constant="71" id="0bH-t2-434"/>
-                        <constraint firstItem="9hi-DL-L9R" firstAttribute="centerY" secondItem="CDa-Ve-3Ch" secondAttribute="centerY" id="4fX-9m-0Nd"/>
                         <constraint firstAttribute="trailing" secondItem="9hi-DL-L9R" secondAttribute="trailing" constant="8" id="IkE-M3-lPM"/>
-                        <constraint firstAttribute="bottom" secondItem="CDa-Ve-3Ch" secondAttribute="bottom" constant="14" id="Uhg-1A-XnT"/>
-                        <constraint firstItem="CDa-Ve-3Ch" firstAttribute="top" secondItem="4JG-3L-cwa" secondAttribute="top" constant="14" id="hUd-Nt-lQL"/>
+                        <constraint firstAttribute="bottom" secondItem="ieL-eK-jQl" secondAttribute="bottom" constant="14" id="Kc8-fa-kvw"/>
+                        <constraint firstItem="ieL-eK-jQl" firstAttribute="top" secondItem="4JG-3L-cwa" secondAttribute="top" constant="14" id="hU8-Np-qbK"/>
+                        <constraint firstItem="9hi-DL-L9R" firstAttribute="centerY" secondItem="ieL-eK-jQl" secondAttribute="centerY" id="qH1-Ih-N2z"/>
+                        <constraint firstItem="ieL-eK-jQl" firstAttribute="leading" secondItem="4JG-3L-cwa" secondAttribute="leading" constant="12" id="rbh-MJ-XlS"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">

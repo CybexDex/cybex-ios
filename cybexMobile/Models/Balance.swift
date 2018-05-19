@@ -22,3 +22,4 @@ class Balance: Mappable {
     balance <- (map["balance"], ToStringTransform())
   }
 }
+

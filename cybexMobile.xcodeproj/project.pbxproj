@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* cybexMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* cybexMobileTests.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		35C7B22E41C704D7B976BB8A /* Pods_cybexMobileTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C733506B85D343A1BC003A /* Pods_cybexMobileTests.framework */; };
 		721F5C6C20AAE7C80042488F /* LockupAssetsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C6B20AAE7C80042488F /* LockupAssetsSectionView.swift */; };
 		721F5C6E20AAE7EF0042488F /* LockupAssetsSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721F5C6D20AAE7EF0042488F /* LockupAssetsSectionView.xib */; };
 		721F5C7020AAF1400042488F /* OpenedOrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */; };
@@ -220,6 +219,7 @@
 		73ACD80A20721B5E00592E69 /* SettingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ACD80620721B5E00592E69 /* SettingDetailViewController.swift */; };
 		73B44E302057ECD000759863 /* PairDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B44E2F2057ECD000759863 /* PairDetailView.swift */; };
 		73B44E5B2057ECD900759863 /* PairDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B44E5A2057ECD900759863 /* PairDetailView.xib */; };
+		73B88E2120AFD4940069AAB6 /* Vesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B88E2020AFD4940069AAB6 /* Vesting.swift */; };
 		73BDCA21206266CE009E67A3 /* HistoryApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDCA20206266CE009E67A3 /* HistoryApi.swift */; };
 		73BDCA4C206269A7009E67A3 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDCA4B206269A7009E67A3 /* Tools.swift */; };
 		73BDCA4E20626C09009E67A3 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDCA4D20626C09009E67A3 /* Bucket.swift */; };
@@ -328,7 +328,6 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		261AF37338F0DE3741046D57 /* Pods-cybexMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile.release.xcconfig"; sourceTree = "<group>"; };
 		28C733506B85D343A1BC003A /* Pods_cybexMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cybexMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		53E47CED13665315AA467C93 /* Pods-cybexMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		721F5C6B20AAE7C80042488F /* LockupAssetsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsSectionView.swift; sourceTree = "<group>"; };
 		721F5C6D20AAE7EF0042488F /* LockupAssetsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsSectionView.xib; sourceTree = "<group>"; };
 		721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersHeaderView.swift; sourceTree = "<group>"; };
@@ -11641,6 +11640,7 @@
 		73ACD80620721B5E00592E69 /* SettingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewController.swift; sourceTree = "<group>"; };
 		73B44E2F2057ECD000759863 /* PairDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairDetailView.swift; sourceTree = "<group>"; };
 		73B44E5A2057ECD900759863 /* PairDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PairDetailView.xib; sourceTree = "<group>"; };
+		73B88E2020AFD4940069AAB6 /* Vesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vesting.swift; sourceTree = "<group>"; };
 		73BDCA20206266CE009E67A3 /* HistoryApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryApi.swift; sourceTree = "<group>"; };
 		73BDCA4B206269A7009E67A3 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		73BDCA4D20626C09009E67A3 /* Bucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bucket.swift; sourceTree = "<group>"; };
@@ -11732,7 +11732,6 @@
 		73F58FC820AC04EF008A1F79 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		73F58FCA20AC0589008A1F79 /* Button.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Button.xib; sourceTree = "<group>"; };
 		A72666D4E9406D5A50C8D67C /* Pods-cybexMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile.debug.xcconfig"; sourceTree = "<group>"; };
-		BE4FB0A485A5C5FE82DF0C50 /* Pods-cybexMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -11740,7 +11739,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35C7B22E41C704D7B976BB8A /* Pods_cybexMobileTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11825,8 +11823,6 @@
 			children = (
 				A72666D4E9406D5A50C8D67C /* Pods-cybexMobile.debug.xcconfig */,
 				261AF37338F0DE3741046D57 /* Pods-cybexMobile.release.xcconfig */,
-				BE4FB0A485A5C5FE82DF0C50 /* Pods-cybexMobileTests.debug.xcconfig */,
-				53E47CED13665315AA467C93 /* Pods-cybexMobileTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -30922,6 +30918,7 @@
 				73AAD13720A57F48002DEFED /* Crypto.swift */,
 				735D8EB520AEAC0C008DAAAC /* Account.swift */,
 				735D8EB720AEACE7008DAAAC /* Balance.swift */,
+				73B88E2020AFD4940069AAB6 /* Vesting.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -31435,7 +31432,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "cybexMobileTests" */;
 			buildPhases = (
-				2DC02D61EBFA26ECB665050E /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -31817,24 +31813,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2DC02D61EBFA26ECB665050E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-cybexMobileTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		73556A0920A008E700F1EDFF /* color set */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -31949,6 +31927,7 @@
 				73D9789420577D2600CB7DE1 /* HomePairView.swift in Sources */,
 				73D34E3C2063A65A008C7507 /* FAQReducers.swift in Sources */,
 				7320D6B5205FA92400C3F579 /* CBKLineVolumeView.swift in Sources */,
+				73B88E2120AFD4940069AAB6 /* Vesting.swift in Sources */,
 				731A0E9E20A4409900507D1E /* EntryCoordinator.swift in Sources */,
 				72F6DF2B20AC2EE600BBF105 /* AccountAssetOperationView.swift in Sources */,
 				73B44E302057ECD000759863 /* PairDetailView.swift in Sources */,
@@ -32106,7 +32085,6 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE4FB0A485A5C5FE82DF0C50 /* Pods-cybexMobileTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -32148,7 +32126,6 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53E47CED13665315AA467C93 /* Pods-cybexMobileTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

@@ -121,9 +121,8 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
         let language = index == 1 ? "zh-Hans" : "en"
         Defaults[.language] = language
         Localize.setCurrentLanguage(language)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "changeLocalizeAction"), object: nil)
       }
-
-
     default:
       break
     }

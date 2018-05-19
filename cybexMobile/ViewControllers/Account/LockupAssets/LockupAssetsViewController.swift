@@ -11,6 +11,8 @@ import RxSwift
 import RxCocoa
 import ReSwift
 import TinyConstraints
+import EZSwiftExtensions
+import SwiftyJSON
 
 class LockupAssetsViewController: BaseViewController {
   
@@ -24,6 +26,7 @@ class LockupAssetsViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+    self.coordinator?.fetchLockupAssetsData(["CYBLanbfQMeMHCkowkpD7CDV2t36WfXfLnrh","CYB4J4j9KHhBKqvZZjPBigQRvBpR7HeKPFWG","CYBQ3sXxGwruu2nW9ynBvz5F8JciGMwmkiBY","CYBCWPGM3BhteRySUGfsf3xmjX9HJYPh3LUf","CYBHB2VMQV6exMeAzWBQq1vnRnDeuTWR3FyF", "CYB7e4T1W7mgCYXV6zZzkFariBAxrpp3BFnB","CYBBRnktyjxJ3W6zPofMZyxYspfXHrLjj2ph", "CYBHWS8zr367xfRAABbjBZTc76rgHr6LdSn3", "CYBCkKVtNtwLktgBh8gCKPsmoD1AvWUnjF4q"])
   }
   
   func setupUI(){
@@ -49,7 +52,11 @@ class LockupAssetsViewController: BaseViewController {
   
   override func configureObserveState() {
     commonObserveState()
-    
+    self.coordinator?.state.property.data.asObservable().distinctUntilChanged().skip(1).subscribe(onNext:{[weak self] (s) in
+      guard let `self` = self else{return}
+      self.tableView.reloadData()
+      self.tableView.layoutIfNeeded()
+      },onError:nil,onCompleted:nil,onDisposed:nil).disposed(by:disposeBag)
   }
 }
 
@@ -57,11 +64,15 @@ class LockupAssetsViewController: BaseViewController {
 
 extension LockupAssetsViewController : UITableViewDataSource ,UITableViewDelegate{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    let data = coordinator!.state.property.data.value
+    return data.datas.count
   }
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing:LockupAssetsCell.self), for: indexPath) as! LockupAssetsCell
-    cell.setup(nil, indexPath: indexPath)
+    let data = coordinator!.state.property.data.value
+    
+    cell.setup(data.datas[indexPath.row], indexPath: indexPath)
     return cell
   }
   
