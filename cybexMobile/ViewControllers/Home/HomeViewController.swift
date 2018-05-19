@@ -29,6 +29,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     handlerUpdateVersion(nil)
     
     UserManager.shared.login("cybex-test", password: "cybextest123456")
+    UserManager.shared.validateLogin("cybex-test", password: "cybextest123456")
     app_coodinator.showLogin()
   }
   

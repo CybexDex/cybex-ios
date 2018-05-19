@@ -187,6 +187,9 @@
 		7341BB39205A5E11007387FE /* UIColor+Cybexblack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341BB0F205A5E11007387FE /* UIColor+Cybexblack.swift */; };
 		735D8EB220AD2A67008DAAAC /* NoticeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */; };
 		735D8EB420AD2A74008DAAAC /* NoticeBoardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */; };
+		735D8EB620AEAC0C008DAAAC /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB520AEAC0C008DAAAC /* Account.swift */; };
+		735D8EB820AEACE7008DAAAC /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB720AEACE7008DAAAC /* Balance.swift */; };
+		735D8EBB20AEB5B0008DAAAC /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EBA20AEB5B0008DAAAC /* Utils.swift */; };
 		7373AE2D20720BB2002DC01F /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373AE2C20720BB2002DC01F /* UserDefaults.swift */; };
 		7396B5ED2067EA7D008051E5 /* UIResponder+Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7396B5EC2067EA7D008051E5 /* UIResponder+Route.swift */; };
 		739B6166207F325A00B61152 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739B6165207F325A00B61152 /* Collection+Extensions.swift */; };
@@ -11601,6 +11604,9 @@
 		7341BB0F205A5E11007387FE /* UIColor+Cybexblack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Cybexblack.swift"; sourceTree = "<group>"; };
 		735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardView.swift; sourceTree = "<group>"; };
 		735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeBoardView.xib; sourceTree = "<group>"; };
+		735D8EB520AEAC0C008DAAAC /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		735D8EB720AEACE7008DAAAC /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
+		735D8EBA20AEB5B0008DAAAC /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7373AE2C20720BB2002DC01F /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		7396B5EC2067EA7D008051E5 /* UIResponder+Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Route.swift"; sourceTree = "<group>"; };
 		739B6165207F325A00B61152 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
@@ -11766,6 +11772,7 @@
 		13B07FAE1A68108700A75B9A /* cybexMobile */ = {
 			isa = PBXGroup;
 			children = (
+				735D8EB920AEB5A6008DAAAC /* Utils */,
 				73F58FC720AC04DC008A1F79 /* UI */,
 				73AAD13320A57C0B002DEFED /* Managers */,
 				73D977A42056592300CB7DE1 /* Base */,
@@ -30903,6 +30910,8 @@
 				73EA6D932085C3AC0045A88B /* Demo.swift */,
 				73D8B0AF207CB6EC001A2232 /* OrderBook.swift */,
 				73AAD13720A57F48002DEFED /* Crypto.swift */,
+				735D8EB520AEAC0C008DAAAC /* Account.swift */,
+				735D8EB720AEACE7008DAAAC /* Balance.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -31003,6 +31012,14 @@
 				73A571682067FD1800921781 /* MarketCache.swift */,
 			);
 			path = Cache;
+			sourceTree = "<group>";
+		};
+		735D8EB920AEB5A6008DAAAC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				735D8EBA20AEB5B0008DAAAC /* Utils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		7370E2D920A2F0C0001F6C3F /* libfc */ = {
@@ -31953,6 +31970,7 @@
 				73D9789E20579EE200CB7DE1 /* MarketReducers.swift in Sources */,
 				733CD33120623F47002AD0E0 /* DataBaseApi.swift in Sources */,
 				73D978042056614900CB7DE1 /* AppActions.swift in Sources */,
+				735D8EBB20AEB5B0008DAAAC /* Utils.swift in Sources */,
 				7396B5ED2067EA7D008051E5 /* UIResponder+Route.swift in Sources */,
 				72C30C8320AA8DAD00F4DCEC /* LockupAssetsCell.swift in Sources */,
 				735D8EB220AD2A67008DAAAC /* NoticeBoardView.swift in Sources */,
@@ -31973,6 +31991,7 @@
 				73D63496206208D8000EB324 /* JsonRPCGenerator.swift in Sources */,
 				73A0CC2F2068EB5E00463ADE /* AppCoordinator+StateManager.swift in Sources */,
 				73D34E452063A675008C7507 /* AccountViewController.swift in Sources */,
+				735D8EB620AEAC0C008DAAAC /* Account.swift in Sources */,
 				73D977E020565E6900CB7DE1 /* HomeRootCoordinator.swift in Sources */,
 				73D9789C20579EE200CB7DE1 /* MarketActions.swift in Sources */,
 				73E49DF42078BF5B003B14D2 /* AccessoryHorizentalView.swift in Sources */,
@@ -32009,6 +32028,7 @@
 				73A2937920AAED3F00893053 /* RegisterReducers.swift in Sources */,
 				73E6B3B42091A81F00B015E5 /* SimpleHTTPService.swift in Sources */,
 				731A0EA020A4409900507D1E /* EntryViewController.swift in Sources */,
+				735D8EB820AEACE7008DAAAC /* Balance.swift in Sources */,
 				73D977E220565E9700CB7DE1 /* ExplorerRootCoordinator.swift in Sources */,
 				73E6B2B9208D911D00B015E5 /* fc_bridge.cpp in Sources */,
 				73A0CC41206A3DDA00463ADE /* AssetInfo.swift in Sources */,
