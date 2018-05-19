@@ -11,14 +11,6 @@ import Localize_Swift
 import SwiftTheme
 
 class AccountAssetOperationsItemView: UIView{
-  // 当前页面stackView有三个Lable 前两个是英文。后面是中文
-  // lable的tag按照顺序。 1  2   3
-  enum label_type : Int {
-    case first_en = 1
-    case last_en  = 2
-    case all_cn   = 3
-  }
-  
   var data: Any? {
     didSet {
       
