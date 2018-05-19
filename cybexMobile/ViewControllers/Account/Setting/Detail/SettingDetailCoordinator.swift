@@ -33,7 +33,9 @@ class SettingDetailCoordinator: AccountRootCoordinator {
 
 extension SettingDetailCoordinator: SettingDetailCoordinatorProtocol {
   func popViewController(_ animated: Bool) {
-    self.rootVC.popViewController(animated: animated)
+    self.rootVC.popToRootViewController(animated: animated)
+    
+    
   }
 }
 

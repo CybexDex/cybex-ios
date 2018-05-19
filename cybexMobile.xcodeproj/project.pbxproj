@@ -55,6 +55,7 @@
 		72F6DF3120AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF3020AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib */; };
 		72F6DF3320AC385E00BBF105 /* AccountStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF3220AC385E00BBF105 /* AccountStatusView.swift */; };
 		72F8C77320AEA9F200454187 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8C77220AEA9F200454187 /* Balance.swift */; };
+		72F8C77520AFE36600454187 /* QuotesTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F8C77420AFE36600454187 /* QuotesTitleView.xib */; };
 		730FDA5D20A314F600CFBF24 /* cassert in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC420A314E200CFBF24 /* cassert */; };
 		730FDA5E20A314F600CFBF24 /* cctype in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC520A314E200CFBF24 /* cctype */; };
 		730FDA5F20A314F600CFBF24 /* cerrno in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC620A314E200CFBF24 /* cerrno */; };
@@ -369,6 +370,7 @@
 		72F6DF3020AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountAssetOperationsItemView.xib; sourceTree = "<group>"; };
 		72F6DF3220AC385E00BBF105 /* AccountStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStatusView.swift; sourceTree = "<group>"; };
 		72F8C77220AEA9F200454187 /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
+		72F8C77420AFE36600454187 /* QuotesTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuotesTitleView.xib; sourceTree = "<group>"; };
 		730FABB920A314E000CFBF24 /* accumulators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators.hpp; sourceTree = "<group>"; };
 		730FABBA20A314E000CFBF24 /* accumulators_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators_fwd.hpp; sourceTree = "<group>"; };
 		730FABBC20A314E000CFBF24 /* accumulator_base.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulator_base.hpp; sourceTree = "<group>"; };
@@ -31157,6 +31159,7 @@
 				73D978032056614900CB7DE1 /* AppActions.swift */,
 				73D97805205661B400CB7DE1 /* AppReducer.swift */,
 				7246670C20AD730B006A918B /* QuotesTitleView.swift */,
+				72F8C77420AFE36600454187 /* QuotesTitleView.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -31541,6 +31544,7 @@
 				730FDA8B20A314F900CFBF24 /* streambuf in Resources */,
 				730FDABC20A314F900CFBF24 /* unordered_set in Resources */,
 				730FDAAD20A314F900CFBF24 /* string.SUNWCCh in Resources */,
+				72F8C77520AFE36600454187 /* QuotesTitleView.xib in Resources */,
 				72F6DF2520AC266B00BBF105 /* AccountPortfolioCell.xib in Resources */,
 				730FDA9B20A314F900CFBF24 /* istream.SUNWCCh in Resources */,
 				730FDAA920A314F900CFBF24 /* sstream.SUNWCCh in Resources */,

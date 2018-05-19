@@ -42,7 +42,7 @@ func async(_ body: @escaping () throws -> Void) {
 }
 
 class SimpleHTTPService {
-
+  
 }
 
 extension SimpleHTTPService {
@@ -68,7 +68,7 @@ extension SimpleHTTPService {
     }
     
   }
-
+  
   static func checkVersion() -> Promise<(update: Bool, url: String, force: Bool)> {
     var request = URLRequest(url: URL(string: AppConfiguration.SERVER_VERSION_URLString)!)
     request.cachePolicy = .reloadIgnoringCacheData
@@ -100,6 +100,27 @@ extension SimpleHTTPService {
       seal.fulfill((false, "", false))
     })
     
+    return promise
+  }
+  
+  static func requestETHPrice() -> Promise<Double>{
+    var request = URLRequest(url: URL(string: AppConfiguration.ETH_PRICE)!)
+    request.cachePolicy = .reloadIgnoringCacheData
+    let (promise,seal) = Promise<Double>.pending()
+    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+      guard let value = response.result.value else {
+        seal.fulfill(0)
+        return
+      }
+      let json = JSON(value)
+      let prices = json["prices"].arrayValue
+      for price in prices {
+        if price["name"] == "ETH"{
+          seal.fulfill(price["value"].doubleValue)
+        }
+      }
+      seal.fulfill(0)
+    }
     return promise
   }
   

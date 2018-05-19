@@ -9,6 +9,7 @@
 import UIKit
 import ReSwift
 import SwiftTheme
+import AwaitKit
 
 class AccountViewController: BaseViewController {
   // 定义整个界面的全部子界面，根据tag值从stackView上面获取不同的界面
@@ -37,7 +38,7 @@ class AccountViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupUI()
+    setupUI()    
   }
   // UI的初始化设置
   func setupUI(){

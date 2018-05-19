@@ -9,6 +9,7 @@
 import Foundation
 import ReSwift
 import AwaitKit
+import EZSwiftExtensions
 
 extension AppCoordinator: AppStateManagerProtocol {
   func subscribe<SelectedState, S: StoreSubscriber>(
@@ -46,11 +47,17 @@ extension AppCoordinator: AppStateManagerProtocol {
         }
       }
     }
-
     WebsocketService.shared.send(request: request)
-
   }
-
+  
+  func fetchEthToRmbPrice(){
+    ez.runThisEvery(seconds: 3.0, startAfterSeconds: 0) { (timer) in
+      let value = try! await(SimpleHTTPService.requestETHPrice())
+      print("Value : \(value)")
+      self.store.dispatch(FecthEthToRmbPriceAction(price: value))
+    }
+    
+  }
 }
 
 extension AppCoordinator {

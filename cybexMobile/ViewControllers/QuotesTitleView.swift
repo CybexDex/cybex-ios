@@ -8,60 +8,88 @@
 
 import UIKit
 
+
 class QuotesTitleView: UIView {
+  
+  enum event : String{
+    case tagDidSelected
+  }
+  
+  @IBOutlet var titleViews: [UIView]!
+  
+  fileprivate func setup() {
+    for titleView in titleViews {
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickViewAction))
+      titleView.addGestureRecognizer(tapGesture)
+    }
+  }
+  
+  @objc func clickViewAction(_ sender : UITapGestureRecognizer){
+    guard let titleView = sender.view else {
+      return
+    }
+    changeToHighStatus(titleView.tag)
+  }
+  
+  func changeToHighStatus(_ index : Int){
+    for titleView in titleViews {
+      if titleView.tag  == (index + 1){
+        titleView.viewWithTag(1)?.isHidden = false
+        if let titleL =  titleView.viewWithTag(2) as? UILabel{
+          titleL.textColor = .darkTwo
+          self.next?.sendEventWith(event.tagDidSelected.rawValue, userinfo: ["selectedIndex": index])
+        }
+      }else{
+        titleView.viewWithTag(1)?.isHidden = true
+        if let titleL =  titleView.viewWithTag(2) as? UILabel{
+          titleL.textColor = .steel
+        }
+      }
+    }
+  }
+  
+  
+  override var intrinsicContentSize: CGSize {
+    return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
+  }
+  
+  fileprivate func updateHeight() {
+    layoutIfNeeded()
+    self.height = dynamicHeight()
+    invalidateIntrinsicContentSize()
+  }
+  
+  fileprivate func dynamicHeight() -> CGFloat {
+    let lastView = self.subviews.last?.subviews.last
+    return lastView!.bottom
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    layoutIfNeeded()
+  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    loadViewFromNib()
+    setup()
   }
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+    loadViewFromNib()
+    setup()
   }
   
-  var titles : [String] = []{
-    didSet{
-      setupUI()
-    }
-  }
-  
-  fileprivate var btns : [UIButton] = []
-  
-  struct item_property {
-    static let space                   = 36.0
-    static let width                     = 35.0
-    static let height                  = 18.0
-    static let normalColor : UIColor   = .steel
-    static let selectedColor : UIColor = .white
-    static let font : CGFloat          = 16.0
-  }
-  // 创建UI内容
-  func setupUI(){
-    let scrollView = UIScrollView.init(frame: self.bounds)
-    scrollView.showsHorizontalScrollIndicator = false
-    addSubview(scrollView)
-    for i in 1...titles.count-1 {
-      let btn : UIButton = UIButton.init(frame: CGRect(x: CGFloat(22.0 + Double(i) * (item_property.width+item_property.space)), y: 6, w: CGFloat(item_property.width), h: CGFloat(item_property.height)))
-      btn.setTitle(titles[i], for: .normal)
-      btn.setTitleColor(item_property.normalColor, for: .normal)
-      btn.setTitleColor(item_property.selectedColor, for: .selected)
-      btn.titleLabel?.font = UIFont.systemFont(ofSize: item_property.font)
-      btn.addTarget(self, action: #selector(self.changeTitle(_:)), for: .touchUpInside)
-      btn.tag = 100+i
-      scrollView.addSubview(btn)
-      btns.append(btn)
-    }
-    scrollView.contentSize = CGSize(width:22.0 + Double(titles.count) *  (item_property.width+item_property.space), height: 0)
-  }
-  
-  @objc func changeTitle(_ sender:UIButton){
-    for btn in btns{
-      if btn == sender{
-        btn.isSelected = true
-      }else{
-        btn.isSelected = false
-      }
-    }
-    // 判断sender的tag值 对应不同的点击事件
+  fileprivate func loadViewFromNib() {
+    let bundle = Bundle(for: type(of: self))
+    let nibName = String(describing: type(of: self))
+    let nib = UINib.init(nibName: nibName, bundle: bundle)
+    let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+    
+    addSubview(view)
+    view.frame = self.bounds
+    view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
   
   

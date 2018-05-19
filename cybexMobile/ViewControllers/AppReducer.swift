@@ -127,7 +127,8 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
       klineDatas[action.pair] = [action.stick: action.assets]
     }
     state.detailData = klineDatas
-    
+  case let action as FecthEthToRmbPriceAction:
+    state.eth_rmb_price = action.price
   default:
     break
   }

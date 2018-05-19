@@ -29,6 +29,7 @@ func LockupAssetsPropertyReducer(_ state: LockupAssetsPropertyState?, action: Ac
 
 func lockupAssteToLockUpAssetsDate(datas : [LockUpAssetsMData]) -> LockUpAssetsVMData{
   var sources = [LockupAssteData]()
+  let value = app_state.property.eth_rmb_price
   for data in datas{
     let quote = data.balance.assetID
     let amount = data.balance.amount
@@ -39,7 +40,7 @@ func lockupAssteToLockUpAssetsDate(datas : [LockUpAssetsMData]) -> LockUpAssetsV
     var price = "≈¥--"
     if result.eth != ""{
       count = String(Double(amount)! / pow(10,Double((assetsInfo?.precision)!)))
-      price = "≈¥" + String(Double(count)!*Double(result.eth)!)
+      price = "≈¥" + String(Double(count)!*Double(result.eth)! * value)
     }
     let name  =  assetsInfo?.symbol
     let icon  = ThemeManager.currentThemeIndex == 0 ? "icBtc" : "icBtcGrey"

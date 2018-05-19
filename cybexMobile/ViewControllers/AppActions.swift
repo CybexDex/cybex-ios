@@ -22,6 +22,8 @@ struct AppPropertyState {
   var pairsRefreshTimes:[Pair:Double]?
 
   var assetInfo:[String:AssetInfo] = [:]
+  
+  var eth_rmb_price : Double  = 0
 }
 
 struct HomeBucket:Equatable,Hashable {
@@ -70,6 +72,7 @@ struct NextPage: Action {}
 struct ResetPage: Action {}
 
 
+
 struct MarketsFetched:Action {
   let pair:AssetPairQueryParams
   let assets:[Bucket]
@@ -94,6 +97,10 @@ struct SubscribeSuccess:Action {
 struct AssetInfoAction:Action {
   let assetID:String
   let info:AssetInfo
+}
+
+struct FecthEthToRmbPriceAction:Action{
+  let price : Double
 }
 
 typealias MarketDataCallback = ([Bucket]) -> Void

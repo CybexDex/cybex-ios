@@ -39,8 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window?.makeKeyAndVisible()
     
     appCoordinator = AppCoordinator(rootVC: rootVC)
+    appCoordinator.fetchEthToRmbPrice()
     appCoordinator.start()
-    
     
     RealReachability.sharedInstance().startNotifier()
     NotificationCenter.default.addObserver(forName: NSNotification.Name.realReachabilityChanged, object: nil, queue: nil) { (notifi) in
@@ -49,9 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     configApplication()
     self.handlerNetworkChanged()
-
+  
     return true
   }
+  
   
   func applicationWillResignActive(_ application: UIApplication) {
     if WebsocketService.shared.checkNetworConnected() {

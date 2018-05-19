@@ -28,6 +28,7 @@ struct FetchedLockupAssetsData:Action {
 
 struct LockupAssetsPropertyState {
   var data:BehaviorRelay<LockUpAssetsVMData> = BehaviorRelay(value: LockUpAssetsVMData(datas: []))
+  var eth_price : Double = 0
 }
 
 struct LockUpAssetsVMData :Equatable{

@@ -20,6 +20,7 @@ protocol AppStateManagerProtocol {
   ) where S.StoreSubscriberStateType == SelectedState
   
   func fetchData(_ params:AssetPairQueryParams, sub:Bool)
+  func fetchEthToRmbPrice()
 }
 
 class AppCoordinator {
@@ -122,6 +123,7 @@ class AppCoordinator {
     }
   
   }
+  
 }
 
 extension UIApplication {

@@ -23,11 +23,16 @@ var app_coodinator:AppCoordinator {
 
 struct AppConfiguration {
   static let APPID = ""
-  static let SERVER_BASE_URLString = "https://cybex.io/"
-  static let SERVER_ICONS_BASE_URLString = "https://cybex.io/icons/"
+  static let SERVER_BASE_URLString = "https://app.cybex.io/"
+  static let SERVER_ICONS_BASE_URLString = "https://app.cybex.io/icons/"
 
   static let SERVER_VERSION_URLString = SERVER_BASE_URLString + "iOS_update.json"
   static let SERVER_MARKETLIST_URLString = SERVER_BASE_URLString + "market_list.json"
+  
+  static let FAQ_NIGHT_THEME            = "https://cybex.io/token_applications/new?style=night"
+  static let FAQ_LIGHT_THEME            = "https://cybex.io/token_applications/new"
+  
+  static let ETH_PRICE                  = SERVER_BASE_URLString + "price"
 }
 
 enum indicator:String {
