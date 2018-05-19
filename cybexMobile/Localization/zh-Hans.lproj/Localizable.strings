@@ -32,6 +32,7 @@
 "login" = "登录";
 "login.tip" = "登录";
 "login.already" = "已注册? ";
+"pin.code"= "验证码";
 
 "register" = "注册";
 

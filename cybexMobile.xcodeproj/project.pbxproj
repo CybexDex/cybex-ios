@@ -190,6 +190,10 @@
 		735D8EB620AEAC0C008DAAAC /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB520AEAC0C008DAAAC /* Account.swift */; };
 		735D8EB820AEACE7008DAAAC /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB720AEACE7008DAAAC /* Balance.swift */; };
 		735D8EBB20AEB5B0008DAAAC /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EBA20AEB5B0008DAAAC /* Utils.swift */; };
+		735D8EBD20AFC958008DAAAC /* PinCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EBC20AFC958008DAAAC /* PinCodeView.swift */; };
+		735D8EBF20AFC964008DAAAC /* PinCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735D8EBE20AFC964008DAAAC /* PinCodeView.xib */; };
+		735D8EC120AFCC84008DAAAC /* PinCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EC020AFCC84008DAAAC /* PinCodeViewController.swift */; };
+		735D8EC320AFCC92008DAAAC /* NoticeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EC220AFCC92008DAAAC /* NoticeBoardViewController.swift */; };
 		7373AE2D20720BB2002DC01F /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373AE2C20720BB2002DC01F /* UserDefaults.swift */; };
 		7396B5ED2067EA7D008051E5 /* UIResponder+Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7396B5EC2067EA7D008051E5 /* UIResponder+Route.swift */; };
 		739B6166207F325A00B61152 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739B6165207F325A00B61152 /* Collection+Extensions.swift */; };
@@ -11607,6 +11611,10 @@
 		735D8EB520AEAC0C008DAAAC /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		735D8EB720AEACE7008DAAAC /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		735D8EBA20AEB5B0008DAAAC /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		735D8EBC20AFC958008DAAAC /* PinCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeView.swift; sourceTree = "<group>"; };
+		735D8EBE20AFC964008DAAAC /* PinCodeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinCodeView.xib; sourceTree = "<group>"; };
+		735D8EC020AFCC84008DAAAC /* PinCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeViewController.swift; sourceTree = "<group>"; };
+		735D8EC220AFCC92008DAAAC /* NoticeBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardViewController.swift; sourceTree = "<group>"; };
 		7373AE2C20720BB2002DC01F /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		7396B5EC2067EA7D008051E5 /* UIResponder+Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Route.swift"; sourceTree = "<group>"; };
 		739B6165207F325A00B61152 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
@@ -30542,6 +30550,8 @@
 		731A0E9820A4409800507D1E /* Entry */ = {
 			isa = PBXGroup;
 			children = (
+				735D8EC020AFCC84008DAAAC /* PinCodeViewController.swift */,
+				735D8EC220AFCC92008DAAAC /* NoticeBoardViewController.swift */,
 				731A0E9920A4409800507D1E /* EntryActions.swift */,
 				731A0E9A20A4409800507D1E /* EntryCoordinator.swift */,
 				731A0E9B20A4409800507D1E /* EntryReducers.swift */,
@@ -31389,6 +31399,8 @@
 				73F58FCA20AC0589008A1F79 /* Button.xib */,
 				735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */,
 				735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */,
+				735D8EBC20AFC958008DAAAC /* PinCodeView.swift */,
+				735D8EBE20AFC964008DAAAC /* PinCodeView.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -31644,6 +31656,7 @@
 				730FDA6020A314F600CFBF24 /* cfloat in Resources */,
 				730FDA9620A314F900CFBF24 /* fstream.SUNWCCh in Resources */,
 				73E49E52207A08CB003B14D2 /* OrderBookCellView.xib in Resources */,
+				735D8EBF20AFC964008DAAAC /* PinCodeView.xib in Resources */,
 				730FDAA120A314F900CFBF24 /* memory.SUNWCCh in Resources */,
 				730FDAA520A314F900CFBF24 /* queue.SUNWCCh in Resources */,
 				730FDA7920A314F900CFBF24 /* iostream in Resources */,
@@ -32032,6 +32045,7 @@
 				73D977E220565E9700CB7DE1 /* ExplorerRootCoordinator.swift in Sources */,
 				73E6B2B9208D911D00B015E5 /* fc_bridge.cpp in Sources */,
 				73A0CC41206A3DDA00463ADE /* AssetInfo.swift in Sources */,
+				735D8EC120AFCC84008DAAAC /* PinCodeViewController.swift in Sources */,
 				73D9789F20579EE200CB7DE1 /* MarketViewController.swift in Sources */,
 				72C30C7C20AA8AA000F4DCEC /* LockupAssetsReducers.swift in Sources */,
 				73E49E4C207A0865003B14D2 /* TradeHistoryCellView.swift in Sources */,
@@ -32050,6 +32064,8 @@
 				72C30C7B20AA8AA000F4DCEC /* LockupAssetsViewController.swift in Sources */,
 				73E49E41207A0273003B14D2 /* TradeHistoryCell.swift in Sources */,
 				73E49E3C2079FFBF003B14D2 /* TradeHistoryCoordinator.swift in Sources */,
+				735D8EC320AFCC92008DAAAC /* NoticeBoardViewController.swift in Sources */,
+				735D8EBD20AFC958008DAAAC /* PinCodeView.swift in Sources */,
 				7320D658205A942C00C3F579 /* NSNotification+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

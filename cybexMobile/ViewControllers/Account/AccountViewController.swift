@@ -9,6 +9,7 @@
 import UIKit
 import ReSwift
 import SwiftTheme
+import RxSwift
 
 class AccountViewController: BaseViewController {
   // 定义整个界面的全部子界面，根据tag值从stackView上面获取不同的界面
@@ -38,12 +39,23 @@ class AccountViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+    setupEvent()
   }
+  
   // UI的初始化设置
   func setupUI(){
     self.localized_text = R.string.localizable.accountTitle.key.localizedContainer()
     configRightNavButton()
   }
+  
+  func setupEvent() {
+    if let login_view = stackView.viewWithTag(view_type.login_view.rawValue) {
+      login_view.rx.tapGesture().when(.recognized).subscribe(onNext: { (tap) in
+        app_coodinator.showLogin()
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    }
+  }
+  
   // 跳转到设置界面
   override func rightAction(_ sender: UIButton) {
     self.coordinator?.openSetting()

@@ -13,6 +13,8 @@ import Presentr
 protocol RegisterCoordinatorProtocol {
   func pushCreateTip()
   func switchToLogin()
+  func confirmRegister()
+  func pincodePresented()
   func dismiss()
 }
 
@@ -35,6 +37,16 @@ class RegisterCoordinator: EntryRootCoordinator {
     return customPresenter
   }()
   
+  let codePresenter: Presentr = {
+    let width = ModalSize.custom(size: 272)
+    let height = ModalSize.custom(size: 226)
+    let center = ModalCenterPosition.center
+    let customType = PresentationType.custom(width: width, height: height, center: center)
+    
+    let customPresenter = Presentr(presentationType: customType)
+    customPresenter.roundCorners = true
+    return customPresenter
+  }()
   
   lazy var creator = RegisterPropertyActionCreate()
   
@@ -47,9 +59,18 @@ class RegisterCoordinator: EntryRootCoordinator {
 
 extension RegisterCoordinator: RegisterCoordinatorProtocol {
   func pushCreateTip() {
-    let vc = R.storyboard.main.attentionViewController()!
+    let vc = R.storyboard.main.registerTipViewController()!
+      self.rootVC.pushViewController(vc, animated: true)
+  }
+  
+  func confirmRegister() {
+    let vc = R.storyboard.main.noticeBoardViewController()!
     self.rootVC.topViewController?.customPresentViewController(presenter, viewController: vc, animated: true, completion: nil)
-    //    self.rootVC.pushViewController(vc, animated: true)
+  }
+  
+  func pincodePresented() {
+    let vc = R.storyboard.main.pinCodeViewController()!
+    self.rootVC.topViewController?.customPresentViewController(codePresenter, viewController: vc, animated: true, completion: nil)
   }
   
   func switchToLogin() {

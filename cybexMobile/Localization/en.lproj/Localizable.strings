@@ -39,6 +39,7 @@
 "opened.title"    = "Opened Orders";
 "confirm" = "CONFIRM";
 "attention" = "ATTENTIONS";
+"pin.code"= "PIN CODE";
 
 "lockupAssets.title"           = "Lockup Assets";
 
