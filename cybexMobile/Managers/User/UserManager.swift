@@ -9,15 +9,23 @@
 import Foundation
 import SwiftyJSON
 import CryptoSwift
+import KeychainAccess
+import FCUUID
 
 extension UserManager {
-  
   func login(_ username:String, password:String) {
     generateKeys(username, password: password)
   }
   
-  func validateLogin() {
+  func validateLogin(_ username:String, password:String) {
+    let request = GetFullAccountsRequest(name: username) { result in
+      if let result = result as? FullAccount {
+        let member = result.account?.superMember
+        
+      }
+    }
     
+    WebsocketService.shared.send(request: request)
   }
   
   func register() {
@@ -31,6 +39,10 @@ class UserManager {
   
   var keys:AccountKeys?
   var avatarString:String?
+  var account:Account?
+  var limitOrders:[LimitOrder]?
+  var balances:[Balance]?
+  
   
   private init() {
     
@@ -39,6 +51,7 @@ class UserManager {
   private func generateKeys(_ username:String, password:String) {
     let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
     
+    saveKey(keysString)
     if let keys = AccountKeys(JSONString: keysString) {
       self.keys = keys
       
@@ -48,6 +61,11 @@ class UserManager {
     
   }
   
-  
+  private func saveKey(_ key:String) {
+    let uuid = UIDevice.current.uuid()!
+    
+    let keychain = Keychain(service: "com.nbltrust.cybex")
+    keychain[uuid] = key
+  }
   
 }

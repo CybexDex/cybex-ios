@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* cybexMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* cybexMobileTests.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		35C7B22E41C704D7B976BB8A /* Pods_cybexMobileTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C733506B85D343A1BC003A /* Pods_cybexMobileTests.framework */; };
 		721F5C6C20AAE7C80042488F /* LockupAssetsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C6B20AAE7C80042488F /* LockupAssetsSectionView.swift */; };
 		721F5C6E20AAE7EF0042488F /* LockupAssetsSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721F5C6D20AAE7EF0042488F /* LockupAssetsSectionView.xib */; };
 		721F5C7020AAF1400042488F /* OpenedOrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */; };
@@ -189,6 +188,13 @@
 		7341BB39205A5E11007387FE /* UIColor+Cybexblack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341BB0F205A5E11007387FE /* UIColor+Cybexblack.swift */; };
 		735D8EB220AD2A67008DAAAC /* NoticeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */; };
 		735D8EB420AD2A74008DAAAC /* NoticeBoardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */; };
+		735D8EB620AEAC0C008DAAAC /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB520AEAC0C008DAAAC /* Account.swift */; };
+		735D8EB820AEACE7008DAAAC /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB720AEACE7008DAAAC /* Balance.swift */; };
+		735D8EBB20AEB5B0008DAAAC /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EBA20AEB5B0008DAAAC /* Utils.swift */; };
+		735D8EBD20AFC958008DAAAC /* PinCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EBC20AFC958008DAAAC /* PinCodeView.swift */; };
+		735D8EBF20AFC964008DAAAC /* PinCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735D8EBE20AFC964008DAAAC /* PinCodeView.xib */; };
+		735D8EC120AFCC84008DAAAC /* PinCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EC020AFCC84008DAAAC /* PinCodeViewController.swift */; };
+		735D8EC320AFCC92008DAAAC /* NoticeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EC220AFCC92008DAAAC /* NoticeBoardViewController.swift */; };
 		7373AE2D20720BB2002DC01F /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373AE2C20720BB2002DC01F /* UserDefaults.swift */; };
 		7396B5ED2067EA7D008051E5 /* UIResponder+Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7396B5EC2067EA7D008051E5 /* UIResponder+Route.swift */; };
 		739B6166207F325A00B61152 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739B6165207F325A00B61152 /* Collection+Extensions.swift */; };
@@ -215,6 +221,7 @@
 		73ACD80A20721B5E00592E69 /* SettingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ACD80620721B5E00592E69 /* SettingDetailViewController.swift */; };
 		73B44E302057ECD000759863 /* PairDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B44E2F2057ECD000759863 /* PairDetailView.swift */; };
 		73B44E5B2057ECD900759863 /* PairDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B44E5A2057ECD900759863 /* PairDetailView.xib */; };
+		73B88E2120AFD4940069AAB6 /* Vesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B88E2020AFD4940069AAB6 /* Vesting.swift */; };
 		73BDCA21206266CE009E67A3 /* HistoryApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDCA20206266CE009E67A3 /* HistoryApi.swift */; };
 		73BDCA4C206269A7009E67A3 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDCA4B206269A7009E67A3 /* Tools.swift */; };
 		73BDCA4E20626C09009E67A3 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BDCA4D20626C09009E67A3 /* Bucket.swift */; };
@@ -323,7 +330,6 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		261AF37338F0DE3741046D57 /* Pods-cybexMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile.release.xcconfig"; sourceTree = "<group>"; };
 		28C733506B85D343A1BC003A /* Pods_cybexMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cybexMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		53E47CED13665315AA467C93 /* Pods-cybexMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		721F5C6B20AAE7C80042488F /* LockupAssetsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsSectionView.swift; sourceTree = "<group>"; };
 		721F5C6D20AAE7EF0042488F /* LockupAssetsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsSectionView.xib; sourceTree = "<group>"; };
 		721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersHeaderView.swift; sourceTree = "<group>"; };
@@ -11605,6 +11611,13 @@
 		7341BB0F205A5E11007387FE /* UIColor+Cybexblack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Cybexblack.swift"; sourceTree = "<group>"; };
 		735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardView.swift; sourceTree = "<group>"; };
 		735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeBoardView.xib; sourceTree = "<group>"; };
+		735D8EB520AEAC0C008DAAAC /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		735D8EB720AEACE7008DAAAC /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
+		735D8EBA20AEB5B0008DAAAC /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		735D8EBC20AFC958008DAAAC /* PinCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeView.swift; sourceTree = "<group>"; };
+		735D8EBE20AFC964008DAAAC /* PinCodeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinCodeView.xib; sourceTree = "<group>"; };
+		735D8EC020AFCC84008DAAAC /* PinCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeViewController.swift; sourceTree = "<group>"; };
+		735D8EC220AFCC92008DAAAC /* NoticeBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardViewController.swift; sourceTree = "<group>"; };
 		7373AE2C20720BB2002DC01F /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		7396B5EC2067EA7D008051E5 /* UIResponder+Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Route.swift"; sourceTree = "<group>"; };
 		739B6165207F325A00B61152 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
@@ -11631,6 +11644,7 @@
 		73ACD80620721B5E00592E69 /* SettingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailViewController.swift; sourceTree = "<group>"; };
 		73B44E2F2057ECD000759863 /* PairDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairDetailView.swift; sourceTree = "<group>"; };
 		73B44E5A2057ECD900759863 /* PairDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PairDetailView.xib; sourceTree = "<group>"; };
+		73B88E2020AFD4940069AAB6 /* Vesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vesting.swift; sourceTree = "<group>"; };
 		73BDCA20206266CE009E67A3 /* HistoryApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryApi.swift; sourceTree = "<group>"; };
 		73BDCA4B206269A7009E67A3 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		73BDCA4D20626C09009E67A3 /* Bucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bucket.swift; sourceTree = "<group>"; };
@@ -11722,7 +11736,6 @@
 		73F58FC820AC04EF008A1F79 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		73F58FCA20AC0589008A1F79 /* Button.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Button.xib; sourceTree = "<group>"; };
 		A72666D4E9406D5A50C8D67C /* Pods-cybexMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile.debug.xcconfig"; sourceTree = "<group>"; };
-		BE4FB0A485A5C5FE82DF0C50 /* Pods-cybexMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -11730,7 +11743,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35C7B22E41C704D7B976BB8A /* Pods_cybexMobileTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11770,6 +11782,7 @@
 		13B07FAE1A68108700A75B9A /* cybexMobile */ = {
 			isa = PBXGroup;
 			children = (
+				735D8EB920AEB5A6008DAAAC /* Utils */,
 				73F58FC720AC04DC008A1F79 /* UI */,
 				73AAD13320A57C0B002DEFED /* Managers */,
 				73D977A42056592300CB7DE1 /* Base */,
@@ -11814,8 +11827,6 @@
 			children = (
 				A72666D4E9406D5A50C8D67C /* Pods-cybexMobile.debug.xcconfig */,
 				261AF37338F0DE3741046D57 /* Pods-cybexMobile.release.xcconfig */,
-				BE4FB0A485A5C5FE82DF0C50 /* Pods-cybexMobileTests.debug.xcconfig */,
-				53E47CED13665315AA467C93 /* Pods-cybexMobileTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -30539,6 +30550,8 @@
 		731A0E9820A4409800507D1E /* Entry */ = {
 			isa = PBXGroup;
 			children = (
+				735D8EC020AFCC84008DAAAC /* PinCodeViewController.swift */,
+				735D8EC220AFCC92008DAAAC /* NoticeBoardViewController.swift */,
 				731A0E9920A4409800507D1E /* EntryActions.swift */,
 				731A0E9A20A4409800507D1E /* EntryCoordinator.swift */,
 				731A0E9B20A4409800507D1E /* EntryReducers.swift */,
@@ -30907,7 +30920,9 @@
 				73EA6D932085C3AC0045A88B /* Demo.swift */,
 				73D8B0AF207CB6EC001A2232 /* OrderBook.swift */,
 				73AAD13720A57F48002DEFED /* Crypto.swift */,
-				72F8C77220AEA9F200454187 /* Balance.swift */,
+				735D8EB520AEAC0C008DAAAC /* Account.swift */,
+				735D8EB720AEACE7008DAAAC /* Balance.swift */,
+				73B88E2020AFD4940069AAB6 /* Vesting.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -31008,6 +31023,14 @@
 				73A571682067FD1800921781 /* MarketCache.swift */,
 			);
 			path = Cache;
+			sourceTree = "<group>";
+		};
+		735D8EB920AEB5A6008DAAAC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				735D8EBA20AEB5B0008DAAAC /* Utils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		7370E2D920A2F0C0001F6C3F /* libfc */ = {
@@ -31378,6 +31401,8 @@
 				73F58FCA20AC0589008A1F79 /* Button.xib */,
 				735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */,
 				735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */,
+				735D8EBC20AFC958008DAAAC /* PinCodeView.swift */,
+				735D8EBE20AFC964008DAAAC /* PinCodeView.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -31412,7 +31437,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "cybexMobileTests" */;
 			buildPhases = (
-				2DC02D61EBFA26ECB665050E /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -31634,6 +31658,7 @@
 				730FDA6020A314F600CFBF24 /* cfloat in Resources */,
 				730FDA9620A314F900CFBF24 /* fstream.SUNWCCh in Resources */,
 				73E49E52207A08CB003B14D2 /* OrderBookCellView.xib in Resources */,
+				735D8EBF20AFC964008DAAAC /* PinCodeView.xib in Resources */,
 				730FDAA120A314F900CFBF24 /* memory.SUNWCCh in Resources */,
 				730FDAA520A314F900CFBF24 /* queue.SUNWCCh in Resources */,
 				730FDA7920A314F900CFBF24 /* iostream in Resources */,
@@ -31794,24 +31819,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2DC02D61EBFA26ECB665050E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-cybexMobileTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		73556A0920A008E700F1EDFF /* color set */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -31926,6 +31933,7 @@
 				73D9789420577D2600CB7DE1 /* HomePairView.swift in Sources */,
 				73D34E3C2063A65A008C7507 /* FAQReducers.swift in Sources */,
 				7320D6B5205FA92400C3F579 /* CBKLineVolumeView.swift in Sources */,
+				73B88E2120AFD4940069AAB6 /* Vesting.swift in Sources */,
 				731A0E9E20A4409900507D1E /* EntryCoordinator.swift in Sources */,
 				72F6DF2B20AC2EE600BBF105 /* AccountAssetOperationView.swift in Sources */,
 				73B44E302057ECD000759863 /* PairDetailView.swift in Sources */,
@@ -31949,7 +31957,6 @@
 				73D34E4D2063A697008C7507 /* SettingReducers.swift in Sources */,
 				73BDCA4E20626C09009E67A3 /* Bucket.swift in Sources */,
 				73D977A62056594800CB7DE1 /* BaseTabbarViewController.swift in Sources */,
-				72F8C77320AEA9F200454187 /* Balance.swift in Sources */,
 				73D8B0B0207CB6EC001A2232 /* OrderBook.swift in Sources */,
 				73D978AF2057A59000CB7DE1 /* BaseCollectionViewCell.swift in Sources */,
 				72F6DF0D20AC0D3700BBF105 /* YourPortfolioCell.swift in Sources */,
@@ -31961,6 +31968,7 @@
 				73D9789E20579EE200CB7DE1 /* MarketReducers.swift in Sources */,
 				733CD33120623F47002AD0E0 /* DataBaseApi.swift in Sources */,
 				73D978042056614900CB7DE1 /* AppActions.swift in Sources */,
+				735D8EBB20AEB5B0008DAAAC /* Utils.swift in Sources */,
 				7396B5ED2067EA7D008051E5 /* UIResponder+Route.swift in Sources */,
 				72C30C8320AA8DAD00F4DCEC /* LockupAssetsCell.swift in Sources */,
 				735D8EB220AD2A67008DAAAC /* NoticeBoardView.swift in Sources */,
@@ -31981,6 +31989,7 @@
 				73D63496206208D8000EB324 /* JsonRPCGenerator.swift in Sources */,
 				73A0CC2F2068EB5E00463ADE /* AppCoordinator+StateManager.swift in Sources */,
 				73D34E452063A675008C7507 /* AccountViewController.swift in Sources */,
+				735D8EB620AEAC0C008DAAAC /* Account.swift in Sources */,
 				73D977E020565E6900CB7DE1 /* HomeRootCoordinator.swift in Sources */,
 				73D9789C20579EE200CB7DE1 /* MarketActions.swift in Sources */,
 				73E49DF42078BF5B003B14D2 /* AccessoryHorizentalView.swift in Sources */,
@@ -32017,9 +32026,11 @@
 				73A2937920AAED3F00893053 /* RegisterReducers.swift in Sources */,
 				73E6B3B42091A81F00B015E5 /* SimpleHTTPService.swift in Sources */,
 				731A0EA020A4409900507D1E /* EntryViewController.swift in Sources */,
+				735D8EB820AEACE7008DAAAC /* Balance.swift in Sources */,
 				73D977E220565E9700CB7DE1 /* ExplorerRootCoordinator.swift in Sources */,
 				73E6B2B9208D911D00B015E5 /* fc_bridge.cpp in Sources */,
 				73A0CC41206A3DDA00463ADE /* AssetInfo.swift in Sources */,
+				735D8EC120AFCC84008DAAAC /* PinCodeViewController.swift in Sources */,
 				73D9789F20579EE200CB7DE1 /* MarketViewController.swift in Sources */,
 				72C30C7C20AA8AA000F4DCEC /* LockupAssetsReducers.swift in Sources */,
 				73E49E4C207A0865003B14D2 /* TradeHistoryCellView.swift in Sources */,
@@ -32038,6 +32049,8 @@
 				72C30C7B20AA8AA000F4DCEC /* LockupAssetsViewController.swift in Sources */,
 				73E49E41207A0273003B14D2 /* TradeHistoryCell.swift in Sources */,
 				73E49E3C2079FFBF003B14D2 /* TradeHistoryCoordinator.swift in Sources */,
+				735D8EC320AFCC92008DAAAC /* NoticeBoardViewController.swift in Sources */,
+				735D8EBD20AFC958008DAAAC /* PinCodeView.swift in Sources */,
 				7320D658205A942C00C3F579 /* NSNotification+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -32078,7 +32091,6 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE4FB0A485A5C5FE82DF0C50 /* Pods-cybexMobileTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -32120,7 +32132,6 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53E47CED13665315AA467C93 /* Pods-cybexMobileTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

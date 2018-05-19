@@ -8,3 +8,4 @@
 #import <KMNavigationBarTransition/KMNavigationBarTransition.h>
 
 #import "BitShareCoordinator.h"
+#import <FCUUID/FCUUID.h>

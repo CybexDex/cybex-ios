@@ -11,11 +11,57 @@ import JSONRPCKit
 import SwiftyJSON
 
 enum dataBaseCatogery:String {
+  case get_full_accounts
   case get_chain_id
   case get_objects
   case subscribe_to_market
   case get_limit_orders
   case get_balance_objects
+}
+
+typealias FullAccount = (account:Account?, balances:[Balance]?, limitOrder:[LimitOrder]?)
+
+struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
+  var name:String
+  var response:RPCSResponse
+
+  var method: String {
+    return "call"
+  }
+  
+  var parameters: Any? {
+    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_full_accounts.rawValue, [[name], true]]
+  }
+  
+  func transferResponse(from resultObject: Any) throws -> Any {
+    let result = JSON(resultObject).arrayValue
+
+    let result_value:FullAccount = (nil, nil, nil)
+    if result.count == 0 {
+      return result_value
+    }
+    
+    guard let full = result.first?.arrayValue[1],
+    let account_dic = full["account"].dictionaryObject
+    else {
+      return result_value
+    }
+    
+    let account = Account(JSON: account_dic)
+    
+    let balances_arr = full["balances"].arrayValue
+    let limitOrder_arr = full["limit_orders"].arrayValue
+
+    let balances = balances_arr.map { (obj) -> Balance in
+      return Balance(JSON: obj.dictionaryObject!)!
+    }
+    
+    let limitOrders = limitOrder_arr.map { (obj) -> LimitOrder in
+      return LimitOrder(JSON: obj.dictionaryObject!)!
+    }
+    
+    return (account, balances, limitOrders)
+  }
 }
 
 struct GetChainIDRequest: JSONRPCKit.Request, JSONRPCResponse {
