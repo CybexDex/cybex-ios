@@ -1,12 +1,11 @@
 platform :ios, '9.0'
 
-plugin 'cocoapods-wholemodule'
-
 def network
     pod 'Starscream'
     pod 'JSONRPCKit'
     pod 'Moya'
     pod 'Kingfisher'
+    pod 'RealReachability'
 end
 
 def data
@@ -79,6 +78,8 @@ end
 
 def other
     pod 'Siren'
+    pod 'LifetimeTracker'
+    pod 'MLeaksFinder'
 end
 
 def fabric
@@ -89,10 +90,8 @@ end
 target 'cybexMobile' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+  
   pod 'Reveal-SDK', :configurations => ['Debug']
-  pod 'LifetimeTracker'
-  pod 'RealReachability'
-  pod 'MLeaksFinder'
   
   fabric
   network
@@ -104,15 +103,6 @@ target 'cybexMobile' do
   extension
   ui
   other
-  
-  # Pods for cybexMobile
-  target 'cybexMobileTests' do
-    inherit! :search_paths
-    # Pods for testing
-#    pod 'Quick'
-#    pod 'Nimble'
-#    pod 'OHHTTPStubs'
-  end
 
 end
 
