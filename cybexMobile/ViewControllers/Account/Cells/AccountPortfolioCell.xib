@@ -83,6 +83,7 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="contentview" destination="YBA-yM-cJZ" id="gbZ-3Y-x33"/>
+                <outlet property="portfolioCellView" destination="dhI-OJ-T5w" id="XcE-Bf-G4e"/>
             </connections>
             <point key="canvasLocation" x="-159" y="-97"/>
         </collectionViewCell>

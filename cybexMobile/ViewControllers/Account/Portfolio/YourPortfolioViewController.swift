@@ -20,6 +20,7 @@ class YourPortfolioViewController: BaseViewController {
     super.viewDidLoad()
     setupUI()
   }
+  
   func setupUI(){
     self.localized_text = R.string.localizable.portfolioTitle.key.localizedContainer()
     let cell = String.init(describing: YourPortfolioCell.self)
@@ -42,17 +43,24 @@ class YourPortfolioViewController: BaseViewController {
   
   override func configureObserveState() {
     commonObserveState()
-    
+    UserManager.shared.balances.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
+      guard let `self` = self else { return }
+      self.tableView.reloadData()
+    }, onError: nil, onCompleted: nil, onDisposed: nil)
   }
 }
 
 extension YourPortfolioViewController : UITableViewDataSource,UITableViewDelegate{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    guard let data = UserManager.shared.balances.value else {
+      return 0
+    }
+    return data.count
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: YourPortfolioCell.self), for: indexPath) as! YourPortfolioCell
-    
+    let data = UserManager.shared.balances.value
+    cell.setup(data?[indexPath.row], indexPath: indexPath)
     return cell
   }
 }

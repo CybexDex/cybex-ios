@@ -17,6 +17,7 @@ class LockupAssetsCell: BaseTableViewCell {
     self.contentView.shadowRadius = 4
     self.contentView.shadowOpacity = 1.0
   }
+  
   @IBOutlet weak var lockupCellView: LockupAssetsView!
   
   override func setup(_ data: Any?, indexPath: IndexPath) {

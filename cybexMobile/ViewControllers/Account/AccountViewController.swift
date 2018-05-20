@@ -32,6 +32,7 @@ class AccountViewController: BaseViewController {
     case normalState = 2
   }
   
+  @IBOutlet weak var portfolioView: AccountPortfolioView!
   @IBOutlet weak var nameL: UILabel!
   
     @IBOutlet weak var memberLevelView: UIView!
@@ -114,9 +115,7 @@ class AccountViewController: BaseViewController {
     let isSuper = UserManager.shared.account.value?.superMember ?? false
     memberLevel.localized_text = isSuper ? R.string.localizable.accountSuperMember.key.localizedContainer() :  R.string.localizable.accountBasicMember.key.localizedContainer()
     totalBalance.text = UserManager.shared.balance.toString
-    
-    
-    
+    portfolioView.data = UserManager.shared.balances.value!
   }
   
   
