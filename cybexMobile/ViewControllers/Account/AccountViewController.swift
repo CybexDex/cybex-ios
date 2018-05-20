@@ -33,6 +33,7 @@ class AccountViewController: BaseViewController {
     case normalState = 2
   }
   
+  @IBOutlet weak var portfolioView: AccountPortfolioView!
   @IBOutlet weak var nameL: UILabel!
   
   @IBOutlet weak var memberLevelView: UIView!
@@ -119,10 +120,8 @@ class AccountViewController: BaseViewController {
     totalBalance.text = UserManager.shared.balance.toString
     
     accountImageView.image = Identicon().icon(from: UserManager.shared.avatarString!, size: CGSize(width: 56, height: 56))
-    
-    if let view = stackView.viewWithTag(view_type.yourPortfolio_view.rawValue) as? AccountPortfolioView {
-      view.data = UserManager.shared.balances.value
-    }
+  
+    portfolioView.data = UserManager.shared.balances.value!
   }
   
   

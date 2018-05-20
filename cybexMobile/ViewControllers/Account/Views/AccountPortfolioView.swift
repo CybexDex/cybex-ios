@@ -13,9 +13,10 @@ class AccountPortfolioView:UIView{
   
   @IBOutlet weak var openPortfolioView: UIView!
   @IBOutlet weak var collectionView: UICollectionView!
-  var data: Any? {
+  
+  var data: [Balance] = [] {
     didSet {
-      
+      collectionView.reloadData()
     }
   }
   enum event:String {
@@ -80,10 +81,11 @@ class AccountPortfolioView:UIView{
 
 extension AccountPortfolioView : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 10
+    return data.count
   }
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String.init(describing: AccountPortfolioCell.self), for: indexPath) as! AccountPortfolioCell
+    cell.setup(data[indexPath.row])
     return cell
   }
   

@@ -347,6 +347,7 @@
                         <outlet property="memberLevel" destination="mSY-yo-RcD" id="QNs-32-szK"/>
                         <outlet property="memberLevelView" destination="9dj-YC-nme" id="p27-6a-ij2"/>
                         <outlet property="nameL" destination="iad-av-Auu" id="e8S-Eb-rXA"/>
+                        <outlet property="portfolioView" destination="Y2C-bZ-Yat" id="eev-EL-AK6"/>
                         <outlet property="stackView" destination="1fp-Zk-OiE" id="Hwr-Qk-b24"/>
                         <outlet property="totalBalance" destination="m7j-ei-f4Q" id="Aio-ew-3oM"/>
                     </connections>

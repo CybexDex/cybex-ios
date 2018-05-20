@@ -12,12 +12,23 @@ class AccountPortfolioCellView: UIView{
   
   var data: Any? {
     didSet {
+      guard let balance = data as? Balance else { return }
+//      icon.image  = UIImage(named: "")
       
+      name.text   = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
+      amount.text = getRealAmount(balance.asset_type, amount: balance.balance).toString
+      
+      price.text  = changeToETHAndCYB(balance.asset_type).cyb == "" ? "--" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (amount.text?.toDouble())!)
+      + " CYB"
     }
   }
+  @IBOutlet weak var icon: UIImageView!
   
+  @IBOutlet weak var name: UILabel!
   
+  @IBOutlet weak var amount: UILabel!
   
+  @IBOutlet weak var price: UILabel!
   fileprivate func setup() {
     
   }

@@ -29,9 +29,9 @@ func LockupAssetsPropertyReducer(_ state: LockupAssetsPropertyState?, action: Ac
 
 func lockupAssteToLockUpAssetsDate(datas : [LockUpAssetsMData]) -> LockUpAssetsVMData{
   var sources = [LockupAssteData]()
-  let value = app_state.property.eth_rmb_price
+  let value   = app_state.property.eth_rmb_price
   for data in datas{
-    let quote = data.balance.assetID
+    let quote  = data.balance.assetID
     let amount = data.balance.amount
     let result = changeToETHAndCYB(quote)
     // 目前显示的是针对ETH的换算

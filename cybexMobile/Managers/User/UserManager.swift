@@ -75,7 +75,9 @@ class UserManager {
     var balance_values:Double = 0
     if let balances = balances.value {
       for balance_value in balances{
-        balance_values += getRealAmount(balance_value.asset_type,amount: balance_value.balance) * changeToETHAndCYB(balance_value.asset_type).cyb.toDouble()!
+        if let eth_cyb = changeToETHAndCYB(balance_value.asset_type).cyb.toDouble() {
+          balance_values += getRealAmount(balance_value.asset_type,amount: balance_value.balance) * eth_cyb
+        }
       }
     }
     if let limitOrder = limitOrder.value{
@@ -114,9 +116,7 @@ class UserManager {
       self.keys = keys
       
       self.avatarString = username.sha256()
-      
     }
-    
   }
   
   private func saveKey(_ key:String) {
