@@ -11,6 +11,7 @@ import ReSwift
 import SwiftTheme
 import AwaitKit
 import RxSwift
+import IGIdenticon
 
 class AccountViewController: BaseViewController {
   // 定义整个界面的全部子界面，根据tag值从stackView上面获取不同的界面
@@ -34,13 +35,15 @@ class AccountViewController: BaseViewController {
   
   @IBOutlet weak var nameL: UILabel!
   
-    @IBOutlet weak var memberLevelView: UIView!
-    @IBOutlet weak var memberLevel: UILabel!
+  @IBOutlet weak var memberLevelView: UIView!
+  @IBOutlet weak var memberLevel: UILabel!
   
-    @IBOutlet weak var totalBalance: UILabel!
-    @IBOutlet weak var stackView: UIStackView!
+  @IBOutlet weak var totalBalance: UILabel!
+  @IBOutlet weak var stackView: UIStackView!
   
   @IBOutlet weak var loginArrowImgView: UIImageView!
+  @IBOutlet weak var accountImageView: UIImageView!
+  
   var coordinator: (AccountCoordinatorProtocol & AccountStateManagerProtocol)?
   
   override func viewDidLoad() {
@@ -115,8 +118,11 @@ class AccountViewController: BaseViewController {
     memberLevel.localized_text = isSuper ? R.string.localizable.accountSuperMember.key.localizedContainer() :  R.string.localizable.accountBasicMember.key.localizedContainer()
     totalBalance.text = UserManager.shared.balance.toString
     
+    accountImageView.image = Identicon().icon(from: UserManager.shared.avatarString!, size: CGSize(width: 56, height: 56))
     
-    
+    if let view = stackView.viewWithTag(view_type.yourPortfolio_view.rawValue) as? AccountPortfolioView {
+      view.data = UserManager.shared.balances.value
+    }
   }
   
   
@@ -146,12 +152,12 @@ class AccountViewController: BaseViewController {
       self.updataStatus()
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
-     UserManager.shared.limitOrder.asObservable().subscribe(onNext: { [weak self](account) in
+    UserManager.shared.limitOrder.asObservable().subscribe(onNext: { [weak self](account) in
       guard let `self` = self else{ return }
       self.updataStatus()
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
-     UserManager.shared.balances.asObservable().subscribe(onNext: { [weak self](account) in
+    UserManager.shared.balances.asObservable().subscribe(onNext: { [weak self](account) in
       guard let `self` = self else{ return }
       self.updataStatus()
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
