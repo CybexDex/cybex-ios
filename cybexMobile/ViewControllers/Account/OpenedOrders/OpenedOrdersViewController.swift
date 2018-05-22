@@ -50,13 +50,19 @@ class OpenedOrdersViewController: BaseViewController {
     
     override func configureObserveState() {
         commonObserveState()
-        
+      UserManager.shared.limitOrder.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
+        guard let `self` = self else { return }
+        self.tableView.reloadData()
+        }, onError: nil, onCompleted: nil, onDisposed: nil)
+      
+      
     }
 }
 
 extension OpenedOrdersViewController : UITableViewDataSource,UITableViewDelegate{
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
     return 10
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
