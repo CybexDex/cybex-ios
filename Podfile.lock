@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (4.7.2)
-  - Atributika (4.4.2)
   - AwaitKit (5.0.0):
     - PromiseKit (~> 6)
   - BeareadToast (0.0.3)
@@ -100,6 +99,7 @@ PODS:
   - SwifterSwift/SwiftStdlib (4.3.0)
   - SwifterSwift/UIKit (4.3.0)
   - SwiftHash (2.0.1)
+  - SwiftRichString (1.1.0)
   - SwiftTheme (0.4.1)
   - SwiftyJSON (4.1.0)
   - SwiftyUserDefaults (3.0.1)
@@ -116,7 +116,6 @@ PODS:
     - SwiftHash (>= 2.0.1)
 
 DEPENDENCIES:
-  - Atributika
   - AwaitKit
   - BeareadToast (from `https://github.com/phpmaple/BeareadToast`)
   - BigInt
@@ -162,6 +161,7 @@ DEPENDENCIES:
   - Siren
   - Starscream
   - SwifterSwift
+  - SwiftRichString
   - SwiftTheme
   - SwiftyJSON
   - SwiftyUserDefaults
@@ -177,7 +177,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - Atributika
     - AwaitKit
     - BigInt
     - BiometricAuthentication
@@ -227,6 +226,7 @@ SPEC REPOS:
     - Starscream
     - SwifterSwift
     - SwiftHash
+    - SwiftRichString
     - SwiftTheme
     - SwiftyJSON
     - SwiftyUserDefaults
@@ -258,7 +258,6 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
-  Atributika: 61cf7794646bd033cd19aad1b8f7e1cae8daa877
   AwaitKit: d8a6e30eeb2da916630270b44636b31033388bd8
   BeareadToast: 17ff7f5ac9609b186543d6a45df8f15f78c9ca7a
   BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
@@ -310,6 +309,7 @@ SPEC CHECKSUMS:
   Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
   SwifterSwift: f3fce2b9fc5b9d8fda6eec33825e5243c60aebba
   SwiftHash: c805de5a434eacfa0dac7210745a50c55d7fe33d
+  SwiftRichString: 49c75726140c7f780fad1d067f804491d51188fa
   SwiftTheme: 36d71c4eed4b2c401c782cf036e4586c749a8173
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
@@ -324,6 +324,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 33386c55fe481f6c2b40250324798d4199469b46
 
-PODFILE CHECKSUM: 730164c9cb725ff9e5bb5883bc2a8244f219b720
+PODFILE CHECKSUM: a990ebea3a3c538b6aa13f33226c5c902658e401
 
 COCOAPODS: 1.5.2

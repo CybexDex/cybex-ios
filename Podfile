@@ -69,7 +69,7 @@ def ui
     pod 'IHKeyboardAvoiding'
     pod 'Typist'
     pod 'RxGesture'
-    pod 'Atributika'
+    pod 'SwiftRichString'
     pod 'ZLaunchAd'
     pod 'SDCAlertView'
     pod 'Presentr'
