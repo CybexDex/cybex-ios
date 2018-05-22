@@ -14,7 +14,7 @@ func OrderBookReducer(action:Action, state:OrderBookState?) -> OrderBookState {
 }
 
 func OrderBookPropertyReducer(_ state: OrderBookPropertyState?, action: Action) -> OrderBookPropertyState {
-  var state = state ?? OrderBookPropertyState()
+  let state = state ?? OrderBookPropertyState()
   
   switch action {
   case let action as FetchedLimitData:

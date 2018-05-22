@@ -14,7 +14,7 @@ func TradeHistoryReducer(action:Action, state:TradeHistoryState?) -> TradeHistor
 }
 
 func TradeHistoryPropertyReducer(_ state: TradeHistoryPropertyState?, action: Action) -> TradeHistoryPropertyState {
-    var state = state ?? TradeHistoryPropertyState()
+    let state = state ?? TradeHistoryPropertyState()
     
     switch action {
     case let action as FetchedFillOrderData:

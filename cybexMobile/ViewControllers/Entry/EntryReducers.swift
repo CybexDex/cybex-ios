@@ -14,7 +14,7 @@ func EntryReducer(action:Action, state:EntryState?) -> EntryState {
 }
 
 func EntryPropertyReducer(_ state: EntryPropertyState?, action: Action) -> EntryPropertyState {
-    var state = state ?? EntryPropertyState()
+    let state = state ?? EntryPropertyState()
     
     switch action {
     default:

@@ -14,7 +14,7 @@ func RegisterReducer(action:Action, state:RegisterState?) -> RegisterState {
 }
 
 func RegisterPropertyReducer(_ state: RegisterPropertyState?, action: Action) -> RegisterPropertyState {
-    var state = state ?? RegisterPropertyState()
+    let state = state ?? RegisterPropertyState()
     
     switch action {
     default:

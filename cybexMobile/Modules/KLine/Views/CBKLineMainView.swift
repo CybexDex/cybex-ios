@@ -240,27 +240,27 @@ extension CBKLineMainView {
     
     let drawAttrsString = NSMutableAttributedString()
     
-    let date = Date(timeIntervalSince1970: drawModel.date)
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm"
-    let dateStr = formatter.string(from: date) + " "
-    
-    let dateAttrs: [NSAttributedStringKey : Any]? = [
-      NSAttributedStringKey.foregroundColor : configuration.main.dateAssistTextColor,
-      NSAttributedStringKey.font : configuration.main.dateAssistTextFont
-    ]
+//    let date = Date(timeIntervalSince1970: drawModel.date)
+//    let formatter = DateFormatter()
+//    formatter.dateFormat = "yyyy-MM-dd HH:mm"
+//    let dateStr = formatter.string(from: date) + " "
+//
+//    let dateAttrs: [NSAttributedStringKey : Any]? = [
+//      NSAttributedStringKey.foregroundColor : configuration.main.dateAssistTextColor,
+//      NSAttributedStringKey.font : configuration.main.dateAssistTextFont
+//    ]
 //    drawAttrsString.append(NSAttributedString(string: dateStr, attributes: dateAttrs))
     
-    let openStr = String(format: "开: %.2f ", drawModel.open)
-    let highStr = String(format: "高: %.2f ", drawModel.high)
-    let lowStr = String(format: "低: %.2f ", drawModel.low)
-    let closeStr = String(format: "收: %.2f ", drawModel.close)
+//    let openStr = String(format: "开: %.2f ", drawModel.open)
+//    let highStr = String(format: "高: %.2f ", drawModel.high)
+//    let lowStr = String(format: "低: %.2f ", drawModel.low)
+//    let closeStr = String(format: "收: %.2f ", drawModel.close)
     
-    let string = openStr + highStr + lowStr + closeStr
-    let attrs: [NSAttributedStringKey : Any]? = [
-      NSAttributedStringKey.foregroundColor : configuration.main.dateAssistTextColor,
-      NSAttributedStringKey.font : configuration.main.dateAssistTextFont
-    ]
+//    let string = openStr + highStr + lowStr + closeStr
+//    let attrs: [NSAttributedStringKey : Any]? = [
+//      NSAttributedStringKey.foregroundColor : configuration.main.dateAssistTextColor,
+//      NSAttributedStringKey.font : configuration.main.dateAssistTextFont
+//    ]
     
 //    drawAttrsString.append(NSAttributedString(string: string, attributes: attrs))
     

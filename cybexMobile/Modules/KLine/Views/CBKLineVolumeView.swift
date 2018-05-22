@@ -206,11 +206,11 @@ extension CBKLineVolumeView {
                                  limitValue: (minValue: Double, maxValue: Double),
                                  drawModels: [CBKLineModel])
   {
-    let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
+//    _ = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
     
-    switch configuration.volume.indicatorType {
-    case .MA_VOLUME(let days):
-      
+//    switch configuration.volume.indicatorType {
+//    case .MA_VOLUME( _):
+    
 //      for (idx, day) in days.enumerated() {
 //
 //        let maLineBrush = CBMALineBrush(brushType: .MA_VOLUME(day),
@@ -231,21 +231,21 @@ extension CBKLineVolumeView {
 //        }
 //        maLineBrush.draw(drawModels: drawModels)
 //      }
-      break
-    default:
-      break
-    }
+//      break
+//    default:
+//      break
+//    }
   }
   
   fileprivate func drawEMA_VOLUME(context: CGContext,
                                   limitValue: (minValue: Double, maxValue: Double),
                                   drawModels: [CBKLineModel])
   {
-    let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
+//    _ = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
+//
+//    switch configuration.volume.indicatorType {
+//    case .EMA_VOLUME(let _):
     
-    switch configuration.volume.indicatorType {
-    case .EMA_VOLUME(let days):
-      
 //      for (idx, day) in days.enumerated() {
 //
 //        let emaLineBrush = CBMALineBrush(brushType: .EMA_VOLUME(day),
@@ -266,10 +266,10 @@ extension CBKLineVolumeView {
 //        }
 //        emaLineBrush.draw(drawModels: drawModels)
 //      }
-      break
-    default:
-      break
-    }
+//      break
+//    default:
+//      break
+//    }
   }
 }
 

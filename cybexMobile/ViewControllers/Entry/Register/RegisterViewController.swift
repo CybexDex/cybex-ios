@@ -14,6 +14,7 @@ import SwiftTheme
 import AwaitKit
 import Macaw
 import Repeat
+import PromiseKit
 
 class RegisterViewController: BaseViewController {
   
@@ -44,9 +45,6 @@ class RegisterViewController: BaseViewController {
     
     updateSvgView()
     
-    //    let exist = try! await(UserManager.shared.checkUserNameExist("cybex-test"))
-    
-    //    print("---\(exist)")
   }
   
   func updateSvgView() {
@@ -61,8 +59,9 @@ class RegisterViewController: BaseViewController {
         }
       }
     }
-   
   }
+  
+
   
   func setupUI() {
     accountTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo

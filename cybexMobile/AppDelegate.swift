@@ -19,6 +19,7 @@ import IQKeyboardManagerSwift
 
 import Fabric
 import Crashlytics
+import SwiftRichString
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window?.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
     IQKeyboardManager.shared.enable = true
     IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+    
+
+
 
     let rootVC = BaseTabbarViewController()
     window?.rootViewController = rootVC
@@ -130,7 +134,7 @@ extension AppDelegate {
       if let vc = app_coodinator.topViewController() {
         vc.endLoading()
       }
-      BeareadToast.showError(text: "network is not available.", inView: self.window!, hide:2)
+      _ = BeareadToast.showError(text: "network is not available.", inView: self.window!, hide:2)
     }
     else {
       let connected = WebsocketService.shared.checkNetworConnected()

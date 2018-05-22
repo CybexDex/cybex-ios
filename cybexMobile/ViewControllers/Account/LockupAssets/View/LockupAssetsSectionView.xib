@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资产/数量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j88-xm-Sqd">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资产/数量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j88-xm-Sqd">
                     <rect key="frame" x="25" y="14" width="53.5" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
@@ -29,7 +29,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" name="paleGrey" red="0.969" green="0.973" blue="0.980" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="j88-xm-Sqd" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="14" id="035-a0-saK"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="qsw-vm-y3W" secondAttribute="bottom" constant="13" id="7SJ-8T-P3T"/>
@@ -43,15 +43,13 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                    <color key="value" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                    <color key="value" name="paleGrey" red="0.969" green="0.973" blue="0.980" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="-165" y="-84"/>
         </view>
     </objects>
-    <resources>
-    </resources>
 </document>

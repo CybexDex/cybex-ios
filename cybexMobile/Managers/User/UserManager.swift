@@ -70,15 +70,12 @@ extension UserManager {
     }
   }
   
-  func validateLogin(_ username:String, password:String) {
-    let request = GetFullAccountsRequest(name: username) { result in
-      if let result = result as? FullAccount {
-        let member = result.account?.superMember
-        
-      }
+  func checkUserName(_ username:String) -> Promise<Bool> {
+    return async {
+      let exist = try! await(UserManager.shared.checkUserNameExist(username))
+      
+      return exist
     }
-    
-    WebsocketService.shared.send(request: request)
   }
   
   func register(_ pinID:String, captcha:String, username:String, password:String) -> Promise<Bool> {
@@ -243,29 +240,6 @@ class UserManager {
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   
-  private func generateKeys(_ username:String, password:String) {
-    let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
-    
-    name = username
-    
-    saveKey(keysString, name:username)
-    if let keys = AccountKeys(JSONString: keysString) {
-      self.keys = keys
-      
-      self.avatarString = username.sha256()
-    }
-  }
-  
-  func getkeyInKeyChain() {
-    let uuid = UIDevice.current.uuid()!
-    
-    let keychain = Keychain(service: "com.nbltrust.cybex")
-    if let keysString = keychain[uuid], let keys = AccountKeys(JSONString: keysString) {
-      self.keys = keys
-      
-      //      self.avatarString = username.sha256()
-    }
-  }
   
   private func saveKey(_ key:String, name:String) {
     let uuid = UIDevice.current.uuid()!

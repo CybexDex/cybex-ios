@@ -193,11 +193,13 @@
 		735D8EB620AEAC0C008DAAAC /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB520AEAC0C008DAAAC /* Account.swift */; };
 		735D8EB820AEACE7008DAAAC /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB720AEACE7008DAAAC /* Balance.swift */; };
 		735D8EBB20AEB5B0008DAAAC /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EBA20AEB5B0008DAAAC /* Utils.swift */; };
-		735D8EBD20AFC958008DAAAC /* PinCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EBC20AFC958008DAAAC /* PinCodeView.swift */; };
-		735D8EBF20AFC964008DAAAC /* PinCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735D8EBE20AFC964008DAAAC /* PinCodeView.xib */; };
-		735D8EC120AFCC84008DAAAC /* PinCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EC020AFCC84008DAAAC /* PinCodeViewController.swift */; };
 		735D8EC320AFCC92008DAAAC /* NoticeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EC220AFCC92008DAAAC /* NoticeBoardViewController.swift */; };
 		7373AE2D20720BB2002DC01F /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373AE2C20720BB2002DC01F /* UserDefaults.swift */; };
+		7386AD5B20B4134D00168629 /* CGContextExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386AD5520B4134D00168629 /* CGContextExtension.swift */; };
+		7386AD5C20B4134D00168629 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386AD5620B4134D00168629 /* ColorTheme.swift */; };
+		7386AD5D20B4134D00168629 /* IconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386AD5720B4134D00168629 /* IconGenerator.swift */; };
+		7386AD5E20B4134D00168629 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386AD5920B4134D00168629 /* Shapes.swift */; };
+		7386AD5F20B4134D00168629 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386AD5A20B4134D00168629 /* UIColorExtension.swift */; };
 		7396B5ED2067EA7D008051E5 /* UIResponder+Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7396B5EC2067EA7D008051E5 /* UIResponder+Route.swift */; };
 		739B6166207F325A00B61152 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739B6165207F325A00B61152 /* Collection+Extensions.swift */; };
 		73A0CC042068E23400463ADE /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A0CC032068E23400463ADE /* BaseWebViewController.swift */; };
@@ -11618,11 +11620,14 @@
 		735D8EB520AEAC0C008DAAAC /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		735D8EB720AEACE7008DAAAC /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		735D8EBA20AEB5B0008DAAAC /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		735D8EBC20AFC958008DAAAC /* PinCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeView.swift; sourceTree = "<group>"; };
-		735D8EBE20AFC964008DAAAC /* PinCodeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PinCodeView.xib; sourceTree = "<group>"; };
-		735D8EC020AFCC84008DAAAC /* PinCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeViewController.swift; sourceTree = "<group>"; };
 		735D8EC220AFCC92008DAAAC /* NoticeBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardViewController.swift; sourceTree = "<group>"; };
 		7373AE2C20720BB2002DC01F /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		7386AD5520B4134D00168629 /* CGContextExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGContextExtension.swift; sourceTree = "<group>"; };
+		7386AD5620B4134D00168629 /* ColorTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
+		7386AD5720B4134D00168629 /* IconGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconGenerator.swift; sourceTree = "<group>"; };
+		7386AD5820B4134D00168629 /* JdenticonSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JdenticonSwift.h; sourceTree = "<group>"; };
+		7386AD5920B4134D00168629 /* Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
+		7386AD5A20B4134D00168629 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		7396B5EC2067EA7D008051E5 /* UIResponder+Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Route.swift"; sourceTree = "<group>"; };
 		739B6165207F325A00B61152 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		73A0CC032068E23400463ADE /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
@@ -30556,7 +30561,6 @@
 		731A0E9820A4409800507D1E /* Entry */ = {
 			isa = PBXGroup;
 			children = (
-				735D8EC020AFCC84008DAAAC /* PinCodeViewController.swift */,
 				735D8EC220AFCC92008DAAAC /* NoticeBoardViewController.swift */,
 				731A0E9920A4409800507D1E /* EntryActions.swift */,
 				731A0E9A20A4409800507D1E /* EntryCoordinator.swift */,
@@ -31055,6 +31059,19 @@
 			path = UserDefaults;
 			sourceTree = "<group>";
 		};
+		7386AD5420B4134D00168629 /* Jdenticon */ = {
+			isa = PBXGroup;
+			children = (
+				7386AD5520B4134D00168629 /* CGContextExtension.swift */,
+				7386AD5620B4134D00168629 /* ColorTheme.swift */,
+				7386AD5720B4134D00168629 /* IconGenerator.swift */,
+				7386AD5820B4134D00168629 /* JdenticonSwift.h */,
+				7386AD5920B4134D00168629 /* Shapes.swift */,
+				7386AD5A20B4134D00168629 /* UIColorExtension.swift */,
+			);
+			path = Jdenticon;
+			sourceTree = "<group>";
+		};
 		73A2937220AAED2B00893053 /* Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -31372,9 +31389,18 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		73E9AB9420B41A060083DFD6 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				7386AD5420B4134D00168629 /* Jdenticon */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
 		73EA6E1E2086F3220045A88B /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				73E9AB9420B41A060083DFD6 /* Vendor */,
 				731A0EDE20A4609500507D1E /* openssl */,
 				73EA9BAE2086F8300045A88B /* boost */,
 				7370E2D920A2F0C0001F6C3F /* libfc */,
@@ -31410,8 +31436,6 @@
 				73F58FCA20AC0589008A1F79 /* Button.xib */,
 				735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */,
 				735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */,
-				735D8EBC20AFC958008DAAAC /* PinCodeView.swift */,
-				735D8EBE20AFC964008DAAAC /* PinCodeView.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -31668,7 +31692,6 @@
 				730FDA6020A314F600CFBF24 /* cfloat in Resources */,
 				730FDA9620A314F900CFBF24 /* fstream.SUNWCCh in Resources */,
 				73E49E52207A08CB003B14D2 /* OrderBookCellView.xib in Resources */,
-				735D8EBF20AFC964008DAAAC /* PinCodeView.xib in Resources */,
 				730FDAA120A314F900CFBF24 /* memory.SUNWCCh in Resources */,
 				730FDAA520A314F900CFBF24 /* queue.SUNWCCh in Resources */,
 				730FDA7920A314F900CFBF24 /* iostream in Resources */,
@@ -31697,7 +31720,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/AwaitKit/AwaitKit.framework",
 				"${BUILT_PRODUCTS_DIR}/BeareadToast/BeareadToast.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
@@ -31712,7 +31734,6 @@
 				"${BUILT_PRODUCTS_DIR}/FBRetainCycleDetector/FBRetainCycleDetector.framework",
 				"${BUILT_PRODUCTS_DIR}/FCUUID/FCUUID.framework",
 				"${BUILT_PRODUCTS_DIR}/GRDB.swift/GRDB.framework",
-				"${BUILT_PRODUCTS_DIR}/IGIdenticon/IGIdenticon.framework",
 				"${BUILT_PRODUCTS_DIR}/IHKeyboardAvoiding/IHKeyboardAvoiding.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONRPCKit/JSONRPCKit.framework",
@@ -31747,6 +31768,7 @@
 				"${BUILT_PRODUCTS_DIR}/Siren/Siren.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftHash/SwiftHash.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftRichString/SwiftRichString.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftTheme/SwiftTheme.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -31764,7 +31786,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AwaitKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BeareadToast.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
@@ -31779,7 +31800,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBRetainCycleDetector.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FCUUID.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGIdenticon.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IHKeyboardAvoiding.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONRPCKit.framework",
@@ -31814,6 +31834,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Siren.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftHash.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRichString.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftTheme.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -31990,6 +32011,7 @@
 				73D978082056625600CB7DE1 /* UIImage+Extensions.swift in Sources */,
 				73E49E3B2079FFBF003B14D2 /* TradeHistoryActions.swift in Sources */,
 				73D34E442063A675008C7507 /* AccountReducers.swift in Sources */,
+				7386AD5E20B4134D00168629 /* Shapes.swift in Sources */,
 				73D9779F205652BA00CB7DE1 /* UIView+Extensions.swift in Sources */,
 				73E49E342079FFAF003B14D2 /* OrderBookCoordinator.swift in Sources */,
 				7320D6A9205B9E5B00C3F579 /* CBKLineBrush.swift in Sources */,
@@ -32009,11 +32031,13 @@
 				73D9789C20579EE200CB7DE1 /* MarketActions.swift in Sources */,
 				73E49DF42078BF5B003B14D2 /* AccessoryHorizentalView.swift in Sources */,
 				731A0E9F20A4409900507D1E /* EntryReducers.swift in Sources */,
+				7386AD5D20B4134D00168629 /* IconGenerator.swift in Sources */,
 				73D34E352063A603008C7507 /* AccountRootCoordinator.swift in Sources */,
 				7320D6BB205FBC5800C3F579 /* CBEMAVOLUMEModel.swift in Sources */,
 				73E49E362079FFAF003B14D2 /* OrderBookViewController.swift in Sources */,
 				73D977E920565EE000CB7DE1 /* NavCoordinator.swift in Sources */,
 				73E49E252078C134003B14D2 /* AccessoryCollectionViewCell.swift in Sources */,
+				7386AD5F20B4134D00168629 /* UIColorExtension.swift in Sources */,
 				73D978A32057A44100CB7DE1 /* PairListHorizantalView.swift in Sources */,
 				7320D6AB205B9E7500C3F579 /* CBMALineBrush.swift in Sources */,
 				72C30C7A20AA8AA000F4DCEC /* LockupAssetsActions.swift in Sources */,
@@ -32044,9 +32068,9 @@
 				731A0EA020A4409900507D1E /* EntryViewController.swift in Sources */,
 				735D8EB820AEACE7008DAAAC /* Balance.swift in Sources */,
 				73D977E220565E9700CB7DE1 /* ExplorerRootCoordinator.swift in Sources */,
+				7386AD5C20B4134D00168629 /* ColorTheme.swift in Sources */,
 				73E6B2B9208D911D00B015E5 /* fc_bridge.cpp in Sources */,
 				73A0CC41206A3DDA00463ADE /* AssetInfo.swift in Sources */,
-				735D8EC120AFCC84008DAAAC /* PinCodeViewController.swift in Sources */,
 				73D9789F20579EE200CB7DE1 /* MarketViewController.swift in Sources */,
 				72C30C7C20AA8AA000F4DCEC /* LockupAssetsReducers.swift in Sources */,
 				73E49E4C207A0865003B14D2 /* TradeHistoryCellView.swift in Sources */,
@@ -32066,8 +32090,8 @@
 				73E49E41207A0273003B14D2 /* TradeHistoryCell.swift in Sources */,
 				73E49E3C2079FFBF003B14D2 /* TradeHistoryCoordinator.swift in Sources */,
 				735D8EC320AFCC92008DAAAC /* NoticeBoardViewController.swift in Sources */,
-				735D8EBD20AFC958008DAAAC /* PinCodeView.swift in Sources */,
 				7320D658205A942C00C3F579 /* NSNotification+Extensions.swift in Sources */,
+				7386AD5B20B4134D00168629 /* CGContextExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

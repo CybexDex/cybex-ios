@@ -14,7 +14,7 @@ func OpenedOrdersReducer(action:Action, state:OpenedOrdersState?) -> OpenedOrder
 }
 
 func OpenedOrdersPropertyReducer(_ state: OpenedOrdersPropertyState?, action: Action) -> OpenedOrdersPropertyState {
-    var state = state ?? OpenedOrdersPropertyState()
+    let state = state ?? OpenedOrdersPropertyState()
   
     switch action {
     default:
