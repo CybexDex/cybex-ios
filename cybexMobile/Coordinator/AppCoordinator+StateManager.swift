@@ -9,7 +9,7 @@
 import Foundation
 import ReSwift
 import AwaitKit
-import EZSwiftExtensions
+import Repeat
 
 extension AppCoordinator: AppStateManagerProtocol {
   func subscribe<SelectedState, S: StoreSubscriber>(
@@ -53,12 +53,18 @@ extension AppCoordinator: AppStateManagerProtocol {
   }
   
   func fetchEthToRmbPrice(){
-    ez.runThisEvery(seconds: 3.0, startAfterSeconds: 0) { (timer) in
+    
+    self.timer = Repeater.every(.seconds(3)) {[weak self] timer in
       let value = try! await(SimpleHTTPService.requestETHPrice())
       print("Value : \(value)")
-      self.store.dispatch(FecthEthToRmbPriceAction(price: value))
+      
+      DispatchQueue.main.async { [weak self] in
+        self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
+      }
     }
     
+    timer?.start()
+
   }
 }
 
@@ -96,14 +102,20 @@ extension AppCoordinator {
   func getLatestData() {
     if AssetConfiguration.shared.asset_ids.isEmpty {
       var pairs:[Pair] = []
-      AssetConfiguration.market_base_assets.forEach { (base) in
-        let pair = try! await(SimpleHTTPService.requestMarketList(base:base))
-        pairs += pair
+      async {
+        AssetConfiguration.market_base_assets.forEach { (base) in
+          let pair = try! await(SimpleHTTPService.requestMarketList(base:base))
+          pairs += pair
+        }
+        
+        main {
+          AssetConfiguration.shared.asset_ids = pairs
+          self.fetchAsset()
+          self.request24hMarkets(AssetConfiguration.shared.asset_ids)
+        }
       }
+      
 
-      AssetConfiguration.shared.asset_ids = pairs
-      self.fetchAsset()
-      self.request24hMarkets(AssetConfiguration.shared.asset_ids)
     }
     else {
       if app_data.assetInfo.count != AssetConfiguration.shared.asset_ids.count {

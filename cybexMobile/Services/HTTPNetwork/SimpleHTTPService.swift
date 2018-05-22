@@ -41,6 +41,10 @@ func async(_ body: @escaping () throws -> Void) {
   Await.Queue.async.ak.async(body)
 }
 
+func main(_ body: @escaping @convention(block) () -> Swift.Void) {
+  DispatchQueue.main.async(execute: body)
+}
+
 class SimpleHTTPService {
   
 }

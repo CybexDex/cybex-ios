@@ -41,7 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window?.makeKeyAndVisible()
     
     appCoordinator = AppCoordinator(rootVC: rootVC)
-    appCoordinator.fetchEthToRmbPrice()
+    
+    self.appCoordinator.fetchEthToRmbPrice()
     appCoordinator.start()
     
 //    appCoordinator.showLogin()

@@ -13,6 +13,7 @@ import ReSwift
 import SwiftTheme
 import AwaitKit
 import Macaw
+import Repeat
 
 class RegisterViewController: BaseViewController {
   
@@ -21,14 +22,16 @@ class RegisterViewController: BaseViewController {
   @IBOutlet weak var accountTextField: ImageTextField!
   @IBOutlet weak var passwordTextField: ImageTextField!
   @IBOutlet weak var confirmPasswordTextField: ImageTextField!
-
+  
   @IBOutlet weak var loginTitle: UILabel!
   @IBOutlet weak var tip: UIImageView!
   @IBOutlet weak var registerButton: Button!
-    
-    @IBOutlet weak var codeTextField: ImageTextField!
-    
-    @IBOutlet weak var macawView: MacawView!
+  
+  @IBOutlet weak var codeTextField: ImageTextField!
+  
+  @IBOutlet weak var macawView: MacawView!
+  
+  var timer:Repeater?
   
   var pinID:String = ""
   
@@ -40,19 +43,25 @@ class RegisterViewController: BaseViewController {
     setupEvent()
     
     updateSvgView()
-
-//    let exist = try! await(UserManager.shared.checkUserNameExist("cybex-test"))
     
-//    print("---\(exist)")
+    //    let exist = try! await(UserManager.shared.checkUserNameExist("cybex-test"))
+    
+    //    print("---\(exist)")
   }
   
   func updateSvgView() {
-    let data = try! await(SimpleHTTPService.requestPinCode())
-    pinID = data.id
-    
-    if let parser = try? SVGParser.parse(text: data.data) {
-      macawView.node = parser
+    async {
+      let data = try! await(SimpleHTTPService.requestPinCode())
+
+      main {
+        self.pinID = data.id
+        
+        if let parser = try? SVGParser.parse(text: data.data) {
+          self.macawView.node = parser
+        }
+      }
     }
+   
   }
   
   func setupUI() {
@@ -115,8 +124,13 @@ extension RegisterViewController {
     self.macawView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
       guard let `self` = self else { return }
       self.updateSvgView()
-
+      
     }).disposed(by: disposeBag)
+    
+    self.timer = Repeater.every(.seconds(120), {[weak self] (timer) in
+      self?.updateSvgView()
+    })
+    self.timer?.start()
     
     self.registerButton.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] (tap) in
       guard let `self` = self else { return }
@@ -132,23 +146,31 @@ extension RegisterViewController {
         
         return
       }
-      let success = UserManager.shared.register(self.pinID, captcha: captcha, username: username, password: password)
-      self.endLoading()
-
-      if success {
-        self.coordinator?.dismiss()
-      }
-      else {
-        self.updateSvgView()
-
-        let vc = UIAlertController(title: "提示", message: "注册失败", preferredStyle: UIAlertControllerStyle.alert)
-        let action = UIAlertAction(title: "确认", style: UIAlertActionStyle.default, handler: nil)
-        vc.addAction(action)
-        self.presentVC(vc)
+      
+      async {
+        let success = try! await(UserManager.shared.register(self.pinID, captcha: captcha, username: username, password: password))
         
+        DispatchQueue.main.async {
+          self.endLoading()
+          
+          if success {
+            self.coordinator?.dismiss()
+          }
+          else {
+            self.updateSvgView()
+            
+            let vc = UIAlertController(title: "提示", message: "注册失败", preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "确认", style: UIAlertActionStyle.default, handler: nil)
+            vc.addAction(action)
+            self.presentVC(vc)
+            
+          }
+        }
       }
+      
+      
     }).disposed(by: disposeBag)
-  
+    
   }
 }
 

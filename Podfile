@@ -54,6 +54,7 @@ def extension
     pod 'EZSwiftExtensions', :git => 'https://github.com/Steven-Cheung/EZSwiftExtensions', :branch => 'swift4'
     pod 'KeychainAccess'
     pod 'SwifterSwift'
+    pod 'Repeat'
 end
 
 def ui

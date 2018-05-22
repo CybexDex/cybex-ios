@@ -84,49 +84,55 @@ extension UIViewController {
 
 
   func handlerUpdateVersion(_ completion: CommonCallback?, showNoUpdate: Bool = false) {
-    let (update, url, force) = try! await(SimpleHTTPService.checkVersion())
-    if let completion = completion {
-      completion()
-    }
-    if update {
-      let alert = AlertController(title: "Update Available", message: "A new version of CybexDex is available. Please update to newest version now", preferredStyle: .alert)
+    async {
+      let (update, url, force) = try! await(SimpleHTTPService.checkVersion())
 
-      if !force {
-        alert.addAction(AlertAction(title: "Next Time", style: .normal, handler: nil))
-      }
-      else {
-        alert.shouldDismissHandler = { (action) in
-          if action?.title == "Next Time" {
-            return true
+      main {
+        if let completion = completion {
+          completion()
+        }
+        if update {
+          let alert = AlertController(title: "Update Available", message: "A new version of CybexDex is available. Please update to newest version now", preferredStyle: .alert)
+          
+          if !force {
+            alert.addAction(AlertAction(title: "Next Time", style: .normal, handler: nil))
           }
           else {
-            action!.handler!(action!)
-            return false
+            alert.shouldDismissHandler = { (action) in
+              if action?.title == "Next Time" {
+                return true
+              }
+              else {
+                action!.handler!(action!)
+                return false
+              }
+            }
           }
+          
+          let action = AlertAction(title: "Update", style: .preferred, handler: { (action) in
+            if force {
+              UIApplication.shared.openURL(URL(string: url)!)
+              return
+            }
+            if url.contains("itunes") {
+              self.openStoreProductWithiTunesItemIdentifier(AppConfiguration.APPID)
+            }
+            else {
+              self.openSafariViewController(url)
+            }
+          })
+          alert.addAction(action)
+          
+          alert.present()
+        }
+        else if showNoUpdate {
+          let alert = AlertController(title: "No Update Available", message: "Current Version is the newest", preferredStyle: .alert)
+          alert.addAction(AlertAction(title: "OK", style: .normal, handler: nil))
+          alert.present()
         }
       }
-
-      let action = AlertAction(title: "Update", style: .preferred, handler: { (action) in
-        if force {
-          UIApplication.shared.openURL(URL(string: url)!)
-          return
-        }
-        if url.contains("itunes") {
-          self.openStoreProductWithiTunesItemIdentifier(AppConfiguration.APPID)
-        }
-        else {
-          self.openSafariViewController(url)
-        }
-      })
-      alert.addAction(action)
-
-      alert.present()
     }
-    else if showNoUpdate {
-      let alert = AlertController(title: "No Update Available", message: "Current Version is the newest", preferredStyle: .alert)
-      alert.addAction(AlertAction(title: "OK", style: .normal, handler: nil))
-      alert.present()
-    }
+   
 
   }
 
