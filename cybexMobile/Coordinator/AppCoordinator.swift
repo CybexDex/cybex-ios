@@ -12,6 +12,7 @@ import Localize_Swift
 import ReSwift
 import SwiftTheme
 import EZSwiftExtensions
+import Repeat
 
 protocol AppStateManagerProtocol {
   var state: AppState { get }
@@ -25,6 +26,8 @@ protocol AppStateManagerProtocol {
 
 class AppCoordinator {
   lazy var creator = AppPropertyActionCreate()
+  
+  var timer:Repeater?
   
   var store = Store<AppState> (
     reducer: AppReducer,

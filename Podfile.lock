@@ -65,6 +65,7 @@ PODS:
     - RealReachability/Ping (= 1.2.0)
   - RealReachability/Connection (1.2.0)
   - RealReachability/Ping (1.2.0)
+  - Repeat (0.5.4)
   - Result (3.2.4)
   - ReSwift (4.0.1)
   - Reveal-SDK (14)
@@ -152,6 +153,7 @@ DEPENDENCIES:
   - Proposer
   - R.swift
   - RealReachability
+  - Repeat
   - ReSwift
   - Reveal-SDK
   - RxCocoa
@@ -214,6 +216,7 @@ SPEC REPOS:
     - R.swift
     - R.swift.Library
     - RealReachability
+    - Repeat
     - Result
     - ReSwift
     - Reveal-SDK
@@ -297,6 +300,7 @@ SPEC CHECKSUMS:
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
   RealReachability: 5e4759f821ecc1c03f6e1db0baf682ef59468b5f
+  Repeat: 6e9ea5147b87470c9ceb4b8b090e3be301dd3461
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   ReSwift: f4012c613e13da7398827fe5aebdb938eaed40a3
   Reveal-SDK: 55b5c5545233b680c2f8da734f202acc15d422b7
@@ -324,6 +328,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 33386c55fe481f6c2b40250324798d4199469b46
 
-PODFILE CHECKSUM: 6245d1726566fbe28112affe784a298d4e07d69e
+PODFILE CHECKSUM: e1bdc70feb9e73fa39342b6f6dd813893927abd6
 
 COCOAPODS: 1.5.2

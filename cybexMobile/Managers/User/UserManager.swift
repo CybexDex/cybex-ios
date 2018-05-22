@@ -22,13 +22,13 @@ extension UserManager {
     if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key {
       let public_key = active_key.public_key
       var canLoginIn = false
-
+      
       let request = GetFullAccountsRequest(name: username) { response in
         if let data = response as? FullAccount, let account = data.account {
- 
+          
           let active_auths = account.active_auths
           let owner_auths = account.owner_auths
-
+          
           for auth in active_auths {
             if let auth = auth as? [Any], let key = auth[0] as? String {
               if key == public_key {
@@ -52,21 +52,21 @@ extension UserManager {
             self.avatarString = username.sha256()
             self.keys = keys
             self.saveKey(keysString, name:username)
-
+            
             self.account.accept(data.account)
             self.balances.accept(data.balances)
             self.limitOrder.accept(data.limitOrder)
-
+            
             completion(true)
             return
           }
         }
         
         completion(false)
-
+        
       }
       WebsocketService.shared.send(request: request)
-
+      
     }
   }
   
@@ -81,23 +81,26 @@ extension UserManager {
     WebsocketService.shared.send(request: request)
   }
   
-  func register(_ pinID:String, captcha:String, username:String, password:String) -> Bool {
-    let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
-    if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key, let owner_key = keys.owner_key, let memo_key = keys.memo_key {
-      let params = ["cap":["id":pinID, "captcha":captcha], "account":["name":username, "owner_key":owner_key.public_key, "active_key":active_key.public_key,"memo_key":memo_key.public_key, "refcode":"", "referrer":""]]
+  func register(_ pinID:String, captcha:String, username:String, password:String) -> Promise<Bool> {
+    return async {
+      let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
       
-      let data = try! await(SimpleHTTPService.requestRegister(params))
-      if data {
-        self.name = username
-        self.avatarString = username.sha256()
-        self.keys = keys
-        self.saveKey(keysString, name:username)
-        fetchAccountInfo()
+      if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key, let owner_key = keys.owner_key, let memo_key = keys.memo_key {
+        let params = ["cap":["id":pinID, "captcha":captcha], "account":["name":username, "owner_key":owner_key.public_key, "active_key":active_key.public_key,"memo_key":memo_key.public_key, "refcode":"", "referrer":""]]
+        
+        let data = try! await(SimpleHTTPService.requestRegister(params))
+        if data {
+          self.name = username
+          self.avatarString = username.sha256()
+          self.keys = keys
+          self.saveKey(keysString, name:username)
+          self.fetchAccountInfo()
+        }
+        return data
+        
       }
-      return data
+      return false
     }
-    
-   return false
   }
   
   func logout() {
@@ -112,7 +115,7 @@ extension UserManager {
     self.account.accept(nil)
     self.balances.accept(nil)
     self.limitOrder.accept(nil)
-
+    
   }
   
   func fetchAccountInfo(){
@@ -123,11 +126,11 @@ extension UserManager {
     if let username = self.name {
       let request = GetFullAccountsRequest(name: username) { response in
         if let data = response as? FullAccount{
-         
+          
           self.account.accept(data.account)
           self.balances.accept(data.balances)
           self.limitOrder.accept(data.limitOrder)
-        
+          
         }
       }
       WebsocketService.shared.send(request: request)
@@ -136,13 +139,13 @@ extension UserManager {
   
   func checkUserNameExist(_ name:String) -> Promise<Bool> {
     let (promise,seal) = Promise<Bool>.pending()
-
+    
     let request = GetAccountByNameRequest(name: name) { response in
       WebsocketService.shared.callbackQueue = DispatchQueue.main
       if let result = response as? Bool {
         seal.fulfill(result)
       }
-     
+      
     }
     
     WebsocketService.shared.callbackQueue = Await.Queue.await
@@ -150,13 +153,13 @@ extension UserManager {
     
     return promise
   }
-
+  
 }
 
 class UserManager {
   static let shared = UserManager()
   var disposeBag = DisposeBag()
-
+  
   var isLoginIn : Bool {
     let uuid = UIDevice.current.uuid()!
     let keychain = Keychain(service: "com.nbltrust.cybex")
@@ -186,7 +189,7 @@ class UserManager {
     var balance_values:Double = 0
     var _limitOrderValue:Double = 0
     var _limitOrder_buy_value:Double = 0
-
+    
     if let balances = balances.value {
       for balance_value in balances{
         if let eth_cyb = changeToETHAndCYB(balance_value.asset_type).cyb.toDouble() {
@@ -199,7 +202,7 @@ class UserManager {
       for limitOrder_value in limitOrder{
         let assetA_info = app_data.assetInfo[limitOrder_value.sellPrice.base.assetID]
         let assetB_info = app_data.assetInfo[limitOrder_value.sellPrice.quote.assetID]
-
+        
         let (base,_) = calculateAssetRelation(assetID_A_name: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetID_B_name: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
         let isBuy = base == ((assetA_info != nil) ? assetA_info!.symbol.filterJade : "")
         
@@ -235,7 +238,7 @@ class UserManager {
           if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 {
             UserManager.shared.fetchAccountInfo()
           }
-
+          
         }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
@@ -255,12 +258,12 @@ class UserManager {
   
   func getkeyInKeyChain() {
     let uuid = UIDevice.current.uuid()!
-
+    
     let keychain = Keychain(service: "com.nbltrust.cybex")
     if let keysString = keychain[uuid], let keys = AccountKeys(JSONString: keysString) {
       self.keys = keys
       
-//      self.avatarString = username.sha256()
+      //      self.avatarString = username.sha256()
     }
   }
   
@@ -271,7 +274,7 @@ class UserManager {
     keychain[uuid] = key
     
     UserDefaults.standard.set(name, forKey: "com.nbltrust.cybex.username")
-
+    
   }
   
 }

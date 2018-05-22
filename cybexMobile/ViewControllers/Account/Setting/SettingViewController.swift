@@ -126,6 +126,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     if indexPath.section == 2 {
       self.startLoading()
+      
       handlerUpdateVersion({
         self.endLoading()
       }, showNoUpdate: true)

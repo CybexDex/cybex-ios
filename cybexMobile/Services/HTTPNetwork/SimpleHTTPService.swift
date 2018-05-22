@@ -41,6 +41,10 @@ func async(_ body: @escaping () throws -> Void) {
   Await.Queue.async.ak.async(body)
 }
 
+func main(_ body: @escaping @convention(block) () -> Swift.Void) {
+  DispatchQueue.main.async(execute: body)
+}
+
 class SimpleHTTPService {
   
 }
@@ -146,7 +150,7 @@ extension SimpleHTTPService {
   static func requestRegister(_ params: [String:Any]) -> Promise<Bool> {
     let (promise,seal) = Promise<Bool>.pending()
     
-    Alamofire.request(URL(string: AppConfiguration.SERVER_REGISTER_URLString)!, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+    Alamofire.request(URL(string: AppConfiguration.SERVER_REGISTER_URLString)!, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
       guard let value = response.result.value else {
         seal.fulfill(false)
         return
