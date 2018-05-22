@@ -69,7 +69,7 @@ def ui
     pod 'IHKeyboardAvoiding'
     pod 'Typist'
     pod 'RxGesture'
-    pod 'SwiftRichString'
+    pod 'SwiftRichString', :git => 'https://github.com/malcommac/SwiftRichString', :tag => '2.0.1'
     pod 'ZLaunchAd'
     pod 'SDCAlertView'
     pod 'Presentr'
