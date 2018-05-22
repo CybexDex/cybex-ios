@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     self.window?.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
     IQKeyboardManager.shared.enable = true
+    IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 
     let rootVC = BaseTabbarViewController()
     window?.rootViewController = rootVC

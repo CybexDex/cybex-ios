@@ -19,18 +19,30 @@ class AccountPortfolioCellView: UIView{
       self.icon.kf.setImage(with: URL(string: iconString))
       
       name.text   = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
-      amount.text = getRealAmount(balance.asset_type, amount: balance.balance).toString
+      // 获得自己的个数
+      realAmount.text = getRealAmount(balance.asset_type, amount: balance.balance).toString
+        
+      // 获取对应CYB的个数
+      let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "" ? "--" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.text?.toDouble())!)
       
-      price.text  = changeToETHAndCYB(balance.asset_type).cyb == "" ? "--" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (amount.text?.toDouble())!)
-      + " CYB"
+      cybPrice.text  = amountCYB + " CYB"
+      
+      if let cybCount = amountCYB.toDouble() {
+        price.text    = "≈¥" + String(cybCount * changeToETHAndCYB("1.3.0").eth.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
+      }else{
+        price.text    = "--"
+      }
     }
   }
+  
   @IBOutlet weak var icon: UIImageView!
   
   @IBOutlet weak var name: UILabel!
   
-  @IBOutlet weak var amount: UILabel!
+  @IBOutlet weak var realAmount: UILabel!
   
+  @IBOutlet weak var cybPrice: UILabel!
+    
   @IBOutlet weak var price: UILabel!
   fileprivate func setup() {
     

@@ -45,18 +45,22 @@ class AccountViewController: BaseViewController {
   @IBOutlet weak var loginArrowImgView: UIImageView!
   @IBOutlet weak var accountImageView: UIImageView!
   
-
+    @IBOutlet weak var balanceRMB: UILabel!
+    
     @IBOutlet weak var bgImageView: UIImageView!
     
-    
+  
   var coordinator: (AccountCoordinatorProtocol & AccountStateManagerProtocol)?
   
-    override func viewDidLoad() {
+  
+  override func viewDidLoad() {
     super.viewDidLoad()
     
     setupUI()
     setupEvent()
   }
+
+  
   
   // UI的初始化设置
   func setupUI(){
@@ -98,7 +102,6 @@ class AccountViewController: BaseViewController {
         stackView.viewWithTag(tag)?.isHidden = true
       }
       bgImageView.isHidden    = true
-
     case .normalState:
       tags = [view_type.login_view.rawValue,view_type.introduce_view.rawValue]
       for tag in [1,2]{
@@ -107,6 +110,7 @@ class AccountViewController: BaseViewController {
       bgImageView.isHidden    = true
     }
   }
+  
   
   
   func commonObserveState() {
@@ -124,12 +128,19 @@ class AccountViewController: BaseViewController {
   }
   
   func updataView(_ isLogin:Bool){
+    if !isLogin{
+      accountImageView.image = #imageLiteral(resourceName: "accountAvatar")
+      return
+    }
     nameL.text =  UserManager.shared.account.value?.name
     
     let isSuper = UserManager.shared.account.value?.superMember ?? false
     memberLevel.localized_text = isSuper ? R.string.localizable.accountSuperMember.key.localizedContainer() :  R.string.localizable.accountBasicMember.key.localizedContainer()
     totalBalance.text = UserManager.shared.balance.toString
-    
+
+    if let ethAmount = changeToETHAndCYB("1.3.0").eth.toDouble(){
+      balanceRMB.text   = "≈¥" + String(UserManager.shared.balance * ethAmount * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
+    }
     accountImageView.image = isLogin ? Identicon().icon(from: UserManager.shared.avatarString!, size: CGSize(width: 56, height: 56)) : #imageLiteral(resourceName: "accountAvatar")
     }
   

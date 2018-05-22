@@ -38,7 +38,7 @@ class YourPorfolioView:  UIView{
         if rmb == 0 {
           price.text = "--"
         }else{
-          price.text = String(rmb * (amount.text?.toDouble())! * app_state.property.eth_rmb_price)
+          price.text = "≈¥" + String(rmb * (amount.text?.toDouble())! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
         }
         
         let cyb  = changeToETHAndCYB(balance.asset_type).cyb.toDouble() ?? 0
