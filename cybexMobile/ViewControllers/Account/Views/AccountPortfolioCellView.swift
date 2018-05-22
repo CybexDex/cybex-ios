@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AccountPortfolioCellView: UIView{
   
   var data: Any? {
     didSet {
       guard let balance = data as? Balance else { return }
-//      icon.image  = UIImage(named: "")
+      
+      let iconString = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"
+      self.icon.kf.setImage(with: URL(string: iconString))
       
       name.text   = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
       amount.text = getRealAmount(balance.asset_type, amount: balance.balance).toString

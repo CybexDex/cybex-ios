@@ -11,7 +11,9 @@ import SwiftTheme
 
 class OpenedOrdersCell: BaseTableViewCell {
   
-  override func awakeFromNib() {
+    @IBOutlet weak var orderView: OpenedOrdersView!
+  
+    override func awakeFromNib() {
     super.awakeFromNib()
     self.contentView.shadowColor = ThemeManager.currentThemeIndex == 0 ? .darkTwo : .paleGrey
     self.contentView.shadowOffset = CGSize(width: 0, height: -1)
@@ -19,9 +21,8 @@ class OpenedOrdersCell: BaseTableViewCell {
     self.contentView.shadowOpacity = 1.0
   }
   
-  override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-    
+  override func setup(_ data: Any?, indexPath: IndexPath) {
+    orderView.data = data
   }
   
 }

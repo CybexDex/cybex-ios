@@ -23,11 +23,19 @@ func calculateAssetRelation(assetID_A_name:String, assetID_B_name:String) -> (ba
   }
   
   
-  if indexA < indexB {
-    return (assetID_A_name, assetID_B_name)
+  if indexA > -1 && indexB > -1 {
+    if indexA < indexB {
+      return (assetID_A_name, assetID_B_name)
+    }
+    else {
+      return (assetID_B_name, assetID_A_name)
+    }
+  }
+  else if indexA < indexB {
+    return (assetID_B_name, assetID_A_name)
   }
   else if indexA > indexB {
-    return (assetID_B_name, assetID_A_name)
+    return (assetID_A_name, assetID_B_name)
   }
   else {
     if assetID_A_name < assetID_B_name {
@@ -69,6 +77,7 @@ func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
   
   if  cyb_eth != "" {
     if result.eth == "" && result.cyb == "" {
+      result = ("0", "0")
     }else if(result.eth == ""){
       result.eth = String(Double(result.cyb)! * Double(1 / Double(cyb_eth)!))
     }else if(result.cyb == ""){

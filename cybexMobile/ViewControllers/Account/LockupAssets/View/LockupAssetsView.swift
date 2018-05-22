@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import Kingfisher
 
 class LockupAssetsView: UIView{
   
   var data: Any? {
     didSet {
       guard let data = data as? LockupAssteData else{ return }
-//      iconImgV.image        = UIImage(named: data.icon)
+    
+      self.iconImgV.kf.setImage(with: URL(string: data.icon))
       nameL.text            = data.name.filterJade
       progressL.text        = "\(Int(data.progress.toDouble()! * 100.0))%"
       if let progress = data.progress.toDouble(){

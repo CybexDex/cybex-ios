@@ -7,7 +7,17 @@
 //
 
 import Foundation
+import IHKeyboardAvoiding
 
 class PinCodeViewController: BaseViewController {
+  var coordinator: RegisterStateManagerProtocol?
+
+  @IBOutlet weak var pinCodeView: PinCodeView!
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+//    self.pinCodeView.data = svg
+    self.pinCodeView.textField.becomeFirstResponder()
+  }
 }

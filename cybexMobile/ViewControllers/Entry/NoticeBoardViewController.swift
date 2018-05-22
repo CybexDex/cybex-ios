@@ -9,5 +9,9 @@
 import Foundation
 
 class NoticeBoardViewController: BaseViewController {
-  
+  var coordinator: RegisterStateManagerProtocol?
+
+  override func viewDidLoad() {
+    
+  }
 }

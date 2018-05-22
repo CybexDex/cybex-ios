@@ -21,13 +21,20 @@ class YourPorfolioView:  UIView{
   @IBOutlet weak var price_cyb: UILabel!
   @IBOutlet weak var high_low_icon: UIImageView!
   @IBOutlet weak var high_low_label: UILabel!
+  
   var data: Any? {
     didSet {
       if let balance = data as? Balance {
+        high_low_view.isHidden = balance.asset_type == AssetConfiguration.CYB
+        
+        let iconString = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"
+        self.icon.kf.setImage(with: URL(string: iconString))
+        
         name.text = app_data.assetInfo[balance.asset_type]?.symbol ?? "--"
         
         amount.text = getRealAmount(balance.asset_type, amount: balance.balance).toString
         let rmb = changeToETHAndCYB(balance.asset_type).eth.toDouble() ?? 0
+        
         if rmb == 0 {
           price.text = "--"
         }else{
@@ -35,10 +42,31 @@ class YourPorfolioView:  UIView{
         }
         
         let cyb  = changeToETHAndCYB(balance.asset_type).cyb.toDouble() ?? 0
+        
         if cyb == 0 {
           price_cyb.text = "--"
         }else{
-          price_cyb.text = String((amount.text?.toDouble())! * cyb)
+          price_cyb.text = String(cyb)
+        }
+        
+        let buckets = app_data.data.value.filter { (homebucket) -> Bool in
+          return homebucket.base == AssetConfiguration.CYB && homebucket.quote == balance.asset_type
+        }
+        if let bucket = buckets.first {
+          DispatchQueue.global().async {
+            let matrix = BucketMatrix(bucket)
+            
+            DispatchQueue.main.async {
+              self.high_low_label.text = (matrix.incre == .greater ? "+" : "") + matrix.change + "%"
+              self.high_low_icon.image = matrix.incre.icon()
+              self.high_low_label.textColor = matrix.incre.color()
+            }
+          }
+        }
+        else {
+          self.high_low_label.textColor = .coolGrey
+          self.high_low_label.text = "-"
+          self.high_low_icon.image = #imageLiteral(resourceName: "ic_arrow_grey2.pdf")
         }
       }
     }

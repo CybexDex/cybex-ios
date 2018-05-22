@@ -17,6 +17,15 @@ class LimitOrder : ImmutableMappable {
   let forSale: String
   let sellPrice: Price
   
+  var isBuy:Bool {
+    let assetA_info = app_data.assetInfo[sellPrice.base.assetID]
+    let assetB_info = app_data.assetInfo[sellPrice.quote.assetID]
+    
+    let (base,_) = calculateAssetRelation(assetID_A_name: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetID_B_name: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
+    
+    return (base == ((assetA_info != nil) ? assetA_info!.symbol.filterJade : ""))
+  }
+  
   required  init(map: Map) throws {
     id                   = try map.value("id")
     expiration           = try map.value("expiration")

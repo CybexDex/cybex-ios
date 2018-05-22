@@ -30,7 +30,12 @@
 "opened.buy" = "Buy";
 "opened.sell" = "Sell";
 "opened.allMoney" = "Total Value:";
+"opened.buyMoney" = "Buy Total Value:";
+"opened.sellMoney" = "Sell Total Value:";
+
 "login" = "LOGIN";
+"logout" = "Log Out";
+
 "login.tip" = "Login";
 "login.already" = "Already have an account? ";
 
@@ -39,7 +44,7 @@
 "opened.title"    = "Opened Orders";
 "confirm" = "CONFIRM";
 "attention" = "ATTENTIONS";
-"pin.code"= "PIN CODE";
+"pin.code"= "Pin Code";
 
 "lockupAssets.title"           = "Lockup Assets";
 

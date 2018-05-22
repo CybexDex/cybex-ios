@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OpenedOrdersHeaderView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
                 <outlet property="totalValueL" destination="LQ2-if-k53" id="W3C-V1-NBr"/>
+                <outlet property="totalValue_tip" destination="hNf-6F-XtD" id="IVn-2j-oQ4"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

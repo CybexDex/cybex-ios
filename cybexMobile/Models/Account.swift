@@ -12,6 +12,8 @@ import ObjectMapper
 class Account: Mappable {
   var membership_expiration_date:String = ""
   var name:String = ""
+  var active_auths:[Any] = []
+  var owner_auths:[Any] = []
   
   required init?(map: Map) {
     
@@ -20,6 +22,8 @@ class Account: Mappable {
   func mapping(map: Map) {
      membership_expiration_date    <- (map["membership_expiration_date"],ToStringTransform())
      name                   <- (map["name"],ToStringTransform())
+     active_auths <- map["active.key_auths"]
+     owner_auths <- map["owner.key_auths"]
   }
 }
 

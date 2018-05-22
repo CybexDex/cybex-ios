@@ -7,17 +7,29 @@
 //
 
 import Foundation
+import Macaw
 
 class PinCodeView: UIView {
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var svg: MacawView!
+    @IBOutlet weak var button: Button!
+    
   var data: Any? {
     didSet {
-      
+      if let svgValue = data as? String, let parser = try? SVGParser.parse(text: svgValue) {
+        svg.node = parser
+      }
     }
   }
   
   
   fileprivate func setup() {
-    
+    button.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+      guard let `self` = self else { return }
+      
+   
+      
+    }).disposed(by: disposeBag)
   }
   
   override var intrinsicContentSize: CGSize {

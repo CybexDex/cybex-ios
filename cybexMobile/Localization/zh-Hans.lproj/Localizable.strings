@@ -28,8 +28,13 @@
 "opened.all" = "全部";
 "opened.buy" = "买入";
 "opened.sell" = "卖出";
-"opened.allMoney" = "卖单总额:";
+"opened.allMoney" = "全部总额:";
+"opened.buyMoney" = "买单总额:";
+"opened.sellMoney" = "卖单总额:";
+
 "login" = "登录";
+"logout" = "退出登录";
+
 "login.tip" = "登录";
 "login.already" = "已注册? ";
 "pin.code"= "验证码";

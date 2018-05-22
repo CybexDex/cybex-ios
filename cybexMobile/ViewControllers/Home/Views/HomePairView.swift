@@ -27,8 +27,8 @@ class HomePairView: UIView {
   
   @IBOutlet weak var bulking: UILabel!
   
-    @IBOutlet weak var asset1: UILabel!
-    @IBOutlet weak var rbmL: UILabel!
+  @IBOutlet weak var asset1: UILabel!
+  @IBOutlet weak var rbmL: UILabel!
   @IBOutlet weak var high_lowContain: UIView!
   
   var base:String!
@@ -56,13 +56,8 @@ class HomePairView: UIView {
           self.volume.text = "V: " + matrix.base_volume
           self.price.text = matrix.price
           self.bulking.text = (matrix.incre == .greater ? "+" : "") + matrix.change + "%"
-          if matrix.incre == .greater{
-            self.high_lowContain.backgroundColor = .turtleGreen
-          }else if matrix.incre == .less {
-            self.high_lowContain.backgroundColor = .reddish
-          }else{
-            self.high_lowContain.backgroundColor = .coolGrey
-          }
+          self.high_lowContain.backgroundColor = matrix.incre.color()
+        
           let (eth,_) = changeToETHAndCYB(markets.quote_info.id)
           self.rbmL.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).toString.formatCurrency(digitNum: 2)
         }

@@ -93,7 +93,7 @@ class CBKLineMainView: UIView {
     
     
     // 绘制提示数据
-    fetchAssistString(model: mainDrawKLineModels.last!)
+    fetchAssistString(model: mainDrawKLineModels.last)
     drawAssistString?.draw(in: CGRect(x: 10, y : 15, w: width - 30, h:configuration.main.assistViewHeight))
     
     let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)

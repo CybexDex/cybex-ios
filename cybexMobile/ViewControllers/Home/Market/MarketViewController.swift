@@ -161,6 +161,7 @@ class MarketViewController: BaseViewController {
   func updateIndex() {
     let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).map( { Pair(base: $0.base, quote: $0.quote) })
     self.curIndex = markets.index(of: pair)!
+    homeBucket = buckets[self.curIndex]
     pair = markets[self.curIndex]
   }
   

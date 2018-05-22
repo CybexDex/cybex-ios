@@ -26,7 +26,8 @@ class LockupAssetsViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
-    self.coordinator?.fetchLockupAssetsData(["CYBLanbfQMeMHCkowkpD7CDV2t36WfXfLnrh","CYB4J4j9KHhBKqvZZjPBigQRvBpR7HeKPFWG","CYBQ3sXxGwruu2nW9ynBvz5F8JciGMwmkiBY","CYBCWPGM3BhteRySUGfsf3xmjX9HJYPh3LUf","CYBHB2VMQV6exMeAzWBQq1vnRnDeuTWR3FyF", "CYB7e4T1W7mgCYXV6zZzkFariBAxrpp3BFnB","CYBBRnktyjxJ3W6zPofMZyxYspfXHrLjj2ph", "CYBHWS8zr367xfRAABbjBZTc76rgHr6LdSn3", "CYBCkKVtNtwLktgBh8gCKPsmoD1AvWUnjF4q"])
+
+    self.coordinator?.fetchLockupAssetsData([UserManager.shared.keys!.active_key!.address, UserManager.shared.keys!.active_key!.compressed,UserManager.shared.keys!.active_key!.uncompressed,UserManager.shared.keys!.owner_key!.address, UserManager.shared.keys!.owner_key!.compressed,UserManager.shared.keys!.owner_key!.uncompressed,UserManager.shared.keys!.memo_key!.address, UserManager.shared.keys!.memo_key!.compressed,UserManager.shared.keys!.memo_key!.uncompressed])
 
   }
   

@@ -100,6 +100,31 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="48" estimatedRowHeight="-1" sectionHeaderHeight="12" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="JKk-ba-DaR">
                                 <rect key="frame" x="15" y="20" width="345" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="4Do-xk-j2g">
+                                    <rect key="frame" x="0.0" y="104.5" width="345" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KDV-f5-Nyx" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="20" width="345" height="48"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="420-9X-Qlm"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isEnable" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="logout"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="KDV-f5-Nyx" firstAttribute="leading" secondItem="4Do-xk-j2g" secondAttribute="leading" id="V8L-g1-we2"/>
+                                        <constraint firstItem="KDV-f5-Nyx" firstAttribute="top" secondItem="4Do-xk-j2g" secondAttribute="top" constant="20" id="eUc-9A-zeP"/>
+                                        <constraint firstAttribute="trailing" secondItem="KDV-f5-Nyx" secondAttribute="trailing" id="rSM-td-obb"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingCell" textLabel="LZ7-vd-sRO" detailTextLabel="aPs-Sy-E2G" rowHeight="48" style="IBUITableViewCellStyleValue1" id="8Md-Vd-i2k" customClass="SettingCell" customModule="cybexMobile" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="345" height="48"/>
@@ -137,7 +162,7 @@
                                         </tableViewCellContentView>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                                <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -162,6 +187,7 @@
                         <viewLayoutGuide key="safeArea" id="biv-q9-gRW"/>
                     </view>
                     <connections>
+                        <outlet property="logoutView" destination="KDV-f5-Nyx" id="eNz-cM-cyG"/>
                         <outlet property="tableView" destination="JKk-ba-DaR" id="wiK-HQ-9r1"/>
                     </connections>
                 </viewController>
@@ -209,7 +235,7 @@
                                         </tableViewCellContentView>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                                <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -441,7 +467,6 @@
                                                                 <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="locali" value="account"/>
-                                                            <userDefinedRuntimeAttribute type="image" keyPath="tailImage" value="check_complete"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                 </subviews>
@@ -472,7 +497,6 @@
                                                                 <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="locali" value="password"/>
-                                                            <userDefinedRuntimeAttribute type="image" keyPath="tailImage" value="check_complete"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                 </subviews>
@@ -517,7 +541,6 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xK9-cC-nwU" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
                                 <rect key="frame" x="13" y="235" width="349" height="48"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="vF6-cY-2jk"/>
                                 </constraints>
@@ -526,7 +549,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEnable" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEnable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -580,10 +603,10 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qcx-qv-DCm">
-                                <rect key="frame" x="13" y="123" width="349" height="144"/>
+                                <rect key="frame" x="13" y="123" width="349" height="192"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9dp-IL-zS9">
-                                        <rect key="frame" x="0.0" y="0.0" width="349" height="144"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="349" height="192"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPW-AW-KrL">
                                                 <rect key="frame" x="0.0" y="0.0" width="349" height="48"/>
@@ -612,8 +635,8 @@
                                                 <constraints>
                                                     <constraint firstItem="aQb-Vc-IrN" firstAttribute="leading" secondItem="rPW-AW-KrL" secondAttribute="leading" constant="12" id="4S8-bJ-5KA"/>
                                                     <constraint firstAttribute="trailing" secondItem="aQb-Vc-IrN" secondAttribute="trailing" constant="18" id="SKP-29-MLC"/>
-                                                    <constraint firstAttribute="bottom" secondItem="aQb-Vc-IrN" secondAttribute="bottom" id="Yil-LX-ojS"/>
                                                     <constraint firstItem="aQb-Vc-IrN" firstAttribute="top" secondItem="rPW-AW-KrL" secondAttribute="top" id="xfq-Ow-k85"/>
+                                                    <constraint firstAttribute="bottom" secondItem="aQb-Vc-IrN" secondAttribute="bottom" id="z6f-P1-LPp"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxV-C7-BgL">
@@ -642,8 +665,8 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="cH2-f1-6Sg" firstAttribute="leading" secondItem="hxV-C7-BgL" secondAttribute="leading" constant="12" id="6Ub-pp-xSW"/>
+                                                    <constraint firstAttribute="bottom" secondItem="cH2-f1-6Sg" secondAttribute="bottom" id="EV3-Ul-arQ"/>
                                                     <constraint firstItem="cH2-f1-6Sg" firstAttribute="top" secondItem="hxV-C7-BgL" secondAttribute="top" id="RwO-7o-Rzk"/>
-                                                    <constraint firstAttribute="bottom" secondItem="cH2-f1-6Sg" secondAttribute="bottom" id="Whx-jn-McS"/>
                                                     <constraint firstAttribute="trailing" secondItem="cH2-f1-6Sg" secondAttribute="trailing" constant="18" id="bKB-Lw-Zyh"/>
                                                 </constraints>
                                             </view>
@@ -674,8 +697,45 @@
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="WIP-LJ-6Yg" secondAttribute="trailing" constant="18" id="ECc-9E-CSr"/>
                                                     <constraint firstItem="WIP-LJ-6Yg" firstAttribute="top" secondItem="Mwk-Mc-icT" secondAttribute="top" id="F48-Jn-0n5"/>
-                                                    <constraint firstAttribute="bottom" secondItem="WIP-LJ-6Yg" secondAttribute="bottom" id="Nx9-bP-US9"/>
+                                                    <constraint firstAttribute="bottom" secondItem="WIP-LJ-6Yg" secondAttribute="bottom" id="F9l-Ul-wey"/>
                                                     <constraint firstItem="WIP-LJ-6Yg" firstAttribute="leading" secondItem="Mwk-Mc-icT" secondAttribute="leading" constant="12" id="a0u-00-Ep7"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bqG-do-OHH">
+                                                <rect key="frame" x="0.0" y="144" width="349" height="48"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WPS-pC-BcR" customClass="ImageTextField" customModule="cybexMobile" customModuleProvider="target">
+                                                        <rect key="frame" x="12" y="0.0" width="221" height="48"/>
+                                                        <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="image" keyPath="fieldImage" value="ic_pincode_24_px"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="locali" value="pin.code"/>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                                <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
+                                                                <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcV-7C-Gjt" customClass="MacawView" customModule="Macaw">
+                                                        <rect key="frame" x="238" y="7" width="99" height="33"/>
+                                                        <color key="backgroundColor" red="1" green="0.76900000000000002" blue="0.47099999999999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="99" id="nXJ-Iw-xQi"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="lcV-7C-Gjt" secondAttribute="trailing" constant="12" id="5Vk-Oh-ly9"/>
+                                                    <constraint firstItem="WPS-pC-BcR" firstAttribute="leading" secondItem="bqG-do-OHH" secondAttribute="leading" constant="12" id="6ap-KZ-fj7"/>
+                                                    <constraint firstItem="lcV-7C-Gjt" firstAttribute="leading" secondItem="WPS-pC-BcR" secondAttribute="trailing" constant="5" id="JoW-IC-mAd"/>
+                                                    <constraint firstAttribute="bottom" secondItem="WPS-pC-BcR" secondAttribute="bottom" id="Ts0-lL-SdF"/>
+                                                    <constraint firstAttribute="bottom" secondItem="lcV-7C-Gjt" secondAttribute="bottom" constant="8" id="nHG-UG-rtW"/>
+                                                    <constraint firstItem="lcV-7C-Gjt" firstAttribute="top" secondItem="bqG-do-OHH" secondAttribute="top" constant="7" id="oQB-sG-XBk"/>
+                                                    <constraint firstItem="WPS-pC-BcR" firstAttribute="top" secondItem="bqG-do-OHH" secondAttribute="top" id="yfu-Kc-gfX"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -687,7 +747,7 @@
                                     <constraint firstAttribute="bottom" secondItem="9dp-IL-zS9" secondAttribute="bottom" id="KQk-U2-nn4"/>
                                     <constraint firstItem="9dp-IL-zS9" firstAttribute="top" secondItem="Qcx-qv-DCm" secondAttribute="top" id="Lse-94-06q"/>
                                     <constraint firstAttribute="trailing" secondItem="9dp-IL-zS9" secondAttribute="trailing" id="UaK-VR-hLK"/>
-                                    <constraint firstAttribute="height" constant="144" id="zEa-4r-r08"/>
+                                    <constraint firstAttribute="height" constant="192" id="zEa-4r-r08"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
@@ -738,7 +798,7 @@
                                 </subviews>
                             </stackView>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kCz-iz-2Gk">
-                                <rect key="frame" x="25" y="281" width="325" height="54"/>
+                                <rect key="frame" x="25" y="329" width="325" height="54"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qp1-2n-pjQ">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="54"/>
@@ -790,14 +850,13 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PRM-Qk-YOz" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
-                                <rect key="frame" x="13" y="341" width="349" height="48"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="13" y="389" width="349" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="90f-HA-egO"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="locali" value="register"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEnable" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEnable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -826,9 +885,12 @@
                     </view>
                     <connections>
                         <outlet property="accountTextField" destination="aQb-Vc-IrN" id="gN5-TL-Nsc"/>
+                        <outlet property="codeTextField" destination="WPS-pC-BcR" id="cYT-5D-SBT"/>
                         <outlet property="confirmPasswordTextField" destination="WIP-LJ-6Yg" id="zrV-YD-8S6"/>
                         <outlet property="loginTitle" destination="sdA-WC-36w" id="95N-Lh-PjK"/>
+                        <outlet property="macawView" destination="lcV-7C-Gjt" id="VvZ-UH-TQD"/>
                         <outlet property="passwordTextField" destination="cH2-f1-6Sg" id="6kw-6v-PMj"/>
+                        <outlet property="registerButton" destination="PRM-Qk-YOz" id="Pdp-cY-4Ml"/>
                         <outlet property="tip" destination="Frv-1Z-6FQ" id="E2J-95-WHZ"/>
                     </connections>
                 </viewController>
@@ -999,6 +1061,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="f1v-Mr-NuI"/>
                     </view>
+                    <connections>
+                        <outlet property="pinCodeView" destination="azH-XB-gSc" id="HMA-46-b7s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GaQ-be-Idv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1149,5 +1214,6 @@
         <image name="cybexicon" width="150" height="20"/>
         <image name="ic_avatar_24_px" width="24" height="24"/>
         <image name="ic_lock_outline_24_px" width="24" height="24"/>
+        <image name="ic_pincode_24_px" width="24" height="24"/>
     </resources>
 </document>

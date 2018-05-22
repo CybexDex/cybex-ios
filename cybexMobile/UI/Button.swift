@@ -34,11 +34,9 @@ class Button:UIView {
   
   func updateView() {
     if isEnable {
-      self.button.alpha = 1
       gradientLayer.isHidden = false
     }
     else {
-      self.button.alpha = 0.3
       gradientLayer.isHidden = true
     }
   }
@@ -46,9 +44,10 @@ class Button:UIView {
   fileprivate func setup() {
     gradientLayer.frame = self.bounds
     self.button.layer.addSublayer(gradientLayer)
+    self.button.isUserInteractionEnabled = false
+    self.button.setBackgroundColor(.steel30, forState: UIControlState.disabled)
     
-    self.button.setBackgroundColor(.steel, forState: UIControlState.disabled)
-    self.button.setTitleColor(.white, for: UIControlState.disabled)
+    self.button.setTitleColor(.white30, for: UIControlState.disabled)
     self.button.setTitleColor(.white, for: UIControlState.normal)
     
     updateView()
@@ -72,6 +71,7 @@ class Button:UIView {
   override func layoutSubviews() {
     super.layoutSubviews()
     layoutIfNeeded()
+    gradientLayer.frame = self.bounds
   }
   
   override init(frame: CGRect) {

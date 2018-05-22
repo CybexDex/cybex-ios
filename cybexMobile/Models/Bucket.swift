@@ -82,11 +82,11 @@ enum changeScope {
   func color() -> UIColor {
     switch self {
     case .greater:
-      return #colorLiteral(red: 0.4922918081, green: 0.7674361467, blue: 0.356476903, alpha: 1)
+      return .turtleGreen
     case .less:
-      return #colorLiteral(red: 0.7984321713, green: 0.3588138223, blue: 0.2628142834, alpha: 1)
+      return .reddish
     case .equal:
-      return #colorLiteral(red: 0.9999966025, green: 0.9999999404, blue: 0.9999999404, alpha: 0.5)
+      return .coolGrey
     }
   }
 }
@@ -112,7 +112,8 @@ class BucketMatrix {
   init(_ homebucket:HomeBucket) {
     self.asset = homebucket.bucket
     
-    let last = self.asset.last!
+    guard let last = self.asset.last else { return }
+    
     let first = self.asset.first!
 
     let flip = homebucket.base != last.base

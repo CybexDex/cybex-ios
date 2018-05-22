@@ -26,7 +26,6 @@
                     <state key="normal" title="Button"/>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="XD6-3x-6C5" firstAttribute="bottom" secondItem="fvD-aj-v7I" secondAttribute="bottom" id="WRw-BK-SKT"/>
                 <constraint firstItem="XD6-3x-6C5" firstAttribute="trailing" secondItem="fvD-aj-v7I" secondAttribute="trailing" id="bu4-Bi-QQz"/>

@@ -124,4 +124,42 @@ extension SimpleHTTPService {
     return promise
   }
   
+  static func requestPinCode() -> Promise<(id:String, data:String)> {
+    var request = URLRequest(url: URL(string: AppConfiguration.SERVER_REGISTER_PINCODE_URLString)!)
+    request.cachePolicy = .reloadIgnoringCacheData
+    
+    let (promise,seal) = Promise<(id:String, data:String)>.pending()
+    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+      guard let value = response.result.value else {
+        seal.fulfill(("", ""))
+        return
+      }
+      let json = JSON(value)
+      let id = json["id"].stringValue
+      let data = json["data"].stringValue
+     
+      seal.fulfill((id,data))
+    }
+    return promise
+  }
+  
+  static func requestRegister(_ params: [String:Any]) -> Promise<Bool> {
+    let (promise,seal) = Promise<Bool>.pending()
+    
+    Alamofire.request(URL(string: AppConfiguration.SERVER_REGISTER_URLString)!, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+      guard let value = response.result.value else {
+        seal.fulfill(false)
+        return
+      }
+      
+      let json = JSON(value)
+      if let _ = json["code"].int {
+        seal.fulfill(false)
+        return
+      }
+      
+      seal.fulfill(true)
+    }
+    return promise
+  }
 }
