@@ -14,7 +14,7 @@ func HomeReducer(action:Action, state:HomeState?) -> HomeState {
 }
 
 func HomePropertyReducer(_ state: HomePropertyState?, action: Action) -> HomePropertyState {
-    var state = state ?? HomePropertyState()
+    let state = state ?? HomePropertyState()
     
     switch action {
     default:

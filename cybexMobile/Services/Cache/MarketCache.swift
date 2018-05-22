@@ -56,7 +56,7 @@ class MarketCache: LocalCache {
   
   func fetchAll() throws -> [MarketRecord]? {
     return try queue?.inDatabase({ db in
-      let base_volume = Column("base_volume")
+//      let base_volume = Column("base_volume")
       
       
 

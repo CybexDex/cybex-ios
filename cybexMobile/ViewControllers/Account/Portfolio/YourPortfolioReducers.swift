@@ -14,7 +14,7 @@ func YourPortfolioReducer(action:Action, state:YourPortfolioState?) -> YourPortf
 }
 
 func YourPortfolioPropertyReducer(_ state: YourPortfolioPropertyState?, action: Action) -> YourPortfolioPropertyState {
-    var state = state ?? YourPortfolioPropertyState()
+    let state = state ?? YourPortfolioPropertyState()
     
     switch action {
     default:

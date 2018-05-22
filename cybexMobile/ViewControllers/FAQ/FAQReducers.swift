@@ -14,7 +14,7 @@ func FAQReducer(action:Action, state:FAQState?) -> FAQState {
 }
 
 func FAQPropertyReducer(_ state: FAQPropertyState?, action: Action) -> FAQPropertyState {
-    var state = state ?? FAQPropertyState()
+    let state = state ?? FAQPropertyState()
     
     switch action {
     default:

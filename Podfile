@@ -74,7 +74,6 @@ def ui
     pod 'SDCAlertView'
     pod 'Presentr'
     pod 'Macaw'
-    pod 'IGIdenticon'
 end
 
 def other
@@ -91,7 +90,8 @@ end
 target 'cybexMobile' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  
+  inhibit_all_warnings!
+
   pod 'Reveal-SDK', :configurations => ['Debug']
   
   fabric
