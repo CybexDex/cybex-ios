@@ -12,6 +12,7 @@ import SwiftTheme
 import AwaitKit
 import RxSwift
 import IGIdenticon
+import Atributika
 
 class AccountViewController: BaseViewController {
   // 定义整个界面的全部子界面，根据tag值从stackView上面获取不同的界面
@@ -49,6 +50,7 @@ class AccountViewController: BaseViewController {
     
     @IBOutlet weak var bgImageView: UIImageView!
     
+  
   
   var coordinator: (AccountCoordinatorProtocol & AccountStateManagerProtocol)?
   
@@ -94,8 +96,10 @@ class AccountViewController: BaseViewController {
       for tag in tags {
         stackView.viewWithTag(tag)?.isHidden = true
       }
-      loginArrowImgView.image = UIImage(named: "ic_arrow_forward_16px")?.withColor(ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo)
+      loginArrowImgView.image   = UIImage(named: "ic_arrow_forward_16px")?.withColor(ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo)
         bgImageView.isHidden    = false
+      
+      
     case .unPortfolio:
       tags = [view_type.login_view.rawValue,view_type.introduce_view.rawValue,view_type.yourPortfolio_view.rawValue]
       for tag in tags {

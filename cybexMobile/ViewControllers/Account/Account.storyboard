@@ -67,16 +67,16 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="E2J-ZU-3ec">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="899"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="907.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1fp-Zk-OiE">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="899"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="907.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vT7-UT-V7u">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yf0-MX-ExV">
-                                                                <rect key="frame" x="25" y="24" width="56" height="56"/>
+                                                                <rect key="frame" x="25" y="16" width="56" height="56"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="accountAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="hJ8-ax-BgI">
                                                                         <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
@@ -115,8 +115,8 @@
                                                             </view>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="Yf0-MX-ExV" firstAttribute="top" secondItem="vT7-UT-V7u" secondAttribute="top" constant="24" id="Q0X-7r-ZUh"/>
-                                                            <constraint firstAttribute="bottom" secondItem="Yf0-MX-ExV" secondAttribute="bottom" constant="16" id="sxx-rh-kYP"/>
+                                                            <constraint firstItem="Yf0-MX-ExV" firstAttribute="top" secondItem="vT7-UT-V7u" secondAttribute="top" constant="16" id="Q0X-7r-ZUh"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Yf0-MX-ExV" secondAttribute="bottom" constant="24" id="sxx-rh-kYP"/>
                                                             <constraint firstItem="Yf0-MX-ExV" firstAttribute="leading" secondItem="vT7-UT-V7u" secondAttribute="leading" constant="25" id="tkD-0G-uFr"/>
                                                         </constraints>
                                                     </view>
@@ -138,11 +138,11 @@
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="locali" value="account.login"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_arrow_forward_16px" translatesAutoresizingMaskIntoConstraints="NO" id="RVp-06-T4Q">
-                                                                <rect key="frame" x="69.5" y="16.5" width="7" height="12"/>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icArrowForward16Px" translatesAutoresizingMaskIntoConstraints="NO" id="RVp-06-T4Q">
+                                                                <rect key="frame" x="69.5" y="14.5" width="16" height="16"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="7.2000000000000002" id="DM2-vC-Frt"/>
-                                                                    <constraint firstAttribute="height" constant="11.699999999999999" id="kxZ-Ml-tte"/>
+                                                                    <constraint firstAttribute="width" constant="16" id="DM2-vC-Frt"/>
+                                                                    <constraint firstAttribute="height" constant="16" id="kxZ-Ml-tte"/>
                                                                 </constraints>
                                                             </imageView>
                                                         </subviews>
@@ -155,16 +155,16 @@
                                                         </constraints>
                                                     </view>
                                                     <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abb-Ib-KXk">
-                                                        <rect key="frame" x="0.0" y="181" width="375" height="100"/>
+                                                        <rect key="frame" x="0.0" y="181" width="375" height="108.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wY-Fh-vlG">
-                                                                <rect key="frame" x="28" y="0.0" width="317" height="100"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wY-Fh-vlG">
+                                                                <rect key="frame" x="28" y="0.0" width="317" height="108.5"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="-">
                                                                         <attributes>
                                                                             <color key="NSColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <font key="NSFont" metaFont="system" size="14"/>
-                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="6" tighteningFactorForTruncation="0.0"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="14" tighteningFactorForTruncation="0.0"/>
                                                                         </attributes>
                                                                     </fragment>
                                                                 </attributedString>
@@ -178,12 +178,11 @@
                                                             <constraint firstItem="8wY-Fh-vlG" firstAttribute="top" secondItem="Abb-Ib-KXk" secondAttribute="top" id="HYE-bv-XLg"/>
                                                             <constraint firstAttribute="trailing" secondItem="8wY-Fh-vlG" secondAttribute="trailing" constant="30" id="bRB-5g-4xH"/>
                                                             <constraint firstItem="8wY-Fh-vlG" firstAttribute="leading" secondItem="Abb-Ib-KXk" secondAttribute="leading" constant="28" id="hdo-FO-4Vk"/>
-                                                            <constraint firstItem="8wY-Fh-vlG" firstAttribute="top" secondItem="Abb-Ib-KXk" secondAttribute="top" id="l8r-3e-Owa"/>
                                                             <constraint firstAttribute="bottom" secondItem="8wY-Fh-vlG" secondAttribute="bottom" id="suz-cL-zpn"/>
                                                         </constraints>
                                                     </view>
                                                     <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4x-QB-AmO">
-                                                        <rect key="frame" x="0.0" y="281" width="375" height="100"/>
+                                                        <rect key="frame" x="0.0" y="289.5" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iad-av-Auu">
                                                                 <rect key="frame" x="25" y="0.0" width="30" height="92"/>
@@ -207,7 +206,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hy-ga-TJx">
-                                                        <rect key="frame" x="0.0" y="381" width="375" height="100"/>
+                                                        <rect key="frame" x="0.0" y="389.5" width="375" height="100"/>
                                                         <subviews>
                                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dj-YC-nme" customClass="LabelView" customModule="cybexMobile" customModuleProvider="target">
                                                                 <rect key="frame" x="25" y="0.0" width="27" height="84"/>
@@ -246,7 +245,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TvZ-dP-jV6">
-                                                        <rect key="frame" x="0.0" y="481" width="375" height="16"/>
+                                                        <rect key="frame" x="0.0" y="489.5" width="375" height="16"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55B-LQ-xww">
                                                                 <rect key="frame" x="25" y="0.0" width="11.5" height="16"/>
@@ -268,7 +267,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INX-EI-F0O">
-                                                        <rect key="frame" x="0.0" y="497" width="375" height="100"/>
+                                                        <rect key="frame" x="0.0" y="505.5" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7j-ei-f4Q">
                                                                 <rect key="frame" x="25" y="0.0" width="18.5" height="86"/>
@@ -300,10 +299,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view tag="7" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2C-bZ-Yat" customClass="AccountPortfolioView" customModule="cybexMobile" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="597" width="375" height="168"/>
+                                                        <rect key="frame" x="0.0" y="605.5" width="375" height="168"/>
                                                     </view>
                                                     <view tag="8" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="134" translatesAutoresizingMaskIntoConstraints="NO" id="rXC-Ps-hL3" customClass="AccountAssetOperationView" customModule="cybexMobile" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="765" width="375" height="134"/>
+                                                        <rect key="frame" x="0.0" y="773.5" width="375" height="134"/>
                                                     </view>
                                                 </subviews>
                                                 <constraints>
@@ -491,7 +490,7 @@
     </scenes>
     <resources>
         <image name="accountAvatar" width="56" height="56"/>
-        <image name="account_bg_light" width="375" height="554"/>
-        <image name="ic_arrow_forward_16px" width="16" height="16"/>
+        <image name="account_bg_light" width="375" height="553"/>
+        <image name="icArrowForward16Px" width="16" height="16"/>
     </resources>
 </document>
