@@ -24,7 +24,12 @@ var app_coodinator:AppCoordinator {
 struct AppConfiguration {
   static let APPID = ""
   static let SERVER_BASE_URLString = "https://app.cybex.io/"
+  static let SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
+
   static let SERVER_ICONS_BASE_URLString = "https://app.cybex.io/icons/"
+
+  static let SERVER_REGISTER_PINCODE_URLString = SERVER_REGISTER_BASE_URLString + "captcha"
+  static let SERVER_REGISTER_URLString = SERVER_REGISTER_BASE_URLString + "register"
 
   static let SERVER_VERSION_URLString = SERVER_BASE_URLString + "iOS_update.json"
   static let SERVER_MARKETLIST_URLString = SERVER_BASE_URLString + "market_list?base="

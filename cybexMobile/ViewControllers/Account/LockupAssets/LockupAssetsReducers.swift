@@ -43,12 +43,12 @@ func lockupAssteToLockUpAssetsDate(datas : [LockUpAssetsMData]) -> LockUpAssetsV
       price = "≈¥" + String(Double(count)!*Double(result.eth)! * value)
     }
     let name  =  assetsInfo?.symbol
-    let icon  = ThemeManager.currentThemeIndex == 0 ? "icBtc" : "icBtcGrey"
+    let icon = AppConfiguration.SERVER_ICONS_BASE_URLString + data.balance.assetID.replacingOccurrences(of: ".", with: "_") + "_grey.png"
     let vesting_duration_seconds = data.vesting_policy.vesting_duration_seconds.toDouble()!
     let begin_time               = data.vesting_policy.begin_timestamp.dateFromISO8601
     let progress = (Date().timeIntervalSince1970 - (begin_time?.timeIntervalSince1970)!) / vesting_duration_seconds
     let end_time = begin_time?.addingTimeInterval(vesting_duration_seconds).toString(format: "yyyy/MM/dd")
-    if progress < 1{
+    if progress < 1 && progress >= 0 {
       sources.append(LockupAssteData(icon: icon, name: name!, amount: count, RMBCount: price, progress: String(progress), endTime: end_time!))
     }
   }

@@ -10,7 +10,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OpenedOrdersView" customModule="cybexMobile" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OpenedOrdersView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="amount" destination="qth-z4-8PY" id="1s1-pW-DMs"/>
+                <outlet property="base" destination="h1X-lg-vN7" id="qkb-Ia-mab"/>
+                <outlet property="orderType" destination="X3J-Yu-Gkq" id="4dt-mb-Y77"/>
+                <outlet property="price" destination="msv-rO-6tQ" id="7Eg-Ii-z64"/>
+                <outlet property="quote" destination="Ma0-Sv-PdY" id="l1O-LO-R18"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="X6Y-12-LO6">
             <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
@@ -91,10 +99,10 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ka3-NE-qjj">
-                    <rect key="frame" x="360.5" y="0.0" width="14.5" height="72"/>
+                    <rect key="frame" x="325" y="0.0" width="50" height="72"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msv-rO-6tQ">
-                            <rect key="frame" x="0.0" y="0.0" width="14.5" height="36"/>
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="36"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -107,8 +115,8 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nF1-DU-FkV">
-                            <rect key="frame" x="0.0" y="36" width="14.5" height="36"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nF1-DU-FkV">
+                            <rect key="frame" x="0.0" y="36" width="50" height="36"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -134,7 +142,7 @@
             <viewLayoutGuide key="safeArea" id="iOf-Ba-GCy"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                    <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                     <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -143,6 +151,4 @@
             <point key="canvasLocation" x="-373" y="-155"/>
         </view>
     </objects>
-    <resources>
-    </resources>
 </document>

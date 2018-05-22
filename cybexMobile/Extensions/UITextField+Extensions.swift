@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftTheme
 
 @IBDesignable
 class ImageTextField: UITextField {
@@ -93,10 +94,12 @@ class ImageTextField: UITextField {
       
       let activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
       activityView.frame = imageView.bounds
+      activityView.activityIndicatorViewStyle = ThemeManager.currentThemeIndex == 0 ? .white : .gray
       activityView.startAnimating()
       rightView?.addSubview(activityView)
       self.activityView = activityView
       self.activityView?.isHidden = true
+      
     } else {
       rightViewMode = UITextFieldViewMode.never
       rightView = nil

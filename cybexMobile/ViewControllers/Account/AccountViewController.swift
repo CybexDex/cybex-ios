@@ -45,9 +45,13 @@ class AccountViewController: BaseViewController {
   @IBOutlet weak var loginArrowImgView: UIImageView!
   @IBOutlet weak var accountImageView: UIImageView!
   
+
+    @IBOutlet weak var bgImageView: UIImageView!
+    
+    
   var coordinator: (AccountCoordinatorProtocol & AccountStateManagerProtocol)?
   
-  override func viewDidLoad() {
+    override func viewDidLoad() {
     super.viewDidLoad()
     
     setupUI()
@@ -59,7 +63,6 @@ class AccountViewController: BaseViewController {
     self.automaticallyAdjustsScrollViewInsets = false
     self.localized_text = R.string.localizable.accountTitle.key.localizedContainer()
     configRightNavButton()
-    setupUIWithStatus(user_type.normalState)
   }
   
   func setupEvent() {
@@ -76,6 +79,10 @@ class AccountViewController: BaseViewController {
   }
   
   fileprivate func setupUIWithStatus(_ sender : user_type){
+    for tag in view_type.header_view.rawValue...view_type.assetOperations_view.rawValue {
+      stackView.viewWithTag(tag)?.isHidden = false
+    }
+    
     var tags : [Int] = []
     switch sender {
     case .unLogin:
@@ -84,16 +91,20 @@ class AccountViewController: BaseViewController {
         stackView.viewWithTag(tag)?.isHidden = true
       }
       loginArrowImgView.image = UIImage(named: "ic_arrow_forward_16px")?.withColor(ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo)
+        bgImageView.isHidden    = false
     case .unPortfolio:
       tags = [view_type.login_view.rawValue,view_type.introduce_view.rawValue,view_type.yourPortfolio_view.rawValue]
       for tag in tags {
         stackView.viewWithTag(tag)?.isHidden = true
       }
+      bgImageView.isHidden    = true
+
     case .normalState:
       tags = [view_type.login_view.rawValue,view_type.introduce_view.rawValue]
       for tag in [1,2]{
         stackView.viewWithTag(tag)?.isHidden = true
       }
+      bgImageView.isHidden    = true
     }
   }
   
@@ -112,35 +123,38 @@ class AccountViewController: BaseViewController {
     }
   }
   
-  func updataView(){
+  func updataView(_ isLogin:Bool){
     nameL.text =  UserManager.shared.account.value?.name
     
     let isSuper = UserManager.shared.account.value?.superMember ?? false
     memberLevel.localized_text = isSuper ? R.string.localizable.accountSuperMember.key.localizedContainer() :  R.string.localizable.accountBasicMember.key.localizedContainer()
     totalBalance.text = UserManager.shared.balance.toString
     
-    accountImageView.image = Identicon().icon(from: UserManager.shared.avatarString!, size: CGSize(width: 56, height: 56))
-  
-    portfolioView.data = UserManager.shared.balances.value!
-  }
+    accountImageView.image = isLogin ? Identicon().icon(from: UserManager.shared.avatarString!, size: CGSize(width: 56, height: 56)) : #imageLiteral(resourceName: "accountAvatar")
+    }
   
   
   
   func updataStatus(){
-    defer {
-      updataView()
-    }
+  
     //  判断是否有name来断定是否登陆
     guard let _ =  UserManager.shared.account.value else {
       setupUIWithStatus(user_type.unLogin)
+      updataView(false)
+
       return
     }
     //  判断是否有可用资产来断定是否显示可用资产
-    guard let _ =  UserManager.shared.balances.value else {
+    guard let balances =  UserManager.shared.balances.value, balances.count > 0  else {
       setupUIWithStatus(user_type.unPortfolio)
+      updataView(true)
+
       return
     }
     setupUIWithStatus(user_type.normalState)
+    updataView(true)
+
+    portfolioView.data = UserManager.shared.balances.value
   }
   
   override func configureObserveState() {

@@ -11,6 +11,8 @@ import RxSwift
 import RxCocoa
 import ReSwift
 import SwiftTheme
+import AwaitKit
+import Macaw
 
 class RegisterViewController: BaseViewController {
   
@@ -22,24 +24,54 @@ class RegisterViewController: BaseViewController {
 
   @IBOutlet weak var loginTitle: UILabel!
   @IBOutlet weak var tip: UIImageView!
-  @IBOutlet weak var registerButton: UIButton!
+  @IBOutlet weak var registerButton: Button!
     
+    @IBOutlet weak var codeTextField: ImageTextField!
+    
+    @IBOutlet weak var macawView: MacawView!
+  
+  var pinID:String = ""
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     configLeftNavButton(#imageLiteral(resourceName: "ic_close_24_px"))
     setupUI()
     setupEvent()
+    
+    updateSvgView()
+
+//    let exist = try! await(UserManager.shared.checkUserNameExist("cybex-test"))
+    
+//    print("---\(exist)")
+  }
+  
+  func updateSvgView() {
+    let data = try! await(SimpleHTTPService.requestPinCode())
+    pinID = data.id
+    
+    if let parser = try? SVGParser.parse(text: data.data) {
+      macawView.node = parser
+    }
   }
   
   func setupUI() {
     accountTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
     passwordTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
     confirmPasswordTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
-
+    codeTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
+    
     accountTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
     passwordTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
     confirmPasswordTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
+    codeTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
+    
+    accountTextField.activityView?.isHidden = true
+    accountTextField.tailImage = nil
+    passwordTextField.activityView?.isHidden = true
+    passwordTextField.tailImage = nil
+    confirmPasswordTextField.activityView?.isHidden = true
+    confirmPasswordTextField.tailImage = nil
   }
   
   @objc override func leftAction(_ sender: UIButton) {
@@ -79,6 +111,44 @@ extension RegisterViewController {
       
       self.coordinator?.pushCreateTip()
     }).disposed(by: disposeBag)
+    
+    self.macawView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+      guard let `self` = self else { return }
+      self.updateSvgView()
+
+    }).disposed(by: disposeBag)
+    
+    self.registerButton.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] (tap) in
+      guard let `self` = self else { return }
+      
+      self.startLoading()
+      guard let captcha = self.codeTextField.text, let username = self.accountTextField.text, let password = self.passwordTextField.text else {
+        self.endLoading()
+        
+        let vc = UIAlertController(title: "提示", message: "提交信息不足", preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "确认", style: UIAlertActionStyle.default, handler: nil)
+        vc.addAction(action)
+        self.presentVC(vc)
+        
+        return
+      }
+      let success = UserManager.shared.register(self.pinID, captcha: captcha, username: username, password: password)
+      self.endLoading()
+
+      if success {
+        self.coordinator?.dismiss()
+      }
+      else {
+        self.updateSvgView()
+
+        let vc = UIAlertController(title: "提示", message: "注册失败", preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "确认", style: UIAlertActionStyle.default, handler: nil)
+        vc.addAction(action)
+        self.presentVC(vc)
+        
+      }
+    }).disposed(by: disposeBag)
+  
   }
 }
 

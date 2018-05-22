@@ -15,6 +15,7 @@ import RealReachability
 import SwiftyUserDefaults
 import BeareadToast
 import EasyAnimation
+import IQKeyboardManagerSwift
 
 import Fabric
 import Crashlytics
@@ -33,7 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window?.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]
 
     self.window?.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
-  
+    IQKeyboardManager.shared.enable = true
+
     let rootVC = BaseTabbarViewController()
     window?.rootViewController = rootVC
     self.window?.makeKeyAndVisible()
@@ -42,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     appCoordinator.fetchEthToRmbPrice()
     appCoordinator.start()
     
+//    appCoordinator.showLogin()
     RealReachability.sharedInstance().startNotifier()
     NotificationCenter.default.addObserver(forName: NSNotification.Name.realReachabilityChanged, object: nil, queue: nil) { (notifi) in
       self.handlerNetworkChanged()

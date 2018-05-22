@@ -10,8 +10,44 @@ import UIKit
 
 class OpenedOrdersView:  UIView{
 
-  var data: Any? {
+    @IBOutlet weak var orderType: OpenedOrdersStatesView!
+    @IBOutlet weak var quote: UILabel!
+    @IBOutlet weak var base: UILabel!
+    @IBOutlet weak var amount: UILabel!
+    @IBOutlet weak var price: UILabel!
+    
+    var data: Any? {
     didSet {
+      if let order = data as? LimitOrder {
+
+        if order.isBuy {
+          self.orderType.opened_status = 0
+          
+          if let quote_info = app_data.assetInfo[order.sellPrice.quote.assetID] {
+            quote.text = quote_info.symbol.filterJade
+          }
+          if let base_info = app_data.assetInfo[order.sellPrice.base.assetID] {
+            base.text = "/" + base_info.symbol.filterJade
+          }
+          
+        }
+        else {
+          self.orderType.opened_status = 1
+          
+          if let quote_info = app_data.assetInfo[order.sellPrice.base.assetID] {
+            quote.text = quote_info.symbol.filterJade
+          }
+          if let base_info = app_data.assetInfo[order.sellPrice.quote.assetID] {
+            base.text = "/" + base_info.symbol.filterJade
+          }
+          
+
+        }
+        let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
+        self.amount.text = quoteAmount.toString
+        let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
+        self.price.text = (baseAmount / quoteAmount).toString
+      }
       
     }
   }

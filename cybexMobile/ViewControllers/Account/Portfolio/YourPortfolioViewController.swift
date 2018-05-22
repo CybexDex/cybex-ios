@@ -43,11 +43,21 @@ class YourPortfolioViewController: BaseViewController {
   
   override func configureObserveState() {
     commonObserveState()
+    
     UserManager.shared.balances.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
       guard let `self` = self else { return }
       self.tableView.reloadData()
-    }, onError: nil, onCompleted: nil, onDisposed: nil)
+    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+    app_data.data.asObservable().distinctUntilChanged()
+      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
+      .subscribe(onNext: { (s) in
+        DispatchQueue.main.async {
+          self.tableView.reloadData()
+        }
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
+  
 }
 
 extension YourPortfolioViewController : UITableViewDataSource,UITableViewDelegate{

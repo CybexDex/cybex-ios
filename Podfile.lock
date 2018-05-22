@@ -23,6 +23,7 @@ PODS:
   - GRDB.swift (2.10.0)
   - IGIdenticon (0.5)
   - IHKeyboardAvoiding (4.2)
+  - IQKeyboardManagerSwift (6.0.3)
   - JSONRPCKit (3.0.0):
     - Result (~> 3.2.0)
   - KeychainAccess (3.1.1)
@@ -133,6 +134,7 @@ DEPENDENCIES:
   - GRDB.swift
   - IGIdenticon
   - IHKeyboardAvoiding
+  - IQKeyboardManagerSwift
   - JSONRPCKit
   - KeychainAccess
   - Kingfisher
@@ -192,6 +194,7 @@ SPEC REPOS:
     - GRDB.swift
     - IGIdenticon
     - IHKeyboardAvoiding
+    - IQKeyboardManagerSwift
     - JSONRPCKit
     - KeychainAccess
     - Kingfisher
@@ -274,6 +277,7 @@ SPEC CHECKSUMS:
   GRDB.swift: 9859cab1b990eac62ee550d3d2208ec1b44f76af
   IGIdenticon: 0f8fa2c776e35d4cb204bedbc5005ef748b263d8
   IHKeyboardAvoiding: 9fbf816b7c3c84911964802ff110d12caf40ebef
+  IQKeyboardManagerSwift: 04e8679f85e496bb2c474eeb9284052f1b3c391c
   JSONRPCKit: 50e0dc5e7f873e87f81562feb8836b7d1974da6d
   KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
   Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
@@ -320,6 +324,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 33386c55fe481f6c2b40250324798d4199469b46
 
-PODFILE CHECKSUM: ade52a45c58409e4b7cd2cf24047c3581764483d
+PODFILE CHECKSUM: 6245d1726566fbe28112affe784a298d4e07d69e
 
 COCOAPODS: 1.5.2

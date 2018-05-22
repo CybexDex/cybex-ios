@@ -68,6 +68,26 @@ extension EntryViewController {
       guard let `self` = self else { return }
       
       self.coordinator?.switchToRegister()
-    })
+    }).disposed(by: disposeBag)
+    
+    self.loginButton.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+      guard let `self` = self else { return }
+      
+      self.startLoading()
+      UserManager.shared.login(self.accountTextField.text!, password: self.passwordTextField.text!) { success in
+        self.endLoading()
+        if success {
+          self.coordinator?.dismiss()
+        }
+        else {
+          let vc = UIAlertController(title: "提示", message: "账号名或者密码错误", preferredStyle: UIAlertControllerStyle.alert)
+          let action = UIAlertAction(title: "确认", style: UIAlertActionStyle.default, handler: nil)
+          vc.addAction(action)
+          self.presentVC(vc)
+        }
+      }
+    }).disposed(by: disposeBag)
   }
+  
+  
 }

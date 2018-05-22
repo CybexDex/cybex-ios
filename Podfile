@@ -21,7 +21,7 @@ def data
     pod 'Locksmith'
     pod 'Then'
     pod 'FCUUID'
-    pod 'IHKeyboardAvoiding'
+    pod 'IQKeyboardManagerSwift'
 end
 
 def resource

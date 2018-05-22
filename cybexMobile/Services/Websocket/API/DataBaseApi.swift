@@ -17,6 +17,31 @@ enum dataBaseCatogery:String {
   case subscribe_to_market
   case get_limit_orders
   case get_balance_objects
+  case get_account_by_name
+}
+
+struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
+  var name:String
+
+  var response: RPCSResponse
+  
+  
+  var method: String {
+    return "call"
+  }
+  
+  var parameters: Any? {
+    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_account_by_name.rawValue, [name]]
+  }
+  
+  func transferResponse(from resultObject: Any) throws -> Any {
+    let result = JSON(resultObject)
+    if let _ = result.dictionaryObject {
+      return true
+    }
+
+    return false
+  }
 }
 
 typealias FullAccount = (account:Account?, balances:[Balance]?, limitOrder:[LimitOrder]?)

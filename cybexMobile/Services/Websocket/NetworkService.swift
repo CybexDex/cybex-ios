@@ -36,6 +36,12 @@ class WebsocketService {
   private var requesting:[String: (String, Any, ()->())] = [:]
 
   private var socket = WebSocket(url: URL(string: NodeURLString.all[0].rawValue)!)
+  var callbackQueue = DispatchQueue.main {
+    didSet {
+      socket.callbackQueue = callbackQueue
+    }
+  }
+
   private var testsockets:[WebSocket] = []
 
   private var batchFactory:BatchFactory!

@@ -14,7 +14,6 @@ protocol RegisterCoordinatorProtocol {
   func pushCreateTip()
   func switchToLogin()
   func confirmRegister()
-  func pincodePresented()
   func dismiss()
 }
 
@@ -40,7 +39,7 @@ class RegisterCoordinator: EntryRootCoordinator {
   let codePresenter: Presentr = {
     let width = ModalSize.custom(size: 272)
     let height = ModalSize.custom(size: 226)
-    let center = ModalCenterPosition.center
+    let center = ModalCenterPosition.custom(centerPoint: CGPoint(x: UIApplication.shared.keyWindow!.width / 2, y: (UIApplication.shared.keyWindow!.height / 2) - 130))
     let customType = PresentationType.custom(width: width, height: height, center: center)
     
     let customPresenter = Presentr(presentationType: customType)
@@ -65,12 +64,8 @@ extension RegisterCoordinator: RegisterCoordinatorProtocol {
   
   func confirmRegister() {
     let vc = R.storyboard.main.noticeBoardViewController()!
+    vc.coordinator = self
     self.rootVC.topViewController?.customPresentViewController(presenter, viewController: vc, animated: true, completion: nil)
-  }
-  
-  func pincodePresented() {
-    let vc = R.storyboard.main.pinCodeViewController()!
-    self.rootVC.topViewController?.customPresentViewController(codePresenter, viewController: vc, animated: true, completion: nil)
   }
   
   func switchToLogin() {

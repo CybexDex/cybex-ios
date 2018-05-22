@@ -16,7 +16,8 @@ import EZSwiftExtensions
 class SettingViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
 
-	var coordinator: (SettingCoordinatorProtocol & SettingStateManagerProtocol)?
+    @IBOutlet weak var logoutView: Button!
+    var coordinator: (SettingCoordinatorProtocol & SettingStateManagerProtocol)?
 
 	override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,8 +28,19 @@ class SettingViewController: BaseViewController {
     }
 
     self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, w: self.tableView.bounds.size.width, h: 0.01))
-
+    self.tableView.tableFooterView?.height = 68
+    
     setupNotification()
+    
+    if !UserManager.shared.isLoginIn{
+      self.logoutView.isHidden = true
+    }
+    self.logoutView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+      guard let `self` = self else { return }
+      
+      UserManager.shared.logout()
+      self.coordinator?.dismiss()
+    }).disposed(by: disposeBag)
   }
   
   override func viewWillAppear(_ animated: Bool) {

@@ -47,6 +47,7 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair:Pair) -> OrderBook {
   
   for order in orders {
     let sellPrice_base = order.sellPrice.base
+    
     if sellPrice_base.assetID == pair.base {
       let percent = bids_total_amount[0...bids.count].reduce(0, +) / bids_total_amount.reduce(0, +)
       
