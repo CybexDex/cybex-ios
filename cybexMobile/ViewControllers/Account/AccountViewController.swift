@@ -46,14 +46,25 @@ class AccountViewController: BaseViewController {
   @IBOutlet weak var loginArrowImgView: UIImageView!
   @IBOutlet weak var accountImageView: UIImageView!
   
-    @IBOutlet weak var balanceRMB: UILabel!
-    
-    @IBOutlet weak var bgImageView: UIImageView!
-    
-
-    @IBOutlet weak var introduceCybex: UILabel!
-    
+  @IBOutlet weak var balanceRMB: UILabel!
+  
+  @IBOutlet weak var bgImageView: UIImageView!
+  
+  
+  @IBOutlet weak var introduceCybex: UILabel!
+  
+  @IBOutlet weak var balanceIntroduce: UIImageView!
   var coordinator: (AccountCoordinatorProtocol & AccountStateManagerProtocol)?
+  
+  var balanceIntroduceView : BalanceIntroduceView {
+    get{
+      let biView = BalanceIntroduceView(frame: UIScreen.main.bounds)
+      UIApplication.shared.keyWindow?.addSubview(biView)
+      return biView
+    }
+  }
+  
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -61,7 +72,7 @@ class AccountViewController: BaseViewController {
     setupUI()
     setupEvent()
   }
-
+  
   
   
   // UI的初始化设置
@@ -69,6 +80,13 @@ class AccountViewController: BaseViewController {
     self.automaticallyAdjustsScrollViewInsets = false
     self.localized_text = R.string.localizable.accountTitle.key.localizedContainer()
     configRightNavButton()
+    balanceIntroduce.image = UIImage(named: "cloudWallet")?.withColor(.steel)
+    self.balanceIntroduce.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self](tap) in
+      
+      guard let `self` = self else {return}
+      let _ = self.balanceIntroduceView
+      
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   
   func setupEvent() {
@@ -99,13 +117,7 @@ class AccountViewController: BaseViewController {
       loginArrowImgView.image = UIImage(named: "ic_arrow_forward_16px")?.withColor(ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo)
       bgImageView.isHidden    = false
       
-      let introduce = R.string.localizable.accountIntroduce.key.localized()
-      let attributeString = NSMutableAttributedString(string: introduce)
-      let paragraphStyle = NSMutableParagraphStyle()
-      paragraphStyle.lineSpacing = 10.0
-      attributeString.addAttribute(NSAttributedStringKey.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributeString.length))
-      attributeString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.steel, range: NSMakeRange(0, attributeString.length))
-      introduceCybex.attributedText = attributeString
+      introduceCybex.styledText = R.string.localizable.accountIntroduce.key.localized()
       
     case .unPortfolio:
       tags = [view_type.login_view.rawValue,view_type.introduce_view.rawValue,view_type.yourPortfolio_view.rawValue]
@@ -113,7 +125,7 @@ class AccountViewController: BaseViewController {
         stackView.viewWithTag(tag)?.isHidden = true
       }
       bgImageView.isHidden    = true
-
+      
     case .normalState:
       tags = [view_type.login_view.rawValue,view_type.introduce_view.rawValue]
       for tag in [1,2]{
@@ -148,8 +160,8 @@ class AccountViewController: BaseViewController {
     
     let isSuper = UserManager.shared.account.value?.superMember ?? false
     memberLevel.localized_text = isSuper ? R.string.localizable.accountSuperMember.key.localizedContainer() :  R.string.localizable.accountBasicMember.key.localizedContainer()
-    totalBalance.text = UserManager.shared.balance.toString
-
+    totalBalance.text = UserManager.shared.balance.toString.formatCurrency(digitNum: 5)
+    
     if let ethAmount = changeToETHAndCYB("1.3.0").eth.toDouble(){
       balanceRMB.text   = "≈¥" + String(UserManager.shared.balance * ethAmount * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
     }
@@ -186,7 +198,7 @@ class AccountViewController: BaseViewController {
     setupUIWithStatus(user_type.normalState)
     updataView(true)
     
-    portfolioView.data = UserManager.shared.balances.value
+    portfolioView.data = UserManager.shared.getPortfolioDatas()
   }
   
   override func configureObserveState() {

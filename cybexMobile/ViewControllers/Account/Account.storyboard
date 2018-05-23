@@ -18,9 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lQm-b5-7fW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="104" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="lQm-b5-7fW">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                         <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -162,6 +162,10 @@
                                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                                                 <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="introduce_normal"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="locali" value="account.introduce"/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
                                                         <constraints>
@@ -249,10 +253,19 @@
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="locali" value="account.yourTotalBalance"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
+                                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloudWallet" translatesAutoresizingMaskIntoConstraints="NO" id="YFu-p3-rFq">
+                                                                <rect key="frame" x="38.5" y="-4" width="24" height="24"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="24" id="JWN-Yf-kR7"/>
+                                                                    <constraint firstAttribute="width" constant="24" id="to0-i6-eB1"/>
+                                                                </constraints>
+                                                            </imageView>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstItem="55B-LQ-xww" firstAttribute="leading" secondItem="TvZ-dP-jV6" secondAttribute="leading" constant="25" id="2bI-3u-cPD"/>
+                                                            <constraint firstItem="YFu-p3-rFq" firstAttribute="leading" secondItem="55B-LQ-xww" secondAttribute="trailing" constant="2" id="CQk-FS-J7m"/>
                                                             <constraint firstItem="55B-LQ-xww" firstAttribute="top" secondItem="TvZ-dP-jV6" secondAttribute="top" id="arU-Ss-NAv"/>
+                                                            <constraint firstItem="YFu-p3-rFq" firstAttribute="centerY" secondItem="55B-LQ-xww" secondAttribute="centerY" id="bDj-6i-6ie"/>
                                                             <constraint firstAttribute="bottom" secondItem="55B-LQ-xww" secondAttribute="bottom" id="zj2-4O-d6c"/>
                                                         </constraints>
                                                     </view>
@@ -283,6 +296,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="m7j-ei-f4Q" secondAttribute="bottom" constant="14" id="1mH-Vn-W5r"/>
                                                             <constraint firstItem="9Qu-fC-mgm" firstAttribute="leading" secondItem="m7j-ei-f4Q" secondAttribute="trailing" constant="10" id="4b2-53-xwa"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Qu-fC-mgm" secondAttribute="trailing" constant="10" id="FdB-oc-20C"/>
                                                             <constraint firstItem="9Qu-fC-mgm" firstAttribute="baseline" secondItem="m7j-ei-f4Q" secondAttribute="baseline" id="LeA-Ln-tPS"/>
                                                             <constraint firstItem="m7j-ei-f4Q" firstAttribute="top" secondItem="INX-EI-F0O" secondAttribute="top" id="iTD-L3-wPC"/>
                                                             <constraint firstItem="m7j-ei-f4Q" firstAttribute="leading" secondItem="INX-EI-F0O" secondAttribute="leading" constant="25" id="snq-yK-6Xs"/>
@@ -346,6 +360,7 @@
                     </view>
                     <connections>
                         <outlet property="accountImageView" destination="hJ8-ax-BgI" id="ZXT-qM-EYQ"/>
+                        <outlet property="balanceIntroduce" destination="YFu-p3-rFq" id="C8r-So-vF5"/>
                         <outlet property="balanceRMB" destination="9Qu-fC-mgm" id="zn5-Cv-OJ8"/>
                         <outlet property="bgImageView" destination="d1Q-u1-Y84" id="WC3-WL-nEt"/>
                         <outlet property="introduceCybex" destination="8wY-Fh-vlG" id="YjB-6D-yxT"/>
@@ -482,6 +497,7 @@
     <resources>
         <image name="accountAvatar" width="56" height="56"/>
         <image name="account_bg_light" width="375" height="553"/>
+        <image name="cloudWallet" width="24" height="24"/>
         <image name="icArrowForward16Px" width="16" height="16"/>
     </resources>
 </document>

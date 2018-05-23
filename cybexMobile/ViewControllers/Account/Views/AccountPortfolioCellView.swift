@@ -13,25 +13,14 @@ class AccountPortfolioCellView: UIView{
   
   var data: Any? {
     didSet {
-      guard let balance = data as? Balance else { return }
+      guard let portfolio = data as? PortfolioData else { return }
       
-      let iconString = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"
-      self.icon.kf.setImage(with: URL(string: iconString))
-      
-      name.text   = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
-      // 获得自己的个数
-      realAmount.text = getRealAmount(balance.asset_type, amount: balance.balance).toString
-        
-      // 获取对应CYB的个数
-      let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "" ? "--" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.text?.toDouble())!)
-      
-      cybPrice.text  = amountCYB + " CYB"
-      
-      if let cybCount = amountCYB.toDouble() {
-        price.text    = "≈¥" + String(cybCount * changeToETHAndCYB("1.3.0").eth.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
-      }else{
-        price.text    = "--"
-      }
+      self.icon.kf.setImage(with: URL(string: portfolio.icon))
+      name.text   = portfolio.name
+      realAmount.text = portfolio.realAmount
+      cybPrice.text  = portfolio.cybPrice
+      price.text  = portfolio.rbmPrice
+
     }
   }
   

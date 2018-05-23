@@ -240,6 +240,11 @@ extension NSObject {
     if picker is LocalizedValueContainer {
       let setLocalizedText = unsafeBitCast(method(for: sel), to: setLocalizedTextIMP.self)
       setLocalizedText(self, sel, (value as! String).localized())
+      
+      //Compatible Swift Rich String
+      if let label = self as? UILabel, let _ = label.styleName {
+        label.styledText = label.text
+      }
     }
     else if let statePicker = picker as? StateValueContainer {
       let setState = unsafeBitCast(method(for: sel), to: setLocalizedTextForStateIMP.self)

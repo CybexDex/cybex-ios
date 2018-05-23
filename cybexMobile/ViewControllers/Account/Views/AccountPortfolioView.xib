@@ -36,7 +36,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KbL-c8-lyW">
                             <rect key="frame" x="46" y="0.0" width="329" height="44"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icArrowForward16Px" translatesAutoresizingMaskIntoConstraints="NO" id="r0P-hw-j32">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_arrow_forward_16px" translatesAutoresizingMaskIntoConstraints="NO" id="r0P-hw-j32">
                                     <rect key="frame" x="292" y="16" width="16" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="16" id="SFi-zo-bVa"/>
@@ -45,7 +45,7 @@
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cag-0u-EoQ">
                                     <rect key="frame" x="275" y="12" width="13" height="24"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                     <userDefinedRuntimeAttributes>
@@ -77,7 +77,7 @@
                     <rect key="frame" x="0.0" y="44" width="375" height="124"/>
                     <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="8" id="5GH-PW-Ism">
-                        <size key="itemSize" width="232" height="118"/>
+                        <size key="itemSize" width="218" height="118"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="13" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -111,6 +111,6 @@
         </view>
     </objects>
     <resources>
-        <image name="icArrowForward16Px" width="16" height="16"/>
+        <image name="ic_arrow_forward_16px" width="16" height="16"/>
     </resources>
 </document>

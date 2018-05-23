@@ -26,6 +26,8 @@ class MarketViewController: BaseViewController {
   @IBOutlet weak var detailView: PairDetailView!
   @IBOutlet weak var kLineView: CBKLineView!
   
+    @IBOutlet weak var marketDetailView: PairDetailView!
+    
   var currentBaseIndex:Int = 0
   
   var timeGap:candlesticks = .one_day {
@@ -80,10 +82,12 @@ class MarketViewController: BaseViewController {
     let quote_name = homeBucket.quote_info.symbol.filterJade
     let base_name = homeBucket.base_info.symbol.filterJade
     
-      self.title = quote_name + "/" + base_name
+    self.title = quote_name + "/" + base_name
     self.view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
     automaticallyAdjustsScrollViewInsets = false
-
+        self.marketDetailView.base_name = base_name
+        self.marketDetailView.quote_name = quote_name
+        
     configLeftNavButton(nil)
     setupPageView()
 

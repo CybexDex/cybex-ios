@@ -16,7 +16,7 @@ class AccountPortfolioView:UIView{
   
   var data: Any? {
     didSet {
-      if let _ = data as? [Balance] {
+      if let _ = data as? [PortfolioData] {
         collectionView.reloadData()
       }
     }
@@ -84,15 +84,15 @@ class AccountPortfolioView:UIView{
 
 extension AccountPortfolioView : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    let balances = data as? [Balance] ?? []
+    let balances = data as? [PortfolioData] ?? []
     
     return balances.count
   }
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String.init(describing: AccountPortfolioCell.self), for: indexPath) as! AccountPortfolioCell
-    let balances = data as? [Balance] ?? []
+    let portfolios = data as? [PortfolioData] ?? []
 
-    cell.setup(balances[indexPath.row])
+    cell.setup(portfolios[indexPath.row])
     return cell
   }
   

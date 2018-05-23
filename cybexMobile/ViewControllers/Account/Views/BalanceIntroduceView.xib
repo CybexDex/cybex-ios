@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BalanceIntroduceView" customModule="cybexMobile" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ir2-36-MJ9">
+                    <rect key="frame" x="51" y="125" width="273" height="169"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXY-he-R26">
+                            <rect key="frame" x="0.0" y="0.0" width="273" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="fjz-45-jAe"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="balance_introduce_title"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQo-8b-JjM">
+                            <rect key="frame" x="18" y="60" width="237" height="17"/>
+                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                            <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="balance_introduce"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="introduce"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QrT-rq-iM2">
+                            <rect key="frame" x="18" y="97" width="237" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="68R-xW-mA7"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="--" backgroundImage="btnColorOrange">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="balance_ensuer"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="ensureAction:" destination="-1" eventType="touchUpInside" id="yOO-tb-GBl"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.97999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="eXY-he-R26" firstAttribute="top" secondItem="ir2-36-MJ9" secondAttribute="top" id="7zn-dw-vg2"/>
+                        <constraint firstItem="aQo-8b-JjM" firstAttribute="leading" secondItem="ir2-36-MJ9" secondAttribute="leading" constant="18" id="9sE-7i-0Hh"/>
+                        <constraint firstItem="eXY-he-R26" firstAttribute="leading" secondItem="ir2-36-MJ9" secondAttribute="leading" id="GSV-eI-ckL"/>
+                        <constraint firstAttribute="trailing" secondItem="QrT-rq-iM2" secondAttribute="trailing" constant="18" id="IsV-GV-tvv"/>
+                        <constraint firstItem="QrT-rq-iM2" firstAttribute="top" secondItem="aQo-8b-JjM" secondAttribute="bottom" constant="20" id="LQj-Ii-CR1"/>
+                        <constraint firstAttribute="bottom" secondItem="QrT-rq-iM2" secondAttribute="bottom" constant="24" id="cZ9-f5-6SM"/>
+                        <constraint firstAttribute="trailing" secondItem="aQo-8b-JjM" secondAttribute="trailing" constant="18" id="drH-UX-icH"/>
+                        <constraint firstAttribute="trailing" secondItem="eXY-he-R26" secondAttribute="trailing" id="gjz-kv-Oit"/>
+                        <constraint firstItem="aQo-8b-JjM" firstAttribute="top" secondItem="eXY-he-R26" secondAttribute="bottom" constant="10" id="t60-KR-EzW"/>
+                        <constraint firstItem="QrT-rq-iM2" firstAttribute="leading" secondItem="ir2-36-MJ9" secondAttribute="leading" constant="18" id="yrc-6B-FpF"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ir2-36-MJ9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="51" id="6Is-CM-7j1"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ir2-36-MJ9" secondAttribute="trailing" constant="51" id="TcX-Nf-sOK"/>
+                <constraint firstItem="ir2-36-MJ9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="105" id="jmg-Hz-meF"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="95n-cv-duo">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        </imageView>
+    </objects>
+    <resources>
+        <image name="btnColorOrange" width="349" height="48"/>
+    </resources>
+</document>

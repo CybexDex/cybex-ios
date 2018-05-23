@@ -1,25 +1,23 @@
 //
-//  LockupAssetsSectionView.swift
+//  BalanceIntroduceView.swift
 //  cybexMobile
 //
-//  Created by DKM on 2018/5/15.
+//  Created by DKM on 2018/5/23.
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
 import UIKit
 
-class LockupAssetsSectionView: UIView{
+class BalanceIntroduceView: UIView {
   
-  var data: Any? {
-    didSet {
-      
-    }
+  @IBAction func ensureAction(_ sender: UIButton) {
+    
+    self.removeFromSuperview()
   }
-
+  
   fileprivate func setup() {
     
   }
-  @IBOutlet weak var cybPriceTitle: UILabel!
   
   override var intrinsicContentSize: CGSize {
     return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
@@ -63,5 +61,4 @@ class LockupAssetsSectionView: UIView{
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
-  
 }

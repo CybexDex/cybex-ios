@@ -2,7 +2,7 @@
 //  UIColor+Additions.swift
 //  Cybex IOS
 //
-//  Generated on Zeplin. (2018/5/19).
+//  Generated on Zeplin. (2018/5/23).
 //  Copyright (c) 2018 __MyCompanyName__. All rights reserved.
 //
 
@@ -22,10 +22,6 @@ extension UIColor {
     return UIColor(white: 1.0, alpha: 1.0)
   }
 
-  @nonobjc class var white30: UIColor {
-    return UIColor(white: 1.0, alpha: 0.3)
-  }
-  
   @nonobjc class var pastelOrange: UIColor {
     return UIColor(red: 254.0 / 255.0, green: 155.0 / 255.0, blue: 85.0 / 255.0, alpha: 1.0)
   }
@@ -38,10 +34,6 @@ extension UIColor {
     return UIColor(red: 120.0 / 255.0, green: 129.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0)
   }
 
-  @nonobjc class var steel30: UIColor {
-    return UIColor(red: 120.0 / 255.0, green: 129.0 / 255.0, blue: 154.0 / 255.0, alpha: 0.3)
-  }
-  
   @nonobjc class var dark: UIColor {
     return UIColor(red: 23.0 / 255.0, green: 29.0 / 255.0, blue: 42.0 / 255.0, alpha: 1.0)
   }
@@ -112,6 +104,22 @@ extension UIColor {
 
   @nonobjc class var steel11: UIColor {
     return UIColor(red: 120.0 / 255.0, green: 129.0 / 255.0, blue: 154.0 / 255.0, alpha: 0.11)
+  }
+
+  @nonobjc class var dark20: UIColor {
+    return UIColor(red: 23.0 / 255.0, green: 29.0 / 255.0, blue: 42.0 / 255.0, alpha: 0.2)
+  }
+
+  @nonobjc class var white98: UIColor {
+    return UIColor(white: 1.0, alpha: 0.98)
+  }
+
+  @nonobjc class var steel10: UIColor {
+    return UIColor(red: 120.0 / 255.0, green: 129.0 / 255.0, blue: 154.0 / 255.0, alpha: 0.1)
+  }
+
+  @nonobjc class var steel30: UIColor {
+    return UIColor(red: 120.0 / 255.0, green: 129.0 / 255.0, blue: 154.0 / 255.0, alpha: 0.3)
   }
 
 }

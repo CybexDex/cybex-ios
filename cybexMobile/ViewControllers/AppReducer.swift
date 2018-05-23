@@ -36,7 +36,7 @@ let TrackingMiddleware: Middleware<Any> = { dispatch, getState in
         
       }
       else if let action = action as? RefreshState {
-//        action.vc?.perform(action.sel)
+       let _ = action.vc?.perform(action.sel)
       }
       
       return next(action)

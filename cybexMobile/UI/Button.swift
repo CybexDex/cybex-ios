@@ -45,9 +45,10 @@ class Button:UIView {
     gradientLayer.frame = self.bounds
     self.button.layer.addSublayer(gradientLayer)
     self.button.isUserInteractionEnabled = false
-    self.button.setBackgroundColor(.steel30, forState: UIControlState.disabled)
+  
+    self.button.setBackgroundColor(.steel, forState: UIControlState.disabled)
     
-    self.button.setTitleColor(.white30, for: UIControlState.disabled)
+    self.button.setTitleColor(.white, for: UIControlState.disabled)
     self.button.setTitleColor(.white, for: UIControlState.normal)
     
     updateView()
