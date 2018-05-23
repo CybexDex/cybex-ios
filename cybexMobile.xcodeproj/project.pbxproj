@@ -308,6 +308,7 @@
 		73E6B2B9208D911D00B015E5 /* fc_bridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B28E208D911A00B015E5 /* fc_bridge.cpp */; };
 		73E6B2BE208D92AB00B015E5 /* BitShareCoordinator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B2BD208D92AB00B015E5 /* BitShareCoordinator.mm */; };
 		73E6B3B42091A81F00B015E5 /* SimpleHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B3B32091A81F00B015E5 /* SimpleHTTPService.swift */; };
+		73E9AB9620B553700083DFD6 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9AB9520B553700083DFD6 /* UIViewController+Extension.swift */; };
 		73EA6D942085C3AC0045A88B /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA6D932085C3AC0045A88B /* Demo.swift */; };
 		73F58FC920AC04EF008A1F79 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F58FC820AC04EF008A1F79 /* Button.swift */; };
 		73F58FCB20AC0589008A1F79 /* Button.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F58FCA20AC0589008A1F79 /* Button.xib */; };
@@ -11740,6 +11741,7 @@
 		73E6B2BC208D91C100B015E5 /* BitShareCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitShareCoordinator.h; sourceTree = "<group>"; };
 		73E6B2BD208D92AB00B015E5 /* BitShareCoordinator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BitShareCoordinator.mm; sourceTree = "<group>"; };
 		73E6B3B32091A81F00B015E5 /* SimpleHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHTTPService.swift; sourceTree = "<group>"; };
+		73E9AB9520B553700083DFD6 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		73EA6D932085C3AC0045A88B /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		73F58FC820AC04EF008A1F79 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		73F58FCA20AC0589008A1F79 /* Button.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Button.xib; sourceTree = "<group>"; };
@@ -31145,6 +31147,7 @@
 				73D9779E205652BA00CB7DE1 /* UIView+Extensions.swift */,
 				73A2936E20AA853600893053 /* Theme_Extensions.swift */,
 				73A2937020AA855100893053 /* Localization_Extensions.swift */,
+				73E9AB9520B553700083DFD6 /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -31731,6 +31734,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBRetainCycleDetector/FBRetainCycleDetector.framework",
 				"${BUILT_PRODUCTS_DIR}/FCUUID/FCUUID.framework",
 				"${BUILT_PRODUCTS_DIR}/GRDB.swift/GRDB.framework",
+				"${BUILT_PRODUCTS_DIR}/Guitar/Guitar.framework",
 				"${BUILT_PRODUCTS_DIR}/IHKeyboardAvoiding/IHKeyboardAvoiding.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONRPCKit/JSONRPCKit.framework",
@@ -31797,6 +31801,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBRetainCycleDetector.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FCUUID.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Guitar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IHKeyboardAvoiding.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONRPCKit.framework",
@@ -32019,6 +32024,7 @@
 				72C100FC20A984F70059FEE8 /* OpenedOrdersViewController.swift in Sources */,
 				721F5C6C20AAE7C80042488F /* LockupAssetsSectionView.swift in Sources */,
 				73BDCA4C206269A7009E67A3 /* Tools.swift in Sources */,
+				73E9AB9620B553700083DFD6 /* UIViewController+Extension.swift in Sources */,
 				73D63496206208D8000EB324 /* JsonRPCGenerator.swift in Sources */,
 				73A0CC2F2068EB5E00463ADE /* AppCoordinator+StateManager.swift in Sources */,
 				73D34E452063A675008C7507 /* AccountViewController.swift in Sources */,

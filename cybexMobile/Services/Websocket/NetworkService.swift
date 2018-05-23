@@ -360,10 +360,10 @@ extension WebsocketService: WebSocketDelegate {
   func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
     let data = JSON(parseJSON:text)
     
-    if let error = data["error"].dictionary {
-      print(error)
-      return
-    }
+//    if let error = data["error"].dictionary {
+//      print(error)
+//      return
+//    }
     
     guard let id = data["id"].int else {
       if let method = data["method"].string, method == "notice", let params = data["params"].array, let mID = params[0].int {

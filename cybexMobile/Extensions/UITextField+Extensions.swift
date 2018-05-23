@@ -92,14 +92,15 @@ class ImageTextField: UITextField {
       imageView.tintColor = color
       rightView = imageView
       
-      let activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-      activityView.frame = imageView.bounds
-      activityView.activityIndicatorViewStyle = ThemeManager.currentThemeIndex == 0 ? .white : .gray
-      activityView.startAnimating()
-      rightView?.addSubview(activityView)
-      self.activityView = activityView
-      self.activityView?.isHidden = true
-      
+      if self.activityView == nil {
+        let activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityView.frame = imageView.bounds
+        activityView.activityIndicatorViewStyle = ThemeManager.currentThemeIndex == 0 ? .white : .gray
+        activityView.startAnimating()
+        rightView?.addSubview(activityView)
+        self.activityView = activityView
+        self.activityView?.isHidden = true
+      }
     } else {
       rightViewMode = UITextFieldViewMode.never
       rightView = nil

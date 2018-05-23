@@ -7,17 +7,33 @@
 //
 
 import Foundation
+import RxCocoa
+import SwiftTheme
 
 class NoticeBoardView: UIView {
+  enum event:String {
+    case confirm
+  }
+  
+  @IBOutlet weak var textView: UITextView!
+  @IBOutlet weak var confirm: Button!
+  
   var data: Any? {
     didSet {
-      
+      if let password = data as? String {
+        self.textView.text = R.string.localizable.registerConfirm.key.localized().replacingOccurrences(of: "<password></password>", with: "<password>\(password)</password>")
+      }
     }
   }
   
   
   fileprivate func setup() {
-    
+    self.confirm.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+      guard let `self` = self else { return }
+      
+      self.next?.sendEventWith(event.confirm.rawValue, userinfo: ["data": self.data ?? []])
+      
+    }).disposed(by: disposeBag)
   }
   
   override var intrinsicContentSize: CGSize {
@@ -62,5 +78,5 @@ class NoticeBoardView: UIView {
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
-
+  
 }

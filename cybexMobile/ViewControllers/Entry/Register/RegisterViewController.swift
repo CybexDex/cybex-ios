@@ -31,10 +31,22 @@ class RegisterViewController: BaseViewController {
   @IBOutlet weak var codeTextField: ImageTextField!
   
   @IBOutlet weak var macawView: MacawView!
-  
+    @IBOutlet weak var errorStackView: UIStackView!
+    @IBOutlet weak var errorMessage: UILabel!
+    
   var timer:Repeater?
   
   var pinID:String = ""
+  var userNameValid = false {
+    didSet {
+      if userNameValid , let password = self.passwordTextField.text, password.length > 0 , self.passwordTextField.text == self.confirmPasswordTextField.text, let code = self.codeTextField.text, code.length == 4 {
+        self.registerButton.isEnable = true
+      }
+      else {
+        self.registerButton.isEnable = false
+      }
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -60,8 +72,6 @@ class RegisterViewController: BaseViewController {
       }
     }
   }
-  
-
   
   func setupUI() {
     accountTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
@@ -108,6 +118,123 @@ class RegisterViewController: BaseViewController {
 
 extension RegisterViewController {
   func setupEvent() {
+//    NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidChange, object: accountTextField, queue: nil) {[weak self] (notifi) in
+//      self?.errorStackView.isHidden = true
+//      self?.accountTextField.activityView?.isHidden = true
+//      self?.accountTextField.tailImage = nil
+//      self?.userNameValid = false
+//
+//      guard let name = self?.accountTextField.text, name.count > 0 else {
+//        self?.errorStackView.isHidden = true
+//        return
+//      }
+//
+//      let (passed, message) = UserManager.shared.validateUserName(name)
+//
+//      if !passed {
+//        self?.errorStackView.isHidden = false
+//        self?.errorMessage.text = message
+//      }
+//      else {
+//        self?.errorStackView.isHidden = true
+//
+//        self?.accountTextField.activityView?.isHidden = false
+//        UserManager.shared.checkUserName(name).done({ (exist) in
+//          main {
+//            self?.accountTextField.activityView?.isHidden = true
+//            if !exist {
+//              self?.accountTextField.tailImage = #imageLiteral(resourceName: "check_complete")
+//              self?.userNameValid = true
+//            }
+//            else {
+//              self?.errorStackView.isHidden = false
+//              self?.errorMessage.text = R.string.localizable.accountValidateError1.key.localized()
+//            }
+//          }
+//        }).cauterize()
+//      }
+//    }
+//
+//    let passwordValid = self.passwordTextField.rx.text.orEmpty.map({ $0.count > 11}).share(replay: 1)
+//    let confirmPasswordValid = self.confirmPasswordTextField.rx.text.orEmpty.map({ $0.count > 11}).share(replay: 1)
+//
+//    passwordValid.subscribe(onNext: {[weak self] (validate) in
+//      guard let `self` = self else { return }
+//
+//      if validate {
+//        self.passwordTextField.tailImage = #imageLiteral(resourceName: "check_complete")
+//        if self.userNameValid {
+//          self.errorStackView.isHidden = true
+//        }
+//      }
+//      else {
+//        if self.userNameValid {
+//          self.errorStackView.isHidden = false
+//          self.errorMessage.text = R.string.localizable.passwordValidateError1.key.localized()
+//        }
+//
+//        self.passwordTextField.tailImage = nil
+//      }
+//
+//      if let confirmText = self.confirmPasswordTextField.text, confirmText.length > 0 && (self.passwordTextField.text != self.confirmPasswordTextField.text) {
+//        if self.userNameValid {
+//          self.errorStackView.isHidden = false
+//          self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
+//        }
+//      }
+//    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+//
+//    confirmPasswordValid.subscribe(onNext: {[weak self] (validate) in
+//      guard let `self` = self else { return }
+//
+//      if !validate {
+//        self.confirmPasswordTextField.tailImage = nil
+//      }
+//      if self.passwordTextField.text == self.confirmPasswordTextField.text {
+//        if self.userNameValid {
+//          self.errorStackView.isHidden = true
+//        }
+//      }
+//      else {
+//        if self.userNameValid {
+//          self.errorStackView.isHidden = false
+//          self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
+//        }
+//      }
+//
+//    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+//
+//    let consistent = Observable.combineLatest(self.passwordTextField.rx.text, self.confirmPasswordTextField.rx.text).map({$0 == $1})
+//
+//
+//    let twoPasswordValid = Observable.combineLatest(passwordValid, confirmPasswordValid, consistent).map({ $0 && $1 && $2})
+//
+//    twoPasswordValid.subscribe(onNext: {[weak self] (validate) in
+//      guard let `self` = self else { return }
+//
+//      if validate {
+//        self.confirmPasswordTextField.tailImage = #imageLiteral(resourceName: "check_complete")
+//      }
+//      else {
+//        self.confirmPasswordTextField.tailImage = nil
+//      }
+//
+//
+//    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+//
+//
+//    Observable.combineLatest(codeTextField.rx.text.orEmpty.map { $0.count == 4 }, accountTextField.rx.text.orEmpty.map { $0.count > 2 }).subscribe(onNext: {[weak self] (validate) in
+//      guard let `self` = self else { return }
+//
+//      if self.accountTextField.tailImage != nil {
+//        self.registerButton.isEnable = true
+//      }
+//      else {
+//        self.registerButton.isEnable = false
+//      }
+//
+//    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
     self.loginTitle.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
       guard let `self` = self else { return }
       
@@ -133,19 +260,14 @@ extension RegisterViewController {
     
     self.registerButton.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] (tap) in
       guard let `self` = self else { return }
-      
+      self.coordinator?.confirmRegister("testpassword123333333333333333333333333333333333333333333")
+
+      return
       self.startLoading()
-      guard let captcha = self.codeTextField.text, let username = self.accountTextField.text, let password = self.passwordTextField.text else {
-        self.endLoading()
-        
-        let vc = UIAlertController(title: "提示", message: "提交信息不足", preferredStyle: UIAlertControllerStyle.alert)
-        let action = UIAlertAction(title: "确认", style: UIAlertActionStyle.default, handler: nil)
-        vc.addAction(action)
-        self.presentVC(vc)
-        
-        return
-      }
       
+      let captcha = self.codeTextField.text ?? ""
+      let username = self.accountTextField.text ?? ""
+      let password = self.passwordTextField.text ?? ""
       async {
         let success = try! await(UserManager.shared.register(self.pinID, captcha: captcha, username: username, password: password))
         
@@ -153,16 +275,12 @@ extension RegisterViewController {
           self.endLoading()
           
           if success {
-            self.coordinator?.dismiss()
+            self.coordinator?.confirmRegister(self.passwordTextField.text!)
           }
           else {
             self.updateSvgView()
             
-            let vc = UIAlertController(title: "提示", message: "注册失败", preferredStyle: UIAlertControllerStyle.alert)
-            let action = UIAlertAction(title: "确认", style: UIAlertActionStyle.default, handler: nil)
-            vc.addAction(action)
-            self.presentVC(vc)
-            
+            self.showAlert(R.string.localizable.registerFail.key.localized(), buttonTitle: R.string.localizable.ok.key.localized())
           }
         }
       }

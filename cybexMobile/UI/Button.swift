@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxCocoa
 
 @IBDesignable
 class Button:UIView {
@@ -19,9 +20,14 @@ class Button:UIView {
     }
   }
   
+  var rx_isEnable:BehaviorRelay<Bool> = BehaviorRelay(value: false) {
+    didSet {
+      self.isEnable = rx_isEnable.value
+    }
+  }
+
   @IBInspectable var isEnable: Bool = false {
     didSet {
-      self.button.isEnabled = isEnable
       updateView()
     }
   }
@@ -35,20 +41,24 @@ class Button:UIView {
   func updateView() {
     if isEnable {
       gradientLayer.isHidden = false
+      self.button.isUserInteractionEnabled = false
+      self.button.setBackgroundColor(.clear, forState: UIControlState.normal)
+      self.button.setTitleColor(.white, for: UIControlState.normal)
     }
     else {
       gradientLayer.isHidden = true
+      self.button.isUserInteractionEnabled = true
+      self.button.setBackgroundColor(.steel30, forState: .normal)
+      self.button.setBackgroundColor(.steel30, forState: .highlighted)
+
+      self.button.setTitleColor(.white30, for: UIControlState.normal)
     }
   }
   
   fileprivate func setup() {
     gradientLayer.frame = self.bounds
+    self.button.isUserInteractionEnabled = true
     self.button.layer.addSublayer(gradientLayer)
-    self.button.isUserInteractionEnabled = false
-    self.button.setBackgroundColor(.steel30, forState: UIControlState.disabled)
-    
-    self.button.setTitleColor(.white30, for: UIControlState.disabled)
-    self.button.setTitleColor(.white, for: UIControlState.normal)
     
     updateView()
   }

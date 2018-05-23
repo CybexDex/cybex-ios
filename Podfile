@@ -22,6 +22,7 @@ def data
     pod 'Then'
     pod 'FCUUID'
     pod 'IQKeyboardManagerSwift'
+    pod 'Guitar'
 end
 
 def resource

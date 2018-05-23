@@ -64,6 +64,23 @@ class EntryViewController: BaseViewController {
 
 extension EntryViewController {
   func setupEvent() {
+    let accountValid = accountTextField.rx.text.orEmpty.map { $0.count > 0 }.share(replay: 1)
+    
+    let passwordValid = passwordTextField.rx.text.orEmpty.map { $0.count > 0}.share(replay: 1)
+    
+    Observable.combineLatest(accountValid, passwordValid) {
+      return $0 && $1
+    }.bind {[weak self] (valid) in
+      guard let `self` = self else { return }
+
+      if valid {
+        self.loginButton.isEnable = true
+      }
+      else {
+        self.loginButton.isEnable = false
+      }
+    }.disposed(by: disposeBag)
+    
     self.createTitle.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
       guard let `self` = self else { return }
       
@@ -80,10 +97,7 @@ extension EntryViewController {
           self.coordinator?.dismiss()
         }
         else {
-          let vc = UIAlertController(title: "提示", message: "账号名或者密码错误", preferredStyle: UIAlertControllerStyle.alert)
-          let action = UIAlertAction(title: "确认", style: UIAlertActionStyle.default, handler: nil)
-          vc.addAction(action)
-          self.presentVC(vc)
+         self.showAlert(R.string.localizable.accountNonMatch.key.localized(), buttonTitle: R.string.localizable.ok.key.localized())
         }
       }
     }).disposed(by: disposeBag)

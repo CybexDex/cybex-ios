@@ -13,7 +13,7 @@ import Presentr
 protocol RegisterCoordinatorProtocol {
   func pushCreateTip()
   func switchToLogin()
-  func confirmRegister()
+  func confirmRegister(_ password:String)
   func dismiss()
 }
 
@@ -62,8 +62,9 @@ extension RegisterCoordinator: RegisterCoordinatorProtocol {
       self.rootVC.pushViewController(vc, animated: true)
   }
   
-  func confirmRegister() {
+  func confirmRegister(_ password:String) {
     let vc = R.storyboard.main.noticeBoardViewController()!
+    vc.password = password
     vc.coordinator = self
     self.rootVC.topViewController?.customPresentViewController(presenter, viewController: vc, animated: true, completion: nil)
   }

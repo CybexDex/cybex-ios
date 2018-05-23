@@ -61,6 +61,20 @@
 "account.superMember"           = "终生会员";
 "account.login"                 = "您好，请登录";
 "account.introduce"             = "CYBEX是一个旨在提高加密资产流动性的去中心化交易所，能够提供更多的透明性、更高的效率性和更好的安全性。";
+"account.nonMatch" = "账户名或者密码错误";
+"ok" = "确认";
+"account.validate.error.1" = "账户名已经被使用";
+"account.validate.error.2" = "账户名必须以字母开头";
+"account.validate.error.3" = "账户名过短/过长";
+"account.validate.error.4" = "账户名需至少包含一个数字或横杠";
+"account.validate.error.5" = "账户名不能包含连续的横杠";
+"account.validate.error.6" = "账户名仅能包含字母、数字、横杠";
+"account.validate.error.7" = "账户必须以字母或数字结尾";
+
+"password.validate.error.1" = "输入12位以上的密码";
+"password.validate.error.2" = "密码不一致";
+"register.fail" = "注册失败";
+"register.confirm" = "当前密码：<password></password>\n• 我明确知晓，一旦忘记密码，我将会失去获取并使用该账户资金的途径\n• 我明确知晓，一旦忘记或丢失了密码，将没有任何人能够帮助我恢复\n• 我已经记录下来，或者用其它方式保存了我的密码\n";
 
 "home_name_vol"                 = "名称/成交量";
 "home_last_price"               = "最新价格";

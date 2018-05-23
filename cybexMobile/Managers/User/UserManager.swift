@@ -15,6 +15,7 @@ import RxCocoa
 import RxSwift
 import PromiseKit
 import AwaitKit
+import Guitar
 
 extension UserManager {
   func login(_ username:String, password:String, completion:@escaping (Bool)->()) {
@@ -68,6 +69,39 @@ extension UserManager {
       WebsocketService.shared.send(request: request)
       
     }
+  }
+  
+  func validateUserName(_ username:String) -> (Bool, String) {
+    if username.length > 63 || username.length < 3 {
+      return (false, R.string.localizable.accountValidateError3.key.localized())
+    }
+    
+    let letterBegin = Guitar(pattern: "^([a-zA-Z])")
+    let containOther = Guitar(pattern: "[1-9+|\\-+]")
+    let continuousDashes = Guitar(pattern: "(\\-\\-)")
+    let dashEnd = Guitar(pattern: "(\\-)$")
+    let legal = Guitar(pattern: "([^a-zA-z1-9\\-])")
+
+    if !letterBegin.test(string: username) {
+      return (false, R.string.localizable.accountValidateError2.key.localized())
+    }
+    
+    if !containOther.test(string: username) {
+      return (false, R.string.localizable.accountValidateError4.key.localized())
+    }
+    
+    if continuousDashes.test(string: username) {
+      return (false, R.string.localizable.accountValidateError5.key.localized())
+    }
+    
+    if dashEnd.test(string: username) {
+      return (false, R.string.localizable.accountValidateError7.key.localized())
+    }
+    
+    if legal.test(string: username) {
+      return (false, R.string.localizable.accountValidateError6.key.localized())
+    }
+    return (true , "")
   }
   
   func checkUserName(_ username:String) -> Promise<Bool> {
@@ -134,7 +168,7 @@ extension UserManager {
     }
   }
   
-  func checkUserNameExist(_ name:String) -> Promise<Bool> {
+  private func checkUserNameExist(_ name:String) -> Promise<Bool> {
     let (promise,seal) = Promise<Bool>.pending()
     
     let request = GetAccountByNameRequest(name: name) { response in

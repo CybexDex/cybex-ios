@@ -549,7 +549,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEnable" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isEnable" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -708,7 +708,7 @@
                                                         <rect key="frame" x="12" y="0.0" width="221" height="48"/>
                                                         <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" textContentType="username"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="image" keyPath="fieldImage" value="ic_pincode_24_px"/>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="locali" value="pin.code"/>
@@ -887,6 +887,8 @@
                         <outlet property="accountTextField" destination="aQb-Vc-IrN" id="gN5-TL-Nsc"/>
                         <outlet property="codeTextField" destination="WPS-pC-BcR" id="cYT-5D-SBT"/>
                         <outlet property="confirmPasswordTextField" destination="WIP-LJ-6Yg" id="zrV-YD-8S6"/>
+                        <outlet property="errorMessage" destination="88d-Sl-shA" id="XgW-ZJ-hOI"/>
+                        <outlet property="errorStackView" destination="kCz-iz-2Gk" id="YNT-pN-h6B"/>
                         <outlet property="loginTitle" destination="sdA-WC-36w" id="95N-Lh-PjK"/>
                         <outlet property="macawView" destination="lcV-7C-Gjt" id="VvZ-UH-TQD"/>
                         <outlet property="passwordTextField" destination="cH2-f1-6Sg" id="6kw-6v-PMj"/>
@@ -1034,6 +1036,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Dly-Li-GXM"/>
                     </view>
+                    <connections>
+                        <outlet property="noticeView" destination="viB-8W-lUx" id="e6d-GS-u9O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUh-eB-BOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
