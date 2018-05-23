@@ -24,7 +24,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uoU-6u-M3A">
                     <rect key="frame" x="0.0" y="0.0" width="272" height="50"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_close_24_px" translatesAutoresizingMaskIntoConstraints="NO" id="QjV-xo-293">
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_close_24_px" translatesAutoresizingMaskIntoConstraints="NO" id="QjV-xo-293">
                             <rect key="frame" x="235" y="17" width="24" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="Dub-jk-XAI"/>
@@ -95,6 +95,9 @@
                         </fragment>
                     </attributedString>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="password"/>
+                    </userDefinedRuntimeAttributes>
                 </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

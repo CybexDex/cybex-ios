@@ -71,7 +71,6 @@ class ImageTextField: UITextField {
   }
   
   func updateView() {
-    
     if let image = fieldImage {
       leftViewMode = UITextFieldViewMode.always
       let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
@@ -83,7 +82,7 @@ class ImageTextField: UITextField {
       leftViewMode = UITextFieldViewMode.never
       leftView = nil
     }
-    
+
     if let image = tailImage {
       rightViewMode = UITextFieldViewMode.always
       let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
@@ -91,7 +90,7 @@ class ImageTextField: UITextField {
       // Note: In order for your image to use the tint color, you have to select the image in the Assets.xcassets and change the "Render As" property to "Template Image".
       imageView.tintColor = color
       rightView = imageView
-      
+
       if self.activityView == nil {
         let activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         activityView.frame = imageView.bounds
@@ -106,7 +105,7 @@ class ImageTextField: UITextField {
       rightView = nil
     }
     // Placeholder text color
-    
+
     attributedPlaceholder = NSAttributedString(string: placeholder != nil ?  placeholder! : "", attributes:[NSAttributedStringKey.foregroundColor: color])
   }
   

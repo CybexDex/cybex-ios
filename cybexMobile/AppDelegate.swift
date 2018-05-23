@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     IQKeyboardManager.shared.enable = true
     IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     
-    RichStyle.init()
+    _ = RichStyle.init()
 
 
 

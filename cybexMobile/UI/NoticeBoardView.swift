@@ -21,7 +21,9 @@ class NoticeBoardView: UIView {
   var data: Any? {
     didSet {
       if let password = data as? String {
-        self.textView.text = R.string.localizable.registerConfirm.key.localized().replacingOccurrences(of: "<password></password>", with: "<password>\(password)</password>")
+        let str = R.string.localizable.registerConfirm.key.localized().replacingOccurrences(of: "<password></password>", with: "<password>\(password)</password>")
+        
+        self.textView.styledText = str
       }
     }
   }
