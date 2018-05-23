@@ -80,7 +80,11 @@
 "home_last_price"               = "最新价格";
 "home_change"                   = "24h涨跌幅";
 
+"asset_mount"                   = "资产/数量";
+"progress_expiration"           = "进度/到期时间";
+"cyb_value"                     = "最新市值(CYB)";
 
-
-
+"balance_introduce"             = "这是你所有资产的估值，包含了在界面中设置了隐藏的资产、委单中的资产、债仓及抵押物。估值采用实时获得的区块链上的价格，可能不那么精确。";
+"balance_introduce_title"       = "账户总余额";
+"balance_ensuer"                = "我知道了";
 

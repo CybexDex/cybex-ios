@@ -31,7 +31,9 @@ class HomePairView: UIView {
   @IBOutlet weak var rbmL: UILabel!
   @IBOutlet weak var high_lowContain: UIView!
   
-  var base:String!
+    @IBOutlet weak var icon: UIImageView!
+    
+    var base:String!
   var quote:String!
   var data: Any? {
     didSet {
@@ -53,9 +55,21 @@ class HomePairView: UIView {
         let matrix = BucketMatrix(markets)
         
         DispatchQueue.main.async {
-          self.volume.text = "V: " + matrix.base_volume
+          //
+          
+          self.icon.kf.setImage(with: URL(string: matrix.icon))
+
+          if let _ = matrix.base_volume.toDouble(){
+            self.volume.text = markets.quote_info.symbol.filterJade + ": " + matrix.quote_volume.formatCurrency(digitNum: 2)
+            
+          }else{
+            let subString = matrix.quote_volume.substring(from: 0, length: matrix.quote_volume.length - 1)
+            
+            self.volume.text = markets.quote_info.symbol.filterJade + ": " + (subString?.formatCurrency(digitNum: 2))! + matrix.quote_volume.substring(from: matrix.quote_volume.length - 1, length: 1)!
+          }
+          
           self.price.text = matrix.price
-          self.bulking.text = (matrix.incre == .greater ? "+" : "") + matrix.change + "%"
+          self.bulking.text = ((matrix.incre == .greater ? "+" : "") + matrix.change).formatCurrency(digitNum: 2) + "%"
           self.high_lowContain.backgroundColor = matrix.incre.color()
         
           let (eth,_) = changeToETHAndCYB(markets.quote_info.id)

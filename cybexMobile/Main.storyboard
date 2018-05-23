@@ -1170,6 +1170,7 @@
                     <connections>
                         <outlet property="detailView" destination="qdl-dg-mGm" id="Sfc-hA-SzB"/>
                         <outlet property="kLineView" destination="7lw-Ew-2wL" id="cRK-JE-v07"/>
+                        <outlet property="marketDetailView" destination="qdl-dg-mGm" id="UAm-nc-Ni5"/>
                         <outlet property="pageContentView" destination="ycn-3R-A7g" id="jfr-qo-nHM"/>
                         <outlet property="pageContentViewHeight" destination="Atp-l9-2xI" id="y1s-YT-TMU"/>
                         <outlet property="pageTitleView" destination="sja-Ii-vIq" id="ZcO-YG-BPR"/>

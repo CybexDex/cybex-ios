@@ -16,6 +16,12 @@ class YourPorfolioView:  UIView{
   @IBOutlet weak var amount: UILabel!
   @IBOutlet weak var price: UILabel!
   
+  @IBOutlet weak var cybAmount: UILabel!
+  
+  @IBOutlet weak var rmbPrice: UILabel!
+  
+  
+  
   // 如果是CYB 就不显示的下层view
   @IBOutlet weak var high_low_view: UIView!
   @IBOutlet weak var price_cyb: UILabel!
@@ -30,23 +36,27 @@ class YourPorfolioView:  UIView{
         let iconString = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"
         self.icon.kf.setImage(with: URL(string: iconString))
         
-        name.text = app_data.assetInfo[balance.asset_type]?.symbol ?? "--"
+        name.text = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
         
         amount.text = getRealAmount(balance.asset_type, amount: balance.balance).toString
-        let rmb = changeToETHAndCYB(balance.asset_type).eth.toDouble() ?? 0
+        
+        let source =  changeToETHAndCYB(balance.asset_type)
+        
+
+        let rmb = source.eth.toDouble() ?? 0
         
         if rmb == 0 {
-          price.text = "--"
+          rmbPrice.text = "--"
         }else{
-          price.text = String(rmb * (amount.text?.toDouble())! * app_state.property.eth_rmb_price)
+          rmbPrice.text = "≈¥" + String(rmb * (amount.text?.toDouble())! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
         }
         
-        let cyb  = changeToETHAndCYB(balance.asset_type).cyb.toDouble() ?? 0
+        let cyb  = source.cyb.toDouble() ?? 0
         
         if cyb == 0 {
-          price_cyb.text = "--"
+          cybAmount.text = "--"
         }else{
-          price_cyb.text = String(cyb)
+          cybAmount.text = String(cyb * (amount.text?.toDouble())!).formatCurrency(digitNum: 5)
         }
         
         let buckets = app_data.data.value.filter { (homebucket) -> Bool in

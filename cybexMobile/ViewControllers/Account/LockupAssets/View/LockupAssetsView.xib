@@ -59,9 +59,9 @@
                     <color key="textColor" red="1" green="0.56899999999999995" blue="0.26300000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QiX-uX-y6v" customClass="LockupProgressView" customModule="cybexMobile" customModuleProvider="target">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QiX-uX-y6v" customClass="LockupProgressView" customModule="cybexMobile" customModuleProvider="target">
                     <rect key="frame" x="296" y="60.5" width="67" height="3"/>
-                    <color key="backgroundColor" red="0.085999999999999993" green="0.11" blue="0.157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="3" id="Ts1-Lk-yES"/>
                         <constraint firstAttribute="width" constant="67" id="skp-To-4Vn"/>
@@ -81,6 +81,18 @@
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1NormalColor">
                             <color key="value" red="0.085999999999999993" green="0.11" blue="0.157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="1.5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                            <color key="value" red="0.085999999999999993" green="0.11" blue="0.157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="direction">
+                            <integer key="value" value="0"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -120,7 +132,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" name="paleGreyTwo" red="0.992" green="0.992" blue="0.996" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.99199999999999999" green="0.99199999999999999" blue="0.996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Ugt-tP-4S0" secondAttribute="trailing" constant="12" id="0u5-kx-FNm"/>
                 <constraint firstItem="BqZ-0p-qYu" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="1z4-BS-Onv"/>
@@ -145,7 +157,7 @@
                     <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                    <color key="value" name="paleGreyTwo" red="0.992" green="0.992" blue="0.996" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="value" red="0.99199999999999999" green="0.99199999999999999" blue="0.996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                     <color key="value" red="0.47058823529411764" green="0.50588235294117645" blue="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>

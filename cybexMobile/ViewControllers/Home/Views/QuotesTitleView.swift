@@ -94,5 +94,4 @@ class QuotesTitleView: UIView {
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
   
-  
 }

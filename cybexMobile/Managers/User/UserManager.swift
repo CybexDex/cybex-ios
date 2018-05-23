@@ -55,7 +55,17 @@ extension UserManager {
             self.saveKey(keysString, name:username)
             
             self.account.accept(data.account)
-            self.balances.accept(data.balances)
+            
+            if var balances = data.balances{
+              for (index,balance) in balances.enumerated(){
+                if getRealAmount(balance.asset_type, amount: balance.balance) == 0{
+                  balances.remove(at: index)
+                }
+              }
+              self.balances.accept(balances)
+            }else{
+              self.balances.accept(data.balances)
+            }
             self.limitOrder.accept(data.limitOrder)
             
             completion(true)
@@ -159,9 +169,17 @@ extension UserManager {
         if let data = response as? FullAccount{
           
           self.account.accept(data.account)
-          self.balances.accept(data.balances)
+          if var balances = data.balances{
+            for (index,balance) in balances.enumerated(){
+              if getRealAmount(balance.asset_type, amount: balance.balance) == 0{
+                balances.remove(at: index)
+              }
+            }
+            self.balances.accept(balances)
+          }else{
+            self.balances.accept(data.balances)
+          }
           self.limitOrder.accept(data.limitOrder)
-          
         }
       }
       WebsocketService.shared.send(request: request)
@@ -283,6 +301,17 @@ class UserManager {
     
     UserDefaults.standard.set(name, forKey: "com.nbltrust.cybex.username")
     
+  }
+  
+  
+  func getPortfolioDatas() -> [PortfolioData]{
+    var datas = [PortfolioData]()
+    if let balances = self.balances.value{
+      for balance in balances{
+        datas.append(PortfolioData.init(balance: balance)!)
+      }
+    }
+    return datas
   }
   
 }

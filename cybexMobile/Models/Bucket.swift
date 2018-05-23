@@ -108,7 +108,7 @@ class BucketMatrix {
   
   var incre:changeScope = .equal
   
-
+  var icon : String = ""
   init(_ homebucket:HomeBucket) {
     self.asset = homebucket.bucket
     
@@ -168,8 +168,15 @@ class BucketMatrix {
     self.high = high.toString.formatCurrency(digitNum: base_info.precision)
     self.low = low.toString.formatCurrency(digitNum: base_info.precision)
 
-    let isCYB = homebucket.base == AssetConfiguration.CYB
-    self.price = lastClose_price.toString.formatCurrency(digitNum: isCYB ? 5 : 8)
+    
+    var digitNum = 5
+    if homebucket.base == AssetConfiguration.ETH{
+      digitNum = 6
+    }else if homebucket.base == AssetConfiguration.BTC{
+      digitNum = 8
+    }
+    
+    self.price = lastClose_price.toString.formatCurrency(digitNum: digitNum)
 
     let change = (lastClose_price - firseOpen_price) * 100 / firseOpen_price
     let percent = round(change * 100) / 100.0
@@ -186,6 +193,7 @@ class BucketMatrix {
       self.incre = .greater
     }
     
+    self.icon = AppConfiguration.SERVER_ICONS_BASE_URLString + quote_info.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"
   }
   
 }

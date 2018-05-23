@@ -18,13 +18,16 @@ class PairDetailView: UIView {
     @IBOutlet weak var baseVolume: UILabel!
     @IBOutlet weak var quoteVolume: UILabel!
   
+  var base_name : String = ""
+  var quote_name : String = ""
+  
     var data: Any? {
     didSet {
       guard let markets = data as? HomeBucket else { return }
       
       if markets.bucket.count == 0 {
-        self.baseVolume.text = "Vol: -"
-        self.quoteVolume.text = "-"
+        self.baseVolume.text = self.base_name + ": -"
+        self.quoteVolume.text = self.quote_name + ":-"
         self.highLabel.text = "High: -"
         self.lowLabel.text = "Low: -"
         self.price.text = "-"
@@ -38,8 +41,8 @@ class PairDetailView: UIView {
         let matrix = BucketMatrix(markets)
         
         DispatchQueue.main.async {
-          self.baseVolume.text = "Vol: " + matrix.base_volume
-          self.quoteVolume.text = matrix.quote_volume
+          self.baseVolume.text = self.base_name + ": " + matrix.base_volume
+          self.quoteVolume.text = self.quote_name + ": " + matrix.quote_volume
           self.highLabel.text = "High: " + matrix.high
           self.lowLabel.text = "Low: " + matrix.low
           

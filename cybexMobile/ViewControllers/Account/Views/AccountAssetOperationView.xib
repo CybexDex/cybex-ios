@@ -25,8 +25,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDo-t5-odi">
-                            <rect key="frame" x="25" y="12" width="15.5" height="24"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <rect key="frame" x="25" y="12" width="13" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
@@ -34,7 +34,6 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="2Kx-xh-6Z2"/>
                         <constraint firstItem="tDo-t5-odi" firstAttribute="top" secondItem="Xyx-fL-WBn" secondAttribute="top" constant="12" id="Lx5-6t-OhN"/>
@@ -43,17 +42,17 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="egJ-SV-iwc" customClass="AccountAssetOperationsItemView" customModule="cybexMobile" customModuleProvider="target">
-                    <rect key="frame" x="13" y="44" width="168.5" height="75"/>
+                    <rect key="frame" x="13" y="44" width="170.5" height="75"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDK-8a-IVE" customClass="AccountAssetOperationsItemView" customModule="cybexMobile" customModuleProvider="target">
-                    <rect key="frame" x="193.5" y="44" width="168.5" height="75"/>
+                    <rect key="frame" x="191.5" y="44" width="170.5" height="75"/>
                 </view>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="egJ-SV-iwc" secondAttribute="bottom" constant="15" id="JVM-K9-KW6"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="YDK-8a-IVE" secondAttribute="trailing" constant="13" id="MBy-es-SQ6"/>
                 <constraint firstItem="egJ-SV-iwc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="Xs3-BF-Qip"/>
-                <constraint firstItem="YDK-8a-IVE" firstAttribute="leading" secondItem="egJ-SV-iwc" secondAttribute="trailing" constant="12" id="ZBu-ag-wrQ"/>
+                <constraint firstItem="YDK-8a-IVE" firstAttribute="leading" secondItem="egJ-SV-iwc" secondAttribute="trailing" constant="8" id="ZBu-ag-wrQ"/>
                 <constraint firstItem="egJ-SV-iwc" firstAttribute="top" secondItem="Xyx-fL-WBn" secondAttribute="bottom" id="dDN-Mq-kW2"/>
                 <constraint firstItem="Xyx-fL-WBn" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="eNZ-ks-CF3"/>
                 <constraint firstItem="YDK-8a-IVE" firstAttribute="width" secondItem="egJ-SV-iwc" secondAttribute="width" id="esz-FN-jsg"/>

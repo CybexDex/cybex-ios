@@ -44,6 +44,7 @@ class Button:UIView {
       self.button.isUserInteractionEnabled = false
       self.button.setBackgroundColor(.clear, forState: UIControlState.normal)
       self.button.setTitleColor(.white, for: UIControlState.normal)
+      self.button.setTitleColor(.white, for: UIControlState.disabled)
     }
     else {
       gradientLayer.isHidden = true
@@ -59,7 +60,7 @@ class Button:UIView {
     gradientLayer.frame = self.bounds
     self.button.isUserInteractionEnabled = true
     self.button.layer.addSublayer(gradientLayer)
-    
+
     updateView()
   }
   

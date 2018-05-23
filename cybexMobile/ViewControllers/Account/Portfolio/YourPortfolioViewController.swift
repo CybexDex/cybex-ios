@@ -12,6 +12,9 @@ import RxCocoa
 import ReSwift
 
 class YourPortfolioViewController: BaseViewController {
+  struct define {
+    static let sectionHeaderHeight : CGFloat = 44.0
+  }
   
   var coordinator: (YourPortfolioCoordinatorProtocol & YourPortfolioStateManagerProtocol)?
   
@@ -46,6 +49,7 @@ class YourPortfolioViewController: BaseViewController {
     
     UserManager.shared.balances.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
       guard let `self` = self else { return }
+      
       self.tableView.reloadData()
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
@@ -72,5 +76,14 @@ extension YourPortfolioViewController : UITableViewDataSource,UITableViewDelegat
     let data = UserManager.shared.balances.value
     cell.setup(data?[indexPath.row], indexPath: indexPath)
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, w: self.view.width, h: define.sectionHeaderHeight))
+    lockupAssetsSectionView.cybPriceTitle.locali = R.string.localizable.cyb_value.key.localized()
+    return lockupAssetsSectionView
+  }
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return define.sectionHeaderHeight
   }
 }

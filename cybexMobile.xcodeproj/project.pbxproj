@@ -15,6 +15,8 @@
 		721F5C7220AAF15F0042488F /* OpenedOrdersHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721F5C7120AAF15F0042488F /* OpenedOrdersHeaderView.xib */; };
 		721F5C7420AAF7290042488F /* OpenedOrdersStatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C7320AAF7290042488F /* OpenedOrdersStatesView.swift */; };
 		7246670D20AD730B006A918B /* QuotesTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7246670C20AD730B006A918B /* QuotesTitleView.swift */; };
+		724A2A6C20B41B5500E28438 /* LabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A2A6B20B41B5500E28438 /* LabelView.swift */; };
+		724A2A6E20B431B300E28438 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A2A6D20B431B300E28438 /* Style.swift */; };
 		72889EE820A9964A007D9E7A /* OpenedOrdersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72889EE620A9964A007D9E7A /* OpenedOrdersCell.swift */; };
 		72889EE920A9964A007D9E7A /* OpenedOrdersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72889EE720A9964A007D9E7A /* OpenedOrdersCell.xib */; };
 		72889EEC20A996E0007D9E7A /* OpenedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */; };
@@ -52,10 +54,11 @@
 		72F6DF2D20AC2EF100BBF105 /* AccountAssetOperationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF2C20AC2EF100BBF105 /* AccountAssetOperationView.xib */; };
 		72F6DF2F20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF2E20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift */; };
 		72F6DF3120AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DF3020AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib */; };
-		72F6DF3320AC385E00BBF105 /* AccountStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF3220AC385E00BBF105 /* AccountStatusView.swift */; };
 		72F8C77520AFE36600454187 /* QuotesTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F8C77420AFE36600454187 /* QuotesTitleView.xib */; };
 		72F8C77720B0068B00454187 /* HomeTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F8C77620B0068B00454187 /* HomeTitleView.xib */; };
 		72F8C77920B009B100454187 /* HomeTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F8C77820B009B100454187 /* HomeTitleView.swift */; };
+		72FEFD3320B57307003D7463 /* BalanceIntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FEFD3220B57307003D7463 /* BalanceIntroduceView.swift */; };
+		72FEFD3520B57319003D7463 /* BalanceIntroduceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72FEFD3420B57319003D7463 /* BalanceIntroduceView.xib */; };
 		730FDA5D20A314F600CFBF24 /* cassert in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC420A314E200CFBF24 /* cassert */; };
 		730FDA5E20A314F600CFBF24 /* cctype in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC520A314E200CFBF24 /* cctype */; };
 		730FDA5F20A314F600CFBF24 /* cerrno in Resources */ = {isa = PBXBuildFile; fileRef = 730FAFC620A314E200CFBF24 /* cerrno */; };
@@ -340,6 +343,8 @@
 		721F5C7120AAF15F0042488F /* OpenedOrdersHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenedOrdersHeaderView.xib; sourceTree = "<group>"; };
 		721F5C7320AAF7290042488F /* OpenedOrdersStatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersStatesView.swift; sourceTree = "<group>"; };
 		7246670C20AD730B006A918B /* QuotesTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesTitleView.swift; sourceTree = "<group>"; };
+		724A2A6B20B41B5500E28438 /* LabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
+		724A2A6D20B431B300E28438 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Style.swift; path = cybexMobile/Base/Style.swift; sourceTree = SOURCE_ROOT; };
 		72889EE620A9964A007D9E7A /* OpenedOrdersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersCell.swift; sourceTree = "<group>"; };
 		72889EE720A9964A007D9E7A /* OpenedOrdersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenedOrdersCell.xib; sourceTree = "<group>"; };
 		72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersView.swift; sourceTree = "<group>"; };
@@ -378,10 +383,11 @@
 		72F6DF2C20AC2EF100BBF105 /* AccountAssetOperationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountAssetOperationView.xib; sourceTree = "<group>"; };
 		72F6DF2E20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetOperationsItemView.swift; sourceTree = "<group>"; };
 		72F6DF3020AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountAssetOperationsItemView.xib; sourceTree = "<group>"; };
-		72F6DF3220AC385E00BBF105 /* AccountStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStatusView.swift; sourceTree = "<group>"; };
 		72F8C77420AFE36600454187 /* QuotesTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuotesTitleView.xib; sourceTree = "<group>"; };
 		72F8C77620B0068B00454187 /* HomeTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTitleView.xib; sourceTree = "<group>"; };
 		72F8C77820B009B100454187 /* HomeTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleView.swift; sourceTree = "<group>"; };
+		72FEFD3220B57307003D7463 /* BalanceIntroduceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceIntroduceView.swift; sourceTree = "<group>"; };
+		72FEFD3420B57319003D7463 /* BalanceIntroduceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceIntroduceView.xib; sourceTree = "<group>"; };
 		730FABB920A314E000CFBF24 /* accumulators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators.hpp; sourceTree = "<group>"; };
 		730FABBA20A314E000CFBF24 /* accumulators_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulators_fwd.hpp; sourceTree = "<group>"; };
 		730FABBC20A314E000CFBF24 /* accumulator_base.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = accumulator_base.hpp; sourceTree = "<group>"; };
@@ -11952,7 +11958,8 @@
 				72F6DF2C20AC2EF100BBF105 /* AccountAssetOperationView.xib */,
 				72F6DF2E20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift */,
 				72F6DF3020AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib */,
-				72F6DF3220AC385E00BBF105 /* AccountStatusView.swift */,
+				72FEFD3220B57307003D7463 /* BalanceIntroduceView.swift */,
+				72FEFD3420B57319003D7463 /* BalanceIntroduceView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -31156,6 +31163,7 @@
 			isa = PBXGroup;
 			children = (
 				73D977A1205657CE00CB7DE1 /* Constants.swift */,
+				724A2A6D20B431B300E28438 /* Style.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -31432,6 +31440,7 @@
 			isa = PBXGroup;
 			children = (
 				7324A91820AB01FA005BCFF8 /* GradientLayer.swift */,
+				724A2A6B20B41B5500E28438 /* LabelView.swift */,
 				73F58FC820AC04EF008A1F79 /* Button.swift */,
 				73F58FCA20AC0589008A1F79 /* Button.xib */,
 				735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */,
@@ -31594,6 +31603,7 @@
 				73E49E46207A02A9003B14D2 /* OrderBookCell.xib in Resources */,
 				730FDAB220A314F900CFBF24 /* typeinfo.SUNWCCh in Resources */,
 				73D978A92057A47200CB7DE1 /* PairListHorizantalView.xib in Resources */,
+				72FEFD3520B57319003D7463 /* BalanceIntroduceView.xib in Resources */,
 				730FDA8220A314F900CFBF24 /* numeric in Resources */,
 				730FDA7120A314F900CFBF24 /* cmath in Resources */,
 				730FDAB320A314F900CFBF24 /* unordered_map.SUNWCCh in Resources */,
@@ -31978,8 +31988,8 @@
 				7320D6B7205FA93600C3F579 /* CBKLineAccessoryView.swift in Sources */,
 				721F5C7020AAF1400042488F /* OpenedOrdersHeaderView.swift in Sources */,
 				72F6DF0A20AC0CF100BBF105 /* YourPorfolioView.swift in Sources */,
+				724A2A6E20B431B300E28438 /* Style.swift in Sources */,
 				731A0EA420A440D000507D1E /* UIColor+Additions.swift in Sources */,
-				72F6DF3320AC385E00BBF105 /* AccountStatusView.swift in Sources */,
 				73E49E50207A08BE003B14D2 /* OrderBookCellView.swift in Sources */,
 				72C100FB20A984F70059FEE8 /* OpenedOrdersActions.swift in Sources */,
 				7324FDCB206CFC37004296E7 /* SettingCell.swift in Sources */,
@@ -32000,6 +32010,7 @@
 				73A571692067FD1900921781 /* MarketCache.swift in Sources */,
 				7320D6A5205B9C0D00C3F579 /* CBKLineMainView.swift in Sources */,
 				73E49E1F2078BF77003B14D2 /* TimeGapView.swift in Sources */,
+				724A2A6C20B41B5500E28438 /* LabelView.swift in Sources */,
 				73E49E3D2079FFBF003B14D2 /* TradeHistoryReducers.swift in Sources */,
 				73ACD80920721B5E00592E69 /* SettingDetailReducers.swift in Sources */,
 				73D9789E20579EE200CB7DE1 /* MarketReducers.swift in Sources */,
@@ -32030,6 +32041,7 @@
 				73D34E452063A675008C7507 /* AccountViewController.swift in Sources */,
 				735D8EB620AEAC0C008DAAAC /* Account.swift in Sources */,
 				73D977E020565E6900CB7DE1 /* HomeRootCoordinator.swift in Sources */,
+				72FEFD3320B57307003D7463 /* BalanceIntroduceView.swift in Sources */,
 				73D9789C20579EE200CB7DE1 /* MarketActions.swift in Sources */,
 				73E49DF42078BF5B003B14D2 /* AccessoryHorizentalView.swift in Sources */,
 				731A0E9F20A4409900507D1E /* EntryReducers.swift in Sources */,

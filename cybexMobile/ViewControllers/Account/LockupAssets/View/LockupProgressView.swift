@@ -17,6 +17,16 @@ class LockupProgressView: UIView {
       self.setNeedsDisplay()
     }
   }
+  
+  //  控制渐进的色彩的方向
+  // 0 是水平。1是垂直
+  @IBInspectable
+  var direction : Int = 0{
+    didSet{
+      self.setNeedsDisplay()
+    }
+  }
+  
   @IBInspectable
   var beginColor : UIColor = UIColor.clear {
     didSet{
@@ -25,21 +35,6 @@ class LockupProgressView: UIView {
   }
   @IBInspectable
   var endColor:UIColor = UIColor.clear{
-    didSet{
-      
-    }
-  }
-  
-  
-  @IBInspectable
-  var theme1NormalColor : UIColor = UIColor.clear {
-    didSet{
-      
-    }
-  }
-  
-  @IBInspectable
-  var theme2NormalColor : UIColor = UIColor.clear {
     didSet{
       
     }
@@ -60,29 +55,23 @@ class LockupProgressView: UIView {
         layer.removeFromSuperlayer()
       }
     }
-    let beginColor   = self.beginColor.cgColor
-    let endColor     = self.endColor.cgColor
-    let colorArr     = [beginColor,endColor]
+    
+    let beginColor        = self.beginColor.cgColor
+    let endColor          = self.endColor.cgColor
+    let colorArr          = [beginColor,endColor]
     let gradient          = CAGradientLayer()
     gradient.colors       = colorArr
+    let x = self.direction == 0 ? 1 : 0
+    let y = self.direction == 1 ? 1 : 0
     gradient.startPoint   = CGPoint(x: 0, y: 0)
-    gradient.endPoint     = CGPoint(x: 1, y: 0)
-    gradient.frame       = self.bounds
-    self.layer.insertSublayer(gradient, at: 0)
+    gradient.endPoint     = CGPoint(x: x, y: y)
+    gradient.frame        = self.bounds
+    self.layer.addSublayer(gradient)
     
-    let path = UIBezierPath()
-    path.move(to: CGPoint(x: CGFloat(self.progress)*rect.width, y: rect.height * 0.5))
-    path.addLine(to: CGPoint(x: rect.width, y: rect.height * 0.5))
-    path.lineWidth = rect.height
-    let shapeLayer = CAShapeLayer()
-    shapeLayer.path = path.cgPath
-    shapeLayer.lineWidth = rect.height
-    
-    if (ThemeManager.currentThemeIndex == 0) {
-      shapeLayer.strokeColor = self.theme1NormalColor.cgColor
-    }else{
-      shapeLayer.strokeColor = self.theme2NormalColor.cgColor
-    }
-    self.layer.addSublayer(shapeLayer)
+
+    let shapeLayer        = CALayer()
+    shapeLayer.frame      = CGRect(x: 0, y: 0, width: CGFloat(self.progress)*rect.width, height: rect.height)
+    shapeLayer.backgroundColor = UIColor.black.cgColor
+    gradient.mask         = shapeLayer
   }
 }
