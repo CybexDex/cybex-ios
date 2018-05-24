@@ -122,10 +122,6 @@ class TradeHistoryViewController: BaseViewController {
 
     }
   }
-  
-  deinit {
-    print("trade history dealloc")
-  }
 }
 
 extension TradeHistoryViewController: UITableViewDelegate, UITableViewDataSource {

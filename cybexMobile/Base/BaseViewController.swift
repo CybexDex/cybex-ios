@@ -96,7 +96,7 @@ class BaseViewController: UIViewController {
       if self.navigationController?.visibleViewController != self {
         return
       }
-      print("Change Change Change")
+//      print("Change Change Change")
       if isUserInteractionEnabled {
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
         self.navigationController?.navigationBar.subviews.forEach({ (view) in

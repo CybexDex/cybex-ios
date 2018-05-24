@@ -55,19 +55,10 @@ class HomePairView: UIView {
         let matrix = BucketMatrix(markets)
         
         DispatchQueue.main.async {
-          //
-          
           self.icon.kf.setImage(with: URL(string: matrix.icon))
 
-          if let _ = matrix.base_volume.toDouble(){
-            self.volume.text = markets.quote_info.symbol.filterJade + ": " + matrix.quote_volume.formatCurrency(digitNum: 2)
-            
-          }else{
-            let subString = matrix.quote_volume.substring(from: 0, length: matrix.quote_volume.length - 1)
-            
-            self.volume.text = markets.quote_info.symbol.filterJade + ": " + (subString?.formatCurrency(digitNum: 2))! + matrix.quote_volume.substring(from: matrix.quote_volume.length - 1, length: 1)!
-          }
-          
+          self.volume.text = markets.quote_info.symbol.filterJade + ": " + matrix.quote_volume
+
           self.price.text = matrix.price
           self.bulking.text = ((matrix.incre == .greater ? "+" : "") + matrix.change).formatCurrency(digitNum: 2) + "%"
           self.high_lowContain.backgroundColor = matrix.incre.color()

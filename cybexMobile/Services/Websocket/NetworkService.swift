@@ -132,7 +132,7 @@ class WebsocketService {
   }
   
   private func changeNode(node: NodeURLString) {
-    print("switch node is \(node.rawValue)")
+    print("current node is \(node.rawValue)")
     currentNode = node
     let request = URLRequest(url: URL(string:node.rawValue)!)
 

@@ -120,4 +120,8 @@ class ImageTextField: UITextField {
     self.bottomColor.setStroke()
     path.stroke()
   }
+  
+  @objc func willDealloc() -> Bool {
+    return false
+  }
 }
