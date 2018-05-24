@@ -21,7 +21,9 @@ class LockupAssetsSectionView: UIView{
   }
   @IBOutlet weak var cybPriceTitle: UILabel!
   
-  override var intrinsicContentSize: CGSize {
+    @IBOutlet weak var totalTitle: UILabel!
+    
+    override var intrinsicContentSize: CGSize {
     return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
   }
   

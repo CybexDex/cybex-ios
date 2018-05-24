@@ -41,7 +41,7 @@ class YourPorfolioView:  UIView{
         
         name.text = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
         
-        amount.text = getRealAmount(balance.asset_type, amount: balance.balance).toString
+        amount.text = getRealAmount(balance.asset_type, amount: balance.balance).toString.formatCurrency(digitNum: 5)
         
         let source =  changeToETHAndCYB(balance.asset_type)
         

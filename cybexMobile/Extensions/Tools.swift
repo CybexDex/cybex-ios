@@ -91,15 +91,19 @@ extension UIViewController {
         if let completion = completion {
           completion()
         }
+        
+
+        
+        
         if update {
-          let alert = AlertController(title: "Update Available", message: "A new version of CybexDex is available. Please update to newest version now", preferredStyle: .alert)
-          
+          let alert = AlertController(title: R.string.localizable.updata_available_title.key.localized(), message: R.string.localizable.updata_available_message.key.localized(), preferredStyle: .alert)
+    
           if !force {
-            alert.addAction(AlertAction(title: "Next Time", style: .normal, handler: nil))
+            alert.addAction(AlertAction(title: R.string.localizable.updata_next_time.key.localized(), style: .normal, handler: nil))
           }
           else {
             alert.shouldDismissHandler = { (action) in
-              if action?.title == "Next Time" {
+              if action?.title == R.string.localizable.updata_next_time.key.localized() {
                 return true
               }
               else {
@@ -109,7 +113,7 @@ extension UIViewController {
             }
           }
           
-          let action = AlertAction(title: "Update", style: .preferred, handler: { (action) in
+          let action = AlertAction(title: R.string.localizable.updata_updata.key.localized(), style: .preferred, handler: { (action) in
             if force {
               UIApplication.shared.openURL(URL(string: url)!)
               return
@@ -126,8 +130,8 @@ extension UIViewController {
           alert.present()
         }
         else if showNoUpdate {
-          let alert = AlertController(title: "No Update Available", message: "Current Version is the newest", preferredStyle: .alert)
-          alert.addAction(AlertAction(title: "OK", style: .normal, handler: nil))
+          let alert = AlertController(title: R.string.localizable.unupdata_title.key.localized(), message: R.string.localizable.unupdata_message.key.localized(), preferredStyle: .alert)
+          alert.addAction(AlertAction(title: R.string.localizable.unupdata_ok.key.localized(), style: .normal, handler: nil))
           alert.present()
         }
       }

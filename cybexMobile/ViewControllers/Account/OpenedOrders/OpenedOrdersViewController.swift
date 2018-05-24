@@ -24,8 +24,24 @@ class OpenedOrdersViewController: BaseViewController {
     setupUI()
   }
   
+  
+  
+  /*
+   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+   let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, w: self.view.width, h: define.sectionHeaderHeight))
+   lockupAssetsSectionView.cybPriceTitle.locali = R.string.localizable.cyb_value.key.localized()
+   return lockupAssetsSectionView
+   }
+   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+   return define.sectionHeaderHeight
+   }
+   */
+  
   func setupUI(){
-    headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 93.5))
+    headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 103))
+    headerView.sectionTitleView.cybPriceTitle.locali = R.string.localizable.opened_order_value.key.localized()
+    headerView.sectionTitleView.totalTitle.locali = R.string.localizable.opened_asset_amount.key.localized()
+    
     tableView.tableHeaderView = headerView
     self.localized_text = R.string.localizable.openedTitle.key.localizedContainer()
     let cell = String.init(describing:OpenedOrdersCell.self)

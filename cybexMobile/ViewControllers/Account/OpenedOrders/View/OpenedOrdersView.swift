@@ -44,7 +44,7 @@ class OpenedOrdersView:  UIView{
 
         }
         let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-        self.amount.text = quoteAmount.toString
+        self.amount.text = quoteAmount.toString + quote.text!
         let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
         self.price.text = (baseAmount / quoteAmount).toString
       }
