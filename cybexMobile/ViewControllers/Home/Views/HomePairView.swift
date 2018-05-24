@@ -57,7 +57,7 @@ class HomePairView: UIView {
         DispatchQueue.main.async {
           self.icon.kf.setImage(with: URL(string: matrix.icon))
 
-          self.volume.text = markets.quote_info.symbol.filterJade + ": " + matrix.quote_volume
+          self.volume.text = " " + matrix.quote_volume
 
           self.price.text = matrix.price
           self.bulking.text = (matrix.incre == .greater ? "+" : "") + matrix.change.formatCurrency(digitNum: 2) + "%"
