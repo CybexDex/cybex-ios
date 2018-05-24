@@ -13,7 +13,8 @@ class OpenedOrdersHeaderView: UIView {
   @IBOutlet weak var totalValueL: UILabel!
   @IBOutlet weak var totalValue_tip: UILabel!
   
-  var data: Any? {
+    @IBOutlet weak var sectionTitleView: LockupAssetsSectionView!
+    var data: Any? {
     didSet {
       if let value = data as? String {
         self.totalValueL.text = value == "0" ? "-" : "≈¥" + value.formatCurrency(digitNum: 2)
@@ -21,7 +22,8 @@ class OpenedOrdersHeaderView: UIView {
     }
   }
   
-  
+    @IBOutlet weak var sectionView: LockupAssetsSectionView!
+    
   fileprivate func setup() {
     
   }

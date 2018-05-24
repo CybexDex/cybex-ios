@@ -88,3 +88,18 @@
 "balance_introduce_title"       = "账户总余额";
 "balance_ensuer"                = "我知道了";
 
+"home_vol"                      = "成交量";
+
+"opened_amount"                 = "数量:";
+"opened_asset_amount"                 = "资产/委托数量";
+"opened_order_value"                  = "委托单价";
+
+
+"updata_available_title"              = "可更新";
+"updata_available_message"            = "新版本的CybexDex可用。请立即更新至最新版本";
+"updata_next_time"                    = "下一步";
+"updata_updata"                       = "更新";
+"unupdata_title"                      = "通知";
+"unupdata_message"                    = "当前版本是最新版本";
+"unupdata_ok"                         = "好的";
+

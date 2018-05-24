@@ -56,13 +56,10 @@ extension UserManager {
             
             self.account.accept(data.account)
             
-            if var balances = data.balances{
-              for (index,balance) in balances.enumerated(){
-                if getRealAmount(balance.asset_type, amount: balance.balance) == 0{
-                  balances.remove(at: index)
-                }
-              }
-              self.balances.accept(balances)
+            if let balances = data.balances{
+              self.balances.accept(balances.filter({ (balance) -> Bool in
+                return getRealAmount(balance.asset_type, amount: balance.balance) != 0
+              }))
             }else{
               self.balances.accept(data.balances)
             }
@@ -74,7 +71,6 @@ extension UserManager {
         }
         
         completion(false)
-        
       }
       WebsocketService.shared.send(request: request)
       
@@ -169,13 +165,12 @@ extension UserManager {
         if let data = response as? FullAccount{
           
           self.account.accept(data.account)
-          if var balances = data.balances{
-            for (index,balance) in balances.enumerated(){
-              if getRealAmount(balance.asset_type, amount: balance.balance) == 0{
-                balances.remove(at: index)
-              }
-            }
-            self.balances.accept(balances)
+          
+          if let balances = data.balances{
+            self.balances.accept(balances.filter({ (balance) -> Bool in
+                return getRealAmount(balance.asset_type, amount: balance.balance) != 0
+            }))
+          
           }else{
             self.balances.accept(data.balances)
           }

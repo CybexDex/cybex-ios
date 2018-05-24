@@ -32,12 +32,12 @@ class AccountViewController: BaseViewController {
     case unLogin     = 0
     case unPortfolio = 1
     case normalState = 2
+    case noDataState = 3
   }
   
   @IBOutlet weak var portfolioView: AccountPortfolioView!
   @IBOutlet weak var nameL: UILabel!
   
-  @IBOutlet weak var memberLevelView: UIView!
   @IBOutlet weak var memberLevel: UILabel!
   
   @IBOutlet weak var totalBalance: UILabel!
@@ -71,6 +71,9 @@ class AccountViewController: BaseViewController {
     
     setupUI()
     setupEvent()
+    if  UserManager.shared.isLoginIn {
+      setupUIWithStatus(user_type.noDataState)
+    }
   }
   
   
@@ -87,6 +90,7 @@ class AccountViewController: BaseViewController {
       let _ = self.balanceIntroduceView
       
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
   }
   
   func setupEvent() {
@@ -132,7 +136,20 @@ class AccountViewController: BaseViewController {
         stackView.viewWithTag(tag)?.isHidden = true
       }
       bgImageView.isHidden    = true
+    case .noDataState:
+      tags = [1,2,4,5,6,7,8]
+      for tag in tags{
+        stackView.viewWithTag(tag)?.isHidden = true
+      }
+      nameL.text =  UserManager.shared.name
+      let hash = UserManager.shared.avatarString!
+      let generator = IconGenerator(size: 168, hash: Data(hex: hash))
+      let image = UIImage(cgImage: generator.render()!)
+      accountImageView.image = image
+      
+      bgImageView.isHidden    = true
     }
+    
   }
   
   

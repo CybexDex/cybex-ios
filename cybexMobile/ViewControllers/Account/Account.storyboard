@@ -202,7 +202,7 @@
                                                     <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hy-ga-TJx">
                                                         <rect key="frame" x="0.0" y="389.5" width="375" height="100"/>
                                                         <subviews>
-                                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dj-YC-nme" customClass="LabelView" customModule="cybexMobile" customModuleProvider="target">
+                                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dj-YC-nme" customClass="GradientLabelView" customModule="cybexMobile" customModuleProvider="target">
                                                                 <rect key="frame" x="25" y="0.0" width="27" height="84"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSY-yo-RcD">
@@ -365,7 +365,6 @@
                         <outlet property="introduceCybex" destination="8wY-Fh-vlG" id="YjB-6D-yxT"/>
                         <outlet property="loginArrowImgView" destination="RVp-06-T4Q" id="7tw-wq-T90"/>
                         <outlet property="memberLevel" destination="mSY-yo-RcD" id="QNs-32-szK"/>
-                        <outlet property="memberLevelView" destination="9dj-YC-nme" id="p27-6a-ij2"/>
                         <outlet property="nameL" destination="iad-av-Auu" id="e8S-Eb-rXA"/>
                         <outlet property="portfolioView" destination="Y2C-bZ-Yat" id="eev-EL-AK6"/>
                         <outlet property="stackView" destination="1fp-Zk-OiE" id="Hwr-Qk-b24"/>

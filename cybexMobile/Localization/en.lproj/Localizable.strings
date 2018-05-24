@@ -91,5 +91,21 @@
 "balance_introduce_title"       = "BALANCE";
 "balance_ensuer"                = "OK";
 
+"home_vol"                      = "Vol";
+
+"opened_amount"                 = "Amount:";
+
+"opened_asset_amount"                 = "Asset/Amount";
+"opened_order_value"                  = "Order Value";
+
+
+"updata_available_title"              = "Update Available";
+"updata_available_message"            = "A new version of CybexDex is available. Please update to newest version now";
+"updata_next_time"                    = "Next Time";
+"updata_updata"                       = "Update";
+"unupdata_title"                      = "No Update Available";
+"unupdata_message"                    = "Current Version is the newest";
+"unupdata_ok"                         = "OK";
+
 
 
