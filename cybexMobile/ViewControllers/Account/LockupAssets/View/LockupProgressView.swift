@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftTheme
+
 @IBDesignable
 class LockupProgressView: UIView {
   

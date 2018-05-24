@@ -69,7 +69,7 @@ class HomePairView: UIView {
           }
           
           self.price.text = matrix.price
-          self.bulking.text = ((matrix.incre == .greater ? "+" : "") + matrix.change).formatCurrency(digitNum: 2) + "%"
+          self.bulking.text = (matrix.incre == .greater ? "+" : "") + matrix.change.formatCurrency(digitNum: 2) + "%"
           self.high_lowContain.backgroundColor = matrix.incre.color()
         
           let (eth,_) = changeToETHAndCYB(markets.quote_info.id)

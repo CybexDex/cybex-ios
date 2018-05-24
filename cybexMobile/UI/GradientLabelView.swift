@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Foundation
 
-class LabelView: UIView {
+class GradientLabelView: UIView {
   
   let gradientLayer: LinearGradientLayer = {
     let gradientLayer = LinearGradientLayer()

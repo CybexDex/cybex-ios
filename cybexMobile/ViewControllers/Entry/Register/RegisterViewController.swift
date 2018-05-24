@@ -54,7 +54,7 @@ class RegisterViewController: BaseViewController {
     configLeftNavButton(#imageLiteral(resourceName: "ic_close_24_px"))
     setupUI()
     setupEvent()
-    
+
     updateSvgView()
     
   }

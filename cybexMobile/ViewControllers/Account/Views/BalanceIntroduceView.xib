@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ir2-36-MJ9">
-                    <rect key="frame" x="51" y="125" width="273" height="169"/>
+                    <rect key="frame" x="51" y="249" width="273" height="169"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXY-he-R26">
                             <rect key="frame" x="0.0" y="0.0" width="273" height="50"/>
@@ -80,9 +80,10 @@
             </subviews>
             <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ir2-36-MJ9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="51" id="6Is-CM-7j1"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ir2-36-MJ9" secondAttribute="trailing" constant="51" id="TcX-Nf-sOK"/>
-                <constraint firstItem="ir2-36-MJ9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="105" id="jmg-Hz-meF"/>
+                <constraint firstItem="ir2-36-MJ9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="51" id="4Nk-0b-4aP"/>
+                <constraint firstAttribute="trailing" secondItem="ir2-36-MJ9" secondAttribute="trailing" constant="51" id="Cps-fg-i0d"/>
+                <constraint firstItem="ir2-36-MJ9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="iN8-wK-ffs"/>
+                <constraint firstItem="ir2-36-MJ9" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="rfM-qV-j8s"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="33.5" y="53.5"/>
