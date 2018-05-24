@@ -32,7 +32,8 @@ class RegisterViewController: BaseViewController {
   
   @IBOutlet weak var macawView: MacawView!
   @IBOutlet weak var errorStackView: UIStackView!
-  @IBOutlet weak var errorMessage: UILabel!
+    @IBOutlet weak var pinCodeActivityView: UIActivityIndicatorView!
+    @IBOutlet weak var errorMessage: UILabel!
   
   var timer:Repeater?
   
@@ -60,10 +61,13 @@ class RegisterViewController: BaseViewController {
   }
   
   func updateSvgView() {
+    self.pinCodeActivityView.startAnimating()
+    
     async {
       let data = try! await(SimpleHTTPService.requestPinCode())
       
       main {
+        self.pinCodeActivityView.stopAnimating()
         self.pinID = data.id
         
         if let parser = try? SVGParser.parse(text: data.data) {
@@ -264,7 +268,9 @@ extension RegisterViewController {
     }).disposed(by: disposeBag)
     
     self.timer = Repeater.every(.seconds(120), {[weak self] (timer) in
-      self?.updateSvgView()
+      main {
+        self?.updateSvgView()
+      }
     })
     self.timer?.start()
     
@@ -288,7 +294,14 @@ extension RegisterViewController {
           else {
             self.updateSvgView()
             
-            self.showAlert(R.string.localizable.registerFail.key.localized(), buttonTitle: R.string.localizable.ok.key.localized())
+            var message = R.string.localizable.registerFail.key.localized()
+            if success.1 == 403 {
+              message = R.string.localizable.registerFail403.key.localized()
+            }
+            else if success.1 == 429 {
+              message = R.string.localizable.registerFail429.key.localized()
+            }
+            self.showAlert(message, buttonTitle: R.string.localizable.ok.key.localized())
           }
         }
       }

@@ -87,6 +87,40 @@ extension UITextView {
   }
 }
 
+extension UIImageView {
+  @IBInspectable
+  var theme1ImageName:String {
+    set {
+      if let theme2 = self.store["image_theme2"] as? String {
+        theme_image = [newValue, theme2]
+      }
+      else {
+        self.store["image_theme1"] = newValue
+      }
+    }
+    
+    get {
+      return theme_image?.value() as! String
+    }
+  }
+  
+  @IBInspectable
+  var theme2ImageName:String {
+    set {
+      if let theme1 = self.store["image_theme1"] as? String {
+        theme_image = [theme1, newValue]
+      }
+      else {
+        self.store["image_theme2"] = newValue
+      }
+    }
+    
+    get {
+      return theme_image?.value() as! String
+    }
+  }
+}
+
 extension UIView {
   @IBInspectable
   var theme1BgColor:UIColor {

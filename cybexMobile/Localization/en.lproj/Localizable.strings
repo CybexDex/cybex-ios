@@ -75,6 +75,8 @@
 "password.validate.error.2" = "The password is not consistent";
 
 "register.fail" = "fail to register";
+"register.fail403" = "Incorrect verify code";
+"register.fail429" = "The operation is too frequent. Please try again later.";
 
 "register.confirm" = "CURRENT PASSWORD:\n<password></password>\n· I UNDERSTAND THAT I WILL LOSE ACCESS TO MY FUNDS IF I LOSE MY PASSWORD\n· I UNDERSTAND THAT NO ONE CAN RECOVER MY PASSWORD IF I LOSE OR FORGET IT\n· I HAVE WRITTEN DOWN OR OTHERWISE STORED MY PASSWORD\n";
 

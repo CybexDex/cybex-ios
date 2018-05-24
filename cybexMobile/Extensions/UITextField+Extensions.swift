@@ -41,6 +41,17 @@ class ImageTextField: UITextField {
   
   @IBInspectable var fieldImage: UIImage? = nil {
     didSet {
+      NotificationCenter.default.removeObserver(self, name: Notification.Name.UITextFieldTextDidBeginEditing, object: nil)
+      NotificationCenter.default.removeObserver(self, name: Notification.Name.UITextFieldTextDidEndEditing, object: nil)
+      
+      NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self, queue: nil) {[weak self] (notifi) in
+        self?.leftView?.alpha = 1
+      }
+      
+      NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self, queue: nil) {[weak self] (notifi) in
+        self?.leftView?.alpha = 0.5
+      }
+      
       updateView()
     }
   }
@@ -77,6 +88,7 @@ class ImageTextField: UITextField {
       imageView.image = image
       // Note: In order for your image to use the tint color, you have to select the image in the Assets.xcassets and change the "Render As" property to "Template Image".
       imageView.tintColor = color
+      imageView.alpha = 0.5
       leftView = imageView
     } else {
       leftViewMode = UITextFieldViewMode.never

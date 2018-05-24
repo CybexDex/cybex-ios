@@ -429,8 +429,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cybexicon" translatesAutoresizingMaskIntoConstraints="NO" id="q7d-ee-hdO">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo_light" translatesAutoresizingMaskIntoConstraints="NO" id="q7d-ee-hdO">
                                 <rect key="frame" x="112.5" y="35" width="150" height="20"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="theme1ImageName" value="ic_logo_dark"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="theme2ImageName" value="ic_logo_light"/>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pBs-TW-hEN">
                                 <rect key="frame" x="30" y="92" width="6.5" height="17"/>
@@ -531,8 +535,8 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HA5-ov-MQv">
-                                <rect key="frame" x="0.0" y="580.5" width="375" height="14.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <rect key="frame" x="0.0" y="578" width="375" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="1" green="0.56899999999999995" blue="0.26300000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -590,8 +594,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cybexicon" translatesAutoresizingMaskIntoConstraints="NO" id="Vdh-df-7d2">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo_light" translatesAutoresizingMaskIntoConstraints="NO" id="Vdh-df-7d2">
                                 <rect key="frame" x="112.5" y="35" width="150" height="20"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="theme2ImageName" value="ic_logo_light"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="theme1ImageName" value="ic_logo_dark"/>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhZ-TF-Kxr">
                                 <rect key="frame" x="30" y="92" width="6.5" height="17"/>
@@ -722,9 +730,16 @@
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcV-7C-Gjt" customClass="MacawView" customModule="Macaw">
                                                         <rect key="frame" x="238" y="7" width="99" height="33"/>
+                                                        <subviews>
+                                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Hn0-ds-Xek">
+                                                                <rect key="frame" x="39.5" y="6.5" width="20" height="20"/>
+                                                            </activityIndicatorView>
+                                                        </subviews>
                                                         <color key="backgroundColor" red="1" green="0.76900000000000002" blue="0.47099999999999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
+                                                            <constraint firstItem="Hn0-ds-Xek" firstAttribute="centerY" secondItem="lcV-7C-Gjt" secondAttribute="centerY" id="fsW-Si-4tn"/>
                                                             <constraint firstAttribute="width" constant="99" id="nXJ-Iw-xQi"/>
+                                                            <constraint firstItem="Hn0-ds-Xek" firstAttribute="centerX" secondItem="lcV-7C-Gjt" secondAttribute="centerX" id="wHe-h3-P24"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -769,11 +784,11 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhc-R5-94g">
-                                <rect key="frame" x="176" y="580" width="23" height="14.5"/>
+                                <rect key="frame" x="175" y="577.5" width="26" height="17"/>
                                 <subviews>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxL-SX-u9D">
-                                        <rect key="frame" x="0.0" y="0.0" width="11.5" height="14.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="13" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
@@ -787,8 +802,8 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdA-WC-36w">
-                                        <rect key="frame" x="11.5" y="0.0" width="11.5" height="14.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <rect key="frame" x="13" y="0.0" width="13" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="1" green="0.56899999999999995" blue="0.26300000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
@@ -892,6 +907,7 @@
                         <outlet property="loginTitle" destination="sdA-WC-36w" id="95N-Lh-PjK"/>
                         <outlet property="macawView" destination="lcV-7C-Gjt" id="VvZ-UH-TQD"/>
                         <outlet property="passwordTextField" destination="cH2-f1-6Sg" id="6kw-6v-PMj"/>
+                        <outlet property="pinCodeActivityView" destination="Hn0-ds-Xek" id="CbK-cW-K6h"/>
                         <outlet property="registerButton" destination="PRM-Qk-YOz" id="Pdp-cY-4Ml"/>
                         <outlet property="tip" destination="Frv-1Z-6FQ" id="E2J-95-WHZ"/>
                     </connections>
@@ -1187,9 +1203,9 @@
         <image name="check_complete" width="24" height="24"/>
         <image name="cloud_wallet" width="24" height="24"/>
         <image name="complete" width="24" height="24"/>
-        <image name="cybexicon" width="150" height="20"/>
         <image name="ic_avatar_24_px" width="24" height="24"/>
         <image name="ic_lock_outline_24_px" width="24" height="24"/>
+        <image name="ic_logo_light" width="150" height="20"/>
         <image name="ic_pincode_24_px" width="24" height="24"/>
     </resources>
 </document>

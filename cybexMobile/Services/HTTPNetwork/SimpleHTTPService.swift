@@ -157,8 +157,8 @@ extension SimpleHTTPService {
       }
       
       let json = JSON(value)
-      if let _ = json["code"].int {
-        seal.fulfill((false, 0))
+      if let code = json["code"].int {
+        seal.fulfill((false, code))
         return
       }
       
