@@ -55,7 +55,9 @@ class YourPortfolioViewController: BaseViewController {
     
     app_data.data.asObservable().distinctUntilChanged()
       .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
-      .subscribe(onNext: { (s) in
+      .subscribe(onNext: {[weak self] (s) in
+        guard let `self` = self else { return }
+
         DispatchQueue.main.async {
           self.tableView.reloadData()
         }

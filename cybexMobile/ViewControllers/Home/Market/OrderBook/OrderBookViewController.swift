@@ -70,9 +70,7 @@ class OrderBookViewController: BaseViewController {
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   
-  deinit {
-    print("orderbook dealloc")
-  }
+
 }
 
 extension OrderBookViewController: UITableViewDelegate, UITableViewDataSource {

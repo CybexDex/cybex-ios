@@ -162,8 +162,8 @@ class BucketMatrix {
 
 
     self.base_volume_origin = base_volume
-    self.base_volume = base_volume.toString.suffixNumber()
-    self.quote_volume = quote_volume.toString.suffixNumber()
+    self.base_volume = base_volume.toString.suffixNumber(digitNum: 2)
+    self.quote_volume = quote_volume.toString.suffixNumber(digitNum: 2)
 
     self.high = high.toString.formatCurrency(digitNum: base_info.precision)
     self.low = low.toString.formatCurrency(digitNum: base_info.precision)

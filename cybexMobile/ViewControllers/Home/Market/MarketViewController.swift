@@ -217,8 +217,8 @@ class MarketViewController: BaseViewController {
         
 
         if let last_model = dataArray.last, (model.date - last_model.date) != 3600 {
-          print(model.date - last_model.date)
-          print("\r\n")
+//          print(model.date - last_model.date)
+//          print("\r\n")
         }
         
         dataArray.append(model)
@@ -266,10 +266,6 @@ class MarketViewController: BaseViewController {
         self.refreshView(false)
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
-  }
-  
-  deinit {
-    print("dealloc")
   }
 }
 

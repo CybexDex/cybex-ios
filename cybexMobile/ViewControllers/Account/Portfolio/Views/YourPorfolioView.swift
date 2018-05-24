@@ -21,7 +21,8 @@ class YourPorfolioView:  UIView{
   @IBOutlet weak var rmbPrice: UILabel!
   
   
-  
+    @IBOutlet weak var bottomView: UIStackView!
+    
   // 如果是CYB 就不显示的下层view
   @IBOutlet weak var high_low_view: UIView!
   @IBOutlet weak var price_cyb: UILabel!
@@ -31,6 +32,8 @@ class YourPorfolioView:  UIView{
   var data: Any? {
     didSet {
       if let balance = data as? Balance {
+        bottomView.isHidden = true
+
         high_low_view.isHidden = balance.asset_type == AssetConfiguration.CYB
         
         let iconString = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"
@@ -83,7 +86,7 @@ class YourPorfolioView:  UIView{
   }
   
   fileprivate func setup() {
-    
+    bottomView.isHidden = true
   }
   
   override var intrinsicContentSize: CGSize {

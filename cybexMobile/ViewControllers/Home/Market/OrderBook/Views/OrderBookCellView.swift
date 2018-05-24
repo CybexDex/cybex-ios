@@ -35,7 +35,7 @@ class OrderBookCellView:UIView {
         self.leftBoxWidth = self.leftBoxWidth.changeMultiplier(multiplier: 0.001)
       }
       
-      print("left:\(self.leftBoxWidth.multiplier)  ")
+//      print("left:\(self.leftBoxWidth.multiplier)  ")
       if let ask = showData.1 {
         self.sell_price.text = ask.price
         self.sell_volume.text = ask.volume
@@ -46,7 +46,7 @@ class OrderBookCellView:UIView {
         self.sell_volume.text = ""
         self.rightBoxWidth = self.rightBoxWidth.changeMultiplier(multiplier: 0.001)
       }
-      print("right:\(self.rightBoxWidth.multiplier)  ")
+//      print("right:\(self.rightBoxWidth.multiplier)  ")
 
     }
   }

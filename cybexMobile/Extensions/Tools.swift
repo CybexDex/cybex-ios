@@ -204,14 +204,10 @@ extension String {
 
   func formatCurrency(digitNum: Int) -> String {
     
-    var num = digitNum
-    if let string = self.components(separatedBy: ".").last ,string.length < digitNum{
-      num = string.length
-    }
     String.numberformatter.numberStyle = .currency
     String.numberformatter.currencySymbol = ""
-    String.numberformatter.maximumFractionDigits = num
-    String.numberformatter.minimumFractionDigits = num
+    String.numberformatter.maximumFractionDigits = digitNum
+    String.numberformatter.minimumFractionDigits = digitNum
 
     let result = String.numberformatter.string(from: NSNumber(value: Double(self)!))
     return result!

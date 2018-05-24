@@ -47,7 +47,7 @@ class AppCoordinator {
   var accountCoordinator: AccountRootCoordinator!
   var entryCoordinator: EntryRootCoordinator!
 
-  var currentPresentedRootCoordinator: NavCoordinator?
+  weak var currentPresentedRootCoordinator: NavCoordinator?
 
   init(rootVC: BaseTabbarViewController) {
     self.rootVC = rootVC
