@@ -29,10 +29,10 @@ let TrackingMiddleware: Middleware<Any> = { dispatch, getState in
       
       if let action = action as? StartLoading {
        
-        action.vc?.startLoading()
+//        action.vc?.startLoading()
       }
       else if let action = action as? EndLoading {
-        action.vc?.endLoading()
+//        action.vc?.endLoading()
         
       }
       else if let action = action as? RefreshState {

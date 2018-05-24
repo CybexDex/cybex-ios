@@ -114,6 +114,11 @@ class RegisterViewController: BaseViewController {
     commonObserveState()
     
   }
+  
+  deinit {
+    self.timer?.pause()
+    self.timer = nil
+  }
 }
 
 extension RegisterViewController {
@@ -191,14 +196,19 @@ extension RegisterViewController {
         self.confirmPasswordTextField.tailImage = nil
       }
       if self.passwordTextField.text == self.confirmPasswordTextField.text {
-        if self.userNameValid {
+        if self.userNameValid ,let passwordText = self.passwordTextField.text, passwordText.length > 11 {
           self.errorStackView.isHidden = true
         }
       }
       else {
         if self.userNameValid {
           self.errorStackView.isHidden = false
-          self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
+          if let passwordText = self.passwordTextField.text, passwordText.length > 11 {
+            self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
+          }
+          else {
+            
+          }
         }
       }
       
@@ -272,7 +282,7 @@ extension RegisterViewController {
         DispatchQueue.main.async {
           self.endLoading()
           
-          if success {
+          if success.0 {
             self.coordinator?.confirmRegister(self.passwordTextField.text!)
           }
           else {
