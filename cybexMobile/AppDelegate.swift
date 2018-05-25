@@ -16,6 +16,7 @@ import SwiftyUserDefaults
 import BeareadToast
 import EasyAnimation
 import IQKeyboardManagerSwift
+import Kingfisher
 
 import Fabric
 import Crashlytics
@@ -37,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window?.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
     IQKeyboardManager.shared.enable = true
     IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+    
+    KingfisherManager.shared.defaultOptions = [.fromMemoryCacheOrRefresh]
     
     _ = RichStyle.init()
 
