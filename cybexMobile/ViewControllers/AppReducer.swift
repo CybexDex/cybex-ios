@@ -105,6 +105,7 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
   switch action {
   case let action as MarketsFetched:
     let data = applyMarketsToState(state, action: action)
+    
     state.data.accept(data)
     refreshTimes[Pair(base:action.pair.firstAssetId, quote:action.pair.secondAssetId)] = Date().timeIntervalSince1970
     state.pairsRefreshTimes = refreshTimes

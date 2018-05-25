@@ -44,7 +44,9 @@ struct HomeBucket:Equatable,Hashable {
   }
   
   var hashValue: Int {
-    return (base.hashValue < quote.hashValue).toInt + base.hashValue ^ quote.hashValue
+    let value = base.hashValue < quote.hashValue ? -1 : 1
+    let valueStr = "\(base.hashValue)" + "+" + "\(quote.hashValue)"
+    return value * valueStr.hashValue
   }
 }
 

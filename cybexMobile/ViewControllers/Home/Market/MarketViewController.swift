@@ -259,7 +259,8 @@ class MarketViewController: BaseViewController {
     commonObserveState()
     
     app_data.data.asObservable().distinctUntilChanged()
-      .filter({$0.count == AssetConfiguration.shared.asset_ids.count}).skip(1)
+      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
+      .skip(1)
       .subscribe(onNext: {[weak self] (s) in
         guard let `self` = self else { return }
         self.updateIndex()

@@ -63,8 +63,19 @@ class HomePairView: UIView {
           self.bulking.text = (matrix.incre == .greater ? "+" : "") + matrix.change.formatCurrency(digitNum: 2) + "%"
           self.high_lowContain.backgroundColor = matrix.incre.color()
         
-          let (eth,_) = changeToETHAndCYB(markets.quote_info.id)
-          self.rbmL.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).toString.formatCurrency(digitNum: 2)
+          let (eth,cyb) = changeToETHAndCYB(markets.quote_info.id)
+          if eth == "0" && cyb == "0"{
+             self.rbmL.text  = "≈¥0.00"
+          }else if (eth == "0"){
+            if let cyb_eth = changeCYB_ETH().toDouble(),cyb_eth != 0{
+              let eth_count = cyb.toDouble()! / cyb_eth
+              self.rbmL.text  = "≈¥" + (eth_count * app_data.eth_rmb_price).toString.formatCurrency(digitNum: 2)
+            }else{
+              self.rbmL.text  = "≈¥0.00"
+            }            
+          }else{
+            self.rbmL.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).toString.formatCurrency(digitNum: 2)
+          }
         }
       }
     }
