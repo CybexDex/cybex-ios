@@ -67,7 +67,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func applicationWillResignActive(_ application: UIApplication) {
     if WebsocketService.shared.checkNetworConnected() {
-      if let vc = app_coodinator.topViewController() {
+      if let vc = app_coodinator.startLoadingVC {
+        app_coodinator.startLoadingVC = nil
         vc.endLoading()
       }
       WebsocketService.shared.disConnect()
@@ -87,6 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     if !WebsocketService.shared.checkNetworConnected() && !WebsocketService.shared.needAutoConnect && reactable {//避免第一次 不是主动断开的链接
       if let vc = app_coodinator.topViewController() {
+        app_coodinator.startLoadingVC = vc
         vc.startLoading()
       }
       WebsocketService.shared.reConnect()
@@ -120,9 +122,9 @@ extension AppDelegate {
     }
     
     app_data.data.asObservable()
-      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
       .subscribe(onNext: { (s) in
-        if let vc = app_coodinator.topViewController() {
+        if let vc = app_coodinator.startLoadingVC {
+          app_coodinator.startLoadingVC = nil
           vc.endLoading()
         }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -132,7 +134,8 @@ extension AppDelegate {
     let status = RealReachability.sharedInstance().currentReachabilityStatus()
     if status == .RealStatusNotReachable || status  == .RealStatusUnknown {
       WebsocketService.shared.disConnect()
-      if let vc = app_coodinator.topViewController() {
+      if let vc = app_coodinator.startLoadingVC {
+        app_coodinator.startLoadingVC = nil
         vc.endLoading()
       }
       _ = BeareadToast.showError(text: "network is not available.", inView: self.window!, hide:2)
@@ -141,6 +144,8 @@ extension AppDelegate {
       let connected = WebsocketService.shared.checkNetworConnected()
       if !connected {
         if let vc = app_coodinator.topViewController() {
+          app_coodinator.startLoadingVC = vc
+          
           vc.startLoading()
         }
         WebsocketService.shared.reConnect()

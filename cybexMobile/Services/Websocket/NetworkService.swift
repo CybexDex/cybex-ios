@@ -118,15 +118,20 @@ class WebsocketService {
     async {
       do {
         let node = try await(self.detectFastNode())
-        self.currentNode = node
-        self.changeNode(node: node)
+        main {
+          self.currentNode = node
+          self.changeNode(node: node)
+        }
+
       }
       catch {
-        ez.runThisAfterDelay(seconds: 10, after: {
-          if !self.checkNetworConnected(), self.autoConnectCount <= 5 {
-            self.autoConnect()
-          }
-        })
+        main {
+          ez.runThisAfterDelay(seconds: 10, after: {
+            if !self.checkNetworConnected(), self.autoConnectCount <= 5 {
+              self.autoConnect()
+            }
+          })
+        }
       }
     }
   }
@@ -139,6 +144,7 @@ class WebsocketService {
     socket.request = request
     socket.delegate = self
     socket.connect()
+
   }
   
   func checkNetworConnected() -> Bool {
@@ -157,6 +163,8 @@ class WebsocketService {
   
   func disConnect() {
     needAutoConnect = false
+    requests = []
+    requesting = [:]
     socket.disconnect()
   }
   
@@ -340,6 +348,7 @@ extension WebsocketService: WebSocketDelegate {
     removeIDs()
     idGenerator = JsonIdGenerator()
     batchFactory.idGenerator = idGenerator
+  
     restoreToRequestList()
     
     if needAutoConnect {
@@ -360,10 +369,10 @@ extension WebsocketService: WebSocketDelegate {
   func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
     let data = JSON(parseJSON:text)
     
-//    if let error = data["error"].dictionary {
-//      print(error)
-//      return
-//    }
+    if let error = data["error"].dictionary {
+      print(error)
+      return
+    }
     
     guard let id = data["id"].int else {
       if let method = data["method"].string, method == "notice", let params = data["params"].array, let mID = params[0].int {

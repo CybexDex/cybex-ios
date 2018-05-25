@@ -32,7 +32,8 @@ class RegisterViewController: BaseViewController {
   
   @IBOutlet weak var macawView: MacawView!
   @IBOutlet weak var errorStackView: UIStackView!
-  @IBOutlet weak var errorMessage: UILabel!
+    @IBOutlet weak var pinCodeActivityView: UIActivityIndicatorView!
+    @IBOutlet weak var errorMessage: UILabel!
   
   var timer:Repeater?
   
@@ -60,10 +61,13 @@ class RegisterViewController: BaseViewController {
   }
   
   func updateSvgView() {
+    self.pinCodeActivityView.startAnimating()
+    
     async {
       let data = try! await(SimpleHTTPService.requestPinCode())
       
       main {
+        self.pinCodeActivityView.stopAnimating()
         self.pinID = data.id
         
         if let parser = try? SVGParser.parse(text: data.data) {
@@ -113,6 +117,11 @@ class RegisterViewController: BaseViewController {
   override func configureObserveState() {
     commonObserveState()
     
+  }
+  
+  deinit {
+    self.timer?.pause()
+    self.timer = nil
   }
 }
 
@@ -191,14 +200,19 @@ extension RegisterViewController {
         self.confirmPasswordTextField.tailImage = nil
       }
       if self.passwordTextField.text == self.confirmPasswordTextField.text {
-        if self.userNameValid {
+        if self.userNameValid ,let passwordText = self.passwordTextField.text, passwordText.length > 11 {
           self.errorStackView.isHidden = true
         }
       }
       else {
         if self.userNameValid {
           self.errorStackView.isHidden = false
-          self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
+          if let passwordText = self.passwordTextField.text, passwordText.length > 11 {
+            self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
+          }
+          else {
+            
+          }
         }
       }
       
@@ -254,7 +268,9 @@ extension RegisterViewController {
     }).disposed(by: disposeBag)
     
     self.timer = Repeater.every(.seconds(120), {[weak self] (timer) in
-      self?.updateSvgView()
+      main {
+        self?.updateSvgView()
+      }
     })
     self.timer?.start()
     
@@ -272,13 +288,20 @@ extension RegisterViewController {
         DispatchQueue.main.async {
           self.endLoading()
           
-          if success {
+          if success.0 {
             self.coordinator?.confirmRegister(self.passwordTextField.text!)
           }
           else {
             self.updateSvgView()
             
-            self.showAlert(R.string.localizable.registerFail.key.localized(), buttonTitle: R.string.localizable.ok.key.localized())
+            var message = R.string.localizable.registerFail.key.localized()
+            if success.1 == 403 {
+              message = R.string.localizable.registerFail403.key.localized()
+            }
+            else if success.1 == 429 {
+              message = R.string.localizable.registerFail429.key.localized()
+            }
+            self.showAlert(message, buttonTitle: R.string.localizable.ok.key.localized())
           }
         }
       }

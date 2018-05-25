@@ -48,6 +48,8 @@ class AppCoordinator {
   var entryCoordinator: EntryRootCoordinator!
 
   weak var currentPresentedRootCoordinator: NavCoordinator?
+  
+  weak var startLoadingVC:BaseViewController?
 
   init(rootVC: BaseTabbarViewController) {
     self.rootVC = rootVC

@@ -147,22 +147,22 @@ extension SimpleHTTPService {
     return promise
   }
   
-  static func requestRegister(_ params: [String:Any]) -> Promise<Bool> {
-    let (promise,seal) = Promise<Bool>.pending()
+  static func requestRegister(_ params: [String:Any]) -> Promise<(Bool, Int)> {
+    let (promise,seal) = Promise<(Bool, Int)>.pending()
     
     Alamofire.request(URL(string: AppConfiguration.SERVER_REGISTER_URLString)!, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
       guard let value = response.result.value else {
-        seal.fulfill(false)
+        seal.fulfill((false, 0))
         return
       }
       
       let json = JSON(value)
-      if let _ = json["code"].int {
-        seal.fulfill(false)
+      if let code = json["code"].int {
+        seal.fulfill((false, code))
         return
       }
       
-      seal.fulfill(true)
+      seal.fulfill((true, 0))
     }
     return promise
   }

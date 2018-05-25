@@ -83,10 +83,10 @@ extension UserManager {
     }
     
     let letterBegin = Guitar(pattern: "^([a-zA-Z])")
-    let containOther = Guitar(pattern: "[1-9+|\\-+]")
+    let containOther = Guitar(pattern: "[0-9+|\\-+]")
     let continuousDashes = Guitar(pattern: "(\\-\\-)")
     let dashEnd = Guitar(pattern: "(\\-)$")
-    let legal = Guitar(pattern: "([^a-zA-z1-9\\-])")
+    let legal = Guitar(pattern: "([^a-zA-z0-9\\-])")
 
     if !letterBegin.test(string: username) {
       return (false, R.string.localizable.accountValidateError2.key.localized())
@@ -118,7 +118,7 @@ extension UserManager {
     }
   }
   
-  func register(_ pinID:String, captcha:String, username:String, password:String) -> Promise<Bool> {
+  func register(_ pinID:String, captcha:String, username:String, password:String) -> Promise<(Bool,Int)> {
     return async {
       let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
       
@@ -126,7 +126,7 @@ extension UserManager {
         let params = ["cap":["id":pinID, "captcha":captcha], "account":["name":username, "owner_key":owner_key.public_key, "active_key":active_key.public_key,"memo_key":memo_key.public_key, "refcode":"", "referrer":""]]
         
         let data = try! await(SimpleHTTPService.requestRegister(params))
-        if data {
+        if data.0 {
           self.name = username
           self.avatarString = username.sha256()
           self.keys = keys
@@ -136,7 +136,7 @@ extension UserManager {
         return data
         
       }
-      return false
+      return (false, 0)
     }
   }
   

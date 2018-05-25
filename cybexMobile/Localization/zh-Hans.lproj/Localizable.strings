@@ -74,6 +74,9 @@
 "password.validate.error.1" = "输入12位以上的密码";
 "password.validate.error.2" = "密码不一致";
 "register.fail" = "注册失败";
+"register.fail403" = "验证码错误";
+"register.fail429" = "操作太频繁，请稍后再试";
+
 "register.confirm" = "当前密码：<password></password>\n• 我明确知晓，一旦忘记密码，我将会失去获取并使用该账户资金的途径\n• 我明确知晓，一旦忘记或丢失了密码，将没有任何人能够帮助我恢复\n• 我已经记录下来，或者用其它方式保存了我的密码\n";
 
 "home_name_vol"                 = "名称/成交量";
