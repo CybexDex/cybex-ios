@@ -36,6 +36,8 @@ extension NSObject {
 
 private var bagKey: UInt8 = 0
 private var storeKey: UInt8 = 1
+private var throttleKey: UInt8 = 2
+private var canrepeatKey: UInt8 = 3
 
 extension NSObject {
   var store: [String:Any] {
@@ -47,6 +49,31 @@ extension NSObject {
     }
     set {
       objc_setAssociatedObject(self, &storeKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    }
+  }
+  
+  var canRepeatContainer: [String:Bool] {
+    get {
+      if let storeData = objc_getAssociatedObject(self, &throttleKey) {
+        return storeData as! [String : Bool]
+      }
+      return [:]
+    }
+    set {
+      objc_setAssociatedObject(self, &throttleKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    }
+  }
+  
+  var canRepeat: Bool {
+    get {
+      if let storeData = objc_getAssociatedObject(self, &canrepeatKey) {
+        return storeData as! Bool
+      }
+      return true
+    }
+    set {
+      canRepeatContainer["\(self)"] = newValue
+      objc_setAssociatedObject(self, &canrepeatKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
   }
 }
