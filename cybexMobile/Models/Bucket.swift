@@ -169,14 +169,7 @@ class BucketMatrix {
     self.low = low.toString.formatCurrency(digitNum: base_info.precision)
 
     
-    var digitNum = 5
-    if homebucket.base == AssetConfiguration.ETH{
-      digitNum = 6
-    }else if homebucket.base == AssetConfiguration.BTC{
-      digitNum = 8
-    }
-    
-    self.price = lastClose_price.toString.formatCurrency(digitNum: digitNum)
+    self.price = lastClose_price.toString.formatCurrency(digitNum: base_info.precision)
 
     let change = (lastClose_price - firseOpen_price) * 100 / firseOpen_price
     let percent = round(change * 100) / 100.0
