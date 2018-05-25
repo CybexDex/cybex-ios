@@ -42,7 +42,7 @@ class HomePairView: UIView {
       self.asset2.text =  markets.quote_info.symbol.filterJade
       self.asset1.text = "/" + markets.base_info.symbol.filterJade
       if markets.bucket.count == 0 {
-        self.volume.text = "V: -"
+        self.volume.text = " -"
         self.price.text = "-"
         self.bulking.text = "-"
         self.bulking.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
