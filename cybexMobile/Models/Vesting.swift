@@ -70,7 +70,7 @@ class PortfolioData{
     cybPrice = amountCYB.formatCurrency(digitNum: 5) + " CYB"
     
     if let cybCount = amountCYB.toDouble() {
-      rbmPrice    = "≈¥" + String(cybCount * changeToETHAndCYB("1.3.0").eth.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
+      rbmPrice    = "≈¥" + String(cybCount * changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
     }else{
       rbmPrice    = "--"
     }

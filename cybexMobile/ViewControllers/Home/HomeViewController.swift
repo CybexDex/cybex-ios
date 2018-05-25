@@ -33,11 +33,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
     setupUI()
     
-    
     handlerUpdateVersion(nil)
-//    UserManager.shared.getkeyInKeyChain()
-//    UserManager.shared.login("cybex-test", password: "cybextest123456")
-//    UserManager.shared.validateLogin("cybex-test", password: "cybextest123456")
   }
   
   func setupUI() {    

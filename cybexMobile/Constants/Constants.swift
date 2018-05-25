@@ -103,7 +103,7 @@ class AssetConfiguration {
   
   static let CYB = "1.3.0"
   static let BTC = "1.3.3"
-  static let EOS = ""
+  static let EOS = "1.3.4"
   static let ETH = "1.3.2"
   
   static let market_base_assets = [AssetConfiguration.CYB,AssetConfiguration.BTC,AssetConfiguration.EOS,AssetConfiguration.ETH]

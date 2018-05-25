@@ -179,7 +179,7 @@ class AccountViewController: BaseViewController {
     memberLevel.localized_text = isSuper ? R.string.localizable.accountSuperMember.key.localizedContainer() :  R.string.localizable.accountBasicMember.key.localizedContainer()
     totalBalance.text = UserManager.shared.balance.toString.formatCurrency(digitNum: 5)
     
-    if let ethAmount = changeToETHAndCYB("1.3.0").eth.toDouble(){
+    if let ethAmount = changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble(){
       balanceRMB.text   = "≈¥" + String(UserManager.shared.balance * ethAmount * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
     }
     
