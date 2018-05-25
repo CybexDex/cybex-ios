@@ -274,8 +274,15 @@ extension RegisterViewController {
     })
     self.timer?.start()
     
-    self.registerButton.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] (tap) in
+    self.registerButton.rx.tapGesture().when(.recognized).filter {[weak self] (tap) -> Bool in
+      guard let `self` = self else { return false }
+
+      return self.registerButton.canRepeat
+      
+    }.subscribe(onNext: {[weak self] (tap) in
       guard let `self` = self else { return }
+      
+      self.registerButton.canRepeat = false
       
       self.startLoading()
       
@@ -303,6 +310,7 @@ extension RegisterViewController {
             }
             self.showAlert(message, buttonTitle: R.string.localizable.ok.key.localized())
           }
+          self.registerButton.canRepeat = true
         }
       }
       
