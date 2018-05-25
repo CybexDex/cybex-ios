@@ -53,6 +53,13 @@ extension AppCoordinator: AppStateManagerProtocol {
   }
   
   func fetchEthToRmbPrice(){
+    async {
+      let value = try! await(SimpleHTTPService.requestETHPrice())
+      
+      main { [weak self] in
+        self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
+      }
+    }
     
     self.timer = Repeater.every(.seconds(3)) {[weak self] timer in
       let value = try! await(SimpleHTTPService.requestETHPrice())
