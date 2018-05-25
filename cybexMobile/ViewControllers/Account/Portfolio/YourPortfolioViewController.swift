@@ -15,6 +15,7 @@ class YourPortfolioViewController: BaseViewController {
   struct define {
     static let sectionHeaderHeight : CGFloat = 44.0
   }
+  var data : [PortfolioData] = [PortfolioData]()
   
   var coordinator: (YourPortfolioCoordinatorProtocol & YourPortfolioStateManagerProtocol)?
   
@@ -50,6 +51,9 @@ class YourPortfolioViewController: BaseViewController {
     UserManager.shared.balances.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
       guard let `self` = self else { return }
       
+      if let _ = UserManager.shared.balances.value{
+        self.data = UserManager.shared.getPortfolioDatas()
+      }
       self.tableView.reloadData()
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
@@ -59,6 +63,9 @@ class YourPortfolioViewController: BaseViewController {
         guard let `self` = self else { return }
 
         DispatchQueue.main.async {
+          if let _ = UserManager.shared.balances.value{
+            self.data = UserManager.shared.getPortfolioDatas()
+          }
           self.tableView.reloadData()
         }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -68,15 +75,14 @@ class YourPortfolioViewController: BaseViewController {
 
 extension YourPortfolioViewController : UITableViewDataSource,UITableViewDelegate{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    guard let data = UserManager.shared.balances.value else {
-      return 0
-    }
-    return data.count
+    
+    return self.data.count
   }
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: YourPortfolioCell.self), for: indexPath) as! YourPortfolioCell
-    let data = UserManager.shared.balances.value
-    cell.setup(data?[indexPath.row], indexPath: indexPath)
+    
+    cell.setup(self.data[indexPath.row], indexPath: indexPath)
     return cell
   }
   

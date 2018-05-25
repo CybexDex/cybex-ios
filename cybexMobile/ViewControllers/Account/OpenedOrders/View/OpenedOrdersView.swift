@@ -19,10 +19,8 @@ class OpenedOrdersView:  UIView{
     var data: Any? {
     didSet {
       if let order = data as? LimitOrder {
-
         if order.isBuy {
           self.orderType.opened_status = 0
-          
           if let quote_info = app_data.assetInfo[order.sellPrice.quote.assetID] {
             quote.text = quote_info.symbol.filterJade
           }
@@ -40,11 +38,10 @@ class OpenedOrdersView:  UIView{
           if let base_info = app_data.assetInfo[order.sellPrice.quote.assetID] {
             base.text = "/" + base_info.symbol.filterJade
           }
-          
-
         }
+        
         let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-        self.amount.text = quoteAmount.toString + quote.text!
+        self.amount.text = quoteAmount.toString + " " +  quote.text!
         let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
         self.price.text = (baseAmount / quoteAmount).toString
       }

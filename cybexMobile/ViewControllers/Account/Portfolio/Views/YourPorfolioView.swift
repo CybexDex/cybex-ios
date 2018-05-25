@@ -31,56 +31,63 @@ class YourPorfolioView:  UIView{
   
   var data: Any? {
     didSet {
-      if let balance = data as? Balance {
+      if let portfolioData = data as? PortfolioData {
         bottomView.isHidden = true
 
-        high_low_view.isHidden = balance.asset_type == AssetConfiguration.CYB
+        self.icon.kf.setImage(with: URL(string: portfolioData.icon))
         
-        let iconString = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"
-        self.icon.kf.setImage(with: URL(string: iconString))
+        name.text      = portfolioData.name
+        amount.text    = portfolioData.realAmount
+        rmbPrice.text  = portfolioData.rbmPrice
+        cybAmount.text = portfolioData.cybPrice
         
-        name.text = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
         
-        amount.text = getRealAmount(balance.asset_type, amount: balance.balance).toString.formatCurrency(digitNum: 5)
-        
-        let source =  changeToETHAndCYB(balance.asset_type)
-        
+//        high_low_view.isHidden = balance.asset_type == AssetConfiguration.CYB
 
-        let rmb = source.eth.toDouble() ?? 0
-        
-        if rmb == 0 {
-          rmbPrice.text = "--"
-        }else{
-          rmbPrice.text = "≈¥" + String(rmb * (amount.text?.toDouble())! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
-        }
-        
-        let cyb  = source.cyb.toDouble() ?? 0
-        
-        if cyb == 0 {
-          cybAmount.text = "--"
-        }else{
-          cybAmount.text = String(cyb * (amount.text?.toDouble())!).formatCurrency(digitNum: 5)
-        }
-        
-        let buckets = app_data.data.value.filter { (homebucket) -> Bool in
-          return homebucket.base == AssetConfiguration.CYB && homebucket.quote == balance.asset_type
-        }
-        if let bucket = buckets.first {
-          DispatchQueue.global().async {
-            let matrix = BucketMatrix(bucket)
-            
-            DispatchQueue.main.async {
-              self.high_low_label.text = (matrix.incre == .greater ? "+" : "") + matrix.change + "%"
-              self.high_low_icon.image = matrix.incre.icon()
-              self.high_low_label.textColor = matrix.incre.color()
-            }
-          }
-        }
-        else {
-          self.high_low_label.textColor = .coolGrey
-          self.high_low_label.text = "-"
-          self.high_low_icon.image = #imageLiteral(resourceName: "ic_arrow_grey2.pdf")
-        }
+//        self.icon.kf.setImage(with: URL(string: iconString))
+//
+//        name.text = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
+//
+//        amount.text = getRealAmount(balance.asset_type, amount: balance.balance).toString.formatCurrency(digitNum: 5)
+//
+//        let source =  changeToETHAndCYB(balance.asset_type)
+//
+//
+//        let rmb = source.eth.toDouble() ?? 0
+//
+//        if rmb == 0 {
+//          rmbPrice.text = "--"
+//        }else{
+//          rmbPrice.text = "≈¥" + String(rmb * (amount.text?.toDouble())! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
+//        }
+//
+//        let cyb  = source.cyb.toDouble() ?? 0
+//
+//        if cyb == 0 {
+//          cybAmount.text = "--"
+//        }else{
+//          cybAmount.text = String(cyb * (amount.text?.toDouble())!).formatCurrency(digitNum: 5)
+//        }
+//
+//        let buckets = app_data.data.value.filter { (homebucket) -> Bool in
+//          return homebucket.base == AssetConfiguration.CYB && homebucket.quote == balance.asset_type
+//        }
+//        if let bucket = buckets.first {
+//          DispatchQueue.global().async {
+//            let matrix = BucketMatrix(bucket)
+//
+//            DispatchQueue.main.async {
+//              self.high_low_label.text = (matrix.incre == .greater ? "+" : "") + matrix.change + "%"
+//              self.high_low_icon.image = matrix.incre.icon()
+//              self.high_low_label.textColor = matrix.incre.color()
+//            }
+//          }
+//        }
+//        else {
+//          self.high_low_label.textColor = .coolGrey
+//          self.high_low_label.text = "-"
+//          self.high_low_icon.image = #imageLiteral(resourceName: "ic_arrow_grey2.pdf")
+//        }
       }
     }
   }

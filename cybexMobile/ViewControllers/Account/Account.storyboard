@@ -138,12 +138,16 @@
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="locali" value="account.login"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icArrowForward16Px" translatesAutoresizingMaskIntoConstraints="NO" id="RVp-06-T4Q">
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RVp-06-T4Q">
                                                                 <rect key="frame" x="69.5" y="14.5" width="16" height="16"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="16" id="DM2-vC-Frt"/>
                                                                     <constraint firstAttribute="height" constant="16" id="kxZ-Ml-tte"/>
                                                                 </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="theme2ImageName" value="icArrowDark24Px"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="theme1ImageName" value="icArrowForward16Px"/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </imageView>
                                                         </subviews>
                                                         <constraints>
@@ -363,7 +367,6 @@
                         <outlet property="balanceRMB" destination="9Qu-fC-mgm" id="zn5-Cv-OJ8"/>
                         <outlet property="bgImageView" destination="d1Q-u1-Y84" id="WC3-WL-nEt"/>
                         <outlet property="introduceCybex" destination="8wY-Fh-vlG" id="YjB-6D-yxT"/>
-                        <outlet property="loginArrowImgView" destination="RVp-06-T4Q" id="7tw-wq-T90"/>
                         <outlet property="memberLevel" destination="mSY-yo-RcD" id="QNs-32-szK"/>
                         <outlet property="nameL" destination="iad-av-Auu" id="e8S-Eb-rXA"/>
                         <outlet property="portfolioView" destination="Y2C-bZ-Yat" id="eev-EL-AK6"/>
@@ -496,6 +499,5 @@
         <image name="accountAvatar" width="56" height="56"/>
         <image name="account_bg_light" width="375" height="553"/>
         <image name="cloudWallet" width="24" height="24"/>
-        <image name="icArrowForward16Px" width="16" height="16"/>
     </resources>
 </document>

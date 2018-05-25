@@ -154,29 +154,29 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0dG-Rp-MKr">
-                    <rect key="frame" x="8" y="89" width="359" height="1"/>
+                    <rect key="frame" x="0.0" y="89" width="375" height="1"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="5Fn-e1-hBq"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                            <color key="value" red="0.090196080505847931" green="0.11372549086809158" blue="0.16470588743686676" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="value" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" name="paleGrey" red="0.969" green="0.973" blue="0.980" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="0dG-Rp-MKr" firstAttribute="leading" secondItem="J3G-Hc-4m6" secondAttribute="leading" constant="8" id="2rq-aI-5Zb"/>
+                <constraint firstItem="0dG-Rp-MKr" firstAttribute="leading" secondItem="J3G-Hc-4m6" secondAttribute="leading" id="2rq-aI-5Zb"/>
                 <constraint firstItem="xCw-AT-elF" firstAttribute="centerY" secondItem="rVR-g2-w3l" secondAttribute="centerY" id="JMO-Mp-Vpm"/>
                 <constraint firstAttribute="trailing" secondItem="xCw-AT-elF" secondAttribute="trailing" id="Kb0-ye-b10"/>
                 <constraint firstItem="YuW-9y-38C" firstAttribute="top" secondItem="J3G-Hc-4m6" secondAttribute="top" constant="8" id="VxS-Qj-2h1"/>
                 <constraint firstItem="vWP-to-6SS" firstAttribute="leading" secondItem="J3G-Hc-4m6" secondAttribute="leading" id="YTJ-rh-wdu"/>
                 <constraint firstAttribute="bottom" secondItem="0dG-Rp-MKr" secondAttribute="bottom" id="chz-xA-860"/>
                 <constraint firstItem="vWP-to-6SS" firstAttribute="top" secondItem="J3G-Hc-4m6" secondAttribute="top" constant="8" id="dvM-Z6-iSC"/>
-                <constraint firstItem="J3G-Hc-4m6" firstAttribute="trailing" secondItem="0dG-Rp-MKr" secondAttribute="trailing" constant="8" id="fpR-Zb-UEk"/>
+                <constraint firstItem="J3G-Hc-4m6" firstAttribute="trailing" secondItem="0dG-Rp-MKr" secondAttribute="trailing" id="fpR-Zb-UEk"/>
                 <constraint firstItem="YuW-9y-38C" firstAttribute="bottom" secondItem="J3G-Hc-4m6" secondAttribute="bottom" constant="-8" id="gDl-16-NX0"/>
                 <constraint firstItem="vWP-to-6SS" firstAttribute="bottom" secondItem="J3G-Hc-4m6" secondAttribute="bottom" constant="-8" id="rOd-Id-sDr"/>
                 <constraint firstItem="YuW-9y-38C" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vWP-to-6SS" secondAttribute="trailing" constant="10" id="sUg-vE-T6t"/>

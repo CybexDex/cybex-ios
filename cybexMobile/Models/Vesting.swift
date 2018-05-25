@@ -50,6 +50,8 @@ class VestingPolicy : Mappable{
   }
 }
 
+
+// 可用资产的页面数据
 class PortfolioData{
   var icon : String = ""
   var name : String = ""
@@ -75,4 +77,7 @@ class PortfolioData{
       rbmPrice    = "--"
     }
   }
+  
+  
+  
 }
