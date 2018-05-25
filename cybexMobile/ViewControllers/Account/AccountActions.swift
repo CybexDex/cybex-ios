@@ -21,7 +21,7 @@ struct AccountState: StateType {
 }
 
 struct AccountPropertyState {
-  
+
 }
 
 

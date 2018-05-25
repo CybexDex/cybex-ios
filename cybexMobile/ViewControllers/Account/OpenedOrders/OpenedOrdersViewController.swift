@@ -26,17 +26,6 @@ class OpenedOrdersViewController: BaseViewController {
   
   
   
-  /*
-   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-   let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, w: self.view.width, h: define.sectionHeaderHeight))
-   lockupAssetsSectionView.cybPriceTitle.locali = R.string.localizable.cyb_value.key.localized()
-   return lockupAssetsSectionView
-   }
-   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-   return define.sectionHeaderHeight
-   }
-   */
-  
   func setupUI(){
     headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 103))
     headerView.sectionTitleView.cybPriceTitle.locali = R.string.localizable.opened_order_value.key.localized()
