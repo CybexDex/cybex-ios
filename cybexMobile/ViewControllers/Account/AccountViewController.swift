@@ -43,7 +43,6 @@ class AccountViewController: BaseViewController {
   @IBOutlet weak var totalBalance: UILabel!
   @IBOutlet weak var stackView: UIStackView!
   
-  @IBOutlet weak var loginArrowImgView: UIImageView!
   @IBOutlet weak var accountImageView: UIImageView!
   
   @IBOutlet weak var balanceRMB: UILabel!
@@ -118,9 +117,8 @@ class AccountViewController: BaseViewController {
       for tag in tags {
         stackView.viewWithTag(tag)?.isHidden = true
       }
-      loginArrowImgView.image = UIImage(named: "ic_arrow_forward_16px")?.withColor(ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo)
+
       bgImageView.isHidden    = false
-      
       introduceCybex.styledText = R.string.localizable.accountIntroduce.key.localized()
       
     case .unPortfolio:
