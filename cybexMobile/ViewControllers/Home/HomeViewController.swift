@@ -8,7 +8,7 @@
 
 import Foundation
 import ReSwift
-import EZSwiftExtensions
+
 import RxCocoa
 import RxSwift
 import ChainableAnimations

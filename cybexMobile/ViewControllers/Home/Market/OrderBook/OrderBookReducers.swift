@@ -51,23 +51,24 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair:Pair) -> OrderBook {
     if sellPrice_base.assetID == pair.base {
       let percent = bids_total_amount[0...bids.count].reduce(0, +) / bids_total_amount.reduce(0, +)
       
-      let precision_ratio = pow(10, order.sellPrice.base.info().precision.toDouble) / pow(10, order.sellPrice.quote.info().precision.toDouble)
+      let precision_ratio = pow(10, order.sellPrice.base.info().precision.double) / pow(10, order.sellPrice.quote.info().precision.double)
 
       let quote_forSale = Double(order.forSale)! / (precision_ratio * order.sellPrice.toReal())
-      let quote_volume = quote_forSale / pow(10, order.sellPrice.quote.info().precision.toDouble)
+      
+      let quote_volume = quote_forSale / pow(10.0, order.sellPrice.quote.info().precision.double)
       
       let isCYB = order.sellPrice.base.assetID == AssetConfiguration.CYB
       let price_precision = isCYB ? 5 : 8
-      let bid = OrderBook.Order(price: order.sellPrice.toReal().toString.formatCurrency(digitNum: price_precision), volume: quote_volume.toString.suffixNumber(digitNum: 10 - price_precision), volume_percent: percent)
+      let bid = OrderBook.Order(price: order.sellPrice.toReal().formatCurrency(digitNum: price_precision), volume: quote_volume.suffixNumber(digitNum: 10 - price_precision), volume_percent: percent)
       bids.append(bid)
     }
     else {
       let percent = asks_total_amount[0...asks.count].reduce(0, +) / asks_total_amount.reduce(0, +)
-      let quote_volume = Double(order.forSale)! / pow(10, sellPrice_base.info().precision.toDouble)
+      let quote_volume = Double(order.forSale)! / pow(10, sellPrice_base.info().precision.double)
       
       let isCYB = order.sellPrice.quote.assetID == AssetConfiguration.CYB
       let price_precision = isCYB ? 5 : 8
-      let ask = OrderBook.Order(price: (1.0 / order.sellPrice.toReal()).toString.formatCurrency(digitNum: price_precision), volume: quote_volume.toString.suffixNumber(digitNum: 10 - price_precision), volume_percent: percent)
+      let ask = OrderBook.Order(price: (1.0 / order.sellPrice.toReal()).formatCurrency(digitNum: price_precision), volume: quote_volume.suffixNumber(digitNum: 10 - price_precision), volume_percent: percent)
       asks.append(ask)
     }
   }

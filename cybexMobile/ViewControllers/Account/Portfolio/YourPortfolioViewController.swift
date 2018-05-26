@@ -87,7 +87,7 @@ extension YourPortfolioViewController : UITableViewDataSource,UITableViewDelegat
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, w: self.view.width, h: define.sectionHeaderHeight))
+    let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: define.sectionHeaderHeight))
     lockupAssetsSectionView.cybPriceTitle.locali = R.string.localizable.cyb_value.key.localized()
     return lockupAssetsSectionView
   }

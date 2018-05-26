@@ -189,15 +189,68 @@ extension Formatter {
     return formatter
   }()
 }
+
 extension Date {
   var iso8601: String {
     return Formatter.iso8601.string(from: self)
   }
 }
 
+extension Double {
+  func string(digits:Int = 0) -> String {
+    if digits == 0 {
+      return "\(self)"
+    }
+    
+    return String(format: "%.\(digits)f", self)
+  }
+  
+  func formatCurrency(digitNum: Int) -> String {
+    let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
+      return formatter.maximumFractionDigits == digitNum
+    })
+    
+    if let format = existFormatters.first {
+      let result = format.string(from: NSNumber(value: self))
+      return result!
+    }
+    else {
+      let numberFormatter = NumberFormatter()
+      numberFormatter.numberStyle = .currency
+      numberFormatter.currencySymbol = ""
+      numberFormatter.maximumFractionDigits = digitNum
+      numberFormatter.minimumFractionDigits = digitNum
+      String.numberFormatters.append(numberFormatter)
+      return self.formatCurrency(digitNum: digitNum)
+    }
+  }
+  
+  func suffixNumber(digitNum: Int = 5) -> String {
+    var num = self
+    let sign = ((num < 0) ? "-" : "")
+    num = fabs(num)
+    if (num < 1000.0) {
+      return "\(sign)\(num.formatCurrency(digitNum: digitNum))"
+    }
+    
+    let exp: Int = Int(log10(num) / 3.0)
+    let units: [String] = ["k", "m", "b"]
+    
+    let precision = pow(1000.0, exp.double)
+    num = 100 * num / precision
+    
+    let result = num.rounded() / 100.0
+  
+//    let roundedNum = round(100.0 * num / pow(1000.0, Double(exp))) / 100.0
+    
+    return "\(sign)\(result.formatCurrency(digitNum: 2))" + "\(units[exp - 1])"
+  }
+}
+
 extension String {
   static var numberFormatters:[NumberFormatter] = []
-
+  static var doubleFormat:NumberFormatter = NumberFormatter()
+  
   var dateFromISO8601: Date? {
     return Formatter.iso8601.date(from: self) // "Mar 22, 2017, 10:22 AM"
   }
@@ -206,6 +259,11 @@ extension String {
     return self.replacingOccurrences(of: "JADE.", with: "")
   }
 
+  public func toDouble() -> Double? {
+    String.doubleFormat.allowsFloats = true
+    return String.doubleFormat.number(from: self)?.doubleValue
+  }
+  
   func formatCurrency(digitNum: Int) -> String {
     let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
       return formatter.maximumFractionDigits == digitNum
@@ -232,14 +290,14 @@ extension String {
     let sign = ((num < 0) ? "-" : "")
     num = fabs(num)
     if (num < 1000.0) {
-      return "\(sign)\(num.toString.formatCurrency(digitNum: digitNum))"
+      return "\(sign)\(num.formatCurrency(digitNum: digitNum))"
     }
 
     let exp: Int = Int(log10(num) / 3.0)
     let units: [String] = ["k", "m", "b"]
     let roundedNum: Double = round(100 * num / pow(1000.0, Double(exp))) / 100
 
-    return "\(sign)\(roundedNum.toString.formatCurrency(digitNum: 2))" + "\(units[exp - 1])"
+    return "\(sign)\(roundedNum.formatCurrency(digitNum: 2))" + "\(units[exp - 1])"
   }
 }
 

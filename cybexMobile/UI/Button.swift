@@ -42,16 +42,14 @@ class Button:UIView {
     if isEnable {
       gradientLayer.isHidden = false
       self.button.isUserInteractionEnabled = false
-      self.button.setBackgroundColor(.clear, forState: UIControlState.normal)
+      self.button.backgroundColor = .clear
       self.button.setTitleColor(.white, for: UIControlState.normal)
       self.button.setTitleColor(.white, for: UIControlState.disabled)
     }
     else {
       gradientLayer.isHidden = true
       self.button.isUserInteractionEnabled = true
-      self.button.setBackgroundColor(.steel30, forState: .normal)
-      self.button.setBackgroundColor(.steel30, forState: .highlighted)
-
+      self.button.backgroundColor = .steel30
       self.button.setTitleColor(.white30, for: UIControlState.normal)
     }
   }

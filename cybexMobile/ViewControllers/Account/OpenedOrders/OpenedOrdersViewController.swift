@@ -45,15 +45,15 @@ class OpenedOrdersViewController: BaseViewController {
     
     if segment.selectedSegmentIndex == 0 {
       headerView.totalValue_tip.localized_text = R.string.localizable.openedAllMoney.key.localizedContainer()
-      headerView.data = (UserManager.shared.limitOrderValue / changeCYB_ETH().toDouble()! * app_data.eth_rmb_price).toString
+      headerView.data = (UserManager.shared.limitOrderValue / changeCYB_ETH().toDouble()! * app_data.eth_rmb_price).string()
     }
     else if segment.selectedSegmentIndex == 1 {
       headerView.totalValue_tip.localized_text = R.string.localizable.openedBuyMoney.key.localizedContainer()
-      headerView.data = (UserManager.shared.limitOrder_buy_value / changeCYB_ETH().toDouble()! * app_data.eth_rmb_price).toString
+      headerView.data = (UserManager.shared.limitOrder_buy_value / changeCYB_ETH().toDouble()! * app_data.eth_rmb_price).string()
     }
     else {
       headerView.totalValue_tip.localized_text = R.string.localizable.openedSellMoney.key.localizedContainer()
-      headerView.data = ((UserManager.shared.limitOrderValue - UserManager.shared.limitOrder_buy_value) / changeCYB_ETH().toDouble()! * app_data.eth_rmb_price).toString
+      headerView.data = ((UserManager.shared.limitOrderValue - UserManager.shared.limitOrder_buy_value) / changeCYB_ETH().toDouble()! * app_data.eth_rmb_price).string()
     }
   }
   

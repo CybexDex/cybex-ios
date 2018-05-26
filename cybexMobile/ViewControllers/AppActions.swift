@@ -16,6 +16,8 @@ struct AppState:StateType {
 struct AppPropertyState {
   var data:BehaviorRelay<[HomeBucket]> = BehaviorRelay(value: [])
   
+  var matrixs:[BucketMatrix] = []
+  
   var detailData:[Pair:[candlesticks:[Bucket]]]?
 
   var subscribeIds:[Pair:Int]?
@@ -151,7 +153,7 @@ class AppPropertyActionCreate: LoadingActionCreator {
                   addAsset.base_volume = "0"
                   addAsset.quote_volume = "0"
                   addAsset.open = asset.open - gapCount * Double(asset.seconds)!
-                  assets.insertFirst(addAsset)
+                  assets.prepend(addAsset)
                   
       
                 }

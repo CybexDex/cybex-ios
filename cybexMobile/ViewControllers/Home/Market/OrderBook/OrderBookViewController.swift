@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
-import EZSwiftExtensions
+
 import SwiftyJSON
 
 class OrderBookViewController: BaseViewController {

@@ -189,10 +189,10 @@ class MarketViewController: BaseViewController {
       for (_, data) in response.enumerated() {
         let base_assetid = data.base
         let base_info = app_data.assetInfo[base_assetid]!
-        let base_precision = pow(10, base_info.precision.toDouble)
+        let base_precision = pow(10, base_info.precision.double)
         let quote_assetid = data.quote
         let quote_info = app_data.assetInfo[quote_assetid]!
-        let quote_precision = pow(10, quote_info.precision.toDouble)
+        let quote_precision = pow(10, quote_info.precision.double)
 
         let open_price = (Double(data.open_base)! / base_precision)  / (Double(data.open_quote)! / quote_precision)
         let close_price = (Double(data.close_base)! / base_precision)  / (Double(data.close_quote)! / quote_precision)

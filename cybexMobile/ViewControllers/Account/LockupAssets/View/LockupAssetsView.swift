@@ -17,8 +17,8 @@ class LockupAssetsView: UIView{
     
       self.iconImgV.kf.setImage(with: URL(string: data.icon))
       nameL.text            = data.name.filterJade
-      progressL.text        = "\(Int(data.progress.toDouble()! * 100.0))%"
-      if let progress = data.progress.toDouble(){
+      progressL.text        = "\(Int(data.progress.double()! * 100.0))%"
+      if let progress = data.progress.toDouble() {
         progressView.progress = progress
       }else{
         progressView.progress = 0

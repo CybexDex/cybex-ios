@@ -11,7 +11,7 @@ import ESTabBarController_swift
 import Localize_Swift
 import ReSwift
 import SwiftTheme
-import EZSwiftExtensions
+import SwifterSwift
 import Repeat
 
 protocol AppStateManagerProtocol {
@@ -121,9 +121,10 @@ class AppCoordinator {
     entryCoordinator.start()
     currentPresentedRootCoordinator = entryCoordinator
     
-    ez.runThisAfterDelay(seconds: 0.1) {
+    SwifterSwift.delay(milliseconds: 0.1) {
       self.rootVC.present(nav, animated: true, completion: nil)
     }
+
   
   }
   

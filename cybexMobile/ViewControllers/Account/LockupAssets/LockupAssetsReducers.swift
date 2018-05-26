@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 import SwiftTheme
-import EZSwiftExtensions
+
 
 func LockupAssetsReducer(action:Action, state:LockupAssetsState?) -> LockupAssetsState {
   return LockupAssetsState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: LockupAssetsPropertyReducer(state?.property, action: action))
@@ -47,7 +47,7 @@ func lockupAssteToLockUpAssetsDate(datas : [LockUpAssetsMData]) -> LockUpAssetsV
     let vesting_duration_seconds = data.vesting_policy.vesting_duration_seconds.toDouble()!
     let begin_time               = data.vesting_policy.begin_timestamp.dateFromISO8601
     let progress = (Date().timeIntervalSince1970 - (begin_time?.timeIntervalSince1970)!) / vesting_duration_seconds
-    let end_time = begin_time?.addingTimeInterval(vesting_duration_seconds).toString(format: "yyyy/MM/dd")
+    let end_time = begin_time?.addingTimeInterval(vesting_duration_seconds).string(withFormat: "yyyy/MM/dd")
     if progress < 1 && progress >= 0 {
       sources.append(LockupAssteData(icon: icon, name: name!, amount: count, RMBCount: price, progress: String(progress), endTime: end_time!))
     }

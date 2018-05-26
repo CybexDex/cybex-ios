@@ -60,7 +60,7 @@ enum candlesticks:Double,Hashable {
   }
   
   var hashValue: Int {
-    return self.rawValue.toInt
+    return self.rawValue.int
   }
   
   static let all:[candlesticks] = [.five_minute, .one_hour, .one_day]
@@ -109,7 +109,7 @@ class AssetConfiguration {
   static let market_base_assets = [AssetConfiguration.CYB,AssetConfiguration.BTC,AssetConfiguration.EOS,AssetConfiguration.ETH]
   
   var unique_ids:[String] {
-    return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).unique()
+    return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).withoutDuplicates()
   }
   
   private init() {

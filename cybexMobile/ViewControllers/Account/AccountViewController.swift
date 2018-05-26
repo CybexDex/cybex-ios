@@ -82,7 +82,7 @@ class AccountViewController: BaseViewController {
     self.automaticallyAdjustsScrollViewInsets = false
     self.localized_text = R.string.localizable.accountTitle.key.localizedContainer()
     configRightNavButton()
-    balanceIntroduce.image = UIImage(named: "cloudWallet")?.withColor(.steel)
+    balanceIntroduce.image = UIImage(named: "cloudWallet")?.tint(.steel, blendMode: .normal)
     self.balanceIntroduce.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self](tap) in
       
       guard let `self` = self else {return}
@@ -175,7 +175,7 @@ class AccountViewController: BaseViewController {
     
     let isSuper = UserManager.shared.account.value?.superMember ?? false
     memberLevel.localized_text = isSuper ? R.string.localizable.accountSuperMember.key.localizedContainer() :  R.string.localizable.accountBasicMember.key.localizedContainer()
-    totalBalance.text = UserManager.shared.balance.toString.formatCurrency(digitNum: 5)
+    totalBalance.text = UserManager.shared.balance.formatCurrency(digitNum: 5)
     
     if let ethAmount = changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble(){
       balanceRMB.text   = "≈¥" + String(UserManager.shared.balance * ethAmount * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)

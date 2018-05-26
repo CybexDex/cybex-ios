@@ -11,7 +11,7 @@ import ReSwift
 import Localize_Swift
 import SwiftTheme
 import SwiftyUserDefaults
-import EZSwiftExtensions
+import SwifterSwift
 
 class SettingViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -27,7 +27,7 @@ class SettingViewController: BaseViewController {
       navigationItem.largeTitleDisplayMode = .always
     }
 
-    self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, w: self.tableView.bounds.size.width, h: 0.01))
+    self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: 0.01))
     self.tableView.tableFooterView?.height = 68
     
     setupNotification()
@@ -117,7 +117,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     else {
       cell.textLabel?.localized_text = R.string.localizable.version.key.localizedContainer()
-      cell.detailTextLabel?.text = ez.appVersion!
+      cell.detailTextLabel?.text = SwifterSwift.appVersion!
     }
     return cell
   }

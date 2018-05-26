@@ -244,7 +244,7 @@ extension CBKLineAccessoryView {
         let strokeColor = macd > 0 ?
           configuration.theme.increaseColor : configuration.theme.decreaseColor
         
-        let path = UIBezierPath(roundedRect: CGRect(x:xPosition - configuration.theme.klineWidth / 2, y:startPoint.y, w: configuration.theme.klineWidth, h:abs(endPoint.y - startPoint.y)), cornerRadius: configuration.theme.klineRadius).cgPath
+        let path = UIBezierPath(roundedRect: CGRect(x:xPosition - configuration.theme.klineWidth / 2, y:startPoint.y, width: configuration.theme.klineWidth, height:abs(endPoint.y - startPoint.y)), cornerRadius: configuration.theme.klineRadius).cgPath
         context.addPath(path)
         context.setFillColor(strokeColor.withAlphaComponent(0.2).cgColor)
         context.fillPath()

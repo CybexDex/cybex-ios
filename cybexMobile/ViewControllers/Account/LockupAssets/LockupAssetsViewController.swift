@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import ReSwift
 import TinyConstraints
-import EZSwiftExtensions
+
 import SwiftyJSON
 
 class LockupAssetsViewController: BaseViewController {
@@ -79,7 +79,7 @@ extension LockupAssetsViewController : UITableViewDataSource ,UITableViewDelegat
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, w: self.view.width, h: define.sectionHeaderHeight))
+    let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: define.sectionHeaderHeight))
     
     return lockupAssetsSectionView
   }

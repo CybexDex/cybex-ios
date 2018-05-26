@@ -78,7 +78,7 @@ extension UserManager {
   }
   
   func validateUserName(_ username:String) -> (Bool, String) {
-    if username.length > 63 || username.length < 3 {
+    if username.count > 63 || username.count < 3 {
       return (false, R.string.localizable.accountValidateError3.key.localized())
     }
     

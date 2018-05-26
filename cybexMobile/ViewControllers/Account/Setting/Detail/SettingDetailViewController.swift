@@ -13,7 +13,7 @@ import ReSwift
 import SwiftTheme
 import Localize_Swift
 import SwiftyUserDefaults
-import EZSwiftExtensions
+import SwifterSwift
 
 enum settingPage {
   case language
@@ -32,7 +32,7 @@ class SettingDetailViewController: BaseViewController {
     super.viewDidLoad()
 
     self.localized_text = self.pageType == .language ? R.string.localizable.language.key.localizedContainer() : R.string.localizable.theme.key.localizedContainer()
-    self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, w: self.tableView.bounds.size.width, h: 0.01))
+    self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: 0.01))
     self.tableView.contentInset = UIEdgeInsetsMake(self.tableView.contentInset.top + 10, 0, 0, 0)
   }
 
@@ -107,22 +107,22 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
     switch self.pageType {
     case .theme:
       self.coordinator?.popViewController(false)
-        
-      ez.runThisAfterDelay(seconds: 0.01) {
+      
+      SwifterSwift.delay(milliseconds: 0.01) {
         Defaults[.theme] = index
         ThemeManager.setTheme(index: index)
       }
      
-  
     case .language:
       self.coordinator?.popViewController(false)
 
-      ez.runThisAfterDelay(seconds: 0.01) {
+      SwifterSwift.delay(milliseconds: 0.01) {
         let language = index == 1 ? "zh-Hans" : "en"
         Defaults[.language] = language
         Localize.setCurrentLanguage(language)
         NotificationCenter.default.post(name: Notification.Name(rawValue: "changeLocalizeAction"), object: nil)
       }
+
     default:
       break
     }

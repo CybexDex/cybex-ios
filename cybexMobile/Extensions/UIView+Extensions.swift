@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftTheme
-import EZSwiftExtensions
+
 import Localize_Swift
 
 extension UIView {

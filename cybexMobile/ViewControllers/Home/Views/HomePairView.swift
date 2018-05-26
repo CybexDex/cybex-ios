@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import EZSwiftExtensions
+
 import RxGesture
 import Kingfisher
 
@@ -69,12 +69,12 @@ class HomePairView: UIView {
           }else if (eth == "0"){
             if let cyb_eth = changeCYB_ETH().toDouble(),cyb_eth != 0{
               let eth_count = cyb.toDouble()! / cyb_eth
-              self.rbmL.text  = "≈¥" + (eth_count * app_data.eth_rmb_price).toString.formatCurrency(digitNum: 2)
+              self.rbmL.text  = "≈¥" + (eth_count * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
             }else{
               self.rbmL.text  = "≈¥0.00"
             }            
           }else{
-            self.rbmL.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).toString.formatCurrency(digitNum: 2)
+            self.rbmL.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
           }
         }
       }

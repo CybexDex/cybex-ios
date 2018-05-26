@@ -94,7 +94,7 @@ class CBKLineMainView: UIView {
     
     // 绘制提示数据
     fetchAssistString(model: mainDrawKLineModels.last)
-    drawAssistString?.draw(in: CGRect(x: 10, y : 15, w: width - 30, h:configuration.main.assistViewHeight))
+    drawAssistString?.draw(in: CGRect(x: 10, y : 15, width: width - 30, height:configuration.main.assistViewHeight))
     
     let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
 
@@ -138,7 +138,7 @@ class CBKLineMainView: UIView {
           context.strokeLineSegments(between: [CGPoint(x: xPosition - configuration.theme.klineWidth / 2, y: closePoint.y), CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: closePoint.y)])
         }
         else {
-          let path = UIBezierPath(roundedRect: CGRect(x:xPosition - configuration.theme.klineWidth / 2, y: klineModel.open < klineModel.close ? closePoint.y : openPoint.y, w: configuration.theme.klineWidth, h:max(abs(closePoint.y - openPoint.y), configuration.theme.klineShadowLineWidth)), cornerRadius: configuration.theme.klineRadius).cgPath
+          let path = UIBezierPath(roundedRect: CGRect(x:xPosition - configuration.theme.klineWidth / 2, y: klineModel.open < klineModel.close ? closePoint.y : openPoint.y, width: configuration.theme.klineWidth, height:max(abs(closePoint.y - openPoint.y), configuration.theme.klineShadowLineWidth)), cornerRadius: configuration.theme.klineRadius).cgPath
           context.addPath(path)
           context.setFillColor(strokeColor.cgColor)
           context.fillPath()

@@ -40,7 +40,7 @@ class RegisterViewController: BaseViewController {
   var pinID:String = ""
   var userNameValid = false {
     didSet {
-      if userNameValid , let password = self.passwordTextField.text, password.length > 11 , self.passwordTextField.text == self.confirmPasswordTextField.text, let code = self.codeTextField.text, code.length == 4 {
+      if userNameValid , let password = self.passwordTextField.text, password.count > 11 , self.passwordTextField.text == self.confirmPasswordTextField.text, let code = self.codeTextField.text, code.count == 4 {
         self.registerButton.isEnable = true
       }
       else {
@@ -185,7 +185,7 @@ extension RegisterViewController {
         self.passwordTextField.tailImage = nil
       }
       
-      if let confirmText = self.confirmPasswordTextField.text, confirmText.length > 0 && (self.passwordTextField.text != self.confirmPasswordTextField.text) {
+      if let confirmText = self.confirmPasswordTextField.text, confirmText.count > 0 && (self.passwordTextField.text != self.confirmPasswordTextField.text) {
         if self.userNameValid {
           self.errorStackView.isHidden = false
           self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
@@ -200,14 +200,14 @@ extension RegisterViewController {
         self.confirmPasswordTextField.tailImage = nil
       }
       if self.passwordTextField.text == self.confirmPasswordTextField.text {
-        if self.userNameValid ,let passwordText = self.passwordTextField.text, passwordText.length > 11 {
+        if self.userNameValid ,let passwordText = self.passwordTextField.text, passwordText.count > 11 {
           self.errorStackView.isHidden = true
         }
       }
       else {
         if self.userNameValid {
           self.errorStackView.isHidden = false
-          if let passwordText = self.passwordTextField.text, passwordText.length > 11 {
+          if let passwordText = self.passwordTextField.text, passwordText.count > 11 {
             self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
           }
           else {

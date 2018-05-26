@@ -8,7 +8,7 @@
 
 import Foundation
 import BeareadToast
-import EZSwiftExtensions
+
 import SwiftTheme
 import RxCocoa
 import RxSwift
@@ -134,7 +134,7 @@ class BaseViewController: UIViewController {
 
   func configLeftNavButton(_ image:UIImage?) {
     leftNavButton = UIButton.init(type: .custom)
-    leftNavButton?.frame = CGRect(x: 0, y: 0, w: 24, h: 24)
+    leftNavButton?.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
     leftNavButton?.setImage(image ?? #imageLiteral(resourceName: "ic_view_list_24px"), for: .normal)
     leftNavButton?.addTarget(self, action: #selector(leftAction(_:)), for: .touchUpInside)
     leftNavButton?.isHidden = false
@@ -143,7 +143,7 @@ class BaseViewController: UIViewController {
   
   func configRightNavButton(_ image:UIImage? = nil) {
     rightNavButton = UIButton.init(type: .custom)
-    rightNavButton?.frame = CGRect(x: 0, y: 0, w: 24, h: 24)
+    rightNavButton?.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
     rightNavButton?.titleLabel?.font = UIFont.systemFont(ofSize: 16)
     rightNavButton?.setImage(image ?? #imageLiteral(resourceName: "icSettings24Px"), for: .normal)
     rightNavButton?.addTarget(self, action: #selector(rightAction(_:)), for: .touchUpInside)

@@ -136,6 +136,6 @@ func getRealAmount(_ id : String ,amount : String) -> Double{
   guard let asset = app_data.assetInfo[id] else {
     return 0
   }
-  return amount.toDouble()! / pow(10, asset.precision.toDouble)
+  return amount.toDouble()! / pow(10, asset.precision.double)
   
 }

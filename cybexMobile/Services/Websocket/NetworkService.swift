@@ -10,7 +10,7 @@ import Foundation
 import Starscream
 import JSONRPCKit
 import SwiftyJSON
-import EZSwiftExtensions
+import SwifterSwift
 import PromiseKit
 import AwaitKit
 
@@ -126,7 +126,7 @@ class WebsocketService {
       }
       catch {
         main {
-          ez.runThisAfterDelay(seconds: 10, after: {
+          SwifterSwift.delay(milliseconds: 10, completion: {
             if !self.checkNetworConnected(), self.autoConnectCount <= 5 {
               self.autoConnect()
             }
@@ -386,20 +386,20 @@ extension WebsocketService: WebSocketDelegate {
       return
     }
     
-    if let requestData = requesting[id.toString], let request = requestData.1 as? JSONRPCResponse {
+    if let requestData = requesting[id.description], let request = requestData.1 as? JSONRPCResponse {
       if requestData.1 is SubscribeMarketRequest {
         request.response(id)
-        requesting.removeValue(forKey: id.toString)
+        requesting.removeValue(forKey: id.description)
         return
       }
       
       if let object = try? request.transferResponse(from: data["result"].object) {
         request.response(object)
-        requesting.removeValue(forKey: id.toString)
+        requesting.removeValue(forKey: id.description)
       }
       else {
         request.response(data.object)
-        requesting.removeValue(forKey: id.toString)
+        requesting.removeValue(forKey: id.description)
       }
     }
     

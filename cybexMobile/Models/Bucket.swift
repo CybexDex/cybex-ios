@@ -128,8 +128,8 @@ class BucketMatrix {
     let base_info = homebucket.base_info
     let quote_info = homebucket.quote_info
 
-    let base_precision = pow(10, base_info.precision.toDouble)
-    let quote_precision = pow(10, quote_info.precision.toDouble)
+    let base_precision = pow(10, base_info.precision.double)
+    let quote_precision = pow(10, quote_info.precision.double)
 
     let lastClose_price = (last_closebase_amount / base_precision) / (last_closequote_amount / quote_precision)
     let firseOpen_price = (first_openbase_amount / base_precision) / (first_openquote_amount / quote_precision)
@@ -162,19 +162,19 @@ class BucketMatrix {
 
 
     self.base_volume_origin = base_volume
-    self.base_volume = base_volume.toString.suffixNumber(digitNum: 2)
-    self.quote_volume = quote_volume.toString.suffixNumber(digitNum: 2)
+    self.base_volume = base_volume.suffixNumber(digitNum: 2)
+    self.quote_volume = quote_volume.suffixNumber(digitNum: 2)
 
-    self.high = high.toString.formatCurrency(digitNum: base_info.precision)
-    self.low = low.toString.formatCurrency(digitNum: base_info.precision)
+    self.high = high.formatCurrency(digitNum: base_info.precision)
+    self.low = low.formatCurrency(digitNum: base_info.precision)
 
     
-    self.price = lastClose_price.toString.formatCurrency(digitNum: base_info.precision)
+    self.price = lastClose_price.formatCurrency(digitNum: base_info.precision)
 
     let change = (lastClose_price - firseOpen_price) * 100 / firseOpen_price
     let percent = round(change * 100) / 100.0
 
-    self.change = percent.toString.formatCurrency(digitNum: 2)
+    self.change = percent.formatCurrency(digitNum: 2)
 
     if percent == 0 {
       self.incre = .equal
@@ -228,7 +228,7 @@ class ToStringTransform: TransformType {
       return v
     }
     else if let v = value as? Int {
-      return v.toString
+      return v.description
     }
     
     return nil

@@ -81,7 +81,7 @@ extension AppCoordinator {
 
     var start = now.addingTimeInterval(-3600 * 24)
 
-    let timePassed = (-start.minute * 60 - start.second).toDouble
+    let timePassed = (-start.minute * 60 - start.second).double
     start = start.addingTimeInterval(timePassed)
 
 
@@ -102,7 +102,7 @@ extension AppCoordinator {
     let now = Date()
     let start = now.addingTimeInterval(-gap.rawValue * 199)
 
-    UIApplication.shared.coordinator().fetchKline(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: gap.rawValue.toInt, startTime: start, endTime: now), gap: gap, vc: vc, selector: selector)
+    UIApplication.shared.coordinator().fetchKline(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: gap.rawValue.int, startTime: start, endTime: now), gap: gap, vc: vc, selector: selector)
   }
 
   func getLatestData() {

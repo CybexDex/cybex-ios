@@ -15,7 +15,8 @@ class BaseWebViewController: BaseViewController {
   public var url: URL? {
     didSet {
       if let fragment = url!.fragment {
-        let random = Int.random(within: 1..<Int(Int32.max))
+        let max = UInt32.max - 1
+        let random = Int.random(between: 1, and: Int(max))
         let chUrl = URL(string: url!.absoluteString.replacingOccurrences(of: "#\(fragment)", with: "#\(random)"))!
         webView.load(URLRequest.init(url: chUrl))
       }

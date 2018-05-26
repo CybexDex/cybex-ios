@@ -9,6 +9,8 @@
 import Foundation
 import ReSwift
 import RxCocoa
+import SwifterSwift
+
 
 public class BlockSubscriber<S>: StoreSubscriber {
   public typealias StoreSubscriberStateType = S
@@ -106,6 +108,7 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
   case let action as MarketsFetched:
     let data = applyMarketsToState(state, action: action)
     
+//    state.matrixs = 
     state.data.accept(data)
     refreshTimes[Pair(base:action.pair.firstAssetId, quote:action.pair.secondAssetId)] = Date().timeIntervalSince1970
     state.pairsRefreshTimes = refreshTimes
@@ -119,7 +122,8 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
   case let action as AssetInfoAction:
     state.assetInfo[action.assetID] = action.info
   case let action as kLineFetched:
-    if klineDatas.has(action.pair) {
+    
+    if klineDatas.has(key: action.pair) {
       var klineData = klineDatas[action.pair]!
       klineData[action.stick] = action.assets
       klineDatas[action.pair] = klineData
