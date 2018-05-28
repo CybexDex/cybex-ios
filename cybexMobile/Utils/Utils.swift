@@ -133,6 +133,7 @@ func changeCYB_ETH() -> String{
 }
 
 
+
 func getRealAmount(_ id : String ,amount : String) -> Double{
   guard let asset = app_data.assetInfo[id] else {
     return 0

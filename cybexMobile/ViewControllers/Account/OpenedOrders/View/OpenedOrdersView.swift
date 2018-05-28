@@ -41,9 +41,9 @@ class OpenedOrdersView:  UIView{
         }
         
         let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-        self.amount.text = quoteAmount.string + " " +  quote.text!
+        self.amount.text = quoteAmount.string.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.base.assetID]!.precision) + " " +  quote.text!
         let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
-        self.price.text = (baseAmount / quoteAmount).string
+        self.price.text = (baseAmount / quoteAmount).string.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.quote.assetID]!.precision)
       }
       
     }

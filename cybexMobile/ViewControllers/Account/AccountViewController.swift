@@ -82,7 +82,8 @@ class AccountViewController: BaseViewController {
     self.automaticallyAdjustsScrollViewInsets = false
     self.localized_text = R.string.localizable.accountTitle.key.localizedContainer()
     configRightNavButton()
-    balanceIntroduce.image = UIImage(named: "cloudWallet")?.tint(.steel, blendMode: .normal)
+//    balanceIntroduce.image = UIImage(named: "cloudWallet")?.tint(.steel, blendMode: .normal)
+    
     self.balanceIntroduce.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self](tap) in
       
       guard let `self` = self else {return}
