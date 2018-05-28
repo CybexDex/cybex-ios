@@ -91,7 +91,7 @@ enum changeScope {
   }
 }
 
-class BucketMatrix {
+struct BucketMatrix {
   var price:String = ""
   
   var asset:[Bucket]
@@ -105,12 +105,16 @@ class BucketMatrix {
   var low:String = ""
   
   var change:String = ""
+  var base:String = ""
+  var quote:String = ""
   
   var incre:changeScope = .equal
   
   var icon : String = ""
   init(_ homebucket:HomeBucket) {
     self.asset = homebucket.bucket
+    self.base = homebucket.base
+    self.quote = homebucket.quote
     
     guard let last = self.asset.last else { return }
     
@@ -224,7 +228,7 @@ class ToStringTransform: TransformType {
   
   open func transformFromJSON(_ value: Any?) -> String? {
     if let v = value as? Double {
-      return String(describing: v)
+      return v.description
     }
     else if let v = value as? String {
       return v

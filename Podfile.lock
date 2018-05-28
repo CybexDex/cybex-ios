@@ -11,6 +11,7 @@ PODS:
   - Crashlytics (3.10.1):
     - Fabric (~> 1.7.5)
   - CryptoSwift (0.9.0)
+  - Device (3.1.0)
   - DNSPageView (1.0.1)
   - EasyAnimation (2.0.2)
   - ESTabBarController-swift (2.6.2)
@@ -55,6 +56,7 @@ PODS:
   - PromiseKit/UIKit (6.2.6):
     - PromiseKit/CorePromise
   - Proposer (1.2.0)
+  - QuickLayout (1.0.13)
   - R.swift (4.0.0):
     - R.swift.Library (~> 4.0.0)
   - R.swift.Library (4.0.0)
@@ -83,6 +85,8 @@ PODS:
   - SipHash (1.2.0)
   - Siren (3.4.0)
   - Starscream (3.0.5)
+  - SwiftEntryKit (0.1.5):
+    - QuickLayout (= 1.0.13)
   - SwifterSwift (4.3.0):
     - SwifterSwift/AppKit (= 4.3.0)
     - SwifterSwift/CoreGraphics (= 4.3.0)
@@ -124,6 +128,7 @@ DEPENDENCIES:
   - ChainableAnimations
   - Crashlytics
   - CryptoSwift
+  - Device
   - DNSPageView
   - EasyAnimation
   - ESTabBarController-swift
@@ -160,6 +165,7 @@ DEPENDENCIES:
   - SDCAlertView
   - Siren
   - Starscream
+  - SwiftEntryKit
   - SwifterSwift
   - SwiftRichString (from `https://github.com/malcommac/SwiftRichString`, tag `2.0.1`)
   - SwiftTheme
@@ -184,6 +190,7 @@ SPEC REPOS:
     - ChainableAnimations
     - Crashlytics
     - CryptoSwift
+    - Device
     - DNSPageView
     - EasyAnimation
     - ESTabBarController-swift
@@ -210,6 +217,7 @@ SPEC REPOS:
     - Presentr
     - PromiseKit
     - Proposer
+    - QuickLayout
     - R.swift
     - R.swift.Library
     - RealReachability
@@ -225,6 +233,7 @@ SPEC REPOS:
     - SipHash
     - Siren
     - Starscream
+    - SwiftEntryKit
     - SwifterSwift
     - SwiftHash
     - SwiftTheme
@@ -266,6 +275,7 @@ SPEC CHECKSUMS:
   ChainableAnimations: 12e0a88e72fb554ad4cda38c40474e4d65c972a2
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   CryptoSwift: bca8c5b653dcc2d9734409242a070ff53bafac86
+  Device: 8a21a61f5f938a12dadd44d82287996081b6919b
   DNSPageView: 93b0f9c9ab0e2f8c1d9aa5b0d44740bd2d775d78
   EasyAnimation: 977ef673efe8ce62447807eedb380a77b189dc80
   ESTabBarController-swift: f0a8679e43df1e60b7b36bbcaf1dc98ba6273c7d
@@ -292,6 +302,7 @@ SPEC CHECKSUMS:
   Presentr: 797ae6ec8904eaba4ec58a4c2065bd66e31569ea
   PromiseKit: 8245cb2e3a8fe00453e580bd4aafb57e1671f501
   Proposer: 722fe61822b89f551ae10afe8314067f98c39c28
+  QuickLayout: caf28f8ead39ef0c2548aff46d50bc46b27aabfc
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
   RealReachability: 5e4759f821ecc1c03f6e1db0baf682ef59468b5f
@@ -307,6 +318,7 @@ SPEC CHECKSUMS:
   SipHash: c6e9e43e9c531b5bc6602545130c26194a6d31ce
   Siren: 5b8be41b5cd05aa3528303325966e919bd53e412
   Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
+  SwiftEntryKit: cf5a98d38a3d37555c028174050de8ce19da13a3
   SwifterSwift: f3fce2b9fc5b9d8fda6eec33825e5243c60aebba
   SwiftHash: c805de5a434eacfa0dac7210745a50c55d7fe33d
   SwiftRichString: 3b29b5f2eb0eb244497532f2fd2ec26318eae584
@@ -324,6 +336,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 33386c55fe481f6c2b40250324798d4199469b46
 
-PODFILE CHECKSUM: 215d96f4ac93a8a8b557bed89562c59a7ff7c99a
+PODFILE CHECKSUM: 153243f17f96880e378152f2c9bab4ef879dfeac
 
 COCOAPODS: 1.5.2

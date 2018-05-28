@@ -121,7 +121,7 @@ class AppCoordinator {
     entryCoordinator.start()
     currentPresentedRootCoordinator = entryCoordinator
     
-    SwifterSwift.delay(milliseconds: 0.1) {
+    SwifterSwift.delay(milliseconds: 100) {
       self.rootVC.present(nav, animated: true, completion: nil)
     }
 

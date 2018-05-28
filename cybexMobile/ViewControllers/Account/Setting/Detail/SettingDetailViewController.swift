@@ -108,7 +108,7 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
     case .theme:
       self.coordinator?.popViewController(false)
       
-      SwifterSwift.delay(milliseconds: 0.01) {
+      SwifterSwift.delay(milliseconds: 10) {
         Defaults[.theme] = index
         ThemeManager.setTheme(index: index)
       }
@@ -116,7 +116,7 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
     case .language:
       self.coordinator?.popViewController(false)
 
-      SwifterSwift.delay(milliseconds: 0.01) {
+      SwifterSwift.delay(milliseconds: 10) {
         let language = index == 1 ? "zh-Hans" : "en"
         Defaults[.language] = language
         Localize.setCurrentLanguage(language)
