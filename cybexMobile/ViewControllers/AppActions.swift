@@ -16,7 +16,7 @@ struct AppState:StateType {
 struct AppPropertyState {
   var data:BehaviorRelay<[HomeBucket]> = BehaviorRelay(value: [])
   
-  var matrixs:[BucketMatrix] = []
+  var matrixs:BehaviorRelay<[Pair:BucketMatrix]> = BehaviorRelay(value:[:])
   
   var detailData:[Pair:[candlesticks:[Bucket]]]?
 
@@ -196,6 +196,7 @@ class AppPropertyActionCreate: LoadingActionCreator {
   func fetchingMarketList(_  params:AssetPairQueryParams, callback:CommonAnyCallback?) {
     let request = GetMarketHistoryRequest(queryParams: params) { response in
       if let callback = callback {
+
         callback(response)
       }
     }

@@ -81,6 +81,7 @@ def other
     pod 'Siren'
     pod 'LifetimeTracker'
     pod 'MLeaksFinder'
+    pod 'Device'
 end
 
 def fabric

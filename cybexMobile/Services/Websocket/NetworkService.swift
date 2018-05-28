@@ -13,6 +13,7 @@ import SwiftyJSON
 import SwifterSwift
 import PromiseKit
 import AwaitKit
+import Device
 
 enum NodeURLString:String {
   case shanghai = "wss://shanghai.51nebula.com"
@@ -28,6 +29,8 @@ enum NodeURLString:String {
 }
 
 class WebsocketService {
+  private var last_send_time:TimeInterval = 0
+  
   private var autoConnectCount = 0
   private var isConnecting:Bool = false
   private var isFetchingID:Bool = false
@@ -126,7 +129,7 @@ class WebsocketService {
       }
       catch {
         main {
-          SwifterSwift.delay(milliseconds: 10, completion: {
+          SwifterSwift.delay(milliseconds: 10000, completion: {
             if !self.checkNetworConnected(), self.autoConnectCount <= 5 {
               self.autoConnect()
             }
@@ -380,7 +383,29 @@ extension WebsocketService: WebSocketDelegate {
           let index = ids.values.index(of: mID)!
           let pair = ids.keys[index]
           
-          UIApplication.shared.coordinator().request24hMarkets([pair], sub: false)
+          if Device.version() == .iPhone5S || Device.version() == .iPhone5C || Device.version() == .iPhone5 {
+            let timeGap = 1.0
+            let cur = NSDate().timeIntervalSince1970
+            if cur - last_send_time > timeGap {
+              UIApplication.shared.coordinator().request24hMarkets([pair], sub: false)
+              last_send_time = cur
+            }
+            else {
+              let futhur = timeGap - (cur - last_send_time)
+              last_send_time = last_send_time + timeGap
+//              print(futhur)
+              SwifterSwift.delay(milliseconds: futhur * 1000) {
+//                print(Date())
+                UIApplication.shared.coordinator().request24hMarkets([pair], sub: false)
+              }
+              
+            }
+          }
+          else {
+            UIApplication.shared.coordinator().request24hMarkets([pair], sub: false)
+          }
+         
+
         }
       }
       return

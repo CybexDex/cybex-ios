@@ -75,7 +75,11 @@ class AccountViewController: BaseViewController {
     }
   }
   
-  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    UserManager.shared.fetchAccountInfo()
+  }
   
   // UI的初始化设置
   func setupUI(){

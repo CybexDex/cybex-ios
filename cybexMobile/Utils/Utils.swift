@@ -58,6 +58,7 @@ func calculateAssetRelation(assetID_A_name:String, assetID_B_name:String) -> (ba
  **/
 
 func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
+//  return ("0", "0")
   let eth_base = AssetConfiguration.ETH
   let cyb_base = AssetConfiguration.CYB
   let eth_cyb  = changeCYB_ETH()
@@ -72,7 +73,7 @@ func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
   let homeBuckets : [HomeBucket] = app_data.data.value
   var result = (eth:"0",cyb:"0")
   for homeBuck : HomeBucket in homeBuckets {
-    let bucket = BucketMatrix(homeBuck)
+    let bucket = getCachedBucket(homeBuck)
     if bucket.price == ""{
       continue
     }
@@ -105,13 +106,15 @@ func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
  **/
 // CYB:base  ETH:quote
 func changeCYB_ETH() -> String{
+//  return "0"
   let cyb_base   = AssetConfiguration.CYB
   let eth_quote = AssetConfiguration.ETH
   var result = "0"
   let homeBuckets : [HomeBucket] = app_data.data.value
   for homeBuck : HomeBucket in homeBuckets {
     if homeBuck.base == cyb_base && homeBuck.quote == eth_quote {
-      let bucket = BucketMatrix(homeBuck)
+      
+      let bucket = getCachedBucket(homeBuck)
       result = bucket.price.replacingOccurrences(of: ",", with: "")
       break
     }
@@ -119,12 +122,15 @@ func changeCYB_ETH() -> String{
   if result == "0"{
     for homeBuck : HomeBucket in homeBuckets {
       if homeBuck.base == eth_quote && homeBuck.quote == cyb_base {
-        let bucket = BucketMatrix(homeBuck)
+        let bucket = getCachedBucket(homeBuck)
         result = bucket.price.replacingOccurrences(of: ",", with: "")
         break
       }
     }
     if result != "0"{
+      if result == "" {
+        return "0"
+      }
       result = String(1 / result.toDouble()!)
     }
   }
@@ -132,6 +138,17 @@ func changeCYB_ETH() -> String{
   return result
 }
 
+func getCachedBucket(_ homebucket:HomeBucket) -> BucketMatrix {
+  var result:BucketMatrix?
+  var matrixs = app_state.property.matrixs.value
+    
+  if let bucket = matrixs[Pair(base:homebucket.base, quote:homebucket.quote)] {
+    result = bucket
+  }
+
+  return result ?? BucketMatrix(homebucket)
+
+}
 
 
 func getRealAmount(_ id : String ,amount : String) -> Double{

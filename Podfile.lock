@@ -11,6 +11,7 @@ PODS:
   - Crashlytics (3.10.1):
     - Fabric (~> 1.7.5)
   - CryptoSwift (0.9.0)
+  - Device (3.1.0)
   - DNSPageView (1.0.1)
   - EasyAnimation (2.0.2)
   - ESTabBarController-swift (2.6.2)
@@ -127,6 +128,7 @@ DEPENDENCIES:
   - ChainableAnimations
   - Crashlytics
   - CryptoSwift
+  - Device
   - DNSPageView
   - EasyAnimation
   - ESTabBarController-swift
@@ -188,6 +190,7 @@ SPEC REPOS:
     - ChainableAnimations
     - Crashlytics
     - CryptoSwift
+    - Device
     - DNSPageView
     - EasyAnimation
     - ESTabBarController-swift
@@ -272,6 +275,7 @@ SPEC CHECKSUMS:
   ChainableAnimations: 12e0a88e72fb554ad4cda38c40474e4d65c972a2
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   CryptoSwift: bca8c5b653dcc2d9734409242a070ff53bafac86
+  Device: 8a21a61f5f938a12dadd44d82287996081b6919b
   DNSPageView: 93b0f9c9ab0e2f8c1d9aa5b0d44740bd2d775d78
   EasyAnimation: 977ef673efe8ce62447807eedb380a77b189dc80
   ESTabBarController-swift: f0a8679e43df1e60b7b36bbcaf1dc98ba6273c7d
@@ -332,6 +336,10 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 33386c55fe481f6c2b40250324798d4199469b46
 
+<<<<<<< HEAD
 PODFILE CHECKSUM: d89f6e43e3efafad2d087ae1bc56dc64686a1df7
+=======
+PODFILE CHECKSUM: 153243f17f96880e378152f2c9bab4ef879dfeac
+>>>>>>> a6bbbbceee611f9597763da716d6819ae13a95b7
 
 COCOAPODS: 1.5.2

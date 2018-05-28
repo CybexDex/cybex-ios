@@ -280,7 +280,7 @@ class UserManager {
       .subscribe(onNext: { (s) in
         DispatchQueue.main.async {
           if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 {
-            UserManager.shared.fetchAccountInfo()
+//            UserManager.shared.fetchAccountInfo()
           }
           
         }

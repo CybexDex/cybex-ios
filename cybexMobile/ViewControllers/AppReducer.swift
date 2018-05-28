@@ -110,9 +110,10 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
   case let action as MarketsFetched:
     async {
       if s.wait(timeout: .distantFuture) == .success {
-        let data = applyMarketsToState(state, action: action)
-       
+      let (matrixs, data) = applyMarketsToState(state, action: action)
+
         main {
+          state.matrixs.accept(matrixs)
           state.data.accept(data)
           refreshTimes[Pair(base:action.pair.firstAssetId, quote:action.pair.secondAssetId)] = Date().timeIntervalSince1970
           state.pairsRefreshTimes = refreshTimes
@@ -149,10 +150,11 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
   return state
 }
 
-func applyMarketsToState(_ state: AppPropertyState, action:MarketsFetched) -> [HomeBucket] {
+func applyMarketsToState(_ state: AppPropertyState, action:MarketsFetched) -> (matrix:[Pair:BucketMatrix], bucket:[HomeBucket]) {
   var data = state.data.value
+  var matrixs = state.matrixs.value
   
-  guard let base_info = state.assetInfo[action.pair.firstAssetId], let quote_info = state.assetInfo[action.pair.secondAssetId] else { return data }
+  guard let base_info = state.assetInfo[action.pair.firstAssetId], let quote_info = state.assetInfo[action.pair.secondAssetId] else { return (matrixs, data) }
 
   var homeBucket = HomeBucket(base: action.pair.firstAssetId, quote: action.pair.secondAssetId, bucket: [], base_info: base_info, quote_info: quote_info)
   if action.assets.count != 0  {
@@ -161,14 +163,19 @@ func applyMarketsToState(_ state: AppPropertyState, action:MarketsFetched) -> [H
   
   let (contain, index) = data.containHashable(homeBucket)
   
+  let matrix = BucketMatrix(homeBucket)
+
   if !contain {
     data.append(homeBucket)
   }
   else {
     data[index] = homeBucket
   }
+  matrixs[Pair(base:homeBucket.base, quote:homeBucket.quote)] = matrix
+
   
   if data.count > 1 {
+    
     let sortedData = data.sorted { (last, cur) -> Bool in
       if last.bucket.count == 0 && cur.bucket.count != 0 {
         return false
@@ -180,14 +187,17 @@ func applyMarketsToState(_ state: AppPropertyState, action:MarketsFetched) -> [H
         return false
       }
       
-      return BucketMatrix.init(last).base_volume_origin > BucketMatrix.init(cur).base_volume_origin
+      let last_matrix = matrixs.values.filter({ last.base == $0.base && last.quote == $0.quote }).first!
+      let cur_matrix = matrixs.values.filter({ cur.base == $0.base && cur.quote == $0.quote }).first!
+
+      return last_matrix.base_volume_origin > cur_matrix.base_volume_origin
     }
     
-    return sortedData
+    return (matrixs, sortedData)
   }
   else {
     
-    return data
+    return (matrixs,data)
   }
 
 }
