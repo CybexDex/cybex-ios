@@ -43,8 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     _ = RichStyle.init()
 
-
-
     let rootVC = BaseTabbarViewController()
     window?.rootViewController = rootVC
     self.window?.makeKeyAndVisible()

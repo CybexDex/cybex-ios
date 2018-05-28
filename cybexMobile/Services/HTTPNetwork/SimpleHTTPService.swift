@@ -20,6 +20,7 @@ struct Await {
   struct Queue {
     static let await = DispatchQueue(label: "com.nbltrsut.awaitqueue", attributes: .concurrent)
     static let async = DispatchQueue(label: "com.nbltrsut.asyncqueue", attributes: .concurrent)
+    static let serialAsync = DispatchQueue(label: "com.nbltrsut.asyncqueue.serial")
   }
 }
 
@@ -39,6 +40,10 @@ func async<T>(_ body: @escaping () throws -> T) -> Promise<T> {
 
 func async(_ body: @escaping () throws -> Void) {
   Await.Queue.async.ak.async(body)
+}
+
+func serialAsync(_ body: @escaping () throws -> Void) {
+  Await.Queue.serialAsync.ak.async(body)
 }
 
 func main(_ body: @escaping @convention(block) () -> Swift.Void) {

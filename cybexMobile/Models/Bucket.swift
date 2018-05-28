@@ -134,18 +134,20 @@ class BucketMatrix {
     let lastClose_price = (last_closebase_amount / base_precision) / (last_closequote_amount / quote_precision)
     let firseOpen_price = (first_openbase_amount / base_precision) / (first_openquote_amount / quote_precision)
 
-
-    let high_price_collection = self.asset.map { (bucket) -> Double in
+    var high_price_collection:[Double] = []
+    var low_price_collection:[Double] = []
+    
+    for bucket in self.asset {
       let high_base = flip ? (Double(bucket.high_quote)! / base_precision) : (Double(bucket.high_base)! / base_precision)
       let quote_base = flip ? (Double(bucket.high_base)! / quote_precision) : (Double(bucket.high_quote)! / quote_precision)
-      return high_base / quote_base
-    }
-
-    let low_price_collection = self.asset.map { (bucket) -> Double in
+      high_price_collection.append(high_base / quote_base)
+      
       let low_base = flip ? (Double(bucket.low_quote)! / base_precision) : (Double(bucket.low_base)! / base_precision)
       let low_quote = flip ? (Double(bucket.low_base)! / quote_precision) : (Double(bucket.low_quote)! / quote_precision)
-      return low_base / low_quote
+      low_price_collection.append(low_base / low_quote)
+
     }
+
 
     let high = high_price_collection.max()!
     let low = low_price_collection.min()!

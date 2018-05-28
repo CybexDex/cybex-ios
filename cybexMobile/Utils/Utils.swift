@@ -128,6 +128,7 @@ func changeCYB_ETH() -> String{
       result = String(1 / result.toDouble()!)
     }
   }
+
   return result
 }
 

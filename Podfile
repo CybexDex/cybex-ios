@@ -74,6 +74,7 @@ def ui
     pod 'SDCAlertView'
     pod 'Presentr'
     pod 'Macaw'
+    pod 'SwiftEntryKit'
 end
 
 def other

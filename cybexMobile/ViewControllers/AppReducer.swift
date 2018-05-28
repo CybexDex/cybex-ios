@@ -11,7 +11,6 @@ import ReSwift
 import RxCocoa
 import SwifterSwift
 
-
 public class BlockSubscriber<S>: StoreSubscriber {
   public typealias StoreSubscriberStateType = S
   private let block: (S) -> Void
@@ -97,6 +96,9 @@ func AppReducer(action:Action, state:AppState?) -> AppState {
   return AppState(property: AppPropertyReducer(state?.property, action: action))
 }
 
+
+let s = DispatchSemaphore(value: 1)
+
 func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppPropertyState {
   var state = state ?? AppPropertyState()
 
@@ -106,12 +108,18 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
   
   switch action {
   case let action as MarketsFetched:
-    let data = applyMarketsToState(state, action: action)
-    
-//    state.matrixs = 
-    state.data.accept(data)
-    refreshTimes[Pair(base:action.pair.firstAssetId, quote:action.pair.secondAssetId)] = Date().timeIntervalSince1970
-    state.pairsRefreshTimes = refreshTimes
+    async {
+      if s.wait(timeout: .distantFuture) == .success {
+        let data = applyMarketsToState(state, action: action)
+       
+        main {
+          state.data.accept(data)
+          refreshTimes[Pair(base:action.pair.firstAssetId, quote:action.pair.secondAssetId)] = Date().timeIntervalSince1970
+          state.pairsRefreshTimes = refreshTimes
+          s.signal()
+        }
+      }
+    }
 
   case let action as SubscribeSuccess:
     ids[action.pair] = action.id
