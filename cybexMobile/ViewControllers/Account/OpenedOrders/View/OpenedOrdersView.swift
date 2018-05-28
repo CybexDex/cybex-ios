@@ -28,6 +28,11 @@ class OpenedOrdersView:  UIView{
             base.text = "/" + base_info.symbol.filterJade
           }
           
+          let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
+          self.amount.text = quoteAmount.string.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.quote.assetID]!.precision) + " " +  quote.text!
+          
+          let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
+          self.price.text = (baseAmount / quoteAmount).string.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.base.assetID]!.precision)
         }
         else {
           self.orderType.opened_status = 1
@@ -38,14 +43,14 @@ class OpenedOrdersView:  UIView{
           if let base_info = app_data.assetInfo[order.sellPrice.quote.assetID] {
             base.text = "/" + base_info.symbol.filterJade
           }
+          
+          let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
+          self.amount.text = quoteAmount.string.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.base.assetID]!.precision) + " " +  quote.text!
+          
+          let baseAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
+          self.price.text = (baseAmount / quoteAmount).string.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.quote.assetID]!.precision)
         }
-        
-        let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-        self.amount.text = quoteAmount.string.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.base.assetID]!.precision) + " " +  quote.text!
-        let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
-        self.price.text = (baseAmount / quoteAmount).string.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.quote.assetID]!.precision)
       }
-      
     }
   }
   
