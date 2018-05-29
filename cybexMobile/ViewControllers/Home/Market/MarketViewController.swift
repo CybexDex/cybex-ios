@@ -12,6 +12,7 @@ import BigInt
 import DNSPageView
 import SwiftTheme
 import Localize_Swift
+import RxSwift
 
 class MarketViewController: BaseViewController {
   @IBOutlet weak var pageTitleView: DNSPageTitleView!
@@ -258,13 +259,17 @@ class MarketViewController: BaseViewController {
   override func configureObserveState() {
     commonObserveState()
     
-    app_data.data.asObservable().distinctUntilChanged()
-      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
+    app_data.data.asObservable()
       .skip(1)
+      .distinctUntilChanged()
+      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
+      .throttle(3, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: {[weak self] (s) in
         guard let `self` = self else { return }
-        self.updateIndex()
-        self.refreshView(false)
+        if self.isVisible {
+          self.updateIndex()
+          self.refreshView(false)
+        }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
   }

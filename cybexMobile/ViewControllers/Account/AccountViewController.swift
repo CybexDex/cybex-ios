@@ -77,8 +77,7 @@ class AccountViewController: BaseViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
-    UserManager.shared.fetchAccountInfo()
+    self.updataStatus()
   }
   
   // UI的初始化设置
@@ -187,10 +186,13 @@ class AccountViewController: BaseViewController {
     }
     
     if isLogin {
-      let hash = UserManager.shared.avatarString!
-      let generator = IconGenerator(size: 168, hash: Data(hex: hash))
-      let image = UIImage(cgImage: generator.render()!)
-      accountImageView.image = image
+      if let hash = UserManager.shared.avatarString {
+        let generator = IconGenerator(size: 168, hash: Data(hex: hash))
+        if let render = generator.render() {
+          let image = UIImage(cgImage: render)
+          accountImageView.image = image
+        }
+      }
     }
     else {
       accountImageView.image =  #imageLiteral(resourceName: "accountAvatar")
@@ -224,19 +226,34 @@ class AccountViewController: BaseViewController {
   override func configureObserveState() {
     commonObserveState()
     
-    UserManager.shared.account.asObservable().subscribe(onNext: { [weak self](account) in
+    UserManager.shared.account.asObservable()
+      .skip(1)
+      .throttle(10, latest: true, scheduler: MainScheduler.instance)
+      .subscribe(onNext: { [weak self](account) in
       guard let `self` = self else{ return }
-      self.updataStatus()
+      if self.isVisible {
+        self.updataStatus()
+      }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
-    UserManager.shared.limitOrder.asObservable().subscribe(onNext: { [weak self](account) in
+    UserManager.shared.limitOrder.asObservable()
+      .skip(1)
+      .throttle(10, latest: true, scheduler: MainScheduler.instance)
+      .subscribe(onNext: { [weak self](account) in
       guard let `self` = self else{ return }
-      self.updataStatus()
+      if self.isVisible {
+        self.updataStatus()
+      }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
-    UserManager.shared.balances.asObservable().subscribe(onNext: { [weak self](account) in
+    UserManager.shared.balances.asObservable()
+      .skip(1)
+      .throttle(10, latest: true, scheduler: MainScheduler.instance)
+      .subscribe(onNext: { [weak self](account) in
       guard let `self` = self else{ return }
-      self.updataStatus()
+      if self.isVisible {
+        self.updataStatus()
+      }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
 }

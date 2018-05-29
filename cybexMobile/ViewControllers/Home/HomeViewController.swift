@@ -70,12 +70,21 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
   override func configureObserveState() {
     commonObserveState()
     
-    app_data.data.asObservable().distinctUntilChanged()
+    app_data.data.asObservable()
+      .skip(1)
       .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
+      .distinctUntilChanged()
+      .throttle(3, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { (s) in
+        if app_data.data.value.count == 0 {
+          return
+        }
         DispatchQueue.main.async {
-          self.tableView.reloadData()
-          self.tableView.isHidden = false
+          if self.isVisible {
+            self.endLoading()
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+          }
         }
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }

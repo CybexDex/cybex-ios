@@ -194,9 +194,9 @@ class AppPropertyActionCreate: LoadingActionCreator {
   }
   
   func fetchingMarketList(_  params:AssetPairQueryParams, callback:CommonAnyCallback?) {
+    
     let request = GetMarketHistoryRequest(queryParams: params) { response in
       if let callback = callback {
-
         callback(response)
       }
     }
