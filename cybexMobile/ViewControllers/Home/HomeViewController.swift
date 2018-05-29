@@ -30,7 +30,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     setupUI()
     
     handlerUpdateVersion(nil)
@@ -74,7 +74,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
       .skip(1)
       .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
       .distinctUntilChanged()
-      .throttle(3, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { (s) in
         if app_data.data.value.count == 0 {
           return

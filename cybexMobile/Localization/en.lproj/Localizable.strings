@@ -109,5 +109,6 @@
 "unupdata_message"                    = "Current Version is the newest";
 "unupdata_ok"                         = "OK";
 
+"noNetwork"                           = "network is not available.";
 
 
