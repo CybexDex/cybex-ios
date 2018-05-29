@@ -30,7 +30,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     setupUI()
     
     handlerUpdateVersion(nil)
@@ -74,8 +74,10 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
       .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
       .subscribe(onNext: { (s) in
         DispatchQueue.main.async {
-          self.tableView.reloadData()
-          self.tableView.isHidden = false
+          if self.isVisible {
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+          }
         }
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }

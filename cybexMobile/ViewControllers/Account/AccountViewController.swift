@@ -53,6 +53,7 @@ class AccountViewController: BaseViewController {
   @IBOutlet weak var introduceCybex: UILabel!
   
   @IBOutlet weak var balanceIntroduce: UIImageView!
+  
   var coordinator: (AccountCoordinatorProtocol & AccountStateManagerProtocol)?
   
   var balanceIntroduceView : BalanceIntroduceView {

@@ -106,3 +106,4 @@
 "unupdata_message"                    = "当前版本是最新版本";
 "unupdata_ok"                         = "好的";
 
+"noNetwork"                           = "网络不佳";

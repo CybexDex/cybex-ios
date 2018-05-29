@@ -139,7 +139,8 @@ extension AppDelegate {
         app_coodinator.startLoadingVC = nil
         vc.endLoading()
       }
-      _ = BeareadToast.showError(text: "network is not available.", inView: self.window!, hide:2)
+      
+      _ = BeareadToast.showError(text: R.string.localizable.noNetwork.key.localized(), inView: self.window!, hide:2)
     }
     else {
       let connected = WebsocketService.shared.checkNetworConnected()
