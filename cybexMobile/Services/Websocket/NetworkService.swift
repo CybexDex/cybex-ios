@@ -30,7 +30,8 @@ enum NodeURLString:String {
 
 class WebsocketService {
   private var last_send_time:TimeInterval = 0
-  
+  private let semaphore = DispatchSemaphore(value: 1)
+
   private var autoConnectCount = 0
   private var isConnecting:Bool = false
   private var isFetchingID:Bool = false
@@ -39,11 +40,6 @@ class WebsocketService {
   private var requesting:[String: (String, Any, ()->())] = [:]
 
   private var socket = WebSocket(url: URL(string: NodeURLString.all[0].rawValue)!)
-  var callbackQueue = DispatchQueue.main {
-    didSet {
-      socket.callbackQueue = callbackQueue
-    }
-  }
 
   private var testsockets:[WebSocket] = []
 
@@ -143,9 +139,10 @@ class WebsocketService {
     print("current node is \(node.rawValue)")
     currentNode = node
     let request = URLRequest(url: URL(string:node.rawValue)!)
-
+    
     socket.request = request
     socket.delegate = self
+    socket.callbackQueue = DispatchQueue.global()
     socket.connect()
 
   }
@@ -276,7 +273,7 @@ extension WebsocketService {
   private func constructSendRequest<Request: JSONRPCKit.Request>(request: Request) -> (()->()) {
     return {[weak self] in
       guard let `self` = self else { return }
-      
+
       let batch = self.batchFactory.create(request)
       
       var writeJSON:JSON
@@ -313,9 +310,10 @@ extension WebsocketService {
     requesting.removeAll()
   }
   
+
   private func handlerRequestPool() {
-    let requestQueue = requests
-    
+    let requestQueue = self.requests
+  
     for request in requestQueue {
       let retry = request.2
       
@@ -370,64 +368,55 @@ extension WebsocketService: WebSocketDelegate {
   }
   
   func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
-    let data = JSON(parseJSON:text)
-    
-    if let error = data["error"].dictionary {
-      print(error)
-      return
-    }
-    
-    guard let id = data["id"].int else {
-      if let method = data["method"].string, method == "notice", let params = data["params"].array, let mID = params[0].int {
-        if let ids = app_data.subscribeIds, ids.values.contains(mID) {
-          let index = ids.values.index(of: mID)!
-          let pair = ids.keys[index]
-          
-          if Device.version() == .iPhone5S || Device.version() == .iPhone5C || Device.version() == .iPhone5 {
-            let timeGap = 1.0
-            let cur = NSDate().timeIntervalSince1970
-            if cur - last_send_time > timeGap {
-              UIApplication.shared.coordinator().request24hMarkets([pair], sub: false)
-              last_send_time = cur
-            }
-            else {
-              let futhur = timeGap - (cur - last_send_time)
-              last_send_time = last_send_time + timeGap
-//              print(futhur)
-              SwifterSwift.delay(milliseconds: futhur * 1000) {
-//                print(Date())
-                UIApplication.shared.coordinator().request24hMarkets([pair], sub: false)
-              }
-              
-            }
-          }
-          else {
-            UIApplication.shared.coordinator().request24hMarkets([pair], sub: false)
-          }
-         
-
-        }
+    if semaphore.wait(timeout: .distantFuture) == .success {
+      defer {
+        semaphore.signal()
       }
-      return
-    }
-    
-    if let requestData = requesting[id.description], let request = requestData.1 as? JSONRPCResponse {
-      if requestData.1 is SubscribeMarketRequest {
-        request.response(id)
-        requesting.removeValue(forKey: id.description)
+      let data = JSON(parseJSON:text)
+      
+      if let error = data["error"].dictionary {
+        print(error)
         return
       }
       
-      if let object = try? request.transferResponse(from: data["result"].object) {
-        request.response(object)
-        requesting.removeValue(forKey: id.description)
+      guard let id = data["id"].int else {
+        if let method = data["method"].string, method == "notice", let params = data["params"].array, let mID = params[0].int {
+          if let ids = app_data.subscribeIds, ids.values.contains(mID) {
+            let index = ids.values.index(of: mID)!
+            let pair = ids.keys[index]
+            
+            main {
+              UIApplication.shared.coordinator().request24hMarkets([pair], sub: false)
+            }
+          }
+        }
+        return
       }
-      else {
-        request.response(data.object)
-        requesting.removeValue(forKey: id.description)
+      
+      
+      if let requestData = self.requesting[id.description], let request = requestData.1 as? JSONRPCResponse {
+        if requestData.1 is SubscribeMarketRequest {
+          main {
+            request.response(id)
+            self.requesting.removeValue(forKey: id.description)
+          }
+          return
+        }
+        
+        if let object = try? request.transferResponse(from: data["result"].object) {
+          main{
+            request.response(object)
+            self.requesting.removeValue(forKey: id.description)
+          }
+        }
+        else {
+          main {
+            request.response(data.object)
+            self.requesting.removeValue(forKey: id.description)
+          }
+        }
       }
     }
-    
   }
   
   func websocketDidReceiveData(socket: WebSocketClient, data: Data) {

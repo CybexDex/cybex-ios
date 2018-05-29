@@ -110,15 +110,16 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
   case let action as MarketsFetched:
     async {
       if s.wait(timeout: .distantFuture) == .success {
-      let (matrixs, data) = applyMarketsToState(state, action: action)
 
-        main {
-          state.matrixs.accept(matrixs)
-          state.data.accept(data)
-          refreshTimes[Pair(base:action.pair.firstAssetId, quote:action.pair.secondAssetId)] = Date().timeIntervalSince1970
-          state.pairsRefreshTimes = refreshTimes
-          s.signal()
-        }
+      let (matrixs, data) = applyMarketsToState(state, action: action)
+       
+      main {
+        state.matrixs.accept(matrixs)
+        state.data.accept(data)
+        refreshTimes[Pair(base:action.pair.firstAssetId, quote:action.pair.secondAssetId)] = Date().timeIntervalSince1970
+        state.pairsRefreshTimes = refreshTimes
+        s.signal()
+      }
       }
     }
 

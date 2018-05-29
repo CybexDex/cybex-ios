@@ -113,14 +113,6 @@ extension UserManager {
     return (true , "")
   }
   
-  func checkUserName(_ username:String) -> Promise<Bool> {
-    return async {
-      let exist = try! await(UserManager.shared.checkUserNameExist(username))
-      
-      return exist
-    }
-  }
-  
   func register(_ pinID:String, captcha:String, username:String, password:String) -> Promise<(Bool,Int)> {
     return async {
       let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
@@ -184,18 +176,16 @@ extension UserManager {
     }
   }
   
-  private func checkUserNameExist(_ name:String) -> Promise<Bool> {
+  func checkUserName(_ name:String) -> Promise<Bool> {
     let (promise,seal) = Promise<Bool>.pending()
     
     let request = GetAccountByNameRequest(name: name) { response in
-      WebsocketService.shared.callbackQueue = DispatchQueue.main
       if let result = response as? Bool {
         seal.fulfill(result)
       }
       
     }
     
-    WebsocketService.shared.callbackQueue = Await.Queue.await
     WebsocketService.shared.send(request: request)
     
     return promise
@@ -283,7 +273,7 @@ class UserManager {
       .subscribe(onNext: { (s) in
         DispatchQueue.main.async {
           if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 {
-//            UserManager.shared.fetchAccountInfo()
+            UserManager.shared.fetchAccountInfo()
           }
           
         }

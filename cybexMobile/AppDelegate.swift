@@ -124,7 +124,7 @@ extension AppDelegate {
     
     app_data.data.asObservable()
       .subscribe(onNext: { (s) in
-        if let vc = app_coodinator.startLoadingVC {
+        if let vc = app_coodinator.startLoadingVC, !(vc is HomeViewController) {
           app_coodinator.startLoadingVC = nil
           vc.endLoading()
         }
