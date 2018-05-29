@@ -135,7 +135,7 @@ class MarketViewController: BaseViewController {
     
     // 最后要调用setupUI方法
     pageContentView.setupUI()
-    pageContentView.collectionView.panGestureRecognizer.require(toFail: UIApplication.shared.coordinator().curDisplayingCoordinator().rootVC.interactivePopGestureRecognizer!)
+    pageContentView.collectionView.panGestureRecognizer.require(toFail: AppConfiguration.shared.appCoordinator.curDisplayingCoordinator().rootVC.interactivePopGestureRecognizer!)
     
     // 让titleView和contentView进行联系起来
     pageTitleView.delegate = pageContentView
@@ -160,7 +160,7 @@ class MarketViewController: BaseViewController {
     self.kLineView.isHidden = hiddenKLine
 
     resetKLinePosition = hiddenKLine
-    UIApplication.shared.coordinator().requestKlineDetailData(pair: pair, gap: timeGap, vc: self, selector: #selector(refreshKLine))
+    AppConfiguration.shared.appCoordinator.requestKlineDetailData(pair: pair, gap: timeGap, vc: self, selector: #selector(refreshKLine))
   }
   
   func updateIndex() {

@@ -93,7 +93,7 @@ extension AppCoordinator {
 
       }
 
-      UIApplication.shared.coordinator().fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub)
+      AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub)
     }
 
   }
@@ -102,7 +102,7 @@ extension AppCoordinator {
     let now = Date()
     let start = now.addingTimeInterval(-gap.rawValue * 199)
 
-    UIApplication.shared.coordinator().fetchKline(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: gap.rawValue.int, startTime: start, endTime: now), gap: gap, vc: vc, selector: selector)
+    AppConfiguration.shared.appCoordinator.fetchKline(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: gap.rawValue.int, startTime: start, endTime: now), gap: gap, vc: vc, selector: selector)
   }
 
   func getLatestData() {

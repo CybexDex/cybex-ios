@@ -12,16 +12,24 @@ typealias CommonCallback = () -> Void
 typealias CommonAnyCallback = (Any) -> Void
 
 var app_data: AppPropertyState {
-  return UIApplication.shared.coordinator().state.property
+  return AppConfiguration.shared.appCoordinator.state.property
 }
 var app_state: AppState {
-  return UIApplication.shared.coordinator().state
+  return AppConfiguration.shared.appCoordinator.state
 }
 var app_coodinator:AppCoordinator {
-  return UIApplication.shared.coordinator()
+  return AppConfiguration.shared.appCoordinator
 }
 
 struct AppConfiguration {
+  static let shared = AppConfiguration()
+  var appCoordinator: AppCoordinator!
+
+  private init() {
+    let rootVC = BaseTabbarViewController()
+    appCoordinator = AppCoordinator(rootVC: rootVC)
+  }
+  
   static let APPID = ""
   static let SERVER_BASE_URLString = "https://app.cybex.io/"
   static let SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"

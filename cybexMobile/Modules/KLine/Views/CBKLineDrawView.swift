@@ -64,7 +64,7 @@ class CBKLineDrawView: UIView {
     panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureAction(_:)))
     panGesture.delegate = self
     addGestureRecognizer(panGesture)
-    panGesture.require(toFail: UIApplication.shared.coordinator().curDisplayingCoordinator().rootVC.interactivePopGestureRecognizer!)
+    panGesture.require(toFail: AppConfiguration.shared.appCoordinator.curDisplayingCoordinator().rootVC.interactivePopGestureRecognizer!)
     
  
     loadingSubviews()

@@ -26,7 +26,6 @@ import SwiftRichString
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
-  var appCoordinator: AppCoordinator!
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     Fabric.with([Crashlytics.self, Answers.self])
@@ -43,14 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     _ = RichStyle.init()
 
-    let rootVC = BaseTabbarViewController()
-    window?.rootViewController = rootVC
+    window?.rootViewController = AppConfiguration.shared.appCoordinator.rootVC
     self.window?.makeKeyAndVisible()
     
-    appCoordinator = AppCoordinator(rootVC: rootVC)
-    
-    self.appCoordinator.fetchEthToRmbPrice()
-    appCoordinator.start()
+    AppConfiguration.shared.appCoordinator.fetchEthToRmbPrice()
+    AppConfiguration.shared.appCoordinator.start()
     
 //    appCoordinator.showLogin()
     RealReachability.sharedInstance().startNotifier()

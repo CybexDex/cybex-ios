@@ -130,13 +130,3 @@ class AppCoordinator {
   
 }
 
-extension UIApplication {
-  func coordinator() -> AppCoordinator {
-    guard let d = self.delegate as? AppDelegate else { fatalError("app delegate name not match")}
-    return d.appCoordinator
-  }
-  
-  func globalState() -> AppState {
-    return self.coordinator().store.state
-  }
-}

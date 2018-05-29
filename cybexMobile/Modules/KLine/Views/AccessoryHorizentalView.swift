@@ -26,7 +26,7 @@ class AccessoryHorizentalView: UIView {
     collectionView.register(UINib(nibName: String(describing: AccessoryCollectionViewCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: AccessoryCollectionViewCell.self))
     
     
-    collectionView.panGestureRecognizer.require(toFail: UIApplication.shared.coordinator().curDisplayingCoordinator().rootVC.interactivePopGestureRecognizer!)
+    collectionView.panGestureRecognizer.require(toFail: AppConfiguration.shared.appCoordinator.curDisplayingCoordinator().rootVC.interactivePopGestureRecognizer!)
 
   }
   

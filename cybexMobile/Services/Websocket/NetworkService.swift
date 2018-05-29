@@ -329,7 +329,7 @@ extension WebsocketService {
   }
   
   private func refreshData() {
-    UIApplication.shared.coordinator().getLatestData()
+    AppConfiguration.shared.appCoordinator.getLatestData()
   }
 }
 
@@ -386,7 +386,7 @@ extension WebsocketService: WebSocketDelegate {
             let pair = ids.keys[index]
             
             main {
-              UIApplication.shared.coordinator().request24hMarkets([pair], sub: false)
+              AppConfiguration.shared.appCoordinator.request24hMarkets([pair], sub: false)
             }
           }
         }
