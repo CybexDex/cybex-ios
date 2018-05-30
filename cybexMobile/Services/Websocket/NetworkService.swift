@@ -28,16 +28,21 @@ enum NodeURLString:String {
   }
 }
 
+typealias RequestingType = [String: RequestsType]
+typealias RequestsType = (String, Any, ()->())
+
 class WebsocketService {
   private var last_send_time:TimeInterval = 0
   private let semaphore = DispatchSemaphore(value: 1)
+  private let requests_queue_concurrent = DispatchQueue(label: "com.nbltrsut.requests_queue_concurrent", attributes: .concurrent)
+  private let requesting_queue_concurrent = DispatchQueue(label: "com.nbltrsut.requesting_queue_concurrent", attributes: .concurrent)
 
   private var autoConnectCount = 0
   private var isConnecting:Bool = false
   private var isFetchingID:Bool = false
 
-  private var requests:[(String, Any, ()->())] = []
-  private var requesting:[String: (String, Any, ()->())] = [:]
+  private var requests:[RequestsType] = []
+  private var requesting:RequestingType = [:]
 
   private var socket = WebSocket(url: URL(string: NodeURLString.all[0].rawValue)!)
 
@@ -164,7 +169,12 @@ class WebsocketService {
   func disConnect() {
     needAutoConnect = false
     requests = []
-    requesting = [:]
+    
+    self.requesting_queue_concurrent.async(flags: .barrier) {[weak self] in
+      guard let `self` = self else { return }
+      self.requesting = [:]
+    }
+    
     socket.disconnect()
   }
   
@@ -287,7 +297,10 @@ extension WebsocketService {
       self.socket.write(data: try! writeJSON.rawData())
       
       let id = writeJSON["id"].stringValue
-      self.requesting[id] = (request.digist, request, self.constructSendRequest(request: request))
+      self.requesting_queue_concurrent.async(flags: .barrier) {[weak self] in
+        guard let `self` = self else { return }
+        self.requesting[id] = (request.digist, request, self.constructSendRequest(request: request))
+      }
       
       if let index = self.requests.index(where: { (value) -> Bool in
         let (digist, _, _) = value
@@ -301,13 +314,25 @@ extension WebsocketService {
   }
   
   private func restoreToRequestList() {
-    let filterRegister = requesting.filter { (value) -> Bool in
-      let (_, requestObject) = value
-      return requestObject.0 != ""
+    var filterRegisters:[RequestsType]!
+    
+    requesting_queue_concurrent.sync { [weak self] in
+      guard let `self` = self else { return }
+      
+      let filterRegister = self.requesting.filter { (value) -> Bool in
+        let (_, requestObject) = value
+        return requestObject.0 != ""
+      }
+      
+      filterRegisters = Array(filterRegister.values)
     }
     
-    requests += Array(filterRegister.values)
-    requesting.removeAll()
+    self.requests += filterRegisters
+
+    self.requesting_queue_concurrent.async(flags: .barrier) {[weak self] in
+      guard let `self` = self else { return }
+      self.requesting.removeAll()
+    }
   }
   
 
@@ -368,10 +393,9 @@ extension WebsocketService: WebSocketDelegate {
   }
   
   func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
-    if semaphore.wait(timeout: .distantFuture) == .success {
-      defer {
-        semaphore.signal()
-      }
+    self.requesting_queue_concurrent.async(flags: .barrier) {[weak self] in
+      guard let `self` = self else { return }
+
       let data = JSON(parseJSON:text)
       
       if let error = data["error"].dictionary {
@@ -393,27 +417,35 @@ extension WebsocketService: WebSocketDelegate {
         return
       }
       
+      var requestData:RequestsType?
       
-      if let requestData = self.requesting[id.description], let request = requestData.1 as? JSONRPCResponse {
+      if let data = self.requesting[id.description] {
+        requestData = data
+      }
+
+      if let requestData = requestData, let request = requestData.1 as? JSONRPCResponse {
         if requestData.1 is SubscribeMarketRequest {
           main {
             request.response(id)
-            self.requesting.removeValue(forKey: id.description)
           }
+          self.requesting.removeValue(forKey: id.description)
+
           return
         }
         
         if let object = try? request.transferResponse(from: data["result"].object) {
           main{
             request.response(object)
-            self.requesting.removeValue(forKey: id.description)
           }
+          self.requesting.removeValue(forKey: id.description)
+
         }
         else {
           main {
             request.response(data.object)
-            self.requesting.removeValue(forKey: id.description)
           }
+          self.requesting.removeValue(forKey: id.description)
+
         }
       }
     }
