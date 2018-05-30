@@ -26,11 +26,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Xy-3q-3c6" customClass="HomeTitleView" customModule="cybexMobile" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="32" width="375" height="39"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="41" id="OqL-ZB-yQp"/>
+                        <constraint firstAttribute="height" constant="39" id="OqL-ZB-yQp"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="chO-09-gGa"/>
                 </view>
             </subviews>
+            <color key="backgroundColor" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="1Xy-3q-3c6" firstAttribute="top" secondItem="2Fi-vg-DUP" secondAttribute="bottom" id="0O2-JW-tFo"/>
                 <constraint firstItem="2Fi-vg-DUP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="C2J-Bj-vsc"/>
@@ -43,7 +44,17 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                    <color key="value" name="paleGrey" red="0.969" green="0.973" blue="0.980" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                    <color key="value" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="22" y="-177"/>
         </view>
     </objects>
+    <resources>
+    </resources>
 </document>
