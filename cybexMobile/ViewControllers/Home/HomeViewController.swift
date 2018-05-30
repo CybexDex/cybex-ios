@@ -17,6 +17,10 @@ import SwiftyJSON
 
 class HomeViewController: BaseViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
   
+  struct define {
+    static let sectionHeaderHeight : Double = 71.0
+  }
+  
   var coordinator: (HomeCoordinatorProtocol & HomeStateManagerProtocol)?
 
   @IBOutlet weak var tableView: UITableView!
@@ -27,6 +31,8 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
       self.tableView.isHidden = false
     }
   }
+  
+ 
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -74,6 +80,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
       .skip(1)
       .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
       .distinctUntilChanged()
+      .throttle(3, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { (s) in
         if app_data.data.value.count == 0 {
           return
@@ -110,6 +117,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
   
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let sectionHeader = HomeSectionHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: CGFloat(define.sectionHeaderHeight)))
+    return sectionHeader
+  }
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return CGFloat(define.sectionHeaderHeight)
   }
 }
 
