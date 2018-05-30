@@ -158,7 +158,9 @@ extension UserManager {
     if let username = self.name {
       let request = GetFullAccountsRequest(name: username) { response in
         if let data = response as? FullAccount{
-          
+          if !self.isLoginIn {
+            return
+          }
           self.account.accept(data.account)
           
           if let balances = data.balances{

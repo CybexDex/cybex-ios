@@ -64,10 +64,11 @@ class PortfolioData{
     
     name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
     // 获得自己的个数
-    realAmount = getRealAmount(balance.asset_type, amount: balance.balance).suffixNumber(digitNum: 5)
+    realAmount = getRealAmount(balance.asset_type, amount: balance.balance).formatCurrency(digitNum: 5)
     
     // 获取对应CYB的个数
     let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "0" ? "-" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.toDouble())!)
+    
     if amountCYB == "-"{
       cybPrice = amountCYB + " CYB"
     }else{

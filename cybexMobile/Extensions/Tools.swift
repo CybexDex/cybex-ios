@@ -259,6 +259,11 @@ extension String {
     return self.replacingOccurrences(of: "JADE.", with: "")
   }
 
+//  var filterZone:String{
+//    return self == "0" ? "--" : self
+//  }
+  
+  
   public func toDouble() -> Double? {
     String.doubleFormat.allowsFloats = true
     return String.doubleFormat.number(from: self)?.doubleValue

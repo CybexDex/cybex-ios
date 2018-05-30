@@ -155,7 +155,10 @@ func applyMarketsToState(_ state: AppPropertyState, action:MarketsFetched) -> (m
   var data = state.data.value
   var matrixs = state.matrixs.value
   
-  guard let base_info = state.assetInfo[action.pair.firstAssetId], let quote_info = state.assetInfo[action.pair.secondAssetId] else { return (matrixs, data) }
+  guard let base_info = state.assetInfo[action.pair.firstAssetId], let quote_info = state.assetInfo[action.pair.secondAssetId] else {
+    return (matrixs, data)
+    
+  }
 
   var homeBucket = HomeBucket(base: action.pair.firstAssetId, quote: action.pair.secondAssetId, bucket: [], base_info: base_info, quote_info: quote_info)
   if action.assets.count != 0  {

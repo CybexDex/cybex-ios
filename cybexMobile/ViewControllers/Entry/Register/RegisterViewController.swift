@@ -15,6 +15,7 @@ import AwaitKit
 import Macaw
 import Repeat
 import PromiseKit
+import Device
 
 class RegisterViewController: BaseViewController {
   
@@ -35,7 +36,9 @@ class RegisterViewController: BaseViewController {
     @IBOutlet weak var pinCodeActivityView: UIActivityIndicatorView!
     @IBOutlet weak var errorMessage: UILabel!
   
-  var timer:Repeater?
+    @IBOutlet weak var titleL: UILabel!
+    
+    var timer:Repeater?
   
   var pinID:String = ""
   var userNameValid = false {
@@ -94,6 +97,11 @@ class RegisterViewController: BaseViewController {
     passwordTextField.tailImage = nil
     confirmPasswordTextField.activityView?.isHidden = true
     confirmPasswordTextField.tailImage = nil
+   
+    
+    if Device.size() == .screen3_5Inch || Device.size() == .screen4Inch{
+        titleL.font = UIFont.systemFont(ofSize: 11)
+    }
   }
   
   @objc override func leftAction(_ sender: UIButton) {
@@ -127,6 +135,7 @@ class RegisterViewController: BaseViewController {
 
 extension RegisterViewController {
   func setupEvent() {
+  
     NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidChange, object: accountTextField, queue: nil) {[weak self] (notifi) in
       self?.errorStackView.isHidden = true
       self?.accountTextField.activityView?.isHidden = true

@@ -31,9 +31,9 @@ class HomePairView: UIView {
   @IBOutlet weak var rbmL: UILabel!
   @IBOutlet weak var high_lowContain: UIView!
   
-    @IBOutlet weak var icon: UIImageView!
-    
-    var base:String!
+  @IBOutlet weak var icon: UIImageView!
+  
+  var base:String!
   var quote:String!
   var data: Any? {
     didSet {
@@ -41,6 +41,9 @@ class HomePairView: UIView {
       
       self.asset2.text =  markets.quote_info.symbol.filterJade
       self.asset1.text = "/" + markets.base_info.symbol.filterJade
+      let matrix = getCachedBucket(markets)
+      
+      self.icon.kf.setImage(with: URL(string: matrix.icon))
       if markets.bucket.count == 0 {
         self.volume.text = " -"
         self.price.text = "-"
@@ -48,35 +51,29 @@ class HomePairView: UIView {
         self.bulking.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         self.high_lowContain.backgroundColor = .coolGrey
         self.rbmL.text  = "-"
+        
         return
       }
       
-      DispatchQueue.global().async {
-        let matrix = BucketMatrix(markets)
-        
-        DispatchQueue.main.async {
-          self.icon.kf.setImage(with: URL(string: matrix.icon))
-
-          self.volume.text = " " + matrix.quote_volume
-
-          self.price.text = matrix.price
-          self.bulking.text = (matrix.incre == .greater ? "+" : "") + matrix.change.formatCurrency(digitNum: 2) + "%"
-          self.high_lowContain.backgroundColor = matrix.incre.color()
-        
-          let (eth,cyb) = changeToETHAndCYB(markets.quote_info.id)
-          if eth == "0" && cyb == "0"{
-             self.rbmL.text  = "≈¥0.00"
-          }else if (eth == "0"){
-            if let cyb_eth = changeCYB_ETH().toDouble(),cyb_eth != 0{
-              let eth_count = cyb.toDouble()! / cyb_eth
-              self.rbmL.text  = "≈¥" + (eth_count * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
-            }else{
-              self.rbmL.text  = "≈¥0.00"
-            }            
-          }else{
-            self.rbmL.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
-          }
+          
+      self.volume.text = " " + matrix.quote_volume
+      
+      self.price.text = matrix.price
+      self.bulking.text = (matrix.incre == .greater ? "+" : "") + matrix.change.formatCurrency(digitNum: 2) + "%"
+      self.high_lowContain.backgroundColor = matrix.incre.color()
+      
+      let (eth,cyb) = changeToETHAndCYB(markets.quote_info.id)
+      if eth == "0" && cyb == "0"{
+        self.rbmL.text  = "≈¥0.00"
+      }else if (eth == "0"){
+        if let cyb_eth = changeCYB_ETH().toDouble(),cyb_eth != 0{
+          let eth_count = cyb.toDouble()! / cyb_eth
+          self.rbmL.text  = "≈¥" + (eth_count * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
+        }else{
+          self.rbmL.text  = "≈¥0.00"
         }
+      }else{
+        self.rbmL.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
       }
     }
   }

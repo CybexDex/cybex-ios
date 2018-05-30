@@ -55,7 +55,9 @@ extension AppCoordinator: AppStateManagerProtocol {
   func fetchEthToRmbPrice(){
     async {
       let value = try! await(SimpleHTTPService.requestETHPrice())
-      
+      if value == 0 {
+        return
+      }
       main { [weak self] in
         self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
       }
