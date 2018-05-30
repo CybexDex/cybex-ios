@@ -15,6 +15,7 @@ import AwaitKit
 import Macaw
 import Repeat
 import PromiseKit
+import IHKeyboardAvoiding
 
 class RegisterViewController: BaseViewController {
   

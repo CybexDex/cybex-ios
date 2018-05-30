@@ -126,10 +126,10 @@ class ImageTextField: UITextField {
     
     let path = UIBezierPath()
     path.move(to: CGPoint(x: self.bounds.origin.x, y: self.bounds.height
-      - 0.5))
+      - 1))
     path.addLine(to: CGPoint(x: self.bounds.size.width, y: self.bounds.height
-      - 0.5))
-    path.lineWidth = 0.5
+      - 1))
+    path.lineWidth = 1
     self.bottomColor.setStroke()
     path.stroke()
   }

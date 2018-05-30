@@ -9,9 +9,6 @@
 import UIKit
 
 class HomeSectionHeaderView:  UIView {
-  
- 
-  
   var data: Any? {
     didSet {
     }

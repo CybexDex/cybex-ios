@@ -114,7 +114,7 @@ class AssetConfiguration {
   static let EOS = "1.3.4"
   static let ETH = "1.3.2"
   
-  static let market_base_assets = [AssetConfiguration.CYB,AssetConfiguration.BTC,AssetConfiguration.EOS,AssetConfiguration.ETH]
+  static let market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.BTC,AssetConfiguration.EOS,AssetConfiguration.CYB]
   
   var unique_ids:[String] {
     return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).withoutDuplicates()
