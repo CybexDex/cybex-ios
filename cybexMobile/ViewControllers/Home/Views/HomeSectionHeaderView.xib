@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeSectionHeaderView" customModule="cybexMobile" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Fi-vg-DUP" customClass="QuotesTitleView" customModule="cybexMobile" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="drU-fF-vUG"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="cak-i1-AaE"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Xy-3q-3c6" customClass="HomeTitleView" customModule="cybexMobile" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="32" width="375" height="39"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="41" id="OqL-ZB-yQp"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="chO-09-gGa"/>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="1Xy-3q-3c6" firstAttribute="top" secondItem="2Fi-vg-DUP" secondAttribute="bottom" id="0O2-JW-tFo"/>
+                <constraint firstItem="2Fi-vg-DUP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="C2J-Bj-vsc"/>
+                <constraint firstItem="1Xy-3q-3c6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="OsZ-DK-G7q"/>
+                <constraint firstItem="2Fi-vg-DUP" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="WOs-lt-qLq"/>
+                <constraint firstItem="1Xy-3q-3c6" firstAttribute="top" secondItem="2Fi-vg-DUP" secondAttribute="bottom" id="dAS-9V-nNp"/>
+                <constraint firstItem="2Fi-vg-DUP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hOy-FT-owF"/>
+                <constraint firstItem="1Xy-3q-3c6" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="sEI-Pv-C84"/>
+                <constraint firstItem="1Xy-3q-3c6" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="yNK-vU-n22"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="22" y="-177"/>
+        </view>
+    </objects>
+</document>

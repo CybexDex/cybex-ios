@@ -38,7 +38,11 @@ class YourPorfolioView:  UIView{
         
         name.text      = portfolioData.name
         amount.text    = portfolioData.realAmount
-        rmbPrice.text  = portfolioData.rbmPrice
+        if portfolioData.rbmPrice == "-"{
+          rmbPrice.isHidden = true
+        }else{
+          rmbPrice.text  = portfolioData.rbmPrice
+        }
         cybAmount.text = portfolioData.cybPrice
         
         

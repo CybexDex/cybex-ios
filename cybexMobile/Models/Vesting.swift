@@ -67,14 +67,17 @@ class PortfolioData{
     realAmount = getRealAmount(balance.asset_type, amount: balance.balance).suffixNumber(digitNum: 5)
     
     // 获取对应CYB的个数
-    let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "" ? "--" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.toDouble())!)
-    
-    cybPrice = amountCYB.formatCurrency(digitNum: 5) + " CYB"
+    let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "0" ? "-" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.toDouble())!)
+    if amountCYB == "-"{
+      cybPrice = amountCYB + " CYB"
+    }else{
+      cybPrice = amountCYB.formatCurrency(digitNum: 5) + " CYB"
+    }
     
     if let cybCount = amountCYB.toDouble() {
       rbmPrice    = "≈¥" + String(cybCount * changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
     }else{
-      rbmPrice    = "--"
+      rbmPrice    = "-"
     }
   }
   

@@ -17,6 +17,8 @@
 		7246670D20AD730B006A918B /* QuotesTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7246670C20AD730B006A918B /* QuotesTitleView.swift */; };
 		724A2A6C20B41B5500E28438 /* GradientLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A2A6B20B41B5500E28438 /* GradientLabelView.swift */; };
 		724A2A6E20B431B300E28438 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A2A6D20B431B300E28438 /* Style.swift */; };
+		726DE2C920BE5287007C53C9 /* HomeSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726DE2C820BE5287007C53C9 /* HomeSectionHeaderView.swift */; };
+		726DE2CB20BE52A5007C53C9 /* HomeSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 726DE2CA20BE52A5007C53C9 /* HomeSectionHeaderView.xib */; };
 		72889EE820A9964A007D9E7A /* OpenedOrdersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72889EE620A9964A007D9E7A /* OpenedOrdersCell.swift */; };
 		72889EE920A9964A007D9E7A /* OpenedOrdersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72889EE720A9964A007D9E7A /* OpenedOrdersCell.xib */; };
 		72889EEC20A996E0007D9E7A /* OpenedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */; };
@@ -346,6 +348,8 @@
 		7246670C20AD730B006A918B /* QuotesTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesTitleView.swift; sourceTree = "<group>"; };
 		724A2A6B20B41B5500E28438 /* GradientLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLabelView.swift; sourceTree = "<group>"; };
 		724A2A6D20B431B300E28438 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Style.swift; path = cybexMobile/Base/Style.swift; sourceTree = SOURCE_ROOT; };
+		726DE2C820BE5287007C53C9 /* HomeSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionHeaderView.swift; sourceTree = "<group>"; };
+		726DE2CA20BE52A5007C53C9 /* HomeSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSectionHeaderView.xib; sourceTree = "<group>"; };
 		72889EE620A9964A007D9E7A /* OpenedOrdersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersCell.swift; sourceTree = "<group>"; };
 		72889EE720A9964A007D9E7A /* OpenedOrdersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenedOrdersCell.xib; sourceTree = "<group>"; };
 		72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersView.swift; sourceTree = "<group>"; };
@@ -31272,6 +31276,8 @@
 				72F8C77620B0068B00454187 /* HomeTitleView.xib */,
 				73D9789320577D2600CB7DE1 /* HomePairView.swift */,
 				73D9789520577D3100CB7DE1 /* HomePairView.xib */,
+				726DE2C820BE5287007C53C9 /* HomeSectionHeaderView.swift */,
+				726DE2CA20BE52A5007C53C9 /* HomeSectionHeaderView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -31618,6 +31624,7 @@
 				72F6DF2520AC266B00BBF105 /* AccountPortfolioCell.xib in Resources */,
 				730FDA9B20A314F900CFBF24 /* istream.SUNWCCh in Resources */,
 				730FDAA920A314F900CFBF24 /* sstream.SUNWCCh in Resources */,
+				726DE2CB20BE52A5007C53C9 /* HomeSectionHeaderView.xib in Resources */,
 				730FDAB020A314F900CFBF24 /* tuple.SUNWCCh in Resources */,
 				730FDA8F20A314F900CFBF24 /* array.SUNWCCh in Resources */,
 				730FDA6A20A314F600CFBF24 /* cstring in Resources */,
@@ -31990,6 +31997,7 @@
 				73B88E2120AFD4940069AAB6 /* Vesting.swift in Sources */,
 				731A0E9E20A4409900507D1E /* EntryCoordinator.swift in Sources */,
 				72F6DF2B20AC2EE600BBF105 /* AccountAssetOperationView.swift in Sources */,
+				726DE2C920BE5287007C53C9 /* HomeSectionHeaderView.swift in Sources */,
 				73B44E302057ECD000759863 /* PairDetailView.swift in Sources */,
 				7320D6B9205FBC4B00C3F579 /* CBMAVOLUMEModel.swift in Sources */,
 				7320D6B7205FA93600C3F579 /* CBKLineAccessoryView.swift in Sources */,

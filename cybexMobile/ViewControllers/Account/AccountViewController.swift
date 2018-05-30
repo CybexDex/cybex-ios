@@ -86,7 +86,7 @@ class AccountViewController: BaseViewController {
     self.automaticallyAdjustsScrollViewInsets = false
     self.localized_text = R.string.localizable.accountTitle.key.localizedContainer()
     configRightNavButton()
-//    balanceIntroduce.image = UIImage(named: "cloudWallet")?.tint(.steel, blendMode: .normal)
+    //    balanceIntroduce.image = UIImage(named: "cloudWallet")?.tint(.steel, blendMode: .normal)
     
     self.balanceIntroduce.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self](tap) in
       
@@ -122,7 +122,7 @@ class AccountViewController: BaseViewController {
       for tag in tags {
         stackView.viewWithTag(tag)?.isHidden = true
       }
-
+      
       bgImageView.isHidden    = false
       introduceCybex.styledText = R.string.localizable.accountIntroduce.key.localized()
       
@@ -180,10 +180,18 @@ class AccountViewController: BaseViewController {
     
     let isSuper = UserManager.shared.account.value?.superMember ?? false
     memberLevel.localized_text = isSuper ? R.string.localizable.accountSuperMember.key.localizedContainer() :  R.string.localizable.accountBasicMember.key.localizedContainer()
-    totalBalance.text = UserManager.shared.balance.formatCurrency(digitNum: 5)
+    if UserManager.shared.balance == 0 {
+        totalBalance.text = "--"
+    }else{
+        totalBalance.text = UserManager.shared.balance.formatCurrency(digitNum: 5)
+    }
     
     if let ethAmount = changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble(){
-      balanceRMB.text   = "≈¥" + String(UserManager.shared.balance * ethAmount * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
+        if UserManager.shared.balance == 0 {
+            balanceRMB.text   = "≈¥--"
+        }else{
+            balanceRMB.text   = "≈¥" + String(UserManager.shared.balance * ethAmount * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
+        }
     }
     
     if isLogin {
@@ -231,31 +239,31 @@ class AccountViewController: BaseViewController {
       .skip(1)
       .throttle(10, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { [weak self](account) in
-      guard let `self` = self else{ return }
-      if self.isVisible {
-        self.updataStatus()
-      }
-      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        guard let `self` = self else{ return }
+        if self.isVisible {
+          self.updataStatus()
+        }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
     UserManager.shared.limitOrder.asObservable()
       .skip(1)
       .throttle(10, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { [weak self](account) in
-      guard let `self` = self else{ return }
-      if self.isVisible {
-        self.updataStatus()
-      }
-      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        guard let `self` = self else{ return }
+        if self.isVisible {
+          self.updataStatus()
+        }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
     UserManager.shared.balances.asObservable()
       .skip(1)
       .throttle(10, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { [weak self](account) in
-      guard let `self` = self else{ return }
-      if self.isVisible {
-        self.updataStatus()
-      }
-      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        guard let `self` = self else{ return }
+        if self.isVisible {
+          self.updataStatus()
+        }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
 }
 

@@ -1,44 +1,23 @@
 //
-//  AccountPortfolioCellView.swift
+//  HomeSectionHeaderView.swift
 //  cybexMobile
 //
-//  Created by DKM on 2018/5/16.
+//  Created by DKM on 2018/5/30.
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
 import UIKit
-import Kingfisher
 
-class AccountPortfolioCellView: UIView{
+class HomeSectionHeaderView:  UIView {
+  
+ 
   
   var data: Any? {
     didSet {
-      guard let portfolio = data as? PortfolioData else { return }
-      
-      self.icon.kf.setImage(with: URL(string: portfolio.icon))
-      name.text   = portfolio.name
-      realAmount.text = portfolio.realAmount
-      cybPrice.text  = portfolio.cybPrice
-      if portfolio.rbmPrice == "-"{
-        price.isHidden = true
-      }else{
-        price.isHidden = false
-        price.text  = portfolio.rbmPrice
-      }
     }
   }
   
-  @IBOutlet weak var icon: UIImageView!
-  
-  @IBOutlet weak var name: UILabel!
-  
-  @IBOutlet weak var realAmount: UILabel!
-  
-  @IBOutlet weak var cybPrice: UILabel!
-    
-  @IBOutlet weak var price: UILabel!
   fileprivate func setup() {
-    
   }
   
   override var intrinsicContentSize: CGSize {
@@ -85,3 +64,4 @@ class AccountPortfolioCellView: UIView{
   }
   
 }
+
