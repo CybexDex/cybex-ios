@@ -266,12 +266,16 @@ class MarketViewController: BaseViewController {
       .throttle(3, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: {[weak self] (s) in
         guard let `self` = self else { return }
-        if self.isVisible {
-          self.updateIndex()
-          self.refreshView(false)
-        }
+        self.performSelector(onMainThread: #selector(self.refreshTotalView), with: nil, waitUntilDone: false)
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
+  }
+  
+  @objc func refreshTotalView() {
+    if self.isVisible {
+      self.updateIndex()
+      self.refreshView(false)
+    }
   }
 }
 

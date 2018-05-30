@@ -85,17 +85,21 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         if app_data.data.value.count == 0 {
           return
         }
-        DispatchQueue.main.async {
-          if self.isVisible {
-            self.endLoading()
-            self.tableView.reloadData()
-            self.tableView.isHidden = false
-          }
-        }
+        self.performSelector(onMainThread: #selector(self.refreshTableView), with: nil, waitUntilDone: false)// non block tracking mode
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   
+  @objc func refreshTableView() {
+    if self.isVisible {
+      self.endLoading()
+      self.tableView.reloadData()
+      self.tableView.isHidden = false
+    }
+  }
+  
 }
+
+
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
