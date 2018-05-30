@@ -32,6 +32,10 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     }
   }
   
+  lazy var sectionHeader : HomeSectionHeaderView = {
+    let sectionHeader = HomeSectionHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: CGFloat(define.sectionHeaderHeight)))
+    return sectionHeader
+  }()
  
   
   override func viewDidLoad() {
@@ -52,6 +56,8 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     
     let cell = String.init(describing: HomePairCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
+    
+//    let sectionHeader = String.init(descripti)
     
   }
   
@@ -124,7 +130,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let sectionHeader = HomeSectionHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: CGFloat(define.sectionHeaderHeight)))
+        
     return sectionHeader
   }
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
