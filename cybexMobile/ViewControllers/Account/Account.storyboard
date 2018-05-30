@@ -139,14 +139,14 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RVp-06-T4Q">
-                                                                <rect key="frame" x="69.5" y="14.5" width="16" height="16"/>
+                                                                <rect key="frame" x="69.5" y="10.5" width="24" height="24"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="16" id="DM2-vC-Frt"/>
-                                                                    <constraint firstAttribute="height" constant="16" id="kxZ-Ml-tte"/>
+                                                                    <constraint firstAttribute="width" constant="24" id="DM2-vC-Frt"/>
+                                                                    <constraint firstAttribute="height" constant="24" id="kxZ-Ml-tte"/>
                                                                 </constraints>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="theme2ImageName" value="icArrowDark24Px"/>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="theme1ImageName" value="icArrowForward16Px"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="theme1ImageName" value="icArrowForward24Px"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </imageView>
                                                         </subviews>

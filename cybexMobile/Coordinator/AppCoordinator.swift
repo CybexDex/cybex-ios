@@ -83,7 +83,7 @@ class AppCoordinator {
     accountCoordinator.start()
     
     rootVC.viewControllers = [home, faq, account]
-   
+    
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: {notification in     
       CBConfiguration.sharedConfiguration.themeIndex = ThemeManager.currentThemeIndex
     })

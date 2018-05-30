@@ -98,7 +98,7 @@
 "opened_amount"                 = "Amount:";
 
 "opened_asset_amount"                 = "Asset/Amount";
-"opened_order_value"                  = "Order Value";
+"opened_order_value"                  = "Price";
 
 
 "updata_available_title"              = "Update Available";

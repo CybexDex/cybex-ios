@@ -112,7 +112,12 @@ extension AppDelegate {
     }
     
     if !Defaults.hasKey(.language) {
-      Localize.setCurrentLanguage("en")
+      if let language = NSLocale.preferredLanguages.first, language == "zh-Hans-CN" {
+        Localize.setCurrentLanguage("zh-Hans")
+      }
+      else {
+        Localize.setCurrentLanguage("en")
+      }
     }
     else {
       Localize.setCurrentLanguage(Defaults[.language])

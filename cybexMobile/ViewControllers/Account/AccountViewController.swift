@@ -84,7 +84,6 @@ class AccountViewController: BaseViewController {
   // UI的初始化设置
   func setupUI(){
     self.automaticallyAdjustsScrollViewInsets = false
-    self.localized_text = R.string.localizable.accountTitle.key.localizedContainer()
     configRightNavButton()
     //    balanceIntroduce.image = UIImage(named: "cloudWallet")?.tint(.steel, blendMode: .normal)
     
