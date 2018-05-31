@@ -8,14 +8,14 @@ PODS:
   - BiometricAuthentication (1.0.5)
   - Cache (4.2.0)
   - ChainableAnimations (3.0.1)
-  - Crashlytics (3.10.1):
-    - Fabric (~> 1.7.5)
-  - CryptoSwift (0.9.0)
+  - Crashlytics (3.10.2):
+    - Fabric (~> 1.7.7)
+  - CryptoSwift (0.10.0)
   - Device (3.1.0)
   - DNSPageView (1.0.1)
   - EasyAnimation (2.0.2)
   - ESTabBarController-swift (2.6.2)
-  - Fabric (1.7.6)
+  - Fabric (1.7.7)
   - FBRetainCycleDetector (0.1.4)
   - FCUUID (1.3.1):
     - UICKeyChainStore (~> 2.1.0)
@@ -26,7 +26,7 @@ PODS:
   - JSONRPCKit (3.0.0):
     - Result (~> 3.2.0)
   - KeychainAccess (3.1.1)
-  - Kingfisher (4.7.0)
+  - Kingfisher (4.8.0)
   - KMNavigationBarTransition (1.1.5)
   - LifetimeTracker (1.4.0)
   - Localize-Swift (2.0.0)
@@ -44,31 +44,31 @@ PODS:
   - NVActivityIndicatorView (4.2.1):
     - NVActivityIndicatorView/Presenter (= 4.2.1)
   - NVActivityIndicatorView/Presenter (4.2.1)
-  - ObjectMapper (3.1.0)
+  - ObjectMapper (3.2.0)
   - Presentr (1.3.2)
-  - PromiseKit (6.2.6):
-    - PromiseKit/CorePromise (= 6.2.6)
-    - PromiseKit/Foundation (= 6.2.6)
-    - PromiseKit/UIKit (= 6.2.6)
-  - PromiseKit/CorePromise (6.2.6)
-  - PromiseKit/Foundation (6.2.6):
+  - PromiseKit (6.2.8):
+    - PromiseKit/CorePromise (= 6.2.8)
+    - PromiseKit/Foundation (= 6.2.8)
+    - PromiseKit/UIKit (= 6.2.8)
+  - PromiseKit/CorePromise (6.2.8)
+  - PromiseKit/Foundation (6.2.8):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.2.6):
+  - PromiseKit/UIKit (6.2.8):
     - PromiseKit/CorePromise
   - Proposer (1.2.0)
-  - QuickLayout (1.0.13)
+  - QuickLayout (2.0.2)
   - R.swift (4.0.0):
     - R.swift.Library (~> 4.0.0)
   - R.swift.Library (4.0.0)
-  - RealReachability (1.2.0):
-    - RealReachability/Connection (= 1.2.0)
-    - RealReachability/Ping (= 1.2.0)
-  - RealReachability/Connection (1.2.0)
-  - RealReachability/Ping (1.2.0)
+  - RealReachability (1.2.2):
+    - RealReachability/Connection (= 1.2.2)
+    - RealReachability/Ping (= 1.2.2)
+  - RealReachability/Connection (1.2.2)
+  - RealReachability/Ping (1.2.2)
   - Repeat (0.5.4)
   - Result (3.2.4)
   - ReSwift (4.0.1)
-  - Reveal-SDK (14)
+  - Reveal-SDK (15)
   - RxCocoa (4.1.2):
     - RxSwift (~> 4.0)
   - RxGesture (1.2.1):
@@ -81,12 +81,12 @@ PODS:
     - GRDB.swift (~> 2.6)
     - RxSwift (~> 4.0)
   - RxSwift (4.1.2)
-  - SDCAlertView (8.0.2)
-  - SipHash (1.2.0)
+  - SDCAlertView (8.1)
+  - SipHash (1.2.1)
   - Siren (3.4.0)
   - Starscream (3.0.5)
-  - SwiftEntryKit (0.1.5):
-    - QuickLayout (= 1.0.13)
+  - SwiftEntryKit (0.2.4):
+    - QuickLayout (= 2.0.2)
   - SwifterSwift (4.3.0):
     - SwifterSwift/AppKit (= 4.3.0)
     - SwifterSwift/CoreGraphics (= 4.3.0)
@@ -116,7 +116,7 @@ PODS:
   - UICKeyChainStore (2.1.1)
   - UIFontComplete (3.0.0)
   - Zephyr (3.1.2)
-  - ZLaunchAd (2.0.2):
+  - ZLaunchAd (2.0.3):
     - SwiftHash (>= 2.0.1)
 
 DEPENDENCIES:
@@ -273,13 +273,13 @@ SPEC CHECKSUMS:
   BiometricAuthentication: e80e99bf1fe871ab624172eb91f1ddbbc47499b5
   Cache: f28f8dd64b632155aabf9b3906b036a659048251
   ChainableAnimations: 12e0a88e72fb554ad4cda38c40474e4d65c972a2
-  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
-  CryptoSwift: bca8c5b653dcc2d9734409242a070ff53bafac86
+  Crashlytics: 0360624eea1c978a743feddb2fb1ef8b37fb7a0d
+  CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
   Device: 8a21a61f5f938a12dadd44d82287996081b6919b
   DNSPageView: 93b0f9c9ab0e2f8c1d9aa5b0d44740bd2d775d78
   EasyAnimation: 977ef673efe8ce62447807eedb380a77b189dc80
   ESTabBarController-swift: f0a8679e43df1e60b7b36bbcaf1dc98ba6273c7d
-  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
+  Fabric: bda89e242bce1b7b8ab264248cf3407774ce0095
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
   GRDB.swift: 9859cab1b990eac62ee550d3d2208ec1b44f76af
@@ -288,7 +288,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 04e8679f85e496bb2c474eeb9284052f1b3c391c
   JSONRPCKit: 50e0dc5e7f873e87f81562feb8836b7d1974da6d
   KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
-  Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
+  Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
   KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
   LifetimeTracker: 51b52d559ffd4570584996b4b94b8779e525ee62
   Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
@@ -298,27 +298,27 @@ SPEC CHECKSUMS:
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   NVActivityIndicatorView: 8068ba3ad39cb44cbaab25d89ff2546b3f092681
-  ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
+  ObjectMapper: 5cccd2de6f253eda859df8116a5a554d9769e859
   Presentr: 797ae6ec8904eaba4ec58a4c2065bd66e31569ea
-  PromiseKit: 8245cb2e3a8fe00453e580bd4aafb57e1671f501
+  PromiseKit: 6788ce1a0ed5448b83d4aaf56b9fc49fb7647d32
   Proposer: 722fe61822b89f551ae10afe8314067f98c39c28
-  QuickLayout: caf28f8ead39ef0c2548aff46d50bc46b27aabfc
+  QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
-  RealReachability: 5e4759f821ecc1c03f6e1db0baf682ef59468b5f
+  RealReachability: 7ea2093650004e5e30635edbf9d29ce9b9091001
   Repeat: 6e9ea5147b87470c9ceb4b8b090e3be301dd3461
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   ReSwift: f4012c613e13da7398827fe5aebdb938eaed40a3
-  Reveal-SDK: 55b5c5545233b680c2f8da734f202acc15d422b7
+  Reveal-SDK: 25e21896c478b60b948f876043f91570d368d23d
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
   RxGRDB: 6a62783c9559f9b1d87c52abd1c331e469765903
   RxSwift: e49536837d9901277638493ea537394d4b55f570
-  SDCAlertView: 289481e983c60abc5b4b5f4c7241fec9c7a853d5
-  SipHash: c6e9e43e9c531b5bc6602545130c26194a6d31ce
+  SDCAlertView: c497f7c812ccc06095d6f772aa282ebe1a216f4a
+  SipHash: b26918dbe6925368d4322374371437c62c9038e2
   Siren: 5b8be41b5cd05aa3528303325966e919bd53e412
   Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
-  SwiftEntryKit: cf5a98d38a3d37555c028174050de8ce19da13a3
+  SwiftEntryKit: 1a78e2434c17fcd85f003e3bbbe12287b6235e03
   SwifterSwift: f3fce2b9fc5b9d8fda6eec33825e5243c60aebba
   SwiftHash: c805de5a434eacfa0dac7210745a50c55d7fe33d
   SwiftRichString: 3b29b5f2eb0eb244497532f2fd2ec26318eae584
@@ -334,8 +334,8 @@ SPEC CHECKSUMS:
   UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
   UIFontComplete: 5b0f59a83308816c610164b79a2540b3520f9b72
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
-  ZLaunchAd: 33386c55fe481f6c2b40250324798d4199469b46
+  ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
 PODFILE CHECKSUM: 153243f17f96880e378152f2c9bab4ef879dfeac
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.5.3

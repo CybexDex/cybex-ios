@@ -48,7 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     AppConfiguration.shared.appCoordinator.fetchEthToRmbPrice()
     AppConfiguration.shared.appCoordinator.start()
     
-//    appCoordinator.showLogin()
     RealReachability.sharedInstance().startNotifier()
     NotificationCenter.default.addObserver(forName: NSNotification.Name.realReachabilityChanged, object: nil, queue: nil) { (notifi) in
       self.handlerNetworkChanged()
