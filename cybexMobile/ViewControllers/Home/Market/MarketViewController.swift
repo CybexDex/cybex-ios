@@ -188,20 +188,31 @@ class MarketViewController: BaseViewController {
 
       var dataArray = [CBKLineModel]()
       for (_, data) in response.enumerated() {
-        let base_assetid = data.base
+        let base_assetid = pair.base
+        let quote_assetid = pair.quote
+
+        let is_base = data.base == base_assetid
+
         let base_info = app_data.assetInfo[base_assetid]!
-        let base_precision = pow(10, base_info.precision.double)
-        let quote_assetid = data.quote
         let quote_info = app_data.assetInfo[quote_assetid]!
+
+        let base_precision = pow(10, base_info.precision.double)
         let quote_precision = pow(10, quote_info.precision.double)
 
-        let open_price = (Double(data.open_base)! / base_precision)  / (Double(data.open_quote)! / quote_precision)
-        let close_price = (Double(data.close_base)! / base_precision)  / (Double(data.close_quote)! / quote_precision)
-        let high_price = (Double(data.high_base)! / base_precision)  / (Double(data.high_quote)! / quote_precision)
-        let low_price = (Double(data.low_base)! / base_precision)  / (Double(data.low_quote)! / quote_precision)
-
-        let model = CBKLineModel(date: data.open, open: open_price, close: close_price, high: high_price, low: low_price, volume: Double(data.base_volume)! / base_precision)
         
+        var open_price = (Double(data.open_base)! / base_precision)  / (Double(data.open_quote)! / quote_precision)
+        var close_price = (Double(data.close_base)! / base_precision)  / (Double(data.close_quote)! / quote_precision)
+        var high_price = (Double(data.high_base)! / base_precision)  / (Double(data.high_quote)! / quote_precision)
+        var low_price = (Double(data.low_base)! / base_precision)  / (Double(data.low_quote)! / quote_precision)
+
+        if !is_base  {
+           open_price = (Double(data.open_quote)! / base_precision)  / (Double(data.open_base)! / quote_precision)
+           close_price = (Double(data.close_quote)! / base_precision)  / (Double(data.close_base)! / quote_precision)
+           high_price = (Double(data.low_quote)! / base_precision)  / (Double(data.low_base)! / quote_precision)
+           low_price = (Double(data.high_quote)! / base_precision)  / (Double(data.high_base)! / quote_precision)
+        }
+        
+        let model = CBKLineModel(date: data.open, open: open_price, close: close_price, high: high_price, low: low_price, volume: (is_base ? Double(data.base_volume)! : Double(data.quote_volume)!) / base_precision, precision: base_info.precision)
         
         let last_idx = dataArray.count - 1
         if last_idx >= 0 {
@@ -210,7 +221,7 @@ class MarketViewController: BaseViewController {
           if gapCount > 1 {
             for _ in 1..<Int(gapCount) {
               let last_model = dataArray.last!
-              let gap_model = CBKLineModel(date: last_model.date + timeGap.rawValue, open: last_model.close, close: last_model.close, high: last_model.close, low: last_model.close, volume: 0)
+              let gap_model = CBKLineModel(date: last_model.date + timeGap.rawValue, open: last_model.close, close: last_model.close, high: last_model.close, low: last_model.close, volume: 0, precision: last_model.precision)
               dataArray.append(gap_model)
             }
           }
@@ -233,7 +244,7 @@ class MarketViewController: BaseViewController {
         if surplus_count >= 1 {
           for _ in 0..<Int(surplus_count) {
             last_model = dataArray.last!
-            let gap_model = CBKLineModel(date: last_model.date + timeGap.rawValue, open: last_model.close, close: last_model.close, high: last_model.close, low: last_model.close, volume: 0)
+            let gap_model = CBKLineModel(date: last_model.date + timeGap.rawValue, open: last_model.close, close: last_model.close, high: last_model.close, low: last_model.close, volume: 0, precision:last_model.precision)
             dataArray.append(gap_model)
           }
         }

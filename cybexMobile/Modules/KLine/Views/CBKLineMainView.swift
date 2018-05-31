@@ -94,7 +94,7 @@ class CBKLineMainView: UIView {
     
     // 绘制提示数据
     fetchAssistString(model: mainDrawKLineModels.last)
-    drawAssistString?.draw(in: CGRect(x: 10, y : 15, width: width - 30, height:configuration.main.assistViewHeight))
+    drawAssistString?.draw(in: CGRect(x: 10, y : configuration.main.dateAssistViewHeight, width: width - 30, height:configuration.main.assistViewHeight))
     
     let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
 
@@ -283,7 +283,7 @@ extension CBKLineMainView {
           let maStr = String(format: "MA(\(days[idx])): ")
           drawAttrsString.append(NSAttributedString(string: maStr, attributes: maAttrs))
 
-          let mavalueStr = String(format: "  %.2f   ", value)
+          let mavalueStr = String(format: "  %.\(drawModel.precision)f   ", value)
           drawAttrsString.append(NSAttributedString(string: mavalueStr, attributes: attrs))
         }
       }
@@ -305,7 +305,7 @@ extension CBKLineMainView {
           let maStr = String(format: "EMA(\(days[idx])): ")
           drawAttrsString.append(NSAttributedString(string: maStr, attributes: maAttrs))
           
-          let emavalueStr = String(format: "  %.2f   ", value)
+          let emavalueStr = String(format: "  %.\(drawModel.precision)f   ", value)
           drawAttrsString.append(NSAttributedString(string: emavalueStr, attributes: attrs))
         }
       }
@@ -324,7 +324,7 @@ extension CBKLineMainView {
           NSAttributedStringKey.foregroundColor : configuration.theme.BOLL_MBColor,
           NSAttributedStringKey.font : configuration.main.dateAssistTextFont
         ]
-        let mbAttrsStr = NSAttributedString(string: String(format: "  %.2f  ", value), attributes: mbAttrs)
+        let mbAttrsStr = NSAttributedString(string: String(format: "  %.\(drawModel.precision)f  ", value), attributes: mbAttrs)
         drawAttrsString.append(mbAttrsStr)
       }
       
@@ -333,7 +333,7 @@ extension CBKLineMainView {
           NSAttributedStringKey.foregroundColor : configuration.theme.BOLL_UPColor,
           NSAttributedStringKey.font : configuration.main.dateAssistTextFont
         ]
-        let upAttrsStr = NSAttributedString(string: String(format: " %.2f  ", value), attributes: upAttrs)
+        let upAttrsStr = NSAttributedString(string: String(format: " %.\(drawModel.precision)f  ", value), attributes: upAttrs)
         drawAttrsString.append(upAttrsStr)
       }
     
@@ -342,7 +342,7 @@ extension CBKLineMainView {
           NSAttributedStringKey.foregroundColor : configuration.theme.BOLL_DNColor,
           NSAttributedStringKey.font : configuration.main.dateAssistTextFont
         ]
-        let dnAttrsStr = NSAttributedString(string: String(format: " %.2f  ", value), attributes: dnAttrs)
+        let dnAttrsStr = NSAttributedString(string: String(format: " %.\(drawModel.precision)f  ", value), attributes: dnAttrs)
         drawAttrsString.append(dnAttrsStr)
       }
       

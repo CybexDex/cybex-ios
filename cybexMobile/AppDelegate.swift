@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     IQKeyboardManager.shared.enable = true
     IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     
-    KingfisherManager.shared.defaultOptions = [.fromMemoryCacheOrRefresh]
+//    KingfisherManager.shared.defaultOptions = [.fromMemoryCacheOrRefresh]
     
     _ = RichStyle.init()
 
