@@ -205,9 +205,9 @@ extension Double {
     return String(format: "%.\(digits)f", self)
   }
   
-  func formatCurrency(digitNum: Int) -> String {
+  func formatCurrency(digitNum: Int ,usesGroupingSeparator:Bool = true) -> String {
     let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
-      return formatter.maximumFractionDigits == digitNum
+      return formatter.maximumFractionDigits == digitNum && formatter.usesGroupingSeparator == usesGroupingSeparator
     })
     
     if let format = existFormatters.first {
@@ -218,6 +218,7 @@ extension Double {
       let numberFormatter = NumberFormatter()
       numberFormatter.numberStyle = .currency
       numberFormatter.currencySymbol = ""
+      numberFormatter.usesGroupingSeparator = usesGroupingSeparator
       numberFormatter.maximumFractionDigits = digitNum
       numberFormatter.minimumFractionDigits = digitNum
       String.numberFormatters.append(numberFormatter)
@@ -265,8 +266,15 @@ extension String {
   
   
   public func toDouble() -> Double? {
+    
+    var selfString = self
+    if selfString.contains(","){
+      selfString = selfString.replacingOccurrences( of:"[^0-9.]", with: "", options: .regularExpression)
+//       selfString = selfString.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789.").inverted)
+    }
+    
     String.doubleFormat.allowsFloats = true
-    return String.doubleFormat.number(from: self)?.doubleValue
+    return String.doubleFormat.number(from: selfString)?.doubleValue
   }
   
   func formatCurrency(digitNum: Int) -> String {

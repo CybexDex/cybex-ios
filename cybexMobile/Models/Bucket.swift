@@ -182,7 +182,7 @@ struct BucketMatrix {
     let change = (lastClose_price - firseOpen_price) * 100 / firseOpen_price
     let percent = round(change * 100) / 100.0
 
-    self.change = percent.formatCurrency(digitNum: 2)
+    self.change = percent.formatCurrency(digitNum: 2,usesGroupingSeparator: false)
 
     if percent == 0 {
       self.incre = .equal

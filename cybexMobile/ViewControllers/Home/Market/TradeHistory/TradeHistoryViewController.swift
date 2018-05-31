@@ -29,7 +29,7 @@ class TradeHistoryViewController: BaseViewController {
       let quote_info = app_data.assetInfo[pair!.quote]!
 
       self.quote_name.text = quote_info.symbol.filterJade
-      self.base_name.text = base_info.symbol
+      self.base_name.text = base_info.symbol.filterJade
       self.coordinator?.fetchData(pair!)
 
     }

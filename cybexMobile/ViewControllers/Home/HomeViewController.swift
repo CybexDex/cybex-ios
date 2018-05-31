@@ -122,6 +122,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     let data = markets[indexPath.row]
     cell.setup(data, indexPath: indexPath)
     
+    
     return cell
   }
   

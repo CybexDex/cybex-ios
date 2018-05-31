@@ -194,11 +194,11 @@
                                         <rect key="frame" x="0.0" y="55.5" width="290" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tdJ-nX-VNu" id="Sn5-Oh-yi0">
-                                            <rect key="frame" x="0.0" y="0.0" width="290" height="47.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="290" height="48"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g20-vo-4mY">
-                                                    <rect key="frame" x="15" y="0.0" width="260" height="47.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="260" height="48"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>

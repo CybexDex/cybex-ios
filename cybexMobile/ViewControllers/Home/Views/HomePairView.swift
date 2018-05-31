@@ -42,6 +42,7 @@ class HomePairView: UIView {
       self.asset2.text =  markets.quote_info.symbol.filterJade
       self.asset1.text = "/" + markets.base_info.symbol.filterJade
       let matrix = getCachedBucket(markets)
+//      self.icon.kf.setImage(with: URL(string: matrix.icon), placeholder: nil, options: [.targetCache], progressBlock: nil, completionHandler: nil)
       
       self.icon.kf.setImage(with: URL(string: matrix.icon))
       if markets.bucket.count == 0 {
@@ -60,6 +61,13 @@ class HomePairView: UIView {
       
       self.price.text = matrix.price
       self.bulking.text = (matrix.incre == .greater ? "+" : "") + matrix.change.formatCurrency(digitNum: 2) + "%"
+
+      if let change = matrix.change.toDouble() ,change > 1000{
+        self.bulking.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
+      }else{
+        self.bulking.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
+      }
+      
       self.high_lowContain.backgroundColor = matrix.incre.color()
       
       let (eth,cyb) = changeToETHAndCYB(markets.quote_info.id)
