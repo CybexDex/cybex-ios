@@ -82,16 +82,16 @@ enum changeScope {
   func color() -> UIColor {
     switch self {
     case .greater:
-      return #colorLiteral(red: 0.4922918081, green: 0.7674361467, blue: 0.356476903, alpha: 1)
+      return .turtleGreen
     case .less:
-      return #colorLiteral(red: 0.7984321713, green: 0.3588138223, blue: 0.2628142834, alpha: 1)
+      return .reddish
     case .equal:
-      return #colorLiteral(red: 0.9999966025, green: 0.9999999404, blue: 0.9999999404, alpha: 0.5)
+      return .coolGrey
     }
   }
 }
 
-class BucketMatrix {
+struct BucketMatrix {
   var price:String = ""
   
   var asset:[Bucket]
@@ -105,14 +105,21 @@ class BucketMatrix {
   var low:String = ""
   
   var change:String = ""
+  var base:String = ""
+  var quote:String = ""
   
   var incre:changeScope = .equal
   
-
+  var icon : String = ""
   init(_ homebucket:HomeBucket) {
     self.asset = homebucket.bucket
+    self.base = homebucket.base
+    self.quote = homebucket.quote
     
-    let last = self.asset.last!
+    self.icon = AppConfiguration.SERVER_ICONS_BASE_URLString + quote.replacingOccurrences(of: ".", with: "_") + "_grey.png"
+
+    guard let last = self.asset.last else { return }
+    
     let first = self.asset.first!
 
     let flip = homebucket.base != last.base
@@ -127,24 +134,26 @@ class BucketMatrix {
     let base_info = homebucket.base_info
     let quote_info = homebucket.quote_info
 
-    let base_precision = pow(10, base_info.precision.toDouble)
-    let quote_precision = pow(10, quote_info.precision.toDouble)
+    let base_precision = pow(10, base_info.precision.double)
+    let quote_precision = pow(10, quote_info.precision.double)
 
     let lastClose_price = (last_closebase_amount / base_precision) / (last_closequote_amount / quote_precision)
     let firseOpen_price = (first_openbase_amount / base_precision) / (first_openquote_amount / quote_precision)
 
-
-    let high_price_collection = self.asset.map { (bucket) -> Double in
+    var high_price_collection:[Double] = []
+    var low_price_collection:[Double] = []
+    
+    for bucket in self.asset {
       let high_base = flip ? (Double(bucket.high_quote)! / base_precision) : (Double(bucket.high_base)! / base_precision)
       let quote_base = flip ? (Double(bucket.high_base)! / quote_precision) : (Double(bucket.high_quote)! / quote_precision)
-      return high_base / quote_base
-    }
-
-    let low_price_collection = self.asset.map { (bucket) -> Double in
+      high_price_collection.append(high_base / quote_base)
+      
       let low_base = flip ? (Double(bucket.low_quote)! / base_precision) : (Double(bucket.low_base)! / base_precision)
       let low_quote = flip ? (Double(bucket.low_base)! / quote_precision) : (Double(bucket.low_quote)! / quote_precision)
-      return low_base / low_quote
+      low_price_collection.append(low_base / low_quote)
+
     }
+
 
     let high = high_price_collection.max()!
     let low = low_price_collection.min()!
@@ -161,19 +170,19 @@ class BucketMatrix {
 
 
     self.base_volume_origin = base_volume
-    self.base_volume = base_volume.toString.suffixNumber()
-    self.quote_volume = quote_volume.toString.suffixNumber()
+    self.base_volume = base_volume.suffixNumber(digitNum: 2)
+    self.quote_volume = quote_volume.suffixNumber(digitNum: 2)
 
-    self.high = high.toString.formatCurrency(digitNum: base_info.precision)
-    self.low = low.toString.formatCurrency(digitNum: base_info.precision)
+    self.high = high.formatCurrency(digitNum: base_info.precision)
+    self.low = low.formatCurrency(digitNum: base_info.precision)
 
-    let isCYB = homebucket.base == AssetConfiguration.CYB
-    self.price = lastClose_price.toString.formatCurrency(digitNum: isCYB ? 5 : 8)
+    
+    self.price = lastClose_price.formatCurrency(digitNum: base_info.precision)
 
     let change = (lastClose_price - firseOpen_price) * 100 / firseOpen_price
     let percent = round(change * 100) / 100.0
 
-    self.change = percent.toString.formatCurrency(digitNum: 2)
+    self.change = percent.formatCurrency(digitNum: 2,usesGroupingSeparator: false)
 
     if percent == 0 {
       self.incre = .equal
@@ -220,13 +229,13 @@ class ToStringTransform: TransformType {
   
   open func transformFromJSON(_ value: Any?) -> String? {
     if let v = value as? Double {
-      return String(describing: v)
+      return v.description
     }
     else if let v = value as? String {
       return v
     }
     else if let v = value as? Int {
-      return v.toString
+      return v.description
     }
     
     return nil

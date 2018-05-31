@@ -9,6 +9,7 @@
 import Foundation
 import ReSwift
 import AwaitKit
+import Repeat
 
 extension AppCoordinator: AppStateManagerProtocol {
   func subscribe<SelectedState, S: StoreSubscriber>(
@@ -45,12 +46,36 @@ extension AppCoordinator: AppStateManagerProtocol {
           self.store.dispatch(AssetInfoAction(assetID: info.id, info: info))
         }
       }
+      
+      
     }
-
     WebsocketService.shared.send(request: request)
+  }
+  
+  func fetchEthToRmbPrice(){
+    async {
+      let value = try! await(SimpleHTTPService.requestETHPrice())
+      if value.count == 0 {
+        return
+      }
+      main { [weak self] in
+        self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
+      }
+    }
+    
+    self.timer = Repeater.every(.seconds(3)) {[weak self] timer in
+      let value = try! await(SimpleHTTPService.requestETHPrice())
+      if value.count == 0 {
+        return
+      }
+      DispatchQueue.main.async { [weak self] in
+        self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
+      }
+    }
+    
+    timer?.start()
 
   }
-
 }
 
 extension AppCoordinator {
@@ -60,7 +85,7 @@ extension AppCoordinator {
 
     var start = now.addingTimeInterval(-3600 * 24)
 
-    let timePassed = (-start.minute * 60 - start.second).toDouble
+    let timePassed = (-start.minute * 60 - start.second).double
     start = start.addingTimeInterval(timePassed)
 
 
@@ -72,7 +97,7 @@ extension AppCoordinator {
 
       }
 
-      UIApplication.shared.coordinator().fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub)
+      AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub)
     }
 
   }
@@ -81,16 +106,26 @@ extension AppCoordinator {
     let now = Date()
     let start = now.addingTimeInterval(-gap.rawValue * 199)
 
-    UIApplication.shared.coordinator().fetchKline(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: gap.rawValue.toInt, startTime: start, endTime: now), gap: gap, vc: vc, selector: selector)
+    AppConfiguration.shared.appCoordinator.fetchKline(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: gap.rawValue.int, startTime: start, endTime: now), gap: gap, vc: vc, selector: selector)
   }
 
   func getLatestData() {
     if AssetConfiguration.shared.asset_ids.isEmpty {
-      let pairs = try! await(SimpleHTTPService.requestMarketList())
+      var pairs:[Pair] = []
+      async {
+        AssetConfiguration.market_base_assets.forEach { (base) in
+          let pair = try! await(SimpleHTTPService.requestMarketList(base:base))
+          pairs += pair
+        }
+        
+        main {
+          AssetConfiguration.shared.asset_ids = pairs
+          self.fetchAsset()
+          self.request24hMarkets(AssetConfiguration.shared.asset_ids)
+        }
+      }
+      
 
-      AssetConfiguration.shared.asset_ids = pairs
-      self.fetchAsset()
-      self.request24hMarkets(pairs)
     }
     else {
       if app_data.assetInfo.count != AssetConfiguration.shared.asset_ids.count {

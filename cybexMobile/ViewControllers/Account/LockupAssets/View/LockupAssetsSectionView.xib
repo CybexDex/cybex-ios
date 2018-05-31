@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LockupAssetsSectionView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="cybPriceTitle" destination="qsw-vm-y3W" id="Gi0-4R-krL"/>
+                <outlet property="totalTitle" destination="j88-xm-Sqd" id="wsU-YN-QMP"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资产/数量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j88-xm-Sqd">
+                    <rect key="frame" x="25" y="14" width="53.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="asset_mount"/>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到期时间/进度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsw-vm-y3W">
+                    <rect key="frame" x="272" y="14" width="78" height="16.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="progress_expiration"/>
+                    </userDefinedRuntimeAttributes>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="j88-xm-Sqd" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="14" id="035-a0-saK"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="qsw-vm-y3W" secondAttribute="bottom" constant="13" id="7SJ-8T-P3T"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="j88-xm-Sqd" secondAttribute="bottom" constant="13" id="Aa4-rs-2m6"/>
+                <constraint firstItem="qsw-vm-y3W" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="14" id="qmP-yP-kaD"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="qsw-vm-y3W" secondAttribute="trailing" constant="25" id="sdK-UI-SHO"/>
+                <constraint firstItem="qsw-vm-y3W" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="j88-xm-Sqd" secondAttribute="trailing" constant="10" id="wDu-em-MkJ"/>
+                <constraint firstItem="j88-xm-Sqd" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="yh8-rD-BjD"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                    <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                    <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="-165" y="-84"/>
+        </view>
+    </objects>
+</document>

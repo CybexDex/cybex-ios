@@ -14,7 +14,7 @@ func MarketReducer(action:Action, state:MarketState?) -> MarketState {
 }
 
 func MarketPropertyReducer(_ state: MarketPropertyState?, action: Action) -> MarketPropertyState {
-    var state = state ?? MarketPropertyState()
+    let state = state ?? MarketPropertyState()
     
     switch action {
     default:

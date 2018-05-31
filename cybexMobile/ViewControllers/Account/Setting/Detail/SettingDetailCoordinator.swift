@@ -20,7 +20,7 @@ protocol SettingDetailStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
 }
 
-class SettingDetailCoordinator: SettingRootCoordinator {
+class SettingDetailCoordinator: AccountRootCoordinator {
     
     lazy var creator = SettingDetailPropertyActionCreate()
     
@@ -33,7 +33,9 @@ class SettingDetailCoordinator: SettingRootCoordinator {
 
 extension SettingDetailCoordinator: SettingDetailCoordinatorProtocol {
   func popViewController(_ animated: Bool) {
-    self.rootVC.popViewController(animated: animated)
+    self.rootVC.popToRootViewController(animated: animated)
+    
+    
   }
 }
 

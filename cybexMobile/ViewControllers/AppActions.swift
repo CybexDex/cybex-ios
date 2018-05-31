@@ -16,12 +16,25 @@ struct AppState:StateType {
 struct AppPropertyState {
   var data:BehaviorRelay<[HomeBucket]> = BehaviorRelay(value: [])
   
+  var matrixs:BehaviorRelay<[Pair:BucketMatrix]> = BehaviorRelay(value:[:])
+  
   var detailData:[Pair:[candlesticks:[Bucket]]]?
 
   var subscribeIds:[Pair:Int]?
   var pairsRefreshTimes:[Pair:Double]?
 
   var assetInfo:[String:AssetInfo] = [:]
+  
+  var rmb_prices : [RMBPrices] = []
+  
+  var eth_rmb_price : Double  = 0
+  
+  
+  func filterQuoteAsset(_ base:String) -> [HomeBucket] {
+    return data.value.filter({ (bucket) -> Bool in
+      return bucket.base == base
+    })
+  }
 }
 
 struct HomeBucket:Equatable,Hashable {
@@ -36,7 +49,9 @@ struct HomeBucket:Equatable,Hashable {
   }
   
   var hashValue: Int {
-    return base.hashValue ^ quote.hashValue
+    let value = base.hashValue < quote.hashValue ? -1 : 1
+    let valueStr = "\(base.hashValue)" + "+" + "\(quote.hashValue)"
+    return value * valueStr.hashValue
   }
 }
 
@@ -70,6 +85,7 @@ struct NextPage: Action {}
 struct ResetPage: Action {}
 
 
+
 struct MarketsFetched:Action {
   let pair:AssetPairQueryParams
   let assets:[Bucket]
@@ -94,6 +110,13 @@ struct SubscribeSuccess:Action {
 struct AssetInfoAction:Action {
   let assetID:String
   let info:AssetInfo
+}
+
+struct FecthEthToRmbPriceAction:Action{
+  let price : [RMBPrices]
+}
+struct FecthUSDTToRmbPriceAction:Action{
+  let price : Double
 }
 
 typealias MarketDataCallback = ([Bucket]) -> Void
@@ -136,7 +159,7 @@ class AppPropertyActionCreate: LoadingActionCreator {
                   addAsset.base_volume = "0"
                   addAsset.quote_volume = "0"
                   addAsset.open = asset.open - gapCount * Double(asset.seconds)!
-                  assets.insertFirst(addAsset)
+                  assets.prepend(addAsset)
                   
       
                 }
@@ -177,6 +200,7 @@ class AppPropertyActionCreate: LoadingActionCreator {
   }
   
   func fetchingMarketList(_  params:AssetPairQueryParams, callback:CommonAnyCallback?) {
+    
     let request = GetMarketHistoryRequest(queryParams: params) { response in
       if let callback = callback {
         callback(response)

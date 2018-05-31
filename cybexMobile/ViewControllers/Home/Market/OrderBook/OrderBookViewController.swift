@@ -10,14 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
-import EZSwiftExtensions
+
 import SwiftyJSON
 
 class OrderBookViewController: BaseViewController {
-
-    @IBOutlet weak var tableView: UITableView!
-    var coordinator: (OrderBookCoordinatorProtocol & OrderBookStateManagerProtocol)?
-
+  
+  @IBOutlet weak var tableView: UITableView!
+  var coordinator: (OrderBookCoordinatorProtocol & OrderBookStateManagerProtocol)?
+  
   var pair:Pair? {
     didSet {
       if self.tableView != nil, oldValue != pair {
@@ -26,8 +26,8 @@ class OrderBookViewController: BaseViewController {
       self.coordinator?.fetchData(pair!)
     }
   }
-
-	override func viewDidLoad() {
+  
+  override func viewDidLoad() {
     super.viewDidLoad()
     
     let cell = String.init(describing: OrderBookCell.self)
@@ -37,42 +37,40 @@ class OrderBookViewController: BaseViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
   }
-
-    func commonObserveState() {
-        coordinator?.subscribe(errorSubscriber) { sub in
-            return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
-        
-        coordinator?.subscribe(loadingSubscriber) { sub in
-            return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
+  
+  func commonObserveState() {
+    coordinator?.subscribe(errorSubscriber) { sub in
+      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
+        return false
+      })
     }
     
-    override func configureObserveState() {
-        commonObserveState()
-      
-      self.coordinator!.state.property.data.asObservable().distinctUntilChanged()
-        .subscribe(onNext: {[weak self] (s) in
-          guard let `self` = self else { return }
-
-          self.tableView.reloadData()
-          self.tableView.layoutIfNeeded()
-
-
-            self.coordinator?.updateMarketListHeight(500)
-            self.tableView.isHidden = false
-
-
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    coordinator?.subscribe(loadingSubscriber) { sub in
+      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
+        return false
+      })
     }
-  
-  deinit {
-    print("orderbook dealloc")
   }
+  
+  override func configureObserveState() {
+    commonObserveState()
+    
+    self.coordinator!.state.property.data.asObservable().distinctUntilChanged()
+      .subscribe(onNext: {[weak self] (s) in
+        guard let `self` = self else { return }
+        
+        self.tableView.reloadData()
+        self.tableView.layoutIfNeeded()
+        
+        
+        self.coordinator?.updateMarketListHeight(500)
+        self.tableView.isHidden = false
+        
+        
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+  }
+  
+
 }
 
 extension OrderBookViewController: UITableViewDelegate, UITableViewDataSource {
@@ -87,11 +85,11 @@ extension OrderBookViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: OrderBookCell.self), for: indexPath) as! OrderBookCell
-
+    
     let data = coordinator!.state.property.data.value
-
+    
     cell.setup((data.bids[optional:indexPath.row], data.asks[optional:indexPath.row]), indexPath: indexPath)
-
+    
     return cell
   }
   

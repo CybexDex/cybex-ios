@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountAssetOperationView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="lockupAssetsView" destination="YDK-8a-IVE" id="MuC-vL-SP7"/>
+                <outlet property="openedOrdersView" destination="egJ-SV-iwc" id="SrT-7V-oAS"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xyx-fL-WBn">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDo-t5-odi">
+                            <rect key="frame" x="25" y="12" width="13" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="account.assetOperations"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="2Kx-xh-6Z2"/>
+                        <constraint firstItem="tDo-t5-odi" firstAttribute="top" secondItem="Xyx-fL-WBn" secondAttribute="top" constant="12" id="Lx5-6t-OhN"/>
+                        <constraint firstAttribute="bottom" secondItem="tDo-t5-odi" secondAttribute="bottom" constant="8" id="Urb-Tf-H2w"/>
+                        <constraint firstItem="tDo-t5-odi" firstAttribute="leading" secondItem="Xyx-fL-WBn" secondAttribute="leading" constant="25" id="mH4-b1-dbP"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="egJ-SV-iwc" customClass="AccountAssetOperationsItemView" customModule="cybexMobile" customModuleProvider="target">
+                    <rect key="frame" x="13" y="44" width="170.5" height="75"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDK-8a-IVE" customClass="AccountAssetOperationsItemView" customModule="cybexMobile" customModuleProvider="target">
+                    <rect key="frame" x="191.5" y="44" width="170.5" height="75"/>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="egJ-SV-iwc" secondAttribute="bottom" constant="15" id="JVM-K9-KW6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="YDK-8a-IVE" secondAttribute="trailing" constant="13" id="MBy-es-SQ6"/>
+                <constraint firstItem="egJ-SV-iwc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="Xs3-BF-Qip"/>
+                <constraint firstItem="YDK-8a-IVE" firstAttribute="leading" secondItem="egJ-SV-iwc" secondAttribute="trailing" constant="8" id="ZBu-ag-wrQ"/>
+                <constraint firstItem="egJ-SV-iwc" firstAttribute="top" secondItem="Xyx-fL-WBn" secondAttribute="bottom" id="dDN-Mq-kW2"/>
+                <constraint firstItem="Xyx-fL-WBn" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="eNZ-ks-CF3"/>
+                <constraint firstItem="YDK-8a-IVE" firstAttribute="width" secondItem="egJ-SV-iwc" secondAttribute="width" id="esz-FN-jsg"/>
+                <constraint firstItem="YDK-8a-IVE" firstAttribute="top" secondItem="Xyx-fL-WBn" secondAttribute="bottom" id="f5d-vW-Kj4"/>
+                <constraint firstItem="Xyx-fL-WBn" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="ki5-nd-rwq"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Xyx-fL-WBn" secondAttribute="trailing" id="luD-8O-99A"/>
+                <constraint firstAttribute="bottom" secondItem="YDK-8a-IVE" secondAttribute="bottom" constant="15" id="wDP-dv-Bgm"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="-405" y="-58"/>
+        </view>
+    </objects>
+</document>

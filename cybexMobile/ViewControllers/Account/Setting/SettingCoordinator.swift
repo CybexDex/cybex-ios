@@ -11,6 +11,7 @@ import ReSwift
 
 protocol SettingCoordinatorProtocol {
   func openSettingDetail(type:settingPage)
+  func dismiss()
 }
 
 protocol SettingStateManagerProtocol {
@@ -20,7 +21,7 @@ protocol SettingStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
 }
 
-class SettingCoordinator: SettingRootCoordinator {
+class SettingCoordinator: AccountRootCoordinator {
     
     lazy var creator = SettingPropertyActionCreate()
     
@@ -36,6 +37,10 @@ class SettingCoordinator: SettingRootCoordinator {
 }
 
 extension SettingCoordinator: SettingCoordinatorProtocol {
+  func dismiss() {
+    self.rootVC.popToRootViewController(animated: true)
+  }
+  
   func openSettingDetail(type:settingPage) {
     let vc = R.storyboard.main.settingDetailViewController()!
     vc.pageType = type

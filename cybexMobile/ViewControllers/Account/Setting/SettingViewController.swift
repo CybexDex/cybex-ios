@@ -11,12 +11,13 @@ import ReSwift
 import Localize_Swift
 import SwiftTheme
 import SwiftyUserDefaults
-import EZSwiftExtensions
+import SwifterSwift
 
 class SettingViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
 
-	var coordinator: (SettingCoordinatorProtocol & SettingStateManagerProtocol)?
+    @IBOutlet weak var logoutView: Button!
+    var coordinator: (SettingCoordinatorProtocol & SettingStateManagerProtocol)?
 
 	override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,14 +27,25 @@ class SettingViewController: BaseViewController {
       navigationItem.largeTitleDisplayMode = .always
     }
 
-    self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, w: self.tableView.bounds.size.width, h: 0.01))
-
+    self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: 0.01))
+    self.tableView.tableFooterView?.height = 68
+    
     setupNotification()
+    
+    if !UserManager.shared.isLoginIn{
+      self.logoutView.isHidden = true
+    }
+    self.logoutView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+      guard let `self` = self else { return }
+      
+      UserManager.shared.logout()
+      self.coordinator?.dismiss()
+    }).disposed(by: disposeBag)
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
+
   }
   
   func setupNotification() {
@@ -105,22 +117,22 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     else {
       cell.textLabel?.localized_text = R.string.localizable.version.key.localizedContainer()
-      cell.detailTextLabel?.text = ez.appVersion!
+      cell.detailTextLabel?.text = SwifterSwift.appVersion!
     }
     return cell
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
     if indexPath.section == 2 {
       self.startLoading()
+      
       handlerUpdateVersion({
         self.endLoading()
       }, showNoUpdate: true)
       return
     }
-    
-    self.coordinator?.openSettingDetail(type: indexPath.section == 0 ? .language : .theme)
-   
+    self.coordinator?.openSettingDetail(type: indexPath.section == 0 ? .language : .theme)   
   }
 
 }

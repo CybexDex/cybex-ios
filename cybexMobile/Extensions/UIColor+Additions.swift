@@ -2,7 +2,7 @@
 //  UIColor+Additions.swift
 //  Cybex IOS
 //
-//  Generated on Zeplin. (2018/5/9).
+//  Generated on Zeplin. (2018/5/23).
 //  Copyright (c) 2018 __MyCompanyName__. All rights reserved.
 //
 
@@ -14,7 +14,7 @@ extension UIColor {
     return UIColor(red: 1.0, green: 196.0 / 255.0, blue: 120.0 / 255.0, alpha: 1.0)
   }
 
-  @nonobjc class var orangeish: UIColor {
+  @nonobjc class var maincolor: UIColor {
     return UIColor(red: 1.0, green: 145.0 / 255.0, blue: 67.0 / 255.0, alpha: 1.0)
   }
 
@@ -44,6 +44,86 @@ extension UIColor {
 
   @nonobjc class var paleGrey: UIColor {
     return UIColor(red: 247.0 / 255.0, green: 248.0 / 255.0, blue: 250.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var darkTwo50: UIColor {
+    return UIColor(red: 27.0 / 255.0, green: 34.0 / 255.0, blue: 48.0 / 255.0, alpha: 0.5)
+  }
+
+  @nonobjc class var white80: UIColor {
+    return UIColor(white: 1.0, alpha: 0.8)
+  }
+
+  @nonobjc class var reddish: UIColor {
+    return UIColor(red: 190.0 / 255.0, green: 70.0 / 255.0, blue: 52.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var coolGrey: UIColor {
+    return UIColor(red: 141.0 / 255.0, green: 144.0 / 255.0, blue: 151.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var turtleGreen: UIColor {
+    return UIColor(red: 109.0 / 255.0, green: 187.0 / 255.0, blue: 73.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var darkTwo80: UIColor {
+    return UIColor(red: 27.0 / 255.0, green: 34.0 / 255.0, blue: 48.0 / 255.0, alpha: 0.8)
+  }
+
+  @nonobjc class var steel80: UIColor {
+    return UIColor(red: 120.0 / 255.0, green: 129.0 / 255.0, blue: 154.0 / 255.0, alpha: 0.8)
+  }
+
+  @nonobjc class var steel20: UIColor {
+    return UIColor(red: 120.0 / 255.0, green: 129.0 / 255.0, blue: 154.0 / 255.0, alpha: 0.2)
+  }
+
+  @nonobjc class var black10: UIColor {
+    return UIColor(white: 0.0, alpha: 0.1)
+  }
+
+  @nonobjc class var black4: UIColor {
+    return UIColor(white: 0.0, alpha: 0.04)
+  }
+
+  @nonobjc class var white4: UIColor {
+    return UIColor(white: 1.0, alpha: 0.04)
+  }
+
+  @nonobjc class var blueyGrey: UIColor {
+    return UIColor(red: 183.0 / 255.0, green: 188.0 / 255.0, blue: 201.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var darkThree: UIColor {
+    return UIColor(red: 22.0 / 255.0, green: 28.0 / 255.0, blue: 40.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var paleGreyTwo: UIColor {
+    return UIColor(red: 253.0 / 255.0, green: 253.0 / 255.0, blue: 254.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var steel11: UIColor {
+    return UIColor(red: 120.0 / 255.0, green: 129.0 / 255.0, blue: 154.0 / 255.0, alpha: 0.11)
+  }
+
+  @nonobjc class var dark20: UIColor {
+    return UIColor(red: 23.0 / 255.0, green: 29.0 / 255.0, blue: 42.0 / 255.0, alpha: 0.2)
+  }
+
+  @nonobjc class var white98: UIColor {
+    return UIColor(white: 1.0, alpha: 0.98)
+  }
+  
+  @nonobjc class var white30: UIColor {
+    return UIColor(white: 1.0, alpha: 0.3)
+  }
+
+  @nonobjc class var steel10: UIColor {
+    return UIColor(red: 120.0 / 255.0, green: 129.0 / 255.0, blue: 154.0 / 255.0, alpha: 0.1)
+  }
+
+  @nonobjc class var steel30: UIColor {
+    return UIColor(red: 120.0 / 255.0, green: 129.0 / 255.0, blue: 154.0 / 255.0, alpha: 0.3)
   }
 
 }

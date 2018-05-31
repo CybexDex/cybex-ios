@@ -10,7 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
-import EZSwiftExtensions
 
 class TradeHistoryViewController: BaseViewController {
   @IBOutlet weak var tableView: UITableView!
@@ -29,8 +28,8 @@ class TradeHistoryViewController: BaseViewController {
       let base_info = app_data.assetInfo[pair!.base]!
       let quote_info = app_data.assetInfo[pair!.quote]!
 
-      self.quote_name.text = quote_info.symbol
-      self.base_name.text = base_info.symbol
+      self.quote_name.text = quote_info.symbol.filterJade
+      self.base_name.text = base_info.symbol.filterJade
       self.coordinator?.fetchData(pair!)
 
     }
@@ -96,8 +95,8 @@ class TradeHistoryViewController: BaseViewController {
         
         let base_info = app_data.assetInfo[pair!.base]!
         let quote_info = app_data.assetInfo[pair!.quote]!
-        let base_precision = pow(10, base_info.precision.toDouble)
-        let quote_precision = pow(10, quote_info.precision.toDouble)
+        let base_precision = pow(10, base_info.precision.double)
+        let quote_precision = pow(10, quote_info.precision.double)
         
         if pay["asset_id"].stringValue == pair!.base {
           let quote_volume = Double(receive["amount"].stringValue)! / quote_precision
@@ -105,7 +104,7 @@ class TradeHistoryViewController: BaseViewController {
           
           let price = base_volume / quote_volume
           let isCYB = base_info.id == AssetConfiguration.CYB
-          showData.append((false, price.toString.formatCurrency(digitNum: isCYB ? 5 : 8), quote_volume.toString.suffixNumber(digitNum:quote_info.precision), base_volume.toString.suffixNumber(digitNum: base_info.precision), time.dateFromISO8601!.toString(format: "MM/dd HH:mm:ss")))
+          showData.append((false, price.formatCurrency(digitNum: isCYB ? 5 : 8), quote_volume.suffixNumber(digitNum:quote_info.precision), base_volume.suffixNumber(digitNum: base_info.precision), time.dateFromISO8601!.string(withFormat: "MM/dd HH:mm:ss")))
         }
         else {
           let quote_volume = Double(pay["amount"].stringValue)! / quote_precision
@@ -113,7 +112,7 @@ class TradeHistoryViewController: BaseViewController {
           
           let price = base_volume / quote_volume
           let isCYB = base_info.id == AssetConfiguration.CYB
-          showData.append((true, price.toString.formatCurrency(digitNum: isCYB ? 5 : 8), quote_volume.toString.suffixNumber(digitNum: quote_info.precision), base_volume.toString.suffixNumber(digitNum: base_info.precision), time.dateFromISO8601!.toString(format: "MM/dd HH:mm:ss")))
+          showData.append((true, price.formatCurrency(digitNum: isCYB ? 5 : 8), quote_volume.suffixNumber(digitNum: quote_info.precision), base_volume.suffixNumber(digitNum: base_info.precision), time.dateFromISO8601!.string(withFormat: "MM/dd HH:mm:ss")))
         }
         
       }
@@ -121,10 +120,6 @@ class TradeHistoryViewController: BaseViewController {
       self.data = showData
 
     }
-  }
-  
-  deinit {
-    print("trade history dealloc")
   }
 }
 

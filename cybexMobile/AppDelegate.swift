@@ -15,15 +15,17 @@ import RealReachability
 import SwiftyUserDefaults
 import BeareadToast
 import EasyAnimation
+import IQKeyboardManagerSwift
+import Kingfisher
 
 import Fabric
 import Crashlytics
+import SwiftRichString
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
-  var appCoordinator: AppCoordinator!
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     Fabric.with([Crashlytics.self, Answers.self])
@@ -33,29 +35,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window?.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]
 
     self.window?.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
-  
-    let rootVC = BaseTabbarViewController()
-    window?.rootViewController = rootVC
+    IQKeyboardManager.shared.enable = true
+    IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+    
+//    KingfisherManager.shared.defaultOptions = [.fromMemoryCacheOrRefresh]
+    
+    _ = RichStyle.init()
+
+    window?.rootViewController = AppConfiguration.shared.appCoordinator.rootVC
     self.window?.makeKeyAndVisible()
     
-    appCoordinator = AppCoordinator(rootVC: rootVC)
-    appCoordinator.start()
-    
+    AppConfiguration.shared.appCoordinator.fetchEthToRmbPrice()
+    AppConfiguration.shared.appCoordinator.start()
     
     RealReachability.sharedInstance().startNotifier()
     NotificationCenter.default.addObserver(forName: NSNotification.Name.realReachabilityChanged, object: nil, queue: nil) { (notifi) in
       self.handlerNetworkChanged()
+      
     }
     
     configApplication()
     self.handlerNetworkChanged()
-
+  
     return true
   }
   
+  
   func applicationWillResignActive(_ application: UIApplication) {
     if WebsocketService.shared.checkNetworConnected() {
-      if let vc = app_coodinator.topViewController() {
+      if let vc = app_coodinator.startLoadingVC {
+        app_coodinator.startLoadingVC = nil
         vc.endLoading()
       }
       WebsocketService.shared.disConnect()
@@ -75,6 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     if !WebsocketService.shared.checkNetworConnected() && !WebsocketService.shared.needAutoConnect && reactable {//避免第一次 不是主动断开的链接
       if let vc = app_coodinator.topViewController() {
+        app_coodinator.startLoadingVC = vc
         vc.startLoading()
       }
       WebsocketService.shared.reConnect()
@@ -101,16 +111,21 @@ extension AppDelegate {
     }
     
     if !Defaults.hasKey(.language) {
-      Localize.setCurrentLanguage("en")
+      if let language = NSLocale.preferredLanguages.first, language == "zh-Hans-CN" {
+        Localize.setCurrentLanguage("zh-Hans")
+      }
+      else {
+        Localize.setCurrentLanguage("en")
+      }
     }
     else {
       Localize.setCurrentLanguage(Defaults[.language])
     }
     
     app_data.data.asObservable()
-      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
       .subscribe(onNext: { (s) in
-        if let vc = app_coodinator.topViewController() {
+        if let vc = app_coodinator.startLoadingVC, !(vc is HomeViewController) {
+          app_coodinator.startLoadingVC = nil
           vc.endLoading()
         }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -120,19 +135,24 @@ extension AppDelegate {
     let status = RealReachability.sharedInstance().currentReachabilityStatus()
     if status == .RealStatusNotReachable || status  == .RealStatusUnknown {
       WebsocketService.shared.disConnect()
-      if let vc = app_coodinator.topViewController() {
+      if let vc = app_coodinator.startLoadingVC {
+        app_coodinator.startLoadingVC = nil
         vc.endLoading()
       }
-      BeareadToast.showError(text: "network is not available.", inView: self.window!, hide:2)
+      
+      _ = BeareadToast.showError(text: R.string.localizable.noNetwork.key.localized(), inView: self.window!, hide:2)
     }
     else {
       let connected = WebsocketService.shared.checkNetworConnected()
       if !connected {
         if let vc = app_coodinator.topViewController() {
+          app_coodinator.startLoadingVC = vc
+          
           vc.startLoading()
         }
         WebsocketService.shared.reConnect()
       }
+    
     }
   }
 }

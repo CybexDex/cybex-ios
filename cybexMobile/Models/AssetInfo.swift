@@ -44,7 +44,7 @@ class Asset : Mappable {
   func volume() -> Double {
     let info = app_data.assetInfo[assetID]!
     
-    return Double(amount)! / pow(10, info.precision.toDouble)
+    return Double(amount)! / pow(10, info.precision.double)
   }
   
   func info() -> AssetInfo {
@@ -77,7 +77,7 @@ class Price : ImmutableMappable {
     let quote_info = quote.info()
     
     let price_ratio =  Double(base.amount)! / Double(quote.amount)!
-    let precision_ratio = pow(10, base_info.precision.toDouble) / pow(10, quote_info.precision.toDouble)
+    let precision_ratio = pow(10, base_info.precision.double) / pow(10, quote_info.precision.double)
     
     return price_ratio / precision_ratio
   }
@@ -89,3 +89,8 @@ extension AssetInfo: Equatable {
     return lhs.precision == rhs.precision && lhs.id == rhs.id && lhs.symbol == rhs.symbol && lhs.dynamic_asset_data_id == rhs.dynamic_asset_data_id
   }
 }
+
+struct  RMBPrices{
+  var name : String = ""
+  var rmb_price : String = ""
+} 

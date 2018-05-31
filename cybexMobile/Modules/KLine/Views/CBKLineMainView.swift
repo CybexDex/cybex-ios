@@ -93,8 +93,8 @@ class CBKLineMainView: UIView {
     
     
     // 绘制提示数据
-    fetchAssistString(model: mainDrawKLineModels.last!)
-    drawAssistString?.draw(in: CGRect(x: 10, y : 15, w: width - 30, h:configuration.main.assistViewHeight))
+    fetchAssistString(model: mainDrawKLineModels.last)
+    drawAssistString?.draw(in: CGRect(x: 10, y : configuration.main.dateAssistViewHeight, width: width - 30, height:configuration.main.assistViewHeight))
     
     let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
 
@@ -138,7 +138,7 @@ class CBKLineMainView: UIView {
           context.strokeLineSegments(between: [CGPoint(x: xPosition - configuration.theme.klineWidth / 2, y: closePoint.y), CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: closePoint.y)])
         }
         else {
-          let path = UIBezierPath(roundedRect: CGRect(x:xPosition - configuration.theme.klineWidth / 2, y: klineModel.open < klineModel.close ? closePoint.y : openPoint.y, w: configuration.theme.klineWidth, h:max(abs(closePoint.y - openPoint.y), configuration.theme.klineShadowLineWidth)), cornerRadius: configuration.theme.klineRadius).cgPath
+          let path = UIBezierPath(roundedRect: CGRect(x:xPosition - configuration.theme.klineWidth / 2, y: klineModel.open < klineModel.close ? closePoint.y : openPoint.y, width: configuration.theme.klineWidth, height:max(abs(closePoint.y - openPoint.y), configuration.theme.klineShadowLineWidth)), cornerRadius: configuration.theme.klineRadius).cgPath
           context.addPath(path)
           context.setFillColor(strokeColor.cgColor)
           context.fillPath()
@@ -240,27 +240,27 @@ extension CBKLineMainView {
     
     let drawAttrsString = NSMutableAttributedString()
     
-    let date = Date(timeIntervalSince1970: drawModel.date)
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm"
-    let dateStr = formatter.string(from: date) + " "
-    
-    let dateAttrs: [NSAttributedStringKey : Any]? = [
-      NSAttributedStringKey.foregroundColor : configuration.main.dateAssistTextColor,
-      NSAttributedStringKey.font : configuration.main.dateAssistTextFont
-    ]
+//    let date = Date(timeIntervalSince1970: drawModel.date)
+//    let formatter = DateFormatter()
+//    formatter.dateFormat = "yyyy-MM-dd HH:mm"
+//    let dateStr = formatter.string(from: date) + " "
+//
+//    let dateAttrs: [NSAttributedStringKey : Any]? = [
+//      NSAttributedStringKey.foregroundColor : configuration.main.dateAssistTextColor,
+//      NSAttributedStringKey.font : configuration.main.dateAssistTextFont
+//    ]
 //    drawAttrsString.append(NSAttributedString(string: dateStr, attributes: dateAttrs))
     
-    let openStr = String(format: "开: %.2f ", drawModel.open)
-    let highStr = String(format: "高: %.2f ", drawModel.high)
-    let lowStr = String(format: "低: %.2f ", drawModel.low)
-    let closeStr = String(format: "收: %.2f ", drawModel.close)
+//    let openStr = String(format: "开: %.2f ", drawModel.open)
+//    let highStr = String(format: "高: %.2f ", drawModel.high)
+//    let lowStr = String(format: "低: %.2f ", drawModel.low)
+//    let closeStr = String(format: "收: %.2f ", drawModel.close)
     
-    let string = openStr + highStr + lowStr + closeStr
-    let attrs: [NSAttributedStringKey : Any]? = [
-      NSAttributedStringKey.foregroundColor : configuration.main.dateAssistTextColor,
-      NSAttributedStringKey.font : configuration.main.dateAssistTextFont
-    ]
+//    let string = openStr + highStr + lowStr + closeStr
+//    let attrs: [NSAttributedStringKey : Any]? = [
+//      NSAttributedStringKey.foregroundColor : configuration.main.dateAssistTextColor,
+//      NSAttributedStringKey.font : configuration.main.dateAssistTextFont
+//    ]
     
 //    drawAttrsString.append(NSAttributedString(string: string, attributes: attrs))
     
@@ -283,7 +283,7 @@ extension CBKLineMainView {
           let maStr = String(format: "MA(\(days[idx])): ")
           drawAttrsString.append(NSAttributedString(string: maStr, attributes: maAttrs))
 
-          let mavalueStr = String(format: "  %.2f   ", value)
+          let mavalueStr = String(format: "  %.\(drawModel.precision)f   ", value)
           drawAttrsString.append(NSAttributedString(string: mavalueStr, attributes: attrs))
         }
       }
@@ -305,7 +305,7 @@ extension CBKLineMainView {
           let maStr = String(format: "EMA(\(days[idx])): ")
           drawAttrsString.append(NSAttributedString(string: maStr, attributes: maAttrs))
           
-          let emavalueStr = String(format: "  %.2f   ", value)
+          let emavalueStr = String(format: "  %.\(drawModel.precision)f   ", value)
           drawAttrsString.append(NSAttributedString(string: emavalueStr, attributes: attrs))
         }
       }
@@ -324,7 +324,7 @@ extension CBKLineMainView {
           NSAttributedStringKey.foregroundColor : configuration.theme.BOLL_MBColor,
           NSAttributedStringKey.font : configuration.main.dateAssistTextFont
         ]
-        let mbAttrsStr = NSAttributedString(string: String(format: "  %.2f  ", value), attributes: mbAttrs)
+        let mbAttrsStr = NSAttributedString(string: String(format: "  %.\(drawModel.precision)f  ", value), attributes: mbAttrs)
         drawAttrsString.append(mbAttrsStr)
       }
       
@@ -333,7 +333,7 @@ extension CBKLineMainView {
           NSAttributedStringKey.foregroundColor : configuration.theme.BOLL_UPColor,
           NSAttributedStringKey.font : configuration.main.dateAssistTextFont
         ]
-        let upAttrsStr = NSAttributedString(string: String(format: " %.2f  ", value), attributes: upAttrs)
+        let upAttrsStr = NSAttributedString(string: String(format: " %.\(drawModel.precision)f  ", value), attributes: upAttrs)
         drawAttrsString.append(upAttrsStr)
       }
     
@@ -342,7 +342,7 @@ extension CBKLineMainView {
           NSAttributedStringKey.foregroundColor : configuration.theme.BOLL_DNColor,
           NSAttributedStringKey.font : configuration.main.dateAssistTextFont
         ]
-        let dnAttrsStr = NSAttributedString(string: String(format: " %.2f  ", value), attributes: dnAttrs)
+        let dnAttrsStr = NSAttributedString(string: String(format: " %.\(drawModel.precision)f  ", value), attributes: dnAttrs)
         drawAttrsString.append(dnAttrsStr)
       }
       

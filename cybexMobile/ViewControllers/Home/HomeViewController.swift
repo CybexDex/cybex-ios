@@ -8,7 +8,7 @@
 
 import Foundation
 import ReSwift
-import EZSwiftExtensions
+
 import RxCocoa
 import RxSwift
 import ChainableAnimations
@@ -17,20 +17,33 @@ import SwiftyJSON
 
 class HomeViewController: BaseViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
   
+  struct define {
+    static let sectionHeaderHeight : Double = 71.0
+  }
+  
   var coordinator: (HomeCoordinatorProtocol & HomeStateManagerProtocol)?
 
   @IBOutlet weak var tableView: UITableView!
   
+  var currentBaseIndex = 0 {
+    didSet{
+      self.tableView.reloadData()
+      self.tableView.isHidden = false
+    }
+  }
+  
+  lazy var sectionHeader : HomeSectionHeaderView = {
+    let sectionHeader = HomeSectionHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: CGFloat(define.sectionHeaderHeight)))
+    return sectionHeader
+  }()
+ 
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     setupUI()
     
     handlerUpdateVersion(nil)
-        
-    BitShareCoordinator.callMethod("abcactive123456")
-    
-    app_coodinator.showLogin()
   }
   
   func setupUI() {    
@@ -38,11 +51,13 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
       navigationItem.largeTitleDisplayMode = .always
     }
     
-    
+    self.automaticallyAdjustsScrollViewInsets = false
     self.localized_text = R.string.localizable.navWatchlist.key.localizedContainer()
     
     let cell = String.init(describing: HomePairCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
+    
+//    let sectionHeader = String.init(descripti)
     
   }
   
@@ -67,17 +82,30 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
   override func configureObserveState() {
     commonObserveState()
     
-    app_data.data.asObservable().distinctUntilChanged()
+    app_data.data.asObservable()
+      .skip(1)
       .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
+      .distinctUntilChanged()
+      .throttle(3, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { (s) in
-        DispatchQueue.main.async {
-          self.tableView.reloadData()
-          self.tableView.isHidden = false
+        if app_data.data.value.count == 0 {
+          return
         }
+        self.performSelector(onMainThread: #selector(self.refreshTableView), with: nil, waitUntilDone: false)// non block tracking mode
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   
+  @objc func refreshTableView() {
+    if self.isVisible {
+      self.endLoading()
+      self.tableView.reloadData()
+      self.tableView.isHidden = false
+    }
+  }
+  
 }
+
+
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -85,14 +113,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return app_data.data.value.count
+    return app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: HomePairCell.self), for: indexPath) as! HomePairCell
-    let markets = app_data.data.value
+    let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex])
     let data = markets[indexPath.row]
     cell.setup(data, indexPath: indexPath)
+    
     
     return cell
   }
@@ -100,16 +129,29 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
   
   }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+    return sectionHeader
+  }
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return CGFloat(define.sectionHeaderHeight)
+  }
 }
 
 extension HomeViewController {
   @objc func cellClicked(_ data:[String: Any]) {
     if let index = data["index"] as? Int {
-      self.coordinator?.openMarket(index:index)
+      self.coordinator?.openMarket(index:index, currentBaseIndex:currentBaseIndex)
 
     }
   }
-
+  
+  @objc func tagDidSelected(_ data : [String : Any]){
+    if let index = data["selectedIndex"] as? Int {
+      currentBaseIndex = index
+    }
+  }
 }
 
 

@@ -10,6 +10,7 @@ import UIKit
 import ReSwift
 
 protocol EntryCoordinatorProtocol {
+  func switchToRegister()
   func dismiss()
 }
 
@@ -32,6 +33,19 @@ class EntryCoordinator: EntryRootCoordinator {
 }
 
 extension EntryCoordinator: EntryCoordinatorProtocol {
+  func switchToRegister() {
+    let vc = R.storyboard.main.registerViewController()!
+    let coordinator = RegisterCoordinator(rootVC: self.rootVC)
+    vc.coordinator = coordinator
+    
+    UIView.beginAnimations("register", context: nil)
+    UIView.setAnimationCurve(.easeInOut)
+    UIView.setAnimationDuration(0.7)
+    UIView.setAnimationTransition(.flipFromLeft, for: self.rootVC.view, cache: false)
+    self.rootVC.pushViewController(vc, animated: false)
+    UIView.commitAnimations()
+  }
+  
   func dismiss() {
     app_coodinator.rootVC.dismiss(animated: true, completion: nil)
   }

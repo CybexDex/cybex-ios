@@ -51,14 +51,14 @@
                                 <constraint firstItem="1cc-zy-VLA" firstAttribute="baseline" secondItem="4tL-70-xwn" secondAttribute="baseline" id="yR4-RC-ppz"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vol: -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wUP-Zp-G2Q">
-                            <rect key="frame" x="0.0" y="52.5" width="125" height="14.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3q0-v6-v4p">
+                            <rect key="frame" x="119" y="52.5" width="6" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.3956063985824585" green="0.42749041318893433" blue="0.53351551294326782" alpha="0.49616476893424988" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3q0-v6-v4p">
-                            <rect key="frame" x="119" y="77.5" width="6" height="14.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vol: -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wUP-Zp-G2Q">
+                            <rect key="frame" x="0.0" y="77.5" width="125" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.3956063985824585" green="0.42749041318893433" blue="0.53351551294326782" alpha="0.49616476893424988" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>

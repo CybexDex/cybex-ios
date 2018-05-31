@@ -23,3 +23,92 @@
 "register.hint" = "Use Cloud Wallet mode to create Account";
 "account" = "Account Name";
 "password" = "Password";
+"confirm_password" = "Confirm Password";
+"account.create" = "Create Account";
+
+"opened.all" = "All";
+"opened.buy" = "Buy";
+"opened.sell" = "Sell";
+"opened.allMoney" = "Total Value:";
+"opened.buyMoney" = "Buy Total Value:";
+"opened.sellMoney" = "Sell Total Value:";
+
+"login" = "LOGIN";
+"logout" = "Log Out";
+
+"login.tip" = "Login";
+"login.already" = "Already have an account? ";
+
+"register" = "Sign Up";
+
+"opened.title"    = "Opened Orders";
+"confirm" = "CONFIRM";
+"attention" = "ATTENTIONS";
+"pin.code"= "Pin Code";
+
+"lockupAssets.title"           = "Lockup Assets";
+
+"portfolio.title"              = "Your Portfolio";
+"portfolio.price"              = "Price (CYB):";
+"portfolio.time"               = "24h Change:";
+
+"account.title"                = "Account";
+"account.yourPortfolio"        = "Your Portfolio";
+"account.viewAll"              = "View All";
+"account.yourTotalBalance"     = "Your Total Balance (CYB):";
+"account.assetOperations"      = "Asset Operations";
+"account.basicMember"          = "Basic Member";
+"account.superMember"          = "Lifetime Member";
+"account.login"                = "Log in Cybex";
+"account.introduce"            = "CYBEX is a decentralized exchange that seeks to improve the liquidity of crypto-assets that’s more transparent, highly efficient and secure.";
+"account.nonMatch" = "Incorrect Account Name or Password";
+"ok" = "OK";
+"account.validate.error.1" = "account name is already taken";
+"account.validate.error.2" = "account name should start with a letter";
+"account.validate.error.3" = "account name should be longer/shorter";
+"account.validate.error.4" = "account name should contain at least one dash or a number";
+"account.validate.error.5" = "account name should not contain continuous dashes";
+"account.validate.error.6" = "account name should only contain letter, dash or numbers";
+"account.validate.error.7" = "account name should end with a letter or number";
+
+"password.validate.error.1" = "The password must at least 12 characters";
+"password.validate.error.2" = "The password is not consistent";
+
+"register.fail" = "fail to register";
+"register.fail403" = "Incorrect verify code";
+"register.fail429" = "The operation is too frequent. Please try again later.";
+
+"register.confirm" = "CURRENT PASSWORD:\n<password></password>\n· I UNDERSTAND THAT I WILL LOSE ACCESS TO MY FUNDS IF I LOSE MY PASSWORD\n· I UNDERSTAND THAT NO ONE CAN RECOVER MY PASSWORD IF I LOSE OR FORGET IT\n· I HAVE WRITTEN DOWN OR OTHERWISE STORED MY PASSWORD\n";
+
+
+"home_name_vol"                 = "Name/Vol";
+"home_last_price"               = "Last Price";
+"home_change"                   = "24h Chg%";
+
+"asset_mount"                   = "Asset/Amount";
+"progress_expiration"           = "Progress/Expiration Time";
+"cyb_value"                     = "Value(CYB)";
+
+"balance_introduce"             = "This is the estimated value of all your assets,including any hidden assets,open orders,debt and collateral.The estimate is done using only live blockchain data and may not be perfectly accurate.";
+"balance_introduce_title"       = "BALANCE";
+"balance_ensuer"                = "OK";
+
+"home_vol"                      = "Vol";
+
+"opened_amount"                 = "Amount:";
+
+"opened_asset_amount"                 = "Asset/Amount";
+"opened_order_value"                  = "Price";
+
+
+"updata_available_title"              = "Update Available";
+"updata_available_message"            = "A new version of CybexDex is available. Please update to newest version now";
+"updata_next_time"                    = "Next Time";
+"updata_updata"                       = "Update";
+"unupdata_title"                      = "No Update Available";
+"unupdata_message"                    = "Current Version is the newest";
+"unupdata_ok"                         = "OK";
+
+"noNetwork"                           = "network is not available.";
+
+

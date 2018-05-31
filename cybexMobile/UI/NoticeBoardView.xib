@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoticeBoardView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="confirm" destination="RTM-vv-049" id="PTB-ad-fs4"/>
+                <outlet property="textView" destination="Esv-89-L6R" id="woW-W6-mdy"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="rst-8h-h8N">
+            <rect key="frame" x="0.0" y="0.0" width="272" height="340"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uoU-6u-M3A">
+                    <rect key="frame" x="0.0" y="0.0" width="272" height="50"/>
+                    <subviews>
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_close_24_px" translatesAutoresizingMaskIntoConstraints="NO" id="QjV-xo-293">
+                            <rect key="frame" x="235" y="17" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="Dub-jk-XAI"/>
+                                <constraint firstAttribute="width" constant="24" id="enc-qJ-oMm"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注意事项" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYj-4F-oIi">
+                            <rect key="frame" x="104" y="16" width="65.5" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="attention"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="QjV-xo-293" firstAttribute="top" secondItem="uoU-6u-M3A" secondAttribute="top" constant="17" id="Nfu-bH-XaE"/>
+                        <constraint firstAttribute="height" constant="50" id="Nph-zX-8Nd"/>
+                        <constraint firstItem="VYj-4F-oIi" firstAttribute="centerX" secondItem="uoU-6u-M3A" secondAttribute="centerX" id="bBh-SL-szi"/>
+                        <constraint firstAttribute="trailing" secondItem="QjV-xo-293" secondAttribute="trailing" constant="13" id="kfJ-Iy-T0r"/>
+                        <constraint firstItem="VYj-4F-oIi" firstAttribute="centerY" secondItem="uoU-6u-M3A" secondAttribute="centerY" id="lcZ-vy-E9W"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RTM-vv-049" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
+                    <rect key="frame" x="18" y="274" width="236" height="48"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="Fbs-Dm-c5e"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isEnable" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="confirm"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esv-89-L6R">
+                    <rect key="frame" x="18" y="60" width="236" height="204"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <attributedString key="attributedText">
+                        <fragment>
+                            <string key="content">CURRENT PASSWORD:
+</string>
+                            <attributes>
+                                <color key="NSColor" red="0.47058823529411764" green="0.50588235294117645" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="14" name="PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="7" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="123456qwert">
+                            <attributes>
+                                <color key="NSColor" red="1" green="0.56862745098039214" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="14" name="PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="7" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment>
+                            <string key="content">
+· I UNDERSTAND THAT I WILL LOSE ACCESS TO MY FUNDS IF I LOSE MY PASSWORD
+· I UNDERSTAND THAT NO ONE CAN RECOVER MY PASSWORD IF I LOSE OR FORGET IT
+· I HAVE WRITTEN DOWN OR OTHERWISE STORED MY PASSWORD
+</string>
+                            <attributes>
+                                <color key="NSColor" red="0.47058823529411764" green="0.50588235294117645" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="14" name="PingFangSC-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="7" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="styleName" value="password"/>
+                    </userDefinedRuntimeAttributes>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Esv-89-L6R" firstAttribute="top" secondItem="uoU-6u-M3A" secondAttribute="bottom" constant="10" id="423-aR-drb"/>
+                <constraint firstItem="RTM-vv-049" firstAttribute="top" secondItem="Esv-89-L6R" secondAttribute="bottom" constant="10" id="8ig-JX-Vtt"/>
+                <constraint firstItem="uoU-6u-M3A" firstAttribute="top" secondItem="k6W-c7-Trg" secondAttribute="top" id="PtJ-OQ-Deo"/>
+                <constraint firstItem="k6W-c7-Trg" firstAttribute="trailing" secondItem="RTM-vv-049" secondAttribute="trailing" constant="18" id="Qso-Q3-oIY"/>
+                <constraint firstItem="uoU-6u-M3A" firstAttribute="leading" secondItem="k6W-c7-Trg" secondAttribute="leading" id="XqJ-2d-3K3"/>
+                <constraint firstItem="k6W-c7-Trg" firstAttribute="trailing" secondItem="uoU-6u-M3A" secondAttribute="trailing" id="dQL-Tg-lsV"/>
+                <constraint firstItem="Esv-89-L6R" firstAttribute="leading" secondItem="k6W-c7-Trg" secondAttribute="leading" constant="18" id="hnm-mB-NoG"/>
+                <constraint firstAttribute="bottom" secondItem="RTM-vv-049" secondAttribute="bottom" constant="18" id="kFg-N7-ivT"/>
+                <constraint firstItem="Esv-89-L6R" firstAttribute="trailing" secondItem="k6W-c7-Trg" secondAttribute="trailing" constant="-18" id="odC-tW-u6x"/>
+                <constraint firstItem="RTM-vv-049" firstAttribute="leading" secondItem="rst-8h-h8N" secondAttribute="leading" constant="18" id="sfb-XO-8yS"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="k6W-c7-Trg"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="4"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="61" y="-147"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_close_24_px" width="24" height="24"/>
+    </resources>
+</document>

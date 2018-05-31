@@ -20,6 +20,7 @@ struct Await {
   struct Queue {
     static let await = DispatchQueue(label: "com.nbltrsut.awaitqueue", attributes: .concurrent)
     static let async = DispatchQueue(label: "com.nbltrsut.asyncqueue", attributes: .concurrent)
+    static let serialAsync = DispatchQueue(label: "com.nbltrsut.asyncqueue.serial")
   }
 }
 
@@ -41,34 +42,44 @@ func async(_ body: @escaping () throws -> Void) {
   Await.Queue.async.ak.async(body)
 }
 
-class SimpleHTTPService {
+func serialAsync(_ body: @escaping () throws -> Void) {
+  Await.Queue.serialAsync.ak.async(body)
+}
 
+func main(_ body: @escaping @convention(block) () -> Swift.Void) {
+  DispatchQueue.main.async(execute: body)
+}
+
+class SimpleHTTPService {
+  
 }
 
 extension SimpleHTTPService {
-  static func requestMarketList() -> Promise<[Pair]> {
-    return Promise<[Pair]> { seal in
-      var request = URLRequest(url: URL(string: AppConfiguration.SERVER_MARKETLIST_URLString)!)
-      request.cachePolicy = .reloadIgnoringCacheData
+  static func requestMarketList(base : String) -> Promise<[Pair]> {
+    var request = URLRequest(url: URL(string: AppConfiguration.SERVER_MARKETLIST_URLString + base)!)
+    request.cachePolicy = .reloadIgnoringCacheData
+    
+    let (promise, seal) = Promise<[Pair]>.pending()
+    
+    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments, completionHandler: { (response) in
+      guard let value = response.result.value else {
+        seal.fulfill([])
+        return
+      }
       
-      Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments, completionHandler: { (response) in
-        guard let value = response.result.value else {
-          seal.fulfill([])
-          return
-        }
-        
-        guard let data = JSON(value).dictionaryValue["data"] else {
-          seal.reject(SimpleHttpError.NotExistData)
-          return
-        }
-        
-        let pairs = data.arrayValue.map({ Pair(base: $0.arrayValue[0].stringValue, quote: $0.arrayValue[1].stringValue) })
-        seal.fulfill(pairs)
-      })
-    }
+      guard let data = JSON(value).dictionaryValue["data"] else {
+        seal.fulfill([])
+        return
+      }
+      
+      let pairs = data.arrayValue.map({ Pair(base:base, quote: $0.stringValue) })
+      seal.fulfill(pairs)
+    })
+  
+    return promise
     
   }
-
+  
   static func checkVersion() -> Promise<(update: Bool, url: String, force: Bool)> {
     var request = URLRequest(url: URL(string: AppConfiguration.SERVER_VERSION_URLString)!)
     request.cachePolicy = .reloadIgnoringCacheData
@@ -103,4 +114,68 @@ extension SimpleHTTPService {
     return promise
   }
   
+  
+  static func requestETHPrice() -> Promise<[RMBPrices]>{
+    var request = URLRequest(url: URL(string: AppConfiguration.ETH_PRICE)!)
+    request.cachePolicy = .reloadIgnoringCacheData
+    let (promise,seal) = Promise<[RMBPrices]>.pending()
+    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+      var rmb_prices = [RMBPrices]()
+      guard let value = response.result.value else {
+        seal.fulfill([])
+        return
+      }
+      let json = JSON(value)
+      
+      let prices = json["prices"].arrayValue
+      for price in prices {
+        rmb_prices.append(RMBPrices(name: price["name"].stringValue, rmb_price: price["value"].stringValue))
+      }
+      seal.fulfill(rmb_prices)
+    }
+    return promise
+  }
+  
+  
+  
+  
+  
+  static func requestPinCode() -> Promise<(id:String, data:String)> {
+    var request = URLRequest(url: URL(string: AppConfiguration.SERVER_REGISTER_PINCODE_URLString)!)
+    request.cachePolicy = .reloadIgnoringCacheData
+    
+    let (promise,seal) = Promise<(id:String, data:String)>.pending()
+    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+      guard let value = response.result.value else {
+        seal.fulfill(("", ""))
+        return
+      }
+      let json = JSON(value)
+      let id = json["id"].stringValue
+      let data = json["data"].stringValue
+     
+      seal.fulfill((id,data))
+    }
+    return promise
+  }
+  
+  static func requestRegister(_ params: [String:Any]) -> Promise<(Bool, Int)> {
+    let (promise,seal) = Promise<(Bool, Int)>.pending()
+    
+    Alamofire.request(URL(string: AppConfiguration.SERVER_REGISTER_URLString)!, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+      guard let value = response.result.value else {
+        seal.fulfill((false, 0))
+        return
+      }
+      
+      let json = JSON(value)
+      if let code = json["code"].int {
+        seal.fulfill((false, code))
+        return
+      }
+      
+      seal.fulfill((true, 0))
+    }
+    return promise
+  }
 }

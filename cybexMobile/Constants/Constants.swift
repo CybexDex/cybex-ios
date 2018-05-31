@@ -12,22 +12,40 @@ typealias CommonCallback = () -> Void
 typealias CommonAnyCallback = (Any) -> Void
 
 var app_data: AppPropertyState {
-  return UIApplication.shared.coordinator().state.property
+  return AppConfiguration.shared.appCoordinator.state.property
 }
 var app_state: AppState {
-  return UIApplication.shared.coordinator().state
+  return AppConfiguration.shared.appCoordinator.state
 }
 var app_coodinator:AppCoordinator {
-  return UIApplication.shared.coordinator()
+  return AppConfiguration.shared.appCoordinator
 }
 
 struct AppConfiguration {
+  static let shared = AppConfiguration()
+  var appCoordinator: AppCoordinator!
+
+  private init() {
+    let rootVC = BaseTabbarViewController()
+    appCoordinator = AppCoordinator(rootVC: rootVC)
+  }
+  
   static let APPID = ""
-  static let SERVER_BASE_URLString = "https://cybex.io/"
-  static let SERVER_ICONS_BASE_URLString = "https://cybex.io/icons/"
+  static let SERVER_BASE_URLString = "https://app.cybex.io/"
+  static let SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
+
+  static let SERVER_ICONS_BASE_URLString = "https://app.cybex.io/icons/"
+
+  static let SERVER_REGISTER_PINCODE_URLString = SERVER_REGISTER_BASE_URLString + "captcha"
+  static let SERVER_REGISTER_URLString = SERVER_REGISTER_BASE_URLString + "register"
 
   static let SERVER_VERSION_URLString = SERVER_BASE_URLString + "iOS_update.json"
-  static let SERVER_MARKETLIST_URLString = SERVER_BASE_URLString + "market_list.json"
+  static let SERVER_MARKETLIST_URLString = SERVER_BASE_URLString + "market_list?base="
+  
+  static let FAQ_NIGHT_THEME            = "https://cybex.io/token_applications/new?style=night"
+  static let FAQ_LIGHT_THEME            = "https://cybex.io/token_applications/new"
+  
+  static let ETH_PRICE                  = SERVER_BASE_URLString + "price"
 }
 
 enum indicator:String {
@@ -50,7 +68,7 @@ enum candlesticks:Double,Hashable {
   }
   
   var hashValue: Int {
-    return self.rawValue.toInt
+    return self.rawValue.int
   }
   
   static let all:[candlesticks] = [.five_minute, .one_hour, .one_day]
@@ -92,9 +110,15 @@ class AssetConfiguration {
   var asset_ids:[Pair] = []
   
   static let CYB = "1.3.0"
+  static let BTC = "1.3.3"
+  static let EOS = "1.3.4"
+  static let ETH = "1.3.2"
+  static let USDT = "1.3.27"
+  
+  static let market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.CYB,AssetConfiguration.USDT,AssetConfiguration.BTC]
   
   var unique_ids:[String] {
-    return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).unique()
+    return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).withoutDuplicates()
   }
   
   private init() {

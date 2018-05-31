@@ -10,9 +10,10 @@ import Foundation
 import Starscream
 import JSONRPCKit
 import SwiftyJSON
-import EZSwiftExtensions
+import SwifterSwift
 import PromiseKit
 import AwaitKit
+import Device
 
 enum NodeURLString:String {
   case shanghai = "wss://shanghai.51nebula.com"
@@ -27,15 +28,24 @@ enum NodeURLString:String {
   }
 }
 
+typealias RequestingType = [String: RequestsType]
+typealias RequestsType = (String, Any, ()->())
+
 class WebsocketService {
+  private var last_send_time:TimeInterval = 0
+  private let semaphore = DispatchSemaphore(value: 1)
+  private let requests_queue_concurrent = DispatchQueue(label: "com.nbltrsut.requests_queue_concurrent", attributes: .concurrent)
+  private let requesting_queue_concurrent = DispatchQueue(label: "com.nbltrsut.requesting_queue_concurrent", attributes: .concurrent)
+
   private var autoConnectCount = 0
   private var isConnecting:Bool = false
   private var isFetchingID:Bool = false
 
-  private var requests:[(String, Any, ()->())] = []
-  private var requesting:[String: (String, Any, ()->())] = [:]
+  private var requests:[RequestsType] = []
+  private var requesting:RequestingType = [:]
 
   private var socket = WebSocket(url: URL(string: NodeURLString.all[0].rawValue)!)
+
   private var testsockets:[WebSocket] = []
 
   private var batchFactory:BatchFactory!
@@ -112,27 +122,34 @@ class WebsocketService {
     async {
       do {
         let node = try await(self.detectFastNode())
-        self.currentNode = node
-        self.changeNode(node: node)
+        main {
+          self.currentNode = node
+          self.changeNode(node: node)
+        }
+
       }
       catch {
-        ez.runThisAfterDelay(seconds: 10, after: {
-          if !self.checkNetworConnected(), self.autoConnectCount <= 5 {
-            self.autoConnect()
-          }
-        })
+        main {
+          SwifterSwift.delay(milliseconds: 10000, completion: {
+            if !self.checkNetworConnected(), self.autoConnectCount <= 5 {
+              self.autoConnect()
+            }
+          })
+        }
       }
     }
   }
   
   private func changeNode(node: NodeURLString) {
-    print("switch node is \(node.rawValue)")
+    print("current node is \(node.rawValue)")
     currentNode = node
     let request = URLRequest(url: URL(string:node.rawValue)!)
-
+    
     socket.request = request
     socket.delegate = self
+    socket.callbackQueue = DispatchQueue.global()
     socket.connect()
+
   }
   
   func checkNetworConnected() -> Bool {
@@ -151,6 +168,13 @@ class WebsocketService {
   
   func disConnect() {
     needAutoConnect = false
+    requests = []
+    
+    self.requesting_queue_concurrent.async(flags: .barrier) {[weak self] in
+      guard let `self` = self else { return }
+      self.requesting = [:]
+    }
+    
     socket.disconnect()
   }
   
@@ -259,7 +283,7 @@ extension WebsocketService {
   private func constructSendRequest<Request: JSONRPCKit.Request>(request: Request) -> (()->()) {
     return {[weak self] in
       guard let `self` = self else { return }
-      
+
       let batch = self.batchFactory.create(request)
       
       var writeJSON:JSON
@@ -273,7 +297,10 @@ extension WebsocketService {
       self.socket.write(data: try! writeJSON.rawData())
       
       let id = writeJSON["id"].stringValue
-      self.requesting[id] = (request.digist, request, self.constructSendRequest(request: request))
+      self.requesting_queue_concurrent.async(flags: .barrier) {[weak self] in
+        guard let `self` = self else { return }
+        self.requesting[id] = (request.digist, request, self.constructSendRequest(request: request))
+      }
       
       if let index = self.requests.index(where: { (value) -> Bool in
         let (digist, _, _) = value
@@ -287,18 +314,31 @@ extension WebsocketService {
   }
   
   private func restoreToRequestList() {
-    let filterRegister = requesting.filter { (value) -> Bool in
-      let (_, requestObject) = value
-      return requestObject.0 != ""
+    var filterRegisters:[RequestsType]!
+    
+    requesting_queue_concurrent.sync { [weak self] in
+      guard let `self` = self else { return }
+      
+      let filterRegister = self.requesting.filter { (value) -> Bool in
+        let (_, requestObject) = value
+        return requestObject.0 != ""
+      }
+      
+      filterRegisters = Array(filterRegister.values)
     }
     
-    requests += Array(filterRegister.values)
-    requesting.removeAll()
+    self.requests += filterRegisters
+
+    self.requesting_queue_concurrent.async(flags: .barrier) {[weak self] in
+      guard let `self` = self else { return }
+      self.requesting.removeAll()
+    }
   }
   
+
   private func handlerRequestPool() {
-    let requestQueue = requests
-    
+    let requestQueue = self.requests
+  
     for request in requestQueue {
       let retry = request.2
       
@@ -314,7 +354,7 @@ extension WebsocketService {
   }
   
   private func refreshData() {
-    UIApplication.shared.coordinator().getLatestData()
+    AppConfiguration.shared.appCoordinator.getLatestData()
   }
 }
 
@@ -334,6 +374,7 @@ extension WebsocketService: WebSocketDelegate {
     removeIDs()
     idGenerator = JsonIdGenerator()
     batchFactory.idGenerator = idGenerator
+  
     restoreToRequestList()
     
     if needAutoConnect {
@@ -352,42 +393,62 @@ extension WebsocketService: WebSocketDelegate {
   }
   
   func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
-    let data = JSON(parseJSON:text)
-    
-    if let error = data["error"].dictionary {
-      print(error)
-      return
-    }
-    
-    guard let id = data["id"].int else {
-      if let method = data["method"].string, method == "notice", let params = data["params"].array, let mID = params[0].int {
-        if let ids = app_data.subscribeIds, ids.values.contains(mID) {
-          let index = ids.values.index(of: mID)!
-          let pair = ids.keys[index]
-          
-          UIApplication.shared.coordinator().request24hMarkets([pair], sub: false)
-        }
-      }
-      return
-    }
-    
-    if let requestData = requesting[id.toString], let request = requestData.1 as? JSONRPCResponse {
-      if requestData.1 is SubscribeMarketRequest {
-        request.response(id)
-        requesting.removeValue(forKey: id.toString)
+    self.requesting_queue_concurrent.async(flags: .barrier) {[weak self] in
+      guard let `self` = self else { return }
+
+      let data = JSON(parseJSON:text)
+      
+      if let error = data["error"].dictionary {
+        print(error)
         return
       }
       
-      if let object = try? request.transferResponse(from: data["result"].object) {
-        request.response(object)
-        requesting.removeValue(forKey: id.toString)
+      guard let id = data["id"].int else {
+        if let method = data["method"].string, method == "notice", let params = data["params"].array, let mID = params[0].int {
+          if let ids = app_data.subscribeIds, ids.values.contains(mID) {
+            let index = ids.values.index(of: mID)!
+            let pair = ids.keys[index]
+            
+            main {
+              AppConfiguration.shared.appCoordinator.request24hMarkets([pair], sub: false)
+            }
+          }
+        }
+        return
       }
-      else {
-        request.response(data.object)
-        requesting.removeValue(forKey: id.toString)
+      
+      var requestData:RequestsType?
+      
+      if let data = self.requesting[id.description] {
+        requestData = data
+      }
+
+      if let requestData = requestData, let request = requestData.1 as? JSONRPCResponse {
+        if requestData.1 is SubscribeMarketRequest {
+          main {
+            request.response(id)
+          }
+          self.requesting.removeValue(forKey: id.description)
+
+          return
+        }
+        
+        if let object = try? request.transferResponse(from: data["result"].object) {
+          main{
+            request.response(object)
+          }
+          self.requesting.removeValue(forKey: id.description)
+
+        }
+        else {
+          main {
+            request.response(data.object)
+          }
+          self.requesting.removeValue(forKey: id.description)
+
+        }
       }
     }
-    
   }
   
   func websocketDidReceiveData(socket: WebSocketClient, data: Data) {

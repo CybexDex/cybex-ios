@@ -64,7 +64,7 @@ class CBKLineDrawView: UIView {
     panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureAction(_:)))
     panGesture.delegate = self
     addGestureRecognizer(panGesture)
-    panGesture.require(toFail: UIApplication.shared.coordinator().curDisplayingCoordinator().rootVC.interactivePopGestureRecognizer!)
+    panGesture.require(toFail: AppConfiguration.shared.appCoordinator.curDisplayingCoordinator().rootVC.interactivePopGestureRecognizer!)
     
  
     loadingSubviews()
@@ -156,10 +156,10 @@ extension CBKLineDrawView {
     /// Main View
     mainView = CBKLineMainView()
     mainView.backgroundColor = UIColor.clear
-    mainView.limitValueChanged = { [weak self] (_ limitValue: (minValue: Double, maxValue: Double)?) -> Void in
-      if let limitValue = limitValue {
+    mainView.limitValueChanged = { (_ limitValue: (minValue: Double, maxValue: Double)?) -> Void in
+//      if let limitValue = limitValue {
 //        self?.mainValueView.limitValue = limitValue
-      }
+//      }
     }
     addSubview(mainView)
 
@@ -177,9 +177,9 @@ extension CBKLineDrawView {
     volumeView = CBKLineVolumeView()
     volumeView.backgroundColor = UIColor.clear
 
-    volumeView.limitValueChanged = { [weak self] (_ limitValue: (minValue: Double, maxValue: Double)?) -> Void in
-      if let limitValue = limitValue {
-      }
+    volumeView.limitValueChanged = { (_ limitValue: (minValue: Double, maxValue: Double)?) -> Void in
+//      if let limitValue = limitValue {
+//      }
     }
     addSubview(volumeView)
     
@@ -193,9 +193,9 @@ extension CBKLineDrawView {
   private func loadingAccessoryView() {
     /// Accessory View
     accessoryView = CBKLineAccessoryView()
-    accessoryView.limitValueChanged = { [weak self] (_ limitValue: (minValue: Double, maxValue: Double)?) -> Void in
-      if let limitValue = limitValue {
-      }
+    accessoryView.limitValueChanged = {  (_ limitValue: (minValue: Double, maxValue: Double)?) -> Void in
+//      if let limitValue = limitValue {
+//      }
     }
     addSubview(accessoryView)
     accessoryView.topToBottom(of: volumeView)
@@ -329,7 +329,7 @@ extension CBKLineDrawView {
       indicatorVerticalView.isHidden = false
       indicatorHorizontalView.isHidden = false
       
-      var drawModel: CBKLineModel?
+//      let drawModel: CBKLineModel?
       
       horizantalTop.constant = location.y
       indicatorHorizontalView.layoutIfNeeded()
@@ -338,17 +338,17 @@ extension CBKLineDrawView {
         verticalLeft.constant = previousOffset
         indicatorVerticalView.layoutIfNeeded()
         
-        if configuration.dataSource.drawKLineModels.count > offsetCount {
-          drawModel = configuration.dataSource.drawKLineModels[offsetCount]
-        }
+//        if configuration.dataSource.drawKLineModels.count > offsetCount {
+//          drawModel = configuration.dataSource.drawKLineModels[offsetCount]
+//        }
         
       } else {
         verticalLeft.constant = nextOffset
         indicatorVerticalView.layoutIfNeeded()
      
-        if configuration.dataSource.drawKLineModels.count > offsetCount {
-          drawModel = configuration.dataSource.drawKLineModels[offsetCount + 1]
-        }
+//        if configuration.dataSource.drawKLineModels.count > offsetCount {
+//          drawModel = configuration.dataSource.drawKLineModels[offsetCount + 1]
+//        }
       }
       
       

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountPortfolioView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="XZY-dc-L2S" id="CJr-Xc-95G"/>
+                <outlet property="openPortfolioView" destination="KbL-c8-lyW" id="xnO-He-nEh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="168"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wqE-CG-ig3">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WML-3y-CtK">
+                            <rect key="frame" x="25" y="12" width="13" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="account.yourPortfolio"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KbL-c8-lyW">
+                            <rect key="frame" x="46" y="0.0" width="329" height="44"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_arrow_forward_16px" translatesAutoresizingMaskIntoConstraints="NO" id="r0P-hw-j32">
+                                    <rect key="frame" x="292" y="16" width="16" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="16" id="SFi-zo-bVa"/>
+                                        <constraint firstAttribute="width" constant="16" id="jy2-uF-6Lu"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cag-0u-EoQ">
+                                    <rect key="frame" x="275" y="12" width="13" height="24"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="account.viewAll"/>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="r0P-hw-j32" firstAttribute="centerY" secondItem="cag-0u-EoQ" secondAttribute="centerY" id="7Bx-wp-Q7e"/>
+                                <constraint firstItem="r0P-hw-j32" firstAttribute="leading" secondItem="cag-0u-EoQ" secondAttribute="trailing" constant="4" id="85v-mZ-Gh1"/>
+                                <constraint firstAttribute="bottom" secondItem="cag-0u-EoQ" secondAttribute="bottom" constant="8" id="cYt-P8-uNY"/>
+                                <constraint firstAttribute="trailing" secondItem="r0P-hw-j32" secondAttribute="trailing" constant="21" id="d36-Wj-liB"/>
+                                <constraint firstItem="cag-0u-EoQ" firstAttribute="top" secondItem="KbL-c8-lyW" secondAttribute="top" constant="12" id="n0a-Hd-0ta"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="WML-3y-CtK" firstAttribute="leading" secondItem="wqE-CG-ig3" secondAttribute="leading" constant="25" id="2fi-VJ-8UV"/>
+                        <constraint firstItem="KbL-c8-lyW" firstAttribute="top" secondItem="wqE-CG-ig3" secondAttribute="top" id="4MQ-9p-f4p"/>
+                        <constraint firstAttribute="bottom" secondItem="KbL-c8-lyW" secondAttribute="bottom" id="7hX-u3-Ebh"/>
+                        <constraint firstItem="KbL-c8-lyW" firstAttribute="leading" secondItem="WML-3y-CtK" secondAttribute="trailing" constant="8" symbolic="YES" id="URb-3U-ezH"/>
+                        <constraint firstItem="WML-3y-CtK" firstAttribute="top" secondItem="wqE-CG-ig3" secondAttribute="top" constant="12" id="X0X-8t-cRG"/>
+                        <constraint firstAttribute="trailing" secondItem="KbL-c8-lyW" secondAttribute="trailing" id="h8a-A0-dP6"/>
+                        <constraint firstAttribute="height" constant="44" id="jg6-eb-wvT"/>
+                        <constraint firstAttribute="bottom" secondItem="WML-3y-CtK" secondAttribute="bottom" constant="8" id="rbG-De-jHb"/>
+                    </constraints>
+                </view>
+                <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="XZY-dc-L2S">
+                    <rect key="frame" x="0.0" y="44" width="375" height="124"/>
+                    <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="8" id="5GH-PW-Ism">
+                        <size key="itemSize" width="218" height="118"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="13" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                            <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="3ZC-kq-4Ab"/>
+                        <outlet property="delegate" destination="-1" id="DvS-Vw-2SN"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="XZY-dc-L2S" secondAttribute="trailing" id="29t-ij-X3O"/>
+                <constraint firstItem="XZY-dc-L2S" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="BfU-Ri-Wb4"/>
+                <constraint firstItem="XZY-dc-L2S" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="44" id="EYC-d1-jqv"/>
+                <constraint firstItem="wqE-CG-ig3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="NhD-Ks-rG9"/>
+                <constraint firstItem="XZY-dc-L2S" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="RrK-sf-Dm7"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wqE-CG-ig3" secondAttribute="trailing" id="mRf-fF-V7k"/>
+                <constraint firstItem="wqE-CG-ig3" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="vOr-DI-t00"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-316" y="-149"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_arrow_forward_16px" width="16" height="16"/>
+    </resources>
+</document>

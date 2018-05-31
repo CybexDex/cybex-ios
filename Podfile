@@ -1,12 +1,11 @@
 platform :ios, '9.0'
 
-plugin 'cocoapods-wholemodule'
-
 def network
     pod 'Starscream'
     pod 'JSONRPCKit'
     pod 'Moya'
     pod 'Kingfisher'
+    pod 'RealReachability'
 end
 
 def data
@@ -22,7 +21,8 @@ def data
     pod 'Locksmith'
     pod 'Then'
     pod 'FCUUID'
-    pod 'IHKeyboardAvoiding'
+    pod 'IQKeyboardManagerSwift'
+    pod 'Guitar'
 end
 
 def resource
@@ -52,9 +52,9 @@ def animation
 end
 
 def extension
-    pod 'EZSwiftExtensions', :git => 'https://github.com/Steven-Cheung/EZSwiftExtensions', :branch => 'swift4'
     pod 'KeychainAccess'
     pod 'SwifterSwift'
+    pod 'Repeat'
 end
 
 def ui
@@ -64,18 +64,24 @@ def ui
     pod 'NVActivityIndicatorView'
     pod 'BeareadToast', :git => 'https://github.com/phpmaple/BeareadToast'
     pod 'DNSPageView'
-    pod 'TextFieldEffects'
     pod 'MJRefresh'
+    pod 'TextFieldEffects'
     pod 'IHKeyboardAvoiding'
     pod 'Typist'
     pod 'RxGesture'
-    pod 'Atributika'
+    pod 'SwiftRichString', :git => 'https://github.com/malcommac/SwiftRichString', :tag => '2.0.1'
     pod 'ZLaunchAd'
     pod 'SDCAlertView'
+    pod 'Presentr'
+    pod 'Macaw'
+    pod 'SwiftEntryKit'
 end
 
 def other
     pod 'Siren'
+    pod 'LifetimeTracker'
+    pod 'MLeaksFinder'
+    pod 'Device'
 end
 
 def fabric
@@ -86,10 +92,9 @@ end
 target 'cybexMobile' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+  inhibit_all_warnings!
+
   pod 'Reveal-SDK', :configurations => ['Debug']
-  pod 'LifetimeTracker'
-  pod 'RealReachability'
-  pod 'MLeaksFinder'
   
   fabric
   network
@@ -101,15 +106,6 @@ target 'cybexMobile' do
   extension
   ui
   other
-  
-  # Pods for cybexMobile
-  target 'cybexMobileTests' do
-    inherit! :search_paths
-    # Pods for testing
-#    pod 'Quick'
-#    pod 'Nimble'
-#    pod 'OHHTTPStubs'
-  end
 
 end
 

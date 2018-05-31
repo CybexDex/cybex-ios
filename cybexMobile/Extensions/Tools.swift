@@ -84,49 +84,59 @@ extension UIViewController {
 
 
   func handlerUpdateVersion(_ completion: CommonCallback?, showNoUpdate: Bool = false) {
-    let (update, url, force) = try! await(SimpleHTTPService.checkVersion())
-    if let completion = completion {
-      completion()
-    }
-    if update {
-      let alert = AlertController(title: "Update Available", message: "A new version of CybexDex is available. Please update to newest version now", preferredStyle: .alert)
+    async {
+      let (update, url, force) = try! await(SimpleHTTPService.checkVersion())
 
-      if !force {
-        alert.addAction(AlertAction(title: "Next Time", style: .normal, handler: nil))
-      }
-      else {
-        alert.shouldDismissHandler = { (action) in
-          if action?.title == "Next Time" {
-            return true
+      main {
+        if let completion = completion {
+          completion()
+        }
+        
+
+        
+        
+        if update {
+          let alert = AlertController(title: R.string.localizable.updata_available_title.key.localized(), message: R.string.localizable.updata_available_message.key.localized(), preferredStyle: .alert)
+    
+          if !force {
+            alert.addAction(AlertAction(title: R.string.localizable.updata_next_time.key.localized(), style: .normal, handler: nil))
           }
           else {
-            action!.handler!(action!)
-            return false
+            alert.shouldDismissHandler = { (action) in
+              if action?.title == R.string.localizable.updata_next_time.key.localized() {
+                return true
+              }
+              else {
+                action!.handler!(action!)
+                return false
+              }
+            }
           }
+          
+          let action = AlertAction(title: R.string.localizable.updata_updata.key.localized(), style: .preferred, handler: { (action) in
+            if force {
+              UIApplication.shared.openURL(URL(string: url)!)
+              return
+            }
+            if url.contains("itunes") {
+              self.openStoreProductWithiTunesItemIdentifier(AppConfiguration.APPID)
+            }
+            else {
+              self.openSafariViewController(url)
+            }
+          })
+          alert.addAction(action)
+          
+          alert.present()
+        }
+        else if showNoUpdate {
+          let alert = AlertController(title: R.string.localizable.unupdata_title.key.localized(), message: R.string.localizable.unupdata_message.key.localized(), preferredStyle: .alert)
+          alert.addAction(AlertAction(title: R.string.localizable.unupdata_ok.key.localized(), style: .normal, handler: nil))
+          alert.present()
         }
       }
-
-      let action = AlertAction(title: "Update", style: .preferred, handler: { (action) in
-        if force {
-          UIApplication.shared.openURL(URL(string: url)!)
-          return
-        }
-        if url.contains("itunes") {
-          self.openStoreProductWithiTunesItemIdentifier(AppConfiguration.APPID)
-        }
-        else {
-          self.openSafariViewController(url)
-        }
-      })
-      alert.addAction(action)
-
-      alert.present()
     }
-    else if showNoUpdate {
-      let alert = AlertController(title: "No Update Available", message: "Current Version is the newest", preferredStyle: .alert)
-      alert.addAction(AlertAction(title: "OK", style: .normal, handler: nil))
-      alert.present()
-    }
+   
 
   }
 
@@ -179,27 +189,113 @@ extension Formatter {
     return formatter
   }()
 }
+
 extension Date {
   var iso8601: String {
     return Formatter.iso8601.string(from: self)
   }
 }
 
-extension String {
-  static let numberformatter = NumberFormatter()
+extension Double {
+  func string(digits:Int = 0) -> String {
+    if digits == 0 {
+      return "\(self)"
+    }
+    
+    return String(format: "%.\(digits)f", self)
+  }
+  
+  func formatCurrency(digitNum: Int ,usesGroupingSeparator:Bool = true) -> String {
+    let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
+      return formatter.maximumFractionDigits == digitNum && formatter.usesGroupingSeparator == usesGroupingSeparator
+    })
+    
+    if let format = existFormatters.first {
+      let result = format.string(from: NSNumber(value: self))
+      return result!
+    }
+    else {
+      let numberFormatter = NumberFormatter()
+      numberFormatter.numberStyle = .currency
+      numberFormatter.currencySymbol = ""
+      numberFormatter.usesGroupingSeparator = usesGroupingSeparator
+      numberFormatter.maximumFractionDigits = digitNum
+      numberFormatter.minimumFractionDigits = digitNum
+      String.numberFormatters.append(numberFormatter)
+      return self.formatCurrency(digitNum: digitNum)
+    }
+  }
+  
+  func suffixNumber(digitNum: Int = 5) -> String {
+    var num = self
+    let sign = ((num < 0) ? "-" : "")
+    num = fabs(num)
+    if (num < 1000.0) {
+      return "\(sign)\(num.formatCurrency(digitNum: digitNum))"
+    }
+    
+    let exp: Int = Int(log10(num) / 3.0)
+    let units: [String] = ["k", "m", "b"]
+    
+    let precision = pow(1000.0, exp.double)
+    num = 100 * num / precision
+    
+    let result = num.rounded() / 100.0
+  
+//    let roundedNum = round(100.0 * num / pow(1000.0, Double(exp))) / 100.0
+    
+    return "\(sign)\(result.formatCurrency(digitNum: 2))" + "\(units[exp - 1])"
+  }
+}
 
+extension String {
+  static var numberFormatters:[NumberFormatter] = []
+  static var doubleFormat:NumberFormatter = NumberFormatter()
+  
   var dateFromISO8601: Date? {
     return Formatter.iso8601.date(from: self) // "Mar 22, 2017, 10:22 AM"
   }
+  
+  var filterJade:String {
+    return self.replacingOccurrences(of: "JADE.", with: "")
+  }
 
+//  var filterZone:String{
+//    return self == "0" ? "--" : self
+//  }
+  
+  
+  public func toDouble() -> Double? {
+    
+    var selfString = self
+    if selfString.contains(","){
+      selfString = selfString.replacingOccurrences( of:"[^0-9.]", with: "", options: .regularExpression)
+//       selfString = selfString.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789.").inverted)
+    }
+    
+    String.doubleFormat.allowsFloats = true
+    return String.doubleFormat.number(from: selfString)?.doubleValue
+  }
+  
   func formatCurrency(digitNum: Int) -> String {
-    String.numberformatter.numberStyle = .currency
-    String.numberformatter.currencySymbol = ""
-    String.numberformatter.maximumFractionDigits = digitNum
-    String.numberformatter.minimumFractionDigits = digitNum
-
-    let result = String.numberformatter.string(from: NSNumber(value: Double(self)!))
-    return result!
+    let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
+      return formatter.maximumFractionDigits == digitNum
+    })
+    
+    if let format = existFormatters.first {
+       let result = format.string(from: NSNumber(value: Double(self)!))
+       return result!
+    }
+    else {
+      let numberFormatter = NumberFormatter()
+      numberFormatter.numberStyle = .currency
+      numberFormatter.currencySymbol = ""
+      numberFormatter.maximumFractionDigits = digitNum
+      numberFormatter.minimumFractionDigits = digitNum
+      String.numberFormatters.append(numberFormatter)
+      return self.formatCurrency(digitNum: digitNum)
+    }
+    
   }
 
   func suffixNumber(digitNum: Int = 5) -> String {
@@ -207,14 +303,14 @@ extension String {
     let sign = ((num < 0) ? "-" : "")
     num = fabs(num)
     if (num < 1000.0) {
-      return "\(sign)\(num.toString.formatCurrency(digitNum: digitNum))"
+      return "\(sign)\(num.formatCurrency(digitNum: digitNum))"
     }
 
     let exp: Int = Int(log10(num) / 3.0)
     let units: [String] = ["k", "m", "b"]
     let roundedNum: Double = round(100 * num / pow(1000.0, Double(exp))) / 100
 
-    return "\(sign)\(roundedNum.toString.formatCurrency(digitNum: 2))" + "\(units[exp - 1])"
+    return "\(sign)\(roundedNum.formatCurrency(digitNum: 2))" + "\(units[exp - 1])"
   }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftTheme
 
 @IBDesignable
 class ImageTextField: UITextField {
@@ -40,9 +41,28 @@ class ImageTextField: UITextField {
   
   @IBInspectable var fieldImage: UIImage? = nil {
     didSet {
+      NotificationCenter.default.removeObserver(self, name: Notification.Name.UITextFieldTextDidBeginEditing, object: nil)
+      NotificationCenter.default.removeObserver(self, name: Notification.Name.UITextFieldTextDidEndEditing, object: nil)
+      
+      NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self, queue: nil) {[weak self] (notifi) in
+        self?.leftView?.alpha = 1
+      }
+      
+      NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self, queue: nil) {[weak self] (notifi) in
+        self?.leftView?.alpha = 0.5
+      }
+      
       updateView()
     }
   }
+  
+  @IBInspectable var tailImage: UIImage? = nil {
+    didSet {
+      updateView()
+    }
+  }
+  
+  var activityView: UIActivityIndicatorView? = nil
   
   @IBInspectable var padding: CGFloat = 0
   @IBInspectable var color: UIColor = UIColor.gray {
@@ -62,20 +82,43 @@ class ImageTextField: UITextField {
   }
   
   func updateView() {
-    
     if let image = fieldImage {
       leftViewMode = UITextFieldViewMode.always
-      let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+      let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
       imageView.image = image
       // Note: In order for your image to use the tint color, you have to select the image in the Assets.xcassets and change the "Render As" property to "Template Image".
       imageView.tintColor = color
+      imageView.alpha = leftView?.alpha ?? 0.5
+      
       leftView = imageView
     } else {
       leftViewMode = UITextFieldViewMode.never
       leftView = nil
     }
+
+    if let image = tailImage {
+      rightViewMode = UITextFieldViewMode.always
+      let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+      imageView.image = image
+      // Note: In order for your image to use the tint color, you have to select the image in the Assets.xcassets and change the "Render As" property to "Template Image".
+      imageView.tintColor = color
+      rightView = imageView
+
+      if self.activityView == nil {
+        let activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityView.frame = imageView.bounds
+        activityView.activityIndicatorViewStyle = ThemeManager.currentThemeIndex == 0 ? .white : .gray
+        activityView.startAnimating()
+        rightView?.addSubview(activityView)
+        self.activityView = activityView
+        self.activityView?.isHidden = true
+      }
+    } else {
+      rightViewMode = UITextFieldViewMode.never
+      rightView = nil
+    }
     // Placeholder text color
-    
+
     attributedPlaceholder = NSAttributedString(string: placeholder != nil ?  placeholder! : "", attributes:[NSAttributedStringKey.foregroundColor: color])
   }
   
@@ -83,11 +126,15 @@ class ImageTextField: UITextField {
     
     let path = UIBezierPath()
     path.move(to: CGPoint(x: self.bounds.origin.x, y: self.bounds.height
-      - 0.5))
+      - 1))
     path.addLine(to: CGPoint(x: self.bounds.size.width, y: self.bounds.height
-      - 0.5))
-    path.lineWidth = 0.5
+      - 1))
+    path.lineWidth = 1
     self.bottomColor.setStroke()
     path.stroke()
+  }
+  
+  @objc func willDealloc() -> Bool {
+    return false
   }
 }

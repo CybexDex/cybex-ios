@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import EZSwiftExtensions
+
 import SwiftTheme
 
 @IBDesignable

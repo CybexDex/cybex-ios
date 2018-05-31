@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 
 protocol HomeCoordinatorProtocol {
-  func openMarket(index:Int)
+  func openMarket(index:Int, currentBaseIndex: Int)
 }
 
 protocol HomeStateManagerProtocol {
@@ -35,9 +35,10 @@ class HomeCoordinator: HomeRootCoordinator {
 }
 
 extension HomeCoordinator: HomeCoordinatorProtocol {
-  func openMarket(index:Int) {
+  func openMarket(index:Int, currentBaseIndex:Int) {
     let vc = R.storyboard.main.marketViewController()!
     vc.curIndex = index
+    vc.currentBaseIndex = currentBaseIndex
     let coordinator = MarketCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator
     self.rootVC.pushViewController(vc, animated: true)

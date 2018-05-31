@@ -14,7 +14,7 @@ func SettingDetailReducer(action:Action, state:SettingDetailState?) -> SettingDe
 }
 
 func SettingDetailPropertyReducer(_ state: SettingDetailPropertyState?, action: Action) -> SettingDetailPropertyState {
-    var state = state ?? SettingDetailPropertyState()
+    let state = state ?? SettingDetailPropertyState()
     
     switch action {
     default:

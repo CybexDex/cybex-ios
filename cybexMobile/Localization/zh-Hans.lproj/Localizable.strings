@@ -22,3 +22,88 @@
 "register.hint" = "创建您的云钱包账户";
 "account" = "账户名";
 "password" = "密码";
+"confirm_password" = "确认密码";
+"account.create" = "创建新账户";
+
+"opened.all" = "全部";
+"opened.buy" = "买入";
+"opened.sell" = "卖出";
+"opened.allMoney" = "全部总额:";
+"opened.buyMoney" = "买单总额:";
+"opened.sellMoney" = "卖单总额:";
+
+"login" = "登录";
+"logout" = "退出登录";
+
+"login.tip" = "登录";
+"login.already" = "已注册? ";
+"pin.code"= "验证码";
+
+"register" = "注册";
+
+"opened.title"    = "委单";
+"confirm" = "我记住了";
+"attention" = "注意事项";
+
+"lockupAssets.title"    = "锁定期资产";
+
+
+"portfolio.title"       = "可用资产";
+"portfolio.price"       = "价格(CYB):";
+"portfolio.time"        = "24h涨跌幅:";
+
+"account.title"                 = "账户";
+"account.yourPortfolio"         = "可用资产";
+"account.viewAll"               = "查看全部";
+"account.yourTotalBalance"      = "账户总余额(CYB):";
+"account.assetOperations"       = "其他资产";
+"account.basicMember"           = "普通会员";
+"account.superMember"           = "终生会员";
+"account.login"                 = "您好，请登录";
+"account.introduce"             = "CYBEX是一个旨在提高加密资产流动性的去中心化交易所，能够提供更多的透明性、更高的效率性和更好的安全性。";
+"account.nonMatch" = "账户名或者密码错误";
+"ok" = "确认";
+"account.validate.error.1" = "账户名已经被使用";
+"account.validate.error.2" = "账户名必须以字母开头";
+"account.validate.error.3" = "账户名过短/过长";
+"account.validate.error.4" = "账户名需至少包含一个数字或横杠";
+"account.validate.error.5" = "账户名不能包含连续的横杠";
+"account.validate.error.6" = "账户名仅能包含字母、数字、横杠";
+"account.validate.error.7" = "账户必须以字母或数字结尾";
+
+"password.validate.error.1" = "输入12位以上的密码";
+"password.validate.error.2" = "密码不一致";
+"register.fail" = "注册失败";
+"register.fail403" = "验证码错误";
+"register.fail429" = "操作太频繁，请稍后再试";
+
+"register.confirm" = "当前密码：<password></password>\n• 我明确知晓，一旦忘记密码，我将会失去获取并使用该账户资金的途径\n• 我明确知晓，一旦忘记或丢失了密码，将没有任何人能够帮助我恢复\n• 我已经记录下来，或者用其它方式保存了我的密码\n";
+
+"home_name_vol"                 = "名称/成交量";
+"home_last_price"               = "最新价格";
+"home_change"                   = "24h涨跌幅";
+
+"asset_mount"                   = "资产/数量";
+"progress_expiration"           = "进度/到期时间";
+"cyb_value"                     = "最新市值(CYB)";
+
+"balance_introduce"             = "这是你所有资产的估值，包含了在界面中设置了隐藏的资产、委单中的资产、债仓及抵押物。估值采用实时获得的区块链上的价格，可能不那么精确。";
+"balance_introduce_title"       = "账户总余额";
+"balance_ensuer"                = "我知道了";
+
+"home_vol"                      = "成交量";
+
+"opened_amount"                 = "数量:";
+"opened_asset_amount"                 = "资产/委托数量";
+"opened_order_value"                  = "委托单价";
+
+
+"updata_available_title"              = "可更新";
+"updata_available_message"            = "新版本的CybexDex可用。请立即更新至最新版本";
+"updata_next_time"                    = "下一步";
+"updata_updata"                       = "更新";
+"unupdata_title"                      = "通知";
+"unupdata_message"                    = "当前版本是最新版本";
+"unupdata_ok"                         = "好的";
+
+"noNetwork"                           = "网络不佳";

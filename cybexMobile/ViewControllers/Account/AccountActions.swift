@@ -9,6 +9,8 @@
 import Foundation
 import ReSwift
 import Moya
+import RxSwift
+import RxCocoa
 
 //MARK: - State
 struct AccountState: StateType {
@@ -19,8 +21,10 @@ struct AccountState: StateType {
 }
 
 struct AccountPropertyState {
-  
+
 }
+
+
 
 //MARK: - Action Creator
 class AccountPropertyActionCreate: LoadingActionCreator {

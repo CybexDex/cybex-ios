@@ -8,6 +8,6 @@
 
 @interface BitShareCoordinator : NSObject
 
-+ (void)callMethod:(NSString *)jsonString;
++ (NSString *)getUserKeys:(NSString *)username password:(NSString *)password;
 
 @end
