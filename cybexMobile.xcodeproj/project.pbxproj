@@ -31514,6 +31514,7 @@
 				73D9776E20562E3400CB7DE1 /* R.swift */,
 				73E6B2BF208DBF5600B015E5 /* fabric */,
 				73556A0920A008E700F1EDFF /* color set */,
+				73DF252720C0185B00A0D00F /* build auto increment */,
 			);
 			buildRules = (
 			);
@@ -31907,6 +31908,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT\"\n";
+		};
+		73DF252720C0185B00A0D00F /* build auto increment */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "build auto increment";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
 		73E6B2BF208DBF5600B015E5 /* fabric */ = {
 			isa = PBXShellScriptBuildPhase;
