@@ -25,7 +25,10 @@ struct AppPropertyState {
 
   var assetInfo:[String:AssetInfo] = [:]
   
+  var rmb_prices : [RMBPrices] = []
+  
   var eth_rmb_price : Double  = 0
+  
   
   func filterQuoteAsset(_ base:String) -> [HomeBucket] {
     return data.value.filter({ (bucket) -> Bool in
@@ -110,6 +113,9 @@ struct AssetInfoAction:Action {
 }
 
 struct FecthEthToRmbPriceAction:Action{
+  let price : [RMBPrices]
+}
+struct FecthUSDTToRmbPriceAction:Action{
   let price : Double
 }
 

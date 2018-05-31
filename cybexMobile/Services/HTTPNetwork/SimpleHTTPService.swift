@@ -114,26 +114,31 @@ extension SimpleHTTPService {
     return promise
   }
   
-  static func requestETHPrice() -> Promise<Double>{
+  
+  static func requestETHPrice() -> Promise<[RMBPrices]>{
     var request = URLRequest(url: URL(string: AppConfiguration.ETH_PRICE)!)
     request.cachePolicy = .reloadIgnoringCacheData
-    let (promise,seal) = Promise<Double>.pending()
+    let (promise,seal) = Promise<[RMBPrices]>.pending()
     Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+      var rmb_prices = [RMBPrices]()
       guard let value = response.result.value else {
-        seal.fulfill(0)
+        seal.fulfill([])
         return
       }
       let json = JSON(value)
+      
       let prices = json["prices"].arrayValue
       for price in prices {
-        if price["name"] == "ETH"{
-          seal.fulfill(price["value"].doubleValue)
-        }
+        rmb_prices.append(RMBPrices(name: price["name"].stringValue, rmb_price: price["value"].stringValue))
       }
-      seal.fulfill(0)
+      seal.fulfill(rmb_prices)
     }
     return promise
   }
+  
+  
+  
+  
   
   static func requestPinCode() -> Promise<(id:String, data:String)> {
     var request = URLRequest(url: URL(string: AppConfiguration.SERVER_REGISTER_PINCODE_URLString)!)

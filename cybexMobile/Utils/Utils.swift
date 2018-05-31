@@ -49,7 +49,6 @@ func calculateAssetRelation(assetID_A_name:String, assetID_B_name:String) -> (ba
 }
 
 //********************深度优化************************
-
 // MARK : 传入quote 导出多少个ETH。多少个CYB
 /**
  规则:
@@ -74,16 +73,48 @@ func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
   var result = (eth:"0",cyb:"0")
   for homeBuck : HomeBucket in homeBuckets {
     let bucket = getCachedBucket(homeBuck)
-    if bucket.price == ""{
-      continue
-    }
+   
     if homeBuck.base == eth_base && homeBuck.quote == sender {
+      if bucket.price == ""{
+        continue
+      }
       result.eth = bucket.price.replacingOccurrences(of: ",", with: "")
     }else if homeBuck.base == cyb_base && homeBuck.quote == sender {
+      if bucket.price == ""{
+        continue
+      }
       result.cyb = bucket.price.replacingOccurrences(of: ",", with: "")
     }
   }
-  if (result.eth == "0" && result.cyb == "0") || (result.eth != "0" && result.cyb != "0") {
+  
+  if (result.eth == "0" && result.cyb == "0") {
+    var sender_rmb_price = "0"
+    var eth_rmb_price = "0"
+    var cyb_rmb_price = "0"
+    for price in app_data.rmb_prices{
+      if app_data.assetInfo[sender]?.symbol.filterJade == price.name{
+        sender_rmb_price = price.rmb_price
+      }else if "CYB" == price.name{
+        cyb_rmb_price = price.rmb_price
+      }else if "ETH" == price.name{
+        eth_rmb_price = price.rmb_price
+      }
+    }
+    
+    if sender_rmb_price == "0"{
+      return result
+    }
+    
+    if eth_rmb_price != "0" {
+      result.eth = String(sender_rmb_price.toDouble()! / eth_rmb_price.toDouble()!)
+      result.cyb = String (eth_cyb.toDouble()! * result.eth.toDouble()!)
+    }else if cyb_rmb_price != "0"{
+      result.cyb = String(sender_rmb_price.toDouble()! / cyb_rmb_price.toDouble()!)
+      result.eth = String (eth_cyb.toDouble()! * 1 / result.cyb.toDouble()!)
+    }
+    
+    return result
+  }else if (result.eth != "0" && result.cyb != "0"){
     return result
   }else {
     if eth_cyb != "0" {

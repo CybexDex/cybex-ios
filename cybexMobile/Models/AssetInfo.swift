@@ -89,3 +89,8 @@ extension AssetInfo: Equatable {
     return lhs.precision == rhs.precision && lhs.id == rhs.id && lhs.symbol == rhs.symbol && lhs.dynamic_asset_data_id == rhs.dynamic_asset_data_id
   }
 }
+
+struct  RMBPrices{
+  var name : String = ""
+  var rmb_price : String = ""
+} 

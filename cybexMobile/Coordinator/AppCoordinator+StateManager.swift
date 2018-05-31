@@ -55,7 +55,7 @@ extension AppCoordinator: AppStateManagerProtocol {
   func fetchEthToRmbPrice(){
     async {
       let value = try! await(SimpleHTTPService.requestETHPrice())
-      if value == 0 {
+      if value.count == 0 {
         return
       }
       main { [weak self] in
@@ -65,7 +65,7 @@ extension AppCoordinator: AppStateManagerProtocol {
     
     self.timer = Repeater.every(.seconds(3)) {[weak self] timer in
       let value = try! await(SimpleHTTPService.requestETHPrice())
-      if value == 0 {
+      if value.count == 0 {
         return
       }
       DispatchQueue.main.async { [weak self] in

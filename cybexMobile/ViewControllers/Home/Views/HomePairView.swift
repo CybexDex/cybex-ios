@@ -72,16 +72,24 @@ class HomePairView: UIView {
       
       let (eth,cyb) = changeToETHAndCYB(markets.quote_info.id)
       if eth == "0" && cyb == "0"{
-        self.rbmL.text  = "≈¥0.00"
+        self.rbmL.text  = "-"
       }else if (eth == "0"){
         if let cyb_eth = changeCYB_ETH().toDouble(),cyb_eth != 0{
           let eth_count = cyb.toDouble()! / cyb_eth
-          self.rbmL.text  = "≈¥" + (eth_count * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
+          if eth_count * app_data.eth_rmb_price == 0{
+            self.rbmL.text  = "-"
+          }else{
+            self.rbmL.text  = "≈¥" + (eth_count * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
+          }
         }else{
-          self.rbmL.text  = "≈¥0.00"
+          self.rbmL.text  = "-"
         }
       }else{
-        self.rbmL.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
+        if eth.toDouble()! * app_data.eth_rmb_price == 0 {
+          self.rbmL.text  = "-"
+        }else{
+          self.rbmL.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
+        }
       }
     }
   }

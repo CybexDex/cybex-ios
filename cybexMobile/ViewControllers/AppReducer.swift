@@ -143,7 +143,15 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
     }
     state.detailData = klineDatas
   case let action as FecthEthToRmbPriceAction:
-    state.eth_rmb_price = action.price
+    if action.price.count > 0 {
+      for rmbPrices in action.price{
+        if rmbPrices.name == "ETH"{
+          state.eth_rmb_price = rmbPrices.rmb_price.toDouble()!
+        }
+      }
+    }
+    state.rmb_prices = action.price
+  
   default:
     break
   }
