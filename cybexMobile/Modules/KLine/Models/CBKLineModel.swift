@@ -47,6 +47,8 @@ class CBKLineModel: ObjectDescriptable {
   // 该model以及之前所有成交量之和
   var sumVolume: Double?
   
+  var precision:Int
+  
   // MARK: MA - MA(N) = (C1+C2+……CN) / N, C:收盘价
   var MAs: [Double?]?
   var MA_VOLUMEs: [Double?]?
@@ -92,7 +94,8 @@ class CBKLineModel: ObjectDescriptable {
        close: Double,
        high: Double,
        low: Double,
-       volume: Double) {
+       volume: Double,
+       precision: Int) {
     
     self.klineDataType = klineDataType
     self.date = date
@@ -101,5 +104,7 @@ class CBKLineModel: ObjectDescriptable {
     self.high = high
     self.low = low
     self.volume = volume
+    
+    self.precision = precision
   }
 }
