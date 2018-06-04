@@ -85,7 +85,7 @@ PODS:
   - SipHash (1.2.1)
   - Siren (3.4.0)
   - Starscream (3.0.5)
-  - SwiftEntryKit (0.2.4):
+  - SwiftEntryKit (0.3.0):
     - QuickLayout (= 2.0.2)
   - SwifterSwift (4.3.0):
     - SwifterSwift/AppKit (= 4.3.0)
@@ -318,7 +318,7 @@ SPEC CHECKSUMS:
   SipHash: b26918dbe6925368d4322374371437c62c9038e2
   Siren: 5b8be41b5cd05aa3528303325966e919bd53e412
   Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
-  SwiftEntryKit: 1a78e2434c17fcd85f003e3bbbe12287b6235e03
+  SwiftEntryKit: 8fe50b9310058f795be9760b198441e693d0a145
   SwifterSwift: f3fce2b9fc5b9d8fda6eec33825e5243c60aebba
   SwiftHash: c805de5a434eacfa0dac7210745a50c55d7fe33d
   SwiftRichString: 3b29b5f2eb0eb244497532f2fd2ec26318eae584
