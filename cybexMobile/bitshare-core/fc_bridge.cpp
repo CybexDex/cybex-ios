@@ -10,14 +10,16 @@ using namespace boost::property_tree;
 #include <iostream>
 #include <string.h>
 
-#include "fc/crypto/elliptic.hpp"
-#include "fc/crypto/ripemd160.hpp"
-#include "fc/crypto/base58.hpp"
-#include "fc/crypto/sha512.hpp"
-#include "fc/io/json.hpp"
-#include "fc/reflect/reflect.hpp"
-#include "fc/io/raw.hpp"
-#include "fc/variant_object.hpp"
+#include <fc/crypto/elliptic.hpp>
+#include <fc/crypto/ripemd160.hpp>
+#include <fc/crypto/base58.hpp>
+#include <fc/crypto/sha512.hpp>
+#include <fc/io/json.hpp>
+#include <fc/reflect/reflect.hpp>
+#include <fc/io/raw.hpp>
+#include <fc/variant_object.hpp>
+
+#include "wallet_lib.hpp"
 
 using namespace std;
 
@@ -111,7 +113,19 @@ pts_address::operator std::string()const
   return "CYB" + fc::to_base58( bin_addr.data, sizeof( bin_addr ) );
 }
 
-fc::mutable_variant_object get_dev_key(string secret)
+/*
+ * global parameters to hold the keys
+ */
+
+cybex_priv_key_type active_priv_key, owner_priv_key, memo_priv_key;
+void clear_user_key()
+{
+  active_priv_key.reset();
+  owner_priv_key.reset();
+  memo_priv_key.reset();
+}
+
+fc::mutable_variant_object get_dev_key(string type, string secret)
 {
   fc::ecc::private_key priv_key = fc::ecc::private_key::regenerate(fc::sha256::hash(string(secret)));
   string private_key = key_to_wif( priv_key );
@@ -142,6 +156,29 @@ fc::mutable_variant_object get_dev_key(string secret)
   ( "compressed", string(compress_pts_addr))
   ( "uncompressed", string(uncompress_pts_addr))
   ;
+  
+  if(type == "active")
+  {
+    if(active_priv_key.valid()){
+      active_priv_key.reset();
+    }
+    active_priv_key = priv_key;
+  }
+  if(type == "owner")
+  {
+    if(owner_priv_key.valid()){
+      owner_priv_key.reset();
+    }
+    owner_priv_key = priv_key;
+  }
+  if(type == "memo")
+  {
+    if(memo_priv_key.valid()){
+      memo_priv_key.reset();
+    }
+    memo_priv_key = priv_key;
+  }
+  
   return mvo;
   //return fc::json::to_string(mvo);
 }
@@ -149,9 +186,9 @@ fc::mutable_variant_object get_dev_key(string secret)
 string get_user_key(string user_name, string password)
 {
   fc::mutable_variant_object mvo;
-  mvo("active-key", get_dev_key(user_name + "active" + password))
-  ("owner-key", get_dev_key(user_name + "owner" + password))
-  ("memo-key", get_dev_key(user_name + "memo" + password))
+  mvo("active-key", get_dev_key("active", user_name + "active" + password))
+  ("owner-key", get_dev_key("owner", user_name + "owner" + password))
+  ("memo-key", get_dev_key("memo", user_name + "memo" + password))
   ;
   return fc::json::to_string(mvo);
 }
