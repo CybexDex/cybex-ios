@@ -91,6 +91,7 @@ extension AssetInfo: Equatable {
 }
 
 struct  RMBPrices{
-  var name : String = ""
+  var name : String      = ""
   var rmb_price : String = ""
 } 
+
