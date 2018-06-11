@@ -57,6 +57,12 @@ std::string key_to_wif(const fc::sha256& secret )
 static map<string, fc::ecc::private_key> stored_keys;
 static string default_public_key = "";
 
+
+void set_default_public_key(string pub_key_base58_str)
+{
+  default_public_key = pub_key_base58_str;
+}
+
 void clear_user_key()
 {
     stored_keys.clear();

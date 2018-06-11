@@ -15,6 +15,7 @@ using namespace fc;
 string get_user_key(string user_name, string password);
 fc::ecc::private_key& get_private_key(string public_key);
 void clear_user_key();
+void set_default_public_key(string pub_key_base58_str);
 
 string transfer(
                 uint16_t ref_block_num,
