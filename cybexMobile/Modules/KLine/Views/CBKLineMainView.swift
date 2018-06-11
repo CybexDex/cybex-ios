@@ -21,17 +21,18 @@ class CBKLineMainView: UIView {
   // 主图绘制K线模型数组
   fileprivate var mainDrawKLineModels: [CBKLineModel]?
   
-  var extraAssistHeight:CGFloat = 40
   // 绘制区域的最大Y值
-  fileprivate var drawMaxY: CGFloat {
+  fileprivate let padding:UIEdgeInsets = UIEdgeInsetsMake(0, 0, 4, 0)
+
+  var drawMaxY: CGFloat {
     get {
-      return drawHeight + configuration.main.assistViewHeight + configuration.main.dateAssistViewHeight
+      return height - padding.bottom
     }
   }
   // 绘制区域的高度
-  fileprivate var drawHeight: CGFloat {
+  var drawHeight: CGFloat {
     get {
-      return height - extraAssistHeight - configuration.main.assistViewHeight - configuration.main.dateAssistViewHeight - 4
+      return height - configuration.main.assistViewHeight - configuration.main.dateAssistViewHeight - padding.bottom - padding.top
     }
   }
   
@@ -94,20 +95,19 @@ class CBKLineMainView: UIView {
     
     // 绘制提示数据
     fetchAssistString(model: mainDrawKLineModels.last)
-    drawAssistString?.draw(in: CGRect(x: 10, y : configuration.main.dateAssistViewHeight, width: width - 30, height:configuration.main.assistViewHeight))
+    drawAssistString?.draw(in: CGRect(x: 10, y : configuration.main.dateAssistViewHeight, width: width - 20, height:configuration.main.assistViewHeight))
     
     let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
 
     var strokeColors:[UIColor] = []
     
     for (index, klineModel) in mainDrawKLineModels.enumerated() {
-      let xPosition = CGFloat(index) * (configuration.theme.klineWidth + configuration.theme.klineSpace) +
-        configuration.theme.klineWidth * 0.5 + configuration.theme.klineSpace + 15
+      let xPosition = CGFloat(index) * (configuration.theme.klineWidth + configuration.theme.klineSpace)
 
       let openPoint = CGPoint(x: xPosition, y: abs(drawMaxY - CGFloat((klineModel.open - limitValue.minValue) / unitValue)))
       let closePoint = CGPoint(x: xPosition, y: abs(drawMaxY - CGFloat((klineModel.close - limitValue.minValue) / unitValue)))
-      let highPoint = CGPoint(x: xPosition, y: abs(drawMaxY - CGFloat((klineModel.high - limitValue.minValue) / unitValue)))
-      let lowPoint = CGPoint(x: xPosition, y: abs(drawMaxY - CGFloat((klineModel.low - limitValue.minValue) / unitValue)))
+      let highPoint = CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: abs(drawMaxY - CGFloat((klineModel.high - limitValue.minValue) / unitValue)))
+      let lowPoint = CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: abs(drawMaxY - CGFloat((klineModel.low - limitValue.minValue) / unitValue)))
 
       switch configuration.main.klineType {
       case .KLine: // K线模式
@@ -135,10 +135,10 @@ class CBKLineMainView: UIView {
         // 画开盘-收盘
         if (closePoint.y == openPoint.y) {
           context.setLineWidth(configuration.theme.klineShadowLineWidth)
-          context.strokeLineSegments(between: [CGPoint(x: xPosition - configuration.theme.klineWidth / 2, y: closePoint.y), CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: closePoint.y)])
+          context.strokeLineSegments(between: [CGPoint(x: xPosition, y: closePoint.y), CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: closePoint.y)])
         }
         else {
-          let path = UIBezierPath(roundedRect: CGRect(x:xPosition - configuration.theme.klineWidth / 2, y: klineModel.open < klineModel.close ? closePoint.y : openPoint.y, width: configuration.theme.klineWidth, height:max(abs(closePoint.y - openPoint.y), configuration.theme.klineShadowLineWidth)), cornerRadius: configuration.theme.klineRadius).cgPath
+          let path = UIBezierPath(roundedRect: CGRect(x:xPosition, y: klineModel.open < klineModel.close ? closePoint.y : openPoint.y, width: configuration.theme.klineWidth, height:max(abs(closePoint.y - openPoint.y), configuration.theme.klineShadowLineWidth)), cornerRadius: configuration.theme.klineRadius).cgPath
           context.addPath(path)
           context.setFillColor(strokeColor.cgColor)
           context.fillPath()
@@ -380,8 +380,7 @@ extension CBKLineMainView {
           
           if let value = model.MAs?[idx] {
             
-            let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace) +
-              self.configuration.theme.klineWidth * 0.5 + self.configuration.theme.klineSpace
+            let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace) 
             
             let yPosition = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
             
@@ -416,8 +415,7 @@ extension CBKLineMainView {
           
           if let value = model.EMAs?[idx] {
             
-            let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace) +
-              self.configuration.theme.klineWidth * 0.5 + self.configuration.theme.klineSpace
+            let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
             
             let yPosition = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
             
@@ -443,8 +441,7 @@ extension CBKLineMainView {
     MBLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
 
       if let value = model.BOLL_MB {
-        let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace) +
-          self.configuration.theme.klineWidth * 0.5 + self.configuration.theme.klineSpace
+        let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
         let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
         return CGPoint(x: xPosition, y: yPosition)
       }
@@ -456,8 +453,7 @@ extension CBKLineMainView {
     UPLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
 
       if let value = model.BOLL_UP {
-        let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace) +
-          self.configuration.theme.klineWidth * 0.5 + self.configuration.theme.klineSpace
+        let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
         let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
         return CGPoint(x: xPosition, y: yPosition)
       }
@@ -469,8 +465,7 @@ extension CBKLineMainView {
     DNLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
 
       if let value = model.BOLL_DN {
-        let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace) +
-          self.configuration.theme.klineWidth * 0.5 + self.configuration.theme.klineSpace
+        let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
 
         let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
         return CGPoint(x: xPosition, y: yPosition)
@@ -511,7 +506,7 @@ extension CBKLineMainView {
     }
   }
   
-  fileprivate func fetchLimitValue() -> (minValue: Double, maxValue: Double)? {
+  func fetchLimitValue() -> (minValue: Double, maxValue: Double)? {
     
     guard let mainDrawKLineModels = mainDrawKLineModels else {
       return nil

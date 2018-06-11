@@ -34,7 +34,6 @@ class CBKLineDrawView: UIView {
   /// 开始draw的数组下标
   fileprivate var drawStartIndex: Int?
   
-  var volumeOffset:Constraint!
   var accessoryHeight:Constraint!
 
   /// draw的个数
@@ -91,14 +90,10 @@ class CBKLineDrawView: UIView {
   
   func switchToAccessory(_ showaccessory:Bool) {
     if showaccessory {
-      volumeOffset.constant = -80
       accessoryHeight.constant = 40
-      mainView.extraAssistHeight = 80
     }
     else {
-      volumeOffset.constant = -40
       accessoryHeight.constant = 0
-      mainView.extraAssistHeight = 40
     }
   }
   
@@ -146,10 +141,11 @@ extension CBKLineDrawView {
   }
   
   fileprivate func loadingSubviews() {
-    loadingMainView()
-    loadingVolumeView()
-    loadingAccessoryView()
     loadingIndicator()
+
+    loadingAccessoryView()
+    loadingVolumeView()
+    loadingMainView()
   }
   
   private func loadingMainView() {
@@ -166,7 +162,7 @@ extension CBKLineDrawView {
     mainView.top(to: self)
     mainView.left(to: self)
     mainView.right(to: self)
-    mainView.height(274)//194 234
+    mainView.bottomToTop(of: volumeView)
     
     /// Main Value View
     
@@ -183,9 +179,9 @@ extension CBKLineDrawView {
     }
     addSubview(volumeView)
     
-    volumeOffset = volumeView.topToBottom(of: mainView, offset: -40)
     volumeView.left(to: self)
     volumeView.right(to: self)
+    volumeView.bottomToTop(of: accessoryView)
     volumeView.height(40)
 
   }
@@ -193,12 +189,14 @@ extension CBKLineDrawView {
   private func loadingAccessoryView() {
     /// Accessory View
     accessoryView = CBKLineAccessoryView()
+    accessoryView.backgroundColor = UIColor.clear
+
     accessoryView.limitValueChanged = {  (_ limitValue: (minValue: Double, maxValue: Double)?) -> Void in
 //      if let limitValue = limitValue {
 //      }
     }
     addSubview(accessoryView)
-    accessoryView.topToBottom(of: volumeView)
+    accessoryView.bottom(to: self)
     accessoryView.left(to: self)
     accessoryView.right(to: self)
     accessoryHeight = accessoryView.height(0)
@@ -237,6 +235,13 @@ extension CBKLineDrawView {
   /// - Parameter recognizer: UIPanGestureRecognizer
   @objc
   fileprivate func panGestureAction(_ recognizer: UIPanGestureRecognizer) {
+    if indicatorVerticalView.isHidden == false {
+      lastOffsetIndex = nil
+      lastPanPoint = nil
+      
+      return
+    }
+    
     switch recognizer.state {
     case .began:
       lastPanPoint = recognizer.location(in: recognizer.view)
@@ -322,14 +327,14 @@ extension CBKLineDrawView {
       let unit = configuration.theme.klineWidth + configuration.theme.klineSpace
       
       let offsetCount: Int = Int((location.x - drawValueViewWidth) / unit)
-      let previousOffset: CGFloat = (CGFloat(offsetCount) + 0.5) * unit + drawValueViewWidth
-      let nextOffset: CGFloat = (CGFloat(offsetCount + 1) + 0.5) * unit + drawValueViewWidth
+      let previousOffset: CGFloat = CGFloat(offsetCount) * unit + configuration.theme.klineWidth / 2.0 - configuration.theme.klineShadowLineWidth / 2.0 + drawValueViewWidth
+      let nextOffset: CGFloat = CGFloat(offsetCount + 1) * unit + configuration.theme.klineWidth / 2.0 - configuration.theme.klineShadowLineWidth / 2.0 + drawValueViewWidth
       
       /// 显示十字线
       indicatorVerticalView.isHidden = false
       indicatorHorizontalView.isHidden = false
       
-//      let drawModel: CBKLineModel?
+      var drawModel:CBKLineModel?
       
       horizantalTop.constant = location.y
       indicatorHorizontalView.layoutIfNeeded()
@@ -338,19 +343,26 @@ extension CBKLineDrawView {
         verticalLeft.constant = previousOffset
         indicatorVerticalView.layoutIfNeeded()
         
-//        if configuration.dataSource.drawKLineModels.count > offsetCount {
-//          drawModel = configuration.dataSource.drawKLineModels[offsetCount]
-//        }
+        if configuration.dataSource.drawKLineModels.count > offsetCount {
+          drawModel = configuration.dataSource.drawKLineModels[offsetCount]
+        }
         
       } else {
         verticalLeft.constant = nextOffset
         indicatorVerticalView.layoutIfNeeded()
      
-//        if configuration.dataSource.drawKLineModels.count > offsetCount {
-//          drawModel = configuration.dataSource.drawKLineModels[offsetCount + 1]
-//        }
+        if configuration.dataSource.drawKLineModels.count > offsetCount + 1 {
+          drawModel = configuration.dataSource.drawKLineModels[offsetCount + 1]
+        }
       }
       
+      if let limitValue = mainView.fetchLimitValue(), let model = drawModel {
+        let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(mainView.drawHeight)
+        
+        horizantalTop.constant = abs(mainView.drawMaxY - CGFloat((model.close - limitValue.minValue) / unitValue))
+      }
+     
+
       
     } else if recognizer.state == .ended {
       // 隐藏十字线
