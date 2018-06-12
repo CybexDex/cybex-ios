@@ -32,6 +32,8 @@ class CBKLineDrawView: UIView {
     var verticalLeft: Constraint!
 
     var panGesture: UIPanGestureRecognizer!
+    var tapGesture: UITapGestureRecognizer?
+
     /// 开始draw的数组下标
     fileprivate var drawStartIndex: Int?
 
@@ -63,7 +65,11 @@ class CBKLineDrawView: UIView {
         addGestureRecognizer(panGesture)
         panGesture.require(toFail: AppConfiguration.shared.appCoordinator.curDisplayingCoordinator().rootVC.interactivePopGestureRecognizer!)
 
-        loadingSubviews()
+      
+      
+      self.isUserInteractionEnabled = true
+      
+      loadingSubviews()
     }
 
     required init?(coder _: NSCoder) {
@@ -134,11 +140,12 @@ extension CBKLineDrawView {
     }
 
     fileprivate func loadingSubviews() {
-        loadingIndicator()
+      loadingIndicator()
 
         loadingAccessoryView()
         loadingVolumeView()
         loadingMainView()
+
     }
 
     private func loadingMainView() {
@@ -202,7 +209,7 @@ extension CBKLineDrawView {
 
         verticalLeft = indicatorVerticalView.left(to: self, offset: 0)
         indicatorVerticalView.width(configuration.theme.longPressLineWidth)
-        indicatorVerticalView.top(to: self)
+        indicatorVerticalView.top(to: self, offset: configuration.main.dateAssistViewHeight)
         indicatorVerticalView.bottom(to: self)
 
         indicatorHorizontalView = UIView()
@@ -266,6 +273,9 @@ extension CBKLineDrawView {
     /// - Parameter recognizer: UIPinchGestureRecognizer
     @objc
     fileprivate func pinchAction(_ recognizer: UIPinchGestureRecognizer) {
+      if indicatorVerticalView.isHidden == false {
+          return
+      }
         let difValue = recognizer.scale - lastScale
 
         if abs(difValue) > configuration.theme.klineScale {
@@ -345,17 +355,30 @@ extension CBKLineDrawView {
                 horizantalTop.constant = abs(mainView.drawMaxY - CGFloat((model.close - limitValue.minValue) / unitValue))
 
                 mainView.fetchAssistString(model: model)
+                mainView.focusModel = model
                 mainView.setNeedsDisplay()
+                NotificationCenter.default.post(name: .SpecialPairDidClicked, object: nil, userInfo: ["klineModel": model])
             }
 
         } else if recognizer.state == .ended {
             // 隐藏十字线
-            indicatorVerticalView.isHidden = true
-            indicatorHorizontalView.isHidden = true
-            mainView.fetchAssistString(model: nil)
-            mainView.setNeedsDisplay()
+          if let tap = tapGesture {
+            self.removeGestureRecognizer(tap)
+          }
+          self.tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeIndicatorLine))
+          self.addGestureRecognizer(tapGesture!)
+         
         }
     }
+  
+  @objc func removeIndicatorLine() {
+    self.indicatorVerticalView.isHidden = true
+    self.indicatorHorizontalView.isHidden = true
+    self.mainView.focusModel = nil
+    self.mainView.fetchAssistString(model: nil)
+    self.mainView.setNeedsDisplay()
+    NotificationCenter.default.post(name: .SpecialPairDidCanceled, object: nil, userInfo: nil)
+  }
 }
 
 extension CBKLineDrawView: UIGestureRecognizerDelegate {

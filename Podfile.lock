@@ -25,6 +25,7 @@ PODS:
   - IQKeyboardManagerSwift (6.0.3)
   - JSONRPCKit (3.0.0):
     - Result (~> 3.2.0)
+  - "Keyboard+LayoutGuide (1.2.2)"
   - KeychainAccess (3.1.1)
   - Kingfisher (4.8.0)
   - KMNavigationBarTransition (1.1.5)
@@ -139,6 +140,7 @@ DEPENDENCIES:
   - IHKeyboardAvoiding
   - IQKeyboardManagerSwift
   - JSONRPCKit
+  - "Keyboard+LayoutGuide"
   - KeychainAccess
   - Kingfisher
   - KMNavigationBarTransition
@@ -202,6 +204,7 @@ SPEC REPOS:
     - IHKeyboardAvoiding
     - IQKeyboardManagerSwift
     - JSONRPCKit
+    - "Keyboard+LayoutGuide"
     - KeychainAccess
     - Kingfisher
     - KMNavigationBarTransition
@@ -287,6 +290,7 @@ SPEC CHECKSUMS:
   IHKeyboardAvoiding: 9fbf816b7c3c84911964802ff110d12caf40ebef
   IQKeyboardManagerSwift: 04e8679f85e496bb2c474eeb9284052f1b3c391c
   JSONRPCKit: 50e0dc5e7f873e87f81562feb8836b7d1974da6d
+  "Keyboard+LayoutGuide": 4c33aa1749cee1af43c3c32a988b58ad1918bdef
   KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
   Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
   KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
@@ -336,6 +340,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: 153243f17f96880e378152f2c9bab4ef879dfeac
+PODFILE CHECKSUM: f5e013d49aedc75a5cb95b4f5d007ded371bf8fd
 
 COCOAPODS: 1.5.3

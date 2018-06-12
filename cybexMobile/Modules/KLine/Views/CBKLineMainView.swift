@@ -21,7 +21,10 @@ class CBKLineMainView: UIView {
     fileprivate var drawAssistString: NSAttributedString?
     // 主图绘制K线模型数组
     fileprivate var mainDrawKLineModels: [CBKLineModel]?
-
+    // focus line
+  
+    var focusModel: CBKLineModel?
+  
     // 绘制区域的最大Y值
     fileprivate let padding: UIEdgeInsets = UIEdgeInsetsMake(CBConfiguration.sharedConfiguration.main.valueAssistViewHeight, 0, CBConfiguration.sharedConfiguration.main.valueAssistViewHeight, 0)
 
@@ -173,6 +176,9 @@ class CBKLineMainView: UIView {
             // 画日期
             drawDateLine(context: context, klineModel: mainDrawKLineModels[index],
                          positionX: xPosition)
+          
+    
+
         }
 
         context.strokePath()
@@ -206,6 +212,7 @@ extension CBKLineMainView {
     ///   - klineModel: 数据模型
     ///   - positionModel: 位置模型
     fileprivate func drawDateLine(context: CGContext, klineModel: CBKLineModel, positionX: CGFloat) {
+      
         let date = Date(timeIntervalSince1970: klineModel.date)
         var dateString = configuration.dateFormatter.string(from: date)
         if configuration.main.timeLineType == .oneDay {
@@ -215,7 +222,7 @@ extension CBKLineMainView {
         }
 
         let dateAttributes: [NSAttributedStringKey: Any]? = [
-            NSAttributedStringKey.foregroundColor: configuration.main.dateAssistTextColor,
+          NSAttributedStringKey.foregroundColor: focusModel == nil ? configuration.main.dateAssistTextColor : configuration.theme.longPressLineColor,
             NSAttributedStringKey.font: configuration.main.dateAssistTextFont,
         ]
 
@@ -226,6 +233,12 @@ extension CBKLineMainView {
 
         if drawDatePoint.x < 0 || (drawDatePoint.x + dateAttrString.size().width) > bounds.width {
             return
+        }
+      
+        if let model = focusModel {
+          if model.propertyDescription() != klineModel.propertyDescription() {
+            return
+          }
         }
 
         if lastDrawDatePoint.equalTo(CGPoint.zero) ||
