@@ -11,6 +11,8 @@
 "nav.apply" = "申请";
 "nav.account" = "账号";
 "nav.setting" = "设置";
+"nav.trade"   = "交易";
+
 "market" = "交易中心";
 "language" = "语言";
 "theme" = "主题";

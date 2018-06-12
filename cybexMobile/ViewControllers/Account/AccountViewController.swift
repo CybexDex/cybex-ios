@@ -273,7 +273,8 @@ extension AccountViewController{
     self.coordinator?.openYourProtfolio()
   }
   @objc func openOpenedOrders(_ data:[String: Any]){
-    self.coordinator?.openOpenedOrders()
+//    self.coordinator?.openOpenedOrders()
+    self.coordinator?.openRecharge()
   }
   @objc func openLockupAssets(_ data:[String: Any]){
     self.coordinator?.openLockupAssets()

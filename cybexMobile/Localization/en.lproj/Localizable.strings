@@ -11,6 +11,9 @@
 "nav.apply" = "Application";
 "nav.account" = "Account";
 "nav.setting" = "Settings";
+"nav.trade"   = "Trade";
+
+
 "market" = "Market";
 
 "language" = "Language";

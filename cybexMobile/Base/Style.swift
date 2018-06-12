@@ -36,6 +36,7 @@ class RichStyle {
     passwordStyle()
   }
   
+  
   func passwordStyle() {
     let normal = Style {
       $0.font = SystemFonts.PingFangSC_Regular.font(size: 14)

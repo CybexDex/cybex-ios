@@ -43,7 +43,8 @@ class AppCoordinator {
   
   var homeCoordinator: HomeRootCoordinator!
   var explorerCoordinator: ExplorerRootCoordinator!
-  var faqCoordinator: FAQRootCoordinator!
+//  var faqCoordinator: FAQRootCoordinator!
+  var tradeCoordinator : TradeRootCoordinator!
   var accountCoordinator: AccountRootCoordinator!
   var entryCoordinator: EntryRootCoordinator!
 
@@ -66,9 +67,10 @@ class AppCoordinator {
     homeCoordinator = HomeRootCoordinator(rootVC: home)
     home.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navWatchlist.key.localized(), image: R.image.ic_watchlist_24px(), selectedImage: R.image.ic_watchlist_active_24px())
     
-    let faq = BaseNavigationController()
-    faqCoordinator = FAQRootCoordinator(rootVC: faq)
-    faq.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navApply.key.localized(), image: R.image.icon_apply(), selectedImage: R.image.icon_apply_active())
+    let trade = BaseNavigationController()
+    tradeCoordinator = TradeRootCoordinator(rootVC: trade)
+    trade.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navTrade.key.localized(), image: R.image.icon_apply(), selectedImage: R.image.icon_apply_active())
+    
     
     let account = BaseNavigationController()
     accountCoordinator = AccountCoordinator(rootVC: account)
@@ -79,10 +81,10 @@ class AppCoordinator {
     //        message.tabBarItem.badgeValue = "99+"
     
     homeCoordinator.start()
-    faqCoordinator.start()
+    tradeCoordinator.start()
     accountCoordinator.start()
     
-    rootVC.viewControllers = [home, faq, account]
+    rootVC.viewControllers = [home, trade, account]
     
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: {notification in     
       CBConfiguration.sharedConfiguration.themeIndex = ThemeManager.currentThemeIndex
@@ -90,7 +92,7 @@ class AppCoordinator {
   }
   
   func curDisplayingCoordinator() -> NavCoordinator {
-    let container = [homeCoordinator, faqCoordinator, accountCoordinator] as [NavCoordinator]
+    let container = [homeCoordinator, tradeCoordinator, accountCoordinator] as [NavCoordinator]
     return container[self.rootVC.selectedIndex]
   }
   

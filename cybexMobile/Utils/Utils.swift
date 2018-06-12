@@ -58,7 +58,6 @@ func calculateAssetRelation(assetID_A_name:String, assetID_B_name:String) -> (ba
  2 先判断CYB/ETH 或者ETH/CYB 是否有值，如果其中一个有值就转换，反之没有数据的币对返回0
  **/
 func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
-
   let eth_base = AssetConfiguration.ETH
   let cyb_base = AssetConfiguration.CYB
   let eth_cyb  = changeCYB_ETH()
@@ -71,13 +70,6 @@ func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
   }
   
   var result = (eth:"0",cyb:"0")
-//  result.cyb = getRelationWithIds(base: cyb_base, quote: sender)
-//  result.eth = getRelationWithIds(base: eth_base, quote: sender)
-//  if result.cyb != "0" && result.eth != "0"{
-//    return result
-//  }
-  
-  
   let homeBuckets : [HomeBucket] = app_data.data.value
   for homeBuck : HomeBucket in homeBuckets {
     let bucket = getCachedBucket(homeBuck)
@@ -108,11 +100,9 @@ func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
         eth_rmb_price = price.rmb_price
       }
     }
-    
     if sender_rmb_price == "0"{
       return result
     }
-    
     if eth_rmb_price != "0" {
       result.eth = String(sender_rmb_price.toDouble()! / eth_rmb_price.toDouble()!)
       result.cyb = String (eth_cyb.toDouble()! * result.eth.toDouble()!)
@@ -120,8 +110,8 @@ func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
       result.cyb = String(sender_rmb_price.toDouble()! / cyb_rmb_price.toDouble()!)
       result.eth = String (eth_cyb.toDouble()! * 1 / result.cyb.toDouble()!)
     }
-    
     return result
+    
   }else if (result.eth != "0" && result.cyb != "0"){
     return result
   }else {
@@ -194,7 +184,7 @@ func getRelationWithIds(base:String,quote:String) -> String{
       quote_rmb = price.rmb_price
     }
   }
-
+  
   if base_rmb != "0" && quote_rmb != "0" {
     return String(quote_rmb.toDouble()! / base_rmb.toDouble()!)
   }

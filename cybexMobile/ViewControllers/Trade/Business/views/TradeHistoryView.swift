@@ -1,0 +1,86 @@
+//
+//  TradeHistoryView.swift
+//  cybexMobile
+//
+//  Created by DKM on 2018/6/12.
+//  Copyright © 2018年 Cybex. All rights reserved.
+//
+
+import UIKit
+
+class TradeHistoryView: UIView {
+
+  @IBOutlet weak var price: UILabel!
+  @IBOutlet weak var amount: UILabel!
+  @IBOutlet weak var sellAmount: UILabel!
+  @IBOutlet weak var time: UILabel!
+  @IBOutlet weak var tableView: UITableView!
+  
+  var data:[(Bool, String, String, String, String)]?{
+    didSet{
+      self.tableView.reloadData()
+    }
+  }
+  
+  func setup(){
+    let cell = String.init(describing: TradeHistoryCell.self)
+    tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
+    
+  }
+  
+  override var intrinsicContentSize: CGSize {
+    return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
+  }
+  
+  fileprivate func updateHeight() {
+    layoutIfNeeded()
+    self.height = dynamicHeight()
+    invalidateIntrinsicContentSize()
+  }
+  
+  fileprivate func dynamicHeight() -> CGFloat {
+    let lastView = self.subviews.last?.subviews.last
+    return lastView!.bottom
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    layoutIfNeeded()
+  }
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    loadViewFromNib()
+    setup()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    loadViewFromNib()
+    setup()
+  }
+  
+  fileprivate func loadViewFromNib() {
+    let bundle = Bundle(for: type(of: self))
+    let nibName = String(describing: type(of: self))
+    let nib = UINib.init(nibName: nibName, bundle: bundle)
+    let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+    
+    addSubview(view)
+    view.frame = self.bounds
+    view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+  }
+}
+extension TradeHistoryView : UITableViewDelegate,UITableViewDataSource{
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 10
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: TradeHistoryCell.self), for: indexPath) as! TradeHistoryCell
+    cell.setup(self.data?[(indexPath.row + 1) * 2 - 2], indexPath: indexPath)
+    return cell
+  }
+  
+  
+}

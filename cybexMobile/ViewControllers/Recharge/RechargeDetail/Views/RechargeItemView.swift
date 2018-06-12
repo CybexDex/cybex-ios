@@ -1,0 +1,125 @@
+//
+//  rechargeView.swift
+//  Demo
+//
+//  Created by DKM on 2018/6/6.
+//  Copyright © 2018年 DKM. All rights reserved.
+//
+
+import UIKit
+enum Recharge_Type:Int{
+    case none = 0
+    case clean
+    case photo
+    case all
+}
+
+
+@IBDesignable
+class RechargeItemView: UIView {
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var content: UITextField!
+    @IBOutlet weak var btn: UIButton!
+    
+    @IBAction func clickAcion(_ sender: UIButton) {
+        switch btn_type! {
+        case .clean:content.text = ""
+        case .photo:takePhoto()
+        case .all:content.text = ""
+        default:
+            break
+        }
+    }
+    
+    
+    @IBInspectable var name : String = "" {
+        didSet{
+            title.text = name
+        }
+    }
+   
+    @IBInspectable var SOURCE_TYPE : Int = 0{
+        didSet{
+            btn_type = Recharge_Type(rawValue: SOURCE_TYPE)
+        }
+    }
+    
+    @IBInspectable var textplaceholder : String = "" {
+        didSet{
+            
+            content.attributedPlaceholder = NSAttributedString(string:textplaceholder,
+                                                           attributes:[NSAttributedStringKey.foregroundColor: UIColor.steel50])
+        }
+    }
+    
+    
+    var btn_type : Recharge_Type? {
+        didSet{
+            switch btn_type! {
+            case .none:
+                btn.isHidden = true
+                content.isEnabled = false
+            default:
+                break
+            }
+        }
+    }
+    
+    func takePhoto(){
+        
+    }
+    
+    func setupUI(){
+        
+    }
+    
+    fileprivate func updateHeight(){
+        layoutIfNeeded()
+        self.frame.size.height = dynamicHeight()
+        invalidateIntrinsicContentSize()
+    }
+    
+    override var intrinsicContentSize: CGSize{
+        return CGSize.init(width:UIViewNoIntrinsicMetric,height:dynamicHeight())
+    }
+    
+    fileprivate func dynamicHeight() -> CGFloat{
+        let lastView = self.subviews.last?.subviews.last
+        return (lastView?.frame.origin.y)! + (lastView?.frame.size.height)!
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layoutIfNeeded()
+    }
+    
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        loadFromXIB()
+    }
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        loadFromXIB()
+    }
+  
+  override func awakeFromNib() {
+    
+  }
+  
+    func loadFromXIB(){
+        let bundle = Bundle(for: type(of: self))
+        let nibName = String(describing: type(of: self))
+        let nib = UINib.init(nibName: nibName, bundle: bundle)
+        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        view.layer.cornerRadius = 4.0
+        view.clipsToBounds = true
+        addSubview(view)
+        
+        view.frame = self.bounds
+        view.autoresizingMask = [.flexibleHeight,.flexibleWidth]
+    }
+}

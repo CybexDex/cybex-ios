@@ -15,15 +15,32 @@
 		721F5C7020AAF1400042488F /* OpenedOrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */; };
 		721F5C7220AAF15F0042488F /* OpenedOrdersHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721F5C7120AAF15F0042488F /* OpenedOrdersHeaderView.xib */; };
 		721F5C7420AAF7290042488F /* OpenedOrdersStatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C7320AAF7290042488F /* OpenedOrdersStatesView.swift */; };
+		7229265320C9333E0066E2A3 /* CybexLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7229264F20C9333C0066E2A3 /* CybexLabel.xib */; };
+		7229265420C9333E0066E2A3 /* RechargeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7229265020C9333D0066E2A3 /* RechargeItemView.swift */; };
+		7229265520C9333E0066E2A3 /* CybexLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7229265120C9333D0066E2A3 /* CybexLabel.swift */; };
+		7229265620C9333E0066E2A3 /* RechargeItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7229265220C9333E0066E2A3 /* RechargeItemView.xib */; };
 		7246670D20AD730B006A918B /* QuotesTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7246670C20AD730B006A918B /* QuotesTitleView.swift */; };
 		724A2A6C20B41B5500E28438 /* GradientLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A2A6B20B41B5500E28438 /* GradientLabelView.swift */; };
 		724A2A6E20B431B300E28438 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A2A6D20B431B300E28438 /* Style.swift */; };
+		7265CFC020CE4A71005DEB7F /* BusinessCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7265CFBC20CE4A71005DEB7F /* BusinessCoordinator.swift */; };
+		7265CFC120CE4A71005DEB7F /* BusinessActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7265CFBD20CE4A71005DEB7F /* BusinessActions.swift */; };
+		7265CFC220CE4A71005DEB7F /* BusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7265CFBE20CE4A71005DEB7F /* BusinessViewController.swift */; };
+		7265CFC320CE4A71005DEB7F /* BusinessReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7265CFBF20CE4A71005DEB7F /* BusinessReducers.swift */; };
+		7265CFC520CE4A96005DEB7F /* Business.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7265CFC420CE4A96005DEB7F /* Business.storyboard */; };
 		726DE2C920BE5287007C53C9 /* HomeSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726DE2C820BE5287007C53C9 /* HomeSectionHeaderView.swift */; };
 		726DE2CB20BE52A5007C53C9 /* HomeSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 726DE2CA20BE52A5007C53C9 /* HomeSectionHeaderView.xib */; };
 		72889EE820A9964A007D9E7A /* OpenedOrdersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72889EE620A9964A007D9E7A /* OpenedOrdersCell.swift */; };
 		72889EE920A9964A007D9E7A /* OpenedOrdersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72889EE720A9964A007D9E7A /* OpenedOrdersCell.xib */; };
 		72889EEC20A996E0007D9E7A /* OpenedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */; };
 		72889EEE20A996ED007D9E7A /* OpenedOrdersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72889EED20A996ED007D9E7A /* OpenedOrdersView.xib */; };
+		729DC5BD20C9341300AEC844 /* RechargeDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5B920C9341300AEC844 /* RechargeDetailCoordinator.swift */; };
+		729DC5BE20C9341300AEC844 /* RechargeDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5BA20C9341300AEC844 /* RechargeDetailActions.swift */; };
+		729DC5BF20C9341300AEC844 /* RechargeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5BB20C9341300AEC844 /* RechargeDetailViewController.swift */; };
+		729DC5C020C9341300AEC844 /* RechargeDetailReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5BC20C9341300AEC844 /* RechargeDetailReducers.swift */; };
+		729DC5C620C93C8800AEC844 /* WithdrawDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5C220C93C8800AEC844 /* WithdrawDetailCoordinator.swift */; };
+		729DC5C720C93C8800AEC844 /* WithdrawDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5C320C93C8800AEC844 /* WithdrawDetailActions.swift */; };
+		729DC5C820C93C8800AEC844 /* WithdrawDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5C420C93C8800AEC844 /* WithdrawDetailViewController.swift */; };
+		729DC5C920C93C8800AEC844 /* WithdrawDetailReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5C520C93C8800AEC844 /* WithdrawDetailReducers.swift */; };
 		72C100F420A981EF0059FEE8 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C100F320A981EE0059FEE8 /* R.generated.swift */; };
 		72C100FA20A984F70059FEE8 /* OpenedOrdersCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C100F620A984F70059FEE8 /* OpenedOrdersCoordinator.swift */; };
 		72C100FB20A984F70059FEE8 /* OpenedOrdersActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C100F720A984F70059FEE8 /* OpenedOrdersActions.swift */; };
@@ -38,6 +55,37 @@
 		72C30C8620AA8DBD00F4DCEC /* LockupAssetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C8520AA8DBD00F4DCEC /* LockupAssetsView.swift */; };
 		72C30C8820AA8DC600F4DCEC /* LockupAssetsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C30C8720AA8DC600F4DCEC /* LockupAssetsView.xib */; };
 		72C30C8A20AAAF7700F4DCEC /* LockupProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C30C8920AAAF7700F4DCEC /* LockupProgressView.swift */; };
+		72C5732A20CF802D005ABFA5 /* CybexActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C5732420CF8029005ABFA5 /* CybexActionView.xib */; };
+		72C5732B20CF802D005ABFA5 /* CybexAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5732520CF8029005ABFA5 /* CybexAlertView.swift */; };
+		72C5732C20CF802D005ABFA5 /* CybexActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5732620CF802A005ABFA5 /* CybexActionView.swift */; };
+		72C5732D20CF802D005ABFA5 /* CybexAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C5732720CF802B005ABFA5 /* CybexAlertView.xib */; };
+		72C5732E20CF802D005ABFA5 /* CybexTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5732820CF802B005ABFA5 /* CybexTextView.swift */; };
+		72C5732F20CF802D005ABFA5 /* CybexTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C5732920CF802C005ABFA5 /* CybexTextView.xib */; };
+		72C5733320CF803C005ABFA5 /* StyleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5733020CF803A005ABFA5 /* StyleContentView.swift */; };
+		72C5733420CF803C005ABFA5 /* StyleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5733120CF803B005ABFA5 /* StyleLabel.swift */; };
+		72C5733520CF803C005ABFA5 /* StyleLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C5733220CF803B005ABFA5 /* StyleLabel.xib */; };
+		72C5733720CF8068005ABFA5 /* DemoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5733620CF8068005ABFA5 /* DemoManager.swift */; };
+		72C5737B20CFA35E005ABFA5 /* TradeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5737720CFA35E005ABFA5 /* TradeCoordinator.swift */; };
+		72C5737C20CFA35E005ABFA5 /* TradeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5737820CFA35E005ABFA5 /* TradeActions.swift */; };
+		72C5737D20CFA35E005ABFA5 /* TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5737920CFA35E005ABFA5 /* TradeViewController.swift */; };
+		72C5737E20CFA35E005ABFA5 /* TradeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5737A20CFA35E005ABFA5 /* TradeReducers.swift */; };
+		72C5738020CFA3DC005ABFA5 /* TradeRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5737F20CFA3DC005ABFA5 /* TradeRootCoordinator.swift */; };
+		72C5738220CFA8CD005ABFA5 /* TradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5738120CFA8CD005ABFA5 /* TradeView.swift */; };
+		72C5738420CFA8E5005ABFA5 /* TradeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C5738320CFA8E5005ABFA5 /* TradeView.xib */; };
+		72C5738820CFAAC9005ABFA5 /* TradeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5738720CFAAC9005ABFA5 /* TradeLineView.swift */; };
+		72C5738A20CFAAD3005ABFA5 /* TradeLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C5738920CFAAD3005ABFA5 /* TradeLineView.xib */; };
+		72C5739020CFBCCD005ABFA5 /* TradeHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5738F20CFBCCD005ABFA5 /* TradeHistoryView.swift */; };
+		72C5739220CFBCD7005ABFA5 /* TradeHistoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C5739120CFBCD7005ABFA5 /* TradeHistoryView.xib */; };
+		72F31DD320C67BAC00A31EAA /* RechargeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F31DCF20C67BAC00A31EAA /* RechargeCoordinator.swift */; };
+		72F31DD420C67BAC00A31EAA /* RechargeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F31DD020C67BAC00A31EAA /* RechargeActions.swift */; };
+		72F31DD520C67BAC00A31EAA /* RechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F31DD120C67BAC00A31EAA /* RechargeViewController.swift */; };
+		72F31DD620C67BAC00A31EAA /* RechargeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F31DD220C67BAC00A31EAA /* RechargeReducers.swift */; };
+		72F31DDA20C67C7B00A31EAA /* RechargeSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F31DD920C67C7B00A31EAA /* RechargeSegment.swift */; };
+		72F31DDC20C67C8F00A31EAA /* RechargeSegment.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F31DDB20C67C8F00A31EAA /* RechargeSegment.xib */; };
+		72F31DDF20C683B000A31EAA /* TradeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F31DDD20C683B000A31EAA /* TradeCell.swift */; };
+		72F31DE020C683B000A31EAA /* TradeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F31DDE20C683B000A31EAA /* TradeCell.xib */; };
+		72F31DE620C6938000A31EAA /* TradeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F31DE520C6938000A31EAA /* TradeItemView.swift */; };
+		72F31DE820C6938A00A31EAA /* TradeItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F31DE720C6938A00A31EAA /* TradeItemView.xib */; };
 		72F6DEFE20AC03FA00BBF105 /* YourPorfolioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72F6DEFD20AC03F900BBF105 /* YourPorfolioView.xib */; };
 		72F6DF0320AC0C6300BBF105 /* YourPortfolioCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DEFF20AC0C6300BBF105 /* YourPortfolioCoordinator.swift */; };
 		72F6DF0420AC0C6300BBF105 /* YourPortfolioActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F6DF0020AC0C6300BBF105 /* YourPortfolioActions.swift */; };
@@ -351,15 +399,32 @@
 		721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersHeaderView.swift; sourceTree = "<group>"; };
 		721F5C7120AAF15F0042488F /* OpenedOrdersHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenedOrdersHeaderView.xib; sourceTree = "<group>"; };
 		721F5C7320AAF7290042488F /* OpenedOrdersStatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersStatesView.swift; sourceTree = "<group>"; };
+		7229264F20C9333C0066E2A3 /* CybexLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CybexLabel.xib; sourceTree = "<group>"; };
+		7229265020C9333D0066E2A3 /* RechargeItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RechargeItemView.swift; sourceTree = "<group>"; };
+		7229265120C9333D0066E2A3 /* CybexLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybexLabel.swift; sourceTree = "<group>"; };
+		7229265220C9333E0066E2A3 /* RechargeItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RechargeItemView.xib; sourceTree = "<group>"; };
 		7246670C20AD730B006A918B /* QuotesTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesTitleView.swift; sourceTree = "<group>"; };
 		724A2A6B20B41B5500E28438 /* GradientLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLabelView.swift; sourceTree = "<group>"; };
 		724A2A6D20B431B300E28438 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Style.swift; path = cybexMobile/Base/Style.swift; sourceTree = SOURCE_ROOT; };
+		7265CFBC20CE4A71005DEB7F /* BusinessCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCoordinator.swift; sourceTree = "<group>"; };
+		7265CFBD20CE4A71005DEB7F /* BusinessActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessActions.swift; sourceTree = "<group>"; };
+		7265CFBE20CE4A71005DEB7F /* BusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessViewController.swift; sourceTree = "<group>"; };
+		7265CFBF20CE4A71005DEB7F /* BusinessReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessReducers.swift; sourceTree = "<group>"; };
+		7265CFC420CE4A96005DEB7F /* Business.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Business.storyboard; sourceTree = "<group>"; };
 		726DE2C820BE5287007C53C9 /* HomeSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionHeaderView.swift; sourceTree = "<group>"; };
 		726DE2CA20BE52A5007C53C9 /* HomeSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSectionHeaderView.xib; sourceTree = "<group>"; };
 		72889EE620A9964A007D9E7A /* OpenedOrdersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersCell.swift; sourceTree = "<group>"; };
 		72889EE720A9964A007D9E7A /* OpenedOrdersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenedOrdersCell.xib; sourceTree = "<group>"; };
 		72889EEB20A996E0007D9E7A /* OpenedOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersView.swift; sourceTree = "<group>"; };
 		72889EED20A996ED007D9E7A /* OpenedOrdersView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenedOrdersView.xib; sourceTree = "<group>"; };
+		729DC5B920C9341300AEC844 /* RechargeDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailCoordinator.swift; sourceTree = "<group>"; };
+		729DC5BA20C9341300AEC844 /* RechargeDetailActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailActions.swift; sourceTree = "<group>"; };
+		729DC5BB20C9341300AEC844 /* RechargeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailViewController.swift; sourceTree = "<group>"; };
+		729DC5BC20C9341300AEC844 /* RechargeDetailReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailReducers.swift; sourceTree = "<group>"; };
+		729DC5C220C93C8800AEC844 /* WithdrawDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailCoordinator.swift; sourceTree = "<group>"; };
+		729DC5C320C93C8800AEC844 /* WithdrawDetailActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailActions.swift; sourceTree = "<group>"; };
+		729DC5C420C93C8800AEC844 /* WithdrawDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailViewController.swift; sourceTree = "<group>"; };
+		729DC5C520C93C8800AEC844 /* WithdrawDetailReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailReducers.swift; sourceTree = "<group>"; };
 		72C100F320A981EE0059FEE8 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		72C100F620A984F70059FEE8 /* OpenedOrdersCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersCoordinator.swift; sourceTree = "<group>"; };
 		72C100F720A984F70059FEE8 /* OpenedOrdersActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersActions.swift; sourceTree = "<group>"; };
@@ -374,6 +439,37 @@
 		72C30C8520AA8DBD00F4DCEC /* LockupAssetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsView.swift; sourceTree = "<group>"; };
 		72C30C8720AA8DC600F4DCEC /* LockupAssetsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsView.xib; sourceTree = "<group>"; };
 		72C30C8920AAAF7700F4DCEC /* LockupProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupProgressView.swift; sourceTree = "<group>"; };
+		72C5732420CF8029005ABFA5 /* CybexActionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CybexActionView.xib; sourceTree = "<group>"; };
+		72C5732520CF8029005ABFA5 /* CybexAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybexAlertView.swift; sourceTree = "<group>"; };
+		72C5732620CF802A005ABFA5 /* CybexActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybexActionView.swift; sourceTree = "<group>"; };
+		72C5732720CF802B005ABFA5 /* CybexAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CybexAlertView.xib; sourceTree = "<group>"; };
+		72C5732820CF802B005ABFA5 /* CybexTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybexTextView.swift; sourceTree = "<group>"; };
+		72C5732920CF802C005ABFA5 /* CybexTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CybexTextView.xib; sourceTree = "<group>"; };
+		72C5733020CF803A005ABFA5 /* StyleContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleContentView.swift; sourceTree = "<group>"; };
+		72C5733120CF803B005ABFA5 /* StyleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleLabel.swift; sourceTree = "<group>"; };
+		72C5733220CF803B005ABFA5 /* StyleLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleLabel.xib; sourceTree = "<group>"; };
+		72C5733620CF8068005ABFA5 /* DemoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoManager.swift; sourceTree = "<group>"; };
+		72C5737720CFA35E005ABFA5 /* TradeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeCoordinator.swift; sourceTree = "<group>"; };
+		72C5737820CFA35E005ABFA5 /* TradeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeActions.swift; sourceTree = "<group>"; };
+		72C5737920CFA35E005ABFA5 /* TradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeViewController.swift; sourceTree = "<group>"; };
+		72C5737A20CFA35E005ABFA5 /* TradeReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeReducers.swift; sourceTree = "<group>"; };
+		72C5737F20CFA3DC005ABFA5 /* TradeRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeRootCoordinator.swift; sourceTree = "<group>"; };
+		72C5738120CFA8CD005ABFA5 /* TradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeView.swift; sourceTree = "<group>"; };
+		72C5738320CFA8E5005ABFA5 /* TradeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TradeView.xib; sourceTree = "<group>"; };
+		72C5738720CFAAC9005ABFA5 /* TradeLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeLineView.swift; sourceTree = "<group>"; };
+		72C5738920CFAAD3005ABFA5 /* TradeLineView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TradeLineView.xib; sourceTree = "<group>"; };
+		72C5738F20CFBCCD005ABFA5 /* TradeHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeHistoryView.swift; sourceTree = "<group>"; };
+		72C5739120CFBCD7005ABFA5 /* TradeHistoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TradeHistoryView.xib; sourceTree = "<group>"; };
+		72F31DCF20C67BAC00A31EAA /* RechargeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeCoordinator.swift; sourceTree = "<group>"; };
+		72F31DD020C67BAC00A31EAA /* RechargeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeActions.swift; sourceTree = "<group>"; };
+		72F31DD120C67BAC00A31EAA /* RechargeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeViewController.swift; sourceTree = "<group>"; };
+		72F31DD220C67BAC00A31EAA /* RechargeReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeReducers.swift; sourceTree = "<group>"; };
+		72F31DD920C67C7B00A31EAA /* RechargeSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeSegment.swift; sourceTree = "<group>"; };
+		72F31DDB20C67C8F00A31EAA /* RechargeSegment.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RechargeSegment.xib; sourceTree = "<group>"; };
+		72F31DDD20C683B000A31EAA /* TradeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeCell.swift; sourceTree = "<group>"; };
+		72F31DDE20C683B000A31EAA /* TradeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TradeCell.xib; sourceTree = "<group>"; };
+		72F31DE520C6938000A31EAA /* TradeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeItemView.swift; sourceTree = "<group>"; };
+		72F31DE720C6938A00A31EAA /* TradeItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TradeItemView.xib; sourceTree = "<group>"; };
 		72F6DEFD20AC03F900BBF105 /* YourPorfolioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YourPorfolioView.xib; sourceTree = "<group>"; };
 		72F6DEFF20AC0C6300BBF105 /* YourPortfolioCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioCoordinator.swift; sourceTree = "<group>"; };
 		72F6DF0020AC0C6300BBF105 /* YourPortfolioActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioActions.swift; sourceTree = "<group>"; };
@@ -11907,6 +12003,55 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7229264D20C932890066E2A3 /* RechargeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				7229264E20C932E90066E2A3 /* Views */,
+				729DC5B920C9341300AEC844 /* RechargeDetailCoordinator.swift */,
+				729DC5BA20C9341300AEC844 /* RechargeDetailActions.swift */,
+				729DC5BB20C9341300AEC844 /* RechargeDetailViewController.swift */,
+				729DC5BC20C9341300AEC844 /* RechargeDetailReducers.swift */,
+			);
+			path = RechargeDetail;
+			sourceTree = "<group>";
+		};
+		7229264E20C932E90066E2A3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7229265120C9333D0066E2A3 /* CybexLabel.swift */,
+				7229264F20C9333C0066E2A3 /* CybexLabel.xib */,
+				7229265020C9333D0066E2A3 /* RechargeItemView.swift */,
+				7229265220C9333E0066E2A3 /* RechargeItemView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7265CFBB20CE4A42005DEB7F /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				7265CFC620CE4C12005DEB7F /* views */,
+				7265CFBC20CE4A71005DEB7F /* BusinessCoordinator.swift */,
+				7265CFBD20CE4A71005DEB7F /* BusinessActions.swift */,
+				7265CFBE20CE4A71005DEB7F /* BusinessViewController.swift */,
+				7265CFBF20CE4A71005DEB7F /* BusinessReducers.swift */,
+				7265CFC420CE4A96005DEB7F /* Business.storyboard */,
+			);
+			path = Business;
+			sourceTree = "<group>";
+		};
+		7265CFC620CE4C12005DEB7F /* views */ = {
+			isa = PBXGroup;
+			children = (
+				72C5738120CFA8CD005ABFA5 /* TradeView.swift */,
+				72C5738320CFA8E5005ABFA5 /* TradeView.xib */,
+				72C5738720CFAAC9005ABFA5 /* TradeLineView.swift */,
+				72C5738920CFAAD3005ABFA5 /* TradeLineView.xib */,
+				72C5738F20CFBCCD005ABFA5 /* TradeHistoryView.swift */,
+				72C5739120CFBCD7005ABFA5 /* TradeHistoryView.xib */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		72889EE320A995A5007D9E7A /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -11926,6 +12071,17 @@
 				721F5C7320AAF7290042488F /* OpenedOrdersStatesView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		729DC5C120C93C6F00AEC844 /* WithdrawDetail */ = {
+			isa = PBXGroup;
+			children = (
+				729DC5C220C93C8800AEC844 /* WithdrawDetailCoordinator.swift */,
+				729DC5C320C93C8800AEC844 /* WithdrawDetailActions.swift */,
+				729DC5C420C93C8800AEC844 /* WithdrawDetailViewController.swift */,
+				729DC5C520C93C8800AEC844 /* WithdrawDetailReducers.swift */,
+			);
+			path = WithdrawDetail;
 			sourceTree = "<group>";
 		};
 		72C100F520A984BF0059FEE8 /* OpenedOrders */ = {
@@ -11973,6 +12129,78 @@
 				721F5C6D20AAE7EF0042488F /* LockupAssetsSectionView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		72C5732320CF8010005ABFA5 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				72C5733620CF8068005ABFA5 /* DemoManager.swift */,
+				72C5733020CF803A005ABFA5 /* StyleContentView.swift */,
+				72C5733120CF803B005ABFA5 /* StyleLabel.swift */,
+				72C5733220CF803B005ABFA5 /* StyleLabel.xib */,
+				72C5732620CF802A005ABFA5 /* CybexActionView.swift */,
+				72C5732420CF8029005ABFA5 /* CybexActionView.xib */,
+				72C5732520CF8029005ABFA5 /* CybexAlertView.swift */,
+				72C5732720CF802B005ABFA5 /* CybexAlertView.xib */,
+				72C5732820CF802B005ABFA5 /* CybexTextView.swift */,
+				72C5732920CF802C005ABFA5 /* CybexTextView.xib */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		72C5737620CFA331005ABFA5 /* Trade */ = {
+			isa = PBXGroup;
+			children = (
+				7265CFBB20CE4A42005DEB7F /* Business */,
+				72C5737720CFA35E005ABFA5 /* TradeCoordinator.swift */,
+				72C5737820CFA35E005ABFA5 /* TradeActions.swift */,
+				72C5737920CFA35E005ABFA5 /* TradeViewController.swift */,
+				72C5737A20CFA35E005ABFA5 /* TradeReducers.swift */,
+			);
+			path = Trade;
+			sourceTree = "<group>";
+		};
+		72F31DCD20C67B5800A31EAA /* Recharge */ = {
+			isa = PBXGroup;
+			children = (
+				729DC5C120C93C6F00AEC844 /* WithdrawDetail */,
+				7229264D20C932890066E2A3 /* RechargeDetail */,
+				72F31DCE20C67B8300A31EAA /* RechargeList */,
+			);
+			path = Recharge;
+			sourceTree = "<group>";
+		};
+		72F31DCE20C67B8300A31EAA /* RechargeList */ = {
+			isa = PBXGroup;
+			children = (
+				72F31DCF20C67BAC00A31EAA /* RechargeCoordinator.swift */,
+				72F31DD020C67BAC00A31EAA /* RechargeActions.swift */,
+				72F31DD120C67BAC00A31EAA /* RechargeViewController.swift */,
+				72F31DD220C67BAC00A31EAA /* RechargeReducers.swift */,
+				72F31DD820C67BD000A31EAA /* Cells */,
+				72F31DD720C67BCA00A31EAA /* Views */,
+			);
+			path = RechargeList;
+			sourceTree = "<group>";
+		};
+		72F31DD720C67BCA00A31EAA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72F31DD920C67C7B00A31EAA /* RechargeSegment.swift */,
+				72F31DDB20C67C8F00A31EAA /* RechargeSegment.xib */,
+				72F31DE520C6938000A31EAA /* TradeItemView.swift */,
+				72F31DE720C6938A00A31EAA /* TradeItemView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		72F31DD820C67BD000A31EAA /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				72F31DDD20C683B000A31EAA /* TradeCell.swift */,
+				72F31DDE20C683B000A31EAA /* TradeCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		72F6DEEA20AC02E400BBF105 /* Portfolio */ = {
@@ -31252,6 +31480,7 @@
 				73D977E320565EA600CB7DE1 /* FAQRootCoordinator.swift */,
 				73D977DF20565E6900CB7DE1 /* HomeRootCoordinator.swift */,
 				73D34E342063A603008C7507 /* AccountRootCoordinator.swift */,
+				72C5737F20CFA3DC005ABFA5 /* TradeRootCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -31267,6 +31496,8 @@
 		73D977EE20565FFC00CB7DE1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				72C5737620CFA331005ABFA5 /* Trade */,
+				72F31DCD20C67B5800A31EAA /* Recharge */,
 				73D977F22056601F00CB7DE1 /* Account */,
 				731A0E9820A4409800507D1E /* Entry */,
 				73D977F12056601800CB7DE1 /* FAQ */,
@@ -31605,6 +31836,7 @@
 		73F58FC720AC04DC008A1F79 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				72C5732320CF8010005ABFA5 /* Alert */,
 				7324A91820AB01FA005BCFF8 /* GradientLayer.swift */,
 				724A2A6B20B41B5500E28438 /* GradientLabelView.swift */,
 				73F58FC820AC04EF008A1F79 /* Button.swift */,
@@ -31769,6 +32001,7 @@
 				730FDA7820A314F900CFBF24 /* ios in Resources */,
 				73E49E4E207A0873003B14D2 /* TradeHistoryCellView.xib in Resources */,
 				730FDA9220A314F900CFBF24 /* cmath.SUNWCCh in Resources */,
+				72F31DE820C6938A00A31EAA /* TradeItemView.xib in Resources */,
 				730FDAB520A314F900CFBF24 /* utility.SUNWCCh in Resources */,
 				73D9789620577D3100CB7DE1 /* HomePairView.xib in Resources */,
 				73E49E212078BFB6003B14D2 /* AccessoryHorizentalView.xib in Resources */,
@@ -31793,6 +32026,7 @@
 				730FDAA920A314F900CFBF24 /* sstream.SUNWCCh in Resources */,
 				726DE2CB20BE52A5007C53C9 /* HomeSectionHeaderView.xib in Resources */,
 				730FDAB020A314F900CFBF24 /* tuple.SUNWCCh in Resources */,
+				72C5738420CFA8E5005ABFA5 /* TradeView.xib in Resources */,
 				730FDA8F20A314F900CFBF24 /* array.SUNWCCh in Resources */,
 				730FDA6A20A314F600CFBF24 /* cstring in Resources */,
 				730FDAAE20A314F900CFBF24 /* strstream.SUNWCCh in Resources */,
@@ -31803,11 +32037,13 @@
 				73E49E48207A02C6003B14D2 /* TradeHistoryCell.xib in Resources */,
 				72F6DF2920AC27C200BBF105 /* AccountPortfolioView.xib in Resources */,
 				730FDA8620A314F900CFBF24 /* regex in Resources */,
+				72F31DE020C683B000A31EAA /* TradeCell.xib in Resources */,
 				730FDA8420A314F900CFBF24 /* queue in Resources */,
 				73D978AB2057A47C00CB7DE1 /* PairCardView.xib in Resources */,
 				730FDA9C20A314F900CFBF24 /* iterator.SUNWCCh in Resources */,
 				72F6DEFE20AC03FA00BBF105 /* YourPorfolioView.xib in Resources */,
 				72F6DF1E20AC206100BBF105 /* AccountPortfolioCellView.xib in Resources */,
+				7229265320C9333E0066E2A3 /* CybexLabel.xib in Resources */,
 				730FDA9A20A314F900CFBF24 /* iostream.SUNWCCh in Resources */,
 				730FDA6920A314F600CFBF24 /* cstdlib in Resources */,
 				72C30C8820AA8DC600F4DCEC /* LockupAssetsView.xib in Resources */,
@@ -31817,6 +32053,7 @@
 				730FDA9920A314F900CFBF24 /* ios.SUNWCCh in Resources */,
 				730FDA6F20A314F900CFBF24 /* array in Resources */,
 				730FDA6E20A314F900CFBF24 /* algorithm in Resources */,
+				72C5732F20CF802D005ABFA5 /* CybexTextView.xib in Resources */,
 				730FDAA620A314F900CFBF24 /* random.SUNWCCh in Resources */,
 				730FDAA020A314F900CFBF24 /* map.SUNWCCh in Resources */,
 				730FDA6220A314F600CFBF24 /* clocale in Resources */,
@@ -31832,8 +32069,10 @@
 				730FDA7E20A314F900CFBF24 /* locale in Resources */,
 				73E49E272078C15B003B14D2 /* AccessoryCollectionViewCell.xib in Resources */,
 				73F58FCB20AC0589008A1F79 /* Button.xib in Resources */,
+				7229265620C9333E0066E2A3 /* RechargeItemView.xib in Resources */,
 				730FDA5E20A314F600CFBF24 /* cctype in Resources */,
 				730FDABE20A314F900CFBF24 /* valarray in Resources */,
+				72C5732D20CF802D005ABFA5 /* CybexAlertView.xib in Resources */,
 				730FDA8120A314F900CFBF24 /* new in Resources */,
 				72F8C77720B0068B00454187 /* HomeTitleView.xib in Resources */,
 				730FDA9320A314F900CFBF24 /* complex.SUNWCCh in Resources */,
@@ -31850,6 +32089,7 @@
 				730FDA7C20A314F900CFBF24 /* limits in Resources */,
 				730FDA8020A314F900CFBF24 /* memory in Resources */,
 				730FDA7720A314F900CFBF24 /* iomanip in Resources */,
+				72C5738A20CFAAD3005ABFA5 /* TradeLineView.xib in Resources */,
 				72F6DF3120AC2FAD00BBF105 /* AccountAssetOperationsItemView.xib in Resources */,
 				730FDA7620A314F900CFBF24 /* functional in Resources */,
 				730FDA5D20A314F600CFBF24 /* cassert in Resources */,
@@ -31861,9 +32101,11 @@
 				730FDAA720A314F900CFBF24 /* regex.SUNWCCh in Resources */,
 				730FDAAB20A314F900CFBF24 /* stdexcept.SUNWCCh in Resources */,
 				730FDAB820A314F900CFBF24 /* tuple in Resources */,
+				72C5732A20CF802D005ABFA5 /* CybexActionView.xib in Resources */,
 				730FDA6520A314F600CFBF24 /* csignal in Resources */,
 				730FDABF20A314F900CFBF24 /* vector in Resources */,
 				730FDA9020A314F900CFBF24 /* bcc32.SUNWCCh in Resources */,
+				72C5733520CF803C005ABFA5 /* StyleLabel.xib in Resources */,
 				73E49E54207A12E4003B14D2 /* Launch Screen.storyboard in Resources */,
 				730FDAA320A314F900CFBF24 /* numeric.SUNWCCh in Resources */,
 				730FDAAA20A314F900CFBF24 /* stack.SUNWCCh in Resources */,
@@ -31875,6 +32117,7 @@
 				730FDA6720A314F600CFBF24 /* cstddef in Resources */,
 				730FDA9520A314F900CFBF24 /* exception.SUNWCCh in Resources */,
 				73B44E5B2057ECD900759863 /* PairDetailView.xib in Resources */,
+				72F31DDC20C67C8F00A31EAA /* RechargeSegment.xib in Resources */,
 				730FDA6D20A314F600CFBF24 /* cwctype in Resources */,
 				730FDA6020A314F600CFBF24 /* cfloat in Resources */,
 				730FDA9620A314F900CFBF24 /* fstream.SUNWCCh in Resources */,
@@ -31882,11 +32125,13 @@
 				73E49E52207A08CB003B14D2 /* OrderBookCellView.xib in Resources */,
 				730FDAA120A314F900CFBF24 /* memory.SUNWCCh in Resources */,
 				730FDAA520A314F900CFBF24 /* queue.SUNWCCh in Resources */,
+				72C5739220CFBCD7005ABFA5 /* TradeHistoryView.xib in Resources */,
 				730FDA7920A314F900CFBF24 /* iostream in Resources */,
 				72F6DF2D20AC2EF100BBF105 /* AccountAssetOperationView.xib in Resources */,
 				730FDA8920A314F900CFBF24 /* stack in Resources */,
 				72F6DF1920AC1C1200BBF105 /* Account.storyboard in Resources */,
 				730FDAA420A314F900CFBF24 /* ostream.SUNWCCh in Resources */,
+				7265CFC520CE4A96005DEB7F /* Business.storyboard in Resources */,
 				730FDA7D20A314F900CFBF24 /* list in Resources */,
 				730FDA9820A314F900CFBF24 /* iomanip.SUNWCCh in Resources */,
 				730FDAB120A314F900CFBF24 /* type_traits.SUNWCCh in Resources */,
@@ -32139,7 +32384,10 @@
 			files = (
 				73D34E422063A675008C7507 /* AccountActions.swift in Sources */,
 				73D97800205660F200CB7DE1 /* HomeActions.swift in Sources */,
+				72F31DD420C67BAC00A31EAA /* RechargeActions.swift in Sources */,
+				72F31DDA20C67C7B00A31EAA /* RechargeSegment.swift in Sources */,
 				73E49E3E2079FFBF003B14D2 /* TradeHistoryViewController.swift in Sources */,
+				72C5733720CF8068005ABFA5 /* DemoManager.swift in Sources */,
 				731A0E9D20A4409900507D1E /* EntryActions.swift in Sources */,
 				73D34E3A2063A65A008C7507 /* FAQActions.swift in Sources */,
 				72889EE820A9964A007D9E7A /* OpenedOrdersCell.swift in Sources */,
@@ -32170,6 +32418,7 @@
 				72C30C8620AA8DBD00F4DCEC /* LockupAssetsView.swift in Sources */,
 				7373AE2D20720BB2002DC01F /* UserDefaults.swift in Sources */,
 				73ACD80820721B5E00592E69 /* SettingDetailCoordinator.swift in Sources */,
+				729DC5C620C93C8800AEC844 /* WithdrawDetailCoordinator.swift in Sources */,
 				7320D6B3205BB16400C3F579 /* CBBOLLModel.swift in Sources */,
 				73A0CC042068E23400463ADE /* BaseWebViewController.swift in Sources */,
 				73D34E4C2063A697008C7507 /* SettingCoordinator.swift in Sources */,
@@ -32183,21 +32432,27 @@
 				726DE2C920BE5287007C53C9 /* HomeSectionHeaderView.swift in Sources */,
 				73B44E302057ECD000759863 /* PairDetailView.swift in Sources */,
 				7320D6B9205FBC4B00C3F579 /* CBMAVOLUMEModel.swift in Sources */,
+				7229265420C9333E0066E2A3 /* RechargeItemView.swift in Sources */,
 				7320D6B7205FA93600C3F579 /* CBKLineAccessoryView.swift in Sources */,
 				721F5C7020AAF1400042488F /* OpenedOrdersHeaderView.swift in Sources */,
+				72F31DE620C6938000A31EAA /* TradeItemView.swift in Sources */,
 				72F6DF0A20AC0CF100BBF105 /* YourPorfolioView.swift in Sources */,
 				724A2A6E20B431B300E28438 /* Style.swift in Sources */,
 				731A0EA420A440D000507D1E /* UIColor+Additions.swift in Sources */,
+				72C5738220CFA8CD005ABFA5 /* TradeView.swift in Sources */,
 				73E49E50207A08BE003B14D2 /* OrderBookCellView.swift in Sources */,
 				72C100FB20A984F70059FEE8 /* OpenedOrdersActions.swift in Sources */,
 				7324FDCB206CFC37004296E7 /* SettingCell.swift in Sources */,
+				729DC5C820C93C8800AEC844 /* WithdrawDetailViewController.swift in Sources */,
 				7246670D20AD730B006A918B /* QuotesTitleView.swift in Sources */,
 				73E6B2BE208D92AB00B015E5 /* BitShareCoordinator.mm in Sources */,
 				73A2937A20AAED3F00893053 /* RegisterViewController.swift in Sources */,
 				73BDCA21206266CE009E67A3 /* HistoryApi.swift in Sources */,
 				72C100FA20A984F70059FEE8 /* OpenedOrdersCoordinator.swift in Sources */,
 				72F6DF0620AC0C6300BBF105 /* YourPortfolioReducers.swift in Sources */,
+				72F31DDF20C683B000A31EAA /* TradeCell.swift in Sources */,
 				73D97802205660F200CB7DE1 /* HomeReducers.swift in Sources */,
+				7265CFC020CE4A71005DEB7F /* BusinessCoordinator.swift in Sources */,
 				72F6DF2F20AC2FA000BBF105 /* AccountAssetOperationsItemView.swift in Sources */,
 				73D34E4D2063A697008C7507 /* SettingReducers.swift in Sources */,
 				73BDCA4E20626C09009E67A3 /* Bucket.swift in Sources */,
@@ -32205,12 +32460,18 @@
 				73D8B0B0207CB6EC001A2232 /* OrderBook.swift in Sources */,
 				73D978AF2057A59000CB7DE1 /* BaseCollectionViewCell.swift in Sources */,
 				72F6DF0D20AC0D3700BBF105 /* YourPortfolioCell.swift in Sources */,
+				72C5737B20CFA35E005ABFA5 /* TradeCoordinator.swift in Sources */,
+				72C5733420CF803C005ABFA5 /* StyleLabel.swift in Sources */,
 				73A571692067FD1900921781 /* MarketCache.swift in Sources */,
+				72C5738820CFAAC9005ABFA5 /* TradeLineView.swift in Sources */,
+				72C5739020CFBCCD005ABFA5 /* TradeHistoryView.swift in Sources */,
+				72C5732B20CF802D005ABFA5 /* CybexAlertView.swift in Sources */,
 				7320D6A5205B9C0D00C3F579 /* CBKLineMainView.swift in Sources */,
 				73E49E1F2078BF77003B14D2 /* TimeGapView.swift in Sources */,
 				724A2A6C20B41B5500E28438 /* GradientLabelView.swift in Sources */,
 				73E49E3D2079FFBF003B14D2 /* TradeHistoryReducers.swift in Sources */,
 				73ACD80920721B5E00592E69 /* SettingDetailReducers.swift in Sources */,
+				72C5733320CF803C005ABFA5 /* StyleContentView.swift in Sources */,
 				73D9789E20579EE200CB7DE1 /* MarketReducers.swift in Sources */,
 				733CD33120623F47002AD0E0 /* DataBaseApi.swift in Sources */,
 				735068D720B7E9B30092CE04 /* debounce-throttle.swift in Sources */,
@@ -32231,6 +32492,7 @@
 				7324A91920AB01FA005BCFF8 /* GradientLayer.swift in Sources */,
 				733402272067DB00000F78B3 /* DemoCache.swift in Sources */,
 				7320D69D205B8C1E00C3F579 /* KLineConfiguration.swift in Sources */,
+				72F31DD520C67BAC00A31EAA /* RechargeViewController.swift in Sources */,
 				72F6DF1C20AC204300BBF105 /* AccountPortfolioView.swift in Sources */,
 				73D978A52057A45500CB7DE1 /* PairCardCell.swift in Sources */,
 				72C100FC20A984F70059FEE8 /* OpenedOrdersViewController.swift in Sources */,
@@ -32245,7 +32507,10 @@
 				73DF25AF20C53D9300A0D00F /* transaction.cpp in Sources */,
 				72FEFD3320B57307003D7463 /* BalanceIntroduceView.swift in Sources */,
 				73D9789C20579EE200CB7DE1 /* MarketActions.swift in Sources */,
+				729DC5BD20C9341300AEC844 /* RechargeDetailCoordinator.swift in Sources */,
 				73E49DF42078BF5B003B14D2 /* AccessoryHorizentalView.swift in Sources */,
+				729DC5BF20C9341300AEC844 /* RechargeDetailViewController.swift in Sources */,
+				72F31DD620C67BAC00A31EAA /* RechargeReducers.swift in Sources */,
 				731A0E9F20A4409900507D1E /* EntryReducers.swift in Sources */,
 				7386AD5D20B4134D00168629 /* IconGenerator.swift in Sources */,
 				73D34E352063A603008C7507 /* AccountRootCoordinator.swift in Sources */,
@@ -32255,12 +32520,14 @@
 				73E49E252078C134003B14D2 /* AccessoryCollectionViewCell.swift in Sources */,
 				7386AD5F20B4134D00168629 /* UIColorExtension.swift in Sources */,
 				73D978A32057A44100CB7DE1 /* PairListHorizantalView.swift in Sources */,
+				7265CFC320CE4A71005DEB7F /* BusinessReducers.swift in Sources */,
 				7320D6AB205B9E7500C3F579 /* CBMALineBrush.swift in Sources */,
 				72C30C7A20AA8AA000F4DCEC /* LockupAssetsActions.swift in Sources */,
 				731A0EA220A440A700507D1E /* EntryRootCoordinator.swift in Sources */,
 				73E49E352079FFAF003B14D2 /* OrderBookReducers.swift in Sources */,
 				73A2937720AAED3F00893053 /* RegisterActions.swift in Sources */,
 				73D34E502063C4C5008C7507 /* Optional+Extensions.swift in Sources */,
+				7265CFC220CE4A71005DEB7F /* BusinessViewController.swift in Sources */,
 				73A2937120AA855100893053 /* Localization_Extensions.swift in Sources */,
 				73D634692062009C000EB324 /* NetworkService.swift in Sources */,
 				73D9789D20579EE200CB7DE1 /* MarketCoordinator.swift in Sources */,
@@ -32268,13 +32535,17 @@
 				73D34E3B2063A65A008C7507 /* FAQCoordinator.swift in Sources */,
 				72C100F420A981EF0059FEE8 /* R.generated.swift in Sources */,
 				73D97801205660F200CB7DE1 /* HomeCoordinator.swift in Sources */,
+				72C5737E20CFA35E005ABFA5 /* TradeReducers.swift in Sources */,
 				73AAD13620A57C2E002DEFED /* UserManager.swift in Sources */,
 				73D977DE20565E3600CB7DE1 /* AppCoordinator.swift in Sources */,
+				7229265520C9333E0066E2A3 /* CybexLabel.swift in Sources */,
 				73D34E4E2063A697008C7507 /* SettingViewController.swift in Sources */,
 				73ACD80720721B5E00592E69 /* SettingDetailActions.swift in Sources */,
+				72F31DD320C67BAC00A31EAA /* RechargeCoordinator.swift in Sources */,
 				72C30C8A20AAAF7700F4DCEC /* LockupProgressView.swift in Sources */,
 				73D34E4B2063A697008C7507 /* SettingActions.swift in Sources */,
 				739B6166207F325A00B61152 /* Collection+Extensions.swift in Sources */,
+				72C5737D20CFA35E005ABFA5 /* TradeViewController.swift in Sources */,
 				7320D6B1205BB14800C3F579 /* CBMACDModel.swift in Sources */,
 				73AAD13820A57F48002DEFED /* Crypto.swift in Sources */,
 				73E49E292078C17A003B14D2 /* AccessoryCollectionView.swift in Sources */,
@@ -32286,8 +32557,10 @@
 				735D8EB820AEACE7008DAAAC /* Balance.swift in Sources */,
 				73DF25B220C53D9300A0D00F /* memo.cpp in Sources */,
 				73D977E220565E9700CB7DE1 /* ExplorerRootCoordinator.swift in Sources */,
+				72C5732C20CF802D005ABFA5 /* CybexActionView.swift in Sources */,
 				7386AD5C20B4134D00168629 /* ColorTheme.swift in Sources */,
 				73E6B2B9208D911D00B015E5 /* fc_bridge.cpp in Sources */,
+				72C5737C20CFA35E005ABFA5 /* TradeActions.swift in Sources */,
 				73A0CC41206A3DDA00463ADE /* AssetInfo.swift in Sources */,
 				73D9789F20579EE200CB7DE1 /* MarketViewController.swift in Sources */,
 				72C30C7C20AA8AA000F4DCEC /* LockupAssetsReducers.swift in Sources */,
@@ -32295,22 +32568,29 @@
 				7320D6A3205B9BAF00C3F579 /* CBKLineDrawView.swift in Sources */,
 				73E49E44207A0294003B14D2 /* OrderBookCell.swift in Sources */,
 				72F6DF0420AC0C6300BBF105 /* YourPortfolioActions.swift in Sources */,
+				72C5738020CFA3DC005ABFA5 /* TradeRootCoordinator.swift in Sources */,
 				7341BB39205A5E11007387FE /* UIColor+Cybexblack.swift in Sources */,
 				72F6DF0520AC0C6300BBF105 /* YourPortfolioViewController.swift in Sources */,
 				73ACD80A20721B5E00592E69 /* SettingDetailViewController.swift in Sources */,
 				72C100FD20A984F70059FEE8 /* OpenedOrdersReducers.swift in Sources */,
+				729DC5C920C93C8800AEC844 /* WithdrawDetailReducers.swift in Sources */,
 				73D9789220577CDC00CB7DE1 /* BaseTableViewCell.swift in Sources */,
 				73DF25B020C53D9300A0D00F /* address.cpp in Sources */,
 				73D34E432063A675008C7507 /* AccountCoordinator.swift in Sources */,
 				73D9788E20577C8F00CB7DE1 /* HomePairCell.swift in Sources */,
+				729DC5C020C9341300AEC844 /* RechargeDetailReducers.swift in Sources */,
 				73A2936F20AA853600893053 /* Theme_Extensions.swift in Sources */,
 				7320D6AD205BB13300C3F579 /* CBMAModel.swift in Sources */,
 				72C30C7B20AA8AA000F4DCEC /* LockupAssetsViewController.swift in Sources */,
 				73E49E41207A0273003B14D2 /* TradeHistoryCell.swift in Sources */,
+				7265CFC120CE4A71005DEB7F /* BusinessActions.swift in Sources */,
 				73E49E3C2079FFBF003B14D2 /* TradeHistoryCoordinator.swift in Sources */,
 				735D8EC320AFCC92008DAAAC /* NoticeBoardViewController.swift in Sources */,
 				7320D658205A942C00C3F579 /* NSNotification+Extensions.swift in Sources */,
 				7386AD5B20B4134D00168629 /* CGContextExtension.swift in Sources */,
+				729DC5BE20C9341300AEC844 /* RechargeDetailActions.swift in Sources */,
+				729DC5C720C93C8800AEC844 /* WithdrawDetailActions.swift in Sources */,
+				72C5732E20CF802D005ABFA5 /* CybexTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
