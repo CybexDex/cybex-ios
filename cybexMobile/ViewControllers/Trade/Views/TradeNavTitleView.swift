@@ -1,5 +1,5 @@
 //
-//  TradeView.swift
+//  TradeNavTitleView.swift
 //  cybexMobile
 //
 //  Created by DKM on 2018/6/12.
@@ -8,21 +8,20 @@
 
 import UIKit
 
-class TradeView: UIView {
+class TradeNavTitleView: UIView {
   
-  @IBOutlet weak var amount: UILabel!
-  @IBOutlet weak var rmbPrice: UILabel!
-  @IBOutlet var sells: [UIView]!
-  @IBOutlet weak var buies: UIView!
+  @IBOutlet weak var title: UILabel!
   
-  var data : Any? {
-    didSet{
+  @IBOutlet weak var icon: UIImageView!
+  
+  
+  var data : [String]?
+  
+  fileprivate func setup() {
+    self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+      guard let `self` = self else { return }
       
-    }
-  }
-  
-  func setup(){
-    
+    }).disposed(by: disposeBag)
   }
   
   override var intrinsicContentSize: CGSize {
@@ -67,4 +66,6 @@ class TradeView: UIView {
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
+  
+  
 }

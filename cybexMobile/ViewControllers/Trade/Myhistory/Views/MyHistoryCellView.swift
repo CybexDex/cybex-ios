@@ -1,19 +1,23 @@
 //
-//  TradeView.swift
+//  MyHistoryCellView.swift
 //  cybexMobile
 //
-//  Created by DKM on 2018/6/12.
+//  Created by DKM on 2018/6/13.
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
 import UIKit
 
-class TradeView: UIView {
-  
+class MyHistoryCellView: UIView {
+
+  @IBOutlet weak var asset: UILabel!
+  @IBOutlet weak var typeView: UIView!
+  @IBOutlet weak var type: UILabel!
+  @IBOutlet weak var price: UILabel!
   @IBOutlet weak var amount: UILabel!
-  @IBOutlet weak var rmbPrice: UILabel!
-  @IBOutlet var sells: [UIView]!
-  @IBOutlet weak var buies: UIView!
+  @IBOutlet weak var time: UILabel!
+  @IBOutlet weak var orderPrice: UILabel!
+  
   
   var data : Any? {
     didSet{

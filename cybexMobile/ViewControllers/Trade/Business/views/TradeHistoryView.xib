@@ -24,10 +24,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bMn-o5-fVt">
-                    <rect key="frame" x="0.0" y="40" width="375" height="360"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Qz-Hc-Rl7">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                     <subviews>
@@ -37,25 +33,25 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="价格" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ky0-2r-hZx">
                                     <rect key="frame" x="0.0" y="0.0" width="94" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" name="steel50" red="0.471" green="0.506" blue="0.604" alpha="0.500" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数量" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7df-DY-2Dg">
                                     <rect key="frame" x="94" y="0.0" width="93.5" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" name="steel50" red="0.471" green="0.506" blue="0.604" alpha="0.500" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="成交额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMr-DL-Zpy">
                                     <rect key="frame" x="187.5" y="0.0" width="94" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" name="steel50" red="0.471" green="0.506" blue="0.604" alpha="0.500" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lul-ud-C8b">
                                     <rect key="frame" x="281.5" y="0.0" width="93.5" height="40"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" name="steel50" red="0.471" green="0.506" blue="0.604" alpha="0.500" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -69,8 +65,15 @@
                         <constraint firstAttribute="bottom" secondItem="nNs-Ig-AUu" secondAttribute="bottom" id="vHR-PK-gTK"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bMn-o5-fVt">
+                    <rect key="frame" x="0.0" y="40" width="375" height="360"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="VFX-4Z-CoS"/>
+                        <outlet property="delegate" destination="-1" id="umv-ox-T1W"/>
+                    </connections>
+                </tableView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="bMn-o5-fVt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="5JG-Zz-v08"/>
                 <constraint firstItem="1Qz-Hc-Rl7" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="6An-Jx-LXm"/>
@@ -85,6 +88,4 @@
             <point key="canvasLocation" x="24.5" y="52"/>
         </view>
     </objects>
-    <resources>
-    </resources>
 </document>

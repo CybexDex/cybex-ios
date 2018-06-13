@@ -32,7 +32,7 @@
                             <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数量CYB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gjz-Cn-PUK">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="数量CYB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gjz-Cn-PUK">
                             <rect key="frame" x="143.5" y="0.0" width="56.5" height="39"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
@@ -41,6 +41,7 @@
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="Gjz-Cn-PUK" secondAttribute="bottom" id="2hS-Cy-Dw8"/>
+                        <constraint firstItem="Gjz-Cn-PUK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ele-i0-I0X" secondAttribute="trailing" id="6cR-xJ-fsp"/>
                         <constraint firstAttribute="trailing" secondItem="Gjz-Cn-PUK" secondAttribute="trailing" id="IX7-Ln-ppX"/>
                         <constraint firstAttribute="bottom" secondItem="ele-i0-I0X" secondAttribute="bottom" id="JZL-VC-R5b"/>
                         <constraint firstItem="ele-i0-I0X" firstAttribute="leading" secondItem="TjC-sN-dND" secondAttribute="leading" id="QR0-vJ-vH3"/>
@@ -143,7 +144,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-24" y="14"/>
+            <point key="canvasLocation" x="-125" y="-71"/>
         </view>
     </objects>
 </document>

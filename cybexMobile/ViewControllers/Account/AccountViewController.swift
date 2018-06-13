@@ -65,7 +65,6 @@ class AccountViewController: BaseViewController {
   }
   
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -85,7 +84,6 @@ class AccountViewController: BaseViewController {
   func setupUI(){
     self.automaticallyAdjustsScrollViewInsets = false
     configRightNavButton()
-    //    balanceIntroduce.image = UIImage(named: "cloudWallet")?.tint(.steel, blendMode: .normal)
     
     self.balanceIntroduce.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self](tap) in
       

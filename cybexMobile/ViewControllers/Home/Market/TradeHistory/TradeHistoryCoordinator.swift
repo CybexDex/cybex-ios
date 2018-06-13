@@ -62,6 +62,8 @@ extension TradeHistoryCoordinator: TradeHistoryStateManagerProtocol {
   func updateMarketListHeight(_ height:CGFloat) {
     if let vc = self.rootVC.viewControllers[self.rootVC.viewControllers.count - 1] as? MarketViewController {
       vc.pageContentViewHeight.constant = height + 40
+    }else if let vc = self.rootVC.viewControllers[self.rootVC.viewControllers.count - 1] as? TradeViewController {
+      print("")
     }
   }
     

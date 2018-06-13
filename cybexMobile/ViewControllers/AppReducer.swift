@@ -146,7 +146,9 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
     if action.price.count > 0 {
       for rmbPrices in action.price{
         if rmbPrices.name == "ETH"{
-          state.eth_rmb_price = rmbPrices.rmb_price.toDouble()!
+          if rmbPrices.rmb_price != "" && rmbPrices.rmb_price != "0"{
+              state.eth_rmb_price = rmbPrices.rmb_price.toDouble()!
+          }
         }
       }
     }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TradeNavTitleView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="icon" destination="9bm-09-bDc" id="FAI-qB-FWo"/>
+                <outlet property="title" destination="rPt-BA-Dlc" id="QQp-yJ-an1"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hXI-FM-uVL">
+                    <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="CYB/ETH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPt-BA-Dlc">
+                            <rect key="frame" x="0.0" y="0.0" width="86" height="40"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icAccountBoxActive24Px" translatesAutoresizingMaskIntoConstraints="NO" id="9bm-09-bDc">
+                            <rect key="frame" x="96" y="0.0" width="24" height="40"/>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="rPt-BA-Dlc" firstAttribute="leading" secondItem="hXI-FM-uVL" secondAttribute="leading" id="89r-9G-dJ4"/>
+                        <constraint firstAttribute="trailing" secondItem="9bm-09-bDc" secondAttribute="trailing" id="eiY-2V-wEh"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="hXI-FM-uVL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PgZ-zZ-D2R"/>
+                <constraint firstItem="hXI-FM-uVL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="gNv-tA-rld"/>
+                <constraint firstItem="hXI-FM-uVL" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="gQt-GW-DG7"/>
+                <constraint firstItem="hXI-FM-uVL" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ny3-0q-AJF"/>
+                <constraint firstAttribute="trailing" secondItem="hXI-FM-uVL" secondAttribute="trailing" id="q5G-sQ-CgI"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="hXI-FM-uVL" secondAttribute="bottom" id="tLd-cz-xcr"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-16" y="-67"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icAccountBoxActive24Px" width="24" height="24"/>
+    </resources>
+</document>

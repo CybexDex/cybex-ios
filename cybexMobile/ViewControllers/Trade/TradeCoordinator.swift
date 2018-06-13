@@ -10,39 +10,46 @@ import UIKit
 import ReSwift
 
 protocol TradeCoordinatorProtocol {
+  func openMyHistory()
 }
 
 protocol TradeStateManagerProtocol {
-    var state: TradeState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<TradeState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
+  var state: TradeState { get }
+  func subscribe<SelectedState, S: StoreSubscriber>(
+    _ subscriber: S, transform: ((Subscription<TradeState>) -> Subscription<SelectedState>)?
+  ) where S.StoreSubscriberStateType == SelectedState
 }
 
 class TradeCoordinator: TradeRootCoordinator {
-    
-    lazy var creator = TradePropertyActionCreate()
-    
-    var store = Store<TradeState>(
-        reducer: TradeReducer,
-        state: nil,
-        middleware:[TrackingMiddleware]
-    )
+  
+  lazy var creator = TradePropertyActionCreate()
+  
+  var store = Store<TradeState>(
+    reducer: TradeReducer,
+    state: nil,
+    middleware:[TrackingMiddleware]
+  )
 }
 
 extension TradeCoordinator: TradeCoordinatorProtocol {
-    
+  func openMyHistory(){
+    let vc = R.storyboard.business.myHistoryViewController()!
+    let coordinator = MyHistoryCoordinator(rootVC: self.rootVC)
+    vc.coordinator = coordinator
+    self.rootVC.pushViewController(vc, animated: true)
+  }
+  
 }
 
 extension TradeCoordinator: TradeStateManagerProtocol {
-    var state: TradeState {
-        return store.state
-    }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<TradeState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-    
+  var state: TradeState {
+    return store.state
+  }
+  
+  func subscribe<SelectedState, S: StoreSubscriber>(
+    _ subscriber: S, transform: ((Subscription<TradeState>) -> Subscription<SelectedState>)?
+    ) where S.StoreSubscriberStateType == SelectedState {
+    store.subscribe(subscriber, transform: transform)
+  }
+  
 }

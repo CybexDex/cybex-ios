@@ -26,20 +26,20 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGX-tb-TTg">
-                    <rect key="frame" x="13" y="0.0" width="31" height="30"/>
+                    <rect key="frame" x="0.0" y="0.0" width="31" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoB-oh-gFo">
-                    <rect key="frame" x="324" y="0.0" width="31" height="30"/>
+                    <rect key="frame" x="331" y="0.0" width="31" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <constraints>
-                <constraint firstItem="CGX-tb-TTg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="0ma-CU-qY4"/>
+                <constraint firstItem="CGX-tb-TTg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="0ma-CU-qY4"/>
                 <constraint firstItem="uSb-Eb-mR9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="5U6-ph-a2R"/>
                 <constraint firstItem="eoB-oh-gFo" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Bsf-LP-g0i"/>
                 <constraint firstItem="CGX-tb-TTg" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Cg5-Oe-6PK"/>
@@ -47,7 +47,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="uSb-Eb-mR9" secondAttribute="trailing" id="KRf-Ml-9BQ"/>
                 <constraint firstItem="eoB-oh-gFo" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Kj1-8i-fZ5"/>
                 <constraint firstItem="CGX-tb-TTg" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="fnn-FP-dy3"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eoB-oh-gFo" secondAttribute="trailing" constant="20" id="mA9-Gr-9XY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eoB-oh-gFo" secondAttribute="trailing" constant="13" id="mA9-Gr-9XY"/>
                 <constraint firstItem="uSb-Eb-mR9" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="rCa-4V-8sN"/>
                 <constraint firstItem="uSb-Eb-mR9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="zMx-EJ-PgN"/>
             </constraints>

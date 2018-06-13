@@ -71,9 +71,10 @@ class TradeHistoryView: UIView {
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
 }
+
 extension TradeHistoryView : UITableViewDelegate,UITableViewDataSource{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    return (self.data?.count)! / 2
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

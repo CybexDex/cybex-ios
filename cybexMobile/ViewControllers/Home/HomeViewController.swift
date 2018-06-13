@@ -44,10 +44,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     setupUI()
     
     handlerUpdateVersion(nil)
-    
-//    BitShareCoordinator.getUserKeys("cybex", password: "s")
-//    let str = BitShareCoordinator.getLimitOrder(2735339, block_id: "0029bcebc212447e1a5b8d1fbd6b0574f14aac55", expiration: 1527868265, chain_id: "90be01e82b981c8f201c9a78a3d31f655743b29ff3274727b1439b093d04aa23", user_id: 31098, order_expiration: 1527898265, asset_id: 0, amount: 100000, receive_asset_id: 2, receive_amount: 10, fee_id: 0, fee_amount: 0)
-    
   }
   
   func setupUI() {    
@@ -60,8 +56,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     
     let cell = String.init(describing: HomePairCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
-    
-//    let sectionHeader = String.init(descripti)
     
   }
   

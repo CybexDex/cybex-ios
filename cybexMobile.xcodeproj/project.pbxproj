@@ -76,6 +76,17 @@
 		72C5738A20CFAAD3005ABFA5 /* TradeLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C5738920CFAAD3005ABFA5 /* TradeLineView.xib */; };
 		72C5739020CFBCCD005ABFA5 /* TradeHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C5738F20CFBCCD005ABFA5 /* TradeHistoryView.swift */; };
 		72C5739220CFBCD7005ABFA5 /* TradeHistoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C5739120CFBCD7005ABFA5 /* TradeHistoryView.xib */; };
+		72C573A520CFE493005ABFA5 /* CybexTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C573A420CFE492005ABFA5 /* CybexTitleView.swift */; };
+		72C573A820CFE970005ABFA5 /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C573A720CFE970005ABFA5 /* TradeNavTitleView.swift */; };
+		72C573AA20CFE979005ABFA5 /* TradeNavTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C573A920CFE979005ABFA5 /* TradeNavTitleView.xib */; };
+		72C573B020D0F012005ABFA5 /* MyHistoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C573AC20D0F012005ABFA5 /* MyHistoryCoordinator.swift */; };
+		72C573B120D0F012005ABFA5 /* MyHistoryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C573AD20D0F012005ABFA5 /* MyHistoryActions.swift */; };
+		72C573B220D0F012005ABFA5 /* MyHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C573AE20D0F012005ABFA5 /* MyHistoryViewController.swift */; };
+		72C573B320D0F012005ABFA5 /* MyHistoryReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C573AF20D0F012005ABFA5 /* MyHistoryReducers.swift */; };
+		72C573B920D0F992005ABFA5 /* MyHistoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C573B820D0F992005ABFA5 /* MyHistoryCellView.swift */; };
+		72C573BC20D0F9AF005ABFA5 /* MyHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C573BA20D0F9AF005ABFA5 /* MyHistoryCell.swift */; };
+		72C573BD20D0F9AF005ABFA5 /* MyHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C573BB20D0F9AF005ABFA5 /* MyHistoryCell.xib */; };
+		72C573BF20D0FB2F005ABFA5 /* MyHistoryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72C573BE20D0FB2F005ABFA5 /* MyHistoryCellView.xib */; };
 		72F31DD320C67BAC00A31EAA /* RechargeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F31DCF20C67BAC00A31EAA /* RechargeCoordinator.swift */; };
 		72F31DD420C67BAC00A31EAA /* RechargeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F31DD020C67BAC00A31EAA /* RechargeActions.swift */; };
 		72F31DD520C67BAC00A31EAA /* RechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F31DD120C67BAC00A31EAA /* RechargeViewController.swift */; };
@@ -460,6 +471,17 @@
 		72C5738920CFAAD3005ABFA5 /* TradeLineView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TradeLineView.xib; sourceTree = "<group>"; };
 		72C5738F20CFBCCD005ABFA5 /* TradeHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeHistoryView.swift; sourceTree = "<group>"; };
 		72C5739120CFBCD7005ABFA5 /* TradeHistoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TradeHistoryView.xib; sourceTree = "<group>"; };
+		72C573A420CFE492005ABFA5 /* CybexTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybexTitleView.swift; sourceTree = "<group>"; };
+		72C573A720CFE970005ABFA5 /* TradeNavTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeNavTitleView.swift; sourceTree = "<group>"; };
+		72C573A920CFE979005ABFA5 /* TradeNavTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TradeNavTitleView.xib; sourceTree = "<group>"; };
+		72C573AC20D0F012005ABFA5 /* MyHistoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHistoryCoordinator.swift; sourceTree = "<group>"; };
+		72C573AD20D0F012005ABFA5 /* MyHistoryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHistoryActions.swift; sourceTree = "<group>"; };
+		72C573AE20D0F012005ABFA5 /* MyHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHistoryViewController.swift; sourceTree = "<group>"; };
+		72C573AF20D0F012005ABFA5 /* MyHistoryReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHistoryReducers.swift; sourceTree = "<group>"; };
+		72C573B820D0F992005ABFA5 /* MyHistoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHistoryCellView.swift; sourceTree = "<group>"; };
+		72C573BA20D0F9AF005ABFA5 /* MyHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHistoryCell.swift; sourceTree = "<group>"; };
+		72C573BB20D0F9AF005ABFA5 /* MyHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyHistoryCell.xib; sourceTree = "<group>"; };
+		72C573BE20D0FB2F005ABFA5 /* MyHistoryCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyHistoryCellView.xib; sourceTree = "<group>"; };
 		72F31DCF20C67BAC00A31EAA /* RechargeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeCoordinator.swift; sourceTree = "<group>"; };
 		72F31DD020C67BAC00A31EAA /* RechargeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeActions.swift; sourceTree = "<group>"; };
 		72F31DD120C67BAC00A31EAA /* RechargeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeViewController.swift; sourceTree = "<group>"; };
@@ -12151,13 +12173,55 @@
 		72C5737620CFA331005ABFA5 /* Trade */ = {
 			isa = PBXGroup;
 			children = (
+				72C573AB20D0EFE0005ABFA5 /* Myhistory */,
 				7265CFBB20CE4A42005DEB7F /* Business */,
 				72C5737720CFA35E005ABFA5 /* TradeCoordinator.swift */,
 				72C5737820CFA35E005ABFA5 /* TradeActions.swift */,
 				72C5737920CFA35E005ABFA5 /* TradeViewController.swift */,
 				72C5737A20CFA35E005ABFA5 /* TradeReducers.swift */,
+				72C573A620CFE959005ABFA5 /* Views */,
 			);
 			path = Trade;
+			sourceTree = "<group>";
+		};
+		72C573A620CFE959005ABFA5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72C573A720CFE970005ABFA5 /* TradeNavTitleView.swift */,
+				72C573A920CFE979005ABFA5 /* TradeNavTitleView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		72C573AB20D0EFE0005ABFA5 /* Myhistory */ = {
+			isa = PBXGroup;
+			children = (
+				72C573B520D0F961005ABFA5 /* Cells */,
+				72C573B420D0F957005ABFA5 /* Views */,
+				72C573AC20D0F012005ABFA5 /* MyHistoryCoordinator.swift */,
+				72C573AD20D0F012005ABFA5 /* MyHistoryActions.swift */,
+				72C573AE20D0F012005ABFA5 /* MyHistoryViewController.swift */,
+				72C573AF20D0F012005ABFA5 /* MyHistoryReducers.swift */,
+			);
+			path = Myhistory;
+			sourceTree = "<group>";
+		};
+		72C573B420D0F957005ABFA5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72C573B820D0F992005ABFA5 /* MyHistoryCellView.swift */,
+				72C573BE20D0FB2F005ABFA5 /* MyHistoryCellView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		72C573B520D0F961005ABFA5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				72C573BA20D0F9AF005ABFA5 /* MyHistoryCell.swift */,
+				72C573BB20D0F9AF005ABFA5 /* MyHistoryCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		72F31DCD20C67B5800A31EAA /* Recharge */ = {
@@ -31837,6 +31901,7 @@
 			isa = PBXGroup;
 			children = (
 				72C5732320CF8010005ABFA5 /* Alert */,
+				72C573A420CFE492005ABFA5 /* CybexTitleView.swift */,
 				7324A91820AB01FA005BCFF8 /* GradientLayer.swift */,
 				724A2A6B20B41B5500E28438 /* GradientLabelView.swift */,
 				73F58FC820AC04EF008A1F79 /* Button.swift */,
@@ -32064,6 +32129,7 @@
 				730FDA5F20A314F600CFBF24 /* cerrno in Resources */,
 				730FDAA220A314F900CFBF24 /* new.SUNWCCh in Resources */,
 				72C30C8420AA8DAD00F4DCEC /* LockupAssetsCell.xib in Resources */,
+				72C573AA20CFE979005ABFA5 /* TradeNavTitleView.xib in Resources */,
 				730FDABD20A314F900CFBF24 /* utility in Resources */,
 				730FDA6120A314F600CFBF24 /* climits in Resources */,
 				730FDA7E20A314F900CFBF24 /* locale in Resources */,
@@ -32114,6 +32180,7 @@
 				730FDA9420A314F900CFBF24 /* deque.SUNWCCh in Resources */,
 				730FDA7B20A314F900CFBF24 /* iterator in Resources */,
 				730FDABA20A314F900CFBF24 /* typeinfo in Resources */,
+				72C573BD20D0F9AF005ABFA5 /* MyHistoryCell.xib in Resources */,
 				730FDA6720A314F600CFBF24 /* cstddef in Resources */,
 				730FDA9520A314F900CFBF24 /* exception.SUNWCCh in Resources */,
 				73B44E5B2057ECD900759863 /* PairDetailView.xib in Resources */,
@@ -32131,6 +32198,7 @@
 				730FDA8920A314F900CFBF24 /* stack in Resources */,
 				72F6DF1920AC1C1200BBF105 /* Account.storyboard in Resources */,
 				730FDAA420A314F900CFBF24 /* ostream.SUNWCCh in Resources */,
+				72C573BF20D0FB2F005ABFA5 /* MyHistoryCellView.xib in Resources */,
 				7265CFC520CE4A96005DEB7F /* Business.storyboard in Resources */,
 				730FDA7D20A314F900CFBF24 /* list in Resources */,
 				730FDA9820A314F900CFBF24 /* iomanip.SUNWCCh in Resources */,
@@ -32396,6 +32464,7 @@
 				73F58FC920AC04EF008A1F79 /* Button.swift in Sources */,
 				7320D6A1205B9A8B00C3F579 /* CBKLineView.swift in Sources */,
 				73D977EB20565EFD00CB7DE1 /* BaseNavigationController.swift in Sources */,
+				72C573B320D0F012005ABFA5 /* MyHistoryReducers.swift in Sources */,
 				72889EEC20A996E0007D9E7A /* OpenedOrdersView.swift in Sources */,
 				73D977A2205657CE00CB7DE1 /* Constants.swift in Sources */,
 				733557D42052642800C5ADD4 /* AppDelegate.swift in Sources */,
@@ -32498,7 +32567,9 @@
 				72C100FC20A984F70059FEE8 /* OpenedOrdersViewController.swift in Sources */,
 				721F5C6C20AAE7C80042488F /* LockupAssetsSectionView.swift in Sources */,
 				73BDCA4C206269A7009E67A3 /* Tools.swift in Sources */,
+				72C573BC20D0F9AF005ABFA5 /* MyHistoryCell.swift in Sources */,
 				73E9AB9620B553700083DFD6 /* UIViewController+Extension.swift in Sources */,
+				72C573A520CFE493005ABFA5 /* CybexTitleView.swift in Sources */,
 				73D63496206208D8000EB324 /* JsonRPCGenerator.swift in Sources */,
 				73A0CC2F2068EB5E00463ADE /* AppCoordinator+StateManager.swift in Sources */,
 				73D34E452063A675008C7507 /* AccountViewController.swift in Sources */,
@@ -32526,9 +32597,12 @@
 				731A0EA220A440A700507D1E /* EntryRootCoordinator.swift in Sources */,
 				73E49E352079FFAF003B14D2 /* OrderBookReducers.swift in Sources */,
 				73A2937720AAED3F00893053 /* RegisterActions.swift in Sources */,
+				72C573A820CFE970005ABFA5 /* TradeNavTitleView.swift in Sources */,
 				73D34E502063C4C5008C7507 /* Optional+Extensions.swift in Sources */,
 				7265CFC220CE4A71005DEB7F /* BusinessViewController.swift in Sources */,
 				73A2937120AA855100893053 /* Localization_Extensions.swift in Sources */,
+				72C573B920D0F992005ABFA5 /* MyHistoryCellView.swift in Sources */,
+				72C573B220D0F012005ABFA5 /* MyHistoryViewController.swift in Sources */,
 				73D634692062009C000EB324 /* NetworkService.swift in Sources */,
 				73D9789D20579EE200CB7DE1 /* MarketCoordinator.swift in Sources */,
 				73D977E420565EA600CB7DE1 /* FAQRootCoordinator.swift in Sources */,
@@ -32541,6 +32615,7 @@
 				7229265520C9333E0066E2A3 /* CybexLabel.swift in Sources */,
 				73D34E4E2063A697008C7507 /* SettingViewController.swift in Sources */,
 				73ACD80720721B5E00592E69 /* SettingDetailActions.swift in Sources */,
+				72C573B020D0F012005ABFA5 /* MyHistoryCoordinator.swift in Sources */,
 				72F31DD320C67BAC00A31EAA /* RechargeCoordinator.swift in Sources */,
 				72C30C8A20AAAF7700F4DCEC /* LockupProgressView.swift in Sources */,
 				73D34E4B2063A697008C7507 /* SettingActions.swift in Sources */,
@@ -32551,6 +32626,7 @@
 				73E49E292078C17A003B14D2 /* AccessoryCollectionView.swift in Sources */,
 				73A2937920AAED3F00893053 /* RegisterReducers.swift in Sources */,
 				73E6B3B42091A81F00B015E5 /* SimpleHTTPService.swift in Sources */,
+				72C573B120D0F012005ABFA5 /* MyHistoryActions.swift in Sources */,
 				72F8C77920B009B100454187 /* HomeTitleView.swift in Sources */,
 				731A0EA020A4409900507D1E /* EntryViewController.swift in Sources */,
 				73DF25B420C53D9300A0D00F /* vote.cpp in Sources */,
