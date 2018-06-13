@@ -20,12 +20,14 @@ class CBKLineView: UIView {
     didSet {
       refreshAccessoryHorizentalView(indicator)
       klineDrawView.switchToAccessory(indicator == .macd)
+      klineDrawView.removeIndicatorLine()
     }
   }
   
   var timeGap:candlesticks = .one_day {
     didSet {
       timeGapView.switchButton(candlesticks.all.index(of: timeGap)!)
+      klineDrawView.removeIndicatorLine()
     }
   }
 

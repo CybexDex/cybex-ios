@@ -327,7 +327,7 @@ extension MarketViewController {
     if let indicator = data["indicator"] as? indicator {
       self.indicator = indicator
       kLineView.indicator = indicator
-      
+
       startLoading()
       fetchKlineData()
     }

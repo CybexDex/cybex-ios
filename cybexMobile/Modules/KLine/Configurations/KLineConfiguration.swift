@@ -117,11 +117,11 @@ protocol CBTheme {
     var tickWidth: CGFloat { get }
 
     /// 刻度线颜色
-    var tickColor: UIColor { get }
+    var tickColor: UIColor { get set }
 
     var dashWidth: CGFloat { get }
 
-    var dashColor: UIColor { get }
+    var dashColor: UIColor { get set }
 
     // MARK: 指标颜色
 
@@ -168,7 +168,7 @@ public class CBMainConfiguration {
     var klineType: CBKLineType = .KLine
 
     /// 主图指标类型
-    var indicatorType: CBIndicatorType = .MA([7, 14, 21])
+    var indicatorType: CBIndicatorType = .MA([7, 25, 99])
 
     /// 辅助视图背景色(e.g. 日期的背景色)
     var dateAssistViewBgColor = #colorLiteral(red: 0.08267984539, green: 0.1148783937, blue: 0.1728201807, alpha: 1)
@@ -209,11 +209,11 @@ class BlackKLineTheme: CBTheme {
 
     var longPressLineColor: UIColor = #colorLiteral(red: 0.9689999819, green: 0.97299999, blue: 0.9800000191, alpha: 1)
 
-    var longPressLineWidth: CGFloat = 1
+    var longPressLineWidth: CGFloat = 0.5
 
     var tickWidth: CGFloat = 1
 
-    var tickColor: UIColor = #colorLiteral(red: 0.9999966025, green: 0.9999999404, blue: 0.9999999404, alpha: 0.03843206092)
+    var tickColor: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
 
     var dashWidth: CGFloat = 1
 

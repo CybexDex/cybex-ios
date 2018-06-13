@@ -89,7 +89,7 @@ class CBKLineMainView: UIView {
 
         // 绘制提示数据
 //    fetchAssistString(model: nil)
-        drawAssistString?.draw(in: CGRect(x: 10, y: configuration.main.dateAssistViewHeight, width: width - 20, height: configuration.main.assistViewHeight))
+        drawAssistString?.draw(in: CGRect(x: 10, y: 0, width: width - 20, height: configuration.main.assistViewHeight))
 
         let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
 
@@ -221,25 +221,31 @@ extension CBKLineMainView {
             dateString = dateString.components(separatedBy: " ")[1]
         }
 
-        let dateAttributes: [NSAttributedStringKey: Any]? = [
-          NSAttributedStringKey.foregroundColor: focusModel == nil ? configuration.main.dateAssistTextColor : configuration.theme.longPressLineColor,
-            NSAttributedStringKey.font: configuration.main.dateAssistTextFont,
+        var dateAttributes: [NSAttributedStringKey: Any]? = [
+            NSAttributedStringKey.foregroundColor: configuration.main.dateAssistTextColor,
+            NSAttributedStringKey.font: configuration.main.dateAssistTextFont
         ]
+     
+        if let model = focusModel {
+          if model.propertyDescription() != klineModel.propertyDescription() {
+            return
+          }
+          else {
+            dateAttributes![NSAttributedStringKey.backgroundColor] = configuration.theme.longPressLineColor
+            dateAttributes![NSAttributedStringKey.foregroundColor] = configuration.theme.dashColor
+          }
+        }
 
+      
         let dateAttrString = NSAttributedString(string: dateString, attributes: dateAttributes)
 
         let drawDatePoint = CGPoint(x: positionX - dateAttrString.size().width * 0.5,
-                                    y: 0)
+                                    y: configuration.main.assistViewHeight)
 
         if drawDatePoint.x < 0 || (drawDatePoint.x + dateAttrString.size().width) > bounds.width {
             return
         }
       
-        if let model = focusModel {
-          if model.propertyDescription() != klineModel.propertyDescription() {
-            return
-          }
-        }
 
         if lastDrawDatePoint.equalTo(CGPoint.zero) ||
             abs(drawDatePoint.x - lastDrawDatePoint.x) > (dateAttrString.size().width * 2) {
@@ -250,11 +256,15 @@ extension CBKLineMainView {
 
             dateAttrString.draw(in: rect)
 
+          
+          if focusModel == nil {
             context.setStrokeColor(configuration.theme.tickColor.cgColor)
             context.setLineWidth(configuration.theme.tickWidth)
-            context.strokeLineSegments(between: [CGPoint(x: drawDatePoint.x + dateAttrString.size().width / 2, y: 14), CGPoint(x: drawDatePoint.x + dateAttrString.size().width / 2, y: height)])
-
+            context.strokeLineSegments(between: [CGPoint(x: drawDatePoint.x + dateAttrString.size().width / 2, y: configuration.main.assistViewHeight + configuration.main.dateAssistViewHeight), CGPoint(x: drawDatePoint.x + dateAttrString.size().width / 2, y: height)])
+            
             lastDrawDatePoint = drawDatePoint
+          }
+          
         }
     }
 

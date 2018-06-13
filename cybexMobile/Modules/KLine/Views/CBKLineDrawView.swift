@@ -20,7 +20,8 @@ class CBKLineDrawView: UIView {
     fileprivate var mainView: CBKLineMainView!
     fileprivate var volumeView: CBKLineVolumeView!
     fileprivate var accessoryView: CBKLineAccessoryView!
-
+  
+    fileprivate var indicatorVolumeLabel:UILabel!
     fileprivate var indicatorVerticalView: UIView!
     fileprivate var indicatorHorizontalView: UIView!
 
@@ -140,11 +141,11 @@ extension CBKLineDrawView {
     }
 
     fileprivate func loadingSubviews() {
-      loadingIndicator()
 
         loadingAccessoryView()
         loadingVolumeView()
         loadingMainView()
+        loadingIndicator()
 
     }
 
@@ -190,8 +191,6 @@ extension CBKLineDrawView {
         accessoryView.backgroundColor = UIColor.clear
 
         accessoryView.limitValueChanged = { (_: (minValue: Double, maxValue: Double)?) -> Void in
-//      if let limitValue = limitValue {
-//      }
         }
         addSubview(accessoryView)
         accessoryView.bottom(to: self)
@@ -204,23 +203,34 @@ extension CBKLineDrawView {
         /// 指示器
         indicatorVerticalView = UIView()
         indicatorVerticalView.isHidden = true
-        indicatorVerticalView.backgroundColor = configuration.theme.longPressLineColor
         addSubview(indicatorVerticalView)
 
         verticalLeft = indicatorVerticalView.left(to: self, offset: 0)
         indicatorVerticalView.width(configuration.theme.longPressLineWidth)
-        indicatorVerticalView.top(to: self, offset: configuration.main.dateAssistViewHeight)
+        indicatorVerticalView.top(to: self, offset: configuration.main.dateAssistViewHeight + configuration.main.assistViewHeight)
         indicatorVerticalView.bottom(to: self)
-
+      
         indicatorHorizontalView = UIView()
         indicatorHorizontalView.isHidden = true
-        indicatorHorizontalView.backgroundColor = configuration.theme.longPressLineColor
         addSubview(indicatorHorizontalView)
 
         indicatorHorizontalView.left(to: self)
         indicatorHorizontalView.height(configuration.theme.longPressLineWidth)
         indicatorHorizontalView.right(to: self)
         horizantalTop = indicatorHorizontalView.top(to: self, offset: 0)
+      
+      
+      indicatorVolumeLabel = UILabel()
+      indicatorVolumeLabel.isHidden = true
+
+      indicatorVolumeLabel.backgroundColor = configuration.theme.longPressLineColor
+      indicatorVolumeLabel.textColor = configuration.theme.dashColor
+      indicatorVolumeLabel.font = configuration.main.dateAssistTextFont
+      
+      addSubview(indicatorVolumeLabel)
+      indicatorVolumeLabel.left(to: indicatorHorizontalView)
+      indicatorVolumeLabel.centerY(to: indicatorHorizontalView)
+      
     }
 }
 
@@ -326,6 +336,10 @@ extension CBKLineDrawView {
             /// 显示十字线
             indicatorVerticalView.isHidden = false
             indicatorHorizontalView.isHidden = false
+            if indicatorVerticalView.layer.sublayers == nil {
+              addDashLine()
+            }
+          
 
             var drawModel: CBKLineModel?
 
@@ -353,7 +367,9 @@ extension CBKLineDrawView {
                 let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(mainView.drawHeight)
 
                 horizantalTop.constant = abs(mainView.drawMaxY - CGFloat((model.close - limitValue.minValue) / unitValue))
-
+                indicatorVolumeLabel.isHidden = false
+                indicatorVolumeLabel.text = model.close.string(digits: model.precision)
+              
                 mainView.fetchAssistString(model: model)
                 mainView.focusModel = model
                 mainView.setNeedsDisplay()
@@ -374,10 +390,41 @@ extension CBKLineDrawView {
   @objc func removeIndicatorLine() {
     self.indicatorVerticalView.isHidden = true
     self.indicatorHorizontalView.isHidden = true
+    self.indicatorVolumeLabel.isHidden = true
+    self.indicatorVolumeLabel.text = ""
     self.mainView.focusModel = nil
     self.mainView.fetchAssistString(model: nil)
     self.mainView.setNeedsDisplay()
     NotificationCenter.default.post(name: .SpecialPairDidCanceled, object: nil, userInfo: nil)
+  }
+  
+  func addDashLine() {
+    let ver_layer = CAShapeLayer()
+    ver_layer.fillColor = UIColor.white.cgColor
+    ver_layer.strokeColor = configuration.theme.longPressLineColor.cgColor
+    ver_layer.lineWidth = configuration.theme.longPressLineWidth
+    ver_layer.lineDashPattern = [3, 3]
+    ver_layer.frame = indicatorVerticalView.bounds
+    let ver_path = UIBezierPath()
+    ver_path.move(to: CGPoint(x: 0, y: 0))
+    ver_path.addLine(to: CGPoint(x: 0, y: indicatorVerticalView.bounds.size.height))
+    ver_layer.path = ver_path.cgPath
+    
+    indicatorVerticalView.layer.addSublayer(ver_layer)
+
+    let hor_layer = CAShapeLayer()
+    hor_layer.fillColor = UIColor.white.cgColor
+    hor_layer.strokeColor = configuration.theme.longPressLineColor.cgColor
+    hor_layer.lineWidth = configuration.theme.longPressLineWidth
+    hor_layer.lineDashPattern = [3, 3]
+    hor_layer.frame = indicatorVerticalView.bounds
+    let hor_path = UIBezierPath()
+    hor_path.move(to: CGPoint(x: 0, y: 0))
+    hor_path.addLine(to: CGPoint(x: indicatorHorizontalView.bounds.size.width, y: 0))
+    hor_layer.path = hor_path.cgPath
+    
+    indicatorHorizontalView.layer.addSublayer(hor_layer)
+
   }
 }
 

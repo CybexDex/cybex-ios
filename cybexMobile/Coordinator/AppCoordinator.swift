@@ -88,6 +88,9 @@ class AppCoordinator {
       CBConfiguration.sharedConfiguration.themeIndex = ThemeManager.currentThemeIndex
       CBConfiguration.sharedConfiguration.main.valueAssistTextColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1) : #colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1)
       CBConfiguration.sharedConfiguration.theme.longPressLineColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1) : #colorLiteral(red: 0.1058823529, green: 0.1333333333, blue: 0.1882352941, alpha: 1)
+      CBConfiguration.sharedConfiguration.theme.tickColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.4470588235, green: 0.5843137255, blue: 0.9921568627, alpha: 0.06) : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.04)
+      CBConfiguration.sharedConfiguration.theme.dashColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.white
+
     })
   }
   
