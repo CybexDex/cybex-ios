@@ -75,6 +75,7 @@ def ui
     pod 'Presentr'
     pod 'Macaw'
     pod 'SwiftEntryKit'
+    pod 'Keyboard+LayoutGuide'
 end
 
 def other

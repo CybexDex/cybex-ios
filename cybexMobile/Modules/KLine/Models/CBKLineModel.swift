@@ -30,6 +30,8 @@ class CBKLineModel: ObjectDescriptable {
   var low: Double
   // 成交量
   var volume: Double
+  // 成交量
+  var towardsVolume: Double
   
   // MARK: 指标
   // 该model以及之前所有开盘价之和
@@ -94,6 +96,7 @@ class CBKLineModel: ObjectDescriptable {
        close: Double,
        high: Double,
        low: Double,
+       towardsVolume:Double,
        volume: Double,
        precision: Int) {
     
@@ -104,7 +107,7 @@ class CBKLineModel: ObjectDescriptable {
     self.high = high
     self.low = low
     self.volume = volume
-    
+    self.towardsVolume = towardsVolume
     self.precision = precision
   }
 }

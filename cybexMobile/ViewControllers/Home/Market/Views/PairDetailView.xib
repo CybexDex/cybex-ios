@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,8 +15,10 @@
                 <outlet property="baseVolume" destination="wUP-Zp-G2Q" id="n44-bB-adv"/>
                 <outlet property="bulking" destination="4tL-70-xwn" id="oT2-CT-JQr"/>
                 <outlet property="bulkingIcon" destination="1cc-zy-VLA" id="fLf-6e-wvh"/>
+                <outlet property="closeLabel" destination="TVQ-NZ-nrt" id="IQE-Vt-iaV"/>
                 <outlet property="highLabel" destination="EES-CT-zlS" id="XYC-ez-1BF"/>
                 <outlet property="lowLabel" destination="hkD-bz-ook" id="Rkp-oY-GOW"/>
+                <outlet property="openLabel" destination="zla-XZ-NPL" id="Ffi-IL-sJ4"/>
                 <outlet property="price" destination="FfI-7t-UPM" id="reC-Jf-OYu"/>
                 <outlet property="quoteVolume" destination="3q0-v6-v4p" id="hh3-BI-wYc"/>
             </connections>
@@ -147,19 +149,23 @@
                                 <constraint firstAttribute="height" constant="42" id="h6s-yd-byL"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zla-XZ-NPL">
-                            <rect key="frame" x="0.0" y="42" width="125" height="50"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zla-XZ-NPL">
+                            <rect key="frame" x="0.0" y="42" width="125" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.39560639860000002" green="0.42749041319999997" blue="0.53351551289999999" alpha="0.4961647689" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVQ-NZ-nrt">
-                            <rect key="frame" x="0.0" y="92" width="125" height="0.0"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVQ-NZ-nrt">
+                            <rect key="frame" x="0.0" y="42" width="125" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" red="0.39560639860000002" green="0.42749041319999997" blue="0.53351551289999999" alpha="0.4961647689" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.396078431372549" green="0.42745098039215684" blue="0.53333333333333333" alpha="0.49616476893424988" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="bA4-Op-Hr8" firstAttribute="trailing" secondItem="zla-XZ-NPL" secondAttribute="trailing" id="80i-2S-ckp"/>
+                        <constraint firstItem="bA4-Op-Hr8" firstAttribute="trailing" secondItem="TVQ-NZ-nrt" secondAttribute="trailing" id="b9p-S3-f1u"/>
+                    </constraints>
                     <viewLayoutGuide key="safeArea" id="bA4-Op-Hr8"/>
                 </stackView>
             </subviews>

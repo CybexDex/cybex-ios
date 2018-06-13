@@ -6,48 +6,55 @@
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
-import UIKit
-import ReSwift
 import BigInt
 import DNSPageView
-import SwiftTheme
 import Localize_Swift
+import ReSwift
 import RxSwift
+import SwiftTheme
+import UIKit
+
+extension NSNotification.Name {
+  static let SpecialPairDidClicked = Notification.Name("SpecialPairDidClicked")
+  static let SpecialPairDidCanceled = Notification.Name("SpecialPairDidCanceled")
+  
+}
 
 class MarketViewController: BaseViewController {
-  @IBOutlet weak var pageTitleView: DNSPageTitleView!
-  @IBOutlet weak var pageContentView: DNSPageContentView!
-
-  @IBOutlet weak var pageContentViewHeight: NSLayoutConstraint!
-  @IBOutlet weak var scrollView: UIScrollView!
+  @IBOutlet var pageTitleView: DNSPageTitleView!
+  @IBOutlet var pageContentView: DNSPageContentView!
   
-
-  @IBOutlet weak var pairListView: PairListHorizantalView!
+  @IBOutlet var pageContentViewHeight: NSLayoutConstraint!
+  @IBOutlet var scrollView: UIScrollView!
   
-  @IBOutlet weak var detailView: PairDetailView!
-  @IBOutlet weak var kLineView: CBKLineView!
+  @IBOutlet var pairListView: PairListHorizantalView!
   
-    @IBOutlet weak var marketDetailView: PairDetailView!
-    
-  var currentBaseIndex:Int = 0
+  @IBOutlet var detailView: PairDetailView!
+  @IBOutlet var kLineView: CBKLineView!
   
-  var timeGap:candlesticks = .one_day {
+  @IBOutlet var marketDetailView: PairDetailView!
+  
+  var currentBaseIndex: Int = 0
+  var kLineSpecial = false
+  
+  var timeGap: candlesticks = .one_day {
     didSet {
       kLineView.timeGap = timeGap
+      CBConfiguration.sharedConfiguration.main.timeLineType = CBTimeLineType(rawValue: Int(timeGap.rawValue))!
     }
   }
   
-  var resetKLinePosition:Bool = true
+  var resetKLinePosition: Bool = true
   
-  var indicator:indicator = .ma {
+  var indicator: indicator = .ma {
     didSet {
       switch indicator {
       case .ma:
         CBConfiguration.sharedConfiguration.main.indicatorType = .MA([7, 14, 21])
-
+        
       case .ema:
         CBConfiguration.sharedConfiguration.main.indicatorType = .EMA([7, 14])
-
+        
       case .macd:
         CBConfiguration.sharedConfiguration.main.indicatorType = .MACD
         self.pageContentViewHeight.constant = 300
@@ -56,45 +63,59 @@ class MarketViewController: BaseViewController {
       case .none:
         break
       }
-    
     }
   }
   
-  var curIndex:Int = 0
+  var curIndex: Int = 0
   var coordinator: (MarketCoordinatorProtocol & MarketStateManagerProtocol)?
   
-  lazy var pair:Pair = {
-    return Pair(base: self.homeBucket.base, quote: self.homeBucket.quote)
+  lazy var pair: Pair = {
+    Pair(base: self.homeBucket.base, quote: self.homeBucket.quote)
   }()
   
-  lazy var homeBucket:HomeBucket = {
+  lazy var homeBucket: HomeBucket = {
     let market = self.buckets[self.curIndex]
     return market
   }()
   
-  lazy var buckets:[HomeBucket] = {
+  lazy var buckets: [HomeBucket] = {
     let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex])
     return markets
   }()
-
-	override func viewDidLoad() {
+  
+  override func viewDidLoad() {
     super.viewDidLoad()
-//    self.localized_text = R.string.localizable.market.key.localizedContainer()
+    setupNotificatin()
+    
     let quote_name = homeBucket.quote_info.symbol.filterJade
     let base_name = homeBucket.base_info.symbol.filterJade
     
-    self.title = quote_name + "/" + base_name
-    self.view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
+    title = quote_name + "/" + base_name
+    view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
     automaticallyAdjustsScrollViewInsets = false
-        self.marketDetailView.base_name = base_name
-        self.marketDetailView.quote_name = quote_name
-        
+    marketDetailView.base_name = base_name
+    marketDetailView.quote_name = quote_name
+    
     configLeftNavButton(nil)
     setupPageView()
-
+    
     startLoading()
     refreshDetailView()
     fetchKlineData()
+  }
+  
+  func setupNotificatin() {
+    NotificationCenter.default.addObserver(forName: .SpecialPairDidClicked, object: nil, queue: nil) {[weak self] (notifi) in
+      guard let `self` = self else { return }
+      self.kLineSpecial = true
+      self.detailView.data = notifi.userInfo?["klineModel"]
+    }
+    
+    NotificationCenter.default.addObserver(forName: .SpecialPairDidCanceled, object: nil, queue: nil) {[weak self] (notifi) in
+      guard let `self` = self else { return }
+      self.kLineSpecial = false
+      self.refreshDetailView()
+    }
   }
   
   func setupPageView() {
@@ -108,7 +129,6 @@ class MarketViewController: BaseViewController {
     style.titleSelectedColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : #colorLiteral(red: 0.1399003565, green: 0.1798574626, blue: 0.2467218637, alpha: 1)
     style.titleFontSize = 14
     
-
     // 设置标题内容
     let titles = Localize.currentLanguage() == "en" ? ["Order Book", "Trade History"] : ["买卖单", "交易历史"]
     
@@ -123,9 +143,8 @@ class MarketViewController: BaseViewController {
     // 最后要调用setupUI方法
     pageTitleView.setupUI()
     
-    
     // 创建每一页对应的controller
-  
+    
     let childViewControllers: [BaseViewController] = coordinator!.setupChildViewControllers(pair)
     
     // 对contentView进行设置
@@ -148,24 +167,23 @@ class MarketViewController: BaseViewController {
     pairListView.data = [self.curIndex, self.buckets]
   }
   
-  func refreshView(_ hiddenKLine:Bool = true) {
-    self.refreshDetailView()
+  func refreshView(_ hiddenKLine: Bool = true) {
+    refreshDetailView()
     fetchKlineData(hiddenKLine)
-
-
-    self.coordinator?.refreshChildViewController(pageContentView.childViewControllers as! [BaseViewController], pair: pair)
+    
+    coordinator?.refreshChildViewController(pageContentView.childViewControllers as! [BaseViewController], pair: pair)
   }
   
-  func fetchKlineData(_ hiddenKLine:Bool = true) {
-    self.kLineView.isHidden = hiddenKLine
-
+  func fetchKlineData(_ hiddenKLine: Bool = true) {
+    kLineView.isHidden = hiddenKLine
+    
     resetKLinePosition = hiddenKLine
     AppConfiguration.shared.appCoordinator.requestKlineDetailData(pair: pair, gap: timeGap, vc: self, selector: #selector(refreshKLine))
   }
   
   func updateIndex() {
-    let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).map( { Pair(base: $0.base, quote: $0.quote) })
-    self.curIndex = markets.index(of: pair)!
+    let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).map({ Pair(base: $0.base, quote: $0.quote) })
+    curIndex = markets.index(of: pair)!
     homeBucket = buckets[self.curIndex]
     pair = markets[self.curIndex]
   }
@@ -177,93 +195,88 @@ class MarketViewController: BaseViewController {
     }
     
     if let klineDatas = app_data.detailData, let klineData = klineDatas[pair] {
-     
       guard let response = klineData[timeGap] else {
         endLoading()
         return
       }
       
       endLoading()
-      self.kLineView.isHidden = false
-
+      kLineView.isHidden = false
+      
       var dataArray = [CBKLineModel]()
       for (_, data) in response.enumerated() {
         let base_assetid = pair.base
         let quote_assetid = pair.quote
-
+        
         let is_base = data.base == base_assetid
-
+        
         let base_info = app_data.assetInfo[base_assetid]!
         let quote_info = app_data.assetInfo[quote_assetid]!
-
+        
         let base_precision = pow(10, base_info.precision.double)
         let quote_precision = pow(10, quote_info.precision.double)
-
         
-        var open_price = (Double(data.open_base)! / base_precision)  / (Double(data.open_quote)! / quote_precision)
-        var close_price = (Double(data.close_base)! / base_precision)  / (Double(data.close_quote)! / quote_precision)
-        var high_price = (Double(data.high_base)! / base_precision)  / (Double(data.high_quote)! / quote_precision)
-        var low_price = (Double(data.low_base)! / base_precision)  / (Double(data.low_quote)! / quote_precision)
-
-        if !is_base  {
-           open_price = (Double(data.open_quote)! / base_precision)  / (Double(data.open_base)! / quote_precision)
-           close_price = (Double(data.close_quote)! / base_precision)  / (Double(data.close_base)! / quote_precision)
-           high_price = (Double(data.low_quote)! / base_precision)  / (Double(data.low_base)! / quote_precision)
-           low_price = (Double(data.high_quote)! / base_precision)  / (Double(data.high_base)! / quote_precision)
+        var open_price = (Double(data.open_base)! / base_precision) / (Double(data.open_quote)! / quote_precision)
+        var close_price = (Double(data.close_base)! / base_precision) / (Double(data.close_quote)! / quote_precision)
+        var high_price = (Double(data.high_base)! / base_precision) / (Double(data.high_quote)! / quote_precision)
+        var low_price = (Double(data.low_base)! / base_precision) / (Double(data.low_quote)! / quote_precision)
+        
+        if !is_base {
+          open_price = (Double(data.open_quote)! / base_precision) / (Double(data.open_base)! / quote_precision)
+          close_price = (Double(data.close_quote)! / base_precision) / (Double(data.close_base)! / quote_precision)
+          high_price = (Double(data.low_quote)! / base_precision) / (Double(data.low_base)! / quote_precision)
+          low_price = (Double(data.high_quote)! / base_precision) / (Double(data.high_base)! / quote_precision)
         }
         
-        let model = CBKLineModel(date: data.open, open: open_price, close: close_price, high: high_price, low: low_price, volume: (is_base ? Double(data.base_volume)! : Double(data.quote_volume)!) / base_precision, precision: base_info.precision)
+        let model = CBKLineModel(date: data.open, open: open_price, close: close_price, high: high_price, low: low_price, towardsVolume: (is_base ? Double(data.quote_volume)! : Double(data.base_volume)!) / quote_precision , volume: (is_base ? Double(data.base_volume)! : Double(data.quote_volume)!) / base_precision, precision: base_info.precision)
         
         let last_idx = dataArray.count - 1
         if last_idx >= 0 {
-
           let gapCount = (model.date - dataArray[last_idx].date) / timeGap.rawValue
           if gapCount > 1 {
-            for _ in 1..<Int(gapCount) {
+            for _ in 1 ..< Int(gapCount) {
               let last_model = dataArray.last!
-              let gap_model = CBKLineModel(date: last_model.date + timeGap.rawValue, open: last_model.close, close: last_model.close, high: last_model.close, low: last_model.close, volume: 0, precision: last_model.precision)
+              let gap_model = CBKLineModel(date: last_model.date + timeGap.rawValue, open: last_model.close, close: last_model.close, high: last_model.close, low: last_model.close, towardsVolume:0, volume: 0, precision: last_model.precision)
               dataArray.append(gap_model)
             }
           }
         }
         
-
         if let last_model = dataArray.last, (model.date - last_model.date) != 3600 {
-//          print(model.date - last_model.date)
-//          print("\r\n")
+          //          print(model.date - last_model.date)
+          //          print("\r\n")
         }
         
         dataArray.append(model)
-        
       }
       
       if dataArray.count > 0 {
         var last_model = dataArray.last!
-
+        
         let surplus_count = (Date().timeIntervalSince1970 - last_model.date) / timeGap.rawValue
         if surplus_count >= 1 {
-          for _ in 0..<Int(surplus_count) {
+          for _ in 0 ..< Int(surplus_count) {
             last_model = dataArray.last!
-            let gap_model = CBKLineModel(date: last_model.date + timeGap.rawValue, open: last_model.close, close: last_model.close, high: last_model.close, low: last_model.close, volume: 0, precision:last_model.precision)
+            let gap_model = CBKLineModel(date: last_model.date + timeGap.rawValue, open: last_model.close, close: last_model.close, high: last_model.close, low: last_model.close, towardsVolume: 0, volume: 0, precision: last_model.precision)
             dataArray.append(gap_model)
           }
         }
       }
-      self.kLineView.drawKLineView(klineModels: dataArray, initialize: resetKLinePosition)
+      kLineView.drawKLineView(klineModels: dataArray, initialize: resetKLinePosition)
     }
   }
   
   func commonObserveState() {
     coordinator?.subscribe(errorSubscriber) { sub in
-        return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-            return false
-        })
+      sub.select { state in state.errorMessage }.skipRepeats({ (_, _) -> Bool in
+        false
+      })
     }
-  
+    
     coordinator?.subscribe(loadingSubscriber) { sub in
-        return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-            return false
-        })
+      sub.select { state in state.isLoading }.skipRepeats({ (_, _) -> Bool in
+        false
+      })
     }
   }
   
@@ -273,28 +286,27 @@ class MarketViewController: BaseViewController {
     app_data.data.asObservable()
       .skip(1)
       .distinctUntilChanged()
-      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
+      .filter({ $0.count == AssetConfiguration.shared.asset_ids.count })
       .throttle(3, latest: true, scheduler: MainScheduler.instance)
-      .subscribe(onNext: {[weak self] (s) in
+      .subscribe(onNext: { [weak self] _ in
         guard let `self` = self else { return }
         self.performSelector(onMainThread: #selector(self.refreshTotalView), with: nil, waitUntilDone: false)
-      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   
   @objc func refreshTotalView() {
-    if self.isVisible {
-      self.updateIndex()
-      self.refreshView(false)
+    if isVisible && !kLineSpecial {
+      updateIndex()
+      refreshView(false)
     }
   }
 }
 
 extension MarketViewController {
-  @objc func cellClicked(_ data:[String: Any]) {
+  @objc func cellClicked(_ data: [String: Any]) {
     if let index = data["index"] as? Int {
-      self.curIndex = index
-      let markets = buckets.map( { Pair(base: $0.base, quote: $0.quote) })
+      curIndex = index
+      let markets = buckets.map({ Pair(base: $0.base, quote: $0.quote) })
       pair = markets[self.curIndex]
       
       startLoading()
@@ -302,23 +314,22 @@ extension MarketViewController {
     }
   }
   
-  @objc func timeClicked(_ data:[String: Any]) {
+  @objc func timeClicked(_ data: [String: Any]) {
     if let candlestick = data["candlestick"] as? candlesticks {
-      self.timeGap = candlestick
+      timeGap = candlestick
       
       startLoading()
       fetchKlineData()
     }
   }
   
-  @objc func indicatorClicked(_ data:[String: Any]) {
+  @objc func indicatorClicked(_ data: [String: Any]) {
     if let indicator = data["indicator"] as? indicator {
       self.indicator = indicator
-      self.kLineView.indicator = indicator
-      
+      kLineView.indicator = indicator
+
       startLoading()
       fetchKlineData()
     }
   }
 }
-

@@ -295,6 +295,7 @@
 		73DF25B420C53D9300A0D00F /* vote.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73DF25AC20C53D8F00A0D00F /* vote.cpp */; };
 		73DF25B520C53D9300A0D00F /* wallet_lib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73DF25AD20C53D9000A0D00F /* wallet_lib.cpp */; };
 		73DF25B620C53D9300A0D00F /* types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73DF25AE20C53D9200A0D00F /* types.cpp */; };
+		73DF25B820C67EEA00A0D00F /* get_dev_key.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73DF25B720C67EE800A0D00F /* get_dev_key.cpp */; };
 		73E49DF42078BF5B003B14D2 /* AccessoryHorizentalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E49DF32078BF5B003B14D2 /* AccessoryHorizentalView.swift */; };
 		73E49E1F2078BF77003B14D2 /* TimeGapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E49E1E2078BF77003B14D2 /* TimeGapView.swift */; };
 		73E49E212078BFB6003B14D2 /* AccessoryHorizentalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73E49E202078BFB5003B14D2 /* AccessoryHorizentalView.xib */; };
@@ -320,7 +321,6 @@
 		73E49E50207A08BE003B14D2 /* OrderBookCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E49E4F207A08BE003B14D2 /* OrderBookCellView.swift */; };
 		73E49E52207A08CB003B14D2 /* OrderBookCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73E49E51207A08CB003B14D2 /* OrderBookCellView.xib */; };
 		73E49E54207A12E4003B14D2 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E49E53207A12E4003B14D2 /* Launch Screen.storyboard */; };
-		73E6B2B9208D911D00B015E5 /* fc_bridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B28E208D911A00B015E5 /* fc_bridge.cpp */; };
 		73E6B2BE208D92AB00B015E5 /* BitShareCoordinator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B2BD208D92AB00B015E5 /* BitShareCoordinator.mm */; };
 		73E6B3B42091A81F00B015E5 /* SimpleHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B3B32091A81F00B015E5 /* SimpleHTTPService.swift */; };
 		73E9AB9620B553700083DFD6 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E9AB9520B553700083DFD6 /* UIViewController+Extension.swift */; };
@@ -11785,6 +11785,7 @@
 		73DF25AC20C53D8F00A0D00F /* vote.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vote.cpp; sourceTree = "<group>"; };
 		73DF25AD20C53D9000A0D00F /* wallet_lib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wallet_lib.cpp; sourceTree = "<group>"; };
 		73DF25AE20C53D9200A0D00F /* types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = types.cpp; sourceTree = "<group>"; };
+		73DF25B720C67EE800A0D00F /* get_dev_key.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = get_dev_key.cpp; sourceTree = "<group>"; };
 		73E49DF32078BF5B003B14D2 /* AccessoryHorizentalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryHorizentalView.swift; sourceTree = "<group>"; };
 		73E49E1E2078BF77003B14D2 /* TimeGapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGapView.swift; sourceTree = "<group>"; };
 		73E49E202078BFB5003B14D2 /* AccessoryHorizentalView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccessoryHorizentalView.xib; sourceTree = "<group>"; };
@@ -11810,7 +11811,6 @@
 		73E49E4F207A08BE003B14D2 /* OrderBookCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookCellView.swift; sourceTree = "<group>"; };
 		73E49E51207A08CB003B14D2 /* OrderBookCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderBookCellView.xib; sourceTree = "<group>"; };
 		73E49E53207A12E4003B14D2 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		73E6B28E208D911A00B015E5 /* fc_bridge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fc_bridge.cpp; sourceTree = "<group>"; };
 		73E6B2BC208D91C100B015E5 /* BitShareCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitShareCoordinator.h; sourceTree = "<group>"; };
 		73E6B2BD208D92AB00B015E5 /* BitShareCoordinator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BitShareCoordinator.mm; sourceTree = "<group>"; };
 		73E6B3B32091A81F00B015E5 /* SimpleHTTPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHTTPService.swift; sourceTree = "<group>"; };
@@ -31593,11 +31593,11 @@
 				73DF25A820C53D8900A0D00F /* transaction.hpp */,
 				73DF25AE20C53D9200A0D00F /* types.cpp */,
 				73DF25AC20C53D8F00A0D00F /* vote.cpp */,
+				73DF25B720C67EE800A0D00F /* get_dev_key.cpp */,
 				73DF25AD20C53D9000A0D00F /* wallet_lib.cpp */,
 				73DF25A920C53D8B00A0D00F /* wallet_lib.hpp */,
 				73E6B2BC208D91C100B015E5 /* BitShareCoordinator.h */,
 				73E6B2BD208D92AB00B015E5 /* BitShareCoordinator.mm */,
-				73E6B28E208D911A00B015E5 /* fc_bridge.cpp */,
 			);
 			path = "bitshare-core";
 			sourceTree = "<group>";
@@ -31927,6 +31927,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONRPCKit/JSONRPCKit.framework",
 				"${BUILT_PRODUCTS_DIR}/KMNavigationBarTransition/KMNavigationBarTransition.framework",
+				"${BUILT_PRODUCTS_DIR}/Keyboard+LayoutGuide/KeyboardLayoutGuide.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/LifetimeTracker/LifetimeTracker.framework",
@@ -31996,6 +31997,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONRPCKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMNavigationBarTransition.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeyboardLayoutGuide.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LifetimeTracker.framework",
@@ -32088,7 +32090,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\nfi";
 		};
 		73E6B2BF208DBF5600B015E5 /* fabric */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -32287,7 +32289,6 @@
 				73DF25B220C53D9300A0D00F /* memo.cpp in Sources */,
 				73D977E220565E9700CB7DE1 /* ExplorerRootCoordinator.swift in Sources */,
 				7386AD5C20B4134D00168629 /* ColorTheme.swift in Sources */,
-				73E6B2B9208D911D00B015E5 /* fc_bridge.cpp in Sources */,
 				73A0CC41206A3DDA00463ADE /* AssetInfo.swift in Sources */,
 				73D9789F20579EE200CB7DE1 /* MarketViewController.swift in Sources */,
 				72C30C7C20AA8AA000F4DCEC /* LockupAssetsReducers.swift in Sources */,
@@ -32304,6 +32305,7 @@
 				73D34E432063A675008C7507 /* AccountCoordinator.swift in Sources */,
 				73D9788E20577C8F00CB7DE1 /* HomePairCell.swift in Sources */,
 				73A2936F20AA853600893053 /* Theme_Extensions.swift in Sources */,
+				73DF25B820C67EEA00A0D00F /* get_dev_key.cpp in Sources */,
 				7320D6AD205BB13300C3F579 /* CBMAModel.swift in Sources */,
 				72C30C7B20AA8AA000F4DCEC /* LockupAssetsViewController.swift in Sources */,
 				73E49E41207A0273003B14D2 /* TradeHistoryCell.swift in Sources */,
