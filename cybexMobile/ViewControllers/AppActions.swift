@@ -143,8 +143,8 @@ class AppPropertyActionCreate: LoadingActionCreator {
               
               self.cycleFetch(asset, params: params, callback: { (o_asset) in
                 if let o_asset = o_asset as? Bucket {
-                  let close = o_asset.close_base
-                  let quote_close = o_asset.close_quote
+                  let close = o_asset.open_base
+                  let quote_close = o_asset.open_quote
                   let addAsset = asset.copy() as! Bucket
                   
                   let gapCount = ceil((asset.open - params.startTime.timeIntervalSince1970) / Double(asset.seconds)!)
