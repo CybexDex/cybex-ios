@@ -48,6 +48,8 @@ func calculateAssetRelation(assetID_A_name:String, assetID_B_name:String) -> (ba
   
 }
 
+
+
 //********************深度优化************************
 // MARK : 传入quote 导出多少个ETH。多少个CYB
 /**
@@ -55,9 +57,8 @@ func calculateAssetRelation(assetID_A_name:String, assetID_B_name:String) -> (ba
  1 如果返回的都非0/都为0，则直接返回
  2 先判断CYB/ETH 或者ETH/CYB 是否有值，如果其中一个有值就转换，反之没有数据的币对返回0
  **/
-
 func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
-//  return ("0", "0")
+
   let eth_base = AssetConfiguration.ETH
   let cyb_base = AssetConfiguration.CYB
   let eth_cyb  = changeCYB_ETH()
@@ -69,11 +70,18 @@ func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
     }
   }
   
-  let homeBuckets : [HomeBucket] = app_data.data.value
   var result = (eth:"0",cyb:"0")
+//  result.cyb = getRelationWithIds(base: cyb_base, quote: sender)
+//  result.eth = getRelationWithIds(base: eth_base, quote: sender)
+//  if result.cyb != "0" && result.eth != "0"{
+//    return result
+//  }
+  
+  
+  let homeBuckets : [HomeBucket] = app_data.data.value
   for homeBuck : HomeBucket in homeBuckets {
     let bucket = getCachedBucket(homeBuck)
-   
+    
     if homeBuck.base == eth_base && homeBuck.quote == sender {
       if bucket.price == ""{
         continue
@@ -137,10 +145,13 @@ func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
  **/
 // CYB:base  ETH:quote
 func changeCYB_ETH() -> String{
-//  return "0"
+  //  return "0"
   let cyb_base   = AssetConfiguration.CYB
-  let eth_quote = AssetConfiguration.ETH
-  var result = "0"
+  let eth_quote  = AssetConfiguration.ETH
+  var result     = getRelationWithIds(base: cyb_base, quote: eth_quote)
+  if result != "0"{
+    return result
+  }
   let homeBuckets : [HomeBucket] = app_data.data.value
   for homeBuck : HomeBucket in homeBuckets {
     if homeBuck.base == cyb_base && homeBuck.quote == eth_quote {
@@ -165,20 +176,46 @@ func changeCYB_ETH() -> String{
       result = String(1 / result.toDouble()!)
     }
   }
-
+  
   return result
 }
+
+// 根据base 和quote对比的RMB 然后转换
+func getRelationWithIds(base:String,quote:String) -> String{
+  let rmb_prices = AppConfiguration.shared.appCoordinator.state.property.rmb_prices
+  let base_name  = app_data.assetInfo[base]?.symbol.filterJade ?? "--"
+  let quote_name = app_data.assetInfo[quote]?.symbol.filterJade ?? "--"
+  var base_rmb = "0"
+  var quote_rmb = "0"
+  for price in rmb_prices {
+    if price.name == base_name{
+      base_rmb = price.rmb_price
+    }else if price.name == quote_name{
+      quote_rmb = price.rmb_price
+    }
+  }
+
+  if base_rmb != "0" && quote_rmb != "0" {
+    return String(quote_rmb.toDouble()! / base_rmb.toDouble()!)
+  }
+  return "0"
+}
+
+
+
+
+
 
 func getCachedBucket(_ homebucket:HomeBucket) -> BucketMatrix {
   var result:BucketMatrix?
   var matrixs = app_state.property.matrixs.value
-    
+  
   if let bucket = matrixs[Pair(base:homebucket.base, quote:homebucket.quote)] {
     result = bucket
   }
-
+  
   return result ?? BucketMatrix(homebucket)
-
+  
 }
 
 

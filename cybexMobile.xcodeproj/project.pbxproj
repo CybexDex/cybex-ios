@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* cybexMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* cybexMobileTests.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		52AC8F48DFBF163DE72DA69B /* Pods_cybexMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F88A3D95F7E62BBFC0BA4F /* Pods_cybexMobile.framework */; };
 		721F5C6C20AAE7C80042488F /* LockupAssetsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C6B20AAE7C80042488F /* LockupAssetsSectionView.swift */; };
 		721F5C6E20AAE7EF0042488F /* LockupAssetsSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 721F5C6D20AAE7EF0042488F /* LockupAssetsSectionView.xib */; };
 		721F5C7020AAF1400042488F /* OpenedOrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */; };
@@ -330,7 +331,6 @@
 		73EA6D942085C3AC0045A88B /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA6D932085C3AC0045A88B /* Demo.swift */; };
 		73F58FC920AC04EF008A1F79 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F58FC820AC04EF008A1F79 /* Button.swift */; };
 		73F58FCB20AC0589008A1F79 /* Button.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F58FCA20AC0589008A1F79 /* Button.xib */; };
-		78F9F85527183B9AAEBF202D /* Pods_cybexMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72C4E6233ACD8199E4F2C647 /* Pods_cybexMobile.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -350,8 +350,6 @@
 		13B07F961A680F5B00A75B9A /* cybexMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cybexMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		261AF37338F0DE3741046D57 /* Pods-cybexMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile.release.xcconfig"; sourceTree = "<group>"; };
-		28C733506B85D343A1BC003A /* Pods_cybexMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cybexMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		721F5C6B20AAE7C80042488F /* LockupAssetsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsSectionView.swift; sourceTree = "<group>"; };
 		721F5C6D20AAE7EF0042488F /* LockupAssetsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsSectionView.xib; sourceTree = "<group>"; };
 		721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersHeaderView.swift; sourceTree = "<group>"; };
@@ -380,7 +378,6 @@
 		72C30C8520AA8DBD00F4DCEC /* LockupAssetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsView.swift; sourceTree = "<group>"; };
 		72C30C8720AA8DC600F4DCEC /* LockupAssetsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsView.xib; sourceTree = "<group>"; };
 		72C30C8920AAAF7700F4DCEC /* LockupProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupProgressView.swift; sourceTree = "<group>"; };
-		72C4E6233ACD8199E4F2C647 /* Pods_cybexMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cybexMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		72F6DEFD20AC03F900BBF105 /* YourPorfolioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YourPorfolioView.xib; sourceTree = "<group>"; };
 		72F6DEFF20AC0C6300BBF105 /* YourPortfolioCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioCoordinator.swift; sourceTree = "<group>"; };
 		72F6DF0020AC0C6300BBF105 /* YourPortfolioActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioActions.swift; sourceTree = "<group>"; };
@@ -11829,7 +11826,9 @@
 		73EA6D932085C3AC0045A88B /* Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo.swift; sourceTree = "<group>"; };
 		73F58FC820AC04EF008A1F79 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		73F58FCA20AC0589008A1F79 /* Button.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Button.xib; sourceTree = "<group>"; };
-		A72666D4E9406D5A50C8D67C /* Pods-cybexMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile.debug.xcconfig"; sourceTree = "<group>"; };
+		D253752E80FEA59382F9CDF1 /* Pods-cybexMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile.debug.xcconfig"; sourceTree = "<group>"; };
+		D3D4EFCCD150128F0BC5CA78 /* Pods-cybexMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile.release.xcconfig"; sourceTree = "<group>"; };
+		E4F88A3D95F7E62BBFC0BA4F /* Pods_cybexMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cybexMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -11849,7 +11848,7 @@
 				73AAD13020A577C4002DEFED /* secp256k1.a in Frameworks */,
 				73AAD13120A577C4002DEFED /* libboost.a in Frameworks */,
 				73AAD13220A577C4002DEFED /* libcrypto.a in Frameworks */,
-				78F9F85527183B9AAEBF202D /* Pods_cybexMobile.framework in Frameworks */,
+				52AC8F48DFBF163DE72DA69B /* Pods_cybexMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11911,19 +11910,9 @@
 				73AAD12920A577C1002DEFED /* libfc.a */,
 				73AAD12A20A577C2002DEFED /* libssl.a */,
 				73AAD12B20A577C3002DEFED /* secp256k1.a */,
-				72C4E6233ACD8199E4F2C647 /* Pods_cybexMobile.framework */,
-				28C733506B85D343A1BC003A /* Pods_cybexMobileTests.framework */,
+				E4F88A3D95F7E62BBFC0BA4F /* Pods_cybexMobile.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		57F299E0A6F8CD19E94EAD92 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A72666D4E9406D5A50C8D67C /* Pods-cybexMobile.debug.xcconfig */,
-				261AF37338F0DE3741046D57 /* Pods-cybexMobile.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		72889EE320A995A5007D9E7A /* cell */ = {
@@ -31650,10 +31639,10 @@
 			isa = PBXGroup;
 			children = (
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				57F299E0A6F8CD19E94EAD92 /* Pods */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				13B07FAE1A68108700A75B9A /* cybexMobile */,
 				00E356EF1AD99517003FC87E /* cybexMobileTests */,
+				C8D558ABB401DF0C3BF1E3E0 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -31667,6 +31656,15 @@
 				00E356EE1AD99517003FC87E /* cybexMobileTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C8D558ABB401DF0C3BF1E3E0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D253752E80FEA59382F9CDF1 /* Pods-cybexMobile.debug.xcconfig */,
+				D3D4EFCCD150128F0BC5CA78 /* Pods-cybexMobile.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -31694,15 +31692,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "cybexMobile" */;
 			buildPhases = (
-				E6B3BD6C1A9EC6EF7C9638E7 /* [CP] Check Pods Manifest.lock */,
+				B71BE6D3719E76C071B1D0C4 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
-				18570DA782C9578569D5A4D5 /* [CP] Embed Pods Frameworks */,
 				73D9776E20562E3400CB7DE1 /* R.swift */,
 				73E6B2BF208DBF5600B015E5 /* fabric */,
 				73556A0920A008E700F1EDFF /* color set */,
 				73DF252720C0185B00A0D00F /* build auto increment */,
+				2084A2825241A41C600C1F12 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -31924,7 +31922,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		18570DA782C9578569D5A4D5 /* [CP] Embed Pods Frameworks */ = {
+		2084A2825241A41C600C1F12 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -32132,7 +32130,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" a0bbb6d623feca529afaf6ed110e62a77f47b16a 3b264ff6cab506aaf14bce576c156ea66229ad7b6dfb666b4fbb91089deb17e2";
 		};
-		E6B3BD6C1A9EC6EF7C9638E7 /* [CP] Check Pods Manifest.lock */ = {
+		B71BE6D3719E76C071B1D0C4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -32459,7 +32457,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A72666D4E9406D5A50C8D67C /* Pods-cybexMobile.debug.xcconfig */;
+			baseConfigurationReference = D253752E80FEA59382F9CDF1 /* Pods-cybexMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -32506,7 +32504,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 261AF37338F0DE3741046D57 /* Pods-cybexMobile.release.xcconfig */;
+			baseConfigurationReference = D3D4EFCCD150128F0BC5CA78 /* Pods-cybexMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

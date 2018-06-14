@@ -58,12 +58,26 @@ extension UserManager {
             
             if let balances = data.balances{
               self.balances.accept(balances.filter({ (balance) -> Bool in
-                return getRealAmount(balance.asset_type, amount: balance.balance) != 0
+                
+                let name = app_data.assetInfo[balance.asset_type]
+                return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
+                  (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
               }))
+              
             }else{
               self.balances.accept(data.balances)
             }
-            self.limitOrder.accept(data.limitOrder)
+            if let limitOrders = data.limitOrder {
+              self.limitOrder.accept(limitOrders.filter({ (limitOrder) -> Bool in
+                let base_name = app_data.assetInfo[limitOrder.sellPrice.base.assetID]
+                let quote_name = app_data.assetInfo[limitOrder.sellPrice.quote.assetID]
+                let base_bool = base_name != nil && ( (base_name?.symbol.hasPrefix("JADE"))! || base_name?.symbol == "CYB")
+                let quote_bool = quote_name != nil && ((quote_name?.symbol.hasPrefix("JADE"))! || quote_name?.symbol == "CYB")
+                return base_bool && quote_bool
+              }))
+            }else{
+              self.limitOrder.accept(data.limitOrder)
+            }
             
             completion(true)
             return
@@ -165,13 +179,26 @@ extension UserManager {
           
           if let balances = data.balances{
             self.balances.accept(balances.filter({ (balance) -> Bool in
-                return getRealAmount(balance.asset_type, amount: balance.balance) != 0
+              
+              let name = app_data.assetInfo[balance.asset_type]
+              return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
+                (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
             }))
-          
+            
           }else{
             self.balances.accept(data.balances)
           }
-          self.limitOrder.accept(data.limitOrder)
+          if let limitOrders = data.limitOrder {
+            self.limitOrder.accept(limitOrders.filter({ (limitOrder) -> Bool in
+              let base_name = app_data.assetInfo[limitOrder.sellPrice.base.assetID]
+              let quote_name = app_data.assetInfo[limitOrder.sellPrice.quote.assetID]
+              let base_bool = base_name != nil && ( (base_name?.symbol.hasPrefix("JADE"))! || base_name?.symbol == "CYB")
+              let quote_bool = quote_name != nil && ((quote_name?.symbol.hasPrefix("JADE"))! || quote_name?.symbol == "CYB")
+              return base_bool && quote_bool
+            }))
+          }else{
+            self.limitOrder.accept(data.limitOrder)
+          }
         }
       }
       WebsocketService.shared.send(request: request)
