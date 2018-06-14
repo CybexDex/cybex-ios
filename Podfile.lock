@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (4.7.2)
+  - Apollo (0.8.0):
+    - Apollo/Core (= 0.8.0)
+  - Apollo/Core (0.8.0)
   - AwaitKit (5.0.0):
     - PromiseKit (~> 6)
   - BeareadToast (0.0.3)
@@ -121,6 +124,7 @@ PODS:
     - SwiftHash (>= 2.0.1)
 
 DEPENDENCIES:
+  - Apollo
   - AwaitKit
   - BeareadToast (from `https://github.com/phpmaple/BeareadToast`)
   - BigInt
@@ -185,6 +189,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Apollo
     - AwaitKit
     - BigInt
     - BiometricAuthentication
@@ -270,6 +275,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  Apollo: 66e0f52289551545adb7ecdd994e713fdbae26eb
   AwaitKit: d8a6e30eeb2da916630270b44636b31033388bd8
   BeareadToast: 17ff7f5ac9609b186543d6a45df8f15f78c9ca7a
   BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
@@ -340,6 +346,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: f5e013d49aedc75a5cb95b4f5d007ded371bf8fd
+PODFILE CHECKSUM: 2c3824185fbd2521a458681f009a3e2a70f1f125
 
 COCOAPODS: 1.5.3

@@ -199,6 +199,10 @@
 		735D8EB820AEACE7008DAAAC /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB720AEACE7008DAAAC /* Balance.swift */; };
 		735D8EBB20AEB5B0008DAAAC /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EBA20AEB5B0008DAAAC /* Utils.swift */; };
 		735D8EC320AFCC92008DAAAC /* NoticeBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EC220AFCC92008DAAAC /* NoticeBoardViewController.swift */; };
+		736A9A6C20D28660000E7700 /* gateway.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 736A9A6920D2865E000E7700 /* gateway.graphql */; };
+		736A9A6D20D28660000E7700 /* GraphQLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736A9A6A20D2865E000E7700 /* GraphQLAPI.swift */; };
+		736A9A6E20D28660000E7700 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 736A9A6B20D2865F000E7700 /* schema.json */; };
+		736A9A7020D28676000E7700 /* GraphQLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736A9A6F20D28676000E7700 /* GraphQLManager.swift */; };
 		7373AE2D20720BB2002DC01F /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373AE2C20720BB2002DC01F /* UserDefaults.swift */; };
 		7386AD5B20B4134D00168629 /* CGContextExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386AD5520B4134D00168629 /* CGContextExtension.swift */; };
 		7386AD5C20B4134D00168629 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386AD5620B4134D00168629 /* ColorTheme.swift */; };
@@ -11640,6 +11644,10 @@
 		735D8EB720AEACE7008DAAAC /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		735D8EBA20AEB5B0008DAAAC /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		735D8EC220AFCC92008DAAAC /* NoticeBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardViewController.swift; sourceTree = "<group>"; };
+		736A9A6920D2865E000E7700 /* gateway.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gateway.graphql; sourceTree = "<group>"; };
+		736A9A6A20D2865E000E7700 /* GraphQLAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQLAPI.swift; sourceTree = "<group>"; };
+		736A9A6B20D2865F000E7700 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		736A9A6F20D28676000E7700 /* GraphQLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLManager.swift; sourceTree = "<group>"; };
 		7373AE2C20720BB2002DC01F /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		7386AD5520B4134D00168629 /* CGContextExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGContextExtension.swift; sourceTree = "<group>"; };
 		7386AD5620B4134D00168629 /* ColorTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
@@ -30991,6 +30999,7 @@
 		7320D669205B7DED00C3F579 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				736A9A6420D2792E000E7700 /* GraphQL */,
 				733402222067D9BC000F78B3 /* Cache */,
 				73E6B3892091A33E00B015E5 /* HTTPNetwork */,
 				7373AE0220720B7D002DC01F /* UserDefaults */,
@@ -31119,6 +31128,17 @@
 				735068D620B7E9B30092CE04 /* debounce-throttle.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		736A9A6420D2792E000E7700 /* GraphQL */ = {
+			isa = PBXGroup;
+			children = (
+				736A9A6920D2865E000E7700 /* gateway.graphql */,
+				736A9A6A20D2865E000E7700 /* GraphQLAPI.swift */,
+				736A9A6B20D2865F000E7700 /* schema.json */,
+				736A9A6F20D28676000E7700 /* GraphQLManager.swift */,
+			);
+			path = GraphQL;
 			sourceTree = "<group>";
 		};
 		7370E2D920A2F0C0001F6C3F /* libfc */ = {
@@ -31803,6 +31823,7 @@
 				730FDA7220A314F900CFBF24 /* complex in Resources */,
 				730FDA6820A314F600CFBF24 /* cstdio in Resources */,
 				73E49E48207A02C6003B14D2 /* TradeHistoryCell.xib in Resources */,
+				736A9A6C20D28660000E7700 /* gateway.graphql in Resources */,
 				72F6DF2920AC27C200BBF105 /* AccountPortfolioView.xib in Resources */,
 				730FDA8620A314F900CFBF24 /* regex in Resources */,
 				730FDA8420A314F900CFBF24 /* queue in Resources */,
@@ -31838,6 +31859,7 @@
 				730FDABE20A314F900CFBF24 /* valarray in Resources */,
 				730FDA8120A314F900CFBF24 /* new in Resources */,
 				72F8C77720B0068B00454187 /* HomeTitleView.xib in Resources */,
+				736A9A6E20D28660000E7700 /* schema.json in Resources */,
 				730FDA9320A314F900CFBF24 /* complex.SUNWCCh in Resources */,
 				730FDA8E20A314F900CFBF24 /* algorithm.SUNWCCh in Resources */,
 				730FDAAC20A314F900CFBF24 /* streambuf.SUNWCCh in Resources */,
@@ -31910,6 +31932,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
 				"${BUILT_PRODUCTS_DIR}/AwaitKit/AwaitKit.framework",
 				"${BUILT_PRODUCTS_DIR}/BeareadToast/BeareadToast.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
@@ -31980,6 +32003,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AwaitKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BeareadToast.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
@@ -32172,6 +32196,7 @@
 				73D977ED20565F0600CB7DE1 /* BaseViewController.swift in Sources */,
 				72F6DF2720AC27A500BBF105 /* AccountPortfolioCellView.swift in Sources */,
 				72C30C8620AA8DBD00F4DCEC /* LockupAssetsView.swift in Sources */,
+				736A9A6D20D28660000E7700 /* GraphQLAPI.swift in Sources */,
 				7373AE2D20720BB2002DC01F /* UserDefaults.swift in Sources */,
 				73ACD80820721B5E00592E69 /* SettingDetailCoordinator.swift in Sources */,
 				7320D6B3205BB16400C3F579 /* CBBOLLModel.swift in Sources */,
@@ -32261,6 +32286,7 @@
 				73D978A32057A44100CB7DE1 /* PairListHorizantalView.swift in Sources */,
 				7320D6AB205B9E7500C3F579 /* CBMALineBrush.swift in Sources */,
 				72C30C7A20AA8AA000F4DCEC /* LockupAssetsActions.swift in Sources */,
+				736A9A7020D28676000E7700 /* GraphQLManager.swift in Sources */,
 				731A0EA220A440A700507D1E /* EntryRootCoordinator.swift in Sources */,
 				73E49E352079FFAF003B14D2 /* OrderBookReducers.swift in Sources */,
 				73A2937720AAED3F00893053 /* RegisterActions.swift in Sources */,

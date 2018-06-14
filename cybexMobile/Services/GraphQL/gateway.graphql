@@ -1,0 +1,41 @@
+query VerifyAddress($asset: String!, $address: String!, $accountName: String) {
+    verifyAddress(asset: $asset, address: $address, accountName: $accountName) {
+        address
+        asset
+        valid
+    }
+}
+
+query WithdrawInfo($type: String!) {
+    withdrawInfo(type: $type) {
+        minValue
+        fee
+        type
+        asset
+        gatewayAccount
+    }
+}
+
+query GetDepositAddress($accountName: String!, $asset: String) {
+    getDepositAddress(accountName: $accountName, asset: $asset) {
+        accountName
+        address
+        type
+        asset
+        jadeOrders
+        latest
+        createAt
+    }
+}
+
+mutation NewDepositAddress($accountName: String!, $asset: String!) {
+    newDepositAddress(accountName: $accountName, asset: $asset) {
+        accountName
+        address
+        type
+        asset
+        jadeOrders
+        latest
+        createAt
+    }
+}

@@ -6,6 +6,7 @@ def network
     pod 'Moya'
     pod 'Kingfisher'
     pod 'RealReachability'
+    pod 'Apollo'
 end
 
 def data
