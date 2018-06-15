@@ -8,14 +8,48 @@
 
 import UIKit
 
-
+@IBDesignable
 class QuotesTitleView: UIView {
-  
   enum event : String{
     case tagDidSelected
   }
   
+  @IBOutlet weak var stackView: UIStackView!
+  
   @IBOutlet var titleViews: [UIView]!
+  
+  
+  @IBInspectable
+  var View_Type : Int = 0 {
+    didSet{
+      if View_Type != 1{
+        self.stackView.axis = .horizontal
+      }else{
+        self.stackView.axis = .vertical
+      }
+    }
+  }
+  
+  @IBInspectable
+  var normal_Color : UIColor = UIColor.steel {
+    didSet{
+      for titleView in titleViews {
+        titleView.viewWithTag(10)?.isHidden = true
+        if let titleL =  titleView.viewWithTag(9) as? UILabel{
+          titleL.theme1TitleColor = normal_Color
+          titleL.theme2TitleColor = normal_Color
+        }
+      }
+    }
+  }
+  
+  @IBInspectable
+  var selected_Color : UIColor = UIColor.white{
+    didSet{
+      
+    }
+  }
+  
   
   fileprivate func setup() {
     for titleView in titleViews {
@@ -30,6 +64,7 @@ class QuotesTitleView: UIView {
     }
     changeToHighStatus(titleView.tag)
   }
+  
   
   func changeToHighStatus(_ index : Int){
     for titleView in titleViews {

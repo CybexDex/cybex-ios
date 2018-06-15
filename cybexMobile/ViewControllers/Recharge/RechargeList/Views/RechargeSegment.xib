@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RechargeSegment" customModule="cybexMobile" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="286-Ac-Sy9">
+                    <rect key="frame" x="71" y="0.0" width="233" height="30"/>
+                    <segments>
+                        <segment title="充值"/>
+                        <segment title="提现"/>
+                    </segments>
+                    <color key="tintColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <action selector="segmentTouch:" destination="-1" eventType="valueChanged" id="YZl-7G-iPN"/>
+                    </connections>
+                </segmentedControl>
+            </subviews>
+            <constraints>
+                <constraint firstItem="286-Ac-Sy9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Cxw-Ho-36N"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="286-Ac-Sy9" secondAttribute="bottom" constant="1" id="GHc-vv-afg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="286-Ac-Sy9" secondAttribute="trailing" constant="71" id="s0h-RR-n65"/>
+                <constraint firstItem="286-Ac-Sy9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="71" id="tti-CE-uMN"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+</document>

@@ -11,6 +11,9 @@
 "nav.apply" = "Application";
 "nav.account" = "Account";
 "nav.setting" = "Settings";
+"nav.trade"   = "Trade";
+
+
 "market" = "Market";
 
 "language" = "Language";
@@ -110,5 +113,29 @@
 "unupdata_ok"                         = "OK";
 
 "noNetwork"                           = "network is not available.";
+
+
+"trade_base"    = "Markets";
+"trade_double"  = "Pairs";
+"trade_change"  = "24 Chg%";
+"trade_value"   = "24 Volume";
+"account_trade" = "Gateway";
+"order_cancle"  = "Cancel";
+
+
+"trade_buy"             = "BUY";
+"trade_sell"            = "SELL";
+"trade_open_orders"     = "Open Orders";
+"trade_limit"           = "Limit";
+"trade_available"       = "Available";
+"trade_fee"             = "Fee";
+"trade_total"           = "Total";
+
+"trade_history"         = "Market Trades";
+
+
+
+"my_opened_price" = "Price/Amount";
+"my_opened_filled" = "Filled/Cancel";
 
 

@@ -30,7 +30,11 @@ final class LinearGradientLayer: CALayer {
   var direction: Direction = .horizontal
   
   var colorSpace = CGColorSpaceCreateDeviceRGB()
-  var colors: [CGColor]?
+  var colors: [CGColor]?{
+    didSet{
+      self.setNeedsDisplay()
+    }
+  }
   var locations: [CGFloat]?
   
   var options: CGGradientDrawingOptions = CGGradientDrawingOptions(rawValue: 0)

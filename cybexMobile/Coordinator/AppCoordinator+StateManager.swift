@@ -21,7 +21,7 @@ extension AppCoordinator: AppStateManagerProtocol {
   func fetchData(_ params: AssetPairQueryParams, sub: Bool = true) {
     store.dispatch(creator.fetchMarket(with: sub, params: params, callback: { [weak self] (assets) in
       guard let `self` = self else { return }
-
+      
       self.store.dispatch(MarketsFetched(pair: params, assets: assets))
     }))
   }
@@ -46,8 +46,6 @@ extension AppCoordinator: AppStateManagerProtocol {
           self.store.dispatch(AssetInfoAction(assetID: info.id, info: info))
         }
       }
-      
-      
     }
     WebsocketService.shared.send(request: request)
   }

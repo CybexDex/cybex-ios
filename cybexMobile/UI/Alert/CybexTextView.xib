@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CybexTextView" customModule="Demo" customModuleProvider="target">
+            <connections>
+                <outlet property="cancle" destination="6wo-p1-1o9" id="lKd-zw-epH"/>
+                <outlet property="contentView" destination="TpJ-p0-0qU" id="iQH-Jc-NEA"/>
+                <outlet property="ensure" destination="NnL-GZ-Fim" id="F22-hY-gRK"/>
+                <outlet property="title" destination="sNM-6o-N5e" id="Ftz-Wc-TQn"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNM-6o-N5e">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                    <color key="backgroundColor" red="0.12941176470588234" green="0.16078431372549018" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="3Ca-rY-G3h"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wo-p1-1o9">
+                    <rect key="frame" x="18" y="134" width="164.5" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="tpw-j0-72e"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <state key="normal" title="取消" backgroundImage="btnColorGrey">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="cancleClick:" destination="-1" eventType="touchUpInside" id="Uya-RL-ThR"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NnL-GZ-Fim">
+                    <rect key="frame" x="192.5" y="134" width="164.5" height="48"/>
+                    <state key="normal" title="确认" backgroundImage="btnColorOrange">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="ensureClick:" destination="-1" eventType="touchUpInside" id="ugc-QF-n7i"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TpJ-p0-0qU">
+                    <rect key="frame" x="0.0" y="50" width="375" height="84"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.10588235294117647" green="0.13333333333333333" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="NnL-GZ-Fim" firstAttribute="height" secondItem="6wo-p1-1o9" secondAttribute="height" id="07t-Tr-YdQ"/>
+                <constraint firstItem="sNM-6o-N5e" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="6vC-D3-HWm"/>
+                <constraint firstItem="NnL-GZ-Fim" firstAttribute="width" secondItem="6wo-p1-1o9" secondAttribute="width" id="81M-RV-bWv"/>
+                <constraint firstItem="NnL-GZ-Fim" firstAttribute="centerY" secondItem="6wo-p1-1o9" secondAttribute="centerY" id="FEu-Ob-sZK"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="6wo-p1-1o9" secondAttribute="bottom" constant="18" id="GF4-2g-P6e"/>
+                <constraint firstItem="6wo-p1-1o9" firstAttribute="top" secondItem="TpJ-p0-0qU" secondAttribute="bottom" id="HGa-Xf-THM"/>
+                <constraint firstItem="TpJ-p0-0qU" firstAttribute="top" secondItem="sNM-6o-N5e" secondAttribute="bottom" id="P4C-eP-amu"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="sNM-6o-N5e" secondAttribute="trailing" id="Q84-i6-RaL"/>
+                <constraint firstItem="6wo-p1-1o9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="18" id="QRi-yF-2Ad"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="NnL-GZ-Fim" secondAttribute="trailing" constant="18" id="a4p-Jh-24J"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="TpJ-p0-0qU" secondAttribute="trailing" id="mJm-Bu-KIr"/>
+                <constraint firstItem="TpJ-p0-0qU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="nw3-Cd-fs0"/>
+                <constraint firstItem="sNM-6o-N5e" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="vNn-nM-A2J"/>
+                <constraint firstItem="NnL-GZ-Fim" firstAttribute="leading" secondItem="6wo-p1-1o9" secondAttribute="trailing" constant="10" id="zi6-j2-A0Q"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="33.5" y="114"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btnColorGrey" width="349" height="48"/>
+        <image name="btnColorOrange" width="349" height="48"/>
+    </resources>
+</document>

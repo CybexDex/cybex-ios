@@ -14,6 +14,7 @@ protocol AccountCoordinatorProtocol {
   func openLockupAssets()
   func openYourProtfolio()
   func openSetting()
+  func openRecharge()
 }
 
 protocol AccountStateManagerProtocol {
@@ -70,9 +71,24 @@ extension AccountCoordinator: AccountCoordinatorProtocol {
   
   // MARK: 设置
   func openSetting(){
+    
+//    let vc = R.storyboard.business.businessViewController()!
+//    let coordinator = BusinessCoordinator(rootVC: self.rootVC)
+//    vc.coordinator = coordinator
+//    self.rootVC.pushViewController(vc, animated: true)
+    
+    
     let vc = R.storyboard.main.settingViewController()!
     let coordinator = SettingCoordinator(rootVC: self.rootVC)
     vc.coordinator  = coordinator
+    self.rootVC.pushViewController(vc, animated: true)
+  }
+  
+  // MARK : 交易
+  func openRecharge(){
+    let vc = R.storyboard.account.rechargeViewController()!
+    let coordinator = RechargeCoordinator(rootVC: self.rootVC)
+    vc.coordinator = coordinator
     self.rootVC.pushViewController(vc, animated: true)
   }
 }

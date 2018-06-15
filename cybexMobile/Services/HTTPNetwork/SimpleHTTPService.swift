@@ -138,8 +138,6 @@ extension SimpleHTTPService {
   
   
   
-  
-  
   static func requestPinCode() -> Promise<(id:String, data:String)> {
     var request = URLRequest(url: URL(string: AppConfiguration.SERVER_REGISTER_PINCODE_URLString)!)
     request.cachePolicy = .reloadIgnoringCacheData

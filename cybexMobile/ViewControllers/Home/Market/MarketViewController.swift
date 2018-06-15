@@ -144,7 +144,6 @@ class MarketViewController: BaseViewController {
     pageTitleView.setupUI()
     
     // 创建每一页对应的controller
-    
     let childViewControllers: [BaseViewController] = coordinator!.setupChildViewControllers(pair)
     
     // 对contentView进行设置

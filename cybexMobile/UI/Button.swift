@@ -32,7 +32,14 @@ class Button:UIView {
     }
   }
   
-  let gradientLayer: LinearGradientLayer = {
+  var colors : [CGColor]? {
+    didSet{
+      self.gradientLayer.colors = colors
+    }
+  }
+  
+  
+  var gradientLayer: LinearGradientLayer = {
     let gradientLayer = LinearGradientLayer()
     gradientLayer.colors = [UIColor.peach.cgColor, UIColor.maincolor.cgColor]
     return gradientLayer
@@ -53,6 +60,9 @@ class Button:UIView {
       self.button.setTitleColor(.white30, for: UIControlState.normal)
     }
   }
+  
+ 
+  
   
   fileprivate func setup() {
     gradientLayer.frame = self.bounds
