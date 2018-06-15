@@ -8,6 +8,9 @@
 
 import Foundation
 import ReSwift
+import SwiftyJSON
+import RxCocoa
+import RxSwift
 
 //MARK: - State
 struct TradeState: StateType {
@@ -18,6 +21,12 @@ struct TradeState: StateType {
 }
 
 struct TradePropertyState {
+  var data:BehaviorRelay<OrderBook> = BehaviorRelay(value: OrderBook(bids: [], asks: []))
+}
+
+struct TradeFetchedLimitData:Action{
+  let data:[LimitOrder]
+  let pair:Pair
 }
 
 //MARK: - Action Creator
@@ -29,4 +38,5 @@ class TradePropertyActionCreate: LoadingActionCreator {
         _ store: Store <TradeState>,
         _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
         ) -> Void
+  
 }

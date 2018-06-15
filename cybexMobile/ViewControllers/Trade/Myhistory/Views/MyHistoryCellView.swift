@@ -12,8 +12,9 @@ class MyHistoryCellView: UIView {
 
   @IBOutlet weak var asset: UILabel!
   @IBOutlet weak var typeView: UIView!
-  @IBOutlet weak var type: UILabel!
-  @IBOutlet weak var price: UILabel!
+  
+    @IBOutlet weak var kindL: UILabel!
+    @IBOutlet weak var price: UILabel!
   @IBOutlet weak var amount: UILabel!
   @IBOutlet weak var time: UILabel!
   @IBOutlet weak var orderPrice: UILabel!
@@ -63,7 +64,7 @@ class MyHistoryCellView: UIView {
   
   fileprivate func loadViewFromNib() {
     let bundle = Bundle(for: type(of: self))
-    let nibName = String(describing: type(of: self))
+    let nibName = String(describing:type(of:self))
     let nib = UINib.init(nibName: nibName, bundle: bundle)
     let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
     

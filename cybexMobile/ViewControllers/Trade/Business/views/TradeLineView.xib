@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="amount" destination="eoB-oh-gFo" id="gFG-Im-Uum"/>
                 <outlet property="backColorView" destination="uSb-Eb-mR9" id="3gK-5t-nEA"/>
+                <outlet property="backViewLeading" destination="5U6-ph-a2R" id="3Kt-xk-GbY"/>
                 <outlet property="price" destination="CGX-tb-TTg" id="TK8-vj-p5P"/>
             </connections>
         </placeholder>
@@ -43,7 +44,7 @@
                 <constraint firstItem="uSb-Eb-mR9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="5U6-ph-a2R"/>
                 <constraint firstItem="eoB-oh-gFo" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Bsf-LP-g0i"/>
                 <constraint firstItem="CGX-tb-TTg" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Cg5-Oe-6PK"/>
-                <constraint firstItem="eoB-oh-gFo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CGX-tb-TTg" secondAttribute="trailing" constant="20" id="Gpm-od-hnq"/>
+                <constraint firstItem="eoB-oh-gFo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CGX-tb-TTg" secondAttribute="trailing" id="Gpm-od-hnq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="uSb-Eb-mR9" secondAttribute="trailing" id="KRf-Ml-9BQ"/>
                 <constraint firstItem="eoB-oh-gFo" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Kj1-8i-fZ5"/>
                 <constraint firstItem="CGX-tb-TTg" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="fnn-FP-dy3"/>

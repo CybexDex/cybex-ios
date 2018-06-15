@@ -102,10 +102,35 @@
 
 "updata_available_title"              = "可更新";
 "updata_available_message"            = "新版本的CybexDex可用。请立即更新至最新版本";
-"updata_next_time"                    = "下一步";
+"updata_next_time"                    = "下次";
 "updata_updata"                       = "更新";
 "unupdata_title"                      = "通知";
 "unupdata_message"                    = "当前版本是最新版本";
 "unupdata_ok"                         = "好的";
 
 "noNetwork"                           = "网络不佳";
+
+
+"trade_base"    = "交易币种";
+"trade_double"  = "交易对";
+"trade_change"  = "涨跌幅";
+"trade_value"   = "成交量";
+"account_trade" = "充值提现";
+"order_cancle"  = "撤单";
+
+"trade_buy"             = "买入";
+"trade_sell"            = "卖出";
+"trade_open_orders"     = "我的委单";
+"trade_limit"           = "限价单";
+"trade_available"       = "余额";
+"trade_fee"             = "手续费";
+"trade_total"           = "成交额";
+
+"trade_history"         = "交易历史";
+
+
+"my_opened_price" = "价格/数量";
+"my_opened_filled" = "成交量/撤单";
+
+
+

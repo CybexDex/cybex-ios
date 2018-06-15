@@ -24,7 +24,7 @@ class RechargeViewController: BaseViewController {
   }
   func setupUI(){
     
-    self.localized_text = "充值提现"
+    self.localized_text = R.string.localizable.account_trade.key.localizedContainer()
     let cell = String.init(describing:TradeCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
   }

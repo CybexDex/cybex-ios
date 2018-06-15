@@ -9,7 +9,8 @@
 import Foundation
 
 func calculateAssetRelation(assetID_A_name:String, assetID_B_name:String) -> (base:String, quote:String) {
-  let relation:[String] = ["ETH", "BTC", "EOS", "CYB"]
+  let relation:[String] = AssetConfiguration.order_name
+
   
   var indexA = -1
   var indexB = -1

@@ -22,7 +22,7 @@ enum dataBaseCatogery:String {
 
 struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
   var name:String
-
+  
   var response: RPCSResponse
   
   
@@ -39,7 +39,7 @@ struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
     if let _ = result.dictionaryObject {
       return true
     }
-
+    
     return false
   }
 }
@@ -49,7 +49,7 @@ typealias FullAccount = (account:Account?, balances:[Balance]?, limitOrder:[Limi
 struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
   var name:String
   var response:RPCSResponse
-
+  
   var method: String {
     return "call"
   }
@@ -60,23 +60,23 @@ struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
   
   func transferResponse(from resultObject: Any) throws -> Any {
     let result = JSON(resultObject).arrayValue
-
+    
     let result_value:FullAccount = (nil, nil, nil)
     if result.count == 0 {
       return result_value
     }
     
     guard let full = result.first?.arrayValue[1],
-    let account_dic = full["account"].dictionaryObject
-    else {
-      return result_value
+      let account_dic = full["account"].dictionaryObject
+      else {
+        return result_value
     }
     
     let account = Account(JSON: account_dic)
     
     let balances_arr = full["balances"].arrayValue
     let limitOrder_arr = full["limit_orders"].arrayValue
-
+    
     let balances = balances_arr.map { (obj) -> Balance in
       return Balance(JSON: obj.dictionaryObject!)!
     }
@@ -129,7 +129,7 @@ struct GetAssetRequest: JSONRPCKit.Request, JSONRPCResponse {
     } else {
       throw CastError(actualValue: resultObject, expectedType: Response.self)
     }
-  
+    
   }
 }
 
@@ -141,7 +141,7 @@ struct SubscribeMarketRequest: JSONRPCKit.Request, RevisionRequest, JSONRPCRespo
   }
   
   var response:RPCSResponse
-
+  
   var parameters: Any? {
     return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.subscribe_to_market.rawValue, [WebsocketService.shared.idGenerator.currentId + 1, ids[0], ids[1]]]
   }
@@ -154,12 +154,12 @@ struct SubscribeMarketRequest: JSONRPCKit.Request, RevisionRequest, JSONRPCRespo
       params[2] = JSON(subParams)
       data["params"] = JSON(params)
     }
-
+    
     return data
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
-      return resultObject
+    return resultObject
   }
 }
 
@@ -177,7 +177,7 @@ struct getLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
   
   func transferResponse(from resultObject: Any) throws -> Any {
     let result = JSON(resultObject).arrayValue
-    if result.count > 1 {
+    if result.count >= 1 {
       var data:[LimitOrder] = []
       for i in result {
         let order = try! LimitOrder(JSON: i.dictionaryObject!)
@@ -202,7 +202,7 @@ struct getBalanceObjectsRequest : JSONRPCKit.Request , JSONRPCResponse{
   }
   
   var parameters : Any? {
-      return [WebsocketService.shared.ids[apiCategory.database] ?? 0 , dataBaseCatogery.get_balance_objects.rawValue,[address]]
+    return [WebsocketService.shared.ids[apiCategory.database] ?? 0 , dataBaseCatogery.get_balance_objects.rawValue,[address]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {

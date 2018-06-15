@@ -8,19 +8,37 @@
 
 import UIKit
 
+protocol TradeNavTitleViewDelegate{
+  func sendEventActionWith()
+}
+
 class TradeNavTitleView: UIView {
   
   @IBOutlet weak var title: UILabel!
   
   @IBOutlet weak var icon: UIImageView!
   
+  var isSetUp : Bool?
   
-  var data : [String]?
+  enum Event_Action : String{
+    case changeTitle
+  }
+  
+  var data : String?{
+    didSet{
+      title.text = data
+    }
+  }
+  var delegate : TradeNavTitleViewDelegate?
   
   fileprivate func setup() {
+    self.isSetUp = false
     self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
       guard let `self` = self else { return }
       
+      self.icon.transform = self.isSetUp == false ? CGAffineTransform(rotationAngle: CGFloat(0.5 * Double.pi)) : CGAffineTransform(rotationAngle: 0)
+      self.isSetUp = !self.isSetUp!
+      self.delegate?.sendEventActionWith()
     }).disposed(by: disposeBag)
   }
   

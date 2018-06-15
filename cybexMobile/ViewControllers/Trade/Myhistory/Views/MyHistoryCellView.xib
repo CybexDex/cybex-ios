@@ -14,10 +14,10 @@
             <connections>
                 <outlet property="amount" destination="eDk-Lz-wqv" id="LIs-4K-ahu"/>
                 <outlet property="asset" destination="HKd-vb-HWp" id="yXp-i0-FHG"/>
+                <outlet property="kindL" destination="yEr-qm-iLC" id="WJK-Aq-ATo"/>
                 <outlet property="orderPrice" destination="1Y2-Tx-GxP" id="vTA-T0-kUb"/>
                 <outlet property="price" destination="PEY-Qq-WB8" id="niv-ye-TSX"/>
                 <outlet property="time" destination="lIN-Ed-96N" id="9Hk-uq-oOV"/>
-                <outlet property="type" destination="yEr-qm-iLC" id="adA-Jb-qq1"/>
                 <outlet property="typeView" destination="djn-pJ-crN" id="Wv2-M4-GyA"/>
             </connections>
         </placeholder>
@@ -38,11 +38,11 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BUY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEr-qm-iLC">
                             <rect key="frame" x="5" y="2" width="20" height="11"/>
                             <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="apple" red="0.553" green="0.784" blue="0.310" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="yEr-qm-iLC" secondAttribute="trailing" constant="5" id="7V1-uI-jTQ"/>
                         <constraint firstAttribute="bottom" secondItem="yEr-qm-iLC" secondAttribute="bottom" constant="2" id="fdS-kh-4Cq"/>
@@ -52,6 +52,9 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                            <color key="value" red="0.55300000000000005" green="0.78400000000000003" blue="0.31" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -64,18 +67,21 @@
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="数量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HV1-jK-utZ">
                     <rect key="frame" x="13" y="44" width="25" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZbW-VI-dJB">
                     <rect key="frame" x="13" y="58.5" width="25" height="29.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已成交" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUW-ai-BHJ">
@@ -103,7 +109,6 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="djn-pJ-crN" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="17" id="4BM-h1-jn0"/>
                 <constraint firstItem="ZbW-VI-dJB" firstAttribute="top" secondItem="HV1-jK-utZ" secondAttribute="bottom" id="8rL-sL-Jnj"/>
@@ -130,4 +135,6 @@
             <point key="canvasLocation" x="56" y="-91"/>
         </view>
     </objects>
+    <resources>
+    </resources>
 </document>

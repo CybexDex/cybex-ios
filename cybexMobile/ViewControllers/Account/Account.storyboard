@@ -365,6 +365,40 @@
                                                                 <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5F6-C3-Zz6">
+                                                                <rect key="frame" x="303" y="29" width="60" height="29"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94m-Ef-W6u">
+                                                                        <rect key="frame" x="12" y="6" width="36" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                                        <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="string" keyPath="locali" value="account_trade"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </label>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="94m-Ef-W6u" firstAttribute="leading" secondItem="5F6-C3-Zz6" secondAttribute="leading" constant="12" id="9jh-tC-er4"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="94m-Ef-W6u" secondAttribute="bottom" constant="6" id="A2R-vm-V8M"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="94m-Ef-W6u" secondAttribute="trailing" constant="12" id="Gvb-9k-yof"/>
+                                                                    <constraint firstItem="94m-Ef-W6u" firstAttribute="top" secondItem="5F6-C3-Zz6" secondAttribute="top" constant="6" id="PDh-rg-d3Y"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                        <size key="value" width="0.0" height="8"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                        <real key="value" value="4"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="m7j-ei-f4Q" secondAttribute="bottom" constant="14" id="1mH-Vn-W5r"/>
@@ -372,6 +406,8 @@
                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Qu-fC-mgm" secondAttribute="trailing" constant="10" id="FdB-oc-20C"/>
                                                             <constraint firstItem="9Qu-fC-mgm" firstAttribute="baseline" secondItem="m7j-ei-f4Q" secondAttribute="baseline" id="LeA-Ln-tPS"/>
                                                             <constraint firstItem="m7j-ei-f4Q" firstAttribute="top" secondItem="INX-EI-F0O" secondAttribute="top" id="iTD-L3-wPC"/>
+                                                            <constraint firstItem="5F6-C3-Zz6" firstAttribute="centerY" secondItem="m7j-ei-f4Q" secondAttribute="centerY" id="miG-GX-wAH"/>
+                                                            <constraint firstAttribute="trailing" secondItem="5F6-C3-Zz6" secondAttribute="trailing" constant="12" id="nzs-VF-0X4"/>
                                                             <constraint firstItem="m7j-ei-f4Q" firstAttribute="leading" secondItem="INX-EI-F0O" secondAttribute="leading" constant="25" id="snq-yK-6Xs"/>
                                                         </constraints>
                                                     </view>
@@ -436,6 +472,7 @@
                         <outlet property="balanceIntroduce" destination="YFu-p3-rFq" id="C8r-So-vF5"/>
                         <outlet property="balanceRMB" destination="9Qu-fC-mgm" id="zn5-Cv-OJ8"/>
                         <outlet property="bgImageView" destination="d1Q-u1-Y84" id="WC3-WL-nEt"/>
+                        <outlet property="gatewayView" destination="5F6-C3-Zz6" id="sRL-bX-Y3u"/>
                         <outlet property="introduceCybex" destination="8wY-Fh-vlG" id="YjB-6D-yxT"/>
                         <outlet property="memberLevel" destination="mSY-yo-RcD" id="QNs-32-szK"/>
                         <outlet property="nameL" destination="iad-av-Auu" id="e8S-Eb-rXA"/>

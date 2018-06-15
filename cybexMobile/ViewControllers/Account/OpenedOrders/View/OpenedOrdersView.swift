@@ -9,16 +9,38 @@
 import UIKit
 
 class OpenedOrdersView:  UIView{
-
-    @IBOutlet weak var orderType: OpenedOrdersStatesView!
-    @IBOutlet weak var quote: UILabel!
-    @IBOutlet weak var base: UILabel!
-    @IBOutlet weak var amount: UILabel!
-    @IBOutlet weak var price: UILabel!
-    
-    var data: Any? {
+  
+  @IBOutlet weak var orderType: OpenedOrdersStatesView!
+  @IBOutlet weak var quote: UILabel!
+  @IBOutlet weak var base: UILabel!
+  @IBOutlet weak var amount: UILabel!
+  @IBOutlet weak var price: UILabel!
+  
+  @IBOutlet weak var basePriceView: UIView!
+  @IBOutlet weak var basePrice: UILabel!
+  
+  @IBOutlet weak var cancleOrder: UIView!
+  @IBOutlet weak var cancleL: UILabel!
+  @IBOutlet weak var cancleImg: UIImageView!
+  
+  enum CancleOrder : String{
+    case cancleOrderAction
+  }
+  
+  var selectedIndex : IndexPath?
+  var data: Any? {
     didSet {
       if let order = data as? LimitOrder {
+        if self.basePriceView.isHidden == false{
+          cancleOrder.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+            guard let `self` = self else { return }
+            self.cancleOrder.next?.sendEventWith(CancleOrder.cancleOrderAction.rawValue, userinfo:["selectedIndex":self.selectedIndex ?? 0])
+          }).disposed(by: disposeBag)
+          
+          self.basePrice.text = "--"
+        }
+        
+        
         if order.isBuy {
           self.orderType.opened_status = 0
           if let quote_info = app_data.assetInfo[order.sellPrice.quote.assetID] {
@@ -101,5 +123,10 @@ class OpenedOrdersView:  UIView{
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
-
+  
+  func setupData(_ data : Any,indexPath:IndexPath){
+    self.data = data
+    self.selectedIndex = indexPath
+  }
+  
 }

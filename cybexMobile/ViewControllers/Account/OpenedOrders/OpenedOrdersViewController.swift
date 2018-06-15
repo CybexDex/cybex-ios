@@ -19,19 +19,19 @@ class OpenedOrdersViewController: BaseViewController {
   
   var coordinator: (OpenedOrdersCoordinatorProtocol & OpenedOrdersStateManagerProtocol)?
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
   }
   
   
-  
   func setupUI(){
     headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 103))
     headerView.sectionTitleView.cybPriceTitle.locali = R.string.localizable.opened_order_value.key.localized()
     headerView.sectionTitleView.totalTitle.locali = R.string.localizable.opened_asset_amount.key.localized()
-    
     tableView.tableHeaderView = headerView
+    
     self.localized_text = R.string.localizable.openedTitle.key.localizedContainer()
     let cell = String.init(describing:OpenedOrdersCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)    

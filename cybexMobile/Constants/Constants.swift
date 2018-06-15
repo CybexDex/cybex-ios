@@ -115,6 +115,7 @@ class AssetConfiguration {
   static let ETH = "1.3.2"
   static let USDT = "1.3.27"
   
+  static let order_name = ["USDT","ETH", "BTC", "CYB"]
   static let market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.CYB,AssetConfiguration.USDT,AssetConfiguration.BTC]
   
   var unique_ids:[String] {

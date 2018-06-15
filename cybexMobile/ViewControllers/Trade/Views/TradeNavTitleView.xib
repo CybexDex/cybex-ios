@@ -21,33 +21,35 @@
             <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hXI-FM-uVL">
-                    <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="CYB/ETH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPt-BA-Dlc">
-                            <rect key="frame" x="0.0" y="0.0" width="86" height="40"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icAccountBoxActive24Px" translatesAutoresizingMaskIntoConstraints="NO" id="9bm-09-bDc">
-                            <rect key="frame" x="96" y="0.0" width="24" height="40"/>
-                        </imageView>
-                    </subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="CYB/ETH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPt-BA-Dlc">
+                    <rect key="frame" x="0.0" y="0.0" width="94" height="40"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                            <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic" translatesAutoresizingMaskIntoConstraints="NO" id="9bm-09-bDc">
+                    <rect key="frame" x="104" y="11.5" width="16" height="16"/>
                     <constraints>
-                        <constraint firstItem="rPt-BA-Dlc" firstAttribute="leading" secondItem="hXI-FM-uVL" secondAttribute="leading" id="89r-9G-dJ4"/>
-                        <constraint firstAttribute="trailing" secondItem="9bm-09-bDc" secondAttribute="trailing" id="eiY-2V-wEh"/>
+                        <constraint firstAttribute="width" constant="16" id="XbP-To-oyU"/>
+                        <constraint firstAttribute="height" constant="16" id="iRF-0Y-4Wa"/>
                     </constraints>
-                </stackView>
+                </imageView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="hXI-FM-uVL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PgZ-zZ-D2R"/>
-                <constraint firstItem="hXI-FM-uVL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="gNv-tA-rld"/>
-                <constraint firstItem="hXI-FM-uVL" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="gQt-GW-DG7"/>
-                <constraint firstItem="hXI-FM-uVL" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ny3-0q-AJF"/>
-                <constraint firstAttribute="trailing" secondItem="hXI-FM-uVL" secondAttribute="trailing" id="q5G-sQ-CgI"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="hXI-FM-uVL" secondAttribute="bottom" id="tLd-cz-xcr"/>
+                <constraint firstItem="rPt-BA-Dlc" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="F6r-Jr-7iu"/>
+                <constraint firstItem="9bm-09-bDc" firstAttribute="leading" secondItem="rPt-BA-Dlc" secondAttribute="trailing" constant="10" id="PJC-1r-Zlj"/>
+                <constraint firstItem="9bm-09-bDc" firstAttribute="centerY" secondItem="rPt-BA-Dlc" secondAttribute="centerY" id="ZIG-m1-1BR"/>
+                <constraint firstItem="rPt-BA-Dlc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="iwa-0w-A6n"/>
+                <constraint firstItem="rPt-BA-Dlc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="pMJ-he-8bG"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9bm-09-bDc" secondAttribute="trailing" id="rVS-0d-kXM"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -55,6 +57,6 @@
         </view>
     </objects>
     <resources>
-        <image name="icAccountBoxActive24Px" width="24" height="24"/>
+        <image name="ic" width="16" height="16"/>
     </resources>
 </document>

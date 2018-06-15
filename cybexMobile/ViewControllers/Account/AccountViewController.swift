@@ -35,7 +35,8 @@ class AccountViewController: BaseViewController {
     case noDataState = 3
   }
   
-  @IBOutlet weak var portfolioView: AccountPortfolioView!
+    @IBOutlet weak var gatewayView: UIView!
+    @IBOutlet weak var portfolioView: AccountPortfolioView!
   @IBOutlet weak var nameL: UILabel!
   
   @IBOutlet weak var memberLevel: UILabel!
@@ -95,6 +96,14 @@ class AccountViewController: BaseViewController {
   }
   
   func setupEvent() {
+    gatewayView.rx.tapGesture().when(.recognized).subscribe(onNext:{[weak self](tap) in
+        
+        guard let `self` = self else {return}
+       self.coordinator?.openRecharge()
+        
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+    
     if let login_view = stackView.viewWithTag(view_type.login_view.rawValue) {
       login_view.rx.tapGesture().when(.recognized).subscribe(onNext: { (tap) in
         app_coodinator.showLogin()
@@ -271,8 +280,8 @@ extension AccountViewController{
     self.coordinator?.openYourProtfolio()
   }
   @objc func openOpenedOrders(_ data:[String: Any]){
-//    self.coordinator?.openOpenedOrders()
-    self.coordinator?.openRecharge()
+    self.coordinator?.openOpenedOrders()
+//    self.coordinator?.openRecharge()
   }
   @objc func openLockupAssets(_ data:[String: Any]){
     self.coordinator?.openLockupAssets()

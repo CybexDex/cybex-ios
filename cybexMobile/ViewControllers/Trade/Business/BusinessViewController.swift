@@ -34,7 +34,11 @@ class BusinessViewController: BaseViewController {
     case SELL
   }
   
-  var vc_type : VC_TYPE = VC_TYPE.BUY
+  var vc_type : VC_TYPE = VC_TYPE.BUY {
+    didSet{
+       setupUI()
+    }
+  }
   var coordinator: (BusinessCoordinatorProtocol & BusinessStateManagerProtocol)?
   
   @IBAction func changePrice(_ sender: UIButton) {

@@ -15,45 +15,52 @@ class MyHistoryViewController: BaseViewController {
   struct define {
     static let sectionHeaderHeight : CGFloat = 44.0
   }
-    @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var tableView: UITableView!
+  
+  var coordinator: (MyHistoryCoordinatorProtocol & MyHistoryStateManagerProtocol)?
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupUI()
+  }
+  func setupUI(){
+    let name = String.init(describing:MyHistoryCell.self)
     
-    var coordinator: (MyHistoryCoordinatorProtocol & MyHistoryStateManagerProtocol)?
-
-	override func viewDidLoad() {
-        super.viewDidLoad()
+    tableView.register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: name)
+  }
+  
+  func commonObserveState() {
+    coordinator?.subscribe(errorSubscriber) { sub in
+      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
+        return false
+      })
     }
     
-    func commonObserveState() {
-        coordinator?.subscribe(errorSubscriber) { sub in
-            return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
-        
-        coordinator?.subscribe(loadingSubscriber) { sub in
-            return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
+    coordinator?.subscribe(loadingSubscriber) { sub in
+      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
+        return false
+      })
     }
+  }
+  
+  override func configureObserveState() {
+    commonObserveState()
     
-    override func configureObserveState() {
-        commonObserveState()
-        
-    }
+  }
 }
 
 extension MyHistoryViewController : UITableViewDelegate,UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 10
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let name = String.init(describing:MyHistoryCell.self)
+    let cell = tableView.dequeueReusableCell(withIdentifier: name, for: indexPath)
+    return cell
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-      return cell
-
-    }
-    
+  }
+  
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: define.sectionHeaderHeight))
     lockupAssetsSectionView.cybPriceTitle.locali = R.string.localizable.cyb_value.key.localized()

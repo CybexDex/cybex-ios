@@ -52,7 +52,7 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
   func fetchData(_ pair:Pair) {
     store.dispatch(creator.fetchLimitOrders(with: pair, callback: {[weak self] (data) in
       guard let `self` = self else { return }
-
+      
       if let data = data as? [LimitOrder] {
         self.store.dispatch(FetchedLimitData(data:data, pair:pair))
       }

@@ -11,9 +11,19 @@ import SwiftTheme
 
 class OpenedOrdersCell: BaseTableViewCell {
   
-    @IBOutlet weak var orderView: OpenedOrdersView!
+  @IBOutlet weak var orderView: OpenedOrdersView!
   
-    override func awakeFromNib() {
+  var Cell_Type : Int = 1{
+    didSet{
+      if Cell_Type != 1 {
+        orderView.basePriceView.isHidden = false
+        orderView.cancleL.isHidden       = false
+        orderView.cancleImg.isHidden     = false
+      }
+    }
+  }
+  
+  override func awakeFromNib() {
     super.awakeFromNib()
     self.contentView.shadowColor = ThemeManager.currentThemeIndex == 0 ? .darkTwo : .paleGrey
     self.contentView.shadowOffset = CGSize(width: 0, height: -1)
@@ -22,7 +32,7 @@ class OpenedOrdersCell: BaseTableViewCell {
   }
   
   override func setup(_ data: Any?, indexPath: IndexPath) {
-    orderView.data = data
+    orderView.setupData(data, indexPath: indexPath)
   }
   
 }

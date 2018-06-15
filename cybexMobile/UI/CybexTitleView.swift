@@ -39,7 +39,7 @@ class CybexTitleView: UIView {
       
       for i in 0...data.count - 1 {
         let btn = UIButton(frame: CGRect(x: CGFloat(i) * (btn_width + space), y: 0, width: btn_width, height: self.height-1))
-        btn.setTitle(data[i], for: .normal)
+        btn.locali = data[i]
         btn.setTitleColor(.steel, for: .normal)
         btn.setTitleColor(.pastelOrange, for: .selected)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)

@@ -12,11 +12,22 @@ class TradeLineView: UIView {
   @IBOutlet weak var backColorView: UIView!
   @IBOutlet weak var price: UILabel!
   @IBOutlet weak var amount: UILabel!
-  
-  
+    @IBOutlet weak var backViewLeading: NSLayoutConstraint!
+    
+  var isBuy : Bool?
   var data : Any?{
     didSet{
-      
+      if let data = data as? OrderBook.Order{
+        price.text  = data.price
+        amount.text = data.volume
+        backViewLeading.constant = self.width * CGFloat(1 - data.volume_percent)
+        backColorView.backgroundColor = self.isBuy == true ? UIColor.reddish15 : UIColor.turtleGreen15
+        price.textColor = self.isBuy == true ? UIColor.reddish : UIColor.turtleGreen
+        if UIScreen.main.bounds.width <= 320 {
+          price.font  = UIFont.systemFont(ofSize: 11)
+          amount.font = UIFont.systemFont(ofSize: 11)
+        }
+      }
     }
   }
   
