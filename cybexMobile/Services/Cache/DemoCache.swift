@@ -15,7 +15,7 @@ struct Place:Codable {
   var isFavorite: Bool
 }
 
-extension Place:MutablePersistable,RowConvertible {
+extension Place:MutablePersistableRecord,FetchableRecord {
   static var databaseTableName: String = "places"
   
   

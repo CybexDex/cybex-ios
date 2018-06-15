@@ -21,6 +21,9 @@ import Kingfisher
 import Fabric
 import Crashlytics
 import SwiftRichString
+import SwiftyBeaver
+
+let log = SwiftyBeaver.self
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,6 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     Fabric.with([Crashlytics.self, Answers.self])
     EasyAnimation.enable()
+    
+    let console = ConsoleDestination()
+    log.addDestination(console)
+//    let file = FileDestination()
+//    file.logFileURL = URL(fileURLWithPath: "/tmp/swiftybeaver.log")
+    //    log.addDestination(file)
     
     self.window = UIWindow.init(frame: UIScreen.main.bounds)
     self.window?.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]

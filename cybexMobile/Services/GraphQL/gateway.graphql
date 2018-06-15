@@ -1,41 +1,47 @@
 query VerifyAddress($asset: String!, $address: String!, $accountName: String) {
     verifyAddress(asset: $asset, address: $address, accountName: $accountName) {
-        address
-        asset
-        valid
+        ...WithdrawAddressInfo
     }
 }
 
-query WithdrawInfo($type: String!) {
+query GetWithdrawInfo($type: String!) {
     withdrawInfo(type: $type) {
-        minValue
-        fee
-        type
-        asset
-        gatewayAccount
+       ...WithdrawinfoObject
     }
 }
 
 query GetDepositAddress($accountName: String!, $asset: String) {
     getDepositAddress(accountName: $accountName, asset: $asset) {
-        accountName
-        address
-        type
-        asset
-        jadeOrders
-        latest
-        createAt
+      ...accountAddressRecord
     }
 }
 
 mutation NewDepositAddress($accountName: String!, $asset: String!) {
     newDepositAddress(accountName: $accountName, asset: $asset) {
-        accountName
-        address
-        type
-        asset
-        jadeOrders
-        latest
-        createAt
+      ...accountAddressRecord
     }
+}
+
+fragment WithdrawAddressInfo on WithdrawAddressInfo {
+  address
+  asset
+  valid
+}
+
+fragment WithdrawinfoObject on WithdrawInfo {
+  minValue
+  fee
+  type
+  asset
+  gatewayAccount
+}
+
+fragment accountAddressRecord on AccountAddressRecord {
+  accountName
+  address
+  type
+  asset
+  jadeOrders
+  latest
+  createAt
 }

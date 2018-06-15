@@ -77,6 +77,7 @@ def ui
     pod 'Macaw'
     pod 'SwiftEntryKit'
     pod 'Keyboard+LayoutGuide'
+    pod 'XLPagerTabStrip'
 end
 
 def other
@@ -89,6 +90,12 @@ end
 def fabric
     pod 'Fabric'
     pod 'Crashlytics'
+end
+
+def debug
+    pod 'SwiftyBeaver'
+#   pod 'AppSpectorSDK'
+#   pod 'WoodPeckeriOS', '>= 1.0.3', :configurations => ['Debug']
 end
 
 target 'cybexMobile' do
@@ -108,7 +115,7 @@ target 'cybexMobile' do
   extension
   ui
   other
-
+  debug
 end
 
 
