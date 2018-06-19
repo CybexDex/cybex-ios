@@ -133,4 +133,18 @@
 "my_opened_filled" = "成交量/撤单";
 
 
+"withdraw_nomore" = "余额不足";
+"withdraw_address_fault" = "地址不合法";
+"withdraw_available" = "可用余额";
+"withdraw_address"   = "提现地址";
+"withdraw_address_placehold"   = "输入或长按粘贴地址";
+"withdraw_amount" = "数量";
+"withdraw_amount_all" = "全部";
+"withdraw_fee"        = "提现手续费";
+"withdraw_gateway_fee" = "转账手续费";
+"withdraw_receive_amount" = "到账数量";
+
+
+
+
 

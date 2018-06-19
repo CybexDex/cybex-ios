@@ -628,7 +628,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="SOURCE_TYPE">
                                                                 <integer key="value" value="0"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="name" value="可用余额"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_available"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T6i-Rm-ECC">
@@ -643,9 +643,9 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="SOURCE_TYPE">
                                                                         <integer key="value" value="2"/>
                                                                     </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="提现地址"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_address"/>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="输入或长按粘贴地址"/>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="textplaceholder" value="输入或长按粘贴地址"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="textplaceholder" value="withdraw_address_placehold"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qr6-Fm-73f" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
@@ -654,9 +654,8 @@
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="SOURCE_TYPE">
                                                                         <integer key="value" value="2"/>
                                                                     </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="数量"/>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_amount"/>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="最小提现数量"/>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="textplaceholder" value="最小提现数量"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                         </subviews>
@@ -676,30 +675,42 @@
                                                         <rect key="frame" x="0.0" y="229" width="349" height="22"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址错误" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YcF-6O-jaN">
-                                                                <rect key="frame" x="12" y="10" width="325" height="0.0"/>
+                                                                <rect key="frame" x="51" y="10" width="286" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <color key="textColor" red="1" green="0.1181127701" blue="0.2395080661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="erro16Px" translatesAutoresizingMaskIntoConstraints="NO" id="vIx-PZ-HXH">
+                                                                <rect key="frame" x="25" y="3" width="16" height="16"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="16" id="YQZ-sQ-jB6"/>
+                                                                    <constraint firstAttribute="width" constant="16" id="fIE-94-cGd"/>
+                                                                </constraints>
+                                                            </imageView>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="YcF-6O-jaN" secondAttribute="bottom" constant="12" id="32Z-ot-CAL"/>
+                                                            <constraint firstItem="vIx-PZ-HXH" firstAttribute="leading" secondItem="ZMf-Nq-OB3" secondAttribute="leading" constant="25" id="7x9-Mb-4Ha"/>
                                                             <constraint firstAttribute="trailing" secondItem="YcF-6O-jaN" secondAttribute="trailing" constant="12" id="AL7-bA-os1"/>
-                                                            <constraint firstItem="YcF-6O-jaN" firstAttribute="leading" secondItem="ZMf-Nq-OB3" secondAttribute="leading" constant="12" id="TWZ-y3-ws6"/>
                                                             <constraint firstItem="YcF-6O-jaN" firstAttribute="top" secondItem="ZMf-Nq-OB3" secondAttribute="top" constant="10" id="bKm-V7-RvF"/>
+                                                            <constraint firstItem="YcF-6O-jaN" firstAttribute="leading" secondItem="vIx-PZ-HXH" secondAttribute="trailing" constant="10" id="pn9-Kk-6Yz"/>
+                                                            <constraint firstItem="vIx-PZ-HXH" firstAttribute="centerY" secondItem="ZMf-Nq-OB3" secondAttribute="centerY" id="tzQ-CF-fUq"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DlJ-rS-N18">
                                                         <rect key="frame" x="0.0" y="234" width="349" height="79"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="网关提现手续费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Trw-Mn-1OM">
-                                                                <rect key="frame" x="12" y="18" width="100" height="22"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Trw-Mn-1OM">
+                                                                <rect key="frame" x="12" y="18" width="0.0" height="22"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="22" id="Fpz-DR-Ed6"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="locali" value="withdraw_fee"/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- ETH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVv-Pa-xFA">
                                                                 <rect key="frame" x="292.5" y="21" width="44.5" height="17"/>
@@ -707,14 +718,17 @@
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内部提现手续费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUL-tK-nBd">
-                                                                <rect key="frame" x="12" y="40" width="100" height="22"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUL-tK-nBd">
+                                                                <rect key="frame" x="12" y="40" width="0.0" height="22"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="22" id="VJF-v0-jBt"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="locali" value="withdraw_gateway_fee"/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- CYB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKH-9I-fn3">
                                                                 <rect key="frame" x="291.5" y="43" width="45.5" height="17"/>
@@ -764,11 +778,14 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GYE-17-xCM">
                                                         <rect key="frame" x="0.0" y="479" width="349" height="129"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到账数量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMF-Ub-sfr">
-                                                                <rect key="frame" x="12" y="22" width="57.5" height="20"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMF-Ub-sfr">
+                                                                <rect key="frame" x="12" y="22" width="0.0" height="20"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="locali" value="withdraw_receive_amount"/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Un-JV-3Lb">
                                                                 <rect key="frame" x="323.5" y="22" width="13.5" height="20"/>
@@ -842,6 +859,13 @@
                         <outlet property="addressView" destination="oJ0-WA-Zua" id="IoJ-XS-XP6"/>
                         <outlet property="amountView" destination="qr6-Fm-73f" id="OuS-By-05x"/>
                         <outlet property="avaliableView" destination="YCH-bx-Cnz" id="wyy-2K-5xN"/>
+                        <outlet property="errorL" destination="YcF-6O-jaN" id="Y5Z-Kl-2Xk"/>
+                        <outlet property="errorView" destination="ZMf-Nq-OB3" id="mqg-xy-Se6"/>
+                        <outlet property="feeView" destination="DlJ-rS-N18" id="mAH-30-KVL"/>
+                        <outlet property="finalAmount" destination="2Un-JV-3Lb" id="cnX-3T-RRm"/>
+                        <outlet property="gateAwayFee" destination="tVv-Pa-xFA" id="Y2P-aF-iI7"/>
+                        <outlet property="insideFee" destination="pKH-9I-fn3" id="PL6-wf-4Ps"/>
+                        <outlet property="introduceView" destination="yhZ-aN-stl" id="fhJ-Qw-vxU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YEe-p4-UE3" sceneMemberID="firstResponder"/>
@@ -1023,5 +1047,6 @@
         <image name="accountAvatar" width="56" height="56"/>
         <image name="account_bg_light" width="375" height="553"/>
         <image name="cloudWallet" width="24" height="24"/>
+        <image name="erro16Px" width="16" height="16"/>
     </resources>
 </document>

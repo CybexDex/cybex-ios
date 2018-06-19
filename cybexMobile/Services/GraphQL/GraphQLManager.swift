@@ -21,7 +21,7 @@ class GraphQLManager {
   static let shared = GraphQLManager()
   
   private init() {
-
+    
   }
   
   func verifyAddress(assetName:String, address:String) -> PromiseKit.Promise<WithdrawAddressInfo?> {
@@ -47,7 +47,6 @@ class GraphQLManager {
         seal.fulfill(nil)
         return
       }
-      
       seal.fulfill(result?.data?.withdrawInfo.fragments.withdrawinfoObject)
     }
     

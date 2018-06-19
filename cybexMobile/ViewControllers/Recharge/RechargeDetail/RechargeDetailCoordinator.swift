@@ -31,7 +31,7 @@ class RechargeDetailCoordinator: AccountRootCoordinator {
 }
 
 extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
-    
+  
 }
 
 extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {

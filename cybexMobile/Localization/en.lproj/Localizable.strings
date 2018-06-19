@@ -138,4 +138,15 @@
 "my_opened_price" = "Price/Amount";
 "my_opened_filled" = "Filled/Cancel";
 
+"withdraw_nomore" = "Lack of balance";
+"withdraw_address_fault" = "Address invalid";
+"withdraw_available" = "Available";
+"withdraw_address"   = "Withdrawal Address";
+"withdraw_address_placehold"   = "Enter or paste address";
+"withdraw_amount" = "Amount";
+"withdraw_amount_all" = "ALL";
+"withdraw_fee"        = "Withdrawal Fee";
+"withdraw_gateway_fee" = "Gateway Fee";
+"withdraw_receive_amount" = "Receive Amount";
+
 

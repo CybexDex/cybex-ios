@@ -9,9 +9,10 @@
 import UIKit
 
 class TradeCell: BaseTableViewCell {
-  
-  
+    @IBOutlet weak var tradeCellView: TradeItemView!
+    
     override func setup(_ data: Any?) {
+    tradeCellView.data = data
   }
 
     override func awakeFromNib() {

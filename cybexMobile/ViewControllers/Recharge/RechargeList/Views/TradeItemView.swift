@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import Kingfisher
 
 class TradeItemView: UIView {
   var data : Any? {
     didSet{
-      
+      if let data = data as? Balance{
+        let info = app_data.assetInfo[data.asset_type]
+        self.icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + data.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
+        name.text = info?.symbol.filterJade
+        amount.text = "\(getRealAmount(data.asset_type,amount: data.balance))"
+      }
     }
   }
     @IBOutlet weak var icon: UIImageView!

@@ -31,7 +31,7 @@
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hM9-Sb-Vwa">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hM9-Sb-Vwa" customClass="ImageTextField" customModule="cybexMobile" customModuleProvider="target">
                     <rect key="frame" x="12" y="38" width="303" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="RaZ-v9-vjo"/>
