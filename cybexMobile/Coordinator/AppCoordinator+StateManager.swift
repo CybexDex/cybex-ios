@@ -110,20 +110,18 @@ extension AppCoordinator {
   func getLatestData() {
     if AssetConfiguration.shared.asset_ids.isEmpty {
       var pairs:[Pair] = []
-      async {
-        AssetConfiguration.market_base_assets.forEach { (base) in
-          let pair = try! await(SimpleHTTPService.requestMarketList(base:base))
+      var count = 0
+      for base in AssetConfiguration.market_base_assets {
+        SimpleHTTPService.requestMarketList(base:base).done({ (pair) in
+          count += 1
           pairs += pair
-        }
-        
-        main {
-          AssetConfiguration.shared.asset_ids = pairs
-          self.fetchAsset()
-          self.request24hMarkets(AssetConfiguration.shared.asset_ids)
-        }
+          if count == AssetConfiguration.market_base_assets.count {
+            AssetConfiguration.shared.asset_ids = pairs
+            self.fetchAsset()
+            self.request24hMarkets(AssetConfiguration.shared.asset_ids)
+          }
+        }).cauterize()
       }
-      
-
     }
     else {
       if app_data.assetInfo.count != AssetConfiguration.shared.asset_ids.count {

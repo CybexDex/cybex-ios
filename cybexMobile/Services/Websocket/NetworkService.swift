@@ -76,6 +76,7 @@ class WebsocketService {
   private func detectFastNode() -> Promise<NodeURLString> {
     let (promise, seal) = Promise<NodeURLString>.pending()
 
+    var errorCount = 0
     for (idx, node) in NodeURLString.all.enumerated() {
       var testsocket:WebSocket!
       
@@ -83,7 +84,10 @@ class WebsocketService {
         testsocket = testsockets[idx]
       }
       else {
-        testsocket = WebSocket(url: URL(string:node.rawValue)!)
+        var request = URLRequest(url: URL(string:node.rawValue)!)
+        request.timeoutInterval = autoConnectCount.double * 1.0 + 0.1//随着重试次数增加 增加超时时间
+        testsocket = WebSocket(request: request)
+    
         testsocket.callbackQueue = Await.Queue.await
         testsockets.append(testsocket)
       }
@@ -92,9 +96,6 @@ class WebsocketService {
       testsocket.onConnect = {
         seal.fulfill(node)
 
-        self.testsockets.forEach({ (s) in
-          s.disconnect()
-        })
       }
       
       /*
@@ -105,7 +106,11 @@ class WebsocketService {
       testsocket.onDisconnect = { error in
         guard let error = error else { return }
         
-        seal.reject(error)
+        errorCount += 1
+        
+        if errorCount == NodeURLString.all.count {
+          seal.reject(error)
+        }
       }
     
       
@@ -113,6 +118,27 @@ class WebsocketService {
     }
     
     return promise
+  }
+  
+  private func pingTest() {
+    var errorCount = 0
+    
+    for (_, node) in NodeURLString.all.enumerated() {
+      let helper = PingHelper()
+      helper.host = node.rawValue.components(separatedBy: "//")[1]
+      helper.ping { (complete) in
+        if complete {
+          
+        }
+        else {
+          errorCount += 1
+          if errorCount == NodeURLString.all.count {
+            
+          }
+        }
+      }
+      
+    }
   }
   
   func connect() {

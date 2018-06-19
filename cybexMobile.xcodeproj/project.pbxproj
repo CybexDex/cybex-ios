@@ -258,6 +258,7 @@
 		7320D6BB205FBC5800C3F579 /* CBEMAVOLUMEModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7320D6BA205FBC5800C3F579 /* CBEMAVOLUMEModel.swift */; };
 		7324A91920AB01FA005BCFF8 /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7324A91820AB01FA005BCFF8 /* GradientLayer.swift */; };
 		7324FDCB206CFC37004296E7 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7324FDCA206CFC37004296E7 /* SettingCell.swift */; };
+		7327CE0D20D8AB8400DC681F /* NetworkBroadcastAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7327CE0C20D8AB8400DC681F /* NetworkBroadcastAPI.swift */; };
 		733402242067DA05000F78B3 /* LocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733402232067DA05000F78B3 /* LocalCache.swift */; };
 		733402272067DB00000F78B3 /* DemoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733402262067DB00000F78B3 /* DemoCache.swift */; };
 		733557D42052642800C5ADD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733557D12052642700C5ADD4 /* AppDelegate.swift */; };
@@ -11769,6 +11770,7 @@
 		7320D6BA205FBC5800C3F579 /* CBEMAVOLUMEModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBEMAVOLUMEModel.swift; sourceTree = "<group>"; };
 		7324A91820AB01FA005BCFF8 /* GradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
 		7324FDCA206CFC37004296E7 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		7327CE0C20D8AB8400DC681F /* NetworkBroadcastAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkBroadcastAPI.swift; sourceTree = "<group>"; };
 		733402232067DA05000F78B3 /* LocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCache.swift; sourceTree = "<group>"; };
 		733402262067DB00000F78B3 /* DemoCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCache.swift; sourceTree = "<group>"; };
 		733557D12052642700C5ADD4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -31909,6 +31911,7 @@
 			children = (
 				733CD33020623F47002AD0E0 /* DataBaseApi.swift */,
 				73BDCA20206266CE009E67A3 /* HistoryApi.swift */,
+				7327CE0C20D8AB8400DC681F /* NetworkBroadcastAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -32575,6 +32578,7 @@
 				72EE598A20D218310096AAB2 /* BusinessTitleView.swift in Sources */,
 				7320D6B5205FA92400C3F579 /* CBKLineVolumeView.swift in Sources */,
 				73B88E2120AFD4940069AAB6 /* Vesting.swift in Sources */,
+				7327CE0D20D8AB8400DC681F /* NetworkBroadcastAPI.swift in Sources */,
 				731A0E9E20A4409900507D1E /* EntryCoordinator.swift in Sources */,
 				72F6DF2B20AC2EE600BBF105 /* AccountAssetOperationView.swift in Sources */,
 				73DF25B320C53D9300A0D00F /* pts_address.cpp in Sources */,
@@ -32722,8 +32726,6 @@
 				73D977E220565E9700CB7DE1 /* ExplorerRootCoordinator.swift in Sources */,
 				72C5732C20CF802D005ABFA5 /* CybexActionView.swift in Sources */,
 				7386AD5C20B4134D00168629 /* ColorTheme.swift in Sources */,
-
-				73E6B2B9208D911D00B015E5 /* fc_bridge.cpp in Sources */,
 				72C5737C20CFA35E005ABFA5 /* TradeActions.swift in Sources */,
 				73A0CC41206A3DDA00463ADE /* AssetInfo.swift in Sources */,
 				73D9789F20579EE200CB7DE1 /* MarketViewController.swift in Sources */,
