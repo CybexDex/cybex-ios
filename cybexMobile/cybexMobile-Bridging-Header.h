@@ -3,7 +3,6 @@
 //
 
 #import <RealReachability/RealReachability.h>
-
 #import <KMNavigationBarTransition/KMNavigationBarTransition.h>
 
 #import "BitShareCoordinator.h"

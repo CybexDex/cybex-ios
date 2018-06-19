@@ -42,6 +42,10 @@ func async(_ body: @escaping () throws -> Void) {
   Await.Queue.async.ak.async(body)
 }
 
+func await(_ body: @escaping () throws -> Void) {
+  Await.Queue.await.ak.async(body)
+}
+
 func serialAsync(_ body: @escaping () throws -> Void) {
   Await.Queue.serialAsync.ak.async(body)
 }
@@ -57,11 +61,12 @@ class SimpleHTTPService {
 extension SimpleHTTPService {
   static func requestMarketList(base : String) -> Promise<[Pair]> {
     var request = URLRequest(url: URL(string: AppConfiguration.SERVER_MARKETLIST_URLString + base)!)
+    request.timeoutInterval = 5
     request.cachePolicy = .reloadIgnoringCacheData
     
     let (promise, seal) = Promise<[Pair]>.pending()
     
-    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments, completionHandler: { (response) in
+    Alamofire.request(request).responseJSON(queue: DispatchQueue.main, options: .allowFragments, completionHandler: { (response) in
       guard let value = response.result.value else {
         seal.fulfill([])
         return
