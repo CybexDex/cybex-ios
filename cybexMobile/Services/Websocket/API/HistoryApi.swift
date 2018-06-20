@@ -13,6 +13,7 @@ import SwiftyJSON
 enum historyCatogery:String {
   case get_market_history
   case get_fill_order_history
+  case get_account_history
 }
 
 struct AssetPairQueryParams {
@@ -21,6 +22,27 @@ struct AssetPairQueryParams {
   var timeGap:Int
   var startTime:Date
   var endTime:Date
+}
+
+struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
+  var accountID:String
+  var response:RPCSResponse
+  
+  var method: String {
+    return "call"
+  }
+  
+  var parameters: Any? {
+    return [WebsocketService.shared.ids[apiCategory.history] ?? 0, historyCatogery.get_account_history.rawValue, [accountID, "1.11.0", "100", "1.11.0"]]
+  }
+  
+  func transferResponse(from resultObject: Any) throws -> Any {
+    if let response = resultObject as? [[String: Any]] {
+      return response
+    } else {
+      throw CastError(actualValue: resultObject, expectedType: Response.self)
+    }
+  }
 }
 
 struct GetMarketHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
