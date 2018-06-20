@@ -17,6 +17,12 @@ class TradeItemView: UIView {
         self.icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + data.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
         name.text = info?.symbol.filterJade
         amount.text = "\(getRealAmount(data.asset_type,amount: data.balance))"
+        amount.isHidden = false
+      }else if let data = data as? String{
+        let info = app_data.assetInfo[data]
+        self.icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + data.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
+        name.text = info?.symbol.filterJade
+        amount.isHidden = true
       }
     }
   }

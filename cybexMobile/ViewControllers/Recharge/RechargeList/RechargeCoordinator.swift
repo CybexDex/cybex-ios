@@ -11,7 +11,7 @@ import ReSwift
 
 protocol RechargeCoordinatorProtocol {
   func openRechargeDetail(_ balance:Balance)
-  func openWithDrawDetail()
+  func openWithDrawDetail(_ id:String)
 }
 
 protocol RechargeStateManagerProtocol {
@@ -19,6 +19,9 @@ protocol RechargeStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<RechargeState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
+  
+  func fetchWithdrawIdsInfo()
+  func fetchDepositIdsInfo()
 }
 
 class RechargeCoordinator: AccountRootCoordinator {
@@ -40,11 +43,11 @@ extension RechargeCoordinator: RechargeCoordinatorProtocol {
     vc.balance        = balance
     self.rootVC.pushViewController(vc, animated: true)
   }
-  func openWithDrawDetail(){
+  func openWithDrawDetail(_ id:String){
     let vc = R.storyboard.account.withdrawDetailViewController()!
     let coordinator = WithdrawDetailCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator
-    
+    vc.withdrawId     = id
     self.rootVC.pushViewController(vc, animated: true)
   }
 }
@@ -59,5 +62,19 @@ extension RechargeCoordinator: RechargeStateManagerProtocol {
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
+  func fetchWithdrawIdsInfo(){
+    async {
+      SimpleHTTPService.fetchIdsInfo(AppConfiguration.WITHDRAW).done { (ids) in
+        self.store.dispatch(FecthWithdrawIds(data: ids))
+        }.cauterize()
+    }
+  }
+  func fetchDepositIdsInfo(){
+    async {
+      SimpleHTTPService.fetchIdsInfo(AppConfiguration.DEPOSIT).done { (ids) in
+        self.store.dispatch(FecthDepositIds(data: ids))
+        }.cauterize()
+    }
+  }
     
 }

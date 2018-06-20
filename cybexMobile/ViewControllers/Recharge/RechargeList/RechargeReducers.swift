@@ -17,6 +17,8 @@ func RechargePropertyReducer(_ state: RechargePropertyState?, action: Action) ->
     var state = state ?? RechargePropertyState()
     
     switch action {
+    case let action as FecthDepositIds:state.depositIds.accept(action.data)
+    case let action as FecthWithdrawIds:state.withdrawIds.accept(action.data)
     default:
         break
     }

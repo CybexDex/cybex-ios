@@ -14,6 +14,7 @@ class Account: Mappable {
   var name:String = ""
   var active_auths:[Any] = []
   var owner_auths:[Any] = []
+  var id:String = ""
   
   required init?(map: Map) {
     
@@ -24,6 +25,7 @@ class Account: Mappable {
      name                   <- (map["name"],ToStringTransform())
      active_auths <- map["active.key_auths"]
      owner_auths <- map["owner.key_auths"]
+    id           <- map["id"]
   }
 }
 

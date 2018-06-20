@@ -24,10 +24,11 @@ class RechargeViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.coordinator?.fetchDepositIdsInfo()
+    self.coordinator?.fetchWithdrawIdsInfo()
     setupUI()
   }
   func setupUI(){
-    
     self.localized_text = R.string.localizable.account_trade.key.localizedContainer()
     let cell = String.init(describing:TradeCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
@@ -46,6 +47,13 @@ class RechargeViewController: BaseViewController {
         return false
       })
     }
+    
+    self.coordinator?.state.property.depositIds.asObservable().skip(1).subscribe(onNext: { [weak self](ids) in
+      guard let `self` = self else {return}
+//      if self.selectedIndex == .RECHARGE {
+        self.tableView.reloadData()
+//      }
+    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   
   override func configureObserveState() {
@@ -68,7 +76,7 @@ extension RechargeViewController:UITableViewDataSource,UITableViewDelegate{
       }
       return 0
     }
-    return 20
+    return (self.coordinator?.state.property.depositIds.value.count)!
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,21 +85,37 @@ extension RechargeViewController:UITableViewDataSource,UITableViewDelegate{
       if let data = UserManager.shared.balances.value{
         cell.setup(data[indexPath.row])
       }
+    }else{
+      if let data = self.coordinator?.state.property.depositIds.value {
+        cell.setup(data[indexPath.row])
+      }
     }
-    
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
     switch selectedIndex.rawValue {
     case 0:
-      self.coordinator?.openWithDrawDetail()
-    case 1:
-      if let data = UserManager.shared.balances.value{
-        let info = data[indexPath.row]
-        
-        self.coordinator?.openRechargeDetail(info)
+      if let data = self.coordinator?.state.property.depositIds.value {
+        self.coordinator?.openWithDrawDetail(data[indexPath.row])
+
       }
+    case 1:
+      if let ids = self.coordinator?.state.property.withdrawIds.value {
+        if let data = UserManager.shared.balances.value{
+          let info = data[indexPath.row]
+          if ids.contains(info.asset_type){
+            self.coordinator?.openRechargeDetail(info)
+          }else{
+            let name = app_data.assetInfo[info.asset_type]?.symbol.filterJade
+            ShowManager.shared.setUp(title_image: "erro16Px", message: "暂停\(String(describing: name))充值提现\n详情请查询公告", animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
+            ShowManager.shared.showAnimationInView(self.view)
+            ShowManager.shared.hide(2)
+          }
+        }
+      }
+      
     default:
       break
     }

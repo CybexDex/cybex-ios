@@ -17,6 +17,7 @@ PODS:
   - Device (3.1.0)
   - DNSPageView (1.0.1)
   - EasyAnimation (2.0.2)
+  - EFQRCode (4.2.2)
   - ESTabBarController-swift (2.6.2)
   - Fabric (1.7.7)
   - FBRetainCycleDetector (0.1.4)
@@ -138,6 +139,7 @@ DEPENDENCIES:
   - Device
   - DNSPageView
   - EasyAnimation
+  - EFQRCode
   - ESTabBarController-swift
   - Fabric
   - FCUUID
@@ -204,6 +206,7 @@ SPEC REPOS:
     - Device
     - DNSPageView
     - EasyAnimation
+    - EFQRCode
     - ESTabBarController-swift
     - Fabric
     - FBRetainCycleDetector
@@ -293,6 +296,7 @@ SPEC CHECKSUMS:
   Device: 8a21a61f5f938a12dadd44d82287996081b6919b
   DNSPageView: 93b0f9c9ab0e2f8c1d9aa5b0d44740bd2d775d78
   EasyAnimation: 977ef673efe8ce62447807eedb380a77b189dc80
+  EFQRCode: 203846c7b135b5f7c1d18bb7923bc32a74c8b363
   ESTabBarController-swift: f0a8679e43df1e60b7b36bbcaf1dc98ba6273c7d
   Fabric: bda89e242bce1b7b8ab264248cf3407774ce0095
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
@@ -354,6 +358,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: 1e09a750f2c0cae596c5d861f8a757051fe2d7f5
+PODFILE CHECKSUM: c7d810353dd11e9895f38909869c418eac3d2188
 
 COCOAPODS: 1.5.3

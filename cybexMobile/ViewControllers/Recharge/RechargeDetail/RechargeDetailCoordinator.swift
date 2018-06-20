@@ -17,6 +17,8 @@ protocol RechargeDetailStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<RechargeDetailState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
+  
+  func fetchWithDrawInfoData(_ assetName:String)
 }
 
 class RechargeDetailCoordinator: AccountRootCoordinator {
@@ -44,5 +46,14 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
-    
+  func fetchWithDrawInfoData(_ assetName:String){
+    async {
+      let data = try? await(GraphQLManager.shared.getWithdrawInfo(assetName: "ETH"))
+      main {
+        if case let data?? = data {
+          self.store.dispatch(FetchWithdrawInfo(data : data))
+        }
+      }
+    }
+  }
 }

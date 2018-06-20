@@ -78,6 +78,7 @@ def ui
     pod 'SwiftEntryKit'
     pod 'Keyboard+LayoutGuide'
     pod 'XLPagerTabStrip'
+    pod 'EFQRCode'
 end
 
 def other

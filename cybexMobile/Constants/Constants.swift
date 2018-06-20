@@ -46,6 +46,9 @@ struct AppConfiguration {
   static let FAQ_LIGHT_THEME            = "https://cybex.io/token_applications/new"
   
   static let ETH_PRICE                  = SERVER_BASE_URLString + "price"
+  static let WITHDRAW                   = SERVER_BASE_URLString + "json/withdraw.json"
+  static let DEPOSIT                    = SERVER_BASE_URLString + "json/deposit.json"
+  static let ASSET                      = SERVER_BASE_URLString + "json/assets.json"
 }
 
 enum indicator:String {

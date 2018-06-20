@@ -181,4 +181,21 @@ extension SimpleHTTPService {
     }
     return promise
   }
+  
+  static func fetchIdsInfo(_ url:String) -> Promise<[String]>{
+    var request = URLRequest(url: URL(string: url)!)
+    request.cachePolicy = .reloadIgnoringCacheData
+    
+    let (promise, seal) = Promise<[String]>.pending()
+    
+    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments, completionHandler: { (response) in
+      guard let value = response.result.value else {
+        seal.fulfill([])
+        return
+      }
+      let ids = JSON(value).arrayValue.map({String(describing: $0.stringValue)})
+      seal.fulfill(ids)
+    })
+    return promise
+  }
 }

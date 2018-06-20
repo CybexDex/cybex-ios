@@ -83,7 +83,7 @@
                                     <constraint firstAttribute="bottom" secondItem="gMb-E7-Hts" secondAttribute="bottom" constant="9" id="s4F-UH-78Y"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="68" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="brH-te-cSq">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="68" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="brH-te-cSq">
                                 <rect key="frame" x="0.0" y="92" width="375" height="575"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
@@ -641,7 +641,7 @@
                                                                 </constraints>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="SOURCE_TYPE">
-                                                                        <integer key="value" value="2"/>
+                                                                        <integer key="value" value="1"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_address"/>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="输入或长按粘贴地址"/>
@@ -1035,6 +1035,7 @@
                         <viewLayoutGuide key="safeArea" id="poW-0p-LVP"/>
                     </view>
                     <connections>
+                        <outlet property="address" destination="An7-Xr-keV" id="IWK-Fb-KLg"/>
                         <outlet property="icon" destination="kLL-NX-zF5" id="XId-MG-ALc"/>
                     </connections>
                 </viewController>

@@ -17,6 +17,8 @@ func RechargeDetailPropertyReducer(_ state: RechargeDetailPropertyState?, action
     var state = state ?? RechargeDetailPropertyState()
     
     switch action {
+    case let action as FetchWithdrawInfo:
+      state.data.accept(action.data)
     default:
         break
     }

@@ -251,6 +251,8 @@ class UserManager {
   var limitOrderValue:Double = 0
   var limitOrder_buy_value: Double = 0
   
+  var limit_reset_address_time : TimeInterval = 0
+  
   var balance : Double {
     
     var balance_values:Double = 0

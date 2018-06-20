@@ -15,8 +15,9 @@ func WithdrawDetailReducer(action:Action, state:WithdrawDetailState?) -> Withdra
 
 func WithdrawDetailPropertyReducer(_ state: WithdrawDetailPropertyState?, action: Action) -> WithdrawDetailPropertyState {
     var state = state ?? WithdrawDetailPropertyState()
-    
     switch action {
+    case let action as FetchAddressInfo:
+      state.data.accept(action.data)
     default:
         break
     }

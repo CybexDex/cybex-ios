@@ -27,11 +27,11 @@ class RechargeDetailViewController: BaseViewController {
   
   @IBOutlet weak var errorView: UIView!
   @IBOutlet weak var errorL: UILabel!
-    
-    @IBOutlet weak var feeView: UIView!
-    
-    @IBOutlet weak var introduceView: UIView!
-    
+  
+  @IBOutlet weak var feeView: UIView!
+  
+  @IBOutlet weak var introduceView: UIView!
+  
   
   enum Recharge_Type : String{
     case noAuthen
@@ -52,26 +52,12 @@ class RechargeDetailViewController: BaseViewController {
       self.title = (app_data.assetInfo[(self.balance?.asset_type)!]?.symbol.filterJade)! + "提现"
     }
     setupUI()
+    self.coordinator?.fetchWithDrawInfoData("ETH")
   }
   
   func setupUI(){
     avaliableView.content.text = changeToETHAndCYB((balance?.asset_type)!).eth + " ETH"
-    do{
-      let data = try await(GraphQLManager.shared.getWithdrawInfo(assetName: (app_data.assetInfo[(balance?.asset_type)!]?.symbol.filterJade)!))
-      if let data = data {
-        addressView.content.text = data.gatewayAccount
-        insideFee.text = String(describing: data.fee) + " CYB"
-        if Localize.currentLanguage() == "en"{
-            amountView.content.placeholder = "Min " + String(describing: data.minValue)
-        }else{
-            amountView.content.placeholder = "最小提现数量 " + String(describing: data.minValue)
-        }
-        
-        
-      }
-    }catch{
-      
-    }
+  
   }
   
   func setupEvent(){
@@ -99,7 +85,6 @@ class RechargeDetailViewController: BaseViewController {
     }
     
     
-    
     NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidChange, object: amountView.content, queue: nil) { [weak self](notification) in
       guard let `self` = self else{return}
       if let amount = self.amountView.content.text?.toDouble(){
@@ -113,20 +98,25 @@ class RechargeDetailViewController: BaseViewController {
       }
     }
     
+    
     NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidChange, object: addressView.content, queue: nil) { [weak self] (notification) in
       guard let `self` = self else{return}
-      do{
-        let data = GraphQLManager.shared.verifyAddress(assetName: (app_data.assetInfo[(self.balance?.asset_type)!]?.symbol.filterJade)!, address: self.addressView.content.text!)
-        if let data = data.value{
-          self.errorView.isHidden = true
-        }else{
-          self.errorView.isHidden = false
-          self.errorL.locali =  R.string.localizable.withdraw_address.key.localized()
-        }
-      }catch{
-        self.errorView.isHidden = false
-        self.errorL.locali =  R.string.localizable.withdraw_address.key.localized()
-      }
+      
+//      do{
+//        let data = try await(GraphQLManager.shared.verifyAddress(assetName: (app_data.assetInfo[(self.balance?.asset_type)!]?.symbol.filterJade)!, address: self.addressView.content.text!))
+//
+//        if let data = data{
+//          if data.valid{
+//            self.errorView.isHidden = true
+//          }else{
+//            self.errorView.isHidden = false
+//            self.errorL.locali =  R.string.localizable.withdraw_address.key.localized()
+//          }
+//        }
+//      }catch{
+//        self.errorView.isHidden = false
+//        self.errorL.locali =  R.string.localizable.withdraw_address.key.localized()
+//      }
     }
   }
   
@@ -142,6 +132,15 @@ class RechargeDetailViewController: BaseViewController {
         return false
       })
     }
+    
+    self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext: {[weak self] (withdrawInfo) in
+      guard let `self` = self else{return}
+      if let data = withdrawInfo{
+        self.insideFee.text = String(describing: data.fee) + (app_data.assetInfo[(self.balance?.asset_type)!]?.symbol.filterJade)!
+        
+//          self.amountView.content.placeholder = Localize.currentLanguage() == "en" ? "Min" + String(describing: data.minValue) : "最小提现数量 " + String(describing: data.minValue)
+      }
+    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
   }
   

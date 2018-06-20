@@ -21,15 +21,6 @@ class RechargeItemView: UIView {
   @IBOutlet weak var content: ImageTextField!
   @IBOutlet weak var btn: UIButton!
   
-  @IBAction func clickAcion(_ sender: UIButton) {
-    switch btn_type! {
-    case .clean:content.text = ""
-    case .photo:takePhoto()
-    case .all:content.text = ""
-    default:
-      break
-    }
-  }
   
   @IBInspectable var name : String = "" {
     didSet{
@@ -51,7 +42,6 @@ class RechargeItemView: UIView {
     }
   }
   
-  
   var btn_type : Recharge_Type? {
     didSet{
       switch btn_type! {
@@ -67,9 +57,7 @@ class RechargeItemView: UIView {
     }
   }
   
-  func takePhoto(){
-    
-  }
+ 
   
   func setupUI(){
     

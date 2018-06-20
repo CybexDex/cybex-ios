@@ -101,6 +101,7 @@ class TradeViewController: BaseViewController {
     
   }
   
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "pushTradeHistoryViewController" {
       tradeHistory = segue.destination as! TradeHistoryViewController

@@ -22,12 +22,29 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzO-LI-HX8" customClass="TradeItemView" customModule="cybexMobile" customModuleProvider="target">
                         <rect key="frame" x="14" y="0.0" width="292" height="43.5"/>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bJB-QV-eS1">
+                        <rect key="frame" x="14" y="42.5" width="292" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="TT5-PI-BOw"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="dzO-LI-HX8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="044-XW-tpg"/>
+                    <constraint firstAttribute="bottom" secondItem="bJB-QV-eS1" secondAttribute="bottom" id="1w3-sX-IUJ"/>
                     <constraint firstItem="dzO-LI-HX8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Z27-Gm-qh6"/>
                     <constraint firstAttribute="trailing" secondItem="dzO-LI-HX8" secondAttribute="trailing" constant="14" id="hKc-HD-0Wa"/>
+                    <constraint firstItem="bJB-QV-eS1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="xOV-gf-vr5"/>
                     <constraint firstAttribute="bottom" secondItem="dzO-LI-HX8" secondAttribute="bottom" id="xP4-Hf-Utx"/>
+                    <constraint firstAttribute="trailing" secondItem="bJB-QV-eS1" secondAttribute="trailing" constant="14" id="z56-88-Nfe"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

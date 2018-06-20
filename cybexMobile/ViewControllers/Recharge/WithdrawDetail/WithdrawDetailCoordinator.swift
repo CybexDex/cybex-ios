@@ -10,39 +10,69 @@ import UIKit
 import ReSwift
 
 protocol WithdrawDetailCoordinatorProtocol {
+  func fetchDepositAddress(_ asset_name:String)
+  func resetDepositAddress(_ asset_name:String)
 }
 
 protocol WithdrawDetailStateManagerProtocol {
-    var state: WithdrawDetailState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<WithdrawDetailState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
+  var state: WithdrawDetailState { get }
+  func subscribe<SelectedState, S: StoreSubscriber>(
+    _ subscriber: S, transform: ((Subscription<WithdrawDetailState>) -> Subscription<SelectedState>)?
+  ) where S.StoreSubscriberStateType == SelectedState
 }
 
 class WithdrawDetailCoordinator: AccountRootCoordinator {
-    
-    lazy var creator = WithdrawDetailPropertyActionCreate()
-    
-    var store = Store<WithdrawDetailState>(
-        reducer: WithdrawDetailReducer,
-        state: nil,
-        middleware:[TrackingMiddleware]
-    )
+  
+  lazy var creator = WithdrawDetailPropertyActionCreate()
+  
+  var store = Store<WithdrawDetailState>(
+    reducer: WithdrawDetailReducer,
+    state: nil,
+    middleware:[TrackingMiddleware]
+  )
 }
 
 extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
+  func fetchDepositAddress(_ asset_name:String){
+    if let name = UserManager.shared.name {
+      async {
+        let data = try? await(GraphQLManager.shared.getDepositAddress(accountName: name,assetName: asset_name))
+        if case let data?? = data {
+          main {
+            self.store.dispatch(FetchAddressInfo(data: data))
+          }
+        }else{
+          self.state.property.data.accept(nil)
+        }
+      }
+    }
+  }
+  
+  func resetDepositAddress(_ asset_name:String){
+    if let name = UserManager.shared.name {
+      async {
+        let data = try? await(GraphQLManager.shared.updateDepositAddress(accountName: name, assetName: asset_name))
+        if case let data?? = data {
+          main {
+            self.store.dispatch(FetchAddressInfo(data: data))
+          }
+        }else{
+          self.state.property.data.accept(nil)
+        }
+      }
+    }
     
+  }
 }
 
 extension WithdrawDetailCoordinator: WithdrawDetailStateManagerProtocol {
-    var state: WithdrawDetailState {
-        return store.state
-    }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<WithdrawDetailState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-    
+  var state: WithdrawDetailState {
+    return store.state
+  }
+  
+  func subscribe<SelectedState, S: StoreSubscriber>(
+    _ subscriber: S, transform: ((Subscription<WithdrawDetailState>) -> Subscription<SelectedState>)?
+    ) where S.StoreSubscriberStateType == SelectedState {
+    store.subscribe(subscriber, transform: transform)
+  }
 }

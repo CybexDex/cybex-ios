@@ -24,7 +24,7 @@ class CybexActionView: UIView {
                     message.text          = messageString
                 }
                 
-                if let titleImageString = data["titleImageTitle"]{
+                if let titleImageString = data["title_image"]{
                     icon.image    = UIImage(named: titleImageString)
                 }
                 updateHeight()

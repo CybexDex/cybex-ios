@@ -196,7 +196,6 @@ func getRelationWithIds(base:String,quote:String) -> String{
 
 
 
-
 func getCachedBucket(_ homebucket:HomeBucket) -> BucketMatrix {
   var result:BucketMatrix?
   var matrixs = app_state.property.matrixs.value
@@ -217,3 +216,18 @@ func getRealAmount(_ id : String ,amount : String) -> Double{
   return amount.toDouble()! / pow(10, asset.precision.double)
   
 }
+
+func saveImageToPhotos(){
+  guard let window = UIApplication.shared.keyWindow else { return }
+  
+  UIGraphicsBeginImageContextWithOptions(window.bounds.size, false, 0.0)
+  
+  window.layer.render(in: UIGraphicsGetCurrentContext()!)
+  
+  let image = UIGraphicsGetImageFromCurrentImageContext()
+  
+  UIGraphicsEndImageContext()
+  
+  UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+}
+

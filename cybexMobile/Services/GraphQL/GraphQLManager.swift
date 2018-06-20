@@ -53,10 +53,10 @@ class GraphQLManager {
     return promise
   }
   
-  func getDepositAddress(accountName:String) -> PromiseKit.Promise<AccountAddressRecord?> {
+  func getDepositAddress(accountName:String ,assetName:String) -> PromiseKit.Promise<AccountAddressRecord?> {
     let (promise, seal) = PromiseKit.Promise<AccountAddressRecord?>.pending()
 
-    let _ = apollo.watch(query: GetDepositAddressQuery(accountName: accountName)) { (result, error) in
+    let _ = apollo.watch(query: GetDepositAddressQuery(accountName: accountName,asset: assetName)) { (result, error) in
       if let _ = error {
         seal.fulfill(nil)
         return

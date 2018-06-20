@@ -8,6 +8,8 @@
 
 import Foundation
 import ReSwift
+import RxSwift
+import RxCocoa
 
 //MARK: - State
 struct RechargeDetailState: StateType {
@@ -18,6 +20,11 @@ struct RechargeDetailState: StateType {
 }
 
 struct RechargeDetailPropertyState {
+  var data : BehaviorRelay<WithdrawinfoObject?> = BehaviorRelay(value: nil)
+}
+
+struct FetchWithdrawInfo:Action {
+  let data : WithdrawinfoObject
 }
 
 //MARK: - Action Creator
