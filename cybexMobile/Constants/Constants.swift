@@ -74,6 +74,77 @@ enum candlesticks:Double,Hashable {
   static let all:[candlesticks] = [.five_minute, .one_hour, .one_day]
 }
 
+enum ChainTypesObjectType:Int {
+  case null = 0
+  case base
+  case account
+  case asset
+  case force_settlement
+  case committee_member
+  case witness
+  case limit_order
+  case call_order
+  case custom
+  case proposal
+  case operation_history
+  case withdraw_permission
+  case vesting_balance
+  case worker
+  case balance
+  case crowdfund
+  case crowdfund_contract
+}
+
+enum ChainTypesOperations:Int {
+  case transfer = 0
+  case limit_order_create
+  case limit_order_cancel
+  case call_order_update
+  case fill_order
+  case account_create
+  case account_update
+  case account_whitelist
+  case account_upgrade
+  case account_transfer
+  case asset_create
+  case asset_update
+  case asset_update_bitasset
+  case asset_update_feed_producers
+  case asset_issue
+  case asset_reserve
+  case asset_fund_fee_pool
+  case asset_settle
+  case asset_global_settle
+  case asset_publish_feed
+  case witness_create
+  case witness_update
+  case proposal_create
+  case proposal_update
+  case proposal_delete
+  case withdraw_permission_create
+  case withdraw_permission_update
+  case withdraw_permission_claim
+  case withdraw_permission_delete
+  case committee_member_create
+  case committee_member_update
+  case committee_member_update_global_parameters
+  case vesting_balance_create
+  case vesting_balance_withdraw
+  case worker_create
+  case custom
+  case assert
+  case balance_claim
+  case override_transfer
+  case transfer_to_blind
+  case blind_transfer
+  case transfer_from_blind
+  case asset_settle_cancel
+  case asset_claim_fees
+  case initiate_crowdfund
+  case participate_crowdfund
+  case withdraw_crowdfund
+}
+
 enum objectID:String {
   case base_object = "1.1.x"
   case account_object = "1.2.x"

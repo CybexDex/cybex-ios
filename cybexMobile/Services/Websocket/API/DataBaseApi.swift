@@ -18,6 +18,30 @@ enum dataBaseCatogery:String {
   case get_limit_orders
   case get_balance_objects
   case get_account_by_name
+  case get_required_fees
+}
+
+struct GetRequiredFees:JSONRPCKit.Request, JSONRPCResponse {
+  var response: RPCSResponse
+  var operationStr:String
+  var assetID:String
+
+  var method: String {
+    return "call"
+  }
+  
+  var parameters: Any? {
+    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_required_fees.rawValue, [JSON(operationStr).dictionaryObject ?? [:], assetID]]
+  }
+  
+  func transferResponse(from resultObject: Any) throws -> Any {
+    let result = JSON(resultObject)
+    if let _ = result.dictionaryObject {
+      return true
+    }
+    
+    return false
+  }
 }
 
 struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
@@ -108,7 +132,7 @@ struct GetChainIDRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
 }
 
-struct GetAssetRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
   var ids:[String]
   var response:RPCSResponse
   

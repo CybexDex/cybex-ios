@@ -105,6 +105,7 @@ class WebsocketService {
        */
       testsocket.onDisconnect = { error in
         guard let error = error else { return }
+        log.error(error)
         
         errorCount += 1
         

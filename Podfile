@@ -33,6 +33,15 @@ end
 def architecture
    pod 'ReSwift'
    pod 'RxSwift'
+   pod 'ObservableArray-RxSwift'
+   pod 'RxSwiftExt'
+   pod 'RxDataSources'
+   pod 'RxKeyboard'
+   pod 'RxValidator'
+   pod 'Action'
+
+   pod 'Lightning'
+
    pod 'Localize-Swift'
    pod 'SwiftTheme'
    pod 'UIFontComplete'
