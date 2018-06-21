@@ -40,7 +40,7 @@ extension AppCoordinator: AppStateManagerProtocol {
   func fetchAsset() {
     guard AssetConfiguration.shared.asset_ids.count > 0 else { return }
 
-    let request = GetAssetRequest(ids: AssetConfiguration.shared.unique_ids) { response in
+    let request = GetObjectsRequest(ids: AssetConfiguration.shared.unique_ids) { response in
       if let assetinfo = response as? [AssetInfo] {
         for info in assetinfo {
           self.store.dispatch(AssetInfoAction(assetID: info.id, info: info))

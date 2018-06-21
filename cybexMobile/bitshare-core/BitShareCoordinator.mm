@@ -48,7 +48,17 @@
   
   return @(jsonString.c_str());
 }
+  
++ (NSString *)getTransterOperation:(int)from_user_id to_user_id:(int)to_user_id asset_id:(int)asset_id amount:(int)amount fee_id:(int)fee_id fee_amount:(int)fee_amount memo:(NSString *)memo from_memo_key:(NSString *)from_memo_key to_memo_key:(NSString *)to_memo_key {
+  string jsonString = get_transfer_op_json(from_user_id, to_user_id, amount, asset_id, fee_amount, fee_id, [memo UTF8String], [from_memo_key UTF8String], [to_memo_key UTF8String]);
+  
+  return @(jsonString.c_str());
+}
  
++ (void)resetDefaultPublicKey:(NSString *)str {
+  set_default_public_key([str UTF8String]);
+}
+  
 + (void)cancelUserKey {
   clear_user_key();
 }

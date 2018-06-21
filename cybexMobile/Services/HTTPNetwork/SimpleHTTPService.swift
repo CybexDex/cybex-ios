@@ -61,7 +61,7 @@ class SimpleHTTPService {
 extension SimpleHTTPService {
   static func requestMarketList(base : String) -> Promise<[Pair]> {
     var request = URLRequest(url: URL(string: AppConfiguration.SERVER_MARKETLIST_URLString + base)!)
-    request.timeoutInterval = 5
+    request.timeoutInterval = 1
     request.cachePolicy = .reloadIgnoringCacheData
     
     let (promise, seal) = Promise<[Pair]>.pending()
@@ -87,6 +87,7 @@ extension SimpleHTTPService {
   
   static func checkVersion() -> Promise<(update: Bool, url: String, force: Bool)> {
     var request = URLRequest(url: URL(string: AppConfiguration.SERVER_VERSION_URLString)!)
+    request.timeoutInterval = 5
     request.cachePolicy = .reloadIgnoringCacheData
     
     let (promise, seal) = Promise<(update: Bool, url: String, force: Bool)>.pending()
@@ -123,6 +124,8 @@ extension SimpleHTTPService {
   static func requestETHPrice() -> Promise<[RMBPrices]>{
     var request = URLRequest(url: URL(string: AppConfiguration.ETH_PRICE)!)
     request.cachePolicy = .reloadIgnoringCacheData
+    request.timeoutInterval = 5
+
     let (promise,seal) = Promise<[RMBPrices]>.pending()
     Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
       var rmb_prices = [RMBPrices]()
@@ -146,7 +149,8 @@ extension SimpleHTTPService {
   static func requestPinCode() -> Promise<(id:String, data:String)> {
     var request = URLRequest(url: URL(string: AppConfiguration.SERVER_REGISTER_PINCODE_URLString)!)
     request.cachePolicy = .reloadIgnoringCacheData
-    
+    request.timeoutInterval = 5
+
     let (promise,seal) = Promise<(id:String, data:String)>.pending()
     Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
       guard let value = response.result.value else {
@@ -163,9 +167,13 @@ extension SimpleHTTPService {
   }
   
   static func requestRegister(_ params: [String:Any]) -> Promise<(Bool, Int)> {
+    var request = try! URLRequest(url: URL(string: AppConfiguration.SERVER_REGISTER_URLString)!, method: .post, headers: ["Content-Type": "application/json"])
+    request.timeoutInterval = 5
+    let encodedURLRequest = try! JSONEncoding.default.encode(request, with: params)
+
     let (promise,seal) = Promise<(Bool, Int)>.pending()
     
-    Alamofire.request(URL(string: AppConfiguration.SERVER_REGISTER_URLString)!, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+    Alamofire.request(encodedURLRequest).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
       guard let value = response.result.value else {
         seal.fulfill((false, 0))
         return
