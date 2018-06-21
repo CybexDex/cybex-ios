@@ -16,12 +16,16 @@ import PromiseKit
  apollo-codegen print-schema schema.json
  **/
 class GraphQLManager {
-  let apollo = ApolloClient(url: URL(string: "https://gateway.cybex.io/gateway")!)
+  let apollo = ApolloClient(url: URL(string: AppConfiguration.GATEWAY_URLString)!)
 
   static let shared = GraphQLManager()
   
   private init() {
     
+  }
+  
+  func memo(_ assetName:String, address:String) -> String {
+    return "withdraw:\(AppConfiguration.GATEWAY_ID):\(assetName):\(address)"
   }
   
   func verifyAddress(assetName:String, address:String) -> PromiseKit.Promise<WithdrawAddressInfo?> {

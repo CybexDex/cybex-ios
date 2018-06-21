@@ -33,6 +33,8 @@ struct AppConfiguration {
   static let APPID = ""
   static let SERVER_BASE_URLString = "https://app.cybex.io/"
   static let SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
+  static let GATEWAY_URLString = "https://gateway.cybex.io/gateway"
+  static let GATEWAY_ID = "CybexGateway" //CybexGatewayDev
 
   static let SERVER_ICONS_BASE_URLString = "https://app.cybex.io/icons/"
 
