@@ -57,17 +57,9 @@ class WithdrawDetailViewController: BaseViewController {
   }
   
   @IBAction func resetAddress(_ sender: Any) {
-    //    let nowDate = Date().timeIntervalSince1970
-    //    if nowDate - UserManager.shared.limit_reset_address_time >= 5 * 60{
-    
+    startLoading()
     let name = app_data.assetInfo[(self.withdrawId)!]?.symbol.filterJade
     self.coordinator?.resetDepositAddress(name!)
-    //      UserManager.shared.limit_reset_address_time = nowDate
-    //    }else{
-    //      ShowManager.shared.setUp(title_image: "erro16Px", message: "请在5分钟后重新生成", animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.sheet_image)
-    //      ShowManager.shared.showAnimationInView(self.view)
-    //      ShowManager.shared.hide(2)
-    //    }
   }
   
   func commonObserveState() {

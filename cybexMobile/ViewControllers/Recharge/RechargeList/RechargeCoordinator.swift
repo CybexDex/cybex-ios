@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 
 protocol RechargeCoordinatorProtocol {
-  func openRechargeDetail(_ balance:Balance)
+  func openRechargeDetail(_ balance:Balance,isWithdraw:Bool)
   func openWithDrawDetail(_ id:String)
 }
 
@@ -36,11 +36,12 @@ class RechargeCoordinator: AccountRootCoordinator {
 }
 
 extension RechargeCoordinator: RechargeCoordinatorProtocol {
-  func openRechargeDetail(_ balance:Balance){
+  func openRechargeDetail(_ balance:Balance,isWithdraw:Bool){
     let vc = R.storyboard.account.rechargeDetailViewController()!
-    let coordinator = RechargeDetailCoordinator(rootVC: self.rootVC)
-    vc.coordinator = coordinator
+    let coordinator   = RechargeDetailCoordinator(rootVC: self.rootVC)
+    vc.coordinator    = coordinator
     vc.balance        = balance
+    vc.isWithdraw     = isWithdraw
     self.rootVC.pushViewController(vc, animated: true)
   }
   func openWithDrawDetail(_ id:String){

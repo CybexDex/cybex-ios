@@ -21,13 +21,8 @@ struct TradeState: StateType {
 }
 
 struct TradePropertyState {
-  var data:BehaviorRelay<OrderBook> = BehaviorRelay(value: OrderBook(bids: [], asks: []))
 }
 
-struct TradeFetchedLimitData:Action{
-  let data:[LimitOrder]
-  let pair:Pair
-}
 
 //MARK: - Action Creator
 class TradePropertyActionCreate: LoadingActionCreator {

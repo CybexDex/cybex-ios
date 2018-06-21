@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import Localize_Swift
 
 class TradeHistoryViewController: BaseViewController {
   
@@ -21,9 +22,16 @@ class TradeHistoryViewController: BaseViewController {
     didSet {
       let base_info = app_data.assetInfo[(pair?.base)!]!
       let quote_info = app_data.assetInfo[(pair?.quote)!]!
-      self.historyView.price.text  = "价格\(base_info.symbol.filterJade)"
-      self.historyView.amount.text = "数量\(quote_info.symbol.filterJade)"
-      self.historyView.sellAmount.text = "成交额\(base_info.symbol.filterJade)"
+      if Localize.currentLanguage() == "en"{
+        self.historyView.price.text  = "Price\(base_info.symbol.filterJade)"
+        self.historyView.amount.text = "Amount\(quote_info.symbol.filterJade)"
+        self.historyView.sellAmount.text = "Total\(base_info.symbol.filterJade)"
+      }else{
+        self.historyView.price.text  = "价格\(base_info.symbol.filterJade)"
+        self.historyView.amount.text = "数量\(quote_info.symbol.filterJade)"
+        self.historyView.sellAmount.text = "成交额\(base_info.symbol.filterJade)"
+      }
+     
       self.coordinator?.fetchData(pair!)
     }
   }
@@ -106,6 +114,16 @@ class TradeHistoryViewController: BaseViewController {
         
       }
       self.data = showData
+    }
+  }
+}
+extension TradeHistoryViewController : TradePair{
+  var pariInfo: Pair {
+    get {
+      return self.pair!
+    }
+    set {
+      self.pair = newValue
     }
   }
 }

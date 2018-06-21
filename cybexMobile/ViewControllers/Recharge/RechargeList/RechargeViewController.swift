@@ -106,16 +106,12 @@ extension RechargeViewController:UITableViewDataSource,UITableViewDelegate{
         if let data = UserManager.shared.balances.value{
           let info = data[indexPath.row]
           if ids.contains(info.asset_type){
-            self.coordinator?.openRechargeDetail(info)
+            self.coordinator?.openRechargeDetail(info,isWithdraw:true)
           }else{
-            let name = app_data.assetInfo[info.asset_type]?.symbol.filterJade
-            ShowManager.shared.setUp(title_image: "erro16Px", message: "暂停\(String(describing: name))充值提现\n详情请查询公告", animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
-            ShowManager.shared.showAnimationInView(self.view)
-            ShowManager.shared.hide(2)
+            self.coordinator?.openRechargeDetail(info,isWithdraw:false)
           }
         }
       }
-      
     default:
       break
     }

@@ -87,7 +87,7 @@ class ShowManager {
   // MARK: 展示
   // 动画效果。
   func showAnimationInView(_ sender: UIView){
-    self.superView          = sender
+    self.superView          = UIApplication.shared.keyWindow
     self.superView?.addSubview(showView!)
     showView?.content       = data
     let leading : CGFloat  = showType == .sheet_image ? 0 : 52
@@ -120,7 +120,11 @@ class ShowManager {
       }
       self.superView?.layoutIfNeeded()
       if showType == .sheet_image{
-        a?.constant = 64
+        if UIScreen.main.bounds.height == 812{
+          a?.constant = 44
+        }else{
+          a?.constant = 20
+        }
       }else{
         a?.constant = -64
       }

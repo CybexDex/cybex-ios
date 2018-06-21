@@ -26,6 +26,10 @@ class QuotesTitleView: UIView {
         self.stackView.axis = .horizontal
       }else{
         self.stackView.axis = .vertical
+        self.stackView.spacing = 25
+        for titleView in self.titleViews{
+          titleView.viewWithTag(10)?.isHidden = true
+        }
       }
     }
   }
@@ -69,7 +73,11 @@ class QuotesTitleView: UIView {
   func changeToHighStatus(_ index : Int){
     for titleView in titleViews {
       if titleView.tag  == index{
-        titleView.viewWithTag(10)?.isHidden = false
+        if self.stackView.axis == .vertical{
+          titleView.viewWithTag(10)?.isHidden = true
+        }else{
+          titleView.viewWithTag(10)?.isHidden = false
+        }
         if let titleL =  titleView.viewWithTag(9) as? UILabel{
           titleL.theme1TitleColor = .white
           titleL.theme2TitleColor = .darkTwo

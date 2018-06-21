@@ -138,8 +138,8 @@
 "my_opened_price" = "Price/Amount";
 "my_opened_filled" = "Filled/Cancel";
 
-"withdraw_nomore" = "Lack of balance";
-"withdraw_address_fault" = "Address invalid";
+"withdraw_nomore" = "Not enough";
+"withdraw_address_fault" = "Verifing the rule of address";
 "withdraw_available" = "Available";
 "withdraw_address"   = "Withdrawal Address";
 "withdraw_address_placehold"   = "Enter or paste address";
@@ -148,5 +148,8 @@
 "withdraw_fee"        = "Withdrawal Fee";
 "withdraw_gateway_fee" = "Gateway Fee";
 "withdraw_receive_amount" = "Receive Amount";
-
+"withdraw_min_value"      = "Less than the minimum withdrawal";
+"recharge_deposit"        = "Deposit";
+"recharge_withdraw"       = "Withdraw";
+"recharge_selectCoin"     = "Select Coin";
 

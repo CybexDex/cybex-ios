@@ -10,18 +10,34 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
-
+import TinyConstraints
 import SwiftyJSON
+import Localize_Swift
+
 
 class OrderBookViewController: BaseViewController {
   
-  @IBOutlet weak var tableView: UITableView!
   var coordinator: (OrderBookCoordinatorProtocol & OrderBookStateManagerProtocol)?
   
+  var contentView : OrderBookContentView!
+  var tradeView : TradeView!
+  var VC_TYPE : Int = 1
   var pair:Pair? {
     didSet {
-      if self.tableView != nil, oldValue != pair {
-        self.tableView.isHidden = true
+//      if (self.contentView != nil || self.tradeView != nil), oldValue != pair {
+//
+//      }
+      if self.tradeView != nil{
+        if let pair = pair{
+          if Localize.currentLanguage() == "en"{
+            self.tradeView.titlePrice.text = "Price " + (app_data.assetInfo[pair.base]?.symbol.filterJade)!
+            self.tradeView.titleAmount.text = "Amount " + (app_data.assetInfo[pair.quote]?.symbol.filterJade)!
+          }else{
+            self.tradeView.titlePrice.text = "价格" + (app_data.assetInfo[pair.base]?.symbol.filterJade)!
+            self.tradeView.titleAmount.text = "数量" + (app_data.assetInfo[pair.quote]?.symbol.filterJade)!
+          }
+        }
+       
       }
       self.coordinator?.fetchData(pair!)
     }
@@ -29,9 +45,19 @@ class OrderBookViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    let cell = String.init(describing: OrderBookCell.self)
-    tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
+    setupUI()
+  }
+  func setupUI(){
+    if VC_TYPE == 1{
+      contentView = OrderBookContentView(frame: .zero)
+      self.view.addSubview(contentView)
+      contentView.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+    }else{
+      tradeView = TradeView(frame:self.view.bounds)
+      self.view.addSubview(tradeView)
+      tradeView.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+      
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -55,46 +81,37 @@ class OrderBookViewController: BaseViewController {
   override func configureObserveState() {
     commonObserveState()
     
-    self.coordinator!.state.property.data.asObservable().distinctUntilChanged()
+    self.coordinator!.state.property.data.asObservable().skip(1).distinctUntilChanged()
       .subscribe(onNext: {[weak self] (s) in
         guard let `self` = self else { return }
-        
-        self.tableView.reloadData()
-        self.tableView.layoutIfNeeded()
-        
-        
-        self.coordinator?.updateMarketListHeight(500)
-        self.tableView.isHidden = false
-        
+        if self.VC_TYPE == 1{
+          self.contentView.data = s
+          self.contentView.tableView.reloadData()
+          self.contentView.tableView.isHidden = false
+          self.coordinator?.updateMarketListHeight(500)
+        }else{
+            self.tradeView.data = s
+          let base_eth = changeToETHAndCYB(self.pair!.base).eth
+          let quote_eth = changeToETHAndCYB(self.pair!.quote).eth
+          
+          
+          self.tradeView.rmbPrice.text = "≈¥" + String(describing: quote_eth.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
+         
+          self.tradeView.amount.text = String(describing: (quote_eth.toDouble()! / base_eth.toDouble()!)).formatCurrency(digitNum: (app_data.assetInfo[self.pair!.base]?.precision)!)
+        }
         
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-  }
-  
-
+  }  
 }
 
-extension OrderBookViewController: UITableViewDelegate, UITableViewDataSource {
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
-  }
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let data = coordinator!.state.property.data.value
-    return max(data.asks.count, data.bids.count)
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: OrderBookCell.self), for: indexPath) as! OrderBookCell
-    
-    let data = coordinator!.state.property.data.value
-    
-    cell.setup((data.bids[optional:indexPath.row], data.asks[optional:indexPath.row]), indexPath: indexPath)
-    
-    return cell
-  }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-    
+extension OrderBookViewController : TradePair{
+  var pariInfo: Pair {
+    get {
+      return self.pair!
+    }
+    set {
+      self.pair = newValue
+    }
   }
 }
+

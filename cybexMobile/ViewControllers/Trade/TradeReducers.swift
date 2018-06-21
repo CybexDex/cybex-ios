@@ -17,8 +17,6 @@ func TradePropertyReducer(_ state: TradePropertyState?, action: Action) -> Trade
     var state = state ?? TradePropertyState()
     
     switch action {
-    case let action as TradeFetchedLimitData :
-      state.data.accept(limitOrders_to_OrderBook(orders: action.data, pair: action.pair))
     default:
         break
     }

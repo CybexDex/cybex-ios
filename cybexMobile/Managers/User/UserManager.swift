@@ -27,6 +27,8 @@ extension UserManager {
       let request = GetFullAccountsRequest(name: username) { response in
         if let data = response as? FullAccount, let account = data.account {
           
+         
+         
           let active_auths = account.active_auths
           let owner_auths = account.owner_auths
           
@@ -175,6 +177,7 @@ extension UserManager {
           if !self.isLoginIn {
             return
           }
+          
           self.account.accept(data.account)
           
           if let balances = data.balances{
@@ -184,7 +187,7 @@ extension UserManager {
               return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
                 (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
             }))
-            
+
           }else{
             self.balances.accept(data.balances)
           }
@@ -234,17 +237,31 @@ class UserManager {
       self.name = name
       self.avatarString = name.sha256()
       self.keys = keys
-      
       return true
     }
-    
     return false
   }
-  
+  var isWithDraw : Bool = false
+  var isTrade : Bool = false
   var name : String?
   var keys:AccountKeys?
   var avatarString:String?
-  var account:BehaviorRelay<Account?> = BehaviorRelay(value: nil)
+  var account:BehaviorRelay<Account?> = BehaviorRelay(value: nil) {
+    didSet{
+      if let account = account.value {
+        if let memoKey = self.keys?.memo_key {
+          if account.memo_key == memoKey.public_key {
+            self.isWithDraw = true
+          }
+        }
+        if let activeKey = self.keys?.active_key{
+          if let activeKeys = account.active_auths as? [String]{
+            self.isTrade = activeKeys.contains(activeKey.public_key)
+          }
+        }
+      }
+    }
+  }
   var balances:BehaviorRelay<[Balance]?> = BehaviorRelay(value: nil)
   var limitOrder:BehaviorRelay<[LimitOrder]?> = BehaviorRelay(value:nil)
   

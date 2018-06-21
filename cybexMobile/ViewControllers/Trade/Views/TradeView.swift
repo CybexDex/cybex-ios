@@ -10,7 +10,10 @@ import UIKit
 
 class TradeView: UIView {
     
-    @IBOutlet weak var amount: UILabel!
+    @IBOutlet weak var titlePrice: UILabel!
+  
+  @IBOutlet weak var titleAmount: UILabel!
+  @IBOutlet weak var amount: UILabel!
     @IBOutlet weak var rmbPrice: UILabel!
     
     @IBOutlet weak var sells: UIStackView!

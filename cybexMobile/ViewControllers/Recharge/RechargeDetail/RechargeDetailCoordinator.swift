@@ -19,6 +19,7 @@ protocol RechargeDetailStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
   
   func fetchWithDrawInfoData(_ assetName:String)
+  func verifyAddress(_ assetName:String,address:String)->Bool
 }
 
 class RechargeDetailCoordinator: AccountRootCoordinator {
@@ -55,5 +56,30 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         }
       }
     }
+  }
+  /*
+   func checkUserName(_ name:String) -> Promise<Bool> {
+   let (promise,seal) = Promise<Bool>.pending()
+   
+   let request = GetAccountByNameRequest(name: name) { response in
+   if let result = response as? Bool {
+   seal.fulfill(result)
+   }
+   }
+   WebsocketService.shared.send(request: request)
+   return promise
+   }
+   */
+  
+  
+  func verifyAddress(_ assetName:String,address:String)->Bool{
+    let data = try? await(GraphQLManager.shared.verifyAddress(assetName: assetName, address: address))
+    if case let data?? = data {
+      return data.valid
+    }else{
+      return false
+    }
+     
+    
   }
 }

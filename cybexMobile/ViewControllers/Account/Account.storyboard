@@ -69,11 +69,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAi-U3-bqh">
                                 <rect key="frame" x="0.0" y="51" width="375" height="39"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择币种" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMb-E7-Hts">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMb-E7-Hts">
                                         <rect key="frame" x="13" y="10" width="57.5" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="locali" value="recharge_selectCoin"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
                                 <constraints>
@@ -672,16 +675,16 @@
                                                         </constraints>
                                                     </view>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZMf-Nq-OB3">
-                                                        <rect key="frame" x="0.0" y="229" width="349" height="22"/>
+                                                        <rect key="frame" x="0.0" y="229" width="349" height="8"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址错误" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YcF-6O-jaN">
-                                                                <rect key="frame" x="51" y="10" width="286" height="0.0"/>
+                                                                <rect key="frame" x="51" y="4" width="286" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <color key="textColor" red="1" green="0.1181127701" blue="0.2395080661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="erro16Px" translatesAutoresizingMaskIntoConstraints="NO" id="vIx-PZ-HXH">
-                                                                <rect key="frame" x="25" y="3" width="16" height="16"/>
+                                                                <rect key="frame" x="25" y="-4" width="16" height="16"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="16" id="YQZ-sQ-jB6"/>
                                                                     <constraint firstAttribute="width" constant="16" id="fIE-94-cGd"/>
@@ -689,10 +692,10 @@
                                                             </imageView>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="YcF-6O-jaN" secondAttribute="bottom" constant="12" id="32Z-ot-CAL"/>
+                                                            <constraint firstAttribute="bottom" secondItem="YcF-6O-jaN" secondAttribute="bottom" constant="4" id="32Z-ot-CAL"/>
                                                             <constraint firstItem="vIx-PZ-HXH" firstAttribute="leading" secondItem="ZMf-Nq-OB3" secondAttribute="leading" constant="25" id="7x9-Mb-4Ha"/>
                                                             <constraint firstAttribute="trailing" secondItem="YcF-6O-jaN" secondAttribute="trailing" constant="12" id="AL7-bA-os1"/>
-                                                            <constraint firstItem="YcF-6O-jaN" firstAttribute="top" secondItem="ZMf-Nq-OB3" secondAttribute="top" constant="10" id="bKm-V7-RvF"/>
+                                                            <constraint firstItem="YcF-6O-jaN" firstAttribute="top" secondItem="ZMf-Nq-OB3" secondAttribute="top" constant="4" id="bKm-V7-RvF"/>
                                                             <constraint firstItem="YcF-6O-jaN" firstAttribute="leading" secondItem="vIx-PZ-HXH" secondAttribute="trailing" constant="10" id="pn9-Kk-6Yz"/>
                                                             <constraint firstItem="vIx-PZ-HXH" firstAttribute="centerY" secondItem="ZMf-Nq-OB3" secondAttribute="centerY" id="tzQ-CF-fUq"/>
                                                         </constraints>

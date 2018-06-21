@@ -20,8 +20,7 @@ class RechargeSegment: UIView {
       self.next?.sendEventWith(event.segmentTouch.rawValue, userinfo: ["selectedIndex":sender.selectedSegmentIndex])
     }
     
-    
-    
+  
   fileprivate func setup(){
     
   }

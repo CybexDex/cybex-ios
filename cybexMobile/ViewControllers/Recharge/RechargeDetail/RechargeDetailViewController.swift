@@ -40,7 +40,7 @@ class RechargeDetailViewController: BaseViewController {
     case normal
   }
   
-  
+  var isWithdraw : Bool = false
   var balance : Balance?
   var coordinator: (RechargeDetailCoordinatorProtocol & RechargeDetailStateManagerProtocol)?
   
@@ -52,71 +52,83 @@ class RechargeDetailViewController: BaseViewController {
       self.title = (app_data.assetInfo[(self.balance?.asset_type)!]?.symbol.filterJade)! + "提现"
     }
     setupUI()
+    setupEvent()
     self.coordinator?.fetchWithDrawInfoData("ETH")
   }
   
   func setupUI(){
-    avaliableView.content.text = changeToETHAndCYB((balance?.asset_type)!).eth + " ETH"
-  
+    amountView.content.keyboardType = .decimalPad
+    addressView.btn.isHidden        = true
+    amountView.btn.setTitle(Localize.currentLanguage() == "en" ? "All" : "全部", for: .normal)
+    avaliableView.content.text = String(describing: getRealAmount((self.balance?.asset_type)!, amount: (self.balance?.balance)!)) + " " + (app_data.assetInfo[(self.balance?.asset_type)!]?.symbol.filterJade)!
+    
+    if !self.isWithdraw{
+      if let name = app_data.assetInfo[(self.balance?.asset_type)!]?.symbol.filterJade{
+        var message = ""
+        if Localize.currentLanguage() == "en"{
+          message = ""
+        }else{
+          message = "暂停\(String(describing: name))充值提现\n详情请查询公告"
+        }
+        ShowManager.shared.setUp(title_image: "erro16Px", message: message, animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
+        ShowManager.shared.showAnimationInView(self.view)
+        ShowManager.shared.hide(2)
+      }
+      return
+    }
+    
+    if !UserManager.shared.isWithDraw {
+      ShowManager.shared.setUp(title_image: "erro16Px", message: "没有提现权限", animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
+      ShowManager.shared.showAnimationInView(self.view)
+      ShowManager.shared.hide(2)
+      return
+    }
+    
+    addressView.btn.addTarget(self, action: #selector(cleanAddress), for: .touchUpInside)
+    amountView.btn.addTarget(self, action: #selector(addAllAmount), for: .touchUpInside)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
   }
   
+  
   func setupEvent(){
-    NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: amountView.content, queue: nil) { [weak self] (notification) in
-      guard let `self` = self else{ return }
-      self.feeView.isHidden = true
-      self.introduceView.isHidden = true
-    }
-    
-    NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: amountView.content, queue: nil) { [weak self] (notification) in
-      guard let `self` = self else{ return }
-      self.feeView.isHidden = false
-      self.introduceView.isHidden = false
-    }
-    
-    NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: addressView.content, queue: nil) { [weak self] (notification) in
-      guard let `self` = self else{ return }
-      self.feeView.isHidden = true
-      self.introduceView.isHidden = true
-    }
-    NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: addressView.content, queue: nil) { [weak self] (notification) in
-      guard let `self` = self else{ return }
-      self.feeView.isHidden = true
-      self.introduceView.isHidden = true
-    }
-    
-    
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidChange, object: amountView.content, queue: nil) { [weak self](notification) in
-      guard let `self` = self else{return}
+    NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: amountView.content, queue: nil) { [weak self](notification) in
+      guard let `self` = self else {return}
+      
       if let amount = self.amountView.content.text?.toDouble(){
-        let avaliable = changeToETHAndCYB((self.balance?.asset_type)!).eth.toDouble()!
-        if amount > avaliable{
-          self.errorView.isHidden = false
-          self.errorL.locali =  R.string.localizable.withdraw_nomore.key.localized()
-        }else{
-          self.errorView.isHidden = true
+        let avaliable = getRealAmount((self.balance?.asset_type)!, amount: (self.balance?.balance)!)
+        if let minValue = self.coordinator?.state.property.data.value?.minValue{
+          if amount < minValue {
+            self.errorView.isHidden = false
+            self.errorL.locali =  R.string.localizable.withdraw_min_value.key.localized()
+          }else if amount + (self.coordinator?.state.property.data.value?.fee)! > avaliable {
+            self.errorView.isHidden = false
+            self.errorL.locali =  R.string.localizable.withdraw_nomore.key.localized()
+          }else{
+            self.errorView.isHidden = true
+            if let fee = self.coordinator?.state.property.data.value?.fee{
+              self.finalAmount.text = String(describing: avaliable - amount - fee)
+            }
+          }
         }
       }
     }
     
-    
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidChange, object: addressView.content, queue: nil) { [weak self] (notification) in
+    NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: addressView.content, queue: nil) { [weak self] (notification) in
       guard let `self` = self else{return}
-      
-//      do{
-//        let data = try await(GraphQLManager.shared.verifyAddress(assetName: (app_data.assetInfo[(self.balance?.asset_type)!]?.symbol.filterJade)!, address: self.addressView.content.text!))
-//
-//        if let data = data{
-//          if data.valid{
-//            self.errorView.isHidden = true
-//          }else{
-//            self.errorView.isHidden = false
-//            self.errorL.locali =  R.string.localizable.withdraw_address.key.localized()
-//          }
-//        }
-//      }catch{
-//        self.errorView.isHidden = false
-//        self.errorL.locali =  R.string.localizable.withdraw_address.key.localized()
-//      }
+      if self.addressView.content.text != nil && (self.addressView.content.text?.count)! > 0 {
+        self.addressView.btn.isHidden = false
+      }else{
+        self.addressView.btn.isHidden = true
+      }
+      if let assetName = app_data.assetInfo[(self.balance?.asset_type)!]?.symbol.filterJade,let address = self.addressView.content.text{
+        if (self.coordinator?.verifyAddress(assetName, address: address) == true){
+          self.errorView.isHidden = true
+        }else{
+          self.errorView.isHidden = false
+          self.errorL.locali =  R.string.localizable.withdraw_address.key.localized()
+        }
+      }
     }
   }
   
@@ -138,14 +150,48 @@ class RechargeDetailViewController: BaseViewController {
       if let data = withdrawInfo{
         self.insideFee.text = String(describing: data.fee) + (app_data.assetInfo[(self.balance?.asset_type)!]?.symbol.filterJade)!
         
-//          self.amountView.content.placeholder = Localize.currentLanguage() == "en" ? "Min" + String(describing: data.minValue) : "最小提现数量 " + String(describing: data.minValue)
+        self.amountView.textplaceholder = Localize.currentLanguage() == "en" ? "Min" + String(describing: data.minValue) : "最小提现数量 " + String(describing: data.minValue)
       }
-    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
   }
   
   override func configureObserveState() {
     commonObserveState()
     
+  }
+}
+
+extension RechargeDetailViewController{
+  @objc func cleanAddress() {
+    self.addressView.content.text = ""
+  }
+  @objc func addAllAmount(){
+    if let fee = self.coordinator?.state.property.data.value?.fee{
+      self.amountView.content.text = String(describing: getRealAmount((self.balance?.asset_type)!, amount: (self.balance?.balance)!) - fee)
+      self.finalAmount.text = self.amountView.content.text
+    }
+  }
+  
+  @objc func keyboardWillShow(){
+    self.feeView.subviews.forEach { (view) in
+      view.isHidden = true
+    }
+    self.introduceView.subviews.forEach { (view) in
+      view.isHidden = true
+    }
+    self.feeView.isHidden = true
+    self.introduceView.isHidden = true
+  }
+  
+  @objc func keyboardWillHidden(){
+    self.feeView.isHidden = false
+    self.introduceView.isHidden = false
+    self.feeView.subviews.forEach { (view) in
+      view.isHidden = false
+    }
+    self.introduceView.subviews.forEach { (view) in
+      view.isHidden = false
+    }
   }
 }

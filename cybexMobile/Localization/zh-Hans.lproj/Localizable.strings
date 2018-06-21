@@ -143,7 +143,10 @@
 "withdraw_fee"        = "提现手续费";
 "withdraw_gateway_fee" = "转账手续费";
 "withdraw_receive_amount" = "到账数量";
-
+"withdraw_min_value"      = "小于最小提现数量";
+"recharge_deposit"        = "充值";
+"recharge_withdraw"       = "提现";
+"recharge_selectCoin"     = "选择币种";
 
 
 

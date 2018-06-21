@@ -12,19 +12,25 @@ import RxCocoa
 import ReSwift
 import TinyConstraints
 
+protocol TradePair {
+  var pariInfo : Pair {get set}
+}
+
+
 class TradeViewController: BaseViewController {
   @IBOutlet weak var topView: UIView!
   @IBOutlet weak var scrollView: UIScrollView!
   @IBOutlet weak var scrollViewLeading: NSLayoutConstraint!
   @IBOutlet weak var historUpDown: UIButton!
   @IBOutlet weak var businessHeightConstraint: NSLayoutConstraint!
-  @IBOutlet var orderBookView: TradeView!
+  @IBOutlet var orderBookView: UIView!
   
   var isMoveMarketTrades : Bool = false
   
   var myOrdersLeading : Constraint!
   
   var chooseTitleView : UIView?
+  var tradeTitltView : TradeNavTitleView!
   
   var coordinator: (TradeCoordinatorProtocol & TradeStateManagerProtocol)?
   
@@ -32,17 +38,30 @@ class TradeViewController: BaseViewController {
   var businessVC   : BusinessViewController!
   var myOrdersView : MyOpenedOrdersView!
   
-  var chooseViewController : ChooseViewController!
+  var homeViewController : HomeViewController!
+  var orderBookViewController : OrderBookViewController!
   
   var chooseViewConstraint : Constraint!
   
   var isMoving : Bool?
   
+  var pair : Pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB){
+    didSet{
+      if self.chooseTitleView != nil {
+        self.sendEventActionWith()
+      }
+      tradeTitltView.title.text = (app_data.assetInfo[pair.quote]?.symbol.filterJade)! + "/" + (app_data.assetInfo[pair.base]?.symbol.filterJade)!
+      self.childViewControllers.forEach { (viewController) in
+        if var viewController = viewController as? TradePair{
+          viewController.pariInfo = pair
+        }
+      }
+    }
+  }
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
     setupNavi()
-    self.coordinator?.fetchData(Pair(base: "1.3.0", quote: "1.3.4"))
     self.historUpDown.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
   }
   
@@ -57,7 +76,15 @@ class TradeViewController: BaseViewController {
     
     businessVC.pair = Pair(base: AssetConfiguration.CYB, quote: AssetConfiguration.ETH)
     tradeHistory.pair = Pair(base: AssetConfiguration.CYB, quote: AssetConfiguration.ETH)
-    
+   
+    self.orderBookViewController = R.storyboard.main.orderBookViewController()!
+    self.orderBookViewController.VC_TYPE = 2
+    self.orderBookViewController.coordinator = OrderBookCoordinator(rootVC: self.navigationController as! BaseNavigationController)
+    self.addChildViewController(self.orderBookViewController)
+    self.orderBookView.addSubview(self.orderBookViewController.view)
+    self.orderBookViewController.view.frame = self.orderBookView.bounds
+    self.orderBookViewController.view.layoutIfNeeded()
+    self.orderBookViewController.didMove(toParentViewController: self)
   }
   
   func setupNavi(){
@@ -67,7 +94,7 @@ class TradeViewController: BaseViewController {
     let leftBtn = UIBarButtonItem(image: UIImage(named: "icCandle"), style: .done, target: self, action: #selector(leftAction(_ :)))
     self.navigationItem.leftBarButtonItem = leftBtn
     
-    let tradeTitltView = TradeNavTitleView(frame: CGRect.zero)
+    tradeTitltView = TradeNavTitleView(frame: CGRect.zero)
     tradeTitltView.delegate = self
     self.navigationItem.titleView = tradeTitltView    
   }
@@ -78,6 +105,10 @@ class TradeViewController: BaseViewController {
   
   @objc override func leftAction(_ sender: UIButton){
     
+  }
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    self.orderBookViewController.pair = self.pair
   }
   
   func commonObserveState() {
@@ -92,13 +123,6 @@ class TradeViewController: BaseViewController {
         return false
       })
     }
-    
-    coordinator?.state.property.data.asObservable().skip(1).distinctUntilChanged().subscribe(onNext: {[weak self] (s) in
-      
-      guard let `self` = self else { return }
-      self.orderBookView.data = s
-    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    
   }
   
   
@@ -114,7 +138,6 @@ class TradeViewController: BaseViewController {
   
   override func configureObserveState() {
     commonObserveState()
-    
   }
   
   func moveToMyOpenedOrders(){
@@ -176,33 +199,41 @@ extension TradeViewController : TradeNavTitleViewDelegate{
     if self.chooseTitleView != nil {
       // 移除
       chooseViewConstraint.constant = -self.view.height
-      UIView.animate(withDuration: 0.5, animations: {
+      UIView.animate(withDuration: 0.3, animations: {
         self.view.layoutIfNeeded()
       }) { (isFinished) in
-        self.chooseViewController.willMove(toParentViewController: self)
-        self.chooseViewController.view.removeFromSuperview()
-        self.chooseViewController.removeFromParentViewController()
+        self.homeViewController.willMove(toParentViewController: self)
+        self.homeViewController.view.removeFromSuperview()
+        self.homeViewController.removeFromParentViewController()
         self.chooseTitleView?.removeFromSuperview()
         self.chooseTitleView = nil
       }
     }else{
       // 添加
-      self.chooseViewController = R.storyboard.business.chooseViewController()!
-      self.addChildViewController(self.chooseViewController)
-      self.chooseTitleView = UIView(frame: .zero)
+      self.homeViewController = R.storyboard.main.homeViewController()!
+      self.homeViewController.VC_TYPE = 2
+      self.addChildViewController(self.homeViewController)
+      self.chooseTitleView = UIView()
+      self.chooseTitleView?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
       self.view.addSubview(self.chooseTitleView!)
       
-      chooseViewConstraint = self.chooseTitleView?.top(to:self.view,offset:-self.view.height)
+      self.chooseTitleView?.top(to:self.view)
       self.chooseTitleView?.leading(to:self.view)
       self.chooseTitleView?.trailing(to: self.view)
       self.chooseTitleView?.height(to: self.view)
       self.view.layoutIfNeeded()
-      self.chooseViewController.view.frame = (self.chooseTitleView?.bounds)!
-      self.chooseViewController.view.backgroundColor = UIColor.clear.withAlphaComponent(0.5)
-      self.chooseTitleView?.addSubview(self.chooseViewController.view)
-      self.chooseViewController.didMove(toParentViewController: self)
-      chooseViewConstraint?.constant = 0
+      
+      self.view.addSubview(self.homeViewController.view)
+      self.homeViewController.view.leftToSuperview(nil, offset: 0, relation: .equal, priority: .required, isActive:true, usingSafeArea: true)
+      chooseViewConstraint = self.homeViewController.view.topToSuperview(nil, offset: -self.view.height, relation: .equal, priority: .required, isActive:true, usingSafeArea: true)
+      self.homeViewController.view.rightToSuperview(nil, offset: 0, relation: .equal, priority: .required, isActive:true, usingSafeArea: true)
+      self.homeViewController.view.height(397)
+      self.homeViewController.didMove(toParentViewController: self)
       self.view.layoutIfNeeded()
+      chooseViewConstraint.constant = 0
+      UIView.animate(withDuration: 0.3) {
+        self.view.layoutIfNeeded()
+      }
     }
   }
 }

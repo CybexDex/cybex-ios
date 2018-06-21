@@ -19,7 +19,6 @@ protocol TradeStateManagerProtocol {
     _ subscriber: S, transform: ((Subscription<TradeState>) -> Subscription<SelectedState>)?
   ) where S.StoreSubscriberStateType == SelectedState
   
-  func fetchData(_ pair : Pair)
 
 }
 
@@ -53,16 +52,6 @@ extension TradeCoordinator: TradeStateManagerProtocol {
     _ subscriber: S, transform: ((Subscription<TradeState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState {
     store.subscribe(subscriber, transform: transform)
-  }
-  
-  
-  func fetchData(_ pair:Pair) {
-    let request = getLimitOrdersRequest(pair: pair) { response in
-      if let data = response as? [LimitOrder] {
-        self.store.dispatch(TradeFetchedLimitData(data:data, pair:pair))
-      }
-    }
-    WebsocketService.shared.send(request: request)
   }
   
 }

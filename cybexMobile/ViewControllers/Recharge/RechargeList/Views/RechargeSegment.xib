@@ -19,10 +19,14 @@
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="286-Ac-Sy9">
                     <rect key="frame" x="71" y="0.0" width="233" height="30"/>
                     <segments>
-                        <segment title="充值"/>
-                        <segment title="提现"/>
+                        <segment title="--"/>
+                        <segment title="--"/>
                     </segments>
                     <color key="tintColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="locali0" value="recharge_deposit"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="locali1" value="recharge_withdraw"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="segmentTouch:" destination="-1" eventType="valueChanged" id="YZl-7G-iPN"/>
                     </connections>
@@ -36,6 +40,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="34.5" y="54"/>
         </view>
     </objects>
 </document>
