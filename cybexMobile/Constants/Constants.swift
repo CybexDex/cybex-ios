@@ -53,6 +53,11 @@ struct AppConfiguration {
   static let ASSET                      = SERVER_BASE_URLString + "json/assets.json"
 }
 
+enum exchangeType {
+    case buy
+    case sell
+}
+
 enum indicator:String {
   case none
   case macd = "MACD"

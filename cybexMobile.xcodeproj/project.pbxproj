@@ -232,6 +232,17 @@
 		730FDABD20A314F900CFBF24 /* utility in Resources */ = {isa = PBXBuildFile; fileRef = 730FD5E320A314F200CFBF24 /* utility */; };
 		730FDABE20A314F900CFBF24 /* valarray in Resources */ = {isa = PBXBuildFile; fileRef = 730FD5E420A314F200CFBF24 /* valarray */; };
 		730FDABF20A314F900CFBF24 /* vector in Resources */ = {isa = PBXBuildFile; fileRef = 730FD5E520A314F200CFBF24 /* vector */; };
+		7314516520DE28AC001CFDA4 /* AccountOpenedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7314516420DE28AB001CFDA4 /* AccountOpenedOrdersView.swift */; };
+		7314516720DE28BE001CFDA4 /* AccountOpenedOrdersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7314516620DE28BE001CFDA4 /* AccountOpenedOrdersView.xib */; };
+		7314516920DE9A2C001CFDA4 /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7314516820DE9A2C001CFDA4 /* EmptySegue.swift */; };
+		7314516B20DE9E2A001CFDA4 /* ExchangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7314516A20DE9E2A001CFDA4 /* ExchangeView.swift */; };
+		7314516F20DEA41E001CFDA4 /* ExchangeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7314516E20DEA41D001CFDA4 /* ExchangeView.xib */; };
+		7314517420DEA55A001CFDA4 /* ExchangeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7314517020DEA55A001CFDA4 /* ExchangeActions.swift */; };
+		7314517520DEA55A001CFDA4 /* ExchangeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7314517120DEA55A001CFDA4 /* ExchangeCoordinator.swift */; };
+		7314517620DEA55A001CFDA4 /* ExchangeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7314517220DEA55A001CFDA4 /* ExchangeReducers.swift */; };
+		7314517720DEA55A001CFDA4 /* ExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7314517320DEA55A001CFDA4 /* ExchangeViewController.swift */; };
+		7314517920DF71F8001CFDA4 /* BusinessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7314517820DF71F8001CFDA4 /* BusinessView.swift */; };
+		7314517B20DF7202001CFDA4 /* BusinessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7314517A20DF7202001CFDA4 /* BusinessView.xib */; };
 		731A0E9720A4408B00507D1E /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A0E6D20A4408900507D1E /* UITextField+Extensions.swift */; };
 		731A0E9D20A4409900507D1E /* EntryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A0E9920A4409800507D1E /* EntryActions.swift */; };
 		731A0E9E20A4409900507D1E /* EntryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A0E9A20A4409800507D1E /* EntryCoordinator.swift */; };
@@ -11538,6 +11549,17 @@
 		730FDA5A20A314F400CFBF24 /* xpressive_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xpressive_fwd.hpp; sourceTree = "<group>"; };
 		730FDA5B20A314F400CFBF24 /* xpressive_static.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xpressive_static.hpp; sourceTree = "<group>"; };
 		730FDA5C20A314F400CFBF24 /* xpressive_typeof.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xpressive_typeof.hpp; sourceTree = "<group>"; };
+		7314516420DE28AB001CFDA4 /* AccountOpenedOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOpenedOrdersView.swift; sourceTree = "<group>"; };
+		7314516620DE28BE001CFDA4 /* AccountOpenedOrdersView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountOpenedOrdersView.xib; sourceTree = "<group>"; };
+		7314516820DE9A2C001CFDA4 /* EmptySegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
+		7314516A20DE9E2A001CFDA4 /* ExchangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeView.swift; sourceTree = "<group>"; };
+		7314516E20DEA41D001CFDA4 /* ExchangeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExchangeView.xib; sourceTree = "<group>"; };
+		7314517020DEA55A001CFDA4 /* ExchangeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeActions.swift; sourceTree = "<group>"; };
+		7314517120DEA55A001CFDA4 /* ExchangeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeCoordinator.swift; sourceTree = "<group>"; };
+		7314517220DEA55A001CFDA4 /* ExchangeReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeReducers.swift; sourceTree = "<group>"; };
+		7314517320DEA55A001CFDA4 /* ExchangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewController.swift; sourceTree = "<group>"; };
+		7314517820DF71F8001CFDA4 /* BusinessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessView.swift; sourceTree = "<group>"; };
+		7314517A20DF7202001CFDA4 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
 		731A0E6D20A4408900507D1E /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		731A0E9920A4409800507D1E /* EntryActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryActions.swift; sourceTree = "<group>"; };
 		731A0E9A20A4409800507D1E /* EntryCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryCoordinator.swift; sourceTree = "<group>"; };
@@ -12112,6 +12134,8 @@
 				72EE598B20D2183A0096AAB2 /* BusinessTitleView.xib */,
 				72EE599320D23AA90096AAB2 /* BusinessTitleItemView.swift */,
 				72EE599520D23AB30096AAB2 /* BusinessTitleItemView.xib */,
+				7314517820DF71F8001CFDA4 /* BusinessView.swift */,
+				7314517A20DF7202001CFDA4 /* BusinessView.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -12133,6 +12157,8 @@
 				721F5C6F20AAF1400042488F /* OpenedOrdersHeaderView.swift */,
 				721F5C7120AAF15F0042488F /* OpenedOrdersHeaderView.xib */,
 				721F5C7320AAF7290042488F /* OpenedOrdersStatesView.swift */,
+				7314516420DE28AB001CFDA4 /* AccountOpenedOrdersView.swift */,
+				7314516620DE28BE001CFDA4 /* AccountOpenedOrdersView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -12221,6 +12247,10 @@
 				72C5737820CFA35E005ABFA5 /* TradeActions.swift */,
 				72C5737920CFA35E005ABFA5 /* TradeViewController.swift */,
 				72C5737A20CFA35E005ABFA5 /* TradeReducers.swift */,
+				7314517020DEA55A001CFDA4 /* ExchangeActions.swift */,
+				7314517120DEA55A001CFDA4 /* ExchangeCoordinator.swift */,
+				7314517220DEA55A001CFDA4 /* ExchangeReducers.swift */,
+				7314517320DEA55A001CFDA4 /* ExchangeViewController.swift */,
 				72C573A620CFE959005ABFA5 /* Views */,
 			);
 			path = Trade;
@@ -12239,6 +12269,8 @@
 				72C573A920CFE979005ABFA5 /* TradeNavTitleView.xib */,
 				72EE59A020D35DF00096AAB2 /* MyOpenedOrdersView.swift */,
 				72EE59A220D35DF80096AAB2 /* MyOpenedOrdersView.xib */,
+				7314516A20DE9E2A001CFDA4 /* ExchangeView.swift */,
+				7314516E20DEA41D001CFDA4 /* ExchangeView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -31591,6 +31623,7 @@
 				73D9789120577CDC00CB7DE1 /* BaseTableViewCell.swift */,
 				73D977EC20565F0600CB7DE1 /* BaseViewController.swift */,
 				73A0CC032068E23400463ADE /* BaseWebViewController.swift */,
+				7314516820DE9A2C001CFDA4 /* EmptySegue.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -32233,6 +32266,7 @@
 				730FDA7620A314F900CFBF24 /* functional in Resources */,
 				730FDA5D20A314F600CFBF24 /* cassert in Resources */,
 				73D9789020577CA000CB7DE1 /* HomePairCell.xib in Resources */,
+				7314517B20DF7202001CFDA4 /* BusinessView.xib in Resources */,
 				730FDAB720A314F900CFBF24 /* vector.SUNWCCh in Resources */,
 				730FDA9E20A314F900CFBF24 /* list.SUNWCCh in Resources */,
 				730FDA8320A314F900CFBF24 /* ostream in Resources */,
@@ -32269,10 +32303,12 @@
 				72C5739220CFBCD7005ABFA5 /* TradeHistoryView.xib in Resources */,
 				730FDA7920A314F900CFBF24 /* iostream in Resources */,
 				72EE599620D23AB30096AAB2 /* BusinessTitleItemView.xib in Resources */,
+				7314516F20DEA41E001CFDA4 /* ExchangeView.xib in Resources */,
 				72F6DF2D20AC2EF100BBF105 /* AccountAssetOperationView.xib in Resources */,
 				730FDA8920A314F900CFBF24 /* stack in Resources */,
 				72F6DF1920AC1C1200BBF105 /* Account.storyboard in Resources */,
 				730FDAA420A314F900CFBF24 /* ostream.SUNWCCh in Resources */,
+				7314516720DE28BE001CFDA4 /* AccountOpenedOrdersView.xib in Resources */,
 				72C573BF20D0FB2F005ABFA5 /* MyHistoryCellView.xib in Resources */,
 				7265CFC520CE4A96005DEB7F /* Business.storyboard in Resources */,
 				730FDA7D20A314F900CFBF24 /* list in Resources */,
@@ -32574,6 +32610,7 @@
 				73D978A72057A46100CB7DE1 /* PairCardView.swift in Sources */,
 				72F6DF2420AC266B00BBF105 /* AccountPortfolioCell.swift in Sources */,
 				73EA6D942085C3AC0045A88B /* Demo.swift in Sources */,
+				7314516920DE9A2C001CFDA4 /* EmptySegue.swift in Sources */,
 				73D34E3D2063A65A008C7507 /* FAQViewController.swift in Sources */,
 				7320D656205A90FD00C3F579 /* NSObject+Extensions.swift in Sources */,
 				731A0E9720A4408B00507D1E /* UITextField+Extensions.swift in Sources */,
@@ -32582,6 +32619,7 @@
 				73A2937820AAED3F00893053 /* RegisterCoordinator.swift in Sources */,
 				7320D6AF205BB13C00C3F579 /* CBEMAModel.swift in Sources */,
 				72C30C7920AA8AA000F4DCEC /* LockupAssetsCoordinator.swift in Sources */,
+				7314517420DEA55A001CFDA4 /* ExchangeActions.swift in Sources */,
 				73D977F42056603800CB7DE1 /* HomeViewController.swift in Sources */,
 				73D977ED20565F0600CB7DE1 /* BaseViewController.swift in Sources */,
 				72F6DF2720AC27A500BBF105 /* AccountPortfolioCellView.swift in Sources */,
@@ -32597,6 +32635,7 @@
 				73D34E3C2063A65A008C7507 /* FAQReducers.swift in Sources */,
 				72EE598A20D218310096AAB2 /* BusinessTitleView.swift in Sources */,
 				7320D6B5205FA92400C3F579 /* CBKLineVolumeView.swift in Sources */,
+				7314517920DF71F8001CFDA4 /* BusinessView.swift in Sources */,
 				73B88E2120AFD4940069AAB6 /* Vesting.swift in Sources */,
 				7327CE0D20D8AB8400DC681F /* NetworkBroadcastAPI.swift in Sources */,
 				731A0E9E20A4409900507D1E /* EntryCoordinator.swift in Sources */,
@@ -32650,6 +32689,7 @@
 				733CD33120623F47002AD0E0 /* DataBaseApi.swift in Sources */,
 				735068D720B7E9B30092CE04 /* debounce-throttle.swift in Sources */,
 				73D978042056614900CB7DE1 /* AppActions.swift in Sources */,
+				7314516520DE28AC001CFDA4 /* AccountOpenedOrdersView.swift in Sources */,
 				735D8EBB20AEB5B0008DAAAC /* Utils.swift in Sources */,
 				7396B5ED2067EA7D008051E5 /* UIResponder+Route.swift in Sources */,
 				72C30C8320AA8DAD00F4DCEC /* LockupAssetsCell.swift in Sources */,
@@ -32660,9 +32700,11 @@
 				73D34E442063A675008C7507 /* AccountReducers.swift in Sources */,
 				7386AD5E20B4134D00168629 /* Shapes.swift in Sources */,
 				73D9779F205652BA00CB7DE1 /* UIView+Extensions.swift in Sources */,
+				7314517720DEA55A001CFDA4 /* ExchangeViewController.swift in Sources */,
 				73E49E342079FFAF003B14D2 /* OrderBookCoordinator.swift in Sources */,
 				73DF25B620C53D9300A0D00F /* types.cpp in Sources */,
 				7320D6A9205B9E5B00C3F579 /* CBKLineBrush.swift in Sources */,
+				7314516B20DE9E2A001CFDA4 /* ExchangeView.swift in Sources */,
 				7324A91920AB01FA005BCFF8 /* GradientLayer.swift in Sources */,
 				733402272067DB00000F78B3 /* DemoCache.swift in Sources */,
 				7320D69D205B8C1E00C3F579 /* KLineConfiguration.swift in Sources */,
@@ -32759,6 +32801,7 @@
 				72C100FD20A984F70059FEE8 /* OpenedOrdersReducers.swift in Sources */,
 				729DC5C920C93C8800AEC844 /* WithdrawDetailReducers.swift in Sources */,
 				73D9789220577CDC00CB7DE1 /* BaseTableViewCell.swift in Sources */,
+				7314517520DEA55A001CFDA4 /* ExchangeCoordinator.swift in Sources */,
 				73DF25B020C53D9300A0D00F /* address.cpp in Sources */,
 				73D34E432063A675008C7507 /* AccountCoordinator.swift in Sources */,
 				73D9788E20577C8F00CB7DE1 /* HomePairCell.swift in Sources */,
@@ -32771,6 +32814,7 @@
 				7265CFC120CE4A71005DEB7F /* BusinessActions.swift in Sources */,
 				73E49E3C2079FFBF003B14D2 /* TradeHistoryCoordinator.swift in Sources */,
 				735D8EC320AFCC92008DAAAC /* NoticeBoardViewController.swift in Sources */,
+				7314517620DEA55A001CFDA4 /* ExchangeReducers.swift in Sources */,
 				721ABFA020DB06A8001C4974 /* HomeContentView.swift in Sources */,
 				7320D658205A942C00C3F579 /* NSNotification+Extensions.swift in Sources */,
 				7386AD5B20B4134D00168629 /* CGContextExtension.swift in Sources */,

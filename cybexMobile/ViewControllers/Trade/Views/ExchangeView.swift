@@ -1,49 +1,46 @@
 //
-//  TradeNavTitleView.swift
+//  ExchangeView.swift
 //  cybexMobile
 //
-//  Created by DKM on 2018/6/12.
+//  Created by koofrank on 2018/6/23.
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-protocol TradeNavTitleViewDelegate{
-  func sendEventActionWith() -> Bool
-}
-
-class TradeNavTitleView: UIView {
+class ExchangeView:UIView {
+  @IBOutlet weak var leftView: UIView!
+  @IBOutlet weak var rightView: UIView!
+  @IBOutlet weak var bottomView: UIView!
+  @IBOutlet weak var historUpDown: UIButton!
+  @IBOutlet weak var titleView: UIView!
   
-  @IBOutlet weak var title: UILabel!
+  @IBOutlet weak var scrollView: UIScrollView!
+  var isMoveMarketTrades : Bool = false
   
-  @IBOutlet weak var icon: UIImageView!
-  
-  var isSetUp : Bool?
-  
-  enum Event_Action : String{
-    case changeTitle
-  }
-  
-  var data : String?{
-    didSet{
-      title.text = data
+  var data: Any? {
+    didSet {
+      
     }
   }
-  var delegate : TradeNavTitleViewDelegate?
+  
+  @IBAction func marketTradesUpDown(_ sender: UIButton) {
+    sender.transform = CGAffineTransform(rotationAngle: isMoveMarketTrades == false ? 0 : CGFloat(Double.pi))
+    if isMoveMarketTrades {
+      self.scrollView.contentOffset = CGPoint(x: 0, y: 0)
+    }
+    else{
+      self.scrollView.contentOffset = CGPoint(x: 0, y: self.titleView.y)
+    }
+    self.isMoveMarketTrades = !self.isMoveMarketTrades
+  }
   
   fileprivate func setup() {
-    self.isSetUp = false
-    self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
-      guard let `self` = self else { return }
-      if let dele = self.delegate, dele.sendEventActionWith() {
-        self.icon.transform = self.isSetUp == false ? CGAffineTransform(rotationAngle: CGFloat(0.5 * Double.pi)) : CGAffineTransform(rotationAngle: 0)
-        self.isSetUp = !self.isSetUp!
-      }
-    }).disposed(by: disposeBag)
+    self.historUpDown.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
   }
   
   override var intrinsicContentSize: CGSize {
-    return self.size
+    return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
   }
   
   fileprivate func updateHeight() {
@@ -84,6 +81,5 @@ class TradeNavTitleView: UIView {
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
-  
   
 }

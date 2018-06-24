@@ -1,49 +1,51 @@
 //
-//  TradeNavTitleView.swift
+//  BusinessView.swift
 //  cybexMobile
 //
-//  Created by DKM on 2018/6/12.
+//  Created by koofrank on 2018/6/24.
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-protocol TradeNavTitleViewDelegate{
-  func sendEventActionWith() -> Bool
-}
+class BusinessView: UIView {
+  @IBOutlet weak var button: Button!
+  @IBOutlet weak var errorMessage: UILabel!
+  @IBOutlet weak var balance: UILabel!
+  
+  @IBOutlet weak var fee: UILabel!
+  @IBOutlet weak var endMoney: UILabel!
+  @IBOutlet weak var baseName: UILabel!
+  @IBOutlet weak var value: UILabel!
 
-class TradeNavTitleView: UIView {
+  @IBOutlet weak var priceTextfield: UITextField!
+  @IBOutlet weak var amountTextfield: UITextField!
+
+  @IBOutlet var percents: [UILabel]!
   
-  @IBOutlet weak var title: UILabel!
-  
-  @IBOutlet weak var icon: UIImageView!
-  
-  var isSetUp : Bool?
-  
-  enum Event_Action : String{
-    case changeTitle
-  }
-  
-  var data : String?{
-    didSet{
-      title.text = data
+  @IBAction func changePrice(_ sender: UIButton) {
+    if sender.tag == 1001{
+      // -
+      
+    }else{
+      // +
+      
     }
   }
-  var delegate : TradeNavTitleViewDelegate?
+  
+  var data: Any? {
+    didSet {
+      
+    }
+  }
+  
   
   fileprivate func setup() {
-    self.isSetUp = false
-    self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
-      guard let `self` = self else { return }
-      if let dele = self.delegate, dele.sendEventActionWith() {
-        self.icon.transform = self.isSetUp == false ? CGAffineTransform(rotationAngle: CGFloat(0.5 * Double.pi)) : CGAffineTransform(rotationAngle: 0)
-        self.isSetUp = !self.isSetUp!
-      }
-    }).disposed(by: disposeBag)
+    
   }
   
   override var intrinsicContentSize: CGSize {
-    return self.size
+    return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
   }
   
   fileprivate func updateHeight() {
@@ -84,6 +86,5 @@ class TradeNavTitleView: UIView {
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
-  
-  
+
 }

@@ -1,8 +1,8 @@
 //
-//  BusinessViewController.swift
+//  ExchangeViewController.swift
 //  cybexMobile
 //
-//  Created DKM on 2018/6/11.
+//  Created koofrank on 2018/6/23.
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
@@ -11,27 +11,27 @@ import RxSwift
 import RxCocoa
 import ReSwift
 
-class BusinessViewController: BaseViewController {
-  var pair: Pair?{
+class ExchangeViewController: BaseViewController {
+  
+  var coordinator: (ExchangeCoordinatorProtocol & ExchangeStateManagerProtocol)?
+  var type : exchangeType = .buy
+
+  var pair: Pair? {
     didSet{
-      
+      self.childViewControllers.forEach { (viewController) in
+        if var viewController = viewController as? TradePair{
+          viewController.pariInfo = pair!
+        }
+      }
     }
   }
   
-  @IBOutlet weak var containerView: BusinessView!
-
-  var type : exchangeType = .buy
+  @IBOutlet weak var containerView: ExchangeView!
   
-  var coordinator: (BusinessCoordinatorProtocol & BusinessStateManagerProtocol)?
-    
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    setupUI()
-  }
-  
-  func setupUI(){
-    containerView.button.gradientLayer.colors = type == .buy ? [UIColor.paleOliveGreen.cgColor,UIColor.apple.cgColor] : [UIColor.pastelRed.cgColor,UIColor.reddish.cgColor]
+    self.coordinator?.setupChildVC(self) 
   }
   
   func commonObserveState() {
@@ -54,7 +54,7 @@ class BusinessViewController: BaseViewController {
   }
 }
 
-extension BusinessViewController : TradePair {
+extension ExchangeViewController : TradePair {
   var pariInfo: Pair {
     get {
       return self.pair!

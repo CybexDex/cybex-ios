@@ -15,6 +15,13 @@ class MyHistoryViewController: BaseViewController {
   struct define {
     static let sectionHeaderHeight : CGFloat = 44.0
   }
+  
+  var pair: Pair? {
+    didSet{
+      
+    }
+  }
+  
   @IBOutlet weak var tableView: UITableView!
   
   var coordinator: (MyHistoryCoordinatorProtocol & MyHistoryStateManagerProtocol)?
@@ -23,6 +30,7 @@ class MyHistoryViewController: BaseViewController {
     super.viewDidLoad()
     setupUI()
   }
+  
   func setupUI(){
     let name = String.init(describing:MyHistoryCell.self)
     

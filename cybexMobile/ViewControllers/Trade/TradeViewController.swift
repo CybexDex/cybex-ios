@@ -18,39 +18,36 @@ protocol TradePair {
 
 
 class TradeViewController: BaseViewController {
+  var tradeTitltView : TradeNavTitleView!
   @IBOutlet weak var topView: UIView!
   @IBOutlet weak var scrollView: UIScrollView!
-  @IBOutlet weak var scrollViewLeading: NSLayoutConstraint!
-  @IBOutlet weak var historUpDown: UIButton!
-  @IBOutlet weak var businessHeightConstraint: NSLayoutConstraint!
-  @IBOutlet var orderBookView: UIView!
   
-  var isMoveMarketTrades : Bool = false
+  var chooseTitleView : UIView?//mask
   
-  var myOrdersLeading : Constraint!
-  
-  var chooseTitleView : UIView?
-  var tradeTitltView : TradeNavTitleView!
+  var selectedIndex:Int = 0 {
+    didSet {
+      switch selectedIndex  {
+      case 0:moveToTradeView(isBuy:true)
+      case 1:moveToTradeView(isBuy:false)
+      case 2:moveToMyOpenedOrders()
+      default:
+        break
+      }
+    }
+  }
   
   var coordinator: (TradeCoordinatorProtocol & TradeStateManagerProtocol)?
   
-  var tradeHistory : TradeHistoryViewController!
-  var businessVC   : BusinessViewController!
-  var myOrdersView : MyOpenedOrdersView!
-  
-  var homeViewController : HomeViewController!
-  var orderBookViewController : OrderBookViewController!
-  
-  var chooseViewConstraint : Constraint!
-  
-  var isMoving : Bool?
-  
-  var pair : Pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB){
+  var pair : Pair = Pair(base: AssetConfiguration.CYB, quote: AssetConfiguration.ETH){
     didSet{
+      guard let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
+      
+      endLoading()
       if self.chooseTitleView != nil {
         self.sendEventActionWith()
       }
-      tradeTitltView.title.text = (app_data.assetInfo[pair.quote]?.symbol.filterJade)! + "/" + (app_data.assetInfo[pair.base]?.symbol.filterJade)!
+      
+      tradeTitltView.title.text = quote_info.symbol.filterJade + "/" + base_info.symbol.filterJade
       self.childViewControllers.forEach { (viewController) in
         if var viewController = viewController as? TradePair{
           viewController.pariInfo = pair
@@ -58,15 +55,19 @@ class TradeViewController: BaseViewController {
       }
     }
   }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.startLoading()
     setupUI()
-    setupNavi()
-    self.historUpDown.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+    
+    self.pair = Pair(base: AssetConfiguration.CYB, quote: AssetConfiguration.ETH)
   }
   
   func setupUI(){
-    self.automaticallyAdjustsScrollViewInsets = false
+    setupNavi()
+    
     let titlesView = CybexTitleView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 32))
     topView.addSubview(titlesView)
     
@@ -74,27 +75,13 @@ class TradeViewController: BaseViewController {
                        R.string.localizable.trade_sell.key.localized(),
                        R.string.localizable.trade_total.key.localized()]
     
-    businessVC.pair = Pair(base: AssetConfiguration.CYB, quote: AssetConfiguration.ETH)
-    tradeHistory.pair = Pair(base: AssetConfiguration.CYB, quote: AssetConfiguration.ETH)
-   
-    self.orderBookViewController = R.storyboard.main.orderBookViewController()!
-    self.orderBookViewController.VC_TYPE = 2
-    self.orderBookViewController.coordinator = OrderBookCoordinator(rootVC: self.navigationController as! BaseNavigationController)
-    self.addChildViewController(self.orderBookViewController)
-    self.orderBookView.addSubview(self.orderBookViewController.view)
-    self.orderBookViewController.view.frame = self.orderBookView.bounds
-    self.orderBookViewController.view.layoutIfNeeded()
-    self.orderBookViewController.didMove(toParentViewController: self)
   }
   
   func setupNavi(){
-    let rightBtn = UIBarButtonItem(image: UIImage(named: "icStarBorder23Px"), style: .done, target: self, action: #selector(rightAction(_ :)))
-    self.navigationItem.rightBarButtonItem = rightBtn
+    configLeftNavButton(R.image.icStarBorder23Px())
+    configRightNavButton(R.image.icCandle())
     
-    let leftBtn = UIBarButtonItem(image: UIImage(named: "icCandle"), style: .done, target: self, action: #selector(leftAction(_ :)))
-    self.navigationItem.leftBarButtonItem = leftBtn
-    
-    tradeTitltView = TradeNavTitleView(frame: CGRect.zero)
+    tradeTitltView = TradeNavTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 64))
     tradeTitltView.delegate = self
     self.navigationItem.titleView = tradeTitltView    
   }
@@ -105,10 +92,6 @@ class TradeViewController: BaseViewController {
   
   @objc override func leftAction(_ sender: UIButton){
     
-  }
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    self.orderBookViewController.pair = self.pair
   }
   
   func commonObserveState() {
@@ -127,133 +110,56 @@ class TradeViewController: BaseViewController {
   
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "pushTradeHistoryViewController" {
-      tradeHistory = segue.destination as! TradeHistoryViewController
-      tradeHistory.coordinator = TradeHistoryCoordinator(rootVC: self.navigationController as! BaseNavigationController)
-    }else if segue.identifier == "pushBusinessViewController" {
-      businessVC = segue.destination as! BusinessViewController
-      businessVC.coordinator = BusinessCoordinator(rootVC: self.navigationController as! BaseNavigationController)
-    }
+    self.coordinator?.setupChildVC(segue)
   }
   
   override func configureObserveState() {
     commonObserveState()
   }
   
+  func pageOffsetForChild(at index: Int) -> CGFloat {
+    return CGFloat(index) * scrollView.bounds.width
+  }
+  
   func moveToMyOpenedOrders(){
-    myOrdersView    = MyOpenedOrdersView(frame: CGRect.zero)
-    self.view.addSubview(myOrdersView)
-    myOrdersLeading =  myOrdersView.leadingToTrailing(of: self.scrollView)
-    myOrdersView.top(to: self.scrollView)
-    myOrdersView.width(to: self.scrollView)
-    myOrdersView.height(to:self.scrollView)
-    myOrdersLeading.constant = -self.view.width
-    self.myOrdersView.layoutIfNeeded()
-    self.view.layoutIfNeeded()
-    self.scrollViewLeading.constant = -self.view.width
-    isMoving = true
-    UIView.animate(withDuration: 0.3, animations: {
-      self.myOrdersView.layoutIfNeeded()
-      self.view.layoutIfNeeded()
-    }) {(isFinished) in
-      self.isMoving = false
-    }
+    self.scrollView.setContentOffset(CGPoint(x: pageOffsetForChild(at: 2), y: 0), animated: true)
   }
   
   func moveToTradeView(isBuy:Bool){
-    businessVC.vc_type = isBuy == true ? .BUY : .SELL
-    if myOrdersView != nil{
-      myOrdersLeading.constant = 0
-      scrollViewLeading.constant = 0
-      isMoving = true
-      UIView.animate(withDuration: 0.3, animations: {
-        self.view.layoutIfNeeded()
-      }) { (isFinished) in
-        self.myOrdersView.removeFromSuperview()
-        self.myOrdersView     = nil
-        self.myOrdersLeading  = nil
-        self.isMoving         = false
-      }
-    }
-  }
-  
-  @IBAction func marketTradesUpDown(_ sender: UIButton) {
-    sender.transform = CGAffineTransform(rotationAngle: isMoveMarketTrades == false ? 0 : CGFloat(Double.pi))
-    if isMoveMarketTrades{
-      businessHeightConstraint.constant = 360
-    }else{
-      businessHeightConstraint.constant = 0
-    }
-    self.view.layoutIfNeeded()
-    self.isMoveMarketTrades = !self.isMoveMarketTrades
-  }
-  
-  
-  override func delete(_ sender: Any?) {
-    print("delete TradeViewController")
+    let index = isBuy ? 0 : 1
+    self.scrollView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: 0), animated: true)
   }
 }
 
-extension TradeViewController : TradeNavTitleViewDelegate{
-  func sendEventActionWith(){
+extension TradeViewController : TradeNavTitleViewDelegate {
+  @discardableResult func sendEventActionWith() -> Bool {
+    if app_data.data.value.count == 0 {
+      return false
+    }
+    
     if self.chooseTitleView != nil {
-      // 移除
-      chooseViewConstraint.constant = -self.view.height
-      UIView.animate(withDuration: 0.3, animations: {
-        self.view.layoutIfNeeded()
-      }) { (isFinished) in
-        self.homeViewController.willMove(toParentViewController: self)
-        self.homeViewController.view.removeFromSuperview()
-        self.homeViewController.removeFromParentViewController()
+      self.coordinator?.removeHomeVC {[weak self] in
+        guard let `self` = self else { return }
         self.chooseTitleView?.removeFromSuperview()
         self.chooseTitleView = nil
       }
     }else{
-      // 添加
-      self.homeViewController = R.storyboard.main.homeViewController()!
-      self.homeViewController.VC_TYPE = 2
-      self.addChildViewController(self.homeViewController)
       self.chooseTitleView = UIView()
       self.chooseTitleView?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
       self.view.addSubview(self.chooseTitleView!)
       
-      self.chooseTitleView?.top(to:self.view)
-      self.chooseTitleView?.leading(to:self.view)
-      self.chooseTitleView?.trailing(to: self.view)
-      self.chooseTitleView?.height(to: self.view)
+      self.chooseTitleView?.edges(to: self.view, insets: UIEdgeInsetsMake(0, 0, 0, 0), priority: .required, isActive: true)
       self.view.layoutIfNeeded()
       
-      self.view.addSubview(self.homeViewController.view)
-      self.homeViewController.view.leftToSuperview(nil, offset: 0, relation: .equal, priority: .required, isActive:true, usingSafeArea: true)
-      chooseViewConstraint = self.homeViewController.view.topToSuperview(nil, offset: -self.view.height, relation: .equal, priority: .required, isActive:true, usingSafeArea: true)
-      self.homeViewController.view.rightToSuperview(nil, offset: 0, relation: .equal, priority: .required, isActive:true, usingSafeArea: true)
-      self.homeViewController.view.height(397)
-      self.homeViewController.didMove(toParentViewController: self)
-      self.view.layoutIfNeeded()
-      chooseViewConstraint.constant = 0
-      UIView.animate(withDuration: 0.3) {
-        self.view.layoutIfNeeded()
-      }
+      self.coordinator?.addHomeVC()
     }
+    
+    return true
   }
 }
 
-
-
-extension TradeViewController{
-  @objc func sendBtnAction(_ data:[String:Any]){
-    if isMoving == true{
-      return
-    }
-    
-    switch data["selectedIndex"] as! Int {
-    case 0:moveToTradeView(isBuy:true)
-    case 1:moveToTradeView(isBuy:false)
-    case 2:moveToMyOpenedOrders()
-    default:
-      break
-    }
+extension TradeViewController {
+  @objc func sendBtnAction(_ data:[String:Any]) {
+    selectedIndex = data["selectedIndex"] as! Int
   }
-  
-  
 }

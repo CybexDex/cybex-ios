@@ -24,22 +24,18 @@ class OrderBookViewController: BaseViewController {
   var VC_TYPE : Int = 1
   var pair:Pair? {
     didSet {
-//      if (self.contentView != nil || self.tradeView != nil), oldValue != pair {
-//
-//      }
+      guard let pair = pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
+      
       if self.tradeView != nil{
-        if let pair = pair{
-          if Localize.currentLanguage() == "en"{
-            self.tradeView.titlePrice.text = "Price " + (app_data.assetInfo[pair.base]?.symbol.filterJade)!
-            self.tradeView.titleAmount.text = "Amount " + (app_data.assetInfo[pair.quote]?.symbol.filterJade)!
-          }else{
-            self.tradeView.titlePrice.text = "价格" + (app_data.assetInfo[pair.base]?.symbol.filterJade)!
-            self.tradeView.titleAmount.text = "数量" + (app_data.assetInfo[pair.quote]?.symbol.filterJade)!
-          }
+        if Localize.currentLanguage() == "en"{
+          self.tradeView.titlePrice.text = "Price " + base_info.symbol.filterJade
+          self.tradeView.titleAmount.text = "Amount " + quote_info.symbol.filterJade
+        }else{
+          self.tradeView.titlePrice.text = "价格" + base_info.symbol.filterJade
+          self.tradeView.titleAmount.text = "数量" + quote_info.symbol.filterJade
         }
-       
       }
-      self.coordinator?.fetchData(pair!)
+      self.coordinator?.fetchData(pair)
     }
   }
   
