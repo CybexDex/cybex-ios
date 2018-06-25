@@ -11,7 +11,8 @@ import ReSwift
 
 protocol TradeCoordinatorProtocol {
   func openMyHistory()
-  
+  func openMarket(index:Int, currentBaseIndex:Int)
+
   func removeHomeVC(_ completion:@escaping () -> Void)
   func addHomeVC()
   
@@ -47,6 +48,15 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
     let vc = R.storyboard.business.myHistoryViewController()!
     vc.pair = tradeVC.pair
     let coordinator = MyHistoryCoordinator(rootVC: self.rootVC)
+    vc.coordinator = coordinator
+    self.rootVC.pushViewController(vc, animated: true)
+  }
+  
+  func openMarket(index:Int, currentBaseIndex:Int) {
+    let vc = R.storyboard.main.marketViewController()!
+    vc.curIndex = index
+    vc.currentBaseIndex = currentBaseIndex
+    let coordinator = MarketCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator
     self.rootVC.pushViewController(vc, animated: true)
   }

@@ -9,12 +9,12 @@
 import UIKit
 
 class MyHistoryCellView: UIView {
-
+  
   @IBOutlet weak var asset: UILabel!
   @IBOutlet weak var typeView: UIView!
   
-    @IBOutlet weak var kindL: UILabel!
-    @IBOutlet weak var price: UILabel!
+  @IBOutlet weak var kindL: UILabel!
+  @IBOutlet weak var price: UILabel!
   @IBOutlet weak var amount: UILabel!
   @IBOutlet weak var time: UILabel!
   @IBOutlet weak var orderPrice: UILabel!
@@ -22,8 +22,18 @@ class MyHistoryCellView: UIView {
   
   var data : Any? {
     didSet{
-      
+      if let fillOrder = data as? FillOrder {
+        updateUI(fillOrder)
+      }
     }
+  }
+  
+  func updateUI(_ order: FillOrder) {
+    if let quoteInfo = app_data.assetInfo[order.fill_price.quote.assetID], let baseInfo = app_data.assetInfo[order.fill_price.base.assetID] {
+      self.asset.text = "\(quoteInfo.symbol)/\(baseInfo.symbol)"
+
+    }
+    
   }
   
   func setup(){

@@ -12,9 +12,11 @@ import RxCocoa
 import ReSwift
 
 class BusinessViewController: BaseViewController {
-  var pair: Pair?{
+  var pair: Pair? {
     didSet{
-      
+      guard let base_info = app_data.assetInfo[pair!.base], let quote_info = app_data.assetInfo[pair!.quote] else { return }
+
+      self.containerView.baseName.text = base_info.symbol.filterJade
     }
   }
   
@@ -51,6 +53,12 @@ class BusinessViewController: BaseViewController {
   override func configureObserveState() {
     commonObserveState()
     
+    coordinator?.state.property.price.asObservable()
+      .skip(1)
+      .distinctUntilChanged()
+      .subscribe(onNext: { (s) in
+       self.containerView.priceTextfield.text = s
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
 }
 
@@ -61,6 +69,14 @@ extension BusinessViewController : TradePair {
     }
     set {
       self.pair = newValue
+    }
+  }
+}
+
+extension BusinessViewController {
+  @objc func amountPercent(_ data:[String:Any]) {
+    if let percent = data["percent"] as? String {
+      
     }
   }
 }

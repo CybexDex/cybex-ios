@@ -276,6 +276,7 @@
 		733557D52052642800C5ADD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 733557D22052642700C5ADD4 /* Main.storyboard */; };
 		733CD33120623F47002AD0E0 /* DataBaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733CD33020623F47002AD0E0 /* DataBaseApi.swift */; };
 		7341BB39205A5E11007387FE /* UIColor+Cybexblack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341BB0F205A5E11007387FE /* UIColor+Cybexblack.swift */; };
+		7348C54F20DFF92900C1B32F /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7348C54E20DFF92900C1B32F /* Operation.swift */; };
 		735068D720B7E9B30092CE04 /* debounce-throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735068D620B7E9B30092CE04 /* debounce-throttle.swift */; };
 		735D8EB220AD2A67008DAAAC /* NoticeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */; };
 		735D8EB420AD2A74008DAAAC /* NoticeBoardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */; };
@@ -11800,6 +11801,7 @@
 		733557D72052644800C5ADD4 /* cybexMobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cybexMobile-Bridging-Header.h"; sourceTree = "<group>"; };
 		733CD33020623F47002AD0E0 /* DataBaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseApi.swift; sourceTree = "<group>"; };
 		7341BB0F205A5E11007387FE /* UIColor+Cybexblack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Cybexblack.swift"; sourceTree = "<group>"; };
+		7348C54E20DFF92900C1B32F /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		735068D620B7E9B30092CE04 /* debounce-throttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "debounce-throttle.swift"; sourceTree = "<group>"; };
 		735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardView.swift; sourceTree = "<group>"; };
 		735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeBoardView.xib; sourceTree = "<group>"; };
@@ -31374,6 +31376,7 @@
 				735D8EB520AEAC0C008DAAAC /* Account.swift */,
 				735D8EB720AEACE7008DAAAC /* Balance.swift */,
 				73B88E2020AFD4940069AAB6 /* Vesting.swift */,
+				7348C54E20DFF92900C1B32F /* Operation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -32675,6 +32678,7 @@
 				72F6DF0D20AC0D3700BBF105 /* YourPortfolioCell.swift in Sources */,
 				72C5737B20CFA35E005ABFA5 /* TradeCoordinator.swift in Sources */,
 				72C5733420CF803C005ABFA5 /* StyleLabel.swift in Sources */,
+				7348C54F20DFF92900C1B32F /* Operation.swift in Sources */,
 				73A571692067FD1900921781 /* MarketCache.swift in Sources */,
 				72C5738820CFAAC9005ABFA5 /* TradeLineView.swift in Sources */,
 				72C5739020CFBCCD005ABFA5 /* TradeHistoryView.swift in Sources */,

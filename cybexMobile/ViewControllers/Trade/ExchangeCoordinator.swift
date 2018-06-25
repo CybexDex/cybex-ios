@@ -12,6 +12,8 @@ import TinyConstraints
 
 protocol ExchangeCoordinatorProtocol {
   func setupChildVC(_ exchange:ExchangeViewController)
+  
+  func switchPriceToBusinessVC(_ price:String, isBuy:Bool)
 }
 
 protocol ExchangeStateManagerProtocol {
@@ -71,6 +73,25 @@ extension ExchangeCoordinator: ExchangeCoordinatorProtocol {
         tradeHistory.didMove(toParentViewController: exchange)
       }
     }    
+  }
+  
+  func switchPriceToBusinessVC(_ price:String, isBuy:Bool) {
+    guard let tradeVC = self.rootVC.topViewController as? TradeViewController,
+      let exchange = tradeVC.childViewControllers.filter({ (vc) -> Bool in
+        if let vc = vc as? ExchangeViewController {
+          let type = isBuy ? exchangeType.buy : exchangeType.sell
+          if type == vc.type {
+            return true
+          }
+          return false
+        }
+        
+        return false
+      }).first as? ExchangeViewController ,
+      let business = exchange.childViewControllers.filter({ $0 is BusinessViewController}).first as? BusinessViewController else {
+        return
+    }
+    business.coordinator?.switchPrice(price)
   }
 }
 

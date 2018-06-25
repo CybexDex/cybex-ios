@@ -38,7 +38,7 @@ class TradeViewController: BaseViewController {
   
   var coordinator: (TradeCoordinatorProtocol & TradeStateManagerProtocol)?
   
-  var pair : Pair = Pair(base: AssetConfiguration.CYB, quote: AssetConfiguration.ETH){
+  var pair : Pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB){
     didSet{
       guard let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
       
@@ -62,7 +62,7 @@ class TradeViewController: BaseViewController {
     self.startLoading()
     setupUI()
     
-    self.pair = Pair(base: AssetConfiguration.CYB, quote: AssetConfiguration.ETH)
+    self.pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB)
   }
   
   func setupUI(){
@@ -87,11 +87,16 @@ class TradeViewController: BaseViewController {
   }
   
   @objc override func rightAction(_ sender: UIButton){
-    self.coordinator?.openMyHistory()
+    
+    if let baseIndex = AssetConfiguration.market_base_assets.index(of: pair.base), let index = app_data.filterQuoteAsset(pair.base).index(where: { (bucket) -> Bool in
+      return bucket.base == pair.base && bucket.quote == pair.quote
+    }) {
+      self.coordinator?.openMarket(index: index, currentBaseIndex: baseIndex)
+    }
   }
   
   @objc override func leftAction(_ sender: UIButton){
-    
+    self.coordinator?.openMyHistory()
   }
   
   func commonObserveState() {

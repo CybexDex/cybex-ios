@@ -10,6 +10,8 @@ import UIKit
 
 class MyHistoryCell: BaseTableViewCell {
 
+    @IBOutlet weak var containerView: MyHistoryCellView!
+  
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -19,7 +21,7 @@ class MyHistoryCell: BaseTableViewCell {
     }
   
   override func setup(_ data: Any?) {
-    
+    containerView.data = data
   }
     
 }

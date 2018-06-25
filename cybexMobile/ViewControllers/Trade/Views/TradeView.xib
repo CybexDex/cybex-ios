@@ -18,6 +18,16 @@
                 <outlet property="sells" destination="lmY-Wb-6Ba" id="7yX-Hp-IRB"/>
                 <outlet property="titleAmount" destination="Gjz-Cn-PUK" id="2YI-e4-98l"/>
                 <outlet property="titlePrice" destination="ele-i0-I0X" id="CMB-If-gTc"/>
+                <outletCollection property="items" destination="Xww-Cv-Pcu" collectionClass="NSMutableArray" id="YVd-92-Bwu"/>
+                <outletCollection property="items" destination="jQk-HF-1pO" collectionClass="NSMutableArray" id="Uzd-Nc-Mvf"/>
+                <outletCollection property="items" destination="WfR-LR-1Yh" collectionClass="NSMutableArray" id="C6h-Kl-ZGN"/>
+                <outletCollection property="items" destination="axg-Bc-Y6y" collectionClass="NSMutableArray" id="sHR-bR-ASn"/>
+                <outletCollection property="items" destination="8GU-R5-Cjp" collectionClass="NSMutableArray" id="c3l-EJ-e3L"/>
+                <outletCollection property="items" destination="jub-D7-CCu" collectionClass="NSMutableArray" id="jA2-Ex-1bB"/>
+                <outletCollection property="items" destination="lLk-1r-6SZ" collectionClass="NSMutableArray" id="Fcn-tx-pab"/>
+                <outletCollection property="items" destination="Ke5-if-dpu" collectionClass="NSMutableArray" id="XNB-cq-4kP"/>
+                <outletCollection property="items" destination="YxF-oe-zdz" collectionClass="NSMutableArray" id="ytz-x2-Rdu"/>
+                <outletCollection property="items" destination="7No-z0-kZX" collectionClass="NSMutableArray" id="7nn-wd-d9j"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

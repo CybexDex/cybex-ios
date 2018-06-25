@@ -9,6 +9,10 @@
 import Foundation
 
 class BusinessView: UIView {
+  enum event:String {
+    case amountPercent
+  }
+  
   @IBOutlet weak var button: Button!
   @IBOutlet weak var errorMessage: UILabel!
   @IBOutlet weak var balance: UILabel!
@@ -41,7 +45,14 @@ class BusinessView: UIView {
   
   
   fileprivate func setup() {
-    
+    for percentLabel in percents {
+      percentLabel.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+        guard let `self` = self else { return }
+        
+        self.next?.sendEventWith(event.amountPercent.rawValue, userinfo: ["percent": percentLabel.text!.replacingOccurrences(of: "%", with: "")])
+        
+      }).disposed(by: disposeBag)
+    }
   }
   
   override var intrinsicContentSize: CGSize {

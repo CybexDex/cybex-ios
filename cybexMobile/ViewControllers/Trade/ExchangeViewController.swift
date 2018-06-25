@@ -65,3 +65,12 @@ extension ExchangeViewController : TradePair {
   }
 }
 
+extension ExchangeViewController {
+  @objc func orderbookClicked(_ data:[String: Any]) {
+    if let price = data["price"] as? String {
+      self.coordinator?.switchPriceToBusinessVC(price, isBuy: self.type == .buy)
+    }
+  }
+}
+
+

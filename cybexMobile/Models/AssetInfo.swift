@@ -48,7 +48,7 @@ class Asset : Mappable {
   }
   
   func info() -> AssetInfo {
-    return app_data.assetInfo[self.assetID]!
+    return app_data.assetInfo[self.assetID] ?? AssetInfo(JSON:[:])!
   }
 }
 
@@ -58,18 +58,16 @@ extension Asset: Equatable {
   }
 }
 
-class Price : ImmutableMappable {
-  let base:Asset
-  let quote:Asset
+class Price : Mappable {
+  var base:Asset = Asset(JSON:[:])!
+  var quote:Asset = Asset(JSON:[:])!
   
-  required  init(map: Map) throws {
-    base                    = try map.value("base")
-    quote                   = try map.value("quote")
+  required init?(map: Map) {
   }
   
   func mapping(map: Map) {
-    base                    >>> map["base"]
-    quote                   >>> map["quote"]
+    base                    <- map["base"]
+    quote                   <- map["quote"]
   }
   
   func toReal() -> Double {

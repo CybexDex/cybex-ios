@@ -77,6 +77,9 @@ class OpenedOrdersViewController: BaseViewController {
       if let account_view = self.containerView as? AccountOpenedOrdersView {
         account_view.data = nil
       }
+      else if let pair_order = self.containerView as? MyOpenedOrdersView {
+        pair_order.data = self.pair
+      }
       
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }

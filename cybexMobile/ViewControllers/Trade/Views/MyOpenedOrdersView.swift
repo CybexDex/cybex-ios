@@ -11,7 +11,15 @@ import UIKit
 class MyOpenedOrdersView: UIView {
     @IBOutlet weak var sectionView: LockupAssetsSectionView!
     @IBOutlet weak var tableView: UITableView!
-    
+  
+  var data : Any? {
+    didSet {
+      if let _ = data as? Pair {
+        self.tableView.reloadData()
+      }
+    }
+  }
+  
   fileprivate func setup() {
     let name = UINib.init(nibName: String.init(describing:OpenedOrdersCell.self), bundle: nil)
     self.tableView.register(name, forCellReuseIdentifier: String.init(describing:OpenedOrdersCell.self))
@@ -66,7 +74,10 @@ class MyOpenedOrdersView: UIView {
 
 extension MyOpenedOrdersView : UITableViewDelegate,UITableViewDataSource{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let orderes = UserManager.shared.limitOrder.value ?? []
+    guard let pair = data as? Pair else { return 0 }
+    let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
+      return limitorder.sellPrice.base.assetID == pair.base && limitorder.sellPrice.quote.assetID == pair.quote
+    }) ?? []
     return orderes.count
   }
   

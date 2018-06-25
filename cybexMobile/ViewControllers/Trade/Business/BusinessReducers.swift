@@ -17,6 +17,8 @@ func BusinessPropertyReducer(_ state: BusinessPropertyState?, action: Action) ->
     var state = state ?? BusinessPropertyState()
     
     switch action {
+    case let action as changePriceAction:
+      state.price.accept(action.price)
     default:
         break
     }
