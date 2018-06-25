@@ -18,12 +18,13 @@
                     user_id:(int)user_id order_expiration:(NSTimeInterval)order_expiration
                    asset_id:(int)asset_id amount:(int)amount receive_asset_id:(int)receive_asset_id
              receive_amount:(int)receive_amount fee_id:(int)fee_id fee_amount:(int)fee_amount;
-  
++ (NSString *)getLimitOrderOperation:(int)user_id expiration:(NSTimeInterval)expiration asset_id:(int)asset_id amount:(int)amount receive_asset_id:(int)receive_asset_id receive_amount:(int)receive_amount fee_id:(int)fee_id fee_amount:(int)fee_amount;
 + (NSString *)cancelLimitOrder:(int)block_num block_id:(NSString *)block_id
                     expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
                        user_id:(int)user_id order_id:(int)order_id
                         fee_id:(int)fee_id fee_amount:(int)fee_amount;
-  
++ (NSString *)cancelLimitOrderOperation:(int)order_id user_id:(int)user_id fee_id:(int)fee_id fee_amount:(int)fee_amount;
+
 // memokey 需要线上取和生成的比较看是否有权限
 + (NSString *)getTransaction:(int)block_num block_id:(NSString *)block_id
                   expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id

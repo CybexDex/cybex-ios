@@ -30,12 +30,21 @@
   return @(jsonString.c_str());
 }
 
++ (NSString *)getLimitOrderOperation:(int)user_id expiration:(NSTimeInterval)expiration asset_id:(int)asset_id amount:(int)amount receive_asset_id:(int)receive_asset_id receive_amount:(int)receive_amount fee_id:(int)fee_id fee_amount:(int)fee_amount {
+  string jsonString= get_limit_order_create_json(user_id, expiration, asset_id, amount, receive_asset_id, receive_amount, 0, fee_amount, fee_id);
+  return @(jsonString.c_str());
+}
+
 + (NSString *)cancelLimitOrder:(int)block_num block_id:(NSString *)block_id
                  expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
                     user_id:(int)user_id order_id:(int)order_id
                      fee_id:(int)fee_id fee_amount:(int)fee_amount {
   string jsonString = cancel_order(block_num, [block_id UTF8String], expiration, [chain_id UTF8String], order_id, user_id, fee_amount, fee_id);
-  
+  return @(jsonString.c_str());
+}
+
++ (NSString *)cancelLimitOrderOperation:(int)order_id user_id:(int)user_id fee_id:(int)fee_id fee_amount:(int)fee_amount {
+  string jsonString = get_cancel_order_json(order_id, user_id, fee_amount, fee_id);
   return @(jsonString.c_str());
 }
   

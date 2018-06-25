@@ -16,7 +16,13 @@ class BusinessViewController: BaseViewController {
     didSet{
       guard let base_info = app_data.assetInfo[pair!.base], let quote_info = app_data.assetInfo[pair!.quote] else { return }
 
-      self.containerView.baseName.text = base_info.symbol.filterJade
+      self.containerView.quoteName.text = quote_info.symbol.filterJade
+      
+      if let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
+        return balance.asset_type.filterJade == (self.type == .buy ? base_info.id : quote_info.id)
+      }).first {
+         self.containerView.balance.text = getRealAmount(balances.asset_type, amount: balances.balance).formatCurrency(digitNum: 5)
+      }
     }
   }
   
@@ -76,7 +82,10 @@ extension BusinessViewController : TradePair {
 extension BusinessViewController {
   @objc func amountPercent(_ data:[String:Any]) {
     if let percent = data["percent"] as? String {
-      
+      if let balance = self.containerView.balance.text?.toDouble(), balance != 0, let limit = self.containerView.priceTextfield.text?.toDouble(), limit != 0 {
+        let amount = (balance * percent.toDouble()! / 100.0) / limit
+        self.containerView.amountTextfield.text = amount.string(digits: 5)
+      }
     }
   }
 }

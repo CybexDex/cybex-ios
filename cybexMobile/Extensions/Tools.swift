@@ -266,6 +266,9 @@ extension String {
   
   
   public func toDouble() -> Double? {
+    if self == "" {
+      return 0
+    }
     
     var selfString = self
     if selfString.contains(","){

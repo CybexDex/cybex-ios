@@ -19,7 +19,7 @@ class BusinessView: UIView {
   
   @IBOutlet weak var fee: UILabel!
   @IBOutlet weak var endMoney: UILabel!
-  @IBOutlet weak var baseName: UILabel!
+  @IBOutlet weak var quoteName: UILabel!
   @IBOutlet weak var value: UILabel!
 
   @IBOutlet weak var priceTextfield: UITextField!

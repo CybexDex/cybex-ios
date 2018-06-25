@@ -14,12 +14,12 @@
             <connections>
                 <outlet property="amountTextfield" destination="aZx-f2-lKv" id="5aH-4J-LvV"/>
                 <outlet property="balance" destination="Pz1-mT-c4i" id="lix-QA-icf"/>
-                <outlet property="baseName" destination="gqP-Ph-sYt" id="0gd-Ob-ThM"/>
                 <outlet property="button" destination="5nb-CT-1u7" id="c8I-Q7-e6J"/>
                 <outlet property="endMoney" destination="JwC-XK-pdl" id="yCt-8Y-Wn5"/>
                 <outlet property="errorMessage" destination="sjE-51-wDn" id="XsS-6D-Af9"/>
                 <outlet property="fee" destination="7C3-1T-dKy" id="saV-2J-eiL"/>
                 <outlet property="priceTextfield" destination="xuL-Sc-CcZ" id="x9C-lt-fsv"/>
+                <outlet property="quoteName" destination="gqP-Ph-sYt" id="a6Z-Ao-BMq"/>
                 <outlet property="value" destination="sVt-f6-hjy" id="KJb-jJ-2b3"/>
                 <outletCollection property="percents" destination="8TU-5q-cLx" collectionClass="NSMutableArray" id="gH5-FQ-02x"/>
                 <outletCollection property="percents" destination="2He-fT-YnW" collectionClass="NSMutableArray" id="lXS-4P-2r8"/>
