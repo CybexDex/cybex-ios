@@ -56,6 +56,11 @@ struct AppConfiguration {
   static let DEPOSIT_MSG                = SERVER_BASE_URLString + "json/deposit_msg.json"
 }
 
+enum exchangeType {
+    case buy
+    case sell
+}
+
 enum indicator:String {
   case none
   case macd = "MACD"

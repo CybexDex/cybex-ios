@@ -62,7 +62,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
   }
   
   func getWithdrawAccountInfo(_ userID:String){
-    BitShareCoordinator.resetDefaultPublicKey(UserManager.shared.keys?.memo_key?.public_key)
+//    BitShareCoordinator.resetDefaultPublicKey(UserManager.shared.keys?.memo_key?.public_key)
     let requeset = GetFullAccountsRequest(name: userID) { (response) in
       if let data = response as? FullAccount, let account = data.account {
         self.state.property.memo_key.accept(account.memo_key)

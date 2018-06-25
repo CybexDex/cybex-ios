@@ -545,60 +545,9 @@
                     <view key="view" contentMode="scaleToFill" id="MwO-P1-hp8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lrl-8E-lYM">
-                                <rect key="frame" x="13" y="21.5" width="349" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="29" id="XDX-YB-2zN"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="All"/>
-                                    <segment title="Buy"/>
-                                    <segment title="Sell"/>
-                                </segments>
-                                <color key="tintColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="locali0" value="opened.all"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="locali1" value="opened.buy"/>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="locali2" value="opened.sell"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="segmentClicked:" destination="fWP-R4-KqE" eventType="valueChanged" id="sMC-5u-8f6"/>
-                                </connections>
-                            </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HTu-hJ-GXP">
-                                <rect key="frame" x="0.0" y="51.5" width="375" height="615.5"/>
-                                <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                        <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outlet property="dataSource" destination="fWP-R4-KqE" id="OxC-Jw-GNI"/>
-                                    <outlet property="delegate" destination="fWP-R4-KqE" id="Dlm-xv-fEt"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="5Y4-un-15V" firstAttribute="trailing" secondItem="lrl-8E-lYM" secondAttribute="trailing" constant="13" id="4VK-i1-uC8"/>
-                            <constraint firstItem="5Y4-un-15V" firstAttribute="bottom" secondItem="HTu-hJ-GXP" secondAttribute="bottom" id="5h1-GK-evn"/>
-                            <constraint firstItem="lrl-8E-lYM" firstAttribute="top" secondItem="5Y4-un-15V" secondAttribute="top" constant="1.5" id="Ddu-Wj-Par"/>
-                            <constraint firstItem="lrl-8E-lYM" firstAttribute="leading" secondItem="5Y4-un-15V" secondAttribute="leading" constant="13" id="Prr-qZ-iNK"/>
-                            <constraint firstItem="HTu-hJ-GXP" firstAttribute="leading" secondItem="5Y4-un-15V" secondAttribute="leading" id="uaJ-mv-pej"/>
-                            <constraint firstItem="HTu-hJ-GXP" firstAttribute="top" secondItem="lrl-8E-lYM" secondAttribute="bottom" constant="1" id="v90-Ko-PVH"/>
-                            <constraint firstItem="5Y4-un-15V" firstAttribute="trailing" secondItem="HTu-hJ-GXP" secondAttribute="trailing" id="zTS-bh-elP"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5Y4-un-15V"/>
                     </view>
-                    <connections>
-                        <outlet property="segment" destination="lrl-8E-lYM" id="9X5-MW-lCR"/>
-                        <outlet property="tableView" destination="HTu-hJ-GXP" id="pVd-n7-qm6"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="phz-Eg-ITZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

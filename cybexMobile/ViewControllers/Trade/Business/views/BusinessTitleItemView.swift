@@ -17,6 +17,7 @@ class BusinessTitleItemView: UIView {
     @IBOutlet weak var change: UILabel!
     @IBOutlet weak var total: UILabel!
     var selectedIndex : Int?
+  
     var data : Any?{
     didSet{
         guard let markets = data as? HomeBucket else { return }
@@ -45,7 +46,7 @@ class BusinessTitleItemView: UIView {
     self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
       guard let `self` = self else { return }
       if let markets = self.data as? HomeBucket{
-        self.next?.sendEventWith(event.cellClicked.rawValue, userinfo: ["info": Pair(base: markets.base, quote: markets.quote)])
+        self.next?.sendEventWith(event.cellClicked.rawValue, userinfo: ["info": Pair(base: markets.base, quote: markets.quote), "index": self.selectedIndex ?? 0])
       }
     }).disposed(by: disposeBag)
   }

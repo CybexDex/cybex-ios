@@ -17,6 +17,8 @@ protocol BusinessStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<BusinessState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
+  
+  func switchPrice(_ price:String)
 }
 
 class BusinessCoordinator: AccountRootCoordinator {
@@ -44,5 +46,8 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
-    
+  
+  func switchPrice(_ price:String) {
+    self.store.dispatch(changePriceAction(price: price))
+  }
 }

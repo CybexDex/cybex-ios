@@ -20,14 +20,21 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
   
   var coordinator: (HomeCoordinatorProtocol & HomeStateManagerProtocol)?
   
-  var contentView : HomeContentView!
-  var businessTitleView : BusinessTitleView!
-  
-  var VC_TYPE : Int = 1 {
+  var pair: Pair? {
     didSet{
-      
+     
     }
   }
+  
+  var contentView : HomeContentView?
+  var businessTitleView : BusinessTitleView?
+  
+  var VC_TYPE : Int = 1 {
+    didSet {
+      switchContainerView()
+    }
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
@@ -39,17 +46,23 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
       navigationItem.largeTitleDisplayMode = .always
     }
     
-    self.automaticallyAdjustsScrollViewInsets = false
     self.localized_text = R.string.localizable.navWatchlist.key.localizedContainer()
-    
+    switchContainerView()
+  }
+  
+  func switchContainerView() {
+    contentView?.removeFromSuperview()
+    businessTitleView?.removeFromSuperview()
     if self.VC_TYPE == 1{
       contentView = HomeContentView()
-      self.view.addSubview(contentView)
-      contentView.edgesToSuperview(insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
+      self.view.addSubview(contentView!)
+      
+      contentView?.edgesToDevice(vc:self, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
+      
     }else{
       businessTitleView = BusinessTitleView(frame: self.view.bounds)
-      self.view.addSubview(businessTitleView)
-      businessTitleView.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+      self.view.addSubview(businessTitleView!)
+      businessTitleView?.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
     }
   }
   
@@ -91,11 +104,11 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     if self.isVisible {
       self.endLoading()
       if self.VC_TYPE == 1{
-        self.contentView.tableView.reloadData()
-        self.contentView.tableView.isHidden = false
+        self.contentView?.tableView.reloadData()
+        self.contentView?.tableView.isHidden = false
       }else{
-        self.businessTitleView.tableView.reloadData()
-        self.businessTitleView.tableView.isHidden = false
+        self.businessTitleView?.tableView.reloadData()
+        self.businessTitleView?.tableView.isHidden = false
       }
     }
   }
@@ -106,7 +119,7 @@ extension HomeViewController {
   @objc func cellClicked(_ data:[String: Any]) {
     if VC_TYPE == 1{
       if let index = data["index"] as? Int {
-        self.coordinator?.openMarket(index:index, currentBaseIndex:self.contentView.currentBaseIndex)
+        self.coordinator?.openMarket(index:index, currentBaseIndex:self.contentView!.currentBaseIndex)
       }
     }else{
       if let value = data["info"] as? Pair{

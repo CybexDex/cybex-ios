@@ -15,6 +15,13 @@ class MyHistoryViewController: BaseViewController {
   struct define {
     static let sectionHeaderHeight : CGFloat = 44.0
   }
+  
+  var pair: Pair? {
+    didSet {
+      
+    }
+  }
+  
   @IBOutlet weak var tableView: UITableView!
   
   var coordinator: (MyHistoryCoordinatorProtocol & MyHistoryStateManagerProtocol)?
@@ -23,6 +30,7 @@ class MyHistoryViewController: BaseViewController {
     super.viewDidLoad()
     setupUI()
   }
+  
   func setupUI(){
     let name = String.init(describing:MyHistoryCell.self)
     
@@ -46,17 +54,29 @@ class MyHistoryViewController: BaseViewController {
   override func configureObserveState() {
     commonObserveState()
     
+    UserManager.shared.fillOrder.asObservable()
+      .skip(1)
+      .throttle(10, latest: true, scheduler: MainScheduler.instance)
+      .subscribe(onNext: { [weak self](account) in
+        guard let `self` = self else{ return }
+        if self.isVisible {
+          self.tableView.reloadData()
+        }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
 }
 
 extension MyHistoryViewController : UITableViewDelegate,UITableViewDataSource{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    return UserManager.shared.fillOrder.value?.count ?? 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let name = String.init(describing:MyHistoryCell.self)
-    let cell = tableView.dequeueReusableCell(withIdentifier: name, for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: name, for: indexPath) as! MyHistoryCell
+    if let fillOrders = UserManager.shared.fillOrder.value as? [FillOrder] {
+      cell.setup(fillOrders[indexPath.row], indexPath: indexPath)
+    }
     return cell
     
   }

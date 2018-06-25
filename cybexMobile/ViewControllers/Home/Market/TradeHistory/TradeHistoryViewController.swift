@@ -20,8 +20,7 @@ class TradeHistoryViewController: BaseViewController {
   
   var pair:Pair? {
     didSet {
-      let base_info = app_data.assetInfo[(pair?.base)!]!
-      let quote_info = app_data.assetInfo[(pair?.quote)!]!
+      guard let base_info = app_data.assetInfo[(pair?.base)!], let quote_info = app_data.assetInfo[(pair?.quote)!] else { return }
       if Localize.currentLanguage() == "en"{
         self.historyView.price.text  = "Price\(base_info.symbol.filterJade)"
         self.historyView.amount.text = "Amount\(quote_info.symbol.filterJade)"

@@ -8,6 +8,8 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
+import RxSwift
 
 //MARK: - State
 struct BusinessState: StateType {
@@ -18,6 +20,11 @@ struct BusinessState: StateType {
 }
 
 struct BusinessPropertyState {
+  var price:BehaviorRelay<String> = BehaviorRelay(value: "")
+}
+
+struct changePriceAction:Action {
+  var price: String
 }
 
 //MARK: - Action Creator

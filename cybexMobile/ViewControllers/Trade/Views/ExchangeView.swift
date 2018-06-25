@@ -1,43 +1,42 @@
 //
-//  MyHistoryCellView.swift
+//  ExchangeView.swift
 //  cybexMobile
 //
-//  Created by DKM on 2018/6/13.
+//  Created by koofrank on 2018/6/23.
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class MyHistoryCellView: UIView {
+class ExchangeView:UIView {
+  @IBOutlet weak var leftView: UIView!
+  @IBOutlet weak var rightView: UIView!
+  @IBOutlet weak var bottomView: UIView!
+  @IBOutlet weak var historUpDown: UIButton!
+  @IBOutlet weak var titleView: UIView!
   
-  @IBOutlet weak var asset: UILabel!
-  @IBOutlet weak var typeView: UIView!
+  @IBOutlet weak var scrollView: UIScrollView!
+  var isMoveMarketTrades : Bool = false
   
-  @IBOutlet weak var kindL: UILabel!
-  @IBOutlet weak var price: UILabel!
-  @IBOutlet weak var amount: UILabel!
-  @IBOutlet weak var time: UILabel!
-  @IBOutlet weak var orderPrice: UILabel!
-  
-  
-  var data : Any? {
-    didSet{
-      if let fillOrder = data as? FillOrder {
-        updateUI(fillOrder)
-      }
+  var data: Any? {
+    didSet {
+      
     }
   }
   
-  func updateUI(_ order: FillOrder) {
-    if let quoteInfo = app_data.assetInfo[order.fill_price.quote.assetID], let baseInfo = app_data.assetInfo[order.fill_price.base.assetID] {
-      self.asset.text = "\(quoteInfo.symbol)/\(baseInfo.symbol)"
-
+  @IBAction func marketTradesUpDown(_ sender: UIButton) {
+    sender.transform = CGAffineTransform(rotationAngle: isMoveMarketTrades == false ? 0 : CGFloat(Double.pi))
+    if isMoveMarketTrades {
+      self.scrollView.contentOffset = CGPoint(x: 0, y: 0)
     }
-    
+    else{
+      self.scrollView.contentOffset = CGPoint(x: 0, y: self.titleView.y)
+    }
+    self.isMoveMarketTrades = !self.isMoveMarketTrades
   }
   
-  func setup(){
-    
+  fileprivate func setup() {
+    self.historUpDown.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
   }
   
   override var intrinsicContentSize: CGSize {
@@ -74,7 +73,7 @@ class MyHistoryCellView: UIView {
   
   fileprivate func loadViewFromNib() {
     let bundle = Bundle(for: type(of: self))
-    let nibName = String(describing:type(of:self))
+    let nibName = String(describing: type(of: self))
     let nib = UINib.init(nibName: nibName, bundle: bundle)
     let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
     
@@ -82,4 +81,5 @@ class MyHistoryCellView: UIView {
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
+  
 }

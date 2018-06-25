@@ -36,6 +36,7 @@ class MarketViewController: BaseViewController {
   
   var currentBaseIndex: Int = 0
   var kLineSpecial = false
+  var canExchange = false
   
   var timeGap: candlesticks = .one_day {
     didSet {
@@ -96,7 +97,6 @@ class MarketViewController: BaseViewController {
     marketDetailView.base_name = base_name
     marketDetailView.quote_name = quote_name
     
-    configLeftNavButton(nil)
     setupPageView()
     
     startLoading()

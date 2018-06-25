@@ -38,7 +38,16 @@ struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
   
   func transferResponse(from resultObject: Any) throws -> Any {
     if let response = resultObject as? [[String: Any]] {
-      return response
+      var fillOrders: [FillOrder] = []
+      
+      for i in response {
+        if let op = i["op"] as? [Any], let opcode = op[0] as? Int, opcode == ChainTypesOperations.fill_order.rawValue, let operation = op[1] as? [String: Any] {
+          if let fillorder = FillOrder(JSON: operation) {
+            fillOrders.append(fillorder)
+          }
+        }
+      }
+      return fillOrders
     } else {
       throw CastError(actualValue: resultObject, expectedType: Response.self)
     }

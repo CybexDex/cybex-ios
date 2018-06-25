@@ -12,56 +12,28 @@ import RxCocoa
 import ReSwift
 
 class BusinessViewController: BaseViewController {
-  var data : Any? {
+  var pair: Pair? {
     didSet{
-      
+      guard let base_info = app_data.assetInfo[pair!.base], let quote_info = app_data.assetInfo[pair!.quote] else { return }
+
+      self.containerView.baseName.text = base_info.symbol.filterJade
     }
   }
-  var pair: Pair?{
-    didSet{
-      
-    }
-  }
-  @IBOutlet weak var button: Button!
-  @IBOutlet weak var errorMessage: UILabel!
-  @IBOutlet weak var balance: UILabel!
   
-  @IBOutlet weak var service: UILabel!
-  @IBOutlet weak var endMoney: UILabel!
+  @IBOutlet weak var containerView: BusinessView!
+
+  var type : exchangeType = .buy
   
-  enum VC_TYPE:String{
-    case BUY
-    case SELL
-  }
-  
-  var vc_type : VC_TYPE = VC_TYPE.BUY {
-    didSet{
-       setupUI()
-    }
-  }
   var coordinator: (BusinessCoordinatorProtocol & BusinessStateManagerProtocol)?
-  
-  @IBAction func changePrice(_ sender: UIButton) {
-    if sender.tag == 1001{
-      // -
-      
-    }else{
-      // +
-      
-    }
-  }
-  
-  override func loadView() {
-    super.loadView()
-  }
-  
-  
+    
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     setupUI()
   }
+  
   func setupUI(){
-    button.gradientLayer.colors = vc_type.rawValue == "BUY" ? [UIColor.paleOliveGreen.cgColor,UIColor.apple.cgColor] : [UIColor.pastelRed.cgColor,UIColor.reddish.cgColor]
+    containerView.button.gradientLayer.colors = type == .buy ? [UIColor.paleOliveGreen.cgColor,UIColor.apple.cgColor] : [UIColor.pastelRed.cgColor,UIColor.reddish.cgColor]
   }
   
   func commonObserveState() {
@@ -81,5 +53,31 @@ class BusinessViewController: BaseViewController {
   override func configureObserveState() {
     commonObserveState()
     
+    coordinator?.state.property.price.asObservable()
+      .skip(1)
+      .distinctUntilChanged()
+      .subscribe(onNext: { (s) in
+       self.containerView.priceTextfield.text = s
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
 }
+
+extension BusinessViewController : TradePair {
+  var pariInfo: Pair {
+    get {
+      return self.pair!
+    }
+    set {
+      self.pair = newValue
+    }
+  }
+}
+
+extension BusinessViewController {
+  @objc func amountPercent(_ data:[String:Any]) {
+    if let percent = data["percent"] as? String {
+      
+    }
+  }
+}
+

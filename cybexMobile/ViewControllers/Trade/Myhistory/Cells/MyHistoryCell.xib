@@ -57,6 +57,9 @@
                     <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="containerView" destination="fM6-OY-Cvf" id="a0g-mC-S4H"/>
+            </connections>
             <point key="canvasLocation" x="-128" y="6"/>
         </tableViewCell>
     </objects>

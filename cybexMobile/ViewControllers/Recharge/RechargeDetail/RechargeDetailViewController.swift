@@ -113,7 +113,7 @@ class RechargeDetailViewController: BaseViewController {
     NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: amountView.content, queue: nil) { [weak self](notification) in
       guard let `self` = self else {return}
       
-      if let amount = self.amountView.content.text?.toDouble(){
+      if let amount = self.amountView.content.text?.toDouble(),amount > 0{
         let avaliable = getRealAmount((self.balance?.asset_type)!, amount: (self.balance?.balance)!)
         if let minValue = self.coordinator?.state.property.data.value?.minValue{
           if amount < minValue {
@@ -131,7 +131,6 @@ class RechargeDetailViewController: BaseViewController {
             }
           }
         }
-        self.coordinator?.getGatewayFee((self.balance?.asset_type)!, amount: self.amountView.content.text!, feeAssetID: AssetConfiguration.CYB, address: self.addressView.content.text!)
       }
     }
     
@@ -215,13 +214,14 @@ class RechargeDetailViewController: BaseViewController {
 }
 
 extension RechargeDetailViewController{
-  
   func changeWithdrawState(){
-    if self.isWithdraw,UserManager.shared.isWithDraw,self.isTrueAddress,self.isAvalibaleAmount{
+//    if self.isWithdraw,UserManager.shared.isWithDraw,self.isTrueAddress,self.isAvalibaleAmount{
       self.withdraw.isEnable = true
-    }else{
-      self.withdraw.isEnable = false
-    }
+      self.coordinator?.getGatewayFee((self.balance?.asset_type)!, amount: self.amountView.content.text!, feeAssetID: AssetConfiguration.CYB, address: self.addressView.content.text!)
+
+//    }else{
+//      self.withdraw.isEnable = false
+//    }
   }
   
   @objc func cleanAddress() {

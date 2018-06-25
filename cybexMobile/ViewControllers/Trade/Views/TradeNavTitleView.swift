@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TradeNavTitleViewDelegate{
-  func sendEventActionWith()
+  func sendEventActionWith() -> Bool
 }
 
 class TradeNavTitleView: UIView {
@@ -35,15 +35,15 @@ class TradeNavTitleView: UIView {
     self.isSetUp = false
     self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
       guard let `self` = self else { return }
-      
-      self.icon.transform = self.isSetUp == false ? CGAffineTransform(rotationAngle: CGFloat(0.5 * Double.pi)) : CGAffineTransform(rotationAngle: 0)
-      self.isSetUp = !self.isSetUp!
-      self.delegate?.sendEventActionWith()
+      if let dele = self.delegate, dele.sendEventActionWith() {
+        self.icon.transform = self.isSetUp == false ? CGAffineTransform(rotationAngle: CGFloat(0.5 * Double.pi)) : CGAffineTransform(rotationAngle: 0)
+        self.isSetUp = !self.isSetUp!
+      }
     }).disposed(by: disposeBag)
   }
   
   override var intrinsicContentSize: CGSize {
-    return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
+    return self.size
   }
   
   fileprivate func updateHeight() {
