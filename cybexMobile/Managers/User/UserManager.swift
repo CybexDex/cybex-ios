@@ -68,7 +68,7 @@ extension UserManager {
       completion(locked)
     }
   }
-
+  
   func register(_ pinID:String, captcha:String, username:String, password:String) -> Promise<(Bool,Int)> {
     return async {
       let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
@@ -81,7 +81,7 @@ extension UserManager {
           self.name = username
           self.avatarString = username.sha256()
           self.saveName(username)
-
+          
           self.keys = keys
           self.fetchAccountInfo()
         }
@@ -151,48 +151,63 @@ extension UserManager {
     return promise
   }
   
-  func unlock(_ username:String, password:String, completion:@escaping (Bool, FullAccount?)->()) {
-      let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
-      if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key {
-        let public_key = active_key.public_key
-        var canLock = false
-        
-        let request = GetFullAccountsRequest(name: username) { response in
-          if let data = response as? FullAccount, let account = data.account {
-            let active_auths = account.active_auths
-            let owner_auths = account.owner_auths
-            
-            for auth in active_auths {
-              if let auth = auth as? [Any], let key = auth[0] as? String {
-                if key == public_key {
-                  canLock = true
-                  break
-                }
+  func unlock(_ username:String?, password:String, completion:@escaping (Bool, FullAccount?)->()) {
+    guard let name = username ?? self.name else { return }
+    
+    let keysString = BitShareCoordinator.getUserKeys(name, password: password)!
+    if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key {
+      let public_key = active_key.public_key
+      var canLock = false
+      
+      let request = GetFullAccountsRequest(name: name) { response in
+        if let data = response as? FullAccount, let account = data.account {
+          let active_auths = account.active_auths
+          let owner_auths = account.owner_auths
+          
+          for auth in active_auths {
+            if let auth = auth as? [Any], let key = auth[0] as? String {
+              if key == public_key {
+                canLock = true
+                break
               }
-            }
-            
-            for auth in owner_auths {
-              if let auth = auth as? [Any], let key = auth[0] as? String {
-                if key == public_key {
-                  canLock = true
-                  break
-                }
-              }
-            }
-            
-            if canLock {
-              self.keys = keys
-              
-              completion(true, data)
-              self.timingLock()
-              return
             }
           }
           
-          completion(false, nil)
+          for auth in owner_auths {
+            if let auth = auth as? [Any], let key = auth[0] as? String {
+              if key == public_key {
+                canLock = true
+                break
+              }
+            }
+          }
+          
+          if canLock {
+            self.keys = keys
+            
+            if let newAccount = self.account.value {
+              if let memoKey = keys.memo_key {
+                if newAccount.memo_key == memoKey.public_key {
+                  self.isWithDraw = true
+                }
+              }
+              if let activeKey = self.keys?.active_key{
+                if let activeKeys = newAccount.active_auths as? [String]{
+                  self.isTrade = activeKeys.contains(activeKey.public_key)
+                }
+              }
+            }
+            
+            completion(true, data)
+            self.timingLock()
+            return
+          }
         }
-        WebsocketService.shared.send(request: request)
+        
+        completion(false, nil)
       }
+      WebsocketService.shared.send(request: request)
+    }
     
     completion(false, nil)
     
@@ -255,9 +270,9 @@ class UserManager {
   var balances:BehaviorRelay<[Balance]?> = BehaviorRelay(value: nil)
   var limitOrder:BehaviorRelay<[LimitOrder]?> = BehaviorRelay(value:nil)
   var fillOrder:BehaviorRelay<[FillOrder]?> = BehaviorRelay(value:nil)
-
+  
   var timer:Repeater?
-
+  
   var limitOrderValue:Double = 0
   var limitOrder_buy_value: Double = 0
   
@@ -333,22 +348,9 @@ class UserManager {
     
     account.asObservable().skip(1).subscribe(onNext: {[weak self] (newAccount) in
       guard let `self` = self else { return }
-      if let newAccount = newAccount {
-        if let memoKey = self.keys?.memo_key {
-          if newAccount.memo_key == memoKey.public_key {
-            self.isWithDraw = true
-          }
-        }
-        if let activeKey = self.keys?.active_key{
-          if let activeKeys = newAccount.active_auths as? [String]{
-            self.isTrade = activeKeys.contains(activeKey.public_key)
-          }
-        }
-        
-        self.fetchHistoryOfOperation()
-      }
+      
+      self.fetchHistoryOfOperation()
     }).disposed(by: disposeBag)
-    
     
   }
   
