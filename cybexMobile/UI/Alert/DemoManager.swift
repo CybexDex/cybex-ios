@@ -91,13 +91,14 @@ class ShowManager {
     self.superView?.addSubview(showView!)
     showView?.content       = data
     let leading : CGFloat  = showType == .sheet_image ? 0 : 52
-    let trailing : CGFloat = showType == .sheet_image ? 0 : -52
+    let trailing : CGFloat = showType == .sheet_image ? 0 : 52
     if animationShow == .none || animationShow == .fadeIn_Out{
       
-      showView?.leading(to: self.superView!,offset:leading)
-      showView?.trailing(to: self.superView!,offset:trailing)
-      showView?.centerX(to: self.superView!)
-      showView?.centerY(to: self.superView!,offset:-64)
+      showView?.leftToSuperview(nil, offset: leading, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
+      
+      showView?.rightToSuperview(nil, offset: trailing, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
+      showView?.centerXToSuperview(nil, offset: 0, priority: .required, isActive: true, usingSafeArea: true)
+      showView?.centerYToSuperview(nil, offset: -64, priority: .required, isActive: true, usingSafeArea: true)
       if animationShow == .fadeIn_Out{
         showView?.alpha   = 0.0
         shadowView?.alpha = 0.0
@@ -109,22 +110,18 @@ class ShowManager {
       return
     }else {
       let top     : CGFloat  = showType == .sheet_image ? -200 : -800
-      showView?.leading(to: self.superView!,offset:leading)
-      showView?.trailing(to: self.superView!,offset:trailing)
+      showView?.leftToSuperview(nil, offset: leading, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
+      showView?.rightToSuperview(nil, offset: trailing, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
       
       if showType == .sheet_image{
-        a = showView?.top(to: self.superView!,offset:top)
+        a = showView?.topToSuperview(nil, offset: top, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
       }else{
-        showView?.centerX(to: self.superView!)
-        a = showView?.centerY(to: self.superView!,offset:top)
+        showView?.centerXToSuperview(nil, offset: 0,  priority: .required, isActive: true, usingSafeArea: true)
+        a = showView?.centerYToSuperview(nil, offset: top, priority: .required, isActive: true, usingSafeArea: true)
       }
       self.superView?.layoutIfNeeded()
       if showType == .sheet_image{
-        if UIScreen.main.bounds.height == 812{
-          a?.constant = 44
-        }else{
-          a?.constant = 20
-        }
+        a?.constant = 0
       }else{
         a?.constant = -64
       }

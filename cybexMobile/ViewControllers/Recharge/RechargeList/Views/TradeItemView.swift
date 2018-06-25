@@ -16,19 +16,29 @@ class TradeItemView: UIView {
         let info = app_data.assetInfo[data.asset_type]
         self.icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + data.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
         name.text = info?.symbol.filterJade
-        amount.text = "\(getRealAmount(data.asset_type,amount: data.balance))"
-        amount.isHidden = false
+        amount.text = String.init(describing: (getRealAmount(data.asset_type,amount: data.balance)).formatCurrency(digitNum: (info?.precision)!))
       }else if let data = data as? String{
+        if let infos = UserManager.shared.balances.value{
+          for balance in infos{
+            if balance.asset_type == data{
+              let info = app_data.assetInfo[balance.asset_type]
+              self.icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + balance.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
+              name.text = info?.symbol.filterJade
+              amount.text = String.init(describing: (getRealAmount(balance.asset_type,amount: balance.balance)).formatCurrency(digitNum: (info?.precision)!))
+              return
+            }
+          }
+          
+        }
         let info = app_data.assetInfo[data]
         self.icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + data.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
         name.text = info?.symbol.filterJade
-        amount.isHidden = true
+        amount.text = "-"
       }
     }
   }
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var totalname: UILabel!
     @IBOutlet weak var amount: UILabel!
   
   fileprivate func setup() {

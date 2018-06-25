@@ -20,17 +20,21 @@ struct RechargeState: StateType {
 }
 
 struct RechargePropertyState {
-  var withdrawIds : BehaviorRelay<[String]> = BehaviorRelay(value:[])
-  var depositIds : BehaviorRelay<[String]> = BehaviorRelay(value: [])
+  var withdrawIds : BehaviorRelay<[Trade]> = BehaviorRelay(value:[])
+  var depositIds : BehaviorRelay<[Trade]> = BehaviorRelay(value: [])
 }
 struct FecthWithdrawIds : Action {
-  let data : [String]
+  let data : [Trade]
 }
 
 struct FecthDepositIds : Action{
-  let data : [String]
+  let data : [Trade]
 }
-
+struct Trade{
+  var id : String = ""
+  var enable : Bool = true
+  var message : String = ""
+}
 
 
 //MARK: - Action Creator

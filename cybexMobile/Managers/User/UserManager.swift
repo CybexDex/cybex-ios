@@ -26,8 +26,6 @@ extension UserManager {
       
       let request = GetFullAccountsRequest(name: username) { response in
         if let data = response as? FullAccount, let account = data.account {
-          
-         
          
           let active_auths = account.active_auths
           let owner_auths = account.owner_auths

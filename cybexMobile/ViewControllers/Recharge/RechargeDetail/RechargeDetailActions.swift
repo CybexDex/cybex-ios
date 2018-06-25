@@ -21,6 +21,8 @@ struct RechargeDetailState: StateType {
 
 struct RechargeDetailPropertyState {
   var data : BehaviorRelay<WithdrawinfoObject?> = BehaviorRelay(value: nil)
+  var memo_key : BehaviorRelay<String?> = BehaviorRelay(value: nil)
+  var gatewayFee : BehaviorRelay<Fee?> = BehaviorRelay(value: nil)
 }
 
 struct FetchWithdrawInfo:Action {

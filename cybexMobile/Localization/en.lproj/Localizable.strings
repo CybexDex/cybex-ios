@@ -153,3 +153,8 @@
 "recharge_withdraw"       = "Withdraw";
 "recharge_selectCoin"     = "Select Coin";
 
+"withdraw"                = "WITHDRAW";
+
+"withdraw_miss_authority" = "Missing authority\nfor withdrawal";
+
+

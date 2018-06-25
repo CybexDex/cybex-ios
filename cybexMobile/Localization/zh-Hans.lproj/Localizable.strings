@@ -147,6 +147,8 @@
 "recharge_deposit"        = "充值";
 "recharge_withdraw"       = "提现";
 "recharge_selectCoin"     = "选择币种";
+"withdraw"                = "提现";
+"withdraw_miss_authority" = "您没有提现权限";
 
 
 

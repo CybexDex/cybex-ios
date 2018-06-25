@@ -51,6 +51,9 @@ struct AppConfiguration {
   static let WITHDRAW                   = SERVER_BASE_URLString + "json/withdraw.json"
   static let DEPOSIT                    = SERVER_BASE_URLString + "json/deposit.json"
   static let ASSET                      = SERVER_BASE_URLString + "json/assets.json"
+//  json/withdraw_msg.json
+  static let WITHDRAW_MSG               = SERVER_BASE_URLString + "json/withdraw_msg.json"
+  static let DEPOSIT_MSG                = SERVER_BASE_URLString + "json/deposit_msg.json"
 }
 
 enum indicator:String {
@@ -195,6 +198,13 @@ class AssetConfiguration {
   static let market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.CYB,AssetConfiguration.USDT,AssetConfiguration.BTC]
   
   var unique_ids:[String] {
+    /*
+     let data = try! await {SimpleHTTPService.fetchIdsInfo()}
+     if let data = data.value{
+     return data
+     }
+     return []
+     */
     return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).withoutDuplicates()
   }
   

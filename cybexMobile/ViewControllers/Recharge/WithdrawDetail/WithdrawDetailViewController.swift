@@ -17,14 +17,28 @@ class WithdrawDetailViewController: BaseViewController {
   
   @IBOutlet weak var address: UILabel!
   @IBOutlet weak var icon: UIImageView!
-  var withdrawId : String?
+    
+    @IBOutlet weak var introduce: UILabel!
+    
+  var trade : Trade?
   var coordinator: (WithdrawDetailCoordinatorProtocol & WithdrawDetailStateManagerProtocol)?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    startLoading()
-    if let balance = self.withdrawId, let name = app_data.assetInfo[balance]?.symbol.filterJade{
-      self.coordinator?.fetchDepositAddress(name)
+    setupUI()
+    
+  }
+  
+  func setupUI(){
+    if self.trade?.enable == false{
+      ShowManager.shared.setUp(title_image: "erro16Px", message: "暂时无法充值", animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.sheet_image)
+      ShowManager.shared.showAnimationInView(self.view)
+      ShowManager.shared.hide(2)
+    }else{
+      if let balance = self.trade?.id, let name = app_data.assetInfo[balance]?.symbol.filterJade{
+        startLoading()
+        self.coordinator?.fetchDepositAddress(name)
+      }
     }
   }
   
@@ -58,7 +72,7 @@ class WithdrawDetailViewController: BaseViewController {
   
   @IBAction func resetAddress(_ sender: Any) {
     startLoading()
-    let name = app_data.assetInfo[(self.withdrawId)!]?.symbol.filterJade
+    let name = app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade
     self.coordinator?.resetDepositAddress(name!)
   }
   

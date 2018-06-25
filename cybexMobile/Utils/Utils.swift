@@ -231,3 +231,12 @@ func saveImageToPhotos(){
   UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
 }
 
+
+// 得到一个ID获取最后一个数据
+func getUserId(_ userId:String)->Int{
+  if userId.contains("."){
+    return Int(String.init(userId.split(separator: ".").last!))!
+  }
+  return 0
+}
+

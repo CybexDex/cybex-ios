@@ -31,16 +31,15 @@ struct GetRequiredFees:JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_required_fees.rawValue, [JSON(operationStr).dictionaryObject ?? [:], assetID]]
+    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_required_fees.rawValue, [[[JSON(parseJSON:operationStr).dictionaryObject ?? [:]]], assetID]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
     let result = JSON(resultObject)
-    if let _ = result.dictionaryObject {
-      return true
+    if let data = result.arrayObject as? [[String:Any]] {
+      return data.flatMap({Fee(JSON: $0)})
     }
-    
-    return false
+    return []
   }
 }
 

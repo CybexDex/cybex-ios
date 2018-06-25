@@ -39,6 +39,7 @@
 		72994C0F20DB1FB1005D0559 /* BusinessTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72994C0D20DB1FB1005D0559 /* BusinessTitleCell.xib */; };
 		72994C1120DB25D3005D0559 /* OrderBookContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72994C1020DB25D3005D0559 /* OrderBookContentView.swift */; };
 		72994C1320DB25DB005D0559 /* OrderBookContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72994C1220DB25DB005D0559 /* OrderBookContentView.xib */; };
+		72994C1520DE9290005D0559 /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72994C1420DE9290005D0559 /* Trade.swift */; };
 		729DC5BD20C9341300AEC844 /* RechargeDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5B920C9341300AEC844 /* RechargeDetailCoordinator.swift */; };
 		729DC5BE20C9341300AEC844 /* RechargeDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5BA20C9341300AEC844 /* RechargeDetailActions.swift */; };
 		729DC5BF20C9341300AEC844 /* RechargeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5BB20C9341300AEC844 /* RechargeDetailViewController.swift */; };
@@ -451,6 +452,7 @@
 		72994C0D20DB1FB1005D0559 /* BusinessTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessTitleCell.xib; sourceTree = "<group>"; };
 		72994C1020DB25D3005D0559 /* OrderBookContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookContentView.swift; sourceTree = "<group>"; };
 		72994C1220DB25DB005D0559 /* OrderBookContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderBookContentView.xib; sourceTree = "<group>"; };
+		72994C1420DE9290005D0559 /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		729DC5B920C9341300AEC844 /* RechargeDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailCoordinator.swift; sourceTree = "<group>"; };
 		729DC5BA20C9341300AEC844 /* RechargeDetailActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailActions.swift; sourceTree = "<group>"; };
 		729DC5BB20C9341300AEC844 /* RechargeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailViewController.swift; sourceTree = "<group>"; };
@@ -31342,6 +31344,7 @@
 				735D8EB520AEAC0C008DAAAC /* Account.swift */,
 				735D8EB720AEACE7008DAAAC /* Balance.swift */,
 				73B88E2020AFD4940069AAB6 /* Vesting.swift */,
+				72994C1420DE9290005D0559 /* Trade.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -32659,6 +32662,7 @@
 				73E49E3B2079FFBF003B14D2 /* TradeHistoryActions.swift in Sources */,
 				73D34E442063A675008C7507 /* AccountReducers.swift in Sources */,
 				7386AD5E20B4134D00168629 /* Shapes.swift in Sources */,
+				72994C1520DE9290005D0559 /* Trade.swift in Sources */,
 				73D9779F205652BA00CB7DE1 /* UIView+Extensions.swift in Sources */,
 				73E49E342079FFAF003B14D2 /* OrderBookCoordinator.swift in Sources */,
 				73DF25B620C53D9300A0D00F /* types.cpp in Sources */,
