@@ -425,10 +425,10 @@ extension WebsocketService: WebSocketDelegate {
 
       let data = JSON(parseJSON:text)
       
-      if let error = data["error"].dictionary {
-        print(error)
-        return
-      }
+//      if let error = data["error"].dictionary {
+//        print("data : \(data)")
+//        print(error)
+//      }
       
       guard let id = data["id"].int else {
         if let method = data["method"].string, method == "notice", let params = data["params"].array, let mID = params[0].int {
@@ -459,24 +459,21 @@ extension WebsocketService: WebSocketDelegate {
 
           return
         }
-        
+        if let error = data["error"].dictionary {
+          print(error)
+          request.response(data)
+          return
+        }
         if let object = try? request.transferResponse(from: data["result"].object) {
           main{
-            request.response(object)
+              request.response(object)
           }
           self.requesting.removeValue(forKey: id.description)
 
         }
         else {
           main {
-            if let error = data["error"].dictionary {
-              print(error)
-              request.response(data)
-            }
-            else {
-              request.response(data.object)
-            }
-
+            request.response(data.object)
           }
           self.requesting.removeValue(forKey: id.description)
 

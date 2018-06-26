@@ -25,17 +25,22 @@ struct GetRequiredFees:JSONRPCKit.Request, JSONRPCResponse {
   var response: RPCSResponse
   var operationStr:String
   var assetID:String
+  var operationID:ChainTypesOperations
 
   var method: String {
     return "call"
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_required_fees.rawValue, [[[JSON(parseJSON:operationStr).dictionaryObject ?? [:]]], assetID]]
+    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_required_fees.rawValue, [[[operationID.rawValue, JSON(parseJSON:operationStr).dictionaryObject ?? [:]]], assetID]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
-    return resultObject
+    let result = JSON(resultObject)
+    if let data = result.arrayObject as? [[String:Any]] {
+      return data.flatMap({Fee(JSON: $0)})
+    }
+    return []
   }
 }
 
@@ -141,6 +146,19 @@ struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
   
   func transferResponse(from resultObject: Any) throws -> Any {
     if let response = resultObject as? [[String: Any]] {
+      if ids.first == "2.1.0"{
+        var head_block_id = ""
+        var head_block_number = ""
+        for res in response.first!{
+          if res.key == "head_block_id"{
+            head_block_id = String(describing:res.value)
+          }else if res.key == "head_block_number"{
+            head_block_number = String(describing:res.value)
+          }
+        }
+        return (block_id:head_block_id,block_num:head_block_number)
+      }
+      
       return response.map { data in
         
         return AssetInfo(JSON:data)!

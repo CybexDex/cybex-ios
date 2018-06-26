@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Localize_Swift
 
 func calculateFee(_ operation:String, focus_asset_id:String, completion:@escaping (_ success:Bool, _ amount:Double, _ assetID:String)->()) {
   let request = GetRequiredFees(response: { (data) in
@@ -280,5 +281,49 @@ func saveImageToPhotos(){
   UIGraphicsEndImageContext()
   
   UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+}
+
+
+// 得到一个ID获取最后一个数据
+func getUserId(_ userId:String)->Int{
+  if userId.contains("."){
+    return Int(String.init(userId.split(separator: ".").last!))!
+  }
+  return 0
+}
+/*
+ address = "Withdrawal Address:"
+ amount = "Amount:"
+ withdrawFee = "Withdrawal Fee:"
+ gatewayFee = "Gateway Fee:"
+ receiveAmount = "Receive Amount:"
+ */
+
+func getWithdrawDetailInfo(addressInfo:String,amountInfo:String,withdrawFeeInfo:String,gatewayFeeInfo:String,receiveAmountInfo:String) -> [NSAttributedString]{
+  var address :String = ""
+  var amount : String = ""
+  var withdrawFee : String = ""
+  var gatewayFee : String = ""
+  var receiveAmount : String = ""
+  
+  if Localize.currentLanguage() == "en"{
+    address = "Withdrawal Address:"
+    amount = "Amount:"
+    withdrawFee = "Withdrawal Fee:"
+    gatewayFee = "Gateway Fee:"
+    receiveAmount = "Receive Amount:"
+  }else{
+    address = "提现地址:"
+    amount = "提现数量:"
+    withdrawFee = "内部转账手续费:"
+    gatewayFee = "网关提现手续费:"
+    receiveAmount = "到账数量:"
+  }
+  return (["<name>\(String(describing: address))</name><content>\n\(String(describing: addressInfo))</content>".set(style: "alertContent"),
+           "<name>\(String(describing: amount))</name><content>  \(String(describing: amountInfo))</content>".set(style: "alertContent"),
+           "<name>\(String(describing: withdrawFee))</name><content>  \(String(describing: withdrawFeeInfo))</content>".set(style: "alertContent"),
+           "<name>\(String(describing: gatewayFee))</name><content>  \(String(describing: gatewayFeeInfo))</content>".set(style: "alertContent"),
+           "<name>\(String(describing: receiveAmount))</name><content>  \(String(describing: receiveAmountInfo))</content>".set(style: "alertContent")] as? [NSAttributedString])!
+  
 }
 

@@ -15,7 +15,6 @@
                 <outlet property="amount" destination="F0x-7j-rFn" id="P9d-Wq-sHC"/>
                 <outlet property="icon" destination="0rB-Yz-ELJ" id="j7s-oV-nU7"/>
                 <outlet property="name" destination="D0o-7C-xUH" id="EaI-Zk-JCu"/>
-                <outlet property="totalname" destination="TjX-k3-s5b" id="RY4-KQ-3uc"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -44,20 +43,6 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjX-k3-s5b">
-                    <rect key="frame" x="45" y="27.5" width="11.5" height="14.5"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
-                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icArrowForward24Px" translatesAutoresizingMaskIntoConstraints="NO" id="3qT-6y-hMu">
                     <rect key="frame" x="351" y="22" width="24" height="24"/>
                     <constraints>
@@ -76,8 +61,6 @@
                 <constraint firstItem="D0o-7C-xUH" firstAttribute="centerY" secondItem="0rB-Yz-ELJ" secondAttribute="centerY" id="YV0-48-fgH"/>
                 <constraint firstItem="3qT-6y-hMu" firstAttribute="centerY" secondItem="0rB-Yz-ELJ" secondAttribute="centerY" id="eXr-1o-Pu3"/>
                 <constraint firstItem="F0x-7j-rFn" firstAttribute="centerY" secondItem="0rB-Yz-ELJ" secondAttribute="centerY" id="j7D-Ew-mXS"/>
-                <constraint firstItem="TjX-k3-s5b" firstAttribute="centerY" secondItem="0rB-Yz-ELJ" secondAttribute="centerY" id="jG0-fE-RD0"/>
-                <constraint firstItem="TjX-k3-s5b" firstAttribute="leading" secondItem="D0o-7C-xUH" secondAttribute="trailing" id="jSB-5X-iQF"/>
                 <constraint firstItem="0rB-Yz-ELJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="4" id="lRq-zM-MN2"/>
                 <constraint firstItem="3qT-6y-hMu" firstAttribute="leading" secondItem="F0x-7j-rFn" secondAttribute="trailing" constant="10" id="oFf-11-NKt"/>
                 <constraint firstItem="0rB-Yz-ELJ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="26" id="rt8-kf-nkw"/>

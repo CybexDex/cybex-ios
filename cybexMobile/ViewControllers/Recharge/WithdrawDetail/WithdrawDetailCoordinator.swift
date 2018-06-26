@@ -12,6 +12,7 @@ import ReSwift
 protocol WithdrawDetailCoordinatorProtocol {
   func fetchDepositAddress(_ asset_name:String)
   func resetDepositAddress(_ asset_name:String)
+  func fetchDepositMessage(callback:@escaping (String)->())
 }
 
 protocol WithdrawDetailStateManagerProtocol {
@@ -61,7 +62,19 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
         }
       }
     }
-    
+  }
+  
+  func fetchDepositMessage(callback:@escaping (String)->()){
+    async {
+      let message = try? await(SimpleHTTPService.fetchDesipotInfoJsonInfo())
+      main {
+        if let message = message{
+          callback(message)
+        }else{
+          callback("")
+        }
+      }
+    }
   }
 }
 

@@ -18,12 +18,15 @@ class RechargeViewController: BaseViewController {
     case WITHDRAW
   }
   var selectedIndex : CELL_TYPE = .RECHARGE
-  
+ 
   @IBOutlet weak var tableView: UITableView!
   var coordinator: (RechargeCoordinatorProtocol & RechargeStateManagerProtocol)?
   
+  var depositData : [Trade]?
+  var withdrawData : [Trade]?
   override func viewDidLoad() {
     super.viewDidLoad()
+    startLoading()
     self.coordinator?.fetchDepositIdsInfo()
     self.coordinator?.fetchWithdrawIdsInfo()
     setupUI()
@@ -48,17 +51,52 @@ class RechargeViewController: BaseViewController {
       })
     }
     
-    self.coordinator?.state.property.depositIds.asObservable().skip(1).subscribe(onNext: { [weak self](ids) in
+    self.coordinator?.state.property.depositIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
       guard let `self` = self else {return}
-//      if self.selectedIndex == .RECHARGE {
+      self.depositData = self.filterData(data)
+      if self.selectedIndex == .RECHARGE{
+        self.endLoading()
         self.tableView.reloadData()
-//      }
+      }
+    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+    self.coordinator?.state.property.withdrawIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
+      guard let `self` = self else { return }
+      self.withdrawData = self.filterData(data)
+      if self.selectedIndex == .WITHDRAW{
+        self.endLoading()
+        self.tableView.reloadData()
+      }
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   
   override func configureObserveState() {
     commonObserveState()
     
+  }
+  
+  func filterData(_ trades:[Trade]) ->[Trade] {
+    let data = trades.filter({return app_data.assetInfo[$0.id] != nil})
+    var tradesInfo : [Trade] = []
+    if let balances = UserManager.shared.balances.value{
+      for balance in balances{
+        for trade in data{
+          if trade.id == balance.asset_type {
+            tradesInfo.append(trade)
+          }
+        }
+      }
+      let filterData = data.filter { (trade) -> Bool in
+        for tradeInfo in tradesInfo{
+          if tradeInfo.id == trade.id {
+            return false
+          }
+        }
+        return true
+      }
+      return tradesInfo + filterData
+    }
+    return data
   }
 }
 
@@ -71,22 +109,25 @@ extension RechargeViewController {
 extension RechargeViewController:UITableViewDataSource,UITableViewDelegate{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if selectedIndex == .WITHDRAW{
-      if let data = UserManager.shared.balances.value{
+      if let data = self.withdrawData{
         return data.count
       }
       return 0
     }
-    return (self.coordinator?.state.property.depositIds.value.count)!
+    if let data = self.depositData{
+      return data.count
+    }
+    return 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing:TradeCell.self), for: indexPath) as! TradeCell
     if selectedIndex == .WITHDRAW {
-      if let data = UserManager.shared.balances.value{
+      if let data = self.withdrawData{
         cell.setup(data[indexPath.row])
       }
     }else{
-      if let data = self.coordinator?.state.property.depositIds.value {
+      if let data = self.depositData{
         cell.setup(data[indexPath.row])
       }
     }
@@ -94,7 +135,6 @@ extension RechargeViewController:UITableViewDataSource,UITableViewDelegate{
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
     switch selectedIndex.rawValue {
     case 0:
       if let data = self.coordinator?.state.property.depositIds.value {
@@ -102,15 +142,8 @@ extension RechargeViewController:UITableViewDataSource,UITableViewDelegate{
 
       }
     case 1:
-      if let ids = self.coordinator?.state.property.withdrawIds.value {
-        if let data = UserManager.shared.balances.value{
-          let info = data[indexPath.row]
-          if ids.contains(info.asset_type){
-            self.coordinator?.openRechargeDetail(info,isWithdraw:true)
-          }else{
-            self.coordinator?.openRechargeDetail(info,isWithdraw:false)
-          }
-        }
+      if let data = self.coordinator?.state.property.withdrawIds.value {
+        self.coordinator?.openRechargeDetail(data[indexPath.row])
       }
     default:
       break

@@ -286,7 +286,7 @@ extension String {
     })
     
     if let format = existFormatters.first {
-       let result = format.string(from: NSNumber(value: self.toDouble()!))
+      let result = format.string(from: NSNumber(value: self.toDouble()!))
        return result!
     }
     else {

@@ -21,11 +21,22 @@ struct RechargeDetailState: StateType {
 
 struct RechargeDetailPropertyState {
   var data : BehaviorRelay<WithdrawinfoObject?> = BehaviorRelay(value: nil)
+  var memo_key : BehaviorRelay<String?> = BehaviorRelay(value: nil)
+  var gatewayFee : BehaviorRelay<Fee?> = BehaviorRelay(value: nil)
 }
 
 struct FetchWithdrawInfo:Action {
   let data : WithdrawinfoObject
 }
+
+struct FetchWithdrawMemokey :Action {
+  let data : String
+}
+
+struct FetchGatewayFee : Action{
+  let data : Fee
+}
+
 
 //MARK: - Action Creator
 class RechargeDetailPropertyActionCreate: LoadingActionCreator {

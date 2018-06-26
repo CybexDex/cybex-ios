@@ -19,6 +19,7 @@ import Guitar
 import Repeat
 
 extension UserManager {
+
   func validateUserName(_ username:String) -> (Bool, String) {
     let letterBegin = Guitar(pattern: "^([a-zA-Z])")
     if !letterBegin.test(string: username) {
@@ -50,7 +51,6 @@ extension UserManager {
     if dashEnd.test(string: username) {
       return (false, R.string.localizable.accountValidateError7.key.localized())
     }
-    
     
     return (true , "")
   }
@@ -189,14 +189,18 @@ extension UserManager {
             self.keys = keys
             
             if let newAccount = self.account.value {
-              if let memoKey = keys.memo_key {
-                if newAccount.memo_key == memoKey.public_key {
+              if let memoKey = keys.memo_key, let ownKey = keys.owner_key, let activeKey = keys.active_key {
+                if [memoKey.public_key, ownKey.public_key, activeKey.public_key].contains(newAccount.memo_key) {
                   self.isWithDraw = true
                 }
               }
-              if let activeKey = self.keys?.active_key{
+              if let memoKey = keys.memo_key, let ownKey = keys.owner_key, let activeKey = keys.active_key{
                 if let activeKeys = newAccount.active_auths as? [String]{
-                  self.isTrade = activeKeys.contains(activeKey.public_key)
+                  for activekey in activeKeys{
+                    if [memoKey.public_key, ownKey.public_key, activeKey.public_key].contains(activekey){
+                      self.isTrade = true
+                    }
+                  }
                 }
               }
             }
@@ -206,15 +210,14 @@ extension UserManager {
             return
           }
         }
-        
         completion(false, nil)
       }
       WebsocketService.shared.send(request: request)
     }
-    else {
+
+    else{
       completion(false, nil)
     }
-    
     
   }
   

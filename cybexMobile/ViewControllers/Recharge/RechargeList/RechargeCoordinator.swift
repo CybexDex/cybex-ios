@@ -10,8 +10,8 @@ import UIKit
 import ReSwift
 
 protocol RechargeCoordinatorProtocol {
-  func openRechargeDetail(_ balance:Balance,isWithdraw:Bool)
-  func openWithDrawDetail(_ id:String)
+  func openRechargeDetail(_ trade:Trade)
+  func openWithDrawDetail(_ trade:Trade)
 }
 
 protocol RechargeStateManagerProtocol {
@@ -36,19 +36,19 @@ class RechargeCoordinator: AccountRootCoordinator {
 }
 
 extension RechargeCoordinator: RechargeCoordinatorProtocol {
-  func openRechargeDetail(_ balance:Balance,isWithdraw:Bool){
+  func openRechargeDetail(_ trade:Trade){
     let vc = R.storyboard.account.rechargeDetailViewController()!
     let coordinator   = RechargeDetailCoordinator(rootVC: self.rootVC)
     vc.coordinator    = coordinator
-    vc.balance        = balance
-    vc.isWithdraw     = isWithdraw
+    vc.trade          = trade
+    vc.isWithdraw     = trade.enable
     self.rootVC.pushViewController(vc, animated: true)
   }
-  func openWithDrawDetail(_ id:String){
+  func openWithDrawDetail(_ trade:Trade){
     let vc = R.storyboard.account.withdrawDetailViewController()!
     let coordinator = WithdrawDetailCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator
-    vc.withdrawId     = id
+    vc.trade     = trade
     self.rootVC.pushViewController(vc, animated: true)
   }
 }
@@ -65,15 +65,20 @@ extension RechargeCoordinator: RechargeStateManagerProtocol {
     }
   func fetchWithdrawIdsInfo(){
     async {
-      SimpleHTTPService.fetchIdsInfo(AppConfiguration.WITHDRAW).done { (ids) in
-        self.store.dispatch(FecthWithdrawIds(data: ids))
+      SimpleHTTPService.fetchWithdrawIdsInfo().done { (ids) in
+        main {
+          self.store.dispatch(FecthWithdrawIds(data: ids))
+        }
         }.cauterize()
     }
   }
   func fetchDepositIdsInfo(){
     async {
-      SimpleHTTPService.fetchIdsInfo(AppConfiguration.DEPOSIT).done { (ids) in
-        self.store.dispatch(FecthDepositIds(data: ids))
+      
+      SimpleHTTPService.fetchDesipotInfo().done { (ids) in
+        main {
+          self.store.dispatch(FecthDepositIds(data: ids))
+        }
         }.cauterize()
     }
   }
