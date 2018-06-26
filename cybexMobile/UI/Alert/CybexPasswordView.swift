@@ -31,11 +31,8 @@ class CybexPasswordView: UIView {
   }
   
   func setup(){
-    if Localize.currentLanguage() == "en"{
-      self.textField.placeholder = "Password"
-    }else{
-      self.textField.placeholder = "请输入密码"
-    }
+    self.textField.placeholder = R.string.localizable.password_placeholder.key.localized()
+    
     if ThemeManager.currentThemeIndex == 0 {
       self.textField.textColor = .white
     }else{

@@ -17,6 +17,8 @@ protocol MyHistoryStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<MyHistoryState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
+  
+  func filterFillOrder(_ pair:Pair) -> [FillOrder]
 }
 
 class MyHistoryCoordinator: TradeRootCoordinator {
@@ -44,5 +46,10 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
-    
+  
+  func filterFillOrder(_ pair:Pair) -> [FillOrder]{
+    if let fillOrders = UserManager.shared.fillOrder.value{
+      return fillOrders
+    }
+  }
 }

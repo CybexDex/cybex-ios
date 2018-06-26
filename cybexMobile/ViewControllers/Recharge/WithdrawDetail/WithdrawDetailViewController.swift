@@ -79,15 +79,9 @@ class WithdrawDetailViewController: BaseViewController {
         ShowManager.shared.hide(2)
       }
     }, rejected: {
-      var title = ""
-      var message = ""
-      if Localize.currentLanguage() == "en"{
-        title = "Tip"
-        message = "Please open photo album permissions in Settings"
-      }else{
-        title = "提示"
-        message = "请在设置中打开相册权限"
-      }
+      let title = R.string.localizable.tip_title.key.localized()
+      let message = R.string.localizable.tip_message.key.localized()
+     
       ShowManager.shared.setUp(title: title, message: message, animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.alert)
       ShowManager.shared.showAnimationInView(self.view)
       ShowManager.shared.hide(2)

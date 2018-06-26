@@ -68,12 +68,8 @@ class RechargeDetailViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    if Localize.currentLanguage() == "en"{
-      self.title = (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)! + " Deposit"
-    }else{
-      self.title = (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)! + "提现"
-    }
     
+    self.title = (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)! + R.string.localizable.recharge_title.key.localized()
     setupUI()
     checkState()
     setupEvent()
@@ -86,7 +82,7 @@ class RechargeDetailViewController: BaseViewController {
     })
     amountView.content.keyboardType = .decimalPad
     addressView.btn.isHidden        = true
-    amountView.btn.setTitle(Localize.currentLanguage() == "en" ? "All" : "全部", for: .normal)
+    amountView.btn.setTitle(R.string.localizable.openedAll.key.localized(), for: .normal)
     if let balance = self.balance{
       avaliableView.content.text = String(describing: getRealAmount(balance.asset_type, amount: balance.balance)) + " " + (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!
     }else{
@@ -125,7 +121,7 @@ class RechargeDetailViewController: BaseViewController {
       }else{
         message = "\(String(describing: name))暂停提现"
       }
-      ShowManager.shared.setUp(title_image: "erro16Px", message: message, animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
+      ShowManager.shared.setUp(title_image: R.image.erro16Px.name, message: message, animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
       ShowManager.shared.showAnimationInView(self.view)
       ShowManager.shared.hide(1)
     }
@@ -141,7 +137,7 @@ class RechargeDetailViewController: BaseViewController {
   
   func checkIsAuthory(){
     let message = R.string.localizable.withdraw_miss_authority.key.localized()
-    ShowManager.shared.setUp(title_image: "erro16Px", message: message, animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
+    ShowManager.shared.setUp(title_image: R.image.erro16Px.name, message: message, animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
     ShowManager.shared.showAnimationInView(self.view)
     ShowManager.shared.hide(1)
     
@@ -217,7 +213,8 @@ class RechargeDetailViewController: BaseViewController {
       if let data = withdrawInfo{
         self.insideFee.text = String(describing: data.fee) + " " + (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)!
         print("minValue : \(data.minValue)")
-        self.amountView.textplaceholder = Localize.currentLanguage() == "en" ? "Min" + String(describing: data.minValue) : "最小提现数量 " + String(describing: data.minValue)
+        
+        self.amountView.textplaceholder = R.string.localizable.recharge_min.key.localized() + String(describing: data.minValue)
       }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
@@ -373,8 +370,8 @@ extension RechargeDetailViewController : ShowManagerDelegate{
           self.checkIsAuthory()
         }
       }else{
-        let message = Localize.currentLanguage() == "en" ? "Invalid password" : "解锁失败，请重新输入密码"
-        ShowManager.shared.data = message
+        
+        ShowManager.shared.data = R.string.localizable.recharge_invalid_password.key.localized()
       }
     })
   }
@@ -386,14 +383,13 @@ extension RechargeDetailViewController : ShowManagerDelegate{
       main {
         if String(describing: data) == "<null>"{
           ShowManager.shared.hide()
-          let message = Localize.currentLanguage() == "en" ? "Withdrawal application successful" : "提现申请成功"
-          ShowManager.shared.setUp(title_image: R.image.icCheckCircleGreen.name, message: message, animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
+          
+          ShowManager.shared.setUp(title_image: R.image.icCheckCircleGreen.name, message: R.string.localizable.recharge_withdraw_success.key.localized(), animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
           ShowManager.shared.showAnimationInView(self.view)
           ShowManager.shared.hide(1)
         }else{
           ShowManager.shared.hide()
-          let message = Localize.currentLanguage() == "en" ? "Withdrawal application failed" : "提现申请失败"
-          ShowManager.shared.setUp(title_image: R.image.erro16Px.name, message: message, animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
+          ShowManager.shared.setUp(title_image: R.image.erro16Px.name, message: R.string.localizable.recharge_withdraw_failed.key.localized(), animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
           ShowManager.shared.showAnimationInView(self.view)
           ShowManager.shared.hide(1)
         }

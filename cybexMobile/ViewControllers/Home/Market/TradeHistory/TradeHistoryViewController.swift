@@ -21,16 +21,11 @@ class TradeHistoryViewController: BaseViewController {
   var pair:Pair? {
     didSet {
       guard let base_info = app_data.assetInfo[(pair?.base)!], let quote_info = app_data.assetInfo[(pair?.quote)!] else { return }
-      if Localize.currentLanguage() == "en"{
-        self.historyView.price.text  = "Price\(base_info.symbol.filterJade)"
-        self.historyView.amount.text = "Amount\(quote_info.symbol.filterJade)"
-        self.historyView.sellAmount.text = "Total\(base_info.symbol.filterJade)"
-      }else{
-        self.historyView.price.text  = "价格\(base_info.symbol.filterJade)"
-        self.historyView.amount.text = "数量\(quote_info.symbol.filterJade)"
-        self.historyView.sellAmount.text = "成交额\(base_info.symbol.filterJade)"
-      }
-     
+      
+      self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized() + base_info.symbol.filterJade
+      self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized() + quote_info.symbol.filterJade
+      self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized() + base_info.symbol.filterJade
+    
       self.coordinator?.fetchData(pair!)
     }
   }

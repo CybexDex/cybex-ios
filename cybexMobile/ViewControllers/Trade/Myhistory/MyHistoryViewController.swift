@@ -21,6 +21,7 @@ class MyHistoryViewController: BaseViewController {
       
     }
   }
+  var data : [FillOrder]?
   
   @IBOutlet weak var tableView: UITableView!
   
@@ -32,6 +33,7 @@ class MyHistoryViewController: BaseViewController {
   }
   
   func setupUI(){
+    self.localized_text = R.string.localizable.my_history_title.key.localizedContainer()
     let name = String.init(describing:MyHistoryCell.self)
     
     tableView.register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: name)
@@ -74,7 +76,7 @@ extension MyHistoryViewController : UITableViewDelegate,UITableViewDataSource{
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let name = String.init(describing:MyHistoryCell.self)
     let cell = tableView.dequeueReusableCell(withIdentifier: name, for: indexPath) as! MyHistoryCell
-    if let fillOrders = UserManager.shared.fillOrder.value as? [FillOrder] {
+    if let fillOrders = UserManager.shared.fillOrder.value {
       cell.setup(fillOrders[indexPath.row], indexPath: indexPath)
     }
     return cell

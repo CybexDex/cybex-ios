@@ -12,14 +12,16 @@ class MyHistoryCellView: UIView {
   
   @IBOutlet weak var asset: UILabel!
   @IBOutlet weak var typeView: UIView!
-  
+    @IBOutlet weak var base: UILabel!
+    
   @IBOutlet weak var kindL: UILabel!
   @IBOutlet weak var price: UILabel!
   @IBOutlet weak var amount: UILabel!
   @IBOutlet weak var time: UILabel!
   @IBOutlet weak var orderPrice: UILabel!
   
-  
+    @IBOutlet weak var state: UILabel!
+    
   var data : Any? {
     didSet{
       if let fillOrder = data as? FillOrder {
@@ -30,10 +32,25 @@ class MyHistoryCellView: UIView {
   
   func updateUI(_ order: FillOrder) {
     if let quoteInfo = app_data.assetInfo[order.fill_price.quote.assetID], let baseInfo = app_data.assetInfo[order.fill_price.base.assetID] {
-      self.asset.text = "\(quoteInfo.symbol)/\(baseInfo.symbol)"
-
+      if order.pays.assetID == order.fill_price.quote.assetID{
+        self.asset.text = quoteInfo.symbol.filterJade
+        self.base.text  = "/" + baseInfo.symbol.filterJade
+        self.kindL.text               = "BUY"
+        self.typeView.backgroundColor = .turtleGreen
+        self.amount.text = String(getRealAmount(order.receives.assetID, amount: order.receives.amount)) + baseInfo.symbol.filterJade
+        self.price.text = String(getRealAmount(order.pays.assetID, amount: order.pays.amount)) +
+          quoteInfo.symbol.filterJade
+      }else{
+        self.asset.text = baseInfo.symbol.filterJade
+        self.base.text  = "/" + quoteInfo.symbol.filterJade
+        self.kindL.text = "SELL"
+        self.typeView.backgroundColor = .reddish
+        self.amount.text = String(getRealAmount(order.pays.assetID, amount: order.pays.amount)) + baseInfo.symbol.filterJade
+        self.price.text = String(getRealAmount(order.receives.assetID, amount: order.receives.amount)) + quoteInfo.symbol.filterJade
+      }
+        
+        self.orderPrice.text = self.price.text
     }
-    
   }
   
   func setup(){

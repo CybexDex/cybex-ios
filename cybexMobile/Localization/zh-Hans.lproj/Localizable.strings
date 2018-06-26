@@ -163,3 +163,37 @@
 "recharge_copy"     = "已复制地址";
 "recharge_save"     = "已保存二维码";
 "recharge_retry"    = "请在5分钟后重新生成";
+
+"utils_address"      = "提现地址:";
+"utils_amount"       = "提现数量:";
+"utils_withdrawfee"  = "转账手续费:";
+"utils_gatewayfee"   = "提现手续费:";
+"utils_receiveamount" = "到账数量:";
+
+"password_placeholder" = "请输入密码";
+"tip_title"   = "提示";
+"tip_message" = "请在设置中打开相册权限";
+
+"recharge_title"  = "提现";
+"recharge_min"    = " 最小提现数量 ";
+
+"recharge_invalid_password" = "解锁失败，请重新输入密码";
+"recharge_withdraw_success" = "提现申请成功";
+"recharge_withdraw_failed" = "提现申请成功";
+
+"orderbook_price"     = "价格";
+"orderbook_amount"    = "数量";
+
+"trade_history_price" = "价格";
+"trade_history_amount" = "数量";
+"trade_history_total" = "成交额";
+
+"setting_language"    = "简体中文";
+
+"mark_order_book"     = "买卖单";
+"mark_trade_history"  = "交易历史";
+
+"my_history_amount"          = "数量";
+"my_history_time"          = "时间";
+"my_history_state"          = "已成交";
+"my_history_title"          = "我的记录";

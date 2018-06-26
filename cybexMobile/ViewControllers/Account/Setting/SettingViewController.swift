@@ -113,7 +113,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     else if indexPath.section == 0 {
       cell.textLabel?.localized_text = R.string.localizable.language.key.localizedContainer()
-      cell.detailTextLabel?.text = Localize.currentLanguage() == "en" ? "English" : "简体中文"
+      cell.detailTextLabel?.text = R.string.localizable.setting_language.key.localized()
     }
     else {
       cell.textLabel?.localized_text = R.string.localizable.version.key.localizedContainer()

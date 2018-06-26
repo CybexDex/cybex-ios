@@ -171,4 +171,37 @@
 "recharge_retry"    = "Please retry 5 minutes later";
 
 
+"utils_address"      = "Withdrawal Address:";
+"utils_amount"       = "Amount:";
+"utils_withdrawfee"  = "Withdrawal Fee:";
+"utils_gatewayfee"   = "Gateway Fee:";
+"utils_receiveamount" = "Receive Amount:";
+
+"password_placeholder" = "Password";
+"tip_title"   = "Tip";
+"tip_message" = "Please open photo album permissions in Settings";
+
+"recharge_title"  = " Deposit";
+"recharge_min"    = "Min ";
+
+"recharge_invalid_password" = "Invalid password";
+"recharge_withdraw_success" = "Withdrawal application successful";
+"recharge_withdraw_failed" = "Withdrawal application failed";
+
+"orderbook_price"     = "Price";
+"orderbook_amount"    = "Amount";
+
+"trade_history_price" = "Price";
+"trade_history_amount" = "Amount";
+"trade_history_total" = "Total";
+
+"setting_language"    = "English";
+
+"mark_order_book"     = "Order Book";
+"mark_trade_history"  = "Trade History";
+
+"my_history_amount"          = "Amount";
+"my_history_time"           = "Time";
+"my_history_state"          = "Done";
+"my_history_title"          = "Order History";
 

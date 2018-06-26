@@ -290,34 +290,15 @@ func getUserId(_ userId:String)->Int{
   }
   return 0
 }
-/*
- address = "Withdrawal Address:"
- amount = "Amount:"
- withdrawFee = "Withdrawal Fee:"
- gatewayFee = "Gateway Fee:"
- receiveAmount = "Receive Amount:"
- */
+
 
 func getWithdrawDetailInfo(addressInfo:String,amountInfo:String,withdrawFeeInfo:String,gatewayFeeInfo:String,receiveAmountInfo:String) -> [NSAttributedString]{
-  var address :String = ""
-  var amount : String = ""
-  var withdrawFee : String = ""
-  var gatewayFee : String = ""
-  var receiveAmount : String = ""
+  let address :String = R.string.localizable.utils_address.key.localized()
+  let amount : String = R.string.localizable.utils_amount.key.localized()
+  let withdrawFee : String = R.string.localizable.utils_withdrawfee.key.localized()
+  let gatewayFee : String = R.string.localizable.utils_gatewayfee.key.localized()
+  let receiveAmount : String = R.string.localizable.utils_receiveamount.key.localized()
   
-  if Localize.currentLanguage() == "en"{
-    address = "Withdrawal Address:"
-    amount = "Amount:"
-    withdrawFee = "Withdrawal Fee:"
-    gatewayFee = "Gateway Fee:"
-    receiveAmount = "Receive Amount:"
-  }else{
-    address = "提现地址:"
-    amount = "提现数量:"
-    withdrawFee = "内部转账手续费:"
-    gatewayFee = "网关提现手续费:"
-    receiveAmount = "到账数量:"
-  }
   return (["<name>\(String(describing: address))</name><content>\n\(String(describing: addressInfo))</content>".set(style: "alertContent"),
            "<name>\(String(describing: amount))</name><content>  \(String(describing: amountInfo))</content>".set(style: "alertContent"),
            "<name>\(String(describing: withdrawFee))</name><content>  \(String(describing: withdrawFeeInfo))</content>".set(style: "alertContent"),

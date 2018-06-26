@@ -27,13 +27,9 @@ class OrderBookViewController: BaseViewController {
       guard let pair = pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
       
       if self.tradeView != nil{
-        if Localize.currentLanguage() == "en"{
-          self.tradeView.titlePrice.text = "Price " + base_info.symbol.filterJade
-          self.tradeView.titleAmount.text = "Amount " + quote_info.symbol.filterJade
-        }else{
-          self.tradeView.titlePrice.text = "价格" + base_info.symbol.filterJade
-          self.tradeView.titleAmount.text = "数量" + quote_info.symbol.filterJade
-        }
+        // orderbook_price
+        self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized()
+        self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized()
       }
       self.coordinator?.fetchData(pair)
     }

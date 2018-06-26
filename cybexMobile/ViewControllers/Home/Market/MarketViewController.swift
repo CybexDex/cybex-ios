@@ -130,7 +130,7 @@ class MarketViewController: BaseViewController {
     style.titleFontSize = 14
     
     // 设置标题内容
-    let titles = Localize.currentLanguage() == "en" ? ["Order Book", "Trade History"] : ["买卖单", "交易历史"]
+    let titles = [R.string.localizable.mark_order_book.key.localized(),R.string.localizable.mark_trade_history.key.localized()]
     
     // 设置默认的起始位置
     let startIndex = 0
