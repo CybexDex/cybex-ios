@@ -61,6 +61,7 @@ class MyHistoryViewController: BaseViewController {
       .throttle(10, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { [weak self](account) in
         guard let `self` = self else{ return }
+        self.data = self.coordinator?.filterFillOrder(self.pair!)
         if self.isVisible {
           self.tableView.reloadData()
         }
@@ -70,13 +71,13 @@ class MyHistoryViewController: BaseViewController {
 
 extension MyHistoryViewController : UITableViewDelegate,UITableViewDataSource{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return UserManager.shared.fillOrder.value?.count ?? 0
+    return self.data?.count ?? 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let name = String.init(describing:MyHistoryCell.self)
     let cell = tableView.dequeueReusableCell(withIdentifier: name, for: indexPath) as! MyHistoryCell
-    if let fillOrders = UserManager.shared.fillOrder.value {
+    if let fillOrders = self.data {
       cell.setup(fillOrders[indexPath.row], indexPath: indexPath)
     }
     return cell

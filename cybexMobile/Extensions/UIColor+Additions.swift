@@ -2,7 +2,7 @@
 //  UIColor+Additions.swift
 //  Cybex IOS
 //
-//  Generated on Zeplin. (2018/6/26).
+//  Generated on Zeplin. (2018/6/27).
 //  Copyright (c) 2018 __MyCompanyName__. All rights reserved.
 //
 
@@ -153,11 +153,13 @@ extension UIColor {
   @nonobjc class var fadedRed: UIColor {
     return UIColor(red: 215.0 / 255.0, green: 51.0 / 255.0, blue: 61.0 / 255.0, alpha: 1.0)
   }
-  
-  @nonobjc class var white30: UIColor {
-    return UIColor(white: 1.0, alpha: 0.3)
+
+  @nonobjc class var paleGreyThree: UIColor {
+    return UIColor(red: 239.0 / 255.0, green: 241.0 / 255.0, blue: 244.0 / 255.0, alpha: 1.0)
   }
   
-  
+  @nonobjc class var white30: UIColor {
+    return UIColor(white: 1, alpha: 0.3)
+  }
 
 }

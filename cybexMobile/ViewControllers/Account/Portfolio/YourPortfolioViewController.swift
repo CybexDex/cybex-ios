@@ -59,6 +59,7 @@ class YourPortfolioViewController: BaseViewController {
     
     app_data.data.asObservable().distinctUntilChanged()
       .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
+      .throttle(10, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: {[weak self] (s) in
         guard let `self` = self else { return }
 
