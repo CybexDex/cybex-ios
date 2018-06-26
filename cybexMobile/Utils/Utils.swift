@@ -9,25 +9,24 @@
 import Foundation
 import Localize_Swift
 
-func calculateFee(_ operation:String, focus_asset_id:String, completion:@escaping (_ success:Bool, _ amount:Double, _ assetID:String)->()) {
+func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTypesOperations = .limit_order_create, completion:@escaping (_ success:Bool, _ amount:Double, _ assetID:String)->()) {
   let request = GetRequiredFees(response: { (data) in
-    if let dic = data as? [[String: Any]], let cyb_amount = dic.first?["amount"] as? Int {
+    if let fees = data as? [Fee], let cyb_amount = fees.first?.amount.toDouble() {
       
       if let cyb = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
         return balance.asset_type == AssetConfiguration.CYB
       }).first {
-        if cyb.balance.toDouble()! >= cyb_amount.double {
+        if cyb.balance.toDouble()! >= cyb_amount {
           let amount = getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string)
           completion(true, amount, AssetConfiguration.CYB)
         }
         else {
           let request = GetRequiredFees(response: { (data) in
-            if let dic = data as? [[String: Any]], let base_amount = dic.first?["amount"] as? Int {
-              
+            if let fees = data as? [Fee], let base_amount = fees.first?.amount.toDouble() {
               if let base = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
                 return balance.asset_type == focus_asset_id
               }).first {
-                if base.balance.toDouble()! >= base_amount.double {
+                if base.balance.toDouble()! >= base_amount {
                   let amount = getRealAmount(focus_asset_id, amount: base_amount.string)
                   completion(true, amount, focus_asset_id)
                 }
@@ -42,7 +41,7 @@ func calculateFee(_ operation:String, focus_asset_id:String, completion:@escapin
             else {
               completion(false, 0, "")
             }
-          }, operationStr: operation, assetID: focus_asset_id)
+          }, operationStr: operation, assetID: focus_asset_id, operationID: operationID)
           
           WebsocketService.shared.send(request: request)
         }
@@ -55,7 +54,7 @@ func calculateFee(_ operation:String, focus_asset_id:String, completion:@escapin
     else {
       completion(false, 0, "")
     }
-  }, operationStr: operation, assetID: AssetConfiguration.CYB)
+  }, operationStr: operation, assetID: AssetConfiguration.CYB, operationID: operationID)
   
   WebsocketService.shared.send(request: request)
 }
