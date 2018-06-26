@@ -175,7 +175,7 @@ enum objectID:String {
   case worker_object = "1.14.x"
   case balance_object = "1.15.x"
   case global_property_object = "2.0.x"
-  case dynamic_global_property_object = "2.1.x"
+  case dynamic_global_property_object = "2.1.0"
   case asset_dynamic_data = "2.3.x"
   case asset_bitasset_data = "2.4.x"
   case account_balance_object = "2.5.x"

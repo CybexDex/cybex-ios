@@ -19,13 +19,15 @@ protocol BusinessStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
   
   func switchPrice(_ price:String)
-  func adjustPrice(_ plus:Bool, precision:Int)
+  func adjustPrice(_ plus:Bool)
 
-  func changePercent(_ percent:Double, isBuy:Bool, assetID:String, precision:Int)
+  func changePercent(_ percent:Double, isBuy:Bool, assetID:String)
   func getBalance(_ assetID:String)
 
   func getFee(_ focus_asset_id:String)
   func resetState()
+  
+  func postLimitOrder(_ pair:Pair, isBuy:Bool, callback: @escaping (_ success: Bool) -> ())
 }
 
 class BusinessCoordinator: AccountRootCoordinator {
@@ -58,8 +60,8 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
     self.store.dispatch(changePriceAction(price: price))
   }
   
-  func adjustPrice(_ plus:Bool, precision:Int) {
-    self.store.dispatch(adjustPriceAction(gap: plus ? 1.0 / pow(10, precision.double) : -1.0 / pow(10, precision.double), precision:precision))
+  func adjustPrice(_ plus:Bool) {
+    self.store.dispatch(adjustPriceAction(plus: plus))
   }
   
   func getFee(_ focus_asset_id:String) {
@@ -70,7 +72,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
     }
   }
   
-  func changePercent(_ percent:Double, isBuy:Bool, assetID:String, precision:Int) {
+  func changePercent(_ percent:Double, isBuy:Bool, assetID:String) {
     let fee_amount = self.state.property.fee_amount.value
     let balance = self.state.property.balance.value
     let fee_id = self.state.property.feeID.value
@@ -95,7 +97,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
         }
       }
       
-      self.store.dispatch(switchPercentAction(amount: amount, precision: precision))
+      self.store.dispatch(switchPercentAction(amount: amount))
     }
   }
   
@@ -110,5 +112,35 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
   
   func resetState() {
     self.store.dispatch(resetTrade())
+  }
+  
+  func postLimitOrder(_ pair:Pair, isBuy:Bool, callback: @escaping (_ success: Bool) -> ()) {
+    guard let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote],let fee_info = app_data.assetInfo[self.state.property.feeID.value], let userid = UserManager.shared.account.value?.id, self.state.property.fee_amount.value != 0, let cur_amount = self.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.state.property.price.value.toDouble(), price != 0 else { return }
+    
+    let total = price * cur_amount
+    let assetID = isBuy ? base_info.id : quote_info.id
+    let amount = isBuy ? Int32(total * pow(10, base_info.precision.double)) : Int32(cur_amount * pow(10, quote_info.precision.double))
+
+    let receive_assetID = isBuy ? quote_info.id : base_info.id
+    let receive_amount = isBuy ? Int32(cur_amount * pow(10, quote_info.precision.double)) : Int32(total * pow(10, base_info.precision.double))
+    
+    let fee_amount = Int32(self.state.property.fee_amount.value * pow(10, fee_info.precision.double))
+
+    blockchainParams { (blockchain_params) in
+      if let jsonStr = BitShareCoordinator.getLimitOrder(blockchain_params.block_num, block_id: blockchain_params.block_id, expiration: Date().timeIntervalSince1970 + 10 * 3600, chain_id: blockchain_params.chain_id, user_id: userid.getID, order_expiration: Date().timeIntervalSince1970 + 3600 * 24 * 365, asset_id: assetID.getID, amount: amount, receive_asset_id: receive_assetID.getID, receive_amount: receive_amount, fee_id: self.state.property.feeID.value.getID, fee_amount: fee_amount) {
+        
+        let request = BroadcastTransactionRequest(response: { (data) in
+          if String(describing: data) == "<null>" {
+            callback(true)
+          }
+          else {
+            callback(false)
+          }
+        }, jsonstr: jsonStr)
+        
+        WebsocketService.shared.send(request: request)
+      }
+    
+    }
   }
 }

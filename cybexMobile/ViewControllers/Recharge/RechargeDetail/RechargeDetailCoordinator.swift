@@ -120,19 +120,6 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
   }
   
-  func getChainId(callback:@escaping(String)->()){
-    let requeset = GetChainIDRequest { (id) in
-      if let id = id as? String{
-        callback(id)
-      }else{
-        callback("")
-      }
-    }
-    WebsocketService.shared.send(request: requeset)
-  }
-  
-  
-  
   func getObjects(assetId:String,amount:String,address:String,fee_id:String,fee_amount:String,callback:@escaping (Any)->()){
     getChainId { (id) in
       if let memo_key = self.state.property.memo_key.value{

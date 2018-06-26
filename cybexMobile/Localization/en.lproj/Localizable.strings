@@ -170,6 +170,8 @@
 "recharge_save"     = "Saved";
 "recharge_retry"    = "Please retry 5 minutes later";
 
+"order_create_success" = "Place order successfully";
+"order_create_fail" = "Place order fail";
 
 "utils_address"      = "Withdrawal Address:";
 "utils_amount"       = "Amount:";

@@ -197,3 +197,5 @@
 "my_history_time"          = "时间";
 "my_history_state"          = "已成交";
 "my_history_title"          = "我的记录";
+"order_create_success" = "挂单成功";
+"order_create_fail" = "挂单失败";
