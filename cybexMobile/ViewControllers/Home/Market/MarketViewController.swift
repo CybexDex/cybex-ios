@@ -353,9 +353,9 @@ extension MarketViewController {
   }
     
     @objc func buy(){
-      self.coordinator?.openTradeViewChontroller(true)
+      self.coordinator?.openTradeViewChontroller(true,pair:self.pair)
     }
     @objc func sell(){
-      self.coordinator?.openTradeViewChontroller(false)
+      self.coordinator?.openTradeViewChontroller(false,pair:self.pair)
     }
 }

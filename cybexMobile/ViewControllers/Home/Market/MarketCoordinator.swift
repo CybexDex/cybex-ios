@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import SwifterSwift
 
 protocol MarketCoordinatorProtocol {
  
@@ -21,7 +22,7 @@ protocol MarketStateManagerProtocol {
   
   func setupChildViewControllers(_ pair:Pair) -> [BaseViewController]
   func refreshChildViewController(_ vcs:[BaseViewController], pair:Pair)
-  func openTradeViewChontroller(_ isBuy:Bool)
+  func openTradeViewChontroller(_ isBuy:Bool,pair:Pair)
 }
 
 class MarketCoordinator: HomeRootCoordinator {
@@ -76,13 +77,17 @@ extension MarketCoordinator: MarketStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
   
-  func openTradeViewChontroller(_ isBuy:Bool){
+  func openTradeViewChontroller(_ isBuy:Bool,pair:Pair){
     self.rootVC.tabBarController?.selectedIndex = 1
     self.rootVC.popToRootViewController(animated: false)
     
-    if let baseNavi = self.rootVC.tabBarController?.viewControllers![1] as? BaseNavigationController,let vc = baseNavi.topViewController as? TradeViewController{
-      vc.selectedIndex = isBuy ? 0 : 1
+    SwifterSwift.delay(milliseconds: 100) {
+      if let baseNavi = self.rootVC.tabBarController?.viewControllers![1] as? BaseNavigationController,let vc = baseNavi.topViewController as? TradeViewController{
+        vc.selectedIndex = isBuy ? 0 : 1
+        vc.pair = pair
+        vc.titlesView?.selectedIndex = vc.selectedIndex
+      }
     }
-    self.rootVC.popToRootViewController(animated: false)
+    
   }
 }

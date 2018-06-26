@@ -28,6 +28,18 @@ class CybexTitleView: UIView {
     return view
   }()
   
+  var selectedIndex : Int = 0{
+    didSet{
+      for button in buttons{
+        if selectedIndex == button.tag{
+          button.isSelected = true
+        }else{
+          button.isSelected = false
+        }
+      }
+      self.lineView.center = CGPoint(x: buttons[selectedIndex].center.x, y: self.height - 0.5)
+    }
+  }
   
   func setup(){
     for view in self.subviews{

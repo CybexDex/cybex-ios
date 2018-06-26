@@ -22,6 +22,7 @@ class TradeViewController: BaseViewController {
   @IBOutlet weak var topView: UIView!
   @IBOutlet weak var scrollView: UIScrollView!
   
+  var titlesView : CybexTitleView?
   var chooseTitleView : UIView?//mask
   
   var selectedIndex:Int = 0 {
@@ -68,10 +69,10 @@ class TradeViewController: BaseViewController {
   func setupUI(){
     setupNavi()
     
-    let titlesView = CybexTitleView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 32))
-    topView.addSubview(titlesView)
+    titlesView = CybexTitleView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 32))
+    topView.addSubview(self.titlesView!)
     
-    titlesView.data = [R.string.localizable.trade_buy.key.localized(),
+    self.titlesView!.data = [R.string.localizable.trade_buy.key.localized(),
                        R.string.localizable.trade_sell.key.localized(),
                        R.string.localizable.trade_total.key.localized()]
     
@@ -128,12 +129,12 @@ class TradeViewController: BaseViewController {
   }
   
   func moveToMyOpenedOrders(){
-    self.scrollView.setContentOffset(CGPoint(x: pageOffsetForChild(at: 2), y: 0), animated: true)
+    self.scrollView.setContentOffset(CGPoint(x: pageOffsetForChild(at: 2), y: 0), animated: false)
   }
   
   func moveToTradeView(isBuy:Bool){
     let index = isBuy ? 0 : 1
-    self.scrollView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: 0), animated: true)
+    self.scrollView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: 0), animated: false)
   }
 }
 
