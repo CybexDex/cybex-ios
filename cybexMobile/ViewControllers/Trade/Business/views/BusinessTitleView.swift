@@ -10,7 +10,12 @@ import UIKit
 
 class BusinessTitleView: UIView {
 
-    @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var leftView: QuotesTitleView!
+  @IBOutlet weak var tableView: UITableView!
+  
+  var selectedIndex:Int?
+  
+  var saveBaseIndex = 0
   
   var currentBaseIndex = 0 {
     didSet{
@@ -82,6 +87,14 @@ extension BusinessTitleView:UITableViewDataSource,UITableViewDelegate{
     
     let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: BusinessTitleCell.self), for: indexPath) as! BusinessTitleCell
     
+    if let selectedIndex = self.selectedIndex,  selectedIndex == indexPath.row && saveBaseIndex == currentBaseIndex {
+      cell.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.paleGrey.hexString(true)]
+      cell.businessTitleCellView.paris.theme_textColor = [UIColor.pastelOrange.hexString(true), UIColor.pastelOrange.hexString(true)]
+    }
+    else {
+      cell.theme_backgroundColor = [UIColor.darkTwo.hexString(true), UIColor.white.hexString(true)]
+      cell.businessTitleCellView.paris.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
+    }
     let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex])
     let data = markets[indexPath.row]
     cell.setup(data, indexPath: indexPath)
@@ -95,8 +108,11 @@ extension BusinessTitleView:UITableViewDataSource,UITableViewDelegate{
 extension BusinessTitleView
 {
   @objc func tagDidSelected(_ data : [String : Any]){
-    if let index = data["selectedIndex"] as? Int {
+    if let index = data["selectedIndex"] as? Int, let save = data["save"] as? Bool {
       self.currentBaseIndex = index
+      if save {
+        saveBaseIndex = index
+      }
     }
   }
 }

@@ -70,19 +70,25 @@ class QuotesTitleView: UIView {
   }
   
   
-  func changeToHighStatus(_ index : Int){
+  func changeToHighStatus(_ index : Int, save:Bool = false){
     for titleView in titleViews {
       if titleView.tag  == index{
         if self.stackView.axis == .vertical{
           titleView.viewWithTag(10)?.isHidden = true
+          if let titleL =  titleView.viewWithTag(9) as? UILabel{
+            titleL.theme1TitleColor = .pastelOrange
+            titleL.theme2TitleColor = .pastelOrange
+            self.next?.sendEventWith(event.tagDidSelected.rawValue, userinfo: ["selectedIndex": index - 1, "save":save])
+          }
         }else{
           titleView.viewWithTag(10)?.isHidden = false
+          if let titleL =  titleView.viewWithTag(9) as? UILabel{
+            titleL.theme1TitleColor = .white
+            titleL.theme2TitleColor = .darkTwo
+            self.next?.sendEventWith(event.tagDidSelected.rawValue, userinfo: ["selectedIndex": index - 1, "save":save])
+          }
         }
-        if let titleL =  titleView.viewWithTag(9) as? UILabel{
-          titleL.theme1TitleColor = .white
-          titleL.theme2TitleColor = .darkTwo
-          self.next?.sendEventWith(event.tagDidSelected.rawValue, userinfo: ["selectedIndex": index - 1])
-        }
+   
       }else{
         titleView.viewWithTag(10)?.isHidden = true
         if let titleL =  titleView.viewWithTag(9) as? UILabel{

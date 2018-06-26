@@ -84,7 +84,7 @@ class BusinessViewController: BaseViewController {
         return
       }
       
-      self.containerView.value.text = "≈¥" + String(describing: changeToETHAndCYB(base_info.id).eth.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
+      self.containerView.value.text = "≈¥" + String(describing: changeToETHAndCYB(base_info.id).eth.toDouble()! * text.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
       
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     

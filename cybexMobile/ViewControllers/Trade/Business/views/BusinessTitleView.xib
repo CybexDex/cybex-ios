@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BusinessTitleView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
+                <outlet property="leftView" destination="3kf-XN-6mc" id="Pf2-XA-6iE"/>
                 <outlet property="tableView" destination="G3y-gW-Fgv" id="8kr-ae-j2j"/>
             </connections>
         </placeholder>
