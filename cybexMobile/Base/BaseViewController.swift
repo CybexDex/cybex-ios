@@ -151,6 +151,19 @@ class BaseViewController: UIViewController {
     navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightNavButton!)
   }
   
+  func configRightNavButton(_ locali:String) {
+    rightNavButton = UIButton.init(type: .custom)
+    rightNavButton?.frame = CGRect(x: 0, y: 0, width: 58, height: 24)
+    rightNavButton?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+    rightNavButton?.titleLabel?.textColor = .steel
+    rightNavButton?.addTarget(self, action: #selector(rightAction(_:)), for: .touchUpInside)
+    rightNavButton?.isHidden = false
+    navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightNavButton!)
+    
+    rightNavButton?.locali = locali
+
+  }
+  
   @objc open func leftAction(_ sender: UIButton) {
     navigationController?.popViewController(animated: true)
   }

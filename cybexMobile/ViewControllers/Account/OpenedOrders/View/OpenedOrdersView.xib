@@ -99,7 +99,7 @@
                             <rect key="frame" x="0.0" y="36" width="52" height="36"/>
                             <subviews>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="he9-L4-SN8">
-                                    <rect key="frame" x="0.0" y="-36" width="52" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="-28.5" width="52" height="0.0"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egL-zq-tVF">
                                             <rect key="frame" x="0.0" y="2" width="11.5" height="14.5"/>
@@ -184,7 +184,7 @@
                                         <userDefinedRuntimeAttribute type="string" keyPath="locali" value="order_cancle"/>
                                     </userDefinedRuntimeAttributes>
                                 </label>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icStarBorder24Px" translatesAutoresizingMaskIntoConstraints="NO" id="Nj6-aa-q8v">
+                                <imageView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icStarBorder24Px" translatesAutoresizingMaskIntoConstraints="NO" id="Nj6-aa-q8v">
                                     <rect key="frame" x="43.5" y="6" width="24" height="24"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="24" id="Jdj-LD-Idx"/>

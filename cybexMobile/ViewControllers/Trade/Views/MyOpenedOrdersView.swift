@@ -12,6 +12,11 @@ class MyOpenedOrdersView: UIView {
     @IBOutlet weak var sectionView: LockupAssetsSectionView!
     @IBOutlet weak var tableView: UITableView!
   
+  
+  enum event : String{
+    case cancelOrder
+  }
+  
   var data : Any? {
     didSet {
       if let _ = data as? Pair {
@@ -82,13 +87,27 @@ extension MyOpenedOrdersView : UITableViewDelegate,UITableViewDataSource{
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
     let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing:OpenedOrdersCell.self), for: indexPath) as! OpenedOrdersCell
     cell.Cell_Type = 0
-    var orderes = UserManager.shared.limitOrder.value ?? []
+    
+    guard let pair = data as? Pair else { return cell }
+    let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
+      return limitorder.sellPrice.base.assetID == pair.base && limitorder.sellPrice.quote.assetID == pair.quote
+    }) ?? []
     cell.setup(orderes[indexPath.row], indexPath: indexPath)
     return cell
   }
-  
-  
+}
+
+extension MyOpenedOrdersView {
+  @objc func cancleOrderAction(_ data: [String: Any]) {
+    if let index = data["selectedIndex"] as? Int {
+      guard let pair = self.data as? Pair else { return  }
+      let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
+        return limitorder.sellPrice.base.assetID == pair.base && limitorder.sellPrice.quote.assetID == pair.quote
+      }) ?? []
+      let order = orderes[index]
+      self.next?.sendEventWith(event.cancelOrder.rawValue, userinfo: ["order": order])
+    }
+  }
 }

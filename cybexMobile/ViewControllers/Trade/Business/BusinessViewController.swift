@@ -74,13 +74,37 @@ class BusinessViewController: BaseViewController {
     (self.containerView.amountTextfield.rx.text.orEmpty <-> self.coordinator!.state.property.amount).disposed(by: disposeBag)
     (self.containerView.priceTextfield.rx.text.orEmpty <-> self.coordinator!.state.property.price).disposed(by: disposeBag)
     
+//RMB
+    self.coordinator!.state.property.price.subscribe(onNext: {[weak self] (text) in
+      guard let `self` = self else { return }
+      
+      self.containerView.tipView.isHidden = true
+      guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0 else {
+        self.containerView.value.text = "≈¥"
+        return
+      }
+      
+      self.containerView.value.text = "≈¥" + String(describing: changeToETHAndCYB(base_info.id).eth.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
+      
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+  
+    self.coordinator!.state.property.amount.subscribe(onNext: {[weak self] (text) in
+      guard let `self` = self else { return }
+      
+      self.containerView.tipView.isHidden = true
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+//precision
     NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.containerView.priceTextfield, queue: nil) {[weak self] (notifi) in
       guard let `self` = self else { return }
+      
       guard let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0 else {
         self.containerView.priceTextfield.text = ""
         return
       }
       self.containerView.priceTextfield.text = text.tradePrice.price
+
     }
     
     NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.containerView.amountTextfield, queue: nil) {[weak self] (notifi) in
@@ -167,8 +191,20 @@ extension BusinessViewController {
   }
   
   @objc func buttonDidClicked(_ data: [String: Any]) {
-    guard let _ = self.pair else { return }
+    guard let pair = self.pair else { return }
 
+    guard let canPost = self.coordinator?.checkBalance(pair, isBuy: self.type == .buy) else {
+      return
+    }
+    
+    if !canPost {
+      self.containerView.tipView.isHidden = false
+      return
+    }
+    else {
+      self.containerView.tipView.isHidden = true
+    }
+    
     if UserManager.shared.isLocked {
       showEnterPassword()
     }
@@ -209,7 +245,7 @@ extension BusinessViewController : ShowManagerDelegate{
           self.postOrder()
         }
         else {
-          
+          ShowManager.shared.data = R.string.localizable.recharge_invalid_password()
         }
        
       }

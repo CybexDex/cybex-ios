@@ -32,10 +32,7 @@ class OpenedOrdersView:  UIView{
     didSet {
       if let order = data as? LimitOrder {
         if self.basePriceView.isHidden == false{
-          cancleOrder.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
-            guard let `self` = self else { return }
-            self.cancleOrder.next?.sendEventWith(CancleOrder.cancleOrderAction.rawValue, userinfo:["selectedIndex":self.selectedIndex ?? 0])
-          }).disposed(by: disposeBag)
+        
           
           self.basePrice.text = "--"
         }
@@ -78,7 +75,10 @@ class OpenedOrdersView:  UIView{
   
   
   fileprivate func setup() {
-    
+    cancleOrder.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+      guard let `self` = self else { return }
+      self.cancleOrder.next?.sendEventWith(CancleOrder.cancleOrderAction.rawValue, userinfo:["selectedIndex":self.selectedIndex?.row ?? 0])
+    }).disposed(by: disposeBag)
   }
   
   override var intrinsicContentSize: CGSize {

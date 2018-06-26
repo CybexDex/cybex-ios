@@ -78,8 +78,8 @@ class TradeViewController: BaseViewController {
   }
   
   func setupNavi(){
-    configLeftNavButton(R.image.icStarBorder23Px())
-    configRightNavButton(R.image.icCandle())
+    configLeftNavButton(R.image.icCandle())
+    configRightNavButton(R.string.localizable.my_history_title.key.localized())
     
     tradeTitltView = TradeNavTitleView(frame: CGRect(x: 0, y: 0, width: 200, height: 64))
     tradeTitltView.delegate = self
@@ -87,16 +87,17 @@ class TradeViewController: BaseViewController {
   }
   
   @objc override func rightAction(_ sender: UIButton){
-    
+    self.coordinator?.openMyHistory()
+
+   
+  }
+  
+  @objc override func leftAction(_ sender: UIButton){
     if let baseIndex = AssetConfiguration.market_base_assets.index(of: pair.base), let index = app_data.filterQuoteAsset(pair.base).index(where: { (bucket) -> Bool in
       return bucket.base == pair.base && bucket.quote == pair.quote
     }) {
       self.coordinator?.openMarket(index: index, currentBaseIndex: baseIndex)
     }
-  }
-  
-  @objc override func leftAction(_ sender: UIButton){
-    self.coordinator?.openMyHistory()
   }
   
   func commonObserveState() {

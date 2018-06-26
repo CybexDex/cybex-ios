@@ -31,6 +31,7 @@ class OpenedOrdersViewController: BaseViewController {
   }
   
   var containerView:UIView?
+  var order:LimitOrder?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -42,6 +43,13 @@ class OpenedOrdersViewController: BaseViewController {
     self.localized_text = R.string.localizable.openedTitle.key.localizedContainer()
    
     switchContainerView()
+  }
+  
+  func showEnterPassword(){
+    let title = R.string.localizable.withdraw_unlock_wallet.key.localized()
+    ShowManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .up_down)
+    ShowManager.shared.delegate = self
+    ShowManager.shared.showAnimationInView(self.view)
   }
   
   func switchContainerView() {
@@ -95,4 +103,57 @@ extension OpenedOrdersViewController : TradePair {
     }
   }
 }
+
+extension OpenedOrdersViewController {
+  @objc func cancelOrder(_ data: [String: Any]) {
+    if let order = data["order"] as? LimitOrder {
+      self.order = order
+      if UserManager.shared.isLocked {
+        showEnterPassword()
+      }
+      else {
+        postCancelOrder()
+      }
+      
+    }
+  }
+  
+  func postCancelOrder() {
+    if let order = self.order {
+      self.startLoading()
+      
+      self.coordinator?.cancelOrder(order.id, callback: {[weak self] (success) in
+        guard let `self` = self else { return }
+        
+        self.endLoading()
+        ShowManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: success ? R.string.localizable.cancel_create_success() : R.string.localizable.cancel_create_fail(), animationType: .up_down, showType: .alert_image)
+        ShowManager.shared.showAnimationInView(self.view)
+        ShowManager.shared.hide(2)
+      })
+
+    }
+  }
+}
+
+extension OpenedOrdersViewController : ShowManagerDelegate{
+  func returnEnsureAction() {
+    
+  }
+  
+  func returnUserPassword(_ sender : String){
+    if let name = UserManager.shared.name {
+      UserManager.shared.unlock(name, password: sender) { (success, _) in
+        if success {
+          ShowManager.shared.hide()
+          self.postCancelOrder()
+        }
+        else {
+          ShowManager.shared.data = R.string.localizable.recharge_invalid_password()
+        }
+        
+      }
+    }
+  }
+}
+
 

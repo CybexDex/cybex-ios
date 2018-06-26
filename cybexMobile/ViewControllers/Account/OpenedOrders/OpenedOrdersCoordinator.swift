@@ -20,6 +20,7 @@ protocol OpenedOrdersStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
   
  
+  func cancelOrder(_ orderID:String, callback: @escaping (_ success: Bool) -> ())
 }
 
 class OpenedOrdersCoordinator: AccountRootCoordinator {
@@ -47,5 +48,33 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
+  
+  func cancelOrder(_ orderID:String, callback: @escaping (_ success: Bool) -> ()) {
+    guard let userid = UserManager.shared.account.value?.id else { return }
+    guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0), let asset = app_data.assetInfo[AssetConfiguration.CYB] else { return }
     
+    calculateFee(operation, focus_asset_id: AssetConfiguration.CYB, operationID: .limit_order_cancel) { (success, amount, assetID) in
+      if success {
+        blockchainParams { (blockchain_params) in
+          if let jsonStr = BitShareCoordinator.cancelLimitOrder(blockchain_params.block_num, block_id: blockchain_params.block_id, expiration: Date().timeIntervalSince1970 + 10 * 3600, chain_id: blockchain_params.chain_id, user_id: userid.getID, order_id: orderID.getID, fee_id: 0, fee_amount: Int32(amount * pow(10, asset.precision.double))) {
+            let request = BroadcastTransactionRequest(response: { (data) in
+              if String(describing: data) == "<null>" {
+                callback(true)
+              }
+              else {
+                callback(false)
+              }
+            }, jsonstr: jsonStr)
+            
+            WebsocketService.shared.send(request: request)
+          }
+        }
+      }
+      else {
+        callback(false)
+      }
+     
+    }
+    
+  }
 }

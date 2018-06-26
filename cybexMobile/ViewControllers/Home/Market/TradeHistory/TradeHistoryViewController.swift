@@ -94,16 +94,18 @@ class TradeHistoryViewController: BaseViewController {
           let base_volume = Double(pay["amount"].stringValue)! / base_precision
           
           let price = base_volume / quote_volume
-          let isCYB = base_info.id == AssetConfiguration.CYB
-          showData.append((false, price.formatCurrency(digitNum: isCYB ? 5 : 8), quote_volume.suffixNumber(digitNum:quote_info.precision), base_volume.suffixNumber(digitNum: base_info.precision), time.dateFromISO8601!.string(withFormat: "MM/dd HH:mm:ss")))
+          let tradePrice = price.tradePrice()
+
+          showData.append((false, tradePrice.price, quote_volume.suffixNumber(digitNum:10 - tradePrice.pricision), base_volume.suffixNumber(digitNum: tradePrice.pricision), time.dateFromISO8601!.string(withFormat: "HH:mm:ss")))
         }
         else {
           let quote_volume = Double(pay["amount"].stringValue)! / quote_precision
           let base_volume = Double(receive["amount"].stringValue)! / base_precision
           
           let price = base_volume / quote_volume
-          let isCYB = base_info.id == AssetConfiguration.CYB
-          showData.append((true, price.formatCurrency(digitNum: isCYB ? 5 : 8), quote_volume.suffixNumber(digitNum: quote_info.precision), base_volume.suffixNumber(digitNum: base_info.precision), time.dateFromISO8601!.string(withFormat: "MM/dd HH:mm:ss")))
+        
+          let tradePrice = price.tradePrice()
+          showData.append((true, tradePrice.price, quote_volume.suffixNumber(digitNum: 10 - tradePrice.pricision), base_volume.suffixNumber(digitNum: tradePrice.pricision), time.dateFromISO8601!.string(withFormat: "HH:mm:ss")))
         }
         
       }

@@ -28,6 +28,7 @@ protocol BusinessStateManagerProtocol {
   func resetState()
   
   func postLimitOrder(_ pair:Pair, isBuy:Bool, callback: @escaping (_ success: Bool) -> ())
+  func checkBalance(_ pair:Pair, isBuy:Bool) -> Bool?
 }
 
 class BusinessCoordinator: AccountRootCoordinator {
@@ -142,5 +143,24 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
       }
     
     }
+  }
+  
+  func checkBalance(_ pair:Pair, isBuy:Bool) -> Bool? {
+    guard let base_info = app_data.assetInfo[pair.base],  self.state.property.fee_amount.value != 0, let cur_amount = self.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.state.property.price.value.toDouble(), price != 0, self.state.property.balance.value != 0 else { return nil }
+    
+    var total:Double = 0
+    
+    if self.state.property.feeID.value == base_info.id {
+      total = price * cur_amount + self.state.property.fee_amount.value
+    }
+    else {
+      total = price * cur_amount
+    }
+    
+    if self.state.property.balance.value >= total {
+      return true
+    }
+    
+   return false
   }
 }

@@ -199,3 +199,5 @@
 "my_history_title"          = "我的记录";
 "order_create_success" = "挂单成功";
 "order_create_fail" = "挂单失败";
+"cancel_create_success" = "撤单成功";
+"cancel_create_fail" = "撤单失败";

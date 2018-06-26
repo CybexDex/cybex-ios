@@ -20,6 +20,7 @@
                 <outlet property="fee" destination="7C3-1T-dKy" id="saV-2J-eiL"/>
                 <outlet property="priceTextfield" destination="xuL-Sc-CcZ" id="x9C-lt-fsv"/>
                 <outlet property="quoteName" destination="gqP-Ph-sYt" id="a6Z-Ao-BMq"/>
+                <outlet property="tipView" destination="KnY-Yk-nXf" id="aIy-A2-UA4"/>
                 <outlet property="value" destination="sVt-f6-hjy" id="KJb-jJ-2b3"/>
                 <outletCollection property="percents" destination="8TU-5q-cLx" collectionClass="NSMutableArray" id="gH5-FQ-02x"/>
                 <outletCollection property="percents" destination="2He-fT-YnW" collectionClass="NSMutableArray" id="lXS-4P-2r8"/>
@@ -172,6 +173,9 @@
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                             <color key="textColor" red="0.93333333330000001" green="0.57254901960000004" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="withdraw_nomore"/>
+                            </userDefinedRuntimeAttributes>
                         </label>
                     </subviews>
                     <constraints>
