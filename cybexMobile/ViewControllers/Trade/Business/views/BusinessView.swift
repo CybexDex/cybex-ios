@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import RxCocoa
 
 class BusinessView: UIView {
   enum event:String {
     case amountPercent
+    case buttonDidClicked
+    case adjustPrice
   }
   
   @IBOutlet weak var button: Button!
@@ -29,11 +32,10 @@ class BusinessView: UIView {
   
   @IBAction func changePrice(_ sender: UIButton) {
     if sender.tag == 1001{
-      // -
-      
+      self.next?.sendEventWith(event.adjustPrice.rawValue, userinfo: ["plus": false])
+
     }else{
-      // +
-      
+      self.next?.sendEventWith(event.adjustPrice.rawValue, userinfo: ["plus": true])
     }
   }
   
@@ -53,6 +55,14 @@ class BusinessView: UIView {
         
       }).disposed(by: disposeBag)
     }
+    
+    button.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+      guard let `self` = self else { return }
+      
+      self.next?.sendEventWith(event.buttonDidClicked.rawValue, userinfo: [:])
+      
+    }).disposed(by: disposeBag)
+    
   }
   
   override var intrinsicContentSize: CGSize {

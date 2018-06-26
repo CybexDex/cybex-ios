@@ -14,15 +14,14 @@ import ReSwift
 class BusinessViewController: BaseViewController {
   var pair: Pair? {
     didSet{
+      self.coordinator?.resetState()
       guard let base_info = app_data.assetInfo[pair!.base], let quote_info = app_data.assetInfo[pair!.quote] else { return }
+      self.coordinator?.getFee(self.type == .buy ? base_info.id : quote_info.id)
 
       self.containerView.quoteName.text = quote_info.symbol.filterJade
       
-      if let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
-        return balance.asset_type.filterJade == (self.type == .buy ? base_info.id : quote_info.id)
-      }).first {
-         self.containerView.balance.text = getRealAmount(balances.asset_type, amount: balances.balance).formatCurrency(digitNum: 5)
-      }
+      self.coordinator?.getBalance((self.type == .buy ? base_info.id : quote_info.id))
+      
     }
   }
   
@@ -36,6 +35,7 @@ class BusinessViewController: BaseViewController {
     super.viewDidLoad()
     
     setupUI()
+   
   }
   
   func setupUI(){
@@ -58,13 +58,61 @@ class BusinessViewController: BaseViewController {
   
   override func configureObserveState() {
     commonObserveState()
+
+    (self.containerView.amountTextfield.rx.text.orEmpty <-> self.coordinator!.state.property.amount).disposed(by: disposeBag)
+    (self.containerView.priceTextfield.rx.text.orEmpty <-> self.coordinator!.state.property.price).disposed(by: disposeBag)
     
-    coordinator?.state.property.price.asObservable()
-      .skip(1)
-      .distinctUntilChanged()
-      .subscribe(onNext: { (s) in
-       self.containerView.priceTextfield.text = s
-      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+//balance
+    self.coordinator?.state.property.balance.asObservable().subscribe(onNext: {[weak self] (balance) in
+      guard let `self` = self else { return }
+
+      guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote], balance != 0 else {
+        self.containerView.balance.text = "--"
+        return
+        
+      }
+      
+      let info = self.type == .buy ? base_info : quote_info
+      let symbol = info.symbol.filterJade
+      let realAmount = balance.string(digits: info.precision)
+      
+      self.containerView.balance.text = "\(realAmount) \(symbol)"
+      
+    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+//fee
+    Observable.combineLatest(coordinator!.state.property.feeID.asObservable(), coordinator!.state.property.fee_amount.asObservable()).subscribe(onNext: {[weak self] (fee_id, fee_amount) in
+      guard let `self` = self else { return }
+
+      guard let info = app_data.assetInfo[fee_id] else {
+        self.containerView.fee.text = "--"
+        return
+      }
+      self.containerView.fee.text = "\(fee_amount) \(info.symbol.filterJade)"
+
+    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+
+//total
+    Observable.combineLatest(coordinator!.state.property.feeID.asObservable(), self.coordinator!.state.property.amount, self.coordinator!.state.property.price, coordinator!.state.property.fee_amount.asObservable()).subscribe(onNext: {[weak self] (feeID, amount, price, fee) in
+      guard let `self` = self else { return }
+      guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base] else {
+        self.containerView.endMoney.text = "--"
+        return
+      }
+
+      guard let limit = price.toDouble(), let amount = amount.toDouble(), limit != 0, amount != 0, fee != 0 else {
+        self.containerView.endMoney.text = "--"
+        return
+      }
+
+      let total = limit * amount + (feeID == base_info.id ? fee : 0)
+      
+      self.containerView.endMoney.text = "\(total.string(digits: base_info.precision)) \(base_info.symbol.filterJade)"
+      
+    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+    
   }
 }
 
@@ -82,11 +130,19 @@ extension BusinessViewController : TradePair {
 extension BusinessViewController {
   @objc func amountPercent(_ data:[String:Any]) {
     if let percent = data["percent"] as? String {
-      if let balance = self.containerView.balance.text?.toDouble(), balance != 0, let limit = self.containerView.priceTextfield.text?.toDouble(), limit != 0 {
-        let amount = (balance * percent.toDouble()! / 100.0) / limit
-        self.containerView.amountTextfield.text = amount.string(digits: 5)
-      }
+      guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote]  else { return }
+      self.coordinator?.changePercent(percent.toDouble()! / 100.0, isBuy: self.type == .buy, assetID: self.type == .buy ? base_info.id : quote_info.id, precision:quote_info.precision)
     }
+  }
+  
+  @objc func buttonDidClicked(_ data: [String: Any]) {
+    
+  }
+  
+  @objc func adjustPrice(_ data:[String : Bool]) {
+    guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let _ = app_data.assetInfo[pair.quote]  else { return }
+
+    self.coordinator?.adjustPrice(data["plus"]!, precision: base_info.precision)
   }
 }
 

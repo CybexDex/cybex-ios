@@ -277,6 +277,7 @@
 		733CD33120623F47002AD0E0 /* DataBaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733CD33020623F47002AD0E0 /* DataBaseApi.swift */; };
 		7341BB39205A5E11007387FE /* UIColor+Cybexblack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7341BB0F205A5E11007387FE /* UIColor+Cybexblack.swift */; };
 		7348C54F20DFF92900C1B32F /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7348C54E20DFF92900C1B32F /* Operation.swift */; };
+		7348C55120E23E7200C1B32F /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7348C55020E23E7000C1B32F /* Operators.swift */; };
 		735068D720B7E9B30092CE04 /* debounce-throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735068D620B7E9B30092CE04 /* debounce-throttle.swift */; };
 		735D8EB220AD2A67008DAAAC /* NoticeBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */; };
 		735D8EB420AD2A74008DAAAC /* NoticeBoardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */; };
@@ -11802,6 +11803,7 @@
 		733CD33020623F47002AD0E0 /* DataBaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseApi.swift; sourceTree = "<group>"; };
 		7341BB0F205A5E11007387FE /* UIColor+Cybexblack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Cybexblack.swift"; sourceTree = "<group>"; };
 		7348C54E20DFF92900C1B32F /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		7348C55020E23E7000C1B32F /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		735068D620B7E9B30092CE04 /* debounce-throttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "debounce-throttle.swift"; sourceTree = "<group>"; };
 		735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardView.swift; sourceTree = "<group>"; };
 		735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeBoardView.xib; sourceTree = "<group>"; };
@@ -31955,6 +31957,7 @@
 		73E9AB9420B41A060083DFD6 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				7348C55020E23E7000C1B32F /* Operators.swift */,
 				7386AD5420B4134D00168629 /* Jdenticon */,
 			);
 			path = Vendor;
@@ -32771,6 +32774,7 @@
 				72C573B020D0F012005ABFA5 /* MyHistoryCoordinator.swift in Sources */,
 				72F31DD320C67BAC00A31EAA /* RechargeCoordinator.swift in Sources */,
 				72C30C8A20AAAF7700F4DCEC /* LockupProgressView.swift in Sources */,
+				7348C55120E23E7200C1B32F /* Operators.swift in Sources */,
 				73D34E4B2063A697008C7507 /* SettingActions.swift in Sources */,
 				739B6166207F325A00B61152 /* Collection+Extensions.swift in Sources */,
 				72C5737D20CFA35E005ABFA5 /* TradeViewController.swift in Sources */,

@@ -152,7 +152,10 @@ extension UserManager {
   }
   
   func unlock(_ username:String?, password:String, completion:@escaping (Bool, FullAccount?)->()) {
-    guard let name = username ?? self.name else { return }
+    guard let name = username ?? self.name else {
+      completion(false, nil)
+      return
+    }
     
     let keysString = BitShareCoordinator.getUserKeys(name, password: password)!
     if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key {
@@ -208,8 +211,10 @@ extension UserManager {
       }
       WebsocketService.shared.send(request: request)
     }
+    else {
+      completion(false, nil)
+    }
     
-    completion(false, nil)
     
   }
   

@@ -469,7 +469,14 @@ extension WebsocketService: WebSocketDelegate {
         }
         else {
           main {
-            request.response(data.object)
+            if let error = data["error"].dictionary {
+              print(error)
+              request.response(data)
+            }
+            else {
+              request.response(data.object)
+            }
+
           }
           self.requesting.removeValue(forKey: id.description)
 
