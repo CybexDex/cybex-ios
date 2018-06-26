@@ -92,7 +92,9 @@ class RechargeDetailViewController: BaseViewController {
     }else{
       avaliableView.content.text = "--" + (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)!
     }
-    
+    self.withdraw.isEnable = false
+    self.withdraw.button.isUserInteractionEnabled = false
+    self.withdraw.button.isEnabled = false
     addressView.btn.addTarget(self, action: #selector(cleanAddress), for: .touchUpInside)
     amountView.btn.addTarget(self, action: #selector(addAllAmount), for: .touchUpInside)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -282,10 +284,12 @@ extension RechargeDetailViewController{
       if UserManager.shared.isWithDraw,self.isWithdraw,self.isTrueAddress,self.amountView.content.text != "",self.isAvalibaleAmount{
         self.withdraw.isEnable = true
         self.withdraw.button.isUserInteractionEnabled = true
+        self.withdraw.button.isEnabled = true
         self.coordinator?.getGatewayFee((self.trade?.id)!, amount: self.amountView.content.text!, feeAssetID: self.feeAssetId, address: self.addressView.content.text!)
       }else{
         self.withdraw.isEnable = false
         self.withdraw.button.isUserInteractionEnabled = false
+        self.withdraw.button.isEnabled = false
       }
     }
   }
@@ -297,7 +301,18 @@ extension RechargeDetailViewController{
   @objc func addAllAmount(){
     if let balance = self.balance{
       if let fee = self.coordinator?.state.property.data.value?.fee{
-        self.amountView.content.text = String(describing: getRealAmount(balance.asset_type, amount: balance.balance) - fee)
+        self.amountView.content.text = String(describing: getRealAmount(balance.asset_type, amount: balance.balance))
+        if let name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade{
+          if let amount = self.amountView.content.text?.toDouble(){
+            if fee > amount{
+              self.finalAmount.text = "0 " + name
+            }else{
+              self.finalAmount.text = String(amount - fee) + " " + name
+            }
+          }
+        }
+      }else{
+        self.amountView.content.text = String(describing: getRealAmount(balance.asset_type, amount: balance.balance))
         if let name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade{
           self.finalAmount.text = self.amountView.content.text! + " " + name
         }

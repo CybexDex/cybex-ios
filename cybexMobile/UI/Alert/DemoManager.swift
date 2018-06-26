@@ -46,7 +46,7 @@ class ShowManager {
   }
   
   
-  private var showView : (UIView & Views)?{
+  var showView : (UIView & Views)?{
     didSet{
       
     }
@@ -141,6 +141,8 @@ class ShowManager {
   func hide(){
     self.showView?.removeFromSuperview()
     self.shadowView?.removeFromSuperview()
+    self.showView = nil
+    self.shadowView = nil
   }
   
   func hide(_ time : TimeInterval){

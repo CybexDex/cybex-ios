@@ -27,7 +27,7 @@ class WithdrawDetailViewController: BaseViewController {
     
   var trade : Trade?
   var coordinator: (WithdrawDetailCoordinatorProtocol & WithdrawDetailStateManagerProtocol)?
-  
+  var isFetching : Bool = false
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
@@ -66,7 +66,9 @@ class WithdrawDetailViewController: BaseViewController {
   }
   
   @IBAction func saveIcon(_ sender: Any) {
-    
+    if (self.address.text?.count)! <= 0 {
+      return
+    }
     let photos: PrivateResource = .photos
     proposeToAccess(photos, agreed: {
       print("I can access Photos. :]\n")
@@ -86,7 +88,7 @@ class WithdrawDetailViewController: BaseViewController {
         title = "提示"
         message = "请在设置中打开相册权限"
       }
-      ShowManager.shared.setUp(title: title, message: message, animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.sheet_image)
+      ShowManager.shared.setUp(title: title, message: message, animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.alert)
       ShowManager.shared.showAnimationInView(self.view)
       ShowManager.shared.hide(2)
     })    
@@ -99,11 +101,14 @@ class WithdrawDetailViewController: BaseViewController {
     ShowManager.shared.setUp(title_image: R.image.icCheckCircleGreen.name, message: R.string.localizable.recharge_copy.key.localized(), animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.sheet_image)
     ShowManager.shared.showAnimationInView(self.view)
     ShowManager.shared.hide(2)
-    
   }
   
   @IBAction func resetAddress(_ sender: Any) {
+    if self.isFetching {
+      return
+    }
     startLoading()
+    self.isFetching = true
     let name = app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade
     self.coordinator?.resetDepositAddress(name!)
   }
@@ -123,6 +128,7 @@ class WithdrawDetailViewController: BaseViewController {
     self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext: {[weak self] (addressInfo) in
       guard let `self` = self else{return}
       self.endLoading()
+      self.isFetching = false
       if let info = addressInfo{
         self.address.text = info.address
         print("address : \(info.address)")
@@ -139,6 +145,9 @@ class WithdrawDetailViewController: BaseViewController {
         }
       }else{
         main {
+          if ShowManager.shared.showView != nil{
+            ShowManager.shared.hide()
+          }
           ShowManager.shared.setUp(title_image: R.image.erro16Px.name, message: R.string.localizable.recharge_retry.key.localized(), animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.sheet_image)
           ShowManager.shared.showAnimationInView(self.view)
           ShowManager.shared.hide(2)
