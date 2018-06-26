@@ -104,7 +104,7 @@ class RechargeDetailViewController: BaseViewController {
       return
     }
     if UserManager.shared.isLocked{
-      self.checkLock()
+      self.showPassWord()
       return
     }
     if !UserManager.shared.isWithDraw{
@@ -127,7 +127,7 @@ class RechargeDetailViewController: BaseViewController {
     }
   }
   
-  func checkLock(){
+  func showPassWord(){
     let title = R.string.localizable.withdraw_unlock_wallet.key.localized()
     ShowManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .up_down)
     ShowManager.shared.delegate = self
@@ -276,7 +276,7 @@ extension RechargeDetailViewController{
   func changeWithdrawState(){
     if UserManager.shared.isLocked{
       print("解锁失败")
-      self.checkLock()
+      self.showPassWord()
     }else{
       if UserManager.shared.isWithDraw,self.isWithdraw,self.isTrueAddress,self.amountView.content.text != "",self.isAvalibaleAmount{
         self.withdraw.isEnable = true

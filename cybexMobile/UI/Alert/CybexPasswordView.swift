@@ -26,6 +26,8 @@ class CybexPasswordView: UIView {
         }else{
           errorView.isHidden = true
         }
+      }else{
+        errorView.isHidden = true
       }
     }
   }

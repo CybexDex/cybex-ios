@@ -1024,7 +1024,7 @@ Cg
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0WE-o2-bsL">
-                                <rect key="frame" x="0.0" y="124" width="320" height="444"/>
+                                <rect key="frame" x="0.0" y="124" width="320" height="388"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7lw-Ew-2wL" customClass="CBKLineView" customModule="cybexMobile" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="388"/>
@@ -1056,6 +1056,7 @@ Cg
                                     <constraint firstAttribute="trailing" secondItem="ycn-3R-A7g" secondAttribute="trailing" id="4pK-3v-I3h"/>
                                     <constraint firstAttribute="bottom" secondItem="ycn-3R-A7g" secondAttribute="bottom" id="CNQ-ta-VjC"/>
                                     <constraint firstAttribute="trailing" secondItem="sja-Ii-vIq" secondAttribute="trailing" id="MLx-zd-L2N"/>
+                                    <constraint firstItem="sja-Ii-vIq" firstAttribute="top" secondItem="7lw-Ew-2wL" secondAttribute="bottom" id="Tqi-nE-1sS"/>
                                     <constraint firstItem="7lw-Ew-2wL" firstAttribute="top" secondItem="0WE-o2-bsL" secondAttribute="top" id="l0n-6e-sXk"/>
                                     <constraint firstItem="sja-Ii-vIq" firstAttribute="leading" secondItem="0WE-o2-bsL" secondAttribute="leading" id="p4j-x2-pTF"/>
                                     <constraint firstItem="sja-Ii-vIq" firstAttribute="top" secondItem="7lw-Ew-2wL" secondAttribute="bottom" id="t6K-Mp-5aK"/>
@@ -1070,16 +1071,25 @@ Cg
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WzK-tX-ker" customClass="PairRechargeView" customModule="cybexMobile" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="512" width="320" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="XI9-ks-qLm"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qRg-Wa-ZSD" firstAttribute="trailing" secondItem="0WE-o2-bsL" secondAttribute="trailing" id="6Lw-gE-bfW"/>
                             <constraint firstItem="ycn-3R-A7g" firstAttribute="width" secondItem="2aP-Hv-3dh" secondAttribute="width" id="BkV-qS-xDg"/>
-                            <constraint firstItem="qRg-Wa-ZSD" firstAttribute="bottom" secondItem="0WE-o2-bsL" secondAttribute="bottom" id="MXp-lS-bl7"/>
                             <constraint firstAttribute="trailing" secondItem="sGL-Rt-Thy" secondAttribute="trailing" id="NMn-Nz-XQu"/>
+                            <constraint firstItem="WzK-tX-ker" firstAttribute="leading" secondItem="qRg-Wa-ZSD" secondAttribute="leading" id="RfL-Ug-rka"/>
                             <constraint firstItem="0WE-o2-bsL" firstAttribute="leading" secondItem="qRg-Wa-ZSD" secondAttribute="leading" id="VLW-kb-pes"/>
                             <constraint firstItem="0WE-o2-bsL" firstAttribute="top" secondItem="sGL-Rt-Thy" secondAttribute="bottom" id="cUw-pG-4ns"/>
+                            <constraint firstItem="WzK-tX-ker" firstAttribute="trailing" secondItem="qRg-Wa-ZSD" secondAttribute="trailing" id="h2b-Ia-f9G"/>
                             <constraint firstItem="sGL-Rt-Thy" firstAttribute="top" secondItem="qRg-Wa-ZSD" secondAttribute="top" id="lCp-9m-qvU"/>
+                            <constraint firstItem="WzK-tX-ker" firstAttribute="bottom" secondItem="qRg-Wa-ZSD" secondAttribute="bottom" id="lzv-ZE-Uoq"/>
+                            <constraint firstItem="WzK-tX-ker" firstAttribute="top" secondItem="0WE-o2-bsL" secondAttribute="bottom" id="ps2-Sr-eyA"/>
                             <constraint firstItem="sGL-Rt-Thy" firstAttribute="leading" secondItem="2aP-Hv-3dh" secondAttribute="leading" id="zsR-Bh-XQU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qRg-Wa-ZSD"/>
@@ -1102,12 +1112,14 @@ Cg
                         <outlet property="pageContentViewHeight" destination="Atp-l9-2xI" id="y1s-YT-TMU"/>
                         <outlet property="pageTitleView" destination="sja-Ii-vIq" id="ZcO-YG-BPR"/>
                         <outlet property="pairListView" destination="EWv-Bu-lgd" id="alj-I2-lZV"/>
+                        <outlet property="rechargeHeight" destination="XI9-ks-qLm" id="PCc-jd-1l1"/>
+                        <outlet property="rechargeView" destination="WzK-tX-ker" id="55e-RF-Rcu"/>
                         <outlet property="scrollView" destination="0WE-o2-bsL" id="rvD-AB-uTx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0N-o0-wYd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1442" y="-182"/>
+            <point key="canvasLocation" x="795" y="-295"/>
         </scene>
     </scenes>
     <resources>

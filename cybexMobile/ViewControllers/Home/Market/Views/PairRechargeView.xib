@@ -10,22 +10,54 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PairRechargeView" customModule="cybexMobile" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PairRechargeView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="buy" destination="VT9-lp-7hb" id="7LZ-YT-TXD"/>
+                <outlet property="sell" destination="5Cr-Cd-h1o" id="sKT-wo-dI7"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VT9-lp-7hb" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
+                    <rect key="frame" x="13" y="6" width="169" height="88"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="trade_buy"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isEnable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Cr-Cd-h1o" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
+                    <rect key="frame" x="193" y="6" width="169" height="88"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="trade_sell"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isEnable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5Cr-Cd-h1o" secondAttribute="trailing" constant="13" id="31l-JI-LpL"/>
+                <constraint firstItem="5Cr-Cd-h1o" firstAttribute="leading" secondItem="VT9-lp-7hb" secondAttribute="trailing" constant="11" id="3xx-eS-uUv"/>
+                <constraint firstAttribute="bottom" secondItem="VT9-lp-7hb" secondAttribute="bottom" constant="6" id="9N7-71-8Rg"/>
+                <constraint firstItem="5Cr-Cd-h1o" firstAttribute="height" secondItem="VT9-lp-7hb" secondAttribute="height" id="FZb-mU-adh"/>
+                <constraint firstItem="5Cr-Cd-h1o" firstAttribute="width" secondItem="VT9-lp-7hb" secondAttribute="width" id="MbD-9W-1Rm"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="5Cr-Cd-h1o" secondAttribute="bottom" constant="6" id="PYA-fi-P16"/>
+                <constraint firstItem="VT9-lp-7hb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="cG1-x6-I8k"/>
+                <constraint firstItem="5Cr-Cd-h1o" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="6" id="ldc-FD-18k"/>
+                <constraint firstItem="VT9-lp-7hb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="6" id="pWY-8Z-NRD"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                    <color key="value" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                    <color key="value" red="0.93700000000000006" green="0.94499999999999995" blue="0.95699999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="-201" y="42"/>
+            <point key="canvasLocation" x="-208.5" y="22"/>
         </view>
     </objects>
-    <resources>
-    </resources>
 </document>

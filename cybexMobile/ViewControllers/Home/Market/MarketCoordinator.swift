@@ -21,6 +21,7 @@ protocol MarketStateManagerProtocol {
   
   func setupChildViewControllers(_ pair:Pair) -> [BaseViewController]
   func refreshChildViewController(_ vcs:[BaseViewController], pair:Pair)
+  func openTradeViewChontroller(_ isBuy:Bool)
 }
 
 class MarketCoordinator: HomeRootCoordinator {
@@ -74,5 +75,14 @@ extension MarketCoordinator: MarketStateManagerProtocol {
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
+  
+  func openTradeViewChontroller(_ isBuy:Bool){
+    self.rootVC.tabBarController?.selectedIndex = 1
+    self.rootVC.popToRootViewController(animated: false)
     
+    if let baseNavi = self.rootVC.tabBarController?.viewControllers![1] as? BaseNavigationController,let vc = baseNavi.topViewController as? TradeViewController{
+      vc.selectedIndex = isBuy ? 0 : 1
+    }
+    self.rootVC.popToRootViewController(animated: false)
+  }
 }

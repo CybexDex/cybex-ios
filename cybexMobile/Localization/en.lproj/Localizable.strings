@@ -172,7 +172,7 @@
 
 "order_create_success" = "Place order successfully";
 "order_create_fail" = "Place order fail";
-<<<<<<< Updated upstream
+
 
 "utils_address"      = "Withdrawal Address:";
 "utils_amount"       = "Amount:";
@@ -207,6 +207,7 @@
 "my_history_time"           = "Time";
 "my_history_state"          = "Done";
 "my_history_title"          = "Order History";
+
 "cancel_create_success" = "Cancel order successfully";
 "cancel_create_fail" = "Cancel order fail";
 

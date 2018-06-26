@@ -34,6 +34,12 @@ class MarketViewController: BaseViewController {
   
   @IBOutlet var marketDetailView: PairDetailView!
   
+    @IBOutlet weak var rechargeView: PairRechargeView!
+  
+    @IBOutlet weak var rechargeHeight: NSLayoutConstraint!
+    
+    
+  var rechargeShowType = PairRechargeView.show_type.show.rawValue
   var currentBaseIndex: Int = 0
   var kLineSpecial = false
   var canExchange = false
@@ -86,7 +92,14 @@ class MarketViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.rechargeView.showType = self.rechargeShowType
+    if self.rechargeShowType == PairRechargeView.show_type.hidden.rawValue{
+        rechargeHeight.constant = 0
+    }else{
+        rechargeHeight.constant = 56
+    }
     setupNotificatin()
+    setupEvent()
     
     let quote_name = homeBucket.quote_info.symbol.filterJade
     let base_name = homeBucket.base_info.symbol.filterJade
@@ -117,6 +130,13 @@ class MarketViewController: BaseViewController {
       self.refreshDetailView()
     }
   }
+    
+    func setupEvent(){
+      self.rechargeView.buy.button.isUserInteractionEnabled = true
+      self.rechargeView.sell.button.isUserInteractionEnabled = true
+        self.rechargeView.buy.button.addTarget(self, action: #selector(buy), for: .touchUpInside)
+        self.rechargeView.sell.button.addTarget(self, action: #selector(sell), for: .touchUpInside)
+    }
   
   func setupPageView() {
     let style = DNSPageStyle()
@@ -331,4 +351,11 @@ extension MarketViewController {
       fetchKlineData()
     }
   }
+    
+    @objc func buy(){
+      self.coordinator?.openTradeViewChontroller(true)
+    }
+    @objc func sell(){
+      self.coordinator?.openTradeViewChontroller(false)
+    }
 }

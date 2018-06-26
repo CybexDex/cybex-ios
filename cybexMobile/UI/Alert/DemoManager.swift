@@ -143,6 +143,7 @@ class ShowManager {
     self.shadowView?.removeFromSuperview()
     self.showView = nil
     self.shadowView = nil
+    self.data = nil
   }
   
   func hide(_ time : TimeInterval){
@@ -153,6 +154,7 @@ class ShowManager {
       }) { (isFinished) in
         self.showView = nil
         self.shadowView = nil
+        self.data = nil
       }
     }else if animationShow == .fadeIn_Out {
       UIView.animate(withDuration: time, delay: 0.3, options: .curveLinear, animations: {
@@ -163,6 +165,7 @@ class ShowManager {
         self.shadowView?.removeFromSuperview()
         self.showView = nil
         self.shadowView = nil
+        self.data = nil
       }
     }else{
       a.constant = showType == .sheet_image ? -200 : -800
@@ -173,6 +176,7 @@ class ShowManager {
         self.shadowView?.removeFromSuperview()
         self.showView = nil
         self.shadowView = nil
+        self.data = nil
       }
     }
   }
