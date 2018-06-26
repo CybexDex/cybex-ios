@@ -67,14 +67,14 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
 
     guard let vc = R.storyboard.main.homeViewController(), let homeView = vc.view else { return }
 
-    vc.pair = tradeVC.pair
     vc.VC_TYPE = 2
     let coordinator = HomeCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator
     tradeVC.addChildViewController(vc)
 
     tradeVC.view.addSubview(homeView)
-    
+    vc.pair = tradeVC.pair
+
     homeVCTopConstaint = homeView.topToDevice(tradeVC, offset: -tradeVC.view.height, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
     homeView.leftToSuperview(nil, offset: 0, relation: .equal, priority: .required, isActive:true, usingSafeArea: true)
     homeView.rightToSuperview(nil, offset: 0, relation: .equal, priority: .required, isActive:true, usingSafeArea: true)

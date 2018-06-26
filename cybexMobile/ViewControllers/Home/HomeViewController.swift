@@ -22,7 +22,15 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
   
   var pair: Pair? {
     didSet{
-     
+      guard let pair = pair , let index = AssetConfiguration.market_base_assets.index(of: pair.base) else { return }
+      
+      if let selectedIndex = app_data.filterQuoteAsset(pair.base).index(where: { (bucket) -> Bool in
+        return bucket.quote == pair.quote
+      }) {
+        self.businessTitleView?.selectedIndex = selectedIndex
+        self.businessTitleView?.leftView.changeToHighStatus(1 + index, save:true)
+      }
+
     }
   }
   
