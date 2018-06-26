@@ -152,7 +152,10 @@ extension UserManager {
   }
   
   func unlock(_ username:String?, password:String, completion:@escaping (Bool, FullAccount?)->()) {
-    guard let name = username ?? self.name else { return }
+    guard let name = username ?? self.name else {
+      completion(false, nil)
+      return
+    }
     
     let keysString = BitShareCoordinator.getUserKeys(name, password: password)!
     if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key {
@@ -186,14 +189,18 @@ extension UserManager {
             self.keys = keys
             
             if let newAccount = self.account.value {
-              if let memoKey = keys.memo_key {
-                if newAccount.memo_key == memoKey.public_key {
+              if let memoKey = keys.memo_key, let ownKey = keys.owner_key, let activeKey = keys.active_key {
+                if [memoKey.public_key, ownKey.public_key, activeKey.public_key].contains(newAccount.memo_key) {
                   self.isWithDraw = true
                 }
               }
-              if let activeKey = self.keys?.active_key{
+              if let memoKey = keys.memo_key, let ownKey = keys.owner_key, let activeKey = keys.active_key{
                 if let activeKeys = newAccount.active_auths as? [String]{
-                  self.isTrade = activeKeys.contains(activeKey.public_key)
+                  for activekey in activeKeys{
+                    if [memoKey.public_key, ownKey.public_key, activeKey.public_key].contains(activekey){
+                      self.isTrade = true
+                    }
+                  }
                 }
               }
             }
@@ -203,13 +210,13 @@ extension UserManager {
             return
           }
         }
-        
         completion(false, nil)
       }
       WebsocketService.shared.send(request: request)
     }
-    
-    completion(false, nil)
+    else{
+      completion(false, nil)
+    }
     
   }
   

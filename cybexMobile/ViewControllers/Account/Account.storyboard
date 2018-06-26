@@ -709,7 +709,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yhZ-aN-stl">
                                                         <rect key="frame" x="0.0" y="323" width="349" height="159"/>
                                                         <subviews>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IZN-u4-HOI">
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" placeholderIntrinsicWidth="325" placeholderIntrinsicHeight="139" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZN-u4-HOI">
                                                                 <rect key="frame" x="12" y="12" width="325" height="139"/>
                                                                 <color key="tintColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
@@ -823,12 +823,13 @@
                         <outlet property="insideFee" destination="pKH-9I-fn3" id="PL6-wf-4Ps"/>
                         <outlet property="introduce" destination="IZN-u4-HOI" id="hye-Cf-Okp"/>
                         <outlet property="introduceView" destination="yhZ-aN-stl" id="fhJ-Qw-vxU"/>
+                        <outlet property="stackView" destination="pxQ-od-hXr" id="eLZ-VG-hKp"/>
                         <outlet property="withdraw" destination="hZu-rU-6n9" id="e89-j2-Icz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YEe-p4-UE3" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-663" y="-727"/>
+            <point key="canvasLocation" x="-974" y="-726"/>
         </scene>
         <!--Withdraw Detail View Controller-->
         <scene sceneID="Sob-I9-saU">
@@ -852,11 +853,14 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zph-4f-JMg">
-                                                <rect key="frame" x="146.5" y="193" width="82" height="95"/>
+                                                <rect key="frame" x="172.5" y="193" width="30" height="95"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                <state key="normal" title="保存二维码">
+                                                <state key="normal">
                                                     <color key="titleColor" red="0.93333333330000001" green="0.57254901960000004" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="locali" value="deposit_save"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="saveIcon:" destination="Ejl-ut-y0L" eventType="touchUpInside" id="hyz-F6-e8V"/>
                                                 </connections>
@@ -873,36 +877,42 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7ra-5B-LZc">
-                                                        <rect key="frame" x="15" y="65" width="24" height="24"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contentCopy" translatesAutoresizingMaskIntoConstraints="NO" id="7ra-5B-LZc">
+                                                        <rect key="frame" x="12" y="65" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="24" id="FdI-41-moK"/>
                                                             <constraint firstAttribute="height" constant="24" id="dyy-RP-1rA"/>
                                                         </constraints>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIN-Ho-XS7">
-                                                        <rect key="frame" x="49" y="61" width="66" height="32"/>
+                                                        <rect key="frame" x="46" y="61" width="30" height="32"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                        <state key="normal" title="复制地址">
+                                                        <state key="normal">
                                                             <color key="titleColor" red="0.93333333330000001" green="0.57254901960000004" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="locali" value="deposit_copy"/>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="copyAddress:" destination="Ejl-ut-y0L" eventType="touchUpInside" id="zQW-fe-gRs"/>
                                                         </connections>
                                                     </button>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Ip-qr-IFz">
-                                                        <rect key="frame" x="221" y="65" width="24" height="24"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icRefresh" translatesAutoresizingMaskIntoConstraints="NO" id="3Ip-qr-IFz">
+                                                        <rect key="frame" x="273" y="65" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="24" id="JaX-xL-4nH"/>
                                                             <constraint firstAttribute="height" constant="24" id="VmE-tQ-str"/>
                                                         </constraints>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJR-7t-sAb">
-                                                        <rect key="frame" x="255" y="61" width="82" height="32"/>
+                                                        <rect key="frame" x="307" y="61" width="30" height="32"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                        <state key="normal" title="生成新地址">
+                                                        <state key="normal">
                                                             <color key="titleColor" red="0.93333333330000001" green="0.57254901960000004" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="locali" value="deposti_get"/>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="resetAddress:" destination="Ejl-ut-y0L" eventType="touchUpInside" id="bX8-01-9BL"/>
                                                         </connections>
@@ -925,7 +935,7 @@
                                                     <constraint firstItem="7ra-5B-LZc" firstAttribute="top" secondItem="An7-Xr-keV" secondAttribute="bottom" constant="15" id="Maa-An-2tw"/>
                                                     <constraint firstAttribute="bottom" secondItem="7ra-5B-LZc" secondAttribute="bottom" constant="13" id="N1R-dp-hqV"/>
                                                     <constraint firstItem="3Ip-qr-IFz" firstAttribute="centerY" secondItem="7ra-5B-LZc" secondAttribute="centerY" id="Yfc-AY-AEj"/>
-                                                    <constraint firstItem="7ra-5B-LZc" firstAttribute="leading" secondItem="JPp-2e-IXs" secondAttribute="leading" constant="15" id="YuL-DS-9f0"/>
+                                                    <constraint firstItem="7ra-5B-LZc" firstAttribute="leading" secondItem="JPp-2e-IXs" secondAttribute="leading" constant="12" id="YuL-DS-9f0"/>
                                                     <constraint firstAttribute="trailing" secondItem="An7-Xr-keV" secondAttribute="trailing" constant="12" id="aCq-1K-uir"/>
                                                     <constraint firstItem="EB6-fA-rgg" firstAttribute="leading" secondItem="JPp-2e-IXs" secondAttribute="leading" constant="12" id="am0-N8-aYr"/>
                                                     <constraint firstItem="EB6-fA-rgg" firstAttribute="top" secondItem="An7-Xr-keV" secondAttribute="bottom" constant="52" id="eGE-gK-eVN"/>
@@ -994,19 +1004,23 @@
                     </view>
                     <connections>
                         <outlet property="address" destination="An7-Xr-keV" id="IWK-Fb-KLg"/>
+                        <outlet property="copyAddress" destination="eIN-Ho-XS7" id="Nyc-Gf-m7G"/>
                         <outlet property="icon" destination="kLL-NX-zF5" id="XId-MG-ALc"/>
                         <outlet property="introduce" destination="TlG-bg-Ir3" id="V2h-fn-4Co"/>
+                        <outlet property="resetAddress" destination="hJR-7t-sAb" id="5UO-oL-hUG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qkb-aA-893" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="862" y="-680"/>
+            <point key="canvasLocation" x="23" y="-739"/>
         </scene>
     </scenes>
     <resources>
         <image name="accountAvatar" width="56" height="56"/>
         <image name="account_bg_light" width="375" height="553"/>
         <image name="cloudWallet" width="24" height="24"/>
+        <image name="contentCopy" width="24" height="24"/>
         <image name="erro16Px" width="16" height="16"/>
+        <image name="icRefresh" width="24" height="24"/>
     </resources>
 </document>

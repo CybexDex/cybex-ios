@@ -14,11 +14,17 @@ protocol Views {
   var content : Any? {get set}
 }
 
+protocol ShowManagerDelegate {
+  func returnUserPassword(_ sender : String)
+  func returnEnsureAction()
+}
+
 class ShowManager {
   
-  static let duration : TimeInterval = 1.0
+  static let durationTime : TimeInterval = 1.0
   static let shared = ShowManager()
   
+  var delegate:ShowManagerDelegate?
   var a : Constraint!
   enum ShowManagerType : String{
     case alert
@@ -33,7 +39,7 @@ class ShowManager {
     case fadeIn_Out
   }
   
-  private var data : Any?{
+  var data : Any?{
     didSet{
       showView?.content = data
     }
@@ -95,14 +101,13 @@ class ShowManager {
     if animationShow == .none || animationShow == .fadeIn_Out{
       
       showView?.leftToSuperview(nil, offset: leading, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
-      
       showView?.rightToSuperview(nil, offset: trailing, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
       showView?.centerXToSuperview(nil, offset: 0, priority: .required, isActive: true, usingSafeArea: true)
       showView?.centerYToSuperview(nil, offset: -64, priority: .required, isActive: true, usingSafeArea: true)
       if animationShow == .fadeIn_Out{
         showView?.alpha   = 0.0
         shadowView?.alpha = 0.0
-        UIView.animate(withDuration: 2.0) {
+        UIView.animate(withDuration: ShowManager.durationTime) {
           self.showView?.alpha   = 1.0
           self.shadowView?.alpha = 0.5
         }
@@ -125,7 +130,7 @@ class ShowManager {
       }else{
         a?.constant = -64
       }
-      UIView.animate(withDuration: 1.5) {
+      UIView.animate(withDuration: ShowManager.durationTime) {
         self.superView?.layoutIfNeeded()
       }
     }
@@ -134,23 +139,18 @@ class ShowManager {
   // MARK: 隐藏
   // 动画效果。
   func hide(){
-    if animationShow == .none || animationShow == .fadeIn_Out{
-      if animationShow == .fadeIn_Out{
-        showView?.alpha   = 1.0
-        shadowView?.alpha = 0.0
-        UIView.animate(withDuration: 2.0) {
-          self.showView?.alpha   = 1.0
-          self.shadowView?.alpha = 0.5
-        }
-      }
-    }
+    self.showView?.removeFromSuperview()
+    self.shadowView?.removeFromSuperview()
   }
+  
   func hide(_ time : TimeInterval){
     if animationShow == .none{
       UIView.animate(withDuration: 0.1, delay: time, options: UIViewAnimationOptions.curveLinear, animations: {
         self.showView?.removeFromSuperview()
         self.shadowView?.removeFromSuperview()
       }) { (isFinished) in
+        self.showView = nil
+        self.shadowView = nil
       }
     }else if animationShow == .fadeIn_Out {
       UIView.animate(withDuration: 0.5, delay: time, options: UIViewAnimationOptions.curveLinear, animations: {
@@ -159,6 +159,8 @@ class ShowManager {
       }) { (isFinished) in
         self.showView?.removeFromSuperview()
         self.shadowView?.removeFromSuperview()
+        self.showView = nil
+        self.shadowView = nil
       }
     }else{
       a.constant = showType == .sheet_image ? -200 : -800
@@ -167,8 +169,9 @@ class ShowManager {
       }) { (isFinished) in
         self.showView?.removeFromSuperview()
         self.shadowView?.removeFromSuperview()
+        self.showView = nil
+        self.shadowView = nil
       }
-      
     }
   }
   
@@ -193,10 +196,9 @@ class ShowManager {
   }
   
   
-  // warning: 待完善
   func setUp(title:String,contentView:(UIView&Views),animationType:ShowAnimationType){
     self.animationShow  = animationType
-    
+    self.showType       = ShowManagerType.alert_image
     self.setupText(contentView,title: title)
   }
   
@@ -219,8 +221,22 @@ class ShowManager {
   }
   fileprivate func setupText(_ sender:(UIView&Views),title:String){
     let textView = CybexTextView(frame: .zero)
+    textView.delegate = self
     textView.middleView = sender
     textView.title.text = title
     showView     = textView
   }
 }
+
+extension ShowManager : CybexTextViewDelegate{
+  func returnPassword(_ password:String){
+    self.delegate?.returnUserPassword(password)    
+  }
+  func clickCancle(){
+    self.hide(0)
+  }
+  func returnEnsureAction(){
+    self.delegate?.returnEnsureAction()
+  }
+}
+

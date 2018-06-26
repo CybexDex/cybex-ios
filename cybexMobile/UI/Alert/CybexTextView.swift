@@ -10,10 +10,13 @@
 import UIKit
 import TinyConstraints
 
-
+protocol CybexTextViewDelegate {
+  func returnPassword(_ password:String)
+  func clickCancle()
+  func returnEnsureAction()
+}
 
 class CybexTextView: UIView {
-    
     var middleView : (UIView&Views)? {
         didSet{
             contentView.addSubview(middleView!)
@@ -23,7 +26,8 @@ class CybexTextView: UIView {
             middleView?.bottom(to:contentView,offset:0)
         }
     }
-    
+  var delegate : CybexTextViewDelegate?
+  
     var data : Any? {
         didSet{
             self.middleView?.content  = data
@@ -37,8 +41,15 @@ class CybexTextView: UIView {
     
     @IBOutlet weak var contentView: UIView!
     @IBAction func cancleClick(_ sender: Any) {
+      self.delegate?.clickCancle()
     }
+  
     @IBAction func ensureClick(_ sender: Any) {
+      if let tf = self.middleView as? CybexPasswordView{
+        self.delegate?.returnPassword(tf.textField.text!)
+      }else{
+        self.delegate?.returnEnsureAction()
+      }
     }
     
     

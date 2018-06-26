@@ -53,3 +53,23 @@ class RichStyle {
     Styles.register(StyleNames.password.rawValue, style: myGroup)
   }
 }
+
+class CommonStyles{
+  init() {
+    let base = Style{
+      $0.font = SystemFonts.PingFangSC_Regular.font(size: 14.0)
+    }
+    
+    let name = Style{
+      $0.font = SystemFonts.PingFangSC_Regular.font(size: 14.0)
+      $0.color = UIColor.init(red: 120 / 255.0, green: 129 / 255.0, blue: 154 / 255.0, alpha: 1.0)
+    }
+    
+    let content = Style{
+      $0.font = SystemFonts.PingFangSC_Medium.font(size: 14.0)
+      $0.color = UIColor.white
+    }
+    let myGroup = StyleGroup(base: base, ["name":name,"content":content])
+    StylesManager.shared.register("alertContent", style: myGroup)
+  }
+}

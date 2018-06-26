@@ -156,5 +156,19 @@
 "withdraw"                = "WITHDRAW";
 
 "withdraw_miss_authority" = "Missing authority\nfor withdrawal";
+"withdraw_unlock_wallet"  = "Unlock Wallet";
+
+"deposit_save"     = "Save QR Code";
+"deposit_copy"     = "Copy Address";
+"deposti_get"      = "Get New Address";
+
+"alert_cancle"     = "CANCLE";
+"alert_ensure"      = "CONFIRM";
+
+"withdraw_success"  = "Withdrawal request has been sent";
+"recharge_copy"     = "Copied";
+"recharge_save"     = "Saved";
+"recharge_retry"    = "Please retry 5 minutes later";
+
 
 

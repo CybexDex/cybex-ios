@@ -149,7 +149,17 @@
 "recharge_selectCoin"     = "选择币种";
 "withdraw"                = "提现";
 "withdraw_miss_authority" = "您没有提现权限";
+"withdraw_unlock_wallet"  = "解锁钱包";
+
+"deposit_save"     = "保存二维码";
+"deposit_copy"     = "复制地址";
+"deposti_get"      = "生成新地址";
+
+"alert_cancle"     = "取消";
+"alert_ensure"      = "确认";
 
 
-
-
+"withdraw_success"  = "提现申请成功";
+"recharge_copy"     = "已复制地址";
+"recharge_save"     = "已保存二维码";
+"recharge_retry"    = "请在5分钟后重新生成";

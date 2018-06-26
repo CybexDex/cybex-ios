@@ -19,6 +19,10 @@ func RechargeDetailPropertyReducer(_ state: RechargeDetailPropertyState?, action
     switch action {
     case let action as FetchWithdrawInfo:
       state.data.accept(action.data)
+    case let action as FetchWithdrawMemokey:
+      state.memo_key.accept(action.data)
+    case let action as FetchGatewayFee:
+      state.gatewayFee.accept(action.data)
     default:
         break
     }

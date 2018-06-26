@@ -61,9 +61,7 @@ class Button:UIView {
     }
   }
   
- 
-  
-  
+   
   fileprivate func setup() {
     gradientLayer.frame = self.bounds
     self.button.isUserInteractionEnabled = true

@@ -17,7 +17,21 @@ class Fee: Mappable {
   }
   func mapping(map: Map) {
     asset_id    <- map["asset_id"]
-    amount      <- map["amount"]
+    amount      <- (map["amount"],ToStringTransform())
+  }
+}
+
+
+
+class Current : Mappable{
+  var head_block_id : String = ""
+  var last_irreversible_block_num : String = ""
+  required init?(map: Map) {
+    
+  }
+  func mapping(map: Map) {
+    head_block_id               <- map["head_block_id"]
+    last_irreversible_block_num <- (map["last_irreversible_block_num"],ToStringTransform())
   }
 }
 
