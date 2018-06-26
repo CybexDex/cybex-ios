@@ -205,6 +205,21 @@ extension Double {
     return String(format: "%.\(digits)f", self)
   }
   
+  func tradePrice() -> (price:String, pricision:Int) {
+    var pricision = 0
+    if self < 0.0001 {
+      pricision = 8
+    }
+    else if self < 1 {
+      pricision = 6
+    }
+    else {
+      pricision = 4
+    }
+    
+    return (self.string(digits: pricision), pricision)
+  }
+  
   func formatCurrency(digitNum: Int ,usesGroupingSeparator:Bool = true) -> String {
     let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
       return formatter.maximumFractionDigits == digitNum && formatter.usesGroupingSeparator == usesGroupingSeparator
@@ -259,11 +274,26 @@ extension String {
   var filterJade:String {
     return self.replacingOccurrences(of: "JADE.", with: "")
   }
-
-//  var filterZone:String{
-//    return self == "0" ? "--" : self
-//  }
   
+  var getID:Int32 {
+    if self == "" {
+      return 0
+    }
+    
+    if let id = self.components(separatedBy: ".").last {
+      return Int32(id)!
+    }
+    
+    return 0
+  }
+
+  var tradePrice:(price:String, pricision:Int) {//0.0001  1   8 6 4
+    if let oldPrice = self.toDouble() {
+      return oldPrice.tradePrice()
+    }
+    
+    return (self, 0)
+  }
   
   public func toDouble() -> Double? {
     if self == "" {

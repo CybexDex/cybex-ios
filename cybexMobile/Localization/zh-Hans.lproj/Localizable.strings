@@ -163,3 +163,6 @@
 "recharge_copy"     = "已复制地址";
 "recharge_save"     = "已保存二维码";
 "recharge_retry"    = "请在5分钟后重新生成";
+
+"order_create_success" = "挂单成功";
+"order_create_fail" = "挂单失败";

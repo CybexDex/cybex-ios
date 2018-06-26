@@ -9,6 +9,29 @@
 import Foundation
 import Localize_Swift
 
+func getChainId(callback:@escaping(String)->()){
+  let requeset = GetChainIDRequest { (id) in
+    if let id = id as? String{
+      callback(id)
+    }else{
+      callback("")
+    }
+  }
+  WebsocketService.shared.send(request: requeset)
+}
+
+typealias BlockChainParamsType = (chain_id:String, block_id:String, block_num:Int32)
+func blockchainParams(callback: @escaping(BlockChainParamsType)->()) {
+  getChainId { (chainID) in
+    let requeset = GetObjectsRequest(ids: [objectID.dynamic_global_property_object.rawValue]) { (infos) in
+      if let infos = infos as? (block_id:String,block_num:String) {
+        callback((chain_id: chainID, block_id: infos.block_id, block_num: Int32(infos.block_num)!))
+      }
+    }
+    WebsocketService.shared.send(request: requeset)
+  }
+}
+
 func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTypesOperations = .limit_order_create, completion:@escaping (_ success:Bool, _ amount:Double, _ assetID:String)->()) {
   let request = GetRequiredFees(response: { (data) in
     if let fees = data as? [Fee], let cyb_amount = fees.first?.amount.toDouble() {

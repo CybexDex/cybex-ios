@@ -34,8 +34,7 @@ struct changePriceAction:Action {
 }
 
 struct adjustPriceAction:Action {
-  var gap: Double
-  var precision:Int
+  var plus: Bool
 }
 
 struct feeFetchedAction:Action {
@@ -50,7 +49,6 @@ struct BalanceFetchedAction:Action {
 
 struct switchPercentAction:Action {
   var amount:Double
-  var precision:Int
 }
 
 struct resetTrade:Action {
