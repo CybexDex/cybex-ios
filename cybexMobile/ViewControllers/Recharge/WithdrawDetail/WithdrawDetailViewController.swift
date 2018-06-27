@@ -35,28 +35,25 @@ class WithdrawDetailViewController: BaseViewController {
   }
   
   func setupUI(){
-    if UIScreen.main.bounds.width == 320 {
-        resetAddress.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
-        copyAddress.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
+    if let name = app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade{
+      self.title = name + R.string.localizable.recharge_title.key.localized()
+      self.coordinator?.fetchDepositMessage(callback: { (message) in
+        if message.count > 0 {
+          self.introduce.attributedText = message.replacingOccurrences(of: "$asset", with: name).set(style: StyleNames.introduce_normal.rawValue)
+        }
+      })
     }
-    self.coordinator?.fetchDepositMessage(callback: { (message) in
-      if message.count > 0 {
-        self.introduce.text = message
-      }
-    })
+    if UIScreen.main.bounds.width == 320 {
+      resetAddress.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
+      copyAddress.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
+    }
     
     if self.trade?.enable == false{
-      let name = app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade
-      var message = ""
-      if Localize.currentLanguage() == "en"{
-        message = "Unable to deposit \(String(describing: name)) for a short time, please retry later"
-      }else{
-        message = "\(String(describing: name))暂停充值"
+      if let errorMsg = Localize.currentLanguage() == "en" ? self.trade?.enMsg : self.trade?.cnMsg {
+        ShowManager.shared.setUp(title_image: R.image.erro16Px.name, message: errorMsg, animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.alert_image)
+        ShowManager.shared.showAnimationInView(self.view)
+        ShowManager.shared.hide(2)
       }
-      
-      ShowManager.shared.setUp(title_image: R.image.erro16Px.name, message: message, animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.sheet_image)
-      ShowManager.shared.showAnimationInView(self.view)
-      ShowManager.shared.hide(2)
     }else{
       if let balance = self.trade?.id, let name = app_data.assetInfo[balance]?.symbol.filterJade{
         startLoading()
@@ -66,6 +63,9 @@ class WithdrawDetailViewController: BaseViewController {
   }
   
   @IBAction func saveIcon(_ sender: Any) {
+    if self.trade?.enable == false{
+      return
+    }
     if (self.address.text?.count)! <= 0 {
       return
     }
@@ -89,6 +89,9 @@ class WithdrawDetailViewController: BaseViewController {
   }
   
   @IBAction func copyAddress(_ sender: Any) {
+    if self.trade?.enable == false{
+      return
+    }
     let board = UIPasteboard.general
     board.string = address.text
     
@@ -98,6 +101,9 @@ class WithdrawDetailViewController: BaseViewController {
   }
   
   @IBAction func resetAddress(_ sender: Any) {
+    if self.trade?.enable == false{
+      return
+    }
     if self.isFetching {
       return
     }

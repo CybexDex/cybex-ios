@@ -35,3 +35,15 @@ class Current : Mappable{
   }
 }
 
+struct Trade{
+  var id : String = ""
+  var enable : Bool = true
+  var enMsg : String = ""
+  var cnMsg : String = ""
+}
+
+struct TradeMsg{
+  var enMsg : String = ""
+  var cnMsg : String = ""
+}
+

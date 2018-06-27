@@ -186,6 +186,7 @@
 
 "recharge_title"  = " Deposit";
 "recharge_min"    = "Min ";
+"withdraw_title"  = " Withdraw";
 
 "recharge_invalid_password" = "Invalid password";
 "recharge_withdraw_success" = "Withdrawal application successful";

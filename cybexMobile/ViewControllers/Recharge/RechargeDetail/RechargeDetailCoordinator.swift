@@ -8,6 +8,8 @@
 
 import UIKit
 import ReSwift
+import Localize_Swift
+
 
 protocol RechargeDetailCoordinatorProtocol {
 }
@@ -166,7 +168,11 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
       let message = try? await(SimpleHTTPService.fetchWithdrawJsonInfo())
       main {
         if let message = message{
-          callback(message)
+          if Localize.currentLanguage() == "en" {
+            callback(message.enMsg)
+          }else{
+            callback(message.cnMsg)
+          }
         }else{
           callback("")
         }

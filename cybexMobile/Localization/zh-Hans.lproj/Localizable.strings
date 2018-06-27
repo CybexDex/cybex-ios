@@ -176,6 +176,8 @@
 
 "recharge_title"  = "提现";
 "recharge_min"    = " 最小提现数量 ";
+"withdraw_title"  = "充值";
+
 
 "recharge_invalid_password" = "解锁失败，请重新输入密码";
 "recharge_withdraw_success" = "提现申请成功";

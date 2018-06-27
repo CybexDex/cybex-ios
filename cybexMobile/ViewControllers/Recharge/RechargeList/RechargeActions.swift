@@ -30,11 +30,7 @@ struct FecthWithdrawIds : Action {
 struct FecthDepositIds : Action{
   let data : [Trade]
 }
-struct Trade{
-  var id : String = ""
-  var enable : Bool = true
-  var message : String = ""
-}
+
 
 
 //MARK: - Action Creator

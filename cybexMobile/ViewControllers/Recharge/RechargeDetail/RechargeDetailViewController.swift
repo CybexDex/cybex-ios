@@ -57,6 +57,7 @@ class RechargeDetailViewController: BaseViewController {
       if let balances = UserManager.shared.balances.value{
         for balance in balances{
           if balance.asset_type == trade?.id{
+            
             self.balance = balance
           }
         }
@@ -69,7 +70,7 @@ class RechargeDetailViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.title = (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)! + R.string.localizable.recharge_title.key.localized()
+    self.title = (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)! + R.string.localizable.withdraw_title.key.localized()
     setupUI()
     checkState()
     setupEvent()
@@ -77,9 +78,13 @@ class RechargeDetailViewController: BaseViewController {
   }
   
   func setupUI(){
-    self.coordinator?.fetchWithDrawMessage(callback: { (message) in
-      self.introduce.text = message
-    })
+    if let name = app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade{
+      self.coordinator?.fetchWithDrawMessage(callback: { (message) in
+
+        self.introduce.attributedText = message.replacingOccurrences(of: "$asset", with: name).set(style: StyleNames.introduce_normal.rawValue)
+      })
+    }
+   
     amountView.content.keyboardType = .decimalPad
     addressView.btn.isHidden        = true
     amountView.btn.setTitle(R.string.localizable.openedAll.key.localized(), for: .normal)
@@ -95,7 +100,6 @@ class RechargeDetailViewController: BaseViewController {
     amountView.btn.addTarget(self, action: #selector(addAllAmount), for: .touchUpInside)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    
   }
   
   func checkState(){
@@ -224,7 +228,7 @@ class RechargeDetailViewController: BaseViewController {
       if let fee = fee, let asset = app_data.assetInfo[self.feeAssetId]{
         let feeAmount = getRealAmount(fee.asset_id, amount: fee.amount)
         if AssetConfiguration.CYB == self.feeAssetId {
-          // 当前CYB作为手续费base
+          // 当前CYB作为手续费币种
           if let balances = UserManager.shared.balances.value {
             for balance in balances{
               
@@ -241,7 +245,7 @@ class RechargeDetailViewController: BaseViewController {
             }
           }
         }else{
-          // 当前提现的币作为手续费base
+          // 当前提现的币作为手续费币种
           if let balance = self.balance{
             let availableAmount = getRealAmount(balance.asset_type, amount: balance.balance)
             if let withdrawAmount = self.amountView.content.text?.toDouble(){
@@ -274,6 +278,9 @@ class RechargeDetailViewController: BaseViewController {
 
 extension RechargeDetailViewController{
   func changeWithdrawState(){
+    if self.trade?.enable == false{
+      return
+    }
     if UserManager.shared.isLocked{
       print("解锁失败")
       self.showPassWord()
@@ -349,7 +356,6 @@ extension RechargeDetailViewController{
   
   
   @objc func withDrawAction(){
-    let _ = CommonStyles.init()
     let subView = StyleContentView(frame: .zero)
     ShowManager.shared.setUp(title: "CONFIERMATION", contentView: subView, animationType: .up_down)
     ShowManager.shared.showAnimationInView(self.view)
@@ -370,7 +376,6 @@ extension RechargeDetailViewController : ShowManagerDelegate{
           self.checkIsAuthory()
         }
       }else{
-        
         ShowManager.shared.data = R.string.localizable.recharge_invalid_password.key.localized()
       }
     })

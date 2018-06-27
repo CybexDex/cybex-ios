@@ -137,12 +137,11 @@ extension RechargeViewController:UITableViewDataSource,UITableViewDelegate{
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch selectedIndex.rawValue {
     case 0:
-      if let data = self.coordinator?.state.property.depositIds.value {
+      if let data = self.depositData {
         self.coordinator?.openWithDrawDetail(data[indexPath.row])
-
       }
     case 1:
-      if let data = self.coordinator?.state.property.withdrawIds.value {
+      if let data = self.withdrawData {
         self.coordinator?.openRechargeDetail(data[indexPath.row])
       }
     default:
