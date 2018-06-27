@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CybexAlertView" customModule="Demo" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CybexAlertView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
                 <outlet property="message" destination="cc6-lT-oGc" id="QG9-hZ-iol"/>
                 <outlet property="title" destination="y5P-8B-UsB" id="16A-QZ-VBf"/>
@@ -58,7 +58,6 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.12941176470588234" green="0.16078431372549018" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="cc6-lT-oGc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1nA-gG-8wY"/>
                 <constraint firstItem="Bgb-oT-fwz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="K5C-Th-LZF"/>
@@ -69,7 +68,17 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                    <color key="value" name="darkFour" red="0.129" green="0.161" blue="0.224" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                    <color key="value" name="darkTwo80" red="0.106" green="0.133" blue="0.188" alpha="0.800" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="-48" y="-126"/>
         </view>
     </objects>
+    <resources>
+    </resources>
 </document>

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import TinyConstraints
+import SwiftTheme
 
 protocol Views {
   var content : Any? {get set}
@@ -58,7 +59,7 @@ class ShowManager {
       if self.showType == ShowManagerType.sheet_image{
         self.shadowView?.backgroundColor = UIColor.black.withAlphaComponent(0.0)
       }else{
-        self.shadowView?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        self.shadowView?.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black.withAlphaComponent(0.5) : UIColor.black.withAlphaComponent(0.0)
       }
       superView?.addSubview(self.shadowView!)
     }
