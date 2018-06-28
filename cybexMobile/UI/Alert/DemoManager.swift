@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import TinyConstraints
+import SwiftTheme
 
 protocol Views {
   var content : Any? {get set}
@@ -58,7 +59,7 @@ class ShowManager {
       if self.showType == ShowManagerType.sheet_image{
         self.shadowView?.backgroundColor = UIColor.black.withAlphaComponent(0.0)
       }else{
-        self.shadowView?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        self.shadowView?.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black.withAlphaComponent(0.5) : UIColor.black.withAlphaComponent(0.0)
       }
       superView?.addSubview(self.shadowView!)
     }
@@ -126,7 +127,7 @@ class ShowManager {
       }
       self.superView?.layoutIfNeeded()
       if showType == .sheet_image{
-        a?.constant = 0
+        a?.constant = 20
       }else{
         a?.constant = -64
       }
@@ -148,7 +149,7 @@ class ShowManager {
   
   func hide(_ time : TimeInterval){
     if animationShow == .none{
-      UIView.animate(withDuration: time, delay: 0.3, options: .curveLinear, animations: {
+      UIView.animate(withDuration: ShowManager.durationTime, delay: time, options: .curveLinear, animations: {
         self.showView?.removeFromSuperview()
         self.shadowView?.removeFromSuperview()
       }) { (isFinished) in
@@ -157,7 +158,7 @@ class ShowManager {
         self.data = nil
       }
     }else if animationShow == .fadeIn_Out {
-      UIView.animate(withDuration: time, delay: 0.3, options: .curveLinear, animations: {
+      UIView.animate(withDuration: ShowManager.durationTime, delay: time, options: .curveLinear, animations: {
         self.showView?.alpha   = 0.0
         self.shadowView?.alpha = 0.0
       }) { (isFinished) in
@@ -169,7 +170,7 @@ class ShowManager {
       }
     }else{
       a.constant = showType == .sheet_image ? -200 : -800
-      UIView.animate(withDuration: time, delay: 0.3, options: .curveLinear, animations: {
+      UIView.animate(withDuration: ShowManager.durationTime, delay: time, options: .curveLinear, animations: {
         self.superView?.layoutIfNeeded()
       }) { (isFinished) in
         self.showView?.removeFromSuperview()

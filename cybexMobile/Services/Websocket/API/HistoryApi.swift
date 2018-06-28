@@ -27,7 +27,6 @@ struct AssetPairQueryParams {
 struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
   var accountID:String
   var response:RPCSResponse
-  
   var method: String {
     return "call"
   }
@@ -41,7 +40,8 @@ struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
       var fillOrders: [FillOrder] = []
       
       for i in response {
-        if let op = i["op"] as? [Any], let opcode = op[0] as? Int, opcode == ChainTypesOperations.fill_order.rawValue, let operation = op[1] as? [String: Any] {
+        if let op = i["op"] as? [Any], let opcode = op[0] as? Int, opcode == ChainTypesOperations.fill_order.rawValue, var operation = op[1] as? [String: Any],let blockNum = i["block_num"] {
+          operation["block_num"] = blockNum
           if let fillorder = FillOrder(JSON: operation) {
             fillOrders.append(fillorder)
           }

@@ -22,7 +22,6 @@ class StyleContentView: UIView ,Views{
         }
     }
     
-
     var data : [NSAttributedString]? {
         didSet{
             setupUI()

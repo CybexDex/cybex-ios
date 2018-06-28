@@ -21,7 +21,7 @@ class MyHistoryViewController: BaseViewController {
       
     }
   }
-  var data : [FillOrder]?
+  var data : [(FillOrder,String)]?
   
   @IBOutlet weak var tableView: UITableView!
   
@@ -61,9 +61,12 @@ class MyHistoryViewController: BaseViewController {
       .throttle(10, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { [weak self](account) in
         guard let `self` = self else{ return }
-        self.data = self.coordinator?.filterFillOrder(self.pair!)
-        if self.isVisible {
-          self.tableView.reloadData()
+        
+        if let data = UserManager.shared.fillOrder.value{
+          self.data = data
+          if self.isVisible{
+            self.tableView.reloadData()
+          }
         }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
@@ -86,7 +89,9 @@ extension MyHistoryViewController : UITableViewDelegate,UITableViewDataSource{
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: define.sectionHeaderHeight))
-    lockupAssetsSectionView.cybPriceTitle.locali = R.string.localizable.cyb_value.key.localized()
+    
+    lockupAssetsSectionView.totalTitle.locali = R.string.localizable.order_history_first_title.key.localized()
+    lockupAssetsSectionView.cybPriceTitle.locali = R.string.localizable.order_history_second_title.key.localized()
     return lockupAssetsSectionView
   }
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TradeItemView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
                 <outlet property="amount" destination="F0x-7j-rFn" id="P9d-Wq-sHC"/>
+                <outlet property="arrow" destination="3qT-6y-hMu" id="iqj-hr-aXz"/>
                 <outlet property="icon" destination="0rB-Yz-ELJ" id="j7s-oV-nU7"/>
                 <outlet property="name" destination="D0o-7C-xUH" id="EaI-Zk-JCu"/>
             </connections>

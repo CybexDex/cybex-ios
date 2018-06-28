@@ -8,6 +8,8 @@
 
 import UIKit
 import Kingfisher
+import Localize_Swift
+import SwiftTheme
 
 class TradeItemView: UIView {
   var data : Any? {
@@ -23,12 +25,9 @@ class TradeItemView: UIView {
               return
             }
           }
+          amount.text = "-"
         }
       }
-//        let info = app_data.assetInfo[data]
-//        self.icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + data.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
-//        name.text = info?.symbol.filterJade
-//        amount.text = "-"
       }
     }
   
@@ -36,8 +35,11 @@ class TradeItemView: UIView {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var amount: UILabel!
   
-  fileprivate func setup() {
-    
+    @IBOutlet weak var arrow: UIImageView!
+    fileprivate func setup() {
+        
+      self.arrow.image = ThemeManager.currentThemeIndex == 0 ? R.image.icArrowLight24Px() : R.image.icArrowDark24Px()
+        
   }
   
   override var intrinsicContentSize: CGSize {

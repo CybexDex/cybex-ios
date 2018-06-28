@@ -41,6 +41,7 @@ class FillOrder:Mappable, NSCopying {
   var pays: Asset = Asset(JSON: [:])!
   var receives: Asset = Asset(JSON: [:])!
   var is_maker:Int = 0 //0 1
+  var block_num : Int = 0
   
   required init?(map: Map) {
   }
@@ -51,6 +52,7 @@ class FillOrder:Mappable, NSCopying {
     pays                   <- map["pays"]
     receives                   <- map["receives"]
     is_maker                   <- map["is_maker"]
+    block_num                   <- map["block_num"]
   }
   
   func copy(with zone: NSZone? = nil) -> Any {

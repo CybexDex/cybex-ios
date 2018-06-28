@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import Localize_Swift
 
 protocol WithdrawDetailCoordinatorProtocol {
   func fetchDepositAddress(_ asset_name:String)
@@ -69,7 +70,11 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
       let message = try? await(SimpleHTTPService.fetchDesipotInfoJsonInfo())
       main {
         if let message = message{
-          callback(message)
+          if Localize.currentLanguage() == "en" {
+            callback(message.enMsg)
+          }else{
+            callback(message.cnMsg)
+          }
         }else{
           callback("")
         }

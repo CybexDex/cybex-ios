@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftTheme
+
 enum Recharge_Type:Int{
   case none = 0
   case clean
@@ -42,6 +44,7 @@ class RechargeItemView: UIView {
     }
   }
   
+  
   var btn_type : Recharge_Type? {
     didSet{
       switch btn_type! {
@@ -60,7 +63,7 @@ class RechargeItemView: UIView {
  
   
   func setupUI(){
-    
+    self.content.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
   }
   
   fileprivate func updateHeight(){
@@ -88,16 +91,19 @@ class RechargeItemView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     loadFromXIB()
+    setupUI()
   }
   
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     loadFromXIB()
+    setupUI()
   }
   
   override func awakeFromNib() {
-    
+    super.awakeFromNib()
+    setupUI()
   }
   
   func loadFromXIB(){

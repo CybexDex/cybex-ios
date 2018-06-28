@@ -15,7 +15,7 @@ class MyHistoryCellView: UIView {
     @IBOutlet weak var base: UILabel!
     
   @IBOutlet weak var kindL: UILabel!
-  @IBOutlet weak var price: UILabel!
+    @IBOutlet weak var orderAmount: UILabel!
   @IBOutlet weak var amount: UILabel!
   @IBOutlet weak var time: UILabel!
   @IBOutlet weak var orderPrice: UILabel!
@@ -24,32 +24,45 @@ class MyHistoryCellView: UIView {
     
   var data : Any? {
     didSet{
-      if let fillOrder = data as? FillOrder {
+      if let fillOrder = data as? (FillOrder,time:String) {
         updateUI(fillOrder)
       }
     }
   }
   
-  func updateUI(_ order: FillOrder) {
-    if let quoteInfo = app_data.assetInfo[order.fill_price.quote.assetID], let baseInfo = app_data.assetInfo[order.fill_price.base.assetID] {
-      if order.pays.assetID == order.fill_price.quote.assetID{
-        self.asset.text = quoteInfo.symbol.filterJade
-        self.base.text  = "/" + baseInfo.symbol.filterJade
-        self.kindL.text               = "BUY"
-        self.typeView.backgroundColor = .turtleGreen
-        self.amount.text = getRealAmount(order.receives.assetID, amount: order.receives.amount).stringValue + baseInfo.symbol.filterJade
-        self.price.text = getRealAmount(order.pays.assetID, amount: order.pays.amount).stringValue +
-          quoteInfo.symbol.filterJade
-      }else{
-        self.asset.text = baseInfo.symbol.filterJade
-        self.base.text  = "/" + quoteInfo.symbol.filterJade
+  func updateUI(_ orderInfo: (FillOrder,time:String)) {
+    let order = orderInfo.0
+    if let quoteInfo = app_data.assetInfo[order.fill_price.quote.assetID], let baseInfo = app_data.assetInfo[order.fill_price.base.assetID],let payInfo = app_data.assetInfo[order.pays.assetID] ,let receiveInfo = app_data.assetInfo[order.receives.assetID]{
+      let result = calculateAssetRelation(assetID_A_name: baseInfo.symbol.filterJade, assetID_B_name: quoteInfo.symbol.filterJade)
+      if result.base == baseInfo.symbol.filterJade && result.quote == quoteInfo.symbol.filterJade{
+        // SEll
+        // pay -> quote   receive -> base
+        self.asset.text = result.quote
+        self.base.text  = "/" + result.base
         self.kindL.text = "SELL"
         self.typeView.backgroundColor = .reddish
-        self.amount.text = getRealAmount(order.pays.assetID, amount: order.pays.amount).stringValue + baseInfo.symbol.filterJade
-        self.price.text = getRealAmount(order.receives.assetID, amount: order.receives.amount).stringValue + quoteInfo.symbol.filterJade
-      }
+        self.amount.text = String(getRealAmount(payInfo.id, amount: order.pays.amount)).formatCurrency(digitNum: payInfo.precision) + " " + result.quote
+        self.orderAmount.text = String(getRealAmount(receiveInfo.id, amount: order.receives.amount)).formatCurrency(digitNum: receiveInfo.precision) + " " +  result.base
+        self.orderPrice.text = String(getRealAmount(receiveInfo.id, amount: order.receives.amount) / getRealAmount(payInfo.id, amount: order.pays.amount)).formatCurrency(digitNum: 8) + " " + result.base
+      }else{
+        // BUY   pay -> base receive -> quote
+        self.kindL.text               = "BUY"
+        self.asset.text = result.quote
+        self.base.text  = "/" + result.base
+        self.typeView.backgroundColor = .turtleGreen
+        self.amount.text = String(getRealAmount(receiveInfo.id, amount:order.receives.amount)).formatCurrency(digitNum: receiveInfo.precision) + " " + result.quote
+        self.orderAmount.text = String(getRealAmount(payInfo.id, amount: order.pays.amount)).formatCurrency(digitNum: payInfo.precision) + " " + result.base
         
-        self.orderPrice.text = self.price.text
+        self.orderPrice.text = String(getRealAmount(payInfo.id, amount: order.pays.amount) / getRealAmount(receiveInfo.id, amount:order.receives.amount)).formatCurrency(digitNum: 8) + " " + result.base
+      }
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+      
+      let date = dateFormatter.date(from: orderInfo.time.replacingOccurrences(of: "T", with: " "))
+      dateFormatter.dateFormat = "MM/dd HH:mm:ss"
+      if let date = date{
+        self.time.text = dateFormatter.string(from: date)
+      }
     }
   }
   

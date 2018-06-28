@@ -56,7 +56,6 @@ class BaseNavigationController: UINavigationController {
     if self.viewControllers.count != 0 {
       viewController.hidesBottomBarWhenPushed = true
       super.pushViewController(viewController, animated: true)
-      viewController.hidesBottomBarWhenPushed = false
     }
     else {
       super.pushViewController(viewController, animated: true)

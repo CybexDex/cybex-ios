@@ -32,11 +32,8 @@ class OpenedOrdersView:  UIView{
     didSet {
       if let order = data as? LimitOrder {
         if self.basePriceView.isHidden == false{
-        
-          
           self.basePrice.text = "--"
         }
-        
         
         if order.isBuy {
           self.orderType.opened_status = 0

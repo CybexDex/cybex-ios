@@ -81,7 +81,7 @@ extension MyOpenedOrdersView : UITableViewDelegate,UITableViewDataSource{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     guard let pair = data as? Pair else { return 0 }
     let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
-      return limitorder.sellPrice.base.assetID == pair.base && limitorder.sellPrice.quote.assetID == pair.quote
+      return (limitorder.sellPrice.base.assetID == pair.base && limitorder.sellPrice.quote.assetID == pair.quote) || (limitorder.sellPrice.base.assetID == pair.quote && limitorder.sellPrice.quote.assetID == pair.base)
     }) ?? []
     return orderes.count
   }
@@ -92,7 +92,7 @@ extension MyOpenedOrdersView : UITableViewDelegate,UITableViewDataSource{
     
     guard let pair = data as? Pair else { return cell }
     let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
-      return limitorder.sellPrice.base.assetID == pair.base && limitorder.sellPrice.quote.assetID == pair.quote
+      return (limitorder.sellPrice.base.assetID == pair.base && limitorder.sellPrice.quote.assetID == pair.quote) || (limitorder.sellPrice.base.assetID == pair.quote && limitorder.sellPrice.quote.assetID == pair.base)
     }) ?? []
     cell.setup(orderes[indexPath.row], indexPath: indexPath)
     return cell

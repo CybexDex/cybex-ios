@@ -591,7 +591,6 @@
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YCH-bx-Cnz" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="349" height="80"/>
-                                                        <color key="backgroundColor" red="0.1058823529" green="0.1333333333" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="80" id="rQy-0S-i0L"/>
                                                         </constraints>
@@ -600,6 +599,12 @@
                                                                 <integer key="value" value="0"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_available"/>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                                <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T6i-Rm-ECC">
@@ -617,6 +622,12 @@
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_address"/>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="输入或长按粘贴地址"/>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="textplaceholder" value="withdraw_address_placehold"/>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qr6-Fm-73f" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
@@ -627,6 +638,12 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_amount"/>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="最小提现数量"/>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                         </subviews>
@@ -686,8 +703,16 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- CYB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVv-Pa-xFA">
                                                                 <rect key="frame" x="291.5" y="21" width="45.5" height="17"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUL-tK-nBd">
                                                                 <rect key="frame" x="12" y="40" width="0.0" height="22"/>
@@ -704,11 +729,18 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- CYB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKH-9I-fn3">
                                                                 <rect key="frame" x="291.5" y="43" width="45.5" height="17"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.090196078430000007" green="0.1137254902" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="tVv-Pa-xFA" secondAttribute="trailing" constant="12" id="FAI-nb-HyQ"/>
                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Trw-Mn-1OM" secondAttribute="trailing" constant="20" symbolic="YES" id="ImL-qL-IbV"/>
@@ -724,6 +756,14 @@
                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JUL-tK-nBd" secondAttribute="trailing" constant="20" symbolic="YES" id="tde-dO-51U"/>
                                                             <constraint firstItem="JUL-tK-nBd" firstAttribute="leading" secondItem="DlJ-rS-N18" secondAttribute="leading" constant="12" id="wu6-Iz-Gsm"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                                <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                                <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yhZ-aN-stl">
                                                         <rect key="frame" x="0.0" y="323" width="349" height="159"/>
@@ -734,21 +774,25 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="139" id="la3-vD-CNx"/>
                                                                 </constraints>
-                                                                <string key="text">您将提出您的ETH到外部账号中。
-瑶池（Jadepool)作为Cybex推荐的网关将为您提供这一服务您将提出您的ETH到外部账号中。瑶池（Jadepool)作为Cybex推荐的网关将为您提供这一服务您将提出您的ETH到外部账号中。
-瑶池（Jadepool)作为Cybex推荐的网关将为您提供这一服务您将提出您的ETH到外部账号中。</string>
                                                                 <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             </textView>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.1058823529" green="0.1333333333" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstItem="IZN-u4-HOI" firstAttribute="top" secondItem="yhZ-aN-stl" secondAttribute="top" constant="12" id="1Uy-OJ-NLy"/>
                                                             <constraint firstAttribute="trailing" secondItem="IZN-u4-HOI" secondAttribute="trailing" constant="12" id="E0o-MP-f0I"/>
                                                             <constraint firstItem="IZN-u4-HOI" firstAttribute="leading" secondItem="yhZ-aN-stl" secondAttribute="leading" constant="12" id="ew4-Zv-hzG"/>
                                                             <constraint firstAttribute="bottom" secondItem="IZN-u4-HOI" secondAttribute="bottom" constant="8" id="m1p-4l-rcZ"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                                <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GYE-17-xCM">
                                                         <rect key="frame" x="0.0" y="492" width="349" height="129"/>
@@ -767,6 +811,14 @@
                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                                                        <color key="value" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZu-rU-6n9" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="54" width="349" height="48"/>
@@ -872,7 +924,7 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zph-4f-JMg">
-                                                <rect key="frame" x="172.5" y="193" width="30" height="95"/>
+                                                <rect key="frame" x="172.5" y="193" width="30" height="203"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <state key="normal">
                                                     <color key="titleColor" red="0.93333333330000001" green="0.57254901960000004" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -885,7 +937,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPp-2e-IXs">
-                                                <rect key="frame" x="13" y="312" width="349" height="102"/>
+                                                <rect key="frame" x="13" y="420" width="349" height="102"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="An7-Xr-keV">
                                                         <rect key="frame" x="12" y="0.0" width="325" height="50"/>
@@ -893,8 +945,16 @@
                                                             <constraint firstAttribute="height" constant="50" id="qFb-mh-nox"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                                                <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contentCopy" translatesAutoresizingMaskIntoConstraints="NO" id="7ra-5B-LZc">
                                                         <rect key="frame" x="12" y="65" width="24" height="24"/>
@@ -944,7 +1004,6 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.1058823529" green="0.1333333333" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="hJR-7t-sAb" secondAttribute="trailing" constant="12" id="04r-d0-fyI"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eIN-Ho-XS7" secondAttribute="trailing" constant="20" symbolic="YES" id="0Kv-6h-O5d"/>
@@ -963,18 +1022,20 @@
                                                     <constraint firstItem="eIN-Ho-XS7" firstAttribute="centerY" secondItem="7ra-5B-LZc" secondAttribute="centerY" id="pHK-4Z-kVm"/>
                                                     <constraint firstItem="hJR-7t-sAb" firstAttribute="leading" secondItem="3Ip-qr-IFz" secondAttribute="trailing" constant="10" id="pJT-mc-vS7"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtl-n3-2TX">
-                                                <rect key="frame" x="13" y="438" width="349" height="132"/>
+                                                <rect key="frame" x="13" y="546" width="349" height="24"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TlG-bg-Ir3">
-                                                        <rect key="frame" x="12" y="12" width="325" height="108"/>
-                                                        <string key="text">您可以快速方便的充入资金到您的Cybex账号haiyan-79中。
-瑶池（Jadepool）作为Cybex推荐的网关将为您提供这一服务 
-同一账户同一资产充值地址需间隔五分钟才可重新生成 
-*  所有出入金到账需要一定时限，请耐心等待 
-*  您当前所获取的资产地址用于充入ETH，请勿充入其他资产，否则可能无法到账且不可找回
-</string>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TlG-bg-Ir3">
+                                                        <rect key="frame" x="12" y="12" width="325" height="0.0"/>
                                                         <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="12"/>
                                                         <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>

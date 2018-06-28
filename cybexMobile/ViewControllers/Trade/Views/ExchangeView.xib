@@ -58,7 +58,6 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="UFu-mK-bwg" firstAttribute="leading" secondItem="WR4-bl-i3D" secondAttribute="leading" constant="12" id="3i2-Pw-e6p"/>
                                         <constraint firstItem="98b-Pj-ayW" firstAttribute="centerY" secondItem="UFu-mK-bwg" secondAttribute="centerY" id="7Bb-gL-pm4"/>

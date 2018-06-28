@@ -21,10 +21,17 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fjy-RN-PdR">
                                 <rect key="frame" x="0.0" y="20" width="375" height="32"/>
-                                <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="GYZ-NL-AEN"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                        <color key="value" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                        <color key="value" name="paleGrey" red="0.969" green="0.973" blue="0.980" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9h5-WD-fuk">
                                 <rect key="frame" x="0.0" y="52" width="375" height="615"/>
@@ -171,7 +178,6 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="LzQ-E4-6tc" firstAttribute="trailing" secondItem="Vql-A1-MsW" secondAttribute="trailing" id="0cZ-2n-Fgb"/>
                             <constraint firstItem="Vql-A1-MsW" firstAttribute="top" secondItem="LzQ-E4-6tc" secondAttribute="top" id="FiN-a7-TwU"/>
@@ -229,7 +235,6 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cT2-x0-GAk" firstAttribute="bottom" secondItem="3E9-A5-7fR" secondAttribute="bottom" id="kZq-Uv-hNi"/>
                             <constraint firstItem="3E9-A5-7fR" firstAttribute="leading" secondItem="cT2-x0-GAk" secondAttribute="leading" id="oeZ-Bn-bQh"/>
@@ -247,4 +252,6 @@
             <point key="canvasLocation" x="-81" y="302"/>
         </scene>
     </scenes>
+    <resources>
+    </resources>
 </document>

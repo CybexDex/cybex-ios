@@ -34,6 +34,7 @@ class RichStyle {
     
     
     passwordStyle()
+    alertDetailStyle()
   }
   
   
@@ -52,10 +53,8 @@ class RichStyle {
     let myGroup = StyleGroup(base: normal, ["password": password])
     Styles.register(StyleNames.password.rawValue, style: myGroup)
   }
-}
-
-class CommonStyles{
-  init() {
+  
+  func alertDetailStyle(){
     let base = Style{
       $0.font = SystemFonts.PingFangSC_Regular.font(size: 14.0)
     }
@@ -73,3 +72,6 @@ class CommonStyles{
     StylesManager.shared.register("alertContent", style: myGroup)
   }
 }
+
+
+
