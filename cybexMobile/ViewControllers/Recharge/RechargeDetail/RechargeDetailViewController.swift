@@ -151,7 +151,7 @@ class RechargeDetailViewController: BaseViewController {
       guard let `self` = self else {return}
       if let amount = self.amountView.content.text?.toDouble(),amount > 0{
         if let balance = self.balance{
-          let avaliable = getRealAmount(balance.asset_type, amount: balance.balance)
+          let avaliable = getRealAmount(balance.asset_type, amount: balance.balance).doubleValue
           if let data = self.coordinator?.state.property.data.value{
             if amount < data.minValue{
               self.isAvalibaleAmount  = false
@@ -222,14 +222,14 @@ class RechargeDetailViewController: BaseViewController {
       guard let `self` = self else{ return }
       
       if let fee = fee, let asset = app_data.assetInfo[self.feeAssetId]{
-        let feeAmount = getRealAmount(fee.asset_id, amount: fee.amount)
+        let feeAmount = getRealAmount(fee.asset_id, amount: fee.amount).doubleValue
         if AssetConfiguration.CYB == self.feeAssetId {
           // 当前CYB作为手续费base
           if let balances = UserManager.shared.balances.value {
             for balance in balances{
               
               if balance.asset_type == AssetConfiguration.CYB{
-                let cybAmount = getRealAmount(balance.asset_type, amount: balance.balance)
+                let cybAmount = getRealAmount(balance.asset_type, amount: balance.balance).doubleValue
                 if feeAmount <= cybAmount{
                   self.gateAwayFee.text = String(describing:feeAmount).formatCurrency(digitNum: asset.precision) + " " + asset.symbol.filterJade
                 }else{
@@ -243,7 +243,7 @@ class RechargeDetailViewController: BaseViewController {
         }else{
           // 当前提现的币作为手续费base
           if let balance = self.balance{
-            let availableAmount = getRealAmount(balance.asset_type, amount: balance.balance)
+            let availableAmount = getRealAmount(balance.asset_type, amount: balance.balance).doubleValue
             if let withdrawAmount = self.amountView.content.text?.toDouble(){
               if availableAmount < feeAmount + withdrawAmount{
                 self.isAvalibaleAmount = false

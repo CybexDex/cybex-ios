@@ -35,7 +35,7 @@ class WithdrawDetailCoordinator: AccountRootCoordinator {
 
 extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
   func fetchDepositAddress(_ asset_name:String){
-    if let name = UserManager.shared.name {
+    if let name = UserManager.shared.name.value {
       async {
         let data = try? await(GraphQLManager.shared.getDepositAddress(accountName: name,assetName: asset_name))
         if case let data?? = data {
@@ -50,7 +50,7 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
   }
   
   func resetDepositAddress(_ asset_name:String){
-    if let name = UserManager.shared.name {
+    if let name = UserManager.shared.name.value {
       async {
         let data = try? await(GraphQLManager.shared.updateDepositAddress(accountName: name, assetName: asset_name))
         if case let data?? = data {

@@ -32,7 +32,7 @@ func blockchainParams(callback: @escaping(BlockChainParamsType)->()) {
   }
 }
 
-func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTypesOperations = .limit_order_create, completion:@escaping (_ success:Bool, _ amount:Double, _ assetID:String)->()) {
+func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTypesOperations = .limit_order_create, completion:@escaping (_ success:Bool, _ amount:Decimal, _ assetID:String)->()) {
   let request = GetRequiredFees(response: { (data) in
     if let fees = data as? [Fee], let cyb_amount = fees.first?.amount.toDouble() {
       
@@ -41,6 +41,7 @@ func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTy
       }).first {
         if cyb.balance.toDouble()! >= cyb_amount {
           let amount = getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string)
+          
           completion(true, amount, AssetConfiguration.CYB)
         }
         else {
@@ -51,10 +52,12 @@ func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTy
               }).first {
                 if base.balance.toDouble()! >= base_amount {
                   let amount = getRealAmount(focus_asset_id, amount: base_amount.string)
+                  
                   completion(true, amount, focus_asset_id)
                 }
                 else {//余额不足
-                  completion(false, 0, "")
+                  completion(true, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
+
                 }
               }
               else {
@@ -283,12 +286,30 @@ func getCachedBucket(_ homebucket:HomeBucket) -> BucketMatrix {
 }
 
 
-func getRealAmount(_ id : String ,amount : String) -> Double{
+func getRealAmount(_ id : String ,amount : String) -> Decimal {
   guard let asset = app_data.assetInfo[id] else {
     return 0
   }
-  return amount.toDouble()! / pow(10, asset.precision.double)
   
+  let precisionNumber = pow(10, asset.precision)
+
+  if let amountDecimal = Decimal(string: amount) {
+    return amountDecimal / precisionNumber
+  }
+
+  return 0
+}
+
+func getRealAmountDouble(_ id : String ,amount : String) -> Double {
+  guard let asset = app_data.assetInfo[id] else {
+    return 0
+  }
+  
+  if let d = Double(amount) {
+    return d / pow(10, asset.precision.double)
+  }
+  
+  return 0
 }
 
 func saveImageToPhotos(){

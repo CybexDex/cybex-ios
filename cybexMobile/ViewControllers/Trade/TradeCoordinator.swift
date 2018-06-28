@@ -65,9 +65,10 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
   func addHomeVC() {
     guard let tradeVC = self.rootVC.topViewController as? TradeViewController else { return }
 
-    guard let vc = R.storyboard.main.homeViewController(), let homeView = vc.view else { return }
-
+    guard let vc = R.storyboard.main.homeViewController() else { return }
     vc.VC_TYPE = 2
+    
+    guard let homeView = vc.view else { return }
     let coordinator = HomeCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator
     tradeVC.addChildViewController(vc)

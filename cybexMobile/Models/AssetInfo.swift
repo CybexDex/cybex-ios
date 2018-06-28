@@ -75,9 +75,13 @@ class Price : Mappable {
     let quote_info = quote.info()
     
     let price_ratio =  Double(base.amount)! / Double(quote.amount)!
-    let precision_ratio = pow(10, base_info.precision.double) / pow(10, quote_info.precision.double)
     
-    return price_ratio / precision_ratio
+    let baseNumber = NSDecimalNumber(floatLiteral: pow(10, base_info.precision.double))
+    let quoteNumber = NSDecimalNumber(floatLiteral: pow(10, quote_info.precision.double))
+
+    let precision_ratio = baseNumber.dividing(by: quoteNumber).stringValue
+    
+    return price_ratio / precision_ratio.toDouble()!
   }
   
 }

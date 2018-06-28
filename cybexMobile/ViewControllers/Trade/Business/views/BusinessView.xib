@@ -50,7 +50,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="269" height="48"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="yes" keyboardType="decimalPad"/>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thr-s4-oCV">
                             <rect key="frame" x="269" y="0.0" width="1" height="48"/>
@@ -122,7 +122,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="303" height="48"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="yes" keyboardType="decimalPad"/>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ais-aX-aR9">
                             <rect key="frame" x="303" y="0.0" width="1" height="48"/>

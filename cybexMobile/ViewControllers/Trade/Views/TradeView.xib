@@ -65,13 +65,13 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lmY-Wb-6Ba">
                     <rect key="frame" x="0.0" y="39" width="200" height="130"/>
                     <subviews>
-                        <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xww-Cv-Pcu" customClass="TradeLineView" customModule="cybexMobile" customModuleProvider="target">
+                        <view tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xww-Cv-Pcu" customClass="TradeLineView" customModule="cybexMobile" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="200" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="26" id="jH1-OC-1I4"/>
                             </constraints>
                         </view>
-                        <view tag="7" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQk-HF-1pO" customClass="TradeLineView" customModule="cybexMobile" customModuleProvider="target">
+                        <view tag="9" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQk-HF-1pO" customClass="TradeLineView" customModule="cybexMobile" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="26" width="200" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="26" id="xVB-Rh-6v6"/>
@@ -83,13 +83,13 @@
                                 <constraint firstAttribute="height" constant="26" id="p7n-CV-iun"/>
                             </constraints>
                         </view>
-                        <view tag="9" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="axg-Bc-Y6y" customClass="TradeLineView" customModule="cybexMobile" customModuleProvider="target">
+                        <view tag="7" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="axg-Bc-Y6y" customClass="TradeLineView" customModule="cybexMobile" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="78" width="200" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="26" id="i4x-gx-Pa1"/>
                             </constraints>
                         </view>
-                        <view tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8GU-R5-Cjp" customClass="TradeLineView" customModule="cybexMobile" customModuleProvider="target">
+                        <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8GU-R5-Cjp" customClass="TradeLineView" customModule="cybexMobile" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="104" width="200" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="26" id="yfz-aL-orC"/>

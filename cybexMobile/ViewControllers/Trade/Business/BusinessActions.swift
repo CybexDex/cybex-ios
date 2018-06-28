@@ -23,10 +23,10 @@ struct BusinessPropertyState {
   var price:BehaviorRelay<String> = BehaviorRelay(value: "")
   var amount:BehaviorRelay<String> = BehaviorRelay(value: "")
 
-  var fee_amount:BehaviorRelay<Double> = BehaviorRelay(value: 0)
+  var fee_amount:BehaviorRelay<Decimal> = BehaviorRelay(value: Decimal(floatLiteral: 0))
   var feeID:BehaviorRelay<String> = BehaviorRelay(value: "")
   
-  var balance:BehaviorRelay<Double> = BehaviorRelay(value: 0)
+  var balance:BehaviorRelay<Decimal> = BehaviorRelay(value: Decimal(floatLiteral: 0))
 }
 
 struct changePriceAction:Action {
@@ -39,16 +39,16 @@ struct adjustPriceAction:Action {
 
 struct feeFetchedAction:Action {
   var success: Bool
-  var amount:Double
+  var amount:Decimal
   var assetID:String
 }
 
 struct BalanceFetchedAction:Action {
-  var amount:Double
+  var amount:Decimal
 }
 
 struct switchPercentAction:Action {
-  var amount:Double
+  var amount:Decimal
 }
 
 struct resetTrade:Action {

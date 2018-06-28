@@ -15,18 +15,8 @@ class BusinessViewController: BaseViewController {
   var pair: Pair? {
     didSet{
       self.coordinator?.resetState()
-      guard let base_info = app_data.assetInfo[pair!.base], let quote_info = app_data.assetInfo[pair!.quote] else { return }
-      self.coordinator?.getFee(self.type == .buy ? base_info.id : quote_info.id)
 
-      self.containerView.quoteName.text = quote_info.symbol.filterJade
-      
-      self.coordinator?.getBalance((self.type == .buy ? base_info.id : quote_info.id))
-      
-      self.containerView.button.locali = self.type == .buy ? R.string.localizable.openedBuy.key.localized() : R.string.localizable.openedSell.key.localized()
-      if let title = self.containerView.button.button.titleLabel?.text {
-        self.containerView.button.locali = "\(title) \(quote_info.symbol.filterJade)"
-
-      }
+      refreshView()
     }
   }
   
@@ -45,6 +35,52 @@ class BusinessViewController: BaseViewController {
   
   func setupUI(){
     containerView.button.gradientLayer.colors = type == .buy ? [UIColor.paleOliveGreen.cgColor,UIColor.apple.cgColor] : [UIColor.pastelRed.cgColor,UIColor.reddish.cgColor]
+  }
+  
+  func refreshView() {
+    guard let pair = pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
+
+    self.containerView.quoteName.text = quote_info.symbol.filterJade
+    
+    self.coordinator?.getFee(self.type == .buy ? base_info.id : quote_info.id)
+    self.coordinator?.getBalance((self.type == .buy ? base_info.id : quote_info.id))
+    
+    changeButtonState()
+  }
+  
+  func checkBalance() {
+    guard let pair = self.pair else {
+      self.containerView.tipView.isHidden = true
+
+      return
+    }
+    
+    guard let canPost = self.coordinator?.checkBalance(pair, isBuy: self.type == .buy) else {
+      self.containerView.tipView.isHidden = true
+      return
+    }
+    
+    if !canPost {
+      self.containerView.tipView.isHidden = false
+      return
+    }
+    else {
+      self.containerView.tipView.isHidden = true
+    }
+  }
+  
+  func changeButtonState() {
+    if UserManager.shared.isLoginIn {
+      guard let pair = pair, let quote_info = app_data.assetInfo[pair.quote] else { return }
+      
+      self.containerView.button.locali = self.type == .buy ? R.string.localizable.openedBuy.key.localized() : R.string.localizable.openedSell.key.localized()
+      if let title = self.containerView.button.button.titleLabel?.text {
+        self.containerView.button.locali = "\(title) \(quote_info.symbol.filterJade)"
+      }
+    }
+    else {
+      self.containerView.button.locali = R.string.localizable.login.key.localized()
+    }
   }
   
   func showEnterPassword(){
@@ -78,12 +114,12 @@ class BusinessViewController: BaseViewController {
     self.coordinator!.state.property.price.subscribe(onNext: {[weak self] (text) in
       guard let `self` = self else { return }
       
-      self.containerView.tipView.isHidden = true
-      guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0 else {
+      self.checkBalance()
+      guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0, text.components(separatedBy: ".").count <= 2 && text != "." else {
         self.containerView.value.text = "≈¥"
         return
       }
-      
+
       self.containerView.value.text = "≈¥" + String(describing: changeToETHAndCYB(base_info.id).eth.toDouble()! * text.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
       
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -92,7 +128,7 @@ class BusinessViewController: BaseViewController {
     self.coordinator!.state.property.amount.subscribe(onNext: {[weak self] (text) in
       guard let `self` = self else { return }
       
-      self.containerView.tipView.isHidden = true
+      self.checkBalance()
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
 //precision
@@ -116,6 +152,15 @@ class BusinessViewController: BaseViewController {
       self.containerView.amountTextfield.text = text.tradePrice.price
     }
    
+    UserManager.shared.balances.asObservable().subscribe(onNext: {[weak self] (balances) in
+      guard let `self` = self else { return }
+
+      guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
+
+      self.coordinator?.getBalance((self.type == .buy ? base_info.id : quote_info.id))
+      self.coordinator?.getFee(self.type == .buy ? base_info.id : quote_info.id)
+
+    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
 //balance
     self.coordinator?.state.property.balance.asObservable().subscribe(onNext: {[weak self] (balance) in
@@ -129,7 +174,7 @@ class BusinessViewController: BaseViewController {
       
       let info = self.type == .buy ? base_info : quote_info
       let symbol = info.symbol.filterJade
-      let realAmount = balance.string(digits: info.precision)
+      let realAmount = balance.doubleValue.string(digits: info.precision)
       
       self.containerView.balance.text = "\(realAmount) \(symbol)"
       
@@ -143,7 +188,8 @@ class BusinessViewController: BaseViewController {
         self.containerView.fee.text = "--"
         return
       }
-      self.containerView.fee.text = "\(fee_amount) \(info.symbol.filterJade)"
+      
+      self.containerView.fee.text = fee_amount.doubleValue.string(digits: info.precision) + " \(info.symbol.filterJade)"
 
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
@@ -168,6 +214,15 @@ class BusinessViewController: BaseViewController {
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
     
+    UserManager.shared.name.subscribe(onNext: { (name) in
+      self.changeButtonState()
+
+      guard let _ = name else {
+        self.coordinator?.resetState()
+        return
+      }
+      
+    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
 }
 
@@ -180,6 +235,10 @@ extension BusinessViewController : TradePair {
       self.pair = newValue
     }
   }
+  
+  func refresh() {
+    refreshView()
+  }
 }
 
 extension BusinessViewController {
@@ -191,19 +250,12 @@ extension BusinessViewController {
   }
   
   @objc func buttonDidClicked(_ data: [String: Any]) {
-    guard let pair = self.pair else { return }
-
-    guard let canPost = self.coordinator?.checkBalance(pair, isBuy: self.type == .buy) else {
+    if !UserManager.shared.isLoginIn {
+      app_coodinator.showLogin()
       return
     }
     
-    if !canPost {
-      self.containerView.tipView.isHidden = false
-      return
-    }
-    else {
-      self.containerView.tipView.isHidden = true
-    }
+    checkBalance()
     
     if UserManager.shared.isLocked {
       showEnterPassword()
@@ -221,6 +273,9 @@ extension BusinessViewController {
       guard let `self` = self else { return }
       
       self.endLoading()
+      if success {
+        self.coordinator?.resetState()
+      }
       ShowManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: success ? R.string.localizable.order_create_success() : R.string.localizable.order_create_fail(), animationType: .up_down, showType: .alert_image)
       ShowManager.shared.showAnimationInView(self.view)
       ShowManager.shared.hide(2)
@@ -238,7 +293,7 @@ extension BusinessViewController : ShowManagerDelegate{
   }
   
   func returnUserPassword(_ sender : String){
-    if let name = UserManager.shared.name {
+    if let name = UserManager.shared.name.value {
       UserManager.shared.unlock(name, password: sender) { (success, _) in
         if success {
           ShowManager.shared.hide()

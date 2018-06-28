@@ -141,7 +141,7 @@ extension OpenedOrdersViewController : ShowManagerDelegate{
   }
   
   func returnUserPassword(_ sender : String){
-    if let name = UserManager.shared.name {
+    if let name = UserManager.shared.name.value {
       UserManager.shared.unlock(name, password: sender) { (success, _) in
         if success {
           ShowManager.shared.hide()

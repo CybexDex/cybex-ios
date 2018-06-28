@@ -79,26 +79,32 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
     let fee_id = self.state.property.feeID.value
 
     if let price = self.state.property.price.value.toDouble(), price != 0, fee_amount != 0, balance != 0 {
-      var amount:Double = 0
+      var amount:Decimal = Decimal(floatLiteral: 0)
 
+      let priceDecimal = Decimal(string: self.state.property.price.value)!
+      let percentDecimal = Decimal(floatLiteral: percent)
+      
       if isBuy {
         if fee_id == assetID {
-          amount = (balance - fee_amount) * percent / price
+          amount = (balance - fee_amount) * percentDecimal / priceDecimal
         }
         else {
-          amount = balance * percent / price
+          amount = balance * percentDecimal / priceDecimal
         }
       }
       else {
         if fee_id == assetID {
-          amount = balance * percent
+          amount = (balance - fee_amount) * percentDecimal
         }
         else {
-          amount = (balance - fee_amount) * percent
+          amount = balance * percentDecimal
         }
       }
       
-      self.store.dispatch(switchPercentAction(amount: amount))
+      if amount > Decimal(floatLiteral: 0) {
+        self.store.dispatch(switchPercentAction(amount: amount))
+      }
+      
     }
   }
   
@@ -125,7 +131,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
     let receive_assetID = isBuy ? quote_info.id : base_info.id
     let receive_amount = isBuy ? Int32(cur_amount * pow(10, quote_info.precision.double)) : Int32(total * pow(10, base_info.precision.double))
     
-    let fee_amount = Int32(self.state.property.fee_amount.value * pow(10, fee_info.precision.double))
+    let fee_amount = Int32(self.state.property.fee_amount.value.doubleValue * pow(10, fee_info.precision.double))
 
     blockchainParams { (blockchain_params) in
       if let jsonStr = BitShareCoordinator.getLimitOrder(blockchain_params.block_num, block_id: blockchain_params.block_id, expiration: Date().timeIntervalSince1970 + 10 * 3600, chain_id: blockchain_params.chain_id, user_id: userid.getID, order_expiration: Date().timeIntervalSince1970 + 3600 * 24 * 365, asset_id: assetID.getID, amount: amount, receive_asset_id: receive_assetID.getID, receive_amount: receive_amount, fee_id: self.state.property.feeID.value.getID, fee_amount: fee_amount) {
@@ -148,13 +154,15 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
   func checkBalance(_ pair:Pair, isBuy:Bool) -> Bool? {
     guard let base_info = app_data.assetInfo[pair.base],  self.state.property.fee_amount.value != 0, let cur_amount = self.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.state.property.price.value.toDouble(), price != 0, self.state.property.balance.value != 0 else { return nil }
     
-    var total:Double = 0
+    var total:Decimal = Decimal(floatLiteral: 0)
+    let priceDecimal = Decimal(string: self.state.property.price.value)!
+    let amountDecimal = Decimal(string: self.state.property.amount.value)!
     
     if self.state.property.feeID.value == base_info.id {
-      total = price * cur_amount + self.state.property.fee_amount.value
+      total = priceDecimal * amountDecimal + self.state.property.fee_amount.value
     }
     else {
-      total = price * cur_amount
+      total = priceDecimal * amountDecimal
     }
     
     if self.state.property.balance.value >= total {

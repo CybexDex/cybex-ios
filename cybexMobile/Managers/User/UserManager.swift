@@ -59,9 +59,10 @@ extension UserManager {
     self.unlock(username, password: password) {[weak self] (locked, data) in
       guard let `self` = self else { return }
       if locked {
-        self.name = username
-        self.avatarString = self.name?.sha256()
         self.saveName(username)
+        self.avatarString = username.sha256()
+
+        self.name.accept(username)
         self.handlerFullAcount(data!)
       }
       
@@ -78,9 +79,11 @@ extension UserManager {
         
         let data = try! await(SimpleHTTPService.requestRegister(params))
         if data.0 {
-          self.name = username
-          self.avatarString = username.sha256()
           self.saveName(username)
+          self.avatarString = username.sha256()
+
+          self.name.accept(username)
+       
           
           self.keys = keys
           self.fetchAccountInfo()
@@ -96,7 +99,7 @@ extension UserManager {
     BitShareCoordinator.cancelUserKey()
     
     UserDefaults.standard.remove("com.nbltrust.cybex.username")
-    self.name = nil
+    self.name.accept(nil)
     self.avatarString = nil
     self.keys = nil
     self.account.accept(nil)
@@ -110,7 +113,7 @@ extension UserManager {
       return
     }
     
-    if let username = self.name {
+    if let username = self.name.value {
       let request = GetFullAccountsRequest(name: username) { response in
         if let data = response as? FullAccount{
           if !self.isLoginIn {
@@ -152,7 +155,7 @@ extension UserManager {
   }
   
   func unlock(_ username:String?, password:String, completion:@escaping (Bool, FullAccount?)->()) {
-    guard let name = username ?? self.name else {
+    guard let name = username ?? self.name.value else {
       completion(false, nil)
       return
     }
@@ -257,8 +260,11 @@ class UserManager {
   
   var isLoginIn : Bool {
     if let name = UserDefaults.standard.object(forKey: "com.nbltrust.cybex.username") as? String {
-      self.name = name
-      self.avatarString = name.sha256()
+      if self.name.value == nil {
+        self.name.accept(name)
+        self.avatarString = name.sha256()
+      }
+
       return true
     }
     return false
@@ -270,7 +276,7 @@ class UserManager {
   
   var isWithDraw : Bool = false
   var isTrade : Bool = false
-  var name : String?
+  var name : BehaviorRelay<String?> = BehaviorRelay(value: nil)
   var keys:AccountKeys?
   var avatarString:String?
   var account:BehaviorRelay<Account?> = BehaviorRelay(value: nil)
@@ -295,7 +301,7 @@ class UserManager {
     if let balances = balances.value {
       for balance_value in balances{
         if let eth_cyb = changeToETHAndCYB(balance_value.asset_type).cyb.toDouble() {
-          balance_values += getRealAmount(balance_value.asset_type,amount: balance_value.balance) * eth_cyb
+          balance_values += getRealAmount(balance_value.asset_type,amount: balance_value.balance).doubleValue * eth_cyb
         }
       }
     }
@@ -310,7 +316,7 @@ class UserManager {
         
         if isBuy {
           if let eth_cyb = changeToETHAndCYB(limitOrder_value.sellPrice.base.assetID).cyb.toDouble() {
-            let buy_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale) * eth_cyb
+            let buy_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale).doubleValue * eth_cyb
             _limitOrderValue += buy_value
             _limitOrder_buy_value += buy_value
             balance_values += buy_value
@@ -318,7 +324,7 @@ class UserManager {
         }
         else{
           if let eth_cyb = changeToETHAndCYB(limitOrder_value.sellPrice.base.assetID).cyb.toDouble() {
-            let sell_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale) * eth_cyb
+            let sell_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale).doubleValue * eth_cyb
             _limitOrderValue += sell_value
             balance_values += sell_value
           }

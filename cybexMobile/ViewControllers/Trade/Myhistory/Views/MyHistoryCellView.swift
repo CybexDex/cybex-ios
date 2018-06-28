@@ -37,16 +37,16 @@ class MyHistoryCellView: UIView {
         self.base.text  = "/" + baseInfo.symbol.filterJade
         self.kindL.text               = "BUY"
         self.typeView.backgroundColor = .turtleGreen
-        self.amount.text = String(getRealAmount(order.receives.assetID, amount: order.receives.amount)) + baseInfo.symbol.filterJade
-        self.price.text = String(getRealAmount(order.pays.assetID, amount: order.pays.amount)) +
+        self.amount.text = getRealAmount(order.receives.assetID, amount: order.receives.amount).stringValue + baseInfo.symbol.filterJade
+        self.price.text = getRealAmount(order.pays.assetID, amount: order.pays.amount).stringValue +
           quoteInfo.symbol.filterJade
       }else{
         self.asset.text = baseInfo.symbol.filterJade
         self.base.text  = "/" + quoteInfo.symbol.filterJade
         self.kindL.text = "SELL"
         self.typeView.backgroundColor = .reddish
-        self.amount.text = String(getRealAmount(order.pays.assetID, amount: order.pays.amount)) + baseInfo.symbol.filterJade
-        self.price.text = String(getRealAmount(order.receives.assetID, amount: order.receives.amount)) + quoteInfo.symbol.filterJade
+        self.amount.text = getRealAmount(order.pays.assetID, amount: order.pays.amount).stringValue + baseInfo.symbol.filterJade
+        self.price.text = getRealAmount(order.receives.assetID, amount: order.receives.amount).stringValue + quoteInfo.symbol.filterJade
       }
         
         self.orderPrice.text = self.price.text

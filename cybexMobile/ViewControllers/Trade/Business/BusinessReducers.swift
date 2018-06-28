@@ -32,7 +32,7 @@ func BusinessPropertyReducer(_ state: BusinessPropertyState?, action: Action) ->
     case let action as BalanceFetchedAction:
       state.balance.accept(action.amount)
     case let action as switchPercentAction:
-      state.amount.accept(action.amount.string(digits: 10 - state.price.value.tradePrice.pricision))
+      state.amount.accept(action.amount.doubleValue.string(digits: 10 - state.price.value.tradePrice.pricision))
     case _ as resetTrade:
       state.price.accept("")
       state.fee_amount.accept(0)

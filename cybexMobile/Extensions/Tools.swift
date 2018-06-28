@@ -38,14 +38,19 @@ public struct Version: Equatable, Comparable {
     if lhs.major < rhs.major {
       return true
     }
+    else if lhs.major == rhs.major {
+      if lhs.minor < rhs.minor {
+        return true
+      }
+      else if lhs.minor == rhs.minor {
+        if lhs.patch < rhs.patch {
+          return true
+        }
 
-    if lhs.minor < rhs.minor {
-      return true
+      }
     }
 
-    if lhs.patch < rhs.patch {
-      return true
-    }
+    
 
     return false
   }
@@ -196,13 +201,38 @@ extension Date {
   }
 }
 
+extension Decimal { // 解决double 计算精度丢失
+  var stringValue:String {
+    return NSDecimalNumber(decimal: self).stringValue
+  }
+  
+  var doubleValue:Double {
+    let str = self.stringValue
+    
+    if let d = Double(str) {
+      return d
+    }
+    return 0
+  }
+}
+
 extension Double {
-  func string(digits:Int = 0) -> String {
+  func string(digits:Int = 0) -> String {//会四舍五入
     if digits == 0 {
       return "\(self)"
     }
     
-    return String(format: "%.\(digits)f", self)
+    let mul = pow(10, digits.double)
+    
+    let floornum = Foundation.floor(self * mul) / mul
+    
+    return String(format: "%.\(digits)f", floornum)
+  }
+  
+  func preciseString() -> String {//解决显示科学计数法的格式
+    let decimal = Decimal(floatLiteral: self)
+    
+    return decimal.stringValue
   }
   
   func tradePrice() -> (price:String, pricision:Int) {
@@ -221,6 +251,10 @@ extension Double {
   }
   
   func formatCurrency(digitNum: Int ,usesGroupingSeparator:Bool = true) -> String {
+    if self < 1000 {
+      return string(digits: digitNum)
+    }
+    
     let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
       return formatter.maximumFractionDigits == digitNum && formatter.usesGroupingSeparator == usesGroupingSeparator
     })
@@ -246,7 +280,7 @@ extension Double {
     let sign = ((num < 0) ? "-" : "")
     num = fabs(num)
     if (num < 1000.0) {
-      return "\(sign)\(num.formatCurrency(digitNum: digitNum))"
+      return "\(sign)\(num.string(digits:digitNum))"
     }
     
     let exp: Int = Int(log10(num) / 3.0)
@@ -259,7 +293,7 @@ extension Double {
   
 //    let roundedNum = round(100.0 * num / pow(1000.0, Double(exp))) / 100.0
     
-    return "\(sign)\(result.formatCurrency(digitNum: 2))" + "\(units[exp - 1])"
+    return "\(sign)\(result.string(digits: 2))" + "\(units[exp - 1])"
   }
 }
 
@@ -303,47 +337,23 @@ extension String {
     var selfString = self
     if selfString.contains(","){
       selfString = selfString.replacingOccurrences( of:"[^0-9.]", with: "", options: .regularExpression)
-//       selfString = selfString.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789.").inverted)
     }
     
-    String.doubleFormat.allowsFloats = true
-    return String.doubleFormat.number(from: selfString)?.doubleValue
+    return Double(selfString)
   }
   
   func formatCurrency(digitNum: Int) -> String {
-    let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
-      return formatter.maximumFractionDigits == digitNum
-    })
-    
-    if let format = existFormatters.first {
-      let result = format.string(from: NSNumber(value: self.toDouble()!))
-       return result!
+    if let str = toDouble()?.formatCurrency(digitNum: digitNum) {
+      return str
     }
-    else {
-      let numberFormatter = NumberFormatter()
-      numberFormatter.numberStyle = .currency
-      numberFormatter.currencySymbol = ""
-      numberFormatter.maximumFractionDigits = digitNum
-      numberFormatter.minimumFractionDigits = digitNum
-      String.numberFormatters.append(numberFormatter)
-      return self.formatCurrency(digitNum: digitNum)
-    }
-    
+    return ""
   }
 
   func suffixNumber(digitNum: Int = 5) -> String {
-    var num: Double = Double(self)!
-    let sign = ((num < 0) ? "-" : "")
-    num = fabs(num)
-    if (num < 1000.0) {
-      return "\(sign)\(num.formatCurrency(digitNum: digitNum))"
+    if let str = Double(self)?.suffixNumber(digitNum:digitNum) {
+      return str
     }
-
-    let exp: Int = Int(log10(num) / 3.0)
-    let units: [String] = ["k", "m", "b"]
-    let roundedNum: Double = round(100 * num / pow(1000.0, Double(exp))) / 100
-
-    return "\(sign)\(roundedNum.formatCurrency(digitNum: 2))" + "\(units[exp - 1])"
+    return ""
   }
 }
 

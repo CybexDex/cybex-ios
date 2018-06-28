@@ -43,6 +43,7 @@ class TradeView: UIView {
             let percent = asks[i - 6].volume_percent / asks[max].volume_percent
             
             sell.data     = (asks[i - 6], percent)
+            
           }else{
             sell.alpha = 0
           }

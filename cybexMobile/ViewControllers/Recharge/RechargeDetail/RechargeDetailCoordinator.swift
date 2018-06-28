@@ -115,8 +115,10 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
   }
   
   func login(_ password : String,callback:@escaping (Bool)->()){
-    UserManager.shared.unlock(UserManager.shared.name!, password: password) { (isAuthory, account) in
-      callback(isAuthory)
+    if let name = UserManager.shared.name.value {
+      UserManager.shared.unlock(name, password: password) { (isAuthory, account) in
+        callback(isAuthory)
+      }
     }
   }
   

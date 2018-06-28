@@ -19,7 +19,7 @@ class TradeItemView: UIView {
         if let balances = UserManager.shared.balances.value{
           for balance in balances{
             if balance.asset_type == data.id{
-              amount.text = String.init(describing: (getRealAmount(balance.asset_type,amount: balance.balance)).formatCurrency(digitNum: (info?.precision)!))
+              amount.text = getRealAmount(balance.asset_type,amount: balance.balance).stringValue.formatCurrency(digitNum: (info?.precision)!)
               return
             }
           }

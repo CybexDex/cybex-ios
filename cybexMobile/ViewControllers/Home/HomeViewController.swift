@@ -46,7 +46,10 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
-    handlerUpdateVersion(nil)
+    
+    if VC_TYPE == 1 {
+      handlerUpdateVersion(nil)
+    }
   }
   
   func setupUI() {    

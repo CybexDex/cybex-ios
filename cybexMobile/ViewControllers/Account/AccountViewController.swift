@@ -150,7 +150,7 @@ class AccountViewController: BaseViewController {
       for tag in tags{
         stackView.viewWithTag(tag)?.isHidden = true
       }
-      nameL.text =  UserManager.shared.name
+      nameL.text =  UserManager.shared.name.value
       let hash = UserManager.shared.avatarString!
       let generator = IconGenerator(size: 168, hash: Data(hex: hash))
       let image = UIImage(cgImage: generator.render()!)

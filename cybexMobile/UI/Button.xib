@@ -23,7 +23,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvD-aj-v7I">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="114"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <state key="normal" title="Button"/>
+                    <state key="normal" title="--"/>
                 </button>
             </subviews>
             <constraints>

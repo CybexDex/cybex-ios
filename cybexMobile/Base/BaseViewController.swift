@@ -155,13 +155,12 @@ class BaseViewController: UIViewController {
     rightNavButton = UIButton.init(type: .custom)
     rightNavButton?.frame = CGRect(x: 0, y: 0, width: 58, height: 24)
     rightNavButton?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-    rightNavButton?.titleLabel?.textColor = .steel
+    rightNavButton?.locali = locali
+
+    rightNavButton?.titleLabel?.theme_textColor = [UIColor.steel.hexString(true), UIColor.steel.hexString(true)]
     rightNavButton?.addTarget(self, action: #selector(rightAction(_:)), for: .touchUpInside)
     rightNavButton?.isHidden = false
     navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightNavButton!)
-    
-    rightNavButton?.locali = locali
-
   }
   
   @objc open func leftAction(_ sender: UIButton) {

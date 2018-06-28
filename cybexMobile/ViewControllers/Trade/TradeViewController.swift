@@ -14,6 +14,14 @@ import TinyConstraints
 
 protocol TradePair {
   var pariInfo : Pair {get set}
+  
+  func refresh()
+}
+
+extension TradePair {
+  func refresh() {
+    
+  }
 }
 
 
@@ -41,18 +49,17 @@ class TradeViewController: BaseViewController {
   
   var pair : Pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB){
     didSet{
-      guard let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
-      
-      endLoading()
-      if self.chooseTitleView != nil {
-        self.sendEventActionWith()
+      getPairInfo()
+      if info != nil {
+        refreshView()
       }
-      
-      tradeTitltView.title.text = quote_info.symbol.filterJade + "/" + base_info.symbol.filterJade
-      self.childViewControllers.forEach { (viewController) in
-        if var viewController = viewController as? TradePair{
-          viewController.pariInfo = pair
-        }
+    }
+  }
+  
+  var info:(base: AssetInfo, quote:AssetInfo)? {
+    didSet {
+      if oldValue == nil {
+        refreshView()
       }
     }
   }
@@ -85,6 +92,11 @@ class TradeViewController: BaseViewController {
     tradeTitltView = TradeNavTitleView(frame: CGRect(x: 0, y: 0, width: 100, height: 64))
     tradeTitltView.delegate = self
     self.navigationItem.titleView = tradeTitltView    
+  }
+  
+  func getPairInfo() {
+    guard let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
+    self.info = (base_info, quote_info)
   }
   
   @objc override func rightAction(_ sender: UIButton){
@@ -122,6 +134,38 @@ class TradeViewController: BaseViewController {
   
   override func configureObserveState() {
     commonObserveState()
+    
+    app_data.data.asObservable()
+      .skip(1)
+      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
+      .distinctUntilChanged()
+      .throttle(3, latest: true, scheduler: MainScheduler.instance)
+      .subscribe(onNext: { (s) in
+        if app_data.data.value.count == 0 {
+          return
+        }
+        
+        if self.isVisible {
+          self.getPairInfo()
+        }
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+  }
+  
+  
+  func refreshView() {
+    guard let info = info else { return }
+    endLoading()
+    if self.chooseTitleView != nil {
+      self.sendEventActionWith()
+    }
+    
+    tradeTitltView.title.text = info.quote.symbol.filterJade + "/" + info.base.symbol.filterJade
+    self.childViewControllers.forEach { (viewController) in
+      if var viewController = viewController as? TradePair{
+        viewController.pariInfo = pair
+        viewController.refresh()
+      }
+    }
   }
   
   func pageOffsetForChild(at index: Int) -> CGFloat {
