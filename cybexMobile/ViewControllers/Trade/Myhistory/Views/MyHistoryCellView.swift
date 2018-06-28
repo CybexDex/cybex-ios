@@ -41,19 +41,19 @@ class MyHistoryCellView: UIView {
         self.base.text  = "/" + result.base
         self.kindL.text = "SELL"
         self.typeView.backgroundColor = .reddish
-        self.amount.text = String(getRealAmount(payInfo.id, amount: order.pays.amount)).formatCurrency(digitNum: payInfo.precision) + " " + result.quote
-        self.orderAmount.text = String(getRealAmount(receiveInfo.id, amount: order.receives.amount)).formatCurrency(digitNum: receiveInfo.precision) + " " +  result.base
-        self.orderPrice.text = String(getRealAmount(receiveInfo.id, amount: order.receives.amount) / getRealAmount(payInfo.id, amount: order.pays.amount)).formatCurrency(digitNum: 8) + " " + result.base
+        self.amount.text = String(getRealAmountDouble(payInfo.id, amount: order.pays.amount)).formatCurrency(digitNum: payInfo.precision) + " " + result.quote
+        self.orderAmount.text = String(getRealAmountDouble(receiveInfo.id, amount: order.receives.amount)).formatCurrency(digitNum: receiveInfo.precision) + " " +  result.base
+        self.orderPrice.text = String(getRealAmountDouble(receiveInfo.id, amount: order.receives.amount) / getRealAmountDouble(payInfo.id, amount: order.pays.amount)).formatCurrency(digitNum: 8) + " " + result.base
       }else{
         // BUY   pay -> base receive -> quote
         self.kindL.text               = "BUY"
         self.asset.text = result.quote
         self.base.text  = "/" + result.base
         self.typeView.backgroundColor = .turtleGreen
-        self.amount.text = String(getRealAmount(receiveInfo.id, amount:order.receives.amount)).formatCurrency(digitNum: receiveInfo.precision) + " " + result.quote
-        self.orderAmount.text = String(getRealAmount(payInfo.id, amount: order.pays.amount)).formatCurrency(digitNum: payInfo.precision) + " " + result.base
+        self.amount.text = String(getRealAmountDouble(receiveInfo.id, amount:order.receives.amount)).formatCurrency(digitNum: receiveInfo.precision) + " " + result.quote
+        self.orderAmount.text = String(getRealAmountDouble(payInfo.id, amount: order.pays.amount)).formatCurrency(digitNum: payInfo.precision) + " " + result.base
         
-        self.orderPrice.text = String(getRealAmount(payInfo.id, amount: order.pays.amount) / getRealAmount(receiveInfo.id, amount:order.receives.amount)).formatCurrency(digitNum: 8) + " " + result.base
+        self.orderPrice.text = String(getRealAmountDouble(payInfo.id, amount: order.pays.amount) / getRealAmountDouble(receiveInfo.id, amount:order.receives.amount)).formatCurrency(digitNum: 8) + " " + result.base
       }
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
