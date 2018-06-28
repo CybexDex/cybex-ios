@@ -184,9 +184,9 @@
 "tip_title"   = "Tip";
 "tip_message" = "Please open photo album permissions in Settings";
 
-"recharge_title"  = " Deposit";
+"recharge_title"  = " Withdraw";
 "recharge_min"    = "Min ";
-"withdraw_title"  = " Withdraw";
+"withdraw_title"  = " Deposit";
 
 "recharge_invalid_password" = "Invalid password";
 "recharge_withdraw_success" = "Withdrawal application successful";
@@ -209,6 +209,11 @@
 "my_history_state"          = "Done";
 "my_history_title"          = "Order History";
 
+"order_history_first_title" = "Assert/Order Amount";
+"order_history_second_title" = "Filled/Order Value";
+
+
 "cancel_create_success" = "Cancel order successfully";
 "cancel_create_fail" = "Cancel order fail";
 
+"withdraw_ensure_title" = "CONFIERMATION";

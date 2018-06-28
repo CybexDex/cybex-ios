@@ -36,7 +36,7 @@ class WithdrawDetailViewController: BaseViewController {
   
   func setupUI(){
     if let name = app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade{
-      self.title = name + R.string.localizable.recharge_title.key.localized()
+      self.title = name + R.string.localizable.withdraw_title.key.localized()
       self.coordinator?.fetchDepositMessage(callback: { (message) in
         if message.count > 0 {
           self.introduce.attributedText = message.replacingOccurrences(of: "$asset", with: name).set(style: StyleNames.introduce_normal.rawValue)
@@ -135,8 +135,7 @@ class WithdrawDetailViewController: BaseViewController {
         if let tryImage = EFQRCode.generate(
           content: info.address,
           size: EFIntSize(width: 100, height: 100),
-          
-          watermark: UIImage(named: R.image.icon_code.name)?.toCGImage()
+          watermark: UIImage(named: R.image.artboard.name)?.toCGImage()
           ) {
           self.icon.image = UIImage(cgImage: tryImage)
           print("Create QRCode image success: \(tryImage)")
@@ -146,7 +145,7 @@ class WithdrawDetailViewController: BaseViewController {
       }else{
         main {
           if ShowManager.shared.showView != nil{
-            ShowManager.shared.hide()
+            return
           }
           ShowManager.shared.setUp(title_image: R.image.erro16Px.name, message: R.string.localizable.recharge_retry.key.localized(), animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.sheet_image)
           ShowManager.shared.showAnimationInView(self.view)

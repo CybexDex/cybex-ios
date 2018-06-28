@@ -18,7 +18,8 @@ protocol MyHistoryStateManagerProtocol {
         _ subscriber: S, transform: ((Subscription<MyHistoryState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
   
-  func filterFillOrder(_ pair:Pair) ->[FillOrder]
+//  func filterFillOrder(_ pair:Pair) ->[FillOrder]
+  func getOrderTime(_ block_num:Int)
 }
 
 class MyHistoryCoordinator: TradeRootCoordinator {
@@ -47,12 +48,12 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
   
-  func filterFillOrder(_ pair:Pair) -> [FillOrder]{
-    if let fillOrders = UserManager.shared.fillOrder.value{
-      return fillOrders.filter({ (fillOrder) -> Bool in
-        return (fillOrder.pays.assetID == pair.base && fillOrder.receives.assetID == pair.quote) || (fillOrder.pays.assetID == pair.quote && fillOrder.receives.assetID == pair.base)
-      })
-    }
-    return []
+  
+  func getOrderTime(_ block_num:Int){
+    let request = getBlockRequest(response: { (results) in
+      
+      print("results : \(results)")
+    }, block_num: block_num)
+    WebsocketService.shared.send(request: request)
   }
 }

@@ -26,7 +26,9 @@ class OpenedOrdersViewController: BaseViewController {
   
   var pair: Pair?{
     didSet{
-      
+      if let pair_order = self.containerView as? MyOpenedOrdersView {
+        pair_order.data = self.pair
+      }
     }
   }
   

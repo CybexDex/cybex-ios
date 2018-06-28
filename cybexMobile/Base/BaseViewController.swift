@@ -155,7 +155,7 @@ class BaseViewController: UIViewController {
     rightNavButton = UIButton.init(type: .custom)
     rightNavButton?.frame = CGRect(x: 0, y: 0, width: 58, height: 24)
     rightNavButton?.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-    rightNavButton?.titleLabel?.textColor = .steel
+    rightNavButton?.setTitleColor(.steel, for: .normal)
     rightNavButton?.addTarget(self, action: #selector(rightAction(_:)), for: .touchUpInside)
     rightNavButton?.isHidden = false
     navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightNavButton!)

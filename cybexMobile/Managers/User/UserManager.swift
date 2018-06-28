@@ -128,9 +128,23 @@ extension UserManager {
     guard let id = self.account.value?.id else {
       return
     }
+    
     let request = GetAccountHistoryRequest(accountID: id) { (data) in
       if let fillorder = data as? [FillOrder] {
-        self.fillOrder.accept(fillorder)
+        var result = [(FillOrder,time:String)]()
+        var count = 0
+        for fillOrder in fillorder{
+          let timeRequest = getBlockRequest(response: { (time) in
+            count += 1
+            if let time = time as? String{
+              result.append((fillOrder,time:time))
+            }
+            if count == fillorder.count{
+              self.fillOrder.accept(result)
+            }
+          }, block_num: fillOrder.block_num)
+          WebsocketService.shared.send(request: timeRequest)
+        }
       }
     }
     WebsocketService.shared.send(request: request)
@@ -277,7 +291,7 @@ class UserManager {
   
   var balances:BehaviorRelay<[Balance]?> = BehaviorRelay(value: nil)
   var limitOrder:BehaviorRelay<[LimitOrder]?> = BehaviorRelay(value:nil)
-  var fillOrder:BehaviorRelay<[FillOrder]?> = BehaviorRelay(value:nil)
+  var fillOrder:BehaviorRelay<[(FillOrder,time:String)]?> = BehaviorRelay(value:nil)
   
   var timer:Repeater?
   

@@ -74,7 +74,7 @@ class TradeViewController: BaseViewController {
     
     self.titlesView!.data = [R.string.localizable.trade_buy.key.localized(),
                        R.string.localizable.trade_sell.key.localized(),
-                       R.string.localizable.trade_total.key.localized()]
+                       R.string.localizable.trade_open_orders.key.localized()]
     
   }
   

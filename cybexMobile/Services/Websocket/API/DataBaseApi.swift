@@ -19,6 +19,7 @@ enum dataBaseCatogery:String {
   case get_balance_objects
   case get_account_by_name
   case get_required_fees
+  case get_block
 }
 
 struct GetRequiredFees:JSONRPCKit.Request, JSONRPCResponse {
@@ -256,4 +257,20 @@ struct getBalanceObjectsRequest : JSONRPCKit.Request , JSONRPCResponse{
     return []
   }
   
+}
+
+struct getBlockRequest : JSONRPCKit.Request , JSONRPCResponse {
+  var response: RPCSResponse
+  
+  var block_num : Int
+  var method:String{
+    return "call"
+  }
+  var parameters: Any?{
+    return [WebsocketService.shared.ids[apiCategory.database] ?? 0,dataBaseCatogery.get_block.rawValue,[block_num]]
+  }
+  func transferResponse(from resultObject: Any) throws -> Any {
+    let data = JSON(resultObject).dictionaryValue
+    return data["timestamp"]?.stringValue ?? ""
+  }
 }

@@ -127,7 +127,7 @@ class ShowManager {
       }
       self.superView?.layoutIfNeeded()
       if showType == .sheet_image{
-        a?.constant = 0
+        a?.constant = 20
       }else{
         a?.constant = -64
       }

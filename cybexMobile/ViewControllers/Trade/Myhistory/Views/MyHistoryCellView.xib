@@ -16,8 +16,8 @@
                 <outlet property="asset" destination="HKd-vb-HWp" id="yXp-i0-FHG"/>
                 <outlet property="base" destination="99t-2R-UFU" id="DtX-Fb-P4q"/>
                 <outlet property="kindL" destination="yEr-qm-iLC" id="WJK-Aq-ATo"/>
+                <outlet property="orderAmount" destination="PEY-Qq-WB8" id="R9P-eX-Hj2"/>
                 <outlet property="orderPrice" destination="1Y2-Tx-GxP" id="vTA-T0-kUb"/>
-                <outlet property="price" destination="PEY-Qq-WB8" id="niv-ye-TSX"/>
                 <outlet property="state" destination="OUW-ai-BHJ" id="AKM-gx-PCS"/>
                 <outlet property="time" destination="lIN-Ed-96N" id="9Hk-uq-oOV"/>
                 <outlet property="typeView" destination="djn-pJ-crN" id="Wv2-M4-GyA"/>
@@ -164,7 +164,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="56" y="-91"/>
+            <point key="canvasLocation" x="-388" y="-187"/>
         </view>
     </objects>
 </document>
