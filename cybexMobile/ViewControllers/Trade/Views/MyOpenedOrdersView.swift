@@ -104,7 +104,7 @@ extension MyOpenedOrdersView {
     if let index = data["selectedIndex"] as? Int {
       guard let pair = self.data as? Pair else { return  }
       let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
-        return limitorder.sellPrice.base.assetID == pair.base && limitorder.sellPrice.quote.assetID == pair.quote
+        return (limitorder.sellPrice.base.assetID == pair.base && limitorder.sellPrice.quote.assetID == pair.quote) || (limitorder.sellPrice.base.assetID == pair.quote && limitorder.sellPrice.quote.assetID == pair.base)
       }) ?? []
       let order = orderes[index]
       self.next?.sendEventWith(event.cancelOrder.rawValue, userinfo: ["order": order])

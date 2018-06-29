@@ -90,6 +90,21 @@ class BusinessViewController: BaseViewController {
     ShowManager.shared.showAnimationInView(self.view)
   }
   
+  func showOpenedOrderInfo(){
+    guard let base_info = app_data.assetInfo[(self.pair?.base)!], let quote_info = app_data.assetInfo[(self.pair?.quote)!],let fee_info = app_data.assetInfo[(self.coordinator?.state.property.feeID.value)!],  self.coordinator?.state.property.fee_amount.value != 0, let cur_amount = self.coordinator?.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.coordinator?.state.property.price.value.toDouble(), price != 0 else { return }
+    
+    let openedOrderDetailView = StyleContentView(frame: .zero)
+    let ensure_title = self.type == .buy ? R.string.localizable.openedorder_buy_ensure.key.localized() : R.string.localizable.openedorder_sell_ensure.key.localized()
+    ShowManager.shared.setUp(title: ensure_title, contentView: openedOrderDetailView, animationType: .up_down)
+    ShowManager.shared.showAnimationInView(self.view)
+    ShowManager.shared.delegate = self
+    let prirce = price.string + " " + base_info.symbol.filterJade
+    let amount = cur_amount.string  + " " + quote_info.symbol.filterJade
+    let total = (price * cur_amount).string + " " + base_info.symbol.filterJade
+//    let feeInfo = (self.coordinator?.state.property.fee_amount.value.string)! + " " + fee_info.symbol.filterJade
+    openedOrderDetailView.data = getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy)
+  }
+  
   func commonObserveState() {
     coordinator?.subscribe(errorSubscriber) { sub in
       return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
@@ -261,7 +276,7 @@ extension BusinessViewController {
       showEnterPassword()
     }
     else {
-      postOrder()
+      self.showOpenedOrderInfo()
     }
   }
   
@@ -289,7 +304,7 @@ extension BusinessViewController {
 
 extension BusinessViewController : ShowManagerDelegate{
   func returnEnsureAction() {
-    
+    self.postOrder()
   }
   
   func returnUserPassword(_ sender : String){
@@ -297,7 +312,7 @@ extension BusinessViewController : ShowManagerDelegate{
       UserManager.shared.unlock(name, password: sender) { (success, _) in
         if success {
           ShowManager.shared.hide()
-          self.postOrder()
+          self.showOpenedOrderInfo()
         }
         else {
           ShowManager.shared.data = R.string.localizable.recharge_invalid_password()

@@ -54,12 +54,52 @@ class OpenedOrdersViewController: BaseViewController {
     ShowManager.shared.showAnimationInView(self.view)
   }
   
+  func showOrderInfo(){
+    guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0), let asset = app_data.assetInfo[AssetConfiguration.CYB] else { return }
+    startLoading()
+    calculateFee(operation, focus_asset_id: AssetConfiguration.CYB, operationID: .limit_order_cancel) { [weak self](success, amount, assetId) in
+      guard let `self` = self else {return}
+      self.endLoading()
+      if success,let order = self.order{
+        let openedOrderDetailView = StyleContentView(frame: .zero)
+        let ensure_title = order.isBuy ? R.string.localizable.cancle_openedorder_buy.key.localized() : R.string.localizable.cancle_openedorder_sell.key.localized()
+        ShowManager.shared.setUp(title: ensure_title, contentView: openedOrderDetailView, animationType: .up_down)
+        ShowManager.shared.showAnimationInView(self.view)
+        ShowManager.shared.delegate = self
+      
+        if let baseInfo = app_data.assetInfo[order.sellPrice.base.assetID], let quoteInfo = app_data.assetInfo[order.sellPrice.quote.assetID],let pair = self.pair{
+          var priceInfo = ""
+          var amountInfo = ""
+          var totalInfo = ""
+          let feeInfo = amount.stringValue.formatCurrency(digitNum: asset.precision) + " " + asset.symbol.filterJade
+          if baseInfo.id == pair.base{
+            let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
+            let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
+            totalInfo = baseAmount.stringValue + " " + baseInfo.symbol.filterJade
+            amountInfo = quoteAmount.stringValue + " " + quoteInfo.symbol.filterJade
+            priceInfo =  (baseAmount / quoteAmount).stringValue.formatCurrency(digitNum: baseInfo.precision) + " " + baseInfo.symbol.filterJade
+          }else{
+            let baseAmount  = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
+            let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
+            
+            totalInfo = baseAmount.stringValue + " " + quoteInfo.symbol.filterJade
+            amountInfo = quoteAmount.stringValue + " " + baseInfo.symbol.filterJade
+            priceInfo =  (baseAmount / quoteAmount).stringValue.formatCurrency(digitNum: quoteInfo.precision) + " " + quoteInfo.symbol.filterJade
+          }
+          openedOrderDetailView.data = getOpenedOrderInfo(price: priceInfo, amount: amountInfo, total: totalInfo, fee: feeInfo, isBuy: order.isBuy)
+        }
+      }
+    }
+  }
+  
   func switchContainerView() {
     containerView?.removeFromSuperview()
     
     containerView = pageType == .account ? AccountOpenedOrdersView() : MyOpenedOrdersView()
     self.view.addSubview(containerView!)
-    
+    if let account_view = self.containerView as? AccountOpenedOrdersView {
+      account_view.data = nil
+    }
     containerView?.edgesToDevice(vc:self, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
   }
   
@@ -114,7 +154,7 @@ extension OpenedOrdersViewController {
         showEnterPassword()
       }
       else {
-        postCancelOrder()
+        self.showOrderInfo()
       }
       
     }
@@ -139,7 +179,8 @@ extension OpenedOrdersViewController {
 
 extension OpenedOrdersViewController : ShowManagerDelegate{
   func returnEnsureAction() {
-    
+    ShowManager.shared.hide()
+    self.postCancelOrder()
   }
   
   func returnUserPassword(_ sender : String){
@@ -147,7 +188,7 @@ extension OpenedOrdersViewController : ShowManagerDelegate{
       UserManager.shared.unlock(name, password: sender) { (success, _) in
         if success {
           ShowManager.shared.hide()
-          self.postCancelOrder()
+          self.showOrderInfo()
         }
         else {
           ShowManager.shared.data = R.string.localizable.recharge_invalid_password()

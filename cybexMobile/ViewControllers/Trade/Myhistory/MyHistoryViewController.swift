@@ -18,10 +18,16 @@ class MyHistoryViewController: BaseViewController {
   
   var pair: Pair? {
     didSet {
+      if let data = UserManager.shared.fillOrder.value{
+        self.data = data
+      }
+    }
+  }
+  var data : [(FillOrder,String)]?{
+    didSet{
       
     }
   }
-  var data : [(FillOrder,String)]?
   
   @IBOutlet weak var tableView: UITableView!
   

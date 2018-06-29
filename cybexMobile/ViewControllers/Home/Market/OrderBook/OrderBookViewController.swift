@@ -28,8 +28,8 @@ class OrderBookViewController: BaseViewController {
       
       if self.tradeView != nil{
         // orderbook_price
-        self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized()
-        self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized()
+        self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
+        self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
         showMarketPrice()
       }
       self.coordinator?.fetchData(pair)

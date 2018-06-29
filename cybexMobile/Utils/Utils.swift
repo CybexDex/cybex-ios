@@ -8,6 +8,7 @@
 
 import Foundation
 import Localize_Swift
+import SwiftTheme
 
 func getChainId(callback:@escaping(String)->()){
   let requeset = GetChainIDRequest { (id) in
@@ -343,11 +344,33 @@ func getWithdrawDetailInfo(addressInfo:String,amountInfo:String,withdrawFeeInfo:
   let gatewayFee : String = R.string.localizable.utils_gatewayfee.key.localized()
   let receiveAmount : String = R.string.localizable.utils_receiveamount.key.localized()
   
-  return (["<name>\(String(describing: address))</name><content>\n\(String(describing: addressInfo))</content>".set(style: "alertContent"),
-           "<name>\(String(describing: amount))</name><content>  \(String(describing: amountInfo))</content>".set(style: "alertContent"),
-           "<name>\(String(describing: withdrawFee))</name><content>  \(String(describing: withdrawFeeInfo))</content>".set(style: "alertContent"),
-           "<name>\(String(describing: gatewayFee))</name><content>  \(String(describing: gatewayFeeInfo))</content>".set(style: "alertContent"),
-           "<name>\(String(describing: receiveAmount))</name><content>  \(String(describing: receiveAmountInfo))</content>".set(style: "alertContent")] as? [NSAttributedString])!
+  let content = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
+  
+  return (["<name>\(String(describing: address))</name><\(content)>\n\(String(describing: addressInfo))</\(content)>".set(style: "alertContent"),
+           "<name>\(String(describing: amount))</name><\(content)>  \(String(describing: amountInfo))</\(content)>".set(style: "alertContent"),
+           "<name>\(String(describing: withdrawFee))</name><\(content)>  \(String(describing: withdrawFeeInfo))</\(content)>".set(style: "alertContent"),
+           "<name>\(String(describing: gatewayFee))</name><\(content)>  \(String(describing: gatewayFeeInfo))</\(content)>".set(style: "alertContent"),
+           "<name>\(String(describing: receiveAmount))</name><\(content)>  \(String(describing: receiveAmountInfo))</\(content)>".set(style: "alertContent")] as? [NSAttributedString])!
+}
+
+func getOpenedOrderInfo(price:String,amount:String,total:String,fee:String,isBuy:Bool) ->[NSAttributedString]{
+  let priceTitle = R.string.localizable.opened_order_value.key.localized()
+  let amountTitle = R.string.localizable.withdraw_amount.key.localized()
+  let totalTitle = R.string.localizable.trade_history_total.key.localized()
+  let feeTitle = R.string.localizable.openedorder_fee_title.key.localized()
+  
+  let priceContentStyle = isBuy ? "content_buy" : "content_sell"
+  let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
+  
+  let result = fee.count == 0 ? (["<name>\(priceTitle): </name><\(priceContentStyle)>\(price)</\(priceContentStyle)>".set(style: "alertContent"),
+    "<name>\(amountTitle): </name><\(contentStyle)>\(amount)</\(contentStyle)>".set(style: "alertContent"),
+  "<name>\(totalTitle): </name><\(contentStyle)>\(total)</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])! :
+    (["<name>\(priceTitle): </name><\(priceContentStyle)>\(price)</\(priceContentStyle)>".set(style: "alertContent"),
+      "<name>\(amountTitle): </name><\(contentStyle)>\(amount)</\(contentStyle)>".set(style: "alertContent"),
+      "<name>\(totalTitle): </name><\(contentStyle)>\(total)</\(contentStyle)>".set(style: "alertContent"),
+      "<name>\(feeTitle): </name><\(contentStyle)>\(fee)</\(contentStyle)>".set(style: "alertContent"),] as? [NSAttributedString])!
+  
+  return  result
   
 }
 

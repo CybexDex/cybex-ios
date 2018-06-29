@@ -90,7 +90,7 @@ class RechargeDetailViewController: BaseViewController {
     amountView.btn.setTitle(R.string.localizable.openedAll.key.localized(), for: .normal)
     if let balance = self.balance{
       if let precision = app_data.assetInfo[balance.asset_type]?.precision{
-        avaliableView.content.text = String(describing: getRealAmount(balance.asset_type, amount: balance.balance)).formatCurrency(digitNum: (precision)) + " " + (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!
+        avaliableView.content.text = getRealAmount(balance.asset_type, amount: balance.balance).stringValue.formatCurrency(digitNum: (precision)) + " " + (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!
       }
     }else{
       avaliableView.content.text = "--" + (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)!
@@ -336,7 +336,7 @@ extension RechargeDetailViewController{
   @objc func addAllAmount(){
     if let balance = self.balance{
       if let fee = self.coordinator?.state.property.data.value?.fee{
-        self.amountView.content.text = String(describing: getRealAmount(balance.asset_type, amount: balance.balance))
+        self.amountView.content.text = getRealAmount(balance.asset_type, amount: balance.balance).stringValue
         if let asset = app_data.assetInfo[balance.asset_type]{
           if let amount = self.amountView.content.text?.toDouble(){
             if fee > amount{
@@ -347,7 +347,7 @@ extension RechargeDetailViewController{
           }
         }
       }else{
-        self.amountView.content.text = String(describing: getRealAmount(balance.asset_type, amount: balance.balance))
+        self.amountView.content.text = getRealAmount(balance.asset_type, amount: balance.balance).stringValue
         if let asset = app_data.assetInfo[balance.asset_type],let amountText = self.amountView.content.text{
           self.finalAmount.text = amountText.formatCurrency(digitNum: asset.precision) + " " + asset.symbol.filterJade
         }
@@ -377,7 +377,6 @@ extension RechargeDetailViewController{
   
   @objc func withDrawAction(){
     let subView = StyleContentView(frame: .zero)
-    
     ShowManager.shared.setUp(title: R.string.localizable.withdraw_ensure_title.key.localized(), contentView: subView, animationType: .up_down)
     ShowManager.shared.showAnimationInView(self.view)
     ShowManager.shared.delegate = self

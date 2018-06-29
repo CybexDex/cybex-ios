@@ -209,3 +209,12 @@
 
 "withdraw_ensure_title" = "确认提现";
 
+"openedorder_buy_ensure" = "买单确认";
+"openedorder_sell_ensure" = "卖单确认";
+"openedorder_fee_title" = "取消手续费";
+
+"cancle_openedorder_sell" = "确认取消该卖单";
+"cancle_openedorder_buy" = "确认取消该买单";
+
+
+

@@ -22,10 +22,10 @@ class TradeHistoryViewController: BaseViewController {
     didSet {
       guard let base_info = app_data.assetInfo[(pair?.base)!], let quote_info = app_data.assetInfo[(pair?.quote)!] else { return }
       
-      self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized() + base_info.symbol.filterJade
-      self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized() + quote_info.symbol.filterJade
-      self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized() + base_info.symbol.filterJade
-    
+      self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
+      self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
+      self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized() + "(" + base_info.symbol.filterJade + ")"
+      self.historyView.time.text = R.string.localizable.my_history_time.key.localized()
       self.coordinator?.fetchData(pair!)
     }
   }

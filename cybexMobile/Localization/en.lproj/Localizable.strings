@@ -217,3 +217,11 @@
 "cancel_create_fail" = "Cancel order fail";
 
 "withdraw_ensure_title" = "CONFIERMATION";
+
+"openedorder_buy_ensure" = "CONFIRMATION";
+"openedorder_sell_ensure" = "CONFIRMATION";
+"openedorder_fee_title" = "Cancellation Fee";
+
+
+"cancle_openedorder_sell" = "CONFIRMATION";
+"cancle_openedorder_buy" = "CONFIRMATION";

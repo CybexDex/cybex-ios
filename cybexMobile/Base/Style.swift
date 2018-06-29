@@ -61,14 +61,32 @@ class RichStyle {
     
     let name = Style{
       $0.font = SystemFonts.PingFangSC_Regular.font(size: 14.0)
-      $0.color = UIColor.init(red: 120 / 255.0, green: 129 / 255.0, blue: 154 / 255.0, alpha: 1.0)
+      $0.color = UIColor.steel
     }
     
-    let content = Style{
+    let content_buy = Style{
+      $0.font = SystemFonts.PingFangSC_Medium.font(size: 14.0)
+      $0.color = UIColor.turtleGreen
+    }
+    
+    let content_sell = Style{
+      $0.font = SystemFonts.PingFangSC_Medium.font(size: 14.0)
+      $0.color = UIColor.reddish
+    }
+    
+    
+    let content_dark = Style{
       $0.font = SystemFonts.PingFangSC_Medium.font(size: 14.0)
       $0.color = UIColor.white
     }
-    let myGroup = StyleGroup(base: base, ["name":name,"content":content])
+    
+    let content_light = Style{
+      $0.font = SystemFonts.PingFangSC_Medium.font(size: 14.0)
+      $0.color = UIColor.darkTwo
+    }
+    
+    
+    let myGroup = StyleGroup(base: base, ["name":name,"content_dark":content_dark,"content_light":content_light,"content_sell":content_sell,"content_buy":content_buy])
     StylesManager.shared.register("alertContent", style: myGroup)
   }
 }

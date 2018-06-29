@@ -8,6 +8,7 @@
 
 import Foundation
 import RxCocoa
+import SwiftTheme
 
 class BusinessView: UIView {
   enum event:String {
@@ -48,6 +49,14 @@ class BusinessView: UIView {
   
   
   fileprivate func setup() {
+    if ThemeManager.currentThemeIndex == 0 {
+      priceTextfield.textColor = .white
+      amountTextfield.textColor = .white
+    }else{
+      priceTextfield.textColor = .darkTwo
+      amountTextfield.textColor = .darkTwo
+    }
+    
     for percentLabel in percents {
       percentLabel.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
         guard let `self` = self else { return }
