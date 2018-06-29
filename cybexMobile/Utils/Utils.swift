@@ -11,14 +11,19 @@ import Localize_Swift
 import SwiftTheme
 
 func getChainId(callback:@escaping(String)->()){
-  let requeset = GetChainIDRequest { (id) in
-    if let id = id as? String{
-      callback(id)
-    }else{
-      callback("")
+  if AppConfiguration.shared.chainID.isEmpty {
+    let requeset = GetChainIDRequest { (id) in
+      if let id = id as? String{
+        callback(id)
+      }else{
+        callback("")
+      }
     }
+    WebsocketService.shared.send(request: requeset)
   }
-  WebsocketService.shared.send(request: requeset)
+  else {
+    callback(AppConfiguration.shared.chainID)
+  }
 }
 
 typealias BlockChainParamsType = (chain_id:String, block_id:String, block_num:Int32)

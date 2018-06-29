@@ -113,7 +113,7 @@ class BaseViewController: UIViewController {
   }
   
   
-  func startLoading() {
+  func startLoading() {    
     guard let hud = toast else {
       toast = BeareadToast.showLoading(inView: self.view)
       return
@@ -122,6 +122,10 @@ class BaseViewController: UIViewController {
     if !hud.isDescendant(of: self.view) {
       toast = BeareadToast.showLoading(inView: self.view)
     }
+  }
+  
+  func isLoading() -> Bool {
+    return self.toast?.alpha == 1
   }
   
   func endLoading() {
@@ -172,5 +176,56 @@ class BaseViewController: UIViewController {
   
   deinit {
     print("dealloc: \(self)")
+  }
+}
+
+extension UIViewController : ShowManagerDelegate {
+  func showPasswordBox(_ title:String = R.string.localizable.withdraw_unlock_wallet.key.localized()){
+    ShowManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .up_down)
+    ShowManager.shared.delegate = self
+    ShowManager.shared.showAnimationInView(self.view)
+  }
+  
+  func showToastBox(_ success:Bool, message:String) {
+    ShowManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: .fadeIn_Out, showType: .alert_image)
+    ShowManager.shared.showAnimationInView(self.view)
+    ShowManager.shared.hide(0.8)
+  }
+  
+  func showTopToastBox(_ success:Bool, message:String) {
+    ShowManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.sheet_image)
+    ShowManager.shared.showAnimationInView(self.view)
+    ShowManager.shared.hide(0.8)
+  }
+  
+  func showConfirm(_ title:String, attributes:[NSAttributedString]?) {
+    let subView = StyleContentView(frame: .zero)
+    subView.data = attributes
+    ShowManager.shared.setUp(title: title, contentView: subView, animationType: .up_down)
+    ShowManager.shared.showAnimationInView(self.view)
+    ShowManager.shared.delegate = self
+  }
+  
+  func returnEnsureAction() {
+    
+  }
+  
+  
+  @objc func passwordPassed(_ passed:Bool) {
+  
+  }
+  @objc func passwordDetecting() {
+    
+  }
+
+  func returnUserPassword(_ sender : String){
+    ShowManager.shared.hide()
+    passwordDetecting()
+    
+    if let name = UserManager.shared.name.value {
+      UserManager.shared.unlock(name, password: sender) {[weak self] (success, _) in
+        self?.passwordPassed(success)
+      }
+    }
   }
 }

@@ -50,9 +50,7 @@ class WithdrawDetailViewController: BaseViewController {
     
     if self.trade?.enable == false{
       if let errorMsg = Localize.currentLanguage() == "en" ? self.trade?.enMsg : self.trade?.cnMsg {
-        ShowManager.shared.setUp(title_image: R.image.erro16Px.name, message: errorMsg, animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.alert_image)
-        ShowManager.shared.showAnimationInView(self.view)
-        ShowManager.shared.hide(2)
+        showToastBox(false, message: errorMsg)
       }
     }else{
       if let balance = self.trade?.id, let name = app_data.assetInfo[balance]?.symbol.filterJade{
@@ -74,17 +72,13 @@ class WithdrawDetailViewController: BaseViewController {
       print("I can access Photos. :]\n")
       if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.savedPhotosAlbum) {
         saveImageToPhotos()
-        ShowManager.shared.setUp(title_image: R.image.icCheckCircleGreen.name, message: R.string.localizable.recharge_save.key.localized(), animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.sheet_image)
-        ShowManager.shared.showAnimationInView(self.view)
-        ShowManager.shared.hide(2)
+    
+        self.showTopToastBox(true, message:R.string.localizable.recharge_save.key.localized())
       }
     }, rejected: {
-      let title = R.string.localizable.tip_title.key.localized()
       let message = R.string.localizable.tip_message.key.localized()
      
-      ShowManager.shared.setUp(title: title, message: message, animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.alert)
-      ShowManager.shared.showAnimationInView(self.view)
-      ShowManager.shared.hide(2)
+      self.showToastBox(false, message: message)
     })    
   }
   
@@ -94,10 +88,8 @@ class WithdrawDetailViewController: BaseViewController {
     }
     let board = UIPasteboard.general
     board.string = address.text
-    
-    ShowManager.shared.setUp(title_image: R.image.icCheckCircleGreen.name, message: R.string.localizable.recharge_copy.key.localized(), animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.sheet_image)
-    ShowManager.shared.showAnimationInView(self.view)
-    ShowManager.shared.hide(2)
+
+    self.showToastBox(true, message: R.string.localizable.recharge_copy.key.localized())
   }
   
   @IBAction func resetAddress(_ sender: Any) {
@@ -147,9 +139,7 @@ class WithdrawDetailViewController: BaseViewController {
           if ShowManager.shared.showView != nil{
             return
           }
-          ShowManager.shared.setUp(title_image: R.image.erro16Px.name, message: R.string.localizable.recharge_retry.key.localized(), animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.sheet_image)
-          ShowManager.shared.showAnimationInView(self.view)
-          ShowManager.shared.hide(2)
+          self.showTopToastBox(false, message: R.string.localizable.recharge_retry.key.localized())
         }
       }
       

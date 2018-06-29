@@ -284,6 +284,24 @@ extension AccountViewController{
 //    self.coordinator?.openRecharge()
   }
   @objc func openLockupAssets(_ data:[String: Any]){
-    self.coordinator?.openLockupAssets()
+    guard !isLoading() else { return }
+    
+    if !UserManager.shared.isLocked {
+      self.coordinator?.openLockupAssets()
+    }
+    else {
+      self.showPasswordBox()
+    }
+  }
+  
+  override func passwordPassed(_ passed: Bool) {
+    self.endLoading()
+    if passed && self.isVisible {
+      self.coordinator?.openLockupAssets()
+    }
+  }
+  
+  override func passwordDetecting() {
+    self.startLoading()
   }
 }

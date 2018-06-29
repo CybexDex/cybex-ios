@@ -10,6 +10,9 @@ import UIKit
 import ReSwift
 
 protocol BusinessCoordinatorProtocol {
+  func parentIsLoading(_ vc:UIViewController?) -> Bool
+  func parentStartLoading(_ vc:UIViewController?)
+  func parentEndLoading(_ vc:UIViewController?)
 }
 
 protocol BusinessStateManagerProtocol {
@@ -43,7 +46,28 @@ class BusinessCoordinator: AccountRootCoordinator {
 }
 
 extension BusinessCoordinator: BusinessCoordinatorProtocol {
+  func parentIsLoading(_ vc:UIViewController?) -> Bool {
+    if let vc = vc as? BaseViewController {
+      return vc.isLoading()
+    }
     
+    return false
+  }
+  
+  func parentStartLoading(_ vc:UIViewController?) {
+    if !parentIsLoading(vc) {
+      if let vc = vc as? BaseViewController {
+        vc.startLoading()
+      }
+    }
+
+  }
+  
+  func parentEndLoading(_ vc:UIViewController?) {
+    if let vc = vc as? BaseViewController {
+      vc.endLoading()
+    }
+  }
 }
 
 extension BusinessCoordinator: BusinessStateManagerProtocol {

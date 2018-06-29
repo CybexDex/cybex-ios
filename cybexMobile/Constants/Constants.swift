@@ -24,6 +24,7 @@ var app_coodinator:AppCoordinator {
 struct AppConfiguration {
   static let shared = AppConfiguration()
   var appCoordinator: AppCoordinator!
+  var chainID:String = ""
 
   private init() {
     let rootVC = BaseTabbarViewController()

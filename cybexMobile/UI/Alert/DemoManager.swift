@@ -15,14 +15,14 @@ protocol Views {
   var content : Any? {get set}
 }
 
-protocol ShowManagerDelegate {
+@objc protocol ShowManagerDelegate {
   func returnUserPassword(_ sender : String)
-  func returnEnsureAction()
+  @objc func returnEnsureAction()
 }
 
 class ShowManager {
   
-  static let durationTime : TimeInterval = 1.0
+  static let durationTime : TimeInterval = 0.3
   static let shared = ShowManager()
   
   var delegate:ShowManagerDelegate?
@@ -243,6 +243,7 @@ extension ShowManager : CybexTextViewDelegate{
     self.hide(0)
   }
   func returnEnsureAction(){
+    self.hide(0)
     self.delegate?.returnEnsureAction()
   }
 }

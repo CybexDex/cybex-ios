@@ -109,7 +109,7 @@ class RechargeDetailViewController: BaseViewController {
       return
     }
     if UserManager.shared.isLocked{
-      self.showPassWord()
+      showPasswordBox()
       return
     }
     if !UserManager.shared.isWithDraw{
@@ -127,25 +127,11 @@ class RechargeDetailViewController: BaseViewController {
           message = cnMsg
         }
       }
-      ShowManager.shared.setUp(title_image: R.image.erro16Px.name, message: message, animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
-      ShowManager.shared.showAnimationInView(self.view)
-      ShowManager.shared.hide(2)
+    showToastBox(false, message: message)
   }
-  
-  func showPassWord(){
-    let title = R.string.localizable.withdraw_unlock_wallet.key.localized()
-    ShowManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .up_down)
-    ShowManager.shared.delegate = self
-    ShowManager.shared.showAnimationInView(self.view)
-    
-  }
-  
+
   func checkIsAuthory(){
-    let message = R.string.localizable.withdraw_miss_authority.key.localized()
-    ShowManager.shared.setUp(title_image: R.image.erro16Px.name, message: message, animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
-    ShowManager.shared.showAnimationInView(self.view)
-    ShowManager.shared.hide(2)
-    
+    showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
   }
   
   
@@ -316,7 +302,7 @@ extension RechargeDetailViewController{
     }
     if UserManager.shared.isLocked{
       print("解锁失败")
-      self.showPassWord()
+      showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
     }else{
       if UserManager.shared.isWithDraw,self.isWithdraw,self.isTrueAddress,self.amountView.content.text != "",self.isAvalibaleAmount{
         self.withdraw.isEnable = true
@@ -376,49 +362,41 @@ extension RechargeDetailViewController{
   
   
   @objc func withDrawAction(){
-    let subView = StyleContentView(frame: .zero)
-    ShowManager.shared.setUp(title: R.string.localizable.withdraw_ensure_title.key.localized(), contentView: subView, animationType: .up_down)
-    ShowManager.shared.showAnimationInView(self.view)
-    ShowManager.shared.delegate = self
-    
     if let addressText = self.addressView.content.text,let amountText = self.amountView.content.text,let insideText = self.insideFee.text,let gatewayFeeText = self.gateAwayFee.text,let finalAmountText = self.finalAmount.text{
-      subView.data = getWithdrawDetailInfo(addressInfo: addressText, amountInfo: amountText + " " + (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)!, withdrawFeeInfo: insideText, gatewayFeeInfo: gatewayFeeText, receiveAmountInfo: finalAmountText)
+      
+      let data = getWithdrawDetailInfo(addressInfo: addressText, amountInfo: amountText + " " + (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)!, withdrawFeeInfo: insideText, gatewayFeeInfo: gatewayFeeText, receiveAmountInfo: finalAmountText)
+      
+      showConfirm(R.string.localizable.withdraw_ensure_title.key.localized(), attributes: data)
+    }
+  }
+  
+  override func passwordPassed(_ passed: Bool) {
+    if passed {
+      ShowManager.shared.hide()
+      self.changeWithdrawState()
+      if !UserManager.shared.isWithDraw{
+        self.checkIsAuthory()
+      }
+    }else{
+      ShowManager.shared.data = R.string.localizable.recharge_invalid_password.key.localized()
     }
   }
 }
 
-extension RechargeDetailViewController : ShowManagerDelegate{
-  func returnUserPassword(_ sender : String){
-    startLoading()
-    self.coordinator?.login(sender, callback: { [weak self](isAuthory) in
-      guard let `self` = self else {return}
-      self.endLoading()
-      if isAuthory {
-        ShowManager.shared.hide()
-        self.changeWithdrawState()
-        if !UserManager.shared.isWithDraw{
-          self.checkIsAuthory()
-        }
-      }else{
-        ShowManager.shared.data = R.string.localizable.recharge_invalid_password.key.localized()
-      }
-    })
-  }
+extension RechargeDetailViewController {
   // 提现操作
-  func returnEnsureAction(){
-    
+  override func returnEnsureAction(){
     let fee_amount = String((self.gateAwayFee.text?.split(separator: " ").first)!)
+    
     self.coordinator?.getObjects(assetId: (self.trade?.id)!,amount: self.amountView.content.text!,address: self.addressView.content.text!,fee_id: self.feeAssetId,fee_amount: fee_amount,callback: { (data) in
       main {
         ShowManager.shared.hide()
         if String(describing: data) == "<null>"{
-          ShowManager.shared.setUp(title_image: R.image.icCheckCircleGreen.name, message: R.string.localizable.recharge_withdraw_success.key.localized(), animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
-          ShowManager.shared.showAnimationInView(self.view)
-          ShowManager.shared.hide(2)
+          self.showToastBox(true, message: R.string.localizable.recharge_withdraw_success.key.localized())
+       
         }else{
-          ShowManager.shared.setUp(title_image: R.image.erro16Px.name, message: R.string.localizable.recharge_withdraw_failed.key.localized(), animationType: ShowManager.ShowAnimationType.fadeIn_Out, showType: ShowManager.ShowManagerType.alert_image)
-          ShowManager.shared.showAnimationInView(self.view)
-          ShowManager.shared.hide(2)
+          self.showToastBox(false, message: R.string.localizable.recharge_withdraw_failed.key.localized())
+
         }
       }
     })
