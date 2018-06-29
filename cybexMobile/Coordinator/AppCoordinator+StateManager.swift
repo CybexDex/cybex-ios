@@ -37,17 +37,24 @@ extension AppCoordinator: AppStateManagerProtocol {
     }))
   }
 
-  func fetchAsset() {
-    guard AssetConfiguration.shared.asset_ids.count > 0 else { return }
-
-    let request = GetObjectsRequest(ids: AssetConfiguration.shared.unique_ids) { response in
-      if let assetinfo = response as? [AssetInfo] {
-        for info in assetinfo {
-          self.store.dispatch(AssetInfoAction(assetID: info.id, info: info))
+  func fetchAsset(_ callback:@escaping (()->Void)) {
+    async {
+      let data = try! await(SimpleHTTPService.fetchIdsInfo())
+      
+      AssetConfiguration.shared.unique_ids = data
+      let request = GetObjectsRequest(ids: data) { response in
+        if let assetinfo = response as? [AssetInfo] {
+          for info in assetinfo {
+            main {
+              self.store.dispatch(AssetInfoAction(assetID: info.id, info: info))
+              callback()
+            }
+          }
         }
       }
+      WebsocketService.shared.send(request: request)
     }
-    WebsocketService.shared.send(request: request)
+    
   }
   
   func fetchEthToRmbPrice(){
@@ -109,23 +116,32 @@ extension AppCoordinator {
 
   func getLatestData() {
     if AssetConfiguration.shared.asset_ids.isEmpty {
-      var pairs:[Pair] = []
-      var count = 0
-      for base in AssetConfiguration.market_base_assets {
-        SimpleHTTPService.requestMarketList(base:base).done({ (pair) in
-          count += 1
-          pairs += pair
-          if count == AssetConfiguration.market_base_assets.count {
-            AssetConfiguration.shared.asset_ids = pairs
-            self.fetchAsset()
-            self.request24hMarkets(AssetConfiguration.shared.asset_ids)
-          }
-        }).cauterize()
+      fetchAsset {
+        var pairs:[Pair] = []
+        var count = 0
+        for base in AssetConfiguration.market_base_assets {
+          SimpleHTTPService.requestMarketList(base:base).done({ (pair) in
+            
+            let piece_pair = pair.filter({ (p) -> Bool in
+              return AssetConfiguration.shared.unique_ids.contains([p.base, p.quote])
+            })
+            count += 1
+            
+            pairs += piece_pair
+            if count == AssetConfiguration.market_base_assets.count {
+              AssetConfiguration.shared.asset_ids = pairs
+              self.request24hMarkets(AssetConfiguration.shared.asset_ids)
+            }
+          }).cauterize()
+        }
       }
+      
     }
     else {
-      if app_data.assetInfo.count != AssetConfiguration.shared.asset_ids.count {
-        fetchAsset()
+      if app_data.assetInfo.count != AssetConfiguration.shared.unique_ids.count {
+        fetchAsset {
+          self.request24hMarkets(AssetConfiguration.shared.asset_ids)
+        }
       }
       request24hMarkets(AssetConfiguration.shared.asset_ids)
     }

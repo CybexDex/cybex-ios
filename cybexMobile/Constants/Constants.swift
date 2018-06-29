@@ -203,16 +203,9 @@ class AssetConfiguration {
   static let order_name = ["USDT","ETH", "BTC", "CYB"]
   static let market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.CYB,AssetConfiguration.USDT,AssetConfiguration.BTC]
   
-  var unique_ids:[String] {
-    /*
-     let data = try! await {SimpleHTTPService.fetchIdsInfo()}
-     if let data = data.value{
-     return data
-     }
-     return []
-     */
-    return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).withoutDuplicates()
-  }
+  var unique_ids:[String] = []
+//    return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).withoutDuplicates()
+  
   
   private init() {
   }
