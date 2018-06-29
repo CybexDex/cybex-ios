@@ -133,7 +133,13 @@ extension UserManager {
     }
     
     let request = GetAccountHistoryRequest(accountID: id) { (data) in
-      if let fillorder = data as? [FillOrder] {
+      if var fillorder = data as? [FillOrder] {
+        fillorder = fillorder.filter({
+          let base_name = app_data.assetInfo[$0.fill_price.base.assetID]
+          let quote_name = app_data.assetInfo[$0.fill_price.quote.assetID]
+          return base_name != nil && quote_name != nil
+        })
+        
         var result = [(FillOrder,time:String)]()
         var count = 0
         for fillOrder in fillorder{

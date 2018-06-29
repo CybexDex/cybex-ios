@@ -65,6 +65,8 @@ class TradeView: UIView {
   }
   
   func setup(){
+//    self.titlePrice.text = self.titlePrice.text?.components(separatedBy: "(")[0] +
+    
     for item in items {
       item.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
         guard let `self` = self else { return }
