@@ -48,25 +48,28 @@ class BusinessViewController: BaseViewController {
     changeButtonState()
   }
   
-  func checkBalance() {
+  @discardableResult func checkBalance() -> Bool {
     guard let pair = self.pair else {
       self.containerView.tipView.isHidden = true
 
-      return
+      return false
     }
     
     guard let canPost = self.coordinator?.checkBalance(pair, isBuy: self.type == .buy) else {
       self.containerView.tipView.isHidden = true
-      return
+      return false
     }
     
     if !canPost {
       self.containerView.tipView.isHidden = false
-      return
+      return false
     }
     else {
       self.containerView.tipView.isHidden = true
+      return true
     }
+    
+    return false
   }
   
   func changeButtonState() {
@@ -83,28 +86,25 @@ class BusinessViewController: BaseViewController {
     }
   }
   
-  func showEnterPassword(){
-    let title = R.string.localizable.withdraw_unlock_wallet.key.localized()
-    ShowManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .up_down)
-    ShowManager.shared.delegate = self
-    ShowManager.shared.showAnimationInView(self.view)
-  }
-  
+
   func showOpenedOrderInfo(){
-    guard let base_info = app_data.assetInfo[(self.pair?.base)!], let quote_info = app_data.assetInfo[(self.pair?.quote)!],let fee_info = app_data.assetInfo[(self.coordinator?.state.property.feeID.value)!],  self.coordinator?.state.property.fee_amount.value != 0, let cur_amount = self.coordinator?.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.coordinator?.state.property.price.value.toDouble(), price != 0 else { return }
+    guard let base_info = app_data.assetInfo[(self.pair?.base)!], let quote_info = app_data.assetInfo[(self.pair?.quote)!],let _ = app_data.assetInfo[(self.coordinator?.state.property.feeID.value)!],  self.coordinator?.state.property.fee_amount.value != 0, let cur_amount = self.coordinator?.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.coordinator?.state.property.price.value.toDouble(), price != 0 else { return }
     
     let openedOrderDetailView = StyleContentView(frame: .zero)
     let ensure_title = self.type == .buy ? R.string.localizable.openedorder_buy_ensure.key.localized() : R.string.localizable.openedorder_sell_ensure.key.localized()
+    
     ShowManager.shared.setUp(title: ensure_title, contentView: openedOrderDetailView, animationType: .up_down)
     ShowManager.shared.showAnimationInView(self.view)
     ShowManager.shared.delegate = self
-    let prirce = price.string + " " + base_info.symbol.filterJade
-    let amount = cur_amount.string  + " " + quote_info.symbol.filterJade
-    let total = (price * cur_amount).string + " " + base_info.symbol.filterJade
+    
+    let prirce = price.string(digits: base_info.precision) + " " + base_info.symbol.filterJade
+    let amount = cur_amount.string(digits: quote_info.precision)  + " " + quote_info.symbol.filterJade
+    let total = (price * cur_amount).string(digits: base_info.precision) + " " + base_info.symbol.filterJade
 //    let feeInfo = (self.coordinator?.state.property.fee_amount.value.string)! + " " + fee_info.symbol.filterJade
     openedOrderDetailView.data = getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy)
   }
   
+
   func commonObserveState() {
     coordinator?.subscribe(errorSubscriber) { sub in
       return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
@@ -265,60 +265,67 @@ extension BusinessViewController {
   }
   
   @objc func buttonDidClicked(_ data: [String: Any]) {
+    if self.coordinator!.parentIsLoading(self.parent) {
+      return
+    }
+    
     if !UserManager.shared.isLoginIn {
       app_coodinator.showLogin()
       return
     }
     
-    checkBalance()
+    guard checkBalance() else { return }
     
     if UserManager.shared.isLocked {
-      showEnterPassword()
+      showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
     }
     else {
       self.showOpenedOrderInfo()
     }
   }
   
-  func postOrder() {
-    guard let pair = self.pair else { return }
-
-    self.startLoading()
-    self.coordinator?.postLimitOrder(pair, isBuy: self.type == .buy, callback: {[weak self] (success) in
-      guard let `self` = self else { return }
-      
-      self.endLoading()
-      if success {
-        self.coordinator?.resetState()
-      }
-      ShowManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: success ? R.string.localizable.order_create_success() : R.string.localizable.order_create_fail(), animationType: .up_down, showType: .alert_image)
-      ShowManager.shared.showAnimationInView(self.view)
-      ShowManager.shared.hide(2)
-    })
-  }
-  
   @objc func adjustPrice(_ data:[String : Bool]) {
     self.coordinator?.adjustPrice(data["plus"]!)
   }
-}
+  
+  func postOrder() {
+    guard let pair = self.pair else { return }
 
-extension BusinessViewController : ShowManagerDelegate{
-  func returnEnsureAction() {
-    self.postOrder()
+    self.coordinator?.postLimitOrder(pair, isBuy: self.type == .buy, callback: {[weak self] (success) in
+      guard let `self` = self else { return }
+      self.coordinator?.parentEndLoading(self.parent)
+
+      if success {
+        self.coordinator?.resetState()
+      }
+      
+      self.showToastBox(success, message:success ? R.string.localizable.order_create_success() : R.string.localizable.order_create_fail())
+     
+    })
+  }
+
+  override func returnEnsureAction() {
+    self.coordinator?.parentStartLoading(self.parent)
+    postOrder()
+  }
+
+  override func passwordDetecting() {
+    self.coordinator?.parentStartLoading(self.parent)
   }
   
-  func returnUserPassword(_ sender : String){
-    if let name = UserManager.shared.name.value {
-      UserManager.shared.unlock(name, password: sender) { (success, _) in
-        if success {
-          ShowManager.shared.hide()
-          self.showOpenedOrderInfo()
-        }
-        else {
-          ShowManager.shared.data = R.string.localizable.recharge_invalid_password()
-        }
-       
-      }
+  override func passwordPassed(_ passed:Bool) {
+    self.coordinator?.parentEndLoading(self.parent)
+
+    guard let trade = self.parent?.parent as? TradeViewController, (trade.selectedIndex == 0 && self.type == .buy) ||  (trade.selectedIndex == 1 && self.type == .sell), self.isVisible else {
+      return
     }
+    
+    if passed {
+      self.showOpenedOrderInfo()
+    }
+    else {
+      self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+    }
+    
   }
 }
