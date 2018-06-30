@@ -211,7 +211,7 @@ extension UserManager {
           if canLock {
             self.keys = keys
             
-            if let newAccount = self.account.value {
+            if let newAccount = data.account {
               if let memoKey = keys.memo_key, let ownKey = keys.owner_key, let activeKey = keys.active_key {
                 if [memoKey.public_key, ownKey.public_key, activeKey.public_key].contains(newAccount.memo_key) {
                   self.isWithDraw = true
