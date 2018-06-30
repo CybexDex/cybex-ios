@@ -14,14 +14,14 @@ import SwiftTheme
 class TradeItemView: UIView {
   var data : Any? {
     didSet{
-      if let data = data as? Trade{
-        let info = app_data.assetInfo[data.id]
+      if let data = data as? Trade,let info = app_data.assetInfo[data.id]{
+        
         self.icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + data.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
-        name.text = info?.symbol.filterJade
+        name.text = info.symbol.filterJade
         if let balances = UserManager.shared.balances.value{
           for balance in balances{
             if balance.asset_type == data.id{
-              amount.text = getRealAmount(balance.asset_type,amount: balance.balance).stringValue.formatCurrency(digitNum: (info?.precision)!)
+              amount.text = getRealAmount(balance.asset_type,amount: balance.balance).doubleValue.string(digits: info.precision)
               return
             }
           }

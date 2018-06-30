@@ -225,3 +225,6 @@
 
 "cancle_openedorder_sell" = "CONFIRMATION";
 "cancle_openedorder_buy" = "CONFIRMATION";
+
+"withdraw_fee_fail"      = "fee failed";
+

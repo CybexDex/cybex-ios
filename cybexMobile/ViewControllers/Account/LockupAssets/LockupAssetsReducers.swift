@@ -40,8 +40,8 @@ func lockupAssteToLockUpAssetsDate(datas : [LockUpAssetsMData]) -> LockUpAssetsV
     var price = "≈¥--"
     if result.eth != ""{
       
-      count = String(Double(amount)! / pow(10,Double((assetsInfo?.precision)!))).formatCurrency(digitNum: app_data.assetInfo[quote]!.precision)
-      price = "≈¥" + String(Double(count)!*Double(result.eth)! * value).formatCurrency(digitNum: 2)
+      count = (Double(amount)! / pow(10,Double((assetsInfo?.precision)!))).string(digits: app_data.assetInfo[quote]!.precision)
+      price = "≈¥" + (Double(count)!*Double(result.eth)! * value).string(digits: 2)
     }
     let name  =  assetsInfo?.symbol
     let icon = AppConfiguration.SERVER_ICONS_BASE_URLString + data.balance.assetID.replacingOccurrences(of: ".", with: "_") + "_grey.png"

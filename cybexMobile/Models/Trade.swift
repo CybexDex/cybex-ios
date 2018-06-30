@@ -12,12 +12,15 @@ import ObjectMapper
 class Fee: Mappable {
   var asset_id : String = ""
   var amount : String = ""
+  var success : Bool = false
+  
   required init?(map: Map) {
     
   }
   func mapping(map: Map) {
     asset_id    <- map["asset_id"]
     amount      <- (map["amount"],ToStringTransform())
+    success     <- map["success"]
   }
 }
 

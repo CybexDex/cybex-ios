@@ -65,20 +65,20 @@ class OpenedOrdersViewController: BaseViewController {
           var priceInfo = ""
           var amountInfo = ""
           var totalInfo = ""
-          let feeInfo = amount.stringValue.formatCurrency(digitNum: asset.precision) + " " + asset.symbol.filterJade
+          let feeInfo = amount.doubleValue.string(digits: asset.precision) + " " + asset.symbol.filterJade
           if baseInfo.id == pair.base{
             let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
             let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
             totalInfo = baseAmount.doubleValue.string(digits: baseInfo.precision) + " " + baseInfo.symbol.filterJade
             amountInfo = quoteAmount.doubleValue.string(digits: quoteInfo.precision) + " " + quoteInfo.symbol.filterJade
-            priceInfo =  (baseAmount / quoteAmount).stringValue.formatCurrency(digitNum: baseInfo.precision) + " " + baseInfo.symbol.filterJade
+            priceInfo =  (baseAmount / quoteAmount).doubleValue.string(digits: baseInfo.precision) + " " + baseInfo.symbol.filterJade
           }else{
             let baseAmount  = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
             let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
             
             totalInfo = baseAmount.doubleValue.string(digits: quoteInfo.precision) + " " + quoteInfo.symbol.filterJade
             amountInfo = quoteAmount.doubleValue.string(digits: baseInfo.precision) + " " + baseInfo.symbol.filterJade
-            priceInfo =  (baseAmount / quoteAmount).stringValue.formatCurrency(digitNum: quoteInfo.precision) + " " + quoteInfo.symbol.filterJade
+            priceInfo =  (baseAmount / quoteAmount).doubleValue.string(digits: quoteInfo.precision) + " " + quoteInfo.symbol.filterJade
           }
           
           self.showConfirm(ensure_title, attributes: getOpenedOrderInfo(price: priceInfo, amount: amountInfo, total: totalInfo, fee: feeInfo, isBuy: order.isBuy))

@@ -12,6 +12,7 @@ import Localize_Swift
 
 
 protocol RechargeDetailCoordinatorProtocol {
+  func pop()
 }
 
 protocol RechargeDetailStateManagerProtocol {
@@ -26,7 +27,6 @@ protocol RechargeDetailStateManagerProtocol {
   func getGatewayFee(_ assetId : String,amount:String,feeAssetID:String,address:String)
   func login(_ password : String,callback:@escaping (Bool)->())
   func getObjects(assetId:String,amount:String,address:String,fee_id:String,fee_amount:String,callback:@escaping (Any)->())
-  
   func fetchWithDrawMessage(callback:@escaping (String)->())
 }
 
@@ -42,7 +42,9 @@ class RechargeDetailCoordinator: AccountRootCoordinator {
 }
 
 extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
-  
+  func pop(){
+    self.rootVC.popViewController(animated: true)
+  }
 }
 
 extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
@@ -79,14 +81,13 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
   
   
   func getGatewayFee(_ assetId : String,amount:String,feeAssetID:String,address:String){
-    async {
       if let memo_key = self.state.property.memo_key.value{
         let name = app_data.assetInfo[assetId]?.symbol.filterJade
         if var amount = amount.toDouble(){
           let value = pow(10, (app_data.assetInfo[assetId]?.precision)!)
           amount = amount * Double(truncating: value as NSNumber)
           
-          let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId((UserManager.shared.account.value?.id)!)),
+          if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId((UserManager.shared.account.value?.id)!)),
                                                                          to_user_id: Int32(getUserId((self.state.property.data.value?.gatewayAccount)!)),
                                                                          asset_id: Int32(getUserId(assetId)),
                                                                          amount: Int32(amount),
@@ -94,17 +95,15 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                          fee_amount: 0,
                                                                          memo: GraphQLManager.shared.memo(name!, address: address),
                                                                          from_memo_key: UserManager.shared.account.value?.memo_key,
-                                                                         to_memo_key: memo_key)
-          let request = GetRequiredFees(response: { (infos) in
-            main {
-              if let infos = infos as? [Fee],infos.count > 0{
-                self.store.dispatch(FetchGatewayFee(data:infos.first!))
-              }
+                                                                         to_memo_key: memo_key){
+            
+            calculateFee(operationString, focus_asset_id: assetId, operationID: .transfer) { (success, amount, fee_id) in
+              
+              let dictionary = ["asset_id":fee_id,"amount":amount.stringValue]
+              self.store.dispatch(FetchGatewayFee(data:(Fee(JSON: dictionary)!,success:success)))
             }
-          }, operationStr: operationString!, assetID: feeAssetID,operationID:.transfer)
-          WebsocketService.shared.send(request: request)
+          }
         }
-      }
     }
   }
   

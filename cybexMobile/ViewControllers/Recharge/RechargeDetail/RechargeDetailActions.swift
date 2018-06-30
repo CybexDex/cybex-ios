@@ -22,7 +22,7 @@ struct RechargeDetailState: StateType {
 struct RechargeDetailPropertyState {
   var data : BehaviorRelay<WithdrawinfoObject?> = BehaviorRelay(value: nil)
   var memo_key : BehaviorRelay<String?> = BehaviorRelay(value: nil)
-  var gatewayFee : BehaviorRelay<Fee?> = BehaviorRelay(value: nil)
+  var gatewayFee : BehaviorRelay<(Fee,success:Bool)?> = BehaviorRelay(value: nil)
 }
 
 struct FetchWithdrawInfo:Action {
@@ -34,7 +34,7 @@ struct FetchWithdrawMemokey :Action {
 }
 
 struct FetchGatewayFee : Action{
-  let data : Fee
+  let data : (Fee,success:Bool)
 }
 
 

@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import SwiftTheme
 
 class BusinessViewController: BaseViewController {
   var pair: Pair? {
@@ -30,11 +31,26 @@ class BusinessViewController: BaseViewController {
     super.viewDidLoad()
     
     setupUI()
-   
+    
+   setupEvent()
   }
   
   func setupUI(){
     containerView.button.gradientLayer.colors = type == .buy ? [UIColor.paleOliveGreen.cgColor,UIColor.apple.cgColor] : [UIColor.pastelRed.cgColor,UIColor.reddish.cgColor]
+  }
+  
+  func setupEvent(){
+    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] notification in
+      guard let `self` = self else { return }
+      
+      if ThemeManager.currentThemeIndex == 0 {
+        self.containerView.priceTextfield.textColor = .white
+        self.containerView.amountTextfield.textColor = .white
+      }else{
+        self.containerView.priceTextfield.textColor = .darkTwo
+        self.containerView.amountTextfield.textColor = .darkTwo
+      }
+    })
   }
   
   func refreshView() {
@@ -68,8 +84,6 @@ class BusinessViewController: BaseViewController {
       self.containerView.tipView.isHidden = true
       return true
     }
-    
-    return false
   }
   
   func changeButtonState() {

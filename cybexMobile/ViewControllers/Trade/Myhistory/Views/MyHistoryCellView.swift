@@ -32,28 +32,31 @@ class MyHistoryCellView: UIView {
   
   func updateUI(_ orderInfo: (FillOrder,time:String)) {
     let order = orderInfo.0
-    if let quoteInfo = app_data.assetInfo[order.fill_price.quote.assetID], let baseInfo = app_data.assetInfo[order.fill_price.base.assetID],let payInfo = app_data.assetInfo[order.pays.assetID] ,let receiveInfo = app_data.assetInfo[order.receives.assetID]{
-      let result = calculateAssetRelation(assetID_A_name: baseInfo.symbol.filterJade, assetID_B_name: quoteInfo.symbol.filterJade)
-      if result.base == baseInfo.symbol.filterJade && result.quote == quoteInfo.symbol.filterJade{
-        // SEll
-        // pay -> quote   receive -> base
+    
+    if let payInfo = app_data.assetInfo[order.pays.assetID] ,let receiveInfo = app_data.assetInfo[order.receives.assetID]{
+      // 从首页筛选出交易对
+      let result = calculateAssetRelation(assetID_A_name: payInfo.symbol.filterJade, assetID_B_name: receiveInfo.symbol.filterJade)
+      if result.base == payInfo.symbol.filterJade && result.quote == receiveInfo.symbol.filterJade{
+        // pay -> base   receive -> quote
+        // Buy
         self.asset.text = result.quote
         self.base.text  = "/" + result.base
-        self.kindL.text = "SELL"
-        self.typeView.backgroundColor = .reddish
-        self.amount.text = String(getRealAmountDouble(payInfo.id, amount: order.pays.amount)).formatCurrency(digitNum: payInfo.precision) + " " + result.quote
-        self.orderAmount.text = String(getRealAmountDouble(receiveInfo.id, amount: order.receives.amount)).formatCurrency(digitNum: receiveInfo.precision) + " " +  result.base
-        self.orderPrice.text = String(getRealAmountDouble(receiveInfo.id, amount: order.receives.amount) / getRealAmountDouble(payInfo.id, amount: order.pays.amount)).formatCurrency(digitNum: 8) + " " + result.base
-      }else{
-        // BUY   pay -> base receive -> quote
-        self.kindL.text               = "BUY"
-        self.asset.text = result.quote
-        self.base.text  = "/" + result.base
+        self.kindL.text = "BUY"
         self.typeView.backgroundColor = .turtleGreen
-        self.amount.text = String(getRealAmountDouble(receiveInfo.id, amount:order.receives.amount)).formatCurrency(digitNum: receiveInfo.precision) + " " + result.quote
-        self.orderAmount.text = String(getRealAmountDouble(payInfo.id, amount: order.pays.amount)).formatCurrency(digitNum: payInfo.precision) + " " + result.base
+        self.amount.text = getRealAmountDouble(receiveInfo.id, amount:order.receives.amount).string(digits: receiveInfo.precision) + " " + receiveInfo.symbol.filterJade
+        self.orderAmount.text = getRealAmountDouble(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision) + " " + payInfo.symbol.filterJade
         
-        self.orderPrice.text = String(getRealAmountDouble(payInfo.id, amount: order.pays.amount) / getRealAmountDouble(receiveInfo.id, amount:order.receives.amount)).formatCurrency(digitNum: 8) + " " + result.base
+        self.orderPrice.text = (getRealAmountDouble(payInfo.id, amount: order.pays.amount) / getRealAmountDouble(receiveInfo.id, amount:order.receives.amount)).string(digits: 8)
+        
+      }else{
+        // SELL   pay -> quote receive -> base
+        self.kindL.text = "SELL"
+        self.asset.text = result.quote
+        self.base.text  = "/" + result.base
+        self.typeView.backgroundColor = .reddish
+        self.amount.text = getRealAmountDouble(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision) + " " + payInfo.symbol.filterJade
+        self.orderAmount.text = getRealAmountDouble(receiveInfo.id, amount: order.receives.amount).string(digits: receiveInfo.precision) + " " +  receiveInfo.symbol.filterJade
+        self.orderPrice.text = (getRealAmountDouble(receiveInfo.id, amount: order.receives.amount) / getRealAmountDouble(payInfo.id, amount: order.pays.amount)).string(digits: 8)
       }
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

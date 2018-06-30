@@ -42,13 +42,13 @@ class OpenedOrdersView:  UIView{
             quote.text = quote_info.symbol.filterJade
             base.text = "/" + base_info.symbol.filterJade
             let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-            self.amount.text = quoteAmount.stringValue.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.quote.assetID]!.precision) + " " + quote_info.symbol.filterJade
+            self.amount.text = quoteAmount.doubleValue.string(digits: quote_info.precision) + " " + quote_info.symbol.filterJade
             let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
             if self.basePriceView.isHidden == false{
-              self.price.text =  baseAmount.stringValue.formatCurrency(digitNum: base_info.precision) + " " + base_info.symbol.filterJade
-               self.basePrice.text = (baseAmount / quoteAmount).stringValue.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.base.assetID]!.precision) + " " + base_info.symbol.filterJade
+              self.price.text =  baseAmount.doubleValue.string(digits: base_info.precision) + " " + base_info.symbol.filterJade
+               self.basePrice.text = (baseAmount / quoteAmount).doubleValue.string(digits: base_info.precision)
             }else{
-              self.price.text = (baseAmount / quoteAmount).stringValue.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.base.assetID]!.precision)
+              self.price.text = (baseAmount / quoteAmount).doubleValue.string(digits: base_info.precision)
             }
           }
           
@@ -60,14 +60,14 @@ class OpenedOrdersView:  UIView{
             quote.text = quote_info.symbol.filterJade
             base.text = "/" + base_info.symbol.filterJade
             let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
-            self.amount.text = quoteAmount.stringValue.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.base.assetID]!.precision) + " " +  quote_info.symbol.filterJade
+            self.amount.text = quoteAmount.doubleValue.string(digits: quote_info.precision) + " " +  quote_info.symbol.filterJade
             let baseAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
             if self.basePriceView.isHidden == false{
-              self.price.text = baseAmount.stringValue.formatCurrency(digitNum: base_info.precision) + " " + base_info.symbol.filterJade
-              self.basePrice.text = (baseAmount / quoteAmount).stringValue.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.base.assetID]!.precision) + " " + base_info.symbol.filterJade
+              self.price.text = baseAmount.doubleValue.string(digits:  base_info.precision) + " " + base_info.symbol.filterJade
+              self.basePrice.text = (baseAmount / quoteAmount).doubleValue.string(digits: quote_info.precision)
 
             }else{
-              self.price.text = (baseAmount / quoteAmount).stringValue.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.quote.assetID]!.precision) + " " + base_info.symbol.filterJade
+              self.price.text = (baseAmount / quoteAmount).doubleValue.string(digits: base_info.precision)
             }
           }
         }

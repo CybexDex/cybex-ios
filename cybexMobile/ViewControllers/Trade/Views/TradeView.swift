@@ -31,7 +31,6 @@ class TradeView: UIView {
       if let data = data as? OrderBook {
         let bids = data.bids
         let asks = data.asks
-       
         
         for i in 6...10{
           let sell = sells.viewWithTag(i) as! TradeLineView
@@ -64,9 +63,7 @@ class TradeView: UIView {
     }
   }
   
-  func setup(){
-//    self.titlePrice.text = self.titlePrice.text?.components(separatedBy: "(")[0] +
-    
+  func setup(){    
     for item in items {
       item.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
         guard let `self` = self else { return }

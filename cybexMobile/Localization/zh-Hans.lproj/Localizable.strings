@@ -216,5 +216,7 @@
 "cancle_openedorder_sell" = "确认取消该卖单";
 "cancle_openedorder_buy" = "确认取消该买单";
 
+"withdraw_fee_fail"      = "获取手续费失败";
+
 
 

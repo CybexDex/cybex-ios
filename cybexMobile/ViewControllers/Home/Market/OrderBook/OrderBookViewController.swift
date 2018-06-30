@@ -24,12 +24,8 @@ class OrderBookViewController: BaseViewController {
   var VC_TYPE : Int = 1
   var pair:Pair? {
     didSet {
-      guard let pair = pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
-      
+      guard let pair = pair else { return }
       if self.tradeView != nil{
-        // orderbook_price
-        self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
-        self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
         showMarketPrice()
       }
       self.coordinator?.fetchData(pair)
@@ -48,9 +44,19 @@ class OrderBookViewController: BaseViewController {
     }else{
       tradeView = TradeView(frame:self.view.bounds)
       self.view.addSubview(tradeView)
-      tradeView.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
       
+      tradeView.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+      setupEvent()
     }
+  }
+  func setupEvent(){
+    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] notification in
+      guard let `self` = self else { return }
+      guard let pair = self.pair, let quote_info = app_data.assetInfo[pair.quote] else { return }
+      
+      self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized()
+      self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
+    })
   }
   
   override func viewWillAppear(_ animated: Bool) {
