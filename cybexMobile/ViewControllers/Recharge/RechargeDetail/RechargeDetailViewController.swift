@@ -136,7 +136,6 @@ class RechargeDetailViewController: BaseViewController {
   
   
   func setupEvent(){
-    
     self.withdraw.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self](tap) in
       guard let `self` = self else{ return }
       self.withDrawAction()
@@ -170,6 +169,9 @@ class RechargeDetailViewController: BaseViewController {
               if success{
                 self.isTrueAddress      = true
                 self.errorView.isHidden = true
+                if let amount = self.amountView.content.text,let amountDouble = amount.toDouble(){
+                  self.checkAmountIsAvailable(amountDouble)
+                }
               }else{
                 self.isTrueAddress = false
                 self.errorView.isHidden = false
@@ -201,6 +203,10 @@ class RechargeDetailViewController: BaseViewController {
         self.isAvalibaleAmount  = true
         self.errorView.isHidden = true
         self.setFinalAmount()
+        if !self.isTrueAddress{
+          self.errorView.isHidden = false
+          self.errorL.locali =  R.string.localizable.withdraw_address_fault.key.localized()
+        }
       }
     }
   }
@@ -325,6 +331,7 @@ extension RechargeDetailViewController{
       self.feeView.isHidden       = true
       self.introduceView.isHidden = true
       self.stackView.layoutIfNeeded()
+        self.view.layoutIfNeeded()
     }
   }
   
@@ -332,6 +339,8 @@ extension RechargeDetailViewController{
     self.feeView.isHidden       = false
     self.introduceView.isHidden = false
     self.stackView.layoutIfNeeded()
+    self.view.layoutIfNeeded()
+
   }
   
   func withDrawAction(){
