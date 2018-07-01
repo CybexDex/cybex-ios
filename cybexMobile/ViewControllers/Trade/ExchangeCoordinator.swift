@@ -67,6 +67,7 @@ extension ExchangeCoordinator: ExchangeCoordinatorProtocol {
         tradeHistory.coordinator = TradeHistoryCoordinator(rootVC: self.rootVC)
         exchange.addChildViewController(tradeHistory)
         
+        tradeHistory.pageType = .trade
         bottomView.addSubview(tradeHistory.view)
         tradeHistory.view.edges(to: bottomView)
         

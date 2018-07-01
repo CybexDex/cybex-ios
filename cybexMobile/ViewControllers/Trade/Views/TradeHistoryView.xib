@@ -65,7 +65,7 @@
                         <constraint firstAttribute="bottom" secondItem="nNs-Ig-AUu" secondAttribute="bottom" id="vHR-PK-gTK"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bMn-o5-fVt">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bMn-o5-fVt">
                     <rect key="frame" x="0.0" y="40" width="375" height="360"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
@@ -77,9 +77,9 @@
             <constraints>
                 <constraint firstItem="bMn-o5-fVt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="5JG-Zz-v08"/>
                 <constraint firstItem="1Qz-Hc-Rl7" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="6An-Jx-LXm"/>
+                <constraint firstItem="bMn-o5-fVt" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="GkA-4Z-RVt"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bMn-o5-fVt" secondAttribute="trailing" id="YBA-0M-dpE"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="1Qz-Hc-Rl7" secondAttribute="trailing" id="bjj-tj-eor"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="bMn-o5-fVt" secondAttribute="bottom" id="hAR-ED-q9y"/>
                 <constraint firstItem="bMn-o5-fVt" firstAttribute="top" secondItem="1Qz-Hc-Rl7" secondAttribute="bottom" id="kj0-YV-HPJ"/>
                 <constraint firstItem="1Qz-Hc-Rl7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="llQ-sh-wcU"/>
             </constraints>

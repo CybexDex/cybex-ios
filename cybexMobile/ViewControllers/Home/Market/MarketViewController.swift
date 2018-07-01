@@ -306,7 +306,7 @@ class MarketViewController: BaseViewController {
       .skip(1)
       .distinctUntilChanged()
       .filter({ $0.count == AssetConfiguration.shared.asset_ids.count })
-      .throttle(3, latest: true, scheduler: MainScheduler.instance)
+      .throttle(5, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in
         guard let `self` = self else { return }
         self.performSelector(onMainThread: #selector(self.refreshTotalView), with: nil, waitUntilDone: false)

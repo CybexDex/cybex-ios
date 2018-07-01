@@ -19,6 +19,8 @@ protocol OrderBookStateManagerProtocol {
         _ subscriber: S, transform: ((Subscription<OrderBookState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
   
+  func resetData(_ pair:Pair)
+
   func fetchData(_ pair:Pair)
   func updateMarketListHeight(_ height:CGFloat)
 }
@@ -49,6 +51,10 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
   
+  func resetData(_ pair:Pair) {
+    self.store.dispatch(FetchedLimitData(data:[], pair:pair))
+  }
+  
   func fetchData(_ pair:Pair) {
     store.dispatch(creator.fetchLimitOrders(with: pair, callback: {[weak self] (data) in
       guard let `self` = self else { return }
@@ -61,7 +67,7 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
   
   func updateMarketListHeight(_ height:CGFloat) {
     if let vc = self.rootVC.viewControllers[self.rootVC.viewControllers.count - 1] as? MarketViewController {
-      vc.pageContentViewHeight.constant = height + 40
+      vc.pageContentViewHeight.constant = height + 50
     }
   }
 

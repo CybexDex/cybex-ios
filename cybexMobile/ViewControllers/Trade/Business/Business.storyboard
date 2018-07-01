@@ -37,22 +37,22 @@
                                 <rect key="frame" x="0.0" y="52" width="375" height="615"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qfk-Ue-uhf">
-                                        <rect key="frame" x="0.0" y="0.0" width="1125" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1125" height="615"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jac-cH-uZ5">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="615"/>
                                                 <connections>
                                                     <segue destination="Fdf-gi-ksD" kind="embed" identifier="ExchangeViewControllerBuy" id="6xO-gd-IjE"/>
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y8d-pJ-zNu">
-                                                <rect key="frame" x="375" y="0.0" width="375" height="667"/>
+                                                <rect key="frame" x="375" y="0.0" width="375" height="615"/>
                                                 <connections>
                                                     <segue destination="0g1-Ao-zfw" kind="embed" identifier="ExchangeViewControllerSell" id="Is8-tK-ZT7"/>
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kvr-lP-awK">
-                                                <rect key="frame" x="750" y="0.0" width="375" height="667"/>
+                                                <rect key="frame" x="750" y="0.0" width="375" height="615"/>
                                                 <connections>
                                                     <segue destination="ogn-X9-Efg" kind="embed" identifier="OpenedOrdersViewController" id="LVv-cy-Lxu"/>
                                                 </connections>
@@ -71,9 +71,9 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Qfk-Ue-uhf" secondAttribute="bottom" id="8Eo-Zi-n0Z"/>
-                                    <constraint firstItem="Qfk-Ue-uhf" firstAttribute="top" secondItem="9h5-WD-fuk" secondAttribute="top" id="SvG-jo-AXG"/>
                                     <constraint firstAttribute="trailing" secondItem="Qfk-Ue-uhf" secondAttribute="trailing" id="V5k-vr-C35"/>
                                     <constraint firstItem="Qfk-Ue-uhf" firstAttribute="leading" secondItem="9h5-WD-fuk" secondAttribute="leading" id="eXI-p1-SX3"/>
+                                    <constraint firstItem="Qfk-Ue-uhf" firstAttribute="top" secondItem="9h5-WD-fuk" secondAttribute="top" id="sPe-C6-AX8"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -82,15 +82,16 @@
                             <constraint firstItem="sJD-hv-SVJ" firstAttribute="trailing" secondItem="9h5-WD-fuk" secondAttribute="trailing" id="8tY-Zz-FDP"/>
                             <constraint firstItem="fjy-RN-PdR" firstAttribute="top" secondItem="sJD-hv-SVJ" secondAttribute="top" id="ET4-XG-ZNH"/>
                             <constraint firstItem="9h5-WD-fuk" firstAttribute="leading" secondItem="sJD-hv-SVJ" secondAttribute="leading" id="IAE-HF-974"/>
+                            <constraint firstAttribute="bottom" secondItem="Qfk-Ue-uhf" secondAttribute="bottom" id="MEH-ih-JDl"/>
                             <constraint firstItem="y8d-pJ-zNu" firstAttribute="width" secondItem="0S0-l3-gEk" secondAttribute="width" id="NnK-qR-dEl"/>
-                            <constraint firstItem="jac-cH-uZ5" firstAttribute="height" secondItem="0S0-l3-gEk" secondAttribute="height" id="O4F-76-OCg"/>
+                            <constraint firstItem="jac-cH-uZ5" firstAttribute="height" secondItem="Qfk-Ue-uhf" secondAttribute="height" id="O4F-76-OCg"/>
                             <constraint firstItem="Qfk-Ue-uhf" firstAttribute="width" secondItem="0S0-l3-gEk" secondAttribute="width" multiplier="3" id="YXn-sA-mjI"/>
                             <constraint firstItem="sJD-hv-SVJ" firstAttribute="bottom" secondItem="9h5-WD-fuk" secondAttribute="bottom" id="baU-1N-dDz"/>
                             <constraint firstItem="kvr-lP-awK" firstAttribute="width" secondItem="0S0-l3-gEk" secondAttribute="width" id="crx-qG-eRU"/>
                             <constraint firstItem="jac-cH-uZ5" firstAttribute="width" secondItem="0S0-l3-gEk" secondAttribute="width" id="efq-2O-zgS"/>
-                            <constraint firstItem="y8d-pJ-zNu" firstAttribute="height" secondItem="0S0-l3-gEk" secondAttribute="height" id="l1b-Nb-xav"/>
+                            <constraint firstItem="y8d-pJ-zNu" firstAttribute="height" secondItem="Qfk-Ue-uhf" secondAttribute="height" id="l1b-Nb-xav"/>
                             <constraint firstItem="fjy-RN-PdR" firstAttribute="leading" secondItem="sJD-hv-SVJ" secondAttribute="leading" id="pgy-Cr-DFk"/>
-                            <constraint firstItem="kvr-lP-awK" firstAttribute="height" secondItem="0S0-l3-gEk" secondAttribute="height" id="rxg-az-OkW"/>
+                            <constraint firstItem="kvr-lP-awK" firstAttribute="height" secondItem="Qfk-Ue-uhf" secondAttribute="height" id="rxg-az-OkW"/>
                             <constraint firstItem="9h5-WD-fuk" firstAttribute="top" secondItem="fjy-RN-PdR" secondAttribute="bottom" id="tch-sy-6va"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sJD-hv-SVJ"/>
@@ -164,7 +165,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LHW-vR-7Tl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="273" y="-571"/>
+            <point key="canvasLocation" x="834" y="-528"/>
         </scene>
         <!--Business View Controller-->
         <scene sceneID="XBz-bH-pb2">
@@ -211,7 +212,7 @@
                             <constraint firstItem="D4M-YH-R3A" firstAttribute="leading" secondItem="Izt-ou-l55" secondAttribute="leading" id="BA1-yW-ltS"/>
                             <constraint firstItem="D4M-YH-R3A" firstAttribute="top" secondItem="Izt-ou-l55" secondAttribute="top" id="Raj-mz-YiA"/>
                             <constraint firstItem="D4M-YH-R3A" firstAttribute="trailing" secondItem="Izt-ou-l55" secondAttribute="trailing" id="U69-KP-o9T"/>
-                            <constraint firstItem="Izt-ou-l55" firstAttribute="bottom" secondItem="D4M-YH-R3A" secondAttribute="bottom" id="jUl-UN-gMv"/>
+                            <constraint firstAttribute="bottom" secondItem="D4M-YH-R3A" secondAttribute="bottom" id="jUl-UN-gMv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Izt-ou-l55"/>
                     </view>

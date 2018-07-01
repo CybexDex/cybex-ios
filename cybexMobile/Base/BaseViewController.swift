@@ -189,7 +189,7 @@ extension UIViewController : ShowManagerDelegate {
   func showToastBox(_ success:Bool, message:String) {
     ShowManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: .fadeIn_Out, showType: .alert_image)
     ShowManager.shared.showAnimationInView(self.view)
-    ShowManager.shared.hide(0.8)
+    ShowManager.shared.hide(2.0)
   }
   
   func showTopToastBox(_ success:Bool, message:String) {

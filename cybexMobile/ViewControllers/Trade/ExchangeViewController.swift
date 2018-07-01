@@ -63,6 +63,14 @@ extension ExchangeViewController : TradePair {
       self.pair = newValue
     }
   }
+  
+  func refresh() {
+    self.childViewControllers.forEach { (viewController) in
+      if let vc = viewController as? TradePair{
+        vc.refresh()
+      }
+    }
+  }
 }
 
 extension ExchangeViewController {

@@ -30,7 +30,7 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvM-bg-mXi">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="884"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="655"/>
                             <subviews>
                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Swa-VX-CqK">
                                     <rect key="frame" x="0.0" y="0.0" width="209" height="350"/>
@@ -68,10 +68,7 @@
                                     </constraints>
                                 </view>
                                 <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="271" translatesAutoresizingMaskIntoConstraints="NO" id="pj3-3h-nPl">
-                                    <rect key="frame" x="0.0" y="384" width="375" height="500"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="500" id="b7f-9R-3vf"/>
-                                    </constraints>
+                                    <rect key="frame" x="0.0" y="384" width="375" height="271"/>
                                 </containerView>
                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qj8-zn-bi9">
                                     <rect key="frame" x="209" y="0.0" width="166" height="350"/>
@@ -82,6 +79,7 @@
                                 <constraint firstItem="pj3-3h-nPl" firstAttribute="top" secondItem="WR4-bl-i3D" secondAttribute="bottom" id="2x0-GH-FGn"/>
                                 <constraint firstItem="WR4-bl-i3D" firstAttribute="top" secondItem="Swa-VX-CqK" secondAttribute="bottom" id="4HZ-lX-7eK"/>
                                 <constraint firstAttribute="trailing" secondItem="qj8-zn-bi9" secondAttribute="trailing" id="6yf-T8-isu"/>
+                                <constraint firstAttribute="bottom" secondItem="pj3-3h-nPl" secondAttribute="bottom" id="Bo1-fM-g05"/>
                                 <constraint firstItem="qj8-zn-bi9" firstAttribute="height" secondItem="Swa-VX-CqK" secondAttribute="height" id="Ia3-b8-tT2"/>
                                 <constraint firstItem="qj8-zn-bi9" firstAttribute="top" secondItem="yvM-bg-mXi" secondAttribute="top" id="IhY-4n-tia"/>
                                 <constraint firstItem="WR4-bl-i3D" firstAttribute="leading" secondItem="yvM-bg-mXi" secondAttribute="leading" id="Kqo-Eu-iyd"/>
@@ -91,7 +89,6 @@
                                 <constraint firstItem="pj3-3h-nPl" firstAttribute="leading" secondItem="yvM-bg-mXi" secondAttribute="leading" id="TRL-4e-2u0"/>
                                 <constraint firstItem="Swa-VX-CqK" firstAttribute="leading" secondItem="yvM-bg-mXi" secondAttribute="leading" id="WVa-Ul-pbt"/>
                                 <constraint firstAttribute="trailing" secondItem="WR4-bl-i3D" secondAttribute="trailing" id="a7Y-gn-LyU"/>
-                                <constraint firstAttribute="bottom" secondItem="pj3-3h-nPl" secondAttribute="bottom" id="mTB-lb-Sfx"/>
                                 <constraint firstItem="WR4-bl-i3D" firstAttribute="trailing" secondItem="yvM-bg-mXi" secondAttribute="trailing" id="yz8-6m-gOu"/>
                             </constraints>
                         </view>

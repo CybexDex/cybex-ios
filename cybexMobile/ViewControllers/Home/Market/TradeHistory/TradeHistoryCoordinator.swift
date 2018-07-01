@@ -19,6 +19,7 @@ protocol TradeHistoryStateManagerProtocol {
         _ subscriber: S, transform: ((Subscription<TradeHistoryState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
   
+  func resetData()
   func fetchData(_ pair:Pair)
   func updateMarketListHeight(_ height:CGFloat)
 }
@@ -49,6 +50,10 @@ extension TradeHistoryCoordinator: TradeHistoryStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
   
+  func resetData() {
+    self.store.dispatch(FetchedFillOrderData(data:[]))
+  }
+  
   func fetchData(_ pair:Pair) {
     store.dispatch(creator.fetchFillOrders(with: pair, callback: {[weak self] (data) in
       guard let `self` = self else { return }
@@ -61,10 +66,9 @@ extension TradeHistoryCoordinator: TradeHistoryStateManagerProtocol {
   
   func updateMarketListHeight(_ height:CGFloat) {
     if let vc = self.rootVC.viewControllers[self.rootVC.viewControllers.count - 1] as? MarketViewController {
-      vc.pageContentViewHeight.constant = height + 40
-    }else if let vc = self.rootVC.viewControllers[self.rootVC.viewControllers.count - 1] as? TradeViewController {
-      print("")
+      vc.pageContentViewHeight.constant = height + 50
     }
+    
   }
     
 }

@@ -64,23 +64,14 @@ extension RechargeCoordinator: RechargeStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
   func fetchWithdrawIdsInfo(){
-    async {
-      SimpleHTTPService.fetchWithdrawIdsInfo().done { (ids) in
-        main {
-          self.store.dispatch(FecthWithdrawIds(data: ids))
-        }
-        }.cauterize()
-    }
+    SimpleHTTPService.fetchWithdrawIdsInfo().done { (ids) in
+        self.store.dispatch(FecthWithdrawIds(data: ids))
+      }.cauterize()
   }
   func fetchDepositIdsInfo(){
-    async {
-      
-      SimpleHTTPService.fetchDesipotInfo().done { (ids) in
-        main {
-          self.store.dispatch(FecthDepositIds(data: ids))
-        }
-        }.cauterize()
-    }
+    SimpleHTTPService.fetchDesipotInfo().done { (ids) in
+        self.store.dispatch(FecthDepositIds(data: ids))
+      }.cauterize()
   }
     
 }

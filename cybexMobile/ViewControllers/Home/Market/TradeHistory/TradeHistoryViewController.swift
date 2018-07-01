@@ -12,21 +12,24 @@ import RxCocoa
 import ReSwift
 import Localize_Swift
 
+enum TradeHistoryPageType {
+  case market
+  case trade
+}
+
 class TradeHistoryViewController: BaseViewController {
   
   @IBOutlet weak var historyView: TradeHistoryView!
   
   var coordinator: (TradeHistoryCoordinatorProtocol & TradeHistoryStateManagerProtocol)?
   
+  var pageType:TradeHistoryPageType = .market
+  
   var pair:Pair? {
     didSet {
-      guard let base_info = app_data.assetInfo[(pair?.base)!], let quote_info = app_data.assetInfo[(pair?.quote)!] else { return }
-      
-      self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
-      self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
-      self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized() + "(" + base_info.symbol.filterJade + ")"
-      self.historyView.time.text = R.string.localizable.my_history_time.key.localized()
-      self.coordinator?.fetchData(pair!)
+      self.coordinator?.resetData()
+
+     refreshView()
     }
   }
   
@@ -42,6 +45,20 @@ class TradeHistoryViewController: BaseViewController {
     super.viewDidLoad()
     setupEvent()
   }
+  
+  func refreshView() {
+    guard let pair = pair, let base_info = app_data.assetInfo[(pair.base)], let quote_info = app_data.assetInfo[(pair.quote)] else { return }
+
+    if pageType == .trade {
+      self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
+      self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
+      self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized() + "(" + base_info.symbol.filterJade + ")"
+      self.historyView.time.text = R.string.localizable.my_history_time.key.localized()
+    }
+    
+    self.coordinator?.fetchData(pair)
+  }
+  
   func setupEvent(){
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] notification in
       guard let `self` = self else { return }
@@ -136,6 +153,10 @@ extension TradeHistoryViewController : TradePair{
     set {
       self.pair = newValue
     }
+  }
+  
+  func refresh() {
+    refreshView()
   }
 }
 
