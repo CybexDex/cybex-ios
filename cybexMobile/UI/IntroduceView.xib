@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroduceView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="content" destination="gwp-Xh-g6r" id="Q7h-tD-xvA"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="139"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bk-Hf-jzb">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="139"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwp-Xh-g6r">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="gwp-Xh-g6r" secondAttribute="trailing" id="1Fa-BY-kSb"/>
+                        <constraint firstItem="gwp-Xh-g6r" firstAttribute="leading" secondItem="1bk-Hf-jzb" secondAttribute="leading" id="D8D-ao-2ka"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="139" id="GcL-SV-Zpe"/>
+                        <constraint firstItem="gwp-Xh-g6r" firstAttribute="top" secondItem="1bk-Hf-jzb" secondAttribute="top" id="MrV-ah-CFF"/>
+                        <constraint firstAttribute="bottom" secondItem="gwp-Xh-g6r" secondAttribute="bottom" id="oD5-Eb-EyF"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="1bk-Hf-jzb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Oky-EU-WDN"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="1bk-Hf-jzb" secondAttribute="trailing" id="eCv-W9-RCi"/>
+                <constraint firstItem="1bk-Hf-jzb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eJX-ev-HI0"/>
+                <constraint firstItem="gwp-Xh-g6r" firstAttribute="width" secondItem="vUN-kp-3ea" secondAttribute="width" id="eMf-CL-I6p"/>
+                <constraint firstItem="1bk-Hf-jzb" firstAttribute="width" secondItem="vUN-kp-3ea" secondAttribute="width" id="ifC-gS-70c"/>
+                <constraint firstItem="1bk-Hf-jzb" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="wc1-s9-1Zy"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="-26" y="-89"/>
+        </view>
+    </objects>
+</document>

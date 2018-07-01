@@ -768,22 +768,15 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yhZ-aN-stl">
                                                         <rect key="frame" x="0.0" y="323" width="349" height="159"/>
                                                         <subviews>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZN-u4-HOI">
-                                                                <rect key="frame" x="12" y="12" width="325" height="139"/>
-                                                                <color key="tintColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="139" id="la3-vD-CNx"/>
-                                                                </constraints>
-                                                                <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                            </textView>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tG-XF-GWP" customClass="IntroduceView" customModule="cybexMobile" customModuleProvider="target">
+                                                                <rect key="frame" x="12" y="12" width="325" height="136"/>
+                                                            </view>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="IZN-u4-HOI" firstAttribute="top" secondItem="yhZ-aN-stl" secondAttribute="top" constant="12" id="1Uy-OJ-NLy"/>
-                                                            <constraint firstAttribute="trailing" secondItem="IZN-u4-HOI" secondAttribute="trailing" constant="12" id="E0o-MP-f0I"/>
-                                                            <constraint firstItem="IZN-u4-HOI" firstAttribute="leading" secondItem="yhZ-aN-stl" secondAttribute="leading" constant="12" id="ew4-Zv-hzG"/>
-                                                            <constraint firstAttribute="bottom" secondItem="IZN-u4-HOI" secondAttribute="bottom" constant="8" id="m1p-4l-rcZ"/>
+                                                            <constraint firstAttribute="bottom" secondItem="8tG-XF-GWP" secondAttribute="bottom" constant="11" id="ESi-gd-6se"/>
+                                                            <constraint firstItem="8tG-XF-GWP" firstAttribute="leading" secondItem="yhZ-aN-stl" secondAttribute="leading" constant="12" id="Rs5-TW-CBY"/>
+                                                            <constraint firstItem="8tG-XF-GWP" firstAttribute="top" secondItem="yhZ-aN-stl" secondAttribute="top" constant="12" id="z8T-PQ-eYz"/>
+                                                            <constraint firstAttribute="trailing" secondItem="8tG-XF-GWP" secondAttribute="trailing" constant="12" id="zTf-9w-Kmm"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
@@ -892,7 +885,7 @@
                         <outlet property="finalAmount" destination="2Un-JV-3Lb" id="cnX-3T-RRm"/>
                         <outlet property="gateAwayFee" destination="tVv-Pa-xFA" id="Y2P-aF-iI7"/>
                         <outlet property="insideFee" destination="pKH-9I-fn3" id="PL6-wf-4Ps"/>
-                        <outlet property="introduce" destination="IZN-u4-HOI" id="hye-Cf-Okp"/>
+                        <outlet property="introduce" destination="8tG-XF-GWP" id="agR-JK-hiK"/>
                         <outlet property="introduceView" destination="yhZ-aN-stl" id="fhJ-Qw-vxU"/>
                         <outlet property="stackView" destination="pxQ-od-hXr" id="eLZ-VG-hKp"/>
                         <outlet property="withdraw" destination="hZu-rU-6n9" id="e89-j2-Icz"/>

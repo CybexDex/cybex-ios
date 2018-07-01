@@ -69,6 +69,11 @@ class MyHistoryViewController: BaseViewController {
         guard let `self` = self else{ return }
         
         if let data = UserManager.shared.fillOrder.value{
+          if data.count == 0{
+            self.view.showNoData(R.string.localizable.myhistory_nodata.key.localized())
+          }else{
+            self.view.hiddenNoData()
+          }
           self.data = data
           if self.isVisible{
             self.tableView.reloadData()

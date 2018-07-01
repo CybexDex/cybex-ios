@@ -211,12 +211,14 @@
 
 "openedorder_buy_ensure" = "买单确认";
 "openedorder_sell_ensure" = "卖单确认";
-"openedorder_fee_title" = "取消手续费";
+"openedorder_fee_title" = "撤单手续费";
 
 "cancle_openedorder_sell" = "确认取消该卖单";
 "cancle_openedorder_buy" = "确认取消该买单";
 
 "withdraw_fee_fail"      = "获取手续费失败";
 
+"openedorder_nodata"     = "暂无委单";
+"myhistory_nodata"       = "暂无交易历史";
 
 

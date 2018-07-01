@@ -228,3 +228,5 @@
 
 "withdraw_fee_fail"      = "fee failed";
 
+"openedorder_nodata"     = "No data of opened order";
+"myhistory_nodata"       = "No data of trade history";

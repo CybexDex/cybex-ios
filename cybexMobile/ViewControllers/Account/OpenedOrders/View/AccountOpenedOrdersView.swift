@@ -108,7 +108,7 @@ extension AccountOpenedOrdersView:UITableViewDelegate, UITableViewDataSource {
     else if segment.selectedSegmentIndex == 2 {
       orderes = orderes.filter({!$0.isBuy})
     }
-    
+  
     return orderes.count
   }
   

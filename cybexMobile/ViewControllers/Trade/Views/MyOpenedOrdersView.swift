@@ -20,6 +20,7 @@ class MyOpenedOrdersView: UIView {
   var data : Any? {
     didSet {
       if let _ = data as? Pair {
+        
         self.tableView.reloadData()
       }
     }
@@ -83,6 +84,12 @@ extension MyOpenedOrdersView : UITableViewDelegate,UITableViewDataSource{
     let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
       return (limitorder.sellPrice.base.assetID == pair.base && limitorder.sellPrice.quote.assetID == pair.quote) || (limitorder.sellPrice.base.assetID == pair.quote && limitorder.sellPrice.quote.assetID == pair.base)
     }) ?? []
+    
+    if orderes.count == 0 {
+      self.showNoData(R.string.localizable.openedorder_nodata.key.localized())
+    }else{
+      self.hiddenNoData()
+    }
     return orderes.count
   }
   

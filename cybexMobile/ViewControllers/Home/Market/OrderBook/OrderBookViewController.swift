@@ -58,6 +58,9 @@ class OrderBookViewController: BaseViewController {
       self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
     })
   }
+  deinit{
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+  }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)

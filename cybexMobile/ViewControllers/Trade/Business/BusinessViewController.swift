@@ -52,6 +52,9 @@ class BusinessViewController: BaseViewController {
       }
     })
   }
+  deinit {
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil)
+  }
   
   func refreshView() {
     guard let pair = pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }

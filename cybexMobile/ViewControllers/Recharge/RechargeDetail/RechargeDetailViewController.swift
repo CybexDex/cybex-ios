@@ -32,10 +32,11 @@ class RechargeDetailViewController: BaseViewController {
   @IBOutlet weak var feeView: UIView!
   
   @IBOutlet weak var introduceView: UIView!
-  @IBOutlet weak var introduce: UITextView!
   @IBOutlet weak var withdraw: Button!
   @IBOutlet weak var stackView: UIStackView!
-  
+    
+    @IBOutlet weak var introduce: IntroduceView!
+    
   var feeAssetId : String  = AssetConfiguration.CYB
   
   var isWithdraw : Bool = false
@@ -58,7 +59,6 @@ class RechargeDetailViewController: BaseViewController {
       if let balances = UserManager.shared.balances.value{
         for balance in balances{
           if balance.asset_type == trade?.id{
-            
             self.balance = balance
           }
         }
@@ -82,7 +82,7 @@ class RechargeDetailViewController: BaseViewController {
     if let name = app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade{
       self.coordinator?.fetchWithDrawMessage(callback: { (message) in
         
-        self.introduce.attributedText = message.replacingOccurrences(of: "$asset", with: name).set(style: StyleNames.introduce_normal.rawValue)
+        self.introduce.locail = message.replacingOccurrences(of: "$asset", with: name)
       })
     }
     
@@ -144,38 +144,11 @@ class RechargeDetailViewController: BaseViewController {
     
     NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: amountView.content, queue: nil) { [weak self](notification) in
       guard let `self` = self else {return}
-      if let text = self.amountView.content.text,let amount = text.toDouble(),amount > 0,let balance = self.balance{
+      
+      if let text = self.amountView.content.text,let amount = text.toDouble(),amount > 0,let balance = self.balance,let balance_info = app_data.assetInfo[balance.asset_type]{
         
-        if let priction = app_data.assetInfo[balance.asset_type]?.precision{
-          if text.contains("."){
-            let texts = text.split(separator: ".")
-            if (texts.last?.count)! > priction {
-              self.amountView.content.text = String(texts.first!) + "." + String(texts.last!).substring(from: 0, length: priction)!
-            }
-          }
-        }
-        
-        let avaliable = getRealAmount(balance.asset_type, amount: balance.balance).doubleValue
-        
-        if let data = self.coordinator?.state.property.data.value{
-          if amount < data.minValue{
-            self.isAvalibaleAmount  = false
-            self.errorView.isHidden = false
-            self.withdraw.isEnable = false
-            self.errorL.locali      =  R.string.localizable.withdraw_min_value.key.localized()
-          }else if amount > avaliable || avaliable < data.fee{
-            self.isAvalibaleAmount  = false
-            self.errorView.isHidden = false
-            self.withdraw.isEnable = false
-            self.errorL.locali =  R.string.localizable.withdraw_nomore.key.localized()
-          }else{
-            self.isAvalibaleAmount  = true
-            self.errorView.isHidden = true
-            if let asset = app_data.assetInfo[balance.asset_type]{
-              self.finalAmount.text = (amount - data.fee).string(digits: asset.precision) + " " + asset.symbol.filterJade
-            }
-          }
-        }
+        self.amountView.content.text = checkMaxLength(text, maxLength: balance_info.precision)
+        self.checkAmountIsAvailable(amount)
       }
     }
     
@@ -211,6 +184,27 @@ class RechargeDetailViewController: BaseViewController {
     }
   }
   
+  func checkAmountIsAvailable(_ amount:Double){
+    if let balance = self.balance, let data = self.coordinator?.state.property.data.value{
+      let avaliable = getRealAmount(balance.asset_type, amount: balance.balance).doubleValue
+      if amount < data.minValue{
+        self.isAvalibaleAmount  = false
+        self.errorView.isHidden = false
+        self.withdraw.isEnable = false
+        self.errorL.locali      =  R.string.localizable.withdraw_min_value.key.localized()
+      }else if amount > avaliable || avaliable < data.fee{
+        self.isAvalibaleAmount  = false
+        self.errorView.isHidden = false
+        self.withdraw.isEnable = false
+        self.errorL.locali =  R.string.localizable.withdraw_nomore.key.localized()
+      }else{
+        self.isAvalibaleAmount  = true
+        self.errorView.isHidden = true
+        self.setFinalAmount()
+      }
+    }
+  }
+  
   func commonObserveState() {
     coordinator?.subscribe(errorSubscriber) { sub in
       return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
@@ -226,11 +220,13 @@ class RechargeDetailViewController: BaseViewController {
     
     self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext: {[weak self] (withdrawInfo) in
       guard let `self` = self else{return}
+      
       if let data = withdrawInfo{
-        if let precision = app_data.assetInfo[(self.trade?.id)!]?.precision{
-          self.insideFee.text = data.fee.string(digits: precision) + " " + (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)!
+        if let trade = self.trade,let trade_info = app_data.assetInfo[trade.id]{
+          self.insideFee.text = data.fee.string(digits: trade_info.precision) + " " + (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)!
         }
-        
+        self.setFinalAmount()
+        self.changeWithdrawState()
         self.amountView.textplaceholder = R.string.localizable.recharge_min.key.localized() + String(describing: data.minValue)
       }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -243,31 +239,46 @@ class RechargeDetailViewController: BaseViewController {
         let fee               = data.0
         self.gateAwayFee.text = (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade
         self.isAvalibaleAmount = true
-        if let trade = self.trade,let asset_info = app_data.assetInfo[trade.id],let withdrawFee    = self.insideFee.text?.components(separatedBy: " ").first?.toDouble(),let withdrawAmount = self.amountView.content.text?.components(separatedBy: " ").first?.toDouble(){
-          
-          if AssetConfiguration.CYB == fee.asset_id{
-            // cyb
-            self.finalAmount.text = (withdrawAmount - withdrawFee).string(digits: asset_info.precision) + " " + asset_info.symbol.filterJade
-          }else{
+          if AssetConfiguration.CYB != fee.asset_id{
             self.feeAssetId       = fee.asset_id
-            self.finalAmount.text = (withdrawAmount - fee.amount.toDouble()! - withdrawFee).string(digits: asset_info.precision) + " " + asset_info.symbol.filterJade
           }
-        }
+        self.setFinalAmount()
+        self.changeWithdrawState()
       }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   
-
+  
   override func configureObserveState() {
     commonObserveState()
     
   }
   
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
+  deinit {
     NotificationCenter.default.removeObserver(self)
-    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
   }
+  
+  func setFinalAmount(){
+    if let text = self.amountView.content.text,let amount = Decimal(string: text){
+      var finalAmount : Decimal = amount
+      var gatewayFee : Decimal = 0
+      if let gateway_fee = self.coordinator?.state.property.gatewayFee.value?.0{
+        if self.feeAssetId != AssetConfiguration.CYB{
+          gatewayFee = getRealAmount(gateway_fee.asset_id, amount: gateway_fee.amount)
+          finalAmount = finalAmount - gatewayFee
+        }
+      }
+      var insideFee :Decimal = 0
+      if let inside_fee = self.coordinator?.state.property.data.value{
+        insideFee = Decimal(inside_fee.fee)
+        finalAmount = finalAmount - insideFee
+      }
+      if let balance = self.balance, let balance_info = app_data.assetInfo[balance.asset_type]{
+        self.finalAmount.text = finalAmount.doubleValue.string(digits: balance_info.precision) + " " + balance_info.symbol.filterJade
+      }
+    }
+  }
+  
 }
 
 extension RechargeDetailViewController{
@@ -279,41 +290,33 @@ extension RechargeDetailViewController{
       if self.isLoading(){
         return
       }
+      if ShowManager.shared.showView != nil{
+        return
+      }
       showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
     }else{
-      if UserManager.shared.isWithDraw,self.isWithdraw,self.isTrueAddress,self.amountView.content.text != "",self.isAvalibaleAmount,let trade = self.trade,let text = self.addressView.content.text{
-        self.withdraw.isEnable = true
-        self.startLoading()
-        self.coordinator?.getGatewayFee(trade.id, amount: self.amountView.content.text!, feeAssetID: self.feeAssetId, address: text)
-      }else{
-        self.withdraw.isEnable = false
+      if let _ = self.coordinator?.state.property.gatewayFee,let _ = self.coordinator?.state.property.data{
+        if UserManager.shared.isWithDraw,self.isWithdraw,self.isTrueAddress,self.amountView.content.text != "",self.isAvalibaleAmount,let trade = self.trade,let text = self.addressView.content.text{
+          self.withdraw.isEnable = true
+          self.startLoading()
+          self.coordinator?.getGatewayFee(trade.id, amount: self.amountView.content.text!, feeAssetID: self.feeAssetId, address: text)
+        }else{
+          self.withdraw.isEnable = false
+        }
       }
     }
   }
   
   @objc func cleanAddress() {
     self.addressView.content.text = ""
+    self.isTrueAddress = false
   }
   
   @objc func addAllAmount(){
     if let balance = self.balance{
-      if let fee = self.coordinator?.state.property.data.value?.fee{
-        self.amountView.content.text = getRealAmount(balance.asset_type, amount: balance.balance).stringValue
-        if let asset = app_data.assetInfo[balance.asset_type]{
-          if let amount = self.amountView.content.text?.toDouble(){
-            if fee > amount{
-              self.finalAmount.text = "-" + asset.symbol.filterJade
-            }else{
-              self.finalAmount.text = (amount - fee).string(digits: asset.precision) + " " + asset.symbol.filterJade
-            }
-          }
-        }
-      }else{
-        self.amountView.content.text = getRealAmount(balance.asset_type, amount: balance.balance).stringValue
-        if let asset = app_data.assetInfo[balance.asset_type],let amountText = self.amountView.content.text{
-          self.finalAmount.text = amountText.toDouble()!.string(digits: asset.precision) + " " + asset.symbol.filterJade
-        }
-      }
+      self.amountView.content.text = getRealAmount(balance.asset_type, amount: balance.balance).stringValue
+      self.checkAmountIsAvailable(getRealAmount(balance.asset_type, amount: balance.balance).doubleValue)
+      self.setFinalAmount()
     }
   }
   
@@ -330,7 +333,6 @@ extension RechargeDetailViewController{
     self.introduceView.isHidden = false
     self.stackView.layoutIfNeeded()
   }
-  
   
   func withDrawAction(){
     if let addressText = self.addressView.content.text,let amountText = self.amountView.content.text,let insideText = self.insideFee.text,let gatewayFeeText = self.gateAwayFee.text,let finalAmountText = self.finalAmount.text{

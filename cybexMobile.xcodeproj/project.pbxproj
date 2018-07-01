@@ -44,6 +44,10 @@
 		72994C1920E0D478005D0559 /* CybexPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72994C1820E0D478005D0559 /* CybexPasswordView.xib */; };
 		72994C1B20E2A282005D0559 /* PairRechargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72994C1A20E2A282005D0559 /* PairRechargeView.swift */; };
 		72994C1D20E2A28F005D0559 /* PairRechargeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72994C1C20E2A28F005D0559 /* PairRechargeView.xib */; };
+		72994C1F20E89EF7005D0559 /* IntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72994C1E20E89EF7005D0559 /* IntroduceView.swift */; };
+		72994C2120E89F1A005D0559 /* IntroduceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72994C2020E89F1A005D0559 /* IntroduceView.xib */; };
+		72994C2720E8ACC6005D0559 /* WithNoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72994C2620E8ACC6005D0559 /* WithNoDataView.swift */; };
+		72994C2920E8ACD4005D0559 /* WithNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72994C2820E8ACD4005D0559 /* WithNoDataView.xib */; };
 		729DC5BD20C9341300AEC844 /* RechargeDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5B920C9341300AEC844 /* RechargeDetailCoordinator.swift */; };
 		729DC5BE20C9341300AEC844 /* RechargeDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5BA20C9341300AEC844 /* RechargeDetailActions.swift */; };
 		729DC5BF20C9341300AEC844 /* RechargeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729DC5BB20C9341300AEC844 /* RechargeDetailViewController.swift */; };
@@ -474,6 +478,10 @@
 		72994C1820E0D478005D0559 /* CybexPasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CybexPasswordView.xib; sourceTree = "<group>"; };
 		72994C1A20E2A282005D0559 /* PairRechargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairRechargeView.swift; sourceTree = "<group>"; };
 		72994C1C20E2A28F005D0559 /* PairRechargeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PairRechargeView.xib; sourceTree = "<group>"; };
+		72994C1E20E89EF7005D0559 /* IntroduceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroduceView.swift; sourceTree = "<group>"; };
+		72994C2020E89F1A005D0559 /* IntroduceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntroduceView.xib; sourceTree = "<group>"; };
+		72994C2620E8ACC6005D0559 /* WithNoDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithNoDataView.swift; sourceTree = "<group>"; };
+		72994C2820E8ACD4005D0559 /* WithNoDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithNoDataView.xib; sourceTree = "<group>"; };
 		729DC5B920C9341300AEC844 /* RechargeDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailCoordinator.swift; sourceTree = "<group>"; };
 		729DC5BA20C9341300AEC844 /* RechargeDetailActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailActions.swift; sourceTree = "<group>"; };
 		729DC5BB20C9341300AEC844 /* RechargeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailViewController.swift; sourceTree = "<group>"; };
@@ -32025,10 +32033,14 @@
 				72C573A420CFE492005ABFA5 /* CybexTitleView.swift */,
 				7324A91820AB01FA005BCFF8 /* GradientLayer.swift */,
 				724A2A6B20B41B5500E28438 /* GradientLabelView.swift */,
+				72994C1E20E89EF7005D0559 /* IntroduceView.swift */,
+				72994C2020E89F1A005D0559 /* IntroduceView.xib */,
 				73F58FC820AC04EF008A1F79 /* Button.swift */,
 				73F58FCA20AC0589008A1F79 /* Button.xib */,
 				735D8EB120AD2A67008DAAAC /* NoticeBoardView.swift */,
 				735D8EB320AD2A74008DAAAC /* NoticeBoardView.xib */,
+				72994C2620E8ACC6005D0559 /* WithNoDataView.swift */,
+				72994C2820E8ACD4005D0559 /* WithNoDataView.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -32182,6 +32194,7 @@
 				730FDA9D20A314F900CFBF24 /* limits.SUNWCCh in Resources */,
 				730FDA6420A314F600CFBF24 /* csetjmp in Resources */,
 				730FDA9120A314F900CFBF24 /* bitset.SUNWCCh in Resources */,
+				72994C2920E8ACD4005D0559 /* WithNoDataView.xib in Resources */,
 				733557D52052642800C5ADD4 /* Main.storyboard in Resources */,
 				730FDA8820A314F900CFBF24 /* sstream in Resources */,
 				730FDA7820A314F900CFBF24 /* ios in Resources */,
@@ -32291,6 +32304,7 @@
 				730FDAB720A314F900CFBF24 /* vector.SUNWCCh in Resources */,
 				730FDA9E20A314F900CFBF24 /* list.SUNWCCh in Resources */,
 				730FDA8320A314F900CFBF24 /* ostream in Resources */,
+				72994C2120E89F1A005D0559 /* IntroduceView.xib in Resources */,
 				730FDA6320A314F600CFBF24 /* cmath in Resources */,
 				730FDAA720A314F900CFBF24 /* regex.SUNWCCh in Resources */,
 				730FDAAB20A314F900CFBF24 /* stdexcept.SUNWCCh in Resources */,
@@ -32645,6 +32659,7 @@
 				7314517420DEA55A001CFDA4 /* ExchangeActions.swift in Sources */,
 				73D977F42056603800CB7DE1 /* HomeViewController.swift in Sources */,
 				73D977ED20565F0600CB7DE1 /* BaseViewController.swift in Sources */,
+				72994C2720E8ACC6005D0559 /* WithNoDataView.swift in Sources */,
 				72F6DF2720AC27A500BBF105 /* AccountPortfolioCellView.swift in Sources */,
 				72C30C8620AA8DBD00F4DCEC /* LockupAssetsView.swift in Sources */,
 				736A9A6D20D28660000E7700 /* GraphQLAPI.swift in Sources */,
@@ -32760,6 +32775,7 @@
 				73D34E352063A603008C7507 /* AccountRootCoordinator.swift in Sources */,
 				7320D6BB205FBC5800C3F579 /* CBEMAVOLUMEModel.swift in Sources */,
 				73E49E362079FFAF003B14D2 /* OrderBookViewController.swift in Sources */,
+				72994C1F20E89EF7005D0559 /* IntroduceView.swift in Sources */,
 				73D977E920565EE000CB7DE1 /* NavCoordinator.swift in Sources */,
 				73E49E252078C134003B14D2 /* AccessoryCollectionViewCell.swift in Sources */,
 				7386AD5F20B4134D00168629 /* UIColorExtension.swift in Sources */,

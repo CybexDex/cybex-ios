@@ -172,3 +172,35 @@ extension UIView {
     }
   }
 }
+
+extension UIView{
+  var noDataView : WithNoDataView?{
+    get{
+      if let nodata = self.subviews.first as? WithNoDataView{
+        return nodata
+      }
+      return nil
+    }
+    set{
+      if let newValue = newValue{
+        self.insertSubview(newValue, at: 0)
+        newValue.edgesToSuperview(insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
+      }
+    }
+  }
+  func showNoData(_ noticeWord : String) {
+    if let _ = self.noDataView {
+      self.hiddenNoData()
+    }else{
+      let nodata = WithNoDataView(frame:self.bounds)
+      self.noDataView = nodata
+      self.noDataView?.notice_word = noticeWord
+    }
+  }
+  func hiddenNoData() {
+    if let _ = self.noDataView{
+      self.noDataView!.removeFromSuperview()
+      self.noDataView = nil
+    }
+  }
+}

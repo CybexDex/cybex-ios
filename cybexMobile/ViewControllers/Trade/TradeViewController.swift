@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import ReSwift
 import TinyConstraints
+import Localize_Swift
 
 protocol TradePair {
   var pariInfo : Pair {get set}
@@ -69,6 +70,7 @@ class TradeViewController: BaseViewController {
     
     self.startLoading()
     setupUI()
+    setupEvent()
     
     self.pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB)
   }
@@ -83,6 +85,21 @@ class TradeViewController: BaseViewController {
                        R.string.localizable.trade_sell.key.localized(),
                        R.string.localizable.trade_open_orders.key.localized()]
     
+  }
+  
+  func setupEvent(){
+    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] notification in
+      guard let `self` = self else {return}
+      self.titlesView!.data = [R.string.localizable.trade_buy.key.localized(),
+                               R.string.localizable.trade_sell.key.localized(),
+                               R.string.localizable.trade_open_orders.key.localized()]
+      self.rightNavButton?.setTitle(R.string.localizable.my_history_title.key.localized(), for: .normal)
+    })
+  }
+  
+  
+  deinit{
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
   }
   
   func setupNavi(){

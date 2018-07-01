@@ -376,6 +376,15 @@ func getOpenedOrderInfo(price:String,amount:String,total:String,fee:String,isBuy
       "<name>\(feeTitle): </name><\(contentStyle)>\(fee)</\(contentStyle)>".set(style: "alertContent"),] as? [NSAttributedString])!
   
   return  result
-  
+}
+
+func checkMaxLength(_ sender:String,maxLength:Int) ->String{
+  if sender.contains("."){
+    let stringArray = sender.components(separatedBy: ".")
+    if let last = stringArray.last,last.count > maxLength,let first = stringArray.first,let maxLast = last.substring(from: 0, length: maxLength){
+      return first + "." + maxLast
+    }
+  }
+  return sender
 }
 

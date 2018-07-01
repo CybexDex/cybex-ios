@@ -53,6 +53,9 @@ class TradeHistoryViewController: BaseViewController {
       self.historyView.time.text = R.string.localizable.my_history_time.key.localized()
     })
   }
+  deinit{
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+  }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
