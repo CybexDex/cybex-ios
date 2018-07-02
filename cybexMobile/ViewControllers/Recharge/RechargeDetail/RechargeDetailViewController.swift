@@ -153,6 +153,8 @@ class RechargeDetailViewController: BaseViewController {
         
         self.amountView.content.text = checkMaxLength(text, maxLength: balance_info.precision)
         self.checkAmountIsAvailable(amount)
+      }else{
+        self.isAvalibaleAmount = false
       }
     }
     
@@ -187,6 +189,7 @@ class RechargeDetailViewController: BaseViewController {
         }
       }else{
         self.addressView.btn.isHidden = true
+        self.isTrueAddress = false
       }
     }
   }
@@ -377,7 +380,7 @@ extension RechargeDetailViewController{
       }
     }else{
       if self.isVisible{
-        ShowManager.shared.data = R.string.localizable.recharge_invalid_password.key.localized()
+        self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
       }
     }
   }

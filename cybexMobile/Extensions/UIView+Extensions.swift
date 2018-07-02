@@ -176,7 +176,7 @@ extension UIView {
 extension UIView{
   var noDataView : WithNoDataView?{
     get{
-      if let nodata = self.subviews.first as? WithNoDataView{
+      if let nodata = self.subviews.last as? WithNoDataView{
         return nodata
       }
       return nil
@@ -195,7 +195,7 @@ extension UIView{
       let nodata = WithNoDataView(frame:self.bounds)
       self.noDataView = nodata
       self.noDataView?.notice_word = noticeWord
-      self.bringSubview(toFront: self.noDataView!)
+//      self.bringSubview(toFront: self.noDataView!)
     }
   }
   func hiddenNoData() {
