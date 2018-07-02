@@ -13,6 +13,7 @@ enum StyleNames:String {
   case introduce_normal
   case introduce
   case password
+  case withdraw_introduce
 }
 
 
@@ -32,6 +33,12 @@ class RichStyle {
     }
     Styles.register(StyleNames.introduce.rawValue, style: introduce_style)
     
+    let with_style = Style {
+      $0.font = SystemFonts.PingFangSC_Regular.font(size: 14.0)
+      $0.color = UIColor.steel
+      $0.lineSpacing = 4.0
+    }
+    Styles.register(StyleNames.withdraw_introduce.rawValue, style: with_style)
     
     passwordStyle()
     alertDetailStyle()

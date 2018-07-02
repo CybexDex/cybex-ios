@@ -13,6 +13,7 @@ import AwaitKit
 import RxSwift
 import CryptoSwift
 import SwiftRichString
+import SwifterSwift
 
 class AccountViewController: BaseViewController {
   // 定义整个界面的全部子界面，根据tag值从stackView上面获取不同的界面
@@ -133,15 +134,15 @@ class AccountViewController: BaseViewController {
       introduceCybex.styledText = R.string.localizable.accountIntroduce.key.localized()
       
     case .unPortfolio:
-      tags = [view_type.login_view.rawValue,view_type.introduce_view.rawValue,view_type.yourPortfolio_view.rawValue]
+      tags = [view_type.login_view.rawValue,view_type.introduce_view.rawValue,view_type.yourPortfolio_view.rawValue,view_type.member_view.rawValue]
       for tag in tags {
         stackView.viewWithTag(tag)?.isHidden = true
       }
       bgImageView.isHidden    = true
       
     case .normalState:
-      tags = [view_type.login_view.rawValue,view_type.introduce_view.rawValue]
-      for tag in [1,2]{
+      tags = [view_type.login_view.rawValue,view_type.introduce_view.rawValue,view_type.member_view.rawValue]
+      for tag in [1,2,4]{
         stackView.viewWithTag(tag)?.isHidden = true
       }
       bgImageView.isHidden    = true
@@ -218,25 +219,23 @@ class AccountViewController: BaseViewController {
   
   
   func updataStatus(){
-    
     //  判断是否有name来断定是否登陆
     guard UserManager.shared.isLoginIn else {
       setupUIWithStatus(user_type.unLogin)
       updataView(false)
-      
       return
     }
     //  判断是否有可用资产来断定是否显示可用资产
     guard let balances =  UserManager.shared.balances.value, balances.count > 0  else {
       setupUIWithStatus(user_type.unPortfolio)
       updataView(true)
-      
       return
     }
     setupUIWithStatus(user_type.normalState)
     updataView(true)
-    
-    portfolioView.data = UserManager.shared.getPortfolioDatas()
+    SwifterSwift.delay(milliseconds: 100) {
+      self.portfolioView.data = UserManager.shared.getPortfolioDatas()
+    }
   }
   
   override func configureObserveState() {
@@ -287,7 +286,6 @@ extension AccountViewController{
   }
   @objc func openOpenedOrders(_ data:[String: Any]){
     self.coordinator?.openOpenedOrders()
-//    self.coordinator?.openRecharge()
   }
   @objc func openLockupAssets(_ data:[String: Any]){
     guard !isLoading() else { return }

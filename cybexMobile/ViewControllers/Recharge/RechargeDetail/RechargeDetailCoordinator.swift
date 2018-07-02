@@ -24,7 +24,7 @@ protocol RechargeDetailStateManagerProtocol {
   
   func fetchWithDrawInfoData(_ assetName:String)
   func verifyAddress(_ assetName:String,address:String,callback:@escaping (Bool)->())
-  func getGatewayFee(_ assetId : String,amount:String,feeAssetID:String,address:String)
+  func getGatewayFee(_ assetId : String,amount:String,address:String)
   func login(_ password : String,callback:@escaping (Bool)->())
   func getObjects(assetId:String,amount:String,address:String,fee_id:String,fee_amount:String,callback:@escaping (Any)->())
   func fetchWithDrawMessage(callback:@escaping (String)->())
@@ -80,7 +80,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
   }
   
   
-  func getGatewayFee(_ assetId : String,amount:String,feeAssetID:String,address:String){
+  func getGatewayFee(_ assetId : String,amount:String,address:String){
       if let memo_key = self.state.property.memo_key.value{
         let name = app_data.assetInfo[assetId]?.symbol.filterJade
         if var amount = amount.toDouble(){

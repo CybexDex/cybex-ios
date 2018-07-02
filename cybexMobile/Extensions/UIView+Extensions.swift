@@ -176,14 +176,14 @@ extension UIView {
 extension UIView{
   var noDataView : WithNoDataView?{
     get{
-      if let nodata = self.subviews.first as? WithNoDataView{
+      if let nodata = self.subviews.last as? WithNoDataView{
         return nodata
       }
       return nil
     }
     set{
       if let newValue = newValue{
-        self.insertSubview(newValue, at: 0)
+        self.addSubview(newValue)
         newValue.edgesToSuperview(insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
       }
     }
@@ -195,6 +195,7 @@ extension UIView{
       let nodata = WithNoDataView(frame:self.bounds)
       self.noDataView = nodata
       self.noDataView?.notice_word = noticeWord
+//      self.bringSubview(toFront: self.noDataView!)
     }
   }
   func hiddenNoData() {

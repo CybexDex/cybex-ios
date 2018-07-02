@@ -43,6 +43,10 @@ class MyHistoryViewController: BaseViewController {
     let name = String.init(describing:MyHistoryCell.self)
     
     tableView.register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: name)
+    if let data = self.data,data.count != 0 {
+    }else{
+      self.view.showNoData(R.string.localizable.myhistory_nodata.key.localized())
+    }
   }
   
   func commonObserveState() {

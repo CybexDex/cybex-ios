@@ -133,8 +133,8 @@ extension UserManager {
     }
     
     let request = GetAccountHistoryRequest(accountID: id) { (data) in
-      if var fillorder = data as? [FillOrder] {
-        fillorder = fillorder.filter({
+      if var fillorders = data as? [FillOrder] {
+        fillorders = fillorders.filter({
           let base_name = app_data.assetInfo[$0.fill_price.base.assetID]
           let quote_name = app_data.assetInfo[$0.fill_price.quote.assetID]
           return base_name != nil && quote_name != nil
@@ -142,13 +142,13 @@ extension UserManager {
         
         var result = [(FillOrder,time:String)]()
         var count = 0
-        for fillOrder in fillorder{
+        for fillOrder in fillorders{
           let timeRequest = getBlockRequest(response: { (time) in
             count += 1
             if let time = time as? String{
               result.append((fillOrder,time:time))
             }
-            if count == fillorder.count{
+            if count == fillorders.count{
               self.fillOrder.accept(result)
             }
           }, block_num: fillOrder.block_num)

@@ -20,7 +20,7 @@ class IntroduceView: UIView {
     var locail : String?{
         didSet{
           if let locail = self.locail{
-            self.content.attributedText = locail.set(style: StyleNames.introduce_normal.rawValue)
+            self.content.attributedText = locail.set(style: StyleNames.withdraw_introduce.rawValue)
           }
         }
     }
