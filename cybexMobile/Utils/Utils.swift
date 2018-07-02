@@ -42,45 +42,43 @@ func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTy
   let request = GetRequiredFees(response: { (data) in
     if let fees = data as? [Fee], let cyb_amount = fees.first?.amount.toDouble() {
       
-      if let cyb = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
+      let cyb = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
         return balance.asset_type == AssetConfiguration.CYB
-      }).first {
-        if cyb.balance.toDouble()! >= cyb_amount {
-          let amount = getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string)
-          
-          completion(true, amount, AssetConfiguration.CYB)
-        }
-        else {
-          let request = GetRequiredFees(response: { (data) in
-            if let fees = data as? [Fee], let base_amount = fees.first?.amount.toDouble() {
-              if let base = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
-                return balance.asset_type == focus_asset_id
-              }).first {
-                if base.balance.toDouble()! >= base_amount {
-                  let amount = getRealAmount(focus_asset_id, amount: base_amount.string)
-                  
-                  completion(true, amount, focus_asset_id)
-                }
-                else {//余额不足
-                  completion(true, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
-
-                }
+      }).first?.balance.toDouble() ?? 0
+      
+      if cyb >= cyb_amount {
+        let amount = getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string)
+        
+        completion(true, amount, AssetConfiguration.CYB)
+      }
+      else {
+        let request = GetRequiredFees(response: { (data) in
+          if let fees = data as? [Fee], let base_amount = fees.first?.amount.toDouble() {
+            if let base = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
+              return balance.asset_type == focus_asset_id
+            }).first {
+              if base.balance.toDouble()! >= base_amount {
+                let amount = getRealAmount(focus_asset_id, amount: base_amount.string)
+                
+                completion(true, amount, focus_asset_id)
               }
-              else {
+              else {//余额不足
                 completion(true, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
+                
               }
             }
             else {
-              completion(false, 0, "")
+              completion(true, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
             }
-          }, operationStr: operation, assetID: focus_asset_id, operationID: operationID)
-          
-          WebsocketService.shared.send(request: request)
-        }
+          }
+          else {
+            completion(true, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
+          }
+        }, operationStr: operation, assetID: focus_asset_id, operationID: operationID)
+        
+        WebsocketService.shared.send(request: request)
       }
-      else {
-        completion(false, 0, "")
-      }
+      
       
     }
     else {
