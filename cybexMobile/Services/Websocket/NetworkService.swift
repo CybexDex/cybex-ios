@@ -296,7 +296,7 @@ extension WebsocketService {
     return false
   }
   
-  private func saveRequest<Request: JSONRPCKit.Request>(request: Request) {
+  private func saveRequest<Request: JSONRPCKit.Request>(request: Request, filterRepeat:Bool = true) {
     self.requests_queue_concurrent.async(flags:.barrier) { [weak self] in
       guard let `self` = self else { return }
 
@@ -307,6 +307,10 @@ extension WebsocketService {
           exist = true
           break
         }
+      }
+      
+      if !filterRepeat {
+        exist = false
       }
 
       if !exist {
@@ -319,6 +323,10 @@ extension WebsocketService {
               exist = true
               break
             }
+          }
+          
+          if !filterRepeat {
+            exist = false
           }
           
           if !exist {
@@ -358,10 +366,11 @@ extension WebsocketService {
       
       self.socket.write(data: try! writeJSON.rawData())
       
+
       let id = writeJSON["id"].stringValue
       self.requesting_queue_concurrent.async(flags: .barrier) {[weak self] in
         guard let `self` = self else { return }
-        self.requesting[id] = (request.digist, request, self.constructSendRequest(request: request))
+        self.requesting[id] = (request.digist , request, self.constructSendRequest(request: request))
       }
       
       self.requests_queue_concurrent.async(flags: .barrier) {[weak self] in
@@ -423,10 +432,10 @@ extension WebsocketService {
     }
   }
   
-  func send<Request: JSONRPCKit.Request>(request: Request) {
-    saveRequest(request: request)
-   
+  func send<Request: JSONRPCKit.Request>(request: Request, filterRepeat:Bool = true) {
+    saveRequest(request: request, filterRepeat: filterRepeat)
   }
+  
   
   private func refreshData() {
     AppConfiguration.shared.appCoordinator.getLatestData()

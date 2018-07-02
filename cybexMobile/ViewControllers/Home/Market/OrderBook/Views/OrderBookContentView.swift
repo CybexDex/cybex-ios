@@ -73,7 +73,7 @@ extension OrderBookContentView:UITableViewDelegate,UITableViewDataSource{
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if let data = self.data as? OrderBook{
-      return max(data.asks.count, data.bids.count)
+      return min(20, max(data.asks.count, data.bids.count))
     }
     return 0
   }
@@ -81,7 +81,29 @@ extension OrderBookContentView:UITableViewDelegate,UITableViewDataSource{
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: OrderBookCell.self), for: indexPath) as! OrderBookCell
     if let data = self.data as? OrderBook{
-      cell.setup((data.bids[optional:indexPath.row], data.asks[optional:indexPath.row]), indexPath: indexPath)
+      let asks = data.asks
+      let bids = data.bids
+      
+      let max_asks = asks.count >= 20 ? 19 : asks.count - 1
+      let max_bids = bids.count >= 20 ? 19 : bids.count - 1
+
+      let max_asks_percent  = asks[optional:max_asks]?.volume_percent
+      let max_bids_percent  = bids[optional:max_bids]?.volume_percent
+
+      let asks_percent = asks[optional:indexPath.row]?.volume_percent
+      let bids_percent = bids[optional:indexPath.row]?.volume_percent
+      
+      var percent_buy:Double? = nil
+      var percent_sell:Double? = nil
+
+      if let max_asks_percent = max_asks_percent, let asks_percent = asks_percent {
+        percent_buy = asks_percent / max_asks_percent
+      }
+      if let max_bids_percent = max_bids_percent, let bids_percent = bids_percent {
+        percent_sell = bids_percent / max_bids_percent
+      }
+      
+      cell.setup((bids[optional:indexPath.row], asks[optional:indexPath.row], percent_sell, percent_buy), indexPath: indexPath)
     }
     return cell
   }

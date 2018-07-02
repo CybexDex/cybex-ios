@@ -27,7 +27,9 @@ class TradeHistoryViewController: BaseViewController {
   
   var pair:Pair? {
     didSet {
-      self.coordinator?.resetData()
+      if pair != oldValue {
+        self.coordinator?.resetData()
+      }
 
      refreshView()
     }
