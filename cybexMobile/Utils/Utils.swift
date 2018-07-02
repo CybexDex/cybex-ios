@@ -63,16 +63,16 @@ func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTy
                 completion(true, amount, focus_asset_id)
               }
               else {//余额不足
-                completion(true, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
+                completion(false, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
                 
               }
             }
             else {
-              completion(true, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
+              completion(false, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
             }
           }
           else {
-            completion(true, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
+            completion(false, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
           }
         }, operationStr: operation, assetID: focus_asset_id, operationID: operationID)
         
