@@ -67,7 +67,7 @@ func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTy
                 }
               }
               else {
-                completion(false, 0, "")
+                completion(true, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
               }
             }
             else {
@@ -388,3 +388,10 @@ func checkMaxLength(_ sender:String,maxLength:Int) ->String{
   return sender
 }
 
+func addressOf(_ o: UnsafeRawPointer) -> Int {
+  return Int(bitPattern: o)
+}
+
+func addressOf<T: AnyObject>(_ o: T) -> Int {
+  return unsafeBitCast(o, to: Int.self)
+}

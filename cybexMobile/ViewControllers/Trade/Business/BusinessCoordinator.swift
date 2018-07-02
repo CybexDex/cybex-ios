@@ -182,16 +182,28 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
     let priceDecimal = Decimal(string: self.state.property.price.value)!
     let amountDecimal = Decimal(string: self.state.property.amount.value)!
     
-    if self.state.property.feeID.value == base_info.id {
-      total = priceDecimal * amountDecimal + self.state.property.fee_amount.value
+    if isBuy {
+      if self.state.property.feeID.value == base_info.id {
+        total = priceDecimal * amountDecimal + self.state.property.fee_amount.value
+      }
+      else {
+        total = priceDecimal * amountDecimal
+      }
     }
     else {
-      total = priceDecimal * amountDecimal
+      if self.state.property.feeID.value == base_info.id {
+        total = amountDecimal + self.state.property.fee_amount.value
+      }
+      else {
+        total = amountDecimal
+      }
+
     }
-    
+   
     if self.state.property.balance.value >= total {
       return true
     }
+
     
    return false
   }

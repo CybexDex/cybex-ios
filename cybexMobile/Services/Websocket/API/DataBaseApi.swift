@@ -210,7 +210,7 @@ struct getLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_limit_orders.rawValue, [pair.base, pair.quote, 20]]
+    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_limit_orders.rawValue, [pair.base, pair.quote, 500]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
@@ -218,8 +218,9 @@ struct getLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
     if result.count >= 1 {
       var data:[LimitOrder] = []
       for i in result {
-        let order = try! LimitOrder(JSON: i.dictionaryObject!)
-        data.append(order)
+        if let order = LimitOrder(JSON: i.dictionaryObject!) {
+          data.append(order)
+        }
       }
       
       return data

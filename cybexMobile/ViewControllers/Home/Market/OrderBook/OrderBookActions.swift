@@ -61,7 +61,7 @@ class OrderBookPropertyActionCreate: LoadingActionCreator {
         }
       }
       
-      WebsocketService.shared.send(request: request) 
+      WebsocketService.shared.send(request: request, filterRepeat: false) 
       
       return nil
       

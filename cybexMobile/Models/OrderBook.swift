@@ -9,13 +9,12 @@
 import Foundation
 import ObjectMapper
 
-
-class LimitOrder : ImmutableMappable {
-  let id: String
-  let expiration: String
-  let seller: String
-  let forSale: String
-  let sellPrice: Price
+class LimitOrder : Mappable {
+  var id: String = ""
+  var expiration: String = ""
+  var seller: String = ""
+  var forSale: String = ""
+  var sellPrice: Price = Price(JSON: [:])!
   
   var isBuy:Bool {
     let assetA_info = app_data.assetInfo[sellPrice.base.assetID]
@@ -26,19 +25,15 @@ class LimitOrder : ImmutableMappable {
     return (base == ((assetA_info != nil) ? assetA_info!.symbol.filterJade : ""))
   }
   
-  required  init(map: Map) throws {
-    id                   = try map.value("id")
-    expiration           = try map.value("expiration")
-    seller               = try map.value("seller")
-    forSale              = try map.value("for_sale", using: ToStringTransform())
-    sellPrice            = try map.value("sell_price")
+  required init?(map: Map) {
+  }
+  
+  func mapping(map: Map) {
+    id                   <- map["id"]
+    expiration           <- map["expiration"]
+    seller               <- map["seller"]
+    forSale              <- (map["for_sale"], ToStringTransform())
+    sellPrice            <- map["sell_price"]
   }
 
-  func mapping(map: Map) {
-    id                   >>> map["id"]
-    expiration           >>> map["expiration"]
-    seller               >>> map["seller"]
-    forSale              >>> (map["for_sale"], ToStringTransform())
-    sellPrice            >>> map["sell_price"]
-  }
 }

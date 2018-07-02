@@ -89,7 +89,7 @@ struct GetFillOrderHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
   var parameters: Any? {
     return [WebsocketService.shared.ids[apiCategory.history] ?? 0, historyCatogery.get_fill_order_history.rawValue, [pair.base, pair.quote, 40]]
   }
-  
+    
   func transferResponse(from resultObject: Any) throws -> Any {
     let result = JSON(resultObject).arrayValue
    

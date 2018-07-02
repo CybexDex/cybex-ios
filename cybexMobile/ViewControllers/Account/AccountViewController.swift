@@ -180,6 +180,7 @@ class AccountViewController: BaseViewController {
   func updataView(_ isLogin:Bool){
     if !isLogin{
       accountImageView.image = #imageLiteral(resourceName: "accountAvatar")
+      portfolioView.data = []
       return
     }
     nameL.text =  UserManager.shared.account.value?.name
@@ -219,7 +220,7 @@ class AccountViewController: BaseViewController {
   func updataStatus(){
     
     //  判断是否有name来断定是否登陆
-    guard let _ =  UserManager.shared.account.value else {
+    guard UserManager.shared.isLoginIn else {
       setupUIWithStatus(user_type.unLogin)
       updataView(false)
       
@@ -261,6 +262,11 @@ class AccountViewController: BaseViewController {
         }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
+//    UserManager.shared.name.asObservable().subscribe(onNext: {[weak self] (_) in
+//      guard let `self` = self else{ return }
+//      self.updataStatus()
+//    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
     UserManager.shared.balances.asObservable()
       .skip(1)
       .throttle(10, latest: true, scheduler: MainScheduler.instance)
@@ -296,9 +302,16 @@ extension AccountViewController{
   
   override func passwordPassed(_ passed: Bool) {
     self.endLoading()
-    if passed && self.isVisible {
-      self.coordinator?.openLockupAssets()
+    
+    if self.isVisible {
+      if passed {
+        self.coordinator?.openLockupAssets()
+      }
+      else {
+        self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+      }
     }
+    
   }
   
   override func passwordDetecting() {
