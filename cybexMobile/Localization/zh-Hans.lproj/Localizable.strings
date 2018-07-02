@@ -175,7 +175,7 @@
 "tip_message" = "请在设置中打开相册权限";
 
 "recharge_title"  = "提现";
-"recharge_min"    = " 最小提现数量 ";
+"recharge_min"    = "最小提现数量 ";
 "withdraw_title"  = "充值";
 
 

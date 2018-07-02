@@ -57,9 +57,26 @@
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iKJ-8A-O9b">
+                    <rect key="frame" x="0.0" y="67" width="375" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="zVH-Rj-OJZ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                            <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <constraints>
+                <constraint firstItem="iKJ-8A-O9b" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1Z8-oL-VXk"/>
+                <constraint firstAttribute="trailing" secondItem="iKJ-8A-O9b" secondAttribute="trailing" id="PMS-bo-G5A"/>
                 <constraint firstItem="D0o-7C-xUH" firstAttribute="centerY" secondItem="0rB-Yz-ELJ" secondAttribute="centerY" id="YV0-48-fgH"/>
+                <constraint firstAttribute="bottom" secondItem="iKJ-8A-O9b" secondAttribute="bottom" id="eMm-GR-55h"/>
                 <constraint firstItem="3qT-6y-hMu" firstAttribute="centerY" secondItem="0rB-Yz-ELJ" secondAttribute="centerY" id="eXr-1o-Pu3"/>
                 <constraint firstItem="F0x-7j-rFn" firstAttribute="centerY" secondItem="0rB-Yz-ELJ" secondAttribute="centerY" id="j7D-Ew-mXS"/>
                 <constraint firstItem="0rB-Yz-ELJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="4" id="lRq-zM-MN2"/>
@@ -70,7 +87,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-155" y="29"/>
+            <point key="canvasLocation" x="60" y="8"/>
         </view>
     </objects>
     <resources>

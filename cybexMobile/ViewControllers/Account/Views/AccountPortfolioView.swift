@@ -17,7 +17,8 @@ class AccountPortfolioView:UIView{
   var data: Any? {
     didSet {
       if let _ = data as? [PortfolioData] {
-        collectionView.reloadData()
+        self.collectionView.reloadData()
+        self.collectionView.collectionViewLayout.invalidateLayout()
       }
     }
   }
@@ -26,6 +27,7 @@ class AccountPortfolioView:UIView{
     case openPortfolio
   }
   fileprivate func setup() {
+    
     let cell = String.init(describing: AccountPortfolioCell.self)
     collectionView.register(UINib.init(nibName: cell, bundle: nil), forCellWithReuseIdentifier: cell)
     openPortfolioView.isUserInteractionEnabled = true
@@ -54,6 +56,7 @@ class AccountPortfolioView:UIView{
   
   override func layoutSubviews() {
     super.layoutSubviews()
+    self.collectionView.collectionViewLayout.invalidateLayout()
     layoutIfNeeded()
   }
   
@@ -85,7 +88,6 @@ class AccountPortfolioView:UIView{
 extension AccountPortfolioView : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     let balances = data as? [PortfolioData] ?? []
-    
     return balances.count
   }
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -95,6 +97,4 @@ extension AccountPortfolioView : UICollectionViewDataSource,UICollectionViewDele
     cell.setup(portfolios[indexPath.row])
     return cell
   }
-  
-  
 }

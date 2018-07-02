@@ -149,12 +149,14 @@ extension OpenedOrdersViewController {
     if let order = data["order"] as? LimitOrder {
       self.order = order
       if UserManager.shared.isLocked {
+        if self.isLoading(){
+          return
+        }
         showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
       }
       else {
         self.showOrderInfo()
       }
-      
     }
   }
   

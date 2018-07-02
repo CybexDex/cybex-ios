@@ -145,8 +145,8 @@
 "withdraw_address_placehold"   = "Enter or paste address";
 "withdraw_amount" = "Amount";
 "withdraw_amount_all" = "ALL";
-"withdraw_fee"        = "Withdrawal Fee";
-"withdraw_gateway_fee" = "Gateway Fee";
+"withdraw_fee"        = "Gateway Fee";
+"withdraw_gateway_fee" = "Withdrawal Fee";
 "withdraw_receive_amount" = "Receive Amount";
 "withdraw_min_value"      = "Less than the minimum withdrawal";
 "recharge_deposit"        = "Deposit";
@@ -185,7 +185,7 @@
 "tip_message" = "Please open photo album permissions in Settings";
 
 "recharge_title"  = " Withdraw";
-"recharge_min"    = "Min ";
+"recharge_min"    = "Minimum ";
 "withdraw_title"  = " Deposit";
 
 "recharge_invalid_password" = "Invalid password";
