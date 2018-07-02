@@ -39,12 +39,12 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
     if let name = UserManager.shared.name.value {
       async {
         let data = try? await(GraphQLManager.shared.getDepositAddress(accountName: name,assetName: asset_name))
-        if case let data?? = data {
-          main {
+        main {
+          if case let data?? = data {
             self.store.dispatch(FetchAddressInfo(data: data))
+          }else{
+            self.state.property.data.accept(nil)
           }
-        }else{
-          self.state.property.data.accept(nil)
         }
       }
     }
@@ -54,12 +54,12 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
     if let name = UserManager.shared.name.value {
       async {
         let data = try? await(GraphQLManager.shared.updateDepositAddress(accountName: name, assetName: asset_name))
-        if case let data?? = data {
-          main {
+        main {
+          if case let data?? = data {
             self.store.dispatch(FetchAddressInfo(data: data))
+          }else{
+            self.state.property.data.accept(nil)
           }
-        }else{
-          self.state.property.data.accept(nil)
         }
       }
     }

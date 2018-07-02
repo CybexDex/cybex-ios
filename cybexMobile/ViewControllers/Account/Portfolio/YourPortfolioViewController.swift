@@ -67,6 +67,9 @@ class YourPortfolioViewController: BaseViewController {
           if let _ = UserManager.shared.balances.value{
             self.data = UserManager.shared.getPortfolioDatas()
           }
+          
+          guard self.isVisible else { return }
+
           self.tableView.reloadData()
         }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)

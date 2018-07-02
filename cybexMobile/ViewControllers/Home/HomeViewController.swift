@@ -128,7 +128,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
 extension HomeViewController {
   @objc func cellClicked(_ data:[String: Any]) {
-    if VC_TYPE == 1{
+    if VC_TYPE == 1{//首页
       if let index = data["index"] as? Int {
         self.coordinator?.openMarket(index:index, currentBaseIndex:self.contentView!.currentBaseIndex)
       }

@@ -41,18 +41,20 @@ extension AppCoordinator: AppStateManagerProtocol {
     async {
       let data = try! await(SimpleHTTPService.fetchIdsInfo())
       
-      AssetConfiguration.shared.unique_ids = data
-      let request = GetObjectsRequest(ids: data) { response in
-        if let assetinfo = response as? [AssetInfo] {
-          for info in assetinfo {
-            main {
+      main {
+        AssetConfiguration.shared.unique_ids = data
+        let request = GetObjectsRequest(ids: data) { response in
+          if let assetinfo = response as? [AssetInfo] {
+            for info in assetinfo {
               self.store.dispatch(AssetInfoAction(assetID: info.id, info: info))
-              callback()
             }
+            callback()
+
           }
         }
+        WebsocketService.shared.send(request: request)
       }
-      WebsocketService.shared.send(request: request)
+     
     }
     
   }
@@ -73,7 +75,7 @@ extension AppCoordinator: AppStateManagerProtocol {
       if value.count == 0 {
         return
       }
-      DispatchQueue.main.async { [weak self] in
+      main { [weak self] in
         self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
       }
     }

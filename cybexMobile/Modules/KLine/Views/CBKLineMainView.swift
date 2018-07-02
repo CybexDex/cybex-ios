@@ -423,12 +423,12 @@ extension CBKLineMainView {
 
         mindrawAttrsString.draw(in: minrect)
 
-        let maxdrawAttrsString = NSMutableAttributedString(string: "←" + high_klineModel.low.string(digits: high_klineModel.precision), attributes: attributes)
+        let maxdrawAttrsString = NSMutableAttributedString(string: "←" + high_klineModel.high.string(digits: high_klineModel.precision), attributes: attributes)
 
         var max_X = high_position.x
         if (high_position.x + mindrawAttrsString.size().width) > bounds.width {
             max_X -= maxdrawAttrsString.size().width
-            maxdrawAttrsString.setAttributedString(NSAttributedString(string: high_klineModel.low.string(digits: high_klineModel.precision) + "→", attributes: attributes))
+            maxdrawAttrsString.setAttributedString(NSAttributedString(string: high_klineModel.high.string(digits: high_klineModel.precision) + "→", attributes: attributes))
         }
 
         let maxrect = CGRect(x: max_X,

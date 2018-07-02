@@ -51,15 +51,13 @@ class TradeViewController: BaseViewController {
   var pair : Pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB){
     didSet{
       getPairInfo()
-      if info != nil {
-        refreshView()
-      }
+      refreshView()
     }
   }
   
   var info:(base: AssetInfo, quote:AssetInfo)? {
     didSet {
-      if oldValue == nil {
+      if oldValue == nil && info != nil {//弱网到请求到数据刷新
         refreshView()
       }
     }
@@ -112,7 +110,10 @@ class TradeViewController: BaseViewController {
   }
   
   func getPairInfo() {
-    guard let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
+    guard let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else {
+      self.info = nil
+      return
+    }
     self.info = (base_info, quote_info)
   }
   
@@ -190,11 +191,17 @@ class TradeViewController: BaseViewController {
   }
   
   func moveToMyOpenedOrders(){
+    if let viewController = childViewControllers[2] as? TradePair{
+      viewController.refresh()
+    }
     self.scrollView.setContentOffset(CGPoint(x: pageOffsetForChild(at: 2), y: 0), animated: false)
   }
   
   func moveToTradeView(isBuy:Bool){
     let index = isBuy ? 0 : 1
+    if let viewController = childViewControllers[index] as? TradePair{
+      viewController.refresh()
+    }
     self.scrollView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: 0), animated: false)
   }
 }

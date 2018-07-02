@@ -61,7 +61,7 @@ class SimpleHTTPService {
 extension SimpleHTTPService {
   static func requestMarketList(base : String) -> Promise<[Pair]> {
     var request = URLRequest(url: URL(string: AppConfiguration.SERVER_MARKETLIST_URLString + base)!)
-    request.timeoutInterval = 1
+    request.timeoutInterval = 5
     request.cachePolicy = .reloadIgnoringCacheData
     
     let (promise, seal) = Promise<[Pair]>.pending()
@@ -212,7 +212,7 @@ extension SimpleHTTPService {
     var request  = URLRequest(url: URL(string: AppConfiguration.WITHDRAW)!)
     request.cachePolicy = .reloadIgnoringCacheData
     let (promise ,seal) = Promise<[Trade]>.pending()
-    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+    Alamofire.request(request).responseJSON(queue: DispatchQueue.main, options: .allowFragments) { (response) in
       guard let value = response.result.value else{
         seal.fulfill([])
         return
@@ -230,7 +230,7 @@ extension SimpleHTTPService {
     var request  = URLRequest(url: URL(string: AppConfiguration.DEPOSIT)!)
     request.cachePolicy = .reloadIgnoringCacheData
     let (promise ,seal) = Promise<[Trade]>.pending()
-    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+    Alamofire.request(request).responseJSON(queue: DispatchQueue.main, options: .allowFragments) { (response) in
       guard let value = response.result.value else{
         seal.fulfill([])
         return

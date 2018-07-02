@@ -190,7 +190,7 @@ extension UIView{
   }
   func showNoData(_ noticeWord : String) {
     if let _ = self.noDataView {
-      self.hiddenNoData()
+      self.noDataView?.notice_word = noticeWord
     }else{
       let nodata = WithNoDataView(frame:self.bounds)
       self.noDataView = nodata

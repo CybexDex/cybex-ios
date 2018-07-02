@@ -146,7 +146,7 @@ class WebsocketService {
     currentNode = nil
     isConnecting = true
 
-    async {
+    DispatchQueue.global().async {
       do {
         let node = try await(self.detectFastNode())
         main {
@@ -195,7 +195,11 @@ class WebsocketService {
   
   func disConnect() {
     needAutoConnect = false
-    requests = []
+    
+    requests_queue_concurrent.async(flags: .barrier) {[weak self] in
+      guard let `self` = self else { return }
+      self.requests = []
+    }
     
     self.requesting_queue_concurrent.async(flags: .barrier) {[weak self] in
       guard let `self` = self else { return }
@@ -293,18 +297,49 @@ extension WebsocketService {
   }
   
   private func saveRequest<Request: JSONRPCKit.Request>(request: Request) {
-    var exist = false
-    
-    for re in requests {
-      if re.0 == request.digist {
-        exist = true
-        break
+    self.requests_queue_concurrent.async(flags:.barrier) { [weak self] in
+      guard let `self` = self else { return }
+
+      var exist = false
+
+      for re in self.requests {
+        if re.0 == request.digist {
+          exist = true
+          break
+        }
+      }
+
+      if !exist {
+        self.requesting_queue_concurrent.async(flags:.barrier) { [weak self] in
+          guard let `self` = self else { return }
+
+
+          for (_, requestingObject) in self.requesting {
+            if requestingObject.0 == request.digist {
+              exist = true
+              break
+            }
+          }
+          
+          if !exist {
+            self.requests_queue_concurrent.async(flags:.barrier) { [weak self] in
+              guard let `self` = self else { return }
+              self.requests.append((request.digist, request, self.constructSendRequest(request: request)))
+              
+              main {
+                if self.preSendAndDetect() {
+                  self.handlerRequestPool()
+                }
+              }
+            }
+          }
+        
+          
+        }
+        
       }
     }
     
-    if !exist {
-      requests.append((request.digist, request, constructSendRequest(request: request)))
-    }
   }
   
   private func constructSendRequest<Request: JSONRPCKit.Request>(request: Request) -> (()->()) {
@@ -329,13 +364,20 @@ extension WebsocketService {
         self.requesting[id] = (request.digist, request, self.constructSendRequest(request: request))
       }
       
-      if let index = self.requests.index(where: { (value) -> Bool in
-        let (digist, _, _) = value
+      self.requests_queue_concurrent.async(flags: .barrier) {[weak self] in
+        guard let `self` = self else { return }
         
-        return digist == request.digist
-      }) {
-        self.requests.remove(at: index)
+        if let index = self.requests.index(where: { (value) -> Bool in
+          let (digist, _, _) = value
+          
+          return digist == request.digist
+        }) {
+          self.requests.remove(at: index)
+        }
+        
       }
+      
+     
 
     }
   }
@@ -354,7 +396,11 @@ extension WebsocketService {
       filterRegisters = Array(filterRegister.values)
     }
     
-    self.requests += filterRegisters
+    self.requests_queue_concurrent.async(flags: .barrier) {[weak self] in
+      guard let `self` = self else { return }
+      
+      self.requests += filterRegisters
+    }
 
     self.requesting_queue_concurrent.async(flags: .barrier) {[weak self] in
       guard let `self` = self else { return }
@@ -364,9 +410,13 @@ extension WebsocketService {
   
 
   private func handlerRequestPool() {
-    let requestQueue = self.requests
+    var realRequests:[RequestsType]!
+
+    self.requests_queue_concurrent.sync {
+      realRequests = self.requests
+    }
   
-    for request in requestQueue {
+    for request in realRequests {
       let retry = request.2
       
       retry()
@@ -375,9 +425,7 @@ extension WebsocketService {
   
   func send<Request: JSONRPCKit.Request>(request: Request) {
     saveRequest(request: request)
-    if preSendAndDetect() {
-      handlerRequestPool()
-    }
+   
   }
   
   private func refreshData() {
@@ -391,8 +439,10 @@ extension WebsocketService: WebSocketDelegate {
     print("websocket is connected")
     isConnecting = false
     
-    preFetchID()
-    fetchIDs()
+    main {
+      self.preFetchID()
+      self.fetchIDs()
+    }
   }
   
   func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {

@@ -25,7 +25,9 @@ class OrderBookViewController: BaseViewController {
   var pair:Pair? {
     didSet {
       guard let pair = pair else { return }
-      if self.tradeView != nil{
+      if self.tradeView != nil {
+        self.coordinator?.resetData(pair)
+
         showMarketPrice()
       }
       self.coordinator?.fetchData(pair)
@@ -92,7 +94,9 @@ class OrderBookViewController: BaseViewController {
         if app_data.data.value.count == 0 {
           return
         }
-        
+
+        guard self.isVisible else { return }
+
         if let pair = self.pair {
           self.coordinator?.fetchData(pair)
         }
@@ -169,6 +173,17 @@ extension OrderBookViewController : TradePair{
     set {
       self.pair = newValue
     }
+  }
+  
+  func refresh() {
+    guard let pair = pair else { return }
+    if self.tradeView != nil {
+//      self.coordinator?.resetData(pair)
+      
+      showMarketPrice()
+    }
+    self.coordinator?.fetchData(pair)
+
   }
 }
 

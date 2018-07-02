@@ -19,6 +19,8 @@ class TradeHistoryView: UIView {
   var data:[(Bool, String, String, String, String)]?{
     didSet{
       self.tableView.reloadData()
+      
+      updateContentSize()
     }
   }
   
@@ -32,20 +34,21 @@ class TradeHistoryView: UIView {
     return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
   }
   
-  fileprivate func updateHeight() {
+  func updateContentSize() {
+    self.performSelector(onMainThread: #selector(self.updateHeight), with: nil, waitUntilDone: false)
+    
+    self.performSelector(onMainThread: #selector(self.updateHeight), with: nil, waitUntilDone: false)
+  }
+  
+  @objc fileprivate func updateHeight() {
     layoutIfNeeded()
     self.height = dynamicHeight()
     invalidateIntrinsicContentSize()
   }
-  
+
   fileprivate func dynamicHeight() -> CGFloat {
     let lastView = self.subviews.last?.subviews.last
-    return lastView!.bottom
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    layoutIfNeeded()
+    return lastView!.top + self.tableView.contentSize.height
   }
   
   override init(frame: CGRect) {

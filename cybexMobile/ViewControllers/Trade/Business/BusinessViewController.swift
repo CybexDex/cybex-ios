@@ -52,9 +52,6 @@ class BusinessViewController: BaseViewController {
       }
     })
   }
-  deinit {
-    NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil)
-  }
   
   func refreshView() {
     guard let pair = pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
@@ -177,13 +174,28 @@ class BusinessViewController: BaseViewController {
     
     NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.containerView.amountTextfield, queue: nil) {[weak self] (notifi) in
       guard let `self` = self else { return }
+
       guard let text = self.containerView.amountTextfield.text, text != "", text.toDouble() != 0 else {
         self.containerView.amountTextfield.text = ""
         return
       }
       self.containerView.amountTextfield.text = text.tradePrice.price
     }
-   
+    
+    NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self.containerView.amountTextfield, queue: nil) {(notifi) in
+      if !UserManager.shared.isLoginIn {
+        app_coodinator.showLogin()
+        return
+      }
+    }
+    
+    NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self.containerView.priceTextfield, queue: nil) {(notifi) in
+      if !UserManager.shared.isLoginIn {
+        app_coodinator.showLogin()
+        return
+      }
+    }
+
     UserManager.shared.balances.asObservable().subscribe(onNext: {[weak self] (balances) in
       guard let `self` = self else { return }
 
@@ -193,7 +205,7 @@ class BusinessViewController: BaseViewController {
       self.coordinator?.getFee(self.type == .buy ? base_info.id : quote_info.id)
 
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    
+
 //balance
     self.coordinator?.state.property.balance.asObservable().subscribe(onNext: {[weak self] (balance) in
       guard let `self` = self else { return }
@@ -201,17 +213,17 @@ class BusinessViewController: BaseViewController {
       guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote], balance != 0 else {
         self.containerView.balance.text = "--"
         return
-        
+
       }
-      
+
       let info = self.type == .buy ? base_info : quote_info
       let symbol = info.symbol.filterJade
       let realAmount = balance.doubleValue.string(digits: info.precision)
-      
+
       self.containerView.balance.text = "\(realAmount) \(symbol)"
-      
+
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    
+
 //fee
     Observable.combineLatest(coordinator!.state.property.feeID.asObservable(), coordinator!.state.property.fee_amount.asObservable()).subscribe(onNext: {[weak self] (fee_id, fee_amount) in
       guard let `self` = self else { return }
@@ -220,11 +232,11 @@ class BusinessViewController: BaseViewController {
         self.containerView.fee.text = "--"
         return
       }
-      
+
       self.containerView.fee.text = fee_amount.doubleValue.string(digits: info.precision) + " \(info.symbol.filterJade)"
 
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    
+
 
 //total
     Observable.combineLatest(coordinator!.state.property.feeID.asObservable(), self.coordinator!.state.property.amount, self.coordinator!.state.property.price, coordinator!.state.property.fee_amount.asObservable()).subscribe(onNext: {[weak self] (feeID, amount, price, fee) in
@@ -240,21 +252,29 @@ class BusinessViewController: BaseViewController {
       }
 
       let total = limit * amount
-      
+
       self.containerView.endMoney.text = "\(total.tradePrice().price) \(base_info.symbol.filterJade)"
-      
+
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    
-    
-    UserManager.shared.name.subscribe(onNext: { (name) in
+
+
+    UserManager.shared.name.skip(1).asObservable().subscribe(onNext: {[weak self] (name) in
+      guard let `self` = self else { return }
+      
       self.changeButtonState()
 
       guard let _ = name else {
         self.coordinator?.resetState()
         return
       }
-      
+
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+  }
+  
+  deinit {
+    NotificationCenter.default.removeObserver(self.containerView.priceTextfield)
+    NotificationCenter.default.removeObserver(self.containerView.amountTextfield)
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil)
   }
 }
 
@@ -323,6 +343,8 @@ extension BusinessViewController {
 
   override func returnEnsureAction() {
     self.coordinator?.parentStartLoading(self.parent)
+    ShowManager.shared.hide()
+
     postOrder()
   }
 

@@ -188,6 +188,7 @@ extension OpenedOrdersViewController {
   
   override func returnEnsureAction() {
     self.startLoading()
+    ShowManager.shared.hide()
     self.postCancelOrder()
   }
 }
