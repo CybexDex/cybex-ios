@@ -359,7 +359,7 @@ class UserManager {
   }
   
   func timingLock() {
-    self.timer = Repeater.once(after: .seconds(120), {[weak self] (timer) in
+    self.timer = Repeater.once(after: .seconds(300), {[weak self] (timer) in
       guard let `self` = self else { return }
       self.keys = nil
     })

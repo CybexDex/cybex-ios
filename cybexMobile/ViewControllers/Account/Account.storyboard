@@ -140,10 +140,10 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="E2J-ZU-3ec">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="908.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="907.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1fp-Zk-OiE">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="908.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="907.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vT7-UT-V7u">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
@@ -437,7 +437,7 @@
                                                         <rect key="frame" x="0.0" y="605.5" width="375" height="168"/>
                                                     </view>
                                                     <view tag="8" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="134" translatesAutoresizingMaskIntoConstraints="NO" id="rXC-Ps-hL3" customClass="AccountAssetOperationView" customModule="cybexMobile" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="773.5" width="375" height="135"/>
+                                                        <rect key="frame" x="0.0" y="773.5" width="375" height="134"/>
                                                     </view>
                                                 </subviews>
                                                 <constraints>
@@ -680,13 +680,13 @@
                                                         <rect key="frame" x="0.0" y="229" width="349" height="8"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址错误" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YcF-6O-jaN">
-                                                                <rect key="frame" x="51" y="4" width="286" height="0.0"/>
+                                                                <rect key="frame" x="26" y="4" width="311" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <color key="textColor" red="1" green="0.1181127701" blue="0.2395080661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="erro16Px" translatesAutoresizingMaskIntoConstraints="NO" id="vIx-PZ-HXH">
-                                                                <rect key="frame" x="25" y="-4" width="16" height="16"/>
+                                                                <rect key="frame" x="0.0" y="-4" width="16" height="16"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="16" id="YQZ-sQ-jB6"/>
                                                                     <constraint firstAttribute="width" constant="16" id="fIE-94-cGd"/>
@@ -695,7 +695,7 @@
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="YcF-6O-jaN" secondAttribute="bottom" constant="4" id="32Z-ot-CAL"/>
-                                                            <constraint firstItem="vIx-PZ-HXH" firstAttribute="leading" secondItem="ZMf-Nq-OB3" secondAttribute="leading" constant="25" id="7x9-Mb-4Ha"/>
+                                                            <constraint firstItem="vIx-PZ-HXH" firstAttribute="leading" secondItem="ZMf-Nq-OB3" secondAttribute="leading" id="7x9-Mb-4Ha"/>
                                                             <constraint firstAttribute="trailing" secondItem="YcF-6O-jaN" secondAttribute="trailing" constant="12" id="AL7-bA-os1"/>
                                                             <constraint firstItem="YcF-6O-jaN" firstAttribute="top" secondItem="ZMf-Nq-OB3" secondAttribute="top" constant="4" id="bKm-V7-RvF"/>
                                                             <constraint firstItem="YcF-6O-jaN" firstAttribute="leading" secondItem="vIx-PZ-HXH" secondAttribute="trailing" constant="10" id="pn9-Kk-6Yz"/>
@@ -900,8 +900,8 @@
                         <outlet property="errorView" destination="ZMf-Nq-OB3" id="mqg-xy-Se6"/>
                         <outlet property="feeView" destination="DlJ-rS-N18" id="mAH-30-KVL"/>
                         <outlet property="finalAmount" destination="2Un-JV-3Lb" id="cnX-3T-RRm"/>
-                        <outlet property="gateAwayFee" destination="tVv-Pa-xFA" id="Y2P-aF-iI7"/>
-                        <outlet property="insideFee" destination="pKH-9I-fn3" id="PL6-wf-4Ps"/>
+                        <outlet property="gateAwayFee" destination="pKH-9I-fn3" id="ptF-RU-NLQ"/>
+                        <outlet property="insideFee" destination="tVv-Pa-xFA" id="ssS-Dg-cRO"/>
                         <outlet property="introduce" destination="8tG-XF-GWP" id="agR-JK-hiK"/>
                         <outlet property="introduceView" destination="yhZ-aN-stl" id="fhJ-Qw-vxU"/>
                         <outlet property="stackView" destination="pxQ-od-hXr" id="eLZ-VG-hKp"/>
@@ -910,7 +910,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YEe-p4-UE3" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-974" y="-726"/>
+            <point key="canvasLocation" x="-1442" y="-870"/>
         </scene>
         <!--Withdraw Detail View Controller-->
         <scene sceneID="Sob-I9-saU">

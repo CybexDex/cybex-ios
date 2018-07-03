@@ -518,9 +518,10 @@ extension WebsocketService: WebSocketDelegate {
 
           return
         }
-        if let error = data["error"].dictionary {
-          print(error)
-          request.response(data)
+        if let _ = data["error"].dictionary {
+          main{
+            request.response(data)
+          }
           return
         }
         if let object = try? request.transferResponse(from: data["result"].object) {

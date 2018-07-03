@@ -257,7 +257,6 @@ struct getBalanceObjectsRequest : JSONRPCKit.Request , JSONRPCResponse{
     }
     return []
   }
-  
 }
 
 struct getBlockRequest : JSONRPCKit.Request , JSONRPCResponse {
