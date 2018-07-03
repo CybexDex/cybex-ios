@@ -146,7 +146,7 @@
 "withdraw_amount" = "Amount";
 "withdraw_amount_all" = "ALL";
 "withdraw_fee"        = "Gateway Fee";
-"withdraw_gateway_fee" = "Withdrawal Fee";
+"withdraw_gateway_fee" = "Transfer Fee";
 "withdraw_receive_amount" = "Receive Amount";
 "withdraw_min_value"      = "Less than the minimum withdrawal";
 "recharge_deposit"        = "Deposit";

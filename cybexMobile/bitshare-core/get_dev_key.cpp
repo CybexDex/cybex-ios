@@ -21,6 +21,7 @@ using namespace boost::property_tree;
 #include <fc/variant_object.hpp>
 #include <fc/exception/exception.hpp>
 #include <graphene/chain/pts_address.hpp>
+#include <graphene/chain/protocol/address.hpp>
 
 #include "wallet_lib.hpp"
 
@@ -113,8 +114,8 @@ fc::mutable_variant_object get_dev_key(string type, string secret)
   mvo( "private_key", private_key)
   ( "public_key", public_key)
   ( "address", address)
-  ( "compressed", string(compress_pts_addr))
-  ( "uncompressed", string(uncompress_pts_addr))
+  ( "compressed", string(graphene::chain::address(compress_pts_addr)))
+  ( "uncompressed", string(graphene::chain::address(uncompress_pts_addr)))
   ;
 
   add_user_key(public_key, priv_key);

@@ -357,7 +357,7 @@ extension RechargeDetailViewController{
   }
   
   func withDrawAction(){
-    if let addressText = self.addressView.content.text,let amountText = self.amountView.content.text,let insideText = self.insideFee.text,let gatewayFeeText = self.gateAwayFee.text,let finalAmountText = self.finalAmount.text{
+    if self.withdraw.isEnable,let addressText = self.addressView.content.text,let amountText = self.amountView.content.text,let insideText = self.insideFee.text,let gatewayFeeText = self.gateAwayFee.text,let finalAmountText = self.finalAmount.text{
       
       let data = getWithdrawDetailInfo(addressInfo: addressText, amountInfo: amountText + " " + (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)!, withdrawFeeInfo: insideText, gatewayFeeInfo: gatewayFeeText, receiveAmountInfo: finalAmountText)
       if self.isVisible{

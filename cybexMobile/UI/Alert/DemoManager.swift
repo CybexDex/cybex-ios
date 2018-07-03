@@ -38,6 +38,7 @@ class ShowManager {
     case none
     case up_down
     case fadeIn_Out
+    case small_big
   }
   
   var data : Any?{
@@ -97,8 +98,8 @@ class ShowManager {
     self.superView          = UIApplication.shared.keyWindow
     self.superView?.addSubview(showView!)
     showView?.content       = data
-    let leading : CGFloat  = showType == .sheet_image ? 0 : 52
-    let trailing : CGFloat = showType == .sheet_image ? 0 : 52
+    let leading : CGFloat   = showType == .sheet_image ? 0 : 52
+    let trailing : CGFloat  = showType == .sheet_image ? 0 : 52
     if animationShow == .none || animationShow == .fadeIn_Out{
       
       showView?.leftToSuperview(nil, offset: leading, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
@@ -114,7 +115,7 @@ class ShowManager {
         }
       }
       return
-    }else {
+    }else if (animationShow == .up_down){
       let top     : CGFloat  = showType == .sheet_image ? -200 : -800
       showView?.leftToSuperview(nil, offset: leading, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
       showView?.rightToSuperview(nil, offset: trailing, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
@@ -134,6 +135,8 @@ class ShowManager {
       UIView.animate(withDuration: ShowManager.durationTime) {
         self.superView?.layoutIfNeeded()
       }
+    }else if (animationShow == .small_big){
+      
     }
   }
   

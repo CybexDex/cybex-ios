@@ -43,14 +43,16 @@ class OpenedOrdersViewController: BaseViewController {
   
   func setupUI(){
     self.localized_text = R.string.localizable.openedTitle.key.localizedContainer()
-   
+    
     switchContainerView()
   }
-
+  
   func showOrderInfo(){
-    guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0), let asset = app_data.assetInfo[AssetConfiguration.CYB] else { return }
+    guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0) else { return }
     startLoading()
-    calculateFee(operation, focus_asset_id: AssetConfiguration.CYB, operationID: .limit_order_cancel) { [weak self](success, amount, assetId) in
+    guard let pair = self.pair else {return}
+    guard let order = self.order else {return}
+    calculateFee(operation, focus_asset_id: order.isBuy ? pair.base : pair.quote, operationID: .limit_order_cancel) { [weak self](success, amount, assetId) in
       guard let `self` = self else {return}
       self.endLoading()
       
@@ -60,12 +62,12 @@ class OpenedOrdersViewController: BaseViewController {
       
       if success,let order = self.order{
         let ensure_title = order.isBuy ? R.string.localizable.cancle_openedorder_buy.key.localized() : R.string.localizable.cancle_openedorder_sell.key.localized()
-      
-        if let baseInfo = app_data.assetInfo[order.sellPrice.base.assetID], let quoteInfo = app_data.assetInfo[order.sellPrice.quote.assetID],let pair = self.pair{
+        
+        if let baseInfo = app_data.assetInfo[order.sellPrice.base.assetID], let quoteInfo = app_data.assetInfo[order.sellPrice.quote.assetID],let pair = self.pair,let fee_info = app_data.assetInfo[assetId]{
           var priceInfo = ""
           var amountInfo = ""
           var totalInfo = ""
-          let feeInfo = amount.doubleValue.string(digits: asset.precision) + " " + asset.symbol.filterJade
+          let feeInfo = amount.doubleValue.string(digits: fee_info.precision) + " " + fee_info.symbol.filterJade
           if baseInfo.id == pair.base{
             let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
             let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
@@ -84,9 +86,12 @@ class OpenedOrdersViewController: BaseViewController {
           self.showConfirm(ensure_title, attributes: getOpenedOrderInfo(price: priceInfo, amount: amountInfo, total: totalInfo, fee: feeInfo, isBuy: order.isBuy))
         }
       }
+      else{
+        self.showToastBox(false, message: R.string.localizable.withdraw_nomore.key.localized())
+      }
     }
   }
-
+  
   func switchContainerView() {
     containerView?.removeFromSuperview()
     
@@ -161,18 +166,19 @@ extension OpenedOrdersViewController {
   }
   
   func postCancelOrder() {
-    if let order = self.order {
+    // order.isBuy ? pair.base : pair.quote
+    if let order = self.order ,let pair = self.pair {
       
-      self.coordinator?.cancelOrder(order.id, callback: {[weak self] (success) in
+      self.coordinator?.cancelOrder(order.id, fee_id:order.isBuy ? pair.base : pair.quote ,callback: {[weak self] (success) in
         guard let `self` = self else { return }
         
         self.endLoading()
         self.showToastBox(success, message: success ? R.string.localizable.cancel_create_success() : R.string.localizable.cancel_create_fail())
       })
-
+      
     }
   }
-
+  
   override func passwordDetecting() {
     self.startLoading()
   }
