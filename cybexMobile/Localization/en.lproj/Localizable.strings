@@ -139,7 +139,7 @@
 "my_opened_filled" = "Filled/Cancel";
 
 "withdraw_nomore" = "Not enough";
-"withdraw_address_fault" = "Verifing the rule of address";
+"withdraw_address_fault" = "Invalid address";
 "withdraw_available" = "Available";
 "withdraw_address"   = "Withdrawal Address";
 "withdraw_address_placehold"   = "Enter or paste address";

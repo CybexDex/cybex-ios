@@ -100,12 +100,12 @@ class ShowManager {
     showView?.content       = data
     let leading : CGFloat   = showType == .sheet_image ? 0 : 52
     let trailing : CGFloat  = showType == .sheet_image ? 0 : 52
-    if animationShow == .none || animationShow == .fadeIn_Out{
-      
+    if animationShow == .none || animationShow == .fadeIn_Out || animationShow == .small_big{
       showView?.leftToSuperview(nil, offset: leading, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
       showView?.rightToSuperview(nil, offset: trailing, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
       showView?.centerXToSuperview(nil, offset: 0, priority: .required, isActive: true, usingSafeArea: true)
       showView?.centerYToSuperview(nil, offset: -64, priority: .required, isActive: true, usingSafeArea: true)
+      self.superView?.layoutIfNeeded()
       if animationShow == .fadeIn_Out{
         showView?.alpha   = 0.0
         shadowView?.alpha = 0.0
@@ -113,9 +113,15 @@ class ShowManager {
           self.showView?.alpha   = 1.0
           self.shadowView?.alpha = 0.5
         }
+      }else if animationShow == .small_big{
+        showView?.transform = CGAffineTransform.init(scaleX: 0.3, y: 0.3)
+        UIView.animate(withDuration: ShowManager.durationTime, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+          self.showView?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+        }, completion: nil)
+        
       }
       return
-    }else if (animationShow == .up_down){
+    }else{
       let top     : CGFloat  = showType == .sheet_image ? -200 : -800
       showView?.leftToSuperview(nil, offset: leading, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
       showView?.rightToSuperview(nil, offset: trailing, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
@@ -135,8 +141,6 @@ class ShowManager {
       UIView.animate(withDuration: ShowManager.durationTime) {
         self.superView?.layoutIfNeeded()
       }
-    }else if (animationShow == .small_big){
-      
     }
   }
   
@@ -171,7 +175,7 @@ class ShowManager {
         self.shadowView = nil
         self.data = nil
       }
-    }else{
+    }else if animationShow == .up_down{
       a.constant = showType == .sheet_image ? -200 : -800
       UIView.animate(withDuration: ShowManager.durationTime, delay: time, options: .curveLinear, animations: {
         self.superView?.layoutIfNeeded()

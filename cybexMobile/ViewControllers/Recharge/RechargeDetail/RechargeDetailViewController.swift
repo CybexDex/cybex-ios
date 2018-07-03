@@ -393,8 +393,13 @@ extension RechargeDetailViewController {
       startLoading()
       let allAmount = Decimal(self.available)
       var requestAmount : String = ""
+      
       if allAmount < gateway + amount{
-        requestAmount = (amount - gateway).stringValue
+        if self.feeAssetId != AssetConfiguration.CYB{
+          requestAmount = (amount - gateway).stringValue
+        }else{
+          requestAmount = amount.stringValue
+        }
       }else{
         requestAmount = amount.stringValue
       }
