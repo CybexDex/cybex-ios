@@ -12,6 +12,7 @@ import RxCocoa
 import ReSwift
 import SwiftTheme
 import TinyConstraints
+import Localize_Swift
 
 enum openedOrdersViewControllerPageType {
   case exchange
@@ -45,6 +46,17 @@ class OpenedOrdersViewController: BaseViewController {
     self.localized_text = R.string.localizable.openedTitle.key.localizedContainer()
     
     switchContainerView()
+  }
+  
+  func setupEvent(){
+    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] notification in
+      guard let `self` = self else { return }
+      if let account_view = self.containerView as? MyOpenedOrdersView {
+        
+        account_view.sectionView.totalTitle.locali = R.string.localizable.my_opened_price.key.localized()
+        account_view.sectionView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key.localized()
+      }      
+    })
   }
   
   func showOrderInfo(){
@@ -99,6 +111,8 @@ class OpenedOrdersViewController: BaseViewController {
     self.view.addSubview(containerView!)
     if let account_view = self.containerView as? AccountOpenedOrdersView {
       account_view.data = nil
+    }else{
+      setupEvent()
     }
     containerView?.edgesToDevice(vc:self, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
   }
