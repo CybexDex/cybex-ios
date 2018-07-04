@@ -43,7 +43,8 @@ class AppCoordinator {
   
   var homeCoordinator: HomeRootCoordinator!
   var explorerCoordinator: ExplorerRootCoordinator!
-  var faqCoordinator: FAQRootCoordinator!
+//  var faqCoordinator: FAQRootCoordinator!
+  var tradeCoordinator : TradeRootCoordinator!
   var accountCoordinator: AccountRootCoordinator!
   var entryCoordinator: EntryRootCoordinator!
 
@@ -66,9 +67,10 @@ class AppCoordinator {
     homeCoordinator = HomeRootCoordinator(rootVC: home)
     home.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navWatchlist.key.localized(), image: R.image.ic_watchlist_24px(), selectedImage: R.image.ic_watchlist_active_24px())
     
-    let faq = BaseNavigationController()
-    faqCoordinator = FAQRootCoordinator(rootVC: faq)
-    faq.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navApply.key.localized(), image: R.image.icon_apply(), selectedImage: R.image.icon_apply_active())
+    let trade = BaseNavigationController()
+    tradeCoordinator = TradeRootCoordinator(rootVC: trade)
+    trade.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navTrade.key.localized(), image: R.image.icon_apply(), selectedImage: R.image.icon_apply_active())
+    
     
     let account = BaseNavigationController()
     accountCoordinator = AccountCoordinator(rootVC: account)
@@ -79,18 +81,23 @@ class AppCoordinator {
     //        message.tabBarItem.badgeValue = "99+"
     
     homeCoordinator.start()
-    faqCoordinator.start()
+    tradeCoordinator.start()
     accountCoordinator.start()
     
-    rootVC.viewControllers = [home, faq, account]
+    rootVC.viewControllers = [home, trade, account]
     
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: {notification in     
       CBConfiguration.sharedConfiguration.themeIndex = ThemeManager.currentThemeIndex
+      CBConfiguration.sharedConfiguration.main.valueAssistTextColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1) : #colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1)
+      CBConfiguration.sharedConfiguration.theme.longPressLineColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1) : #colorLiteral(red: 0.1058823529, green: 0.1333333333, blue: 0.1882352941, alpha: 1)
+      CBConfiguration.sharedConfiguration.theme.tickColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.4470588235, green: 0.5843137255, blue: 0.9921568627, alpha: 0.06) : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.04)
+      CBConfiguration.sharedConfiguration.theme.dashColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.white
+
     })
   }
   
   func curDisplayingCoordinator() -> NavCoordinator {
-    let container = [homeCoordinator, faqCoordinator, accountCoordinator] as [NavCoordinator]
+    let container = [homeCoordinator, tradeCoordinator, accountCoordinator] as [NavCoordinator]
     return container[self.rootVC.selectedIndex]
   }
   

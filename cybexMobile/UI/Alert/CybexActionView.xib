@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CybexActionView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="icon" destination="a0Y-SP-5yx" id="yL7-8x-CbM"/>
+                <outlet property="message" destination="vyY-pR-pps" id="fdo-4y-TJO"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3Q2-X3-Ofg">
+                    <rect key="frame" x="166" y="-8" width="44" height="80"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icCheckCircleGreen" translatesAutoresizingMaskIntoConstraints="NO" id="a0Y-SP-5yx">
+                            <rect key="frame" x="0.0" y="28" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="24" id="5kk-TY-UnS"/>
+                                <constraint firstAttribute="height" constant="24" id="T4c-dF-Dem"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyY-pR-pps">
+                            <rect key="frame" x="29" y="30.5" width="15" height="19.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="iSf-aG-382"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="a0Y-SP-5yx" firstAttribute="leading" secondItem="3Q2-X3-Ofg" secondAttribute="leading" id="EBt-UN-Px6"/>
+                        <constraint firstAttribute="trailing" secondItem="vyY-pR-pps" secondAttribute="trailing" id="Qrp-qO-g52"/>
+                        <constraint firstItem="vyY-pR-pps" firstAttribute="top" secondItem="3Q2-X3-Ofg" secondAttribute="top" constant="30" id="n4p-Od-PlG"/>
+                        <constraint firstItem="a0Y-SP-5yx" firstAttribute="centerY" secondItem="3Q2-X3-Ofg" secondAttribute="centerY" id="ugI-vb-QV8"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="3Q2-X3-Ofg" secondAttribute="bottom" constant="20" id="FND-Pv-Tey"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3Q2-X3-Ofg" secondAttribute="trailing" constant="20" id="J7w-XM-brc"/>
+                <constraint firstItem="3Q2-X3-Ofg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="JdR-6T-CMg"/>
+                <constraint firstItem="3Q2-X3-Ofg" firstAttribute="top" relation="lessThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="VCS-De-KyZ"/>
+                <constraint firstItem="3Q2-X3-Ofg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="WNd-LL-Eyb"/>
+                <constraint firstItem="3Q2-X3-Ofg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="jVj-qW-P52"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                    <color key="value" name="darkFour" red="0.129" green="0.161" blue="0.224" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                    <color key="value" name="steelTwo80" red="0.471" green="0.506" blue="0.604" alpha="0.804" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="120" y="26.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icCheckCircleGreen" width="24" height="24"/>
+    </resources>
+</document>

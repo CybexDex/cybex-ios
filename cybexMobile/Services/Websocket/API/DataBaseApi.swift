@@ -18,11 +18,36 @@ enum dataBaseCatogery:String {
   case get_limit_orders
   case get_balance_objects
   case get_account_by_name
+  case get_required_fees
+  case get_block
+}
+
+struct GetRequiredFees:JSONRPCKit.Request, JSONRPCResponse {
+  var response: RPCSResponse
+  var operationStr:String
+  var assetID:String
+  var operationID:ChainTypesOperations
+
+  var method: String {
+    return "call"
+  }
+  
+  var parameters: Any? {
+    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_required_fees.rawValue, [[[operationID.rawValue, JSON(parseJSON:operationStr).dictionaryObject ?? [:]]], assetID]]
+  }
+  
+  func transferResponse(from resultObject: Any) throws -> Any {
+    let result = JSON(resultObject)
+    if let data = result.arrayObject as? [[String:Any]] {
+      return data.flatMap({Fee(JSON: $0)})
+    }
+    return []
+  }
 }
 
 struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
   var name:String
-
+  
   var response: RPCSResponse
   
   
@@ -39,7 +64,7 @@ struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
     if let _ = result.dictionaryObject {
       return true
     }
-
+    
     return false
   }
 }
@@ -49,7 +74,7 @@ typealias FullAccount = (account:Account?, balances:[Balance]?, limitOrder:[Limi
 struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
   var name:String
   var response:RPCSResponse
-
+  
   var method: String {
     return "call"
   }
@@ -60,23 +85,23 @@ struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
   
   func transferResponse(from resultObject: Any) throws -> Any {
     let result = JSON(resultObject).arrayValue
-
+    
     let result_value:FullAccount = (nil, nil, nil)
     if result.count == 0 {
       return result_value
     }
     
     guard let full = result.first?.arrayValue[1],
-    let account_dic = full["account"].dictionaryObject
-    else {
-      return result_value
+      let account_dic = full["account"].dictionaryObject
+      else {
+        return result_value
     }
     
     let account = Account(JSON: account_dic)
     
     let balances_arr = full["balances"].arrayValue
     let limitOrder_arr = full["limit_orders"].arrayValue
-
+    
     let balances = balances_arr.map { (obj) -> Balance in
       return Balance(JSON: obj.dictionaryObject!)!
     }
@@ -108,7 +133,7 @@ struct GetChainIDRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
 }
 
-struct GetAssetRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
   var ids:[String]
   var response:RPCSResponse
   
@@ -122,6 +147,19 @@ struct GetAssetRequest: JSONRPCKit.Request, JSONRPCResponse {
   
   func transferResponse(from resultObject: Any) throws -> Any {
     if let response = resultObject as? [[String: Any]] {
+      if ids.first == "2.1.0"{
+        var head_block_id = ""
+        var head_block_number = ""
+        for res in response.first!{
+          if res.key == "head_block_id"{
+            head_block_id = String(describing:res.value)
+          }else if res.key == "head_block_number"{
+            head_block_number = String(describing:res.value)
+          }
+        }
+        return (block_id:head_block_id,block_num:head_block_number)
+      }
+      
       return response.map { data in
         
         return AssetInfo(JSON:data)!
@@ -129,7 +167,7 @@ struct GetAssetRequest: JSONRPCKit.Request, JSONRPCResponse {
     } else {
       throw CastError(actualValue: resultObject, expectedType: Response.self)
     }
-  
+    
   }
 }
 
@@ -141,7 +179,7 @@ struct SubscribeMarketRequest: JSONRPCKit.Request, RevisionRequest, JSONRPCRespo
   }
   
   var response:RPCSResponse
-
+  
   var parameters: Any? {
     return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.subscribe_to_market.rawValue, [WebsocketService.shared.idGenerator.currentId + 1, ids[0], ids[1]]]
   }
@@ -154,12 +192,12 @@ struct SubscribeMarketRequest: JSONRPCKit.Request, RevisionRequest, JSONRPCRespo
       params[2] = JSON(subParams)
       data["params"] = JSON(params)
     }
-
+    
     return data
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
-      return resultObject
+    return resultObject
   }
 }
 
@@ -172,16 +210,17 @@ struct getLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_limit_orders.rawValue, [pair.base, pair.quote, 20]]
+    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_limit_orders.rawValue, [pair.base, pair.quote, 500]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
     let result = JSON(resultObject).arrayValue
-    if result.count > 1 {
+    if result.count >= 1 {
       var data:[LimitOrder] = []
       for i in result {
-        let order = try! LimitOrder(JSON: i.dictionaryObject!)
-        data.append(order)
+        if let order = LimitOrder(JSON: i.dictionaryObject!) {
+          data.append(order)
+        }
       }
       
       return data
@@ -202,7 +241,7 @@ struct getBalanceObjectsRequest : JSONRPCKit.Request , JSONRPCResponse{
   }
   
   var parameters : Any? {
-      return [WebsocketService.shared.ids[apiCategory.database] ?? 0 , dataBaseCatogery.get_balance_objects.rawValue,[address]]
+    return [WebsocketService.shared.ids[apiCategory.database] ?? 0 , dataBaseCatogery.get_balance_objects.rawValue,[address]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
@@ -218,5 +257,20 @@ struct getBalanceObjectsRequest : JSONRPCKit.Request , JSONRPCResponse{
     }
     return []
   }
+}
+
+struct getBlockRequest : JSONRPCKit.Request , JSONRPCResponse {
+  var response: RPCSResponse
   
+  var block_num : Int
+  var method:String{
+    return "call"
+  }
+  var parameters: Any?{
+    return [WebsocketService.shared.ids[apiCategory.database] ?? 0,dataBaseCatogery.get_block.rawValue,[block_num]]
+  }
+  func transferResponse(from resultObject: Any) throws -> Any {
+    let data = JSON(resultObject).dictionaryValue
+    return data["timestamp"]?.stringValue ?? ""
+  }
 }

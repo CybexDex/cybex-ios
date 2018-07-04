@@ -14,36 +14,47 @@ import RxSwift
 import ChainableAnimations
 import TableFlip
 import SwiftyJSON
+import TinyConstraints
 
+enum view_type : Int{
+  case homeContent    = 1
+  case businessTitle
+}
 class HomeViewController: BaseViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
-  
-  struct define {
-    static let sectionHeaderHeight : Double = 71.0
-  }
+
   
   var coordinator: (HomeCoordinatorProtocol & HomeStateManagerProtocol)?
-
-  @IBOutlet weak var tableView: UITableView!
   
-  var currentBaseIndex = 0 {
+  var pair: Pair? {
     didSet{
-      self.tableView.reloadData()
-      self.tableView.isHidden = false
+      guard let pair = pair , let index = AssetConfiguration.market_base_assets.index(of: pair.base) else { return }
+      
+      if let selectedIndex = app_data.filterQuoteAsset(pair.base).index(where: { (bucket) -> Bool in
+        return bucket.quote == pair.quote
+      }) {
+        self.businessTitleView?.selectedIndex = selectedIndex
+        self.businessTitleView?.leftView.changeToHighStatus(1 + index, save:true)
+      }
+
     }
   }
   
-  lazy var sectionHeader : HomeSectionHeaderView = {
-    let sectionHeader = HomeSectionHeaderView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: CGFloat(define.sectionHeaderHeight)))
-    return sectionHeader
-  }()
- 
+  var contentView : HomeContentView?
+  var businessTitleView : BusinessTitleView?
+  
+  var VC_TYPE : Int = 1 {
+    didSet {
+      switchContainerView()
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     setupUI()
     
-    handlerUpdateVersion(nil)
+    if VC_TYPE == view_type.homeContent.rawValue {
+      handlerUpdateVersion(nil)
+    }
   }
   
   func setupUI() {    
@@ -51,14 +62,24 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
       navigationItem.largeTitleDisplayMode = .always
     }
     
-    self.automaticallyAdjustsScrollViewInsets = false
     self.localized_text = R.string.localizable.navWatchlist.key.localizedContainer()
-    
-    let cell = String.init(describing: HomePairCell.self)
-    tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
-    
-//    let sectionHeader = String.init(descripti)
-    
+    switchContainerView()
+  }
+  
+  func switchContainerView() {
+    contentView?.removeFromSuperview()
+    businessTitleView?.removeFromSuperview()
+    if self.VC_TYPE == view_type.homeContent.rawValue{
+      contentView = HomeContentView()
+      self.view.addSubview(contentView!)
+      
+      contentView?.edgesToDevice(vc:self, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
+      
+    }else{
+      businessTitleView = BusinessTitleView(frame: self.view.bounds)
+      self.view.addSubview(businessTitleView!)
+      businessTitleView?.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -71,7 +92,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         return false
       })
     }
-
+    
     coordinator?.subscribe(loadingSubscriber) { sub in
       return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
         return false
@@ -92,67 +113,40 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
           return
         }
         self.performSelector(onMainThread: #selector(self.refreshTableView), with: nil, waitUntilDone: false)// non block tracking mode
-    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   
   @objc func refreshTableView() {
     if self.isVisible {
       self.endLoading()
-      self.tableView.reloadData()
-      self.tableView.isHidden = false
+      if self.VC_TYPE == 1{
+        self.contentView?.tableView.reloadData()
+        self.contentView?.tableView.isHidden = false
+      }else{
+        self.businessTitleView?.tableView.reloadData()
+        self.businessTitleView?.tableView.isHidden = false
+      }
     }
   }
-  
 }
 
-
-
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
-  }
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).count
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: HomePairCell.self), for: indexPath) as! HomePairCell
-    let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex])
-    let data = markets[indexPath.row]
-    cell.setup(data, indexPath: indexPath)
-    
-    
-    return cell
-  }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-  
-  }
-  
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-    return sectionHeader
-  }
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return CGFloat(define.sectionHeaderHeight)
-  }
-}
 
 extension HomeViewController {
   @objc func cellClicked(_ data:[String: Any]) {
-    if let index = data["index"] as? Int {
-      self.coordinator?.openMarket(index:index, currentBaseIndex:currentBaseIndex)
-
-    }
-  }
-  
-  @objc func tagDidSelected(_ data : [String : Any]){
-    if let index = data["selectedIndex"] as? Int {
-      currentBaseIndex = index
+    if VC_TYPE == view_type.homeContent.rawValue{//首页
+      if let index = data["index"] as? Int {
+        self.coordinator?.openMarket(index:index, currentBaseIndex:self.contentView!.currentBaseIndex)
+      }
+    }else{
+      if let value = data["info"] as? Pair{
+        if let superVC = self.parent as? TradeViewController{
+          superVC.pair = value
+        }
+      }
     }
   }
 }
+
 
 
 

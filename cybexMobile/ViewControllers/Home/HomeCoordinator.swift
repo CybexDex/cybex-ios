@@ -39,6 +39,8 @@ extension HomeCoordinator: HomeCoordinatorProtocol {
     let vc = R.storyboard.main.marketViewController()!
     vc.curIndex = index
     vc.currentBaseIndex = currentBaseIndex
+    vc.rechargeShowType = PairRechargeView.show_type.show.rawValue
+
     let coordinator = MarketCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator
     self.rootVC.pushViewController(vc, animated: true)

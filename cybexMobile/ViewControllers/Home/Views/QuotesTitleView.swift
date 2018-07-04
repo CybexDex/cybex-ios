@@ -8,14 +8,52 @@
 
 import UIKit
 
-
+@IBDesignable
 class QuotesTitleView: UIView {
-  
   enum event : String{
     case tagDidSelected
   }
   
+  @IBOutlet weak var stackView: UIStackView!
+  
   @IBOutlet var titleViews: [UIView]!
+  
+  
+  @IBInspectable
+  var View_Type : Int = 0 {
+    didSet{
+      if View_Type != 1{
+        self.stackView.axis = .horizontal
+      }else{
+        self.stackView.axis = .vertical
+        self.stackView.spacing = 25
+        for titleView in self.titleViews{
+          titleView.viewWithTag(10)?.isHidden = true
+        }
+      }
+    }
+  }
+  
+  @IBInspectable
+  var normal_Color : UIColor = UIColor.steel {
+    didSet{
+      for titleView in titleViews {
+        titleView.viewWithTag(10)?.isHidden = true
+        if let titleL =  titleView.viewWithTag(9) as? UILabel{
+          titleL.theme1TitleColor = normal_Color
+          titleL.theme2TitleColor = normal_Color
+        }
+      }
+    }
+  }
+  
+  @IBInspectable
+  var selected_Color : UIColor = UIColor.white{
+    didSet{
+      
+    }
+  }
+  
   
   fileprivate func setup() {
     for titleView in titleViews {
@@ -31,15 +69,26 @@ class QuotesTitleView: UIView {
     changeToHighStatus(titleView.tag)
   }
   
-  func changeToHighStatus(_ index : Int){
+  
+  func changeToHighStatus(_ index : Int, save:Bool = false){
     for titleView in titleViews {
       if titleView.tag  == index{
-        titleView.viewWithTag(10)?.isHidden = false
-        if let titleL =  titleView.viewWithTag(9) as? UILabel{
-          titleL.theme1TitleColor = .white
-          titleL.theme2TitleColor = .darkTwo
-          self.next?.sendEventWith(event.tagDidSelected.rawValue, userinfo: ["selectedIndex": index - 1])
+        if self.stackView.axis == .vertical{
+          titleView.viewWithTag(10)?.isHidden = true
+          if let titleL =  titleView.viewWithTag(9) as? UILabel{
+            titleL.theme1TitleColor = .pastelOrange
+            titleL.theme2TitleColor = .pastelOrange
+            self.next?.sendEventWith(event.tagDidSelected.rawValue, userinfo: ["selectedIndex": index - 1, "save":save])
+          }
+        }else{
+          titleView.viewWithTag(10)?.isHidden = false
+          if let titleL =  titleView.viewWithTag(9) as? UILabel{
+            titleL.theme1TitleColor = .white
+            titleL.theme2TitleColor = .darkTwo
+            self.next?.sendEventWith(event.tagDidSelected.rawValue, userinfo: ["selectedIndex": index - 1, "save":save])
+          }
         }
+   
       }else{
         titleView.viewWithTag(10)?.isHidden = true
         if let titleL =  titleView.viewWithTag(9) as? UILabel{

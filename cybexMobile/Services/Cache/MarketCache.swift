@@ -19,7 +19,7 @@ struct MarketRecord:Codable {
   var open:TimeInterval
 }
 
-extension MarketRecord:MutablePersistable,RowConvertible  {
+extension MarketRecord:MutablePersistableRecord,FetchableRecord  {
   static var databaseTableName: String = "markets"
   
   mutating func didInsert(with rowID: Int64, for column: String?) {

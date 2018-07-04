@@ -16,81 +16,10 @@ import RxSwift
 import PromiseKit
 import AwaitKit
 import Guitar
+import Repeat
 
 extension UserManager {
-  func login(_ username:String, password:String, completion:@escaping (Bool)->()) {
-    let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
-    if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key {
-      let public_key = active_key.public_key
-      var canLoginIn = false
-      
-      let request = GetFullAccountsRequest(name: username) { response in
-        if let data = response as? FullAccount, let account = data.account {
-          
-          let active_auths = account.active_auths
-          let owner_auths = account.owner_auths
-          
-          for auth in active_auths {
-            if let auth = auth as? [Any], let key = auth[0] as? String {
-              if key == public_key {
-                canLoginIn = true
-                break
-              }
-            }
-          }
-          
-          for auth in owner_auths {
-            if let auth = auth as? [Any], let key = auth[0] as? String {
-              if key == public_key {
-                canLoginIn = true
-                break
-              }
-            }
-          }
-          
-          if canLoginIn {
-            self.name = username
-            self.avatarString = username.sha256()
-            self.keys = keys
-            self.saveKey(keysString, name:username)
-            
-            self.account.accept(data.account)
-            
-            if let balances = data.balances{
-              self.balances.accept(balances.filter({ (balance) -> Bool in
-                
-                let name = app_data.assetInfo[balance.asset_type]
-                return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
-                  (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
-              }))
-              
-            }else{
-              self.balances.accept(data.balances)
-            }
-            if let limitOrders = data.limitOrder {
-              self.limitOrder.accept(limitOrders.filter({ (limitOrder) -> Bool in
-                let base_name = app_data.assetInfo[limitOrder.sellPrice.base.assetID]
-                let quote_name = app_data.assetInfo[limitOrder.sellPrice.quote.assetID]
-                let base_bool = base_name != nil && ( (base_name?.symbol.hasPrefix("JADE"))! || base_name?.symbol == "CYB")
-                let quote_bool = quote_name != nil && ((quote_name?.symbol.hasPrefix("JADE"))! || quote_name?.symbol == "CYB")
-                return base_bool && quote_bool
-              }))
-            }else{
-              self.limitOrder.accept(data.limitOrder)
-            }
-            
-            completion(true)
-            return
-          }
-        }
-        
-        completion(false)
-      }
-      WebsocketService.shared.send(request: request)
-      
-    }
-  }
-  
+
   func validateUserName(_ username:String) -> (Bool, String) {
     let letterBegin = Guitar(pattern: "^([a-zA-Z])")
     if !letterBegin.test(string: username) {
@@ -123,8 +52,22 @@ extension UserManager {
       return (false, R.string.localizable.accountValidateError7.key.localized())
     }
     
-    
     return (true , "")
+  }
+  
+  func login(_ username:String, password:String, completion:@escaping (Bool)->()) {
+    self.unlock(username, password: password) {[weak self] (locked, data) in
+      guard let `self` = self else { return }
+      if locked {
+        self.saveName(username)
+        self.avatarString = username.sha256()
+
+        self.name.accept(username)
+        self.handlerFullAcount(data!)
+      }
+      
+      completion(locked)
+    }
   }
   
   func register(_ pinID:String, captcha:String, username:String, password:String) -> Promise<(Bool,Int)> {
@@ -136,10 +79,12 @@ extension UserManager {
         
         let data = try! await(SimpleHTTPService.requestRegister(params))
         if data.0 {
-          self.name = username
+          self.saveName(username)
           self.avatarString = username.sha256()
+
+          self.name.accept(username)
+          
           self.keys = keys
-          self.saveKey(keysString, name:username)
           self.fetchAccountInfo()
         }
         return data
@@ -150,18 +95,16 @@ extension UserManager {
   }
   
   func logout() {
-    let uuid = UIDevice.current.uuid()!
-    let keychain = Keychain(service: "com.nbltrust.cybex")
-    try? keychain.remove(uuid)
+    BitShareCoordinator.cancelUserKey()
     
     UserDefaults.standard.remove("com.nbltrust.cybex.username")
-    self.name = nil
+    self.name.accept(nil)
     self.avatarString = nil
     self.keys = nil
     self.account.accept(nil)
     self.balances.accept(nil)
     self.limitOrder.accept(nil)
-    
+    self.fillOrder.accept(nil)
   }
   
   func fetchAccountInfo(){
@@ -169,40 +112,54 @@ extension UserManager {
       return
     }
     
-    if let username = self.name {
+    if let username = self.name.value {
       let request = GetFullAccountsRequest(name: username) { response in
         if let data = response as? FullAccount{
           if !self.isLoginIn {
             return
           }
-          self.account.accept(data.account)
           
-          if let balances = data.balances{
-            self.balances.accept(balances.filter({ (balance) -> Bool in
-              
-              let name = app_data.assetInfo[balance.asset_type]
-              return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
-                (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
-            }))
-            
-          }else{
-            self.balances.accept(data.balances)
-          }
-          if let limitOrders = data.limitOrder {
-            self.limitOrder.accept(limitOrders.filter({ (limitOrder) -> Bool in
-              let base_name = app_data.assetInfo[limitOrder.sellPrice.base.assetID]
-              let quote_name = app_data.assetInfo[limitOrder.sellPrice.quote.assetID]
-              let base_bool = base_name != nil && ( (base_name?.symbol.hasPrefix("JADE"))! || base_name?.symbol == "CYB")
-              let quote_bool = quote_name != nil && ((quote_name?.symbol.hasPrefix("JADE"))! || quote_name?.symbol == "CYB")
-              return base_bool && quote_bool
-            }))
-          }else{
-            self.limitOrder.accept(data.limitOrder)
-          }
+          self.handlerFullAcount(data)
         }
       }
       WebsocketService.shared.send(request: request)
     }
+  }
+  
+  func fetchHistoryOfOperation() {
+    guard let id = self.account.value?.id else {
+      return
+    }
+    
+    let request = GetAccountHistoryRequest(accountID: id) { (data) in
+      if var fillorders = data as? [FillOrder] {
+        if fillorders.count == 0 || !self.isLoginIn {
+          self.fillOrder.accept(nil)
+          return
+        }
+        fillorders = fillorders.filter({
+          let base_name = app_data.assetInfo[$0.fill_price.base.assetID]
+          let quote_name = app_data.assetInfo[$0.fill_price.quote.assetID]
+          return base_name != nil && quote_name != nil
+        })
+        
+        var result = [(FillOrder,time:String)]()
+        var count = 0
+        for fillOrder in fillorders{
+          let timeRequest = getBlockRequest(response: { (time) in
+            count += 1
+            if let time = time as? String{
+              result.append((fillOrder,time:time))
+            }
+            if count == fillorders.count{
+              self.fillOrder.accept(result)
+            }
+          }, block_num: fillOrder.block_num)
+          WebsocketService.shared.send(request: timeRequest)
+        }
+      }
+    }
+    WebsocketService.shared.send(request: request)
   }
   
   func checkUserName(_ name:String) -> Promise<Bool> {
@@ -220,6 +177,104 @@ extension UserManager {
     return promise
   }
   
+  func unlock(_ username:String?, password:String, completion:@escaping (Bool, FullAccount?)->()) {
+    guard let name = username ?? self.name.value else {
+      completion(false, nil)
+      return
+    }
+    
+    let keysString = BitShareCoordinator.getUserKeys(name, password: password)!
+    if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key {
+      let public_key = active_key.public_key
+      var canLock = false
+      
+      let request = GetFullAccountsRequest(name: name) { response in
+        if let data = response as? FullAccount, let account = data.account {
+          let active_auths = account.active_auths
+          let owner_auths = account.owner_auths
+          
+          for auth in active_auths {
+            if let auth = auth as? [Any], let key = auth[0] as? String {
+              if key == public_key {
+                canLock = true
+                break
+              }
+            }
+          }
+          
+          for auth in owner_auths {
+            if let auth = auth as? [Any], let key = auth[0] as? String {
+              if key == public_key {
+                canLock = true
+                break
+              }
+            }
+          }
+          
+          if canLock {
+            self.keys = keys
+            
+            if let newAccount = data.account {
+              if let memoKey = keys.memo_key, let ownKey = keys.owner_key, let activeKey = keys.active_key {
+                if [memoKey.public_key, ownKey.public_key, activeKey.public_key].contains(newAccount.memo_key) {
+                  self.isWithDraw = true
+                }
+              }
+              if let memoKey = keys.memo_key, let ownKey = keys.owner_key, let activeKey = keys.active_key{
+                if let activeKeys = newAccount.active_auths as? [String]{
+                  for activekey in activeKeys{
+                    if [memoKey.public_key, ownKey.public_key, activeKey.public_key].contains(activekey){
+                      self.isTrade = true
+                    }
+                  }
+                }
+              }
+            }
+            
+            completion(true, data)
+            self.timingLock()
+            return
+          }
+        }
+        completion(false, nil)
+      }
+      WebsocketService.shared.send(request: request)
+    }
+
+    else{
+      completion(false, nil)
+    }
+    
+  }
+  
+  func handlerFullAcount(_ data:FullAccount) {
+    self.account.accept(data.account)
+    
+    if let balances = data.balances {
+      self.balances.accept(balances.filter({ (balance) -> Bool in
+        let name = app_data.assetInfo[balance.asset_type]
+        return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
+          (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
+      }))
+      
+    }else{
+      self.balances.accept(data.balances)
+    }
+    
+    if let limitOrders = data.limitOrder {
+      self.limitOrder.accept(limitOrders.filter({ (limitOrder) -> Bool in
+        let base_name = app_data.assetInfo[limitOrder.sellPrice.base.assetID]
+        let quote_name = app_data.assetInfo[limitOrder.sellPrice.quote.assetID]
+        let base_bool = base_name != nil && ((base_name?.symbol.hasPrefix("JADE"))! || base_name?.symbol == "CYB")
+        let quote_bool = quote_name != nil && ((quote_name?.symbol.hasPrefix("JADE"))! || quote_name?.symbol == "CYB")
+        
+        return base_bool && quote_bool
+      }))
+    }else{
+      self.limitOrder.accept(data.limitOrder)
+    }
+  }
+  
 }
 
 class UserManager {
@@ -227,28 +282,38 @@ class UserManager {
   var disposeBag = DisposeBag()
   
   var isLoginIn : Bool {
-    let uuid = UIDevice.current.uuid()!
-    let keychain = Keychain(service: "com.nbltrust.cybex")
-    if let keysString = keychain[uuid], let keys = AccountKeys(JSONString: keysString), let name = UserDefaults.standard.object(forKey: "com.nbltrust.cybex.username") as? String {
-      self.name = name
-      self.avatarString = name.sha256()
-      self.keys = keys
-      
+    if let name = UserDefaults.standard.object(forKey: "com.nbltrust.cybex.username") as? String {
+      if self.name.value == nil {
+        self.name.accept(name)
+        self.avatarString = name.sha256()
+      }
+
       return true
     }
-    
     return false
   }
   
-  var name : String?
+  var isLocked:Bool {
+    return self.keys == nil
+  }
+  
+  var isWithDraw : Bool = false
+  var isTrade : Bool = false
+  var name : BehaviorRelay<String?> = BehaviorRelay(value: nil)
   var keys:AccountKeys?
   var avatarString:String?
   var account:BehaviorRelay<Account?> = BehaviorRelay(value: nil)
+  
   var balances:BehaviorRelay<[Balance]?> = BehaviorRelay(value: nil)
   var limitOrder:BehaviorRelay<[LimitOrder]?> = BehaviorRelay(value:nil)
+  var fillOrder:BehaviorRelay<[(FillOrder,time:String)]?> = BehaviorRelay(value:nil)
+  
+  var timer:Repeater?
   
   var limitOrderValue:Double = 0
   var limitOrder_buy_value: Double = 0
+  
+  var limit_reset_address_time : TimeInterval = 0
   
   var balance : Double {
     
@@ -259,7 +324,7 @@ class UserManager {
     if let balances = balances.value {
       for balance_value in balances{
         if let eth_cyb = changeToETHAndCYB(balance_value.asset_type).cyb.toDouble() {
-          balance_values += getRealAmount(balance_value.asset_type,amount: balance_value.balance) * eth_cyb
+          balance_values += getRealAmount(balance_value.asset_type,amount: balance_value.balance).doubleValue * eth_cyb
         }
       }
     }
@@ -274,7 +339,7 @@ class UserManager {
         
         if isBuy {
           if let eth_cyb = changeToETHAndCYB(limitOrder_value.sellPrice.base.assetID).cyb.toDouble() {
-            let buy_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale) * eth_cyb
+            let buy_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale).doubleValue * eth_cyb
             _limitOrderValue += buy_value
             _limitOrder_buy_value += buy_value
             balance_values += buy_value
@@ -282,7 +347,7 @@ class UserManager {
         }
         else{
           if let eth_cyb = changeToETHAndCYB(limitOrder_value.sellPrice.base.assetID).cyb.toDouble() {
-            let sell_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale) * eth_cyb
+            let sell_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale).doubleValue * eth_cyb
             _limitOrderValue += sell_value
             balance_values += sell_value
           }
@@ -296,7 +361,17 @@ class UserManager {
     return balance_values
   }
   
+  func timingLock() {
+    self.timer = Repeater.once(after: .seconds(300), {[weak self] (timer) in
+      guard let `self` = self else { return }
+      self.keys = nil
+    })
+    
+    timer?.start()
+  }
+  
   private init() {
+    
     app_data.data.asObservable().distinctUntilChanged()
       .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
       .subscribe(onNext: { (s) in
@@ -307,17 +382,18 @@ class UserManager {
           
         }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+    account.asObservable().skip(1).subscribe(onNext: {[weak self] (newAccount) in
+      guard let `self` = self else { return }
+      
+      self.fetchHistoryOfOperation()
+    }).disposed(by: disposeBag)
+    
   }
   
   
-  private func saveKey(_ key:String, name:String) {
-    let uuid = UIDevice.current.uuid()!
-    
-    let keychain = Keychain(service: "com.nbltrust.cybex")
-    keychain[uuid] = key
-    
+  private func saveName(_ name:String) {
     UserDefaults.standard.set(name, forKey: "com.nbltrust.cybex.username")
-    
   }
   
   

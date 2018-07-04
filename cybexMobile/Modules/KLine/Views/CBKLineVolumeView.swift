@@ -92,9 +92,7 @@ class CBKLineVolumeView: UIView {
     var strokeColors:[UIColor] = []
 
     for (index, klineModel) in volumeDrawKLineModels.enumerated() {
-      
-      let xPosition = CGFloat(index) * (configuration.theme.klineWidth + configuration.theme.klineSpace) +
-        configuration.theme.klineWidth * 0.5 + configuration.theme.klineSpace + 15
+      let xPosition = CGFloat(index) * (configuration.theme.klineWidth + configuration.theme.klineSpace)
       
       let yPosition = abs(drawMaxY - CGFloat((klineModel.volume - limitValue.minValue) / unitValue))
       let startPoint = CGPoint(x: xPosition, y: yPosition)
@@ -117,7 +115,7 @@ class CBKLineVolumeView: UIView {
       
       strokeColors.append(strokeColor)
 
-      let path = UIBezierPath(roundedRect: CGRect(x:xPosition - configuration.theme.klineWidth / 2, y:startPoint.y, width: configuration.theme.klineWidth, height:abs(endPoint.y - startPoint.y)), cornerRadius: configuration.theme.klineRadius).cgPath
+      let path = UIBezierPath(roundedRect: CGRect(x:xPosition, y:startPoint.y, width: configuration.theme.klineWidth, height:abs(endPoint.y - startPoint.y)), cornerRadius: configuration.theme.klineRadius).cgPath
       context.addPath(path)
       context.setFillColor(strokeColor.withAlphaComponent(0.2).cgColor)
       context.fillPath()

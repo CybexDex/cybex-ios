@@ -9,46 +9,67 @@
 import UIKit
 
 class OpenedOrdersView:  UIView{
-
-    @IBOutlet weak var orderType: OpenedOrdersStatesView!
-    @IBOutlet weak var quote: UILabel!
-    @IBOutlet weak var base: UILabel!
-    @IBOutlet weak var amount: UILabel!
-    @IBOutlet weak var price: UILabel!
-    
-    var data: Any? {
+  
+  @IBOutlet weak var orderType: OpenedOrdersStatesView!
+  @IBOutlet weak var quote: UILabel!
+  @IBOutlet weak var base: UILabel!
+  @IBOutlet weak var amount: UILabel!
+  @IBOutlet weak var price: UILabel!
+  
+  @IBOutlet weak var basePriceView: UIView!
+  @IBOutlet weak var basePrice: UILabel!
+  
+  @IBOutlet weak var cancleOrder: UIView!
+  @IBOutlet weak var cancleL: UILabel!
+  @IBOutlet weak var cancleImg: UIImageView!
+  
+  enum CancleOrder : String{
+    case cancleOrderAction
+  }
+  
+  var selectedIndex : IndexPath?
+  var data: Any? {
     didSet {
       if let order = data as? LimitOrder {
+        if self.basePriceView.isHidden == false{
+          self.basePrice.text = "--"
+        }
+        
         if order.isBuy {
           self.orderType.opened_status = 0
-          if let quote_info = app_data.assetInfo[order.sellPrice.quote.assetID] {
+          
+          if let quote_info = app_data.assetInfo[order.sellPrice.quote.assetID] ,let base_info = app_data.assetInfo[order.sellPrice.base.assetID]{
             quote.text = quote_info.symbol.filterJade
-          }
-          if let base_info = app_data.assetInfo[order.sellPrice.base.assetID] {
             base.text = "/" + base_info.symbol.filterJade
+            let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
+            self.amount.text = quoteAmount.doubleValue.string(digits: quote_info.precision) + " " + quote_info.symbol.filterJade
+            let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
+            if self.basePriceView.isHidden == false{
+              self.price.text =  baseAmount.doubleValue.string(digits: base_info.precision) + " " + base_info.symbol.filterJade
+               self.basePrice.text = (baseAmount / quoteAmount).doubleValue.string(digits: base_info.precision)
+            }else{
+              self.price.text = (baseAmount / quoteAmount).doubleValue.string(digits: base_info.precision)
+            }
           }
           
-          let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-          self.amount.text = quoteAmount.string.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.quote.assetID]!.precision) + " " +  quote.text!
-          
-          let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
-          self.price.text = (baseAmount / quoteAmount).string.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.base.assetID]!.precision)
         }
         else {
           self.orderType.opened_status = 1
           
-          if let quote_info = app_data.assetInfo[order.sellPrice.base.assetID] {
+          if let quote_info = app_data.assetInfo[order.sellPrice.base.assetID],let base_info = app_data.assetInfo[order.sellPrice.quote.assetID]{
             quote.text = quote_info.symbol.filterJade
-          }
-          if let base_info = app_data.assetInfo[order.sellPrice.quote.assetID] {
             base.text = "/" + base_info.symbol.filterJade
+            let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
+            self.amount.text = quoteAmount.doubleValue.string(digits: quote_info.precision) + " " +  quote_info.symbol.filterJade
+            let baseAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
+            if self.basePriceView.isHidden == false{
+              self.price.text = baseAmount.doubleValue.string(digits:  base_info.precision) + " " + base_info.symbol.filterJade
+              self.basePrice.text = (baseAmount / quoteAmount).doubleValue.string(digits: quote_info.precision)
+
+            }else{
+              self.price.text = (baseAmount / quoteAmount).doubleValue.string(digits: base_info.precision)
+            }
           }
-          
-          let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
-          self.amount.text = quoteAmount.string.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.base.assetID]!.precision) + " " +  quote.text!
-          
-          let baseAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-          self.price.text = (baseAmount / quoteAmount).string.formatCurrency(digitNum: app_data.assetInfo[order.sellPrice.quote.assetID]!.precision)
         }
       }
     }
@@ -56,7 +77,10 @@ class OpenedOrdersView:  UIView{
   
   
   fileprivate func setup() {
-    
+    cancleOrder.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+      guard let `self` = self else { return }
+      self.cancleOrder.next?.sendEventWith(CancleOrder.cancleOrderAction.rawValue, userinfo:["selectedIndex":self.selectedIndex?.row ?? 0])
+    }).disposed(by: disposeBag)
   }
   
   override var intrinsicContentSize: CGSize {
@@ -101,5 +125,10 @@ class OpenedOrdersView:  UIView{
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
-
+  
+  func setupData(_ data : Any,indexPath:IndexPath){
+    self.data = data
+    self.selectedIndex = indexPath
+  }
+  
 }

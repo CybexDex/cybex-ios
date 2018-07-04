@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="84" id="KGk-i7-Jjw" customClass="MyHistoryCell" customModule="cybexMobile" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="83.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM6-OY-Cvf" customClass="MyHistoryCellView" customModule="cybexMobile" customModuleProvider="target">
+                        <rect key="frame" x="13" y="0.0" width="294" height="83"/>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4JI-XM-vgS">
+                        <rect key="frame" x="13" y="83" width="294" height="1"/>
+                        <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="2pX-s5-IPe"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="fM6-OY-Cvf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="0IL-2I-w3a"/>
+                    <constraint firstItem="4JI-XM-vgS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="0VO-kx-Qp9"/>
+                    <constraint firstAttribute="trailing" secondItem="4JI-XM-vgS" secondAttribute="trailing" constant="13" id="7Ux-6g-jKw"/>
+                    <constraint firstItem="fM6-OY-Cvf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ILk-WN-O6n"/>
+                    <constraint firstAttribute="trailing" secondItem="fM6-OY-Cvf" secondAttribute="trailing" constant="13" id="R8M-iV-e9Y"/>
+                    <constraint firstAttribute="bottom" secondItem="4JI-XM-vgS" secondAttribute="bottom" id="rVX-Is-4zy"/>
+                    <constraint firstItem="4JI-XM-vgS" firstAttribute="top" secondItem="fM6-OY-Cvf" secondAttribute="bottom" id="sO8-3g-wa2"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                    <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                    <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="containerView" destination="fM6-OY-Cvf" id="a0g-mC-S4H"/>
+            </connections>
+            <point key="canvasLocation" x="-128" y="6"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TradeNavTitleView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="icon" destination="9bm-09-bDc" id="FAI-qB-FWo"/>
+                <outlet property="title" destination="rPt-BA-Dlc" id="QQp-yJ-an1"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="114" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q6W-VM-yGF">
+                    <rect key="frame" x="27" y="10.5" width="61" height="19.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="--/--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPt-BA-Dlc">
+                            <rect key="frame" x="0.0" y="0.0" width="35" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic" translatesAutoresizingMaskIntoConstraints="NO" id="9bm-09-bDc">
+                            <rect key="frame" x="45" y="1" width="16" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="16" id="XbP-To-oyU"/>
+                                <constraint firstAttribute="height" constant="16" id="iRF-0Y-4Wa"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="9bm-09-bDc" firstAttribute="centerY" secondItem="rPt-BA-Dlc" secondAttribute="centerY" id="5yL-qw-drR"/>
+                        <constraint firstAttribute="trailing" secondItem="9bm-09-bDc" secondAttribute="trailing" id="G21-mq-Um4"/>
+                        <constraint firstItem="9bm-09-bDc" firstAttribute="leading" secondItem="rPt-BA-Dlc" secondAttribute="trailing" constant="10" id="I7l-gq-jyn"/>
+                        <constraint firstItem="rPt-BA-Dlc" firstAttribute="centerY" secondItem="q6W-VM-yGF" secondAttribute="centerY" id="SzK-te-GAd"/>
+                        <constraint firstItem="rPt-BA-Dlc" firstAttribute="top" secondItem="q6W-VM-yGF" secondAttribute="top" id="aLl-dn-FpD"/>
+                        <constraint firstAttribute="bottom" secondItem="rPt-BA-Dlc" secondAttribute="bottom" id="mv1-9M-tX1"/>
+                        <constraint firstItem="rPt-BA-Dlc" firstAttribute="leading" secondItem="q6W-VM-yGF" secondAttribute="leading" id="oYF-V4-lXL"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="q6W-VM-yGF" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Few-ZO-qrn"/>
+                <constraint firstItem="q6W-VM-yGF" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="GJc-GU-8Bn"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-19" y="-67"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic" width="16" height="16"/>
+    </resources>
+</document>

@@ -28,7 +28,6 @@ class LockupAssetsViewController: BaseViewController {
     setupUI()
 
     self.coordinator?.fetchLockupAssetsData([UserManager.shared.keys!.active_key!.address, UserManager.shared.keys!.active_key!.compressed,UserManager.shared.keys!.active_key!.uncompressed,UserManager.shared.keys!.owner_key!.address, UserManager.shared.keys!.owner_key!.compressed,UserManager.shared.keys!.owner_key!.uncompressed,UserManager.shared.keys!.memo_key!.address, UserManager.shared.keys!.memo_key!.compressed,UserManager.shared.keys!.memo_key!.uncompressed])
-
   }
   
   func setupUI(){

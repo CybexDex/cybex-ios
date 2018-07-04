@@ -10,82 +10,107 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import Localize_Swift
+
+enum TradeHistoryPageType {
+  case market
+  case trade
+}
 
 class TradeHistoryViewController: BaseViewController {
-  @IBOutlet weak var tableView: UITableView!
   
-    @IBOutlet weak var quote_name: UILabel!
-    @IBOutlet weak var base_name: UILabel!
-    
-    var coordinator: (TradeHistoryCoordinatorProtocol & TradeHistoryStateManagerProtocol)?
+  @IBOutlet weak var historyView: TradeHistoryView!
+  
+  var coordinator: (TradeHistoryCoordinatorProtocol & TradeHistoryStateManagerProtocol)?
+  
+  var pageType:TradeHistoryPageType = .market
   
   var pair:Pair? {
     didSet {
-      if self.tableView != nil, oldValue != pair {
-        self.tableView.isHidden = true
+      if pair != oldValue {
+        self.coordinator?.resetData()
       }
-     
-      let base_info = app_data.assetInfo[pair!.base]!
-      let quote_info = app_data.assetInfo[pair!.quote]!
 
-      self.quote_name.text = quote_info.symbol.filterJade
-      self.base_name.text = base_info.symbol.filterJade
-      self.coordinator?.fetchData(pair!)
-
+     refreshView()
     }
   }
   
-  var data:[(Bool, String, String, String, String)] = []
-
-	override func viewDidLoad() {
+  var data:[(Bool, String, String, String, String)]?{
+    didSet{
+      if self.historyView != nil{
+        self.historyView.data = data
+      }
+    }
+  }
+  
+  override func viewDidLoad() {
     super.viewDidLoad()
+    setupEvent()
+  }
+  
+  func refreshView() {
+    guard let pair = pair, let base_info = app_data.assetInfo[(pair.base)], let quote_info = app_data.assetInfo[(pair.quote)] else { return }
+
+    if pageType == .trade {
+      self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
+      self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
+      self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized() + "(" + base_info.symbol.filterJade + ")"
+      self.historyView.time.text = R.string.localizable.my_history_time.key.localized()
+    }else{
+      self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized()
+      self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized()
+      self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized()
+      self.historyView.time.text = R.string.localizable.my_history_time.key.localized()
+    }
     
-    let cell = String.init(describing: TradeHistoryCell.self)
-    tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
+    self.coordinator?.fetchData(pair)
+  }
+  
+  func setupEvent(){
+    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] notification in
+      guard let `self` = self else { return }
+     self.refreshView()
+    })
+  }
+  deinit{
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
   }
   
-    func commonObserveState() {
-        coordinator?.subscribe(errorSubscriber) { sub in
-            return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
-        
-        coordinator?.subscribe(loadingSubscriber) { sub in
-            return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
+  func commonObserveState() {
+    coordinator?.subscribe(errorSubscriber) { sub in
+      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
+        return false
+      })
     }
     
-    override func configureObserveState() {
-        commonObserveState()
-      
-      self.coordinator!.state.property.data.asObservable()
-        .subscribe(onNext: {[weak self] (s) in
-          guard let `self` = self else { return }
-         
-          self.convertToData()
-          
-          self.tableView.reloadData()
-          self.tableView.layoutIfNeeded()
-          
-          self.coordinator?.updateMarketListHeight(500)
-          self.tableView.isHidden = false
-          
-          }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-      
-      
+    coordinator?.subscribe(loadingSubscriber) { sub in
+      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
+        return false
+      })
     }
+  }
+  
+  override func configureObserveState() {
+    commonObserveState()
+    
+    self.coordinator!.state.property.data.asObservable()
+      .subscribe(onNext: {[weak self] (s) in
+        guard let `self` = self else { return }
+        
+        self.convertToData()
+        self.coordinator?.updateMarketListHeight(500)
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+  }
   
   func convertToData() {
     if let data = self.coordinator?.state.property.data.value {
       var showData:[(Bool, String, String, String, String)] = []
-
+      
       for d in data {
         let curData = d
         
@@ -98,50 +123,43 @@ class TradeHistoryViewController: BaseViewController {
         let base_precision = pow(10, base_info.precision.double)
         let quote_precision = pow(10, quote_info.precision.double)
         
-        if pay["asset_id"].stringValue == pair!.base {
+        if pay["asset_id"].stringValue == pair?.base {
           let quote_volume = Double(receive["amount"].stringValue)! / quote_precision
           let base_volume = Double(pay["amount"].stringValue)! / base_precision
           
           let price = base_volume / quote_volume
-          let isCYB = base_info.id == AssetConfiguration.CYB
-          showData.append((false, price.formatCurrency(digitNum: isCYB ? 5 : 8), quote_volume.suffixNumber(digitNum:quote_info.precision), base_volume.suffixNumber(digitNum: base_info.precision), time.dateFromISO8601!.string(withFormat: "MM/dd HH:mm:ss")))
+          let tradePrice = price.tradePrice()
+
+          showData.append((false, tradePrice.price, quote_volume.suffixNumber(digitNum:10 - tradePrice.pricision), base_volume.suffixNumber(digitNum: tradePrice.pricision), time.dateFromISO8601!.string(withFormat: "HH:mm:ss")))
         }
         else {
           let quote_volume = Double(pay["amount"].stringValue)! / quote_precision
           let base_volume = Double(receive["amount"].stringValue)! / base_precision
           
           let price = base_volume / quote_volume
-          let isCYB = base_info.id == AssetConfiguration.CYB
-          showData.append((true, price.formatCurrency(digitNum: isCYB ? 5 : 8), quote_volume.suffixNumber(digitNum: quote_info.precision), base_volume.suffixNumber(digitNum: base_info.precision), time.dateFromISO8601!.string(withFormat: "MM/dd HH:mm:ss")))
+        
+          let tradePrice = price.tradePrice()
+          showData.append((true, tradePrice.price, quote_volume.suffixNumber(digitNum: 10 - tradePrice.pricision), base_volume.suffixNumber(digitNum: tradePrice.pricision), time.dateFromISO8601!.string(withFormat: "HH:mm:ss")))
         }
         
       }
-      
       self.data = showData
-
     }
   }
 }
-
-extension TradeHistoryViewController: UITableViewDelegate, UITableViewDataSource {
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
+extension TradeHistoryViewController : TradePair{
+  var pariInfo: Pair {
+    get {
+      return self.pair!
+    }
+    set {
+      self.pair = newValue
+    }
   }
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.data.count / 2
-    
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: TradeHistoryCell.self), for: indexPath) as! TradeHistoryCell
-    cell.setup(self.data[(indexPath.row + 1) * 2 - 2], indexPath: indexPath)
-    
-    return cell
-  }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-    
+  func refresh() {
+    refreshView()
   }
 }
+
+

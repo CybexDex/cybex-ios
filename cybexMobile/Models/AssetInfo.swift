@@ -48,7 +48,7 @@ class Asset : Mappable {
   }
   
   func info() -> AssetInfo {
-    return app_data.assetInfo[self.assetID]!
+    return app_data.assetInfo[self.assetID] ?? AssetInfo(JSON:[:])!
   }
 }
 
@@ -58,18 +58,16 @@ extension Asset: Equatable {
   }
 }
 
-class Price : ImmutableMappable {
-  let base:Asset
-  let quote:Asset
+class Price : Mappable {
+  var base:Asset = Asset(JSON:[:])!
+  var quote:Asset = Asset(JSON:[:])!
   
-  required  init(map: Map) throws {
-    base                    = try map.value("base")
-    quote                   = try map.value("quote")
+  required init?(map: Map) {
   }
   
   func mapping(map: Map) {
-    base                    >>> map["base"]
-    quote                   >>> map["quote"]
+    base                    <- map["base"]
+    quote                   <- map["quote"]
   }
   
   func toReal() -> Double {
@@ -77,9 +75,13 @@ class Price : ImmutableMappable {
     let quote_info = quote.info()
     
     let price_ratio =  Double(base.amount)! / Double(quote.amount)!
-    let precision_ratio = pow(10, base_info.precision.double) / pow(10, quote_info.precision.double)
     
-    return price_ratio / precision_ratio
+    let baseNumber = NSDecimalNumber(floatLiteral: pow(10, base_info.precision.double))
+    let quoteNumber = NSDecimalNumber(floatLiteral: pow(10, quote_info.precision.double))
+
+    let precision_ratio = baseNumber.dividing(by: quoteNumber).stringValue
+    
+    return price_ratio / precision_ratio.toDouble()!
   }
   
 }
@@ -91,6 +93,7 @@ extension AssetInfo: Equatable {
 }
 
 struct  RMBPrices{
-  var name : String = ""
+  var name : String      = ""
   var rmb_price : String = ""
 } 
+

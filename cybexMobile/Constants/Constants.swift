@@ -24,6 +24,7 @@ var app_coodinator:AppCoordinator {
 struct AppConfiguration {
   static let shared = AppConfiguration()
   var appCoordinator: AppCoordinator!
+  var chainID:String = ""
 
   private init() {
     let rootVC = BaseTabbarViewController()
@@ -33,6 +34,8 @@ struct AppConfiguration {
   static let APPID = ""
   static let SERVER_BASE_URLString = "https://app.cybex.io/"
   static let SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
+  static let GATEWAY_URLString = "https://gateway.cybex.io/gateway"
+  static let GATEWAY_ID = "CybexGateway" //CybexGatewayDev
 
   static let SERVER_ICONS_BASE_URLString = "https://app.cybex.io/icons/"
 
@@ -46,6 +49,17 @@ struct AppConfiguration {
   static let FAQ_LIGHT_THEME            = "https://cybex.io/token_applications/new"
   
   static let ETH_PRICE                  = SERVER_BASE_URLString + "price"
+  static let WITHDRAW                   = SERVER_BASE_URLString + "json/withdraw.json"
+  static let DEPOSIT                    = SERVER_BASE_URLString + "json/deposit.json"
+  static let ASSET                      = SERVER_BASE_URLString + "json/assets.json"
+//  json/withdraw_msg.json
+  static let WITHDRAW_MSG               = SERVER_BASE_URLString + "json/withdraw_msg.json"
+  static let DEPOSIT_MSG                = SERVER_BASE_URLString + "json/deposit_msg.json"
+}
+
+enum exchangeType {
+    case buy
+    case sell
 }
 
 enum indicator:String {
@@ -74,6 +88,77 @@ enum candlesticks:Double,Hashable {
   static let all:[candlesticks] = [.five_minute, .one_hour, .one_day]
 }
 
+enum ChainTypesObjectType:Int {
+  case null = 0
+  case base
+  case account
+  case asset
+  case force_settlement
+  case committee_member
+  case witness
+  case limit_order
+  case call_order
+  case custom
+  case proposal
+  case operation_history
+  case withdraw_permission
+  case vesting_balance
+  case worker
+  case balance
+  case crowdfund
+  case crowdfund_contract
+}
+
+enum ChainTypesOperations:Int {
+  case transfer = 0
+  case limit_order_create
+  case limit_order_cancel
+  case call_order_update
+  case fill_order
+  case account_create
+  case account_update
+  case account_whitelist
+  case account_upgrade
+  case account_transfer
+  case asset_create
+  case asset_update
+  case asset_update_bitasset
+  case asset_update_feed_producers
+  case asset_issue
+  case asset_reserve
+  case asset_fund_fee_pool
+  case asset_settle
+  case asset_global_settle
+  case asset_publish_feed
+  case witness_create
+  case witness_update
+  case proposal_create
+  case proposal_update
+  case proposal_delete
+  case withdraw_permission_create
+  case withdraw_permission_update
+  case withdraw_permission_claim
+  case withdraw_permission_delete
+  case committee_member_create
+  case committee_member_update
+  case committee_member_update_global_parameters
+  case vesting_balance_create
+  case vesting_balance_withdraw
+  case worker_create
+  case custom
+  case assert
+  case balance_claim
+  case override_transfer
+  case transfer_to_blind
+  case blind_transfer
+  case transfer_from_blind
+  case asset_settle_cancel
+  case asset_claim_fees
+  case initiate_crowdfund
+  case participate_crowdfund
+  case withdraw_crowdfund
+}
+
 enum objectID:String {
   case base_object = "1.1.x"
   case account_object = "1.2.x"
@@ -91,7 +176,7 @@ enum objectID:String {
   case worker_object = "1.14.x"
   case balance_object = "1.15.x"
   case global_property_object = "2.0.x"
-  case dynamic_global_property_object = "2.1.x"
+  case dynamic_global_property_object = "2.1.0"
   case asset_dynamic_data = "2.3.x"
   case asset_bitasset_data = "2.4.x"
   case account_balance_object = "2.5.x"
@@ -115,11 +200,12 @@ class AssetConfiguration {
   static let ETH = "1.3.2"
   static let USDT = "1.3.27"
   
+  static let order_name = ["USDT","ETH", "BTC", "CYB"]
   static let market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.CYB,AssetConfiguration.USDT,AssetConfiguration.BTC]
   
-  var unique_ids:[String] {
-    return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).withoutDuplicates()
-  }
+  var unique_ids:[String] = []
+//    return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).withoutDuplicates()
+  
   
   private init() {
   }

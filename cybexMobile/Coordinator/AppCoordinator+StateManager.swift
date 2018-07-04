@@ -21,7 +21,7 @@ extension AppCoordinator: AppStateManagerProtocol {
   func fetchData(_ params: AssetPairQueryParams, sub: Bool = true) {
     store.dispatch(creator.fetchMarket(with: sub, params: params, callback: { [weak self] (assets) in
       guard let `self` = self else { return }
-
+      
       self.store.dispatch(MarketsFetched(pair: params, assets: assets))
     }))
   }
@@ -37,19 +37,26 @@ extension AppCoordinator: AppStateManagerProtocol {
     }))
   }
 
-  func fetchAsset() {
-    guard AssetConfiguration.shared.asset_ids.count > 0 else { return }
+  func fetchAsset(_ callback:@escaping (()->Void)) {
+    async {
+      let data = try! await(SimpleHTTPService.fetchIdsInfo())
+      
+      main {
+        AssetConfiguration.shared.unique_ids = data
+        let request = GetObjectsRequest(ids: data) { response in
+          if let assetinfo = response as? [AssetInfo] {
+            for info in assetinfo {
+              self.store.dispatch(AssetInfoAction(assetID: info.id, info: info))
+            }
+            callback()
 
-    let request = GetAssetRequest(ids: AssetConfiguration.shared.unique_ids) { response in
-      if let assetinfo = response as? [AssetInfo] {
-        for info in assetinfo {
-          self.store.dispatch(AssetInfoAction(assetID: info.id, info: info))
+          }
         }
+        WebsocketService.shared.send(request: request)
       }
-      
-      
+     
     }
-    WebsocketService.shared.send(request: request)
+    
   }
   
   func fetchEthToRmbPrice(){
@@ -68,7 +75,7 @@ extension AppCoordinator: AppStateManagerProtocol {
       if value.count == 0 {
         return
       }
-      DispatchQueue.main.async { [weak self] in
+      main { [weak self] in
         self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
       }
     }
@@ -111,25 +118,32 @@ extension AppCoordinator {
 
   func getLatestData() {
     if AssetConfiguration.shared.asset_ids.isEmpty {
-      var pairs:[Pair] = []
-      async {
-        AssetConfiguration.market_base_assets.forEach { (base) in
-          let pair = try! await(SimpleHTTPService.requestMarketList(base:base))
-          pairs += pair
-        }
-        
-        main {
-          AssetConfiguration.shared.asset_ids = pairs
-          self.fetchAsset()
-          self.request24hMarkets(AssetConfiguration.shared.asset_ids)
+      fetchAsset {
+        var pairs:[Pair] = []
+        var count = 0
+        for base in AssetConfiguration.market_base_assets {
+          SimpleHTTPService.requestMarketList(base:base).done({ (pair) in
+            
+            let piece_pair = pair.filter({ (p) -> Bool in
+              return AssetConfiguration.shared.unique_ids.contains([p.base, p.quote])
+            })
+            count += 1
+            
+            pairs += piece_pair
+            if count == AssetConfiguration.market_base_assets.count {
+              AssetConfiguration.shared.asset_ids = pairs
+              self.request24hMarkets(AssetConfiguration.shared.asset_ids)
+            }
+          }).cauterize()
         }
       }
       
-
     }
     else {
-      if app_data.assetInfo.count != AssetConfiguration.shared.asset_ids.count {
-        fetchAsset()
+      if app_data.assetInfo.count != AssetConfiguration.shared.unique_ids.count {
+        fetchAsset {
+          self.request24hMarkets(AssetConfiguration.shared.asset_ids)
+        }
       }
       request24hMarkets(AssetConfiguration.shared.asset_ids)
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftTheme
-
+import TinyConstraints
 import Localize_Swift
 
 extension UIView {
@@ -132,6 +132,76 @@ extension UIView {
     }
     set {
       layer.shadowOpacity = newValue
+    }
+  }
+}
+
+extension UIView {
+  public func edgesToDevice(vc:UIViewController, insets: TinyEdgeInsets = .zero, priority: LayoutPriority = .required, isActive: Bool = true, usingSafeArea: Bool = false) {
+    if #available(iOS 11.0, *) {
+       edgesToSuperview(insets: insets, priority: priority, isActive: isActive, usingSafeArea: usingSafeArea)
+    }
+    else {
+      prepareForLayout()
+      let constraints = [
+        topAnchor.constraint(equalTo: vc.topLayoutGuide.bottomAnchor, constant: insets.top).with(priority),
+        leadingAnchor.constraint(equalTo: superview!.leadingAnchor, constant: insets.left).with(priority),
+        bottomAnchor.constraint(equalTo: vc.bottomLayoutGuide.topAnchor, constant: insets.bottom).with(priority),
+        trailingAnchor.constraint(equalTo: superview!.trailingAnchor, constant: insets.right).with(priority)
+      ]
+      
+      if isActive {
+        Constraint.activate(constraints)
+      }
+    }
+   
+  }
+  
+  public func topToDevice( _ vc:UIViewController, offset: CGFloat = 0, relation: ConstraintRelation = .equal, priority: LayoutPriority = .required, isActive: Bool = true, usingSafeArea: Bool = false) -> Constraint {
+    if #available(iOS 11.0, *) {
+      return topToSuperview(nil, offset: offset, relation: relation, priority: priority, isActive: isActive, usingSafeArea: usingSafeArea)
+    }
+    else {
+      prepareForLayout()
+      
+      switch relation {
+      case .equal: return topAnchor.constraint(equalTo: vc.topLayoutGuide.bottomAnchor, constant: offset).with(priority).set(active: isActive)
+      case .equalOrLess: return topAnchor.constraint(lessThanOrEqualTo: vc.topLayoutGuide.bottomAnchor, constant: offset).with(priority).set(active: isActive)
+      case .equalOrGreater: return topAnchor.constraint(greaterThanOrEqualTo: vc.topLayoutGuide.bottomAnchor, constant: offset).with(priority).set(active: isActive)
+      }
+    }
+  }
+}
+
+extension UIView{
+  var noDataView : WithNoDataView?{
+    get{
+      if let nodata = self.subviews.last as? WithNoDataView{
+        return nodata
+      }
+      return nil
+    }
+    set{
+      if let newValue = newValue{
+        self.addSubview(newValue)
+        newValue.edgesToSuperview(insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
+      }
+    }
+  }
+  func showNoData(_ noticeWord : String) {
+    if let _ = self.noDataView {
+      self.noDataView?.notice_word = noticeWord
+    }else{
+      let nodata = WithNoDataView(frame:self.bounds)
+      self.noDataView = nodata
+      self.noDataView?.notice_word = noticeWord
+//      self.bringSubview(toFront: self.noDataView!)
+    }
+  }
+  func hiddenNoData() {
+    if let _ = self.noDataView{
+      self.noDataView!.removeFromSuperview()
+      self.noDataView = nil
     }
   }
 }

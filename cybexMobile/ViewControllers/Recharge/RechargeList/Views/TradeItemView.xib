@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TradeItemView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="amount" destination="F0x-7j-rFn" id="P9d-Wq-sHC"/>
+                <outlet property="arrow" destination="3qT-6y-hMu" id="iqj-hr-aXz"/>
+                <outlet property="icon" destination="0rB-Yz-ELJ" id="j7s-oV-nU7"/>
+                <outlet property="name" destination="D0o-7C-xUH" id="EaI-Zk-JCu"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0rB-Yz-ELJ">
+                    <rect key="frame" x="4" y="26" width="16" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="16" id="aRX-a0-LMw"/>
+                        <constraint firstAttribute="height" constant="16" id="gF9-IH-laa"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0o-7C-xUH">
+                    <rect key="frame" x="30" y="24.5" width="15" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icArrowForward24Px" translatesAutoresizingMaskIntoConstraints="NO" id="3qT-6y-hMu">
+                    <rect key="frame" x="351" y="22" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="QYO-nn-Hkk"/>
+                        <constraint firstAttribute="height" constant="24" id="y7e-Sb-WAU"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0x-7j-rFn">
+                    <rect key="frame" x="326" y="24" width="15" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iKJ-8A-O9b">
+                    <rect key="frame" x="0.0" y="67" width="375" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="zVH-Rj-OJZ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                            <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="iKJ-8A-O9b" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1Z8-oL-VXk"/>
+                <constraint firstAttribute="trailing" secondItem="iKJ-8A-O9b" secondAttribute="trailing" id="PMS-bo-G5A"/>
+                <constraint firstItem="D0o-7C-xUH" firstAttribute="centerY" secondItem="0rB-Yz-ELJ" secondAttribute="centerY" id="YV0-48-fgH"/>
+                <constraint firstAttribute="bottom" secondItem="iKJ-8A-O9b" secondAttribute="bottom" id="eMm-GR-55h"/>
+                <constraint firstItem="3qT-6y-hMu" firstAttribute="centerY" secondItem="0rB-Yz-ELJ" secondAttribute="centerY" id="eXr-1o-Pu3"/>
+                <constraint firstItem="F0x-7j-rFn" firstAttribute="centerY" secondItem="0rB-Yz-ELJ" secondAttribute="centerY" id="j7D-Ew-mXS"/>
+                <constraint firstItem="0rB-Yz-ELJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="4" id="lRq-zM-MN2"/>
+                <constraint firstItem="3qT-6y-hMu" firstAttribute="leading" secondItem="F0x-7j-rFn" secondAttribute="trailing" constant="10" id="oFf-11-NKt"/>
+                <constraint firstItem="0rB-Yz-ELJ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="26" id="rt8-kf-nkw"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="3qT-6y-hMu" secondAttribute="trailing" id="tf3-Zi-SMk"/>
+                <constraint firstItem="D0o-7C-xUH" firstAttribute="leading" secondItem="0rB-Yz-ELJ" secondAttribute="trailing" constant="10" id="tfX-sd-mOO"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="60" y="8"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icArrowForward24Px" width="24" height="24"/>
+    </resources>
+</document>

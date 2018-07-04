@@ -20,12 +20,14 @@ class CBKLineView: UIView {
     didSet {
       refreshAccessoryHorizentalView(indicator)
       klineDrawView.switchToAccessory(indicator == .macd)
+      klineDrawView.removeIndicatorLine()
     }
   }
   
   var timeGap:candlesticks = .one_day {
     didSet {
       timeGapView.switchButton(candlesticks.all.index(of: timeGap)!)
+      klineDrawView.removeIndicatorLine()
     }
   }
 
@@ -50,9 +52,9 @@ class CBKLineView: UIView {
   }
   
   func loadSubView() {
-    loadingDrawView()
     loadAccessoryCollectionView()
     loadTimeGapView()
+    loadingDrawView()
   }
   
   func loadAccessoryCollectionView() {
@@ -70,6 +72,7 @@ class CBKLineView: UIView {
     accessHorizentalView.data = indicator
   }
   
+  
   func loadTimeGapView() {
     timeGapView = TimeGapView()
     addSubview(timeGapView)
@@ -79,13 +82,14 @@ class CBKLineView: UIView {
     timeGapView.right(to: self, offset:-15)
     timeGapView.height(60)
   }
-  
+
   private func loadingDrawView() {
     klineDrawView = CBKLineDrawView()
     addSubview(klineDrawView)
     
-    klineDrawView.edges(to: self, insets: UIEdgeInsets(top: 56, left: 0, bottom: 0, right: 0))
+    klineDrawView.topToBottom(of: accessHorizentalView)
+    klineDrawView.left(to: self)
+    klineDrawView.right(to: self)
+    klineDrawView.bottomToTop(of: timeGapView)
   }
-  
-
 }

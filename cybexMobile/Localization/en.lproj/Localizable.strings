@@ -11,6 +11,9 @@
 "nav.apply" = "Application";
 "nav.account" = "Account";
 "nav.setting" = "Settings";
+"nav.trade"   = "Exchange";
+
+
 "market" = "Market";
 
 "language" = "Language";
@@ -112,3 +115,124 @@
 "noNetwork"                           = "network is not available.";
 
 
+"orderbook_buy_price"     = "Buy Price";
+"orderbook_volume"        = "Volume";
+"orderbook_sell_price"    = "Sell Price";
+
+
+
+"trade_base"    = "Markets";
+"trade_double"  = "Pairs";
+"trade_change"  = "24 Chg%";
+"trade_value"   = "24 Volume";
+"account_trade" = "Gateway";
+"order_cancle"  = "Cancel";
+
+
+"trade_buy"             = "BUY";
+"trade_sell"            = "SELL";
+"trade_open_orders"     = "Open Orders";
+"trade_limit"           = "Limit";
+"trade_available"       = "Available";
+"trade_fee"             = "Fee";
+"trade_total"           = "Total";
+
+"trade_history"         = "Market Trades";
+
+
+
+"my_opened_price" = "Price/Amount";
+"my_opened_filled" = "Filled/Cancel";
+
+"withdraw_nomore" = "Not enough";
+"withdraw_address_fault" = "Invalid address";
+"withdraw_available" = "Available";
+"withdraw_address"   = "Withdrawal Address";
+"withdraw_address_placehold"   = "Enter or paste address";
+"withdraw_amount" = "Amount";
+"withdraw_amount_all" = "ALL";
+"withdraw_fee"        = "Gateway Fee";
+"withdraw_gateway_fee" = "Transfer Fee";
+"withdraw_receive_amount" = "Receive Amount";
+"withdraw_min_value"      = "Less than the minimum withdrawal";
+"recharge_deposit"        = "Deposit";
+"recharge_withdraw"       = "Withdraw";
+"recharge_selectCoin"     = "Select Coin";
+
+"withdraw"                = "WITHDRAW";
+
+"withdraw_miss_authority" = "Missing authority\nfor withdrawal";
+"withdraw_unlock_wallet"  = "Unlock Wallet";
+
+"deposit_save"     = "Save QR Code";
+"deposit_copy"     = "Copy Address";
+"deposti_get"      = "Get New Address";
+
+"alert_cancle"     = "CANCLE";
+"alert_ensure"      = "CONFIRM";
+
+"withdraw_success"  = "Withdrawal request has been sent";
+"recharge_copy"     = "Copied";
+"recharge_save"     = "Saved";
+"recharge_retry"    = "Please retry 5 minutes later";
+
+"order_create_success" = "Place order successfully";
+"order_create_fail" = "Place order fail";
+
+
+"utils_address"      = "Withdrawal Address:";
+"utils_amount"       = "Amount:";
+"utils_withdrawfee"  = "Withdrawal Fee:";
+"utils_gatewayfee"   = "Gateway Fee:";
+"utils_receiveamount" = "Receive Amount:";
+
+"password_placeholder" = "Password";
+"tip_title"   = "Tip";
+"tip_message" = "Please open photo album permissions in Settings";
+
+"recharge_title"  = " Withdraw";
+"recharge_min"    = "Minimum ";
+"withdraw_title"  = " Deposit";
+
+"recharge_invalid_password" = "Invalid password";
+"recharge_withdraw_success" = "Withdrawal application successful";
+"recharge_withdraw_failed" = "Withdrawal application failed";
+
+"orderbook_price"     = "Price";
+"orderbook_amount"    = "Amount";
+
+"trade_history_price" = "Price";
+"trade_history_amount" = "Amount";
+"trade_history_total" = "Total";
+
+"setting_language"    = "English";
+
+"mark_order_book"     = "Order Book";
+"mark_trade_history"  = "Trade History";
+
+"my_history_amount"          = "Amount";
+"my_history_time"           = "Time";
+"my_history_state"          = "Done";
+"my_history_title"          = "Order History";
+
+"order_history_first_title" = "Assert/Order Amount";
+"order_history_second_title" = "Filled/Order Value";
+
+
+"cancel_create_success" = "Cancel order successfully";
+"cancel_create_fail" = "Cancel order fail";
+
+"withdraw_ensure_title" = "CONFIERMATION";
+
+"openedorder_buy_ensure" = "CONFIRMATION";
+"openedorder_sell_ensure" = "CONFIRMATION";
+"openedorder_fee_title" = "Cancellation Fee";
+
+
+"cancle_openedorder_sell" = "CONFIRMATION";
+"cancle_openedorder_buy" = "CONFIRMATION";
+
+"withdraw_fee_fail"      = "fee failed";
+
+"openedorder_nodata"     = "No data of opened order";
+"myhistory_nodata"       = "No data of exchange history";

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="btn" destination="Syi-GU-VtP" id="9QD-ml-Gh5"/>
+                <outlet property="content" destination="hM9-Sb-Vwa" id="VeX-cg-hOu"/>
+                <outlet property="title" destination="9MT-CT-F1Q" id="XCR-VN-pHC"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9MT-CT-F1Q">
+                    <rect key="frame" x="12" y="16" width="13" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="gTX-Hk-0bm"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hM9-Sb-Vwa" customClass="ImageTextField" customModule="cybexMobile" customModuleProvider="target">
+                    <rect key="frame" x="12" y="38" width="303" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="RaZ-v9-vjo"/>
+                    </constraints>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syi-GU-VtP">
+                    <rect key="frame" x="321" y="35.5" width="30" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Syi-GU-VtP" secondAttribute="trailing" constant="24" id="0N9-uB-r7U"/>
+                <constraint firstItem="9MT-CT-F1Q" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="1Nx-2Y-XjW"/>
+                <constraint firstItem="hM9-Sb-Vwa" firstAttribute="top" secondItem="9MT-CT-F1Q" secondAttribute="bottom" id="4wZ-gD-RW6"/>
+                <constraint firstItem="Syi-GU-VtP" firstAttribute="centerY" secondItem="hM9-Sb-Vwa" secondAttribute="centerY" id="LNr-iK-dWB"/>
+                <constraint firstItem="hM9-Sb-Vwa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="N1t-XF-DSH"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hM9-Sb-Vwa" secondAttribute="trailing" constant="60" id="PO0-sb-pLl"/>
+                <constraint firstItem="9MT-CT-F1Q" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="kWH-zZ-vbE"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+</document>

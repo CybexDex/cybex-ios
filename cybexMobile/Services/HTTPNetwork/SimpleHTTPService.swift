@@ -42,6 +42,10 @@ func async(_ body: @escaping () throws -> Void) {
   Await.Queue.async.ak.async(body)
 }
 
+func await(_ body: @escaping () throws -> Void) {
+  Await.Queue.await.ak.async(body)
+}
+
 func serialAsync(_ body: @escaping () throws -> Void) {
   Await.Queue.serialAsync.ak.async(body)
 }
@@ -57,11 +61,12 @@ class SimpleHTTPService {
 extension SimpleHTTPService {
   static func requestMarketList(base : String) -> Promise<[Pair]> {
     var request = URLRequest(url: URL(string: AppConfiguration.SERVER_MARKETLIST_URLString + base)!)
+    request.timeoutInterval = 5
     request.cachePolicy = .reloadIgnoringCacheData
     
     let (promise, seal) = Promise<[Pair]>.pending()
     
-    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments, completionHandler: { (response) in
+    Alamofire.request(request).responseJSON(queue: DispatchQueue.main, options: .allowFragments, completionHandler: { (response) in
       guard let value = response.result.value else {
         seal.fulfill([])
         return
@@ -75,13 +80,13 @@ extension SimpleHTTPService {
       let pairs = data.arrayValue.map({ Pair(base:base, quote: $0.stringValue) })
       seal.fulfill(pairs)
     })
-  
-    return promise
     
+    return promise
   }
   
   static func checkVersion() -> Promise<(update: Bool, url: String, force: Bool)> {
     var request = URLRequest(url: URL(string: AppConfiguration.SERVER_VERSION_URLString)!)
+    request.timeoutInterval = 5
     request.cachePolicy = .reloadIgnoringCacheData
     
     let (promise, seal) = Promise<(update: Bool, url: String, force: Bool)>.pending()
@@ -118,6 +123,8 @@ extension SimpleHTTPService {
   static func requestETHPrice() -> Promise<[RMBPrices]>{
     var request = URLRequest(url: URL(string: AppConfiguration.ETH_PRICE)!)
     request.cachePolicy = .reloadIgnoringCacheData
+    request.timeoutInterval = 5
+    
     let (promise,seal) = Promise<[RMBPrices]>.pending()
     Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
       var rmb_prices = [RMBPrices]()
@@ -138,11 +145,10 @@ extension SimpleHTTPService {
   
   
   
-  
-  
   static func requestPinCode() -> Promise<(id:String, data:String)> {
     var request = URLRequest(url: URL(string: AppConfiguration.SERVER_REGISTER_PINCODE_URLString)!)
     request.cachePolicy = .reloadIgnoringCacheData
+    request.timeoutInterval = 5
     
     let (promise,seal) = Promise<(id:String, data:String)>.pending()
     Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
@@ -153,16 +159,20 @@ extension SimpleHTTPService {
       let json = JSON(value)
       let id = json["id"].stringValue
       let data = json["data"].stringValue
-     
+      
       seal.fulfill((id,data))
     }
     return promise
   }
   
   static func requestRegister(_ params: [String:Any]) -> Promise<(Bool, Int)> {
+    var request = try! URLRequest(url: URL(string: AppConfiguration.SERVER_REGISTER_URLString)!, method: .post, headers: ["Content-Type": "application/json"])
+    request.timeoutInterval = 5
+    let encodedURLRequest = try! JSONEncoding.default.encode(request, with: params)
+    
     let (promise,seal) = Promise<(Bool, Int)>.pending()
     
-    Alamofire.request(URL(string: AppConfiguration.SERVER_REGISTER_URLString)!, method: .post, parameters: params, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+    Alamofire.request(encodedURLRequest).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
       guard let value = response.result.value else {
         seal.fulfill((false, 0))
         return
@@ -175,6 +185,95 @@ extension SimpleHTTPService {
       }
       
       seal.fulfill((true, 0))
+    }
+    return promise
+  }
+  
+  static func fetchIdsInfo() -> Promise<[String]>{
+    var request = URLRequest(url: URL(string: AppConfiguration.ASSET)!)
+    request.cachePolicy = .reloadIgnoringCacheData
+    
+    let (promise, seal) = Promise<[String]>.pending()
+    
+    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments, completionHandler: { (response) in
+      guard let value = response.result.value else {
+        seal.fulfill([])
+        return
+      }
+      let ids = JSON(value).arrayValue.map({String(describing: $0.stringValue)})
+      seal.fulfill(ids)
+    })
+    return promise
+  }
+  
+  
+  static func fetchWithdrawIdsInfo() -> Promise<[Trade]>{
+    var request  = URLRequest(url: URL(string: AppConfiguration.WITHDRAW)!)
+    request.cachePolicy = .reloadIgnoringCacheData
+    let (promise ,seal) = Promise<[Trade]>.pending()
+    Alamofire.request(request).responseJSON(queue: DispatchQueue.main, options: .allowFragments) { (response) in
+      guard let value = response.result.value else{
+        seal.fulfill([])
+        return
+      }
+      //  var enMsg : String = ""
+      //  var cnMsg : String = ""
+      let trades = JSON(value).arrayValue.map({Trade(id:$0["id"].stringValue,enable:$0["enable"].boolValue,enMsg:$0["enMsg"].stringValue,cnMsg:$0["cnMsg"].stringValue)})
+      seal.fulfill(trades)
+    }
+    return promise
+  }
+  
+  
+  static func fetchDesipotInfo() -> Promise<[Trade]>{
+    var request  = URLRequest(url: URL(string: AppConfiguration.DEPOSIT)!)
+    request.cachePolicy = .reloadIgnoringCacheData
+    let (promise ,seal) = Promise<[Trade]>.pending()
+    Alamofire.request(request).responseJSON(queue: DispatchQueue.main, options: .allowFragments) { (response) in
+      guard let value = response.result.value else{
+        seal.fulfill([])
+        return
+      }
+      let trades = JSON(value).arrayValue.map({Trade(id:$0["id"].stringValue,enable:$0["enable"].boolValue,enMsg:$0["enMsg"].stringValue,cnMsg:$0["cnMsg"].stringValue)})
+      seal.fulfill(trades)
+    }
+    return promise
+  }
+  
+  static func fetchDesipotInfoJsonInfo() -> Promise<TradeMsg>{
+    var request  = URLRequest(url: URL(string: AppConfiguration.DEPOSIT_MSG)!)
+    request.cachePolicy = .reloadIgnoringCacheData
+    let (promise ,seal) = Promise<TradeMsg>.pending()
+    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+      guard let value = response.result.value else{
+        seal.fulfill(TradeMsg(enMsg: "", cnMsg: ""))
+        return
+      }
+      let data = JSON(value).dictionaryValue
+      if let enMsg = data["enMsg"]?.stringValue ,let cnMsg = data["cnMsg"]?.stringValue{
+        seal.fulfill(TradeMsg(enMsg: enMsg, cnMsg: cnMsg))
+      }else{
+        seal.fulfill(TradeMsg(enMsg: "", cnMsg: ""))
+      }
+    }
+    return promise
+  }
+  
+  static func fetchWithdrawJsonInfo() -> Promise<TradeMsg>{
+    var request  = URLRequest(url: URL(string: AppConfiguration.WITHDRAW_MSG)!)
+    request.cachePolicy = .reloadIgnoringCacheData
+    let (promise ,seal) = Promise<TradeMsg>.pending()
+    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+      guard let value = response.result.value else{
+        seal.fulfill(TradeMsg(enMsg: "", cnMsg: ""))
+        return
+      }
+      let data = JSON(value).dictionaryValue
+      if let enMsg = data["enMsg"]?.stringValue ,let cnMsg = data["cnMsg"]?.stringValue{
+        seal.fulfill(TradeMsg(enMsg: enMsg, cnMsg: cnMsg))
+      }else{
+        seal.fulfill(TradeMsg(enMsg: "", cnMsg: ""))
+      }
     }
     return promise
   }

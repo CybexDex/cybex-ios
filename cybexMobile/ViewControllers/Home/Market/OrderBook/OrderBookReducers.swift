@@ -35,7 +35,55 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair:Pair) -> OrderBook {
   var bids_total_amount:[Double] = []
   var asks_total_amount:[Double] = []
 
+  var combineOrders:[LimitOrder] = []
+  
+  var buy_lastTradePrice = ""
+  var sell_lastTradePrice = ""
+
+  //合并同样精度的委单
   for order in orders {
+    let sellPrice_base = order.sellPrice.base
+
+    var tradePrice:(price:String, pricision:Int)!
+    
+    var isBuy:Bool!
+    
+    if sellPrice_base.assetID == pair.base {
+      tradePrice = order.sellPrice.toReal().tradePrice()
+      isBuy = true
+    }
+    else {
+      tradePrice = (1.0 / order.sellPrice.toReal()).tradePrice()
+      isBuy = false
+    }
+
+    var lastTradePrice = isBuy ? buy_lastTradePrice : sell_lastTradePrice
+    
+    if tradePrice.price == lastTradePrice {
+      lastTradePrice = tradePrice.price
+      
+      let lastIndex = combineOrders.count - 1
+      let lastOrder = combineOrders[lastIndex]
+      
+      lastOrder.forSale = "\(lastOrder.forSale.toDouble()! + order.forSale.toDouble()!)"
+      combineOrders[lastIndex] = lastOrder
+    }
+    else {
+      lastTradePrice = tradePrice.price
+
+      combineOrders.append(order)
+    }
+    
+    if isBuy {
+      buy_lastTradePrice = lastTradePrice
+    }
+    else {
+      sell_lastTradePrice = lastTradePrice
+    }
+    
+  }
+  
+  for order in combineOrders {
     let sellPrice_base = order.sellPrice.base
     if sellPrice_base.assetID == pair.base {
       bids_total_amount.append(Double(order.forSale)!)
@@ -45,7 +93,7 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair:Pair) -> OrderBook {
     }
   }
   
-  for order in orders {
+  for order in combineOrders {
     let sellPrice_base = order.sellPrice.base
     
     if sellPrice_base.assetID == pair.base {
@@ -57,18 +105,23 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair:Pair) -> OrderBook {
       
       let quote_volume = quote_forSale / pow(10.0, order.sellPrice.quote.info().precision.double)
       
-      let isCYB = order.sellPrice.base.assetID == AssetConfiguration.CYB
-      let price_precision = isCYB ? 5 : 8
-      let bid = OrderBook.Order(price: order.sellPrice.toReal().formatCurrency(digitNum: price_precision), volume: quote_volume.suffixNumber(digitNum: 10 - price_precision), volume_percent: percent)
+//      let isCYB = order.sellPrice.base.assetID == AssetConfiguration.CYB
+//      let price_precision = isCYB ? 5 : 8
+      
+      let tradePrice = order.sellPrice.toReal().tradePrice()
+      let bid = OrderBook.Order(price: tradePrice.price, volume: quote_volume.suffixNumber(digitNum: 10 - tradePrice.pricision), volume_percent: percent)
       bids.append(bid)
     }
     else {
       let percent = asks_total_amount[0...asks.count].reduce(0, +) / asks_total_amount.reduce(0, +)
       let quote_volume = Double(order.forSale)! / pow(10, sellPrice_base.info().precision.double)
       
-      let isCYB = order.sellPrice.quote.assetID == AssetConfiguration.CYB
-      let price_precision = isCYB ? 5 : 8
-      let ask = OrderBook.Order(price: (1.0 / order.sellPrice.toReal()).formatCurrency(digitNum: price_precision), volume: quote_volume.suffixNumber(digitNum: 10 - price_precision), volume_percent: percent)
+//      let isCYB = order.sellPrice.quote.assetID == AssetConfiguration.CYB
+//      let price_precision = isCYB ? 5 : 8
+      
+      let tradePrice = (1.0 / order.sellPrice.toReal()).tradePrice()
+
+      let ask = OrderBook.Order(price: tradePrice.price, volume: quote_volume.suffixNumber(digitNum: 10 - tradePrice.pricision), volume_percent: percent)
       asks.append(ask)
     }
   }

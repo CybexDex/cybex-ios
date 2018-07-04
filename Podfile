@@ -6,6 +6,7 @@ def network
     pod 'Moya'
     pod 'Kingfisher'
     pod 'RealReachability'
+    pod 'Apollo'
 end
 
 def data
@@ -32,6 +33,15 @@ end
 def architecture
    pod 'ReSwift'
    pod 'RxSwift'
+   pod 'ObservableArray-RxSwift'
+   pod 'RxSwiftExt'
+   pod 'RxDataSources'
+   pod 'RxKeyboard'
+   pod 'RxValidator'
+   pod 'Action'
+
+   pod 'Lightning'
+
    pod 'Localize-Swift'
    pod 'SwiftTheme'
    pod 'UIFontComplete'
@@ -75,6 +85,9 @@ def ui
     pod 'Presentr'
     pod 'Macaw'
     pod 'SwiftEntryKit'
+    pod 'Keyboard+LayoutGuide'
+    pod 'XLPagerTabStrip'
+    pod 'EFQRCode'
 end
 
 def other
@@ -87,6 +100,12 @@ end
 def fabric
     pod 'Fabric'
     pod 'Crashlytics'
+end
+
+def debug
+    pod 'SwiftyBeaver'
+#   pod 'AppSpectorSDK'
+#   pod 'WoodPeckeriOS', '>= 1.0.3', :configurations => ['Debug']
 end
 
 target 'cybexMobile' do
@@ -106,7 +125,5 @@ target 'cybexMobile' do
   extension
   ui
   other
-
+  debug
 end
-
-

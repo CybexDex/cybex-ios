@@ -111,15 +111,15 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
     async {
       if s.wait(timeout: .distantFuture) == .success {
 
-      let (matrixs, data) = applyMarketsToState(state, action: action)
+        let (matrixs, data) = applyMarketsToState(state, action: action)
        
-      main {
-        state.matrixs.accept(matrixs)
-        state.data.accept(data)
-        refreshTimes[Pair(base:action.pair.firstAssetId, quote:action.pair.secondAssetId)] = Date().timeIntervalSince1970
-        state.pairsRefreshTimes = refreshTimes
-        s.signal()
-      }
+        main {
+          state.matrixs.accept(matrixs)
+          state.data.accept(data)
+          refreshTimes[Pair(base:action.pair.firstAssetId, quote:action.pair.secondAssetId)] = Date().timeIntervalSince1970
+          state.pairsRefreshTimes = refreshTimes
+          s.signal()
+        }
       }
     }
 
@@ -167,7 +167,6 @@ func applyMarketsToState(_ state: AppPropertyState, action:MarketsFetched) -> (m
   
   guard let base_info = state.assetInfo[action.pair.firstAssetId], let quote_info = state.assetInfo[action.pair.secondAssetId] else {
     return (matrixs, data)
-    
   }
 
   var homeBucket = HomeBucket(base: action.pair.firstAssetId, quote: action.pair.secondAssetId, bucket: [], base_info: base_info, quote_info: quote_info)
