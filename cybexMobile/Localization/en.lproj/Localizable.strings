@@ -115,6 +115,12 @@
 "noNetwork"                           = "network is not available.";
 
 
+"orderbook_buy_price"     = "Buy Price";
+"orderbook_volume"        = "Volume";
+"orderbook_sell_price"    = "Sell Price";
+
+
+
 "trade_base"    = "Markets";
 "trade_double"  = "Pairs";
 "trade_change"  = "24 Chg%";

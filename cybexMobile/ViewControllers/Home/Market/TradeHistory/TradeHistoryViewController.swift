@@ -56,6 +56,11 @@ class TradeHistoryViewController: BaseViewController {
       self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
       self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized() + "(" + base_info.symbol.filterJade + ")"
       self.historyView.time.text = R.string.localizable.my_history_time.key.localized()
+    }else{
+      self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized()
+      self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized()
+      self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized()
+      self.historyView.time.text = R.string.localizable.my_history_time.key.localized()
     }
     
     self.coordinator?.fetchData(pair)
@@ -64,12 +69,7 @@ class TradeHistoryViewController: BaseViewController {
   func setupEvent(){
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] notification in
       guard let `self` = self else { return }
-      guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
-      
-      self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized() 
-      self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
-      self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized() + "(" + base_info.symbol.filterJade + ")"
-      self.historyView.time.text = R.string.localizable.my_history_time.key.localized()
+     self.refreshView()
     })
   }
   deinit{

@@ -97,11 +97,9 @@ class RechargeDetailViewController: BaseViewController {
     amountView.content.keyboardType = .decimalPad
     addressView.btn.isHidden        = true
     amountView.btn.setTitle(R.string.localizable.openedAll.key.localized(), for: .normal)
-    if let balance = self.balance{
-      if let balance_info = app_data.assetInfo[balance.asset_type]{
-        avaliableView.content.text = self.available.string(digits: balance_info.precision) + " " + balance_info.symbol.filterJade
-        self.available = getRealAmount(balance.asset_type, amount: balance.balance).doubleValue
-      }
+    if let balance = self.balance,let balance_info = app_data.assetInfo[balance.asset_type]{
+      avaliableView.content.text = self.available.string(digits: balance_info.precision) + " " + balance_info.symbol.filterJade
+      self.available = getRealAmount(balance.asset_type, amount: balance.balance).doubleValue
     }else{
       avaliableView.content.text = "--" + (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)!
     }

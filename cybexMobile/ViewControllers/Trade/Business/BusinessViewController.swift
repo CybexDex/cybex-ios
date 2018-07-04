@@ -182,15 +182,20 @@ class BusinessViewController: BaseViewController {
       self.containerView.amountTextfield.text = text.tradePrice.price
     }
     
-    NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self.containerView.amountTextfield, queue: nil) {(notifi) in
+    NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self.containerView.amountTextfield, queue: nil) {[weak self](notifi) in
+      guard let `self` = self else {return}
       if !UserManager.shared.isLoginIn {
+        self.containerView.amountTextfield.resignFirstResponder()
         app_coodinator.showLogin()
         return
       }
     }
     
-    NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self.containerView.priceTextfield, queue: nil) {(notifi) in
+    NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self.containerView.priceTextfield, queue: nil) {[weak self](notifi) in
+      guard let `self` = self else {return}
+      
       if !UserManager.shared.isLoginIn {
+        self.containerView.priceTextfield.resignFirstResponder()
         app_coodinator.showLogin()
         return
       }
@@ -301,7 +306,7 @@ extension BusinessViewController {
     }
   }
   
-  @objc func buttonDidClicked(_ data: [String: Any]) {
+  @objc func buttonDidClicked(_ data: [String: Any]) {  
     if self.coordinator!.parentIsLoading(self.parent) {
       return
     }

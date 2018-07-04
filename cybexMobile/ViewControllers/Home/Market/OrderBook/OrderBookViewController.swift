@@ -14,6 +14,10 @@ import TinyConstraints
 import SwiftyJSON
 import Localize_Swift
 
+enum orderbook_type : Int{
+  case contentView = 1
+  case tradeView
+}
 
 class OrderBookViewController: BaseViewController {
   
@@ -21,7 +25,7 @@ class OrderBookViewController: BaseViewController {
   
   var contentView : OrderBookContentView!
   var tradeView : TradeView!
-  var VC_TYPE : Int = 1
+  var VC_TYPE : Int = orderbook_type.contentView.rawValue
   var pair:Pair? {
     didSet {
       guard let pair = pair else { return }
@@ -39,7 +43,7 @@ class OrderBookViewController: BaseViewController {
     setupUI()
   }
   func setupUI(){
-    if VC_TYPE == 1{
+    if VC_TYPE == orderbook_type.contentView.rawValue{
       contentView = OrderBookContentView(frame: .zero)
       self.view.addSubview(contentView)
       contentView.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))

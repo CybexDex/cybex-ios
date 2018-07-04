@@ -12,7 +12,11 @@ class OrderBookContentView: UIView {
 
     @IBOutlet weak var tableView: UITableView!
   
-  
+    @IBOutlet weak var buyPrice: UILabel!
+    @IBOutlet weak var buyVolume: UILabel!
+    @IBOutlet weak var sellPrice: UILabel!
+    @IBOutlet weak var sellVolume: UILabel!
+    
   var data : Any?{
     didSet{
       self.tableView.reloadData()
@@ -20,6 +24,12 @@ class OrderBookContentView: UIView {
   }
   
   fileprivate func setup() {
+    
+    self.buyPrice.locali =  R.string.localizable.orderbook_buy_price.key.localized()
+    self.buyVolume.locali = R.string.localizable.orderbook_volume.key.localized()
+    self.sellPrice.locali = R.string.localizable.orderbook_sell_price.key.localized()
+    self.sellVolume.locali = R.string.localizable.orderbook_volume.key.localized()
+    
     let cell = String.init(describing: OrderBookCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)  }
   

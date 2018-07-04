@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import TinyConstraints
 import SwiftTheme
+import SwifterSwift
 
 protocol Views {
   var content : Any? {get set}
@@ -22,7 +23,7 @@ protocol Views {
 
 class ShowManager {
   
-  static let durationTime : TimeInterval = 0.3
+  static let durationTime : TimeInterval = 0.5
   static let shared = ShowManager()
   
   var delegate:ShowManagerDelegate?
@@ -115,10 +116,11 @@ class ShowManager {
         }
       }else if animationShow == .small_big{
         showView?.transform = CGAffineTransform.init(scaleX: 0.3, y: 0.3)
-        UIView.animate(withDuration: ShowManager.durationTime, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        UIView.animate(withDuration: ShowManager.durationTime, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
           self.showView?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
-        }, completion: nil)
-        
+        }, completion:{ (isFinished) in
+          
+        })
       }
       return
     }else{
@@ -155,11 +157,10 @@ class ShowManager {
   }
   
   func hide(_ time : TimeInterval){
-    if animationShow == .none{
-      UIView.animate(withDuration: ShowManager.durationTime, delay: time, options: .curveLinear, animations: {
+    if animationShow == .none || animationShow == .small_big{
+      SwifterSwift.delay(milliseconds: time * 1000) {
         self.showView?.removeFromSuperview()
         self.shadowView?.removeFromSuperview()
-      }) { (isFinished) in
         self.showView = nil
         self.shadowView = nil
         self.data = nil
