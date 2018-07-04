@@ -11,7 +11,7 @@
 "nav.apply" = "Application";
 "nav.account" = "Account";
 "nav.setting" = "Settings";
-"nav.trade"   = "Trade";
+"nav.trade"   = "Exchange";
 
 
 "market" = "Market";
@@ -235,4 +235,4 @@
 "withdraw_fee_fail"      = "fee failed";
 
 "openedorder_nodata"     = "No data of opened order";
-"myhistory_nodata"       = "No data of trade history";
+"myhistory_nodata"       = "No data of exchange history";
