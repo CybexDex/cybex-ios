@@ -92,4 +92,3 @@ fastlane/test_output
 .DS_Store
 *.a
 .Podfile.lock
-cybexMobile/ViewControllers/Home/HomeViewController.swift
