@@ -16,7 +16,12 @@ import TableFlip
 import SwiftyJSON
 import TinyConstraints
 
+enum view_type : Int{
+  case homeContent    = 1
+  case businessTitle
+}
 class HomeViewController: BaseViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
+
   
   var coordinator: (HomeCoordinatorProtocol & HomeStateManagerProtocol)?
   
@@ -47,7 +52,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     super.viewDidLoad()
     setupUI()
     
-    if VC_TYPE == 1 {
+    if VC_TYPE == view_type.homeContent.rawValue {
       handlerUpdateVersion(nil)
     }
   }
@@ -64,7 +69,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
   func switchContainerView() {
     contentView?.removeFromSuperview()
     businessTitleView?.removeFromSuperview()
-    if self.VC_TYPE == 1{
+    if self.VC_TYPE == view_type.homeContent.rawValue{
       contentView = HomeContentView()
       self.view.addSubview(contentView!)
       
@@ -128,7 +133,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
 extension HomeViewController {
   @objc func cellClicked(_ data:[String: Any]) {
-    if VC_TYPE == 1{//首页
+    if VC_TYPE == view_type.homeContent.rawValue{//首页
       if let index = data["index"] as? Int {
         self.coordinator?.openMarket(index:index, currentBaseIndex:self.contentView!.currentBaseIndex)
       }

@@ -12,6 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderBookContentView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
+                <outlet property="buyPrice" destination="dmw-BB-8Vm" id="QYw-Oj-KTI"/>
+                <outlet property="buyVolume" destination="Oql-ao-t4j" id="znN-0q-UQy"/>
+                <outlet property="sellPrice" destination="nCg-32-q1K" id="b9W-LV-pyW"/>
+                <outlet property="sellVolume" destination="GxB-qF-ecF" id="5cY-DN-STg"/>
                 <outlet property="tableView" destination="lKs-FY-fxP" id="iyB-If-hW2"/>
             </connections>
         </placeholder>

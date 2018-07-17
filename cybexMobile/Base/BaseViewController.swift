@@ -181,13 +181,13 @@ class BaseViewController: UIViewController {
 
 extension UIViewController : ShowManagerDelegate {
   func showPasswordBox(_ title:String = R.string.localizable.withdraw_unlock_wallet.key.localized()){
-    ShowManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .up_down)
+    ShowManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big)
     ShowManager.shared.delegate = self
     ShowManager.shared.showAnimationInView(self.view)
   }
   
   func showToastBox(_ success:Bool, message:String) {
-    ShowManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: .fadeIn_Out, showType: .alert_image)
+    ShowManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: .small_big, showType: .alert_image)
     ShowManager.shared.showAnimationInView(self.view)
     ShowManager.shared.hide(2.0)
   }
@@ -201,7 +201,7 @@ extension UIViewController : ShowManagerDelegate {
   func showConfirm(_ title:String, attributes:[NSAttributedString]?) {
     let subView = StyleContentView(frame: .zero)
     subView.data = attributes
-    ShowManager.shared.setUp(title: title, contentView: subView, animationType: .up_down)
+    ShowManager.shared.setUp(title: title, contentView: subView, animationType: .small_big)
     ShowManager.shared.showAnimationInView(self.view)
     ShowManager.shared.delegate = self
   }

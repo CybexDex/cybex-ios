@@ -110,6 +110,10 @@
 
 "noNetwork"                           = "网络不佳";
 
+"orderbook_buy_price"     = "买价";
+"orderbook_volume"        = "数量";
+"orderbook_sell_price"    = "卖价";
+
 
 "trade_base"    = "交易币种";
 "trade_double"  = "交易对";

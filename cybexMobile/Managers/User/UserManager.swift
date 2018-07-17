@@ -83,7 +83,6 @@ extension UserManager {
           self.avatarString = username.sha256()
 
           self.name.accept(username)
-       
           
           self.keys = keys
           self.fetchAccountInfo()
@@ -134,6 +133,10 @@ extension UserManager {
     
     let request = GetAccountHistoryRequest(accountID: id) { (data) in
       if var fillorders = data as? [FillOrder] {
+        if fillorders.count == 0 || !self.isLoginIn {
+          self.fillOrder.accept(nil)
+          return
+        }
         fillorders = fillorders.filter({
           let base_name = app_data.assetInfo[$0.fill_price.base.assetID]
           let quote_name = app_data.assetInfo[$0.fill_price.quote.assetID]

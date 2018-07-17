@@ -119,7 +119,6 @@ class TradeViewController: BaseViewController {
   
   @objc override func rightAction(_ sender: UIButton){
     self.coordinator?.openMyHistory()
-
    
   }
   

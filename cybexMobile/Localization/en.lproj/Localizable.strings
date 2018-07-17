@@ -11,7 +11,7 @@
 "nav.apply" = "Application";
 "nav.account" = "Account";
 "nav.setting" = "Settings";
-"nav.trade"   = "Trade";
+"nav.trade"   = "Exchange";
 
 
 "market" = "Market";
@@ -115,6 +115,12 @@
 "noNetwork"                           = "network is not available.";
 
 
+"orderbook_buy_price"     = "Buy Price";
+"orderbook_volume"        = "Volume";
+"orderbook_sell_price"    = "Sell Price";
+
+
+
 "trade_base"    = "Markets";
 "trade_double"  = "Pairs";
 "trade_change"  = "24 Chg%";
@@ -139,7 +145,7 @@
 "my_opened_filled" = "Filled/Cancel";
 
 "withdraw_nomore" = "Not enough";
-"withdraw_address_fault" = "Verifing the rule of address";
+"withdraw_address_fault" = "Invalid address";
 "withdraw_available" = "Available";
 "withdraw_address"   = "Withdrawal Address";
 "withdraw_address_placehold"   = "Enter or paste address";
@@ -229,4 +235,4 @@
 "withdraw_fee_fail"      = "fee failed";
 
 "openedorder_nodata"     = "No data of opened order";
-"myhistory_nodata"       = "No data of trade history";
+"myhistory_nodata"       = "No data of exchange history";

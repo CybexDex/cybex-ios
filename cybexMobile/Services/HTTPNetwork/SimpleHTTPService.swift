@@ -82,7 +82,6 @@ extension SimpleHTTPService {
     })
     
     return promise
-    
   }
   
   static func checkVersion() -> Promise<(update: Bool, url: String, force: Bool)> {
