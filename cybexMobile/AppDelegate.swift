@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     log.addDestination(console)
 //    let file = FileDestination()
 //    file.logFileURL = URL(fileURLWithPath: "/tmp/swiftybeaver.log")
-    //    log.addDestination(file)
+//    log.addDestination(file)
     
     self.window = UIWindow.init(frame: UIScreen.main.bounds)
     self.window?.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]

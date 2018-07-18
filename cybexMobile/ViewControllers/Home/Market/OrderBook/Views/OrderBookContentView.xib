@@ -28,32 +28,32 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="5Au-Jx-t0c">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="zbm-t3-Puk">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmw-BB-8Vm">
-                                        <rect key="frame" x="0.0" y="0.0" width="94" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="94" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.39560639860000002" green="0.42749041319999997" blue="0.53351551289999999" alpha="0.4961647689" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volume" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oql-ao-t4j">
-                                        <rect key="frame" x="94" y="0.0" width="93.5" height="20"/>
+                                        <rect key="frame" x="94" y="0.0" width="93.5" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.39560639860000002" green="0.42749041319999997" blue="0.53351551289999999" alpha="0.4961647689" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sell Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCg-32-q1K">
-                                        <rect key="frame" x="187.5" y="0.0" width="94" height="20"/>
+                                        <rect key="frame" x="187.5" y="0.0" width="94" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.39560639860000002" green="0.42749041319999997" blue="0.53351551289999999" alpha="0.4961647689" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volume" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GxB-qF-ecF">
-                                        <rect key="frame" x="281.5" y="0.0" width="93.5" height="20"/>
+                                        <rect key="frame" x="281.5" y="0.0" width="93.5" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.39560639860000002" green="0.42749041319999997" blue="0.53351551289999999" alpha="0.4961647689" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>

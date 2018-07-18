@@ -30,8 +30,8 @@ class TradeHistoryViewController: BaseViewController {
       if pair != oldValue {
         self.coordinator?.resetData()
       }
-
-     refreshView()
+      
+      refreshView()
     }
   }
   
@@ -50,26 +50,25 @@ class TradeHistoryViewController: BaseViewController {
   
   func refreshView() {
     guard let pair = pair, let base_info = app_data.assetInfo[(pair.base)], let quote_info = app_data.assetInfo[(pair.quote)] else { return }
-
-    if pageType == .trade {
-      self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
-      self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
-      self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized() + "(" + base_info.symbol.filterJade + ")"
-      self.historyView.time.text = R.string.localizable.my_history_time.key.localized()
-    }else{
-      self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized()
-      self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized()
-      self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized()
-      self.historyView.time.text = R.string.localizable.my_history_time.key.localized()
+    if self.view.width == 320 {
+      self.historyView.price.font  = UIFont.systemFont(ofSize: 11)
+      self.historyView.amount.font  = UIFont.systemFont(ofSize: 11)
+      self.historyView.sellAmount.font  = UIFont.systemFont(ofSize: 11)
+      self.historyView.time.font = UIFont.systemFont(ofSize: 11)
     }
     
+    self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
+    self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
+    self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized() + "(" + base_info.symbol.filterJade + ")"
+    self.historyView.time.text = R.string.localizable.my_history_time.key.localized()
+
     self.coordinator?.fetchData(pair)
   }
   
   func setupEvent(){
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] notification in
       guard let `self` = self else { return }
-     self.refreshView()
+      self.refreshView()
     })
   }
   deinit{
@@ -97,6 +96,7 @@ class TradeHistoryViewController: BaseViewController {
   override func configureObserveState() {
     commonObserveState()
     
+
     self.coordinator!.state.property.data.asObservable()
       .subscribe(onNext: {[weak self] (s) in
         guard let `self` = self else { return }
@@ -129,7 +129,7 @@ class TradeHistoryViewController: BaseViewController {
           
           let price = base_volume / quote_volume
           let tradePrice = price.tradePrice()
-
+          
           showData.append((false, tradePrice.price, quote_volume.suffixNumber(digitNum:10 - tradePrice.pricision), base_volume.suffixNumber(digitNum: tradePrice.pricision), time.dateFromISO8601!.string(withFormat: "HH:mm:ss")))
         }
         else {
@@ -137,7 +137,7 @@ class TradeHistoryViewController: BaseViewController {
           let base_volume = Double(receive["amount"].stringValue)! / base_precision
           
           let price = base_volume / quote_volume
-        
+          
           let tradePrice = price.tradePrice()
           showData.append((true, tradePrice.price, quote_volume.suffixNumber(digitNum: 10 - tradePrice.pricision), base_volume.suffixNumber(digitNum: tradePrice.pricision), time.dateFromISO8601!.string(withFormat: "HH:mm:ss")))
         }
@@ -158,7 +158,7 @@ extension TradeHistoryViewController : TradePair{
   }
   
   func refresh() {
-    refreshView()
+//    refreshView()
   }
 }
 

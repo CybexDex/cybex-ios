@@ -50,6 +50,9 @@ class TradeViewController: BaseViewController {
   
   var pair : Pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB){
     didSet{
+      if self.chooseTitleView != nil {
+          self.sendEventActionWith()
+      }
       getPairInfo()
       refreshView()
     }
@@ -69,7 +72,7 @@ class TradeViewController: BaseViewController {
     self.startLoading()
     setupUI()
     setupEvent()
-    
+
     self.pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB)
   }
   
@@ -95,14 +98,14 @@ class TradeViewController: BaseViewController {
     })
   }
   
-  
   deinit{
     NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
   }
   
   func setupNavi(){
     configLeftNavButton(R.image.icCandle())
-    configRightNavButton(R.string.localizable.my_history_title.key.localized())
+    configRightNavButton(R.image.ic_star_border_24_px())
+//    configRightNavButton(R.string.localizable.my_history_title.key.localized())
     
     tradeTitltView = TradeNavTitleView(frame: CGRect(x: 0, y: 0, width: 100, height: 64))
     tradeTitltView.delegate = self
@@ -156,14 +159,15 @@ class TradeViewController: BaseViewController {
       .skip(1)
       .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
       .distinctUntilChanged()
-      .throttle(3, latest: true, scheduler: MainScheduler.instance)
+      .throttle(6, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { (s) in
         if app_data.data.value.count == 0 {
           return
         }
-        
+
         if self.isVisible {
           self.getPairInfo()
+          self.refreshView()
         }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
@@ -172,9 +176,7 @@ class TradeViewController: BaseViewController {
   func refreshView() {
     guard let info = info else { return }
     endLoading()
-    if self.chooseTitleView != nil {
-      self.sendEventActionWith()
-    }
+
     
     tradeTitltView.title.text = info.quote.symbol.filterJade + "/" + info.base.symbol.filterJade
     self.childViewControllers.forEach { (viewController) in

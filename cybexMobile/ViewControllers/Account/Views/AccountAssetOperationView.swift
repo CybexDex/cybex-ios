@@ -17,7 +17,8 @@ class AccountAssetOperationView: UIView{
   
   var data: Any? {
     didSet {
-      
+      openedOrdersView.data = data
+      lockupAssetsView.data = data
     }
   }
   enum event:String{

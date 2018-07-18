@@ -141,7 +141,7 @@
 
 
 
-"my_opened_price" = "Price/Amount";
+"my_opened_price" = "Order Price/Order Amount";
 "my_opened_filled" = "Filled/Cancel";
 
 "withdraw_nomore" = "Not enough";
@@ -149,6 +149,10 @@
 "withdraw_available" = "Available";
 "withdraw_address"   = "Withdrawal Address";
 "withdraw_address_placehold"   = "Enter or paste address";
+
+"eos_withdraw_account" = "Withdrawal Account";
+"eos_withdraw_account_placehold" = "Enter or paste address address";
+
 "withdraw_amount" = "Amount";
 "withdraw_amount_all" = "ALL";
 "withdraw_fee"        = "Gateway Fee";
@@ -182,7 +186,7 @@
 
 "utils_address"      = "Withdrawal Address:";
 "utils_amount"       = "Amount:";
-"utils_withdrawfee"  = "Withdrawal Fee:";
+"utils_withdrawfee"  = "Transfer Fee:";
 "utils_gatewayfee"   = "Gateway Fee:";
 "utils_receiveamount" = "Receive Amount:";
 
@@ -215,8 +219,8 @@
 "my_history_state"          = "Done";
 "my_history_title"          = "Order History";
 
-"order_history_first_title" = "Assert/Order Amount";
-"order_history_second_title" = "Filled/Order Value";
+"order_history_first_title" = "Assert/Amount";
+"order_history_second_title" = "Filled/Price";
 
 
 "cancel_create_success" = "Cancel order successfully";
@@ -234,5 +238,16 @@
 
 "withdraw_fee_fail"      = "fee failed";
 
-"openedorder_nodata"     = "No data of opened order";
-"myhistory_nodata"       = "No data of exchange history";
+"openedorder_nodata"     = "No open orders";
+"myhistory_nodata"       = "No exchange history";
+
+"eos_account_title" = "EOS Deposit Account";
+"eos_copy_account" = "Copy Account Name";
+"eos_code"  = "Verification code";
+"eos_code_tip" = "(Must transfer your EOS to deposit account with this verification code in memo)";
+"eos_copy_code" = "Copy Code";
+"eos_reset_code" = "Get New Code";
+
+"business_login_title" = "Log in to exchange";
+
+"update_version" = "Version update";

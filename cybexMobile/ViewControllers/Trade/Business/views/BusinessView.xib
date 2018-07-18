@@ -123,7 +123,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="≈¥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVt-f6-hjy">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="≈¥0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVt-f6-hjy">
                     <rect key="frame" x="13" y="104" width="350" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -189,7 +189,7 @@
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KnY-Yk-nXf">
                     <rect key="frame" x="13" y="178.5" width="350" height="20"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="complete" translatesAutoresizingMaskIntoConstraints="NO" id="wiA-bV-CRE">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_error_16_px" translatesAutoresizingMaskIntoConstraints="NO" id="wiA-bV-CRE">
                             <rect key="frame" x="0.0" y="2" width="16" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="9Ga-sv-8d1"/>
@@ -199,7 +199,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjE-51-wDn">
                             <rect key="frame" x="19" y="4" width="26.5" height="12"/>
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                            <color key="textColor" red="0.93333333330000001" green="0.57254901960000004" blue="0.3411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" red="0.84299999999999997" green="0.20000000000000001" blue="0.23899999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="locali" value="withdraw_nomore"/>
@@ -428,9 +428,10 @@
                 <constraint firstItem="1Wy-R7-PtL" firstAttribute="trailing" secondItem="sVt-f6-hjy" secondAttribute="trailing" constant="12" id="zlo-cq-mg1"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="1Wy-R7-PtL"/>
+            <point key="canvasLocation" x="-154.5" y="53.5"/>
         </view>
     </objects>
     <resources>
-        <image name="complete" width="24" height="24"/>
+        <image name="ic_error_16_px" width="16" height="16"/>
     </resources>
 </document>

@@ -46,7 +46,7 @@ class MyHistoryCellView: UIView {
         self.amount.text = getRealAmountDouble(receiveInfo.id, amount:order.receives.amount).string(digits: receiveInfo.precision) + " " + receiveInfo.symbol.filterJade
         self.orderAmount.text = getRealAmountDouble(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision) + " " + payInfo.symbol.filterJade
         
-        self.orderPrice.text = (getRealAmountDouble(payInfo.id, amount: order.pays.amount) / getRealAmountDouble(receiveInfo.id, amount:order.receives.amount)).string(digits: 8)
+        self.orderPrice.text = (getRealAmountDouble(payInfo.id, amount: order.pays.amount) / getRealAmountDouble(receiveInfo.id, amount:order.receives.amount)).string(digits: payInfo.precision) + " " + payInfo.symbol.filterJade
         
       }else{
         // SELL   pay -> quote receive -> base
@@ -56,16 +56,10 @@ class MyHistoryCellView: UIView {
         self.typeView.backgroundColor = .reddish
         self.amount.text = getRealAmountDouble(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision) + " " + payInfo.symbol.filterJade
         self.orderAmount.text = getRealAmountDouble(receiveInfo.id, amount: order.receives.amount).string(digits: receiveInfo.precision) + " " +  receiveInfo.symbol.filterJade
-        self.orderPrice.text = (getRealAmountDouble(receiveInfo.id, amount: order.receives.amount) / getRealAmountDouble(payInfo.id, amount: order.pays.amount)).string(digits: 8)
+        self.orderPrice.text = (getRealAmountDouble(receiveInfo.id, amount: order.receives.amount) / getRealAmountDouble(payInfo.id, amount: order.pays.amount)).string(digits: receiveInfo.precision) + " " +  receiveInfo.symbol.filterJade
       }
-      let dateFormatter = DateFormatter()
-      dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-      
-      let date = dateFormatter.date(from: orderInfo.time.replacingOccurrences(of: "T", with: " "))
-      dateFormatter.dateFormat = "MM/dd HH:mm:ss"
-      if let date = date{
-        self.time.text = dateFormatter.string(from: date)
-      }
+    
+      self.time.text = orderInfo.time
     }
   }
   

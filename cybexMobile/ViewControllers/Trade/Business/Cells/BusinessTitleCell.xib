@@ -24,20 +24,28 @@
                         <rect key="frame" x="16" y="11" width="288" height="21"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s7Q-fb-ubh">
-                        <rect key="frame" x="16" y="32" width="288" height="1"/>
+                        <rect key="frame" x="0.0" y="42.5" width="320" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="pb5-U4-QlU"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="s7Q-fb-ubh" secondAttribute="bottom" id="7AS-Fg-vlh"/>
                     <constraint firstAttribute="bottomMargin" secondItem="dIg-rQ-E9E" secondAttribute="bottom" constant="1" id="7D3-yw-qyj"/>
-                    <constraint firstItem="s7Q-fb-ubh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="95l-ie-X2k"/>
+                    <constraint firstAttribute="trailing" secondItem="s7Q-fb-ubh" secondAttribute="trailing" id="H14-Hf-1om"/>
+                    <constraint firstItem="s7Q-fb-ubh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="JeV-Dr-j99"/>
                     <constraint firstItem="dIg-rQ-E9E" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="cWK-Jn-lDO"/>
                     <constraint firstItem="dIg-rQ-E9E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="dHR-Kq-pe5"/>
-                    <constraint firstItem="s7Q-fb-ubh" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="dP3-eu-oGD"/>
                     <constraint firstItem="dIg-rQ-E9E" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="kRW-tU-yeQ"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="s7Q-fb-ubh" secondAttribute="bottom" id="kgV-Uz-CaH"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

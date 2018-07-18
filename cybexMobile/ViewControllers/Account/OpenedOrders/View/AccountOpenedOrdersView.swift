@@ -48,11 +48,11 @@ class AccountOpenedOrdersView:UIView {
     let cell = String.init(describing:OpenedOrdersCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
     tableView.separatorColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
-    
+
     headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: 103))
     headerView.sectionTitleView.cybPriceTitle.locali = R.string.localizable.opened_order_value.key.localized()
     headerView.sectionTitleView.totalTitle.locali = R.string.localizable.opened_asset_amount.key.localized()
-    tableView.tableHeaderView = headerView
+    tableView.tableHeaderView = UIView()
   }
   
   override var intrinsicContentSize: CGSize {

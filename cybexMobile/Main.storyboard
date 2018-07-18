@@ -243,14 +243,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJm-As-Vxn" customClass="TradeHistoryView" customModule="cybexMobile" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="13" y="20" width="294" height="548"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ZJm-As-Vxn" firstAttribute="leading" secondItem="r6h-2a-7Y8" secondAttribute="leading" id="HGU-1w-FJM"/>
+                            <constraint firstItem="ZJm-As-Vxn" firstAttribute="leading" secondItem="r6h-2a-7Y8" secondAttribute="leading" constant="13" id="HGU-1w-FJM"/>
                             <constraint firstItem="ZJm-As-Vxn" firstAttribute="top" secondItem="r6h-2a-7Y8" secondAttribute="top" id="Prf-FD-6Tm"/>
-                            <constraint firstItem="r6h-2a-7Y8" firstAttribute="trailing" secondItem="ZJm-As-Vxn" secondAttribute="trailing" id="RbN-fg-zvj"/>
+                            <constraint firstItem="r6h-2a-7Y8" firstAttribute="trailing" secondItem="ZJm-As-Vxn" secondAttribute="trailing" constant="13" id="RbN-fg-zvj"/>
                             <constraint firstItem="r6h-2a-7Y8" firstAttribute="bottom" secondItem="ZJm-As-Vxn" secondAttribute="bottom" id="RhB-YW-Pwg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="r6h-2a-7Y8"/>
@@ -660,7 +660,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qp1-2n-pjQ">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="54"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="complete" translatesAutoresizingMaskIntoConstraints="NO" id="ERq-s7-HY9">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_error_16_px" translatesAutoresizingMaskIntoConstraints="NO" id="ERq-s7-HY9">
                                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="HLl-sV-meF"/>
@@ -1125,8 +1125,8 @@ Cg
     <resources>
         <image name="check_complete" width="24" height="24"/>
         <image name="cloud_wallet" width="24" height="24"/>
-        <image name="complete" width="24" height="24"/>
         <image name="ic_avatar_24_px" width="24" height="24"/>
+        <image name="ic_error_16_px" width="16" height="16"/>
         <image name="ic_lock_outline_24_px" width="24" height="24"/>
         <image name="ic_logo_light" width="150" height="20"/>
         <image name="ic_pincode_24_px" width="24" height="24"/>

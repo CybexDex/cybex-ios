@@ -11,13 +11,17 @@ import RxSwift
 import RxCocoa
 import ReSwift
 import SwiftTheme
+import Localize_Swift
+import SwifterSwift
 
 class BusinessViewController: BaseViewController {
   var pair: Pair? {
     didSet{
-      self.coordinator?.resetState()
+      if oldValue != pair{
+        self.coordinator?.resetState()
 
-      refreshView()
+        refreshView()
+      }
     }
   }
   
@@ -31,7 +35,7 @@ class BusinessViewController: BaseViewController {
     super.viewDidLoad()
     
     setupUI()
-    
+
    setupEvent()
   }
   
@@ -51,6 +55,15 @@ class BusinessViewController: BaseViewController {
         self.containerView.amountTextfield.textColor = .darkTwo
       }
     })
+    
+    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](notification) in
+      guard let `self` = self else { return }
+    
+      self.containerView.amountTextfield.placeholder = R.string.localizable.withdraw_amount.key.localized()
+      self.containerView.priceTextfield.placeholder = R.string.localizable.orderbook_price.key.localized()
+      self.containerView.amountTextfield.setPlaceHolderTextColor(UIColor.steel50)
+      self.containerView.priceTextfield.setPlaceHolderTextColor(UIColor.steel50)
+    }
   }
   
   func refreshView() {
@@ -96,7 +109,7 @@ class BusinessViewController: BaseViewController {
       }
     }
     else {
-      self.containerView.button.locali = R.string.localizable.login.key.localized()
+      self.containerView.button.locali = R.string.localizable.business_login_title.key.localized()
     }
   }
   
@@ -107,9 +120,9 @@ class BusinessViewController: BaseViewController {
     let openedOrderDetailView = StyleContentView(frame: .zero)
     let ensure_title = self.type == .buy ? R.string.localizable.openedorder_buy_ensure.key.localized() : R.string.localizable.openedorder_sell_ensure.key.localized()
     
-    ShowManager.shared.setUp(title: ensure_title, contentView: openedOrderDetailView, animationType: .up_down)
-    ShowManager.shared.showAnimationInView(self.view)
-    ShowManager.shared.delegate = self
+    ShowToastManager.shared.setUp(title: ensure_title, contentView: openedOrderDetailView, animationType: .up_down)
+    ShowToastManager.shared.showAnimationInView(self.view)
+    ShowToastManager.shared.delegate = self
     
     let prirce = price.string(digits: base_info.precision) + " " + base_info.symbol.filterJade
     let amount = cur_amount.string(digits: quote_info.precision)  + " " + quote_info.symbol.filterJade
@@ -145,7 +158,7 @@ class BusinessViewController: BaseViewController {
       
       self.checkBalance()
       guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0, text.components(separatedBy: ".").count <= 2 && text != "." else {
-        self.containerView.value.text = "≈¥"
+        self.containerView.value.text = "≈¥0.00"
         return
       }
 
@@ -294,7 +307,7 @@ extension BusinessViewController : TradePair {
   }
   
   func refresh() {
-    refreshView()
+//    refreshView()
   }
 }
 
@@ -318,12 +331,12 @@ extension BusinessViewController {
     
     guard checkBalance() else { return }
     
-    if UserManager.shared.isLocked {
-      showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
-    }
-    else {
+//    if UserManager.shared.isLocked {
+//      showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
+//    }
+//    else {
       self.showOpenedOrderInfo()
-    }
+//    }
   }
   
   @objc func adjustPrice(_ data:[String : Bool]) {
@@ -347,10 +360,16 @@ extension BusinessViewController {
   }
 
   override func returnEnsureAction() {
-    self.coordinator?.parentStartLoading(self.parent)
-    ShowManager.shared.hide()
-
-    postOrder()
+//    self.coordinator?.parentStartLoading(self.parent)
+    ShowToastManager.shared.hide()
+    if UserManager.shared.isLocked {
+      SwifterSwift.delay(milliseconds: 100) {
+        self.showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
+      }
+    }else{
+      self.coordinator?.parentStartLoading(self.parent)
+      postOrder()
+    }
   }
 
   override func passwordDetecting() {
@@ -358,16 +377,19 @@ extension BusinessViewController {
   }
   
   override func passwordPassed(_ passed:Bool) {
-    self.coordinator?.parentEndLoading(self.parent)
 
-    guard let trade = self.parent?.parent as? TradeViewController, (trade.selectedIndex == 0 && self.type == .buy) ||  (trade.selectedIndex == 1 && self.type == .sell), self.isVisible else {
-      return
-    }
+//    guard let trade = self.parent?.parent as? TradeViewController, (trade.selectedIndex == 0 && self.type == .buy) ||  (trade.selectedIndex == 1 && self.type == .sell), self.isVisible else {
+//      return
+//    }
     
     if passed {
-      self.showOpenedOrderInfo()
+      
+//      self.coordinator?.parentStartLoading(self.parent)
+      postOrder()
+//      self.showOpenedOrderInfo()
     }
     else {
+      self.coordinator?.parentEndLoading(self.parent)
       self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
     }
     

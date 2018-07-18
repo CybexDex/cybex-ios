@@ -25,6 +25,13 @@ class OrderBookContentView: UIView {
   
   fileprivate func setup() {
     
+    if UIScreen.main.bounds.width == 320 {
+      self.buyPrice.font = UIFont.systemFont(ofSize: 10)
+      self.buyVolume.font = UIFont.systemFont(ofSize: 10)
+      self.sellPrice.font = UIFont.systemFont(ofSize: 10)
+      self.sellVolume.font = UIFont.systemFont(ofSize: 10)
+    }
+    
     self.buyPrice.locali =  R.string.localizable.orderbook_buy_price.key.localized()
     self.buyVolume.locali = R.string.localizable.orderbook_volume.key.localized()
     self.sellPrice.locali = R.string.localizable.orderbook_sell_price.key.localized()

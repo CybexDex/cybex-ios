@@ -181,29 +181,29 @@ class BaseViewController: UIViewController {
 
 extension UIViewController : ShowManagerDelegate {
   func showPasswordBox(_ title:String = R.string.localizable.withdraw_unlock_wallet.key.localized()){
-    ShowManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big)
-    ShowManager.shared.delegate = self
-    ShowManager.shared.showAnimationInView(self.view)
+    ShowToastManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big)
+    ShowToastManager.shared.delegate = self
+    ShowToastManager.shared.showAnimationInView(self.view)
   }
   
   func showToastBox(_ success:Bool, message:String) {
-    ShowManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: .small_big, showType: .alert_image)
-    ShowManager.shared.showAnimationInView(self.view)
-    ShowManager.shared.hide(2.0)
+    ShowToastManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: .small_big, showType: .alert_image)
+    ShowToastManager.shared.showAnimationInView(self.view)
+    ShowToastManager.shared.hide(2.0)
   }
   
   func showTopToastBox(_ success:Bool, message:String) {
-    ShowManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: ShowManager.ShowAnimationType.up_down, showType: ShowManager.ShowManagerType.sheet_image)
-    ShowManager.shared.showAnimationInView(self.view)
-    ShowManager.shared.hide(0.8)
+    ShowToastManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: ShowToastManager.ShowAnimationType.up_down, showType: ShowToastManager.ShowManagerType.sheet_image)
+    ShowToastManager.shared.showAnimationInView(self.view)
+    ShowToastManager.shared.hide(2.0)
   }
   
   func showConfirm(_ title:String, attributes:[NSAttributedString]?) {
     let subView = StyleContentView(frame: .zero)
     subView.data = attributes
-    ShowManager.shared.setUp(title: title, contentView: subView, animationType: .small_big)
-    ShowManager.shared.showAnimationInView(self.view)
-    ShowManager.shared.delegate = self
+    ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .small_big)
+    ShowToastManager.shared.showAnimationInView(self.view)
+    ShowToastManager.shared.delegate = self
   }
   
   func returnEnsureAction() {
@@ -219,7 +219,7 @@ extension UIViewController : ShowManagerDelegate {
   }
 
   func returnUserPassword(_ sender : String){
-    ShowManager.shared.hide()
+    ShowToastManager.shared.hide()
     passwordDetecting()
     
     if let name = UserManager.shared.name.value {

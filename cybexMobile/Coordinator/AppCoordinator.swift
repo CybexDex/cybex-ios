@@ -20,6 +20,7 @@ protocol AppStateManagerProtocol {
     _ subscriber: S, transform: ((Subscription<AppState>) -> Subscription<SelectedState>)?
   ) where S.StoreSubscriberStateType == SelectedState
   
+  func fetchData(_ params:AssetPairQueryParams, sub:Bool,callback:@escaping ()->())
   func fetchData(_ params:AssetPairQueryParams, sub:Bool)
   func fetchEthToRmbPrice()
 }
@@ -29,6 +30,12 @@ class AppCoordinator {
   
   var timer:Repeater?
   
+  var fetchPariTimer:Repeater?
+  
+  var firstFetchPairsCount = 0
+  var secondFetchPairsCount = 0
+  var thirdFetchPairsCount = 0
+
   var store = Store<AppState> (
     reducer: AppReducer,
     state: nil,
@@ -131,9 +138,8 @@ class AppCoordinator {
     SwifterSwift.delay(milliseconds: 100) {
       self.rootVC.present(nav, animated: true, completion: nil)
     }
-
-  
   }
+  
   
 }
 

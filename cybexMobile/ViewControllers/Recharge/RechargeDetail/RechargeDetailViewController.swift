@@ -17,201 +17,147 @@ import SwifterSwift
 
 class RechargeDetailViewController: BaseViewController {
   
-  @IBOutlet weak var avaliableView: RechargeItemView!
-  @IBOutlet weak var addressView: RechargeItemView!
-  @IBOutlet weak var amountView: RechargeItemView!
   
-  @IBOutlet weak var gateAwayFee: UILabel!
-  @IBOutlet weak var insideFee: UILabel!
-  
-  @IBOutlet weak var finalAmount: UILabel!
-  
-  @IBOutlet weak var errorView: UIView!
-  @IBOutlet weak var errorL: UILabel!
-  
-  @IBOutlet weak var feeView: UIView!
-  
-  @IBOutlet weak var introduceView: UIView!
-  @IBOutlet weak var withdraw: Button!
-  @IBOutlet weak var stackView: UIStackView!
-  
-  @IBOutlet weak var introduce: IntroduceView!
+  @IBOutlet weak var contentView: RechargeView!
   
   var feeAssetId : String  = AssetConfiguration.CYB
-  
   var available : Double = 0.0
-  
+  var requireAmount : String = ""
   var isWithdraw : Bool = false
-  var isTrueAddress : Bool = false{
+  var isTrueAddress : Bool = false {
     didSet{
-      if isTrueAddress != oldValue{
+      if isTrueAddress != oldValue {
         self.changeWithdrawState()
       }
     }
   }
-  var isAvalibaleAmount : Bool = false{
+  var isAvalibaleAmount : Bool = false {
     didSet{
-      if isAvalibaleAmount != oldValue{
+      if isAvalibaleAmount != oldValue {
         self.changeWithdrawState()
       }
     }
   }
-  var trade : Trade?{
+  var trade : Trade? {
     didSet{
-      if let balances = UserManager.shared.balances.value{
-        for balance in balances{
-          if balance.asset_type == trade?.id{
-            self.balance = balance
-          }
-        }
+      if let trade = self.trade {
+        self.balance = getBalanceWithAssetId(trade.id)
+        self.precision = app_data.assetInfo[trade.id]?.precision
       }
     }
   }
-  var balance : Balance?{
+  var balance : Balance? {
     didSet{
-      if let balance = balance{
+      if let balance = balance {
         self.available = getRealAmountDouble(balance.asset_type, amount: balance.balance)
       }
     }
   }
   var coordinator: (RechargeDetailCoordinatorProtocol & RechargeDetailStateManagerProtocol)?
-  
+  var precision : Int?
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    self.title = (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)! + R.string.localizable.recharge_title.key.localized()
+    if let trade = self.trade, let trade_Info = app_data.assetInfo[trade.id]{
+      self.title = trade_Info.symbol.filterJade + R.string.localizable.recharge_title.key.localized()
+      if trade_Info.symbol.filterJade == "EOS"{
+        self.contentView.addressView.name = R.string.localizable.eos_withdraw_account.key.localized()
+        self.contentView.addressView.textplaceholder = R.string.localizable.eos_withdraw_account_placehold.key.localized()
+      }
+      self.startLoading()
+      self.coordinator?.fetchWithDrawInfoData(trade_Info.symbol.filterJade)
+    }
     setupUI()
-    checkState()
     setupEvent()
-    self.coordinator?.fetchWithDrawInfoData((app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)!)
   }
   
-  func setupUI(){
-    if let name = app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade{
-      self.coordinator?.fetchWithDrawMessage(callback: { (message) in
-        
-        self.introduce.locail = message.replacingOccurrences(of: "$asset", with: name)
-      })
-    }
+  func setupUI() {
+    self.contentView.trade  = self.trade
+    self.contentView.balance  = self.balance
+  }
+  
+  func setupEvent() {
     
-    amountView.content.keyboardType = .decimalPad
-    addressView.btn.isHidden        = true
-    amountView.btn.setTitle(R.string.localizable.openedAll.key.localized(), for: .normal)
-    if let balance = self.balance,let balance_info = app_data.assetInfo[balance.asset_type]{
-      avaliableView.content.text = self.available.string(digits: balance_info.precision) + " " + balance_info.symbol.filterJade
-      self.available = getRealAmount(balance.asset_type, amount: balance.balance).doubleValue
-    }else{
-      avaliableView.content.text = "--" + (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)!
-    }
-    self.withdraw.isEnable = false
-    addressView.btn.addTarget(self, action: #selector(cleanAddress), for: .touchUpInside)
-    amountView.btn.addTarget(self, action: #selector(addAllAmount), for: .touchUpInside)
+    self.contentView.amountView.btn.addTarget(self, action: #selector(addAllAmount), for: .touchUpInside)
+    self.contentView.addressView.btn.addTarget(self, action: #selector(cleanAddress), for: .touchUpInside)
+    
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-  }
-  
-  func checkState(){
-    if !self.isWithdraw{
-      self.checkIsWithdraw()
-      return
-    }
-    if UserManager.shared.isLocked{
-      showPasswordBox()
-      return
-    }
-    if !UserManager.shared.isWithDraw{
-      self.checkIsAuthory()
-      return
-    }
-  }
-  
-  func checkIsWithdraw(){
-    var message = ""
-    if let enMsg = self.trade?.enMsg,let cnMsg = self.trade?.cnMsg{
-      message = Localize.currentLanguage() == "en" ? enMsg : cnMsg
-    }
-    showToastBox(false, message: message)
-  }
-  
-  func checkIsAuthory(){
-    showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
-  }
-  
-  
-  func setupEvent(){
-    self.withdraw.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self](tap) in
+    
+    self.contentView.withdraw.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self](tap) in
       guard let `self` = self else{ return }
       self.withDrawAction()
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: amountView.content, queue: nil) { [weak self](notification) in
+    NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: contentView.amountView.content, queue: nil) { [weak self](notification) in
       guard let `self` = self else {return}
       
-      if let text = self.amountView.content.text,let amount = text.toDouble(),amount > 0,let balance = self.balance,let balance_info = app_data.assetInfo[balance.asset_type]{
-        
-        self.amountView.content.text = checkMaxLength(text, maxLength: balance_info.precision)
+      if let text = self.contentView.amountView.content.text,let amount = text.toDouble(),amount > 0,let balance = self.balance,let balance_info = app_data.assetInfo[balance.asset_type]{
+        if let coordinator =  self.coordinator, let value = coordinator.state.property.data.value ,let precision = value.precision{
+          self.precision = precision
+          self.contentView.amountView.content.text = checkMaxLength(text, maxLength: value.precision ?? balance_info.precision)
+        }else{
+          self.contentView.amountView.content.text = checkMaxLength(text, maxLength: balance_info.precision)
+        }
         self.checkAmountIsAvailable(amount)
       }else{
+        if let text = self.contentView.amountView.content.text {
+          self.contentView.amountView.content.text = text.substring(from: 0, length: text.count - 1)
+        }
         self.isAvalibaleAmount = false
       }
     }
     
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: addressView.content, queue: nil) { [weak self] (notification) in
+    NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: contentView.addressView.content, queue: nil) { [weak self] (notification) in
       guard let `self` = self else{return}
       
-      if let address = self.addressView.content.text , address.count > 0 {
-        self.addressView.btn.isHidden = false
+      if let address = self.contentView.addressView.content.text, address.count > 0 {
+        self.contentView.addressView.btn.isHidden = false
         let letterBegin = Guitar(pattern: "^([a-zA-Z0-9])")
         if !letterBegin.test(string: address){
           self.isTrueAddress = false
-          self.errorView.isHidden = false
-          self.errorL.locali =  R.string.localizable.withdraw_address_fault.key.localized()
+          self.contentView.errorView.isHidden = false
+          self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key.localized()
           return
         }
-        if let balance = self.balance{
-          if let assetName = app_data.assetInfo[balance.asset_type]?.symbol.filterJade{
-            self.coordinator?.verifyAddress(assetName, address: address, callback: { (success) in
-              if success{
-                self.isTrueAddress      = true
-                self.errorView.isHidden = true
-                if let amount = self.amountView.content.text,amount.count != 0,let amountDouble = amount.toDouble() {
-                  self.checkAmountIsAvailable(amountDouble)
-                }
-              }else{
-                self.isTrueAddress = false
-                self.errorView.isHidden = false
-                self.errorL.locali =  R.string.localizable.withdraw_address_fault.key.localized()
+        if let balance = self.balance ,let balance_info = app_data.assetInfo[balance.asset_type]{
+          let assetName = balance_info.symbol.filterJade
+          self.coordinator?.verifyAddress(assetName, address: address, callback: { (success) in
+            if success{
+              self.isTrueAddress = true
+              self.contentView.errorView.isHidden = true
+              if let amount = self.contentView.amountView.content.text,amount.count != 0,let amountDouble = amount.toDouble() {
+                self.checkAmountIsAvailable(amountDouble)
               }
-            })
-          }
+            }else{
+              self.isTrueAddress = false
+              self.contentView.errorView.isHidden = false
+              self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key.localized()
+            }
+          })
         }
       }else{
-        self.addressView.btn.isHidden = true
+        self.contentView.addressView.btn.isHidden = true
         self.isTrueAddress = false
       }
     }
   }
   
-  func checkAmountIsAvailable(_ amount:Double){
-    if let balance = self.balance, let data = self.coordinator?.state.property.data.value{
-      let avaliable = getRealAmount(balance.asset_type, amount: balance.balance).doubleValue
+  func checkAmountIsAvailable(_ amount:Double) {
+    if let data = self.coordinator?.state.property.data.value {
+      self.isAvalibaleAmount  = false
+      self.contentView.errorView.isHidden = false
+      self.contentView.withdraw.isEnable = false
       if amount < data.minValue{
-        self.isAvalibaleAmount  = false
-        self.errorView.isHidden = false
-        self.withdraw.isEnable = false
-        self.errorL.locali      =  R.string.localizable.withdraw_min_value.key.localized()
-      }else if amount > avaliable || avaliable < data.fee{
-        self.isAvalibaleAmount  = false
-        self.errorView.isHidden = false
-        self.withdraw.isEnable = false
-        self.errorL.locali =  R.string.localizable.withdraw_nomore.key.localized()
+        self.contentView.errorL.locali = R.string.localizable.withdraw_min_value.key.localized()
+      }else if amount > self.available || self.available < data.fee {
+        self.contentView.errorL.locali =  R.string.localizable.withdraw_nomore.key.localized()
       }else{
-        self.isAvalibaleAmount  = true
-        self.errorView.isHidden = true
+        self.isAvalibaleAmount = true
+        self.contentView.errorView.isHidden = true
         self.setFinalAmount()
-        if let addressText = self.addressView.content.text,addressText.count != 0,!self.isTrueAddress{
-          self.errorView.isHidden = false
-          self.errorL.locali =  R.string.localizable.withdraw_address_fault.key.localized()
+        if let addressText = self.contentView.addressView.content.text,addressText.count != 0,!self.isTrueAddress{
+          self.contentView.errorView.isHidden = false
+          self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key.localized()
         }
       }
     }
@@ -231,15 +177,22 @@ class RechargeDetailViewController: BaseViewController {
     }
     
     self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext: {[weak self] (withdrawInfo) in
-      guard let `self` = self else{return}
+      guard let `self` = self else { return }
+      
       self.endLoading()
-      if let data = withdrawInfo{
-        if let trade = self.trade,let trade_info = app_data.assetInfo[trade.id]{
-          self.insideFee.text = data.fee.string(digits: trade_info.precision) + " " + (app_data.assetInfo[trade.id]?.symbol.filterJade)!
+      if let data = withdrawInfo {
+        if let precision = data.precision {
+          self.precision = precision
+        }
+        if let trade = self.trade,let trade_info = app_data.assetInfo[trade.id],let precision = self.precision,let balance = self.balance{
+          self.contentView.insideFee.text = data.fee.string(digits: precision) + " " + trade_info.symbol.filterJade
+          self.contentView.avaliableView.content.text = getRealAmountDouble(balance.asset_type, amount: balance.balance).string(digits: trade_info.precision) + " " + trade_info.symbol.filterJade
         }
         self.setFinalAmount()
-        self.changeWithdrawState()
-        self.amountView.textplaceholder = R.string.localizable.recharge_min.key.localized() + String(describing: data.minValue)
+        SwifterSwift.delay(milliseconds: 300) {
+          self.changeWithdrawState()
+        }
+        self.contentView.amountView.textplaceholder = R.string.localizable.recharge_min.key.localized() + String(describing: data.minValue)
       }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
@@ -248,14 +201,17 @@ class RechargeDetailViewController: BaseViewController {
       guard let `self` = self else{ return }
       self.endLoading()
       if let data = result, data.success,let feeInfo = app_data.assetInfo[data.0.asset_id]{
-        let fee               = data.0
-        self.gateAwayFee.text = (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade
-        self.isAvalibaleAmount = true
-        if AssetConfiguration.CYB != fee.asset_id{
-          self.feeAssetId       = fee.asset_id
+        let fee = data.0
+        if let trade = self.trade ,let precision = self.precision ,feeInfo.id == trade.id{
+          self.contentView.gateAwayFee.text = (fee.amount.toDouble()?.string(digits: precision))! + " " + feeInfo.symbol.filterJade
+        }else{
+          self.contentView.gateAwayFee.text = (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade
         }
+        self.feeAssetId = AssetConfiguration.CYB != fee.asset_id ? fee.asset_id : AssetConfiguration.CYB
         self.setFinalAmount()
-        self.changeWithdrawState()
+        SwifterSwift.delay(milliseconds: 300, completion: {
+          self.changeWithdrawState()
+        })
       }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
@@ -271,93 +227,90 @@ class RechargeDetailViewController: BaseViewController {
   }
   
   func setFinalAmount(){
-    if let text = self.amountView.content.text,let amount = Decimal(string: text){
-      var finalAmount : Decimal = amount
-      if let gateway_fee = self.coordinator?.state.property.gatewayFee.value?.0{
-        if self.feeAssetId != AssetConfiguration.CYB{
-          if let gatewayFee = Decimal(string:gateway_fee.amount){
-            if Decimal(self.available) < gatewayFee + amount{
-              finalAmount = finalAmount - gatewayFee
-            }
-          }
-        }
-      }
+    if let text = self.contentView.amountView.content.text,let amount = Decimal(string: text){
       
-      var insideFee :Decimal = 0
-      if let inside_fee = self.coordinator?.state.property.data.value{
-        insideFee = Decimal(inside_fee.fee)
-        finalAmount = finalAmount - insideFee
-      }
-      if finalAmount.doubleValue > 0,let balance = self.balance, let balance_info = app_data.assetInfo[balance.asset_type]{
-        self.finalAmount.text = finalAmount.doubleValue.string(digits: balance_info.precision) + " " + balance_info.symbol.filterJade
+      let (finalAmount,requireAmount) = (self.coordinator?.getFinalAmount(fee_id: self.feeAssetId, amount: amount, available: self.available))!
+      self.requireAmount = requireAmount
+      if finalAmount.doubleValue > 0,let balance = self.balance, let balance_info = app_data.assetInfo[balance.asset_type],let precision = self.precision{
+        self.contentView.finalAmount.text = finalAmount.doubleValue.string(digits: precision) + " " + balance_info.symbol.filterJade
       }
     }
   }
 }
 
 extension RechargeDetailViewController{
-  func changeWithdrawState(){
-    if  self.trade?.enable == false {
+  /*
+   1 所有的状态判断都在这个方法
+   2 显示不同的状态提示框
+   3 币种可提现  解锁钱包  权限  输入额度  地址
+  */
+  func changeWithdrawState() {
+    if self.isWithdraw == false {
+      if let trade = self.trade {
+        self.showToastBox(false, message: Localize.currentLanguage() == "en" ? trade.enMsg : trade.cnMsg)
+      }
       return
     }
-    if UserManager.shared.isLocked{
+    if UserManager.shared.isLocked {
       if self.isLoading(){
         return
       }
-      if ShowManager.shared.showView != nil{
+      if ShowToastManager.shared.showView != nil {
         return
       }
       showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
-    }else{
-      if UserManager.shared.isWithDraw, self.isWithdraw, self.isTrueAddress, self.isAvalibaleAmount{
+      return
+    }
+    if !UserManager.shared.isWithDraw{
+      showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
+      return
+    }else {
+      if self.isTrueAddress, self.isAvalibaleAmount{
         if let _ = self.coordinator?.state.property.gatewayFee.value,let _ = self.coordinator?.state.property.data.value{
-          self.withdraw.isEnable = true
+          self.contentView.withdraw.isEnable = true
         }else{
-          if let trade = self.trade,let amount = self.amountView.content.text,let address = self.addressView.content.text{
+          if let trade = self.trade,let amount = self.contentView.amountView.content.text,let address = self.contentView.addressView.content.text{
             self.startLoading()
             self.coordinator?.getGatewayFee(trade.id, amount: amount, address: address)
           }
         }
       }else{
-        self.withdraw.isEnable = false
+        self.contentView.withdraw.isEnable = false
       }
     }
   }
   
   @objc func cleanAddress() {
-    self.addressView.content.text = ""
+    self.contentView.addressView.content.text = ""
     self.isTrueAddress = false
+
   }
   
   @objc func addAllAmount(){
-    if let balance = self.balance{
-      self.amountView.content.text = getRealAmount(balance.asset_type, amount: balance.balance).stringValue
+    if let balance = self.balance,let precision = self.precision{
+      self.contentView.amountView.content.text = getRealAmount(balance.asset_type, amount: balance.balance).doubleValue.string(digits: precision)
       self.checkAmountIsAvailable(getRealAmount(balance.asset_type, amount: balance.balance).doubleValue)
       self.setFinalAmount()
     }
   }
   
   @objc func keyboardWillShow(){
-    if self.addressView.content.isFirstResponder || self.amountView.content.isFirstResponder{
-      self.feeView.isHidden       = true
-      self.introduceView.isHidden = true
-      self.stackView.layoutIfNeeded()
+    if self.contentView.addressView.content.isFirstResponder || self.contentView.amountView.content.isFirstResponder{
+      self.contentView.feeView.isHidden       = true
+      self.contentView.introduceView.isHidden = true
       self.view.layoutIfNeeded()
     }
   }
   
   @objc func keyboardWillHidden(){
-    self.feeView.isHidden       = false
-    self.introduceView.isHidden = false
-    self.stackView.layoutIfNeeded()
+    self.contentView.feeView.isHidden       = false
+    self.contentView.introduceView.isHidden = false
     self.view.layoutIfNeeded()
-    
   }
   
   func withDrawAction(){
-    if self.withdraw.isEnable,let addressText = self.addressView.content.text,let amountText = self.amountView.content.text,let insideText = self.insideFee.text,let gatewayFeeText = self.gateAwayFee.text,let finalAmountText = self.finalAmount.text{
-      
-      let data = getWithdrawDetailInfo(addressInfo: addressText, amountInfo: amountText + " " + (app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade)!, withdrawFeeInfo: insideText, gatewayFeeInfo: gatewayFeeText, receiveAmountInfo: finalAmountText)
+    if self.contentView.withdraw.isEnable,let trade = self.trade,let trade_info = app_data.assetInfo[trade.id]{
+      let data = getWithdrawDetailInfo(addressInfo: self.contentView.addressView.content.text!, amountInfo: self.contentView.amountView.content.text! + " " + trade_info.symbol.filterJade, withdrawFeeInfo: self.contentView.insideFee.text!, gatewayFeeInfo: self.contentView.gateAwayFee.text!, receiveAmountInfo: self.contentView.finalAmount.text!)
       if self.isVisible{
         showConfirm(R.string.localizable.withdraw_ensure_title.key.localized(), attributes: data)
       }
@@ -371,11 +324,8 @@ extension RechargeDetailViewController{
   override func passwordPassed(_ passed: Bool) {
     endLoading()
     if passed {
-      ShowManager.shared.hide()
+      ShowToastManager.shared.hide()
       self.changeWithdrawState()
-      if !UserManager.shared.isWithDraw{
-        self.checkIsAuthory()
-      }
     }else{
       if self.isVisible{
         self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
@@ -387,25 +337,18 @@ extension RechargeDetailViewController{
 extension RechargeDetailViewController {
   // 提现操作
   override func returnEnsureAction(){
-    if let gatewayText = self.gateAwayFee.text,let first_text = gatewayText.components(separatedBy: " ").first,let gateway = Decimal(string:first_text),let amountString = self.amountView.content.text,let amount = Decimal(string:amountString),let address = self.addressView.content.text{
-      startLoading()
-      let allAmount = Decimal(self.available)
-      var requestAmount : String = ""
-      
-      if allAmount < gateway + amount{
-        if self.feeAssetId != AssetConfiguration.CYB{
-          requestAmount = (amount - gateway).stringValue
-        }else{
-          requestAmount = amount.stringValue
-        }
-      }else{
-        requestAmount = amount.stringValue
+    if let address = self.contentView.addressView.content.text{
+      var gateway : Decimal = 0
+      if let gatewayFee = self.coordinator?.state.property.gatewayFee.value{
+        gateway = Decimal(string:gatewayFee.0.amount)!
       }
-      self.coordinator?.getObjects(assetId: (self.trade?.id)!,amount: requestAmount,address: address,fee_id: self.feeAssetId,fee_amount: first_text,callback: {[weak self] (data) in
+      startLoading()
+  
+      self.coordinator?.getObjects(assetId: (self.trade?.id)!,amount: self.requireAmount,address: address,fee_id: self.feeAssetId,fee_amount: gateway.stringValue,callback: {[weak self] (data) in
         guard let `self` = self else { return }
         self.endLoading()
         main {
-          ShowManager.shared.hide()
+          ShowToastManager.shared.hide()
           if self.isVisible{
             if String(describing: data) == "<null>"{
               self.showToastBox(true, message: R.string.localizable.recharge_withdraw_success.key.localized())

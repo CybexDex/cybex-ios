@@ -43,7 +43,11 @@ struct Trade{
   var enable : Bool = true
   var enMsg : String = ""
   var cnMsg : String = ""
+  var enInfo : String = ""
+  var cnInfo : String = ""
 }
+
+
 
 struct TradeMsg{
   var enMsg : String = ""

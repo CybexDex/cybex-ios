@@ -22,39 +22,22 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM6-OY-Cvf" customClass="MyHistoryCellView" customModule="cybexMobile" customModuleProvider="target">
                         <rect key="frame" x="13" y="0.0" width="294" height="83"/>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4JI-XM-vgS">
-                        <rect key="frame" x="13" y="83" width="294" height="1"/>
-                        <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="2pX-s5-IPe"/>
-                        </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="fM6-OY-Cvf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="0IL-2I-w3a"/>
-                    <constraint firstItem="4JI-XM-vgS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="0VO-kx-Qp9"/>
-                    <constraint firstAttribute="trailing" secondItem="4JI-XM-vgS" secondAttribute="trailing" constant="13" id="7Ux-6g-jKw"/>
                     <constraint firstItem="fM6-OY-Cvf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ILk-WN-O6n"/>
                     <constraint firstAttribute="trailing" secondItem="fM6-OY-Cvf" secondAttribute="trailing" constant="13" id="R8M-iV-e9Y"/>
-                    <constraint firstAttribute="bottom" secondItem="4JI-XM-vgS" secondAttribute="bottom" id="rVX-Is-4zy"/>
-                    <constraint firstItem="4JI-XM-vgS" firstAttribute="top" secondItem="fM6-OY-Cvf" secondAttribute="bottom" id="sO8-3g-wa2"/>
+                    <constraint firstAttribute="bottom" secondItem="fM6-OY-Cvf" secondAttribute="bottom" id="gqf-ie-6UZ"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                    <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                    <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>

@@ -31,10 +31,13 @@ class OrderBookViewController: BaseViewController {
       guard let pair = pair else { return }
       if self.tradeView != nil {
         self.coordinator?.resetData(pair)
-
+        
         showMarketPrice()
       }
       self.coordinator?.fetchData(pair)
+      if self.tradeView != nil || self.contentView != nil {
+        setTopTitle()
+      }
     }
   }
   
@@ -54,14 +57,27 @@ class OrderBookViewController: BaseViewController {
       tradeView.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
       setupEvent()
     }
+    setTopTitle()
   }
+  
+  func setTopTitle(){
+    guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base],let quote_info = app_data.assetInfo[pair.quote] else { return }
+    if VC_TYPE == orderbook_type.tradeView.rawValue{
+      self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
+      self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
+    }else{
+      self.contentView.buyPrice.locali =  R.string.localizable.orderbook_buy_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
+      self.contentView.buyVolume.locali = R.string.localizable.orderbook_volume.key.localized() + "(" + quote_info.symbol.filterJade + ")"
+      self.contentView.sellPrice.locali = R.string.localizable.orderbook_sell_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
+      self.contentView.sellVolume.locali = R.string.localizable.orderbook_volume.key.localized() + "(" + quote_info.symbol.filterJade + ")"
+    }
+  }
+  
   func setupEvent(){
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] notification in
       guard let `self` = self else { return }
-      guard let pair = self.pair, let quote_info = app_data.assetInfo[pair.quote] else { return }
+      self.setTopTitle()
       
-      self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized()
-      self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
     })
   }
   deinit{
@@ -88,27 +104,7 @@ class OrderBookViewController: BaseViewController {
   
   override func configureObserveState() {
     commonObserveState()
-    
-    app_data.data.asObservable()
-      .skip(1)
-      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
-      .distinctUntilChanged()
-      .throttle(3, latest: true, scheduler: MainScheduler.instance)
-      .subscribe(onNext: { (s) in
-        if app_data.data.value.count == 0 {
-          return
-        }
 
-        guard self.isVisible else { return }
-
-        if let pair = self.pair {
-          self.coordinator?.fetchData(pair)
-        }
-
-        if self.VC_TYPE != 1{
-          self.showMarketPrice()
-        }
-      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
     self.coordinator!.state.property.data.asObservable().skip(1).distinctUntilChanged()
       .subscribe(onNext: {[weak self] (s) in
@@ -119,8 +115,11 @@ class OrderBookViewController: BaseViewController {
           self.contentView.tableView.isHidden = false
           self.coordinator?.updateMarketListHeight(500)
         }else{
-          self.tradeView.data = s
+          if !(s.asks.count == 0 && s.bids.count == 0){
+            self.tradeView.data = s
+          }
         }
+        
         
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
@@ -135,12 +134,12 @@ class OrderBookViewController: BaseViewController {
       let data = markets[selectedIndex]
       
       let matrix = getCachedBucket(data)
-
+      
       self.tradeView.amount.text = matrix.price
       self.tradeView.amount.textColor = matrix.incre.color()
       
       if matrix.price == "" {
-         self.tradeView.rmbPrice.text  = "≈¥"
+        self.tradeView.rmbPrice.text  = "≈¥"
         return
       }
       let (eth,cyb) = changeToETHAndCYB(pair.quote)
@@ -180,14 +179,13 @@ extension OrderBookViewController : TradePair{
   }
   
   func refresh() {
-    guard let pair = pair else { return }
-    if self.tradeView != nil {
-//      self.coordinator?.resetData(pair)
-      
-      showMarketPrice()
-    }
-    self.coordinator?.fetchData(pair)
-
+//    guard let pair = pair else { return }
+//    if self.tradeView != nil {
+//      //      self.coordinator?.resetData(pair)
+//
+//      showMarketPrice()
+//    }
+//    self.coordinator?.fetchData(pair)
   }
 }
 

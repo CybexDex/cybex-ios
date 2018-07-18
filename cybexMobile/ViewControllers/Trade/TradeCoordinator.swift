@@ -115,7 +115,7 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
       segueinfo.destination.coordinator = ExchangeCoordinator(rootVC: self.rootVC)
       segueinfo.destination.type = .buy
     }
-    
+
     if let segueinfo = R.segue.tradeViewController.exchangeViewControllerSell(segue: segue) {
       segueinfo.destination.coordinator = ExchangeCoordinator(rootVC: self.rootVC)
       segueinfo.destination.type = .sell

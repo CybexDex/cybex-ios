@@ -44,21 +44,22 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icArrowForward24Px" translatesAutoresizingMaskIntoConstraints="NO" id="3qT-6y-hMu">
-                    <rect key="frame" x="351" y="22" width="24" height="24"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icArrowForward16Px" translatesAutoresizingMaskIntoConstraints="NO" id="3qT-6y-hMu">
+                    <rect key="frame" x="359" y="26" width="16" height="16"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="24" id="QYO-nn-Hkk"/>
-                        <constraint firstAttribute="height" constant="24" id="y7e-Sb-WAU"/>
+                        <constraint firstAttribute="width" constant="16" id="QYO-nn-Hkk"/>
+                        <constraint firstAttribute="height" constant="16" id="y7e-Sb-WAU"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0x-7j-rFn">
-                    <rect key="frame" x="326" y="24" width="15" height="19.5"/>
+                    <rect key="frame" x="334" y="24" width="15" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iKJ-8A-O9b">
                     <rect key="frame" x="0.0" y="67" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="zVH-Rj-OJZ"/>
                     </constraints>
@@ -91,6 +92,6 @@
         </view>
     </objects>
     <resources>
-        <image name="icArrowForward24Px" width="24" height="24"/>
+        <image name="icArrowForward16Px" width="16" height="16"/>
     </resources>
 </document>

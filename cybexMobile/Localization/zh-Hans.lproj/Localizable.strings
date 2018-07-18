@@ -142,6 +142,10 @@
 "withdraw_available" = "可用余额";
 "withdraw_address"   = "提现地址";
 "withdraw_address_placehold"   = "输入或长按粘贴地址";
+
+"eos_withdraw_account" = "提现账户";
+"eos_withdraw_account_placehold" = "输入或长按粘贴账户";
+
 "withdraw_amount" = "数量";
 "withdraw_amount_all" = "全部";
 "withdraw_fee"        = "提现手续费";
@@ -185,7 +189,7 @@
 
 "recharge_invalid_password" = "解锁失败，请重新输入密码";
 "recharge_withdraw_success" = "提现申请成功";
-"recharge_withdraw_failed" = "提现申请成功";
+"recharge_withdraw_failed" = "提现申请失败";
 
 "orderbook_price"     = "价格";
 "orderbook_amount"    = "数量";
@@ -223,6 +227,19 @@
 "withdraw_fee_fail"      = "获取手续费失败";
 
 "openedorder_nodata"     = "暂无委单";
-"myhistory_nodata"       = "暂无交易历史";
+"myhistory_nodata"       = "暂无交易记录";
+
+
+"eos_account_title" = "EOS充值帐户";
+"eos_copy_account" = "复制账户";
+"eos_code"  = "备注验证码";
+"eos_code_tip" = "(请务必在转账备注中填写并核对正确)";
+"eos_copy_code" = "复制验证码";
+"eos_reset_code" = "重新生成";
+
+"business_login_title" = "请登录";
+
+"update_version" = "版本更新";
+
 
 

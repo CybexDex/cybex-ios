@@ -35,7 +35,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         self.businessTitleView?.selectedIndex = selectedIndex
         self.businessTitleView?.leftView.changeToHighStatus(1 + index, save:true)
       }
-
     }
   }
   
@@ -72,7 +71,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     if self.VC_TYPE == view_type.homeContent.rawValue{
       contentView = HomeContentView()
       self.view.addSubview(contentView!)
-      
       contentView?.edgesToDevice(vc:self, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
       
     }else{
@@ -112,6 +110,9 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         if app_data.data.value.count == 0 {
           return
         }
+        if app_coodinator.fetchPariTimer == nil || !(app_coodinator.fetchPariTimer!.state.isRunning){
+          AppConfiguration.shared.appCoordinator.repeatFetchPairInfo()
+        }
         self.performSelector(onMainThread: #selector(self.refreshTableView), with: nil, waitUntilDone: false)// non block tracking mode
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
@@ -124,7 +125,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         self.contentView?.tableView.isHidden = false
       }else{
         self.businessTitleView?.tableView.reloadData()
-        self.businessTitleView?.tableView.isHidden = false
+//        self.businessTitleView?.tableView.isHidden = false
       }
     }
   }
@@ -146,6 +147,8 @@ extension HomeViewController {
     }
   }
 }
+
+
 
 
 

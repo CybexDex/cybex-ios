@@ -21,13 +21,25 @@ protocol Views {
   @objc func returnEnsureAction()
 }
 
-class ShowManager {
+class ShowToastManager {
   
   static let durationTime : TimeInterval = 0.5
-  static let shared = ShowManager()
+  static let shared = ShowToastManager()
   
   var delegate:ShowManagerDelegate?
-  var a : Constraint!
+
+  var ensureClickBlock : CommonCallback!
+  
+  var isShowSingleBtn : Bool? {
+    didSet{
+      if isShowSingleBtn == true,let textView = self.showView as? CybexTextView{
+        textView.cancle.isHidden  = true
+        textView.ensureRight.constant = (textView.width - textView.ensure.width) * 0.5
+      }
+    }
+  }
+  
+  var showViewTop : Constraint!
   enum ShowManagerType : String{
     case alert
     case alert_image
@@ -61,7 +73,7 @@ class ShowManager {
       if self.showType == ShowManagerType.sheet_image{
         self.shadowView?.backgroundColor = UIColor.black.withAlphaComponent(0.0)
       }else{
-        self.shadowView?.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black.withAlphaComponent(0.5) : UIColor.black.withAlphaComponent(0.0)
+        self.shadowView?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
       }
       superView?.addSubview(self.shadowView!)
     }
@@ -82,12 +94,7 @@ class ShowManager {
   
   private var animationShow : ShowAnimationType = .fadeIn_Out
   
-  private  var showType : ShowManagerType? {
-    didSet{
-      
-    }
-  }
-  
+  private  var showType : ShowManagerType?
   
   private init(){
     
@@ -105,18 +112,18 @@ class ShowManager {
       showView?.leftToSuperview(nil, offset: leading, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
       showView?.rightToSuperview(nil, offset: trailing, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
       showView?.centerXToSuperview(nil, offset: 0, priority: .required, isActive: true, usingSafeArea: true)
-      showView?.centerYToSuperview(nil, offset: -64, priority: .required, isActive: true, usingSafeArea: true)
+      showView?.centerYToSuperview(nil, offset: -32, priority: .required, isActive: true, usingSafeArea: true)
       self.superView?.layoutIfNeeded()
       if animationShow == .fadeIn_Out{
         showView?.alpha   = 0.0
         shadowView?.alpha = 0.0
-        UIView.animate(withDuration: ShowManager.durationTime) {
+        UIView.animate(withDuration: ShowToastManager.durationTime) {
           self.showView?.alpha   = 1.0
           self.shadowView?.alpha = 0.5
         }
       }else if animationShow == .small_big{
         showView?.transform = CGAffineTransform.init(scaleX: 0.3, y: 0.3)
-        UIView.animate(withDuration: ShowManager.durationTime, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        UIView.animate(withDuration: ShowToastManager.durationTime, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
           self.showView?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
         }, completion:{ (isFinished) in
           
@@ -129,18 +136,18 @@ class ShowManager {
       showView?.rightToSuperview(nil, offset: trailing, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
       
       if showType == .sheet_image{
-        a = showView?.topToSuperview(nil, offset: top, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
+        showViewTop = showView?.topToSuperview(nil, offset: top, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
       }else{
         showView?.centerXToSuperview(nil, offset: 0,  priority: .required, isActive: true, usingSafeArea: true)
-        a = showView?.centerYToSuperview(nil, offset: top, priority: .required, isActive: true, usingSafeArea: true)
+        showViewTop = showView?.centerYToSuperview(nil, offset: top, priority: .required, isActive: true, usingSafeArea: true)
       }
       self.superView?.layoutIfNeeded()
       if showType == .sheet_image{
-        a?.constant = 20
+        showViewTop?.constant = 20
       }else{
-        a?.constant = -64
+        showViewTop?.constant = -32
       }
-      UIView.animate(withDuration: ShowManager.durationTime) {
+      UIView.animate(withDuration: ShowToastManager.durationTime) {
         self.superView?.layoutIfNeeded()
       }
     }
@@ -164,9 +171,10 @@ class ShowManager {
         self.showView = nil
         self.shadowView = nil
         self.data = nil
+        self.isShowSingleBtn = nil
       }
     }else if animationShow == .fadeIn_Out {
-      UIView.animate(withDuration: ShowManager.durationTime, delay: time, options: .curveLinear, animations: {
+      UIView.animate(withDuration: ShowToastManager.durationTime, delay: time, options: .curveLinear, animations: {
         self.showView?.alpha   = 0.0
         self.shadowView?.alpha = 0.0
       }) { (isFinished) in
@@ -175,10 +183,11 @@ class ShowManager {
         self.showView = nil
         self.shadowView = nil
         self.data = nil
+        self.isShowSingleBtn = nil
       }
     }else if animationShow == .up_down{
-      a.constant = showType == .sheet_image ? -200 : -800
-      UIView.animate(withDuration: ShowManager.durationTime, delay: time, options: .curveLinear, animations: {
+      showViewTop.constant = showType == .sheet_image ? -200 : -800
+      UIView.animate(withDuration: ShowToastManager.durationTime, delay: time, options: .curveLinear, animations: {
         self.superView?.layoutIfNeeded()
       }) { (isFinished) in
         self.showView?.removeFromSuperview()
@@ -186,6 +195,7 @@ class ShowManager {
         self.showView = nil
         self.shadowView = nil
         self.data = nil
+        self.isShowSingleBtn = nil
       }
     }
   }
@@ -234,6 +244,7 @@ class ShowManager {
     let sheetView = CybexActionView(frame: .zero)
     showView     = sheetView
   }
+  
   fileprivate func setupText(_ sender:(UIView&Views),title:String){
     let textView = CybexTextView(frame: .zero)
     textView.delegate = self
@@ -243,7 +254,7 @@ class ShowManager {
   }
 }
 
-extension ShowManager : CybexTextViewDelegate{
+extension ShowToastManager : CybexTextViewDelegate{
   func returnPassword(_ password:String){
     self.delegate?.returnUserPassword(password)    
   }
@@ -253,6 +264,9 @@ extension ShowManager : CybexTextViewDelegate{
   func returnEnsureAction(){
     self.hide(0)
     self.delegate?.returnEnsureAction()
+    if self.isShowSingleBtn != nil{
+      self.ensureClickBlock()
+    }
   }
 }
 

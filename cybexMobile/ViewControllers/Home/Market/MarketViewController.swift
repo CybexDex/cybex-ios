@@ -224,6 +224,7 @@ class MarketViewController: BaseViewController {
       
       var dataArray = [CBKLineModel]()
       for (_, data) in response.enumerated() {
+               
         let base_assetid = pair.base
         let quote_assetid = pair.quote
         
@@ -247,6 +248,13 @@ class MarketViewController: BaseViewController {
           low_price = (Double(data.high_quote)! / base_precision) / (Double(data.high_base)! / quote_precision)
         }
         
+        if high_price > 1.3 * (open_price + close_price) * 0.5 {
+          high_price = max(open_price, close_price)
+        }
+        
+        if low_price < 0.7 * (open_price + close_price) * 0.5 {
+          low_price = min(open_price, close_price)
+        }
         let model = CBKLineModel(date: data.open, open: open_price, close: close_price, high: high_price, low: low_price, towardsVolume: (is_base ? Double(data.quote_volume)! : Double(data.base_volume)!) / quote_precision , volume: (is_base ? Double(data.base_volume)! : Double(data.quote_volume)!) / base_precision, precision: base_info.precision)
         
         let last_idx = dataArray.count - 1

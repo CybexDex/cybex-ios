@@ -63,7 +63,13 @@ class TradeView: UIView {
     }
   }
   
-  func setup(){    
+  func setup(){
+    
+    if UIScreen.main.bounds.width == 320 {
+      self.titlePrice.font = UIFont.systemFont(ofSize: 10)
+      self.titleAmount.font = UIFont.systemFont(ofSize: 10)
+    }
+    
     for item in items {
       item.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
         guard let `self` = self else { return }

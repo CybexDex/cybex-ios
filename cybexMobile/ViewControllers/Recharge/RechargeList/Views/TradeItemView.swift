@@ -41,7 +41,7 @@ class TradeItemView: UIView {
     @IBOutlet weak var arrow: UIImageView!
     fileprivate func setup() {
         
-      self.arrow.image = ThemeManager.currentThemeIndex == 0 ? R.image.icArrowLight24Px() : R.image.icArrowDark24Px()
+//      self.arrow.image = ThemeManager.currentThemeIndex == 0 ? R.image.icArrowLight24Px() : R.image.icArrowDark24Px()
         
   }
   

@@ -11,6 +11,7 @@ import AwaitKit
 import SwiftyJSON
 import PromiseKit
 import Alamofire
+import Localize_Swift
 
 enum SimpleHttpError: Error {
   case NotExistData
@@ -84,16 +85,16 @@ extension SimpleHTTPService {
     return promise
   }
   
-  static func checkVersion() -> Promise<(update: Bool, url: String, force: Bool)> {
+  static func checkVersion() -> Promise<(update: Bool, url: String, force: Bool, content:String)> {
     var request = URLRequest(url: URL(string: AppConfiguration.SERVER_VERSION_URLString)!)
     request.timeoutInterval = 5
     request.cachePolicy = .reloadIgnoringCacheData
     
-    let (promise, seal) = Promise<(update: Bool, url: String, force: Bool)>.pending()
+    let (promise, seal) = Promise<(update: Bool, url: String, force: Bool, content:String)>.pending()
     
     Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments, completionHandler: { (response) in
       guard let value = response.result.value else {
-        seal.fulfill((false, "", false))
+        seal.fulfill((false, "", false ,""))
         return
       }
       
@@ -103,17 +104,18 @@ extension SimpleHTTPService {
       
       if let cur = Version(Bundle.main.version), let remote = Version(lastest_version) {
         if cur >= remote {
-          seal.fulfill((false, "", false))
+          seal.fulfill((false, "", false, ""))
           return
         }
         
         let force_data = json["force"]
         
-        seal.fulfill((true, json["url"].stringValue, force_data[Bundle.main.version].boolValue))
+        
+        seal.fulfill((true, json["url"].stringValue, force_data[Bundle.main.version].boolValue ,Localize.currentLanguage() == "en" ?  json["enUpdateInfo"].stringValue : json["cnUpdateInfo"].stringValue))
         return
       }
       
-      seal.fulfill((false, "", false))
+      seal.fulfill((false, "", false, ""))
     })
     
     return promise
@@ -218,7 +220,7 @@ extension SimpleHTTPService {
       }
       //  var enMsg : String = ""
       //  var cnMsg : String = ""
-      let trades = JSON(value).arrayValue.map({Trade(id:$0["id"].stringValue,enable:$0["enable"].boolValue,enMsg:$0["enMsg"].stringValue,cnMsg:$0["cnMsg"].stringValue)})
+      let trades = JSON(value).arrayValue.map({Trade(id:$0["id"].stringValue, enable:$0["enable"].boolValue, enMsg:$0["enMsg"].stringValue, cnMsg:$0["cnMsg"].stringValue, enInfo:$0["enInfo"].stringValue, cnInfo:$0["cnInfo"].stringValue)})
       seal.fulfill(trades)
     }
     return promise
@@ -234,7 +236,7 @@ extension SimpleHTTPService {
         seal.fulfill([])
         return
       }
-      let trades = JSON(value).arrayValue.map({Trade(id:$0["id"].stringValue,enable:$0["enable"].boolValue,enMsg:$0["enMsg"].stringValue,cnMsg:$0["cnMsg"].stringValue)})
+      let trades = JSON(value).arrayValue.map({Trade(id:$0["id"].stringValue, enable:$0["enable"].boolValue, enMsg:$0["enMsg"].stringValue, cnMsg:$0["cnMsg"].stringValue, enInfo:$0["enInfo"].stringValue, cnInfo:$0["cnInfo"].stringValue)})
       seal.fulfill(trades)
     }
     return promise

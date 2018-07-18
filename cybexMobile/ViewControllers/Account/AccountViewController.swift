@@ -51,7 +51,8 @@ class AccountViewController: BaseViewController {
   
   @IBOutlet weak var bgImageView: UIImageView!
   
-  
+    @IBOutlet weak var accountBottomView: AccountAssetOperationView!
+    
   @IBOutlet weak var introduceCybex: UILabel!
   
   @IBOutlet weak var balanceIntroduce: UIImageView!
@@ -80,6 +81,9 @@ class AccountViewController: BaseViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.updataStatus()
+    gatewayView.shadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20
+    portfolioView.collectionView.reloadData()
+    accountBottomView.data = nil
   }
   
   // UI的初始化设置

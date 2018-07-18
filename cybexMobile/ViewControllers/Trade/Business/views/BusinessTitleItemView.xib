@@ -61,30 +61,11 @@
                         </label>
                     </subviews>
                 </stackView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvW-wI-ziL">
-                    <rect key="frame" x="0.0" y="99" width="375" height="1"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="Acy-HQ-ezf"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="FnD-on-lhQ"/>
-                    </constraints>
-                    <viewLayoutGuide key="safeArea" id="A5c-vh-G9r"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                            <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="jRl-dG-k2z" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="7PW-jq-eSA"/>
-                <constraint firstItem="bvW-wI-ziL" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="DTV-ux-Egv"/>
                 <constraint firstItem="jRl-dG-k2z" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="V6g-bZ-Jpf"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="jRl-dG-k2z" secondAttribute="trailing" id="dSy-kk-aqO"/>
-                <constraint firstItem="bvW-wI-ziL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hhp-ta-VEZ"/>
-                <constraint firstAttribute="bottom" secondItem="bvW-wI-ziL" secondAttribute="bottom" id="kpE-2p-qyp"/>
                 <constraint firstAttribute="bottom" secondItem="jRl-dG-k2z" secondAttribute="bottom" id="xDm-BC-0po"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

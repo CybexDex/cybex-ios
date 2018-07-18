@@ -146,12 +146,12 @@ struct BucketMatrix {
     var low_price_collection:[Double] = []
     
     for bucket in self.asset {
-      let high_base = flip ? (Double(bucket.high_quote)! / base_precision) : (Double(bucket.high_base)! / base_precision)
-      let quote_base = flip ? (Double(bucket.high_base)! / quote_precision) : (Double(bucket.high_quote)! / quote_precision)
+      let high_base = flip ? (Double(bucket.low_quote)! / base_precision) : (Double(bucket.high_base)! / base_precision)
+      let quote_base = flip ? (Double(bucket.low_base)! / quote_precision) : (Double(bucket.high_quote)! / quote_precision)
       high_price_collection.append(high_base / quote_base)
       
-      let low_base = flip ? (Double(bucket.low_quote)! / base_precision) : (Double(bucket.low_base)! / base_precision)
-      let low_quote = flip ? (Double(bucket.low_base)! / quote_precision) : (Double(bucket.low_quote)! / quote_precision)
+      let low_base = flip ? (Double(bucket.high_quote)! / base_precision) : (Double(bucket.low_base)! / base_precision)
+      let low_quote = flip ? (Double(bucket.high_base)! / quote_precision) : (Double(bucket.low_quote)! / quote_precision)
       low_price_collection.append(low_base / low_quote)
 
     }

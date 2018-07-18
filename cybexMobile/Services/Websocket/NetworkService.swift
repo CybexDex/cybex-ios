@@ -296,7 +296,7 @@ extension WebsocketService {
     return false
   }
   
-  private func saveRequest<Request: JSONRPCKit.Request>(request: Request, filterRepeat:Bool = true) {
+  private func saveRequest<Request: JSONRPCKit.Request>(request: Request, filterRepeat:Bool = false) {
     self.requests_queue_concurrent.async(flags:.barrier) { [weak self] in
       guard let `self` = self else { return }
 
@@ -317,8 +317,8 @@ extension WebsocketService {
         self.requesting_queue_concurrent.async(flags:.barrier) { [weak self] in
           guard let `self` = self else { return }
 
-
-          for (_, requestingObject) in self.requesting {
+          let requestings = self.requesting
+          for (_, requestingObject) in requestings {
             if requestingObject.0 == request.digist {
               exist = true
               break
@@ -383,11 +383,7 @@ extension WebsocketService {
         }) {
           self.requests.remove(at: index)
         }
-        
       }
-      
-     
-
     }
   }
   
@@ -474,8 +470,6 @@ extension WebsocketService: WebSocketDelegate {
     } else {
       print("websocket disconnected")
     }
-    
-    
   }
   
   func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
@@ -484,22 +478,22 @@ extension WebsocketService: WebSocketDelegate {
 
       let data = JSON(parseJSON:text)
       
-//      if let error = data["error"].dictionary {
-//        print("data : \(data)")
-//        print(error)
-//      }
+      if let error = data["error"].dictionary {
+        print("data : \(data)")
+        print(error)
+      }
       
       guard let id = data["id"].int else {
-        if let method = data["method"].string, method == "notice", let params = data["params"].array, let mID = params[0].int {
-          if let ids = app_data.subscribeIds, ids.values.contains(mID) {
-            let index = ids.values.index(of: mID)!
-            let pair = ids.keys[index]
-            
-            main {
-              AppConfiguration.shared.appCoordinator.request24hMarkets([pair], sub: false)
-            }
-          }
-        }
+//        if let method = data["method"].string, method == "notice", let params = data["params"].array, let mID = params[0].int {
+//          if let ids = app_data.subscribeIds, ids.values.contains(mID) {
+//            let index = ids.values.index(of: mID)!
+//            let pair = ids.keys[index]
+//
+//            main {
+//              AppConfiguration.shared.appCoordinator.request24hMarkets([pair], sub: false)
+//            }
+//          }
+//        }
         return
       }
       
@@ -520,8 +514,10 @@ extension WebsocketService: WebSocketDelegate {
         }
         if let _ = data["error"].dictionary {
           main{
+            print("websocketDidReceiveMessage Error")
             request.response(data)
           }
+          self.requesting.removeValue(forKey: id.description)
           return
         }
         if let object = try? request.transferResponse(from: data["result"].object) {
