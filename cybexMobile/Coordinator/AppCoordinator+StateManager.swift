@@ -109,9 +109,9 @@ extension AppCoordinator {
       }
       return true
     }
-    log.warning("firstFetchPairsCount \(firstFetchPairsCount)")
-    log.warning("secondFetchPairsCount \(secondFetchPairsCount)")
-    log.warning("thirdFetchPairsCount \(thirdFetchPairsCount)")
+//    log.warning("firstFetchPairsCount \(firstFetchPairsCount)")
+//    log.warning("secondFetchPairsCount \(secondFetchPairsCount)")
+//    log.warning("thirdFetchPairsCount \(thirdFetchPairsCount)")
 
     if self.firstFetchPairsCount != 0 || self.secondFetchPairsCount != 0 || self.thirdFetchPairsCount != 0 {
       return
@@ -125,9 +125,9 @@ extension AppCoordinator {
       self.thirdFetchPairsCount = filterPairs.count - 2 * length - 1
       for index in 0...length - 1 {
         let pair = filterPairs[index]
-        log.warning("first")
+//        log.warning("first")
         AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
-          log.warning("first response")
+//          log.warning("first response")
           self.firstFetchPairsCount -= 1
         }
       }
@@ -135,23 +135,22 @@ extension AppCoordinator {
         for index in length...2*length {
 
           let pair = filterPairs[index]
-          log.warning("second")
+//          log.warning("second")
           AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
-            log.warning("second response")
+//            log.warning("second response")
 
             self.secondFetchPairsCount -= 1
           }
-          
         }
       }
       SwifterSwift.delay(milliseconds: 2000) {
         for index in 2*length+1...filterPairs.count - 1 {
 
           let pair = filterPairs[index]
-          log.warning("third")
+//          log.warning("third")
 
           AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
-            log.warning("third response")
+//            log.warning("third response")
             self.thirdFetchPairsCount -= 1
           }
         }

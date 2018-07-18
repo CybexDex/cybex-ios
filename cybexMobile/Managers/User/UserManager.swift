@@ -373,7 +373,8 @@ class UserManager {
   private init() {
     
     app_data.data.asObservable().distinctUntilChanged()
-      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
+//      .filter({$0.count = AssetConfiguration.shared.asset_ids.count})
+      .throttle(3, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { (s) in
         DispatchQueue.main.async {
           if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 {

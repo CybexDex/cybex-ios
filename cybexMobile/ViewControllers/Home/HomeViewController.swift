@@ -103,7 +103,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     
     app_data.data.asObservable()
       .skip(1)
-      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
+//      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
       .distinctUntilChanged()
       .throttle(3, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { (s) in
