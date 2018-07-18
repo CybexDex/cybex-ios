@@ -313,7 +313,7 @@ class MarketViewController: BaseViewController {
     app_data.data.asObservable()
       .skip(1)
       .distinctUntilChanged()
-      .filter({ $0.count == AssetConfiguration.shared.asset_ids.count })
+//      .filter({ $0.count == AssetConfiguration.shared.asset_ids.count })
       .throttle(5, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { [weak self] _ in
         guard let `self` = self else { return }
