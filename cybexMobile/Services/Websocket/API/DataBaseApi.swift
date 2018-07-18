@@ -82,6 +82,7 @@ struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
   var parameters: Any? {
     return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_full_accounts.rawValue, [[name], true]]
   }
+ 
   
   func transferResponse(from resultObject: Any) throws -> Any {
     let result = JSON(resultObject).arrayValue

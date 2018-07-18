@@ -10,6 +10,7 @@ import Foundation
 import ReSwift
 import AwaitKit
 import Repeat
+import SwifterSwift
 
 extension AppCoordinator: AppStateManagerProtocol {
   func subscribe<SelectedState, S: StoreSubscriber>(
@@ -17,7 +18,15 @@ extension AppCoordinator: AppStateManagerProtocol {
   ) where S.StoreSubscriberStateType == SelectedState {
     store.subscribe(subscriber, transform: transform)
   }
-
+ 
+  func fetchData(_ params: AssetPairQueryParams, sub: Bool = true,callback:@escaping ()->()) {
+    store.dispatch(creator.fetchMarket(with: sub, params: params, callback: { [weak self] (assets) in
+      guard let `self` = self else { return }
+      callback()
+      self.store.dispatch(MarketsFetched(pair: params, assets: assets))
+    }))
+  }
+  
   func fetchData(_ params: AssetPairQueryParams, sub: Bool = true) {
     store.dispatch(creator.fetchMarket(with: sub, params: params, callback: { [weak self] (assets) in
       guard let `self` = self else { return }
@@ -86,7 +95,7 @@ extension AppCoordinator: AppStateManagerProtocol {
 }
 
 extension AppCoordinator {
-  func request24hMarkets(_ pairs: [Pair], sub: Bool = true) {
+  func request24hMarkets(_ pairs: [Pair], sub: Bool = true ,totalTime:Double = 3,splits:Int = 3) {
     let now = Date()
     let curTime = now.timeIntervalSince1970
 
@@ -94,20 +103,100 @@ extension AppCoordinator {
 
     let timePassed = (-start.minute * 60 - start.second).double
     start = start.addingTimeInterval(timePassed)
-
-
-    for pair in pairs {
+    var filterPairs = pairs.filter { (pair) -> Bool in
       if let refreshTimes = app_data.pairsRefreshTimes, let oldTime = refreshTimes[pair] {
-        if curTime - oldTime < 5 {
-          continue
-        }
-
+        return curTime - oldTime >= 5
       }
-
-      AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub)
+      return true
     }
+    log.warning("firstFetchPairsCount \(firstFetchPairsCount)")
+    log.warning("secondFetchPairsCount \(secondFetchPairsCount)")
+    log.warning("thirdFetchPairsCount \(thirdFetchPairsCount)")
+
+    if self.firstFetchPairsCount != 0 || self.secondFetchPairsCount != 0 || self.thirdFetchPairsCount != 0 {
+      return
+    }
+    
+    // 筛选后的pairs
+    let length : Int = filterPairs.count / 3
+    if length > 1,!sub {
+      self.firstFetchPairsCount = length
+      self.secondFetchPairsCount = length + 1
+      self.thirdFetchPairsCount = filterPairs.count - 2 * length - 1
+      for index in 0...length - 1 {
+        let pair = filterPairs[index]
+        log.warning("first")
+        AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
+          log.warning("first response")
+          self.firstFetchPairsCount -= 1
+        }
+      }
+      SwifterSwift.delay(milliseconds: 1000) {
+        for index in length...2*length {
+
+          let pair = filterPairs[index]
+          log.warning("second")
+          AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
+            log.warning("second response")
+
+            self.secondFetchPairsCount -= 1
+          }
+          
+        }
+      }
+      SwifterSwift.delay(milliseconds: 2000) {
+        for index in 2*length+1...filterPairs.count - 1 {
+
+          let pair = filterPairs[index]
+          log.warning("third")
+
+          AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
+            log.warning("third response")
+            self.thirdFetchPairsCount -= 1
+          }
+        }
+      }
+    }else {
+      for pair in filterPairs {
+        AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub)
+      }
+    }
+    
+
+//    for pair in filterPairs {
+//      if let refreshTimes = app_data.pairsRefreshTimes, let oldTime = refreshTimes[pair] {
+//        if curTime - oldTime < 5 {
+//          continue
+//        }
+//
+//      }
+//
+//      AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub)
+//    }
 
   }
+  
+
+  
+  func repeatFetchPairInfo(){
+    
+    if self.fetchPariTimer != nil ,!(self.fetchPariTimer?.state.isRunning)!{
+      self.fetchPariTimer?.pause()
+      self.fetchPariTimer = nil
+    }
+    self.fetchPariTimer = Repeater.every(.seconds(3), { [weak self](timer) in
+      guard let `self` = self else {return}
+      let status = RealReachability.sharedInstance().currentReachabilityStatus()
+      if status == .RealStatusNotReachable || status  == .RealStatusUnknown {
+        timer.pause()
+        
+        return
+      }
+      self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false)
+    })
+  }
+
+  
 
   func requestKlineDetailData(pair: Pair, gap: candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
     let now = Date()
@@ -123,7 +212,7 @@ extension AppCoordinator {
         var count = 0
         for base in AssetConfiguration.market_base_assets {
           SimpleHTTPService.requestMarketList(base:base).done({ (pair) in
-            
+            log.error("requestMarketList base \(base)  pairs  \(pair.count)")
             let piece_pair = pair.filter({ (p) -> Bool in
               return AssetConfiguration.shared.unique_ids.contains([p.base, p.quote])
             })

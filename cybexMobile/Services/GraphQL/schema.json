@@ -1158,6 +1158,18 @@
               "deprecationReason": null
             },
             {
+              "name": "precision",
+              "description": "",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "gatewayAccount",
               "description": "",
               "args": [],

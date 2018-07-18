@@ -99,7 +99,7 @@
                             <rect key="frame" x="0.0" y="36" width="52" height="36"/>
                             <subviews>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="he9-L4-SN8">
-                                    <rect key="frame" x="0.0" y="-36" width="52" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="-29" width="52" height="0.0"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egL-zq-tVF">
                                             <rect key="frame" x="0.0" y="2" width="0.0" height="14.5"/>
@@ -206,6 +206,22 @@
                         <constraint firstAttribute="trailing" secondItem="msv-rO-6tQ" secondAttribute="trailing" id="QYe-7h-HkS"/>
                     </constraints>
                 </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Lc-or-cgh">
+                    <rect key="frame" x="0.0" y="71" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="LWp-3f-4cx"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="4DE-WQ-GhT"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                            <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="ka3-NE-qjj" firstAttribute="trailing" secondItem="iOf-Ba-GCy" secondAttribute="trailing" id="57h-Ho-f9W"/>
@@ -213,7 +229,10 @@
                 <constraint firstItem="geV-Eb-8JF" firstAttribute="leading" secondItem="iOf-Ba-GCy" secondAttribute="leading" id="9Kq-mD-9A0"/>
                 <constraint firstItem="geV-Eb-8JF" firstAttribute="top" secondItem="X6Y-12-LO6" secondAttribute="top" id="BVa-7e-IQk"/>
                 <constraint firstItem="ka3-NE-qjj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="geV-Eb-8JF" secondAttribute="trailing" constant="10" id="GWo-ma-c4h"/>
+                <constraint firstItem="2Lc-or-cgh" firstAttribute="leading" secondItem="iOf-Ba-GCy" secondAttribute="leading" id="RwD-Rd-PZB"/>
+                <constraint firstItem="2Lc-or-cgh" firstAttribute="trailing" secondItem="iOf-Ba-GCy" secondAttribute="trailing" id="TP3-Q5-VSO"/>
                 <constraint firstAttribute="bottom" secondItem="geV-Eb-8JF" secondAttribute="bottom" id="d2k-yi-637"/>
+                <constraint firstAttribute="bottom" secondItem="2Lc-or-cgh" secondAttribute="bottom" id="lS8-6i-GeU"/>
                 <constraint firstAttribute="bottom" secondItem="ka3-NE-qjj" secondAttribute="bottom" id="mcN-K8-6uZ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

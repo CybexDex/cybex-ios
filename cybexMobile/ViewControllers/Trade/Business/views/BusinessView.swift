@@ -56,7 +56,11 @@ class BusinessView: UIView {
       priceTextfield.textColor = .darkTwo
       amountTextfield.textColor = .darkTwo
     }
-    
+  
+    self.amountTextfield.placeholder = R.string.localizable.withdraw_amount.key.localized()
+    self.priceTextfield.placeholder = R.string.localizable.orderbook_price.key.localized()
+    self.amountTextfield.setPlaceHolderTextColor(UIColor.steel50)
+    self.priceTextfield.setPlaceHolderTextColor(UIColor.steel50)
     for percentLabel in percents {
       percentLabel.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
         guard let `self` = self else { return }

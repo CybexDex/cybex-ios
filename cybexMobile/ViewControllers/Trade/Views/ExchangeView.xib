@@ -68,7 +68,7 @@
                                     </constraints>
                                 </view>
                                 <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="271" translatesAutoresizingMaskIntoConstraints="NO" id="pj3-3h-nPl">
-                                    <rect key="frame" x="0.0" y="384" width="375" height="271"/>
+                                    <rect key="frame" x="13" y="384" width="349" height="271"/>
                                 </containerView>
                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qj8-zn-bi9">
                                     <rect key="frame" x="209" y="0.0" width="166" height="350"/>
@@ -84,9 +84,9 @@
                                 <constraint firstItem="qj8-zn-bi9" firstAttribute="top" secondItem="yvM-bg-mXi" secondAttribute="top" id="IhY-4n-tia"/>
                                 <constraint firstItem="WR4-bl-i3D" firstAttribute="leading" secondItem="yvM-bg-mXi" secondAttribute="leading" id="Kqo-Eu-iyd"/>
                                 <constraint firstItem="qj8-zn-bi9" firstAttribute="leading" secondItem="Swa-VX-CqK" secondAttribute="trailing" id="M1C-EM-9od"/>
-                                <constraint firstAttribute="trailing" secondItem="pj3-3h-nPl" secondAttribute="trailing" id="NoK-ud-B9y"/>
+                                <constraint firstAttribute="trailing" secondItem="pj3-3h-nPl" secondAttribute="trailing" constant="13" id="NoK-ud-B9y"/>
                                 <constraint firstItem="Swa-VX-CqK" firstAttribute="top" secondItem="yvM-bg-mXi" secondAttribute="top" id="RuK-8w-A6m"/>
-                                <constraint firstItem="pj3-3h-nPl" firstAttribute="leading" secondItem="yvM-bg-mXi" secondAttribute="leading" id="TRL-4e-2u0"/>
+                                <constraint firstItem="pj3-3h-nPl" firstAttribute="leading" secondItem="yvM-bg-mXi" secondAttribute="leading" constant="13" id="TRL-4e-2u0"/>
                                 <constraint firstItem="Swa-VX-CqK" firstAttribute="leading" secondItem="yvM-bg-mXi" secondAttribute="leading" id="WVa-Ul-pbt"/>
                                 <constraint firstAttribute="trailing" secondItem="WR4-bl-i3D" secondAttribute="trailing" id="a7Y-gn-LyU"/>
                                 <constraint firstItem="WR4-bl-i3D" firstAttribute="trailing" secondItem="yvM-bg-mXi" secondAttribute="trailing" id="yz8-6m-gOu"/>

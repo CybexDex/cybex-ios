@@ -13,22 +13,31 @@ class QuotesTitleView: UIView {
   enum event : String{
     case tagDidSelected
   }
-  
+    
+    @IBOutlet weak var line: UIView!
+    
   @IBOutlet weak var stackView: UIStackView!
   
   @IBOutlet var titleViews: [UIView]!
   
-  
+    @IBOutlet weak var stackViewLeft: NSLayoutConstraint!
+    
   @IBInspectable
   var View_Type : Int = 0 {
     didSet{
       if View_Type != 1{
         self.stackView.axis = .horizontal
+        stackViewLeft.constant = 22
       }else{
         self.stackView.axis = .vertical
-        self.stackView.spacing = 25
+        self.stackView.spacing = 0
+        stackViewLeft.constant = 0
+        self.line.isHidden = true
         for titleView in self.titleViews{
           titleView.viewWithTag(10)?.isHidden = true
+          if let label = titleView.viewWithTag(9) as? UILabel{
+            label.textAlignment = .left
+          }
         }
       }
     }

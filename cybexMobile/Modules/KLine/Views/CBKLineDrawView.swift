@@ -359,6 +359,7 @@ extension CBKLineDrawView {
                 indicatorVerticalView.layoutIfNeeded()
 
                 if configuration.dataSource.drawKLineModels.count > offsetCount + 1 {
+                  print("index : \(offsetCount + 1)")
                     drawModel = configuration.dataSource.drawKLineModels[offsetCount + 1]
                 }
             }

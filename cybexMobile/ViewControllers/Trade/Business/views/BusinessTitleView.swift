@@ -20,7 +20,7 @@ class BusinessTitleView: UIView {
   var currentBaseIndex = 0 {
     didSet{
       self.tableView.reloadData()
-      self.tableView.isHidden = false
+//      self.tableView.isHidden = false
     }
   }
   

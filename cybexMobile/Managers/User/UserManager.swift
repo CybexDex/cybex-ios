@@ -148,8 +148,8 @@ extension UserManager {
         for fillOrder in fillorders{
           let timeRequest = getBlockRequest(response: { (time) in
             count += 1
-            if let time = time as? String{
-              result.append((fillOrder,time:time))
+            if let time = time as? String, let date = time.dateFromISO8601{
+              result.append((fillOrder,time:(date.string(withFormat: "MM/dd HH:mm:ss"))))
             }
             if count == fillorders.count{
               self.fillOrder.accept(result)
@@ -238,7 +238,7 @@ extension UserManager {
         }
         completion(false, nil)
       }
-      WebsocketService.shared.send(request: request)
+      WebsocketService.shared.send(request: request, filterRepeat:false)
     }
 
     else{

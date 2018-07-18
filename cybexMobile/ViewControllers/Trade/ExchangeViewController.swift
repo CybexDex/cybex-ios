@@ -18,9 +18,13 @@ class ExchangeViewController: BaseViewController {
 
   var pair: Pair? {
     didSet{
-      self.childViewControllers.forEach { (viewController) in
-        if var viewController = viewController as? TradePair{
-          viewController.pariInfo = pair!
+      if self.isVisible {
+        print("exchangeType : \(type)")
+        self.childViewControllers.forEach { (viewController) in
+          if var viewController = viewController as? TradePair{
+
+            viewController.pariInfo = pair!
+          }
         }
       }
     }
@@ -31,7 +35,7 @@ class ExchangeViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.coordinator?.setupChildVC(self) 
+    self.coordinator?.setupChildVC(self)
   }
   
   func commonObserveState() {
@@ -65,9 +69,11 @@ extension ExchangeViewController : TradePair {
   }
   
   func refresh() {
-    self.childViewControllers.forEach { (viewController) in
-      if let vc = viewController as? TradePair{
-        vc.refresh()
+    if self.isVisible {
+      self.childViewControllers.forEach { (viewController) in
+        if let vc = viewController as? TradePair{
+          vc.refresh()
+        }
       }
     }
   }

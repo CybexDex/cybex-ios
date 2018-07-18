@@ -13,7 +13,7 @@ import SwiftTheme
 class AccountAssetOperationsItemView: UIView{
   var data: Any? {
     didSet {
-      
+      self.setup()
     }
   }
   

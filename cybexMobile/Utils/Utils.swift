@@ -38,7 +38,7 @@ func blockchainParams(callback: @escaping(BlockChainParamsType)->()) {
   }
 }
 
-func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTypesOperations = .limit_order_create, completion:@escaping (_ success:Bool, _ amount:Decimal, _ assetID:String)->()) {
+func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTypesOperations = .limit_order_create, filterRepeat:Bool = true,completion:@escaping (_ success:Bool, _ amount:Decimal, _ assetID:String)->()) {
   let request = GetRequiredFees(response: { (data) in
     if let fees = data as? [Fee], let cyb_amount = fees.first?.amount.toDouble() {
       
@@ -76,7 +76,7 @@ func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTy
           }
         }, operationStr: operation, assetID: focus_asset_id, operationID: operationID)
         
-        WebsocketService.shared.send(request: request)
+        WebsocketService.shared.send(request: request ,filterRepeat:filterRepeat)
       }
       
       
@@ -343,11 +343,16 @@ func getUserId(_ userId:String)->Int{
 func getWithdrawDetailInfo(addressInfo:String,amountInfo:String,withdrawFeeInfo:String,gatewayFeeInfo:String,receiveAmountInfo:String) -> [NSAttributedString]{
   let address :String = R.string.localizable.utils_address.key.localized()
   let amount : String = R.string.localizable.utils_amount.key.localized()
-  let withdrawFee : String = R.string.localizable.utils_withdrawfee.key.localized()
-  let gatewayFee : String = R.string.localizable.utils_gatewayfee.key.localized()
+  let gatewayFee : String = R.string.localizable.utils_withdrawfee.key.localized()
+  let withdrawFee : String = R.string.localizable.utils_gatewayfee.key.localized()
   let receiveAmount : String = R.string.localizable.utils_receiveamount.key.localized()
   
   let content = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
+  
+  /*
+   "utils_withdrawfee"  = "Transfer Fee:";
+   "utils_gatewayfee"   = "Gateway Fee:";
+   */
   
   return (["<name>\(String(describing: address))</name><\(content)>\n\(String(describing: addressInfo))</\(content)>".set(style: "alertContent"),
            "<name>\(String(describing: amount))</name><\(content)>  \(String(describing: amountInfo))</\(content)>".set(style: "alertContent"),
@@ -392,4 +397,21 @@ func addressOf(_ o: UnsafeRawPointer) -> Int {
 
 func addressOf<T: AnyObject>(_ o: T) -> Int {
   return unsafeBitCast(o, to: Int.self)
+}
+
+func getBalanceWithAssetId(_ asset:String) -> Balance? {
+  if let balances = UserManager.shared.balances.value {
+    for balance in balances {
+      if balance.asset_type == asset{
+        return balance
+      }
+    }
+    return nil
+  }
+  return nil
+}
+
+func getTimeZone() -> TimeInterval {
+  let timeZone = TimeZone.current
+  return TimeInterval(timeZone.secondsFromGMT(for: Date()))
 }

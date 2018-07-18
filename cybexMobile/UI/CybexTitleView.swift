@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftTheme
 
 class CybexTitleView: UIView {
   
@@ -45,7 +46,9 @@ class CybexTitleView: UIView {
     for view in self.subviews{
       view.removeFromSuperview()
     }
-    
+    let view = UIView(frame: CGRect(x: 0, y: frame.height - 1, width: frame.width, height: 1))
+    view.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white4 : UIColor.steel11
+    self.addSubview(view)
     if let data = data {
       let btn_width : CGFloat = (self.frame.width - CGFloat(data.count - 1) * space) / CGFloat(data.count)
       
@@ -85,9 +88,7 @@ class CybexTitleView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    let view = UIView(frame: CGRect(x: 0, y: frame.height - 1, width: frame.width, height: 1))
-    view.backgroundColor = UIColor.white
-    self.addSubview(view)
+    
   }
   
   required init?(coder aDecoder: NSCoder) {

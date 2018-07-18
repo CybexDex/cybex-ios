@@ -34,6 +34,7 @@ fragment WithdrawinfoObject on WithdrawInfo {
   type
   asset
   gatewayAccount
+  precision
 }
 
 fragment accountAddressRecord on AccountAddressRecord {

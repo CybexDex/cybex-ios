@@ -12,17 +12,18 @@ import SwiftyJSON
 import SafariServices
 import StoreKit
 import SDCAlertView
+import SwiftTheme
 
 public struct Version: Equatable, Comparable {
   public let major: Int
   public let minor: Int
   public let patch: Int
   public let string: String?
-
+  
   public init?(_ version: String) {
-
+    
     let parts: Array<String> = version.split { $0 == "." }.map { String($0) }
-
+    
     if let majorOptional = parts[optional: 0], let minorOptional = parts[optional: 1], let patchOptional = parts[optional: 2],
       let majorInt = Int(majorOptional), let minorInt = Int(minorOptional), let patchInt = Int(patchOptional) {
       self.major = majorInt
@@ -33,7 +34,7 @@ public struct Version: Equatable, Comparable {
       return nil
     }
   }
-
+  
   public static func < (lhs: Version, rhs: Version) -> Bool {
     if lhs.major < rhs.major {
       return true
@@ -46,15 +47,15 @@ public struct Version: Equatable, Comparable {
         if lhs.patch < rhs.patch {
           return true
         }
-
+        
       }
     }
-
     
-
+    
+    
     return false
   }
-
+  
 }
 
 func prettyPrint(with json: [String: Any]) -> String {
@@ -64,61 +65,57 @@ func prettyPrint(with json: [String: Any]) -> String {
 }
 
 extension UIViewController {
+  
   func openStoreProductWithiTunesItemIdentifier(_ identifier: String) {
     let storeViewController = SKStoreProductViewController()
     storeViewController.delegate = self
-
+    
     let parameters = [SKStoreProductParameterITunesItemIdentifier: identifier]
     storeViewController.loadProduct(withParameters: parameters) { [weak self] (loaded, error) -> Void in
       if loaded {
         guard let `self` = self else { return }
-
+        
         self.present(storeViewController, animated: true)
       }
     }
   }
-
+  
   func openSafariViewController(_ urlString: String) {
     if let url = URL(string: urlString) {
       let vc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
       vc.delegate = self
-
+      
       self.present(vc, animated: true)
     }
   }
-
-
-  func handlerUpdateVersion(_ completion: CommonCallback?, showNoUpdate: Bool = false) {
+  
+  
+  func handlerUpdateVersion(_ completion: CommonCallback?, showNoUpdate: Bool = false ) {
     async {
-      let (update, url, force) = try! await(SimpleHTTPService.checkVersion())
-
+      let (update, url, force ,content) = try! await(SimpleHTTPService.checkVersion())
       main {
         if let completion = completion {
           completion()
         }
-        
-
-        
-        
         if update {
-          let alert = AlertController(title: R.string.localizable.updata_available_title.key.localized(), message: R.string.localizable.updata_available_message.key.localized(), preferredStyle: .alert)
-    
-          if !force {
-            alert.addAction(AlertAction(title: R.string.localizable.updata_next_time.key.localized(), style: .normal, handler: nil))
-          }
-          else {
-            alert.shouldDismissHandler = { (action) in
-              if action?.title == R.string.localizable.updata_next_time.key.localized() {
-                return true
-              }
-              else {
-                action!.handler!(action!)
-                return false
-              }
-            }
+          
+          let contentView = StyleContentView(frame: .zero)
+          ShowToastManager.shared.setUp(title: R.string.localizable.update_version.key.localized(), contentView: contentView, animationType: ShowToastManager.ShowAnimationType.small_big)
+          ShowToastManager.shared.showAnimationInView(self.view)
+          
+          
+          let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
+          if content.contains("\n"){
+            contentView.data = content.replacingOccurrences(of: "\n", with: "\\").components(separatedBy: "\\").map({ (string) in
+              "<\(contentStyle)>\(string)</\(contentStyle)>".set(style: "alertContent")!
+            })
+          }else{
+            contentView.data = ["<\(contentStyle)>\(content)</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString]
           }
           
-          let action = AlertAction(title: R.string.localizable.updata_updata.key.localized(), style: .preferred, handler: { (action) in
+          ShowToastManager.shared.isShowSingleBtn = force
+          
+          ShowToastManager.shared.ensureClickBlock = {
             if force {
               UIApplication.shared.openURL(URL(string: url)!)
               return
@@ -129,10 +126,40 @@ extension UIViewController {
             else {
               self.openSafariViewController(url)
             }
-          })
-          alert.addAction(action)
+          }
           
-          alert.present()
+          
+          //          let alert = AlertController(title: R.string.localizable.updata_available_title.key.localized(), message: R.string.localizable.updata_available_message.key.localized(), preferredStyle: .alert)
+          //
+          //          if !force {
+          //            alert.addAction(AlertAction(title: R.string.localizable.updata_next_time.key.localized(), style: .normal, handler: nil))
+          //          }
+          //          else {
+          //            alert.shouldDismissHandler = { (action) in
+          //              if action?.title == R.string.localizable.updata_next_time.key.localized() {
+          //                return true
+          //              }
+          //              else {
+          //                action!.handler!(action!)
+          //                return false
+          //              }
+          //            }
+          //          }
+          //
+          //          let action = AlertAction(title: R.string.localizable.updata_updata.key.localized(), style: .preferred, handler: { (action) in
+          //                      if force {
+          //                        UIApplication.shared.openURL(URL(string: url)!)
+          //                        return
+          //                      }
+          //                      if url.contains("itunes") {
+          //                        self.openStoreProductWithiTunesItemIdentifier(AppConfiguration.APPID)
+          //                      }
+          //                      else {
+          //                        self.openSafariViewController(url)
+          //                      }
+          //          })
+          //          alert.addAction(action)
+          //          alert.present()
         }
         else if showNoUpdate {
           let alert = AlertController(title: R.string.localizable.unupdata_title.key.localized(), message: R.string.localizable.unupdata_message.key.localized(), preferredStyle: .alert)
@@ -141,11 +168,9 @@ extension UIViewController {
         }
       }
     }
-   
-
   }
-
 }
+
 
 extension UIViewController: SKStoreProductViewControllerDelegate {
   public func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
@@ -176,13 +201,13 @@ extension NSLayoutConstraint {
       multiplier: multiplier,
       constant: constant)
     newConstraint.priority = priority
-
+    
     NSLayoutConstraint.deactivate([self])
     NSLayoutConstraint.activate([newConstraint])
-
+    
     return newConstraint
   }
-
+  
 }
 extension Formatter {
   static let iso8601: DateFormatter = {
@@ -290,8 +315,8 @@ extension Double {
     num = 100 * num / precision
     
     let result = num.rounded() / 100.0
-  
-//    let roundedNum = round(100.0 * num / pow(1000.0, Double(exp))) / 100.0
+    
+    //    let roundedNum = round(100.0 * num / pow(1000.0, Double(exp))) / 100.0
     
     return "\(sign)\(result.string(digits: 2))" + "\(units[exp - 1])"
   }
@@ -320,7 +345,7 @@ extension String {
     
     return 0
   }
-
+  
   var tradePrice:(price:String, pricision:Int) {//0.0001  1   8 6 4
     if let oldPrice = self.toDouble() {
       return oldPrice.tradePrice()
@@ -348,7 +373,7 @@ extension String {
     }
     return ""
   }
-
+  
   func suffixNumber(digitNum: Int = 5) -> String {
     if let str = Double(self)?.suffixNumber(digitNum:digitNum) {
       return str
@@ -356,5 +381,7 @@ extension String {
     return ""
   }
 }
+
+
 
 

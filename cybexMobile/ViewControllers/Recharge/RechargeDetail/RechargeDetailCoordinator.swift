@@ -28,6 +28,7 @@ protocol RechargeDetailStateManagerProtocol {
   func login(_ password : String,callback:@escaping (Bool)->())
   func getObjects(assetId:String,amount:String,address:String,fee_id:String,fee_amount:String,callback:@escaping (Any)->())
   func fetchWithDrawMessage(callback:@escaping (String)->())
+  func getFinalAmount(fee_id:String,amount:Decimal,available:Double) -> (Decimal,String)
 }
 
 class RechargeDetailCoordinator: AccountRootCoordinator {
@@ -186,4 +187,29 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
       }
     }
   }
+  
+  func getFinalAmount(fee_id:String,amount:Decimal,available:Double) -> (Decimal,String) {
+    
+    let allAmount = Decimal(available)
+    var requestAmount : String = ""
+    
+    var finalAmount : Decimal = amount
+    if fee_id != AssetConfiguration.CYB {
+      if let gateway_fee = self.state.property.gatewayFee.value?.0,let gatewayFee = Decimal(string:gateway_fee.amount) {
+        if allAmount < gatewayFee + amount {
+          finalAmount = finalAmount - gatewayFee
+          requestAmount = (amount - gatewayFee).stringValue
+        }else{
+          requestAmount = amount.stringValue
+        }
+      }
+    }else{
+      requestAmount = amount.stringValue
+    }
+    if let data = self.state.property.data.value {
+      finalAmount = finalAmount - Decimal(data.fee)
+    }
+    return (finalAmount,requestAmount)
+  }
+  
 }

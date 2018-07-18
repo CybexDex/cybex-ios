@@ -21,6 +21,7 @@ class CBTabBarView: ESTabBarItemContentView {
     badgeOffset.horizontal = 12
     renderingMode = .alwaysOriginal
     titleLabel.font = UIFont.systemFont(ofSize: 9)
+    insets = UIEdgeInsets(top: -2, left: 2, bottom: 2, right: 2)
   }
   
   public required init?(coder aDecoder: NSCoder) {

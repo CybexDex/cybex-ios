@@ -137,14 +137,14 @@ class OpenedOrdersViewController: BaseViewController {
     
     UserManager.shared.limitOrder.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
       guard let `self` = self else { return }
-      
+
       if let account_view = self.containerView as? AccountOpenedOrdersView {
         account_view.data = nil
       }
       else if let pair_order = self.containerView as? MyOpenedOrdersView {
         pair_order.data = self.pair
       }
-      
+
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
 }
@@ -210,7 +210,7 @@ extension OpenedOrdersViewController {
   
   override func returnEnsureAction() {
     self.startLoading()
-    ShowManager.shared.hide()
+    ShowToastManager.shared.hide()
     self.postCancelOrder()
   }
 }

@@ -12,7 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuotesTitleView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
+                <outlet property="line" destination="bvo-54-tIP" id="WKs-Yh-fe0"/>
                 <outlet property="stackView" destination="6bt-dO-NoS" id="srV-zZ-cNd"/>
+                <outlet property="stackViewLeft" destination="oom-gN-SOl" id="Sot-Ib-KnF"/>
                 <outletCollection property="titleViews" destination="DnU-53-L3k" collectionClass="NSMutableArray" id="GU4-jd-mC7"/>
                 <outletCollection property="titleViews" destination="Vg3-S5-l2e" collectionClass="NSMutableArray" id="G0o-Na-9fE"/>
                 <outletCollection property="titleViews" destination="yag-mV-Rhv" collectionClass="NSMutableArray" id="5aY-Gr-fL4"/>
