@@ -3,10 +3,10 @@
 import Apollo
 
 public final class VerifyAddressQuery: GraphQLQuery {
-  public let operationDefinition =
+  public static let operationString =
     "query VerifyAddress($asset: String!, $address: String!, $accountName: String) {\n  verifyAddress(asset: $asset, address: $address, accountName: $accountName) {\n    __typename\n    ...WithdrawAddressInfo\n  }\n}"
 
-  public var queryDocument: String { return operationDefinition.appending(WithdrawAddressInfo.fragmentDefinition) }
+  public static var requestString: String { return operationString.appending(WithdrawAddressInfo.fragmentString) }
 
   public var asset: String
   public var address: String
@@ -29,22 +29,22 @@ public final class VerifyAddressQuery: GraphQLQuery {
       GraphQLField("verifyAddress", arguments: ["asset": GraphQLVariable("asset"), "address": GraphQLVariable("address"), "accountName": GraphQLVariable("accountName")], type: .nonNull(.object(VerifyAddress.selections))),
     ]
 
-    public private(set) var resultMap: ResultMap
+    public var snapshot: Snapshot
 
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
+    public init(snapshot: Snapshot) {
+      self.snapshot = snapshot
     }
 
     public init(verifyAddress: VerifyAddress) {
-      self.init(unsafeResultMap: ["__typename": "Query", "verifyAddress": verifyAddress.resultMap])
+      self.init(snapshot: ["__typename": "Query", "verifyAddress": verifyAddress.snapshot])
     }
 
     public var verifyAddress: VerifyAddress {
       get {
-        return VerifyAddress(unsafeResultMap: resultMap["verifyAddress"]! as! ResultMap)
+        return VerifyAddress(snapshot: snapshot["verifyAddress"]! as! Snapshot)
       }
       set {
-        resultMap.updateValue(newValue.resultMap, forKey: "verifyAddress")
+        snapshot.updateValue(newValue.snapshot, forKey: "verifyAddress")
       }
     }
 
@@ -59,74 +59,70 @@ public final class VerifyAddressQuery: GraphQLQuery {
         GraphQLField("valid", type: .nonNull(.scalar(Bool.self))),
       ]
 
-      public private(set) var resultMap: ResultMap
+      public var snapshot: Snapshot
 
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
+      public init(snapshot: Snapshot) {
+        self.snapshot = snapshot
       }
 
       public init(address: String, asset: String? = nil, valid: Bool) {
-        self.init(unsafeResultMap: ["__typename": "WithdrawAddressInfo", "address": address, "asset": asset, "valid": valid])
+        self.init(snapshot: ["__typename": "WithdrawAddressInfo", "address": address, "asset": asset, "valid": valid])
       }
 
       public var __typename: String {
         get {
-          return resultMap["__typename"]! as! String
+          return snapshot["__typename"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "__typename")
+          snapshot.updateValue(newValue, forKey: "__typename")
         }
       }
 
       public var address: String {
         get {
-          return resultMap["address"]! as! String
+          return snapshot["address"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "address")
+          snapshot.updateValue(newValue, forKey: "address")
         }
       }
 
       public var asset: String? {
         get {
-          return resultMap["asset"] as? String
+          return snapshot["asset"] as? String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "asset")
+          snapshot.updateValue(newValue, forKey: "asset")
         }
       }
 
       public var valid: Bool {
         get {
-          return resultMap["valid"]! as! Bool
+          return snapshot["valid"]! as! Bool
         }
         set {
-          resultMap.updateValue(newValue, forKey: "valid")
+          snapshot.updateValue(newValue, forKey: "valid")
         }
       }
 
       public var fragments: Fragments {
         get {
-          return Fragments(unsafeResultMap: resultMap)
+          return Fragments(snapshot: snapshot)
         }
         set {
-          resultMap += newValue.resultMap
+          snapshot += newValue.snapshot
         }
       }
 
       public struct Fragments {
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
+        public var snapshot: Snapshot
 
         public var withdrawAddressInfo: WithdrawAddressInfo {
           get {
-            return WithdrawAddressInfo(unsafeResultMap: resultMap)
+            return WithdrawAddressInfo(snapshot: snapshot)
           }
           set {
-            resultMap += newValue.resultMap
+            snapshot += newValue.snapshot
           }
         }
       }
@@ -135,10 +131,10 @@ public final class VerifyAddressQuery: GraphQLQuery {
 }
 
 public final class GetWithdrawInfoQuery: GraphQLQuery {
-  public let operationDefinition =
+  public static let operationString =
     "query GetWithdrawInfo($type: String!) {\n  withdrawInfo(type: $type) {\n    __typename\n    ...WithdrawinfoObject\n  }\n}"
 
-  public var queryDocument: String { return operationDefinition.appending(WithdrawinfoObject.fragmentDefinition) }
+  public static var requestString: String { return operationString.appending(WithdrawinfoObject.fragmentString) }
 
   public var type: String
 
@@ -157,22 +153,22 @@ public final class GetWithdrawInfoQuery: GraphQLQuery {
       GraphQLField("withdrawInfo", arguments: ["type": GraphQLVariable("type")], type: .nonNull(.object(WithdrawInfo.selections))),
     ]
 
-    public private(set) var resultMap: ResultMap
+    public var snapshot: Snapshot
 
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
+    public init(snapshot: Snapshot) {
+      self.snapshot = snapshot
     }
 
     public init(withdrawInfo: WithdrawInfo) {
-      self.init(unsafeResultMap: ["__typename": "Query", "withdrawInfo": withdrawInfo.resultMap])
+      self.init(snapshot: ["__typename": "Query", "withdrawInfo": withdrawInfo.snapshot])
     }
 
     public var withdrawInfo: WithdrawInfo {
       get {
-        return WithdrawInfo(unsafeResultMap: resultMap["withdrawInfo"]! as! ResultMap)
+        return WithdrawInfo(snapshot: snapshot["withdrawInfo"]! as! Snapshot)
       }
       set {
-        resultMap.updateValue(newValue.resultMap, forKey: "withdrawInfo")
+        snapshot.updateValue(newValue.snapshot, forKey: "withdrawInfo")
       }
     }
 
@@ -190,101 +186,97 @@ public final class GetWithdrawInfoQuery: GraphQLQuery {
         GraphQLField("precision", type: .scalar(Int.self)),
       ]
 
-      public private(set) var resultMap: ResultMap
+      public var snapshot: Snapshot
 
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
+      public init(snapshot: Snapshot) {
+        self.snapshot = snapshot
       }
 
       public init(minValue: Double, fee: Double, type: String, asset: String, gatewayAccount: String, precision: Int? = nil) {
-        self.init(unsafeResultMap: ["__typename": "WithdrawInfo", "minValue": minValue, "fee": fee, "type": type, "asset": asset, "gatewayAccount": gatewayAccount, "precision": precision])
+        self.init(snapshot: ["__typename": "WithdrawInfo", "minValue": minValue, "fee": fee, "type": type, "asset": asset, "gatewayAccount": gatewayAccount, "precision": precision])
       }
 
       public var __typename: String {
         get {
-          return resultMap["__typename"]! as! String
+          return snapshot["__typename"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "__typename")
+          snapshot.updateValue(newValue, forKey: "__typename")
         }
       }
 
       public var minValue: Double {
         get {
-          return resultMap["minValue"]! as! Double
+          return snapshot["minValue"]! as! Double
         }
         set {
-          resultMap.updateValue(newValue, forKey: "minValue")
+          snapshot.updateValue(newValue, forKey: "minValue")
         }
       }
 
       public var fee: Double {
         get {
-          return resultMap["fee"]! as! Double
+          return snapshot["fee"]! as! Double
         }
         set {
-          resultMap.updateValue(newValue, forKey: "fee")
+          snapshot.updateValue(newValue, forKey: "fee")
         }
       }
 
       public var type: String {
         get {
-          return resultMap["type"]! as! String
+          return snapshot["type"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "type")
+          snapshot.updateValue(newValue, forKey: "type")
         }
       }
 
       public var asset: String {
         get {
-          return resultMap["asset"]! as! String
+          return snapshot["asset"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "asset")
+          snapshot.updateValue(newValue, forKey: "asset")
         }
       }
 
       public var gatewayAccount: String {
         get {
-          return resultMap["gatewayAccount"]! as! String
+          return snapshot["gatewayAccount"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "gatewayAccount")
+          snapshot.updateValue(newValue, forKey: "gatewayAccount")
         }
       }
 
       public var precision: Int? {
         get {
-          return resultMap["precision"] as? Int
+          return snapshot["precision"] as? Int
         }
         set {
-          resultMap.updateValue(newValue, forKey: "precision")
+          snapshot.updateValue(newValue, forKey: "precision")
         }
       }
 
       public var fragments: Fragments {
         get {
-          return Fragments(unsafeResultMap: resultMap)
+          return Fragments(snapshot: snapshot)
         }
         set {
-          resultMap += newValue.resultMap
+          snapshot += newValue.snapshot
         }
       }
 
       public struct Fragments {
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
+        public var snapshot: Snapshot
 
         public var withdrawinfoObject: WithdrawinfoObject {
           get {
-            return WithdrawinfoObject(unsafeResultMap: resultMap)
+            return WithdrawinfoObject(snapshot: snapshot)
           }
           set {
-            resultMap += newValue.resultMap
+            snapshot += newValue.snapshot
           }
         }
       }
@@ -293,10 +285,10 @@ public final class GetWithdrawInfoQuery: GraphQLQuery {
 }
 
 public final class GetDepositAddressQuery: GraphQLQuery {
-  public let operationDefinition =
+  public static let operationString =
     "query GetDepositAddress($accountName: String!, $asset: String) {\n  getDepositAddress(accountName: $accountName, asset: $asset) {\n    __typename\n    ...accountAddressRecord\n  }\n}"
 
-  public var queryDocument: String { return operationDefinition.appending(AccountAddressRecord.fragmentDefinition) }
+  public static var requestString: String { return operationString.appending(AccountAddressRecord.fragmentString) }
 
   public var accountName: String
   public var asset: String?
@@ -317,22 +309,22 @@ public final class GetDepositAddressQuery: GraphQLQuery {
       GraphQLField("getDepositAddress", arguments: ["accountName": GraphQLVariable("accountName"), "asset": GraphQLVariable("asset")], type: .object(GetDepositAddress.selections)),
     ]
 
-    public private(set) var resultMap: ResultMap
+    public var snapshot: Snapshot
 
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
+    public init(snapshot: Snapshot) {
+      self.snapshot = snapshot
     }
 
     public init(getDepositAddress: GetDepositAddress? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "getDepositAddress": getDepositAddress.flatMap { (value: GetDepositAddress) -> ResultMap in value.resultMap }])
+      self.init(snapshot: ["__typename": "Query", "getDepositAddress": getDepositAddress.flatMap { (value: GetDepositAddress) -> Snapshot in value.snapshot }])
     }
 
     public var getDepositAddress: GetDepositAddress? {
       get {
-        return (resultMap["getDepositAddress"] as? ResultMap).flatMap { GetDepositAddress(unsafeResultMap: $0) }
+        return (snapshot["getDepositAddress"] as? Snapshot).flatMap { GetDepositAddress(snapshot: $0) }
       }
       set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "getDepositAddress")
+        snapshot.updateValue(newValue?.snapshot, forKey: "getDepositAddress")
       }
     }
 
@@ -351,110 +343,106 @@ public final class GetDepositAddressQuery: GraphQLQuery {
         GraphQLField("createAt", type: .scalar(String.self)),
       ]
 
-      public private(set) var resultMap: ResultMap
+      public var snapshot: Snapshot
 
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
+      public init(snapshot: Snapshot) {
+        self.snapshot = snapshot
       }
 
       public init(accountName: String, address: String, type: String? = nil, asset: String, jadeOrders: [String?], latest: Bool, createAt: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "AccountAddressRecord", "accountName": accountName, "address": address, "type": type, "asset": asset, "jadeOrders": jadeOrders, "latest": latest, "createAt": createAt])
+        self.init(snapshot: ["__typename": "AccountAddressRecord", "accountName": accountName, "address": address, "type": type, "asset": asset, "jadeOrders": jadeOrders, "latest": latest, "createAt": createAt])
       }
 
       public var __typename: String {
         get {
-          return resultMap["__typename"]! as! String
+          return snapshot["__typename"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "__typename")
+          snapshot.updateValue(newValue, forKey: "__typename")
         }
       }
 
       public var accountName: String {
         get {
-          return resultMap["accountName"]! as! String
+          return snapshot["accountName"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "accountName")
+          snapshot.updateValue(newValue, forKey: "accountName")
         }
       }
 
       public var address: String {
         get {
-          return resultMap["address"]! as! String
+          return snapshot["address"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "address")
+          snapshot.updateValue(newValue, forKey: "address")
         }
       }
 
       public var type: String? {
         get {
-          return resultMap["type"] as? String
+          return snapshot["type"] as? String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "type")
+          snapshot.updateValue(newValue, forKey: "type")
         }
       }
 
       public var asset: String {
         get {
-          return resultMap["asset"]! as! String
+          return snapshot["asset"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "asset")
+          snapshot.updateValue(newValue, forKey: "asset")
         }
       }
 
       public var jadeOrders: [String?] {
         get {
-          return resultMap["jadeOrders"]! as! [String?]
+          return snapshot["jadeOrders"]! as! [String?]
         }
         set {
-          resultMap.updateValue(newValue, forKey: "jadeOrders")
+          snapshot.updateValue(newValue, forKey: "jadeOrders")
         }
       }
 
       public var latest: Bool {
         get {
-          return resultMap["latest"]! as! Bool
+          return snapshot["latest"]! as! Bool
         }
         set {
-          resultMap.updateValue(newValue, forKey: "latest")
+          snapshot.updateValue(newValue, forKey: "latest")
         }
       }
 
       public var createAt: String? {
         get {
-          return resultMap["createAt"] as? String
+          return snapshot["createAt"] as? String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "createAt")
+          snapshot.updateValue(newValue, forKey: "createAt")
         }
       }
 
       public var fragments: Fragments {
         get {
-          return Fragments(unsafeResultMap: resultMap)
+          return Fragments(snapshot: snapshot)
         }
         set {
-          resultMap += newValue.resultMap
+          snapshot += newValue.snapshot
         }
       }
 
       public struct Fragments {
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
+        public var snapshot: Snapshot
 
         public var accountAddressRecord: AccountAddressRecord {
           get {
-            return AccountAddressRecord(unsafeResultMap: resultMap)
+            return AccountAddressRecord(snapshot: snapshot)
           }
           set {
-            resultMap += newValue.resultMap
+            snapshot += newValue.snapshot
           }
         }
       }
@@ -463,10 +451,10 @@ public final class GetDepositAddressQuery: GraphQLQuery {
 }
 
 public final class NewDepositAddressMutation: GraphQLMutation {
-  public let operationDefinition =
+  public static let operationString =
     "mutation NewDepositAddress($accountName: String!, $asset: String!) {\n  newDepositAddress(accountName: $accountName, asset: $asset) {\n    __typename\n    ...accountAddressRecord\n  }\n}"
 
-  public var queryDocument: String { return operationDefinition.appending(AccountAddressRecord.fragmentDefinition) }
+  public static var requestString: String { return operationString.appending(AccountAddressRecord.fragmentString) }
 
   public var accountName: String
   public var asset: String
@@ -487,22 +475,22 @@ public final class NewDepositAddressMutation: GraphQLMutation {
       GraphQLField("newDepositAddress", arguments: ["accountName": GraphQLVariable("accountName"), "asset": GraphQLVariable("asset")], type: .nonNull(.object(NewDepositAddress.selections))),
     ]
 
-    public private(set) var resultMap: ResultMap
+    public var snapshot: Snapshot
 
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
+    public init(snapshot: Snapshot) {
+      self.snapshot = snapshot
     }
 
     public init(newDepositAddress: NewDepositAddress) {
-      self.init(unsafeResultMap: ["__typename": "Mutation", "newDepositAddress": newDepositAddress.resultMap])
+      self.init(snapshot: ["__typename": "Mutation", "newDepositAddress": newDepositAddress.snapshot])
     }
 
     public var newDepositAddress: NewDepositAddress {
       get {
-        return NewDepositAddress(unsafeResultMap: resultMap["newDepositAddress"]! as! ResultMap)
+        return NewDepositAddress(snapshot: snapshot["newDepositAddress"]! as! Snapshot)
       }
       set {
-        resultMap.updateValue(newValue.resultMap, forKey: "newDepositAddress")
+        snapshot.updateValue(newValue.snapshot, forKey: "newDepositAddress")
       }
     }
 
@@ -521,110 +509,106 @@ public final class NewDepositAddressMutation: GraphQLMutation {
         GraphQLField("createAt", type: .scalar(String.self)),
       ]
 
-      public private(set) var resultMap: ResultMap
+      public var snapshot: Snapshot
 
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
+      public init(snapshot: Snapshot) {
+        self.snapshot = snapshot
       }
 
       public init(accountName: String, address: String, type: String? = nil, asset: String, jadeOrders: [String?], latest: Bool, createAt: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "AccountAddressRecord", "accountName": accountName, "address": address, "type": type, "asset": asset, "jadeOrders": jadeOrders, "latest": latest, "createAt": createAt])
+        self.init(snapshot: ["__typename": "AccountAddressRecord", "accountName": accountName, "address": address, "type": type, "asset": asset, "jadeOrders": jadeOrders, "latest": latest, "createAt": createAt])
       }
 
       public var __typename: String {
         get {
-          return resultMap["__typename"]! as! String
+          return snapshot["__typename"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "__typename")
+          snapshot.updateValue(newValue, forKey: "__typename")
         }
       }
 
       public var accountName: String {
         get {
-          return resultMap["accountName"]! as! String
+          return snapshot["accountName"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "accountName")
+          snapshot.updateValue(newValue, forKey: "accountName")
         }
       }
 
       public var address: String {
         get {
-          return resultMap["address"]! as! String
+          return snapshot["address"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "address")
+          snapshot.updateValue(newValue, forKey: "address")
         }
       }
 
       public var type: String? {
         get {
-          return resultMap["type"] as? String
+          return snapshot["type"] as? String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "type")
+          snapshot.updateValue(newValue, forKey: "type")
         }
       }
 
       public var asset: String {
         get {
-          return resultMap["asset"]! as! String
+          return snapshot["asset"]! as! String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "asset")
+          snapshot.updateValue(newValue, forKey: "asset")
         }
       }
 
       public var jadeOrders: [String?] {
         get {
-          return resultMap["jadeOrders"]! as! [String?]
+          return snapshot["jadeOrders"]! as! [String?]
         }
         set {
-          resultMap.updateValue(newValue, forKey: "jadeOrders")
+          snapshot.updateValue(newValue, forKey: "jadeOrders")
         }
       }
 
       public var latest: Bool {
         get {
-          return resultMap["latest"]! as! Bool
+          return snapshot["latest"]! as! Bool
         }
         set {
-          resultMap.updateValue(newValue, forKey: "latest")
+          snapshot.updateValue(newValue, forKey: "latest")
         }
       }
 
       public var createAt: String? {
         get {
-          return resultMap["createAt"] as? String
+          return snapshot["createAt"] as? String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "createAt")
+          snapshot.updateValue(newValue, forKey: "createAt")
         }
       }
 
       public var fragments: Fragments {
         get {
-          return Fragments(unsafeResultMap: resultMap)
+          return Fragments(snapshot: snapshot)
         }
         set {
-          resultMap += newValue.resultMap
+          snapshot += newValue.snapshot
         }
       }
 
       public struct Fragments {
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
+        public var snapshot: Snapshot
 
         public var accountAddressRecord: AccountAddressRecord {
           get {
-            return AccountAddressRecord(unsafeResultMap: resultMap)
+            return AccountAddressRecord(snapshot: snapshot)
           }
           set {
-            resultMap += newValue.resultMap
+            snapshot += newValue.snapshot
           }
         }
       }
@@ -633,7 +617,7 @@ public final class NewDepositAddressMutation: GraphQLMutation {
 }
 
 public struct WithdrawAddressInfo: GraphQLFragment {
-  public static let fragmentDefinition =
+  public static let fragmentString =
     "fragment WithdrawAddressInfo on WithdrawAddressInfo {\n  __typename\n  address\n  asset\n  valid\n}"
 
   public static let possibleTypes = ["WithdrawAddressInfo"]
@@ -645,55 +629,55 @@ public struct WithdrawAddressInfo: GraphQLFragment {
     GraphQLField("valid", type: .nonNull(.scalar(Bool.self))),
   ]
 
-  public private(set) var resultMap: ResultMap
+  public var snapshot: Snapshot
 
-  public init(unsafeResultMap: ResultMap) {
-    self.resultMap = unsafeResultMap
+  public init(snapshot: Snapshot) {
+    self.snapshot = snapshot
   }
 
   public init(address: String, asset: String? = nil, valid: Bool) {
-    self.init(unsafeResultMap: ["__typename": "WithdrawAddressInfo", "address": address, "asset": asset, "valid": valid])
+    self.init(snapshot: ["__typename": "WithdrawAddressInfo", "address": address, "asset": asset, "valid": valid])
   }
 
   public var __typename: String {
     get {
-      return resultMap["__typename"]! as! String
+      return snapshot["__typename"]! as! String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "__typename")
+      snapshot.updateValue(newValue, forKey: "__typename")
     }
   }
 
   public var address: String {
     get {
-      return resultMap["address"]! as! String
+      return snapshot["address"]! as! String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "address")
+      snapshot.updateValue(newValue, forKey: "address")
     }
   }
 
   public var asset: String? {
     get {
-      return resultMap["asset"] as? String
+      return snapshot["asset"] as? String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "asset")
+      snapshot.updateValue(newValue, forKey: "asset")
     }
   }
 
   public var valid: Bool {
     get {
-      return resultMap["valid"]! as! Bool
+      return snapshot["valid"]! as! Bool
     }
     set {
-      resultMap.updateValue(newValue, forKey: "valid")
+      snapshot.updateValue(newValue, forKey: "valid")
     }
   }
 }
 
 public struct WithdrawinfoObject: GraphQLFragment {
-  public static let fragmentDefinition =
+  public static let fragmentString =
     "fragment WithdrawinfoObject on WithdrawInfo {\n  __typename\n  minValue\n  fee\n  type\n  asset\n  gatewayAccount\n  precision\n}"
 
   public static let possibleTypes = ["WithdrawInfo"]
@@ -708,82 +692,82 @@ public struct WithdrawinfoObject: GraphQLFragment {
     GraphQLField("precision", type: .scalar(Int.self)),
   ]
 
-  public private(set) var resultMap: ResultMap
+  public var snapshot: Snapshot
 
-  public init(unsafeResultMap: ResultMap) {
-    self.resultMap = unsafeResultMap
+  public init(snapshot: Snapshot) {
+    self.snapshot = snapshot
   }
 
   public init(minValue: Double, fee: Double, type: String, asset: String, gatewayAccount: String, precision: Int? = nil) {
-    self.init(unsafeResultMap: ["__typename": "WithdrawInfo", "minValue": minValue, "fee": fee, "type": type, "asset": asset, "gatewayAccount": gatewayAccount, "precision": precision])
+    self.init(snapshot: ["__typename": "WithdrawInfo", "minValue": minValue, "fee": fee, "type": type, "asset": asset, "gatewayAccount": gatewayAccount, "precision": precision])
   }
 
   public var __typename: String {
     get {
-      return resultMap["__typename"]! as! String
+      return snapshot["__typename"]! as! String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "__typename")
+      snapshot.updateValue(newValue, forKey: "__typename")
     }
   }
 
   public var minValue: Double {
     get {
-      return resultMap["minValue"]! as! Double
+      return snapshot["minValue"]! as! Double
     }
     set {
-      resultMap.updateValue(newValue, forKey: "minValue")
+      snapshot.updateValue(newValue, forKey: "minValue")
     }
   }
 
   public var fee: Double {
     get {
-      return resultMap["fee"]! as! Double
+      return snapshot["fee"]! as! Double
     }
     set {
-      resultMap.updateValue(newValue, forKey: "fee")
+      snapshot.updateValue(newValue, forKey: "fee")
     }
   }
 
   public var type: String {
     get {
-      return resultMap["type"]! as! String
+      return snapshot["type"]! as! String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "type")
+      snapshot.updateValue(newValue, forKey: "type")
     }
   }
 
   public var asset: String {
     get {
-      return resultMap["asset"]! as! String
+      return snapshot["asset"]! as! String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "asset")
+      snapshot.updateValue(newValue, forKey: "asset")
     }
   }
 
   public var gatewayAccount: String {
     get {
-      return resultMap["gatewayAccount"]! as! String
+      return snapshot["gatewayAccount"]! as! String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "gatewayAccount")
+      snapshot.updateValue(newValue, forKey: "gatewayAccount")
     }
   }
 
   public var precision: Int? {
     get {
-      return resultMap["precision"] as? Int
+      return snapshot["precision"] as? Int
     }
     set {
-      resultMap.updateValue(newValue, forKey: "precision")
+      snapshot.updateValue(newValue, forKey: "precision")
     }
   }
 }
 
 public struct AccountAddressRecord: GraphQLFragment {
-  public static let fragmentDefinition =
+  public static let fragmentString =
     "fragment accountAddressRecord on AccountAddressRecord {\n  __typename\n  accountName\n  address\n  type\n  asset\n  jadeOrders\n  latest\n  createAt\n}"
 
   public static let possibleTypes = ["AccountAddressRecord"]
@@ -799,85 +783,85 @@ public struct AccountAddressRecord: GraphQLFragment {
     GraphQLField("createAt", type: .scalar(String.self)),
   ]
 
-  public private(set) var resultMap: ResultMap
+  public var snapshot: Snapshot
 
-  public init(unsafeResultMap: ResultMap) {
-    self.resultMap = unsafeResultMap
+  public init(snapshot: Snapshot) {
+    self.snapshot = snapshot
   }
 
   public init(accountName: String, address: String, type: String? = nil, asset: String, jadeOrders: [String?], latest: Bool, createAt: String? = nil) {
-    self.init(unsafeResultMap: ["__typename": "AccountAddressRecord", "accountName": accountName, "address": address, "type": type, "asset": asset, "jadeOrders": jadeOrders, "latest": latest, "createAt": createAt])
+    self.init(snapshot: ["__typename": "AccountAddressRecord", "accountName": accountName, "address": address, "type": type, "asset": asset, "jadeOrders": jadeOrders, "latest": latest, "createAt": createAt])
   }
 
   public var __typename: String {
     get {
-      return resultMap["__typename"]! as! String
+      return snapshot["__typename"]! as! String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "__typename")
+      snapshot.updateValue(newValue, forKey: "__typename")
     }
   }
 
   public var accountName: String {
     get {
-      return resultMap["accountName"]! as! String
+      return snapshot["accountName"]! as! String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "accountName")
+      snapshot.updateValue(newValue, forKey: "accountName")
     }
   }
 
   public var address: String {
     get {
-      return resultMap["address"]! as! String
+      return snapshot["address"]! as! String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "address")
+      snapshot.updateValue(newValue, forKey: "address")
     }
   }
 
   public var type: String? {
     get {
-      return resultMap["type"] as? String
+      return snapshot["type"] as? String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "type")
+      snapshot.updateValue(newValue, forKey: "type")
     }
   }
 
   public var asset: String {
     get {
-      return resultMap["asset"]! as! String
+      return snapshot["asset"]! as! String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "asset")
+      snapshot.updateValue(newValue, forKey: "asset")
     }
   }
 
   public var jadeOrders: [String?] {
     get {
-      return resultMap["jadeOrders"]! as! [String?]
+      return snapshot["jadeOrders"]! as! [String?]
     }
     set {
-      resultMap.updateValue(newValue, forKey: "jadeOrders")
+      snapshot.updateValue(newValue, forKey: "jadeOrders")
     }
   }
 
   public var latest: Bool {
     get {
-      return resultMap["latest"]! as! Bool
+      return snapshot["latest"]! as! Bool
     }
     set {
-      resultMap.updateValue(newValue, forKey: "latest")
+      snapshot.updateValue(newValue, forKey: "latest")
     }
   }
 
   public var createAt: String? {
     get {
-      return resultMap["createAt"] as? String
+      return snapshot["createAt"] as? String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "createAt")
+      snapshot.updateValue(newValue, forKey: "createAt")
     }
   }
 }

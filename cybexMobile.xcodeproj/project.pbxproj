@@ -5641,6 +5641,7 @@
 		732D2DD12E9EC24ACDA2584754B764AE /* length.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = length.hpp; sourceTree = "<group>"; };
 		732E4F1D9395351DD9A1CE9DD6098806 /* directive.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = directive.hpp; sourceTree = "<group>"; };
 		7332B0A4E530EEDF4F5295A267932B23 /* static_binding.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = static_binding.hpp; sourceTree = "<group>"; };
+		7335642E20FF2C0500426FE4 /* cybex_gateway_query.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cybex_gateway_query.hpp; sourceTree = "<group>"; };
 		7336D47B5E14FBBBDC4A985A8613F59A /* recursive_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = recursive_wrapper_fwd.hpp; sourceTree = "<group>"; };
 		7339798545DEB848EA63717020DCCAA9 /* properties.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = properties.hpp; sourceTree = "<group>"; };
 		733BBFA91394DEE24D0EE47EF4C35F04 /* end.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = end.hpp; sourceTree = "<group>"; };
@@ -18170,6 +18171,7 @@
 				BDF267598F1BD7119F25816C54D2DC13 /* BitShareCoordinator.mm */,
 				0752303043000C4F3E38C8928A180A83 /* address.cpp */,
 				58B1719FC546C85383F43246B40ACE56 /* cybex_mob_lib.hpp */,
+				7335642E20FF2C0500426FE4 /* cybex_gateway_query.hpp */,
 				7386291A788FC7DE14BE446D1B0B59FF /* get_dev_key.cpp */,
 				E1434F6B78DADFA922E2399F02E599FD /* memo.cpp */,
 				EBF8893D3AF1D39CA154127A31FABB77 /* pts_address.cpp */,

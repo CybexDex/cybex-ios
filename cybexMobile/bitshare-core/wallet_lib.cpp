@@ -6,6 +6,7 @@
 #include "graphene/chain/protocol/transfer.hpp"
 #include "transaction.hpp"
 #include "wallet_lib.hpp"
+#include "cybex_gateway_query.hpp"
 
 using namespace std;
 using namespace fc;
@@ -241,3 +242,29 @@ string get_cancel_order_json(
   variant op_json(o);
   return fc::json::to_string(op_json);
 } catch(...){return "";}}
+
+
+string cybex_gateway_query(
+                           string accountName,
+                           string asset,
+                           string fundType,
+                           uint32_t size,
+                           uint32_t offset,
+                           uint32_t expiration
+                           )
+{
+  struct cybex_gateway_query_operation op;
+  digest_type::encoder enc;
+  
+  op.accountName = accountName;
+  op.asset = asset;
+  op.fundType = fundType;
+  op.size = size;
+  op.offset = offset;
+  op.expiration = fc::time_point_sec(expiration);
+  
+  fc::ecc::private_key active_priv_key = get_private_key("");
+  fc::raw::pack(enc, op);
+  variant sig(active_priv_key.sign_compact(enc.result()));
+  return fc::json::to_string(sig);
+}
