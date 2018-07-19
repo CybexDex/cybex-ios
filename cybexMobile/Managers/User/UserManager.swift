@@ -197,6 +197,7 @@ extension UserManager {
             if let auth = auth as? [Any], let key = auth[0] as? String {
               if key == public_key {
                 canLock = true
+                BitShareCoordinator.resetDefaultPublicKey(key)
                 break
               }
             }
@@ -206,6 +207,7 @@ extension UserManager {
             if let auth = auth as? [Any], let key = auth[0] as? String {
               if key == public_key {
                 canLock = true
+                BitShareCoordinator.resetDefaultPublicKey(key)
                 break
               }
             }

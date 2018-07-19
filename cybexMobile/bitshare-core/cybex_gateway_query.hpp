@@ -16,6 +16,7 @@
 
 using namespace fc;
 
+
 struct cybex_gateway_query_operation
 {
   string accountName;
@@ -23,9 +24,16 @@ struct cybex_gateway_query_operation
   optional<string> fundType;
   optional<uint32_t> size;
   optional<uint32_t> offset;
-  time_point_sec expiration;
+  uint32_t expiration;
+};
+
+struct cybex_gateway_query_transaction
+{
+  struct cybex_gateway_query_operation op;
+  graphene::chain::signature_type signer;
 };
 
 FC_REFLECT(cybex_gateway_query_operation, (accountName)(asset)(fundType)(size)(offset)(expiration))
+FC_REFLECT(cybex_gateway_query_transaction, (op)(signer))
 
 #endif

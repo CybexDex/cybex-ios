@@ -102,3 +102,7 @@ string cybex_gateway_query(
                            uint32_t offset,
                            uint32_t expiration
                            );
+
+string decrypt_memo_data(
+                         string memo_json_str
+                         );
