@@ -110,7 +110,7 @@ PODS:
   - SDCAlertView (8.1)
   - SipHash (1.2.2)
   - Siren (3.4.1)
-  - Starscream (3.0.5)
+  - SocketRocket (0.5.1)
   - SwiftEntryKit (0.4.2):
     - QuickLayout (= 2.0.2)
   - SwifterSwift (4.3.0):
@@ -202,7 +202,7 @@ DEPENDENCIES:
   - RxValidator
   - SDCAlertView
   - Siren
-  - Starscream
+  - SocketRocket (from `https://github.com/facebook/SocketRocket`, branch `master`)
   - SwiftEntryKit
   - SwifterSwift
   - SwiftRichString (from `https://github.com/malcommac/SwiftRichString`, tag `2.0.1`)
@@ -283,7 +283,6 @@ SPEC REPOS:
     - SDCAlertView
     - SipHash
     - Siren
-    - Starscream
     - SwiftEntryKit
     - SwifterSwift
     - SwiftHash
@@ -306,6 +305,9 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   BeareadToast:
     :git: https://github.com/phpmaple/BeareadToast
+  SocketRocket:
+    :branch: master
+    :git: https://github.com/facebook/SocketRocket
   SwiftRichString:
     :git: https://github.com/malcommac/SwiftRichString
     :tag: 2.0.1
@@ -314,6 +316,9 @@ CHECKOUT OPTIONS:
   BeareadToast:
     :commit: 1e82fc7338e9ab176168af234900f5fc61ade947
     :git: https://github.com/phpmaple/BeareadToast
+  SocketRocket:
+    :commit: 0a023409b138039d1ab5ac5431fe61c5f334e86b
+    :git: https://github.com/facebook/SocketRocket
   SwiftRichString:
     :git: https://github.com/malcommac/SwiftRichString
     :tag: 2.0.1
@@ -381,7 +386,7 @@ SPEC CHECKSUMS:
   SDCAlertView: c497f7c812ccc06095d6f772aa282ebe1a216f4a
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   Siren: 94e13d40b48d8c0ddac053140d607c36bb487767
-  Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
+  SocketRocket: dbb1554b8fc288ef8ef370d6285aeca7361be31e
   SwiftEntryKit: f6c478d5e6016c255b5f7a8a2cc67c5594e97273
   SwifterSwift: f3fce2b9fc5b9d8fda6eec33825e5243c60aebba
   SwiftHash: c805de5a434eacfa0dac7210745a50c55d7fe33d
@@ -402,6 +407,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: 3da75bfe89031a59d2bc72e02e462f506a882de8
+PODFILE CHECKSUM: ea6b18fd0e9abd862db495bd66903f4677ac9f0f
 
 COCOAPODS: 1.5.3

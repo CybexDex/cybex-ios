@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Starscream
+import SocketRocket
 import JSONRPCKit
 import SwiftyJSON
 import SwifterSwift
@@ -31,7 +31,7 @@ enum NodeURLString:String {
 typealias RequestingType = [String: RequestsType]
 typealias RequestsType = (String, Any, ()->())
 
-class WebsocketService {
+class WebsocketService: NSObject {
   private var last_send_time:TimeInterval = 0
   private let semaphore = DispatchSemaphore(value: 1)
   private let requests_queue_concurrent = DispatchQueue(label: "com.nbltrsut.requests_queue_concurrent", attributes: .concurrent)
@@ -44,9 +44,9 @@ class WebsocketService {
   private var requests:[RequestsType] = []
   private var requesting:RequestingType = [:]
 
-  private var socket = WebSocket(url: URL(string: NodeURLString.all[0].rawValue)!)
+  private var socket = SRWebSocket(url: URL(string: NodeURLString.all[0].rawValue)!)
 
-  private var testsockets:[WebSocket] = []
+  private var testsockets:[SRWebSocket] = []
 
   private var batchFactory:BatchFactory!
   private(set) var idGenerator:JsonIdGenerator = JsonIdGenerator()
@@ -65,10 +65,11 @@ class WebsocketService {
     }
   }
 
-  private init() {
+  private override init() {
+    super.init()
     self.batchFactory = BatchFactory(version: "2.0", idGenerator:self.idGenerator)
 
-//    connect()
+    connect()
   }
   
   static let shared = WebsocketService()
@@ -78,7 +79,7 @@ class WebsocketService {
 
     var errorCount = 0
     for (idx, node) in NodeURLString.all.enumerated() {
-      var testsocket:WebSocket!
+      var testsocket:SRWebSocket!
       
       if idx < testsockets.count {
         testsocket = testsockets[idx]
@@ -86,36 +87,36 @@ class WebsocketService {
       else {
         var request = URLRequest(url: URL(string:node.rawValue)!)
         request.timeoutInterval = autoConnectCount.double * 1.0 + 0.1//随着重试次数增加 增加超时时间
-        testsocket = WebSocket(request: request)
-    
-        testsocket.callbackQueue = Await.Queue.await
+        testsocket = SRWebSocket(urlRequest: request)
+        
+//        testsocket.callbackQueue = Await.Queue.await
         testsockets.append(testsocket)
       }
       
       //websocketDidConnect
-      testsocket.onConnect = {
-        seal.fulfill(node)
-
-      }
+//      testsocket.onConnect = {
+//        seal.fulfill(node)
+//
+//      }
       
       /*
        error NSError  domain: "NSPOSIXErrorDomain" - code: 50 网络断开
        error WSError writeTimeoutError 超时 网络延迟
        error nil socket断开
        */
-      testsocket.onDisconnect = { error in
-        guard let error = error else { return }
-        log.error(error)
-        
-        errorCount += 1
-        
-        if errorCount == NodeURLString.all.count {
-          seal.reject(error)
-        }
-      }
-    
-      
-      testsocket.connect()
+//      testsocket.onDisconnect = { error in
+//        guard let error = error else { return }
+//        log.error(error)
+//
+//        errorCount += 1
+//
+//        if errorCount == NodeURLString.all.count {
+//          seal.reject(error)
+//        }
+//      }
+//
+//
+//      testsocket.connect()
     }
     
     return promise
@@ -146,25 +147,27 @@ class WebsocketService {
     currentNode = nil
     isConnecting = true
 
-    DispatchQueue.global().async {
-      do {
-        let node = try await(self.detectFastNode())
-        main {
-          self.currentNode = node
-          self.changeNode(node: node)
-        }
-
-      }
-      catch {
-        main {
-          SwifterSwift.delay(milliseconds: 10000, completion: {
-            if !self.checkNetworConnected(), self.autoConnectCount <= 5 {
-              self.autoConnect()
-            }
-          })
-        }
-      }
-    }
+    self.currentNode = NodeURLString.shanghai
+    changeNode(node: self.currentNode!)
+//    DispatchQueue.global().async {
+//      do {
+//        let node = try await(self.detectFastNode())
+//        main {
+//          self.currentNode = node
+//          self.changeNode(node: node)
+//        }
+//
+//      }
+//      catch {
+//        main {
+//          SwifterSwift.delay(milliseconds: 10000, completion: {
+//            if !self.checkNetworConnected(), self.autoConnectCount <= 5 {
+//              self.autoConnect()
+//            }
+//          })
+//        }
+//      }
+//    }
   }
   
   private func changeNode(node: NodeURLString) {
@@ -172,19 +175,20 @@ class WebsocketService {
     currentNode = node
     let request = URLRequest(url: URL(string:node.rawValue)!)
     
-    socket.request = request
+    socket = SRWebSocket(urlRequest: request)
+    
     socket.delegate = self
-    socket.callbackQueue = DispatchQueue.global()
-    socket.connect()
+    socket.delegateDispatchQueue = DispatchQueue.global()
+    socket.open()
 
   }
   
   func checkNetworConnected() -> Bool {
-    if !socket.isConnected {
-      return false
+    if socket.readyState == SRReadyState.OPEN {
+      return true
     }
     
-    return true
+    return false
   }
   
   func reConnect() {
@@ -206,7 +210,7 @@ class WebsocketService {
       self.requesting = [:]
     }
     
-    socket.disconnect()
+    socket.close()
   }
   
   private func autoConnect() {
@@ -364,7 +368,12 @@ extension WebsocketService {
         writeJSON = JSON(batch.requestObject)
       }
       
-      self.socket.write(data: try! writeJSON.rawData())
+      if self.socket.readyState == SRReadyState.OPEN {
+        let data = try? writeJSON.rawData()
+        
+        try? self.socket.send(data: data)
+      }
+      
       
 
       let id = writeJSON["id"].stringValue
@@ -439,18 +448,19 @@ extension WebsocketService {
 }
 
 
-extension WebsocketService: WebSocketDelegate {
-  func websocketDidConnect(socket: WebSocketClient) {
+extension WebsocketService: SRWebSocketDelegate {
+  func webSocketDidOpen(_ webSocket: SRWebSocket) {
     print("websocket is connected")
     isConnecting = false
-    
+
     main {
       self.preFetchID()
       self.fetchIDs()
     }
   }
   
-  func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
+  
+  func webSocket(_ webSocket: SRWebSocket, didFailWithError error: Error) {
     isConnecting = false
     
     removeIDs()
@@ -463,20 +473,21 @@ extension WebsocketService: WebSocketDelegate {
       reConnect()
     }
     
-    if let e = error as? WSError {
-      print("websocket is disconnected: \(e.message)")
-    } else if let e = error {
-      print("websocket is disconnected: \(e.localizedDescription)")
-    } else {
-      print("websocket disconnected")
-    }
+//    if let e = error as? WSError {
+//      print("websocket is disconnected: \(e.message)")
+//    } else if let e = error {
+//      print("websocket is disconnected: \(e.localizedDescription)")
+//    } else {
+//      print("websocket disconnected")
+//    }
   }
   
-  func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
+  func webSocket(_ webSocket: SRWebSocket, didReceiveMessage message: Any) {
+  
     self.requesting_queue_concurrent.async(flags: .barrier) {[weak self] in
-      guard let `self` = self else { return }
+      guard let `self` = self, let message = message as? String else { return }
 
-      let data = JSON(parseJSON:text)
+      let data = JSON(parseJSON:message)
       
       if let error = data["error"].dictionary {
         print("data : \(data)")
@@ -538,7 +549,5 @@ extension WebsocketService: WebSocketDelegate {
     }
   }
   
-  func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
-  }
   
 }
