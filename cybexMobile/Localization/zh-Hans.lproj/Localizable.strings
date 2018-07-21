@@ -241,5 +241,12 @@
 
 "update_version" = "版本更新";
 
+//zsy add
+"my_property" = "我的资产";
+"order_value" = "委托单";
+"transfer" = "转账";
+"account_property" = "账户资产估值(CYB)";
+"hello" = "您好，";
+//zsy end
 
 

@@ -10,6 +10,9 @@ import UIKit
 import ReSwift
 
 protocol YourPortfolioCoordinatorProtocol {
+  func pushToRechargeVC()
+  func pushToWithdrawDepositVC()
+  func pushToTransferVC()
 }
 
 protocol YourPortfolioStateManagerProtocol {
@@ -31,7 +34,17 @@ class YourPortfolioCoordinator: AccountRootCoordinator {
 }
 
 extension YourPortfolioCoordinator: YourPortfolioCoordinatorProtocol {
+  func pushToRechargeVC() {
     
+  }
+  
+  func pushToWithdrawDepositVC() {
+    
+  }
+  
+  func pushToTransferVC() {
+    
+  }
 }
 
 extension YourPortfolioCoordinator: YourPortfolioStateManagerProtocol {

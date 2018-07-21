@@ -19,6 +19,7 @@ class YourPortfolioViewController: BaseViewController {
   
   var coordinator: (YourPortfolioCoordinatorProtocol & YourPortfolioStateManagerProtocol)?
   
+  @IBOutlet weak var tableHeadView: YourPortfolioTableHeadView!
   @IBOutlet weak var tableView: UITableView!
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,9 +27,10 @@ class YourPortfolioViewController: BaseViewController {
   }
   
   func setupUI(){
-    self.localized_text = R.string.localizable.portfolioTitle.key.localizedContainer()
+    self.localized_text = R.string.localizable.my_property.key.localizedContainer()
     let cell = String.init(describing: YourPortfolioCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
+    tableView.tableHeaderView = tableHeadView
   }
   
   func commonObserveState() {
@@ -90,12 +92,24 @@ extension YourPortfolioViewController : UITableViewDataSource,UITableViewDelegat
     return cell
   }
   
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: define.sectionHeaderHeight))
-    lockupAssetsSectionView.cybPriceTitle.locali = R.string.localizable.cyb_value.key.localized()
-    return lockupAssetsSectionView
+//  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//    let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: define.sectionHeaderHeight))
+//    lockupAssetsSectionView.cybPriceTitle.locali = R.string.localizable.cyb_value.key.localized()
+//    return lockupAssetsSectionView
+//  }
+//  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//    return define.sectionHeaderHeight
+//  }
+}
+
+extension YourPortfolioViewController {
+  @objc func rechargeEvent(_ data: [String: Any]) {
+    self.coordinator?.pushToRechargeVC()
   }
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return define.sectionHeaderHeight
+  @objc func withdrawDepositEvent(_ data: [String: Any]) {
+    self.coordinator?.pushToWithdrawDepositVC()
+  }
+  @objc func transferEvent(_ data: [String: Any]) {
+    self.coordinator?.pushToTransferVC()
   }
 }
