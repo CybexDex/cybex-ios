@@ -136,5 +136,57 @@
             </objects>
             <point key="canvasLocation" x="1107" y="176"/>
         </scene>
+        <!--Transfer Detail View Controller-->
+        <scene sceneID="nhD-VS-VUz">
+            <objects>
+                <viewController storyboardIdentifier="TransferDetailViewController" id="5Ny-u7-eHM" customClass="TransferDetailViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E0m-5c-fty">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J9j-8m-C3N" customClass="TransferTopView" customModule="cybexMobile" customModuleProvider="target">
+                                <rect key="frame" x="13" y="33" width="349" height="108"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="108" id="tcK-iC-Ai5"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                        <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FQU-Kv-5Os" customClass="TransferContentView" customModule="cybexMobile" customModuleProvider="target">
+                                <rect key="frame" x="13" y="153" width="349" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="J9j-8m-C3N" firstAttribute="top" secondItem="N28-lf-MRf" secondAttribute="top" constant="13" id="DFj-MX-ERT"/>
+                            <constraint firstItem="FQU-Kv-5Os" firstAttribute="top" secondItem="J9j-8m-C3N" secondAttribute="bottom" constant="12" id="Euj-nV-0Ds"/>
+                            <constraint firstItem="J9j-8m-C3N" firstAttribute="leading" secondItem="N28-lf-MRf" secondAttribute="leading" constant="13" id="HmD-sB-dSy"/>
+                            <constraint firstItem="FQU-Kv-5Os" firstAttribute="leading" secondItem="N28-lf-MRf" secondAttribute="leading" constant="13" id="N8h-SW-2iI"/>
+                            <constraint firstItem="N28-lf-MRf" firstAttribute="trailing" secondItem="FQU-Kv-5Os" secondAttribute="trailing" constant="13" id="Tfa-Ic-T4c"/>
+                            <constraint firstItem="N28-lf-MRf" firstAttribute="trailing" secondItem="J9j-8m-C3N" secondAttribute="trailing" constant="13" id="tJV-p4-Zyp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="N28-lf-MRf"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RDq-GH-VgO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1876" y="190"/>
+        </scene>
     </scenes>
 </document>

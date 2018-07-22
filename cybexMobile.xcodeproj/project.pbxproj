@@ -219,6 +219,16 @@
 		72199D9521045DD000575226 /* TransferListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199D9321045DD000575226 /* TransferListCell.xib */; };
 		72199D9721045DDE00575226 /* TransferListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D9621045DDE00575226 /* TransferListCellView.swift */; };
 		72199D9921045DEA00575226 /* TransferListCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199D9821045DEA00575226 /* TransferListCellView.xib */; };
+		72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D9B2104636900575226 /* TransferDetailCoordinator.swift */; };
+		72199DA02104636900575226 /* TransferDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D9C2104636900575226 /* TransferDetailActions.swift */; };
+		72199DA12104636900575226 /* TransferDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D9D2104636900575226 /* TransferDetailViewController.swift */; };
+		72199DA22104636900575226 /* TransferDetailReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D9E2104636900575226 /* TransferDetailReducers.swift */; };
+		72199DA5210466C000575226 /* TransferTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199DA4210466C000575226 /* TransferTopView.swift */; };
+		72199DA7210466CB00575226 /* TransferTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199DA6210466CB00575226 /* TransferTopView.xib */; };
+		72199DA92104680000575226 /* TransferContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199DA82104680000575226 /* TransferContentView.swift */; };
+		72199DAB2104680900575226 /* TransferContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199DAA2104680900575226 /* TransferContentView.xib */; };
+		72199DAD2104687400575226 /* TransferLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199DAC2104687400575226 /* TransferLineView.swift */; };
+		72199DAF2104687D00575226 /* TransferLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199DAE2104687D00575226 /* TransferLineView.xib */; };
 		7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25010BD1F86818F3968A6D9DEF12AD52 /* BusinessViewController.swift */; };
 		7279867F20F49B3300FFB2DA /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 7279867E20F49B3200FFB2DA /* schema.json */; };
 		72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */; };
@@ -5631,6 +5641,16 @@
 		72199D9321045DD000575226 /* TransferListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferListCell.xib; sourceTree = "<group>"; };
 		72199D9621045DDE00575226 /* TransferListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListCellView.swift; sourceTree = "<group>"; };
 		72199D9821045DEA00575226 /* TransferListCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferListCellView.xib; sourceTree = "<group>"; };
+		72199D9B2104636900575226 /* TransferDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDetailCoordinator.swift; sourceTree = "<group>"; };
+		72199D9C2104636900575226 /* TransferDetailActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDetailActions.swift; sourceTree = "<group>"; };
+		72199D9D2104636900575226 /* TransferDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDetailViewController.swift; sourceTree = "<group>"; };
+		72199D9E2104636900575226 /* TransferDetailReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDetailReducers.swift; sourceTree = "<group>"; };
+		72199DA4210466C000575226 /* TransferTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferTopView.swift; sourceTree = "<group>"; };
+		72199DA6210466CB00575226 /* TransferTopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferTopView.xib; sourceTree = "<group>"; };
+		72199DA82104680000575226 /* TransferContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferContentView.swift; sourceTree = "<group>"; };
+		72199DAA2104680900575226 /* TransferContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferContentView.xib; sourceTree = "<group>"; };
+		72199DAC2104687400575226 /* TransferLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferLineView.swift; sourceTree = "<group>"; };
+		72199DAE2104687D00575226 /* TransferLineView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferLineView.xib; sourceTree = "<group>"; };
 		721B475F13CCE8D8192F58C4A44E15C3 /* static_warning.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = static_warning.hpp; sourceTree = "<group>"; };
 		721E9CE95D8C107D2503951AB72EAE66 /* bind_to_log.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bind_to_log.hpp; sourceTree = "<group>"; };
 		722AC369F029E99ECD96C2DF727A4317 /* arithmetic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = arithmetic.hpp; sourceTree = "<group>"; };
@@ -21538,6 +21558,7 @@
 		72199D7F21045CEA00575226 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
+				72199D9A2104635400575226 /* TransferDetail */,
 				72199D9121045DAF00575226 /* Views */,
 				72199D9021045DAA00575226 /* Cells */,
 				72199D8821045D4700575226 /* TransferListCoordinator.swift */,
@@ -21562,6 +21583,31 @@
 			children = (
 				72199D9621045DDE00575226 /* TransferListCellView.swift */,
 				72199D9821045DEA00575226 /* TransferListCellView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		72199D9A2104635400575226 /* TransferDetail */ = {
+			isa = PBXGroup;
+			children = (
+				72199DA32104669800575226 /* Views */,
+				72199D9B2104636900575226 /* TransferDetailCoordinator.swift */,
+				72199D9C2104636900575226 /* TransferDetailActions.swift */,
+				72199D9D2104636900575226 /* TransferDetailViewController.swift */,
+				72199D9E2104636900575226 /* TransferDetailReducers.swift */,
+			);
+			path = TransferDetail;
+			sourceTree = "<group>";
+		};
+		72199DA32104669800575226 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72199DA4210466C000575226 /* TransferTopView.swift */,
+				72199DA6210466CB00575226 /* TransferTopView.xib */,
+				72199DA82104680000575226 /* TransferContentView.swift */,
+				72199DAA2104680900575226 /* TransferContentView.xib */,
+				72199DAC2104687400575226 /* TransferLineView.swift */,
+				72199DAE2104687D00575226 /* TransferLineView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -32411,6 +32457,7 @@
 				ED52E183FEB4713941693F42DF4A3FC3 /* cfloat in Resources */,
 				D87D82C27FA74490808CC159AF1F26A4 /* climits in Resources */,
 				8BBD1A7F16A0642B27F1E61660BBBE75 /* clocale in Resources */,
+				72199DA7210466CB00575226 /* TransferTopView.xib in Resources */,
 				1B738C312087134B7F7E5462BD1DB526 /* cmath in Resources */,
 				2BF75EA384934AE269618BFA4D315DA3 /* cmath in Resources */,
 				60366FF13A1DDFEAB352E48931017AD4 /* cmath.SUNWCCh in Resources */,
@@ -32467,11 +32514,13 @@
 				0498653CB73623C7731DCD17309EC21A /* queue.SUNWCCh in Resources */,
 				775A0AC293D3BA7664DF110680A7CA5E /* random in Resources */,
 				50AC1D5876BE8E4CE1F57FE12CB138AA /* random.SUNWCCh in Resources */,
+				72199DAB2104680900575226 /* TransferContentView.xib in Resources */,
 				3299A2EFB332B1EE39EB214D2FC87525 /* regex in Resources */,
 				CC76CFB4727E500CB64DF691E8EE3E33 /* regex.SUNWCCh in Resources */,
 				05802DA2E7EDEEA258806461FCCFF8DD /* set in Resources */,
 				922CBDB730EBC9FC4D98119AD58C8A0E /* set.SUNWCCh in Resources */,
 				56368B5447BA035D8DA7B2F5DD5495F4 /* sstream in Resources */,
+				72199DAF2104687D00575226 /* TransferLineView.xib in Resources */,
 				43A6A4507174D761F8591B6EAD54A7DC /* sstream.SUNWCCh in Resources */,
 				7279867F20F49B3300FFB2DA /* schema.json in Resources */,
 				F74894049FBFC47D85ABB9A91B3911D2 /* stack in Resources */,
@@ -32794,6 +32843,7 @@
 				9708F7C8EA5B8E107E937306846BE6F0 /* AccountPortfolioCellView.swift in Sources */,
 				32BED01405F6D7B22B348057E0BDE3C8 /* AccountPortfolioView.swift in Sources */,
 				72199D6F21044FE800575226 /* WithdrawRecodeCoordinator.swift in Sources */,
+				72199DA92104680000575226 /* TransferContentView.swift in Sources */,
 				E0AD8E2E835D84754C63BA76FBA8582E /* AccountReducers.swift in Sources */,
 				C44F04354B1B9F8051BA2651AC620D65 /* AccountRootCoordinator.swift in Sources */,
 				13E6F8CDA828421536430547C25E3C99 /* AccountViewController.swift in Sources */,
@@ -32819,6 +32869,7 @@
 				B9DE00DA8B7EDD0F9BEA00881C4924C1 /* BusinessTitleCell.swift in Sources */,
 				66A5DD971B80802DF72977E071CAB84D /* BusinessTitleItemView.swift in Sources */,
 				72199D8D21045D4700575226 /* TransferListActions.swift in Sources */,
+				72199DA12104636900575226 /* TransferDetailViewController.swift in Sources */,
 				72199D8F21045D4700575226 /* TransferListReducers.swift in Sources */,
 				72199D6621044FD100575226 /* RechargeRecodeCoordinator.swift in Sources */,
 				188394B25D1EF3596A01900469FACBFB /* BusinessTitleView.swift in Sources */,
@@ -32833,6 +32884,7 @@
 				A971765C0FF4C52CAA1C001A3ABBC1B1 /* CBKLineDrawView.swift in Sources */,
 				45E03EE6B4BBE7286E7287D3DFD1B9D6 /* CBKLineMainView.swift in Sources */,
 				E286FE83AA3DB3C53DD1FDE1CA1BC208 /* CBKLineModel.swift in Sources */,
+				72199DAD2104687400575226 /* TransferLineView.swift in Sources */,
 				BAB27405E1C42F6C20B9DBF1FDDBC100 /* CBKLineView.swift in Sources */,
 				B7631744A19B452081A71269BF881246 /* CBKLineVolumeView.swift in Sources */,
 				8C3E5CB53A30AD3221992CCA44A8D332 /* CBMACDModel.swift in Sources */,
@@ -32854,6 +32906,7 @@
 				61096350D887C3728E3B617E993C2365 /* Demo.swift in Sources */,
 				51FB3EBF69DA6AF015F0DF92781986BF /* DemoCache.swift in Sources */,
 				A1EF7FAAA7F0B4F6C9FE153714C1ED47 /* ShowToastManager.swift in Sources */,
+				72199DA5210466C000575226 /* TransferTopView.swift in Sources */,
 				BD76C30DD5E6DF9195A2DF3218C62F70 /* EmptySegue.swift in Sources */,
 				054514C4C6457A51CC46615D25768574 /* EntryActions.swift in Sources */,
 				E5401ED6E9547DC2097AC58606842B84 /* EntryCoordinator.swift in Sources */,
@@ -32934,6 +32987,7 @@
 				F1B88753DCA13AC5B42338848EEC8DBF /* OpenedOrdersView.swift in Sources */,
 				F5DDA9E8ED5A5AA3D7A8F0705CFBA4BD /* OpenedOrdersViewController.swift in Sources */,
 				8712B050CE07ED3C160B237CB07116ED /* Operation.swift in Sources */,
+				72199DA02104636900575226 /* TransferDetailActions.swift in Sources */,
 				B7C833CEBC9B338666CA2D979065BF91 /* Operators.swift in Sources */,
 				A33E06706616C92F527D5547D28DEBF6 /* Optional+Extensions.swift in Sources */,
 				CDFF0BF138FA10588F2D771CAF16AF34 /* OrderBook.swift in Sources */,
@@ -33005,12 +33059,14 @@
 				640657C00CD9588E73E0F0280F245348 /* TradeRootCoordinator.swift in Sources */,
 				C02132F00200B408020442C307CEE0B6 /* TradeView.swift in Sources */,
 				7CA82BA6BC1F22AAA929D52CD5C4434F /* TradeViewController.swift in Sources */,
+				72199DA22104636900575226 /* TransferDetailReducers.swift in Sources */,
 				A0205CDF8595D10C5D9367EBCBBA714A /* UIColor+Additions.swift in Sources */,
 				1885C2EE1E25930F2E94702A8C05C2BC /* UIColor+Cybexblack.swift in Sources */,
 				72199D7221044FE800575226 /* WithdrawRecodeReducers.swift in Sources */,
 				492A4075DDD845005D90DD5201F32F26 /* UIColorExtension.swift in Sources */,
 				CC8DD1E9001CFBB8915E342EDB329B3E /* UIImage+Extensions.swift in Sources */,
 				0C46B30A32343632C135B84DDEB47F80 /* UIResponder+Route.swift in Sources */,
+				72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */,
 				0FF6C4A7AAF40F0AC67CBDAEAA2406E2 /* UITextField+Extensions.swift in Sources */,
 				C2728D465891E65690FBF4E868796852 /* UIView+Extensions.swift in Sources */,
 				01D3990C8F03B94C2207F37FF3C7C895 /* UIViewController+Extension.swift in Sources */,

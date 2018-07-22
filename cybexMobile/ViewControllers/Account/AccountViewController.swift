@@ -289,7 +289,9 @@ extension AccountViewController{
     self.coordinator?.openYourProtfolio()
   }
   @objc func openOpenedOrders(_ data:[String: Any]){
-    self.coordinator?.openOpenedOrders()
+    
+    self.coordinator?.openTransfreList()
+//    self.coordinator?.openOpenedOrders()
   }
   @objc func openLockupAssets(_ data:[String: Any]){
     guard !isLoading() else { return }

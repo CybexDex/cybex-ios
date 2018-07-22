@@ -269,4 +269,14 @@
 "transfer_done" = "Received";
 "transfer_send" = "Sent";
 
+// 转账详情
+"transfer_detail" = "转账详情";
+"transfer_detail_send" = "Out";
+"transfer_detail_income" = "In";
+"transfer_detail_income_address" = "From";
+"transfer_detail_send_address" = "To";
+"transfer_detail_time" = "Vesting Period";
+"transfer_detail_fee" = "Fee";
+"transfer_detail_mome" = "Memo";
+"transfer_Detail_click" = "Click to view";
 

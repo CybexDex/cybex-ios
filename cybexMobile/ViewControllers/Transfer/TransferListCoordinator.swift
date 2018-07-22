@@ -10,6 +10,8 @@ import UIKit
 import ReSwift
 
 protocol TransferListCoordinatorProtocol {
+  
+  func openTransferDetail(_ sender:Any?)
 }
 
 protocol TransferListStateManagerProtocol {
@@ -19,7 +21,7 @@ protocol TransferListStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
 }
 
-class TransferListCoordinator: <#RootCoordinator#> {
+class TransferListCoordinator: AccountRootCoordinator {
     
     lazy var creator = TransferListPropertyActionCreate()
     
@@ -31,7 +33,12 @@ class TransferListCoordinator: <#RootCoordinator#> {
 }
 
 extension TransferListCoordinator: TransferListCoordinatorProtocol {
-    
+  func openTransferDetail(_ sender:Any?) {
+    if let vc = R.storyboard.recode.transferDetailViewController() {
+      vc.coordinator = TransferDetailCoordinator(rootVC: self.rootVC)
+      self.rootVC.pushViewController(vc, animated: true)
+    }
+  }
 }
 
 extension TransferListCoordinator: TransferListStateManagerProtocol {

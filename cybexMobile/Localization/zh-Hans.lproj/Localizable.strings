@@ -257,5 +257,16 @@
 "transfer_done" = "已收到";
 "transfer_send" = "已转出";
 
+// 转账详情
+"transfer_detail" = "转账详情";
+"transfer_detail_send" = "支出";
+"transfer_detail_income" = "收入";
+"transfer_detail_income_address" = "付款账户";
+"transfer_detail_send_address" = "收款账户";
+"transfer_detail_time" = "锁定期";
+"transfer_detail_fee" = "手续费";
+"transfer_detail_mome" = "备注信息";
+"transfer_Detail_click" = "点击查看";
+
 
 

@@ -22,6 +22,7 @@ class TransferListViewController: BaseViewController {
     }
     
     func setupUI() {
+      self.title = R.string.localizable.transfer_title()
         let nibString = String(describing: TransferListCell.self)
         self.tableView.register(UINib(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
     }
@@ -57,5 +58,9 @@ extension TransferListViewController : UITableViewDataSource,UITableViewDelegate
         let cell = tableView.dequeueReusableCell(withIdentifier: cellString, for: indexPath)
         return cell
     }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    self.coordinator?.openTransferDetail(nil)
+  }
     
 }
