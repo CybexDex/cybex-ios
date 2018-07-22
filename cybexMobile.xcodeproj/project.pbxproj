@@ -211,6 +211,14 @@
 		72199D7A210450C900575226 /* RecodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199D78210450C900575226 /* RecodeCell.xib */; };
 		72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D7B210450EA00575226 /* RecodeCellView.swift */; };
 		72199D7E210450F500575226 /* RecodeCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199D7D210450F500575226 /* RecodeCellView.xib */; };
+		72199D8C21045D4700575226 /* TransferListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D8821045D4700575226 /* TransferListCoordinator.swift */; };
+		72199D8D21045D4700575226 /* TransferListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D8921045D4700575226 /* TransferListActions.swift */; };
+		72199D8E21045D4700575226 /* TransferListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D8A21045D4700575226 /* TransferListViewController.swift */; };
+		72199D8F21045D4700575226 /* TransferListReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D8B21045D4700575226 /* TransferListReducers.swift */; };
+		72199D9421045DD000575226 /* TransferListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D9221045DD000575226 /* TransferListCell.swift */; };
+		72199D9521045DD000575226 /* TransferListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199D9321045DD000575226 /* TransferListCell.xib */; };
+		72199D9721045DDE00575226 /* TransferListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D9621045DDE00575226 /* TransferListCellView.swift */; };
+		72199D9921045DEA00575226 /* TransferListCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199D9821045DEA00575226 /* TransferListCellView.xib */; };
 		7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25010BD1F86818F3968A6D9DEF12AD52 /* BusinessViewController.swift */; };
 		7279867F20F49B3300FFB2DA /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 7279867E20F49B3200FFB2DA /* schema.json */; };
 		72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */; };
@@ -5615,6 +5623,14 @@
 		72199D78210450C900575226 /* RecodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecodeCell.xib; sourceTree = "<group>"; };
 		72199D7B210450EA00575226 /* RecodeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecodeCellView.swift; sourceTree = "<group>"; };
 		72199D7D210450F500575226 /* RecodeCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecodeCellView.xib; sourceTree = "<group>"; };
+		72199D8821045D4700575226 /* TransferListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListCoordinator.swift; sourceTree = "<group>"; };
+		72199D8921045D4700575226 /* TransferListActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListActions.swift; sourceTree = "<group>"; };
+		72199D8A21045D4700575226 /* TransferListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListViewController.swift; sourceTree = "<group>"; };
+		72199D8B21045D4700575226 /* TransferListReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListReducers.swift; sourceTree = "<group>"; };
+		72199D9221045DD000575226 /* TransferListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListCell.swift; sourceTree = "<group>"; };
+		72199D9321045DD000575226 /* TransferListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferListCell.xib; sourceTree = "<group>"; };
+		72199D9621045DDE00575226 /* TransferListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListCellView.swift; sourceTree = "<group>"; };
+		72199D9821045DEA00575226 /* TransferListCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferListCellView.xib; sourceTree = "<group>"; };
 		721B475F13CCE8D8192F58C4A44E15C3 /* static_warning.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = static_warning.hpp; sourceTree = "<group>"; };
 		721E9CE95D8C107D2503951AB72EAE66 /* bind_to_log.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bind_to_log.hpp; sourceTree = "<group>"; };
 		722AC369F029E99ECD96C2DF727A4317 /* arithmetic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = arithmetic.hpp; sourceTree = "<group>"; };
@@ -21519,6 +21535,37 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		72199D7F21045CEA00575226 /* Transfer */ = {
+			isa = PBXGroup;
+			children = (
+				72199D9121045DAF00575226 /* Views */,
+				72199D9021045DAA00575226 /* Cells */,
+				72199D8821045D4700575226 /* TransferListCoordinator.swift */,
+				72199D8921045D4700575226 /* TransferListActions.swift */,
+				72199D8A21045D4700575226 /* TransferListViewController.swift */,
+				72199D8B21045D4700575226 /* TransferListReducers.swift */,
+			);
+			path = Transfer;
+			sourceTree = "<group>";
+		};
+		72199D9021045DAA00575226 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				72199D9221045DD000575226 /* TransferListCell.swift */,
+				72199D9321045DD000575226 /* TransferListCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		72199D9121045DAF00575226 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72199D9621045DDE00575226 /* TransferListCellView.swift */,
+				72199D9821045DEA00575226 /* TransferListCellView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		72B51E6DD463B5A3E36B4946FEB7D64A /* proto */ = {
 			isa = PBXGroup;
 			children = (
@@ -30793,6 +30840,7 @@
 		F189D4AC3A5BB2DB266277BAD8CB0EA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				72199D7F21045CEA00575226 /* Transfer */,
 				1957BC4603D51BA58EA334581171C0AD /* Account */,
 				9D2617B8E4636D7B44A5583FD0A56039 /* Entry */,
 				95C45586F4A469DCB5A1CFCC4CB80A62 /* FAQ */,
@@ -32338,6 +32386,7 @@
 				C860BE92032F361E51995DB61C68774C /* RechargeSegment.xib in Resources */,
 				131A2FCACA9688EC4FC89E1A50E45457 /* StyleLabel.xib in Resources */,
 				425ABA62CF90E4866D5279A917C235AD /* TimeGapView.xib in Resources */,
+				72199D9921045DEA00575226 /* TransferListCellView.xib in Resources */,
 				09C3D6D8CF52A972307C4A1F1C214738 /* TradeCell.xib in Resources */,
 				807473C43B99A27237F53C7E2A2FE7F3 /* TradeHistoryCell.xib in Resources */,
 				3F6CBB1D8AC88D546B003B8A585E4EEB /* TradeHistoryCellView.xib in Resources */,
@@ -32441,6 +32490,7 @@
 				654DF2DDC90FA8C9A328B55918F4EEB3 /* tuple.SUNWCCh in Resources */,
 				86CAB827F380B4DDA4B48B813DEF7775 /* type_traits in Resources */,
 				C7186D34A3AA4B5EC090CB7DDDC4767F /* type_traits.SUNWCCh in Resources */,
+				72199D9521045DD000575226 /* TransferListCell.xib in Resources */,
 				4BDAA1229CE79E449D71FBB78746E6E5 /* typeinfo in Resources */,
 				29860A52A2F9E6057FEC80C30DB2C08C /* typeinfo.SUNWCCh in Resources */,
 				564933AA201BA7D916E7B2AABAE742F8 /* unordered_map in Resources */,
@@ -32729,6 +32779,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72199D9421045DD000575226 /* TransferListCell.swift in Sources */,
 				04AE2E3C8F409B0337F53AE4DB52FCD0 /* AccessoryCollectionView.swift in Sources */,
 				98ED9D145EF3DAA0FD242984364B676F /* AccessoryCollectionViewCell.swift in Sources */,
 				D6EF2CA9447A80749A341523EA37E613 /* AccessoryHorizentalView.swift in Sources */,
@@ -32767,6 +32818,8 @@
 				56FC707000D714C2C1294918AFBB33B6 /* BusinessReducers.swift in Sources */,
 				B9DE00DA8B7EDD0F9BEA00881C4924C1 /* BusinessTitleCell.swift in Sources */,
 				66A5DD971B80802DF72977E071CAB84D /* BusinessTitleItemView.swift in Sources */,
+				72199D8D21045D4700575226 /* TransferListActions.swift in Sources */,
+				72199D8F21045D4700575226 /* TransferListReducers.swift in Sources */,
 				72199D6621044FD100575226 /* RechargeRecodeCoordinator.swift in Sources */,
 				188394B25D1EF3596A01900469FACBFB /* BusinessTitleView.swift in Sources */,
 				C0AC3C1A58448D06655DCE0994FDC33A /* BusinessView.swift in Sources */,
@@ -32814,10 +32867,12 @@
 				41369312624D03C488017E7D88E4D41E /* ExchangeViewController.swift in Sources */,
 				F0CE8D5A02461E239914DF75E18C23FA /* ExplorerRootCoordinator.swift in Sources */,
 				0E785072E0FFD5C3B2BE5B7EAB012755 /* FAQActions.swift in Sources */,
+				72199D8E21045D4700575226 /* TransferListViewController.swift in Sources */,
 				2BE29FBC5EBC24621C616DCA7C58F109 /* FAQCoordinator.swift in Sources */,
 				72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */,
 				98D200C38B81D27DAF59438FCB5EF646 /* FAQReducers.swift in Sources */,
 				3B824D5C362724DE4C1048A35CDC37E0 /* FAQRootCoordinator.swift in Sources */,
+				72199D8C21045D4700575226 /* TransferListCoordinator.swift in Sources */,
 				F6AF1D76C51578A4EC2438427711F783 /* FAQViewController.swift in Sources */,
 				8691BEEE7629D4BE41D13D82D9AF29A9 /* GradientLabelView.swift in Sources */,
 				FF9F0639B5927B79A3EFC30AF470DE97 /* GradientLayer.swift in Sources */,
@@ -32897,6 +32952,7 @@
 				A819B2C87ADE04838AE8D44CF16C53B4 /* PairRechargeView.swift in Sources */,
 				70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */,
 				72199D6821044FD100575226 /* RechargeRecodeViewController.swift in Sources */,
+				72199D9721045DDE00575226 /* TransferListCellView.swift in Sources */,
 				E54849D562EC4C8B42B70B962A97269E /* R.generated.swift in Sources */,
 				ED57B29BDB18C8B97035E7DA20DF26E5 /* RechargeActions.swift in Sources */,
 				665FBB42152A37B183D011D45A4A0F22 /* RechargeCoordinator.swift in Sources */,

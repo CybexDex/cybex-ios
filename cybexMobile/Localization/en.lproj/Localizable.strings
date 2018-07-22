@@ -263,6 +263,10 @@
 "recode_state_fail" = "Failed";
 "recode_state_success" = "Done";
 
+// 转账记录
 
+"transfer_title" = "Transfer Records";
+"transfer_done" = "Received";
+"transfer_send" = "Sent";
 
 
