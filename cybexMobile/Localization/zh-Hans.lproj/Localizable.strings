@@ -241,5 +241,19 @@
 
 "update_version" = "版本更新";
 
+// 充提现
+"withdraw_list" = "提现记录";
+"deposit_list" = "充值记录";
+"update_time" = "更新时间:";
+"recode_address" = "地址:";
+"recode_state_new" = "新建";
+"recode_state_upping" = "正在上链";
+"recode_state_noensure" = "待确认";
+"recode_state_fail" = "失败";
+"recode_state_success" = "成功";
+
+
+
+
 
 

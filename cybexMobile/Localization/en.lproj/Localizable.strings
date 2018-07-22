@@ -251,3 +251,18 @@
 "business_login_title" = "Log in to exchange";
 
 "update_version" = "Version update";
+
+// 充提现
+"withdraw_list" = "Withdraw Records";
+"deposit_list" = "Deposit Records";
+"update_time" = "Update time:";
+"recode_address" = "Address:";
+"recode_state_new" = "New";
+"recode_state_upping" = "Init";
+"recode_state_noensure" = "Pending";
+"recode_state_fail" = "Failed";
+"recode_state_success" = "Done";
+
+
+
+
