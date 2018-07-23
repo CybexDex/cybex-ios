@@ -280,3 +280,10 @@
 "transfer_detail_mome" = "Memo";
 "transfer_Detail_click" = "Click to view";
 
+//zsy add
+"my_property" = "My Balance";
+"order_value" = "Opened Orders";
+"transfer" = "Transfer";
+"account_property" = "Your Total Balance(CYB)";
+"hello" = "Hello，";
+//zsy end

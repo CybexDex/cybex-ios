@@ -24,7 +24,10 @@ struct AccountPropertyState {
 
 }
 
-
+struct AccountViewModel {
+  var leftImage: UIImage?
+  var name: String = ""
+}
 
 //MARK: - Action Creator
 class AccountPropertyActionCreate: LoadingActionCreator {

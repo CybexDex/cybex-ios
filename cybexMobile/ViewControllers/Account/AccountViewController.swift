@@ -16,57 +16,12 @@ import SwiftRichString
 import SwifterSwift
 
 class AccountViewController: BaseViewController {
-  // 定义整个界面的全部子界面，根据tag值从stackView上面获取不同的界面
-  enum view_type:Int {
-    case header_view          = 0
-    case login_view           = 1
-    case introduce_view       = 2
-    case hello_view           = 3
-    case member_view          = 4
-    case totalBalance_view    = 5
-    case yourBanlance_view    = 6
-    case yourPortfolio_view   = 7
-    case assetOperations_view = 8
-  }
-  
-  enum user_type:Int{
-    case unLogin     = 0
-    case unPortfolio = 1
-    case normalState = 2
-    case noDataState = 3
-  }
-  
-    @IBOutlet weak var gatewayView: UIView!
-    @IBOutlet weak var portfolioView: AccountPortfolioView!
-  @IBOutlet weak var nameL: UILabel!
-  
-  @IBOutlet weak var memberLevel: UILabel!
-  
-  @IBOutlet weak var totalBalance: UILabel!
-  @IBOutlet weak var stackView: UIStackView!
-  
-  @IBOutlet weak var accountImageView: UIImageView!
-  
-  @IBOutlet weak var balanceRMB: UILabel!
-  
-  @IBOutlet weak var bgImageView: UIImageView!
-  
-    @IBOutlet weak var accountBottomView: AccountAssetOperationView!
-    
-  @IBOutlet weak var introduceCybex: UILabel!
-  
-  @IBOutlet weak var balanceIntroduce: UIImageView!
   
   var coordinator: (AccountCoordinatorProtocol & AccountStateManagerProtocol)?
   
-  var balanceIntroduceView : BalanceIntroduceView {
-    get{
-      let biView = BalanceIntroduceView(frame: UIScreen.main.bounds)
-      UIApplication.shared.keyWindow?.addSubview(biView)
-      return biView
-    }
-  }
+  @IBOutlet weak var accountContentView: AccountContentView!
   
+  var dataArray: [AccountViewModel] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -74,98 +29,65 @@ class AccountViewController: BaseViewController {
     setupUI()
     setupEvent()
     if  UserManager.shared.isLoginIn {
-      setupUIWithStatus(user_type.noDataState)
     }
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    self.updataStatus()
-    gatewayView.shadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20
-    portfolioView.collectionView.reloadData()
-    accountBottomView.data = nil
+    SwifterSwift.delay(milliseconds: 100) {
+      self.setupUI()
+    }
+  }
+  
+  func setupIconImg() {
+    if UserManager.shared.isLoginIn == true {
+      accountContentView.headerView.icon = R.image.accountAvatar()
+    } else {
+      if let hash = UserManager.shared.avatarString {
+        let generator = IconGenerator(size: 168, hash: Data(hex: hash))
+        if let render = generator.render() {
+          let image = UIImage(cgImage: render)
+          accountContentView.headerView.icon = image
+        }
+      }
+    }
+  }
+  
+  func setupTitle() {
+    if let name = UserManager.shared.account.value?.name {
+      accountContentView.headerView.title = R.string.localizable.hello.key.localized() + name
+    } else {
+      accountContentView.headerView.title = R.string.localizable.accountLogin.key.localized()
+    }
   }
   
   // UI的初始化设置
   func setupUI(){
-    self.automaticallyAdjustsScrollViewInsets = false
-    configRightNavButton()
+    setupTitle()
+    setupIconImg()
+    self.configRightNavButton(R.image.icSettings24Px())
     
-    self.balanceIntroduce.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self](tap) in
+    let imgArray = [R.image.icBalance(),R.image.w(),R.image.icOrder28Px(),R.image.icLockAsset()]
+    let nameArray = [R.string.localizable.my_property.key.localized(),R.string.localizable.account_trade.key.localized(),R.string.localizable.order_value.key.localized(),R.string.localizable.lockupAssetsTitle.key.localized()]
+    dataArray.removeAll()
+    for i in 0..<4 {
+      var model = AccountViewModel()
+      model.leftImage = imgArray[i]
+      model.name = nameArray[i]
       
-      guard let `self` = self else {return}
-      let _ = self.balanceIntroduceView
-      
-      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    
+      dataArray.append(model)
+    }
+    accountContentView.data = dataArray
   }
   
   func setupEvent() {
-    gatewayView.rx.tapGesture().when(.recognized).subscribe(onNext:{[weak self](tap) in
-        
-        guard let `self` = self else {return}
-       self.coordinator?.openRecharge()
-        
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
-    
-    if let login_view = stackView.viewWithTag(view_type.login_view.rawValue) {
-      login_view.rx.tapGesture().when(.recognized).subscribe(onNext: { (tap) in
-        app_coodinator.showLogin()
-      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    }
   }
   
   // 跳转到设置界面
   override func rightAction(_ sender: UIButton) {
     self.coordinator?.openSetting()
   }
-  
-  fileprivate func setupUIWithStatus(_ sender : user_type){
-    for tag in view_type.header_view.rawValue...view_type.assetOperations_view.rawValue {
-      stackView.viewWithTag(tag)?.isHidden = false
-    }
-    
-    var tags : [Int] = []
-    switch sender {
-    case .unLogin:
-      tags = Array(view_type.hello_view.rawValue...view_type.assetOperations_view.rawValue)
-      for tag in tags {
-        stackView.viewWithTag(tag)?.isHidden = true
-      }
-      
-      bgImageView.isHidden    = false
-      introduceCybex.styledText = R.string.localizable.accountIntroduce.key.localized()
-      
-    case .unPortfolio:
-      tags = [view_type.login_view.rawValue,view_type.introduce_view.rawValue,view_type.yourPortfolio_view.rawValue,view_type.member_view.rawValue]
-      for tag in tags {
-        stackView.viewWithTag(tag)?.isHidden = true
-      }
-      bgImageView.isHidden    = true
-      
-    case .normalState:
-      tags = [view_type.login_view.rawValue,view_type.introduce_view.rawValue,view_type.member_view.rawValue]
-      for tag in [1,2,4]{
-        stackView.viewWithTag(tag)?.isHidden = true
-      }
-      bgImageView.isHidden    = true
-    case .noDataState:
-      tags = [1,2,4,5,6,7,8]
-      for tag in tags{
-        stackView.viewWithTag(tag)?.isHidden = true
-      }
-      nameL.text =  UserManager.shared.name.value
-      let hash = UserManager.shared.avatarString!
-      let generator = IconGenerator(size: 168, hash: Data(hex: hash))
-      let image = UIImage(cgImage: generator.render()!)
-      accountImageView.image = image
-      
-      bgImageView.isHidden    = true
-    }
-    
-  }
-  
   
   
   func commonObserveState() {
@@ -182,117 +104,28 @@ class AccountViewController: BaseViewController {
     }
   }
   
-  func updataView(_ isLogin:Bool){
-    if !isLogin{
-      accountImageView.image = #imageLiteral(resourceName: "accountAvatar")
-      portfolioView.data = []
-      return
-    }
-    nameL.text =  UserManager.shared.account.value?.name
-    
-    let isSuper = UserManager.shared.account.value?.superMember ?? false
-    memberLevel.localized_text = isSuper ? R.string.localizable.accountSuperMember.key.localizedContainer() :  R.string.localizable.accountBasicMember.key.localizedContainer()
-    if UserManager.shared.balance == 0 {
-        totalBalance.text = "--"
-    }else{
-        totalBalance.text = UserManager.shared.balance.formatCurrency(digitNum: 5)
-    }
-    
-    if let ethAmount = changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble(){
-        if UserManager.shared.balance == 0 {
-            balanceRMB.text   = "≈¥--"
-        }else{
-            balanceRMB.text   = "≈¥" + String(UserManager.shared.balance * ethAmount * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
-        }
-    }
-    
-    if isLogin {
-      if let hash = UserManager.shared.avatarString {
-        let generator = IconGenerator(size: 168, hash: Data(hex: hash))
-        if let render = generator.render() {
-          let image = UIImage(cgImage: render)
-          accountImageView.image = image
-        }
-      }
-    }
-    else {
-      accountImageView.image =  #imageLiteral(resourceName: "accountAvatar")
-    }
-  }
-  
-  
-  
-  func updataStatus(){
-    //  判断是否有name来断定是否登陆
-    guard UserManager.shared.isLoginIn else {
-      setupUIWithStatus(user_type.unLogin)
-      updataView(false)
-      return
-    }
-    //  判断是否有可用资产来断定是否显示可用资产
-    guard let balances =  UserManager.shared.balances.value, balances.count > 0  else {
-      setupUIWithStatus(user_type.unPortfolio)
-      updataView(true)
-      return
-    }
-    setupUIWithStatus(user_type.normalState)
-    updataView(true)
-    SwifterSwift.delay(milliseconds: 100) {
-      self.portfolioView.data = UserManager.shared.getPortfolioDatas()
-    }
-  }
-  
   override func configureObserveState() {
     commonObserveState()
     
-    UserManager.shared.account.asObservable()
-      .skip(1)
-      .throttle(10, latest: true, scheduler: MainScheduler.instance)
-      .subscribe(onNext: { [weak self](account) in
-        guard let `self` = self else{ return }
-        if self.isVisible {
-          self.updataStatus()
-        }
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    
-    UserManager.shared.limitOrder.asObservable()
-      .skip(1)
-      .throttle(10, latest: true, scheduler: MainScheduler.instance)
-      .subscribe(onNext: { [weak self](account) in
-        guard let `self` = self else{ return }
-        if self.isVisible {
-          self.updataStatus()
-        }
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    
-//    UserManager.shared.name.asObservable().subscribe(onNext: {[weak self] (_) in
-//      guard let `self` = self else{ return }
-//      self.updataStatus()
-//    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    
-    UserManager.shared.balances.asObservable()
-      .skip(1)
-      .throttle(10, latest: true, scheduler: MainScheduler.instance)
-      .subscribe(onNext: { [weak self](account) in
-        guard let `self` = self else{ return }
-        if self.isVisible {
-          self.updataStatus()
-        }
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
 }
 
-
-
 extension AccountViewController{
-  @objc func openPortfolio(_ data:[String: Any]){
-    self.coordinator?.openYourProtfolio()
+
+  @objc func clickCellView(_ sender:[String:Any]) {
+    let index = sender["index"] as! Int
+    switch index {
+    case 0:
+      self.coordinator?.openYourProtfolio()
+    case 1:
+      self.coordinator?.openRecharge()
+    case 2:
+      self.coordinator?.openOpenedOrders()
+    default:
+      self.coordinator?.openLockupAssets()
+    }
   }
-  @objc func openOpenedOrders(_ data:[String: Any]){
-    
-    self.coordinator?.openTransfreList()
-//    self.coordinator?.openOpenedOrders()
-  }
+
   @objc func openLockupAssets(_ data:[String: Any]){
     guard !isLoading() else { return }
     
