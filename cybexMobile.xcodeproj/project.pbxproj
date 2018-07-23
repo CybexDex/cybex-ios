@@ -41,7 +41,6 @@
 		12AE5E9B9597FDA9EB27559DFCF073C7 /* TradeHistoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916E56478C2E42A90E8F4966F67037EA /* TradeHistoryCoordinator.swift */; };
 		131A2FCACA9688EC4FC89E1A50E45457 /* StyleLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE8A53C91AF199F1B99E4CCFB807DE2F /* StyleLabel.xib */; };
 		133E7DE8927D9AD19315D14E638939BE /* RechargeDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDA3A4A776E85A3F485F32310E2798 /* RechargeDetailCoordinator.swift */; };
-		13E6F8CDA828421536430547C25E3C99 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211E75C94D3D4AED3ACD48A4DA014E6D /* AccountViewController.swift */; };
 		141F9BF8F7BFFEAE83218B9E885D8FE8 /* IntroduceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 074CB2BE294F4C31A708254F4EAF6C82 /* IntroduceView.xib */; };
 		165A81AE46EF4E77603EE09ED7D761D7 /* PairRechargeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15763F4D0858712960CE513D0F020B2A /* PairRechargeView.xib */; };
 		166E70E89C354FE2B3C8BA861FE6958E /* BitShareCoordinator.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDF267598F1BD7119F25816C54D2DC13 /* BitShareCoordinator.mm */; };
@@ -67,7 +66,6 @@
 		253FA678E24480209F5F9418FE39D896 /* fstream in Resources */ = {isa = PBXBuildFile; fileRef = 09C798C2A2DF06089D59BC8BF9958C05 /* fstream */; };
 		26827458BC8C2CF5494505DA58315BBF /* OpenedOrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABDEB18F3DC6A39D5E8D8EA57AF7EF4 /* OpenedOrdersHeaderView.swift */; };
 		26DBFE949DEA6BC4379A397564804816 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5A634CE35111FD12F72879D9846891B9 /* README.md */; };
-		296F974C8751FC2ACF0E43EF8AC2EC7D /* YourPortfolioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8075A3CC5F95435FAB990943905756 /* YourPortfolioCell.xib */; };
 		29860A52A2F9E6057FEC80C30DB2C08C /* typeinfo.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = 0846DF32BCC3D7E11C7031C8EDC62EBD /* typeinfo.SUNWCCh */; };
 		29C911F371D5F143FB814E54626700D5 /* RechargeSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F999943C67E4ED6E626A8BA802C612 /* RechargeSegment.swift */; };
 		2BE29FBC5EBC24621C616DCA7C58F109 /* FAQCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6517201700BBB3CC3C3F12A7F3C9D /* FAQCoordinator.swift */; };
@@ -93,6 +91,27 @@
 		391642968E6C035AD01FF015BD4847DA /* locale.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = 284197B3A6944C108C888C15A8E42B68 /* locale.SUNWCCh */; };
 		39B1BBF9B99CF53A16A6AE77910821EA /* WithNoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDB324B58456952A4BD2C57EFFC5F9FB /* WithNoDataView.xib */; };
 		3A66D34045644F50A286279AF9051D1D /* cstdarg in Resources */ = {isa = PBXBuildFile; fileRef = A84421C17A899ED974B2D83D709B3514 /* cstdarg */; };
+		3B0EB651210313B200F19C31 /* NormalCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB643210313A900F19C31 /* NormalCellView.xib */; };
+		3B0EB652210313B200F19C31 /* YourPortfolioTableHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0EB644210313AA00F19C31 /* YourPortfolioTableHeadView.swift */; };
+		3B0EB653210313B200F19C31 /* NormalContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB645210313AB00F19C31 /* NormalContentCell.xib */; };
+		3B0EB654210313B200F19C31 /* NormalCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0EB646210313AB00F19C31 /* NormalCellView.swift */; };
+		3B0EB655210313B200F19C31 /* AccountContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0EB647210313AC00F19C31 /* AccountContentView.swift */; };
+		3B0EB656210313B200F19C31 /* YourPortfolioTableHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB648210313AC00F19C31 /* YourPortfolioTableHeadView.xib */; };
+		3B0EB657210313B200F19C31 /* AccountContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB649210313AD00F19C31 /* AccountContentView.xib */; };
+		3B0EB658210313B200F19C31 /* AccountTableHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB64A210313AE00F19C31 /* AccountTableHeadView.xib */; };
+		3B0EB659210313B200F19C31 /* NormalContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0EB64B210313AE00F19C31 /* NormalContentCell.swift */; };
+		3B0EB65A210313B200F19C31 /* AccountTableHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0EB64C210313AF00F19C31 /* AccountTableHeadView.swift */; };
+		3B0EB65B210313B200F19C31 /* YourPortfolioHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0EB64D210313B000F19C31 /* YourPortfolioHandleView.swift */; };
+		3B0EB65C210313B200F19C31 /* YourPortfolioHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0EB64E210313B000F19C31 /* YourPortfolioHeadView.swift */; };
+		3B0EB65D210313B200F19C31 /* YourPortfolioHandleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB64F210313B100F19C31 /* YourPortfolioHandleView.xib */; };
+		3B0EB65E210313B200F19C31 /* YourPortfolioHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB650210313B100F19C31 /* YourPortfolioHeadView.xib */; };
+		3B0EB6602103149100F19C31 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0EB65F2103149000F19C31 /* AccountViewController.swift */; };
+		3B0EB662210314A600F19C31 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB661210314A600F19C31 /* Account.storyboard */; };
+		3B0EB6642103150D00F19C31 /* AccountActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0EB6632103150D00F19C31 /* AccountActions.swift */; };
+		3B0EB6672103155C00F19C31 /* YourPortfolioCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0EB6652103155B00F19C31 /* YourPortfolioCoordinator.swift */; };
+		3B0EB6682103155C00F19C31 /* YourPortfolioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0EB6662103155C00F19C31 /* YourPortfolioViewController.swift */; };
+		3B0EB66A2103158300F19C31 /* YourPorfolioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB6692103158200F19C31 /* YourPorfolioView.xib */; };
+		3B0EB66C2103158A00F19C31 /* YourPortfolioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB66B2103158A00F19C31 /* YourPortfolioCell.xib */; };
 		3B824D5C362724DE4C1048A35CDC37E0 /* FAQRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76A60156D4654017DDEA67DEC3EAAD /* FAQRootCoordinator.swift */; };
 		3CB09937C6D6A05CD97DF278F0EFF936 /* PairCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADA779DE36FE60947508691E83755D82 /* PairCardView.xib */; };
 		3D400D51F52AE73941E3134046491BA5 /* HomePairView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBAD31050F280F35AEB1E408E3D018D /* HomePairView.swift */; };
@@ -112,7 +131,6 @@
 		44195E9AD82F1EA4A629372891EC8157 /* EntryReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE429108D7D23DA4BF5306BC38743C95 /* EntryReducers.swift */; };
 		4420DD3F31DC377E0DB1DEC13E7708A5 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B60E209CC95EA35CC58E6745292B02 /* HomeCoordinator.swift */; };
 		45E03EE6B4BBE7286E7287D3DFD1B9D6 /* CBKLineMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F27C08A4D37E9DECD3AD611FCE4845 /* CBKLineMainView.swift */; };
-		45F096F31DE8AC086844CCB3CAE35AD6 /* AccountActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995BD37F40292DFF8A054051D93AFF09 /* AccountActions.swift */; };
 		461B84D25CFA564E9455211A24902BB7 /* CBKLineBrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC47FBA93F369E74257B73FF4F60CB /* CBKLineBrush.swift */; };
 		46317E1E7CFDD19141FDE4C8D29D5E84 /* AccountPortfolioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59E70240A0D746433D10EC4C3515AEBE /* AccountPortfolioCell.xib */; };
 		46CD7B2787FFCD483A5A723E52C54292 /* MarketReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AA07A608DC29C935C5D559EF00C797 /* MarketReducers.swift */; };
@@ -254,7 +272,6 @@
 		8F231436DF08E691F844CC01B2AC1845 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCE6ED625648B248C391722FFDBCC7F /* Crypto.swift */; };
 		8FF572CD842115D51EF4E8A116CA56AE /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E446848D77BE15DE0D515068BA38C3C /* SettingCoordinator.swift */; };
 		901F7EEB7579A06B661DD96529FC25E2 /* CBEMAModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F1F43868840D94E48B386B85D32EBD /* CBEMAModel.swift */; };
-		90EB9ADEF3FE7F48AA0E908B00B2BBA8 /* YourPortfolioCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1A2E404AC3292F2C16F028696D2477 /* YourPortfolioCoordinator.swift */; };
 		911CFA6B3FC228D25DBD994B8E6AAEDD /* get_dev_key.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7386291A788FC7DE14BE446D1B0B59FF /* get_dev_key.cpp */; };
 		922CBDB730EBC9FC4D98119AD58C8A0E /* set.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = B569192C503BF6BD49FFA2C2EDEE4C46 /* set.SUNWCCh */; };
 		92AF8740929C204D86A85866576BC844 /* CBMALineBrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765794B9345D4F09CFA2C25E83A2F198 /* CBMALineBrush.swift */; };
@@ -341,7 +358,6 @@
 		C5DB709236E31D29681C3DAA03E03D48 /* memory.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = A60880D654AEED9382228C0F67B00A2A /* memory.SUNWCCh */; };
 		C6701BBC918D15D20650CF726BA483EA /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD9516DB7B3ECF8651E0B2A8702D273 /* Tools.swift */; };
 		C7186D34A3AA4B5EC090CB7DDDC4767F /* type_traits.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = D4866C603E9D2C0C10EFE46E55504C5D /* type_traits.SUNWCCh */; };
-		C808A2AB5DAE119E4801AB0087E6B74D /* YourPorfolioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A08E5964DBB29FD65DE1553C14AF7DA /* YourPorfolioView.xib */; };
 		C860BE92032F361E51995DB61C68774C /* RechargeSegment.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB525835351EF4ABDC6B1B30A5A7DF8F /* RechargeSegment.xib */; };
 		C96D0912126309ECA43CED968127E06E /* CybexPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF65F612F7F7D85BA6BC98FA8C7F91A /* CybexPasswordView.swift */; };
 		C9E9C25E6F2F69A3AF5564B11DFE17E7 /* bcc32.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = 75DF1991F801D2C9005F6741537A6A8C /* bcc32.SUNWCCh */; };
@@ -408,7 +424,6 @@
 		EEC52B0701FDE9B489D4D61193C9B420 /* RechargeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8382753BAEF516983F1C18FCE77A64A /* RechargeDetailViewController.swift */; };
 		EF1711F1556779794DCD9F9C097F4B27 /* deque.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = 3F647412DDC170FFD1848746FE875894 /* deque.SUNWCCh */; };
 		F0CE8D5A02461E239914DF75E18C23FA /* ExplorerRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4CB904E1C8FCF8AA656A9851C65296 /* ExplorerRootCoordinator.swift */; };
-		F0E79CA6B98DD35E457309D4FF202F14 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBFDE6FD6080F7DE95BA3B75181930DD /* Account.storyboard */; };
 		F1B88753DCA13AC5B42338848EEC8DBF /* OpenedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C264445F2C3263F5F8AD02F1ABE4A0D /* OpenedOrdersView.swift */; };
 		F24B99CDDDF561BBDC659914CD6802F9 /* istream in Resources */ = {isa = PBXBuildFile; fileRef = 500F4356CB816D7F82EEAE46C71EA0DF /* istream */; };
 		F2B3C1AA7FB7997E861C7C969991EF1A /* cassert in Resources */ = {isa = PBXBuildFile; fileRef = 9BFD20E30BE09426D1CE73F058C309C2 /* cassert */; };
@@ -423,7 +438,6 @@
 		F8B52B20C9737C584DECE7D52285A92D /* TradeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6353467A00229720E1C36ABA38C9188 /* TradeItemView.swift */; };
 		F912145FB06A9D6AD18125E0D832BCD0 /* new in Resources */ = {isa = PBXBuildFile; fileRef = D45F29E2784DCD5361D27C608FCDF3DD /* new */; };
 		FA440557E2E63D1F8D271A63BBEA414C /* HomePairCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0770CF9EE84B15079C787BBF0F969D2A /* HomePairCell.xib */; };
-		FB39534569BA9D5D2202F80CF2FB1F6B /* YourPortfolioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9483E34003D1723C34C68EB4C0B026C9 /* YourPortfolioViewController.swift */; };
 		FC108E84DEAE074748E2868644692BCD /* HomeContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E473B25626CA499D56EA2280AB068727 /* HomeContentView.swift */; };
 		FC8F317187D539852A834267F3F427FA /* ExchangeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054E54B331D3D0135AE365E667BA0C4E /* ExchangeCoordinator.swift */; };
 		FD3EC1F0E0460AD4C43027F8BEF9974B /* cwctype in Resources */ = {isa = PBXBuildFile; fileRef = 8C4ABE4E4C2718966D4D85737B0997AB /* cwctype */; };
@@ -1982,7 +1996,6 @@
 		210EB708E16E74218797AA76C7D790CF /* const_iterator_type.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = const_iterator_type.hpp; sourceTree = "<group>"; };
 		2114A8B09B721159E8ADB76D6C9DABBB /* to_array.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = to_array.hpp; sourceTree = "<group>"; };
 		211E39FDE500D6AFDFCF07CA16653762 /* thrust_resize.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = thrust_resize.hpp; sourceTree = "<group>"; };
-		211E75C94D3D4AED3ACD48A4DA014E6D /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		212007D902ED8F9EAC53ABF0C813E82E /* qi_eol.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = qi_eol.hpp; sourceTree = "<group>"; };
 		2121F112FFA65753E27EC677767E31BD /* arity50_0.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = arity50_0.hpp; sourceTree = "<group>"; };
 		21240AA85E69F653C4681B8763589C99 /* set_error.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = set_error.hpp; sourceTree = "<group>"; };
@@ -3147,6 +3160,27 @@
 		3AF39A03B5F23A165EEBD2393F1FFF10 /* integrate_times.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = integrate_times.hpp; sourceTree = "<group>"; };
 		3B0A4F70A544654FC1D060AFA60A7BB3 /* set_c.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = set_c.hpp; sourceTree = "<group>"; };
 		3B0A6770C998111E95CB24BBE0E7470C /* internal_row.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = internal_row.hpp; sourceTree = "<group>"; };
+		3B0EB643210313A900F19C31 /* NormalCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NormalCellView.xib; sourceTree = "<group>"; };
+		3B0EB644210313AA00F19C31 /* YourPortfolioTableHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourPortfolioTableHeadView.swift; sourceTree = "<group>"; };
+		3B0EB645210313AB00F19C31 /* NormalContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NormalContentCell.xib; sourceTree = "<group>"; };
+		3B0EB646210313AB00F19C31 /* NormalCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalCellView.swift; sourceTree = "<group>"; };
+		3B0EB647210313AC00F19C31 /* AccountContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountContentView.swift; sourceTree = "<group>"; };
+		3B0EB648210313AC00F19C31 /* YourPortfolioTableHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YourPortfolioTableHeadView.xib; sourceTree = "<group>"; };
+		3B0EB649210313AD00F19C31 /* AccountContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountContentView.xib; sourceTree = "<group>"; };
+		3B0EB64A210313AE00F19C31 /* AccountTableHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountTableHeadView.xib; sourceTree = "<group>"; };
+		3B0EB64B210313AE00F19C31 /* NormalContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalContentCell.swift; sourceTree = "<group>"; };
+		3B0EB64C210313AF00F19C31 /* AccountTableHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTableHeadView.swift; sourceTree = "<group>"; };
+		3B0EB64D210313B000F19C31 /* YourPortfolioHandleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourPortfolioHandleView.swift; sourceTree = "<group>"; };
+		3B0EB64E210313B000F19C31 /* YourPortfolioHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourPortfolioHeadView.swift; sourceTree = "<group>"; };
+		3B0EB64F210313B100F19C31 /* YourPortfolioHandleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YourPortfolioHandleView.xib; sourceTree = "<group>"; };
+		3B0EB650210313B100F19C31 /* YourPortfolioHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YourPortfolioHeadView.xib; sourceTree = "<group>"; };
+		3B0EB65F2103149000F19C31 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		3B0EB661210314A600F19C31 /* Account.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
+		3B0EB6632103150D00F19C31 /* AccountActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountActions.swift; sourceTree = "<group>"; };
+		3B0EB6652103155B00F19C31 /* YourPortfolioCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourPortfolioCoordinator.swift; sourceTree = "<group>"; };
+		3B0EB6662103155C00F19C31 /* YourPortfolioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourPortfolioViewController.swift; sourceTree = "<group>"; };
+		3B0EB6692103158200F19C31 /* YourPorfolioView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YourPorfolioView.xib; sourceTree = "<group>"; };
+		3B0EB66B2103158A00F19C31 /* YourPortfolioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YourPortfolioCell.xib; sourceTree = "<group>"; };
 		3B0F03281099E5CB23C9EED4F0AE2995 /* shift_right.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shift_right.hpp; sourceTree = "<group>"; };
 		3B10A2434BBEC16BE6DF92269C7B997E /* karma_operator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = karma_operator.hpp; sourceTree = "<group>"; };
 		3B1194399994B58BCB6CC1146665EAB5 /* functors.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = functors.hpp; sourceTree = "<group>"; };
@@ -3808,7 +3842,6 @@
 		49FA158FE288AC057C89736F11DB42F3 /* thread.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = thread.hpp; sourceTree = "<group>"; };
 		49FD019FD35D3A3F05764B71A1491956 /* unordered_multiset_view.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unordered_multiset_view.hpp; sourceTree = "<group>"; };
 		4A067828B563612E648F36B8486F8234 /* null_deleter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = null_deleter.hpp; sourceTree = "<group>"; };
-		4A08E5964DBB29FD65DE1553C14AF7DA /* YourPorfolioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YourPorfolioView.xib; sourceTree = "<group>"; };
 		4A09BA1DB8A80E0F47C5D1D5CFCEBFB5 /* is_set_type_of.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = is_set_type_of.hpp; sourceTree = "<group>"; };
 		4A0BFB1DA68F4DFD786FC6D8F95FAC57 /* make_list10.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = make_list10.hpp; sourceTree = "<group>"; };
 		4A0DB3EBA61020A1BC94A73E24EC6EE5 /* shared_ptr_deleter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shared_ptr_deleter.hpp; sourceTree = "<group>"; };
@@ -7122,7 +7155,6 @@
 		9474BAB2D496219A9AB73D08EFBF8654 /* buffer_join_miter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = buffer_join_miter.hpp; sourceTree = "<group>"; };
 		947FA45A5E39C1EB54DF465E7DD508D4 /* linear.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = linear.hpp; sourceTree = "<group>"; };
 		9481E479BE06852201379C04B929C7E1 /* interface.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = interface.hpp; sourceTree = "<group>"; };
-		9483E34003D1723C34C68EB4C0B026C9 /* YourPortfolioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioViewController.swift; sourceTree = "<group>"; };
 		94922339870DBBBF6E48BC5F3FC98D3E /* push_front.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = push_front.hpp; sourceTree = "<group>"; };
 		949CBC62E73CEAF01D8CFBDD6D2A0361 /* cstdlib.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cstdlib.hpp; sourceTree = "<group>"; };
 		94A20D12C70B3815E41809D8A518093B /* make_expr_funop.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = make_expr_funop.hpp; sourceTree = "<group>"; };
@@ -7340,7 +7372,6 @@
 		995377986EC1D55D6B9105A887C13898 /* severity_logger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = severity_logger.hpp; sourceTree = "<group>"; };
 		995512E9B38C8744057D133606CA7268 /* time_point_io.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = time_point_io.hpp; sourceTree = "<group>"; };
 		995A3B04B412B891FF77403652C3F6E9 /* errors.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = errors.hpp; sourceTree = "<group>"; };
-		995BD37F40292DFF8A054051D93AFF09 /* AccountActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountActions.swift; sourceTree = "<group>"; };
 		995ED841E01BE8F3FD294CA1ED121236 /* edge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = edge.hpp; sourceTree = "<group>"; };
 		996C83AC3020243D6112992290549620 /* is_interval_joiner.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = is_interval_joiner.hpp; sourceTree = "<group>"; };
 		997E6F39C226D953AEAE3DF6C812E92E /* polygon_90_set_data.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = polygon_90_set_data.hpp; sourceTree = "<group>"; };
@@ -8086,7 +8117,6 @@
 		AA05AF2878BD0B872721500BE053F575 /* map.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = map.hpp; sourceTree = "<group>"; };
 		AA0D07DB98352D7EDB8BBA07BAE762B7 /* BalanceIntroduceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceIntroduceView.swift; sourceTree = "<group>"; };
 		AA173FC4290EF98802B5886CE5B21A7E /* actor_operator_30.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = actor_operator_30.hpp; sourceTree = "<group>"; };
-		AA1A2E404AC3292F2C16F028696D2477 /* YourPortfolioCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourPortfolioCoordinator.swift; sourceTree = "<group>"; };
 		AA1AA7C9F43E8609FE5EE4F14B8B7F07 /* interval_map.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = interval_map.hpp; sourceTree = "<group>"; };
 		AA21880988A4B45712C7028B4F3EA895 /* karma_list.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = karma_list.hpp; sourceTree = "<group>"; };
 		AA294B29ABEC09DA01F10AFD6B259355 /* tuple_tie50.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tuple_tie50.hpp; sourceTree = "<group>"; };
@@ -10391,7 +10421,6 @@
 		DBED4220E40E7686630C483E24928578 /* at_key.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = at_key.hpp; sourceTree = "<group>"; };
 		DBEE1B38C838D6D3E317CAE320E930EA /* temporary.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = temporary.hpp; sourceTree = "<group>"; };
 		DBFB42CD55CE3BEC741DEA604C97F18F /* adapt_struct_named.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = adapt_struct_named.hpp; sourceTree = "<group>"; };
-		DBFDE6FD6080F7DE95BA3B75181930DD /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
 		DC03B347ACBEAF2380AF766418953E4F /* compose.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = compose.hpp; sourceTree = "<group>"; };
 		DC0EF23613747567FABC0BED6997BBA7 /* edge_list.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = edge_list.hpp; sourceTree = "<group>"; };
 		DC1242808EA33536F61776E6AF836A3C /* arity30_1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = arity30_1.hpp; sourceTree = "<group>"; };
@@ -11777,7 +11806,6 @@
 		FA6CD4687EE1B38A1509BD48D9D579E8 /* lex_char_token_def.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lex_char_token_def.hpp; sourceTree = "<group>"; };
 		FA749D29C9C21DDDCD849584CCFFF58A /* n_ary_helper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = n_ary_helper.hpp; sourceTree = "<group>"; };
 		FA7F457372623CE548F082CA1BF46151 /* greater.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = greater.hpp; sourceTree = "<group>"; };
-		FA8075A3CC5F95435FAB990943905756 /* YourPortfolioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YourPortfolioCell.xib; sourceTree = "<group>"; };
 		FA9450F1B53851CD47769D390A0DB046 /* close.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = close.hpp; sourceTree = "<group>"; };
 		FA998C7E81000571697462436239C2DE /* bind_member_function.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bind_member_function.hpp; sourceTree = "<group>"; };
 		FA9A187EE3CAB717A6A5322D8BA532FE /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -14601,11 +14629,11 @@
 				9F7460321B64E4F8B6BC024A46942A74 /* Portfolio */,
 				80CB565113D87AC1CFD2AC0376DE68D8 /* Setting */,
 				D6C4546E46CA46AF465428DAE720A9A9 /* Views */,
-				DBFDE6FD6080F7DE95BA3B75181930DD /* Account.storyboard */,
-				995BD37F40292DFF8A054051D93AFF09 /* AccountActions.swift */,
+				3B0EB661210314A600F19C31 /* Account.storyboard */,
+				3B0EB6632103150D00F19C31 /* AccountActions.swift */,
 				A5E4FDA98A150BD654049D01D15F1AE0 /* AccountCoordinator.swift */,
 				15D3052EA7FC58D19807D2ECFF133440 /* AccountReducers.swift */,
-				211E75C94D3D4AED3ACD48A4DA014E6D /* AccountViewController.swift */,
+				3B0EB65F2103149000F19C31 /* AccountViewController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -16136,7 +16164,7 @@
 			isa = PBXGroup;
 			children = (
 				CD49A70BB200F99079C0A8551AB6380C /* YourPorfolioView.swift */,
-				4A08E5964DBB29FD65DE1553C14AF7DA /* YourPorfolioView.xib */,
+				3B0EB6692103158200F19C31 /* YourPorfolioView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -24817,9 +24845,9 @@
 				E8B7D947810C691217BBCA0DCFBC9675 /* Cells */,
 				2CACEA62FBF3C4884A51325B9756F226 /* Views */,
 				0AA2E7BB8C3521C0377129F32694FA2F /* YourPortfolioActions.swift */,
-				AA1A2E404AC3292F2C16F028696D2477 /* YourPortfolioCoordinator.swift */,
 				F56CF4752C488C8E3485B9CA5D592E89 /* YourPortfolioReducers.swift */,
-				9483E34003D1723C34C68EB4C0B026C9 /* YourPortfolioViewController.swift */,
+				3B0EB6652103155B00F19C31 /* YourPortfolioCoordinator.swift */,
+				3B0EB6662103155C00F19C31 /* YourPortfolioViewController.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -27437,6 +27465,20 @@
 				68BACE8EEAA2A59DA44765D421D6502A /* NoticeBoardView.xib */,
 				76641164D1767750EC31D5818E9EB61C /* WithNoDataView.swift */,
 				DDB324B58456952A4BD2C57EFFC5F9FB /* WithNoDataView.xib */,
+				3B0EB647210313AC00F19C31 /* AccountContentView.swift */,
+				3B0EB649210313AD00F19C31 /* AccountContentView.xib */,
+				3B0EB64C210313AF00F19C31 /* AccountTableHeadView.swift */,
+				3B0EB64A210313AE00F19C31 /* AccountTableHeadView.xib */,
+				3B0EB646210313AB00F19C31 /* NormalCellView.swift */,
+				3B0EB643210313A900F19C31 /* NormalCellView.xib */,
+				3B0EB64B210313AE00F19C31 /* NormalContentCell.swift */,
+				3B0EB645210313AB00F19C31 /* NormalContentCell.xib */,
+				3B0EB64D210313B000F19C31 /* YourPortfolioHandleView.swift */,
+				3B0EB64F210313B100F19C31 /* YourPortfolioHandleView.xib */,
+				3B0EB64E210313B000F19C31 /* YourPortfolioHeadView.swift */,
+				3B0EB650210313B100F19C31 /* YourPortfolioHeadView.xib */,
+				3B0EB644210313AA00F19C31 /* YourPortfolioTableHeadView.swift */,
+				3B0EB648210313AC00F19C31 /* YourPortfolioTableHeadView.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -30054,7 +30096,7 @@
 			isa = PBXGroup;
 			children = (
 				9B7061C65E348D739A983603E60536D6 /* YourPortfolioCell.swift */,
-				FA8075A3CC5F95435FAB990943905756 /* YourPortfolioCell.xib */,
+				3B0EB66B2103158A00F19C31 /* YourPortfolioCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -32209,7 +32251,6 @@
 				A081A5FE86C0AC44E299840DD8C1DE00 /* AccessoryCollectionView.xib in Resources */,
 				D971C57B81B4A2FBB083235DDE5057A2 /* AccessoryCollectionViewCell.xib in Resources */,
 				FE75674B7C6A22FAFA051C9CE0E95A1D /* AccessoryHorizentalView.xib in Resources */,
-				F0E79CA6B98DD35E457309D4FF202F14 /* Account.storyboard in Resources */,
 				607DB9C515F6376EF477F0C62C46B8F2 /* AccountAssetOperationView.xib in Resources */,
 				334F0C20FD029ABA79FC1F141026A0AB /* AccountAssetOperationsItemView.xib in Resources */,
 				66D4B960BFC33039549F7EF70D2866CA /* AccountOpenedOrdersView.xib in Resources */,
@@ -32245,6 +32286,7 @@
 				A0EB4B1B6F7ED67099FE6F6641D24E84 /* LockupAssetsView.xib in Resources */,
 				DADCEB576AA31881365CA9DFD8588B7A /* Main.storyboard in Resources */,
 				5EC5CB38F68C8EB063FE6DB600247A30 /* MyHistoryCell.xib in Resources */,
+				3B0EB658210313B200F19C31 /* AccountTableHeadView.xib in Resources */,
 				7323B4B02A3A6EFE54C1B30D7491D953 /* MyHistoryCellView.xib in Resources */,
 				16AF9C856D66092D87065E969141D71F /* MyOpenedOrdersView.xib in Resources */,
 				4EFDB6FA81BF7FB9600D4A6E07374864 /* NoticeBoardView.xib in Resources */,
@@ -32267,6 +32309,7 @@
 				425ABA62CF90E4866D5279A917C235AD /* TimeGapView.xib in Resources */,
 				09C3D6D8CF52A972307C4A1F1C214738 /* TradeCell.xib in Resources */,
 				807473C43B99A27237F53C7E2A2FE7F3 /* TradeHistoryCell.xib in Resources */,
+				3B0EB65D210313B200F19C31 /* YourPortfolioHandleView.xib in Resources */,
 				3F6CBB1D8AC88D546B003B8A585E4EEB /* TradeHistoryCellView.xib in Resources */,
 				E4EC6E667A50D907DF7D0113D3486006 /* TradeHistoryView.xib in Resources */,
 				693EC4E5D05D82D8A27851ECF6FB867F /* TradeItemView.xib in Resources */,
@@ -32274,8 +32317,7 @@
 				0737B0DB4E4E56D3888CE3625D77FD37 /* TradeNavTitleView.xib in Resources */,
 				6C88B282D0F65F3A6830B8B450AC462A /* TradeView.xib in Resources */,
 				39B1BBF9B99CF53A16A6AE77910821EA /* WithNoDataView.xib in Resources */,
-				C808A2AB5DAE119E4801AB0087E6B74D /* YourPorfolioView.xib in Resources */,
-				296F974C8751FC2ACF0E43EF8AC2EC7D /* YourPortfolioCell.xib in Resources */,
+				3B0EB65E210313B200F19C31 /* YourPortfolioHeadView.xib in Resources */,
 				589C3222B6936F858915CE755BEA7139 /* algorithm in Resources */,
 				E2CDBCB0F3EF1EAF61B086884BE94766 /* algorithm.SUNWCCh in Resources */,
 				6A80CEA201B762683D148EF0C7CC0EE0 /* array in Resources */,
@@ -32308,6 +32350,7 @@
 				EF1711F1556779794DCD9F9C097F4B27 /* deque.SUNWCCh in Resources */,
 				B092CA3EF1CCD7607CBD3DF06D135FF3 /* exception in Resources */,
 				DABA4FA4206C0B423BF6C8FC627694EC /* exception.SUNWCCh in Resources */,
+				3B0EB66A2103158300F19C31 /* YourPorfolioView.xib in Resources */,
 				253FA678E24480209F5F9418FE39D896 /* fstream in Resources */,
 				FEBB2F561098E005326CBBE9989889FE /* fstream.SUNWCCh in Resources */,
 				72EC6A5A20F4612200CEAFF6 /* RechargeView.xib in Resources */,
@@ -32319,6 +32362,7 @@
 				DD53E4DB5C321358D6C1AB4A303C62BA /* iomanip.SUNWCCh in Resources */,
 				1B5442C169C4BCFD231A911F7FB3CDCA /* ios in Resources */,
 				6AF4A16A7EEB87292ADF065AFFB58A89 /* ios.SUNWCCh in Resources */,
+				3B0EB656210313B200F19C31 /* YourPortfolioTableHeadView.xib in Resources */,
 				D572ADD35AC26CDD8080C75793723AAA /* iostream in Resources */,
 				CCAE5DE33DB69016094D5459EC036AF3 /* iostream.SUNWCCh in Resources */,
 				F24B99CDDDF561BBDC659914CD6802F9 /* istream in Resources */,
@@ -32327,6 +32371,7 @@
 				4D2C3C73B33C0F5DFFDDACE7722B0DC0 /* iterator.SUNWCCh in Resources */,
 				A591F8CDC508E8D1142FFABA4332AA47 /* limits in Resources */,
 				DEB016D2DCEE16701CFE117CA91D6A6E /* limits.SUNWCCh in Resources */,
+				3B0EB66C2103158A00F19C31 /* YourPortfolioCell.xib in Resources */,
 				6606283093C0601C36BC239A6E6B4122 /* list in Resources */,
 				B8EFD62DBA800F5CB653240EA55CDFB0 /* list.SUNWCCh in Resources */,
 				8E65033ACE605A9519CB4FB888940FAB /* locale in Resources */,
@@ -32337,12 +32382,15 @@
 				C5DB709236E31D29681C3DAA03E03D48 /* memory.SUNWCCh in Resources */,
 				F912145FB06A9D6AD18125E0D832BCD0 /* new in Resources */,
 				C1DFA012D72EAC0707437339C740AA1D /* new.SUNWCCh in Resources */,
+				3B0EB651210313B200F19C31 /* NormalCellView.xib in Resources */,
 				33833F52134478BD9FD74523EE8680CA /* numeric in Resources */,
 				82CC896530FDE1745A34075AB66C47CF /* numeric.SUNWCCh in Resources */,
 				77DF3E181F0DC071988789053E0F6FD7 /* ostream in Resources */,
 				762156C3AEB620F8C8A01F26B1F818AC /* ostream.SUNWCCh in Resources */,
+				3B0EB657210313B200F19C31 /* AccountContentView.xib in Resources */,
 				BD394524F3A87D34A0C4C4CE6DB0405D /* queue in Resources */,
 				0498653CB73623C7731DCD17309EC21A /* queue.SUNWCCh in Resources */,
+				3B0EB662210314A600F19C31 /* Account.storyboard in Resources */,
 				775A0AC293D3BA7664DF110680A7CA5E /* random in Resources */,
 				50AC1D5876BE8E4CE1F57FE12CB138AA /* random.SUNWCCh in Resources */,
 				3299A2EFB332B1EE39EB214D2FC87525 /* regex in Resources */,
@@ -32366,6 +32414,7 @@
 				C459D1A89E1A9B2C420DA7E25BC057BF /* tuple in Resources */,
 				654DF2DDC90FA8C9A328B55918F4EEB3 /* tuple.SUNWCCh in Resources */,
 				86CAB827F380B4DDA4B48B813DEF7775 /* type_traits in Resources */,
+				3B0EB653210313B200F19C31 /* NormalContentCell.xib in Resources */,
 				C7186D34A3AA4B5EC090CB7DDDC4767F /* type_traits.SUNWCCh in Resources */,
 				4BDAA1229CE79E449D71FBB78746E6E5 /* typeinfo in Resources */,
 				29860A52A2F9E6057FEC80C30DB2C08C /* typeinfo.SUNWCCh in Resources */,
@@ -32659,7 +32708,6 @@
 				98ED9D145EF3DAA0FD242984364B676F /* AccessoryCollectionViewCell.swift in Sources */,
 				D6EF2CA9447A80749A341523EA37E613 /* AccessoryHorizentalView.swift in Sources */,
 				53079FD90D2B1B6BCB3863CB53111FAA /* Account.swift in Sources */,
-				45F096F31DE8AC086844CCB3CAE35AD6 /* AccountActions.swift in Sources */,
 				B53165C099917599B9638053318C729A /* AccountAssetOperationView.swift in Sources */,
 				305DB17562E3D02F04E0122C1C4674A4 /* AccountAssetOperationsItemView.swift in Sources */,
 				65A0AB87E09E879EFAFA04DBA6B15D3E /* AccountCoordinator.swift in Sources */,
@@ -32669,7 +32717,6 @@
 				32BED01405F6D7B22B348057E0BDE3C8 /* AccountPortfolioView.swift in Sources */,
 				E0AD8E2E835D84754C63BA76FBA8582E /* AccountReducers.swift in Sources */,
 				C44F04354B1B9F8051BA2651AC620D65 /* AccountRootCoordinator.swift in Sources */,
-				13E6F8CDA828421536430547C25E3C99 /* AccountViewController.swift in Sources */,
 				0960C892D63D17ABEB447BCE5525D299 /* AppActions.swift in Sources */,
 				C281A4038187FCD131A006BA4689D2BD /* AppCoordinator+StateManager.swift in Sources */,
 				19864A14CDDAB9987FBB0457B007B23E /* AppCoordinator.swift in Sources */,
@@ -32682,6 +32729,7 @@
 				F7886D0310C612E91619D84DDA4182F5 /* BaseNavigationController.swift in Sources */,
 				AAEB2ADE1A954767CBCDED7BE011631A /* BaseTabbarViewController.swift in Sources */,
 				E173B41881E536F07501B0784F9660CF /* BaseTableViewCell.swift in Sources */,
+				3B0EB65A210313B200F19C31 /* AccountTableHeadView.swift in Sources */,
 				E67B496E838B6A7A22AF4F05AED93441 /* BaseViewController.swift in Sources */,
 				59A469E9C21A3CE0D06E98458A2D1BD6 /* BaseWebViewController.swift in Sources */,
 				166E70E89C354FE2B3C8BA861FE6958E /* BitShareCoordinator.mm in Sources */,
@@ -32690,6 +32738,7 @@
 				4FEB6E47ECB698CEDE290B109E474660 /* BusinessCoordinator.swift in Sources */,
 				56FC707000D714C2C1294918AFBB33B6 /* BusinessReducers.swift in Sources */,
 				B9DE00DA8B7EDD0F9BEA00881C4924C1 /* BusinessTitleCell.swift in Sources */,
+				3B0EB6642103150D00F19C31 /* AccountActions.swift in Sources */,
 				66A5DD971B80802DF72977E071CAB84D /* BusinessTitleItemView.swift in Sources */,
 				188394B25D1EF3596A01900469FACBFB /* BusinessTitleView.swift in Sources */,
 				C0AC3C1A58448D06655DCE0994FDC33A /* BusinessView.swift in Sources */,
@@ -32712,6 +32761,7 @@
 				E13AE68F78264232722CD68636FC433B /* CGContextExtension.swift in Sources */,
 				1F89EA780689075E3FB3230FDB6EE703 /* Collection+Extensions.swift in Sources */,
 				DFA46607407072808EE78AEA1A37D728 /* ColorTheme.swift in Sources */,
+				3B0EB6602103149100F19C31 /* AccountViewController.swift in Sources */,
 				49652BAEE9A80FCCF6104C181395648C /* Constants.swift in Sources */,
 				8F231436DF08E691F844CC01B2AC1845 /* Crypto.swift in Sources */,
 				BE882BD38F3D40A56E08366BC6C20DDC /* CybexActionView.swift in Sources */,
@@ -32749,6 +32799,7 @@
 				105EA57407E74D316C2918BA41771E3B /* HomeActions.swift in Sources */,
 				FC108E84DEAE074748E2868644692BCD /* HomeContentView.swift in Sources */,
 				4420DD3F31DC377E0DB1DEC13E7708A5 /* HomeCoordinator.swift in Sources */,
+				3B0EB659210313B200F19C31 /* NormalContentCell.swift in Sources */,
 				8C20E983876A75B5AF1B2B1CC5B7FA6C /* HomePairCell.swift in Sources */,
 				3D400D51F52AE73941E3134046491BA5 /* HomePairView.swift in Sources */,
 				9ED2AB33B2CDBB57B605BE26C2D455C2 /* HomeReducers.swift in Sources */,
@@ -32772,6 +32823,7 @@
 				6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */,
 				8DFD3022184642B3A8D4D8A8FE04F655 /* LockupProgressView.swift in Sources */,
 				AF84FCBA2E7219D1FC633DA7881BD0ED /* MarketActions.swift in Sources */,
+				3B0EB652210313B200F19C31 /* YourPortfolioTableHeadView.swift in Sources */,
 				92F32777AC4AC77905155B74B115E1A1 /* MarketCache.swift in Sources */,
 				A91E01A343738BBD63B5015631CE57A7 /* MarketCoordinator.swift in Sources */,
 				46CD7B2787FFCD483A5A723E52C54292 /* MarketReducers.swift in Sources */,
@@ -32782,6 +32834,7 @@
 				5CB67D4A0FFFF2D433936B9A36216722 /* MyHistoryCoordinator.swift in Sources */,
 				406AB4BA0BF043D771D15D751F7AB45D /* MyHistoryReducers.swift in Sources */,
 				41143CEDF6A8910D9C2E8BCEE8C47A38 /* MyHistoryViewController.swift in Sources */,
+				3B0EB65B210313B200F19C31 /* YourPortfolioHandleView.swift in Sources */,
 				CD017D1C374A5B06D3ECEC24936E0911 /* MyOpenedOrdersView.swift in Sources */,
 				D3008B984211AFE152859658DC6B773B /* NSNotification+Extensions.swift in Sources */,
 				031F69CC95D2906A4F8F4063776327F6 /* NSObject+Extensions.swift in Sources */,
@@ -32793,6 +32846,7 @@
 				CC7617050BB0397377BB75D99DE68B3A /* OpenedOrdersActions.swift in Sources */,
 				D1612139CDC75BB4ACC08A1D78FD0AEE /* OpenedOrdersCell.swift in Sources */,
 				5F25028208C6665DE69B50E5D5ECBEF6 /* OpenedOrdersCoordinator.swift in Sources */,
+				3B0EB655210313B200F19C31 /* AccountContentView.swift in Sources */,
 				26827458BC8C2CF5494505DA58315BBF /* OpenedOrdersHeaderView.swift in Sources */,
 				6DBCCB0ED729AC68AF493B54C15A81CF /* OpenedOrdersReducers.swift in Sources */,
 				1DCCD247499C6FA4753D44CA869E6EB4 /* OpenedOrdersStatesView.swift in Sources */,
@@ -32823,6 +32877,7 @@
 				D1C63B5AAC5552A99528E306AC7F57E0 /* RechargeDetailReducers.swift in Sources */,
 				EEC52B0701FDE9B489D4D61193C9B420 /* RechargeDetailViewController.swift in Sources */,
 				10F005E5213C8CAD146ED273B0CDF11F /* RechargeItemView.swift in Sources */,
+				3B0EB6682103155C00F19C31 /* YourPortfolioViewController.swift in Sources */,
 				6AF937D55236FFDCE1D8F1B34F7D29ED /* RechargeReducers.swift in Sources */,
 				29C911F371D5F143FB814E54626700D5 /* RechargeSegment.swift in Sources */,
 				E593AB226F596677B1664A82995509CA /* RechargeViewController.swift in Sources */,
@@ -32837,6 +32892,7 @@
 				D7D9A9DE89519CA3D6E61C32D3DDC7B8 /* SettingDetailCoordinator.swift in Sources */,
 				C02C4003FF83596F8B0016AC9DC90B06 /* SettingDetailReducers.swift in Sources */,
 				72EC6A5920F4612200CEAFF6 /* RechargeView.swift in Sources */,
+				3B0EB654210313B200F19C31 /* NormalCellView.swift in Sources */,
 				D3551784962B5675BB3A8DD9DA31F698 /* SettingDetailViewController.swift in Sources */,
 				34DC0886711DBC04C2F6364BB16F838A /* SettingReducers.swift in Sources */,
 				751D31DB62BFC9F2FC1A0EFC4C23A801 /* SettingViewController.swift in Sources */,
@@ -32864,6 +32920,7 @@
 				73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */,
 				2E3DB3499E75C0D06068C979CD788B00 /* TradeReducers.swift in Sources */,
 				640657C00CD9588E73E0F0280F245348 /* TradeRootCoordinator.swift in Sources */,
+				3B0EB65C210313B200F19C31 /* YourPortfolioHeadView.swift in Sources */,
 				C02132F00200B408020442C307CEE0B6 /* TradeView.swift in Sources */,
 				7CA82BA6BC1F22AAA929D52CD5C4434F /* TradeViewController.swift in Sources */,
 				A0205CDF8595D10C5D9367EBCBBA714A /* UIColor+Additions.swift in Sources */,
@@ -32872,6 +32929,7 @@
 				CC8DD1E9001CFBB8915E342EDB329B3E /* UIImage+Extensions.swift in Sources */,
 				0C46B30A32343632C135B84DDEB47F80 /* UIResponder+Route.swift in Sources */,
 				0FF6C4A7AAF40F0AC67CBDAEAA2406E2 /* UITextField+Extensions.swift in Sources */,
+				3B0EB6672103155C00F19C31 /* YourPortfolioCoordinator.swift in Sources */,
 				C2728D465891E65690FBF4E868796852 /* UIView+Extensions.swift in Sources */,
 				01D3990C8F03B94C2207F37FF3C7C895 /* UIViewController+Extension.swift in Sources */,
 				696EB2454DD46A9C497C7C719B12BF12 /* UserDefaults.swift in Sources */,
@@ -32886,9 +32944,7 @@
 				EC446CED4809CD57D338FB866A5AE631 /* YourPorfolioView.swift in Sources */,
 				60502E37A09ABFC6DD95A24F6A855B65 /* YourPortfolioActions.swift in Sources */,
 				480BE6AB9D3A7CCE75BCB6BBF9525FFD /* YourPortfolioCell.swift in Sources */,
-				90EB9ADEF3FE7F48AA0E908B00B2BBA8 /* YourPortfolioCoordinator.swift in Sources */,
 				ACCB7267D22FD99349666A34A7079245 /* YourPortfolioReducers.swift in Sources */,
-				FB39534569BA9D5D2202F80CF2FB1F6B /* YourPortfolioViewController.swift in Sources */,
 				344BC9FA73F9380AE43608848D803A6F /* address.cpp in Sources */,
 				8CC6E7829BCE9117984B6237F79C5180 /* debounce-throttle.swift in Sources */,
 				72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */,

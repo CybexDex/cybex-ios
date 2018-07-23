@@ -16,6 +16,11 @@ enum StyleNames:String {
   case withdraw_introduce
 }
 
+enum LineViewStyleNames:String {
+  case normal_name
+  case normal_content
+  case transfer_confirm
+}
 
 class RichStyle {
   init() {
@@ -42,6 +47,7 @@ class RichStyle {
     
     passwordStyle()
     alertDetailStyle()
+    initLineViewStyle()
   }
   
   
@@ -95,6 +101,24 @@ class RichStyle {
     
     let myGroup = StyleGroup(base: base, ["name":name,"content_dark":content_dark,"content_light":content_light,"content_sell":content_sell,"content_buy":content_buy])
     StylesManager.shared.register("alertContent", style: myGroup)
+  }
+  
+  func initLineViewStyle(){
+    let name_style = Style{
+      $0.font = SystemFonts.PingFangSC_Regular.font(size: 16.0)
+    }
+    Styles.register(LineViewStyleNames.normal_name.rawValue, style: name_style)
+    
+    let content_style = Style{
+      $0.font = SystemFonts.PingFangSC_Regular.font(size: 14.0)
+    }
+    Styles.register(LineViewStyleNames.normal_content.rawValue, style: content_style)
+    
+    let confirm_style = Style{
+      $0.font = SystemFonts.PingFangSC_Semibold.font(size: 16.0)
+    }
+    Styles.register(LineViewStyleNames.transfer_confirm.rawValue, style: confirm_style)
+    
   }
 }
 
