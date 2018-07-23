@@ -16,9 +16,9 @@ class YourPortfolioHandleView: UIView {
   @IBOutlet weak var transferView: UIView!
   
   enum event: String {
-    case rechargeEvent
-    case withdrawDepositEvent
-    case transferEvent
+    case recharge
+    case withdrawdeposit
+    case transfer
   }
   
   func setup(){
@@ -29,17 +29,17 @@ class YourPortfolioHandleView: UIView {
   func setUpEvent() {
     rechargeView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
       guard let `self` = self else { return }
-      self.next?.sendEventWith(event.rechargeEvent.rawValue, userinfo: [:])
+      self.next?.sendEventWith(event.recharge.rawValue, userinfo: [:])
     }).disposed(by: disposeBag)
     
     withdrawDepositView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
       guard let `self` = self else { return }
-      self.next?.sendEventWith(event.withdrawDepositEvent.rawValue, userinfo: [:])
+      self.next?.sendEventWith(event.withdrawdeposit.rawValue, userinfo: [:])
     }).disposed(by: disposeBag)
     
     transferView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
       guard let `self` = self else { return }
-      self.next?.sendEventWith(event.transferEvent.rawValue, userinfo: [:])
+      self.next?.sendEventWith(event.transfer.rawValue, userinfo: [:])
     }).disposed(by: disposeBag)
   }
   

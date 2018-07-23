@@ -14,10 +14,10 @@ class AccountContentView: UIView {
   @IBOutlet weak var headerView: AccountTableHeadView!
   
   enum event: String {
-    case myPropertyEvent
-    case accountTradeEvent
-    case orderValueEvent
-    case lockupAssetsEvent
+    case myproperty
+    case accounttrade
+    case ordervalue
+    case lockupassets
   }
   
   var data : Any? {
@@ -97,13 +97,13 @@ extension AccountContentView:UITableViewDelegate,UITableViewDataSource {
     tableView.deselectRow(at: indexPath, animated: true)
     switch indexPath.row {
     case 0:
-      self.sendEventWith(event.myPropertyEvent.rawValue, userinfo: [:])
+      self.sendEventWith(event.myproperty.rawValue, userinfo: [:])
     case 1:
-      self.sendEventWith(event.accountTradeEvent.rawValue, userinfo: [:])
+      self.sendEventWith(event.accounttrade.rawValue, userinfo: [:])
     case 2:
-      self.sendEventWith(event.orderValueEvent.rawValue, userinfo: [:])
+      self.sendEventWith(event.ordervalue.rawValue, userinfo: [:])
     default:
-      self.sendEventWith(event.lockupAssetsEvent.rawValue, userinfo: [:])
+      self.sendEventWith(event.lockupassets.rawValue, userinfo: [:])
     }
     
   }

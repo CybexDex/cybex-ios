@@ -103,13 +103,13 @@ extension YourPortfolioViewController : UITableViewDataSource,UITableViewDelegat
 }
 
 extension YourPortfolioViewController {
-  @objc func rechargeEvent(_ data: [String: Any]) {
+  @objc func recharge(_ data: [String: Any]) {
     self.coordinator?.pushToRechargeVC()
   }
-  @objc func withdrawDepositEvent(_ data: [String: Any]) {
+  @objc func withdrawdeposit(_ data: [String: Any]) {
     self.coordinator?.pushToWithdrawDepositVC()
   }
-  @objc func transferEvent(_ data: [String: Any]) {
+  @objc func transfer(_ data: [String: Any]) {
     self.coordinator?.pushToTransferVC()
   }
 }

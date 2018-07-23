@@ -34,6 +34,9 @@ class AccountViewController: BaseViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    SwifterSwift.delay(milliseconds: 100) {
+      self.setupUI()
+    }
   }
   
   func setupIconImg() {
@@ -52,9 +55,9 @@ class AccountViewController: BaseViewController {
   
   func setupTitle() {
     if let name = UserManager.shared.account.value?.name {
-      accountContentView.headerView.title = R.string.localizable.business_login_title() + name
+      accountContentView.headerView.title = R.string.localizable.hello.key.localized() + name
     } else {
-      accountContentView.headerView.title = R.string.localizable.accountLogin()
+      accountContentView.headerView.title = R.string.localizable.accountLogin.key.localized()
     }
   }
   
@@ -65,11 +68,13 @@ class AccountViewController: BaseViewController {
     self.configRightNavButton(R.image.icSettings24Px())
     
     let imgArray = [R.image.icBalance(),R.image.w(),R.image.icOrder28Px(),R.image.icLockAsset()]
-    let nameArray = [R.string.localizable.my_property(),R.string.localizable.account_trade(),R.string.localizable.order_value(),R.string.localizable.lockupAssetsTitle()]
+    let nameArray = [R.string.localizable.my_property.key.localized(),R.string.localizable.account_trade.key.localized(),R.string.localizable.order_value.key.localized(),R.string.localizable.lockupAssetsTitle.key.localized()]
+    dataArray.removeAll()
     for i in 0..<4 {
       var model = AccountViewModel()
       model.leftImage = imgArray[i]
       model.name = nameArray[i]
+      
       dataArray.append(model)
     }
     accountContentView.data = dataArray
