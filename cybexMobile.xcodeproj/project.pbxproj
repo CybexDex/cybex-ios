@@ -60,6 +60,14 @@
 		20C5C352A5EE76CE53F6F1F8C7CE1FB6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58821AB0DBC6F8D25C15C288A13EEC6 /* Utils.swift */; };
 		213EC3DB0AD2CFD1A25AD89A5EF104E9 /* cstring in Resources */ = {isa = PBXBuildFile; fileRef = 2C0E66223B7730FAE31724B603C8989E /* cstring */; };
 		21D4F7060148486EE0215AE84B53174E /* types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B6F72530F722C7FA8FC3B932B0D79C /* types.cpp */; };
+		221EC2352105B1930059F856 /* TitleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC22E2105B18F0059F856 /* TitleTextView.swift */; };
+		221EC2362105B1930059F856 /* TitleTextfieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221EC22F2105B1900059F856 /* TitleTextfieldView.xib */; };
+		221EC2372105B1930059F856 /* GrowSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC2312105B1910059F856 /* GrowSectionView.swift */; };
+		221EC2382105B1930059F856 /* GrowContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC2322105B1910059F856 /* GrowContentView.swift */; };
+		221EC2392105B1930059F856 /* TitleTextfieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC2332105B1920059F856 /* TitleTextfieldView.swift */; };
+		221EC23A2105B1930059F856 /* TitleTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221EC2342105B1920059F856 /* TitleTextView.xib */; };
+		221EC23D2105B3110059F856 /* CornerAndShadowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221EC23B2105B3100059F856 /* CornerAndShadowView.xib */; };
+		221EC23E2105B3110059F856 /* CornerAndShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC23C2105B3100059F856 /* CornerAndShadowView.swift */; };
 		22489CC12EB4F62154A78964CF73A58A /* stack.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = 659153FDF9C2587A288669F497A0A4E5 /* stack.SUNWCCh */; };
 		22BB2BC362DB5BB21C3699A31111523E /* AccountPortfolioCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115F2B194BC4D206A29A5A90BF6DDACE /* AccountPortfolioCellView.xib */; };
 		24401F60F82FEDDA35FBCCED409C1102 /* HomeRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E395E7B5D2617408E203CD024E8818 /* HomeRootCoordinator.swift */; };
@@ -2046,6 +2054,14 @@
 		2204C2A37D9B8D472A84EAFF8626E0AF /* safestack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = safestack.h; sourceTree = "<group>"; };
 		22084D8E5DA43B6895C236695938A2C0 /* mem_fn_template.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mem_fn_template.hpp; sourceTree = "<group>"; };
 		220F3AEF2DB8D023C86F712418BE672F /* base_dimension.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = base_dimension.hpp; sourceTree = "<group>"; };
+		221EC22E2105B18F0059F856 /* TitleTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextView.swift; sourceTree = "<group>"; };
+		221EC22F2105B1900059F856 /* TitleTextfieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTextfieldView.xib; sourceTree = "<group>"; };
+		221EC2312105B1910059F856 /* GrowSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrowSectionView.swift; sourceTree = "<group>"; };
+		221EC2322105B1910059F856 /* GrowContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrowContentView.swift; sourceTree = "<group>"; };
+		221EC2332105B1920059F856 /* TitleTextfieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextfieldView.swift; sourceTree = "<group>"; };
+		221EC2342105B1920059F856 /* TitleTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTextView.xib; sourceTree = "<group>"; };
+		221EC23B2105B3100059F856 /* CornerAndShadowView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CornerAndShadowView.xib; sourceTree = "<group>"; };
+		221EC23C2105B3100059F856 /* CornerAndShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerAndShadowView.swift; sourceTree = "<group>"; };
 		2222854C9861803977FE6B7C4872C7CC /* count_impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = count_impl.hpp; sourceTree = "<group>"; };
 		222B3D704C2C7B73179A527A9A1D9665 /* comparison.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = comparison.hpp; sourceTree = "<group>"; };
 		222D9023D03155C8E60E50C1A2EDDF3D /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
@@ -15221,6 +15237,15 @@
 			path = preprocessed;
 			sourceTree = "<group>";
 		};
+		221EC2302105B1910059F856 /* GrowContentView */ = {
+			isa = PBXGroup;
+			children = (
+				221EC2312105B1910059F856 /* GrowSectionView.swift */,
+				221EC2322105B1910059F856 /* GrowContentView.swift */,
+			);
+			path = GrowContentView;
+			sourceTree = "<group>";
+		};
 		224748CD65885032F7AB0AAC25946646 /* object */ = {
 			isa = PBXGroup;
 			children = (
@@ -27453,7 +27478,14 @@
 		C31EC57D28FCC624D48C5CC42DE96975 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				221EC2302105B1910059F856 /* GrowContentView */,
 				296FFE91A389347663BB0BCE840E70F0 /* Alert */,
+				221EC2332105B1920059F856 /* TitleTextfieldView.swift */,
+				221EC22F2105B1900059F856 /* TitleTextfieldView.xib */,
+				221EC22E2105B18F0059F856 /* TitleTextView.swift */,
+				221EC2342105B1920059F856 /* TitleTextView.xib */,
+				221EC23C2105B3100059F856 /* CornerAndShadowView.swift */,
+				221EC23B2105B3100059F856 /* CornerAndShadowView.xib */,
 				4CAF894CE4DB0CD3B11F47C1BB626167 /* Button.swift */,
 				F4869E5D42420E772C6FC2589A1D9B03 /* Button.xib */,
 				C360C842917AEAE6A068E1AA610EB0F8 /* CybexTitleView.swift */,
@@ -32361,6 +32393,7 @@
 				72EC6A5520F4611500CEAFF6 /* EOSWithdrawView.xib in Resources */,
 				DD53E4DB5C321358D6C1AB4A303C62BA /* iomanip.SUNWCCh in Resources */,
 				1B5442C169C4BCFD231A911F7FB3CDCA /* ios in Resources */,
+				221EC23D2105B3110059F856 /* CornerAndShadowView.xib in Resources */,
 				6AF4A16A7EEB87292ADF065AFFB58A89 /* ios.SUNWCCh in Resources */,
 				3B0EB656210313B200F19C31 /* YourPortfolioTableHeadView.xib in Resources */,
 				D572ADD35AC26CDD8080C75793723AAA /* iostream in Resources */,
@@ -32376,6 +32409,7 @@
 				B8EFD62DBA800F5CB653240EA55CDFB0 /* list.SUNWCCh in Resources */,
 				8E65033ACE605A9519CB4FB888940FAB /* locale in Resources */,
 				391642968E6C035AD01FF015BD4847DA /* locale.SUNWCCh in Resources */,
+				221EC23A2105B1930059F856 /* TitleTextView.xib in Resources */,
 				A5056283C24CDC308A84C34723B9999D /* map in Resources */,
 				A74A9391C9FC80F533BB168C6F09C5BD /* map.SUNWCCh in Resources */,
 				0AA525ED6C44D673ABDA5E34FE8BAF65 /* memory in Resources */,
@@ -32420,6 +32454,7 @@
 				29860A52A2F9E6057FEC80C30DB2C08C /* typeinfo.SUNWCCh in Resources */,
 				564933AA201BA7D916E7B2AABAE742F8 /* unordered_map in Resources */,
 				998269579E4C8DE1F4556D259DFBDAB5 /* unordered_map.SUNWCCh in Resources */,
+				221EC2362105B1930059F856 /* TitleTextfieldView.xib in Resources */,
 				6084C2B0324022A0F68E124354424AFB /* unordered_set in Resources */,
 				99D6E2448ABDF3B06D193E29E801F4CD /* unordered_set.SUNWCCh in Resources */,
 				5A385D846A5D23CD4987AF8B040811DF /* utility in Resources */,
@@ -32499,6 +32534,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBRetainCycleDetector/FBRetainCycleDetector.framework",
 				"${BUILT_PRODUCTS_DIR}/FCUUID/FCUUID.framework",
 				"${BUILT_PRODUCTS_DIR}/GRDB.swift/GRDB.framework",
+				"${BUILT_PRODUCTS_DIR}/GrowingTextView/GrowingTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/Guitar/Guitar.framework",
 				"${BUILT_PRODUCTS_DIR}/IHKeyboardAvoiding/IHKeyboardAvoiding.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
@@ -32581,6 +32617,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBRetainCycleDetector.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FCUUID.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GrowingTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Guitar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IHKeyboardAvoiding.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
@@ -32741,7 +32778,10 @@
 				3B0EB6642103150D00F19C31 /* AccountActions.swift in Sources */,
 				66A5DD971B80802DF72977E071CAB84D /* BusinessTitleItemView.swift in Sources */,
 				188394B25D1EF3596A01900469FACBFB /* BusinessTitleView.swift in Sources */,
+				221EC2382105B1930059F856 /* GrowContentView.swift in Sources */,
+				221EC2392105B1930059F856 /* TitleTextfieldView.swift in Sources */,
 				C0AC3C1A58448D06655DCE0994FDC33A /* BusinessView.swift in Sources */,
+				221EC2372105B1930059F856 /* GrowSectionView.swift in Sources */,
 				7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */,
 				3D856B5FBCBB3B250D34CFA99756374F /* Button.swift in Sources */,
 				9CFD97FEB32C00C8359B325D39F04494 /* CBBOLLModel.swift in Sources */,
@@ -32820,6 +32860,7 @@
 				80258D6F4C94ACC78C20B5ACE8BEAD2F /* LockupAssetsReducers.swift in Sources */,
 				85D46A1F0D3BBF12CF72903D466D9239 /* LockupAssetsSectionView.swift in Sources */,
 				B2B05000B81768D84E3FBE9B46392133 /* LockupAssetsView.swift in Sources */,
+				221EC2352105B1930059F856 /* TitleTextView.swift in Sources */,
 				6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */,
 				8DFD3022184642B3A8D4D8A8FE04F655 /* LockupProgressView.swift in Sources */,
 				AF84FCBA2E7219D1FC633DA7881BD0ED /* MarketActions.swift in Sources */,
@@ -32941,6 +32982,7 @@
 				975938BD454B9AB3D5F1AD8C06CDFCA8 /* WithdrawDetailCoordinator.swift in Sources */,
 				A9A444493A756B51F4BF2CC8F119C4EA /* WithdrawDetailReducers.swift in Sources */,
 				A390401CBDF18D681CE95ABF9268BBF3 /* WithdrawDetailViewController.swift in Sources */,
+				221EC23E2105B3110059F856 /* CornerAndShadowView.swift in Sources */,
 				EC446CED4809CD57D338FB866A5AE631 /* YourPorfolioView.swift in Sources */,
 				60502E37A09ABFC6DD95A24F6A855B65 /* YourPortfolioActions.swift in Sources */,
 				480BE6AB9D3A7CCE75BCB6BBF9525FFD /* YourPortfolioCell.swift in Sources */,
