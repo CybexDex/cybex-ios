@@ -35,7 +35,7 @@
   
 + (NSString *)getTransterOperation:(int)from_user_id to_user_id:(int)to_user_id asset_id:(int)asset_id amount:(int)amount fee_id:(int)fee_id fee_amount:(int)fee_amount memo:(NSString *)memo from_memo_key:(NSString *)from_memo_key to_memo_key:(NSString *)to_memo_key;
   
-+ (void)resetDefaultPublicKey:(NSString *)str;
++ (void)resetDefaultPublicKey:(NSString *)str;//每次登录设置默认签名的公钥  默认为active-key
   
 + (void)cancelUserKey;
   
