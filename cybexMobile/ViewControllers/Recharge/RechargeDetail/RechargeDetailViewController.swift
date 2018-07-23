@@ -73,6 +73,11 @@ class RechargeDetailViewController: BaseViewController {
   func setupUI() {
     self.contentView.trade  = self.trade
     self.contentView.balance  = self.balance
+    self.configRightNavButton(R.string.localizable.withdraw_list())
+  }
+  
+  override func rightAction(_ sender: UIButton) {
+    self.coordinator?.openWithdrawRecodeList()
   }
   
   func setupEvent() {

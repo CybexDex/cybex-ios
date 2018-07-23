@@ -111,6 +111,7 @@ class AccountViewController: BaseViewController {
 }
 
 extension AccountViewController{
+
   @objc func clickCellView(_ sender:[String:Any]) {
     let index = sender["index"] as! Int
     switch index {

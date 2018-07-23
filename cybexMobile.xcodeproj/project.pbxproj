@@ -216,6 +216,37 @@
 		6DBCCB0ED729AC68AF493B54C15A81CF /* OpenedOrdersReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF14FC4A3BFAB5A78D89088EA656DA2 /* OpenedOrdersReducers.swift */; };
 		6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90712234E28EE675FA991ADB398400A0 /* LockupAssetsViewController.swift */; };
 		70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4D27CA3E4885E696C2D1EAEFD1BAB4 /* QuotesTitleView.swift */; };
+		72199D6621044FD100575226 /* RechargeRecodeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6221044FD100575226 /* RechargeRecodeCoordinator.swift */; };
+		72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6321044FD100575226 /* RechargeRecodeActions.swift */; };
+		72199D6821044FD100575226 /* RechargeRecodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6421044FD100575226 /* RechargeRecodeViewController.swift */; };
+		72199D6921044FD100575226 /* RechargeRecodeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6521044FD100575226 /* RechargeRecodeReducers.swift */; };
+		72199D6F21044FE800575226 /* WithdrawRecodeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6B21044FE800575226 /* WithdrawRecodeCoordinator.swift */; };
+		72199D7021044FE800575226 /* WithdrawRecodeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6C21044FE800575226 /* WithdrawRecodeActions.swift */; };
+		72199D7121044FE800575226 /* WithdrawRecodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6D21044FE800575226 /* WithdrawRecodeViewController.swift */; };
+		72199D7221044FE800575226 /* WithdrawRecodeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6E21044FE800575226 /* WithdrawRecodeReducers.swift */; };
+		72199D742104502800575226 /* Recode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72199D732104502800575226 /* Recode.storyboard */; };
+		72199D79210450C900575226 /* RecodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D77210450C900575226 /* RecodeCell.swift */; };
+		72199D7A210450C900575226 /* RecodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199D78210450C900575226 /* RecodeCell.xib */; };
+		72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D7B210450EA00575226 /* RecodeCellView.swift */; };
+		72199D7E210450F500575226 /* RecodeCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199D7D210450F500575226 /* RecodeCellView.xib */; };
+		72199D8C21045D4700575226 /* TransferListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D8821045D4700575226 /* TransferListCoordinator.swift */; };
+		72199D8D21045D4700575226 /* TransferListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D8921045D4700575226 /* TransferListActions.swift */; };
+		72199D8E21045D4700575226 /* TransferListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D8A21045D4700575226 /* TransferListViewController.swift */; };
+		72199D8F21045D4700575226 /* TransferListReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D8B21045D4700575226 /* TransferListReducers.swift */; };
+		72199D9421045DD000575226 /* TransferListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D9221045DD000575226 /* TransferListCell.swift */; };
+		72199D9521045DD000575226 /* TransferListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199D9321045DD000575226 /* TransferListCell.xib */; };
+		72199D9721045DDE00575226 /* TransferListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D9621045DDE00575226 /* TransferListCellView.swift */; };
+		72199D9921045DEA00575226 /* TransferListCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199D9821045DEA00575226 /* TransferListCellView.xib */; };
+		72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D9B2104636900575226 /* TransferDetailCoordinator.swift */; };
+		72199DA02104636900575226 /* TransferDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D9C2104636900575226 /* TransferDetailActions.swift */; };
+		72199DA12104636900575226 /* TransferDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D9D2104636900575226 /* TransferDetailViewController.swift */; };
+		72199DA22104636900575226 /* TransferDetailReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D9E2104636900575226 /* TransferDetailReducers.swift */; };
+		72199DA5210466C000575226 /* TransferTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199DA4210466C000575226 /* TransferTopView.swift */; };
+		72199DA7210466CB00575226 /* TransferTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199DA6210466CB00575226 /* TransferTopView.xib */; };
+		72199DA92104680000575226 /* TransferContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199DA82104680000575226 /* TransferContentView.swift */; };
+		72199DAB2104680900575226 /* TransferContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199DAA2104680900575226 /* TransferContentView.xib */; };
+		72199DAD2104687400575226 /* TransferLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199DAC2104687400575226 /* TransferLineView.swift */; };
+		72199DAF2104687D00575226 /* TransferLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199DAE2104687D00575226 /* TransferLineView.xib */; };
 		7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25010BD1F86818F3968A6D9DEF12AD52 /* BusinessViewController.swift */; };
 		7279867F20F49B3300FFB2DA /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 7279867E20F49B3200FFB2DA /* schema.json */; };
 		72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */; };
@@ -5622,6 +5653,37 @@
 		721401C37369E9EC5F09B832E7811F83 /* function_template.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = function_template.hpp; sourceTree = "<group>"; };
 		72152A9CCDD285E8443FBE328B3B5082 /* graphviz.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = graphviz.hpp; sourceTree = "<group>"; };
 		721676906B5FA3121F2DBD36D5D5B6A2 /* test_tools.ipp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = test_tools.ipp; sourceTree = "<group>"; };
+		72199D6221044FD100575226 /* RechargeRecodeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeCoordinator.swift; sourceTree = "<group>"; };
+		72199D6321044FD100575226 /* RechargeRecodeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeActions.swift; sourceTree = "<group>"; };
+		72199D6421044FD100575226 /* RechargeRecodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeViewController.swift; sourceTree = "<group>"; };
+		72199D6521044FD100575226 /* RechargeRecodeReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeReducers.swift; sourceTree = "<group>"; };
+		72199D6B21044FE800575226 /* WithdrawRecodeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawRecodeCoordinator.swift; sourceTree = "<group>"; };
+		72199D6C21044FE800575226 /* WithdrawRecodeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawRecodeActions.swift; sourceTree = "<group>"; };
+		72199D6D21044FE800575226 /* WithdrawRecodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawRecodeViewController.swift; sourceTree = "<group>"; };
+		72199D6E21044FE800575226 /* WithdrawRecodeReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawRecodeReducers.swift; sourceTree = "<group>"; };
+		72199D732104502800575226 /* Recode.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recode.storyboard; sourceTree = "<group>"; };
+		72199D77210450C900575226 /* RecodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecodeCell.swift; sourceTree = "<group>"; };
+		72199D78210450C900575226 /* RecodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecodeCell.xib; sourceTree = "<group>"; };
+		72199D7B210450EA00575226 /* RecodeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecodeCellView.swift; sourceTree = "<group>"; };
+		72199D7D210450F500575226 /* RecodeCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecodeCellView.xib; sourceTree = "<group>"; };
+		72199D8821045D4700575226 /* TransferListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListCoordinator.swift; sourceTree = "<group>"; };
+		72199D8921045D4700575226 /* TransferListActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListActions.swift; sourceTree = "<group>"; };
+		72199D8A21045D4700575226 /* TransferListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListViewController.swift; sourceTree = "<group>"; };
+		72199D8B21045D4700575226 /* TransferListReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListReducers.swift; sourceTree = "<group>"; };
+		72199D9221045DD000575226 /* TransferListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListCell.swift; sourceTree = "<group>"; };
+		72199D9321045DD000575226 /* TransferListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferListCell.xib; sourceTree = "<group>"; };
+		72199D9621045DDE00575226 /* TransferListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferListCellView.swift; sourceTree = "<group>"; };
+		72199D9821045DEA00575226 /* TransferListCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferListCellView.xib; sourceTree = "<group>"; };
+		72199D9B2104636900575226 /* TransferDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDetailCoordinator.swift; sourceTree = "<group>"; };
+		72199D9C2104636900575226 /* TransferDetailActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDetailActions.swift; sourceTree = "<group>"; };
+		72199D9D2104636900575226 /* TransferDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDetailViewController.swift; sourceTree = "<group>"; };
+		72199D9E2104636900575226 /* TransferDetailReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDetailReducers.swift; sourceTree = "<group>"; };
+		72199DA4210466C000575226 /* TransferTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferTopView.swift; sourceTree = "<group>"; };
+		72199DA6210466CB00575226 /* TransferTopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferTopView.xib; sourceTree = "<group>"; };
+		72199DA82104680000575226 /* TransferContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferContentView.swift; sourceTree = "<group>"; };
+		72199DAA2104680900575226 /* TransferContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferContentView.xib; sourceTree = "<group>"; };
+		72199DAC2104687400575226 /* TransferLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferLineView.swift; sourceTree = "<group>"; };
+		72199DAE2104687D00575226 /* TransferLineView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferLineView.xib; sourceTree = "<group>"; };
 		721B475F13CCE8D8192F58C4A44E15C3 /* static_warning.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = static_warning.hpp; sourceTree = "<group>"; };
 		721E9CE95D8C107D2503951AB72EAE66 /* bind_to_log.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bind_to_log.hpp; sourceTree = "<group>"; };
 		722AC369F029E99ECD96C2DF727A4317 /* arithmetic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = arithmetic.hpp; sourceTree = "<group>"; };
@@ -21478,6 +21540,106 @@
 			path = nt2;
 			sourceTree = "<group>";
 		};
+		72199D6121044FB600575226 /* RechargeRecode */ = {
+			isa = PBXGroup;
+			children = (
+				72199D76210450AC00575226 /* Cells */,
+				72199D75210450A000575226 /* Views */,
+				72199D6221044FD100575226 /* RechargeRecodeCoordinator.swift */,
+				72199D6321044FD100575226 /* RechargeRecodeActions.swift */,
+				72199D6421044FD100575226 /* RechargeRecodeViewController.swift */,
+				72199D6521044FD100575226 /* RechargeRecodeReducers.swift */,
+				72199D732104502800575226 /* Recode.storyboard */,
+			);
+			path = RechargeRecode;
+			sourceTree = "<group>";
+		};
+		72199D6A21044FD700575226 /* WithdrawRecode */ = {
+			isa = PBXGroup;
+			children = (
+				72199D6B21044FE800575226 /* WithdrawRecodeCoordinator.swift */,
+				72199D6C21044FE800575226 /* WithdrawRecodeActions.swift */,
+				72199D6D21044FE800575226 /* WithdrawRecodeViewController.swift */,
+				72199D6E21044FE800575226 /* WithdrawRecodeReducers.swift */,
+			);
+			path = WithdrawRecode;
+			sourceTree = "<group>";
+		};
+		72199D75210450A000575226 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72199D7B210450EA00575226 /* RecodeCellView.swift */,
+				72199D7D210450F500575226 /* RecodeCellView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		72199D76210450AC00575226 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				72199D77210450C900575226 /* RecodeCell.swift */,
+				72199D78210450C900575226 /* RecodeCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		72199D7F21045CEA00575226 /* Transfer */ = {
+			isa = PBXGroup;
+			children = (
+				72199D9A2104635400575226 /* TransferDetail */,
+				72199D9121045DAF00575226 /* Views */,
+				72199D9021045DAA00575226 /* Cells */,
+				72199D8821045D4700575226 /* TransferListCoordinator.swift */,
+				72199D8921045D4700575226 /* TransferListActions.swift */,
+				72199D8A21045D4700575226 /* TransferListViewController.swift */,
+				72199D8B21045D4700575226 /* TransferListReducers.swift */,
+			);
+			path = Transfer;
+			sourceTree = "<group>";
+		};
+		72199D9021045DAA00575226 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				72199D9221045DD000575226 /* TransferListCell.swift */,
+				72199D9321045DD000575226 /* TransferListCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		72199D9121045DAF00575226 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72199D9621045DDE00575226 /* TransferListCellView.swift */,
+				72199D9821045DEA00575226 /* TransferListCellView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		72199D9A2104635400575226 /* TransferDetail */ = {
+			isa = PBXGroup;
+			children = (
+				72199DA32104669800575226 /* Views */,
+				72199D9B2104636900575226 /* TransferDetailCoordinator.swift */,
+				72199D9C2104636900575226 /* TransferDetailActions.swift */,
+				72199D9D2104636900575226 /* TransferDetailViewController.swift */,
+				72199D9E2104636900575226 /* TransferDetailReducers.swift */,
+			);
+			path = TransferDetail;
+			sourceTree = "<group>";
+		};
+		72199DA32104669800575226 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72199DA4210466C000575226 /* TransferTopView.swift */,
+				72199DA6210466CB00575226 /* TransferTopView.xib */,
+				72199DA82104680000575226 /* TransferContentView.swift */,
+				72199DAA2104680900575226 /* TransferContentView.xib */,
+				72199DAC2104687400575226 /* TransferLineView.swift */,
+				72199DAE2104687D00575226 /* TransferLineView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		72B51E6DD463B5A3E36B4946FEB7D64A /* proto */ = {
 			isa = PBXGroup;
 			children = (
@@ -26941,6 +27103,7 @@
 		BC07906A1E2E020C6177ADCA4F64EF05 /* RechargeDetail */ = {
 			isa = PBXGroup;
 			children = (
+				72199D6121044FB600575226 /* RechargeRecode */,
 				6F80A8DB9CC8A072FDB23592D220D4A5 /* Views */,
 				8CD2F49B999FF4B9FB8DB0B17BE5F897 /* RechargeDetailActions.swift */,
 				DCDDA3A4A776E85A3F485F32310E2798 /* RechargeDetailCoordinator.swift */,
@@ -28571,6 +28734,7 @@
 		D45A98F5C4B226E86B604DDF7AEE6546 /* WithdrawDetail */ = {
 			isa = PBXGroup;
 			children = (
+				72199D6A21044FD700575226 /* WithdrawRecode */,
 				72EC6A4E20F4611500CEAFF6 /* Views */,
 				A0BD0C5B42031D1C4DFFD51560AF9178 /* WithdrawDetailActions.swift */,
 				4C14509E978A6A84AD1A5E97E1E66761 /* WithdrawDetailCoordinator.swift */,
@@ -30764,6 +30928,7 @@
 		F189D4AC3A5BB2DB266277BAD8CB0EA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				72199D7F21045CEA00575226 /* Transfer */,
 				1957BC4603D51BA58EA334581171C0AD /* Account */,
 				9D2617B8E4636D7B44A5583FD0A56039 /* Entry */,
 				95C45586F4A469DCB5A1CFCC4CB80A62 /* FAQ */,
@@ -32248,6 +32413,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72199D7E210450F500575226 /* RecodeCellView.xib in Resources */,
 				A081A5FE86C0AC44E299840DD8C1DE00 /* AccessoryCollectionView.xib in Resources */,
 				D971C57B81B4A2FBB083235DDE5057A2 /* AccessoryCollectionViewCell.xib in Resources */,
 				FE75674B7C6A22FAFA051C9CE0E95A1D /* AccessoryHorizentalView.xib in Resources */,
@@ -32283,6 +32449,7 @@
 				DF032043A699E690FA00D8C90B72773F /* Localizable.strings in Resources */,
 				082F8D06A9EF700C8EB3A8BC62D8F1A8 /* LockupAssetsCell.xib in Resources */,
 				089679AF63200358A2B8B9059A9824A0 /* LockupAssetsSectionView.xib in Resources */,
+				72199D742104502800575226 /* Recode.storyboard in Resources */,
 				A0EB4B1B6F7ED67099FE6F6641D24E84 /* LockupAssetsView.xib in Resources */,
 				DADCEB576AA31881365CA9DFD8588B7A /* Main.storyboard in Resources */,
 				5EC5CB38F68C8EB063FE6DB600247A30 /* MyHistoryCell.xib in Resources */,
@@ -32307,6 +32474,7 @@
 				C860BE92032F361E51995DB61C68774C /* RechargeSegment.xib in Resources */,
 				131A2FCACA9688EC4FC89E1A50E45457 /* StyleLabel.xib in Resources */,
 				425ABA62CF90E4866D5279A917C235AD /* TimeGapView.xib in Resources */,
+				72199D9921045DEA00575226 /* TransferListCellView.xib in Resources */,
 				09C3D6D8CF52A972307C4A1F1C214738 /* TradeCell.xib in Resources */,
 				807473C43B99A27237F53C7E2A2FE7F3 /* TradeHistoryCell.xib in Resources */,
 				3B0EB65D210313B200F19C31 /* YourPortfolioHandleView.xib in Resources */,
@@ -32331,6 +32499,7 @@
 				ED52E183FEB4713941693F42DF4A3FC3 /* cfloat in Resources */,
 				D87D82C27FA74490808CC159AF1F26A4 /* climits in Resources */,
 				8BBD1A7F16A0642B27F1E61660BBBE75 /* clocale in Resources */,
+				72199DA7210466CB00575226 /* TransferTopView.xib in Resources */,
 				1B738C312087134B7F7E5462BD1DB526 /* cmath in Resources */,
 				2BF75EA384934AE269618BFA4D315DA3 /* cmath in Resources */,
 				60366FF13A1DDFEAB352E48931017AD4 /* cmath.SUNWCCh in Resources */,
@@ -32393,11 +32562,13 @@
 				3B0EB662210314A600F19C31 /* Account.storyboard in Resources */,
 				775A0AC293D3BA7664DF110680A7CA5E /* random in Resources */,
 				50AC1D5876BE8E4CE1F57FE12CB138AA /* random.SUNWCCh in Resources */,
+				72199DAB2104680900575226 /* TransferContentView.xib in Resources */,
 				3299A2EFB332B1EE39EB214D2FC87525 /* regex in Resources */,
 				CC76CFB4727E500CB64DF691E8EE3E33 /* regex.SUNWCCh in Resources */,
 				05802DA2E7EDEEA258806461FCCFF8DD /* set in Resources */,
 				922CBDB730EBC9FC4D98119AD58C8A0E /* set.SUNWCCh in Resources */,
 				56368B5447BA035D8DA7B2F5DD5495F4 /* sstream in Resources */,
+				72199DAF2104687D00575226 /* TransferLineView.xib in Resources */,
 				43A6A4507174D761F8591B6EAD54A7DC /* sstream.SUNWCCh in Resources */,
 				7279867F20F49B3300FFB2DA /* schema.json in Resources */,
 				F74894049FBFC47D85ABB9A91B3911D2 /* stack in Resources */,
@@ -32409,6 +32580,7 @@
 				7A2069F078916F1BEFA51B4280F15043 /* string in Resources */,
 				53ADE9C0C622E19FE297F56C179322D3 /* string.SUNWCCh in Resources */,
 				F6E646CF8EB874C269CB9BF08759CF71 /* strstream in Resources */,
+				72199D7A210450C900575226 /* RecodeCell.xib in Resources */,
 				65A58B083600BE7FD253D77F601E9A39 /* strstream.SUNWCCh in Resources */,
 				42B430EE564071AC084887D35EFA7DD2 /* sun.SUNWCCh in Resources */,
 				C459D1A89E1A9B2C420DA7E25BC057BF /* tuple in Resources */,
@@ -32416,6 +32588,7 @@
 				86CAB827F380B4DDA4B48B813DEF7775 /* type_traits in Resources */,
 				3B0EB653210313B200F19C31 /* NormalContentCell.xib in Resources */,
 				C7186D34A3AA4B5EC090CB7DDDC4767F /* type_traits.SUNWCCh in Resources */,
+				72199D9521045DD000575226 /* TransferListCell.xib in Resources */,
 				4BDAA1229CE79E449D71FBB78746E6E5 /* typeinfo in Resources */,
 				29860A52A2F9E6057FEC80C30DB2C08C /* typeinfo.SUNWCCh in Resources */,
 				564933AA201BA7D916E7B2AABAE742F8 /* unordered_map in Resources */,
@@ -32704,17 +32877,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72199D9421045DD000575226 /* TransferListCell.swift in Sources */,
 				04AE2E3C8F409B0337F53AE4DB52FCD0 /* AccessoryCollectionView.swift in Sources */,
 				98ED9D145EF3DAA0FD242984364B676F /* AccessoryCollectionViewCell.swift in Sources */,
 				D6EF2CA9447A80749A341523EA37E613 /* AccessoryHorizentalView.swift in Sources */,
 				53079FD90D2B1B6BCB3863CB53111FAA /* Account.swift in Sources */,
 				B53165C099917599B9638053318C729A /* AccountAssetOperationView.swift in Sources */,
+				72199D7121044FE800575226 /* WithdrawRecodeViewController.swift in Sources */,
 				305DB17562E3D02F04E0122C1C4674A4 /* AccountAssetOperationsItemView.swift in Sources */,
 				65A0AB87E09E879EFAFA04DBA6B15D3E /* AccountCoordinator.swift in Sources */,
 				C37CA15215CBB1B064E0514AB9D0EFE5 /* AccountOpenedOrdersView.swift in Sources */,
 				D3694E6115F5ED50F0FFE4108E64BAEE /* AccountPortfolioCell.swift in Sources */,
 				9708F7C8EA5B8E107E937306846BE6F0 /* AccountPortfolioCellView.swift in Sources */,
 				32BED01405F6D7B22B348057E0BDE3C8 /* AccountPortfolioView.swift in Sources */,
+				72199D6F21044FE800575226 /* WithdrawRecodeCoordinator.swift in Sources */,
+				72199DA92104680000575226 /* TransferContentView.swift in Sources */,
 				E0AD8E2E835D84754C63BA76FBA8582E /* AccountReducers.swift in Sources */,
 				C44F04354B1B9F8051BA2651AC620D65 /* AccountRootCoordinator.swift in Sources */,
 				0960C892D63D17ABEB447BCE5525D299 /* AppActions.swift in Sources */,
@@ -32740,6 +32917,10 @@
 				B9DE00DA8B7EDD0F9BEA00881C4924C1 /* BusinessTitleCell.swift in Sources */,
 				3B0EB6642103150D00F19C31 /* AccountActions.swift in Sources */,
 				66A5DD971B80802DF72977E071CAB84D /* BusinessTitleItemView.swift in Sources */,
+				72199D8D21045D4700575226 /* TransferListActions.swift in Sources */,
+				72199DA12104636900575226 /* TransferDetailViewController.swift in Sources */,
+				72199D8F21045D4700575226 /* TransferListReducers.swift in Sources */,
+				72199D6621044FD100575226 /* RechargeRecodeCoordinator.swift in Sources */,
 				188394B25D1EF3596A01900469FACBFB /* BusinessTitleView.swift in Sources */,
 				C0AC3C1A58448D06655DCE0994FDC33A /* BusinessView.swift in Sources */,
 				7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */,
@@ -32752,6 +32933,7 @@
 				A971765C0FF4C52CAA1C001A3ABBC1B1 /* CBKLineDrawView.swift in Sources */,
 				45E03EE6B4BBE7286E7287D3DFD1B9D6 /* CBKLineMainView.swift in Sources */,
 				E286FE83AA3DB3C53DD1FDE1CA1BC208 /* CBKLineModel.swift in Sources */,
+				72199DAD2104687400575226 /* TransferLineView.swift in Sources */,
 				BAB27405E1C42F6C20B9DBF1FDDBC100 /* CBKLineView.swift in Sources */,
 				B7631744A19B452081A71269BF881246 /* CBKLineVolumeView.swift in Sources */,
 				8C3E5CB53A30AD3221992CCA44A8D332 /* CBMACDModel.swift in Sources */,
@@ -32774,6 +32956,7 @@
 				61096350D887C3728E3B617E993C2365 /* Demo.swift in Sources */,
 				51FB3EBF69DA6AF015F0DF92781986BF /* DemoCache.swift in Sources */,
 				A1EF7FAAA7F0B4F6C9FE153714C1ED47 /* ShowToastManager.swift in Sources */,
+				72199DA5210466C000575226 /* TransferTopView.swift in Sources */,
 				BD76C30DD5E6DF9195A2DF3218C62F70 /* EmptySegue.swift in Sources */,
 				054514C4C6457A51CC46615D25768574 /* EntryActions.swift in Sources */,
 				E5401ED6E9547DC2097AC58606842B84 /* EntryCoordinator.swift in Sources */,
@@ -32787,9 +32970,12 @@
 				41369312624D03C488017E7D88E4D41E /* ExchangeViewController.swift in Sources */,
 				F0CE8D5A02461E239914DF75E18C23FA /* ExplorerRootCoordinator.swift in Sources */,
 				0E785072E0FFD5C3B2BE5B7EAB012755 /* FAQActions.swift in Sources */,
+				72199D8E21045D4700575226 /* TransferListViewController.swift in Sources */,
 				2BE29FBC5EBC24621C616DCA7C58F109 /* FAQCoordinator.swift in Sources */,
+				72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */,
 				98D200C38B81D27DAF59438FCB5EF646 /* FAQReducers.swift in Sources */,
 				3B824D5C362724DE4C1048A35CDC37E0 /* FAQRootCoordinator.swift in Sources */,
+				72199D8C21045D4700575226 /* TransferListCoordinator.swift in Sources */,
 				F6AF1D76C51578A4EC2438427711F783 /* FAQViewController.swift in Sources */,
 				8691BEEE7629D4BE41D13D82D9AF29A9 /* GradientLabelView.swift in Sources */,
 				FF9F0639B5927B79A3EFC30AF470DE97 /* GradientLayer.swift in Sources */,
@@ -32807,6 +32993,7 @@
 				9F391D11D2B1C4522215117016EAA2F7 /* HomeSectionHeaderView.swift in Sources */,
 				DBBB81526F86E5409BB4D8C0D8A6CF1B /* HomeTitleView.swift in Sources */,
 				9BDA71F68E64FDF8BBAE5E8A3391FFA1 /* HomeViewController.swift in Sources */,
+				72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */,
 				72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */,
 				59EC4E5138ECE3D4E7570F3EE0EF28E0 /* IconGenerator.swift in Sources */,
 				61804E3238064ADBE771CD78E212AB6A /* IntroduceView.swift in Sources */,
@@ -32836,6 +33023,7 @@
 				41143CEDF6A8910D9C2E8BCEE8C47A38 /* MyHistoryViewController.swift in Sources */,
 				3B0EB65B210313B200F19C31 /* YourPortfolioHandleView.swift in Sources */,
 				CD017D1C374A5B06D3ECEC24936E0911 /* MyOpenedOrdersView.swift in Sources */,
+				72199D7021044FE800575226 /* WithdrawRecodeActions.swift in Sources */,
 				D3008B984211AFE152859658DC6B773B /* NSNotification+Extensions.swift in Sources */,
 				031F69CC95D2906A4F8F4063776327F6 /* NSObject+Extensions.swift in Sources */,
 				009625463316961A6BB07A49EB88D5D5 /* NavCoordinator.swift in Sources */,
@@ -32853,12 +33041,14 @@
 				F1B88753DCA13AC5B42338848EEC8DBF /* OpenedOrdersView.swift in Sources */,
 				F5DDA9E8ED5A5AA3D7A8F0705CFBA4BD /* OpenedOrdersViewController.swift in Sources */,
 				8712B050CE07ED3C160B237CB07116ED /* Operation.swift in Sources */,
+				72199DA02104636900575226 /* TransferDetailActions.swift in Sources */,
 				B7C833CEBC9B338666CA2D979065BF91 /* Operators.swift in Sources */,
 				A33E06706616C92F527D5547D28DEBF6 /* Optional+Extensions.swift in Sources */,
 				CDFF0BF138FA10588F2D771CAF16AF34 /* OrderBook.swift in Sources */,
 				019AC681342BD1E978777A6A503E27B6 /* OrderBookActions.swift in Sources */,
 				4C5E6FF343C8DA25EC51F44EF725069E /* OrderBookCell.swift in Sources */,
 				D898B818223D8DD3B304D2D7F5A3E2AB /* OrderBookCellView.swift in Sources */,
+				72199D79210450C900575226 /* RecodeCell.swift in Sources */,
 				B50D80579F91D71A098AEB21A8251C44 /* OrderBookContentView.swift in Sources */,
 				DB5E6F5B71C53800CE2EEA32391210BE /* OrderBookCoordinator.swift in Sources */,
 				813E625BF1238DDBDC460AFDBCEF4049 /* OrderBookReducers.swift in Sources */,
@@ -32869,6 +33059,8 @@
 				D3C87D3A247487C8D834A828782FC472 /* PairListHorizantalView.swift in Sources */,
 				A819B2C87ADE04838AE8D44CF16C53B4 /* PairRechargeView.swift in Sources */,
 				70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */,
+				72199D6821044FD100575226 /* RechargeRecodeViewController.swift in Sources */,
+				72199D9721045DDE00575226 /* TransferListCellView.swift in Sources */,
 				E54849D562EC4C8B42B70B962A97269E /* R.generated.swift in Sources */,
 				ED57B29BDB18C8B97035E7DA20DF26E5 /* RechargeActions.swift in Sources */,
 				665FBB42152A37B183D011D45A4A0F22 /* RechargeCoordinator.swift in Sources */,
@@ -32907,6 +33099,7 @@
 				5012DA167BBBF31D3392DD2453106515 /* Trade.swift in Sources */,
 				A806E796D672D304574E9E46E50F16EC /* TradeActions.swift in Sources */,
 				8528FA970144D53CB71EF87725B0AAE9 /* TradeCell.swift in Sources */,
+				72199D6921044FD100575226 /* RechargeRecodeReducers.swift in Sources */,
 				4E2B0C9A04FD5D11C7AFA4CC9DF8492F /* TradeCoordinator.swift in Sources */,
 				E549F16D59025C0BE00C28BFA24C9E0D /* TradeHistoryActions.swift in Sources */,
 				B4125FF4D7849714DA71E04BC6D888AB /* TradeHistoryCell.swift in Sources */,
@@ -32923,11 +33116,14 @@
 				3B0EB65C210313B200F19C31 /* YourPortfolioHeadView.swift in Sources */,
 				C02132F00200B408020442C307CEE0B6 /* TradeView.swift in Sources */,
 				7CA82BA6BC1F22AAA929D52CD5C4434F /* TradeViewController.swift in Sources */,
+				72199DA22104636900575226 /* TransferDetailReducers.swift in Sources */,
 				A0205CDF8595D10C5D9367EBCBBA714A /* UIColor+Additions.swift in Sources */,
 				1885C2EE1E25930F2E94702A8C05C2BC /* UIColor+Cybexblack.swift in Sources */,
+				72199D7221044FE800575226 /* WithdrawRecodeReducers.swift in Sources */,
 				492A4075DDD845005D90DD5201F32F26 /* UIColorExtension.swift in Sources */,
 				CC8DD1E9001CFBB8915E342EDB329B3E /* UIImage+Extensions.swift in Sources */,
 				0C46B30A32343632C135B84DDEB47F80 /* UIResponder+Route.swift in Sources */,
+				72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */,
 				0FF6C4A7AAF40F0AC67CBDAEAA2406E2 /* UITextField+Extensions.swift in Sources */,
 				3B0EB6672103155C00F19C31 /* YourPortfolioCoordinator.swift in Sources */,
 				C2728D465891E65690FBF4E868796852 /* UIView+Extensions.swift in Sources */,
