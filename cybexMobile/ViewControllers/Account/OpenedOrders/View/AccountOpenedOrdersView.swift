@@ -52,7 +52,7 @@ class AccountOpenedOrdersView:UIView {
     headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: 103))
     headerView.sectionTitleView.cybPriceTitle.locali = R.string.localizable.opened_order_value.key.localized()
     headerView.sectionTitleView.totalTitle.locali = R.string.localizable.opened_asset_amount.key.localized()
-    tableView.tableHeaderView = UIView()
+    tableView.tableHeaderView = headerView
   }
   
   override var intrinsicContentSize: CGSize {
