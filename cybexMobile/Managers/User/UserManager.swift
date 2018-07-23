@@ -21,12 +21,12 @@ import Repeat
 extension UserManager {
 
   func validateUserName(_ username:String) -> (Bool, String) {
-    let letterBegin = Guitar(pattern: "^([a-zA-Z])")
+    let letterBegin = Guitar(pattern: "^([a-z])")
     if !letterBegin.test(string: username) {
       return (false, R.string.localizable.accountValidateError2.key.localized())
     }
     
-    let legal = Guitar(pattern: "([^a-zA-z0-9\\-])")
+    let legal = Guitar(pattern: "([^a-z0-9\\-])")
     if legal.test(string: username) {
       return (false, R.string.localizable.accountValidateError6.key.localized())
     }
