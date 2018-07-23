@@ -270,7 +270,7 @@
 "transfer_send" = "Sent";
 
 // 转账详情
-"transfer_detail" = "转账详情";
+"transfer_detail" = "Transfer Details";
 "transfer_detail_send" = "Out";
 "transfer_detail_income" = "In";
 "transfer_detail_income_address" = "From";

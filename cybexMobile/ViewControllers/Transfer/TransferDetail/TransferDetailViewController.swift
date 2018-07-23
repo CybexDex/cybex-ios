@@ -12,34 +12,34 @@ import RxCocoa
 import ReSwift
 
 class TransferDetailViewController: BaseViewController {
-
-	var coordinator: (TransferDetailCoordinatorProtocol & TransferDetailStateManagerProtocol)?
-
-	override func viewDidLoad() {
-        super.viewDidLoad()
-      setupUI()
-    }
+  
+  var coordinator: (TransferDetailCoordinatorProtocol & TransferDetailStateManagerProtocol)?
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupUI()
+  }
+  
   func setupUI() {
     self.title = R.string.localizable.transfer_detail()
-
   }
-    
-    func commonObserveState() {
-        coordinator?.subscribe(errorSubscriber) { sub in
-            return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
-        
-        coordinator?.subscribe(loadingSubscriber) { sub in
-            return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
+  
+  func commonObserveState() {
+    coordinator?.subscribe(errorSubscriber) { sub in
+      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
+        return false
+      })
     }
     
-    override func configureObserveState() {
-        commonObserveState()
-        
+    coordinator?.subscribe(loadingSubscriber) { sub in
+      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
+        return false
+      })
     }
+  }
+  
+  override func configureObserveState() {
+    commonObserveState()
+    
+  }
 }

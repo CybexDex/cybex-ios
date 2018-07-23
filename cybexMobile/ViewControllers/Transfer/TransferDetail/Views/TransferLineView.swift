@@ -10,21 +10,11 @@ import UIKit
 
 @IBDesignable
 class TransferLineView: UIView {
-
-    @IBOutlet weak var name: UILabel!
-    
-    @IBOutlet weak var content: UILabel!
   
-  @IBInspectable
-  var type:Int = 0 {
-    didSet {
-      if type != 0 {
-        self.content.locali = R.string.localizable.transfer_Detail_click()
-        self.content.textColor = UIColor.pastelOrange
-        self.content.isUserInteractionEnabled = true
-      }
-    }
-  }
+  @IBOutlet weak var name: UILabel!
+  
+  @IBOutlet weak var content: UILabel!
+  
   
   
   @IBInspectable
@@ -36,8 +26,6 @@ class TransferLineView: UIView {
     }
   }
   
-  
-  
   @IBInspectable
   var content_locali : String? {
     didSet{
@@ -46,7 +34,7 @@ class TransferLineView: UIView {
       }
     }
   }
-    
+  
   func setup() {
     self.content.isUserInteractionEnabled = false
     let tap = UITapGestureRecognizer(target: self, action: #selector(clickToMemo))
@@ -84,6 +72,7 @@ class TransferLineView: UIView {
     loadFromXIB()
     setup()
   }
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     setup()

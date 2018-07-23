@@ -12,45 +12,43 @@ import RxCocoa
 import ReSwift
 
 class RechargeRecodeViewController: BaseViewController {
-
-    @IBOutlet weak var tableView: UITableView!
-    var coordinator: (RechargeRecodeCoordinatorProtocol & RechargeRecodeStateManagerProtocol)?
-
-	override func viewDidLoad() {
-        super.viewDidLoad()
-      setupUI()
-
-    }
+  
+  @IBOutlet weak var tableView: UITableView!
+  var coordinator: (RechargeRecodeCoordinatorProtocol & RechargeRecodeStateManagerProtocol)?
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupUI()
+  }
   
   func setupUI() {
     self.title = R.string.localizable.deposit_list()
     let nibString = String(describing: RecodeCell.self)
     self.tableView.register(UINib(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
   }
-    
-    func commonObserveState() {
-        coordinator?.subscribe(errorSubscriber) { sub in
-            return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
-        
-        coordinator?.subscribe(loadingSubscriber) { sub in
-            return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
+  
+  func commonObserveState() {
+    coordinator?.subscribe(errorSubscriber) { sub in
+      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
+        return false
+      })
     }
     
-    override func configureObserveState() {
-        commonObserveState()
-        
+    coordinator?.subscribe(loadingSubscriber) { sub in
+      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
+        return false
+      })
     }
+  }
+  
+  override func configureObserveState() {
+    commonObserveState()
+  }
 }
 
 extension RechargeRecodeViewController : UITableViewDelegate,UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-     return 10
+    return 10
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
