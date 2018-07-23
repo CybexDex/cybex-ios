@@ -32,7 +32,7 @@ struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.history] ?? 0, historyCatogery.get_account_history.rawValue, [accountID, "1.11.0", "100", "1.11.0"]]
+    return [WebsocketService.shared.ids[apiCategory.history] ?? 0, historyCatogery.get_account_history.rawValue, [accountID, objectID.operation_history_object, "100", objectID.operation_history_object]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
