@@ -15,10 +15,10 @@ import SwifterSwift
 extension AppCoordinator: AppStateManagerProtocol {
   func subscribe<SelectedState, S: StoreSubscriber>(
     _ subscriber: S, transform: ((Subscription<AppState>) -> Subscription<SelectedState>)?
-  ) where S.StoreSubscriberStateType == SelectedState {
+    ) where S.StoreSubscriberStateType == SelectedState {
     store.subscribe(subscriber, transform: transform)
   }
- 
+  
   func fetchData(_ params: AssetPairQueryParams, sub: Bool = true,callback:@escaping ()->()) {
     store.dispatch(creator.fetchMarket(with: sub, params: params, callback: { [weak self] (assets) in
       guard let `self` = self else { return }
@@ -34,18 +34,18 @@ extension AppCoordinator: AppStateManagerProtocol {
       self.store.dispatch(MarketsFetched(pair: params, assets: assets))
     }))
   }
-
+  
   func fetchKline(_ params: AssetPairQueryParams, gap: candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
     store.dispatch(creator.fetchMarket(with: false, params: params, callback: { [weak self] (assets) in
       guard let `self` = self else { return }
-
+      
       self.store.dispatch(kLineFetched(pair: Pair(base: params.firstAssetId, quote: params.secondAssetId), stick: gap, assets: assets))
       if let vc = vc, let sel = selector {
         self.store.dispatch(RefreshState(sel: sel, vc: vc))
       }
     }))
   }
-
+  
   func fetchAsset(_ callback:@escaping (()->Void)) {
     async {
       let data = try! await(SimpleHTTPService.fetchIdsInfo())
@@ -58,12 +58,12 @@ extension AppCoordinator: AppStateManagerProtocol {
               self.store.dispatch(AssetInfoAction(assetID: info.id, info: info))
             }
             callback()
-
+            
           }
         }
         WebsocketService.shared.send(request: request)
       }
-     
+      
     }
     
   }
@@ -90,7 +90,7 @@ extension AppCoordinator: AppStateManagerProtocol {
     }
     
     timer?.start()
-
+    
   }
 }
 
@@ -98,9 +98,9 @@ extension AppCoordinator {
   func request24hMarkets(_ pairs: [Pair], sub: Bool = true ,totalTime:Double = 3,splits:Int = 3) {
     let now = Date()
     let curTime = now.timeIntervalSince1970
-
+    
     var start = now.addingTimeInterval(-3600 * 24)
-
+    
     let timePassed = (-start.minute * 60 - start.second).double
     start = start.addingTimeInterval(timePassed)
     var filterPairs = pairs.filter { (pair) -> Bool in
@@ -109,10 +109,10 @@ extension AppCoordinator {
       }
       return true
     }
-//    log.warning("firstFetchPairsCount \(firstFetchPairsCount)")
-//    log.warning("secondFetchPairsCount \(secondFetchPairsCount)")
-//    log.warning("thirdFetchPairsCount \(thirdFetchPairsCount)")
-
+    //    log.warning("firstFetchPairsCount \(firstFetchPairsCount)")
+    //    log.warning("secondFetchPairsCount \(secondFetchPairsCount)")
+    //    log.warning("thirdFetchPairsCount \(thirdFetchPairsCount)")
+    
     if self.firstFetchPairsCount != 0 || self.secondFetchPairsCount != 0 || self.thirdFetchPairsCount != 0 {
       return
     }
@@ -125,32 +125,32 @@ extension AppCoordinator {
       self.thirdFetchPairsCount = filterPairs.count - 2 * length - 1
       for index in 0...length - 1 {
         let pair = filterPairs[index]
-//        log.warning("first")
+        //        log.warning("first")
         AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
-//          log.warning("first response")
+          //          log.warning("first response")
           self.firstFetchPairsCount -= 1
         }
       }
       SwifterSwift.delay(milliseconds: 1000) {
         for index in length...2*length {
-
+          
           let pair = filterPairs[index]
-//          log.warning("second")
+          //          log.warning("second")
           AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
-//            log.warning("second response")
-
+            //            log.warning("second response")
+            
             self.secondFetchPairsCount -= 1
           }
         }
       }
       SwifterSwift.delay(milliseconds: 2000) {
         for index in 2*length+1...filterPairs.count - 1 {
-
+          
           let pair = filterPairs[index]
-//          log.warning("third")
-
+          //          log.warning("third")
+          
           AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
-//            log.warning("third response")
+            //            log.warning("third response")
             self.thirdFetchPairsCount -= 1
           }
         }
@@ -161,21 +161,21 @@ extension AppCoordinator {
       }
     }
     
-
-//    for pair in filterPairs {
-//      if let refreshTimes = app_data.pairsRefreshTimes, let oldTime = refreshTimes[pair] {
-//        if curTime - oldTime < 5 {
-//          continue
-//        }
-//
-//      }
-//
-//      AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub)
-//    }
-
+    
+    //    for pair in filterPairs {
+    //      if let refreshTimes = app_data.pairsRefreshTimes, let oldTime = refreshTimes[pair] {
+    //        if curTime - oldTime < 5 {
+    //          continue
+    //        }
+    //
+    //      }
+    //
+    //      AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub)
+    //    }
+    
   }
   
-
+  
   
   func repeatFetchPairInfo(){
     
@@ -194,16 +194,16 @@ extension AppCoordinator {
       self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false)
     })
   }
-
   
-
+  
+  
   func requestKlineDetailData(pair: Pair, gap: candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
     let now = Date()
     let start = now.addingTimeInterval(-gap.rawValue * 199)
-
+    
     AppConfiguration.shared.appCoordinator.fetchKline(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: gap.rawValue.int, startTime: start, endTime: now), gap: gap, vc: vc, selector: selector)
   }
-
+  
   func getLatestData() {
     if AssetConfiguration.shared.asset_ids.isEmpty {
       fetchAsset {
@@ -235,7 +235,7 @@ extension AppCoordinator {
       }
       request24hMarkets(AssetConfiguration.shared.asset_ids)
     }
-
+    
   }
 }
 
