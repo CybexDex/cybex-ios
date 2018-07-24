@@ -10,6 +10,7 @@ import Foundation
 import SwiftTheme
 
 class BaseNavigationController: UINavigationController {
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -49,8 +50,6 @@ class BaseNavigationController: UINavigationController {
     })
     
   }
-  
-  
   
   override func pushViewController(_ viewController: UIViewController, animated: Bool) {
     if self.viewControllers.count != 0 {
