@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -90,8 +90,22 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zc1-RL-cEB">
+                                    <rect key="frame" x="0.0" y="91.5" width="346" height="0.5"/>
+                                    <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="0.5" id="HZa-Fo-vO8"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                            <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="Epg-bd-VZJ" firstAttribute="top" secondItem="iio-Rf-0Rq" secondAttribute="top" constant="17" id="1bp-df-56Z"/>
                                 <constraint firstAttribute="trailing" secondItem="YRg-NO-d4e" secondAttribute="trailing" constant="3" id="8Ne-b9-as5"/>
@@ -102,10 +116,13 @@
                                 <constraint firstItem="l4V-9a-rOH" firstAttribute="centerY" secondItem="Epg-bd-VZJ" secondAttribute="centerY" id="O21-Hq-BUP"/>
                                 <constraint firstItem="l4V-9a-rOH" firstAttribute="leading" secondItem="Epg-bd-VZJ" secondAttribute="trailing" constant="8" id="UUc-iC-KzI"/>
                                 <constraint firstAttribute="bottom" secondItem="miR-34-EvR" secondAttribute="bottom" constant="16" id="UtP-f7-3Lx"/>
+                                <constraint firstAttribute="trailing" secondItem="zc1-RL-cEB" secondAttribute="trailing" constant="3" id="Zz4-uc-6XW"/>
                                 <constraint firstItem="miR-34-EvR" firstAttribute="top" secondItem="Epg-bd-VZJ" secondAttribute="bottom" constant="12" id="d5n-mC-Xxh"/>
                                 <constraint firstAttribute="trailing" secondItem="aiS-AU-zA1" secondAttribute="trailing" constant="3" id="grC-Vr-UvZ"/>
                                 <constraint firstItem="aiS-AU-zA1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="l4V-9a-rOH" secondAttribute="trailing" id="jYy-g7-lB4"/>
                                 <constraint firstItem="aiS-AU-zA1" firstAttribute="centerY" secondItem="Epg-bd-VZJ" secondAttribute="centerY" id="mRe-SE-n2s"/>
+                                <constraint firstItem="zc1-RL-cEB" firstAttribute="leading" secondItem="iio-Rf-0Rq" secondAttribute="leading" id="odA-27-nIJ"/>
+                                <constraint firstAttribute="bottom" secondItem="zc1-RL-cEB" secondAttribute="bottom" id="zKO-ys-4ND"/>
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zMT-d8-Ima">
@@ -211,7 +228,6 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="v8G-2k-49h" secondAttribute="trailing" constant="13" id="Nnu-Fa-Hkk"/>
                 <constraint firstItem="v8G-2k-49h" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="aDA-vb-gNb"/>

@@ -66,12 +66,12 @@
 "account.nonMatch" = "账户名或者密码错误";
 "ok" = "确认";
 "account.validate.error.1" = "账户名已经被使用";
-"account.validate.error.2" = "账户名必须以字母开头";
+"account.validate.error.2" = "账户名必须以小写字母开头";
 "account.validate.error.3" = "账户名过短/过长";
 "account.validate.error.4" = "账户名需至少包含一个数字或横杠";
 "account.validate.error.5" = "账户名不能包含连续的横杠";
-"account.validate.error.6" = "账户名仅能包含字母、数字、横杠";
-"account.validate.error.7" = "账户必须以字母或数字结尾";
+"account.validate.error.6" = "账户名仅能包含小写字母、数字、横杠";
+"account.validate.error.7" = "账户必须以小写字母或数字结尾";
 
 "password.validate.error.1" = "输入12位以上的密码";
 "password.validate.error.2" = "密码不一致";
@@ -241,5 +241,39 @@
 
 "update_version" = "版本更新";
 
+// 充提现
+"withdraw_list" = "提现记录";
+"deposit_list" = "充值记录";
+"update_time" = "更新时间:";
+"recode_address" = "地址:";
+"recode_state_new" = "新建";
+"recode_state_upping" = "正在上链";
+"recode_state_noensure" = "待确认";
+"recode_state_fail" = "失败";
+"recode_state_success" = "成功";
+
+// 转账记录
+"transfer_title" = "转账记录";
+"transfer_done" = "已收到";
+"transfer_send" = "已转出";
+
+// 转账详情
+"transfer_detail" = "转账详情";
+"transfer_detail_send" = "支出";
+"transfer_detail_income" = "收入";
+"transfer_detail_income_address" = "付款账户";
+"transfer_detail_send_address" = "收款账户";
+"transfer_detail_time" = "锁定期";
+"transfer_detail_fee" = "手续费";
+"transfer_detail_mome" = "备注信息";
+"transfer_Detail_click" = "点击查看";
+
+//zsy add
+"my_property" = "我的资产";
+"order_value" = "委托单";
+"transfer" = "转账";
+"account_property" = "账户资产估值(CYB)";
+"hello" = "您好，";
+//zsy end
 
 
