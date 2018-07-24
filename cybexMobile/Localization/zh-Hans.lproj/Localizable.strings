@@ -268,6 +268,17 @@
 "transfer_detail_mome" = "备注信息";
 "transfer_Detail_click" = "点击查看";
 
+//转账
+"transfer_title" = "转账";
+"transfer_transfer" = "转账";
+"transfer_account" = "账户名";
+"transfer_account_pla" = "请输入收款方账户名";
+"transfer_crypto" = "币种";
+"transfer_crypto_pla" = "CYB";
+"transfer_quantity" = "金额";
+"transfer_memo" = "备注";
+"transfer_fee" = "手续费";
+
 //zsy add
 "my_property" = "我的资产";
 "order_value" = "委托单";
