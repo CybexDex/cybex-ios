@@ -147,7 +147,7 @@ class WebsocketService: NSObject {
     currentNode = nil
     isConnecting = true
 
-    self.currentNode = NodeURLString.shanghai
+    self.currentNode = NodeURLString.beijing
     changeNode(node: self.currentNode!)
 //    DispatchQueue.global().async {
 //      do {
@@ -461,6 +461,8 @@ extension WebsocketService: SRWebSocketDelegate {
   
   
   func webSocket(_ webSocket: SRWebSocket, didFailWithError error: Error) {
+    print("websocket didFailWithError \(error)")
+
     isConnecting = false
     
     removeIDs()

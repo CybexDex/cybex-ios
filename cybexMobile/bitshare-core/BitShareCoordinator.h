@@ -7,12 +7,12 @@
 //
 
 @interface BitShareCoordinator : NSObject
-
+  
 + (NSString *)getUserKeys:(NSString *)username password:(NSString *)password;
-
-/**
- 需要先调用getuserkey
- **/
+  
+  /**
+   需要先调用getuserkey
+   **/
 + (NSString *)getLimitOrder:(int)block_num block_id:(NSString *)block_id
                  expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
                     user_id:(int)user_id order_expiration:(NSTimeInterval)order_expiration
@@ -24,9 +24,9 @@
                        user_id:(int)user_id order_id:(int)order_id
                         fee_id:(int)fee_id fee_amount:(int)fee_amount;
 + (NSString *)cancelLimitOrderOperation:(int)order_id user_id:(int)user_id fee_id:(int)fee_id fee_amount:(int)fee_amount;
-
-// memokey 需要线上取和生成的比较看是否有权限
-
+  
+  // memokey 需要线上取和生成的比较看是否有权限
+  
 + (NSString *)getTransaction:(int)block_num block_id:(NSString *)block_id
                   expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
                 from_user_id:(int)from_user_id to_user_id:(int)to_user_id
@@ -39,4 +39,8 @@
   
 + (void)cancelUserKey;
   
-@end
+  
+  
++ (NSString *)getRecodeLoginOperation:(NSString *)accountName asset:(NSString *)asset fundType:(NSString *)fundType size:(int)size offset:(int)offset expiration:(int)expiration;
+  
+  @end

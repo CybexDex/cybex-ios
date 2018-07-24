@@ -29,6 +29,7 @@ PODS:
     - UICKeyChainStore (~> 2.1.0)
   - GRDB.swift (3.1.0)
   - Guitar (0.4.1)
+  - HandyJSON (4.1.1)
   - IHKeyboardAvoiding (4.2)
   - IQKeyboardManagerSwift (6.0.4)
   - JSONRPCKit (3.0.0):
@@ -167,6 +168,7 @@ DEPENDENCIES:
   - FCUUID
   - GRDB.swift
   - Guitar
+  - HandyJSON
   - IHKeyboardAvoiding
   - IQKeyboardManagerSwift
   - JSONRPCKit
@@ -243,6 +245,7 @@ SPEC REPOS:
     - FCUUID
     - GRDB.swift
     - Guitar
+    - HandyJSON
     - IHKeyboardAvoiding
     - IQKeyboardManagerSwift
     - JSONRPCKit
@@ -346,6 +349,7 @@ SPEC CHECKSUMS:
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
   GRDB.swift: 6a0e323257fdfa75a0eed9c74d5f2f60428bef1a
   Guitar: 7410dc37f2c12d5b8b67711d771608900c37636e
+  HandyJSON: 3a3de917c4118767ffe41c29b5acba23409649f4
   IHKeyboardAvoiding: 9fbf816b7c3c84911964802ff110d12caf40ebef
   IQKeyboardManagerSwift: 36dbe324b4f9793f5f41ba5227f3e7c76dfefd50
   JSONRPCKit: 50e0dc5e7f873e87f81562feb8836b7d1974da6d
@@ -407,6 +411,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: ea6b18fd0e9abd862db495bd66903f4677ac9f0f
+PODFILE CHECKSUM: 8adbbfa9735e80e358d9b56d51a5c541c306b265
 
 COCOAPODS: 1.5.3
