@@ -8,6 +8,10 @@
 
 import UIKit
 
+typealias textDidBegainEdit = () -> Void
+typealias textDidEndEdit = () -> Void
+typealias textDidChanged = () -> Void
+
 protocol TitleTextFieldViewDelegate: NSObjectProtocol {
   func textIntroduction(titleTextFieldView : TitleTextfieldView)
   func textActionTrigger(titleTextFieldView: TitleTextfieldView, selected: Bool, index: NSInteger)

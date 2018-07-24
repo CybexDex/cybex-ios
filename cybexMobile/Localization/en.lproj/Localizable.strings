@@ -67,12 +67,12 @@
 "account.nonMatch" = "Incorrect Account Name or Password";
 "ok" = "OK";
 "account.validate.error.1" = "account name is already taken";
-"account.validate.error.2" = "account name should start with a letter";
+"account.validate.error.2" = "account name should start with a lowercase letter";
 "account.validate.error.3" = "account name should be longer/shorter";
 "account.validate.error.4" = "account name should contain at least one dash or a number";
 "account.validate.error.5" = "account name should not contain continuous dashes";
-"account.validate.error.6" = "account name should only contain letter, dash or numbers";
-"account.validate.error.7" = "account name should end with a letter or number";
+"account.validate.error.6" = "account name should only contain lowercase letter, dash or numbers";
+"account.validate.error.7" = "account name should end with a lowercase letter or number";
 
 "password.validate.error.1" = "The password must at least 12 characters";
 "password.validate.error.2" = "The password is not consistent";
@@ -251,6 +251,45 @@
 "business_login_title" = "Log in to exchange";
 
 "update_version" = "Version update";
+
+// 充提现
+"withdraw_list" = "Withdraw Records";
+"deposit_list" = "Deposit Records";
+"update_time" = "Update time:";
+"recode_address" = "Address:";
+"recode_state_new" = "New";
+"recode_state_upping" = "Init";
+"recode_state_noensure" = "Pending";
+"recode_state_fail" = "Failed";
+"recode_state_success" = "Done";
+
+// 转账记录
+
+"transfer_title" = "Transfer Records";
+"transfer_done" = "Received";
+"transfer_send" = "Sent";
+
+// 转账详情
+"transfer_detail" = "Transfer Details";
+"transfer_detail_send" = "Out";
+"transfer_detail_income" = "In";
+"transfer_detail_income_address" = "From";
+"transfer_detail_send_address" = "To";
+"transfer_detail_time" = "Vesting Period";
+"transfer_detail_fee" = "Fee";
+"transfer_detail_mome" = "Memo";
+"transfer_Detail_click" = "Click to view";
+
+//转账
+"transfer_title" = "Transfer";
+"transfer_transfer" = "Send";
+"transfer_account" = "Account Name";
+"transfer_account_pla" = "To Account name";
+"transfer_crypto" = "Crypto";
+"transfer_crypto_pla" = "CYB";
+"transfer_quantity" = "Quantity";
+"transfer_memo" = "Momo";
+"transfer_fee" = "Fee";
 
 //zsy add
 "my_property" = "My Balance";

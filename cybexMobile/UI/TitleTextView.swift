@@ -215,7 +215,12 @@ class TitleTextView: UIView {
     return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
   }
   
-  func updateHeight() {
+  func updateContentSize() {
+    self.performSelector(onMainThread: #selector(self.updateHeight), with: nil, waitUntilDone: false)
+    self.performSelector(onMainThread: #selector(self.updateHeight), with: nil, waitUntilDone: false)
+  }
+  
+  @objc func updateHeight() {
     layoutIfNeeded()
     self.height = dynamicHeight()
     invalidateIntrinsicContentSize()
