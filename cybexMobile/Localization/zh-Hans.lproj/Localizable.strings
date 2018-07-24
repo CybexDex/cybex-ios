@@ -288,4 +288,7 @@
 "hello" = "您好，";
 //zsy end
 
+"recode_nodata" = "暂无记录";
+"balance_nodata" = "暂无资产";
+
 
