@@ -81,6 +81,8 @@
 		225746DE210707DD0017FA1A /* PickerReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746DA210707DD0017FA1A /* PickerReducers.swift */; };
 		225746E02107089A0017FA1A /* PickerRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746DF2107089A0017FA1A /* PickerRootCoordinator.swift */; };
 		225746E4210715890017FA1A /* Components.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 225746E3210715890017FA1A /* Components.storyboard */; };
+		225746E821073E480017FA1A /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746E721073E480017FA1A /* PickerView.swift */; };
+		225746EA21073E8C0017FA1A /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225746E921073E8C0017FA1A /* PickerView.xib */; };
 		22BB2BC362DB5BB21C3699A31111523E /* AccountPortfolioCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115F2B194BC4D206A29A5A90BF6DDACE /* AccountPortfolioCellView.xib */; };
 		24401F60F82FEDDA35FBCCED409C1102 /* HomeRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E395E7B5D2617408E203CD024E8818 /* HomeRootCoordinator.swift */; };
 		253FA678E24480209F5F9418FE39D896 /* fstream in Resources */ = {isa = PBXBuildFile; fileRef = 09C798C2A2DF06089D59BC8BF9958C05 /* fstream */; };
@@ -2125,6 +2127,8 @@
 		225746DA210707DD0017FA1A /* PickerReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerReducers.swift; sourceTree = "<group>"; };
 		225746DF2107089A0017FA1A /* PickerRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerRootCoordinator.swift; sourceTree = "<group>"; };
 		225746E3210715890017FA1A /* Components.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Components.storyboard; sourceTree = "<group>"; };
+		225746E721073E480017FA1A /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		225746E921073E8C0017FA1A /* PickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
 		225C01E7C835B6B6F91293F4185D1A2B /* forward2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = forward2.hpp; sourceTree = "<group>"; };
 		225CB05DD7FC3DF3558070995DC73C63 /* gregorian_types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gregorian_types.hpp; sourceTree = "<group>"; };
 		225E8165925A15D152167374ACF26D4F /* random.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = random.hpp; sourceTree = "<group>"; };
@@ -15361,6 +15365,7 @@
 		225746D6210707410017FA1A /* Picker */ = {
 			isa = PBXGroup;
 			children = (
+				225746E621073E250017FA1A /* View */,
 				225746D7210707DD0017FA1A /* PickerCoordinator.swift */,
 				225746D8210707DD0017FA1A /* PickerActions.swift */,
 				225746D9210707DD0017FA1A /* PickerViewController.swift */,
@@ -15368,6 +15373,15 @@
 				225746DF2107089A0017FA1A /* PickerRootCoordinator.swift */,
 			);
 			path = Picker;
+			sourceTree = "<group>";
+		};
+		225746E621073E250017FA1A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				225746E721073E480017FA1A /* PickerView.swift */,
+				225746E921073E8C0017FA1A /* PickerView.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		22B5289FEC78BA3A7B622112276B93D1 /* stl */ = {
@@ -32645,6 +32659,7 @@
 				77DF3E181F0DC071988789053E0F6FD7 /* ostream in Resources */,
 				762156C3AEB620F8C8A01F26B1F818AC /* ostream.SUNWCCh in Resources */,
 				3B0EB657210313B200F19C31 /* AccountContentView.xib in Resources */,
+				225746EA21073E8C0017FA1A /* PickerView.xib in Resources */,
 				BD394524F3A87D34A0C4C4CE6DB0405D /* queue in Resources */,
 				0498653CB73623C7731DCD17309EC21A /* queue.SUNWCCh in Resources */,
 				3B0EB662210314A600F19C31 /* Account.storyboard in Resources */,
@@ -33226,6 +33241,7 @@
 				492A4075DDD845005D90DD5201F32F26 /* UIColorExtension.swift in Sources */,
 				CC8DD1E9001CFBB8915E342EDB329B3E /* UIImage+Extensions.swift in Sources */,
 				0C46B30A32343632C135B84DDEB47F80 /* UIResponder+Route.swift in Sources */,
+				225746E821073E480017FA1A /* PickerView.swift in Sources */,
 				72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */,
 				0FF6C4A7AAF40F0AC67CBDAEAA2406E2 /* UITextField+Extensions.swift in Sources */,
 				3B0EB6672103155C00F19C31 /* YourPortfolioCoordinator.swift in Sources */,

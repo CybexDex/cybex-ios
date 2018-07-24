@@ -278,6 +278,7 @@
 "transfer_quantity" = "金额";
 "transfer_memo" = "备注";
 "transfer_fee" = "手续费";
+"picker_comfirm" = "确认";
 
 //zsy add
 "my_property" = "我的资产";
