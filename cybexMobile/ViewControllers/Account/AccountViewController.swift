@@ -112,6 +112,12 @@ class AccountViewController: BaseViewController {
 
 extension AccountViewController{
 
+  @objc func login(_ data:[String:Any]) {
+    if !UserManager.shared.isLoginIn {
+      app_coodinator.showLogin()
+    }
+  }
+  
   @objc func clickCellView(_ sender:[String:Any]) {
     let index = sender["index"] as! Int
     switch index {
