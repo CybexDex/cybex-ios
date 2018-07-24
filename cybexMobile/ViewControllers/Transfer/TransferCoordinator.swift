@@ -10,6 +10,7 @@ import UIKit
 import ReSwift
 
 protocol TransferCoordinatorProtocol {
+  func pushToRecordVC()
 }
 
 protocol TransferStateManagerProtocol {
@@ -31,7 +32,12 @@ class TransferCoordinator: AccountRootCoordinator {
 }
 
 extension TransferCoordinator: TransferCoordinatorProtocol {
-    
+  func pushToRecordVC() {
+    let recordVC = R.storyboard.recode.transferListViewController()
+    let coordinator = TransferListCoordinator(rootVC: self.rootVC)
+    recordVC?.coordinator = coordinator
+    self.rootVC.pushViewController(recordVC!, animated: true)
+  }
 }
 
 extension TransferCoordinator: TransferStateManagerProtocol {

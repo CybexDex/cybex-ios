@@ -16,6 +16,18 @@ class TransferView: UIView {
   
   @IBOutlet weak var transferButton: UIButton!
   
+  var balance: String = "" {
+    didSet {
+      quantityView.unit = balance
+    }
+  }
+  
+  var fee: String = "" {
+    didSet {
+      feeLabel.text = fee
+    }
+  }
+  
   lazy var accountView: TitleTextfieldView = {
     let accountView = TitleTextfieldView()
     return accountView
@@ -144,7 +156,7 @@ extension TransferView: GrowContentViewDataSource {
   }
   
   func shadowSettingOfSection(_ contentView: GrowContentView, section: NSInteger) -> (color: UIColor, offset: CGSize, radius: CGFloat) {
-    return (UIColor.steel20,CGSize(width: 0, height: 8),8)
+    return (UIColor.red,CGSize(width: 0, height: -5),5)
   }
   
   func viewOfIndexpath(_ contentView: GrowContentView, indexpath: NSIndexPath) -> (view: UIView, key: String) {
@@ -199,6 +211,10 @@ extension TransferView: TitleTextFieldViewDelegate,TitleTextFieldViewDataSource,
   func textActionTrigger(titleTextFieldView: TitleTextfieldView, selected: Bool, index: NSInteger) {
     if index == 0 {
       titleTextFieldView.clearText()
+    } else {
+      if titleTextFieldView == cryptoView {
+        
+      }
     }
   }
   
@@ -231,6 +247,14 @@ extension TransferView: TitleTextFieldViewDelegate,TitleTextFieldViewDataSource,
   }
   
   func textActionSettings(titleTextFieldView: TitleTextfieldView) -> [TextButtonSetting] {
+    if titleTextFieldView == cryptoView {
+      return [TextButtonSetting(imageName: R.image.ic_close_24_px.name,
+                                selectedImageName: R.image.ic_close_24_px.name,
+                                isShowWhenEditing: true),
+              TextButtonSetting(imageName: R.image.ic_ieo_more.name,
+                                selectedImageName: R.image.ic_ieo_more.name,
+                                isShowWhenEditing: false)]
+    }
     return [TextButtonSetting(imageName: R.image.ic_close_24_px.name,
                               selectedImageName: R.image.ic_close_24_px.name,
                               isShowWhenEditing: true)]

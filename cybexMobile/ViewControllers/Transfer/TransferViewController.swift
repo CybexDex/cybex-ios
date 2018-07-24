@@ -42,5 +42,13 @@ class TransferViewController: BaseViewController {
   
   func setupUI() {
     self.title = R.string.localizable.transfer_title.key.localized()
+    self.configRightNavButton(R.image.ic_records_24_px())
+    transferView.balance = R.string.localizable.transfer_balance.key.localized() + "1000CYB"
+    transferView.fee = "1.001 CYB"
+  }
+  
+  override func rightAction(_ sender: UIButton) {
+    self.coordinator?.pushToRecordVC()
+    
   }
 }
