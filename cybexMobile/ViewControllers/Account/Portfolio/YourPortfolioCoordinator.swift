@@ -35,7 +35,7 @@ class YourPortfolioCoordinator: AccountRootCoordinator {
 
 extension YourPortfolioCoordinator: YourPortfolioCoordinatorProtocol {
   func pushToRechargeVC() {
-    
+
   }
   
   func pushToWithdrawDepositVC() {

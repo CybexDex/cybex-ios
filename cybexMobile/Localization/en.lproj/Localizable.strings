@@ -287,3 +287,7 @@
 "account_property" = "Your Total Balance(CYB)";
 "hello" = "Hello，";
 //zsy end
+
+"recode_nodata" = "No record";
+"balance_nodata" = "No assert";
+
