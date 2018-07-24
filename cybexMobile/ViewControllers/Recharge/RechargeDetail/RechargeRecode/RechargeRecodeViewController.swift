@@ -25,6 +25,7 @@ class RechargeRecodeViewController: BaseViewController {
     self.title = R.string.localizable.deposit_list()
     let nibString = String(describing: RecodeCell.self)
     self.tableView.register(UINib(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
+    self.view.showNoData(R.string.localizable.recode_nodata(), icon: R.image.img_no_records.name)
   }
   
   func commonObserveState() {
@@ -48,7 +49,7 @@ class RechargeRecodeViewController: BaseViewController {
 
 extension RechargeRecodeViewController : UITableViewDelegate,UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    return 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

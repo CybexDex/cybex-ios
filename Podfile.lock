@@ -28,6 +28,7 @@ PODS:
   - FCUUID (1.3.1):
     - UICKeyChainStore (~> 2.1.0)
   - GRDB.swift (3.1.0)
+  - GrowingTextView (0.5.6)
   - Guitar (0.4.1)
   - HandyJSON (4.1.1)
   - IHKeyboardAvoiding (4.2)
@@ -167,6 +168,7 @@ DEPENDENCIES:
   - Fabric
   - FCUUID
   - GRDB.swift
+  - GrowingTextView
   - Guitar
   - HandyJSON
   - IHKeyboardAvoiding
@@ -244,6 +246,7 @@ SPEC REPOS:
     - FBRetainCycleDetector
     - FCUUID
     - GRDB.swift
+    - GrowingTextView
     - Guitar
     - HandyJSON
     - IHKeyboardAvoiding
@@ -348,6 +351,7 @@ SPEC CHECKSUMS:
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
   GRDB.swift: 6a0e323257fdfa75a0eed9c74d5f2f60428bef1a
+  GrowingTextView: 8958f4fb7419de58dd622021b2d0696487e00e70
   Guitar: 7410dc37f2c12d5b8b67711d771608900c37636e
   HandyJSON: 3a3de917c4118767ffe41c29b5acba23409649f4
   IHKeyboardAvoiding: 9fbf816b7c3c84911964802ff110d12caf40ebef
@@ -411,6 +415,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: 8adbbfa9735e80e358d9b56d51a5c541c306b265
+PODFILE CHECKSUM: 08c60c87a4c31c346b1d451931d7d7b9986e4466
 
 COCOAPODS: 1.5.3

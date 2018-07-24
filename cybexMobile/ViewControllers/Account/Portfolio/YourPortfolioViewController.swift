@@ -19,18 +19,33 @@ class YourPortfolioViewController: BaseViewController {
   
   var coordinator: (YourPortfolioCoordinatorProtocol & YourPortfolioStateManagerProtocol)?
   
-  @IBOutlet weak var tableHeadView: YourPortfolioTableHeadView!
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var imgBgView: UIImageView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    let image = UIImage.init(color: UIColor.clear)
+    self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+    self.navigationController?.navigationBar.isTranslucent = true
+  }
+  
   func setupUI(){
+    let height = UIScreen.main.bounds.height
+    if height == 812 {
+      imgBgView.image = R.image.imgMyBalanceBgX()
+    } else {
+      imgBgView.image = R.image.imgMyBalanceBg()
+    }
+
+    configLeftNavButton(R.image.icArrowForwardWhite16Px())
     self.localized_text = R.string.localizable.my_property.key.localizedContainer()
     let cell = String.init(describing: YourPortfolioCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
-    tableView.tableHeaderView = tableHeadView
   }
   
   func commonObserveState() {

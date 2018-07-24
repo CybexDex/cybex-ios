@@ -60,7 +60,26 @@
 		20C5C352A5EE76CE53F6F1F8C7CE1FB6 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58821AB0DBC6F8D25C15C288A13EEC6 /* Utils.swift */; };
 		213EC3DB0AD2CFD1A25AD89A5EF104E9 /* cstring in Resources */ = {isa = PBXBuildFile; fileRef = 2C0E66223B7730FAE31724B603C8989E /* cstring */; };
 		21D4F7060148486EE0215AE84B53174E /* types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B6F72530F722C7FA8FC3B932B0D79C /* types.cpp */; };
+		221EC2352105B1930059F856 /* TitleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC22E2105B18F0059F856 /* TitleTextView.swift */; };
+		221EC2362105B1930059F856 /* TitleTextfieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221EC22F2105B1900059F856 /* TitleTextfieldView.xib */; };
+		221EC2372105B1930059F856 /* GrowSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC2312105B1910059F856 /* GrowSectionView.swift */; };
+		221EC2382105B1930059F856 /* GrowContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC2322105B1910059F856 /* GrowContentView.swift */; };
+		221EC2392105B1930059F856 /* TitleTextfieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC2332105B1920059F856 /* TitleTextfieldView.swift */; };
+		221EC23A2105B1930059F856 /* TitleTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221EC2342105B1920059F856 /* TitleTextView.xib */; };
+		221EC23D2105B3110059F856 /* CornerAndShadowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221EC23B2105B3100059F856 /* CornerAndShadowView.xib */; };
+		221EC23E2105B3110059F856 /* CornerAndShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC23C2105B3100059F856 /* CornerAndShadowView.swift */; };
+		221EC24C2105CF310059F856 /* TransferCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC2482105CF310059F856 /* TransferCoordinator.swift */; };
+		221EC24D2105CF310059F856 /* TransferActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC2492105CF310059F856 /* TransferActions.swift */; };
+		221EC24E2105CF310059F856 /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC24A2105CF310059F856 /* TransferViewController.swift */; };
+		221EC24F2105CF310059F856 /* TransferReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC24B2105CF310059F856 /* TransferReducers.swift */; };
+		221EC251210609A10059F856 /* TransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC250210609A10059F856 /* TransferView.swift */; };
+		221EC253210609B20059F856 /* TransferView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221EC252210609B20059F856 /* TransferView.xib */; };
 		22489CC12EB4F62154A78964CF73A58A /* stack.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = 659153FDF9C2587A288669F497A0A4E5 /* stack.SUNWCCh */; };
+		225746DB210707DD0017FA1A /* PickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746D7210707DD0017FA1A /* PickerCoordinator.swift */; };
+		225746DC210707DD0017FA1A /* PickerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746D8210707DD0017FA1A /* PickerActions.swift */; };
+		225746DD210707DD0017FA1A /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746D9210707DD0017FA1A /* PickerViewController.swift */; };
+		225746DE210707DD0017FA1A /* PickerReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746DA210707DD0017FA1A /* PickerReducers.swift */; };
+		225746E02107089A0017FA1A /* PickerRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746DF2107089A0017FA1A /* PickerRootCoordinator.swift */; };
 		22BB2BC362DB5BB21C3699A31111523E /* AccountPortfolioCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115F2B194BC4D206A29A5A90BF6DDACE /* AccountPortfolioCellView.xib */; };
 		24401F60F82FEDDA35FBCCED409C1102 /* HomeRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E395E7B5D2617408E203CD024E8818 /* HomeRootCoordinator.swift */; };
 		253FA678E24480209F5F9418FE39D896 /* fstream in Resources */ = {isa = PBXBuildFile; fileRef = 09C798C2A2DF06089D59BC8BF9958C05 /* fstream */; };
@@ -2078,6 +2097,20 @@
 		2204C2A37D9B8D472A84EAFF8626E0AF /* safestack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = safestack.h; sourceTree = "<group>"; };
 		22084D8E5DA43B6895C236695938A2C0 /* mem_fn_template.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mem_fn_template.hpp; sourceTree = "<group>"; };
 		220F3AEF2DB8D023C86F712418BE672F /* base_dimension.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = base_dimension.hpp; sourceTree = "<group>"; };
+		221EC22E2105B18F0059F856 /* TitleTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextView.swift; sourceTree = "<group>"; };
+		221EC22F2105B1900059F856 /* TitleTextfieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTextfieldView.xib; sourceTree = "<group>"; };
+		221EC2312105B1910059F856 /* GrowSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrowSectionView.swift; sourceTree = "<group>"; };
+		221EC2322105B1910059F856 /* GrowContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrowContentView.swift; sourceTree = "<group>"; };
+		221EC2332105B1920059F856 /* TitleTextfieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextfieldView.swift; sourceTree = "<group>"; };
+		221EC2342105B1920059F856 /* TitleTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTextView.xib; sourceTree = "<group>"; };
+		221EC23B2105B3100059F856 /* CornerAndShadowView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CornerAndShadowView.xib; sourceTree = "<group>"; };
+		221EC23C2105B3100059F856 /* CornerAndShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerAndShadowView.swift; sourceTree = "<group>"; };
+		221EC2482105CF310059F856 /* TransferCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferCoordinator.swift; sourceTree = "<group>"; };
+		221EC2492105CF310059F856 /* TransferActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferActions.swift; sourceTree = "<group>"; };
+		221EC24A2105CF310059F856 /* TransferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
+		221EC24B2105CF310059F856 /* TransferReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferReducers.swift; sourceTree = "<group>"; };
+		221EC250210609A10059F856 /* TransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferView.swift; sourceTree = "<group>"; };
+		221EC252210609B20059F856 /* TransferView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferView.xib; sourceTree = "<group>"; };
 		2222854C9861803977FE6B7C4872C7CC /* count_impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = count_impl.hpp; sourceTree = "<group>"; };
 		222B3D704C2C7B73179A527A9A1D9665 /* comparison.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = comparison.hpp; sourceTree = "<group>"; };
 		222D9023D03155C8E60E50C1A2EDDF3D /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
@@ -2086,6 +2119,11 @@
 		223822E146B4DA10D4ACBB0F2B6057A3 /* is_placeholder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = is_placeholder.hpp; sourceTree = "<group>"; };
 		224F001483339343F0A46D8BFB881ED5 /* default_header_holder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = default_header_holder.hpp; sourceTree = "<group>"; };
 		2256F0BFDB5333BC8D5BFFF6CF45B9F9 /* adams_bashforth.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = adams_bashforth.hpp; sourceTree = "<group>"; };
+		225746D7210707DD0017FA1A /* PickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCoordinator.swift; sourceTree = "<group>"; };
+		225746D8210707DD0017FA1A /* PickerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerActions.swift; sourceTree = "<group>"; };
+		225746D9210707DD0017FA1A /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
+		225746DA210707DD0017FA1A /* PickerReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerReducers.swift; sourceTree = "<group>"; };
+		225746DF2107089A0017FA1A /* PickerRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerRootCoordinator.swift; sourceTree = "<group>"; };
 		225C01E7C835B6B6F91293F4185D1A2B /* forward2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = forward2.hpp; sourceTree = "<group>"; };
 		225CB05DD7FC3DF3558070995DC73C63 /* gregorian_types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gregorian_types.hpp; sourceTree = "<group>"; };
 		225E8165925A15D152167374ACF26D4F /* random.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = random.hpp; sourceTree = "<group>"; };
@@ -15285,6 +15323,26 @@
 			path = preprocessed;
 			sourceTree = "<group>";
 		};
+		221EC2302105B1910059F856 /* GrowContentView */ = {
+			isa = PBXGroup;
+			children = (
+				221EC2312105B1910059F856 /* GrowSectionView.swift */,
+				221EC2322105B1910059F856 /* GrowContentView.swift */,
+			);
+			path = GrowContentView;
+			sourceTree = "<group>";
+		};
+		221EC2472105CF140059F856 /* TransferRecord */ = {
+			isa = PBXGroup;
+			children = (
+				72199D8821045D4700575226 /* TransferListCoordinator.swift */,
+				72199D8921045D4700575226 /* TransferListActions.swift */,
+				72199D8A21045D4700575226 /* TransferListViewController.swift */,
+				72199D8B21045D4700575226 /* TransferListReducers.swift */,
+			);
+			path = TransferRecord;
+			sourceTree = "<group>";
+		};
 		224748CD65885032F7AB0AAC25946646 /* object */ = {
 			isa = PBXGroup;
 			children = (
@@ -15298,6 +15356,18 @@
 				41E02CB8455FAE5CC7B37E457A76254A /* static_cast.hpp */,
 			);
 			path = object;
+			sourceTree = "<group>";
+		};
+		225746D6210707410017FA1A /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				225746D7210707DD0017FA1A /* PickerCoordinator.swift */,
+				225746D8210707DD0017FA1A /* PickerActions.swift */,
+				225746D9210707DD0017FA1A /* PickerViewController.swift */,
+				225746DA210707DD0017FA1A /* PickerReducers.swift */,
+				225746DF2107089A0017FA1A /* PickerRootCoordinator.swift */,
+			);
+			path = Picker;
 			sourceTree = "<group>";
 		};
 		22B5289FEC78BA3A7B622112276B93D1 /* stl */ = {
@@ -21589,13 +21659,14 @@
 		72199D7F21045CEA00575226 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
+				221EC2472105CF140059F856 /* TransferRecord */,
 				72199D9A2104635400575226 /* TransferDetail */,
 				72199D9121045DAF00575226 /* Views */,
 				72199D9021045DAA00575226 /* Cells */,
-				72199D8821045D4700575226 /* TransferListCoordinator.swift */,
-				72199D8921045D4700575226 /* TransferListActions.swift */,
-				72199D8A21045D4700575226 /* TransferListViewController.swift */,
-				72199D8B21045D4700575226 /* TransferListReducers.swift */,
+				221EC2482105CF310059F856 /* TransferCoordinator.swift */,
+				221EC2492105CF310059F856 /* TransferActions.swift */,
+				221EC24A2105CF310059F856 /* TransferViewController.swift */,
+				221EC24B2105CF310059F856 /* TransferReducers.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -21614,6 +21685,8 @@
 			children = (
 				72199D9621045DDE00575226 /* TransferListCellView.swift */,
 				72199D9821045DEA00575226 /* TransferListCellView.xib */,
+				221EC250210609A10059F856 /* TransferView.swift */,
+				221EC252210609B20059F856 /* TransferView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -27619,7 +27692,15 @@
 		C31EC57D28FCC624D48C5CC42DE96975 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				225746D6210707410017FA1A /* Picker */,
+				221EC2302105B1910059F856 /* GrowContentView */,
 				296FFE91A389347663BB0BCE840E70F0 /* Alert */,
+				221EC2332105B1920059F856 /* TitleTextfieldView.swift */,
+				221EC22F2105B1900059F856 /* TitleTextfieldView.xib */,
+				221EC22E2105B18F0059F856 /* TitleTextView.swift */,
+				221EC2342105B1920059F856 /* TitleTextView.xib */,
+				221EC23C2105B3100059F856 /* CornerAndShadowView.swift */,
+				221EC23B2105B3100059F856 /* CornerAndShadowView.xib */,
 				4CAF894CE4DB0CD3B11F47C1BB626167 /* Button.swift */,
 				F4869E5D42420E772C6FC2589A1D9B03 /* Button.xib */,
 				C360C842917AEAE6A068E1AA610EB0F8 /* CybexTitleView.swift */,
@@ -32449,6 +32530,7 @@
 				141F9BF8F7BFFEAE83218B9E885D8FE8 /* IntroduceView.xib in Resources */,
 				72EC6A5420F4611500CEAFF6 /* WithdrawView.xib in Resources */,
 				59662228CB1D233B02EF357CA563A486 /* Launch Screen.storyboard in Resources */,
+				221EC253210609B20059F856 /* TransferView.xib in Resources */,
 				DF032043A699E690FA00D8C90B72773F /* Localizable.strings in Resources */,
 				082F8D06A9EF700C8EB3A8BC62D8F1A8 /* LockupAssetsCell.xib in Resources */,
 				089679AF63200358A2B8B9059A9824A0 /* LockupAssetsSectionView.xib in Resources */,
@@ -32533,6 +32615,7 @@
 				72EC6A5520F4611500CEAFF6 /* EOSWithdrawView.xib in Resources */,
 				DD53E4DB5C321358D6C1AB4A303C62BA /* iomanip.SUNWCCh in Resources */,
 				1B5442C169C4BCFD231A911F7FB3CDCA /* ios in Resources */,
+				221EC23D2105B3110059F856 /* CornerAndShadowView.xib in Resources */,
 				6AF4A16A7EEB87292ADF065AFFB58A89 /* ios.SUNWCCh in Resources */,
 				3B0EB656210313B200F19C31 /* YourPortfolioTableHeadView.xib in Resources */,
 				D572ADD35AC26CDD8080C75793723AAA /* iostream in Resources */,
@@ -32548,6 +32631,7 @@
 				B8EFD62DBA800F5CB653240EA55CDFB0 /* list.SUNWCCh in Resources */,
 				8E65033ACE605A9519CB4FB888940FAB /* locale in Resources */,
 				391642968E6C035AD01FF015BD4847DA /* locale.SUNWCCh in Resources */,
+				221EC23A2105B1930059F856 /* TitleTextView.xib in Resources */,
 				A5056283C24CDC308A84C34723B9999D /* map in Resources */,
 				A74A9391C9FC80F533BB168C6F09C5BD /* map.SUNWCCh in Resources */,
 				0AA525ED6C44D673ABDA5E34FE8BAF65 /* memory in Resources */,
@@ -32596,6 +32680,7 @@
 				29860A52A2F9E6057FEC80C30DB2C08C /* typeinfo.SUNWCCh in Resources */,
 				564933AA201BA7D916E7B2AABAE742F8 /* unordered_map in Resources */,
 				998269579E4C8DE1F4556D259DFBDAB5 /* unordered_map.SUNWCCh in Resources */,
+				221EC2362105B1930059F856 /* TitleTextfieldView.xib in Resources */,
 				6084C2B0324022A0F68E124354424AFB /* unordered_set in Resources */,
 				99D6E2448ABDF3B06D193E29E801F4CD /* unordered_set.SUNWCCh in Resources */,
 				5A385D846A5D23CD4987AF8B040811DF /* utility in Resources */,
@@ -32675,6 +32760,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBRetainCycleDetector/FBRetainCycleDetector.framework",
 				"${BUILT_PRODUCTS_DIR}/FCUUID/FCUUID.framework",
 				"${BUILT_PRODUCTS_DIR}/GRDB.swift/GRDB.framework",
+				"${BUILT_PRODUCTS_DIR}/GrowingTextView/GrowingTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/Guitar/Guitar.framework",
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/IHKeyboardAvoiding/IHKeyboardAvoiding.framework",
@@ -32758,6 +32844,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBRetainCycleDetector.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FCUUID.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GrowingTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Guitar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IHKeyboardAvoiding.framework",
@@ -32892,6 +32979,7 @@
 				305DB17562E3D02F04E0122C1C4674A4 /* AccountAssetOperationsItemView.swift in Sources */,
 				65A0AB87E09E879EFAFA04DBA6B15D3E /* AccountCoordinator.swift in Sources */,
 				C37CA15215CBB1B064E0514AB9D0EFE5 /* AccountOpenedOrdersView.swift in Sources */,
+				225746DE210707DD0017FA1A /* PickerReducers.swift in Sources */,
 				D3694E6115F5ED50F0FFE4108E64BAEE /* AccountPortfolioCell.swift in Sources */,
 				9708F7C8EA5B8E107E937306846BE6F0 /* AccountPortfolioCellView.swift in Sources */,
 				32BED01405F6D7B22B348057E0BDE3C8 /* AccountPortfolioView.swift in Sources */,
@@ -32927,7 +33015,10 @@
 				72199D8F21045D4700575226 /* TransferListReducers.swift in Sources */,
 				72199D6621044FD100575226 /* RechargeRecodeCoordinator.swift in Sources */,
 				188394B25D1EF3596A01900469FACBFB /* BusinessTitleView.swift in Sources */,
+				221EC2382105B1930059F856 /* GrowContentView.swift in Sources */,
+				221EC2392105B1930059F856 /* TitleTextfieldView.swift in Sources */,
 				C0AC3C1A58448D06655DCE0994FDC33A /* BusinessView.swift in Sources */,
+				221EC2372105B1930059F856 /* GrowSectionView.swift in Sources */,
 				7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */,
 				3D856B5FBCBB3B250D34CFA99756374F /* Button.swift in Sources */,
 				9CFD97FEB32C00C8359B325D39F04494 /* CBBOLLModel.swift in Sources */,
@@ -32938,6 +33029,7 @@
 				A971765C0FF4C52CAA1C001A3ABBC1B1 /* CBKLineDrawView.swift in Sources */,
 				45E03EE6B4BBE7286E7287D3DFD1B9D6 /* CBKLineMainView.swift in Sources */,
 				E286FE83AA3DB3C53DD1FDE1CA1BC208 /* CBKLineModel.swift in Sources */,
+				225746DC210707DD0017FA1A /* PickerActions.swift in Sources */,
 				72199DAD2104687400575226 /* TransferLineView.swift in Sources */,
 				BAB27405E1C42F6C20B9DBF1FDDBC100 /* CBKLineView.swift in Sources */,
 				B7631744A19B452081A71269BF881246 /* CBKLineVolumeView.swift in Sources */,
@@ -32999,6 +33091,7 @@
 				DBBB81526F86E5409BB4D8C0D8A6CF1B /* HomeTitleView.swift in Sources */,
 				9BDA71F68E64FDF8BBAE5E8A3391FFA1 /* HomeViewController.swift in Sources */,
 				72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */,
+				221EC24F2105CF310059F856 /* TransferReducers.swift in Sources */,
 				72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */,
 				59EC4E5138ECE3D4E7570F3EE0EF28E0 /* IconGenerator.swift in Sources */,
 				61804E3238064ADBE771CD78E212AB6A /* IntroduceView.swift in Sources */,
@@ -33013,6 +33106,7 @@
 				80258D6F4C94ACC78C20B5ACE8BEAD2F /* LockupAssetsReducers.swift in Sources */,
 				85D46A1F0D3BBF12CF72903D466D9239 /* LockupAssetsSectionView.swift in Sources */,
 				B2B05000B81768D84E3FBE9B46392133 /* LockupAssetsView.swift in Sources */,
+				221EC2352105B1930059F856 /* TitleTextView.swift in Sources */,
 				6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */,
 				8DFD3022184642B3A8D4D8A8FE04F655 /* LockupProgressView.swift in Sources */,
 				AF84FCBA2E7219D1FC633DA7881BD0ED /* MarketActions.swift in Sources */,
@@ -33020,6 +33114,7 @@
 				92F32777AC4AC77905155B74B115E1A1 /* MarketCache.swift in Sources */,
 				A91E01A343738BBD63B5015631CE57A7 /* MarketCoordinator.swift in Sources */,
 				46CD7B2787FFCD483A5A723E52C54292 /* MarketReducers.swift in Sources */,
+				221EC24D2105CF310059F856 /* TransferActions.swift in Sources */,
 				6B64E2B67481907BE9CFCAE4FCF346A6 /* MarketViewController.swift in Sources */,
 				56C9CE8FDE2020EA4F72F21F30D27087 /* MyHistoryActions.swift in Sources */,
 				D97554A68B333ECF6F33B4558E08E005 /* MyHistoryCell.swift in Sources */,
@@ -33038,6 +33133,7 @@
 				AC784AB46820FFF7BD6DBFCD8132C403 /* NoticeBoardView.swift in Sources */,
 				41AC38B585A5D36715B3161B49381FB5 /* NoticeBoardViewController.swift in Sources */,
 				CC7617050BB0397377BB75D99DE68B3A /* OpenedOrdersActions.swift in Sources */,
+				225746DB210707DD0017FA1A /* PickerCoordinator.swift in Sources */,
 				D1612139CDC75BB4ACC08A1D78FD0AEE /* OpenedOrdersCell.swift in Sources */,
 				5F25028208C6665DE69B50E5D5ECBEF6 /* OpenedOrdersCoordinator.swift in Sources */,
 				3B0EB655210313B200F19C31 /* AccountContentView.swift in Sources */,
@@ -33074,9 +33170,11 @@
 				133E7DE8927D9AD19315D14E638939BE /* RechargeDetailCoordinator.swift in Sources */,
 				D1C63B5AAC5552A99528E306AC7F57E0 /* RechargeDetailReducers.swift in Sources */,
 				EEC52B0701FDE9B489D4D61193C9B420 /* RechargeDetailViewController.swift in Sources */,
+				221EC251210609A10059F856 /* TransferView.swift in Sources */,
 				10F005E5213C8CAD146ED273B0CDF11F /* RechargeItemView.swift in Sources */,
 				3B0EB6682103155C00F19C31 /* YourPortfolioViewController.swift in Sources */,
 				6AF937D55236FFDCE1D8F1B34F7D29ED /* RechargeReducers.swift in Sources */,
+				221EC24E2105CF310059F856 /* TransferViewController.swift in Sources */,
 				29C911F371D5F143FB814E54626700D5 /* RechargeSegment.swift in Sources */,
 				E593AB226F596677B1664A82995509CA /* RechargeViewController.swift in Sources */,
 				60FB6241E99099A751F12BD01130832D /* RegisterActions.swift in Sources */,
@@ -33116,6 +33214,7 @@
 				894D811521F19A8670D0A6C61B11C600 /* TradeHistoryViewController.swift in Sources */,
 				F8B52B20C9737C584DECE7D52285A92D /* TradeItemView.swift in Sources */,
 				07D976BEA2F5A840607DE4D526DB1420 /* TradeLineView.swift in Sources */,
+				221EC24C2105CF310059F856 /* TransferCoordinator.swift in Sources */,
 				73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */,
 				2E3DB3499E75C0D06068C979CD788B00 /* TradeReducers.swift in Sources */,
 				640657C00CD9588E73E0F0280F245348 /* TradeRootCoordinator.swift in Sources */,
@@ -33132,6 +33231,7 @@
 				72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */,
 				0FF6C4A7AAF40F0AC67CBDAEAA2406E2 /* UITextField+Extensions.swift in Sources */,
 				3B0EB6672103155C00F19C31 /* YourPortfolioCoordinator.swift in Sources */,
+				225746E02107089A0017FA1A /* PickerRootCoordinator.swift in Sources */,
 				C2728D465891E65690FBF4E868796852 /* UIView+Extensions.swift in Sources */,
 				01D3990C8F03B94C2207F37FF3C7C895 /* UIViewController+Extension.swift in Sources */,
 				696EB2454DD46A9C497C7C719B12BF12 /* UserDefaults.swift in Sources */,
@@ -33143,6 +33243,7 @@
 				975938BD454B9AB3D5F1AD8C06CDFCA8 /* WithdrawDetailCoordinator.swift in Sources */,
 				A9A444493A756B51F4BF2CC8F119C4EA /* WithdrawDetailReducers.swift in Sources */,
 				A390401CBDF18D681CE95ABF9268BBF3 /* WithdrawDetailViewController.swift in Sources */,
+				221EC23E2105B3110059F856 /* CornerAndShadowView.swift in Sources */,
 				EC446CED4809CD57D338FB866A5AE631 /* YourPorfolioView.swift in Sources */,
 				60502E37A09ABFC6DD95A24F6A855B65 /* YourPortfolioActions.swift in Sources */,
 				480BE6AB9D3A7CCE75BCB6BBF9525FFD /* YourPortfolioCell.swift in Sources */,
@@ -33156,6 +33257,7 @@
 				AB91379B8C52B82AAF3DCC870ED7DA37 /* transaction.cpp in Sources */,
 				21D4F7060148486EE0215AE84B53174E /* types.cpp in Sources */,
 				31F4371D9622BE1743A354B2E42FCD4F /* vote.cpp in Sources */,
+				225746DD210707DD0017FA1A /* PickerViewController.swift in Sources */,
 				D95238FCF7D7B7E691BA9B403CE9F873 /* wallet_lib.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

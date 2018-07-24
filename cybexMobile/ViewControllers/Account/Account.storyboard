@@ -18,36 +18,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgMyBalanceBg" translatesAutoresizingMaskIntoConstraints="NO" id="d0Y-Sp-hzO">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lQm-b5-7fW">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="213" width="375" height="454"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="LVj-d6-o0Z" customClass="YourPortfolioTableHeadView" customModule="cybexMobile" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="193"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </view>
                                 <connections>
                                     <outlet property="dataSource" destination="hui-Ix-qff" id="1W6-wn-dg4"/>
                                     <outlet property="delegate" destination="hui-Ix-qff" id="wWT-ra-Zj8"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVj-d6-o0Z" customClass="YourPortfolioTableHeadView" customModule="cybexMobile" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="193"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="193" id="PgP-A6-sND"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="QWm-r0-HhQ" firstAttribute="trailing" secondItem="d0Y-Sp-hzO" secondAttribute="trailing" id="0Wu-w8-7R8"/>
+                            <constraint firstItem="LVj-d6-o0Z" firstAttribute="leading" secondItem="QWm-r0-HhQ" secondAttribute="leading" id="2WY-8R-Aa3"/>
                             <constraint firstItem="lQm-b5-7fW" firstAttribute="leading" secondItem="QWm-r0-HhQ" secondAttribute="leading" id="63L-9n-ViC"/>
-                            <constraint firstItem="lQm-b5-7fW" firstAttribute="top" secondItem="QWm-r0-HhQ" secondAttribute="top" id="AOa-Sj-nye"/>
                             <constraint firstItem="QWm-r0-HhQ" firstAttribute="bottom" secondItem="lQm-b5-7fW" secondAttribute="bottom" id="DwY-JN-7a8"/>
                             <constraint firstItem="QWm-r0-HhQ" firstAttribute="trailing" secondItem="lQm-b5-7fW" secondAttribute="trailing" id="HdK-Yp-ndO"/>
+                            <constraint firstItem="LVj-d6-o0Z" firstAttribute="trailing" secondItem="QWm-r0-HhQ" secondAttribute="trailing" id="SCf-au-AiM"/>
+                            <constraint firstItem="d0Y-Sp-hzO" firstAttribute="top" secondItem="khK-64-v47" secondAttribute="top" id="atP-3u-Cza"/>
+                            <constraint firstItem="LVj-d6-o0Z" firstAttribute="top" secondItem="QWm-r0-HhQ" secondAttribute="top" id="oAs-CG-shQ"/>
+                            <constraint firstItem="d0Y-Sp-hzO" firstAttribute="leading" secondItem="QWm-r0-HhQ" secondAttribute="leading" id="oMH-30-4sv"/>
+                            <constraint firstItem="lQm-b5-7fW" firstAttribute="top" secondItem="LVj-d6-o0Z" secondAttribute="bottom" id="wMQ-8V-qYg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QWm-r0-HhQ"/>
                     </view>
                     <connections>
-                        <outlet property="tableHeadView" destination="LVj-d6-o0Z" id="Fpx-JG-EWn"/>
+                        <outlet property="imgBgView" destination="d0Y-Sp-hzO" id="WdG-ni-FXv"/>
                         <outlet property="tableView" destination="lQm-b5-7fW" id="NgJ-s1-9xP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZV-GV-ZOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="86" y="154"/>
+            <point key="canvasLocation" x="85.599999999999994" y="152.47376311844079"/>
         </scene>
         <!--Recharge View Controller-->
         <scene sceneID="Rg4-Gf-Qzr">
@@ -135,13 +146,13 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rf-4b-3th" customClass="AccountContentView" customModule="cybexMobile" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" name="white" red="1.000" green="1.000" blue="1.000" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                        <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                        <color key="value" name="white" red="1.000" green="1.000" blue="1.000" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -285,5 +296,6 @@
     </scenes>
     <resources>
         <image name="account_bg_light" width="375" height="553"/>
+        <image name="imgMyBalanceBg" width="375" height="180"/>
     </resources>
 </document>

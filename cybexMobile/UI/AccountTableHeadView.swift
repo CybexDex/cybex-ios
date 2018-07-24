@@ -13,6 +13,10 @@ class AccountTableHeadView: UIView {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var iconImageView: UIImageView!
   
+  enum event: String {
+    case login
+  }
+  
   var title = "" {
     didSet {
       titleLabel.text = title
@@ -26,7 +30,15 @@ class AccountTableHeadView: UIView {
   }
   
   func setup(){
+    setupEvent()
     updateHeight()
+  }
+  
+  func setupEvent() {
+    titleLabel.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap  in
+      guard let `self` = self else { return}
+      self.next?.sendEventWith(event.login.rawValue, userinfo: [:])
+    }).disposed(by: disposeBag)
   }
   
   override init(frame: CGRect) {
