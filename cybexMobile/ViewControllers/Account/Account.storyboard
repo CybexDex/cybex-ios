@@ -126,6 +126,7 @@
                         <viewLayoutGuide key="safeArea" id="T3R-pk-lLR"/>
                     </view>
                     <connections>
+                        <outlet property="rechargeSegmentView" destination="bnF-ZF-IRj" id="jIl-Ok-x2U"/>
                         <outlet property="tableView" destination="brH-te-cSq" id="eDP-Ep-F8e"/>
                     </connections>
                 </viewController>

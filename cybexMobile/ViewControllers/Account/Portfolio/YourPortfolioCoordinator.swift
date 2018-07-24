@@ -35,11 +35,19 @@ class YourPortfolioCoordinator: AccountRootCoordinator {
 
 extension YourPortfolioCoordinator: YourPortfolioCoordinatorProtocol {
   func pushToRechargeVC() {
-    
+    let vc = R.storyboard.account.rechargeViewController()!
+    let coordinator = RechargeCoordinator(rootVC: self.rootVC)
+    vc.coordinator = coordinator
+    vc.selectedIndex = .RECHARGE
+    self.rootVC.pushViewController(vc, animated: true)
   }
   
   func pushToWithdrawDepositVC() {
-    
+    let vc = R.storyboard.account.rechargeViewController()!
+    let coordinator = RechargeCoordinator(rootVC: self.rootVC)
+    vc.coordinator = coordinator
+    vc.selectedIndex = .WITHDRAW
+    self.rootVC.pushViewController(vc, animated: true)
   }
   
   func pushToTransferVC() {

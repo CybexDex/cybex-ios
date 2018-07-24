@@ -19,6 +19,7 @@ class RechargeViewController: BaseViewController {
   }
   var selectedIndex : CELL_TYPE = .RECHARGE
  
+  @IBOutlet weak var rechargeSegmentView: RechargeSegment!
   @IBOutlet weak var tableView: UITableView!
   var coordinator: (RechargeCoordinatorProtocol & RechargeStateManagerProtocol)?
   
@@ -36,6 +37,8 @@ class RechargeViewController: BaseViewController {
     let cell = String.init(describing:TradeCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
     tableView.tableFooterView = UIView()
+    rechargeSegmentView.segmentControl.selectedSegmentIndex = selectedIndex.rawValue
+
   }
   
   func commonObserveState() {
