@@ -10,6 +10,11 @@ import UIKit
 
 class PickerRootCoordinator: NavCoordinator {
   override func start() {
-    
+    if let vc = R.storyboard.components.pickerViewController() {
+      let coordinator = PickerCoordinator(rootVC: self.rootVC)
+      vc.coordinator = coordinator
+      self.rootVC.pushViewController(vc, animated: true)
+    }
+
   }
 }

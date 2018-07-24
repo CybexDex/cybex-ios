@@ -10,6 +10,7 @@ import UIKit
 import ReSwift
 
 protocol PickerCoordinatorProtocol {
+  func dismiss()
 }
 
 protocol PickerStateManagerProtocol {
@@ -31,7 +32,9 @@ class PickerCoordinator: PickerRootCoordinator {
 }
 
 extension PickerCoordinator: PickerCoordinatorProtocol {
-    
+  func dismiss() {
+    self.rootVC.dismiss(animated: true, completion: nil)
+  }
 }
 
 extension PickerCoordinator: PickerStateManagerProtocol {

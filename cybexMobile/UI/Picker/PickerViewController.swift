@@ -12,29 +12,35 @@ import RxCocoa
 import ReSwift
 
 class PickerViewController: BaseViewController {
-
-	var coordinator: (PickerCoordinatorProtocol & PickerStateManagerProtocol)?
-
-	override func viewDidLoad() {
-        super.viewDidLoad()
+  
+  var coordinator: (PickerCoordinatorProtocol & PickerStateManagerProtocol)?
+  
+  @IBOutlet weak var picker: UIPickerView!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+  
+  func setupUI() {
+    
+  }
+  
+  func commonObserveState() {
+    coordinator?.subscribe(errorSubscriber) { sub in
+      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
+        return false
+      })
     }
     
-    func commonObserveState() {
-        coordinator?.subscribe(errorSubscriber) { sub in
-            return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
-        
-        coordinator?.subscribe(loadingSubscriber) { sub in
-            return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
+    coordinator?.subscribe(loadingSubscriber) { sub in
+      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
+        return false
+      })
     }
+  }
+  
+  override func configureObserveState() {
+    commonObserveState()
     
-    override func configureObserveState() {
-        commonObserveState()
-        
-    }
+  }
 }

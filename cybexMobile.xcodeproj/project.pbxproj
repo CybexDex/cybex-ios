@@ -80,6 +80,7 @@
 		225746DD210707DD0017FA1A /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746D9210707DD0017FA1A /* PickerViewController.swift */; };
 		225746DE210707DD0017FA1A /* PickerReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746DA210707DD0017FA1A /* PickerReducers.swift */; };
 		225746E02107089A0017FA1A /* PickerRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746DF2107089A0017FA1A /* PickerRootCoordinator.swift */; };
+		225746E4210715890017FA1A /* Components.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 225746E3210715890017FA1A /* Components.storyboard */; };
 		22BB2BC362DB5BB21C3699A31111523E /* AccountPortfolioCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115F2B194BC4D206A29A5A90BF6DDACE /* AccountPortfolioCellView.xib */; };
 		24401F60F82FEDDA35FBCCED409C1102 /* HomeRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E395E7B5D2617408E203CD024E8818 /* HomeRootCoordinator.swift */; };
 		253FA678E24480209F5F9418FE39D896 /* fstream in Resources */ = {isa = PBXBuildFile; fileRef = 09C798C2A2DF06089D59BC8BF9958C05 /* fstream */; };
@@ -2123,6 +2124,7 @@
 		225746D9210707DD0017FA1A /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		225746DA210707DD0017FA1A /* PickerReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerReducers.swift; sourceTree = "<group>"; };
 		225746DF2107089A0017FA1A /* PickerRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerRootCoordinator.swift; sourceTree = "<group>"; };
+		225746E3210715890017FA1A /* Components.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Components.storyboard; sourceTree = "<group>"; };
 		225C01E7C835B6B6F91293F4185D1A2B /* forward2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = forward2.hpp; sourceTree = "<group>"; };
 		225CB05DD7FC3DF3558070995DC73C63 /* gregorian_types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gregorian_types.hpp; sourceTree = "<group>"; };
 		225E8165925A15D152167374ACF26D4F /* random.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = random.hpp; sourceTree = "<group>"; };
@@ -27723,6 +27725,7 @@
 				3B0EB650210313B100F19C31 /* YourPortfolioHeadView.xib */,
 				3B0EB644210313AA00F19C31 /* YourPortfolioTableHeadView.swift */,
 				3B0EB648210313AC00F19C31 /* YourPortfolioTableHeadView.xib */,
+				225746E3210715890017FA1A /* Components.storyboard */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -32571,6 +32574,7 @@
 				589C3222B6936F858915CE755BEA7139 /* algorithm in Resources */,
 				E2CDBCB0F3EF1EAF61B086884BE94766 /* algorithm.SUNWCCh in Resources */,
 				6A80CEA201B762683D148EF0C7CC0EE0 /* array in Resources */,
+				225746E4210715890017FA1A /* Components.storyboard in Resources */,
 				1CDF918F13C09430A6744E7A1FED2C86 /* array.SUNWCCh in Resources */,
 				C9E9C25E6F2F69A3AF5564B11DFE17E7 /* bcc32.SUNWCCh in Resources */,
 				425F516586C7C2E1111A674631812919 /* bitset in Resources */,
