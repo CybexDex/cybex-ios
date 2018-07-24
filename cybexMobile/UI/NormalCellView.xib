@@ -69,10 +69,10 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.11" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" name="steel11" red="0.471" green="0.506" blue="0.604" alpha="0.110" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.11" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" name="steel11" red="0.471" green="0.506" blue="0.604" alpha="0.110" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
