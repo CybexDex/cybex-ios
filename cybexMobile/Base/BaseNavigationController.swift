@@ -14,9 +14,13 @@ class BaseNavigationController: UINavigationController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setupNavUI()
+  }
+  
+  func setupNavUI() {
     self.view.theme1BgColor = UIColor.dark
     self.view.theme2BgColor = UIColor.paleGrey
-
+    
     self.interactivePopGestureRecognizer?.delegate = self
     let image = UIImage.init(color: .dark)
     self.navigationBar.setBackgroundImage(image, for: .default)
@@ -28,9 +32,21 @@ class BaseNavigationController: UINavigationController {
       self.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:#colorLiteral(red: 1, green: 0.6386402845, blue: 0.3285836577, alpha: 1)]
     }
     self.navigationBar.tintColor = #colorLiteral(red: 0.5436816812, green: 0.5804407597, blue: 0.6680644155, alpha: 1)
-
-//    self.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "ic_arrow_back_16px")
-//    self.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "ic_arrow_back_16px")
+    
+    if ThemeManager.currentThemeIndex == 0 {
+      let image = UIImage.init(color: UIColor.dark)
+      self.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.paleGrey]
+      self.navigationBar.setBackgroundImage(image, for: .default)
+      
+    }
+    else {
+      let image = UIImage.init(color:UIColor.paleGrey)
+      self.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.dark]
+      self.navigationBar.setBackgroundImage(image, for: .default)
+      
+    }
+    //    self.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "ic_arrow_back_16px")
+    //    self.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "ic_arrow_back_16px")
     
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] notification in
       guard let `self` = self else { return }
@@ -39,16 +55,15 @@ class BaseNavigationController: UINavigationController {
         let image = UIImage.init(color: UIColor.dark)
         self.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.paleGrey]
         self.navigationBar.setBackgroundImage(image, for: .default)
-
+        
       }
       else {
         let image = UIImage.init(color:UIColor.paleGrey)
         self.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.dark]
         self.navigationBar.setBackgroundImage(image, for: .default)
-
+        
       }
     })
-    
   }
   
   override func pushViewController(_ viewController: UIViewController, animated: Bool) {

@@ -32,7 +32,11 @@
                                     <rect key="frame" x="53" y="9" width="24" height="24"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icDeposit24Px" translatesAutoresizingMaskIntoConstraints="NO" id="2cW-XX-lRl">
-                                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                            <rect key="frame" x="4" y="4" width="16" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="16" id="e9Z-NP-675"/>
+                                                <constraint firstAttribute="width" constant="16" id="jR7-9w-x0y"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.11" colorSpace="custom" customColorSpace="sRGB"/>
@@ -102,7 +106,11 @@
                                     <rect key="frame" x="53" y="9" width="24" height="24"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icWithdraw24Px" translatesAutoresizingMaskIntoConstraints="NO" id="ACJ-1r-n7u">
-                                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                            <rect key="frame" x="4" y="4" width="16" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="16" id="0fk-2U-FfE"/>
+                                                <constraint firstAttribute="height" constant="16" id="Opi-Wj-ADM"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -172,7 +180,11 @@
                                     <rect key="frame" x="53" y="9" width="24" height="24"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icSend24Px" translatesAutoresizingMaskIntoConstraints="NO" id="bZf-qL-pkn">
-                                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                            <rect key="frame" x="4" y="4" width="16" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="16" id="AGS-3q-k4f"/>
+                                                <constraint firstAttribute="width" constant="16" id="BZn-Ji-RVV"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
