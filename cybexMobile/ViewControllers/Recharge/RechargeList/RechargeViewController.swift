@@ -19,6 +19,7 @@ class RechargeViewController: BaseViewController {
   }
   var selectedIndex : CELL_TYPE = .RECHARGE
  
+  @IBOutlet weak var rechargeSegmentView: RechargeSegment!
   @IBOutlet weak var tableView: UITableView!
   var coordinator: (RechargeCoordinatorProtocol & RechargeStateManagerProtocol)?
   
@@ -33,9 +34,11 @@ class RechargeViewController: BaseViewController {
   }
   func setupUI(){
     self.localized_text = R.string.localizable.account_trade.key.localizedContainer()
-    let cell = String.init(describing:TradeCell.self)
+//    let cell = String.init(describing:TradeCell.self)
+    let cell = R.nib.tradeCell.name
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
     tableView.tableFooterView = UIView()
+    rechargeSegmentView.segmentControl.selectedSegmentIndex = selectedIndex.rawValue
   }
   
   func commonObserveState() {

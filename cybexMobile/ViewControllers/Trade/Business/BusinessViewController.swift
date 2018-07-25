@@ -329,6 +329,7 @@ extension BusinessViewController {
       return
     }
     
+    
     guard checkBalance() else { return }
     
 //    if UserManager.shared.isLocked {
