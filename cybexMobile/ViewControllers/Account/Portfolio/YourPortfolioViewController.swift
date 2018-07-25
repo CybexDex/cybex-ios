@@ -32,6 +32,14 @@ class YourPortfolioViewController: BaseViewController {
     let image = UIImage.init(color: UIColor.clear)
     self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
     self.navigationController?.navigationBar.isTranslucent = true
+    self.navigationController?.makeTransparent(withTint: .white)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    if let nav = self.navigationController as? BaseNavigationController {
+      nav.setupNavUI()
+    }
   }
   
   func setupUI(){
@@ -44,7 +52,8 @@ class YourPortfolioViewController: BaseViewController {
 
     configLeftNavButton(R.image.icArrowForwardWhite16Px())
     self.localized_text = R.string.localizable.my_property.key.localizedContainer()
-    let cell = String.init(describing: YourPortfolioCell.self)
+//    let cell = String.init(describing: YourPortfolioCell.self)
+    let cell = R.nib.yourPortfolioCell.name
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
   }
   

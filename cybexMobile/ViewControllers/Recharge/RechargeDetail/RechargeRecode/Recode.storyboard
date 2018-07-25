@@ -223,7 +223,6 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="bas-dV-Va6" firstAttribute="top" secondItem="PVK-Es-1FB" secondAttribute="top" id="4rB-bt-pP1"/>
                             <constraint firstItem="PVK-Es-1FB" firstAttribute="trailing" secondItem="bas-dV-Va6" secondAttribute="trailing" id="afC-kH-J4m"/>

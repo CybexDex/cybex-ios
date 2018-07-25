@@ -197,3 +197,42 @@ extension UIView {
     return theme_backgroundColor?.value() as! UIColor
   }
 }
+
+extension UIPickerView {
+  @IBInspectable
+  var theme1TintColor:UIColor {
+    set {
+      if let theme2 = self.store["picker_theme2"] as? String {
+        theme_tintColor = [newValue.hexString(true), theme2]
+      }
+      else {
+        self.store["picker_theme1"] = newValue.hexString(true)
+      }
+    }
+    
+    get {
+      return theme_tintColor?.value() as! UIColor
+    }
+  }
+  
+  var themeTintColor:UIColor {
+    return theme_tintColor?.value() as! UIColor
+  }
+  
+  @IBInspectable
+  var theme2TintColor:UIColor {
+    set {
+      if let theme1 = self.store["picker_theme1"] as? String {
+        theme_tintColor = [theme1, newValue.hexString(true)]
+      }
+      else {
+        self.store["picker_theme2"] = newValue.hexString(true)
+      }
+    }
+    
+    get {
+      return theme_tintColor?.value() as! UIColor
+    }
+  }
+}
+

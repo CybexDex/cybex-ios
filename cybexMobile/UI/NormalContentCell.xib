@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMg-3B-N7P" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
-                        <rect key="frame" x="16" y="0.0" width="288" height="43.5"/>
+                        <rect key="frame" x="20" y="0.0" width="284" height="43.5"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="name_style" value="normal_name"/>
                             <userDefinedRuntimeAttribute type="number" keyPath="state">
@@ -34,7 +34,7 @@
                 <constraints>
                     <constraint firstItem="iMg-3B-N7P" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Q3I-4a-FAa"/>
                     <constraint firstAttribute="bottom" secondItem="iMg-3B-N7P" secondAttribute="bottom" id="dSs-zF-yqI"/>
-                    <constraint firstItem="iMg-3B-N7P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="gRU-25-kaB"/>
+                    <constraint firstItem="iMg-3B-N7P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="gRU-25-kaB"/>
                     <constraint firstAttribute="trailing" secondItem="iMg-3B-N7P" secondAttribute="trailing" constant="16" id="rxr-9S-1jM"/>
                 </constraints>
             </tableViewCellContentView>
