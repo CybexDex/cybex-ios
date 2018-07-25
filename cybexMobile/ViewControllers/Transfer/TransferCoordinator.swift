@@ -8,8 +8,10 @@
 
 import UIKit
 import ReSwift
+import Presentr
 
 protocol TransferCoordinatorProtocol {
+  func showPicker()
 }
 
 protocol TransferStateManagerProtocol {
@@ -31,7 +33,21 @@ class TransferCoordinator: AccountRootCoordinator {
 }
 
 extension TransferCoordinator: TransferCoordinatorProtocol {
+  func showPicker() {
+    let width = ModalSize.full
+    let height = ModalSize.custom(size: 244)
+    let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: UIScreen.main.bounds.height - 244))
+    let customType = PresentationType.custom(width: width, height: height, center: center)
     
+    let presenter = Presentr(presentationType: customType)
+    presenter.dismissOnTap = true
+    presenter.keyboardTranslationType = .moveUp
+    
+    let newVC = BaseNavigationController()
+    let pickerCoordinator = PickerRootCoordinator(rootVC: newVC)
+    self.rootVC.topViewController?.customPresentViewController(presenter, viewController: newVC, animated: true, completion: nil)
+    pickerCoordinator.startWithItems(["CYB","ETH","BTC"] as AnyObject, selectedValue: (0, 0))
+  }
 }
 
 extension TransferCoordinator: TransferStateManagerProtocol {
