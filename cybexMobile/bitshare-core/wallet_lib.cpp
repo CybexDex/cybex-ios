@@ -254,7 +254,7 @@ string cybex_gateway_query(
                            uint32_t offset,
                            uint32_t expiration
                            )
-{
+{try{
   struct cybex_gateway_query_transaction trx;
   digest_type::encoder enc;
   
@@ -269,7 +269,7 @@ string cybex_gateway_query(
   fc::raw::pack(enc, trx.op);
   trx.signer = active_priv_key.sign_compact(enc.result());
   return fc::json::to_string(trx);
-}
+} catch(...){return "";}}
 
 string decrypt_memo_data(
                          string memo_json_str
