@@ -50,3 +50,35 @@ struct TradeRecord : HandyJSON {
   init() {}
 }
 
+
+struct HandyAsset : HandyJSON {
+  var amount : String = ""
+  var asset_id : String = ""
+  init(){}
+  mutating func mapping(mapper: HelpingMapper) {
+    mapper <<<
+     amount <-- "amount"
+  }
+}
+
+struct Memo : HandyJSON {
+  var from : String = ""
+  var to : String = ""
+  var nonce : String = ""
+  var message : String = ""
+}
+
+
+struct TransferRecord : HandyJSON {
+  var fee : HandyAsset?
+  var from : String = ""
+  var to : String = ""
+  var amount : HandyAsset?
+  var memo : Memo?
+  var block_num : Int = 0
+  var vesting_period : String = ""
+  var public_key : String = ""
+  
+  init(){}
+}
+

@@ -430,10 +430,11 @@ func getWithdrawAndDepositRecords(_ accountName : String, asset : String, fundTy
     paragram["signer"] = UserManager.shared.signer?.signer
     SimpleHTTPService.fetchRecords(paragram).done { (result) in
       callback(result)
-      }.catch { (error) in
+    }.catch { (error) in
         callback(nil)
     }
-  }else{
+  }
+  else {
     let time = TimeInterval(expiration) - Date().timeIntervalSince1970
     let operation = BitShareCoordinator.getRecodeLoginOperation(accountName, asset: asset, fundType: fundType.rawValue, size: Int32(size), offset: Int32(offset), expiration: Int32(expiration))
     
@@ -450,10 +451,11 @@ func getWithdrawAndDepositRecords(_ accountName : String, asset : String, fundTy
           }).catch({ (error) in
             callback(nil)
           })
-        }else{
+        }
+        else {
           callback(nil)
         }
-        }.catch { (error) in
+      }.catch { (error) in
           callback(nil)
       }
     }

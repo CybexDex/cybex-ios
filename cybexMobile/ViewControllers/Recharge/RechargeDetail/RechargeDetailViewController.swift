@@ -38,6 +38,7 @@ class RechargeDetailViewController: BaseViewController {
       }
     }
   }
+  
   var trade : Trade? {
     didSet{
       if let trade = self.trade {

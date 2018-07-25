@@ -15,7 +15,8 @@ class TransferListViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     
 	var coordinator: (TransferListCoordinatorProtocol & TransferListStateManagerProtocol)?
-
+  var data : [(TransferRecord,time:String)]?
+  
 	override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -43,19 +44,29 @@ class TransferListViewController: BaseViewController {
     
     override func configureObserveState() {
         commonObserveState()
-        
+      UserManager.shared.transferRecords.asObservable().subscribe(onNext: { [weak self](data) in
+        guard let `self` = self ,let data = data else { return }
+        self.data = data
+        if self.isVisible {
+          self.tableView.reloadData()
+        }
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }
 
 extension TransferListViewController : UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+      if let data = self.data {
+        return data.count
+      }
+      return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellString = String(describing: TransferListCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellString, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellString, for: indexPath) as! TransferListCell
+        cell.setup(self.data![indexPath.row], indexPath: indexPath)
         return cell
     }
   

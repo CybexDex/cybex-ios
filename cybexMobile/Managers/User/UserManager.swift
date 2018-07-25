@@ -19,7 +19,7 @@ import Guitar
 import Repeat
 
 extension UserManager {
-
+  
   func validateUserName(_ username:String) -> (Bool, String) {
     let letterBegin = Guitar(pattern: "^([a-z])")
     if !letterBegin.test(string: username) {
@@ -61,7 +61,7 @@ extension UserManager {
       if locked {
         self.saveName(username)
         self.avatarString = username.sha256()
-
+        
         self.name.accept(username)
         self.handlerFullAcount(data!)
       }
@@ -81,7 +81,7 @@ extension UserManager {
         if data.0 {
           self.saveName(username)
           self.avatarString = username.sha256()
-
+          
           self.name.accept(username)
           
           self.keys = keys
@@ -105,6 +105,7 @@ extension UserManager {
     self.balances.accept(nil)
     self.limitOrder.accept(nil)
     self.fillOrder.accept(nil)
+    self.transferRecords.accept(nil)
   }
   
   func fetchAccountInfo(){
@@ -126,12 +127,73 @@ extension UserManager {
     }
   }
   
+  func fetchHistoryOfFillOrdersAndTransferRecords() {
+    guard let id = self.account.value?.id else {
+      return
+    }
+    
+    let request = GetAccountHistoryRequest(accountID: id) { (data) in
+      if let data = data as? (fillOrders:[FillOrder],transferRecords:[TransferRecord]) {
+        var fillorders = data.fillOrders
+        if fillorders.count == 0 || !self.isLoginIn {
+          self.fillOrder.accept(nil)
+          return
+        }
+        fillorders = fillorders.filter({
+          let base_name = app_data.assetInfo[$0.fill_price.base.assetID]
+          let quote_name = app_data.assetInfo[$0.fill_price.quote.assetID]
+          return base_name != nil && quote_name != nil
+        })
+        
+        var result = [(FillOrder,time:String)]()
+        var count = 0
+        for fillOrder in fillorders{
+          let timeRequest = getBlockRequest(response: { (time) in
+            count += 1
+            if let time = time as? String, let date = time.dateFromISO8601{
+              result.append((fillOrder,time:(date.string(withFormat: "MM/dd HH:mm:ss"))))
+            }
+            if count == fillorders.count{
+              self.fillOrder.accept(result)
+            }
+          }, block_num: fillOrder.block_num)
+          WebsocketService.shared.send(request: timeRequest)
+        }
+        
+        let transferRecordList = data.transferRecords
+        if transferRecordList.count == 0 || !self.isLoginIn {
+          self.transferRecords.accept(nil)
+          return
+        }
+        
+        var records = [(TransferRecord,time:String)]()
+        var recordCount = 0
+        for transferRecord in transferRecordList {
+          let timeRequest = getBlockRequest(response: { (time) in
+            recordCount += 1
+            if let time = time as? String, let date = time.dateFromISO8601{
+              records.append((transferRecord,time:(date.string(withFormat: "MM/dd HH:mm:ss"))))
+            }
+            if recordCount == transferRecordList.count{
+              self.transferRecords.accept(records)
+            }
+          }, block_num: transferRecord.block_num)
+          WebsocketService.shared.send(request: timeRequest)
+        }
+      }
+      
+    }
+    WebsocketService.shared.send(request: request,filterRepeat: false)
+  }
+  
+  
   func fetchHistoryOfOperation() {
     guard let id = self.account.value?.id else {
       return
     }
     
     let request = GetAccountHistoryRequest(accountID: id) { (data) in
+  
       if var fillorders = data as? [FillOrder] {
         if fillorders.count == 0 || !self.isLoginIn {
           self.fillOrder.accept(nil)
@@ -243,7 +305,7 @@ extension UserManager {
       }
       WebsocketService.shared.send(request: request, filterRepeat:false)
     }
-
+      
     else{
       completion(false, nil)
     }
@@ -290,7 +352,7 @@ class UserManager {
         self.name.accept(name)
         self.avatarString = name.sha256()
       }
-
+      
       return true
     }
     return false
@@ -310,9 +372,10 @@ class UserManager {
   var balances:BehaviorRelay<[Balance]?> = BehaviorRelay(value: nil)
   var limitOrder:BehaviorRelay<[LimitOrder]?> = BehaviorRelay(value:nil)
   var fillOrder:BehaviorRelay<[(FillOrder,time:String)]?> = BehaviorRelay(value:nil)
+  var transferRecords : BehaviorRelay<[(TransferRecord,time:String)]?> = BehaviorRelay(value: nil)
   
   var timer:Repeater?
-
+  
   
   var limitOrderValue:Double = 0
   var limitOrder_buy_value: Double = 0
@@ -397,7 +460,7 @@ class UserManager {
   private init() {
     
     app_data.data.asObservable().distinctUntilChanged()
-//      .filter({$0.count = AssetConfiguration.shared.asset_ids.count})
+      //      .filter({$0.count = AssetConfiguration.shared.asset_ids.count})
       .throttle(3, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { (s) in
         DispatchQueue.main.async {
@@ -411,7 +474,8 @@ class UserManager {
     account.asObservable().skip(1).subscribe(onNext: {[weak self] (newAccount) in
       guard let `self` = self else { return }
       
-      self.fetchHistoryOfOperation()
+      self.fetchHistoryOfFillOrdersAndTransferRecords()
+//      self.fetchHistoryOfOperation()
     }).disposed(by: disposeBag)
     
   }

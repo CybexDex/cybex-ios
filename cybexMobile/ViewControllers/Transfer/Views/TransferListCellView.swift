@@ -18,7 +18,25 @@ class TransferListCellView: UIView {
   
   var data : Any? {
     didSet{
-      
+      if let data = data as? (TransferRecord,time:String) {
+        
+        let transferRecord = data.0
+        self.time.text = data.time
+        self.address.text = transferRecord.to
+        if let transferAmount = transferRecord.amount ,let assetInfo = app_data.assetInfo[(transferRecord.amount?.asset_id)!] {
+          self.amount.text = getRealAmount(transferAmount.asset_id, amount: transferAmount.amount).stringValue.formatCurrency(digitNum: assetInfo.precision) + " " + assetInfo.symbol.filterJade
+
+          if transferRecord.from == UserManager.shared.name.value {
+            self.state.text = R.string.localizable.transfer_send.key.localized()
+            self.icon.image = R.image.ic_send()
+            self.amount.text = "-" + self.amount.text!
+          }else {
+            self.state.text = R.string.localizable.transfer_done.key.localized()
+            self.icon.image = R.image.ic_income()
+            self.amount.text = "+" + self.amount.text!
+          }
+        }
+      }
     }
   }
   
