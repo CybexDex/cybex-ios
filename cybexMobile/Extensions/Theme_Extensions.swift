@@ -220,7 +220,7 @@ extension UIPickerView {
   }
   
   @IBInspectable
-  var theme2TinkColor:UIColor {
+  var theme2TintColor:UIColor {
     set {
       if let theme1 = self.store["picker_theme1"] as? String {
         theme_tintColor = [theme1, newValue.hexString(true)]

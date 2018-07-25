@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct PickerData {
+  static let key = "key"
+  static let items = "items"
+}
+
 class PickerView: UIView {
   @IBOutlet weak var picker: UIPickerView!
   
@@ -118,7 +123,7 @@ extension PickerView {
             obj = (obj as! [Int: AnyObject])[0]
           }
           if obj is [String: AnyObject] {
-            obj = (obj as! [String: AnyObject])["items"]
+            obj = (obj as! [String: AnyObject])[PickerData.items]
           }
           if obj is [String] {
             components += 1
@@ -149,7 +154,7 @@ extension PickerView {
         while c < component && obj != nil {
           obj = (obj as! [Int: [String: AnyObject]])[picker.selectedRow(inComponent: c)] as AnyObject?
           if obj is [String: AnyObject] {
-            obj = (obj as! [String: AnyObject])["items"]
+            obj = (obj as! [String: AnyObject])[PickerData.items]
           }
           c += 1
         }
@@ -195,7 +200,7 @@ extension PickerView {
         else if obj is [Int: [String: AnyObject]] {
           let d: [Int: [String: AnyObject]] = (obj as! [Int: [String: AnyObject]])
           let d1: [String: AnyObject] = d[row]! as [String: AnyObject]
-          return d1["key"] as? String
+          return d1[PickerData.key] as? String
         }
       }
     }
