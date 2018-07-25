@@ -11,6 +11,7 @@ import ReSwift
 import Presentr
 
 protocol TransferCoordinatorProtocol {
+  func pushToRecordVC()
   func showPicker()
 }
 
@@ -33,6 +34,13 @@ class TransferCoordinator: AccountRootCoordinator {
 }
 
 extension TransferCoordinator: TransferCoordinatorProtocol {
+  func pushToRecordVC() {
+    let recordVC = R.storyboard.recode.transferListViewController()
+    let coordinator = TransferListCoordinator(rootVC: self.rootVC)
+    recordVC?.coordinator = coordinator
+    self.rootVC.pushViewController(recordVC!, animated: true)
+  }
+
   func showPicker() {
     let width = ModalSize.full
     let height = ModalSize.custom(size: 244)

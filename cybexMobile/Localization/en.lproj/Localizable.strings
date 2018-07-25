@@ -290,6 +290,7 @@
 "transfer_quantity" = "Quantity";
 "transfer_memo" = "Momo";
 "transfer_fee" = "Fee";
+"transfer_balance" = "Available";
 "picker_comfirm" = "Comfirm";
 
 //zsy add

@@ -26,8 +26,6 @@ class GrowSectionView: UIView {
   
   func setupUI() {
     corAndShadowView = CornerAndShadowView()
-    corAndShadowView?.theme1BgColor = UIColor.darkTwo
-    corAndShadowView?.theme2BgColor = UIColor.white
     self.addSubview(corAndShadowView!)
     
     corAndShadowView?.left(to: self, offset: 0)
@@ -36,6 +34,7 @@ class GrowSectionView: UIView {
     corAndShadowView?.bottom(to: self, offset: 0)
     
     contentView = UIStackView(frame: CGRect.zero)
+    contentView?.backgroundColor = UIColor.clear
     contentView?.axis = .vertical
     contentView?.distribution = .fill
     contentView?.alignment = .fill

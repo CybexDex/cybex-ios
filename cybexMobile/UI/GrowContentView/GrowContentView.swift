@@ -79,6 +79,7 @@ class GrowContentView: UIView {
       sectionView.corAndShadowView?.newShadowColor = shadowSetting.color
       sectionView.corAndShadowView?.newShadowOffset = shadowSetting.offset
       sectionView.corAndShadowView?.newShadowRadius = shadowSetting.radius
+      sectionView.corAndShadowView?.shadowOpacity = 1.0
     }
     return sectionView
   }
