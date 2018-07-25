@@ -184,8 +184,7 @@ extension UserManager {
     }
     
     let keysString = BitShareCoordinator.getUserKeys(name, password: password)!
-    if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key {
-      let public_key = active_key.public_key
+    if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key, let memoKey = keys.memo_key, let ownKey = keys.owner_key {
       var canLock = false
       
       let request = GetFullAccountsRequest(name: name) { response in
@@ -195,7 +194,7 @@ extension UserManager {
           
           for auth in active_auths {
             if let auth = auth as? [Any], let key = auth[0] as? String {
-              if key == public_key {
+              if [memoKey.public_key, ownKey.public_key, active_key.public_key].contains(key) {
                 canLock = true
                 BitShareCoordinator.resetDefaultPublicKey(key)
                 break
@@ -203,12 +202,14 @@ extension UserManager {
             }
           }
           
-          for auth in owner_auths {
-            if let auth = auth as? [Any], let key = auth[0] as? String {
-              if key == public_key {
-                canLock = true
-                BitShareCoordinator.resetDefaultPublicKey(key)
-                break
+          if !canLock {
+            for auth in owner_auths {
+              if let auth = auth as? [Any], let key = auth[0] as? String {
+                if [memoKey.public_key, ownKey.public_key, active_key.public_key].contains(key) {
+                  canLock = true
+                  BitShareCoordinator.resetDefaultPublicKey(key)
+                  break
+                }
               }
             }
           }
@@ -311,11 +312,32 @@ class UserManager {
   var fillOrder:BehaviorRelay<[(FillOrder,time:String)]?> = BehaviorRelay(value:nil)
   
   var timer:Repeater?
+
   
   var limitOrderValue:Double = 0
   var limitOrder_buy_value: Double = 0
   
   var limit_reset_address_time : TimeInterval = 0
+  
+  var signerTimer : Repeater?
+  var isSigner : Bool = false
+  
+  var signer : (signerTime : TimeInterval ,signer : String)? {
+    didSet{
+      self.isSigner = true
+      self.timingSigner((self.signer?.signerTime)!)
+    }
+  }
+  
+  
+  func timingSigner(_ sender : TimeInterval) {
+    self.signerTimer = Repeater.once(after: .seconds(sender), {[weak self] (timer) in
+      guard let `self` = self else { return }
+      self.isSigner = false
+    })
+    
+    signerTimer?.start()
+  }
   
   var balance : Double {
     

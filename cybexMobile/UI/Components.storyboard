@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Picker View Controller-->
+        <scene sceneID="BsE-u8-2M0">
+            <objects>
+                <viewController storyboardIdentifier="PickerViewController" id="iyM-ji-1Dw" customClass="PickerViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5p8-jh-9bx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XbN-ep-GIN" customClass="PickerView" customModule="cybexMobile" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="WVR-Ca-A7h"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="c8y-tV-ygr" firstAttribute="trailing" secondItem="XbN-ep-GIN" secondAttribute="trailing" id="EYn-z4-Nc8"/>
+                            <constraint firstItem="XbN-ep-GIN" firstAttribute="top" secondItem="c8y-tV-ygr" secondAttribute="top" id="FX5-M0-zM0"/>
+                            <constraint firstItem="XbN-ep-GIN" firstAttribute="leading" secondItem="c8y-tV-ygr" secondAttribute="leading" id="XXy-Ap-1Ep"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="c8y-tV-ygr"/>
+                    </view>
+                    <connections>
+                        <outlet property="pickerView" destination="XbN-ep-GIN" id="JVs-Dj-UMP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RRp-Zy-5lz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="84" y="7"/>
+        </scene>
+    </scenes>
+</document>

@@ -9,6 +9,7 @@
 import Foundation
 import Localize_Swift
 import SwiftTheme
+import SwiftyJSON
 
 func getChainId(callback:@escaping(String)->()){
   if AppConfiguration.shared.chainID.isEmpty {
@@ -88,10 +89,10 @@ func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTy
   
   WebsocketService.shared.send(request: request)
 }
-  
+
 func calculateAssetRelation(assetID_A_name:String, assetID_B_name:String) -> (base:String, quote:String) {
   let relation:[String] = AssetConfiguration.order_name
-
+  
   
   var indexA = -1
   var indexB = -1
@@ -296,11 +297,11 @@ func getRealAmount(_ id : String ,amount : String) -> Decimal {
   }
   
   let precisionNumber = pow(10, asset.precision)
-
+  
   if let amountDecimal = Decimal(string: amount) {
     return amountDecimal / precisionNumber
   }
-
+  
   return 0
 }
 
@@ -371,8 +372,8 @@ func getOpenedOrderInfo(price:String,amount:String,total:String,fee:String,isBuy
   let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
   
   let result = fee.count == 0 ? (["<name>\(priceTitle): </name><\(priceContentStyle)>\(price)</\(priceContentStyle)>".set(style: "alertContent"),
-    "<name>\(amountTitle): </name><\(contentStyle)>\(amount)</\(contentStyle)>".set(style: "alertContent"),
-  "<name>\(totalTitle): </name><\(contentStyle)>\(total)</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])! :
+                                  "<name>\(amountTitle): </name><\(contentStyle)>\(amount)</\(contentStyle)>".set(style: "alertContent"),
+                                  "<name>\(totalTitle): </name><\(contentStyle)>\(total)</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])! :
     (["<name>\(priceTitle): </name><\(priceContentStyle)>\(price)</\(priceContentStyle)>".set(style: "alertContent"),
       "<name>\(amountTitle): </name><\(contentStyle)>\(amount)</\(contentStyle)>".set(style: "alertContent"),
       "<name>\(totalTitle): </name><\(contentStyle)>\(total)</\(contentStyle)>".set(style: "alertContent"),
@@ -415,3 +416,47 @@ func getTimeZone() -> TimeInterval {
   let timeZone = TimeZone.current
   return TimeInterval(timeZone.secondsFromGMT(for: Date()))
 }
+
+enum fundType : String {
+  case WITHDRAW
+  case DEPOSIT
+}
+
+
+func getWithdrawAndDepositRecords(_ accountName : String, asset : String, fundType : fundType, size : Int, offset : Int, expiration : Int ,callback:@escaping (TradeRecord?)->()) {
+  
+  var paragram = ["op":["accountName":accountName,"asset":asset, "fundType":fundType.rawValue, "size": Int32(size), "offset": Int32(offset),"expiration":expiration],"signer":"" ] as [String : Any]
+  if UserManager.shared.isSigner {
+    paragram["signer"] = UserManager.shared.signer?.signer
+    SimpleHTTPService.fetchRecords(paragram).done { (result) in
+      callback(result)
+      }.catch { (error) in
+        callback(nil)
+    }
+  }else{
+    let time = TimeInterval(expiration) - Date().timeIntervalSince1970
+    let operation = BitShareCoordinator.getRecodeLoginOperation(accountName, asset: asset, fundType: fundType.rawValue, size: Int32(size), offset: Int32(offset), expiration: Int32(expiration))
+    
+    if let operation = operation {
+      let json = JSON(parseJSON: operation)
+      let signer = json["signer"].stringValue
+      paragram["signer"] = signer
+      SimpleHTTPService.recordLogin(paragram).done { (result) in
+        if let result = result {
+          UserManager.shared.signer = (time,result)
+          paragram["signer"] = result
+          SimpleHTTPService.fetchRecords(paragram).done({ (data) in
+            callback(data)
+          }).catch({ (error) in
+            callback(nil)
+          })
+        }else{
+          callback(nil)
+        }
+        }.catch { (error) in
+          callback(nil)
+      }
+    }
+  }
+}
+

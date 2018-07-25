@@ -12,6 +12,7 @@ end
 
 def data
     pod 'ObjectMapper'
+    pod 'HandyJSON'
     pod 'SwiftyJSON'
     pod 'BigInt'
     pod 'GRDB.swift'

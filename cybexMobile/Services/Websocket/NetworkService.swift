@@ -461,6 +461,8 @@ extension WebsocketService: SRWebSocketDelegate {
   
   
   func webSocket(_ webSocket: SRWebSocket, didFailWithError error: Error) {
+    print("websocket didFailWithError \(error)")
+
     isConnecting = false
     
     removeIDs()
