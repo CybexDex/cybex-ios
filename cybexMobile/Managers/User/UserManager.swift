@@ -157,7 +157,7 @@ extension UserManager {
               self.fillOrder.accept(result)
             }
           }, block_num: fillOrder.block_num)
-          WebsocketService.shared.send(request: timeRequest)
+          CybexWebSocketService.shared.send(request: timeRequest)
         }
         
         let transferRecordList = data.transferRecords
@@ -178,12 +178,12 @@ extension UserManager {
               self.transferRecords.accept(records)
             }
           }, block_num: transferRecord.block_num)
-          WebsocketService.shared.send(request: timeRequest)
+          CybexWebSocketService.shared.send(request: timeRequest)
         }
       }
       
     }
-    WebsocketService.shared.send(request: request,filterRepeat: false)
+    CybexWebSocketService.shared.send(request: request)
   }
   
   

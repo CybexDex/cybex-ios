@@ -18,7 +18,7 @@ protocol RechargeRecodeStateManagerProtocol {
     _ subscriber: S, transform: ((Subscription<RechargeRecodeState>) -> Subscription<SelectedState>)?
   ) where S.StoreSubscriberStateType == SelectedState
   
-  func fetchRechargeRecodeList()
+  func fetchRechargeRecodeList(_ accountName : String ,asset : String ,fundType : fundType ,size : Int , offset : Int ,expiration : Int)
   
 }
 
@@ -48,7 +48,7 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
     store.subscribe(subscriber, transform: transform)
   }
   
-  func fetchRechargeRecodeList(_ accountName : String ,asset : String ,fundType : String ,size : Int , offset : Int ,expiration : Int) {
+  func fetchRechargeRecodeList(_ accountName : String ,asset : String ,fundType : fundType ,size : Int , offset : Int ,expiration : Int) {
     getWithdrawAndDepositRecords(accountName, asset: asset, fundType: fundType, size: size, offset: offset, expiration: expiration) { (result) in
       
     }
