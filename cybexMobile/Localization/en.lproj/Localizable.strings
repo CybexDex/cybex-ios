@@ -21,6 +21,12 @@
 "dark" = "Dark";
 "light" = "Light";
 "version" = "Version";
+"frequency" = "Frequency";
+
+"frequency_normal" = "Ordinary Market";
+"frequency_time" = "Real-time Market";
+"frequency_wifi" = "Real-time Market(WiFi Only)";
+
 
 "login.hint" = "Use Cloud Wallet mode to login Account";
 "register.hint" = "Use Cloud Wallet mode to create Account";

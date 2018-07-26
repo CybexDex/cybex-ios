@@ -19,10 +19,12 @@ struct Record : HandyJSON {
   var state : String = ""
   var updateAt : Date!
   
+  
   mutating func mapping(mapper: HelpingMapper) {
     mapper <<<
-      updateAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss")
+      self.updateAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.zzz'Z'")
   }
+  
   init() {}
 }
 
@@ -45,7 +47,6 @@ struct TradeRecord : HandyJSON {
   var size : Int = 0
   var offset : Int = 0
   var records : [Record]!
-  
   
   init() {}
 }

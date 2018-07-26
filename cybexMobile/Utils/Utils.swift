@@ -447,6 +447,7 @@ func getWithdrawAndDepositRecords(_ accountName : String, asset : String, fundTy
           UserManager.shared.signer = (time,result)
           paragram["signer"] = result
           SimpleHTTPService.fetchRecords(paragram).done({ (data) in
+            
             callback(data)
           }).catch({ (error) in
             callback(nil)

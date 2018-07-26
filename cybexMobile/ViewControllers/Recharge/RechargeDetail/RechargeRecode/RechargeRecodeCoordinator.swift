@@ -50,7 +50,7 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
   
   func fetchRechargeRecodeList(_ accountName : String ,asset : String ,fundType : fundType ,size : Int , offset : Int ,expiration : Int) {
     getWithdrawAndDepositRecords(accountName, asset: asset, fundType: fundType, size: size, offset: offset, expiration: expiration) { (result) in
-      
+      self.store.dispatch(FetchDepositRecordsAction(data : result))
     }
   }
   

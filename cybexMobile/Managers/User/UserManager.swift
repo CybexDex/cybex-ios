@@ -362,6 +362,11 @@ class UserManager {
     return self.keys == nil
   }
   
+  var refreshTime : TimeInterval = 3 {
+    didSet {
+      app_coodinator.repeatFetchPairInfo()
+    }
+  }
   var isWithDraw : Bool = false
   var isTrade : Bool = false
   var name : BehaviorRelay<String?> = BehaviorRelay(value: nil)

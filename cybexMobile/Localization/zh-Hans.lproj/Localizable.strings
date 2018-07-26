@@ -13,12 +13,19 @@
 "nav.setting" = "设置";
 "nav.trade"   = "交易";
 
+
 "market" = "交易中心";
 "language" = "语言";
 "theme" = "主题";
 "dark" = "黑色";
 "light" = "白色";
 "version" = "版本";
+"frequency" = "行情刷新频率";
+
+"frequency_normal" = "普通行情";
+"frequency_time" = "实时行情";
+"frequency_wifi" = "仅在WiFi下实时行情";
+
 
 "login.hint" = "登录您的云钱包账户";
 "register.hint" = "创建您的云钱包账户";

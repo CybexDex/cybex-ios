@@ -162,12 +162,11 @@ extension AppCoordinator {
   
   
   func repeatFetchPairInfo(_ priority:Operation.QueuePriority = .normal){
-    
     if self.fetchPariTimer != nil {
       self.fetchPariTimer?.pause()
       self.fetchPariTimer = nil
     }
-    self.fetchPariTimer = Repeater.every(.seconds(3), { [weak self](timer) in
+    self.fetchPariTimer = Repeater.every(.seconds(UserManager.shared.refreshTime), { [weak self](timer) in
       guard let `self` = self else {return}
       let status = RealReachability.sharedInstance().currentReachabilityStatus()
       if status == .RealStatusNotReachable || status  == .RealStatusUnknown || !CybexWebSocketService.shared.checkNetworConnected() {
