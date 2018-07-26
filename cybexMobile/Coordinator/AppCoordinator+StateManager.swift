@@ -175,7 +175,9 @@ extension AppCoordinator {
         
         return
       }
-      self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority:priority)
+      if !CybexWebSocketService.shared.overload() {
+        self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority:priority)
+      }
     })
   }
   
