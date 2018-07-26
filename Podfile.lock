@@ -2,23 +2,23 @@ PODS:
   - Action (3.6.0):
     - RxCocoa (~> 4.2.0)
     - RxSwift (~> 4.2.0)
-  - Alamofire (4.7.2)
+  - Alamofire (4.7.3)
   - AlamofireNetworkActivityLogger (2.3.0):
     - Alamofire (~> 4.6)
-  - Apollo (0.8.0):
-    - Apollo/Core (= 0.8.0)
-  - Apollo/Core (0.8.0)
+  - Apollo (0.9.1):
+    - Apollo/Core (= 0.9.1)
+  - Apollo/Core (0.9.1)
   - AsyncOperation (1.1.0)
   - AwaitKit (5.0.0):
     - PromiseKit (~> 6)
   - BeareadToast (0.0.3)
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
-  - BiometricAuthentication (1.0.6)
+  - BiometricAuthentication (2.0.2)
   - Cache (5.0.0)
   - ChainableAnimations (3.0.1)
-  - Crashlytics (3.10.2):
-    - Fabric (~> 1.7.7)
+  - Crashlytics (3.10.5):
+    - Fabric (~> 1.7.9)
   - CryptoSwift (0.10.0)
   - Device (3.1.0)
   - Differentiator (3.0.2)
@@ -26,25 +26,27 @@ PODS:
   - EasyAnimation (2.0.2)
   - EFQRCode (4.2.2)
   - ESTabBarController-swift (2.6.2)
-  - Fabric (1.7.7)
+  - Fabric (1.7.9)
   - FBRetainCycleDetector (0.1.4)
   - FCUUID (1.3.1):
     - UICKeyChainStore (~> 2.1.0)
-  - GRDB.swift (3.1.0)
+  - GRDB.swift (3.2.0)
+  - GrowingTextView (0.5.6)
   - Guitar (0.4.1)
+  - HandyJSON (4.1.1)
   - IHKeyboardAvoiding (4.2)
-  - IQKeyboardManagerSwift (6.0.4)
+  - IQKeyboardManagerSwift (6.1.1)
   - JSONRPCKit (3.0.0):
     - Result (~> 3.2.0)
   - "Keyboard+LayoutGuide (1.2.2)"
   - KeychainAccess (3.1.1)
-  - Kingfisher (4.8.0)
+  - Kingfisher (4.8.1)
   - KMNavigationBarTransition (1.1.5)
   - LifetimeTracker (1.4.0)
   - Lightning (2.0.0)
   - Localize-Swift (2.0.0)
   - Locksmith (4.0.0)
-  - Macaw (0.9.0):
+  - Macaw (0.9.2):
     - SWXMLHash
   - MJRefresh (3.1.15.3)
   - MLeaksFinder (1.0.0):
@@ -54,36 +56,36 @@ PODS:
   - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
-  - NVActivityIndicatorView (4.2.1):
-    - NVActivityIndicatorView/Presenter (= 4.2.1)
-  - NVActivityIndicatorView/Presenter (4.2.1)
+  - NVActivityIndicatorView (4.3.0):
+    - NVActivityIndicatorView/Presenter (= 4.3.0)
+  - NVActivityIndicatorView/Presenter (4.3.0)
   - ObjectMapper (3.3.0)
   - ObservableArray-RxSwift (0.2.0):
     - RxSwift (~> 4.0)
   - Presentr (1.3.2)
-  - PromiseKit (6.3.3):
-    - PromiseKit/CorePromise (= 6.3.3)
-    - PromiseKit/Foundation (= 6.3.3)
-    - PromiseKit/UIKit (= 6.3.3)
-  - PromiseKit/CorePromise (6.3.3)
-  - PromiseKit/Foundation (6.3.3):
+  - PromiseKit (6.3.4):
+    - PromiseKit/CorePromise (= 6.3.4)
+    - PromiseKit/Foundation (= 6.3.4)
+    - PromiseKit/UIKit (= 6.3.4)
+  - PromiseKit/CorePromise (6.3.4)
+  - PromiseKit/Foundation (6.3.4):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.3.3):
+  - PromiseKit/UIKit (6.3.4):
     - PromiseKit/CorePromise
   - Proposer (1.2.0)
   - QuickLayout (2.0.2)
   - R.swift (4.0.0):
     - R.swift.Library (~> 4.0.0)
   - R.swift.Library (4.0.0)
-  - RealReachability (1.2.2):
-    - RealReachability/Connection (= 1.2.2)
-    - RealReachability/Ping (= 1.2.2)
-  - RealReachability/Connection (1.2.2)
-  - RealReachability/Ping (1.2.2)
-  - Repeat (0.5.4)
+  - RealReachability (1.3.0):
+    - RealReachability/Connection (= 1.3.0)
+    - RealReachability/Ping (= 1.3.0)
+  - RealReachability/Connection (1.3.0)
+  - RealReachability/Ping (1.3.0)
+  - Repeat (0.5.6)
   - Result (3.2.4)
   - ReSwift (4.0.1)
-  - Reveal-SDK (15)
+  - Reveal-SDK (16)
   - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
   - RxDataSources (3.0.2):
@@ -103,34 +105,36 @@ PODS:
     - RxCocoa (>= 4.1.0)
     - RxSwift (>= 4.1.0)
   - RxSwift (4.2.0)
-  - RxSwiftExt (3.2.0):
-    - RxSwiftExt/Core (= 3.2.0)
-  - RxSwiftExt/Core (3.2.0):
+  - RxSwiftExt (3.3.0):
+    - RxSwiftExt/Core (= 3.3.0)
+  - RxSwiftExt/Core (3.3.0):
     - RxSwift (~> 4.0)
-  - RxValidator (0.0.5):
+  - RxValidator (0.0.8):
     - RxCocoa (>= 4.1.0)
     - RxSwift (>= 4.1.0)
   - SDCAlertView (8.1)
   - SipHash (1.2.2)
-  - Siren (3.4.1)
+  - Siren (3.4.3)
   - SocketRocket (0.5.1)
-  - SwiftEntryKit (0.4.2):
+  - SwiftEntryKit (0.5.6):
     - QuickLayout (= 2.0.2)
-  - SwifterSwift (4.3.0):
-    - SwifterSwift/AppKit (= 4.3.0)
-    - SwifterSwift/CoreGraphics (= 4.3.0)
-    - SwifterSwift/CoreLocation (= 4.3.0)
-    - SwifterSwift/Foundation (= 4.3.0)
-    - SwifterSwift/MapKit (= 4.3.0)
-    - SwifterSwift/SwiftStdlib (= 4.3.0)
-    - SwifterSwift/UIKit (= 4.3.0)
-  - SwifterSwift/AppKit (4.3.0)
-  - SwifterSwift/CoreGraphics (4.3.0)
-  - SwifterSwift/CoreLocation (4.3.0)
-  - SwifterSwift/Foundation (4.3.0)
-  - SwifterSwift/MapKit (4.3.0)
-  - SwifterSwift/SwiftStdlib (4.3.0)
-  - SwifterSwift/UIKit (4.3.0)
+  - SwifterSwift (4.4.0):
+    - SwifterSwift/AppKit (= 4.4.0)
+    - SwifterSwift/CoreGraphics (= 4.4.0)
+    - SwifterSwift/CoreLocation (= 4.4.0)
+    - SwifterSwift/Foundation (= 4.4.0)
+    - SwifterSwift/MapKit (= 4.4.0)
+    - SwifterSwift/SpriteKit (= 4.4.0)
+    - SwifterSwift/SwiftStdlib (= 4.4.0)
+    - SwifterSwift/UIKit (= 4.4.0)
+  - SwifterSwift/AppKit (4.4.0)
+  - SwifterSwift/CoreGraphics (4.4.0)
+  - SwifterSwift/CoreLocation (4.4.0)
+  - SwifterSwift/Foundation (4.4.0)
+  - SwifterSwift/MapKit (4.4.0)
+  - SwifterSwift/SpriteKit (4.4.0)
+  - SwifterSwift/SwiftStdlib (4.4.0)
+  - SwifterSwift/UIKit (4.4.0)
   - SwiftHash (2.0.1)
   - SwiftRichString (2.0.1)
   - SwiftTheme (0.4.1)
@@ -142,7 +146,7 @@ PODS:
   - TextFieldEffects (1.4.0)
   - Then (2.3.0)
   - TinyConstraints (3.1.1)
-  - Typist (1.2.1)
+  - Typist (1.2.2)
   - UICKeyChainStore (2.1.1)
   - UIFontComplete (3.0.0)
   - XLPagerTabStrip (8.0.1)
@@ -171,7 +175,9 @@ DEPENDENCIES:
   - Fabric
   - FCUUID
   - GRDB.swift
+  - GrowingTextView
   - Guitar
+  - HandyJSON
   - IHKeyboardAvoiding
   - IQKeyboardManagerSwift
   - JSONRPCKit
@@ -249,7 +255,9 @@ SPEC REPOS:
     - FBRetainCycleDetector
     - FCUUID
     - GRDB.swift
+    - GrowingTextView
     - Guitar
+    - HandyJSON
     - IHKeyboardAvoiding
     - IQKeyboardManagerSwift
     - JSONRPCKit
@@ -332,17 +340,17 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Action: 3d9486d3da02b572b0a034b6c49ac4c3fbcc8b63
-  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireNetworkActivityLogger: 6f3076652ab7fa6c819b59be08ea038d339e36d8
-  Apollo: 66e0f52289551545adb7ecdd994e713fdbae26eb
+  Apollo: 308d9b7b4e2918c17bafb113cfbd65773c29ccd6
   AsyncOperation: db1c082553a0f6332e0bf7d03814acdd3d59e6a7
   AwaitKit: d8a6e30eeb2da916630270b44636b31033388bd8
   BeareadToast: 17ff7f5ac9609b186543d6a45df8f15f78c9ca7a
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
-  BiometricAuthentication: 31cf4595d4e699e73a037604a6edca54beac05f1
+  BiometricAuthentication: ce2f923d4df7a4b340e154137e7b47e544abc1ae
   Cache: fae4826ba52d7a5d9a3a0ad6fe73e3501a82964f
   ChainableAnimations: 12e0a88e72fb554ad4cda38c40474e4d65c972a2
-  Crashlytics: 0360624eea1c978a743feddb2fb1ef8b37fb7a0d
+  Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
   CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
   Device: 8a21a61f5f938a12dadd44d82287996081b6919b
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
@@ -350,54 +358,56 @@ SPEC CHECKSUMS:
   EasyAnimation: 977ef673efe8ce62447807eedb380a77b189dc80
   EFQRCode: 203846c7b135b5f7c1d18bb7923bc32a74c8b363
   ESTabBarController-swift: f0a8679e43df1e60b7b36bbcaf1dc98ba6273c7d
-  Fabric: bda89e242bce1b7b8ab264248cf3407774ce0095
+  Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
-  GRDB.swift: 6a0e323257fdfa75a0eed9c74d5f2f60428bef1a
+  GRDB.swift: c5bb04b25a9931fec937920e913787e45f96124f
+  GrowingTextView: 8958f4fb7419de58dd622021b2d0696487e00e70
   Guitar: 7410dc37f2c12d5b8b67711d771608900c37636e
+  HandyJSON: 3a3de917c4118767ffe41c29b5acba23409649f4
   IHKeyboardAvoiding: 9fbf816b7c3c84911964802ff110d12caf40ebef
-  IQKeyboardManagerSwift: 36dbe324b4f9793f5f41ba5227f3e7c76dfefd50
+  IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
   JSONRPCKit: 50e0dc5e7f873e87f81562feb8836b7d1974da6d
   "Keyboard+LayoutGuide": 4c33aa1749cee1af43c3c32a988b58ad1918bdef
   KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
-  Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
+  Kingfisher: 868c1149679a7ab6869be118faa9b5aed154aaf0
   KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
   LifetimeTracker: 51b52d559ffd4570584996b4b94b8779e525ee62
   Lightning: c6a02102c761491a4957c6265d9161dc5452c3bf
   Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
-  Macaw: 6337ed621a73df10522eaab17f45c1ae0b753dc0
+  Macaw: 6db42cb10c1e018ee940a906b42a1ead5557e080
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
   Moya: a725035953bc1c0eb1be505ab903984501d82440
-  NVActivityIndicatorView: 8068ba3ad39cb44cbaab25d89ff2546b3f092681
+  NVActivityIndicatorView: 963f62bf9f993fcf23218e55958e5b1761b9504c
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   ObservableArray-RxSwift: 905a088f51b1653f7eb55e6887f8a13916618f50
   Presentr: 797ae6ec8904eaba4ec58a4c2065bd66e31569ea
-  PromiseKit: e168626994ae29c38b51252a8d1b0a561fd3f2c7
+  PromiseKit: e1425568123ec844a944c93f2bcb29d511d39cf5
   Proposer: 722fe61822b89f551ae10afe8314067f98c39c28
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
-  RealReachability: 7ea2093650004e5e30635edbf9d29ce9b9091001
-  Repeat: 6e9ea5147b87470c9ceb4b8b090e3be301dd3461
+  RealReachability: eae9c58d2db52fadd8e1cba4b5d4c028454fbc47
+  Repeat: 79fae833c601ef457148ba6ffae276e5c629ab0a
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   ReSwift: f4012c613e13da7398827fe5aebdb938eaed40a3
-  Reveal-SDK: 25e21896c478b60b948f876043f91570d368d23d
+  Reveal-SDK: ed36bdbb3cbf90b94ae5da0dbcb3c7ae6738c51f
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
   RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
   RxGRDB: 30c245cb1ff2d9ca52fe9326cb01757e97ce3202
   RxKeyboard: e5efbaa109c35be909dd888e53de0f0efdf5169e
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
-  RxSwiftExt: 64b7140124629a6a084159735f3714f0fb1c61d6
-  RxValidator: e6ed83f6e3842bf7e56c878e6e4f5d592f5d628d
+  RxSwiftExt: 81afb48ab0602f503147417baeb3989d64c7687d
+  RxValidator: 37303537f39c0a764d7552bd26d27d086cfd61c6
   SDCAlertView: c497f7c812ccc06095d6f772aa282ebe1a216f4a
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
-  Siren: 94e13d40b48d8c0ddac053140d607c36bb487767
+  Siren: e3cf1a93fa0fa73c03452107e95e5c10768d1d08
   SocketRocket: dbb1554b8fc288ef8ef370d6285aeca7361be31e
-  SwiftEntryKit: f6c478d5e6016c255b5f7a8a2cc67c5594e97273
-  SwifterSwift: f3fce2b9fc5b9d8fda6eec33825e5243c60aebba
+  SwiftEntryKit: 1df92ac86d36f3c8c88175687bdd61ccfecbe2ee
+  SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
   SwiftHash: c805de5a434eacfa0dac7210745a50c55d7fe33d
   SwiftRichString: 3b29b5f2eb0eb244497532f2fd2ec26318eae584
   SwiftTheme: 36d71c4eed4b2c401c782cf036e4586c749a8173
@@ -409,13 +419,13 @@ SPEC CHECKSUMS:
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
   Then: ee21c97b85ff6062b9b0080c9abb1eea46743345
   TinyConstraints: c15ce864e9ef87dfd18ee3bd746d510a38d84198
-  Typist: 88b462c1c5adc6d4e8601773fcb0b7d7113d18af
+  Typist: 61acc798767f15bf24c61fb9a43d285974380f37
   UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
   UIFontComplete: 5b0f59a83308816c610164b79a2540b3520f9b72
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: c2fe9d1332959156103ee159d93ae4597ab79900
+PODFILE CHECKSUM: 2366b50854634b41f4def83df299d904a1b5a6ef
 
 COCOAPODS: 1.5.3
