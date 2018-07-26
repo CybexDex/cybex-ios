@@ -102,7 +102,7 @@ class CBKLineDrawView: UIView {
         // 展示的个数
 
         if drawStartIndex == nil {
-            drawStartIndex = configuration.dataSource.klineModels.count - drawCount - 1
+            drawStartIndex = configuration.dataSource.klineModels.count - drawCount
         }
 
         if lastOffsetIndex != nil {
@@ -110,8 +110,8 @@ class CBKLineDrawView: UIView {
         }
 
         drawStartIndex! = drawStartIndex! > 0 ? drawStartIndex! : 0
-        if drawStartIndex! > configuration.dataSource.klineModels.count - drawCount - 1 {
-            drawStartIndex! = configuration.dataSource.klineModels.count - drawCount - 1
+        if drawStartIndex! > configuration.dataSource.klineModels.count - drawCount {
+            drawStartIndex! = configuration.dataSource.klineModels.count - drawCount
         }
 
         configuration.dataSource.drawKLineModels.removeAll()
