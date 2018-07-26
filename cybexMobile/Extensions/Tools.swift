@@ -242,16 +242,26 @@ extension Decimal { // 解决double 计算精度丢失
 }
 
 extension Double {
-  func string(digits:Int = 0) -> String {//会四舍五入
+  func string(digits:Int = 0) -> String {
+    var decimal = Decimal(floatLiteral: self)
+
+    var drounded = Decimal()
+    NSDecimalRound(&drounded, &decimal, digits, .plain)
+    
     if digits == 0 {
-      return "\(self)"
+      return drounded.stringValue
     }
     
-    let mul = pow(10, digits.double)
+    var formatterString : String = "0."
+  
+    for _ in 0 ..< digits {
+      formatterString.append("0")
+    }
+
+    let formatter = NumberFormatter()
+    formatter.positiveFormat = formatterString
     
-    let floornum = Foundation.floor(self * mul) / mul
-    
-    return String(format: "%.\(digits)f", floornum)
+    return formatter.string(from: NSDecimalNumber(decimal: drounded)) ?? "0"
   }
   
   func preciseString() -> String {//解决显示科学计数法的格式
@@ -262,10 +272,11 @@ extension Double {
   
   func tradePrice() -> (price:String, pricision:Int) {
     var pricision = 0
-    if self < 0.0001 {
+    let decimal = Decimal(floatLiteral: self)
+    if decimal < Decimal(floatLiteral: 0.0001) {
       pricision = 8
     }
-    else if self < 1 {
+    else if decimal < Decimal(floatLiteral: 1) {
       pricision = 6
     }
     else {
