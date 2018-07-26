@@ -54,6 +54,6 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
       
       print("results : \(results)")
     }, block_num: block_num)
-    WebsocketService.shared.send(request: request)
+    CybexWebSocketService.shared.send(request: request)
   }
 }

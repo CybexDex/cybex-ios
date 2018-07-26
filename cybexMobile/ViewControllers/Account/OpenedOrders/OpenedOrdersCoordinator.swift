@@ -66,7 +66,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
                 callback(false)
               }
             }, jsonstr: jsonStr)
-            WebsocketService.shared.send(request: request)
+            CybexWebSocketService.shared.send(request: request)
           }
         }
       }

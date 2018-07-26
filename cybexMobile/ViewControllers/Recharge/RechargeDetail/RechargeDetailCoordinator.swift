@@ -85,7 +85,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         self.store.dispatch(FetchWithdrawMemokey(data:account.memo_key))
       }
     }
-    WebsocketService.shared.send(request: requeset)
+    CybexWebSocketService.shared.send(request: requeset)
   }
   
   
@@ -170,11 +170,11 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                   callback(data)
                 }
               }, jsonstr: jsonstr!)
-              WebsocketService.shared.send(request: withdrawRequest)
+              CybexWebSocketService.shared.send(request: withdrawRequest)
             }
           }
         }
-        WebsocketService.shared.send(request: requeset)
+        CybexWebSocketService.shared.send(request: requeset)
       }
     }
   }

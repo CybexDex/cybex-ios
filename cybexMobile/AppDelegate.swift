@@ -22,6 +22,7 @@ import Fabric
 import Crashlytics
 import SwiftRichString
 import SwiftyBeaver
+import AlamofireNetworkActivityLogger
 
 let log = SwiftyBeaver.self
 
@@ -34,6 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Fabric.with([Crashlytics.self, Answers.self])
     EasyAnimation.enable()
     
+    NetworkActivityLogger.shared.startLogging()
+    NetworkActivityLogger.shared.level = .error
+
     let console = ConsoleDestination()
     log.addDestination(console)
 //    let file = FileDestination()
@@ -71,13 +75,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   
   func applicationWillResignActive(_ application: UIApplication) {
-    if WebsocketService.shared.checkNetworConnected() {
+    if CybexWebSocketService.shared.checkNetworConnected() {
       if let vc = app_coodinator.startLoadingVC {
         app_coodinator.startLoadingVC = nil
         vc.endLoading()
       }
-      WebsocketService.shared.disConnect()
     }
+    CybexWebSocketService.shared.disconnect()
+
   }
   
   func applicationDidEnterBackground(_ application: UIApplication) {
@@ -91,12 +96,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let status = RealReachability.sharedInstance().currentReachabilityStatus()
     let reactable = (status != .RealStatusNotReachable && status != .RealStatusUnknown)
     
-    if !WebsocketService.shared.checkNetworConnected() && !WebsocketService.shared.needAutoConnect && reactable {//避免第一次 不是主动断开的链接
+    if !CybexWebSocketService.shared.checkNetworConnected() && !CybexWebSocketService.shared.needAutoConnect && reactable {//避免第一次 不是主动断开的链接
       if let vc = app_coodinator.topViewController() {
         app_coodinator.startLoadingVC = vc
         vc.startLoading()
       }
-      WebsocketService.shared.reConnect()
+      CybexWebSocketService.shared.connect()
     }
   }
   
@@ -135,7 +140,7 @@ extension AppDelegate {
       .subscribe(onNext: { (s) in
         if let vc = app_coodinator.startLoadingVC, !(vc is HomeViewController) {
           app_coodinator.startLoadingVC = nil
-          vc.endLoading()
+//          vc.endLoading()
         }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
@@ -143,7 +148,7 @@ extension AppDelegate {
   func handlerNetworkChanged() {
     let status = RealReachability.sharedInstance().currentReachabilityStatus()
     if status == .RealStatusNotReachable || status  == .RealStatusUnknown {
-      WebsocketService.shared.disConnect()
+      CybexWebSocketService.shared.disconnect()
       if let vc = app_coodinator.startLoadingVC {
         app_coodinator.startLoadingVC = nil
         vc.endLoading()
@@ -152,14 +157,15 @@ extension AppDelegate {
       _ = BeareadToast.showError(text: R.string.localizable.noNetwork.key.localized(), inView: self.window!, hide:2)
     }
     else {
-      let connected = WebsocketService.shared.checkNetworConnected()
+      let connected = CybexWebSocketService.shared.checkNetworConnected()
       if !connected {
         if let vc = app_coodinator.topViewController() {
           app_coodinator.startLoadingVC = vc
           
           vc.startLoading()
         }
-        WebsocketService.shared.reConnect()
+//        CybexWebSocketService.shared.reConnect()
+        CybexWebSocketService.shared.connect()
       }
     
     }

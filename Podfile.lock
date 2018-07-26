@@ -3,9 +3,12 @@ PODS:
     - RxCocoa (~> 4.2.0)
     - RxSwift (~> 4.2.0)
   - Alamofire (4.7.2)
+  - AlamofireNetworkActivityLogger (2.3.0):
+    - Alamofire (~> 4.6)
   - Apollo (0.8.0):
     - Apollo/Core (= 0.8.0)
   - Apollo/Core (0.8.0)
+  - AsyncOperation (1.1.0)
   - AwaitKit (5.0.0):
     - PromiseKit (~> 6)
   - BeareadToast (0.0.3)
@@ -149,7 +152,9 @@ PODS:
 
 DEPENDENCIES:
   - Action
+  - AlamofireNetworkActivityLogger
   - Apollo
+  - AsyncOperation
   - AwaitKit
   - BeareadToast (from `https://github.com/phpmaple/BeareadToast`)
   - BigInt
@@ -224,7 +229,9 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Action
     - Alamofire
+    - AlamofireNetworkActivityLogger
     - Apollo
+    - AsyncOperation
     - AwaitKit
     - BigInt
     - BiometricAuthentication
@@ -326,7 +333,9 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Action: 3d9486d3da02b572b0a034b6c49ac4c3fbcc8b63
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  AlamofireNetworkActivityLogger: 6f3076652ab7fa6c819b59be08ea038d339e36d8
   Apollo: 66e0f52289551545adb7ecdd994e713fdbae26eb
+  AsyncOperation: db1c082553a0f6332e0bf7d03814acdd3d59e6a7
   AwaitKit: d8a6e30eeb2da916630270b44636b31033388bd8
   BeareadToast: 17ff7f5ac9609b186543d6a45df8f15f78c9ca7a
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
@@ -407,6 +416,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: ea6b18fd0e9abd862db495bd66903f4677ac9f0f
+PODFILE CHECKSUM: c2fe9d1332959156103ee159d93ae4597ab79900
 
 COCOAPODS: 1.5.3

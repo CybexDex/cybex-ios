@@ -61,7 +61,7 @@ extension AppCoordinator: AppStateManagerProtocol {
             
           }
         }
-        WebsocketService.shared.send(request: request)
+        CybexWebSocketService.shared.send(request: request)
       }
       
     }
@@ -186,7 +186,7 @@ extension AppCoordinator {
     self.fetchPariTimer = Repeater.every(.seconds(3), { [weak self](timer) in
       guard let `self` = self else {return}
       let status = RealReachability.sharedInstance().currentReachabilityStatus()
-      if status == .RealStatusNotReachable || status  == .RealStatusUnknown {
+      if status == .RealStatusNotReachable || status  == .RealStatusUnknown || !CybexWebSocketService.shared.checkNetworConnected() {
         timer.pause()
         
         return
@@ -211,7 +211,7 @@ extension AppCoordinator {
         var count = 0
         for base in AssetConfiguration.market_base_assets {
           SimpleHTTPService.requestMarketList(base:base).done({ (pair) in
-            log.error("requestMarketList base \(base)  pairs  \(pair.count)")
+//            log.error("requestMarketList base \(base)  pairs  \(pair.count)")
             let piece_pair = pair.filter({ (p) -> Bool in
               return AssetConfiguration.shared.unique_ids.contains([p.base, p.quote])
             })
@@ -224,6 +224,12 @@ extension AppCoordinator {
             }
           }).cauterize()
         }
+        
+        
+        if app_coodinator.fetchPariTimer == nil || !(app_coodinator.fetchPariTimer!.state.isRunning){
+          AppConfiguration.shared.appCoordinator.repeatFetchPairInfo()
+        }
+
       }
       
     }

@@ -70,7 +70,6 @@
 		29C911F371D5F143FB814E54626700D5 /* RechargeSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F999943C67E4ED6E626A8BA802C612 /* RechargeSegment.swift */; };
 		2BE29FBC5EBC24621C616DCA7C58F109 /* FAQCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6517201700BBB3CC3C3F12A7F3C9D /* FAQCoordinator.swift */; };
 		2BF75EA384934AE269618BFA4D315DA3 /* cmath in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5CC90CB20E424307D263480BB807D /* cmath */; };
-		2C164AFCD61889DC510C161A5249F16B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1982C05DA228E64E90D9A507B179D31 /* NetworkService.swift */; };
 		2E3DB3499E75C0D06068C979CD788B00 /* TradeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B134B85F2EADB461B1D5BB2F4C52C1A7 /* TradeReducers.swift */; };
 		305DB17562E3D02F04E0122C1C4674A4 /* AccountAssetOperationsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C7F5E00C093647E89239BDBF84218 /* AccountAssetOperationsItemView.swift */; };
 		31C896C3EDB9257E2EBC0DAFC5097A7B /* SettingDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00FB3F4329945CA3897EC4D9DB48C26 /* SettingDetailActions.swift */; };
@@ -256,6 +255,7 @@
 		72EC6A5920F4612200CEAFF6 /* RechargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A5720F4612100CEAFF6 /* RechargeView.swift */; };
 		72EC6A5A20F4612200CEAFF6 /* RechargeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5820F4612200CEAFF6 /* RechargeView.xib */; };
 		7323B4B02A3A6EFE54C1B30D7491D953 /* MyHistoryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E17D1C068A4ED09DD447E3434E5E550 /* MyHistoryCellView.xib */; };
+		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
 		74270D4B512CD81AA7159B135F944B0A /* ExchangeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D294438F1AC7ABE633549FA9CD2FDF2 /* ExchangeView.xib */; };
 		751D31DB62BFC9F2FC1A0EFC4C23A801 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D9F26ADE20F5811273E4B32DED357 /* SettingViewController.swift */; };
@@ -5741,6 +5741,7 @@
 		7339798545DEB848EA63717020DCCAA9 /* properties.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = properties.hpp; sourceTree = "<group>"; };
 		733BBFA91394DEE24D0EE47EF4C35F04 /* end.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = end.hpp; sourceTree = "<group>"; };
 		7344DCB142B3E51B91B0A7D12614C9A2 /* pool_construct_simple.ipp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pool_construct_simple.ipp; sourceTree = "<group>"; };
+		73481176210815BF000BF1B8 /* CybexWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebSocketService.swift; sourceTree = "<group>"; };
 		7355BF528D49DAD350032FC147C8FA32 /* function.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = function.hpp; sourceTree = "<group>"; };
 		735EA8642354E31CA8166DA44203A684 /* shift_right.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shift_right.hpp; sourceTree = "<group>"; };
 		735FA00E9301F0DB45760B1C0D7FEC09 /* extreme_value.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = extreme_value.hpp; sourceTree = "<group>"; };
@@ -11447,7 +11448,6 @@
 		F195AFD1F69759C40D756670A4500C90 /* property_serialize.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = property_serialize.hpp; sourceTree = "<group>"; };
 		F1964E6F4CB8684468C9288C41E08428 /* karma_kleene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = karma_kleene.hpp; sourceTree = "<group>"; };
 		F196B0AA286723A35C72695BC9A188A8 /* cray.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cray.hpp; sourceTree = "<group>"; };
-		F1982C05DA228E64E90D9A507B179D31 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		F19A43255FDBAFA9CBE7962ED803CA99 /* haiku.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = haiku.h; sourceTree = "<group>"; };
 		F1A796B9F013511A53C8FD60F6729570 /* element_equal.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = element_equal.hpp; sourceTree = "<group>"; };
 		F1B30B8C9243760C377457B9498D49B8 /* attr_output_impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = attr_output_impl.hpp; sourceTree = "<group>"; };
@@ -24761,7 +24761,7 @@
 			children = (
 				EBFEECDF952B5773D80F2F6B4F9D391F /* API */,
 				E3BE4472AAF8DE509EE3833B137B92B3 /* JsonRPCGenerator.swift */,
-				F1982C05DA228E64E90D9A507B179D31 /* NetworkService.swift */,
+				73481176210815BF000BF1B8 /* CybexWebSocketService.swift */,
 			);
 			path = Websocket;
 			sourceTree = "<group>";
@@ -32655,7 +32655,9 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Action/Action.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
+				"${BUILT_PRODUCTS_DIR}/AsyncOperation/AsyncOperation.framework",
 				"${BUILT_PRODUCTS_DIR}/AwaitKit/AwaitKit.framework",
 				"${BUILT_PRODUCTS_DIR}/BeareadToast/BeareadToast.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
@@ -32737,7 +32739,9 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Action.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireNetworkActivityLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AsyncOperation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AwaitKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BeareadToast.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
@@ -33028,7 +33032,6 @@
 				031F69CC95D2906A4F8F4063776327F6 /* NSObject+Extensions.swift in Sources */,
 				009625463316961A6BB07A49EB88D5D5 /* NavCoordinator.swift in Sources */,
 				8E9524F703A8466022C2D28281507174 /* NetworkBroadcastAPI.swift in Sources */,
-				2C164AFCD61889DC510C161A5249F16B /* NetworkService.swift in Sources */,
 				AC784AB46820FFF7BD6DBFCD8132C403 /* NoticeBoardView.swift in Sources */,
 				41AC38B585A5D36715B3161B49381FB5 /* NoticeBoardViewController.swift in Sources */,
 				CC7617050BB0397377BB75D99DE68B3A /* OpenedOrdersActions.swift in Sources */,
@@ -33129,6 +33132,7 @@
 				C2728D465891E65690FBF4E868796852 /* UIView+Extensions.swift in Sources */,
 				01D3990C8F03B94C2207F37FF3C7C895 /* UIViewController+Extension.swift in Sources */,
 				696EB2454DD46A9C497C7C719B12BF12 /* UserDefaults.swift in Sources */,
+				73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */,
 				1EE747D219462D96F1597B374E8338E8 /* UserManager.swift in Sources */,
 				20C5C352A5EE76CE53F6F1F8C7CE1FB6 /* Utils.swift in Sources */,
 				E3A0DE7C4852EA18DEEC292ADE0A8F49 /* Vesting.swift in Sources */,
