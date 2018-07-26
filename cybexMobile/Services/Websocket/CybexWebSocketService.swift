@@ -63,7 +63,7 @@ class CybexWebSocketService: NSObject {
   private override init() {
     super.init()
     self.queue = OperationQueue()
-    self.queue.maxConcurrentOperationCount = 1
+    self.queue.maxConcurrentOperationCount = 3
     self.queue.isSuspended = true
     
     self.batchFactory = BatchFactory(version: "2.0", idGenerator:self.idGenerator)
@@ -114,6 +114,10 @@ class CybexWebSocketService: NSObject {
   }
   
   //MARK: - Public Methods -
+  
+  func overload() -> Bool {
+    return self.queue.operations.count > 40
+  }
   
   func connect() {
     if !self.isConnecting {
@@ -201,7 +205,7 @@ class CybexWebSocketService: NSObject {
       }]
     
     for request in registerID_re {
-      send(request: request, priority:.high)
+      send(request: request, priority:.veryHigh)
     }
   }
   
@@ -252,12 +256,13 @@ class CybexWebSocketService: NSObject {
       
       }
     }
-    
-    if request is GetMarketHistoryRequest {
-      operation.queuePriority = .low
+
+    operation.queuePriority = priority
+    if priority == .veryHigh || priority == .high {
+      operation.qualityOfService = .userInteractive
     }
     else {
-      operation.queuePriority = priority
+      operation.qualityOfService = .default
     }
     
     if let idInt = id.int, idInt > 3, self.ids.count < 3 {
