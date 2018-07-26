@@ -95,7 +95,7 @@ extension AppCoordinator: AppStateManagerProtocol {
 }
 
 extension AppCoordinator {
-  func request24hMarkets(_ pairs: [Pair], sub: Bool = true ,totalTime:Double = 3,splits:Int = 3) {
+  func request24hMarkets(_ pairs: [Pair], sub: Bool = true) {
     let now = Date()
     let curTime = now.timeIntervalSince1970
     
@@ -109,9 +109,6 @@ extension AppCoordinator {
       }
       return true
     }
-    //    log.warning("firstFetchPairsCount \(firstFetchPairsCount)")
-    //    log.warning("secondFetchPairsCount \(secondFetchPairsCount)")
-    //    log.warning("thirdFetchPairsCount \(thirdFetchPairsCount)")
     
     if self.firstFetchPairsCount != 0 || self.secondFetchPairsCount != 0 || self.thirdFetchPairsCount != 0 {
       return
@@ -125,9 +122,8 @@ extension AppCoordinator {
       self.thirdFetchPairsCount = filterPairs.count - 2 * length - 1
       for index in 0...length - 1 {
         let pair = filterPairs[index]
-        //        log.warning("first")
         AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
-          //          log.warning("first response")
+          
           self.firstFetchPairsCount -= 1
         }
       }
@@ -135,9 +131,7 @@ extension AppCoordinator {
         for index in length...2*length {
           
           let pair = filterPairs[index]
-          //          log.warning("second")
           AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
-            //            log.warning("second response")
             
             self.secondFetchPairsCount -= 1
           }
@@ -147,10 +141,8 @@ extension AppCoordinator {
         for index in 2*length+1...filterPairs.count - 1 {
           
           let pair = filterPairs[index]
-          //          log.warning("third")
-          
           AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
-            //            log.warning("third response")
+            
             self.thirdFetchPairsCount -= 1
           }
         }
@@ -160,18 +152,6 @@ extension AppCoordinator {
         AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub)
       }
     }
-    
-    
-    //    for pair in filterPairs {
-    //      if let refreshTimes = app_data.pairsRefreshTimes, let oldTime = refreshTimes[pair] {
-    //        if curTime - oldTime < 5 {
-    //          continue
-    //        }
-    //
-    //      }
-    //
-    //      AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub)
-    //    }
     
   }
   
@@ -211,7 +191,7 @@ extension AppCoordinator {
         var count = 0
         for base in AssetConfiguration.market_base_assets {
           SimpleHTTPService.requestMarketList(base:base).done({ (pair) in
-//            log.error("requestMarketList base \(base)  pairs  \(pair.count)")
+
             let piece_pair = pair.filter({ (p) -> Bool in
               return AssetConfiguration.shared.unique_ids.contains([p.base, p.quote])
             })
@@ -225,11 +205,10 @@ extension AppCoordinator {
           }).cauterize()
         }
         
-        
         if app_coodinator.fetchPariTimer == nil || !(app_coodinator.fetchPariTimer!.state.isRunning){
           AppConfiguration.shared.appCoordinator.repeatFetchPairInfo()
         }
-
+        
       }
       
     }
