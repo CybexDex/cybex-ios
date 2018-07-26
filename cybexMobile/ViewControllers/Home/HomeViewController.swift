@@ -15,6 +15,7 @@ import ChainableAnimations
 import TableFlip
 import SwiftyJSON
 import TinyConstraints
+import Repeat
 
 enum view_type : Int{
   case homeContent    = 1
@@ -22,7 +23,8 @@ enum view_type : Int{
 }
 class HomeViewController: BaseViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
 
-  
+  var timer:Timer?
+
   var coordinator: (HomeCoordinatorProtocol & HomeStateManagerProtocol)?
   
   var pair: Pair? {
@@ -41,6 +43,22 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
   var contentView : HomeContentView?
   var businessTitleView : BusinessTitleView?
   
+  var base:String {
+    if self.VC_TYPE == 1 {
+      if let titleView = self.contentView {
+        return AssetConfiguration.market_base_assets[titleView.currentBaseIndex]
+      }
+      return ""
+    }
+    else {
+      if let titleView = self.businessTitleView {
+        return AssetConfiguration.market_base_assets[titleView.currentBaseIndex]
+      }
+      return ""
+
+    }
+    
+  }
   var VC_TYPE : Int = 1 {
     didSet {
       switchContainerView()
@@ -101,20 +119,31 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
   override func configureObserveState() {
     commonObserveState()
     
-    app_data.data.asObservable()
-      .skip(1)
-//      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
-      .distinctUntilChanged()
-      .throttle(3, latest: true, scheduler: MainScheduler.instance)
-      .subscribe(onNext: { (s) in
-        if app_data.data.value.count == 0 {
-          return
-        }
-        if app_coodinator.fetchPariTimer == nil || !(app_coodinator.fetchPariTimer!.state.isRunning){
-          AppConfiguration.shared.appCoordinator.repeatFetchPairInfo()
-        }
-        self.performSelector(onMainThread: #selector(self.refreshTableView), with: nil, waitUntilDone: false)// non block tracking mode
+    app_data.data.asObservable().filter({[weak self] (s) -> Bool in
+      guard let `self` = self else { return false}
+
+      let buckets = s.filter { (homebucket) -> Bool in
+        return homebucket.base == self.base
+      }
+      
+      if buckets.count == AssetConfiguration.shared.asset_ids.filter( { $0.base == self.base} ).count, buckets.count != 0 {
+        return true
+      }
+      
+      return false
+    }).take(1)
+    .subscribe(onNext: {[weak self] (s) in
+      guard let `self` = self else { return }
+      
+      self.updateUI()
+
+      self.timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.updateUI), userInfo: nil, repeats: true)
+      
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+  }
+  
+  @objc func updateUI() {
+    self.performSelector(onMainThread: #selector(self.refreshTableView), with: nil, waitUntilDone: false)// non block tracking mode
   }
   
   @objc func refreshTableView() {

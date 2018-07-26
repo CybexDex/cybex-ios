@@ -13,43 +13,45 @@ protocol RechargeRecodeCoordinatorProtocol {
 }
 
 protocol RechargeRecodeStateManagerProtocol {
-    var state: RechargeRecodeState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<RechargeRecodeState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
+  var state: RechargeRecodeState { get }
+  func subscribe<SelectedState, S: StoreSubscriber>(
+    _ subscriber: S, transform: ((Subscription<RechargeRecodeState>) -> Subscription<SelectedState>)?
+  ) where S.StoreSubscriberStateType == SelectedState
   
   func fetchRechargeRecodeList()
-
+  
 }
 
 class RechargeRecodeCoordinator: AccountRootCoordinator {
-    
-    lazy var creator = RechargeRecodePropertyActionCreate()
-    
-    var store = Store<RechargeRecodeState>(
-        reducer: RechargeRecodeReducer,
-        state: nil,
-        middleware:[TrackingMiddleware]
-    )
+  
+  lazy var creator = RechargeRecodePropertyActionCreate()
+  
+  var store = Store<RechargeRecodeState>(
+    reducer: RechargeRecodeReducer,
+    state: nil,
+    middleware:[TrackingMiddleware]
+  )
 }
 
 extension RechargeRecodeCoordinator: RechargeRecodeCoordinatorProtocol {
-    
+  
 }
 
 extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
-    var state: RechargeRecodeState {
-        return store.state
-    }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<RechargeRecodeState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-  
-  func fetchRechargeRecodeList() {
-    
+  var state: RechargeRecodeState {
+    return store.state
   }
-    
+  
+  func subscribe<SelectedState, S: StoreSubscriber>(
+    _ subscriber: S, transform: ((Subscription<RechargeRecodeState>) -> Subscription<SelectedState>)?
+    ) where S.StoreSubscriberStateType == SelectedState {
+    store.subscribe(subscriber, transform: transform)
+  }
+  
+  func fetchRechargeRecodeList(_ accountName : String ,asset : String ,fundType : String ,size : Int , offset : Int ,expiration : Int) {
+    getWithdrawAndDepositRecords(accountName, asset: asset, fundType: fundType, size: size, offset: offset, expiration: expiration) { (result) in
+      
+    }
+  }
+  
 }

@@ -8,6 +8,7 @@ def network
     pod 'Kingfisher'
     pod 'RealReachability'
     pod 'Apollo'
+    pod 'AlamofireNetworkActivityLogger'
 end
 
 def data
@@ -49,6 +50,8 @@ def architecture
    pod 'UIFontComplete'
    pod 'RxCocoa'
    pod 'AwaitKit'
+   
+   pod 'AsyncOperation'
 end
 
 def permission

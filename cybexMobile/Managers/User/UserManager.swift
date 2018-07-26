@@ -123,7 +123,7 @@ extension UserManager {
           self.handlerFullAcount(data)
         }
       }
-      WebsocketService.shared.send(request: request)
+      CybexWebSocketService.shared.send(request: request)
     }
   }
   
@@ -217,11 +217,11 @@ extension UserManager {
               self.fillOrder.accept(result)
             }
           }, block_num: fillOrder.block_num)
-          WebsocketService.shared.send(request: timeRequest)
+          CybexWebSocketService.shared.send(request: timeRequest)
         }
       }
     }
-    WebsocketService.shared.send(request: request)
+    CybexWebSocketService.shared.send(request: request)
   }
   
   func checkUserName(_ name:String) -> Promise<Bool> {
@@ -234,7 +234,7 @@ extension UserManager {
       
     }
     
-    WebsocketService.shared.send(request: request)
+    CybexWebSocketService.shared.send(request: request)
     
     return promise
   }
@@ -303,7 +303,7 @@ extension UserManager {
         }
         completion(false, nil)
       }
-      WebsocketService.shared.send(request: request, filterRepeat:false)
+      CybexWebSocketService.shared.send(request: request)
     }
       
     else{

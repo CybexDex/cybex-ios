@@ -186,12 +186,12 @@ class AppPropertyActionCreate: LoadingActionCreator {
  
       
       if sub {
-        let subRequest = SubscribeMarketRequest(ids: [params.firstAssetId, params.secondAssetId]) { response in
-          if let id = response as? Int {
-            store.dispatch(SubscribeSuccess(pair: Pair(base: params.firstAssetId, quote: params.secondAssetId), id: id))
-          }
-        }
-        WebsocketService.shared.send(request: subRequest)
+//        let subRequest = SubscribeMarketRequest(ids: [params.firstAssetId, params.secondAssetId]) { response in
+//          if let id = response as? Int {
+//            store.dispatch(SubscribeSuccess(pair: Pair(base: params.firstAssetId, quote: params.secondAssetId), id: id))
+//          }
+//        }
+//        CybexWebSocketService.shared.send(request: subRequest)
       }
       
       return nil
@@ -207,7 +207,7 @@ class AppPropertyActionCreate: LoadingActionCreator {
       }
     }
     
-    WebsocketService.shared.send(request: request)
+    CybexWebSocketService.shared.send(request: request)
   }
   
   func cycleFetch(_ asset:Bucket, params:AssetPairQueryParams, callback:CommonAnyCallback?) {
