@@ -201,7 +201,7 @@ class CybexWebSocketService: NSObject {
       }]
     
     for request in registerID_re {
-      send(request: request, priority:.high)
+      send(request: request, priority:.veryHigh)
     }
   }
   
@@ -252,13 +252,8 @@ class CybexWebSocketService: NSObject {
       
       }
     }
-    
-    if request is GetMarketHistoryRequest {
-      operation.queuePriority = .low
-    }
-    else {
-      operation.queuePriority = priority
-    }
+
+    operation.queuePriority = priority
     
     if let idInt = id.int, idInt > 3, self.ids.count < 3 {
       registerOperations().forEach { (op) in

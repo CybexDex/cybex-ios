@@ -14,6 +14,7 @@ import RxSwift
 import CryptoSwift
 import SwiftRichString
 import SwifterSwift
+import Repeat
 
 class AccountViewController: BaseViewController {
   
@@ -23,6 +24,8 @@ class AccountViewController: BaseViewController {
   
   var dataArray: [AccountViewModel] = []
   
+  var testTime : TimeInterval = 3
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -30,6 +33,13 @@ class AccountViewController: BaseViewController {
     setupEvent()
     if  UserManager.shared.isLoginIn {
     }
+    testRepeatAction()
+  }
+  
+  func testRepeatAction(){
+    Repeater.every(.seconds(testTime), { [weak self](timer) in
+      print("test")
+    })
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -98,7 +108,8 @@ class AccountViewController: BaseViewController {
   
   // 跳转到设置界面
   override func rightAction(_ sender: UIButton) {
-    self.coordinator?.openSetting()
+    self.testTime = 10
+//    self.coordinator?.openSetting()
   }
   
   

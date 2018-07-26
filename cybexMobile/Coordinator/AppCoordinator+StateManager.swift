@@ -19,16 +19,16 @@ extension AppCoordinator: AppStateManagerProtocol {
     store.subscribe(subscriber, transform: transform)
   }
   
-  func fetchData(_ params: AssetPairQueryParams, sub: Bool = true,callback:@escaping ()->()) {
-    store.dispatch(creator.fetchMarket(with: sub, params: params, callback: { [weak self] (assets) in
+  func fetchData(_ params: AssetPairQueryParams, sub: Bool = true, priority: Foundation.Operation.QueuePriority = .normal, callback:@escaping ()->()) {
+    store.dispatch(creator.fetchMarket(with: sub, params: params, priority:priority, callback: { [weak self] (assets) in
       guard let `self` = self else { return }
       callback()
       self.store.dispatch(MarketsFetched(pair: params, assets: assets))
     }))
   }
   
-  func fetchData(_ params: AssetPairQueryParams, sub: Bool = true) {
-    store.dispatch(creator.fetchMarket(with: sub, params: params, callback: { [weak self] (assets) in
+  func fetchData(_ params: AssetPairQueryParams, sub: Bool = true, priority: Foundation.Operation.QueuePriority = .normal) {
+    store.dispatch(creator.fetchMarket(with: sub, params: params, priority: priority, callback: { [weak self] (assets) in
       guard let `self` = self else { return }
       
       self.store.dispatch(MarketsFetched(pair: params, assets: assets))
@@ -36,7 +36,7 @@ extension AppCoordinator: AppStateManagerProtocol {
   }
   
   func fetchKline(_ params: AssetPairQueryParams, gap: candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
-    store.dispatch(creator.fetchMarket(with: false, params: params, callback: { [weak self] (assets) in
+    store.dispatch(creator.fetchMarket(with: false, params: params, priority:.high , callback: { [weak self] (assets) in
       guard let `self` = self else { return }
       
       self.store.dispatch(kLineFetched(pair: Pair(base: params.firstAssetId, quote: params.secondAssetId), stick: gap, assets: assets))
@@ -61,7 +61,7 @@ extension AppCoordinator: AppStateManagerProtocol {
             
           }
         }
-        CybexWebSocketService.shared.send(request: request)
+        CybexWebSocketService.shared.send(request: request, priority:.veryHigh)
       }
       
     }
@@ -95,7 +95,8 @@ extension AppCoordinator: AppStateManagerProtocol {
 }
 
 extension AppCoordinator {
-  func request24hMarkets(_ pairs: [Pair], sub: Bool = true) {
+
+  func request24hMarkets(_ pairs: [Pair], sub: Bool = true ,totalTime:Double = 3,splits:Int = 3, priority:Operation.QueuePriority = .normal ) {
     let now = Date()
     let curTime = now.timeIntervalSince1970
     
@@ -122,8 +123,9 @@ extension AppCoordinator {
       self.thirdFetchPairsCount = filterPairs.count - 2 * length - 1
       for index in 0...length - 1 {
         let pair = filterPairs[index]
-        AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
-          
+
+        AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority) {
+
           self.firstFetchPairsCount -= 1
         }
       }
@@ -131,7 +133,8 @@ extension AppCoordinator {
         for index in length...2*length {
           
           let pair = filterPairs[index]
-          AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
+
+          AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority) {
             
             self.secondFetchPairsCount -= 1
           }
@@ -141,15 +144,16 @@ extension AppCoordinator {
         for index in 2*length+1...filterPairs.count - 1 {
           
           let pair = filterPairs[index]
-          AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub) {
-            
+
+          AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority) {
+
             self.thirdFetchPairsCount -= 1
           }
         }
       }
     }else {
       for pair in filterPairs {
-        AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub)
+        AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority)
       }
     }
     
@@ -157,9 +161,9 @@ extension AppCoordinator {
   
   
   
-  func repeatFetchPairInfo(){
+  func repeatFetchPairInfo(_ priority:Operation.QueuePriority = .normal){
     
-    if self.fetchPariTimer != nil ,!(self.fetchPariTimer?.state.isRunning)!{
+    if self.fetchPariTimer != nil {
       self.fetchPariTimer?.pause()
       self.fetchPariTimer = nil
     }
@@ -171,7 +175,7 @@ extension AppCoordinator {
         
         return
       }
-      self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false)
+      self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority:priority)
     })
   }
   
@@ -200,13 +204,13 @@ extension AppCoordinator {
             pairs += piece_pair
             if count == AssetConfiguration.market_base_assets.count {
               AssetConfiguration.shared.asset_ids = pairs
-              self.request24hMarkets(AssetConfiguration.shared.asset_ids)
+              self.request24hMarkets(AssetConfiguration.shared.asset_ids,priority:.high)
             }
           }).cauterize()
         }
         
         if app_coodinator.fetchPariTimer == nil || !(app_coodinator.fetchPariTimer!.state.isRunning){
-          AppConfiguration.shared.appCoordinator.repeatFetchPairInfo()
+          AppConfiguration.shared.appCoordinator.repeatFetchPairInfo(.veryLow)
         }
         
       }
@@ -215,10 +219,10 @@ extension AppCoordinator {
     else {
       if app_data.assetInfo.count != AssetConfiguration.shared.unique_ids.count {
         fetchAsset {
-          self.request24hMarkets(AssetConfiguration.shared.asset_ids)
+          self.request24hMarkets(AssetConfiguration.shared.asset_ids, priority:.high)
         }
       }
-      request24hMarkets(AssetConfiguration.shared.asset_ids)
+      request24hMarkets(AssetConfiguration.shared.asset_ids, priority:.high)
     }
     
   }
