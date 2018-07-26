@@ -10,11 +10,12 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import RxGesture
 
 class TransferViewController: BaseViewController {
   
-    @IBOutlet weak var transferView: TransferView!
-    var coordinator: (TransferCoordinatorProtocol & TransferStateManagerProtocol)?
+  @IBOutlet weak var transferView: TransferView!
+  var coordinator: (TransferCoordinatorProtocol & TransferStateManagerProtocol)?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,7 +38,8 @@ class TransferViewController: BaseViewController {
   
   override func configureObserveState() {
     commonObserveState()
-    
+    Observable.combineLatest(self.coordinator!.state.property.accountValid.asObservable()).map { (arg0) -> Bool in
+      }.bind(to: self.transferView.transferButton.isEnabled).disposed(by: disposeBag)
   }
   
   func setupUI() {
@@ -47,8 +49,19 @@ class TransferViewController: BaseViewController {
     transferView.fee = "1.001 CYB"
   }
   
+  func setupEvent() {
+
+  }
+  
   override func rightAction(_ sender: UIButton) {
     self.coordinator?.pushToRecordVC()
     
+  }
+}
+
+
+extension TransferViewController {
+  @objc func selectCrypto(_ data: [String : Any]) {
+    self.coordinator?.showPicker()
   }
 }

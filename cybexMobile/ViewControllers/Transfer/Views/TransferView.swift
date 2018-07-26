@@ -99,6 +99,10 @@ class TransferView: UIView {
     view.autoresizingMask = [.flexibleHeight,.flexibleWidth]
   }
   
+  enum TransferEvents: String {
+    case selectCrypto
+  }
+  
   func setupUI() {
     contentView.datasource = self
     setupTextView()
@@ -213,7 +217,7 @@ extension TransferView: TitleTextFieldViewDelegate,TitleTextFieldViewDataSource,
       titleTextFieldView.clearText()
     } else {
       if titleTextFieldView == cryptoView {
-        
+        self.sendEventWith(TransferEvents.selectCrypto.rawValue, userinfo: [:])
       }
     }
   }
