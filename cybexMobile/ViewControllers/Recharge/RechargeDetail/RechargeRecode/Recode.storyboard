@@ -167,7 +167,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FQU-Kv-5Os" customClass="TransferContentView" customModule="cybexMobile" customModuleProvider="target">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FQU-Kv-5Os" customClass="TransferContentView" customModule="cybexMobile" customModuleProvider="target">
                                 <rect key="frame" x="13" y="153" width="349" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -187,6 +187,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDq-GH-VgO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1876" y="190"/>
+        </scene>
+        <!--Transfer View Controller-->
+        <scene sceneID="C6t-gl-EUf">
+            <objects>
+                <viewController storyboardIdentifier="TransferViewController" id="JUS-oP-3Tr" customClass="TransferViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E4j-r0-TUq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bas-dV-Va6">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fl-Gf-uzC">
+                                        <rect key="frame" x="0.0" y="151" width="375" height="128"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bVo-rA-btF" customClass="TransferView" customModule="cybexMobile" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="bVo-rA-btF" secondAttribute="bottom" constant="30" id="3vx-MB-N1q"/>
+                                            <constraint firstAttribute="trailing" secondItem="bVo-rA-btF" secondAttribute="trailing" id="MJf-hB-Klm"/>
+                                            <constraint firstItem="bVo-rA-btF" firstAttribute="top" secondItem="5fl-Gf-uzC" secondAttribute="top" id="QEv-mf-u02"/>
+                                            <constraint firstItem="bVo-rA-btF" firstAttribute="leading" secondItem="5fl-Gf-uzC" secondAttribute="leading" id="ufh-d9-tnO"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="5fl-Gf-uzC" firstAttribute="top" secondItem="bas-dV-Va6" secondAttribute="top" id="659-sz-J8e"/>
+                                    <constraint firstItem="5fl-Gf-uzC" firstAttribute="width" secondItem="bas-dV-Va6" secondAttribute="width" id="Jcj-iK-sVw"/>
+                                    <constraint firstItem="5fl-Gf-uzC" firstAttribute="leading" secondItem="bas-dV-Va6" secondAttribute="leading" id="KqQ-oo-qc2"/>
+                                    <constraint firstAttribute="bottom" secondItem="5fl-Gf-uzC" secondAttribute="bottom" id="cx7-eK-gzz"/>
+                                    <constraint firstAttribute="trailing" secondItem="5fl-Gf-uzC" secondAttribute="trailing" id="lEm-US-UPo"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="bas-dV-Va6" firstAttribute="top" secondItem="PVK-Es-1FB" secondAttribute="top" id="4rB-bt-pP1"/>
+                            <constraint firstItem="PVK-Es-1FB" firstAttribute="trailing" secondItem="bas-dV-Va6" secondAttribute="trailing" id="afC-kH-J4m"/>
+                            <constraint firstItem="bas-dV-Va6" firstAttribute="leading" secondItem="PVK-Es-1FB" secondAttribute="leading" id="rHN-7q-39Y"/>
+                            <constraint firstItem="PVK-Es-1FB" firstAttribute="bottom" secondItem="bas-dV-Va6" secondAttribute="bottom" id="zpf-DZ-ynV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PVK-Es-1FB"/>
+                    </view>
+                    <connections>
+                        <outlet property="transferView" destination="bVo-rA-btF" id="ZfG-7g-jdP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="upj-KP-yKL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2564" y="189.3553223388306"/>
         </scene>
     </scenes>
 </document>

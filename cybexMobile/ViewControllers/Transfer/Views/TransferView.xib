@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TransferView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="bby-5S-Txt" id="QuB-J0-dpm"/>
+                <outlet property="feeLabel" destination="SH2-zO-jvy" id="XZP-1j-xRJ"/>
+                <outlet property="transferButton" destination="JtI-Lu-Cqc" id="ePO-uR-4wy"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="406"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bby-5S-Txt" customClass="GrowContentView" customModule="cybexMobile" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39u-Dd-m5v">
+                    <rect key="frame" x="25" y="144" width="35.5" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="transfer_fee"/>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SH2-zO-jvy">
+                    <rect key="frame" x="70.5" y="154" width="279.5" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                            <color key="value" name="white" red="1.000" green="1.000" blue="1.000" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                            <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JtI-Lu-Cqc">
+                    <rect key="frame" x="16" y="254" width="343" height="48"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" backgroundImage="btnColorOrange">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="transfer_transfer"/>
+                    </userDefinedRuntimeAttributes>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="JtI-Lu-Cqc" secondAttribute="trailing" constant="16" id="4Ti-OL-4CL"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SH2-zO-jvy" secondAttribute="trailing" constant="25" id="4dv-tr-vaH"/>
+                <constraint firstItem="SH2-zO-jvy" firstAttribute="leading" secondItem="39u-Dd-m5v" secondAttribute="trailing" constant="10" id="6JN-A1-gLL"/>
+                <constraint firstItem="bby-5S-Txt" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="ArL-XS-vNn"/>
+                <constraint firstItem="39u-Dd-m5v" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="JRh-8a-GpG"/>
+                <constraint firstItem="JtI-Lu-Cqc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Kux-3M-GoL"/>
+                <constraint firstItem="39u-Dd-m5v" firstAttribute="top" secondItem="bby-5S-Txt" secondAttribute="bottom" constant="16" id="Xb0-9n-n2O"/>
+                <constraint firstItem="bby-5S-Txt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="byZ-4J-yqC"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bby-5S-Txt" secondAttribute="trailing" id="p9P-f1-lt9"/>
+                <constraint firstItem="JtI-Lu-Cqc" firstAttribute="top" secondItem="39u-Dd-m5v" secondAttribute="bottom" constant="90" id="rzZ-jU-5ao"/>
+                <constraint firstItem="SH2-zO-jvy" firstAttribute="centerY" secondItem="39u-Dd-m5v" secondAttribute="centerY" id="xmK-un-efd"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="33.5" y="-26"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btnColorOrange" width="349" height="48"/>
+    </resources>
+</document>

@@ -280,6 +280,19 @@
 "transfer_detail_mome" = "Memo";
 "transfer_Detail_click" = "Click to view";
 
+//转账
+"transfer_title" = "Transfer";
+"transfer_transfer" = "Send";
+"transfer_account" = "Account Name";
+"transfer_account_pla" = "To Account name";
+"transfer_crypto" = "Crypto";
+"transfer_crypto_pla" = "CYB";
+"transfer_quantity" = "Quantity";
+"transfer_memo" = "Momo";
+"transfer_fee" = "Fee";
+"transfer_balance" = "Available";
+"picker_comfirm" = "Comfirm";
+
 //zsy add
 "my_property" = "My Balance";
 "order_value" = "Opened Orders";
@@ -287,3 +300,7 @@
 "account_property" = "Your Total Balance(CYB)";
 "hello" = "Hello，";
 //zsy end
+
+"recode_nodata" = "No record";
+"balance_nodata" = "No assert";
+

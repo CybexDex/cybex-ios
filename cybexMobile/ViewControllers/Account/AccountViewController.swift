@@ -34,9 +34,19 @@ class AccountViewController: BaseViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    SwifterSwift.delay(milliseconds: 100) {
-      self.setupUI()
-    }
+
+    self.setupUI()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+//    if let nav = self.navigationController as? BaseNavigationController {
+//      nav.setupNavUI()
+//    }
   }
   
   func setupIconImg() {
@@ -63,6 +73,8 @@ class AccountViewController: BaseViewController {
   
   // UI的初始化设置
   func setupUI(){
+    
+    self.navigationItem.title = ""
     setupTitle()
     setupIconImg()
     self.configRightNavButton(R.image.icSettings24Px())
@@ -112,6 +124,12 @@ class AccountViewController: BaseViewController {
 
 extension AccountViewController{
 
+  @objc func login(_ data:[String:Any]) {
+    if !UserManager.shared.isLoginIn {
+      app_coodinator.showLogin()
+    }
+  }
+  
   @objc func clickCellView(_ sender:[String:Any]) {
     let index = sender["index"] as! Int
     switch index {
@@ -122,7 +140,7 @@ extension AccountViewController{
     case 2:
       self.coordinator?.openOpenedOrders()
     default:
-      self.coordinator?.openLockupAssets()
+      openLockupAssets([:])
     }
   }
 

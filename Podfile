@@ -13,6 +13,7 @@ end
 
 def data
     pod 'ObjectMapper'
+    pod 'HandyJSON'
     pod 'SwiftyJSON'
     pod 'BigInt'
     pod 'GRDB.swift'
@@ -92,6 +93,7 @@ def ui
     pod 'Keyboard+LayoutGuide'
     pod 'XLPagerTabStrip'
     pod 'EFQRCode'
+    pod 'GrowingTextView'
 end
 
 def other

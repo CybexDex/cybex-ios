@@ -188,6 +188,19 @@ extension UIView{
       }
     }
   }
+  
+  func showNoData(_ noticeWord : String, icon : String) {
+    if let _ = self.noDataView {
+      self.noDataView?.notice_word = noticeWord
+      self.noDataView?.icon_name = icon
+    }else {
+      let nodata = WithNoDataView(frame:self.bounds)
+      self.noDataView = nodata
+      self.noDataView?.notice_word = noticeWord
+      self.noDataView?.icon_name = icon
+    }
+  }
+  
   func showNoData(_ noticeWord : String) {
     if let _ = self.noDataView {
       self.noDataView?.notice_word = noticeWord
@@ -195,7 +208,7 @@ extension UIView{
       let nodata = WithNoDataView(frame:self.bounds)
       self.noDataView = nodata
       self.noDataView?.notice_word = noticeWord
-//      self.bringSubview(toFront: self.noDataView!)
+      self.noDataView?.noticeContairner.constant = -64
     }
   }
   func hiddenNoData() {

@@ -279,4 +279,58 @@ extension SimpleHTTPService {
     }
     return promise
   }
+  
+  
+  static func recordLogin(_ sender : [String:Any]) -> Promise<String?> {
+    var request = try! URLRequest(url: URL(string: AppConfiguration.RECODE_LOGIN)!, method: .post, headers: ["Content-Type": "application/json"])
+    request.timeoutInterval = 5
+    request.cachePolicy = .reloadIgnoringCacheData
+    
+    let encodedURLRequest = try! JSONEncoding.default.encode(request, with: sender)
+    let (promise ,seal) = Promise<String?>.pending()
+    
+    Alamofire.request(encodedURLRequest).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+      guard let value = response.result.value else {
+        seal.fulfill(nil)
+        return
+      }
+      let data = JSON(value).dictionaryValue
+      if let code = data["code"]?.int ,code == 200 {
+        if let result = data["data"]?.dictionaryValue {
+          seal.fulfill(result["signer"]?.string)
+        }else {
+          seal.fulfill(nil)
+        }
+      }else {
+        seal.fulfill(nil)
+      }
+    }
+    return promise
+  }
+  
+  
+  static func fetchRecords(_ sender : [String:Any]) -> Promise<TradeRecord?> {
+  
+    var request = try! URLRequest(url: URL(string: AppConfiguration.RECODE_RECODES)!, method: .post, headers: ["Content-Type": "application/json"])
+    request.timeoutInterval = 5
+    request.cachePolicy = .reloadIgnoringCacheData
+    let encodedURLRequest = try! JSONEncoding.default.encode(request, with: sender)
+    
+    let (promise ,seal) = Promise<TradeRecord?>.pending()
+    Alamofire.request(encodedURLRequest).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+      guard let value = response.result.value else {
+        seal.fulfill(nil)
+        return
+      }
+      let data = JSON(value).dictionaryValue
+      if let code = data["code"]?.int ,code == 200 {
+        if let result = data["data"]?.dictionaryObject {
+          seal.fulfill(TradeRecord.deserialize(from: result))
+        }
+      }else{
+        seal.fulfill(nil)
+      }
+    }
+    return promise
+  }
 }
