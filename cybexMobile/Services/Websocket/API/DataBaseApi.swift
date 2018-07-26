@@ -33,7 +33,7 @@ struct GetRequiredFees:JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_required_fees.rawValue, [[[operationID.rawValue, JSON(parseJSON:operationStr).dictionaryObject ?? [:]]], assetID]]
+    return [apiCategory.database, dataBaseCatogery.get_required_fees.rawValue, [[[operationID.rawValue, JSON(parseJSON:operationStr).dictionaryObject ?? [:]]], assetID]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
@@ -56,7 +56,7 @@ struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_account_by_name.rawValue, [name]]
+    return [apiCategory.database, dataBaseCatogery.get_account_by_name.rawValue, [name]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
@@ -80,7 +80,7 @@ struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_full_accounts.rawValue, [[name], true]]
+    return [apiCategory.database, dataBaseCatogery.get_full_accounts.rawValue, [[name], true]]
   }
  
   
@@ -122,7 +122,7 @@ struct GetChainIDRequest: JSONRPCKit.Request, JSONRPCResponse {
   var response:RPCSResponse
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_chain_id.rawValue, []]
+    return [apiCategory.database, dataBaseCatogery.get_chain_id.rawValue, []]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
@@ -143,7 +143,7 @@ struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_objects.rawValue, [ids]]
+    return [apiCategory.database, dataBaseCatogery.get_objects.rawValue, [ids]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
@@ -182,7 +182,7 @@ struct SubscribeMarketRequest: JSONRPCKit.Request, RevisionRequest, JSONRPCRespo
   var response:RPCSResponse
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.subscribe_to_market.rawValue, [WebsocketService.shared.idGenerator.currentId + 1, ids[0], ids[1]]]
+    return [apiCategory.database, dataBaseCatogery.subscribe_to_market.rawValue, [CybexWebSocketService.shared.idGenerator.currentId + 1, ids[0], ids[1]]]
   }
   
   func revisionParameters(_ data:Any) -> Any {
@@ -211,7 +211,7 @@ struct getLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.database] ?? 0, dataBaseCatogery.get_limit_orders.rawValue, [pair.base, pair.quote, 500]]
+    return [apiCategory.database, dataBaseCatogery.get_limit_orders.rawValue, [pair.base, pair.quote, 500]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
@@ -242,7 +242,7 @@ struct getBalanceObjectsRequest : JSONRPCKit.Request , JSONRPCResponse{
   }
   
   var parameters : Any? {
-    return [WebsocketService.shared.ids[apiCategory.database] ?? 0 , dataBaseCatogery.get_balance_objects.rawValue,[address]]
+    return [apiCategory.database , dataBaseCatogery.get_balance_objects.rawValue,[address]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
@@ -268,7 +268,7 @@ struct getBlockRequest : JSONRPCKit.Request , JSONRPCResponse {
     return "call"
   }
   var parameters: Any?{
-    return [WebsocketService.shared.ids[apiCategory.database] ?? 0,dataBaseCatogery.get_block.rawValue,[block_num]]
+    return [apiCategory.database,dataBaseCatogery.get_block.rawValue,[block_num]]
   }
   func transferResponse(from resultObject: Any) throws -> Any {
     let data = JSON(resultObject).dictionaryValue
