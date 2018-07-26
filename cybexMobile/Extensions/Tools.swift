@@ -246,9 +246,22 @@ extension Double {
     var decimal = Decimal(floatLiteral: self)
 
     var drounded = Decimal()
-    NSDecimalRound(&drounded, &decimal, digits, .down)
+    NSDecimalRound(&drounded, &decimal, digits, .plain)
     
-    return drounded.stringValue
+    if digits == 0 {
+      return drounded.stringValue
+    }
+    
+    var formatterString : String = "0."
+  
+    for _ in 0 ..< digits {
+      formatterString.append("0")
+    }
+
+    let formatter = NumberFormatter()
+    formatter.positiveFormat = formatterString
+    
+    return formatter.string(from: NSDecimalNumber(decimal: drounded)) ?? "0"
   }
   
   func preciseString() -> String {//解决显示科学计数法的格式
