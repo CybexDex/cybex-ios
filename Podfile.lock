@@ -149,6 +149,9 @@ PODS:
   - Typist (1.2.2)
   - UICKeyChainStore (2.1.1)
   - UIFontComplete (3.0.0)
+  - XLActionController (4.0.1):
+    - XLActionController/Core (= 4.0.1)
+  - XLActionController/Core (4.0.1)
   - XLPagerTabStrip (8.0.1)
   - Zephyr (3.1.2)
   - ZLaunchAd (2.0.3):
@@ -227,6 +230,7 @@ DEPENDENCIES:
   - TinyConstraints
   - Typist
   - UIFontComplete
+  - XLActionController
   - XLPagerTabStrip
   - Zephyr
   - ZLaunchAd
@@ -313,6 +317,7 @@ SPEC REPOS:
     - Typist
     - UICKeyChainStore
     - UIFontComplete
+    - XLActionController
     - XLPagerTabStrip
     - Zephyr
     - ZLaunchAd
@@ -422,10 +427,11 @@ SPEC CHECKSUMS:
   Typist: 61acc798767f15bf24c61fb9a43d285974380f37
   UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
   UIFontComplete: 5b0f59a83308816c610164b79a2540b3520f9b72
+  XLActionController: 007868251c0eed70d649d06c1625259b73b3a600
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: 2366b50854634b41f4def83df299d904a1b5a6ef
+PODFILE CHECKSUM: 69f3b03064642dd5dadc8e7fcdee2480143ab452
 
 COCOAPODS: 1.5.3

@@ -127,6 +127,25 @@ class SettingViewController: BaseViewController {
 }
 
 extension SettingViewController {
+  func chooseRefreshStyle() {
+    
+//    let actionController =
+//
+//    actionController.addAction(Action("View Details", style: .default, handler: { action in
+//      // do something useful
+//    }))
+//    actionController.addAction(Action("View Retweets", style: .default, handler: { action in
+//      // do something useful
+//    }))
+//    actionController.addAction(Action("View in Favstar", style: .default, handler: { action in
+//      // do something useful
+//    }))
+//
+//    actionController.addSection(Section())
+//    actionController.addAction(Action("Cancel", style: .cancel, handler:nil))
+//
+//    present(actionController, animated: true, completion: nil)
+  }
   
 }
 
