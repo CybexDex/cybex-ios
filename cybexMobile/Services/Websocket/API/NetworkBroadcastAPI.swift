@@ -23,7 +23,7 @@ struct BroadcastTransactionRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.network_broadcast] ?? 0, broadcastCatogery.broadcast_transaction_with_callback.rawValue, [WebsocketService.shared.idGenerator.currentId + 1, JSON(parseJSON:jsonstr).dictionaryObject ?? [:]]]
+    return [apiCategory.network_broadcast, broadcastCatogery.broadcast_transaction_with_callback.rawValue, [CybexWebSocketService.shared.idGenerator.currentId + 1, JSON(parseJSON:jsonstr).dictionaryObject ?? [:]]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {

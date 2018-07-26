@@ -32,7 +32,7 @@ struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.history] ?? 0, historyCatogery.get_account_history.rawValue, [accountID, objectID.operation_history_object, "100", objectID.operation_history_object]]
+    return [apiCategory.history, historyCatogery.get_account_history.rawValue, [accountID, objectID.operation_history_object, "100", objectID.operation_history_object]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
@@ -63,7 +63,7 @@ struct GetMarketHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.history] ?? 0, historyCatogery.get_market_history.rawValue, [queryParams.firstAssetId, queryParams.secondAssetId, queryParams.timeGap, queryParams.startTime.iso8601, queryParams.endTime.iso8601]]
+    return [apiCategory.history, historyCatogery.get_market_history.rawValue, [queryParams.firstAssetId, queryParams.secondAssetId, queryParams.timeGap, queryParams.startTime.iso8601, queryParams.endTime.iso8601]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
@@ -87,7 +87,7 @@ struct GetFillOrderHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [WebsocketService.shared.ids[apiCategory.history] ?? 0, historyCatogery.get_fill_order_history.rawValue, [pair.base, pair.quote, 40]]
+    return [apiCategory.history, historyCatogery.get_fill_order_history.rawValue, [pair.base, pair.quote, 40]]
   }
     
   func transferResponse(from resultObject: Any) throws -> Any {

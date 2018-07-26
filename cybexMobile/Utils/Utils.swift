@@ -20,7 +20,7 @@ func getChainId(callback:@escaping(String)->()){
         callback("")
       }
     }
-    WebsocketService.shared.send(request: requeset)
+    CybexWebSocketService.shared.send(request: requeset)
   }
   else {
     callback(AppConfiguration.shared.chainID)
@@ -35,7 +35,7 @@ func blockchainParams(callback: @escaping(BlockChainParamsType)->()) {
         callback((chain_id: chainID, block_id: infos.block_id, block_num: Int32(infos.block_num)!))
       }
     }
-    WebsocketService.shared.send(request: requeset)
+    CybexWebSocketService.shared.send(request: requeset)
   }
 }
 
@@ -77,7 +77,7 @@ func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTy
           }
         }, operationStr: operation, assetID: focus_asset_id, operationID: operationID)
         
-        WebsocketService.shared.send(request: request ,filterRepeat:filterRepeat)
+        CybexWebSocketService.shared.send(request: request)
       }
       
       
@@ -87,7 +87,7 @@ func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTy
     }
   }, operationStr: operation, assetID: AssetConfiguration.CYB, operationID: operationID)
   
-  WebsocketService.shared.send(request: request)
+  CybexWebSocketService.shared.send(request: request)
 }
 
 func calculateAssetRelation(assetID_A_name:String, assetID_B_name:String) -> (base:String, quote:String) {
