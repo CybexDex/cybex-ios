@@ -35,13 +35,14 @@
                     <constraint firstAttribute="trailing" secondItem="3la-SC-9zW" secondAttribute="trailing" id="nI0-Xe-1Bg"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" name="white" red="1.000" green="1.000" blue="1.000" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="LIx-Jj-1OA"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                     <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="value" name="white" red="1.000" green="1.000" blue="1.000" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
@@ -50,4 +51,6 @@
             <point key="canvasLocation" x="54" y="-97.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+    </resources>
 </document>

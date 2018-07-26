@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountTableHeadView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
-                <outlet property="iconImageView" destination="N9r-6o-jh9" id="afe-3G-PSj"/>
+                <outlet property="iconImageView" destination="3JQ-ER-phP" id="ZR1-K7-j9i"/>
                 <outlet property="titleLabel" destination="gzX-sE-u4A" id="Z07-qf-yzo"/>
             </connections>
         </placeholder>
@@ -21,21 +21,6 @@
             <rect key="frame" x="0.0" y="0.0" width="408" height="182"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="accountAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="N9r-6o-jh9">
-                    <rect key="frame" x="34" y="25" width="56" height="56"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="56" id="DCz-fB-HTm"/>
-                        <constraint firstAttribute="width" constant="56" id="lN7-n9-iKr"/>
-                    </constraints>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                            <real key="value" value="28"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="28"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzX-sE-u4A">
                     <rect key="frame" x="34" y="101" width="82.5" height="41"/>
                     <constraints>
@@ -53,13 +38,51 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQn-Zv-smL">
+                    <rect key="frame" x="34" y="25" width="56" height="56"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="accountAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="3JQ-ER-phP">
+                            <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                    <real key="value" value="28"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="28"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="2ji-cz-Aef"/>
+                        <constraint firstAttribute="width" constant="56" id="8Wv-ql-yhE"/>
+                        <constraint firstAttribute="bottom" secondItem="3JQ-ER-phP" secondAttribute="bottom" id="Cfz-Ss-AFz"/>
+                        <constraint firstAttribute="trailing" secondItem="3JQ-ER-phP" secondAttribute="trailing" id="LBZ-8b-NpZ"/>
+                        <constraint firstItem="3JQ-ER-phP" firstAttribute="leading" secondItem="qQn-Zv-smL" secondAttribute="leading" id="lGC-yK-i04"/>
+                        <constraint firstItem="3JQ-ER-phP" firstAttribute="top" secondItem="qQn-Zv-smL" secondAttribute="top" id="v9j-PZ-p3O"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                            <real key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                            <size key="value" width="0.0" height="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <constraints>
-                <constraint firstItem="N9r-6o-jh9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="34" id="4tT-Z1-3x8"/>
-                <constraint firstItem="N9r-6o-jh9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="25" id="DXU-YN-gPH"/>
+                <constraint firstItem="qQn-Zv-smL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="25" id="SLQ-jp-SGp"/>
                 <constraint firstItem="gzX-sE-u4A" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="34" id="SxX-ih-ql3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="gzX-sE-u4A" secondAttribute="bottom" constant="40" id="b7j-h9-54S"/>
-                <constraint firstItem="gzX-sE-u4A" firstAttribute="top" secondItem="N9r-6o-jh9" secondAttribute="bottom" constant="20" id="gCV-YW-s2k"/>
+                <constraint firstItem="qQn-Zv-smL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="34" id="mmZ-pP-pck"/>
+                <constraint firstItem="gzX-sE-u4A" firstAttribute="top" secondItem="qQn-Zv-smL" secondAttribute="bottom" constant="20" id="oHi-YC-8kC"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
