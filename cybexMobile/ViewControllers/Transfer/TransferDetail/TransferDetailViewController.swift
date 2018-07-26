@@ -13,7 +13,12 @@ import ReSwift
 
 class TransferDetailViewController: BaseViewController {
   
-  var coordinator: (TransferDetailCoordinatorProtocol & TransferDetailStateManagerProtocol)?
+    @IBOutlet weak var headerView: TransferTopView!
+    @IBOutlet weak var contentView: TransferContentView!
+    
+    var coordinator: (TransferDetailCoordinatorProtocol & TransferDetailStateManagerProtocol)?
+  
+  var data : TransferRecordViewModel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,6 +27,8 @@ class TransferDetailViewController: BaseViewController {
   
   func setupUI() {
     self.title = R.string.localizable.transfer_detail()
+    self.headerView.data = data
+    self.contentView.data = data
   }
   
   func commonObserveState() {

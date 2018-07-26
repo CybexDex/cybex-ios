@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftTheme
 
 class TransferListCellView: UIView {
   
@@ -18,22 +19,19 @@ class TransferListCellView: UIView {
   
   var data : Any? {
     didSet{
-      if let data = data as? (TransferRecord,time:String) {
-        
-        let transferRecord = data.0
+      if let data = data as? TransferRecordViewModel {
+        self.icon.image = data.isSend ? R.image.ic_send() : R.image.ic_income()
         self.time.text = data.time
-        self.address.text = transferRecord.to
-        if let transferAmount = transferRecord.amount ,let assetInfo = app_data.assetInfo[(transferRecord.amount?.asset_id)!] {
+        self.address.text = data.isSend ? data.to : data.from
+        self.state.text = data.isSend ? R.string.localizable.transfer_send.key.localized() : R.string.localizable.transfer_done.key.localized()
+        if let transferAmount = data.amount ,let assetInfo = app_data.assetInfo[transferAmount.asset_id] {
           self.amount.text = getRealAmount(transferAmount.asset_id, amount: transferAmount.amount).stringValue.formatCurrency(digitNum: assetInfo.precision) + " " + assetInfo.symbol.filterJade
-
-          if transferRecord.from == UserManager.shared.name.value {
-            self.state.text = R.string.localizable.transfer_send.key.localized()
-            self.icon.image = R.image.ic_send()
+          if data.isSend {
             self.amount.text = "-" + self.amount.text!
+            self.amount.textColor = ThemeManager.currentThemeIndex == 0 ? self.amount.theme1TitleColor : self.amount.theme2TitleColor
           }else {
-            self.state.text = R.string.localizable.transfer_done.key.localized()
-            self.icon.image = R.image.ic_income()
             self.amount.text = "+" + self.amount.text!
+            self.amount.textColor = UIColor.pastelOrange
           }
         }
       }

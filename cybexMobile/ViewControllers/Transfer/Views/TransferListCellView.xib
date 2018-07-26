@@ -31,8 +31,8 @@
                         <constraint firstAttribute="width" constant="24" id="cLO-pD-m2q"/>
                     </constraints>
                 </imageView>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pol-to-Dfe">
-                    <rect key="frame" x="61" y="-78.5" width="301" height="257"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="pol-to-Dfe">
+                    <rect key="frame" x="61" y="-81" width="301" height="262"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTa-NI-0g7">
                             <rect key="frame" x="0.0" y="0.0" width="301" height="128.5"/>
@@ -75,7 +75,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qqs-Lv-iQT">
-                            <rect key="frame" x="0.0" y="128.5" width="301" height="128.5"/>
+                            <rect key="frame" x="0.0" y="133.5" width="301" height="128.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERe-WR-OVJ">
                                     <rect key="frame" x="0.0" y="0.0" width="31" height="128.5"/>

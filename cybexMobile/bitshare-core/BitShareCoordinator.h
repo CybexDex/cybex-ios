@@ -43,4 +43,6 @@
   
 + (NSString *)getRecodeLoginOperation:(NSString *)accountName asset:(NSString *)asset fundType:(NSString *)fundType size:(int)size offset:(int)offset expiration:(int)expiration;
   
++ (NSString *)getMemo:(NSString *)memo;
+  
   @end

@@ -61,12 +61,7 @@ struct HandyAsset : HandyJSON {
   }
 }
 
-struct Memo : HandyJSON {
-  var from : String = ""
-  var to : String = ""
-  var nonce : String = ""
-  var message : String = ""
-}
+
 
 
 struct TransferRecord : HandyJSON {
@@ -74,11 +69,24 @@ struct TransferRecord : HandyJSON {
   var from : String = ""
   var to : String = ""
   var amount : HandyAsset?
-  var memo : Memo?
+  var memo : String = ""
   var block_num : Int = 0
   var vesting_period : String = ""
   var public_key : String = ""
   
   init(){}
+  
+}
+
+
+struct TransferRecordViewModel {
+  var isSend : Bool = false
+  var from : String = ""
+  var to : String = ""
+  var time : String = ""
+  var amount : HandyAsset?
+  var memo : String = ""
+  var vesting_period : String = ""
+  var fee : HandyAsset?
 }
 

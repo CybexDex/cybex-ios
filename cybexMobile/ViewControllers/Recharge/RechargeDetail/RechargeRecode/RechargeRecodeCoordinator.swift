@@ -17,6 +17,9 @@ protocol RechargeRecodeStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<RechargeRecodeState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
+  
+  func fetchRechargeRecodeList()
+
 }
 
 class RechargeRecodeCoordinator: AccountRootCoordinator {
@@ -44,5 +47,9 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
+  
+  func fetchRechargeRecodeList() {
+    
+  }
     
 }

@@ -23,7 +23,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tu4-FW-v38">
+                        <rect key="frame" x="13" y="42.5" width="294" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="nGi-Rh-FCg"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                <color key="value" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                 <color key="value" name="paleGrey" red="0.969" green="0.973" blue="0.980" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
@@ -34,8 +48,11 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="FmV-pC-Jwa" secondAttribute="trailing" id="CVX-Ry-hLq"/>
                     <constraint firstItem="FmV-pC-Jwa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="SHi-ag-92d"/>
+                    <constraint firstItem="tu4-FW-v38" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="cHO-H5-HO3"/>
                     <constraint firstItem="FmV-pC-Jwa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="epM-Pi-htx"/>
+                    <constraint firstAttribute="trailing" secondItem="tu4-FW-v38" secondAttribute="trailing" constant="13" id="g1m-4B-aUo"/>
                     <constraint firstAttribute="bottom" secondItem="FmV-pC-Jwa" secondAttribute="bottom" id="hxT-O4-nuM"/>
+                    <constraint firstAttribute="bottom" secondItem="tu4-FW-v38" secondAttribute="bottom" id="reg-xL-aur"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

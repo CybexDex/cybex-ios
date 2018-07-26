@@ -280,6 +280,9 @@
 "transfer_fee" = "手续费";
 "transfer_balance" = "余额";
 "picker_comfirm" = "确认";
+"transfer_unit_time" = "分";
+
+
 
 //zsy add
 "my_property" = "我的资产";
