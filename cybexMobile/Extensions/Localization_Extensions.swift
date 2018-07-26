@@ -131,7 +131,7 @@ private func getOperation(
   _ object : NSObject,
   _ selector : Selector
   ) -> ValueContainer? {
-  return object.operations[selector]
+  return object.changeOperations[selector]
 }
 
 private func setOperation(
@@ -139,7 +139,7 @@ private func setOperation(
   _ selector : Selector,
   _ picker : ValueContainer?
   ) {
-  object.operations[selector] = picker
+  object.changeOperations[selector] = picker
   object.performOperations(sel: selector, picker: picker)
 }
 
@@ -216,7 +216,7 @@ private var operationKey = 2018
 extension NSObject {
   typealias Operations = [Selector: ValueContainer]
   
-  var operations: Operations {
+  var changeOperations: Operations {
     get {
       if let themePickers = objc_getAssociatedObject(self, &operationKey) as? Operations {
         return themePickers
@@ -277,7 +277,7 @@ extension NSObject {
   }
   
   fileprivate func _resetOperation() {
-    self.operations.forEach {[weak self] selector, picker in
+    self.changeOperations.forEach {[weak self] selector, picker in
       UIView.animate(withDuration: 0.3) {
         guard let `self` = self else { return }
         self.performOperations(sel: selector, picker: picker)

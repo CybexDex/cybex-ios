@@ -169,7 +169,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
           }
         }, jsonstr: jsonStr)
         
-        WebsocketService.shared.send(request: request)
+        CybexWebSocketService.shared.send(request: request)
       }
     
     }

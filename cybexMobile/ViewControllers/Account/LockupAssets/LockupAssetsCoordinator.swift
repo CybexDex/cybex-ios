@@ -57,6 +57,6 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
         self.store.dispatch(FetchedLockupAssetsData(data: data))
       }
     }
-    WebsocketService.shared.send(request: request)
+    CybexWebSocketService.shared.send(request: request)
   }
 }

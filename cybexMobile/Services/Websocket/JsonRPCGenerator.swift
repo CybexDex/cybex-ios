@@ -14,6 +14,7 @@ enum apiCategory:String {
   case database
   case network_broadcast
   case history
+  case none
 }
 
 struct CastError<ExpectedType>: Error {
@@ -82,7 +83,7 @@ struct RegisterIDRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [1, api.rawValue, []]
+    return [apiCategory.none, api.rawValue, []]
   }
   
   var digist:String {

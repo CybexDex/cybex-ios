@@ -63,7 +63,7 @@ class LockupAssetsPropertyActionCreate: LoadingActionCreator {
           callback(response)
         }
       }
-      WebsocketService.shared.send(request: request)
+      CybexWebSocketService.shared.send(request: request)
       return nil
     }
   }

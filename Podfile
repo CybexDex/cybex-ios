@@ -1,12 +1,14 @@
 platform :ios, '9.0'
 
 def network
-    pod 'Starscream'
+#    pod 'Starscream'
+    pod 'SocketRocket', :git => 'https://github.com/facebook/SocketRocket', :branch => 'master'
     pod 'JSONRPCKit'
     pod 'Moya'
     pod 'Kingfisher'
     pod 'RealReachability'
     pod 'Apollo'
+    pod 'AlamofireNetworkActivityLogger'
 end
 
 def data
@@ -47,6 +49,8 @@ def architecture
    pod 'UIFontComplete'
    pod 'RxCocoa'
    pod 'AwaitKit'
+   
+   pod 'AsyncOperation'
 end
 
 def permission

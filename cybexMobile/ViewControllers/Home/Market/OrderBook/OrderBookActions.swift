@@ -61,7 +61,7 @@ class OrderBookPropertyActionCreate: LoadingActionCreator {
         }
       }
       
-      WebsocketService.shared.send(request: request, filterRepeat: false) 
+      CybexWebSocketService.shared.send(request: request) 
       
       return nil
       
