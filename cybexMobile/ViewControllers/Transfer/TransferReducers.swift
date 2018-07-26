@@ -10,18 +10,26 @@ import UIKit
 import ReSwift
 
 func TransferReducer(action:Action, state:TransferState?) -> TransferState {
-    return TransferState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: TransferPropertyReducer(state?.property, action: action))
+  return TransferState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: TransferPropertyReducer(state?.property, action: action))
 }
 
 func TransferPropertyReducer(_ state: TransferPropertyState?, action: Action) -> TransferPropertyState {
-    var state = state ?? TransferPropertyState()
-    
-    switch action {
-    default:
-        break
-    }
-    
-    return state
+  let state = state ?? TransferPropertyState()
+  
+  switch action {
+  case let action as ValidAccountAction:
+    state.accountValid.accept(action.isValid)
+  case let action as ValidAmountAction:
+    state.amountValid.accept(action.isValid)
+  case let action as SetBalanceAction:
+    state.balance.accept(action.balance)
+  case let action as SetFeeAction:
+    state.fee.accept(action.fee)
+  default:
+    break
+  }
+  
+  return state
 }
 
 

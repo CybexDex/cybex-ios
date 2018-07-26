@@ -97,7 +97,7 @@
                     <rect key="frame" x="16" y="70" width="478" height="1"/>
                     <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="0.5" id="vX4-SG-crq"/>
+                        <constraint firstAttribute="height" constant="1" id="vX4-SG-crq"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">

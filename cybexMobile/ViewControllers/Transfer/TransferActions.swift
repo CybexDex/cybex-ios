@@ -19,15 +19,20 @@ struct TransferState: StateType {
 }
 
 struct TransferPropertyState {
+  var data : BehaviorRelay<WithdrawinfoObject?> = BehaviorRelay(value: nil)
+  
   var accountValid: BehaviorRelay<Bool> = BehaviorRelay(value: false)
   
   var amountValid: BehaviorRelay<Bool> = BehaviorRelay(value: false)
   
-  var balance: Balance?
+  var balance: BehaviorRelay<Balance?> = BehaviorRelay(value: nil)
   
-  var crypto: BehaviorRelay<String> = BehaviorRelay(value: "0")
+  var fee: BehaviorRelay<String> = BehaviorRelay(value: "--CYB")
   
-  var fee: BehaviorRelay<String> = BehaviorRelay(value: "0")
+  var amount: BehaviorRelay<String> = BehaviorRelay(value: "")
+  
+  var memo: BehaviorRelay<String> = BehaviorRelay(value: "")
+  
 }
 
 struct ValidAccountAction: Action {
@@ -38,8 +43,8 @@ struct ValidAmountAction: Action {
   var isValid: Bool = false
 }
 
-struct SetCryptoAction: Action {
-  var crypto: String = "0"
+struct SetBalanceAction: Action {
+  let balance: Balance
 }
 
 struct SetFeeAction: Action {

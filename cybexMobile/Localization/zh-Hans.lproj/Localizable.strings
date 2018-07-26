@@ -274,7 +274,7 @@
 "transfer_account" = "账户名";
 "transfer_account_pla" = "请输入收款方账户名";
 "transfer_crypto" = "币种";
-"transfer_crypto_pla" = "CYB";
+"transfer_crypto_pla" = "请选择转账币种";
 "transfer_quantity" = "金额";
 "transfer_memo" = "备注";
 "transfer_fee" = "手续费";

@@ -8,9 +8,9 @@
 
 import UIKit
 
-typealias textDidBegainEdit = () -> Void
-typealias textDidEndEdit = () -> Void
-typealias textDidChanged = () -> Void
+typealias TextDidBegainEdit = (() -> Void)
+typealias TextDidEndEdit = (() -> Void)
+typealias TextDidChanged = (() -> Void)
 
 protocol TitleTextFieldViewDelegate: NSObjectProtocol {
   func textIntroduction(titleTextFieldView : TitleTextfieldView)

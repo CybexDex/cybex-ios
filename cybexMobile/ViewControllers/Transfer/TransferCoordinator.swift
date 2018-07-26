@@ -24,9 +24,17 @@ protocol TransferStateManagerProtocol {
   
   func verifyAddress(_ assetName: String, address: String, callback: @escaping (Bool)->())
   
-  func validAmount(_ balance: Balance, amount: NSString, memo: String)
+  func setAmount(_ amount: String)
+  
+  func setMemo(_ memo: String)
+  
+  func validAmount()
+  
+  func validAccount(_ account: String)
   
   func transfer(_ assetId: String, amount: String, address: String, fee_id: String, fee_amount: String, callback: @escaping (Any)->())
+  
+  func getGatewayFee(_ assetId: String, amount: String, memo: String)
 }
 
 class TransferCoordinator: AccountRootCoordinator {
@@ -63,10 +71,11 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
     self.rootVC.topViewController?.customPresentViewController(presenter, viewController: newNav, animated: true, completion: nil)
     
     var items = [String]()
-    if let balances = UserManager.shared.balances.value {
+    let balances = UserManager.shared.balances.value
+    if let balances = balances {
       for balance in balances {
-        if let trade = app_data.assetInfo[balance.asset_type] {
-          items.append(trade.symbol.filterJade)
+        if let info = app_data.assetInfo[balance.asset_type] {
+          items.append(info.symbol.filterJade)
         }
       }
     }
@@ -76,7 +85,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
       vc.selectedValue =  (0, 0)
       let coordinator = PickerCoordinator(rootVC: pickerCoordinator.rootVC)
       coordinator.pickerDidSelected = { [weak self] (picker: UIPickerView) -> Void in
-        
+        self?.store.dispatch(SetBalanceAction(balance: balances![picker.selectedRow(inComponent: 0)]))
       }
       vc.coordinator = coordinator
       
@@ -90,21 +99,68 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     
   }
   
-  func verifyAddress(_ assetName: String, address: String, callback: @escaping (Bool)->()){
-    async {
-      let data = try? await(GraphQLManager.shared.verifyAddress(assetName: assetName, address: address))
-      main {
-        if case let data?? = data {
-          self.store.dispatch(ValidAccountAction(isValid: data.valid))
-        }else{
-          self.store.dispatch(ValidAmountAction(isValid: false))
+  
+  func validAccount(_ account: String) {
+    if let balance = self.state.property.balance.value {
+      if let info = app_data.assetInfo[balance.asset_type] {
+        verifyAddress(info.symbol.filterJade, address: account) {[weak self] (success) in
+          guard let `self` = self else { return }
+          self.store.dispatch(ValidAccountAction(isValid: success))
         }
       }
     }
   }
   
-  func validAmount(_ balance: Balance, amount: NSString, memo: String) {
-    
+  func verifyAddress(_ assetName: String, address: String, callback: @escaping (Bool)->()){
+    async {
+      let data = try? await(GraphQLManager.shared.verifyAddress(assetName: assetName, address: address))
+      main {
+        if case let data?? = data {
+          callback(data.valid)
+        }else{
+          callback(false)
+        }
+      }
+    }
+  }
+  
+  func setAmount(_ amount: String) {
+    self.state.property.amount.accept(amount)
+  }
+  
+  func setMemo(_ memo: String) {
+    self.state.property.memo.accept(memo)
+  }
+  
+  func validAmount() {
+    if let balance = self.state.property.balance.value {
+      getGatewayFee(balance.asset_type, amount: self.state.property.amount.value, memo: self.state.property.memo.value)
+    }
+  }
+  
+  func getGatewayFee(_ assetId: String, amount: String, memo: String) {
+    let memo_key = self.state.property.memo.value
+    if var amount = amount.toDouble(){
+      let value = pow(10, (app_data.assetInfo[assetId]?.precision)!)
+      amount = amount * Double(truncating: value as NSNumber)
+      
+      if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId((UserManager.shared.account.value?.id)!)),
+                                                                        to_user_id: Int32(getUserId((self.state.property.data.value?.gatewayAccount)!)),
+                                                                        asset_id: Int32(getUserId(assetId)),
+                                                                        amount: Int32(amount),
+                                                                        fee_id: 0,
+                                                                        fee_amount: 0,
+                                                                        memo: memo,
+                                                                        from_memo_key: UserManager.shared.account.value?.memo_key,
+                                                                        to_memo_key: memo_key){
+        
+        calculateFee(operationString, focus_asset_id: assetId, operationID: .transfer) { (success, amount, fee_id) in
+          log.debug(amount)
+//          let dictionary = ["asset_id":fee_id,"amount":amount.stringValue]
+//          self.store.dispatch(FetchGatewayFee(data:(Fee(JSON: dictionary)!,success:success)))
+        }
+      }
+    }
   }
   
   var state: TransferState {
