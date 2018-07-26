@@ -32,7 +32,7 @@ struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [apiCategory.history, historyCatogery.get_account_history.rawValue, [accountID, objectID.operation_history_object, "100", objectID.operation_history_object]]
+    return [apiCategory.history, historyCatogery.get_account_history.rawValue, [accountID, objectID.operation_history_object.rawValue, "100", objectID.operation_history_object.rawValue]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
