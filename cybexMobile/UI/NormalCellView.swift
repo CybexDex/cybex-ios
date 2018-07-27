@@ -96,7 +96,7 @@ class NormalCellView: UIView {
 //                }
                 self.leftIcon.isHidden = false
                 self.leftIcon.image = leftIconImg
-                nameLeftConstraint.constant = 41
+                nameLeftConstraint.constant = 39+15
 //            }
         }
     }
