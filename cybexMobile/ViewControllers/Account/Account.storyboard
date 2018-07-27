@@ -142,8 +142,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account_bg_light" translatesAutoresizingMaskIntoConstraints="NO" id="d1Q-u1-Y84">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="accountBg" translatesAutoresizingMaskIntoConstraints="NO" id="d1Q-u1-Y84">
+                                <rect key="frame" x="0.0" y="510" width="375" height="157"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rf-4b-3th" customClass="AccountContentView" customModule="cybexMobile" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
@@ -157,7 +157,6 @@
                             <constraint firstItem="9rf-4b-3th" firstAttribute="leading" secondItem="CvP-Zi-pWY" secondAttribute="leading" id="NcV-ZN-C5j"/>
                             <constraint firstItem="9rf-4b-3th" firstAttribute="top" secondItem="CvP-Zi-pWY" secondAttribute="top" id="Wrk-Q2-WfI"/>
                             <constraint firstItem="CvP-Zi-pWY" firstAttribute="trailing" secondItem="9rf-4b-3th" secondAttribute="trailing" id="iaj-xo-tDX"/>
-                            <constraint firstItem="d1Q-u1-Y84" firstAttribute="top" secondItem="E0K-cV-CXv" secondAttribute="top" id="lEa-9U-bIE"/>
                             <constraint firstAttribute="bottom" secondItem="d1Q-u1-Y84" secondAttribute="bottom" id="vzM-ix-RhM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CvP-Zi-pWY"/>
@@ -287,7 +286,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="account_bg_light" width="375" height="553"/>
+        <image name="accountBg" width="375" height="157"/>
         <image name="imgMyBalanceBg" width="375" height="180"/>
     </resources>
 </document>

@@ -31,7 +31,7 @@ class AccountTableHeadView: UIView {
   
   func setup(){
     setupEvent()
-    updateHeight()
+//    updateHeight()
   }
   
   func setupEvent() {

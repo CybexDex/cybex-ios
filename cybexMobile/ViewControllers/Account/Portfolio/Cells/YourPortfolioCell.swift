@@ -14,10 +14,10 @@ class YourPortfolioCell: BaseTableViewCell {
   
   override func awakeFromNib() {
         super.awakeFromNib()
-    self.contentView.shadowOffset = CGSize(width: 0, height: 8)
-    self.contentView.shadowColor   = ThemeManager.currentThemeIndex == 0 ? .black10 : .steel20
-    self.contentView.shadowRadius  = 4
-    self.contentView.shadowOpacity = 1.0
+//    self.contentView.shadowOffset = CGSize(width: 0, height: 8)
+//    self.contentView.shadowColor   = ThemeManager.currentThemeIndex == 0 ? .black10 : .steel20
+//    self.contentView.shadowRadius  = 4
+//    self.contentView.shadowOpacity = 1.0
     
   }
     @IBOutlet weak var yourPortfolioCellView: YourPorfolioView!

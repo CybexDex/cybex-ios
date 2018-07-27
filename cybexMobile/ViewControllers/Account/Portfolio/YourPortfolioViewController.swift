@@ -80,8 +80,16 @@ class YourPortfolioViewController: BaseViewController {
       if let _ = UserManager.shared.balances.value{
         self.data = UserManager.shared.getPortfolioDatas()
       }
+      
       self.tableView.reloadData()
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+    UserManager.shared.limitOrder.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
+      guard let `self` = self else { return }
+      self.data = UserManager.shared.getPortfolioDatas()
+      self.tableView.reloadData()
+
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
     app_data.data.asObservable().distinctUntilChanged()
 //      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
@@ -93,7 +101,11 @@ class YourPortfolioViewController: BaseViewController {
           if let _ = UserManager.shared.balances.value{
             self.data = UserManager.shared.getPortfolioDatas()
           }
-          
+          if self.data.count == 0 {
+            self.tableView.showNoData(R.string.localizable.balance_nodata.key.localized(), icon: R.image.imgWalletNoAssert.name)
+          } else {
+            self.tableView.hiddenNoData()
+          }
           guard self.isVisible else { return }
 
           self.tableView.reloadData()
@@ -137,3 +149,5 @@ extension YourPortfolioViewController {
     self.coordinator?.pushToTransferVC()
   }
 }
+
+

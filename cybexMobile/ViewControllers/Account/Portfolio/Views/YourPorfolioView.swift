@@ -29,6 +29,12 @@ class YourPorfolioView:  UIView{
   @IBOutlet weak var high_low_icon: UIImageView!
   @IBOutlet weak var high_low_label: UILabel!
   
+  var block: Any? {
+    didSet {
+      
+    }
+  }
+  
   var data: Any? {
     didSet {
       if let portfolioData = data as? PortfolioData {
@@ -43,7 +49,7 @@ class YourPorfolioView:  UIView{
         }else{
           rmbPrice.text  = portfolioData.rbmPrice
         }
-        cybAmount.text = portfolioData.cybPrice
+        cybAmount.text = portfolioData.realAmount
         
         
 //        high_low_view.isHidden = balance.asset_type == AssetConfiguration.CYB
