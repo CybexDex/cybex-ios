@@ -300,6 +300,8 @@
 "account_property" = "Your Total Balance(CYB)";
 "hello" = "Hello，";
 "deposit_withdraw" = "Deposit/Withdraw";
+"frozen" = "Frozen：";
+
 //zsy end
 
 "recode_nodata" = "No record";

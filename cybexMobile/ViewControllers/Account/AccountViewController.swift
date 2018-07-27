@@ -145,13 +145,29 @@ extension AccountViewController{
     let index = sender["index"] as! Int
     switch index {
     case 0:
-      self.coordinator?.openYourProtfolio()
+      if !UserManager.shared.isLoginIn {
+        app_coodinator.showLogin()
+      } else {
+        self.coordinator?.openYourProtfolio()
+      }
     case 1:
-      self.coordinator?.openRecharge()
+      if !UserManager.shared.isLoginIn {
+        app_coodinator.showLogin()
+      } else {
+        self.coordinator?.openRecharge()
+      }
     case 2:
-      self.coordinator?.openOpenedOrders()
+      if !UserManager.shared.isLoginIn {
+        app_coodinator.showLogin()
+      } else {
+        self.coordinator?.openOpenedOrders()
+      }
     default:
-      openLockupAssets([:])
+      if !UserManager.shared.isLoginIn {
+        app_coodinator.showLogin()
+      } else {
+        openLockupAssets([:])
+      }
     }
   }
 

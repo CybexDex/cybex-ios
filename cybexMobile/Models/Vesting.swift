@@ -91,7 +91,7 @@ class MyPortfolioData{
   var rbmPrice : String = ""
   var limitAmount : String = ""
   
-  required init?(balance : Balance, limit : LimitOrder){
+  required init?(balance : Balance){
     icon = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"
     
     name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
@@ -108,6 +108,23 @@ class MyPortfolioData{
     }
     
     //获取冻结资产
+    var limitDecimal: Decimal = 0
     
+    if let limitArray = UserManager.shared.limitOrder.value {
+      for limit in limitArray {
+        if limit.isBuy {
+          if limit.sellPrice.base.assetID == balance.asset_type {
+            let amount = getRealAmount(balance.asset_type, amount: limit.sellPrice.base.amount)
+            limitDecimal = limitDecimal + amount
+          }
+        } else {
+          if limit.sellPrice.quote.assetID == balance.asset_type {
+            let amount = getRealAmount(balance.asset_type, amount: limit.sellPrice.quote.amount)
+            limitDecimal = limitDecimal + amount
+          }
+        }
+      }
+      limitAmount = R.string.localizable.frozen.key.localized() + limitDecimal.stringValue.formatCurrency(digitNum: 5)
+    }
   }
 }
