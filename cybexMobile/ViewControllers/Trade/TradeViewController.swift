@@ -76,6 +76,19 @@ class TradeViewController: BaseViewController {
     self.pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB)
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    if app_data.data.value.count == 0 {
+      return
+    }
+    
+    if self.isVisible {
+      self.getPairInfo()
+      self.refreshView()
+    }
+  }
+  
   func setupUI(){
     setupNavi()
     
