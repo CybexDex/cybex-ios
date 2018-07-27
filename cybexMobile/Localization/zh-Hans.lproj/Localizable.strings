@@ -280,6 +280,8 @@
 "transfer_fee" = "手续费";
 "transfer_balance" = "余额";
 "picker_comfirm" = "确认";
+"transfer_failed" = "转账失败";
+"transfer_successed" = "转账成功";
 
 //zsy add
 "my_property" = "我的资产";

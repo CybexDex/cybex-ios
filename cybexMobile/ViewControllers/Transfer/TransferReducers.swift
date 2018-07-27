@@ -25,6 +25,8 @@ func TransferPropertyReducer(_ state: TransferPropertyState?, action: Action) ->
     state.balance.accept(action.balance)
   case let action as SetFeeAction:
     state.fee.accept(action.fee)
+  case let action as SetToAccountAction:
+    state.to_account.accept(action.account)
   default:
     break
   }

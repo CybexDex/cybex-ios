@@ -39,7 +39,7 @@ class TransferView: UIView {
     didSet {
       transferButton.setBackgroundImage(buttonIsEnable ? R.image.btnColorOrange() : R.image.btnColorGrey(), for: .normal)
       transferButton.isUserInteractionEnabled = buttonIsEnable
-      transferButton.alpha = 0.5
+      transferButton.alpha = buttonIsEnable ? 1.0 : 0.5
     }
   }
   
@@ -145,6 +145,8 @@ class TransferView: UIView {
     self.handleSetupSubTextFiledView(quantityView, tag: InputType.amount.rawValue)
     quantityView.textField.keyboardType = .decimalPad
     self.handleSubTextView(memoView, tag: InputType.memo.rawValue)
+    memoView.textView.minHeight = 90
+    memoView.textView.maxHeight = 90
   }
   
   func handleSetupSubTextFiledView(_ titleTextfieldView: TitleTextfieldView, tag: Int) {
@@ -194,7 +196,7 @@ extension TransferView: GrowContentViewDataSource {
   }
   
   func shadowSettingOfSection(_ contentView: GrowContentView, section: NSInteger) -> (color: UIColor, offset: CGSize, radius: CGFloat) {
-    return (UIColor.red,CGSize(width: 0, height: -5),5)
+    return (UIColor.black,CGSize(width: 0, height: 0),5)
   }
   
   func viewOfIndexpath(_ contentView: GrowContentView, indexpath: NSIndexPath) -> (view: UIView, key: String) {
@@ -263,7 +265,7 @@ extension TransferView: TitleTextFieldViewDelegate,TitleTextFieldViewDataSource,
                               warningText: "",
                               introduce: "",
                               isShowPromptWhenEditing: false,
-                              showLine: true,
+                              showLine: false,
                               isSecureTextEntry: false)
     } else if titleTextFieldView == cryptoView {
       return TitleTextSetting(title: R.string.localizable.transfer_crypto.key.localized(),
@@ -279,7 +281,7 @@ extension TransferView: TitleTextFieldViewDelegate,TitleTextFieldViewDataSource,
                               warningText: "",
                               introduce: "",
                               isShowPromptWhenEditing: false,
-                              showLine: false,
+                              showLine: true,
                               isSecureTextEntry: false)
     }
   }
@@ -304,28 +306,37 @@ extension TransferView: TitleTextFieldViewDelegate,TitleTextFieldViewDataSource,
 }
 
 extension TransferView: UITextFieldDelegate {
+  func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    switch textField.tag {
+    case InputType.crypto.rawValue:
+      self.sendEventWith(TransferEvents.selectCrypto.rawValue, userinfo: [:])
+      return false
+    default:
+      return true
+    }
+  }
+  
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
-    
+    switch textField.tag {
+    case InputType.account.rawValue:
+      self.sendEventWith(TextChangeEvent.account.rawValue, userinfo: ["content" : textField.text ?? ""])
+    case InputType.amount.rawValue:
+      self.sendEventWith(TextChangeEvent.amount.rawValue, userinfo: ["content" : textField.text ?? ""])
+    default:
+      return
+    }
   }
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    let currentText = textField.text ?? ""
-    let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
     switch textField.tag {
-    case InputType.account.rawValue:
-      self.sendEventWith(TextChangeEvent.account.rawValue, userinfo: ["content" : newText])
-    case InputType.amount.rawValue:
-      self.sendEventWith(TextChangeEvent.amount.rawValue, userinfo: ["content" : newText])
     case InputType.crypto.rawValue:
       return false
     default:
       return true
     }
-    return true
   }
 }
 
@@ -338,11 +349,17 @@ extension TransferView: GrowingTextViewDelegate {
     
   }
   
+  func textViewDidChange(_ textView: UITextView) {
+    if textView.tag == InputType.memo.rawValue {
+      self.sendEventWith(TextChangeEvent.memo.rawValue, userinfo: ["content" : textView.text])
+    }
+  }
+  
   func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
     if textView.tag == InputType.memo.rawValue {
       memoView.updateContentSize()
+      contentView.updateContentSize()
       self.updateContentSize()
-      self.sendEventWith(TextChangeEvent.memo.rawValue, userinfo: ["content" : textView.text])
     }
   }
 }

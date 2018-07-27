@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftTheme
 
 struct PickerData {
   static let key = "key"
@@ -95,9 +96,11 @@ extension PickerView: UIPickerViewDelegate,UIPickerViewDataSource {
     return 0
   }
   
-  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+  func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
     if items != nil {
-      return self.titleForRow(row, component: component)
+      if let title = self.titleForRow(row, component: component) {
+        return NSAttributedString(string: title, attributes:[NSAttributedStringKey.foregroundColor: ThemeManager.currentThemeIndex == 0 ? pickerView.theme1TintColor : pickerView.theme2TintColor])
+      }
     }
     return nil
   }
