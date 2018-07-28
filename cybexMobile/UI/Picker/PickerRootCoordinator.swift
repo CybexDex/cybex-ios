@@ -12,15 +12,4 @@ class PickerRootCoordinator: NavCoordinator {
   override func start() {
     
   }
-  
-  func startWithItems(_ items: AnyObject, selectedValue: (component: NSInteger,row: NSInteger)) {
-    if let vc = R.storyboard.components.pickerViewController() {
-      vc.items = items
-      vc.selectedValue = selectedValue
-      let coordinator = PickerCoordinator(rootVC: self.rootVC)
-      vc.coordinator = coordinator
-      
-      self.rootVC.pushViewController(vc, animated: true)
-    }
-  }
 }

@@ -9,8 +9,10 @@
 import UIKit
 import ReSwift
 
+typealias PickerDidSelected = ((_ picker: UIPickerView) -> Void)
+
 protocol PickerCoordinatorProtocol {
-  func dismiss()
+  func finishWithPicker(_ picker: UIPickerView)
 }
 
 protocol PickerStateManagerProtocol {
@@ -23,7 +25,9 @@ protocol PickerStateManagerProtocol {
 class PickerCoordinator: PickerRootCoordinator {
     
     lazy var creator = PickerPropertyActionCreate()
-    
+  
+  var pickerDidSelected: PickerDidSelected?
+  
     var store = Store<PickerState>(
         reducer: PickerReducer,
         state: nil,
@@ -32,7 +36,10 @@ class PickerCoordinator: PickerRootCoordinator {
 }
 
 extension PickerCoordinator: PickerCoordinatorProtocol {
-  func dismiss() {
+  func finishWithPicker(_ picker: UIPickerView) {
+    if let pickerSelect = self.pickerDidSelected {
+      pickerSelect(picker)
+    }
     self.rootVC.dismiss(animated: true, completion: nil)
   }
 }

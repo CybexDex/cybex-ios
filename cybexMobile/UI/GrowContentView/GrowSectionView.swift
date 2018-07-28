@@ -34,7 +34,6 @@ class GrowSectionView: UIView {
     corAndShadowView?.bottom(to: self, offset: 0)
     
     contentView = UIStackView(frame: CGRect.zero)
-    contentView?.backgroundColor = UIColor.clear
     contentView?.axis = .vertical
     contentView?.distribution = .fill
     contentView?.alignment = .fill
