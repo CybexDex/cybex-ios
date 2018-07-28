@@ -290,6 +290,7 @@
 "account_property" = "账户资产估值(CYB)";
 "hello" = "您好，";
 "deposit_withdraw" = "充值提现";
+"frozen" = "冻结：";
 
 //zsy end
 

@@ -432,16 +432,15 @@ class UserManager {
     return datas
   }
   
-//  func getMyPortfolioDatas() -> [MyPortfolioData]{
-//    var datas = [MyPortfolioData]()
-//    if let balances = self.balances.value, let limits = self.limitOrder.value {
-//      for balance in balances{
-//        datas.append(MyPortfolioData.init(balance: balance, limit: limit))
-//      }
-////      for limi
-//    }
-//    return datas
-//  }
+  func getMyPortfolioDatas() -> [MyPortfolioData]{
+    var datas = [MyPortfolioData]()
+    if let balances = self.balances.value {
+      for balance in balances{
+        datas.append(MyPortfolioData.init(balance: balance)!)
+      }
+    }
+    return datas
+  }
   
 }
 

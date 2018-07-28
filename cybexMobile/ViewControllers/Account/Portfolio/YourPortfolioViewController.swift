@@ -10,12 +10,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import SwiftTheme
 
 class YourPortfolioViewController: BaseViewController {
   struct define {
     static let sectionHeaderHeight : CGFloat = 44.0
   }
-  var data : [PortfolioData] = [PortfolioData]()
+  var data : [MyPortfolioData] = [MyPortfolioData]()
   
   var coordinator: (YourPortfolioCoordinatorProtocol & YourPortfolioStateManagerProtocol)?
   
@@ -24,14 +25,21 @@ class YourPortfolioViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupUI()
+
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    setupUI()
+    
     let image = UIImage.init(color: UIColor.clear)
     self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
     self.navigationController?.navigationBar.isTranslucent = true
+    self.navigationController?.makeTransparent(withTint: .white)
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     self.navigationController?.makeTransparent(withTint: .white)
   }
   
@@ -42,7 +50,18 @@ class YourPortfolioViewController: BaseViewController {
     }
   }
   
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    if ThemeManager.currentThemeIndex == 0 {
+      UIApplication.shared.statusBarStyle = .lightContent
+    } else {
+      UIApplication.shared.statusBarStyle = .default
+    }
+  }
+  
   func setupUI(){
+    UIApplication.shared.statusBarStyle = .lightContent
+
     let height = UIScreen.main.bounds.height
     if height == 812 {
       imgBgView.image = R.image.imgMyBalanceBgX()
@@ -78,7 +97,7 @@ class YourPortfolioViewController: BaseViewController {
       guard let `self` = self else { return }
       
       if let _ = UserManager.shared.balances.value{
-        self.data = UserManager.shared.getPortfolioDatas()
+        self.data = UserManager.shared.getMyPortfolioDatas()
       }
       
       self.tableView.reloadData()
@@ -86,7 +105,7 @@ class YourPortfolioViewController: BaseViewController {
     
     UserManager.shared.limitOrder.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
       guard let `self` = self else { return }
-      self.data = UserManager.shared.getPortfolioDatas()
+      self.data = UserManager.shared.getMyPortfolioDatas()
       self.tableView.reloadData()
 
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -99,7 +118,7 @@ class YourPortfolioViewController: BaseViewController {
 
         DispatchQueue.main.async {
           if let _ = UserManager.shared.balances.value{
-            self.data = UserManager.shared.getPortfolioDatas()
+            self.data = UserManager.shared.getMyPortfolioDatas()
           }
           if self.data.count == 0 {
             self.tableView.showNoData(R.string.localizable.balance_nodata.key.localized(), icon: R.image.imgWalletNoAssert.name)

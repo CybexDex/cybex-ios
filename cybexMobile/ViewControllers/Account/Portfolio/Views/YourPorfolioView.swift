@@ -29,21 +29,15 @@ class YourPorfolioView:  UIView{
   @IBOutlet weak var high_low_icon: UIImageView!
   @IBOutlet weak var high_low_label: UILabel!
   
-  var block: Any? {
-    didSet {
-      
-    }
-  }
-  
   var data: Any? {
     didSet {
-      if let portfolioData = data as? PortfolioData {
+      if let portfolioData = data as? MyPortfolioData {
         bottomView.isHidden = true
 
         self.icon.kf.setImage(with: URL(string: portfolioData.icon))
         
         name.text      = portfolioData.name
-        amount.text    = portfolioData.realAmount
+        amount.text    = portfolioData.limitAmount
         if portfolioData.rbmPrice == "-"{
           rmbPrice.isHidden = true
         }else{
