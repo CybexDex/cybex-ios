@@ -18,7 +18,7 @@ protocol RechargeRecodeStateManagerProtocol {
     _ subscriber: S, transform: ((Subscription<RechargeRecodeState>) -> Subscription<SelectedState>)?
   ) where S.StoreSubscriberStateType == SelectedState
   
-  func fetchRechargeRecodeList(_ accountName : String ,asset : String ,fundType : fundType ,size : Int , offset : Int ,expiration : Int)
+  func fetchRechargeRecodeList(_ accountName : String ,asset : String ,fundType : fundType ,size : Int , offset : Int ,expiration : Int ,callback:@escaping (Bool)->())
   
 }
 
@@ -48,10 +48,15 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
     store.subscribe(subscriber, transform: transform)
   }
   
-  func fetchRechargeRecodeList(_ accountName : String ,asset : String ,fundType : fundType ,size : Int , offset : Int ,expiration : Int) {
-    getWithdrawAndDepositRecords(accountName, asset: asset, fundType: fundType, size: size, offset: offset, expiration: expiration) { (result) in
+  func fetchRechargeRecodeList(_ accountName : String ,asset : String ,fundType : fundType ,size : Int , offset : Int ,expiration : Int, callback:@escaping (Bool)->()) {
+    getWithdrawAndDepositRecords(accountName, asset: asset, fundType: fundType, size: size, offset: offset, expiration: expiration) { [weak self](result) in
+      guard let `self` = self else { return }
       self.store.dispatch(FetchDepositRecordsAction(data : result))
+      if result != nil {
+        callback(true)
+      }else {
+        callback(false)
+      }
     }
   }
-  
 }

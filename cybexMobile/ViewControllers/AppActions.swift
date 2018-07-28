@@ -22,6 +22,8 @@ struct AppPropertyState {
 
   var subscribeIds:[Pair:Int]?
   var pairsRefreshTimes:[Pair:Double]?
+  
+  var otherRequestRelyData:BehaviorRelay<Int?> = BehaviorRelay(value: nil)
 
   var assetInfo:[String:AssetInfo] = [:]
   

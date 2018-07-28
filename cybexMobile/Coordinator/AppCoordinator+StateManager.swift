@@ -95,8 +95,15 @@ extension AppCoordinator: AppStateManagerProtocol {
 }
 
 extension AppCoordinator {
+  
+  /*
+   1 根据base分组
+   2 根据refreshTime刷新
+   3 延迟函数
+   */
+  
 
-  func request24hMarkets(_ pairs: [Pair], sub: Bool = true ,totalTime:Double = 3,splits:Int = 3, priority:Operation.QueuePriority = .normal ) {
+  func request24hMarkets(_ pairs: [Pair], sub: Bool = true ,totalTime:Double = 3,splits:Int = 3, priority:Operation.QueuePriority = .normal ,isNoFirst: Bool = true) {
     let now = Date()
     let curTime = now.timeIntervalSince1970
     
@@ -104,59 +111,80 @@ extension AppCoordinator {
     
     let timePassed = (-start.minute * 60 - start.second).double
     start = start.addingTimeInterval(timePassed)
-    var filterPairs = pairs.filter { (pair) -> Bool in
+    let filterPairs = pairs.filter { (pair) -> Bool in
       if let refreshTimes = app_data.pairsRefreshTimes, let oldTime = refreshTimes[pair] {
         return curTime - oldTime >= 5
       }
       return true
     }
     
-    if self.firstFetchPairsCount != 0 || self.secondFetchPairsCount != 0 || self.thirdFetchPairsCount != 0 {
-      return
-    }
-    
-    // 筛选后的pairs
-    let length : Int = filterPairs.count / 3
-    if length > 1,!sub {
-      self.firstFetchPairsCount = length
-      self.secondFetchPairsCount = length + 1
-      self.thirdFetchPairsCount = filterPairs.count - 2 * length - 1
-      for index in 0...length - 1 {
-        let pair = filterPairs[index]
-
-        AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority) {
-
-          self.firstFetchPairsCount -= 1
-        }
-      }
-      SwifterSwift.delay(milliseconds: 1000) {
-        for index in length...2*length {
-          
-          let pair = filterPairs[index]
-
-          AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority) {
-            
-            self.secondFetchPairsCount -= 1
-          }
-        }
-      }
-      SwifterSwift.delay(milliseconds: 2000) {
-        for index in 2*length+1...filterPairs.count - 1 {
-          
-          let pair = filterPairs[index]
-
-          AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority) {
-
-            self.thirdFetchPairsCount -= 1
-          }
-        }
-      }
-    }else {
+    if isNoFirst {
       for pair in filterPairs {
         AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority)
       }
+    }else {
+      fetch24Markets(UserManager.shared.refreshTime, startTime: start, now: now,sub: sub,priority: priority)
     }
+ 
     
+//    // 筛选后的pairs
+//    let length : Int = filterPairs.count / 3
+//    if length > 1,!sub {
+//
+//      for index in 0...length - 1 {
+//        let pair = filterPairs[index]
+//
+//        AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority) {
+//
+//        }
+//      }
+//      SwifterSwift.delay(milliseconds: 1000) {
+//        for index in length...2*length {
+//
+//          let pair = filterPairs[index]
+//
+//          AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority) {
+//
+//          }
+//        }
+//      }
+//      SwifterSwift.delay(milliseconds: 2000) {
+//        for index in 2*length+1...filterPairs.count - 1 {
+//
+//          let pair = filterPairs[index]
+//
+//          AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority) {
+//
+//          }
+//        }
+//      }
+//    }else {
+//      for pair in filterPairs {
+//        AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority)
+//      }
+//    }
+    
+  }
+  
+  
+  func fetch24Markets(_ time : TimeInterval ,startTime : Date ,now : Date ,sub : Bool = true ,priority:Operation.QueuePriority = .normal) {
+    
+    let timeSpace = time / Double(AssetConfiguration.market_base_assets.count)
+    
+    var refreshTime : TimeInterval = 0
+    for index in 0..<AssetConfiguration.market_base_assets.count {
+      let base = AssetConfiguration.market_base_assets[index]
+      refreshTime = Double(index) * timeSpace
+      let pairs = AssetConfiguration.shared.asset_ids.filter({return $0.base == base})
+      SwifterSwift.delay(milliseconds: refreshTime * 1000.0) {
+        
+        for pair in pairs {
+        
+          log.warning("base -- \(pair.base) time --- \(Date())")
+          AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: startTime, endTime: now), sub: sub, priority:priority)
+        }
+      }
+    }
   }
   
   
@@ -166,16 +194,21 @@ extension AppCoordinator {
       self.fetchPariTimer?.pause()
       self.fetchPariTimer = nil
     }
+    
     self.fetchPariTimer = Repeater.every(.seconds(UserManager.shared.refreshTime), { [weak self](timer) in
       guard let `self` = self else {return}
       let status = RealReachability.sharedInstance().currentReachabilityStatus()
       if status == .RealStatusNotReachable || status  == .RealStatusUnknown || !CybexWebSocketService.shared.checkNetworConnected() {
+   
+        app_coodinator.fetchPariTimer = nil
         timer.pause()
         
         return
       }
       if !CybexWebSocketService.shared.overload() {
-        self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority:priority)
+//        self.state.property.otherRequestRelyData.accept(1)
+        self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority: priority, isNoFirst: false)
+//        self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority:priority)
       }
     })
   }
@@ -224,6 +257,11 @@ extension AppCoordinator {
         }
       }
       request24hMarkets(AssetConfiguration.shared.asset_ids, priority:.high)
+      if app_coodinator.fetchPariTimer == nil || !(app_coodinator.fetchPariTimer!.state.isRunning){
+        AppConfiguration.shared.appCoordinator.repeatFetchPairInfo(.veryLow)
+      }
+
+      
     }
     
   }

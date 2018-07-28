@@ -69,7 +69,7 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_text" value="language"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="language"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCO-l7-dlp" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
@@ -84,7 +84,7 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_text" value="frequency"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="frequency"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJ6-Af-LNN" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
@@ -97,7 +97,7 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_text" value="version"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="version"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                 </subviews>
@@ -131,7 +131,7 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_text" value="theme"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="theme"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                 </subviews>

@@ -239,12 +239,8 @@
 		70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4D27CA3E4885E696C2D1EAEFD1BAB4 /* QuotesTitleView.swift */; };
 		72199D6621044FD100575226 /* RechargeRecodeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6221044FD100575226 /* RechargeRecodeCoordinator.swift */; };
 		72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6321044FD100575226 /* RechargeRecodeActions.swift */; };
-		72199D6821044FD100575226 /* RechargeRecodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6421044FD100575226 /* RechargeRecodeViewController.swift */; };
+		72199D6821044FD100575226 /* TradeRecodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6421044FD100575226 /* TradeRecodeViewController.swift */; };
 		72199D6921044FD100575226 /* RechargeRecodeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6521044FD100575226 /* RechargeRecodeReducers.swift */; };
-		72199D6F21044FE800575226 /* WithdrawRecodeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6B21044FE800575226 /* WithdrawRecodeCoordinator.swift */; };
-		72199D7021044FE800575226 /* WithdrawRecodeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6C21044FE800575226 /* WithdrawRecodeActions.swift */; };
-		72199D7121044FE800575226 /* WithdrawRecodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6D21044FE800575226 /* WithdrawRecodeViewController.swift */; };
-		72199D7221044FE800575226 /* WithdrawRecodeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6E21044FE800575226 /* WithdrawRecodeReducers.swift */; };
 		72199D742104502800575226 /* Recode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72199D732104502800575226 /* Recode.storyboard */; };
 		72199D79210450C900575226 /* RecodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D77210450C900575226 /* RecodeCell.swift */; };
 		72199D7A210450C900575226 /* RecodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199D78210450C900575226 /* RecodeCell.xib */; };
@@ -5700,12 +5696,8 @@
 		721676906B5FA3121F2DBD36D5D5B6A2 /* test_tools.ipp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = test_tools.ipp; sourceTree = "<group>"; };
 		72199D6221044FD100575226 /* RechargeRecodeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeCoordinator.swift; sourceTree = "<group>"; };
 		72199D6321044FD100575226 /* RechargeRecodeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeActions.swift; sourceTree = "<group>"; };
-		72199D6421044FD100575226 /* RechargeRecodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeViewController.swift; sourceTree = "<group>"; };
+		72199D6421044FD100575226 /* TradeRecodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeRecodeViewController.swift; sourceTree = "<group>"; };
 		72199D6521044FD100575226 /* RechargeRecodeReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeReducers.swift; sourceTree = "<group>"; };
-		72199D6B21044FE800575226 /* WithdrawRecodeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawRecodeCoordinator.swift; sourceTree = "<group>"; };
-		72199D6C21044FE800575226 /* WithdrawRecodeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawRecodeActions.swift; sourceTree = "<group>"; };
-		72199D6D21044FE800575226 /* WithdrawRecodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawRecodeViewController.swift; sourceTree = "<group>"; };
-		72199D6E21044FE800575226 /* WithdrawRecodeReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawRecodeReducers.swift; sourceTree = "<group>"; };
 		72199D732104502800575226 /* Recode.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Recode.storyboard; sourceTree = "<group>"; };
 		72199D77210450C900575226 /* RecodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecodeCell.swift; sourceTree = "<group>"; };
 		72199D78210450C900575226 /* RecodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecodeCell.xib; sourceTree = "<group>"; };
@@ -21629,29 +21621,18 @@
 			path = nt2;
 			sourceTree = "<group>";
 		};
-		72199D6121044FB600575226 /* RechargeRecode */ = {
+		72199D6121044FB600575226 /* TradeRecord */ = {
 			isa = PBXGroup;
 			children = (
 				72199D76210450AC00575226 /* Cells */,
 				72199D75210450A000575226 /* Views */,
 				72199D6221044FD100575226 /* RechargeRecodeCoordinator.swift */,
 				72199D6321044FD100575226 /* RechargeRecodeActions.swift */,
-				72199D6421044FD100575226 /* RechargeRecodeViewController.swift */,
+				72199D6421044FD100575226 /* TradeRecodeViewController.swift */,
 				72199D6521044FD100575226 /* RechargeRecodeReducers.swift */,
 				72199D732104502800575226 /* Recode.storyboard */,
 			);
-			path = RechargeRecode;
-			sourceTree = "<group>";
-		};
-		72199D6A21044FD700575226 /* WithdrawRecode */ = {
-			isa = PBXGroup;
-			children = (
-				72199D6B21044FE800575226 /* WithdrawRecodeCoordinator.swift */,
-				72199D6C21044FE800575226 /* WithdrawRecodeActions.swift */,
-				72199D6D21044FE800575226 /* WithdrawRecodeViewController.swift */,
-				72199D6E21044FE800575226 /* WithdrawRecodeReducers.swift */,
-			);
-			path = WithdrawRecode;
+			path = TradeRecord;
 			sourceTree = "<group>";
 		};
 		72199D75210450A000575226 /* Views */ = {
@@ -27195,7 +27176,7 @@
 		BC07906A1E2E020C6177ADCA4F64EF05 /* RechargeDetail */ = {
 			isa = PBXGroup;
 			children = (
-				72199D6121044FB600575226 /* RechargeRecode */,
+				72199D6121044FB600575226 /* TradeRecord */,
 				6F80A8DB9CC8A072FDB23592D220D4A5 /* Views */,
 				8CD2F49B999FF4B9FB8DB0B17BE5F897 /* RechargeDetailActions.swift */,
 				DCDDA3A4A776E85A3F485F32310E2798 /* RechargeDetailCoordinator.swift */,
@@ -28835,7 +28816,6 @@
 		D45A98F5C4B226E86B604DDF7AEE6546 /* WithdrawDetail */ = {
 			isa = PBXGroup;
 			children = (
-				72199D6A21044FD700575226 /* WithdrawRecode */,
 				72EC6A4E20F4611500CEAFF6 /* Views */,
 				A0BD0C5B42031D1C4DFFD51560AF9178 /* WithdrawDetailActions.swift */,
 				4C14509E978A6A84AD1A5E97E1E66761 /* WithdrawDetailCoordinator.swift */,
@@ -32776,6 +32756,7 @@
 				"${BUILT_PRODUCTS_DIR}/Device/Device.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/EFQRCode/EFQRCode.framework",
+				"${BUILT_PRODUCTS_DIR}/ESPullToRefresh/ESPullToRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/EasyAnimation/EasyAnimation.framework",
 				"${BUILT_PRODUCTS_DIR}/FBRetainCycleDetector/FBRetainCycleDetector.framework",
@@ -32863,6 +32844,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Device.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EFQRCode.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESPullToRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESTabBarController_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EasyAnimation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBRetainCycleDetector.framework",
@@ -33000,7 +32982,6 @@
 				D6EF2CA9447A80749A341523EA37E613 /* AccessoryHorizentalView.swift in Sources */,
 				53079FD90D2B1B6BCB3863CB53111FAA /* Account.swift in Sources */,
 				B53165C099917599B9638053318C729A /* AccountAssetOperationView.swift in Sources */,
-				72199D7121044FE800575226 /* WithdrawRecodeViewController.swift in Sources */,
 				305DB17562E3D02F04E0122C1C4674A4 /* AccountAssetOperationsItemView.swift in Sources */,
 				65A0AB87E09E879EFAFA04DBA6B15D3E /* AccountCoordinator.swift in Sources */,
 				C37CA15215CBB1B064E0514AB9D0EFE5 /* AccountOpenedOrdersView.swift in Sources */,
@@ -33008,7 +32989,6 @@
 				D3694E6115F5ED50F0FFE4108E64BAEE /* AccountPortfolioCell.swift in Sources */,
 				9708F7C8EA5B8E107E937306846BE6F0 /* AccountPortfolioCellView.swift in Sources */,
 				32BED01405F6D7B22B348057E0BDE3C8 /* AccountPortfolioView.swift in Sources */,
-				72199D6F21044FE800575226 /* WithdrawRecodeCoordinator.swift in Sources */,
 				72199DA92104680000575226 /* TransferContentView.swift in Sources */,
 				E0AD8E2E835D84754C63BA76FBA8582E /* AccountReducers.swift in Sources */,
 				C44F04354B1B9F8051BA2651AC620D65 /* AccountRootCoordinator.swift in Sources */,
@@ -33149,7 +33129,6 @@
 				41143CEDF6A8910D9C2E8BCEE8C47A38 /* MyHistoryViewController.swift in Sources */,
 				3B0EB65B210313B200F19C31 /* YourPortfolioHandleView.swift in Sources */,
 				CD017D1C374A5B06D3ECEC24936E0911 /* MyOpenedOrdersView.swift in Sources */,
-				72199D7021044FE800575226 /* WithdrawRecodeActions.swift in Sources */,
 				D3008B984211AFE152859658DC6B773B /* NSNotification+Extensions.swift in Sources */,
 				031F69CC95D2906A4F8F4063776327F6 /* NSObject+Extensions.swift in Sources */,
 				009625463316961A6BB07A49EB88D5D5 /* NavCoordinator.swift in Sources */,
@@ -33185,7 +33164,7 @@
 				D3C87D3A247487C8D834A828782FC472 /* PairListHorizantalView.swift in Sources */,
 				A819B2C87ADE04838AE8D44CF16C53B4 /* PairRechargeView.swift in Sources */,
 				70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */,
-				72199D6821044FD100575226 /* RechargeRecodeViewController.swift in Sources */,
+				72199D6821044FD100575226 /* TradeRecodeViewController.swift in Sources */,
 				72199D9721045DDE00575226 /* TransferListCellView.swift in Sources */,
 				E54849D562EC4C8B42B70B962A97269E /* R.generated.swift in Sources */,
 				ED57B29BDB18C8B97035E7DA20DF26E5 /* RechargeActions.swift in Sources */,
@@ -33248,7 +33227,6 @@
 				72199DA22104636900575226 /* TransferDetailReducers.swift in Sources */,
 				A0205CDF8595D10C5D9367EBCBBA714A /* UIColor+Additions.swift in Sources */,
 				1885C2EE1E25930F2E94702A8C05C2BC /* UIColor+Cybexblack.swift in Sources */,
-				72199D7221044FE800575226 /* WithdrawRecodeReducers.swift in Sources */,
 				492A4075DDD845005D90DD5201F32F26 /* UIColorExtension.swift in Sources */,
 				CC8DD1E9001CFBB8915E342EDB329B3E /* UIImage+Extensions.swift in Sources */,
 				0C46B30A32343632C135B84DDEB47F80 /* UIResponder+Route.swift in Sources */,

@@ -69,7 +69,7 @@ class WithdrawDetailViewController: BaseViewController {
   }
   
   override func rightAction(_ sender: UIButton) {
-    self.coordinator?.openDepositRecode()
+    self.coordinator?.openDepositRecode((self.trade?.id)!)
   }
   
   

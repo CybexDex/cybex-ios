@@ -273,7 +273,8 @@
 "transfer_detail_time" = "锁定期";
 "transfer_detail_fee" = "手续费";
 "transfer_detail_mome" = "备注信息";
-"transfer_Detail_click" = "点击查看";
+"transfer_detail_click" = "点击查看";
+"transfer_detail_nodata" = "无";
 
 //转账
 "transfer_title" = "转账";
@@ -301,5 +302,12 @@
 
 "recode_nodata" = "暂无记录";
 "balance_nodata" = "暂无资产";
+
+
+"Loading more" = "加载更多";
+"No more data" = "没有更多的数据";
+"Loading..." = "正在加载";
+"Pull to refresh" = "下拉刷新";
+"Release to refresh" = "松开刷新";
 
 

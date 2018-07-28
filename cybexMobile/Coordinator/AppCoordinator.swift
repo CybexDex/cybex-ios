@@ -32,10 +32,6 @@ class AppCoordinator {
   
   var fetchPariTimer:Repeater?
   
-  var firstFetchPairsCount = 0
-  var secondFetchPairsCount = 0
-  var thirdFetchPairsCount = 0
-
   var store = Store<AppState> (
     reducer: AppReducer,
     state: nil,

@@ -31,6 +31,7 @@ class TransferLineView: UIView {
     didSet{
       if let text = content_locali {
         content.text = text
+        updateHeight()
       }
     }
   }

@@ -25,34 +25,34 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Nt-33-TQt">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="580"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="645"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FIp-zF-KLy" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_income_address"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90X-tO-lhd" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="76" width="375" height="76"/>
+                            <rect key="frame" x="0.0" y="89" width="375" height="89"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="my_history_time"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t0l-RC-r4P" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="152" width="375" height="276"/>
+                            <rect key="frame" x="0.0" y="178" width="375" height="289"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_fee"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O32-0m-HlA" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="428" width="375" height="76"/>
+                            <rect key="frame" x="0.0" y="467" width="375" height="89"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_time"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kan-Pk-1BB" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="504" width="375" height="76"/>
+                            <rect key="frame" x="0.0" y="556" width="375" height="89"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_mome"/>
                             </userDefinedRuntimeAttributes>

@@ -78,7 +78,7 @@ class RechargeDetailViewController: BaseViewController {
   }
   
   override func rightAction(_ sender: UIButton) {
-    self.coordinator?.openWithdrawRecodeList()
+    self.coordinator?.openWithdrawRecodeList((self.trade?.id)!)
   }
   
   func setupEvent() {

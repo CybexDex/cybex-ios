@@ -13,7 +13,7 @@ import Localize_Swift
 
 protocol RechargeDetailCoordinatorProtocol {
   func pop()
-  func openWithdrawRecodeList()
+  func openWithdrawRecodeList(_ asset_id : String)
 }
 
 protocol RechargeDetailStateManagerProtocol {
@@ -48,9 +48,11 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
     self.rootVC.popViewController(animated: true)
   }
  
-  func openWithdrawRecodeList() {
-    if let vc = R.storyboard.recode.withdrawRecodeViewController() {
-      vc.coordinator = WithdrawRecodeCoordinator(rootVC: self.rootVC)
+  func openWithdrawRecodeList(_ asset_id : String) {
+    if let vc = R.storyboard.recode.rechargeRecodeViewController() {
+      vc.coordinator = RechargeRecodeCoordinator(rootVC: self.rootVC)
+      vc.assetInfo = app_data.assetInfo[asset_id]
+      vc.record_type = .WITHDRAW
       self.rootVC.pushViewController(vc, animated: true)
     }
   }

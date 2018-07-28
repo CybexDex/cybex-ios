@@ -95,6 +95,7 @@ def ui
     pod 'EFQRCode'
     pod 'GrowingTextView'
     pod 'XLActionController'
+    pod 'ESPullToRefresh'
 end
 
 def other

@@ -9,20 +9,47 @@
 import Foundation
 import HandyJSON
 
+
+enum RecordState : String ,HandyJSONEnum {
+  case new
+  case state_init = "init"
+  case pending
+  case failed
+  case done
+  
+  func desccription() -> String {
+    switch self {
+    case .new:
+      return R.string.localizable.recode_state_new.key.localized()
+    case .state_init:
+      return R.string.localizable.recode_state_upping.key.localized()
+    case .pending:
+      return R.string.localizable.recode_state_noensure.key.localized()
+    case .failed:
+      return R.string.localizable.recode_state_fail.key.localized()
+    case .done:
+      return R.string.localizable.recode_state_success.key.localized()
+    }
+  }
+  
+}
+
 struct Record : HandyJSON {
+  
   var accountName : String = ""
   var address : String = ""
   var amount : Int = 0
   var asset : String = ""
   var coinType : String = ""
   var fundType : String = ""
-  var state : String = ""
+  var state : RecordState!
   var updateAt : Date!
   
   
   mutating func mapping(mapper: HelpingMapper) {
     mapper <<<
       self.updateAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.zzz'Z'")
+    
   }
   
   init() {}
@@ -46,7 +73,7 @@ struct TradeRecord : HandyJSON {
   var total : Int = 0
   var size : Int = 0
   var offset : Int = 0
-  var records : [Record]!
+  var records : [Record]?
   
   init() {}
 }
@@ -63,6 +90,13 @@ struct HandyAsset : HandyJSON {
 }
 
 
+struct Memo : HandyJSON{
+  var from : String = ""
+  var message : String = ""
+  var to : String = ""
+  var nonce : String = ""
+}
+
 
 
 struct TransferRecord : HandyJSON {
@@ -70,13 +104,13 @@ struct TransferRecord : HandyJSON {
   var from : String = ""
   var to : String = ""
   var amount : HandyAsset?
-  var memo : String = ""
+  var memo : Memo?
   var block_num : Int = 0
   var vesting_period : String = ""
   var public_key : String = ""
   
   init(){}
-  
+
 }
 
 

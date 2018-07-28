@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import SwiftTheme
 
 class TransferDetailViewController: BaseViewController {
   
@@ -48,5 +49,34 @@ class TransferDetailViewController: BaseViewController {
   override func configureObserveState() {
     commonObserveState()
     
+  }
+}
+
+extension TransferDetailViewController {
+  @objc func transferMemo(_ sender : [String : Any]) {
+    if UserManager.shared.isLocked {
+      self.showPasswordBox()
+    }else {
+      
+      self.contentView.memoView.content.text = BitShareCoordinator.getMemo(self.data.memo)
+      self.contentView.memoView.content.textColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
+    }
+  }
+  
+  override func passwordDetecting() {
+    self.startLoading()
+  }
+  
+  override func passwordPassed(_ passed: Bool) {
+    self.endLoading()
+    if passed {
+      self.contentView.memoView.content.text = BitShareCoordinator.getMemo(self.data.memo)
+      self.contentView.memoView.content.textColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
+    }
+    else{
+      if self.isVisible{
+        self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+      }
+    }
   }
 }

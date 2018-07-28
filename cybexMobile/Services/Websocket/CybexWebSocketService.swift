@@ -53,6 +53,7 @@ class CybexWebSocketService: NSObject {
   private var errorCount = 0
   private var isConnecting:Bool = false
   private var isDetecting:Bool = false
+  private var isClosing = false
 
   private var queue:OperationQueue!
   
@@ -91,6 +92,7 @@ class CybexWebSocketService: NSObject {
     isDetecting = true
     self.currentNode = nil
     log.debug("detecting node .......")
+    self.testsockets.removeAll()
     
     for (idx, node) in NodeURLString.all.enumerated() {
       var testsocket:SRWebSocket!
@@ -122,6 +124,7 @@ class CybexWebSocketService: NSObject {
   func connect() {
     if !self.isConnecting {
       isConnecting = true
+      isClosing = false
       needAutoConnect = true
       detectFastNode()
     }
@@ -129,7 +132,8 @@ class CybexWebSocketService: NSObject {
   
   func disconnect() {
     log.warning("websocket now disconnect by u")
-    
+    self.isClosing = true
+
     self.needAutoConnect = false
     self.socket.close()
     
@@ -166,6 +170,10 @@ class CybexWebSocketService: NSObject {
       }
       
       appendRequestToQueue(request, priority:priority, response: block)
+      
+      if !self.isConnecting && !self.isClosing && socket.readyState != .OPEN {
+        connect()
+      }
     }
     
   }
@@ -252,8 +260,6 @@ class CybexWebSocketService: NSObject {
           let data = try? json.rawData()
           try? self.socket.send(data: data)
         }
-        
-      
       }
     }
 
@@ -282,18 +288,21 @@ class CybexWebSocketService: NSObject {
   //MARK: - Nodes -
   
   private func connectNode(node: NodeURLString) {
-    log.info("connecting node: \(node.rawValue)")
-    
-    self.idGenerator = JsonIdGenerator()
-    self.batchFactory.idGenerator = self.idGenerator
-    
-    let request = URLRequest(url: URL(string:node.rawValue)!)
-    
-    socket = SRWebSocket(urlRequest: request)
-    
-    socket.delegate = self
-    socket.delegateDispatchQueue = DispatchQueue.main
-    socket.open()
+    if socket.readyState != .OPEN {
+      log.info("connecting node: \(node.rawValue)")
+
+      self.idGenerator = JsonIdGenerator()
+      self.batchFactory.idGenerator = self.idGenerator
+      
+      let request = URLRequest(url: URL(string:node.rawValue)!)
+      
+      socket = SRWebSocket(urlRequest: request)
+      
+      socket.delegate = self
+      socket.delegateDispatchQueue = DispatchQueue.main
+      socket.open()
+    }
+
   }
 }
 

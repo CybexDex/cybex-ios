@@ -20,6 +20,7 @@ class TransferListViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+    self.startLoading()
   }
   
   func setupUI() {
@@ -52,6 +53,7 @@ class TransferListViewController: BaseViewController {
     
     self.coordinator?.state.property.data.asObservable().subscribe(onNext: { [weak self](data) in
       guard let `self` = self else { return }
+      self.endLoading()
       if self.isVisible {
         self.data = data
         self.tableView.reloadData()

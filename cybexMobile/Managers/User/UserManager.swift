@@ -362,7 +362,7 @@ class UserManager {
     return self.keys == nil
   }
   
-  var refreshTime : TimeInterval = 3 {
+  var refreshTime : TimeInterval = 6 {
     didSet {
       app_coodinator.repeatFetchPairInfo()
     }
@@ -387,25 +387,7 @@ class UserManager {
   
   var limit_reset_address_time : TimeInterval = 0
   
-  var signerTimer : Repeater?
-  var isSigner : Bool = false
   
-  var signer : (signerTime : TimeInterval ,signer : String)? {
-    didSet{
-      self.isSigner = true
-      self.timingSigner((self.signer?.signerTime)!)
-    }
-  }
-  
-  
-  func timingSigner(_ sender : TimeInterval) {
-    self.signerTimer = Repeater.once(after: .seconds(sender), {[weak self] (timer) in
-      guard let `self` = self else { return }
-      self.isSigner = false
-    })
-    
-    signerTimer?.start()
-  }
   
   var balance : Double {
     
@@ -465,14 +447,14 @@ class UserManager {
   private init() {
     
     app_data.data.asObservable().distinctUntilChanged()
-      //      .filter({$0.count = AssetConfiguration.shared.asset_ids.count})
+      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
       .throttle(3, latest: true, scheduler: MainScheduler.instance)
       .subscribe(onNext: { (s) in
         DispatchQueue.main.async {
           if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 {
             UserManager.shared.fetchAccountInfo()
           }
-          
+
         }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     

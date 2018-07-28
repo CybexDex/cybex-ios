@@ -86,7 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func applicationDidEnterBackground(_ application: UIApplication) {
-   
+    app_coodinator.fetchPariTimer?.pause()
+    app_coodinator.fetchPariTimer = nil
   }
   
   func applicationWillEnterForeground(_ application: UIApplication) {
@@ -140,7 +141,7 @@ extension AppDelegate {
       .subscribe(onNext: { (s) in
         if let vc = app_coodinator.startLoadingVC, !(vc is HomeViewController) {
           app_coodinator.startLoadingVC = nil
-//          vc.endLoading()
+          vc.endLoading()
         }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
@@ -164,7 +165,6 @@ extension AppDelegate {
           
           vc.startLoading()
         }
-//        CybexWebSocketService.shared.reConnect()
         CybexWebSocketService.shared.connect()
       }
     
