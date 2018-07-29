@@ -186,6 +186,7 @@ class TitleTextView: UIView {
   }
   
   func setup() {
+    self.textView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
     updateHeight()
   }
   
@@ -194,19 +195,19 @@ class TitleTextView: UIView {
   }
   
   fileprivate func recoverUI() {
-    titleLabel.text = setting.title
-    titleLabel.textColor = UIColor.steel
-    gapView.backgroundColor = UIColor.paleGreyTwo
+//    titleLabel.text = setting.title
+//    titleLabel.textColor = UIColor.steel
+//    gapView.backgroundColor = UIColor.paleGreyTwo
   }
   
   fileprivate func redSealUI() {
-    titleLabel.text = setting.warningText
+//    titleLabel.text = setting.warningText
 //    titleLabel.textColor = UIColor.scarlet
 //    gapView.backgroundColor = UIColor.scarlet
   }
   
   fileprivate func highlightUI() {
-    titleLabel.text = setting.title
+//    titleLabel.text = setting.title
 //    titleLabel.textColor = UIColor.darkSlateBlue
 //    gapView.backgroundColor = UIColor.darkSlateBlue
   }

@@ -15,7 +15,7 @@ class CornerAndShadowView: UIView {
   var newCornerRadius: CGFloat = 4 {
     didSet {
       cornerView.cornerRadius = newCornerRadius
-      }
+    }
   }
   
   var newShadowRadius: CGFloat = 4 {
@@ -23,8 +23,8 @@ class CornerAndShadowView: UIView {
       self.shadowRadius = newShadowRadius
     }
   }
-    
-  var newShadowColor: UIColor = UIColor.clear {
+  
+  var newShadowColor: UIColor = UIColor.dark20 {
     didSet {
       self.shadowColor = newShadowColor
     }
@@ -35,7 +35,7 @@ class CornerAndShadowView: UIView {
       self.shadowOffset = newShadowOffset
     }
   }
-    
+  
   func setUp() {
     updateHeight()
   }
@@ -63,7 +63,7 @@ class CornerAndShadowView: UIView {
       guard let `self` = self else { return }
       if subView.shadowOpacity == 0 {
         subView.cornerRadius = self.cornerView.cornerRadius
-      }      
+      }
     }
   }
   
@@ -71,7 +71,6 @@ class CornerAndShadowView: UIView {
     super.init(frame: frame)
     loadViewFromNib()
     setUp()
-    
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -90,4 +89,5 @@ class CornerAndShadowView: UIView {
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
+  
 }

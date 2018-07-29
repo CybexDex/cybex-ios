@@ -77,18 +77,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="miR-34-EvR">
-                                    <rect key="frame" x="0.0" y="45" width="14.5" height="31"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <nil key="textColor"/>
+                                    <rect key="frame" x="0.0" y="45" width="11.5" height="31"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zc1-RL-cEB">
                                     <rect key="frame" x="0.0" y="91.5" width="346" height="0.5"/>

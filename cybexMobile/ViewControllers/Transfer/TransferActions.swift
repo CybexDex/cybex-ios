@@ -8,6 +8,7 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
 
 //MARK: - State
 struct TransferState: StateType {
@@ -17,7 +18,42 @@ struct TransferState: StateType {
     var property: TransferPropertyState
 }
 
-struct TransferPropertyState {
+struct TransferPropertyState {  
+  var accountValid: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+  
+  var amountValid: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+  
+  var balance: BehaviorRelay<Balance?> = BehaviorRelay(value: nil)
+  
+  var fee: BehaviorRelay<Fee?> = BehaviorRelay(value: nil)
+  
+  var account: BehaviorRelay<String> = BehaviorRelay(value: "")
+  
+  var amount: BehaviorRelay<String> = BehaviorRelay(value: "")
+  
+  var memo: BehaviorRelay<String> = BehaviorRelay(value: "")
+  
+  var to_account: BehaviorRelay<Account?> = BehaviorRelay(value: nil)
+}
+
+struct ValidAccountAction: Action {
+  var isValid: Bool = false
+}
+
+struct ValidAmountAction: Action {
+  var isValid: Bool = false
+}
+
+struct SetBalanceAction: Action {
+  let balance: Balance
+}
+
+struct SetFeeAction: Action {
+  let fee: Fee
+}
+
+struct SetToAccountAction: Action {
+  let account: Account
 }
 
 //MARK: - Action Creator

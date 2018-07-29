@@ -298,14 +298,16 @@
 "transfer_account" = "Account Name";
 "transfer_account_pla" = "To Account name";
 "transfer_crypto" = "Crypto";
-"transfer_crypto_pla" = "CYB";
+"transfer_crypto_pla" = "Please select crypto type";
 "transfer_quantity" = "Quantity";
-"transfer_memo" = "Momo";
+"transfer_memo" = "Memo";
 "transfer_fee" = "Fee";
 "transfer_balance" = "Available";
 "picker_comfirm" = "Comfirm";
 "transfer_unit_time" = "minutes";
 
+"transfer_failed" = "Transfer failed";
+"transfer_successed" = "Transfer successfully";
 
 //zsy add
 "my_property" = "My Balance";
@@ -314,6 +316,8 @@
 "account_property" = "Your Total Balance(CYB)";
 "hello" = "Hello，";
 "deposit_withdraw" = "Deposit/Withdraw";
+"frozen" = "Frozen：";
+
 //zsy end
 
 "recode_nodata" = "No record";

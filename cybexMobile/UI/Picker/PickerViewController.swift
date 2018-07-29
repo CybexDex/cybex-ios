@@ -11,9 +11,13 @@ import RxSwift
 import RxCocoa
 import ReSwift
 
+typealias OnPickerComfirm = () -> Void
+
 class PickerViewController: BaseViewController {
   
   var coordinator: (PickerCoordinatorProtocol & PickerStateManagerProtocol)?
+  
+  var onPickerComfirm: OnPickerComfirm?
   
   @IBOutlet weak var pickerView: PickerView!
   
@@ -35,7 +39,7 @@ class PickerViewController: BaseViewController {
   }
   
   override func rightAction(_ sender: UIButton) {
-    self.coordinator?.dismiss()
+    self.coordinator?.finishWithPicker(pickerView.picker)
   }
   
   func commonObserveState() {
