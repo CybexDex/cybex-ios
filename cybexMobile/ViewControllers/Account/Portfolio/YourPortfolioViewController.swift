@@ -76,7 +76,6 @@ class YourPortfolioViewController: BaseViewController {
     
     UserManager.shared.balances.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
       guard let `self` = self else { return }
-      
       if let _ = UserManager.shared.balances.value{
         self.data = UserManager.shared.getPortfolioDatas()
       }
@@ -102,6 +101,7 @@ class YourPortfolioViewController: BaseViewController {
             self.data = UserManager.shared.getPortfolioDatas()
           }
           if self.data.count == 0 {
+           
             self.tableView.showNoData(R.string.localizable.balance_nodata.key.localized(), icon: R.image.imgWalletNoAssert.name)
           } else {
             self.tableView.hiddenNoData()
