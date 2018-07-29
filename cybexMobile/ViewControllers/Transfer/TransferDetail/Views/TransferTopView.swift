@@ -23,6 +23,10 @@ class TransferTopView: UIView {
           self.amount.text = getRealAmount(amountInfo.asset_id, amount: amountInfo.amount).stringValue.formatCurrency(digitNum: assetInfo.precision) + assetInfo.symbol.filterJade
           self.amount.text = data.isSend ? "-" + self.amount.text! : "+" + self.amount.text!
         }
+        if UIScreen.main.bounds.width == 320 {
+          self.amount.font = UIFont.systemFont(ofSize: 20.0, weight: .medium)
+        }
+        
         updateHeight()
       }
     }

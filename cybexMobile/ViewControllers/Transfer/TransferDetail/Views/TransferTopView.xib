@@ -29,7 +29,7 @@
                         <constraint firstAttribute="height" constant="40" id="yAU-pV-HhF"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDk-eT-QZG">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDk-eT-QZG">
                     <rect key="frame" x="65" y="42.5" width="54" height="26.5"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                     <nil key="textColor"/>
@@ -55,6 +55,7 @@
                 <constraint firstItem="6rr-7Z-erx" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="Mbj-14-qw1"/>
                 <constraint firstItem="IDk-eT-QZG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="PsZ-nc-p9q"/>
                 <constraint firstItem="6rr-7Z-erx" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="TY7-GJ-EsL"/>
+                <constraint firstItem="Lom-Ql-VG4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IDk-eT-QZG" secondAttribute="trailing" constant="10" id="VRI-fQ-cLM"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Lom-Ql-VG4" secondAttribute="trailing" constant="13" id="VlB-DU-9HS"/>
                 <constraint firstItem="Lom-Ql-VG4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="f64-Uf-K2c"/>
                 <constraint firstItem="6rr-7Z-erx" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="nMf-dB-CfN"/>

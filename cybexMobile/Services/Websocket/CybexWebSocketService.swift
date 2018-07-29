@@ -142,6 +142,7 @@ class CybexWebSocketService: NSObject {
     self.errorCount = 0
     self.autoConnectCount = 0
     self.ids.removeAll()
+    closeAllTestSocket()
     self.idGenerator = JsonIdGenerator()
     self.batchFactory.idGenerator = self.idGenerator
     self.queue.cancelAllOperations()

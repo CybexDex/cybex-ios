@@ -193,7 +193,7 @@ extension UserManager {
     }
     
     let request = GetAccountHistoryRequest(accountID: id) { (data) in
-  
+      
       if var fillorders = data as? [FillOrder] {
         if fillorders.count == 0 || !self.isLoginIn {
           self.fillOrder.accept(nil)
@@ -358,8 +358,32 @@ class UserManager {
     return false
   }
   
+  enum frequency_type : Int{
+    case normal = 0
+    case time
+    case WiFi
+    
+    func description() -> String {
+      switch self {
+      case .normal:return R.string.localizable.frequency_normal.key.localized()
+      case .time:return R.string.localizable.frequency_time.key.localized()
+      case .WiFi:return R.string.localizable.frequency_wifi.key.localized()
+      }
+    }
+  }
+  
   var isLocked:Bool {
     return self.keys == nil
+  }
+  
+  var frequency_type : frequency_type = .normal {
+    didSet {
+      switch self.frequency_type {
+      case .normal:self.refreshTime = 6
+      case .time:self.refreshTime = 3
+      case .WiFi:self.refreshTime = 3
+      }
+    }
   }
   
   var refreshTime : TimeInterval = 6 {
@@ -454,7 +478,7 @@ class UserManager {
           if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 {
             UserManager.shared.fetchAccountInfo()
           }
-
+          
         }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
@@ -462,7 +486,7 @@ class UserManager {
       guard let `self` = self else { return }
       
       self.fetchHistoryOfFillOrdersAndTransferRecords()
-//      self.fetchHistoryOfOperation()
+      //      self.fetchHistoryOfOperation()
     }).disposed(by: disposeBag)
     
   }
@@ -483,6 +507,16 @@ class UserManager {
     return datas
   }
   
+  //  func getMyPortfolioDatas() -> [MyPortfolioData]{
+  //    var datas = [MyPortfolioData]()
+  //    if let balances = self.balances.value, let limits = self.limitOrder.value {
+  //      for balance in balances{
+  //        datas.append(MyPortfolioData.init(balance: balance, limit: limit))
+  //      }
+  ////      for limi
+  //    }
+  //    return datas
+  //  }
   
 }
 

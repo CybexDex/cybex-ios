@@ -54,7 +54,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NP8-xs-njn">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="272"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEv-8w-Nao" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEv-8w-Nao">
                                                 <rect key="frame" x="13" y="0.0" width="294" height="144"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpo-dn-0FV" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
@@ -115,7 +115,7 @@
                                                     <constraint firstItem="qJ6-Af-LNN" firstAttribute="leading" secondItem="XEv-8w-Nao" secondAttribute="leading" id="y9C-jh-3w8"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbw-NE-dXd" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbw-NE-dXd">
                                                 <rect key="frame" x="13" y="156" width="294" height="48"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCU-kq-OIy" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
@@ -812,6 +812,7 @@
                         <outlet property="confirmPasswordTextField" destination="WIP-LJ-6Yg" id="zrV-YD-8S6"/>
                         <outlet property="errorMessage" destination="88d-Sl-shA" id="XgW-ZJ-hOI"/>
                         <outlet property="errorStackView" destination="kCz-iz-2Gk" id="YNT-pN-h6B"/>
+                        <outlet property="iconTopContainer" destination="aOK-hr-KQS" id="jsv-g2-lTT"/>
                         <outlet property="loginTitle" destination="sdA-WC-36w" id="95N-Lh-PjK"/>
                         <outlet property="macawView" destination="lcV-7C-Gjt" id="VvZ-UH-TQD"/>
                         <outlet property="passwordTextField" destination="cH2-f1-6Sg" id="6kw-6v-PMj"/>
@@ -823,7 +824,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t98-tC-Xto" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-506.39999999999998" y="2163.8680659670167"/>
+            <point key="canvasLocation" x="-921" y="2151"/>
         </scene>
         <!--Base View Controller-->
         <scene sceneID="HmV-8b-lNI">

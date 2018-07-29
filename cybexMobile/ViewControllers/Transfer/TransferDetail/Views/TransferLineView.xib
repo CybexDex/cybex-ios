@@ -65,6 +65,7 @@
                 <constraint firstAttribute="trailing" secondItem="Yce-p8-nSx" secondAttribute="trailing" constant="13" id="N4c-Rq-Etd"/>
                 <constraint firstItem="Yce-p8-nSx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="ThL-i9-7Ep"/>
                 <constraint firstItem="8P7-RI-JBc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="gCK-5A-ic2"/>
+                <constraint firstItem="Yce-p8-nSx" firstAttribute="top" secondItem="Z8m-R3-d6I" secondAttribute="bottom" constant="16" id="nep-Yq-YVc"/>
                 <constraint firstItem="Z8m-R3-d6I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8P7-RI-JBc" secondAttribute="trailing" constant="75" id="pKU-sh-Dlc"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

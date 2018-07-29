@@ -34,8 +34,9 @@ class AccountViewController: BaseViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-
-    self.setupUI()
+    SwifterSwift.delay(milliseconds: 100) {
+      self.setupUI()
+    }
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -50,7 +51,7 @@ class AccountViewController: BaseViewController {
   }
   
   func setupIconImg() {
-    if UserManager.shared.isLoginIn == true {
+    if UserManager.shared.isLoginIn == false {
       accountContentView.headerView.icon = R.image.accountAvatar()
     } else {
       if let hash = UserManager.shared.avatarString {
@@ -80,7 +81,7 @@ class AccountViewController: BaseViewController {
     self.configRightNavButton(R.image.icSettings24Px())
     
     let imgArray = [R.image.icBalance(),R.image.w(),R.image.icOrder28Px(),R.image.icLockAsset()]
-    let nameArray = [R.string.localizable.my_property.key.localized(),R.string.localizable.account_trade.key.localized(),R.string.localizable.order_value.key.localized(),R.string.localizable.lockupAssetsTitle.key.localized()]
+    let nameArray = [R.string.localizable.my_property.key.localized(),R.string.localizable.deposit_withdraw.key.localized(),R.string.localizable.order_value.key.localized(),R.string.localizable.lockupAssetsTitle.key.localized()]
     dataArray.removeAll()
     for i in 0..<4 {
       var model = AccountViewModel()
@@ -119,6 +120,16 @@ class AccountViewController: BaseViewController {
   override func configureObserveState() {
     commonObserveState()
     
+    UserManager.shared.account.asObservable()
+      .skip(1)
+      .throttle(10, latest: true, scheduler: MainScheduler.instance)
+      .subscribe(onNext: { [weak self](account) in
+        guard let `self` = self else{ return }
+        if self.isVisible {
+          self.setupTitle()
+          self.setupIconImg()
+        }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
 }
 

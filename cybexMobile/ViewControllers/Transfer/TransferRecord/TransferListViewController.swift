@@ -56,6 +56,12 @@ class TransferListViewController: BaseViewController {
       self.endLoading()
       if self.isVisible {
         self.data = data
+        if self.data?.count == 0 {
+          self.view.showNoData(R.string.localizable.recode_nodata(), icon: R.image.img_no_records.name)
+          return
+        }else {
+          self.view.hiddenNoData()
+        }
         self.tableView.reloadData()
       }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)

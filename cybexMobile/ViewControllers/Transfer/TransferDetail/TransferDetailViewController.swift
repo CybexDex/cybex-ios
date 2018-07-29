@@ -58,8 +58,9 @@ extension TransferDetailViewController {
       self.showPasswordBox()
     }else {
       
-      self.contentView.memoView.content.text = BitShareCoordinator.getMemo(self.data.memo)
+      self.contentView.content_text = BitShareCoordinator.getMemo(self.data.memo)
       self.contentView.memoView.content.textColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
+      self.contentView.layoutIfNeeded()
     }
   }
   
@@ -70,8 +71,9 @@ extension TransferDetailViewController {
   override func passwordPassed(_ passed: Bool) {
     self.endLoading()
     if passed {
-      self.contentView.memoView.content.text = BitShareCoordinator.getMemo(self.data.memo)
+      self.contentView.content_text = BitShareCoordinator.getMemo(self.data.memo)
       self.contentView.memoView.content.textColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
+      self.contentView.layoutIfNeeded()
     }
     else{
       if self.isVisible{

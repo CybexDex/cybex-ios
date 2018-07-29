@@ -205,6 +205,7 @@ class NormalCellView: UIView {
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
   
+
 }
 
 extension NormalCellView {

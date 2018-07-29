@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="365" height="315"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5B-3c-fla">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5B-3c-fla">
                     <rect key="frame" x="0.0" y="0.0" width="365" height="315"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <userDefinedRuntimeAttributes>
@@ -36,7 +36,6 @@
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
-            <color key="backgroundColor" name="steel20" red="0.471" green="0.506" blue="0.604" alpha="0.200" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="a5B-3c-fla" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="7Zc-Ab-B4J"/>
                 <constraint firstItem="a5B-3c-fla" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Pea-Mf-Lny"/>
@@ -49,9 +48,6 @@
                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
                     <real key="value" value="1"/>
                 </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                    <color key="value" name="steel20" red="0.471" green="0.506" blue="0.604" alpha="0.200" colorSpace="custom" customColorSpace="sRGB"/>
-                </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                     <real key="value" value="4"/>
                 </userDefinedRuntimeAttribute>
@@ -62,6 +58,4 @@
             <point key="canvasLocation" x="-4" y="-203"/>
         </view>
     </objects>
-    <resources>
-    </resources>
 </document>

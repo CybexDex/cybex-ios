@@ -14,6 +14,19 @@ class YourPortfolioHeadView: UIView {
   @IBOutlet weak var memberLevel: UILabel!
   @IBOutlet weak var totalBalance: UILabel!
   @IBOutlet weak var balanceRMB: UILabel!
+  @IBOutlet weak var helpButton: UIButton!
+  
+  var balanceIntroduceView : BalanceIntroduceView {
+    get{
+      let biView = BalanceIntroduceView(frame: UIScreen.main.bounds)
+      UIApplication.shared.keyWindow?.addSubview(biView)
+      return biView
+    }
+  }
+  
+  enum event: String {
+    case help
+  }
   
   var data: Any? {
     didSet {
@@ -24,18 +37,26 @@ class YourPortfolioHeadView: UIView {
   func setup(){
     memberLevel.localized_text = R.string.localizable.account_property.key.localizedContainer()
     if UserManager.shared.balance == 0 {
-      totalBalance.text = "--"
+      totalBalance.text = "0.00000"
     }else{
       totalBalance.text = UserManager.shared.balance.formatCurrency(digitNum: 5)
     }
     
     if let ethAmount = changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble(){
       if UserManager.shared.balance == 0 {
-        balanceRMB.text   = "≈¥--"
+        balanceRMB.text   = "≈¥0.00"
       }else{
         balanceRMB.text   = "≈¥" + String(UserManager.shared.balance * ethAmount * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
       }
     }
+    
+    helpButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] touch in
+      guard let `self` = self else {return}
+      let _ = self.balanceIntroduceView
+//      guard let `self` = self else { return }
+//      self.sendEventWith(event.help.rawValue, userinfo: [ : ])
+      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
     updateHeight()
   }
   

@@ -92,6 +92,8 @@ class TradeRecodeViewController: BaseViewController {
             self.view.showNoData(R.string.localizable.recode_nodata(), icon: R.image.img_no_records.name)
             self.isNoMoreData = true
             return
+          }else {
+            self.view.hiddenNoData()
           }
           if records.count < 20 {
             self.isNoMoreData = true
