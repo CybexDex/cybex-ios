@@ -29,6 +29,7 @@ class NormalContentCell: BaseTableViewCell {
             cellView.index = indexPath.row
             cellView.leftIconImg = data.leftImage
             cellView.rightIconName = selectedIndex == indexPath.row ? "icArrowLight24Px" : "icArrowLight24Px"
+            cellView.nameLeftConstraint.constant = 43
         }
     }
     

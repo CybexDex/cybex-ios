@@ -179,8 +179,10 @@ extension AppCoordinator {
       SwifterSwift.delay(milliseconds: refreshTime * 1000.0) {
         
         for pair in pairs {
-        
-          log.warning("base -- \(pair.base) time --- \(Date())")
+          
+          if CybexWebSocketService.shared.overload() {
+            return
+          }
           AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: startTime, endTime: now), sub: sub, priority:priority)
         }
       }
@@ -196,19 +198,18 @@ extension AppCoordinator {
     }
     
     self.fetchPariTimer = Repeater.every(.seconds(UserManager.shared.refreshTime), { [weak self](timer) in
-      guard let `self` = self else {return}
-      let status = RealReachability.sharedInstance().currentReachabilityStatus()
-      if status == .RealStatusNotReachable || status  == .RealStatusUnknown || !CybexWebSocketService.shared.checkNetworConnected() {
-   
-        app_coodinator.fetchPariTimer = nil
-        timer.pause()
-        
-        return
-      }
-      if !CybexWebSocketService.shared.overload() {
-//        self.state.property.otherRequestRelyData.accept(1)
+      main {
+        guard let `self` = self else {return}
+        let status = RealReachability.sharedInstance().currentReachabilityStatus()
+        if status == .RealStatusNotReachable || status  == .RealStatusUnknown || !CybexWebSocketService.shared.checkNetworConnected() {
+          
+          app_coodinator.fetchPariTimer = nil
+          timer.pause()
+          return
+        }
+        log.debug("freshTime ----\(Date())")
+        self.state.property.otherRequestRelyData.accept(1)
         self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority: priority, isNoFirst: false)
-//        self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority:priority)
       }
     })
   }

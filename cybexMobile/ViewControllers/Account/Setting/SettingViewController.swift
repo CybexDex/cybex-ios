@@ -55,8 +55,8 @@ class SettingViewController: BaseViewController {
     version.content.text = Bundle.main.version
     theme.content_locali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key.localized() : R.string.localizable.light.key.localized()
     frequency.content_locali = UserManager.shared.frequency_type.description()
-    self.topContentShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.darkTwo : UIColor.steel20
-    self.themeShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.darkTwo : UIColor.steel20
+    self.topContentShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20
+    self.themeShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20
   }
   
   
@@ -69,7 +69,6 @@ class SettingViewController: BaseViewController {
         if let view = tap.view as? NormalCellView {
           self.clickCellView(view)
         }
-        
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
   }
@@ -100,8 +99,8 @@ class SettingViewController: BaseViewController {
   func setupNotification() {
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] notification in
       guard let `self` = self else { return }
-      self.topContentShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.clear : UIColor.steel20
-      self.themeShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.clear : UIColor.steel20
+      self.topContentShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20
+      self.themeShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20
     })
     
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] notification in
@@ -163,7 +162,7 @@ extension SettingViewController {
     }))
     
     actionController.addSection(PeriscopeSection())
-    actionController.addAction(Action("Cancel", style: .cancel, handler: { action in
+    actionController.addAction(Action(R.string.localizable.alert_cancle.key.localized(), style: .cancel, handler: { action in
     }))
     
     present(actionController, animated: true, completion: nil)

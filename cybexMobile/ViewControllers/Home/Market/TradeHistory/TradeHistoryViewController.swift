@@ -30,7 +30,6 @@ class TradeHistoryViewController: BaseViewController {
       if pair != oldValue {
         self.coordinator?.resetData()
       }
-      
       refreshView()
     }
   }
@@ -158,7 +157,7 @@ extension TradeHistoryViewController : TradePair{
   }
   
   func refresh() {
-//    refreshView()
+    refreshView()
   }
 }
 

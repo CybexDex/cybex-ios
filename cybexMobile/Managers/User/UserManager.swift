@@ -17,6 +17,7 @@ import PromiseKit
 import AwaitKit
 import Guitar
 import Repeat
+import SwiftyUserDefaults
 
 extension UserManager {
   
@@ -381,13 +382,20 @@ class UserManager {
       switch self.frequency_type {
       case .normal:self.refreshTime = 6
       case .time:self.refreshTime = 3
-      case .WiFi:self.refreshTime = 3
+      case .WiFi:
+        let status = RealReachability.sharedInstance().currentReachabilityStatus()
+        if status == .RealStatusViaWiFi {
+          self.refreshTime = 3
+        }else {
+          self.refreshTime = 6
+        }
       }
     }
   }
   
   var refreshTime : TimeInterval = 6 {
     didSet {
+      Defaults[.refreshTime] = refreshTime
       app_coodinator.repeatFetchPairInfo()
     }
   }
@@ -470,12 +478,10 @@ class UserManager {
   
   private init() {
     
-    app_data.data.asObservable().distinctUntilChanged()
-      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
-      .throttle(3, latest: true, scheduler: MainScheduler.instance)
+    app_data.otherRequestRelyData.asObservable()
       .subscribe(onNext: { (s) in
         DispatchQueue.main.async {
-          if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 {
+          if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 && !CybexWebSocketService.shared.overload() {
             UserManager.shared.fetchAccountInfo()
           }
           
@@ -484,9 +490,10 @@ class UserManager {
     
     account.asObservable().skip(1).subscribe(onNext: {[weak self] (newAccount) in
       guard let `self` = self else { return }
-      
+      if CybexWebSocketService.shared.overload() {
+        return
+      }
       self.fetchHistoryOfFillOrdersAndTransferRecords()
-      //      self.fetchHistoryOfOperation()
     }).disposed(by: disposeBag)
     
   }

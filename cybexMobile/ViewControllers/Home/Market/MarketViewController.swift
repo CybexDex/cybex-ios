@@ -310,14 +310,12 @@ class MarketViewController: BaseViewController {
   override func configureObserveState() {
     commonObserveState()
     
-    app_data.data.asObservable()
-      .skip(1)
-      .distinctUntilChanged()
-//      .filter({ $0.count == AssetConfiguration.shared.asset_ids.count })
-      .throttle(5, latest: true, scheduler: MainScheduler.instance)
+    app_data.otherRequestRelyData.asObservable()
       .subscribe(onNext: { [weak self] _ in
         guard let `self` = self else { return }
-        self.performSelector(onMainThread: #selector(self.refreshTotalView), with: nil, waitUntilDone: false)
+        if !CybexWebSocketService.shared.overload() {
+          self.performSelector(onMainThread: #selector(self.refreshTotalView), with: nil, waitUntilDone: false)
+        }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   

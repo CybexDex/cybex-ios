@@ -51,7 +51,7 @@ class TradeViewController: BaseViewController {
   var pair : Pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB){
     didSet{
       if self.chooseTitleView != nil {
-          self.sendEventActionWith()
+        self.sendEventActionWith()
       }
       getPairInfo()
       refreshView()
@@ -72,12 +72,13 @@ class TradeViewController: BaseViewController {
     self.startLoading()
     setupUI()
     setupEvent()
-
+    
     self.pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB)
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    
     
     if app_data.data.value.count == 0 {
       return
@@ -96,8 +97,8 @@ class TradeViewController: BaseViewController {
     topView.addSubview(self.titlesView!)
     
     self.titlesView!.data = [R.string.localizable.trade_buy.key.localized(),
-                       R.string.localizable.trade_sell.key.localized(),
-                       R.string.localizable.trade_open_orders.key.localized()]
+                             R.string.localizable.trade_sell.key.localized(),
+                             R.string.localizable.trade_open_orders.key.localized()]
     
   }
   
@@ -118,7 +119,7 @@ class TradeViewController: BaseViewController {
   func setupNavi(){
     configLeftNavButton(R.image.icCandle())
     configRightNavButton(R.image.ic_star_border_24_px())
-//    configRightNavButton(R.string.localizable.my_history_title.key.localized())
+    //    configRightNavButton(R.string.localizable.my_history_title.key.localized())
     
     tradeTitltView = TradeNavTitleView(frame: CGRect(x: 0, y: 0, width: 100, height: 64))
     tradeTitltView.delegate = self
@@ -135,7 +136,7 @@ class TradeViewController: BaseViewController {
   
   @objc override func rightAction(_ sender: UIButton){
     self.coordinator?.openMyHistory()
-   
+    
   }
   
   @objc override func leftAction(_ sender: UIButton){
@@ -168,16 +169,12 @@ class TradeViewController: BaseViewController {
   override func configureObserveState() {
     commonObserveState()
     
-    app_data.data.asObservable()
-      .skip(1)
-//      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
-      .distinctUntilChanged()
-      .throttle(6, latest: true, scheduler: MainScheduler.instance)
+    app_data.otherRequestRelyData.asObservable()
       .subscribe(onNext: { (s) in
         if app_data.data.value.count == 0 {
           return
         }
-
+        
         if self.isVisible {
           self.getPairInfo()
           self.refreshView()
@@ -187,15 +184,16 @@ class TradeViewController: BaseViewController {
   
   
   func refreshView() {
-    guard let info = info else { return }
-    endLoading()
-
-    
-    tradeTitltView.title.text = info.quote.symbol.filterJade + "/" + info.base.symbol.filterJade
-    self.childViewControllers.forEach { (viewController) in
-      if var viewController = viewController as? TradePair{
-        viewController.pariInfo = pair
-        viewController.refresh()
+    main {
+      guard let info = self.info else { return }
+      self.endLoading()
+      
+      self.tradeTitltView.title.text = info.quote.symbol.filterJade + "/" + info.base.symbol.filterJade
+      self.childViewControllers.forEach { (viewController) in
+        if var viewController = viewController as? TradePair{
+          viewController.pariInfo = self.pair
+          viewController.refresh()
+        }
       }
     }
   }

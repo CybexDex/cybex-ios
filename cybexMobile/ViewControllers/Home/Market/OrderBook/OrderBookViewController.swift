@@ -179,13 +179,13 @@ extension OrderBookViewController : TradePair{
   }
   
   func refresh() {
-//    guard let pair = pair else { return }
-//    if self.tradeView != nil {
-//      //      self.coordinator?.resetData(pair)
-//
-//      showMarketPrice()
-//    }
-//    self.coordinator?.fetchData(pair)
+    guard let pair = pair else { return }
+    if self.tradeView != nil {
+      //      self.coordinator?.resetData(pair)
+
+      showMarketPrice()
+    }
+    self.coordinator?.fetchData(pair)
   }
 }
 
