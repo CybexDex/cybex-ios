@@ -27,16 +27,16 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zan-CH-sMg">
                     <rect key="frame" x="13" y="171" width="350" height="1"/>
-                    <color key="backgroundColor" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="j5D-a2-f1v"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                            <color key="value" name="paleGrey" red="0.969" green="0.973" blue="0.980" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                            <color key="value" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -54,7 +54,7 @@
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                            <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -64,33 +64,36 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kX2-NJ-Wg5">
                     <rect key="frame" x="327" y="16.5" width="36" height="17"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                    <color key="textColor" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                            <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="O29-RH-BwL">
-                    <rect key="frame" x="13" y="39" width="240" height="100"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="O29-RH-BwL">
+                    <rect key="frame" x="13" y="39" width="308.5" height="34"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66s-T4-qmr">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="308.5" height="14.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jom-gX-aeT">
-                                    <rect key="frame" x="0.0" y="0.0" width="11.5" height="50"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jom-gX-aeT">
+                                    <rect key="frame" x="0.0" y="0.0" width="11.5" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" name="steel50" red="0.471" green="0.506" blue="0.604" alpha="0.500" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="update_time"/>
+                                    </userDefinedRuntimeAttributes>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbI-31-bWI">
-                                    <rect key="frame" x="11.5" y="18.5" width="228.5" height="14.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbI-31-bWI">
+                                    <rect key="frame" x="19.5" y="0.0" width="289" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -98,31 +101,34 @@
                                 <constraint firstItem="QbI-31-bWI" firstAttribute="centerY" secondItem="jom-gX-aeT" secondAttribute="centerY" id="1B4-t5-aHb"/>
                                 <constraint firstItem="jom-gX-aeT" firstAttribute="leading" secondItem="66s-T4-qmr" secondAttribute="leading" id="i0z-19-VaR"/>
                                 <constraint firstItem="jom-gX-aeT" firstAttribute="top" secondItem="66s-T4-qmr" secondAttribute="top" id="lY0-0J-hB9"/>
-                                <constraint firstItem="QbI-31-bWI" firstAttribute="leading" secondItem="jom-gX-aeT" secondAttribute="trailing" id="u8v-TI-fyl"/>
+                                <constraint firstItem="QbI-31-bWI" firstAttribute="leading" secondItem="jom-gX-aeT" secondAttribute="trailing" constant="8" id="u8v-TI-fyl"/>
                                 <constraint firstAttribute="bottom" secondItem="jom-gX-aeT" secondAttribute="bottom" id="wlp-n6-LjH"/>
                                 <constraint firstAttribute="trailing" secondItem="QbI-31-bWI" secondAttribute="trailing" id="yZw-0O-hZp"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="01L-63-hiS">
-                            <rect key="frame" x="0.0" y="50" width="240" height="50"/>
+                            <rect key="frame" x="0.0" y="19.5" width="308.5" height="14.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bC-tL-Z2r">
-                                    <rect key="frame" x="0.0" y="0.0" width="11.5" height="14.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bC-tL-Z2r">
+                                    <rect key="frame" x="0.0" y="0.0" width="289" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" name="steel50" red="0.471" green="0.506" blue="0.604" alpha="0.500" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="recode_address"/>
+                                    </userDefinedRuntimeAttributes>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9G4-i5-qX4">
-                                    <rect key="frame" x="11.5" y="0.0" width="228.5" height="14.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9G4-i5-qX4">
+                                    <rect key="frame" x="297" y="0.0" width="11.5" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="1bC-tL-Z2r" firstAttribute="top" secondItem="01L-63-hiS" secondAttribute="top" id="88T-0x-OPm"/>
                                 <constraint firstItem="9G4-i5-qX4" firstAttribute="centerY" secondItem="1bC-tL-Z2r" secondAttribute="centerY" id="8jH-Wv-Bxu"/>
-                                <constraint firstItem="9G4-i5-qX4" firstAttribute="leading" secondItem="1bC-tL-Z2r" secondAttribute="trailing" id="TUT-Cu-52K"/>
+                                <constraint firstItem="9G4-i5-qX4" firstAttribute="leading" secondItem="1bC-tL-Z2r" secondAttribute="trailing" constant="8" id="TUT-Cu-52K"/>
                                 <constraint firstItem="1bC-tL-Z2r" firstAttribute="leading" secondItem="01L-63-hiS" secondAttribute="leading" id="bm9-aa-Hdi"/>
                                 <constraint firstAttribute="trailing" secondItem="9G4-i5-qX4" secondAttribute="trailing" id="dZL-ID-EUh"/>
                             </constraints>
@@ -130,13 +136,13 @@
                     </subviews>
                 </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omM-9E-jJ3">
-                    <rect key="frame" x="351.5" y="57.5" width="11.5" height="14.5"/>
+                    <rect key="frame" x="351.5" y="39" width="11.5" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
-                    <color key="textColor" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                            <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
@@ -154,13 +160,14 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="omM-9E-jJ3" secondAttribute="trailing" constant="13" id="a1K-oq-rzc"/>
                 <constraint firstItem="Qjj-ZS-3jq" firstAttribute="centerY" secondItem="uPF-Sh-ueU" secondAttribute="centerY" id="f6R-Gc-gIQ"/>
                 <constraint firstItem="uPF-Sh-ueU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="gFj-jf-a9A"/>
+                <constraint firstItem="omM-9E-jJ3" firstAttribute="leading" secondItem="O29-RH-BwL" secondAttribute="trailing" constant="30" id="ma9-HX-hP8"/>
                 <constraint firstItem="zan-CH-sMg" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="oPB-at-zn9"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                    <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                     <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -169,6 +176,4 @@
             <point key="canvasLocation" x="34" y="90"/>
         </view>
     </objects>
-    <resources>
-    </resources>
 </document>

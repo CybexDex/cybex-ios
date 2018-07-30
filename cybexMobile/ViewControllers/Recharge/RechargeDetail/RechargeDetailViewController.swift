@@ -38,6 +38,7 @@ class RechargeDetailViewController: BaseViewController {
       }
     }
   }
+  
   var trade : Trade? {
     didSet{
       if let trade = self.trade {
@@ -73,11 +74,12 @@ class RechargeDetailViewController: BaseViewController {
   func setupUI() {
     self.contentView.trade  = self.trade
     self.contentView.balance  = self.balance
+
     self.configRightNavButton(R.image.icWithdrawNew24Px())
   }
   
   override func rightAction(_ sender: UIButton) {
-    self.coordinator?.openWithdrawRecodeList()
+    self.coordinator?.openWithdrawRecodeList((self.trade?.id)!)
   }
   
   func setupEvent() {

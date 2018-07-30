@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftTheme
 
 class TransferListCellView: UIView {
   
@@ -18,7 +19,22 @@ class TransferListCellView: UIView {
   
   var data : Any? {
     didSet{
-      
+      if let data = data as? TransferRecordViewModel {
+        self.icon.image = data.isSend ? R.image.ic_send() : R.image.ic_income()
+        self.time.text = data.time
+        self.address.text = data.isSend ? data.to : data.from
+        self.state.text = data.isSend ? R.string.localizable.transfer_send.key.localized() : R.string.localizable.transfer_done.key.localized()
+        if let transferAmount = data.amount ,let assetInfo = app_data.assetInfo[transferAmount.asset_id] {
+          self.amount.text = getRealAmount(transferAmount.asset_id, amount: transferAmount.amount).stringValue.formatCurrency(digitNum: assetInfo.precision) + " " + assetInfo.symbol.filterJade
+          if data.isSend {
+            self.amount.text = "-" + self.amount.text!
+            self.amount.textColor = ThemeManager.currentThemeIndex == 0 ? self.amount.theme1TitleColor : self.amount.theme2TitleColor
+          }else {
+            self.amount.text = "+" + self.amount.text!
+            self.amount.textColor = UIColor.pastelOrange
+          }
+        }
+      }
     }
   }
   

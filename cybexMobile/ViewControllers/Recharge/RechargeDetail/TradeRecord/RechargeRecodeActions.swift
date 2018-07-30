@@ -8,6 +8,7 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
 
 //MARK: - State
 struct RechargeRecodeState: StateType {
@@ -18,7 +19,13 @@ struct RechargeRecodeState: StateType {
 }
 
 struct RechargeRecodePropertyState {
+  var data : BehaviorRelay<TradeRecord?> = BehaviorRelay(value: nil)
 }
+
+struct FetchDepositRecordsAction : Action {
+  var data : TradeRecord?
+}
+
 
 //MARK: - Action Creator
 class RechargeRecodePropertyActionCreate: LoadingActionCreator {

@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="365" height="315"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5B-3c-fla">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5B-3c-fla">
                     <rect key="frame" x="0.0" y="0.0" width="365" height="315"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -47,14 +47,11 @@
                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
                     <real key="value" value="1"/>
                 </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                    <color key="value" red="0.15294117647058825" green="0.20392156862745098" blue="0.49019607843137253" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
-                </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                     <real key="value" value="4"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                    <size key="value" width="0.0" height="2"/>
+                    <size key="value" width="0.0" height="8"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="-4.5" y="-203.5"/>

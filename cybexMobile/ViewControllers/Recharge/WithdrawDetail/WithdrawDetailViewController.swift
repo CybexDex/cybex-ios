@@ -32,7 +32,6 @@ class WithdrawDetailViewController: BaseViewController {
   func setupUI(){
     
     self.configRightNavButton(R.image.icDepositNew24Px())
-
     if let trade = self.trade, let name = app_data.assetInfo[trade.id]?.symbol.filterJade{
       self.title = name + R.string.localizable.withdraw_title.key.localized()
       let message = Localize.currentLanguage() == "en" ? trade.enInfo: trade.cnInfo
@@ -70,7 +69,7 @@ class WithdrawDetailViewController: BaseViewController {
   }
   
   override func rightAction(_ sender: UIButton) {
-    self.coordinator?.openDepositRecode()
+    self.coordinator?.openDepositRecode((self.trade?.id)!)
   }
   
   

@@ -94,6 +94,8 @@ def ui
     pod 'XLPagerTabStrip'
     pod 'EFQRCode'
     pod 'GrowingTextView'
+    pod 'XLActionController'
+    pod 'ESPullToRefresh'
 end
 
 def other

@@ -10,39 +10,49 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TransferContentView" customModule="cybexMobile" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TransferContentView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="addressView" destination="FIp-zF-KLy" id="rt7-Ea-yhM"/>
+                <outlet property="feeView" destination="t0l-RC-r4P" id="SyD-ji-Tlj"/>
+                <outlet property="memoView" destination="kan-Pk-1BB" id="MwG-lO-rbc"/>
+                <outlet property="timeView" destination="90X-tO-lhd" id="MkE-Ya-KJb"/>
+                <outlet property="vestingPeriodView" destination="O32-0m-HlA" id="6y6-9n-5Pa"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Nt-33-TQt">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Nt-33-TQt">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="710"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FIp-zF-KLy" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="102"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_income_address"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90X-tO-lhd" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="50" width="375" height="50"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <rect key="frame" x="0.0" y="102" width="375" height="102"/>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_time"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="my_history_time"/>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t0l-RC-r4P" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="100" width="375" height="250"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t0l-RC-r4P" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="204" width="375" height="302"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_fee"/>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O32-0m-HlA" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="350" width="375" height="50"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O32-0m-HlA" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="506" width="375" height="102"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_time"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kan-Pk-1BB" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="608" width="375" height="102"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_mome"/>
                             </userDefinedRuntimeAttributes>
@@ -50,7 +60,6 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="7Nt-33-TQt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Ox1-iA-7Gf"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7Nt-33-TQt" secondAttribute="trailing" id="YIl-kb-UdW"/>

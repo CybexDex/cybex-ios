@@ -82,6 +82,7 @@ extension LockupAssetsViewController : UITableViewDataSource ,UITableViewDelegat
     
     return lockupAssetsSectionView
   }
+  
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
       return define.sectionHeaderHeight
   }

@@ -8,6 +8,8 @@
 
 import Foundation
 import ReSwift
+import SwiftyJSON
+import RxCocoa
 
 //MARK: - State
 struct TransferListState: StateType {
@@ -18,6 +20,11 @@ struct TransferListState: StateType {
 }
 
 struct TransferListPropertyState {
+  var data : BehaviorRelay<[TransferRecordViewModel]?> = BehaviorRelay(value: nil)
+}
+
+struct ReduceTansferRecordsAction : Action {
+  var data : [(TransferRecord,time:String)]
 }
 
 //MARK: - Action Creator

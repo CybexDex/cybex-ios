@@ -9,7 +9,62 @@
 import UIKit
 
 class TransferContentView: UIView {
+  
+  enum event : String {
+    case transferMemo
+  }
+  
+    @IBOutlet weak var addressView: TransferLineView!
+    @IBOutlet weak var timeView: TransferLineView!
+    @IBOutlet weak var feeView: TransferLineView!
+    @IBOutlet weak var vestingPeriodView: TransferLineView!
+    @IBOutlet weak var memoView: TransferLineView!
+    
+    
+  var data : Any? {
+    didSet{
+        if let data = data as? TransferRecordViewModel {
+          addressView.name_locali = data.isSend ? R.string.localizable.transfer_detail_send_address.key.localized() : R.string.localizable.transfer_detail_income_address.key.localized()
+          addressView.content.text = data.isSend ? data.to : data.from
+          timeView.content.text = data.time
+          
+          if data.vesting_period == "" {
+            vestingPeriodView.content.text = R.string.localizable.transfer_detail_nodata.key.localized()
+          }
+          else {
+            vestingPeriodView.content.text = data.vesting_period + R.string.localizable.transfer_unit_time.key.localized()
+          }
+          
+          if data.memo == "" {
+            memoView.content.text = R.string.localizable.transfer_detail_nodata.key.localized()
+          }
+          else {
+            memoView.content.text = R.string.localizable.transfer_detail_click.key.localized()
+            memoView.content.textColor = UIColor.pastelOrange
+            memoView.isUserInteractionEnabled = true
+            memoView.content.rx.tapGesture().when(.recognized).asObservable().subscribe(onNext: { [weak self](tap) in
+              guard let `self` = self else { return }
+              self.next?.sendEventWith(event.transferMemo.rawValue, userinfo: ["memoView":""])
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+          }
 
+          if let feeInfo = data.fee,let assetInfo = app_data.assetInfo[feeInfo.asset_id] {
+            feeView.content.text = getRealAmount(feeInfo.asset_id, amount: feeInfo.amount).stringValue.formatCurrency(digitNum: assetInfo.precision) + assetInfo.symbol
+          }
+          updateHeight()
+        }
+    }
+  }
+  
+  var content_text : String? {
+    didSet {
+      if let text = content_text {
+        self.memoView.content_locali = text
+        updateHeight()
+      }
+    }
+  }
+  
   func setup() {
     
   }
