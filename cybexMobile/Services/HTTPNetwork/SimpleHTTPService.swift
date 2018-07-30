@@ -325,7 +325,12 @@ extension SimpleHTTPService {
       let data = JSON(value).dictionaryValue
       if let code = data["code"]?.int ,code == 200 {
         if let result = data["data"]?.dictionaryObject {
-          seal.fulfill(TradeRecord.deserialize(from: result))
+          if let callbackData = TradeRecord.deserialize(from: result) {
+            seal.fulfill(callbackData)
+          }
+          else {
+            seal.fulfill(nil)
+          }
         }
       }else{
         seal.fulfill(nil)

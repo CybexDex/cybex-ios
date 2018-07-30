@@ -77,4 +77,10 @@
   string jsonString = cybex_gateway_query([accountName UTF8String], [asset UTF8String], [fundType UTF8String], size, offset, expiration);
   return @(jsonString.c_str());
 }
+  
++ (NSString *)getMemo:(NSString *)memo {
+  string jsonString = decrypt_memo_data([memo UTF8String]);
+  return @(jsonString.c_str());
+}
+  
   @end

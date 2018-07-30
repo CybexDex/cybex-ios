@@ -422,40 +422,29 @@ enum fundType : String {
   case DEPOSIT
 }
 
-
 func getWithdrawAndDepositRecords(_ accountName : String, asset : String, fundType : fundType, size : Int, offset : Int, expiration : Int ,callback:@escaping (TradeRecord?)->()) {
   
   var paragram = ["op":["accountName":accountName,"asset":asset, "fundType":fundType.rawValue, "size": Int32(size), "offset": Int32(offset),"expiration":expiration],"signer":"" ] as [String : Any]
-  if UserManager.shared.isSigner {
-    paragram["signer"] = UserManager.shared.signer?.signer
-    SimpleHTTPService.fetchRecords(paragram).done { (result) in
-      callback(result)
+  
+  let operation = BitShareCoordinator.getRecodeLoginOperation(accountName, asset: asset, fundType: fundType.rawValue, size: Int32(size), offset: Int32(offset), expiration: Int32(expiration))
+  if let operation = operation {
+    let json = JSON(parseJSON: operation)
+    let signer = json["signer"].stringValue
+    paragram["signer"] = signer
+    SimpleHTTPService.recordLogin(paragram).done { (result) in
+      if let result = result {
+        paragram["signer"] = result
+        SimpleHTTPService.fetchRecords(paragram).done({ (data) in
+          callback(data)
+        }).catch({ (error) in
+          callback(nil)
+        })
+      }
+      else {
+        callback(nil)
+      }
       }.catch { (error) in
         callback(nil)
-    }
-  }else{
-    let time = TimeInterval(expiration) - Date().timeIntervalSince1970
-    let operation = BitShareCoordinator.getRecodeLoginOperation(accountName, asset: asset, fundType: fundType.rawValue, size: Int32(size), offset: Int32(offset), expiration: Int32(expiration))
-    
-    if let operation = operation {
-      let json = JSON(parseJSON: operation)
-      let signer = json["signer"].stringValue
-      paragram["signer"] = signer
-      SimpleHTTPService.recordLogin(paragram).done { (result) in
-        if let result = result {
-          UserManager.shared.signer = (time,result)
-          paragram["signer"] = result
-          SimpleHTTPService.fetchRecords(paragram).done({ (data) in
-            callback(data)
-          }).catch({ (error) in
-            callback(nil)
-          })
-        }else{
-          callback(nil)
-        }
-        }.catch { (error) in
-          callback(nil)
-      }
     }
   }
 }

@@ -19,7 +19,12 @@ class RecodeCellView: UIView {
   
   var data : Any? {
     didSet{
-      
+      if let data = data as? Record {
+        address.text = data.address
+        time.text = data.updateAt.string(withFormat: "MM/dd HH:mm:ss")
+        name.text = data.asset.filterJade
+        state.text = data.state.desccription()
+      }
     }
   }
   

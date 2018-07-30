@@ -21,6 +21,12 @@
 "dark" = "Dark";
 "light" = "Light";
 "version" = "Version";
+"frequency" = "Frequency";
+
+"frequency_normal" = "Ordinary Market";
+"frequency_time" = "Real-time Market";
+"frequency_wifi" = "Real-time Market(WiFi Only)";
+
 
 "login.hint" = "Use Cloud Wallet mode to login Account";
 "register.hint" = "Use Cloud Wallet mode to create Account";
@@ -263,11 +269,16 @@
 "recode_state_fail" = "Failed";
 "recode_state_success" = "Done";
 
+
+
 // 转账记录
 
 "transfer_title" = "Transfer Records";
 "transfer_done" = "Received";
 "transfer_send" = "Sent";
+
+
+
 
 // 转账详情
 "transfer_detail" = "Transfer Details";
@@ -278,7 +289,8 @@
 "transfer_detail_time" = "Vesting Period";
 "transfer_detail_fee" = "Fee";
 "transfer_detail_mome" = "Memo";
-"transfer_Detail_click" = "Click to view";
+"transfer_detail_click" = "Click to view";
+"transfer_detail_nodata" = "None";
 
 //转账
 "transfer_title" = "Transfer";
@@ -292,6 +304,8 @@
 "transfer_fee" = "Fee";
 "transfer_balance" = "Available";
 "picker_comfirm" = "Comfirm";
+"transfer_unit_time" = "minutes";
+
 "transfer_failed" = "Transfer failed";
 "transfer_successed" = "Transfer successfully";
 
@@ -308,4 +322,10 @@
 
 "recode_nodata" = "No record";
 "balance_nodata" = "No assert";
+
+"Loading more" = "Loading more";
+"No more data" = "No more data";
+"Loading..." = "Loading...";
+"Pull to refresh" = "Pull to refresh";
+"Release to refresh" = "Release to refresh";
 

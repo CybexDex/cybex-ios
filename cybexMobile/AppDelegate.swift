@@ -167,7 +167,6 @@ extension AppDelegate {
         }
         CybexWebSocketService.shared.connect()
       }
-    
     }
   }
 }

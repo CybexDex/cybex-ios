@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import ESPullToRefresh
+import XLActionController
+
 
 extension UIViewController {
   func showAlert(_ message:String, buttonTitle:String) {
@@ -18,3 +21,31 @@ extension UIViewController {
   }
   
 }
+
+extension UIViewController {
+  func addPullToRefresh(_ tableView : UITableView,callback:@escaping(((()->Void)?)->Void)){
+    
+    tableView.es.addPullToRefresh {
+      callback({
+        tableView.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: false)
+      })
+    }
+    
+  }
+  
+  
+  func addInfiniteScrolling(_ tableView : UITableView ,callback:@escaping(((Bool)->())?)->()){
+    tableView.es.addInfiniteScrolling {
+      
+      callback({ isNoMoreData in
+        if isNoMoreData {
+          tableView.es.noticeNoMoreData()
+        }else{
+          tableView.es.stopLoadingMore()
+        }
+      })
+    }
+  }
+}
+
+

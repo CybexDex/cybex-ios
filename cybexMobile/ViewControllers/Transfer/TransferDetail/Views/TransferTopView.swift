@@ -10,11 +10,29 @@ import UIKit
 
 class TransferTopView: UIView {
   
-    @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var state: UILabel!
-    @IBOutlet weak var amount: UILabel!
-    
-    func setup() {
+  @IBOutlet weak var icon: UIImageView!
+  @IBOutlet weak var state: UILabel!
+  @IBOutlet weak var amount: UILabel!
+  
+  var data : Any? {
+    didSet{
+      if let data = data as? TransferRecordViewModel {
+        self.icon.image = data.isSend ? R.image.ic_sent_40_px() : R.image.ic_income_40_px()
+        self.state.text = data.isSend ? R.string.localizable.transfer_detail_send.key.localized() : R.string.localizable.transfer_detail_income.key.localized()
+        if let amountInfo = data.amount, let assetInfo = app_data.assetInfo[amountInfo.asset_id] {
+          self.amount.text = getRealAmount(amountInfo.asset_id, amount: amountInfo.amount).stringValue.formatCurrency(digitNum: assetInfo.precision) + assetInfo.symbol.filterJade
+          self.amount.text = data.isSend ? "-" + self.amount.text! : "+" + self.amount.text!
+        }
+        if UIScreen.main.bounds.width == 320 {
+          self.amount.font = UIFont.systemFont(ofSize: 20.0, weight: .medium)
+        }
+        
+        updateHeight()
+      }
+    }
+  }
+  
+  func setup() {
     
   }
   
@@ -63,5 +81,5 @@ class TransferTopView: UIView {
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight,.flexibleWidth]
   }
-
+  
 }

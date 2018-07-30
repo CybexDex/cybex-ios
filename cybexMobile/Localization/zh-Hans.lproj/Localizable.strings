@@ -13,12 +13,19 @@
 "nav.setting" = "设置";
 "nav.trade"   = "交易";
 
+
 "market" = "交易中心";
 "language" = "语言";
 "theme" = "主题";
 "dark" = "黑色";
 "light" = "白色";
 "version" = "版本";
+"frequency" = "行情刷新频率";
+
+"frequency_normal" = "普通行情";
+"frequency_time" = "实时行情";
+"frequency_wifi" = "仅在WiFi下实时行情";
+
 
 "login.hint" = "登录您的云钱包账户";
 "register.hint" = "创建您的云钱包账户";
@@ -266,7 +273,8 @@
 "transfer_detail_time" = "锁定期";
 "transfer_detail_fee" = "手续费";
 "transfer_detail_mome" = "备注信息";
-"transfer_Detail_click" = "点击查看";
+"transfer_detail_click" = "点击查看";
+"transfer_detail_nodata" = "无";
 
 //转账
 "transfer_title" = "转账";
@@ -280,6 +288,9 @@
 "transfer_fee" = "手续费";
 "transfer_balance" = "余额";
 "picker_comfirm" = "确认";
+"transfer_unit_time" = "分";
+
+
 "transfer_failed" = "转账失败";
 "transfer_successed" = "转账成功";
 
@@ -296,5 +307,12 @@
 
 "recode_nodata" = "暂无记录";
 "balance_nodata" = "暂无资产";
+
+
+"Loading more" = "加载更多";
+"No more data" = "没有更多的数据";
+"Loading..." = "正在加载";
+"Pull to refresh" = "下拉刷新";
+"Release to refresh" = "松开刷新";
 
 

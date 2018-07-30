@@ -53,10 +53,8 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="ixC-Y6-Fvy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="6Ff-BL-4t1"/>
                 <constraint firstItem="ixC-Y6-Fvy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-32" id="OLS-Jj-vYR"/>
                 <constraint firstItem="ixC-Y6-Fvy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ia9-kp-qjD"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ixC-Y6-Fvy" secondAttribute="trailing" constant="20" id="yza-97-yn9"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
