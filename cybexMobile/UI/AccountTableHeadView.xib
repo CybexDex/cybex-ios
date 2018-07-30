@@ -21,8 +21,8 @@
             <rect key="frame" x="0.0" y="0.0" width="408" height="182"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzX-sE-u4A">
-                    <rect key="frame" x="34" y="101" width="82.5" height="41"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzX-sE-u4A">
+                    <rect key="frame" x="34" y="101" width="340" height="41"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="41" id="BKJ-JG-Uua"/>
                     </constraints>
@@ -78,6 +78,7 @@
                 </view>
             </subviews>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gzX-sE-u4A" secondAttribute="trailing" constant="34" id="2cs-aw-jfJ"/>
                 <constraint firstItem="qQn-Zv-smL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="25" id="SLQ-jp-SGp"/>
                 <constraint firstItem="gzX-sE-u4A" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="34" id="SxX-ih-ql3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="gzX-sE-u4A" secondAttribute="bottom" constant="40" id="b7j-h9-54S"/>
