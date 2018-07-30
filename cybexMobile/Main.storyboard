@@ -54,7 +54,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NP8-xs-njn">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="272"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEv-8w-Nao">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEv-8w-Nao" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
                                                 <rect key="frame" x="13" y="0.0" width="294" height="144"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpo-dn-0FV" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
@@ -90,7 +90,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJ6-Af-LNN" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="96" width="294" height="48"/>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                                                 <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
@@ -115,7 +115,7 @@
                                                     <constraint firstItem="qJ6-Af-LNN" firstAttribute="leading" secondItem="XEv-8w-Nao" secondAttribute="leading" id="y9C-jh-3w8"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbw-NE-dXd">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbw-NE-dXd" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
                                                 <rect key="frame" x="13" y="156" width="294" height="48"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCU-kq-OIy" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
@@ -124,7 +124,7 @@
                                                             <constraint firstAttribute="height" constant="48" id="5dO-bs-Rzg"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                                                 <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
@@ -205,6 +205,8 @@
                         <outlet property="language" destination="fpo-dn-0FV" id="qK3-Uw-ek3"/>
                         <outlet property="logoutView" destination="KDV-f5-Nyx" id="eNz-cM-cyG"/>
                         <outlet property="theme" destination="OCU-kq-OIy" id="9Zs-kp-2pU"/>
+                        <outlet property="themeShadowView" destination="nbw-NE-dXd" id="4yE-uV-SPl"/>
+                        <outlet property="topContentShadowView" destination="XEv-8w-Nao" id="Mp4-mg-tm9"/>
                         <outlet property="version" destination="qJ6-Af-LNN" id="C8p-1f-uOB"/>
                     </connections>
                 </viewController>
