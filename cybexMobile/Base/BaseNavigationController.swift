@@ -17,6 +17,12 @@ class BaseNavigationController: UINavigationController {
     setupNavUI()
   }
   
+  func updateNavUI() {
+    let image = UIImage.init(color: .dark)
+    self.navigationBar.setBackgroundImage(image, for: .default)
+    self.navigationBar.isTranslucent = false
+  }
+  
   func setupNavUI() {
     self.view.theme1BgColor = UIColor.dark
     self.view.theme2BgColor = UIColor.paleGrey
@@ -47,7 +53,11 @@ class BaseNavigationController: UINavigationController {
     }
     //    self.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "ic_arrow_back_16px")
     //    self.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "ic_arrow_back_16px")
-    
+    addNotification()
+
+  }
+  
+  func addNotification() {
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] notification in
       guard let `self` = self else { return }
       

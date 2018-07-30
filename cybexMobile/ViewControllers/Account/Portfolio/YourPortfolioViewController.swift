@@ -25,28 +25,27 @@ class YourPortfolioViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
+    let tradeTitltView = TradeNavTitleView(frame: CGRect(x: 0, y: 0, width: 100, height: 64))
+    tradeTitltView.title.localized_text =  R.string.localizable.my_property.key.localizedContainer()
+    tradeTitltView.title.textColor = UIColor.white
+    tradeTitltView.icon.isHidden = true
+    self.navigationItem.titleView = tradeTitltView
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    setupUI()
     
     let image = UIImage.init(color: UIColor.clear)
-    self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-    self.navigationController?.navigationBar.isTranslucent = true
-    self.navigationController?.makeTransparent(withTint: .white)
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    self.navigationController?.makeTransparent(withTint: .white)
+    navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+    navigationController?.navigationBar.isTranslucent = true
+    setupUI()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     if let nav = self.navigationController as? BaseNavigationController {
-      nav.setupNavUI()
+      nav.updateNavUI()
     }
   }
   
@@ -70,7 +69,6 @@ class YourPortfolioViewController: BaseViewController {
     }
 
     configLeftNavButton(R.image.icArrowForwardWhite16Px())
-    self.localized_text = R.string.localizable.my_property.key.localizedContainer()
 //    let cell = String.init(describing: YourPortfolioCell.self)
     let cell = R.nib.yourPortfolioCell.name
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
