@@ -388,7 +388,7 @@ class UserManager {
   
   var refreshTime : TimeInterval = 6 {
     didSet {
-      app_coodinator.repeatFetchPairInfo()
+      app_coodinator.repeatFetchPairInfo(.veryLow)
     }
   }
   var isWithDraw : Bool = false
