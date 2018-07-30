@@ -77,7 +77,7 @@ class TitleTextfieldView: UIView {
       let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(introduce))
       introduceLabel.addGestureRecognizer(tapGestureRecognizer)
       
-      textField.attributedPlaceholder = NSMutableAttributedString.init(string: setting.placeholder, attributes: [NSAttributedStringKey.foregroundColor: UIColor.blueyGrey])
+      textField.attributedPlaceholder = NSMutableAttributedString.init(string: setting.placeholder, attributes: [NSAttributedStringKey.foregroundColor: UIColor.steel50])
       textField.isSecureTextEntry = setting.isSecureTextEntry
       gapView.alpha = setting.showLine ? 1.0 : 0.0
     }
