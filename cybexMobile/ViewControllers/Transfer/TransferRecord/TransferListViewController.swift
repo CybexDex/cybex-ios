@@ -47,8 +47,12 @@ class TransferListViewController: BaseViewController {
     commonObserveState()
     UserManager.shared.transferRecords.asObservable().subscribe(onNext: { [weak self](data) in
       guard let `self` = self else { return }
-      self.coordinator?.reduceTransferRecords()
-      
+      if let result = data ,result.count > 0 {
+        self.coordinator?.reduceTransferRecords()
+      }
+      else {
+        self.endLoading()
+      }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
     self.coordinator?.state.property.data.asObservable().subscribe(onNext: { [weak self](data) in

@@ -21,7 +21,8 @@ struct OrderBookState: StateType {
 }
 
 struct OrderBookPropertyState {
-  var data:BehaviorRelay<OrderBook> = BehaviorRelay(value: OrderBook(bids: [], asks: []))
+  var data:BehaviorRelay<OrderBook?> = BehaviorRelay(value: nil)
+  var pair:BehaviorRelay<Pair?> = BehaviorRelay(value: nil)
 }
 
 struct OrderBook:Equatable {

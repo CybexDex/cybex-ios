@@ -17,6 +17,7 @@ import PromiseKit
 import AwaitKit
 import Guitar
 import Repeat
+import SwiftyUserDefaults
 
 extension UserManager {
   
@@ -135,6 +136,9 @@ extension UserManager {
     let request = GetAccountHistoryRequest(accountID: id) { (data) in
       if let data = data as? (fillOrders:[FillOrder],transferRecords:[TransferRecord]) {
         var fillorders = data.fillOrders
+        if data.transferRecords.count == 0 {
+          self.transferRecords.accept(nil)
+        }
         if fillorders.count == 0 || !self.isLoginIn {
           self.fillOrder.accept(nil)
           return
@@ -376,12 +380,19 @@ class UserManager {
     return self.keys == nil
   }
   
-  var frequency_type : frequency_type = .normal {
+  var frequency_type : frequency_type = .WiFi {
     didSet {
+      Defaults[.frequency_type] = self.frequency_type.rawValue
       switch self.frequency_type {
       case .normal:self.refreshTime = 6
       case .time:self.refreshTime = 3
-      case .WiFi:self.refreshTime = 3
+      case .WiFi:
+        let status = RealReachability.sharedInstance().currentReachabilityStatus()
+        if status == .RealStatusViaWiFi {
+          self.refreshTime = 3
+        }else {
+          self.refreshTime = 6
+        }
       }
     }
   }
@@ -405,13 +416,10 @@ class UserManager {
   
   var timer:Repeater?
   
-  
   var limitOrderValue:Double = 0
   var limitOrder_buy_value: Double = 0
   
   var limit_reset_address_time : TimeInterval = 0
-  
-  
   
   var balance : Double {
     
@@ -470,12 +478,10 @@ class UserManager {
   
   private init() {
     
-    app_data.data.asObservable().distinctUntilChanged()
-      .filter({$0.count == AssetConfiguration.shared.asset_ids.count})
-      .throttle(3, latest: true, scheduler: MainScheduler.instance)
+    app_data.otherRequestRelyData.asObservable()
       .subscribe(onNext: { (s) in
         DispatchQueue.main.async {
-          if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 {
+          if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 && !CybexWebSocketService.shared.overload() {
             UserManager.shared.fetchAccountInfo()
           }
           
@@ -484,9 +490,10 @@ class UserManager {
     
     account.asObservable().skip(1).subscribe(onNext: {[weak self] (newAccount) in
       guard let `self` = self else { return }
-      
+      if CybexWebSocketService.shared.overload() {
+        return
+      }
       self.fetchHistoryOfFillOrdersAndTransferRecords()
-      //      self.fetchHistoryOfOperation()
     }).disposed(by: disposeBag)
     
   }

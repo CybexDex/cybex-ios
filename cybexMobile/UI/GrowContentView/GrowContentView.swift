@@ -15,7 +15,7 @@ protocol GrowContentViewDataSource {
   func marginOfContentView(_ contentView: GrowContentView) -> CGFloat
   func heightWithSectionHeader(_ contentView: GrowContentView,section: NSInteger) -> CGFloat
   func cornerRadiusOfSection(_ contentView: GrowContentView,section: NSInteger) -> CGFloat
-  func shadowSettingOfSection(_ contentView: GrowContentView,section: NSInteger) -> (color: UIColor,offset: CGSize,radius: CGFloat)
+  func shadowSettingOfSection(_ contentView: GrowContentView,section: NSInteger) -> (color: UIColor,offset: CGSize,radius: CGFloat,opacity: Float)
   func viewOfIndexpath(_ contentView: GrowContentView,indexpath: NSIndexPath) -> (view: UIView,key: String)
 }
 
@@ -72,14 +72,14 @@ class GrowContentView: UIView {
   fileprivate func sectionView(_ section: NSInteger, headerHeight: CGFloat) -> GrowSectionView {
     let sectionView = GrowSectionView()
     if let radius = self.datasource?.cornerRadiusOfSection(self, section: section) {
-      sectionView.corAndShadowView?.cornerRadius = radius
+      sectionView.corAndShadowView?.newCornerRadius = radius
     }
     
     if let shadowSetting = self.datasource?.shadowSettingOfSection(self, section: section) {
       sectionView.corAndShadowView?.newShadowColor = shadowSetting.color
       sectionView.corAndShadowView?.newShadowOffset = shadowSetting.offset
       sectionView.corAndShadowView?.newShadowRadius = shadowSetting.radius
-      sectionView.corAndShadowView?.shadowOpacity = 1.0
+      sectionView.corAndShadowView?.newShadowOpcity = shadowSetting.opacity
     }
     return sectionView
   }

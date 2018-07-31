@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import Presentr
 
 protocol TradeCoordinatorProtocol {
   func openMyHistory()
@@ -63,6 +64,16 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
   }
   
   func addHomeVC() {
+//    let width = ModalSize.full
+//    let height = ModalSize.custom(size: 397)
+//    let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: 397 * 0.5))
+//    let customType = PresentationType.custom(width: width, height: height, center: center)
+//
+//    let presenter = Presentr(presentationType: customType)
+//    presenter.dismissOnSwipeDirection = .top
+//    presenter.presentationType = .popup
+    
+    
     guard let tradeVC = self.rootVC.topViewController as? TradeViewController else { return }
 
     guard let vc = R.storyboard.main.homeViewController() else { return }
@@ -71,6 +82,10 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
     guard let homeView = vc.view else { return }
     let coordinator = HomeCoordinator(rootVC: self.rootVC)
     vc.coordinator  = coordinator
+    
+//    tradeVC.customPresentViewController(presenter, viewController: vc, animated: true, completion: nil)
+    
+    
     tradeVC.addChildViewController(vc)
 
     tradeVC.view.addSubview(homeView)
@@ -80,9 +95,9 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
     homeView.leftToSuperview(nil, offset: 0, relation: .equal, priority: .required, isActive:true, usingSafeArea: true)
     homeView.rightToSuperview(nil, offset: 0, relation: .equal, priority: .required, isActive:true, usingSafeArea: true)
     homeView.height(397)
-    
+
     vc.didMove(toParentViewController: tradeVC)
-    
+
     tradeVC.view.layoutIfNeeded()
     homeVCTopConstaint.constant = 0
     UIView.animate(withDuration: 0.3) {

@@ -24,6 +24,7 @@ class TransferDetailViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+
   }
   
   func setupUI() {

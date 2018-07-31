@@ -37,6 +37,8 @@ protocol TransferStateManagerProtocol {
   
   func validAccount()
   
+  func checkAmount(_ transferAmount: Double)
+  
   func transfer(_ callback: @escaping (Any)->())
   
   func getGatewayFee(_ assetId: String, amount: String, memo: String)
@@ -85,6 +87,10 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
       }
     }
     
+    if items.count == 0 {
+      items.append(R.string.localizable.balance_nodata())
+    }
+    
     if let vc = R.storyboard.components.pickerViewController() {
       vc.items = items as AnyObject
       vc.selectedValue =  (0, 0)
@@ -92,7 +98,9 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
       coordinator.pickerDidSelected = { [weak self] (picker: UIPickerView) -> Void in
         guard let `self` = self else { return }
         self.getTransferAccountInfo()
-        self.store.dispatch(SetBalanceAction(balance: balances![picker.selectedRow(inComponent: 0)]))
+        if let balance = balances,balance.count > 0 {
+          self.store.dispatch(SetBalanceAction(balance: balances![picker.selectedRow(inComponent: 0)]))
+        }
       }
       vc.coordinator = coordinator
       
@@ -156,6 +164,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
   
   func validAccount() {
     if !self.state.property.account.value.isEmpty {
+      
       UserManager.shared.checkUserName(self.state.property.account.value).done({[weak self] (exist) in
         main {
           guard let `self` = self else { return }
@@ -169,6 +178,9 @@ extension TransferCoordinator: TransferStateManagerProtocol {
   }
   
   func setAccount(_ account: String) {
+    if !self.state.property.account.value.isEmpty,self.state.property.account.value != account {
+      self.store.dispatch(ValidAccountAction(isValid: false))
+    }
     self.state.property.account.accept(account)
     validAccount()
   }
@@ -184,11 +196,8 @@ extension TransferCoordinator: TransferStateManagerProtocol {
   }
   
   func validAmount() {
-    if let balance = self.state.property.balance.value {
-      if self.state.property.accountValid.value {
-        getGatewayFee(balance.asset_type, amount: self.state.property.amount.value, memo: self.state.property.memo.value)
-      }
-    }
+    let balance = self.state.property.balance.value
+    getGatewayFee(balance?.asset_type ?? "", amount: self.state.property.amount.value, memo: self.state.property.memo.value)
   }
   
   func getTransferAccountInfo() {
@@ -204,33 +213,56 @@ extension TransferCoordinator: TransferStateManagerProtocol {
   
   func getGatewayFee(_ assetId: String, amount: String, memo: String) {
     if var amount = amount.toDouble() {
-      let value = pow(10, (app_data.assetInfo[assetId]?.precision)!)
+      let value = assetId.isEmpty ? 1 : pow(10, (app_data.assetInfo[assetId]?.precision)!)
       amount = amount * Double(truncating: value as NSNumber)
-      if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId((UserManager.shared.account.value?.id)!)),
-                                                                        to_user_id: Int32(getUserId((self.state.property.to_account.value?.id)!)),
+      checkAmount(amount)
+      let from_user_id = UserManager.shared.account.value?.id ?? "0"
+      let from_memo_key = UserManager.shared.account.value?.memo_key ?? ""
+      let to_user_id = self.state.property.to_account.value?.id ?? "0"
+      let to_memo_key = self.state.property.to_account.value?.memo_key ?? from_memo_key
+      if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId(from_user_id)),
+                                                                        to_user_id: Int32(getUserId(to_user_id)),
                                                                         asset_id: Int32(getUserId(assetId)),
                                                                         amount: Int32(amount),
                                                                         fee_id: 0,
                                                                         fee_amount: 0,
                                                                         memo: memo,
-                                                                        from_memo_key: UserManager.shared.account.value?.memo_key,
-                                                                        to_memo_key: self.state.property.to_account.value?.memo_key){
-        log.debug(operationString)
+                                                                        from_memo_key: from_memo_key,
+                                                                        to_memo_key: to_memo_key){
         calculateFee(operationString, focus_asset_id: assetId, operationID: .transfer) { (success, amount, fee_id) in
-          let dictionary = ["asset_id":fee_id,"amount":amount.stringValue]
-          self.store.dispatch(SetFeeAction(fee: Fee(JSON: dictionary)!))
-          if let balance = self.state.property.balance.value {
-            let realBalance = getRealAmountDouble(balance.asset_type, amount: balance.balance)
-            if let feeAmount = amount.stringValue.toDouble(), let transferAmount = self.state.property.amount.value.toDouble() {
-              if realBalance > feeAmount + transferAmount  {
-                self.store.dispatch(ValidAmountAction(isValid: true))
-                return
-              }
+          if success {
+            let dictionary = ["asset_id":fee_id,"amount":amount.stringValue]
+            self.store.dispatch(SetFeeAction(fee: Fee(JSON: dictionary)!))
+            if let transferAmount = self.state.property.amount.value.toDouble() {
+              self.checkAmount(transferAmount)
+            } else {
+              self.store.dispatch(ValidAmountAction(isValid: true))
             }
+          } else {
+            self.store.dispatch(ValidAmountAction(isValid: false))
           }
-          self.store.dispatch(ValidAmountAction(isValid: false))
         }
       }
+    }
+  }
+  
+  func checkAmount(_ transferAmount: Double) {
+    if let balance = self.state.property.balance.value,let totalAmount = balance.balance.toDouble() {
+      var feeAmount: Double = 0
+      if let fee = self.state.property.fee.value {
+        if fee.asset_id == balance.asset_type {
+          feeAmount = fee.amount.toDouble() ?? 0
+          let value = fee.asset_id.isEmpty ? 1 : pow(10, (app_data.assetInfo[fee.asset_id]?.precision)!)
+          feeAmount = feeAmount * Double(truncating: value as NSNumber)
+        }
+      }
+      if transferAmount + feeAmount > totalAmount {
+        self.store.dispatch(ValidAmountAction(isValid: false))
+      } else {
+        self.store.dispatch(ValidAmountAction(isValid: true))
+      }
+    } else {
+      self.store.dispatch(ValidAmountAction(isValid: true))
     }
   }
   

@@ -19,7 +19,9 @@ func TransferListPropertyReducer(_ state: TransferListPropertyState?, action: Ac
     
     switch action {
     case let action as ReduceTansferRecordsAction :
-      state.data.accept(transferRecordsToViewModels(action.data))
+      transferRecordsToViewModels(action.data) { (result) in
+        state.data.accept(result)
+      }
       break
     default:
         break
@@ -28,17 +30,28 @@ func TransferListPropertyReducer(_ state: TransferListPropertyState?, action: Ac
     return state
 }
 
-func transferRecordsToViewModels(_ sender : [(TransferRecord,time:String)]) -> [TransferRecordViewModel]? {
+func transferRecordsToViewModels(_ sender : [(TransferRecord,time:String)] ,callback:@escaping([TransferRecordViewModel])->()) {
   if sender.count == 0 {
-    return nil
+    callback([])
   }
   
-  
-  return sender.map({ (data) in
-    
-    TransferRecordViewModel(isSend: data.0.from == UserManager.shared.account.value?.id, from: data.0.from, to: data.0.to, time: data.time, amount: data.0.amount, memo: data.0.memo?.toJSONString() ?? "", vesting_period: data.0.vesting_period, fee: data.0.fee)
-  })
-  
+  if let account = UserManager.shared.account.value {
+    var result : [TransferRecordViewModel] = [TransferRecordViewModel]()
+    for source : (TransferRecord,time:String) in sender {
+      let requeset_id = source.0.from == account.id ?  source.0.to : source.0.from
+      let request = GetFullAccountsRequest(name: requeset_id) { (response) in
+        if let data = response as? FullAccount, let account = data.account {
+          let requeset_name = account.name
+          let transferViewModel = TransferRecordViewModel(isSend: source.0.from == UserManager.shared.account.value?.id, from: source.0.from == account.id ? account.name : requeset_name, to: source.0.from == account.id ? requeset_name : account.name, time: source.time, amount: source.0.amount, memo: source.0.memo?.toJSONString() ?? "", vesting_period: source.0.vesting_period, fee: source.0.fee)
+          result.append(transferViewModel)
+          if result.count == sender.count {
+            callback(result)
+          }
+        }
+      }
+      CybexWebSocketService.shared.send(request: request)
+    }
+  }
 }
 
 
