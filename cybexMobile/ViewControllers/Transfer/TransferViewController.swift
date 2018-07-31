@@ -71,7 +71,11 @@ class TransferViewController: BaseViewController {
     Observable.combineLatest(self.coordinator!.state.property.accountValid.asObservable(),
                              self.coordinator!.state.property.amountValid.asObservable()).subscribe(onNext: {[weak self] (accountValid,amountValid) in
                               guard let `self` = self else { return }
-                              self.transferView.buttonIsEnable = accountValid && amountValid && ((self.coordinator?.state.property.balance.value) != nil) && !(self.coordinator?.state.property.amount.value.isEmpty ?? true)
+                              if let _ = self.coordinator?.state.property.balance.value, let transferAmount = self.coordinator?.state.property.amount.value.toDouble() {
+                                self.transferView.buttonIsEnable = accountValid && amountValid && transferAmount > 0
+                              } else {
+                                self.transferView.buttonIsEnable = false
+                              }
                               if !accountValid && !(self.coordinator?.state.property.account.value.isEmpty)! {
                                 self.showToastBox(false, message: R.string.localizable.transfer_account_unexist.key.localized())
                               }
