@@ -260,7 +260,7 @@
 "recode_state_success" = "成功";
 
 // 转账记录
-"transfer_title" = "转账记录";
+"transfer_list_title" = "转账记录";
 "transfer_done" = "已收到";
 "transfer_send" = "已转出";
 

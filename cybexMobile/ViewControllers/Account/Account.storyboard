@@ -171,6 +171,7 @@
                     </view>
                     <connections>
                         <outlet property="accountContentView" destination="9rf-4b-3th" id="Bg7-wf-bIZ"/>
+                        <outlet property="bgImageView" destination="d1Q-u1-Y84" id="VIb-13-cmk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6RC-sf-fWW" userLabel="First Responder" sceneMemberID="firstResponder"/>

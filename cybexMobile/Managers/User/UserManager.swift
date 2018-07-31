@@ -490,7 +490,7 @@ class UserManager {
     
     account.asObservable().skip(1).subscribe(onNext: {[weak self] (newAccount) in
       guard let `self` = self else { return }
-      if CybexWebSocketService.shared.overload() {
+      if CybexWebSocketService.shared.overload() || self.fillOrder.value != nil {
         return
       }
       self.fetchHistoryOfFillOrdersAndTransferRecords()
