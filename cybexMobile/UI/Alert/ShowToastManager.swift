@@ -34,7 +34,7 @@ class ShowToastManager {
     didSet{
       if isShowSingleBtn == true,let textView = self.showView as? CybexTextView{
         textView.cancle.isHidden  = true
-        textView.ensureRight.constant = (textView.width - textView.ensure.width) * 0.5
+        textView.hSeparateView.isHidden = true
       }
     }
   }

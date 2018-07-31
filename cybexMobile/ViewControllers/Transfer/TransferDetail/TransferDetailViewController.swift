@@ -24,13 +24,7 @@ class TransferDetailViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
-    
-    self.startLoading()
-    self.coordinator?.fetchAccoutInfoWithId(self.data.isSend ? data.to : data.from, callback: { [weak self](account_name) in
-      guard let `self` = self else { return }
-      self.endLoading()
-      self.contentView.address_content = account_name
-    })
+
   }
   
   func setupUI() {

@@ -30,7 +30,7 @@ class OrderBookViewController: BaseViewController {
     didSet {
       guard let pair = pair else { return }
       if self.tradeView != nil {
-        self.coordinator?.resetData(pair)
+//        self.coordinator?.resetData(pair)
         
         showMarketPrice()
       }
@@ -109,13 +109,18 @@ class OrderBookViewController: BaseViewController {
     self.coordinator!.state.property.data.asObservable().skip(1).distinctUntilChanged()
       .subscribe(onNext: {[weak self] (s) in
         guard let `self` = self else { return }
+        if let parentVC = self.parent?.parent as? TradeViewController {
+          if parentVC.isLoading() {
+            parentVC.endLoading()
+          }
+        }
         if self.VC_TYPE == 1{
           self.contentView.data = s
           self.contentView.tableView.reloadData()
           self.contentView.tableView.isHidden = false
           self.coordinator?.updateMarketListHeight(500)
         }else{
-          if !(s.asks.count == 0 && s.bids.count == 0){
+          if self.coordinator?.state.property.pair.value == self.pair{
             self.tradeView.data = s
           }
         }

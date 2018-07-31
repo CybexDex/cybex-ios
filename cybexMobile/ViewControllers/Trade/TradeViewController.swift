@@ -136,7 +136,6 @@ class TradeViewController: BaseViewController {
   
   @objc override func rightAction(_ sender: UIButton){
     self.coordinator?.openMyHistory()
-    
   }
   
   @objc override func leftAction(_ sender: UIButton){
@@ -229,6 +228,7 @@ extension TradeViewController : TradeNavTitleViewDelegate {
         guard let `self` = self else { return }
         self.chooseTitleView?.removeFromSuperview()
         self.chooseTitleView = nil
+        self.startLoading()
       }
     }else{
       self.chooseTitleView = UIView()

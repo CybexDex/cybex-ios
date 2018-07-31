@@ -38,8 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     NetworkActivityLogger.shared.startLogging()
     NetworkActivityLogger.shared.level = .error
-    if Defaults.hasKey(.refreshTime){
-      UserManager.shared.refreshTime = Defaults[.refreshTime]
+    if Defaults.hasKey(.frequency_type){
+      UserManager.shared.frequency_type = UserManager.frequency_type(rawValue: Defaults[.frequency_type])!
     }
       
     let console = ConsoleDestination()
@@ -172,7 +172,8 @@ extension AppDelegate {
       }else {
         if status == .RealStatusViaWiFi {
           UserManager.shared.refreshTime = 3
-        }else {
+        }
+        else {
           UserManager.shared.refreshTime = 6
         }
       }
