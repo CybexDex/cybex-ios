@@ -164,6 +164,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
   
   func validAccount() {
     if !self.state.property.account.value.isEmpty {
+      
       UserManager.shared.checkUserName(self.state.property.account.value).done({[weak self] (exist) in
         main {
           guard let `self` = self else { return }
@@ -177,6 +178,9 @@ extension TransferCoordinator: TransferStateManagerProtocol {
   }
   
   func setAccount(_ account: String) {
+    if !self.state.property.account.value.isEmpty,self.state.property.account.value != account {
+      self.store.dispatch(ValidAccountAction(isValid: false))
+    }
     self.state.property.account.accept(account)
     validAccount()
   }
