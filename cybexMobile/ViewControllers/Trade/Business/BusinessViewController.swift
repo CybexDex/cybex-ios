@@ -269,7 +269,7 @@ class BusinessViewController: BaseViewController {
         return
       }
 
-      let total = limit * amount
+      let total = Decimal(floatLiteral: limit) * Decimal(floatLiteral: amount)
 
       self.containerView.endMoney.text = "\(total.tradePrice().price) \(base_info.symbol.filterJade)"
 
