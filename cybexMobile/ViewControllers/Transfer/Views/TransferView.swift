@@ -35,6 +35,12 @@ class TransferView: UIView {
     }
   }
   
+  var precision: Int = 0 {
+    didSet {
+      quantityView.textField.text = ""
+    }
+  }
+  
   var buttonIsEnable: Bool = false {
     didSet {
       transferButton.setBackgroundImage(buttonIsEnable ? R.image.btnColorOrange() : R.image.btnColorGrey(), for: .normal)
@@ -324,7 +330,9 @@ extension TransferView: UITextFieldDelegate {
     case InputType.account.rawValue:
       self.sendEventWith(TextChangeEvent.account.rawValue, userinfo: ["content" : textField.text ?? ""])
     case InputType.amount.rawValue:
-      self.sendEventWith(TextChangeEvent.amount.rawValue, userinfo: ["content" : textField.text ?? ""])
+      let validedText = textField.text?.toDouble()?.string(digits: precision)
+      textField.text = validedText
+      self.sendEventWith(TextChangeEvent.amount.rawValue, userinfo: ["content" : validedText ?? ""])
     default:
       return
     }

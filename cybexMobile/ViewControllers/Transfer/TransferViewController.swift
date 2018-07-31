@@ -21,6 +21,7 @@ class TransferViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+    getFee()
   }
   
   func commonObserveState() {
@@ -70,7 +71,13 @@ class TransferViewController: BaseViewController {
     Observable.combineLatest(self.coordinator!.state.property.accountValid.asObservable(),
                              self.coordinator!.state.property.amountValid.asObservable()).subscribe(onNext: {[weak self] (accountValid,amountValid) in
                               guard let `self` = self else { return }
-                              self.transferView.buttonIsEnable = accountValid && amountValid
+                              self.transferView.buttonIsEnable = accountValid && amountValid && ((self.coordinator?.state.property.balance.value) != nil) && !(self.coordinator?.state.property.amount.value.isEmpty ?? true)
+                              if !accountValid && !(self.coordinator?.state.property.account.value.isEmpty)! {
+                                self.showToastBox(false, message: R.string.localizable.transfer_account_unexist.key.localized())
+                              }
+                              if !amountValid, ((self.coordinator?.state.property.fee.value) != nil) {
+                                self.showToastBox(false, message: R.string.localizable.transfer_balance_unenough.key.localized())
+                              }
                               }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
     //币种及余额监听
@@ -79,6 +86,7 @@ class TransferViewController: BaseViewController {
       if let balance = balance {
         if let info = app_data.assetInfo[balance.asset_type] {
           self.transferView.crypto = info.symbol.filterJade
+          self.transferView.precision = info.precision
           let realBalance = getRealAmountDouble(balance.asset_type, amount: balance.balance)
           self.transferView.balance = R.string.localizable.transfer_balance.key.localized() + String(format: "%f", realBalance) + (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!
         }
@@ -98,6 +106,10 @@ class TransferViewController: BaseViewController {
   func setupUI() {
     self.title = R.string.localizable.transfer_title.key.localized()
     self.configRightNavButton(R.image.ic_records_24_px())
+  }
+  
+  func getFee() {
+    self.coordinator?.validAmount()
   }
   
   override func rightAction(_ sender: UIButton) {

@@ -308,6 +308,8 @@
 
 "transfer_failed" = "Transfer failed";
 "transfer_successed" = "Transfer successfully";
+"transfer_account_unexist" = "账户不存在";
+"transfer_balance_unenough" = "余额不足";
 
 //zsy add
 "my_property" = "My Balance";
