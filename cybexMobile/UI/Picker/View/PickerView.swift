@@ -82,6 +82,10 @@ class PickerView: UIView {
 }
 
 extension PickerView: UIPickerViewDelegate,UIPickerViewDataSource {
+  func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    return 41
+  }
+  
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     if items != nil {
       return self.numberOfComponents()

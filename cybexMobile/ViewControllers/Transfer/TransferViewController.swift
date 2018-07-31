@@ -42,23 +42,28 @@ class TransferViewController: BaseViewController {
     
     self.transferView.transferButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] tap in
       guard let `self` = self else { return }
-      self.startLoading()
-      self.coordinator?.transfer({ (data) in
-        self.endLoading()
-        main {
-          ShowToastManager.shared.hide()
-          if self.isVisible{
-            if String(describing: data) == "<null>"{
-              self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())
-              SwifterSwift.delay(milliseconds: 100) {
-                self.coordinator?.pop()
+      if !UserManager.shared.isLocked {
+        self.startLoading()
+        self.coordinator?.transfer({ (data) in
+          self.endLoading()
+          main {
+            ShowToastManager.shared.hide()
+            if self.isVisible{
+              if String(describing: data) == "<null>"{
+                self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())
+                SwifterSwift.delay(milliseconds: 100) {
+                  self.coordinator?.pop()
+                }
+              }else{
+                self.showToastBox(false, message: R.string.localizable.transfer_failed.key.localized())
               }
-            }else{
-              self.showToastBox(false, message: R.string.localizable.transfer_failed.key.localized())
             }
           }
-        }
-      })
+        })
+      }
+      else {
+        self.showPasswordBox()
+      }
     }).disposed(by: disposeBag)
     
     //按钮状态监听
