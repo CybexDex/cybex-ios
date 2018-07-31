@@ -20,27 +20,45 @@ class CornerAndShadowView: UIView {
   
   var newShadowRadius: CGFloat = 4 {
     didSet {
-      self.shadowRadius = newShadowRadius
+      self.subviews.forEach { (subView) in
+        if subView.shadowOpacity == 1 {
+          subView.shadowRadius = newShadowRadius
+        }
+      }
     }
   }
   
-  var newShadowColor: UIColor = UIColor.steel20 {
+  var newShadowColor: UIColor = UIColor.dark20 {
     didSet {
-      self.shadowColor = newShadowColor
-    }
-  }
-  
-  var newShadowOpcity: Float = 1 {
-    didSet {
-      self.shadowOpacity = newShadowOpcity
+      self.subviews.forEach { (subView) in
+        if subView.shadowOpacity == 1 {
+          subView.shadowColor = newShadowColor
+        }
+      }
     }
   }
   
   var newShadowOffset: CGSize = CGSize(width: 0, height: 0) {
     didSet {
-      self.shadowOffset = newShadowOffset
+      self.subviews.forEach { (subView) in
+        if subView.shadowOpacity == 1 {
+          subView.shadowOffset = newShadowOffset
+        }
+      }
+    }
+  }  
+  
+  var newShadowOpcity: Float = 1 {
+    didSet {
+      self.subviews.forEach { (subView) in
+        if subView.shadowOpacity == 1 {
+          subView.shadowOpacity = newShadowOpcity
+        }
+      }
     }
   }
+  
+  
   
   func setUp() {
     updateHeight()

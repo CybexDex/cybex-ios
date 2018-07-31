@@ -64,6 +64,9 @@ class NormalCellView: UIView {
     didSet {
       if let contentLocali = content_locali {
         self.content.locali = contentLocali
+        if UIScreen.main.bounds.width == 320 {
+          content.font = UIFont.systemFont(ofSize: 13)
+        }
       }
     }
   }
@@ -85,6 +88,9 @@ class NormalCellView: UIView {
     didSet{
       if let text = content_text {
         content.attributedText = text.localized().set(style: content_style ?? "")
+        if UIScreen.main.bounds.width == 320 {
+          content.font = UIFont.systemFont(ofSize: 13)
+        }
       }
     }
   }

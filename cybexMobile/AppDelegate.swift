@@ -35,9 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Fabric.with([Crashlytics.self, Answers.self])
     EasyAnimation.enable()
     
+    
     NetworkActivityLogger.shared.startLogging()
     NetworkActivityLogger.shared.level = .error
-
+    if Defaults.hasKey(.frequency_type){
+      UserManager.shared.frequency_type = UserManager.frequency_type(rawValue: Defaults[.frequency_type])!
+    }
+      
     let console = ConsoleDestination()
     log.addDestination(console)
 //    let file = FileDestination()
@@ -63,12 +67,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     RealReachability.sharedInstance().startNotifier()
     NotificationCenter.default.addObserver(forName: NSNotification.Name.realReachabilityChanged, object: nil, queue: nil) { (notifi) in
-      self.handlerNetworkChanged()
+      main {
+        self.handlerNetworkChanged()
+      }
     }
     
     configApplication()
     self.handlerNetworkChanged()
-  
+
+    
     return true
   }
   
@@ -158,6 +165,18 @@ extension AppDelegate {
       _ = BeareadToast.showError(text: R.string.localizable.noNetwork.key.localized(), inView: self.window!, hide:2)
     }
     else {
+      if UserManager.shared.frequency_type == .normal {
+        UserManager.shared.refreshTime = 6
+      }else if UserManager.shared.frequency_type == .time {
+        UserManager.shared.refreshTime = 3
+      }else {
+        if status == .RealStatusViaWiFi {
+          UserManager.shared.refreshTime = 3
+        }
+        else {
+          UserManager.shared.refreshTime = 6
+        }
+      }
       let connected = CybexWebSocketService.shared.checkNetworConnected()
       if !connected {
         if let vc = app_coodinator.topViewController() {

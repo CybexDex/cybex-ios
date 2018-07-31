@@ -144,7 +144,7 @@ extension RegisterViewController {
       let nsValue = userinfo.object(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
       let keyboardRec = nsValue.cgRectValue
       
-      self.iconTopContainer.constant -= abs(self.view.height - self.errorStackView.bottom - keyboardRec.height)
+      self.iconTopContainer.constant -= abs(self.view.height - self.errorStackView.bottom - keyboardRec.height) - 10
     }
     
     NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: nil) { (notification) in

@@ -118,7 +118,7 @@ class CybexWebSocketService: NSObject {
   //MARK: - Public Methods -
   
   func overload() -> Bool {
-    return self.queue.operations.count > 40
+    return self.queue.operations.count > 150
   }
   
   func connect() {

@@ -55,6 +55,9 @@ extension TradeHistoryCoordinator: TradeHistoryStateManagerProtocol {
   }
   
   func fetchData(_ pair:Pair) {
+    if CybexWebSocketService.shared.overload() {
+      return
+    }
     store.dispatch(creator.fetchFillOrders(with: pair, callback: {[weak self] (data) in
       guard let `self` = self else { return }
       

@@ -64,7 +64,9 @@ class PortfolioData{
     
     name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
     // 获得自己的个数
-    realAmount = getRealAmount(balance.asset_type, amount: balance.balance).stringValue.formatCurrency(digitNum: 5)
+    if let asset_info = app_data.assetInfo[balance.asset_type] {
+      realAmount = getRealAmount(balance.asset_type, amount: balance.balance).stringValue.formatCurrency(digitNum: asset_info.precision)
+    }
     
     // 获取对应CYB的个数
     let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "0" ? "-" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.toDouble())!)
@@ -96,7 +98,9 @@ class MyPortfolioData{
     
     name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
     // 获得自己的个数
-    realAmount = getRealAmount(balance.asset_type, amount: balance.balance).stringValue.formatCurrency(digitNum: 5)
+    if let asset_info = app_data.assetInfo[balance.asset_type] {
+      realAmount = getRealAmount(balance.asset_type, amount: balance.balance).stringValue.formatCurrency(digitNum: asset_info.precision)
+    }
     
     // 获取对应CYB的个数
     let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "0" ? "-" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.toDouble())!)
@@ -124,7 +128,9 @@ class MyPortfolioData{
           }
         }
       }
-      limitAmount = R.string.localizable.frozen.key.localized() + limitDecimal.stringValue.formatCurrency(digitNum: 5)
+      if let asset_info = app_data.assetInfo[balance.asset_type] {
+        limitAmount = R.string.localizable.frozen.key.localized() + limitDecimal.stringValue.formatCurrency(digitNum: asset_info.precision)
+      }
     }
   }
 }
