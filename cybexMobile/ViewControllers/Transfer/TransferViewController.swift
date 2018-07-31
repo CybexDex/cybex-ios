@@ -86,7 +86,7 @@ class TransferViewController: BaseViewController {
       if let balance = balance {
         if let info = app_data.assetInfo[balance.asset_type] {
           self.transferView.crypto = info.symbol.filterJade
-          info.precision
+          self.transferView.precision = info.precision
           let realBalance = getRealAmountDouble(balance.asset_type, amount: balance.balance)
           self.transferView.balance = R.string.localizable.transfer_balance.key.localized() + String(format: "%f", realBalance) + (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!
         }

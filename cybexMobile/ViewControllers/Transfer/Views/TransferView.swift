@@ -329,18 +329,17 @@ extension TransferView: UITextFieldDelegate {
     switch textField.tag {
     case InputType.account.rawValue:
       self.sendEventWith(TextChangeEvent.account.rawValue, userinfo: ["content" : textField.text ?? ""])
+    case InputType.amount.rawValue:
+      let validedText = textField.text?.toDouble()?.string(digits: precision)
+      textField.text = validedText
+      self.sendEventWith(TextChangeEvent.amount.rawValue, userinfo: ["content" : validedText ?? ""])
     default:
       return
     }
   }
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    let currentText = textField.text ?? ""
-    let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
     switch textField.tag {
-    case InputType.amount.rawValue:
-      self.sendEventWith(TextChangeEvent.amount.rawValue, userinfo: ["content" : textField.text ?? ""])
-      
     case InputType.crypto.rawValue:
       return false
     default:
