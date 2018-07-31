@@ -35,6 +35,12 @@ class TransferView: UIView {
     }
   }
   
+  var precision: Int = 0 {
+    didSet {
+      quantityView.textField.text = ""
+    }
+  }
+  
   var buttonIsEnable: Bool = false {
     didSet {
       transferButton.setBackgroundImage(buttonIsEnable ? R.image.btnColorOrange() : R.image.btnColorGrey(), for: .normal)
@@ -323,15 +329,18 @@ extension TransferView: UITextFieldDelegate {
     switch textField.tag {
     case InputType.account.rawValue:
       self.sendEventWith(TextChangeEvent.account.rawValue, userinfo: ["content" : textField.text ?? ""])
-    case InputType.amount.rawValue:
-      self.sendEventWith(TextChangeEvent.amount.rawValue, userinfo: ["content" : textField.text ?? ""])
     default:
       return
     }
   }
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    let currentText = textField.text ?? ""
+    let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
     switch textField.tag {
+    case InputType.amount.rawValue:
+      self.sendEventWith(TextChangeEvent.amount.rawValue, userinfo: ["content" : textField.text ?? ""])
+      
     case InputType.crypto.rawValue:
       return false
     default:
