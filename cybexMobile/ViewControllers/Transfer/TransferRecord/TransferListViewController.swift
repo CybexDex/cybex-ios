@@ -24,7 +24,7 @@ class TransferListViewController: BaseViewController {
   }
   
   func setupUI() {
-    self.title = R.string.localizable.transfer_title()
+    self.title = R.string.localizable.transfer_list_title()
     let nibString = String(describing: TransferListCell.self)
     self.tableView.register(UINib(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
   }

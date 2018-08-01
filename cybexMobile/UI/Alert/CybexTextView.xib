@@ -113,8 +113,8 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9H-e4-pEm">
-                    <rect key="frame" x="186.5" y="200" width="1" height="0.0"/>
-                    <color key="backgroundColor" red="0.129" green="0.161" blue="0.224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="186.5" y="152" width="1" height="48"/>
+                    <color key="backgroundColor" name="white" red="1.000" green="1.000" blue="1.000" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="1" id="wPV-cu-3Qi"/>
                     </constraints>
@@ -134,7 +134,7 @@
                 <constraint firstItem="w9H-e4-pEm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="BpY-rw-oLb"/>
                 <constraint firstItem="rdy-of-kia" firstAttribute="top" secondItem="TpJ-p0-0qU" secondAttribute="bottom" id="HGa-Xf-THM"/>
                 <constraint firstItem="rdy-of-kia" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KYy-W7-CPu"/>
-                <constraint firstItem="w9H-e4-pEm" firstAttribute="top" secondItem="rdy-of-kia" secondAttribute="bottom" constant="48" id="O22-mr-Y3Y"/>
+                <constraint firstItem="w9H-e4-pEm" firstAttribute="top" secondItem="rdy-of-kia" secondAttribute="bottom" id="O22-mr-Y3Y"/>
                 <constraint firstItem="TpJ-p0-0qU" firstAttribute="top" secondItem="sNM-6o-N5e" secondAttribute="bottom" id="P4C-eP-amu"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="sNM-6o-N5e" secondAttribute="trailing" id="Q84-i6-RaL"/>
                 <constraint firstAttribute="trailing" secondItem="rdy-of-kia" secondAttribute="trailing" id="SPs-df-et2"/>
@@ -160,4 +160,6 @@
             <point key="canvasLocation" x="-259" y="102"/>
         </view>
     </objects>
+    <resources>
+    </resources>
 </document>
