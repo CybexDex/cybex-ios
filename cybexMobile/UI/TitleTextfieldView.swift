@@ -44,9 +44,7 @@ class TitleTextfieldView: UIView {
   
   weak var datasource: TitleTextFieldViewDataSource? {
     didSet {
-      setting = datasource?.textUISetting(titleTextFieldView: self)
-      buttonSettings = datasource?.textActionSettings(titleTextFieldView: self)
-      unit = datasource?.textUnitStr(titleTextFieldView: self)
+      self.reloadData()
     }
   }
   
@@ -97,15 +95,19 @@ class TitleTextfieldView: UIView {
     }
   }
   
-  func setUnit(unit: String) {
-    
+  func reloadData() {
+    setting = datasource?.textUISetting(titleTextFieldView: self)
+    buttonSettings = datasource?.textActionSettings(titleTextFieldView: self)
+    unit = datasource?.textUnitStr(titleTextFieldView: self)
   }
   
   func setupRightView() {
     guard (buttonSettings != nil) else {
       return
     }
-    
+    if actionsView.arrangedSubviews.count > 0 {
+      actionsView.removeArrangedSubviews()
+    }
     for (index, value) in (buttonSettings?.enumerated())! {
       let image = UIImage(named: value.imageName)
       let btn = TextRightButton()

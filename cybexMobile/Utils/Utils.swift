@@ -382,6 +382,20 @@ func getOpenedOrderInfo(price:String,amount:String,total:String,fee:String,isBuy
   return  result
 }
 
+func getTransferInfo(_ account: String, quanitity: String, fee: String, memo: String) -> [NSAttributedString] {
+  let accountTitle = R.string.localizable.transfer_account.key.localized()
+  let quantityTitle = R.string.localizable.transfer_quantity.key.localized()
+  let feeTitle = R.string.localizable.transfer_fee.key.localized()
+  let memoTitle = R.string.localizable.transfer_memo.key.localized()
+  
+  let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
+  
+  return (["<name>\(String(describing: accountTitle))</name><\(contentStyle)>\n\(String(describing: account))</\(contentStyle)>".set(style: "alertContent"),
+           "<name>\(String(describing: quantityTitle))</name><\(contentStyle)>  \(String(describing: quanitity))</\(contentStyle)>".set(style: "alertContent"),
+           "<name>\(String(describing: feeTitle))</name><\(contentStyle)>  \(String(describing: fee))</\(contentStyle)>".set(style: "alertContent"),
+           "<name>\(String(describing: memoTitle))</name><\(contentStyle)>  \(String(describing: memo))</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])!
+}
+
 func checkMaxLength(_ sender:String,maxLength:Int) ->String{
   if sender.contains("."){
     let stringArray = sender.components(separatedBy: ".")

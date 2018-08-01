@@ -18,7 +18,7 @@ func TransferPropertyReducer(_ state: TransferPropertyState?, action: Action) ->
   
   switch action {
   case let action as ValidAccountAction:
-    state.accountValid.accept(action.isValid)
+    state.accountValid.accept(action.status)
   case let action as ValidAmountAction:
     state.amountValid.accept(action.isValid)
   case let action as SetBalanceAction:
