@@ -273,7 +273,7 @@
 
 // 转账记录
 
-"transfer_title" = "Transfer Records";
+"transfer_list_title" = "Transfer Records";
 "transfer_done" = "Received";
 "transfer_send" = "Sent";
 

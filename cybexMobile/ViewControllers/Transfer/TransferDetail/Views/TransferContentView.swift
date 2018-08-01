@@ -25,7 +25,7 @@ class TransferContentView: UIView {
     didSet{
         if let data = data as? TransferRecordViewModel {
           addressView.name_locali = data.isSend ? R.string.localizable.transfer_detail_send_address.key.localized() : R.string.localizable.transfer_detail_income_address.key.localized()
-//          addressView.content.text = data.isSend ? data.to : data.from
+          addressView.content.text = data.isSend ? data.to : data.from
           timeView.content.text = data.time
           
           if data.vesting_period == "" {

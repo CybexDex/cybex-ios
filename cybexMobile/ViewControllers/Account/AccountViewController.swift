@@ -19,13 +19,19 @@ class AccountViewController: BaseViewController {
   
   var coordinator: (AccountCoordinatorProtocol & AccountStateManagerProtocol)?
   
-  @IBOutlet weak var accountContentView: AccountContentView!
+    @IBOutlet weak var bgImageView: UIImageView!
+    @IBOutlet weak var accountContentView: AccountContentView!
   
   var dataArray: [AccountViewModel] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    let height = UIScreen.main.bounds.height
+    if height == 812 {
+      bgImageView.image = R.image.account_bg_x()
+    } else {
+      bgImageView.image = R.image.accountBg()
+    }
     setupUI()
     setupEvent()
     if  UserManager.shared.isLoginIn {
@@ -51,6 +57,7 @@ class AccountViewController: BaseViewController {
   }
   
   func setupIconImg() {
+    
     if UserManager.shared.isLoginIn == false {
       accountContentView.headerView.icon = R.image.accountAvatar()
     } else {
