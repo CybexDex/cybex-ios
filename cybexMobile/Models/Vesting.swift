@@ -117,19 +117,23 @@ class MyPortfolioData{
     if let limitArray = UserManager.shared.limitOrder.value {
       for limit in limitArray {
         if limit.isBuy {
-          if limit.sellPrice.base.assetID == balance.asset_type {
-            let amount = getRealAmount(balance.asset_type, amount: limit.sellPrice.base.amount)
+          if limit.sellPrice.quote.assetID == balance.asset_type {
+            let amount = getRealAmount(balance.asset_type, amount: limit.sellPrice.quote.amount)
             limitDecimal = limitDecimal + amount
           }
         } else {
-          if limit.sellPrice.quote.assetID == balance.asset_type {
-            let amount = getRealAmount(balance.asset_type, amount: limit.sellPrice.quote.amount)
+          if limit.sellPrice.base.assetID == balance.asset_type {
+            let amount = getRealAmount(balance.asset_type, amount: limit.sellPrice.base.amount)
             limitDecimal = limitDecimal + amount
           }
         }
       }
       if let asset_info = app_data.assetInfo[balance.asset_type] {
-        limitAmount = R.string.localizable.frozen.key.localized() + limitDecimal.stringValue.formatCurrency(digitNum: asset_info.precision)
+        if limitDecimal == 0 {
+          limitAmount = R.string.localizable.frozen.key.localized() + "--"
+        } else {
+          limitAmount = R.string.localizable.frozen.key.localized() + limitDecimal.stringValue.formatCurrency(digitNum: asset_info.precision)
+        }
       }
     }
   }
