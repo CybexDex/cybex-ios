@@ -72,14 +72,14 @@ class GrowContentView: UIView {
   fileprivate func sectionView(_ section: NSInteger, headerHeight: CGFloat) -> GrowSectionView {
     let sectionView = GrowSectionView()
     if let radius = self.datasource?.cornerRadiusOfSection(self, section: section) {
-      sectionView.corAndShadowView?.newCornerRadius = radius
+      sectionView.cornerView?.cornerRadius = radius
     }
     
     if let shadowSetting = self.datasource?.shadowSettingOfSection(self, section: section) {
-      sectionView.corAndShadowView?.newShadowColor = shadowSetting.color
-      sectionView.corAndShadowView?.newShadowOffset = shadowSetting.offset
-      sectionView.corAndShadowView?.newShadowRadius = shadowSetting.radius
-      sectionView.corAndShadowView?.newShadowOpcity = shadowSetting.opacity
+      sectionView.shadowColor = shadowSetting.color
+      sectionView.shadowOffset = shadowSetting.offset
+      sectionView.shadowRadius = shadowSetting.radius
+      sectionView.shadowOpacity = shadowSetting.opacity
     }
     return sectionView
   }

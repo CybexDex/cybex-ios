@@ -100,6 +100,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         self.getTransferAccountInfo()
         if let balance = balances,balance.count > 0 {
           self.store.dispatch(SetBalanceAction(balance: balances![picker.selectedRow(inComponent: 0)]))
+          self.validAmount()
         }
       }
       vc.coordinator = coordinator
@@ -168,7 +169,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
       UserManager.shared.checkUserName(self.state.property.account.value).done({[weak self] (exist) in
         main {
           guard let `self` = self else { return }
-          self.store.dispatch(ValidAccountAction(isValid: exist))
+          self.store.dispatch(ValidAccountAction(status: exist ? .validSuccessed : .validFailed))
           if exist {
             self.getTransferAccountInfo()
           }
@@ -179,7 +180,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
   
   func setAccount(_ account: String) {
     if !self.state.property.account.value.isEmpty,self.state.property.account.value != account {
-      self.store.dispatch(ValidAccountAction(isValid: false))
+      self.store.dispatch(ValidAccountAction(status: .unValided))
     }
     self.state.property.account.accept(account)
     validAccount()
@@ -201,7 +202,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
   }
   
   func getTransferAccountInfo() {
-    if self.state.property.accountValid.value {
+    if self.state.property.accountValid.value == .validSuccessed {
       let requeset = GetFullAccountsRequest(name: self.state.property.account.value) { (response) in
         if let data = response as? FullAccount, let account = data.account {
           self.store.dispatch(SetToAccountAction(account: account))
@@ -215,7 +216,6 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     if var amount = amount.toDouble() {
       let value = assetId.isEmpty ? 1 : pow(10, (app_data.assetInfo[assetId]?.precision)!)
       amount = amount * Double(truncating: value as NSNumber)
-      checkAmount(amount)
       let from_user_id = UserManager.shared.account.value?.id ?? "0"
       let from_memo_key = UserManager.shared.account.value?.memo_key ?? ""
       let to_user_id = self.state.property.to_account.value?.id ?? "0"
@@ -230,10 +230,12 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                                                                         from_memo_key: from_memo_key,
                                                                         to_memo_key: to_memo_key){
         calculateFee(operationString, focus_asset_id: assetId, operationID: .transfer) { (success, amount, fee_id) in
+          let dictionary = ["asset_id":fee_id,"amount":amount.stringValue]
+          self.store.dispatch(SetFeeAction(fee: Fee(JSON: dictionary)!))
           if success {
-            let dictionary = ["asset_id":fee_id,"amount":amount.stringValue]
-            self.store.dispatch(SetFeeAction(fee: Fee(JSON: dictionary)!))
-            if let transferAmount = self.state.property.amount.value.toDouble() {
+            if var transferAmount = self.state.property.amount.value.toDouble() {
+              let value = assetId.isEmpty ? 1 : pow(10, (app_data.assetInfo[assetId]?.precision)!)
+              transferAmount = transferAmount * Double(truncating: value as NSNumber)
               self.checkAmount(transferAmount)
             } else {
               self.store.dispatch(ValidAmountAction(isValid: true))

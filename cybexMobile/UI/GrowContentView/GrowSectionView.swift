@@ -10,7 +10,7 @@ import UIKit
 
 class GrowSectionView: UIView {
   
-  var corAndShadowView: CornerAndShadowView?
+  var cornerView: UIView?
   
   var contentView: UIStackView?
   
@@ -25,24 +25,26 @@ class GrowSectionView: UIView {
   }
   
   func setupUI() {
-    corAndShadowView = CornerAndShadowView()
-    self.addSubview(corAndShadowView!)
+    cornerView = UIView()
+    cornerView?.theme1BgColor = UIColor.darkTwo
+    cornerView?.theme2BgColor = UIColor.white
+    self.addSubview(cornerView!)
     
-    corAndShadowView?.left(to: self, offset: 0)
-    corAndShadowView?.right(to: self, offset: 0)
-    corAndShadowView?.top(to: self, offset: 0)
-    corAndShadowView?.bottom(to: self, offset: 0)
+    cornerView?.left(to: self, offset: 0)
+    cornerView?.right(to: self, offset: 0)
+    cornerView?.top(to: self, offset: 0)
+    cornerView?.bottom(to: self, offset: 0)
     
     contentView = UIStackView(frame: CGRect.zero)
     contentView?.axis = .vertical
     contentView?.distribution = .fill
     contentView?.alignment = .fill
-    corAndShadowView?.addSubview(contentView!)
+    cornerView?.addSubview(contentView!)
     
-    contentView?.left(to: corAndShadowView!, offset: 0)
-    contentView?.right(to: corAndShadowView!, offset: 0)
-    contentView?.top(to: corAndShadowView!, offset: 0)
-    contentView?.bottom(to: corAndShadowView!, offset: 0)
+    contentView?.left(to: cornerView!, offset: 0)
+    contentView?.right(to: cornerView!, offset: 0)
+    contentView?.top(to: cornerView!, offset: 0)
+    contentView?.bottom(to: cornerView!, offset: 0)
     
     updateHeight()
   }

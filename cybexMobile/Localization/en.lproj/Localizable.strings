@@ -303,13 +303,13 @@
 "transfer_memo" = "Memo";
 "transfer_fee" = "Fee";
 "transfer_balance" = "Available";
-"picker_comfirm" = "Comfirm";
+"picker_comfirm" = "Confirm";
 "transfer_unit_time" = "minutes";
 
 "transfer_failed" = "Transfer failed";
 "transfer_successed" = "Transfer successfully";
-"transfer_account_unexist" = "账户不存在";
-"transfer_balance_unenough" = "余额不足";
+"transfer_account_unexist" = "Account doesn’t exist.";
+"transfer_balance_unenough" = "There are no enough coins in your account.";
 
 //zsy add
 "my_property" = "My Balance";

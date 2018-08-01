@@ -53,7 +53,8 @@ static void _set_transfer_operation(
     o.memo = memo_data();
     //o.memo->from = fc::ecc::public_key::from_base58(from_memo_pub_key);
     //o.memo->to = fc::ecc::public_key::from_base58(to_memo_pub_key);
-    fc::ecc::private_key memo_priv_key = fc::ecc::private_key();
+    fc::ecc::private_key memo_priv_key = get_private_key(from_memo_pub_key);
+//    fc::ecc::private_key memo_priv_key = fc::ecc::private_key();
     o.memo->from = public_key_type(from_memo_pub_key);
     o.memo->to = public_key_type(to_memo_pub_key);
     o.memo->set_message(memo_priv_key, o.memo->to, memo);

@@ -18,8 +18,14 @@ struct TransferState: StateType {
     var property: TransferPropertyState
 }
 
+enum AccountValidStatus: Int {
+  case unValided = 0
+  case validSuccessed
+  case validFailed
+}
+
 struct TransferPropertyState {  
-  var accountValid: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+  var accountValid: BehaviorRelay<AccountValidStatus> = BehaviorRelay(value: .unValided)
   
   var amountValid: BehaviorRelay<Bool> = BehaviorRelay(value: false)
   
@@ -37,7 +43,7 @@ struct TransferPropertyState {
 }
 
 struct ValidAccountAction: Action {
-  var isValid: Bool = false
+  var status: AccountValidStatus = .unValided
 }
 
 struct ValidAmountAction: Action {

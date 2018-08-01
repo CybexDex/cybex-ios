@@ -41,6 +41,12 @@ class TransferView: UIView {
     }
   }
   
+  var accountValidStatus: AccountValidStatus = .unValided {
+    didSet {
+      accountView.reloadData()
+    }
+  }
+  
   var buttonIsEnable: Bool = false {
     didSet {
       transferButton.setBackgroundImage(buttonIsEnable ? R.image.btnColorOrange() : R.image.btnColorGrey(), for: .normal)
@@ -255,12 +261,8 @@ extension TransferView: TitleTextFieldViewDelegate,TitleTextFieldViewDataSource,
   }
   
   func textActionTrigger(titleTextFieldView: TitleTextfieldView, selected: Bool, index: NSInteger) {
-    if index == 0 {
-      titleTextFieldView.clearText()
-    } else {
-      if titleTextFieldView == cryptoView {
-        self.sendEventWith(TransferEvents.selectCrypto.rawValue, userinfo: [:])
-      }
+    if titleTextFieldView == cryptoView {
+      self.sendEventWith(TransferEvents.selectCrypto.rawValue, userinfo: [:])
     }
   }
   
@@ -294,16 +296,18 @@ extension TransferView: TitleTextFieldViewDelegate,TitleTextFieldViewDataSource,
   
   func textActionSettings(titleTextFieldView: TitleTextfieldView) -> [TextButtonSetting] {
     if titleTextFieldView == cryptoView {
-      return [TextButtonSetting(imageName: R.image.ic_close_24_px.name,
-                                selectedImageName: R.image.ic_close_24_px.name,
-                                isShowWhenEditing: true),
-              TextButtonSetting(imageName: R.image.ic_ieo_more.name,
+      return [TextButtonSetting(imageName: R.image.ic_ieo_more.name,
                                 selectedImageName: R.image.ic_ieo_more.name,
                                 isShowWhenEditing: false)]
+    } else if titleTextFieldView == accountView {
+      if accountValidStatus != .unValided {
+        let imgName = accountValidStatus == .validSuccessed ? R.image.check_complete.name : R.image.ic_error.name
+        return [TextButtonSetting(imageName: imgName,
+                                  selectedImageName: imgName,
+                                  isShowWhenEditing: false)]
+      }
     }
-    return [TextButtonSetting(imageName: R.image.ic_close_24_px.name,
-                              selectedImageName: R.image.ic_close_24_px.name,
-                              isShowWhenEditing: true)]
+    return []
   }
   
   func textUnitStr(titleTextFieldView: TitleTextfieldView) -> String {
@@ -330,9 +334,13 @@ extension TransferView: UITextFieldDelegate {
     case InputType.account.rawValue:
       self.sendEventWith(TextChangeEvent.account.rawValue, userinfo: ["content" : textField.text ?? ""])
     case InputType.amount.rawValue:
-      let validedText = textField.text?.toDouble()?.string(digits: precision)
-      textField.text = validedText
-      self.sendEventWith(TextChangeEvent.amount.rawValue, userinfo: ["content" : validedText ?? ""])
+      if textField.text?.trimmed.count == 0 {
+        self.sendEventWith(TextChangeEvent.amount.rawValue, userinfo: ["content" : ""])
+      } else {
+        let validedText = textField.text?.toDouble()?.string(digits: precision)
+        textField.text = validedText
+        self.sendEventWith(TextChangeEvent.amount.rawValue, userinfo: ["content" : validedText ?? ""])
+      }
     default:
       return
     }
@@ -354,13 +362,13 @@ extension TransferView: GrowingTextViewDelegate {
   }
   
   func textViewDidEndEditing(_ textView: UITextView) {
-    
-  }
-  
-  func textViewDidChange(_ textView: UITextView) {
     if textView.tag == InputType.memo.rawValue {
       self.sendEventWith(TextChangeEvent.memo.rawValue, userinfo: ["content" : textView.text])
     }
+  }
+  
+  func textViewDidChange(_ textView: UITextView) {
+    
   }
   
   func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
