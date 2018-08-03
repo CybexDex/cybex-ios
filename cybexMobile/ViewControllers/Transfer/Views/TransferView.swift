@@ -8,6 +8,7 @@
 
 import UIKit
 import GrowingTextView
+import SwiftTheme
 
 class TransferView: UIView {
   
@@ -204,11 +205,12 @@ extension TransferView: GrowContentViewDataSource {
   }
   
   func cornerRadiusOfSection(_ contentView: GrowContentView, section: NSInteger) -> CGFloat {
+    
     return 4.0
   }
   
   func shadowSettingOfSection(_ contentView: GrowContentView, section: NSInteger) -> (color: UIColor, offset: CGSize, radius: CGFloat, opacity: Float) {
-    return (UIColor.steel,CGSize(width: 0, height: 4),4,0.2)
+    return (ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20 ,CGSize(width: 0, height: 4),4,0.2)
   }
   
   func viewOfIndexpath(_ contentView: GrowContentView, indexpath: NSIndexPath) -> (view: UIView, key: String) {
@@ -301,7 +303,7 @@ extension TransferView: TitleTextFieldViewDelegate,TitleTextFieldViewDataSource,
                                 isShowWhenEditing: false)]
     } else if titleTextFieldView == accountView {
       if accountValidStatus != .unValided {
-        let imgName = accountValidStatus == .validSuccessed ? R.image.check_complete.name : R.image.ic_error.name
+        let imgName = accountValidStatus == .validSuccessed ? R.image.check_complete.name : R.image.ic_close_24_px.name
         return [TextButtonSetting(imageName: imgName,
                                   selectedImageName: imgName,
                                   isShowWhenEditing: false)]

@@ -18,11 +18,14 @@ class TransferViewController: BaseViewController {
   @IBOutlet weak var transferView: TransferView!
   var coordinator: (TransferCoordinatorProtocol & TransferStateManagerProtocol)?
   
+  var isFetchFee : Bool = true
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
     getFee()
   }
+  
+  
   
   func commonObserveState() {
     coordinator?.subscribe(errorSubscriber) { sub in
@@ -43,7 +46,8 @@ class TransferViewController: BaseViewController {
     
     self.transferView.transferButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] tap in
       guard let `self` = self else { return }
-      self.transferComfirm()
+
+      self.clickTransferAction()
     }).disposed(by: disposeBag)
     
     //按钮状态监听
@@ -67,7 +71,7 @@ class TransferViewController: BaseViewController {
     
     //余额监听
     self.coordinator!.state.property.amountValid.asObservable().subscribe(onNext: {[weak self] (result) in
-      if !result, ((self?.coordinator?.state.property.fee.value) != nil) {
+      if !result, ((self?.coordinator?.state.property.fee.value) != nil),self?.coordinator?.state.property.balance.value != nil {
         self?.showToastBox(false, message: R.string.localizable.transfer_balance_unenough.key.localized())
       }
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -101,7 +105,21 @@ class TransferViewController: BaseViewController {
   }
   
   func getFee() {
-    self.coordinator?.validAmount()
+    if !UserManager.shared.isLocked {
+      self.coordinator?.validAmount()
+    }
+    else {
+      self.showPasswordBox()
+    }
+  }
+  
+  func clickTransferAction() {
+    if !UserManager.shared.isLocked {
+      self.transferComfirm()
+    }
+    else {
+      self.showPasswordBox()
+    }
   }
   
   func transferComfirm() {
@@ -112,7 +130,7 @@ class TransferViewController: BaseViewController {
       let fee = self.coordinator?.state.property.fee.value {
       if let feeInfo = app_data.assetInfo[fee.asset_id] {
         let data = getTransferInfo(account, quanitity: amount + (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!, fee: (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade, memo: memo)
-        showConfirm(R.string.localizable.withdraw_ensure_title.key.localized(), attributes: data)
+        showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data)
       }
     }
   }
@@ -124,7 +142,29 @@ class TransferViewController: BaseViewController {
 
 
 extension TransferViewController {
+  override func passwordDetecting() {
+    self.startLoading()
+  }
+  
+  override func passwordPassed(_ passed: Bool) {
+    self.endLoading()
+    if passed {
+      if self.isFetchFee == true {
+        self.isFetchFee = false
+        self.coordinator?.validAmount()
+      }
+      else {
+        self.transferComfirm()
+      }
+    }
+    else {
+      self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+    }
+  }
+  
+  
   override func returnEnsureAction() {
+    ShowToastManager.shared.hide()
     if !UserManager.shared.isLocked {
       self.startLoading()
       self.coordinator?.transfer({ (data) in
@@ -134,9 +174,11 @@ extension TransferViewController {
           if self.isVisible{
             if String(describing: data) == "<null>"{
               self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())
-              SwifterSwift.delay(milliseconds: 100) {
-                self.coordinator?.pop()
-              }
+//              SwifterSwift.delay(milliseconds: 100) {
+//                self.coordinator?.pop()
+//              }
+              self.coordinator?.resetData()
+              self.removeTransferInfo()
             }else{
               self.showToastBox(false, message: R.string.localizable.transfer_failed.key.localized())
             }
@@ -145,9 +187,23 @@ extension TransferViewController {
       })
     }
     else {
-      self.showPasswordBox()
+      SwifterSwift.delay(milliseconds: 300) {
+        self.showPasswordBox()
+      }
     }
   }
+  
+  func removeTransferInfo() {
+    self.transferView.accountView.textField.text = ""
+    self.transferView.cryptoView.textField.text = ""
+    self.transferView.quantityView.textField.text = ""
+    self.transferView.balance = ""
+    self.transferView.memoView.textView.text = ""
+    self.transferView.feeLabel.text = ""
+    self.coordinator?.getGatewayFee(AssetConfiguration.CYB, amount: "0", memo: "")
+    self.transferView.buttonIsEnable = false
+  }
+  
   
   @objc func selectCrypto(_ data: [String : Any]) {
     self.coordinator?.showPicker()
@@ -158,10 +214,18 @@ extension TransferViewController {
   }
   
   @objc func amount(_ data: [String : Any]) {
-    self.coordinator?.setAmount(data["content"] as! String)
+    self.coordinator?.setAmount(data["content"] as! String,canFetchFee:!UserManager.shared.isLocked)
+    if UserManager.shared.isLocked {
+      self.isFetchFee = true
+      self.showPasswordBox()
+    }
   }
   
   @objc func memo(_ data: [String : Any]) {
-    self.coordinator?.setMemo(data["content"] as! String)
+    self.coordinator?.setMemo(data["content"] as! String,canFetchFee:!UserManager.shared.isLocked)
+    if UserManager.shared.isLocked {
+      self.isFetchFee = true
+      self.showPasswordBox()
+    }
   }
 }

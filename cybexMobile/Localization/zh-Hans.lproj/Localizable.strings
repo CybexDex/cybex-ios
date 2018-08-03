@@ -275,8 +275,10 @@
 "transfer_detail_mome" = "备注信息";
 "transfer_detail_click" = "点击查看";
 "transfer_detail_nodata" = "无";
+"transfer_ensure_title" = "转账确认";
 
 //转账
+
 "transfer_title" = "转账";
 "transfer_transfer" = "转账";
 "transfer_account" = "账户名";
@@ -288,7 +290,12 @@
 "transfer_fee" = "手续费";
 "transfer_balance" = "余额";
 "picker_comfirm" = "确认";
-"transfer_unit_time" = "分";
+
+"transfer_unit_day" = "天";
+"transfer_unit_hour" = "时";
+"transfer_unit_minite" = "分";
+"transfer_unit_second" = "秒";
+
 
 
 "transfer_failed" = "转账失败";
@@ -298,7 +305,7 @@
 
 //zsy add
 "my_property" = "我的资产";
-"order_value" = "委托单";
+"order_value" = "委单";
 "transfer" = "转账";
 "account_property" = "账户资产估值(CYB)";
 "hello" = "您好，";

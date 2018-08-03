@@ -136,12 +136,14 @@ extension UserManager {
     let request = GetAccountHistoryRequest(accountID: id) { (data) in
       if let data = data as? (fillOrders:[FillOrder],transferRecords:[TransferRecord]) {
         var fillorders = data.fillOrders
+        if !self.isLoginIn {
+          return
+        }
         if data.transferRecords.count == 0 {
           self.transferRecords.accept(nil)
         }
-        if fillorders.count == 0 || !self.isLoginIn {
+        if fillorders.count == 0  {
           self.fillOrder.accept(nil)
-          return
         }
         fillorders = fillorders.filter({
           let base_name = app_data.assetInfo[$0.fill_price.base.assetID]
@@ -161,7 +163,7 @@ extension UserManager {
               self.fillOrder.accept(result)
             }
           }, block_num: fillOrder.block_num)
-          CybexWebSocketService.shared.send(request: timeRequest)
+          CybexWebSocketService.shared.send(request: timeRequest,priority: Operation.QueuePriority.high)
         }
         
         let transferRecordList = data.transferRecords
@@ -322,8 +324,9 @@ extension UserManager {
     if let balances = data.balances {
       self.balances.accept(balances.filter({ (balance) -> Bool in
         let name = app_data.assetInfo[balance.asset_type]
-        return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
-          (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
+        return (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
+//        return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
+//          (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
       }))
       
     }else{
@@ -519,7 +522,14 @@ class UserManager {
     var datas = [MyPortfolioData]()
     if let balances = self.balances.value {
       for balance in balances{
-        datas.append(MyPortfolioData.init(balance: balance)!)
+        if let foloiData = MyPortfolioData.init(balance: balance) {
+          if (foloiData.realAmount == "" || foloiData.realAmount.toDouble() == 0) && foloiData.limitAmount.contains("--") {
+            
+          }
+          else {
+            datas.append(foloiData)
+          }
+        }
       }
     }
     return datas

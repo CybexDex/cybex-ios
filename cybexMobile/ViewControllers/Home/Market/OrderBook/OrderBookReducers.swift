@@ -45,7 +45,7 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair:Pair) -> OrderBook {
   for order in orders {
     let sellPrice_base = order.sellPrice.base
 
-    var tradePrice:(price:String, pricision:Int)!
+    var tradePrice:(price:String, pricision:Int ,amountPricision:Int)!
     
     var isBuy:Bool!
     

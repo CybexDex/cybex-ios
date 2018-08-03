@@ -181,24 +181,36 @@ class BaseViewController: UIViewController {
 
 extension UIViewController : ShowManagerDelegate {
   func showPasswordBox(_ title:String = R.string.localizable.withdraw_unlock_wallet.key.localized()){
+    if ShowToastManager.shared.showView != nil {
+      return
+    }
     ShowToastManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big)
     ShowToastManager.shared.delegate = self
     ShowToastManager.shared.showAnimationInView(self.view)
   }
   
   func showToastBox(_ success:Bool, message:String) {
+    if ShowToastManager.shared.showView != nil {
+      return
+    }
     ShowToastManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: .small_big, showType: .alert_image)
     ShowToastManager.shared.showAnimationInView(self.view)
     ShowToastManager.shared.hide(2.0)
   }
   
   func showTopToastBox(_ success:Bool, message:String) {
+    if ShowToastManager.shared.showView != nil {
+      return
+    }
     ShowToastManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: ShowToastManager.ShowAnimationType.up_down, showType: ShowToastManager.ShowManagerType.sheet_image)
     ShowToastManager.shared.showAnimationInView(self.view)
     ShowToastManager.shared.hide(2.0)
   }
   
   func showConfirm(_ title:String, attributes:[NSAttributedString]?) {
+    if ShowToastManager.shared.showView != nil {
+      return
+    }
     let subView = StyleContentView(frame: .zero)
     subView.data = attributes
     ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .small_big)

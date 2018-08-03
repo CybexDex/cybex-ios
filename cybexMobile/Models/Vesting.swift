@@ -106,9 +106,9 @@ class MyPortfolioData{
     let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "0" ? "-" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.toDouble())!)
     
     if let cybCount = amountCYB.toDouble() {
-      rbmPrice    = "≈¥" + String(cybCount * changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
+      rbmPrice = "≈¥" + String(cybCount * changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
     }else{
-      rbmPrice    = "-"
+      rbmPrice = "-"
     }
     
     //获取冻结资产
@@ -117,8 +117,8 @@ class MyPortfolioData{
     if let limitArray = UserManager.shared.limitOrder.value {
       for limit in limitArray {
         if limit.isBuy {
-          if limit.sellPrice.quote.assetID == balance.asset_type {
-            let amount = getRealAmount(balance.asset_type, amount: limit.sellPrice.quote.amount)
+          if limit.sellPrice.base.assetID == balance.asset_type {
+            let amount = getRealAmount(balance.asset_type, amount: limit.sellPrice.base.amount)
             limitDecimal = limitDecimal + amount
           }
         } else {

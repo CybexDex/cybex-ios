@@ -39,7 +39,7 @@ class TradeRecodeViewController: BaseViewController {
   
   
   func setupUI() {
-    self.title = record_type == .DEPOSIT ? R.string.localizable.deposit_list() : R.string.localizable.withdraw_list()
+    self.title = record_type == .DEPOSIT ? R.string.localizable.deposit_list.key.localized() : R.string.localizable.withdraw_list.key.localized()
     let nibString = String(describing: RecodeCell.self)
     self.tableView.register(UINib(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
   }
@@ -89,7 +89,7 @@ class TradeRecodeViewController: BaseViewController {
           }
           self.data += records
           if self.data.count == 0 {
-            self.view.showNoData(R.string.localizable.recode_nodata(), icon: R.image.img_no_records.name)
+            self.view.showNoData(R.string.localizable.recode_nodata.key.localized(), icon: R.image.img_no_records.name)
             self.isNoMoreData = true
             return
           }else {

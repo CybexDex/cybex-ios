@@ -12,21 +12,23 @@ import SwiftRichString
 
 @IBDesignable
 class IntroduceView: UIView {
-
-    @IBOutlet weak var content: UILabel!
-    
-    
-    @IBInspectable
-    var locail : String?{
-        didSet{
-          if let locail = self.locail{
-            self.content.attributedText = locail.set(style: StyleNames.withdraw_introduce.rawValue)
-          }
-        }
+  
+  @IBOutlet weak var content: UILabel!
+  
+  
+  @IBInspectable
+  var locail : String?{
+    didSet{
+      if let locail = self.locail{
+        self.content.attributedText = locail.set(style: self.locail_style)
+      }
     }
-    
+  }
+  
+  @IBInspectable
+  var locail_style : String = StyleNames.withdraw_introduce.rawValue
+  
   func setup(){
-    
   }
   
   override var intrinsicContentSize: CGSize {

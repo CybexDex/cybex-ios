@@ -291,6 +291,8 @@
 "transfer_detail_mome" = "Memo";
 "transfer_detail_click" = "Click to view";
 "transfer_detail_nodata" = "None";
+"transfer_ensure_title" = "CONFIRM";
+
 
 //转账
 "transfer_title" = "Transfer";
@@ -304,7 +306,12 @@
 "transfer_fee" = "Fee";
 "transfer_balance" = "Available";
 "picker_comfirm" = "Confirm";
-"transfer_unit_time" = "minutes";
+
+"transfer_unit_day" = "d";
+"transfer_unit_hour" = "h";
+"transfer_unit_minite" = "m";
+"transfer_unit_second" = "s";
+
 
 "transfer_failed" = "Transfer failed";
 "transfer_successed" = "Transfer successfully";
