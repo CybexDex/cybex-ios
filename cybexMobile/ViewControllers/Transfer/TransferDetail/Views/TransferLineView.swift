@@ -7,14 +7,15 @@
 //
 
 import UIKit
+import SwiftTheme
 
 @IBDesignable
 class TransferLineView: UIView {
   
   @IBOutlet weak var name: UILabel!
+  //    @IBOutlet weak var content: UILabel!
   
-  @IBOutlet weak var content: UILabel!
-  
+  @IBOutlet weak var content: UITextView!
   
   
   @IBInspectable
@@ -31,6 +32,9 @@ class TransferLineView: UIView {
     didSet{
       if let text = content_locali {
         content.text = text
+        content.textAlignment = .right
+        content.textColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
+        content.font = UIFont.systemFont(ofSize: 14.0)
         updateHeight()
       }
     }
@@ -38,8 +42,6 @@ class TransferLineView: UIView {
   
   func setup() {
     self.content.isUserInteractionEnabled = false
-    let tap = UITapGestureRecognizer(target: self, action: #selector(clickToMemo))
-    self.content.addGestureRecognizer(tap)
   }
   
   fileprivate func updateHeight() {
@@ -74,10 +76,6 @@ class TransferLineView: UIView {
     setup()
   }
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    setup()
-  }
   
   private func loadFromXIB() {
     let bundle = Bundle(for: type(of: self))
@@ -90,8 +88,4 @@ class TransferLineView: UIView {
   }
 }
 
-extension TransferLineView {
-  @objc func clickToMemo() {
-    
-  }
-}
+

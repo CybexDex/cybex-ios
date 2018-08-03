@@ -119,6 +119,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
       else {
         if fee_id == assetID {
           amount = (balance - fee_amount) * percentDecimal
+          log.debug("amount ----- \(amount.doubleValue)")
         }
         else {
           amount = balance * percentDecimal
@@ -200,8 +201,11 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
       }
 
     }
+    let balanceDouble = Int(round(self.state.property.balance.value.doubleValue * pow(10, base_info.precision).doubleValue))
+    let totalDouble = Int(round(total.doubleValue * pow(10, base_info.precision).doubleValue))
+    
    
-    if self.state.property.balance.value >= total {
+    if balanceDouble >= totalDouble {
       return true
     }
 

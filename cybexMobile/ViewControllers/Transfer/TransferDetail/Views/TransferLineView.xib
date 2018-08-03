@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
-                <outlet property="content" destination="Z8m-R3-d6I" id="jDn-5s-pYu"/>
+                <outlet property="content" destination="4mb-tW-sbk" id="dKf-Vu-6Xm"/>
                 <outlet property="name" destination="8P7-RI-JBc" id="ijc-6r-8v9"/>
             </connections>
         </placeholder>
@@ -22,16 +22,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8P7-RI-JBc">
-                    <rect key="frame" x="13" y="25" width="0.0" height="0.0"/>
+                    <rect key="frame" x="13" y="24" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8m-R3-d6I">
-                    <rect key="frame" x="362" y="16" width="0.0" height="17"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mb-tW-sbk">
+                    <rect key="frame" x="88" y="16" width="274" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -40,7 +39,7 @@
                             <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                </label>
+                </textView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yce-p8-nSx">
                     <rect key="frame" x="13" y="49" width="349" height="1"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -58,16 +57,15 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="8P7-RI-JBc" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="5su-ot-7db"/>
                 <constraint firstAttribute="bottom" secondItem="Yce-p8-nSx" secondAttribute="bottom" id="9vB-lw-hNF"/>
-                <constraint firstItem="Z8m-R3-d6I" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Bna-Uc-M52"/>
-                <constraint firstItem="Z8m-R3-d6I" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="Bpr-FO-8rY"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Z8m-R3-d6I" secondAttribute="trailing" constant="13" id="HTa-jR-IIx"/>
+                <constraint firstAttribute="bottom" secondItem="4mb-tW-sbk" secondAttribute="bottom" constant="16" id="MzU-9D-uPP"/>
                 <constraint firstAttribute="trailing" secondItem="Yce-p8-nSx" secondAttribute="trailing" constant="13" id="N4c-Rq-Etd"/>
                 <constraint firstItem="Yce-p8-nSx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="ThL-i9-7Ep"/>
+                <constraint firstItem="4mb-tW-sbk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="Yxs-OM-CvJ"/>
                 <constraint firstItem="8P7-RI-JBc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="gCK-5A-ic2"/>
-                <constraint firstItem="Yce-p8-nSx" firstAttribute="top" secondItem="Z8m-R3-d6I" secondAttribute="bottom" constant="16" id="nep-Yq-YVc"/>
-                <constraint firstItem="Z8m-R3-d6I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8P7-RI-JBc" secondAttribute="trailing" constant="75" id="pKU-sh-Dlc"/>
+                <constraint firstItem="8P7-RI-JBc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="24" id="pdf-Kg-6gt"/>
+                <constraint firstItem="4mb-tW-sbk" firstAttribute="leading" secondItem="8P7-RI-JBc" secondAttribute="trailing" constant="75" id="rlg-2r-HxE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="4mb-tW-sbk" secondAttribute="trailing" constant="13" id="vPP-oH-Kom"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

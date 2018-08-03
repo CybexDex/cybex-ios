@@ -94,18 +94,20 @@ class YourPortfolioViewController: BaseViewController {
     UserManager.shared.balances.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
       guard let `self` = self else { return }
       if let _ = UserManager.shared.balances.value{
-        self.data = UserManager.shared.getMyPortfolioDatas()
+        self.data = UserManager.shared.getMyPortfolioDatas().filter({ (folioData) -> Bool in
+          return folioData.realAmount != "0" && folioData.limitAmount != "0"
+        })
       }
       
       self.tableView.reloadData()
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
-    UserManager.shared.limitOrder.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
-      guard let `self` = self else { return }
-      self.data = UserManager.shared.getMyPortfolioDatas()
-      self.tableView.reloadData()
-
-      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+//    UserManager.shared.limitOrder.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
+//      guard let `self` = self else { return }
+//      self.data = UserManager.shared.getMyPortfolioDatas()
+//      self.tableView.reloadData()
+//
+//      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
     app_data.otherRequestRelyData.asObservable()
       .subscribe(onNext: {[weak self] (s) in
@@ -113,8 +115,11 @@ class YourPortfolioViewController: BaseViewController {
 
         DispatchQueue.main.async {
           if let _ = UserManager.shared.balances.value{
-            self.data = UserManager.shared.getMyPortfolioDatas()
+            self.data = UserManager.shared.getMyPortfolioDatas().filter({ (folioData) -> Bool in
+              return folioData.realAmount != "0" && folioData.limitAmount != "0"
+            })
           }
+          
           if self.data.count == 0 {
            
             self.tableView.showNoData(R.string.localizable.balance_nodata.key.localized(), icon: R.image.imgWalletNoAssert.name)

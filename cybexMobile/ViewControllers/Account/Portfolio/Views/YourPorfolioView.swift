@@ -38,12 +38,32 @@ class YourPorfolioView:  UIView{
         
         name.text      = portfolioData.name
         amount.text    = portfolioData.limitAmount
-        if portfolioData.rbmPrice == "-"{
-          rmbPrice.isHidden = true
-        }else{
-          rmbPrice.text  = portfolioData.rbmPrice
+        
+        if portfolioData.name == "GET" {
+          self.rmbPrice.text = "≈¥0.00"
+          let request = changeToCybRequest(response: { [weak self](data) in
+            guard let `self` = self else { return }
+            if let data = data as? String ,let dataDouble = data.toDouble() {
+              let changedCybAmount = portfolioData.realAmount.toDouble()! / (1 / dataDouble)
+                
+              let cybRmbPrice = changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble()! * app_state.property.eth_rmb_price
+              self.rmbPrice.text = "≈¥" + (changedCybAmount * cybRmbPrice).string(digits: 2, roundingMode: .down)
+            }
+            return
+            }, baseName: AssetConfiguration.CYB, quoteName: "1.3.17")
+          CybexWebSocketService.shared.send(request: request)
+        }
+        else {
+          if portfolioData.rbmPrice == "-"{
+            rmbPrice.text = "≈¥0.00"
+            
+          }else{
+            rmbPrice.text  = portfolioData.rbmPrice
+          }
         }
         cybAmount.text = portfolioData.realAmount
+
+        
         
         
 //        high_low_view.isHidden = balance.asset_type == AssetConfiguration.CYB

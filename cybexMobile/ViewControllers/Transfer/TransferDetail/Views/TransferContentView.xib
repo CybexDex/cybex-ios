@@ -24,35 +24,50 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Nt-33-TQt">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="710"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Nt-33-TQt">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="336"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FIp-zF-KLy" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="102"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="5dx-VK-Qov"/>
+                            </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_income_address"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90X-tO-lhd" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="102" width="375" height="102"/>
+                            <rect key="frame" x="0.0" y="54" width="375" height="54"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="40J-FF-wGo"/>
+                            </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="my_history_time"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t0l-RC-r4P" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="204" width="375" height="302"/>
+                            <rect key="frame" x="0.0" y="108" width="375" height="54"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="G6N-9q-UsD"/>
+                            </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_fee"/>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O32-0m-HlA" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="506" width="375" height="102"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O32-0m-HlA" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="162" width="375" height="54"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="54" id="q2M-8R-qxC"/>
+                            </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_time"/>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kan-Pk-1BB" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="608" width="375" height="102"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kan-Pk-1BB" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="216" width="375" height="120"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="120" id="nuN-2C-Qf7"/>
+                            </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_mome"/>
                             </userDefinedRuntimeAttributes>

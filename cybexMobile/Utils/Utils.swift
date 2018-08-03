@@ -152,6 +152,7 @@ func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
     }
   }
   
+  
   var result = (eth:"0",cyb:"0")
   let homeBuckets : [HomeBucket] = app_data.data.value
   for homeBuck : HomeBucket in homeBuckets {
@@ -355,11 +356,11 @@ func getWithdrawDetailInfo(addressInfo:String,amountInfo:String,withdrawFeeInfo:
    "utils_gatewayfee"   = "Gateway Fee:";
    */
   
-  return (["<name>\(String(describing: address))</name><\(content)>\n\(String(describing: addressInfo))</\(content)>".set(style: "alertContent"),
-           "<name>\(String(describing: amount))</name><\(content)>  \(String(describing: amountInfo))</\(content)>".set(style: "alertContent"),
-           "<name>\(String(describing: withdrawFee))</name><\(content)>  \(String(describing: withdrawFeeInfo))</\(content)>".set(style: "alertContent"),
-           "<name>\(String(describing: gatewayFee))</name><\(content)>  \(String(describing: gatewayFeeInfo))</\(content)>".set(style: "alertContent"),
-           "<name>\(String(describing: receiveAmount))</name><\(content)>  \(String(describing: receiveAmountInfo))</\(content)>".set(style: "alertContent")] as? [NSAttributedString])!
+  return (["<name>\(String(describing: address)):</name><\(content)>\n\(String(describing: addressInfo))</\(content)>".set(style: "alertContent"),
+           "<name>\(String(describing: amount)):</name><\(content)>  \(String(describing: amountInfo))</\(content)>".set(style: "alertContent"),
+           "<name>\(String(describing: withdrawFee)):</name><\(content)>  \(String(describing: withdrawFeeInfo))</\(content)>".set(style: "alertContent"),
+           "<name>\(String(describing: gatewayFee)):</name><\(content)>  \(String(describing: gatewayFeeInfo))</\(content)>".set(style: "alertContent"),
+           "<name>\(String(describing: receiveAmount)):</name><\(content)>  \(String(describing: receiveAmountInfo))</\(content)>".set(style: "alertContent")] as? [NSAttributedString])!
 }
 
 func getOpenedOrderInfo(price:String,amount:String,total:String,fee:String,isBuy:Bool) ->[NSAttributedString]{
@@ -390,10 +391,10 @@ func getTransferInfo(_ account: String, quanitity: String, fee: String, memo: St
   
   let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
   
-  return (["<name>\(String(describing: accountTitle))</name><\(contentStyle)>\n\(String(describing: account))</\(contentStyle)>".set(style: "alertContent"),
-           "<name>\(String(describing: quantityTitle))</name><\(contentStyle)>  \(String(describing: quanitity))</\(contentStyle)>".set(style: "alertContent"),
-           "<name>\(String(describing: feeTitle))</name><\(contentStyle)>  \(String(describing: fee))</\(contentStyle)>".set(style: "alertContent"),
-           "<name>\(String(describing: memoTitle))</name><\(contentStyle)>  \(String(describing: memo))</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])!
+  return (["<name>\(String(describing: accountTitle)):</name>  <\(contentStyle)>\(String(describing: account))</\(contentStyle)>".set(style: "alertContent"),
+           "<name>\(String(describing: quantityTitle)):</name><\(contentStyle)>  \(String(describing: quanitity))</\(contentStyle)>".set(style: "alertContent"),
+           "<name>\(String(describing: feeTitle)):</name><\(contentStyle)>  \(String(describing: fee))</\(contentStyle)>".set(style: "alertContent"),
+           "<name>\(String(describing: memoTitle)):</name><\(contentStyle)>  \(String(describing: memo))</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])!
 }
 
 func checkMaxLength(_ sender:String,maxLength:Int) ->String{

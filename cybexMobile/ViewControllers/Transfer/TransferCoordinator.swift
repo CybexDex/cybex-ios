@@ -29,9 +29,9 @@ protocol TransferStateManagerProtocol {
   
   func setAccount(_ account: String)
   
-  func setAmount(_ amount: String)
+  func setAmount(_ amount: String ,canFetchFee : Bool)
   
-  func setMemo(_ memo: String)
+  func setMemo(_ memo: String ,canFetchFee : Bool)
   
   func validAmount()
   
@@ -42,6 +42,8 @@ protocol TransferStateManagerProtocol {
   func transfer(_ callback: @escaping (Any)->())
   
   func getGatewayFee(_ assetId: String, amount: String, memo: String)
+  
+  func resetData()
 }
 
 class TransferCoordinator: AccountRootCoordinator {
@@ -78,7 +80,9 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
     self.rootVC.topViewController?.customPresentViewController(presenter, viewController: newNav, animated: true, completion: nil)
     
     var items = [String]()
-    let balances = UserManager.shared.balances.value
+    let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
+      return getRealAmountDouble(balance.asset_type, amount: balance.balance) != 0
+    })
     if let balances = balances {
       for balance in balances {
         if let info = app_data.assetInfo[balance.asset_type] {
@@ -88,7 +92,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
     }
     
     if items.count == 0 {
-      items.append(R.string.localizable.balance_nodata())
+      items.append(R.string.localizable.balance_nodata.key.localized())
     }
     
     if let vc = R.storyboard.components.pickerViewController() {
@@ -186,14 +190,18 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     validAccount()
   }
   
-  func setAmount(_ amount: String) {
+  func setAmount(_ amount: String ,canFetchFee : Bool) {
     self.state.property.amount.accept(amount)
-    validAmount()
+    if canFetchFee {
+      validAmount()
+    }
   }
   
-  func setMemo(_ memo: String) {
+  func setMemo(_ memo: String ,canFetchFee : Bool) {
     self.state.property.memo.accept(memo)
-    validAmount()
+    if canFetchFee {
+      validAmount()
+    }
   }
   
   func validAmount() {
@@ -223,7 +231,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
       if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId(from_user_id)),
                                                                         to_user_id: Int32(getUserId(to_user_id)),
                                                                         asset_id: Int32(getUserId(assetId)),
-                                                                        amount: Int32(amount),
+                                                                        amount: 0,
                                                                         fee_id: 0,
                                                                         fee_amount: 0,
                                                                         memo: memo,
@@ -241,7 +249,10 @@ extension TransferCoordinator: TransferStateManagerProtocol {
               self.store.dispatch(ValidAmountAction(isValid: true))
             }
           } else {
-            self.store.dispatch(ValidAmountAction(isValid: false))
+            if let transferAmount = self.state.property.amount.value.toDouble(), transferAmount != 0 {
+              self.store.dispatch(ValidAmountAction(isValid: false))
+            }
+//            self.store.dispatch(ValidAmountAction(isValid: false))
           }
         }
       }
@@ -266,6 +277,10 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     } else {
       self.store.dispatch(ValidAmountAction(isValid: true))
     }
+  }
+  
+  func resetData() {
+    self.store.dispatch(ResetDataAction())
   }
   
   var state: TransferState {

@@ -62,6 +62,10 @@ struct SetToAccountAction: Action {
   let account: Account
 }
 
+struct ResetDataAction : Action {
+  
+}
+
 //MARK: - Action Creator
 class TransferPropertyActionCreate {
     public typealias ActionCreator = (_ state: TransferState, _ store: Store<TransferState>) -> Action?

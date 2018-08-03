@@ -255,10 +255,10 @@ extension Decimal { // 解决double 计算精度丢失
     return (self.string(digits: pricision), pricision)
   }
   
-  func string(digits:Int = 0) -> String {
+  func string(digits:Int = 0, roundingMode: NSDecimalNumber.RoundingMode = .plain) -> String {
     var decimal = self
     var drounded = Decimal()
-    NSDecimalRound(&drounded, &decimal, digits, .plain)
+    NSDecimalRound(&drounded, &decimal, digits, roundingMode)
     
     if digits == 0 {
       return drounded.stringValue
@@ -278,10 +278,10 @@ extension Decimal { // 解决double 计算精度丢失
 }
 
 extension Double {
-  func string(digits:Int = 0) -> String {
+  func string(digits:Int = 0,roundingMode: NSDecimalNumber.RoundingMode = .plain) -> String {
     let decimal = Decimal(floatLiteral: self)
 
-    return decimal.string(digits: digits)
+    return decimal.string(digits: digits,roundingMode:roundingMode)
   }
   
   func preciseString() -> String {//解决显示科学计数法的格式
@@ -290,20 +290,24 @@ extension Double {
     return decimal.stringValue
   }
   
-  func tradePrice() -> (price:String, pricision:Int) {
+  func tradePrice() -> (price:String, pricision:Int ,amountPricision : Int) {
     var pricision = 0
+    var amountPricision = 0
     let decimal = Decimal(floatLiteral: self)
     if decimal < Decimal(floatLiteral: 0.0001) {
       pricision = 8
+      amountPricision = 2
     }
     else if decimal < Decimal(floatLiteral: 1) {
       pricision = 6
+      amountPricision = 4
     }
     else {
       pricision = 4
+      amountPricision = 6
     }
     
-    return (self.string(digits: pricision), pricision)
+    return (self.string(digits: pricision), pricision , amountPricision)
   }
   
   func formatCurrency(digitNum: Int ,usesGroupingSeparator:Bool = true) -> String {
@@ -377,12 +381,12 @@ extension String {
     return 0
   }
   
-  var tradePrice:(price:String, pricision:Int) {//0.0001  1   8 6 4
+  var tradePrice:(price:String, pricision:Int ,amountPricision : Int) {//0.0001  1   8 6 4
     if let oldPrice = self.toDouble() {
       return oldPrice.tradePrice()
     }
     
-    return (self, 0)
+    return (self, 0 , 0)
   }
   
   public func toDouble() -> Double? {
@@ -411,6 +415,33 @@ extension String {
     }
     return ""
   }
+}
+
+
+func transferTimeType(_ time : Int) -> String {
+  var result = ""
+  var times = 0
+  if time == 0 {
+    result = "0"
+    return result + R.string.localizable.transfer_unit_second.key.localized()
+  }
+  
+  if time / (3600 * 24) != 0 {
+    result = "\(time / (3600 * 24))" + R.string.localizable.transfer_unit_day.key.localized()
+  }
+  times = time % (3600 * 24)
+  if times / 3600 != 0 {
+    result += "\(times / 3600)" + R.string.localizable.transfer_unit_hour.key.localized()
+  }
+  times = times % 3600
+  if times / 60 != 0 {
+    result += "\(times / 60)" + R.string.localizable.transfer_unit_minite.key.localized()
+  }
+  times = times % 60
+  if times != 0 {
+    result += "\(times)" + R.string.localizable.transfer_unit_second.key.localized()
+  }
+  return result
 }
 
 

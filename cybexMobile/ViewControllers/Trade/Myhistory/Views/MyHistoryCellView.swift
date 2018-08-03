@@ -12,16 +12,16 @@ class MyHistoryCellView: UIView {
   
   @IBOutlet weak var asset: UILabel!
   @IBOutlet weak var typeView: UIView!
-    @IBOutlet weak var base: UILabel!
-    
+  @IBOutlet weak var base: UILabel!
+  
   @IBOutlet weak var kindL: UILabel!
-    @IBOutlet weak var orderAmount: UILabel!
+  @IBOutlet weak var orderAmount: UILabel!
   @IBOutlet weak var amount: UILabel!
   @IBOutlet weak var time: UILabel!
   @IBOutlet weak var orderPrice: UILabel!
   
-    @IBOutlet weak var state: UILabel!
-    
+  @IBOutlet weak var state: UILabel!
+  
   var data : Any? {
     didSet{
       if let fillOrder = data as? (FillOrder,time:String) {
@@ -43,10 +43,10 @@ class MyHistoryCellView: UIView {
         self.base.text  = "/" + result.base
         self.kindL.text = "BUY"
         self.typeView.backgroundColor = .turtleGreen
-        self.amount.text = getRealAmountDouble(receiveInfo.id, amount:order.receives.amount).string(digits: receiveInfo.precision) + " " + receiveInfo.symbol.filterJade
-        self.orderAmount.text = getRealAmountDouble(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision) + " " + payInfo.symbol.filterJade
+        self.amount.text = getRealAmountDouble(receiveInfo.id, amount:order.receives.amount).string(digits: receiveInfo.precision,roundingMode:.down) + " " + receiveInfo.symbol.filterJade
+        self.orderAmount.text = getRealAmountDouble(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision,roundingMode:.down) + " " + payInfo.symbol.filterJade
         
-        self.orderPrice.text = (getRealAmountDouble(payInfo.id, amount: order.pays.amount) / getRealAmountDouble(receiveInfo.id, amount:order.receives.amount)).string(digits: payInfo.precision) + " " + payInfo.symbol.filterJade
+        self.orderPrice.text = (getRealAmountDouble(payInfo.id, amount: order.pays.amount) / getRealAmountDouble(receiveInfo.id, amount:order.receives.amount)).string(digits: payInfo.precision,roundingMode:.down) + " " + payInfo.symbol.filterJade
         
       }else{
         // SELL   pay -> quote receive -> base
@@ -54,11 +54,11 @@ class MyHistoryCellView: UIView {
         self.asset.text = result.quote
         self.base.text  = "/" + result.base
         self.typeView.backgroundColor = .reddish
-        self.amount.text = getRealAmountDouble(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision) + " " + payInfo.symbol.filterJade
-        self.orderAmount.text = getRealAmountDouble(receiveInfo.id, amount: order.receives.amount).string(digits: receiveInfo.precision) + " " +  receiveInfo.symbol.filterJade
-        self.orderPrice.text = (getRealAmountDouble(receiveInfo.id, amount: order.receives.amount) / getRealAmountDouble(payInfo.id, amount: order.pays.amount)).string(digits: receiveInfo.precision) + " " +  receiveInfo.symbol.filterJade
+        self.amount.text = getRealAmountDouble(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision,roundingMode:.down) + " " + payInfo.symbol.filterJade
+        self.orderAmount.text = getRealAmountDouble(receiveInfo.id, amount: order.receives.amount).string(digits: receiveInfo.precision,roundingMode:.down) + " " +  receiveInfo.symbol.filterJade
+        self.orderPrice.text = (getRealAmountDouble(receiveInfo.id, amount: order.receives.amount) / getRealAmountDouble(payInfo.id, amount: order.pays.amount)).string(digits: receiveInfo.precision,roundingMode:.down) + " " +  receiveInfo.symbol.filterJade
       }
-    
+      
       self.time.text = orderInfo.time
     }
   }

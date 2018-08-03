@@ -25,21 +25,20 @@ class TransferContentView: UIView {
     didSet{
         if let data = data as? TransferRecordViewModel {
           addressView.name_locali = data.isSend ? R.string.localizable.transfer_detail_send_address.key.localized() : R.string.localizable.transfer_detail_income_address.key.localized()
-          addressView.content.text = data.isSend ? data.to : data.from
-          timeView.content.text = data.time
+          addressView.content_locali = data.isSend ? data.to : data.from
+          timeView.content_locali = data.time
           
           if data.vesting_period == "" {
-            vestingPeriodView.content.text = R.string.localizable.transfer_detail_nodata.key.localized()
+            vestingPeriodView.content_locali = R.string.localizable.transfer_detail_nodata.key.localized()
           }
           else {
-            vestingPeriodView.content.text = data.vesting_period + R.string.localizable.transfer_unit_time.key.localized()
+            vestingPeriodView.content_locali = transferTimeType(Int(data.vesting_period)!)
           }
-          
           if data.memo == "" {
-            memoView.content.text = R.string.localizable.transfer_detail_nodata.key.localized()
+            memoView.content_locali = R.string.localizable.transfer_detail_nodata.key.localized()
           }
           else {
-            memoView.content.text = R.string.localizable.transfer_detail_click.key.localized()
+            memoView.content_locali = R.string.localizable.transfer_detail_click.key.localized()
             memoView.content.textColor = UIColor.pastelOrange
             memoView.isUserInteractionEnabled = true
             memoView.content.rx.tapGesture().when(.recognized).asObservable().subscribe(onNext: { [weak self](tap) in
@@ -49,7 +48,7 @@ class TransferContentView: UIView {
           }
 
           if let feeInfo = data.fee,let assetInfo = app_data.assetInfo[feeInfo.asset_id] {
-            feeView.content.text = getRealAmount(feeInfo.asset_id, amount: feeInfo.amount).stringValue.formatCurrency(digitNum: assetInfo.precision) + assetInfo.symbol
+            feeView.content_locali = getRealAmount(feeInfo.asset_id, amount: feeInfo.amount).stringValue.formatCurrency(digitNum: assetInfo.precision) + " " + assetInfo.symbol.filterJade
           }
           updateHeight()
         }
@@ -58,7 +57,7 @@ class TransferContentView: UIView {
   
   var address_content : String? {
     didSet{
-      self.addressView.content.text = self.address_content
+      self.addressView.content_locali = self.address_content
     }
   }
   

@@ -27,7 +27,7 @@ class TransferDetailViewController: BaseViewController {
   }
   
   func setupUI() {
-    self.title = R.string.localizable.transfer_detail()
+    self.title = R.string.localizable.transfer_detail.key.localized()
     self.headerView.data = data
     self.contentView.data = data
   }
