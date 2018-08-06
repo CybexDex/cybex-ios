@@ -41,17 +41,21 @@ class YourPorfolioView:  UIView{
         
         if portfolioData.name == "GET" {
           self.rmbPrice.text = "≈¥0.00"
-          let request = changeToCybRequest(response: { [weak self](data) in
-            guard let `self` = self else { return }
-            if let data = data as? String ,let dataDouble = data.toDouble() {
-              let changedCybAmount = portfolioData.realAmount.toDouble()! / (1 / dataDouble)
-                
+          if let relation = app_coodinator.getToCybRelation, relation != 0 {
+            let changedCybAmount = portfolioData.realAmount.toDouble()! / relation
+            
+            let cybRmbPrice = changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble()! * app_state.property.eth_rmb_price
+            self.rmbPrice.text = "≈¥" + (changedCybAmount * cybRmbPrice).string(digits: 2, roundingMode: .down)
+          }
+          else {
+            app_coodinator.fetchGetToCyb { [weak self](relation) in
+              guard let `self` = self else { return }
+              let changedCybAmount = portfolioData.realAmount.toDouble()! / relation
+              
               let cybRmbPrice = changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble()! * app_state.property.eth_rmb_price
               self.rmbPrice.text = "≈¥" + (changedCybAmount * cybRmbPrice).string(digits: 2, roundingMode: .down)
             }
-            return
-            }, baseName: AssetConfiguration.CYB, quoteName: "1.3.17")
-          CybexWebSocketService.shared.send(request: request)
+          }
         }
         else {
           if portfolioData.rbmPrice == "-"{

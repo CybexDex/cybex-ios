@@ -101,8 +101,6 @@ class TradeRecodeViewController: BaseViewController {
           if self.isVisible {
             self.tableView.reloadData()
           }
-        }else {
-          self.showToastBox(false, message: "接口失败")
         }
         callback()
       })

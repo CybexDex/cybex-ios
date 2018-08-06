@@ -312,7 +312,7 @@ extension Double {
   
   func formatCurrency(digitNum: Int ,usesGroupingSeparator:Bool = true) -> String {
     if self < 1000 {
-      return string(digits: digitNum)
+      return string(digits: digitNum,roundingMode:.down)
     }
     
     let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in

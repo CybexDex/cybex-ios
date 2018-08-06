@@ -132,7 +132,8 @@ class MyPortfolioData{
         if limitDecimal == 0 {
           limitAmount = R.string.localizable.frozen.key.localized() + "--"
         } else {
-          limitAmount = R.string.localizable.frozen.key.localized() + limitDecimal.stringValue.formatCurrency(digitNum: asset_info.precision)
+          log.debug("limitAmountlimitAmount\(limitDecimal.doubleValue)")
+          limitAmount = R.string.localizable.frozen.key.localized() + limitDecimal.string(digits: asset_info.precision, roundingMode: .down)
         }
       }
     }
