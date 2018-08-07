@@ -53,10 +53,8 @@ class CybexWebSocketService: NSObject {
   private var errorCount = 0
   private var isConnecting:Bool = false
   private var isDetecting:Bool = false
-<<<<<<< HEAD
-=======
+
   private var isClosing = false
->>>>>>> release/1.3.0
 
   private var queue:OperationQueue!
   
@@ -67,11 +65,8 @@ class CybexWebSocketService: NSObject {
   private override init() {
     super.init()
     self.queue = OperationQueue()
-<<<<<<< HEAD
-    self.queue.maxConcurrentOperationCount = 1
-=======
+
     self.queue.maxConcurrentOperationCount = 3
->>>>>>> release/1.3.0
     self.queue.isSuspended = true
     
     self.batchFactory = BatchFactory(version: "2.0", idGenerator:self.idGenerator)
@@ -99,10 +94,8 @@ class CybexWebSocketService: NSObject {
     isDetecting = true
     self.currentNode = nil
     log.debug("detecting node .......")
-<<<<<<< HEAD
-=======
+
     self.testsockets.removeAll()
->>>>>>> release/1.3.0
     
     for (idx, node) in NodeURLString.all.enumerated() {
       var testsocket:SRWebSocket!
@@ -127,11 +120,6 @@ class CybexWebSocketService: NSObject {
   
   //MARK: - Public Methods -
   
-<<<<<<< HEAD
-  func connect() {
-    if !self.isConnecting {
-      isConnecting = true
-=======
   func overload() -> Bool {
     return self.queue.operations.count > 150
   }
@@ -140,7 +128,6 @@ class CybexWebSocketService: NSObject {
     if !self.isConnecting {
       isConnecting = true
       isClosing = false
->>>>>>> release/1.3.0
       needAutoConnect = true
       detectFastNode()
     }
@@ -148,12 +135,9 @@ class CybexWebSocketService: NSObject {
   
   func disconnect() {
     log.warning("websocket now disconnect by u")
-<<<<<<< HEAD
-    
-=======
+
     self.isClosing = true
 
->>>>>>> release/1.3.0
     self.needAutoConnect = false
     self.socket.close()
     
@@ -162,10 +146,8 @@ class CybexWebSocketService: NSObject {
     self.errorCount = 0
     self.autoConnectCount = 0
     self.ids.removeAll()
-<<<<<<< HEAD
-=======
+
     closeAllTestSocket()
->>>>>>> release/1.3.0
     self.idGenerator = JsonIdGenerator()
     self.batchFactory.idGenerator = self.idGenerator
     self.queue.cancelAllOperations()
@@ -194,13 +176,11 @@ class CybexWebSocketService: NSObject {
       }
       
       appendRequestToQueue(request, priority:priority, response: block)
-<<<<<<< HEAD
-=======
+
       
       if !self.isConnecting && !self.isClosing && socket.readyState != .OPEN {
         connect()
       }
->>>>>>> release/1.3.0
     }
     
   }
@@ -240,11 +220,7 @@ class CybexWebSocketService: NSObject {
       }]
     
     for request in registerID_re {
-<<<<<<< HEAD
-      send(request: request, priority:.high)
-=======
       send(request: request, priority:.veryHigh)
->>>>>>> release/1.3.0
     }
   }
   
@@ -291,18 +267,6 @@ class CybexWebSocketService: NSObject {
           let data = try? json.rawData()
           try? self.socket.send(data: data)
         }
-<<<<<<< HEAD
-        
-      
-      }
-    }
-    
-    if request is GetMarketHistoryRequest {
-      operation.queuePriority = .low
-    }
-    else {
-      operation.queuePriority = priority
-=======
       }
     }
 
@@ -312,7 +276,6 @@ class CybexWebSocketService: NSObject {
     }
     else {
       operation.qualityOfService = .default
->>>>>>> release/1.3.0
     }
     
     if let idInt = id.int, idInt > 3, self.ids.count < 3 {
@@ -332,20 +295,6 @@ class CybexWebSocketService: NSObject {
   //MARK: - Nodes -
   
   private func connectNode(node: NodeURLString) {
-<<<<<<< HEAD
-    log.info("connecting node: \(node.rawValue)")
-    
-    self.idGenerator = JsonIdGenerator()
-    self.batchFactory.idGenerator = self.idGenerator
-    
-    let request = URLRequest(url: URL(string:node.rawValue)!)
-    
-    socket = SRWebSocket(urlRequest: request)
-    
-    socket.delegate = self
-    socket.delegateDispatchQueue = DispatchQueue.main
-    socket.open()
-=======
     if socket.readyState != .OPEN {
       log.info("connecting node: \(node.rawValue)")
 
@@ -360,8 +309,6 @@ class CybexWebSocketService: NSObject {
       socket.delegateDispatchQueue = DispatchQueue.main
       socket.open()
     }
-
->>>>>>> release/1.3.0
   }
 }
 
