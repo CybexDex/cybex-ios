@@ -20,6 +20,7 @@ enum dataBaseCatogery:String {
   case get_account_by_name
   case get_required_fees
   case get_block
+  case get_ticker
 }
 
 struct GetRequiredFees:JSONRPCKit.Request, JSONRPCResponse {
@@ -273,5 +274,25 @@ struct getBlockRequest : JSONRPCKit.Request , JSONRPCResponse {
   func transferResponse(from resultObject: Any) throws -> Any {
     let data = JSON(resultObject).dictionaryValue
     return data["timestamp"]?.stringValue ?? ""
+  }
+}
+
+struct changeToCybRequest : JSONRPCKit.Request , JSONRPCResponse {
+  var response: RPCSResponse
+  
+  var baseName : String
+  var quoteName : String
+  var method:String{
+    return "call"
+  }
+  
+  var parameters: Any?{
+    return [apiCategory.database, dataBaseCatogery.get_ticker.rawValue,[baseName,quoteName]]
+  }
+  
+  func transferResponse(from resultObject: Any) throws -> Any {
+    let data = JSON(resultObject).dictionaryValue
+    let latest = data["latest"]?.stringValue
+    return latest ?? ""
   }
 }

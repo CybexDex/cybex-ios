@@ -4,8 +4,10 @@
 #include <fc/smart_ref_impl.hpp>
 #include "graphene/chain/protocol/types.hpp"
 #include "graphene/chain/protocol/transfer.hpp"
+#include "graphene/chain/protocol/memo.hpp"
 #include "transaction.hpp"
 #include "wallet_lib.hpp"
+#include "cybex_gateway_query.hpp"
 
 using namespace std;
 using namespace fc;
@@ -52,6 +54,7 @@ static void _set_transfer_operation(
     //o.memo->from = fc::ecc::public_key::from_base58(from_memo_pub_key);
     //o.memo->to = fc::ecc::public_key::from_base58(to_memo_pub_key);
     fc::ecc::private_key memo_priv_key = get_private_key(from_memo_pub_key);
+//    fc::ecc::private_key memo_priv_key = fc::ecc::private_key();
     o.memo->from = public_key_type(from_memo_pub_key);
     o.memo->to = public_key_type(to_memo_pub_key);
     o.memo->set_message(memo_priv_key, o.memo->to, memo);
@@ -241,3 +244,49 @@ string get_cancel_order_json(
   variant op_json(o);
   return fc::json::to_string(op_json);
 } catch(...){return "";}}
+
+
+
+string cybex_gateway_query(
+                           string accountName,
+                           string asset,
+                           string fundType,
+                           uint32_t size,
+                           uint32_t offset,
+                           uint32_t expiration
+                           )
+{try{
+  struct cybex_gateway_query_transaction trx;
+  digest_type::encoder enc;
+  
+  trx.op.accountName = accountName;
+  trx.op.asset = asset;
+  trx.op.fundType = fundType;
+  trx.op.size = size;
+  trx.op.offset = offset;
+  trx.op.expiration = expiration; //fc::time_point_sec(expiration);
+  
+  fc::ecc::private_key active_priv_key = get_private_key("");
+  fc::raw::pack(enc, trx.op);
+  trx.signer = active_priv_key.sign_compact(enc.result());
+  return fc::json::to_string(trx);
+} catch(...){return "";}}
+
+string decrypt_memo_data(
+                         string memo_json_str
+                         )
+{ try{
+  struct memo_data m = fc::json::from_string(memo_json_str).as<memo_data>();
+  fc::ecc::private_key memo_priv_key;
+  fc::ecc::public_key memo_pub_key;
+  try {
+    memo_priv_key = get_private_key(std::string(m.from));
+    memo_pub_key = m.to;
+  } catch(...){
+    memo_priv_key = get_private_key(std::string(m.to));
+    memo_pub_key = m.from;
+  }
+  
+  return m.get_message(memo_priv_key, memo_pub_key);
+} catch(...){return "";}}
+

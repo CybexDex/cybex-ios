@@ -55,6 +55,9 @@ extension TradeHistoryCoordinator: TradeHistoryStateManagerProtocol {
   }
   
   func fetchData(_ pair:Pair) {
+    if CybexWebSocketService.shared.overload() {
+      return
+    }
     store.dispatch(creator.fetchFillOrders(with: pair, callback: {[weak self] (data) in
       guard let `self` = self else { return }
       
@@ -65,7 +68,7 @@ extension TradeHistoryCoordinator: TradeHistoryStateManagerProtocol {
   }
   
   func updateMarketListHeight(_ height:CGFloat) {
-    if let vc = self.rootVC.viewControllers[self.rootVC.viewControllers.count - 1] as? MarketViewController {
+    if let vc = self.rootVC.viewControllers[self.rootVC.viewControllers.count - 1] as? MarketViewController, vc.pageContentViewHeight != nil {
       vc.pageContentViewHeight.constant = height + 50
     }
   }

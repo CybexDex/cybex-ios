@@ -17,9 +17,10 @@ import PromiseKit
 import AwaitKit
 import Guitar
 import Repeat
+import SwiftyUserDefaults
 
 extension UserManager {
-
+  
   func validateUserName(_ username:String) -> (Bool, String) {
     let letterBegin = Guitar(pattern: "^([a-z])")
     if !letterBegin.test(string: username) {
@@ -61,7 +62,7 @@ extension UserManager {
       if locked {
         self.saveName(username)
         self.avatarString = username.sha256()
-
+        
         self.name.accept(username)
         self.handlerFullAcount(data!)
       }
@@ -81,7 +82,7 @@ extension UserManager {
         if data.0 {
           self.saveName(username)
           self.avatarString = username.sha256()
-
+          
           self.name.accept(username)
           
           self.keys = keys
@@ -105,6 +106,7 @@ extension UserManager {
     self.balances.accept(nil)
     self.limitOrder.accept(nil)
     self.fillOrder.accept(nil)
+    self.transferRecords.accept(nil)
   }
   
   func fetchAccountInfo(){
@@ -126,12 +128,78 @@ extension UserManager {
     }
   }
   
+  func fetchHistoryOfFillOrdersAndTransferRecords() {
+    guard let id = self.account.value?.id else {
+      return
+    }
+    
+    let request = GetAccountHistoryRequest(accountID: id) { (data) in
+      if let data = data as? (fillOrders:[FillOrder],transferRecords:[TransferRecord]) {
+        var fillorders = data.fillOrders
+        if !self.isLoginIn {
+          return
+        }
+        if data.transferRecords.count == 0 {
+          self.transferRecords.accept(nil)
+        }
+        if fillorders.count == 0  {
+          self.fillOrder.accept(nil)
+        }
+        fillorders = fillorders.filter({
+          let base_name = app_data.assetInfo[$0.fill_price.base.assetID]
+          let quote_name = app_data.assetInfo[$0.fill_price.quote.assetID]
+          return base_name != nil && quote_name != nil
+        })
+        
+        var result = [(FillOrder,time:String)]()
+        var count = 0
+        for fillOrder in fillorders{
+          let timeRequest = getBlockRequest(response: { (time) in
+            count += 1
+            if let time = time as? String, let date = time.dateFromISO8601{
+              result.append((fillOrder,time:(date.string(withFormat: "MM/dd HH:mm:ss"))))
+            }
+            if count == fillorders.count{
+              self.fillOrder.accept(result)
+            }
+          }, block_num: fillOrder.block_num)
+          CybexWebSocketService.shared.send(request: timeRequest,priority: Operation.QueuePriority.high)
+        }
+        
+        let transferRecordList = data.transferRecords
+        if transferRecordList.count == 0 || !self.isLoginIn {
+          self.transferRecords.accept(nil)
+          return
+        }
+        
+        var records = [(TransferRecord,time:String)]()
+        var recordCount = 0
+        for transferRecord in transferRecordList {
+          let timeRequest = getBlockRequest(response: { (time) in
+            recordCount += 1
+            if let time = time as? String, let date = time.dateFromISO8601{
+              records.append((transferRecord,time:(date.string(withFormat: "MM/dd HH:mm:ss"))))
+            }
+            if recordCount == transferRecordList.count{
+              self.transferRecords.accept(records)
+            }
+          }, block_num: transferRecord.block_num)
+          CybexWebSocketService.shared.send(request: timeRequest)
+        }
+      }
+      
+    }
+    CybexWebSocketService.shared.send(request: request)
+  }
+  
+  
   func fetchHistoryOfOperation() {
     guard let id = self.account.value?.id else {
       return
     }
     
     let request = GetAccountHistoryRequest(accountID: id) { (data) in
+      
       if var fillorders = data as? [FillOrder] {
         if fillorders.count == 0 || !self.isLoginIn {
           self.fillOrder.accept(nil)
@@ -184,8 +252,7 @@ extension UserManager {
     }
     
     let keysString = BitShareCoordinator.getUserKeys(name, password: password)!
-    if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key {
-      let public_key = active_key.public_key
+    if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key, let memoKey = keys.memo_key, let ownKey = keys.owner_key {
       var canLock = false
       
       let request = GetFullAccountsRequest(name: name) { response in
@@ -195,18 +262,22 @@ extension UserManager {
           
           for auth in active_auths {
             if let auth = auth as? [Any], let key = auth[0] as? String {
-              if key == public_key {
+              if [memoKey.public_key, ownKey.public_key, active_key.public_key].contains(key) {
                 canLock = true
+                BitShareCoordinator.resetDefaultPublicKey(key)
                 break
               }
             }
           }
           
-          for auth in owner_auths {
-            if let auth = auth as? [Any], let key = auth[0] as? String {
-              if key == public_key {
-                canLock = true
-                break
+          if !canLock {
+            for auth in owner_auths {
+              if let auth = auth as? [Any], let key = auth[0] as? String {
+                if [memoKey.public_key, ownKey.public_key, active_key.public_key].contains(key) {
+                  canLock = true
+                  BitShareCoordinator.resetDefaultPublicKey(key)
+                  break
+                }
               }
             }
           }
@@ -240,7 +311,7 @@ extension UserManager {
       }
       CybexWebSocketService.shared.send(request: request)
     }
-
+      
     else{
       completion(false, nil)
     }
@@ -253,8 +324,9 @@ extension UserManager {
     if let balances = data.balances {
       self.balances.accept(balances.filter({ (balance) -> Bool in
         let name = app_data.assetInfo[balance.asset_type]
-        return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
-          (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
+        return (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
+//        return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
+//          (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
       }))
       
     }else{
@@ -287,16 +359,52 @@ class UserManager {
         self.name.accept(name)
         self.avatarString = name.sha256()
       }
-
+      
       return true
     }
     return false
+  }
+  
+  enum frequency_type : Int{
+    case normal = 0
+    case time
+    case WiFi
+    
+    func description() -> String {
+      switch self {
+      case .normal:return R.string.localizable.frequency_normal.key.localized()
+      case .time:return R.string.localizable.frequency_time.key.localized()
+      case .WiFi:return R.string.localizable.frequency_wifi.key.localized()
+      }
+    }
   }
   
   var isLocked:Bool {
     return self.keys == nil
   }
   
+  var frequency_type : frequency_type = .WiFi {
+    didSet {
+      Defaults[.frequency_type] = self.frequency_type.rawValue
+      switch self.frequency_type {
+      case .normal:self.refreshTime = 6
+      case .time:self.refreshTime = 3
+      case .WiFi:
+        let status = RealReachability.sharedInstance().currentReachabilityStatus()
+        if status == .RealStatusViaWiFi {
+          self.refreshTime = 3
+        }else {
+          self.refreshTime = 6
+        }
+      }
+    }
+  }
+  
+  var refreshTime : TimeInterval = 6 {
+    didSet {
+      app_coodinator.repeatFetchPairInfo(.veryLow)
+    }
+  }
   var isWithDraw : Bool = false
   var isTrade : Bool = false
   var name : BehaviorRelay<String?> = BehaviorRelay(value: nil)
@@ -307,6 +415,7 @@ class UserManager {
   var balances:BehaviorRelay<[Balance]?> = BehaviorRelay(value: nil)
   var limitOrder:BehaviorRelay<[LimitOrder]?> = BehaviorRelay(value:nil)
   var fillOrder:BehaviorRelay<[(FillOrder,time:String)]?> = BehaviorRelay(value:nil)
+  var transferRecords : BehaviorRelay<[(TransferRecord,time:String)]?> = BehaviorRelay(value: nil)
   
   var timer:Repeater?
   
@@ -372,12 +481,10 @@ class UserManager {
   
   private init() {
     
-    app_data.data.asObservable().distinctUntilChanged()
-//      .filter({$0.count = AssetConfiguration.shared.asset_ids.count})
-      .throttle(3, latest: true, scheduler: MainScheduler.instance)
+    app_data.otherRequestRelyData.asObservable()
       .subscribe(onNext: { (s) in
         DispatchQueue.main.async {
-          if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 {
+          if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 && !CybexWebSocketService.shared.overload() {
             UserManager.shared.fetchAccountInfo()
           }
           
@@ -386,8 +493,10 @@ class UserManager {
     
     account.asObservable().skip(1).subscribe(onNext: {[weak self] (newAccount) in
       guard let `self` = self else { return }
-      
-      self.fetchHistoryOfOperation()
+      if CybexWebSocketService.shared.overload() || self.fillOrder.value != nil {
+        return
+      }
+      self.fetchHistoryOfFillOrdersAndTransferRecords()
     }).disposed(by: disposeBag)
     
   }
@@ -408,6 +517,23 @@ class UserManager {
     return datas
   }
   
+
+  func getMyPortfolioDatas() -> [MyPortfolioData]{
+    var datas = [MyPortfolioData]()
+    if let balances = self.balances.value {
+      for balance in balances{
+        if let foloiData = MyPortfolioData.init(balance: balance) {
+          if (foloiData.realAmount == "" || foloiData.realAmount.toDouble() == 0) && foloiData.limitAmount.contains("--") {
+            
+          }
+          else {
+            datas.append(foloiData)
+          }
+        }
+      }
+    }
+    return datas
+  }
   
 }
 

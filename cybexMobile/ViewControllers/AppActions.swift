@@ -22,6 +22,8 @@ struct AppPropertyState {
 
   var subscribeIds:[Pair:Int]?
   var pairsRefreshTimes:[Pair:Double]?
+  
+  var otherRequestRelyData:BehaviorRelay<Int?> = BehaviorRelay(value: nil)
 
   var assetInfo:[String:AssetInfo] = [:]
   
@@ -130,9 +132,9 @@ class AppPropertyActionCreate: LoadingActionCreator {
     _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
     ) -> Void
   
-  func fetchMarket(with sub:Bool = true, params:AssetPairQueryParams, callback:MarketDataCallback?) -> ActionCreator {
+  func fetchMarket(with sub:Bool = true, params:AssetPairQueryParams, priority: Operation.QueuePriority = .normal, callback:MarketDataCallback?) -> ActionCreator {
     return { state, store in
-      self.fetchingMarketList(params, callback: {[weak self] (res) in
+      self.fetchingMarketList(params, priority:priority, callback: {[weak self] (res) in
         guard let `self` = self else { return }
         
         if var assets = res as? [Bucket] {
@@ -141,7 +143,7 @@ class AppPropertyActionCreate: LoadingActionCreator {
             
             if asset.open > params.startTime.timeIntervalSince1970 {
               
-              self.cycleFetch(asset, params: params, callback: { (o_asset) in
+              self.cycleFetch(asset, params: params, priority: priority, callback: { (o_asset) in
                 if let o_asset = o_asset as? Bucket {
                   let close = o_asset.open_base
                   let quote_close = o_asset.open_quote
@@ -199,7 +201,7 @@ class AppPropertyActionCreate: LoadingActionCreator {
     }
   }
   
-  func fetchingMarketList(_  params:AssetPairQueryParams, callback:CommonAnyCallback?) {
+  func fetchingMarketList(_  params:AssetPairQueryParams, priority: Operation.QueuePriority = .normal, callback:CommonAnyCallback?) {
     
     let request = GetMarketHistoryRequest(queryParams: params) { response in
       if let callback = callback {
@@ -207,14 +209,14 @@ class AppPropertyActionCreate: LoadingActionCreator {
       }
     }
     
-    CybexWebSocketService.shared.send(request: request)
+    CybexWebSocketService.shared.send(request: request, priority: priority)
   }
   
-  func cycleFetch(_ asset:Bucket, params:AssetPairQueryParams, callback:CommonAnyCallback?) {
+  func cycleFetch(_ asset:Bucket, params:AssetPairQueryParams, priority: Operation.QueuePriority = .normal, callback:CommonAnyCallback?) {
     var re_params = params
     re_params.startTime = params.startTime.addingTimeInterval(-24 * 3600)
     re_params.endTime = params.startTime
-    self.fetchingMarketList(re_params, callback: {[weak self] (o_res) in
+    self.fetchingMarketList(re_params, priority:priority, callback: {[weak self] (o_res) in
       guard let `self` = self else { return }
       if let o_assets = o_res as? [Bucket] {
         if o_assets.count > 0, let o_asset = o_assets.last {

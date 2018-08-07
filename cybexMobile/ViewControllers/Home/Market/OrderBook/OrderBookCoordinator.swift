@@ -56,6 +56,9 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
   }
   
   func fetchData(_ pair:Pair) {
+    if CybexWebSocketService.shared.overload() {
+      return
+    }
     store.dispatch(creator.fetchLimitOrders(with: pair, callback: {[weak self] (data) in
       guard let `self` = self else { return }
       

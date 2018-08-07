@@ -94,3 +94,15 @@ string get_cancel_order_json(
                              unsigned_int fee_asset_id /* instance id of asset to pay fee */
 );
 
+string cybex_gateway_query(
+                           string accountName,
+                           string asset,
+                           string fundType,
+                           uint32_t size,
+                           uint32_t offset,
+                           uint32_t expiration
+                           );
+
+string decrypt_memo_data(
+                         string memo_json_str
+                         );

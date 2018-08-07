@@ -14,6 +14,8 @@ protocol WithdrawDetailCoordinatorProtocol {
   func fetchDepositAddress(_ asset_name:String)
   func resetDepositAddress(_ asset_name:String)
   func fetchDepositMessage(callback:@escaping (String)->())
+  func openDepositRecode(_ asset_id : String)
+  
 }
 
 protocol WithdrawDetailStateManagerProtocol {
@@ -79,6 +81,14 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
           callback("")
         }
       }
+    }
+  }
+  
+  func openDepositRecode(_ asset_id : String) {
+    if let vc = R.storyboard.recode.rechargeRecodeViewController() {
+      vc.coordinator = RechargeRecodeCoordinator(rootVC: self.rootVC)
+      vc.assetInfo = app_data.assetInfo[asset_id]
+      self.rootVC.pushViewController(vc, animated: true)
     }
   }
 }

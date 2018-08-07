@@ -21,7 +21,8 @@ import IHKeyboardAvoiding
 
 class RegisterViewController: BaseViewController {
   
-  var coordinator: (RegisterCoordinatorProtocol & RegisterStateManagerProtocol)?
+    @IBOutlet weak var iconTopContainer: NSLayoutConstraint!
+    var coordinator: (RegisterCoordinatorProtocol & RegisterStateManagerProtocol)?
   
   @IBOutlet weak var accountTextField: ImageTextField!
   @IBOutlet weak var passwordTextField: ImageTextField!
@@ -138,6 +139,19 @@ class RegisterViewController: BaseViewController {
 extension RegisterViewController {
   func setupEvent() {
   
+    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: nil) { (notification) in
+      let userinfo: NSDictionary = notification.userInfo! as NSDictionary
+      let nsValue = userinfo.object(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+      let keyboardRec = nsValue.cgRectValue
+      
+      self.iconTopContainer.constant -= abs(self.view.height - self.errorStackView.bottom - keyboardRec.height) - 10
+    }
+    
+    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: nil) { (notification) in
+      self.iconTopContainer.constant = 15
+      
+    }
+    
     NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidChange, object: accountTextField, queue: nil) {[weak self] (notifi) in
       self?.errorStackView.isHidden = true
       self?.accountTextField.activityView?.isHidden = true

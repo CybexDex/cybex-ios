@@ -21,6 +21,12 @@
 "dark" = "Dark";
 "light" = "Light";
 "version" = "Version";
+"frequency" = "Frequency";
+
+"frequency_normal" = "Ordinary Market";
+"frequency_time" = "Real-time Market";
+"frequency_wifi" = "Real-time Market(WiFi Only)";
+
 
 "login.hint" = "Use Cloud Wallet mode to login Account";
 "register.hint" = "Use Cloud Wallet mode to create Account";
@@ -184,11 +190,11 @@
 "order_create_fail" = "Place order fail";
 
 
-"utils_address"      = "Withdrawal Address:";
-"utils_amount"       = "Amount:";
-"utils_withdrawfee"  = "Transfer Fee:";
-"utils_gatewayfee"   = "Gateway Fee:";
-"utils_receiveamount" = "Receive Amount:";
+"utils_address"      = "Withdrawal Address";
+"utils_amount"       = "Amount";
+"utils_withdrawfee"  = "Transfer Fee";
+"utils_gatewayfee"   = "Gateway Fee";
+"utils_receiveamount" = "Receive Amount";
 
 "password_placeholder" = "Password";
 "tip_title"   = "Tip";
@@ -251,3 +257,84 @@
 "business_login_title" = "Log in to exchange";
 
 "update_version" = "Version update";
+
+// 充提现
+"withdraw_list" = "Withdraw Records";
+"deposit_list" = "Deposit Records";
+"update_time" = "Update time:";
+"recode_address" = "Address:";
+"recode_state_new" = "New";
+"recode_state_upping" = "Init";
+"recode_state_noensure" = "Pending";
+"recode_state_fail" = "Failed";
+"recode_state_success" = "Done";
+
+
+
+// 转账记录
+
+"transfer_list_title" = "Transfer Records";
+"transfer_done" = "Received";
+"transfer_send" = "Sent";
+
+
+
+
+// 转账详情
+"transfer_detail" = "Transfer Details";
+"transfer_detail_send" = "Out";
+"transfer_detail_income" = "In";
+"transfer_detail_income_address" = "From";
+"transfer_detail_send_address" = "To";
+"transfer_detail_time" = "Vesting Period";
+"transfer_detail_fee" = "Fee";
+"transfer_detail_mome" = "Memo";
+"transfer_detail_click" = "Click to view";
+"transfer_detail_nodata" = "None";
+"transfer_ensure_title" = "CONFIRM";
+
+
+//转账
+"transfer_title" = "Transfer";
+"transfer_transfer" = "Send";
+"transfer_account" = "Account Name";
+"transfer_account_pla" = "To Account name";
+"transfer_crypto" = "Crypto";
+"transfer_crypto_pla" = "Please select crypto type";
+"transfer_quantity" = "Quantity";
+"transfer_memo" = "Memo";
+"transfer_fee" = "Fee";
+"transfer_balance" = "Available";
+"picker_comfirm" = "Confirm";
+
+"transfer_unit_day" = "d";
+"transfer_unit_hour" = "h";
+"transfer_unit_minite" = "m";
+"transfer_unit_second" = "s";
+
+
+"transfer_failed" = "Transfer failed";
+"transfer_successed" = "Transfer successfully";
+"transfer_account_unexist" = "Account doesn’t exist.";
+"transfer_balance_unenough" = "There are no enough coins in your account.";
+
+//zsy add
+"my_property" = "My Balance";
+"order_value" = "Opened Orders";
+"transfer" = "Transfer";
+"account_property" = "Your Total Balance(CYB)";
+"hello" = "Hello，";
+"deposit_withdraw" = "Deposit/Withdraw";
+"frozen" = "Frozen：";
+
+//zsy end
+
+"recode_nodata" = "No record";
+"balance_nodata" = "No assert";
+
+"Loading more" = "Loading more";
+"No more data" = "No more data";
+"Loading..." = "Loading...";
+"Pull to refresh" = "Pull to refresh";
+"Release to refresh" = "Release to refresh";
+

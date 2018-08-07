@@ -119,6 +119,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
       else {
         if fee_id == assetID {
           amount = (balance - fee_amount) * percentDecimal
+          log.debug("amount ----- \(amount.doubleValue)")
         }
         else {
           amount = balance * percentDecimal
@@ -147,18 +148,23 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
   
   func postLimitOrder(_ pair:Pair, isBuy:Bool, callback: @escaping (_ success: Bool) -> ()) {
     guard let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote],let fee_info = app_data.assetInfo[self.state.property.feeID.value], let userid = UserManager.shared.account.value?.id, self.state.property.fee_amount.value != 0, let cur_amount = self.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.state.property.price.value.toDouble(), price != 0 else { return }
+    guard  let cur_amount_Decimal = Decimal(string:self.state.property.amount.value) ,cur_amount_Decimal != 0 , let price_Decimal = Decimal(string:self.state.property.price.value) , price_Decimal != 0 else { return }
     
-    let total = price * cur_amount
+    let total = cur_amount_Decimal * price_Decimal
+//    let total = price * cur_amount
     let assetID = isBuy ? base_info.id : quote_info.id
-    let amount = isBuy ? Int32(total * pow(10, base_info.precision.double)) : Int32(cur_amount * pow(10, quote_info.precision.double))
+    
+    let amount = isBuy ? Int32((total * pow(10, base_info.precision)).string(digits: 0, roundingMode: .down)) : Int32((cur_amount_Decimal * pow(10, base_info.precision)).string(digits: 0, roundingMode: .down))
+//    let amount = isBuy ? Int32(round(total * pow(10, base_info.precision.double))) : Int32(round(cur_amount * pow(10, quote_info.precision.double)))
 
     let receive_assetID = isBuy ? quote_info.id : base_info.id
-    let receive_amount = isBuy ? Int32(cur_amount * pow(10, quote_info.precision.double)) : Int32(total * pow(10, base_info.precision.double))
+    let receive_amount = isBuy ? Int32((cur_amount_Decimal * pow(10, quote_info.precision)).string(digits: 0, roundingMode: .down)) : Int32((total * pow(10, base_info.precision)).string(digits: 0, roundingMode: .down))
+//    let receive_amount = isBuy ? Int32(round(cur_amount * pow(10, quote_info.precision.double))) : Int32(round(total * pow(10, base_info.precision.double)))
     
-    let fee_amount = Int32(self.state.property.fee_amount.value.doubleValue * pow(10, fee_info.precision.double))
+    let fee_amount = Int32(round(self.state.property.fee_amount.value.doubleValue * pow(10, fee_info.precision.double)))
 
     blockchainParams { (blockchain_params) in
-      if let jsonStr = BitShareCoordinator.getLimitOrder(blockchain_params.block_num, block_id: blockchain_params.block_id, expiration: Date().timeIntervalSince1970 + 10 * 3600, chain_id: blockchain_params.chain_id, user_id: userid.getID, order_expiration: Date().timeIntervalSince1970 + 3600 * 24 * 365, asset_id: assetID.getID, amount: amount, receive_asset_id: receive_assetID.getID, receive_amount: receive_amount, fee_id: self.state.property.feeID.value.getID, fee_amount: fee_amount) {
+      if let jsonStr = BitShareCoordinator.getLimitOrder(blockchain_params.block_num, block_id: blockchain_params.block_id, expiration: Date().timeIntervalSince1970 + 10 * 3600, chain_id: blockchain_params.chain_id, user_id: userid.getID, order_expiration: Date().timeIntervalSince1970 + 3600 * 24 * 365, asset_id: assetID.getID, amount: amount!, receive_asset_id: receive_assetID.getID, receive_amount: receive_amount!, fee_id: self.state.property.feeID.value.getID, fee_amount: fee_amount) {
         
         let request = BroadcastTransactionRequest(response: { (data) in
           if String(describing: data) == "<null>" {
@@ -199,8 +205,11 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
       }
 
     }
+    let balanceDouble = Int(round(self.state.property.balance.value.doubleValue * pow(10, base_info.precision).doubleValue))
+    let totalDouble = Int(round(total.doubleValue * pow(10, base_info.precision).doubleValue))
+    
    
-    if self.state.property.balance.value >= total {
+    if balanceDouble >= totalDouble {
       return true
     }
 

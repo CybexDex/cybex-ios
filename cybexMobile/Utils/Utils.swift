@@ -9,6 +9,7 @@
 import Foundation
 import Localize_Swift
 import SwiftTheme
+import SwiftyJSON
 
 func getChainId(callback:@escaping(String)->()){
   if AppConfiguration.shared.chainID.isEmpty {
@@ -88,10 +89,10 @@ func calculateFee(_ operation:String, focus_asset_id:String, operationID:ChainTy
   
   CybexWebSocketService.shared.send(request: request)
 }
-  
+
 func calculateAssetRelation(assetID_A_name:String, assetID_B_name:String) -> (base:String, quote:String) {
   let relation:[String] = AssetConfiguration.order_name
-
+  
   
   var indexA = -1
   var indexB = -1
@@ -150,6 +151,7 @@ func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
       return (String(1.0/Double(eth_cyb)!),"1")
     }
   }
+  
   
   var result = (eth:"0",cyb:"0")
   let homeBuckets : [HomeBucket] = app_data.data.value
@@ -296,11 +298,11 @@ func getRealAmount(_ id : String ,amount : String) -> Decimal {
   }
   
   let precisionNumber = pow(10, asset.precision)
-
+  
   if let amountDecimal = Decimal(string: amount) {
     return amountDecimal / precisionNumber
   }
-
+  
   return 0
 }
 
@@ -354,11 +356,11 @@ func getWithdrawDetailInfo(addressInfo:String,amountInfo:String,withdrawFeeInfo:
    "utils_gatewayfee"   = "Gateway Fee:";
    */
   
-  return (["<name>\(String(describing: address))</name><\(content)>\n\(String(describing: addressInfo))</\(content)>".set(style: "alertContent"),
-           "<name>\(String(describing: amount))</name><\(content)>  \(String(describing: amountInfo))</\(content)>".set(style: "alertContent"),
-           "<name>\(String(describing: withdrawFee))</name><\(content)>  \(String(describing: withdrawFeeInfo))</\(content)>".set(style: "alertContent"),
-           "<name>\(String(describing: gatewayFee))</name><\(content)>  \(String(describing: gatewayFeeInfo))</\(content)>".set(style: "alertContent"),
-           "<name>\(String(describing: receiveAmount))</name><\(content)>  \(String(describing: receiveAmountInfo))</\(content)>".set(style: "alertContent")] as? [NSAttributedString])!
+  return (["<name>\(String(describing: address)):</name><\(content)>\n\(String(describing: addressInfo))</\(content)>".set(style: "alertContent"),
+           "<name>\(String(describing: amount)):</name><\(content)>  \(String(describing: amountInfo))</\(content)>".set(style: "alertContent"),
+           "<name>\(String(describing: withdrawFee)):</name><\(content)>  \(String(describing: withdrawFeeInfo))</\(content)>".set(style: "alertContent"),
+           "<name>\(String(describing: gatewayFee)):</name><\(content)>  \(String(describing: gatewayFeeInfo))</\(content)>".set(style: "alertContent"),
+           "<name>\(String(describing: receiveAmount)):</name><\(content)>  \(String(describing: receiveAmountInfo))</\(content)>".set(style: "alertContent")] as? [NSAttributedString])!
 }
 
 func getOpenedOrderInfo(price:String,amount:String,total:String,fee:String,isBuy:Bool) ->[NSAttributedString]{
@@ -371,14 +373,28 @@ func getOpenedOrderInfo(price:String,amount:String,total:String,fee:String,isBuy
   let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
   
   let result = fee.count == 0 ? (["<name>\(priceTitle): </name><\(priceContentStyle)>\(price)</\(priceContentStyle)>".set(style: "alertContent"),
-    "<name>\(amountTitle): </name><\(contentStyle)>\(amount)</\(contentStyle)>".set(style: "alertContent"),
-  "<name>\(totalTitle): </name><\(contentStyle)>\(total)</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])! :
+                                  "<name>\(amountTitle): </name><\(contentStyle)>\(amount)</\(contentStyle)>".set(style: "alertContent"),
+                                  "<name>\(totalTitle): </name><\(contentStyle)>\(total)</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])! :
     (["<name>\(priceTitle): </name><\(priceContentStyle)>\(price)</\(priceContentStyle)>".set(style: "alertContent"),
       "<name>\(amountTitle): </name><\(contentStyle)>\(amount)</\(contentStyle)>".set(style: "alertContent"),
       "<name>\(totalTitle): </name><\(contentStyle)>\(total)</\(contentStyle)>".set(style: "alertContent"),
       "<name>\(feeTitle): </name><\(contentStyle)>\(fee)</\(contentStyle)>".set(style: "alertContent"),] as? [NSAttributedString])!
   
   return  result
+}
+
+func getTransferInfo(_ account: String, quanitity: String, fee: String, memo: String) -> [NSAttributedString] {
+  let accountTitle = R.string.localizable.transfer_account.key.localized()
+  let quantityTitle = R.string.localizable.transfer_quantity.key.localized()
+  let feeTitle = R.string.localizable.transfer_fee.key.localized()
+  let memoTitle = R.string.localizable.transfer_memo.key.localized()
+  
+  let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
+  
+  return (["<name>\(String(describing: accountTitle)):</name>  <\(contentStyle)>\(String(describing: account))</\(contentStyle)>".set(style: "alertContent"),
+           "<name>\(String(describing: quantityTitle)):</name><\(contentStyle)>  \(String(describing: quanitity))</\(contentStyle)>".set(style: "alertContent"),
+           "<name>\(String(describing: feeTitle)):</name><\(contentStyle)>  \(String(describing: fee))</\(contentStyle)>".set(style: "alertContent"),
+           "<name>\(String(describing: memoTitle)):</name><\(contentStyle)>  \(String(describing: memo))</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])!
 }
 
 func checkMaxLength(_ sender:String,maxLength:Int) ->String{
@@ -415,3 +431,36 @@ func getTimeZone() -> TimeInterval {
   let timeZone = TimeZone.current
   return TimeInterval(timeZone.secondsFromGMT(for: Date()))
 }
+
+enum fundType : String {
+  case WITHDRAW
+  case DEPOSIT
+}
+
+func getWithdrawAndDepositRecords(_ accountName : String, asset : String, fundType : fundType, size : Int, offset : Int, expiration : Int ,callback:@escaping (TradeRecord?)->()) {
+  
+  var paragram = ["op":["accountName":accountName,"asset":asset, "fundType":fundType.rawValue, "size": Int32(size), "offset": Int32(offset),"expiration":expiration],"signer":"" ] as [String : Any]
+  
+  let operation = BitShareCoordinator.getRecodeLoginOperation(accountName, asset: asset, fundType: fundType.rawValue, size: Int32(size), offset: Int32(offset), expiration: Int32(expiration))
+  if let operation = operation {
+    let json = JSON(parseJSON: operation)
+    let signer = json["signer"].stringValue
+    paragram["signer"] = signer
+    SimpleHTTPService.recordLogin(paragram).done { (result) in
+      if let result = result {
+        paragram["signer"] = result
+        SimpleHTTPService.fetchRecords(paragram).done({ (data) in
+          callback(data)
+        }).catch({ (error) in
+          callback(nil)
+        })
+      }
+      else {
+        callback(nil)
+      }
+      }.catch { (error) in
+        callback(nil)
+    }
+  }
+}
+

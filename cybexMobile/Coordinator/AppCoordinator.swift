@@ -20,9 +20,11 @@ protocol AppStateManagerProtocol {
     _ subscriber: S, transform: ((Subscription<AppState>) -> Subscription<SelectedState>)?
   ) where S.StoreSubscriberStateType == SelectedState
   
-  func fetchData(_ params:AssetPairQueryParams, sub:Bool,callback:@escaping ()->())
-  func fetchData(_ params:AssetPairQueryParams, sub:Bool)
+  func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority, callback:@escaping ()->())
+  func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority)
   func fetchEthToRmbPrice()
+  
+  func fetchGetToCyb(_ callback:@escaping(Double)->())
 }
 
 class AppCoordinator {
@@ -32,10 +34,8 @@ class AppCoordinator {
   
   var fetchPariTimer:Repeater?
   
-  var firstFetchPairsCount = 0
-  var secondFetchPairsCount = 0
-  var thirdFetchPairsCount = 0
-
+  var getToCybRelation : Double?
+  
   var store = Store<AppState> (
     reducer: AppReducer,
     state: nil,

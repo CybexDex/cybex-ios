@@ -12,6 +12,8 @@ import RxSwift
 
 class RechargeSegment: UIView {
   
+  @IBOutlet weak var segmentControl: UISegmentedControl!
+  
   enum event:String {
     case segmentTouch
   }

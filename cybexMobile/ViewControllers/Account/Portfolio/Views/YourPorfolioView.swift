@@ -31,19 +31,43 @@ class YourPorfolioView:  UIView{
   
   var data: Any? {
     didSet {
-      if let portfolioData = data as? PortfolioData {
+      if let portfolioData = data as? MyPortfolioData {
         bottomView.isHidden = true
 
         self.icon.kf.setImage(with: URL(string: portfolioData.icon))
         
         name.text      = portfolioData.name
-        amount.text    = portfolioData.realAmount
-        if portfolioData.rbmPrice == "-"{
-          rmbPrice.isHidden = true
-        }else{
-          rmbPrice.text  = portfolioData.rbmPrice
+        amount.text    = portfolioData.limitAmount
+        
+        if portfolioData.name == "GET" {
+          self.rmbPrice.text = "≈¥0.00"
+          if let relation = app_coodinator.getToCybRelation, relation != 0 {
+            let changedCybAmount = portfolioData.realAmount.toDouble()! / relation
+            
+            let cybRmbPrice = changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble()! * app_state.property.eth_rmb_price
+            self.rmbPrice.text = "≈¥" + (changedCybAmount * cybRmbPrice).string(digits: 2, roundingMode: .down)
+          }
+          else {
+            app_coodinator.fetchGetToCyb { [weak self](relation) in
+              guard let `self` = self else { return }
+              let changedCybAmount = portfolioData.realAmount.toDouble()! / relation
+              
+              let cybRmbPrice = changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble()! * app_state.property.eth_rmb_price
+              self.rmbPrice.text = "≈¥" + (changedCybAmount * cybRmbPrice).string(digits: 2, roundingMode: .down)
+            }
+          }
         }
-        cybAmount.text = portfolioData.cybPrice
+        else {
+          if portfolioData.rbmPrice == "-"{
+            rmbPrice.text = "≈¥0.00"
+            
+          }else{
+            rmbPrice.text  = portfolioData.rbmPrice
+          }
+        }
+        cybAmount.text = portfolioData.realAmount
+
+        
         
         
 //        high_low_view.isHidden = balance.asset_type == AssetConfiguration.CYB

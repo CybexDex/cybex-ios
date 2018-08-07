@@ -22,7 +22,6 @@ class ExchangeViewController: BaseViewController {
         print("exchangeType : \(type)")
         self.childViewControllers.forEach { (viewController) in
           if var viewController = viewController as? TradePair{
-
             viewController.pariInfo = pair!
           }
         }

@@ -15,7 +15,7 @@
                 <outlet property="cancle" destination="6wo-p1-1o9" id="lKd-zw-epH"/>
                 <outlet property="contentView" destination="TpJ-p0-0qU" id="iQH-Jc-NEA"/>
                 <outlet property="ensure" destination="NnL-GZ-Fim" id="F22-hY-gRK"/>
-                <outlet property="ensureRight" destination="a4p-Jh-24J" id="Xr8-jl-oo2"/>
+                <outlet property="hSeparateView" destination="w9H-e4-pEm" id="1QF-3G-KzH"/>
                 <outlet property="title" destination="sNM-6o-N5e" id="Ftz-Wc-TQn"/>
             </connections>
         </placeholder>
@@ -31,7 +31,7 @@
                         <constraint firstAttribute="height" constant="50" id="3Ca-rY-G3h"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
@@ -44,66 +44,108 @@
                             <color key="value" red="0.129" green="0.161" blue="0.224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wo-p1-1o9">
-                    <rect key="frame" x="18" y="134" width="164.5" height="48"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="48" id="tpw-j0-72e"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                    <state key="normal" backgroundImage="btnColorGrey">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="alert_cancle"/>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="4"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="cancleClick:" destination="-1" eventType="touchUpInside" id="Uya-RL-ThR"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NnL-GZ-Fim">
-                    <rect key="frame" x="192.5" y="134" width="164.5" height="48"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="48" id="tsU-OL-cfW"/>
-                    </constraints>
-                    <state key="normal" backgroundImage="btnColorOrange">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="alert_ensure"/>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="4"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="ensureClick:" destination="-1" eventType="touchUpInside" id="ugc-QF-n7i"/>
-                    </connections>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="s3Z-4U-1wO">
+                    <rect key="frame" x="0.0" y="152" width="375" height="48"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wo-p1-1o9">
+                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="tpw-j0-72e"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="alert_cancle"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="cancleClick:" destination="-1" eventType="touchUpInside" id="Uya-RL-ThR"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NnL-GZ-Fim">
+                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="tsU-OL-cfW"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <state key="normal">
+                                <color key="titleColor" red="0.996" green="0.60799999999999998" blue="0.33300000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="alert_ensure"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="ensureClick:" destination="-1" eventType="touchUpInside" id="ugc-QF-n7i"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TpJ-p0-0qU">
-                    <rect key="frame" x="0.0" y="50" width="375" height="84"/>
+                    <rect key="frame" x="0.0" y="50" width="375" height="101"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rdy-of-kia">
+                    <rect key="frame" x="0.0" y="151" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="rdv-7X-QyE"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                            <color key="value" red="0.129" green="0.161" blue="0.224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.11" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9H-e4-pEm">
+                    <rect key="frame" x="186.5" y="152" width="1" height="48"/>
+                    <color key="backgroundColor" name="white" red="1.000" green="1.000" blue="1.000" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="wPV-cu-3Qi"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.11" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                            <color key="value" red="0.129" green="0.161" blue="0.224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="sNM-6o-N5e" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="6vC-D3-HWm"/>
-                <constraint firstItem="NnL-GZ-Fim" firstAttribute="width" secondItem="6wo-p1-1o9" secondAttribute="width" id="81M-RV-bWv"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="6wo-p1-1o9" secondAttribute="bottom" constant="18" id="GF4-2g-P6e"/>
-                <constraint firstItem="6wo-p1-1o9" firstAttribute="top" secondItem="TpJ-p0-0qU" secondAttribute="bottom" id="HGa-Xf-THM"/>
+                <constraint firstItem="w9H-e4-pEm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="BpY-rw-oLb"/>
+                <constraint firstItem="rdy-of-kia" firstAttribute="top" secondItem="TpJ-p0-0qU" secondAttribute="bottom" id="HGa-Xf-THM"/>
+                <constraint firstItem="rdy-of-kia" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KYy-W7-CPu"/>
+                <constraint firstItem="w9H-e4-pEm" firstAttribute="top" secondItem="rdy-of-kia" secondAttribute="bottom" id="O22-mr-Y3Y"/>
                 <constraint firstItem="TpJ-p0-0qU" firstAttribute="top" secondItem="sNM-6o-N5e" secondAttribute="bottom" id="P4C-eP-amu"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="sNM-6o-N5e" secondAttribute="trailing" id="Q84-i6-RaL"/>
-                <constraint firstItem="6wo-p1-1o9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="18" id="QRi-yF-2Ad"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="NnL-GZ-Fim" secondAttribute="trailing" constant="18" id="a4p-Jh-24J"/>
+                <constraint firstAttribute="trailing" secondItem="rdy-of-kia" secondAttribute="trailing" id="SPs-df-et2"/>
+                <constraint firstItem="s3Z-4U-1wO" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="igX-2a-dka"/>
+                <constraint firstAttribute="bottom" secondItem="w9H-e4-pEm" secondAttribute="bottom" id="mIC-rl-L9H"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="TpJ-p0-0qU" secondAttribute="trailing" id="mJm-Bu-KIr"/>
                 <constraint firstItem="TpJ-p0-0qU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="nw3-Cd-fs0"/>
-                <constraint firstItem="NnL-GZ-Fim" firstAttribute="top" secondItem="TpJ-p0-0qU" secondAttribute="bottom" id="up7-j0-0UE"/>
+                <constraint firstItem="s3Z-4U-1wO" firstAttribute="top" secondItem="rdy-of-kia" secondAttribute="bottom" id="oGE-nf-d3u"/>
+                <constraint firstAttribute="trailing" secondItem="s3Z-4U-1wO" secondAttribute="trailing" id="pfu-xx-ZhG"/>
+                <constraint firstItem="s3Z-4U-1wO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="rDy-0W-gDv"/>
                 <constraint firstItem="sNM-6o-N5e" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="vNn-nM-A2J"/>
-                <constraint firstItem="NnL-GZ-Fim" firstAttribute="leading" secondItem="6wo-p1-1o9" secondAttribute="trailing" constant="10" id="zi6-j2-A0Q"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -119,7 +161,5 @@
         </view>
     </objects>
     <resources>
-        <image name="btnColorGrey" width="349" height="48"/>
-        <image name="btnColorOrange" width="349" height="48"/>
     </resources>
 </document>

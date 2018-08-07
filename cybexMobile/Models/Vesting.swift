@@ -64,7 +64,9 @@ class PortfolioData{
     
     name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
     // 获得自己的个数
-    realAmount = getRealAmount(balance.asset_type, amount: balance.balance).stringValue.formatCurrency(digitNum: 5)
+    if let asset_info = app_data.assetInfo[balance.asset_type] {
+      realAmount = getRealAmount(balance.asset_type, amount: balance.balance).stringValue.formatCurrency(digitNum: asset_info.precision)
+    }
     
     // 获取对应CYB的个数
     let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "0" ? "-" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.toDouble())!)
@@ -81,7 +83,59 @@ class PortfolioData{
       rbmPrice    = "-"
     }
   }
+}
+
+// 我的资产的页面数据
+class MyPortfolioData{
+  var icon : String = ""
+  var name : String = ""
+  var realAmount : String = ""
+  var rbmPrice : String = ""
+  var limitAmount : String = ""
   
-  
-  
+  required init?(balance : Balance){
+    icon = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"
+    
+    name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
+    // 获得自己的个数
+    if let asset_info = app_data.assetInfo[balance.asset_type] {
+      realAmount = getRealAmount(balance.asset_type, amount: balance.balance).stringValue.formatCurrency(digitNum: asset_info.precision)
+    }
+    
+    // 获取对应CYB的个数
+    let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "0" ? "-" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.toDouble())!)
+    
+    if let cybCount = amountCYB.toDouble() {
+      rbmPrice = "≈¥" + String(cybCount * changeToETHAndCYB(AssetConfiguration.CYB).eth.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
+    }else{
+      rbmPrice = "-"
+    }
+    
+    //获取冻结资产
+    var limitDecimal: Decimal = 0
+    
+    if let limitArray = UserManager.shared.limitOrder.value {
+      for limit in limitArray {
+        if limit.isBuy {
+          if limit.sellPrice.base.assetID == balance.asset_type {
+            let amount = getRealAmount(balance.asset_type, amount: limit.sellPrice.base.amount)
+            limitDecimal = limitDecimal + amount
+          }
+        } else {
+          if limit.sellPrice.base.assetID == balance.asset_type {
+            let amount = getRealAmount(balance.asset_type, amount: limit.sellPrice.base.amount)
+            limitDecimal = limitDecimal + amount
+          }
+        }
+      }
+      if let asset_info = app_data.assetInfo[balance.asset_type] {
+        if limitDecimal == 0 {
+          limitAmount = R.string.localizable.frozen.key.localized() + "--"
+        } else {
+          log.debug("limitAmountlimitAmount\(limitDecimal.doubleValue)")
+          limitAmount = R.string.localizable.frozen.key.localized() + limitDecimal.string(digits: asset_info.precision, roundingMode: .down)
+        }
+      }
+    }
+  }
 }

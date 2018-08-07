@@ -32,22 +32,35 @@ struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
   }
   
   var parameters: Any? {
-    return [apiCategory.history, historyCatogery.get_account_history.rawValue, [accountID, "1.11.0", "100", "1.11.0"]]
+    return [apiCategory.history, historyCatogery.get_account_history.rawValue, [accountID, objectID.operation_history_object.rawValue, "100", objectID.operation_history_object.rawValue]]
   }
   
   func transferResponse(from resultObject: Any) throws -> Any {
     if let response = resultObject as? [[String: Any]] {
       var fillOrders: [FillOrder] = []
-      
+      var transferRecords : [TransferRecord] = []
       for i in response {
-        if let op = i["op"] as? [Any], let opcode = op[0] as? Int, opcode == ChainTypesOperations.fill_order.rawValue, var operation = op[1] as? [String: Any],let blockNum = i["block_num"] {
+        if let op = i["op"] as? [Any], let opcode = op[0] as? Int, var operation = op[1] as? [String: Any],let blockNum = i["block_num"] {
           operation["block_num"] = blockNum
-          if let fillorder = FillOrder(JSON: operation) {
-            fillOrders.append(fillorder)
+          if opcode == ChainTypesOperations.fill_order.rawValue {
+            if let fillorder = FillOrder(JSON: operation) {
+              fillOrders.append(fillorder)
+            }
+          }
+          else if opcode == ChainTypesOperations.transfer.rawValue {
+            // 转账记录
+            if let extensions = operation["extensions"] as? [Any], extensions.count > 0, let lockUpInfos = extensions[0] as? [Any], lockUpInfos.count >= 2, let lockUpInfo = lockUpInfos[1] as? [String:Any] {
+              operation["vesting_period"] = lockUpInfo["vesting_period"]
+              operation["public_key"] = lockUpInfo["public_key"]
+            }
+            
+            if let transferRecord = TransferRecord.deserialize(from: operation) {
+              transferRecords.append(transferRecord)
+            }
           }
         }
       }
-      return fillOrders
+      return (fillOrders,transferRecords)
     } else {
       throw CastError(actualValue: resultObject, expectedType: Response.self)
     }

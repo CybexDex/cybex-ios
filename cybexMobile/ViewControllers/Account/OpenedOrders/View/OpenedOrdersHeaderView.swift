@@ -17,7 +17,7 @@ class OpenedOrdersHeaderView: UIView {
     var data: Any? {
     didSet {
       if let value = data as? String {
-        self.totalValueL.text = value == "0" ? "-" : "≈¥" + value.formatCurrency(digitNum: 2)
+        self.totalValueL.text = value == "0" ? "≈¥0.00" : "≈¥" + value.formatCurrency(digitNum: 2)
       }
     }
   }

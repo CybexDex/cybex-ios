@@ -239,33 +239,13 @@ extension Decimal { // 解决double 计算精度丢失
     }
     return 0
   }
-}
-
-extension Double {
-  func string(digits:Int = 0) -> String {//会四舍五入
-    if digits == 0 {
-      return "\(self)"
-    }
-    
-    let mul = pow(10, digits.double)
-    
-    let floornum = Foundation.floor(self * mul) / mul
-    
-    return String(format: "%.\(digits)f", floornum)
-  }
-  
-  func preciseString() -> String {//解决显示科学计数法的格式
-    let decimal = Decimal(floatLiteral: self)
-    
-    return decimal.stringValue
-  }
   
   func tradePrice() -> (price:String, pricision:Int) {
     var pricision = 0
-    if self < 0.0001 {
+    if self < Decimal(floatLiteral: 0.0001) {
       pricision = 8
     }
-    else if self < 1 {
+    else if self < Decimal(floatLiteral: 1) {
       pricision = 6
     }
     else {
@@ -275,9 +255,64 @@ extension Double {
     return (self.string(digits: pricision), pricision)
   }
   
+  func string(digits:Int = 0, roundingMode: NSDecimalNumber.RoundingMode = .plain) -> String {
+    var decimal = self
+    var drounded = Decimal()
+    NSDecimalRound(&drounded, &decimal, digits, roundingMode)
+    
+    if digits == 0 {
+      return drounded.stringValue
+    }
+    
+    var formatterString : String = "0."
+    
+    for _ in 0 ..< digits {
+      formatterString.append("0")
+    }
+    
+    let formatter = NumberFormatter()
+    formatter.positiveFormat = formatterString
+    
+    return formatter.string(from: NSDecimalNumber(decimal: drounded)) ?? "0"
+  }
+}
+
+extension Double {
+  func string(digits:Int = 0,roundingMode: NSDecimalNumber.RoundingMode = .plain) -> String {
+    let decimal = Decimal(floatLiteral: self)
+
+    return decimal.string(digits: digits,roundingMode:roundingMode)
+  }
+  
+  func preciseString() -> String {//解决显示科学计数法的格式
+    let decimal = Decimal(floatLiteral: self)
+    
+    return decimal.stringValue
+  }
+  
+  func tradePrice() -> (price:String, pricision:Int ,amountPricision : Int) {
+    var pricision = 0
+    var amountPricision = 0
+    let decimal = Decimal(floatLiteral: self)
+    if decimal < Decimal(floatLiteral: 0.0001) {
+      pricision = 8
+      amountPricision = 2
+    }
+    else if decimal < Decimal(floatLiteral: 1) {
+      pricision = 6
+      amountPricision = 4
+    }
+    else {
+      pricision = 4
+      amountPricision = 6
+    }
+    
+    return (self.string(digits: pricision), pricision , amountPricision)
+  }
+  
   func formatCurrency(digitNum: Int ,usesGroupingSeparator:Bool = true) -> String {
     if self < 1000 {
-      return string(digits: digitNum)
+      return string(digits: digitNum,roundingMode:.down)
     }
     
     let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
@@ -346,12 +381,12 @@ extension String {
     return 0
   }
   
-  var tradePrice:(price:String, pricision:Int) {//0.0001  1   8 6 4
+  var tradePrice:(price:String, pricision:Int ,amountPricision : Int) {//0.0001  1   8 6 4
     if let oldPrice = self.toDouble() {
       return oldPrice.tradePrice()
     }
     
-    return (self, 0)
+    return (self, 0 , 0)
   }
   
   public func toDouble() -> Double? {
@@ -380,6 +415,33 @@ extension String {
     }
     return ""
   }
+}
+
+
+func transferTimeType(_ time : Int) -> String {
+  var result = ""
+  var times = 0
+  if time == 0 {
+    result = "0"
+    return result + R.string.localizable.transfer_unit_second.key.localized()
+  }
+  
+  if time / (3600 * 24) != 0 {
+    result = "\(time / (3600 * 24))" + R.string.localizable.transfer_unit_day.key.localized()
+  }
+  times = time % (3600 * 24)
+  if times / 3600 != 0 {
+    result += "\(times / 3600)" + R.string.localizable.transfer_unit_hour.key.localized()
+  }
+  times = times % 3600
+  if times / 60 != 0 {
+    result += "\(times / 60)" + R.string.localizable.transfer_unit_minite.key.localized()
+  }
+  times = times % 60
+  if times != 0 {
+    result += "\(times)" + R.string.localizable.transfer_unit_second.key.localized()
+  }
+  return result
 }
 
 

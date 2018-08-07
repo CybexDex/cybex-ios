@@ -13,12 +13,19 @@
 "nav.setting" = "设置";
 "nav.trade"   = "交易";
 
+
 "market" = "交易中心";
 "language" = "语言";
 "theme" = "主题";
 "dark" = "黑色";
 "light" = "白色";
 "version" = "版本";
+"frequency" = "行情刷新频率";
+
+"frequency_normal" = "普通行情";
+"frequency_time" = "实时行情";
+"frequency_wifi" = "仅在WiFi下实时行情";
+
 
 "login.hint" = "登录您的云钱包账户";
 "register.hint" = "创建您的云钱包账户";
@@ -172,11 +179,11 @@
 "recharge_save"     = "已保存二维码";
 "recharge_retry"    = "请在5分钟后重新生成";
 
-"utils_address"      = "提现地址:";
-"utils_amount"       = "提现数量:";
-"utils_withdrawfee"  = "转账手续费:";
-"utils_gatewayfee"   = "提现手续费:";
-"utils_receiveamount" = "到账数量:";
+"utils_address"      = "提现地址";
+"utils_amount"       = "提现数量";
+"utils_withdrawfee"  = "转账手续费";
+"utils_gatewayfee"   = "提现手续费";
+"utils_receiveamount" = "到账数量";
 
 "password_placeholder" = "请输入密码";
 "tip_title"   = "提示";
@@ -241,5 +248,80 @@
 
 "update_version" = "版本更新";
 
+// 充提现
+"withdraw_list" = "提现记录";
+"deposit_list" = "充值记录";
+"update_time" = "更新时间:";
+"recode_address" = "地址:";
+"recode_state_new" = "新建";
+"recode_state_upping" = "正在上链";
+"recode_state_noensure" = "待确认";
+"recode_state_fail" = "失败";
+"recode_state_success" = "成功";
+
+// 转账记录
+"transfer_list_title" = "转账记录";
+"transfer_done" = "已收到";
+"transfer_send" = "已转出";
+
+// 转账详情
+"transfer_detail" = "转账详情";
+"transfer_detail_send" = "支出";
+"transfer_detail_income" = "收入";
+"transfer_detail_income_address" = "付款账户";
+"transfer_detail_send_address" = "收款账户";
+"transfer_detail_time" = "锁定期";
+"transfer_detail_fee" = "手续费";
+"transfer_detail_mome" = "备注信息";
+"transfer_detail_click" = "点击查看";
+"transfer_detail_nodata" = "无";
+"transfer_ensure_title" = "转账确认";
+
+//转账
+
+"transfer_title" = "转账";
+"transfer_transfer" = "转账";
+"transfer_account" = "账户名";
+"transfer_account_pla" = "请输入收款方账户名";
+"transfer_crypto" = "币种";
+"transfer_crypto_pla" = "请选择转账币种";
+"transfer_quantity" = "金额";
+"transfer_memo" = "备注";
+"transfer_fee" = "手续费";
+"transfer_balance" = "余额";
+"picker_comfirm" = "确认";
+
+"transfer_unit_day" = "天";
+"transfer_unit_hour" = "时";
+"transfer_unit_minite" = "分";
+"transfer_unit_second" = "秒";
+
+
+
+"transfer_failed" = "转账失败";
+"transfer_successed" = "转账成功";
+"transfer_account_unexist" = "账户不存在";
+"transfer_balance_unenough" = "余额不足";
+
+//zsy add
+"my_property" = "我的资产";
+"order_value" = "委单";
+"transfer" = "转账";
+"account_property" = "账户资产估值(CYB)";
+"hello" = "您好，";
+"deposit_withdraw" = "充值提现";
+"frozen" = "冻结：";
+
+//zsy end
+
+"recode_nodata" = "暂无记录";
+"balance_nodata" = "暂无资产";
+
+
+"Loading more" = "加载更多";
+"No more data" = "没有更多的数据";
+"Loading..." = "正在加载";
+"Pull to refresh" = "下拉刷新";
+"Release to refresh" = "松开刷新";
 
 

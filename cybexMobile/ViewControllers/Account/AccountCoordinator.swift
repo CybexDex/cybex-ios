@@ -15,6 +15,8 @@ protocol AccountCoordinatorProtocol {
   func openYourProtfolio()
   func openSetting()
   func openRecharge()
+  
+  func openTransfreList()
 }
 
 protocol AccountStateManagerProtocol {
@@ -89,6 +91,12 @@ extension AccountCoordinator: AccountCoordinatorProtocol {
     let vc = R.storyboard.account.rechargeViewController()!
     let coordinator = RechargeCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator
+    self.rootVC.pushViewController(vc, animated: true)
+  }
+  
+  func openTransfreList() {
+    let vc = R.storyboard.recode.transferListViewController()!
+    vc.coordinator = TransferListCoordinator(rootVC: self.rootVC)
     self.rootVC.pushViewController(vc, animated: true)
   }
 }

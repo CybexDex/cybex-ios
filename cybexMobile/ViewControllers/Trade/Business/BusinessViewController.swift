@@ -126,7 +126,7 @@ class BusinessViewController: BaseViewController {
     
     let prirce = price.string(digits: base_info.precision) + " " + base_info.symbol.filterJade
     let amount = cur_amount.string(digits: quote_info.precision)  + " " + quote_info.symbol.filterJade
-    let total = (price * cur_amount).string(digits: base_info.precision) + " " + base_info.symbol.filterJade
+    let total = (price * cur_amount).string(digits: base_info.precision,roundingMode:.down) + " " + base_info.symbol.filterJade
 //    let feeInfo = (self.coordinator?.state.property.fee_amount.value.string)! + " " + fee_info.symbol.filterJade
     openedOrderDetailView.data = getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy)
   }
@@ -182,7 +182,10 @@ class BusinessViewController: BaseViewController {
         return
       }
       self.containerView.priceTextfield.text = text.tradePrice.price
-
+      guard let amountText = self.containerView.amountTextfield.text, amountText != "", amountText.toDouble() != 0 else {
+        return
+      }
+      self.containerView.amountTextfield.text = amountText.formatCurrency(digitNum: text.tradePrice.amountPricision)
     }
     
     NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.containerView.amountTextfield, queue: nil) {[weak self] (notifi) in
@@ -192,7 +195,14 @@ class BusinessViewController: BaseViewController {
         self.containerView.amountTextfield.text = ""
         return
       }
-      self.containerView.amountTextfield.text = text.tradePrice.price
+      
+      guard let priceText = self.containerView.priceTextfield.text, priceText != "", priceText.toDouble() != 0 else {
+        
+        self.containerView.amountTextfield.text = text.tradePrice.price
+        return
+      }
+      
+      self.containerView.amountTextfield.text = text.formatCurrency(digitNum: priceText.tradePrice.amountPricision)
     }
     
     NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self.containerView.amountTextfield, queue: nil) {[weak self](notifi) in
@@ -269,9 +279,14 @@ class BusinessViewController: BaseViewController {
         return
       }
 
-      let total = limit * amount
+      let total = Decimal(floatLiteral: limit) * Decimal(floatLiteral: amount)
 
-      self.containerView.endMoney.text = "\(total.tradePrice().price) \(base_info.symbol.filterJade)"
+      guard let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0 else {
+        self.containerView.endMoney.text = "\(total.tradePrice().price) \(base_info.symbol.filterJade)"
+        return
+      }
+      
+      self.containerView.endMoney.text = "\(total.string(digits: text.tradePrice.pricision, roundingMode: .down)) \(base_info.symbol.filterJade)"
 
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
@@ -319,7 +334,9 @@ extension BusinessViewController {
     }
   }
   
-  @objc func buttonDidClicked(_ data: [String: Any]) {  
+  @objc func buttonDidClicked(_ data: [String: Any]) {
+    self.containerView.priceTextfield.endEditing(true)
+    self.containerView.amountTextfield.endEditing(true)
     if self.coordinator!.parentIsLoading(self.parent) {
       return
     }
@@ -328,6 +345,7 @@ extension BusinessViewController {
       app_coodinator.showLogin()
       return
     }
+    
     
     guard checkBalance() else { return }
     
