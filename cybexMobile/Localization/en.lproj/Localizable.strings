@@ -190,11 +190,11 @@
 "order_create_fail" = "Place order fail";
 
 
-"utils_address"      = "Withdrawal Address:";
-"utils_amount"       = "Amount:";
-"utils_withdrawfee"  = "Transfer Fee:";
-"utils_gatewayfee"   = "Gateway Fee:";
-"utils_receiveamount" = "Receive Amount:";
+"utils_address"      = "Withdrawal Address";
+"utils_amount"       = "Amount";
+"utils_withdrawfee"  = "Transfer Fee";
+"utils_gatewayfee"   = "Gateway Fee";
+"utils_receiveamount" = "Receive Amount";
 
 "password_placeholder" = "Password";
 "tip_title"   = "Tip";

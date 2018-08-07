@@ -92,6 +92,24 @@ extension AppCoordinator: AppStateManagerProtocol {
     timer?.start()
     
   }
+  
+  
+  
+  func fetchGetToCyb(_ callback:@escaping(Double)->()) {
+    let request = changeToCybRequest(response: { [weak self](data) in
+      guard let `self` = self else { return }
+      if let data = data as? String ,let dataDouble = data.toDouble(), dataDouble != 0 {
+        self.getToCybRelation = 1 / dataDouble
+        callback(1 / dataDouble)
+      }
+      else {
+        callback(0)
+      }
+      
+      }, baseName: AssetConfiguration.CYB, quoteName: "1.3.17")
+    CybexWebSocketService.shared.send(request: request)
+  }
+  
 }
 
 extension AppCoordinator {

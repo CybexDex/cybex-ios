@@ -98,7 +98,7 @@ class RechargeDetailViewController: BaseViewController {
     NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: contentView.amountView.content, queue: nil) { [weak self](notification) in
       guard let `self` = self else {return}
       
-      if let text = self.contentView.amountView.content.text,let amount = text.toDouble(),amount > 0,let balance = self.balance,let balance_info = app_data.assetInfo[balance.asset_type]{
+      if let text = self.contentView.amountView.content.text,let amount = text.toDouble(),amount >= 0,let balance = self.balance,let balance_info = app_data.assetInfo[balance.asset_type]{
         if let coordinator =  self.coordinator, let value = coordinator.state.property.data.value ,let precision = value.precision{
           self.precision = precision
           self.contentView.amountView.content.text = checkMaxLength(text, maxLength: value.precision ?? balance_info.precision)

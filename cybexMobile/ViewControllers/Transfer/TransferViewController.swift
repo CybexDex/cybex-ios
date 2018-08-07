@@ -84,7 +84,7 @@ class TransferViewController: BaseViewController {
           self.transferView.crypto = info.symbol.filterJade
           self.transferView.precision = info.precision
           let realBalance = getRealAmountDouble(balance.asset_type, amount: balance.balance)
-          self.transferView.balance = R.string.localizable.transfer_balance.key.localized() + realBalance.string(digits: info.precision) + (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!
+          self.transferView.balance = R.string.localizable.transfer_balance.key.localized() + realBalance.string(digits: info.precision) + " " +  (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!
         }
       }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -129,7 +129,7 @@ class TransferViewController: BaseViewController {
       let memo = self.transferView.memoView.textView.text,
       let fee = self.coordinator?.state.property.fee.value {
       if let feeInfo = app_data.assetInfo[fee.asset_id] {
-        let data = getTransferInfo(account, quanitity: amount + (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!, fee: (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade, memo: memo)
+        let data = getTransferInfo(account, quanitity: amount + " " + (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!, fee: (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade, memo: memo)
         showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data)
       }
     }

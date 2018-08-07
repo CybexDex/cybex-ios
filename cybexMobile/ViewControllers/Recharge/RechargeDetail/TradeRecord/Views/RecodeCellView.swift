@@ -24,6 +24,7 @@ class RecodeCellView: UIView {
         time.text = data.updateAt.string(withFormat: "MM/dd HH:mm:ss")
         name.text = data.asset.filterJade
         state.text = data.state.desccription()
+        updateHeight()
       }
     }
   }
@@ -44,7 +45,7 @@ class RecodeCellView: UIView {
   
   fileprivate func dynamicHeight() -> CGFloat {
     let lastView = self.subviews.last?.subviews.last
-    return lastView!.bottom
+    return lastView!.bottom + 8
   }
   
   override func layoutSubviews() {

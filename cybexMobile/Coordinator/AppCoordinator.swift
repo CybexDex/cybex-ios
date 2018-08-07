@@ -23,6 +23,8 @@ protocol AppStateManagerProtocol {
   func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority, callback:@escaping ()->())
   func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority)
   func fetchEthToRmbPrice()
+  
+  func fetchGetToCyb(_ callback:@escaping(Double)->())
 }
 
 class AppCoordinator {
@@ -31,6 +33,8 @@ class AppCoordinator {
   var timer:Repeater?
   
   var fetchPariTimer:Repeater?
+  
+  var getToCybRelation : Double?
   
   var store = Store<AppState> (
     reducer: AppReducer,
