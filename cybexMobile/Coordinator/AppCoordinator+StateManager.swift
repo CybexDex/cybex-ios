@@ -87,6 +87,11 @@ extension AppCoordinator: AppStateManagerProtocol {
       main { [weak self] in
         self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
       }
+      
+      let marketList = try! await(SimpleHTTPService.fetchMarketListJson())
+      main { [weak self] in
+        self?.store.dispatch(FecthMarketListAction(data: marketList))
+      }
     }
     
     timer?.start()
@@ -113,13 +118,12 @@ extension AppCoordinator: AppStateManagerProtocol {
 }
 
 extension AppCoordinator {
-  
+
   /*
    1 根据base分组
    2 根据refreshTime刷新
    3 延迟函数
    */
-  
 
   func request24hMarkets(_ pairs: [Pair], sub: Bool = true ,totalTime:Double = 3,splits:Int = 3, priority:Operation.QueuePriority = .normal ,isNoFirst: Bool = true) {
     let now = Date()
@@ -143,45 +147,6 @@ extension AppCoordinator {
     }else {
       fetch24Markets(UserManager.shared.refreshTime, startTime: start, now: now,sub: sub,priority: priority)
     }
- 
-    
-//    // 筛选后的pairs
-//    let length : Int = filterPairs.count / 3
-//    if length > 1,!sub {
-//
-//      for index in 0...length - 1 {
-//        let pair = filterPairs[index]
-//
-//        AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority) {
-//
-//        }
-//      }
-//      SwifterSwift.delay(milliseconds: 1000) {
-//        for index in length...2*length {
-//
-//          let pair = filterPairs[index]
-//
-//          AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority) {
-//
-//          }
-//        }
-//      }
-//      SwifterSwift.delay(milliseconds: 2000) {
-//        for index in 2*length+1...filterPairs.count - 1 {
-//
-//          let pair = filterPairs[index]
-//
-//          AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority) {
-//
-//          }
-//        }
-//      }
-//    }else {
-//      for pair in filterPairs {
-//        AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority)
-//      }
-//    }
-    
   }
   
   
@@ -226,6 +191,7 @@ extension AppCoordinator {
           return
         }
         log.debug("freshTime ----\(Date())")
+        
         self.state.property.otherRequestRelyData.accept(1)
         self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority: priority, isNoFirst: false)
       }
