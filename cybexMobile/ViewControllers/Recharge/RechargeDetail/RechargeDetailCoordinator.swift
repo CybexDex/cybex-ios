@@ -25,9 +25,8 @@ protocol RechargeDetailStateManagerProtocol {
   
   func fetchWithDrawInfoData(_ assetName:String)
   func verifyAddress(_ assetName:String,address:String,callback:@escaping (Bool)->())
-  func getGatewayFee(_ assetId : String,amount:String,address:String)
-  func login(_ password : String,callback:@escaping (Bool)->())
-  func getObjects(assetId:String,amount:String,address:String,fee_id:String,fee_amount:String,callback:@escaping (Any)->())
+  func getGatewayFee(_ assetId : String,amount:String,address:String,isEOS:Bool)
+  func getObjects(assetId:String,amount:String,address:String,fee_id:String,fee_amount:String,isEOS:Bool,callback:@escaping (Any)->())
   func fetchWithDrawMessage(callback:@escaping (String)->())
   func getFinalAmount(fee_id:String,amount:Decimal,available:Double) -> (Decimal,String)
 }
@@ -91,9 +90,10 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
   }
   
   
-  func getGatewayFee(_ assetId : String,amount:String,address:String){
+  func getGatewayFee(_ assetId : String,amount:String,address:String,isEOS:Bool){
       if let memo_key = self.state.property.memo_key.value{
         let name = app_data.assetInfo[assetId]?.symbol.filterJade
+        let memo = self.state.property.memo.value
         if var amount = amount.toDouble(){
           let value = pow(10, (app_data.assetInfo[assetId]?.precision)!)
           amount = amount * Double(truncating: value as NSNumber)
@@ -104,7 +104,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                          amount: Int32(amount),
                                                                          fee_id: 0,
                                                                          fee_amount: 0,
-                                                                         memo: GraphQLManager.shared.memo(name!, address: address),
+                                                                         memo: isEOS ? GraphQLManager.shared.memo(name!, address: address + "[\(memo)]") : GraphQLManager.shared.memo(name!, address: address),
                                                                          from_memo_key: UserManager.shared.account.value?.memo_key,
                                                                          to_memo_key: memo_key){
             
@@ -117,7 +117,6 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         }
     }
   }
-  
   
   func verifyAddress(_ assetName:String,address:String,callback:@escaping (Bool)->()){
     async {
@@ -132,18 +131,11 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
   }
   
-  func login(_ password : String,callback:@escaping (Bool)->()){
-    if let name = UserManager.shared.name.value {
-      UserManager.shared.unlock(name, password: password) { (isAuthory, account) in
-        callback(isAuthory)
-      }
-    }
-  }
-  
-  func getObjects(assetId:String,amount:String,address:String,fee_id:String,fee_amount:String,callback:@escaping (Any)->()){
+  func getObjects(assetId:String,amount:String,address:String,fee_id:String,fee_amount:String,isEOS:Bool,callback:@escaping (Any)->()){
     getChainId { (id) in
       if let memo_key = self.state.property.memo_key.value{
         let name = app_data.assetInfo[assetId]?.symbol.filterJade
+        let memo = self.state.property.memo.value
         let requeset = GetObjectsRequest(ids: ["2.1.0"]) { (infos) in
           if let infos = infos as? (block_id:String,block_num:String){
             if var amount = amount.toDouble(){
@@ -163,7 +155,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                 amount: Int32(amount),
                                                                 fee_id: Int32(getUserId(fee_id)),
                                                                 fee_amount: Int32(fee_amout),
-                                                                memo: GraphQLManager.shared.memo(name!, address: address),
+                                                                memo: isEOS ? GraphQLManager.shared.memo(name!, address: address + "[\(memo)]") : GraphQLManager.shared.memo(name!, address: address),
                                                                 from_memo_key: UserManager.shared.account.value?.memo_key,
                                                                 to_memo_key: memo_key)
               

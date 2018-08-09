@@ -137,7 +137,8 @@ extension TradeRecodeViewController : UITableViewDelegate,UITableViewDataSource 
     if let asset_info = self.assetInfo {
       cell.cellView.icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + asset_info.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
       let record = self.data[indexPath.row]
-      cell.cellView.amount.text = getRealAmount(asset_info.id, amount: String(record.amount)).string.formatCurrency(digitNum: asset_info.precision) + asset_info.symbol.filterJade
+      
+      cell.cellView.amount.text = getRealAmount(asset_info.id, amount: String(record.amount)).string.formatCurrency(digitNum: asset_info.precision) + " " +  asset_info.symbol.filterJade
       cell.setup(record, indexPath: indexPath)
     }
     return cell

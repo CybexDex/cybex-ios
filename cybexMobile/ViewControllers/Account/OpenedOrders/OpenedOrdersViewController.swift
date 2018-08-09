@@ -79,20 +79,20 @@ class OpenedOrdersViewController: BaseViewController {
           var priceInfo = ""
           var amountInfo = ""
           var totalInfo = ""
-          let feeInfo = amount.doubleValue.string(digits: fee_info.precision) + " " + fee_info.symbol.filterJade
+          let feeInfo = amount.string(digits: fee_info.precision,roundingMode:.down) + " " + fee_info.symbol.filterJade
           if baseInfo.id == pair.base{
             let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
             let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-            totalInfo = baseAmount.doubleValue.string(digits: baseInfo.precision) + " " + baseInfo.symbol.filterJade
-            amountInfo = quoteAmount.doubleValue.string(digits: quoteInfo.precision) + " " + quoteInfo.symbol.filterJade
-            priceInfo =  (baseAmount / quoteAmount).doubleValue.string(digits: baseInfo.precision) + " " + baseInfo.symbol.filterJade
+            totalInfo = baseAmount.string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
+            amountInfo = quoteAmount.string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
+            priceInfo =  (baseAmount / quoteAmount).string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
           }else{
             let baseAmount  = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
             let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
             
-            totalInfo = baseAmount.doubleValue.string(digits: quoteInfo.precision) + " " + quoteInfo.symbol.filterJade
-            amountInfo = quoteAmount.doubleValue.string(digits: baseInfo.precision) + " " + baseInfo.symbol.filterJade
-            priceInfo =  (baseAmount / quoteAmount).doubleValue.string(digits: quoteInfo.precision) + " " + quoteInfo.symbol.filterJade
+            totalInfo = baseAmount.string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
+            amountInfo = quoteAmount.string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
+            priceInfo =  (baseAmount / quoteAmount).string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
           }
           
           self.showConfirm(ensure_title, attributes: getOpenedOrderInfo(price: priceInfo, amount: amountInfo, total: totalInfo, fee: feeInfo, isBuy: order.isBuy))

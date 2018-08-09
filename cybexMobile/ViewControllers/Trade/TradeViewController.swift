@@ -66,6 +66,8 @@ class TradeViewController: BaseViewController {
     }
   }
   
+  var isfirstRefresh : Bool = true
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -191,7 +193,10 @@ class TradeViewController: BaseViewController {
       self.childViewControllers.forEach { (viewController) in
         if var viewController = viewController as? TradePair{
           viewController.pariInfo = self.pair
-          viewController.refresh()
+          if self.isfirstRefresh {
+            viewController.refresh()
+            self.isfirstRefresh = false
+          }
         }
       }
     }

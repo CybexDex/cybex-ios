@@ -72,6 +72,7 @@ class BusinessViewController: BaseViewController {
     self.containerView.quoteName.text = quote_info.symbol.filterJade
     
     self.coordinator?.getFee(self.type == .buy ? base_info.id : quote_info.id)
+  
     self.coordinator?.getBalance((self.type == .buy ? base_info.id : quote_info.id))
     
     changeButtonState()
@@ -115,7 +116,8 @@ class BusinessViewController: BaseViewController {
   
 
   func showOpenedOrderInfo(){
-    guard let base_info = app_data.assetInfo[(self.pair?.base)!], let quote_info = app_data.assetInfo[(self.pair?.quote)!],let _ = app_data.assetInfo[(self.coordinator?.state.property.feeID.value)!],  self.coordinator?.state.property.fee_amount.value != 0, let cur_amount = self.coordinator?.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.coordinator?.state.property.price.value.toDouble(), price != 0 else { return }
+    guard let base_info = app_data.assetInfo[(self.pair?.base)!], let quote_info = app_data.assetInfo[(self.pair?.quote)!],let _ = app_data.assetInfo[(self.coordinator?.state.property.feeID.value)!],  self.coordinator?.state.property.fee_amount.value != 0, let cur_amount = self.coordinator?.state.property.amount.value, let decimal_amount = Decimal(string:cur_amount), let price = self.coordinator?.state.property.price.value, let decimal_price = Decimal(string:price) else { return }
+    
     
     let openedOrderDetailView = StyleContentView(frame: .zero)
     let ensure_title = self.type == .buy ? R.string.localizable.openedorder_buy_ensure.key.localized() : R.string.localizable.openedorder_sell_ensure.key.localized()
@@ -124,9 +126,9 @@ class BusinessViewController: BaseViewController {
     ShowToastManager.shared.showAnimationInView(self.view)
     ShowToastManager.shared.delegate = self
     
-    let prirce = price.string(digits: base_info.precision) + " " + base_info.symbol.filterJade
-    let amount = cur_amount.string(digits: quote_info.precision)  + " " + quote_info.symbol.filterJade
-    let total = (price * cur_amount).string(digits: base_info.precision,roundingMode:.down) + " " + base_info.symbol.filterJade
+    let prirce = decimal_price.string(digits: base_info.precision,roundingMode:.down) + " " + base_info.symbol.filterJade
+    let amount = decimal_amount.string(digits: quote_info.precision,roundingMode:.down)  + " " + quote_info.symbol.filterJade
+    let total = (decimal_price * decimal_amount).string(digits: base_info.precision,roundingMode:.down) + " " + base_info.symbol.filterJade
 //    let feeInfo = (self.coordinator?.state.property.fee_amount.value.string)! + " " + fee_info.symbol.filterJade
     openedOrderDetailView.data = getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy)
   }
@@ -186,6 +188,7 @@ class BusinessViewController: BaseViewController {
         return
       }
       self.containerView.amountTextfield.text = amountText.formatCurrency(digitNum: text.tradePrice.amountPricision)
+      self.coordinator?.state.property.price.accept(self.containerView.priceTextfield.text!)
     }
     
     NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.containerView.amountTextfield, queue: nil) {[weak self] (notifi) in
@@ -203,6 +206,7 @@ class BusinessViewController: BaseViewController {
       }
       
       self.containerView.amountTextfield.text = text.formatCurrency(digitNum: priceText.tradePrice.amountPricision)
+      self.coordinator?.state.property.amount.accept(self.containerView.amountTextfield.text!)
     }
     
     NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self.containerView.amountTextfield, queue: nil) {[weak self](notifi) in
@@ -228,7 +232,7 @@ class BusinessViewController: BaseViewController {
       guard let `self` = self else { return }
 
       guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
-
+      
       self.coordinator?.getBalance((self.type == .buy ? base_info.id : quote_info.id))
       self.coordinator?.getFee(self.type == .buy ? base_info.id : quote_info.id)
 
@@ -240,9 +244,11 @@ class BusinessViewController: BaseViewController {
 
       guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote], balance != 0 else {
         self.containerView.balance.text = "--"
+        self.containerView.tipView.isHidden = false
         return
-
+      
       }
+      self.containerView.tipView.isHidden = true
 
       let info = self.type == .buy ? base_info : quote_info
       let symbol = info.symbol.filterJade

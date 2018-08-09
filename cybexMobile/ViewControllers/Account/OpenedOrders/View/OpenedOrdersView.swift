@@ -46,7 +46,15 @@ class OpenedOrdersView:  UIView{
             let base_price = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount) / getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
             
             let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
-            let quoteAmount = baseAmount / base_price
+            
+            var quoteAmount : Decimal!
+            if order.forSale == order.sellPrice.base.amount {
+              quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
+            }
+            else {
+              quoteAmount = baseAmount / base_price
+            }
+            
             self.amount.text = quoteAmount.string(digits: quote_info.precision,roundingMode:.down) + " " + quote_info.symbol.filterJade
             if self.basePriceView.isHidden == false{
               self.price.text =  baseAmount.string(digits: base_info.precision,roundingMode:.down) + " " + base_info.symbol.filterJade
@@ -65,12 +73,18 @@ class OpenedOrdersView:  UIView{
             let base_price = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount) / getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
             let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
 
-            let baseAmount = base_price * quoteAmount
+            var baseAmount : Decimal!
+            if order.forSale == order.sellPrice.base.amount {
+              baseAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
+            }
+            else {
+              baseAmount = base_price * quoteAmount
+            }
 
             self.amount.text = quoteAmount.string(digits: quote_info.precision,roundingMode:.down) + " " +  quote_info.symbol.filterJade
             if self.basePriceView.isHidden == false{
               self.price.text = baseAmount.string(digits:  base_info.precision,roundingMode:.down) + " " + base_info.symbol.filterJade
-              self.basePrice.text = base_price.string(digits: quote_info.precision,roundingMode:.down) + " " + base_info.symbol.filterJade
+              self.basePrice.text = base_price.string(digits: base_info.precision,roundingMode:.down) + " " + base_info.symbol.filterJade
 
             }else{
               self.price.text = base_price.string(digits: base_info.precision,roundingMode:.down) + " " + base_info.symbol.filterJade

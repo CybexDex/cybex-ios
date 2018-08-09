@@ -29,11 +29,11 @@ let TrackingMiddleware: Middleware<Any> = { dispatch, getState in
     return { action in
       
       if let action = action as? StartLoading {
-       
-//        action.vc?.startLoading()
+        
+        //        action.vc?.startLoading()
       }
       else if let action = action as? EndLoading {
-//        action.vc?.endLoading()
+        //        action.vc?.endLoading()
         
       }
       else if let action = action as? RefreshState {
@@ -101,7 +101,7 @@ let s = DispatchSemaphore(value: 1)
 
 func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppPropertyState {
   var state = state ?? AppPropertyState()
-
+  
   var ids = state.subscribeIds ?? [:]
   var refreshTimes = state.pairsRefreshTimes ?? [:]
   var klineDatas = state.detailData ?? [:]
@@ -110,9 +110,9 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
   case let action as MarketsFetched:
     async {
       if s.wait(timeout: .distantFuture) == .success {
-
+        
         let (matrixs, data) = applyMarketsToState(state, action: action)
-       
+        
         main {
           state.matrixs.accept(matrixs)
           state.data.accept(data)
@@ -122,7 +122,7 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
         }
       }
     }
-
+    
   case let action as SubscribeSuccess:
     ids[action.pair] = action.id
     refreshTimes[action.pair] = Date().timeIntervalSince1970
@@ -153,7 +153,8 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
       }
     }
     state.rmb_prices = action.price
-  
+  case let action as FecthMarketListAction:
+    state.importMarketLists = action.data
   default:
     break
   }
@@ -168,7 +169,7 @@ func applyMarketsToState(_ state: AppPropertyState, action:MarketsFetched) -> (m
   guard let base_info = state.assetInfo[action.pair.firstAssetId], let quote_info = state.assetInfo[action.pair.secondAssetId] else {
     return (matrixs, data)
   }
-
+  
   var homeBucket = HomeBucket(base: action.pair.firstAssetId, quote: action.pair.secondAssetId, bucket: [], base_info: base_info, quote_info: quote_info)
   if action.assets.count != 0  {
     homeBucket.bucket = action.assets
@@ -177,7 +178,7 @@ func applyMarketsToState(_ state: AppPropertyState, action:MarketsFetched) -> (m
   let (contain, index) = data.containHashable(homeBucket)
   
   let matrix = BucketMatrix(homeBucket)
-
+  
   if !contain {
     data.append(homeBucket)
   }
@@ -185,7 +186,6 @@ func applyMarketsToState(_ state: AppPropertyState, action:MarketsFetched) -> (m
     data[index] = homeBucket
   }
   matrixs[Pair(base:homeBucket.base, quote:homeBucket.quote)] = matrix
-
   
   if data.count > 1 {
     
@@ -202,7 +202,7 @@ func applyMarketsToState(_ state: AppPropertyState, action:MarketsFetched) -> (m
       
       let last_matrix = matrixs.values.filter({ last.base == $0.base && last.quote == $0.quote }).first!
       let cur_matrix = matrixs.values.filter({ cur.base == $0.base && cur.quote == $0.quote }).first!
-
+      
       return last_matrix.base_volume_origin > cur_matrix.base_volume_origin
     }
     
@@ -212,5 +212,5 @@ func applyMarketsToState(_ state: AppPropertyState, action:MarketsFetched) -> (m
     
     return (matrixs,data)
   }
-
+  
 }
