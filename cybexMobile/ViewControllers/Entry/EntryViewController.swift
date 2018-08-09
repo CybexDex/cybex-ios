@@ -25,7 +25,7 @@ class EntryViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    configLeftNavButton(#imageLiteral(resourceName: "ic_close_24_px"))
+    configLeftNavButton(UIImage(named: R.image.icClose24Px.name))
     
     setupUI()
     setupEvent()

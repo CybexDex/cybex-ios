@@ -34,16 +34,21 @@ struct AppPropertyState {
   var importMarketLists : [ImportantMarketPair] = []
   
   func filterQuoteAsset(_ base:String) -> [HomeBucket] {
-    var data = self.data.value.filter({ (bucket) -> Bool in
+    
+    return self.data.value.filter({ (bucket) -> Bool in
       return bucket.base == base
     })
     
-    for market in self.importMarketLists {
-      if base == market.base {
-        data = data.filter({market.quotes.contains($0.quote)}) + data.filter({!market.quotes.contains($0.quote)})
-      }
-    }
-    return data
+//    var data = self.data.value.filter({ (bucket) -> Bool in
+//      return bucket.base == base
+//    })
+//
+//    for market in self.importMarketLists {
+//      if base == market.base {
+//        data = data.filter({market.quotes.contains($0.quote)}) + data.filter({!market.quotes.contains($0.quote)})
+//      }
+//    }
+//    return data
   }
 }
 

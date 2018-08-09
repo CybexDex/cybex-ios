@@ -154,7 +154,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
 //    let total = price * cur_amount
     let assetID = isBuy ? base_info.id : quote_info.id
     
-    let amount = isBuy ? Int32((total * pow(10, base_info.precision)).string(digits: 0, roundingMode: .down)) : Int32((cur_amount_Decimal * pow(10, base_info.precision)).string(digits: 0, roundingMode: .down))
+    let amount = isBuy ? Int32((total * pow(10, base_info.precision)).string(digits: 0, roundingMode: .down)) : Int32((cur_amount_Decimal * pow(10, quote_info.precision)).string(digits: 0, roundingMode: .down))
 //    let amount = isBuy ? Int32(round(total * pow(10, base_info.precision.double))) : Int32(round(cur_amount * pow(10, quote_info.precision.double)))
 
     let receive_assetID = isBuy ? quote_info.id : base_info.id

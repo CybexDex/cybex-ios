@@ -184,6 +184,7 @@
 "utils_withdrawfee"  = "转账手续费";
 "utils_gatewayfee"   = "提现手续费";
 "utils_receiveamount" = "到账数量";
+"withdraw_memo" = "备注";
 
 "password_placeholder" = "请输入密码";
 "tip_title"   = "提示";

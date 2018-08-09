@@ -45,7 +45,7 @@ class RecodeCellView: UIView {
   
   fileprivate func dynamicHeight() -> CGFloat {
     let lastView = self.subviews.last?.subviews.last
-    return lastView!.bottom + 8
+    return lastView!.bottom
   }
   
   override func layoutSubviews() {

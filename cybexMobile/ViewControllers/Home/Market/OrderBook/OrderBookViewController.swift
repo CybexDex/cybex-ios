@@ -124,8 +124,6 @@ class OrderBookViewController: BaseViewController {
             self.tradeView.data = s
           }
         }
-        
-        
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   
@@ -169,7 +167,6 @@ class OrderBookViewController: BaseViewController {
         }
       }
     }
-    
   }
 }
 

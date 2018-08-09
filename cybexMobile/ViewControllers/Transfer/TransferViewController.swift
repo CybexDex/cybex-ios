@@ -25,8 +25,6 @@ class TransferViewController: BaseViewController {
     getFee()
   }
   
-  
-  
   func commonObserveState() {
     coordinator?.subscribe(errorSubscriber) { sub in
       return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in

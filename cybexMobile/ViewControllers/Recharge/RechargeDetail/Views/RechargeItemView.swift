@@ -23,6 +23,7 @@ class RechargeItemView: UIView {
   @IBOutlet weak var content: ImageTextField!
   @IBOutlet weak var btn: UIButton!
   
+  @IBOutlet weak var bottomLineView: UIView!
   
   @IBInspectable var name : String = "" {
     didSet{
@@ -44,7 +45,12 @@ class RechargeItemView: UIView {
     }
   }
   
-  
+  @IBInspectable var isShowLineView : Bool = false {
+    didSet {
+      bottomLineView.isHidden = !isShowLineView
+    }
+  }
+
   var btn_type : Recharge_Type? {
     didSet{
       switch btn_type! {
@@ -60,7 +66,7 @@ class RechargeItemView: UIView {
     }
   }
   
- 
+  
   
   func setupUI(){
     self.content.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
