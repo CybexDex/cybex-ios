@@ -35,7 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Fabric.with([Crashlytics.self, Answers.self])
     EasyAnimation.enable()
     
-    
+    setupAnalytics()
+
     NetworkActivityLogger.shared.startLogging()
     NetworkActivityLogger.shared.level = .error
     if Defaults.hasKey(.frequency_type){
@@ -79,6 +80,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
   
+  func setupAnalytics() {
+    guard let gai = GAI.sharedInstance() else {
+      assert(false, "Google Analytics not configured correctly")
+    }
+    gai.tracker(withTrackingId: "UA-121082216-2")
+    // Optional: automatically report uncaught exceptions.
+    gai.trackUncaughtExceptions = true
+    
+    // Optional: set Logger to VERBOSE for debug information.
+    // Remove before app release.
+    gai.logger.logLevel = .verbose;
+  }
   
   
   func applicationWillResignActive(_ application: UIApplication) {

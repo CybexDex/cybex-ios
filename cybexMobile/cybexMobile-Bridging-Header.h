@@ -8,3 +8,7 @@
 #import "BitShareCoordinator.h"
 #import <FCUUID/FCUUID.h>
 #import <SocketRocket/SocketRocket.h>
+
+#import <GoogleAnalytics/GAI.h>
+#import <GoogleAnalytics/GAIDictionaryBuilder.h>
+#import <GoogleAnalytics/GAIFields.h>
