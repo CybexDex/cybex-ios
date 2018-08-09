@@ -122,6 +122,7 @@ target 'cybexMobile' do
   inhibit_all_warnings!
 
   pod 'Reveal-SDK', :configurations => ['Debug']
+  pod 'GoogleAnalytics'
   
   fabric
   network

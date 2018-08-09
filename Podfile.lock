@@ -31,6 +31,7 @@ PODS:
   - FBRetainCycleDetector (0.1.4)
   - FCUUID (1.3.1):
     - UICKeyChainStore (~> 2.1.0)
+  - GoogleAnalytics (3.17.0)
   - GRDB.swift (3.2.0)
   - GrowingTextView (0.5.6)
   - Guitar (0.4.1)
@@ -179,6 +180,7 @@ DEPENDENCIES:
   - ESTabBarController-swift
   - Fabric
   - FCUUID
+  - GoogleAnalytics
   - GRDB.swift
   - GrowingTextView
   - Guitar
@@ -261,6 +263,7 @@ SPEC REPOS:
     - Fabric
     - FBRetainCycleDetector
     - FCUUID
+    - GoogleAnalytics
     - GRDB.swift
     - GrowingTextView
     - Guitar
@@ -370,6 +373,7 @@ SPEC CHECKSUMS:
   Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
+  GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GRDB.swift: c5bb04b25a9931fec937920e913787e45f96124f
   GrowingTextView: 8958f4fb7419de58dd622021b2d0696487e00e70
   Guitar: 7410dc37f2c12d5b8b67711d771608900c37636e
@@ -436,6 +440,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: 93ce2cc6a8818b946bbd9021fa0f1739c08ae128
+PODFILE CHECKSUM: 9fd098c299ea17da3ecf4a0a5495e6c70470718a
 
 COCOAPODS: 1.5.3
