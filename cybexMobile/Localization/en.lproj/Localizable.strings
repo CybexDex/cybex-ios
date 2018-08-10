@@ -83,6 +83,9 @@
 "password.validate.error.1" = "The password must at least 12 characters";
 "password.validate.error.2" = "The password is not consistent";
 
+"password.validate.error.3" = "Password must be at least 12 characters and must contain upper case, lower case, numbers and special characters";
+
+
 "register.fail" = "fail to register";
 "register.fail403" = "Incorrect verify code";
 "register.fail429" = "The operation is too frequent. Please try again later.";

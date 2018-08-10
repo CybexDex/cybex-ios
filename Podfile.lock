@@ -31,7 +31,6 @@ PODS:
   - FBRetainCycleDetector (0.1.4)
   - FCUUID (1.3.1):
     - UICKeyChainStore (~> 2.1.0)
-  - GoogleAnalytics (3.17.0)
   - GRDB.swift (3.2.0)
   - GrowingTextView (0.5.6)
   - Guitar (0.4.1)
@@ -151,6 +150,11 @@ PODS:
   - Typist (1.2.2)
   - UICKeyChainStore (2.1.1)
   - UIFontComplete (3.0.0)
+  - UMCAnalytics (5.5.0):
+    - UMCCommon
+  - UMCCommon (1.5.2)
+  - UMCCommonLog (1.0.0)
+  - UMCSecurityPlugins (1.0.6)
   - XLActionController (4.0.1):
     - XLActionController/Core (= 4.0.1)
   - XLActionController/Core (4.0.1)
@@ -180,7 +184,6 @@ DEPENDENCIES:
   - ESTabBarController-swift
   - Fabric
   - FCUUID
-  - GoogleAnalytics
   - GRDB.swift
   - GrowingTextView
   - Guitar
@@ -234,6 +237,10 @@ DEPENDENCIES:
   - TinyConstraints
   - Typist
   - UIFontComplete
+  - UMCAnalytics
+  - UMCCommon
+  - UMCCommonLog
+  - UMCSecurityPlugins
   - XLActionController
   - XLPagerTabStrip
   - Zephyr
@@ -263,7 +270,6 @@ SPEC REPOS:
     - Fabric
     - FBRetainCycleDetector
     - FCUUID
-    - GoogleAnalytics
     - GRDB.swift
     - GrowingTextView
     - Guitar
@@ -323,6 +329,10 @@ SPEC REPOS:
     - Typist
     - UICKeyChainStore
     - UIFontComplete
+    - UMCAnalytics
+    - UMCCommon
+    - UMCCommonLog
+    - UMCSecurityPlugins
     - XLActionController
     - XLPagerTabStrip
     - Zephyr
@@ -373,7 +383,6 @@ SPEC CHECKSUMS:
   Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
-  GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GRDB.swift: c5bb04b25a9931fec937920e913787e45f96124f
   GrowingTextView: 8958f4fb7419de58dd622021b2d0696487e00e70
   Guitar: 7410dc37f2c12d5b8b67711d771608900c37636e
@@ -435,11 +444,15 @@ SPEC CHECKSUMS:
   Typist: 61acc798767f15bf24c61fb9a43d285974380f37
   UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
   UIFontComplete: 5b0f59a83308816c610164b79a2540b3520f9b72
+  UMCAnalytics: 4667788559a72f2fa5077117d1b8802a3b6eb6bb
+  UMCCommon: 4392868ac47ff1b101663106bb114ba616fabbad
+  UMCCommonLog: 05a2d5de21858e3d870551562cff405c1366d244
+  UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   XLActionController: 007868251c0eed70d649d06c1625259b73b3a600
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: 9fd098c299ea17da3ecf4a0a5495e6c70470718a
+PODFILE CHECKSUM: 4d70438310a373ac49851830975df6361fb7e86d
 
 COCOAPODS: 1.5.3

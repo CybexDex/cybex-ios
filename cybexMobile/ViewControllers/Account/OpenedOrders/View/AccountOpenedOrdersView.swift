@@ -10,9 +10,12 @@ import Foundation
 import SwiftTheme
 
 class AccountOpenedOrdersView:UIView {
+  enum event : String{
+    case cancelOrder
+  }
   
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var segment: UISegmentedControl!
+  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var segment: UISegmentedControl!
   var headerView:OpenedOrdersHeaderView!
   
   var data : Any?{
@@ -22,10 +25,10 @@ class AccountOpenedOrdersView:UIView {
     }
   }
   
-    @IBAction func segmentDidClicked(_ sender: Any) {
-      updateHeaderView()
-      self.tableView.reloadData()
-    }
+  @IBAction func segmentDidClicked(_ sender: Any) {
+    updateHeaderView()
+    self.tableView.reloadData()
+  }
   
   func updateHeaderView() {
     guard let _ = UserManager.shared.limitOrder.value else { return }
@@ -48,10 +51,11 @@ class AccountOpenedOrdersView:UIView {
     let cell = String.init(describing:OpenedOrdersCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
     tableView.separatorColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
-
+    
     headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: 103))
-    headerView.sectionTitleView.cybPriceTitle.locali = R.string.localizable.opened_order_value.key.localized()
-    headerView.sectionTitleView.totalTitle.locali = R.string.localizable.opened_asset_amount.key.localized()
+    
+    headerView.sectionTitleView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key.localized()
+    headerView.sectionTitleView.totalTitle.locali = R.string.localizable.my_opened_price.key.localized()
     tableView.tableHeaderView = headerView
   }
   
@@ -108,13 +112,15 @@ extension AccountOpenedOrdersView:UITableViewDelegate, UITableViewDataSource {
     else if segment.selectedSegmentIndex == 2 {
       orderes = orderes.filter({!$0.isBuy})
     }
-  
+    
     return orderes.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: OpenedOrdersCell.self), for: indexPath) as! OpenedOrdersCell
     var orderes = UserManager.shared.limitOrder.value ?? []
+    cell.Cell_Type = 0
+    
     if segment.selectedSegmentIndex == 1 {
       orderes = orderes.filter({$0.isBuy})
     }
@@ -125,5 +131,24 @@ extension AccountOpenedOrdersView:UITableViewDelegate, UITableViewDataSource {
     cell.setup(orderes[indexPath.row], indexPath: indexPath)
     
     return cell
+  }
+}
+
+extension AccountOpenedOrdersView {
+  @objc func cancleOrderAction(_ data: [String: Any]) {
+    if let index = data["selectedIndex"] as? Int {
+      
+      var orderes = UserManager.shared.limitOrder.value ?? []
+      
+      if segment.selectedSegmentIndex == 1 {
+        orderes = orderes.filter({$0.isBuy})
+      }
+      else if segment.selectedSegmentIndex == 2 {
+        orderes = orderes.filter({!$0.isBuy})
+      }
+      
+      let order = orderes[index]
+      self.next?.sendEventWith(event.cancelOrder.rawValue, userinfo: ["order": order])
+    }
   }
 }

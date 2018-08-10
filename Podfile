@@ -116,13 +116,22 @@ def debug
 #   pod 'WoodPeckeriOS', '>= 1.0.3', :configurations => ['Debug']
 end
 
+def um
+    pod 'UMCCommon'
+    pod 'UMCSecurityPlugins'
+    pod 'UMCAnalytics'
+    pod 'UMCCommonLog'
+end
+
 target 'cybexMobile' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   inhibit_all_warnings!
 
   pod 'Reveal-SDK', :configurations => ['Debug']
-  pod 'GoogleAnalytics'
+  
+  
+  
   
   fabric
   network
@@ -135,4 +144,5 @@ target 'cybexMobile' do
   ui
   other
   debug
+  um
 end

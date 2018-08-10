@@ -189,40 +189,55 @@ extension RegisterViewController {
       }
     }
     
-    let passwordValid = self.passwordTextField.rx.text.orEmpty.map({ $0.count > 11}).share(replay: 1)
-    let confirmPasswordValid = self.confirmPasswordTextField.rx.text.orEmpty.map({ $0.count > 11}).share(replay: 1)
+    let passwordValid = self.passwordTextField.rx.text.orEmpty.map({ verifyPassword($0) }).share(replay: 1)
+
+//    let passwordValid = self.passwordTextField.rx.text.orEmpty.map({ $0.count > 11}).share(replay: 1)
+    let confirmPasswordValid = self.confirmPasswordTextField.rx.text.orEmpty.map({ verifyPassword($0) }).share(replay: 1)
     
     passwordValid.subscribe(onNext: {[weak self] (validate) in
       guard let `self` = self else { return }
-      
+      if let text = self.passwordTextField.text,text.count == 0 {
+        return
+      }
       if validate {
         self.passwordTextField.tailImage = #imageLiteral(resourceName: "check_complete")
         if self.userNameValid {
           self.errorStackView.isHidden = true
         }
+        if let confirmText = self.confirmPasswordTextField.text, confirmText.count > 0 && (self.passwordTextField.text != self.confirmPasswordTextField.text) {
+          if self.userNameValid {
+            self.errorStackView.isHidden = false
+            self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
+          }
+        }
       }
       else {
         if self.userNameValid {
           self.errorStackView.isHidden = false
-          self.errorMessage.text = R.string.localizable.passwordValidateError1.key.localized()
+          self.errorMessage.text = R.string.localizable.passwordValidateError3.key.localized()
         }
         
         self.passwordTextField.tailImage = nil
       }
       
-      if let confirmText = self.confirmPasswordTextField.text, confirmText.count > 0 && (self.passwordTextField.text != self.confirmPasswordTextField.text) {
-        if self.userNameValid {
-          self.errorStackView.isHidden = false
-          self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
-        }
-      }
       }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
     confirmPasswordValid.subscribe(onNext: {[weak self] (validate) in
       guard let `self` = self else { return }
+      if let text = self.confirmPasswordTextField.text,text.count == 0 {
+        return
+      }
+      if let text = self.passwordTextField.text ,text.count > 0 ,!verifyPassword(text) {
+        self.errorStackView.isHidden = false
+        self.errorMessage.text = R.string.localizable.passwordValidateError3.key.localized()
+        return
+      }
       
       if !validate {
+        self.errorStackView.isHidden = false
+        self.errorMessage.text = self.passwordTextField.text!.count > 0 ? R.string.localizable.passwordValidateError2.key.localized() : R.string.localizable.passwordValidateError3.key.localized()
         self.confirmPasswordTextField.tailImage = nil
+        return
       }
       if self.passwordTextField.text == self.confirmPasswordTextField.text {
         if self.userNameValid ,let passwordText = self.passwordTextField.text, passwordText.count > 11 {
