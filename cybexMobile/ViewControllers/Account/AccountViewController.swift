@@ -155,6 +155,7 @@ extension AccountViewController{
       if !UserManager.shared.isLoginIn {
         app_coodinator.showLogin()
       } else {
+
         self.coordinator?.openYourProtfolio()
       }
     case 1:

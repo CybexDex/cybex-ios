@@ -99,7 +99,7 @@
                             <rect key="frame" x="0.0" y="36" width="52" height="36"/>
                             <subviews>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="he9-L4-SN8">
-                                    <rect key="frame" x="0.0" y="-29" width="52" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="-36" width="52" height="0.0"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egL-zq-tVF">
                                             <rect key="frame" x="0.0" y="2" width="0.0" height="14.5"/>

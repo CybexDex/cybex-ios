@@ -24,7 +24,10 @@ import SwiftRichString
 import SwiftyBeaver
 import AlamofireNetworkActivityLogger
 
+
 let log = SwiftyBeaver.self
+
+fileprivate let UM_APPKEY = "5b6bf4a8b27b0a3429000016"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -81,16 +84,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func setupAnalytics() {
-    guard let gai = GAI.sharedInstance() else {
-      assert(false, "Google Analytics not configured correctly")
-    }
-    gai.tracker(withTrackingId: "UA-121082216-2")
-    // Optional: automatically report uncaught exceptions.
-    gai.trackUncaughtExceptions = true
+    UMCommonLogManager.setUp()
+    MobClick.setCrashReportEnabled(true)
+    UMConfigure.setLogEnabled(true)
+    UMConfigure.setEncryptEnabled(true)
+    UMConfigure.initWithAppkey(UM_APPKEY, channel: "fir")
     
-    // Optional: set Logger to VERBOSE for debug information.
-    // Remove before app release.
-    gai.logger.logLevel = .verbose;
   }
   
   
