@@ -132,9 +132,8 @@ class BusinessViewController: BaseViewController {
   
 
   func showOpenedOrderInfo(){
-    guard let base_info = app_data.assetInfo[(self.pair?.base)!], let quote_info = app_data.assetInfo[(self.pair?.quote)!],let _ = app_data.assetInfo[(self.coordinator?.state.property.feeID.value)!],  self.coordinator?.state.property.fee_amount.value != 0, let cur_amount = self.coordinator?.state.property.amount.value, let decimal_amount = Decimal(string:cur_amount), let price = self.coordinator?.state.property.price.value, let decimal_price = Decimal(string:price) else { return }
+    guard let base_info = app_data.assetInfo[(self.pair?.base)!], let quote_info = app_data.assetInfo[(self.pair?.quote)!],let _ = app_data.assetInfo[(self.coordinator?.state.property.feeID.value)!],  self.coordinator?.state.property.fee_amount.value != 0, let cur_amount = self.coordinator?.state.property.amount.value, let decimal_amount = cur_amount.toDecimal(),decimal_amount != 0, let price = self.coordinator?.state.property.price.value, let decimal_price = price.toDecimal(), decimal_price != 0 else { return }
     
-
     let openedOrderDetailView = StyleContentView(frame: .zero)
     let ensure_title = self.type == .buy ? R.string.localizable.openedorder_buy_ensure.key.localized() : R.string.localizable.openedorder_sell_ensure.key.localized()
     

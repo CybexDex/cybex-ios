@@ -299,7 +299,7 @@ func getRealAmount(_ id : String ,amount : String) -> Decimal {
   
   let precisionNumber = pow(10, asset.precision)
   
-  if let amountDecimal = Decimal(string: amount) {
+  if let amountDecimal = amount.toDecimal() {
     return amountDecimal / precisionNumber
   }
   
