@@ -26,6 +26,7 @@ struct WithdrawAddress: Codable, DefaultsSerializable, Equatable {
     var publicKey:String
     var name:String
     var address:String
+    var currency:String
     var memo:String?
 }
 
@@ -48,6 +49,26 @@ class AddressManager {
         let list = Defaults[.withdrawAddressList]
         
         return list.filter( {$0.publicKey == pubKey} )
+    }
+    
+    func getWithDrawAddressListWith(_ pubKey:String, currency:String) -> [WithdrawAddress] {
+        let list = Defaults[.withdrawAddressList]
+        
+        return list.filter( {$0.publicKey == pubKey && $0.currency == currency } )
+    }
+    
+    func containAddressOfWithDraw(_ pubKey:String, address:String) -> (Bool, [WithdrawAddress]) {
+        let list = Defaults[.withdrawAddressList]
+        
+        let filterList = list.filter { (info) -> Bool in
+            return info.publicKey == pubKey && info.address == address
+        }
+        
+        if filterList.count > 0 {
+            return (true, filterList)
+        }
+        
+        return (false, [])
     }
     
     func containWithDrawAddress(_ id:String) -> (Bool, WithdrawAddress?) {
@@ -104,6 +125,20 @@ class AddressManager {
         return list.filter( {$0.publicKey == pubKey} )
     }
     
+    func containAddressOfTrnasfer(_ pubKey:String, address:String) -> (Bool, [TransferAddress]) {
+        let list = Defaults[.transferAddressList]
+        
+        let filterList = list.filter { (info) -> Bool in
+            return info.publicKey == pubKey && info.address == address
+        }
+        
+        if filterList.count > 0 {
+            return (true, filterList)
+        }
+        
+        return (false, [])
+    }
+
     func containTransferAddress(_ id:String) -> (Bool, TransferAddress?) {
         let list = Defaults[.transferAddressList]
         
