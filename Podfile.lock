@@ -21,6 +21,12 @@ PODS:
     - Fabric (~> 1.7.9)
   - CryptoSwift (0.10.0)
   - Device (3.1.0)
+  - DifferenceKit (0.3.0):
+    - DifferenceKit/Core (= 0.3.0)
+    - DifferenceKit/UIExtensions (= 0.3.0)
+  - DifferenceKit/Core (0.3.0)
+  - DifferenceKit/UIExtensions (0.3.0):
+    - DifferenceKit/Core
   - Differentiator (3.0.2)
   - DNSPageView (1.0.1)
   - EasyAnimation (2.0.2)
@@ -180,6 +186,7 @@ DEPENDENCIES:
   - Crashlytics
   - CryptoSwift
   - Device
+  - DifferenceKit
   - DNSPageView
   - EasyAnimation
   - EFQRCode
@@ -267,6 +274,7 @@ SPEC REPOS:
     - Crashlytics
     - CryptoSwift
     - Device
+    - DifferenceKit
     - Differentiator
     - DNSPageView
     - EasyAnimation
@@ -388,6 +396,7 @@ SPEC CHECKSUMS:
   Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
   CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
   Device: 8a21a61f5f938a12dadd44d82287996081b6919b
+  DifferenceKit: a9aa5baabd2be8829c6c41a3f7cad97065c0c2bd
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   DNSPageView: 93b0f9c9ab0e2f8c1d9aa5b0d44740bd2d775d78
   EasyAnimation: 977ef673efe8ce62447807eedb380a77b189dc80
@@ -470,6 +479,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: d591f1dbb17b9f281a7cee5f06a0b546c4d2785d
+PODFILE CHECKSUM: d9c844b9439e94e6eee125087083cbf7f573c533
 
 COCOAPODS: 1.5.3

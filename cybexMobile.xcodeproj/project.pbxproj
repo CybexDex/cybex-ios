@@ -277,6 +277,7 @@
 		7323B4B02A3A6EFE54C1B30D7491D953 /* MyHistoryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E17D1C068A4ED09DD447E3434E5E550 /* MyHistoryCellView.xib */; };
 		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
+		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
 		74270D4B512CD81AA7159B135F944B0A /* ExchangeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D294438F1AC7ABE633549FA9CD2FDF2 /* ExchangeView.xib */; };
 		751D31DB62BFC9F2FC1A0EFC4C23A801 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D9F26ADE20F5811273E4B32DED357 /* SettingViewController.swift */; };
@@ -5794,6 +5795,7 @@
 		7386F2902121204A00ABC924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7386F296212120B500ABC924 /* cybexMobileTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cybexMobileTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		7386F299212120F200ABC924 /* RPCTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCTest.swift; sourceTree = "<group>"; };
+		7386F29B212124BF00ABC924 /* AddressManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressManager.swift; sourceTree = "<group>"; };
 		7388EB07415DBCA0B8C079BF7C089E8C /* kinematic_viscosity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kinematic_viscosity.hpp; sourceTree = "<group>"; };
 		73905E38FD41E7F65B811029DCAADED6 /* banded.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = banded.hpp; sourceTree = "<group>"; };
 		7395B10A36CA7EBBE9AFABCDCC97095A /* results_collector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = results_collector.hpp; sourceTree = "<group>"; };
@@ -31166,9 +31168,9 @@
 				B1CE0949A770A9355E35EABBD4213DAB /* Products */,
 				CDB5CFC7D170B0A1511D4AD336877512 /* cybexMobile */,
 			);
-			indentWidth = 2;
+			indentWidth = 4;
 			sourceTree = "<group>";
-			tabWidth = 2;
+			tabWidth = 4;
 			usesTabs = 0;
 		};
 		F3F32C67D194CD1595B29F493882A65D /* cell */ = {
@@ -32394,6 +32396,7 @@
 			isa = PBXGroup;
 			children = (
 				7BD5587609C819354D09286FEB055A26 /* User */,
+				7386F29B212124BF00ABC924 /* AddressManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -32777,6 +32780,7 @@
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/DNSPageView/DNSPageView.framework",
 				"${BUILT_PRODUCTS_DIR}/Device/Device.framework",
+				"${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/EFQRCode/EFQRCode.framework",
 				"${BUILT_PRODUCTS_DIR}/ESPullToRefresh/ESPullToRefresh.framework",
@@ -32866,6 +32870,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DNSPageView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Device.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DifferenceKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EFQRCode.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESPullToRefresh.framework",
@@ -33101,6 +33106,7 @@
 				72199D8F21045D4700575226 /* TransferListReducers.swift in Sources */,
 				72199D6621044FD100575226 /* RechargeRecodeCoordinator.swift in Sources */,
 				188394B25D1EF3596A01900469FACBFB /* BusinessTitleView.swift in Sources */,
+				7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */,
 				221EC2382105B1930059F856 /* GrowContentView.swift in Sources */,
 				221EC2392105B1930059F856 /* TitleTextfieldView.swift in Sources */,
 				C0AC3C1A58448D06655DCE0994FDC33A /* BusinessView.swift in Sources */,

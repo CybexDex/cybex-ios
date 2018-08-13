@@ -27,6 +27,7 @@ def data
     pod 'FCUUID'
     pod 'IQKeyboardManagerSwift'
     pod 'Guitar'
+    pod 'DifferenceKit'
 end
 
 def resource
