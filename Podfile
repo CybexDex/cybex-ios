@@ -103,6 +103,8 @@ def other
     pod 'LifetimeTracker'
     pod 'MLeaksFinder'
     pod 'Device'
+    pod 'SwiftNotificationCenter'
+
 end
 
 def fabric
@@ -130,9 +132,6 @@ target 'cybexMobile' do
 
   pod 'Reveal-SDK', :configurations => ['Debug']
   
-  
-  
-  
   fabric
   network
   animation
@@ -145,4 +144,11 @@ target 'cybexMobile' do
   other
   debug
   um
+  
+  target 'cybexMobileTests' do
+      inherit! :search_paths
+      # Pods for testing
+      pod 'Nimble'
+      pod 'Quick'
+  end
 end

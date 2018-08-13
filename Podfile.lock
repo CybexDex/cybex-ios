@@ -57,6 +57,7 @@ PODS:
   - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
+  - Nimble (7.1.3)
   - NVActivityIndicatorView (4.3.0):
     - NVActivityIndicatorView/Presenter (= 4.3.0)
   - NVActivityIndicatorView/Presenter (4.3.0)
@@ -74,6 +75,7 @@ PODS:
   - PromiseKit/UIKit (6.3.4):
     - PromiseKit/CorePromise
   - Proposer (1.2.0)
+  - Quick (1.3.1)
   - QuickLayout (2.0.2)
   - R.swift (4.0.0):
     - R.swift.Library (~> 4.0.0)
@@ -137,6 +139,7 @@ PODS:
   - SwifterSwift/SwiftStdlib (4.4.0)
   - SwifterSwift/UIKit (4.4.0)
   - SwiftHash (2.0.1)
+  - SwiftNotificationCenter (1.0.3)
   - SwiftRichString (2.0.1)
   - SwiftTheme (0.4.1)
   - SwiftyBeaver (1.6.0)
@@ -203,11 +206,13 @@ DEPENDENCIES:
   - MJRefresh
   - MLeaksFinder
   - Moya
+  - Nimble
   - NVActivityIndicatorView
   - ObjectMapper
   - ObservableArray-RxSwift
   - Presentr
   - Proposer
+  - Quick
   - R.swift
   - RealReachability
   - Repeat
@@ -226,6 +231,7 @@ DEPENDENCIES:
   - SocketRocket (from `https://github.com/facebook/SocketRocket`, branch `master`)
   - SwiftEntryKit
   - SwifterSwift
+  - SwiftNotificationCenter
   - SwiftRichString (from `https://github.com/malcommac/SwiftRichString`, tag `2.0.1`)
   - SwiftTheme
   - SwiftyBeaver
@@ -289,12 +295,14 @@ SPEC REPOS:
     - MJRefresh
     - MLeaksFinder
     - Moya
+    - Nimble
     - NVActivityIndicatorView
     - ObjectMapper
     - ObservableArray-RxSwift
     - Presentr
     - PromiseKit
     - Proposer
+    - Quick
     - QuickLayout
     - R.swift
     - R.swift.Library
@@ -317,6 +325,7 @@ SPEC REPOS:
     - SwiftEntryKit
     - SwifterSwift
     - SwiftHash
+    - SwiftNotificationCenter
     - SwiftTheme
     - SwiftyBeaver
     - SwiftyJSON
@@ -407,12 +416,14 @@ SPEC CHECKSUMS:
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
   Moya: a725035953bc1c0eb1be505ab903984501d82440
+  Nimble: 2839b01d1b31f6a6a7777a221f0d91cf52e8e27b
   NVActivityIndicatorView: 963f62bf9f993fcf23218e55958e5b1761b9504c
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   ObservableArray-RxSwift: 905a088f51b1653f7eb55e6887f8a13916618f50
   Presentr: 797ae6ec8904eaba4ec58a4c2065bd66e31569ea
   PromiseKit: e1425568123ec844a944c93f2bcb29d511d39cf5
   Proposer: 722fe61822b89f551ae10afe8314067f98c39c28
+  Quick: d17304d58d0d169dd0bd1c6e5c28e3318de32a1a
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
@@ -436,6 +447,7 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 1df92ac86d36f3c8c88175687bdd61ccfecbe2ee
   SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
   SwiftHash: c805de5a434eacfa0dac7210745a50c55d7fe33d
+  SwiftNotificationCenter: 309e912a10d664ef68979deb1df7f17c2bdbe2ea
   SwiftRichString: 3b29b5f2eb0eb244497532f2fd2ec26318eae584
   SwiftTheme: 36d71c4eed4b2c401c782cf036e4586c749a8173
   SwiftyBeaver: e45759613e50b522b0e6f53b1f0f14389b45ca34
@@ -458,6 +470,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: 7b981d5b36c399355eebad38e28a8f1d35ba81b7
+PODFILE CHECKSUM: d591f1dbb17b9f281a7cee5f06a0b546c4d2785d
 
 COCOAPODS: 1.5.3
