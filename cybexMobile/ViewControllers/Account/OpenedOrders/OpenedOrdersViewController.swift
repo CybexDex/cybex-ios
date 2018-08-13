@@ -39,8 +39,8 @@ class OpenedOrdersViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+    let _ = UserManager.shared.balance
   }
-  
   
   func setupUI(){
     self.localized_text = R.string.localizable.openedTitle.key.localizedContainer()

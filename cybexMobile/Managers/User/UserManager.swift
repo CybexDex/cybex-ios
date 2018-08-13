@@ -97,8 +97,8 @@ extension UserManager {
   
   func logout() {
     BitShareCoordinator.cancelUserKey()
-    
-    UserDefaults.standard.remove("com.nbltrust.cybex.username")
+    UserDefaults.standard.removeObject(forKey: "com.nbltrust.cybex.username")
+//    UserDefaults.standard.remove("com.nbltrust.cybex.username")
     self.name.accept(nil)
     self.avatarString = nil
     self.keys = nil
@@ -419,7 +419,34 @@ class UserManager {
   
   var timer:Repeater?
   
-  var limitOrderValue:Double = 0
+  var limitOrderValue : Double {
+    var _limitOrderValue:Double = 0
+    var _limitOrder_buy_value:Double = 0
+    if let limitOrder = limitOrder.value{
+      for limitOrder_value in limitOrder{
+        let assetA_info = app_data.assetInfo[limitOrder_value.sellPrice.base.assetID]
+        let assetB_info = app_data.assetInfo[limitOrder_value.sellPrice.quote.assetID]
+        
+        let (base,_) = calculateAssetRelation(assetID_A_name: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetID_B_name: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
+        let isBuy = base == ((assetA_info != nil) ? assetA_info!.symbol.filterJade : "")
+        
+        if isBuy {
+          if let eth_cyb = changeToETHAndCYB(limitOrder_value.sellPrice.base.assetID).cyb.toDouble() {
+            let buy_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale).doubleValue * eth_cyb
+            _limitOrderValue += buy_value
+            _limitOrder_buy_value += buy_value
+          }
+        }
+        else{
+          if let eth_cyb = changeToETHAndCYB(limitOrder_value.sellPrice.base.assetID).cyb.toDouble() {
+            let sell_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale).doubleValue * eth_cyb
+            _limitOrderValue += sell_value
+          }
+        }
+      }
+    }
+    return _limitOrderValue
+  }
   var limitOrder_buy_value: Double = 0
   
   var limit_reset_address_time : TimeInterval = 0
@@ -464,7 +491,7 @@ class UserManager {
       }
     }
     
-    limitOrderValue = _limitOrderValue
+//    limitOrderValue = _limitOrderValue
     limitOrder_buy_value = _limitOrder_buy_value
     
     return balance_values

@@ -182,7 +182,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
   }
   
   func checkBalance(_ pair:Pair, isBuy:Bool) -> Bool? {
-    guard let base_info = app_data.assetInfo[pair.base],let quote_info = app_data.assetInfo[pair.quote],  self.state.property.fee_amount.value != 0, let cur_amount = self.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.state.property.price.value.toDouble(), price != 0, self.state.property.balance.value != 0 else { return nil }
+    guard let base_info = app_data.assetInfo[pair.base],let quote_info = app_data.assetInfo[pair.quote],  self.state.property.fee_amount.value != 0, let cur_amount = self.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.state.property.price.value.toDouble(), price != 0 else { return nil }
     
     var total:Decimal = Decimal(floatLiteral: 0)
     let priceDecimal = Decimal(string: self.state.property.price.value)!

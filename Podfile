@@ -19,7 +19,7 @@ def data
     pod 'GRDB.swift'
     pod 'CryptoSwift'
     pod 'RxGRDB'
-    pod 'SwiftyUserDefaults'
+    pod 'SwiftyUserDefaults',:git => 'https://github.com/radex/SwiftyUserDefaults', :tag => '4.0.0-alpha.1'
     pod 'Zephyr'
     pod 'Cache'
     pod 'Locksmith'

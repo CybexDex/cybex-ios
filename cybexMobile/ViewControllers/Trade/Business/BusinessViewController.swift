@@ -19,7 +19,7 @@ class BusinessViewController: BaseViewController {
     didSet{
       if oldValue != pair{
         self.coordinator?.resetState()
-
+        fetchLatestPrice()
         refreshView()
       }
     }
@@ -30,13 +30,29 @@ class BusinessViewController: BaseViewController {
   var type : exchangeType = .buy
   
   var coordinator: (BusinessCoordinatorProtocol & BusinessStateManagerProtocol)?
-    
+  
+  var price_pricision : Int = 0
+  var amount_pricision : Int = 0
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setupUI()
 
    setupEvent()
+  }
+  
+  func fetchLatestPrice() {
+    guard let pair = pair , let _ = AssetConfiguration.market_base_assets.index(of: pair.base) else { return }
+    
+    if let selectedIndex = app_data.filterQuoteAsset(pair.base).index(where: { (bucket) -> Bool in
+      return bucket.quote == pair.quote
+    }) {
+      let markets = app_data.filterQuoteAsset(pair.base)
+      let data = markets[selectedIndex]
+      let matrix = getCachedBucket(data)
+      price_pricision = matrix.price.tradePrice.pricision
+      amount_pricision = matrix.price.tradePrice.amountPricision
+    }
   }
   
   func setupUI(){
@@ -118,7 +134,7 @@ class BusinessViewController: BaseViewController {
   func showOpenedOrderInfo(){
     guard let base_info = app_data.assetInfo[(self.pair?.base)!], let quote_info = app_data.assetInfo[(self.pair?.quote)!],let _ = app_data.assetInfo[(self.coordinator?.state.property.feeID.value)!],  self.coordinator?.state.property.fee_amount.value != 0, let cur_amount = self.coordinator?.state.property.amount.value, let decimal_amount = Decimal(string:cur_amount), let price = self.coordinator?.state.property.price.value, let decimal_price = Decimal(string:price) else { return }
     
-    
+
     let openedOrderDetailView = StyleContentView(frame: .zero)
     let ensure_title = self.type == .buy ? R.string.localizable.openedorder_buy_ensure.key.localized() : R.string.localizable.openedorder_sell_ensure.key.localized()
     
@@ -179,21 +195,26 @@ class BusinessViewController: BaseViewController {
     NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.containerView.priceTextfield, queue: nil) {[weak self] (notifi) in
       guard let `self` = self else { return }
       
+      if self.containerView.tipView.isHidden == true ,self.coordinator?.state.property.balance.value == 0{
+        self.containerView.tipView.isHidden = false
+      }
       guard let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0 else {
         self.containerView.priceTextfield.text = ""
         return
       }
-      self.containerView.priceTextfield.text = text.tradePrice.price
+      self.containerView.priceTextfield.text = text.formatCurrency(digitNum: self.price_pricision)
       guard let amountText = self.containerView.amountTextfield.text, amountText != "", amountText.toDouble() != 0 else {
         return
       }
-      self.containerView.amountTextfield.text = amountText.formatCurrency(digitNum: text.tradePrice.amountPricision)
+      self.containerView.amountTextfield.text = amountText.formatCurrency(digitNum: self.amount_pricision)
       self.coordinator?.state.property.price.accept(self.containerView.priceTextfield.text!)
     }
     
     NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.containerView.amountTextfield, queue: nil) {[weak self] (notifi) in
       guard let `self` = self else { return }
-
+      if self.containerView.tipView.isHidden == true ,self.coordinator?.state.property.balance.value == 0{
+        self.containerView.tipView.isHidden = false
+      }
       guard let text = self.containerView.amountTextfield.text, text != "", text.toDouble() != 0 else {
         self.containerView.amountTextfield.text = ""
         return
@@ -201,11 +222,11 @@ class BusinessViewController: BaseViewController {
       
       guard let priceText = self.containerView.priceTextfield.text, priceText != "", priceText.toDouble() != 0 else {
         
-        self.containerView.amountTextfield.text = text.tradePrice.price
+        self.containerView.amountTextfield.text = text.formatCurrency(digitNum: self.amount_pricision)
         return
       }
       
-      self.containerView.amountTextfield.text = text.formatCurrency(digitNum: priceText.tradePrice.amountPricision)
+      self.containerView.amountTextfield.text = text.formatCurrency(digitNum: self.amount_pricision)
       self.coordinator?.state.property.amount.accept(self.containerView.amountTextfield.text!)
     }
     
@@ -239,7 +260,7 @@ class BusinessViewController: BaseViewController {
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
 //balance
-    self.coordinator?.state.property.balance.asObservable().subscribe(onNext: {[weak self] (balance) in
+    self.coordinator?.state.property.balance.asObservable().skip(1).subscribe(onNext: {[weak self] (balance) in
       guard let `self` = self else { return }
 
       guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote], balance != 0 else {
@@ -248,7 +269,7 @@ class BusinessViewController: BaseViewController {
         return
       
       }
-      self.containerView.tipView.isHidden = true
+//      self.containerView.tipView.isHidden = true
 
       let info = self.type == .buy ? base_info : quote_info
       let symbol = info.symbol.filterJade
@@ -288,11 +309,11 @@ class BusinessViewController: BaseViewController {
       let total = Decimal(floatLiteral: limit) * Decimal(floatLiteral: amount)
 
       guard let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0 else {
-        self.containerView.endMoney.text = "\(total.tradePrice().price) \(base_info.symbol.filterJade)"
+        self.containerView.endMoney.text = "\(total.string(digits: self.price_pricision, roundingMode: .down)) \(base_info.symbol.filterJade)"
         return
       }
       
-      self.containerView.endMoney.text = "\(total.string(digits: text.tradePrice.pricision, roundingMode: .down)) \(base_info.symbol.filterJade)"
+      self.containerView.endMoney.text = "\(total.string(digits: self.price_pricision, roundingMode: .down)) \(base_info.symbol.filterJade)"
 
     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 

@@ -141,7 +141,7 @@ PODS:
   - SwiftTheme (0.4.1)
   - SwiftyBeaver (1.6.0)
   - SwiftyJSON (4.1.0)
-  - SwiftyUserDefaults (3.0.1)
+  - SwiftyUserDefaults (4.0.0-alpha.1)
   - SWXMLHash (4.7.0)
   - TableFlip (1.2)
   - TextFieldEffects (1.4.0)
@@ -230,7 +230,7 @@ DEPENDENCIES:
   - SwiftTheme
   - SwiftyBeaver
   - SwiftyJSON
-  - SwiftyUserDefaults
+  - SwiftyUserDefaults (from `https://github.com/radex/SwiftyUserDefaults`, tag `4.0.0-alpha.1`)
   - TableFlip
   - TextFieldEffects
   - Then
@@ -320,7 +320,6 @@ SPEC REPOS:
     - SwiftTheme
     - SwiftyBeaver
     - SwiftyJSON
-    - SwiftyUserDefaults
     - SWXMLHash
     - TableFlip
     - TextFieldEffects
@@ -347,6 +346,9 @@ EXTERNAL SOURCES:
   SwiftRichString:
     :git: https://github.com/malcommac/SwiftRichString
     :tag: 2.0.1
+  SwiftyUserDefaults:
+    :git: https://github.com/radex/SwiftyUserDefaults
+    :tag: 4.0.0-alpha.1
 
 CHECKOUT OPTIONS:
   BeareadToast:
@@ -358,6 +360,9 @@ CHECKOUT OPTIONS:
   SwiftRichString:
     :git: https://github.com/malcommac/SwiftRichString
     :tag: 2.0.1
+  SwiftyUserDefaults:
+    :git: https://github.com/radex/SwiftyUserDefaults
+    :tag: 4.0.0-alpha.1
 
 SPEC CHECKSUMS:
   Action: 3d9486d3da02b572b0a034b6c49ac4c3fbcc8b63
@@ -435,7 +440,7 @@ SPEC CHECKSUMS:
   SwiftTheme: 36d71c4eed4b2c401c782cf036e4586c749a8173
   SwiftyBeaver: e45759613e50b522b0e6f53b1f0f14389b45ca34
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
-  SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
+  SwiftyUserDefaults: cebe0ff9472f52699772a514b6f7155861d8069b
   SWXMLHash: f4522438189f72b41e39676d19469a8969d60dd1
   TableFlip: 2ae22773412b295a7cbc54d95b44085bb28092f6
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
@@ -453,6 +458,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
 
-PODFILE CHECKSUM: 4d70438310a373ac49851830975df6361fb7e86d
+PODFILE CHECKSUM: 7b981d5b36c399355eebad38e28a8f1d35ba81b7
 
 COCOAPODS: 1.5.3

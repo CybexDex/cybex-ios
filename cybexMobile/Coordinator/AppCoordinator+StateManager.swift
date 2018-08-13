@@ -142,6 +142,7 @@ extension AppCoordinator {
     
     if isNoFirst {
       for pair in filterPairs {
+        
         AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority)
       }
     }else {
@@ -162,7 +163,9 @@ extension AppCoordinator {
       SwifterSwift.delay(milliseconds: refreshTime * 1000.0) {
         
         for pair in pairs {
-          
+//          if pair.base == "1.3.0" && pair.quote == "1.3.506" {
+//            print("test")
+//          }
           if CybexWebSocketService.shared.overload() {
             return
           }
