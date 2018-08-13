@@ -98,7 +98,7 @@ extension UserManager {
   func logout() {
     BitShareCoordinator.cancelUserKey()
     
-    UserDefaults.standard.remove("com.nbltrust.cybex.username")
+    Defaults.remove(.username)
     self.name.accept(nil)
     self.avatarString = nil
     self.keys = nil
@@ -354,7 +354,8 @@ class UserManager {
   var disposeBag = DisposeBag()
   
   var isLoginIn : Bool {
-    if let name = UserDefaults.standard.object(forKey: "com.nbltrust.cybex.username") as? String {
+    let name = Defaults[.username]
+    if name.count > 0 {
       if self.name.value == nil {
         self.name.accept(name)
         self.avatarString = name.sha256()
@@ -503,7 +504,7 @@ class UserManager {
   
   
   private func saveName(_ name:String) {
-    UserDefaults.standard.set(name, forKey: "com.nbltrust.cybex.username")
+    Defaults[.username] = name
   }
   
   

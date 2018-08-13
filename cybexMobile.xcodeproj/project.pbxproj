@@ -199,7 +199,6 @@
 		5E6C74108A768A913651E001F98CDA92 /* CBKLineAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921C69799EA326C4E610B4ED75996613 /* CBKLineAccessoryView.swift */; };
 		5EC5CB38F68C8EB063FE6DB600247A30 /* MyHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 564D558F3147D65862574A362C3B9436 /* MyHistoryCell.xib */; };
 		5F25028208C6665DE69B50E5D5ECBEF6 /* OpenedOrdersCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE0D24F43A533ACCEEA9540AD92F1BB /* OpenedOrdersCoordinator.swift */; };
-		5F6E6E47CDF2657E396A2AC81BBDC689 /* cybexMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BF58FD7E6D541585F337A93D2C25E5F9 /* cybexMobileTests.m */; };
 		5FA8151B70B4FFED7B6D2206D2E13F14 /* SettingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2372538C137AE590F07952D446927D2 /* SettingActions.swift */; };
 		60366FF13A1DDFEAB352E48931017AD4 /* cmath.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = 035BDC8EE4F54A9D426F66840D9F9552 /* cmath.SUNWCCh */; };
 		60502E37A09ABFC6DD95A24F6A855B65 /* YourPortfolioActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2E7BB8C3521C0377129F32694FA2F /* YourPortfolioActions.swift */; };
@@ -277,6 +276,7 @@
 		72EC6A5A20F4612200CEAFF6 /* RechargeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5820F4612200CEAFF6 /* RechargeView.xib */; };
 		7323B4B02A3A6EFE54C1B30D7491D953 /* MyHistoryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E17D1C068A4ED09DD447E3434E5E550 /* MyHistoryCellView.xib */; };
 		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
+		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
 		74270D4B512CD81AA7159B135F944B0A /* ExchangeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D294438F1AC7ABE633549FA9CD2FDF2 /* ExchangeView.xib */; };
 		751D31DB62BFC9F2FC1A0EFC4C23A801 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D9F26ADE20F5811273E4B32DED357 /* SettingViewController.swift */; };
@@ -415,6 +415,7 @@
 		C9E9C25E6F2F69A3AF5564B11DFE17E7 /* bcc32.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = 75DF1991F801D2C9005F6741537A6A8C /* bcc32.SUNWCCh */; };
 		CA894F0EB69EF4448C0142CE0BE7D9C5 /* HistoryApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E66F4AF6CA1870B8CEFAF7740212296 /* HistoryApi.swift */; };
 		CB5F7115F86F33FA0B26878FC117A884 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9037BC25051001E9F8FCE16E650544D1 /* Bucket.swift */; };
+		CC5BA851F07D7A3C8A816838 /* Pods_cybexMobileTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E56A62A5C617215AEF420E2 /* Pods_cybexMobileTests.framework */; };
 		CC7617050BB0397377BB75D99DE68B3A /* OpenedOrdersActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4807AE2A7E878B1F976D5835DED567 /* OpenedOrdersActions.swift */; };
 		CC76CFB4727E500CB64DF691E8EE3E33 /* regex.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = FE56BB394A8764F3AF2E168E14EC274D /* regex.SUNWCCh */; };
 		CC8DD1E9001CFBB8915E342EDB329B3E /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90916C662B8C64E050E0CCC9F5D950B /* UIImage+Extensions.swift */; };
@@ -500,7 +501,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2B341FBB6452207213A28E698DE49979 /* PBXContainerItemProxy */ = {
+		7386F2912121204A00ABC924 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 86D7094F24AAA52C797AF890376BB10F /* Project object */;
 			proxyType = 1;
@@ -2823,7 +2824,6 @@
 		31DE9DB410AC97802D1F5ED92F4E8930 /* unit_test_parameters.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unit_test_parameters.hpp; sourceTree = "<group>"; };
 		31E499239C725208EC8B4C721342C154 /* char_parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = char_parser.hpp; sourceTree = "<group>"; };
 		31E5AC5B7DA60DBA8B28062E01EB2C97 /* hashed_factory_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = hashed_factory_fwd.hpp; sourceTree = "<group>"; };
-		31E60B2DF7EF327BCFED1F004888AFEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31F158CF8D7AA0EAFA3FE12711DF56CA /* read_until.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = read_until.hpp; sourceTree = "<group>"; };
 		31F1C50F702F28B0DB2906471BA0A17E /* null_signal_blocker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = null_signal_blocker.hpp; sourceTree = "<group>"; };
 		31F2C2AAB802F57BC0C7693D522A9D00 /* unordered_set_adaptor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unordered_set_adaptor.hpp; sourceTree = "<group>"; };
@@ -4847,6 +4847,7 @@
 		5EEC3BCE9514934C6D91140A37FF98B6 /* map_tie.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = map_tie.hpp; sourceTree = "<group>"; };
 		5EF6023B95C142443D0C2FD05ACF1B53 /* exceptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = exceptions.hpp; sourceTree = "<group>"; };
 		5EF8AE1EB90BB4EBD3AC13DFA8EC5F62 /* ring_type.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ring_type.hpp; sourceTree = "<group>"; };
+		5EFCB4A4F6EBACDDF4092BFE /* Pods-cybexMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5F032E5C2D226E19236FD2E7A07281C3 /* stats.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = stats.hpp; sourceTree = "<group>"; };
 		5F135552F60143DDE384CEE0F5336395 /* config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = config.hpp; sourceTree = "<group>"; };
 		5F16458B8008AE626B815DCE430C4722 /* variant.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = variant.hpp; sourceTree = "<group>"; };
@@ -5538,7 +5539,6 @@
 		6E5EDA779634F40359A5946B717597BF /* arg.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = arg.hpp; sourceTree = "<group>"; };
 		6E619F9D3DC46F1FC78A9F8D84E7BA43 /* vector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vector.hpp; sourceTree = "<group>"; };
 		6E661C6DBDCDFDD1FA2019E24B9A6069 /* not_equal_to.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = not_equal_to.hpp; sourceTree = "<group>"; };
-		6E6953B45CA1A9169DAD03F52CEC6CE6 /* cybexMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cybexMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E6AD6ED1E98AB2829B48905A9B2925D /* generation_runge_kutta_cash_karp54.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = generation_runge_kutta_cash_karp54.hpp; sourceTree = "<group>"; };
 		6E6AE63E6B0E8016D33EA74E0C71576A /* template_arity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = template_arity.hpp; sourceTree = "<group>"; };
 		6E6C9529AEFAC22349B49CE06211DE4C /* hashed_index_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = hashed_index_fwd.hpp; sourceTree = "<group>"; };
@@ -5616,6 +5616,7 @@
 		702D42946476853CCE4370A733EE9A38 /* scatterv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = scatterv.hpp; sourceTree = "<group>"; };
 		703C5097924FF5DC2E03C33A1E3B99BB /* value_of_impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = value_of_impl.hpp; sourceTree = "<group>"; };
 		703E73786D63E9553DDE038C01A1B8B7 /* ceil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ceil.hpp; sourceTree = "<group>"; };
+		70426ED23CD0622F852F02B8 /* Pods-cybexMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cybexMobileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		70428999B5D1CA69BB53AFCFD271FE9F /* set.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = set.hpp; sourceTree = "<group>"; };
 		7047F8319A1599023D6D6EAC4F0B77CC /* iterator_range_io.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = iterator_range_io.hpp; sourceTree = "<group>"; };
 		704A5A69C49CEED490EA77F907500531 /* argument_predefined_10.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = argument_predefined_10.hpp; sourceTree = "<group>"; };
@@ -5789,6 +5790,10 @@
 		735FA00E9301F0DB45760B1C0D7FEC09 /* extreme_value.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = extreme_value.hpp; sourceTree = "<group>"; };
 		737258FAB6762972136E4188BF20F602 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
 		7386291A788FC7DE14BE446D1B0B59FF /* get_dev_key.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = get_dev_key.cpp; sourceTree = "<group>"; };
+		7386F28C2121204A00ABC924 /* cybexMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cybexMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7386F2902121204A00ABC924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7386F296212120B500ABC924 /* cybexMobileTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cybexMobileTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		7386F299212120F200ABC924 /* RPCTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCTest.swift; sourceTree = "<group>"; };
 		7388EB07415DBCA0B8C079BF7C089E8C /* kinematic_viscosity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kinematic_viscosity.hpp; sourceTree = "<group>"; };
 		73905E38FD41E7F65B811029DCAADED6 /* banded.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = banded.hpp; sourceTree = "<group>"; };
 		7395B10A36CA7EBBE9AFABCDCC97095A /* results_collector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = results_collector.hpp; sourceTree = "<group>"; };
@@ -7690,6 +7695,7 @@
 		9E461CC6CEFAB528C778115CBDBCD690 /* lock_types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lock_types.hpp; sourceTree = "<group>"; };
 		9E4DD869C920CF84E9855398FE4D65D0 /* fenced_block.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = fenced_block.hpp; sourceTree = "<group>"; };
 		9E4F8336CF64F46B3DA0D503788C0350 /* rational_horner1_6.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rational_horner1_6.hpp; sourceTree = "<group>"; };
+		9E56A62A5C617215AEF420E2 /* Pods_cybexMobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cybexMobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6497D98A0FAF37E54DB18D9788DDA0 /* optional.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = optional.hpp; sourceTree = "<group>"; };
 		9E6A7BB5897445FC2356B8462F8E5525 /* basic_endpoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = basic_endpoint.hpp; sourceTree = "<group>"; };
 		9E6C19DAEA3355ACBDE9F5E0DF191907 /* throw_exception.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = throw_exception.hpp; sourceTree = "<group>"; };
@@ -9170,7 +9176,6 @@
 		BF4A368BBB9BC4623FDC7E7F44382BBB /* alignment_of_clang.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = alignment_of_clang.hpp; sourceTree = "<group>"; };
 		BF4CB904E1C8FCF8AA656A9851C65296 /* ExplorerRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerRootCoordinator.swift; sourceTree = "<group>"; };
 		BF52DEDC0933E76F52897780398462DE /* reverse.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = reverse.hpp; sourceTree = "<group>"; };
-		BF58FD7E6D541585F337A93D2C25E5F9 /* cybexMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cybexMobileTests.m; sourceTree = "<group>"; };
 		BF5973D643E279700F7B692EF5D6A828 /* back.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = back.hpp; sourceTree = "<group>"; };
 		BF5C34FBE1046F6A78D475FC2107BAD5 /* copy_cv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = copy_cv.hpp; sourceTree = "<group>"; };
 		BF694BD96BBB0380AE38832CD9784C1F /* as_action.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = as_action.hpp; sourceTree = "<group>"; };
@@ -12165,10 +12170,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		01A914B5734CB28681D5DF890A8FC26F /* Frameworks */ = {
+		7386F2892121204A00ABC924 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC5BA851F07D7A3C8A816838 /* Pods_cybexMobileTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -19419,14 +19425,6 @@
 			path = action;
 			sourceTree = "<group>";
 		};
-		59C689E1411B68E326341074E48F4352 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				31E60B2DF7EF327BCFED1F004888AFEE /* Info.plist */,
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		5A00B858501E2EA11D90D7B79A9E14FD /* type_traits */ = {
 			isa = PBXGroup;
 			children = (
@@ -21813,6 +21811,16 @@
 			path = auxiliary;
 			sourceTree = "<group>";
 		};
+		7386F28D2121204A00ABC924 /* cybexMobileTests */ = {
+			isa = PBXGroup;
+			children = (
+				7386F2902121204A00ABC924 /* Info.plist */,
+				7386F299212120F200ABC924 /* RPCTest.swift */,
+				7386F296212120B500ABC924 /* cybexMobileTests-Bridging-Header.h */,
+			);
+			path = cybexMobileTests;
+			sourceTree = "<group>";
+		};
 		738B1DD062FB720F3A915D3AAF3D83A9 /* flatten_view */ = {
 			isa = PBXGroup;
 			children = (
@@ -23417,6 +23425,8 @@
 			children = (
 				730115CA9351045A5CEE4B396B055387 /* Pods-cybexMobile.debug.xcconfig */,
 				EE7A1A7462092B8F170A7056A093228E /* Pods-cybexMobile.release.xcconfig */,
+				5EFCB4A4F6EBACDDF4092BFE /* Pods-cybexMobileTests.debug.xcconfig */,
+				70426ED23CD0622F852F02B8 /* Pods-cybexMobileTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -26541,7 +26551,7 @@
 			isa = PBXGroup;
 			children = (
 				5EB62FECB47867CB67A0E608894CF362 /* cybexMobile.app */,
-				6E6953B45CA1A9169DAD03F52CEC6CE6 /* cybexMobileTests.xctest */,
+				7386F28C2121204A00ABC924 /* cybexMobileTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -28741,15 +28751,6 @@
 			path = support;
 			sourceTree = "<group>";
 		};
-		D0B35C2BD785B955AE5423F14AFA3914 /* cybexMobileTests */ = {
-			isa = PBXGroup;
-			children = (
-				59C689E1411B68E326341074E48F4352 /* Supporting Files */,
-				BF58FD7E6D541585F337A93D2C25E5F9 /* cybexMobileTests.m */,
-			);
-			path = cybexMobileTests;
-			sourceTree = "<group>";
-		};
 		D0EE6C92EE6AFF54DAE8548EBF7BBB8A /* openssl */ = {
 			isa = PBXGroup;
 			children = (
@@ -28932,6 +28933,7 @@
 				8B6A666082254B4BA4CBD399FCAEC435 /* libfc.a */,
 				114CD7D9CF3C9F8A3AD0C1D9E0FA288A /* libssl.a */,
 				DFC92DA999C5A845EF1C09E98057F95D /* secp256k1.a */,
+				9E56A62A5C617215AEF420E2 /* Pods_cybexMobileTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -31158,11 +31160,11 @@
 		F3EBF4E6D2E2492B42F25C18354E14EB = {
 			isa = PBXGroup;
 			children = (
+				7386F28D2121204A00ABC924 /* cybexMobileTests */,
 				D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */,
 				867DC13D64BFE1ECAC8B7E12A480E38F /* Pods */,
 				B1CE0949A770A9355E35EABBD4213DAB /* Products */,
 				CDB5CFC7D170B0A1511D4AD336877512 /* cybexMobile */,
-				D0B35C2BD785B955AE5423F14AFA3914 /* cybexMobileTests */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -32434,22 +32436,24 @@
 			productReference = 5EB62FECB47867CB67A0E608894CF362 /* cybexMobile.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7998D82CE27B9E810C917C51EF95D775 /* cybexMobileTests */ = {
+		7386F28B2121204A00ABC924 /* cybexMobileTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4E6850B7D580F85052F39B772B35B7FB /* Build configuration list for PBXNativeTarget "cybexMobileTests" */;
+			buildConfigurationList = 7386F2932121204B00ABC924 /* Build configuration list for PBXNativeTarget "cybexMobileTests" */;
 			buildPhases = (
-				9C076BB09BC647C2ED09C6EBD097C3D7 /* Sources */,
-				01A914B5734CB28681D5DF890A8FC26F /* Frameworks */,
-				41CC898751A67F0D1146A9FE9E465F6C /* Resources */,
+				63B89CB4897862A41FC84BA0 /* [CP] Check Pods Manifest.lock */,
+				7386F2882121204A00ABC924 /* Sources */,
+				7386F2892121204A00ABC924 /* Frameworks */,
+				7386F28A2121204A00ABC924 /* Resources */,
+				8B3E28F2B6A9917BF900E49B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8C3838AFB4957BD9F74BA8B388F87311 /* PBXTargetDependency */,
+				7386F2922121204A00ABC924 /* PBXTargetDependency */,
 			);
 			name = cybexMobileTests;
 			productName = cybexMobileTests;
-			productReference = 6E6953B45CA1A9169DAD03F52CEC6CE6 /* cybexMobileTests.xctest */;
+			productReference = 7386F28C2121204A00ABC924 /* cybexMobileTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -32458,6 +32462,7 @@
 		86D7094F24AAA52C797AF890376BB10F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Cybex;
 				TargetAttributes = {
@@ -32477,9 +32482,11 @@
 							};
 						};
 					};
-					7998D82CE27B9E810C917C51EF95D775 = {
-						CreatedOnToolsVersion = 6.2;
+					7386F28B2121204A00ABC924 = {
+						CreatedOnToolsVersion = 9.4.1;
 						DevelopmentTeam = M5LYGNKFLB;
+						LastSwiftMigration = 0940;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 6597A0AC6C29D30281EBD879E45F3BAF;
 					};
 				};
@@ -32499,7 +32506,7 @@
 			projectRoot = "";
 			targets = (
 				6597A0AC6C29D30281EBD879E45F3BAF /* cybexMobile */,
-				7998D82CE27B9E810C917C51EF95D775 /* cybexMobileTests */,
+				7386F28B2121204A00ABC924 /* cybexMobileTests */,
 			);
 		};
 /* End PBXProject section */
@@ -32707,7 +32714,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		41CC898751A67F0D1146A9FE9E465F6C /* Resources */ = {
+		7386F28A2121204A00ABC924 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -32824,6 +32831,7 @@
 				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftEntryKit/SwiftEntryKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftHash/SwiftHash.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftNotificationCenter/SwiftNotificationCenter.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftRichString/SwiftRichString.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftTheme/SwiftTheme.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
@@ -32912,6 +32920,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftEntryKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftHash.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftNotificationCenter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRichString.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftTheme.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
@@ -32935,6 +32944,24 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		63B89CB4897862A41FC84BA0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cybexMobileTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		64CA9F24897CCC8641D07FEE1CB77EA5 /* fabric */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -32948,6 +32975,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" a0bbb6d623feca529afaf6ed110e62a77f47b16a 3b264ff6cab506aaf14bce576c156ea66229ad7b6dfb666b4fbb91089deb17e2";
+		};
+		8B3E28F2B6A9917BF900E49B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobileTests/Pods-cybexMobileTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		A6D55984F0239A7067AB1555 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -32998,11 +33045,11 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9C076BB09BC647C2ED09C6EBD097C3D7 /* Sources */ = {
+		7386F2882121204A00ABC924 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F6E6E47CDF2657E396A2AC81BBDC689 /* cybexMobileTests.m in Sources */,
+				7386F29A212120F200ABC924 /* RPCTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -33304,10 +33351,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8C3838AFB4957BD9F74BA8B388F87311 /* PBXTargetDependency */ = {
+		7386F2922121204A00ABC924 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6597A0AC6C29D30281EBD879E45F3BAF /* cybexMobile */;
-			targetProxy = 2B341FBB6452207213A28E698DE49979 /* PBXContainerItemProxy */;
+			targetProxy = 7386F2912121204A00ABC924 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -33475,47 +33522,6 @@
 			};
 			name = Debug;
 		};
-		3C9D0B617098669B4717A1D0EBB5B6F8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = M5LYGNKFLB;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-randombytes",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
-				);
-				INFOPLIST_FILE = "cybexMobileTests/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-					"$(inherited)",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cybexMobile.app/cybexMobile";
-			};
-			name = Debug;
-		};
 		3E377E989338A63B1FB7E1644E6775C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -33570,40 +33576,64 @@
 			};
 			name = Debug;
 		};
-		A76D0615ADF9A74BA458576A1F5F7825 /* Release */ = {
+		7386F2942121204B00ABC924 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EFCB4A4F6EBACDDF4092BFE /* Pods-cybexMobileTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				COPY_PHASE_STRIP = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = M5LYGNKFLB;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-randombytes",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
-				);
-				INFOPLIST_FILE = "cybexMobileTests/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = cybexMobileTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-					"$(inherited)",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrust.cybexMobileTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobileTests/cybexMobileTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cybexMobile.app/cybexMobile";
+			};
+			name = Debug;
+		};
+		7386F2952121204B00ABC924 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 70426ED23CD0622F852F02B8 /* Pods-cybexMobileTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = M5LYGNKFLB;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = cybexMobileTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrust.cybexMobileTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobileTests/cybexMobileTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cybexMobile.app/cybexMobile";
 			};
 			name = Release;
@@ -33620,11 +33650,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4E6850B7D580F85052F39B772B35B7FB /* Build configuration list for PBXNativeTarget "cybexMobileTests" */ = {
+		7386F2932121204B00ABC924 /* Build configuration list for PBXNativeTarget "cybexMobileTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3C9D0B617098669B4717A1D0EBB5B6F8 /* Debug */,
-				A76D0615ADF9A74BA458576A1F5F7825 /* Release */,
+				7386F2942121204B00ABC924 /* Debug */,
+				7386F2952121204B00ABC924 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
