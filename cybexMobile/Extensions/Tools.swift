@@ -403,6 +403,19 @@ extension String {
     return Double(selfString)
   }
   
+  
+  public func toDecimal() -> Decimal? {
+    if self == "" {
+      return Decimal(0)
+    }
+    var selfString = self
+    if selfString.contains(","){
+      selfString = selfString.replacingOccurrences( of:"[^0-9.]", with: "", options: .regularExpression)
+    }
+    return Decimal(string:selfString)
+  }
+  
+  
   func formatCurrency(digitNum: Int) -> String {
     if let str = toDouble()?.formatCurrency(digitNum: digitNum) {
       return str

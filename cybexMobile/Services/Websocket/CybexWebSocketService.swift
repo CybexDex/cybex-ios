@@ -21,7 +21,9 @@ enum NodeURLString:String {
   case tokyo = "wss://tokyo-01.cybex.io"
   case korea = "wss://korea-01.cybex.io"
   
+//  case test = "https://hangzhou.51nebula.com/"
   static var all:[NodeURLString] {
+//    return [.test]
     return [.shanghai, .beijing, .hongkong, .singapore, .tokyo, .korea]
   }
 }
@@ -363,8 +365,6 @@ extension CybexWebSocketService: SRWebSocketDelegate {
   func webSocket(_ webSocket: SRWebSocket, didReceiveMessage message: Any) {
     if self.currentNode == nil && isDetectingSocket(webSocket) {
       self.closeAllTestSocket()
-      // test
-//      self.currentNode = NodeURLString(rawValue: "https://hangzhou.51nebula.com/")!
       
       self.currentNode = NodeURLString(rawValue: webSocket.url!.absoluteString)!
       connectNode(node: self.currentNode!)

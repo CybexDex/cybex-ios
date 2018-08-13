@@ -299,7 +299,7 @@ func getRealAmount(_ id : String ,amount : String) -> Decimal {
   
   let precisionNumber = pow(10, asset.precision)
   
-  if let amountDecimal = Decimal(string: amount) {
+  if let amountDecimal = amount.toDecimal() {
     return amountDecimal / precisionNumber
   }
   
@@ -352,10 +352,9 @@ func getWithdrawDetailInfo(addressInfo:String,amountInfo:String,withdrawFeeInfo:
   
   let content = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
   
-  return isEOS ?
+  return (isEOS && memoInfo.count > 0) ?
     (["<name>\(String(describing: address)):</name><\(content)>\n\(String(describing: addressInfo))</\(content)>".set(style: "alertContent"),
-      "<name>\(String(describing: memo)):</name><\(content)>\n\(String(describing: memoInfo))</\(content)>".set(style: "alertContent"),
-      "<name>\(String(describing: address)):</name><\(content)>\n\(String(describing: addressInfo))</\(content)>".set(style: "alertContent"),
+      "<name>\(String(describing: memo)):</name><\(content)>  \(String(describing: memoInfo))</\(content)>".set(style: "alertContent"),
       "<name>\(String(describing: amount)):</name><\(content)>  \(String(describing: amountInfo))</\(content)>".set(style: "alertContent"),
       "<name>\(String(describing: withdrawFee)):</name><\(content)>  \(String(describing: withdrawFeeInfo))</\(content)>".set(style: "alertContent"),
       "<name>\(String(describing: gatewayFee)):</name><\(content)>  \(String(describing: gatewayFeeInfo))</\(content)>".set(style: "alertContent"),
