@@ -26,12 +26,12 @@ class RPCTest: XCTestCase {
     }
     
     func testAddress() {
-        let info = TransferAddress(id: AddressManager.shared.getUUID(), publicKey: "ttt", name: "test", address: "xxxxxxxxxsw23222")
+        let info = TransferAddress(id: AddressManager.shared.getUUID(), name: "test", address: "xxxxxxxxxsw23222")
         
         AddressManager.shared.addTransferAddress(info)
-        let list = AddressManager.shared.getTransferAddressList("ttt")
+        let list = AddressManager.shared.getTransferAddressList()
         
-        let info2 = TransferAddress(id:info.id, publicKey: "ttt", name: "test", address: "xxxxxxxxxsw1111")
+        let info2 = TransferAddress(id:info.id, name: "test", address: "xxxxxxxxxsw1111")
         AddressManager.shared.updateTransferAddress(info2)
         
         let result = AddressManager.shared.containTransferAddress(info2.id)

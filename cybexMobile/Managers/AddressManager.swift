@@ -11,8 +11,7 @@ import SwiftyUserDefaults
 
 struct TransferAddress: Codable, DefaultsSerializable, Equatable {
     var id:String
-    var publicKey:String
-    var name:String
+    var name:String//标签
     var address:String
 }
 
@@ -23,9 +22,8 @@ extension TransferAddress: DefaultsDefaultArrayValueType {
 
 struct WithdrawAddress: Codable, DefaultsSerializable, Equatable {
     var id:String
-    var publicKey:String
-    var name:String
-    var address:String
+    var name:String//标签
+    var address:String//地址或者账户
     var currency:String
     var memo:String?
 }
@@ -45,23 +43,23 @@ class AddressManager {
         return NSUUID().uuidString
     }
 
-    func getWithDrawAddressList(_ pubKey:String) -> [WithdrawAddress] {
+    func getWithDrawAddressList() -> [WithdrawAddress] {
         let list = Defaults[.withdrawAddressList]
         
-        return list.filter( {$0.publicKey == pubKey} )
+        return list
     }
     
-    func getWithDrawAddressListWith(_ pubKey:String, currency:String) -> [WithdrawAddress] {
+    func getWithDrawAddressListWith(_ currency:String) -> [WithdrawAddress] {
         let list = Defaults[.withdrawAddressList]
         
-        return list.filter( {$0.publicKey == pubKey && $0.currency == currency } )
+        return list.filter( {$0.currency == currency } )
     }
     
-    func containAddressOfWithDraw(_ pubKey:String, address:String) -> (Bool, [WithdrawAddress]) {
+    func containAddressOfWithDraw(_ address:String) -> (Bool, [WithdrawAddress]) {
         let list = Defaults[.withdrawAddressList]
         
         let filterList = list.filter { (info) -> Bool in
-            return info.publicKey == pubKey && info.address == address
+            return info.address == address
         }
         
         if filterList.count > 0 {
@@ -119,17 +117,17 @@ class AddressManager {
     
     //MARK: -- Transfer
     
-    func getTransferAddressList(_ pubKey:String) -> [TransferAddress] {
+    func getTransferAddressList() -> [TransferAddress] {
         let list = Defaults[.transferAddressList]
         
-        return list.filter( {$0.publicKey == pubKey} )
+        return list
     }
     
-    func containAddressOfTrnasfer(_ pubKey:String, address:String) -> (Bool, [TransferAddress]) {
+    func containAddressOfTransfer(_ address:String) -> (Bool, [TransferAddress]) {
         let list = Defaults[.transferAddressList]
         
         let filterList = list.filter { (info) -> Bool in
-            return info.publicKey == pubKey && info.address == address
+            return info.address == address
         }
         
         if filterList.count > 0 {

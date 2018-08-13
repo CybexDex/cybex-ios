@@ -193,7 +193,7 @@ extension AppCoordinator {
           timer.pause()
           return
         }
-        log.debug("freshTime ----\(Date())")
+//        log.debug("freshTime ----\(Date())")
         
         self.state.property.otherRequestRelyData.accept(1)
         self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority: priority, isNoFirst: false)
