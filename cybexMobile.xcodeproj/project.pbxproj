@@ -236,6 +236,12 @@
 		6DBCCB0ED729AC68AF493B54C15A81CF /* OpenedOrdersReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF14FC4A3BFAB5A78D89088EA656DA2 /* OpenedOrdersReducers.swift */; };
 		6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90712234E28EE675FA991ADB398400A0 /* LockupAssetsViewController.swift */; };
 		70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4D27CA3E4885E696C2D1EAEFD1BAB4 /* QuotesTitleView.swift */; };
+		7217B07C2122AAFD00608531 /* AddAddressCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B0782122AAFD00608531 /* AddAddressCoordinator.swift */; };
+		7217B07D2122AAFD00608531 /* AddAddressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B0792122AAFD00608531 /* AddAddressActions.swift */; };
+		7217B07E2122AAFD00608531 /* AddAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B07A2122AAFD00608531 /* AddAddressViewController.swift */; };
+		7217B07F2122AAFD00608531 /* AddAddressReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B07B2122AAFD00608531 /* AddAddressReducers.swift */; };
+		7217B0832122AD9D00608531 /* AddAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B0822122AD9D00608531 /* AddAddressView.swift */; };
+		7217B0852122ADA800608531 /* AddAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7217B0842122ADA800608531 /* AddAddressView.xib */; };
 		72199D6621044FD100575226 /* RechargeRecodeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6221044FD100575226 /* RechargeRecodeCoordinator.swift */; };
 		72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6321044FD100575226 /* RechargeRecodeActions.swift */; };
 		72199D6821044FD100575226 /* TradeRecodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6421044FD100575226 /* TradeRecodeViewController.swift */; };
@@ -278,6 +284,28 @@
 		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
+		7386F2A22121665100ABC924 /* AddressHomeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29E2121665100ABC924 /* AddressHomeActions.swift */; };
+		7386F2A32121665100ABC924 /* AddressHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29F2121665100ABC924 /* AddressHomeCoordinator.swift */; };
+		7386F2A42121665100ABC924 /* AddressHomeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2A02121665100ABC924 /* AddressHomeReducers.swift */; };
+		7386F2A52121665100ABC924 /* AddressHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2A12121665100ABC924 /* AddressHomeViewController.swift */; };
+		7386F2AE21216B2200ABC924 /* TransferAddressHomeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2AA21216B2200ABC924 /* TransferAddressHomeActions.swift */; };
+		7386F2AF21216B2200ABC924 /* TransferAddressHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2AB21216B2200ABC924 /* TransferAddressHomeCoordinator.swift */; };
+		7386F2B021216B2200ABC924 /* TransferAddressHomeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2AC21216B2200ABC924 /* TransferAddressHomeReducers.swift */; };
+		7386F2B121216B2200ABC924 /* TransferAddressHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2AD21216B2200ABC924 /* TransferAddressHomeViewController.swift */; };
+		7386F2B621216B3A00ABC924 /* WithdrawAddressHomeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2B221216B3A00ABC924 /* WithdrawAddressHomeActions.swift */; };
+		7386F2B721216B3A00ABC924 /* WithdrawAddressHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2B321216B3A00ABC924 /* WithdrawAddressHomeCoordinator.swift */; };
+		7386F2B821216B3A00ABC924 /* WithdrawAddressHomeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2B421216B3A00ABC924 /* WithdrawAddressHomeReducers.swift */; };
+		7386F2B921216B3A00ABC924 /* WithdrawAddressHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2B521216B3A00ABC924 /* WithdrawAddressHomeViewController.swift */; };
+		7386F2BE21216B9E00ABC924 /* WithdrawAddressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2BA21216B9E00ABC924 /* WithdrawAddressActions.swift */; };
+		7386F2BF21216B9E00ABC924 /* WithdrawAddressCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2BB21216B9E00ABC924 /* WithdrawAddressCoordinator.swift */; };
+		7386F2C021216B9E00ABC924 /* WithdrawAddressReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2BC21216B9E00ABC924 /* WithdrawAddressReducers.swift */; };
+		7386F2C121216B9E00ABC924 /* WithdrawAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2BD21216B9E00ABC924 /* WithdrawAddressViewController.swift */; };
+		7386F2C821216FC700ABC924 /* SectionCornerViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2C621216FC700ABC924 /* SectionCornerViewView.swift */; };
+		7386F2C921216FC700ABC924 /* SectionCornerViewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7386F2C721216FC700ABC924 /* SectionCornerViewView.xib */; };
+		7386F2D42121735800ABC924 /* AddressHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2D22121735800ABC924 /* AddressHomeTableViewCell.swift */; };
+		7386F2D52121735800ABC924 /* AddressHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7386F2D32121735800ABC924 /* AddressHomeTableViewCell.xib */; };
+		7386F2D82121737600ABC924 /* AddressHomeTableViewCellViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2D62121737600ABC924 /* AddressHomeTableViewCellViewView.swift */; };
+		7386F2D92121737600ABC924 /* AddressHomeTableViewCellViewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7386F2D72121737600ABC924 /* AddressHomeTableViewCellViewView.xib */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
 		74270D4B512CD81AA7159B135F944B0A /* ExchangeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D294438F1AC7ABE633549FA9CD2FDF2 /* ExchangeView.xib */; };
 		751D31DB62BFC9F2FC1A0EFC4C23A801 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D9F26ADE20F5811273E4B32DED357 /* SettingViewController.swift */; };
@@ -5698,6 +5726,12 @@
 		721401C37369E9EC5F09B832E7811F83 /* function_template.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = function_template.hpp; sourceTree = "<group>"; };
 		72152A9CCDD285E8443FBE328B3B5082 /* graphviz.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = graphviz.hpp; sourceTree = "<group>"; };
 		721676906B5FA3121F2DBD36D5D5B6A2 /* test_tools.ipp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = test_tools.ipp; sourceTree = "<group>"; };
+		7217B0782122AAFD00608531 /* AddAddressCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressCoordinator.swift; sourceTree = "<group>"; };
+		7217B0792122AAFD00608531 /* AddAddressActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressActions.swift; sourceTree = "<group>"; };
+		7217B07A2122AAFD00608531 /* AddAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewController.swift; sourceTree = "<group>"; };
+		7217B07B2122AAFD00608531 /* AddAddressReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressReducers.swift; sourceTree = "<group>"; };
+		7217B0822122AD9D00608531 /* AddAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressView.swift; sourceTree = "<group>"; };
+		7217B0842122ADA800608531 /* AddAddressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAddressView.xib; sourceTree = "<group>"; };
 		72199D6221044FD100575226 /* RechargeRecodeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeCoordinator.swift; sourceTree = "<group>"; };
 		72199D6321044FD100575226 /* RechargeRecodeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeActions.swift; sourceTree = "<group>"; };
 		72199D6421044FD100575226 /* TradeRecodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeRecodeViewController.swift; sourceTree = "<group>"; };
@@ -5796,6 +5830,28 @@
 		7386F296212120B500ABC924 /* cybexMobileTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cybexMobileTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		7386F299212120F200ABC924 /* RPCTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCTest.swift; sourceTree = "<group>"; };
 		7386F29B212124BF00ABC924 /* AddressManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressManager.swift; sourceTree = "<group>"; };
+		7386F29E2121665100ABC924 /* AddressHomeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressHomeActions.swift; sourceTree = "<group>"; };
+		7386F29F2121665100ABC924 /* AddressHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressHomeCoordinator.swift; sourceTree = "<group>"; };
+		7386F2A02121665100ABC924 /* AddressHomeReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressHomeReducers.swift; sourceTree = "<group>"; };
+		7386F2A12121665100ABC924 /* AddressHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressHomeViewController.swift; sourceTree = "<group>"; };
+		7386F2AA21216B2200ABC924 /* TransferAddressHomeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferAddressHomeActions.swift; sourceTree = "<group>"; };
+		7386F2AB21216B2200ABC924 /* TransferAddressHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferAddressHomeCoordinator.swift; sourceTree = "<group>"; };
+		7386F2AC21216B2200ABC924 /* TransferAddressHomeReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferAddressHomeReducers.swift; sourceTree = "<group>"; };
+		7386F2AD21216B2200ABC924 /* TransferAddressHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferAddressHomeViewController.swift; sourceTree = "<group>"; };
+		7386F2B221216B3A00ABC924 /* WithdrawAddressHomeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAddressHomeActions.swift; sourceTree = "<group>"; };
+		7386F2B321216B3A00ABC924 /* WithdrawAddressHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAddressHomeCoordinator.swift; sourceTree = "<group>"; };
+		7386F2B421216B3A00ABC924 /* WithdrawAddressHomeReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAddressHomeReducers.swift; sourceTree = "<group>"; };
+		7386F2B521216B3A00ABC924 /* WithdrawAddressHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAddressHomeViewController.swift; sourceTree = "<group>"; };
+		7386F2BA21216B9E00ABC924 /* WithdrawAddressActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAddressActions.swift; sourceTree = "<group>"; };
+		7386F2BB21216B9E00ABC924 /* WithdrawAddressCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAddressCoordinator.swift; sourceTree = "<group>"; };
+		7386F2BC21216B9E00ABC924 /* WithdrawAddressReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAddressReducers.swift; sourceTree = "<group>"; };
+		7386F2BD21216B9E00ABC924 /* WithdrawAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAddressViewController.swift; sourceTree = "<group>"; };
+		7386F2C621216FC700ABC924 /* SectionCornerViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCornerViewView.swift; sourceTree = "<group>"; };
+		7386F2C721216FC700ABC924 /* SectionCornerViewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionCornerViewView.xib; sourceTree = "<group>"; };
+		7386F2D22121735800ABC924 /* AddressHomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressHomeTableViewCell.swift; sourceTree = "<group>"; };
+		7386F2D32121735800ABC924 /* AddressHomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressHomeTableViewCell.xib; sourceTree = "<group>"; };
+		7386F2D62121737600ABC924 /* AddressHomeTableViewCellViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressHomeTableViewCellViewView.swift; sourceTree = "<group>"; };
+		7386F2D72121737600ABC924 /* AddressHomeTableViewCellViewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressHomeTableViewCellViewView.xib; sourceTree = "<group>"; };
 		7388EB07415DBCA0B8C079BF7C089E8C /* kinematic_viscosity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kinematic_viscosity.hpp; sourceTree = "<group>"; };
 		73905E38FD41E7F65B811029DCAADED6 /* banded.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = banded.hpp; sourceTree = "<group>"; };
 		7395B10A36CA7EBBE9AFABCDCC97095A /* results_collector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = results_collector.hpp; sourceTree = "<group>"; };
@@ -14735,6 +14791,7 @@
 		1957BC4603D51BA58EA334581171C0AD /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				7386F29D212165FD00ABC924 /* Address */,
 				F787C1B74054A1821B702F93B816D56C /* Cells */,
 				6E0AA227CB72A179CFB9442DCB7D85E9 /* LockupAssets */,
 				92AA40172D435927D99A7636D930C77A /* OpenedOrders */,
@@ -21625,6 +21682,35 @@
 			path = nt2;
 			sourceTree = "<group>";
 		};
+		7217B0772122A99000608531 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				7217B0812122AD8900608531 /* Cells */,
+				7217B0802122AD8300608531 /* Views */,
+				7217B0782122AAFD00608531 /* AddAddressCoordinator.swift */,
+				7217B0792122AAFD00608531 /* AddAddressActions.swift */,
+				7217B07A2122AAFD00608531 /* AddAddressViewController.swift */,
+				7217B07B2122AAFD00608531 /* AddAddressReducers.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		7217B0802122AD8300608531 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7217B0822122AD9D00608531 /* AddAddressView.swift */,
+				7217B0842122ADA800608531 /* AddAddressView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7217B0812122AD8900608531 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		72199D6121044FB600575226 /* TradeRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -21821,6 +21907,98 @@
 				7386F296212120B500ABC924 /* cybexMobileTests-Bridging-Header.h */,
 			);
 			path = cybexMobileTests;
+			sourceTree = "<group>";
+		};
+		7386F29D212165FD00ABC924 /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				7217B0772122A99000608531 /* Add */,
+				7386F2A921216ACD00ABC924 /* Transfer */,
+				7386F2A821216AC700ABC924 /* Withdraw */,
+				7386F2A7212169FF00ABC924 /* Cells */,
+				7386F2A6212169EF00ABC924 /* Views */,
+				7386F29E2121665100ABC924 /* AddressHomeActions.swift */,
+				7386F29F2121665100ABC924 /* AddressHomeCoordinator.swift */,
+				7386F2A02121665100ABC924 /* AddressHomeReducers.swift */,
+				7386F2A12121665100ABC924 /* AddressHomeViewController.swift */,
+			);
+			path = Address;
+			sourceTree = "<group>";
+		};
+		7386F2A6212169EF00ABC924 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7386F2D62121737600ABC924 /* AddressHomeTableViewCellViewView.swift */,
+				7386F2D72121737600ABC924 /* AddressHomeTableViewCellViewView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7386F2A7212169FF00ABC924 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7386F2D22121735800ABC924 /* AddressHomeTableViewCell.swift */,
+				7386F2D32121735800ABC924 /* AddressHomeTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		7386F2A821216AC700ABC924 /* Withdraw */ = {
+			isa = PBXGroup;
+			children = (
+				7386F2C321216F8200ABC924 /* Cells */,
+				7386F2C221216F7C00ABC924 /* Views */,
+				7386F2B221216B3A00ABC924 /* WithdrawAddressHomeActions.swift */,
+				7386F2B321216B3A00ABC924 /* WithdrawAddressHomeCoordinator.swift */,
+				7386F2B421216B3A00ABC924 /* WithdrawAddressHomeReducers.swift */,
+				7386F2B521216B3A00ABC924 /* WithdrawAddressHomeViewController.swift */,
+				7386F2BA21216B9E00ABC924 /* WithdrawAddressActions.swift */,
+				7386F2BB21216B9E00ABC924 /* WithdrawAddressCoordinator.swift */,
+				7386F2BC21216B9E00ABC924 /* WithdrawAddressReducers.swift */,
+				7386F2BD21216B9E00ABC924 /* WithdrawAddressViewController.swift */,
+			);
+			path = Withdraw;
+			sourceTree = "<group>";
+		};
+		7386F2A921216ACD00ABC924 /* Transfer */ = {
+			isa = PBXGroup;
+			children = (
+				7386F2C521216F8B00ABC924 /* Cells */,
+				7386F2C421216F8700ABC924 /* Views */,
+				7386F2AA21216B2200ABC924 /* TransferAddressHomeActions.swift */,
+				7386F2AB21216B2200ABC924 /* TransferAddressHomeCoordinator.swift */,
+				7386F2AC21216B2200ABC924 /* TransferAddressHomeReducers.swift */,
+				7386F2AD21216B2200ABC924 /* TransferAddressHomeViewController.swift */,
+			);
+			path = Transfer;
+			sourceTree = "<group>";
+		};
+		7386F2C221216F7C00ABC924 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7386F2C321216F8200ABC924 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		7386F2C421216F8700ABC924 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7386F2C521216F8B00ABC924 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		738B1DD062FB720F3A915D3AAF3D83A9 /* flatten_view */ = {
@@ -27750,6 +27928,8 @@
 				3B0EB644210313AA00F19C31 /* YourPortfolioTableHeadView.swift */,
 				3B0EB648210313AC00F19C31 /* YourPortfolioTableHeadView.xib */,
 				225746E3210715890017FA1A /* Components.storyboard */,
+				7386F2C621216FC700ABC924 /* SectionCornerViewView.swift */,
+				7386F2C721216FC700ABC924 /* SectionCornerViewView.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -32561,6 +32741,7 @@
 				DADCEB576AA31881365CA9DFD8588B7A /* Main.storyboard in Resources */,
 				5EC5CB38F68C8EB063FE6DB600247A30 /* MyHistoryCell.xib in Resources */,
 				3B0EB658210313B200F19C31 /* AccountTableHeadView.xib in Resources */,
+				7386F2C921216FC700ABC924 /* SectionCornerViewView.xib in Resources */,
 				7323B4B02A3A6EFE54C1B30D7491D953 /* MyHistoryCellView.xib in Resources */,
 				16AF9C856D66092D87065E969141D71F /* MyOpenedOrdersView.xib in Resources */,
 				4EFDB6FA81BF7FB9600D4A6E07374864 /* NoticeBoardView.xib in Resources */,
@@ -32597,6 +32778,7 @@
 				589C3222B6936F858915CE755BEA7139 /* algorithm in Resources */,
 				E2CDBCB0F3EF1EAF61B086884BE94766 /* algorithm.SUNWCCh in Resources */,
 				6A80CEA201B762683D148EF0C7CC0EE0 /* array in Resources */,
+				7217B0852122ADA800608531 /* AddAddressView.xib in Resources */,
 				225746E4210715890017FA1A /* Components.storyboard in Resources */,
 				1CDF918F13C09430A6744E7A1FED2C86 /* array.SUNWCCh in Resources */,
 				C9E9C25E6F2F69A3AF5564B11DFE17E7 /* bcc32.SUNWCCh in Resources */,
@@ -32617,6 +32799,7 @@
 				50915BC730017A895B2663F8FE47B318 /* csetjmp in Resources */,
 				37F2E0A1EC99E3D52B87483728F0C31B /* csignal in Resources */,
 				3A66D34045644F50A286279AF9051D1D /* cstdarg in Resources */,
+				7386F2D92121737600ABC924 /* AddressHomeTableViewCellViewView.xib in Resources */,
 				97A25CFA01434F7C0AF6B052507271EF /* cstddef in Resources */,
 				6070ECC6CD01377E85F78D0E2B0E4FE4 /* cstdio in Resources */,
 				A23785A38EA5D04EC95049512BE0E75E /* cstdlib in Resources */,
@@ -32660,6 +32843,7 @@
 				A74A9391C9FC80F533BB168C6F09C5BD /* map.SUNWCCh in Resources */,
 				0AA525ED6C44D673ABDA5E34FE8BAF65 /* memory in Resources */,
 				C5DB709236E31D29681C3DAA03E03D48 /* memory.SUNWCCh in Resources */,
+				7386F2D52121735800ABC924 /* AddressHomeTableViewCell.xib in Resources */,
 				F912145FB06A9D6AD18125E0D832BCD0 /* new in Resources */,
 				C1DFA012D72EAC0707437339C740AA1D /* new.SUNWCCh in Resources */,
 				3B0EB651210313B200F19C31 /* NormalCellView.xib in Resources */,
@@ -33071,6 +33255,7 @@
 				C37CA15215CBB1B064E0514AB9D0EFE5 /* AccountOpenedOrdersView.swift in Sources */,
 				225746DE210707DD0017FA1A /* PickerReducers.swift in Sources */,
 				D3694E6115F5ED50F0FFE4108E64BAEE /* AccountPortfolioCell.swift in Sources */,
+				7386F2D42121735800ABC924 /* AddressHomeTableViewCell.swift in Sources */,
 				9708F7C8EA5B8E107E937306846BE6F0 /* AccountPortfolioCellView.swift in Sources */,
 				32BED01405F6D7B22B348057E0BDE3C8 /* AccountPortfolioView.swift in Sources */,
 				72199DA92104680000575226 /* TransferContentView.swift in Sources */,
@@ -33088,8 +33273,11 @@
 				F7886D0310C612E91619D84DDA4182F5 /* BaseNavigationController.swift in Sources */,
 				AAEB2ADE1A954767CBCDED7BE011631A /* BaseTabbarViewController.swift in Sources */,
 				E173B41881E536F07501B0784F9660CF /* BaseTableViewCell.swift in Sources */,
+				7217B07C2122AAFD00608531 /* AddAddressCoordinator.swift in Sources */,
 				3B0EB65A210313B200F19C31 /* AccountTableHeadView.swift in Sources */,
+				7386F2A32121665100ABC924 /* AddressHomeCoordinator.swift in Sources */,
 				E67B496E838B6A7A22AF4F05AED93441 /* BaseViewController.swift in Sources */,
+				7386F2A52121665100ABC924 /* AddressHomeViewController.swift in Sources */,
 				59A469E9C21A3CE0D06E98458A2D1BD6 /* BaseWebViewController.swift in Sources */,
 				166E70E89C354FE2B3C8BA861FE6958E /* BitShareCoordinator.mm in Sources */,
 				CB5F7115F86F33FA0B26878FC117A884 /* Bucket.swift in Sources */,
@@ -33108,6 +33296,7 @@
 				221EC2382105B1930059F856 /* GrowContentView.swift in Sources */,
 				221EC2392105B1930059F856 /* TitleTextfieldView.swift in Sources */,
 				C0AC3C1A58448D06655DCE0994FDC33A /* BusinessView.swift in Sources */,
+				7386F2B621216B3A00ABC924 /* WithdrawAddressHomeActions.swift in Sources */,
 				221EC2372105B1930059F856 /* GrowSectionView.swift in Sources */,
 				7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */,
 				3D856B5FBCBB3B250D34CFA99756374F /* Button.swift in Sources */,
@@ -33125,14 +33314,17 @@
 				B7631744A19B452081A71269BF881246 /* CBKLineVolumeView.swift in Sources */,
 				8C3E5CB53A30AD3221992CCA44A8D332 /* CBMACDModel.swift in Sources */,
 				92AF8740929C204D86A85866576BC844 /* CBMALineBrush.swift in Sources */,
+				7217B0832122AD9D00608531 /* AddAddressView.swift in Sources */,
 				7F38CC71354724DD10BBC3E8BF37C44A /* CBMAModel.swift in Sources */,
 				51ED56491B9169BC8F1E25548D3387D8 /* CBMAVOLUMEModel.swift in Sources */,
+				7386F2BF21216B9E00ABC924 /* WithdrawAddressCoordinator.swift in Sources */,
 				E13AE68F78264232722CD68636FC433B /* CGContextExtension.swift in Sources */,
 				1F89EA780689075E3FB3230FDB6EE703 /* Collection+Extensions.swift in Sources */,
 				DFA46607407072808EE78AEA1A37D728 /* ColorTheme.swift in Sources */,
 				3B0EB6602103149100F19C31 /* AccountViewController.swift in Sources */,
 				49652BAEE9A80FCCF6104C181395648C /* Constants.swift in Sources */,
 				8F231436DF08E691F844CC01B2AC1845 /* Crypto.swift in Sources */,
+				7386F2BE21216B9E00ABC924 /* WithdrawAddressActions.swift in Sources */,
 				BE882BD38F3D40A56E08366BC6C20DDC /* CybexActionView.swift in Sources */,
 				50C985D347323594C1A8239536E6AAAD /* CybexAlertView.swift in Sources */,
 				B708A685A32CF984A16E8AA133B5032A /* CybexLabel.swift in Sources */,
@@ -33140,6 +33332,7 @@
 				C4B9965B38DBF143FD1862CF88F9DAE1 /* CybexTextView.swift in Sources */,
 				CD7ECF264F6C16A3649CE586A93D6269 /* CybexTitleView.swift in Sources */,
 				8C00D47D4D9F9CB040B6855F6CC7D757 /* DataBaseApi.swift in Sources */,
+				7217B07E2122AAFD00608531 /* AddAddressViewController.swift in Sources */,
 				61096350D887C3728E3B617E993C2365 /* Demo.swift in Sources */,
 				51FB3EBF69DA6AF015F0DF92781986BF /* DemoCache.swift in Sources */,
 				A1EF7FAAA7F0B4F6C9FE153714C1ED47 /* ShowToastManager.swift in Sources */,
@@ -33162,6 +33355,7 @@
 				72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */,
 				98D200C38B81D27DAF59438FCB5EF646 /* FAQReducers.swift in Sources */,
 				3B824D5C362724DE4C1048A35CDC37E0 /* FAQRootCoordinator.swift in Sources */,
+				7386F2C121216B9E00ABC924 /* WithdrawAddressViewController.swift in Sources */,
 				72199D8C21045D4700575226 /* TransferListCoordinator.swift in Sources */,
 				F6AF1D76C51578A4EC2438427711F783 /* FAQViewController.swift in Sources */,
 				8691BEEE7629D4BE41D13D82D9AF29A9 /* GradientLabelView.swift in Sources */,
@@ -33171,6 +33365,7 @@
 				CA894F0EB69EF4448C0142CE0BE7D9C5 /* HistoryApi.swift in Sources */,
 				105EA57407E74D316C2918BA41771E3B /* HomeActions.swift in Sources */,
 				FC108E84DEAE074748E2868644692BCD /* HomeContentView.swift in Sources */,
+				7386F2AF21216B2200ABC924 /* TransferAddressHomeCoordinator.swift in Sources */,
 				4420DD3F31DC377E0DB1DEC13E7708A5 /* HomeCoordinator.swift in Sources */,
 				3B0EB659210313B200F19C31 /* NormalContentCell.swift in Sources */,
 				8C20E983876A75B5AF1B2B1CC5B7FA6C /* HomePairCell.swift in Sources */,
@@ -33192,6 +33387,7 @@
 				0B0FFCE74BC73BD13EB049B68CD7E5AE /* LockupAssetsActions.swift in Sources */,
 				421AAF66E862B29FD286626A32636875 /* LockupAssetsCell.swift in Sources */,
 				1262E9F910FE9F357F1D1857B4FD93A4 /* LockupAssetsCoordinator.swift in Sources */,
+				7386F2B021216B2200ABC924 /* TransferAddressHomeReducers.swift in Sources */,
 				72AAC8B02106FC840040793F /* Record.swift in Sources */,
 				80258D6F4C94ACC78C20B5ACE8BEAD2F /* LockupAssetsReducers.swift in Sources */,
 				85D46A1F0D3BBF12CF72903D466D9239 /* LockupAssetsSectionView.swift in Sources */,
@@ -33224,6 +33420,7 @@
 				225746DB210707DD0017FA1A /* PickerCoordinator.swift in Sources */,
 				D1612139CDC75BB4ACC08A1D78FD0AEE /* OpenedOrdersCell.swift in Sources */,
 				5F25028208C6665DE69B50E5D5ECBEF6 /* OpenedOrdersCoordinator.swift in Sources */,
+				7217B07D2122AAFD00608531 /* AddAddressActions.swift in Sources */,
 				3B0EB655210313B200F19C31 /* AccountContentView.swift in Sources */,
 				26827458BC8C2CF5494505DA58315BBF /* OpenedOrdersHeaderView.swift in Sources */,
 				6DBCCB0ED729AC68AF493B54C15A81CF /* OpenedOrdersReducers.swift in Sources */,
@@ -33235,15 +33432,18 @@
 				B7C833CEBC9B338666CA2D979065BF91 /* Operators.swift in Sources */,
 				A33E06706616C92F527D5547D28DEBF6 /* Optional+Extensions.swift in Sources */,
 				CDFF0BF138FA10588F2D771CAF16AF34 /* OrderBook.swift in Sources */,
+				7386F2A42121665100ABC924 /* AddressHomeReducers.swift in Sources */,
 				019AC681342BD1E978777A6A503E27B6 /* OrderBookActions.swift in Sources */,
 				4C5E6FF343C8DA25EC51F44EF725069E /* OrderBookCell.swift in Sources */,
 				D898B818223D8DD3B304D2D7F5A3E2AB /* OrderBookCellView.swift in Sources */,
 				72199D79210450C900575226 /* RecodeCell.swift in Sources */,
 				B50D80579F91D71A098AEB21A8251C44 /* OrderBookContentView.swift in Sources */,
 				DB5E6F5B71C53800CE2EEA32391210BE /* OrderBookCoordinator.swift in Sources */,
+				7386F2B921216B3A00ABC924 /* WithdrawAddressHomeViewController.swift in Sources */,
 				813E625BF1238DDBDC460AFDBCEF4049 /* OrderBookReducers.swift in Sources */,
 				562EE9FB61A1D1EBCB263F8C8DE265B6 /* OrderBookViewController.swift in Sources */,
 				CEC8E5E6CEBF33DC5FED8EBCA2AFAAE7 /* PairCardCell.swift in Sources */,
+				7386F2D82121737600ABC924 /* AddressHomeTableViewCellViewView.swift in Sources */,
 				806E6CA899929830A51F0FBB79089A80 /* PairCardView.swift in Sources */,
 				48373055E74D836258CD46891945EF38 /* PairDetailView.swift in Sources */,
 				D3C87D3A247487C8D834A828782FC472 /* PairListHorizantalView.swift in Sources */,
@@ -33254,6 +33454,7 @@
 				E54849D562EC4C8B42B70B962A97269E /* R.generated.swift in Sources */,
 				ED57B29BDB18C8B97035E7DA20DF26E5 /* RechargeActions.swift in Sources */,
 				665FBB42152A37B183D011D45A4A0F22 /* RechargeCoordinator.swift in Sources */,
+				7386F2C821216FC700ABC924 /* SectionCornerViewView.swift in Sources */,
 				10F92CEABF192DAC227A5005DD4F12BF /* RechargeDetailActions.swift in Sources */,
 				133E7DE8927D9AD19315D14E638939BE /* RechargeDetailCoordinator.swift in Sources */,
 				D1C63B5AAC5552A99528E306AC7F57E0 /* RechargeDetailReducers.swift in Sources */,
@@ -33307,16 +33508,20 @@
 				2E3DB3499E75C0D06068C979CD788B00 /* TradeReducers.swift in Sources */,
 				72D9DD58210EB60F00963915 /* Periscope.swift in Sources */,
 				640657C00CD9588E73E0F0280F245348 /* TradeRootCoordinator.swift in Sources */,
+				7217B07F2122AAFD00608531 /* AddAddressReducers.swift in Sources */,
+				7386F2B121216B2200ABC924 /* TransferAddressHomeViewController.swift in Sources */,
 				3B0EB65C210313B200F19C31 /* YourPortfolioHeadView.swift in Sources */,
 				C02132F00200B408020442C307CEE0B6 /* TradeView.swift in Sources */,
 				7CA82BA6BC1F22AAA929D52CD5C4434F /* TradeViewController.swift in Sources */,
 				72199DA22104636900575226 /* TransferDetailReducers.swift in Sources */,
+				7386F2C021216B9E00ABC924 /* WithdrawAddressReducers.swift in Sources */,
 				A0205CDF8595D10C5D9367EBCBBA714A /* UIColor+Additions.swift in Sources */,
 				1885C2EE1E25930F2E94702A8C05C2BC /* UIColor+Cybexblack.swift in Sources */,
 				492A4075DDD845005D90DD5201F32F26 /* UIColorExtension.swift in Sources */,
 				CC8DD1E9001CFBB8915E342EDB329B3E /* UIImage+Extensions.swift in Sources */,
 				0C46B30A32343632C135B84DDEB47F80 /* UIResponder+Route.swift in Sources */,
 				225746E821073E480017FA1A /* PickerView.swift in Sources */,
+				7386F2B721216B3A00ABC924 /* WithdrawAddressHomeCoordinator.swift in Sources */,
 				72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */,
 				0FF6C4A7AAF40F0AC67CBDAEAA2406E2 /* UITextField+Extensions.swift in Sources */,
 				3B0EB6672103155C00F19C31 /* YourPortfolioCoordinator.swift in Sources */,
@@ -33327,6 +33532,7 @@
 				73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */,
 				1EE747D219462D96F1597B374E8338E8 /* UserManager.swift in Sources */,
 				20C5C352A5EE76CE53F6F1F8C7CE1FB6 /* Utils.swift in Sources */,
+				7386F2AE21216B2200ABC924 /* TransferAddressHomeActions.swift in Sources */,
 				E3A0DE7C4852EA18DEEC292ADE0A8F49 /* Vesting.swift in Sources */,
 				9F062BB04541D9C9086AED80A6B1E454 /* WithNoDataView.swift in Sources */,
 				D943D44B1F143FD28298F8C1F7E94552 /* WithdrawDetailActions.swift in Sources */,
@@ -33335,6 +33541,7 @@
 				A390401CBDF18D681CE95ABF9268BBF3 /* WithdrawDetailViewController.swift in Sources */,
 				221EC23E2105B3110059F856 /* CornerAndShadowView.swift in Sources */,
 				EC446CED4809CD57D338FB866A5AE631 /* YourPorfolioView.swift in Sources */,
+				7386F2A22121665100ABC924 /* AddressHomeActions.swift in Sources */,
 				60502E37A09ABFC6DD95A24F6A855B65 /* YourPortfolioActions.swift in Sources */,
 				480BE6AB9D3A7CCE75BCB6BBF9525FFD /* YourPortfolioCell.swift in Sources */,
 				ACCB7267D22FD99349666A34A7079245 /* YourPortfolioReducers.swift in Sources */,
@@ -33344,6 +33551,7 @@
 				911CFA6B3FC228D25DBD994B8E6AAEDD /* get_dev_key.cpp in Sources */,
 				AA4E21B5AB76E4FEA62F38545E25868C /* memo.cpp in Sources */,
 				9CA15199365825CE26938B0E719EC4CC /* pts_address.cpp in Sources */,
+				7386F2B821216B3A00ABC924 /* WithdrawAddressHomeReducers.swift in Sources */,
 				AB91379B8C52B82AAF3DCC870ED7DA37 /* transaction.cpp in Sources */,
 				21D4F7060148486EE0215AE84B53174E /* types.cpp in Sources */,
 				31F4371D9622BE1743A354B2E42FCD4F /* vote.cpp in Sources */,

@@ -102,7 +102,11 @@ class BusinessViewController: BaseViewController {
     }
     
     guard let canPost = self.coordinator?.checkBalance(pair, isBuy: self.type == .buy) else {
-      self.containerView.tipView.isHidden = true
+        if let amount =  self.containerView.amountTextfield.text, amount.count > 0 , let price =  self.containerView.priceTextfield.text, price.count > 0  {
+            self.containerView.tipView.isHidden = false
+        }else {
+            self.containerView.tipView.isHidden = true
+        }
       return false
     }
     
@@ -194,9 +198,9 @@ class BusinessViewController: BaseViewController {
     NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.containerView.priceTextfield, queue: nil) {[weak self] (notifi) in
       guard let `self` = self else { return }
       
-      if self.containerView.tipView.isHidden == true ,self.coordinator?.state.property.balance.value == 0{
-        self.containerView.tipView.isHidden = false
-      }
+//      if self.containerView.tipView.isHidden == true ,self.coordinator?.state.property.balance.value == 0{
+//        self.containerView.tipView.isHidden = false
+//      }
       guard let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0 else {
         self.containerView.priceTextfield.text = ""
         return
@@ -211,9 +215,9 @@ class BusinessViewController: BaseViewController {
     
     NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.containerView.amountTextfield, queue: nil) {[weak self] (notifi) in
       guard let `self` = self else { return }
-      if self.containerView.tipView.isHidden == true ,self.coordinator?.state.property.balance.value == 0{
-        self.containerView.tipView.isHidden = false
-      }
+//      if self.containerView.tipView.isHidden == true ,self.coordinator?.state.property.balance.value == 0{
+//        self.containerView.tipView.isHidden = false
+//      }
       guard let text = self.containerView.amountTextfield.text, text != "", text.toDouble() != 0 else {
         self.containerView.amountTextfield.text = ""
         return
@@ -264,7 +268,10 @@ class BusinessViewController: BaseViewController {
 
       guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote], balance != 0 else {
         self.containerView.balance.text = "--"
-        self.containerView.tipView.isHidden = false
+        
+        if let amount =  self.containerView.amountTextfield.text, amount.count > 0 , let price =  self.containerView.priceTextfield.text, price.count > 0  {
+            self.containerView.tipView.isHidden = false
+        }
         return
       
       }
