@@ -1,27 +1,28 @@
 //
-//  SectionCornerViewView.swift
+//  AddressCellView.swift
 //  cybexMobile
 //
-//  Created koofrank on 2018/8/13.
+//  Created koofrank on 2018/8/14.
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
 import Foundation
-import TinyConstraints
 
 @IBDesignable
-class SectionCornerViewView: UIView {
+class AddressCellView: UIView {
+    @IBOutlet weak var nickName: UILabel!
+    @IBOutlet weak var address: UILabel!
     
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var memo: UILabel!
     
     var data: Any? {
         didSet {
-            
+        
         }
     }
     
     fileprivate func setup() {
-        updateHeight()        
+        updateHeight()
     }
     
     override var intrinsicContentSize: CGSize {

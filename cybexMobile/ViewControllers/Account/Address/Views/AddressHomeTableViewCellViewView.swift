@@ -10,14 +10,31 @@ import Foundation
 
 @IBDesignable
 class AddressHomeTableViewCellViewView: UIView {
+    
+    @IBOutlet weak var sectionView: SectionCornerViewView!
+    
     var data: Any? {
         didSet {
         
         }
     }
     
+    func appendView() {
+        let v = NormalCellView(frame: CGRect.zero)
+        v.index = 0
+        v.name_locali = R.string.localizable.withdraw_address()
+        v.height(54)
+        sectionView.stackView.addArrangedSubview(v)
+        
+        let v2 = NormalCellView(frame: CGRect.zero)
+        v2.index = 1
+        v2.name_locali = R.string.localizable.transfer_account()
+        sectionView.stackView.addArrangedSubview(v2)
+    }
+    
     fileprivate func setup() {
         updateHeight()
+        appendView()
     }
     
     override var intrinsicContentSize: CGSize {

@@ -1,17 +1,16 @@
 //
-//  AddressHomeTableViewCell.swift
+//  WithdrawAddressHomeTableViewCell.swift
 //  cybexMobile
 //
-//  Created by koofrank on 2018/8/13.
+//  Created by koofrank on 2018/8/14.
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
 import UIKit
 
-class AddressHomeTableViewCell: BaseTableViewCell {
+class WithdrawAddressHomeTableViewCell: BaseTableViewCell {
 
-    @IBOutlet weak var foreView: AddressHomeTableViewCellViewView!
-    
+    @IBOutlet weak var foreView: NormalCellView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

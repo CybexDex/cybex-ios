@@ -7,9 +7,10 @@
 //
 
 import XCTest
-import Nimble
 import HandyJSON
 import SwiftyJSON
+import FCUUID
+import SwiftyUserDefaults
 
 @testable import cybexMobile
 

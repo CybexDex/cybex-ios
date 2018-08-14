@@ -13,10 +13,23 @@ import ReSwift
 
 class TransferAddressHomeViewController: BaseViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+
 	var coordinator: (TransferAddressHomeCoordinatorProtocol & TransferAddressHomeStateManagerProtocol)?
 
 	override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupUI()
+    }
+    
+    func setupUI() {
+        configRightNavButton(R.image.ic_add_24_px())
+        self.tableView.register(R.nib.transferAddressHomeTableViewCell(), forCellReuseIdentifier: R.nib.transferAddressHomeTableViewCell.name)
+    }
+    
+    override func rightAction(_ sender: UIButton) {
+        
     }
     
     func commonObserveState() {
@@ -36,5 +49,17 @@ class TransferAddressHomeViewController: BaseViewController {
     override func configureObserveState() {
         commonObserveState()
         
+    }
+}
+
+extension TransferAddressHomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.transferAddressHomeTableViewCell.name, for: indexPath) as! TransferAddressHomeTableViewCell
+        
+        return cell
     }
 }

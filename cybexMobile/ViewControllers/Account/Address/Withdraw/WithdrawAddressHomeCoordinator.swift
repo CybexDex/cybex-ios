@@ -11,6 +11,7 @@ import ReSwift
 import SwiftNotificationCenter
 
 protocol WithdrawAddressHomeCoordinatorProtocol {
+    func openWithDrawAddressVC()
 }
 
 protocol WithdrawAddressHomeStateManagerProtocol {
@@ -36,7 +37,12 @@ class WithdrawAddressHomeCoordinator: AccountRootCoordinator {
 }
 
 extension WithdrawAddressHomeCoordinator: WithdrawAddressHomeCoordinatorProtocol {
-    
+    func openWithDrawAddressVC() {
+        let vc = R.storyboard.account.withdrawAddressViewController()!
+        let coor = WithdrawAddressCoordinator(rootVC: self.rootVC)
+        vc.coordinator = coor
+        self.rootVC.pushViewController(vc, animated: true)
+    }
 }
 
 extension WithdrawAddressHomeCoordinator: WithdrawAddressHomeStateManagerProtocol {

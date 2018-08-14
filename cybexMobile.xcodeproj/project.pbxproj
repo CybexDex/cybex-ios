@@ -275,6 +275,14 @@
 		72EC6A5920F4612200CEAFF6 /* RechargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A5720F4612100CEAFF6 /* RechargeView.swift */; };
 		72EC6A5A20F4612200CEAFF6 /* RechargeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5820F4612200CEAFF6 /* RechargeView.xib */; };
 		7323B4B02A3A6EFE54C1B30D7491D953 /* MyHistoryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E17D1C068A4ED09DD447E3434E5E550 /* MyHistoryCellView.xib */; };
+		733714B12122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714AF2122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift */; };
+		733714B22122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714B02122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib */; };
+		733714B52122D2B400B2ED90 /* WithdrawAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714B32122D2B400B2ED90 /* WithdrawAddressTableViewCell.swift */; };
+		733714B62122D2B400B2ED90 /* WithdrawAddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714B42122D2B400B2ED90 /* WithdrawAddressTableViewCell.xib */; };
+		733714B92122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714B72122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.swift */; };
+		733714BA2122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714B82122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.xib */; };
+		733714BD2122D32500B2ED90 /* AddressCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714BB2122D32500B2ED90 /* AddressCellView.swift */; };
+		733714BE2122D32500B2ED90 /* AddressCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714BC2122D32500B2ED90 /* AddressCellView.xib */; };
 		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
@@ -5804,6 +5812,14 @@
 		7332B0A4E530EEDF4F5295A267932B23 /* static_binding.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = static_binding.hpp; sourceTree = "<group>"; };
 		7335642E20FF2C0500426FE4 /* cybex_gateway_query.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cybex_gateway_query.hpp; sourceTree = "<group>"; };
 		7336D47B5E14FBBBDC4A985A8613F59A /* recursive_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = recursive_wrapper_fwd.hpp; sourceTree = "<group>"; };
+		733714AF2122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAddressHomeTableViewCell.swift; sourceTree = "<group>"; };
+		733714B02122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithdrawAddressHomeTableViewCell.xib; sourceTree = "<group>"; };
+		733714B32122D2B400B2ED90 /* WithdrawAddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAddressTableViewCell.swift; sourceTree = "<group>"; };
+		733714B42122D2B400B2ED90 /* WithdrawAddressTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithdrawAddressTableViewCell.xib; sourceTree = "<group>"; };
+		733714B72122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferAddressHomeTableViewCell.swift; sourceTree = "<group>"; };
+		733714B82122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferAddressHomeTableViewCell.xib; sourceTree = "<group>"; };
+		733714BB2122D32500B2ED90 /* AddressCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCellView.swift; sourceTree = "<group>"; };
+		733714BC2122D32500B2ED90 /* AddressCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCellView.xib; sourceTree = "<group>"; };
 		7339798545DEB848EA63717020DCCAA9 /* properties.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = properties.hpp; sourceTree = "<group>"; };
 		733BBFA91394DEE24D0EE47EF4C35F04 /* end.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = end.hpp; sourceTree = "<group>"; };
 		7344DCB142B3E51B91B0A7D12614C9A2 /* pool_construct_simple.ipp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pool_construct_simple.ipp; sourceTree = "<group>"; };
@@ -21934,6 +21950,8 @@
 		7386F2C221216F7C00ABC924 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				733714BB2122D32500B2ED90 /* AddressCellView.swift */,
+				733714BC2122D32500B2ED90 /* AddressCellView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -21941,6 +21959,10 @@
 		7386F2C321216F8200ABC924 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				733714AF2122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift */,
+				733714B02122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib */,
+				733714B32122D2B400B2ED90 /* WithdrawAddressTableViewCell.swift */,
+				733714B42122D2B400B2ED90 /* WithdrawAddressTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -21955,6 +21977,8 @@
 		7386F2C521216F8B00ABC924 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				733714B72122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.swift */,
+				733714B82122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -32662,6 +32686,7 @@
 				D971C57B81B4A2FBB083235DDE5057A2 /* AccessoryCollectionViewCell.xib in Resources */,
 				FE75674B7C6A22FAFA051C9CE0E95A1D /* AccessoryHorizentalView.xib in Resources */,
 				607DB9C515F6376EF477F0C62C46B8F2 /* AccountAssetOperationView.xib in Resources */,
+				733714BE2122D32500B2ED90 /* AddressCellView.xib in Resources */,
 				334F0C20FD029ABA79FC1F141026A0AB /* AccountAssetOperationsItemView.xib in Resources */,
 				66D4B960BFC33039549F7EF70D2866CA /* AccountOpenedOrdersView.xib in Resources */,
 				46317E1E7CFDD19141FDE4C8D29D5E84 /* AccountPortfolioCell.xib in Resources */,
@@ -32721,12 +32746,15 @@
 				C860BE92032F361E51995DB61C68774C /* RechargeSegment.xib in Resources */,
 				131A2FCACA9688EC4FC89E1A50E45457 /* StyleLabel.xib in Resources */,
 				425ABA62CF90E4866D5279A917C235AD /* TimeGapView.xib in Resources */,
+				733714B62122D2B400B2ED90 /* WithdrawAddressTableViewCell.xib in Resources */,
+				733714BA2122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.xib in Resources */,
 				72199D9921045DEA00575226 /* TransferListCellView.xib in Resources */,
 				09C3D6D8CF52A972307C4A1F1C214738 /* TradeCell.xib in Resources */,
 				807473C43B99A27237F53C7E2A2FE7F3 /* TradeHistoryCell.xib in Resources */,
 				3B0EB65D210313B200F19C31 /* YourPortfolioHandleView.xib in Resources */,
 				3F6CBB1D8AC88D546B003B8A585E4EEB /* TradeHistoryCellView.xib in Resources */,
 				E4EC6E667A50D907DF7D0113D3486006 /* TradeHistoryView.xib in Resources */,
+				733714B22122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib in Resources */,
 				693EC4E5D05D82D8A27851ECF6FB867F /* TradeItemView.xib in Resources */,
 				3694F2505E21A01BF3C935E69F510D95 /* TradeLineView.xib in Resources */,
 				0737B0DB4E4E56D3888CE3625D77FD37 /* TradeNavTitleView.xib in Resources */,
@@ -33327,6 +33355,7 @@
 				9ED2AB33B2CDBB57B605BE26C2D455C2 /* HomeReducers.swift in Sources */,
 				24401F60F82FEDDA35FBCCED409C1102 /* HomeRootCoordinator.swift in Sources */,
 				9F391D11D2B1C4522215117016EAA2F7 /* HomeSectionHeaderView.swift in Sources */,
+				733714B92122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.swift in Sources */,
 				DBBB81526F86E5409BB4D8C0D8A6CF1B /* HomeTitleView.swift in Sources */,
 				9BDA71F68E64FDF8BBAE5E8A3391FFA1 /* HomeViewController.swift in Sources */,
 				72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */,
@@ -33376,6 +33405,7 @@
 				5F25028208C6665DE69B50E5D5ECBEF6 /* OpenedOrdersCoordinator.swift in Sources */,
 				3B0EB655210313B200F19C31 /* AccountContentView.swift in Sources */,
 				26827458BC8C2CF5494505DA58315BBF /* OpenedOrdersHeaderView.swift in Sources */,
+				733714B12122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift in Sources */,
 				6DBCCB0ED729AC68AF493B54C15A81CF /* OpenedOrdersReducers.swift in Sources */,
 				1DCCD247499C6FA4753D44CA869E6EB4 /* OpenedOrdersStatesView.swift in Sources */,
 				F1B88753DCA13AC5B42338848EEC8DBF /* OpenedOrdersView.swift in Sources */,
@@ -33400,6 +33430,7 @@
 				806E6CA899929830A51F0FBB79089A80 /* PairCardView.swift in Sources */,
 				48373055E74D836258CD46891945EF38 /* PairDetailView.swift in Sources */,
 				D3C87D3A247487C8D834A828782FC472 /* PairListHorizantalView.swift in Sources */,
+				733714B52122D2B400B2ED90 /* WithdrawAddressTableViewCell.swift in Sources */,
 				A819B2C87ADE04838AE8D44CF16C53B4 /* PairRechargeView.swift in Sources */,
 				70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */,
 				72199D6821044FD100575226 /* TradeRecodeViewController.swift in Sources */,
@@ -33439,6 +33470,7 @@
 				9A604E7E43C4ECBE5B57FAD1D0D88687 /* Style.swift in Sources */,
 				D519E052461ED8221B6CF5C9D9B7741C /* StyleContentView.swift in Sources */,
 				345CA96631D318F012F0BB80ACD3BCCD /* StyleLabel.swift in Sources */,
+				733714BD2122D32500B2ED90 /* AddressCellView.swift in Sources */,
 				666C535B0D6573A3C341FC0208A91E71 /* Theme_Extensions.swift in Sources */,
 				4C82733DA80E26D923B4A21677ACDE89 /* TimeGapView.swift in Sources */,
 				C6701BBC918D15D20650CF726BA483EA /* Tools.swift in Sources */,
@@ -33636,6 +33668,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 			};
 			name = Release;
 		};
@@ -33737,6 +33770,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 			};
 			name = Debug;
 		};

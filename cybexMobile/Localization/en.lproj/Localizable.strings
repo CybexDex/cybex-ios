@@ -310,6 +310,7 @@
 "transfer_memo" = "Memo";
 "transfer_fee" = "Fee";
 "transfer_balance" = "Available";
+
 "picker_comfirm" = "Confirm";
 
 "transfer_unit_day" = "d";
@@ -344,4 +345,5 @@
 "Release to refresh" = "Release to refresh";
 
 "address_manager" = "地址管理";
-
+"transfer_account" = "转账账户";
+"address_or_account" = "标签/账户";
