@@ -35,6 +35,7 @@ struct changePriceAction:Action {
 
 struct adjustPriceAction:Action {
   var plus: Bool
+  var pricision:Int
 }
 
 struct feeFetchedAction:Action {

@@ -384,7 +384,7 @@ extension BusinessViewController {
   }
   
   @objc func adjustPrice(_ data:[String : Bool]) {
-    self.coordinator?.adjustPrice(data["plus"]!)
+    self.coordinator?.adjustPrice(data["plus"]!,price_pricision:self.price_pricision)
   }
   
   func postOrder() {

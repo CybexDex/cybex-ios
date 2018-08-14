@@ -22,7 +22,7 @@ protocol BusinessStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
   
   func switchPrice(_ price:String)
-  func adjustPrice(_ plus:Bool)
+  func adjustPrice(_ plus:Bool,price_pricision:Int)
 
   func changePercent(_ percent:Double, isBuy:Bool, assetID:String)
   func getBalance(_ assetID:String)
@@ -85,8 +85,8 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
     self.store.dispatch(changePriceAction(price: price))
   }
   
-  func adjustPrice(_ plus:Bool) {
-    self.store.dispatch(adjustPriceAction(plus: plus))
+  func adjustPrice(_ plus:Bool,price_pricision:Int) {
+    self.store.dispatch(adjustPriceAction(plus: plus,pricision:price_pricision))
   }
   
   func getFee(_ focus_asset_id:String) {
@@ -154,17 +154,17 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
 //    let total = price * cur_amount
     let assetID = isBuy ? base_info.id : quote_info.id
     
-    let amount = isBuy ? Int32((total * pow(10, base_info.precision)).string(digits: 0, roundingMode: .down)) : Int32((cur_amount_Decimal * pow(10, quote_info.precision)).string(digits: 0, roundingMode: .down))
+    let amount = isBuy ? Int64((total * pow(10, base_info.precision)).string(digits: 0, roundingMode: .down)) : Int64((cur_amount_Decimal * pow(10, quote_info.precision)).string(digits: 0, roundingMode: .down))
 //    let amount = isBuy ? Int32(round(total * pow(10, base_info.precision.double))) : Int32(round(cur_amount * pow(10, quote_info.precision.double)))
-
+    
     let receive_assetID = isBuy ? quote_info.id : base_info.id
-    let receive_amount = isBuy ? Int32((cur_amount_Decimal * pow(10, quote_info.precision)).string(digits: 0, roundingMode: .down)) : Int32((total * pow(10, base_info.precision)).string(digits: 0, roundingMode: .down))
+    let receive_amount = isBuy ? Int64((cur_amount_Decimal * pow(10, quote_info.precision)).string(digits: 0, roundingMode: .down)) : Int64((total * pow(10, base_info.precision)).string(digits: 0, roundingMode: .down))
 //    let receive_amount = isBuy ? Int32(round(cur_amount * pow(10, quote_info.precision.double))) : Int32(round(total * pow(10, base_info.precision.double)))
     
-    let fee_amount = Int32(round(self.state.property.fee_amount.value.doubleValue * pow(10, fee_info.precision.double)))
+    let fee_amount = Int64(round(self.state.property.fee_amount.value.doubleValue * pow(10, fee_info.precision.double)))
 
     blockchainParams { (blockchain_params) in
-      if let jsonStr = BitShareCoordinator.getLimitOrder(blockchain_params.block_num, block_id: blockchain_params.block_id, expiration: Date().timeIntervalSince1970 + 10 * 3600, chain_id: blockchain_params.chain_id, user_id: userid.getID, order_expiration: Date().timeIntervalSince1970 + 3600 * 24 * 365, asset_id: assetID.getID, amount: amount!, receive_asset_id: receive_assetID.getID, receive_amount: receive_amount!, fee_id: self.state.property.feeID.value.getID, fee_amount: fee_amount) {
+        if let jsonStr = BitShareCoordinator.getLimitOrder(blockchain_params.block_num, block_id: blockchain_params.block_id, expiration: Date().timeIntervalSince1970 + 10 * 3600, chain_id: blockchain_params.chain_id, user_id: userid.getID, order_expiration: Date().timeIntervalSince1970 + 3600 * 24 * 365, asset_id: assetID.getID, amount: amount!, receive_asset_id: receive_assetID.getID, receive_amount: receive_amount!, fee_id: self.state.property.feeID.value.getID, fee_amount: fee_amount) {
         
         let request = BroadcastTransactionRequest(response: { (data) in
           if String(describing: data) == "<null>" {

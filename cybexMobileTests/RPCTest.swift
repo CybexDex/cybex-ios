@@ -7,9 +7,9 @@
 //
 
 import XCTest
-import Nimble
-import HandyJSON
-import SwiftyJSON
+//import Nimble
+//import HandyJSON
+//import SwiftyJSON
 
 @testable import cybexMobile
 
@@ -26,17 +26,17 @@ class RPCTest: XCTestCase {
     }
     
     func testAddress() {
-        let info = TransferAddress(id: AddressManager.shared.getUUID(), publicKey: "ttt", name: "test", address: "xxxxxxxxxsw23222")
-        
-        AddressManager.shared.addTransferAddress(info)
-        let list = AddressManager.shared.getTransferAddressList("ttt")
-        
-        let info2 = TransferAddress(id:info.id, publicKey: "ttt", name: "test", address: "xxxxxxxxxsw1111")
-        AddressManager.shared.updateTransferAddress(info2)
-        
-        let result = AddressManager.shared.containTransferAddress(info2.id)
-        
-        AddressManager.shared.removeTransferAddress(info2.id)
+//        let info = TransferAddress(id: AddressManager.shared.getUUID(), publicKey: "ttt", name: "test", address: "xxxxxxxxxsw23222")
+//
+//        AddressManager.shared.addTransferAddress(info)
+//        let list = AddressManager.shared.getTransferAddressList("ttt")
+//
+//        let info2 = TransferAddress(id:info.id, publicKey: "ttt", name: "test", address: "xxxxxxxxxsw1111")
+//        AddressManager.shared.updateTransferAddress(info2)
+//
+//        let result = AddressManager.shared.containTransferAddress(info2.id)
+//
+//        AddressManager.shared.removeTransferAddress(info2.id)
         
         
         // This is an example of a functional test case.

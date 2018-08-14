@@ -24,7 +24,7 @@ func BusinessPropertyReducer(_ state: BusinessPropertyState?, action: Action) ->
       let gap = action.plus ? 1.0 / pow(10, precision.double) : -1.0 / pow(10, precision.double)
       
       if let price = state.price.value.toDouble(), price != 0, price + gap > 0 {
-        state.price.accept((price + gap).tradePrice().price)
+        state.price.accept((price + gap).string(digits: action.pricision, roundingMode: .down))
       }
     case let action as feeFetchedAction:
       state.fee_amount.accept(action.amount)
