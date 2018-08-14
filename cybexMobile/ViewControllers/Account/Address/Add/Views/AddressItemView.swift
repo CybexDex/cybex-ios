@@ -1,5 +1,5 @@
 //
-//  AddAddressView.swift
+//  AddressItemView.swift
 //  cybexMobile
 //
 //  Created by DKM on 2018/8/14.
@@ -8,13 +8,33 @@
 
 import UIKit
 
-class AddAddressView: UIView {
-
-    @IBOutlet weak var asset: RechargeItemView!
-    @IBOutlet weak var address: AddressItemView!
-    @IBOutlet weak var mark: AddressItemView!
-    @IBOutlet weak var memo: AddressItemView!
-    @IBOutlet weak var addBtn: Button!
+@IBDesignable
+class AddressItemView: UIView {
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var icon: UIButton!
+    @IBOutlet weak var content: UITextView!
+    
+    @IBOutlet weak var lineView: UIView!
+    
+    @IBInspectable var title : String = "" {
+        didSet{
+            name.localized_text = title.localizedContainer()
+        }
+    }
+    
+    @IBInspectable var textplaceholder : String = "" {
+        didSet{
+            content.toolbarPlaceholder = textplaceholder
+            
+        }
+    }
+    
+    @IBInspectable var isShowLineView : Bool = true {
+        didSet {
+            self.lineView.isHidden = !isShowLineView
+        }
+    }
+    
     
     var data: Any? {
         didSet {
@@ -68,5 +88,4 @@ class AddAddressView: UIView {
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-
 }

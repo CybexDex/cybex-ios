@@ -61,10 +61,9 @@ class OpenedOrdersViewController: BaseViewController {
     
     func showOrderInfo(){
         guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0) else { return }
-        //    guard let pair = self.pair else {return}
         guard let order = self.order else {return}
         startLoading()
-        calculateFee(operation, focus_asset_id: order.isBuy ? order.sellPrice.base.assetID : order.sellPrice.quote.assetID, operationID: .limit_order_cancel) { [weak self](success, amount, assetId) in
+        calculateFee(operation, focus_asset_id: order.sellPrice.base.assetID , operationID: .limit_order_cancel) { [weak self](success, amount, assetId) in
             guard let `self` = self else {return}
             self.endLoading()
             
@@ -185,9 +184,9 @@ extension OpenedOrdersViewController {
     
     func postCancelOrder() {
         // order.isBuy ? pair.base : pair.quote
-        if let order = self.order ,let pair = self.pair {
+        if let order = self.order {
             
-            self.coordinator?.cancelOrder(order.id, fee_id:order.isBuy ? pair.base : pair.quote ,callback: {[weak self] (success) in
+            self.coordinator?.cancelOrder(order.id, fee_id: order.sellPrice.base.assetID ,callback: {[weak self] (success) in
                 guard let `self` = self else { return }
                 
                 self.endLoading()

@@ -102,7 +102,7 @@ class BusinessViewController: BaseViewController {
     }
     
     guard let canPost = self.coordinator?.checkBalance(pair, isBuy: self.type == .buy) else {
-        if let amount =  self.containerView.amountTextfield.text, amount.count > 0 , let price =  self.containerView.priceTextfield.text, price.count > 0  {
+        if let amount =  self.containerView.amountTextfield.text, let amountDouble = amount.toDouble(), amountDouble > 0 , let price =  self.containerView.priceTextfield.text, let priceDouble = price.toDouble(), priceDouble > 0  {
             self.containerView.tipView.isHidden = false
         }else {
             self.containerView.tipView.isHidden = true
@@ -269,7 +269,7 @@ class BusinessViewController: BaseViewController {
       guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote], balance != 0 else {
         self.containerView.balance.text = "--"
         
-        if let amount =  self.containerView.amountTextfield.text, amount.count > 0 , let price =  self.containerView.priceTextfield.text, price.count > 0  {
+        if let amount =  self.containerView.amountTextfield.text, let amountDouble = amount.toDouble(), amountDouble > 0 , let price =  self.containerView.priceTextfield.text, let priceDouble = price.toDouble(), priceDouble > 0  {
             self.containerView.tipView.isHidden = false
         }
         return

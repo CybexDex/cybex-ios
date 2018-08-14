@@ -242,6 +242,8 @@
 		7217B07F2122AAFD00608531 /* AddAddressReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B07B2122AAFD00608531 /* AddAddressReducers.swift */; };
 		7217B0832122AD9D00608531 /* AddAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B0822122AD9D00608531 /* AddAddressView.swift */; };
 		7217B0852122ADA800608531 /* AddAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7217B0842122ADA800608531 /* AddAddressView.xib */; };
+		7217B0872122BBD900608531 /* AddressItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B0862122BBD900608531 /* AddressItemView.swift */; };
+		7217B0892122BBE500608531 /* AddressItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7217B0882122BBE500608531 /* AddressItemView.xib */; };
 		72199D6621044FD100575226 /* RechargeRecodeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6221044FD100575226 /* RechargeRecodeCoordinator.swift */; };
 		72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6321044FD100575226 /* RechargeRecodeActions.swift */; };
 		72199D6821044FD100575226 /* TradeRecodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6421044FD100575226 /* TradeRecodeViewController.swift */; };
@@ -5732,6 +5734,8 @@
 		7217B07B2122AAFD00608531 /* AddAddressReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressReducers.swift; sourceTree = "<group>"; };
 		7217B0822122AD9D00608531 /* AddAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressView.swift; sourceTree = "<group>"; };
 		7217B0842122ADA800608531 /* AddAddressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAddressView.xib; sourceTree = "<group>"; };
+		7217B0862122BBD900608531 /* AddressItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressItemView.swift; sourceTree = "<group>"; };
+		7217B0882122BBE500608531 /* AddressItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressItemView.xib; sourceTree = "<group>"; };
 		72199D6221044FD100575226 /* RechargeRecodeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeCoordinator.swift; sourceTree = "<group>"; };
 		72199D6321044FD100575226 /* RechargeRecodeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeActions.swift; sourceTree = "<group>"; };
 		72199D6421044FD100575226 /* TradeRecodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeRecodeViewController.swift; sourceTree = "<group>"; };
@@ -21700,6 +21704,8 @@
 			children = (
 				7217B0822122AD9D00608531 /* AddAddressView.swift */,
 				7217B0842122ADA800608531 /* AddAddressView.xib */,
+				7217B0862122BBD900608531 /* AddressItemView.swift */,
+				7217B0882122BBE500608531 /* AddressItemView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -32711,6 +32717,7 @@
 				6A019F6EFC3FAEE49A5991F402E36143 /* AccountPortfolioView.xib in Resources */,
 				49A5F40C54716A0DE78B3C2D417905C3 /* BalanceIntroduceView.xib in Resources */,
 				42575EE1042178AB8C2805F4949A3F45 /* Business.storyboard in Resources */,
+				7217B0892122BBE500608531 /* AddressItemView.xib in Resources */,
 				192C3ADF0D3E049D53C92A483D63CD03 /* BusinessTitleCell.xib in Resources */,
 				56D03074319AE5D578E9B4CD28B6C1F9 /* BusinessTitleItemView.xib in Resources */,
 				E7F391C513AB0D96277BECAC9BE9672E /* BusinessTitleView.xib in Resources */,
@@ -33520,6 +33527,7 @@
 				492A4075DDD845005D90DD5201F32F26 /* UIColorExtension.swift in Sources */,
 				CC8DD1E9001CFBB8915E342EDB329B3E /* UIImage+Extensions.swift in Sources */,
 				0C46B30A32343632C135B84DDEB47F80 /* UIResponder+Route.swift in Sources */,
+				7217B0872122BBD900608531 /* AddressItemView.swift in Sources */,
 				225746E821073E480017FA1A /* PickerView.swift in Sources */,
 				7386F2B721216B3A00ABC924 /* WithdrawAddressHomeCoordinator.swift in Sources */,
 				72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */,

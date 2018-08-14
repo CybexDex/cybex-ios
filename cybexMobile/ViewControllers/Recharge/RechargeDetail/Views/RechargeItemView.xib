@@ -48,8 +48,8 @@
                         <color key="titleColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
-                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40u-27-4bk">
-                    <rect key="frame" x="25" y="49" width="325" height="1"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40u-27-4bk">
+                    <rect key="frame" x="12" y="99" width="351" height="1"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="G2M-Gh-zcG"/>
                     </constraints>

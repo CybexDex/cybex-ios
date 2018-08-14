@@ -344,4 +344,9 @@
 "Release to refresh" = "Release to refresh";
 
 "address_manager" = "地址管理";
+"address_asset" = "币种";
+"address_mark" = "标签";
+"address_add" = "添加";
+
+
 
