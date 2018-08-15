@@ -20,36 +20,37 @@ struct BusinessState: StateType {
 }
 
 struct BusinessPropertyState {
-  var price:BehaviorRelay<String> = BehaviorRelay(value: "")
-  var amount:BehaviorRelay<String> = BehaviorRelay(value: "")
-
-  var fee_amount:BehaviorRelay<Decimal> = BehaviorRelay(value: Decimal(floatLiteral: 0))
-  var feeID:BehaviorRelay<String> = BehaviorRelay(value: "")
-  
-  var balance:BehaviorRelay<Decimal> = BehaviorRelay(value: Decimal(floatLiteral: 0))
+    var price:BehaviorRelay<String> = BehaviorRelay(value: "")
+    var amount:BehaviorRelay<String> = BehaviorRelay(value: "")
+    
+    var fee_amount:BehaviorRelay<Decimal> = BehaviorRelay(value: Decimal(floatLiteral: 0))
+    var feeID:BehaviorRelay<String> = BehaviorRelay(value: "")
+    
+    var balance:BehaviorRelay<Decimal> = BehaviorRelay(value: Decimal(floatLiteral: 0))
 }
 
 struct changePriceAction:Action {
-  var price: String
+    var price: String
 }
 
 struct adjustPriceAction:Action {
-  var plus: Bool
-  var pricision:Int
+    var plus: Bool
+    var pricision:Int
 }
 
 struct feeFetchedAction:Action {
-  var success: Bool
-  var amount:Decimal
-  var assetID:String
+    var success: Bool
+    var amount:Decimal
+    var assetID:String
 }
 
 struct BalanceFetchedAction:Action {
-  var amount:Decimal
+    var amount:Decimal
 }
 
 struct switchPercentAction:Action {
-  var amount:Decimal
+    var amount:Decimal
+    var pricision:Int
 }
 
 struct resetTrade:Action {

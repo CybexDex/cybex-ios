@@ -329,7 +329,8 @@
 "Release to refresh" = "松开刷新";
 
 "address_manager" = "地址管理";
-
+"transfer_account" = "转账账户";
+"address_or_account" = "标签/账户";
 
 "address_asset" = "币种";
 "address_mark" = "标签";

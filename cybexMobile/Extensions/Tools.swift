@@ -417,6 +417,7 @@ extension String {
   
   
   func formatCurrency(digitNum: Int) -> String {
+    
     if let str = toDouble()?.formatCurrency(digitNum: digitNum) {
       return str
     }

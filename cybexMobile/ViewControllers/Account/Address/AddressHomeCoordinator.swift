@@ -11,6 +11,8 @@ import ReSwift
 import SwiftNotificationCenter
 
 protocol AddressHomeCoordinatorProtocol {
+    func openWithDrawAddressHomeViewController()
+    func openTransferAddressHomeViewController()
 }
 
 protocol AddressHomeStateManagerProtocol {
@@ -36,7 +38,19 @@ class AddressHomeCoordinator: AccountRootCoordinator {
 }
 
 extension AddressHomeCoordinator: AddressHomeCoordinatorProtocol {
+    func openWithDrawAddressHomeViewController() {
+        let vc = R.storyboard.account.withdrawAddressHomeViewController()!
+        let coor = WithdrawAddressHomeCoordinator(rootVC: self.rootVC)
+        vc.coordinator = coor
+        self.rootVC.pushViewController(vc, animated: true)
+    }
     
+    func openTransferAddressHomeViewController() {
+        let vc = R.storyboard.account.transferAddressHomeViewController()!
+        let coor = TransferAddressHomeCoordinator(rootVC: self.rootVC)
+        vc.coordinator = coor
+        self.rootVC.pushViewController(vc, animated: true)
+    }
 }
 
 extension AddressHomeCoordinator: AddressHomeStateManagerProtocol {

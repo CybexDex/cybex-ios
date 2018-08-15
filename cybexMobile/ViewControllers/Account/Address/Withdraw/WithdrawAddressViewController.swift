@@ -13,10 +13,23 @@ import ReSwift
 
 class WithdrawAddressViewController: BaseViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+
 	var coordinator: (WithdrawAddressCoordinatorProtocol & WithdrawAddressStateManagerProtocol)?
 
 	override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupUI()
+    }
+    
+    func setupUI() {
+        configRightNavButton(R.image.ic_add_24_px())
+        self.tableView.register(R.nib.withdrawAddressTableViewCell(), forCellReuseIdentifier: R.nib.withdrawAddressTableViewCell.name)
+    }
+    
+    override func rightAction(_ sender: UIButton) {
+        
     }
     
     func commonObserveState() {
@@ -38,3 +51,16 @@ class WithdrawAddressViewController: BaseViewController {
         
     }
 }
+
+extension WithdrawAddressViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.withdrawAddressTableViewCell.name, for: indexPath) as! WithdrawAddressTableViewCell
+        
+        return cell
+    }
+}
+

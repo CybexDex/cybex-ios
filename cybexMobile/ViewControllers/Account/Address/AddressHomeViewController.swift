@@ -26,6 +26,7 @@ class AddressHomeViewController: BaseViewController {
     func setupUI() {
         self.localized_text = R.string.localizable.address_manager.key.localizedContainer()
         
+        self.tableView.register(R.nib.addressHomeTableViewCell(), forCellReuseIdentifier: R.nib.addressHomeTableViewCell.name)
     }
     
     func commonObserveState() {
@@ -45,5 +46,32 @@ class AddressHomeViewController: BaseViewController {
     override func configureObserveState() {
         commonObserveState()
         
+    }
+}
+
+extension AddressHomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.addressHomeTableViewCell.name, for: indexPath) as! AddressHomeTableViewCell
+        
+        return cell
+    }
+}
+
+extension AddressHomeViewController {
+    @objc func clickCellView(_ data:[String:Any]) {
+        if let index = data["index"] as? Int {
+            switch index {
+            case 0:
+                self.coordinator?.openWithDrawAddressHomeViewController()
+            case 1:
+                self.coordinator?.openTransferAddressHomeViewController()
+            default:
+                break
+            }
+        }
     }
 }
