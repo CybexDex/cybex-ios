@@ -35,10 +35,12 @@ class BaseView: UIControl {
 
     @IBInspectable public var showTouchFeedback: Bool = true
 
-    var data: Any? {
-        didSet {
-            
-        }
+    var data: Any!
+    
+    func updateUI<T>(_ model:T, handler:((T)->Void)?) {
+        self.data = model
+
+        handler?(model)
     }
     
     func setup() {

@@ -14,6 +14,9 @@ class WithdrawAddressTableViewCell: BaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        
+//        foreView.updateUI(1, handler: <#T##((T) -> Void)?##((T) -> Void)?##(T) -> Void#>)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -9,8 +9,10 @@
 import UIKit
 import ReSwift
 import SwiftNotificationCenter
+import XLActionController
 
 protocol WithdrawAddressCoordinatorProtocol {
+    func openActionVC()
 }
 
 protocol WithdrawAddressStateManagerProtocol {
@@ -36,7 +38,38 @@ class WithdrawAddressCoordinator: AccountRootCoordinator {
 }
 
 extension WithdrawAddressCoordinator: WithdrawAddressCoordinatorProtocol {
-    
+    func openActionVC() {
+        
+//        let actionController = PeriscopeActionController()
+//        actionController.selectedIndex = IndexPath(row: UserManager.shared.frequency_type.rawValue, section: 0)
+//
+//        actionController.addAction(Action(R.string.localizable.frequency_normal.key.localized(), style: .destructive, handler: {[weak self] action in
+//            guard let `self` = self else {return}
+//            UserManager.shared.frequency_type = .normal
+//            self.frequency.content_locali = UserManager.shared.frequency_type.description()
+//        }))
+//
+//        actionController.addAction(Action(R.string.localizable.frequency_time.key.localized(), style: .destructive, handler: { [weak self]action in
+//            guard let `self` = self else {return}
+//
+//            UserManager.shared.frequency_type = .time
+//            self.frequency.content_locali = UserManager.shared.frequency_type.description()
+//
+//        }))
+//
+//        actionController.addAction(Action(R.string.localizable.frequency_wifi.key.localized(), style: .destructive, handler: { [weak self]action in
+//            guard let `self` = self else {return}
+//            UserManager.shared.frequency_type = .WiFi
+//            self.frequency.content_locali = UserManager.shared.frequency_type.description()
+//        }))
+//
+//        actionController.addSection(PeriscopeSection())
+//        actionController.addAction(Action(R.string.localizable.alert_cancle.key.localized(), style: .cancel, handler: { action in
+//        }))
+//
+//        present(actionController, animated: true, completion: nil)
+        
+    }
 }
 
 extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {

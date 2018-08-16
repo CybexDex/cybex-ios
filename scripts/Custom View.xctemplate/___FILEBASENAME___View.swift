@@ -13,13 +13,7 @@ class ___VARIABLE_productName:identifier___View: BaseView {
     enum Event:String {
         case ___VARIABLE_productName:identifier___ViewDidClicked
     }
-    
-    override var data: Any? {
-        didSet {
-            
-        }
-    }
-    
+        
     override func setup() {
         super.setup()
         
@@ -27,5 +21,11 @@ class ___VARIABLE_productName:identifier___View: BaseView {
     
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.___VARIABLE_productName:identifier___ViewDidClicked.rawValue, userinfo: [:])
+    }
+}
+
+extension ___VARIABLE_productName:identifier___View {
+    func adapterModelTo___VARIABLE_productName:identifier___View(_ model:<#Type#>) {
+        
     }
 }
