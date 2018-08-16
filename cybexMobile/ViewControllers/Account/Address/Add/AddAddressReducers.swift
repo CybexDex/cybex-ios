@@ -17,6 +17,15 @@ func AddAddressPropertyReducer(_ state: AddAddressPropertyState?, action: Action
     var state = state ?? AddAddressPropertyState()
     
     switch action {
+    case let action as SetAssetAction:
+        state.asset.accept(action.data)
+        
+    case let action as VerificationAddressAction :
+        state.addressVailed.accept(action.success)
+        
+    case let action as VerificationNoteAction:
+        state.noteVailed.accept(action.data)
+        
     default:
         break
     }
