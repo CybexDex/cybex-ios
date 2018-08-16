@@ -89,8 +89,6 @@ class AccountViewController: BaseViewController {
     
     let imgArray = [R.image.icBalance(), R.image.w(), R.image.ic_address_28_px(), R.image.icOrder28Px(), R.image.icLockAsset()]
     
-   
-    
     let nameArray = [R.string.localizable.my_property.key.localized(),
                      R.string.localizable.deposit_withdraw.key.localized(),
                      R.string.localizable.address_manager.key.localized(),
