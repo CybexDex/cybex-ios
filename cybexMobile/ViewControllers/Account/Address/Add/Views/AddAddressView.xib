@@ -21,7 +21,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6q4-h0-XPL" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
@@ -52,13 +52,13 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iQa-jc-TN5" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
-                    <rect key="frame" x="13" y="165" width="349" height="128"/>
+                    <rect key="frame" x="13" y="113" width="349" height="354"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IM7-uO-yfx">
-                            <rect key="frame" x="0.0" y="-36" width="349" height="384"/>
+                            <rect key="frame" x="0.0" y="0.0" width="349" height="150"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7H-v2-JhM" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="349" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="349" height="50"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                             <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -71,7 +71,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fr7-gO-noA" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="128" width="349" height="128"/>
+                                    <rect key="frame" x="0.0" y="50" width="349" height="50"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                             <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -84,7 +84,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="whW-p3-HOf" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="256" width="349" height="128"/>
+                                    <rect key="frame" x="0.0" y="100" width="349" height="50"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                             <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -107,7 +107,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jy7-aL-05W" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
-                    <rect key="frame" x="13" y="571" width="349" height="48"/>
+                    <rect key="frame" x="13" y="504" width="349" height="48"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="Fl6-tE-Xxa"/>
                     </constraints>

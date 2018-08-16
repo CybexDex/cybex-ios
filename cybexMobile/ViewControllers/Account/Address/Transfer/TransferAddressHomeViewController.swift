@@ -29,7 +29,7 @@ class TransferAddressHomeViewController: BaseViewController {
     }
     
     override func rightAction(_ sender: UIButton) {
-        
+        self.coordinator?.openAddTransferAddress()
     }
     
     func commonObserveState() {

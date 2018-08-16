@@ -13,7 +13,8 @@ import ReSwift
 
 class AddAddressViewController: BaseViewController {
 
-	var coordinator: (AddAddressCoordinatorProtocol & AddAddressStateManagerProtocol)?
+    @IBOutlet weak var containerView: AddAddressView!
+    var coordinator: (AddAddressCoordinatorProtocol & AddAddressStateManagerProtocol)?
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,13 @@ class AddAddressViewController: BaseViewController {
                 return false
             })
         }
+        
+        (self.containerView.asset.content.rx.text.orEmpty <-> self.coordinator!.state.property.asset).disposed(by: disposeBag)
+        (self.containerView.address.content.rx.text.orEmpty <-> self.coordinator!.state.property.address).disposed(by: disposeBag)
+        (self.containerView.mark.content.rx.text.orEmpty <-> self.coordinator!.state.property.note).disposed(by: disposeBag)
+        (self.containerView.memo.content.rx.text.orEmpty <-> self.coordinator!.state.property.memo).disposed(by: disposeBag)
+        
+        
     }
     
     override func configureObserveState() {
