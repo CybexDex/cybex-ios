@@ -15,13 +15,17 @@ struct ___VARIABLE_productName:identifier___State: StateType {
     var page: Int = 1
     var errorMessage:String?
     var property: ___VARIABLE_productName:identifier___PropertyState
+    var callback: ___VARIABLE_productName:identifier___CallbackState
 }
 
 struct ___VARIABLE_productName:identifier___PropertyState {
 }
 
+struct ___VARIABLE_productName:identifier___CallbackState {
+}
+
 //MARK: - Action Creator
-class ___VARIABLE_productName:identifier___PropertyActionCreate: LoadingActionCreator {
+class ___VARIABLE_productName:identifier___PropertyActionCreate {
     public typealias ActionCreator = (_ state: ___VARIABLE_productName:identifier___State, _ store: Store<___VARIABLE_productName:identifier___State>) -> Action?
     
     public typealias AsyncActionCreator = (

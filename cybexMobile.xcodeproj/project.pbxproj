@@ -274,6 +274,32 @@
 		72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A5220F4611500CEAFF6 /* WithdrawView.swift */; };
 		72EC6A5920F4612200CEAFF6 /* RechargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A5720F4612100CEAFF6 /* RechargeView.swift */; };
 		72EC6A5A20F4612200CEAFF6 /* RechargeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5820F4612200CEAFF6 /* RechargeView.xib */; };
+		7307A917212518DC00BD6444 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7307A8F9212518DB00BD6444 /* .gitignore */; };
+		7307A918212518DC00BD6444 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7307A8FA212518DB00BD6444 /* .travis.yml */; };
+		7307A919212518DC00BD6444 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 7307A8FC212518DB00BD6444 /* .gitkeep */; };
+		7307A91A212518DC00BD6444 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 7307A8FE212518DB00BD6444 /* .gitkeep */; };
+		7307A91B212518DC00BD6444 /* LGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A8FF212518DB00BD6444 /* LGButton.swift */; };
+		7307A91C212518DC00BD6444 /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A901212518DB00BD6444 /* FontAwesome.swift */; };
+		7307A91D212518DC00BD6444 /* FontLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A902212518DB00BD6444 /* FontLoader.swift */; };
+		7307A91E212518DC00BD6444 /* Iconic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A903212518DB00BD6444 /* Iconic.swift */; };
+		7307A91F212518DC00BD6444 /* IonIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A904212518DB00BD6444 /* IonIcons.swift */; };
+		7307A920212518DC00BD6444 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7307A905212518DB00BD6444 /* LICENSE */; };
+		7307A921212518DC00BD6444 /* MapIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A906212518DB00BD6444 /* MapIcon.swift */; };
+		7307A922212518DC00BD6444 /* MaterialIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A907212518DB00BD6444 /* MaterialIcon.swift */; };
+		7307A923212518DC00BD6444 /* Octicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A908212518DB00BD6444 /* Octicon.swift */; };
+		7307A924212518DC00BD6444 /* SwiftIconFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A909212518DB00BD6444 /* SwiftIconFont.swift */; };
+		7307A925212518DC00BD6444 /* SwiftIconLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A90A212518DB00BD6444 /* SwiftIconLabel.swift */; };
+		7307A926212518DC00BD6444 /* ThemifyIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A90B212518DB00BD6444 /* ThemifyIcon.swift */; };
+		7307A927212518DC00BD6444 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7307A90C212518DB00BD6444 /* Info.plist */; };
+		7307A928212518DC00BD6444 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7307A90F212518DB00BD6444 /* FontAwesome.ttf */; };
+		7307A929212518DC00BD6444 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7307A910212518DB00BD6444 /* Ionicons.ttf */; };
+		7307A92A212518DC00BD6444 /* LGButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7307A911212518DB00BD6444 /* LGButton.xib */; };
+		7307A92B212518DC00BD6444 /* map-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7307A912212518DB00BD6444 /* map-icons.ttf */; };
+		7307A92C212518DC00BD6444 /* MaterialIcons-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7307A913212518DB00BD6444 /* MaterialIcons-Regular.ttf */; };
+		7307A92D212518DC00BD6444 /* octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7307A914212518DB00BD6444 /* octicons.ttf */; };
+		7307A92E212518DC00BD6444 /* open-iconic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7307A915212518DB00BD6444 /* open-iconic.ttf */; };
+		7307A92F212518DC00BD6444 /* themify.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7307A916212518DB00BD6444 /* themify.ttf */; };
+		7307A931212518F300BD6444 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A930212518F300BD6444 /* BaseView.swift */; };
 		7323B4B02A3A6EFE54C1B30D7491D953 /* MyHistoryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E17D1C068A4ED09DD447E3434E5E550 /* MyHistoryCellView.xib */; };
 		733714B12122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714AF2122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift */; };
 		733714B22122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714B02122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib */; };
@@ -5802,6 +5828,33 @@
 		730350CD33C88F71FBDF3A2E2D8B5F33 /* dcomp_mem_fun.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dcomp_mem_fun.hpp; sourceTree = "<group>"; };
 		73042F6078CCA28C5A23E3359FC63606 /* duplicates_iterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = duplicates_iterator.hpp; sourceTree = "<group>"; };
 		7304CD9CD63684D97B23E3AC9C2F17A0 /* formatting.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = formatting.hpp; sourceTree = "<group>"; };
+		7307A8F9212518DB00BD6444 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		7307A8FA212518DB00BD6444 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		7307A8FC212518DB00BD6444 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		7307A8FE212518DB00BD6444 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		7307A8FF212518DB00BD6444 /* LGButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGButton.swift; sourceTree = "<group>"; };
+		7307A901212518DB00BD6444 /* FontAwesome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontAwesome.swift; sourceTree = "<group>"; };
+		7307A902212518DB00BD6444 /* FontLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontLoader.swift; sourceTree = "<group>"; };
+		7307A903212518DB00BD6444 /* Iconic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Iconic.swift; sourceTree = "<group>"; };
+		7307A904212518DB00BD6444 /* IonIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IonIcons.swift; sourceTree = "<group>"; };
+		7307A905212518DB00BD6444 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		7307A906212518DB00BD6444 /* MapIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapIcon.swift; sourceTree = "<group>"; };
+		7307A907212518DB00BD6444 /* MaterialIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialIcon.swift; sourceTree = "<group>"; };
+		7307A908212518DB00BD6444 /* Octicon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Octicon.swift; sourceTree = "<group>"; };
+		7307A909212518DB00BD6444 /* SwiftIconFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftIconFont.swift; sourceTree = "<group>"; };
+		7307A90A212518DB00BD6444 /* SwiftIconLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftIconLabel.swift; sourceTree = "<group>"; };
+		7307A90B212518DB00BD6444 /* ThemifyIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemifyIcon.swift; sourceTree = "<group>"; };
+		7307A90C212518DB00BD6444 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7307A90D212518DB00BD6444 /* LGButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGButton.h; sourceTree = "<group>"; };
+		7307A90F212518DB00BD6444 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		7307A910212518DB00BD6444 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		7307A911212518DB00BD6444 /* LGButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LGButton.xib; sourceTree = "<group>"; };
+		7307A912212518DB00BD6444 /* map-icons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "map-icons.ttf"; sourceTree = "<group>"; };
+		7307A913212518DB00BD6444 /* MaterialIcons-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MaterialIcons-Regular.ttf"; sourceTree = "<group>"; };
+		7307A914212518DB00BD6444 /* octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = octicons.ttf; sourceTree = "<group>"; };
+		7307A915212518DB00BD6444 /* open-iconic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "open-iconic.ttf"; sourceTree = "<group>"; };
+		7307A916212518DB00BD6444 /* themify.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = themify.ttf; sourceTree = "<group>"; };
+		7307A930212518F300BD6444 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		7318C16259141480B20816B58236A157 /* empty_impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = empty_impl.hpp; sourceTree = "<group>"; };
 		731D235E20085DC94F05D5F5263DC27A /* c99sub_rounding_control.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = c99sub_rounding_control.hpp; sourceTree = "<group>"; };
 		7320A25885996B0F4C311BB64C7BE7DC /* not_specified.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = not_specified.hpp; sourceTree = "<group>"; };
@@ -17982,6 +18035,7 @@
 				A4CC22AA9CB81600F41DDDED43729F72 /* BaseViewController.swift */,
 				01C2F31F4F1749972F35CE9EC2B2B39C /* BaseWebViewController.swift */,
 				DD606656A250A840B13C511345FAB615 /* EmptySegue.swift */,
+				7307A930212518F300BD6444 /* BaseView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -21845,6 +21899,71 @@
 				DB9F92349B8EDFF11CD9152C8BBC7CB7 /* rotating_buffer.hpp */,
 			);
 			path = detail;
+			sourceTree = "<group>";
+		};
+		7307A8F8212518DB00BD6444 /* LGButton */ = {
+			isa = PBXGroup;
+			children = (
+				7307A8F9212518DB00BD6444 /* .gitignore */,
+				7307A8FA212518DB00BD6444 /* .travis.yml */,
+				7307A8FB212518DB00BD6444 /* Assets */,
+				7307A8FD212518DB00BD6444 /* Classes */,
+				7307A90C212518DB00BD6444 /* Info.plist */,
+				7307A90D212518DB00BD6444 /* LGButton.h */,
+				7307A90E212518DB00BD6444 /* Resources */,
+			);
+			path = LGButton;
+			sourceTree = "<group>";
+		};
+		7307A8FB212518DB00BD6444 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				7307A8FC212518DB00BD6444 /* .gitkeep */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		7307A8FD212518DB00BD6444 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				7307A8FE212518DB00BD6444 /* .gitkeep */,
+				7307A8FF212518DB00BD6444 /* LGButton.swift */,
+				7307A900212518DB00BD6444 /* SwiftIconFont */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		7307A900212518DB00BD6444 /* SwiftIconFont */ = {
+			isa = PBXGroup;
+			children = (
+				7307A901212518DB00BD6444 /* FontAwesome.swift */,
+				7307A902212518DB00BD6444 /* FontLoader.swift */,
+				7307A903212518DB00BD6444 /* Iconic.swift */,
+				7307A904212518DB00BD6444 /* IonIcons.swift */,
+				7307A905212518DB00BD6444 /* LICENSE */,
+				7307A906212518DB00BD6444 /* MapIcon.swift */,
+				7307A907212518DB00BD6444 /* MaterialIcon.swift */,
+				7307A908212518DB00BD6444 /* Octicon.swift */,
+				7307A909212518DB00BD6444 /* SwiftIconFont.swift */,
+				7307A90A212518DB00BD6444 /* SwiftIconLabel.swift */,
+				7307A90B212518DB00BD6444 /* ThemifyIcon.swift */,
+			);
+			path = SwiftIconFont;
+			sourceTree = "<group>";
+		};
+		7307A90E212518DB00BD6444 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7307A90F212518DB00BD6444 /* FontAwesome.ttf */,
+				7307A910212518DB00BD6444 /* Ionicons.ttf */,
+				7307A911212518DB00BD6444 /* LGButton.xib */,
+				7307A912212518DB00BD6444 /* map-icons.ttf */,
+				7307A913212518DB00BD6444 /* MaterialIcons-Regular.ttf */,
+				7307A914212518DB00BD6444 /* octicons.ttf */,
+				7307A915212518DB00BD6444 /* open-iconic.ttf */,
+				7307A916212518DB00BD6444 /* themify.ttf */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		731E7434A0EB068392434DD3D8AEFE63 /* detail */ = {
@@ -27912,6 +28031,7 @@
 				225746E3210715890017FA1A /* Components.storyboard */,
 				7386F2C621216FC700ABC924 /* SectionCornerViewView.swift */,
 				7386F2C721216FC700ABC924 /* SectionCornerViewView.xib */,
+				7307A8F8212518DB00BD6444 /* LGButton */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -32682,6 +32802,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72199D7E210450F500575226 /* RecodeCellView.xib in Resources */,
+				7307A917212518DC00BD6444 /* .gitignore in Resources */,
 				A081A5FE86C0AC44E299840DD8C1DE00 /* AccessoryCollectionView.xib in Resources */,
 				D971C57B81B4A2FBB083235DDE5057A2 /* AccessoryCollectionViewCell.xib in Resources */,
 				FE75674B7C6A22FAFA051C9CE0E95A1D /* AccessoryHorizentalView.xib in Resources */,
@@ -32726,14 +32847,17 @@
 				3B0EB658210313B200F19C31 /* AccountTableHeadView.xib in Resources */,
 				7386F2C921216FC700ABC924 /* SectionCornerViewView.xib in Resources */,
 				7323B4B02A3A6EFE54C1B30D7491D953 /* MyHistoryCellView.xib in Resources */,
+				7307A92C212518DC00BD6444 /* MaterialIcons-Regular.ttf in Resources */,
 				16AF9C856D66092D87065E969141D71F /* MyOpenedOrdersView.xib in Resources */,
 				4EFDB6FA81BF7FB9600D4A6E07374864 /* NoticeBoardView.xib in Resources */,
+				7307A92B212518DC00BD6444 /* map-icons.ttf in Resources */,
 				ED699787C0E757F3F46A0E2B5D6BF947 /* OpenedOrdersCell.xib in Resources */,
 				6C1820B3CDFFEBD3CF821B6CDB3F4691 /* OpenedOrdersHeaderView.xib in Resources */,
 				F61A4020689A1596B862EDC3AD38A3BC /* OpenedOrdersView.xib in Resources */,
 				8809F4832AD9F2B07F73CDE8C8D41240 /* OrderBookCell.xib in Resources */,
 				5C9247949858F09E0B4A6A2A18854787 /* OrderBookCellView.xib in Resources */,
 				72D9DD59210EB60F00963915 /* PeriscopeCell.xib in Resources */,
+				7307A918212518DC00BD6444 /* .travis.yml in Resources */,
 				3385671DD5F1B6ED220AB916F7859ECF /* OrderBookContentView.xib in Resources */,
 				813174FFD07A88030F54BD2F9B24E36C /* PairCardCell.xib in Resources */,
 				3CB09937C6D6A05CD97DF278F0EFF936 /* PairCardView.xib in Resources */,
@@ -32743,6 +32867,7 @@
 				6D56D7D9D38BE89CB6BD8D314E0E6370 /* QuotesTitleView.xib in Resources */,
 				26DBFE949DEA6BC4379A397564804816 /* README.md in Resources */,
 				ACE7BA86B00F181D50D549AA91EED07E /* RechargeItemView.xib in Resources */,
+				7307A927212518DC00BD6444 /* Info.plist in Resources */,
 				C860BE92032F361E51995DB61C68774C /* RechargeSegment.xib in Resources */,
 				131A2FCACA9688EC4FC89E1A50E45457 /* StyleLabel.xib in Resources */,
 				425ABA62CF90E4866D5279A917C235AD /* TimeGapView.xib in Resources */,
@@ -32754,11 +32879,14 @@
 				3B0EB65D210313B200F19C31 /* YourPortfolioHandleView.xib in Resources */,
 				3F6CBB1D8AC88D546B003B8A585E4EEB /* TradeHistoryCellView.xib in Resources */,
 				E4EC6E667A50D907DF7D0113D3486006 /* TradeHistoryView.xib in Resources */,
+				7307A91A212518DC00BD6444 /* .gitkeep in Resources */,
 				733714B22122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib in Resources */,
 				693EC4E5D05D82D8A27851ECF6FB867F /* TradeItemView.xib in Resources */,
 				3694F2505E21A01BF3C935E69F510D95 /* TradeLineView.xib in Resources */,
+				7307A929212518DC00BD6444 /* Ionicons.ttf in Resources */,
 				0737B0DB4E4E56D3888CE3625D77FD37 /* TradeNavTitleView.xib in Resources */,
 				6C88B282D0F65F3A6830B8B450AC462A /* TradeView.xib in Resources */,
+				7307A92F212518DC00BD6444 /* themify.ttf in Resources */,
 				39B1BBF9B99CF53A16A6AE77910821EA /* WithNoDataView.xib in Resources */,
 				3B0EB65E210313B200F19C31 /* YourPortfolioHeadView.xib in Resources */,
 				589C3222B6936F858915CE755BEA7139 /* algorithm in Resources */,
@@ -32783,10 +32911,12 @@
 				7A338F1410B84BFCF63BC54F6AE76502 /* complex.SUNWCCh in Resources */,
 				50915BC730017A895B2663F8FE47B318 /* csetjmp in Resources */,
 				37F2E0A1EC99E3D52B87483728F0C31B /* csignal in Resources */,
+				7307A920212518DC00BD6444 /* LICENSE in Resources */,
 				3A66D34045644F50A286279AF9051D1D /* cstdarg in Resources */,
 				7386F2D92121737600ABC924 /* AddressHomeTableViewCellViewView.xib in Resources */,
 				97A25CFA01434F7C0AF6B052507271EF /* cstddef in Resources */,
 				6070ECC6CD01377E85F78D0E2B0E4FE4 /* cstdio in Resources */,
+				7307A928212518DC00BD6444 /* FontAwesome.ttf in Resources */,
 				A23785A38EA5D04EC95049512BE0E75E /* cstdlib in Resources */,
 				213EC3DB0AD2CFD1A25AD89A5EF104E9 /* cstring in Resources */,
 				34DB73437AC87F7ADAA2E3876C96649E /* ctime in Resources */,
@@ -32804,8 +32934,10 @@
 				B0F10FE7D7F581984C468F1FE9420A41 /* functional.SUNWCCh in Resources */,
 				E03900031A3D0D695E0419C5FECD70C3 /* gateway.graphql in Resources */,
 				6C06CFF06D23C4F28BFEB3D1CD549D13 /* iomanip in Resources */,
+				7307A92D212518DC00BD6444 /* octicons.ttf in Resources */,
 				72EC6A5520F4611500CEAFF6 /* EOSWithdrawView.xib in Resources */,
 				DD53E4DB5C321358D6C1AB4A303C62BA /* iomanip.SUNWCCh in Resources */,
+				7307A919212518DC00BD6444 /* .gitkeep in Resources */,
 				1B5442C169C4BCFD231A911F7FB3CDCA /* ios in Resources */,
 				221EC23D2105B3110059F856 /* CornerAndShadowView.xib in Resources */,
 				6AF4A16A7EEB87292ADF065AFFB58A89 /* ios.SUNWCCh in Resources */,
@@ -32824,7 +32956,9 @@
 				8E65033ACE605A9519CB4FB888940FAB /* locale in Resources */,
 				391642968E6C035AD01FF015BD4847DA /* locale.SUNWCCh in Resources */,
 				221EC23A2105B1930059F856 /* TitleTextView.xib in Resources */,
+				7307A92A212518DC00BD6444 /* LGButton.xib in Resources */,
 				A5056283C24CDC308A84C34723B9999D /* map in Resources */,
+				7307A92E212518DC00BD6444 /* open-iconic.ttf in Resources */,
 				A74A9391C9FC80F533BB168C6F09C5BD /* map.SUNWCCh in Resources */,
 				0AA525ED6C44D673ABDA5E34FE8BAF65 /* memory in Resources */,
 				C5DB709236E31D29681C3DAA03E03D48 /* memory.SUNWCCh in Resources */,
@@ -33244,6 +33378,7 @@
 				9708F7C8EA5B8E107E937306846BE6F0 /* AccountPortfolioCellView.swift in Sources */,
 				32BED01405F6D7B22B348057E0BDE3C8 /* AccountPortfolioView.swift in Sources */,
 				72199DA92104680000575226 /* TransferContentView.swift in Sources */,
+				7307A921212518DC00BD6444 /* MapIcon.swift in Sources */,
 				E0AD8E2E835D84754C63BA76FBA8582E /* AccountReducers.swift in Sources */,
 				C44F04354B1B9F8051BA2651AC620D65 /* AccountRootCoordinator.swift in Sources */,
 				0960C892D63D17ABEB447BCE5525D299 /* AppActions.swift in Sources */,
@@ -33271,6 +33406,7 @@
 				B9DE00DA8B7EDD0F9BEA00881C4924C1 /* BusinessTitleCell.swift in Sources */,
 				3B0EB6642103150D00F19C31 /* AccountActions.swift in Sources */,
 				66A5DD971B80802DF72977E071CAB84D /* BusinessTitleItemView.swift in Sources */,
+				7307A925212518DC00BD6444 /* SwiftIconLabel.swift in Sources */,
 				72199D8D21045D4700575226 /* TransferListActions.swift in Sources */,
 				72199DA12104636900575226 /* TransferDetailViewController.swift in Sources */,
 				72199D8F21045D4700575226 /* TransferListReducers.swift in Sources */,
@@ -33291,6 +33427,7 @@
 				461B84D25CFA564E9455211A24902BB7 /* CBKLineBrush.swift in Sources */,
 				A971765C0FF4C52CAA1C001A3ABBC1B1 /* CBKLineDrawView.swift in Sources */,
 				45E03EE6B4BBE7286E7287D3DFD1B9D6 /* CBKLineMainView.swift in Sources */,
+				7307A91B212518DC00BD6444 /* LGButton.swift in Sources */,
 				E286FE83AA3DB3C53DD1FDE1CA1BC208 /* CBKLineModel.swift in Sources */,
 				225746DC210707DD0017FA1A /* PickerActions.swift in Sources */,
 				72199DAD2104687400575226 /* TransferLineView.swift in Sources */,
@@ -33346,9 +33483,11 @@
 				BDFF205572EB31DAD4702C934B9A81D1 /* GraphQLManager.swift in Sources */,
 				CA894F0EB69EF4448C0142CE0BE7D9C5 /* HistoryApi.swift in Sources */,
 				105EA57407E74D316C2918BA41771E3B /* HomeActions.swift in Sources */,
+				7307A923212518DC00BD6444 /* Octicon.swift in Sources */,
 				FC108E84DEAE074748E2868644692BCD /* HomeContentView.swift in Sources */,
 				7386F2AF21216B2200ABC924 /* TransferAddressHomeCoordinator.swift in Sources */,
 				4420DD3F31DC377E0DB1DEC13E7708A5 /* HomeCoordinator.swift in Sources */,
+				7307A91D212518DC00BD6444 /* FontLoader.swift in Sources */,
 				3B0EB659210313B200F19C31 /* NormalContentCell.swift in Sources */,
 				8C20E983876A75B5AF1B2B1CC5B7FA6C /* HomePairCell.swift in Sources */,
 				3D400D51F52AE73941E3134046491BA5 /* HomePairView.swift in Sources */,
@@ -33358,6 +33497,7 @@
 				733714B92122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.swift in Sources */,
 				DBBB81526F86E5409BB4D8C0D8A6CF1B /* HomeTitleView.swift in Sources */,
 				9BDA71F68E64FDF8BBAE5E8A3391FFA1 /* HomeViewController.swift in Sources */,
+				7307A924212518DC00BD6444 /* SwiftIconFont.swift in Sources */,
 				72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */,
 				221EC24F2105CF310059F856 /* TransferReducers.swift in Sources */,
 				72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */,
@@ -33391,6 +33531,7 @@
 				5CB67D4A0FFFF2D433936B9A36216722 /* MyHistoryCoordinator.swift in Sources */,
 				406AB4BA0BF043D771D15D751F7AB45D /* MyHistoryReducers.swift in Sources */,
 				41143CEDF6A8910D9C2E8BCEE8C47A38 /* MyHistoryViewController.swift in Sources */,
+				7307A91E212518DC00BD6444 /* Iconic.swift in Sources */,
 				3B0EB65B210313B200F19C31 /* YourPortfolioHandleView.swift in Sources */,
 				CD017D1C374A5B06D3ECEC24936E0911 /* MyOpenedOrdersView.swift in Sources */,
 				D3008B984211AFE152859658DC6B773B /* NSNotification+Extensions.swift in Sources */,
@@ -33417,6 +33558,7 @@
 				CDFF0BF138FA10588F2D771CAF16AF34 /* OrderBook.swift in Sources */,
 				7386F2A42121665100ABC924 /* AddressHomeReducers.swift in Sources */,
 				019AC681342BD1E978777A6A503E27B6 /* OrderBookActions.swift in Sources */,
+				7307A931212518F300BD6444 /* BaseView.swift in Sources */,
 				4C5E6FF343C8DA25EC51F44EF725069E /* OrderBookCell.swift in Sources */,
 				D898B818223D8DD3B304D2D7F5A3E2AB /* OrderBookCellView.swift in Sources */,
 				72199D79210450C900575226 /* RecodeCell.swift in Sources */,
@@ -33425,6 +33567,7 @@
 				7386F2B921216B3A00ABC924 /* WithdrawAddressHomeViewController.swift in Sources */,
 				813E625BF1238DDBDC460AFDBCEF4049 /* OrderBookReducers.swift in Sources */,
 				562EE9FB61A1D1EBCB263F8C8DE265B6 /* OrderBookViewController.swift in Sources */,
+				7307A926212518DC00BD6444 /* ThemifyIcon.swift in Sources */,
 				CEC8E5E6CEBF33DC5FED8EBCA2AFAAE7 /* PairCardCell.swift in Sources */,
 				7386F2D82121737600ABC924 /* AddressHomeTableViewCellViewView.swift in Sources */,
 				806E6CA899929830A51F0FBB79089A80 /* PairCardView.swift in Sources */,
@@ -33483,6 +33626,7 @@
 				B4125FF4D7849714DA71E04BC6D888AB /* TradeHistoryCell.swift in Sources */,
 				1004CC5E6B42E88C009CBF159D123279 /* TradeHistoryCellView.swift in Sources */,
 				12AE5E9B9597FDA9EB27559DFCF073C7 /* TradeHistoryCoordinator.swift in Sources */,
+				7307A922212518DC00BD6444 /* MaterialIcon.swift in Sources */,
 				806B06314E8ECEEB9566B42F7A68C553 /* TradeHistoryReducers.swift in Sources */,
 				529398111D54AC2675A435EC00F50E5B /* TradeHistoryView.swift in Sources */,
 				894D811521F19A8670D0A6C61B11C600 /* TradeHistoryViewController.swift in Sources */,
@@ -33500,6 +33644,7 @@
 				72199DA22104636900575226 /* TransferDetailReducers.swift in Sources */,
 				7386F2C021216B9E00ABC924 /* WithdrawAddressReducers.swift in Sources */,
 				A0205CDF8595D10C5D9367EBCBBA714A /* UIColor+Additions.swift in Sources */,
+				7307A91C212518DC00BD6444 /* FontAwesome.swift in Sources */,
 				1885C2EE1E25930F2E94702A8C05C2BC /* UIColor+Cybexblack.swift in Sources */,
 				492A4075DDD845005D90DD5201F32F26 /* UIColorExtension.swift in Sources */,
 				CC8DD1E9001CFBB8915E342EDB329B3E /* UIImage+Extensions.swift in Sources */,
@@ -33535,6 +33680,7 @@
 				911CFA6B3FC228D25DBD994B8E6AAEDD /* get_dev_key.cpp in Sources */,
 				AA4E21B5AB76E4FEA62F38545E25868C /* memo.cpp in Sources */,
 				9CA15199365825CE26938B0E719EC4CC /* pts_address.cpp in Sources */,
+				7307A91F212518DC00BD6444 /* IonIcons.swift in Sources */,
 				7386F2B821216B3A00ABC924 /* WithdrawAddressHomeReducers.swift in Sources */,
 				AB91379B8C52B82AAF3DCC870ED7DA37 /* transaction.cpp in Sources */,
 				21D4F7060148486EE0215AE84B53174E /* types.cpp in Sources */,

@@ -28,6 +28,10 @@ class ___VARIABLE_productName:identifier___Coordinator: <#RootCoordinator#> {
         state: nil,
         middleware:[TrackingMiddleware]
     )
+    override func register() {
+        Broadcaster.register(___VARIABLE_productName:identifier___CoordinatorProtocol.self, observer: self)
+        Broadcaster.register(___VARIABLE_productName:identifier___StateManagerProtocol.self, observer: self)
+    }
 }
 
 extension ___VARIABLE_productName:identifier___Coordinator: ___VARIABLE_productName:identifier___CoordinatorProtocol {

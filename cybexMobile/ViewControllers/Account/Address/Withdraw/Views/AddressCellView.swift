@@ -9,62 +9,29 @@
 import Foundation
 
 @IBDesignable
-class AddressCellView: UIView {
+class AddressCellView: BaseView {
+    
     @IBOutlet weak var nickName: UILabel!
     @IBOutlet weak var address: UILabel!
     
     @IBOutlet weak var memo: UILabel!
     
-    var data: Any? {
+    enum Event:String {
+        case AddressCellViewDidClicked
+    }
+
+    override var data: Any? {
         didSet {
-        
+            
         }
     }
     
-    fileprivate func setup() {
-        updateHeight()
-    }
-    
-    override var intrinsicContentSize: CGSize {
-        return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
-    }
-    
-    fileprivate func updateHeight() {
-        layoutIfNeeded()
-        self.height = dynamicHeight()
-        invalidateIntrinsicContentSize()
-    }
-    
-    fileprivate func dynamicHeight() -> CGFloat {
-        let lastView = self.subviews.last?.subviews.last
-        return lastView?.bottom ?? 0
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layoutIfNeeded()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        loadViewFromNib()
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        loadViewFromNib()
-        setup()
-    }
-    
-    fileprivate func loadViewFromNib() {
-        let bundle = Bundle(for: type(of: self))
-        let nibName = String(describing: type(of: self))
-        let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+    override func setup() {
+        super.setup()
         
-        insertSubview(view, at: 0)
-        view.frame = self.bounds
-        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    }
+    
+    @objc override func didClicked() {
+        self.next?.sendEventWith(Event.AddressCellViewDidClicked.rawValue, userinfo: [:])
     }
 }
