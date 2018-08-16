@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="content" destination="LJp-jr-cv5" id="Omj-S6-9Kk"/>
+                <outlet property="icon" destination="gdh-PX-Dek" id="FIG-AV-y9V"/>
+                <outlet property="lineView" destination="Zq1-g7-aRR" id="VF5-2Q-c1D"/>
+                <outlet property="name" destination="aXj-HU-WbO" id="MUe-FS-yLb"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Agn-Jf-TGB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXj-HU-WbO">
+                    <rect key="frame" x="12" y="16" width="13" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="U1f-16-KcO"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdh-PX-Dek">
+                    <rect key="frame" x="339" y="38" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="AuC-fY-f2R"/>
+                        <constraint firstAttribute="height" constant="24" id="oN1-45-sYc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zq1-g7-aRR">
+                    <rect key="frame" x="12" y="99" width="351" height="1"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Lnh-pN-N6q"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                            <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LJp-jr-cv5">
+                    <rect key="frame" x="12" y="38" width="317" height="52"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </textView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="gdh-PX-Dek" firstAttribute="centerY" secondItem="Agn-Jf-TGB" secondAttribute="centerY" id="20V-ny-m2m"/>
+                <constraint firstItem="aXj-HU-WbO" firstAttribute="top" secondItem="d78-FV-7Fg" secondAttribute="top" constant="16" id="2Gu-ap-bq4"/>
+                <constraint firstItem="Zq1-g7-aRR" firstAttribute="leading" secondItem="Agn-Jf-TGB" secondAttribute="leading" constant="12" id="4Mt-5F-m1Z"/>
+                <constraint firstItem="aXj-HU-WbO" firstAttribute="leading" secondItem="d78-FV-7Fg" secondAttribute="leading" constant="12" id="5zQ-zV-djw"/>
+                <constraint firstItem="d78-FV-7Fg" firstAttribute="trailing" secondItem="gdh-PX-Dek" secondAttribute="trailing" constant="12" id="99d-Gq-734"/>
+                <constraint firstItem="Zq1-g7-aRR" firstAttribute="top" secondItem="LJp-jr-cv5" secondAttribute="bottom" constant="9" id="HqR-th-v1F"/>
+                <constraint firstItem="d78-FV-7Fg" firstAttribute="bottom" secondItem="Zq1-g7-aRR" secondAttribute="bottom" id="IgF-tl-5l5"/>
+                <constraint firstItem="gdh-PX-Dek" firstAttribute="leading" secondItem="LJp-jr-cv5" secondAttribute="trailing" constant="10" id="LNa-ev-Q1N"/>
+                <constraint firstItem="LJp-jr-cv5" firstAttribute="top" secondItem="aXj-HU-WbO" secondAttribute="bottom" id="PbG-GI-YAo"/>
+                <constraint firstAttribute="trailing" secondItem="Zq1-g7-aRR" secondAttribute="trailing" constant="12" id="cqI-qI-b8N"/>
+                <constraint firstItem="LJp-jr-cv5" firstAttribute="leading" secondItem="d78-FV-7Fg" secondAttribute="leading" constant="12" id="olp-ZB-PoR"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="d78-FV-7Fg"/>
+            <point key="canvasLocation" x="33.5" y="54"/>
+        </view>
+    </objects>
+</document>

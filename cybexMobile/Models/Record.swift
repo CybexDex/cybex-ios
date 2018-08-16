@@ -10,25 +10,19 @@ import Foundation
 import HandyJSON
 
 
-enum RecordState : String ,HandyJSONEnum {
-  case new
-  case state_init = "init"
-  case pending
-  case failed
-  case done
-  
+extension String {
   func desccription() -> String {
     switch self {
-    case .new:
+    case "new":
       return R.string.localizable.recode_state_new.key.localized()
-    case .state_init:
-      return R.string.localizable.recode_state_upping.key.localized()
-    case .pending:
+    case "pending":
       return R.string.localizable.recode_state_noensure.key.localized()
-    case .failed:
+    case "failed":
       return R.string.localizable.recode_state_fail.key.localized()
-    case .done:
+    case "done":
       return R.string.localizable.recode_state_success.key.localized()
+    default:
+        return R.string.localizable.recode_state_upping.key.localized()
     }
   }
   
@@ -42,14 +36,12 @@ struct Record : HandyJSON {
   var asset : String = ""
   var coinType : String = ""
   var fundType : String = ""
-  var state : RecordState!
+  var state : String = ""
   var updateAt : Date!
-  
   
   mutating func mapping(mapper: HelpingMapper) {
     mapper <<<
       self.updateAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.zzz'Z'")
-    
   }
   
   init() {}
@@ -66,6 +58,7 @@ open class GemmaDateFormatTransform: DateFormatterTransform {
     
     super.init(dateFormatter: formatter)
   }
+
 }
 
 

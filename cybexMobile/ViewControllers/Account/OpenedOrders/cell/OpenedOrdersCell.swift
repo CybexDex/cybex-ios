@@ -25,10 +25,10 @@ class OpenedOrdersCell: BaseTableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    self.contentView.shadowColor = ThemeManager.currentThemeIndex == 0 ? .darkTwo : .paleGrey
-    self.contentView.shadowOffset = CGSize(width: 0, height: -1)
-    self.contentView.shadowRadius = 0
-    self.contentView.shadowOpacity = 1.0
+//    self.contentView.shadowColor = ThemeManager.currentThemeIndex == 0 ? .darkTwo : .paleGrey
+//    self.contentView.shadowOffset = CGSize(width: 0, height: -1)
+//    self.contentView.shadowRadius = 0
+//    self.contentView.shadowOpacity = 1.0
   }
   
   override func setup(_ data: Any?, indexPath: IndexPath) {

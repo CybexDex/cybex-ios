@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftTheme
 
 class OpenedOrdersView:  UIView{
   
@@ -22,7 +23,8 @@ class OpenedOrdersView:  UIView{
   @IBOutlet weak var cancleOrder: UIView!
   @IBOutlet weak var cancleL: UILabel!
   @IBOutlet weak var cancleImg: UIImageView!
-  
+    @IBOutlet weak var lineView: UIView!
+    
   enum CancleOrder : String{
     case cancleOrderAction
   }
@@ -101,6 +103,9 @@ class OpenedOrdersView:  UIView{
       guard let `self` = self else { return }
       self.cancleOrder.next?.sendEventWith(CancleOrder.cancleOrderAction.rawValue, userinfo:["selectedIndex":self.selectedIndex?.row ?? 0])
     }).disposed(by: disposeBag)
+    
+//    self.lineView.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
+
   }
   
   override var intrinsicContentSize: CGSize {
