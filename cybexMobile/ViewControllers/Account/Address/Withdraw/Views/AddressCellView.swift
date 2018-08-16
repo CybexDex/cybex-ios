@@ -23,16 +23,15 @@ class AddressCellView: BaseView {
     override func setup() {
         super.setup()
         
+        setupSubViewEvent()
+    }
+    
+    func setupSubViewEvent() {
+        
     }
     
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.AddressCellViewDidClicked.rawValue, userinfo: [:])
-    }
-}
-
-extension AddressCellView {
-    func adapterModelToAddressCellView(_ model:Int) {
-        
+        self.next?.sendEventWith(Event.AddressCellViewDidClicked.rawValue, userinfo: ["data": self.data ?? ""])
     }
 }
 

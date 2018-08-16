@@ -308,6 +308,7 @@
 		7307A92E212518DC00BD6444 /* open-iconic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7307A915212518DB00BD6444 /* open-iconic.ttf */; };
 		7307A92F212518DC00BD6444 /* themify.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7307A916212518DB00BD6444 /* themify.ttf */; };
 		7307A931212518F300BD6444 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A930212518F300BD6444 /* BaseView.swift */; };
+		7307A94521257BE900BD6444 /* AddressCellViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A94421257BE900BD6444 /* AddressCellViewAdapter.swift */; };
 		7323B4B02A3A6EFE54C1B30D7491D953 /* MyHistoryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E17D1C068A4ED09DD447E3434E5E550 /* MyHistoryCellView.xib */; };
 		733714B12122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714AF2122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift */; };
 		733714B22122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714B02122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib */; };
@@ -5871,6 +5872,7 @@
 		7307A915212518DB00BD6444 /* open-iconic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "open-iconic.ttf"; sourceTree = "<group>"; };
 		7307A916212518DB00BD6444 /* themify.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = themify.ttf; sourceTree = "<group>"; };
 		7307A930212518F300BD6444 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		7307A94421257BE900BD6444 /* AddressCellViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCellViewAdapter.swift; sourceTree = "<group>"; };
 		7318C16259141480B20816B58236A157 /* empty_impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = empty_impl.hpp; sourceTree = "<group>"; };
 		731D235E20085DC94F05D5F5263DC27A /* c99sub_rounding_control.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = c99sub_rounding_control.hpp; sourceTree = "<group>"; };
 		7320A25885996B0F4C311BB64C7BE7DC /* not_specified.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = not_specified.hpp; sourceTree = "<group>"; };
@@ -22118,6 +22120,7 @@
 			isa = PBXGroup;
 			children = (
 				733714BB2122D32500B2ED90 /* AddressCellView.swift */,
+				7307A94421257BE900BD6444 /* AddressCellViewAdapter.swift */,
 				733714BC2122D32500B2ED90 /* AddressCellView.xib */,
 			);
 			path = Views;
@@ -33423,6 +33426,7 @@
 				65A0AB87E09E879EFAFA04DBA6B15D3E /* AccountCoordinator.swift in Sources */,
 				C37CA15215CBB1B064E0514AB9D0EFE5 /* AccountOpenedOrdersView.swift in Sources */,
 				225746DE210707DD0017FA1A /* PickerReducers.swift in Sources */,
+				7307A94521257BE900BD6444 /* AddressCellViewAdapter.swift in Sources */,
 				D3694E6115F5ED50F0FFE4108E64BAEE /* AccountPortfolioCell.swift in Sources */,
 				7386F2D42121735800ABC924 /* AddressHomeTableViewCell.swift in Sources */,
 				9708F7C8EA5B8E107E937306846BE6F0 /* AccountPortfolioCellView.swift in Sources */,

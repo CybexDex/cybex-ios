@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import SwiftNotificationCenter
 
 class WithdrawAddressViewController: BaseViewController {
 
@@ -29,7 +30,11 @@ class WithdrawAddressViewController: BaseViewController {
     }
     
     override func rightAction(_ sender: UIButton) {
-        
+        Broadcaster.notify(AddressCellView.self) { (view) in
+            if view.isDescendant(of: self.view) {
+                
+            }
+        }
     }
     
     func commonObserveState() {

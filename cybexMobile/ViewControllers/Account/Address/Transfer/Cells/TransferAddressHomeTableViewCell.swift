@@ -16,6 +16,7 @@ class TransferAddressHomeTableViewCell: BaseTableViewCell {
         super.awakeFromNib()
         // Initialization code
         
+        foreView.updateUI(1, handler: AddressCellView.adapterModelToAddressCellView(foreView))
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
