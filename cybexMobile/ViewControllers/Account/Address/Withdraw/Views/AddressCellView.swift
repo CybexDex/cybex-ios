@@ -19,12 +19,6 @@ class AddressCellView: BaseView {
     enum Event:String {
         case AddressCellViewDidClicked
     }
-
-    override var data: Any? {
-        didSet {
-            
-        }
-    }
     
     override func setup() {
         super.setup()
@@ -35,3 +29,11 @@ class AddressCellView: BaseView {
         self.next?.sendEventWith(Event.AddressCellViewDidClicked.rawValue, userinfo: [:])
     }
 }
+
+extension AddressCellView {
+    func adapterModelToAddressCellView(_ model:Int) {
+        
+    }
+}
+
+
