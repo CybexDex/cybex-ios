@@ -87,13 +87,20 @@ class AccountViewController: BaseViewController {
     setupIconImg()
     self.configRightNavButton(R.image.icSettings24Px())
     
-    let imgArray = [R.image.icBalance(), R.image.w(), R.image.ic_address_28_px(), R.image.icOrder28Px(), R.image.icLockAsset()]
+//    let imgArray = [R.image.icBalance(), R.image.w(), R.image.ic_address_28_px(), R.image.icOrder28Px(), R.image.icLockAsset()]
     
+    let imgArray = [R.image.icBalance(), R.image.w(), R.image.icOrder28Px(), R.image.icLockAsset()]
+
     let nameArray = [R.string.localizable.my_property.key.localized(),
                      R.string.localizable.deposit_withdraw.key.localized(),
-                     R.string.localizable.address_manager.key.localized(),
                      R.string.localizable.order_value.key.localized(),
                      R.string.localizable.lockupAssetsTitle.key.localized()]
+    
+//    let nameArray = [R.string.localizable.my_property.key.localized(),
+//                     R.string.localizable.deposit_withdraw.key.localized(),
+//                     R.string.localizable.address_manager.key.localized(),
+//                     R.string.localizable.order_value.key.localized(),
+//                     R.string.localizable.lockupAssetsTitle.key.localized()]
     
     dataArray.removeAll()
     for i in 0..<nameArray.count {
@@ -170,13 +177,13 @@ extension AccountViewController{
       } else {
         self.coordinator?.openRecharge()
       }
+//    case 2:
+//        if !UserManager.shared.isLoginIn {
+//            app_coodinator.showLogin()
+//        } else {
+//            self.coordinator?.openAddressManager()
+//        }
     case 2:
-        if !UserManager.shared.isLoginIn {
-            app_coodinator.showLogin()
-        } else {
-            self.coordinator?.openAddressManager()
-        }
-    case 3:
       if !UserManager.shared.isLoginIn {
         app_coodinator.showLogin()
       } else {

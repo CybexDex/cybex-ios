@@ -236,6 +236,14 @@
 		6DBCCB0ED729AC68AF493B54C15A81CF /* OpenedOrdersReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF14FC4A3BFAB5A78D89088EA656DA2 /* OpenedOrdersReducers.swift */; };
 		6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90712234E28EE675FA991ADB398400A0 /* LockupAssetsViewController.swift */; };
 		70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4D27CA3E4885E696C2D1EAEFD1BAB4 /* QuotesTitleView.swift */; };
+		7217B07C2122AAFD00608531 /* AddAddressCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B0782122AAFD00608531 /* AddAddressCoordinator.swift */; };
+		7217B07D2122AAFD00608531 /* AddAddressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B0792122AAFD00608531 /* AddAddressActions.swift */; };
+		7217B07E2122AAFD00608531 /* AddAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B07A2122AAFD00608531 /* AddAddressViewController.swift */; };
+		7217B07F2122AAFD00608531 /* AddAddressReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B07B2122AAFD00608531 /* AddAddressReducers.swift */; };
+		7217B0832122AD9D00608531 /* AddAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B0822122AD9D00608531 /* AddAddressView.swift */; };
+		7217B0852122ADA800608531 /* AddAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7217B0842122ADA800608531 /* AddAddressView.xib */; };
+		7217B0872122BBD900608531 /* AddressItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B0862122BBD900608531 /* AddressItemView.swift */; };
+		7217B0892122BBE500608531 /* AddressItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7217B0882122BBE500608531 /* AddressItemView.xib */; };
 		72199D6621044FD100575226 /* RechargeRecodeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6221044FD100575226 /* RechargeRecodeCoordinator.swift */; };
 		72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6321044FD100575226 /* RechargeRecodeActions.swift */; };
 		72199D6821044FD100575226 /* TradeRecodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199D6421044FD100575226 /* TradeRecodeViewController.swift */; };
@@ -5728,6 +5736,14 @@
 		721401C37369E9EC5F09B832E7811F83 /* function_template.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = function_template.hpp; sourceTree = "<group>"; };
 		72152A9CCDD285E8443FBE328B3B5082 /* graphviz.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = graphviz.hpp; sourceTree = "<group>"; };
 		721676906B5FA3121F2DBD36D5D5B6A2 /* test_tools.ipp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = test_tools.ipp; sourceTree = "<group>"; };
+		7217B0782122AAFD00608531 /* AddAddressCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressCoordinator.swift; sourceTree = "<group>"; };
+		7217B0792122AAFD00608531 /* AddAddressActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressActions.swift; sourceTree = "<group>"; };
+		7217B07A2122AAFD00608531 /* AddAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewController.swift; sourceTree = "<group>"; };
+		7217B07B2122AAFD00608531 /* AddAddressReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressReducers.swift; sourceTree = "<group>"; };
+		7217B0822122AD9D00608531 /* AddAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressView.swift; sourceTree = "<group>"; };
+		7217B0842122ADA800608531 /* AddAddressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAddressView.xib; sourceTree = "<group>"; };
+		7217B0862122BBD900608531 /* AddressItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressItemView.swift; sourceTree = "<group>"; };
+		7217B0882122BBE500608531 /* AddressItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressItemView.xib; sourceTree = "<group>"; };
 		72199D6221044FD100575226 /* RechargeRecodeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeCoordinator.swift; sourceTree = "<group>"; };
 		72199D6321044FD100575226 /* RechargeRecodeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeRecodeActions.swift; sourceTree = "<group>"; };
 		72199D6421044FD100575226 /* TradeRecodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeRecodeViewController.swift; sourceTree = "<group>"; };
@@ -21686,6 +21702,37 @@
 			path = nt2;
 			sourceTree = "<group>";
 		};
+		7217B0772122A99000608531 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				7217B0812122AD8900608531 /* Cells */,
+				7217B0802122AD8300608531 /* Views */,
+				7217B0782122AAFD00608531 /* AddAddressCoordinator.swift */,
+				7217B0792122AAFD00608531 /* AddAddressActions.swift */,
+				7217B07A2122AAFD00608531 /* AddAddressViewController.swift */,
+				7217B07B2122AAFD00608531 /* AddAddressReducers.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		7217B0802122AD8300608531 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7217B0822122AD9D00608531 /* AddAddressView.swift */,
+				7217B0842122ADA800608531 /* AddAddressView.xib */,
+				7217B0862122BBD900608531 /* AddressItemView.swift */,
+				7217B0882122BBE500608531 /* AddressItemView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7217B0812122AD8900608531 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		72199D6121044FB600575226 /* TradeRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -21887,6 +21934,7 @@
 		7386F29D212165FD00ABC924 /* Address */ = {
 			isa = PBXGroup;
 			children = (
+				7217B0772122A99000608531 /* Add */,
 				7386F2A921216ACD00ABC924 /* Transfer */,
 				7386F2A821216AC700ABC924 /* Withdraw */,
 				7386F2A7212169FF00ABC924 /* Cells */,
@@ -32694,6 +32742,7 @@
 				6A019F6EFC3FAEE49A5991F402E36143 /* AccountPortfolioView.xib in Resources */,
 				49A5F40C54716A0DE78B3C2D417905C3 /* BalanceIntroduceView.xib in Resources */,
 				42575EE1042178AB8C2805F4949A3F45 /* Business.storyboard in Resources */,
+				7217B0892122BBE500608531 /* AddressItemView.xib in Resources */,
 				192C3ADF0D3E049D53C92A483D63CD03 /* BusinessTitleCell.xib in Resources */,
 				56D03074319AE5D578E9B4CD28B6C1F9 /* BusinessTitleItemView.xib in Resources */,
 				E7F391C513AB0D96277BECAC9BE9672E /* BusinessTitleView.xib in Resources */,
@@ -32764,6 +32813,7 @@
 				589C3222B6936F858915CE755BEA7139 /* algorithm in Resources */,
 				E2CDBCB0F3EF1EAF61B086884BE94766 /* algorithm.SUNWCCh in Resources */,
 				6A80CEA201B762683D148EF0C7CC0EE0 /* array in Resources */,
+				7217B0852122ADA800608531 /* AddAddressView.xib in Resources */,
 				225746E4210715890017FA1A /* Components.storyboard in Resources */,
 				1CDF918F13C09430A6744E7A1FED2C86 /* array.SUNWCCh in Resources */,
 				C9E9C25E6F2F69A3AF5564B11DFE17E7 /* bcc32.SUNWCCh in Resources */,
@@ -33258,6 +33308,7 @@
 				F7886D0310C612E91619D84DDA4182F5 /* BaseNavigationController.swift in Sources */,
 				AAEB2ADE1A954767CBCDED7BE011631A /* BaseTabbarViewController.swift in Sources */,
 				E173B41881E536F07501B0784F9660CF /* BaseTableViewCell.swift in Sources */,
+				7217B07C2122AAFD00608531 /* AddAddressCoordinator.swift in Sources */,
 				3B0EB65A210313B200F19C31 /* AccountTableHeadView.swift in Sources */,
 				7386F2A32121665100ABC924 /* AddressHomeCoordinator.swift in Sources */,
 				E67B496E838B6A7A22AF4F05AED93441 /* BaseViewController.swift in Sources */,
@@ -33298,6 +33349,7 @@
 				B7631744A19B452081A71269BF881246 /* CBKLineVolumeView.swift in Sources */,
 				8C3E5CB53A30AD3221992CCA44A8D332 /* CBMACDModel.swift in Sources */,
 				92AF8740929C204D86A85866576BC844 /* CBMALineBrush.swift in Sources */,
+				7217B0832122AD9D00608531 /* AddAddressView.swift in Sources */,
 				7F38CC71354724DD10BBC3E8BF37C44A /* CBMAModel.swift in Sources */,
 				51ED56491B9169BC8F1E25548D3387D8 /* CBMAVOLUMEModel.swift in Sources */,
 				7386F2BF21216B9E00ABC924 /* WithdrawAddressCoordinator.swift in Sources */,
@@ -33315,6 +33367,7 @@
 				C4B9965B38DBF143FD1862CF88F9DAE1 /* CybexTextView.swift in Sources */,
 				CD7ECF264F6C16A3649CE586A93D6269 /* CybexTitleView.swift in Sources */,
 				8C00D47D4D9F9CB040B6855F6CC7D757 /* DataBaseApi.swift in Sources */,
+				7217B07E2122AAFD00608531 /* AddAddressViewController.swift in Sources */,
 				61096350D887C3728E3B617E993C2365 /* Demo.swift in Sources */,
 				51FB3EBF69DA6AF015F0DF92781986BF /* DemoCache.swift in Sources */,
 				A1EF7FAAA7F0B4F6C9FE153714C1ED47 /* ShowToastManager.swift in Sources */,
@@ -33403,6 +33456,7 @@
 				225746DB210707DD0017FA1A /* PickerCoordinator.swift in Sources */,
 				D1612139CDC75BB4ACC08A1D78FD0AEE /* OpenedOrdersCell.swift in Sources */,
 				5F25028208C6665DE69B50E5D5ECBEF6 /* OpenedOrdersCoordinator.swift in Sources */,
+				7217B07D2122AAFD00608531 /* AddAddressActions.swift in Sources */,
 				3B0EB655210313B200F19C31 /* AccountContentView.swift in Sources */,
 				26827458BC8C2CF5494505DA58315BBF /* OpenedOrdersHeaderView.swift in Sources */,
 				733714B12122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift in Sources */,
@@ -33493,6 +33547,7 @@
 				2E3DB3499E75C0D06068C979CD788B00 /* TradeReducers.swift in Sources */,
 				72D9DD58210EB60F00963915 /* Periscope.swift in Sources */,
 				640657C00CD9588E73E0F0280F245348 /* TradeRootCoordinator.swift in Sources */,
+				7217B07F2122AAFD00608531 /* AddAddressReducers.swift in Sources */,
 				7386F2B121216B2200ABC924 /* TransferAddressHomeViewController.swift in Sources */,
 				3B0EB65C210313B200F19C31 /* YourPortfolioHeadView.swift in Sources */,
 				C02132F00200B408020442C307CEE0B6 /* TradeView.swift in Sources */,
@@ -33504,6 +33559,7 @@
 				492A4075DDD845005D90DD5201F32F26 /* UIColorExtension.swift in Sources */,
 				CC8DD1E9001CFBB8915E342EDB329B3E /* UIImage+Extensions.swift in Sources */,
 				0C46B30A32343632C135B84DDEB47F80 /* UIResponder+Route.swift in Sources */,
+				7217B0872122BBD900608531 /* AddressItemView.swift in Sources */,
 				225746E821073E480017FA1A /* PickerView.swift in Sources */,
 				7386F2B721216B3A00ABC924 /* WithdrawAddressHomeCoordinator.swift in Sources */,
 				72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */,

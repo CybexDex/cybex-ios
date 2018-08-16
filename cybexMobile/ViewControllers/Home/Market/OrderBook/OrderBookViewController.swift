@@ -138,7 +138,7 @@ class OrderBookViewController: BaseViewController {
       
       let matrix = getCachedBucket(data)
       
-      self.tradeView.amount.text = matrix.price
+      self.tradeView.amount.text = matrix.price.tradePrice.price
       self.tradeView.amount.textColor = matrix.incre.color()
       
       if matrix.price == "" {

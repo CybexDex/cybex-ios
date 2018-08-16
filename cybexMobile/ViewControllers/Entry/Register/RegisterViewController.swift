@@ -199,6 +199,10 @@ extension RegisterViewController {
     passwordValid.subscribe(onNext: {[weak self] (validate) in
       guard let `self` = self else { return }
       if let text = self.passwordTextField.text,text.count == 0 {
+        self.passwordTextField.tailImage = nil
+        if let passwordText = self.confirmPasswordTextField.text,passwordText.count == 0 ,self.userNameValid{
+            self.errorStackView.isHidden = true
+        }
         return
       }
       if validate {
@@ -227,6 +231,10 @@ extension RegisterViewController {
     confirmPasswordValid.subscribe(onNext: {[weak self] (validate) in
       guard let `self` = self else { return }
       if let text = self.confirmPasswordTextField.text,text.count == 0 {
+        self.confirmPasswordTextField.tailImage = nil
+        if let passwordText = self.passwordTextField.text,passwordText.count == 0 ,self.userNameValid{
+            self.errorStackView.isHidden = true
+        }
         return
       }
       if let text = self.passwordTextField.text ,text.count > 0 ,!verifyPassword(text) {
@@ -355,10 +363,7 @@ extension RegisterViewController {
           self.registerButton.canRepeat = true
         }
       }
-      
-      
     }).disposed(by: disposeBag)
-    
   }
 }
 

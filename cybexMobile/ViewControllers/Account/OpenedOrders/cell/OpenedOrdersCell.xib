@@ -21,7 +21,6 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WCr-Bh-seB" customClass="OpenedOrdersView" customModule="cybexMobile" customModuleProvider="target">
                         <rect key="frame" x="13" y="0.0" width="294" height="44.5"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </subviews>
                 <constraints>
