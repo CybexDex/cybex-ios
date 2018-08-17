@@ -14,7 +14,7 @@ func ___VARIABLE_productName:identifier___Reducer(action:Action, state:___VARIAB
 }
 
 func ___VARIABLE_productName:identifier___PropertyReducer(_ state: ___VARIABLE_productName:identifier___PropertyState?, action: Action) -> ___VARIABLE_productName:identifier___PropertyState {
-    var state = state ?? ___VARIABLE_productName:identifier___PropertyState()
+    let state = state ?? ___VARIABLE_productName:identifier___PropertyState()
     
     switch action {
     default:

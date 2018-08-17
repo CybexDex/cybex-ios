@@ -28,6 +28,12 @@ class TransferAddressHomeViewController: BaseViewController {
         self.tableView.register(R.nib.transferAddressHomeTableViewCell(), forCellReuseIdentifier: R.nib.transferAddressHomeTableViewCell.name)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.coordinator?.fetchData()
+    }
+    
     override func rightAction(_ sender: UIButton) {
         self.coordinator?.openAddTransferAddress()
     }
@@ -49,16 +55,24 @@ class TransferAddressHomeViewController: BaseViewController {
     override func configureObserveState() {
         commonObserveState()
         
+        self.coordinator?.state.property.data.asObservable().subscribe(onNext: {[weak self] (data) in
+            guard let `self` = self else { return }
+            
+            self.tableView.reloadData()
+            }, onError: nil, onCompleted: nil , onDisposed: nil).disposed(by: disposeBag)
     }
 }
 
 extension TransferAddressHomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.coordinator?.state.property.data.value.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.transferAddressHomeTableViewCell.name, for: indexPath) as! TransferAddressHomeTableViewCell
+        if let data = self.coordinator?.state.property.data.value {
+            cell.setup(data[indexPath.row], indexPath: indexPath)
+        }
         
         return cell
     }

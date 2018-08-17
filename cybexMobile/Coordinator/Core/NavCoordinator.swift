@@ -18,6 +18,7 @@ class NavCoordinator:NavProtocol {
     
     init(rootVC: BaseNavigationController) {
         self.rootVC = rootVC
+        register()
     }
     
     func start()  {

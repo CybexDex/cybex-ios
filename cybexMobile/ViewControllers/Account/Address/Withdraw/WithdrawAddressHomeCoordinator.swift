@@ -9,6 +9,7 @@
 import UIKit
 import ReSwift
 import SwiftNotificationCenter
+import Async
 
 protocol WithdrawAddressHomeCoordinatorProtocol {
     func openWithDrawAddressVC()
@@ -19,6 +20,10 @@ protocol WithdrawAddressHomeStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<WithdrawAddressHomeState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
+    
+    func fetchData()
+    func fetchAddressData()
+    func selectCell(_ index:Int)
 }
 
 class WithdrawAddressHomeCoordinator: AccountRootCoordinator {
@@ -56,4 +61,27 @@ extension WithdrawAddressHomeCoordinator: WithdrawAddressHomeStateManagerProtoco
         store.subscribe(subscriber, transform: transform)
     }
     
+    func fetchData() {
+        SimpleHTTPService.fetchWithdrawIdsInfo().done { (ids) in
+            self.store.dispatch(FecthWithdrawIds(data: ids))
+        }.cauterize()
+    }
+    
+    func fetchAddressData() {
+        guard self.state.property.data.value.count > 0 else { return }
+        
+        var data:[String: [WithdrawAddress]] = [:]
+        
+        for viewmodel in self.state.property.data.value {
+            data[viewmodel.model.id] = AddressManager.shared.getWithDrawAddressListWith(viewmodel.model.id)
+        }
+        
+        Async.main {
+            self.store.dispatch(WithdrawAddressHomeAddressDataAction(data: data))
+        }
+    }
+    
+    func selectCell(_ index:Int) {
+        self.store.dispatch(WithdrawAddressHomeSelectedAction(index: index))
+    }
 }

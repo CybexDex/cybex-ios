@@ -19,6 +19,8 @@ protocol TransferAddressHomeStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<TransferAddressHomeState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
+    
+    func fetchData()
 }
 
 class TransferAddressHomeCoordinator: AccountRootCoordinator {
@@ -56,4 +58,8 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtoco
         store.subscribe(subscriber, transform: transform)
     }
     
+    func fetchData() {
+        let list = AddressManager.shared.getTransferAddressList()
+        self.store.dispatch(TransferAddressHomeDataAction(data: list))
+    }
 }

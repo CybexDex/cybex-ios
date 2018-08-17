@@ -8,6 +8,7 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
 
 //MARK: - State
 struct WithdrawAddressState: StateType {
@@ -19,6 +20,11 @@ struct WithdrawAddressState: StateType {
 }
 
 struct WithdrawAddressPropertyState {
+    var data: BehaviorRelay<[WithdrawAddress]> = BehaviorRelay(value: [])
+}
+
+struct WithdrawAddressDataAction: Action {
+    var data: [WithdrawAddress]
 }
 
 struct WithdrawAddressCallbackState {

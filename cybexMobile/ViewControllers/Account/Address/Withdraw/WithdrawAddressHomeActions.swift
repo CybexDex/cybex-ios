@@ -8,6 +8,7 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
 
 //MARK: - State
 struct WithdrawAddressHomeState: StateType {
@@ -18,7 +19,27 @@ struct WithdrawAddressHomeState: StateType {
     var callback: WithdrawAddressHomeCallbackState
 }
 
+struct WithdrawAddressHomeViewModel {
+    var imageURLString:String = ""
+    var count:BehaviorRelay<String> = BehaviorRelay(value:"")
+    var name:String = ""
+    var model:Trade = Trade()
+}
+
 struct WithdrawAddressHomePropertyState {
+    typealias WithdrawAddressHomeData = (viewModel:WithdrawAddressHomeViewModel, addressData:[WithdrawAddress])
+    
+    var data: BehaviorRelay<[WithdrawAddressHomeViewModel]> = BehaviorRelay(value:[])
+    var selectedViewModel: BehaviorRelay<WithdrawAddressHomeData?> = BehaviorRelay(value:nil)
+    var addressData: BehaviorRelay<[String: [WithdrawAddress]]> = BehaviorRelay(value:[:])
+}
+
+struct WithdrawAddressHomeSelectedAction:Action {
+    var index:Int
+}
+
+struct WithdrawAddressHomeAddressDataAction:Action {
+    var data:[String: [WithdrawAddress]]
 }
 
 struct WithdrawAddressHomeCallbackState {

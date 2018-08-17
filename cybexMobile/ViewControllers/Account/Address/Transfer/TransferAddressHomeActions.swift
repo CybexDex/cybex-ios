@@ -8,6 +8,7 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
 
 //MARK: - State
 struct TransferAddressHomeState: StateType {
@@ -19,6 +20,11 @@ struct TransferAddressHomeState: StateType {
 }
 
 struct TransferAddressHomePropertyState {
+    var data: BehaviorRelay<[TransferAddress]> = BehaviorRelay(value: [])
+}
+
+struct TransferAddressHomeDataAction:Action {
+    var data: [TransferAddress]
 }
 
 struct TransferAddressHomeCallbackState {

@@ -14,9 +14,11 @@ func TransferAddressHomeReducer(action:Action, state:TransferAddressHomeState?) 
 }
 
 func TransferAddressHomePropertyReducer(_ state: TransferAddressHomePropertyState?, action: Action) -> TransferAddressHomePropertyState {
-    var state = state ?? TransferAddressHomePropertyState()
+    let state = state ?? TransferAddressHomePropertyState()
     
     switch action {
+    case let action as TransferAddressHomeDataAction:
+        state.data.accept(action.data)
     default:
         break
     }
