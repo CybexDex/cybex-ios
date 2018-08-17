@@ -35,6 +35,12 @@ class AddressItemView: UIView {
     }
     
     
+    @IBInspectable var maxNumberOfLines : Int = Int.max {
+        didSet {
+            self.content.textContainer.maximumNumberOfLines = maxNumberOfLines
+        }
+    }
+    
     var data: Any? {
         didSet {
             

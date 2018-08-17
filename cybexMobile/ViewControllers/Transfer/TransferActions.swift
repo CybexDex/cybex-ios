@@ -40,6 +40,7 @@ struct TransferPropertyState {
   var memo: BehaviorRelay<String> = BehaviorRelay(value: "")
   
   var to_account: BehaviorRelay<Account?> = BehaviorRelay(value: nil)
+  
 }
 
 struct ValidAccountAction: Action {
@@ -64,6 +65,10 @@ struct SetToAccountAction: Action {
 
 struct ResetDataAction : Action {
   
+}
+
+struct ChooseAccountAction : Action {
+    var account : TransferAddress
 }
 
 //MARK: - Action Creator

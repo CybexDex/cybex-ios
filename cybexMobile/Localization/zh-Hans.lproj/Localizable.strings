@@ -342,6 +342,12 @@
 "account_title_add" = "添加转账账户";
 "address_title_add" = "添加提现地址";
 "address_title_add_eos" = "添加提现账户";
+"address_add_success" = "添加成功";
 
+"choose_address" = "选择地址";
+"add_address" = "添加地址";
+
+"choose_account" = "选择账户";
+"add_account" = "添加账户";
 
 

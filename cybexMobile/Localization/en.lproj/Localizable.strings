@@ -362,3 +362,11 @@
 "account_title_add" = "Add Transfer Account";
 "address_title_add" = "Add Address";
 "address_title_add_eos" = "Add Account";
+"address_add_success" = "Added";
+
+"choose_address" = "Select";
+"add_address" = "Add";
+
+"choose_account" = "Select";
+"add_account" = "Add";
+

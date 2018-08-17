@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import SwifterSwift
 
 class AddAddressViewController: BaseViewController {
     
@@ -17,16 +18,19 @@ class AddAddressViewController: BaseViewController {
     var coordinator: (AddAddressCoordinatorProtocol & AddAddressStateManagerProtocol)?
 
     var address_type : address_type = .withdraw
-    var isEOS : Bool = false
+
+    var asset : String = ""
     
 	override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
+        self.coordinator?.setAsset(self.asset)
     }
     
     func setupUI() {
         if address_type == .withdraw {
-            if self.isEOS {
+            self.containerView.asset.content.text = app_data.assetInfo[self.asset]?.symbol.filterJade
+            if self.asset == AssetConfiguration.EOS {
                 self.title = R.string.localizable.address_title_add_eos.key.localized()
                 self.containerView.address.title = R.string.localizable.eos_withdraw_account.key.localized()
             }
@@ -39,7 +43,7 @@ class AddAddressViewController: BaseViewController {
         else {
             self.title = R.string.localizable.account_title_add.key.localized()
             self.containerView.asset.isHidden = true
-            if !self.isEOS {
+            if self.asset != AssetConfiguration.EOS {
                 self.containerView.memo.isHidden = true
             }
         }
@@ -81,6 +85,19 @@ class AddAddressViewController: BaseViewController {
             }
         }
         
+        self.coordinator?.state.property.addressVailed.asObservable().skip(1).subscribe(onNext: { [weak self](address_success) in
+            guard let `self` = self else {return}
+            if !address_success {
+                var errosMessage = R.string.localizable.transfer_account_unexist.key.localized()
+                if self.address_type == .withdraw && self.asset != AssetConfiguration.EOS  {
+                   errosMessage = R.string.localizable.withdraw_address_fault.key.localized()
+                }
+                
+                self.showToastBox(false, message: errosMessage)
+            }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        
         Observable.combineLatest(self.coordinator!.state.property.addressVailed.asObservable(), self.coordinator!.state.property.noteVailed.asObservable()).subscribe(onNext: { [weak self](address_success,note_success) in
             guard let `self` = self else { return }
             guard address_success,note_success else {
@@ -90,11 +107,7 @@ class AddAddressViewController: BaseViewController {
             self.containerView.addBtn.isEnable = true
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
-        self.containerView.addBtn.rx.tapGesture().when(.recognized).filter {[weak self] (tap) -> Bool in
-            guard let `self` = self else { return false }
-            
-            return self.containerView.addBtn.canRepeat
-            }.subscribe(onNext: { [weak self](tap) in
+        self.containerView.addBtn.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self](tap) in
                 guard let `self` = self else { return }
                 let exit = AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text)
                 if exit.0 {
@@ -102,6 +115,11 @@ class AddAddressViewController: BaseViewController {
                 }
                 else {
                     self.coordinator?.addAddress(self.address_type)
+                    self.showToastBox(true, message: R.string.localizable.address_add_success.key.localized())
+                    SwifterSwift.delay(milliseconds: 1000, completion: {
+                        ShowToastManager.shared.hide(0)
+                        self.coordinator?.pop()
+                    })
                 }
                 
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)

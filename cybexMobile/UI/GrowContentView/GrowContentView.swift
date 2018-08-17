@@ -35,6 +35,9 @@ class GrowContentView: UIView {
       updateUI()
     }
   }
+    func reloadData() {
+        
+    }
   
   fileprivate func updateUI() {
     guard let datasource = self.datasource else {
