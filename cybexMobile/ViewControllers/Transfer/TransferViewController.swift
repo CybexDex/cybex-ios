@@ -105,6 +105,10 @@ class TransferViewController: BaseViewController {
             guard let `self` = self else { return }
             self.coordinator?.chooseOrAddAddress()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        self.coordinator?.state.property.account.asObservable().skip(1).subscribe(onNext: { [weak self](account) in
+            guard let `self` = self else { return }
+            self.transferView.accountView.textField.text = account
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     
     func setupUI() {
