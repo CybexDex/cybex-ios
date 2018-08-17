@@ -7,19 +7,19 @@
 //
 
 import UIKit
+import Kingfisher
 
 class WithdrawAddressHomeTableViewCell: BaseTableViewCell {
 
-    @IBOutlet weak var foreView: NormalCellView!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @IBOutlet weak var foreView: TradeItemView!
+  
+    override func setup(_ data: Any?) {
+        if let data = data as? WithdrawAddressHomeViewModel {
+            foreView.icon.kf.setImage(with: URL(string: data.imageURLString))
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+            foreView.name.text = data.name
+            foreView.amount.text = data.count.value
+        }
     }
     
 }

@@ -105,7 +105,7 @@ def other
     pod 'MLeaksFinder'
     pod 'Device'
     pod 'SwiftNotificationCenter'
-
+    pod 'AsyncSwift'
 end
 
 def fabric

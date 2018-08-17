@@ -20,6 +20,8 @@ protocol WithdrawAddressStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<WithdrawAddressState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
+    
+    func refreshData(_ id:String?)
 }
 
 class WithdrawAddressCoordinator: AccountRootCoordinator {
@@ -83,4 +85,14 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
     
+    func refreshData(_ id:String?) {
+        if id == nil {
+            Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
+                if let viewmodel = coor.state.property.selectedViewModel.value {
+                    let addressData = viewmodel.addressData
+                    self.store.dispatch(WithdrawAddressDataAction(data: addressData))
+                }
+            }
+        }
+    }
 }

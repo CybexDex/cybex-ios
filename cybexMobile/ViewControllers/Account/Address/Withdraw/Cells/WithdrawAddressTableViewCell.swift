@@ -11,18 +11,11 @@ import UIKit
 class WithdrawAddressTableViewCell: BaseTableViewCell {
 
     @IBOutlet weak var foreView: AddressCellView!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        
-        
-//        foreView.updateUI(1, handler: <#T##((T) -> Void)?##((T) -> Void)?##(T) -> Void#>)
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+  
+    override func setup(_ data: Any?) {
+        if let d = data as? WithdrawAddress {
+            foreView.updateUI(d, handler: AddressCellView.adapterWithdrawModelToAddressCellView(foreView))
+        }
     }
     
 }

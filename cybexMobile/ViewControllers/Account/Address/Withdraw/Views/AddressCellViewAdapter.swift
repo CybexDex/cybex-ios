@@ -9,14 +9,17 @@
 import Foundation
 
 extension AddressCellView {
-    func adapterModelToAddressCellView(_ model:Int) {
-        
+    func adapterWithdrawModelToAddressCellView(_ model:WithdrawAddress) {
+        nickName.text = model.name
+        address.text = model.address
+        memo.text = model.memo
     }
 }
 
 extension AddressCellView {
-    func adapterXXModelToAddressCellView(_ model:String) {
-        
+    func adapterTransferModelToAddressCellView(_ model:TransferAddress) {
+        nickName.text = model.name
+        address.text = model.address
     }
 }
 

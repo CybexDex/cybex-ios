@@ -34,6 +34,7 @@ class AccountViewController: BaseViewController {
     }
     setupUI()
     setupEvent()
+    
     if  UserManager.shared.isLoginIn {
     }
   }

@@ -29,12 +29,14 @@ class WithdrawAddressViewController: BaseViewController {
         self.tableView.register(R.nib.withdrawAddressTableViewCell(), forCellReuseIdentifier: R.nib.withdrawAddressTableViewCell.name)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.coordinator?.refreshData(nil)
+    }
+    
     override func rightAction(_ sender: UIButton) {
-        Broadcaster.notify(AddressCellView.self) { (view) in
-            if view.isDescendant(of: self.view) {
-                
-            }
-        }
+       
     }
     
     func commonObserveState() {
@@ -54,16 +56,25 @@ class WithdrawAddressViewController: BaseViewController {
     override func configureObserveState() {
         commonObserveState()
         
+        self.coordinator?.state.property.data.asObservable().subscribe(onNext: {[weak self] (data) in
+            guard let `self` = self else { return }
+            
+            self.tableView.reloadData()
+        }, onError: nil, onCompleted: nil , onDisposed: nil).disposed(by: disposeBag)
     }
 }
 
 extension WithdrawAddressViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.coordinator?.state.property.data.value.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.withdrawAddressTableViewCell.name, for: indexPath) as! WithdrawAddressTableViewCell
+        
+        if let data = self.coordinator?.state.property.data.value {
+            cell.setup(data[indexPath.row], indexPath: indexPath)
+        }
         
         return cell
     }

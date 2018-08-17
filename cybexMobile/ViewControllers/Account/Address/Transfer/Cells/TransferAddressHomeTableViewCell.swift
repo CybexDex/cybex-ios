@@ -12,17 +12,10 @@ class TransferAddressHomeTableViewCell: BaseTableViewCell {
 
     @IBOutlet weak var foreView: AddressCellView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        
-        foreView.updateUI(1, handler: AddressCellView.adapterModelToAddressCellView(foreView))
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func setup(_ data: Any?) {
+        if let d = data as? TransferAddress {
+            foreView.updateUI(d, handler: AddressCellView.adapterTransferModelToAddressCellView(foreView))
+        }
     }
     
 }
