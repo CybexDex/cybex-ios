@@ -24,10 +24,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6q4-h0-XPL" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
-                    <rect key="frame" x="13" y="21" width="349" height="80"/>
+                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ggn-zV-THI">
+                    <rect key="frame" x="13" y="21" width="349" height="374"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9L5-t9-1aA" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9L5-t9-1aA" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="349" height="80"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
@@ -42,71 +42,64 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="9L5-t9-1aA" firstAttribute="leading" secondItem="6q4-h0-XPL" secondAttribute="leading" id="Kkd-dE-np3"/>
-                        <constraint firstAttribute="height" constant="80" id="Mnt-oX-Ay6"/>
-                        <constraint firstAttribute="trailing" secondItem="9L5-t9-1aA" secondAttribute="trailing" id="W9f-9l-jmr"/>
-                        <constraint firstItem="9L5-t9-1aA" firstAttribute="top" secondItem="6q4-h0-XPL" secondAttribute="top" id="cPQ-XV-Jj1"/>
-                        <constraint firstAttribute="bottom" secondItem="9L5-t9-1aA" secondAttribute="bottom" id="lTc-61-WKf"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iQa-jc-TN5" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
-                    <rect key="frame" x="13" y="113" width="349" height="354"/>
-                    <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IM7-uO-yfx">
-                            <rect key="frame" x="0.0" y="0.0" width="349" height="150"/>
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G3z-pT-NHT">
+                            <rect key="frame" x="0.0" y="92" width="349" height="282"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7H-v2-JhM" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="349" height="50"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="utils_address"/>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fr7-gO-noA" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="50" width="349" height="50"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="address_mark"/>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
-                                </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="whW-p3-HOf" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="100" width="349" height="50"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="withdraw_memo"/>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
-                                    </userDefinedRuntimeAttributes>
-                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IM7-uO-yfx">
+                                    <rect key="frame" x="0.0" y="0.0" width="349" height="282"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I7H-v2-JhM" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="349" height="50"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="nav.account"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fr7-gO-noA" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="50" width="349" height="182"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="address_mark"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="whW-p3-HOf" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="232" width="349" height="50"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="withdraw_memo"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                </stackView>
                             </subviews>
-                        </stackView>
+                            <constraints>
+                                <constraint firstItem="IM7-uO-yfx" firstAttribute="leading" secondItem="G3z-pT-NHT" secondAttribute="leading" id="bN7-gx-ijB"/>
+                                <constraint firstAttribute="bottom" secondItem="IM7-uO-yfx" secondAttribute="bottom" id="fvk-yX-gxL"/>
+                                <constraint firstAttribute="trailing" secondItem="IM7-uO-yfx" secondAttribute="trailing" id="jHi-SW-lEX"/>
+                                <constraint firstItem="IM7-uO-yfx" firstAttribute="top" secondItem="G3z-pT-NHT" secondAttribute="top" id="s4k-oc-3r7"/>
+                            </constraints>
+                        </view>
                     </subviews>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="IM7-uO-yfx" secondAttribute="trailing" id="0O3-do-SYa"/>
-                        <constraint firstAttribute="bottom" secondItem="IM7-uO-yfx" secondAttribute="bottom" id="Ks2-Ys-50A"/>
-                        <constraint firstItem="IM7-uO-yfx" firstAttribute="leading" secondItem="iQa-jc-TN5" secondAttribute="leading" id="XV3-8n-Gru"/>
-                        <constraint firstItem="IM7-uO-yfx" firstAttribute="top" secondItem="iQa-jc-TN5" secondAttribute="top" id="xUD-np-4xa"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jy7-aL-05W" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
+                </stackView>
+                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jy7-aL-05W" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
                     <rect key="frame" x="13" y="504" width="349" height="48"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="Fl6-tE-Xxa"/>
@@ -121,19 +114,16 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Jy7-aL-05W" secondAttribute="bottom" constant="48" id="Hdy-B7-D8T"/>
-                <constraint firstItem="iQa-jc-TN5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="JrB-fp-f8y"/>
-                <constraint firstItem="6q4-h0-XPL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="Qth-lG-zId"/>
-                <constraint firstItem="Jy7-aL-05W" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iQa-jc-TN5" secondAttribute="bottom" constant="20" id="TKG-D4-yWV"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="iQa-jc-TN5" secondAttribute="trailing" constant="13" id="gEf-07-9Nt"/>
-                <constraint firstItem="6q4-h0-XPL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="1" id="kmY-5V-Mj3"/>
+                <constraint firstItem="ggn-zV-THI" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="1" id="Djh-bO-eMC"/>
+                <constraint firstItem="Jy7-aL-05W" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ggn-zV-THI" secondAttribute="bottom" constant="40" id="eVn-eS-qcR"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ggn-zV-THI" secondAttribute="trailing" constant="13" id="i5S-gv-AVf"/>
                 <constraint firstItem="Jy7-aL-05W" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="nud-vs-wVt"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Jy7-aL-05W" secondAttribute="trailing" constant="13" id="qIu-GA-LuB"/>
-                <constraint firstItem="iQa-jc-TN5" firstAttribute="top" secondItem="6q4-h0-XPL" secondAttribute="bottom" constant="12" id="smv-RF-fbI"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6q4-h0-XPL" secondAttribute="trailing" constant="13" id="uos-9f-86H"/>
+                <constraint firstItem="ggn-zV-THI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="rFh-Mq-qyI"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-693" y="69"/>
         </view>
     </objects>
 </document>

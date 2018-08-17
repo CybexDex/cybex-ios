@@ -225,10 +225,10 @@
 "mark_order_book"     = "Order Book";
 "mark_trade_history"  = "Trade History";
 
-"my_history_amount"          = "Amount";
-"my_history_time"           = "Time";
-"my_history_state"          = "Done";
-"my_history_title"          = "Order History";
+"my_history_amount"   = "Amount";
+"my_history_time"     = "Time";
+"my_history_state"    = "Done";
+"my_history_title"    = "Order History";
 
 "order_history_first_title" = "Assert/Amount";
 "order_history_second_title" = "Filled/Price";
@@ -355,5 +355,10 @@
 "transfer_account" = "转账账户";
 "address_or_account" = "标签/账户";
 
-"account_exit" = "该账户已存在";
-"address_exit" = "该地址已存在";
+"account_exit" = "The account is already existed";
+"address_exit" = "The address is already existed";
+
+
+"account_title_add" = "Add Transfer Account";
+"address_title_add" = "Add Address";
+"address_title_add_eos" = "Add Account";

@@ -93,10 +93,10 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
     func addAddress(_ type : address_type) {
         
         if type == .withdraw {
-            AddressManager.shared.addWithDrawAddress(WithdrawAddress(id: UserManager.shared.name.value!, name: self.state.property.asset.value, address: self.state.property.address.value, currency: self.state.property.note.value, memo: self.state.property.memo.value))
+            AddressManager.shared.addWithDrawAddress(WithdrawAddress(id: AddressManager.shared.getUUID(), name: self.state.property.asset.value, address: self.state.property.address.value, currency: self.state.property.note.value, memo: self.state.property.memo.value))
         }
         else {
-            AddressManager.shared.addTransferAddress(TransferAddress(id: UserManager.shared.name.value!, name: self.state.property.note.value, address: self.state.property.address.value))
+            AddressManager.shared.addTransferAddress(TransferAddress(id: AddressManager.shared.getUUID(), name: self.state.property.note.value, address: self.state.property.address.value))
         }
     }
 }
