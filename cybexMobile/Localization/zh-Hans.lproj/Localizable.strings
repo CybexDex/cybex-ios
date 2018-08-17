@@ -336,5 +336,12 @@
 "address_mark" = "标签";
 "address_add" = "添加";
 
+"account_exit" = "该账户已存在";
+"address_exit" = "该地址已存在";
+
+"account_title_add" = "添加转账账户";
+"address_title_add" = "添加提现地址";
+"address_title_add_eos" = "添加提现账户";
+
 
 

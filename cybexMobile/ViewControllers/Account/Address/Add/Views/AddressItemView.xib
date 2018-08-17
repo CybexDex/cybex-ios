@@ -33,7 +33,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdh-PX-Dek">
-                    <rect key="frame" x="339" y="38" width="24" height="24"/>
+                    <rect key="frame" x="339" y="46" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="AuC-fY-f2R"/>
                         <constraint firstAttribute="height" constant="24" id="oN1-45-sYc"/>
@@ -57,8 +57,8 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LJp-jr-cv5">
-                    <rect key="frame" x="12" y="38" width="317" height="52"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LJp-jr-cv5">
+                    <rect key="frame" x="12" y="38" width="317" height="53"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <userDefinedRuntimeAttributes>
@@ -72,15 +72,15 @@
                 </textView>
             </subviews>
             <constraints>
-                <constraint firstItem="gdh-PX-Dek" firstAttribute="centerY" secondItem="Agn-Jf-TGB" secondAttribute="centerY" id="20V-ny-m2m"/>
                 <constraint firstItem="aXj-HU-WbO" firstAttribute="top" secondItem="d78-FV-7Fg" secondAttribute="top" constant="16" id="2Gu-ap-bq4"/>
                 <constraint firstItem="Zq1-g7-aRR" firstAttribute="leading" secondItem="Agn-Jf-TGB" secondAttribute="leading" constant="12" id="4Mt-5F-m1Z"/>
                 <constraint firstItem="aXj-HU-WbO" firstAttribute="leading" secondItem="d78-FV-7Fg" secondAttribute="leading" constant="12" id="5zQ-zV-djw"/>
                 <constraint firstItem="d78-FV-7Fg" firstAttribute="trailing" secondItem="gdh-PX-Dek" secondAttribute="trailing" constant="12" id="99d-Gq-734"/>
-                <constraint firstItem="Zq1-g7-aRR" firstAttribute="top" secondItem="LJp-jr-cv5" secondAttribute="bottom" constant="9" id="HqR-th-v1F"/>
                 <constraint firstItem="d78-FV-7Fg" firstAttribute="bottom" secondItem="Zq1-g7-aRR" secondAttribute="bottom" id="IgF-tl-5l5"/>
                 <constraint firstItem="gdh-PX-Dek" firstAttribute="leading" secondItem="LJp-jr-cv5" secondAttribute="trailing" constant="10" id="LNa-ev-Q1N"/>
                 <constraint firstItem="LJp-jr-cv5" firstAttribute="top" secondItem="aXj-HU-WbO" secondAttribute="bottom" id="PbG-GI-YAo"/>
+                <constraint firstItem="Zq1-g7-aRR" firstAttribute="top" secondItem="LJp-jr-cv5" secondAttribute="bottom" constant="8" id="SRO-pC-Val"/>
+                <constraint firstItem="gdh-PX-Dek" firstAttribute="top" secondItem="LJp-jr-cv5" secondAttribute="top" constant="8" id="Vr5-vz-XcN"/>
                 <constraint firstAttribute="trailing" secondItem="Zq1-g7-aRR" secondAttribute="trailing" constant="12" id="cqI-qI-b8N"/>
                 <constraint firstItem="LJp-jr-cv5" firstAttribute="leading" secondItem="d78-FV-7Fg" secondAttribute="leading" constant="12" id="olp-ZB-PoR"/>
             </constraints>

@@ -25,7 +25,6 @@ class AddressItemView: UIView {
     @IBInspectable var textplaceholder : String = "" {
         didSet{
             content.toolbarPlaceholder = textplaceholder
-            
         }
     }
     

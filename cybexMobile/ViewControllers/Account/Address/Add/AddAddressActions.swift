@@ -8,6 +8,7 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
 
 //MARK: - State
 struct AddAddressState: StateType {
@@ -18,7 +19,28 @@ struct AddAddressState: StateType {
 }
 
 struct AddAddressPropertyState {
+    var asset : BehaviorRelay<String> = BehaviorRelay(value: "")
+    var address :BehaviorRelay<String> = BehaviorRelay(value: "")
+    var note : BehaviorRelay<String> = BehaviorRelay(value: "")
+    var memo : BehaviorRelay<String> = BehaviorRelay(value: "")
+    
+    var addressVailed : BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var noteVailed : BehaviorRelay<Bool> = BehaviorRelay(value: false)
 }
+
+
+struct VerificationNoteAction : Action {
+    var data : Bool
+}
+
+struct SetAssetAction : Action {
+    var data : String
+}
+
+struct VerificationAddressAction : Action {
+    var success : Bool
+}
+
 
 //MARK: - Action Creator
 class AddAddressPropertyActionCreate: LoadingActionCreator {
