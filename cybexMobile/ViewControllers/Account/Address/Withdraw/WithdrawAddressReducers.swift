@@ -14,11 +14,13 @@ func WithdrawAddressReducer(action:Action, state:WithdrawAddressState?) -> Withd
 }
 
 func WithdrawAddressPropertyReducer(_ state: WithdrawAddressPropertyState?, action: Action) -> WithdrawAddressPropertyState {
-    var state = state ?? WithdrawAddressPropertyState()
+    let state = state ?? WithdrawAddressPropertyState()
     
     switch action {
     case let action as WithdrawAddressDataAction:
         state.data.accept(action.data)
+    case let action as WithdrawAddressSelectDataAction:
+        state.selectedAddress.accept(action.data)
     default:
         break
     }

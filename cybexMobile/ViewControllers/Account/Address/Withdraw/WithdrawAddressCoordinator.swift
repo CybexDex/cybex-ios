@@ -10,6 +10,7 @@ import UIKit
 import ReSwift
 import SwiftNotificationCenter
 import XLActionController
+import Async
 
 protocol WithdrawAddressCoordinatorProtocol {
     func openActionVC()
@@ -22,6 +23,11 @@ protocol WithdrawAddressStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
     
     func refreshData(_ id:String?)
+    
+    func select(_ address:WithdrawAddress?)
+    func copy()
+    func confirmdelete()
+    func delete()
 }
 
 class WithdrawAddressCoordinator: AccountRootCoordinator {
@@ -41,36 +47,26 @@ class WithdrawAddressCoordinator: AccountRootCoordinator {
 
 extension WithdrawAddressCoordinator: WithdrawAddressCoordinatorProtocol {
     func openActionVC() {
+        let actionController = PeriscopeActionController()
+
+        actionController.addAction(Action(R.string.localizable.copy.key.localized(), style: .destructive, handler: {[weak self] action in
+            guard let `self` = self else {return}
+            self.copy()
+        }))
+
+        actionController.addAction(Action(R.string.localizable.delete.key.localized(), style: .destructive, handler: {[weak self] action in
+            guard let `self` = self else {return}
+            self.confirmdelete()
+        }))
         
-//        let actionController = PeriscopeActionController()
-//        actionController.selectedIndex = IndexPath(row: UserManager.shared.frequency_type.rawValue, section: 0)
-//
-//        actionController.addAction(Action(R.string.localizable.frequency_normal.key.localized(), style: .destructive, handler: {[weak self] action in
-//            guard let `self` = self else {return}
-//            UserManager.shared.frequency_type = .normal
-//            self.frequency.content_locali = UserManager.shared.frequency_type.description()
-//        }))
-//
-//        actionController.addAction(Action(R.string.localizable.frequency_time.key.localized(), style: .destructive, handler: { [weak self]action in
-//            guard let `self` = self else {return}
-//
-//            UserManager.shared.frequency_type = .time
-//            self.frequency.content_locali = UserManager.shared.frequency_type.description()
-//
-//        }))
-//
-//        actionController.addAction(Action(R.string.localizable.frequency_wifi.key.localized(), style: .destructive, handler: { [weak self]action in
-//            guard let `self` = self else {return}
-//            UserManager.shared.frequency_type = .WiFi
-//            self.frequency.content_locali = UserManager.shared.frequency_type.description()
-//        }))
-//
-//        actionController.addSection(PeriscopeSection())
-//        actionController.addAction(Action(R.string.localizable.alert_cancle.key.localized(), style: .cancel, handler: { action in
-//        }))
-//
-//        present(actionController, animated: true, completion: nil)
-        
+        actionController.addSection(PeriscopeSection())
+        actionController.addAction(Action(R.string.localizable.alert_cancle.key.localized(), style: .cancel, handler: {[weak self] action in
+            guard let `self` = self else {return}
+
+            self.select(nil)
+        }))
+
+        self.rootVC.topViewController?.present(actionController, animated: true, completion: nil)
     }
 }
 
@@ -94,5 +90,32 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
                 }
             }
         }
+    }
+    
+    func select(_ address:WithdrawAddress?) {
+        self.store.dispatch(WithdrawAddressSelectDataAction(data: address))
+    }
+    
+    func copy() {
+        if let addressData = self.state.property.selectedAddress.value {
+            UIPasteboard.general.string = addressData.address
+            
+            self.rootVC.topViewController?.showToastBox(true, message: R.string.localizable.copied())
+        }
+    }
+    
+    func confirmdelete() {
+        self.rootVC.topViewController?.showConfirm(R.string.localizable.confirm(), attributes: nil)
+    }
+    
+    func delete() {
+        if let addressData = self.state.property.selectedAddress.value {
+            AddressManager.shared.removeWithDrawAddress(addressData.id)
+            
+            Async.main {
+                self.rootVC.topViewController?.showToastBox(true, message: R.string.localizable.deleted())
+            }
+        }
+      
     }
 }

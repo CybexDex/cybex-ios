@@ -344,7 +344,7 @@
 "Pull to refresh" = "Pull to refresh";
 "Release to refresh" = "Release to refresh";
 
-"address_manager" = "地址管理";
+"address_manager" = "Address Management";
 
 "address_asset" = "Cryto";
 "address_mark" = "Note";
@@ -352,8 +352,8 @@
 
 
 
-"transfer_account" = "转账账户";
-"address_or_account" = "标签/账户";
+"transfer_account" = "Transfer Account";
+"address_or_account" = "Note/Account";
 
 "account_exit" = "The account is already existed";
 "address_exit" = "The address is already existed";
@@ -362,3 +362,10 @@
 "account_title_add" = "Add Transfer Account";
 "address_title_add" = "Add Address";
 "address_title_add_eos" = "Add Account";
+"transfer_account_manager" = "Transfer Account";
+
+"copy" = "Copy";
+"copied" = "Copied";
+
+"delete" = "Delete";
+"deleted" = "Deleted";
