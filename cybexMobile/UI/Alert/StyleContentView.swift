@@ -28,7 +28,7 @@ class StyleContentView: UIView ,Views{
       updateHeight()
     }
   }
-    
+
   var labels : [StyleLabel] = []
   
   func setupUI(){

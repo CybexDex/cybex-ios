@@ -61,6 +61,12 @@ class TransferAddressHomeViewController: BaseViewController {
         self.coordinator?.state.property.data.asObservable().subscribe(onNext: {[weak self] (data) in
             guard let `self` = self else { return }
             
+            if data.count == 0 {
+                self.view.showNoData(R.string.localizable.address_nodata(), icon: R.image.img_no_records.name)
+            }
+            else {
+                self.view.hiddenNoData()
+            }
             self.tableView.reloadData()
             }, onError: nil, onCompleted: nil , onDisposed: nil).disposed(by: disposeBag)
     }

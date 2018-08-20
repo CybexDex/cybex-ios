@@ -24,7 +24,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ggn-zV-THI">
+                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ggn-zV-THI">
                     <rect key="frame" x="13" y="21" width="349" height="343"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9L5-t9-1aA" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
@@ -45,13 +45,13 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G3z-pT-NHT">
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G3z-pT-NHT">
                             <rect key="frame" x="0.0" y="92" width="349" height="251"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IM7-uO-yfx">
+                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IM7-uO-yfx">
                                     <rect key="frame" x="0.0" y="0.0" width="349" height="251"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" verticalHuggingPriority="1000" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I7H-v2-JhM" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I7H-v2-JhM" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="349" height="50"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
@@ -62,9 +62,6 @@
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="nav.account"/>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="maxNumberOfLines">
-                                                    <integer key="value" value="0"/>
-                                                </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fr7-gO-noA" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
@@ -109,7 +106,7 @@
                         </view>
                     </subviews>
                 </stackView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jy7-aL-05W" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
+                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jy7-aL-05W" customClass="Button" customModule="cybexMobile" customModuleProvider="target">
                     <rect key="frame" x="13" y="404" width="349" height="48"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="Fl6-tE-Xxa"/>
@@ -128,7 +125,6 @@
                 <constraint firstItem="Jy7-aL-05W" firstAttribute="top" secondItem="ggn-zV-THI" secondAttribute="bottom" constant="40" id="eVn-eS-qcR"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ggn-zV-THI" secondAttribute="trailing" constant="13" id="i5S-gv-AVf"/>
                 <constraint firstItem="Jy7-aL-05W" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="nud-vs-wVt"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Jy7-aL-05W" secondAttribute="bottom" constant="48" id="od5-HF-3y1"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Jy7-aL-05W" secondAttribute="trailing" constant="13" id="qIu-GA-LuB"/>
                 <constraint firstItem="ggn-zV-THI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="rFh-Mq-qyI"/>
             </constraints>

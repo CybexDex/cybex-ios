@@ -371,7 +371,8 @@ extension RechargeDetailViewController {
                 ShowToastManager.shared.hide()
                 if self.isVisible{
                     if String(describing: data) == "<null>"{
-                        if AddressManager.shared.containAddressOfWithDraw(self.contentView.addressView.content.text!).0 == false {
+        
+                        if AddressManager.shared.containAddressOfWithDraw(address).0 == false {
                             self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.withdraw_success_title.key.localized(), content: R.string.localizable.withdraw_success_content.key.localized())
                         }
                         else{
@@ -380,7 +381,6 @@ extension RechargeDetailViewController {
                                 self.coordinator?.pop()
                             }
                         }
-                        
                     }else{
                         self.showToastBox(false, message: R.string.localizable.recharge_withdraw_failed.key.localized())
                     }

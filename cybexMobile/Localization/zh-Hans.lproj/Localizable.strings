@@ -352,6 +352,8 @@
 "delete" = "删除";
 "deleted" = "删除成功";
 
+"address" = "地址";
+
 "choose_address" = "选择地址";
 "add_address" = "添加地址";
 
@@ -364,3 +366,6 @@
 "transfer_success_title" = "转账成功";
 "transfer_success_content" = "是否将该账户储存到转账账户列表？";
 
+"delete_confirm_address" = "确认删除该地址？";
+"delete_confirm_account" = "确认删除该账户？";
+"address_nodata"       = "暂无地址";

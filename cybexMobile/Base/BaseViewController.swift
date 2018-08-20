@@ -12,6 +12,7 @@ import BeareadToast
 import SwiftTheme
 import RxCocoa
 import RxSwift
+import SwifterSwift
 
 class BaseViewController: UIViewController {
     
@@ -188,6 +189,7 @@ extension UIViewController : ShowManagerDelegate {
         }
         ShowToastManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big)
         ShowToastManager.shared.delegate = self
+
         ShowToastManager.shared.showAnimationInView(self.view)
     }
     
@@ -209,12 +211,14 @@ extension UIViewController : ShowManagerDelegate {
         ShowToastManager.shared.hide(2.0)
     }
     
-    func showConfirm(_ title:String, attributes:[NSAttributedString]?) {
+    func showConfirm(_ title:String, attributes:[NSAttributedString]?, setup: (([StyleLabel]) -> Void)? = nil) {
         if ShowToastManager.shared.showView != nil {
             return
         }
         let subView = StyleContentView(frame: .zero)
         subView.data = attributes
+        setup?(subView.labels)
+        
         ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .small_big)
         ShowToastManager.shared.showAnimationInView(self.view)
         ShowToastManager.shared.delegate = self
@@ -223,14 +227,17 @@ extension UIViewController : ShowManagerDelegate {
     
     func showConfirmImage(_ title_image:String, title:String,content:String) {
         if ShowToastManager.shared.showView != nil {
-            return
+            ShowToastManager.shared.hide(0)
+//            return
         }
-        let subView = CybexShowTitleView(frame: .zero)
-        subView.title.locali = title
-        subView.contentLable.locali = content
-        ShowToastManager.shared.setUp(title_image: title_image, contentView: subView, animationType: .small_big)
-        ShowToastManager.shared.showAnimationInView(self.view)
-        ShowToastManager.shared.delegate = self
+        SwifterSwift.delay(milliseconds: 100) {
+            let subView = CybexShowTitleView(frame: .zero)
+            subView.title.locali = title
+            subView.contentLable.locali = content
+            ShowToastManager.shared.setUp(title_image: title_image, contentView: subView, animationType: .small_big)
+            ShowToastManager.shared.showAnimationInView(self.view)
+            ShowToastManager.shared.delegate = self
+        }
     }
     
     func returnEnsureAction() {

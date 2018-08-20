@@ -372,6 +372,7 @@
 "choose_account" = "Select";
 "add_account" = "Add";
 
+"address" = "Address";
 
 "withdraw_success_title" = "Withdraw applicatation has been sent.";
 "withdraw_success_content" = "Add this account to list?";
@@ -387,3 +388,7 @@
 "delete" = "Delete";
 "deleted" = "Deleted";
 
+
+"delete_confirm_address" = "Confirm to delete this address?";
+"delete_confirm_account" = "Confirm to delete this account?";
+"address_nodata"       = "No address";

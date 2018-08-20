@@ -42,8 +42,8 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nbl-9g-TgY">
-                    <rect key="frame" x="321" y="42" width="30" height="16"/>
+                <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="760" translatesAutoresizingMaskIntoConstraints="NO" id="Nbl-9g-TgY">
+                    <rect key="frame" x="321" y="39" width="30" height="16"/>
                     <subviews>
                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_address_16_px" translatesAutoresizingMaskIntoConstraints="NO" id="RQC-vc-ehZ">
                             <rect key="frame" x="-321" y="0.0" width="16" height="16"/>
@@ -52,7 +52,7 @@
                                 <constraint firstAttribute="height" constant="16" id="hqk-H0-VdO"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syi-GU-VtP">
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" verticalHuggingPriority="255" horizontalCompressionResistancePriority="760" verticalCompressionResistancePriority="760" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syi-GU-VtP">
                             <rect key="frame" x="0.0" y="0.0" width="30" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal">
@@ -84,7 +84,7 @@
                 <constraint firstItem="40u-27-4bk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="aek-3r-7zc"/>
                 <constraint firstItem="9MT-CT-F1Q" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="kWH-zZ-vbE"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="40u-27-4bk" secondAttribute="bottom" id="lkQ-gJ-hax"/>
-                <constraint firstItem="Nbl-9g-TgY" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="viR-0P-e9y"/>
+                <constraint firstItem="Nbl-9g-TgY" firstAttribute="top" secondItem="9MT-CT-F1Q" secondAttribute="bottom" constant="1" id="mZi-1h-Fub"/>
                 <constraint firstItem="Nbl-9g-TgY" firstAttribute="leading" secondItem="hM9-Sb-Vwa" secondAttribute="trailing" constant="1" id="xLs-qH-t5Z"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Nbl-9g-TgY" secondAttribute="trailing" constant="24" id="xR1-U4-UzR"/>
             </constraints>

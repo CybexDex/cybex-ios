@@ -12,6 +12,11 @@ import RxCocoa
 import ReSwift
 import SwifterSwift
 
+enum pop_type : Int {
+    case normal = 0
+    case selectVC
+}
+
 class AddAddressViewController: BaseViewController {
     
     @IBOutlet weak var containerView: AddAddressView!
@@ -25,6 +30,7 @@ class AddAddressViewController: BaseViewController {
     
     var transferAddress : TransferAddress?
     
+    var popActionType : pop_type = .normal
 	override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -79,6 +85,7 @@ class AddAddressViewController: BaseViewController {
         (self.containerView.mark.content.rx.text.orEmpty <-> self.coordinator!.state.property.note).disposed(by: disposeBag)
         (self.containerView.memo.content.rx.text.orEmpty <-> self.coordinator!.state.property.memo).disposed(by: disposeBag)
         
+        
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidEndEditing, object: self.containerView.mark.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
             if let text = self.containerView.mark.content.text ,text.count != 0 {
@@ -93,22 +100,22 @@ class AddAddressViewController: BaseViewController {
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidEndEditing, object: self.containerView.address.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else {return}
-            if let text = self.containerView.address.content.text,text.count > 0 {
-                self.startLoading()
+            if let text = self.containerView.address.content.text, text.trimmed.count > 0 {
+                self.containerView.address_state = .Loading
                 self.coordinator?.verityAddress(text.trimmed, type: self.address_type)
+            }else {
+                self.containerView.address_state = .none
             }
         }
         
         self.coordinator?.state.property.addressVailed.asObservable().skip(1).subscribe(onNext: { [weak self](address_success) in
             guard let `self` = self else {return}
-            self.endLoading()
             if !address_success {
-                var errosMessage = R.string.localizable.transfer_account_unexist.key.localized()
-                if self.address_type == .withdraw && self.asset != AssetConfiguration.EOS  {
-                   errosMessage = R.string.localizable.withdraw_address_fault.key.localized()
-                }
-                
-                self.showToastBox(false, message: errosMessage)
+                self.containerView.address_state = .Fail
+               
+            }
+            else {
+                self.containerView.address_state = .Success
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
@@ -134,7 +141,7 @@ class AddAddressViewController: BaseViewController {
                     self.showToastBox(true, message: R.string.localizable.address_add_success.key.localized())
                     SwifterSwift.delay(milliseconds: 1000, completion: {
                         ShowToastManager.shared.hide(0)
-                        self.coordinator?.pop()
+                        self.coordinator?.pop(self.popActionType)
                     })
                 }
                 

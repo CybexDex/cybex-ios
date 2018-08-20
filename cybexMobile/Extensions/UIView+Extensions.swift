@@ -176,14 +176,18 @@ extension UIView {
 extension UIView{
   var noDataView : WithNoDataView?{
     get{
-      if let nodata = self.subviews.last as? WithNoDataView{
-        return nodata
-      }
+        for subview in self.subviews {
+            if let nodataview = subview as? WithNoDataView {
+                return nodataview
+            }
+        }
+ 
       return nil
     }
     set{
       if let newValue = newValue{
         self.addSubview(newValue)
+        R.string.localizable.account.key.localized()
 //        newValue.edgesToSuperview(insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
       }
     }
@@ -212,9 +216,7 @@ extension UIView{
     }
   }
   func hiddenNoData() {
-    if let _ = self.noDataView{
-      self.noDataView!.removeFromSuperview()
+      self.noDataView?.removeFromSuperview()
       self.noDataView = nil
-    }
   }
 }

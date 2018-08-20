@@ -91,7 +91,7 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtoco
     }
     
     func refreshData() {
-        let list = AddressManager.shared.getTransferAddressList()
+        let list = AddressManager.shared.getTransferAddressList().sorted(by: \.name, ascending: false)
         self.store.dispatch(TransferAddressHomeDataAction(data: list))
     }
     
@@ -108,7 +108,14 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtoco
     }
     
     func confirmdelete() {
-        self.rootVC.topViewController?.showConfirm(R.string.localizable.confirm(), attributes: nil)
+        if let addressData = self.state.property.selectedAddress.value {
+            self.rootVC.topViewController?.showConfirm(R.string.localizable.confirm(), attributes: confirmDeleteTransferAddress(addressData), setup: { (labels) in
+                for label in labels {
+                    label.content.numberOfLines = 1
+                    label.content.lineBreakMode = .byTruncatingMiddle
+                }
+            })
+        }
     }
     
     func delete() {

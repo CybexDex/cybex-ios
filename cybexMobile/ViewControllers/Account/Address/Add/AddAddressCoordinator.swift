@@ -16,7 +16,7 @@ enum address_type : String {
 }
 
 protocol AddAddressCoordinatorProtocol {
-    func pop()
+    func pop(_ sender : pop_type)
 }
 
 protocol AddAddressStateManagerProtocol {
@@ -50,8 +50,17 @@ class AddAddressCoordinator: AccountRootCoordinator {
 }
 
 extension AddAddressCoordinator: AddAddressCoordinatorProtocol {
-    func pop() {
-        self.rootVC.popViewController()
+    func pop(_ sender : pop_type) {
+        if sender == .normal {
+            self.rootVC.popViewController()
+        }
+        else {
+            for viewController in self.rootVC.viewControllers {
+                if viewController is RechargeViewController {
+                    let _ = self.rootVC.popToViewController(viewController, animated: true)
+                }
+            }
+        }
     }
 }
 

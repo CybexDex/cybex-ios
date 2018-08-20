@@ -190,12 +190,9 @@ extension TransferViewController {
                             }
                             else {
                                 self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())
-                                //              SwifterSwift.delay(milliseconds: 100) {
-                                //                self.coordinator?.pop()
-                                //              }
-                                self.coordinator?.resetData()
-                                self.removeTransferInfo()
                             }
+                            self.coordinator?.resetData()
+                            self.removeTransferInfo()
                         }else{
                             self.showToastBox(false, message: R.string.localizable.transfer_failed.key.localized())
                         }
@@ -213,6 +210,7 @@ extension TransferViewController {
     override func returnEnsureImageAction() {
         let transferAddress = TransferAddress(id: AddressManager.shared.getUUID(), name: "", address: self.coordinator!.state.property.account.value)
         self.coordinator?.openAddTransferAddress(transferAddress)
+        
     }
     
     func removeTransferInfo() {

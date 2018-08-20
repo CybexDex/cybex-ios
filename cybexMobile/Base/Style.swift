@@ -10,10 +10,11 @@ import Foundation
 import SwiftRichString
 
 enum StyleNames:String {
-  case introduce_normal
-  case introduce
-  case password
-  case withdraw_introduce
+    case introduce_normal
+    case introduce
+    case password
+    case withdraw_introduce
+    case alertContent
 }
 
 enum LineViewStyleNames:String {
@@ -100,7 +101,7 @@ class RichStyle {
     
     
     let myGroup = StyleGroup(base: base, ["name":name,"content_dark":content_dark,"content_light":content_light,"content_sell":content_sell,"content_buy":content_buy])
-    StylesManager.shared.register("alertContent", style: myGroup)
+    StylesManager.shared.register(StyleNames.alertContent.rawValue, style: myGroup)
   }
   
   func initLineViewStyle(){
