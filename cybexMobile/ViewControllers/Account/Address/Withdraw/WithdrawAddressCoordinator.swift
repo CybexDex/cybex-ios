@@ -22,8 +22,8 @@ protocol WithdrawAddressStateManagerProtocol {
         _ subscriber: S, transform: ((Subscription<WithdrawAddressState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
     
-    func refreshData(_ id:String?)
-    
+    func refreshData()
+    func fetchData()
     func select(_ address:WithdrawAddress?)
     func copy()
     func confirmdelete()
@@ -81,13 +81,22 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
     
-    func refreshData(_ id:String?) {
-        if id == nil {
-            Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
-                if let viewmodel = coor.state.property.selectedViewModel.value {
-                    let addressData = viewmodel.addressData
-                    self.store.dispatch(WithdrawAddressDataAction(data: addressData))
-                }
+    func fetchData() {
+        Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
+            if let viewmodel = coor.state.property.selectedViewModel.value {
+                let addressData = viewmodel.addressData
+                self.store.dispatch(WithdrawAddressDataAction(data: addressData))
+            }
+        }
+    }
+    
+    func refreshData() {
+        Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
+            if let viewmodel = coor.state.property.selectedViewModel.value {
+                let id = viewmodel.viewModel.model.id
+                
+                let addressData = AddressManager.shared.getWithDrawAddressListWith(id)
+                self.store.dispatch(WithdrawAddressDataAction(data: addressData))
             }
         }
     }

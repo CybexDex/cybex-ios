@@ -21,11 +21,17 @@ struct TransferAddressHomeState: StateType {
 
 struct TransferAddressHomePropertyState {
     var data: BehaviorRelay<[TransferAddress]> = BehaviorRelay(value: [])
+    var selectedAddress: BehaviorRelay<TransferAddress?> = BehaviorRelay(value:nil)
 }
 
 struct TransferAddressHomeDataAction:Action {
     var data: [TransferAddress]
 }
+
+struct TransferAddressSelectDataAction: Action {
+    var data: TransferAddress?
+}
+
 
 struct TransferAddressHomeCallbackState {
 }
