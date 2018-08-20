@@ -28,7 +28,9 @@ class StyleContentView: UIView ,Views{
       updateHeight()
     }
   }
-      
+
+  var labels : [StyleLabel] = []
+  
   func setupUI(){
     if let data = data{
       for view in self.subviews{
@@ -53,7 +55,7 @@ class StyleContentView: UIView ,Views{
             lable.bottom(to: self,offset:-18)
           }
         }
-        
+        labels.append(lable)
         testLabel = lable
         
         lable.data = data[i]

@@ -37,7 +37,7 @@ class WithdrawAddressViewController: BaseViewController {
     }
     
     override func rightAction(_ sender: UIButton) {
-       
+       self.coordinator?.openAddWithdrawAddress()
     }
     
     func commonObserveState() {

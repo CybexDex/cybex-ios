@@ -50,6 +50,7 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeCoordinatorProtocol
     func openAddTransferAddress() {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
+            vc.address_type = .transfer
             self.rootVC.pushViewController(vc, animated: true)
         }
     }

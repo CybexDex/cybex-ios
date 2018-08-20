@@ -14,6 +14,8 @@ import Async
 
 protocol WithdrawAddressCoordinatorProtocol {
     func openActionVC()
+    
+    func openAddWithdrawAddress()
 }
 
 protocol WithdrawAddressStateManagerProtocol {
@@ -66,6 +68,20 @@ extension WithdrawAddressCoordinator: WithdrawAddressCoordinatorProtocol {
         }))
 
         self.rootVC.topViewController?.present(actionController, animated: true, completion: nil)
+    }
+    
+    func openAddWithdrawAddress() {
+        Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
+            if let viewmodel = coor.state.property.selectedViewModel.value {
+                let id = viewmodel.viewModel.model.id
+                if let vc = R.storyboard.account.addAddressViewController() {
+                    vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
+                    vc.address_type = .withdraw
+                    vc.asset = id
+                    self.rootVC.pushViewController(vc, animated: true)
+                }
+            }
+        }
     }
 }
 

@@ -390,8 +390,10 @@ extension RechargeDetailViewController {
     }
     
     override func returnEnsureImageAction() {
-        let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: self.contentView.addressView.content.text!, currency: (self.trade?.id)!, memo: self.contentView.memoView.content.text!)
-//        self.coordinator?.
-//        self.coordinator?.pop()
+        if let address = self.contentView.addressView.content.text,let memo = self.contentView.memoView.content.text,let trade = self.trade {
+            let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: address, currency: trade.id, memo: memo)
+            self.coordinator?.openAddAddressWithAddress(withdrawAddress)
+        }
+     
     }
 }
