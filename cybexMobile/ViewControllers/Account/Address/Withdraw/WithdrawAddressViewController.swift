@@ -26,6 +26,7 @@ class WithdrawAddressViewController: BaseViewController {
     
     func setupUI() {
         configRightNavButton(R.image.ic_add_24_px())
+        self.localized_text = R.string.localizable.eos_withdraw_account.key.localizedContainer()
         self.tableView.register(R.nib.withdrawAddressTableViewCell(), forCellReuseIdentifier: R.nib.withdrawAddressTableViewCell.name)
     }
     
@@ -77,6 +78,21 @@ extension WithdrawAddressViewController: UITableViewDelegate, UITableViewDataSou
         }
         
         return cell
+    }
+}
+
+extension WithdrawAddressViewController {
+    @objc func AddressCellViewDidClicked(_ data:[String: Any]) {
+        if let addressdata = data["data"] as? WithdrawAddress {
+            self.coordinator?.select(addressdata)
+            self.coordinator?.openActionVC()
+        }
+    }
+    
+    override func returnEnsureAction() {
+        self.coordinator?.delete()
+        
+        //TODO: 刷新
     }
 }
 
