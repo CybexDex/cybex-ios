@@ -12,7 +12,8 @@ extension AddressCellView {
     func adapterWithdrawModelToAddressCellView(_ model:WithdrawAddress) {
         nickName.text = model.name
         address.text = model.address
-        memo.text = model.memo
+        
+        memo.text = model.memo ?? "-"
     }
 }
 

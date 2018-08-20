@@ -28,7 +28,7 @@ class StyleContentView: UIView ,Views{
       updateHeight()
     }
   }
-  
+      
   func setupUI(){
     if let data = data{
       for view in self.subviews{

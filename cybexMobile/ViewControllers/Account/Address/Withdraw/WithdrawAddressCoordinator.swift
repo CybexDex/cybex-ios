@@ -23,7 +23,6 @@ protocol WithdrawAddressStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
     
     func refreshData()
-    func fetchData()
     func select(_ address:WithdrawAddress?)
     func copy()
     func confirmdelete()
@@ -81,21 +80,12 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
     
-    func fetchData() {
-        Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
-            if let viewmodel = coor.state.property.selectedViewModel.value {
-                let addressData = viewmodel.addressData
-                self.store.dispatch(WithdrawAddressDataAction(data: addressData))
-            }
-        }
-    }
-    
     func refreshData() {
         Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
             if let viewmodel = coor.state.property.selectedViewModel.value {
                 let id = viewmodel.viewModel.model.id
                 
-                let addressData = AddressManager.shared.getWithDrawAddressListWith(id)
+                let addressData = AddressManager.shared.getWithDrawAddressListWith(id).sorted(by: \.name, ascending: false)
                 self.store.dispatch(WithdrawAddressDataAction(data: addressData))
             }
         }
@@ -107,14 +97,26 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
     
     func copy() {
         if let addressData = self.state.property.selectedAddress.value {
-            UIPasteboard.general.string = addressData.address
+            if addressData.currency == AssetConfiguration.EOS {
+                if let memo = addressData.memo {
+                    UIPasteboard.general.string = addressData.address + "(\(memo))"
+                }
+                else {
+                     UIPasteboard.general.string = addressData.address
+                }
+            }
+            else {
+                UIPasteboard.general.string = addressData.address
+            }
             
             self.rootVC.topViewController?.showToastBox(true, message: R.string.localizable.copied())
         }
     }
     
     func confirmdelete() {
-        self.rootVC.topViewController?.showConfirm(R.string.localizable.confirm(), attributes: nil)
+        if let addressData = self.state.property.selectedAddress.value {
+            self.rootVC.topViewController?.showConfirm(R.string.localizable.confirm(), attributes: [confirmDeleteWithDrawAddress(addressData)])
+        }
     }
     
     func delete() {
