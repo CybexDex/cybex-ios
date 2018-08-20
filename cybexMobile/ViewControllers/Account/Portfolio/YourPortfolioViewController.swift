@@ -68,7 +68,7 @@ class YourPortfolioViewController: BaseViewController {
       imgBgView.image = R.image.imgMyBalanceBg()
     }
 
-    configLeftNavButton(R.image.icArrowForwardWhite16Px())
+    configLeftNavigationButton(R.image.ic_back_white_24_px())
 //    let cell = String.init(describing: YourPortfolioCell.self)
     let cell = R.nib.yourPortfolioCell.name
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)

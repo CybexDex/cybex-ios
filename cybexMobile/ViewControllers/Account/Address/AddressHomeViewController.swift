@@ -25,7 +25,6 @@ class AddressHomeViewController: BaseViewController {
     
     func setupUI() {
         self.localized_text = R.string.localizable.address_manager.key.localizedContainer()
-        configLeftNavButton(nil)
 
         self.tableView.register(R.nib.addressHomeTableViewCell(), forCellReuseIdentifier: R.nib.addressHomeTableViewCell.name)
     }

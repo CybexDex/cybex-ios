@@ -119,7 +119,6 @@ class TradeViewController: BaseViewController {
   }
   
   func setupNavi(){
-    configLeftNavButton(R.image.icCandle())
     configRightNavButton(R.image.ic_star_border_24_px())
     
     tradeTitltView = TradeNavTitleView(frame: CGRect(x: 0, y: 0, width: 100, height: 64))

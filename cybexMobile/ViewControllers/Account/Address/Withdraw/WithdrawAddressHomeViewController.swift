@@ -32,7 +32,6 @@ class WithdrawAddressHomeViewController: BaseViewController {
     }
     
     func setupUI() {
-        configLeftNavButton(nil)
         self.localized_text = R.string.localizable.withdraw_address.key.localizedContainer()
 
         self.tableView.register(R.nib.withdrawAddressHomeTableViewCell(), forCellReuseIdentifier: R.nib.withdrawAddressHomeTableViewCell.name)
