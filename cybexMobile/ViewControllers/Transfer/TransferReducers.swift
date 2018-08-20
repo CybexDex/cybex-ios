@@ -36,6 +36,9 @@ func TransferPropertyReducer(_ state: TransferPropertyState?, action: Action) ->
     state.amount.accept("")
     state.memo.accept("")
     state.to_account.accept(nil)
+  case let action as ChooseAccountAction:
+    state.account.accept(action.account.address)
+    state.accountValid.accept(AccountValidStatus.validSuccessed)
   default:
     break
   }

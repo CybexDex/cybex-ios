@@ -16,6 +16,7 @@ enum address_type : String {
 }
 
 protocol AddAddressCoordinatorProtocol {
+    func pop()
 }
 
 protocol AddAddressStateManagerProtocol {
@@ -32,6 +33,7 @@ protocol AddAddressStateManagerProtocol {
     func verityNote(_ success : Bool)
 
     func addAddress(_ type : address_type)
+    
 }
 
 class AddAddressCoordinator: AccountRootCoordinator {
@@ -46,7 +48,9 @@ class AddAddressCoordinator: AccountRootCoordinator {
 }
 
 extension AddAddressCoordinator: AddAddressCoordinatorProtocol {
-    
+    func pop() {
+        self.rootVC.popViewController()
+    }
 }
 
 extension AddAddressCoordinator: AddAddressStateManagerProtocol {
@@ -66,14 +70,14 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
             
             UserManager.shared.checkUserName(address).done({ (exist) in
                 main {
-                    self.store.dispatch(VerificationAddressAction(success:!exist))
+                    self.store.dispatch(VerificationAddressAction(success:exist))
                 }
             }).cauterize()
             
         case .withdraw:
-            
-            Broadcaster.notify(RechargeDetailCoordinator.self) { (rechargeCoordinator) in
-                rechargeCoordinator.verifyAddress(self.state.property.asset.value, address: address, callback: { (isSuccess) in
+            if let asset_info = app_data.assetInfo[self.state.property.asset.value] {
+                
+                RechargeDetailCoordinator.verifyAddress(asset_info.symbol.filterJade, address: address, callback: { (isSuccess) in
                     self.store.dispatch(VerificationAddressAction(success:isSuccess))
                 })
             }
@@ -93,7 +97,7 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
     func addAddress(_ type : address_type) {
         
         if type == .withdraw {
-            AddressManager.shared.addWithDrawAddress(WithdrawAddress(id: AddressManager.shared.getUUID(), name: self.state.property.asset.value, address: self.state.property.address.value, currency: self.state.property.note.value, memo: self.state.property.memo.value))
+            AddressManager.shared.addWithDrawAddress(WithdrawAddress(id: AddressManager.shared.getUUID(), name: self.state.property.note.value, address: self.state.property.address.value, currency: self.state.property.asset.value, memo: self.state.property.memo.value))
         }
         else {
             AddressManager.shared.addTransferAddress(TransferAddress(id: AddressManager.shared.getUUID(), name: self.state.property.note.value, address: self.state.property.address.value))
