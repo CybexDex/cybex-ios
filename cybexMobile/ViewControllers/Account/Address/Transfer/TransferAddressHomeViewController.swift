@@ -24,7 +24,6 @@ class TransferAddressHomeViewController: BaseViewController {
     }
     
     func setupUI() {
-        configLeftNavButton(nil)
         configRightNavButton(R.image.ic_add_24_px())
         
         self.localized_text = R.string.localizable.transfer_account_manager.key.localizedContainer()

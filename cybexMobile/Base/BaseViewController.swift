@@ -27,7 +27,6 @@ class BaseViewController: UIViewController {
     
     weak var toast: BeareadToast?
     var table:UITableView?
-    var leftNavButton: UIButton?
     var rightNavButton: UIButton?
     var isNavBarShadowHidden: Bool = false {
         didSet {
@@ -137,14 +136,7 @@ class BaseViewController: UIViewController {
         toast?.hide(true, after: after)
     }
     
-    func configLeftNavButton(_ image:UIImage?) {
-        leftNavButton = UIButton.init(type: .custom)
-        leftNavButton?.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        leftNavButton?.setImage(image ?? R.image.ic_arrow_back_24px(), for: .normal)
-        leftNavButton?.addTarget(self, action: #selector(leftAction(_:)), for: .touchUpInside)
-        leftNavButton?.isHidden = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftNavButton!)
-    }
+   
     
     func configRightNavButton(_ image:UIImage? = nil) {
         rightNavButton = UIButton.init(type: .custom)
@@ -167,9 +159,6 @@ class BaseViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightNavButton!)
     }
     
-    @objc open func leftAction(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
-    }
     
     @objc open func rightAction(_ sender: UIButton) {
         
@@ -177,6 +166,21 @@ class BaseViewController: UIViewController {
     
     deinit {
         print("dealloc: \(self)")
+    }
+}
+
+extension UIViewController {
+    @objc open func leftAction(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
+
+    func configLeftNavigationButton(_ image:UIImage?) {
+        let leftNavButton = UIButton.init(type: .custom)
+        leftNavButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        leftNavButton.setImage(image ?? R.image.ic_back_24_px(), for: .normal)
+        leftNavButton.addTarget(self, action: #selector(leftAction(_:)), for: .touchUpInside)
+        leftNavButton.isHidden = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftNavButton)
     }
 }
 

@@ -25,7 +25,6 @@ class WithdrawAddressViewController: BaseViewController {
     }
     
     func setupUI() {
-        configLeftNavButton(nil)
         configRightNavButton(R.image.ic_add_24_px())
         self.localized_text = self.coordinator!.isEOS() ? R.string.localizable.eos_withdraw_account.key.localizedContainer() : R.string.localizable.withdraw_address.key.localizedContainer()
         self.tableView.register(R.nib.withdrawAddressTableViewCell(), forCellReuseIdentifier: R.nib.withdrawAddressTableViewCell.name)
