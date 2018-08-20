@@ -389,4 +389,6 @@
 
 "delete_confirm_address" = "Confirm to delete this address?";
 "delete_confirm_account" = "Confirm to delete this account?";
-"address_nodata"       = "No address";
+"address_nodata"       = "No withdraw address";
+"account_nodata"       = "No withdraw account";
+"account_transfer_nodata"       = "No transfer account";

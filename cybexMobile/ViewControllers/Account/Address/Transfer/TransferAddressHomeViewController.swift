@@ -24,6 +24,7 @@ class TransferAddressHomeViewController: BaseViewController {
     }
     
     func setupUI() {
+        configLeftNavButton(nil)
         configRightNavButton(R.image.ic_add_24_px())
         
         self.localized_text = R.string.localizable.transfer_account_manager.key.localizedContainer()
@@ -62,7 +63,7 @@ class TransferAddressHomeViewController: BaseViewController {
             guard let `self` = self else { return }
             
             if data.count == 0 {
-                self.view.showNoData(R.string.localizable.address_nodata(), icon: R.image.img_no_records.name)
+                self.view.showNoData(R.string.localizable.account_transfer_nodata.key.localized(), icon: R.image.img_no_address.name)
             }
             else {
                 self.view.hiddenNoData()
