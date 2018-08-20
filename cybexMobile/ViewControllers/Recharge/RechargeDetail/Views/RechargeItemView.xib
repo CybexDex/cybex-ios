@@ -15,6 +15,7 @@
                 <outlet property="bottomLineView" destination="40u-27-4bk" id="sg4-0k-RI7"/>
                 <outlet property="btn" destination="Syi-GU-VtP" id="9QD-ml-Gh5"/>
                 <outlet property="content" destination="hM9-Sb-Vwa" id="VeX-cg-hOu"/>
+                <outlet property="leftImageView" destination="RQC-vc-ehZ" id="niq-wW-gZu"/>
                 <outlet property="title" destination="9MT-CT-F1Q" id="XCR-VN-pHC"/>
             </connections>
         </placeholder>
@@ -33,7 +34,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hM9-Sb-Vwa" customClass="ImageTextField" customModule="cybexMobile" customModuleProvider="target">
-                    <rect key="frame" x="12" y="38" width="303" height="24"/>
+                    <rect key="frame" x="12" y="38" width="308" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="RaZ-v9-vjo"/>
                     </constraints>
@@ -41,13 +42,25 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syi-GU-VtP">
-                    <rect key="frame" x="321" y="35.5" width="30" height="29"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal">
-                        <color key="titleColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nbl-9g-TgY">
+                    <rect key="frame" x="321" y="42" width="30" height="16"/>
+                    <subviews>
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_address_16_px" translatesAutoresizingMaskIntoConstraints="NO" id="RQC-vc-ehZ">
+                            <rect key="frame" x="-321" y="0.0" width="16" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="16" id="IZx-69-m6E"/>
+                                <constraint firstAttribute="height" constant="16" id="hqk-H0-VdO"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syi-GU-VtP">
+                            <rect key="frame" x="0.0" y="0.0" width="30" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal">
+                                <color key="titleColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40u-27-4bk">
                     <rect key="frame" x="12" y="99" width="351" height="1"/>
                     <constraints>
@@ -64,19 +77,23 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Syi-GU-VtP" secondAttribute="trailing" constant="24" id="0N9-uB-r7U"/>
                 <constraint firstItem="9MT-CT-F1Q" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="1Nx-2Y-XjW"/>
                 <constraint firstItem="hM9-Sb-Vwa" firstAttribute="top" secondItem="9MT-CT-F1Q" secondAttribute="bottom" id="4wZ-gD-RW6"/>
                 <constraint firstAttribute="trailing" secondItem="40u-27-4bk" secondAttribute="trailing" constant="12" id="Bfl-1d-CvK"/>
-                <constraint firstItem="Syi-GU-VtP" firstAttribute="centerY" secondItem="hM9-Sb-Vwa" secondAttribute="centerY" id="LNr-iK-dWB"/>
                 <constraint firstItem="hM9-Sb-Vwa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="12" id="N1t-XF-DSH"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hM9-Sb-Vwa" secondAttribute="trailing" constant="60" id="PO0-sb-pLl"/>
                 <constraint firstItem="40u-27-4bk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="aek-3r-7zc"/>
                 <constraint firstItem="9MT-CT-F1Q" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="kWH-zZ-vbE"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="40u-27-4bk" secondAttribute="bottom" id="lkQ-gJ-hax"/>
+                <constraint firstItem="Nbl-9g-TgY" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="viR-0P-e9y"/>
+                <constraint firstItem="Nbl-9g-TgY" firstAttribute="leading" secondItem="hM9-Sb-Vwa" secondAttribute="trailing" constant="1" id="xLs-qH-t5Z"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Nbl-9g-TgY" secondAttribute="trailing" constant="24" id="xR1-U4-UzR"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-370" y="-95"/>
         </view>
     </objects>
+    <resources>
+        <image name="ic_address_16_px" width="16" height="16"/>
+    </resources>
 </document>

@@ -18,6 +18,7 @@ class TransferView: UIView {
   
   @IBOutlet weak var transferButton: UIButton!
   
+
   var crypto: String = "" {
     didSet {
       cryptoView.textField.text = crypto
@@ -254,6 +255,7 @@ extension TransferView: TitleTextFieldViewDelegate,TitleTextFieldViewDataSource,
   }
   
   func textActionSettings(titleTextView: TitleTextView) -> [TextButtonSetting] {
+  
     return [TextButtonSetting(imageName: R.image.ic_close_24_px.name,
                               selectedImageName: R.image.ic_close_24_px.name,
                               isShowWhenEditing: true)]
@@ -297,7 +299,12 @@ extension TransferView: TitleTextFieldViewDelegate,TitleTextFieldViewDataSource,
   }
   
   func textActionSettings(titleTextFieldView: TitleTextfieldView) -> [TextButtonSetting] {
-    if titleTextFieldView == cryptoView {
+    if titleTextFieldView == accountView {
+        return [TextButtonSetting(imageName: R.image.ic_address_16_px.name,
+                                  selectedImageName: R.image.ic_address_16_px.name,
+                                  isShowWhenEditing: false)]
+    }
+    else if titleTextFieldView == cryptoView {
       return [TextButtonSetting(imageName: R.image.ic_ieo_more.name,
                                 selectedImageName: R.image.ic_ieo_more.name,
                                 isShowWhenEditing: false)]
@@ -313,6 +320,14 @@ extension TransferView: TitleTextFieldViewDelegate,TitleTextFieldViewDataSource,
   }
   
   func textUnitStr(titleTextFieldView: TitleTextfieldView) -> String {
+    if titleTextFieldView == accountView {
+        if AddressManager.shared.getTransferAddressList().count == 0 {
+            return R.string.localizable.add_account.key.localized()
+        }
+        else {
+            return R.string.localizable.choose_account.key.localized()
+        }
+    }
     return ""
   }
 }

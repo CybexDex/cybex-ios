@@ -273,6 +273,8 @@
 		72199DAF2104687D00575226 /* TransferLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199DAE2104687D00575226 /* TransferLineView.xib */; };
 		7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25010BD1F86818F3968A6D9DEF12AD52 /* BusinessViewController.swift */; };
 		7279867F20F49B3300FFB2DA /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 7279867E20F49B3200FFB2DA /* schema.json */; };
+		728C15792129AE9300053555 /* CybexShowTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C15782129AE9300053555 /* CybexShowTitleView.swift */; };
+		728C157B2129AEA400053555 /* CybexShowTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728C157A2129AEA400053555 /* CybexShowTitleView.xib */; };
 		72AAC8B02106FC840040793F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AAC8AF2106FC840040793F /* Record.swift */; };
 		72D9DD58210EB60F00963915 /* Periscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9DD56210EB60E00963915 /* Periscope.swift */; };
 		72D9DD59210EB60F00963915 /* PeriscopeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D9DD57210EB60E00963915 /* PeriscopeCell.xib */; };
@@ -5815,6 +5817,8 @@
 		72789C0E96418BF478684ED7E483E03F /* polynomial_horner2_6.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = polynomial_horner2_6.hpp; sourceTree = "<group>"; };
 		7279867E20F49B3200FFB2DA /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		727AE54235841DBD27700416DA7C59A7 /* begin_end.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = begin_end.hpp; sourceTree = "<group>"; };
+		728C15782129AE9300053555 /* CybexShowTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexShowTitleView.swift; sourceTree = "<group>"; };
+		728C157A2129AEA400053555 /* CybexShowTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CybexShowTitleView.xib; sourceTree = "<group>"; };
 		7294ACA094774CBC3A232CCF3B94FB3C /* forward_skeleton_iarchive.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = forward_skeleton_iarchive.hpp; sourceTree = "<group>"; };
 		729881601FC5B8414C86AD9DB2135680 /* is_object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = is_object.hpp; sourceTree = "<group>"; };
 		72A0D92CB5DA11ECF15AD346140869EE /* set_matcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = set_matcher.hpp; sourceTree = "<group>"; };
@@ -16306,6 +16310,8 @@
 				56299B4E9395DEA09802901B4057FB7B /* StyleContentView.swift */,
 				CA6287C8EE00F20CB26C195E867398A5 /* StyleLabel.swift */,
 				FE8A53C91AF199F1B99E4CCFB807DE2F /* StyleLabel.xib */,
+				728C15782129AE9300053555 /* CybexShowTitleView.swift */,
+				728C157A2129AEA400053555 /* CybexShowTitleView.xib */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -33059,6 +33065,7 @@
 				72199D9521045DD000575226 /* TransferListCell.xib in Resources */,
 				4BDAA1229CE79E449D71FBB78746E6E5 /* typeinfo in Resources */,
 				29860A52A2F9E6057FEC80C30DB2C08C /* typeinfo.SUNWCCh in Resources */,
+				728C157B2129AEA400053555 /* CybexShowTitleView.xib in Resources */,
 				564933AA201BA7D916E7B2AABAE742F8 /* unordered_map in Resources */,
 				998269579E4C8DE1F4556D259DFBDAB5 /* unordered_map.SUNWCCh in Resources */,
 				221EC2362105B1930059F856 /* TitleTextfieldView.xib in Resources */,
@@ -33738,6 +33745,7 @@
 				ACCB7267D22FD99349666A34A7079245 /* YourPortfolioReducers.swift in Sources */,
 				344BC9FA73F9380AE43608848D803A6F /* address.cpp in Sources */,
 				8CC6E7829BCE9117984B6237F79C5180 /* debounce-throttle.swift in Sources */,
+				728C15792129AE9300053555 /* CybexShowTitleView.swift in Sources */,
 				72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */,
 				911CFA6B3FC228D25DBD994B8E6AAEDD /* get_dev_key.cpp in Sources */,
 				AA4E21B5AB76E4FEA62F38545E25868C /* memo.cpp in Sources */,

@@ -342,6 +342,7 @@
 "account_title_add" = "添加转账账户";
 "address_title_add" = "添加提现地址";
 "address_title_add_eos" = "添加提现账户";
+"address_add_success" = "添加成功";
 "transfer_account_manager" = "转账账户管理";
 
 "copy" = "复制";
@@ -350,5 +351,15 @@
 "delete" = "删除";
 "deleted" = "删除成功";
 
+"choose_address" = "选择地址";
+"add_address" = "添加地址";
 
+"choose_account" = "选择账户";
+"add_account" = "添加账户";
+
+"withdraw_success_title" = "提现申请成功";
+"withdraw_success_content" = "是否将该地址储存到提现地址列表？";
+
+"transfer_success_title" = "转账成功";
+"transfer_success_content" = "是否将该账户储存到转账账户列表？";
 

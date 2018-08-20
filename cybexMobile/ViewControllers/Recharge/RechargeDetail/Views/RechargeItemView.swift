@@ -23,6 +23,7 @@ class RechargeItemView: UIView {
     @IBOutlet weak var content: ImageTextField!
     @IBOutlet weak var btn: UIButton!
     
+    @IBOutlet weak var leftImageView: UIImageView!
     @IBOutlet weak var bottomLineView: UIView!
     
     @IBInspectable var name : String = "" {
@@ -60,7 +61,8 @@ class RechargeItemView: UIView {
                 content.isEnabled = false
             case .clean:
                 btn.isHidden = false
-                btn.setBackgroundImage(UIImage(named: "icCancel24Px"), for: .normal)
+                leftImageView.isHidden = false
+                leftImageView.image = R.image.ic_address_16_px()
             default:
                 break
             }

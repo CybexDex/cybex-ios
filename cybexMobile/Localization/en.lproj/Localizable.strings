@@ -362,6 +362,22 @@
 "account_title_add" = "Add Transfer Account";
 "address_title_add" = "Add Address";
 "address_title_add_eos" = "Add Account";
+
+"address_add_success" = "Added";
+
+"choose_address" = "Select";
+"add_address" = "Add";
+
+"choose_account" = "Select";
+"add_account" = "Add";
+
+
+"withdraw_success_title" = "Withdraw applicatation has been sent.";
+"withdraw_success_content" = "Add this account to list?";
+
+"transfer_success_title" = "Transfer success";
+"transfer_success_content" = "Add to transfer account list?";
+
 "transfer_account_manager" = "Transfer Account";
 
 "copy" = "Copy";

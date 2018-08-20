@@ -25,10 +25,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ggn-zV-THI">
-                    <rect key="frame" x="13" y="21" width="349" height="374"/>
+                    <rect key="frame" x="13" y="21" width="349" height="430"/>
                     <subviews>
                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9L5-t9-1aA" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="349" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="80" id="ekW-2T-DoD"/>
+                            </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                     <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -43,13 +46,13 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G3z-pT-NHT">
-                            <rect key="frame" x="0.0" y="92" width="349" height="282"/>
+                            <rect key="frame" x="0.0" y="92" width="349" height="338"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IM7-uO-yfx">
-                                    <rect key="frame" x="0.0" y="0.0" width="349" height="282"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="349" height="338"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I7H-v2-JhM" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="349" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="349" height="82.5"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                                     <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -62,7 +65,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fr7-gO-noA" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="50" width="349" height="182"/>
+                                            <rect key="frame" x="0.0" y="82.5" width="349" height="173"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                                     <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -72,10 +75,13 @@
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="address_mark"/>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="maxNumberOfLines">
+                                                    <integer key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="whW-p3-HOf" customClass="AddressItemView" customModule="cybexMobile" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="232" width="349" height="50"/>
+                                            <rect key="frame" x="0.0" y="255.5" width="349" height="82.5"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                                     <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
