@@ -356,6 +356,7 @@ extension RechargeDetailViewController{
             }
         }
     }
+
 }
 
 extension RechargeDetailViewController {
@@ -370,15 +371,27 @@ extension RechargeDetailViewController {
                 ShowToastManager.shared.hide()
                 if self.isVisible{
                     if String(describing: data) == "<null>"{
-                        self.showToastBox(true, message: R.string.localizable.recharge_withdraw_success.key.localized())
-                        SwifterSwift.delay(milliseconds: 100) {
-                            self.coordinator?.pop()
+                        if AddressManager.shared.containAddressOfWithDraw(self.contentView.addressView.content.text!).0 == false {
+                            self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.withdraw_success_title.key.localized(), content: R.string.localizable.withdraw_success_content.key.localized())
                         }
+                        else{
+                            self.showToastBox(true, message: R.string.localizable.recharge_withdraw_success.key.localized())
+                            SwifterSwift.delay(milliseconds: 100) {
+                                self.coordinator?.pop()
+                            }
+                        }
+                        
                     }else{
                         self.showToastBox(false, message: R.string.localizable.recharge_withdraw_failed.key.localized())
                     }
                 }
             }
         })
+    }
+    
+    override func returnEnsureImageAction() {
+        let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: self.contentView.addressView.content.text!, currency: (self.trade?.id)!, memo: self.contentView.memoView.content.text!)
+//        self.coordinator?.
+//        self.coordinator?.pop()
     }
 }

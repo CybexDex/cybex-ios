@@ -21,6 +21,8 @@ class AddAddressViewController: BaseViewController {
 
     var asset : String = ""
     
+    var withdrawAddress : WithdrawAddress?
+    
 	override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()

@@ -15,6 +15,7 @@ protocol CybexTextViewDelegate {
     func returnPassword(_ password:String)
     func clickCancle()
     func returnEnsureAction()
+    func returnEnsureImageAction()
 }
 
 
@@ -38,7 +39,7 @@ class CybexTextView: UIView {
         }
     }
     
-  
+    @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var hSeparateView: UIView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var cancle: UIButton!
@@ -53,7 +54,12 @@ class CybexTextView: UIView {
         if let tf = self.middleView as? CybexPasswordView{
             self.delegate?.returnPassword(tf.textField.text!)
         }else{
-            self.delegate?.returnEnsureAction()
+            if titleImageView.isHidden == true {
+                self.delegate?.returnEnsureAction()
+            }
+            else {
+                self.delegate?.returnEnsureImageAction()
+            }
         }
     }
     

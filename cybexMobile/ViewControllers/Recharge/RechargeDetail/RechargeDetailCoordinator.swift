@@ -15,6 +15,7 @@ import Presentr
 protocol RechargeDetailCoordinatorProtocol {
     func pop()
     func openWithdrawRecodeList(_ asset_id : String)
+    func openAddAddressWithAddress(_ withdrawAddress : WithdrawAddress)
 }
 
 protocol RechargeDetailStateManagerProtocol {
@@ -48,6 +49,15 @@ class RechargeDetailCoordinator: AccountRootCoordinator {
 extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
     func pop(){
         self.rootVC.popViewController(animated: true)
+    }
+    
+    func openAddAddressWithAddress(_ withdrawAddress : WithdrawAddress) {
+        if let vc = R.storyboard.account.addAddressViewController() {
+            vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
+            vc.withdrawAddress = withdrawAddress
+            vc.asset = withdrawAddress.currency
+            self.rootVC.pushViewController(vc, animated: true)
+        }
     }
     
     func openWithdrawRecodeList(_ asset_id : String) {
