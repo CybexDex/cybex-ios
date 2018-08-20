@@ -33,7 +33,7 @@ class WithdrawAddressViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.coordinator?.refreshData(nil)
+        self.coordinator?.refreshData()
     }
     
     override func rightAction(_ sender: UIButton) {
@@ -92,7 +92,7 @@ extension WithdrawAddressViewController {
     override func returnEnsureAction() {
         self.coordinator?.delete()
         
-        //TODO: 刷新
+        self.coordinator?.refreshData()
     }
 }
 

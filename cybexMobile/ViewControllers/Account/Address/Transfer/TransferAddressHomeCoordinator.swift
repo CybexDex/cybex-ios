@@ -9,9 +9,12 @@
 import UIKit
 import ReSwift
 import SwiftNotificationCenter
+import XLActionController
+import Async
 
 protocol TransferAddressHomeCoordinatorProtocol {
     func openAddTransferAddress()
+    func openActionVC()
 }
 
 protocol TransferAddressHomeStateManagerProtocol {
@@ -20,7 +23,12 @@ protocol TransferAddressHomeStateManagerProtocol {
         _ subscriber: S, transform: ((Subscription<TransferAddressHomeState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
     
-    func fetchData()
+    func refreshData()
+    
+    func select(_ address:TransferAddress?)
+    func copy()
+    func confirmdelete()
+    func delete()
 }
 
 class TransferAddressHomeCoordinator: AccountRootCoordinator {
@@ -45,6 +53,29 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeCoordinatorProtocol
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
+    
+    func openActionVC() {
+        let actionController = PeriscopeActionController()
+        
+        actionController.addAction(Action(R.string.localizable.copy.key.localized(), style: .destructive, handler: {[weak self] action in
+            guard let `self` = self else {return}
+            self.copy()
+        }))
+        
+        actionController.addAction(Action(R.string.localizable.delete.key.localized(), style: .destructive, handler: {[weak self] action in
+            guard let `self` = self else {return}
+            self.confirmdelete()
+        }))
+        
+        actionController.addSection(PeriscopeSection())
+        actionController.addAction(Action(R.string.localizable.alert_cancle.key.localized(), style: .cancel, handler: {[weak self] action in
+            guard let `self` = self else {return}
+            
+            self.select(nil)
+        }))
+        
+        self.rootVC.topViewController?.present(actionController, animated: true, completion: nil)
+    }
 }
 
 extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtocol {
@@ -58,8 +89,35 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtoco
         store.subscribe(subscriber, transform: transform)
     }
     
-    func fetchData() {
+    func refreshData() {
         let list = AddressManager.shared.getTransferAddressList()
         self.store.dispatch(TransferAddressHomeDataAction(data: list))
+    }
+    
+    func select(_ address:TransferAddress?) {
+        self.store.dispatch(TransferAddressSelectDataAction(data: address))
+    }
+    
+    func copy() {
+        if let addressData = self.state.property.selectedAddress.value {
+            UIPasteboard.general.string = addressData.address
+            
+            self.rootVC.topViewController?.showToastBox(true, message: R.string.localizable.copied())
+        }
+    }
+    
+    func confirmdelete() {
+        self.rootVC.topViewController?.showConfirm(R.string.localizable.confirm(), attributes: nil)
+    }
+    
+    func delete() {
+        if let addressData = self.state.property.selectedAddress.value {
+            AddressManager.shared.removeTransferAddress(addressData.id)
+            
+            Async.main {
+                self.rootVC.topViewController?.showToastBox(true, message: R.string.localizable.deleted())
+            }
+        }
+        
     }
 }

@@ -34,7 +34,7 @@ class TransferAddressHomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.coordinator?.fetchData()
+        self.coordinator?.refreshData()
     }
     
     override func rightAction(_ sender: UIButton) {
@@ -78,5 +78,20 @@ extension TransferAddressHomeViewController: UITableViewDelegate, UITableViewDat
         }
         
         return cell
+    }
+}
+
+extension TransferAddressHomeViewController {
+    @objc func AddressCellViewDidClicked(_ data:[String: Any]) {
+        if let addressdata = data["data"] as? TransferAddress {
+            self.coordinator?.select(addressdata)
+            self.coordinator?.openActionVC()
+        }
+    }
+    
+    override func returnEnsureAction() {
+        self.coordinator?.delete()
+        
+        self.coordinator?.refreshData()
     }
 }
