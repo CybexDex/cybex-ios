@@ -209,12 +209,14 @@ extension UIViewController : ShowManagerDelegate {
         ShowToastManager.shared.hide(2.0)
     }
     
-    func showConfirm(_ title:String, attributes:[NSAttributedString]?) {
+    func showConfirm(_ title:String, attributes:[NSAttributedString]?, setup: (([StyleLabel]) -> Void)? = nil) {
         if ShowToastManager.shared.showView != nil {
             return
         }
         let subView = StyleContentView(frame: .zero)
         subView.data = attributes
+        setup?(subView.labels)
+        
         ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .small_big)
         ShowToastManager.shared.showAnimationInView(self.view)
         ShowToastManager.shared.delegate = self

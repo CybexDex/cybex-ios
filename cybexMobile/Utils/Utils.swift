@@ -400,43 +400,48 @@ func getTransferInfo(_ account: String, quanitity: String, fee: String, memo: St
            "<name>\(String(describing: memoTitle)):</name><\(contentStyle)>  \(String(describing: memo))</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])!
 }
 
-func confirmDeleteWithDrawAddress(_ info:WithdrawAddress) -> NSAttributedString {
+func confirmDeleteWithDrawAddress(_ info:WithdrawAddress) -> [NSAttributedString] {
+    
     let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
 
     let isEOS = info.currency == AssetConfiguration.EOS
     let existMemo = info.memo != nil && !info.memo!.isEmpty
     
-    var result = ""
+    var result:[NSAttributedString] = []
     
     let title = "<\(contentStyle)>" + (isEOS ? R.string.localizable.delete_confirm_account() : R.string.localizable.delete_confirm_address()) + "</\(contentStyle)>"
+    result.append(title.set(style: StyleNames.alertContent.rawValue)!)
     
-    let note = "<name>" + R.string.localizable.address_mark() + ":</name>" + "<\(contentStyle)>" + "\(info.name)" + "</\(contentStyle)>"
-    
-    let address = "<name>" + (isEOS ? R.string.localizable.accountTitle() : R.string.localizable.address()) + ":</name>" + "<\(contentStyle)>" + "\(info.address)" + "</\(contentStyle)>"
-    
-    result = title + "\n" + note + "\n" + address + "\n"
+    let note = "<name>" + R.string.localizable.address_mark() + "：</name>" + "<\(contentStyle)>" + "\(info.name)" + "</\(contentStyle)>"
+    result.append(note.set(style: StyleNames.alertContent.rawValue)!)
+
+    let address = "<name>" + (isEOS ? R.string.localizable.accountTitle() : R.string.localizable.address()) + "：</name>" + "<\(contentStyle)>" + "\(info.address)" + "</\(contentStyle)>"
+    result.append(address.set(style: StyleNames.alertContent.rawValue)!)
+
     if existMemo {
-        let memo = "<name>" + R.string.localizable.withdraw_memo() + ":</name>" + "<\(contentStyle)>" + "\(info.memo!)" + "</\(contentStyle)>"
-        result += memo + "\n"
+        let memo = "<name>" + R.string.localizable.withdraw_memo() + "：</name>" + "<\(contentStyle)>" + "\(info.memo!)" + "</\(contentStyle)>"
+        result.append(memo.set(style: StyleNames.alertContent.rawValue)!)
     }
     
-    return result.set(style: StyleNames.alertContent.rawValue)!
+    return result
 }
 
-func confirmDeleteTransferAddress(_ info:TransferAddress) -> NSAttributedString {
+func confirmDeleteTransferAddress(_ info:TransferAddress) -> [NSAttributedString] {
     let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
     
-    var result = ""
-    
+    var result:[NSAttributedString] = []
+
     let title = "<\(contentStyle)>" + R.string.localizable.delete_confirm_account() + "</\(contentStyle)>"
+    result.append(title.set(style: StyleNames.alertContent.rawValue)!)
+
+    let note = "<name>" + R.string.localizable.address_mark() + "：</name>" + "<\(contentStyle)>" + "\(info.name)" + "</\(contentStyle)>"
+    result.append(note.set(style: StyleNames.alertContent.rawValue)!)
+
+    let address = "<name>" + R.string.localizable.accountTitle() + "：</name>" + "<\(contentStyle)>" + "\(info.address)" + "</\(contentStyle)>"
+    result.append(address.set(style: StyleNames.alertContent.rawValue)!)
+
     
-    let note = "<name>" + R.string.localizable.address_mark() + ":</name>" + "<\(contentStyle)>" + "\(info.name)" + "</\(contentStyle)>"
-    
-    let address = "<name>" + R.string.localizable.accountTitle() + ":</name>" + "<\(contentStyle)>" + "\(info.address)" + "</\(contentStyle)>"
-    
-    result = title + "\n" + note + "\n" + address + "\n"
-    
-    return result.set(style: StyleNames.alertContent.rawValue)!
+    return result
 }
 
 

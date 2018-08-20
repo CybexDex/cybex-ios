@@ -101,7 +101,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
             if let viewmodel = coor.state.property.selectedViewModel.value {
                 let id = viewmodel.viewModel.model.id
                 
-                let addressData = AddressManager.shared.getWithDrawAddressListWith(id).sorted(by: \.name, ascending: false)
+                let addressData = AddressManager.shared.getWithDrawAddressListWith(id).sorted(by: \.name, ascending: true)
                 self.store.dispatch(WithdrawAddressDataAction(data: addressData))
             }
         }
@@ -131,7 +131,13 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
     
     func confirmdelete() {
         if let addressData = self.state.property.selectedAddress.value {
-            self.rootVC.topViewController?.showConfirm(R.string.localizable.confirm(), attributes: [confirmDeleteWithDrawAddress(addressData)])
+            self.rootVC.topViewController?.showConfirm(R.string.localizable.confirm(), attributes: confirmDeleteWithDrawAddress(addressData), setup: { (labels) in
+                for label in labels {
+                    label.content.numberOfLines = 1
+                    label.content.lineBreakMode = .byTruncatingMiddle
+                }
+            })
+
         }
     }
     

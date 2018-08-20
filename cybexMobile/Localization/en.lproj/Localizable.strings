@@ -389,3 +389,4 @@
 
 "delete_confirm_address" = "Confirm to delete this address?";
 "delete_confirm_account" = "Confirm to delete this account?";
+"address_nodata"       = "No address";

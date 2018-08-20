@@ -13,7 +13,12 @@ extension AddressCellView {
         nickName.text = model.name
         address.text = model.address
         
-        memo.text = model.memo ?? "-"
+        if let memoText = model.memo, !memoText.isEmpty {
+            memo.text = memoText
+        }
+        else {
+            memo.text = "-"
+        }
     }
 }
 
