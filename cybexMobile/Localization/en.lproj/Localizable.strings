@@ -364,6 +364,7 @@
 "address_title_add_eos" = "Add Account";
 
 "address_add_success" = "Added";
+"address_note_placeholder" = "Less than 15 characters";
 
 "choose_address" = "Select";
 "add_address" = "Add";
@@ -385,3 +386,4 @@
 
 "delete" = "Delete";
 "deleted" = "Deleted";
+

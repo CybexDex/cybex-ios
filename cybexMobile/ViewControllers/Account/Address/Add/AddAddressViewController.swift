@@ -74,12 +74,12 @@ class AddAddressViewController: BaseViewController {
                 return false
             })
         }
-        
+     
         (self.containerView.address.content.rx.text.orEmpty <-> self.coordinator!.state.property.address).disposed(by: disposeBag)
         (self.containerView.mark.content.rx.text.orEmpty <-> self.coordinator!.state.property.note).disposed(by: disposeBag)
         (self.containerView.memo.content.rx.text.orEmpty <-> self.coordinator!.state.property.memo).disposed(by: disposeBag)
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidEndEditing, object: self.containerView.mark.content, queue: nil) { [weak self](notification) in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidEndEditing, object: self.containerView.mark.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
             if let text = self.containerView.mark.content.text ,text.count != 0 {
                 self.coordinator?.verityNote(true)
@@ -94,12 +94,14 @@ class AddAddressViewController: BaseViewController {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidEndEditing, object: self.containerView.address.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else {return}
             if let text = self.containerView.address.content.text,text.count > 0 {
-                self.coordinator?.verityAddress(text, type: self.address_type)
+                self.startLoading()
+                self.coordinator?.verityAddress(text.trimmed, type: self.address_type)
             }
         }
         
         self.coordinator?.state.property.addressVailed.asObservable().skip(1).subscribe(onNext: { [weak self](address_success) in
             guard let `self` = self else {return}
+            self.endLoading()
             if !address_success {
                 var errosMessage = R.string.localizable.transfer_account_unexist.key.localized()
                 if self.address_type == .withdraw && self.asset != AssetConfiguration.EOS  {

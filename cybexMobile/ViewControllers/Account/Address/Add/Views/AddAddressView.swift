@@ -12,7 +12,7 @@ class AddAddressView: UIView {
 
     @IBOutlet weak var asset: RechargeItemView!
     @IBOutlet weak var address: AddressItemView!
-    @IBOutlet weak var mark: AddressItemView!
+    @IBOutlet weak var mark: RechargeItemView!
     @IBOutlet weak var memo: AddressItemView!
     @IBOutlet weak var addBtn: Button!
     
