@@ -185,12 +185,17 @@ extension TransferViewController {
                     ShowToastManager.shared.hide()
                     if self.isVisible{
                         if String(describing: data) == "<null>"{
-                            self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())
-                            //              SwifterSwift.delay(milliseconds: 100) {
-                            //                self.coordinator?.pop()
-                            //              }
-                            self.coordinator?.resetData()
-                            self.removeTransferInfo()
+                            if AddressManager.shared.containAddressOfTransfer(self.coordinator!.state.property.account.value).0 == false {
+                                self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.transfer_success_title.key.localized(), content: R.string.localizable.transfer_success_content.key.localized())
+                            }
+                            else {
+                                self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())
+                                //              SwifterSwift.delay(milliseconds: 100) {
+                                //                self.coordinator?.pop()
+                                //              }
+                                self.coordinator?.resetData()
+                                self.removeTransferInfo()
+                            }
                         }else{
                             self.showToastBox(false, message: R.string.localizable.transfer_failed.key.localized())
                         }
@@ -203,6 +208,11 @@ extension TransferViewController {
                 self.showPasswordBox()
             }
         }
+    }
+    
+    override func returnEnsureImageAction() {
+        let transferAddress = TransferAddress(id: AddressManager.shared.getUUID(), name: "", address: self.coordinator!.state.property.account.value)
+        self.coordinator?.openAddTransferAddress(transferAddress)
     }
     
     func removeTransferInfo() {

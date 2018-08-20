@@ -34,6 +34,8 @@ protocol AddAddressStateManagerProtocol {
 
     func addAddress(_ type : address_type)
     
+    func veritiedAddress()
+    
 }
 
 class AddAddressCoordinator: AccountRootCoordinator {
@@ -84,6 +86,10 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
         default:
             break
         }
+    }
+    
+    func veritiedAddress() {
+        self.store.dispatch(VerificationAddressAction(success:true))
     }
     
     func setAsset(_ asset : String) {

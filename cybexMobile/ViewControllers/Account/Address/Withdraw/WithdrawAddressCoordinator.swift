@@ -72,14 +72,16 @@ extension WithdrawAddressCoordinator: WithdrawAddressCoordinatorProtocol {
     }
     
     func openAddWithdrawAddress() {
-        if let vc = R.storyboard.account.addAddressViewController() {
-            vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
-            Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
-                if let selectedModel = coor.state.property.selectedViewModel.value ,let firstModel = selectedModel.addressData.first{
-                    vc.asset = firstModel.currency
+        Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
+            if let viewmodel = coor.state.property.selectedViewModel.value {
+                let id = viewmodel.viewModel.model.id
+                if let vc = R.storyboard.account.addAddressViewController() {
+                    vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
+                    vc.address_type = .withdraw
+                    vc.asset = id
+                    self.rootVC.pushViewController(vc, animated: true)
                 }
             }
-            self.rootVC.pushViewController(vc, animated: true)
         }
     }
 }
