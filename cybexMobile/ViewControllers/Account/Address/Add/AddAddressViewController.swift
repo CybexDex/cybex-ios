@@ -65,7 +65,8 @@ class AddAddressViewController: BaseViewController {
                 self.containerView.data = transferAddress
                 self.coordinator?.veritiedAddress()
             }
-        }        
+        }
+        configLeftNavButton(nil)
     }
     
     func commonObserveState() {
@@ -131,7 +132,11 @@ class AddAddressViewController: BaseViewController {
         
         self.containerView.addBtn.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self](tap) in
                 guard let `self` = self else { return }
-
+            self.view.endEditing(true)
+            
+            if self.containerView.addBtn.isEnable == false {
+                return
+            }
             let exit = self.address_type == .withdraw ?  AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text).0 : AddressManager.shared.containAddressOfTransfer(self.containerView.address.content.text).0
                 if exit {
                     self.showToastBox(false, message: self.address_type == .withdraw ? R.string.localizable.address_exit.key.localized() : R.string.localizable.account_exit.key.localized())
@@ -144,7 +149,6 @@ class AddAddressViewController: BaseViewController {
                         self.coordinator?.pop(self.popActionType)
                     })
                 }
-                
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     

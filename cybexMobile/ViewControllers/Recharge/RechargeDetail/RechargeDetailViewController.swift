@@ -43,6 +43,7 @@ class RechargeDetailViewController: BaseViewController {
             if let trade = self.trade {
                 self.balance = getBalanceWithAssetId(trade.id)
                 self.precision = app_data.assetInfo[trade.id]?.precision
+                self.isEOS = trade.id == AssetConfiguration.EOS
             }
         }
     }
@@ -79,6 +80,7 @@ class RechargeDetailViewController: BaseViewController {
         self.contentView.balance  = self.balance
         
         self.configRightNavButton(R.image.icWithdrawNew24Px())
+        self.configLeftNavButton(nil)
     }
     
     override func rightAction(_ sender: UIButton) {

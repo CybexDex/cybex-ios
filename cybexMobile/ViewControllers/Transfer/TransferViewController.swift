@@ -66,16 +66,18 @@ class TransferViewController: BaseViewController {
         
         //账户监听
         self.coordinator!.state.property.accountValid.asObservable().subscribe(onNext: {[weak self] (status) in
-            self?.transferView.accountValidStatus = status
-            if status == .validFailed && !(self?.coordinator?.state.property.account.value.isEmpty)! {
-                self?.showToastBox(false, message: R.string.localizable.transfer_account_unexist.key.localized())
+            guard let `self` = self else { return }
+            self.transferView.accountValidStatus = status
+            if status == .validFailed && !(self.coordinator?.state.property.account.value.isEmpty)!,self.transferView.accountView.textField.text!.count != 0 {
+                self.showToastBox(false, message: R.string.localizable.transfer_account_unexist.key.localized())
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         //余额监听
         self.coordinator!.state.property.amountValid.asObservable().subscribe(onNext: {[weak self] (result) in
-            if !result, ((self?.coordinator?.state.property.fee.value) != nil),self?.coordinator?.state.property.balance.value != nil {
-                self?.showToastBox(false, message: R.string.localizable.transfer_balance_unenough.key.localized())
+            guard let `self` = self else { return }
+            if !result, ((self.coordinator?.state.property.fee.value) != nil),self.coordinator?.state.property.balance.value != nil ,self.transferView.balance.count != 0{
+                self.showToastBox(false, message: R.string.localizable.transfer_balance_unenough.key.localized())
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
@@ -190,9 +192,10 @@ extension TransferViewController {
                             }
                             else {
                                 self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())
+                                self.removeTransferInfo()
+                                self.coordinator?.resetData()
                             }
-                            self.coordinator?.resetData()
-                            self.removeTransferInfo()
+                            
                         }else{
                             self.showToastBox(false, message: R.string.localizable.transfer_failed.key.localized())
                         }
@@ -210,7 +213,8 @@ extension TransferViewController {
     override func returnEnsureImageAction() {
         let transferAddress = TransferAddress(id: AddressManager.shared.getUUID(), name: "", address: self.coordinator!.state.property.account.value)
         self.coordinator?.openAddTransferAddress(transferAddress)
-        
+        self.removeTransferInfo()
+        self.coordinator?.resetData()
     }
     
     func removeTransferInfo() {
