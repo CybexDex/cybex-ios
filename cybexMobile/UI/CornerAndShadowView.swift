@@ -57,6 +57,23 @@ class CornerAndShadowView: UIView {
       }
     }
   }
+    
+    
+    var newSpread: CGFloat = 0 {
+        didSet {
+            self.subviews.forEach { (subView) in
+                if subView.shadowOpacity == 1 {
+                    if subView.spread == 0 {
+                        subView.layer.shadowPath = nil
+                    }
+                    else {
+                        let rect = subView.bounds.insetBy(dx: -newSpread, dy: -newSpread)
+                        subView.layer.shadowPath = UIBezierPath(rect: rect).cgPath
+                    }
+                }
+            }
+        }
+    }
   
   
   

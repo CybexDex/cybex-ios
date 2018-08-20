@@ -140,9 +140,9 @@ class NormalCellView: UIView {
   }
   
   @IBInspectable
-  var isShowLineView : Bool = false {
+  var isShowLineView : Bool = true {
     didSet{
-      self.lineView.isHidden = isShowLineView
+      self.lineView.isHidden = !isShowLineView
     }
   }
   
