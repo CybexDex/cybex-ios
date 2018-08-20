@@ -29,6 +29,8 @@ protocol WithdrawAddressStateManagerProtocol {
     func copy()
     func confirmdelete()
     func delete()
+    
+    func isEOS() -> Bool
 }
 
 class WithdrawAddressCoordinator: AccountRootCoordinator {
@@ -101,14 +103,38 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
             if let viewmodel = coor.state.property.selectedViewModel.value {
                 let id = viewmodel.viewModel.model.id
                 
-                let addressData = AddressManager.shared.getWithDrawAddressListWith(id).sorted(by: \.name, ascending: true)
-                self.store.dispatch(WithdrawAddressDataAction(data: addressData))
+                let list = AddressManager.shared.getWithDrawAddressListWith(id)
+                
+                let names = list.map { (info) -> AddressName in
+                    return AddressName(name: info.name)
+                }
+                
+                let sortedNames = sortNameBasedonAddress(names)
+                
+                let data = list.sorted { (front, last) -> Bool in
+                    return sortedNames.index(of: front.name)! <= sortedNames.index(of: last.name)!
+                }
+                
+                self.store.dispatch(WithdrawAddressDataAction(data: data))
             }
         }
     }
     
     func select(_ address:WithdrawAddress?) {
         self.store.dispatch(WithdrawAddressSelectDataAction(data: address))
+    }
+    
+    func isEOS() -> Bool {
+        var result = false
+        Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
+            if let viewmodel = coor.state.property.selectedViewModel.value {
+                if viewmodel.viewModel.model.id == AssetConfiguration.EOS {
+                    result = true
+                }
+            }
+        }
+        
+        return result
     }
     
     func copy() {

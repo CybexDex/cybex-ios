@@ -80,6 +80,22 @@ extension UIView {
       layer.masksToBounds = true
     }
   }
+    
+    @IBInspectable var spread: CGFloat {
+        get {
+            return 0
+        }
+        set {
+            if newValue == 0 {
+                layer.shadowPath = nil
+            }
+            else {
+                let rect = bounds.insetBy(dx: -newValue, dy: -newValue)
+                layer.shadowPath = UIBezierPath(rect: rect).cgPath
+            }
+           
+        }
+    }
   
   @IBInspectable var borderWidth: CGFloat {
     get {

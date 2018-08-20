@@ -28,6 +28,7 @@ def data
     pod 'IQKeyboardManagerSwift'
     pod 'Guitar'
     pod 'DifferenceKit'
+    pod 'Dollar'
 end
 
 def resource

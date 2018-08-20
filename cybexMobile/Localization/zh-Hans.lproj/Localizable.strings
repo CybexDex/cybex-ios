@@ -368,4 +368,7 @@
 
 "delete_confirm_address" = "确认删除该地址？";
 "delete_confirm_account" = "确认删除该账户？";
-"address_nodata"       = "暂无地址";
+"address_nodata"       = "暂无提现地址";
+"account_nodata"       = "暂无提现账户";
+
+"account_transfer_nodata"       = "暂无转账账户";

@@ -90,7 +90,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJ6-Af-LNN" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="96" width="294" height="48"/>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                                                 <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
@@ -124,7 +124,7 @@
                                                             <constraint firstAttribute="height" constant="48" id="5dO-bs-Rzg"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                                                 <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
