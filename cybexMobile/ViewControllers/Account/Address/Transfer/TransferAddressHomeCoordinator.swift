@@ -11,6 +11,7 @@ import ReSwift
 import SwiftNotificationCenter
 import XLActionController
 import Async
+import Dollar
 
 protocol TransferAddressHomeCoordinatorProtocol {
     func openAddTransferAddress()
@@ -91,8 +92,18 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtoco
     }
     
     func refreshData() {
-        let list = AddressManager.shared.getTransferAddressList().sorted(by: \.name, ascending: false)
-        self.store.dispatch(TransferAddressHomeDataAction(data: list))
+        let list = AddressManager.shared.getTransferAddressList()
+        
+        let names = list.map { (info) -> AddressName in
+            return AddressName(name: info.name)
+        }
+        
+        let sortedNames = sortNameBasedonAddress(names)
+     
+        let data = list.sorted { (front, last) -> Bool in
+             return sortedNames.index(of: front.name)! <= sortedNames.index(of: last.name)!
+        }
+        self.store.dispatch(TransferAddressHomeDataAction(data: data))
     }
     
     func select(_ address:TransferAddress?) {

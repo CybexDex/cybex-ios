@@ -30,6 +30,7 @@ PODS:
     - DifferenceKit/Core
   - Differentiator (3.0.2)
   - DNSPageView (1.0.1)
+  - Dollar (7.1.0)
   - EasyAnimation (2.0.2)
   - EFQRCode (4.2.2)
   - ESPullToRefresh (2.7)
@@ -188,6 +189,7 @@ DEPENDENCIES:
   - Device
   - DifferenceKit
   - DNSPageView
+  - Dollar
   - EasyAnimation
   - EFQRCode
   - ESPullToRefresh
@@ -278,6 +280,7 @@ SPEC REPOS:
     - DifferenceKit
     - Differentiator
     - DNSPageView
+    - Dollar
     - EasyAnimation
     - EFQRCode
     - ESPullToRefresh
@@ -400,6 +403,7 @@ SPEC CHECKSUMS:
   DifferenceKit: 529d32c38c0a63196c7519cfb3d6e94cab3d23ee
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   DNSPageView: 93b0f9c9ab0e2f8c1d9aa5b0d44740bd2d775d78
+  Dollar: dc69a2997fa5df12ae7a91fec897963664c26750
   EasyAnimation: 977ef673efe8ce62447807eedb380a77b189dc80
   EFQRCode: 203846c7b135b5f7c1d18bb7923bc32a74c8b363
   ESPullToRefresh: 119e2710b82b75536aab2bbe4883ba119fca35c8
@@ -479,6 +483,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 34f79abb60018f2e2a5168d6287d90473024ab81
 
-PODFILE CHECKSUM: 5c412b7f43ab9a9e1b1d5b5036186c2ff4431a02
+PODFILE CHECKSUM: 5858c72081bdf6f8244d8b39a9396a367f19177f
 
 COCOAPODS: 1.5.3

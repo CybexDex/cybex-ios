@@ -512,3 +512,32 @@ func getWithdrawAndDepositRecords(_ accountName : String, asset : String, fundTy
   }
 }
 
+func sortNameBasedonAddress(_ names: [AddressName]) -> [String] {
+    let collation = UILocalizedIndexedCollation.current()
+    var newSectionsArray: [[AddressName]] = []
+    
+    for _ in 0 ..< collation.sectionTitles.count {
+        let array = [AddressName]()
+        newSectionsArray.append(array)
+    }
+    
+    for name in names {
+        let sectionNumber = collation.section(for: name, collationStringSelector: #selector(getter: AddressName.name))
+        var sectionBeans = newSectionsArray[sectionNumber]
+        
+        sectionBeans.append(name)
+        
+        newSectionsArray[sectionNumber] = sectionBeans
+    }
+    
+    for i in 0 ..< collation.sectionTitles.count {
+        let beansArrayForSection = newSectionsArray[i]
+        
+        let sortedBeansArrayForSection = collation.sortedArray(from: beansArrayForSection, collationStringSelector:  #selector(getter: AddressName.name))
+        newSectionsArray[i] = sortedBeansArrayForSection as! [AddressName]
+    }
+    
+    let sortedNames = newSectionsArray.flatMap({ $0 }).map({ $0.name })
+    
+    return sortedNames
+}

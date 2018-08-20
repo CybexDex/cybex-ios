@@ -15,6 +15,13 @@ struct TransferAddress: Codable, DefaultsSerializable, Equatable {
     var address:String
 }
 
+class AddressName: NSObject {
+    @objc var name: String
+    init(name: String) {
+        self.name = name
+    }
+}
+
 extension TransferAddress: DefaultsDefaultArrayValueType {
     static let defaultArrayValue: [TransferAddress] = []
 }

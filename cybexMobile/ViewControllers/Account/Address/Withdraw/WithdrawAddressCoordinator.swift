@@ -101,8 +101,19 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
             if let viewmodel = coor.state.property.selectedViewModel.value {
                 let id = viewmodel.viewModel.model.id
                 
-                let addressData = AddressManager.shared.getWithDrawAddressListWith(id).sorted(by: \.name, ascending: true)
-                self.store.dispatch(WithdrawAddressDataAction(data: addressData))
+                let list = AddressManager.shared.getWithDrawAddressListWith(id)
+                
+                let names = list.map { (info) -> AddressName in
+                    return AddressName(name: info.name)
+                }
+                
+                let sortedNames = sortNameBasedonAddress(names)
+                
+                let data = list.sorted { (front, last) -> Bool in
+                    return sortedNames.index(of: front.name)! <= sortedNames.index(of: last.name)!
+                }
+                
+                self.store.dispatch(WithdrawAddressDataAction(data: data))
             }
         }
     }
