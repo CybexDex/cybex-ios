@@ -17,6 +17,8 @@ protocol TransferCoordinatorProtocol {
     func showPicker()
     
     func pop()
+    
+    func openAddTransferAddress(_ sender : TransferAddress)
 }
 
 protocol TransferStateManagerProtocol {
@@ -165,6 +167,15 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
             vc.coordinator = coordinator
             
             newNav.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func openAddTransferAddress(_ sender : TransferAddress) {
+        if let vc = R.storyboard.account.addAddressViewController() {
+            vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
+            vc.address_type = .transfer
+            vc.transferAddress = sender
+            self.rootVC.pushViewController(vc, animated: true)
         }
     }
 }

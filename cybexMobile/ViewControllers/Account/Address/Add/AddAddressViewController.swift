@@ -23,9 +23,12 @@ class AddAddressViewController: BaseViewController {
     
     var withdrawAddress : WithdrawAddress?
     
+    var transferAddress : TransferAddress?
+    
 	override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
+        
         self.coordinator?.setAsset(self.asset)
     }
     
@@ -41,6 +44,10 @@ class AddAddressViewController: BaseViewController {
                 self.containerView.address.title = R.string.localizable.withdraw_address.key.localized()
                 self.containerView.memo.isHidden = true
             }
+            if self.withdrawAddress != nil {
+                self.containerView.data = withdrawAddress
+                self.coordinator?.veritiedAddress()
+            }
         }
         else {
             self.title = R.string.localizable.account_title_add.key.localized()
@@ -48,7 +55,11 @@ class AddAddressViewController: BaseViewController {
             if self.asset != AssetConfiguration.EOS {
                 self.containerView.memo.isHidden = true
             }
-        }
+            if self.transferAddress != nil {
+                self.containerView.data = transferAddress
+                self.coordinator?.veritiedAddress()
+            }
+        }        
     }
     
     func commonObserveState() {
@@ -82,7 +93,7 @@ class AddAddressViewController: BaseViewController {
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidEndEditing, object: self.containerView.address.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else {return}
-            if let text = self.containerView.address.content.text {
+            if let text = self.containerView.address.content.text,text.count > 0 {
                 self.coordinator?.verityAddress(text, type: self.address_type)
             }
         }
@@ -111,8 +122,9 @@ class AddAddressViewController: BaseViewController {
         
         self.containerView.addBtn.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self](tap) in
                 guard let `self` = self else { return }
-                let exit = AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text)
-                if exit.0 {
+
+            let exit = self.address_type == .withdraw ?  AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text).0 : AddressManager.shared.containAddressOfTransfer(self.containerView.address.content.text).0
+                if exit {
                     self.showToastBox(false, message: self.address_type == .withdraw ? R.string.localizable.address_exit.key.localized() : R.string.localizable.account_exit.key.localized())
                 }
                 else {
