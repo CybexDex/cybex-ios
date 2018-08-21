@@ -76,7 +76,7 @@
                             <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="newTheme2ShadowColor">
-                            <color key="value" name="steel20" red="0.471" green="0.506" blue="0.604" alpha="0.200" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -92,6 +92,4 @@
             <point key="canvasLocation" x="-70.5" y="229"/>
         </view>
     </objects>
-    <resources>
-    </resources>
 </document>
