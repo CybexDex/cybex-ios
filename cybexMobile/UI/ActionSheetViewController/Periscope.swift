@@ -45,10 +45,6 @@ public class PeriscopeCell: XLActionController.ActionCell {
         let backgroundView = UIView()
         selectedBackgroundView = backgroundView
     }
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        self.actionTitleLabel?.textColor = UIColor.pastelOrange
-    }
 }
 
 
