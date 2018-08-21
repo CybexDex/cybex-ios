@@ -335,6 +335,7 @@
 "address_asset" = "币种";
 "address_mark" = "标签";
 "address_add" = "添加";
+"address_note_placeholder" = "最多不超过15个字符";
 
 "account_exit" = "该账户已存在";
 "address_exit" = "该地址已存在";

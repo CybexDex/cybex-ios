@@ -12,6 +12,7 @@ import BeareadToast
 import SwiftTheme
 import RxCocoa
 import RxSwift
+import SwifterSwift
 
 class BaseViewController: UIViewController {
     
@@ -188,55 +189,66 @@ extension UIViewController : ShowManagerDelegate {
     
     func showPasswordBox(_ title:String = R.string.localizable.withdraw_unlock_wallet.key.localized()){
         if ShowToastManager.shared.showView != nil {
-            return
+            ShowToastManager.shared.hide(0)
         }
-        ShowToastManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big)
-        ShowToastManager.shared.delegate = self
-        ShowToastManager.shared.showAnimationInView(self.view)
+        SwifterSwift.delay(milliseconds: 100) {
+            ShowToastManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big)
+            ShowToastManager.shared.delegate = self
+            
+            ShowToastManager.shared.showAnimationInView(self.view)
+        }
     }
     
     func showToastBox(_ success:Bool, message:String) {
         if ShowToastManager.shared.showView != nil {
-            return
+            ShowToastManager.shared.hide(0)
         }
-        ShowToastManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: .small_big, showType: .alert_image)
-        ShowToastManager.shared.showAnimationInView(self.view)
-        ShowToastManager.shared.hide(2.0)
+        SwifterSwift.delay(milliseconds: 100) {
+            ShowToastManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: .small_big, showType: .alert_image)
+            ShowToastManager.shared.showAnimationInView(self.view)
+            ShowToastManager.shared.hide(2.0)
+        }
     }
     
     func showTopToastBox(_ success:Bool, message:String) {
         if ShowToastManager.shared.showView != nil {
-            return
+            ShowToastManager.shared.hide(0)
         }
-        ShowToastManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: ShowToastManager.ShowAnimationType.up_down, showType: ShowToastManager.ShowManagerType.sheet_image)
-        ShowToastManager.shared.showAnimationInView(self.view)
-        ShowToastManager.shared.hide(2.0)
+        SwifterSwift.delay(milliseconds: 100) {
+            ShowToastManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: ShowToastManager.ShowAnimationType.up_down, showType: ShowToastManager.ShowManagerType.sheet_image)
+            ShowToastManager.shared.showAnimationInView(self.view)
+            ShowToastManager.shared.hide(2.0)
+        }
     }
     
     func showConfirm(_ title:String, attributes:[NSAttributedString]?, setup: (([StyleLabel]) -> Void)? = nil) {
         if ShowToastManager.shared.showView != nil {
-            return
+            ShowToastManager.shared.hide(0)
         }
-        let subView = StyleContentView(frame: .zero)
-        subView.data = attributes
-        setup?(subView.labels)
-        
-        ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .small_big)
-        ShowToastManager.shared.showAnimationInView(self.view)
-        ShowToastManager.shared.delegate = self
+        SwifterSwift.delay(milliseconds: 100) {
+            let subView = StyleContentView(frame: .zero)
+            subView.data = attributes
+            setup?(subView.labels)
+            
+            ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .small_big)
+            ShowToastManager.shared.showAnimationInView(self.view)
+            ShowToastManager.shared.delegate = self
+        }
     }
     
     
     func showConfirmImage(_ title_image:String, title:String,content:String) {
         if ShowToastManager.shared.showView != nil {
-            return
+            ShowToastManager.shared.hide(0)
         }
-        let subView = CybexShowTitleView(frame: .zero)
-        subView.title.locali = title
-        subView.contentLable.locali = content
-        ShowToastManager.shared.setUp(title_image: title_image, contentView: subView, animationType: .small_big)
-        ShowToastManager.shared.showAnimationInView(self.view)
-        ShowToastManager.shared.delegate = self
+        SwifterSwift.delay(milliseconds: 100) {
+            let subView = CybexShowTitleView(frame: .zero)
+            subView.title.locali = title
+            subView.contentLable.locali = content
+            ShowToastManager.shared.setUp(title_image: title_image, contentView: subView, animationType: .small_big)
+            ShowToastManager.shared.showAnimationInView(self.view)
+            ShowToastManager.shared.delegate = self
+        }
     }
     
     func returnEnsureAction() {

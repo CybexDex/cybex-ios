@@ -13,7 +13,6 @@ class AddressItemView: UIView {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var icon: UIButton!
     @IBOutlet weak var content: UITextView!
-    
     @IBOutlet weak var lineView: UIView!
     
     @IBInspectable var title : String = "" {

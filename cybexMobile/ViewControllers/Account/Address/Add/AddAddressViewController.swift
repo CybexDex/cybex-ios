@@ -12,6 +12,11 @@ import RxCocoa
 import ReSwift
 import SwifterSwift
 
+enum pop_type : Int {
+    case normal = 0
+    case selectVC
+}
+
 class AddAddressViewController: BaseViewController {
     
     @IBOutlet weak var containerView: AddAddressView!
@@ -25,6 +30,7 @@ class AddAddressViewController: BaseViewController {
     
     var transferAddress : TransferAddress?
     
+    var popActionType : pop_type = .normal
 	override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -59,7 +65,8 @@ class AddAddressViewController: BaseViewController {
                 self.containerView.data = transferAddress
                 self.coordinator?.veritiedAddress()
             }
-        }        
+        }
+        configLeftNavButton(nil)
     }
     
     func commonObserveState() {
@@ -74,12 +81,13 @@ class AddAddressViewController: BaseViewController {
                 return false
             })
         }
-        
+     
         (self.containerView.address.content.rx.text.orEmpty <-> self.coordinator!.state.property.address).disposed(by: disposeBag)
         (self.containerView.mark.content.rx.text.orEmpty <-> self.coordinator!.state.property.note).disposed(by: disposeBag)
         (self.containerView.memo.content.rx.text.orEmpty <-> self.coordinator!.state.property.memo).disposed(by: disposeBag)
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidEndEditing, object: self.containerView.mark.content, queue: nil) { [weak self](notification) in
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidEndEditing, object: self.containerView.mark.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
             if let text = self.containerView.mark.content.text ,text.count != 0 {
                 self.coordinator?.verityNote(true)
@@ -93,20 +101,22 @@ class AddAddressViewController: BaseViewController {
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidEndEditing, object: self.containerView.address.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else {return}
-            if let text = self.containerView.address.content.text,text.count > 0 {
-                self.coordinator?.verityAddress(text, type: self.address_type)
+            if let text = self.containerView.address.content.text, text.trimmed.count > 0 {
+                self.containerView.address_state = .Loading
+                self.coordinator?.verityAddress(text.trimmed, type: self.address_type)
+            }else {
+                self.containerView.address_state = .none
             }
         }
         
         self.coordinator?.state.property.addressVailed.asObservable().skip(1).subscribe(onNext: { [weak self](address_success) in
             guard let `self` = self else {return}
             if !address_success {
-                var errosMessage = R.string.localizable.transfer_account_unexist.key.localized()
-                if self.address_type == .withdraw && self.asset != AssetConfiguration.EOS  {
-                   errosMessage = R.string.localizable.withdraw_address_fault.key.localized()
-                }
-                
-                self.showToastBox(false, message: errosMessage)
+                self.containerView.address_state = .Fail
+               
+            }
+            else {
+                self.containerView.address_state = .Success
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
@@ -122,7 +132,11 @@ class AddAddressViewController: BaseViewController {
         
         self.containerView.addBtn.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self](tap) in
                 guard let `self` = self else { return }
-
+            self.view.endEditing(true)
+            
+            if self.containerView.addBtn.isEnable == false {
+                return
+            }
             let exit = self.address_type == .withdraw ?  AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text).0 : AddressManager.shared.containAddressOfTransfer(self.containerView.address.content.text).0
                 if exit {
                     self.showToastBox(false, message: self.address_type == .withdraw ? R.string.localizable.address_exit.key.localized() : R.string.localizable.account_exit.key.localized())
@@ -132,10 +146,9 @@ class AddAddressViewController: BaseViewController {
                     self.showToastBox(true, message: R.string.localizable.address_add_success.key.localized())
                     SwifterSwift.delay(milliseconds: 1000, completion: {
                         ShowToastManager.shared.hide(0)
-                        self.coordinator?.pop()
+                        self.coordinator?.pop(self.popActionType)
                     })
                 }
-                
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     

@@ -394,10 +394,13 @@ func getTransferInfo(_ account: String, quanitity: String, fee: String, memo: St
   
   let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
   
-  return (["<name>\(String(describing: accountTitle)):</name>  <\(contentStyle)>\(String(describing: account))</\(contentStyle)>".set(style: "alertContent"),
+  return memo.trimmed.count != 0 ? (["<name>\(String(describing: accountTitle)):</name>  <\(contentStyle)>\(String(describing: account))</\(contentStyle)>".set(style: "alertContent"),
            "<name>\(String(describing: quantityTitle)):</name><\(contentStyle)>  \(String(describing: quanitity))</\(contentStyle)>".set(style: "alertContent"),
            "<name>\(String(describing: feeTitle)):</name><\(contentStyle)>  \(String(describing: fee))</\(contentStyle)>".set(style: "alertContent"),
-           "<name>\(String(describing: memoTitle)):</name><\(contentStyle)>  \(String(describing: memo))</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])!
+    "<name>\(String(describing: memoTitle)):</name><\(contentStyle)>  \(String(describing: memo))</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])! :
+    (["<name>\(String(describing: accountTitle)):</name>  <\(contentStyle)>\(String(describing: account))</\(contentStyle)>".set(style: "alertContent"),
+      "<name>\(String(describing: quantityTitle)):</name><\(contentStyle)>  \(String(describing: quanitity))</\(contentStyle)>".set(style: "alertContent"),
+      "<name>\(String(describing: feeTitle)):</name><\(contentStyle)>  \(String(describing: fee))</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])!
 }
 
 func confirmDeleteWithDrawAddress(_ info:WithdrawAddress) -> [NSAttributedString] {

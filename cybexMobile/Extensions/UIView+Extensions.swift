@@ -203,6 +203,7 @@ extension UIView{
     set{
       if let newValue = newValue{
         self.addSubview(newValue)
+        R.string.localizable.account.key.localized()
 //        newValue.edgesToSuperview(insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
       }
     }

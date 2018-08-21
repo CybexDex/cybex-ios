@@ -56,6 +56,7 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
             vc.withdrawAddress = withdrawAddress
             vc.asset = withdrawAddress.currency
+            vc.popActionType = .selectVC
             self.rootVC.pushViewController(vc, animated: true)
         }
     }

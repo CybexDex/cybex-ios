@@ -30,7 +30,7 @@ class WithdrawDetailViewController: BaseViewController {
   }
   
   func setupUI(){
-    
+    self.configLeftNavButton(nil)
     self.configRightNavButton(R.image.icDepositNew24Px())
     if let trade = self.trade, let name = app_data.assetInfo[trade.id]?.symbol.filterJade{
       self.title = name + R.string.localizable.withdraw_title.key.localized()
@@ -53,7 +53,6 @@ class WithdrawDetailViewController: BaseViewController {
         self.containerView?.introduce.attributedText = message.set(style: StyleNames.withdraw_introduce.rawValue)
       }
     }
-    
   
     
     if self.trade?.enable == false{

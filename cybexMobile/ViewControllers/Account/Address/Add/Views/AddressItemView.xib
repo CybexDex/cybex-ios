@@ -57,10 +57,10 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LJp-jr-cv5">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="300" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LJp-jr-cv5">
                     <rect key="frame" x="12" y="38" width="317" height="53"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -79,8 +79,8 @@
                 <constraint firstItem="d78-FV-7Fg" firstAttribute="bottom" secondItem="Zq1-g7-aRR" secondAttribute="bottom" id="IgF-tl-5l5"/>
                 <constraint firstItem="gdh-PX-Dek" firstAttribute="leading" secondItem="LJp-jr-cv5" secondAttribute="trailing" constant="10" id="LNa-ev-Q1N"/>
                 <constraint firstItem="LJp-jr-cv5" firstAttribute="top" secondItem="aXj-HU-WbO" secondAttribute="bottom" id="PbG-GI-YAo"/>
-                <constraint firstItem="Zq1-g7-aRR" firstAttribute="top" secondItem="LJp-jr-cv5" secondAttribute="bottom" constant="8" id="SRO-pC-Val"/>
                 <constraint firstItem="gdh-PX-Dek" firstAttribute="top" secondItem="LJp-jr-cv5" secondAttribute="top" constant="8" id="Vr5-vz-XcN"/>
+                <constraint firstItem="Zq1-g7-aRR" firstAttribute="top" secondItem="LJp-jr-cv5" secondAttribute="bottom" constant="8" id="X1H-2w-GC2"/>
                 <constraint firstAttribute="trailing" secondItem="Zq1-g7-aRR" secondAttribute="trailing" constant="12" id="cqI-qI-b8N"/>
                 <constraint firstItem="LJp-jr-cv5" firstAttribute="leading" secondItem="d78-FV-7Fg" secondAttribute="leading" constant="12" id="olp-ZB-PoR"/>
             </constraints>
