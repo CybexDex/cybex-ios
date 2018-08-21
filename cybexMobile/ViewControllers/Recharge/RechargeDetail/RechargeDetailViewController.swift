@@ -162,18 +162,22 @@ class RechargeDetailViewController: BaseViewController {
                         self.isTrueAddress = false
                         self.contentView.errorView.isHidden = false
                         self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key.localized()
+                        self.contentView.addressView.address_state = .Fail
                         return
                     }
                     if let balance = self.balance ,let balance_info = app_data.assetInfo[balance.asset_type]{
                         let assetName = balance_info.symbol.filterJade
+                        self.contentView.addressView.address_state = .Loading
                         RechargeDetailCoordinator.verifyAddress(assetName, address: address, callback: { (success) in
                             if success{
                                 self.isTrueAddress = true
+                                self.contentView.addressView.address_state = .Success
                                 self.contentView.errorView.isHidden = true
                                 if let amount = self.contentView.amountView.content.text,amount.count != 0,let amountDouble = amount.toDouble() {
                                     self.checkAmountIsAvailable(amountDouble)
                                 }
                             }else{
+                                self.contentView.addressView.address_state = .Fail
                                 self.isTrueAddress = false
                                 self.contentView.errorView.isHidden = false
                                 self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key.localized()
@@ -181,6 +185,7 @@ class RechargeDetailViewController: BaseViewController {
                         })
                     }
                 }else{
+                    self.contentView.addressView.address_state = .none
                     self.isTrueAddress = false
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)

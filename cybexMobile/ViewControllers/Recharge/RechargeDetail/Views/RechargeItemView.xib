@@ -12,10 +12,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
+                <outlet property="addressStateImageView" destination="zeV-rC-eWZ" id="4nh-BV-sbq"/>
                 <outlet property="bottomLineView" destination="40u-27-4bk" id="sg4-0k-RI7"/>
                 <outlet property="btn" destination="Syi-GU-VtP" id="9QD-ml-Gh5"/>
                 <outlet property="content" destination="hM9-Sb-Vwa" id="VeX-cg-hOu"/>
                 <outlet property="leftImageView" destination="RQC-vc-ehZ" id="niq-wW-gZu"/>
+                <outlet property="leftView" destination="jag-us-xCY" id="oci-1g-Ttz"/>
                 <outlet property="title" destination="9MT-CT-F1Q" id="XCR-VN-pHC"/>
             </connections>
         </placeholder>
@@ -34,7 +36,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hM9-Sb-Vwa" customClass="ImageTextField" customModule="cybexMobile" customModuleProvider="target">
-                    <rect key="frame" x="12" y="38" width="308" height="24"/>
+                    <rect key="frame" x="12" y="38" width="68" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="RaZ-v9-vjo"/>
                     </constraints>
@@ -43,17 +45,35 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="760" translatesAutoresizingMaskIntoConstraints="NO" id="Nbl-9g-TgY">
-                    <rect key="frame" x="321" y="39" width="30" height="16"/>
+                    <rect key="frame" x="81" y="39" width="270" height="16"/>
                     <subviews>
-                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_address_16_px" translatesAutoresizingMaskIntoConstraints="NO" id="RQC-vc-ehZ">
-                            <rect key="frame" x="-321" y="0.0" width="16" height="16"/>
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zeV-rC-eWZ">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="16"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="16" id="IZx-69-m6E"/>
-                                <constraint firstAttribute="height" constant="16" id="hqk-H0-VdO"/>
+                                <constraint firstAttribute="height" constant="24" id="1MQ-Fj-Qr2"/>
+                                <constraint firstAttribute="width" constant="24" id="qLA-BE-SFo"/>
                             </constraints>
                         </imageView>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jag-us-xCY">
+                            <rect key="frame" x="220" y="-20" width="56" height="56"/>
+                            <subviews>
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_address_16_px" translatesAutoresizingMaskIntoConstraints="NO" id="RQC-vc-ehZ">
+                                    <rect key="frame" x="20" y="20" width="16" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="16" id="cTI-Wt-i1u"/>
+                                        <constraint firstAttribute="height" constant="16" id="sFZ-CM-qVn"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="1KK-78-RbQ"/>
+                                <constraint firstAttribute="width" constant="24" id="5wF-oE-gsX"/>
+                                <constraint firstItem="RQC-vc-ehZ" firstAttribute="centerY" secondItem="jag-us-xCY" secondAttribute="centerY" id="PGc-nN-rhE"/>
+                                <constraint firstItem="RQC-vc-ehZ" firstAttribute="centerX" secondItem="jag-us-xCY" secondAttribute="centerX" id="kYG-bR-9J7"/>
+                            </constraints>
+                        </view>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" verticalHuggingPriority="255" horizontalCompressionResistancePriority="760" verticalCompressionResistancePriority="760" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Syi-GU-VtP">
-                            <rect key="frame" x="0.0" y="0.0" width="30" height="16"/>
+                            <rect key="frame" x="240" y="0.0" width="30" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal">
                                 <color key="titleColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -84,6 +84,7 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
             UserManager.shared.checkUserName(address).done({ (exist) in
                 main {
                     self.store.dispatch(VerificationAddressAction(success:exist))
+                    self.store.dispatch(SetAddressAction(data:address))
                 }
             }).cauterize()
             
@@ -92,6 +93,7 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
                 
                 RechargeDetailCoordinator.verifyAddress(asset_info.symbol.filterJade, address: address, callback: { (isSuccess) in
                     self.store.dispatch(VerificationAddressAction(success:isSuccess))
+                    self.store.dispatch(SetAddressAction(data:address))
                 })
             }
         default:

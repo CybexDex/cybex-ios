@@ -18,6 +18,12 @@ class CornerAndShadowView: UIView {
     var newCornerRadius: CGFloat = 4 {
         didSet {
             cornerView.cornerRadius = newCornerRadius
+            self.subviews.forEach { [weak self](subView) in
+                guard let `self` = self else { return }
+                if subView.shadowOpacity == 0 {
+                    subView.cornerRadius = self.cornerView.cornerRadius
+                }
+            }
         }
     }
     
@@ -105,50 +111,22 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
-    
-    
-    func setUp() {
-        updateHeight()
-    }
-    
-    override var intrinsicContentSize: CGSize {
-        return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
-    }
-    
-    fileprivate func updateHeight() {
-        layoutIfNeeded()
-        self.height = dynamicHeight()
-        invalidateIntrinsicContentSize()
-    }
-    
-    fileprivate func dynamicHeight() -> CGFloat {
-        let lastView = self.subviews.last?.subviews.last
-        return lastView?.bottom ?? 0
-        
-    }
+
     
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
-        self.subviews.forEach { [weak self](subView) in
-            guard let `self` = self else { return }
-            if subView.shadowOpacity == 0 {
-                subView.cornerRadius = self.cornerView.cornerRadius
-            }
-        }
+        
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
-        setUp()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
-        setUp()
     }
     
     fileprivate func loadViewFromNib() {

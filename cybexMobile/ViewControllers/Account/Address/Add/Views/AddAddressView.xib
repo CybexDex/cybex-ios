@@ -16,7 +16,6 @@
                 <outlet property="address" destination="I7H-v2-JhM" id="OQG-Z6-KnF"/>
                 <outlet property="asset" destination="9L5-t9-1aA" id="4Nf-OL-pok"/>
                 <outlet property="assetShadowView" destination="quF-zt-a0w" id="rAG-bA-GPN"/>
-                <outlet property="contentShadowView" destination="6Av-AI-BRH" id="URu-Zg-vKE"/>
                 <outlet property="mark" destination="fr7-gO-noA" id="gbK-oP-z3o"/>
                 <outlet property="memo" destination="whW-p3-HOf" id="Byn-gb-SC0"/>
             </connections>
@@ -46,7 +45,7 @@
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="string" keyPath="name" value="address_asset"/>
                                         <userDefinedRuntimeAttribute type="number" keyPath="SOURCE_TYPE">
-                                            <integer key="value" value="2"/>
+                                            <integer key="value" value="0"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
@@ -57,8 +56,31 @@
                                 <constraint firstItem="9L5-t9-1aA" firstAttribute="top" secondItem="quF-zt-a0w" secondAttribute="top" id="dDn-dZ-bbL"/>
                                 <constraint firstAttribute="bottom" secondItem="9L5-t9-1aA" secondAttribute="bottom" id="sZk-FO-XOA"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="newCornerRadius">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="newShadowRadius">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="size" keyPath="newShadowOffset">
+                                    <size key="value" width="0.0" height="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="newSpread">
+                                    <real key="value" value="-4"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="newTheme1ShadowColor">
+                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="newTheme2ShadowColor">
+                                    <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="newShadowOpcity">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </view>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Av-AI-BRH">
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Av-AI-BRH" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="92" width="349" height="291"/>
                             <subviews>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G3z-pT-NHT">
@@ -120,8 +142,8 @@
                                         <constraint firstItem="IM7-uO-yfx" firstAttribute="top" secondItem="G3z-pT-NHT" secondAttribute="top" id="vcG-8H-sVt"/>
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="4"/>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
@@ -133,14 +155,26 @@
                                 <constraint firstItem="G3z-pT-NHT" firstAttribute="leading" secondItem="6Av-AI-BRH" secondAttribute="leading" id="sjL-NT-CK1"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                    <size key="value" width="0.0" height="8"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                <userDefinedRuntimeAttribute type="number" keyPath="newCornerRadius">
                                     <real key="value" value="4"/>
                                 </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <userDefinedRuntimeAttribute type="color" keyPath="newTheme1ShadowColor">
+                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="newTheme2ShadowColor">
+                                    <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="newShadowRadius">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="size" keyPath="newShadowOffset">
+                                    <size key="value" width="0.0" height="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="newShadowOpcity">
                                     <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="newSpread">
+                                    <real key="value" value="-4"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>

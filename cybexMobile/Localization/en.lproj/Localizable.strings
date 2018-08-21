@@ -335,8 +335,8 @@
 
 //zsy end
 
-"recode_nodata" = "No record";
-"balance_nodata" = "No assert";
+"recode_nodata" = "No Record";
+"balance_nodata" = "No Asset";
 
 "Loading more" = "Loading more";
 "No more data" = "No more data";

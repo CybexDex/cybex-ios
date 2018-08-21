@@ -25,7 +25,6 @@ class AddAddressView: UIView {
     @IBOutlet weak var addBtn: Button!
     
     @IBOutlet weak var assetShadowView: CornerAndShadowView!
-    @IBOutlet weak var contentShadowView: UIView!
     
     
     fileprivate var activityIndicator : UIActivityIndicatorView?
@@ -71,9 +70,9 @@ class AddAddressView: UIView {
     }
     
     func startAnimation() {
-        self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-        self.activityIndicator?.activityIndicatorViewStyle = ThemeManager.currentThemeIndex == 0 ? .white : .gray
-        self.activityIndicator?.center = self.address.icon.center
+        self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: self.address.icon.width, height: self.address.icon.height))
+        self.activityIndicator?.activityIndicatorViewStyle = .gray
+        self.activityIndicator?.center = CGPoint(x: self.address.icon.width * 0.5, y: self.address.icon.height * 0.5)
         self.address.icon.addSubview(self.activityIndicator!);
         self.activityIndicator?.startAnimating()
     }
@@ -84,8 +83,6 @@ class AddAddressView: UIView {
     
     fileprivate func setup() {
         updateHeight()
-        assetShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20
-        contentShadowView.layer.shadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10.cgColor : UIColor.steel20.cgColor
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidChange, object: self.address.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else {return}
