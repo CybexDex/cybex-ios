@@ -89,9 +89,13 @@ extension WithdrawAddressViewController: UITableViewDelegate, UITableViewDataSou
 
 extension WithdrawAddressViewController {
     @objc func AddressCellViewDidClicked(_ data:[String: Any]) {
-        if let addressdata = data["data"] as? WithdrawAddress {
+        if let addressdata = data["data"] as? WithdrawAddress, let view = data["self"] as? AddressCellView {
             self.coordinator?.select(addressdata)
-            self.coordinator?.openActionVC()
+            
+            view.isSelected = true
+            self.coordinator?.openActionVC({
+                view.isSelected = false
+            })
         }
     }
     

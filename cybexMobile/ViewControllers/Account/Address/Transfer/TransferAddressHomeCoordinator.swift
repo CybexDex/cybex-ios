@@ -15,7 +15,7 @@ import Dollar
 
 protocol TransferAddressHomeCoordinatorProtocol {
     func openAddTransferAddress()
-    func openActionVC()
+    func openActionVC(_ dismissCallback:CommonCallback?)
 }
 
 protocol TransferAddressHomeStateManagerProtocol {
@@ -56,17 +56,20 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeCoordinatorProtocol
         }
     }
     
-    func openActionVC() {
+    func openActionVC(_ dismissCallback:CommonCallback?) {
         let actionController = PeriscopeActionController()
+        actionController.tapMaskCallback = dismissCallback
         
         actionController.addAction(Action(R.string.localizable.copy.key.localized(), style: .destructive, handler: {[weak self] action in
             guard let `self` = self else {return}
             self.copy()
+            dismissCallback?()
         }))
         
         actionController.addAction(Action(R.string.localizable.delete.key.localized(), style: .destructive, handler: {[weak self] action in
             guard let `self` = self else {return}
             self.confirmdelete()
+            dismissCallback?()
         }))
         
         actionController.addSection(PeriscopeSection())
@@ -74,6 +77,7 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeCoordinatorProtocol
             guard let `self` = self else {return}
             
             self.select(nil)
+            dismissCallback?()
         }))
         
         self.rootVC.topViewController?.present(actionController, animated: true, completion: nil)
