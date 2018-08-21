@@ -60,7 +60,6 @@ public class PeriscopeSection: Section<String, Void> {
 }
 
 public class PeriscopeHeader: UICollectionReusableView {
-    
     lazy var label: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(red: 120/255.0, green: 129/255.0, blue: 154/255.0, alpha: 1.0)
@@ -82,7 +81,8 @@ public class PeriscopeHeader: UICollectionReusableView {
 }
 
 public class PeriscopeActionController: ActionController<PeriscopeCell, String, PeriscopeHeader, String, UICollectionReusableView, Void> {
-    
+    var tapMaskCallback:CommonCallback?
+
     var selectedIndex : IndexPath?
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -131,6 +131,10 @@ public class PeriscopeActionController: ActionController<PeriscopeCell, String, 
                 cell.actionTitleLabel?.textColor = UIColor.pastelOrange
             }
         }
+    }
+    
+    public override func onWillDismissView() {
+        tapMaskCallback?()
     }
 }
 

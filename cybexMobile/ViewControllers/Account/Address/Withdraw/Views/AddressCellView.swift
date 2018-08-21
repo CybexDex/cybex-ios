@@ -31,7 +31,7 @@ class AddressCellView: BaseView {
     }
     
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.AddressCellViewDidClicked.rawValue, userinfo: ["data": self.data ?? ""])
+        self.next?.sendEventWith(Event.AddressCellViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }
 
