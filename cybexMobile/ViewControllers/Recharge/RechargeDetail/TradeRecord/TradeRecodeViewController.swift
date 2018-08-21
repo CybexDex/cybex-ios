@@ -42,7 +42,6 @@ class TradeRecodeViewController: BaseViewController {
     self.title = record_type == .DEPOSIT ? R.string.localizable.deposit_list.key.localized() : R.string.localizable.withdraw_list.key.localized()
     let nibString = String(describing: RecodeCell.self)
     self.tableView.register(UINib(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
-    self.configLeftNavButton(nil)
   }
   
   func setupEvent() {
