@@ -24,6 +24,10 @@ class AddAddressView: UIView {
     @IBOutlet weak var memo: AddressItemView!
     @IBOutlet weak var addBtn: Button!
     
+    @IBOutlet weak var assetShadowView: CornerAndShadowView!
+    @IBOutlet weak var contentShadowView: UIView!
+    
+    
     fileprivate var activityIndicator : UIActivityIndicatorView?
     var data: Any? {
         didSet {
@@ -61,7 +65,6 @@ class AddAddressView: UIView {
                     self.stop()
                     self.address.icon.setBackgroundImage(R.image.check_complete(), for: .normal)
                     break
-                    
                 }
             }
         }
@@ -81,6 +84,8 @@ class AddAddressView: UIView {
     
     fileprivate func setup() {
         updateHeight()
+        assetShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20
+        contentShadowView.layer.shadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10.cgColor : UIColor.steel20.cgColor
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidChange, object: self.address.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else {return}

@@ -372,3 +372,5 @@
 "account_nodata"       = "暂无提现账户";
 
 "account_transfer_nodata"       = "暂无转账账户";
+
+"address_delete_confirm" = "删除确认";

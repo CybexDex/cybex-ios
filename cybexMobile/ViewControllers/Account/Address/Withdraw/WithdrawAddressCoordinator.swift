@@ -157,7 +157,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
     
     func confirmdelete() {
         if let addressData = self.state.property.selectedAddress.value {
-            self.rootVC.topViewController?.showConfirm(R.string.localizable.confirm(), attributes: confirmDeleteWithDrawAddress(addressData), setup: { (labels) in
+            self.rootVC.topViewController?.showConfirm(R.string.localizable.address_delete_confirm.key.localized(), attributes: confirmDeleteWithDrawAddress(addressData), setup: { (labels) in
                 for label in labels {
                     label.content.numberOfLines = 1
                     label.content.lineBreakMode = .byTruncatingMiddle

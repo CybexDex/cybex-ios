@@ -120,7 +120,7 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtoco
     
     func confirmdelete() {
         if let addressData = self.state.property.selectedAddress.value {
-            self.rootVC.topViewController?.showConfirm(R.string.localizable.confirm(), attributes: confirmDeleteTransferAddress(addressData), setup: { (labels) in
+            self.rootVC.topViewController?.showConfirm(R.string.localizable.address_delete_confirm.key.localized(), attributes: confirmDeleteTransferAddress(addressData), setup: { (labels) in
                 for label in labels {
                     label.content.numberOfLines = 1
                     label.content.lineBreakMode = .byTruncatingMiddle

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftTheme
 
 class CornerAndShadowView: UIView {
   
