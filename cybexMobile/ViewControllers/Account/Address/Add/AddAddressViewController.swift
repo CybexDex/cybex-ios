@@ -93,6 +93,7 @@ class AddAddressViewController: BaseViewController {
                 self.coordinator?.verityNote(true)
                 if text.count > 15 {
                     self.containerView.mark.content.text = text.substring(from: 0, length: 15)
+                    self.coordinator?.setAsset(self.containerView.mark.content.text!)
                 }
             }else {
                 self.coordinator?.verityNote(false)

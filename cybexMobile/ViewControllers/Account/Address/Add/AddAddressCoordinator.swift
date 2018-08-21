@@ -36,6 +36,8 @@ protocol AddAddressStateManagerProtocol {
     
     func veritiedAddress()
     
+    func setNoteAction(_ note : String)
+    
 }
 
 class AddAddressCoordinator: AccountRootCoordinator {
@@ -117,5 +119,9 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
         else {
             AddressManager.shared.addTransferAddress(TransferAddress(id: AddressManager.shared.getUUID(), name: self.state.property.note.value, address: self.state.property.address.value))
         }
+    }
+    
+    func setNoteAction(_ note : String) {
+        self.store.dispatch(SetNoteAction(data : note))
     }
 }
