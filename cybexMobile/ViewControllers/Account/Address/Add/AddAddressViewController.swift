@@ -66,7 +66,6 @@ class AddAddressViewController: BaseViewController {
                 self.coordinator?.veritiedAddress()
             }
         }
-        configLeftNavButton(nil)
     }
     
     func commonObserveState() {

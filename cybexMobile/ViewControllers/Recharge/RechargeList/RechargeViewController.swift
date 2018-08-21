@@ -39,7 +39,6 @@ class RechargeViewController: BaseViewController {
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
     tableView.tableFooterView = UIView()
     rechargeSegmentView.segmentControl.selectedSegmentIndex = selectedIndex.rawValue
-    self.configLeftNavButton(nil)
   }
   
   func commonObserveState() {

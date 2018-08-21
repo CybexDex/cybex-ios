@@ -80,7 +80,6 @@ class RechargeDetailViewController: BaseViewController {
         self.contentView.balance  = self.balance
         
         self.configRightNavButton(R.image.icWithdrawNew24Px())
-        self.configLeftNavButton(nil)
     }
     
     override func rightAction(_ sender: UIButton) {
