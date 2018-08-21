@@ -412,17 +412,17 @@ func confirmDeleteWithDrawAddress(_ info:WithdrawAddress) -> [NSAttributedString
     
     var result:[NSAttributedString] = []
     
-    let title = "<\(contentStyle)>" + (isEOS ? R.string.localizable.delete_confirm_account() : R.string.localizable.delete_confirm_address()) + "</\(contentStyle)>"
+    let title = "<\(contentStyle)>" + (isEOS ? R.string.localizable.delete_confirm_account.key.localized() : R.string.localizable.delete_confirm_address.key.localized()) + "</\(contentStyle)>"
     result.append(title.set(style: StyleNames.alertContent.rawValue)!)
     
-    let note = "<name>" + R.string.localizable.address_mark() + "：</name>" + "<\(contentStyle)>" + "\(info.name)" + "</\(contentStyle)>"
+    let note = "<name>" + R.string.localizable.address_mark.key.localized() + "：</name>" + "<\(contentStyle)>" + "\(info.name)" + "</\(contentStyle)>"
     result.append(note.set(style: StyleNames.alertContent.rawValue)!)
 
-    let address = "<name>" + (isEOS ? R.string.localizable.accountTitle() : R.string.localizable.address()) + "：</name>" + "<\(contentStyle)>" + "\(info.address)" + "</\(contentStyle)>"
+    let address = "<name>" + (isEOS ? R.string.localizable.accountTitle.key.localized() : R.string.localizable.address.key.localized()) + "：</name>" + "<\(contentStyle)>" + "\(info.address)" + "</\(contentStyle)>"
     result.append(address.set(style: StyleNames.alertContent.rawValue)!)
 
     if existMemo {
-        let memo = "<name>" + R.string.localizable.withdraw_memo() + "：</name>" + "<\(contentStyle)>" + "\(info.memo!)" + "</\(contentStyle)>"
+        let memo = "<name>" + R.string.localizable.withdraw_memo.key.localized() + "：</name>" + "<\(contentStyle)>" + "\(info.memo!)" + "</\(contentStyle)>"
         result.append(memo.set(style: StyleNames.alertContent.rawValue)!)
     }
     
@@ -434,13 +434,13 @@ func confirmDeleteTransferAddress(_ info:TransferAddress) -> [NSAttributedString
     
     var result:[NSAttributedString] = []
 
-    let title = "<\(contentStyle)>" + R.string.localizable.delete_confirm_account() + "</\(contentStyle)>"
+    let title = "<\(contentStyle)>" + R.string.localizable.delete_confirm_account.key.localized() + "</\(contentStyle)>"
     result.append(title.set(style: StyleNames.alertContent.rawValue)!)
 
-    let note = "<name>" + R.string.localizable.address_mark() + "：</name>" + "<\(contentStyle)>" + "\(info.name)" + "</\(contentStyle)>"
+    let note = "<name>" + R.string.localizable.address_mark.key.localized() + "：</name>" + "<\(contentStyle)>" + "\(info.name)" + "</\(contentStyle)>"
     result.append(note.set(style: StyleNames.alertContent.rawValue)!)
 
-    let address = "<name>" + R.string.localizable.accountTitle() + "：</name>" + "<\(contentStyle)>" + "\(info.address)" + "</\(contentStyle)>"
+    let address = "<name>" + R.string.localizable.accountTitle.key.localized() + "：</name>" + "<\(contentStyle)>" + "\(info.address)" + "</\(contentStyle)>"
     result.append(address.set(style: StyleNames.alertContent.rawValue)!)
 
     

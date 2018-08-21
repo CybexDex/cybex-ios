@@ -178,7 +178,7 @@
                                                         <real key="value" value="4"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="size" keyPath="newShadowOffset">
-                                                        <size key="value" width="0.0" height="80"/>
+                                                        <size key="value" width="0.0" height="8"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="newShadowOpcity">
                                                         <real key="value" value="1"/>

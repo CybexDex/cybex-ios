@@ -132,5 +132,12 @@ public class PeriscopeActionController: ActionController<PeriscopeCell, String, 
     public override func onWillDismissView() {
         tapMaskCallback?()
     }
+    
+    public override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        super.collectionView(collectionView, didSelectItemAt: indexPath)
+        if let cell = collectionView.cellForItem(at: indexPath) as? PeriscopeCell {
+            cell.actionTitleLabel?.textColor = UIColor.pastelOrange
+        }
+    }
 }
 

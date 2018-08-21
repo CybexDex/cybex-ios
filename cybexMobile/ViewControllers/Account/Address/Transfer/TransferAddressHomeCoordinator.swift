@@ -118,7 +118,7 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtoco
         if let addressData = self.state.property.selectedAddress.value {
             UIPasteboard.general.string = addressData.address
             
-            self.rootVC.topViewController?.showToastBox(true, message: R.string.localizable.copied())
+            self.rootVC.topViewController?.showToastBox(true, message: R.string.localizable.copied.key.localized())
         }
     }
     
@@ -138,7 +138,7 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtoco
             AddressManager.shared.removeTransferAddress(addressData.id)
             
             Async.main {
-                self.rootVC.topViewController?.showToastBox(true, message: R.string.localizable.deleted())
+                self.rootVC.topViewController?.showToastBox(true, message: R.string.localizable.deleted.key.localized())
             }
         }
         
