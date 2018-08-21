@@ -13,6 +13,7 @@ import TinyConstraints
 class SectionCornerViewView: UIView {
     
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var shadowView: CornerAndShadowView!
     
     var data: Any? {
         didSet {
@@ -21,7 +22,7 @@ class SectionCornerViewView: UIView {
     }
     
     fileprivate func setup() {
-        updateHeight()        
+        updateHeight()
     }
     
     override var intrinsicContentSize: CGSize {
