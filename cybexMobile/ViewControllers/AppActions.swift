@@ -10,6 +10,21 @@ import Foundation
 import ReSwift
 import RxCocoa
 
+enum PageState {
+    case initial
+    case loading
+    case refreshing
+    case loadMore
+    case noMore
+    case noData
+    case normal
+    case error(Error)
+}
+
+protocol BaseState: StateType {
+    var pageState:BehaviorRelay<PageState> { get set }
+}
+
 struct AppState:StateType {
   var property: AppPropertyState
 }

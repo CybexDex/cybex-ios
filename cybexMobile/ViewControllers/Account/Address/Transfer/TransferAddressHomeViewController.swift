@@ -41,23 +41,7 @@ class TransferAddressHomeViewController: BaseViewController {
         self.coordinator?.openAddTransferAddress()
     }
     
-    func commonObserveState() {
-        coordinator?.subscribe(errorSubscriber) { sub in
-            return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
-        
-        coordinator?.subscribe(loadingSubscriber) { sub in
-            return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
-    }
-    
     override func configureObserveState() {
-        commonObserveState()
-        
         self.coordinator?.state.property.data.asObservable().subscribe(onNext: {[weak self] (data) in
             guard let `self` = self else { return }
             

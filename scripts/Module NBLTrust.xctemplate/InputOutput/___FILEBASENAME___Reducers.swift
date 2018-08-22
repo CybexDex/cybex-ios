@@ -10,19 +10,14 @@ import UIKit
 import ReSwift
 
 func ___VARIABLE_productName:identifier___Reducer(action:Action, state:___VARIABLE_productName:identifier___State?) -> ___VARIABLE_productName:identifier___State {
-    return ___VARIABLE_productName:identifier___State(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: ___VARIABLE_productName:identifier___PropertyReducer(states?.property, action: action), callback:state?.callback ?? ___VARIABLE_productName:identifier___CallbackState())
-}
-
-func ___VARIABLE_productName:identifier___PropertyReducer(_ state: ___VARIABLE_productName:identifier___PropertyState?, action: Action) -> ___VARIABLE_productName:identifier___PropertyState {
-    let state = state ?? ___VARIABLE_productName:identifier___PropertyState()
-    
+    let state = state ?? ___VARIABLE_productName:identifier___State()
+        
     switch action {
     default:
         break
     }
-    
+        
     return state
 }
-
 
 

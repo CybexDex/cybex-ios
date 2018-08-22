@@ -41,41 +41,24 @@ class RechargeViewController: BaseViewController {
     rechargeSegmentView.segmentControl.selectedSegmentIndex = selectedIndex.rawValue
   }
   
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
+  override func configureObserveState() {
     self.coordinator?.state.property.depositIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
-      guard let `self` = self else {return}
-      self.depositData = self.filterData(data)
-      if self.selectedIndex == .RECHARGE{
-        self.endLoading()
-        self.tableView.reloadData()
-      }
-    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        guard let `self` = self else {return}
+        self.depositData = self.filterData(data)
+        if self.selectedIndex == .RECHARGE{
+            self.endLoading()
+            self.tableView.reloadData()
+        }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
     self.coordinator?.state.property.withdrawIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
-      guard let `self` = self else { return }
-      self.withdrawData = self.filterData(data)
-      if self.selectedIndex == .WITHDRAW{
-        self.endLoading()
-        self.tableView.reloadData()
-      }
-    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-  }
-  
-  override func configureObserveState() {
-    commonObserveState()
-    
+        guard let `self` = self else { return }
+        self.withdrawData = self.filterData(data)
+        if self.selectedIndex == .WITHDRAW{
+            self.endLoading()
+            self.tableView.reloadData()
+        }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   
   func filterData(_ trades:[Trade]) ->[Trade] {

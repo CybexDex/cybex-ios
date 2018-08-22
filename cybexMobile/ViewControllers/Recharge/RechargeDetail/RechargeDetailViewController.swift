@@ -227,21 +227,8 @@ class RechargeDetailViewController: BaseViewController {
             }
         }
     }
-    
-    func commonObserveState() {
-        coordinator?.subscribe(errorSubscriber) { sub in
-            return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
-        
-        coordinator?.subscribe(loadingSubscriber) { sub in
-            return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
-        
-        
+
+    override func configureObserveState() {
         self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext: {[weak self] (withdrawInfo) in
             guard let `self` = self, let data = withdrawInfo else { return }
             self.endLoading()
@@ -278,12 +265,6 @@ class RechargeDetailViewController: BaseViewController {
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
-        
-    }
-    
-    
-    override func configureObserveState() {
-        commonObserveState()
         (self.contentView.memoView.content.rx.text.orEmpty <-> self.coordinator!.state.property.memo).disposed(by: disposeBag)
     }
     

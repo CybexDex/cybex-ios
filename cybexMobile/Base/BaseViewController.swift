@@ -15,16 +15,6 @@ import RxSwift
 import SwifterSwift
 
 class BaseViewController: UIViewController {
-    
-    lazy var errorSubscriber: BlockSubscriber<String?> = BlockSubscriber {[weak self] s in
-        guard let `self` = self else { return }
-        
-    }
-    
-    lazy var loadingSubscriber: BlockSubscriber<Bool> = BlockSubscriber {[weak self] s in
-        guard let `self` = self else { return }
-    }
-    
     weak var toast: BeareadToast?
     var table:UITableView?
     var rightNavButton: UIButton?

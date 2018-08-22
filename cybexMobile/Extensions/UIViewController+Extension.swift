@@ -12,6 +12,10 @@ import XLActionController
 
 
 extension UIViewController {
+    @objc func refreshViewController() {
+        
+    }
+    
   func showAlert(_ message:String, buttonTitle:String) {
     let vc = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.alert)
     let action = UIAlertAction(title: buttonTitle, style: UIAlertActionStyle.default, handler: nil)

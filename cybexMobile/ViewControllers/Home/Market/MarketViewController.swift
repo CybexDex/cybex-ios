@@ -293,22 +293,7 @@ class MarketViewController: BaseViewController {
     }
   }
   
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      sub.select { state in state.errorMessage }.skipRepeats({ (_, _) -> Bool in
-        false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      sub.select { state in state.isLoading }.skipRepeats({ (_, _) -> Bool in
-        false
-      })
-    }
-  }
-  
   override func configureObserveState() {
-    commonObserveState()
     
     app_data.otherRequestRelyData.asObservable()
       .subscribe(onNext: { [weak self] _ in

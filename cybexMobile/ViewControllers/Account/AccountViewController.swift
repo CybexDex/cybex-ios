@@ -116,24 +116,7 @@ class AccountViewController: BaseViewController {
     self.coordinator?.openSetting()
   }
   
-  
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-  }
-  
   override func configureObserveState() {
-    commonObserveState()
-    
     UserManager.shared.account.asObservable()
       .skip(1)
       .throttle(10, latest: true, scheduler: MainScheduler.instance)

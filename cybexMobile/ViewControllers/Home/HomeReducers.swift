@@ -9,12 +9,8 @@
 import UIKit
 import ReSwift
 
-func HomeReducer(action:Action, state:HomeState?) -> HomeState {
-    return HomeState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: HomePropertyReducer(state?.property, action: action))
-}
-
-func HomePropertyReducer(_ state: HomePropertyState?, action: Action) -> HomePropertyState {
-    let state = state ?? HomePropertyState()
+func HomeReducer(action: Action, state: HomeState?) -> HomeState {
+    let state = state ?? HomeState()
     
     switch action {
     default:
