@@ -22,6 +22,7 @@ struct WithdrawAddressState: StateType {
 struct WithdrawAddressPropertyState {
     var data: BehaviorRelay<[WithdrawAddress]> = BehaviorRelay(value: [])
     var selectedAddress: BehaviorRelay<WithdrawAddress?> = BehaviorRelay(value:nil)
+    var selectedAsset : BehaviorRelay<String?> = BehaviorRelay(value: "")
 }
 
 struct WithdrawAddressDataAction: Action {
@@ -33,6 +34,10 @@ struct WithdrawAddressSelectDataAction: Action {
 }
 
 struct WithdrawAddressCallbackState {
+}
+
+struct SetSelectedAssetAction : Action {
+    var asset : String
 }
 
 //MARK: - Action Creator

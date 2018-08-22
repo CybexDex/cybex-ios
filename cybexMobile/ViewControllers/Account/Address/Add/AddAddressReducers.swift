@@ -22,7 +22,6 @@ func AddAddressPropertyReducer(_ state: AddAddressPropertyState?, action: Action
         
     case let action as VerificationAddressAction :
         state.addressVailed.accept(action.success)
-        
     case let action as VerificationNoteAction:
         state.noteVailed.accept(action.data)
     case let action as SetNoteAction:

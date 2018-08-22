@@ -263,6 +263,7 @@
                         <viewLayoutGuide key="safeArea" id="WV2-9X-HlH"/>
                     </view>
                     <connections>
+                        <outlet property="leftLabel" destination="tIk-Mt-c8W" id="BRt-HL-Ufg"/>
                         <outlet property="rightLabel" destination="nFx-hE-4Zf" id="y6r-VX-mWm"/>
                         <outlet property="tableView" destination="ldd-37-Yj5" id="XSh-Ic-x3K"/>
                     </connections>

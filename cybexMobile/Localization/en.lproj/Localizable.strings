@@ -296,13 +296,13 @@
 "transfer_detail_mome" = "Memo";
 "transfer_detail_click" = "Click to view";
 "transfer_detail_nodata" = "None";
-"transfer_ensure_title" = "CONFIRM";
+"transfer_ensure_title" = "CONFIRMATION";
 
 
 //转账
 "transfer_title" = "Transfer";
 "transfer_transfer" = "Send";
-"transfer_account" = "Account Name";
+"transfer_account_title" = "Account Name";
 "transfer_account_pla" = "To Account name";
 "transfer_crypto" = "Crypto";
 "transfer_crypto_pla" = "Please select crypto type";
@@ -354,6 +354,7 @@
 
 "transfer_account" = "Transfer Account";
 "address_or_account" = "Note/Account";
+"account_or_address" = "Note/Address";
 
 "account_exit" = "The account is already existed";
 "address_exit" = "The address is already existed";
@@ -396,5 +397,5 @@
 "account_nodata"       = "No withdraw account";
 "account_transfer_nodata"       = "No transfer account";
 
-"address_delete_confirm" = "Confirm";
+"address_delete_confirm" = "CONFIRMATION";
 

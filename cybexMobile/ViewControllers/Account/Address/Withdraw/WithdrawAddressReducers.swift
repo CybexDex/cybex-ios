@@ -21,6 +21,8 @@ func WithdrawAddressPropertyReducer(_ state: WithdrawAddressPropertyState?, acti
         state.data.accept(action.data)
     case let action as WithdrawAddressSelectDataAction:
         state.selectedAddress.accept(action.data)
+    case let action as SetSelectedAssetAction:
+        state.selectedAsset.accept(action.asset)
     default:
         break
     }
