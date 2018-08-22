@@ -17,24 +17,59 @@ class ___VARIABLE_productName:identifier___ViewController: BaseViewController {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupData()
+        setupUI()
+        setupEvent()
     }
     
-    func commonObserveState() {
-        coordinator?.subscribe(errorSubscriber) { sub in
-            return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func refreshViewController() {
         
-        coordinator?.subscribe(loadingSubscriber) { sub in
-            return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
+    }
+    
+    func setupUI() {
+        
+    }
+
+    func setupData() {
+        
+    }
+    
+    func setupEvent() {
+        
     }
     
     override func configureObserveState() {
-        commonObserveState()
         
     }
 }
+
+//MARK: - TableViewDelegate
+
+//extension ___VARIABLE_productName:identifier___ViewController: UITableViewDataSource, UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 10
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//          let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.<#cell#>.name, for: indexPath) as! <#cell#>
+//
+//        return cell
+//    }
+//}
+
+
+//MARK: - View Event
+
+//extension ___VARIABLE_productName:identifier___ViewController {
+//    @objc func <#view#>DidClicked(_ data:[String: Any]) {
+//        if let addressdata = data["data"] as? <#model#>, let view = data["self"] as? <#view#>  {
+//
+//        }
+//    }
+//}
+

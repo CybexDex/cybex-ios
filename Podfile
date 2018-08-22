@@ -99,6 +99,7 @@ def ui
     pod 'GrowingTextView'
     pod 'XLActionController'
     pod 'ESPullToRefresh'
+    pod 'FSPagerView'
 end
 
 def other

@@ -73,23 +73,8 @@ class YourPortfolioViewController: BaseViewController {
     let cell = R.nib.yourPortfolioCell.name
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
   }
-  
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-  }
-  
+
   override func configureObserveState() {
-    commonObserveState()
     
     UserManager.shared.balances.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
       guard let `self` = self else { return }

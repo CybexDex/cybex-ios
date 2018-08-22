@@ -17,7 +17,12 @@ class ___VARIABLE_productName:identifier___View: BaseView {
     override func setup() {
         super.setup()
         
+        setupUI()
         setupSubViewEvent()
+    }
+    
+    func setupUI() {
+        
     }
     
     func setupSubViewEvent() {

@@ -68,19 +68,7 @@ class AddAddressViewController: BaseViewController {
         }
     }
     
-    func commonObserveState() {
-        coordinator?.subscribe(errorSubscriber) { sub in
-            return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
-        
-        coordinator?.subscribe(loadingSubscriber) { sub in
-            return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-                return false
-            })
-        }
-     
+    override func configureObserveState() {
         (self.containerView.address.content.rx.text.orEmpty <-> self.coordinator!.state.property.address).disposed(by: disposeBag)
         (self.containerView.mark.content.rx.text.orEmpty <-> self.coordinator!.state.property.note).disposed(by: disposeBag)
         (self.containerView.memo.content.rx.text.orEmpty <-> self.coordinator!.state.property.memo).disposed(by: disposeBag)
@@ -118,7 +106,7 @@ class AddAddressViewController: BaseViewController {
             else {
                 self.containerView.address_state = .Success
             }
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         
         Observable.combineLatest(self.coordinator!.state.property.addressVailed.asObservable(), self.coordinator!.state.property.noteVailed.asObservable()).subscribe(onNext: { [weak self](address_success,note_success) in
@@ -128,33 +116,29 @@ class AddAddressViewController: BaseViewController {
                 return
             }
             self.containerView.addBtn.isEnable = true
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         self.containerView.addBtn.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self](tap) in
-                guard let `self` = self else { return }
+            guard let `self` = self else { return }
             self.view.endEditing(true)
             
             if self.containerView.addBtn.isEnable == false {
                 return
             }
             let exit = self.address_type == .withdraw ?  AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text).0 : AddressManager.shared.containAddressOfTransfer(self.containerView.address.content.text).0
-                if exit {
-                    if self.isVisible {
-                        self.showToastBox(false, message: self.address_type == .withdraw ? R.string.localizable.address_exit.key.localized() : R.string.localizable.account_exit.key.localized())
-                    }
+            if exit {
+                if self.isVisible {
+                    self.showToastBox(false, message: self.address_type == .withdraw ? R.string.localizable.address_exit.key.localized() : R.string.localizable.account_exit.key.localized())
                 }
-                else {
-                    self.coordinator?.addAddress(self.address_type)
-                    self.showToastBox(true, message: R.string.localizable.address_add_success.key.localized())
-                    SwifterSwift.delay(milliseconds: 1000, completion: {
-                        ShowToastManager.shared.hide(0)
-                        self.coordinator?.pop(self.popActionType)
-                    })
-                }
+            }
+            else {
+                self.coordinator?.addAddress(self.address_type)
+                self.showToastBox(true, message: R.string.localizable.address_add_success.key.localized())
+                SwifterSwift.delay(milliseconds: 1000, completion: {
+                    ShowToastManager.shared.hide(0)
+                    self.coordinator?.pop(self.popActionType)
+                })
+            }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    }
-    
-    override func configureObserveState() {
-        commonObserveState()
     }
 }

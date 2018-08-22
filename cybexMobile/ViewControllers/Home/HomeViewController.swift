@@ -102,22 +102,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     super.viewWillAppear(animated)
   }
   
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-  }
-  
   override func configureObserveState() {
-    commonObserveState()
     
     app_data.data.asObservable().filter({[weak self] (s) -> Bool in
       guard let `self` = self else { return false}

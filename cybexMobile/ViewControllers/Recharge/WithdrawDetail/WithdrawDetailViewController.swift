@@ -66,44 +66,29 @@ class WithdrawDetailViewController: BaseViewController {
     self.coordinator?.openDepositRecode((self.trade?.id)!)
   }
   
-  
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext: {[weak self] (addressInfo) in
-      guard let `self` = self else{return}
-      self.endLoading()
-      self.isFetching = false
-      
-      if let info = addressInfo{
-        if self.isEOS{
-          self.eosContainerView?.data = info
-        }else{
-          self.containerView?.data = info
-        }
-      }else{
-        main {
-          if ShowToastManager.shared.showView != nil{
-            return
-          }
-          self.showToastBox(false, message: R.string.localizable.recharge_retry.key.localized())
-        }
-      }
-      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-  }
-  
   override func configureObserveState() {
-    commonObserveState()
-  }
+    self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext: {[weak self] (addressInfo) in
+        guard let `self` = self else{return}
+        self.endLoading()
+        self.isFetching = false
+        
+        if let info = addressInfo{
+            if self.isEOS{
+                self.eosContainerView?.data = info
+            }else{
+                self.containerView?.data = info
+            }
+        }else{
+            main {
+                if ShowToastManager.shared.showView != nil{
+                    return
+                }
+                self.showToastBox(false, message: R.string.localizable.recharge_retry.key.localized())
+            }
+        }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+    }
   
   func fetchDepositAddress(){
     if self.trade?.enable == false{

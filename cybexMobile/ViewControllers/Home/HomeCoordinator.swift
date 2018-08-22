@@ -15,15 +15,10 @@ protocol HomeCoordinatorProtocol {
 
 protocol HomeStateManagerProtocol {
     var state: HomeState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<HomeState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
 }
 
 class HomeCoordinator: HomeRootCoordinator {
-    lazy var creator = HomePropertyActionCreate()
-    
-    var store = Store<HomeState>(
+    var store = Store(
         reducer: HomeReducer,
         state: nil,
         middleware:[TrackingMiddleware]
@@ -48,9 +43,5 @@ extension HomeCoordinator: HomeCoordinatorProtocol {
 }
 
 extension HomeCoordinator: HomeStateManagerProtocol {
-  func subscribe<SelectedState, S: StoreSubscriber>(
-      _ subscriber: S, transform: ((Subscription<HomeState>) -> Subscription<SelectedState>)?
-      ) where S.StoreSubscriberStateType == SelectedState {
-      store.subscribe(subscriber, transform: transform)
-  }
+
 }

@@ -145,29 +145,12 @@ class TradeViewController: BaseViewController {
       self.coordinator?.openMarket(index: index, currentBaseIndex: baseIndex)
     }
   }
-  
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-  }
-  
-  
+
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     self.coordinator?.setupChildVC(segue)
   }
   
-  override func configureObserveState() {
-    commonObserveState()
-    
+  override func configureObserveState() {    
     app_data.otherRequestRelyData.asObservable()
       .subscribe(onNext: { (s) in
         if app_data.data.value.count == 0 {

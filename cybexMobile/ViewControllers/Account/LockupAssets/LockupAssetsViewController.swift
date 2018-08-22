@@ -37,22 +37,7 @@ class LockupAssetsViewController: BaseViewController {
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
   }
   
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-  }
-  
   override func configureObserveState() {
-    commonObserveState()
     self.coordinator?.state.property.data.asObservable().distinctUntilChanged().skip(1).subscribe(onNext:{[weak self] (s) in
       guard let `self` = self else{return}
       self.tableView.reloadData()
