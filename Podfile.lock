@@ -46,7 +46,7 @@ PODS:
   - IHKeyboardAvoiding (4.2)
   - IQKeyboardManagerSwift (6.1.1)
   - JSONRPCKit (3.0.0):
-    - Result (~> 3.2.0)
+    - Result (~> 4.0.0)
   - "Keyboard+LayoutGuide (1.2.2)"
   - KeychainAccess (3.1.1)
   - Kingfisher (4.8.1)
@@ -60,11 +60,11 @@ PODS:
   - MJRefresh (3.1.15.3)
   - MLeaksFinder (1.0.0):
     - FBRetainCycleDetector
-  - Moya (11.0.2):
-    - Moya/Core (= 11.0.2)
-  - Moya/Core (11.0.2):
+  - Moya (12.0.0-beta.1):
+    - Moya/Core (= 12.0.0-beta.1)
+  - Moya/Core (12.0.0-beta.1):
     - Alamofire (~> 4.1)
-    - Result (~> 3.0)
+    - Result (~> 4.0)
   - Nimble (7.1.3)
   - NVActivityIndicatorView (4.3.0):
     - NVActivityIndicatorView/Presenter (= 4.3.0)
@@ -94,7 +94,7 @@ PODS:
   - RealReachability/Connection (1.3.0)
   - RealReachability/Ping (1.3.0)
   - Repeat (0.5.6)
-  - Result (3.2.4)
+  - Result (4.0.0)
   - ReSwift (4.0.1)
   - Reveal-SDK (17)
   - RxCocoa (4.2.0):
@@ -165,6 +165,7 @@ PODS:
   - UMCCommon (1.5.2)
   - UMCCommonLog (1.0.0)
   - UMCSecurityPlugins (1.0.6)
+  - Validator (3.0.2)
   - XLActionController (4.0.1):
     - XLActionController/Core (= 4.0.1)
   - XLActionController/Core (4.0.1)
@@ -202,7 +203,7 @@ DEPENDENCIES:
   - HandyJSON
   - IHKeyboardAvoiding
   - IQKeyboardManagerSwift
-  - JSONRPCKit
+  - JSONRPCKit (from `https://github.com/phpmaple/JSONRPCKit`, branch `master`)
   - "Keyboard+LayoutGuide"
   - KeychainAccess
   - Kingfisher
@@ -214,7 +215,7 @@ DEPENDENCIES:
   - Macaw
   - MJRefresh
   - MLeaksFinder
-  - Moya
+  - Moya (from `https://github.com/Moya/Moya`, tag `12.0.0-beta.1`)
   - Nimble
   - NVActivityIndicatorView
   - ObjectMapper
@@ -256,6 +257,7 @@ DEPENDENCIES:
   - UMCCommon
   - UMCCommonLog
   - UMCSecurityPlugins
+  - Validator
   - XLActionController
   - XLPagerTabStrip
   - Zephyr
@@ -294,7 +296,6 @@ SPEC REPOS:
     - HandyJSON
     - IHKeyboardAvoiding
     - IQKeyboardManagerSwift
-    - JSONRPCKit
     - "Keyboard+LayoutGuide"
     - KeychainAccess
     - Kingfisher
@@ -306,7 +307,6 @@ SPEC REPOS:
     - Macaw
     - MJRefresh
     - MLeaksFinder
-    - Moya
     - Nimble
     - NVActivityIndicatorView
     - ObjectMapper
@@ -352,6 +352,7 @@ SPEC REPOS:
     - UMCCommon
     - UMCCommonLog
     - UMCSecurityPlugins
+    - Validator
     - XLActionController
     - XLPagerTabStrip
     - Zephyr
@@ -360,6 +361,12 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   BeareadToast:
     :git: https://github.com/phpmaple/BeareadToast
+  JSONRPCKit:
+    :branch: master
+    :git: https://github.com/phpmaple/JSONRPCKit
+  Moya:
+    :git: https://github.com/Moya/Moya
+    :tag: 12.0.0-beta.1
   SocketRocket:
     :branch: master
     :git: https://github.com/facebook/SocketRocket
@@ -374,6 +381,12 @@ CHECKOUT OPTIONS:
   BeareadToast:
     :commit: 1e82fc7338e9ab176168af234900f5fc61ade947
     :git: https://github.com/phpmaple/BeareadToast
+  JSONRPCKit:
+    :commit: 389b9feaae3983e6f632e083fb75c62f7985accf
+    :git: https://github.com/phpmaple/JSONRPCKit
+  Moya:
+    :git: https://github.com/Moya/Moya
+    :tag: 12.0.0-beta.1
   SocketRocket:
     :commit: 0a023409b138039d1ab5ac5431fe61c5f334e86b
     :git: https://github.com/facebook/SocketRocket
@@ -417,7 +430,7 @@ SPEC CHECKSUMS:
   HandyJSON: bc81fbeb62d65ae5d5942ed29bc4a8265d18c1e8
   IHKeyboardAvoiding: 9fbf816b7c3c84911964802ff110d12caf40ebef
   IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
-  JSONRPCKit: 50e0dc5e7f873e87f81562feb8836b7d1974da6d
+  JSONRPCKit: eb41d88efb88d4cbf2b66aa6c34fb62339c0ef14
   "Keyboard+LayoutGuide": 4c33aa1749cee1af43c3c32a988b58ad1918bdef
   KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
   Kingfisher: 868c1149679a7ab6869be118faa9b5aed154aaf0
@@ -429,7 +442,7 @@ SPEC CHECKSUMS:
   Macaw: 6db42cb10c1e018ee940a906b42a1ead5557e080
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
-  Moya: a725035953bc1c0eb1be505ab903984501d82440
+  Moya: 1b8d16b4dac4302c323ca95077a733836e73484a
   Nimble: 2839b01d1b31f6a6a7777a221f0d91cf52e8e27b
   NVActivityIndicatorView: 963f62bf9f993fcf23218e55958e5b1761b9504c
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
@@ -443,7 +456,7 @@ SPEC CHECKSUMS:
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
   RealReachability: eae9c58d2db52fadd8e1cba4b5d4c028454fbc47
   Repeat: 79fae833c601ef457148ba6ffae276e5c629ab0a
-  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   ReSwift: f4012c613e13da7398827fe5aebdb938eaed40a3
   Reveal-SDK: a6df49f47319bd19a110c960c498af32df72c0af
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
@@ -478,11 +491,12 @@ SPEC CHECKSUMS:
   UMCCommon: 4392868ac47ff1b101663106bb114ba616fabbad
   UMCCommonLog: 05a2d5de21858e3d870551562cff405c1366d244
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
+  Validator: bf211c1d71b3f910d230c09c70e62429d0fef63a
   XLActionController: 007868251c0eed70d649d06c1625259b73b3a600
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 34f79abb60018f2e2a5168d6287d90473024ab81
 
-PODFILE CHECKSUM: 5858c72081bdf6f8244d8b39a9396a367f19177f
+PODFILE CHECKSUM: 35750f99139a00eff4760ffe815d71647b287eb9
 
 COCOAPODS: 1.5.3

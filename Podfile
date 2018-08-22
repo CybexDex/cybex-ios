@@ -3,8 +3,8 @@ platform :ios, '9.0'
 def network
 #    pod 'Starscream'
     pod 'SocketRocket', :git => 'https://github.com/facebook/SocketRocket', :branch => 'master'
-    pod 'JSONRPCKit'
-    pod 'Moya'
+    pod 'JSONRPCKit', :git => 'https://github.com/phpmaple/JSONRPCKit', :branch => 'master'
+    pod 'Moya', :git => 'https://github.com/Moya/Moya', :tag => '12.0.0-beta.1'
     pod 'Kingfisher'
     pod 'RealReachability'
     pod 'Apollo'
@@ -29,6 +29,7 @@ def data
     pod 'Guitar'
     pod 'DifferenceKit'
     pod 'Dollar'
+    pod 'Validator'
 end
 
 def resource
