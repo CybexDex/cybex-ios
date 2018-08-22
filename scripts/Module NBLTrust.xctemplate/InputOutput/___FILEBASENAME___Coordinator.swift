@@ -15,6 +15,8 @@ protocol ___VARIABLE_productName:identifier___CoordinatorProtocol {
 
 protocol ___VARIABLE_productName:identifier___StateManagerProtocol {
     var state: ___VARIABLE_productName:identifier___State { get }
+    
+    func switchPageState(_ state:PageState)
 }
 
 class ___VARIABLE_productName:identifier___Coordinator: <#RootCoordinator#> {
@@ -39,5 +41,7 @@ extension ___VARIABLE_productName:identifier___Coordinator: ___VARIABLE_productN
 }
 
 extension ___VARIABLE_productName:identifier___Coordinator: ___VARIABLE_productName:identifier___StateManagerProtocol {
-    
+    func switchPageState(_ state:PageState) {
+        self.store.dispatch(PageStateAction(state: state))
+    }
 }

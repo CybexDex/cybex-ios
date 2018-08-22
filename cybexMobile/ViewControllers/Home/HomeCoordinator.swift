@@ -15,6 +15,8 @@ protocol HomeCoordinatorProtocol {
 
 protocol HomeStateManagerProtocol {
     var state: HomeState { get }
+    
+    func switchPageState(_ state:PageState)
 }
 
 class HomeCoordinator: HomeRootCoordinator {
@@ -40,8 +42,12 @@ extension HomeCoordinator: HomeCoordinatorProtocol {
     vc.coordinator = coordinator
     self.rootVC.pushViewController(vc, animated: true)
   }
+    
+ 
 }
 
 extension HomeCoordinator: HomeStateManagerProtocol {
-
+    func switchPageState(_ state:PageState) {
+        self.store.dispatch(PageStateAction(state: state))
+    }
 }
