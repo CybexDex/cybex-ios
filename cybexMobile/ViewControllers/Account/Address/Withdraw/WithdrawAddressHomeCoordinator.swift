@@ -46,6 +46,9 @@ extension WithdrawAddressHomeCoordinator: WithdrawAddressHomeCoordinatorProtocol
         let vc = R.storyboard.account.withdrawAddressViewController()!
         let coor = WithdrawAddressCoordinator(rootVC: self.rootVC)
         vc.coordinator = coor
+        if let viewModel = self.state.property.selectedViewModel.value {
+            vc.asset = viewModel.viewModel.model.id
+        }
         self.rootVC.pushViewController(vc, animated: true)
     }
 }

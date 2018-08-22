@@ -387,7 +387,7 @@ func getOpenedOrderInfo(price:String,amount:String,total:String,fee:String,isBuy
 }
 
 func getTransferInfo(_ account: String, quanitity: String, fee: String, memo: String) -> [NSAttributedString] {
-  let accountTitle = R.string.localizable.transfer_account.key.localized()
+  let accountTitle = R.string.localizable.transfer_account_title.key.localized()
   let quantityTitle = R.string.localizable.transfer_quantity.key.localized()
   let feeTitle = R.string.localizable.transfer_fee.key.localized()
   let memoTitle = R.string.localizable.transfer_memo.key.localized()

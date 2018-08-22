@@ -118,7 +118,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
                 let data = list.sorted { (front, last) -> Bool in
                     return sortedNames.index(of: front.name)! <= sortedNames.index(of: last.name)!
                 }
-                
+            
                 self.store.dispatch(WithdrawAddressDataAction(data: data))
             }
         }
@@ -137,7 +137,6 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
                 }
             }
         }
-        
         return result
     }
     
