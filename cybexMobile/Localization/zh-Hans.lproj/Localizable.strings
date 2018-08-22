@@ -345,6 +345,7 @@
 "address_title_add_eos" = "添加提现账户";
 "address_add_success" = "添加成功";
 "transfer_account_manager" = "转账账户管理";
+"withdraw_address_manager" = "提现地址管理";
 
 "copy" = "复制";
 "copied" = "复制成功";

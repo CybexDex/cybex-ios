@@ -381,6 +381,7 @@
 "transfer_success_content" = "Add to transfer account list?";
 
 "transfer_account_manager" = "Transfer Account";
+"withdraw_address_manager" = "Withdrawal Address";
 
 "copy" = "Copy";
 "copied" = "Copied";

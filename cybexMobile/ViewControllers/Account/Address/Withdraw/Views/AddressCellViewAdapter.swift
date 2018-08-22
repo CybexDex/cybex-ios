@@ -17,7 +17,7 @@ extension AddressCellView {
             memo.text = memoText
         }
         else {
-            memo.text = "-"
+            memo.text = ""
         }
     }
 }
