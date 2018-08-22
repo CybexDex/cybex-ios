@@ -45,10 +45,6 @@ public class PeriscopeCell: XLActionController.ActionCell {
         let backgroundView = UIView()
         selectedBackgroundView = backgroundView
     }
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        self.actionTitleLabel?.textColor = UIColor.pastelOrange
-    }
 }
 
 
@@ -135,6 +131,13 @@ public class PeriscopeActionController: ActionController<PeriscopeCell, String, 
     
     public override func onWillDismissView() {
         tapMaskCallback?()
+    }
+    
+    public override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        super.collectionView(collectionView, didSelectItemAt: indexPath)
+        if let cell = collectionView.cellForItem(at: indexPath) as? PeriscopeCell {
+            cell.actionTitleLabel?.textColor = UIColor.pastelOrange
+        }
     }
 }
 

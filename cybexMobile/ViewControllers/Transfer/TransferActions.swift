@@ -22,6 +22,7 @@ enum AccountValidStatus: Int {
   case unValided = 0
   case validSuccessed
   case validFailed
+  case validding
 }
 
 struct TransferPropertyState {  

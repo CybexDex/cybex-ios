@@ -335,8 +335,8 @@
 
 //zsy end
 
-"recode_nodata" = "No record";
-"balance_nodata" = "No assert";
+"recode_nodata" = "No Record";
+"balance_nodata" = "No Asset";
 
 "Loading more" = "Loading more";
 "No more data" = "No more data";
@@ -381,6 +381,7 @@
 "transfer_success_content" = "Add to transfer account list?";
 
 "transfer_account_manager" = "Transfer Account";
+"withdraw_address_manager" = "Withdrawal Address";
 
 "copy" = "Copy";
 "copied" = "Copied";
@@ -394,3 +395,6 @@
 "address_nodata"       = "No withdraw address";
 "account_nodata"       = "No withdraw account";
 "account_transfer_nodata"       = "No transfer account";
+
+"address_delete_confirm" = "Confirm";
+

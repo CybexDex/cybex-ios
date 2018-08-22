@@ -11,7 +11,7 @@ import SwiftTheme
 
 enum Recharge_Type:Int{
     case none = 0
-    case clean
+    case address
     case photo
     case all
 }
@@ -23,13 +23,17 @@ class RechargeItemView: UIView {
     @IBOutlet weak var content: ImageTextField!
     @IBOutlet weak var btn: UIButton!
     
+    @IBOutlet weak var leftView: UIView!
     @IBOutlet weak var leftImageView: UIImageView!
     @IBOutlet weak var bottomLineView: UIView!
     
+    @IBOutlet weak var addressStateImageView: UIImageView!
+    
+    fileprivate var activityIndicator : UIActivityIndicatorView?
+
     @IBInspectable var name : String = "" {
         didSet{
             title.localized_text = name.localizedContainer()
-            
         }
     }
     
@@ -59,9 +63,10 @@ class RechargeItemView: UIView {
             case .none:
                 btn.isHidden = true
                 content.isEnabled = false
-            case .clean:
+            case .address:
                 btn.isHidden = false
                 leftImageView.isHidden = false
+                leftView.isHidden = false
                 leftImageView.image = R.image.ic_address_16_px()
             default:
                 break
@@ -69,6 +74,48 @@ class RechargeItemView: UIView {
         }
     }
     
+    var address_state : image_state? {
+        didSet {
+            if self.btn_type != .address {
+                return
+            }
+            if let state = self.address_state {
+                switch state {
+                case .none:
+                    self.addressStateImageView.isHidden = true
+                    break
+                case .Loading:
+                    self.addressStateImageView.isHidden = false
+                    self.addressStateImageView.image = nil
+                    self.startAnimation()
+                    break
+                case .Fail:
+                    self.addressStateImageView.isHidden = false
+                    self.stop()
+                    self.addressStateImageView.image = R.image.ic_close_24_px()
+                    break
+                case .Success:
+                    self.addressStateImageView.isHidden = false
+                    self.stop()
+                    self.addressStateImageView.image = R.image.check_complete()
+                    break
+                }
+            }
+        }
+    }
+    
+    func startAnimation() {
+        self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: self.addressStateImageView.width, height: self.addressStateImageView.height))
+        self.activityIndicator?.activityIndicatorViewStyle = .gray
+        self.activityIndicator?.center = CGPoint(x: self.addressStateImageView.width * 0.5, y: self.addressStateImageView.height * 0.5)
+        self.addressStateImageView.addSubview(self.activityIndicator!);
+        self.activityIndicator?.startAnimating()
+    }
+    
+    func stop() {
+        self.activityIndicator?.stopAnimating()
+        self.activityIndicator = nil
+    }
     
     
     func setupUI(){

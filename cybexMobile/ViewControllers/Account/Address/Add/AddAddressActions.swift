@@ -41,6 +41,14 @@ struct VerificationAddressAction : Action {
     var success : Bool
 }
 
+struct SetNoteAction : Action {
+    var data : String
+}
+
+struct SetAddressAction : Action {
+    var data : String
+}
+
 
 //MARK: - Action Creator
 class AddAddressPropertyActionCreate: LoadingActionCreator {

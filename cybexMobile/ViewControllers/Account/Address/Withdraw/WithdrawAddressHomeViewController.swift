@@ -32,7 +32,7 @@ class WithdrawAddressHomeViewController: BaseViewController {
     }
     
     func setupUI() {
-        self.localized_text = R.string.localizable.withdraw_address.key.localizedContainer()
+        self.localized_text = R.string.localizable.withdraw_address_manager.key.localizedContainer()
 
         self.tableView.register(R.nib.withdrawAddressHomeTableViewCell(), forCellReuseIdentifier: R.nib.withdrawAddressHomeTableViewCell.name)
     }

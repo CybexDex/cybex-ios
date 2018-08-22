@@ -36,6 +36,8 @@ protocol AddAddressStateManagerProtocol {
     
     func veritiedAddress()
     
+    func setNoteAction(_ note : String)
+    
 }
 
 class AddAddressCoordinator: AccountRootCoordinator {
@@ -82,6 +84,7 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
             UserManager.shared.checkUserName(address).done({ (exist) in
                 main {
                     self.store.dispatch(VerificationAddressAction(success:exist))
+                    self.store.dispatch(SetAddressAction(data:address))
                 }
             }).cauterize()
             
@@ -90,6 +93,7 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
                 
                 RechargeDetailCoordinator.verifyAddress(asset_info.symbol.filterJade, address: address, callback: { (isSuccess) in
                     self.store.dispatch(VerificationAddressAction(success:isSuccess))
+                    self.store.dispatch(SetAddressAction(data:address))
                 })
             }
         default:
@@ -117,5 +121,9 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
         else {
             AddressManager.shared.addTransferAddress(TransferAddress(id: AddressManager.shared.getUUID(), name: self.state.property.note.value, address: self.state.property.address.value))
         }
+    }
+    
+    func setNoteAction(_ note : String) {
+        self.store.dispatch(SetNoteAction(data : note))
     }
 }

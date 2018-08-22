@@ -16,7 +16,8 @@ class WithdrawAddressViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-	var coordinator: (WithdrawAddressCoordinatorProtocol & WithdrawAddressStateManagerProtocol)?
+    @IBOutlet weak var rightLabel: UILabel!
+    var coordinator: (WithdrawAddressCoordinatorProtocol & WithdrawAddressStateManagerProtocol)?
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ class WithdrawAddressViewController: BaseViewController {
     func setupUI() {
         configRightNavButton(R.image.ic_add_24_px())
         self.localized_text = self.coordinator!.isEOS() ? R.string.localizable.eos_withdraw_account.key.localizedContainer() : R.string.localizable.withdraw_address.key.localizedContainer()
+        self.rightLabel.isHidden = !self.coordinator!.isEOS()
         self.tableView.register(R.nib.withdrawAddressTableViewCell(), forCellReuseIdentifier: R.nib.withdrawAddressTableViewCell.name)
     }
     

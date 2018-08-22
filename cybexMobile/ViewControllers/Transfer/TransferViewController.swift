@@ -69,7 +69,11 @@ class TransferViewController: BaseViewController {
             guard let `self` = self else { return }
             self.transferView.accountValidStatus = status
             if status == .validFailed && !(self.coordinator?.state.property.account.value.isEmpty)!,self.transferView.accountView.textField.text!.count != 0 {
-                self.showToastBox(false, message: R.string.localizable.transfer_account_unexist.key.localized())
+                self.transferView.accountView.loading_state = .Fail
+//                self.showToastBox(false, message: R.string.localizable.transfer_account_unexist.key.localized())
+            }
+            else {
+                self.transferView.accountView.loading_state = .Success
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         

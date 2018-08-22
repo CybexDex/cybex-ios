@@ -24,6 +24,9 @@ class AddAddressView: UIView {
     @IBOutlet weak var memo: AddressItemView!
     @IBOutlet weak var addBtn: Button!
     
+    @IBOutlet weak var assetShadowView: CornerAndShadowView!
+    
+    
     fileprivate var activityIndicator : UIActivityIndicatorView?
     var data: Any? {
         didSet {
@@ -61,16 +64,15 @@ class AddAddressView: UIView {
                     self.stop()
                     self.address.icon.setBackgroundImage(R.image.check_complete(), for: .normal)
                     break
-                    
                 }
             }
         }
     }
     
     func startAnimation() {
-        self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-        self.activityIndicator?.activityIndicatorViewStyle = ThemeManager.currentThemeIndex == 0 ? .white : .gray
-        self.activityIndicator?.center = self.address.icon.center
+        self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: self.address.icon.width, height: self.address.icon.height))
+        self.activityIndicator?.activityIndicatorViewStyle = .gray
+        self.activityIndicator?.center = CGPoint(x: self.address.icon.width * 0.5, y: self.address.icon.height * 0.5)
         self.address.icon.addSubview(self.activityIndicator!);
         self.activityIndicator?.startAnimating()
     }
