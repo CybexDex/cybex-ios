@@ -35,6 +35,7 @@
             <connections>
                 <outlet property="foreView" destination="nQ8-cr-z8s" id="SSF-sX-rza"/>
             </connections>
+            <point key="canvasLocation" x="22" y="52"/>
         </tableViewCell>
     </objects>
 </document>

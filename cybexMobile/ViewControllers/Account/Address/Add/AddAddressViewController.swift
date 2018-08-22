@@ -57,7 +57,7 @@ class AddAddressViewController: BaseViewController {
         }
         else {
             self.title = R.string.localizable.account_title_add.key.localized()
-            self.containerView.asset.isHidden = true
+            self.containerView.assetShadowView.isHidden = true
             if self.asset != AssetConfiguration.EOS {
                 self.containerView.memo.isHidden = true
             }
@@ -88,10 +88,11 @@ class AddAddressViewController: BaseViewController {
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidEndEditing, object: self.containerView.mark.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
-            if let text = self.containerView.mark.content.text ,text.count != 0 {
+            if let text = self.containerView.mark.content.text ,text.trimmed.count != 0 {
                 self.coordinator?.verityNote(true)
-                if text.count > 15 {
-                    self.containerView.mark.content.text = text.substring(from: 0, length: 15)
+                if text.trimmed.count > 15 {
+                    self.containerView.mark.content.text = text.trimmed.substring(from: 0, length: 15)
+                    self.coordinator?.setAsset(self.containerView.mark.content.text!)
                 }
             }else {
                 self.coordinator?.verityNote(false)
@@ -101,6 +102,7 @@ class AddAddressViewController: BaseViewController {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidEndEditing, object: self.containerView.address.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else {return}
             if let text = self.containerView.address.content.text, text.trimmed.count > 0 {
+                
                 self.containerView.address_state = .Loading
                 self.coordinator?.verityAddress(text.trimmed, type: self.address_type)
             }else {
@@ -112,7 +114,6 @@ class AddAddressViewController: BaseViewController {
             guard let `self` = self else {return}
             if !address_success {
                 self.containerView.address_state = .Fail
-               
             }
             else {
                 self.containerView.address_state = .Success
@@ -138,7 +139,9 @@ class AddAddressViewController: BaseViewController {
             }
             let exit = self.address_type == .withdraw ?  AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text).0 : AddressManager.shared.containAddressOfTransfer(self.containerView.address.content.text).0
                 if exit {
-                    self.showToastBox(false, message: self.address_type == .withdraw ? R.string.localizable.address_exit.key.localized() : R.string.localizable.account_exit.key.localized())
+                    if self.isVisible {
+                        self.showToastBox(false, message: self.address_type == .withdraw ? R.string.localizable.address_exit.key.localized() : R.string.localizable.account_exit.key.localized())
+                    }
                 }
                 else {
                     self.coordinator?.addAddress(self.address_type)

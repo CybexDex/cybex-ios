@@ -163,6 +163,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
                 let selectedIndex = picker.selectedRow(inComponent: 0)
                 
                 self.store.dispatch(ChooseAccountAction(account:items[selectedIndex]))
+                self.store.dispatch(ValidAccountAction(status: .validSuccessed))
             }
             vc.coordinator = coordinator
             
@@ -231,7 +232,9 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     
     func validAccount() {
         if !self.state.property.account.value.isEmpty {
-            
+            if let vc = self.rootVC.topViewController as? TransferViewController {
+                vc.transferView.accountView.loading_state = .Loading
+            }
             UserManager.shared.checkUserName(self.state.property.account.value).done({[weak self] (exist) in
                 main {
                     guard let `self` = self else { return }
