@@ -28,7 +28,7 @@ class AddressHomeTableViewCellViewView: UIView {
         
         let v2 = NormalCellView(frame: CGRect.zero)
         v2.index = 1
-        v2.name_locali = R.string.localizable.transfer_account.key
+        v2.name_locali = R.string.localizable.transfer_account_name.key
         v2.isShowLineView = false
         sectionView.stackView.addArrangedSubview(v2)
     }

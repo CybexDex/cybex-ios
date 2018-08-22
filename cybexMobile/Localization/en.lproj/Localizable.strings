@@ -302,7 +302,7 @@
 //转账
 "transfer_title" = "Transfer";
 "transfer_transfer" = "Send";
-"transfer_account_title" = "Account Name";
+"transfer_account_title" = "Account";
 "transfer_account_pla" = "To Account name";
 "transfer_crypto" = "Crypto";
 "transfer_crypto_pla" = "Please select crypto type";
@@ -352,7 +352,9 @@
 
 
 
-"transfer_account" = "Transfer Account";
+"transfer_account" = "Account";
+"transfer_account_name" = "Transfer Account";
+
 "address_or_account" = "Note/Account";
 "account_or_address" = "Note/Address";
 
