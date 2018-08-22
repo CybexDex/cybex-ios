@@ -103,7 +103,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
   }
   
   override func configureObserveState() {
-    
     app_data.data.asObservable().filter({[weak self] (s) -> Bool in
       guard let `self` = self else { return false}
 

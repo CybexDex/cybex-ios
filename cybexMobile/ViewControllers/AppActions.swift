@@ -94,6 +94,11 @@ struct Pair:Hashable {
 class LoadingActionCreator {
 }
 
+
+struct PageStateAction: Action {
+    var state: PageState
+}
+
 // MARK: - Common Actions
 struct StartLoading: Action {
   var vc: BaseViewController?

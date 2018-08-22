@@ -25,25 +25,18 @@ public class BlockSubscriber<S>: StoreSubscriber {
 }
 
 let TrackingMiddleware: Middleware<Any> = { dispatch, getState in
-  return { next in
-    
-    return { action in
-      
-      if let action = action as? StartLoading {
-        
-        //        action.vc?.startLoading()
-      }
-      else if let action = action as? EndLoading {
-        //        action.vc?.endLoading()
-        
-      }
-      else if let action = action as? RefreshState {
-        _ = action.vc?.perform(action.sel)
-      }
-      
-      return next(action)
+    return { next in
+        return { action in
+            if let action = action as? PageStateAction, let state = getState() as? BaseState {
+                state.pageState.accept(action.state)
+            }
+            else if let action = action as? RefreshState {
+                _ = action.vc?.perform(action.sel)
+            }
+            
+            return next(action)
+        }
     }
-  }
 }
 
 

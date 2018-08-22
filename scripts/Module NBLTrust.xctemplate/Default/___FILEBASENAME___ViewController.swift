@@ -44,7 +44,10 @@ class ___VARIABLE_productName:identifier___ViewController: BaseViewController {
     }
     
     override func configureObserveState() {
-        
+        coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self] (state) in
+            guard let `self` = self else { return }
+            
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }
 
