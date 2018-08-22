@@ -159,7 +159,7 @@
 "withdraw_address"   = "Withdrawal Address";
 "withdraw_address_placehold"   = "Enter or paste address";
 
-"eos_withdraw_account" = "Withdrawal Account";
+"eos_withdraw_account" = "Withdraw Account";
 "eos_withdraw_account_placehold" = "Enter or paste address address";
 
 "withdraw_amount" = "Amount";
@@ -384,7 +384,7 @@
 "transfer_success_content" = "Add to transfer account list?";
 
 "transfer_account_manager" = "Transfer Account";
-"withdraw_address_manager" = "Withdrawal Address";
+"withdraw_address_manager" = "Withdraw Address";
 
 "copy" = "Copy";
 "copied" = "Copied";
