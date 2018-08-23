@@ -156,7 +156,7 @@
 "withdraw_nomore" = "Not enough";
 "withdraw_address_fault" = "Invalid address";
 "withdraw_available" = "Available";
-"withdraw_address"   = "Withdrawal Address";
+"withdraw_address"   = "Withdraw Address";
 "withdraw_address_placehold"   = "Enter or paste address";
 
 "eos_withdraw_account" = "Withdraw Account";
@@ -346,7 +346,7 @@
 
 "address_manager" = "Address Management";
 
-"address_asset" = "Currency";
+"address_asset" = "Crypto";
 "address_mark" = "Note";
 "address_add" = "Add";
 
@@ -363,8 +363,8 @@
 
 
 "account_title_add" = "Add Transfer Account";
-"address_title_add" = "Add Address";
-"address_title_add_eos" = "Add Account";
+"address_title_add" = "Add Withdraw Address";
+"address_title_add_eos" = "Add Withdraw Account";
 
 "address_add_success" = "Added";
 "address_note_placeholder" = "Less than 15 characters";
