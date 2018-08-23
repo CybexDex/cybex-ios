@@ -44,6 +44,8 @@ struct TransferPropertyState {
   
 }
 
+
+
 struct ValidAccountAction: Action {
   var status: AccountValidStatus = .unValided
 }

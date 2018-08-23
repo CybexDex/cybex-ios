@@ -74,32 +74,30 @@ class RechargeItemView: UIView {
         }
     }
     
-    var address_state : image_state? {
+    var address_state : image_state = .normal {
         didSet {
             if self.btn_type != .address {
                 return
             }
-            if let state = self.address_state {
-                switch state {
-                case .none:
-                    self.addressStateImageView.isHidden = true
-                    break
-                case .Loading:
-                    self.addressStateImageView.isHidden = false
-                    self.addressStateImageView.image = nil
-                    self.startAnimation()
-                    break
-                case .Fail:
-                    self.addressStateImageView.isHidden = false
-                    self.stop()
-                    self.addressStateImageView.image = R.image.ic_close_24_px()
-                    break
-                case .Success:
-                    self.addressStateImageView.isHidden = false
-                    self.stop()
-                    self.addressStateImageView.image = R.image.check_complete()
-                    break
-                }
+            switch address_state {
+            case .normal:
+                self.addressStateImageView.isHidden = true
+                break
+            case .Loading:
+                self.addressStateImageView.isHidden = false
+                self.addressStateImageView.image = nil
+                self.startAnimation()
+                break
+            case .Fail:
+                self.addressStateImageView.isHidden = false
+                self.stop()
+                self.addressStateImageView.image = R.image.ic_close_24_px()
+                break
+            case .Success:
+                self.addressStateImageView.isHidden = false
+                self.stop()
+                self.addressStateImageView.image = R.image.check_complete()
+                break
             }
         }
     }

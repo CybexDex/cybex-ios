@@ -116,6 +116,11 @@ class TransferViewController: BaseViewController {
     }
     
     func clickTransferAction() {
+        self.view.endEditing(true)
+        if self.transferView.accountView.loading_state != .Success || self.coordinator!.state.property.accountValid.value != AccountValidStatus.validSuccessed {
+            self.transferView.accountView.loading_state = .normal
+            return
+        }
         if !UserManager.shared.isLocked {
             self.transferComfirm()
         }
@@ -222,7 +227,15 @@ extension TransferViewController {
     }
     
     @objc func account(_ data: [String : Any]) {
-        self.coordinator?.setAccount(data["content"] as! String)
+        if let text = data["content"] as? String {
+            self.coordinator?.dispatchAccountAction(AccountValidStatus.unValided)
+            if text.count != 0 {
+                self.coordinator?.setAccount(text)
+            }
+            else {
+                self.transferView.accountView.loading_state = .normal
+            }
+        }
     }
     
     @objc func amount(_ data: [String : Any]) {

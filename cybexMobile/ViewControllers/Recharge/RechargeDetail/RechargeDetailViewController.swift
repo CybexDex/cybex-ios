@@ -185,7 +185,7 @@ class RechargeDetailViewController: BaseViewController {
                         })
                     }
                 }else{
-                    self.contentView.addressView.address_state = .none
+                    self.contentView.addressView.address_state = .normal
                     self.isTrueAddress = false
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -320,6 +320,10 @@ extension RechargeDetailViewController{
     }
     
     func withDrawAction(){
+        self.view.endEditing(true)
+        if self.contentView.addressView.address_state != .Success {
+            return
+        }
         if self.contentView.withdraw.isEnable,let trade = self.trade,let trade_info = app_data.assetInfo[trade.id]{
             let data = getWithdrawDetailInfo(addressInfo: self.contentView.addressView.content.text!, amountInfo: self.contentView.amountView.content.text! + " " + trade_info.symbol.filterJade, withdrawFeeInfo: self.contentView.insideFee.text!, gatewayFeeInfo: self.contentView.gateAwayFee.text!, receiveAmountInfo: self.contentView.finalAmount.text!,isEOS:self.isEOS,memoInfo:self.contentView.memoView.content.text!)
             if self.isVisible{

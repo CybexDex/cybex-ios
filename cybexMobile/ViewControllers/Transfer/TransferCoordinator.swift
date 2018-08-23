@@ -49,6 +49,9 @@ protocol TransferStateManagerProtocol {
     func resetData()
     
     func chooseOrAddAddress()
+    
+    func dispatchAccountAction(_ type : AccountValidStatus) 
+
 }
 
 class TransferCoordinator: AccountRootCoordinator {
@@ -182,6 +185,11 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
 }
 
 extension TransferCoordinator: TransferStateManagerProtocol {
+    
+    func dispatchAccountAction(_ type : AccountValidStatus) {
+        self.store.dispatch(ValidAccountAction(status: type))
+    }
+    
     func transfer(_ callback: @escaping (Any) -> ()) {
         getChainId { (id) in
             guard let balance = self.state.property.balance.value else {
