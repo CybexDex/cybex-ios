@@ -10,7 +10,7 @@ import UIKit
 import SwiftTheme
 
 enum image_state : Int {
-    case none = 0
+    case normal = 0
     case Loading
     case Fail
     case Success
@@ -42,29 +42,27 @@ class AddAddressView: UIView {
         }
     }
     
-    var address_state : image_state? {
+    var address_state : image_state = .normal {
         didSet {
-            if let state = self.address_state {
-                switch state {
-                case .none:
-                    self.address.icon.isHidden = true
-                    break
-                case .Loading:
-                    self.address.icon.isHidden = false
-                    self.address.icon.setBackgroundImage(nil, for: .normal)
-                    self.startAnimation()
-                    break
-                case .Fail:
-                    self.address.icon.isHidden = false
-                    self.stop()
-                    self.address.icon.setBackgroundImage(R.image.ic_close_24_px(), for: .normal)
-                    break
-                case .Success:
-                    self.address.icon.isHidden = false
-                    self.stop()
-                    self.address.icon.setBackgroundImage(R.image.check_complete(), for: .normal)
-                    break
-                }
+            switch self.address_state {
+            case .normal:
+                self.address.icon.isHidden = true
+                break
+            case .Loading:
+                self.address.icon.isHidden = false
+                self.address.icon.setBackgroundImage(nil, for: .normal)
+                self.startAnimation()
+                break
+            case .Fail:
+                self.address.icon.isHidden = false
+                self.stop()
+                self.address.icon.setBackgroundImage(R.image.ic_close_24_px(), for: .normal)
+                break
+            case .Success:
+                self.address.icon.isHidden = false
+                self.stop()
+                self.address.icon.setBackgroundImage(R.image.check_complete(), for: .normal)
+                break
             }
         }
     }

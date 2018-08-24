@@ -13,7 +13,7 @@ import SwiftTheme
 
 protocol CybexTextViewDelegate {
     func returnPassword(_ password:String)
-    func clickCancle()
+    func clickCancle(_ sender : CybexTextView)
     func returnEnsureAction()
     func returnEnsureImageAction()
 }
@@ -26,7 +26,7 @@ class CybexTextView: UIView {
             contentView.addSubview(middleView!)
             middleView?.leading(to: contentView,offset:20)
             middleView?.trailing(to: contentView,offset:-20)
-            middleView?.top(to:contentView,offset:20)
+            middleView?.top(to:contentView,offset:16)
             middleView?.bottom(to:contentView,offset:0)
         }
     }
@@ -47,7 +47,7 @@ class CybexTextView: UIView {
     
     @IBOutlet weak var contentView: UIView!
     @IBAction func cancleClick(_ sender: Any) {
-        self.delegate?.clickCancle()
+        self.delegate?.clickCancle(self)
     }
     
     @IBAction func ensureClick(_ sender: Any) {

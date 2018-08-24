@@ -52,7 +52,7 @@ class AddAddressViewController: BaseViewController {
             }
             if self.withdrawAddress != nil {
                 self.containerView.data = withdrawAddress
-                self.coordinator?.veritiedAddress()
+                self.coordinator?.veritiedAddress(true)
             }
         }
         else {
@@ -63,7 +63,7 @@ class AddAddressViewController: BaseViewController {
             }
             if self.transferAddress != nil {
                 self.containerView.data = transferAddress
-                self.coordinator?.veritiedAddress()
+                self.coordinator?.veritiedAddress(true)
             }
         }
     }
@@ -90,18 +90,23 @@ class AddAddressViewController: BaseViewController {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidEndEditing, object: self.containerView.address.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else {return}
             if let text = self.containerView.address.content.text, text.trimmed.count > 0 {
-                
                 self.containerView.address_state = .Loading
                 self.coordinator?.verityAddress(text.trimmed, type: self.address_type)
             }else {
-                self.containerView.address_state = .none
+                self.containerView.address_state = .normal
+                self.coordinator?.veritiedAddress(false)
             }
         }
         
         self.coordinator?.state.property.addressVailed.asObservable().skip(1).subscribe(onNext: { [weak self](address_success) in
             guard let `self` = self else {return}
             if !address_success {
-                self.containerView.address_state = .Fail
+                if self.containerView.address.content.text.count != 0 {
+                    self.containerView.address_state = .Fail
+                }
+                else {
+                    self.containerView.address_state = .normal
+                }
             }
             else {
                 self.containerView.address_state = .Success
@@ -122,10 +127,10 @@ class AddAddressViewController: BaseViewController {
             guard let `self` = self else { return }
             self.view.endEditing(true)
             
-            if self.containerView.addBtn.isEnable == false {
+            if self.containerView.addBtn.isEnable == false || self.containerView.address_state != .Success {
                 return
             }
-            let exit = self.address_type == .withdraw ?  AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text).0 : AddressManager.shared.containAddressOfTransfer(self.containerView.address.content.text).0
+            let exit = self.address_type == .withdraw ?  AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text,currency: self.asset).0 : AddressManager.shared.containAddressOfTransfer(self.containerView.address.content.text).0
             if exit {
                 if self.isVisible {
                     self.showToastBox(false, message: self.address_type == .withdraw ? R.string.localizable.address_exit.key.localized() : R.string.localizable.account_exit.key.localized())
