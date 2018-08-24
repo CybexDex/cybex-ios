@@ -181,7 +181,7 @@
 "deposit_copy"     = "Copy Address";
 "deposti_get"      = "Get New Address";
 
-"alert_cancle"     = "CANCLE";
+"alert_cancle"     = "CANCEL";
 "alert_ensure"      = "CONFIRM";
 
 "withdraw_success"  = "Withdrawal request has been sent";

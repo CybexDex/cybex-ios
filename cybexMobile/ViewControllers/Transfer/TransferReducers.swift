@@ -39,6 +39,9 @@ func TransferPropertyReducer(_ state: TransferPropertyState?, action: Action) ->
   case let action as ChooseAccountAction:
     state.account.accept(action.account.address)
     state.accountValid.accept(AccountValidStatus.validSuccessed)
+    
+  case let action as CleanToAccountAction:
+    state.to_account.accept(nil)
   default:
     break
   }

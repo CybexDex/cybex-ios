@@ -16,6 +16,8 @@ import SwifterSwift
 class TransferViewController: BaseViewController {
     
     @IBOutlet weak var transferView: TransferView!
+    var account_name : String = ""
+    
     var coordinator: (TransferCoordinatorProtocol & TransferStateManagerProtocol)?
     
     var isFetchFee : Bool = true
@@ -104,6 +106,7 @@ class TransferViewController: BaseViewController {
     func setupUI() {
         self.title = R.string.localizable.transfer_title.key.localized()
         self.configRightNavButton(R.image.ic_records_24_px())
+        self.configLeftNavigationButton(nil)
     }
     
     func getFee() {
@@ -182,13 +185,12 @@ extension TransferViewController {
                         if String(describing: data) == "<null>"{
                             if AddressManager.shared.containAddressOfTransfer(self.coordinator!.state.property.account.value).0 == false {
                                 self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.transfer_success_title.key.localized(), content: R.string.localizable.transfer_success_content.key.localized())
+                                self.account_name = self.coordinator!.state.property.account.value
                             }
                             else {
                                 self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())
-                                self.removeTransferInfo()
-                                self.coordinator?.resetData()
+                                self.coordinator?.reopenAction()
                             }
-                            
                         }else{
                             self.showToastBox(false, message: R.string.localizable.transfer_failed.key.localized())
                         }
@@ -204,21 +206,16 @@ extension TransferViewController {
     }
     
     override func returnEnsureImageAction() {
-        let transferAddress = TransferAddress(id: AddressManager.shared.getUUID(), name: "", address: self.coordinator!.state.property.account.value)
+       
+        let transferAddress = TransferAddress(id: AddressManager.shared.getUUID(), name: "", address: self.account_name)
+        self.coordinator?.reopenAction()
         self.coordinator?.openAddTransferAddress(transferAddress)
-        self.removeTransferInfo()
-        self.coordinator?.resetData()
     }
     
-    func removeTransferInfo() {
-        self.transferView.accountView.textField.text = ""
-        self.transferView.cryptoView.textField.text = ""
-        self.transferView.quantityView.textField.text = ""
-        self.transferView.balance = ""
-        self.transferView.memoView.textView.text = ""
-        self.transferView.feeLabel.text = ""
-        self.coordinator?.getGatewayFee(AssetConfiguration.CYB, amount: "0", memo: "")
-        self.transferView.buttonIsEnable = false
+    override func cancelImageAction(_ sender : CybexTextView) {
+        if sender.title.isHidden == true {
+            self.coordinator?.reopenAction()
+        }
     }
     
     

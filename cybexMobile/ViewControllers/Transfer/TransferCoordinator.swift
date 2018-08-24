@@ -19,6 +19,8 @@ protocol TransferCoordinatorProtocol {
     func pop()
     
     func openAddTransferAddress(_ sender : TransferAddress)
+    
+    func reopenAction()
 }
 
 protocol TransferStateManagerProtocol {
@@ -45,8 +47,6 @@ protocol TransferStateManagerProtocol {
     func transfer(_ callback: @escaping (Any)->())
     
     func getGatewayFee(_ assetId: String, amount: String, memo: String)
-    
-    func resetData()
     
     func chooseOrAddAddress()
     
@@ -77,6 +77,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         let coordinator = TransferListCoordinator(rootVC: self.rootVC)
         recordVC?.coordinator = coordinator
         self.rootVC.pushViewController(recordVC!, animated: true)
+    
     }
     
     func showPicker() {
@@ -164,9 +165,10 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
             coordinator.pickerDidSelected = { [weak self] (picker: UIPickerView) -> Void in
                 guard let `self` = self else { return }
                 let selectedIndex = picker.selectedRow(inComponent: 0)
-                
-                self.store.dispatch(ChooseAccountAction(account:items[selectedIndex]))
+                self.store.dispatch(CleanToAccountAction())
                 self.store.dispatch(ValidAccountAction(status: .validSuccessed))
+                self.store.dispatch(ChooseAccountAction(account:items[selectedIndex]))
+                self.getTransferAccountInfo()
             }
             vc.coordinator = coordinator
             
@@ -181,6 +183,14 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
             vc.transferAddress = sender
             self.rootVC.pushViewController(vc, animated: true)
         }
+    }
+    
+    func reopenAction() {
+        
+        let transferVC = R.storyboard.recode.transferViewController()!
+        let coordinator = TransferCoordinator(rootVC: self.rootVC)
+        transferVC.coordinator = coordinator
+        self.rootVC.viewControllers[self.rootVC.viewControllers.count - 1] = transferVC
     }
 }
 
@@ -352,9 +362,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
         }
     }
     
-    func resetData() {
-        self.store.dispatch(ResetDataAction())
-    }
+   
     
     var state: TransferState {
         return store.state

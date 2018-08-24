@@ -151,7 +151,7 @@ extension YourPortfolioViewController {
     self.coordinator?.pushToWithdrawDepositVC()
   }
   @objc func transfer(_ data: [String: Any]) {
-    self.coordinator?.pushToTransferVC()
+    self.coordinator?.pushToTransferVC(true)
   }
 }
 

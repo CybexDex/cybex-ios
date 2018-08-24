@@ -363,7 +363,7 @@ extension RechargeDetailViewController {
                 if self.isVisible{
                     if String(describing: data) == "<null>"{
         
-                        if AddressManager.shared.containAddressOfWithDraw(address).0 == false {
+                        if AddressManager.shared.containAddressOfWithDraw(address,currency:self.trade!.id).0 == false {
                             self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.withdraw_success_title.key.localized(), content: R.string.localizable.withdraw_success_content.key.localized())
                         }
                         else{

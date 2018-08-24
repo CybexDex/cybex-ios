@@ -130,7 +130,7 @@ class AddAddressViewController: BaseViewController {
             if self.containerView.addBtn.isEnable == false || self.containerView.address_state != .Success {
                 return
             }
-            let exit = self.address_type == .withdraw ?  AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text).0 : AddressManager.shared.containAddressOfTransfer(self.containerView.address.content.text).0
+            let exit = self.address_type == .withdraw ?  AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text,currency: self.asset).0 : AddressManager.shared.containAddressOfTransfer(self.containerView.address.content.text).0
             if exit {
                 if self.isVisible {
                     self.showToastBox(false, message: self.address_type == .withdraw ? R.string.localizable.address_exit.key.localized() : R.string.localizable.account_exit.key.localized())

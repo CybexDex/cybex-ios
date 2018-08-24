@@ -62,11 +62,13 @@ class AddressManager {
         return list.filter( {$0.currency == currency } )
     }
     
-    func containAddressOfWithDraw(_ address:String) -> (Bool, [WithdrawAddress]) {
+    func containAddressOfWithDraw(_ address:String, currency : String) -> (Bool, [WithdrawAddress]) {
         let list = Defaults[.withdrawAddressList]
         
         let filterList = list.filter { (info) -> Bool in
-            return info.address == address
+            return info.currency == currency
+            }.filter { (info) -> Bool in
+                return info.address == address
         }
         
         if filterList.count > 0 {

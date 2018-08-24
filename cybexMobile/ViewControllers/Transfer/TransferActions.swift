@@ -70,6 +70,10 @@ struct ResetDataAction : Action {
   
 }
 
+struct CleanToAccountAction : Action{
+    
+}
+
 struct ChooseAccountAction : Action {
     var account : TransferAddress
 }
