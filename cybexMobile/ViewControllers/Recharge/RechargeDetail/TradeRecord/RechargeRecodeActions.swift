@@ -19,11 +19,17 @@ struct RechargeRecodeState: StateType {
 }
 
 struct RechargeRecodePropertyState {
-  var data : BehaviorRelay<TradeRecord?> = BehaviorRelay(value: nil)
+    var data : BehaviorRelay<TradeRecord?> = BehaviorRelay(value: nil)
+    var asset : String = ""
 }
 
 struct FetchDepositRecordsAction : Action {
-  var data : TradeRecord?
+    var data : TradeRecord?
+    var asset_id : String
+}
+
+struct SetWithdrawListAssetAction : Action {
+    var asset : String
 }
 
 

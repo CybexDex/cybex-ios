@@ -50,7 +50,7 @@
 
 "register" = "注册";
 
-"opened.title"    = "委单";
+"opened.title"    = "我的委单";
 "confirm" = "我记住了";
 "attention" = "注意事项";
 
@@ -82,6 +82,9 @@
 
 "password.validate.error.1" = "输入12位以上的密码";
 "password.validate.error.2" = "密码不一致";
+"password.validate.error.3" = "密码需包含大小写字母、数字、特殊字符，长度不少于12个字符";
+
+
 "register.fail" = "注册失败";
 "register.fail403" = "验证码错误";
 "register.fail429" = "操作太频繁，请稍后再试";
@@ -184,6 +187,7 @@
 "utils_withdrawfee"  = "转账手续费";
 "utils_gatewayfee"   = "提现手续费";
 "utils_receiveamount" = "到账数量";
+"withdraw_memo" = "备注";
 
 "password_placeholder" = "请输入密码";
 "tip_title"   = "提示";
@@ -281,11 +285,11 @@
 
 "transfer_title" = "转账";
 "transfer_transfer" = "转账";
-"transfer_account" = "账户名";
+"transfer_account_title" = "账户";
 "transfer_account_pla" = "请输入收款方账户名";
 "transfer_crypto" = "币种";
 "transfer_crypto_pla" = "请选择转账币种";
-"transfer_quantity" = "金额";
+"transfer_quantity" = "数量";
 "transfer_memo" = "备注";
 "transfer_fee" = "手续费";
 "transfer_balance" = "余额";
@@ -305,7 +309,7 @@
 
 //zsy add
 "my_property" = "我的资产";
-"order_value" = "委单";
+"order_value" = "我的委单";
 "transfer" = "转账";
 "account_property" = "账户资产估值(CYB)";
 "hello" = "您好，";
@@ -324,4 +328,52 @@
 "Pull to refresh" = "下拉刷新";
 "Release to refresh" = "松开刷新";
 
+"address_manager" = "地址管理";
+"transfer_account_name" = "转账账户";
+"transfer_account" = "账户";
+"address_or_account" = "标签/账户";
+"account_or_address" = "标签/地址";
 
+"address_asset" = "币种";
+"address_mark" = "标签";
+"address_add" = "添加";
+"address_note_placeholder" = "最多不超过15个字符";
+
+"account_exit" = "该账户已存在";
+"address_exit" = "该地址已存在";
+
+"account_title_add" = "添加转账账户";
+"address_title_add" = "添加提现地址";
+"address_title_add_eos" = "添加提现账户";
+"address_add_success" = "添加成功";
+"transfer_account_manager" = "转账账户管理";
+"withdraw_address_manager" = "提现地址管理";
+
+"copy" = "复制";
+"copied" = "复制成功";
+
+"delete" = "删除";
+"deleted" = "删除成功";
+
+"address" = "地址";
+
+"choose_address" = "选择地址";
+"add_address" = "添加地址";
+
+"choose_account" = "选择账户";
+"add_account" = "添加账户";
+
+"withdraw_success_title" = "提现申请成功";
+"withdraw_success_content" = "是否将该地址储存到提现地址列表？";
+
+"transfer_success_title" = "转账成功";
+"transfer_success_content" = "是否将该账户储存到转账账户列表？";
+
+"delete_confirm_address" = "确认删除该地址？";
+"delete_confirm_account" = "确认删除该账户？";
+"address_nodata"       = "暂无提现地址";
+"account_nodata"       = "暂无提现账户";
+
+"account_transfer_nodata"       = "暂无转账账户";
+
+"address_delete_confirm" = "删除确认";

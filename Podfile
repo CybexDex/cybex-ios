@@ -3,8 +3,8 @@ platform :ios, '9.0'
 def network
 #    pod 'Starscream'
     pod 'SocketRocket', :git => 'https://github.com/facebook/SocketRocket', :branch => 'master'
-    pod 'JSONRPCKit'
-    pod 'Moya'
+    pod 'JSONRPCKit', :git => 'https://github.com/phpmaple/JSONRPCKit', :branch => 'master'
+    pod 'Moya', :git => 'https://github.com/Moya/Moya', :tag => '12.0.0-beta.1'
     pod 'Kingfisher'
     pod 'RealReachability'
     pod 'Apollo'
@@ -19,7 +19,7 @@ def data
     pod 'GRDB.swift'
     pod 'CryptoSwift'
     pod 'RxGRDB'
-    pod 'SwiftyUserDefaults'
+    pod 'SwiftyUserDefaults',:git => 'https://github.com/radex/SwiftyUserDefaults', :tag => '4.0.0-alpha.1'
     pod 'Zephyr'
     pod 'Cache'
     pod 'Locksmith'
@@ -27,6 +27,10 @@ def data
     pod 'FCUUID'
     pod 'IQKeyboardManagerSwift'
     pod 'Guitar'
+    pod 'DifferenceKit'
+    pod 'Dollar'
+    pod 'Validator'
+    pod 'Fakery'
 end
 
 def resource
@@ -96,6 +100,7 @@ def ui
     pod 'GrowingTextView'
     pod 'XLActionController'
     pod 'ESPullToRefresh'
+    pod 'FSPagerView'
 end
 
 def other
@@ -103,6 +108,8 @@ def other
     pod 'LifetimeTracker'
     pod 'MLeaksFinder'
     pod 'Device'
+    pod 'SwiftNotificationCenter'
+    pod 'AsyncSwift'
 end
 
 def fabric
@@ -114,6 +121,13 @@ def debug
     pod 'SwiftyBeaver'
 #   pod 'AppSpectorSDK'
 #   pod 'WoodPeckeriOS', '>= 1.0.3', :configurations => ['Debug']
+end
+
+def um
+    pod 'UMCCommon'
+    pod 'UMCSecurityPlugins'
+    pod 'UMCAnalytics'
+    pod 'UMCCommonLog'
 end
 
 target 'cybexMobile' do
@@ -134,4 +148,12 @@ target 'cybexMobile' do
   ui
   other
   debug
+  um
+  
+  target 'cybexMobileTests' do
+      inherit! :search_paths
+      # Pods for testing
+      pod 'Nimble'
+      pod 'Quick'
+  end
 end

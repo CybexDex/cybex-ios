@@ -10,6 +10,21 @@ import Foundation
 import ReSwift
 import RxCocoa
 
+enum PageState {
+    case initial
+    case loading
+    case refreshing
+    case loadMore
+    case noMore
+    case noData
+    case normal
+    case error(Error)
+}
+
+protocol BaseState: StateType {
+    var pageState:BehaviorRelay<PageState> { get set }
+}
+
 struct AppState:StateType {
   var property: AppPropertyState
 }
@@ -31,11 +46,24 @@ struct AppPropertyState {
   
   var eth_rmb_price : Double  = 0
   
+  var importMarketLists : [ImportantMarketPair] = []
   
   func filterQuoteAsset(_ base:String) -> [HomeBucket] {
-    return data.value.filter({ (bucket) -> Bool in
+    
+    return self.data.value.filter({ (bucket) -> Bool in
       return bucket.base == base
     })
+    
+//    var data = self.data.value.filter({ (bucket) -> Bool in
+//      return bucket.base == base
+//    })
+//
+//    for market in self.importMarketLists {
+//      if base == market.base {
+//        data = data.filter({market.quotes.contains($0.quote)}) + data.filter({!market.quotes.contains($0.quote)})
+//      }
+//    }
+//    return data
   }
 }
 
@@ -66,6 +94,11 @@ struct Pair:Hashable {
 class LoadingActionCreator {
 }
 
+
+struct PageStateAction: Action {
+    var state: PageState
+}
+
 // MARK: - Common Actions
 struct StartLoading: Action {
   var vc: BaseViewController?
@@ -87,6 +120,9 @@ struct NextPage: Action {}
 struct ResetPage: Action {}
 
 
+struct FecthMarketListAction : Action {
+  var data : [ImportantMarketPair]
+}
 
 struct MarketsFetched:Action {
   let pair:AssetPairQueryParams
@@ -162,10 +198,7 @@ class AppPropertyActionCreate: LoadingActionCreator {
                   addAsset.quote_volume = "0"
                   addAsset.open = asset.open - gapCount * Double(asset.seconds)!
                   assets.prepend(addAsset)
-                  
-      
                 }
-                
                 callback?(assets)
 
               })

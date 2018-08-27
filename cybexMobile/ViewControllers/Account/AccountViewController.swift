@@ -34,6 +34,7 @@ class AccountViewController: BaseViewController {
     }
     setupUI()
     setupEvent()
+    
     if  UserManager.shared.isLoginIn {
     }
   }
@@ -87,10 +88,16 @@ class AccountViewController: BaseViewController {
     setupIconImg()
     self.configRightNavButton(R.image.icSettings24Px())
     
-    let imgArray = [R.image.icBalance(),R.image.w(),R.image.icOrder28Px(),R.image.icLockAsset()]
-    let nameArray = [R.string.localizable.my_property.key.localized(),R.string.localizable.deposit_withdraw.key.localized(),R.string.localizable.order_value.key.localized(),R.string.localizable.lockupAssetsTitle.key.localized()]
+    let imgArray = [R.image.icBalance(), R.image.w(), R.image.ic_address_28_px(), R.image.icOrder28Px(), R.image.icLockAsset()]
+    
+    let nameArray = [R.string.localizable.my_property.key.localized(),
+                     R.string.localizable.deposit_withdraw.key.localized(),
+                     R.string.localizable.address_manager.key.localized(),
+                     R.string.localizable.order_value.key.localized(),
+                     R.string.localizable.lockupAssetsTitle.key.localized()]
+    
     dataArray.removeAll()
-    for i in 0..<4 {
+    for i in 0..<nameArray.count {
       var model = AccountViewModel()
       model.leftImage = imgArray[i]
       model.name = nameArray[i]
@@ -109,24 +116,7 @@ class AccountViewController: BaseViewController {
     self.coordinator?.openSetting()
   }
   
-  
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-  }
-  
   override func configureObserveState() {
-    commonObserveState()
-    
     UserManager.shared.account.asObservable()
       .skip(1)
       .throttle(10, latest: true, scheduler: MainScheduler.instance)
@@ -155,6 +145,7 @@ extension AccountViewController{
       if !UserManager.shared.isLoginIn {
         app_coodinator.showLogin()
       } else {
+
         self.coordinator?.openYourProtfolio()
       }
     case 1:
@@ -164,6 +155,12 @@ extension AccountViewController{
         self.coordinator?.openRecharge()
       }
     case 2:
+        if !UserManager.shared.isLoginIn {
+            app_coodinator.showLogin()
+        } else {
+            self.coordinator?.openAddressManager()
+        }
+    case 3:
       if !UserManager.shared.isLoginIn {
         app_coodinator.showLogin()
       } else {

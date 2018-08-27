@@ -24,7 +24,10 @@ import SwiftRichString
 import SwiftyBeaver
 import AlamofireNetworkActivityLogger
 
+
 let log = SwiftyBeaver.self
+
+fileprivate let UM_APPKEY = "5b6bf4a8b27b0a3429000016"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -35,7 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Fabric.with([Crashlytics.self, Answers.self])
     EasyAnimation.enable()
     
-    
+    setupAnalytics()
+
     NetworkActivityLogger.shared.startLogging()
     NetworkActivityLogger.shared.level = .error
     if Defaults.hasKey(.frequency_type){
@@ -79,6 +83,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
   
+  func setupAnalytics() {
+    UMCommonLogManager.setUp()
+    MobClick.setCrashReportEnabled(true)
+    UMConfigure.setLogEnabled(true)
+    UMConfigure.setEncryptEnabled(true)
+    UMConfigure.initWithAppkey(UM_APPKEY, channel: "fir")
+    
+  }
   
   
   func applicationWillResignActive(_ application: UIApplication) {

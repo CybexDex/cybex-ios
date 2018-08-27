@@ -90,7 +90,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJ6-Af-LNN" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="96" width="294" height="48"/>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                                                 <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
@@ -114,6 +114,29 @@
                                                     <constraint firstItem="XCO-l7-dlp" firstAttribute="top" secondItem="fpo-dn-0FV" secondAttribute="bottom" id="tTo-zw-fVD"/>
                                                     <constraint firstItem="qJ6-Af-LNN" firstAttribute="leading" secondItem="XEv-8w-Nao" secondAttribute="leading" id="y9C-jh-3w8"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="newCornerRadius">
+                                                        <real key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="newTheme1ShadowColor">
+                                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="newTheme2ShadowColor">
+                                                        <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="newShadowRadius">
+                                                        <real key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="newShadowOffset">
+                                                        <size key="value" width="0.0" height="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="newShadowOpcity">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="newSpread">
+                                                        <real key="value" value="-4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbw-NE-dXd" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
                                                 <rect key="frame" x="13" y="156" width="294" height="48"/>
@@ -124,7 +147,7 @@
                                                             <constraint firstAttribute="height" constant="48" id="5dO-bs-Rzg"/>
                                                         </constraints>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                                                 <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
@@ -141,6 +164,29 @@
                                                     <constraint firstItem="OCU-kq-OIy" firstAttribute="top" secondItem="nbw-NE-dXd" secondAttribute="top" id="uS9-mG-rm9"/>
                                                     <constraint firstAttribute="trailing" secondItem="OCU-kq-OIy" secondAttribute="trailing" id="xtT-EM-KG5"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="newCornerRadius">
+                                                        <real key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="newTheme1ShadowColor">
+                                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="newTheme2ShadowColor">
+                                                        <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="newShadowRadius">
+                                                        <real key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="newShadowOffset">
+                                                        <size key="value" width="0.0" height="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="newShadowOpcity">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="newSpread">
+                                                        <real key="value" value="-4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Do-xk-j2g">
                                                 <rect key="frame" x="13" y="420" width="294" height="68"/>
@@ -205,8 +251,6 @@
                         <outlet property="language" destination="fpo-dn-0FV" id="qK3-Uw-ek3"/>
                         <outlet property="logoutView" destination="KDV-f5-Nyx" id="eNz-cM-cyG"/>
                         <outlet property="theme" destination="OCU-kq-OIy" id="9Zs-kp-2pU"/>
-                        <outlet property="themeShadowView" destination="nbw-NE-dXd" id="4yE-uV-SPl"/>
-                        <outlet property="topContentShadowView" destination="XEv-8w-Nao" id="Mp4-mg-tm9"/>
                         <outlet property="version" destination="qJ6-Af-LNN" id="C8p-1f-uOB"/>
                     </connections>
                 </viewController>

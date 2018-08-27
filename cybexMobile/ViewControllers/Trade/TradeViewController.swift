@@ -66,6 +66,8 @@ class TradeViewController: BaseViewController {
     }
   }
   
+  var isfirstRefresh : Bool = true
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -117,9 +119,7 @@ class TradeViewController: BaseViewController {
   }
   
   func setupNavi(){
-    configLeftNavButton(R.image.icCandle())
     configRightNavButton(R.image.ic_star_border_24_px())
-    //    configRightNavButton(R.string.localizable.my_history_title.key.localized())
     
     tradeTitltView = TradeNavTitleView(frame: CGRect(x: 0, y: 0, width: 100, height: 64))
     tradeTitltView.delegate = self
@@ -145,29 +145,12 @@ class TradeViewController: BaseViewController {
       self.coordinator?.openMarket(index: index, currentBaseIndex: baseIndex)
     }
   }
-  
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-  }
-  
-  
+
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     self.coordinator?.setupChildVC(segue)
   }
   
-  override func configureObserveState() {
-    commonObserveState()
-    
+  override func configureObserveState() {    
     app_data.otherRequestRelyData.asObservable()
       .subscribe(onNext: { (s) in
         if app_data.data.value.count == 0 {
@@ -191,7 +174,10 @@ class TradeViewController: BaseViewController {
       self.childViewControllers.forEach { (viewController) in
         if var viewController = viewController as? TradePair{
           viewController.pariInfo = self.pair
-          viewController.refresh()
+          if self.isfirstRefresh {
+            viewController.refresh()
+            self.isfirstRefresh = false
+          }
         }
       }
     }

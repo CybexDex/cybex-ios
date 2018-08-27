@@ -21,7 +21,9 @@ enum NodeURLString:String {
   case tokyo = "wss://tokyo-01.cybex.io"
   case korea = "wss://korea-01.cybex.io"
   
+//  case test = "https://hangzhou.51nebula.com/"
   static var all:[NodeURLString] {
+//    return [.test]
     return [.shanghai, .beijing, .hongkong, .singapore, .tokyo, .korea]
   }
 }
@@ -261,8 +263,7 @@ class CybexWebSocketService: NSObject {
           }
           json["params"] = JSON(oldParams)
           
-          
-          log.info("request: \(json.rawString()!)")
+//          log.info("request: \(json.rawString()!)")
           
           let data = try? json.rawData()
           try? self.socket.send(data: data)
@@ -369,6 +370,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
   func webSocket(_ webSocket: SRWebSocket, didReceiveMessage message: Any) {
     if self.currentNode == nil && isDetectingSocket(webSocket) {
       self.closeAllTestSocket()
+      
       self.currentNode = NodeURLString(rawValue: webSocket.url!.absoluteString)!
       connectNode(node: self.currentNode!)
       
@@ -380,7 +382,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
     
     guard let message = message as? String else { return }
 
-    log.info("enter receieveMessage --- current operations Count: \(queue.operationCount)")
+//    log.info("enter receieveMessage --- current operations Count: \(queue.operationCount)")
     let data = JSON(parseJSON:message)
 //    log.info("receive message: \(data.rawString()!)")
     
@@ -394,8 +396,6 @@ extension CybexWebSocketService: SRWebSocketDelegate {
         operation.state = .finished
       }
     }
-    
-    log.info("end receieveMessage --- current operations Count: \(queue.operationCount)")
-
+//    log.info("end receieveMessage --- current operations Count: \(queue.operationCount)")
   }
 }

@@ -9,28 +9,33 @@
 import Foundation
 
 protocol NavProtocol {
-  func openWebVC(url:URL)
+    func openWebVC(url:URL)
 }
 
 class NavCoordinator:NavProtocol {
-  
-  weak var rootVC: BaseNavigationController!
-  
-  init(rootVC: BaseNavigationController) {
-    self.rootVC = rootVC
-  }
-  
-  func start()  {
     
-  }
+    weak var rootVC: BaseNavigationController!
+    
+    init(rootVC: BaseNavigationController) {
+        self.rootVC = rootVC
+        register()
+    }
+    
+    func start()  {
+        
+    }
+    
+    func register() {
+        
+    }
 }
 
 extension NavCoordinator {
-  func openWebVC(url:URL) {
-    let web = BaseWebViewController()
-    web.url = url
-
-    self.rootVC.pushViewController(web, animated: true)
-  }
-  
+    func openWebVC(url:URL) {
+        let web = BaseWebViewController()
+        web.url = url
+        
+        self.rootVC.pushViewController(web, animated: true)
+    }
+    
 }

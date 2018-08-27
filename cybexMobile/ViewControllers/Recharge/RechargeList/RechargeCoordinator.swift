@@ -44,6 +44,7 @@ extension RechargeCoordinator: RechargeCoordinatorProtocol {
     vc.isWithdraw     = trade.enable
     self.rootVC.pushViewController(vc, animated: true)
   }
+  
   func openWithDrawDetail(_ trade:Trade){
     let vc = R.storyboard.account.withdrawDetailViewController()!
     let coordinator = WithdrawDetailCoordinator(rootVC: self.rootVC)

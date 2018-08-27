@@ -56,6 +56,8 @@ struct AppConfiguration {
   static let WITHDRAW_MSG               = SERVER_BASE_URLString + "json/withdraw_msg.json"
   static let DEPOSIT_MSG                = SERVER_BASE_URLString + "json/deposit_msg.json"
   
+  static let MARKETLISTS                = SERVER_BASE_URLString + "json/marketlists.json"
+  
   static let RECODE_BASE_URLString = "https://gateway-query.cybex.io/"
   static let RECODE_LOGIN = RECODE_BASE_URLString + "login"
   static let RECODE_RECODES = RECODE_BASE_URLString + "records"

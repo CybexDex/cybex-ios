@@ -79,7 +79,7 @@ class TradeRecodeViewController: BaseViewController {
   func fetchDepositRecords(offset : Int = 0 ,callback:@escaping ()->()) {
     self.startLoading()
     if let asset_info = self.assetInfo ,let name = UserManager.shared.name.value {
-      self.coordinator?.fetchRechargeRecodeList(name, asset: asset_info.symbol, fundType: record_type, size: 20, offset: offset, expiration: Int(Date().timeIntervalSince1970 + 600) ,callback: { [weak self] success in
+        self.coordinator?.fetchRechargeRecodeList(name, asset: asset_info.symbol, fundType: record_type, size: 20, offset: offset, expiration: Int(Date().timeIntervalSince1970 + 600), asset_id: asset_info.id ,callback: { [weak self] success in
       
         guard let `self` = self else {return}
         self.endLoading()
@@ -106,23 +106,9 @@ class TradeRecodeViewController: BaseViewController {
       })
     }
   }
-  
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-  }
+
   
   override func configureObserveState() {
-    commonObserveState()
   }
 }
 
@@ -134,12 +120,8 @@ extension TradeRecodeViewController : UITableViewDelegate,UITableViewDataSource 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cellString = String(describing: RecodeCell.self)
     let cell = tableView.dequeueReusableCell(withIdentifier: cellString, for: indexPath) as! RecodeCell
-    if let asset_info = self.assetInfo {
-      cell.cellView.icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + asset_info.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
-      let record = self.data[indexPath.row]
-      cell.cellView.amount.text = getRealAmount(asset_info.id, amount: String(record.amount)).string.formatCurrency(digitNum: asset_info.precision) + asset_info.symbol.filterJade
-      cell.setup(record, indexPath: indexPath)
-    }
+    
+    cell.setup(self.data[indexPath.row], indexPath: indexPath)
     return cell
   }
 }

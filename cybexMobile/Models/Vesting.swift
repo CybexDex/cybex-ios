@@ -65,7 +65,7 @@ class PortfolioData{
     name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
     // 获得自己的个数
     if let asset_info = app_data.assetInfo[balance.asset_type] {
-      realAmount = getRealAmount(balance.asset_type, amount: balance.balance).stringValue.formatCurrency(digitNum: asset_info.precision)
+      realAmount = getRealAmount(balance.asset_type, amount: balance.balance).string(digits: asset_info.precision, roundingMode: .down)
     }
     
     // 获取对应CYB的个数
@@ -99,7 +99,7 @@ class MyPortfolioData{
     name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
     // 获得自己的个数
     if let asset_info = app_data.assetInfo[balance.asset_type] {
-      realAmount = getRealAmount(balance.asset_type, amount: balance.balance).stringValue.formatCurrency(digitNum: asset_info.precision)
+      realAmount = getRealAmount(balance.asset_type, amount: balance.balance).string(digits: asset_info.precision, roundingMode: .down)
     }
     
     // 获取对应CYB的个数

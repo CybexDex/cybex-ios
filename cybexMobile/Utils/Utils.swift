@@ -299,7 +299,7 @@ func getRealAmount(_ id : String ,amount : String) -> Decimal {
   
   let precisionNumber = pow(10, asset.precision)
   
-  if let amountDecimal = Decimal(string: amount) {
+  if let amountDecimal = amount.toDecimal() {
     return amountDecimal / precisionNumber
   }
   
@@ -342,25 +342,28 @@ func getUserId(_ userId:String)->Int{
 }
 
 
-func getWithdrawDetailInfo(addressInfo:String,amountInfo:String,withdrawFeeInfo:String,gatewayFeeInfo:String,receiveAmountInfo:String) -> [NSAttributedString]{
+func getWithdrawDetailInfo(addressInfo:String,amountInfo:String,withdrawFeeInfo:String,gatewayFeeInfo:String,receiveAmountInfo:String,isEOS:Bool,memoInfo:String) -> [NSAttributedString]{
   let address :String = R.string.localizable.utils_address.key.localized()
   let amount : String = R.string.localizable.utils_amount.key.localized()
   let gatewayFee : String = R.string.localizable.utils_withdrawfee.key.localized()
   let withdrawFee : String = R.string.localizable.utils_gatewayfee.key.localized()
   let receiveAmount : String = R.string.localizable.utils_receiveamount.key.localized()
+  let memo : String = R.string.localizable.withdraw_memo.key.localized()
   
   let content = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
   
-  /*
-   "utils_withdrawfee"  = "Transfer Fee:";
-   "utils_gatewayfee"   = "Gateway Fee:";
-   */
-  
-  return (["<name>\(String(describing: address)):</name><\(content)>\n\(String(describing: addressInfo))</\(content)>".set(style: "alertContent"),
-           "<name>\(String(describing: amount)):</name><\(content)>  \(String(describing: amountInfo))</\(content)>".set(style: "alertContent"),
-           "<name>\(String(describing: withdrawFee)):</name><\(content)>  \(String(describing: withdrawFeeInfo))</\(content)>".set(style: "alertContent"),
-           "<name>\(String(describing: gatewayFee)):</name><\(content)>  \(String(describing: gatewayFeeInfo))</\(content)>".set(style: "alertContent"),
-           "<name>\(String(describing: receiveAmount)):</name><\(content)>  \(String(describing: receiveAmountInfo))</\(content)>".set(style: "alertContent")] as? [NSAttributedString])!
+  return (isEOS && memoInfo.count > 0) ?
+    (["<name>\(String(describing: address)):</name><\(content)>\n\(String(describing: addressInfo))</\(content)>".set(style: "alertContent"),
+      "<name>\(String(describing: memo)):</name><\(content)>  \(String(describing: memoInfo))</\(content)>".set(style: "alertContent"),
+      "<name>\(String(describing: amount)):</name><\(content)>  \(String(describing: amountInfo))</\(content)>".set(style: "alertContent"),
+      "<name>\(String(describing: withdrawFee)):</name><\(content)>  \(String(describing: withdrawFeeInfo))</\(content)>".set(style: "alertContent"),
+      "<name>\(String(describing: gatewayFee)):</name><\(content)>  \(String(describing: gatewayFeeInfo))</\(content)>".set(style: "alertContent"),
+      "<name>\(String(describing: receiveAmount)):</name><\(content)>  \(String(describing: receiveAmountInfo))</\(content)>".set(style: "alertContent")] as? [NSAttributedString])! :
+    (["<name>\(String(describing: address)):</name><\(content)>\n\(String(describing: addressInfo))</\(content)>".set(style: "alertContent"),
+    "<name>\(String(describing: amount)):</name><\(content)>  \(String(describing: amountInfo))</\(content)>".set(style: "alertContent"),
+    "<name>\(String(describing: withdrawFee)):</name><\(content)>  \(String(describing: withdrawFeeInfo))</\(content)>".set(style: "alertContent"),
+    "<name>\(String(describing: gatewayFee)):</name><\(content)>  \(String(describing: gatewayFeeInfo))</\(content)>".set(style: "alertContent"),
+    "<name>\(String(describing: receiveAmount)):</name><\(content)>  \(String(describing: receiveAmountInfo))</\(content)>".set(style: "alertContent")] as? [NSAttributedString])!
 }
 
 func getOpenedOrderInfo(price:String,amount:String,total:String,fee:String,isBuy:Bool) ->[NSAttributedString]{
@@ -384,18 +387,66 @@ func getOpenedOrderInfo(price:String,amount:String,total:String,fee:String,isBuy
 }
 
 func getTransferInfo(_ account: String, quanitity: String, fee: String, memo: String) -> [NSAttributedString] {
-  let accountTitle = R.string.localizable.transfer_account.key.localized()
+  let accountTitle = R.string.localizable.transfer_account_title.key.localized()
   let quantityTitle = R.string.localizable.transfer_quantity.key.localized()
   let feeTitle = R.string.localizable.transfer_fee.key.localized()
   let memoTitle = R.string.localizable.transfer_memo.key.localized()
   
   let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
   
-  return (["<name>\(String(describing: accountTitle)):</name>  <\(contentStyle)>\(String(describing: account))</\(contentStyle)>".set(style: "alertContent"),
+  return memo.trimmed.count != 0 ? (["<name>\(String(describing: accountTitle)):</name>  <\(contentStyle)>\(String(describing: account))</\(contentStyle)>".set(style: "alertContent"),
            "<name>\(String(describing: quantityTitle)):</name><\(contentStyle)>  \(String(describing: quanitity))</\(contentStyle)>".set(style: "alertContent"),
            "<name>\(String(describing: feeTitle)):</name><\(contentStyle)>  \(String(describing: fee))</\(contentStyle)>".set(style: "alertContent"),
-           "<name>\(String(describing: memoTitle)):</name><\(contentStyle)>  \(String(describing: memo))</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])!
+    "<name>\(String(describing: memoTitle)):</name><\(contentStyle)>  \(String(describing: memo))</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])! :
+    (["<name>\(String(describing: accountTitle)):</name>  <\(contentStyle)>\(String(describing: account))</\(contentStyle)>".set(style: "alertContent"),
+      "<name>\(String(describing: quantityTitle)):</name><\(contentStyle)>  \(String(describing: quanitity))</\(contentStyle)>".set(style: "alertContent"),
+      "<name>\(String(describing: feeTitle)):</name><\(contentStyle)>  \(String(describing: fee))</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])!
 }
+
+func confirmDeleteWithDrawAddress(_ info:WithdrawAddress) -> [NSAttributedString] {
+    
+    let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
+
+    let isEOS = info.currency == AssetConfiguration.EOS
+    let existMemo = info.memo != nil && !info.memo!.isEmpty
+    
+    var result:[NSAttributedString] = []
+    
+    let title = "<\(contentStyle)>" + (isEOS ? R.string.localizable.delete_confirm_account.key.localized() : R.string.localizable.delete_confirm_address.key.localized()) + "</\(contentStyle)>"
+    result.append(title.set(style: StyleNames.alertContent.rawValue)!)
+    
+    let note = "<name>" + R.string.localizable.address_mark.key.localized() + "：</name>" + "<\(contentStyle)>" + "\(info.name)" + "</\(contentStyle)>"
+    result.append(note.set(style: StyleNames.alertContent.rawValue)!)
+
+    let address = "<name>" + (isEOS ? R.string.localizable.accountTitle.key.localized() : R.string.localizable.address.key.localized()) + "：</name>" + "<\(contentStyle)>" + "\(info.address)" + "</\(contentStyle)>"
+    result.append(address.set(style: StyleNames.alertContent.rawValue)!)
+
+    if existMemo {
+        let memo = "<name>" + R.string.localizable.withdraw_memo.key.localized() + "：</name>" + "<\(contentStyle)>" + "\(info.memo!)" + "</\(contentStyle)>"
+        result.append(memo.set(style: StyleNames.alertContent.rawValue)!)
+    }
+    
+    return result
+}
+
+func confirmDeleteTransferAddress(_ info:TransferAddress) -> [NSAttributedString] {
+    let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
+    
+    var result:[NSAttributedString] = []
+
+    let title = "<\(contentStyle)>" + R.string.localizable.delete_confirm_account.key.localized() + "</\(contentStyle)>"
+    result.append(title.set(style: StyleNames.alertContent.rawValue)!)
+
+    let note = "<name>" + R.string.localizable.address_mark.key.localized() + "：</name>" + "<\(contentStyle)>" + "\(info.name)" + "</\(contentStyle)>"
+    result.append(note.set(style: StyleNames.alertContent.rawValue)!)
+
+    let address = "<name>" + R.string.localizable.accountTitle.key.localized() + "：</name>" + "<\(contentStyle)>" + "\(info.address)" + "</\(contentStyle)>"
+    result.append(address.set(style: StyleNames.alertContent.rawValue)!)
+
+    
+    return result
+}
+
 
 func checkMaxLength(_ sender:String,maxLength:Int) ->String{
   if sender.contains("."){
@@ -464,3 +515,48 @@ func getWithdrawAndDepositRecords(_ accountName : String, asset : String, fundTy
   }
 }
 
+func sortNameBasedonAddress(_ names: [AddressName]) -> [String] {
+    let collation = UILocalizedIndexedCollation.current()
+    var newSectionsArray: [[AddressName]] = []
+    
+    for _ in 0 ..< collation.sectionTitles.count {
+        let array = [AddressName]()
+        newSectionsArray.append(array)
+    }
+    
+    for name in names {
+        let sectionNumber = collation.section(for: name, collationStringSelector: #selector(getter: AddressName.name))
+        var sectionBeans = newSectionsArray[sectionNumber]
+        
+        sectionBeans.append(name)
+        
+        newSectionsArray[sectionNumber] = sectionBeans
+    }
+    
+    for i in 0 ..< collation.sectionTitles.count {
+        let beansArrayForSection = newSectionsArray[i]
+        
+        let sortedBeansArrayForSection = collation.sortedArray(from: beansArrayForSection, collationStringSelector:  #selector(getter: AddressName.name))
+        newSectionsArray[i] = sortedBeansArrayForSection as! [AddressName]
+    }
+    
+    let sortedNames = newSectionsArray.flatMap({ $0 }).map({ $0.name })
+    
+    return sortedNames
+}
+
+struct WeakObject<T: AnyObject>: Equatable, Hashable {
+    static func == (lhs: WeakObject<T>, rhs: WeakObject<T>) -> Bool {
+        return lhs.object === rhs.object
+    }
+    
+    weak var object: T?
+    init(_ object: T) {
+        self.object = object
+    }
+    
+    var hashValue: Int {
+        if let object = self.object { return ObjectIdentifier(object).hashValue }
+        else { return 0 }
+    }
+}

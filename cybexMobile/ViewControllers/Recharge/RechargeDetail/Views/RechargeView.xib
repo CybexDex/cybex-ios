@@ -23,6 +23,7 @@
                 <outlet property="insideFee" destination="oy5-ye-zub" id="iad-vF-H4X"/>
                 <outlet property="introduce" destination="Ejc-lN-07f" id="yXB-bK-OlI"/>
                 <outlet property="introduceView" destination="mFS-Cj-1Ht" id="bVi-tz-9O9"/>
+                <outlet property="memoView" destination="gnP-R6-llI" id="lqD-ru-2Og"/>
                 <outlet property="stackView" destination="OWl-Rh-fSG" id="kQ9-li-5oh"/>
                 <outlet property="withdraw" destination="FAR-sa-0ke" id="08y-Cm-k2f"/>
             </connections>
@@ -36,10 +37,10 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="600" translatesAutoresizingMaskIntoConstraints="NO" id="IHY-jL-hXd">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="621"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="688"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OWl-Rh-fSG">
-                                    <rect key="frame" x="13" y="0.0" width="349" height="621"/>
+                                    <rect key="frame" x="13" y="0.0" width="349" height="688"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Nh-CU-1ag" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="349" height="80"/>
@@ -59,8 +60,8 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xuG-mz-vda">
-                                            <rect key="frame" x="0.0" y="90" width="349" height="134"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="d7J-9k-CEy">
+                                            <rect key="frame" x="0.0" y="90" width="349" height="201"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mYS-m6-mJ9" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="349" height="67"/>
@@ -80,10 +81,33 @@
                                                         <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gnP-R6-llI" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="67" width="349" height="67"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="67" id="kuX-72-lPm"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="SOURCE_TYPE">
+                                                            <integer key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_memo"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cTf-Z4-7CG" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="67" width="349" height="67"/>
+                                                    <rect key="frame" x="0.0" y="134" width="349" height="67"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="67" id="lxL-sQ-Rld"/>
+                                                    </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="SOURCE_TYPE">
                                                             <integer key="value" value="2"/>
@@ -96,40 +120,13 @@
                                                         <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mkE-iB-rXn">
-                                                    <rect key="frame" x="12" y="66" width="325" height="1"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="VUe-Fz-XZ9"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                                            <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.1058823529" green="0.1333333333" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="134" id="0s2-a5-1Xz"/>
-                                                <constraint firstItem="mYS-m6-mJ9" firstAttribute="top" secondItem="xuG-mz-vda" secondAttribute="top" id="DeA-oM-s2a"/>
-                                                <constraint firstItem="mYS-m6-mJ9" firstAttribute="leading" secondItem="xuG-mz-vda" secondAttribute="leading" id="IsC-Nv-H6C"/>
-                                                <constraint firstAttribute="trailing" secondItem="cTf-Z4-7CG" secondAttribute="trailing" id="PbZ-dl-GPd"/>
-                                                <constraint firstItem="cTf-Z4-7CG" firstAttribute="leading" secondItem="xuG-mz-vda" secondAttribute="leading" id="TTN-VP-1yX"/>
-                                                <constraint firstAttribute="trailing" secondItem="mkE-iB-rXn" secondAttribute="trailing" constant="12" id="U6N-h0-I7V"/>
-                                                <constraint firstAttribute="trailing" secondItem="mYS-m6-mJ9" secondAttribute="trailing" id="aef-6G-Niw"/>
-                                                <constraint firstItem="mkE-iB-rXn" firstAttribute="centerY" secondItem="xuG-mz-vda" secondAttribute="centerY" id="d91-0J-zqC"/>
-                                                <constraint firstAttribute="bottom" secondItem="cTf-Z4-7CG" secondAttribute="bottom" id="m6E-yz-3b3"/>
-                                                <constraint firstItem="cTf-Z4-7CG" firstAttribute="top" secondItem="mYS-m6-mJ9" secondAttribute="bottom" id="nnB-hr-Mh1"/>
-                                                <constraint firstItem="mkE-iB-rXn" firstAttribute="leading" secondItem="xuG-mz-vda" secondAttribute="leading" constant="12" id="uJe-rb-NtO"/>
-                                            </constraints>
-                                        </view>
+                                        </stackView>
                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MbT-t2-i9i">
-                                            <rect key="frame" x="0.0" y="229" width="349" height="8"/>
+                                            <rect key="frame" x="0.0" y="296" width="349" height="8"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址错误" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfA-D7-bl9">
                                                     <rect key="frame" x="31" y="4" width="306" height="0.0"/>
@@ -155,7 +152,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2C4-we-wEr">
-                                            <rect key="frame" x="0.0" y="234" width="349" height="79"/>
+                                            <rect key="frame" x="0.0" y="301" width="349" height="79"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="550-pL-z1P">
                                                     <rect key="frame" x="12" y="18" width="0.0" height="22"/>
@@ -235,7 +232,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mFS-Cj-1Ht">
-                                            <rect key="frame" x="0.0" y="323" width="349" height="159"/>
+                                            <rect key="frame" x="0.0" y="390" width="349" height="159"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ejc-lN-07f" customClass="IntroduceView" customModule="cybexMobile" customModuleProvider="target">
                                                     <rect key="frame" x="12" y="12" width="325" height="136"/>
@@ -257,7 +254,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GP3-z2-cxh">
-                                            <rect key="frame" x="0.0" y="492" width="349" height="129"/>
+                                            <rect key="frame" x="0.0" y="559" width="349" height="129"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6C6-Sc-Lae">
                                                     <rect key="frame" x="12" y="22" width="0.0" height="20"/>
@@ -343,6 +340,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-419" y="-75"/>
         </view>
     </objects>
     <resources>

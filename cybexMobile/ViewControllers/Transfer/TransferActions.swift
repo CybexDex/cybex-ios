@@ -22,6 +22,7 @@ enum AccountValidStatus: Int {
   case unValided = 0
   case validSuccessed
   case validFailed
+  case validding
 }
 
 struct TransferPropertyState {  
@@ -40,7 +41,10 @@ struct TransferPropertyState {
   var memo: BehaviorRelay<String> = BehaviorRelay(value: "")
   
   var to_account: BehaviorRelay<Account?> = BehaviorRelay(value: nil)
+  
 }
+
+
 
 struct ValidAccountAction: Action {
   var status: AccountValidStatus = .unValided
@@ -64,6 +68,14 @@ struct SetToAccountAction: Action {
 
 struct ResetDataAction : Action {
   
+}
+
+struct CleanToAccountAction : Action{
+    
+}
+
+struct ChooseAccountAction : Action {
+    var account : TransferAddress
 }
 
 //MARK: - Action Creator

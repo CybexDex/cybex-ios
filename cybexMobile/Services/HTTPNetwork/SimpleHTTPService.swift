@@ -281,6 +281,24 @@ extension SimpleHTTPService {
   }
   
   
+  static func fetchMarketListJson() -> Promise<[ImportantMarketPair]> {
+    var request  = URLRequest(url: URL(string: AppConfiguration.MARKETLISTS)!)
+    request.cachePolicy = .reloadIgnoringCacheData
+    let (promise ,seal) = Promise<[ImportantMarketPair]>.pending()
+    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+      guard let value = response.result.value else {
+        seal.fulfill([])
+        return
+      }
+      let marketLists = JSON(value).arrayValue.map({ (item) in
+        ImportantMarketPair(base: item["base"].stringValue, quotes: (item["quotes"].arrayObject as? [String])!)
+      })
+      seal.fulfill(marketLists)
+    }
+    return promise
+  }
+  
+  
   static func recordLogin(_ sender : [String:Any]) -> Promise<String?> {
     var request = try! URLRequest(url: URL(string: AppConfiguration.RECODE_LOGIN)!, method: .post, headers: ["Content-Type": "application/json"])
     request.timeoutInterval = 5

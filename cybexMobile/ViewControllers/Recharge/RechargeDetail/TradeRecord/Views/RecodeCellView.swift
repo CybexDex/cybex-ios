@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftTheme
 
 class RecodeCellView: UIView {
 
@@ -20,10 +21,21 @@ class RecodeCellView: UIView {
   var data : Any? {
     didSet{
       if let data = data as? Record {
-        address.text = data.address
+        let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "node_dark" : "node_white"
+        let withdrawAddress = AddressManager.shared.containAddressOfWithDraw(data.address, currency: data.asset_id)
+        let attributedString = withdrawAddress.0 == true ? "<\(contentStyle)>\(withdrawAddress.1.first!.name)</\(contentStyle)>\n<address>\(data.address)</address>".set(style: StyleNames.address.rawValue) :  "<address>\(data.address)</address>".set(style: StyleNames.address.rawValue)
+        address.attributedText = attributedString
         time.text = data.updateAt.string(withFormat: "MM/dd HH:mm:ss")
         name.text = data.asset.filterJade
         state.text = data.state.desccription()
+        icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + data.asset_id.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
+        if let asset_info = app_data.assetInfo[data.asset_id] {
+            amount.text = getRealAmount(asset_info.id, amount: String(data.amount)).string.formatCurrency(digitNum: asset_info.precision) + " " +  asset_info.symbol.filterJade
+        }
+        else {
+            amount.text = "-"
+        }
+        
         updateHeight()
       }
     }
@@ -45,7 +57,7 @@ class RecodeCellView: UIView {
   
   fileprivate func dynamicHeight() -> CGFloat {
     let lastView = self.subviews.last?.subviews.last
-    return lastView!.bottom + 8
+    return lastView!.bottom 
   }
   
   override func layoutSubviews() {

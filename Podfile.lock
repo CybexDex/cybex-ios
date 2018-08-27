@@ -5,10 +5,11 @@ PODS:
   - Alamofire (4.7.3)
   - AlamofireNetworkActivityLogger (2.3.0):
     - Alamofire (~> 4.6)
-  - Apollo (0.9.1):
-    - Apollo/Core (= 0.9.1)
-  - Apollo/Core (0.9.1)
+  - Apollo (0.9.2):
+    - Apollo/Core (= 0.9.2)
+  - Apollo/Core (0.9.2)
   - AsyncOperation (1.1.0)
+  - AsyncSwift (2.0.4)
   - AwaitKit (5.0.0):
     - PromiseKit (~> 6)
   - BeareadToast (0.0.3)
@@ -19,26 +20,35 @@ PODS:
   - ChainableAnimations (3.0.1)
   - Crashlytics (3.10.5):
     - Fabric (~> 1.7.9)
-  - CryptoSwift (0.10.0)
+  - CryptoSwift (0.11.0)
   - Device (3.1.0)
+  - DifferenceKit (0.4.0):
+    - DifferenceKit/Core (= 0.4.0)
+    - DifferenceKit/UIExtensions (= 0.4.0)
+  - DifferenceKit/Core (0.4.0)
+  - DifferenceKit/UIExtensions (0.4.0):
+    - DifferenceKit/Core
   - Differentiator (3.0.2)
   - DNSPageView (1.0.1)
+  - Dollar (7.1.0)
   - EasyAnimation (2.0.2)
   - EFQRCode (4.2.2)
   - ESPullToRefresh (2.7)
   - ESTabBarController-swift (2.6.2)
   - Fabric (1.7.9)
+  - Fakery (3.3.0)
   - FBRetainCycleDetector (0.1.4)
   - FCUUID (1.3.1):
     - UICKeyChainStore (~> 2.1.0)
+  - FSPagerView (0.7.2)
   - GRDB.swift (3.2.0)
   - GrowingTextView (0.5.6)
   - Guitar (0.4.1)
-  - HandyJSON (4.1.1)
+  - HandyJSON (4.1.3)
   - IHKeyboardAvoiding (4.2)
   - IQKeyboardManagerSwift (6.1.1)
   - JSONRPCKit (3.0.0):
-    - Result (~> 3.2.0)
+    - Result (~> 4.0.0)
   - "Keyboard+LayoutGuide (1.2.2)"
   - KeychainAccess (3.1.1)
   - Kingfisher (4.8.1)
@@ -52,11 +62,12 @@ PODS:
   - MJRefresh (3.1.15.3)
   - MLeaksFinder (1.0.0):
     - FBRetainCycleDetector
-  - Moya (11.0.2):
-    - Moya/Core (= 11.0.2)
-  - Moya/Core (11.0.2):
+  - Moya (12.0.0-beta.1):
+    - Moya/Core (= 12.0.0-beta.1)
+  - Moya/Core (12.0.0-beta.1):
     - Alamofire (~> 4.1)
-    - Result (~> 3.0)
+    - Result (~> 4.0)
+  - Nimble (7.1.3)
   - NVActivityIndicatorView (4.3.0):
     - NVActivityIndicatorView/Presenter (= 4.3.0)
   - NVActivityIndicatorView/Presenter (4.3.0)
@@ -74,6 +85,7 @@ PODS:
   - PromiseKit/UIKit (6.3.4):
     - PromiseKit/CorePromise
   - Proposer (1.2.0)
+  - Quick (1.3.1)
   - QuickLayout (2.0.2)
   - R.swift (4.0.0):
     - R.swift.Library (~> 4.0.0)
@@ -84,9 +96,9 @@ PODS:
   - RealReachability/Connection (1.3.0)
   - RealReachability/Ping (1.3.0)
   - Repeat (0.5.6)
-  - Result (3.2.4)
+  - Result (4.0.0)
   - ReSwift (4.0.1)
-  - Reveal-SDK (16)
+  - Reveal-SDK (17)
   - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
   - RxDataSources (3.0.2):
@@ -117,7 +129,7 @@ PODS:
   - SipHash (1.2.2)
   - Siren (3.4.3)
   - SocketRocket (0.5.1)
-  - SwiftEntryKit (0.5.6):
+  - SwiftEntryKit (0.5.8):
     - QuickLayout (= 2.0.2)
   - SwifterSwift (4.4.0):
     - SwifterSwift/AppKit (= 4.4.0)
@@ -136,13 +148,13 @@ PODS:
   - SwifterSwift/SpriteKit (4.4.0)
   - SwifterSwift/SwiftStdlib (4.4.0)
   - SwifterSwift/UIKit (4.4.0)
-  - SwiftHash (2.0.1)
+  - SwiftNotificationCenter (1.0.3)
   - SwiftRichString (2.0.1)
   - SwiftTheme (0.4.1)
   - SwiftyBeaver (1.6.0)
   - SwiftyJSON (4.1.0)
-  - SwiftyUserDefaults (3.0.1)
-  - SWXMLHash (4.7.0)
+  - SwiftyUserDefaults (4.0.0-alpha.1)
+  - SWXMLHash (4.7.1)
   - TableFlip (1.2)
   - TextFieldEffects (1.4.0)
   - Then (2.3.0)
@@ -150,19 +162,25 @@ PODS:
   - Typist (1.2.2)
   - UICKeyChainStore (2.1.1)
   - UIFontComplete (3.0.0)
+  - UMCAnalytics (5.5.0):
+    - UMCCommon
+  - UMCCommon (1.5.2)
+  - UMCCommonLog (1.0.0)
+  - UMCSecurityPlugins (1.0.6)
+  - Validator (3.0.2)
   - XLActionController (4.0.1):
     - XLActionController/Core (= 4.0.1)
   - XLActionController/Core (4.0.1)
   - XLPagerTabStrip (8.0.1)
   - Zephyr (3.1.2)
-  - ZLaunchAd (2.0.3):
-    - SwiftHash (>= 2.0.1)
+  - ZLaunchAd (2.0.4)
 
 DEPENDENCIES:
   - Action
   - AlamofireNetworkActivityLogger
   - Apollo
   - AsyncOperation
+  - AsyncSwift
   - AwaitKit
   - BeareadToast (from `https://github.com/phpmaple/BeareadToast`)
   - BigInt
@@ -172,20 +190,24 @@ DEPENDENCIES:
   - Crashlytics
   - CryptoSwift
   - Device
+  - DifferenceKit
   - DNSPageView
+  - Dollar
   - EasyAnimation
   - EFQRCode
   - ESPullToRefresh
   - ESTabBarController-swift
   - Fabric
+  - Fakery
   - FCUUID
+  - FSPagerView
   - GRDB.swift
   - GrowingTextView
   - Guitar
   - HandyJSON
   - IHKeyboardAvoiding
   - IQKeyboardManagerSwift
-  - JSONRPCKit
+  - JSONRPCKit (from `https://github.com/phpmaple/JSONRPCKit`, branch `master`)
   - "Keyboard+LayoutGuide"
   - KeychainAccess
   - Kingfisher
@@ -197,12 +219,14 @@ DEPENDENCIES:
   - Macaw
   - MJRefresh
   - MLeaksFinder
-  - Moya
+  - Moya (from `https://github.com/Moya/Moya`, tag `12.0.0-beta.1`)
+  - Nimble
   - NVActivityIndicatorView
   - ObjectMapper
   - ObservableArray-RxSwift
   - Presentr
   - Proposer
+  - Quick
   - R.swift
   - RealReachability
   - Repeat
@@ -221,17 +245,23 @@ DEPENDENCIES:
   - SocketRocket (from `https://github.com/facebook/SocketRocket`, branch `master`)
   - SwiftEntryKit
   - SwifterSwift
+  - SwiftNotificationCenter
   - SwiftRichString (from `https://github.com/malcommac/SwiftRichString`, tag `2.0.1`)
   - SwiftTheme
   - SwiftyBeaver
   - SwiftyJSON
-  - SwiftyUserDefaults
+  - SwiftyUserDefaults (from `https://github.com/radex/SwiftyUserDefaults`, tag `4.0.0-alpha.1`)
   - TableFlip
   - TextFieldEffects
   - Then
   - TinyConstraints
   - Typist
   - UIFontComplete
+  - UMCAnalytics
+  - UMCCommon
+  - UMCCommonLog
+  - UMCSecurityPlugins
+  - Validator
   - XLActionController
   - XLPagerTabStrip
   - Zephyr
@@ -244,6 +274,7 @@ SPEC REPOS:
     - AlamofireNetworkActivityLogger
     - Apollo
     - AsyncOperation
+    - AsyncSwift
     - AwaitKit
     - BigInt
     - BiometricAuthentication
@@ -252,22 +283,25 @@ SPEC REPOS:
     - Crashlytics
     - CryptoSwift
     - Device
+    - DifferenceKit
     - Differentiator
     - DNSPageView
+    - Dollar
     - EasyAnimation
     - EFQRCode
     - ESPullToRefresh
     - ESTabBarController-swift
     - Fabric
+    - Fakery
     - FBRetainCycleDetector
     - FCUUID
+    - FSPagerView
     - GRDB.swift
     - GrowingTextView
     - Guitar
     - HandyJSON
     - IHKeyboardAvoiding
     - IQKeyboardManagerSwift
-    - JSONRPCKit
     - "Keyboard+LayoutGuide"
     - KeychainAccess
     - Kingfisher
@@ -279,13 +313,14 @@ SPEC REPOS:
     - Macaw
     - MJRefresh
     - MLeaksFinder
-    - Moya
+    - Nimble
     - NVActivityIndicatorView
     - ObjectMapper
     - ObservableArray-RxSwift
     - Presentr
     - PromiseKit
     - Proposer
+    - Quick
     - QuickLayout
     - R.swift
     - R.swift.Library
@@ -307,11 +342,10 @@ SPEC REPOS:
     - Siren
     - SwiftEntryKit
     - SwifterSwift
-    - SwiftHash
+    - SwiftNotificationCenter
     - SwiftTheme
     - SwiftyBeaver
     - SwiftyJSON
-    - SwiftyUserDefaults
     - SWXMLHash
     - TableFlip
     - TextFieldEffects
@@ -320,6 +354,11 @@ SPEC REPOS:
     - Typist
     - UICKeyChainStore
     - UIFontComplete
+    - UMCAnalytics
+    - UMCCommon
+    - UMCCommonLog
+    - UMCSecurityPlugins
+    - Validator
     - XLActionController
     - XLPagerTabStrip
     - Zephyr
@@ -328,30 +367,49 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   BeareadToast:
     :git: https://github.com/phpmaple/BeareadToast
+  JSONRPCKit:
+    :branch: master
+    :git: https://github.com/phpmaple/JSONRPCKit
+  Moya:
+    :git: https://github.com/Moya/Moya
+    :tag: 12.0.0-beta.1
   SocketRocket:
     :branch: master
     :git: https://github.com/facebook/SocketRocket
   SwiftRichString:
     :git: https://github.com/malcommac/SwiftRichString
     :tag: 2.0.1
+  SwiftyUserDefaults:
+    :git: https://github.com/radex/SwiftyUserDefaults
+    :tag: 4.0.0-alpha.1
 
 CHECKOUT OPTIONS:
   BeareadToast:
     :commit: 1e82fc7338e9ab176168af234900f5fc61ade947
     :git: https://github.com/phpmaple/BeareadToast
+  JSONRPCKit:
+    :commit: 389b9feaae3983e6f632e083fb75c62f7985accf
+    :git: https://github.com/phpmaple/JSONRPCKit
+  Moya:
+    :git: https://github.com/Moya/Moya
+    :tag: 12.0.0-beta.1
   SocketRocket:
     :commit: 0a023409b138039d1ab5ac5431fe61c5f334e86b
     :git: https://github.com/facebook/SocketRocket
   SwiftRichString:
     :git: https://github.com/malcommac/SwiftRichString
     :tag: 2.0.1
+  SwiftyUserDefaults:
+    :git: https://github.com/radex/SwiftyUserDefaults
+    :tag: 4.0.0-alpha.1
 
 SPEC CHECKSUMS:
   Action: 3d9486d3da02b572b0a034b6c49ac4c3fbcc8b63
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireNetworkActivityLogger: 6f3076652ab7fa6c819b59be08ea038d339e36d8
-  Apollo: 308d9b7b4e2918c17bafb113cfbd65773c29ccd6
+  Apollo: 39d1adfceb6f262fc58286ec9425fd7c332877fb
   AsyncOperation: db1c082553a0f6332e0bf7d03814acdd3d59e6a7
+  AsyncSwift: 65775a7b32e740609b24969ece3de58723b9dc3e
   AwaitKit: d8a6e30eeb2da916630270b44636b31033388bd8
   BeareadToast: 17ff7f5ac9609b186543d6a45df8f15f78c9ca7a
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
@@ -359,24 +417,28 @@ SPEC CHECKSUMS:
   Cache: fae4826ba52d7a5d9a3a0ad6fe73e3501a82964f
   ChainableAnimations: 12e0a88e72fb554ad4cda38c40474e4d65c972a2
   Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
-  CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
+  CryptoSwift: ad5208dd2aae0a764ea4ce2c2d34bd067cae67f0
   Device: 8a21a61f5f938a12dadd44d82287996081b6919b
+  DifferenceKit: 529d32c38c0a63196c7519cfb3d6e94cab3d23ee
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   DNSPageView: 93b0f9c9ab0e2f8c1d9aa5b0d44740bd2d775d78
+  Dollar: dc69a2997fa5df12ae7a91fec897963664c26750
   EasyAnimation: 977ef673efe8ce62447807eedb380a77b189dc80
   EFQRCode: 203846c7b135b5f7c1d18bb7923bc32a74c8b363
   ESPullToRefresh: 119e2710b82b75536aab2bbe4883ba119fca35c8
   ESTabBarController-swift: f0a8679e43df1e60b7b36bbcaf1dc98ba6273c7d
   Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
+  Fakery: 3aae11a87721c807c18c6456500d088c1230d3e5
   FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
+  FSPagerView: 7515f63c424da71623d299d4fbbfb3dd884642ff
   GRDB.swift: c5bb04b25a9931fec937920e913787e45f96124f
   GrowingTextView: 8958f4fb7419de58dd622021b2d0696487e00e70
   Guitar: 7410dc37f2c12d5b8b67711d771608900c37636e
-  HandyJSON: 3a3de917c4118767ffe41c29b5acba23409649f4
+  HandyJSON: bc81fbeb62d65ae5d5942ed29bc4a8265d18c1e8
   IHKeyboardAvoiding: 9fbf816b7c3c84911964802ff110d12caf40ebef
   IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
-  JSONRPCKit: 50e0dc5e7f873e87f81562feb8836b7d1974da6d
+  JSONRPCKit: eb41d88efb88d4cbf2b66aa6c34fb62339c0ef14
   "Keyboard+LayoutGuide": 4c33aa1749cee1af43c3c32a988b58ad1918bdef
   KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
   Kingfisher: 868c1149679a7ab6869be118faa9b5aed154aaf0
@@ -388,21 +450,23 @@ SPEC CHECKSUMS:
   Macaw: 6db42cb10c1e018ee940a906b42a1ead5557e080
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
-  Moya: a725035953bc1c0eb1be505ab903984501d82440
+  Moya: 1b8d16b4dac4302c323ca95077a733836e73484a
+  Nimble: 2839b01d1b31f6a6a7777a221f0d91cf52e8e27b
   NVActivityIndicatorView: 963f62bf9f993fcf23218e55958e5b1761b9504c
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   ObservableArray-RxSwift: 905a088f51b1653f7eb55e6887f8a13916618f50
   Presentr: 797ae6ec8904eaba4ec58a4c2065bd66e31569ea
   PromiseKit: e1425568123ec844a944c93f2bcb29d511d39cf5
   Proposer: 722fe61822b89f551ae10afe8314067f98c39c28
+  Quick: d17304d58d0d169dd0bd1c6e5c28e3318de32a1a
   QuickLayout: a730730b646b231fd4ef7cffaeb1e81fe0e1ca92
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
   RealReachability: eae9c58d2db52fadd8e1cba4b5d4c028454fbc47
   Repeat: 79fae833c601ef457148ba6ffae276e5c629ab0a
-  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   ReSwift: f4012c613e13da7398827fe5aebdb938eaed40a3
-  Reveal-SDK: ed36bdbb3cbf90b94ae5da0dbcb3c7ae6738c51f
+  Reveal-SDK: a6df49f47319bd19a110c960c498af32df72c0af
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
   RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
@@ -415,15 +479,15 @@ SPEC CHECKSUMS:
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   Siren: e3cf1a93fa0fa73c03452107e95e5c10768d1d08
   SocketRocket: dbb1554b8fc288ef8ef370d6285aeca7361be31e
-  SwiftEntryKit: 1df92ac86d36f3c8c88175687bdd61ccfecbe2ee
+  SwiftEntryKit: ff42f06ff7468ffa6a8b63edf806159c99205681
   SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
-  SwiftHash: c805de5a434eacfa0dac7210745a50c55d7fe33d
+  SwiftNotificationCenter: 309e912a10d664ef68979deb1df7f17c2bdbe2ea
   SwiftRichString: 3b29b5f2eb0eb244497532f2fd2ec26318eae584
   SwiftTheme: 36d71c4eed4b2c401c782cf036e4586c749a8173
   SwiftyBeaver: e45759613e50b522b0e6f53b1f0f14389b45ca34
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
-  SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
-  SWXMLHash: f4522438189f72b41e39676d19469a8969d60dd1
+  SwiftyUserDefaults: cebe0ff9472f52699772a514b6f7155861d8069b
+  SWXMLHash: 661b67bc94a01fe71a6ad4ca690cf2cafa5d1d6f
   TableFlip: 2ae22773412b295a7cbc54d95b44085bb28092f6
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
   Then: ee21c97b85ff6062b9b0080c9abb1eea46743345
@@ -431,11 +495,16 @@ SPEC CHECKSUMS:
   Typist: 61acc798767f15bf24c61fb9a43d285974380f37
   UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
   UIFontComplete: 5b0f59a83308816c610164b79a2540b3520f9b72
+  UMCAnalytics: 4667788559a72f2fa5077117d1b8802a3b6eb6bb
+  UMCCommon: 4392868ac47ff1b101663106bb114ba616fabbad
+  UMCCommonLog: 05a2d5de21858e3d870551562cff405c1366d244
+  UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
+  Validator: bf211c1d71b3f910d230c09c70e62429d0fef63a
   XLActionController: 007868251c0eed70d649d06c1625259b73b3a600
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
-  ZLaunchAd: 47e4fd3718c73d48d74ac37f7f637021e4fd0e4b
+  ZLaunchAd: 34f79abb60018f2e2a5168d6287d90473024ab81
 
-PODFILE CHECKSUM: 93ce2cc6a8818b946bbd9021fa0f1739c08ae128
+PODFILE CHECKSUM: 7aa097675f36ece5cf902c1c1a4a1fb732bc9aee
 
 COCOAPODS: 1.5.3

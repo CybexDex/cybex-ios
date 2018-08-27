@@ -13,6 +13,7 @@ import SafariServices
 import StoreKit
 import SDCAlertView
 import SwiftTheme
+import Guitar
 
 public struct Version: Equatable, Comparable {
   public let major: Int
@@ -402,7 +403,21 @@ extension String {
     return Double(selfString)
   }
   
+  
+  public func toDecimal() -> Decimal? {
+    if self == "" {
+      return Decimal(0)
+    }
+    var selfString = self
+    if selfString.contains(","){
+      selfString = selfString.replacingOccurrences( of:"[^0-9.]", with: "", options: .regularExpression)
+    }
+    return Decimal(string:selfString)
+  }
+  
+  
   func formatCurrency(digitNum: Int) -> String {
+    
     if let str = toDouble()?.formatCurrency(digitNum: digitNum) {
       return str
     }
@@ -444,6 +459,18 @@ func transferTimeType(_ time : Int) -> String {
   return result
 }
 
-
+func verifyPassword(_ password : String) -> (Bool) {
+  if password.count < 12 {
+    return false
+  }
+  
+  let guiter = Guitar(pattern: "(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{12,}")
+  if !guiter.test(string: password) {
+    return false
+  }
+  else {
+    return true
+  }
+}
 
 

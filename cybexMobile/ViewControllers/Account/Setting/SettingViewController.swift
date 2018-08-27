@@ -16,10 +16,7 @@ import XLActionController
 
 
 class SettingViewController: BaseViewController {
-  
-    @IBOutlet weak var topContentShadowView: CornerAndShadowView!
-    
-    @IBOutlet weak var themeShadowView: CornerAndShadowView!
+
     
   @IBOutlet weak var language: NormalCellView!
   @IBOutlet weak var frequency: NormalCellView!
@@ -55,8 +52,7 @@ class SettingViewController: BaseViewController {
     version.content.text = Bundle.main.version
     theme.content_locali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key.localized() : R.string.localizable.light.key.localized()
     frequency.content_locali = UserManager.shared.frequency_type.description()
-    self.topContentShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20
-    self.themeShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20
+
   }
   
   
@@ -97,11 +93,7 @@ class SettingViewController: BaseViewController {
   }
   
   func setupNotification() {
-    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] notification in
-      guard let `self` = self else { return }
-      self.topContentShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20
-      self.themeShadowView.newShadowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20
-    })
+   
     
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] notification in
       guard let `self` = self else { return }
@@ -111,24 +103,7 @@ class SettingViewController: BaseViewController {
     })
   }
   
-  
-  
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-  }
-  
   override func configureObserveState() {
-    commonObserveState()
   }
   
   deinit {

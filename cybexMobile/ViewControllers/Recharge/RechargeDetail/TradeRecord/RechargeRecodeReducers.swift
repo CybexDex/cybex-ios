@@ -18,19 +18,29 @@ func RechargeRecodePropertyReducer(_ state: RechargeRecodePropertyState?, action
     
     switch action {
     case let action as FetchDepositRecordsAction:
-    
-      state.data.accept(action.data)
+        
+        state.data.accept(transferDepositRecords(action.data,asset_id : action.asset_id))
+    case let action as SetWithdrawListAssetAction:
+        state.asset = action.asset
     default:
         break
     }
-    
     return state
 }
 
-func transferDepositRecords(_ sender : TradeRecord) {
-  let records = sender.records
-  
-  
+func transferDepositRecords(_ sender : TradeRecord? , asset_id : String) -> TradeRecord? {
+    guard var tradeRecord = sender else { return nil }
+    if var records = tradeRecord.records {
+        for index in 0..<records.count {
+            var record = records[index]
+            record.asset_id = asset_id
+            records.remove(at: index)
+            records.insert(record, at: index)
+        }
+        tradeRecord.records = records
+    }
+    
+    return tradeRecord
 }
 
 

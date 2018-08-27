@@ -24,14 +24,13 @@ class EntryViewController: BaseViewController {
     
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    configLeftNavButton(#imageLiteral(resourceName: "ic_close_24_px"))
-    
+        
     setupUI()
     setupEvent()
   }
 
   func setupUI() {
+    configLeftNavigationButton(R.image.icClose24Px())
     accountTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
     passwordTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
     accountTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
@@ -41,23 +40,8 @@ class EntryViewController: BaseViewController {
   @objc override func leftAction(_ sender: UIButton) {
     coordinator?.dismiss()
   }
-  
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-  }
 
   override func configureObserveState() {
-    commonObserveState()
 
   }
 }

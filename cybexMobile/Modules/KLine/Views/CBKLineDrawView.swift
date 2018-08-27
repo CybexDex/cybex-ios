@@ -255,8 +255,8 @@ extension CBKLineDrawView {
 
             let location = recognizer.location(in: recognizer.view)
             let klineUnit = configuration.theme.klineWidth + configuration.theme.klineSpace
-
-            if abs(location.x - lastPanPoint!.x) < klineUnit {
+            
+            if abs(location.x - (lastPanPoint?.x ?? 0)) < klineUnit {
                 return
             }
 

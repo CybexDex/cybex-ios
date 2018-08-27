@@ -88,24 +88,7 @@ class OrderBookViewController: BaseViewController {
     super.viewWillAppear(animated)
   }
   
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-  }
-  
   override func configureObserveState() {
-    commonObserveState()
-
-    
     self.coordinator!.state.property.data.asObservable().skip(1).distinctUntilChanged()
       .subscribe(onNext: {[weak self] (s) in
         guard let `self` = self else { return }
@@ -124,8 +107,6 @@ class OrderBookViewController: BaseViewController {
             self.tradeView.data = s
           }
         }
-        
-        
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
   }
   
@@ -140,7 +121,7 @@ class OrderBookViewController: BaseViewController {
       
       let matrix = getCachedBucket(data)
       
-      self.tradeView.amount.text = matrix.price
+      self.tradeView.amount.text = matrix.price.tradePrice.price
       self.tradeView.amount.textColor = matrix.incre.color()
       
       if matrix.price == "" {
@@ -169,7 +150,6 @@ class OrderBookViewController: BaseViewController {
         }
       }
     }
-    
   }
 }
 

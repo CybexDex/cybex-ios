@@ -19,6 +19,7 @@
                 <outlet property="cancleImg" destination="Nj6-aa-q8v" id="wrz-Lk-d90"/>
                 <outlet property="cancleL" destination="nF1-DU-FkV" id="IOr-2n-Ou0"/>
                 <outlet property="cancleOrder" destination="i1d-F0-My9" id="8AV-QD-wSu"/>
+                <outlet property="lineView" destination="2Lc-or-cgh" id="SY4-iC-cLL"/>
                 <outlet property="orderType" destination="X3J-Yu-Gkq" id="4dt-mb-Y77"/>
                 <outlet property="price" destination="msv-rO-6tQ" id="7Eg-Ii-z64"/>
                 <outlet property="quote" destination="Ma0-Sv-PdY" id="l1O-LO-R18"/>
@@ -99,7 +100,7 @@
                             <rect key="frame" x="0.0" y="36" width="52" height="36"/>
                             <subviews>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="he9-L4-SN8">
-                                    <rect key="frame" x="0.0" y="-29" width="52" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="-36" width="52" height="0.0"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egL-zq-tVF">
                                             <rect key="frame" x="0.0" y="2" width="0.0" height="14.5"/>
@@ -208,17 +209,16 @@
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Lc-or-cgh">
                     <rect key="frame" x="0.0" y="71" width="375" height="1"/>
-                    <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="LWp-3f-4cx"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="4DE-WQ-GhT"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                            <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                            <color key="value" name="paleGrey" red="0.969" green="0.973" blue="0.980" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>

@@ -80,6 +80,22 @@ extension UIView {
       layer.masksToBounds = true
     }
   }
+    
+    @IBInspectable var spread: CGFloat {
+        get {
+            return 0
+        }
+        set {
+            if newValue == 0 {
+                layer.shadowPath = nil
+            }
+            else {
+                let rect = bounds.insetBy(dx: -newValue, dy: -newValue)
+                layer.shadowPath = UIBezierPath(rect: rect).cgPath
+            }
+           
+        }
+    }
   
   @IBInspectable var borderWidth: CGFloat {
     get {
@@ -176,9 +192,12 @@ extension UIView {
 extension UIView{
   var noDataView : WithNoDataView?{
     get{
-      if let nodata = self.subviews.last as? WithNoDataView{
-        return nodata
-      }
+        for subview in self.subviews {
+            if let nodataview = subview as? WithNoDataView {
+                return nodataview
+            }
+        }
+ 
       return nil
     }
     set{
@@ -212,9 +231,7 @@ extension UIView{
     }
   }
   func hiddenNoData() {
-    if let _ = self.noDataView{
-      self.noDataView!.removeFromSuperview()
+      self.noDataView?.removeFromSuperview()
       self.noDataView = nil
-    }
   }
 }
