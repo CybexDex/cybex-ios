@@ -203,6 +203,7 @@ class RechargeDetailViewController: BaseViewController {
         self.coordinator?.state.property.withdrawAddress.asObservable().subscribe(onNext: { [weak self](address) in
             guard let `self` = self , let address = address else { return }
             self.contentView.addressView.content.text = address.address
+            self.contentView.addressView.address_state = .Success
             self.isTrueAddress = true
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }

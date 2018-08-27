@@ -212,13 +212,13 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                 return
             }
             let amount = self.state.property.amount.value
-            let requeset = GetObjectsRequest(ids: ["2.1.0"]) { (infos) in
+            let requeset = GetObjectsRequest(ids: [objectID.dynamic_global_property_object.rawValue]) { (infos) in
                 if let infos = infos as? (block_id:String,block_num:String){
-                    if var amount = amount.toDouble(){
-                        let value = pow(10, (app_data.assetInfo[balance.asset_type]?.precision)!)
+                    if var amount = amount.toDouble() ,let assetInfo = app_data.assetInfo[balance.asset_type] ,let feeInfo = app_data.assetInfo[fee.asset_id]{
+                        let value = pow(10, assetInfo.precision)
                         amount = amount * Double(truncating: value as NSNumber)
                         
-                        let fee_amout = fee.amount.toDouble()! * Double(truncating: pow(10, (app_data.assetInfo[fee.asset_id]?.precision)!) as NSNumber)
+                        let fee_amout = fee.amount.toDouble()! * Double(truncating: pow(10, feeInfo.precision) as NSNumber)
                         
                         let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
                                                                           block_id: infos.block_id,

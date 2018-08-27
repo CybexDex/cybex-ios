@@ -189,7 +189,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
             if let memo_key = self.state.property.memo_key.value{
                 let name = app_data.assetInfo[assetId]?.symbol.filterJade
                 let memo = self.state.property.memo.value
-                let requeset = GetObjectsRequest(ids: ["2.1.0"]) { (infos) in
+                let requeset = GetObjectsRequest(ids: [objectID.dynamic_global_property_object.rawValue]) { (infos) in
                     if let infos = infos as? (block_id:String,block_num:String){
                         if var amount = amount.toDouble(){
                             let value = pow(10, (app_data.assetInfo[assetId]?.precision)!)
