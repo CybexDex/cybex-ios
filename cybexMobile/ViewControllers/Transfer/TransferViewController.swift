@@ -177,7 +177,8 @@ extension TransferViewController {
         ShowToastManager.shared.hide()
         if !UserManager.shared.isLocked {
             self.startLoading()
-            self.coordinator?.transfer({ (data) in
+            self.coordinator?.transfer({ [weak self](data) in
+                guard let `self` = self else { return }
                 self.endLoading()
                 main {
                     ShowToastManager.shared.hide()
