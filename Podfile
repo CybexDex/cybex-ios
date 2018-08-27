@@ -30,6 +30,7 @@ def data
     pod 'DifferenceKit'
     pod 'Dollar'
     pod 'Validator'
+    pod 'Fakery'
 end
 
 def resource

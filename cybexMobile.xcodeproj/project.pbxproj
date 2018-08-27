@@ -322,6 +322,7 @@
 		733714BD2122D32500B2ED90 /* AddressCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714BB2122D32500B2ED90 /* AddressCellView.swift */; };
 		733714BE2122D32500B2ED90 /* AddressCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714BC2122D32500B2ED90 /* AddressCellView.xib */; };
 		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
+		73587E9D2133EB15006CF8A6 /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
 		7386F2A22121665100ABC924 /* AddressHomeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29E2121665100ABC924 /* AddressHomeActions.swift */; };
@@ -5902,6 +5903,7 @@
 		7344DCB142B3E51B91B0A7D12614C9A2 /* pool_construct_simple.ipp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pool_construct_simple.ipp; sourceTree = "<group>"; };
 		73481176210815BF000BF1B8 /* CybexWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebSocketService.swift; sourceTree = "<group>"; };
 		7355BF528D49DAD350032FC147C8FA32 /* function.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = function.hpp; sourceTree = "<group>"; };
+		73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPCircularProgress.swift; sourceTree = "<group>"; };
 		735EA8642354E31CA8166DA44203A684 /* shift_right.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shift_right.hpp; sourceTree = "<group>"; };
 		735FA00E9301F0DB45760B1C0D7FEC09 /* extreme_value.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = extreme_value.hpp; sourceTree = "<group>"; };
 		737258FAB6762972136E4188BF20F602 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
@@ -28052,6 +28054,7 @@
 		C31EC57D28FCC624D48C5CC42DE96975 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */,
 				72D9DD55210EB5FC00963915 /* ActionSheetViewController */,
 				225746D6210707410017FA1A /* Picker */,
 				221EC2302105B1910059F856 /* GrowContentView */,
@@ -33157,6 +33160,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBRetainCycleDetector/FBRetainCycleDetector.framework",
 				"${BUILT_PRODUCTS_DIR}/FCUUID/FCUUID.framework",
 				"${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework",
+				"${BUILT_PRODUCTS_DIR}/Fakery/Fakery.framework",
 				"${BUILT_PRODUCTS_DIR}/GRDB.swift/GRDB.framework",
 				"${BUILT_PRODUCTS_DIR}/GrowingTextView/GrowingTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/Guitar/Guitar.framework",
@@ -33250,6 +33254,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBRetainCycleDetector.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FCUUID.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSPagerView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Fakery.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GrowingTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Guitar.framework",
@@ -33643,6 +33648,7 @@
 				DB5E6F5B71C53800CE2EEA32391210BE /* OrderBookCoordinator.swift in Sources */,
 				7386F2B921216B3A00ABC924 /* WithdrawAddressHomeViewController.swift in Sources */,
 				813E625BF1238DDBDC460AFDBCEF4049 /* OrderBookReducers.swift in Sources */,
+				73587E9D2133EB15006CF8A6 /* RPCircularProgress.swift in Sources */,
 				562EE9FB61A1D1EBCB263F8C8DE265B6 /* OrderBookViewController.swift in Sources */,
 				7307A926212518DC00BD6444 /* ThemifyIcon.swift in Sources */,
 				CEC8E5E6CEBF33DC5FED8EBCA2AFAAE7 /* PairCardCell.swift in Sources */,
