@@ -55,6 +55,7 @@ class CybexWebSocketService: NSObject {
   private var errorCount = 0
   private var isConnecting:Bool = false
   private var isDetecting:Bool = false
+
   private var isClosing = false
 
   private var queue:OperationQueue!
@@ -66,6 +67,7 @@ class CybexWebSocketService: NSObject {
   private override init() {
     super.init()
     self.queue = OperationQueue()
+
     self.queue.maxConcurrentOperationCount = 3
     self.queue.isSuspended = true
     
@@ -94,6 +96,7 @@ class CybexWebSocketService: NSObject {
     isDetecting = true
     self.currentNode = nil
     log.debug("detecting node .......")
+
     self.testsockets.removeAll()
     
     for (idx, node) in NodeURLString.all.enumerated() {
@@ -134,6 +137,7 @@ class CybexWebSocketService: NSObject {
   
   func disconnect() {
     log.warning("websocket now disconnect by u")
+
     self.isClosing = true
 
     self.needAutoConnect = false
@@ -144,6 +148,7 @@ class CybexWebSocketService: NSObject {
     self.errorCount = 0
     self.autoConnectCount = 0
     self.ids.removeAll()
+
     closeAllTestSocket()
     self.idGenerator = JsonIdGenerator()
     self.batchFactory.idGenerator = self.idGenerator
@@ -173,6 +178,7 @@ class CybexWebSocketService: NSObject {
       }
       
       appendRequestToQueue(request, priority:priority, response: block)
+
       
       if !self.isConnecting && !self.isClosing && socket.readyState != .OPEN {
         connect()
@@ -304,7 +310,6 @@ class CybexWebSocketService: NSObject {
       socket.delegateDispatchQueue = DispatchQueue.main
       socket.open()
     }
-
   }
 }
 

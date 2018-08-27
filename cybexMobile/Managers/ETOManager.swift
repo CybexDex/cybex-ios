@@ -37,19 +37,21 @@ struct ETOStateOption:OptionSet {
 enum ETOClauseState {
     case normal
     case notShow
-    case checked
     case checkedAndImmutable
 }
 
 enum ETOJoinButtonStyle {
     case normal
+    case wait
+    case notPassed
     case disable
+    case notShow
 }
 
 enum ETOJoinButtonAction {
     case unset
-    case auditPage
-    case transferPage
+    case inputCode
+    case crowdPage
     case icoapePage
     case unlockPage
 }
@@ -86,14 +88,11 @@ class ETOManager {
     }
     
     func getClauseState() -> ETOClauseState {
-        if state.contains([.login, .KYCPassed, .notReserved, .bookable]) {
+        if state.contains([.login, .KYCPassed, .notReserved, .bookable]) && !state.contains(.finished) {
             return .normal
         }
-        else if state.contains([.login, .KYCPassed, .reserved, .bookable, .auditPassed, .waitAudit]) {
+        else if state.contains([.login, .KYCPassed, .reserved, .bookable]) && !state.contains(.finished) {
             return .checkedAndImmutable
-        }
-        else if state.contains([.notLogin, .bookable, .notStarted, .underway]) {
-            return .checked
         }
         
         return .notShow
@@ -104,38 +103,35 @@ class ETOManager {
         
         switch clause {
         case .normal:
-            return .normal(title: "立即参与", style: .normal, action: .auditPage)
+            return .normal(title: "立即参与", style: .normal, action: .inputCode)
         case .checkedAndImmutable:
-            if state.contains(.notStarted) || state.contains(.finished) {
-                return .disable(title: "已通过审核", style: .disable)
+            if state.contains(.auditPassed) {
+                if state.contains(.notStarted) {
+                    return .disable(title: "等待众筹开始", style: .wait)
+                }
+                return .normal(title: "立即众筹", style: .normal, action: .crowdPage)
             }
-            else if state.contains(.underway) {
-                return .normal(title: "立即参与", style: .normal, action: .transferPage)
+            else if state.contains(.waitAudit) {
+                return .disable(title: "审核中", style: .wait)
             }
             else {
-                return .disable(title: "审核中", style: .disable)
+                return .disable(title: "审核不通过", style: .notPassed)
             }
-        case .checked:
-            return .normal(title: "立即参与", style: .normal, action: .unlockPage)
         case .notShow:
             if state.contains(.notReserved) {
-                return .disable(title: "立即参与", style: .disable)
+                if !state.contains(.finished) {
+                    return .disable(title: "停止预约", style: .disable)
+                }
             }
-            else if state.contains([.login, .bookable]) {
-                return .disable(title: "未通过审核", style: .disable)
-            }
-            else if state.contains([.login, .notBookable]) {
-                return .disable(title: "立即参与", style: .disable)
-            }
-            else if state.contains([.login]) {
+            else if state.contains(.KYCNotPassed) {
                 return .normal(title: "进行KYC", style: .normal, action: .icoapePage)
             }
-            else if state.contains([.notLogin, .finished]) {
-                return .notShow
+            else if state.contains(.notLogin) && !state.contains(.finished) {
+                return .normal(title: "请登录", style: .normal, action: .unlockPage)
             }
-            else {
-                return .disable(title: "停止预约", style: .disable)
-            }
+            
+            return .notShow
+            
         }
       
     }
