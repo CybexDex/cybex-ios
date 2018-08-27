@@ -34,7 +34,7 @@ protocol AddAddressStateManagerProtocol {
 
     func addAddress(_ type : address_type)
     
-    func veritiedAddress()
+    func veritiedAddress(_ type : Bool)
     
     func setNoteAction(_ note : String)
     
@@ -101,8 +101,8 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
         }
     }
     
-    func veritiedAddress() {
-        self.store.dispatch(VerificationAddressAction(success:true))
+    func veritiedAddress(_ type : Bool) {
+        self.store.dispatch(VerificationAddressAction(success:type))
     }
     
     func setAsset(_ asset : String) {

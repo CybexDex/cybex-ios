@@ -183,7 +183,7 @@ extension OpenedOrdersViewController {
                 guard let `self` = self else { return }
                 
                 self.endLoading()
-                self.showToastBox(success, message: success ? R.string.localizable.cancel_create_success() : R.string.localizable.cancel_create_fail())
+                self.showToastBox(success, message: success ? R.string.localizable.cancel_create_success.key.localized() : R.string.localizable.cancel_create_fail.key.localized())
             })
             
         }

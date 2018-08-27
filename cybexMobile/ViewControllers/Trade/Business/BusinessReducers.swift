@@ -20,11 +20,11 @@ func BusinessPropertyReducer(_ state: BusinessPropertyState?, action: Action) ->
     case let action as changePriceAction:
         state.price.accept(action.price)
     case let action as adjustPriceAction:
-        let precision = state.price.value.tradePrice.pricision
+        let precision = action.pricision
         let gap = action.plus ? 1.0 / pow(10, precision) : -1.0 / pow(10, precision)
         
         if let price = state.price.value.toDecimal(), price != 0, price + gap > 0 {
-            state.price.accept((price + gap).string(digits: action.pricision, roundingMode: .down))
+            state.price.accept((price + gap).string(digits: precision, roundingMode: .down))
         }
     case let action as feeFetchedAction:
         state.fee_amount.accept(action.amount)

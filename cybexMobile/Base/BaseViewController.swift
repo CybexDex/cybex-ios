@@ -98,7 +98,6 @@ class BaseViewController: UIViewController {
                     view.isUserInteractionEnabled = false
                 })
             }
-            
         }).disposed(by: disposeBag)
     }
     
@@ -247,7 +246,9 @@ extension UIViewController : ShowManagerDelegate {
     func returnEnsureImageAction() {
         
     }
-    
+    func cancelImageAction(_ sender : CybexTextView) {
+        
+    }
     
     @objc func passwordPassed(_ passed:Bool) {
         
@@ -266,4 +267,5 @@ extension UIViewController : ShowManagerDelegate {
             }
         }
     }
+    
 }

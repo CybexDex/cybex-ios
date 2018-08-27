@@ -20,6 +20,7 @@ protocol Views {
     func returnUserPassword(_ sender : String)
     @objc func returnEnsureAction()
     @objc func returnEnsureImageAction()
+    @objc func cancelImageAction(_ sender : CybexTextView)
 }
 
 class ShowToastManager {
@@ -256,7 +257,7 @@ class ShowToastManager {
         textView.delegate = self
         textView.middleView = sender
         textView.title.text = title
-        showView     = textView
+        showView = textView
     }
     
     fileprivate func setupTextImage(_ sender:(UIView&Views),title_image:String) {
@@ -274,8 +275,9 @@ extension ShowToastManager : CybexTextViewDelegate{
     func returnPassword(_ password:String){
         self.delegate?.returnUserPassword(password)
     }
-    func clickCancle(){
+    func clickCancle(_ sender : CybexTextView){
         self.hide(0)
+        self.delegate?.cancelImageAction(sender)
     }
     func returnEnsureAction(){
         self.hide(0)

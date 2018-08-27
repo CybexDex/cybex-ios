@@ -100,7 +100,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="01L-63-hiS">
-                    <rect key="frame" x="13" y="65.5" width="350" height="14.5"/>
+                    <rect key="frame" x="13" y="65.5" width="350" height="22.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bC-tL-Z2r">
                             <rect key="frame" x="0.0" y="0.0" width="11.5" height="14.5"/>
@@ -120,7 +120,7 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="1bC-tL-Z2r" firstAttribute="top" secondItem="01L-63-hiS" secondAttribute="top" id="88T-0x-OPm"/>
-                        <constraint firstAttribute="bottom" secondItem="9G4-i5-qX4" secondAttribute="bottom" id="NQB-GA-LYr"/>
+                        <constraint firstAttribute="bottom" secondItem="9G4-i5-qX4" secondAttribute="bottom" constant="8" id="NQB-GA-LYr"/>
                         <constraint firstItem="9G4-i5-qX4" firstAttribute="leading" secondItem="1bC-tL-Z2r" secondAttribute="trailing" constant="8" id="TUT-Cu-52K"/>
                         <constraint firstItem="1bC-tL-Z2r" firstAttribute="leading" secondItem="01L-63-hiS" secondAttribute="leading" id="bm9-aa-Hdi"/>
                         <constraint firstAttribute="trailing" secondItem="9G4-i5-qX4" secondAttribute="trailing" id="dZL-ID-EUh"/>

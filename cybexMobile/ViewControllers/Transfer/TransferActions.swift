@@ -44,6 +44,8 @@ struct TransferPropertyState {
   
 }
 
+
+
 struct ValidAccountAction: Action {
   var status: AccountValidStatus = .unValided
 }
@@ -66,6 +68,10 @@ struct SetToAccountAction: Action {
 
 struct ResetDataAction : Action {
   
+}
+
+struct CleanToAccountAction : Action{
+    
 }
 
 struct ChooseAccountAction : Action {

@@ -70,6 +70,7 @@ class BusinessViewController: BaseViewController {
                 self.containerView.priceTextfield.textColor = .darkTwo
                 self.containerView.amountTextfield.textColor = .darkTwo
             }
+            
         })
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](notification) in
@@ -79,6 +80,7 @@ class BusinessViewController: BaseViewController {
             self.containerView.priceTextfield.placeholder = R.string.localizable.orderbook_price.key.localized()
             self.containerView.amountTextfield.setPlaceHolderTextColor(UIColor.steel50)
             self.containerView.priceTextfield.setPlaceHolderTextColor(UIColor.steel50)
+            self.changeButtonState()
         }
     }
     
@@ -392,7 +394,7 @@ extension BusinessViewController {
                 self.coordinator?.resetState()
             }
             
-            self.showToastBox(success, message:success ? R.string.localizable.order_create_success() : R.string.localizable.order_create_fail())
+            self.showToastBox(success, message:success ? R.string.localizable.order_create_success.key.localized() : R.string.localizable.order_create_fail.key.localized())
             
         })
     }

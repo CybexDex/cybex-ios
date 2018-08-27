@@ -312,7 +312,7 @@ extension TransferView: TitleTextFieldViewDelegate,TitleTextFieldViewDataSource,
                 accountView.loading_state = .Loading
             }
             else {
-                accountView.loading_state = .none
+                accountView.loading_state = .normal
             }
             return [TextButtonSetting(imageName: "loading_state",
                                       selectedImageName: "",
@@ -353,10 +353,8 @@ extension TransferView: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField.tag {
-        case InputType.account.rawValue:
-            if let text = textField.text , text.count == 0 {
-                self.accountView.loading_state = .none
-            }
+        case InputType.account.rawValue: 
+            self.accountView.loading_state = .normal
             self.sendEventWith(TextChangeEvent.account.rawValue, userinfo: ["content" : textField.text ?? ""])
         case InputType.amount.rawValue:
             if textField.text?.trimmed.count == 0 {

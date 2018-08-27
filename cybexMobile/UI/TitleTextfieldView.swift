@@ -70,29 +70,27 @@ class TitleTextfieldView: UIView {
     
     var loadingBtn : TextRightButton?
     
-    var loading_state : image_state? {
+    var loading_state : image_state = .normal {
         didSet{
-            if let state = loading_state {
-                switch state {
-                case .none:
-                    self.loadingBtn?.isHidden = true
-                    break
-                case .Loading:
-                    self.loadingBtn?.isHidden = false
-                    self.loadingBtn?.setImage(nil, for: .normal)
-                    self.startAnimation()
-                    break
-                case .Fail:
-                    self.loadingBtn?.isHidden = false
-                    self.stop()
-                    self.loadingBtn?.setImage(R.image.ic_close_24_px(), for: .normal)
-                    break
-                case .Success:
-                    self.loadingBtn?.isHidden = false
-                    self.stop()
-                    self.loadingBtn?.setImage(R.image.check_complete(), for: .normal)
-                    break
-                }
+            switch self.loading_state {
+            case .normal:
+                self.loadingBtn?.isHidden = true
+                break
+            case .Loading:
+                self.loadingBtn?.isHidden = false
+                self.loadingBtn?.setImage(nil, for: .normal)
+                self.startAnimation()
+                break
+            case .Fail:
+                self.loadingBtn?.isHidden = false
+                self.stop()
+                self.loadingBtn?.setImage(R.image.ic_close_24_px(), for: .normal)
+                break
+            case .Success:
+                self.loadingBtn?.isHidden = false
+                self.stop()
+                self.loadingBtn?.setImage(R.image.check_complete(), for: .normal)
+                break
             }
         }
     }

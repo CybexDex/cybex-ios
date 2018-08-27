@@ -48,7 +48,7 @@ class TransferContentView: UIView {
           }
 
           if let feeInfo = data.fee,let assetInfo = app_data.assetInfo[feeInfo.asset_id] {
-            feeView.content_locali = getRealAmount(feeInfo.asset_id, amount: feeInfo.amount).stringValue.formatCurrency(digitNum: assetInfo.precision) + " " + assetInfo.symbol.filterJade
+            feeView.content_locali = getRealAmount(feeInfo.asset_id, amount: feeInfo.amount).string(digits: assetInfo.precision, roundingMode: .down) + " " + assetInfo.symbol.filterJade
           }
           updateHeight()
         }

@@ -30,6 +30,7 @@ class EntryViewController: BaseViewController {
   }
 
   func setupUI() {
+    configLeftNavigationButton(R.image.icClose24Px())
     accountTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
     passwordTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
     accountTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
