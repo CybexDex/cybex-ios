@@ -119,3 +119,5 @@ struct TransferRecordViewModel {
     var fee : HandyAsset?
 }
 
+
+
