@@ -110,6 +110,7 @@ def other
     pod 'Device'
     pod 'SwiftNotificationCenter'
     pod 'AsyncSwift'
+    pod 'MonkeyKing' #share
 end
 
 def fabric

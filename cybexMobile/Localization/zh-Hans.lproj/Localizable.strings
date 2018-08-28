@@ -12,7 +12,7 @@
 "nav.account" = "账号";
 "nav.setting" = "设置";
 "nav.trade"   = "交易";
-
+"nav.eto" = "ETO";
 
 "market" = "交易中心";
 "language" = "语言";

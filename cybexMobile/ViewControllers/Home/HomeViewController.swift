@@ -82,6 +82,8 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     self.localized_text = R.string.localizable.navWatchlist.key.localizedContainer()
     switchContainerView()
   }
+    
+    
   
   func switchContainerView() {
     contentView?.removeFromSuperview()

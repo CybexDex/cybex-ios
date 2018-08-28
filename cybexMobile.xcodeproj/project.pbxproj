@@ -281,6 +281,17 @@
 		72199DAD2104687400575226 /* TransferLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199DAC2104687400575226 /* TransferLineView.swift */; };
 		72199DAF2104687D00575226 /* TransferLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199DAE2104687D00575226 /* TransferLineView.xib */; };
 		7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25010BD1F86818F3968A6D9DEF12AD52 /* BusinessViewController.swift */; };
+		7267DA00213502AE004AF9AF /* ETORootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267D9FF213502AE004AF9AF /* ETORootCoordinator.swift */; };
+		7267DA0621350327004AF9AF /* ETOCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA0221350327004AF9AF /* ETOCoordinator.swift */; };
+		7267DA0721350327004AF9AF /* ETOActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA0321350327004AF9AF /* ETOActions.swift */; };
+		7267DA0821350327004AF9AF /* ETOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA0421350327004AF9AF /* ETOViewController.swift */; };
+		7267DA0921350327004AF9AF /* ETOReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA0521350327004AF9AF /* ETOReducers.swift */; };
+		7267DA1521351D40004AF9AF /* ETOProjectViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA1221351D40004AF9AF /* ETOProjectViewAdapter.swift */; };
+		7267DA1621351D40004AF9AF /* ETOProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA1321351D40004AF9AF /* ETOProjectView.swift */; };
+		7267DA1721351D40004AF9AF /* ETOProjectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7267DA1421351D40004AF9AF /* ETOProjectView.xib */; };
+		7267DA1A21351D5A004AF9AF /* ETOProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA1821351D5A004AF9AF /* ETOProjectCell.swift */; };
+		7267DA1B21351D5A004AF9AF /* ETOProjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7267DA1921351D5A004AF9AF /* ETOProjectCell.xib */; };
+		7267DA1D2135244A004AF9AF /* ETO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA1C2135244A004AF9AF /* ETO.swift */; };
 		7279867F20F49B3300FFB2DA /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 7279867E20F49B3200FFB2DA /* schema.json */; };
 		728C15792129AE9300053555 /* CybexShowTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C15782129AE9300053555 /* CybexShowTitleView.swift */; };
 		728C157B2129AEA400053555 /* CybexShowTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728C157A2129AEA400053555 /* CybexShowTitleView.xib */; };
@@ -5834,6 +5845,17 @@
 		72570A175BDFE6E23276B261A3F3EC53 /* up_if_not_array.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = up_if_not_array.hpp; sourceTree = "<group>"; };
 		726201BDF53A0D14B143F99AE0D3D850 /* cast.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cast.hpp; sourceTree = "<group>"; };
 		72630919AABC6C6A863179F2D2ADB0CB /* complex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = complex.hpp; sourceTree = "<group>"; };
+		7267D9FF213502AE004AF9AF /* ETORootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETORootCoordinator.swift; sourceTree = "<group>"; };
+		7267DA0221350327004AF9AF /* ETOCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCoordinator.swift; sourceTree = "<group>"; };
+		7267DA0321350327004AF9AF /* ETOActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOActions.swift; sourceTree = "<group>"; };
+		7267DA0421350327004AF9AF /* ETOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOViewController.swift; sourceTree = "<group>"; };
+		7267DA0521350327004AF9AF /* ETOReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOReducers.swift; sourceTree = "<group>"; };
+		7267DA1221351D40004AF9AF /* ETOProjectViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOProjectViewAdapter.swift; sourceTree = "<group>"; };
+		7267DA1321351D40004AF9AF /* ETOProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOProjectView.swift; sourceTree = "<group>"; };
+		7267DA1421351D40004AF9AF /* ETOProjectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOProjectView.xib; sourceTree = "<group>"; };
+		7267DA1821351D5A004AF9AF /* ETOProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOProjectCell.swift; sourceTree = "<group>"; };
+		7267DA1921351D5A004AF9AF /* ETOProjectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOProjectCell.xib; sourceTree = "<group>"; };
+		7267DA1C2135244A004AF9AF /* ETO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETO.swift; sourceTree = "<group>"; };
 		72789C0E96418BF478684ED7E483E03F /* polynomial_horner2_6.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = polynomial_horner2_6.hpp; sourceTree = "<group>"; };
 		7279867E20F49B3200FFB2DA /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		727AE54235841DBD27700416DA7C59A7 /* begin_end.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = begin_end.hpp; sourceTree = "<group>"; };
@@ -21719,6 +21741,7 @@
 				149A7633B62C66BF0A91E02182615CB5 /* Trade.swift */,
 				A594949DD908310B30266DF5349ACA42 /* Vesting.swift */,
 				72AAC8AF2106FC840040793F /* Record.swift */,
+				7267DA1C2135244A004AF9AF /* ETO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -21905,6 +21928,38 @@
 				72199DAA2104680900575226 /* TransferContentView.xib */,
 				72199DAC2104687400575226 /* TransferLineView.swift */,
 				72199DAE2104687D00575226 /* TransferLineView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7267DA0121350317004AF9AF /* ETO */ = {
+			isa = PBXGroup;
+			children = (
+				7267DA0B21351933004AF9AF /* Views */,
+				7267DA0A21351927004AF9AF /* Cell */,
+				7267DA0221350327004AF9AF /* ETOCoordinator.swift */,
+				7267DA0321350327004AF9AF /* ETOActions.swift */,
+				7267DA0421350327004AF9AF /* ETOViewController.swift */,
+				7267DA0521350327004AF9AF /* ETOReducers.swift */,
+			);
+			path = ETO;
+			sourceTree = "<group>";
+		};
+		7267DA0A21351927004AF9AF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7267DA1821351D5A004AF9AF /* ETOProjectCell.swift */,
+				7267DA1921351D5A004AF9AF /* ETOProjectCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		7267DA0B21351933004AF9AF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7267DA1221351D40004AF9AF /* ETOProjectViewAdapter.swift */,
+				7267DA1321351D40004AF9AF /* ETOProjectView.swift */,
+				7267DA1421351D40004AF9AF /* ETOProjectView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -27277,6 +27332,7 @@
 				1F76A60156D4654017DDEA67DEC3EAAD /* FAQRootCoordinator.swift */,
 				E8E395E7B5D2617408E203CD024E8818 /* HomeRootCoordinator.swift */,
 				32EED361030B4F9C7CFFB90076C4437F /* TradeRootCoordinator.swift */,
+				7267D9FF213502AE004AF9AF /* ETORootCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -31398,6 +31454,7 @@
 		F189D4AC3A5BB2DB266277BAD8CB0EA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7267DA0121350317004AF9AF /* ETO */,
 				72199D7F21045CEA00575226 /* Transfer */,
 				1957BC4603D51BA58EA334581171C0AD /* Account */,
 				9D2617B8E4636D7B44A5583FD0A56039 /* Entry */,
@@ -32932,6 +32989,7 @@
 				082F8D06A9EF700C8EB3A8BC62D8F1A8 /* LockupAssetsCell.xib in Resources */,
 				089679AF63200358A2B8B9059A9824A0 /* LockupAssetsSectionView.xib in Resources */,
 				72199D742104502800575226 /* Recode.storyboard in Resources */,
+				7267DA1721351D40004AF9AF /* ETOProjectView.xib in Resources */,
 				A0EB4B1B6F7ED67099FE6F6641D24E84 /* LockupAssetsView.xib in Resources */,
 				DADCEB576AA31881365CA9DFD8588B7A /* Main.storyboard in Resources */,
 				5EC5CB38F68C8EB063FE6DB600247A30 /* MyHistoryCell.xib in Resources */,
@@ -32951,6 +33009,7 @@
 				7307A918212518DC00BD6444 /* .travis.yml in Resources */,
 				3385671DD5F1B6ED220AB916F7859ECF /* OrderBookContentView.xib in Resources */,
 				813174FFD07A88030F54BD2F9B24E36C /* PairCardCell.xib in Resources */,
+				7267DA1B21351D5A004AF9AF /* ETOProjectCell.xib in Resources */,
 				3CB09937C6D6A05CD97DF278F0EFF936 /* PairCardView.xib in Resources */,
 				FDFA2C6266D88980D2E29CCFF6D98441 /* PairDetailView.xib in Resources */,
 				0ED42A2E6A4E84AEF46AFE2E669A6EC7 /* PairListHorizantalView.xib in Resources */,
@@ -33209,6 +33268,7 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/MLeaksFinder/MLeaksFinder.framework",
 				"${BUILT_PRODUCTS_DIR}/Macaw/Macaw.framework",
+				"${BUILT_PRODUCTS_DIR}/MonkeyKing/MonkeyKing.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
@@ -33303,6 +33363,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLeaksFinder.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Macaw.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MonkeyKing.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
@@ -33488,6 +33549,7 @@
 				72199DA92104680000575226 /* TransferContentView.swift in Sources */,
 				7307A921212518DC00BD6444 /* MapIcon.swift in Sources */,
 				E0AD8E2E835D84754C63BA76FBA8582E /* AccountReducers.swift in Sources */,
+				7267DA1521351D40004AF9AF /* ETOProjectViewAdapter.swift in Sources */,
 				C44F04354B1B9F8051BA2651AC620D65 /* AccountRootCoordinator.swift in Sources */,
 				0960C892D63D17ABEB447BCE5525D299 /* AppActions.swift in Sources */,
 				C281A4038187FCD131A006BA4689D2BD /* AppCoordinator+StateManager.swift in Sources */,
@@ -33526,6 +33588,7 @@
 				221EC2392105B1930059F856 /* TitleTextfieldView.swift in Sources */,
 				C0AC3C1A58448D06655DCE0994FDC33A /* BusinessView.swift in Sources */,
 				7386F2B621216B3A00ABC924 /* WithdrawAddressHomeActions.swift in Sources */,
+				7267DA1621351D40004AF9AF /* ETOProjectView.swift in Sources */,
 				221EC2372105B1930059F856 /* GrowSectionView.swift in Sources */,
 				7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */,
 				3D856B5FBCBB3B250D34CFA99756374F /* Button.swift in Sources */,
@@ -33613,6 +33676,7 @@
 				9BDA71F68E64FDF8BBAE5E8A3391FFA1 /* HomeViewController.swift in Sources */,
 				7307A924212518DC00BD6444 /* SwiftIconFont.swift in Sources */,
 				72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */,
+				7267DA1D2135244A004AF9AF /* ETO.swift in Sources */,
 				221EC24F2105CF310059F856 /* TransferReducers.swift in Sources */,
 				72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */,
 				59EC4E5138ECE3D4E7570F3EE0EF28E0 /* IconGenerator.swift in Sources */,
@@ -33629,6 +33693,7 @@
 				80258D6F4C94ACC78C20B5ACE8BEAD2F /* LockupAssetsReducers.swift in Sources */,
 				85D46A1F0D3BBF12CF72903D466D9239 /* LockupAssetsSectionView.swift in Sources */,
 				B2B05000B81768D84E3FBE9B46392133 /* LockupAssetsView.swift in Sources */,
+				7267DA0821350327004AF9AF /* ETOViewController.swift in Sources */,
 				221EC2352105B1930059F856 /* TitleTextView.swift in Sources */,
 				6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */,
 				8DFD3022184642B3A8D4D8A8FE04F655 /* LockupProgressView.swift in Sources */,
@@ -33638,6 +33703,7 @@
 				92F32777AC4AC77905155B74B115E1A1 /* MarketCache.swift in Sources */,
 				A91E01A343738BBD63B5015631CE57A7 /* MarketCoordinator.swift in Sources */,
 				46CD7B2787FFCD483A5A723E52C54292 /* MarketReducers.swift in Sources */,
+				7267DA00213502AE004AF9AF /* ETORootCoordinator.swift in Sources */,
 				221EC24D2105CF310059F856 /* TransferActions.swift in Sources */,
 				6B64E2B67481907BE9CFCAE4FCF346A6 /* MarketViewController.swift in Sources */,
 				56C9CE8FDE2020EA4F72F21F30D27087 /* MyHistoryActions.swift in Sources */,
@@ -33676,8 +33742,10 @@
 				7386F2A42121665100ABC924 /* AddressHomeReducers.swift in Sources */,
 				019AC681342BD1E978777A6A503E27B6 /* OrderBookActions.swift in Sources */,
 				7307A931212518F300BD6444 /* BaseView.swift in Sources */,
+				7267DA0621350327004AF9AF /* ETOCoordinator.swift in Sources */,
 				4C5E6FF343C8DA25EC51F44EF725069E /* OrderBookCell.swift in Sources */,
 				D898B818223D8DD3B304D2D7F5A3E2AB /* OrderBookCellView.swift in Sources */,
+				7267DA0921350327004AF9AF /* ETOReducers.swift in Sources */,
 				72199D79210450C900575226 /* RecodeCell.swift in Sources */,
 				B50D80579F91D71A098AEB21A8251C44 /* OrderBookContentView.swift in Sources */,
 				DB5E6F5B71C53800CE2EEA32391210BE /* OrderBookCoordinator.swift in Sources */,
@@ -33757,6 +33825,7 @@
 				640657C00CD9588E73E0F0280F245348 /* TradeRootCoordinator.swift in Sources */,
 				7217B07F2122AAFD00608531 /* AddAddressReducers.swift in Sources */,
 				7386F2B121216B2200ABC924 /* TransferAddressHomeViewController.swift in Sources */,
+				7267DA0721350327004AF9AF /* ETOActions.swift in Sources */,
 				3B0EB65C210313B200F19C31 /* YourPortfolioHeadView.swift in Sources */,
 				C02132F00200B408020442C307CEE0B6 /* TradeView.swift in Sources */,
 				7CA82BA6BC1F22AAA929D52CD5C4434F /* TradeViewController.swift in Sources */,
@@ -33769,6 +33838,7 @@
 				CC8DD1E9001CFBB8915E342EDB329B3E /* UIImage+Extensions.swift in Sources */,
 				0C46B30A32343632C135B84DDEB47F80 /* UIResponder+Route.swift in Sources */,
 				7217B0872122BBD900608531 /* AddressItemView.swift in Sources */,
+				7267DA1A21351D5A004AF9AF /* ETOProjectCell.swift in Sources */,
 				225746E821073E480017FA1A /* PickerView.swift in Sources */,
 				7386F2B721216B3A00ABC924 /* WithdrawAddressHomeCoordinator.swift in Sources */,
 				72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */,
