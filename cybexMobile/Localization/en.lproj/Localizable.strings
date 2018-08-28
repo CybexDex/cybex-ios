@@ -12,6 +12,7 @@
 "nav.account" = "Account";
 "nav.setting" = "Settings";
 "nav.trade"   = "Exchange";
+"nav.eto" = "ETO";
 
 
 "market" = "Market";

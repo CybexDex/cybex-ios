@@ -218,21 +218,25 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                         let value = pow(10, assetInfo.precision)
                         amount = amount * Double(truncating: value as NSNumber)
                         
-                        let fee_amout = fee.amount.toDouble()! * Double(truncating: pow(10, feeInfo.precision) as NSNumber)
+                        guard let fee_amount = fee.amount.toDouble() ,let from_account = UserManager.shared.account.value ,let to_account = self.state.property.to_account.value else {
+                                return
+                        }
                         
+                        let fee_amout = fee_amount * Double(truncating: pow(10, feeInfo.precision) as NSNumber)
+                       
                         let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
                                                                           block_id: infos.block_id,
                                                                           expiration: Date().timeIntervalSince1970 + 10 * 3600,
                                                                           chain_id: id,
-                                                                          from_user_id: Int32(getUserId((UserManager.shared.account.value?.id)!)),
-                                                                          to_user_id: Int32(getUserId((self.state.property.to_account.value?.id)!)),
+                                                                          from_user_id: Int32(getUserId(from_account.id)),
+                                                                          to_user_id: Int32(getUserId(to_account.id)),
                                                                           asset_id: Int32(getUserId(balance.asset_type)),
                                                                           receive_asset_id: Int32(getUserId(balance.asset_type)),
                                                                           amount: Int64(Int32(amount)),
                                                                           fee_id: Int32(getUserId(fee.asset_id)),
                                                                           fee_amount: Int64(fee_amout),
                                                                           memo: self.state.property.memo.value,
-                                                                          from_memo_key: UserManager.shared.account.value?.memo_key,
+                                                                          from_memo_key: from_account.memo_key,
                                                                           to_memo_key: to_account.memo_key)
                         
                         let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
