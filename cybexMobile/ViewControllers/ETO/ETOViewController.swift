@@ -35,7 +35,6 @@ class ETOViewController: BaseViewController {
     }
     
     func setupUI() {
-        
         tableView.register(UINib.init(nibName: R.nib.etoProjectCell.name, bundle: nil), forCellReuseIdentifier: R.nib.etoProjectCell.name)
     }
 

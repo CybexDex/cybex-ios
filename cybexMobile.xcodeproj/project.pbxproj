@@ -334,6 +334,7 @@
 		733714BE2122D32500B2ED90 /* AddressCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714BC2122D32500B2ED90 /* AddressCellView.xib */; };
 		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
 		73587E9D2133EB15006CF8A6 /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */; };
+		73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9F21352AD8006CF8A6 /* ETOMGService.swift */; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
 		7386F2A22121665100ABC924 /* AddressHomeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29E2121665100ABC924 /* AddressHomeActions.swift */; };
@@ -5926,6 +5927,7 @@
 		73481176210815BF000BF1B8 /* CybexWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebSocketService.swift; sourceTree = "<group>"; };
 		7355BF528D49DAD350032FC147C8FA32 /* function.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = function.hpp; sourceTree = "<group>"; };
 		73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPCircularProgress.swift; sourceTree = "<group>"; };
+		73587E9F21352AD8006CF8A6 /* ETOMGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOMGService.swift; sourceTree = "<group>"; };
 		735EA8642354E31CA8166DA44203A684 /* shift_right.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shift_right.hpp; sourceTree = "<group>"; };
 		735FA00E9301F0DB45760B1C0D7FEC09 /* extreme_value.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = extreme_value.hpp; sourceTree = "<group>"; };
 		737258FAB6762972136E4188BF20F602 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
@@ -22107,6 +22109,14 @@
 			path = auxiliary;
 			sourceTree = "<group>";
 		};
+		73587E9E21352AA8006CF8A6 /* ETOMG */ = {
+			isa = PBXGroup;
+			children = (
+				73587E9F21352AD8006CF8A6 /* ETOMGService.swift */,
+			);
+			path = ETOMG;
+			sourceTree = "<group>";
+		};
 		7386F28D2121204A00ABC924 /* cybexMobileTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -29199,6 +29209,7 @@
 		D20B8449A5999F7E7C8218C87D423298 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				73587E9E21352AA8006CF8A6 /* ETOMG */,
 				B3A7B2B168414622D5415E459355C157 /* Cache */,
 				563B15E66B3177DAF59BE0B7796A2ABF /* GraphQL */,
 				99BA08948A7490717821708BF7DDB811 /* HTTPNetwork */,
@@ -33814,6 +33825,7 @@
 				01D3990C8F03B94C2207F37FF3C7C895 /* UIViewController+Extension.swift in Sources */,
 				696EB2454DD46A9C497C7C719B12BF12 /* UserDefaults.swift in Sources */,
 				73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */,
+				73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */,
 				1EE747D219462D96F1597B374E8338E8 /* UserManager.swift in Sources */,
 				20C5C352A5EE76CE53F6F1F8C7CE1FB6 /* Utils.swift in Sources */,
 				7386F2AE21216B2200ABC924 /* TransferAddressHomeActions.swift in Sources */,
