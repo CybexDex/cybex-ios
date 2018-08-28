@@ -134,6 +134,15 @@
 		3B0EB66A2103158300F19C31 /* YourPorfolioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB6692103158200F19C31 /* YourPorfolioView.xib */; };
 		3B0EB66C2103158A00F19C31 /* YourPortfolioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB66B2103158A00F19C31 /* YourPortfolioCell.xib */; };
 		3B824D5C362724DE4C1048A35CDC37E0 /* FAQRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76A60156D4654017DDEA67DEC3EAAD /* FAQRootCoordinator.swift */; };
+		3BF5B7DE2134F1F200E8BFC9 /* ETODetailViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5B7DB2134F1F200E8BFC9 /* ETODetailViewAdapter.swift */; };
+		3BF5B7DF2134F1F200E8BFC9 /* ETODetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5B7DC2134F1F200E8BFC9 /* ETODetailView.swift */; };
+		3BF5B7E02134F1F200E8BFC9 /* ETODetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BF5B7DD2134F1F200E8BFC9 /* ETODetailView.xib */; };
+		3BF5B7E42134F5A800E8BFC9 /* ETODetailHeaderViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5B7E12134F5A700E8BFC9 /* ETODetailHeaderViewAdapter.swift */; };
+		3BF5B7E52134F5A800E8BFC9 /* ETODetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5B7E22134F5A700E8BFC9 /* ETODetailHeaderView.swift */; };
+		3BF5B7E62134F5A800E8BFC9 /* ETODetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BF5B7E32134F5A700E8BFC9 /* ETODetailHeaderView.xib */; };
+		3BF5B7EA2135001B00E8BFC9 /* ETODetailIntroViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5B7E72135001B00E8BFC9 /* ETODetailIntroViewAdapter.swift */; };
+		3BF5B7EB2135001B00E8BFC9 /* ETODetailIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5B7E82135001B00E8BFC9 /* ETODetailIntroView.swift */; };
+		3BF5B7EC2135001B00E8BFC9 /* ETODetailIntroView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BF5B7E92135001B00E8BFC9 /* ETODetailIntroView.xib */; };
 		3CB09937C6D6A05CD97DF278F0EFF936 /* PairCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADA779DE36FE60947508691E83755D82 /* PairCardView.xib */; };
 		3D400D51F52AE73941E3134046491BA5 /* HomePairView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBAD31050F280F35AEB1E408E3D018D /* HomePairView.swift */; };
 		3D856B5FBCBB3B250D34CFA99756374F /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF894CE4DB0CD3B11F47C1BB626167 /* Button.swift */; };
@@ -3365,6 +3374,15 @@
 		3BE0C03343AFE2DC0A0E9E8BB1E61DEC /* iter_fold.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = iter_fold.hpp; sourceTree = "<group>"; };
 		3BE576FDD0E1B38A102672EA402DBA32 /* map.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = map.hpp; sourceTree = "<group>"; };
 		3BEC891FECA0D714B88B673F60AFE2DA /* sp_counted_base_snc_ps3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sp_counted_base_snc_ps3.hpp; sourceTree = "<group>"; };
+		3BF5B7DB2134F1F200E8BFC9 /* ETODetailViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETODetailViewAdapter.swift; sourceTree = "<group>"; };
+		3BF5B7DC2134F1F200E8BFC9 /* ETODetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETODetailView.swift; sourceTree = "<group>"; };
+		3BF5B7DD2134F1F200E8BFC9 /* ETODetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETODetailView.xib; sourceTree = "<group>"; };
+		3BF5B7E12134F5A700E8BFC9 /* ETODetailHeaderViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETODetailHeaderViewAdapter.swift; sourceTree = "<group>"; };
+		3BF5B7E22134F5A700E8BFC9 /* ETODetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETODetailHeaderView.swift; sourceTree = "<group>"; };
+		3BF5B7E32134F5A700E8BFC9 /* ETODetailHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETODetailHeaderView.xib; sourceTree = "<group>"; };
+		3BF5B7E72135001B00E8BFC9 /* ETODetailIntroViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETODetailIntroViewAdapter.swift; sourceTree = "<group>"; };
+		3BF5B7E82135001B00E8BFC9 /* ETODetailIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETODetailIntroView.swift; sourceTree = "<group>"; };
+		3BF5B7E92135001B00E8BFC9 /* ETODetailIntroView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETODetailIntroView.xib; sourceTree = "<group>"; };
 		3BFD8532394E3475A78E785CFAE6EB5D /* rbtree_node.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rbtree_node.hpp; sourceTree = "<group>"; };
 		3BFE425AA346A44CAD0CD3D1E2CDF8EF /* scoped_ptr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = scoped_ptr.hpp; sourceTree = "<group>"; };
 		3BFF3DE97A7D44A6F9AF0FEF054B211F /* fusion_algebra_dispatcher.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = fusion_algebra_dispatcher.hpp; sourceTree = "<group>"; };
@@ -28093,6 +28111,15 @@
 				225746E3210715890017FA1A /* Components.storyboard */,
 				7386F2C621216FC700ABC924 /* SectionCornerViewView.swift */,
 				7386F2C721216FC700ABC924 /* SectionCornerViewView.xib */,
+				3BF5B7DB2134F1F200E8BFC9 /* ETODetailViewAdapter.swift */,
+				3BF5B7DC2134F1F200E8BFC9 /* ETODetailView.swift */,
+				3BF5B7DD2134F1F200E8BFC9 /* ETODetailView.xib */,
+				3BF5B7E12134F5A700E8BFC9 /* ETODetailHeaderViewAdapter.swift */,
+				3BF5B7E22134F5A700E8BFC9 /* ETODetailHeaderView.swift */,
+				3BF5B7E32134F5A700E8BFC9 /* ETODetailHeaderView.xib */,
+				3BF5B7E72135001B00E8BFC9 /* ETODetailIntroViewAdapter.swift */,
+				3BF5B7E82135001B00E8BFC9 /* ETODetailIntroView.swift */,
+				3BF5B7E92135001B00E8BFC9 /* ETODetailIntroView.xib */,
 				7307A8F8212518DB00BD6444 /* LGButton */,
 			);
 			path = UI;
@@ -32968,6 +32995,7 @@
 				ED52E183FEB4713941693F42DF4A3FC3 /* cfloat in Resources */,
 				D87D82C27FA74490808CC159AF1F26A4 /* climits in Resources */,
 				8BBD1A7F16A0642B27F1E61660BBBE75 /* clocale in Resources */,
+				3BF5B7E02134F1F200E8BFC9 /* ETODetailView.xib in Resources */,
 				72199DA7210466CB00575226 /* TransferTopView.xib in Resources */,
 				1B738C312087134B7F7E5462BD1DB526 /* cmath in Resources */,
 				2BF75EA384934AE269618BFA4D315DA3 /* cmath in Resources */,
@@ -33042,6 +33070,7 @@
 				3B0EB662210314A600F19C31 /* Account.storyboard in Resources */,
 				775A0AC293D3BA7664DF110680A7CA5E /* random in Resources */,
 				50AC1D5876BE8E4CE1F57FE12CB138AA /* random.SUNWCCh in Resources */,
+				3BF5B7EC2135001B00E8BFC9 /* ETODetailIntroView.xib in Resources */,
 				72199DAB2104680900575226 /* TransferContentView.xib in Resources */,
 				3299A2EFB332B1EE39EB214D2FC87525 /* regex in Resources */,
 				CC76CFB4727E500CB64DF691E8EE3E33 /* regex.SUNWCCh in Resources */,
@@ -33055,6 +33084,7 @@
 				22489CC12EB4F62154A78964CF73A58A /* stack.SUNWCCh in Resources */,
 				DBC8B2BFCF2832BDBDCB1C29365DDB63 /* stdexcept in Resources */,
 				471B00A20DEA97DACD2C3FDA97CF6EEF /* stdexcept.SUNWCCh in Resources */,
+				3BF5B7E62134F5A800E8BFC9 /* ETODetailHeaderView.xib in Resources */,
 				8910C0B8505B7C57AD492F938D620E2B /* streambuf in Resources */,
 				03C05D381C138B492E2DB327C2F1E853 /* streambuf.SUNWCCh in Resources */,
 				7A2069F078916F1BEFA51B4280F15043 /* string in Resources */,
@@ -33442,6 +33472,7 @@
 				72199D9421045DD000575226 /* TransferListCell.swift in Sources */,
 				04AE2E3C8F409B0337F53AE4DB52FCD0 /* AccessoryCollectionView.swift in Sources */,
 				98ED9D145EF3DAA0FD242984364B676F /* AccessoryCollectionViewCell.swift in Sources */,
+				3BF5B7E52134F5A800E8BFC9 /* ETODetailHeaderView.swift in Sources */,
 				D6EF2CA9447A80749A341523EA37E613 /* AccessoryHorizentalView.swift in Sources */,
 				53079FD90D2B1B6BCB3863CB53111FAA /* Account.swift in Sources */,
 				B53165C099917599B9638053318C729A /* AccountAssetOperationView.swift in Sources */,
@@ -33501,6 +33532,7 @@
 				9CFD97FEB32C00C8359B325D39F04494 /* CBBOLLModel.swift in Sources */,
 				901F7EEB7579A06B661DD96529FC25E2 /* CBEMAModel.swift in Sources */,
 				AC416049EBD480832773C359C9BAE970 /* CBEMAVOLUMEModel.swift in Sources */,
+				3BF5B7EA2135001B00E8BFC9 /* ETODetailIntroViewAdapter.swift in Sources */,
 				5E6C74108A768A913651E001F98CDA92 /* CBKLineAccessoryView.swift in Sources */,
 				461B84D25CFA564E9455211A24902BB7 /* CBKLineBrush.swift in Sources */,
 				A971765C0FF4C52CAA1C001A3ABBC1B1 /* CBKLineDrawView.swift in Sources */,
@@ -33550,6 +33582,7 @@
 				41369312624D03C488017E7D88E4D41E /* ExchangeViewController.swift in Sources */,
 				F0CE8D5A02461E239914DF75E18C23FA /* ExplorerRootCoordinator.swift in Sources */,
 				0E785072E0FFD5C3B2BE5B7EAB012755 /* FAQActions.swift in Sources */,
+				3BF5B7EB2135001B00E8BFC9 /* ETODetailIntroView.swift in Sources */,
 				72199D8E21045D4700575226 /* TransferListViewController.swift in Sources */,
 				2BE29FBC5EBC24621C616DCA7C58F109 /* FAQCoordinator.swift in Sources */,
 				72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */,
@@ -33599,6 +33632,7 @@
 				221EC2352105B1930059F856 /* TitleTextView.swift in Sources */,
 				6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */,
 				8DFD3022184642B3A8D4D8A8FE04F655 /* LockupProgressView.swift in Sources */,
+				3BF5B7E42134F5A800E8BFC9 /* ETODetailHeaderViewAdapter.swift in Sources */,
 				AF84FCBA2E7219D1FC633DA7881BD0ED /* MarketActions.swift in Sources */,
 				3B0EB652210313B200F19C31 /* YourPortfolioTableHeadView.swift in Sources */,
 				92F32777AC4AC77905155B74B115E1A1 /* MarketCache.swift in Sources */,
@@ -33619,6 +33653,7 @@
 				031F69CC95D2906A4F8F4063776327F6 /* NSObject+Extensions.swift in Sources */,
 				009625463316961A6BB07A49EB88D5D5 /* NavCoordinator.swift in Sources */,
 				8E9524F703A8466022C2D28281507174 /* NetworkBroadcastAPI.swift in Sources */,
+				3BF5B7DF2134F1F200E8BFC9 /* ETODetailView.swift in Sources */,
 				AC784AB46820FFF7BD6DBFCD8132C403 /* NoticeBoardView.swift in Sources */,
 				41AC38B585A5D36715B3161B49381FB5 /* NoticeBoardViewController.swift in Sources */,
 				CC7617050BB0397377BB75D99DE68B3A /* OpenedOrdersActions.swift in Sources */,
@@ -33748,6 +33783,7 @@
 				20C5C352A5EE76CE53F6F1F8C7CE1FB6 /* Utils.swift in Sources */,
 				7386F2AE21216B2200ABC924 /* TransferAddressHomeActions.swift in Sources */,
 				E3A0DE7C4852EA18DEEC292ADE0A8F49 /* Vesting.swift in Sources */,
+				3BF5B7DE2134F1F200E8BFC9 /* ETODetailViewAdapter.swift in Sources */,
 				9F062BB04541D9C9086AED80A6B1E454 /* WithNoDataView.swift in Sources */,
 				D943D44B1F143FD28298F8C1F7E94552 /* WithdrawDetailActions.swift in Sources */,
 				975938BD454B9AB3D5F1AD8C06CDFCA8 /* WithdrawDetailCoordinator.swift in Sources */,
