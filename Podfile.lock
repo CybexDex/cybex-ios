@@ -62,6 +62,7 @@ PODS:
   - MJRefresh (3.1.15.3)
   - MLeaksFinder (1.0.0):
     - FBRetainCycleDetector
+  - MonkeyKing (1.8.0)
   - Moya (12.0.0-beta.1):
     - Moya/Core (= 12.0.0-beta.1)
   - Moya/Core (12.0.0-beta.1):
@@ -219,6 +220,7 @@ DEPENDENCIES:
   - Macaw
   - MJRefresh
   - MLeaksFinder
+  - MonkeyKing
   - Moya (from `https://github.com/Moya/Moya`, tag `12.0.0-beta.1`)
   - Nimble
   - NVActivityIndicatorView
@@ -313,6 +315,7 @@ SPEC REPOS:
     - Macaw
     - MJRefresh
     - MLeaksFinder
+    - MonkeyKing
     - Nimble
     - NVActivityIndicatorView
     - ObjectMapper
@@ -450,6 +453,7 @@ SPEC CHECKSUMS:
   Macaw: 6db42cb10c1e018ee940a906b42a1ead5557e080
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
+  MonkeyKing: a09f77048f3dd8ee94143dc70fc7b47a2362188e
   Moya: 1b8d16b4dac4302c323ca95077a733836e73484a
   Nimble: 2839b01d1b31f6a6a7777a221f0d91cf52e8e27b
   NVActivityIndicatorView: 963f62bf9f993fcf23218e55958e5b1761b9504c
@@ -505,6 +509,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 34f79abb60018f2e2a5168d6287d90473024ab81
 
-PODFILE CHECKSUM: 7aa097675f36ece5cf902c1c1a4a1fb732bc9aee
+PODFILE CHECKSUM: 704cac39b04b1f93a71f8bcf88f667630be14092
 
 COCOAPODS: 1.5.3
