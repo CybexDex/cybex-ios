@@ -10,9 +10,20 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ETOProjectView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="icon" destination="LBt-oQ-w0g" id="0De-BO-dNp"/>
+                <outlet property="markLabel" destination="WgY-3z-Hxs" id="8LA-yA-EjR"/>
+                <outlet property="nameLabel" destination="0rG-8U-sxA" id="ftR-IQ-OXi"/>
+                <outlet property="progressLabel" destination="8Oi-x8-nEL" id="i5O-lc-0yS"/>
+                <outlet property="progressView" destination="GxL-Oj-Bhv" id="aY3-Gz-aM5"/>
+                <outlet property="stateLabel" destination="exm-CO-epf" id="IK5-qE-Cgv"/>
+                <outlet property="timeImgView" destination="na5-42-pdN" id="2P7-VS-93k"/>
+                <outlet property="timeLabel" destination="HGo-bQ-fRy" id="1Gu-cs-4Gl"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="xA0-0e-ZaO" customClass="ETOProjectView" customModule="cybexMobile" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="xA0-0e-ZaO">
             <rect key="frame" x="0.0" y="0.0" width="375" height="118"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -37,10 +48,10 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WgY-3z-Hxs">
                     <rect key="frame" x="95" y="39.5" width="262" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GxL-Oj-Bhv" customClass="LockupProgressView" customModule="cybexMobile" customModuleProvider="target">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GxL-Oj-Bhv" customClass="LockupProgressView" customModule="cybexMobile" customModuleProvider="target">
                     <rect key="frame" x="95" y="65" width="223" height="8"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -52,6 +63,9 @@
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="direction">
                             <integer key="value" value="0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="4"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -77,11 +91,10 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGo-bQ-fRy">
                     <rect key="frame" x="119" y="81" width="238" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="exm-CO-epf" firstAttribute="centerX" secondItem="LBt-oQ-w0g" secondAttribute="centerX" id="0xj-vo-bxv"/>
                 <constraint firstItem="dcm-4B-Ve0" firstAttribute="trailing" secondItem="WgY-3z-Hxs" secondAttribute="trailing" constant="18" id="63R-Wb-hCq"/>
@@ -108,19 +121,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="dcm-4B-Ve0"/>
-            <connections>
-                <outlet property="icon" destination="LBt-oQ-w0g" id="Ua6-52-iBe"/>
-                <outlet property="markLabel" destination="WgY-3z-Hxs" id="aAG-ae-UTT"/>
-                <outlet property="nameLabel" destination="0rG-8U-sxA" id="G6z-JQ-WQP"/>
-                <outlet property="progressLabel" destination="8Oi-x8-nEL" id="Onv-A8-wJE"/>
-                <outlet property="progressView" destination="GxL-Oj-Bhv" id="xkf-IE-BfA"/>
-                <outlet property="stateLabel" destination="exm-CO-epf" id="dDL-fc-Pbl"/>
-                <outlet property="timeImgView" destination="na5-42-pdN" id="TcH-9J-dkm"/>
-                <outlet property="timeLabel" destination="HGo-bQ-fRy" id="6rs-LT-sLc"/>
-            </connections>
             <point key="canvasLocation" x="-271" y="-794"/>
         </view>
     </objects>
-    <resources>
-    </resources>
 </document>

@@ -40,6 +40,7 @@ class LockupProgressView: UIView {
             
         }
     }
+    
     @IBInspectable
     var space : CGFloat = 2 {
         didSet{
@@ -62,9 +63,6 @@ class LockupProgressView: UIView {
                 layer.removeFromSuperlayer()
             }
         }
-        
-        let path = UIBezierPath(rect: rect)
-        path.lineCapStyle = .round
         
         let beginColor        = self.beginColor.cgColor
         let endColor          = self.endColor.cgColor

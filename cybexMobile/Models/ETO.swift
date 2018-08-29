@@ -18,3 +18,17 @@ struct ETOProjectModel {
     var time_progress : Double = 0
     var time : String = ""
 }
+
+struct ETOProjectInfo : HandyJSON {
+    
+    
+}
+
+
+struct ETOBannerModel {
+    var index : Int = 0
+    var id : String = ""
+    var banner : Int = 0
+    var adds_banner : String = ""
+    var adds_banner_lang_en : String = ""
+}

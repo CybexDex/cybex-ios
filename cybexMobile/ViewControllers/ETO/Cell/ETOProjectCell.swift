@@ -10,12 +10,10 @@ import UIKit
 
 class ETOProjectCell: BaseTableViewCell {
 
+    @IBOutlet weak var projectView: ETOProjectView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
     }
     
     override func setup(_ data: Any?) {

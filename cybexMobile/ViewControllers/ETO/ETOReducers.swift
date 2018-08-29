@@ -11,13 +11,16 @@ import ReSwift
 
 func ETOReducer(action:Action, state:ETOState?) -> ETOState {
     let state = state ?? ETOState()
-        
     switch action {
-    default:
-        break
+        case let action as FetchProjectModelAction:
+            state.data.accept(transferModelToViewModel(action.data))
+            break
+        default:break
     }
-        
     return state
 }
 
-
+func transferModelToViewModel(_ data : [ETOProjectInfo]) -> [ETOProjectModel] {
+    
+    return []
+}
