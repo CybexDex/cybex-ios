@@ -45,7 +45,6 @@ enum ETOJoinButtonStyle {
     case wait
     case notPassed
     case disable
-    case notShow
 }
 
 enum ETOJoinButtonAction {
@@ -103,7 +102,7 @@ class ETOManager {
         
         switch clause {
         case .normal:
-            return .normal(title: "立即参与", style: .normal, action: .inputCode)
+            return .normal(title: "立即预约", style: .normal, action: .inputCode)
         case .checkedAndImmutable:
             if state.contains(.auditPassed) {
                 if state.contains(.notStarted) {
@@ -115,7 +114,7 @@ class ETOManager {
                 return .disable(title: "审核中", style: .wait)
             }
             else {
-                return .disable(title: "审核不通过", style: .notPassed)
+                return .disable(title: "审核未通过", style: .notPassed)
             }
         case .notShow:
             if state.contains(.notReserved) {

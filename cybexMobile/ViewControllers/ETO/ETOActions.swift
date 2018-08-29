@@ -19,7 +19,7 @@ struct ETOState: BaseState {
 
 //MARK: - Action
 struct FetchProjectModelAction : Action {
-    var data : [ETOProjectInfo]
+    var data : [String]
 }
 
 

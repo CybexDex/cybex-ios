@@ -56,7 +56,6 @@ class HomeContentView: UIView {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    layoutIfNeeded()
   }
   
   override init(frame: CGRect) {
