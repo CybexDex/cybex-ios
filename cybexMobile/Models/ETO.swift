@@ -18,3 +18,13 @@ struct ETOProjectModel {
     var time_progress : Double = 0
     var time : String = ""
 }
+
+struct ETODetailAdapterModel {
+    var icon_url : String = ""
+    var state : String = ""
+    var name : String = ""
+    var mark : String = ""
+    var progress : Double = 0
+    var time_progress : Double = 0
+    var time : String = ""
+}

@@ -333,6 +333,11 @@
 "hello" = "Hello，";
 "deposit_withdraw" = "Deposit/Withdraw";
 "frozen" = "Frozen：";
+"get_white_list" = "获取白名单";
+"ETO_detail" = "ETO详情";
+"project_intro" = "项目介绍";
+"project_website" = "项目官网";
+"user_agreement" = "《用户协议》";
 
 //zsy end
 

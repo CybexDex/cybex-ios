@@ -1,5 +1,5 @@
 //
-//  ETODetailHeaderViewAdapter.swift
+//  ETODetailIntroViewAdapter.swift
 //  cybexMobile
 //
 //  Created zhusongyu on 2018/8/28.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension ETODetailHeaderView {
-    func adapterModelToETODetailHeaderView(_ model:<#Type#>) {
+extension ETODetailIntroView {
+    func adapterModelToETODetailIntroView(_ model:ETODetailModel) {
         
     }
 }

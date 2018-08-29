@@ -10,10 +10,17 @@ import Foundation
 
 @IBDesignable
 class ETODetailHeaderView: BaseView {
+    
+    @IBOutlet weak var iconImgView: UIImageView!
+    @IBOutlet weak var progressView: LockupProgressView!
+    @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var stateImgView: UIImageView!
+    
     enum Event:String {
         case ETODetailHeaderViewDidClicked
     }
-        
+
     override func setup() {
         super.setup()
         

@@ -133,6 +133,11 @@
 		3B0EB6682103155C00F19C31 /* YourPortfolioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0EB6662103155C00F19C31 /* YourPortfolioViewController.swift */; };
 		3B0EB66A2103158300F19C31 /* YourPorfolioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB6692103158200F19C31 /* YourPorfolioView.xib */; };
 		3B0EB66C2103158A00F19C31 /* YourPortfolioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0EB66B2103158A00F19C31 /* YourPortfolioCell.xib */; };
+		3B125C8521366BEE000A9F97 /* ETODetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B125C8421366BEE000A9F97 /* ETODetail.storyboard */; };
+		3B824A2C2135350200D7A4A7 /* ETODetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B824A282135350200D7A4A7 /* ETODetailCoordinator.swift */; };
+		3B824A2D2135350200D7A4A7 /* ETODetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B824A292135350200D7A4A7 /* ETODetailActions.swift */; };
+		3B824A2E2135350200D7A4A7 /* ETODetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B824A2A2135350200D7A4A7 /* ETODetailViewController.swift */; };
+		3B824A2F2135350200D7A4A7 /* ETODetailReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B824A2B2135350200D7A4A7 /* ETODetailReducers.swift */; };
 		3B824D5C362724DE4C1048A35CDC37E0 /* FAQRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76A60156D4654017DDEA67DEC3EAAD /* FAQRootCoordinator.swift */; };
 		3BF5B7DE2134F1F200E8BFC9 /* ETODetailViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5B7DB2134F1F200E8BFC9 /* ETODetailViewAdapter.swift */; };
 		3BF5B7DF2134F1F200E8BFC9 /* ETODetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5B7DC2134F1F200E8BFC9 /* ETODetailView.swift */; };
@@ -3348,6 +3353,7 @@
 		3B0F03281099E5CB23C9EED4F0AE2995 /* shift_right.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shift_right.hpp; sourceTree = "<group>"; };
 		3B10A2434BBEC16BE6DF92269C7B997E /* karma_operator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = karma_operator.hpp; sourceTree = "<group>"; };
 		3B1194399994B58BCB6CC1146665EAB5 /* functors.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = functors.hpp; sourceTree = "<group>"; };
+		3B125C8421366BEE000A9F97 /* ETODetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ETODetail.storyboard; sourceTree = "<group>"; };
 		3B12ABC37C1D12AF68CAC27B3F35C610 /* mpi.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mpi.hpp; sourceTree = "<group>"; };
 		3B17AD64B08C2FCBC0EB152443BCE420 /* basic_bind.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = basic_bind.hpp; sourceTree = "<group>"; };
 		3B188AA0F1875FB49D7EAA6BDB6CBC53 /* is_view_impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = is_view_impl.hpp; sourceTree = "<group>"; };
@@ -3366,6 +3372,10 @@
 		3B6FAB6021FF08826335FC80213E99A9 /* vector10_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vector10_fwd.hpp; sourceTree = "<group>"; };
 		3B715466C5C58B74D9EA14BE14D7FF92 /* modifier.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = modifier.hpp; sourceTree = "<group>"; };
 		3B72742634640AC14D82FD09B7D3B97B /* has_pre_increment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = has_pre_increment.hpp; sourceTree = "<group>"; };
+		3B824A282135350200D7A4A7 /* ETODetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETODetailCoordinator.swift; sourceTree = "<group>"; };
+		3B824A292135350200D7A4A7 /* ETODetailActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETODetailActions.swift; sourceTree = "<group>"; };
+		3B824A2A2135350200D7A4A7 /* ETODetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETODetailViewController.swift; sourceTree = "<group>"; };
+		3B824A2B2135350200D7A4A7 /* ETODetailReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETODetailReducers.swift; sourceTree = "<group>"; };
 		3B8BFE1C6A2BA23A064376F177A0659A /* finalize.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = finalize.hpp; sourceTree = "<group>"; };
 		3B8CC9DF2B590F79EDDED0540998D2D5 /* list.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = list.hpp; sourceTree = "<group>"; };
 		3B901D9E4A7708B5FC34568F417B5DE2 /* buffers_iterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = buffers_iterator.hpp; sourceTree = "<group>"; };
@@ -17578,6 +17588,35 @@
 			path = cla;
 			sourceTree = "<group>";
 		};
+		3BF5B7ED21352DD100E8BFC9 /* ETODetail */ = {
+			isa = PBXGroup;
+			children = (
+				3BF5B7EE21352E0900E8BFC9 /* Views */,
+				3B824A282135350200D7A4A7 /* ETODetailCoordinator.swift */,
+				3B824A292135350200D7A4A7 /* ETODetailActions.swift */,
+				3B824A2A2135350200D7A4A7 /* ETODetailViewController.swift */,
+				3B824A2B2135350200D7A4A7 /* ETODetailReducers.swift */,
+				3B125C8421366BEE000A9F97 /* ETODetail.storyboard */,
+			);
+			path = ETODetail;
+			sourceTree = "<group>";
+		};
+		3BF5B7EE21352E0900E8BFC9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3BF5B7DB2134F1F200E8BFC9 /* ETODetailViewAdapter.swift */,
+				3BF5B7DC2134F1F200E8BFC9 /* ETODetailView.swift */,
+				3BF5B7DD2134F1F200E8BFC9 /* ETODetailView.xib */,
+				3BF5B7E12134F5A700E8BFC9 /* ETODetailHeaderViewAdapter.swift */,
+				3BF5B7E22134F5A700E8BFC9 /* ETODetailHeaderView.swift */,
+				3BF5B7E32134F5A700E8BFC9 /* ETODetailHeaderView.xib */,
+				3BF5B7E72135001B00E8BFC9 /* ETODetailIntroViewAdapter.swift */,
+				3BF5B7E82135001B00E8BFC9 /* ETODetailIntroView.swift */,
+				3BF5B7E92135001B00E8BFC9 /* ETODetailIntroView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		3C00E55DC5D2015B19AC3B9F9B28997E /* python */ = {
 			isa = PBXGroup;
 			children = (
@@ -21935,6 +21974,7 @@
 		7267DA0121350317004AF9AF /* ETO */ = {
 			isa = PBXGroup;
 			children = (
+				3BF5B7ED21352DD100E8BFC9 /* ETODetail */,
 				7267DA0B21351933004AF9AF /* Views */,
 				7267DA0A21351927004AF9AF /* Cell */,
 				7267DA0221350327004AF9AF /* ETOCoordinator.swift */,
@@ -28167,15 +28207,6 @@
 				225746E3210715890017FA1A /* Components.storyboard */,
 				7386F2C621216FC700ABC924 /* SectionCornerViewView.swift */,
 				7386F2C721216FC700ABC924 /* SectionCornerViewView.xib */,
-				3BF5B7DB2134F1F200E8BFC9 /* ETODetailViewAdapter.swift */,
-				3BF5B7DC2134F1F200E8BFC9 /* ETODetailView.swift */,
-				3BF5B7DD2134F1F200E8BFC9 /* ETODetailView.xib */,
-				3BF5B7E12134F5A700E8BFC9 /* ETODetailHeaderViewAdapter.swift */,
-				3BF5B7E22134F5A700E8BFC9 /* ETODetailHeaderView.swift */,
-				3BF5B7E32134F5A700E8BFC9 /* ETODetailHeaderView.xib */,
-				3BF5B7E72135001B00E8BFC9 /* ETODetailIntroViewAdapter.swift */,
-				3BF5B7E82135001B00E8BFC9 /* ETODetailIntroView.swift */,
-				3BF5B7E92135001B00E8BFC9 /* ETODetailIntroView.xib */,
 				7307A8F8212518DB00BD6444 /* LGButton */,
 			);
 			path = UI;
@@ -33144,6 +33175,7 @@
 				DBC8B2BFCF2832BDBDCB1C29365DDB63 /* stdexcept in Resources */,
 				471B00A20DEA97DACD2C3FDA97CF6EEF /* stdexcept.SUNWCCh in Resources */,
 				3BF5B7E62134F5A800E8BFC9 /* ETODetailHeaderView.xib in Resources */,
+				3B125C8521366BEE000A9F97 /* ETODetail.storyboard in Resources */,
 				8910C0B8505B7C57AD492F938D620E2B /* streambuf in Resources */,
 				03C05D381C138B492E2DB327C2F1E853 /* streambuf.SUNWCCh in Resources */,
 				7A2069F078916F1BEFA51B4280F15043 /* string in Resources */,
@@ -33533,6 +33565,7 @@
 				72199D9421045DD000575226 /* TransferListCell.swift in Sources */,
 				04AE2E3C8F409B0337F53AE4DB52FCD0 /* AccessoryCollectionView.swift in Sources */,
 				98ED9D145EF3DAA0FD242984364B676F /* AccessoryCollectionViewCell.swift in Sources */,
+				3B824A2D2135350200D7A4A7 /* ETODetailActions.swift in Sources */,
 				3BF5B7E52134F5A800E8BFC9 /* ETODetailHeaderView.swift in Sources */,
 				D6EF2CA9447A80749A341523EA37E613 /* AccessoryHorizentalView.swift in Sources */,
 				53079FD90D2B1B6BCB3863CB53111FAA /* Account.swift in Sources */,
@@ -33643,6 +33676,7 @@
 				98CCDC7B05741EEDF9AF05992AA2A8DF /* ExchangeReducers.swift in Sources */,
 				A9ADC5BE1460E34FCA1B4F52F30FDE5F /* ExchangeView.swift in Sources */,
 				41369312624D03C488017E7D88E4D41E /* ExchangeViewController.swift in Sources */,
+				3B824A2E2135350200D7A4A7 /* ETODetailViewController.swift in Sources */,
 				F0CE8D5A02461E239914DF75E18C23FA /* ExplorerRootCoordinator.swift in Sources */,
 				0E785072E0FFD5C3B2BE5B7EAB012755 /* FAQActions.swift in Sources */,
 				3BF5B7EB2135001B00E8BFC9 /* ETODetailIntroView.swift in Sources */,
@@ -33736,6 +33770,7 @@
 				F5DDA9E8ED5A5AA3D7A8F0705CFBA4BD /* OpenedOrdersViewController.swift in Sources */,
 				8712B050CE07ED3C160B237CB07116ED /* Operation.swift in Sources */,
 				72199DA02104636900575226 /* TransferDetailActions.swift in Sources */,
+				3B824A2C2135350200D7A4A7 /* ETODetailCoordinator.swift in Sources */,
 				B7C833CEBC9B338666CA2D979065BF91 /* Operators.swift in Sources */,
 				A33E06706616C92F527D5547D28DEBF6 /* Optional+Extensions.swift in Sources */,
 				CDFF0BF138FA10588F2D771CAF16AF34 /* OrderBook.swift in Sources */,
@@ -33764,6 +33799,7 @@
 				70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */,
 				72199D6821044FD100575226 /* TradeRecodeViewController.swift in Sources */,
 				72199D9721045DDE00575226 /* TransferListCellView.swift in Sources */,
+				3B824A2F2135350200D7A4A7 /* ETODetailReducers.swift in Sources */,
 				E54849D562EC4C8B42B70B962A97269E /* R.generated.swift in Sources */,
 				ED57B29BDB18C8B97035E7DA20DF26E5 /* RechargeActions.swift in Sources */,
 				665FBB42152A37B183D011D45A4A0F22 /* RechargeCoordinator.swift in Sources */,
