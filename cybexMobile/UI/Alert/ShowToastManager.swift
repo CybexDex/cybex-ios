@@ -28,6 +28,8 @@ class ShowToastManager {
     static let durationTime : TimeInterval = 0.5
     static let shared = ShowToastManager()
     
+    var timer_time : TimeInterval = 0
+    
     var delegate:ShowManagerDelegate?
     
     var ensureClickBlock : CommonCallback!
@@ -69,6 +71,7 @@ class ShowToastManager {
         }
     }
     
+    
     private var superView : UIView?{
         didSet{
             self.shadowView = UIView.init(frame: UIScreen.main.bounds)
@@ -99,6 +102,11 @@ class ShowToastManager {
     private  var showType : ShowManagerType?
     
     private init(){
+        
+    }
+    
+    // 倒计时
+    func startCountDown() {
         
     }
     
@@ -272,6 +280,10 @@ class ShowToastManager {
 }
 
 extension ShowToastManager : CybexTextViewDelegate{
+    func returnInviteCode(_ code: String) {
+        
+    }
+    
     func returnPassword(_ password:String){
         self.delegate?.returnUserPassword(password)
     }
