@@ -36,6 +36,7 @@ struct AppConfiguration {
     static let SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
     static let GATEWAY_URLString = "https://gateway.cybex.io/gateway"
     static let ETO_MG_BASE_URLString = URL(string:"https://eto.cybex.io/api")!
+    static let ETO_MG_BASE_TEST_URLString = URL(string:"https://ieo-apitest.cybex.io/api")!
     static let GATEWAY_ID = "CybexGateway" //CybexGatewayDev
     
     static let SERVER_ICONS_BASE_URLString = "https://app.cybex.io/icons/"

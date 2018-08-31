@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,10 +30,10 @@
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                <color key="value" name="white"/>
+                                <color key="value" name="white" red="1.000" green="1.000" blue="1.000" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                <color key="value" name="darkTwo"/>
+                                <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
@@ -48,10 +47,10 @@
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                        <color key="value" name="steel"/>
+                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                        <color key="value" name="steel"/>
+                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
@@ -62,10 +61,10 @@
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                        <color key="value" name="steel"/>
+                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                        <color key="value" name="steel"/>
+                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
@@ -92,10 +91,10 @@
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                        <color key="value" name="steel"/>
+                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                        <color key="value" name="steel"/>
+                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
@@ -106,10 +105,10 @@
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                        <color key="value" name="steel"/>
+                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                        <color key="value" name="steel"/>
+                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
@@ -147,35 +146,5 @@
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="darkTwo">
-            <color red="0.1059999987" green="0.1330000013" blue="0.1879999936" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="white">
-            <color red="0.976000011" green="0.976000011" blue="0.976000011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>
