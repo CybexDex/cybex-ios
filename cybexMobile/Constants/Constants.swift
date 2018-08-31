@@ -62,6 +62,9 @@ struct AppConfiguration {
     static let RECODE_BASE_URLString = "https://gateway-query.cybex.io/"
     static let RECODE_LOGIN = RECODE_BASE_URLString + "login"
     static let RECODE_RECODES = RECODE_BASE_URLString + "records"
+    
+    static let HELP_NIGHT_URL = "http://47.75.154.39:3009/cybexnight?lang="
+    static let HELP_LIGHT_URL = "http://47.75.154.39:3009/cybexday?lang="
 }
 
 enum exchangeType {

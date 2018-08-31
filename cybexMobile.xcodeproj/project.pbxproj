@@ -326,6 +326,10 @@
 		72D9DD58210EB60F00963915 /* Periscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9DD56210EB60E00963915 /* Periscope.swift */; };
 		72D9DD59210EB60F00963915 /* PeriscopeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D9DD57210EB60E00963915 /* PeriscopeCell.xib */; };
 		72DBCA652138D94200905303 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA622138D94200905303 /* ContainerView.swift */; };
+		72DBCA7421391A4300905303 /* CybexWebCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7021391A4300905303 /* CybexWebCoordinator.swift */; };
+		72DBCA7521391A4300905303 /* CybexWebActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7121391A4300905303 /* CybexWebActions.swift */; };
+		72DBCA7621391A4300905303 /* CybexWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7221391A4300905303 /* CybexWebViewController.swift */; };
+		72DBCA7721391A4300905303 /* CybexWebReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7321391A4300905303 /* CybexWebReducers.swift */; };
 		72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */; };
 		72EC6A5420F4611500CEAFF6 /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */; };
 		72EC6A5520F4611500CEAFF6 /* EOSWithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5120F4611500CEAFF6 /* EOSWithdrawView.xib */; };
@@ -372,6 +376,13 @@
 		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
 		73587E9D2133EB15006CF8A6 /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */; };
 		73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9F21352AD8006CF8A6 /* ETOMGService.swift */; };
+		73587EAB2137C057006CF8A6 /* ETOCrowdActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EA72137C057006CF8A6 /* ETOCrowdActions.swift */; };
+		73587EAC2137C057006CF8A6 /* ETOCrowdCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EA82137C057006CF8A6 /* ETOCrowdCoordinator.swift */; };
+		73587EAD2137C057006CF8A6 /* ETOCrowdReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EA92137C057006CF8A6 /* ETOCrowdReducers.swift */; };
+		73587EAE2137C057006CF8A6 /* ETOCrowdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EAA2137C057006CF8A6 /* ETOCrowdViewController.swift */; };
+		73587EB42137C69B006CF8A6 /* ETOCrowdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB12137C69B006CF8A6 /* ETOCrowdView.swift */; };
+		73587EB52137C69B006CF8A6 /* ETOCrowdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */; };
+		73587EB62137C69B006CF8A6 /* ETOCrowdViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
 		7386F2A22121665100ABC924 /* AddressHomeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29E2121665100ABC924 /* AddressHomeActions.swift */; };
@@ -397,6 +408,10 @@
 		7386F2D82121737600ABC924 /* AddressHomeTableViewCellViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2D62121737600ABC924 /* AddressHomeTableViewCellViewView.swift */; };
 		7386F2D92121737600ABC924 /* AddressHomeTableViewCellViewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7386F2D72121737600ABC924 /* AddressHomeTableViewCellViewView.xib */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
+		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
+		73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */; };
+		73F50BA32137D71F0071B08D /* ETOCrowdGridItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */; };
+		73F50BA42137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50BA12137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift */; };
 		74270D4B512CD81AA7159B135F944B0A /* ExchangeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D294438F1AC7ABE633549FA9CD2FDF2 /* ExchangeView.xib */; };
 		751D31DB62BFC9F2FC1A0EFC4C23A801 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D9F26ADE20F5811273E4B32DED357 /* SettingViewController.swift */; };
 		762156C3AEB620F8C8A01F26B1F818AC /* ostream.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = 9173FC0B79DF4409B5715D23613E8F82 /* ostream.SUNWCCh */; };
@@ -5931,6 +5946,10 @@
 		72D9DD57210EB60E00963915 /* PeriscopeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeriscopeCell.xib; sourceTree = "<group>"; };
 		72DADAB6EFE218D74953EE73EFA244F0 /* invoker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = invoker.hpp; sourceTree = "<group>"; };
 		72DBCA622138D94200905303 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		72DBCA7021391A4300905303 /* CybexWebCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebCoordinator.swift; sourceTree = "<group>"; };
+		72DBCA7121391A4300905303 /* CybexWebActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebActions.swift; sourceTree = "<group>"; };
+		72DBCA7221391A4300905303 /* CybexWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebViewController.swift; sourceTree = "<group>"; };
+		72DBCA7321391A4300905303 /* CybexWebReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebReducers.swift; sourceTree = "<group>"; };
 		72E4468D71171890A95A24639B6298E1 /* qi_distinct.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = qi_distinct.hpp; sourceTree = "<group>"; };
 		72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EOSWithdrawView.swift; sourceTree = "<group>"; };
 		72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawView.xib; sourceTree = "<group>"; };
@@ -6002,6 +6021,13 @@
 		7355BF528D49DAD350032FC147C8FA32 /* function.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = function.hpp; sourceTree = "<group>"; };
 		73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPCircularProgress.swift; sourceTree = "<group>"; };
 		73587E9F21352AD8006CF8A6 /* ETOMGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOMGService.swift; sourceTree = "<group>"; };
+		73587EA72137C057006CF8A6 /* ETOCrowdActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdActions.swift; sourceTree = "<group>"; };
+		73587EA82137C057006CF8A6 /* ETOCrowdCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdCoordinator.swift; sourceTree = "<group>"; };
+		73587EA92137C057006CF8A6 /* ETOCrowdReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdReducers.swift; sourceTree = "<group>"; };
+		73587EAA2137C057006CF8A6 /* ETOCrowdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdViewController.swift; sourceTree = "<group>"; };
+		73587EB12137C69B006CF8A6 /* ETOCrowdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdView.swift; sourceTree = "<group>"; };
+		73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdView.xib; sourceTree = "<group>"; };
+		73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdViewAdapter.swift; sourceTree = "<group>"; };
 		735EA8642354E31CA8166DA44203A684 /* shift_right.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shift_right.hpp; sourceTree = "<group>"; };
 		735FA00E9301F0DB45760B1C0D7FEC09 /* extreme_value.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = extreme_value.hpp; sourceTree = "<group>"; };
 		737258FAB6762972136E4188BF20F602 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
@@ -6059,6 +6085,10 @@
 		73E7D0ED0CF4AC111EDFEBA2CCAE642E /* value_at_impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = value_at_impl.hpp; sourceTree = "<group>"; };
 		73EA3E0BEC70D841A1C7B178F1453C76 /* key_extractors.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = key_extractors.hpp; sourceTree = "<group>"; };
 		73EEF168CB7435503BA6A96D2A48DB63 /* cs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cs.hpp; sourceTree = "<group>"; };
+		73F50B9D2137D0B20071B08D /* ETO.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ETO.storyboard; sourceTree = "<group>"; };
+		73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemView.swift; sourceTree = "<group>"; };
+		73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdGridItemView.xib; sourceTree = "<group>"; };
+		73F50BA12137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemViewAdapter.swift; sourceTree = "<group>"; };
 		7401C47BEBBCCB83E20CF4CE5F502BA5 /* map_transformer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = map_transformer.hpp; sourceTree = "<group>"; };
 		740413BF73DBBAA191FD980F62B563BC /* modulus.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = modulus.hpp; sourceTree = "<group>"; };
 		741427D2934E98250BE7E24F86B1AD19 /* stack.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = stack.hpp; sourceTree = "<group>"; };
@@ -15576,7 +15606,6 @@
 			children = (
 				221C614B213535CC0021C007 /* ShareView.swift */,
 				221C615021364DFF0021C007 /* ShareData.swift */,
-				221C615A213685C00021C007 /* GridContentView.swift */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -22067,6 +22096,7 @@
 		721B5E3B2138050A00F7C86F /* App */ = {
 			isa = PBXGroup;
 			children = (
+				221C615A213685C00021C007 /* GridContentView.swift */,
 				72DBCA622138D94200905303 /* ContainerView.swift */,
 			);
 			path = App;
@@ -22078,12 +22108,14 @@
 				221C6170213925910021C007 /* Record */,
 				3BF5B7ED21352DD100E8BFC9 /* ETODetail */,
 				221C61672137FCB70021C007 /* ImageShare */,
+				73587EA62137C032006CF8A6 /* ETOCrowd */,
 				7267DA0B21351933004AF9AF /* Views */,
 				7267DA0A21351927004AF9AF /* Cell */,
 				7267DA0221350327004AF9AF /* ETOCoordinator.swift */,
 				7267DA0321350327004AF9AF /* ETOActions.swift */,
 				7267DA0421350327004AF9AF /* ETOViewController.swift */,
 				7267DA0521350327004AF9AF /* ETOReducers.swift */,
+				73F50B9D2137D0B20071B08D /* ETO.storyboard */,
 			);
 			path = ETO;
 			sourceTree = "<group>";
@@ -22154,6 +22186,17 @@
 				72D9DD57210EB60E00963915 /* PeriscopeCell.xib */,
 			);
 			path = ActionSheetViewController;
+			sourceTree = "<group>";
+		};
+		72DBCA6F21391A2500905303 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				72DBCA7021391A4300905303 /* CybexWebCoordinator.swift */,
+				72DBCA7121391A4300905303 /* CybexWebActions.swift */,
+				72DBCA7221391A4300905303 /* CybexWebViewController.swift */,
+				72DBCA7321391A4300905303 /* CybexWebReducers.swift */,
+			);
+			path = Web;
 			sourceTree = "<group>";
 		};
 		72EC6A4E20F4611500CEAFF6 /* Views */ = {
@@ -22280,6 +22323,31 @@
 				73587E9F21352AD8006CF8A6 /* ETOMGService.swift */,
 			);
 			path = ETOMG;
+			sourceTree = "<group>";
+		};
+		73587EA62137C032006CF8A6 /* ETOCrowd */ = {
+			isa = PBXGroup;
+			children = (
+				73587EAF2137C093006CF8A6 /* Views */,
+				73587EA72137C057006CF8A6 /* ETOCrowdActions.swift */,
+				73587EA82137C057006CF8A6 /* ETOCrowdCoordinator.swift */,
+				73587EA92137C057006CF8A6 /* ETOCrowdReducers.swift */,
+				73587EAA2137C057006CF8A6 /* ETOCrowdViewController.swift */,
+			);
+			path = ETOCrowd;
+			sourceTree = "<group>";
+		};
+		73587EAF2137C093006CF8A6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73587EB12137C69B006CF8A6 /* ETOCrowdView.swift */,
+				73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */,
+				73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */,
+				73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */,
+				73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */,
+				73F50BA12137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		7386F28D2121204A00ABC924 /* cybexMobileTests */ = {
@@ -31605,6 +31673,7 @@
 		F189D4AC3A5BB2DB266277BAD8CB0EA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				72DBCA6F21391A2500905303 /* Web */,
 				7267DA0121350317004AF9AF /* ETO */,
 				72199D7F21045CEA00575226 /* Transfer */,
 				1957BC4603D51BA58EA334581171C0AD /* Account */,
@@ -33132,6 +33201,7 @@
 				343B3B20696F1F8A5D0239DC26B4D46E /* HomeSectionHeaderView.xib in Resources */,
 				0F5B4C2ED5AA414537D2D058FEF73238 /* HomeTitleView.xib in Resources */,
 				A396423FD35CDC17D68637F91A3F8A45 /* Images.xcassets in Resources */,
+				73F50BA32137D71F0071B08D /* ETOCrowdGridItemView.xib in Resources */,
 				8D8F2D36C5546EAF1A176CA54843EC17 /* InfoPlist.strings in Resources */,
 				141F9BF8F7BFFEAE83218B9E885D8FE8 /* IntroduceView.xib in Resources */,
 				72EC6A5420F4611500CEAFF6 /* WithdrawView.xib in Resources */,
@@ -33220,6 +33290,7 @@
 				3A66D34045644F50A286279AF9051D1D /* cstdarg in Resources */,
 				7386F2D92121737600ABC924 /* AddressHomeTableViewCellViewView.xib in Resources */,
 				97A25CFA01434F7C0AF6B052507271EF /* cstddef in Resources */,
+				73587EB52137C69B006CF8A6 /* ETOCrowdView.xib in Resources */,
 				6070ECC6CD01377E85F78D0E2B0E4FE4 /* cstdio in Resources */,
 				7307A928212518DC00BD6444 /* FontAwesome.ttf in Resources */,
 				A23785A38EA5D04EC95049512BE0E75E /* cstdlib in Resources */,
@@ -33235,6 +33306,7 @@
 				253FA678E24480209F5F9418FE39D896 /* fstream in Resources */,
 				FEBB2F561098E005326CBBE9989889FE /* fstream.SUNWCCh in Resources */,
 				72EC6A5A20F4612200CEAFF6 /* RechargeView.xib in Resources */,
+				73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */,
 				9EA108502286C5902DEBFC3445BF5BFA /* functional in Resources */,
 				B0F10FE7D7F581984C468F1FE9420A41 /* functional.SUNWCCh in Resources */,
 				E03900031A3D0D695E0419C5FECD70C3 /* gateway.graphql in Resources */,
@@ -33720,8 +33792,10 @@
 				C1FFA2C8BE63611BC0DD9B20A183FEF7 /* AssetInfo.swift in Sources */,
 				46F85B0BF83E45545572AF39E2A2F48B /* Balance.swift in Sources */,
 				94BFDD245BD4F1E4274CC4D8C0AC3FCD /* BalanceIntroduceView.swift in Sources */,
+				73F50BA42137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift in Sources */,
 				4D3E4222415A233603135173A5D25471 /* BaseCollectionViewCell.swift in Sources */,
 				F7886D0310C612E91619D84DDA4182F5 /* BaseNavigationController.swift in Sources */,
+				73587EB42137C69B006CF8A6 /* ETOCrowdView.swift in Sources */,
 				AAEB2ADE1A954767CBCDED7BE011631A /* BaseTabbarViewController.swift in Sources */,
 				E173B41881E536F07501B0784F9660CF /* BaseTableViewCell.swift in Sources */,
 				7217B07C2122AAFD00608531 /* AddAddressCoordinator.swift in Sources */,
@@ -33731,6 +33805,7 @@
 				7386F2A52121665100ABC924 /* AddressHomeViewController.swift in Sources */,
 				59A469E9C21A3CE0D06E98458A2D1BD6 /* BaseWebViewController.swift in Sources */,
 				166E70E89C354FE2B3C8BA861FE6958E /* BitShareCoordinator.mm in Sources */,
+				73587EB62137C69B006CF8A6 /* ETOCrowdViewAdapter.swift in Sources */,
 				CB5F7115F86F33FA0B26878FC117A884 /* Bucket.swift in Sources */,
 				BD11B7517E2B6A4051899973BEAEF8BC /* BusinessActions.swift in Sources */,
 				4FEB6E47ECB698CEDE290B109E474660 /* BusinessCoordinator.swift in Sources */,
@@ -33795,6 +33870,7 @@
 				61096350D887C3728E3B617E993C2365 /* Demo.swift in Sources */,
 				51FB3EBF69DA6AF015F0DF92781986BF /* DemoCache.swift in Sources */,
 				A1EF7FAAA7F0B4F6C9FE153714C1ED47 /* ShowToastManager.swift in Sources */,
+				72DBCA7421391A4300905303 /* CybexWebCoordinator.swift in Sources */,
 				72199DA5210466C000575226 /* TransferTopView.swift in Sources */,
 				221C615D213685C00021C007 /* GridContentView.swift in Sources */,
 				730229A1212E52B50073D5CE /* ETOManager.swift in Sources */,
@@ -33846,6 +33922,7 @@
 				72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */,
 				7267DA1D2135244A004AF9AF /* ETO.swift in Sources */,
 				221EC24F2105CF310059F856 /* TransferReducers.swift in Sources */,
+				72DBCA7721391A4300905303 /* CybexWebReducers.swift in Sources */,
 				72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */,
 				59EC4E5138ECE3D4E7570F3EE0EF28E0 /* IconGenerator.swift in Sources */,
 				61804E3238064ADBE771CD78E212AB6A /* IntroduceView.swift in Sources */,
@@ -33914,6 +33991,7 @@
 				019AC681342BD1E978777A6A503E27B6 /* OrderBookActions.swift in Sources */,
 				7307A931212518F300BD6444 /* BaseView.swift in Sources */,
 				7267DA0621350327004AF9AF /* ETOCoordinator.swift in Sources */,
+				72DBCA7621391A4300905303 /* CybexWebViewController.swift in Sources */,
 				4C5E6FF343C8DA25EC51F44EF725069E /* OrderBookCell.swift in Sources */,
 				D898B818223D8DD3B304D2D7F5A3E2AB /* OrderBookCellView.swift in Sources */,
 				7267DA0921350327004AF9AF /* ETOReducers.swift in Sources */,
@@ -33975,10 +34053,13 @@
 				D519E052461ED8221B6CF5C9D9B7741C /* StyleContentView.swift in Sources */,
 				345CA96631D318F012F0BB80ACD3BCCD /* StyleLabel.swift in Sources */,
 				733714BD2122D32500B2ED90 /* AddressCellView.swift in Sources */,
+				73587EAD2137C057006CF8A6 /* ETOCrowdReducers.swift in Sources */,
 				666C535B0D6573A3C341FC0208A91E71 /* Theme_Extensions.swift in Sources */,
+				72DBCA7521391A4300905303 /* CybexWebActions.swift in Sources */,
 				4C82733DA80E26D923B4A21677ACDE89 /* TimeGapView.swift in Sources */,
 				C6701BBC918D15D20650CF726BA483EA /* Tools.swift in Sources */,
 				5012DA167BBBF31D3392DD2453106515 /* Trade.swift in Sources */,
+				73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */,
 				A806E796D672D304574E9E46E50F16EC /* TradeActions.swift in Sources */,
 				8528FA970144D53CB71EF87725B0AAE9 /* TradeCell.swift in Sources */,
 				72199D6921044FD100575226 /* RechargeRecodeReducers.swift in Sources */,
@@ -33992,6 +34073,7 @@
 				806B06314E8ECEEB9566B42F7A68C553 /* TradeHistoryReducers.swift in Sources */,
 				529398111D54AC2675A435EC00F50E5B /* TradeHistoryView.swift in Sources */,
 				894D811521F19A8670D0A6C61B11C600 /* TradeHistoryViewController.swift in Sources */,
+				73587EAC2137C057006CF8A6 /* ETOCrowdCoordinator.swift in Sources */,
 				F8B52B20C9737C584DECE7D52285A92D /* TradeItemView.swift in Sources */,
 				07D976BEA2F5A840607DE4D526DB1420 /* TradeLineView.swift in Sources */,
 				221EC24C2105CF310059F856 /* TransferCoordinator.swift in Sources */,
@@ -34003,6 +34085,7 @@
 				221C617C213926A50021C007 /* ETORecordCell.swift in Sources */,
 				7386F2B121216B2200ABC924 /* TransferAddressHomeViewController.swift in Sources */,
 				7267DA0721350327004AF9AF /* ETOActions.swift in Sources */,
+				73587EAE2137C057006CF8A6 /* ETOCrowdViewController.swift in Sources */,
 				3B0EB65C210313B200F19C31 /* YourPortfolioHeadView.swift in Sources */,
 				C02132F00200B408020442C307CEE0B6 /* TradeView.swift in Sources */,
 				7CA82BA6BC1F22AAA929D52CD5C4434F /* TradeViewController.swift in Sources */,
@@ -34045,6 +34128,7 @@
 				7386F2A22121665100ABC924 /* AddressHomeActions.swift in Sources */,
 				60502E37A09ABFC6DD95A24F6A855B65 /* YourPortfolioActions.swift in Sources */,
 				480BE6AB9D3A7CCE75BCB6BBF9525FFD /* YourPortfolioCell.swift in Sources */,
+				73587EAB2137C057006CF8A6 /* ETOCrowdActions.swift in Sources */,
 				ACCB7267D22FD99349666A34A7079245 /* YourPortfolioReducers.swift in Sources */,
 				344BC9FA73F9380AE43608848D803A6F /* address.cpp in Sources */,
 				8CC6E7829BCE9117984B6237F79C5180 /* debounce-throttle.swift in Sources */,

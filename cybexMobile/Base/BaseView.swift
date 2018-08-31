@@ -76,6 +76,11 @@ class BaseView: UIControl {
         
     }
     
+    func clearBgColor() {
+        self.foreView.theme_backgroundColor = nil
+        self.foreView.backgroundColor = .clear
+    }
+    
     //MARK: Touch
     
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
@@ -129,11 +134,6 @@ class BaseView: UIControl {
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView?.bottom ?? 0
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layoutIfNeeded()
     }
     
     override init(frame: CGRect) {

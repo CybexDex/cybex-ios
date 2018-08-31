@@ -210,6 +210,7 @@
 "trade_history_total" = "成交额";
 
 "setting_language"    = "简体中文";
+"setting_help" = "帮助与反馈";
 
 "mark_order_book"     = "买卖单";
 "mark_trade_history"  = "交易历史";
@@ -386,3 +387,10 @@
 
 "hot_project" = "热门项目";
 
+"eto_personal_cap" = "单账号限额";
+"eto_subscription_unit" = "最小认购单位";
+"eto_remaining" = "剩余可认购额度";
+"eto_min_subscription" = "单笔最低限额";
+"eto_subscribed" = "已认购限额";
+"eto_available" = "可用余额 %@ %@";
+"eto_join" = "参与ETO";

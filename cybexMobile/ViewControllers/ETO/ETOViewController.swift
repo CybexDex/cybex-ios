@@ -28,7 +28,6 @@ class ETOViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
     }
     
     override func refreshViewController() {
@@ -38,11 +37,11 @@ class ETOViewController: BaseViewController {
     func setupUI() {
         self.localized_text = R.string.localizable.hot_project.key.localizedContainer()
         configRightNavButton(R.image.ic_records_24_px())
-         transferNavigationBar(0.0)
+        transferNavigationBar(0.0)
     }
     
     override func rightAction(_ sender: UIButton) {
-       
+        
     }
     
     
@@ -75,7 +74,7 @@ class ETOViewController: BaseViewController {
         coordinator?.state.data.asObservable().subscribe(onNext: { [weak self](data) in
             guard let `self` = self else { return }
             self.endLoading()
-        
+            
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         coordinator?.state.banners.asObservable().subscribe(onNext: { [weak self](banners) in

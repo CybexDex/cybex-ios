@@ -222,6 +222,7 @@
 "trade_history_total" = "Total";
 
 "setting_language"    = "English";
+"setting_help" = "Help&Feedback";
 
 "mark_order_book"     = "Order Book";
 "mark_trade_history"  = "Trade History";
@@ -409,3 +410,11 @@
 
 "hot_project" = "Popular ETOs";
 
+"eto_personal_cap" = "Personal Cap";
+"eto_subscription_unit" = "Subscription Unit";
+"eto_remaining" = "Remaining";
+"eto_min_subscription" = "Min.Subscription";
+"eto_subscribed" = "Subscribed";
+
+"eto_available" = "Available %@ %@";
+"eto_join" = "Join in ETO";
