@@ -31,6 +31,7 @@ class ETOProjectView: BaseView {
         setupSubViewEvent()
     }
     
+    
     func setupUI() {
         
     }

@@ -125,7 +125,7 @@ class BaseViewController: UIViewController {
         toast?.hide(true, after: after)
     }
     
-   
+    
     
     func configRightNavButton(_ image:UIImage? = nil) {
         rightNavButton = UIButton.init(type: .custom)
@@ -162,7 +162,7 @@ extension UIViewController {
     @objc open func leftAction(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
-
+    
     func configLeftNavigationButton(_ image:UIImage?) {
         let leftNavButton = UIButton.init(type: .custom)
         leftNavButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
@@ -188,8 +188,8 @@ extension UIViewController : ShowManagerDelegate {
         }
     }
     
-    func showToastBox(_ success:Bool, message:String) {
-        if ShowToastManager.shared.showView != nil {
+    func showToastBox(_ success:Bool, message:String, manager:ShowToastManager = ShowToastManager.shared) {
+        if manager.showView != nil {
             ShowToastManager.shared.hide(0)
         }
         SwifterSwift.delay(milliseconds: 100) {
