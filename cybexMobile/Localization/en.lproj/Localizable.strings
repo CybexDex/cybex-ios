@@ -334,6 +334,11 @@
 "hello" = "Hello，";
 "deposit_withdraw" = "Deposit/Withdraw";
 "frozen" = "Frozen：";
+"get_white_list" = "Get Whitelist";
+"ETO_detail" = "ETO Details";
+"project_intro" = "Project Introduction";
+"project_website" = "Project Website";
+"user_agreement" = "《User Agreement》";
 
 //zsy end
 
