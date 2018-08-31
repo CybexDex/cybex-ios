@@ -10,8 +10,8 @@ import Foundation
 
 class ETORootCoordinator : NavCoordinator {
     override func start() {
-        let vc = R.storyboard.etoDetail.etoDetailViewController()!
-        let coordinator = ETODetailCoordinator(rootVC: self.rootVC)
+        let vc = R.storyboard.main.etoViewController()!
+        let coordinator = ETOCoordinator(rootVC: self.rootVC)
         vc.coordinator = coordinator
         self.rootVC.pushViewController(vc, animated: true)
     }

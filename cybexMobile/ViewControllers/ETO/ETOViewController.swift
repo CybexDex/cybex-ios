@@ -109,6 +109,10 @@ extension ETOViewController {
             self.transferNavigationBar(progress)
         }
     }
+    
+    @objc func ETOHomeBannerViewDidClicked(_ data:[String:Any]) {
+        self.coordinator?.openBanner()
+    }
 }
 
 

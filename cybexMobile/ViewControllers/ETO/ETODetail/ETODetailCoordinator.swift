@@ -11,6 +11,7 @@ import ReSwift
 import SwiftNotificationCenter
 
 protocol ETODetailCoordinatorProtocol {
+    func openShare()
 }
 
 protocol ETODetailStateManagerProtocol {
@@ -37,7 +38,12 @@ class ETODetailCoordinator: ETORootCoordinator {
 }
 
 extension ETODetailCoordinator: ETODetailCoordinatorProtocol {
-    
+    func openShare() {
+        if let vc = R.storyboard.main.imageShareViewController() {
+            vc.coordinator = ImageShareCoordinator(rootVC: self.rootVC)
+            self.rootVC.pushViewController(vc, animated: true)
+        }
+    }
 }
 
 extension ETODetailCoordinator: ETODetailStateManagerProtocol {

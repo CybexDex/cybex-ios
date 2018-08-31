@@ -35,7 +35,11 @@ class ETODetailViewController: BaseViewController {
     }
     
     func setupUI() {
-        
+        configRightNavButton(R.image.ic_share_24_px())
+    }
+    
+    override func rightAction(_ sender: UIButton) {
+        self.coordinator?.openShare()
     }
 
     func setupData() {

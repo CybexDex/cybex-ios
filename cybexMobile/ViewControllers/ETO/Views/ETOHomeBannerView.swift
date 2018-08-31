@@ -43,9 +43,7 @@ class ETOHomeBannerView: BaseView {
     
     }
     
-    @objc override func didClicked() {
-        self.next?.sendEventWith(Event.ETOHomeBannerViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
-    }
+ 
 }
 
 extension ETOHomeBannerView : FSPagerViewDataSource,FSPagerViewDelegate {
@@ -62,7 +60,7 @@ extension ETOHomeBannerView : FSPagerViewDataSource,FSPagerViewDelegate {
     }
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        
+        self.next?.sendEventWith(Event.ETOHomeBannerViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
     
     func pagerViewDidScroll(_ pagerView: FSPagerView) {

@@ -37,6 +37,7 @@ class ETODetailView: BaseView {
     }
     
     func setupUI() {
+        
         getWhiteListView.rightIcon.image = R.image.icwhitelist()
         getWhiteListView.name.textColor = UIColor.pastelOrange
         getJoinButtonState()

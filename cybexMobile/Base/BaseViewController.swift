@@ -174,8 +174,6 @@ extension UIViewController {
 }
 
 extension UIViewController : ShowManagerDelegate {
-    
-    
     func showPasswordBox(_ title:String = R.string.localizable.withdraw_unlock_wallet.key.localized()){
         if ShowToastManager.shared.showView != nil {
             ShowToastManager.shared.hide(0)
@@ -183,7 +181,6 @@ extension UIViewController : ShowManagerDelegate {
         SwifterSwift.delay(milliseconds: 100) {
             ShowToastManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big)
             ShowToastManager.shared.delegate = self
-            
             ShowToastManager.shared.showAnimationInView(self.view)
         }
     }
@@ -253,6 +250,7 @@ extension UIViewController : ShowManagerDelegate {
     @objc func passwordPassed(_ passed:Bool) {
         
     }
+    
     @objc func passwordDetecting() {
         
     }
@@ -267,5 +265,4 @@ extension UIViewController : ShowManagerDelegate {
             }
         }
     }
-    
 }
