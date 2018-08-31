@@ -9,11 +9,12 @@
 import Foundation
 import FSPagerView
 import TinyConstraints
+import Fakery
 
 @IBDesignable
 class ETOHomeBannerView: BaseView {
-    
-    var pagerView : FSPagerView!
+    @IBOutlet weak var pagerView: FSPagerView!
+    @IBOutlet weak var pagerControl: FSPageControl!
     
     enum Event:String {
         case ETOHomeBannerViewDidClicked
@@ -27,20 +28,15 @@ class ETOHomeBannerView: BaseView {
     }
     
     func setupUI() {
-        self.pagerView = FSPagerView(frame:.zero)
-        self.addSubview(self.pagerView)
-        self.pagerView.edges(to: self)
-        self.layoutIfNeeded()
         self.setPagerViewStyle()
     }
     
     func setPagerViewStyle() {
         self.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: String(describing: FSPagerViewCell.self))
-        self.pagerView.itemSize = CGSize(width: self.width, height: self.height)
-        self.pagerView.isInfinite = true
-        self.pagerView.automaticSlidingInterval = 3.0
-        self.pagerView.dataSource = self
-        self.pagerView.delegate = self
+
+        self.pagerControl.contentHorizontalAlignment = .center
+        self.pagerControl.numberOfPages = 5
+        self.pagerControl.currentPage = 1
     }
     
     func setupSubViewEvent() {
@@ -54,17 +50,26 @@ class ETOHomeBannerView: BaseView {
 
 extension ETOHomeBannerView : FSPagerViewDataSource,FSPagerViewDelegate {
     func numberOfItems(in pagerView: FSPagerView) -> Int {
+        
         return 5
     }
 
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
-        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: String(describing: FSPagerViewCell.self), at: index)
-
-        cell.imageView?.kf.setImage(with: URL(string: "https://www.google.com.hk/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"))
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: String(describing: FSPagerViewCell.self), at: index) as FSPagerViewCell
+        cell.imageView?.contentMode = .scaleAspectFill
+        cell.imageView?.kf.setImage(with: URL(string: Faker().company.logo()))
         return cell
     }
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         
     }
+    
+    func pagerViewDidScroll(_ pagerView: FSPagerView) {
+        if self.pagerControl.currentPage != pagerView.currentIndex {
+            self.pagerControl.currentPage = pagerView.currentIndex
+        }
+    }
 }
+
+

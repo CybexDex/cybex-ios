@@ -9,9 +9,15 @@
 import Foundation
 import FSPagerView
 import TinyConstraints
+import Device
 
 @IBDesignable
 class ETOHomeView: BaseView {
+    
+    var tableViewHeaderViewHeight : CGFloat {
+        return Device.version() == .iPhoneX ? 240 : 191
+    }
+    static let section_height : CGFloat = 40
     enum Event:String {
         case ETOHomeViewDidClicked
         case ChangeNavigationBarEvent
@@ -31,19 +37,22 @@ class ETOHomeView: BaseView {
     func setupUI() {
         let cell_name = R.nib.etoProjectCell.name
         tableView.register(UINib.init(nibName: cell_name, bundle: nil), forCellReuseIdentifier: cell_name)
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        } 
         createFSPagerView()
     }
     
     func createFSPagerView(){
-        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 191))
+        let containerView = UIView(frame: .zero)
         self.tableView.tableHeaderView = containerView
+        containerView.height(tableViewHeaderViewHeight)
+        containerView.widthToSuperview()
         self.pageView = ETOHomeBannerView(frame: .zero)
         containerView.addSubview(self.pageView)
-        self.pageView.edgesToSuperview(insets: TinyEdgeInsets.zero, priority: LayoutPriority.required, isActive: true, usingSafeArea: true)
-        self.pageView.topToSuperview(nil, offset: 0, relation: .equal, priority: .required, isActive: false, usingSafeArea: false)
+        self.pageView.edgesToSuperview(insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: LayoutPriority.required, isActive: true, usingSafeArea: false)
         containerView.layoutIfNeeded()
     }
-
     
     func setupSubViewEvent() {
 
@@ -51,6 +60,37 @@ class ETOHomeView: BaseView {
     
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.ETOHomeViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+    }
+    
+    func createSectionHeight() -> UIView {
+        let sectionView = UIView(frame: CGRect(x: 0, y: 0, width: self.width, height: ETOHomeView.section_height))
+        let label = UILabel(frame: CGRect(x: 12, y: 0, width: self.width - 24, height: ETOHomeView.section_height))
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = .steel
+        label.locali = R.string.localizable.hot_project.key.localized()
+        sectionView.addSubview(label)
+        return sectionView
+    }
+    
+    func fetchAlphaProgress() {
+        let contentOffSet = tableView.contentOffset
+        var progress : CGFloat = contentOffSet.y / tableViewHeaderViewHeight
+        
+        if progress < 0.05 {
+            progress = 0
+        }
+        
+        if progress > 0.5 {
+            if #available(iOS 11.0, *) {
+                tableView.contentInsetAdjustmentBehavior = .always
+            }
+        }
+        else {
+            if #available(iOS 11.0, *) {
+                tableView.contentInsetAdjustmentBehavior = .never
+            }
+        }
+        self.next?.sendEventWith(Event.ChangeNavigationBarEvent.rawValue, userinfo: ["progress" : progress])
     }
 }
 
@@ -60,31 +100,23 @@ extension ETOHomeView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.etoProjectCell.name, for: indexPath) as! ETOProjectCell
-        
+        cell.setup(ETOProjectModel())
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionView = UIView(frame: CGRect(x: 0, y: 0, width: self.width, height: 40))
-        let label = UILabel(frame: CGRect(x: 12, y: 0, width: self.width - 24, height: 40))
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = .steel
-        label.locali = R.string.localizable.hot_project.key.localized()
-        sectionView.addSubview(label)
-        return sectionView
+        return self.createSectionHeight()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return ETOHomeView.section_height
     }
 }
 
 // 增加View里面
 extension ETOHomeView {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // 判断滑动距离从而显示navigationBar的状态
-        self.next?.sendEventWith(Event.ChangeNavigationBarEvent.rawValue, userinfo: ["contentOffSet":scrollView.contentOffset])
+        fetchAlphaProgress()
     }
 }

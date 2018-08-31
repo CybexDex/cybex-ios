@@ -15,9 +15,10 @@ extension ETOProjectView {
         self.icon.kf.setImage(with: URL(string: faker.company.logo()))
         self.nameLabel.text = faker.name.name()
         self.markLabel.text = faker.address.state()
-        self.progressView.progress = Double(arc4random() % 100) * 0.01
         self.stateLabel.text = faker.address.state()
-        self.progressLabel.text = "\(Double(arc4random() % 100) * 0.01)"
         self.timeLabel.text = faker.business.creditCardExpiryDate()?.dateString()
+        self.progressView.progress = Double(arc4random() % 100) * 0.01
+        self.progressLabel.text = "\(self.progressView.progress * 100)%"
+        self.progressLabel.textColor = UIColor.pastelOrange
     }
 }

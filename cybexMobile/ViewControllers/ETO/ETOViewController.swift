@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import SwiftTheme
 
 class ETOViewController: BaseViewController {
     
@@ -22,11 +23,12 @@ class ETOViewController: BaseViewController {
         setupData()
         setupUI()
         setupEvent()
+        self.navigationController?.navigationBar.isTranslucent = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        transferNavigationBar(0.0)
+       
     }
     
     override func refreshViewController() {
@@ -34,10 +36,9 @@ class ETOViewController: BaseViewController {
     }
     
     func setupUI() {
+        self.localized_text = R.string.localizable.hot_project.key.localizedContainer()
         configRightNavButton(R.image.ic_records_24_px())
-        self.automaticallyAdjustsScrollViewInsets = false
-        self.navigationController?.navigationBar.isTranslucent = true
-        transferNavigationBar(0.0)
+         transferNavigationBar(0.0)
     }
     
     override func rightAction(_ sender: UIButton) {
@@ -59,7 +60,10 @@ class ETOViewController: BaseViewController {
     }
     
     func setupEvent() {
-        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] notification in
+            guard let `self` = self else { return }
+            self.homeView.fetchAlphaProgress()
+        })
     }
     
     override func configureObserveState() {
@@ -80,18 +84,29 @@ class ETOViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     
-    func transferNavigationBar(_ alpha : Double) {
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.paleGrey]
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.barTintColor = UIColor.clear
-
+    func transferNavigationBar(_ alpha : CGFloat) {
+        self.navigationController?.navigationBar.isTranslucent = alpha > 0.9 ? false : true
+        if ThemeManager.currentThemeIndex == 0 {
+            let image = UIImage.init(color: UIColor.dark.withAlphaComponent(alpha))
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.paleGrey.withAlphaComponent(alpha)]
+            self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+        }
+        else {
+            let image = UIImage.init(color:UIColor.paleGrey.withAlphaComponent(alpha))
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.dark.withAlphaComponent(alpha)]
+            self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+        }
     }
 }
 
 extension ETOViewController {
     @objc func ETOProjectViewDidClicked(_ data:[String: Any]) {
-        if let addressdata = data["data"] as? ETOProjectModel, let view = data["self"] as? ETOProjectView  {
-            self.coordinator?.openProjectItem()
+        self.coordinator?.openProjectItem()
+    }
+    
+    @objc func ChangeNavigationBarEvent(_ data:[String:Any]) {
+        if let progress = data["progress"] as? CGFloat {
+            self.transferNavigationBar(progress)
         }
     }
 }
