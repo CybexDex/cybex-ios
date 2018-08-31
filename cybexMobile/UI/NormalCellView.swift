@@ -224,7 +224,6 @@ extension NormalCellView {
       self.sendEventWith(event_name.clickCellView.rawValue, userinfo: ["index":index])
     case NormalCellViewState.transform.rawValue:
       print("")
-      
     default:break
     }
   }

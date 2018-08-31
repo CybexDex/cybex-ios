@@ -303,6 +303,10 @@
 		72D9DD58210EB60F00963915 /* Periscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9DD56210EB60E00963915 /* Periscope.swift */; };
 		72D9DD59210EB60F00963915 /* PeriscopeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D9DD57210EB60E00963915 /* PeriscopeCell.xib */; };
 		72DBCA652138D94200905303 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA622138D94200905303 /* ContainerView.swift */; };
+		72DBCA7421391A4300905303 /* CybexWebCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7021391A4300905303 /* CybexWebCoordinator.swift */; };
+		72DBCA7521391A4300905303 /* CybexWebActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7121391A4300905303 /* CybexWebActions.swift */; };
+		72DBCA7621391A4300905303 /* CybexWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7221391A4300905303 /* CybexWebViewController.swift */; };
+		72DBCA7721391A4300905303 /* CybexWebReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7321391A4300905303 /* CybexWebReducers.swift */; };
 		72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */; };
 		72EC6A5420F4611500CEAFF6 /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */; };
 		72EC6A5520F4611500CEAFF6 /* EOSWithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5120F4611500CEAFF6 /* EOSWithdrawView.xib */; };
@@ -5885,6 +5889,10 @@
 		72D9DD57210EB60E00963915 /* PeriscopeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeriscopeCell.xib; sourceTree = "<group>"; };
 		72DADAB6EFE218D74953EE73EFA244F0 /* invoker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = invoker.hpp; sourceTree = "<group>"; };
 		72DBCA622138D94200905303 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		72DBCA7021391A4300905303 /* CybexWebCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebCoordinator.swift; sourceTree = "<group>"; };
+		72DBCA7121391A4300905303 /* CybexWebActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebActions.swift; sourceTree = "<group>"; };
+		72DBCA7221391A4300905303 /* CybexWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebViewController.swift; sourceTree = "<group>"; };
+		72DBCA7321391A4300905303 /* CybexWebReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebReducers.swift; sourceTree = "<group>"; };
 		72E4468D71171890A95A24639B6298E1 /* qi_distinct.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = qi_distinct.hpp; sourceTree = "<group>"; };
 		72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EOSWithdrawView.swift; sourceTree = "<group>"; };
 		72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawView.xib; sourceTree = "<group>"; };
@@ -22055,6 +22063,17 @@
 			path = ActionSheetViewController;
 			sourceTree = "<group>";
 		};
+		72DBCA6F21391A2500905303 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				72DBCA7021391A4300905303 /* CybexWebCoordinator.swift */,
+				72DBCA7121391A4300905303 /* CybexWebActions.swift */,
+				72DBCA7221391A4300905303 /* CybexWebViewController.swift */,
+				72DBCA7321391A4300905303 /* CybexWebReducers.swift */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
 		72EC6A4E20F4611500CEAFF6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -31504,6 +31523,7 @@
 		F189D4AC3A5BB2DB266277BAD8CB0EA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				72DBCA6F21391A2500905303 /* Web */,
 				7267DA0121350317004AF9AF /* ETO */,
 				72199D7F21045CEA00575226 /* Transfer */,
 				1957BC4603D51BA58EA334581171C0AD /* Account */,
@@ -33681,6 +33701,7 @@
 				61096350D887C3728E3B617E993C2365 /* Demo.swift in Sources */,
 				51FB3EBF69DA6AF015F0DF92781986BF /* DemoCache.swift in Sources */,
 				A1EF7FAAA7F0B4F6C9FE153714C1ED47 /* ShowToastManager.swift in Sources */,
+				72DBCA7421391A4300905303 /* CybexWebCoordinator.swift in Sources */,
 				72199DA5210466C000575226 /* TransferTopView.swift in Sources */,
 				221C615D213685C00021C007 /* GridContentView.swift in Sources */,
 				730229A1212E52B50073D5CE /* ETOManager.swift in Sources */,
@@ -33729,6 +33750,7 @@
 				72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */,
 				7267DA1D2135244A004AF9AF /* ETO.swift in Sources */,
 				221EC24F2105CF310059F856 /* TransferReducers.swift in Sources */,
+				72DBCA7721391A4300905303 /* CybexWebReducers.swift in Sources */,
 				72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */,
 				59EC4E5138ECE3D4E7570F3EE0EF28E0 /* IconGenerator.swift in Sources */,
 				61804E3238064ADBE771CD78E212AB6A /* IntroduceView.swift in Sources */,
@@ -33794,6 +33816,7 @@
 				019AC681342BD1E978777A6A503E27B6 /* OrderBookActions.swift in Sources */,
 				7307A931212518F300BD6444 /* BaseView.swift in Sources */,
 				7267DA0621350327004AF9AF /* ETOCoordinator.swift in Sources */,
+				72DBCA7621391A4300905303 /* CybexWebViewController.swift in Sources */,
 				4C5E6FF343C8DA25EC51F44EF725069E /* OrderBookCell.swift in Sources */,
 				D898B818223D8DD3B304D2D7F5A3E2AB /* OrderBookCellView.swift in Sources */,
 				7267DA0921350327004AF9AF /* ETOReducers.swift in Sources */,
@@ -33854,6 +33877,7 @@
 				345CA96631D318F012F0BB80ACD3BCCD /* StyleLabel.swift in Sources */,
 				733714BD2122D32500B2ED90 /* AddressCellView.swift in Sources */,
 				666C535B0D6573A3C341FC0208A91E71 /* Theme_Extensions.swift in Sources */,
+				72DBCA7521391A4300905303 /* CybexWebActions.swift in Sources */,
 				4C82733DA80E26D923B4A21677ACDE89 /* TimeGapView.swift in Sources */,
 				C6701BBC918D15D20650CF726BA483EA /* Tools.swift in Sources */,
 				5012DA167BBBF31D3392DD2453106515 /* Trade.swift in Sources */,

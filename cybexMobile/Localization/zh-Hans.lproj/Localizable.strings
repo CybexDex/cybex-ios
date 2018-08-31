@@ -210,6 +210,7 @@
 "trade_history_total" = "成交额";
 
 "setting_language"    = "简体中文";
+"setting_help" = "帮助与反馈";
 
 "mark_order_book"     = "买卖单";
 "mark_trade_history"  = "交易历史";
