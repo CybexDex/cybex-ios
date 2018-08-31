@@ -47,7 +47,7 @@ enum ETOJoinButtonStyle {
     case disable
 }
 
-enum ETOJoinButtonAction {
+enum ETOJoinButtonAction: String {
     case unset
     case inputCode
     case crowdPage
@@ -99,7 +99,8 @@ class ETOManager {
     
     func getETOJoinButtonState() -> ETOJoinButtonState {
         let clause = getClauseState()
-        
+        return .disable(title: "停止预约", style: .disable)
+
         switch clause {
         case .normal:
             return .normal(title: "立即预约", style: .normal, action: .inputCode)
@@ -128,9 +129,9 @@ class ETOManager {
             else if state.contains(.notLogin) && !state.contains(.finished) {
                 return .normal(title: "请登录", style: .normal, action: .unlockPage)
             }
-            
+
             return .notShow
-            
+
         }
       
     }
