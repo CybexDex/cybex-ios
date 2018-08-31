@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ETODetailHeaderView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
                 <outlet property="iconImgView" destination="dsv-tR-mjn" id="wF7-FL-tJJ"/>
+                <outlet property="nameLabel" destination="EWT-JP-Q6f" id="bOK-82-Ph1"/>
                 <outlet property="progressLabel" destination="bTo-4e-3Il" id="z47-V6-WnP"/>
                 <outlet property="progressView" destination="N6I-ZH-YAg" id="dnA-1R-B6m"/>
                 <outlet property="stateImgView" destination="73l-Iz-Dyk" id="IAF-Ft-FIJ"/>
@@ -21,11 +22,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="H4u-ab-Osf">
-            <rect key="frame" x="0.0" y="0.0" width="377" height="108"/>
+            <rect key="frame" x="0.0" y="0.0" width="415" height="172"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dsv-tR-mjn">
-                    <rect key="frame" x="148.5" y="12" width="80" height="0.0"/>
+                    <rect key="frame" x="167.5" y="12.5" width="80" height="80"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="FTk-o2-mM5"/>
                         <constraint firstAttribute="height" constant="80" id="JFS-nK-qqD"/>
@@ -37,27 +38,30 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lbt-VD-1m9">
-                    <rect key="frame" x="168.5" y="23" width="40.5" height="19.5"/>
+                    <rect key="frame" x="187.5" y="103.5" width="40.5" height="1.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWT-JP-Q6f">
-                            <rect key="frame" x="0.0" y="0.0" width="40.5" height="19.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="40.5" height="1.5"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
                                     <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                    <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6tD-Wc-kYr">
-                    <rect key="frame" x="69.5" y="45.5" width="238" height="32"/>
+                    <rect key="frame" x="88.5" y="108" width="238" height="24"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N6I-ZH-YAg" customClass="LockupProgressView" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="207" height="32"/>
-                            <color key="backgroundColor" name="almostBlack" red="0.031" green="0.039" blue="0.059" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                            <rect key="frame" x="0.0" y="8.5" width="207" height="7.5"/>
+                            <color key="backgroundColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="8" id="jZW-l6-lDc"/>
                                 <constraint firstAttribute="width" constant="207" id="yGv-Lk-Qab"/>
@@ -70,12 +74,15 @@
                                     <real key="value" value="2"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                    <color key="value" name="almostBlack" red="0.031" green="0.039" blue="0.059" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="value" red="0.031" green="0.039" blue="0.058999999999999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                    <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTo-4e-3Il">
-                            <rect key="frame" x="217" y="7.5" width="21" height="17"/>
+                            <rect key="frame" x="217" y="3.5" width="21" height="17"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -91,22 +98,25 @@
                     </constraints>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3wd-P0-Lfm">
-                    <rect key="frame" x="160.5" y="81.5" width="57" height="14.5"/>
+                    <rect key="frame" x="179" y="136" width="57" height="24"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" translatesAutoresizingMaskIntoConstraints="NO" id="Y5Q-dQ-ODN">
-                            <rect key="frame" x="0.0" y="0.0" width="16" height="14.5"/>
+                            <rect key="frame" x="0.0" y="4" width="16" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="XyY-GZ-uH1"/>
                                 <constraint firstAttribute="width" constant="16" id="qJh-NI-9xO"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AiV-cK-3El">
-                            <rect key="frame" x="26" y="0.0" width="31" height="14.5"/>
+                            <rect key="frame" x="26" y="5" width="31" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                    <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
                                     <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
@@ -139,7 +149,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="cEn-tE-L5d"/>
-            <point key="canvasLocation" x="48.5" y="-348"/>
+            <point key="canvasLocation" x="67.5" y="-316"/>
         </view>
     </objects>
     <resources>

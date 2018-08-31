@@ -10,6 +10,6 @@ import Foundation
 
 extension ETODetailView {
     func adapterModelToETODetailView(_ model:ETODetailAdapterModel) {
-        self.updateUI(<#T##model: T##T#>, handler: <#T##((T) -> Void)?##((T) -> Void)?##(T) -> Void#>)
+        
     }
 }

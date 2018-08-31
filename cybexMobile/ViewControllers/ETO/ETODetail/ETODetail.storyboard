@@ -22,7 +22,6 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0MW-0M-OxX" firstAttribute="leading" secondItem="y8a-W2-9SB" secondAttribute="leading" id="0cm-7Q-vLB"/>
                             <constraint firstItem="0MW-0M-OxX" firstAttribute="top" secondItem="y8a-W2-9SB" secondAttribute="top" id="K33-zh-Y0Y"/>
@@ -30,18 +29,14 @@
                             <constraint firstItem="y8a-W2-9SB" firstAttribute="bottom" secondItem="0MW-0M-OxX" secondAttribute="bottom" id="xhq-QD-cUa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="y8a-W2-9SB"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                <color key="value" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </view>
+                    <connections>
+                        <outlet property="contentView" destination="0MW-0M-OxX" id="iE8-7u-TKG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OE-2B-JVV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-166" y="116"/>
         </scene>
     </scenes>
-    <resources>
-    </resources>
 </document>

@@ -15,7 +15,9 @@ class ETODetailViewController: BaseViewController {
 
 	var coordinator: (ETODetailCoordinatorProtocol & ETODetailStateManagerProtocol)?
 
-	override func viewDidLoad() {
+    @IBOutlet weak var contentView: ETODetailView!
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         setupData()
@@ -25,6 +27,7 @@ class ETODetailViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        contentView.setupUI()
     }
     
     override func refreshViewController() {
@@ -36,7 +39,7 @@ class ETODetailViewController: BaseViewController {
     }
 
     func setupData() {
-        
+
     }
     
     func setupEvent() {

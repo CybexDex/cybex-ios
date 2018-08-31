@@ -7,46 +7,49 @@
 //
 
 import Foundation
+import ActiveLabel
 
 @IBDesignable
 class ETODetailIntroView: BaseView {
     
     @IBOutlet weak var downUpButton: UIButton!
-    @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var contentLabel: ActiveLabel!
     @IBOutlet weak var titleLabel: UILabel!
     
     enum Event:String {
         case ETODetailIntroViewDidClicked
         case downUpBtnClick
+        case labelClick
     }
     
     @IBInspectable
     var title: String = "" {
         didSet {
-            titleLabel.text = title
+            titleLabel.locali = title
         }
     }
-//    
-//    @IBInspectable
-//    var Theme1TitleColor: UIColor = UIColor.white {
-//        didSet {
-//            titleLabel.textColor = Theme1TitleColor
-//        }
-//    }
-//    
-//    @IBInspectable
-//    var Theme2TitleColor: UIColor = UIColor.white {
-//        didSet {
-//            titleLabel.textColor = Theme2TitleColor
-//        }
-//    }
     
     var content: String = "" {
         didSet {
-            contentLabel.attributedText = content.set(style: StyleNames.address.rawValue)
+            contentLabel.text = content
         }
     }
     
+    func setContentAttribute(contentLabelStr:String, attLabelArray: [String]) {
+        content = contentLabelStr
+        contentLabel.isUserInteractionEnabled = true
+        for att in attLabelArray {
+            let customType = ActiveType.custom(pattern: "\(att)")
+            contentLabel.enabledTypes.append(customType)
+            contentLabel.customize { label in
+                label.customColor[customType] = UIColor.steel
+                label.handleCustomTap(for: customType, handler: { (str) in
+                    self.next?.sendEventWith(Event.labelClick.rawValue, userinfo: ["clicklabel":str])
+                })
+            }
+        }
+    }
+
     override func setup() {
         super.setup()
         
