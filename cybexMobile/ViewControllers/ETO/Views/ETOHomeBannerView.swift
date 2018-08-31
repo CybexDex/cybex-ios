@@ -29,6 +29,9 @@ class ETOHomeBannerView: BaseView {
     
     func setupUI() {
         self.setPagerViewStyle()
+
+        self.pagerControl.setFillColor(.paleGrey, for: .selected)
+        self.pagerControl.setFillColor(.steel50, for: .normal)
     }
     
     func setPagerViewStyle() {

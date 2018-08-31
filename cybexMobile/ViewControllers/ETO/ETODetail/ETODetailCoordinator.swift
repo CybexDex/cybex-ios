@@ -12,6 +12,7 @@ import SwiftNotificationCenter
 
 protocol ETODetailCoordinatorProtocol {
     func openShare()
+    func openETOCrowdVC()
 }
 
 protocol ETODetailStateManagerProtocol {
@@ -43,6 +44,13 @@ extension ETODetailCoordinator: ETODetailCoordinatorProtocol {
             vc.coordinator = ImageShareCoordinator(rootVC: self.rootVC)
             self.rootVC.pushViewController(vc, animated: true)
         }
+    }
+    
+    func openETOCrowdVC() {
+        let vc = R.storyboard.etO.etoCrowdViewController()!
+        let coor = ETOCrowdCoordinator(rootVC: self.rootVC)
+        vc.coordinator = coor
+        self.rootVC.pushViewController(vc)
     }
 }
 

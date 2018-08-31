@@ -50,6 +50,22 @@ public class LGButton: UIControl {
     @IBOutlet fileprivate var trailingLoadingConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate var leadingLoadingConstraint: NSLayoutConstraint!
     
+    override public var isEnabled: Bool {
+        didSet {
+            if isEnabled {
+                isUserInteractionEnabled = true
+                gradient?.isHidden = false
+                self.alpha = 1
+                setupView()
+            }
+            else {
+                isUserInteractionEnabled = false
+                gradient?.isHidden = true
+                self.alpha = 0.5
+                setupView()
+            }
+        }
+    }
     
     public var isLoading = false {
         didSet {
@@ -334,6 +350,17 @@ public class LGButton: UIControl {
         }
     }
     
+    var locali:String {
+        set {
+            self.titleLbl.localized_text = newValue.localizedContainer()
+            self.titleString = newValue.localized()
+        }
+        
+        get {
+            return (self.titleLbl.localized_text?.value() as! String).localized()
+        }
+    }
+    
     // MARK: - Overrides
     // MARK:
     override init(frame: CGRect) {
@@ -395,7 +422,7 @@ public class LGButton: UIControl {
     }
     
     fileprivate func setupGradientBackground() {
-        if gradientStartColor != nil && gradientEndColor != nil && gradient == nil{
+        if gradientStartColor != nil && gradientEndColor != nil && gradient == nil && isEnabled {
             gradient = CAGradientLayer()
             gradient!.frame.size = frame.size
             gradient!.colors = [gradientStartColor!.cgColor, gradientEndColor!.cgColor]

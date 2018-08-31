@@ -28,7 +28,7 @@ class ETOViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.homeView.fetchAlphaProgress()
     }
     
     override func refreshViewController() {
@@ -36,15 +36,14 @@ class ETOViewController: BaseViewController {
     }
     
     func setupUI() {
-        self.localized_text = R.string.localizable.hot_project.key.localizedContainer()
+        self.navigationController?.navigationItem.title = R.string.localizable.hot_project.key.localized()
         configRightNavButton(R.image.ic_records_24_px())
-        transferNavigationBar(0.0)
+        self.homeView.fetchAlphaProgress()
     }
     
     override func rightAction(_ sender: UIButton) {
-        
+        self.coordinator?.openProjectHistroy()
     }
-    
     
     func setupData() {
         fetchData()

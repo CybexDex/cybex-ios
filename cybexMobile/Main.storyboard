@@ -1335,6 +1335,7 @@ Cg
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gme-5j-eUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="39" y="644"/>
         </scene>
         <!--Image Share View Controller-->
         <scene sceneID="Bqp-tx-VEK">
@@ -1363,7 +1364,7 @@ Cg
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RbK-Ld-fO7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="682.5" y="111.97183098591549"/>
+            <point key="canvasLocation" x="1553" y="-225"/>
         </scene>
     </scenes>
     <resources>

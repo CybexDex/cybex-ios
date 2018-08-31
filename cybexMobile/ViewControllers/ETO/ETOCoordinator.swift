@@ -14,6 +14,7 @@ protocol ETOCoordinatorProtocol {
     func openProjectItem()
     func openBanner()
     func openProjectHistroy()
+    
 }
 
 protocol ETOStateManagerProtocol {
@@ -56,7 +57,7 @@ extension ETOCoordinator: ETOCoordinatorProtocol {
     }
     
     func openProjectHistroy() {
-        
+        if let vc = R.storyboard.main.
     }
 }
 

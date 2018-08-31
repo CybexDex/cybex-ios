@@ -27,9 +27,13 @@ import Foundation
 class GridContentView: UIView {
     weak var delegate: GridContentViewDelegate?
     
-    weak var datasource: GridContentViewDataSource?
+    weak var datasource: GridContentViewDataSource? {
+        didSet {
+            reloadData()
+        }
+    }
     
-    private var edgeInsets: UIEdgeInsets = UIEdgeInsetsMake(30, 25, 30, 25)
+    private var edgeInsets: UIEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
     
     private var lineGap: CGFloat = 25
     
@@ -123,7 +127,9 @@ class GridContentView: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        loadData()
+        setupUI()
     }
     
     func reloadData() {
@@ -147,8 +153,8 @@ class GridContentView: UIView {
     }
     
     fileprivate func dynamicHeight() -> CGFloat {
-        let lastView = self.subviews.last?.subviews.last
-        return lastView!.bottom + edgeInsets.bottom + edgeInsets.top
+        let lastView = self.subviews.last
+        return lastView?.bottom ?? 0 + edgeInsets.bottom + edgeInsets.top
     }
     
     override func layoutSubviews() {
