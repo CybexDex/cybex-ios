@@ -101,6 +101,7 @@ def ui
     pod 'XLActionController'
     pod 'ESPullToRefresh'
     pod 'FSPagerView'
+    pod 'ActiveLabel'
 end
 
 def other

@@ -2,6 +2,7 @@ PODS:
   - Action (3.6.0):
     - RxCocoa (~> 4.2.0)
     - RxSwift (~> 4.2.0)
+  - ActiveLabel (0.9.0)
   - Alamofire (4.7.3)
   - AlamofireNetworkActivityLogger (2.3.0):
     - Alamofire (~> 4.6)
@@ -178,6 +179,7 @@ PODS:
 
 DEPENDENCIES:
   - Action
+  - ActiveLabel
   - AlamofireNetworkActivityLogger
   - Apollo
   - AsyncOperation
@@ -272,6 +274,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Action
+    - ActiveLabel
     - Alamofire
     - AlamofireNetworkActivityLogger
     - Apollo
@@ -408,6 +411,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Action: 3d9486d3da02b572b0a034b6c49ac4c3fbcc8b63
+  ActiveLabel: c4fdd14a288483e98b5a3dff0ab214699aeee74a
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireNetworkActivityLogger: 6f3076652ab7fa6c819b59be08ea038d339e36d8
   Apollo: 39d1adfceb6f262fc58286ec9425fd7c332877fb
@@ -509,6 +513,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 34f79abb60018f2e2a5168d6287d90473024ab81
 
-PODFILE CHECKSUM: 704cac39b04b1f93a71f8bcf88f667630be14092
+PODFILE CHECKSUM: fe96909d73f8d35c3b65305ecc55c3a339d46e49
 
 COCOAPODS: 1.5.3
