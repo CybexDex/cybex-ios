@@ -20,6 +20,8 @@ import Foundation
     @objc optional func lineGapForView(_ view: GridContentView) -> CGFloat
     
     @objc optional func lineMaxItemNum(_ view: GridContentView) -> Int
+    
+    @objc optional func lineHeightForView(_ view: GridContentView, lineNum: Int) -> CGFloat
 }
 
 class GridContentView: UIView {
@@ -66,6 +68,9 @@ class GridContentView: UIView {
                 lineView.distribution = .fillEqually
                 lineView.alignment = .fill
                 contentView.addArrangedSubview(lineView)
+                lineView.left(to: contentView, offset:0)
+                lineView.right(to: contentView, offset:0)
+                updateLineHeight(lineView, lineNum: row)
                 
                 for rowIndex in 0 ..< self.lineNum {
                     let index = row * self.lineNum + rowIndex
@@ -77,6 +82,17 @@ class GridContentView: UIView {
                 }
             }
             updateHeight()
+        }
+    }
+    
+    fileprivate func updateLineHeight(_ lineView: UIStackView, lineNum: Int) {
+        if let dataSource = self.datasource {
+            if dataSource.responds(to: #selector(GridContentViewDataSource.lineHeightForView(_:lineNum:))) {
+                let height = dataSource.lineHeightForView!(self, lineNum: lineNum)
+                if height > 0 {
+                    lineView.height(height)
+                }
+            }
         }
     }
     

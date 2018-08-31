@@ -136,7 +136,7 @@ class ShareView: UIView {
     
     func viewWithImgName(_ name: String) -> UIImageView {
         let view = UIImageView.init()
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .center
         view.image = UIImage.init(named: name)
         return view
     }
@@ -164,6 +164,10 @@ extension ShareView: GridContentViewDelegate,GridContentViewDataSource {
     
     func edgeInsetsForView(_ view: GridContentView) -> UIEdgeInsets {
         return UIEdgeInsetsMake(30, 0, 30, 0)
+    }
+    
+    func lineHeightForView(_ view: GridContentView, lineNum: Int) -> CGFloat {
+        return 120
     }
     
 }
