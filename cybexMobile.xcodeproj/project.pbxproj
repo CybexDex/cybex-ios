@@ -290,12 +290,19 @@
 		7267DA1A21351D5A004AF9AF /* ETOProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA1821351D5A004AF9AF /* ETOProjectCell.swift */; };
 		7267DA1B21351D5A004AF9AF /* ETOProjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7267DA1921351D5A004AF9AF /* ETOProjectCell.xib */; };
 		7267DA1D2135244A004AF9AF /* ETO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA1C2135244A004AF9AF /* ETO.swift */; };
+		7267DA2121363BEE004AF9AF /* ETOHomeViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA1E21363BEE004AF9AF /* ETOHomeViewAdapter.swift */; };
+		7267DA2221363BEE004AF9AF /* ETOHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA1F21363BEE004AF9AF /* ETOHomeView.swift */; };
+		7267DA2321363BEE004AF9AF /* ETOHomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7267DA2021363BEE004AF9AF /* ETOHomeView.xib */; };
+		7267DA2D21364BF7004AF9AF /* ETOHomeBannerViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA2A21364BF7004AF9AF /* ETOHomeBannerViewAdapter.swift */; };
+		7267DA2E21364BF7004AF9AF /* ETOHomeBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA2B21364BF7004AF9AF /* ETOHomeBannerView.swift */; };
+		7267DA2F21364BF7004AF9AF /* ETOHomeBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7267DA2C21364BF7004AF9AF /* ETOHomeBannerView.xib */; };
 		7279867F20F49B3300FFB2DA /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 7279867E20F49B3200FFB2DA /* schema.json */; };
 		728C15792129AE9300053555 /* CybexShowTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C15782129AE9300053555 /* CybexShowTitleView.swift */; };
 		728C157B2129AEA400053555 /* CybexShowTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728C157A2129AEA400053555 /* CybexShowTitleView.xib */; };
 		72AAC8B02106FC840040793F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AAC8AF2106FC840040793F /* Record.swift */; };
 		72D9DD58210EB60F00963915 /* Periscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9DD56210EB60E00963915 /* Periscope.swift */; };
 		72D9DD59210EB60F00963915 /* PeriscopeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D9DD57210EB60E00963915 /* PeriscopeCell.xib */; };
+		72DBCA652138D94200905303 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA622138D94200905303 /* ContainerView.swift */; };
 		72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */; };
 		72EC6A5420F4611500CEAFF6 /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */; };
 		72EC6A5520F4611500CEAFF6 /* EOSWithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5120F4611500CEAFF6 /* EOSWithdrawView.xib */; };
@@ -5853,6 +5860,12 @@
 		7267DA1821351D5A004AF9AF /* ETOProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOProjectCell.swift; sourceTree = "<group>"; };
 		7267DA1921351D5A004AF9AF /* ETOProjectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOProjectCell.xib; sourceTree = "<group>"; };
 		7267DA1C2135244A004AF9AF /* ETO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETO.swift; sourceTree = "<group>"; };
+		7267DA1E21363BEE004AF9AF /* ETOHomeViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOHomeViewAdapter.swift; sourceTree = "<group>"; };
+		7267DA1F21363BEE004AF9AF /* ETOHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOHomeView.swift; sourceTree = "<group>"; };
+		7267DA2021363BEE004AF9AF /* ETOHomeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOHomeView.xib; sourceTree = "<group>"; };
+		7267DA2A21364BF7004AF9AF /* ETOHomeBannerViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOHomeBannerViewAdapter.swift; sourceTree = "<group>"; };
+		7267DA2B21364BF7004AF9AF /* ETOHomeBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOHomeBannerView.swift; sourceTree = "<group>"; };
+		7267DA2C21364BF7004AF9AF /* ETOHomeBannerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOHomeBannerView.xib; sourceTree = "<group>"; };
 		72789C0E96418BF478684ED7E483E03F /* polynomial_horner2_6.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = polynomial_horner2_6.hpp; sourceTree = "<group>"; };
 		7279867E20F49B3200FFB2DA /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		727AE54235841DBD27700416DA7C59A7 /* begin_end.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = begin_end.hpp; sourceTree = "<group>"; };
@@ -5871,6 +5884,7 @@
 		72D9DD56210EB60E00963915 /* Periscope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Periscope.swift; sourceTree = "<group>"; };
 		72D9DD57210EB60E00963915 /* PeriscopeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeriscopeCell.xib; sourceTree = "<group>"; };
 		72DADAB6EFE218D74953EE73EFA244F0 /* invoker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = invoker.hpp; sourceTree = "<group>"; };
+		72DBCA622138D94200905303 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		72E4468D71171890A95A24639B6298E1 /* qi_distinct.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = qi_distinct.hpp; sourceTree = "<group>"; };
 		72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EOSWithdrawView.swift; sourceTree = "<group>"; };
 		72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawView.xib; sourceTree = "<group>"; };
@@ -21951,6 +21965,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		721B5E3B2138050A00F7C86F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				72DBCA622138D94200905303 /* ContainerView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		7267DA0121350317004AF9AF /* ETO */ = {
 			isa = PBXGroup;
 			children = (
@@ -21980,6 +22002,12 @@
 				7267DA1221351D40004AF9AF /* ETOProjectViewAdapter.swift */,
 				7267DA1321351D40004AF9AF /* ETOProjectView.swift */,
 				7267DA1421351D40004AF9AF /* ETOProjectView.xib */,
+				7267DA1E21363BEE004AF9AF /* ETOHomeViewAdapter.swift */,
+				7267DA1F21363BEE004AF9AF /* ETOHomeView.swift */,
+				7267DA2021363BEE004AF9AF /* ETOHomeView.xib */,
+				7267DA2A21364BF7004AF9AF /* ETOHomeBannerViewAdapter.swift */,
+				7267DA2B21364BF7004AF9AF /* ETOHomeBannerView.swift */,
+				7267DA2C21364BF7004AF9AF /* ETOHomeBannerView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -28156,6 +28184,7 @@
 		C31EC57D28FCC624D48C5CC42DE96975 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				721B5E3B2138050A00F7C86F /* App */,
 				221C6149213535C30021C007 /* Share */,
 				73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */,
 				72D9DD55210EB5FC00963915 /* ActionSheetViewController */,
@@ -33005,6 +33034,7 @@
 				141F9BF8F7BFFEAE83218B9E885D8FE8 /* IntroduceView.xib in Resources */,
 				72EC6A5420F4611500CEAFF6 /* WithdrawView.xib in Resources */,
 				59662228CB1D233B02EF357CA563A486 /* Launch Screen.storyboard in Resources */,
+				7267DA2321363BEE004AF9AF /* ETOHomeView.xib in Resources */,
 				221EC253210609B20059F856 /* TransferView.xib in Resources */,
 				DF032043A699E690FA00D8C90B72773F /* Localizable.strings in Resources */,
 				082F8D06A9EF700C8EB3A8BC62D8F1A8 /* LockupAssetsCell.xib in Resources */,
@@ -33142,6 +33172,7 @@
 				82CC896530FDE1745A34075AB66C47CF /* numeric.SUNWCCh in Resources */,
 				77DF3E181F0DC071988789053E0F6FD7 /* ostream in Resources */,
 				762156C3AEB620F8C8A01F26B1F818AC /* ostream.SUNWCCh in Resources */,
+				7267DA2F21364BF7004AF9AF /* ETOHomeBannerView.xib in Resources */,
 				3B0EB657210313B200F19C31 /* AccountContentView.xib in Resources */,
 				225746EA21073E8C0017FA1A /* PickerView.xib in Resources */,
 				BD394524F3A87D34A0C4C4CE6DB0405D /* queue in Resources */,
@@ -33627,6 +33658,7 @@
 				92AF8740929C204D86A85866576BC844 /* CBMALineBrush.swift in Sources */,
 				7217B0832122AD9D00608531 /* AddAddressView.swift in Sources */,
 				7F38CC71354724DD10BBC3E8BF37C44A /* CBMAModel.swift in Sources */,
+				7267DA2D21364BF7004AF9AF /* ETOHomeBannerViewAdapter.swift in Sources */,
 				51ED56491B9169BC8F1E25548D3387D8 /* CBMAVOLUMEModel.swift in Sources */,
 				7386F2BF21216B9E00ABC924 /* WithdrawAddressCoordinator.swift in Sources */,
 				221C616D2137FCCF0021C007 /* ImageShareActions.swift in Sources */,
@@ -33638,6 +33670,7 @@
 				8F231436DF08E691F844CC01B2AC1845 /* Crypto.swift in Sources */,
 				7386F2BE21216B9E00ABC924 /* WithdrawAddressActions.swift in Sources */,
 				BE882BD38F3D40A56E08366BC6C20DDC /* CybexActionView.swift in Sources */,
+				7267DA2121363BEE004AF9AF /* ETOHomeViewAdapter.swift in Sources */,
 				50C985D347323594C1A8239536E6AAAD /* CybexAlertView.swift in Sources */,
 				B708A685A32CF984A16E8AA133B5032A /* CybexLabel.swift in Sources */,
 				C96D0912126309ECA43CED968127E06E /* CybexPasswordView.swift in Sources */,
@@ -33735,6 +33768,7 @@
 				CD017D1C374A5B06D3ECEC24936E0911 /* MyOpenedOrdersView.swift in Sources */,
 				D3008B984211AFE152859658DC6B773B /* NSNotification+Extensions.swift in Sources */,
 				031F69CC95D2906A4F8F4063776327F6 /* NSObject+Extensions.swift in Sources */,
+				7267DA2221363BEE004AF9AF /* ETOHomeView.swift in Sources */,
 				009625463316961A6BB07A49EB88D5D5 /* NavCoordinator.swift in Sources */,
 				8E9524F703A8466022C2D28281507174 /* NetworkBroadcastAPI.swift in Sources */,
 				AC784AB46820FFF7BD6DBFCD8132C403 /* NoticeBoardView.swift in Sources */,
@@ -33814,6 +33848,7 @@
 				751D31DB62BFC9F2FC1A0EFC4C23A801 /* SettingViewController.swift in Sources */,
 				030B97405D03CAF3E911B685DA7AC4E8 /* Shapes.swift in Sources */,
 				F7C39F3DD49909044D9E8FF34ABF3F2D /* SimpleHTTPService.swift in Sources */,
+				7267DA2E21364BF7004AF9AF /* ETOHomeBannerView.swift in Sources */,
 				9A604E7E43C4ECBE5B57FAD1D0D88687 /* Style.swift in Sources */,
 				D519E052461ED8221B6CF5C9D9B7741C /* StyleContentView.swift in Sources */,
 				345CA96631D318F012F0BB80ACD3BCCD /* StyleLabel.swift in Sources */,
@@ -33869,6 +33904,7 @@
 				696EB2454DD46A9C497C7C719B12BF12 /* UserDefaults.swift in Sources */,
 				73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */,
 				73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */,
+				72DBCA652138D94200905303 /* ContainerView.swift in Sources */,
 				1EE747D219462D96F1597B374E8338E8 /* UserManager.swift in Sources */,
 				20C5C352A5EE76CE53F6F1F8C7CE1FB6 /* Utils.swift in Sources */,
 				7386F2AE21216B2200ABC924 /* TransferAddressHomeActions.swift in Sources */,

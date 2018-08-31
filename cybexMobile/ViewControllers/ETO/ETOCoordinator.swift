@@ -11,12 +11,17 @@ import ReSwift
 import SwiftNotificationCenter
 
 protocol ETOCoordinatorProtocol {
+    func openProjectItem()
 }
 
 protocol ETOStateManagerProtocol {
     var state: ETOState { get }
     
     func switchPageState(_ state:PageState)
+    
+    func fetchProjectData()
+    
+    func fetchBannersData()
 }
 
 class ETOCoordinator: ETORootCoordinator {
@@ -37,11 +42,21 @@ class ETOCoordinator: ETORootCoordinator {
 }
 
 extension ETOCoordinator: ETOCoordinatorProtocol {
-    
+    func openProjectItem() {
+        
+    }
 }
 
 extension ETOCoordinator: ETOStateManagerProtocol {
     func switchPageState(_ state:PageState) {
         self.store.dispatch(PageStateAction(state: state))
+    }
+    
+    func fetchProjectData() {
+        
+    }
+    
+    func fetchBannersData() {
+        
     }
 }

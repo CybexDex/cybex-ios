@@ -21,6 +21,13 @@ protocol CybexTextViewDelegate {
 
 
 class CybexTextView: UIView {
+    
+    enum CybexTextView_type : Int {
+        case normal
+        case time
+    }
+    
+    
     var middleView : (UIView&Views)? {
         didSet{
             contentView.addSubview(middleView!)
@@ -38,6 +45,10 @@ class CybexTextView: UIView {
             updateHeight()
         }
     }
+    
+//    var type : CybexTextView_type = .normal {
+//        didSet{}
+//    }
     
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var hSeparateView: UIView!

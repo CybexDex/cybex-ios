@@ -548,37 +548,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="130" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="r2J-An-Fxw">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MnO-kH-0YR" customClass="ETOHomeView" customModule="cybexMobile" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="JUA-lL-XeH">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="191"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </view>
-                                <connections>
-                                    <outlet property="dataSource" destination="MLA-x0-5qf" id="va2-En-H94"/>
-                                    <outlet property="delegate" destination="MLA-x0-5qf" id="Pxo-cS-4jh"/>
-                                </connections>
-                            </tableView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                        <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                        <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="cHO-Bx-yEo" firstAttribute="trailing" secondItem="r2J-An-Fxw" secondAttribute="trailing" id="N0g-eP-TSP"/>
-                            <constraint firstItem="r2J-An-Fxw" firstAttribute="leading" secondItem="cHO-Bx-yEo" secondAttribute="leading" id="NR6-Lw-kQN"/>
-                            <constraint firstItem="cHO-Bx-yEo" firstAttribute="bottom" secondItem="r2J-An-Fxw" secondAttribute="bottom" id="nNF-lt-uXo"/>
-                            <constraint firstItem="r2J-An-Fxw" firstAttribute="top" secondItem="Hpb-Uf-R7K" secondAttribute="top" id="wQx-AW-cVU"/>
+                            <constraint firstItem="MnO-kH-0YR" firstAttribute="leading" secondItem="cHO-Bx-yEo" secondAttribute="leading" id="GTW-oZ-GcL"/>
+                            <constraint firstItem="cHO-Bx-yEo" firstAttribute="trailing" secondItem="MnO-kH-0YR" secondAttribute="trailing" id="KWH-p0-9ji"/>
+                            <constraint firstItem="cHO-Bx-yEo" firstAttribute="bottom" secondItem="MnO-kH-0YR" secondAttribute="bottom" id="WZj-lI-pwt"/>
+                            <constraint firstItem="MnO-kH-0YR" firstAttribute="top" secondItem="Hpb-Uf-R7K" secondAttribute="top" id="sNj-UC-T9w"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cHO-Bx-yEo"/>
                     </view>
                     <connections>
-                        <outlet property="pageView" destination="JUA-lL-XeH" id="ODv-XN-Cp4"/>
-                        <outlet property="tableView" destination="r2J-An-Fxw" id="zYy-Da-zTa"/>
+                        <outlet property="homeView" destination="MnO-kH-0YR" id="yHV-iD-g6L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f8Z-Bw-IKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1380" y="2151"/>
+            <point key="canvasLocation" x="1271" y="2151"/>
         </scene>
         <!--Register-->
         <scene sceneID="jj0-Un-2Bi">

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ETOHomeBannerView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="pagerControl" destination="Y3w-05-77e" id="7du-um-bRI"/>
+                <outlet property="pagerView" destination="79F-0r-jJz" id="aMS-h1-ET3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="gzD-2m-dpl">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79F-0r-jJz" customClass="FSPagerView" customModule="FSPagerView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isInfinite" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="automaticSlidingInterval">
+                            <real key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="WMI-X5-c77"/>
+                        <outlet property="delegate" destination="-1" id="LFJ-bq-pDR"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y3w-05-77e" customClass="FSPageControl" customModule="FSPagerView">
+                    <rect key="frame" x="0.0" y="645" width="375" height="10"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="VnQ-9r-5iw"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="bZT-0A-fAb"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="hidesForSinglePage" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Y3w-05-77e" firstAttribute="leading" secondItem="fN0-YM-14k" secondAttribute="leading" id="ACW-3z-6jX"/>
+                <constraint firstItem="Y3w-05-77e" firstAttribute="trailing" secondItem="fN0-YM-14k" secondAttribute="trailing" id="LbH-SQ-WtL"/>
+                <constraint firstItem="fN0-YM-14k" firstAttribute="trailing" secondItem="79F-0r-jJz" secondAttribute="trailing" id="TAn-vL-PZc"/>
+                <constraint firstItem="79F-0r-jJz" firstAttribute="top" secondItem="gzD-2m-dpl" secondAttribute="top" id="Ty2-8x-s34"/>
+                <constraint firstItem="fN0-YM-14k" firstAttribute="bottom" secondItem="Y3w-05-77e" secondAttribute="bottom" constant="12" id="WeS-2l-Tb5"/>
+                <constraint firstItem="fN0-YM-14k" firstAttribute="bottom" secondItem="79F-0r-jJz" secondAttribute="bottom" id="bxu-60-aUI"/>
+                <constraint firstItem="79F-0r-jJz" firstAttribute="leading" secondItem="fN0-YM-14k" secondAttribute="leading" id="tDv-Id-ync"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fN0-YM-14k"/>
+            <point key="canvasLocation" x="-107.5" y="-98.5"/>
+        </view>
+    </objects>
+</document>

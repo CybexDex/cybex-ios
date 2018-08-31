@@ -28,6 +28,12 @@ class LockupProgressView: UIView {
         }
     }
     
+    var colors: [CGColor]? {
+        didSet{
+            
+        }
+    }
+    
     @IBInspectable
     var beginColor : UIColor = UIColor.clear {
         didSet{
@@ -40,6 +46,7 @@ class LockupProgressView: UIView {
             
         }
     }
+    
     @IBInspectable
     var space : CGFloat = 2 {
         didSet{
@@ -62,27 +69,36 @@ class LockupProgressView: UIView {
                 layer.removeFromSuperlayer()
             }
         }
-        
-        let path = UIBezierPath(rect: rect)
-        path.lineCapStyle = .round
-        
-        let beginColor        = self.beginColor.cgColor
-        let endColor          = self.endColor.cgColor
-        let colorArr          = [beginColor,endColor]
-        let gradient          = CAGradientLayer()
-        gradient.colors       = colorArr
+        let gradient = createGradientLayer()
+        self.layer.addSublayer(gradient)
+        gradient.mask = createMaskLayer(rect)
+    }
+    
+    func createGradientLayer() -> CAGradientLayer{
+        let beginColor = self.beginColor.cgColor
+        let endColor = self.endColor.cgColor
+        let colorArr = [beginColor,endColor]
+        let gradient = CAGradientLayer()
+        if let colors = self.colors {
+            gradient.colors = colors
+        }
+        else {
+            gradient.colors = colorArr
+        }
         let x = self.direction == 0 ? 1 : 0
         let y = self.direction == 1 ? 1 : 0
-        gradient.startPoint   = CGPoint(x: 0, y: 0)
-        gradient.endPoint     = CGPoint(x: x, y: y)
-        gradient.frame        = self.bounds
-        self.layer.addSublayer(gradient)
-        
-        let shapeLayer        = CALayer()
-        shapeLayer.cornerRadius = 2
-        shapeLayer.frame      = CGRect(x: self.direction == 0 ? space : 0, y: self.direction == 1 ? space : 0, width: CGFloat(self.progress) * (rect.width - (self.direction == 0 ? space * 2 : 0)), height: rect.height - (self.direction == 1 ? space * 2 : 0))
-        shapeLayer.backgroundColor = UIColor.black.cgColor
-        
-        gradient.mask         = shapeLayer
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: x, y: y)
+        gradient.opacity = 1.0
+        gradient.frame = self.bounds
+        return gradient
+    }
+    
+    func createMaskLayer(_ rect : CGRect) -> CALayer {
+        let maskLayer        = CALayer()
+        maskLayer.frame      = CGRect(x: space , y: space, width: CGFloat(self.progress) * (rect.width - space * 2), height: rect.height - space * 2)
+        maskLayer.cornerRadius = maskLayer.frame.height * 0.5
+        maskLayer.backgroundColor = UIColor.black.cgColor
+        return maskLayer
     }
 }
