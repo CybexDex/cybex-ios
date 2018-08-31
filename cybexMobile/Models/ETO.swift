@@ -11,8 +11,8 @@ import HandyJSON
 
 struct ETOBannerModel:HandyJSON {
     var id:String = ""
-    var adds_banner:String = ""
-    var adds_banner__lang_en:String = ""
+    var adds_banner_mobil:String = ""
+    var adds_banner_mobil__lang_en:String = ""
 }
 
 struct ETOUserAuditModel:HandyJSON {
@@ -72,8 +72,8 @@ struct ETOTradeHistoryModel: HandyJSON {
 }
 
 struct ETOProjectModel:HandyJSON {
-    var adds_logo: String = ""
-    var adds_logo__lang_en: String = ""
+    var adds_logo_mobil: String = ""
+    var adds_logo_mobil__lang_en: String = ""
     var adds_keyword: String = ""
     var adds_keyword__lang_en: String = ""
     var adds_advantage: String = ""
@@ -82,54 +82,13 @@ struct ETOProjectModel:HandyJSON {
     var adds_website__lang_en: String = ""
     var adds_detail: String = ""
     var adds_detail__lang_en: String = ""
-    
-    var status: String = "" // finish pre ok
-    var name: String = ""
-    var receive_address: String = ""
-    var current_percent:Double = 0
-    
-    var start_at:Date?
-    var end_at:Date?
-    var finish_at:Date?
-    var offer_at:Date?
-    var lock_at:Date?
-    
-    var token_name: String = ""
-    var base_token_name: String = ""
-    var rate:Int = 0 //1 base
-    
-    var base_max_quota: Int = 0
-    var base_accuracy: Int = 0
-    var base_min_quota: Int = 0
-    
-    var is_user_in:String = "0" // 0不准预约 1可以预约
-    
-    mutating func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.start_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
-        mapper <<<
-            self.end_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
-        mapper <<<
-            self.finish_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
-        mapper <<<
-            self.offer_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
-        mapper <<<
-            self.lock_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
-    }
-}
+    var adds_share_mobil: String = ""
+    var adds_share_mobil__lang_en: String = ""
+    var adds_buy_desc: String = ""
+    var adds_buy_desc__lang_en: String = ""
+    var adds_whitelist: String = ""
+    var adds_whitelist__lang_en: String = ""
 
-struct ETODetailAdapterModel:HandyJSON {
-    var adds_logo: String = ""
-    var adds_logo__lang_en: String = ""
-    var adds_keyword: String = ""
-    var adds_keyword__lang_en: String = ""
-    var adds_advantage: String = ""
-    var adds_advantage__lang_en: String = ""
-    var adds_website: String = ""
-    var adds_website__lang_en: String = ""
-    var adds_detail: String = ""
-    var adds_detail__lang_en: String = ""
-    
     var status: String = "" // finish pre ok
     var name: String = ""
     var receive_address: String = ""
@@ -163,4 +122,5 @@ struct ETODetailAdapterModel:HandyJSON {
         mapper <<<
             self.lock_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
     }
+
 }

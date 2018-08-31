@@ -69,7 +69,7 @@ struct ETOMGService {
 
 extension ETOMGAPI : TargetType {
     var baseURL: URL {
-        return AppConfiguration.ETO_MG_BASE_URLString
+        return AppConfiguration.ETO_MG_BASE_TEST_URLString
     }
     
     var path: String {
