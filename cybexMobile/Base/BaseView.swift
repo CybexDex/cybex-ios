@@ -76,6 +76,11 @@ class BaseView: UIControl {
         
     }
     
+    func clearBgColor() {
+        self.foreView.theme_backgroundColor = nil
+        self.foreView.backgroundColor = .clear
+    }
+    
     //MARK: Touch
     
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
