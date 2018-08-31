@@ -6,15 +6,22 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ETORecordListViewView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="actionLabel" destination="lsr-lc-kDp" id="R2d-AO-qcn"/>
+                <outlet property="amountLabel" destination="phv-0X-hZV" id="CyN-a4-Yt0"/>
+                <outlet property="nameLabel" destination="V0T-Da-I7z" id="vol-Nb-epM"/>
+                <outlet property="statusLabel" destination="uHS-bQ-1Ss" id="4jq-1H-LdR"/>
+                <outlet property="timeLabel" destination="2DT-di-P1z" id="ghE-2D-zWf"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="Wwx-gN-njJ">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="152"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0T-Da-I7z">
@@ -29,46 +36,45 @@
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                            <color key="value" name="white"/>
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                            <color key="value" name="darkTwo"/>
+                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uqS-H6-SSh">
                     <rect key="frame" x="13" y="36" width="349" height="20"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phv-0X-hZV">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phv-0X-hZV" userLabel="Amount Label">
                             <rect key="frame" x="337.5" y="0.0" width="11.5" height="20"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                    <color key="value" name="steel"/>
+                                    <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                    <color key="value" name="steel"/>
+                                    <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lsr-lc-kDp">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lsr-lc-kDp" userLabel="Action Label">
                             <rect key="frame" x="0.0" y="0.0" width="337.5" height="20"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                    <color key="value" name="steel"/>
+                                    <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                    <color key="value" name="steel"/>
+                                    <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="phv-0X-hZV" secondAttribute="trailing" id="A6u-BA-gaA"/>
                         <constraint firstItem="phv-0X-hZV" firstAttribute="top" secondItem="uqS-H6-SSh" secondAttribute="top" id="Dii-5e-X7Q"/>
@@ -90,10 +96,10 @@
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                    <color key="value" name="steel"/>
+                                    <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                    <color key="value" name="steel"/>
+                                    <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
@@ -104,15 +110,14 @@
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                    <color key="value" name="steel"/>
+                                    <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                    <color key="value" name="steel"/>
+                                    <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="2DT-di-P1z" firstAttribute="top" secondItem="fXw-9v-o48" secondAttribute="top" id="0ks-KD-fO7"/>
                         <constraint firstAttribute="trailing" secondItem="uHS-bQ-1Ss" secondAttribute="trailing" id="APz-Ch-0cR"/>
@@ -124,6 +129,21 @@
                         <constraint firstItem="2DT-di-P1z" firstAttribute="leading" secondItem="fXw-9v-o48" secondAttribute="leading" id="haP-f8-uKY"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5d-j1-J5l">
+                    <rect key="frame" x="13" y="88" width="349" height="1"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="2VK-7Q-B0A"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                            <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                            <color key="value" name="white" red="1.000" green="1.000" blue="1.000" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -131,47 +151,28 @@
                 <constraint firstItem="PoT-2G-l4l" firstAttribute="trailing" secondItem="uqS-H6-SSh" secondAttribute="trailing" constant="13" id="8bb-ue-V0f"/>
                 <constraint firstItem="V0T-Da-I7z" firstAttribute="leading" secondItem="PoT-2G-l4l" secondAttribute="leading" constant="13" id="AsQ-G6-7XW"/>
                 <constraint firstItem="V0T-Da-I7z" firstAttribute="top" secondItem="PoT-2G-l4l" secondAttribute="top" constant="12" id="SAl-I6-9cy"/>
+                <constraint firstItem="m5d-j1-J5l" firstAttribute="top" secondItem="fXw-9v-o48" secondAttribute="bottom" constant="12" id="ZcR-Se-HdS"/>
+                <constraint firstItem="PoT-2G-l4l" firstAttribute="trailing" secondItem="m5d-j1-J5l" secondAttribute="trailing" constant="13" id="crS-n5-2A9"/>
                 <constraint firstItem="PoT-2G-l4l" firstAttribute="trailing" secondItem="V0T-Da-I7z" secondAttribute="trailing" constant="13" id="dX8-5A-xwN"/>
                 <constraint firstItem="fXw-9v-o48" firstAttribute="leading" secondItem="PoT-2G-l4l" secondAttribute="leading" constant="13" id="dlv-UF-hbn"/>
                 <constraint firstItem="PoT-2G-l4l" firstAttribute="trailing" secondItem="fXw-9v-o48" secondAttribute="trailing" constant="13" id="fqX-Ad-mze"/>
                 <constraint firstItem="uqS-H6-SSh" firstAttribute="top" secondItem="V0T-Da-I7z" secondAttribute="bottom" id="h2h-Dz-Dcl"/>
+                <constraint firstItem="m5d-j1-J5l" firstAttribute="leading" secondItem="PoT-2G-l4l" secondAttribute="leading" constant="13" id="p5j-7H-rLi"/>
                 <constraint firstItem="uqS-H6-SSh" firstAttribute="leading" secondItem="PoT-2G-l4l" secondAttribute="leading" constant="13" id="pTk-ha-oAL"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="PoT-2G-l4l"/>
-            <point key="canvasLocation" x="33.5" y="-106.5"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="33.5" y="-143"/>
         </view>
     </objects>
     <resources>
-        <namedColor name="darkTwo">
-            <color red="0.1059999987" green="0.1330000013" blue="0.1879999936" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="steel">
-            <color red="0.47099998589999997" green="0.50599998239999999" blue="0.60399997230000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="white">
-            <color red="0.976000011" green="0.976000011" blue="0.976000011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>

@@ -10,6 +10,16 @@ import Foundation
 
 @IBDesignable
 class ETORecordListViewView: BaseView {
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var actionLabel: UILabel!
+    
+    @IBOutlet weak var amountLabel: UILabel!
+    
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    @IBOutlet weak var statusLabel: UILabel!
+    
     enum Event:String {
         case ETORecordListViewViewDidClicked
     }
@@ -22,7 +32,11 @@ class ETORecordListViewView: BaseView {
     }
     
     func setupUI() {
-        
+        nameLabel.text = "Hash future"
+        actionLabel.text = "Join ETO"
+        amountLabel.text = "10 CYB"
+        timeLabel.text = "2018/12/28  12:09:50"
+        statusLabel.text = "Failed to receive"
     }
     
     func setupSubViewEvent() {

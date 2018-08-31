@@ -1382,7 +1382,6 @@ Cg
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vKt-ij-PjH" firstAttribute="leading" secondItem="w6L-jn-sW5" secondAttribute="leading" id="JrC-XL-fJG"/>
                             <constraint firstItem="w6L-jn-sW5" firstAttribute="bottom" secondItem="vKt-ij-PjH" secondAttribute="bottom" id="Rca-cU-80y"/>
