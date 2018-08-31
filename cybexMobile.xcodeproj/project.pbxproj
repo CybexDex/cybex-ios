@@ -67,6 +67,12 @@
 		221C616D2137FCCF0021C007 /* ImageShareActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C61692137FCCF0021C007 /* ImageShareActions.swift */; };
 		221C616E2137FCCF0021C007 /* ImageShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C616A2137FCCF0021C007 /* ImageShareViewController.swift */; };
 		221C616F2137FCCF0021C007 /* ImageShareReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C616B2137FCCF0021C007 /* ImageShareReducers.swift */; };
+		221C6175213926570021C007 /* ETORecordListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C6171213926570021C007 /* ETORecordListCoordinator.swift */; };
+		221C6176213926570021C007 /* ETORecordListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C6172213926570021C007 /* ETORecordListActions.swift */; };
+		221C6177213926570021C007 /* ETORecordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C6173213926570021C007 /* ETORecordListViewController.swift */; };
+		221C6178213926570021C007 /* ETORecordListReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C6174213926570021C007 /* ETORecordListReducers.swift */; };
+		221C617C213926A50021C007 /* ETORecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C617A213926A50021C007 /* ETORecordCell.swift */; };
+		221C617D213926A50021C007 /* ETORecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C617B213926A50021C007 /* ETORecordCell.xib */; };
 		221EC2352105B1930059F856 /* TitleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC22E2105B18F0059F856 /* TitleTextView.swift */; };
 		221EC2362105B1930059F856 /* TitleTextfieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221EC22F2105B1900059F856 /* TitleTextfieldView.xib */; };
 		221EC2372105B1930059F856 /* GrowSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC2312105B1910059F856 /* GrowSectionView.swift */; };
@@ -2216,6 +2222,12 @@
 		221C61692137FCCF0021C007 /* ImageShareActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShareActions.swift; sourceTree = "<group>"; };
 		221C616A2137FCCF0021C007 /* ImageShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShareViewController.swift; sourceTree = "<group>"; };
 		221C616B2137FCCF0021C007 /* ImageShareReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShareReducers.swift; sourceTree = "<group>"; };
+		221C6171213926570021C007 /* ETORecordListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETORecordListCoordinator.swift; sourceTree = "<group>"; };
+		221C6172213926570021C007 /* ETORecordListActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETORecordListActions.swift; sourceTree = "<group>"; };
+		221C6173213926570021C007 /* ETORecordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETORecordListViewController.swift; sourceTree = "<group>"; };
+		221C6174213926570021C007 /* ETORecordListReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETORecordListReducers.swift; sourceTree = "<group>"; };
+		221C617A213926A50021C007 /* ETORecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETORecordCell.swift; sourceTree = "<group>"; };
+		221C617B213926A50021C007 /* ETORecordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETORecordCell.xib; sourceTree = "<group>"; };
 		221EC22E2105B18F0059F856 /* TitleTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextView.swift; sourceTree = "<group>"; };
 		221EC22F2105B1900059F856 /* TitleTextfieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTextfieldView.xib; sourceTree = "<group>"; };
 		221EC2312105B1910059F856 /* GrowSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrowSectionView.swift; sourceTree = "<group>"; };
@@ -15574,6 +15586,27 @@
 			path = ImageShare;
 			sourceTree = "<group>";
 		};
+		221C6170213925910021C007 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				221C6179213926650021C007 /* Cells */,
+				221C6171213926570021C007 /* ETORecordListCoordinator.swift */,
+				221C6172213926570021C007 /* ETORecordListActions.swift */,
+				221C6173213926570021C007 /* ETORecordListViewController.swift */,
+				221C6174213926570021C007 /* ETORecordListReducers.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		221C6179213926650021C007 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				221C617A213926A50021C007 /* ETORecordCell.swift */,
+				221C617B213926A50021C007 /* ETORecordCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		221EC2302105B1910059F856 /* GrowContentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -22033,6 +22066,7 @@
 		7267DA0121350317004AF9AF /* ETO */ = {
 			isa = PBXGroup;
 			children = (
+				221C6170213925910021C007 /* Record */,
 				3BF5B7ED21352DD100E8BFC9 /* ETODetail */,
 				221C61672137FCB70021C007 /* ImageShare */,
 				7267DA0B21351933004AF9AF /* Views */,
@@ -33065,6 +33099,7 @@
 				733714BE2122D32500B2ED90 /* AddressCellView.xib in Resources */,
 				334F0C20FD029ABA79FC1F141026A0AB /* AccountAssetOperationsItemView.xib in Resources */,
 				66D4B960BFC33039549F7EF70D2866CA /* AccountOpenedOrdersView.xib in Resources */,
+				221C617D213926A50021C007 /* ETORecordCell.xib in Resources */,
 				46317E1E7CFDD19141FDE4C8D29D5E84 /* AccountPortfolioCell.xib in Resources */,
 				22BB2BC362DB5BB21C3699A31111523E /* AccountPortfolioCellView.xib in Resources */,
 				6A019F6EFC3FAEE49A5991F402E36143 /* AccountPortfolioView.xib in Resources */,
@@ -33652,6 +33687,7 @@
 				D6EF2CA9447A80749A341523EA37E613 /* AccessoryHorizentalView.swift in Sources */,
 				53079FD90D2B1B6BCB3863CB53111FAA /* Account.swift in Sources */,
 				B53165C099917599B9638053318C729A /* AccountAssetOperationView.swift in Sources */,
+				221C6176213926570021C007 /* ETORecordListActions.swift in Sources */,
 				305DB17562E3D02F04E0122C1C4674A4 /* AccountAssetOperationsItemView.swift in Sources */,
 				65A0AB87E09E879EFAFA04DBA6B15D3E /* AccountCoordinator.swift in Sources */,
 				C37CA15215CBB1B064E0514AB9D0EFE5 /* AccountOpenedOrdersView.swift in Sources */,
@@ -33706,6 +33742,7 @@
 				7267DA1621351D40004AF9AF /* ETOProjectView.swift in Sources */,
 				221EC2372105B1930059F856 /* GrowSectionView.swift in Sources */,
 				7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */,
+				221C6177213926570021C007 /* ETORecordListViewController.swift in Sources */,
 				3D856B5FBCBB3B250D34CFA99756374F /* Button.swift in Sources */,
 				9CFD97FEB32C00C8359B325D39F04494 /* CBBOLLModel.swift in Sources */,
 				901F7EEB7579A06B661DD96529FC25E2 /* CBEMAModel.swift in Sources */,
@@ -33776,6 +33813,7 @@
 				F6AF1D76C51578A4EC2438427711F783 /* FAQViewController.swift in Sources */,
 				8691BEEE7629D4BE41D13D82D9AF29A9 /* GradientLabelView.swift in Sources */,
 				FF9F0639B5927B79A3EFC30AF470DE97 /* GradientLayer.swift in Sources */,
+				221C6175213926570021C007 /* ETORecordListCoordinator.swift in Sources */,
 				9FFDE7661D05B455AFBA92F553A193FC /* GraphQLAPI.swift in Sources */,
 				BDFF205572EB31DAD4702C934B9A81D1 /* GraphQLManager.swift in Sources */,
 				CA894F0EB69EF4448C0142CE0BE7D9C5 /* HistoryApi.swift in Sources */,
@@ -33935,6 +33973,7 @@
 				72199D6921044FD100575226 /* RechargeRecodeReducers.swift in Sources */,
 				4E2B0C9A04FD5D11C7AFA4CC9DF8492F /* TradeCoordinator.swift in Sources */,
 				E549F16D59025C0BE00C28BFA24C9E0D /* TradeHistoryActions.swift in Sources */,
+				221C6178213926570021C007 /* ETORecordListReducers.swift in Sources */,
 				B4125FF4D7849714DA71E04BC6D888AB /* TradeHistoryCell.swift in Sources */,
 				1004CC5E6B42E88C009CBF159D123279 /* TradeHistoryCellView.swift in Sources */,
 				12AE5E9B9597FDA9EB27559DFCF073C7 /* TradeHistoryCoordinator.swift in Sources */,
@@ -33950,6 +33989,7 @@
 				72D9DD58210EB60F00963915 /* Periscope.swift in Sources */,
 				640657C00CD9588E73E0F0280F245348 /* TradeRootCoordinator.swift in Sources */,
 				7217B07F2122AAFD00608531 /* AddAddressReducers.swift in Sources */,
+				221C617C213926A50021C007 /* ETORecordCell.swift in Sources */,
 				7386F2B121216B2200ABC924 /* TransferAddressHomeViewController.swift in Sources */,
 				7267DA0721350327004AF9AF /* ETOActions.swift in Sources */,
 				3B0EB65C210313B200F19C31 /* YourPortfolioHeadView.swift in Sources */,
