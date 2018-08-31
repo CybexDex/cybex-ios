@@ -10,8 +10,9 @@ import UIKit
 import ReSwift
 
 protocol SettingCoordinatorProtocol {
-  func openSettingDetail(type:settingPage)
-  func dismiss()
+    func openSettingDetail(type:settingPage)
+    func dismiss()
+    func openHelpWebView()
 }
 
 protocol SettingStateManagerProtocol {
@@ -37,17 +38,24 @@ class SettingCoordinator: AccountRootCoordinator {
 }
 
 extension SettingCoordinator: SettingCoordinatorProtocol {
-  func dismiss() {
-    self.rootVC.popToRootViewController(animated: true)
-  }
-  
-  func openSettingDetail(type:settingPage) {
-    let vc = R.storyboard.main.settingDetailViewController()!
-    vc.pageType = type
-    let coordinator = SettingDetailCoordinator(rootVC: self.rootVC)
-    vc.coordinator = coordinator
-    self.rootVC.pushViewController(vc, animated: true)
-  }
+    func dismiss() {
+        self.rootVC.popToRootViewController(animated: true)
+    }
+    
+    func openSettingDetail(type:settingPage) {
+        let vc = R.storyboard.main.settingDetailViewController()!
+        vc.pageType = type
+        let coordinator = SettingDetailCoordinator(rootVC: self.rootVC)
+        vc.coordinator = coordinator
+        self.rootVC.pushViewController(vc, animated: true)
+    }
+    
+    func openHelpWebView() {
+        if let vc = R.storyboard.main.cybexWebViewController() {
+            vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
+            self.rootVC.pushViewController(vc ,animated: true)
+        }
+    }
 }
 
 extension SettingCoordinator: SettingStateManagerProtocol {

@@ -38,7 +38,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qd0-zi-nRM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="135" y="754"/>
+            <point key="canvasLocation" x="75" y="1353"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="h4u-Pj-qgP">
@@ -55,7 +55,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XEv-8w-Nao" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
-                                                <rect key="frame" x="13" y="0.0" width="294" height="144"/>
+                                                <rect key="frame" x="13" y="0.0" width="294" height="192"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpo-dn-0FV" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="294" height="48"/>
@@ -89,8 +89,11 @@
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJ6-Af-LNN" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="96" width="294" height="48"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="48" id="n6f-q7-YcC"/>
+                                                        </constraints>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                                                 <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </userDefinedRuntimeAttribute>
@@ -100,18 +103,36 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="version"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4b-wr-Ums" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="144" width="294" height="48"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="48" id="KLe-Z3-Lii"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                                <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="setting_help"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="fpo-dn-0FV" firstAttribute="leading" secondItem="XEv-8w-Nao" secondAttribute="leading" id="F2W-uH-vPQ"/>
                                                     <constraint firstAttribute="trailing" secondItem="fpo-dn-0FV" secondAttribute="trailing" id="Gng-ko-80O"/>
                                                     <constraint firstAttribute="trailing" secondItem="XCO-l7-dlp" secondAttribute="trailing" id="JGJ-Ez-idh"/>
+                                                    <constraint firstItem="b4b-wr-Ums" firstAttribute="top" secondItem="qJ6-Af-LNN" secondAttribute="bottom" id="JuA-qL-S4Y"/>
                                                     <constraint firstAttribute="trailing" secondItem="qJ6-Af-LNN" secondAttribute="trailing" id="LIS-RD-E4z"/>
                                                     <constraint firstItem="fpo-dn-0FV" firstAttribute="top" secondItem="XEv-8w-Nao" secondAttribute="top" id="XJm-dj-X9U"/>
-                                                    <constraint firstAttribute="bottom" secondItem="qJ6-Af-LNN" secondAttribute="bottom" id="fRe-Vh-fXl"/>
+                                                    <constraint firstAttribute="trailing" secondItem="b4b-wr-Ums" secondAttribute="trailing" id="a7h-Xe-3n3"/>
+                                                    <constraint firstItem="b4b-wr-Ums" firstAttribute="leading" secondItem="XEv-8w-Nao" secondAttribute="leading" id="bOr-y1-U69"/>
                                                     <constraint firstItem="qJ6-Af-LNN" firstAttribute="top" secondItem="XCO-l7-dlp" secondAttribute="bottom" id="fqe-uO-eGN"/>
-                                                    <constraint firstAttribute="height" constant="144" id="lSL-dh-3KZ"/>
                                                     <constraint firstItem="XCO-l7-dlp" firstAttribute="leading" secondItem="XEv-8w-Nao" secondAttribute="leading" id="rQR-hG-DUN"/>
                                                     <constraint firstItem="XCO-l7-dlp" firstAttribute="top" secondItem="fpo-dn-0FV" secondAttribute="bottom" id="tTo-zw-fVD"/>
+                                                    <constraint firstAttribute="bottom" secondItem="b4b-wr-Ums" secondAttribute="bottom" id="vvW-DZ-eIi"/>
                                                     <constraint firstItem="qJ6-Af-LNN" firstAttribute="leading" secondItem="XEv-8w-Nao" secondAttribute="leading" id="y9C-jh-3w8"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
@@ -139,7 +160,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbw-NE-dXd" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
-                                                <rect key="frame" x="13" y="156" width="294" height="48"/>
+                                                <rect key="frame" x="13" y="204" width="294" height="48"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCU-kq-OIy" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="294" height="48"/>
@@ -248,6 +269,7 @@
                     </view>
                     <connections>
                         <outlet property="frequency" destination="XCO-l7-dlp" id="opC-U4-ZSZ"/>
+                        <outlet property="help" destination="b4b-wr-Ums" id="JbK-z3-uO3"/>
                         <outlet property="language" destination="fpo-dn-0FV" id="qK3-Uw-ek3"/>
                         <outlet property="logoutView" destination="KDV-f5-Nyx" id="eNz-cM-cyG"/>
                         <outlet property="theme" destination="OCU-kq-OIy" id="9Zs-kp-2pU"/>
@@ -1091,6 +1113,21 @@ Cg
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghi-v2-DbO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-529" y="2878"/>
+        </scene>
+        <!--Cybex Web View Controller-->
+        <scene sceneID="arU-c8-cED">
+            <objects>
+                <viewController storyboardIdentifier="CybexWebViewController" id="O2X-Ky-lKp" customClass="CybexWebViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="G4h-hY-oDb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Vq2-qx-MtQ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mg3-Nu-aen" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-555" y="3596"/>
         </scene>
         <!--Notice Board View Controller-->
         <scene sceneID="NxD-DC-FlH">

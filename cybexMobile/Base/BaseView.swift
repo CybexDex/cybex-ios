@@ -131,11 +131,6 @@ class BaseView: UIControl {
         return lastView?.bottom ?? 0
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layoutIfNeeded()
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()

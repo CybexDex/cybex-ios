@@ -222,6 +222,7 @@
 "trade_history_total" = "Total";
 
 "setting_language"    = "English";
+"setting_help" = "Help&Feedback";
 
 "mark_order_book"     = "Order Book";
 "mark_trade_history"  = "Trade History";
