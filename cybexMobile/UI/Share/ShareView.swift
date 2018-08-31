@@ -150,10 +150,6 @@ class ShareView: UIView {
 }
 
 extension ShareView: GridContentViewDelegate,GridContentViewDataSource {
-    func itemSizeForView(_ view: GridContentView) -> CGSize {
-        return CGSize(width: 48, height: 48)
-    }
-    
     func itemDidSelect(_ view: GridContentView, index: NSInteger) {
         
     }
@@ -163,11 +159,11 @@ extension ShareView: GridContentViewDelegate,GridContentViewDataSource {
     }
     
     func lineMaxItemNum(_ view: GridContentView) -> Int {
-        return 3
+        return 4
     }
     
     func edgeInsetsForView(_ view: GridContentView) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(30, 25, 30, 25)
+        return UIEdgeInsetsMake(30, 0, 30, 0)
     }
     
 }

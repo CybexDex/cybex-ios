@@ -1299,6 +1299,35 @@ Cg
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gme-5j-eUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--Image Share View Controller-->
+        <scene sceneID="Bqp-tx-VEK">
+            <objects>
+                <viewController storyboardIdentifier="ImageShareViewController" id="ItF-X9-eCg" customClass="ImageShareViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wGC-nU-PrH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xRq-Yu-GzR">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xRq-Yu-GzR" firstAttribute="leading" secondItem="xhd-fb-wtZ" secondAttribute="leading" id="5u2-rW-4CS"/>
+                            <constraint firstItem="xhd-fb-wtZ" firstAttribute="bottom" secondItem="xRq-Yu-GzR" secondAttribute="bottom" id="Mos-7L-izp"/>
+                            <constraint firstItem="xhd-fb-wtZ" firstAttribute="trailing" secondItem="xRq-Yu-GzR" secondAttribute="trailing" id="ctR-E7-2Mc"/>
+                            <constraint firstItem="xRq-Yu-GzR" firstAttribute="top" secondItem="xhd-fb-wtZ" secondAttribute="top" id="sxW-Fv-SP2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xhd-fb-wtZ"/>
+                    </view>
+                    <connections>
+                        <outlet property="imgContentView" destination="xRq-Yu-GzR" id="eIs-BC-ZAz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RbK-Ld-fO7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="682.5" y="111.97183098591549"/>
+        </scene>
     </scenes>
     <resources>
         <image name="check_complete" width="24" height="24"/>
