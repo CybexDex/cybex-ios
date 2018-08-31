@@ -13,7 +13,8 @@ import ReSwift
 
 class ETORecordListViewController: BaseViewController {
 
-	var coordinator: (ETORecordListCoordinatorProtocol & ETORecordListStateManagerProtocol)?
+    @IBOutlet weak var recordTableView: UITableView!
+    var coordinator: (ETORecordListCoordinatorProtocol & ETORecordListStateManagerProtocol)?
 
 	override func viewDidLoad() {
         super.viewDidLoad()
