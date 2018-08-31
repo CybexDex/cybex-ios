@@ -15,8 +15,6 @@ import Foundation
 @objc protocol GridContentViewDataSource: NSObjectProtocol {
     func itemsForView(_  view: GridContentView) -> [UIView]
     
-    func itemSizeForView(_ view: GridContentView) -> CGSize
-    
     @objc optional func edgeInsetsForView(_  view: GridContentView) -> UIEdgeInsets
     
     @objc optional func lineGapForView(_ view: GridContentView) -> CGFloat
@@ -65,7 +63,7 @@ class GridContentView: UIView {
             for row in 0 ..< rows {
                 let lineView = UIStackView(frame: CGRect.zero)
                 lineView.axis = .horizontal
-                lineView.distribution = .equalSpacing
+                lineView.distribution = .fillEqually
                 lineView.alignment = .fill
                 contentView.addArrangedSubview(lineView)
                 
@@ -103,7 +101,7 @@ class GridContentView: UIView {
                 self.lineNum = dataSource.lineMaxItemNum!(self)
             }
             
-            self.itemSize = dataSource.itemSizeForView(self)
+            
             self.collectionViews = dataSource.itemsForView(self)
         }
     }
