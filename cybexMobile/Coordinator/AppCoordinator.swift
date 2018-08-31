@@ -63,9 +63,15 @@ class AppCoordinator {
     init(rootVC: BaseTabbarViewController) {
         self.rootVC = rootVC
         
-        rootVC.didHijackHandler = { (tab, vc, index) in
-            vc.refreshViewController()
+        rootVC.shouldHijackHandler = {[weak self] (tab, vc, index) in
+            guard let `self` = self else { return false }
+            if self.rootVC.selectedIndex == index, let nav = vc as? BaseNavigationController {
+                nav.topViewController?.refreshViewController()
+            }
+            
+            return false
         }
+
     }
     
     func start() {

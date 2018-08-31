@@ -33,6 +33,11 @@ class CBTabBarView: ESTabBarItemContentView {
     completion?()
   }
   
+    override func deselectAnimation(animated: Bool, completion: (() -> ())?) {
+        super.deselectAnimation(animated: animated, completion: completion)
+        
+    }
+    
   override func reselectAnimation(animated: Bool, completion: (() -> ())?) {
     bounceAnimation()
     completion?()
