@@ -73,6 +73,9 @@
 		221C6178213926570021C007 /* ETORecordListReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C6174213926570021C007 /* ETORecordListReducers.swift */; };
 		221C617C213926A50021C007 /* ETORecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C617A213926A50021C007 /* ETORecordCell.swift */; };
 		221C617D213926A50021C007 /* ETORecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C617B213926A50021C007 /* ETORecordCell.xib */; };
+		221C6181213940140021C007 /* ETORecordListViewViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C617E213940140021C007 /* ETORecordListViewViewAdapter.swift */; };
+		221C6182213940140021C007 /* ETORecordListViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C617F213940140021C007 /* ETORecordListViewView.swift */; };
+		221C6183213940140021C007 /* ETORecordListViewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C6180213940140021C007 /* ETORecordListViewView.xib */; };
 		221EC2352105B1930059F856 /* TitleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC22E2105B18F0059F856 /* TitleTextView.swift */; };
 		221EC2362105B1930059F856 /* TitleTextfieldView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221EC22F2105B1900059F856 /* TitleTextfieldView.xib */; };
 		221EC2372105B1930059F856 /* GrowSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221EC2312105B1910059F856 /* GrowSectionView.swift */; };
@@ -2243,6 +2246,9 @@
 		221C6174213926570021C007 /* ETORecordListReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETORecordListReducers.swift; sourceTree = "<group>"; };
 		221C617A213926A50021C007 /* ETORecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETORecordCell.swift; sourceTree = "<group>"; };
 		221C617B213926A50021C007 /* ETORecordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETORecordCell.xib; sourceTree = "<group>"; };
+		221C617E213940140021C007 /* ETORecordListViewViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETORecordListViewViewAdapter.swift; sourceTree = "<group>"; };
+		221C617F213940140021C007 /* ETORecordListViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETORecordListViewView.swift; sourceTree = "<group>"; };
+		221C6180213940140021C007 /* ETORecordListViewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETORecordListViewView.xib; sourceTree = "<group>"; };
 		221EC22E2105B18F0059F856 /* TitleTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTextView.swift; sourceTree = "<group>"; };
 		221EC22F2105B1900059F856 /* TitleTextfieldView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTextfieldView.xib; sourceTree = "<group>"; };
 		221EC2312105B1910059F856 /* GrowSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrowSectionView.swift; sourceTree = "<group>"; };
@@ -15632,6 +15638,9 @@
 			children = (
 				221C617A213926A50021C007 /* ETORecordCell.swift */,
 				221C617B213926A50021C007 /* ETORecordCell.xib */,
+				221C617E213940140021C007 /* ETORecordListViewViewAdapter.swift */,
+				221C617F213940140021C007 /* ETORecordListViewView.swift */,
+				221C6180213940140021C007 /* ETORecordListViewView.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -33381,6 +33390,7 @@
 				728C157B2129AEA400053555 /* CybexShowTitleView.xib in Resources */,
 				564933AA201BA7D916E7B2AABAE742F8 /* unordered_map in Resources */,
 				998269579E4C8DE1F4556D259DFBDAB5 /* unordered_map.SUNWCCh in Resources */,
+				221C6183213940140021C007 /* ETORecordListViewView.xib in Resources */,
 				221EC2362105B1930059F856 /* TitleTextfieldView.xib in Resources */,
 				6084C2B0324022A0F68E124354424AFB /* unordered_set in Resources */,
 				99D6E2448ABDF3B06D193E29E801F4CD /* unordered_set.SUNWCCh in Resources */,
@@ -34011,6 +34021,7 @@
 				10F92CEABF192DAC227A5005DD4F12BF /* RechargeDetailActions.swift in Sources */,
 				133E7DE8927D9AD19315D14E638939BE /* RechargeDetailCoordinator.swift in Sources */,
 				D1C63B5AAC5552A99528E306AC7F57E0 /* RechargeDetailReducers.swift in Sources */,
+				221C6181213940140021C007 /* ETORecordListViewViewAdapter.swift in Sources */,
 				EEC52B0701FDE9B489D4D61193C9B420 /* RechargeDetailViewController.swift in Sources */,
 				221EC251210609A10059F856 /* TransferView.swift in Sources */,
 				10F005E5213C8CAD146ED273B0CDF11F /* RechargeItemView.swift in Sources */,
@@ -34097,6 +34108,7 @@
 				225746E02107089A0017FA1A /* PickerRootCoordinator.swift in Sources */,
 				C2728D465891E65690FBF4E868796852 /* UIView+Extensions.swift in Sources */,
 				01D3990C8F03B94C2207F37FF3C7C895 /* UIViewController+Extension.swift in Sources */,
+				221C6182213940140021C007 /* ETORecordListViewView.swift in Sources */,
 				696EB2454DD46A9C497C7C719B12BF12 /* UserDefaults.swift in Sources */,
 				73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */,
 				73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */,
