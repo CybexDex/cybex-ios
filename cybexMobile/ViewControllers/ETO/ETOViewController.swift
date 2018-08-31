@@ -36,7 +36,7 @@ class ETOViewController: BaseViewController {
     }
     
     func setupUI() {
-        self.navigationController?.navigationItem.title = R.string.localizable.hot_project.key.localized()
+        self.navigationItem.title = R.string.localizable.hot_project.key.localized()
         configRightNavButton(R.image.ic_records_24_px())
         self.homeView.fetchAlphaProgress()
     }
