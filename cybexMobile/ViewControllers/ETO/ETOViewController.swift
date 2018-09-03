@@ -30,6 +30,14 @@ class ETOViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.homeView.fetchAlphaProgress()
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.isTranslucent = false
+        if let naviVC = self.navigationController as? BaseNavigationController {
+            naviVC.setNavigationBarStyleAction()
+        }
+    }
     
     override func refreshViewController() {
         
@@ -84,7 +92,7 @@ class ETOViewController: BaseViewController {
     }
     
     func transferNavigationBar(_ alpha : CGFloat) {
-        self.navigationController?.navigationBar.isTranslucent = alpha > 0.9 ? false : true
+        self.navigationController?.navigationBar.isTranslucent = alpha > 1 ? false : true
         if ThemeManager.currentThemeIndex == 0 {
             let image = UIImage.init(color: UIColor.dark.withAlphaComponent(alpha))
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.paleGrey.withAlphaComponent(alpha)]

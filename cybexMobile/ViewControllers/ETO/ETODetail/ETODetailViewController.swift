@@ -88,4 +88,8 @@ extension ETODetailViewController {
     @objc func clickCellView(_ data: [String: Any]) {
         
     }
+    
+    @objc func crowdPage(_ data : [String:Any]) {
+        self.coordinator?.openETOCrowdVC()
+    }
 }

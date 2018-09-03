@@ -38,6 +38,7 @@ class AddAddressView: UIView {
             else if let address = data as? TransferAddress {
                 self.address.content.text = address.address
                 self.mark.content.text = address.name
+                
             }
         }
     }

@@ -57,7 +57,10 @@ extension ETOCoordinator: ETOCoordinatorProtocol {
     }
     
     func openProjectHistroy() {
-//        if let vc = R.storyboard.main.
+        if let vc = R.storyboard.main.etoRecordListViewController() {
+            vc.coordinator = ETORecordListCoordinator(rootVC: self.rootVC)
+            self.rootVC.pushViewController(vc, animated: true)
+        }
     }
 }
 

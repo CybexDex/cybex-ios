@@ -38,6 +38,14 @@ class BaseNavigationController: UINavigationController {
         }
         self.navigationBar.tintColor = #colorLiteral(red: 0.5436816812, green: 0.5804407597, blue: 0.6680644155, alpha: 1)
         
+        self.setNavigationBarStyleAction()
+        //    self.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "ic_arrow_back_16px")
+        //    self.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "ic_arrow_back_16px")
+        addNotification()
+        
+    }
+    
+    func setNavigationBarStyleAction() {
         if ThemeManager.currentThemeIndex == 0 {
             let image = UIImage.init(color: UIColor.dark)
             self.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.paleGrey]
@@ -50,10 +58,6 @@ class BaseNavigationController: UINavigationController {
             self.navigationBar.setBackgroundImage(image, for: .default)
             
         }
-        //    self.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "ic_arrow_back_16px")
-        //    self.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "ic_arrow_back_16px")
-        addNotification()
-        
     }
     
     func addNotification() {

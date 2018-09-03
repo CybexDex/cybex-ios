@@ -12,11 +12,11 @@ import RxCocoa
 import ReSwift
 
 class ETORecordListViewController: BaseViewController {
-
+    
     @IBOutlet weak var recordTableView: UITableView!
     var coordinator: (ETORecordListCoordinatorProtocol & ETORecordListStateManagerProtocol)?
-
-	override func viewDidLoad() {
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         setupData()
@@ -35,7 +35,7 @@ class ETORecordListViewController: BaseViewController {
     func setupUI() {
         
     }
-
+    
     func setupData() {
         
     }
@@ -57,20 +57,20 @@ class ETORecordListViewController: BaseViewController {
 //    }
 //
 //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//          let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.<#cell#>.name, for: indexPath) as! <#cell#>
+//        let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.<#cell#>.name, for: indexPath) as! <#cell#>
 //
 //        return cell
 //    }
 //}
 
 
-//MARK: - View Event
 
-//extension ETORecordListViewController {
+
+extension ETORecordListViewController {
 //    @objc func <#view#>DidClicked(_ data:[String: Any]) {
 //        if let addressdata = data["data"] as? <#model#>, let view = data["self"] as? <#view#>  {
 //
 //        }
 //    }
-//}
+}
 

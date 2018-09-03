@@ -27,6 +27,7 @@ class ETODetailView: BaseView {
         case crowdPage
         case icoapePage
         case unlockPage
+        
     }
         
     override func setup() {
@@ -138,6 +139,8 @@ class ETODetailView: BaseView {
         agreeButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] touch in
             guard let `self` = self else { return }
             self.agreeButton.isSelected = !self.agreeButton.isSelected
+            self.next?.sendEventWith(Event.crowdPage.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     

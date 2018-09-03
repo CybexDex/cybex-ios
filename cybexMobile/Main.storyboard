@@ -1364,7 +1364,6 @@ Cg
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RbK-Ld-fO7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-
             <point key="canvasLocation" x="1044" y="2887"/>
         </scene>
         <!--Record List View Controller-->
