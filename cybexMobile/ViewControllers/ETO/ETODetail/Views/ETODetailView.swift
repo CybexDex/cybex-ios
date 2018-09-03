@@ -21,12 +21,15 @@ class ETODetailView: BaseView {
     @IBOutlet weak var websiteView: ETODetailIntroView!
     @IBOutlet weak var headerView: ETODetailHeaderView!
     
+    
+    fileprivate var action : ETOJoinButtonAction?
     enum Event:String {
         case ETODetailViewDidClicked
         case inputCode
         case crowdPage
         case icoapePage
         case unlockPage
+        
     }
         
     override func setup() {
@@ -37,6 +40,7 @@ class ETODetailView: BaseView {
     }
     
     func setupUI() {
+        clearBgColor()
         getWhiteListView.rightIcon.image = R.image.icwhitelist()
         getWhiteListView.name.textColor = UIColor.pastelOrange
         getJoinButtonState()
@@ -66,13 +70,7 @@ class ETODetailView: BaseView {
         stateButton.titleString = title
         updateClauseState(clauseState: clauseState)
         updateJoinButton(style: style)
-        
-        if let action = action {
-            stateButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] touch in
-                guard let `self` = self else { return }
-                self.next?.sendEventWith(action.rawValue, userinfo: [:])
-                }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        }
+        self.action = action
     }
     
     func updateJoinButton(style: ETOJoinButtonStyle) {
@@ -134,9 +132,17 @@ class ETODetailView: BaseView {
     }
     
     func setupSubViewEvent() {
+        stateButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] touch in
+            guard let `self` = self else { return }
+            guard let action =  self.action else { return }
+            self.next?.sendEventWith(action.rawValue, userinfo: [:])
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
         agreeButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] touch in
             guard let `self` = self else { return }
             self.agreeButton.isSelected = !self.agreeButton.isSelected
+            self.next?.sendEventWith(Event.crowdPage.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     

@@ -35,7 +35,12 @@ class ETODetailViewController: BaseViewController {
     }
     
     func setupUI() {
-        
+        self.localized_text = R.string.localizable.eto_project_detail.key.localizedContainer()
+        configRightNavButton(R.image.ic_share_24_px())
+    }
+    
+    override func rightAction(_ sender: UIButton) {
+        self.coordinator?.openShare()
     }
 
     func setupData() {
@@ -82,5 +87,9 @@ class ETODetailViewController: BaseViewController {
 extension ETODetailViewController {
     @objc func clickCellView(_ data: [String: Any]) {
         
+    }
+    
+    @objc func crowdPage(_ data : [String:Any]) {
+        self.coordinator?.openETOCrowdVC()
     }
 }

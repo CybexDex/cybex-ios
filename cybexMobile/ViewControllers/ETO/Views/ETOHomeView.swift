@@ -35,6 +35,7 @@ class ETOHomeView: BaseView {
     }
     
     func setupUI() {
+        clearBgColor()
         let cell_name = R.nib.etoProjectCell.name
         tableView.register(UINib.init(nibName: cell_name, bundle: nil), forCellReuseIdentifier: cell_name)
         if #available(iOS 11.0, *) {

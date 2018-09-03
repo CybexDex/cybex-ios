@@ -395,5 +395,7 @@
 "eto_available" = "可用余额 %@ %@";
 "eto_join" = "参与ETO";
 
+"eto_project_detail" = "项目详情";
+
 "eto_share" = "分享";
 "eto_records" = "ETO纪录";

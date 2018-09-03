@@ -33,6 +33,11 @@
                         <constraint firstAttribute="height" constant="54" id="gSJ-F3-ojz"/>
                         <constraint firstAttribute="width" constant="54" id="uKF-PF-cgQ"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="27"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rG-8U-sxA">
                     <rect key="frame" x="95" y="12" width="262" height="19.5"/>
@@ -73,7 +78,7 @@
                                     <real key="value" value="4"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                    <color key="value" red="0.078" green="0.089999999999999997" blue="0.122" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                     <color key="value" red="0.94099999999999995" green="0.94099999999999995" blue="0.94899999999999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

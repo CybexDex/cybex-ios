@@ -28,6 +28,15 @@ class ETOViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.homeView.fetchAlphaProgress()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.isTranslucent = false
+        if let naviVC = self.navigationController as? BaseNavigationController {
+            naviVC.setNavigationBarStyleAction()
+        }
     }
     
     override func refreshViewController() {
@@ -35,15 +44,14 @@ class ETOViewController: BaseViewController {
     }
     
     func setupUI() {
-        self.localized_text = R.string.localizable.hot_project.key.localizedContainer()
+        self.navigationItem.title = R.string.localizable.hot_project.key.localized()
         configRightNavButton(R.image.ic_records_24_px())
-        transferNavigationBar(0.0)
+        self.homeView.fetchAlphaProgress()
     }
     
     override func rightAction(_ sender: UIButton) {
-        
+        self.coordinator?.openProjectHistroy()
     }
-    
     
     func setupData() {
         fetchData()
@@ -84,7 +92,7 @@ class ETOViewController: BaseViewController {
     }
     
     func transferNavigationBar(_ alpha : CGFloat) {
-        self.navigationController?.navigationBar.isTranslucent = alpha > 0.9 ? false : true
+        self.navigationController?.navigationBar.isTranslucent = alpha > 1 ? false : true
         if ThemeManager.currentThemeIndex == 0 {
             let image = UIImage.init(color: UIColor.dark.withAlphaComponent(alpha))
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.paleGrey.withAlphaComponent(alpha)]
@@ -107,6 +115,10 @@ extension ETOViewController {
         if let progress = data["progress"] as? CGFloat {
             self.transferNavigationBar(progress)
         }
+    }
+    
+    @objc func ETOHomeBannerViewDidClicked(_ data:[String:Any]) {
+        self.coordinator?.openBanner()
     }
 }
 

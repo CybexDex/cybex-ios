@@ -12,7 +12,9 @@ import SwiftNotificationCenter
 
 protocol ETOCoordinatorProtocol {
     func openProjectItem()
-    func openETOCrowdVC()
+    func openBanner()
+    func openProjectHistroy()
+    
 }
 
 protocol ETOStateManagerProtocol {
@@ -44,13 +46,21 @@ class ETOCoordinator: ETORootCoordinator {
 
 extension ETOCoordinator: ETOCoordinatorProtocol {
     func openProjectItem() {
+        if let vc = R.storyboard.etoDetail.etoDetailViewController() {
+            vc.coordinator = ETODetailCoordinator(rootVC: self.rootVC)
+            self.rootVC.pushViewController(vc, animated: true)
+        }
     }
+    
+    func openBanner() {
         
-    func openETOCrowdVC() {
-        let vc = R.storyboard.etO.etoCrowdViewController()!
-        let coor = ETOCrowdCoordinator(rootVC: self.rootVC)
-        vc.coordinator = coor
-        self.rootVC.pushViewController(vc)
+    }
+    
+    func openProjectHistroy() {
+        if let vc = R.storyboard.main.etoRecordListViewController() {
+            vc.coordinator = ETORecordListCoordinator(rootVC: self.rootVC)
+            self.rootVC.pushViewController(vc, animated: true)
+        }
     }
 }
 

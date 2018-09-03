@@ -418,6 +418,8 @@
 
 "eto_available" = "Available %@ %@";
 "eto_join" = "Join in ETO";
+"eto_project_detail" = "Project Details";
+
 
 "eto_share" = "Share";
 "eto_records" = "ETO Records";
