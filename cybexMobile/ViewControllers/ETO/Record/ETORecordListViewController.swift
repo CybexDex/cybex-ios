@@ -33,7 +33,11 @@ class ETORecordListViewController: BaseViewController {
     }
     
     func setupUI() {
-        
+        self.title = R.string.localizable.eto_records.key.localized()
+
+        let nibString = R.nib.etoRecordCell.identifier
+        recordTableView.register(UINib.init(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
+        recordTableView.separatorStyle = .none
     }
     
     func setupData() {
@@ -49,20 +53,25 @@ class ETORecordListViewController: BaseViewController {
     }
 }
 
-//MARK: - TableViewDelegate
-
-//extension ETORecordListViewController: UITableViewDataSource, UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 10
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.<#cell#>.name, for: indexPath) as! <#cell#>
-//
-//        return cell
-//    }
-//}
-
+extension ETORecordListViewController: UITableViewDelegate,UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let nibString = String.init(describing:type(of: ETORecordCell()))
+        let cell = tableView.dequeueReusableCell(withIdentifier: nibString, for: indexPath) as! ETORecordCell
+        return cell
+    }
+}
 
 
 

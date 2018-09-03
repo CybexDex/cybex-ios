@@ -7,19 +7,20 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Unknown constraint types" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="191" id="KGk-i7-Jjw" customClass="ETORecordCell" customModule="cybexMobile" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="191"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ETORecordCell" id="KGk-i7-Jjw" customClass="ETORecordCell" customModule="cybexMobile" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="190.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sO-TJ-zvV">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sO-TJ-zvV">
                         <rect key="frame" x="13" y="12" width="294" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="TOG-tm-6DI"/>
@@ -30,41 +31,41 @@
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                <color key="value" name="white" red="1.000" green="1.000" blue="1.000" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYj-Ga-Apk">
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UYj-Ga-Apk">
                         <rect key="frame" x="13" y="36" width="294" height="20"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gf4-Gj-Rzb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" ambiguous="YES" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gf4-Gj-Rzb">
                                 <rect key="frame" x="282.5" y="0.0" width="11.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpk-oe-Xsd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpk-oe-Xsd">
                                 <rect key="frame" x="0.0" y="0.0" width="282.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
@@ -81,34 +82,34 @@
                             <constraint firstItem="hpk-oe-Xsd" firstAttribute="top" secondItem="UYj-Ga-Apk" secondAttribute="top" id="zwm-xs-vaS"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ySP-H1-1pd">
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ySP-H1-1pd">
                         <rect key="frame" x="13" y="56" width="294" height="20"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Drm-me-R4l">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" ambiguous="YES" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Drm-me-R4l">
                                 <rect key="frame" x="0.0" y="0.0" width="282.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoI-Uy-BJG">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" ambiguous="YES" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoI-Uy-BJG">
                                 <rect key="frame" x="282.5" y="0.0" width="11.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                                        <color key="value" name="steel" red="0.471" green="0.506" blue="0.604" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
@@ -127,24 +128,12 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="4sO-TJ-zvV" secondAttribute="trailing" constant="13" id="2RK-Hu-fub"/>
-                    <constraint firstItem="UYj-Ga-Apk" firstAttribute="top" secondItem="4sO-TJ-zvV" secondAttribute="bottom" id="DqH-yF-S08"/>
-                    <constraint firstAttribute="trailing" secondItem="UYj-Ga-Apk" secondAttribute="trailing" constant="13" id="EJ5-cF-j2e"/>
-                    <constraint firstItem="4sO-TJ-zvV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="JaU-og-3uh"/>
-                    <constraint firstItem="4sO-TJ-zvV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="Mce-hN-0Xf"/>
-                    <constraint firstItem="UYj-Ga-Apk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="Pyo-h1-VYL"/>
-                    <constraint firstItem="4sO-TJ-zvV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="SQ9-ow-eGn"/>
-                    <constraint firstAttribute="trailing" secondItem="4sO-TJ-zvV" secondAttribute="trailing" constant="13" id="Vqf-IT-iHO"/>
-                    <constraint firstAttribute="trailing" secondItem="ySP-H1-1pd" secondAttribute="trailing" constant="13" id="cly-oR-R8A"/>
-                    <constraint firstItem="ySP-H1-1pd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="dGM-gm-J6g"/>
-                    <constraint firstItem="4sO-TJ-zvV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="sOG-v4-YPg"/>
-                    <constraint firstItem="ySP-H1-1pd" firstAttribute="top" secondItem="UYj-Ga-Apk" secondAttribute="bottom" id="ynS-1W-71h"/>
+                    <constraint firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8i7-xW-r8D"/>
+                    <constraint firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="F3w-yL-LiY"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="34" y="127.5"/>
+            <point key="canvasLocation" x="34" y="62.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-    </resources>
 </document>
