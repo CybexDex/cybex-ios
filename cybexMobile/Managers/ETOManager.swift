@@ -99,7 +99,10 @@ class ETOManager {
     
     func getETOJoinButtonState() -> ETOJoinButtonState {
         let clause = getClauseState()
-        return .disable(title: "停止预约", style: .disable)
+//MARK: Test
+        return .normal(title: "立即众筹", style: .normal, action: .crowdPage)
+
+//        return .disable(title: "停止预约", style: .disable)
 
         switch clause {
         case .normal:
