@@ -56,6 +56,7 @@ def architecture
    pod 'AwaitKit'
    
    pod 'AsyncOperation'
+   pod 'URLNavigator'
 end
 
 def permission
