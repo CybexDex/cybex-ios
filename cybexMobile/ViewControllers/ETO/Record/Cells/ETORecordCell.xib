@@ -12,13 +12,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="191" id="KGk-i7-Jjw" customClass="ETORecordCell" customModule="cybexMobile" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="191"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ETORecordCell" id="KGk-i7-Jjw" customClass="ETORecordCell" customModule="cybexMobile" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="190.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+<<<<<<< HEAD
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PDR-7S-hbC" customClass="ETORecordListViewView" customModule="cybexMobile" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="60.5"/>
+=======
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sO-TJ-zvV">
                         <rect key="frame" x="13" y="12" width="294" height="24"/>
                         <constraints>
@@ -124,27 +128,26 @@
                             <constraint firstAttribute="bottom" secondItem="LoI-Uy-BJG" secondAttribute="bottom" id="l2N-Gw-zXV"/>
                             <constraint firstItem="Drm-me-R4l" firstAttribute="top" secondItem="ySP-H1-1pd" secondAttribute="top" id="w64-K1-RSe"/>
                         </constraints>
+>>>>>>> e431d4aef69cfdd5c6a87a6653ea77a148d00c6f
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="4sO-TJ-zvV" secondAttribute="trailing" constant="13" id="2RK-Hu-fub"/>
-                    <constraint firstItem="UYj-Ga-Apk" firstAttribute="top" secondItem="4sO-TJ-zvV" secondAttribute="bottom" id="DqH-yF-S08"/>
-                    <constraint firstAttribute="trailing" secondItem="UYj-Ga-Apk" secondAttribute="trailing" constant="13" id="EJ5-cF-j2e"/>
-                    <constraint firstItem="4sO-TJ-zvV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="JaU-og-3uh"/>
-                    <constraint firstItem="4sO-TJ-zvV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="Mce-hN-0Xf"/>
-                    <constraint firstItem="UYj-Ga-Apk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="Pyo-h1-VYL"/>
-                    <constraint firstItem="4sO-TJ-zvV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="SQ9-ow-eGn"/>
-                    <constraint firstAttribute="trailing" secondItem="4sO-TJ-zvV" secondAttribute="trailing" constant="13" id="Vqf-IT-iHO"/>
-                    <constraint firstAttribute="trailing" secondItem="ySP-H1-1pd" secondAttribute="trailing" constant="13" id="cly-oR-R8A"/>
-                    <constraint firstItem="ySP-H1-1pd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="dGM-gm-J6g"/>
-                    <constraint firstItem="4sO-TJ-zvV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="sOG-v4-YPg"/>
-                    <constraint firstItem="ySP-H1-1pd" firstAttribute="top" secondItem="UYj-Ga-Apk" secondAttribute="bottom" id="ynS-1W-71h"/>
+                    <constraint firstAttribute="bottom" secondItem="PDR-7S-hbC" secondAttribute="bottom" id="3D2-RG-R3B"/>
+                    <constraint firstItem="PDR-7S-hbC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8i7-xW-r8D"/>
+                    <constraint firstItem="PDR-7S-hbC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="F3w-yL-LiY"/>
+                    <constraint firstAttribute="trailing" secondItem="PDR-7S-hbC" secondAttribute="trailing" id="p9r-gZ-1Om"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="34" y="127.5"/>
+            <connections>
+                <outlet property="recordView" destination="PDR-7S-hbC" id="nBG-cj-hj0"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="62.5"/>
         </tableViewCell>
     </objects>
+<<<<<<< HEAD
+=======
     <resources>
     </resources>
+>>>>>>> e431d4aef69cfdd5c6a87a6653ea77a148d00c6f
 </document>

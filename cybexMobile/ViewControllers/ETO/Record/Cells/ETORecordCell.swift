@@ -9,7 +9,8 @@
 import UIKit
 
 class ETORecordCell: UITableViewCell {
-
+    @IBOutlet weak var recordView: ETORecordListViewView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
