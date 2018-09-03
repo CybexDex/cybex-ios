@@ -51,7 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    let file = FileDestination()
 //    file.logFileURL = URL(fileURLWithPath: "/tmp/swiftybeaver.log")
 //    log.addDestination(file)
-    
+    RichStyle.shared.start()
+
     self.window = UIWindow.init(frame: UIScreen.main.bounds)
     self.window?.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]
 
@@ -60,8 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     
 //    KingfisherManager.shared.defaultOptions = [.fromMemoryCacheOrRefresh]
-    
-    _ = RichStyle.init()
 
     window?.rootViewController = AppConfiguration.shared.appCoordinator.rootVC
     self.window?.makeKeyAndVisible()

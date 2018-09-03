@@ -560,3 +560,7 @@ struct WeakObject<T: AnyObject>: Equatable, Hashable {
         else { return 0 }
     }
 }
+
+func labelBaselineOffset(_ lineHeight:CGFloat, fontHeight:CGFloat) -> Float {
+   return ((lineHeight - lineHeight) / 4.0).float
+}
