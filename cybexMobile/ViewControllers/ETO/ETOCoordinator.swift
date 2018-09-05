@@ -84,6 +84,12 @@ extension ETOCoordinator: ETOStateManagerProtocol {
     }
     
     func fetchBannersData() {
-       
+        ETOMGService.request(target: ETOMGAPI.getBanner(), success: { (json) in
+            
+        }, error: { (error) in
+            
+        }) { (error) in
+            
+        }
     }
 }

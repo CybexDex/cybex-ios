@@ -17,8 +17,8 @@ enum CybexError: Error {
         switch self {
         case let .NetworkError(code):
             return code.desc()
-        case .ServiceHTTPError(_):
-            return "service 500"
+        case let .ServiceHTTPError(desc):
+            return desc
         case let .ServiceFriendlyError(_, desc):
             return desc
         }

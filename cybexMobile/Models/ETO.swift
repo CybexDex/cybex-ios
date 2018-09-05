@@ -27,7 +27,7 @@ struct ETOShortProjectStatusModel:HandyJSON {
     
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
-            self.finish_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.zzz'Z'")
+            self.finish_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
     }
 }
 
@@ -36,7 +36,7 @@ struct ETOUserModel:HandyJSON {
 }
 
 enum ETOTradeHistoryStatus:String, HandyJSONEnum {
-    case ok = "0"
+    case ok = ""
     
     case projectNotExist = "1"
     case userNotInWhiteList = "2"
@@ -93,13 +93,13 @@ struct ETOTradeHistoryModel: HandyJSON {
     var project_name: String = ""
     var ieo_type: ETOIEOType = .receive //receive: 参与ETO send: 到账成功
     var reason:ETOTradeHistoryStatus = .ok
-    var create_at:Date!
-    var token_count:Double = 0
+    var created_at:Date!
+    var token_count:String = ""
     var token:String = ""
     
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
-            self.create_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.zzz'Z'")
+            self.created_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
     }
 }
 

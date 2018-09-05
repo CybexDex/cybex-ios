@@ -14,11 +14,16 @@ func ETORecordListReducer(action:Action, state:ETORecordListState?) -> ETORecord
         
     switch action {
     case let action as ETORecordListFetchedAction:
-        if let model = [ETOTradeHistoryModel].deserialize(from: action.data["data"].arrayObject!)?.compactMap({ $0 }) {
-            state.data.accept(model)
+        if let model = [ETOTradeHistoryModel].deserialize(from: action.data.arrayObject!)?.compactMap({ $0 }) {
+            var appendModel = state.data.value
+            if action.add {
+                appendModel += model
+            }
+            else {
+                appendModel = model
+            }
+            state.data.accept(appendModel)
         }
-    case let action as PageStateAction:
-        state.pageState.accept(action.state)
     default:
         break
     }

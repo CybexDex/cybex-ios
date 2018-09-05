@@ -22,6 +22,7 @@ struct ETORecordListState: BaseState {
 
 struct ETORecordListFetchedAction: Action {
     var data: JSON
+    var add: Bool 
 }
 
 
