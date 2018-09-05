@@ -70,26 +70,20 @@ extension ETOCoordinator: ETOStateManagerProtocol {
     }
     
     func fetchProjectData() {
-        ETOMGService.request(target: ETOMGAPI.getProjects(offset: 0, limit: 4), success: { (json) in
-           if let projects = json.arrayValue.map({ (data)  in
-                ETOProjectModel.deserialize(from: data.dictionaryValue)
-           }) as? [ETOProjectModel] {
-            self.store.dispatch(FetchProjectModelAction(data:projects))
+        ETOMGService.request(target: ETOMGAPI.getProjects(offset: 0, limit: 4), success: { json in
+            if let projects = json.arrayValue.map({ (data)  in
+                ETOProjectModel.deserialize(from: data.dictionaryObject)
+            }) as? [ETOProjectModel] {
+                self.store.dispatch(FetchProjectModelAction(data:projects))
             }
-        }, error: { (errorCode, json) in
-            log.debug("errorCode : \(errorCode) json : \(json)")
-        }) { (moyeError) in
-            log.debug("moyeError : \(String(describing: moyeError.errorDescription))")
+        }, error: { (error) in
+            
+        }) { (error) in
+            
         }
     }
     
     func fetchBannersData() {
-        ETOMGService.request(target: ETOMGAPI.getBanner(), success: { (json) in
-            
-        }, error: { (errorCode, errorJson) in
-            
-        }) { (moyaError) in
-            
-        }
+       
     }
 }
