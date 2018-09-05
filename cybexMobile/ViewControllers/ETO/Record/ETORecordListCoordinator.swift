@@ -52,17 +52,20 @@ extension ETORecordListCoordinator: ETORecordListStateManagerProtocol {
     func fetchETORecord(_ page: Int, reason: PageLoadReason) {
         guard let name = UserManager.shared.name.value else { return }
         ETOMGService.request(target: .getUserTradeList(name: name, page: page, limit: 20), success: { (json) in
-            if json.arrayValue.count == 0 && reason != .manualLoadMore {
+            let data = json["data"]
+            
+            if data.arrayValue.count == 0 && reason != .manualLoadMore {
                 self.switchPageState(.noData)
             }
-            else if json.arrayValue.count < 20 {
+            else if data.arrayValue.count < 20 {
                 self.switchPageState(.noMore)
             }
-            else {
-                self.switchPageState(.normal(reason: reason))
-            }
             
-            self.store.dispatch(ETORecordListFetchedAction(data: json))
+            self.switchPageState(.normal(reason: reason))
+
+            let add = reason == .manualLoadMore
+            
+            self.store.dispatch(ETORecordListFetchedAction(data: data, add: add))
 
         }, error: { (error) in
             self.switchPageState(PageState.error(error: error, reason: reason))
