@@ -121,7 +121,7 @@ struct ETOProjectModel:HandyJSON {
     var adds_whitelist: String = ""
     var adds_whitelist__lang_en: String = ""
 
-    var status: String = "" // finish pre ok
+    var status: ProjectState? // finish pre ok
     var name: String = ""
     var receive_address: String = ""
     var current_percent:Double = 0
@@ -154,5 +154,50 @@ struct ETOProjectModel:HandyJSON {
         mapper <<<
             self.lock_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
     }
+}
 
+enum ProjectState : String ,HandyJSONEnum{
+    case finish = "finish"
+    case pre = "pre"
+    case ok = "ok"
+    
+    func description() -> String {
+        switch self {
+        case .finish:
+            return R.string.localizable.eto_project_finish.key.localized()
+        case .pre:
+            return R.string.localizable.eto_project_comming.key.localized()
+        case .ok:
+            return R.string.localizable.eto_project_progress.key.localized()
+        default:
+            return ""
+        }
+    }
+}
+
+
+struct ETOProjectViewModel {
+    
+    var icon: String = ""
+    var icon_en: String = ""
+    var name: String = ""
+    var key_words: String = ""
+    var key_words_en: String = ""
+    var status: String = ""
+    var current_percent: String = ""
+    var progress: Double = 0
+    var time: String = ""
+    var model: ETOProjectModel?
+    
+    init(_ projectModel : ETOProjectModel) {
+        self.model = projectModel
+        self.name = projectModel.name
+        self.key_words = projectModel.adds_keyword
+        self.key_words_en = projectModel.adds_keyword__lang_en
+        self.status = projectModel.status!.description()
+        self.current_percent = (projectModel.current_percent * 100).string(digits:0, roundingMode: .down) + "%"
+        self.progress = projectModel.current_percent
+        self.icon = projectModel.adds_logo_mobil
+        self.icon_en = projectModel.adds_logo_mobil__lang_en
+    }
 }
