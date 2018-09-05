@@ -413,6 +413,7 @@
 		73F50BA32137D71F0071B08D /* ETOCrowdGridItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */; };
 		73F50BA42137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50BA12137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift */; };
 		73F50BA8213D20B50071B08D /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50BA7213D20B50071B08D /* BaseLabel.swift */; };
+		73F50BAA213FB5B60071B08D /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50BA9213FB5B60071B08D /* Error.swift */; };
 		74270D4B512CD81AA7159B135F944B0A /* ExchangeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D294438F1AC7ABE633549FA9CD2FDF2 /* ExchangeView.xib */; };
 		751D31DB62BFC9F2FC1A0EFC4C23A801 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D9F26ADE20F5811273E4B32DED357 /* SettingViewController.swift */; };
 		762156C3AEB620F8C8A01F26B1F818AC /* ostream.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = 9173FC0B79DF4409B5715D23613E8F82 /* ostream.SUNWCCh */; };
@@ -6091,6 +6092,7 @@
 		73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdGridItemView.xib; sourceTree = "<group>"; };
 		73F50BA12137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemViewAdapter.swift; sourceTree = "<group>"; };
 		73F50BA7213D20B50071B08D /* BaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
+		73F50BA9213FB5B60071B08D /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		7401C47BEBBCCB83E20CF4CE5F502BA5 /* map_transformer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = map_transformer.hpp; sourceTree = "<group>"; };
 		740413BF73DBBAA191FD980F62B563BC /* modulus.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = modulus.hpp; sourceTree = "<group>"; };
 		741427D2934E98250BE7E24F86B1AD19 /* stack.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = stack.hpp; sourceTree = "<group>"; };
@@ -12540,6 +12542,7 @@
 			children = (
 				B3305C1C418372FA9FA71DED7DFCFA48 /* Constants.swift */,
 				FD800C4ACA7689CE7F307E184325A954 /* Style.swift */,
+				73F50BA9213FB5B60071B08D /* Error.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -33815,6 +33818,7 @@
 				56FC707000D714C2C1294918AFBB33B6 /* BusinessReducers.swift in Sources */,
 				B9DE00DA8B7EDD0F9BEA00881C4924C1 /* BusinessTitleCell.swift in Sources */,
 				3B0EB6642103150D00F19C31 /* AccountActions.swift in Sources */,
+				73F50BAA213FB5B60071B08D /* Error.swift in Sources */,
 				66A5DD971B80802DF72977E071CAB84D /* BusinessTitleItemView.swift in Sources */,
 				7307A925212518DC00BD6444 /* SwiftIconLabel.swift in Sources */,
 				72199D8D21045D4700575226 /* TransferListActions.swift in Sources */,

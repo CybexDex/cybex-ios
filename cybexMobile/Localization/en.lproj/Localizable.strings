@@ -420,6 +420,12 @@
 "eto_join" = "Join in ETO";
 "eto_project_detail" = "Project Details";
 
-
 "eto_share" = "Share";
 "eto_records" = "ETO Records";
+"eto_record_receive" = "Receive Token";
+"eto_record_send" = "Join ETO";
+
+"eto_invalid_sub" = "Invalid Subscription";
+"eto_invalid_partly_sub" = "Subscription partly invalid";
+"eto_refund" = "Refund";
+"eto_receive_success" = "Received";
