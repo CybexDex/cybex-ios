@@ -72,7 +72,7 @@ extension ETOCoordinator: ETOStateManagerProtocol {
     func fetchProjectData() {
         ETOMGService.request(target: ETOMGAPI.getProjects(offset: 0, limit: 4), success: { (json) in
            if let projects = json.arrayValue.map({ (data)  in
-                ETOProjectModel.deserialize(from: data.dictionaryValue)
+                ETOProjectModel.deserialize(from: data.dictionaryObject)
            }) as? [ETOProjectModel] {
             self.store.dispatch(FetchProjectModelAction(data:projects))
             }
