@@ -88,10 +88,10 @@ extension AppCoordinator: AppStateManagerProtocol {
         self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
       }
       
-//      let marketList = try! await(SimpleHTTPService.fetchMarketListJson())
-//      main { [weak self] in
-//        self?.store.dispatch(FecthMarketListAction(data: marketList))
-//      }
+      let marketList = try! await(SimpleHTTPService.fetchMarketListJson())
+      main { [weak self] in
+        self?.store.dispatch(FecthMarketListAction(data: marketList))
+      }
     }
     
     timer?.start()
@@ -248,10 +248,7 @@ extension AppCoordinator {
       if app_coodinator.fetchPariTimer == nil || !(app_coodinator.fetchPariTimer!.state.isRunning){
         AppConfiguration.shared.appCoordinator.repeatFetchPairInfo(.veryLow)
       }
-
-      
     }
-    
   }
 }
 

@@ -15,7 +15,6 @@ import SwiftTheme
 class ETOViewController: BaseViewController {
     
     var coordinator: (ETOCoordinatorProtocol & ETOStateManagerProtocol)?
-    
     @IBOutlet weak var homeView: ETOHomeView!
     
     override func viewDidLoad() {
@@ -23,30 +22,24 @@ class ETOViewController: BaseViewController {
         setupData()
         setupUI()
         setupEvent()
-        self.navigationController?.navigationBar.isTranslucent = true
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.homeView.fetchAlphaProgress()
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.navigationBar.isTranslucent = false
-        if let naviVC = self.navigationController as? BaseNavigationController {
-            naviVC.setNavigationBarStyleAction()
-        }
-    }
-    
+
     override func refreshViewController() {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchProjectData()
+    }
+    
     func setupUI() {
-        self.navigationItem.title = R.string.localizable.hot_project.key.localized()
+        setupNaviUI()
+    }
+    
+    func setupNaviUI() {
+        self.navigationItem.titleView = UIImageView(image: R.image.img_etologo())
         configRightNavButton(R.image.ic_records_24_px())
-        self.homeView.fetchAlphaProgress()
     }
     
     override func rightAction(_ sender: UIButton) {
@@ -54,23 +47,20 @@ class ETOViewController: BaseViewController {
     }
     
     func setupData() {
-        fetchData()
+//        fetchProjectData()
         fetchBannder()
     }
     
-    func fetchData() {
-        
+    func fetchProjectData() {
+        self.coordinator?.fetchProjectData()
     }
     
     func fetchBannder() {
-        
+        self.coordinator?.fetchBannersData()
     }
     
     func setupEvent() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] notification in
-            guard let `self` = self else { return }
-            self.homeView.fetchAlphaProgress()
-        })
+   
     }
     
     override func configureObserveState() {
@@ -90,31 +80,11 @@ class ETOViewController: BaseViewController {
             
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
-    
-    func transferNavigationBar(_ alpha : CGFloat) {
-        self.navigationController?.navigationBar.isTranslucent = alpha > 1 ? false : true
-        if ThemeManager.currentThemeIndex == 0 {
-            let image = UIImage.init(color: UIColor.dark.withAlphaComponent(alpha))
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.paleGrey.withAlphaComponent(alpha)]
-            self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-        }
-        else {
-            let image = UIImage.init(color:UIColor.paleGrey.withAlphaComponent(alpha))
-            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.dark.withAlphaComponent(alpha)]
-            self.navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-        }
-    }
 }
 
 extension ETOViewController {
     @objc func ETOProjectViewDidClicked(_ data:[String: Any]) {
         self.coordinator?.openProjectItem()
-    }
-    
-    @objc func ChangeNavigationBarEvent(_ data:[String:Any]) {
-        if let progress = data["progress"] as? CGFloat {
-            self.transferNavigationBar(progress)
-        }
     }
     
     @objc func ETOHomeBannerViewDidClicked(_ data:[String:Any]) {

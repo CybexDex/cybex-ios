@@ -81,5 +81,6 @@ class ExchangeView:UIView {
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
-  
 }
+
+

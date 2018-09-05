@@ -21,6 +21,8 @@ class ETOHomeBannerView: BaseView {
     }
         
     override func setup() {
+        self.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: String(describing: FSPagerViewCell.self))
+
         super.setup()
         
         setupUI()
@@ -29,14 +31,12 @@ class ETOHomeBannerView: BaseView {
     
     func setupUI() {
         self.setPagerViewStyle()
-
+        
         self.pagerControl.setFillColor(.paleGrey, for: .selected)
         self.pagerControl.setFillColor(.steel50, for: .normal)
     }
     
     func setPagerViewStyle() {
-        self.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: String(describing: FSPagerViewCell.self))
-
         self.pagerControl.contentHorizontalAlignment = .center
         self.pagerControl.numberOfPages = 5
         self.pagerControl.currentPage = 1

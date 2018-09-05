@@ -17,19 +17,16 @@ protocol Views {
 }
 
 @objc protocol ShowManagerDelegate {
-    func returnUserPassword(_ sender : String)
+    func returnUserPassword(_ sender: String)
     @objc func returnEnsureAction()
     @objc func returnEnsureImageAction()
     @objc func cancelImageAction(_ sender : CybexTextView)
 }
 
 class ShowToastManager {
-    
     static let durationTime : TimeInterval = 0.5
     static let shared = ShowToastManager()
-    
     var timer_time : TimeInterval = 0
-    
     var delegate:ShowManagerDelegate?
     
     var ensureClickBlock : CommonCallback!
@@ -107,7 +104,7 @@ class ShowToastManager {
     
     // 倒计时
     func startCountDown() {
-        
+
     }
     
     // MARK: 展示

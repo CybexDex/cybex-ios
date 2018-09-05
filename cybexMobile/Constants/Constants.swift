@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyUserDefaults
 
 typealias CommonCallback = () -> Void
 typealias CommonAnyCallback = (Any) -> Void
@@ -32,9 +33,9 @@ struct AppConfiguration {
     }
     
     static let APPID = ""
-    static let SERVER_BASE_URLString = "https://app.cybex.io/"
-    static let SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
-    static let GATEWAY_URLString = "https://gateway.cybex.io/gateway"
+    static var SERVER_BASE_URLString = "https://app.cybex.io/"
+    static var SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
+    static var GATEWAY_URLString = "https://gateway.cybex.io/gateway"
     static let ETO_MG_BASE_URLString = URL(string:"https://eto.cybex.io/api")!
     static let ETO_MG_BASE_TEST_URLString = URL(string:"https://ieo-apitest.cybex.io/api")!
     static let GATEWAY_ID = "CybexGateway" //CybexGatewayDev
@@ -66,6 +67,10 @@ struct AppConfiguration {
     
     static let HELP_NIGHT_URL = "http://47.75.154.39:3009/cybexnight?lang="
     static let HELP_LIGHT_URL = "http://47.75.154.39:3009/cybexday?lang="
+    
+    static let GATEWAY_TEST_URLStringa = "https://gatewaytest.cybex.io/gateway"
+    static let SERVER_REGISTER_BASE_TEST_URLString = "https://faucet.51nebula.com/"
+    static let SERVER_TEST_BASE_URLString = "http://47.91.242.71:3039/"
 }
 
 enum exchangeType {

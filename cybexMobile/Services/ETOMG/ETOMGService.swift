@@ -10,6 +10,7 @@ import Foundation
 import Moya
 import Alamofire
 import SwiftyJSON
+import SwiftyUserDefaults
 
 enum ETOMGAPI {
     case getBanner()
@@ -69,7 +70,10 @@ struct ETOMGService {
 
 extension ETOMGAPI : TargetType {
     var baseURL: URL {
-        return AppConfiguration.ETO_MG_BASE_TEST_URLString
+        if Defaults[.environment] == "test" {
+            return AppConfiguration.ETO_MG_BASE_TEST_URLString
+        }
+        return AppConfiguration.ETO_MG_BASE_URLString
     }
     
     var path: String {
@@ -106,7 +110,7 @@ extension ETOMGAPI : TargetType {
         switch self {
         case .getProjectDetail(let id):
             return ["project": id]
-        case .getProjects(let limit, let offset):
+        case .getProjects(let offset, let limit):
             return ["limit":limit, "offset": offset]
         case .refreshProject(let id):
             return ["project": id]

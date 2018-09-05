@@ -10,6 +10,7 @@ import Foundation
 import Localize_Swift
 import SwiftTheme
 import SwiftyJSON
+import SwiftyUserDefaults
 
 func getChainId(callback:@escaping(String)->()){
   if AppConfiguration.shared.chainID.isEmpty {
@@ -563,4 +564,20 @@ struct WeakObject<T: AnyObject>: Equatable, Hashable {
 
 func labelBaselineOffset(_ lineHeight:CGFloat, fontHeight:CGFloat) -> Float {
    return ((lineHeight - lineHeight) / 4.0).float
+}
+
+
+func changeEnvironmentAction() {
+    if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
+        AppConfiguration.SERVER_BASE_URLString = "https://app.cybex.io/"
+        AppConfiguration.SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
+        AppConfiguration.GATEWAY_URLString = "https://gateway.cybex.io/gateway"
+        Defaults[.environment] = ""
+    }
+    else {
+        AppConfiguration.SERVER_BASE_URLString = AppConfiguration.SERVER_TEST_BASE_URLString
+        AppConfiguration.SERVER_REGISTER_BASE_URLString = AppConfiguration.SERVER_REGISTER_BASE_TEST_URLString
+        AppConfiguration.GATEWAY_URLString = AppConfiguration.SERVER_TEST_BASE_URLString
+        Defaults[.environment] = "test"
+    }
 }
