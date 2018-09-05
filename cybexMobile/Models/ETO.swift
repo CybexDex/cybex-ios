@@ -59,7 +59,7 @@ enum ETOTradeHistoryStatus:String, HandyJSONEnum {
 struct ETOTradeHistoryModel: HandyJSON {
     var project_id:Int = 0
     var project_name: String = ""
-    var ieo_type: String = "" //receive: 参与ETO send: ETO发币
+    var ieo_type: String = "" //receive: 参与ETO send: 到账成功
     var reason:ETOTradeHistoryStatus = .ok
     var create_at:Date!
     var token_count:Double = 0
