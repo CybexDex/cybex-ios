@@ -10,12 +10,12 @@ import Foundation
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
-  static let theme = DefaultsKey<Int>("theme")
-  static let language = DefaultsKey<String>("language")
-  static let refreshTime = DefaultsKey<Double>("refreshTime")
-  static let frequency_type = DefaultsKey<Int>("frequency_type")
-  static let username = DefaultsKey<String>("com.nbltrust.cybex.username")
-  
-  static let transferAddressList = DefaultsKey<[TransferAddress]>("TransferAddressList")
-  static let withdrawAddressList = DefaultsKey<[WithdrawAddress]>("WithdrawAddressList")
+    static let theme = DefaultsKey<Int>("theme")
+    static let language = DefaultsKey<String>("language")
+    static let refreshTime = DefaultsKey<Double>("refreshTime")
+    static let frequency_type = DefaultsKey<Int>("frequency_type")
+    static let username = DefaultsKey<String>("com.nbltrust.cybex.username")
+    
+    static let transferAddressList = DefaultsKey<[TransferAddress]>("TransferAddressList")
+    static let withdrawAddressList = DefaultsKey<[WithdrawAddress]>("WithdrawAddressList")
 }
