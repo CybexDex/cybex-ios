@@ -32,11 +32,6 @@ class ETORecordListViewView: BaseView {
     }
     
     func setupUI() {
-        nameLabel.text = "Hash future"
-        actionLabel.text = "Join ETO"
-        amountLabel.text = "10 CYB"
-        timeLabel.text = "2018/12/28  12:09:50"
-        statusLabel.text = "Failed to receive"
     }
     
     func setupSubViewEvent() {

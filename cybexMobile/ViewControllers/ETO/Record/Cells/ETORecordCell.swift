@@ -8,18 +8,12 @@
 
 import UIKit
 
-class ETORecordCell: UITableViewCell {
+class ETORecordCell: BaseTableViewCell {
     @IBOutlet weak var recordView: ETORecordListViewView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func setup(_ data: Any?) {
+        if let data = data as? ETOTradeHistoryModel {
+            recordView.updateUI(data, handler: ETORecordListViewView.adapterModelToETORecordListViewView(recordView))
+        }
     }
-    
 }

@@ -40,8 +40,8 @@ struct ETOMGService {
     static func request(
         target: ETOMGAPI,
         success successCallback: @escaping (JSON) -> Void,
-        error errorCallback: @escaping (_ statusCode: Int, _ result: JSON) -> Void,
-        failure failureCallback: @escaping (MoyaError) -> Void
+        error errorCallback: @escaping (CybexError) -> Void,
+        failure failureCallback: @escaping (CybexError) -> Void
         ) {
         
         provider.request(target) { (result) in
@@ -55,14 +55,14 @@ struct ETOMGService {
                         successCallback(result)
                     }
                     else {
-                        errorCallback(json["code"].intValue, json["result"])
+                        errorCallback(CybexError.ServiceFriendlyError(code: json["code"].intValue, desc: json["result"].stringValue))
                     }
                 }
-                catch _ {
-                    errorCallback(99999, "")
+                catch let serverError {
+                    failureCallback(CybexError.ServiceHTTPError(desc: serverError.localizedDescription))
                 }
             case let .failure(error):
-                failureCallback(error)
+                failureCallback(CybexError.ServiceHTTPError(desc: error.localizedDescription))
             }
         }
     }

@@ -46,14 +46,6 @@
                                         <constraint firstAttribute="height" constant="214" id="fOg-7d-Rpt"/>
                                         <constraint firstItem="DL5-X1-LNf" firstAttribute="leading" secondItem="36T-Ad-HXP" secondAttribute="leading" constant="12" id="iiN-A8-DwL"/>
                                     </constraints>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                            <color key="value" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1UZ-Cs-q7C" customClass="ContainerView" customModule="cybexMobile" customModuleProvider="target">
                                     <rect key="frame" x="13" y="229" width="349" height="78"/>

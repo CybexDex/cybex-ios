@@ -36,7 +36,7 @@ struct ETOUserModel:HandyJSON {
 }
 
 enum ETOTradeHistoryStatus:String, HandyJSONEnum {
-    case ok = ""
+    case ok = "0"
     
     case projectNotExist = "1"
     case userNotInWhiteList = "2"
@@ -54,12 +54,44 @@ enum ETOTradeHistoryStatus:String, HandyJSONEnum {
     case moreThanAccuracy = "14"
     case transferWithLockup = "15"
     case fail = "101"
+    
+    func showTitle() -> String {
+        if let reason = self.rawValue.int {
+            switch reason {
+            case 1...11, 15:
+                return R.string.localizable.eto_invalid_sub.key.localized()
+            case 12...14:
+                return R.string.localizable.eto_invalid_partly_sub.key.localized()
+            case 16:
+                return R.string.localizable.eto_refund.key.localized()
+            default:
+                return R.string.localizable.eto_receive_success.key.localized()
+            }
+        }
+        else {
+            return R.string.localizable.eto_receive_success.key.localized()
+        }
+    }
+}
+
+enum ETOIEOType:String, HandyJSONEnum {
+    case receive
+    case send
+    
+    func showTitle() -> String {
+        switch self {
+        case .receive:
+            return R.string.localizable.eto_record_receive.key.localized()
+        case .send:
+            return R.string.localizable.eto_record_send.key.localized()
+        }
+    }
 }
 
 struct ETOTradeHistoryModel: HandyJSON {
     var project_id:Int = 0
     var project_name: String = ""
-    var ieo_type: String = "" //receive: 参与ETO send: ETO发币
+    var ieo_type: ETOIEOType = .receive //receive: 参与ETO send: 到账成功
     var reason:ETOTradeHistoryStatus = .ok
     var create_at:Date!
     var token_count:Double = 0

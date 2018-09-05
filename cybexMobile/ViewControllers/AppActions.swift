@@ -10,15 +10,60 @@ import Foundation
 import ReSwift
 import RxCocoa
 
-enum PageState {
+enum PageRefreshType: Int {
+    case initial = 0
+    case manual
+    
+    func mapReason() -> PageLoadReason {
+        switch self {
+        case .initial:
+            return .initialRefresh
+        case .manual:
+            return .manualRefresh
+        }
+    }
+}
+
+enum PageLoadReason: Int {
+    case initialRefresh = 0
+    case manualRefresh
+    case manualLoadMore
+}
+
+indirect enum PageState {
     case initial
-    case loading
-    case refreshing
-    case loadMore
+    case loading(reason: PageLoadReason)
+    case refresh(type: PageRefreshType)
+    case loadMore(page: Int)
     case noMore
     case noData
-    case normal
-    case error(Error)
+    case normal(reason: PageLoadReason)
+    case error(error: CybexError, reason: PageLoadReason)
+}
+
+extension PageState: Equatable {
+    static func == (lhs: PageState, rhs: PageState) -> Bool {
+        switch (lhs, rhs) {
+        case (.initial, .initial):
+            return true
+        case (.loading, .loading):
+            return true
+        case (.refresh(let lhsLast), .refresh(let rhsLast)):
+            return lhsLast == rhsLast
+        case (.loadMore(let lhsPage), .loadMore(let rhsPage)):
+            return lhsPage == rhsPage
+        case (.noMore, .noMore):
+            return true
+        case (.noData, .noData):
+            return true
+        case (.normal(let lhsLast), .normal(let rhsLast)):
+            return lhsLast == rhsLast
+        case (.error(let lhsError, _), .error(let rhsError, _)):
+            return lhsError == rhsError
+        default:
+            return false
+        }
+    }
 }
 
 protocol BaseState: StateType {

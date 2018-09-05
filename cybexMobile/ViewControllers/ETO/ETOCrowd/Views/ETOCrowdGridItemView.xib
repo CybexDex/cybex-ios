@@ -90,7 +90,17 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Yt8-U1-0Hn"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                    <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="-183.5" y="-533"/>
         </view>
     </objects>
+    <resources>
+    </resources>
 </document>

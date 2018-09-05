@@ -400,3 +400,11 @@
 
 "eto_share" = "分享";
 "eto_records" = "ETO纪录";
+"eto_record_receive" = "收到Token";
+"eto_record_send" = "参与ETO";
+
+"eto_invalid_sub" = "无效认购";
+"eto_invalid_partly_sub" = "部分无效";
+"eto_refund" = "退款";
+"eto_receive_success" = "到账成功";
+

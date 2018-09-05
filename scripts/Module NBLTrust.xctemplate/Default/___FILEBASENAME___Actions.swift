@@ -9,10 +9,14 @@
 import Foundation
 import ReSwift
 import RxCocoa
+import SwiftyJSON
 
 //MARK: - State
 struct ___VARIABLE_productName:identifier___State: BaseState {
-   var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 }
 
 //MARK: - Action
+struct ___VARIABLE_productName:identifier___FetchedAction: Action {
+    var data:JSON
+}
