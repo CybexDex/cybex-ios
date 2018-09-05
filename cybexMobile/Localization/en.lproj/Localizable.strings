@@ -24,6 +24,9 @@
 "version" = "Version";
 "frequency" = "Frequency";
 
+"environment" = "environment";
+
+
 "frequency_normal" = "Ordinary Market";
 "frequency_time" = "Real-time Market";
 "frequency_wifi" = "Real-time Market(WiFi Only)";

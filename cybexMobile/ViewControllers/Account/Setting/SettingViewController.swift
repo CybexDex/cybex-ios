@@ -17,6 +17,7 @@ import XLActionController
 
 class SettingViewController: BaseViewController {
     
+    @IBOutlet weak var environment: NormalCellView!
     
     @IBOutlet weak var help: NormalCellView!
     @IBOutlet weak var language: NormalCellView!
@@ -53,12 +54,11 @@ class SettingViewController: BaseViewController {
         version.content.text = Bundle.main.version
         theme.content_locali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key.localized() : R.string.localizable.light.key.localized()
         frequency.content_locali = UserManager.shared.frequency_type.description()
-        
     }
     
     
     func setupEvent() {
-        let itemsView = [language,frequency,version,help,theme]
+        let itemsView = [language,frequency,version,help,theme,environment]
         
         for itemView in itemsView {
             itemView?.rx.tapGesture().when(.ended).asObservable().subscribe(onNext: { [weak self](tap) in
@@ -85,8 +85,11 @@ class SettingViewController: BaseViewController {
         else if sender == help {
             self.coordinator?.openHelpWebView()
         }
-        else {
+        else if sender == theme {
             self.coordinator?.openSettingDetail(type: .theme)
+        }
+        else if sender == environment {
+            self.coordinator?.changeEnveronment()
         }
     }
     
@@ -144,7 +147,6 @@ extension SettingViewController {
         }))
         
         present(actionController, animated: true, completion: nil)
-        
     }
 }
 

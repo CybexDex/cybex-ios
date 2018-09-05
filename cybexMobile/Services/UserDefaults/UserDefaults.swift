@@ -18,4 +18,6 @@ extension DefaultsKeys {
     
     static let transferAddressList = DefaultsKey<[TransferAddress]>("TransferAddressList")
     static let withdrawAddressList = DefaultsKey<[WithdrawAddress]>("WithdrawAddressList")
+    
+    static let environment = DefaultsKey<String>("environment")
 }

@@ -248,10 +248,7 @@ extension AppCoordinator {
       if app_coodinator.fetchPariTimer == nil || !(app_coodinator.fetchPariTimer!.state.isRunning){
         AppConfiguration.shared.appCoordinator.repeatFetchPairInfo(.veryLow)
       }
-
-      
     }
-    
   }
 }
 

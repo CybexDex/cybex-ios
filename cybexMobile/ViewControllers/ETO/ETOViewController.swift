@@ -28,6 +28,11 @@ class ETOViewController: BaseViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchProjectData()
+    }
+    
     func setupUI() {
         setupNaviUI()
     }
@@ -42,16 +47,16 @@ class ETOViewController: BaseViewController {
     }
     
     func setupData() {
-        fetchData()
+//        fetchProjectData()
         fetchBannder()
     }
     
-    func fetchData() {
-        
+    func fetchProjectData() {
+        self.coordinator?.fetchProjectData()
     }
     
     func fetchBannder() {
-        
+        self.coordinator?.fetchBannersData()
     }
     
     func setupEvent() {
