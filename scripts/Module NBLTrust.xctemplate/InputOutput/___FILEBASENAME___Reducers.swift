@@ -13,8 +13,6 @@ func ___VARIABLE_productName:identifier___Reducer(action:Action, state:___VARIAB
     let state = state ?? ___VARIABLE_productName:identifier___State()
         
     switch action {
-    case let action as PageStateAction:
-        state.pageState.accept(action.state)
     default:
         break
     }

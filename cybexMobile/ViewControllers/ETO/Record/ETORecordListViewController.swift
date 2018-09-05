@@ -113,6 +113,8 @@ class ETORecordListViewController: BaseViewController {
             guard let `self` = self else { return }
             self.recordTableView.reloadData()
         }).disposed(by: disposeBag)
+        
+        
     }
 }
 
