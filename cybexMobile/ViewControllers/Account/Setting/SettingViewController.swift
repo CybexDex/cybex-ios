@@ -89,7 +89,9 @@ class SettingViewController: BaseViewController {
             self.coordinator?.openSettingDetail(type: .theme)
         }
         else if sender == environment {
-            self.coordinator?.changeEnveronment()
+            self.coordinator?.changeEnveronment({ isTest in
+                self.showToastBox(true, message: isTest == true ? "当前为测试环境" : "当前为正式环境")
+            })
         }
     }
     

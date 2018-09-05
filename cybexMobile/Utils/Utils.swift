@@ -569,15 +569,13 @@ func labelBaselineOffset(_ lineHeight:CGFloat, fontHeight:CGFloat) -> Float {
 
 func changeEnvironmentAction() {
     if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
-        AppConfiguration.SERVER_BASE_URLString = "https://app.cybex.io/"
-        AppConfiguration.SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
-        AppConfiguration.GATEWAY_URLString = "https://gateway.cybex.io/gateway"
-        Defaults[.environment] = ""
-    }
-    else {
         AppConfiguration.SERVER_BASE_URLString = AppConfiguration.SERVER_TEST_BASE_URLString
         AppConfiguration.SERVER_REGISTER_BASE_URLString = AppConfiguration.SERVER_REGISTER_BASE_TEST_URLString
         AppConfiguration.GATEWAY_URLString = AppConfiguration.SERVER_TEST_BASE_URLString
-        Defaults[.environment] = "test"
+    }
+    else {
+        AppConfiguration.SERVER_BASE_URLString = "https://app.cybex.io/"
+        AppConfiguration.SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
+        AppConfiguration.GATEWAY_URLString = "https://gateway.cybex.io/gateway"
     }
 }

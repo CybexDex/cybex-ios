@@ -45,8 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if Defaults.hasKey(.frequency_type){
       UserManager.shared.frequency_type = UserManager.frequency_type(rawValue: Defaults[.frequency_type])!
     }
-    
     changeEnvironmentAction()
+    
       
     let console = ConsoleDestination()
     log.addDestination(console)

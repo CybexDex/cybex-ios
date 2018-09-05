@@ -23,7 +23,7 @@ protocol SettingStateManagerProtocol {
         _ subscriber: S, transform: ((Subscription<SettingState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
     
-    func changeEnveronment()
+    func changeEnveronment(_ callback:@escaping(Bool)->())
 }
 
 class SettingCoordinator: AccountRootCoordinator {
@@ -70,12 +70,22 @@ extension SettingCoordinator: SettingStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
     
-    func changeEnveronment() {
+    func changeEnveronment(_ callback:@escaping(Bool)->()) {
+        var isTest = false
+        if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
+            Defaults[.environment] = ""
+            isTest = false
+        }
+        else {
+            Defaults[.environment] = "test"
+            isTest = true
+        }
         changeEnvironmentAction()
         
         CybexWebSocketService.shared.disconnect()
         UserManager.shared.logout()
         CybexWebSocketService.shared.connect()
+        callback(isTest)
         self.rootVC.popViewController()
     }
 }
