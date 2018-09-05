@@ -46,6 +46,14 @@
                                         <constraint firstAttribute="height" constant="214" id="fOg-7d-Rpt"/>
                                         <constraint firstItem="DL5-X1-LNf" firstAttribute="leading" secondItem="36T-Ad-HXP" secondAttribute="leading" constant="12" id="iiN-A8-DwL"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                            <color key="value" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1UZ-Cs-q7C" customClass="ContainerView" customModule="cybexMobile" customModuleProvider="target">
                                     <rect key="frame" x="13" y="229" width="349" height="78"/>
@@ -140,11 +148,16 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hee-pg-dUu" customClass="ContainerView" customModule="cybexMobile" customModuleProvider="target">
                                     <rect key="frame" x="13" y="432" width="349" height="24"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYD-JT-eDi">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYD-JT-eDi" customClass="BaseLabel" customModule="cybexMobile" customModuleProvider="target">
                                             <rect key="frame" x="12" y="12" width="325" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                                    <real key="value" value="20"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </label>
                                     </subviews>
                                     <constraints>
@@ -153,6 +166,9 @@
                                         <constraint firstItem="UYD-JT-eDi" firstAttribute="leading" secondItem="Hee-pg-dUu" secondAttribute="leading" constant="12" id="YT3-qE-Mtu"/>
                                         <constraint firstAttribute="trailing" secondItem="UYD-JT-eDi" secondAttribute="trailing" constant="12" id="wVW-zJ-lZP"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHiddenShadow" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                 </view>
                             </subviews>
                             <constraints>

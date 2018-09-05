@@ -43,6 +43,11 @@ class ETODetailIntroView: BaseView {
             contentLabel.enabledTypes.append(customType)
             contentLabel.customize { label in
                 label.customColor[customType] = UIColor.steel
+                label.configureLinkAttribute = { (type, attributes, isSelected) in
+                    var atts = attributes
+                    atts[NSAttributedStringKey.underlineStyle] = 1
+                    return atts
+                }
                 label.handleCustomTap(for: customType, handler: { (str) in
                     self.next?.sendEventWith(Event.labelClick.rawValue, userinfo: ["clicklabel":str])
                 })

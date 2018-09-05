@@ -15,7 +15,7 @@ class ETOCrowdView: BaseView {
     @IBOutlet weak var titleTextView: TitleTextfieldView!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var actionButton: LGButton!
-    @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var descLabel: BaseLabel!
     
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var errorLabel: UILabel!
@@ -45,10 +45,12 @@ class ETOCrowdView: BaseView {
 //        self.actionButton.isEnabled = false
         
         self.titleTextView.unitLabel.text = R.string.localizable.eto_available.key.localizedFormat("1.666", "ETH")
+        
+        let accountName = StyleNames.bold_12_20.tagText("test1")
         self.descLabel.text = """
-        • You will participate in the ETO by your ETH balance in your CYBEX account, and the process may consume certain fees.\n
-        • The assets of this project will be deposited to your account (test1) after successful subscription.\n
-        • Your final subscription will be subject to the verification by the project holder. You can check through "ETO Project History". When circumstances like personal hard cap exceeded or project.Quota oversubscription happens, the unconfirmed excess quota will be refunded to relevant CYBEX accounts when project ETO ends.\n
+        • You will participate in the ETO by your ETH balance in your CYBEX account, and the process may consume certain fees.
+        • The assets of this project will be deposited to your account (\(accountName)) after successful subscription.
+        • Your final subscription will be subject to the verification by the project holder. You can check through "ETO Project History". When circumstances like personal hard cap exceeded or project.Quota oversubscription happens, the unconfirmed excess quota will be refunded to relevant CYBEX accounts when project ETO ends.
         •    The final ETO participation result takes time to be confirmed. Please wait patiently. If you have any questions, please contact our community assistant through WeChat account: CybexServiceA.
         """
         
@@ -78,7 +80,6 @@ extension ETOCrowdView: GridContentViewDataSource {
             item.titleLabel.locali = titles[index].key
             item.valueLabel.text = "\(index) ETH"
             item.lineView.isHidden = index == 4
-            
             return item
         })
         

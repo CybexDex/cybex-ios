@@ -412,6 +412,7 @@
 		73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */; };
 		73F50BA32137D71F0071B08D /* ETOCrowdGridItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */; };
 		73F50BA42137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50BA12137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift */; };
+		73F50BA8213D20B50071B08D /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50BA7213D20B50071B08D /* BaseLabel.swift */; };
 		74270D4B512CD81AA7159B135F944B0A /* ExchangeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D294438F1AC7ABE633549FA9CD2FDF2 /* ExchangeView.xib */; };
 		751D31DB62BFC9F2FC1A0EFC4C23A801 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632D9F26ADE20F5811273E4B32DED357 /* SettingViewController.swift */; };
 		762156C3AEB620F8C8A01F26B1F818AC /* ostream.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = 9173FC0B79DF4409B5715D23613E8F82 /* ostream.SUNWCCh */; };
@@ -6089,6 +6090,7 @@
 		73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemView.swift; sourceTree = "<group>"; };
 		73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdGridItemView.xib; sourceTree = "<group>"; };
 		73F50BA12137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemViewAdapter.swift; sourceTree = "<group>"; };
+		73F50BA7213D20B50071B08D /* BaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
 		7401C47BEBBCCB83E20CF4CE5F502BA5 /* map_transformer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = map_transformer.hpp; sourceTree = "<group>"; };
 		740413BF73DBBAA191FD980F62B563BC /* modulus.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = modulus.hpp; sourceTree = "<group>"; };
 		741427D2934E98250BE7E24F86B1AD19 /* stack.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = stack.hpp; sourceTree = "<group>"; };
@@ -18265,6 +18267,7 @@
 				01C2F31F4F1749972F35CE9EC2B2B39C /* BaseWebViewController.swift */,
 				DD606656A250A840B13C511345FAB615 /* EmptySegue.swift */,
 				7307A930212518F300BD6444 /* BaseView.swift */,
+				73F50BA7213D20B50071B08D /* BaseLabel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -34121,6 +34124,7 @@
 				9F062BB04541D9C9086AED80A6B1E454 /* WithNoDataView.swift in Sources */,
 				D943D44B1F143FD28298F8C1F7E94552 /* WithdrawDetailActions.swift in Sources */,
 				975938BD454B9AB3D5F1AD8C06CDFCA8 /* WithdrawDetailCoordinator.swift in Sources */,
+				73F50BA8213D20B50071B08D /* BaseLabel.swift in Sources */,
 				A9A444493A756B51F4BF2CC8F119C4EA /* WithdrawDetailReducers.swift in Sources */,
 				A390401CBDF18D681CE95ABF9268BBF3 /* WithdrawDetailViewController.swift in Sources */,
 				221EC23E2105B3110059F856 /* CornerAndShadowView.swift in Sources */,

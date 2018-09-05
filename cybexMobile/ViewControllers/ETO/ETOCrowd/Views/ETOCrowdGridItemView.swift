@@ -27,7 +27,7 @@ class ETOCrowdGridItemView: BaseView {
     }
     
     func setupUI() {
-        
+        clearBgColor()
     }
     
     func setupSubViewEvent() {

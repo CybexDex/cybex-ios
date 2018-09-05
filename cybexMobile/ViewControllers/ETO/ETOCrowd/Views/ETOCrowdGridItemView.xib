@@ -66,6 +66,7 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiF-UE-lxS">
                             <rect key="frame" x="0.0" y="81" width="65" height="1"/>
+                            <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="pUf-Ki-Rzw"/>
                             </constraints>

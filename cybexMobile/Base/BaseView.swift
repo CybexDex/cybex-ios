@@ -160,7 +160,8 @@ class BaseView: UIControl {
         let foreView = UIView()
         foreView.frame = self.bounds
         foreView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        foreView.theme_backgroundColor = [UIColor.darkTwo.hexString(true), UIColor.white.hexString(true)]
+        foreView.theme1BgColor = UIColor.darkTwo
+        foreView.theme2BgColor = UIColor.white
         insertSubview(foreView, at: 0)
 
         self.xibView = view
