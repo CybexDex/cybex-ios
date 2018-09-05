@@ -8,6 +8,8 @@
 
 import UIKit
 import ReSwift
+import SwiftyUserDefaults
+
 
 protocol SettingCoordinatorProtocol {
     func openSettingDetail(type:settingPage)
@@ -20,6 +22,8 @@ protocol SettingStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<SettingState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
+    
+    func changeEnveronment()
 }
 
 class SettingCoordinator: AccountRootCoordinator {
@@ -66,4 +70,12 @@ extension SettingCoordinator: SettingStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
     
+    func changeEnveronment() {
+        changeEnvironmentAction()
+        
+        CybexWebSocketService.shared.disconnect()
+        UserManager.shared.logout()
+        CybexWebSocketService.shared.connect()
+        self.rootVC.popViewController()
+    }
 }

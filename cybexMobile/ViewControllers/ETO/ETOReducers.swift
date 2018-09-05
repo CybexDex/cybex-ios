@@ -13,14 +13,14 @@ func ETOReducer(action:Action, state:ETOState?) -> ETOState {
     let state = state ?? ETOState()
     switch action {
         case let action as FetchProjectModelAction:
-//            state.data.accept(transferModelToViewModel(action.data))
+            state.data.accept(action.data)
             break
         default:break
     }
     return state
 }
 
-//func transferModelToViewModel(_ data : [ETOProjectInfo]) -> [ETOProjectModel] {
-//
-//    return []
-//}
+func transferModelToViewModel(_ data : [ETOProjectModel]) {
+
+   
+}

@@ -21,6 +21,7 @@
 "light" = "白色";
 "version" = "版本";
 "frequency" = "行情刷新频率";
+"environment" = "切换环境";
 
 "frequency_normal" = "普通行情";
 "frequency_time" = "实时行情";

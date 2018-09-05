@@ -234,13 +234,32 @@
                                                     <constraint firstAttribute="trailing" secondItem="KDV-f5-Nyx" secondAttribute="trailing" id="rSM-td-obb"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hT-8l-4k3" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
+                                                <rect key="frame" x="13" y="272" width="294" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="mMo-cU-BbU"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="environment"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="4Do-xk-j2g" firstAttribute="leading" secondItem="NP8-xs-njn" secondAttribute="leading" constant="13" id="4uM-UA-kvU"/>
+                                            <constraint firstItem="0hT-8l-4k3" firstAttribute="leading" secondItem="NP8-xs-njn" secondAttribute="leading" constant="13" id="7H9-sw-OdM"/>
                                             <constraint firstAttribute="bottom" secondItem="4Do-xk-j2g" secondAttribute="bottom" constant="60" id="EXX-2O-y5s"/>
                                             <constraint firstItem="nbw-NE-dXd" firstAttribute="leading" secondItem="NP8-xs-njn" secondAttribute="leading" constant="13" id="MV7-lR-vbK"/>
                                             <constraint firstAttribute="trailing" secondItem="XEv-8w-Nao" secondAttribute="trailing" constant="13" id="a5J-kr-QLf"/>
                                             <constraint firstAttribute="trailing" secondItem="4Do-xk-j2g" secondAttribute="trailing" constant="13" id="bsw-pt-QsY"/>
+                                            <constraint firstAttribute="trailing" secondItem="0hT-8l-4k3" secondAttribute="trailing" constant="13" id="clt-r1-uhD"/>
+                                            <constraint firstItem="0hT-8l-4k3" firstAttribute="top" secondItem="nbw-NE-dXd" secondAttribute="bottom" constant="20" id="hcC-Xj-IK1"/>
                                             <constraint firstItem="nbw-NE-dXd" firstAttribute="top" secondItem="XEv-8w-Nao" secondAttribute="bottom" constant="12" id="kfh-d9-ARb"/>
                                             <constraint firstItem="XEv-8w-Nao" firstAttribute="top" secondItem="NP8-xs-njn" secondAttribute="top" id="uQ0-TC-g3L"/>
                                             <constraint firstItem="XEv-8w-Nao" firstAttribute="leading" secondItem="NP8-xs-njn" secondAttribute="leading" constant="13" id="vXE-DY-fdv"/>
@@ -268,6 +287,7 @@
                         <viewLayoutGuide key="safeArea" id="biv-q9-gRW"/>
                     </view>
                     <connections>
+                        <outlet property="environment" destination="0hT-8l-4k3" id="EpE-2d-Wy3"/>
                         <outlet property="frequency" destination="XCO-l7-dlp" id="opC-U4-ZSZ"/>
                         <outlet property="help" destination="b4b-wr-Ums" id="JbK-z3-uO3"/>
                         <outlet property="language" destination="fpo-dn-0FV" id="qK3-Uw-ek3"/>
@@ -278,7 +298,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gtp-B6-7B3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965" y="895"/>
+            <point key="canvasLocation" x="866" y="880"/>
         </scene>
         <!--Setting Detail View Controller-->
         <scene sceneID="3dh-0B-hnB">

@@ -241,46 +241,7 @@ extension SimpleHTTPService {
     }
     return promise
   }
-  
-  static func fetchDesipotInfoJsonInfo() -> Promise<TradeMsg>{
-    var request  = URLRequest(url: URL(string: AppConfiguration.DEPOSIT_MSG)!)
-    request.cachePolicy = .reloadIgnoringCacheData
-    let (promise ,seal) = Promise<TradeMsg>.pending()
-    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
-      guard let value = response.result.value else{
-        seal.fulfill(TradeMsg(enMsg: "", cnMsg: ""))
-        return
-      }
-      let data = JSON(value).dictionaryValue
-      if let enMsg = data["enMsg"]?.stringValue ,let cnMsg = data["cnMsg"]?.stringValue{
-        seal.fulfill(TradeMsg(enMsg: enMsg, cnMsg: cnMsg))
-      }else{
-        seal.fulfill(TradeMsg(enMsg: "", cnMsg: ""))
-      }
-    }
-    return promise
-  }
-  
-  static func fetchWithdrawJsonInfo() -> Promise<TradeMsg>{
-    var request  = URLRequest(url: URL(string: AppConfiguration.WITHDRAW_MSG)!)
-    request.cachePolicy = .reloadIgnoringCacheData
-    let (promise ,seal) = Promise<TradeMsg>.pending()
-    Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
-      guard let value = response.result.value else{
-        seal.fulfill(TradeMsg(enMsg: "", cnMsg: ""))
-        return
-      }
-      let data = JSON(value).dictionaryValue
-      if let enMsg = data["enMsg"]?.stringValue ,let cnMsg = data["cnMsg"]?.stringValue{
-        seal.fulfill(TradeMsg(enMsg: enMsg, cnMsg: cnMsg))
-      }else{
-        seal.fulfill(TradeMsg(enMsg: "", cnMsg: ""))
-      }
-    }
-    return promise
-  }
-  
-  
+    
   static func fetchMarketListJson() -> Promise<[ImportantMarketPair]> {
     var request  = URLRequest(url: URL(string: AppConfiguration.MARKETLISTS)!)
     request.cachePolicy = .reloadIgnoringCacheData

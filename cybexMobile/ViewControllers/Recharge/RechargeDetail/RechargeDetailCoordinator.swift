@@ -29,7 +29,6 @@ protocol RechargeDetailStateManagerProtocol {
     static func verifyAddress(_ assetName:String,address:String,callback:@escaping (Bool)->())
     func getGatewayFee(_ assetId : String,amount:String,address:String,isEOS:Bool)
     func getObjects(assetId:String,amount:String,address:String,fee_id:String,fee_amount:String,isEOS:Bool,callback:@escaping (Any)->())
-    func fetchWithDrawMessage(callback:@escaping (String)->())
     func getFinalAmount(fee_id:String,amount:Decimal,available:Double) -> (Decimal,String)
     
     func chooseOrAddAddress(_ sender : String)
@@ -222,23 +221,6 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                     }
                 }
                 CybexWebSocketService.shared.send(request: requeset)
-            }
-        }
-    }
-    
-    func fetchWithDrawMessage(callback:@escaping (String)->()){
-        async {
-            let message = try? await(SimpleHTTPService.fetchWithdrawJsonInfo())
-            main {
-                if let message = message{
-                    if Localize.currentLanguage() == "en" {
-                        callback(message.enMsg)
-                    }else{
-                        callback(message.cnMsg)
-                    }
-                }else{
-                    callback("")
-                }
             }
         }
     }

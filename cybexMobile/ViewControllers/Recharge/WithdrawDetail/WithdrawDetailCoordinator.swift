@@ -13,7 +13,6 @@ import Localize_Swift
 protocol WithdrawDetailCoordinatorProtocol {
   func fetchDepositAddress(_ asset_name:String)
   func resetDepositAddress(_ asset_name:String)
-  func fetchDepositMessage(callback:@escaping (String)->())
   func openDepositRecode(_ asset_id : String)
   
 }
@@ -62,23 +61,6 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
           }else{
             self.state.property.data.accept(nil)
           }
-        }
-      }
-    }
-  }
-  
-  func fetchDepositMessage(callback:@escaping (String)->()){
-    async {
-      let message = try? await(SimpleHTTPService.fetchDesipotInfoJsonInfo())
-      main {
-        if let message = message{
-          if Localize.currentLanguage() == "en" {
-            callback(message.enMsg)
-          }else{
-            callback(message.cnMsg)
-          }
-        }else{
-          callback("")
         }
       }
     }

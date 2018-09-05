@@ -55,7 +55,7 @@ class AppCoordinator {
     var accountCoordinator: AccountRootCoordinator!
     var entryCoordinator: EntryRootCoordinator!
     var etoCoordinator : ETORootCoordinator!
-    
+    var container : [NavCoordinator]!
     weak var currentPresentedRootCoordinator: NavCoordinator?
     
     weak var startLoadingVC:BaseViewController?
@@ -106,6 +106,8 @@ class AppCoordinator {
         accountCoordinator.start()
         etoCoordinator.start()
         
+        self.container = [homeCoordinator, tradeCoordinator, etoCoordinator,accountCoordinator] as [NavCoordinator]
+        
         rootVC.viewControllers = [home, trade, eto,account]
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: {notification in
@@ -129,8 +131,7 @@ class AppCoordinator {
     }
     
     func curDisplayingCoordinator() -> NavCoordinator {
-        let container = [homeCoordinator, tradeCoordinator, accountCoordinator] as [NavCoordinator]
-        return container[self.rootVC.selectedIndex]
+        return self.container[self.rootVC.selectedIndex]
     }
     
     func presentedViewController() -> BaseViewController? {
