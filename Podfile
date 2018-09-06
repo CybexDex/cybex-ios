@@ -116,6 +116,11 @@ def other
     pod 'MonkeyKing' #share
 end
 
+def scripts
+    pod 'SwiftGen'
+    pod 'Sourcery'
+end
+
 def fabric
     pod 'Fabric'
     pod 'Crashlytics'
@@ -153,6 +158,7 @@ target 'cybexMobile' do
   other
   debug
   um
+  scripts
   
   target 'cybexMobileTests' do
       inherit! :search_paths

@@ -132,6 +132,7 @@ PODS:
   - Siren (3.4.3)
   - SkeletonView (1.4)
   - SocketRocket (0.5.1)
+  - Sourcery (0.14.0)
   - SwiftEntryKit (0.5.8):
     - QuickLayout (= 2.0.2)
   - SwifterSwift (4.4.0):
@@ -151,6 +152,7 @@ PODS:
   - SwifterSwift/SpriteKit (4.4.0)
   - SwifterSwift/SwiftStdlib (4.4.0)
   - SwifterSwift/UIKit (4.4.0)
+  - SwiftGen (5.3.0)
   - SwiftNotificationCenter (1.0.3)
   - SwiftRichString (2.0.1)
   - SwiftTheme (0.4.1)
@@ -250,8 +252,10 @@ DEPENDENCIES:
   - Siren
   - SkeletonView
   - SocketRocket (from `https://github.com/facebook/SocketRocket`, branch `master`)
+  - Sourcery
   - SwiftEntryKit
   - SwifterSwift
+  - SwiftGen
   - SwiftNotificationCenter
   - SwiftRichString (from `https://github.com/malcommac/SwiftRichString`, tag `2.0.1`)
   - SwiftTheme
@@ -351,8 +355,10 @@ SPEC REPOS:
     - SipHash
     - Siren
     - SkeletonView
+    - Sourcery
     - SwiftEntryKit
     - SwifterSwift
+    - SwiftGen
     - SwiftNotificationCenter
     - SwiftTheme
     - SwiftyBeaver
@@ -494,8 +500,10 @@ SPEC CHECKSUMS:
   Siren: e3cf1a93fa0fa73c03452107e95e5c10768d1d08
   SkeletonView: 50f7a9b04e3a62bd0ae964859c19317fabaea367
   SocketRocket: dbb1554b8fc288ef8ef370d6285aeca7361be31e
+  Sourcery: 51332d15c2fc40e4ac5956e149a5d95607c63154
   SwiftEntryKit: ff42f06ff7468ffa6a8b63edf806159c99205681
   SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
+  SwiftGen: 4379bd3640b0a212a0f6ea3c494adba385513d10
   SwiftNotificationCenter: 309e912a10d664ef68979deb1df7f17c2bdbe2ea
   SwiftRichString: 3b29b5f2eb0eb244497532f2fd2ec26318eae584
   SwiftTheme: 36d71c4eed4b2c401c782cf036e4586c749a8173
@@ -521,6 +529,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 34f79abb60018f2e2a5168d6287d90473024ab81
 
-PODFILE CHECKSUM: 567045d5d2d49d197c36640c449a8f39948c1ac6
+PODFILE CHECKSUM: 15df7b1836f916e30b5e222517acf5034534d423
 
 COCOAPODS: 1.5.3
