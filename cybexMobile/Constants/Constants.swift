@@ -210,14 +210,14 @@ enum objectID:String {
 class AssetConfiguration {  
     var asset_ids:[Pair] = []
     
-    static let CYB = "1.3.0"
-    static let BTC = "1.3.3"
-    static let EOS = "1.3.4"
-    static let ETH = "1.3.2"
+    static var CYB = "1.3.0"
+    static var BTC = "1.3.3"
+    static var ETH = "1.3.2"
+    static var EOS = "1.3.4"
     static let USDT = "1.3.27"
     
     static let order_name = ["USDT","ETH", "BTC", "CYB"]
-    static let market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.CYB,AssetConfiguration.USDT,AssetConfiguration.BTC]
+    static var market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.CYB,AssetConfiguration.USDT,AssetConfiguration.BTC]
     
     var unique_ids:[String] = []
     //    return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).withoutDuplicates()

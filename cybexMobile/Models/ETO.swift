@@ -177,7 +177,6 @@ enum ProjectState : String ,HandyJSONEnum{
 
 
 struct ETOProjectViewModel {
-    
     var icon: String = ""
     var icon_en: String = ""
     var name: String = ""
@@ -199,5 +198,6 @@ struct ETOProjectViewModel {
         self.progress = projectModel.current_percent
         self.icon = projectModel.adds_logo_mobil
         self.icon_en = projectModel.adds_logo_mobil__lang_en
+        
     }
 }

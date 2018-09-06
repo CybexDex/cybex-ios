@@ -22,11 +22,11 @@ class HomeContentView: UIView {
       self.tableView.isHidden = false
     }
   }
+    
   lazy var sectionHeader : HomeSectionHeaderView = {
     let sectionHeader = HomeSectionHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: CGFloat(define.sectionHeaderHeight)))
     return sectionHeader
   }()
-  
   
   
   var data : Any? {

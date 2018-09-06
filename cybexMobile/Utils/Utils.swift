@@ -572,10 +572,22 @@ func changeEnvironmentAction() {
         AppConfiguration.SERVER_BASE_URLString = AppConfiguration.SERVER_TEST_BASE_URLString
         AppConfiguration.SERVER_REGISTER_BASE_URLString = AppConfiguration.SERVER_REGISTER_BASE_TEST_URLString
         AppConfiguration.GATEWAY_URLString = AppConfiguration.SERVER_TEST_BASE_URLString
+        
+        AssetConfiguration.CYB = "1.3.0"
+        AssetConfiguration.BTC = "1.3.25"
+        AssetConfiguration.ETH = "1.3.18"
+        AssetConfiguration.EOS = "1.3.967"
+        AssetConfiguration.market_base_assets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.BTC]
     }
     else {
         AppConfiguration.SERVER_BASE_URLString = "https://app.cybex.io/"
         AppConfiguration.SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
         AppConfiguration.GATEWAY_URLString = "https://gateway.cybex.io/gateway"
+
+        AssetConfiguration.CYB = "1.3.0"
+        AssetConfiguration.BTC = "1.3.3"
+        AssetConfiguration.ETH = "1.3.2"
+        AssetConfiguration.EOS = "1.3.4"
+        AssetConfiguration.market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.CYB,AssetConfiguration.USDT,AssetConfiguration.BTC]
     }
 }
