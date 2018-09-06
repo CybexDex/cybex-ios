@@ -433,9 +433,12 @@ extension String {
 }
 
 
-func transferTimeType(_ time : Int) -> String {
+func transferTimeType(_ time: Int, type: Bool = false) -> String {
     var result = ""
     var times = 0
+    if type == true {
+        
+    }
     if time == 0 {
         result = "0"
         return result + R.string.localizable.transfer_unit_second.key.localized()
@@ -458,6 +461,8 @@ func transferTimeType(_ time : Int) -> String {
     }
     return result
 }
+
+
 
 func verifyPassword(_ password : String) -> (Bool) {
     if password.count < 12 {

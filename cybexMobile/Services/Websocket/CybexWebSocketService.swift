@@ -125,6 +125,7 @@ class CybexWebSocketService: NSObject {
     //MARK: - Public Methods -
     
     func overload() -> Bool {
+        log.debug("当前请求个数:\(self.queue.operations.count)")
         return self.queue.operations.count > 150
     }
     
