@@ -33125,7 +33125,7 @@
 				ORGANIZATIONNAME = Cybex;
 				TargetAttributes = {
 					6597A0AC6C29D30281EBD879E45F3BAF = {
-						DevelopmentTeam = M5LYGNKFLB;
+						DevelopmentTeam = Z4LN46787D;
 						LastSwiftMigration = 920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -34205,7 +34205,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M5LYGNKFLB;
+				DEVELOPMENT_TEAM = Z4LN46787D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -34230,7 +34230,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrust.cybex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
@@ -34300,7 +34300,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = M5LYGNKFLB;
+				DEVELOPMENT_TEAM = Z4LN46787D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -34325,7 +34325,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrust.cybex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
