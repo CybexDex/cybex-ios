@@ -8,6 +8,7 @@
 
 import Foundation
 import HandyJSON
+import DifferenceKit
 
 struct ETOBannerModel:HandyJSON {
     var id:String = ""
@@ -88,7 +89,7 @@ enum ETOIEOType:String, HandyJSONEnum {
     }
 }
 
-struct ETOTradeHistoryModel: HandyJSON {
+struct ETOTradeHistoryModel: HandyJSON, Differentiable, Equatable, Hashable {
     var project_id:Int = 0
     var project_name: String = ""
     var ieo_type: ETOIEOType = .receive //receive: 参与ETO send: 到账成功
@@ -100,6 +101,14 @@ struct ETOTradeHistoryModel: HandyJSON {
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
             self.created_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
+    }
+    
+    static func == (lhs: ETOTradeHistoryModel, rhs: ETOTradeHistoryModel) -> Bool {
+        return lhs.project_id == rhs.project_id && lhs.project_name == rhs.project_name && lhs.ieo_type == rhs.ieo_type && lhs.reason == rhs.reason && lhs.created_at == rhs.created_at && lhs.token_count == rhs.token_count && lhs.token == rhs.token
+    }
+    
+    var hashValue: Int {
+        return project_id
     }
 }
 

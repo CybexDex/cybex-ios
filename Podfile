@@ -103,6 +103,7 @@ def ui
     pod 'ESPullToRefresh'
     pod 'FSPagerView'
     pod 'ActiveLabel'
+    pod 'SkeletonView'
 end
 
 def other

@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import DifferenceKit
 
 func ETORecordListReducer(action:Action, state:ETORecordListState?) -> ETORecordListState {
     let state = state ?? ETORecordListState()
@@ -22,8 +23,12 @@ func ETORecordListReducer(action:Action, state:ETORecordListState?) -> ETORecord
             else {
                 appendModel = model
             }
-            state.data.accept(appendModel)
+            
+            let changeset = StagedChangeset(source: state.data.value, target: appendModel)
+
+            state.changeSet.accept(changeset)
         }
+        
     default:
         break
     }

@@ -10,11 +10,14 @@ import Foundation
 import ReSwift
 import RxCocoa
 import SwiftyJSON
+import DifferenceKit
 
 //MARK: - State
 struct ETORecordListState: BaseState {
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
     var data:BehaviorRelay<[ETOTradeHistoryModel]> = BehaviorRelay(value: [])
+    var changeSet:BehaviorRelay<StagedChangeset<[ETOTradeHistoryModel]>> = BehaviorRelay(value: StagedChangeset<[ETOTradeHistoryModel]>())
+
     var page:BehaviorRelay<Int> = BehaviorRelay(value: 1)
 }
 
