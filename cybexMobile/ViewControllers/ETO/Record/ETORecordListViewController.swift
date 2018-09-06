@@ -109,20 +109,20 @@ class ETORecordListViewController: BaseViewController {
             }
         }).disposed(by: disposeBag)
         
-        self.coordinator!.state.data.asObservable().subscribe(onNext: {[weak self] (data) in
+        self.coordinator!.state.changeSet.asObservable().skip(1).subscribe(onNext: {[weak self] (changeset) in
             guard let `self` = self else { return }
-            self.recordTableView.reloadData()
+            
+            self.recordTableView.reload(using: changeset, with: .none) {[weak self] data in
+                guard let `self` = self else { return }
+
+                self.coordinator?.state.data.accept(data)
+            }
         }).disposed(by: disposeBag)
-        
         
     }
 }
 
-extension ETORecordListViewController: UITableViewDelegate,UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
+extension ETORecordListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.coordinator!.state.data.value.count
     }
