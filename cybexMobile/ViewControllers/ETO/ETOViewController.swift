@@ -64,31 +64,36 @@ class ETOViewController: BaseViewController {
     }
     
     override func configureObserveState() {
-        coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self] (state) in
-            guard let `self` = self else { return }
+        coordinator?.state.pageState.asObservable().subscribe(onNext: {(state) in
             
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         coordinator?.state.data.asObservable().subscribe(onNext: { [weak self](data) in
             guard let `self` = self else { return }
             self.endLoading()
+            self.homeView.data = data
             
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         coordinator?.state.banners.asObservable().subscribe(onNext: { [weak self](banners) in
             guard let `self` = self else { return }
-            
+            self.endLoading()
+            self.homeView.pageView.data = banners
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }
 
 extension ETOViewController {
     @objc func ETOProjectViewDidClicked(_ data:[String: Any]) {
-        self.coordinator?.openProjectItem()
+        if let viewModel = data["data"] as? ETOProjectViewModel {
+            self.coordinator?.setSelectedProjectData(viewModel.model!)
+        }
     }
     
     @objc func ETOHomeBannerViewDidClicked(_ data:[String:Any]) {
-        self.coordinator?.openBanner()
+        if let banner = data["data"] as? ETOBannerModel {
+            self.coordinator?.setSelectedBannerData(banner)
+        }
     }
 }
 

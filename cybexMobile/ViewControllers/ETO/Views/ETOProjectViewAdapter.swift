@@ -8,17 +8,25 @@
 
 import Foundation
 import Fakery
+import Localize_Swift
+import RxSwift
+import RxCocoa
 
 extension ETOProjectView {
-    func adapterModelToETOProjectView(_ model:ETOProjectModel) {
-        let faker = Faker.init()
-        self.icon.kf.setImage(with: URL(string: faker.company.logo()))
-        self.nameLabel.text = faker.name.name()
-        self.markLabel.text = faker.address.state()
-        self.stateLabel.text = faker.address.state()
-        self.timeLabel.text = faker.business.creditCardExpiryDate()?.dateString()
-        self.progressView.progress = Double(arc4random() % 100) * 0.01
-        self.progressLabel.text = "\(self.progressView.progress * 100)%"
-        self.progressLabel.textColor = UIColor.pastelOrange
+    func adapterModelToETOProjectView(_ model:ETOProjectViewModel) {
+        self.nameLabel.text = model.name
+        self.stateLabel.text = model.status
+        self.timeLabel.text = model.time
+        self.progressLabel.text = model.current_percent
+        self.progressView.progress = model.progress
+        
+        if Localize.currentLanguage() == "en" {
+            self.icon.kf.setImage(with: URL(string: model.icon_en))
+            self.markLabel.text = model.key_words_en
+        }
+        else {
+            self.icon.kf.setImage(with: URL(string: model.icon))
+            self.markLabel.text = model.key_words
+        }
     }
 }

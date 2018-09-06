@@ -24,14 +24,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x25-A2-64f" customClass="ETOProjectView" customModule="cybexMobile" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="298" height="67.5"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                        <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <constraints>
@@ -40,6 +32,14 @@
                             <constraint firstAttribute="trailing" secondItem="x25-A2-64f" secondAttribute="trailing" id="SrX-VS-Fkm"/>
                             <constraint firstItem="x25-A2-64f" firstAttribute="leading" secondItem="50J-Mg-Ryg" secondAttribute="leading" id="WFc-6z-20d"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <constraints>
@@ -64,4 +64,6 @@
             <point key="canvasLocation" x="-239" y="-96"/>
         </tableViewCell>
     </objects>
+    <resources>
+    </resources>
 </document>

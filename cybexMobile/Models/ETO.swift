@@ -9,11 +9,12 @@
 import Foundation
 import HandyJSON
 import DifferenceKit
+import RxSwift
 
 struct ETOBannerModel:HandyJSON {
     var id:String = ""
-    var adds_banner_mobil:String = ""
-    var adds_banner_mobil__lang_en:String = ""
+    var adds_banner_mobile:String = ""
+    var adds_banner_mobile__lang_en:String = ""
 }
 
 struct ETOUserAuditModel:HandyJSON {
@@ -113,8 +114,8 @@ struct ETOTradeHistoryModel: HandyJSON, Differentiable, Equatable, Hashable {
 }
 
 struct ETOProjectModel:HandyJSON {
-    var adds_logo_mobil: String = ""
-    var adds_logo_mobil__lang_en: String = ""
+    var adds_logo_mobile: String = ""
+    var adds_logo_mobile__lang_en: String = ""
     var adds_keyword: String = ""
     var adds_keyword__lang_en: String = ""
     var adds_advantage: String = ""
@@ -148,6 +149,8 @@ struct ETOProjectModel:HandyJSON {
     var base_max_quota: Int = 0
     var base_accuracy: Int = 0
     var base_min_quota: Int = 0
+    
+    var project: String = ""
     
     var is_user_in:String = "0" // 0不准预约 1可以预约
     
@@ -205,8 +208,8 @@ struct ETOProjectViewModel {
         self.status = projectModel.status!.description()
         self.current_percent = (projectModel.current_percent * 100).string(digits:0, roundingMode: .down) + "%"
         self.progress = projectModel.current_percent
-        self.icon = projectModel.adds_logo_mobil
-        self.icon_en = projectModel.adds_logo_mobil__lang_en
-        
+        self.icon = projectModel.adds_logo_mobile
+        self.icon_en = projectModel.adds_logo_mobile__lang_en
+        self.time = projectModel.start_at!.iso8601String
     }
 }

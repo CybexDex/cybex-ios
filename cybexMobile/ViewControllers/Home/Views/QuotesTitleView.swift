@@ -64,10 +64,10 @@ class QuotesTitleView: UIView {
     
     fileprivate func setup() {
         for titleView in titleViews {
-            if Defaults[.environment] == "test", titleView.tag == 3 {
-                titleView.isHidden = true
-                continue
+            if titleView.tag == 3 {
+                titleView.isHidden = Defaults[.environment] == "test" ? true : false
             }
+
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickViewAction))
             titleView.addGestureRecognizer(tapGesture)
         }

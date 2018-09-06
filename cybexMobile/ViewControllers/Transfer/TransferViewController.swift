@@ -25,6 +25,10 @@ class TransferViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
         getFee()
+        if !UserManager.shared.isWithDraw{
+            showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
+            return
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -165,6 +169,7 @@ extension TransferViewController {
             }
             else {
                 self.transferComfirm()
+                
             }
         }
         else {
@@ -175,6 +180,10 @@ extension TransferViewController {
     
     override func returnEnsureAction() {
         ShowToastManager.shared.hide()
+        if !UserManager.shared.isWithDraw{
+            showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
+            return
+        }
         if !UserManager.shared.isLocked {
             self.startLoading()
             self.coordinator?.transfer({ [weak self](data) in
