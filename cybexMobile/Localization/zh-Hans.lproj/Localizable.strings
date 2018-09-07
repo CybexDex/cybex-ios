@@ -409,7 +409,10 @@
 "eto_receive_success" = "到账成功";
 
 
-"eto_project_finish" = "结束";
+"eto_project_finish" = "已结束";
 "eto_project_comming" = "即将开始";
 "eto_project_progress" = "正在进行";
 
+"eto_project_time_finish" = "完成时间:";
+"eto_project_time_comming" = "距离结束:";
+"eto_project_time_pre" = "距离开始:";

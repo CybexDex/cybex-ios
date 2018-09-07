@@ -19,7 +19,7 @@ extension ETOProjectView {
         self.timeLabel.text = model.time
         self.progressLabel.text = model.current_percent
         self.progressView.progress = model.progress
-        
+        self.timeState.text = model.timeState
         if Localize.currentLanguage() == "en" {
             self.icon.kf.setImage(with: URL(string: model.icon_en))
             self.markLabel.text = model.key_words_en
@@ -28,5 +28,20 @@ extension ETOProjectView {
             self.icon.kf.setImage(with: URL(string: model.icon))
             self.markLabel.text = model.key_words
         }
+        if let projectModel = model.model {
+            switch projectModel.status! {
+            case .finish:
+                self.progressView.beginColor = .slate
+                self.progressView.endColor = .cloudyBlue
+                self.progressView.progress = 1
+            case .ok:
+                self.stateLabel.textColor = UIColor.pastelOrange
+                self.progressLabel.textColor = UIColor.pastelOrange
+            case .pre:
+                self.stateLabel.textColor = UIColor.pastelOrange
+                self.progressLabel.textColor = UIColor.pastelOrange
+            }
+        }
+        self.updateHeight()
     }
 }
