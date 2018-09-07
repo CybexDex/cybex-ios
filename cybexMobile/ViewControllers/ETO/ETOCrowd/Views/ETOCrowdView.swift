@@ -24,6 +24,7 @@ class ETOCrowdView: BaseView {
     
     enum Event:String {
         case ETOCrowdViewDidClicked
+        case ETOCrowdButtonDidClicked
     }
         
     override func setup() {
@@ -46,12 +47,17 @@ class ETOCrowdView: BaseView {
     }
     
     func setupSubViewEvent() {
-    
+        self.actionButton.addTarget(self, action: #selector(buttonDidClicked), for: .touchUpInside)
     }
     
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.ETOCrowdViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
+    
+    @objc func buttonDidClicked() {
+        self.next?.sendEventWith(Event.ETOCrowdButtonDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+    }
+
 }
 
 extension ETOCrowdView: GridContentViewDataSource {

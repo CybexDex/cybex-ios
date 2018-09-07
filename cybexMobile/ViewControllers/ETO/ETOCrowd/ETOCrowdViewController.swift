@@ -40,6 +40,7 @@ class ETOCrowdViewController: BaseViewController {
     func setupData() {
         self.coordinator?.fetchData()
         self.coordinator?.fetchUserRecord()
+        self.coordinator?.fetchFee()
     }
     
     func setupEvent() {
@@ -63,31 +64,25 @@ class ETOCrowdViewController: BaseViewController {
             
             self.contentView.updateUI((projectModel:project, userModel:model), handler: ETOCrowdView.adapterModelToUserCrowdView(self.contentView))
         }).disposed(by: disposeBag)
+        
+        coordinator?.state.fee.asObservable().subscribe(onNext: {[weak self] (model) in
+            if let `self` = self, let data = model, let feeInfo = app_data.assetInfo[data.asset_id], let feeAmount = data.amount.toDouble()?.string(digits: feeInfo.precision, roundingMode: .down) {
+                self.contentView.priceLabel.text = feeAmount + " " + feeInfo.symbol.filterJade
+            }
+        }).disposed(by: disposeBag)
     }
 }
 
-//MARK: - TableViewDelegate
-
-//extension ETOCrowdViewController: UITableViewDataSource, UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 10
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//          let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.<#cell#>.name, for: indexPath) as! <#cell#>
-//
-//        return cell
-//    }
-//}
-
-
 //MARK: - View Event
+extension ETOCrowdViewController {
+    @objc func ETOCrowdButtonDidClicked(_ data:[String: Any]) {
+        guard let price = self.contentView.titleTextView.textField.text?.toDouble() else { return }
+        
+        self.coordinator?.joinCrowd(price, callback: { (data) in
+            if String(describing: data) == "<null>"{
 
-//extension ETOCrowdViewController {
-//    @objc func <#view#>DidClicked(_ data:[String: Any]) {
-//        if let addressdata = data["data"] as? <#model#>, let view = data["self"] as? <#view#>  {
-//
-//        }
-//    }
-//}
+            }
+        })
+    }
+}
 
