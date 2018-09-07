@@ -135,6 +135,7 @@ class CybexWebSocketService: NSObject {
             needAutoConnect = true
             if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
                 log.debug("test detecting node .....https://hangzhou.51nebula.com/")
+                self.currentNode = NodeURLString.test
                 connectNode(node: NodeURLString.test)
                 return
             }

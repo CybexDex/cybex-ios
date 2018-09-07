@@ -19,6 +19,8 @@ protocol ETODetailStateManagerProtocol {
     var state: ETODetailState { get }
     
     func switchPageState(_ state:PageState)
+    
+    func setETOProjectDetailModel(_ model: ETOProjectModel)
 }
 
 class ETODetailCoordinator: ETORootCoordinator {
@@ -35,6 +37,14 @@ class ETODetailCoordinator: ETORootCoordinator {
     override func register() {
         Broadcaster.register(ETODetailCoordinatorProtocol.self, observer: self)
         Broadcaster.register(ETODetailStateManagerProtocol.self, observer: self)
+    }
+    
+    func fetchData() {
+        Broadcaster.notify(ETOStateManagerProtocol.self) { (coor) in
+            if let model = coor.state.selectedProjectModel.value {
+                self.store.dispatch(SetProjectDetailAction(data: model))
+            }
+        }
     }
 }
 
@@ -57,5 +67,9 @@ extension ETODetailCoordinator: ETODetailCoordinatorProtocol {
 extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     func switchPageState(_ state:PageState) {
         self.store.dispatch(PageStateAction(state: state))
+    }
+    
+    func setETOProjectDetailModel(_ model: ETOProjectModel) {
+        self.store.dispatch(SetProjectDetailAction(data: model))
     }
 }

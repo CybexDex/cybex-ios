@@ -11,10 +11,8 @@ import ReSwift
 import SwiftNotificationCenter
 
 protocol ETOCoordinatorProtocol {
-    func openProjectItem()
     func openBanner()
     func openProjectHistroy()
-    
 }
 
 protocol ETOStateManagerProtocol {
@@ -25,6 +23,10 @@ protocol ETOStateManagerProtocol {
     func fetchProjectData()
     
     func fetchBannersData()
+    
+    func setSelectedProjectData(_ model: ETOProjectModel)
+    
+    func setSelectedBannerData(_ model: ETOBannerModel)
 }
 
 class ETOCoordinator: ETORootCoordinator {
@@ -45,7 +47,7 @@ class ETOCoordinator: ETORootCoordinator {
 }
 
 extension ETOCoordinator: ETOCoordinatorProtocol {
-    func openProjectItem() {
+    func openProjectItem(_ model: ETOProjectModel) {
         if let vc = R.storyboard.etoDetail.etoDetailViewController() {
             vc.coordinator = ETODetailCoordinator(rootVC: self.rootVC)
             self.rootVC.pushViewController(vc, animated: true)
@@ -85,11 +87,32 @@ extension ETOCoordinator: ETOStateManagerProtocol {
     
     func fetchBannersData() {
         ETOMGService.request(target: ETOMGAPI.getBanner(), success: { (json) in
-            
+            if let banners = json.arrayValue.map({ data in
+                ETOBannerModel.deserialize(from: data.dictionaryObject)
+            }) as? [ETOBannerModel] {
+                self.store.dispatch(FetchBannerModelAction(data: banners))
+            }
         }, error: { (error) in
-            
         }) { (error) in
-            
+        }
+    }
+    
+    func setSelectedProjectData(_ model: ETOProjectModel) {
+        self.store.dispatch(SetSelectedProjectModelAction(data: model))
+        self.openProjectItem(model)
+    }
+    
+    func setSelectedBannerData(_ model: ETOBannerModel) {
+        self.store.dispatch(SetSelectedBannerModelAction(data: model))
+        if let projectModels = self.state.data.value {
+            for projectModel in projectModels {
+                if let data = projectModel.model {
+                    if data.project == model.id {
+                        self.setSelectedProjectData(data)
+                        break
+                    }
+                }
+            }
         }
     }
 }

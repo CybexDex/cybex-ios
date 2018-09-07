@@ -11,13 +11,16 @@ import ReSwift
 
 func ETODetailReducer(action:Action, state:ETODetailState?) -> ETODetailState {
     let state = state ?? ETODetailState()
-        
+    
     switch action {
+    case let action as SetProjectDetailAction:
+        state.data.accept(action.data)
     default:
         break
     }
-        
     return state
 }
+
+
 
 

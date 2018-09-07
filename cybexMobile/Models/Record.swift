@@ -25,7 +25,6 @@ extension String {
             return R.string.localizable.recode_state_upping.key.localized()
         }
     }
-    
 }
 
 struct Record : HandyJSON {

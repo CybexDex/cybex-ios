@@ -17,7 +17,7 @@ class ETOProjectCell: BaseTableViewCell {
     }
     
     override func setup(_ data: Any?) {
-        if let data = data as? ETOProjectModel {
+        if let data = data as? ETOProjectViewModel {
             projectView.updateUI(data, handler: ETOProjectView.adapterModelToETOProjectView(projectView))
         }
     }

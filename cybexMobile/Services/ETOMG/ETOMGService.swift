@@ -108,6 +108,8 @@ extension ETOMGAPI : TargetType {
     
     var urlParameters: [String:Any] {
         switch self {
+        case .getBanner():
+            return ["client":"mobile"]
         case .getProjectDetail(let id):
             return ["project": id]
         case .getProjects(let offset, let limit):

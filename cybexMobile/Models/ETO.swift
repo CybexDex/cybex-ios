@@ -9,11 +9,12 @@
 import Foundation
 import HandyJSON
 import DifferenceKit
+import RxSwift
 
 struct ETOBannerModel:HandyJSON {
     var id:String = ""
-    var adds_banner_mobil:String = ""
-    var adds_banner_mobil__lang_en:String = ""
+    var adds_banner_mobile:String = ""
+    var adds_banner_mobile__lang_en:String = ""
 }
 
 struct ETOUserAuditModel:HandyJSON {
@@ -113,8 +114,8 @@ struct ETOTradeHistoryModel: HandyJSON, Differentiable, Equatable, Hashable {
 }
 
 struct ETOProjectModel:HandyJSON {
-    var adds_logo_mobil: String = ""
-    var adds_logo_mobil__lang_en: String = ""
+    var adds_logo_mobile: String = ""
+    var adds_logo_mobile__lang_en: String = ""
     var adds_keyword: String = ""
     var adds_keyword__lang_en: String = ""
     var adds_advantage: String = ""
@@ -130,7 +131,7 @@ struct ETOProjectModel:HandyJSON {
     var adds_whitelist: String = ""
     var adds_whitelist__lang_en: String = ""
 
-    var status: String = "" // finish pre ok
+    var status: ProjectState? // finish pre ok
     var name: String = ""
     var receive_address: String = ""
     var current_percent:Double = 0
@@ -149,6 +150,8 @@ struct ETOProjectModel:HandyJSON {
     var base_accuracy: Int = 0
     var base_min_quota: Int = 0
     
+    var project: String = ""
+    
     var is_user_in:String = "0" // 0不准预约 1可以预约
     
     mutating func mapping(mapper: HelpingMapper) {
@@ -163,5 +166,50 @@ struct ETOProjectModel:HandyJSON {
         mapper <<<
             self.lock_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
     }
+}
 
+enum ProjectState : String ,HandyJSONEnum{
+    case finish = "finish"
+    case pre = "pre"
+    case ok = "ok"
+    
+    func description() -> String {
+        switch self {
+        case .finish:
+            return R.string.localizable.eto_project_finish.key.localized()
+        case .pre:
+            return R.string.localizable.eto_project_comming.key.localized()
+        case .ok:
+            return R.string.localizable.eto_project_progress.key.localized()
+        default:
+            return ""
+        }
+    }
+}
+
+
+struct ETOProjectViewModel {
+    var icon: String = ""
+    var icon_en: String = ""
+    var name: String = ""
+    var key_words: String = ""
+    var key_words_en: String = ""
+    var status: String = ""
+    var current_percent: String = ""
+    var progress: Double = 0
+    var time: String = ""
+    var model: ETOProjectModel?
+    
+    init(_ projectModel : ETOProjectModel) {
+        self.model = projectModel
+        self.name = projectModel.name
+        self.key_words = projectModel.adds_keyword
+        self.key_words_en = projectModel.adds_keyword__lang_en
+        self.status = projectModel.status!.description()
+        self.current_percent = (projectModel.current_percent * 100).string(digits:0, roundingMode: .down) + "%"
+        self.progress = projectModel.current_percent
+        self.icon = projectModel.adds_logo_mobile
+        self.icon_en = projectModel.adds_logo_mobile__lang_en
+        self.time = projectModel.start_at!.iso8601String
+    }
 }

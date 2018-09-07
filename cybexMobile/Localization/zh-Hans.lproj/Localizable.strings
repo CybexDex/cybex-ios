@@ -408,3 +408,8 @@
 "eto_refund" = "退款";
 "eto_receive_success" = "到账成功";
 
+
+"eto_project_finish" = "结束";
+"eto_project_comming" = "即将开始";
+"eto_project_progress" = "正在进行";
+

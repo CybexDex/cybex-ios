@@ -44,7 +44,7 @@ class ETODetailViewController: BaseViewController {
     }
 
     func setupData() {
-
+        
     }
     
     func setupEvent() {
@@ -59,30 +59,6 @@ class ETODetailViewController: BaseViewController {
     }
 }
 
-//MARK: - TableViewDelegate
-
-//extension ETODetailViewController: UITableViewDataSource, UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 10
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//          let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.<#cell#>.name, for: indexPath) as! <#cell#>
-//
-//        return cell
-//    }
-//}
-
-
-//MARK: - View Event
-
-//extension ETODetailViewController {
-//    @objc func <#view#>DidClicked(_ data:[String: Any]) {
-//        if let addressdata = data["data"] as? <#model#>, let view = data["self"] as? <#view#>  {
-//
-//        }
-//    }
-//}
 
 extension ETODetailViewController {
     @objc func clickCellView(_ data: [String: Any]) {
