@@ -44,7 +44,7 @@ class ETODetailViewController: BaseViewController {
     }
 
     func setupData() {
-        
+        self.coordinator?.fetchData()
     }
     
     func setupEvent() {

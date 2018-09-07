@@ -160,9 +160,6 @@ extension AppCoordinator {
             SwifterSwift.delay(milliseconds: refreshTime * 1000.0) {
                 
                 for pair in pairs {
-                    //          if pair.base == "1.3.0" && pair.quote == "1.3.506" {
-                    //            print("test")
-                    //          }
                     if CybexWebSocketService.shared.overload() {
                         return
                     }
@@ -190,13 +187,15 @@ extension AppCoordinator {
                     timer.pause()
                     return
                 }
-                //        log.debug("freshTime ----\(Date())")
                 
                 self.state.property.otherRequestRelyData.accept(1)
                 self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority: priority, isNoFirst: false)
             }
         })
     }
+    
+    
+    
     
     func requestKlineDetailData(pair: Pair, gap: candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
         let now = Date()

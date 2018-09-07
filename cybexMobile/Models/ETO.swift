@@ -154,6 +154,8 @@ struct ETOProjectModel:HandyJSON {
     
     var is_user_in:String = "0" // 0不准预约 1可以预约
     
+    var t_total_time: String = ""
+    
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
             self.start_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
@@ -197,8 +199,38 @@ struct ETOProjectViewModel {
     var status: String = ""
     var current_percent: String = ""
     var progress: Double = 0
-    var time: String = ""
     var model: ETOProjectModel?
+    var timeState: String {
+        if let data = self.model, let state = data.status {
+            if state == .finish {
+                return R.string.localizable.eto_project_time_finish.key.localized()
+            }
+            else if state == .pre {
+                return R.string.localizable.eto_project_time_pre.key.localized()
+            }
+            else {
+                return R.string.localizable.eto_project_time_comming.key.localized()
+            }
+        }
+        return ""
+    }
+    var time: String {
+        if let data = self.model, let state = data.status {
+            if state == .finish {
+                if data.t_total_time == "" {
+                    return transferTimeType(Int(data.end_at!.timeIntervalSince1970 - data.start_at!.timeIntervalSince1970))
+                }
+                return transferTimeType(Int(data.t_total_time)!,type: true)
+            }
+            else if state == .pre {
+                return transferTimeType(Int(data.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true)
+            }
+            else {
+                return transferTimeType(Int(Date().timeIntervalSince1970 - data.start_at!.timeIntervalSince1970),type: true)
+            }
+        }
+        return ""
+    }
     
     init(_ projectModel : ETOProjectModel) {
         self.model = projectModel
@@ -210,6 +242,5 @@ struct ETOProjectViewModel {
         self.progress = projectModel.current_percent
         self.icon = projectModel.adds_logo_mobile
         self.icon_en = projectModel.adds_logo_mobile__lang_en
-        self.time = projectModel.start_at!.iso8601String
     }
 }
