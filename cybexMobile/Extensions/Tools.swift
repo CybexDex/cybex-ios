@@ -436,9 +436,7 @@ extension String {
 func transferTimeType(_ time: Int, type: Bool = false) -> String {
     var result = ""
     var times = 0
-    if type == true {
-        
-    }
+
     if time == 0 {
         result = "0"
         return result + R.string.localizable.transfer_unit_second.key.localized()
@@ -449,18 +447,27 @@ func transferTimeType(_ time: Int, type: Bool = false) -> String {
     }
     times = time % (3600 * 24)
     if times / 3600 != 0 {
-        result += "\(times / 3600)" + R.string.localizable.transfer_unit_hour.key.localized()
+        if type == true, result != "" {
+            result += " \(times / 3600)" + R.string.localizable.transfer_unit_hour.key.localized()
+            return result
+        }
+        result += " \(times / 3600)" + R.string.localizable.transfer_unit_hour.key.localized()
     }
     times = times % 3600
     if times / 60 != 0 {
-        result += "\(times / 60)" + R.string.localizable.transfer_unit_minite.key.localized()
+        if type == true, result != "" {
+            result += " \(times / 60)" + R.string.localizable.transfer_unit_minite.key.localized()
+            return result
+        }
+        result += " \(times / 60)" + R.string.localizable.transfer_unit_minite.key.localized()
     }
     times = times % 60
     if times != 0 {
-        result += "\(times)" + R.string.localizable.transfer_unit_second.key.localized()
+        result += " \(times)" + R.string.localizable.transfer_unit_second.key.localized()
     }
     return result
 }
+
 
 
 

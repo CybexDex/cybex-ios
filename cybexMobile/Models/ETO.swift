@@ -200,20 +200,33 @@ struct ETOProjectViewModel {
     var current_percent: String = ""
     var progress: Double = 0
     var model: ETOProjectModel?
+    var timeState: String {
+        if let data = self.model, let state = data.status {
+            if state == .finish {
+                return R.string.localizable.eto_project_time_finish.key.localized()
+            }
+            else if state == .pre {
+                return R.string.localizable.eto_project_time_pre.key.localized()
+            }
+            else {
+                return R.string.localizable.eto_project_time_comming.key.localized()
+            }
+        }
+        return ""
+    }
     var time: String {
         if let data = self.model, let state = data.status {
             if state == .finish {
                 if data.t_total_time == "" {
-                    
-                    return "\(data.end_at!.timeIntervalSince1970 - data.start_at!.timeIntervalSince1970)"
+                    return transferTimeType(Int(data.end_at!.timeIntervalSince1970 - data.start_at!.timeIntervalSince1970))
                 }
-                return ""
+                return transferTimeType(Int(data.t_total_time)!,type: true)
             }
             else if state == .pre {
-                return ""
+                return transferTimeType(Int(data.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true)
             }
             else {
-                return ""
+                return transferTimeType(Int(Date().timeIntervalSince1970 - data.start_at!.timeIntervalSince1970),type: true)
             }
         }
         return ""

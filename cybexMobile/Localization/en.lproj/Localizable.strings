@@ -438,4 +438,8 @@
 "eto_project_comming" = "Coming";
 "eto_project_progress" = "In Progress";
 
+"eto_project_time_finish" = "Ended:";
+"eto_project_time_comming" = "Left:";
+"eto_project_time_pre" = "In:";
+
 

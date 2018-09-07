@@ -21,6 +21,10 @@ func ETODetailReducer(action:Action, state:ETODetailState?) -> ETODetailState {
     return state
 }
 
+func transferProjectModel(_ sender: ETOProjectModel) {
+    
+}
+
 
 
 

@@ -21,6 +21,8 @@ protocol ETODetailStateManagerProtocol {
     func switchPageState(_ state:PageState)
     
     func setETOProjectDetailModel(_ model: ETOProjectModel)
+    
+    func fetchData()
 }
 
 class ETODetailCoordinator: ETORootCoordinator {
