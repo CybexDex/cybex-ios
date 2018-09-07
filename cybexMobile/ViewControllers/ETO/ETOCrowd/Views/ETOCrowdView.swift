@@ -43,17 +43,6 @@ class ETOCrowdView: BaseView {
         self.actionButton.locali = R.string.localizable.eto_join.key
         self.actionButton.bgColor = UIColor.steel
 //        self.actionButton.isEnabled = false
-        
-        self.titleTextView.unitLabel.text = R.string.localizable.eto_available.key.localizedFormat("1.666", "ETH")
-        
-        let accountName = StyleNames.bold_12_20.tagText("test1")
-        self.descLabel.text = """
-        • You will participate in the ETO by your ETH balance in your CYBEX account, and the process may consume certain fees.
-        • The assets of this project will be deposited to your account (\(accountName)) after successful subscription.
-        • Your final subscription will be subject to the verification by the project holder. You can check through "ETO Project History". When circumstances like personal hard cap exceeded or project.Quota oversubscription happens, the unconfirmed excess quota will be refunded to relevant CYBEX accounts when project ETO ends.
-        •    The final ETO participation result takes time to be confirmed. Please wait patiently. If you have any questions, please contact our community assistant through WeChat account: CybexServiceA.
-        """
-        
     }
     
     func setupSubViewEvent() {
@@ -78,7 +67,7 @@ extension ETOCrowdView: GridContentViewDataSource {
         let views = Array(0...4).map({ (index) -> ETOCrowdGridItemView in
             let item = ETOCrowdGridItemView()
             item.titleLabel.locali = titles[index].key
-            item.valueLabel.text = "\(index) ETH"
+            item.valueLabel.text = "-- ETH"
             item.lineView.isHidden = index == 4
             return item
         })

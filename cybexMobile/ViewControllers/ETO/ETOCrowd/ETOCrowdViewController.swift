@@ -15,7 +15,9 @@ class ETOCrowdViewController: BaseViewController {
 
 	var coordinator: (ETOCrowdCoordinatorProtocol & ETOCrowdStateManagerProtocol)?
 
-	override func viewDidLoad() {
+    @IBOutlet var contentView: ETOCrowdView!
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         setupData()
@@ -36,7 +38,8 @@ class ETOCrowdViewController: BaseViewController {
     }
 
     func setupData() {
-        
+        self.coordinator?.fetchData()
+        self.coordinator?.fetchUserRecord()
     }
     
     func setupEvent() {
@@ -48,6 +51,18 @@ class ETOCrowdViewController: BaseViewController {
             guard let `self` = self else { return }
             
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        coordinator?.state.data.asObservable().subscribe(onNext: {[weak self] (model) in
+            guard let `self` = self, let model = model else { return }
+
+            self.contentView.updateUI(model, handler: ETOCrowdView.adapterModelToETOCrowdView(self.contentView))
+        }).disposed(by: disposeBag)
+        
+        coordinator?.state.userData.asObservable().subscribe(onNext: {[weak self] (model) in
+            guard let `self` = self, let model = model, let project = self.coordinator?.state.data.value else { return }
+            
+            self.contentView.updateUI((projectModel:project, userModel:model), handler: ETOCrowdView.adapterModelToUserCrowdView(self.contentView))
+        }).disposed(by: disposeBag)
     }
 }
 

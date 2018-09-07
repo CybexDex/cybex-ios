@@ -34,7 +34,7 @@ struct ETOShortProjectStatusModel:HandyJSON {
 }
 
 struct ETOUserModel:HandyJSON {
-    var current_base_token_count:Int = 0
+    var current_base_token_count:Double = 0
 }
 
 enum ETOTradeHistoryStatus:String, HandyJSONEnum {
@@ -114,6 +114,7 @@ struct ETOTradeHistoryModel: HandyJSON, Differentiable, Equatable, Hashable {
 }
 
 struct ETOProjectModel:HandyJSON {
+    var id: Int = 0
     var adds_logo_mobile: String = ""
     var adds_logo_mobile__lang_en: String = ""
     var adds_keyword: String = ""
@@ -146,9 +147,9 @@ struct ETOProjectModel:HandyJSON {
     var base_token_name: String = ""
     var rate:Int = 0 //1 base
     
-    var base_max_quota: Int = 0
+    var base_max_quota: Double = 0
     var base_accuracy: Int = 0
-    var base_min_quota: Int = 0
+    var base_min_quota: Double = 0
     
     var project: String = ""
     

@@ -40,7 +40,7 @@ struct GetRequiredFees:JSONRPCKit.Request, JSONRPCResponse {
     func transferResponse(from resultObject: Any) throws -> Any {
         let result = JSON(resultObject)
         if let data = result.arrayObject as? [[String:Any]] {
-            return data.flatMap({Fee(JSON: $0)})
+            return data.compactMap({Fee(JSON: $0)})
         }
         return []
     }

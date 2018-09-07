@@ -17,6 +17,9 @@ protocol ETOCrowdStateManagerProtocol {
     var state: ETOCrowdState { get }
     
     func switchPageState(_ state:PageState)
+    
+    func fetchData()
+    func fetchUserRecord()
 }
 
 class ETOCrowdCoordinator: ETORootCoordinator {
@@ -41,6 +44,27 @@ extension ETOCrowdCoordinator: ETOCrowdCoordinatorProtocol {
 }
 
 extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
+    func fetchData() {
+        Broadcaster.notify(ETODetailStateManagerProtocol.self) {(coor) in
+            self.store.dispatch(SetProjectDetailAction(data: coor.state.data.value!))
+        }
+    }
+    
+    func fetchUserRecord() {
+        guard let name = UserManager.shared.name.value, let data = self.state.data.value else { return }
+
+        ETOMGService.request(target: .refreshUserState(name: name, pid: data.id), success: { (json) in
+            if let model = ETOUserModel.deserialize(from: json.dictionaryObject) {
+                self.store.dispatch(fetchCurrentTokenCountAction(userModel: model))
+            }
+            
+        }, error: { (error) in
+            
+        }) { (error) in
+            
+        }
+    }
+    
     func switchPageState(_ state:PageState) {
         self.store.dispatch(PageStateAction(state: state))
     }
