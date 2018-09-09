@@ -130,6 +130,8 @@ struct ETOProjectModel:HandyJSON {
     var adds_buy_desc__lang_en: String = ""
     var adds_whitelist: String = ""
     var adds_whitelist__lang_en: String = ""
+    var adds_whitepaper: String = ""
+    var adds_whitepaper__lang_en: String = ""
 
     var status: ProjectState? // finish pre ok
     var name: String = ""
@@ -141,6 +143,7 @@ struct ETOProjectModel:HandyJSON {
     var finish_at:Date?
     var offer_at:Date?
     var lock_at:Date?
+    var create_at:Date?
     
     var token_name: String = ""
     var base_token_name: String = ""
@@ -167,6 +170,8 @@ struct ETOProjectModel:HandyJSON {
             self.offer_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
         mapper <<<
             self.lock_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
+        mapper <<<
+            self.create_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
     }
 }
 
@@ -199,9 +204,9 @@ struct ETOProjectViewModel {
     var status: String = ""
     var current_percent: String = ""
     var progress: Double = 0
-    var model: ETOProjectModel?
+    var projectModel: ETOProjectModel?
     var timeState: String {
-        if let data = self.model, let state = data.status {
+        if let data = self.projectModel, let state = data.status {
             if state == .finish {
                 return R.string.localizable.eto_project_time_finish.key.localized()
             }
@@ -214,8 +219,9 @@ struct ETOProjectViewModel {
         }
         return ""
     }
+    
     var time: String {
-        if let data = self.model, let state = data.status {
+        if let data = self.projectModel, let state = data.status {
             if state == .finish {
                 if data.t_total_time == "" {
                     return transferTimeType(Int(data.end_at!.timeIntervalSince1970 - data.start_at!.timeIntervalSince1970))
@@ -232,8 +238,47 @@ struct ETOProjectViewModel {
         return ""
     }
     
+    var etoDetail: String {
+        var result: String = ""
+        if let data = self.projectModel {
+            result += R.string.localizable.eto_project_name.key.localized() + data.name + "\n"
+            result += R.string.localizable.eto_token_name.key.localized() + data.token_name + "\n"
+            result += R.string.localizable.eto_start_time.key.localized() + data.start_at!.iso8601 + "\n"
+            result += R.string.localizable.eto_end_time.key.localized() + data.end_at!.iso8601 + "\n"
+            result += R.string.localizable.eto_start_at.key.localized() + data.lock_at!.iso8601 + "\n"
+            if data.offer_at == nil {
+                result += R.string.localizable.eto_token_releasing_time.key.localized() + R.string.localizable.eto_project_immediate.key.localized() + "\n"
+            }
+            else {
+                  result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offer_at!.iso8601 + "\n"
+            }
+            result += R.string.localizable.eto_exchange_ratio.key.localized() + "1" + data.base_token_name + "=" + "\(data.rate)" + data.token_name
+        }
+        return result
+    }
+
+    var project_website: String {
+        var result: String = ""
+        if let data = self.projectModel {
+            result += R.string.localizable.eto_project_online.key.localized() + data.adds_website + "\n"
+            result += R.string.localizable.eto_project_white_Paper.key.localized() + data.adds_whitepaper + "\n"
+            result += R.string.localizable.eto_project_detail.key.localized() + data.adds_detail
+        }
+        return result
+    }
+    
+    var project_website_en: String {
+        var result: String = ""
+        if let data = self.projectModel {
+            result += R.string.localizable.eto_project_online.key.localized() + data.adds_website__lang_en + "\n"
+            result += R.string.localizable.eto_project_white_Paper.key.localized() + data.adds_whitepaper__lang_en + "\n"
+            result += R.string.localizable.eto_project_detail.key.localized() + data.adds_detail__lang_en
+        }
+        return result
+    }
+    
     init(_ projectModel : ETOProjectModel) {
-        self.model = projectModel
+        self.projectModel = projectModel
         self.name = projectModel.name
         self.key_words = projectModel.adds_keyword
         self.key_words_en = projectModel.adds_keyword__lang_en
@@ -244,3 +289,6 @@ struct ETOProjectViewModel {
         self.icon_en = projectModel.adds_logo_mobile__lang_en
     }
 }
+
+
+

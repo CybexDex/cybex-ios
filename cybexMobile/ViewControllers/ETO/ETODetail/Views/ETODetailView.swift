@@ -41,13 +41,10 @@ class ETODetailView: BaseView {
     
     func setupUI() {
         clearBgColor()
+        getJoinButtonState()
+        
         getWhiteListView.rightIcon.image = R.image.icwhitelist()
         getWhiteListView.name.textColor = UIColor.pastelOrange
-        getJoinButtonState()
-        detailView.content = "项目名称：ICO CLUB CHAIN\n代币名称：CLUB\n兑换比例：1 ETH=1667 CLUB\nETO时间：2018/08/03  17:25:00\n结束时间：2018/09/03  18:25:00\n开放交易时间：2018/08/03  17:25:00\n发币时间：实时\n使用币种：ETH"
-        
-        websiteView.setContentAttribute(contentLabelStr: "官网：haha1\n白皮书：haha2\n项目详情：haha3", attLabelArray: ["haha1","haha2","haha3"])
-        headerView.setupUI()
     }
     
     func getJoinButtonState() {

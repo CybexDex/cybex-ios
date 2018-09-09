@@ -43,6 +43,10 @@ class ETOViewController: BaseViewController {
     }
     
     override func rightAction(_ sender: UIButton) {
+        if !UserManager.shared.isLoginIn {
+            app_coodinator.showLogin()
+            return
+        }
         self.coordinator?.openProjectHistroy()
     }
     
@@ -86,7 +90,7 @@ class ETOViewController: BaseViewController {
 extension ETOViewController {
     @objc func ETOProjectViewDidClicked(_ data:[String: Any]) {
         if let viewModel = data["data"] as? ETOProjectViewModel {
-            self.coordinator?.setSelectedProjectData(viewModel.model!)
+            self.coordinator?.setSelectedProjectData(viewModel.projectModel!)
         }
     }
     

@@ -7,9 +7,21 @@
 //
 
 import Foundation
+import Localize_Swift
 
 extension ETODetailView {
-    func adapterModelToETODetailView(_ model:ETOProjectModel) {
-        
+    func adapterModelToETODetailView(_ model:ETOProjectViewModel) {
+        if let data = model.projectModel {
+            if Localize.currentLanguage() == "en" {
+                websiteView.setContentAttribute(contentLabelStr: model.project_website, attLabelArray: [data.adds_website, data.adds_whitepaper, data.adds_detail])
+                introView.content = data.adds_advantage__lang_en
+            }
+            else {
+                websiteView.setContentAttribute(contentLabelStr: model.project_website_en, attLabelArray: [data.adds_website__lang_en, data.adds_whitepaper__lang_en, data.adds_detail__lang_en])
+                introView.content = data.adds_advantage
+            }
+        }
+        detailView.content = model.etoDetail
+        headerView.adapterModelToETODetailHeaderView(model)
     }
 }
