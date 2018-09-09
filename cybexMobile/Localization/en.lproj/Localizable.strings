@@ -438,8 +438,22 @@
 "eto_project_comming" = "Coming";
 "eto_project_progress" = "In Progress";
 
-"eto_project_time_finish" = "Ended:";
-"eto_project_time_comming" = "Left:";
-"eto_project_time_pre" = "In:";
+"eto_project_time_finish" = "Ended：";
+"eto_project_time_comming" = "Left：";
+"eto_project_time_pre" = "In：";
+
+"eto_project_name" = "Project Name：";
+"eto_token_name" = "Token Name：";
+"eto_start_time" = "ETO Time：";
+"eto_end_time" = "End at：";
+"eto_start_at" = "Circulation on Cybex Starts at：";
+"eto_token_releasing_time" = "Token Releasing Time：";
+"eto_currency" = "Currency：";
+"eto_exchange_ratio" = "Exchange Ratio：";
+
+"eto_project_online" = "Official Website：";
+"eto_project_white_Paper" = "Whitepaper：";
+
+"eto_project_immediate" = "Immediate";
 
 

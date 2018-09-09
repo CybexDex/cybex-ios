@@ -28,7 +28,7 @@ extension ETOProjectView {
             self.icon.kf.setImage(with: URL(string: model.icon))
             self.markLabel.text = model.key_words
         }
-        if let projectModel = model.model {
+        if let projectModel = model.projectModel {
             switch projectModel.status! {
             case .finish:
                 self.progressView.beginColor = .slate

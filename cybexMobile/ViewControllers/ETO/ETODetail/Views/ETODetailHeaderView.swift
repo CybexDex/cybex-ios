@@ -32,13 +32,7 @@ class ETODetailHeaderView: BaseView {
     }
     
     func setupUI() {
-        setupStateImgOnGoingCN()
-        let faker = Faker.init()
-        iconImgView.kf.setImage(with: URL(string: faker.company.logo()))
-        timeLabel.text = faker.business.creditCardExpiryDate()?.string()
-        progressValue = 0.5
-        progressLabel.text = "48%"
-        nameLabel.text = faker.name.name()
+ 
     }
     
     var progressValue: Double = 0.0 {
@@ -68,29 +62,7 @@ class ETODetailHeaderView: BaseView {
     
     }
     
-    func setupStateImgOnGoingCN() {
-        stateImgView.image = R.image.ongoingcn()
-    }
     
-    func setupStateImgEndCN() {
-        stateImgView.image = R.image.endcn()
-    }
-    
-    func setupStateImgWillStartCN() {
-        stateImgView.image = R.image.willstartcn()
-    }
-    
-    func setupStateImgOnGoingEN() {
-        stateImgView.image = R.image.ongoingen()
-    }
-    
-    func setupStateImgEndEN() {
-        stateImgView.image = R.image.enden()
-    }
-    
-    func setupStateImgWillStartEN() {
-        stateImgView.image = R.image.willstarten()
-    }
     
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.ETODetailHeaderViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])

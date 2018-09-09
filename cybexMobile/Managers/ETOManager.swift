@@ -99,8 +99,8 @@ class ETOManager {
     
     func getETOJoinButtonState() -> ETOJoinButtonState {
         let clause = getClauseState()
-//MARK: Test
-        return .normal(title: "立即众筹", style: .normal, action: .crowdPage)
+////MARK: Test
+//        return .normal(title: "立即众筹", style: .normal, action: .crowdPage)
 
 //        return .disable(title: "停止预约", style: .disable)
 
@@ -134,8 +134,6 @@ class ETOManager {
             }
 
             return .notShow
-
         }
-      
     }
 }
