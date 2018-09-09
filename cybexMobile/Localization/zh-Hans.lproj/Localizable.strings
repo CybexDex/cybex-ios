@@ -431,4 +431,13 @@
 "eto_project_immediate" = "实时";
 
 
+"eto_project_reserve_now" = "立即预约";
+"eto_project_verifying" = "审核中";
+"eto_project_stop_reserve" = "停止预约";
+"eto_project_waiting" = "等待众筹开始";
+"eto_project_join" = "立即众筹";
+"eto_project_rejected" = "审核未通过";
+"eto_project_kyc" = "进行KYC";
+"eto_project_login" = "请登录";
+
 

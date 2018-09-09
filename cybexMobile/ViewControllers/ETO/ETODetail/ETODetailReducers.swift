@@ -15,7 +15,8 @@ func ETODetailReducer(action:Action, state:ETODetailState?) -> ETODetailState {
     switch action {
     case let action as SetProjectDetailAction:
         state.data.accept(transferProjectModel(action.data))
-        
+    case let action as FetchUserStateAction:
+        state.userState.accept(action.data)
     default:
         break
     }

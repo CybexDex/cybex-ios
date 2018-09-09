@@ -456,4 +456,12 @@
 
 "eto_project_immediate" = "Immediate";
 
+"eto_project_reserve_now" = "Reserve Now";
+"eto_project_verifying" = "Verifying";
+"eto_project_stop_reserve" = "Stop Reserve";
+"eto_project_waiting" = "Waiting for ETO";
+"eto_project_join" = "Join ETO now";
+"eto_project_rejected" = "Rejected";
+"eto_project_kyc" = "KYC Verification";
+"eto_project_login" = "Login";
 

@@ -23,6 +23,8 @@ protocol ETODetailStateManagerProtocol {
     func setETOProjectDetailModel(_ model: ETOProjectModel)
     
     func fetchData()
+    
+    func fetchUpState()
 }
 
 class ETODetailCoordinator: ETORootCoordinator {
@@ -45,6 +47,34 @@ class ETODetailCoordinator: ETORootCoordinator {
         Broadcaster.notify(ETOStateManagerProtocol.self) { (coor) in
             if let model = coor.state.selectedProjectModel.value {
                 self.store.dispatch(SetProjectDetailAction(data: model))
+            }
+        }
+    }
+    
+    func fetchUserState() {
+        if let name = UserManager.shared.name.value, let data = self.state.data.value, let projectModel = data.projectModel, let projectId = projectModel.project.int {
+            ETOMGService.request(target: ETOMGAPI.checkUserState(name: name, id: projectId), success: { (json) in
+                if let data = json.dictionaryObject, let model = ETOUserAuditModel.deserialize(from: data){
+                    self.store.dispatch(FetchUserStateAction(data:model))
+                }
+            }, error: { (error) in
+                
+            }) { (error) in
+                
+            }
+        }
+    }
+    
+    
+    func fetchUpState() {
+        if !UserManager.shared.isLoginIn {
+            ETOManager.shared.changeState(.notLogin)
+        }
+        else {
+            if let state = self.state.userState.value {
+                if state.status == "unstart" {
+                    ETOManager.shared.changeState([.login, .notBookable])
+                }
             }
         }
     }
