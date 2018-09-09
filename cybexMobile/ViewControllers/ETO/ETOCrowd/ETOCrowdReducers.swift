@@ -13,6 +13,12 @@ func ETOCrowdReducer(action:Action, state:ETOCrowdState?) -> ETOCrowdState {
     let state = state ?? ETOCrowdState()
         
     switch action {
+    case let action as SetProjectDetailAction:
+        state.data.accept(action.data)
+    case let action as fetchCurrentTokenCountAction:
+        state.userData.accept(action.userModel)
+    case let action as SetFeeAction:
+        state.fee.accept(action.fee)
     default:
         break
     }

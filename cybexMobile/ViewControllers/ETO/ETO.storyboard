@@ -20,6 +20,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="utP-hA-D2G"/>
                     </view>
+                    <connections>
+                        <outlet property="contentView" destination="24b-ig-avX" id="eIf-el-bOT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZM8-p4-J8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

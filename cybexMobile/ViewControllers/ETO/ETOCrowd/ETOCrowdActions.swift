@@ -12,7 +12,14 @@ import RxCocoa
 
 //MARK: - State
 struct ETOCrowdState: BaseState {
-   var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var data: BehaviorRelay<ETOProjectModel?> = BehaviorRelay(value: nil)
+    var userData: BehaviorRelay<ETOUserModel?> = BehaviorRelay(value: nil)
+    var fee: BehaviorRelay<Fee?> = BehaviorRelay(value: nil)
 }
 
 //MARK: - Action
+
+struct fetchCurrentTokenCountAction: Action {
+    var userModel: ETOUserModel
+}
