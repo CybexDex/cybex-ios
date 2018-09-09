@@ -416,3 +416,11 @@
 "eto_project_time_finish" = "完成时间:";
 "eto_project_time_comming" = "距离结束:";
 "eto_project_time_pre" = "距离开始:";
+
+"eto_submit_title" = "你将参与 %@ 的ETO";
+"eto_submit_check_error_1" = "余额不足";
+"eto_submit_check_error_2" = "超出单账号限额";
+"eto_submit_check_error_3" = "剩余可认购额度不足";
+"eto_submit_check_error_4" = "不可低于单笔最低限额";
+"eto_submit_check_error_5" = "认购金额为最小认购单位整数倍";
+"eto_submit_confirm" = "ETO确认";

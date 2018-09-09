@@ -25,6 +25,9 @@ extension ETOCrowdView {
             let amount = getRealAmount(balance.asset_type, amount: balance.balance).string(digits: info.precision, roundingMode: .down)
             self.titleTextView.unitLabel.text = R.string.localizable.eto_available.key.localizedFormat(amount, model.base_token_name)
         }
+        else {
+            self.titleTextView.unitLabel.text = R.string.localizable.eto_available.key.localizedFormat("--", model.base_token_name)
+        }
         
 //        let accountName = StyleNames.bold_12_20.tagText("test1")
         self.descLabel.text = Localize.currentLanguage() == "en" ? model.adds_buy_desc__lang_en : model.adds_buy_desc

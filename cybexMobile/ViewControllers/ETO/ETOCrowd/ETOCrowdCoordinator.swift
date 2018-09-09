@@ -11,6 +11,7 @@ import ReSwift
 import SwiftNotificationCenter
 
 protocol ETOCrowdCoordinatorProtocol {
+    func showConfirm(_ transferAmount:Double)
 }
 
 protocol ETOCrowdStateManagerProtocol {
@@ -21,6 +22,10 @@ protocol ETOCrowdStateManagerProtocol {
     func fetchData()
     func fetchUserRecord()
     func fetchFee()
+    
+    func unsetValidStatus()
+    func checkValidStatus(_ transferAmount:Double)
+    
     func joinCrowd(_ transferAmount:Double, callback: @escaping CommonAnyCallback)
 }
 
@@ -42,7 +47,16 @@ class ETOCrowdCoordinator: ETORootCoordinator {
 }
 
 extension ETOCrowdCoordinator: ETOCrowdCoordinatorProtocol {
-    
+    func showConfirm(_ transferAmount:Double) {
+        guard let data = self.state.data.value, let fee = self.state.fee.value, let feeInfo = app_data.assetInfo[fee.asset_id], let feeAmount = fee.amount.toDouble()?.string(digits: feeInfo.precision, roundingMode: .down) else { return }
+
+        self.rootVC.topViewController?.showConfirm(R.string.localizable.eto_submit_confirm.key.localized(), attributes: confirmSubmitCrowd(data.name, amount: "\(transferAmount) \(data.base_token_name)", fee: "\(feeAmount) \(feeInfo.symbol.filterJade)"), setup: { (labels) in
+                //            for label in labels {
+                //                label.content.numberOfLines = 1
+                //                label.content.lineBreakMode = .byTruncatingMiddle
+                //            }
+            })
+    }
 }
 
 extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
@@ -66,8 +80,66 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
                 self.store.dispatch(SetFeeAction(fee: Fee(JSON: dictionary)!))
             }
             else {
-                self.store.dispatch(SetFeeAction(fee: Fee(JSON: ["asset_id":assetID, "amount": "0"])!))
+                self.store.dispatch(changeETOValidStatusAction(status: .feeNotEnough))
             }
+            
+        }
+    }
+    
+    func unsetValidStatus() {
+        guard self.state.validStatus.value != .feeNotEnough else { return }
+
+        self.store.dispatch(changeETOValidStatusAction(status: .notValid))
+    }
+    
+    func checkValidStatus(_ transferAmount:Double) {
+        guard self.state.validStatus.value == .notValid else { return }
+        
+        guard let balances = UserManager.shared.balances.value, let data = self.state.data.value, let userModel = self.state.userData.value else { return }
+        
+        let balance = balances.filter { (balance) -> Bool in
+            if let name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade {
+                return name == data.base_token_name
+            }
+            
+            return false
+        }.first
+        
+        if let balance = balance, let info = app_data.assetInfo[balance.asset_type] {
+            let amount = getRealAmount(balance.asset_type, amount: balance.balance).string(digits: info.precision, roundingMode: .down)
+            
+            if transferAmount > amount.toDouble()! {
+                self.store.dispatch(changeETOValidStatusAction(status: .notEnough))
+                return
+            }
+        }
+        else {
+            self.store.dispatch(changeETOValidStatusAction(status: .notEnough))
+            return
+        }
+        
+        if transferAmount > data.base_max_quota {
+            self.store.dispatch(changeETOValidStatusAction(status: .moreThanLimit))
+            return
+        }
+        
+        let remain = data.base_max_quota - userModel.current_base_token_count
+        
+        if transferAmount > remain {
+            self.store.dispatch(changeETOValidStatusAction(status: .notAvaliableLimit))
+            return
+        }
+        
+        if transferAmount < data.base_min_quota {
+            self.store.dispatch(changeETOValidStatusAction(status: .lessThanLeastLimit))
+            return
+        }
+        
+        let unit = 1 / pow(10, data.base_accuracy)
+        
+        if transferAmount.truncatingRemainder(dividingBy: unit.doubleValue) > 0 {
+            self.store.dispatch(changeETOValidStatusAction(status: .precisionError))
+            return
         }
     }
     
