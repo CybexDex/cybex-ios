@@ -14,15 +14,17 @@ func ETODetailReducer(action:Action, state:ETODetailState?) -> ETODetailState {
     
     switch action {
     case let action as SetProjectDetailAction:
-        state.data.accept(action.data)
+        state.data.accept(transferProjectModel(action.data))
+        
     default:
         break
     }
     return state
 }
 
-func transferProjectModel(_ sender: ETOProjectModel) {
+func transferProjectModel(_ sender: ETOProjectModel) -> ETOProjectViewModel{
     
+    return ETOProjectViewModel(sender)
 }
 
 

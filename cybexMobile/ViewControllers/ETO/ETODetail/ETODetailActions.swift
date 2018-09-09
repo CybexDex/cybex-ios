@@ -13,7 +13,7 @@ import RxCocoa
 //MARK: - State
 struct ETODetailState: BaseState {
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
-    var data: BehaviorRelay<ETOProjectModel?> = BehaviorRelay(value: nil)
+    var data: BehaviorRelay<ETOProjectViewModel?> = BehaviorRelay(value: nil)
 }
 
 //MARK: - Action

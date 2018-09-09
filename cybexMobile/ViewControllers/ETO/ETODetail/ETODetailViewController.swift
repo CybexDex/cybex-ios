@@ -54,7 +54,14 @@ class ETODetailViewController: BaseViewController {
     override func configureObserveState() {
         coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self] (state) in
             guard let `self` = self else { return }
-            
+        
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        coordinator?.state.data.asObservable().subscribe(onNext: { [weak self] data in
+            guard let `self` = self else { return }
+            if let model = data as? ETOProjectViewModel {
+                self.contentView.adapterModelToETODetailView(model)
+            }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }

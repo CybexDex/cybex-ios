@@ -41,8 +41,10 @@ class ETODetailIntroView: BaseView {
         for att in attLabelArray {
             let customType = ActiveType.custom(pattern: "\(att)")
             contentLabel.enabledTypes.append(customType)
+            contentLabel.numberOfLines = 3
             contentLabel.customize { label in
                 label.customColor[customType] = UIColor.steel
+                label.customSelectedColor[customType] = UIColor.steel
                 label.configureLinkAttribute = { (type, attributes, isSelected) in
                     var atts = attributes
                     atts[NSAttributedStringKey.underlineStyle] = 1

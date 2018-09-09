@@ -203,7 +203,9 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
     
     func fetchData() {
         Broadcaster.notify(ETODetailStateManagerProtocol.self) {(coor) in
-            self.store.dispatch(SetProjectDetailAction(data: coor.state.data.value!))
+            if let model = coor.state.data.value?.projectModel {
+                self.store.dispatch(SetProjectDetailAction(data: model))
+            }
         }
     }
     
