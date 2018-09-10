@@ -16,15 +16,31 @@ import Localize_Swift
 
 class CybexWebViewController: BaseWebViewController {
     
+    enum web_type: Int {
+        case help = 0
+        case kyc
+        case whitelist
+        case project_website
+        case whitepaper
+    }
+    
+    
     var coordinator: (CybexWebCoordinatorProtocol & CybexWebStateManagerProtocol)?
     
+    var vc_type: web_type = .help
+    
     override func viewDidLoad() {
-        let url = Defaults[.theme] == 0 ?AppConfiguration.HELP_NIGHT_URL + Localize.currentLanguage() : AppConfiguration.HELP_LIGHT_URL + Localize.currentLanguage()
-        self.url = URL(string: url)
+        if vc_type == .help {
+            let url = Defaults[.theme] == 0 ?AppConfiguration.HELP_NIGHT_URL + Localize.currentLanguage() : AppConfiguration.HELP_LIGHT_URL + Localize.currentLanguage()
+            self.url = URL(string: url)
+        }
         super.viewDidLoad()
         
         setupUI()
         setupEvent()
+        if vc_type != .help {
+            webView.load(URLRequest.init(url: self.url!))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +52,14 @@ class CybexWebViewController: BaseWebViewController {
     }
     
     func setupUI() {
-        self.title = R.string.localizable.setting_help.key.localized()
+        switch self.vc_type {
+        case .help:
+            self.title = R.string.localizable.setting_help.key.localized()
+        case .kyc:
+            break
+        default:
+            break
+        }
     }
     
     func setupEvent() {

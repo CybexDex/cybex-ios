@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Localize_Swift
 
 @IBDesignable
 class ETODetailView: BaseView {
@@ -145,6 +146,12 @@ class ETODetailView: BaseView {
     
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.ETODetailViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+    }
+    
+    @objc func clickCellView(_ data: [String: Any]) {
+        if let data = self.data as? ETOProjectViewModel, let model = data.projectModel {
+            self.next?.sendEventWith("clickCellView", userinfo: ["data": Localize.currentLanguage() == "en" ? model.adds_whitelist__lang_en : model.adds_whitelist])
+        }
     }
 }
 

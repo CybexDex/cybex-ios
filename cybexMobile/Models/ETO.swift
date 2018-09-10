@@ -24,7 +24,7 @@ struct ETOUserAuditModel:HandyJSON {
 
 struct ETOShortProjectStatusModel:HandyJSON {
     var current_percent:Int = 0
-    var status:String = "" //finish pre ok
+    var status:ProjectState? //finish pre ok
     var finish_at:Date!
     
     mutating func mapping(mapper: HelpingMapper) {

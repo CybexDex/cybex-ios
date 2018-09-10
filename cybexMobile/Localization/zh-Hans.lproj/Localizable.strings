@@ -441,3 +441,22 @@
 "eto_project_online" = "官网：";
 "eto_project_white_Paper" = "白皮书：";
 "eto_project_immediate" = "实时";
+
+
+"eto_project_reserve_now" = "立即预约";
+"eto_project_verifying" = "审核中";
+"eto_project_stop_reserve" = "停止预约";
+"eto_project_waiting" = "等待众筹开始";
+"eto_project_join" = "立即众筹";
+"eto_project_rejected" = "审核未通过";
+"eto_project_kyc" = "进行KYC";
+"eto_project_login" = "请登录";
+
+
+
+"eto_transfer_title" = "转账待确认中";
+"eto_transfer_content" = "请勿重复转账";
+
+"eto_invite_code_error" = "请输入正确的邀请码";
+"eto_invite_code_title" = "输入邀请码";
+

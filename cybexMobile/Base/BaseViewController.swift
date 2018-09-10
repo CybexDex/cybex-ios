@@ -174,12 +174,12 @@ extension UIViewController {
 }
 
 extension UIViewController : ShowManagerDelegate {
-    func showPasswordBox(_ title:String = R.string.localizable.withdraw_unlock_wallet.key.localized()){
+    func showPasswordBox(_ title:String = R.string.localizable.withdraw_unlock_wallet.key.localized(),middleType:CybexTextView.textView_type = .normal){
         if ShowToastManager.shared.showView != nil {
             ShowToastManager.shared.hide(0)
         }
         SwifterSwift.delay(milliseconds: 100) {
-            ShowToastManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big)
+            ShowToastManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big,middleType:middleType)
             ShowToastManager.shared.delegate = self
             ShowToastManager.shared.showAnimationInView(self.view)
         }
@@ -237,6 +237,20 @@ extension UIViewController : ShowManagerDelegate {
         }
     }
     
+    
+    func showWaiting(_ title: String, content: String, time: Int) {
+        if ShowToastManager.shared.showView != nil {
+            ShowToastManager.shared.hide(0)
+        }
+        SwifterSwift.delay(milliseconds: 100) {
+            ShowToastManager.shared.setUp(title, content: content, time: time, animationType: ShowToastManager.ShowAnimationType.small_big)
+            ShowToastManager.shared.showAnimationInView(self.view)
+            ShowToastManager.shared.delegate = self
+        }
+    }
+    
+    
+    
     func returnEnsureAction() {
         
     }
@@ -264,5 +278,13 @@ extension UIViewController : ShowManagerDelegate {
                 self?.passwordPassed(success)
             }
         }
+    }
+    
+    func ensureWaitingAction(_ sender: CybexWaitingView) {
+        
+    }
+    
+    func returnInviteCode(_ sender: String) {
+        
     }
 }

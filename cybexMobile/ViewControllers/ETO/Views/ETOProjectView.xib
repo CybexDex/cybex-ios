@@ -134,13 +134,6 @@
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="project_progress" translatesAutoresizingMaskIntoConstraints="NO" id="na5-42-pdN">
-                    <rect key="frame" x="95" y="90" width="16" height="16"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="16" id="TdT-pV-uaF"/>
-                        <constraint firstAttribute="height" constant="16" id="V7w-bW-der"/>
-                    </constraints>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rG-8U-sxA">
                     <rect key="frame" x="95" y="12" width="262" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
@@ -161,6 +154,13 @@
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="project_progress" translatesAutoresizingMaskIntoConstraints="NO" id="na5-42-pdN">
+                    <rect key="frame" x="95" y="90" width="16" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="16" id="TdT-pV-uaF"/>
+                        <constraint firstAttribute="height" constant="16" id="V7w-bW-der"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <constraints>
                 <constraint firstItem="exm-CO-epf" firstAttribute="centerX" secondItem="LBt-oQ-w0g" secondAttribute="centerX" id="0xj-vo-bxv"/>

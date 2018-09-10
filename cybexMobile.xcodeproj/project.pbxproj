@@ -330,6 +330,8 @@
 		72DBCA7521391A4300905303 /* CybexWebActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7121391A4300905303 /* CybexWebActions.swift */; };
 		72DBCA7621391A4300905303 /* CybexWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7221391A4300905303 /* CybexWebViewController.swift */; };
 		72DBCA7721391A4300905303 /* CybexWebReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7321391A4300905303 /* CybexWebReducers.swift */; };
+		72E3A4CC214560580083E417 /* CybexWaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E3A4C9214560580083E417 /* CybexWaitingView.swift */; };
+		72E3A4CD214560580083E417 /* CybexWaitingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72E3A4CA214560580083E417 /* CybexWaitingView.xib */; };
 		72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */; };
 		72EC6A5420F4611500CEAFF6 /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */; };
 		72EC6A5520F4611500CEAFF6 /* EOSWithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5120F4611500CEAFF6 /* EOSWithdrawView.xib */; };
@@ -5953,6 +5955,8 @@
 		72DBCA7121391A4300905303 /* CybexWebActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebActions.swift; sourceTree = "<group>"; };
 		72DBCA7221391A4300905303 /* CybexWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebViewController.swift; sourceTree = "<group>"; };
 		72DBCA7321391A4300905303 /* CybexWebReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebReducers.swift; sourceTree = "<group>"; };
+		72E3A4C9214560580083E417 /* CybexWaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWaitingView.swift; sourceTree = "<group>"; };
+		72E3A4CA214560580083E417 /* CybexWaitingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CybexWaitingView.xib; sourceTree = "<group>"; };
 		72E4468D71171890A95A24639B6298E1 /* qi_distinct.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = qi_distinct.hpp; sourceTree = "<group>"; };
 		72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EOSWithdrawView.swift; sourceTree = "<group>"; };
 		72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawView.xib; sourceTree = "<group>"; };
@@ -16495,6 +16499,8 @@
 				FE8A53C91AF199F1B99E4CCFB807DE2F /* StyleLabel.xib */,
 				728C15782129AE9300053555 /* CybexShowTitleView.swift */,
 				728C157A2129AEA400053555 /* CybexShowTitleView.xib */,
+				72E3A4C9214560580083E417 /* CybexWaitingView.swift */,
+				72E3A4CA214560580083E417 /* CybexWaitingView.xib */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -33192,6 +33198,7 @@
 				6A019F6EFC3FAEE49A5991F402E36143 /* AccountPortfolioView.xib in Resources */,
 				49A5F40C54716A0DE78B3C2D417905C3 /* BalanceIntroduceView.xib in Resources */,
 				42575EE1042178AB8C2805F4949A3F45 /* Business.storyboard in Resources */,
+				72E3A4CD214560580083E417 /* CybexWaitingView.xib in Resources */,
 				7217B0892122BBE500608531 /* AddressItemView.xib in Resources */,
 				192C3ADF0D3E049D53C92A483D63CD03 /* BusinessTitleCell.xib in Resources */,
 				56D03074319AE5D578E9B4CD28B6C1F9 /* BusinessTitleItemView.xib in Resources */,
@@ -34005,6 +34012,7 @@
 				019AC681342BD1E978777A6A503E27B6 /* OrderBookActions.swift in Sources */,
 				7307A931212518F300BD6444 /* BaseView.swift in Sources */,
 				7267DA0621350327004AF9AF /* ETOCoordinator.swift in Sources */,
+				72E3A4CC214560580083E417 /* CybexWaitingView.swift in Sources */,
 				72DBCA7621391A4300905303 /* CybexWebViewController.swift in Sources */,
 				4C5E6FF343C8DA25EC51F44EF725069E /* OrderBookCell.swift in Sources */,
 				D898B818223D8DD3B304D2D7F5A3E2AB /* OrderBookCellView.swift in Sources */,

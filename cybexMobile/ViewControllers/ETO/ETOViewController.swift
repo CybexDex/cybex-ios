@@ -30,7 +30,7 @@ class ETOViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchProjectData()
+        self.fetchProjectData()
     }
     
     func setupUI() {
@@ -51,7 +51,6 @@ class ETOViewController: BaseViewController {
     }
     
     func setupData() {
-//        fetchProjectData()
         fetchBannder()
     }
     
@@ -89,8 +88,8 @@ class ETOViewController: BaseViewController {
 
 extension ETOViewController {
     @objc func ETOProjectViewDidClicked(_ data:[String: Any]) {
-        if let viewModel = data["data"] as? ETOProjectViewModel {
-            self.coordinator?.setSelectedProjectData(viewModel.projectModel!)
+        if let viewModel = data["data"] as? ETOProjectViewModel, let projectModel = viewModel.projectModel {
+            self.coordinator?.setSelectedProjectData(projectModel)
         }
     }
     
