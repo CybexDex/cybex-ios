@@ -165,6 +165,7 @@ extension TransferViewController {
             }
             else {
                 self.transferComfirm()
+                
             }
         }
         else {
@@ -176,6 +177,12 @@ extension TransferViewController {
     override func returnEnsureAction() {
         ShowToastManager.shared.hide()
         if !UserManager.shared.isLocked {
+
+            if !UserManager.shared.isWithDraw, self.coordinator?.state.property.memo.value.count != 0{
+                showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
+                return
+            }
+            
             self.startLoading()
             self.coordinator?.transfer({ [weak self](data) in
                 guard let `self` = self else { return }
@@ -245,6 +252,10 @@ extension TransferViewController {
     }
     
     @objc func memo(_ data: [String : Any]) {
+        if !UserManager.shared.isWithDraw{
+            showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
+            return
+        }
         self.coordinator?.setMemo(data["content"] as! String,canFetchFee:!UserManager.shared.isLocked)
         if UserManager.shared.isLocked {
             self.isFetchFee = true

@@ -448,6 +448,24 @@ func confirmDeleteTransferAddress(_ info:TransferAddress) -> [NSAttributedString
     return result
 }
 
+func confirmSubmitCrowd(_ name:String, amount:String, fee:String) -> [NSAttributedString] {
+    let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
+    
+    var result:[NSAttributedString] = []
+    
+    let title = R.string.localizable.eto_submit_title.key.localizedFormat(name).tagText(contentStyle)
+    result.append(title.set(style: StyleNames.alertContent.rawValue)!)
+    
+    let note = (R.string.localizable.transfer_quantity.key.localized() + ": ").tagText("name") + amount.tagText(contentStyle)
+    
+    result.append(note.set(style: StyleNames.alertContent.rawValue)!)
+    
+    let address = (R.string.localizable.transfer_fee.key.localized() + ": " ).tagText("name") + fee.tagText(contentStyle)
+    result.append(address.set(style: StyleNames.alertContent.rawValue)!)
+    
+    return result
+}
+
 
 func checkMaxLength(_ sender:String,maxLength:Int) ->String{
   if sender.contains("."){
@@ -572,10 +590,22 @@ func changeEnvironmentAction() {
         AppConfiguration.SERVER_BASE_URLString = AppConfiguration.SERVER_TEST_BASE_URLString
         AppConfiguration.SERVER_REGISTER_BASE_URLString = AppConfiguration.SERVER_REGISTER_BASE_TEST_URLString
         AppConfiguration.GATEWAY_URLString = AppConfiguration.SERVER_TEST_BASE_URLString
+        
+        AssetConfiguration.CYB = "1.3.0"
+        AssetConfiguration.BTC = "1.3.25"
+        AssetConfiguration.ETH = "1.3.18"
+        AssetConfiguration.EOS = "1.3.967"
+        AssetConfiguration.market_base_assets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.BTC]
     }
     else {
         AppConfiguration.SERVER_BASE_URLString = "https://app.cybex.io/"
         AppConfiguration.SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
         AppConfiguration.GATEWAY_URLString = "https://gateway.cybex.io/gateway"
+
+        AssetConfiguration.CYB = "1.3.0"
+        AssetConfiguration.BTC = "1.3.3"
+        AssetConfiguration.ETH = "1.3.2"
+        AssetConfiguration.EOS = "1.3.4"
+        AssetConfiguration.market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.CYB,AssetConfiguration.USDT,AssetConfiguration.BTC]
     }
 }

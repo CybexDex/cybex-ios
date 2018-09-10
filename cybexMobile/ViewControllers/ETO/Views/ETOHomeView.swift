@@ -24,6 +24,12 @@ class ETOHomeView: BaseView {
     @IBOutlet weak var tableView: UITableView!
     var pageView: ETOHomeBannerView!
     
+    
+    override var data: Any? {
+        didSet{
+            self.tableView.reloadData()
+        }
+    }
     override func setup() {
         super.setup()
         
@@ -63,24 +69,22 @@ class ETOHomeView: BaseView {
 }
 
 extension ETOHomeView: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if let datas = self.data as? [ETOProjectViewModel] {
+            return datas.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.etoProjectCell.name, for: indexPath) as! ETOProjectCell
-        cell.setup(ETOProjectModel())
+        if let datas = self.data as? [ETOProjectViewModel] {
+            cell.setup(datas[indexPath.row])
+        }
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130
-    }
-    
+        
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
     }

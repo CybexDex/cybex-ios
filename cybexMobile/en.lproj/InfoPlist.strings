@@ -10,4 +10,7 @@ NSLocationWhenInUseUsageDescription = "location";
 NSMicrophoneUsageDescription = "microphone";
 NSCameraUsageDescription = "camera";
 NSPhotoLibraryUsageDescription = "photo library";
+NSContactsUsageDescription = "contacts";
+NSCalendarsUsageDescription = "calendars";
+NSLocationAlwaysUsageDescription = "location";
 CFBundleDisplayName = "CybexDex";

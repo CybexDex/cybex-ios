@@ -103,6 +103,7 @@ def ui
     pod 'ESPullToRefresh'
     pod 'FSPagerView'
     pod 'ActiveLabel'
+    pod 'SkeletonView'
 end
 
 def other
@@ -113,6 +114,11 @@ def other
     pod 'SwiftNotificationCenter'
     pod 'AsyncSwift'
     pod 'MonkeyKing' #share
+end
+
+def scripts
+    pod 'SwiftGen'
+    pod 'Sourcery'
 end
 
 def fabric
@@ -152,6 +158,7 @@ target 'cybexMobile' do
   other
   debug
   um
+  scripts
   
   target 'cybexMobileTests' do
       inherit! :search_paths

@@ -32,10 +32,10 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2d-WC-B2V">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="631.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="688.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4r8-tz-KNu">
-                                    <rect key="frame" x="13" y="0.0" width="349" height="631.5"/>
+                                    <rect key="frame" x="13" y="0.0" width="349" height="688.5"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j1n-rn-LH2" customClass="ContainerView" customModule="cybexMobile" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="349" height="189.5"/>
@@ -146,25 +146,25 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIe-Ro-csV">
-                                            <rect key="frame" x="0.0" y="303.5" width="349" height="328"/>
+                                            <rect key="frame" x="0.0" y="303.5" width="349" height="385"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="1CO-LG-Zq6">
-                                                    <rect key="frame" x="0.0" y="0.0" width="349" height="328"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="349" height="385"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gao-rn-eya" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="349" height="50"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="349" height="107"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="ETO_detail"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6bD-jk-BNx" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="51" width="349" height="128"/>
+                                                            <rect key="frame" x="0.0" y="108" width="349" height="128"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="project_intro"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LtC-Yw-aVQ" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="180" width="349" height="148"/>
+                                                            <rect key="frame" x="0.0" y="237" width="349" height="148"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="project_website"/>
                                                             </userDefinedRuntimeAttributes>

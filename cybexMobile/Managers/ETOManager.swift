@@ -52,7 +52,7 @@ enum ETOJoinButtonAction: String {
     case inputCode
     case crowdPage
     case icoapePage
-    case unlockPage
+    case loginPage
 }
 
 enum ETOJoinButtonState {
@@ -71,7 +71,7 @@ class ETOManager {
     }
     
     func changeState(_ state:ETOStateOption) {
-        let loginState:ETOStateOption = [.login, .notStarted]
+        let loginState:ETOStateOption = [.login, .notLogin]
         let kycState:ETOStateOption = [.KYCPassed, .KYCNotPassed]
         let userReserveState:ETOStateOption = [.reserved, .notReserved]
         let projectBookState:ETOStateOption = [.bookable, .notBookable]
@@ -79,7 +79,7 @@ class ETOManager {
         let projectState:ETOStateOption = [.notStarted, .underway, .finished]
         
         for stateSet in [loginState, kycState, userReserveState, projectBookState, auditState, projectState] {
-            if stateSet.contains(state) {
+            if stateSet.contains(state.intersection(stateSet)) {
                 self.state.remove(stateSet)
                 self.state.insert(state.intersection(stateSet))
             }
@@ -99,43 +99,35 @@ class ETOManager {
     
     func getETOJoinButtonState() -> ETOJoinButtonState {
         let clause = getClauseState()
-//MARK: Test
-        return .normal(title: "立即众筹", style: .normal, action: .crowdPage)
-
-//        return .disable(title: "停止预约", style: .disable)
-
         switch clause {
         case .normal:
-            return .normal(title: "立即预约", style: .normal, action: .inputCode)
+            return .normal(title: R.string.localizable.eto_project_reserve_now.key.localized(), style: .normal, action: .inputCode)
         case .checkedAndImmutable:
             if state.contains(.auditPassed) {
                 if state.contains(.notStarted) {
-                    return .disable(title: "等待众筹开始", style: .wait)
+                    return .disable(title: R.string.localizable.eto_project_waiting.key.localized(), style: .wait)
                 }
-                return .normal(title: "立即众筹", style: .normal, action: .crowdPage)
+                return .normal(title: R.string.localizable.eto_project_join.key.localized(), style: .normal, action: .crowdPage)
             }
             else if state.contains(.waitAudit) {
-                return .disable(title: "审核中", style: .wait)
+                return .disable(title: R.string.localizable.eto_project_verifying.key.localized(), style: .wait)
             }
             else {
-                return .disable(title: "审核未通过", style: .notPassed)
+                return .disable(title: R.string.localizable.eto_project_rejected.key.localized(), style: .notPassed)
             }
         case .notShow:
             if state.contains(.notReserved) {
                 if !state.contains(.finished) {
-                    return .disable(title: "停止预约", style: .disable)
+                    return .disable(title: R.string.localizable.eto_project_stop_reserve.key.localized(), style: .disable)
                 }
             }
             else if state.contains(.KYCNotPassed) {
-                return .normal(title: "进行KYC", style: .normal, action: .icoapePage)
+                return .normal(title: R.string.localizable.eto_project_kyc.key.localized(), style: .normal, action: .icoapePage)
             }
             else if state.contains(.notLogin) && !state.contains(.finished) {
-                return .normal(title: "请登录", style: .normal, action: .unlockPage)
+                return .normal(title: R.string.localizable.eto_project_login.key.localized(), style: .normal, action: .loginPage)
             }
-
             return .notShow
-
         }
-      
     }
 }

@@ -15,7 +15,9 @@ class ETOCrowdViewController: BaseViewController {
 
 	var coordinator: (ETOCrowdCoordinatorProtocol & ETOCrowdStateManagerProtocol)?
 
-	override func viewDidLoad() {
+    @IBOutlet var contentView: ETOCrowdView!
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         setupData()
@@ -32,15 +34,27 @@ class ETOCrowdViewController: BaseViewController {
     }
     
     func setupUI() {
-        
+        self.contentView.actionButton.isEnabled = false
     }
 
     func setupData() {
-        
+        self.coordinator?.fetchData()
+        self.coordinator?.fetchUserRecord()
+        self.coordinator?.fetchFee()
     }
     
     func setupEvent() {
+        NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self.contentView.titleTextView.textField, queue: nil) {[weak self] (notifi) in
+            guard let `self` = self else { return }
+            
+            self.coordinator?.unsetValidStatus()
+        }
         
+        NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.contentView.titleTextView.textField, queue: nil) {[weak self] (notifi) in
+            guard let `self` = self, let amount = self.contentView.titleTextView.textField.text?.toDouble() else { return }
+            
+            self.coordinator?.checkValidStatus(amount)
+        }
     }
     
     override func configureObserveState() {
@@ -48,31 +62,97 @@ class ETOCrowdViewController: BaseViewController {
             guard let `self` = self else { return }
             
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        coordinator?.state.data.asObservable().subscribe(onNext: {[weak self] (model) in
+            guard let `self` = self, let model = model else { return }
+            self.navigationItem.title = model.name + " ETO"
+            self.contentView.updateUI(model, handler: ETOCrowdView.adapterModelToETOCrowdView(self.contentView))
+        }).disposed(by: disposeBag)
+        
+        coordinator?.state.userData.asObservable().subscribe(onNext: {[weak self] (model) in
+            guard let `self` = self, let model = model, let project = self.coordinator?.state.data.value else { return }
+            
+            self.contentView.updateUI((projectModel:project, userModel:model), handler: ETOCrowdView.adapterModelToUserCrowdView(self.contentView))
+        }).disposed(by: disposeBag)
+        
+        coordinator?.state.fee.asObservable().subscribe(onNext: {[weak self] (model) in
+            if let `self` = self, let data = model, let feeInfo = app_data.assetInfo[data.asset_id], let feeAmount = data.amount.toDouble()?.string(digits: feeInfo.precision, roundingMode: .down) {
+                self.contentView.priceLabel.text = feeAmount + " " + feeInfo.symbol.filterJade
+            }
+        }).disposed(by: disposeBag)
+        
+        coordinator?.state.validStatus.asObservable().subscribe(onNext: {[weak self] (status) in
+            guard let `self` = self else { return }
+
+            if case .notValid = status {
+                self.contentView.actionButton.isEnabled = false
+                self.contentView.errorView.isHidden = true
+                return
+            }
+            
+            if case .ok = status {
+                self.contentView.errorView.isHidden = true
+                self.contentView.actionButton.isEnabled = true
+            }
+            else {
+                self.contentView.actionButton.isEnabled = false
+                self.contentView.errorView.isHidden = false
+                self.contentView.errorLabel.text = status.desc()
+            }
+
+        }).disposed(by: disposeBag)
+
     }
 }
 
-//MARK: - TableViewDelegate
-
-//extension ETOCrowdViewController: UITableViewDataSource, UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 10
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//          let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.<#cell#>.name, for: indexPath) as! <#cell#>
-//
-//        return cell
-//    }
-//}
-
-
 //MARK: - View Event
+extension ETOCrowdViewController {
+    @objc func ETOCrowdButtonDidClicked(_ data:[String: Any]) {
+        self.view.endEditing(true)
+        
+        if UserManager.shared.isLocked {
+            self.showPasswordBox()
+            return
+        }
+        
+        guard let price = self.contentView.titleTextView.textField.text?.toDouble() else { return }
 
-//extension ETOCrowdViewController {
-//    @objc func <#view#>DidClicked(_ data:[String: Any]) {
-//        if let addressdata = data["data"] as? <#model#>, let view = data["self"] as? <#view#>  {
-//
-//        }
-//    }
-//}
+        self.coordinator?.showConfirm(price)
+    }
+    
+    override func returnEnsureAction() {
+        guard let price = self.contentView.titleTextView.textField.text?.toDouble() else { return }
+        self.startLoading()
+        self.coordinator?.joinCrowd(price, callback: { [weak self](data) in
+            guard let `self` = self else { return }
+            self.endLoading()
+            if String(describing: data) == "<null>" {
+                self.showWaiting(R.string.localizable.eto_transfer_title.key.localized(), content: R.string.localizable.eto_transfer_content.key.localized(), time: 5)
+            }
+            else {
+                self.showToastBox(false, message: R.string.localizable.transfer_failed.key.localized())
+            }
+        })
+    }
+    
+    override func ensureWaitingAction(_ sender: CybexWaitingView) {
+        ShowToastManager.shared.hide(0)
+        self.navigationController?.popViewController()
+    }
+    
+    override func passwordDetecting() {
+        self.startLoading()
+    }
+    
+    override func passwordPassed(_ passed: Bool) {
+        self.endLoading()
+        if passed == true {
+            guard let price = self.contentView.titleTextView.textField.text?.toDouble() else { return }
+            self.coordinator?.showConfirm(price)
+        }
+        else {
+            self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+        }
+    }
+}
 

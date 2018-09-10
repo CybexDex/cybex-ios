@@ -36,41 +36,63 @@ struct AppConfiguration {
     static var SERVER_BASE_URLString = "https://app.cybex.io/"
     static var SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
     static var GATEWAY_URLString = "https://gateway.cybex.io/gateway"
-    static let ETO_MG_BASE_URLString = URL(string:"https://eto.cybex.io/api")!
-    static let ETO_MG_BASE_TEST_URLString = URL(string:"https://ieo-apitest.cybex.io/api")!
-    static let GATEWAY_ID = "CybexGateway" //CybexGatewayDev
+    static var ETO_MG_BASE_URLString = URL(string:"https://eto.cybex.io/api")!
+    static var ETO_MG_BASE_TEST_URLString = URL(string:"https://ieo-apitest.cybex.io/api")!
+    static var GATEWAY_ID = "CybexGateway" //CybexGatewayDev
     
-    static let SERVER_ICONS_BASE_URLString = "https://app.cybex.io/icons/"
+    static var SERVER_ICONS_BASE_URLString = "https://app.cybex.io/icons/"
     
-    static let SERVER_REGISTER_PINCODE_URLString = SERVER_REGISTER_BASE_URLString + "captcha"
-    static let SERVER_REGISTER_URLString = SERVER_REGISTER_BASE_URLString + "register"
+    static var SERVER_REGISTER_PINCODE_URLString: String {
+        return SERVER_REGISTER_BASE_URLString + "captcha"
+    }
+    static var SERVER_REGISTER_URLString: String {
+        return SERVER_REGISTER_BASE_URLString + "register"
+    }
     
-    static let SERVER_VERSION_URLString = SERVER_BASE_URLString + "iOS_update.json"
-    static let SERVER_MARKETLIST_URLString = SERVER_BASE_URLString + "market_list?base="
+    static var SERVER_VERSION_URLString: String {
+        return SERVER_BASE_URLString + "iOS_update.json"
+    }
+    static var SERVER_MARKETLIST_URLString: String {
+        return SERVER_BASE_URLString + "market_list?base="
+    }
     
-    static let FAQ_NIGHT_THEME            = "https://cybex.io/token_applications/new?style=night"
-    static let FAQ_LIGHT_THEME            = "https://cybex.io/token_applications/new"
+    static var FAQ_NIGHT_THEME            = "https://cybex.io/token_applications/new?style=night"
+    static var FAQ_LIGHT_THEME            = "https://cybex.io/token_applications/new"
     
-    static let ETH_PRICE                  = SERVER_BASE_URLString + "price"
-    static let WITHDRAW                   = SERVER_BASE_URLString + "json/withdraw.json"
-    static let DEPOSIT                    = SERVER_BASE_URLString + "json/deposit.json"
-    static let ASSET                      = SERVER_BASE_URLString + "json/assets.json"
+    static var ETH_PRICE: String {
+        return SERVER_BASE_URLString + "price"
+    }
+    static var WITHDRAW: String {
+        return SERVER_BASE_URLString + "json/withdraw.json"
+    }
+    static var DEPOSIT: String {
+        return SERVER_BASE_URLString + "json/deposit.json"
+    }
+    static var ASSET: String {
+        return SERVER_BASE_URLString + "json/assets.json"
+    }
     //  json/withdraw_msg.json
-    static let WITHDRAW_MSG               = SERVER_BASE_URLString + "json/withdraw_msg.json"
-    static let DEPOSIT_MSG                = SERVER_BASE_URLString + "json/deposit_msg.json"
+    static var WITHDRAW_MSG: String {
+        return SERVER_BASE_URLString + "json/withdraw_msg.json"
+    }
+    static var DEPOSIT_MSG: String {
+        return SERVER_BASE_URLString + "json/deposit_msg.json"
+    }
     
-    static let MARKETLISTS                = SERVER_BASE_URLString + "json/marketlists.json"
+    static var MARKETLISTS: String {
+        return  SERVER_BASE_URLString + "json/marketlists.json"
+    }
     
-    static let RECODE_BASE_URLString = "https://gateway-query.cybex.io/"
-    static let RECODE_LOGIN = RECODE_BASE_URLString + "login"
-    static let RECODE_RECODES = RECODE_BASE_URLString + "records"
+    static var RECODE_BASE_URLString = "https://gateway-query.cybex.io/"
+    static var RECODE_LOGIN = RECODE_BASE_URLString + "login"
+    static var RECODE_RECODES = RECODE_BASE_URLString + "records"
     
-    static let HELP_NIGHT_URL = "http://47.75.154.39:3009/cybexnight?lang="
-    static let HELP_LIGHT_URL = "http://47.75.154.39:3009/cybexday?lang="
+    static var HELP_NIGHT_URL = "http://47.75.154.39:3009/cybexnight?lang="
+    static var HELP_LIGHT_URL = "http://47.75.154.39:3009/cybexday?lang="
     
-    static let GATEWAY_TEST_URLStringa = "https://gatewaytest.cybex.io/gateway"
-    static let SERVER_REGISTER_BASE_TEST_URLString = "https://faucet.51nebula.com/"
-    static let SERVER_TEST_BASE_URLString = "http://47.91.242.71:3039/"
+    static var GATEWAY_TEST_URLStringa = "https://gatewaytest.cybex.io/gateway"
+    static var SERVER_REGISTER_BASE_TEST_URLString = "https://faucet.51nebula.com/"
+    static var SERVER_TEST_BASE_URLString = "http://47.91.242.71:3039/"
 }
 
 enum exchangeType {
@@ -210,14 +232,14 @@ enum objectID:String {
 class AssetConfiguration {  
     var asset_ids:[Pair] = []
     
-    static let CYB = "1.3.0"
-    static let BTC = "1.3.3"
-    static let EOS = "1.3.4"
-    static let ETH = "1.3.2"
+    static var CYB = "1.3.0"
+    static var BTC = "1.3.3"
+    static var ETH = "1.3.2"
+    static var EOS = "1.3.4"
     static let USDT = "1.3.27"
     
     static let order_name = ["USDT","ETH", "BTC", "CYB"]
-    static let market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.CYB,AssetConfiguration.USDT,AssetConfiguration.BTC]
+    static var market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.CYB,AssetConfiguration.USDT,AssetConfiguration.BTC]
     
     var unique_ids:[String] = []
     //    return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).withoutDuplicates()

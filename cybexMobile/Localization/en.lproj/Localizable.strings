@@ -432,3 +432,51 @@
 "eto_invalid_partly_sub" = "Subscription partly invalid";
 "eto_refund" = "Refund";
 "eto_receive_success" = "Received";
+
+
+"eto_project_finish" = "Ended";
+"eto_project_comming" = "Coming";
+"eto_project_progress" = "In Progress";
+
+"eto_project_time_finish" = "Ended：";
+"eto_project_time_comming" = "Left：";
+"eto_project_time_pre" = "In：";
+
+"eto_project_name" = "Project Name：";
+"eto_token_name" = "Token Name：";
+"eto_start_time" = "ETO Time：";
+"eto_end_time" = "End at：";
+"eto_start_at" = "Circulation on Cybex Starts at：";
+"eto_token_releasing_time" = "Token Releasing Time：";
+"eto_currency" = "Currency：";
+"eto_exchange_ratio" = "Exchange Ratio：";
+
+"eto_project_online" = "Official Website：";
+"eto_project_white_Paper" = "Whitepaper：";
+
+"eto_project_immediate" = "Immediate";
+
+"eto_project_reserve_now" = "Reserve Now";
+"eto_project_verifying" = "Verifying";
+"eto_project_stop_reserve" = "Stop Reserve";
+"eto_project_waiting" = "Waiting for ETO";
+"eto_project_join" = "Join ETO now";
+"eto_project_rejected" = "Rejected";
+"eto_project_kyc" = "KYC Verification";
+"eto_project_login" = "Login";
+
+"eto_submit_title" = "You will join in ETO of %@";
+"eto_submit_check_error_1" = "insufficient balances";
+"eto_submit_check_error_2" = "beyond personal hard cap";
+"eto_submit_check_error_3" = "insufficient remaining quota";
+"eto_submit_check_error_4" = "must beyond minimum purchasing unit";
+"eto_submit_check_error_5" = "must purchase an integer multiple of minimum purchasing unit";
+"eto_submit_confirm" = "ETO Confirm";
+
+
+"eto_transfer_title" = "Verifying";
+"eto_transfer_content" = "Do not repeat transfers";
+
+"eto_invite_code_error" = "Please enter a valid invitation code";
+"eto_invite_code_title" = "Invitation code";
+

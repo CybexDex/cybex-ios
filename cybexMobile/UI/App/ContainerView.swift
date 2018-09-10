@@ -13,16 +13,25 @@ class ContainerView: CornerAndShadowView {
     @IBInspectable
     var isHiddenShadow: Bool = false {
         didSet {
-            self.shadowOffset = .zero
-            self.newSpread = 0
-            self.newTheme1ShadowColor = .clear
-            self.newTheme2ShadowColor = .clear
+            if isHiddenShadow {
+                self.shadowOffset = .zero
+                self.newSpread = 0
+                self.newTheme1ShadowColor = .clear
+                self.newTheme2ShadowColor = .clear
+            }
         }
     }
     
     override var backgroundColor: UIColor? {
         didSet {
             cornerView.backgroundColor = backgroundColor
+        }
+    }
+    
+    override var cornerRadius: CGFloat {
+        didSet {
+            self.newCornerRadius = cornerRadius
+            layer.masksToBounds = false
         }
     }
     
@@ -34,7 +43,7 @@ class ContainerView: CornerAndShadowView {
     
     func setupUI() {
         if !isHiddenShadow {
-            self.newCornerRadius = 4
+            self.cornerRadius = 4
             self.newSpread = -4
             self.newShadowOpcity = 1.0
             self.newShadowOffset = CGSize(width: 0, height: 8)

@@ -81,7 +81,11 @@ extension SettingCoordinator: SettingStateManagerProtocol {
             isTest = true
         }
         changeEnvironmentAction()
+        AssetConfiguration.shared.asset_ids = []
+        AssetConfiguration.shared.unique_ids = []
         
+        app_data.data.accept([])
+
         CybexWebSocketService.shared.disconnect()
         UserManager.shared.logout()
         CybexWebSocketService.shared.connect()

@@ -19,6 +19,7 @@ class ETOProjectView: BaseView {
     @IBOutlet weak var timeImgView: UIImageView!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var timeState: UILabel!
     
     enum Event:String {
         case ETOProjectViewDidClicked
