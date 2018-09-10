@@ -88,7 +88,11 @@ class ETODetailView: BaseView {
             stateButton.alpha = 1
             stateButton.isUserInteractionEnabled = false
         case .notPassed:
-            stateButton.titleColor = UIColor.white
+            if ThemeManager.currentThemeIndex == 0 {
+                stateButton.titleColor = UIColor.white
+            } else {
+                stateButton.titleColor = UIColor.darkTwo
+            }
             stateButton.btn_borderColor = UIColor.steel50
             stateButton.btn_borderWidth = 1
             stateButton.bgColor = UIColor.clear
