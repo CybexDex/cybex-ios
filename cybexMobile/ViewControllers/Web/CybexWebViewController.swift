@@ -24,7 +24,6 @@ class CybexWebViewController: BaseWebViewController {
         case whitepaper
     }
     
-    
     var coordinator: (CybexWebCoordinatorProtocol & CybexWebStateManagerProtocol)?
     
     var vc_type: web_type = .help
