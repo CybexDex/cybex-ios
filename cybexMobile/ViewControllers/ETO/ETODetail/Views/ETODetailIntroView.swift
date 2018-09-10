@@ -13,7 +13,7 @@ import ActiveLabel
 class ETODetailIntroView: BaseView {
     
     @IBOutlet weak var downUpButton: UIButton!
-    @IBOutlet weak var contentLabel: ActiveLabel!
+    @IBOutlet weak var contentLabel: BaseLabel!
     @IBOutlet weak var titleLabel: UILabel!
     
     enum Event:String {
@@ -37,22 +37,24 @@ class ETODetailIntroView: BaseView {
     
     func setContentAttribute(contentLabelStr:String, attLabelArray: [String]) {
         content = contentLabelStr
-        contentLabel.isUserInteractionEnabled = true
-        for att in attLabelArray {
-            let customType = ActiveType.custom(pattern: "\(att)")
-            contentLabel.enabledTypes.append(customType)
-            contentLabel.customize { label in
-                label.customColor[customType] = UIColor.steel
-                label.configureLinkAttribute = { (type, attributes, isSelected) in
-                    var atts = attributes
-                    atts[NSAttributedStringKey.underlineStyle] = 1
-                    return atts
-                }
-                label.handleCustomTap(for: customType, handler: { (str) in
-                    self.next?.sendEventWith(Event.labelClick.rawValue, userinfo: ["clicklabel":str])
-                })
-            }
-        }
+        contentLabel.lineBreakMode = NSLineBreakMode.byCharWrapping
+
+//        contentLabel.isUserInteractionEnabled = true
+//        for att in attLabelArray {
+//            let customType = ActiveType.custom(pattern: att)
+//            contentLabel.enabledTypes.append(customType)
+//            contentLabel.customize { label in
+//                label.customColor[customType] = UIColor.steel
+//                label.configureLinkAttribute = { (type, attributes, isSelected) in
+//                    var atts = attributes
+//                    atts[NSAttributedStringKey.underlineStyle] = 1
+//                    return atts
+//                }
+//                label.handleCustomTap(for: customType, handler: { (str) in
+//                    self.next?.sendEventWith(Event.labelClick.rawValue, userinfo: ["clicklabel":str])
+//                })
+//            }
+//        }
     }
 
     override func setup() {
