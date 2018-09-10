@@ -46,7 +46,7 @@ class ETODetailView: BaseView {
         getJoinButtonState()
         detailView.content = "项目名称：ICO CLUB CHAIN\n代币名称：CLUB\n兑换比例：1 ETH=1667 CLUB\nETO时间：2018/08/03  17:25:00\n结束时间：2018/09/03  18:25:00\n开放交易时间：2018/08/03  17:25:00\n发币时间：实时\n使用币种：ETH"
         introView.content = "Herdius 是具有前瞻性的跨链交互解决方案。Herdius 用一个私钥打通所有的区块链，只需要一个 Herdius 账户和配套的 Herdius 钱包，无需特定的代币，用户就能够跨链使用各种去中心化应用，触达各种生态系统。Herdius 独特的同态秘钥派生技术能够保障我们建立一个全球化的流动资金池，打通各家中心化、去中心化交易所、资金池。为了能够应对这么高的交易吞吐量，Herdius 采用了一种改良的、非联邦型的 DPoS 共识机制，其中 HER 代币起到了质押货币的作用。Herdius 所采用的共识机制使得我们可以采用一种称为区块叠加区块（Blocks-on-blocks，BoB）的技术，构建一条可以垂直扩展的区块链。用户可以质押任意金额的 HER 代币，然后参与到 Herdius 链上的交易验证中。通过质押所挣得的手续费与抵押代币的多少、交易量成正比。"
-        websiteView.setContentAttribute(contentLabelStr: "官网：https://www.notion.so/d3198dd4ba934f6ba4f7164d49ac9ded?v=f43339b8776244e4bd95cc11f63d9a8d\n白皮书：haha2\n项目详情：haha3", attLabelArray: ["https://www.notion.so/d3198dd4ba934f6ba4f7164d49ac9ded?v=f43339b8776244e4bd95cc11f63d9a8d","haha2","haha3"])
+        websiteView.setContentAttribute(contentLabelStr: "官网：https://www.notion.so/d3198dd4ba934f6ba4f7164d49ac9dedv=f43339b8776244e4bd95cc11f63d9a8d\n白皮书：https://blog.csdn.net/qxuewei/article/details/51095192\n项目详情：haha3", attLabelArray: ["https://www.notion.so/d3198dd4ba934f6ba4f7164d49ac9dedv=f43339b8776244e4bd95cc11f63d9a8d","https://blog.csdn.net/qxuewei/article/details/51095192","haha3"])
         headerView.setupUI()
         
         getWhiteListView.rightIcon.image = R.image.icwhitelist()
@@ -92,7 +92,11 @@ class ETODetailView: BaseView {
             stateButton.alpha = 1
             stateButton.isUserInteractionEnabled = false
         case .notPassed:
-            stateButton.titleColor = UIColor.white
+            if ThemeManager.currentThemeIndex == 0 {
+                stateButton.titleColor = UIColor.white
+            } else {
+                stateButton.titleColor = UIColor.darkTwo
+            }
             stateButton.btn_borderColor = UIColor.steel50
             stateButton.btn_borderWidth = 1
             stateButton.bgColor = UIColor.clear
