@@ -102,7 +102,7 @@ class ETODetailViewController: BaseViewController {
         coordinator?.state.userState.asObservable().subscribe(onNext: { [weak self]data in
             guard let `self` = self else { return }
             main {
-                if let _ = data as? ETOShortProjectStatusModel {
+                if let _ = data as? ETOUserAuditModel {
                     self.coordinator?.fetchUpState()
                 }
             }
@@ -147,5 +147,9 @@ extension ETODetailViewController {
                 ShowToastManager.shared.data = R.string.localizable.eto_invite_code_error.key.localized()
             }
         })
+    }
+    
+    @objc func labelClick(_ sender: [String:Any]) {
+        
     }
 }

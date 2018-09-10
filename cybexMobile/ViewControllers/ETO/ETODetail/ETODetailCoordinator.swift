@@ -104,6 +104,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             
             ETOMGService.request(target: ETOMGAPI.checkUserState(name: name, id: projectId), success: { (json) in
                 if let data = json.dictionaryObject, let model = ETOUserAuditModel.deserialize(from: data){
+               
                     self.store.dispatch(FetchUserStateAction(data:model))
                 }
                 self.switchPageState(PageState.normal(reason: .initialRefresh))
@@ -187,7 +188,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
         }
         ETOManager.shared.changeState(etoState)
         if let vc = self.rootVC.topViewController as? ETODetailViewController {
-            vc.contentView.setupUI()
+            vc.contentView.getJoinButtonState()
         }
     }
     
