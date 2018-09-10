@@ -10,13 +10,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import Repeat
 
 class ETODetailViewController: BaseViewController {
 
 	var coordinator: (ETODetailCoordinatorProtocol & ETODetailStateManagerProtocol)?
 
     @IBOutlet weak var contentView: ETODetailView!
-    
+
+    var timerRepeater: Repeater!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,6 +47,14 @@ class ETODetailViewController: BaseViewController {
 
     func setupData() {
         self.coordinator?.fetchData()
+        
+        self.timerRepeater = Repeater.every(.seconds(1), { [weak self](timer) in
+            main {
+                guard let `self` = self else { return }
+                self.coordinator?.updateETOProjectDetailAction()
+                self.coordinator?.fetchUserState()
+            }
+        })
     }
     
     func setupEvent() {
@@ -61,6 +71,22 @@ class ETODetailViewController: BaseViewController {
             guard let `self` = self else { return }
             if let model = data as? ETOProjectViewModel {
                 self.contentView.adapterModelToETODetailView(model)
+                self.contentView.data = model
+            }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        coordinator?.state.refreshData.asObservable().subscribe(onNext: { [weak self] data in
+            guard let `self` = self else { return }
+            if let model = data as? ETOProjectViewModel {
+                self.contentView.headerView.adapterModelToETODetailHeaderView(model)
+                self.coordinator?.fetchUpState()
+            }
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        coordinator?.state.userState.asObservable().subscribe(onNext: { [weak self]data in
+            guard let `self` = self else { return }
+            if let _ = data as? ETOShortProjectStatusModel {
+                self.coordinator?.fetchUpState()
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
@@ -69,10 +95,37 @@ class ETODetailViewController: BaseViewController {
 
 extension ETODetailViewController {
     @objc func clickCellView(_ data: [String: Any]) {
-        
+        self.coordinator?.openWebWithUrl(data["data"] as! String)
     }
     
     @objc func crowdPage(_ data : [String:Any]) {
         self.coordinator?.openETOCrowdVC()
+    }
+    
+    @objc func unlockPage(_ data: [String:Any]) {
+        app_coodinator.showLogin()
+    }
+    
+    @objc func unset(_ data:[String:Any]) {
+        
+    }
+   
+    @objc func inputCode(_ data: [String:Any]) {
+        self.showPasswordBox(R.string.localizable.eto_invite_code_title.key.localized(),middleType: .time)
+    }
+    
+    @objc func icoapePage(_ data: [String:Any]) {
+        
+    }
+    
+    override func returnInviteCode(_ sender: String) {
+        self.coordinator?.checkInviteCode(code: sender, callback: { (success) in
+            if success == true {
+                ShowToastManager.shared.hide(0)
+            }
+            else {
+                ShowToastManager.shared.data = R.string.localizable.eto_invite_code_error.key.localized()
+            }
+        })
     }
 }

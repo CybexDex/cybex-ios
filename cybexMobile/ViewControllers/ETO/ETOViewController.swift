@@ -30,7 +30,7 @@ class ETOViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchProjectData()
+        self.fetchProjectData()
     }
     
     func setupUI() {
@@ -51,7 +51,6 @@ class ETOViewController: BaseViewController {
     }
     
     func setupData() {
-//        fetchProjectData()
         fetchBannder()
     }
     

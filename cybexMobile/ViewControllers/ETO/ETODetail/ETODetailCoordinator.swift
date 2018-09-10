@@ -13,18 +13,19 @@ import SwiftNotificationCenter
 protocol ETODetailCoordinatorProtocol {
     func openShare()
     func openETOCrowdVC()
+    func openWebWithUrl(_ sender: String)
 }
 
 protocol ETODetailStateManagerProtocol {
     var state: ETODetailState { get }
     
     func switchPageState(_ state:PageState)
-    
     func setETOProjectDetailModel(_ model: ETOProjectModel)
-    
     func fetchData()
-    
     func fetchUpState()
+    func checkInviteCode(code: String, callback:@escaping(Bool)->())
+    func updateETOProjectDetailAction()
+    func fetchUserState()
 }
 
 class ETODetailCoordinator: ETORootCoordinator {
@@ -43,6 +44,42 @@ class ETODetailCoordinator: ETORootCoordinator {
         Broadcaster.register(ETODetailStateManagerProtocol.self, observer: self)
     }
     
+    
+}
+
+extension ETODetailCoordinator: ETODetailCoordinatorProtocol {
+    func openShare() {
+        if let vc = R.storyboard.main.imageShareViewController() {
+            vc.coordinator = ImageShareCoordinator(rootVC: self.rootVC)
+            self.rootVC.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func openETOCrowdVC() {
+        let vc = R.storyboard.etO.etoCrowdViewController()!
+        let coor = ETOCrowdCoordinator(rootVC: self.rootVC)
+        vc.coordinator = coor
+        self.rootVC.pushViewController(vc)
+    }
+    
+    func openWebWithUrl(_ sender: String) {
+        if let vc = R.storyboard.main.cybexWebViewController() {
+            vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
+            vc.vc_type = .whitelist
+            vc.url = URL(string: sender)
+            self.rootVC.pushViewController(vc ,animated: true)
+        }
+    }
+}
+
+extension ETODetailCoordinator: ETODetailStateManagerProtocol {
+    func switchPageState(_ state:PageState) {
+        self.store.dispatch(PageStateAction(state: state))
+    }
+    
+    func setETOProjectDetailModel(_ model: ETOProjectModel) {
+        self.store.dispatch(SetProjectDetailAction(data: model))
+    }
     func fetchData() {
         Broadcaster.notify(ETOStateManagerProtocol.self) { (coor) in
             if let model = coor.state.selectedProjectModel.value {
@@ -65,43 +102,86 @@ class ETODetailCoordinator: ETORootCoordinator {
         }
     }
     
-    
     func fetchUpState() {
+        guard  let model = self.state.data.value?.projectModel, let projectState = model.status, let state = self.state.userState.value else { return }
+        var etoState: ETOStateOption = .unset
+        etoState.remove(.unset)
         if !UserManager.shared.isLoginIn {
-            ETOManager.shared.changeState(.notLogin)
+            etoState.insert(.notLogin)
         }
         else {
-            if let state = self.state.userState.value {
+            etoState.insert(.login)
+            
+            if state.kyc_result == "not_start" {
+                etoState.insert(.KYCNotPassed)
+                ETOManager.shared.changeState(etoState)
+                return
+            }
+            else if state.kyc_result == "ok" {
+                etoState.insert(.KYCPassed)
                 if state.status == "unstart" {
-                    ETOManager.shared.changeState([.login, .notBookable])
+                    etoState.insert(.notReserved)
+                }
+                else {
+                    etoState.insert(.reserved)
+                }
+                
+                if model.is_user_in == "0" {
+                    etoState.insert(.notBookable)
+                }
+                else {
+                    etoState.insert(.bookable)
+                }
+                
+                if state.status == "waiting" {
+                    etoState.insert(.waitAudit)
+                }
+                else if state.status == "ok" {
+                    etoState.insert(.auditPassed)
+                }
+                else if state.status == "reject" {
+                    etoState.insert(.auditNotPassed)
                 }
             }
         }
+        
+        if projectState == .finish {
+            etoState.insert(.finished)
+        }
+        else if projectState == .pre {
+            etoState.insert(.notStarted)
+        }
+        else if projectState == .ok {
+            etoState.insert(.underway)
+        }
+        ETOManager.shared.changeState(etoState)
     }
-}
-
-extension ETODetailCoordinator: ETODetailCoordinatorProtocol {
-    func openShare() {
-        if let vc = R.storyboard.main.imageShareViewController() {
-            vc.coordinator = ImageShareCoordinator(rootVC: self.rootVC)
-            self.rootVC.pushViewController(vc, animated: true)
+    
+    func checkInviteCode(code: String, callback:@escaping(Bool)->()) {
+        guard let name = UserManager.shared.name.value, let projectModel = self.state.data.value?.projectModel else {
+            callback(false)
+            return
+        }
+        
+        ETOMGService.request(target: ETOMGAPI.validCode(name: name, pid: projectModel.id, code: code), success: { json in
+            callback(true)
+        }, error: { error in
+            callback(false)
+        }) { error in
+            callback(false)
         }
     }
     
-    func openETOCrowdVC() {
-        let vc = R.storyboard.etO.etoCrowdViewController()!
-        let coor = ETOCrowdCoordinator(rootVC: self.rootVC)
-        vc.coordinator = coor
-        self.rootVC.pushViewController(vc)
-    }
-}
-
-extension ETODetailCoordinator: ETODetailStateManagerProtocol {
-    func switchPageState(_ state:PageState) {
-        self.store.dispatch(PageStateAction(state: state))
-    }
-    
-    func setETOProjectDetailModel(_ model: ETOProjectModel) {
-        self.store.dispatch(SetProjectDetailAction(data: model))
+    func updateETOProjectDetailAction() {
+        guard  let model = self.state.data.value?.projectModel else { return }
+        ETOMGService.request(target: ETOMGAPI.refreshProject(id: model.id), success: { json in
+            if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
+                self.store.dispatch(RefrehProjectModelAction(data: refreshModel))
+            }
+        }, error: { (error) in
+            
+        }) { error in
+            
+        }
     }
 }

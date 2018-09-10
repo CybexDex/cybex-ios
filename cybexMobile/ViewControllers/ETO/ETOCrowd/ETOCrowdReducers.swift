@@ -19,6 +19,8 @@ func ETOCrowdReducer(action:Action, state:ETOCrowdState?) -> ETOCrowdState {
         state.userData.accept(action.userModel)
     case let action as SetFeeAction:
         state.fee.accept(action.fee)
+    case let action as changeETOValidStatusAction:
+        state.validStatus.accept(action.status)
     default:
         break
     }

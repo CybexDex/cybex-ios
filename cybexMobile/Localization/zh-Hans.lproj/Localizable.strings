@@ -413,6 +413,18 @@
 "eto_project_comming" = "即将开始";
 "eto_project_progress" = "正在进行";
 
+"eto_project_time_finish" = "完成时间:";
+"eto_project_time_comming" = "距离结束:";
+"eto_project_time_pre" = "距离开始:";
+
+"eto_submit_title" = "你将参与 %@ 的ETO";
+"eto_submit_check_error_1" = "余额不足";
+"eto_submit_check_error_2" = "超出单账号限额";
+"eto_submit_check_error_3" = "剩余可认购额度不足";
+"eto_submit_check_error_4" = "不可低于单笔最低限额";
+"eto_submit_check_error_5" = "认购金额为最小认购单位整数倍";
+"eto_submit_confirm" = "ETO确认";
+
 "eto_project_time_finish" = "完成时间：";
 "eto_project_time_comming" = "距离结束：";
 "eto_project_time_pre" = "距离开始：";
@@ -440,4 +452,11 @@
 "eto_project_kyc" = "进行KYC";
 "eto_project_login" = "请登录";
 
+
+
+"eto_transfer_title" = "转账待确认中";
+"eto_transfer_content" = "请勿重复转账";
+
+"eto_invite_code_error" = "请输入正确的邀请码";
+"eto_invite_code_title" = "输入邀请码";
 

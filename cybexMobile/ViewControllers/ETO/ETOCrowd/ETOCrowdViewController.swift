@@ -34,7 +34,7 @@ class ETOCrowdViewController: BaseViewController {
     }
     
     func setupUI() {
-        
+        self.contentView.actionButton.isEnabled = false
     }
 
     func setupData() {
@@ -44,7 +44,17 @@ class ETOCrowdViewController: BaseViewController {
     }
     
     func setupEvent() {
+        NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self.contentView.titleTextView.textField, queue: nil) {[weak self] (notifi) in
+            guard let `self` = self else { return }
+            
+            self.coordinator?.unsetValidStatus()
+        }
         
+        NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.contentView.titleTextView.textField, queue: nil) {[weak self] (notifi) in
+            guard let `self` = self, let amount = self.contentView.titleTextView.textField.text?.toDouble() else { return }
+            
+            self.coordinator?.checkValidStatus(amount)
+        }
     }
     
     override func configureObserveState() {
@@ -70,19 +80,54 @@ class ETOCrowdViewController: BaseViewController {
                 self.contentView.priceLabel.text = feeAmount + " " + feeInfo.symbol.filterJade
             }
         }).disposed(by: disposeBag)
+        
+        coordinator?.state.validStatus.asObservable().subscribe(onNext: {[weak self] (status) in
+            guard let `self` = self else { return }
+
+            if case .notValid = status {
+                self.contentView.actionButton.isEnabled = false
+                self.contentView.errorView.isHidden = true
+                return
+            }
+            
+            if case .ok = status {
+                self.contentView.errorView.isHidden = true
+                self.contentView.actionButton.isEnabled = true
+            }
+            else {
+                self.contentView.actionButton.isEnabled = false
+                self.contentView.errorView.isHidden = false
+                self.contentView.errorLabel.text = status.desc()
+            }
+
+        }).disposed(by: disposeBag)
+
     }
 }
 
 //MARK: - View Event
 extension ETOCrowdViewController {
     @objc func ETOCrowdButtonDidClicked(_ data:[String: Any]) {
+        self.view.endEditing(true)
+        
+        guard let price = self.contentView.titleTextView.textField.text?.toDouble() else { return }
+
+        self.coordinator?.showConfirm(price)
+    }
+    
+    override func returnEnsureAction() {
         guard let price = self.contentView.titleTextView.textField.text?.toDouble() else { return }
         
         self.coordinator?.joinCrowd(price, callback: { (data) in
-            if String(describing: data) == "<null>"{
-
+            if String(describing: data) == "<null>" {
+                self.showWaiting(R.string.localizable.eto_transfer_title.key.localized(), content: R.string.localizable.eto_transfer_content.key.localized(), time: 5)
             }
         })
+    }
+    
+    override func ensureWaitingAction(_ sender: CybexWaitingView) {
+        ShowToastManager.shared.hide(0)
+        self.navigationController?.popViewController()
     }
 }
 

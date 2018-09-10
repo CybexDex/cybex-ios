@@ -99,11 +99,6 @@ class ETOManager {
     
     func getETOJoinButtonState() -> ETOJoinButtonState {
         let clause = getClauseState()
-////MARK: Test
-//        return .normal(title: "立即众筹", style: .normal, action: .crowdPage)
-
-//        return .disable(title: "停止预约", style: .disable)
-
         switch clause {
         case .normal:
             return .normal(title: R.string.localizable.eto_project_reserve_now.key.localized(), style: .normal, action: .inputCode)

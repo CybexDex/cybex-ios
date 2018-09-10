@@ -448,6 +448,24 @@ func confirmDeleteTransferAddress(_ info:TransferAddress) -> [NSAttributedString
     return result
 }
 
+func confirmSubmitCrowd(_ name:String, amount:String, fee:String) -> [NSAttributedString] {
+    let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
+    
+    var result:[NSAttributedString] = []
+    
+    let title = R.string.localizable.eto_submit_title.key.localizedFormat(name).tagText(contentStyle)
+    result.append(title.set(style: StyleNames.alertContent.rawValue)!)
+    
+    let note = (R.string.localizable.transfer_quantity.key.localized() + ": ").tagText("name") + amount.tagText(contentStyle)
+    
+    result.append(note.set(style: StyleNames.alertContent.rawValue)!)
+    
+    let address = (R.string.localizable.transfer_fee.key.localized() + ": " ).tagText("name") + fee.tagText(contentStyle)
+    result.append(address.set(style: StyleNames.alertContent.rawValue)!)
+    
+    return result
+}
+
 
 func checkMaxLength(_ sender:String,maxLength:Int) ->String{
   if sender.contains("."){
