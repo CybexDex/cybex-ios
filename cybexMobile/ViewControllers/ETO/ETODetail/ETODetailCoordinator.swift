@@ -81,6 +81,20 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             if let model = coor.state.selectedProjectModel.value {
                 self.store.dispatch(SetProjectDetailAction(data: model))
             }
+            else {
+                if let bannerModel = coor.state.selectedBannerModel.value, let bannerId = bannerModel.id.int {
+                    ETOMGService.request(target: ETOMGAPI.getProjectDetail(id: bannerId), success: { json in
+                        if let model = ETOProjectModel.deserialize(from: json.dictionaryObject) {
+                            self.store.dispatch(SetProjectDetailAction(data: model))
+                        }
+                        self.switchPageState(PageState.normal(reason: .initialRefresh))
+                    }, error: { (error) in
+                        self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
+                    }, failure: { (error) in
+                        self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
+                    })
+                }
+            }
         }
     }
     
@@ -90,8 +104,11 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                 if let data = json.dictionaryObject, let model = ETOUserAuditModel.deserialize(from: data){
                     self.store.dispatch(FetchUserStateAction(data:model))
                 }
+                self.switchPageState(PageState.normal(reason: .initialRefresh))
             }, error: { (error) in
+                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
             }) { (error) in
+                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
             }
         }
         else {
@@ -124,12 +141,17 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
         else {
             etoState.insert(.login)
             
-            if state.kyc_result == "not_start" {
+            if state.kyc_status == "not_start" {
                 etoState.insert(.KYCNotPassed)
                 ETOManager.shared.changeState(etoState)
+                if let vc = self.rootVC.topViewController as? ETODetailViewController {
+                    main {
+                        vc.contentView.setupUI()
+                    }
+                }
                 return
             }
-            else if state.kyc_result == "ok" {
+            else if state.kyc_status == "ok" {
                 etoState.insert(.KYCPassed)
                 if state.status == "unstart" {
                     etoState.insert(.notReserved)
@@ -166,6 +188,11 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             etoState.insert(.underway)
         }
         ETOManager.shared.changeState(etoState)
+        if let vc = self.rootVC.topViewController as? ETODetailViewController {
+            main {
+                vc.contentView.setupUI()
+            }
+        }
     }
     
     func checkInviteCode(code: String, callback:@escaping(Bool)->()) {
@@ -189,10 +216,11 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
                 self.store.dispatch(RefrehProjectModelAction(data: refreshModel))
             }
+            self.switchPageState(PageState.normal(reason: .initialRefresh))
         }, error: { (error) in
-            
+            self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
         }) { error in
-            
+            self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
         }
     }
 }

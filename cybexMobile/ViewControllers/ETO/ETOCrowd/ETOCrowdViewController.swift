@@ -65,7 +65,7 @@ class ETOCrowdViewController: BaseViewController {
         
         coordinator?.state.data.asObservable().subscribe(onNext: {[weak self] (model) in
             guard let `self` = self, let model = model else { return }
-
+            self.navigationItem.title = model.name + " ETO"
             self.contentView.updateUI(model, handler: ETOCrowdView.adapterModelToETOCrowdView(self.contentView))
         }).disposed(by: disposeBag)
         
@@ -110,6 +110,11 @@ extension ETOCrowdViewController {
     @objc func ETOCrowdButtonDidClicked(_ data:[String: Any]) {
         self.view.endEditing(true)
         
+        if UserManager.shared.isLocked {
+            self.showPasswordBox()
+            return
+        }
+        
         guard let price = self.contentView.titleTextView.textField.text?.toDouble() else { return }
 
         self.coordinator?.showConfirm(price)
@@ -117,10 +122,15 @@ extension ETOCrowdViewController {
     
     override func returnEnsureAction() {
         guard let price = self.contentView.titleTextView.textField.text?.toDouble() else { return }
-        
-        self.coordinator?.joinCrowd(price, callback: { (data) in
+        self.startLoading()
+        self.coordinator?.joinCrowd(price, callback: { [weak self](data) in
+            guard let `self` = self else { return }
+            self.endLoading()
             if String(describing: data) == "<null>" {
                 self.showWaiting(R.string.localizable.eto_transfer_title.key.localized(), content: R.string.localizable.eto_transfer_content.key.localized(), time: 5)
+            }
+            else {
+                self.showToastBox(false, message: R.string.localizable.transfer_failed.key.localized())
             }
         })
     }
@@ -128,6 +138,21 @@ extension ETOCrowdViewController {
     override func ensureWaitingAction(_ sender: CybexWaitingView) {
         ShowToastManager.shared.hide(0)
         self.navigationController?.popViewController()
+    }
+    
+    override func passwordDetecting() {
+        self.startLoading()
+    }
+    
+    override func passwordPassed(_ passed: Bool) {
+        self.endLoading()
+        if passed == true {
+            guard let price = self.contentView.titleTextView.textField.text?.toDouble() else { return }
+            self.coordinator?.showConfirm(price)
+        }
+        else {
+            self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+        }
     }
 }
 

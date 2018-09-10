@@ -47,7 +47,7 @@ class ETOCoordinator: ETORootCoordinator {
 }
 
 extension ETOCoordinator: ETOCoordinatorProtocol {
-    func openProjectItem(_ model: ETOProjectModel) {
+    func openProjectItem() {
         if let vc = R.storyboard.etoDetail.etoDetailViewController() {
             vc.coordinator = ETODetailCoordinator(rootVC: self.rootVC)
             self.rootVC.pushViewController(vc, animated: true)
@@ -99,7 +99,7 @@ extension ETOCoordinator: ETOStateManagerProtocol {
     
     func setSelectedProjectData(_ model: ETOProjectModel) {
         self.store.dispatch(SetSelectedProjectModelAction(data: model))
-        self.openProjectItem(model)
+        self.openProjectItem()
     }
     
     func setSelectedBannerData(_ model: ETOBannerModel) {
@@ -109,10 +109,11 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                 if let data = projectModel.projectModel {
                     if data.project == model.id {
                         self.setSelectedProjectData(data)
-                        break
+                        return
                     }
                 }
             }
         }
+        self.openProjectItem()
     }
 }

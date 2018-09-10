@@ -16,7 +16,7 @@ extension ETODetailHeaderView {
         self.iconImgView.kf.setImage(with: URL(string: Localize.currentLanguage() == "en" ? model.icon_en : model.icon))
         self.progressView.progress = model.progress
         self.progressLabel.text = model.current_percent
-        self.timeLabel.text = model.timeState + model.time
+        self.timeLabel.text = model.timeState + model.detail_time
         self.nameLabel.text = model.name
         if let projectModel = model.projectModel {
             switch projectModel.status! {

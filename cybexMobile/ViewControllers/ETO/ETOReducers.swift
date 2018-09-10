@@ -21,6 +21,7 @@ func ETOReducer(action:Action, state:ETOState?) -> ETOState {
     case let action as SetSelectedProjectModelAction:
         state.selectedProjectModel.accept(action.data)
     case let action as SetSelectedBannerModelAction:
+        state.selectedProjectModel.accept(nil)
         state.selectedBannerModel.accept(action.data)
     default:break
     }
