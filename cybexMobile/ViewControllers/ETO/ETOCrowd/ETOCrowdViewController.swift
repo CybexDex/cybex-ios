@@ -120,9 +120,14 @@ extension ETOCrowdViewController {
         
         self.coordinator?.joinCrowd(price, callback: { (data) in
             if String(describing: data) == "<null>" {
-                
+                self.showWaiting(R.string.localizable.eto_transfer_title.key.localized(), content: R.string.localizable.eto_transfer_content.key.localized(), time: 5)
             }
         })
+    }
+    
+    override func ensureWaitingAction(_ sender: CybexWaitingView) {
+        ShowToastManager.shared.hide(0)
+        self.navigationController?.popViewController()
     }
 }
 

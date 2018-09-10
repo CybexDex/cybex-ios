@@ -14,10 +14,21 @@ import RxCocoa
 struct ETODetailState: BaseState {
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
     var data: BehaviorRelay<ETOProjectViewModel?> = BehaviorRelay(value: nil)
+    var userState: BehaviorRelay<ETOUserAuditModel?> = BehaviorRelay(value: nil)
+    var refreshData: BehaviorRelay<ETOProjectViewModel?> = BehaviorRelay(value: nil)
+
 }
 
 //MARK: - Action
 
 struct SetProjectDetailAction: Action {
     var data: ETOProjectModel
+}
+
+struct FetchUserStateAction: Action {
+    var data: ETOUserAuditModel
+}
+
+struct RefrehProjectModelAction: Action {
+    var data: ETOShortProjectStatusModel
 }

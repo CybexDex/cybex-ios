@@ -456,6 +456,15 @@
 
 "eto_project_immediate" = "Immediate";
 
+"eto_project_reserve_now" = "Reserve Now";
+"eto_project_verifying" = "Verifying";
+"eto_project_stop_reserve" = "Stop Reserve";
+"eto_project_waiting" = "Waiting for ETO";
+"eto_project_join" = "Join ETO now";
+"eto_project_rejected" = "Rejected";
+"eto_project_kyc" = "KYC Verification";
+"eto_project_login" = "Login";
+
 "eto_submit_title" = "You will join in ETO of %@";
 "eto_submit_check_error_1" = "insufficient balances";
 "eto_submit_check_error_2" = "beyond personal hard cap";
@@ -463,3 +472,11 @@
 "eto_submit_check_error_4" = "must beyond minimum purchasing unit";
 "eto_submit_check_error_5" = "must purchase an integer multiple of minimum purchasing unit";
 "eto_submit_confirm" = "ETO Confirm";
+
+
+"eto_transfer_title" = "Verifying";
+"eto_transfer_content" = "Do not repeat transfers";
+
+"eto_invite_code_error" = "Please enter a valid invitation code";
+"eto_invite_code_title" = "Invitation code";
+
