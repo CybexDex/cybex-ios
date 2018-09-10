@@ -18,7 +18,7 @@ class ETODetailViewController: BaseViewController {
 
     @IBOutlet weak var contentView: ETODetailView!
 
-    var timerRepeater: Repeater!
+    var timerRepeater: Repeater?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +30,21 @@ class ETODetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         contentView.setupUI()
+        self.startRepeatAction()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.timerRepeater!.pause()
+        self.timerRepeater = nil
+    }
+    
+    func startRepeatAction() {
+        self.timerRepeater = Repeater.every(.seconds(1), { [weak self](timer) in
+            guard let `self` = self else { return }
+            self.coordinator?.updateETOProjectDetailAction()
+            self.coordinator?.fetchUserState()
+        })
     }
     
     override func refreshViewController() {
@@ -46,12 +61,8 @@ class ETODetailViewController: BaseViewController {
     }
 
     func setupData() {
+        self.startLoading()
         self.coordinator?.fetchData()
-        self.timerRepeater = Repeater.every(.seconds(1), { [weak self](timer) in
-            guard let `self` = self else { return }
-            self.coordinator?.updateETOProjectDetailAction()
-            self.coordinator?.fetchUserState()
-        })
     }
     
     func setupEvent() {
@@ -61,14 +72,18 @@ class ETODetailViewController: BaseViewController {
     override func configureObserveState() {
         coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self] (state) in
             guard let `self` = self else { return }
-        
+            if case let .error(error, _) = state {
+                self.showToastBox(false, message: error.localizedDescription)
+            }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         coordinator?.state.data.asObservable().subscribe(onNext: { [weak self] data in
             guard let `self` = self else { return }
+            self.endLoading()
             if let model = data {
                 self.contentView.adapterModelToETODetailView(model)
                 self.contentView.data = model
+                self.title = model.name + " ETO"
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
@@ -105,7 +120,7 @@ extension ETODetailViewController {
         self.coordinator?.openETOCrowdVC()
     }
     
-    @objc func unlockPage(_ data: [String:Any]) {
+    @objc func loginPage(_ data: [String:Any]) {
         app_coodinator.showLogin()
     }
     
@@ -118,9 +133,7 @@ extension ETODetailViewController {
     }
     
     @objc func icoapePage(_ data: [String:Any]) {
-        if let url = data["data"] as? String {
-            self.coordinator?.openWebWithUrl("https://icoape.com/",type: CybexWebViewController.web_type.kyc)
-        }
+        self.coordinator?.openWebWithUrl("https://icoape.com/",type: CybexWebViewController.web_type.kyc)
     }
     
     override func returnInviteCode(_ sender: String) {

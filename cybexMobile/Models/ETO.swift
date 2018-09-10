@@ -18,12 +18,12 @@ struct ETOBannerModel:HandyJSON {
 }
 
 struct ETOUserAuditModel:HandyJSON {
-    var kyc_result: String = "" //not_start, ok
+    var kyc_status: String = "" //not_start, ok
     var status: String = "" //unstart: 没有预约 waiting,ok,reject
 }
 
 struct ETOShortProjectStatusModel:HandyJSON {
-    var current_percent:Int = 0
+    var current_percent:Double = 0
     var status:ProjectState? //finish pre ok
     var finish_at:Date!
     
@@ -278,6 +278,8 @@ struct ETOProjectViewModel {
         return result
     }
     
+    var detail_time: String = ""
+    
     init(_ projectModel : ETOProjectModel) {
         self.projectModel = projectModel
         self.name = projectModel.name
@@ -288,6 +290,23 @@ struct ETOProjectViewModel {
         self.progress = projectModel.current_percent
         self.icon = projectModel.adds_logo_mobile
         self.icon_en = projectModel.adds_logo_mobile__lang_en
+        
+        if let state = projectModel.status {
+            if state == .finish {
+                if projectModel.t_total_time == "" {
+                    self.detail_time = transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970))
+                }
+                else {
+                    self.detail_time = transferTimeType(Int(projectModel.t_total_time)!,type: true)
+                }
+            }
+            else if state == .pre {
+                self.detail_time = transferTimeType(Int(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true)
+            }
+            else {
+                self.detail_time = transferTimeType(Int(Date().timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970),type: true)
+            }
+        }
     }
 }
 

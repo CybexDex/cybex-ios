@@ -84,7 +84,7 @@
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="locali" value="user_agreement"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Muh-af-TAD" customClass="LGButton" customModule="cybexMobile" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Muh-af-TAD" customClass="LGButton" customModule="cybexMobile" customModuleProvider="target">
                                                             <rect key="frame" x="233" y="0.0" width="116" height="38"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="116" id="aTo-Mk-5bo"/>

@@ -31,9 +31,10 @@ func transferProjectModel(_ sender: ETOProjectModel) -> ETOProjectViewModel{
 
 func refreshProjectModel(_ sender: ETOShortProjectStatusModel,viewModel: ETOProjectViewModel?) -> ETOProjectViewModel? {
     guard let model = viewModel, var projectModel = model.projectModel else { return nil }
-    projectModel.current_percent = Double(sender.current_percent)
+    projectModel.current_percent = sender.current_percent
     projectModel.status = sender.status
     projectModel.finish_at = sender.finish_at
+    
     
     return ETOProjectViewModel(projectModel)
 }

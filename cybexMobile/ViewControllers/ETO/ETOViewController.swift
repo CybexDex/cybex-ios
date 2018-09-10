@@ -51,6 +51,8 @@ class ETOViewController: BaseViewController {
     }
     
     func setupData() {
+        self.view.showNoData("")
+        self.startLoading()
         fetchBannder()
     }
     
@@ -74,6 +76,7 @@ class ETOViewController: BaseViewController {
         coordinator?.state.data.asObservable().subscribe(onNext: { [weak self](data) in
             guard let `self` = self else { return }
             self.endLoading()
+            self.view.hiddenNoData()
             self.homeView.data = data
             
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)

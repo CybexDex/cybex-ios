@@ -141,6 +141,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
             self.store.dispatch(changeETOValidStatusAction(status: .precisionError))
             return
         }
+        self.store.dispatch(changeETOValidStatusAction(status: .ok))
     }
     
     func joinCrowd(_ transferAmount:Double, callback: @escaping CommonAnyCallback) {

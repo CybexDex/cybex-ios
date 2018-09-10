@@ -52,7 +52,7 @@ enum ETOJoinButtonAction: String {
     case inputCode
     case crowdPage
     case icoapePage
-    case unlockPage
+    case loginPage
 }
 
 enum ETOJoinButtonState {
@@ -79,7 +79,7 @@ class ETOManager {
         let projectState:ETOStateOption = [.notStarted, .underway, .finished]
         
         for stateSet in [loginState, kycState, userReserveState, projectBookState, auditState, projectState] {
-            if stateSet.contains(state) {
+            if stateSet.contains(state.intersection(stateSet)) {
                 self.state.remove(stateSet)
                 self.state.insert(state.intersection(stateSet))
             }
@@ -125,9 +125,8 @@ class ETOManager {
                 return .normal(title: R.string.localizable.eto_project_kyc.key.localized(), style: .normal, action: .icoapePage)
             }
             else if state.contains(.notLogin) && !state.contains(.finished) {
-                return .normal(title: R.string.localizable.eto_project_login.key.localized(), style: .normal, action: .unlockPage)
+                return .normal(title: R.string.localizable.eto_project_login.key.localized(), style: .normal, action: .loginPage)
             }
-
             return .notShow
         }
     }

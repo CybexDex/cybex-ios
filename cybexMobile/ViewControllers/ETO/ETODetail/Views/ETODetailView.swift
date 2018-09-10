@@ -8,6 +8,7 @@
 
 import Foundation
 import Localize_Swift
+import SwiftTheme
 
 @IBDesignable
 class ETODetailView: BaseView {
@@ -107,10 +108,12 @@ class ETODetailView: BaseView {
         case .normal:
             updateAgreeBtnImg(normal: R.image.icUnselected16Px()!, selected: R.image.icSelected24Px()!, highlighted: R.image.icSelected24Px()!)
             agreeButton.isUserInteractionEnabled = true
+            agreeButton.isSelected = false
             updateClauseViewHidden(isHidden: false)
         case .checkedAndImmutable:
             updateAgreeBtnImg(normal: R.image.icSelected124Px()!, selected: R.image.icSelected124Px()!, highlighted: R.image.icSelected124Px()!)
             agreeButton.isUserInteractionEnabled = false
+            agreeButton.isSelected = true
             updateClauseViewHidden(isHidden: false)
         case .notShow:
             updateClauseViewHidden(isHidden: true)
@@ -133,13 +136,16 @@ class ETODetailView: BaseView {
         stateButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] touch in
             guard let `self` = self else { return }
             guard let action =  self.action else { return }
+            if self.agreeButton.isHidden == false, self.agreeButton.isSelected == false {
+                return
+            }
             self.next?.sendEventWith(action.rawValue, userinfo: [:])
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         agreeButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] touch in
             guard let `self` = self else { return }
             self.agreeButton.isSelected = !self.agreeButton.isSelected
-            self.next?.sendEventWith(Event.crowdPage.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+//            self.next?.sendEventWith(Event.crowdPage.rawValue, userinfo: ["data": self.data ?? "", "self": self])
 
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
