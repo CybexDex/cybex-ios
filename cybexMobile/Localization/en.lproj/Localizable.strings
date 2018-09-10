@@ -457,9 +457,9 @@
 "eto_project_immediate" = "Immediate";
 
 "eto_submit_title" = "You will join in ETO of %@";
-"eto_submit_check_error_1" = "余额不足";
-"eto_submit_check_error_2" = "超出单账号限额";
-"eto_submit_check_error_3" = "剩余可认购额度不足";
-"eto_submit_check_error_4" = "不可低于单笔最低限额";
-"eto_submit_check_error_5" = "认购金额为最小认购单位整数倍";
+"eto_submit_check_error_1" = "insufficient balances";
+"eto_submit_check_error_2" = "beyond personal hard cap";
+"eto_submit_check_error_3" = "insufficient remaining quota";
+"eto_submit_check_error_4" = "must beyond minimum purchasing unit";
+"eto_submit_check_error_5" = "must purchase an integer multiple of minimum purchasing unit";
 "eto_submit_confirm" = "ETO Confirm";
