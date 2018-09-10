@@ -23,7 +23,7 @@ import Crashlytics
 import SwiftRichString
 import SwiftyBeaver
 import AlamofireNetworkActivityLogger
-
+import NBLCommonModule
 
 let log = SwiftyBeaver.self
 
@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     EasyAnimation.enable()
     
     setupAnalytics()
-
+    
     NetworkActivityLogger.shared.startLogging()
     NetworkActivityLogger.shared.level = .error
     if Defaults.hasKey(.frequency_type){
