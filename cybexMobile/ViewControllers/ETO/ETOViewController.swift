@@ -88,8 +88,8 @@ class ETOViewController: BaseViewController {
 
 extension ETOViewController {
     @objc func ETOProjectViewDidClicked(_ data:[String: Any]) {
-        if let viewModel = data["data"] as? ETOProjectViewModel {
-            self.coordinator?.setSelectedProjectData(viewModel.projectModel!)
+        if let viewModel = data["data"] as? ETOProjectViewModel, let projectModel = viewModel.projectModel {
+            self.coordinator?.setSelectedProjectData(projectModel)
         }
     }
     

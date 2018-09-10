@@ -38,7 +38,7 @@ class ETODetailViewController: BaseViewController {
     
     func setupUI() {
         self.localized_text = R.string.localizable.eto_project_detail.key.localizedContainer()
-        configRightNavButton(R.image.ic_share_24_px())
+//        configRightNavButton(R.image.ic_share_24_px())
     }
     
     override func rightAction(_ sender: UIButton) {
@@ -47,13 +47,10 @@ class ETODetailViewController: BaseViewController {
 
     func setupData() {
         self.coordinator?.fetchData()
-        
         self.timerRepeater = Repeater.every(.seconds(1), { [weak self](timer) in
-            main {
-                guard let `self` = self else { return }
-                self.coordinator?.updateETOProjectDetailAction()
-                self.coordinator?.fetchUserState()
-            }
+            guard let `self` = self else { return }
+            self.coordinator?.updateETOProjectDetailAction()
+            self.coordinator?.fetchUserState()
         })
     }
     
@@ -69,7 +66,7 @@ class ETODetailViewController: BaseViewController {
         
         coordinator?.state.data.asObservable().subscribe(onNext: { [weak self] data in
             guard let `self` = self else { return }
-            if let model = data as? ETOProjectViewModel {
+            if let model = data {
                 self.contentView.adapterModelToETODetailView(model)
                 self.contentView.data = model
             }
@@ -77,16 +74,20 @@ class ETODetailViewController: BaseViewController {
         
         coordinator?.state.refreshData.asObservable().subscribe(onNext: { [weak self] data in
             guard let `self` = self else { return }
-            if let model = data as? ETOProjectViewModel {
-                self.contentView.headerView.adapterModelToETODetailHeaderView(model)
-                self.coordinator?.fetchUpState()
+            main {
+                if let model = data {
+                    self.contentView.headerView.adapterModelToETODetailHeaderView(model)
+                    self.coordinator?.fetchUpState()
+                }
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         coordinator?.state.userState.asObservable().subscribe(onNext: { [weak self]data in
             guard let `self` = self else { return }
-            if let _ = data as? ETOShortProjectStatusModel {
-                self.coordinator?.fetchUpState()
+            main {
+                if let _ = data as? ETOShortProjectStatusModel {
+                    self.coordinator?.fetchUpState()
+                }
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
@@ -95,7 +96,9 @@ class ETODetailViewController: BaseViewController {
 
 extension ETODetailViewController {
     @objc func clickCellView(_ data: [String: Any]) {
-        self.coordinator?.openWebWithUrl(data["data"] as! String)
+        if let url = data["data"] as? String {
+            self.coordinator?.openWebWithUrl(url,type: CybexWebViewController.web_type.whitelist)
+        }
     }
     
     @objc func crowdPage(_ data : [String:Any]) {
@@ -115,7 +118,9 @@ extension ETODetailViewController {
     }
     
     @objc func icoapePage(_ data: [String:Any]) {
-        
+        if let url = data["data"] as? String {
+            self.coordinator?.openWebWithUrl("https://icoape.com/",type: CybexWebViewController.web_type.kyc)
+        }
     }
     
     override func returnInviteCode(_ sender: String) {

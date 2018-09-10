@@ -13,14 +13,13 @@ import SwiftNotificationCenter
 protocol ETODetailCoordinatorProtocol {
     func openShare()
     func openETOCrowdVC()
-    func openWebWithUrl(_ sender: String)
+    func openWebWithUrl(_ sender: String,type: CybexWebViewController.web_type)
 }
 
 protocol ETODetailStateManagerProtocol {
     var state: ETODetailState { get }
     
     func switchPageState(_ state:PageState)
-    func setETOProjectDetailModel(_ model: ETOProjectModel)
     func fetchData()
     func fetchUpState()
     func checkInviteCode(code: String, callback:@escaping(Bool)->())
@@ -62,10 +61,10 @@ extension ETODetailCoordinator: ETODetailCoordinatorProtocol {
         self.rootVC.pushViewController(vc)
     }
     
-    func openWebWithUrl(_ sender: String) {
+    func openWebWithUrl(_ sender: String,type: CybexWebViewController.web_type) {
         if let vc = R.storyboard.main.cybexWebViewController() {
             vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
-            vc.vc_type = .whitelist
+            vc.vc_type = type
             vc.url = URL(string: sender)
             self.rootVC.pushViewController(vc ,animated: true)
         }
@@ -76,10 +75,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     func switchPageState(_ state:PageState) {
         self.store.dispatch(PageStateAction(state: state))
     }
-    
-    func setETOProjectDetailModel(_ model: ETOProjectModel) {
-        self.store.dispatch(SetProjectDetailAction(data: model))
-    }
+
     func fetchData() {
         Broadcaster.notify(ETOStateManagerProtocol.self) { (coor) in
             if let model = coor.state.selectedProjectModel.value {
@@ -95,9 +91,25 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                     self.store.dispatch(FetchUserStateAction(data:model))
                 }
             }, error: { (error) in
-                
             }) { (error) in
-                
+            }
+        }
+        else {
+            if let data = self.state.data.value, let projectModel = data.projectModel ,let projectState = projectModel.status{
+                if projectState == .finish {
+                    ETOManager.shared.changeState([.notLogin, .finished])
+                }
+                else if projectState == .pre {
+                    ETOManager.shared.changeState([.notLogin, .notStarted])
+                }
+                else if projectState == .ok {
+                    ETOManager.shared.changeState([.notLogin, .underway])
+                }
+                if let vc = self.rootVC.topViewController as? ETODetailViewController {
+                    main {
+                        vc.contentView.setupUI()
+                    }
+                }
             }
         }
     }
@@ -144,7 +156,6 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                 }
             }
         }
-        
         if projectState == .finish {
             etoState.insert(.finished)
         }
