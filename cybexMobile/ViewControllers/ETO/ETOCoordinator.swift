@@ -11,7 +11,6 @@ import ReSwift
 import SwiftNotificationCenter
 
 protocol ETOCoordinatorProtocol {
-    func openBanner()
     func openProjectHistroy()
 }
 
@@ -27,6 +26,10 @@ protocol ETOStateManagerProtocol {
     func setSelectedProjectData(_ model: ETOProjectModel)
     
     func setSelectedBannerData(_ model: ETOBannerModel)
+    
+    func refreshProjectDatas()
+    
+    func refreshTime()
 }
 
 class ETOCoordinator: ETORootCoordinator {
@@ -39,7 +42,7 @@ class ETOCoordinator: ETORootCoordinator {
     var state: ETOState {
         return store.state
     }
-            
+    
     override func register() {
         Broadcaster.register(ETOCoordinatorProtocol.self, observer: self)
         Broadcaster.register(ETOStateManagerProtocol.self, observer: self)
@@ -52,10 +55,6 @@ extension ETOCoordinator: ETOCoordinatorProtocol {
             vc.coordinator = ETODetailCoordinator(rootVC: self.rootVC)
             self.rootVC.pushViewController(vc, animated: true)
         }
-    }
-    
-    func openBanner() {
-        
     }
     
     func openProjectHistroy() {
@@ -79,9 +78,9 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                 self.store.dispatch(FetchProjectModelAction(data:projects))
             }
         }, error: { (error) in
-            
+            self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
         }) { (error) in
-            
+            self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
         }
     }
     
@@ -93,7 +92,9 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                 self.store.dispatch(FetchBannerModelAction(data: banners))
             }
         }, error: { (error) in
+            self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
         }) { (error) in
+            self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
         }
     }
     
@@ -115,5 +116,40 @@ extension ETOCoordinator: ETOStateManagerProtocol {
             }
         }
         self.openProjectItem()
+    }
+    
+    func refreshProjectDatas() {
+        if let projectModels = self.state.data.value {
+            for viewModel in projectModels {
+                if let projectModel = viewModel.projectModel, projectModel.status! == .pre || projectModel.status! == .ok  {
+                    ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { (json) in
+                        if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
+                            viewModel.current_percent.accept((refreshModel.current_percent * 100).string(digits:0, roundingMode: .down) + "%")
+                            viewModel.progress.accept(refreshModel.current_percent)
+                            viewModel.status.accept(refreshModel.status!.description())
+                            viewModel.project_state.accept(refreshModel.status)
+                            projectModel.status = refreshModel.status
+                        }
+                    }, error: { (error) in
+                    }) { (error) in
+                    }
+                }
+            }
+        }
+    }
+    
+    func refreshTime() {
+        if let projectModels = self.state.data.value {
+            for viewModel in projectModels {
+                if let projectModel = viewModel.projectModel, projectModel.status! == .pre || projectModel.status! == .ok  {
+                    if projectModel.status! == .pre {
+                        viewModel.time.accept(transferTimeType(Int(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true))
+                    }
+                    else if projectModel.status! == .ok {
+                        viewModel.time.accept(transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true))
+                    }
+                }
+            }
+        }
     }
 }

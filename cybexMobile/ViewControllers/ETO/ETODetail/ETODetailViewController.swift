@@ -29,7 +29,6 @@ class ETODetailViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        contentView.setupUI()
         self.startRepeatAction()
     }
     
@@ -41,9 +40,11 @@ class ETODetailViewController: BaseViewController {
     
     func startRepeatAction() {
         self.timerRepeater = Repeater.every(.seconds(1), { [weak self](timer) in
-            guard let `self` = self else { return }
-            self.coordinator?.updateETOProjectDetailAction()
-            self.coordinator?.fetchUserState()
+            main {
+                guard let `self` = self else { return }
+                self.coordinator?.updateETOProjectDetailAction()
+                self.coordinator?.fetchUserState()
+            }
         })
     }
     
@@ -73,6 +74,7 @@ class ETODetailViewController: BaseViewController {
         coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self] (state) in
             guard let `self` = self else { return }
             if case let .error(error, _) = state {
+                self.endLoading()
                 self.showToastBox(false, message: error.localizedDescription)
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)

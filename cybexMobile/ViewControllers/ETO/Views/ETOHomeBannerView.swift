@@ -88,7 +88,9 @@ extension ETOHomeBannerView : FSPagerViewDataSource,FSPagerViewDelegate {
     }
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        self.next?.sendEventWith(Event.ETOHomeBannerViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        if let data = self.data as? [ETOBannerModel], index < data.count {
+            self.next?.sendEventWith(Event.ETOHomeBannerViewDidClicked.rawValue, userinfo: ["data": data[index] , "self": self])
+        }
     }
     
     func pagerViewDidScroll(_ pagerView: FSPagerView) {

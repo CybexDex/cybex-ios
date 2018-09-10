@@ -10,6 +10,7 @@ import Foundation
 import HandyJSON
 import DifferenceKit
 import RxSwift
+import RxCocoa
 
 struct ETOBannerModel:HandyJSON {
     var id:String = ""
@@ -113,7 +114,7 @@ struct ETOTradeHistoryModel: HandyJSON, Differentiable, Equatable, Hashable {
     }
 }
 
-struct ETOProjectModel:HandyJSON {
+class ETOProjectModel:HandyJSON {
     var id: Int = 0
     var adds_logo_mobile: String = ""
     var adds_logo_mobile__lang_en: String = ""
@@ -160,7 +161,7 @@ struct ETOProjectModel:HandyJSON {
     
     var t_total_time: String = ""
     
-    mutating func mapping(mapper: HelpingMapper) {
+    func mapping(mapper: HelpingMapper) {
         mapper <<<
             self.start_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
         mapper <<<
@@ -174,6 +175,8 @@ struct ETOProjectModel:HandyJSON {
         mapper <<<
             self.create_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
     }
+    
+    required init() {}
 }
 
 enum ProjectState : String ,HandyJSONEnum{
@@ -196,15 +199,15 @@ enum ProjectState : String ,HandyJSONEnum{
 }
 
 
-struct ETOProjectViewModel {
+class ETOProjectViewModel {
     var icon: String = ""
     var icon_en: String = ""
     var name: String = ""
     var key_words: String = ""
     var key_words_en: String = ""
-    var status: String = ""
-    var current_percent: String = ""
-    var progress: Double = 0
+    var status: BehaviorRelay<String> = BehaviorRelay(value: "")
+    var current_percent: BehaviorRelay<String> = BehaviorRelay(value: "")
+    var progress: BehaviorRelay<Double> = BehaviorRelay(value: 0)
     var projectModel: ETOProjectModel?
     var timeState: String {
         if let data = self.projectModel, let state = data.status {
@@ -221,23 +224,7 @@ struct ETOProjectViewModel {
         return ""
     }
     
-    var time: String {
-        if let data = self.projectModel, let state = data.status {
-            if state == .finish {
-                if data.t_total_time == "" {
-                    return transferTimeType(Int(data.end_at!.timeIntervalSince1970 - data.start_at!.timeIntervalSince1970))
-                }
-                return transferTimeType(Int(data.t_total_time)!,type: true)
-            }
-            else if state == .pre {
-                return transferTimeType(Int(data.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true)
-            }
-            else {
-                return transferTimeType(Int(Date().timeIntervalSince1970 - data.start_at!.timeIntervalSince1970),type: true)
-            }
-        }
-        return ""
-    }
+    var time: BehaviorRelay<String> = BehaviorRelay(value: "")
     
     var etoDetail: String {
         var result: String = ""
@@ -278,37 +265,42 @@ struct ETOProjectViewModel {
         return result
     }
     
-    var detail_time: String = ""
-    
+    var detail_time: BehaviorRelay<String> = BehaviorRelay(value: "")
+    var project_state: BehaviorRelay<ProjectState?> = BehaviorRelay(value:nil)
     init(_ projectModel : ETOProjectModel) {
         self.projectModel = projectModel
         self.name = projectModel.name
         self.key_words = projectModel.adds_keyword
         self.key_words_en = projectModel.adds_keyword__lang_en
-        self.status = projectModel.status!.description()
-        self.current_percent = (projectModel.current_percent * 100).string(digits:0, roundingMode: .down) + "%"
-        self.progress = projectModel.current_percent
+        self.status.accept(projectModel.status!.description())
+        self.current_percent.accept((projectModel.current_percent * 100).string(digits:0, roundingMode: .down) + "%")
+        self.progress.accept(projectModel.current_percent)
         self.icon = projectModel.adds_logo_mobile
         self.icon_en = projectModel.adds_logo_mobile__lang_en
-        
+        self.project_state.accept(projectModel.status)
         if let state = projectModel.status {
             if state == .finish {
                 if projectModel.t_total_time == "" {
-                    self.detail_time = transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970))
+                    self.detail_time.accept(transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970)))
+                    self.time.accept(transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970)))
                 }
                 else {
-                    self.detail_time = transferTimeType(Int(projectModel.t_total_time)!,type: true)
+                    self.detail_time.accept(transferTimeType(Int(projectModel.t_total_time)!))
+                    self.time.accept(transferTimeType(Int(projectModel.t_total_time)!,type: true))
                 }
             }
             else if state == .pre {
-                self.detail_time = transferTimeType(Int(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true)
+                self.detail_time.accept(transferTimeType(Int(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970)))
+                self.time.accept(transferTimeType(Int(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true))
             }
             else {
-                self.detail_time = transferTimeType(Int(Date().timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970),type: true)
+                self.detail_time.accept(transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970)))
+                self.time.accept(transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true))
             }
         }
     }
 }
+
 
 
 

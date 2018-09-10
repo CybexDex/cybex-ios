@@ -37,7 +37,7 @@ class ETODetailCoordinator: ETORootCoordinator {
     var state: ETODetailState {
         return store.state
     }
-            
+    
     override func register() {
         Broadcaster.register(ETODetailCoordinatorProtocol.self, observer: self)
         Broadcaster.register(ETODetailStateManagerProtocol.self, observer: self)
@@ -72,10 +72,11 @@ extension ETODetailCoordinator: ETODetailCoordinatorProtocol {
 }
 
 extension ETODetailCoordinator: ETODetailStateManagerProtocol {
+    
     func switchPageState(_ state:PageState) {
         self.store.dispatch(PageStateAction(state: state))
     }
-
+    
     func fetchData() {
         Broadcaster.notify(ETOStateManagerProtocol.self) { (coor) in
             if let model = coor.state.selectedProjectModel.value {
@@ -100,6 +101,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     
     func fetchUserState() {
         if let name = UserManager.shared.name.value, let data = self.state.data.value, let projectModel = data.projectModel, let projectId = projectModel.project.int {
+            
             ETOMGService.request(target: ETOMGAPI.checkUserState(name: name, id: projectId), success: { (json) in
                 if let data = json.dictionaryObject, let model = ETOUserAuditModel.deserialize(from: data){
                     self.store.dispatch(FetchUserStateAction(data:model))
@@ -123,9 +125,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                     ETOManager.shared.changeState([.notLogin, .underway])
                 }
                 if let vc = self.rootVC.topViewController as? ETODetailViewController {
-                    main {
-                        vc.contentView.setupUI()
-                    }
+                    vc.contentView.getJoinButtonState()
                 }
             }
         }
@@ -145,9 +145,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                 etoState.insert(.KYCNotPassed)
                 ETOManager.shared.changeState(etoState)
                 if let vc = self.rootVC.topViewController as? ETODetailViewController {
-                    main {
-                        vc.contentView.setupUI()
-                    }
+                    vc.contentView.getJoinButtonState()
                 }
                 return
             }
@@ -189,9 +187,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
         }
         ETOManager.shared.changeState(etoState)
         if let vc = self.rootVC.topViewController as? ETODetailViewController {
-            main {
-                vc.contentView.setupUI()
-            }
+            vc.contentView.setupUI()
         }
     }
     
@@ -212,15 +208,27 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     
     func updateETOProjectDetailAction() {
         guard  let model = self.state.data.value?.projectModel else { return }
-        ETOMGService.request(target: ETOMGAPI.refreshProject(id: model.id), success: { json in
-            if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
-                self.store.dispatch(RefrehProjectModelAction(data: refreshModel))
+        
+        if model.status! == .pre || model.status! == .ok {
+            ETOMGService.request(target: ETOMGAPI.refreshProject(id: model.id), success: { json in
+                if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
+                    self.store.dispatch(RefrehProjectModelAction(data: refreshModel))
+                }
+                self.switchPageState(PageState.normal(reason: .initialRefresh))
+            }, error: { (error) in
+                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
+            }) { error in
+                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
             }
-            self.switchPageState(PageState.normal(reason: .initialRefresh))
-        }, error: { (error) in
-            self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
-        }) { error in
-            self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
+            
+            if let viewModel = self.state.data.value, let projectModel = viewModel.projectModel {
+                if model.status! == .pre {
+                    viewModel.detail_time.accept(transferTimeType(Int(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970)))
+                }
+                else if model.status! == .ok {
+                    viewModel.detail_time.accept(transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970)))
+                }
+            }
         }
     }
 }
