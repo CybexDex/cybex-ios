@@ -58,6 +58,19 @@ class RichStyle {
         })
     }
     
+    //label_PingFangSC-Regular_12_#F7F8FAFF_20
+    func constructStyle(_ font: SystemFonts = SystemFonts.PingFangSC_Regular, fontSize: CGFloat = 12, color:UIColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo, lineHeight: CGFloat = 20) {
+        let style = Style {
+            let realfont = font.font(size: fontSize)
+            $0.font = realfont
+            $0.color = color
+            
+            $0.setupLineHeight(lineHeight, fontHeight: realfont.lineHeight)
+        }
+        
+        Styles.register("label_\(font.rawValue)_\(fontSize)_\(color.hexString(true))_\(lineHeight)", style: style)
+    }
+    
     func changeStyleFromTheme() {
         let style = Style {
             $0.font = SystemFonts.PingFangSC_Regular.font(size: 14.0)
