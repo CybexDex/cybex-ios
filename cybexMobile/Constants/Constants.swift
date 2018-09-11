@@ -52,6 +52,11 @@ struct AppConfiguration {
     static var SERVER_VERSION_URLString: String {
         return SERVER_BASE_URLString + "iOS_update.json"
     }
+    
+    static var SERVER_VERSION_APPSTORE_URLString: String {
+        return SERVER_BASE_URLString + "iOS_store_update.json"
+    }
+    
     static var SERVER_MARKETLIST_URLString: String {
         return SERVER_BASE_URLString + "market_list?base="
     }

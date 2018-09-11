@@ -25,6 +25,7 @@ import SwiftyBeaver
 import AlamofireNetworkActivityLogger
 import NBLCommonModule
 
+
 let log = SwiftyBeaver.self
 
 fileprivate let UM_APPKEY = "5b6bf4a8b27b0a3429000016"
@@ -47,6 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     changeEnvironmentAction()
     
+    let cache = KingfisherManager.shared.cache
+    cache.clearDiskCache()
+    cache.clearMemoryCache()
+    cache.cleanExpiredDiskCache()
       
     let console = ConsoleDestination()
     log.addDestination(console)

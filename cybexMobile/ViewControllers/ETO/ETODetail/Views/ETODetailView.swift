@@ -31,7 +31,7 @@ class ETODetailView: BaseView {
         case crowdPage
         case icoapePage
         case unlockPage
-        
+        case showToastError
     }
         
     override func setup() {
@@ -140,6 +140,7 @@ class ETODetailView: BaseView {
             guard let `self` = self else { return }
             guard let action =  self.action else { return }
             if self.agreeButton.isHidden == false, self.agreeButton.isSelected == false {
+                self.next?.sendEventWith(Event.showToastError.rawValue, userinfo: [:])
                 return
             }
             self.next?.sendEventWith(action.rawValue, userinfo: [:])

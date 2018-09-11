@@ -481,3 +481,5 @@
 "eto_invite_code_title" = "Invitation code";
 
 "eto_time_less_minite" = "less one minite";
+
+"eto_detail_user_agreement_error" = "Please check 《User Agreement》 first.";

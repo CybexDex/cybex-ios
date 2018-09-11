@@ -186,8 +186,10 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
         else if projectState == .ok {
             etoState.insert(.underway)
         }
+        let stateBefore = ETOManager.shared.getClauseState()
         ETOManager.shared.changeState(etoState)
-        if let vc = self.rootVC.topViewController as? ETODetailViewController {
+        let stateEnd = ETOManager.shared.getClauseState()
+        if stateBefore != stateEnd, let vc = self.rootVC.topViewController as? ETODetailViewController {
             vc.contentView.getJoinButtonState()
         }
     }

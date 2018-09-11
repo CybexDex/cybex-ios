@@ -64,7 +64,8 @@ enum ETOJoinButtonState {
 class ETOManager {
     static let shared = ETOManager()
     
-    private var state = ETOStateOption.unset
+    private(set) var state = ETOStateOption.unset
+    
     
     private init() {
         

@@ -154,4 +154,8 @@ extension ETODetailViewController {
             self.coordinator?.openWebWithUrl(url, type: CybexWebViewController.web_type.project_website)
         }
     }
+    
+    @objc func showToastError(_ sender: [String:Any]) {
+        self.showToastBox(false, message: R.string.localizable.eto_detail_user_agreement_error.key.localized())
+    }
 }

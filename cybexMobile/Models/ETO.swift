@@ -30,7 +30,7 @@ struct ETOShortProjectStatusModel:HandyJSON {
     
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
-            self.finish_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
+            self.finish_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
     }
 }
 
@@ -99,6 +99,22 @@ struct ETOTradeHistoryModel: HandyJSON, Differentiable, Equatable, Hashable {
     var created_at:Date!
     var token_count:String = ""
     var token:String = ""
+    var pricision: Int {
+        guard let balances = UserManager.shared.balances.value else { return 0 }
+        
+        let balance = balances.filter { (balance) -> Bool in
+            if let name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade {
+                return name == self.token
+            }
+            
+            return false
+            }.first
+        
+        if let balance = balance, let info = app_data.assetInfo[balance.asset_type] {
+            return info.precision
+        }
+        return 0
+    }
     
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
@@ -163,17 +179,17 @@ class ETOProjectModel:HandyJSON {
     
     func mapping(mapper: HelpingMapper) {
         mapper <<<
-            self.start_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
+            self.start_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
         mapper <<<
-            self.end_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
+            self.end_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
         mapper <<<
-            self.finish_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
+            self.finish_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
         mapper <<<
-            self.offer_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
+            self.offer_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
         mapper <<<
-            self.lock_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
+            self.lock_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
         mapper <<<
-            self.create_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
+            self.create_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
     }
     
     required init() {}
