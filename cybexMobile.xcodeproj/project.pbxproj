@@ -386,8 +386,6 @@
 		73587EB52137C69B006CF8A6 /* ETOCrowdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */; };
 		73587EB62137C69B006CF8A6 /* ETOCrowdViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */; };
 		737F8C352145532A00DD522A /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F8C342145532A00DD522A /* String+Extensions.swift */; };
-		737F8DC8214660E300DD522A /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 737F8DBF214660DD00DD522A /* NBLCommonModule.framework */; };
-		737F8DC9214660E300DD522A /* NBLCommonModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 737F8DBF214660DD00DD522A /* NBLCommonModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
 		7386F2A22121665100ABC924 /* AddressHomeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29E2121665100ABC924 /* AddressHomeActions.swift */; };
@@ -413,6 +411,7 @@
 		7386F2D82121737600ABC924 /* AddressHomeTableViewCellViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2D62121737600ABC924 /* AddressHomeTableViewCellViewView.swift */; };
 		7386F2D92121737600ABC924 /* AddressHomeTableViewCellViewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7386F2D72121737600ABC924 /* AddressHomeTableViewCellViewView.xib */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
+		73F1DEAE214762C20065BD72 /* NBLCommonModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 737F8DBF214660DD00DD522A /* NBLCommonModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
 		73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */; };
 		73F50BA32137D71F0071B08D /* ETOCrowdGridItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */; };
@@ -670,13 +669,6 @@
 			remoteGlobalIDString = 651FAE08A2E8FE5F6193B978991836D7;
 			remoteInfo = "Pods-NBLCommonModuleTests";
 		};
-		737F8DCA214660E300DD522A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 737F8D98214660DC00DD522A /* NBLCommonModule.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 737F8C422146539100DD522A;
-			remoteInfo = NBLCommonModule;
-		};
 		7386F2912121204A00ABC924 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 86D7094F24AAA52C797AF890376BB10F /* Project object */;
@@ -684,16 +676,30 @@
 			remoteGlobalIDString = 6597A0AC6C29D30281EBD879E45F3BAF;
 			remoteInfo = cybexMobile;
 		};
+		73F1DE3C21466C340065BD72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 737F8DA3214660DC00DD522A /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FB7F9ABD44B0B4FC9F11D1B28220A2D0;
+			remoteInfo = Repeat;
+		};
+		73F1DEAF214762C20065BD72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 737F8D98214660DC00DD522A /* NBLCommonModule.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 737F8C422146539100DD522A;
+			remoteInfo = NBLCommonModule;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		737F8C6A2146547E00DD522A /* Embed Frameworks */ = {
+		73F1DEB1214762C30065BD72 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				737F8DC9214660E300DD522A /* NBLCommonModule.framework in Embed Frameworks */,
+				73F1DEAE214762C20065BD72 /* NBLCommonModule.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4365,7 +4371,6 @@
 		4EFBC92266E967CE7E5F995C5F7D6C69 /* streambuf.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = streambuf.hpp; sourceTree = "<group>"; };
 		4F13434CBE502FC50FF782E459848F63 /* velocity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = velocity.hpp; sourceTree = "<group>"; };
 		4F1900FD80072ED6D1DD8AF8A28E93E2 /* closing_iterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = closing_iterator.hpp; sourceTree = "<group>"; };
-		4F1F128FBF3575C10A8B96077AAA56F9 /* cybexMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cybexMobile.entitlements; sourceTree = "<group>"; };
 		4F22637B0E6D6C08297B5BC3DB1DCF19 /* sliced.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sliced.hpp; sourceTree = "<group>"; };
 		4F2F8E07DA0A73B69165E4D19776ADB5 /* new_eval_40.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = new_eval_40.hpp; sourceTree = "<group>"; };
 		4F30EC4CBDFDAB87433F005FAA98B612 /* list.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = list.hpp; sourceTree = "<group>"; };
@@ -6062,6 +6067,7 @@
 		732D2DD12E9EC24ACDA2584754B764AE /* length.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = length.hpp; sourceTree = "<group>"; };
 		732E4F1D9395351DD9A1CE9DD6098806 /* directive.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = directive.hpp; sourceTree = "<group>"; };
 		7332B0A4E530EEDF4F5295A267932B23 /* static_binding.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = static_binding.hpp; sourceTree = "<group>"; };
+		73335AC821476AA700CEF254 /* cybexMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cybexMobile.entitlements; sourceTree = "<group>"; };
 		7335642E20FF2C0500426FE4 /* cybex_gateway_query.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cybex_gateway_query.hpp; sourceTree = "<group>"; };
 		7336D47B5E14FBBBDC4A985A8613F59A /* recursive_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = recursive_wrapper_fwd.hpp; sourceTree = "<group>"; };
 		733714AF2122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAddressHomeTableViewCell.swift; sourceTree = "<group>"; };
@@ -12544,7 +12550,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ECF8204F8406ACA571309CEEC8F20A3 /* Pods_cybexMobile.framework in Frameworks */,
-				737F8DC8214660E300DD522A /* NBLCommonModule.framework in Frameworks */,
 				6257D6A4A5ED0C635B89E55C84FA1215 /* libboost.a in Frameworks */,
 				786DA36D390BADA15DF7637951260BE0 /* libcrypto.a in Frameworks */,
 				8899C4D33A4F31180D755A486B4A6B6C /* libfc.a in Frameworks */,
@@ -22506,6 +22511,7 @@
 			children = (
 				737F8DC5214660DD00DD522A /* Pods_NBLCommonModule.framework */,
 				737F8DC7214660DD00DD522A /* Pods_NBLCommonModuleTests.framework */,
+				73F1DE3D21466C340065BD72 /* Repeat.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -29361,6 +29367,7 @@
 		CDB5CFC7D170B0A1511D4AD336877512 /* cybexMobile */ = {
 			isa = PBXGroup;
 			children = (
+				73335AC821476AA700CEF254 /* cybexMobile.entitlements */,
 				45513F547AB0EFB7BD213DB2BFAC9168 /* Base */,
 				001CE5518F8A5D177DC13712C25E1325 /* Constants */,
 				B597FD23132156F1CD884836F3169B37 /* Coordinator */,
@@ -29383,7 +29390,6 @@
 				101951300FAFC5192A5E883D926A0C6D /* Main.storyboard */,
 				649950D64DFE386B6F9AEFB688AAD486 /* R.generated.swift */,
 				E9385075C042AC240E36D35EBA28F5B7 /* cybexMobile-Bridging-Header.h */,
-				4F1F128FBF3575C10A8B96077AAA56F9 /* cybexMobile.entitlements */,
 			);
 			path = cybexMobile;
 			sourceTree = "<group>";
@@ -33281,12 +33287,12 @@
 				BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */,
 				4C503C5D3E59634F44E3149DFE8EA11D /* [CP] Embed Pods Frameworks */,
 				A6D55984F0239A7067AB1555 /* [CP] Copy Pods Resources */,
-				737F8C6A2146547E00DD522A /* Embed Frameworks */,
+				73F1DEB1214762C30065BD72 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				737F8DCB214660E300DD522A /* PBXTargetDependency */,
+				73F1DEB0214762C20065BD72 /* PBXTargetDependency */,
 			);
 			name = cybexMobile;
 			productName = "Hello World";
@@ -33331,17 +33337,35 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
 							};
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.DataProtection = {
+								enabled = 0;
+							};
+							com.apple.GameCenter.iOS = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
 							com.apple.Keychain = {
+								enabled = 0;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
+							};
 							com.apple.iCloud = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
 					7386F28B2121204A00ABC924 = {
 						CreatedOnToolsVersion = 9.4.1;
-						DevelopmentTeam = M5LYGNKFLB;
+						DevelopmentTeam = Z4LN46787D;
 						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6597A0AC6C29D30281EBD879E45F3BAF;
@@ -33405,6 +33429,13 @@
 			fileType = wrapper.framework;
 			path = Pods_NBLCommonModuleTests.framework;
 			remoteRef = 737F8DC6214660DD00DD522A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		73F1DE3D21466C340065BD72 /* Repeat.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Repeat.framework;
+			remoteRef = 73F1DE3C21466C340065BD72 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -34406,15 +34437,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		737F8DCB214660E300DD522A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = NBLCommonModule;
-			targetProxy = 737F8DCA214660E300DD522A /* PBXContainerItemProxy */;
-		};
 		7386F2922121204A00ABC924 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6597A0AC6C29D30281EBD879E45F3BAF /* cybexMobile */;
 			targetProxy = 7386F2912121204A00ABC924 /* PBXContainerItemProxy */;
+		};
+		73F1DEB0214762C20065BD72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NBLCommonModule;
+			targetProxy = 73F1DEAF214762C20065BD72 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -34655,12 +34686,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = M5LYGNKFLB;
+				DEVELOPMENT_TEAM = Z4LN46787D;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = cybexMobileTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrust.cybexMobileTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybexMobileTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobileTests/cybexMobileTests-Bridging-Header.h";
@@ -34687,12 +34718,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = M5LYGNKFLB;
+				DEVELOPMENT_TEAM = Z4LN46787D;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = cybexMobileTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrust.cybexMobileTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybexMobileTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobileTests/cybexMobileTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
