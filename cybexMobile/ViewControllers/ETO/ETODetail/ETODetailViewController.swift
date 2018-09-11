@@ -150,6 +150,8 @@ extension ETODetailViewController {
     }
     
     @objc func labelClick(_ sender: [String:Any]) {
-        
+        if let url = sender["clicklabel"] as? String {
+            self.coordinator?.openWebWithUrl(url, type: CybexWebViewController.web_type.project_website)
+        }
     }
 }

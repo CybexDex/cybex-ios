@@ -231,9 +231,9 @@ class ETOProjectViewModel {
         if let data = self.projectModel {
             result += R.string.localizable.eto_project_name.key.localized() + data.name + "\n"
             result += R.string.localizable.eto_token_name.key.localized() + data.token_name + "\n"
-            result += R.string.localizable.eto_start_time.key.localized() + data.start_at!.iso8601 + "\n"
-            result += R.string.localizable.eto_end_time.key.localized() + data.end_at!.iso8601 + "\n"
-            result += R.string.localizable.eto_start_at.key.localized() + data.lock_at!.iso8601 + "\n"
+            result += R.string.localizable.eto_start_time.key.localized() + data.start_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
+            result += R.string.localizable.eto_end_time.key.localized() + data.end_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
+            result += R.string.localizable.eto_start_at.key.localized() + data.lock_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             if data.offer_at == nil {
                 result += R.string.localizable.eto_token_releasing_time.key.localized() + R.string.localizable.eto_project_immediate.key.localized() + "\n"
             }

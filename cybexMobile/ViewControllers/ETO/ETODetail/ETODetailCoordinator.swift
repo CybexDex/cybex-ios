@@ -109,9 +109,9 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                 }
                 self.switchPageState(PageState.normal(reason: .initialRefresh))
             }, error: { (error) in
-                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
+//                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
             }) { (error) in
-                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
+//                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
             }
         }
         else {
@@ -217,9 +217,9 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                 }
                 self.switchPageState(PageState.normal(reason: .initialRefresh))
             }, error: { (error) in
-                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
+//                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
             }) { error in
-                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
+//                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
             }
             
             if let viewModel = self.state.data.value, let projectModel = viewModel.projectModel {
