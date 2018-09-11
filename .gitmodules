@@ -1,0 +1,3 @@
+[submodule "NBLCommonModule"]
+	path = NBLCommonModule
+	url = https://github.com/phpmaple/NBLCommonModule

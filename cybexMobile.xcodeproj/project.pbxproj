@@ -386,6 +386,8 @@
 		73587EB52137C69B006CF8A6 /* ETOCrowdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */; };
 		73587EB62137C69B006CF8A6 /* ETOCrowdViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */; };
 		737F8C352145532A00DD522A /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F8C342145532A00DD522A /* String+Extensions.swift */; };
+		737F8DC8214660E300DD522A /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 737F8DBF214660DD00DD522A /* NBLCommonModule.framework */; };
+		737F8DC9214660E300DD522A /* NBLCommonModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 737F8DBF214660DD00DD522A /* NBLCommonModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
 		7386F2A22121665100ABC924 /* AddressHomeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29E2121665100ABC924 /* AddressHomeActions.swift */; };
@@ -640,6 +642,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		737F8DBE214660DD00DD522A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 737F8D98214660DC00DD522A /* NBLCommonModule.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 737F8C432146539100DD522A;
+			remoteInfo = NBLCommonModule;
+		};
+		737F8DC0214660DD00DD522A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 737F8D98214660DC00DD522A /* NBLCommonModule.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 737F8C4C2146539100DD522A;
+			remoteInfo = NBLCommonModuleTests;
+		};
+		737F8DC4214660DD00DD522A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 737F8DA3214660DC00DD522A /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 68101462037E1EC969AAF60EEDA8BE24;
+			remoteInfo = "Pods-NBLCommonModule";
+		};
+		737F8DC6214660DD00DD522A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 737F8DA3214660DC00DD522A /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 651FAE08A2E8FE5F6193B978991836D7;
+			remoteInfo = "Pods-NBLCommonModuleTests";
+		};
+		737F8DCA214660E300DD522A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 737F8D98214660DC00DD522A /* NBLCommonModule.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 737F8C422146539100DD522A;
+			remoteInfo = NBLCommonModule;
+		};
 		7386F2912121204A00ABC924 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 86D7094F24AAA52C797AF890376BB10F /* Project object */;
@@ -648,6 +685,20 @@
 			remoteInfo = cybexMobile;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		737F8C6A2146547E00DD522A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				737F8DC9214660E300DD522A /* NBLCommonModule.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0000A7A30F75E4593CC5ED85A4C32E58 /* cpp_defined_grammar.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cpp_defined_grammar.hpp; sourceTree = "<group>"; };
@@ -6039,6 +6090,37 @@
 		735FA00E9301F0DB45760B1C0D7FEC09 /* extreme_value.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = extreme_value.hpp; sourceTree = "<group>"; };
 		737258FAB6762972136E4188BF20F602 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
 		737F8C342145532A00DD522A /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		737F8D93214660DC00DD522A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		737F8D95214660DC00DD522A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		737F8D96214660DC00DD522A /* NBLCommonModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBLCommonModule.h; sourceTree = "<group>"; };
+		737F8D97214660DC00DD522A /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		737F8D98214660DC00DD522A /* NBLCommonModule.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = NBLCommonModule.xcodeproj; sourceTree = "<group>"; };
+		737F8D9B214660DC00DD522A /* NBLCommonModule.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = NBLCommonModule.xcworkspace; sourceTree = "<group>"; };
+		737F8D9D214660DC00DD522A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		737F8D9E214660DC00DD522A /* NBLCommonModuleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBLCommonModuleTests.swift; sourceTree = "<group>"; };
+		737F8D9F214660DC00DD522A /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		737F8DA0214660DC00DD522A /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
+		737F8DA2214660DC00DD522A /* Manifest.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Manifest.lock; sourceTree = "<group>"; };
+		737F8DA3214660DC00DD522A /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pods.xcodeproj; sourceTree = "<group>"; };
+		737F8DA8214660DC00DD522A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		737F8DA9214660DC00DD522A /* Pods-NBLCommonModule-acknowledgements.markdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Pods-NBLCommonModule-acknowledgements.markdown"; sourceTree = "<group>"; };
+		737F8DAA214660DC00DD522A /* Pods-NBLCommonModule-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-NBLCommonModule-acknowledgements.plist"; sourceTree = "<group>"; };
+		737F8DAB214660DC00DD522A /* Pods-NBLCommonModule-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Pods-NBLCommonModule-dummy.m"; sourceTree = "<group>"; };
+		737F8DAC214660DC00DD522A /* Pods-NBLCommonModule-resources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Pods-NBLCommonModule-resources.sh"; sourceTree = "<group>"; };
+		737F8DAD214660DC00DD522A /* Pods-NBLCommonModule-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pods-NBLCommonModule-umbrella.h"; sourceTree = "<group>"; };
+		737F8DAE214660DC00DD522A /* Pods-NBLCommonModule.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-NBLCommonModule.debug.xcconfig"; sourceTree = "<group>"; };
+		737F8DAF214660DC00DD522A /* Pods-NBLCommonModule.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = "Pods-NBLCommonModule.modulemap"; sourceTree = "<group>"; };
+		737F8DB0214660DC00DD522A /* Pods-NBLCommonModule.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-NBLCommonModule.release.xcconfig"; sourceTree = "<group>"; };
+		737F8DB2214660DC00DD522A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		737F8DB3214660DC00DD522A /* Pods-NBLCommonModuleTests-acknowledgements.markdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Pods-NBLCommonModuleTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		737F8DB4214660DC00DD522A /* Pods-NBLCommonModuleTests-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-NBLCommonModuleTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		737F8DB5214660DC00DD522A /* Pods-NBLCommonModuleTests-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Pods-NBLCommonModuleTests-dummy.m"; sourceTree = "<group>"; };
+		737F8DB6214660DC00DD522A /* Pods-NBLCommonModuleTests-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Pods-NBLCommonModuleTests-frameworks.sh"; sourceTree = "<group>"; };
+		737F8DB7214660DC00DD522A /* Pods-NBLCommonModuleTests-resources.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Pods-NBLCommonModuleTests-resources.sh"; sourceTree = "<group>"; };
+		737F8DB8214660DC00DD522A /* Pods-NBLCommonModuleTests-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pods-NBLCommonModuleTests-umbrella.h"; sourceTree = "<group>"; };
+		737F8DB9214660DC00DD522A /* Pods-NBLCommonModuleTests.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-NBLCommonModuleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		737F8DBA214660DC00DD522A /* Pods-NBLCommonModuleTests.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = "Pods-NBLCommonModuleTests.modulemap"; sourceTree = "<group>"; };
+		737F8DBB214660DC00DD522A /* Pods-NBLCommonModuleTests.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-NBLCommonModuleTests.release.xcconfig"; sourceTree = "<group>"; };
 		7386291A788FC7DE14BE446D1B0B59FF /* get_dev_key.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = get_dev_key.cpp; sourceTree = "<group>"; };
 		7386F28C2121204A00ABC924 /* cybexMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cybexMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7386F2902121204A00ABC924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -12462,6 +12544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ECF8204F8406ACA571309CEEC8F20A3 /* Pods_cybexMobile.framework in Frameworks */,
+				737F8DC8214660E300DD522A /* NBLCommonModule.framework in Frameworks */,
 				6257D6A4A5ED0C635B89E55C84FA1215 /* libboost.a in Frameworks */,
 				786DA36D390BADA15DF7637951260BE0 /* libcrypto.a in Frameworks */,
 				8899C4D33A4F31180D755A486B4A6B6C /* libfc.a in Frameworks */,
@@ -22365,6 +22448,110 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		737F8D92214660DC00DD522A /* NBLCommonModule */ = {
+			isa = PBXGroup;
+			children = (
+				737F8D93214660DC00DD522A /* .gitignore */,
+				737F8D94214660DC00DD522A /* NBLCommonModule */,
+				737F8D98214660DC00DD522A /* NBLCommonModule.xcodeproj */,
+				737F8D9B214660DC00DD522A /* NBLCommonModule.xcworkspace */,
+				737F8D9C214660DC00DD522A /* NBLCommonModuleTests */,
+				737F8D9F214660DC00DD522A /* Podfile */,
+				737F8DA0214660DC00DD522A /* Podfile.lock */,
+				737F8DA1214660DC00DD522A /* Pods */,
+			);
+			path = NBLCommonModule;
+			sourceTree = "<group>";
+		};
+		737F8D94214660DC00DD522A /* NBLCommonModule */ = {
+			isa = PBXGroup;
+			children = (
+				737F8D95214660DC00DD522A /* Info.plist */,
+				737F8D96214660DC00DD522A /* NBLCommonModule.h */,
+				737F8D97214660DC00DD522A /* test.swift */,
+			);
+			path = NBLCommonModule;
+			sourceTree = "<group>";
+		};
+		737F8D99214660DC00DD522A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				737F8DBF214660DD00DD522A /* NBLCommonModule.framework */,
+				737F8DC1214660DD00DD522A /* NBLCommonModuleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		737F8D9C214660DC00DD522A /* NBLCommonModuleTests */ = {
+			isa = PBXGroup;
+			children = (
+				737F8D9D214660DC00DD522A /* Info.plist */,
+				737F8D9E214660DC00DD522A /* NBLCommonModuleTests.swift */,
+			);
+			path = NBLCommonModuleTests;
+			sourceTree = "<group>";
+		};
+		737F8DA1214660DC00DD522A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				737F8DA2214660DC00DD522A /* Manifest.lock */,
+				737F8DA3214660DC00DD522A /* Pods.xcodeproj */,
+				737F8DA6214660DC00DD522A /* Target Support Files */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		737F8DA4214660DC00DD522A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				737F8DC5214660DD00DD522A /* Pods_NBLCommonModule.framework */,
+				737F8DC7214660DD00DD522A /* Pods_NBLCommonModuleTests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		737F8DA6214660DC00DD522A /* Target Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				737F8DA7214660DC00DD522A /* Pods-NBLCommonModule */,
+				737F8DB1214660DC00DD522A /* Pods-NBLCommonModuleTests */,
+			);
+			path = "Target Support Files";
+			sourceTree = "<group>";
+		};
+		737F8DA7214660DC00DD522A /* Pods-NBLCommonModule */ = {
+			isa = PBXGroup;
+			children = (
+				737F8DA8214660DC00DD522A /* Info.plist */,
+				737F8DA9214660DC00DD522A /* Pods-NBLCommonModule-acknowledgements.markdown */,
+				737F8DAA214660DC00DD522A /* Pods-NBLCommonModule-acknowledgements.plist */,
+				737F8DAB214660DC00DD522A /* Pods-NBLCommonModule-dummy.m */,
+				737F8DAC214660DC00DD522A /* Pods-NBLCommonModule-resources.sh */,
+				737F8DAD214660DC00DD522A /* Pods-NBLCommonModule-umbrella.h */,
+				737F8DAE214660DC00DD522A /* Pods-NBLCommonModule.debug.xcconfig */,
+				737F8DAF214660DC00DD522A /* Pods-NBLCommonModule.modulemap */,
+				737F8DB0214660DC00DD522A /* Pods-NBLCommonModule.release.xcconfig */,
+			);
+			path = "Pods-NBLCommonModule";
+			sourceTree = "<group>";
+		};
+		737F8DB1214660DC00DD522A /* Pods-NBLCommonModuleTests */ = {
+			isa = PBXGroup;
+			children = (
+				737F8DB2214660DC00DD522A /* Info.plist */,
+				737F8DB3214660DC00DD522A /* Pods-NBLCommonModuleTests-acknowledgements.markdown */,
+				737F8DB4214660DC00DD522A /* Pods-NBLCommonModuleTests-acknowledgements.plist */,
+				737F8DB5214660DC00DD522A /* Pods-NBLCommonModuleTests-dummy.m */,
+				737F8DB6214660DC00DD522A /* Pods-NBLCommonModuleTests-frameworks.sh */,
+				737F8DB7214660DC00DD522A /* Pods-NBLCommonModuleTests-resources.sh */,
+				737F8DB8214660DC00DD522A /* Pods-NBLCommonModuleTests-umbrella.h */,
+				737F8DB9214660DC00DD522A /* Pods-NBLCommonModuleTests.debug.xcconfig */,
+				737F8DBA214660DC00DD522A /* Pods-NBLCommonModuleTests.modulemap */,
+				737F8DBB214660DC00DD522A /* Pods-NBLCommonModuleTests.release.xcconfig */,
+			);
+			path = "Pods-NBLCommonModuleTests";
+			sourceTree = "<group>";
+		};
 		7386F28D2121204A00ABC924 /* cybexMobileTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -31825,6 +32012,7 @@
 		F3EBF4E6D2E2492B42F25C18354E14EB = {
 			isa = PBXGroup;
 			children = (
+				737F8D92214660DC00DD522A /* NBLCommonModule */,
 				7386F28D2121204A00ABC924 /* cybexMobileTests */,
 				D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */,
 				867DC13D64BFE1ECAC8B7E12A480E38F /* Pods */,
@@ -33093,10 +33281,12 @@
 				BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */,
 				4C503C5D3E59634F44E3149DFE8EA11D /* [CP] Embed Pods Frameworks */,
 				A6D55984F0239A7067AB1555 /* [CP] Copy Pods Resources */,
+				737F8C6A2146547E00DD522A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				737F8DCB214660E300DD522A /* PBXTargetDependency */,
 			);
 			name = cybexMobile;
 			productName = "Hello World";
@@ -33170,6 +33360,16 @@
 			mainGroup = F3EBF4E6D2E2492B42F25C18354E14EB;
 			productRefGroup = B1CE0949A770A9355E35EABBD4213DAB /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 737F8D99214660DC00DD522A /* Products */;
+					ProjectRef = 737F8D98214660DC00DD522A /* NBLCommonModule.xcodeproj */;
+				},
+				{
+					ProductGroup = 737F8DA4214660DC00DD522A /* Products */;
+					ProjectRef = 737F8DA3214660DC00DD522A /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6597A0AC6C29D30281EBD879E45F3BAF /* cybexMobile */,
@@ -33177,6 +33377,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		737F8DBF214660DD00DD522A /* NBLCommonModule.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NBLCommonModule.framework;
+			remoteRef = 737F8DBE214660DD00DD522A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		737F8DC1214660DD00DD522A /* NBLCommonModuleTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NBLCommonModuleTests.xctest;
+			remoteRef = 737F8DC0214660DD00DD522A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		737F8DC5214660DD00DD522A /* Pods_NBLCommonModule.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_NBLCommonModule.framework;
+			remoteRef = 737F8DC4214660DD00DD522A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		737F8DC7214660DD00DD522A /* Pods_NBLCommonModuleTests.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_NBLCommonModuleTests.framework;
+			remoteRef = 737F8DC6214660DD00DD522A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1F1278CDBFA95B0E46D9562DAFE69F12 /* Resources */ = {
@@ -34175,6 +34406,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		737F8DCB214660E300DD522A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NBLCommonModule;
+			targetProxy = 737F8DCA214660E300DD522A /* PBXContainerItemProxy */;
+		};
 		7386F2922121204A00ABC924 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6597A0AC6C29D30281EBD879E45F3BAF /* cybexMobile */;
@@ -34210,6 +34446,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EE7A1A7462092B8F170A7056A093228E /* Pods-cybexMobile.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -34304,6 +34541,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 730115CA9351045A5CEE4B396B055387 /* Pods-cybexMobile.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
