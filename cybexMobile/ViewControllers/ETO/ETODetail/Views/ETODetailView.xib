@@ -28,19 +28,19 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7AE-fZ-SKu">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7AE-fZ-SKu">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2d-WC-B2V">
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E2d-WC-B2V">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="688.5"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4r8-tz-KNu">
+                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4r8-tz-KNu">
                                     <rect key="frame" x="13" y="0.0" width="349" height="688.5"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j1n-rn-LH2" customClass="ContainerView" customModule="cybexMobile" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j1n-rn-LH2" customClass="ContainerView" customModule="cybexMobile" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="349" height="189.5"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMW-AS-KDJ" customClass="ETODetailHeaderView" customModule="cybexMobile" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UMW-AS-KDJ" customClass="ETODetailHeaderView" customModule="cybexMobile" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="349" height="189.5"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
@@ -59,13 +59,13 @@
                                                 <constraint firstAttribute="trailing" secondItem="UMW-AS-KDJ" secondAttribute="trailing" id="ssu-73-z66"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Erh-Fy-qev">
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Erh-Fy-qev">
                                             <rect key="frame" x="0.0" y="197.5" width="349" height="46"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aj2-Ga-KRR">
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aj2-Ga-KRR">
                                                     <rect key="frame" x="0.0" y="4" width="349" height="38"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lve-Wg-dnW">
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lve-Wg-dnW">
                                                             <rect key="frame" x="20" y="11" width="16" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="16" id="dPR-PC-b9K"/>
@@ -75,7 +75,7 @@
                                                             <state key="selected" image="icSelected124Px"/>
                                                             <state key="highlighted" image="icSelected124Px"/>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVh-bD-YhK">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVh-bD-YhK">
                                                             <rect key="frame" x="46" y="10.5" width="36" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                             <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -84,7 +84,7 @@
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="locali" value="user_agreement"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Muh-af-TAD" customClass="LGButton" customModule="cybexMobile" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Muh-af-TAD" customClass="LGButton" customModule="cybexMobile" customModuleProvider="target">
                                                             <rect key="frame" x="233" y="0.0" width="116" height="38"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="116" id="aTo-Mk-5bo"/>
@@ -110,23 +110,14 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="Aj2-Ga-KRR" firstAttribute="leading" secondItem="Erh-Fy-qev" secondAttribute="leading" id="8RM-a4-8IZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="Aj2-Ga-KRR" secondAttribute="trailing" id="95a-Pt-1QK"/>
                                                 <constraint firstItem="Aj2-Ga-KRR" firstAttribute="top" secondItem="Erh-Fy-qev" secondAttribute="top" constant="4" id="VyN-bw-oan"/>
                                                 <constraint firstAttribute="bottom" secondItem="Aj2-Ga-KRR" secondAttribute="bottom" constant="4" id="Yet-Aw-nUg"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                                    <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aGZ-wE-RFP" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aGZ-wE-RFP" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="251.5" width="349" height="44"/>
                                             <color key="backgroundColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
@@ -145,25 +136,25 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIe-Ro-csV">
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BIe-Ro-csV">
                                             <rect key="frame" x="0.0" y="303.5" width="349" height="385"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="1CO-LG-Zq6">
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="1CO-LG-Zq6">
                                                     <rect key="frame" x="0.0" y="0.0" width="349" height="385"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gao-rn-eya" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gao-rn-eya" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="349" height="107"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="ETO_detail"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6bD-jk-BNx" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6bD-jk-BNx" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="108" width="349" height="128"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="project_intro"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LtC-Yw-aVQ" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LtC-Yw-aVQ" customClass="ETODetailIntroView" customModule="cybexMobile" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="237" width="349" height="148"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="string" keyPath="title" value="project_website"/>
@@ -172,7 +163,6 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="1CO-LG-Zq6" firstAttribute="leading" secondItem="BIe-Ro-csV" secondAttribute="leading" id="HIO-Ke-LP5"/>
                                                 <constraint firstAttribute="bottom" secondItem="1CO-LG-Zq6" secondAttribute="bottom" id="Idl-k6-5tK"/>
@@ -180,11 +170,8 @@
                                                 <constraint firstAttribute="trailing" secondItem="1CO-LG-Zq6" secondAttribute="trailing" id="yml-cL-oYT"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                                    <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="4"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
