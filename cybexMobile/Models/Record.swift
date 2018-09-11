@@ -49,11 +49,11 @@ struct Record : HandyJSON {
 
 open class GemmaDateFormatTransform: DateFormatterTransform {
     
-    public init(formatString: String) {
+    public init(formatString: String, gmt: Int = 0) {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
         formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.timeZone = TimeZone(secondsFromGMT: gmt)
         formatter.dateFormat = formatString
         
         super.init(dateFormatter: formatter)

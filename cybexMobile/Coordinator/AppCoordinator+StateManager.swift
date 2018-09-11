@@ -169,8 +169,6 @@ extension AppCoordinator {
         }
     }
     
-    
-    
     func repeatFetchPairInfo(_ priority:Operation.QueuePriority = .normal){
         if self.fetchPariTimer != nil {
             self.fetchPariTimer?.pause()
@@ -193,9 +191,6 @@ extension AppCoordinator {
             }
         })
     }
-    
-    
-    
     
     func requestKlineDetailData(pair: Pair, gap: candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
         let now = Date()

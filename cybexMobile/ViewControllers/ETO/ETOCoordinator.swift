@@ -124,7 +124,7 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                 if let projectModel = viewModel.projectModel, projectModel.status! == .pre || projectModel.status! == .ok  {
                     ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { (json) in
                         if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
-                            viewModel.current_percent.accept((refreshModel.current_percent * 100).string(digits:0, roundingMode: .down) + "%")
+                            viewModel.current_percent.accept((refreshModel.current_percent * 100).string(digits:2, roundingMode: .down) + "%")
                             viewModel.progress.accept(refreshModel.current_percent)
                             viewModel.status.accept(refreshModel.status!.description())
                             viewModel.project_state.accept(refreshModel.status)
@@ -143,10 +143,10 @@ extension ETOCoordinator: ETOStateManagerProtocol {
             for viewModel in projectModels {
                 if let projectModel = viewModel.projectModel, projectModel.status! == .pre || projectModel.status! == .ok  {
                     if projectModel.status! == .pre {
-                        viewModel.time.accept(transferTimeType(Int(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true))
+                        viewModel.time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
                     }
                     else if projectModel.status! == .ok {
-                        viewModel.time.accept(transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true))
+                        viewModel.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
                     }
                 }
             }

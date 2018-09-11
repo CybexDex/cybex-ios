@@ -79,7 +79,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     configApplication()
     self.handlerNetworkChanged()
-
     
     return true
   }

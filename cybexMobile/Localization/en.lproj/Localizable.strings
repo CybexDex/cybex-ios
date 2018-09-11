@@ -480,3 +480,4 @@
 "eto_invite_code_error" = "Please enter a valid invitation code";
 "eto_invite_code_title" = "Invitation code";
 
+"eto_time_less_minite" = "less one minite";

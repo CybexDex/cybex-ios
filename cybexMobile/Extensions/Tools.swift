@@ -469,6 +469,24 @@ func transferTimeType(_ time: Int, type: Bool = false) -> String {
 }
 
 
+func timeHandle(_ time: Double, isHiddenSecond: Bool = true) -> String {
+    var result = ""
+    var intTime = time.int
+    
+    if isHiddenSecond == true, intTime < 60 {
+        return R.string.localizable.eto_time_less_minite.key.localized()
+    }
+    result += "\(intTime / (3600 * 24))" + R.string.localizable.transfer_unit_day.key.localized() + " "
+    intTime = intTime % (3600 * 24)
+    result += "\(intTime / 3600)" + R.string.localizable.transfer_unit_hour.key.localized() + " "
+    intTime = intTime % 3600
+    result += "\(intTime / 60)" + R.string.localizable.transfer_unit_minite.key.localized()
+    if isHiddenSecond == false {
+        intTime = intTime % 60
+        result += " \(intTime)" + R.string.localizable.transfer_unit_second.key.localized()
+    }
+    return result
+}
 
 
 func verifyPassword(_ password : String) -> (Bool) {

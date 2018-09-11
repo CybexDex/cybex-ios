@@ -120,7 +120,6 @@ class AppCoordinator {
         })
         
         aspect()
-        
     }
     
     func aspect() {

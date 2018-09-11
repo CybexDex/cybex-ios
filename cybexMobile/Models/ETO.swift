@@ -30,7 +30,7 @@ struct ETOShortProjectStatusModel:HandyJSON {
     
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
-            self.finish_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
+            self.finish_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
     }
 }
 
@@ -84,9 +84,9 @@ enum ETOIEOType:String, HandyJSONEnum {
     func showTitle() -> String {
         switch self {
         case .receive:
-            return R.string.localizable.eto_record_receive.key.localized()
-        case .send:
             return R.string.localizable.eto_record_send.key.localized()
+        case .send:
+            return R.string.localizable.eto_record_receive.key.localized()
         }
     }
 }
@@ -163,17 +163,17 @@ class ETOProjectModel:HandyJSON {
     
     func mapping(mapper: HelpingMapper) {
         mapper <<<
-            self.start_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
+            self.start_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
         mapper <<<
-            self.end_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
+            self.end_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
         mapper <<<
-            self.finish_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
+            self.finish_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
         mapper <<<
-            self.offer_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
+            self.offer_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
         mapper <<<
-            self.lock_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
+            self.lock_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
         mapper <<<
-            self.create_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
+            self.create_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss", gmt: 8)
     }
     
     required init() {}
@@ -233,7 +233,9 @@ class ETOProjectViewModel {
             result += R.string.localizable.eto_token_name.key.localized() + data.token_name + "\n"
             result += R.string.localizable.eto_start_time.key.localized() + data.start_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             result += R.string.localizable.eto_end_time.key.localized() + data.end_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
-            result += R.string.localizable.eto_start_at.key.localized() + data.lock_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
+            if data.lock_at != nil {
+                result += R.string.localizable.eto_start_at.key.localized() + data.lock_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
+            }
             if data.offer_at == nil {
                 result += R.string.localizable.eto_token_releasing_time.key.localized() + R.string.localizable.eto_project_immediate.key.localized() + "\n"
             }
@@ -241,6 +243,7 @@ class ETOProjectViewModel {
                   result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offer_at!.iso8601 + "\n"
             }
             result += R.string.localizable.eto_exchange_ratio.key.localized() + "1" + data.base_token_name + "=" + "\(data.rate)" + data.token_name
+            result += R.string.localizable.eto_currency.key.localized() + data.base_token_name.filterJade
         }
         return result
     }
@@ -250,7 +253,9 @@ class ETOProjectViewModel {
         if let data = self.projectModel {
             result += R.string.localizable.eto_project_online.key.localized() + data.adds_website + "\n"
             result += R.string.localizable.eto_project_white_Paper.key.localized() + data.adds_whitepaper + "\n"
-            result += R.string.localizable.eto_project_detail.key.localized() + data.adds_detail
+            if data.adds_detail.count != 0 {
+                result += R.string.localizable.eto_project_detail.key.localized() + data.adds_detail
+            }
         }
         return result
     }
@@ -273,7 +278,7 @@ class ETOProjectViewModel {
         self.key_words = projectModel.adds_keyword
         self.key_words_en = projectModel.adds_keyword__lang_en
         self.status.accept(projectModel.status!.description())
-        self.current_percent.accept((projectModel.current_percent * 100).string(digits:0, roundingMode: .down) + "%")
+        self.current_percent.accept((projectModel.current_percent * 100).string(digits:2, roundingMode: .down) + "%")
         self.progress.accept(projectModel.current_percent)
         self.icon = projectModel.adds_logo_mobile
         self.icon_en = projectModel.adds_logo_mobile__lang_en
@@ -281,26 +286,24 @@ class ETOProjectViewModel {
         if let state = projectModel.status {
             if state == .finish {
                 if projectModel.t_total_time == "" {
-                    self.detail_time.accept(transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970)))
-                    self.time.accept(transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970)))
+                    
+                    self.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
+                    self.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
                 }
                 else {
-                    self.detail_time.accept(transferTimeType(Int(projectModel.t_total_time)!))
-                    self.time.accept(transferTimeType(Int(projectModel.t_total_time)!,type: true))
+                    self.detail_time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
+                    self.time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
                 }
             }
             else if state == .pre {
-                self.detail_time.accept(transferTimeType(Int(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970)))
-                self.time.accept(transferTimeType(Int(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true))
+                self.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970,isHiddenSecond: false))
+                self.time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
             }
             else {
-                self.detail_time.accept(transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970)))
-                self.time.accept(transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true))
+                self.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970, isHiddenSecond: false))
+                self.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
             }
         }
     }
 }
-
-
-
 

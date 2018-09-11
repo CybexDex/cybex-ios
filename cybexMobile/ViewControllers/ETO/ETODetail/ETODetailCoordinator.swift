@@ -224,10 +224,10 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             
             if let viewModel = self.state.data.value, let projectModel = viewModel.projectModel {
                 if model.status! == .pre {
-                    viewModel.detail_time.accept(transferTimeType(Int(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970)))
+                    viewModel.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970,isHiddenSecond: false))
                 }
                 else if model.status! == .ok {
-                    viewModel.detail_time.accept(transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970)))
+                    viewModel.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970, isHiddenSecond: false))
                 }
             }
         }
