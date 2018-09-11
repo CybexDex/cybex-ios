@@ -86,7 +86,12 @@ extension SimpleHTTPService {
   }
   
   static func checkVersion() -> Promise<(update: Bool, url: String, force: Bool, content:String)> {
-    var request = URLRequest(url: URL(string: AppConfiguration.SERVER_VERSION_URLString)!)
+    var urlString = AppConfiguration.SERVER_VERSION_APPSTORE_URLString
+    
+    if let bundleID = Bundle.main.bundleIdentifier, bundleID.contains("fir") {
+        urlString = AppConfiguration.SERVER_VERSION_URLString
+    }
+    var request = URLRequest(url: URL(string: urlString)!)
     request.timeoutInterval = 5
     request.cachePolicy = .reloadIgnoringCacheData
     
