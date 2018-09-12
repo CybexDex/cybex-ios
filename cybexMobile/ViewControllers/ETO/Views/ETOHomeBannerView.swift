@@ -11,6 +11,7 @@ import FSPagerView
 import TinyConstraints
 import Fakery
 import Localize_Swift
+import SwiftTheme
 
 @IBDesignable
 class ETOHomeBannerView: BaseView {
@@ -44,6 +45,11 @@ class ETOHomeBannerView: BaseView {
         
         setupUI()
         setupSubViewEvent()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: self, queue: nil) { [weak self](notification) in
+            guard let `self` = self else { return }
+            self.pagerView.reloadData()
+        }
     }
     
     func setupUI() {
@@ -88,7 +94,9 @@ extension ETOHomeBannerView : FSPagerViewDataSource,FSPagerViewDelegate {
     }
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        self.next?.sendEventWith(Event.ETOHomeBannerViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        if let data = self.data as? [ETOBannerModel], index < data.count {
+            self.next?.sendEventWith(Event.ETOHomeBannerViewDidClicked.rawValue, userinfo: ["data": data[index] , "self": self])
+        }
     }
     
     func pagerViewDidScroll(_ pagerView: FSPagerView) {

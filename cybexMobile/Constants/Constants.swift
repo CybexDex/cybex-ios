@@ -98,6 +98,10 @@ struct AppConfiguration {
     static var GATEWAY_TEST_URLStringa = "https://gatewaytest.cybex.io/gateway"
     static var SERVER_REGISTER_BASE_TEST_URLString = "https://faucet.51nebula.com/"
     static var SERVER_TEST_BASE_URLString = "http://47.91.242.71:3039/"
+    
+    static var BASE_SETTING_JSON: String {
+        return SERVER_BASE_URLString + "json/settings.json"
+    }
 }
 
 enum exchangeType {

@@ -10,7 +10,6 @@ import UIKit
 import ReSwift
 import SwiftyUserDefaults
 
-
 protocol SettingCoordinatorProtocol {
     func openSettingDetail(type:settingPage)
     func dismiss()

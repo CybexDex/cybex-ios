@@ -653,6 +653,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		72D98A8421478ABD00C8BE49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 737F8DA3214660DC00DD522A /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FB7F9ABD44B0B4FC9F11D1B28220A2D0;
+			remoteInfo = Repeat;
+		};
 		737F8DBE214660DD00DD522A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 737F8D98214660DC00DD522A /* NBLCommonModule.xcodeproj */;
@@ -22548,6 +22555,7 @@
 				737F8DC5214660DD00DD522A /* Pods_NBLCommonModule.framework */,
 				737F8DC7214660DD00DD522A /* Pods_NBLCommonModuleTests.framework */,
 				73F1DE3D21466C340065BD72 /* Repeat.framework */,
+
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -33452,6 +33460,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		72D98A8521478ABD00C8BE49 /* Repeat.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Repeat.framework;
+			remoteRef = 72D98A8421478ABD00C8BE49 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		737F8DBF214660DD00DD522A /* NBLCommonModule.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -34560,7 +34575,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = cybexMobile/cybexMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -34656,7 +34670,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = cybexMobile/cybexMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

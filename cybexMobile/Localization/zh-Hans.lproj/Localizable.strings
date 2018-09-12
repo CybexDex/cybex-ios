@@ -447,7 +447,7 @@
 "eto_project_verifying" = "审核中";
 "eto_project_stop_reserve" = "停止预约";
 "eto_project_waiting" = "等待众筹开始";
-"eto_project_join" = "立即众筹";
+"eto_project_join" = "立即ETO";
 "eto_project_rejected" = "审核未通过";
 "eto_project_kyc" = "进行KYC";
 "eto_project_login" = "请登录";
@@ -459,4 +459,8 @@
 
 "eto_invite_code_error" = "请输入正确的邀请码";
 "eto_invite_code_title" = "输入邀请码";
+
+"eto_time_less_minite" = "小于1分钟";
+
+"eto_detail_user_agreement_error" = "请先勾选《用户协议》";
 

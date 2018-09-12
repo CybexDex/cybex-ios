@@ -10,29 +10,43 @@ import Foundation
 import Fakery
 import Localize_Swift
 import SwiftTheme
+import RxCocoa
 
 extension ETODetailHeaderView {
     func adapterModelToETODetailHeaderView(_ model:ETOProjectViewModel) {
-        self.iconImgView.kf.setImage(with: URL(string: Localize.currentLanguage() == "en" ? model.icon_en : model.icon))
-        self.progressView.progress = model.progress
-        self.progressLabel.text = model.current_percent
-        self.timeLabel.text = model.timeState + model.detail_time
         self.nameLabel.text = model.name
-        if let projectModel = model.projectModel {
-            switch projectModel.status! {
+        self.iconImgView.kf.setImage(with: URL(string: Localize.currentLanguage() == "en" ? model.icon_en : model.icon))
+        model.progress.asObservable().subscribe(onNext: { [weak self](progress) in
+            guard let `self` = self else { return }
+            self.progressView.progress = progress
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        model.detail_time.asObservable().subscribe(onNext: { [weak self](time) in
+            guard let `self` = self else {return}
+            self.timeLabel.text = model.timeState + time
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        model.current_percent.asObservable().subscribe(onNext: { [weak self](progress) in
+            guard let `self` = self else { return }
+            self.progressLabel.text = progress
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        model.project_state.asObservable().subscribe(onNext: { [weak self](state) in
+            guard let `self` = self, let project_state = state else { return }
+            switch project_state {
             case .finish:
-                stateImgView.image = Localize.currentLanguage() == "en" ? R.image.enden() : R.image.endcn()
+                self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.enden() : R.image.endcn()
                 self.progressLabel.textColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
                 self.progressView.progress = 1
                 self.progressView.beginColor = UIColor.slate
                 self.progressView.endColor = UIColor.cloudyBlue
             case .pre:
-                stateImgView.image = Localize.currentLanguage() == "en" ? R.image.willstarten() : R.image.willstartcn()
+                self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.willstarten() : R.image.willstartcn()
                 self.progressLabel.textColor = UIColor.pastelOrange
             case .ok:
-                stateImgView.image = Localize.currentLanguage() == "en" ? R.image.ongoingen() : R.image.ongoingcn()
+                self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.ongoingen() : R.image.ongoingcn()
                 self.progressLabel.textColor = UIColor.pastelOrange
             }
-        }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }

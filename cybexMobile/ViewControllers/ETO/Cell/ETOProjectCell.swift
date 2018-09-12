@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ETOProjectCell: BaseTableViewCell {
 
@@ -20,5 +21,9 @@ class ETOProjectCell: BaseTableViewCell {
         if let data = data as? ETOProjectViewModel {
             projectView.updateUI(data, handler: ETOProjectView.adapterModelToETOProjectView(projectView))
         }
+    }
+    
+    override func prepareForReuse() {
+        disposeBag = DisposeBag()
     }
 }

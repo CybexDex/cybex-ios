@@ -10,6 +10,7 @@ import Foundation
 import HandyJSON
 import DifferenceKit
 import RxSwift
+import RxCocoa
 
 struct ETOBannerModel:HandyJSON {
     var id:String = ""
@@ -83,9 +84,9 @@ enum ETOIEOType:String, HandyJSONEnum {
     func showTitle() -> String {
         switch self {
         case .receive:
-            return R.string.localizable.eto_record_receive.key.localized()
-        case .send:
             return R.string.localizable.eto_record_send.key.localized()
+        case .send:
+            return R.string.localizable.eto_record_receive.key.localized()
         }
     }
 }
@@ -98,6 +99,22 @@ struct ETOTradeHistoryModel: HandyJSON, Differentiable, Equatable, Hashable {
     var created_at:Date!
     var token_count:String = ""
     var token:String = ""
+    var pricision: Int {
+        guard let balances = UserManager.shared.balances.value else { return 0 }
+        
+        let balance = balances.filter { (balance) -> Bool in
+            if let name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade {
+                return name == self.token
+            }
+            
+            return false
+            }.first
+        
+        if let balance = balance, let info = app_data.assetInfo[balance.asset_type] {
+            return info.precision
+        }
+        return 0
+    }
     
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
@@ -113,7 +130,7 @@ struct ETOTradeHistoryModel: HandyJSON, Differentiable, Equatable, Hashable {
     }
 }
 
-struct ETOProjectModel:HandyJSON {
+class ETOProjectModel:HandyJSON {
     var id: Int = 0
     var adds_logo_mobile: String = ""
     var adds_logo_mobile__lang_en: String = ""
@@ -160,7 +177,7 @@ struct ETOProjectModel:HandyJSON {
     
     var t_total_time: String = ""
     
-    mutating func mapping(mapper: HelpingMapper) {
+    func mapping(mapper: HelpingMapper) {
         mapper <<<
             self.start_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
         mapper <<<
@@ -174,6 +191,8 @@ struct ETOProjectModel:HandyJSON {
         mapper <<<
             self.create_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
     }
+    
+    required init() {}
 }
 
 enum ProjectState : String ,HandyJSONEnum{
@@ -196,15 +215,15 @@ enum ProjectState : String ,HandyJSONEnum{
 }
 
 
-struct ETOProjectViewModel {
+class ETOProjectViewModel {
     var icon: String = ""
     var icon_en: String = ""
     var name: String = ""
     var key_words: String = ""
     var key_words_en: String = ""
-    var status: String = ""
-    var current_percent: String = ""
-    var progress: Double = 0
+    var status: BehaviorRelay<String> = BehaviorRelay(value: "")
+    var current_percent: BehaviorRelay<String> = BehaviorRelay(value: "")
+    var progress: BehaviorRelay<Double> = BehaviorRelay(value: 0)
     var projectModel: ETOProjectModel?
     var timeState: String {
         if let data = self.projectModel, let state = data.status {
@@ -221,32 +240,18 @@ struct ETOProjectViewModel {
         return ""
     }
     
-    var time: String {
-        if let data = self.projectModel, let state = data.status {
-            if state == .finish {
-                if data.t_total_time == "" {
-                    return transferTimeType(Int(data.end_at!.timeIntervalSince1970 - data.start_at!.timeIntervalSince1970))
-                }
-                return transferTimeType(Int(data.t_total_time)!,type: true)
-            }
-            else if state == .pre {
-                return transferTimeType(Int(data.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true)
-            }
-            else {
-                return transferTimeType(Int(Date().timeIntervalSince1970 - data.start_at!.timeIntervalSince1970),type: true)
-            }
-        }
-        return ""
-    }
+    var time: BehaviorRelay<String> = BehaviorRelay(value: "")
     
     var etoDetail: String {
         var result: String = ""
         if let data = self.projectModel {
             result += R.string.localizable.eto_project_name.key.localized() + data.name + "\n"
             result += R.string.localizable.eto_token_name.key.localized() + data.token_name + "\n"
-            result += R.string.localizable.eto_start_time.key.localized() + data.start_at!.iso8601 + "\n"
-            result += R.string.localizable.eto_end_time.key.localized() + data.end_at!.iso8601 + "\n"
-            result += R.string.localizable.eto_start_at.key.localized() + data.lock_at!.iso8601 + "\n"
+            result += R.string.localizable.eto_start_time.key.localized() + data.start_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
+            result += R.string.localizable.eto_end_time.key.localized() + data.end_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
+            if data.lock_at != nil {
+                result += R.string.localizable.eto_start_at.key.localized() + data.lock_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
+            }
             if data.offer_at == nil {
                 result += R.string.localizable.eto_token_releasing_time.key.localized() + R.string.localizable.eto_project_immediate.key.localized() + "\n"
             }
@@ -254,6 +259,7 @@ struct ETOProjectViewModel {
                   result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offer_at!.iso8601 + "\n"
             }
             result += R.string.localizable.eto_exchange_ratio.key.localized() + "1" + data.base_token_name + "=" + "\(data.rate)" + data.token_name
+            result += R.string.localizable.eto_currency.key.localized() + data.base_token_name.filterJade
         }
         return result
     }
@@ -263,7 +269,9 @@ struct ETOProjectViewModel {
         if let data = self.projectModel {
             result += R.string.localizable.eto_project_online.key.localized() + data.adds_website + "\n"
             result += R.string.localizable.eto_project_white_Paper.key.localized() + data.adds_whitepaper + "\n"
-            result += R.string.localizable.eto_project_detail.key.localized() + data.adds_detail
+            if data.adds_detail.count != 0 {
+                result += R.string.localizable.eto_project_detail.key.localized() + data.adds_detail
+            }
         }
         return result
     }
@@ -278,37 +286,40 @@ struct ETOProjectViewModel {
         return result
     }
     
-    var detail_time: String = ""
-    
+    var detail_time: BehaviorRelay<String> = BehaviorRelay(value: "")
+    var project_state: BehaviorRelay<ProjectState?> = BehaviorRelay(value:nil)
     init(_ projectModel : ETOProjectModel) {
         self.projectModel = projectModel
         self.name = projectModel.name
         self.key_words = projectModel.adds_keyword
         self.key_words_en = projectModel.adds_keyword__lang_en
-        self.status = projectModel.status!.description()
-        self.current_percent = (projectModel.current_percent * 100).string(digits:0, roundingMode: .down) + "%"
-        self.progress = projectModel.current_percent
+        self.status.accept(projectModel.status!.description())
+        self.current_percent.accept((projectModel.current_percent * 100).string(digits:2, roundingMode: .down) + "%")
+        self.progress.accept(projectModel.current_percent)
         self.icon = projectModel.adds_logo_mobile
         self.icon_en = projectModel.adds_logo_mobile__lang_en
-        
+        self.project_state.accept(projectModel.status)
         if let state = projectModel.status {
             if state == .finish {
                 if projectModel.t_total_time == "" {
-                    self.detail_time = transferTimeType(Int(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970))
+                    
+                    self.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
+                    self.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
                 }
                 else {
-                    self.detail_time = transferTimeType(Int(projectModel.t_total_time)!,type: true)
+                    self.detail_time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
+                    self.time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
                 }
             }
             else if state == .pre {
-                self.detail_time = transferTimeType(Int(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970),type: true)
+                self.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970,isHiddenSecond: false))
+                self.time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
             }
             else {
-                self.detail_time = transferTimeType(Int(Date().timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970),type: true)
+                self.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970, isHiddenSecond: false))
+                self.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
             }
         }
     }
 }
-
-
 
