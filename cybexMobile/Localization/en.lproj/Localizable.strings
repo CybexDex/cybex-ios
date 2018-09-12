@@ -447,6 +447,8 @@
 "eto_token_releasing_time" = "Token Releasing Time：";
 "eto_currency" = "Currency：";
 "eto_exchange_ratio" = "Exchange Ratio：";
+"eto_total_supply" = "Total Token Supply：";
+
 
 "eto_project_online" = "Official Website：";
 "eto_project_white_Paper" = "Whitepaper：";

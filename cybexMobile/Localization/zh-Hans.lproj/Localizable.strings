@@ -437,6 +437,7 @@
 "eto_token_releasing_time" = "发币时间：";
 "eto_currency" = "使用币种：";
 "eto_exchange_ratio" = "兑换比例：";
+"eto_total_supply" = "代币总量：";
 
 "eto_project_online" = "官网：";
 "eto_project_white_Paper" = "白皮书：";

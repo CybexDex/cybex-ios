@@ -141,12 +141,15 @@ extension ETOCoordinator: ETOStateManagerProtocol {
     func refreshTime() {
         if let projectModels = self.state.data.value {
             for viewModel in projectModels {
-                if let projectModel = viewModel.projectModel, projectModel.status! == .pre || projectModel.status! == .ok  {
+                if let projectModel = viewModel.projectModel {
                     if projectModel.status! == .pre {
                         viewModel.time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
                     }
                     else if projectModel.status! == .ok {
                         viewModel.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                    }
+                    else if projectModel.status! == .finish {
+                        viewModel.time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
                     }
                 }
             }

@@ -35,13 +35,23 @@ extension ETODetailHeaderView {
             guard let `self` = self, let project_state = state else { return }
             switch project_state {
             case .finish:
-                self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.enden() : R.image.endcn()
+                if ThemeManager.currentThemeIndex == 0 {
+                    self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.end_en_dark() : R.image.end_cn_dark()
+                }
+                else {
+                    self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.end_en_light() : R.image.end_cn_light()
+                }
                 self.progressLabel.textColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
                 self.progressView.progress = 1
                 self.progressView.beginColor = UIColor.slate
                 self.progressView.endColor = UIColor.cloudyBlue
             case .pre:
-                self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.willstarten() : R.image.willstartcn()
+                if ThemeManager.currentThemeIndex == 0 {
+                    self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.comming_en_dark() : R.image.comming_cn_dark()
+                }
+                else {
+                    self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.comming_en_light() : R.image.comming_cn_light()
+                }
                 self.progressLabel.textColor = UIColor.pastelOrange
             case .ok:
                 self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.ongoingen() : R.image.ongoingcn()

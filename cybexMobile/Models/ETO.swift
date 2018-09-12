@@ -11,6 +11,7 @@ import HandyJSON
 import DifferenceKit
 import RxSwift
 import RxCocoa
+import Localize_Swift
 
 struct ETOBannerModel:HandyJSON {
     var id:String = ""
@@ -147,6 +148,8 @@ class ETOProjectModel:HandyJSON {
     var adds_whitelist__lang_en: String = ""
     var adds_whitepaper: String = ""
     var adds_whitepaper__lang_en: String = ""
+    var adds_token_total: String = ""
+    var adds_token_total__lang_en: String = ""
 
     var status: ProjectState? // finish pre ok
     var name: String = ""
@@ -244,6 +247,17 @@ class ETOProjectViewModel {
         if let data = self.projectModel {
             result += R.string.localizable.eto_project_name.key.localized() + data.name + "\n"
             result += R.string.localizable.eto_token_name.key.localized() + data.token_name + "\n"
+//            var adds_token_total: String = ""
+//            var adds_token_total__lang_en: String = ""
+            if data.adds_token_total.count != 0 || data.adds_token_total__lang_en.count != 0 {
+                if Localize.currentLanguage() == "en" {
+                    result += R.string.localizable.eto_total_supply.key.localized() + data.adds_token_total__lang_en + "\n"
+                }
+                else {
+                    result += R.string.localizable.eto_total_supply.key.localized() + data.adds_token_total + "\n"
+                }
+            }
+            
             result += R.string.localizable.eto_start_time.key.localized() + data.start_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             result += R.string.localizable.eto_end_time.key.localized() + data.end_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             if data.lock_at != nil {
@@ -300,7 +314,6 @@ class ETOProjectViewModel {
         if let state = projectModel.status {
             if state == .finish {
                 if projectModel.t_total_time == "" {
-                    
                     self.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
                     self.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
                 }

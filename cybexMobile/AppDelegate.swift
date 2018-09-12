@@ -25,7 +25,6 @@ import SwiftyBeaver
 import AlamofireNetworkActivityLogger
 import NBLCommonModule
 
-
 let log = SwiftyBeaver.self
 
 fileprivate let UM_APPKEY = "5b6bf4a8b27b0a3429000016"
@@ -75,6 +74,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppConfiguration.shared.appCoordinator.fetchEthToRmbPrice()
         AppConfiguration.shared.appCoordinator.start()
         self.fetchEtoHiddenRequest()
+        
+        ZYNetworkAccessibity.setAlertEnable(true)
+        ZYNetworkAccessibity.setStateDidUpdateNotifier { (state) in
+            if state == ZYNetworkAccessibleState.accessible {
+                self.fetchEtoHiddenRequest()
+            }
+        }
+        ZYNetworkAccessibity.start()
         
         RealReachability.sharedInstance().startNotifier()
         NotificationCenter.default.addObserver(forName: NSNotification.Name.realReachabilityChanged, object: nil, queue: nil) { (notifi) in
