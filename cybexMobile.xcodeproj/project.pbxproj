@@ -426,6 +426,7 @@
 		738FCEDB2148E73F0042331A /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCECF2148E73D0042331A /* Moya.framework */; };
 		738FCEDC2148E73F0042331A /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCED02148E73E0042331A /* RxCocoa.framework */; };
 		738FCEDD2148E73F0042331A /* RxMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCED12148E73E0042331A /* RxMoya.framework */; };
+		738FCEE9214909CC0042331A /* ZYNetworkAccessibity.m in Sources */ = {isa = PBXBuildFile; fileRef = 738FCEE4214909CC0042331A /* ZYNetworkAccessibity.m */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
 		73F1DEAE214762C20065BD72 /* NBLCommonModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 737F8DBF214660DD00DD522A /* NBLCommonModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
@@ -6188,6 +6189,8 @@
 		738FCECF2148E73D0042331A /* Moya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya.framework; path = Carthage/Build/iOS/Moya.framework; sourceTree = "<group>"; };
 		738FCED02148E73E0042331A /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		738FCED12148E73E0042331A /* RxMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxMoya.framework; path = Carthage/Build/iOS/RxMoya.framework; sourceTree = "<group>"; };
+		738FCEE3214909CC0042331A /* ZYNetworkAccessibity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYNetworkAccessibity.h; sourceTree = "<group>"; };
+		738FCEE4214909CC0042331A /* ZYNetworkAccessibity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYNetworkAccessibity.m; sourceTree = "<group>"; };
 		73905E38FD41E7F65B811029DCAADED6 /* banded.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = banded.hpp; sourceTree = "<group>"; };
 		7395B10A36CA7EBBE9AFABCDCC97095A /* results_collector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = results_collector.hpp; sourceTree = "<group>"; };
 		73983BB9CB6A4759E1777B89783F2430 /* implementation_help.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = implementation_help.hpp; sourceTree = "<group>"; };
@@ -17748,6 +17751,7 @@
 		39391F871F58EBD32CBE03CE2DB590CC /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				738FCEE2214909CC0042331A /* ZYNetworkAccessibity */,
 				8B5274A9974EFCDE3D932E9EA52C257A /* Vendor */,
 				DF004C30BA3A0AD39A7125A3724BDE33 /* boost */,
 				5462E9509CF2F1C07489DACBF2E8D9F7 /* libfc */,
@@ -22724,6 +22728,15 @@
 				C567622A15528D50EF51843AFB715713 /* flatten_view_iterator.hpp */,
 			);
 			path = flatten_view;
+			sourceTree = "<group>";
+		};
+		738FCEE2214909CC0042331A /* ZYNetworkAccessibity */ = {
+			isa = PBXGroup;
+			children = (
+				738FCEE3214909CC0042331A /* ZYNetworkAccessibity.h */,
+				738FCEE4214909CC0042331A /* ZYNetworkAccessibity.m */,
+			);
+			path = ZYNetworkAccessibity;
 			sourceTree = "<group>";
 		};
 		73C49E5FCA40D27ABA2BBD4913D73C44 /* detail */ = {
@@ -34140,6 +34153,7 @@
 				3B824A2D2135350200D7A4A7 /* ETODetailActions.swift in Sources */,
 				3BF5B7E52134F5A800E8BFC9 /* ETODetailHeaderView.swift in Sources */,
 				D6EF2CA9447A80749A341523EA37E613 /* AccessoryHorizentalView.swift in Sources */,
+				738FCEE9214909CC0042331A /* ZYNetworkAccessibity.m in Sources */,
 				53079FD90D2B1B6BCB3863CB53111FAA /* Account.swift in Sources */,
 				B53165C099917599B9638053318C729A /* AccountAssetOperationView.swift in Sources */,
 				221C6176213926570021C007 /* ETORecordListActions.swift in Sources */,
