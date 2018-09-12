@@ -4,8 +4,8 @@ def network
 #    pod 'Starscream'
     pod 'SocketRocket', :git => 'https://github.com/facebook/SocketRocket', :branch => 'master'
     pod 'JSONRPCKit', :git => 'https://github.com/phpmaple/JSONRPCKit', :branch => 'master'
-    pod 'Moya', :git => 'https://github.com/Moya/Moya', :tag => '12.0.0-beta.1'
-    pod 'Kingfisher'
+#    pod 'Moya', :git => 'https://github.com/Moya/Moya', :tag => '12.0.0-beta.1'
+#    pod 'Kingfisher'
     pod 'RealReachability'
     pod 'Apollo'
     pod 'AlamofireNetworkActivityLogger'
@@ -13,7 +13,7 @@ end
 
 def data
     pod 'ObjectMapper'
-    pod 'HandyJSON'
+#    pod 'HandyJSON'
     pod 'SwiftyJSON'
     pod 'BigInt'
     pod 'GRDB.swift'
@@ -38,8 +38,8 @@ def resource
 end
 
 def architecture
-   pod 'ReSwift'
-   pod 'RxSwift'
+#   pod 'ReSwift'
+#   pod 'RxSwift'
    pod 'ObservableArray-RxSwift'
    pod 'RxSwiftExt'
    pod 'RxDataSources'
