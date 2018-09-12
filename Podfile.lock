@@ -45,14 +45,12 @@ PODS:
   - GRDB.swift (3.2.0)
   - GrowingTextView (0.5.6)
   - Guitar (0.4.1)
-  - HandyJSON (4.1.3)
   - IHKeyboardAvoiding (4.2)
   - IQKeyboardManagerSwift (6.1.1)
   - JSONRPCKit (3.0.0):
     - Result (~> 4.0.0)
   - "Keyboard+LayoutGuide (1.2.2)"
   - KeychainAccess (3.1.1)
-  - Kingfisher (4.8.1)
   - KMNavigationBarTransition (1.1.5)
   - LifetimeTracker (1.4.0)
   - Lightning (2.0.0)
@@ -94,7 +92,6 @@ PODS:
   - RealReachability/Ping (1.3.0)
   - Repeat (0.5.6)
   - Result (4.0.0)
-  - ReSwift (4.0.1)
   - Reveal-SDK (17)
   - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
@@ -206,13 +203,11 @@ DEPENDENCIES:
   - GRDB.swift
   - GrowingTextView
   - Guitar
-  - HandyJSON
   - IHKeyboardAvoiding
   - IQKeyboardManagerSwift
   - JSONRPCKit (from `https://github.com/phpmaple/JSONRPCKit`, branch `master`)
   - "Keyboard+LayoutGuide"
   - KeychainAccess
-  - Kingfisher
   - KMNavigationBarTransition
   - LifetimeTracker
   - Lightning
@@ -232,14 +227,12 @@ DEPENDENCIES:
   - R.swift
   - RealReachability
   - Repeat
-  - ReSwift
   - Reveal-SDK
   - RxCocoa
   - RxDataSources
   - RxGesture
   - RxGRDB
   - RxKeyboard
-  - RxSwift
   - RxSwiftExt
   - RxValidator
   - SDCAlertView
@@ -306,12 +299,10 @@ SPEC REPOS:
     - GRDB.swift
     - GrowingTextView
     - Guitar
-    - HandyJSON
     - IHKeyboardAvoiding
     - IQKeyboardManagerSwift
     - "Keyboard+LayoutGuide"
     - KeychainAccess
-    - Kingfisher
     - KMNavigationBarTransition
     - LifetimeTracker
     - Lightning
@@ -335,7 +326,6 @@ SPEC REPOS:
     - RealReachability
     - Repeat
     - Result
-    - ReSwift
     - Reveal-SDK
     - RxCocoa
     - RxDataSources
@@ -442,13 +432,11 @@ SPEC CHECKSUMS:
   GRDB.swift: c5bb04b25a9931fec937920e913787e45f96124f
   GrowingTextView: 8958f4fb7419de58dd622021b2d0696487e00e70
   Guitar: 7410dc37f2c12d5b8b67711d771608900c37636e
-  HandyJSON: bc81fbeb62d65ae5d5942ed29bc4a8265d18c1e8
   IHKeyboardAvoiding: 9fbf816b7c3c84911964802ff110d12caf40ebef
   IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
   JSONRPCKit: eb41d88efb88d4cbf2b66aa6c34fb62339c0ef14
   "Keyboard+LayoutGuide": 4c33aa1749cee1af43c3c32a988b58ad1918bdef
   KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
-  Kingfisher: 868c1149679a7ab6869be118faa9b5aed154aaf0
   KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
   LifetimeTracker: 51b52d559ffd4570584996b4b94b8779e525ee62
   Lightning: c6a02102c761491a4957c6265d9161dc5452c3bf
@@ -472,7 +460,6 @@ SPEC CHECKSUMS:
   RealReachability: eae9c58d2db52fadd8e1cba4b5d4c028454fbc47
   Repeat: 79fae833c601ef457148ba6ffae276e5c629ab0a
   Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
-  ReSwift: f4012c613e13da7398827fe5aebdb938eaed40a3
   Reveal-SDK: a6df49f47319bd19a110c960c498af32df72c0af
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
@@ -516,6 +503,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 34f79abb60018f2e2a5168d6287d90473024ab81
 
-PODFILE CHECKSUM: aa627c705a75fc69fbbce22db241a90ab26c1fbc
+PODFILE CHECKSUM: 7ee9a98a9da02f67f5403b39382a82a06bc2be47
 
 COCOAPODS: 1.5.3

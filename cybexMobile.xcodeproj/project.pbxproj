@@ -410,8 +410,18 @@
 		7386F2D52121735800ABC924 /* AddressHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7386F2D32121735800ABC924 /* AddressHomeTableViewCell.xib */; };
 		7386F2D82121737600ABC924 /* AddressHomeTableViewCellViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2D62121737600ABC924 /* AddressHomeTableViewCellViewView.swift */; };
 		7386F2D92121737600ABC924 /* AddressHomeTableViewCellViewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7386F2D72121737600ABC924 /* AddressHomeTableViewCellViewView.xib */; };
-		738FCE2F2148D7DB0042331A /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCE2A2148D7DB0042331A /* Moya.framework */; };
-		738FCE302148D7DB0042331A /* Moya.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCE2A2148D7DB0042331A /* Moya.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		738FCEC52148E72E0042331A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCEC42148E72E0042331A /* Alamofire.framework */; };
+		738FCED22148E73F0042331A /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCEC62148E7340042331A /* RxBlocking.framework */; };
+		738FCED32148E73F0042331A /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCEC72148E7350042331A /* RxSwift.framework */; };
+		738FCED42148E73F0042331A /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCEC82148E7360042331A /* ReactiveSwift.framework */; };
+		738FCED52148E73F0042331A /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCEC92148E7370042331A /* Kingfisher.framework */; };
+		738FCED62148E73F0042331A /* HandyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCECA2148E7380042331A /* HandyJSON.framework */; };
+		738FCED72148E73F0042331A /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCECB2148E7390042331A /* ReSwift.framework */; };
+		738FCED82148E73F0042331A /* ReactiveMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCECC2148E73A0042331A /* ReactiveMoya.framework */; };
+		738FCED92148E73F0042331A /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCECD2148E73B0042331A /* Result.framework */; };
+		738FCEDB2148E73F0042331A /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCECF2148E73D0042331A /* Moya.framework */; };
+		738FCEDC2148E73F0042331A /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCED02148E73E0042331A /* RxCocoa.framework */; };
+		738FCEDD2148E73F0042331A /* RxMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCED12148E73E0042331A /* RxMoya.framework */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
 		73F1DEAE214762C20065BD72 /* NBLCommonModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 737F8DBF214660DD00DD522A /* NBLCommonModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
@@ -701,7 +711,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				738FCE302148D7DB0042331A /* Moya.framework in Embed Frameworks */,
 				73F1DEAE214762C20065BD72 /* NBLCommonModule.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -6159,7 +6168,18 @@
 		7386F2D62121737600ABC924 /* AddressHomeTableViewCellViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressHomeTableViewCellViewView.swift; sourceTree = "<group>"; };
 		7386F2D72121737600ABC924 /* AddressHomeTableViewCellViewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressHomeTableViewCellViewView.xib; sourceTree = "<group>"; };
 		7388EB07415DBCA0B8C079BF7C089E8C /* kinematic_viscosity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kinematic_viscosity.hpp; sourceTree = "<group>"; };
-		738FCE2A2148D7DB0042331A /* Moya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya.framework; path = Carthage/Build/iOS/Moya.framework; sourceTree = "<group>"; };
+		738FCEC42148E72E0042331A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		738FCEC62148E7340042331A /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
+		738FCEC72148E7350042331A /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		738FCEC82148E7360042331A /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
+		738FCEC92148E7370042331A /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		738FCECA2148E7380042331A /* HandyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HandyJSON.framework; path = Carthage/Build/iOS/HandyJSON.framework; sourceTree = "<group>"; };
+		738FCECB2148E7390042331A /* ReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReSwift.framework; path = Carthage/Build/iOS/ReSwift.framework; sourceTree = "<group>"; };
+		738FCECC2148E73A0042331A /* ReactiveMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveMoya.framework; path = Carthage/Build/iOS/ReactiveMoya.framework; sourceTree = "<group>"; };
+		738FCECD2148E73B0042331A /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		738FCECF2148E73D0042331A /* Moya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya.framework; path = Carthage/Build/iOS/Moya.framework; sourceTree = "<group>"; };
+		738FCED02148E73E0042331A /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		738FCED12148E73E0042331A /* RxMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxMoya.framework; path = Carthage/Build/iOS/RxMoya.framework; sourceTree = "<group>"; };
 		73905E38FD41E7F65B811029DCAADED6 /* banded.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = banded.hpp; sourceTree = "<group>"; };
 		7395B10A36CA7EBBE9AFABCDCC97095A /* results_collector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = results_collector.hpp; sourceTree = "<group>"; };
 		73983BB9CB6A4759E1777B89783F2430 /* implementation_help.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = implementation_help.hpp; sourceTree = "<group>"; };
@@ -12554,8 +12574,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ECF8204F8406ACA571309CEEC8F20A3 /* Pods_cybexMobile.framework in Frameworks */,
-				738FCE2F2148D7DB0042331A /* Moya.framework in Frameworks */,
 				6257D6A4A5ED0C635B89E55C84FA1215 /* libboost.a in Frameworks */,
+				738FCED22148E73F0042331A /* RxBlocking.framework in Frameworks */,
+				738FCED32148E73F0042331A /* RxSwift.framework in Frameworks */,
+				738FCED42148E73F0042331A /* ReactiveSwift.framework in Frameworks */,
+				738FCED52148E73F0042331A /* Kingfisher.framework in Frameworks */,
+				738FCED62148E73F0042331A /* HandyJSON.framework in Frameworks */,
+				738FCED72148E73F0042331A /* ReSwift.framework in Frameworks */,
+				738FCED82148E73F0042331A /* ReactiveMoya.framework in Frameworks */,
+				738FCED92148E73F0042331A /* Result.framework in Frameworks */,
+				738FCEDB2148E73F0042331A /* Moya.framework in Frameworks */,
+				738FCEDC2148E73F0042331A /* RxCocoa.framework in Frameworks */,
+				738FCEDD2148E73F0042331A /* RxMoya.framework in Frameworks */,
+				738FCEC52148E72E0042331A /* Alamofire.framework in Frameworks */,
 				786DA36D390BADA15DF7637951260BE0 /* libcrypto.a in Frameworks */,
 				8899C4D33A4F31180D755A486B4A6B6C /* libfc.a in Frameworks */,
 				ECF5D8036B47223BDDD5184927710C20 /* libssl.a in Frameworks */,
@@ -29788,6 +29819,18 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				738FCECA2148E7380042331A /* HandyJSON.framework */,
+				738FCEC92148E7370042331A /* Kingfisher.framework */,
+				738FCECF2148E73D0042331A /* Moya.framework */,
+				738FCECC2148E73A0042331A /* ReactiveMoya.framework */,
+				738FCEC82148E7360042331A /* ReactiveSwift.framework */,
+				738FCECD2148E73B0042331A /* Result.framework */,
+				738FCECB2148E7390042331A /* ReSwift.framework */,
+				738FCEC62148E7340042331A /* RxBlocking.framework */,
+				738FCED02148E73E0042331A /* RxCocoa.framework */,
+				738FCED12148E73E0042331A /* RxMoya.framework */,
+				738FCEC72148E7350042331A /* RxSwift.framework */,
+				738FCEC42148E72E0042331A /* Alamofire.framework */,
 				3A208A846E8909F779DA5EF54B68891D /* Pods_cybexMobile.framework */,
 				0A7304F2BEF3C98AC05E5F01EC7205E8 /* libboost.a */,
 				AA9D354E1FFC86DF9A64FE653BD6840F /* libcrypto.a */,
@@ -32023,7 +32066,6 @@
 		F3EBF4E6D2E2492B42F25C18354E14EB = {
 			isa = PBXGroup;
 			children = (
-				738FCE2A2148D7DB0042331A /* Moya.framework */,
 				737F8D92214660DC00DD522A /* NBLCommonModule */,
 				7386F28D2121204A00ABC924 /* cybexMobileTests */,
 				D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */,
@@ -33767,14 +33809,12 @@
 				"${BUILT_PRODUCTS_DIR}/GRDB.swift/GRDB.framework",
 				"${BUILT_PRODUCTS_DIR}/GrowingTextView/GrowingTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/Guitar/Guitar.framework",
-				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/IHKeyboardAvoiding/IHKeyboardAvoiding.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONRPCKit/JSONRPCKit.framework",
 				"${BUILT_PRODUCTS_DIR}/KMNavigationBarTransition/KMNavigationBarTransition.framework",
 				"${BUILT_PRODUCTS_DIR}/Keyboard+LayoutGuide/KeyboardLayoutGuide.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/LifetimeTracker/LifetimeTracker.framework",
 				"${BUILT_PRODUCTS_DIR}/Lightning/Lightning.framework",
 				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
@@ -33791,7 +33831,6 @@
 				"${BUILT_PRODUCTS_DIR}/Proposer/Proposer.framework",
 				"${BUILT_PRODUCTS_DIR}/QuickLayout/QuickLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
-				"${BUILT_PRODUCTS_DIR}/ReSwift/ReSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RealReachability/RealReachability.framework",
 				"${BUILT_PRODUCTS_DIR}/Repeat/Repeat.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -33864,14 +33903,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GrowingTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Guitar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IHKeyboardAvoiding.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONRPCKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMNavigationBarTransition.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeyboardLayoutGuide.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LifetimeTracker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lightning.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
@@ -33888,7 +33925,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Proposer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealReachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Repeat.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -33972,11 +34008,33 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/HandyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Moya.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveMoya.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxMoya.framework",
 			);
 			name = carthage;
 			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/HandyJSON.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Moya.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReactiveMoya.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReactiveSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Result.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ReSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxBlocking.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxMoya.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

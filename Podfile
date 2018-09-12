@@ -39,7 +39,7 @@ end
 
 def architecture
 #   pod 'ReSwift'
-   pod 'RxSwift'
+#   pod 'RxSwift'
    pod 'ObservableArray-RxSwift'
    pod 'RxSwiftExt'
    pod 'RxDataSources'
