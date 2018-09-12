@@ -24,7 +24,6 @@ class CybexWebViewController: BaseWebViewController {
         case whitepaper
     }
     
-    
     var coordinator: (CybexWebCoordinatorProtocol & CybexWebStateManagerProtocol)?
     
     var vc_type: web_type = .help
@@ -38,13 +37,14 @@ class CybexWebViewController: BaseWebViewController {
         
         setupUI()
         setupEvent()
-        if vc_type != .help {
-            webView.load(URLRequest.init(url: self.url!))
-        }
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if vc_type != .help {
+            webView.load(URLRequest.init(url: self.url!))
+        }
     }
     
     override func refreshViewController() {

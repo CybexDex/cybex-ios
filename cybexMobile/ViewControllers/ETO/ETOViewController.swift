@@ -11,12 +11,14 @@ import RxSwift
 import RxCocoa
 import ReSwift
 import SwiftTheme
+import Repeat
 
 class ETOViewController: BaseViewController {
     
     var coordinator: (ETOCoordinatorProtocol & ETOStateManagerProtocol)?
     @IBOutlet weak var homeView: ETOHomeView!
-    
+    var timerRepeater: Repeater?
+    var infosRepeater: Repeater?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupData()
@@ -28,9 +30,39 @@ class ETOViewController: BaseViewController {
         
     }
     
+    func startInfosRepeatAction() {
+        self.infosRepeater = Repeater.every(.seconds(3), { [weak self](timer) in
+            main {
+                guard let `self` = self else { return }
+                self.coordinator?.refreshProjectDatas()
+            }
+        })
+    }
+    
+    func startTimeRepeatAction() {
+        self.timerRepeater = Repeater.every(.seconds(1), { [weak self](timer) in
+            main {
+                guard let `self` = self else { return }
+                self.coordinator?.refreshTime()
+            }
+        })
+    }
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fetchProjectData()
+        self.startInfosRepeatAction()
+        self.startTimeRepeatAction()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.infosRepeater?.pause()
+        self.infosRepeater = nil
+        self.timerRepeater?.pause()
+        self.timerRepeater = nil
     }
     
     func setupUI() {
@@ -69,7 +101,8 @@ class ETOViewController: BaseViewController {
     }
     
     override func configureObserveState() {
-        coordinator?.state.pageState.asObservable().subscribe(onNext: {(state) in
+        coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self](state) in
+            guard let `self` = self else { return }
             
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         

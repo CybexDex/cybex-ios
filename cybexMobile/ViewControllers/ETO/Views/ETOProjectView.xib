@@ -123,7 +123,7 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGo-bQ-fRy">
-                    <rect key="frame" x="160" y="91" width="197" height="14.5"/>
+                    <rect key="frame" x="150" y="91" width="207" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -180,7 +180,7 @@
                 <constraint firstItem="dcm-4B-Ve0" firstAttribute="bottom" secondItem="na5-42-pdN" secondAttribute="bottom" constant="12" id="dqG-16-WMs"/>
                 <constraint firstItem="WgY-3z-Hxs" firstAttribute="top" secondItem="0rG-8U-sxA" secondAttribute="bottom" constant="10" id="eJg-jg-w9M"/>
                 <constraint firstItem="dcm-4B-Ve0" firstAttribute="trailing" secondItem="0rG-8U-sxA" secondAttribute="trailing" constant="18" id="eNd-K2-I3v"/>
-                <constraint firstItem="HGo-bQ-fRy" firstAttribute="leading" secondItem="44n-Qz-I0q" secondAttribute="trailing" constant="10" id="g3E-am-sZu"/>
+                <constraint firstItem="HGo-bQ-fRy" firstAttribute="leading" secondItem="44n-Qz-I0q" secondAttribute="trailing" id="g3E-am-sZu"/>
                 <constraint firstItem="8Oi-x8-nEL" firstAttribute="centerY" secondItem="8M1-5S-2XG" secondAttribute="centerY" id="l59-bU-CbE"/>
                 <constraint firstItem="na5-42-pdN" firstAttribute="top" secondItem="8M1-5S-2XG" secondAttribute="bottom" constant="12" id="ljy-6Q-gQ1"/>
                 <constraint firstItem="44n-Qz-I0q" firstAttribute="centerY" secondItem="na5-42-pdN" secondAttribute="centerY" id="mnh-G0-6UG"/>
