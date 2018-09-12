@@ -59,7 +59,25 @@ enum ETOJoinButtonState {
     case normal(title: String, style: ETOJoinButtonStyle, action: ETOJoinButtonAction)
     case disable(title: String, style: ETOJoinButtonStyle)
     case notShow
+    
 }
+
+extension ETOJoinButtonState: Equatable {
+    static func == (lhs: ETOJoinButtonState, rhs: ETOJoinButtonState) -> Bool {
+        switch (lhs, rhs) {
+        case (.normal(let titlelhs, let stylelhs, let actionlhs), .normal(let titlerhs, let stylerhs, let actionrhs)):
+            return titlelhs == titlerhs && stylelhs == stylerhs && actionlhs == actionrhs
+        case let (.disable(titlelhs, stylelhs), .disable(titlerhs, stylerhs)):
+            return titlelhs == titlerhs && stylelhs == stylerhs
+        case let (.notShow, .notShow):
+            return true
+        default:
+            return false
+        }
+    }
+}
+
+
 
 class ETOManager {
     static let shared = ETOManager()

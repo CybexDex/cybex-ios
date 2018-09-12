@@ -305,7 +305,7 @@ class ShowToastManager {
     func updateCybexTextViewType(_ sender: CybexTextView) {
         sender.ensure.isEnabled = false
         sender.ensure.setTitle(String(self.timer_time) + R.string.localizable.transfer_unit_second.key.localized(), for: .normal)
-        
+        self.timer_time = 30
         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(changeTimerTimeAction), userInfo: nil, repeats: true)
         self.timer?.fire()
     }

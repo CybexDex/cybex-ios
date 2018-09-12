@@ -22,7 +22,7 @@ protocol ETODetailStateManagerProtocol {
     func switchPageState(_ state:PageState)
     func fetchData()
     func fetchUpState()
-    func checkInviteCode(code: String, callback:@escaping(Bool)->())
+    func checkInviteCode(code: String, callback:@escaping(Bool,String)->())
     func updateETOProjectDetailAction()
     func fetchUserState()
 }
@@ -42,8 +42,6 @@ class ETODetailCoordinator: ETORootCoordinator {
         Broadcaster.register(ETODetailCoordinatorProtocol.self, observer: self)
         Broadcaster.register(ETODetailStateManagerProtocol.self, observer: self)
     }
-    
-    
 }
 
 extension ETODetailCoordinator: ETODetailCoordinatorProtocol {
@@ -141,8 +139,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
         }
         else {
             etoState.insert(.login)
-            
-            if state.kyc_status == "not_start" {
+            if state.kyc_status == .not_start {
                 etoState.insert(.KYCNotPassed)
                 ETOManager.shared.changeState(etoState)
                 if let vc = self.rootVC.topViewController as? ETODetailViewController {
@@ -150,9 +147,9 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                 }
                 return
             }
-            else if state.kyc_status == "ok" {
+            else if state.kyc_status == .ok {
                 etoState.insert(.KYCPassed)
-                if state.status == "unstart" {
+                if state.status == .unstart {
                     etoState.insert(.notReserved)
                 }
                 else {
@@ -166,13 +163,13 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                     etoState.insert(.bookable)
                 }
                 
-                if state.status == "waiting" {
+                if state.status == .waiting {
                     etoState.insert(.waitAudit)
                 }
-                else if state.status == "ok" {
+                else if state.status == .ok {
                     etoState.insert(.auditPassed)
                 }
-                else if state.status == "reject" {
+                else if state.status == .reject {
                     etoState.insert(.auditNotPassed)
                 }
             }
@@ -187,25 +184,28 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             etoState.insert(.underway)
         }
         let stateBefore = ETOManager.shared.getClauseState()
+        let btnBefore = ETOManager.shared.getETOJoinButtonState()
         ETOManager.shared.changeState(etoState)
         let stateEnd = ETOManager.shared.getClauseState()
-        if stateBefore != stateEnd, let vc = self.rootVC.topViewController as? ETODetailViewController {
+        let btnEnd = ETOManager.shared.getETOJoinButtonState()
+        
+        if (stateBefore != stateEnd || btnBefore != btnEnd), let vc = self.rootVC.topViewController as? ETODetailViewController {
             vc.contentView.getJoinButtonState()
         }
     }
     
-    func checkInviteCode(code: String, callback:@escaping(Bool)->()) {
+    func checkInviteCode(code: String, callback:@escaping(Bool,String)->()) {
         guard let name = UserManager.shared.name.value, let projectModel = self.state.data.value?.projectModel else {
-            callback(false)
+            callback(false,"")
             return
         }
         
         ETOMGService.request(target: ETOMGAPI.validCode(name: name, pid: projectModel.id, code: code), success: { json in
-            callback(true)
+            callback(true,"")
         }, error: { error in
-            callback(false)
+            callback(false,error.localizedDescription)
         }) { error in
-            callback(false)
+            callback(false,error.localizedDescription)
         }
     }
     
@@ -226,10 +226,10 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             
             if let viewModel = self.state.data.value, let projectModel = viewModel.projectModel {
                 if model.status! == .pre {
-                    viewModel.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970,isHiddenSecond: false))
+                    viewModel.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
                 }
                 else if model.status! == .ok {
-                    viewModel.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970, isHiddenSecond: false))
+                    viewModel.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
                 }
             }
         }
