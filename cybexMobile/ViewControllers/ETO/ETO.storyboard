@@ -26,7 +26,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZM8-p4-J8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-233" y="-98"/>
+            <point key="canvasLocation" x="-1169" y="-125"/>
+        </scene>
+        <!--User Agreement View Controller-->
+        <scene sceneID="eLK-A7-Ldi">
+            <objects>
+                <viewController id="n89-H9-nAE" customClass="ETOUserAgreementViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oy7-2g-mkS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="q8e-Iz-5v9"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PRb-bo-c9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-463" y="-125"/>
         </scene>
     </scenes>
 </document>

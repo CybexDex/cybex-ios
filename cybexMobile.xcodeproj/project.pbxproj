@@ -332,6 +332,10 @@
 		72DBCA7721391A4300905303 /* CybexWebReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7321391A4300905303 /* CybexWebReducers.swift */; };
 		72E3A4CC214560580083E417 /* CybexWaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E3A4C9214560580083E417 /* CybexWaitingView.swift */; };
 		72E3A4CD214560580083E417 /* CybexWaitingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72E3A4CA214560580083E417 /* CybexWaitingView.xib */; };
+		72E4DF702147C7BD00D9584B /* ETOUserAgreementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E4DF6C2147C7BD00D9584B /* ETOUserAgreementCoordinator.swift */; };
+		72E4DF712147C7BD00D9584B /* ETOUserAgreementActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E4DF6D2147C7BD00D9584B /* ETOUserAgreementActions.swift */; };
+		72E4DF722147C7BD00D9584B /* ETOUserAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E4DF6E2147C7BD00D9584B /* ETOUserAgreementViewController.swift */; };
+		72E4DF732147C7BD00D9584B /* ETOUserAgreementReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E4DF6F2147C7BD00D9584B /* ETOUserAgreementReducers.swift */; };
 		72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */; };
 		72EC6A5420F4611500CEAFF6 /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */; };
 		72EC6A5520F4611500CEAFF6 /* EOSWithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5120F4611500CEAFF6 /* EOSWithdrawView.xib */; };
@@ -653,13 +657,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		72D98A8421478ABD00C8BE49 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 737F8DA3214660DC00DD522A /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = FB7F9ABD44B0B4FC9F11D1B28220A2D0;
-			remoteInfo = Repeat;
-		};
 		737F8DBE214660DD00DD522A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 737F8D98214660DC00DD522A /* NBLCommonModule.xcodeproj */;
@@ -6033,6 +6030,10 @@
 		72E3A4C9214560580083E417 /* CybexWaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWaitingView.swift; sourceTree = "<group>"; };
 		72E3A4CA214560580083E417 /* CybexWaitingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CybexWaitingView.xib; sourceTree = "<group>"; };
 		72E4468D71171890A95A24639B6298E1 /* qi_distinct.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = qi_distinct.hpp; sourceTree = "<group>"; };
+		72E4DF6C2147C7BD00D9584B /* ETOUserAgreementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOUserAgreementCoordinator.swift; sourceTree = "<group>"; };
+		72E4DF6D2147C7BD00D9584B /* ETOUserAgreementActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOUserAgreementActions.swift; sourceTree = "<group>"; };
+		72E4DF6E2147C7BD00D9584B /* ETOUserAgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOUserAgreementViewController.swift; sourceTree = "<group>"; };
+		72E4DF6F2147C7BD00D9584B /* ETOUserAgreementReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOUserAgreementReducers.swift; sourceTree = "<group>"; };
 		72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EOSWithdrawView.swift; sourceTree = "<group>"; };
 		72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawView.xib; sourceTree = "<group>"; };
 		72EC6A5120F4611500CEAFF6 /* EOSWithdrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EOSWithdrawView.xib; sourceTree = "<group>"; };
@@ -17863,6 +17864,10 @@
 				3B824A2A2135350200D7A4A7 /* ETODetailViewController.swift */,
 				3B824A2B2135350200D7A4A7 /* ETODetailReducers.swift */,
 				3B125C8421366BEE000A9F97 /* ETODetail.storyboard */,
+				72E4DF6C2147C7BD00D9584B /* ETOUserAgreementCoordinator.swift */,
+				72E4DF6D2147C7BD00D9584B /* ETOUserAgreementActions.swift */,
+				72E4DF6E2147C7BD00D9584B /* ETOUserAgreementViewController.swift */,
+				72E4DF6F2147C7BD00D9584B /* ETOUserAgreementReducers.swift */,
 			);
 			path = ETODetail;
 			sourceTree = "<group>";
@@ -22555,7 +22560,6 @@
 				737F8DC5214660DD00DD522A /* Pods_NBLCommonModule.framework */,
 				737F8DC7214660DD00DD522A /* Pods_NBLCommonModuleTests.framework */,
 				73F1DE3D21466C340065BD72 /* Repeat.framework */,
-
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -33460,13 +33464,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		72D98A8521478ABD00C8BE49 /* Repeat.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Repeat.framework;
-			remoteRef = 72D98A8421478ABD00C8BE49 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		737F8DBF214660DD00DD522A /* NBLCommonModule.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -34315,6 +34312,7 @@
 				80258D6F4C94ACC78C20B5ACE8BEAD2F /* LockupAssetsReducers.swift in Sources */,
 				85D46A1F0D3BBF12CF72903D466D9239 /* LockupAssetsSectionView.swift in Sources */,
 				B2B05000B81768D84E3FBE9B46392133 /* LockupAssetsView.swift in Sources */,
+				72E4DF702147C7BD00D9584B /* ETOUserAgreementCoordinator.swift in Sources */,
 				7267DA0821350327004AF9AF /* ETOViewController.swift in Sources */,
 				221EC2352105B1930059F856 /* TitleTextView.swift in Sources */,
 				6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */,
@@ -34340,6 +34338,7 @@
 				CD017D1C374A5B06D3ECEC24936E0911 /* MyOpenedOrdersView.swift in Sources */,
 				D3008B984211AFE152859658DC6B773B /* NSNotification+Extensions.swift in Sources */,
 				031F69CC95D2906A4F8F4063776327F6 /* NSObject+Extensions.swift in Sources */,
+				72E4DF732147C7BD00D9584B /* ETOUserAgreementReducers.swift in Sources */,
 				7267DA2221363BEE004AF9AF /* ETOHomeView.swift in Sources */,
 				009625463316961A6BB07A49EB88D5D5 /* NavCoordinator.swift in Sources */,
 				8E9524F703A8466022C2D28281507174 /* NetworkBroadcastAPI.swift in Sources */,
@@ -34396,6 +34395,7 @@
 				ED57B29BDB18C8B97035E7DA20DF26E5 /* RechargeActions.swift in Sources */,
 				665FBB42152A37B183D011D45A4A0F22 /* RechargeCoordinator.swift in Sources */,
 				7386F2C821216FC700ABC924 /* SectionCornerViewView.swift in Sources */,
+				72E4DF722147C7BD00D9584B /* ETOUserAgreementViewController.swift in Sources */,
 				10F92CEABF192DAC227A5005DD4F12BF /* RechargeDetailActions.swift in Sources */,
 				133E7DE8927D9AD19315D14E638939BE /* RechargeDetailCoordinator.swift in Sources */,
 				D1C63B5AAC5552A99528E306AC7F57E0 /* RechargeDetailReducers.swift in Sources */,
@@ -34454,6 +34454,7 @@
 				894D811521F19A8670D0A6C61B11C600 /* TradeHistoryViewController.swift in Sources */,
 				73587EAC2137C057006CF8A6 /* ETOCrowdCoordinator.swift in Sources */,
 				F8B52B20C9737C584DECE7D52285A92D /* TradeItemView.swift in Sources */,
+				72E4DF712147C7BD00D9584B /* ETOUserAgreementActions.swift in Sources */,
 				07D976BEA2F5A840607DE4D526DB1420 /* TradeLineView.swift in Sources */,
 				221EC24C2105CF310059F856 /* TransferCoordinator.swift in Sources */,
 				73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */,

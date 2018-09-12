@@ -36,6 +36,7 @@ class ETODetailViewController: BaseViewController {
         super.viewWillDisappear(animated)
         self.timerRepeater!.pause()
         self.timerRepeater = nil
+        ETOManager.shared.changeState(.unset)
     }
     
     func startRepeatAction() {
@@ -64,6 +65,7 @@ class ETODetailViewController: BaseViewController {
     func setupData() {
         self.startLoading()
         self.coordinator?.fetchData()
+        self.coordinator?.fetchUserState()
     }
     
     func setupEvent() {
@@ -102,14 +104,13 @@ class ETODetailViewController: BaseViewController {
         coordinator?.state.userState.asObservable().subscribe(onNext: { [weak self]data in
             guard let `self` = self else { return }
             main {
-                if let _ = data as? ETOUserAuditModel {
+                if let _ = data  {
                     self.coordinator?.fetchUpState()
                 }
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }
-
 
 extension ETODetailViewController {
     @objc func clickCellView(_ data: [String: Any]) {
@@ -139,12 +140,12 @@ extension ETODetailViewController {
     }
     
     override func returnInviteCode(_ sender: String) {
-        self.coordinator?.checkInviteCode(code: sender, callback: { (success) in
+        self.coordinator?.checkInviteCode(code: sender, callback: { (success,errorDescription) in
             if success == true {
                 ShowToastManager.shared.hide(0)
             }
             else {
-                ShowToastManager.shared.data = R.string.localizable.eto_invite_code_error.key.localized()
+                ShowToastManager.shared.data = errorDescription
             }
         })
     }

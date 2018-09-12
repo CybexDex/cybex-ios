@@ -18,9 +18,21 @@ struct ETOBannerModel:HandyJSON {
     var adds_banner_mobile__lang_en:String = ""
 }
 
+enum user_kyc_status: String, HandyJSONEnum {
+    case not_start = "not_start"
+    case ok = "ok"
+}
+
+enum user_status: String, HandyJSONEnum {
+    case unstart = "unstart"
+    case waiting = "waiting"
+    case ok = "ok"
+    case reject = "reject"
+}
+
 struct ETOUserAuditModel:HandyJSON {
-    var kyc_status: String = "" //not_start, ok
-    var status: String = "" //unstart: 没有预约 waiting,ok,reject
+    var kyc_status: user_kyc_status = .not_start //not_start, ok
+    var status: user_status = .unstart //unstart: 没有预约 waiting,ok,reject
 }
 
 struct ETOShortProjectStatusModel:HandyJSON {
@@ -99,23 +111,7 @@ struct ETOTradeHistoryModel: HandyJSON, Differentiable, Equatable, Hashable {
     var created_at:Date!
     var token_count:String = ""
     var token:String = ""
-    var pricision: Int {
-        guard let balances = UserManager.shared.balances.value else { return 0 }
         
-        let balance = balances.filter { (balance) -> Bool in
-            if let name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade {
-                return name == self.token
-            }
-            
-            return false
-            }.first
-        
-        if let balance = balance, let info = app_data.assetInfo[balance.asset_type] {
-            return info.precision
-        }
-        return 0
-    }
-    
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
             self.created_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
@@ -129,6 +125,7 @@ struct ETOTradeHistoryModel: HandyJSON, Differentiable, Equatable, Hashable {
         return project_id
     }
 }
+
 
 class ETOProjectModel:HandyJSON {
     var id: Int = 0
@@ -258,8 +255,9 @@ class ETOProjectViewModel {
             else {
                   result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offer_at!.iso8601 + "\n"
             }
+            result += R.string.localizable.eto_currency.key.localized() + data.base_token_name.filterJade + "\n"
+
             result += R.string.localizable.eto_exchange_ratio.key.localized() + "1" + data.base_token_name + "=" + "\(data.rate)" + data.token_name
-            result += R.string.localizable.eto_currency.key.localized() + data.base_token_name.filterJade
         }
         return result
     }
@@ -312,11 +310,11 @@ class ETOProjectViewModel {
                 }
             }
             else if state == .pre {
-                self.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970,isHiddenSecond: false))
+                self.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
                 self.time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
             }
             else {
-                self.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970, isHiddenSecond: false))
+                self.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
                 self.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
             }
         }

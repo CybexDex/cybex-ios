@@ -7,11 +7,13 @@
 //
 
 import Foundation
+import SwiftyJSON
+import Localize_Swift
 
 enum CybexError: Error {
     case NetworkError(code: NetworkErrorCode)
     case ServiceHTTPError(desc: String)
-    case ServiceFriendlyError(code:Int, desc: String)
+    case ServiceFriendlyError(code:Int, desc: JSON)
 
     var localizedDescription: String {
         switch self {
@@ -20,7 +22,18 @@ enum CybexError: Error {
         case let .ServiceHTTPError(desc):
             return desc
         case let .ServiceFriendlyError(_, desc):
-            return desc
+            if let localized = desc.string {
+                return localized
+            }
+            else if let dic = desc.dictionaryObject {
+                if Localize.currentLanguage() == "en", let enString = dic["en"] as? String {
+                    return enString
+                }
+                else if let zhString = dic["zh"] as? String {
+                    return zhString
+                }
+            }
+            return ""
         }
     }
 }

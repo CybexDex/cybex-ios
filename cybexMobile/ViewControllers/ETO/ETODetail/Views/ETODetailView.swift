@@ -23,8 +23,8 @@ class ETODetailView: BaseView {
     @IBOutlet weak var websiteView: ETODetailIntroView!
     @IBOutlet weak var headerView: ETODetailHeaderView!
     
-    
     fileprivate var action : ETOJoinButtonAction?
+    
     enum Event:String {
         case ETODetailViewDidClicked
         case inputCode
