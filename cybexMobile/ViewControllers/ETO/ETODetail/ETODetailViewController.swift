@@ -36,7 +36,6 @@ class ETODetailViewController: BaseViewController {
         super.viewWillDisappear(animated)
         self.timerRepeater!.pause()
         self.timerRepeater = nil
-        ETOManager.shared.changeState(.unset)
     }
     
     func startRepeatAction() {

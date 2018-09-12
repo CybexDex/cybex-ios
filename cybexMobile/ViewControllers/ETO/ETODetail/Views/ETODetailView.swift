@@ -43,7 +43,8 @@ class ETODetailView: BaseView {
     
     func setupUI() {
         clearBgColor()
-        self.stateView.isHidden = true    
+        self.stateView.isHidden = true
+        ETOManager.shared.changeState(.unset)
         getWhiteListView.rightIcon.image = R.image.icwhitelist()
         getWhiteListView.name.textColor = UIColor.pastelOrange
     }

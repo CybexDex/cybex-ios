@@ -210,7 +210,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     }
     
     func updateETOProjectDetailAction() {
-        guard  let model = self.state.data.value?.projectModel else { return }
+        guard let model = self.state.data.value?.projectModel else { return }
         
         if model.status! == .pre || model.status! == .ok {
             ETOMGService.request(target: ETOMGAPI.refreshProject(id: model.id), success: { json in

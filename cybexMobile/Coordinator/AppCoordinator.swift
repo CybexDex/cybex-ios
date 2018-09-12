@@ -13,6 +13,7 @@ import ReSwift
 import SwiftTheme
 import SwifterSwift
 import Repeat
+import RxCocoa
 
 protocol AppStateManagerProtocol {
     var state: AppState { get }
@@ -56,6 +57,9 @@ class AppCoordinator {
     var entryCoordinator: EntryRootCoordinator!
     var etoCoordinator : ETORootCoordinator!
     var container : [NavCoordinator]!
+    
+    var etoStatus: BehaviorRelay<ETOHidden?> = BehaviorRelay(value:nil)
+    
     weak var currentPresentedRootCoordinator: NavCoordinator?
     
     weak var startLoadingVC:BaseViewController?
@@ -103,11 +107,16 @@ class AppCoordinator {
         homeCoordinator.start()
         tradeCoordinator.start()
         accountCoordinator.start()
-        etoCoordinator.start()
         
-        self.container = [homeCoordinator, tradeCoordinator, etoCoordinator,accountCoordinator] as [NavCoordinator]
-        
-        rootVC.viewControllers = [home, trade, eto,account]
+        if let status = self.etoStatus.value, status.isETOEnabled == true {
+            etoCoordinator.start()
+            self.container = [homeCoordinator, tradeCoordinator, etoCoordinator,accountCoordinator] as [NavCoordinator]
+            rootVC.viewControllers = [home, trade, eto, account]
+        }
+        else {
+            self.container = [homeCoordinator, tradeCoordinator, accountCoordinator] as [NavCoordinator]
+            rootVC.viewControllers = [home, trade, account]
+        }
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: {notification in
             CBConfiguration.sharedConfiguration.themeIndex = ThemeManager.currentThemeIndex
@@ -115,7 +124,6 @@ class AppCoordinator {
             CBConfiguration.sharedConfiguration.theme.longPressLineColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1) : #colorLiteral(red: 0.1058823529, green: 0.1333333333, blue: 0.1882352941, alpha: 1)
             CBConfiguration.sharedConfiguration.theme.tickColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.4470588235, green: 0.5843137255, blue: 0.9921568627, alpha: 0.06) : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.04)
             CBConfiguration.sharedConfiguration.theme.dashColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.white
-            
         })
         
         aspect()
@@ -163,7 +171,5 @@ class AppCoordinator {
             self.rootVC.present(nav, animated: true, completion: nil)
         }
     }
-    
-    
 }
 

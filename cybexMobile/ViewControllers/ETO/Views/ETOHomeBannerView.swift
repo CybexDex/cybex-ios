@@ -12,6 +12,7 @@ import TinyConstraints
 import Fakery
 import Localize_Swift
 import SwiftTheme
+import Device
 
 @IBDesignable
 class ETOHomeBannerView: BaseView {
@@ -66,7 +67,7 @@ class ETOHomeBannerView: BaseView {
     }
     
     func setPagerViewStyle() {
-        self.pagerView.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 191)
+        self.pagerView.itemSize = CGSize(width: UIScreen.main.bounds.width, height: Device.version() == .iPhoneX ? 240 : 191)
     }
     
     func setupSubViewEvent() {

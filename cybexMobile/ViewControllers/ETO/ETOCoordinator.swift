@@ -124,11 +124,11 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                 if let projectModel = viewModel.projectModel, projectModel.status! == .pre || projectModel.status! == .ok  {
                     ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { (json) in
                         if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
+                            projectModel.status = refreshModel.status
                             viewModel.current_percent.accept((refreshModel.current_percent * 100).string(digits:2, roundingMode: .down) + "%")
                             viewModel.progress.accept(refreshModel.current_percent)
                             viewModel.status.accept(refreshModel.status!.description())
                             viewModel.project_state.accept(refreshModel.status)
-                            projectModel.status = refreshModel.status
                         }
                     }, error: { (error) in
                     }) { (error) in

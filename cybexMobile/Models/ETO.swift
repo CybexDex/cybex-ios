@@ -253,7 +253,7 @@ class ETOProjectViewModel {
                 result += R.string.localizable.eto_token_releasing_time.key.localized() + R.string.localizable.eto_project_immediate.key.localized() + "\n"
             }
             else {
-                  result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offer_at!.iso8601 + "\n"
+                  result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offer_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             }
             result += R.string.localizable.eto_currency.key.localized() + data.base_token_name.filterJade + "\n"
 
@@ -319,5 +319,10 @@ class ETOProjectViewModel {
             }
         }
     }
+}
+
+struct ETOHidden: HandyJSON {
+    var isETOEnabled: Bool = false
+    var isShareEnabled: Bool = false
 }
 
