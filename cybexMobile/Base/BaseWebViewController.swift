@@ -69,7 +69,12 @@ extension BaseWebViewController: WKUIDelegate, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error)  {
-        endLoading()
+        if error._code == NSURLErrorCancelled {
+            return
+        }
+        else {
+            endLoading()
+        }
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {

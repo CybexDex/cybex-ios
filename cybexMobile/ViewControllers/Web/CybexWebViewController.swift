@@ -40,6 +40,15 @@ class CybexWebViewController: BaseWebViewController {
        
     }
     
+    override func leftAction(_ sender: UIButton) {
+        if self.webView.canGoBack {
+            self.webView.goBack()
+        }
+        else {
+            super.leftAction(sender)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if vc_type != .help {
