@@ -1,0 +1,4 @@
+git "https://github.com/Moya/Moya" "12.0.0-beta.1"
+github "onevcat/Kingfisher"
+github "alibaba/HandyJSON"
+github "ReSwift/ReSwift"

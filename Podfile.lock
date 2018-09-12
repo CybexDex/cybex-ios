@@ -64,11 +64,6 @@ PODS:
   - MLeaksFinder (1.0.0):
     - FBRetainCycleDetector
   - MonkeyKing (1.8.0)
-  - Moya (12.0.0-beta.1):
-    - Moya/Core (= 12.0.0-beta.1)
-  - Moya/Core (12.0.0-beta.1):
-    - Alamofire (~> 4.1)
-    - Result (~> 4.0)
   - Nimble (7.1.3)
   - NVActivityIndicatorView (4.3.0):
     - NVActivityIndicatorView/Presenter (= 4.3.0)
@@ -227,7 +222,6 @@ DEPENDENCIES:
   - MJRefresh
   - MLeaksFinder
   - MonkeyKing
-  - Moya (from `https://github.com/Moya/Moya`, tag `12.0.0-beta.1`)
   - Nimble
   - NVActivityIndicatorView
   - ObjectMapper
@@ -388,9 +382,6 @@ EXTERNAL SOURCES:
   JSONRPCKit:
     :branch: master
     :git: https://github.com/phpmaple/JSONRPCKit
-  Moya:
-    :git: https://github.com/Moya/Moya
-    :tag: 12.0.0-beta.1
   SocketRocket:
     :branch: master
     :git: https://github.com/facebook/SocketRocket
@@ -408,9 +399,6 @@ CHECKOUT OPTIONS:
   JSONRPCKit:
     :commit: 389b9feaae3983e6f632e083fb75c62f7985accf
     :git: https://github.com/phpmaple/JSONRPCKit
-  Moya:
-    :git: https://github.com/Moya/Moya
-    :tag: 12.0.0-beta.1
   SocketRocket:
     :commit: 0a023409b138039d1ab5ac5431fe61c5f334e86b
     :git: https://github.com/facebook/SocketRocket
@@ -470,7 +458,6 @@ SPEC CHECKSUMS:
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
   MonkeyKing: a09f77048f3dd8ee94143dc70fc7b47a2362188e
-  Moya: 1b8d16b4dac4302c323ca95077a733836e73484a
   Nimble: 2839b01d1b31f6a6a7777a221f0d91cf52e8e27b
   NVActivityIndicatorView: 963f62bf9f993fcf23218e55958e5b1761b9504c
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
@@ -529,6 +516,6 @@ SPEC CHECKSUMS:
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 34f79abb60018f2e2a5168d6287d90473024ab81
 
-PODFILE CHECKSUM: 15df7b1836f916e30b5e222517acf5034534d423
+PODFILE CHECKSUM: aa627c705a75fc69fbbce22db241a90ab26c1fbc
 
 COCOAPODS: 1.5.3
