@@ -360,8 +360,6 @@
 "address_mark" = "Note";
 "address_add" = "Add";
 
-
-
 "transfer_account" = "Account";
 "transfer_account_name" = "Transfer Account";
 
@@ -370,7 +368,6 @@
 
 "account_exit" = "The account is already existed";
 "address_exit" = "The address is already existed";
-
 
 "account_title_add" = "Add Transfer Account";
 "address_title_add" = "Add Withdraw Address";
