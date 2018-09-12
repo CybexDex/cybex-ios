@@ -71,7 +71,6 @@ class AppCoordinator {
             
             return false
         }
-
     }
     
     func start() {

@@ -20,6 +20,9 @@ extension ETODetailView {
                 websiteView.setContentAttribute(contentLabelStr: model.project_website_en, attLabelArray: [data.adds_website__lang_en, data.adds_whitepaper__lang_en, data.adds_detail__lang_en])
                 introView.content = data.adds_advantage
             }
+            if data.adds_whitelist == "" && data.adds_whitelist__lang_en == "" {
+                self.getWhiteListView.isHidden = true
+            }
         }
         detailView.content = model.etoDetail
         headerView.adapterModelToETODetailHeaderView(model)
