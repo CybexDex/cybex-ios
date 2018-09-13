@@ -51,9 +51,6 @@ class CybexWebViewController: BaseWebViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if vc_type != .help {
-            webView.load(URLRequest.init(url: self.url!))
-        }
     }
     
     override func refreshViewController() {
@@ -76,7 +73,7 @@ class CybexWebViewController: BaseWebViewController {
             guard let `self` = self else { return }
             self.setURL()
         })
-        
+
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
             self.setURL()
