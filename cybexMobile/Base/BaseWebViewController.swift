@@ -14,14 +14,15 @@ class BaseWebViewController: BaseViewController {
     
     public var url: URL? {
         didSet {
-            if let fragment = url!.fragment {
+            guard let url = url else { return }
+            if let fragment = url.fragment {
                 let max = UInt32.max - 1
                 let random = Int.random(between: 1, and: Int(max))
-                let chUrl = URL(string: url!.absoluteString.replacingOccurrences(of: "#\(fragment)", with: "#\(random)"))!
+                let chUrl = URL(string: url.absoluteString.replacingOccurrences(of: "#\(fragment)", with: "#\(random)"))!
                 webView.load(URLRequest.init(url: chUrl))
             }
             else {
-                webView.load(URLRequest.init(url: url!))
+                webView.load(URLRequest.init(url: url))
             }
         }
     }
@@ -44,7 +45,10 @@ class BaseWebViewController: BaseViewController {
         webView.navigationDelegate = self
         view.addSubview(webView)
         webView.edgesToSuperview(insets: .zero, priority: .required, isActive: true, usingSafeArea: true)
-        webView.load(URLRequest.init(url: url!))
+        
+        if let url = url {
+            webView.load(URLRequest.init(url: url))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
