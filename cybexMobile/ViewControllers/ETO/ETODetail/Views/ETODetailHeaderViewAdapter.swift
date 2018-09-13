@@ -42,9 +42,10 @@ extension ETODetailHeaderView {
                     self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.end_en_light() : R.image.end_cn_light()
                 }
                 self.progressLabel.textColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
-                self.progressView.progress = 1
+                self.progressView.progress = model.progress.value
                 self.progressView.beginColor = UIColor.slate
                 self.progressView.endColor = UIColor.cloudyBlue
+                self.progressLabel.textColor = self.nameLabel.textColor
             case .pre:
                 if ThemeManager.currentThemeIndex == 0 {
                     self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.comming_en_dark() : R.image.comming_cn_dark()

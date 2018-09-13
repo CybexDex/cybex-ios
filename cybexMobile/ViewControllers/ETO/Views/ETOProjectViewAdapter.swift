@@ -37,8 +37,9 @@ extension ETOProjectView {
             case .finish:
                 self.progressView.beginColor = .slate
                 self.progressView.endColor = .cloudyBlue
-                self.progressView.progress = 1
+                self.progressView.progress = model.progress.value
                 self.stateLabel.textColor = self.nameLabel.textColor
+                self.progressLabel.textColor = self.nameLabel.textColor
             case .ok:
                 self.stateLabel.textColor = UIColor.pastelOrange
                 self.progressLabel.textColor = UIColor.pastelOrange
