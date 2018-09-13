@@ -16,8 +16,84 @@
 default_platform(:ios)
 
 platform :ios do
+  app_identifier=CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+
   desc "Description of what the lane does"
-  lane :custom_lane do
-    # add actions here: https://docs.fastlane.tools/actions
+  lane :fir do
+    xcode_select("/Applications/Xcode.app")
+    gym(
+      output_name: "cybex-fir",
+      scheme:"cybexMobile",
+      workspace:"cybexMobile.xcworkspace",
+      configuration:"Release",
+      export_method:"ad-hoc",
+      output_directory:"~/Documents/ipa",
+      export_xcargs: "-allowProvisioningUpdates",
+      export_options: {
+        provisioningProfiles: {
+          app_identifier => "iOS Team Ad Hoc Provisioning Profile: #{app_identifier}"
+        }
+      }
+    )
+    firim(firim_api_token:"92fc2819f9894e4890c9fd27d4c1d234")
+    slack(message: "Successfully distributed cybex to fir")
   end
+  
+  lane :pgy do    
+    gym(
+      output_name: "cybex-pgy",
+      scheme:"cybexMobile",
+      workspace:"cybexMobile.xcworkspace",
+      configuration:"Release",
+      export_method:"ad-hoc",
+      output_directory:"~/Documents/ipa",
+      export_xcargs: "-allowProvisioningUpdates",
+      export_options: {
+        provisioningProfiles: {
+          app_identifier => "match AdHoc #{app_identifier}"
+        }
+      }
+    )
+    pgyer(api_key: "a2c74d482ef9465360ef906105e22721", user_key: "b2cdd30d4b7eecc802ecfd097490805b")
+    slack(message: "Successfully distributed cybex to pgy")
+  end
+
+  lane :publish do
+    gym(
+      output_name: "cybex-appstore",
+      scheme:"cybexMobile",
+      workspace:"cybexMobile.xcworkspace",
+      configuration:"Release",
+      export_method:"app-store",
+      output_directory:"~/Documents/ipa",
+      export_xcargs: "-allowProvisioningUpdates",
+      export_options: {
+        provisioningProfiles: {
+          app_identifier => "match #{app_identifier}"
+        }
+      }
+    )
+    appstore
+    slack(message: "Successfully distributed cybex to appstore")
+  end
+  
+   lane :test do
+      gym(
+        output_name: "cybex-testflight",
+        scheme:"cybexMobile",
+        workspace:"cybexMobile.xcworkspace",
+        configuration:"Release",
+        export_method:"app-store",
+        output_directory:"~/Documents/ipa",
+        export_xcargs: "-allowProvisioningUpdates",
+        export_options: {
+          provisioningProfiles: {
+            app_identifier => "match #{app_identifier}"
+          }
+        }
+      )
+      upload_to_testflight
+      slack(message: "Successfully distributed cybex to testflight")
+    end
+
 end
