@@ -76,8 +76,6 @@ class ETODetailView: BaseView {
         switch style {
         case .normal:
             stateButton.titleColor = UIColor.white
-            stateButton.gradientStartColor = UIColor.clear
-            stateButton.gradientEndColor = UIColor.clear
             stateButton.gradientStartColor = UIColor.peach
             stateButton.gradientEndColor = UIColor.maincolor
             stateButton.alpha = 1
@@ -106,8 +104,6 @@ class ETODetailView: BaseView {
             stateButton.isUserInteractionEnabled = false
         case .disable:
             stateButton.titleColor = UIColor.white
-            stateButton.gradientStartColor = UIColor.clear
-            stateButton.gradientEndColor = UIColor.clear
             stateButton.gradientStartColor = UIColor.steel
             stateButton.gradientEndColor = UIColor.steel
             stateButton.alpha = 0.5

@@ -23,7 +23,7 @@ extension ETODetailHeaderView {
         
         model.detail_time.asObservable().subscribe(onNext: { [weak self](time) in
             guard let `self` = self else {return}
-            self.timeLabel.text = model.timeState + time
+            self.timeLabel.text = model.project_state.value?.description() ?? "" + time
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         model.current_percent.asObservable().subscribe(onNext: { [weak self](progress) in

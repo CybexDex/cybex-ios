@@ -225,20 +225,20 @@ class ETOProjectViewModel {
     var current_percent: BehaviorRelay<String> = BehaviorRelay(value: "")
     var progress: BehaviorRelay<Double> = BehaviorRelay(value: 0)
     var projectModel: ETOProjectModel?
-    var timeState: String {
-        if let data = self.projectModel, let state = data.status {
-            if state == .finish {
-                return R.string.localizable.eto_project_time_finish.key.localized()
-            }
-            else if state == .pre {
-                return R.string.localizable.eto_project_time_pre.key.localized()
-            }
-            else {
-                return R.string.localizable.eto_project_time_comming.key.localized()
-            }
-        }
-        return ""
-    }
+//    var timeState: String {
+//        if let data = self.projectModel, let state = data.status {
+//            if state == .finish {
+//                return R.string.localizable.eto_project_time_finish.key.localized()
+//            }
+//            else if state == .pre {
+//                return R.string.localizable.eto_project_time_pre.key.localized()
+//            }
+//            else {
+//                return R.string.localizable.eto_project_time_comming.key.localized()
+//            }
+//        }
+//        return ""
+//    }
     
     var time: BehaviorRelay<String> = BehaviorRelay(value: "")
     
