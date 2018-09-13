@@ -17,7 +17,6 @@ func ETOReducer(action:Action, state:ETOState?) -> ETOState {
         break
     case let action as FetchBannerModelAction:
         state.banners.accept(action.data)
-        
     case let action as SetSelectedProjectModelAction:
         state.selectedProjectModel.accept(action.data)
     case let action as SetSelectedBannerModelAction:

@@ -102,6 +102,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    self.contentView?.tableView.reloadData()
   }
   
   override func configureObserveState() {

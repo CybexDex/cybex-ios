@@ -23,7 +23,7 @@ extension ETODetailHeaderView {
         
         model.detail_time.asObservable().subscribe(onNext: { [weak self](time) in
             guard let `self` = self else {return}
-            self.timeLabel.text = model.timeState + time
+            self.timeLabel.text = model.project_state.value?.description() ?? "" + time
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         model.current_percent.asObservable().subscribe(onNext: { [weak self](progress) in
@@ -35,13 +35,24 @@ extension ETODetailHeaderView {
             guard let `self` = self, let project_state = state else { return }
             switch project_state {
             case .finish:
-                self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.enden() : R.image.endcn()
+                if ThemeManager.currentThemeIndex == 0 {
+                    self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.end_en_dark() : R.image.end_cn_dark()
+                }
+                else {
+                    self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.end_en_light() : R.image.end_cn_light()
+                }
                 self.progressLabel.textColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
-                self.progressView.progress = 1
+                self.progressView.progress = model.progress.value
                 self.progressView.beginColor = UIColor.slate
                 self.progressView.endColor = UIColor.cloudyBlue
+                self.progressLabel.textColor = self.nameLabel.textColor
             case .pre:
-                self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.willstarten() : R.image.willstartcn()
+                if ThemeManager.currentThemeIndex == 0 {
+                    self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.comming_en_dark() : R.image.comming_cn_dark()
+                }
+                else {
+                    self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.comming_en_light() : R.image.comming_cn_light()
+                }
                 self.progressLabel.textColor = UIColor.pastelOrange
             case .ok:
                 self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.ongoingen() : R.image.ongoingcn()

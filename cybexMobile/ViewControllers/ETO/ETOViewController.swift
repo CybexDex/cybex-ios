@@ -17,7 +17,7 @@ class ETOViewController: BaseViewController {
     
     var coordinator: (ETOCoordinatorProtocol & ETOStateManagerProtocol)?
     @IBOutlet weak var homeView: ETOHomeView!
-    var timerRepeater: Repeater?
+//    var timerRepeater: Repeater?
     var infosRepeater: Repeater?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,34 +35,33 @@ class ETOViewController: BaseViewController {
             main {
                 guard let `self` = self else { return }
                 self.coordinator?.refreshProjectDatas()
-            }
-        })
-    }
-    
-    func startTimeRepeatAction() {
-        self.timerRepeater = Repeater.every(.seconds(1), { [weak self](timer) in
-            main {
-                guard let `self` = self else { return }
                 self.coordinator?.refreshTime()
             }
         })
     }
     
-    
+//    func startTimeRepeatAction() {
+//        self.timerRepeater = Repeater.every(.seconds(1), { [weak self](timer) in
+//            main {
+//                guard let `self` = self else { return }
+//            }
+//        })
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fetchProjectData()
+        self.fetchBannder()
         self.startInfosRepeatAction()
-        self.startTimeRepeatAction()
+//        self.startTimeRepeatAction()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.infosRepeater?.pause()
         self.infosRepeater = nil
-        self.timerRepeater?.pause()
-        self.timerRepeater = nil
+//        self.timerRepeater?.pause()
+//        self.timerRepeater = nil
     }
     
     func setupUI() {

@@ -360,8 +360,6 @@
 "address_mark" = "Note";
 "address_add" = "Add";
 
-
-
 "transfer_account" = "Account";
 "transfer_account_name" = "Transfer Account";
 
@@ -370,7 +368,6 @@
 
 "account_exit" = "The account is already existed";
 "address_exit" = "The address is already existed";
-
 
 "account_title_add" = "Add Transfer Account";
 "address_title_add" = "Add Withdraw Address";
@@ -450,6 +447,8 @@
 "eto_token_releasing_time" = "Token Releasing Time：";
 "eto_currency" = "Currency：";
 "eto_exchange_ratio" = "Exchange Ratio：";
+"eto_total_supply" = "Total Token Supply：";
+
 
 "eto_project_online" = "Official Website：";
 "eto_project_white_Paper" = "Whitepaper：";
@@ -480,6 +479,6 @@
 "eto_invite_code_error" = "Please enter a valid invitation code";
 "eto_invite_code_title" = "Invitation code";
 
-"eto_time_less_minite" = "less one minite";
+"eto_time_less_minite" = "less than one minute";
 
 "eto_detail_user_agreement_error" = "Please check 《User Agreement》 first.";

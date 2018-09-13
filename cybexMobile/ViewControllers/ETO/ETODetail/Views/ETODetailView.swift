@@ -43,7 +43,8 @@ class ETODetailView: BaseView {
     
     func setupUI() {
         clearBgColor()
-        self.stateView.isHidden = true    
+        self.stateView.isHidden = true
+        ETOManager.shared.changeState(.unset)
         getWhiteListView.rightIcon.image = R.image.icwhitelist()
         getWhiteListView.name.textColor = UIColor.pastelOrange
     }
@@ -83,6 +84,8 @@ class ETODetailView: BaseView {
             stateButton.titleColor = UIColor.pastelOrange
             stateButton.btn_borderColor = UIColor.peach
             stateButton.btn_borderWidth = 1
+            stateButton.gradientStartColor = UIColor.clear
+            stateButton.gradientEndColor = UIColor.clear
             stateButton.bgColor = UIColor.clear
             stateButton.alpha = 1
             stateButton.isUserInteractionEnabled = false
@@ -92,6 +95,8 @@ class ETODetailView: BaseView {
             } else {
                 stateButton.titleColor = UIColor.darkTwo
             }
+            stateButton.gradientStartColor = UIColor.clear
+            stateButton.gradientEndColor = UIColor.clear
             stateButton.btn_borderColor = UIColor.steel50
             stateButton.btn_borderWidth = 1
             stateButton.bgColor = UIColor.clear

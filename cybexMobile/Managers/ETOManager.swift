@@ -109,7 +109,7 @@ class ETOManager {
         if state.contains([.login, .KYCPassed, .notReserved, .bookable]) && !state.contains(.finished) {
             return .normal
         }
-        else if state.contains([.login, .KYCPassed, .reserved, .bookable]) && !state.contains(.finished) {
+        else if state.contains([.login, .KYCPassed, .reserved]) && !state.contains(.finished) {
             return .checkedAndImmutable
         }
         

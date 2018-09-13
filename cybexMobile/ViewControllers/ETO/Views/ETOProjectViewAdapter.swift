@@ -32,11 +32,14 @@ extension ETOProjectView {
         
         model.project_state.asObservable().subscribe(onNext: { [weak self](projectState) in
             guard let `self` = self, let state = projectState  else { return }
+            self.timeState.text = projectState?.description() ?? ""
             switch state{
             case .finish:
                 self.progressView.beginColor = .slate
                 self.progressView.endColor = .cloudyBlue
-                self.progressView.progress = 1
+                self.progressView.progress = model.progress.value
+                self.stateLabel.textColor = self.nameLabel.textColor
+                self.progressLabel.textColor = self.nameLabel.textColor
             case .ok:
                 self.stateLabel.textColor = UIColor.pastelOrange
                 self.progressLabel.textColor = UIColor.pastelOrange
@@ -50,9 +53,7 @@ extension ETOProjectView {
             self.timeLabel.text = time
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
-        
         self.nameLabel.text = model.name
-        self.timeState.text = model.timeState
         if Localize.currentLanguage() == "en" {
             self.icon.kf.setImage(with: URL(string: model.icon_en))
             self.markLabel.text = model.key_words_en

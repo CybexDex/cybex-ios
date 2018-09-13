@@ -17,9 +17,11 @@ class ETOHomeView: BaseView {
         case ETOHomeViewDidClicked
         case ChangeNavigationBarEvent
     }
+    
     var tableViewHeaderViewHeight : CGFloat {
         return Device.version() == .iPhoneX ? 240 : 191
     }
+    
     static let section_height : CGFloat = 40
     @IBOutlet weak var tableView: UITableView!
     var pageView: ETOHomeBannerView!

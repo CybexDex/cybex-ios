@@ -210,7 +210,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     }
     
     func updateETOProjectDetailAction() {
-        guard  let model = self.state.data.value?.projectModel else { return }
+        guard let model = self.state.data.value?.projectModel else { return }
         
         if model.status! == .pre || model.status! == .ok {
             ETOMGService.request(target: ETOMGAPI.refreshProject(id: model.id), success: { json in
@@ -230,6 +230,9 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                 }
                 else if model.status! == .ok {
                     viewModel.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                }
+                else if model.status! == .finish {
+                    viewModel.detail_time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
                 }
             }
         }

@@ -11,6 +11,7 @@ import HandyJSON
 import DifferenceKit
 import RxSwift
 import RxCocoa
+import Localize_Swift
 
 struct ETOBannerModel:HandyJSON {
     var id:String = ""
@@ -147,6 +148,8 @@ class ETOProjectModel:HandyJSON {
     var adds_whitelist__lang_en: String = ""
     var adds_whitepaper: String = ""
     var adds_whitepaper__lang_en: String = ""
+    var adds_token_total: String = ""
+    var adds_token_total__lang_en: String = ""
 
     var status: ProjectState? // finish pre ok
     var name: String = ""
@@ -222,20 +225,20 @@ class ETOProjectViewModel {
     var current_percent: BehaviorRelay<String> = BehaviorRelay(value: "")
     var progress: BehaviorRelay<Double> = BehaviorRelay(value: 0)
     var projectModel: ETOProjectModel?
-    var timeState: String {
-        if let data = self.projectModel, let state = data.status {
-            if state == .finish {
-                return R.string.localizable.eto_project_time_finish.key.localized()
-            }
-            else if state == .pre {
-                return R.string.localizable.eto_project_time_pre.key.localized()
-            }
-            else {
-                return R.string.localizable.eto_project_time_comming.key.localized()
-            }
-        }
-        return ""
-    }
+//    var timeState: String {
+//        if let data = self.projectModel, let state = data.status {
+//            if state == .finish {
+//                return R.string.localizable.eto_project_time_finish.key.localized()
+//            }
+//            else if state == .pre {
+//                return R.string.localizable.eto_project_time_pre.key.localized()
+//            }
+//            else {
+//                return R.string.localizable.eto_project_time_comming.key.localized()
+//            }
+//        }
+//        return ""
+//    }
     
     var time: BehaviorRelay<String> = BehaviorRelay(value: "")
     
@@ -244,6 +247,17 @@ class ETOProjectViewModel {
         if let data = self.projectModel {
             result += R.string.localizable.eto_project_name.key.localized() + data.name + "\n"
             result += R.string.localizable.eto_token_name.key.localized() + data.token_name + "\n"
+//            var adds_token_total: String = ""
+//            var adds_token_total__lang_en: String = ""
+            if data.adds_token_total.count != 0 || data.adds_token_total__lang_en.count != 0 {
+                if Localize.currentLanguage() == "en" {
+                    result += R.string.localizable.eto_total_supply.key.localized() + data.adds_token_total__lang_en + "\n"
+                }
+                else {
+                    result += R.string.localizable.eto_total_supply.key.localized() + data.adds_token_total + "\n"
+                }
+            }
+            
             result += R.string.localizable.eto_start_time.key.localized() + data.start_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             result += R.string.localizable.eto_end_time.key.localized() + data.end_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             if data.lock_at != nil {
@@ -253,7 +267,7 @@ class ETOProjectViewModel {
                 result += R.string.localizable.eto_token_releasing_time.key.localized() + R.string.localizable.eto_project_immediate.key.localized() + "\n"
             }
             else {
-                  result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offer_at!.iso8601 + "\n"
+                  result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offer_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             }
             result += R.string.localizable.eto_currency.key.localized() + data.base_token_name.filterJade + "\n"
 
@@ -300,7 +314,6 @@ class ETOProjectViewModel {
         if let state = projectModel.status {
             if state == .finish {
                 if projectModel.t_total_time == "" {
-                    
                     self.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
                     self.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
                 }
@@ -319,5 +332,10 @@ class ETOProjectViewModel {
             }
         }
     }
+}
+
+struct ETOHidden: HandyJSON {
+    var isETOEnabled: Bool = false
+    var isShareEnabled: Bool = false
 }
 
