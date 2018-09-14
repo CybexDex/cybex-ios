@@ -38,6 +38,10 @@ class ETORecordListViewController: BaseViewController {
         let nibString = R.nib.etoRecordCell.identifier
         recordTableView.register(UINib.init(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
         recordTableView.separatorStyle = .none
+        recordTableView.estimatedRowHeight = 88
+        recordTableView.estimatedSectionFooterHeight = 0
+        recordTableView.estimatedSectionHeaderHeight = 0
+        recordTableView.rowHeight = 88
         
         self.addPullToRefresh(recordTableView) {[weak self] (finish) in
             guard let `self` = self else { return }
@@ -74,6 +78,7 @@ class ETORecordListViewController: BaseViewController {
                 }
                 
             case .refresh(let type):
+                self.recordTableView.footer?.resetNoMoreData()
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
                 self.coordinator?.fetchETORecord(1, reason: type.mapReason())
                 
@@ -112,7 +117,7 @@ class ETORecordListViewController: BaseViewController {
         self.coordinator!.state.changeSet.asObservable().skip(1).subscribe(onNext: {[weak self] (changeset) in
             guard let `self` = self else { return }
             
-            self.recordTableView.reload(using: changeset, with: .none) {[weak self] data in
+            self.recordTableView.reload(using: changeset, with: UITableViewRowAnimation.fade) {[weak self] data in
                 guard let `self` = self else { return }
 
                 self.coordinator?.state.data.accept(data)
