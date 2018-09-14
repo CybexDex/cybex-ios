@@ -75,7 +75,6 @@ class CybexTextView: UIView {
         }
     }
     
-    
     func setup() {
         self.cancle.setTitleColor(ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo , for: .normal)
     }

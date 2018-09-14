@@ -179,7 +179,7 @@ extension UIViewController : ShowManagerDelegate {
             ShowToastManager.shared.hide(0)
         }
         SwifterSwift.delay(milliseconds: 100) {
-            ShowToastManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big,middleType:middleType)
+            ShowToastManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big, middleType: middleType)
             ShowToastManager.shared.delegate = self
             ShowToastManager.shared.showAnimationInView(self.view)
         }

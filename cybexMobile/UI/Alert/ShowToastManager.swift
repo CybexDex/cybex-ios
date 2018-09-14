@@ -234,7 +234,6 @@ class ShowToastManager {
         }
     }
     
-    
     func setUp(title:String,contentView:(UIView&Views),animationType:ShowAnimationType,middleType:CybexTextView.textView_type = .normal){
         self.animationShow  = animationType
         self.showType       = ShowManagerType.alert_image
@@ -323,13 +322,13 @@ class ShowToastManager {
             self.timer_time = self.timer_time - 1
         }
         
-        guard let textview = self.showView as? CybexTextView  else { return }
+        guard let textview = self.showView as? CybexTextView, textview.view_type != .time else { return }
+        
         if self.timer_time <= 0 {
             textview.ensure.setTitle(R.string.localizable.alert_ensure.key.localized(), for: .normal)
             textview.ensure.isEnabled = true
         }
-        else {
-            
+        else {            
             textview.ensure.setTitle(self.timer_time.string(digits: 0, roundingMode: .down) + R.string.localizable.transfer_unit_second.key.localized(), for: .normal)
         }
     }

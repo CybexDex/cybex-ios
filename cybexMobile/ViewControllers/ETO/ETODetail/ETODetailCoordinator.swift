@@ -212,23 +212,21 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     func updateETOProjectDetailAction() {
         guard let model = self.state.data.value, let projectModel = model.projectModel else { return }
         
-        if projectModel.status! == .pre || projectModel.status! == .ok {
-            ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { json in
-                if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
-                    projectModel.finish_at = refreshModel.finish_at
-                    projectModel.status = refreshModel.status
-                    model.current_percent.accept((refreshModel.current_percent * 100).string(digits:2, roundingMode: .down) + "%")
-                    model.progress.accept(refreshModel.current_percent)
-                    model.status.accept(refreshModel.status!.description())
-                    model.project_state.accept(refreshModel.status)
-                }
-                self.switchPageState(PageState.normal(reason: .initialRefresh))
-            }, error: { (error) in
-//                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
-            }) { error in
-//                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
+//        if projectModel.status! == .pre || projectModel.status! == .ok {
+        ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { json in
+            if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
+                projectModel.finish_at = refreshModel.finish_at
+                projectModel.status = refreshModel.status
+                model.current_percent.accept((refreshModel.current_percent * 100).string(digits:2, roundingMode: .down) + "%")
+                model.progress.accept(refreshModel.current_percent)
+                model.status.accept(refreshModel.status!.description())
+                model.project_state.accept(refreshModel.status)
             }
+            self.switchPageState(PageState.normal(reason: .initialRefresh))
+        }, error: { (error) in
+        }) { error in
         }
+//        }
         
         if projectModel.status! == .pre {
             model.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
@@ -244,6 +242,10 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                 else {
                     model.detail_time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
                 }
+            }
+            else {
+                model.detail_time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
+
             }
         }
     }
