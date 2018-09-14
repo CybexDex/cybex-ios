@@ -112,7 +112,7 @@ struct ETOTradeHistoryModel: HandyJSON, Differentiable, Equatable, Hashable {
     var created_at:Date!
     var token_count:String = ""
     var token:String = ""
-        
+    
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
             self.created_at <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd HH:mm:ss")
@@ -150,7 +150,7 @@ class ETOProjectModel:HandyJSON {
     var adds_whitepaper__lang_en: String = ""
     var adds_token_total: String = ""
     var adds_token_total__lang_en: String = ""
-
+    
     var status: ProjectState? // finish pre ok
     var name: String = ""
     var receive_address: String = ""
@@ -247,8 +247,8 @@ class ETOProjectViewModel {
         if let data = self.projectModel {
             result += R.string.localizable.eto_project_name.key.localized() + data.name + "\n"
             result += R.string.localizable.eto_token_name.key.localized() + data.token_name + "\n"
-//            var adds_token_total: String = ""
-//            var adds_token_total__lang_en: String = ""
+            //            var adds_token_total: String = ""
+            //            var adds_token_total__lang_en: String = ""
             if data.adds_token_total.count != 0 || data.adds_token_total__lang_en.count != 0 {
                 if Localize.currentLanguage() == "en" {
                     result += R.string.localizable.eto_total_supply.key.localized() + data.adds_token_total__lang_en + "\n"
@@ -267,15 +267,15 @@ class ETOProjectViewModel {
                 result += R.string.localizable.eto_token_releasing_time.key.localized() + R.string.localizable.eto_project_immediate.key.localized() + "\n"
             }
             else {
-                  result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offer_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
+                result += R.string.localizable.eto_token_releasing_time.key.localized() + data.offer_at!.string(withFormat: "yyyy/MM/dd HH:mm:ss") + "\n"
             }
             result += R.string.localizable.eto_currency.key.localized() + data.base_token_name.filterJade + "\n"
-
+            
             result += R.string.localizable.eto_exchange_ratio.key.localized() + "1" + data.base_token_name + "=" + "\(data.rate)" + data.token_name
         }
         return result
     }
-
+    
     var project_website: String {
         var result: String = ""
         if let data = self.projectModel {
@@ -314,8 +314,10 @@ class ETOProjectViewModel {
         if let state = projectModel.status {
             if state == .finish {
                 if projectModel.t_total_time == "" {
-                    self.detail_time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
-                    self.time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
+                    if projectModel.finish_at != nil {
+                        self.detail_time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
+                        self.time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
+                    }
                 }
                 else {
                     self.detail_time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))

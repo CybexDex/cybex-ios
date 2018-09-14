@@ -77,8 +77,8 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     
     func fetchData() {
         Broadcaster.notify(ETOStateManagerProtocol.self) { (coor) in
-            if let model = coor.state.selectedProjectModel.value {
-                self.store.dispatch(SetProjectDetailAction(data: model))
+            if let model = coor.state.selectedProjectModel.value, let projectModel = model.projectModel {
+                self.store.dispatch(SetProjectDetailAction(data: projectModel))
             }
             else {
                 if let bannerModel = coor.state.selectedBannerModel.value, let bannerId = bannerModel.id.int {
@@ -107,9 +107,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                 }
                 self.switchPageState(PageState.normal(reason: .initialRefresh))
             }, error: { (error) in
-//                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
             }) { (error) in
-//                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
             }
         }
         else {
@@ -210,9 +208,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     }
     
     func updateETOProjectDetailAction() {
-        guard let model = self.state.data.value, let projectModel = model.projectModel else { return }
-        
-//        if projectModel.status! == .pre || projectModel.status! == .ok {
+        guard let model = self.state.data.value, let projectModel = model.projectModel else { return }        
         ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { json in
             if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
                 projectModel.finish_at = refreshModel.finish_at
@@ -221,6 +217,23 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                 model.progress.accept(refreshModel.current_percent)
                 model.status.accept(refreshModel.status!.description())
                 model.project_state.accept(refreshModel.status)
+                
+                if refreshModel.status! == .pre {
+                    model.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                }
+                else if refreshModel.status! == .ok {
+                    model.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                }
+                else if refreshModel.status! == .finish {
+                    if refreshModel.finish_at != nil {
+                        if projectModel.t_total_time == "" {
+                            model.detail_time.accept(timeHandle(refreshModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
+                        }
+                        else {
+                            model.detail_time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
+                        }
+                    }
+                }
             }
             self.switchPageState(PageState.normal(reason: .initialRefresh))
         }, error: { (error) in
@@ -228,25 +241,21 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
         }
 //        }
         
-        if projectModel.status! == .pre {
-            model.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-        }
-        else if projectModel.status! == .ok {
-            model.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-        }
-        else if projectModel.status! == .finish {
-            if projectModel.finish_at != nil {
-                if projectModel.t_total_time == "" {
-                    model.detail_time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
-                }
-                else {
-                    model.detail_time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
-                }
-            }
-            else {
-                model.detail_time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
-
-            }
-        }
+//        if projectModel.status! == .pre {
+//            model.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+//        }
+//        else if projectModel.status! == .ok {
+//            model.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+//        }
+//        else if projectModel.status! == .finish {
+//            if projectModel.finish_at != nil {
+//                if projectModel.t_total_time == "" {
+//                    model.detail_time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
+//                }
+//                else {
+//                    model.detail_time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
+//                }
+//            }
+//        }
     }
 }

@@ -322,7 +322,7 @@ class ShowToastManager {
             self.timer_time = self.timer_time - 1
         }
         
-        guard let textview = self.showView as? CybexTextView, textview.view_type != .time else { return }
+        guard let textview = self.showView as? CybexTextView, textview.view_type == .time else { return }
         
         if self.timer_time <= 0 {
             textview.ensure.setTitle(R.string.localizable.alert_ensure.key.localized(), for: .normal)

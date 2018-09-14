@@ -23,7 +23,7 @@ protocol ETOStateManagerProtocol {
     
     func fetchBannersData()
     
-    func setSelectedProjectData(_ model: ETOProjectModel)
+    func setSelectedProjectData(_ model: ETOProjectViewModel)
     
     func setSelectedBannerData(_ model: ETOBannerModel)
     
@@ -66,6 +66,7 @@ extension ETOCoordinator: ETOCoordinatorProtocol {
 }
 
 extension ETOCoordinator: ETOStateManagerProtocol {
+    
     func switchPageState(_ state:PageState) {
         self.store.dispatch(PageStateAction(state: state))
     }
@@ -98,7 +99,7 @@ extension ETOCoordinator: ETOStateManagerProtocol {
         }
     }
     
-    func setSelectedProjectData(_ model: ETOProjectModel) {
+    func setSelectedProjectData(_ model: ETOProjectViewModel) {
         self.store.dispatch(SetSelectedProjectModelAction(data: model))
         self.openProjectItem()
     }
@@ -109,7 +110,7 @@ extension ETOCoordinator: ETOStateManagerProtocol {
             for projectModel in projectModels {
                 if let data = projectModel.projectModel {
                     if data.project == model.id {
-                        self.setSelectedProjectData(data)
+                        self.setSelectedProjectData(projectModel)
                         return
                     }
                 }
@@ -130,6 +131,23 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                             viewModel.progress.accept(refreshModel.current_percent)
                             viewModel.status.accept(refreshModel.status!.description())
                             viewModel.project_state.accept(refreshModel.status)
+                            
+                            if refreshModel.status! == .pre {
+                                viewModel.time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                            }
+                            else if refreshModel.status! == .ok {
+                                viewModel.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                            }
+                            else if refreshModel.status! == .finish {
+                                if refreshModel.finish_at != nil {
+                                    if projectModel.t_total_time == "" {
+                                        viewModel.time.accept(timeHandle(refreshModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
+                                    }
+                                    else {
+                                        viewModel.time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
+                                    }
+                                }
+                            }
                         }
                     }, error: { (error) in
                     }) { (error) in
@@ -140,28 +158,27 @@ extension ETOCoordinator: ETOStateManagerProtocol {
     }
     
     func refreshTime() {
-        if let projectModels = self.state.data.value {
-            for viewModel in projectModels {
-                if let projectModel = viewModel.projectModel {
-                    if projectModel.status! == .pre {
-                        viewModel.time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                    }
-                    else if projectModel.status! == .ok {
-                        viewModel.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                    }
-                    else if projectModel.status! == .finish {
-                        
-                        if projectModel.finish_at != nil {
-                            if projectModel.t_total_time == "" {
-                                viewModel.time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
-                            }
-                            else {
-                                viewModel.time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        if let projectModels = self.state.data.value {
+//            for viewModel in projectModels {
+//                if let projectModel = viewModel.projectModel {
+//                    if projectModel.status! == .pre {
+//                        viewModel.time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+//                    }
+//                    else if projectModel.status! == .ok {
+//                        viewModel.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+//                    }
+//                    else if projectModel.status! == .finish {
+//                        if projectModel.finish_at != nil {
+//                            if projectModel.t_total_time == "" {
+//                                viewModel.time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
+//                            }
+//                            else {
+//                                viewModel.time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 }

@@ -56,9 +56,22 @@ open class GemmaDateFormatTransform: DateFormatterTransform {
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         formatter.dateFormat = formatString
         
+
         super.init(dateFormatter: formatter)
     }
     
+    override open func transformFromJSON(_ value: Any?) -> Date? {
+        if let dateString = value as? String, let date = dateFormatter.date(from: dateString) {
+            return date
+        }
+        else {
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSSSS"
+            if let dateString = value as? String {
+                return dateFormatter.date(from: dateString)
+            }
+            return nil
+        }
+    }
 }
 
 

@@ -216,7 +216,7 @@ extension UIViewController : ShowManagerDelegate {
             subView.data = attributes
             setup?(subView.labels)
             
-            ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .small_big)
+            ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .small_big, middleType: .normal)
             ShowToastManager.shared.showAnimationInView(self.view)
             ShowToastManager.shared.delegate = self
         }
