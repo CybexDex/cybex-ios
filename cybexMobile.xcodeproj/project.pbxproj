@@ -622,6 +622,7 @@
 		E54849D562EC4C8B42B70B962A97269E /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649950D64DFE386B6F9AEFB688AAD486 /* R.generated.swift */; };
 		E549F16D59025C0BE00C28BFA24C9E0D /* TradeHistoryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C7C0B8B265DA4E893E6DAA7A991A07 /* TradeHistoryActions.swift */; };
 		E593AB226F596677B1664A82995509CA /* RechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E4F362B4EECA84513D897A70155B42 /* RechargeViewController.swift */; };
+		E5CD3A13DC3F979C7B7186F3 /* Pods_cybexMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A208A846E8909F779DA5EF54B68891D /* Pods_cybexMobile.framework */; };
 		E67B496E838B6A7A22AF4F05AED93441 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CC22AA9CB81600F41DDDED43729F72 /* BaseViewController.swift */; };
 		E7F391C513AB0D96277BECAC9BE9672E /* BusinessTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 935A7F7272FAB98A67C7B9D1190CFAD0 /* BusinessTitleView.xib */; };
 		EC446CED4809CD57D338FB866A5AE631 /* YourPorfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49A70BB200F99079C0A8551AB6380C /* YourPorfolioView.swift */; };
@@ -12609,6 +12610,7 @@
 				8899C4D33A4F31180D755A486B4A6B6C /* libfc.a in Frameworks */,
 				ECF5D8036B47223BDDD5184927710C20 /* libssl.a in Frameworks */,
 				642738CE26AA31C2FAA06F203B5D5A57 /* secp256k1.a in Frameworks */,
+				E5CD3A13DC3F979C7B7186F3 /* Pods_cybexMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -34639,7 +34641,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EE7A1A7462092B8F170A7056A093228E /* Pods-cybexMobile.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -34735,7 +34736,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 730115CA9351045A5CEE4B396B055387 /* Pods-cybexMobile.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Debug";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
