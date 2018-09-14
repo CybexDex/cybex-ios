@@ -22,6 +22,7 @@ platform :ios do
   lane :fir do
     xcode_select("/Applications/Xcode.app")
     gym(
+      xcargs: "-UseNewBuildSystem=YES",
       output_name: "cybex-fir",
       scheme:"cybexMobile",
       workspace:"cybexMobile.xcworkspace",
@@ -31,7 +32,7 @@ platform :ios do
       export_xcargs: "-allowProvisioningUpdates",
       export_options: {
         provisioningProfiles: {
-          app_identifier => "iOS Team Ad Hoc Provisioning Profile: #{app_identifier}"
+          app_identifier => "AdHoc com.nbltrustdev.cybex.fir"
         }
       }
     )
