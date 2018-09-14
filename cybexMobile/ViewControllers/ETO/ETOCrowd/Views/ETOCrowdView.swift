@@ -40,7 +40,7 @@ class ETOCrowdView: BaseView {
     
         self.titleTextView.textField.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
         self.titleTextView.gapView.isHidden = true
-        self.titleTextView.titleLabel.locali = R.string.localizable.transfer_quantity.key
+        self.titleTextView.titleLabel.locali = R.string.localizable.eto_quantity.key
         self.actionButton.locali = R.string.localizable.eto_join.key
         self.actionButton.bgColor = UIColor.steel
 //        self.actionButton.isEnabled = false

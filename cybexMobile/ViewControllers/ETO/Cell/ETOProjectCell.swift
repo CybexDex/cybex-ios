@@ -24,6 +24,7 @@ class ETOProjectCell: BaseTableViewCell {
     }
     
     override func prepareForReuse() {
-        disposeBag = DisposeBag()
+        super.prepareForReuse()
+        projectView.disposeBag = DisposeBag()
     }
 }

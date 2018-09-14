@@ -60,9 +60,10 @@ extension ETORecordListCoordinator: ETORecordListStateManagerProtocol {
             else if data.arrayValue.count < 20 {
                 self.switchPageState(.noMore)
             }
+            else {
+                self.switchPageState(.normal(reason: reason))
+            }
             
-            self.switchPageState(.normal(reason: reason))
-
             let add = reason == .manualLoadMore
             
             self.store.dispatch(ETORecordListFetchedAction(data: data, add: add))

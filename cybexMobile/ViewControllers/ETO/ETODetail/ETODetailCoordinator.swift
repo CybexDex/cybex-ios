@@ -210,12 +210,17 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     }
     
     func updateETOProjectDetailAction() {
-        guard let model = self.state.data.value?.projectModel else { return }
+        guard let model = self.state.data.value, let projectModel = model.projectModel else { return }
         
-        if model.status! == .pre || model.status! == .ok {
-            ETOMGService.request(target: ETOMGAPI.refreshProject(id: model.id), success: { json in
+        if projectModel.status! == .pre || projectModel.status! == .ok {
+            ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { json in
                 if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
-                    self.store.dispatch(RefrehProjectModelAction(data: refreshModel))
+                    projectModel.finish_at = refreshModel.finish_at
+                    projectModel.status = refreshModel.status
+                    model.current_percent.accept((refreshModel.current_percent * 100).string(digits:2, roundingMode: .down) + "%")
+                    model.progress.accept(refreshModel.current_percent)
+                    model.status.accept(refreshModel.status!.description())
+                    model.project_state.accept(refreshModel.status)
                 }
                 self.switchPageState(PageState.normal(reason: .initialRefresh))
             }, error: { (error) in
@@ -223,17 +228,17 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             }) { error in
 //                self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
             }
-            
-            if let viewModel = self.state.data.value, let projectModel = viewModel.projectModel {
-                if model.status! == .pre {
-                    viewModel.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                }
-                else if model.status! == .ok {
-                    viewModel.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                }
-                else if model.status! == .finish {
-                    viewModel.detail_time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
-                }
+        }
+        
+        if projectModel.status! == .pre {
+            model.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+        }
+        else if projectModel.status! == .ok {
+            model.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+        }
+        else if projectModel.status! == .finish {
+            if projectModel.finish_at != nil {
+                model.detail_time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970  - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
             }
         }
     }

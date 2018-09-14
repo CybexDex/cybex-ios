@@ -12,6 +12,7 @@ import SwiftNotificationCenter
 
 protocol ETOCrowdCoordinatorProtocol {
     func showConfirm(_ transferAmount:Double)
+    func reOpenCrowd()
 }
 
 protocol ETOCrowdStateManagerProtocol {
@@ -56,6 +57,13 @@ extension ETOCrowdCoordinator: ETOCrowdCoordinatorProtocol {
                 //                label.content.lineBreakMode = .byTruncatingMiddle
                 //            }
             })
+    }
+    
+    func reOpenCrowd() {
+        if let vc = R.storyboard.etO.etoCrowdViewController() {
+            vc.coordinator = ETOCrowdCoordinator(rootVC: self.rootVC)
+            self.rootVC.viewControllers[self.rootVC.viewControllers.count - 1] = vc
+        }
     }
 }
 

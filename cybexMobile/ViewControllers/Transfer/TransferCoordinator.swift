@@ -186,7 +186,6 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
     }
     
     func reopenAction() {
-        
         let transferVC = R.storyboard.recode.transferViewController()!
         let coordinator = TransferCoordinator(rootVC: self.rootVC)
         transferVC.coordinator = coordinator

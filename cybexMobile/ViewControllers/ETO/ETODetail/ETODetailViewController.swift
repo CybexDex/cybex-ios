@@ -158,4 +158,8 @@ extension ETODetailViewController {
     @objc func showToastError(_ sender: [String:Any]) {
         self.showToastBox(false, message: R.string.localizable.eto_detail_user_agreement_error.key.localized())
     }
+    
+    @objc func showAgreement(_ sender: [String:Any]) {
+        self.coordinator?.openWebWithUrl("", type: CybexWebViewController.web_type.agreement)
+    }
 }

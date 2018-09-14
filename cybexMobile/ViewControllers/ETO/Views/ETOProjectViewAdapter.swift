@@ -32,7 +32,7 @@ extension ETOProjectView {
         
         model.project_state.asObservable().subscribe(onNext: { [weak self](projectState) in
             guard let `self` = self, let state = projectState  else { return }
-            self.timeState.text = projectState?.description() ?? ""
+            self.timeState.text = model.timeState
             switch state{
             case .finish:
                 self.progressView.beginColor = .slate

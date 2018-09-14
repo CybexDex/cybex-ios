@@ -32,6 +32,7 @@ class ETODetailView: BaseView {
         case icoapePage
         case unlockPage
         case showToastError
+        case showAgreement
     }
         
     override func setup() {
@@ -141,6 +142,13 @@ class ETODetailView: BaseView {
     }
     
     func setupSubViewEvent() {
+        
+        stateLabel.rx.tapGesture().when(UIGestureRecognizerState.recognized).asObservable().subscribe(onNext: { [weak self](tap) in
+            guard let `self` = self else { return }
+            self.sendEventWith(Event.showAgreement.rawValue, userinfo: [:])
+            
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
         stateButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] touch in
             guard let `self` = self else { return }
             guard let action =  self.action else { return }

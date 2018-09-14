@@ -10,12 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import Repeat
 
 class ETOCrowdViewController: BaseViewController {
 
 	var coordinator: (ETOCrowdCoordinatorProtocol & ETOCrowdStateManagerProtocol)?
 
     @IBOutlet var contentView: ETOCrowdView!
+    var timerRepeater: Repeater?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,22 @@ class ETOCrowdViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.startTimeRepeatAction()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.timerRepeater?.pause()
+        self.timerRepeater = nil
+    }
+    
+    func startTimeRepeatAction() {
+        self.timerRepeater = Repeater.every(.seconds(3), { [weak self](timer) in
+            main {
+                guard let `self` = self else { return }
+                self.coordinator?.fetchUserRecord()
+            }
+        })
     }
     
     override func refreshViewController() {
@@ -137,7 +155,7 @@ extension ETOCrowdViewController {
     
     override func ensureWaitingAction(_ sender: CybexWaitingView) {
         ShowToastManager.shared.hide(0)
-        self.navigationController?.popViewController()
+        self.coordinator?.reOpenCrowd()
     }
     
     override func passwordDetecting() {
