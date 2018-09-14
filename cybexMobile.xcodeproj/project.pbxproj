@@ -107,7 +107,6 @@
 		29860A52A2F9E6057FEC80C30DB2C08C /* typeinfo.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = 0846DF32BCC3D7E11C7031C8EDC62EBD /* typeinfo.SUNWCCh */; };
 		29C911F371D5F143FB814E54626700D5 /* RechargeSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F999943C67E4ED6E626A8BA802C612 /* RechargeSegment.swift */; };
 		2BE29FBC5EBC24621C616DCA7C58F109 /* FAQCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6517201700BBB3CC3C3F12A7F3C9D /* FAQCoordinator.swift */; };
-		2BF75EA384934AE269618BFA4D315DA3 /* cmath in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5CC90CB20E424307D263480BB807D /* cmath */; };
 		2E3DB3499E75C0D06068C979CD788B00 /* TradeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B134B85F2EADB461B1D5BB2F4C52C1A7 /* TradeReducers.swift */; };
 		305DB17562E3D02F04E0122C1C4674A4 /* AccountAssetOperationsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C7F5E00C093647E89239BDBF84218 /* AccountAssetOperationsItemView.swift */; };
 		31C896C3EDB9257E2EBC0DAFC5097A7B /* SettingDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00FB3F4329945CA3897EC4D9DB48C26 /* SettingDetailActions.swift */; };
@@ -347,10 +346,6 @@
 		72EC6A5920F4612200CEAFF6 /* RechargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A5720F4612100CEAFF6 /* RechargeView.swift */; };
 		72EC6A5A20F4612200CEAFF6 /* RechargeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5820F4612200CEAFF6 /* RechargeView.xib */; };
 		730229A1212E52B50073D5CE /* ETOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730229A0212E52B50073D5CE /* ETOManager.swift */; };
-		7307A917212518DC00BD6444 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7307A8F9212518DB00BD6444 /* .gitignore */; };
-		7307A918212518DC00BD6444 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 7307A8FA212518DB00BD6444 /* .travis.yml */; };
-		7307A919212518DC00BD6444 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 7307A8FC212518DB00BD6444 /* .gitkeep */; };
-		7307A91A212518DC00BD6444 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 7307A8FE212518DB00BD6444 /* .gitkeep */; };
 		7307A91B212518DC00BD6444 /* LGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A8FF212518DB00BD6444 /* LGButton.swift */; };
 		7307A91C212518DC00BD6444 /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A901212518DB00BD6444 /* FontAwesome.swift */; };
 		7307A91D212518DC00BD6444 /* FontLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A902212518DB00BD6444 /* FontLoader.swift */; };
@@ -363,7 +358,6 @@
 		7307A924212518DC00BD6444 /* SwiftIconFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A909212518DB00BD6444 /* SwiftIconFont.swift */; };
 		7307A925212518DC00BD6444 /* SwiftIconLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A90A212518DB00BD6444 /* SwiftIconLabel.swift */; };
 		7307A926212518DC00BD6444 /* ThemifyIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A90B212518DB00BD6444 /* ThemifyIcon.swift */; };
-		7307A927212518DC00BD6444 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7307A90C212518DB00BD6444 /* Info.plist */; };
 		7307A928212518DC00BD6444 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7307A90F212518DB00BD6444 /* FontAwesome.ttf */; };
 		7307A929212518DC00BD6444 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7307A910212518DB00BD6444 /* Ionicons.ttf */; };
 		7307A92A212518DC00BD6444 /* LGButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7307A911212518DB00BD6444 /* LGButton.xib */; };
@@ -696,13 +690,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6597A0AC6C29D30281EBD879E45F3BAF;
 			remoteInfo = cybexMobile;
-		};
-		73F1DE3C21466C340065BD72 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 737F8DA3214660DC00DD522A /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = FB7F9ABD44B0B4FC9F11D1B28220A2D0;
-			remoteInfo = Repeat;
 		};
 		73F1DEAF214762C20065BD72 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -5843,7 +5830,6 @@
 		6FB6F2218697DE476E08CB612E843FB0 /* duration_units.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = duration_units.hpp; sourceTree = "<group>"; };
 		6FBD2B403B18F7483B986E00C91085A9 /* variadic_arg_type.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = variadic_arg_type.hpp; sourceTree = "<group>"; };
 		6FBE2DDBBC338BFBA2AA7C63E51C9410 /* expression_types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = expression_types.hpp; sourceTree = "<group>"; };
-		6FC5CC90CB20E424307D263480BB807D /* cmath */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cmath; sourceTree = "<group>"; };
 		6FCE7A274F4066AE3D66BDA1846585F7 /* rtree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rtree.hpp; sourceTree = "<group>"; };
 		6FDA60E740D7A7D0F319EA79E870D515 /* to_tuple.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = to_tuple.hpp; sourceTree = "<group>"; };
 		6FDB07FF12FF5AA8F76F3EA4B64E1A84 /* bind_mf2_cc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bind_mf2_cc.hpp; sourceTree = "<group>"; };
@@ -6060,10 +6046,6 @@
 		730350CD33C88F71FBDF3A2E2D8B5F33 /* dcomp_mem_fun.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dcomp_mem_fun.hpp; sourceTree = "<group>"; };
 		73042F6078CCA28C5A23E3359FC63606 /* duplicates_iterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = duplicates_iterator.hpp; sourceTree = "<group>"; };
 		7304CD9CD63684D97B23E3AC9C2F17A0 /* formatting.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = formatting.hpp; sourceTree = "<group>"; };
-		7307A8F9212518DB00BD6444 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		7307A8FA212518DB00BD6444 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
-		7307A8FC212518DB00BD6444 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		7307A8FE212518DB00BD6444 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		7307A8FF212518DB00BD6444 /* LGButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGButton.swift; sourceTree = "<group>"; };
 		7307A901212518DB00BD6444 /* FontAwesome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontAwesome.swift; sourceTree = "<group>"; };
 		7307A902212518DB00BD6444 /* FontLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontLoader.swift; sourceTree = "<group>"; };
@@ -6076,7 +6058,6 @@
 		7307A909212518DB00BD6444 /* SwiftIconFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftIconFont.swift; sourceTree = "<group>"; };
 		7307A90A212518DB00BD6444 /* SwiftIconLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftIconLabel.swift; sourceTree = "<group>"; };
 		7307A90B212518DB00BD6444 /* ThemifyIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemifyIcon.swift; sourceTree = "<group>"; };
-		7307A90C212518DB00BD6444 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7307A90D212518DB00BD6444 /* LGButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGButton.h; sourceTree = "<group>"; };
 		7307A90F212518DB00BD6444 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		7307A910212518DB00BD6444 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
@@ -15323,7 +15304,6 @@
 				25231A512AF2D0A49DB711108F215891 /* cfloat */,
 				908ABE250D6A96BE48D388EA119A95C6 /* climits */,
 				2AB365BF943BAA72AD9CCD63CE2817E9 /* clocale */,
-				6FC5CC90CB20E424307D263480BB807D /* cmath */,
 				042066D698DBCAD2FEC0AEADFDBEE31B /* csetjmp */,
 				E8D56EA735622C19F802D38A2DF9F8C5 /* csignal */,
 				A84421C17A899ED974B2D83D709B3514 /* cstdarg */,
@@ -22391,29 +22371,16 @@
 		7307A8F8212518DB00BD6444 /* LGButton */ = {
 			isa = PBXGroup;
 			children = (
-				7307A8F9212518DB00BD6444 /* .gitignore */,
-				7307A8FA212518DB00BD6444 /* .travis.yml */,
-				7307A8FB212518DB00BD6444 /* Assets */,
 				7307A8FD212518DB00BD6444 /* Classes */,
-				7307A90C212518DB00BD6444 /* Info.plist */,
 				7307A90D212518DB00BD6444 /* LGButton.h */,
 				7307A90E212518DB00BD6444 /* Resources */,
 			);
 			path = LGButton;
 			sourceTree = "<group>";
 		};
-		7307A8FB212518DB00BD6444 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				7307A8FC212518DB00BD6444 /* .gitkeep */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
 		7307A8FD212518DB00BD6444 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				7307A8FE212518DB00BD6444 /* .gitkeep */,
 				7307A8FF212518DB00BD6444 /* LGButton.swift */,
 				7307A900212518DB00BD6444 /* SwiftIconFont */,
 			);
@@ -22571,7 +22538,6 @@
 			children = (
 				737F8DC5214660DD00DD522A /* Pods_NBLCommonModule.framework */,
 				737F8DC7214660DD00DD522A /* Pods_NBLCommonModuleTests.framework */,
-				73F1DE3D21466C340065BD72 /* Repeat.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -33518,13 +33484,6 @@
 			remoteRef = 737F8DC6214660DD00DD522A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		73F1DE3D21466C340065BD72 /* Repeat.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Repeat.framework;
-			remoteRef = 73F1DE3C21466C340065BD72 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -33533,7 +33492,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				72199D7E210450F500575226 /* RecodeCellView.xib in Resources */,
-				7307A917212518DC00BD6444 /* .gitignore in Resources */,
 				A081A5FE86C0AC44E299840DD8C1DE00 /* AccessoryCollectionView.xib in Resources */,
 				D971C57B81B4A2FBB083235DDE5057A2 /* AccessoryCollectionViewCell.xib in Resources */,
 				FE75674B7C6A22FAFA051C9CE0E95A1D /* AccessoryHorizentalView.xib in Resources */,
@@ -33595,7 +33553,6 @@
 				8809F4832AD9F2B07F73CDE8C8D41240 /* OrderBookCell.xib in Resources */,
 				5C9247949858F09E0B4A6A2A18854787 /* OrderBookCellView.xib in Resources */,
 				72D9DD59210EB60F00963915 /* PeriscopeCell.xib in Resources */,
-				7307A918212518DC00BD6444 /* .travis.yml in Resources */,
 				3385671DD5F1B6ED220AB916F7859ECF /* OrderBookContentView.xib in Resources */,
 				813174FFD07A88030F54BD2F9B24E36C /* PairCardCell.xib in Resources */,
 				7267DA1B21351D5A004AF9AF /* ETOProjectCell.xib in Resources */,
@@ -33606,7 +33563,6 @@
 				6D56D7D9D38BE89CB6BD8D314E0E6370 /* QuotesTitleView.xib in Resources */,
 				26DBFE949DEA6BC4379A397564804816 /* README.md in Resources */,
 				ACE7BA86B00F181D50D549AA91EED07E /* RechargeItemView.xib in Resources */,
-				7307A927212518DC00BD6444 /* Info.plist in Resources */,
 				C860BE92032F361E51995DB61C68774C /* RechargeSegment.xib in Resources */,
 				131A2FCACA9688EC4FC89E1A50E45457 /* StyleLabel.xib in Resources */,
 				425ABA62CF90E4866D5279A917C235AD /* TimeGapView.xib in Resources */,
@@ -33618,7 +33574,6 @@
 				3B0EB65D210313B200F19C31 /* YourPortfolioHandleView.xib in Resources */,
 				3F6CBB1D8AC88D546B003B8A585E4EEB /* TradeHistoryCellView.xib in Resources */,
 				E4EC6E667A50D907DF7D0113D3486006 /* TradeHistoryView.xib in Resources */,
-				7307A91A212518DC00BD6444 /* .gitkeep in Resources */,
 				733714B22122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib in Resources */,
 				693EC4E5D05D82D8A27851ECF6FB867F /* TradeItemView.xib in Resources */,
 				3694F2505E21A01BF3C935E69F510D95 /* TradeLineView.xib in Resources */,
@@ -33647,7 +33602,6 @@
 				3BF5B7E02134F1F200E8BFC9 /* ETODetailView.xib in Resources */,
 				72199DA7210466CB00575226 /* TransferTopView.xib in Resources */,
 				1B738C312087134B7F7E5462BD1DB526 /* cmath in Resources */,
-				2BF75EA384934AE269618BFA4D315DA3 /* cmath in Resources */,
 				60366FF13A1DDFEAB352E48931017AD4 /* cmath.SUNWCCh in Resources */,
 				1D7C46604A3839DF31366F776FD78D23 /* complex in Resources */,
 				7A338F1410B84BFCF63BC54F6AE76502 /* complex.SUNWCCh in Resources */,
@@ -33681,7 +33635,6 @@
 				7307A92D212518DC00BD6444 /* octicons.ttf in Resources */,
 				72EC6A5520F4611500CEAFF6 /* EOSWithdrawView.xib in Resources */,
 				DD53E4DB5C321358D6C1AB4A303C62BA /* iomanip.SUNWCCh in Resources */,
-				7307A919212518DC00BD6444 /* .gitkeep in Resources */,
 				1B5442C169C4BCFD231A911F7FB3CDCA /* ios in Resources */,
 				221EC23D2105B3110059F856 /* CornerAndShadowView.xib in Resources */,
 				6AF4A16A7EEB87292ADF065AFFB58A89 /* ios.SUNWCCh in Resources */,
@@ -34617,7 +34570,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EE7A1A7462092B8F170A7056A093228E /* Pods-cybexMobile.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -34712,7 +34664,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 730115CA9351045A5CEE4B396B055387 /* Pods-cybexMobile.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Debug";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -34747,7 +34698,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100 -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE_SPECIFIER = "";
