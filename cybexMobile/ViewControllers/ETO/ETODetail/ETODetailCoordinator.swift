@@ -238,7 +238,12 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
         }
         else if projectModel.status! == .finish {
             if projectModel.finish_at != nil {
-                model.detail_time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970  - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
+                if projectModel.t_total_time == "" {
+                    model.detail_time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
+                }
+                else {
+                    model.detail_time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
+                }
             }
         }
     }

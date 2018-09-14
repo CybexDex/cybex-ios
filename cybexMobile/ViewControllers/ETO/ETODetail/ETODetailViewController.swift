@@ -142,6 +142,7 @@ extension ETODetailViewController {
         self.coordinator?.checkInviteCode(code: sender, callback: { (success,errorDescription) in
             if success == true {
                 ShowToastManager.shared.hide(0)
+                self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.eto_appointment_success.key.localized(), content: "")
             }
             else {
                 ShowToastManager.shared.data = errorDescription

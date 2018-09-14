@@ -487,3 +487,5 @@
 "eto_time_less_minite" = "less than one minute";
 
 "eto_detail_user_agreement_error" = "Please check 《User Agreement》 first.";
+
+"eto_appointment_success" = "Successful appointment, please wait for the audit result patiently";

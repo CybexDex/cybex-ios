@@ -468,4 +468,5 @@
 "eto_time_less_minite" = "小于1分钟";
 
 "eto_detail_user_agreement_error" = "请先勾选《用户协议》";
+"eto_appointment_success" = "预约成功，请耐心等待审核结果";
 

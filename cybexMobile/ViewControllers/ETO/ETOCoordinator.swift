@@ -150,7 +150,15 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                         viewModel.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
                     }
                     else if projectModel.status! == .finish {
-                        viewModel.time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
+                        
+                        if projectModel.finish_at != nil {
+                            if projectModel.t_total_time == "" {
+                                viewModel.time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
+                            }
+                            else {
+                                viewModel.time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
+                            }
+                        }
                     }
                 }
             }

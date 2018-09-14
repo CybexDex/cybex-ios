@@ -314,8 +314,8 @@ class ETOProjectViewModel {
         if let state = projectModel.status {
             if state == .finish {
                 if projectModel.t_total_time == "" {
-                    self.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
-                    self.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
+                    self.detail_time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
+                    self.time.accept(timeHandle(projectModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
                 }
                 else {
                     self.detail_time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
