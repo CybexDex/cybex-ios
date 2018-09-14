@@ -137,7 +137,10 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         
         let unit = 1 / pow(10, data.base_accuracy)
         
-        if transferAmount.truncatingRemainder(dividingBy: unit.doubleValue) > 0 {
+        let multiple = Decimal(floatLiteral: transferAmount) / unit
+        let mantissa = Decimal(floatLiteral: floor(multiple.doubleValue))
+        
+        if (multiple - mantissa) > Decimal(floatLiteral: 0) {
             self.store.dispatch(changeETOValidStatusAction(status: .precisionError))
             return
         }
