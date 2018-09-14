@@ -33,7 +33,7 @@ extension UIViewController {
             })
         }
         
-        if let headerview = headerView.animator.view as? ESRefreshHeaderAnimator {
+        if let headerview = ((headerView as ESRefreshHeaderView).animator as ESRefreshAnimatorProtocol).view as? ESRefreshHeaderAnimator {
             headerview.loadingDescription = R.string.localizable.loading.key.localized()
             headerview.releaseToRefreshDescription = R.string.localizable.releaseToRefresh.key.localized()
             headerview.pullToRefreshDescription = R.string.localizable.pullToRefresh.key.localized()
@@ -53,16 +53,11 @@ extension UIViewController {
             })
         }
 
-        if let footerView = footerView.animator.view as? ESRefreshFooterAnimator {
+        if let footerView = ((footerView as ESRefreshFooterView).animator as ESRefreshAnimatorProtocol).view as? ESRefreshFooterAnimator {
             footerView.loadingDescription = R.string.localizable.loading.key.localized()
             footerView.loadingMoreDescription = R.string.localizable.loadingMore.key.localized()
             footerView.noMoreDataDescription = R.string.localizable.noMoreData.key.localized()
         }
-        else {
-            
-            print(footerView.animator.view)
-        }
-        
     }
     
     func stopInfiniteScrolling(_ tableView : UITableView, haveNoMore: Bool) {
