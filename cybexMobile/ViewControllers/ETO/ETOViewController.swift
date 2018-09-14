@@ -40,28 +40,17 @@ class ETOViewController: BaseViewController {
         })
     }
     
-//    func startTimeRepeatAction() {
-//        self.timerRepeater = Repeater.every(.seconds(1), { [weak self](timer) in
-//            main {
-//                guard let `self` = self else { return }
-//            }
-//        })
-//    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fetchProjectData()
         self.fetchBannder()
         self.startInfosRepeatAction()
-//        self.startTimeRepeatAction()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.infosRepeater?.pause()
         self.infosRepeater = nil
-//        self.timerRepeater?.pause()
-//        self.timerRepeater = nil
     }
     
     func setupUI() {
@@ -84,7 +73,6 @@ class ETOViewController: BaseViewController {
     func setupData() {
         self.view.showNoData("")
         self.startLoading()
-        fetchBannder()
     }
     
     func fetchProjectData() {
@@ -123,8 +111,8 @@ class ETOViewController: BaseViewController {
 
 extension ETOViewController {
     @objc func ETOProjectViewDidClicked(_ data:[String: Any]) {
-        if let viewModel = data["data"] as? ETOProjectViewModel, let projectModel = viewModel.projectModel {
-            self.coordinator?.setSelectedProjectData(projectModel)
+        if let viewModel = data["data"] as? ETOProjectViewModel{
+            self.coordinator?.setSelectedProjectData(viewModel)
         }
     }
     

@@ -210,7 +210,6 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
                             }
                         }
                     }
-                        
                     CybexWebSocketService.shared.send(request: accountRequeset)
                 }
             }

@@ -53,7 +53,7 @@ class ETODetailViewController: BaseViewController {
     }
     
     func setupUI() {
-        self.localized_text = R.string.localizable.eto_project_detail.key.localizedContainer()
+        self.localized_text = R.string.localizable.eto_project_detail_title.key.localizedContainer()
 //        configRightNavButton(R.image.ic_share_24_px())
     }
     
@@ -142,6 +142,7 @@ extension ETODetailViewController {
         self.coordinator?.checkInviteCode(code: sender, callback: { (success,errorDescription) in
             if success == true {
                 ShowToastManager.shared.hide(0)
+                self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.eto_appointment_success.key.localized(), content: "")
             }
             else {
                 ShowToastManager.shared.data = errorDescription

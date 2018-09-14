@@ -15,7 +15,7 @@ struct ETOState: BaseState {
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
     var data : BehaviorRelay<[ETOProjectViewModel]?> = BehaviorRelay(value: nil)
     var banners : BehaviorRelay<[ETOBannerModel]?> = BehaviorRelay(value: nil)
-    var selectedProjectModel: BehaviorRelay<ETOProjectModel?> = BehaviorRelay(value: nil)
+    var selectedProjectModel: BehaviorRelay<ETOProjectViewModel?> = BehaviorRelay(value: nil)
     var selectedBannerModel: BehaviorRelay<ETOBannerModel?> = BehaviorRelay(value: nil)
 }
 
@@ -29,7 +29,7 @@ struct FetchBannerModelAction: Action {
 }
 
 struct SetSelectedProjectModelAction: Action {
-    var data : ETOProjectModel
+    var data : ETOProjectViewModel
 }
 
 struct SetSelectedBannerModelAction: Action {

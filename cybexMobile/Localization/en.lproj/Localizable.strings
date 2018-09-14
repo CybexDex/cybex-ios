@@ -345,6 +345,9 @@
 
 //zsy end
 
+"eto_project_detail_title" = "Project Details";
+
+
 "recode_nodata" = "No Record";
 "balance_nodata" = "No Asset";
 
@@ -418,7 +421,7 @@
 
 "eto_available" = "Available %@ %@";
 "eto_join" = "Join in ETO";
-"eto_project_detail" = "Project Details";
+"eto_project_detail" = "Project Details：";
 
 "eto_share" = "Share";
 "eto_records" = "ETO Records";
@@ -470,7 +473,7 @@
 "eto_project_login" = "Login";
 
 "eto_submit_title" = "You will join in ETO of %@";
-"eto_submit_check_error_1" = "insufficient balances";
+"eto_submit_check_error_1" = "Not enough";
 "eto_submit_check_error_2" = "beyond personal hard cap";
 "eto_submit_check_error_3" = "insufficient remaining quota";
 "eto_submit_check_error_4" = "must beyond minimum purchasing unit";
@@ -487,3 +490,5 @@
 "eto_time_less_minite" = "less than one minute";
 
 "eto_detail_user_agreement_error" = "Please check 《User Agreement》 first.";
+
+"eto_appointment_success" = "Successful appointment, please wait for the audit result patiently";

@@ -234,7 +234,6 @@ class ShowToastManager {
         }
     }
     
-    
     func setUp(title:String,contentView:(UIView&Views),animationType:ShowAnimationType,middleType:CybexTextView.textView_type = .normal){
         self.animationShow  = animationType
         self.showType       = ShowManagerType.alert_image
@@ -276,6 +275,10 @@ class ShowToastManager {
         textView.middleView = sender
         textView.title.text = title
         textView.view_type = cybexTextViewType
+        if cybexTextViewType == .time ,let textMiddleView = textView.middleView as? CybexPasswordView {
+            textMiddleView.textField.isSecureTextEntry = false
+            textMiddleView.textField.placeholder = ""
+        }
         if cybexTextViewType == .time, self.timer_time != 30, self.timer_time != 0 {
             textView.ensure.isEnabled = false
             textView.ensure.setTitle(String(self.timer_time), for: UIControlState.normal)
@@ -304,7 +307,7 @@ class ShowToastManager {
     
     func updateCybexTextViewType(_ sender: CybexTextView) {
         sender.ensure.isEnabled = false
-        sender.ensure.setTitle(String(self.timer_time) + R.string.localizable.transfer_unit_second.key.localized(), for: .normal)
+        sender.ensure.setTitle(self.timer_time.string(digits: 0, roundingMode: .down) + R.string.localizable.transfer_unit_second.key.localized(), for: .normal)
         self.timer_time = 30
         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(changeTimerTimeAction), userInfo: nil, repeats: true)
         self.timer?.fire()
@@ -319,13 +322,14 @@ class ShowToastManager {
             self.timer_time = self.timer_time - 1
         }
         
-        guard let textview = self.showView as? CybexTextView  else { return }
+        guard let textview = self.showView as? CybexTextView, textview.view_type == .time else { return }
+        
         if self.timer_time <= 0 {
             textview.ensure.setTitle(R.string.localizable.alert_ensure.key.localized(), for: .normal)
             textview.ensure.isEnabled = true
         }
-        else {
-            textview.ensure.setTitle(String(self.timer_time) + R.string.localizable.transfer_unit_second.key.localized(), for: .normal)
+        else {            
+            textview.ensure.setTitle(self.timer_time.string(digits: 0, roundingMode: .down) + R.string.localizable.transfer_unit_second.key.localized(), for: .normal)
         }
     }
 }
@@ -345,6 +349,7 @@ extension ShowToastManager : CybexTextViewDelegate{
         self.hide(0)
         self.delegate?.cancelImageAction(sender)
     }
+    
     func returnEnsureAction(){
         self.hide(0)
         self.delegate?.returnEnsureAction()
