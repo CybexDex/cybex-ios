@@ -196,6 +196,11 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
                             }, jsonstr: ope)
                             CybexWebSocketService.shared.send(request: withdrawRequest)
                         }
+                        else {
+                            main {
+                                callback("")
+                            }
+                        }
                     }
                         
                     CybexWebSocketService.shared.send(request: accountRequeset)
