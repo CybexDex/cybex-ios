@@ -302,6 +302,7 @@
 "transfer_unit_minite" = "分";
 "transfer_unit_second" = "秒";
 
+"eto_quantity" = "金额";
 
 
 "transfer_failed" = "转账失败";
@@ -399,12 +400,12 @@
 "eto_project_detail" = "项目详情";
 
 "eto_share" = "分享";
-"eto_records" = "ETO纪录";
+"eto_records" = "ETO记录";
 "eto_record_receive" = "收到Token";
 "eto_record_send" = "参与ETO";
 
 "eto_invalid_sub" = "无效认购";
-"eto_invalid_partly_sub" = "部分无效";
+"eto_invalid_partly_sub" = "部分有效";
 "eto_refund" = "退款";
 "eto_receive_success" = "到账成功";
 
@@ -429,6 +430,7 @@
 "eto_project_time_comming" = "距离结束：";
 "eto_project_time_pre" = "距离开始：";
 
+
 "eto_project_name" = "项目名称：";
 "eto_token_name" = "代币名称：";
 "eto_start_time" = "ETO时间：";
@@ -442,6 +444,8 @@
 "eto_project_online" = "官网：";
 "eto_project_white_Paper" = "白皮书：";
 "eto_project_immediate" = "实时";
+
+"eto_user_agreenment" = "服务条款与协议";
 
 
 "eto_project_reserve_now" = "立即预约";

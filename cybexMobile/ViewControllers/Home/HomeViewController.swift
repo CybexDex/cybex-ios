@@ -11,7 +11,6 @@ import ReSwift
 
 import RxCocoa
 import RxSwift
-import ChainableAnimations
 import TableFlip
 import SwiftyJSON
 import TinyConstraints

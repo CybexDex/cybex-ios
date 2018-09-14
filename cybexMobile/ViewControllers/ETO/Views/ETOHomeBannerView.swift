@@ -67,7 +67,7 @@ class ETOHomeBannerView: BaseView {
     }
     
     func setPagerViewStyle() {
-        self.pagerView.itemSize = CGSize(width: UIScreen.main.bounds.width, height: Device.version() == .iPhoneX ? 240 : 191)
+        self.pagerView.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 191)
     }
     
     func setupSubViewEvent() {
@@ -85,7 +85,7 @@ extension ETOHomeBannerView : FSPagerViewDataSource,FSPagerViewDelegate {
 
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: String(describing: FSPagerViewCell.self), at: index) as FSPagerViewCell
-        cell.imageView?.contentMode = .scaleToFill
+        cell.imageView?.contentMode = .scaleAspectFill
         if let banners = self.data as? [ETOBannerModel] {
             let banner = banners[index]
             let bannerUrl = Localize.currentLanguage() == "en" ? banner.adds_banner_mobile__lang_en : banner.adds_banner_mobile

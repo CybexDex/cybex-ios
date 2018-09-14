@@ -22,6 +22,7 @@ class CybexWebViewController: BaseWebViewController {
         case whitelist
         case project_website
         case whitepaper
+        case agreement
     }
     
     var coordinator: (CybexWebCoordinatorProtocol & CybexWebStateManagerProtocol)?
@@ -32,6 +33,13 @@ class CybexWebViewController: BaseWebViewController {
         if vc_type == .help {
             let url = Defaults[.theme] == 0 ?AppConfiguration.HELP_NIGHT_URL + Localize.currentLanguage() : AppConfiguration.HELP_LIGHT_URL + Localize.currentLanguage()
             self.url = URL(string: url)
+        }
+        else if vc_type == .agreement {
+            self.navigationItem.title = R.string.localizable.eto_user_agreenment.key.localized()
+            var urlString = ""
+            urlString = Localize.currentLanguage() == "en" ? "en" : "cn"
+            urlString += ThemeManager.currentThemeIndex == 0 ? "_dark" : "_light"
+            self.url = Bundle.main.url(forResource: urlString, withExtension: ".html")
         }
         super.viewDidLoad()
         

@@ -19,7 +19,7 @@ class ETOHomeView: BaseView {
     }
     
     var tableViewHeaderViewHeight : CGFloat {
-        return Device.version() == .iPhoneX ? 240 : 191
+        return 191
     }
     
     static let section_height : CGFloat = 40
@@ -81,6 +81,7 @@ extension ETOHomeView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.etoProjectCell.name, for: indexPath) as! ETOProjectCell
+        cell.prepareForReuse()
         if let datas = self.data as? [ETOProjectViewModel] {
             cell.setup(datas[indexPath.row])
         }

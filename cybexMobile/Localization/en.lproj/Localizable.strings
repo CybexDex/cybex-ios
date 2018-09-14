@@ -349,7 +349,7 @@
 "balance_nodata" = "No Asset";
 
 "Loading more" = "Loading more";
-"No more data" = "No more data";
+"No more data" = "No More Data";
 "Loading..." = "Loading...";
 "Pull to refresh" = "Pull to refresh";
 "Release to refresh" = "Release to refresh";
@@ -426,9 +426,14 @@
 "eto_record_send" = "Join ETO";
 
 "eto_invalid_sub" = "Invalid Subscription";
-"eto_invalid_partly_sub" = "Subscription partly invalid";
+"eto_invalid_partly_sub" = "Subscription partly valid";
 "eto_refund" = "Refund";
 "eto_receive_success" = "Received";
+
+"eto_quantity" = "Quantity";
+
+"eto_user_agreenment" = "Terms and Conditions";
+
 
 
 "eto_project_finish" = "Ended";
@@ -459,7 +464,7 @@
 "eto_project_verifying" = "Verifying";
 "eto_project_stop_reserve" = "Stop Reserve";
 "eto_project_waiting" = "Waiting for ETO";
-"eto_project_join" = "Join ETO now";
+"eto_project_join" = "Join ETO Now";
 "eto_project_rejected" = "Rejected";
 "eto_project_kyc" = "KYC Verification";
 "eto_project_login" = "Login";

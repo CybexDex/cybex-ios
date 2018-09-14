@@ -17,8 +17,8 @@ func ETODetailReducer(action:Action, state:ETODetailState?) -> ETODetailState {
         state.data.accept(transferProjectModel(action.data))
     case let action as FetchUserStateAction:
         state.userState.accept(action.data)
-    case let action as RefrehProjectModelAction:
-        refreshProjectModel(action.data, viewModel: state.data.value)
+//    case let action as RefrehProjectModelAction:
+//        refreshProjectModel(action.data, viewModel: state.data.value)
     default:
         break
     }
@@ -29,15 +29,21 @@ func transferProjectModel(_ sender: ETOProjectModel) -> ETOProjectViewModel{
     return ETOProjectViewModel(sender)
 }
 
-func refreshProjectModel(_ sender: ETOShortProjectStatusModel,viewModel: ETOProjectViewModel?)  {
-    guard let model = viewModel, let projectMode = model.projectModel else { return }
-    projectMode.status = sender.status
-    projectMode.finish_at = sender.finish_at
-    model.current_percent.accept((sender.current_percent * 100).string(digits:2, roundingMode: .down) + "%")
-    model.progress.accept(sender.current_percent)
-    model.status.accept(sender.status!.description())
-    model.project_state.accept(sender.status)
-}
+//func refreshProjectModel(_ sender: ETOShortProjectStatusModel,viewModel: ETOProjectViewModel?)  {
+//    guard let model = viewModel, let projectMode = model.projectModel else { return }
+//    if sender.status == projectMode.status {
+//        projectMode.status = .finish
+//    }
+//    else {
+//        projectMode.status = sender.status
+//    }
+//    projectMode.status = sender.status
+//    projectMode.finish_at = sender.finish_at
+//    model.current_percent.accept((sender.current_percent * 100).string(digits:2, roundingMode: .down) + "%")
+//    model.progress.accept(sender.current_percent)
+//    model.status.accept(sender.status!.description())
+//    model.project_state.accept(sender.status)
+//}
 
 
 

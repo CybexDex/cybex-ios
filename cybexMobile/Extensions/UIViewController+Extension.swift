@@ -10,7 +10,6 @@ import Foundation
 import ESPullToRefresh
 import XLActionController
 
-
 extension UIViewController {
     @objc func refreshViewController() {//become active 后台到前台 或者double click tab
         
@@ -28,11 +27,16 @@ extension UIViewController {
 
 extension UIViewController {
     func addPullToRefresh(_ tableView : UITableView,callback:@escaping(((()->Void)?)->Void)){
-        
-        tableView.es.addPullToRefresh {
+        let headerView = tableView.es.addPullToRefresh {
             callback({[weak self] in
                 self?.stopPullRefresh(tableView)
             })
+        }
+        
+        if let headerview = headerView.animator.view as? ESRefreshHeaderAnimator {
+            headerview.loadingDescription = R.string.localizable.loading.key.localized()
+            headerview.releaseToRefreshDescription = R.string.localizable.releaseToRefresh.key.localized()
+            headerview.pullToRefreshDescription = R.string.localizable.pullToRefresh.key.localized()
         }
         
     }
@@ -42,12 +46,23 @@ extension UIViewController {
     }
     
     func addInfiniteScrolling(_ tableView : UITableView ,callback:@escaping(((Bool)->())?)->()){
-        tableView.es.addInfiniteScrolling {
-            
+        
+         let footerView = tableView.es.addInfiniteScrolling {
             callback({[weak self] isNoMoreData in
                 self?.stopInfiniteScrolling(tableView, haveNoMore: isNoMoreData)
             })
         }
+
+        if let footerView = footerView.animator.view as? ESRefreshFooterAnimator {
+            footerView.loadingDescription = R.string.localizable.loading.key.localized()
+            footerView.loadingMoreDescription = R.string.localizable.loadingMore.key.localized()
+            footerView.noMoreDataDescription = R.string.localizable.noMoreData.key.localized()
+        }
+        else {
+            
+            print(footerView.animator.view)
+        }
+        
     }
     
     func stopInfiniteScrolling(_ tableView : UITableView, haveNoMore: Bool) {

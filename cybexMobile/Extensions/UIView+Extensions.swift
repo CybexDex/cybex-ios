@@ -10,6 +10,7 @@ import Foundation
 import SwiftTheme
 import TinyConstraints
 import Localize_Swift
+import ESPullToRefresh
 
 extension UIView {
   var x: CGFloat {
@@ -230,8 +231,10 @@ extension UIView{
       self.noDataView?.noticeContairner.constant = -64
     }
   }
+    
   func hiddenNoData() {
       self.noDataView?.removeFromSuperview()
       self.noDataView = nil
   }
 }
+

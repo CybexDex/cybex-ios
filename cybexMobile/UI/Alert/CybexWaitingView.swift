@@ -64,6 +64,7 @@ extension CybexWaitingView {
             self.timer?.invalidate()
             ensureBtn.setTitle(R.string.localizable.alert_ensure.key.localized(), for: .normal)
             ensureBtn.isEnabled = true
+            self.delegate?.waitingEnsureAction(sender: self)
         }
         else {
             self.time = self.time! - 1
