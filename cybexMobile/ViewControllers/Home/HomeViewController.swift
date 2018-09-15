@@ -8,7 +8,6 @@
 
 import Foundation
 import ReSwift
-import ChainableAnimations
 import RxCocoa
 import RxSwift
 import TableFlip

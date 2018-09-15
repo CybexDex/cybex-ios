@@ -11,10 +11,9 @@ import UIKit
 
 import Localize_Swift
 import SwiftTheme
-import RealReachability
+import Reachability
 import SwiftyUserDefaults
 import BeareadToast
-import EasyAnimation
 import IQKeyboardManagerSwift
 import Kingfisher
 
@@ -26,6 +25,7 @@ import AlamofireNetworkActivityLogger
 import NBLCommonModule
 
 let log = SwiftyBeaver.self
+let reachability = Reachability()!
 
 fileprivate let UM_APPKEY = "5b6bf4a8b27b0a3429000016"
 
@@ -36,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self, Answers.self])
-        EasyAnimation.enable()
         
         setupAnalytics()
         
@@ -83,15 +82,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         ZYNetworkAccessibity.start()
         
-        RealReachability.sharedInstance().startNotifier()
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.realReachabilityChanged, object: nil, queue: nil) { (notifi) in
-            main {
-                self.handlerNetworkChanged()
-            }
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(handlerNetworkChanged(note:)), name: .reachabilityChanged, object: reachability)
+
+//        RealReachability.sharedInstance().startNotifier()
+//        NotificationCenter.default.addObserver(forName: NSNotification.Name.realReachabilityChanged, object: nil, queue: nil) { (notifi) in
+//            main {
+//                self.handlerNetworkChanged()
+//            }
+//        }
+        try? reachability.startNotifier()
         
         configApplication()
-        self.handlerNetworkChanged()
         
         return true
     }
@@ -111,7 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MobClick.setCrashReportEnabled(true)
         UMConfigure.setLogEnabled(true)
         UMConfigure.setEncryptEnabled(true)
-        UMConfigure.initWithAppkey(UM_APPKEY, channel: "fir")
+        UMConfigure.initWithAppkey(UM_APPKEY, channel: Bundle.main.bundleIdentifier!)
         
     }
     
@@ -136,8 +137,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        let status = RealReachability.sharedInstance().currentReachabilityStatus()
-        let reactable = (status != .RealStatusNotReachable && status != .RealStatusUnknown)
+        let status = reachability.connection
+        let reactable = (status != .none)
         
         if !CybexWebSocketService.shared.checkNetworConnected() && !CybexWebSocketService.shared.needAutoConnect && reactable {//避免第一次 不是主动断开的链接
             if let vc = app_coodinator.topViewController() {
@@ -188,9 +189,11 @@ extension AppDelegate {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     
-    func handlerNetworkChanged() {
-        let status = RealReachability.sharedInstance().currentReachabilityStatus()
-        if status == .RealStatusNotReachable || status  == .RealStatusUnknown {
+    @objc func handlerNetworkChanged(note: Notification) {
+        let reachability = note.object as! Reachability
+
+        switch reachability.connection {
+        case .none:
             CybexWebSocketService.shared.disconnect()
             if let vc = app_coodinator.startLoadingVC {
                 app_coodinator.startLoadingVC = nil
@@ -198,14 +201,13 @@ extension AppDelegate {
             }
             
             _ = BeareadToast.showError(text: R.string.localizable.noNetwork.key.localized(), inView: self.window!, hide:2)
-        }
-        else {
+        default:
             if UserManager.shared.frequency_type == .normal {
                 UserManager.shared.refreshTime = 6
             }else if UserManager.shared.frequency_type == .time {
                 UserManager.shared.refreshTime = 3
             }else {
-                if status == .RealStatusViaWiFi {
+                if reachability.connection == .wifi {
                     UserManager.shared.refreshTime = 3
                 }
                 else {
@@ -221,6 +223,8 @@ extension AppDelegate {
                 }
                 CybexWebSocketService.shared.connect()
             }
+
         }
+       
     }
 }

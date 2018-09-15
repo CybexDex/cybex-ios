@@ -21,11 +21,6 @@ or alternatively using `brew cask install fastlane`
 fastlane ios fir
 ```
 Description of what the lane does
-### ios pgy
-```
-fastlane ios pgy
-```
-
 ### ios publish
 ```
 fastlane ios publish

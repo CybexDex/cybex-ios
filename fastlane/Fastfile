@@ -16,11 +16,13 @@
 default_platform(:ios)
 
 platform :ios do
-  app_identifier=CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
-
   desc "Description of what the lane does"
   lane :fir do
-    xcode_select("/Applications/Xcode.app")
+    app_identifier="com.nbltrustdev.cybex.fir"
+    update_info_plist(
+      plist_path:"cybexMobile/Info.plist",
+      app_identifier: "#{app_identifier}"
+    )
     gym(
       xcargs: "-UseNewBuildSystem=YES",
       output_name: "cybex-fir",
@@ -31,6 +33,7 @@ platform :ios do
       output_directory:"~/Documents/ipa",
       export_xcargs: "-allowProvisioningUpdates",
       export_options: {
+        compileBitcode: false,
         provisioningProfiles: {
           app_identifier => "AdHoc com.nbltrustdev.cybex.fir"
         }
@@ -39,27 +42,13 @@ platform :ios do
     firim(firim_api_token:"92fc2819f9894e4890c9fd27d4c1d234")
     slack(message: "Successfully distributed cybex to fir")
   end
-  
-  lane :pgy do    
-    gym(
-      output_name: "cybex-pgy",
-      scheme:"cybexMobile",
-      workspace:"cybexMobile.xcworkspace",
-      configuration:"Release",
-      export_method:"ad-hoc",
-      output_directory:"~/Documents/ipa",
-      export_xcargs: "-allowProvisioningUpdates",
-      export_options: {
-        provisioningProfiles: {
-          app_identifier => "match AdHoc #{app_identifier}"
-        }
-      }
-    )
-    pgyer(api_key: "a2c74d482ef9465360ef906105e22721", user_key: "b2cdd30d4b7eecc802ecfd097490805b")
-    slack(message: "Successfully distributed cybex to pgy")
-  end
 
   lane :publish do
+    app_identifier="com.nbltrustdev.cybex"
+    update_info_plist(
+      plist_path:"cybexMobile/Info.plist",
+      app_identifier: "AppStore #{app_identifier}"
+    )
     gym(
       output_name: "cybex-appstore",
       scheme:"cybexMobile",
@@ -69,8 +58,9 @@ platform :ios do
       output_directory:"~/Documents/ipa",
       export_xcargs: "-allowProvisioningUpdates",
       export_options: {
+        compileBitcode: false,
         provisioningProfiles: {
-          app_identifier => "match #{app_identifier}"
+          app_identifier => "#{app_identifier}"
         }
       }
     )
@@ -79,6 +69,11 @@ platform :ios do
   end
   
    lane :test do
+      app_identifier="com.nbltrustdev.cybex"
+      update_info_plist(
+        plist_path:"cybexMobile/Info.plist",
+        app_identifier: "#{app_identifier}"
+      )
       gym(
         output_name: "cybex-testflight",
         scheme:"cybexMobile",
@@ -88,8 +83,9 @@ platform :ios do
         output_directory:"~/Documents/ipa",
         export_xcargs: "-allowProvisioningUpdates",
         export_options: {
+          compileBitcode: false,
           provisioningProfiles: {
-            app_identifier => "match #{app_identifier}"
+            app_identifier => "AppStore #{app_identifier}"
           }
         }
       )

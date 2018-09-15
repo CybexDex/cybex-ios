@@ -11,6 +11,7 @@ import ReSwift
 import AwaitKit
 import Repeat
 import SwifterSwift
+import Reachability
 
 extension AppCoordinator: AppStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
@@ -178,14 +179,12 @@ extension AppCoordinator {
         self.fetchPariTimer = Repeater.every(.seconds(UserManager.shared.refreshTime), { [weak self](timer) in
             main {
                 guard let `self` = self else {return}
-                let status = RealReachability.sharedInstance().currentReachabilityStatus()
-                if status == .RealStatusNotReachable || status  == .RealStatusUnknown || !CybexWebSocketService.shared.checkNetworConnected() {
-                    
-                    app_coodinator.fetchPariTimer = nil
-                    timer.pause()
-                    return
+                if reachability.connection == .none ||
+                    !CybexWebSocketService.shared.checkNetworConnected() {
+                        app_coodinator.fetchPariTimer = nil
+                        timer.pause()
+                        return
                 }
-                
                 self.state.property.otherRequestRelyData.accept(1)
                 self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority: priority, isNoFirst: false)
             }

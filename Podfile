@@ -2,11 +2,11 @@ platform :ios, '9.0'
 
 def network
 #    pod 'Starscream'
-    pod 'SocketRocket', :git => 'https://github.com/facebook/SocketRocket', :branch => 'master'
+#    pod 'SocketRocket', :git => 'https://github.com/facebook/SocketRocket', :branch => 'master'
     pod 'JSONRPCKit', :git => 'https://github.com/phpmaple/JSONRPCKit', :branch => 'master'
 #    pod 'Moya', :git => 'https://github.com/Moya/Moya', :tag => '12.0.0-beta.1'
 #    pod 'Kingfisher'
-    pod 'RealReachability'
+    pod 'ReachabilitySwift'
     pod 'Apollo'
     pod 'AlamofireNetworkActivityLogger'
 end
@@ -15,10 +15,10 @@ def data
     pod 'ObjectMapper'
 #    pod 'HandyJSON'
     pod 'SwiftyJSON'
-    pod 'BigInt'
-    pod 'GRDB.swift'
+#    pod 'BigInt'
+#    pod 'GRDB.swift'
     pod 'CryptoSwift'
-    pod 'RxGRDB'
+#    pod 'RxGRDB'
     pod 'SwiftyUserDefaults',:git => 'https://github.com/radex/SwiftyUserDefaults', :tag => '4.0.0-alpha.1'
     pod 'Zephyr'
     pod 'Cache'
@@ -26,7 +26,7 @@ def data
     pod 'Then'
     pod 'FCUUID'
     pod 'IQKeyboardManagerSwift'
-    pod 'Guitar'
+#    pod 'Guitar'
     pod 'DifferenceKit'
     pod 'Dollar'
     pod 'Validator'
@@ -65,9 +65,9 @@ def permission
 end
 
 def animation
-    pod 'EasyAnimation'
+#    pod 'EasyAnimation'
 #    pod 'Hero'
-    pod 'ChainableAnimations'
+#    pod 'ChainableAnimations'
     pod 'TableFlip'
 end
 
@@ -94,7 +94,7 @@ def ui
     pod 'SDCAlertView'
     pod 'Presentr'
     pod 'Macaw'
-    pod 'SwiftEntryKit'
+#    pod 'SwiftEntryKit'
     pod 'Keyboard+LayoutGuide'
     pod 'XLPagerTabStrip'
     pod 'EFQRCode'
@@ -141,7 +141,7 @@ end
 
 target 'cybexMobile' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
+#  use_frameworks!
   inhibit_all_warnings!
 
   pod 'Reveal-SDK', :configurations => ['Debug']

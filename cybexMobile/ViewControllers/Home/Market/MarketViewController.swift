@@ -6,7 +6,6 @@
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
-import BigInt
 import DNSPageView
 import Localize_Swift
 import ReSwift

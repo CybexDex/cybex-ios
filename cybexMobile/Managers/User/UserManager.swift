@@ -10,7 +10,6 @@ import Foundation
 import SwiftyJSON
 import CryptoSwift
 import KeychainAccess
-import FCUUID
 import RxCocoa
 import RxSwift
 import PromiseKit
@@ -392,8 +391,8 @@ class UserManager {
       case .normal:self.refreshTime = 6
       case .time:self.refreshTime = 3
       case .WiFi:
-        let status = RealReachability.sharedInstance().currentReachabilityStatus()
-        if status == .RealStatusViaWiFi {
+        let status = reachability.connection
+        if status == .wifi {
           self.refreshTime = 3
         }else {
           self.refreshTime = 6
