@@ -368,6 +368,20 @@
 		7307A92F212518DC00BD6444 /* themify.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7307A916212518DB00BD6444 /* themify.ttf */; };
 		7307A931212518F300BD6444 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A930212518F300BD6444 /* BaseView.swift */; };
 		7307A94521257BE900BD6444 /* AddressCellViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A94421257BE900BD6444 /* AddressCellViewAdapter.swift */; };
+		731C11BB214D045E00761955 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11AD214D045700761955 /* RxBlocking.framework */; };
+		731C11BC214D045E00761955 /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11AE214D045800761955 /* ReactiveSwift.framework */; };
+		731C11BD214D045E00761955 /* ReactiveMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11AF214D045800761955 /* ReactiveMoya.framework */; };
+		731C11BE214D045E00761955 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B0214D045900761955 /* Alamofire.framework */; };
+		731C11BF214D045E00761955 /* RxMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B1214D045900761955 /* RxMoya.framework */; };
+		731C11C0214D045E00761955 /* Guitar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B2214D045A00761955 /* Guitar.framework */; };
+		731C11C1214D045E00761955 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B3214D045A00761955 /* RxCocoa.framework */; };
+		731C11C2214D045E00761955 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B4214D045B00761955 /* RxSwift.framework */; };
+		731C11C3214D045E00761955 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B5214D045B00761955 /* Kingfisher.framework */; };
+		731C11C4214D045E00761955 /* HandyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B6214D045C00761955 /* HandyJSON.framework */; };
+		731C11C5214D045E00761955 /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B7214D045C00761955 /* ReSwift.framework */; };
+		731C11C6214D045E00761955 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B8214D045D00761955 /* SocketRocket.framework */; };
+		731C11C7214D045E00761955 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B9214D045D00761955 /* Result.framework */; };
+		731C11C8214D045E00761955 /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11BA214D045E00761955 /* Moya.framework */; };
 		7323B4B02A3A6EFE54C1B30D7491D953 /* MyHistoryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E17D1C068A4ED09DD447E3434E5E550 /* MyHistoryCellView.xib */; };
 		733714B12122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714AF2122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift */; };
 		733714B22122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714B02122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib */; };
@@ -387,8 +401,6 @@
 		73587EB42137C69B006CF8A6 /* ETOCrowdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB12137C69B006CF8A6 /* ETOCrowdView.swift */; };
 		73587EB52137C69B006CF8A6 /* ETOCrowdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */; };
 		73587EB62137C69B006CF8A6 /* ETOCrowdViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */; };
-		736E537F214C04B100A04140 /* Guitar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736E537A214C04B100A04140 /* Guitar.framework */; };
-		736E5389214C0A5900A04140 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736E5384214C0A5900A04140 /* SocketRocket.framework */; };
 		73752FC4214C13510089BD21 /* libNBLCommonModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73752FC3214C13430089BD21 /* libNBLCommonModule.a */; };
 		737F8C352145532A00DD522A /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F8C342145532A00DD522A /* String+Extensions.swift */; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
@@ -415,18 +427,6 @@
 		7386F2D52121735800ABC924 /* AddressHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7386F2D32121735800ABC924 /* AddressHomeTableViewCell.xib */; };
 		7386F2D82121737600ABC924 /* AddressHomeTableViewCellViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F2D62121737600ABC924 /* AddressHomeTableViewCellViewView.swift */; };
 		7386F2D92121737600ABC924 /* AddressHomeTableViewCellViewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7386F2D72121737600ABC924 /* AddressHomeTableViewCellViewView.xib */; };
-		738FCEC52148E72E0042331A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCEC42148E72E0042331A /* Alamofire.framework */; };
-		738FCED22148E73F0042331A /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCEC62148E7340042331A /* RxBlocking.framework */; };
-		738FCED32148E73F0042331A /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCEC72148E7350042331A /* RxSwift.framework */; };
-		738FCED42148E73F0042331A /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCEC82148E7360042331A /* ReactiveSwift.framework */; };
-		738FCED52148E73F0042331A /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCEC92148E7370042331A /* Kingfisher.framework */; };
-		738FCED62148E73F0042331A /* HandyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCECA2148E7380042331A /* HandyJSON.framework */; };
-		738FCED72148E73F0042331A /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCECB2148E7390042331A /* ReSwift.framework */; };
-		738FCED82148E73F0042331A /* ReactiveMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCECC2148E73A0042331A /* ReactiveMoya.framework */; };
-		738FCED92148E73F0042331A /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCECD2148E73B0042331A /* Result.framework */; };
-		738FCEDB2148E73F0042331A /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCECF2148E73D0042331A /* Moya.framework */; };
-		738FCEDC2148E73F0042331A /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCED02148E73E0042331A /* RxCocoa.framework */; };
-		738FCEDD2148E73F0042331A /* RxMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738FCED12148E73E0042331A /* RxMoya.framework */; };
 		738FCEE9214909CC0042331A /* ZYNetworkAccessibity.m in Sources */ = {isa = PBXBuildFile; fileRef = 738FCEE4214909CC0042331A /* ZYNetworkAccessibity.m */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
@@ -6050,6 +6050,20 @@
 		7307A930212518F300BD6444 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		7307A94421257BE900BD6444 /* AddressCellViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCellViewAdapter.swift; sourceTree = "<group>"; };
 		7318C16259141480B20816B58236A157 /* empty_impl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = empty_impl.hpp; sourceTree = "<group>"; };
+		731C11AD214D045700761955 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
+		731C11AE214D045800761955 /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
+		731C11AF214D045800761955 /* ReactiveMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveMoya.framework; path = Carthage/Build/iOS/ReactiveMoya.framework; sourceTree = "<group>"; };
+		731C11B0214D045900761955 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		731C11B1214D045900761955 /* RxMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxMoya.framework; path = Carthage/Build/iOS/RxMoya.framework; sourceTree = "<group>"; };
+		731C11B2214D045A00761955 /* Guitar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Guitar.framework; path = Carthage/Build/iOS/Guitar.framework; sourceTree = "<group>"; };
+		731C11B3214D045A00761955 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		731C11B4214D045B00761955 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		731C11B5214D045B00761955 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		731C11B6214D045C00761955 /* HandyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HandyJSON.framework; path = Carthage/Build/iOS/HandyJSON.framework; sourceTree = "<group>"; };
+		731C11B7214D045C00761955 /* ReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReSwift.framework; path = Carthage/Build/iOS/ReSwift.framework; sourceTree = "<group>"; };
+		731C11B8214D045D00761955 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = Carthage/Build/iOS/SocketRocket.framework; sourceTree = "<group>"; };
+		731C11B9214D045D00761955 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		731C11BA214D045E00761955 /* Moya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya.framework; path = Carthage/Build/iOS/Moya.framework; sourceTree = "<group>"; };
 		731D235E20085DC94F05D5F5263DC27A /* c99sub_rounding_control.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = c99sub_rounding_control.hpp; sourceTree = "<group>"; };
 		7320A25885996B0F4C311BB64C7BE7DC /* not_specified.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = not_specified.hpp; sourceTree = "<group>"; };
 		7320BA4D07F22ADCCF65E54A4057170A /* cons_tie.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cons_tie.hpp; sourceTree = "<group>"; };
@@ -6084,8 +6098,6 @@
 		73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdViewAdapter.swift; sourceTree = "<group>"; };
 		735EA8642354E31CA8166DA44203A684 /* shift_right.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shift_right.hpp; sourceTree = "<group>"; };
 		735FA00E9301F0DB45760B1C0D7FEC09 /* extreme_value.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = extreme_value.hpp; sourceTree = "<group>"; };
-		736E537A214C04B100A04140 /* Guitar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Guitar.framework; path = Carthage/Build/iOS/Guitar.framework; sourceTree = "<group>"; };
-		736E5384214C0A5900A04140 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = Carthage/Build/iOS/SocketRocket.framework; sourceTree = "<group>"; };
 		737258FAB6762972136E4188BF20F602 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
 		73752FBB214C13420089BD21 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		73752FBD214C13420089BD21 /* NBLCommonModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBLCommonModule.swift; sourceTree = "<group>"; };
@@ -6120,18 +6132,6 @@
 		7386F2D62121737600ABC924 /* AddressHomeTableViewCellViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressHomeTableViewCellViewView.swift; sourceTree = "<group>"; };
 		7386F2D72121737600ABC924 /* AddressHomeTableViewCellViewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressHomeTableViewCellViewView.xib; sourceTree = "<group>"; };
 		7388EB07415DBCA0B8C079BF7C089E8C /* kinematic_viscosity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kinematic_viscosity.hpp; sourceTree = "<group>"; };
-		738FCEC42148E72E0042331A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		738FCEC62148E7340042331A /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
-		738FCEC72148E7350042331A /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
-		738FCEC82148E7360042331A /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
-		738FCEC92148E7370042331A /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
-		738FCECA2148E7380042331A /* HandyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HandyJSON.framework; path = Carthage/Build/iOS/HandyJSON.framework; sourceTree = "<group>"; };
-		738FCECB2148E7390042331A /* ReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReSwift.framework; path = Carthage/Build/iOS/ReSwift.framework; sourceTree = "<group>"; };
-		738FCECC2148E73A0042331A /* ReactiveMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveMoya.framework; path = Carthage/Build/iOS/ReactiveMoya.framework; sourceTree = "<group>"; };
-		738FCECD2148E73B0042331A /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
-		738FCECF2148E73D0042331A /* Moya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya.framework; path = Carthage/Build/iOS/Moya.framework; sourceTree = "<group>"; };
-		738FCED02148E73E0042331A /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
-		738FCED12148E73E0042331A /* RxMoya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxMoya.framework; path = Carthage/Build/iOS/RxMoya.framework; sourceTree = "<group>"; };
 		738FCEE3214909CC0042331A /* ZYNetworkAccessibity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYNetworkAccessibity.h; sourceTree = "<group>"; };
 		738FCEE4214909CC0042331A /* ZYNetworkAccessibity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYNetworkAccessibity.m; sourceTree = "<group>"; };
 		73905E38FD41E7F65B811029DCAADED6 /* banded.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = banded.hpp; sourceTree = "<group>"; };
@@ -12529,22 +12529,22 @@
 			files = (
 				73752FC4214C13510089BD21 /* libNBLCommonModule.a in Frameworks */,
 				6257D6A4A5ED0C635B89E55C84FA1215 /* libboost.a in Frameworks */,
-				738FCED22148E73F0042331A /* RxBlocking.framework in Frameworks */,
-				738FCED32148E73F0042331A /* RxSwift.framework in Frameworks */,
-				738FCED42148E73F0042331A /* ReactiveSwift.framework in Frameworks */,
-				738FCED52148E73F0042331A /* Kingfisher.framework in Frameworks */,
-				738FCED62148E73F0042331A /* HandyJSON.framework in Frameworks */,
-				738FCED72148E73F0042331A /* ReSwift.framework in Frameworks */,
-				738FCED82148E73F0042331A /* ReactiveMoya.framework in Frameworks */,
-				738FCED92148E73F0042331A /* Result.framework in Frameworks */,
-				738FCEDB2148E73F0042331A /* Moya.framework in Frameworks */,
-				738FCEDC2148E73F0042331A /* RxCocoa.framework in Frameworks */,
-				738FCEDD2148E73F0042331A /* RxMoya.framework in Frameworks */,
-				738FCEC52148E72E0042331A /* Alamofire.framework in Frameworks */,
 				786DA36D390BADA15DF7637951260BE0 /* libcrypto.a in Frameworks */,
-				736E5389214C0A5900A04140 /* SocketRocket.framework in Frameworks */,
-				736E537F214C04B100A04140 /* Guitar.framework in Frameworks */,
 				8899C4D33A4F31180D755A486B4A6B6C /* libfc.a in Frameworks */,
+				731C11BB214D045E00761955 /* RxBlocking.framework in Frameworks */,
+				731C11BC214D045E00761955 /* ReactiveSwift.framework in Frameworks */,
+				731C11BD214D045E00761955 /* ReactiveMoya.framework in Frameworks */,
+				731C11BE214D045E00761955 /* Alamofire.framework in Frameworks */,
+				731C11BF214D045E00761955 /* RxMoya.framework in Frameworks */,
+				731C11C0214D045E00761955 /* Guitar.framework in Frameworks */,
+				731C11C1214D045E00761955 /* RxCocoa.framework in Frameworks */,
+				731C11C2214D045E00761955 /* RxSwift.framework in Frameworks */,
+				731C11C3214D045E00761955 /* Kingfisher.framework in Frameworks */,
+				731C11C4214D045E00761955 /* HandyJSON.framework in Frameworks */,
+				731C11C5214D045E00761955 /* ReSwift.framework in Frameworks */,
+				731C11C6214D045E00761955 /* SocketRocket.framework in Frameworks */,
+				731C11C7214D045E00761955 /* Result.framework in Frameworks */,
+				731C11C8214D045E00761955 /* Moya.framework in Frameworks */,
 				ECF5D8036B47223BDDD5184927710C20 /* libssl.a in Frameworks */,
 				642738CE26AA31C2FAA06F203B5D5A57 /* secp256k1.a in Frameworks */,
 				FCBCB514EB84E1F2472EA3F9 /* libPods-cybexMobile.a in Frameworks */,
@@ -29701,21 +29701,21 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				731C11B0214D045900761955 /* Alamofire.framework */,
+				731C11B2214D045A00761955 /* Guitar.framework */,
+				731C11B6214D045C00761955 /* HandyJSON.framework */,
+				731C11B5214D045B00761955 /* Kingfisher.framework */,
+				731C11BA214D045E00761955 /* Moya.framework */,
+				731C11AF214D045800761955 /* ReactiveMoya.framework */,
+				731C11AE214D045800761955 /* ReactiveSwift.framework */,
+				731C11B9214D045D00761955 /* Result.framework */,
+				731C11B7214D045C00761955 /* ReSwift.framework */,
+				731C11AD214D045700761955 /* RxBlocking.framework */,
+				731C11B3214D045A00761955 /* RxCocoa.framework */,
+				731C11B1214D045900761955 /* RxMoya.framework */,
+				731C11B4214D045B00761955 /* RxSwift.framework */,
+				731C11B8214D045D00761955 /* SocketRocket.framework */,
 				73752FBA214C13420089BD21 /* NBLCommonModule */,
-				736E5384214C0A5900A04140 /* SocketRocket.framework */,
-				736E537A214C04B100A04140 /* Guitar.framework */,
-				738FCECA2148E7380042331A /* HandyJSON.framework */,
-				738FCEC92148E7370042331A /* Kingfisher.framework */,
-				738FCECF2148E73D0042331A /* Moya.framework */,
-				738FCECC2148E73A0042331A /* ReactiveMoya.framework */,
-				738FCEC82148E7360042331A /* ReactiveSwift.framework */,
-				738FCECD2148E73B0042331A /* Result.framework */,
-				738FCECB2148E7390042331A /* ReSwift.framework */,
-				738FCEC62148E7340042331A /* RxBlocking.framework */,
-				738FCED02148E73E0042331A /* RxCocoa.framework */,
-				738FCED12148E73E0042331A /* RxMoya.framework */,
-				738FCEC72148E7350042331A /* RxSwift.framework */,
-				738FCEC42148E72E0042331A /* Alamofire.framework */,
 				0A7304F2BEF3C98AC05E5F01EC7205E8 /* libboost.a */,
 				AA9D354E1FFC86DF9A64FE653BD6840F /* libcrypto.a */,
 				8B6A666082254B4BA4CBD399FCAEC435 /* libfc.a */,
@@ -33219,9 +33219,10 @@
 				BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */,
 				4C503C5D3E59634F44E3149DFE8EA11D /* [CP] Embed Pods Frameworks */,
 				A6D55984F0239A7067AB1555 /* [CP] Copy Pods Resources */,
-				738FCE312148D7EC0042331A /* carthage */,
 				738FCEEA214914BD0042331A /* icon */,
 				736E5369214BBC2D00A04140 /* Embed Frameworks */,
+				7384FD58214CF5F900AFF5BE /* appstore bug */,
+				738FCE312148D7EC0042331A /* carthage */,
 			);
 			buildRules = (
 			);
@@ -33671,6 +33672,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" a0bbb6d623feca529afaf6ed110e62a77f47b16a 3b264ff6cab506aaf14bce576c156ea66229ad7b6dfb666b4fbb91089deb17e2";
+		};
+		7384FD58214CF5F900AFF5BE /* appstore bug */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "appstore bug";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n";
 		};
 		738FCE312148D7EC0042331A /* carthage */ = {
 			isa = PBXShellScriptBuildPhase;

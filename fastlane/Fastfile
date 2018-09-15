@@ -35,7 +35,7 @@ platform :ios do
       export_options: {
         compileBitcode: false,
         provisioningProfiles: {
-          app_identifier => "AdHoc com.nbltrustdev.cybex.fir"
+          "com.nbltrustdev.cybex.fir" => "AdHoc com.nbltrustdev.cybex.fir"
         }
       }
     )
@@ -47,7 +47,7 @@ platform :ios do
     app_identifier="com.nbltrustdev.cybex"
     update_info_plist(
       plist_path:"cybexMobile/Info.plist",
-      app_identifier: "AppStore #{app_identifier}"
+      app_identifier: "#{app_identifier}"
     )
     gym(
       output_name: "cybex-appstore",
@@ -60,7 +60,7 @@ platform :ios do
       export_options: {
         compileBitcode: false,
         provisioningProfiles: {
-          app_identifier => "#{app_identifier}"
+          "com.nbltrustdev.cybex" => "AppStore #{app_identifier}"
         }
       }
     )
@@ -85,7 +85,7 @@ platform :ios do
         export_options: {
           compileBitcode: false,
           provisioningProfiles: {
-            app_identifier => "AppStore #{app_identifier}"
+            "com.nbltrustdev.cybex" => "AppStore #{app_identifier}"
           }
         }
       )
