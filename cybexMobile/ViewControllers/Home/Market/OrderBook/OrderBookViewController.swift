@@ -66,10 +66,10 @@ class OrderBookViewController: BaseViewController {
       self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
       self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
     }else{
-      self.contentView.buyPrice.locali =  R.string.localizable.orderbook_buy_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
-      self.contentView.buyVolume.locali = R.string.localizable.orderbook_volume.key.localized() + "(" + quote_info.symbol.filterJade + ")"
-      self.contentView.sellPrice.locali = R.string.localizable.orderbook_sell_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
-      self.contentView.sellVolume.locali = R.string.localizable.orderbook_volume.key.localized() + "(" + quote_info.symbol.filterJade + ")"
+      self.contentView.buyPrice.text =  R.string.localizable.orderbook_buy_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
+      self.contentView.buyVolume.text = R.string.localizable.orderbook_volume.key.localized() + "(" + quote_info.symbol.filterJade + ")"
+      self.contentView.sellPrice.text = R.string.localizable.orderbook_sell_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
+      self.contentView.sellVolume.text = R.string.localizable.orderbook_volume.key.localized() + "(" + quote_info.symbol.filterJade + ")"
     }
   }
   

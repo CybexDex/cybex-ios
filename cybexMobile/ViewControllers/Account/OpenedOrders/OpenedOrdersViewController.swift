@@ -53,8 +53,8 @@ class OpenedOrdersViewController: BaseViewController {
             guard let `self` = self else { return }
             if let account_view = self.containerView as? MyOpenedOrdersView {
                 
-                account_view.sectionView.totalTitle.locali = R.string.localizable.my_opened_price.key.localized()
-                account_view.sectionView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key.localized()
+                account_view.sectionView.totalTitle.locali = R.string.localizable.my_opened_price.key
+                account_view.sectionView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key
             }
         })
         

@@ -126,13 +126,13 @@ class BusinessViewController: BaseViewController {
         if UserManager.shared.isLoginIn {
             guard let pair = pair, let quote_info = app_data.assetInfo[pair.quote] else { return }
             
-            self.containerView.button.locali = self.type == .buy ? R.string.localizable.openedBuy.key.localized() : R.string.localizable.openedSell.key.localized()
+            self.containerView.button.locali = self.type == .buy ? R.string.localizable.openedBuy.key : R.string.localizable.openedSell.key
             if let title = self.containerView.button.button.titleLabel?.text {
-                self.containerView.button.locali = "\(title) \(quote_info.symbol.filterJade)"
+                self.containerView.button.button.setTitle("\(title) \(quote_info.symbol.filterJade)", for: .normal)
             }
         }
         else {
-            self.containerView.button.locali = R.string.localizable.business_login_title.key.localized()
+            self.containerView.button.locali = R.string.localizable.business_login_title.key
         }
     }
     

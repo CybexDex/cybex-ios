@@ -50,7 +50,9 @@ class CybexWebViewController: BaseWebViewController {
     
     override func leftAction(_ sender: UIButton) {
         if self.webView.canGoBack {
-            self.webView.goBack()
+            if case .none = self.webView.goBack() {
+                super.leftAction(sender)
+            }
         }
         else {
             super.leftAction(sender)

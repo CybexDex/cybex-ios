@@ -50,9 +50,9 @@ class SettingViewController: BaseViewController {
     }
     
     func setupUI() {
-        language.content_locali =  R.string.localizable.setting_language.key.localized()
+        language.content_locali =  R.string.localizable.setting_language.key
         version.content.text = Bundle.main.version
-        theme.content_locali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key.localized() : R.string.localizable.light.key.localized()
+        theme.content_locali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key : R.string.localizable.light.key
         frequency.content_locali = UserManager.shared.frequency_type.description()
     }
     

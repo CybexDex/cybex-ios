@@ -373,9 +373,9 @@ class UserManager {
     
     func description() -> String {
       switch self {
-      case .normal:return R.string.localizable.frequency_normal.key.localized()
-      case .time:return R.string.localizable.frequency_time.key.localized()
-      case .WiFi:return R.string.localizable.frequency_wifi.key.localized()
+      case .normal:return R.string.localizable.frequency_normal.key
+      case .time:return R.string.localizable.frequency_time.key
+      case .WiFi:return R.string.localizable.frequency_wifi.key
       }
     }
   }

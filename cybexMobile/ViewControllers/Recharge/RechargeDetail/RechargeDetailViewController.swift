@@ -161,7 +161,7 @@ class RechargeDetailViewController: BaseViewController {
                     if !letterBegin.test(string: address){
                         self.isTrueAddress = false
                         self.contentView.errorView.isHidden = false
-                        self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key.localized()
+                        self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key
                         self.contentView.addressView.address_state = .Fail
                         return
                     }
@@ -180,7 +180,7 @@ class RechargeDetailViewController: BaseViewController {
                                 self.contentView.addressView.address_state = .Fail
                                 self.isTrueAddress = false
                                 self.contentView.errorView.isHidden = false
-                                self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key.localized()
+                                self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key
                             }
                         })
                     }
@@ -214,16 +214,16 @@ class RechargeDetailViewController: BaseViewController {
             self.contentView.errorView.isHidden = false
             self.contentView.withdraw.isEnable = false
             if amount < data.minValue{
-                self.contentView.errorL.locali = R.string.localizable.withdraw_min_value.key.localized()
+                self.contentView.errorL.locali = R.string.localizable.withdraw_min_value.key
             }else if amount > self.available || self.available < data.fee {
-                self.contentView.errorL.locali =  R.string.localizable.withdraw_nomore.key.localized()
+                self.contentView.errorL.locali =  R.string.localizable.withdraw_nomore.key
             }else{
                 self.isAvalibaleAmount = true
                 self.contentView.errorView.isHidden = true
                 self.setFinalAmount()
                 if let addressText = self.contentView.addressView.content.text,addressText.count != 0,!self.isTrueAddress{
                     self.contentView.errorView.isHidden = false
-                    self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key.localized()
+                    self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key
                 }
             }
         }

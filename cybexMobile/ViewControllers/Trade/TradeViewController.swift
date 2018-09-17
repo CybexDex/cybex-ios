@@ -98,18 +98,18 @@ class TradeViewController: BaseViewController {
     titlesView = CybexTitleView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 32))
     topView.addSubview(self.titlesView!)
     
-    self.titlesView!.data = [R.string.localizable.trade_buy.key.localized(),
-                             R.string.localizable.trade_sell.key.localized(),
-                             R.string.localizable.trade_open_orders.key.localized()]
+    self.titlesView!.data = [R.string.localizable.trade_buy.key,
+                             R.string.localizable.trade_sell.key,
+                             R.string.localizable.trade_open_orders.key]
     
   }
   
   func setupEvent(){
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] notification in
       guard let `self` = self else {return}
-      self.titlesView!.data = [R.string.localizable.trade_buy.key.localized(),
-                               R.string.localizable.trade_sell.key.localized(),
-                               R.string.localizable.trade_open_orders.key.localized()]
+      self.titlesView!.data = [R.string.localizable.trade_buy.key,
+                               R.string.localizable.trade_sell.key,
+                               R.string.localizable.trade_open_orders.key]
       self.rightNavButton?.setTitle(R.string.localizable.my_history_title.key.localized(), for: .normal)
     })
   }

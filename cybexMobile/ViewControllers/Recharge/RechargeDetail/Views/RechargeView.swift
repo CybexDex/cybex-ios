@@ -68,23 +68,23 @@ class RechargeView: UIView {
     
     func updateViewWithAssetName(_ name : String) {
         if name == AssetConfiguration.EOS{
-            self.addressView.name = R.string.localizable.eos_withdraw_account.key.localized()
-            self.addressView.textplaceholder = R.string.localizable.eos_withdraw_account_placehold.key.localized()
+            self.addressView.name = R.string.localizable.eos_withdraw_account.key
+            self.addressView.textplaceholder = R.string.localizable.eos_withdraw_account_placehold.key
             
             if AddressManager.shared.getWithDrawAddressListWith(name).count == 0 {
-                self.addressView.btn.locali = R.string.localizable.add_account.key.localized()
+                self.addressView.btn.locali = R.string.localizable.add_account.key
             }
             else {
-                self.addressView.btn.locali = R.string.localizable.choose_account.key.localized()
+                self.addressView.btn.locali = R.string.localizable.choose_account.key
             }
         }
         else {
             self.memoView.isHidden = true
             if AddressManager.shared.getWithDrawAddressListWith(name).count == 0 {
-                self.addressView.btn.locali = R.string.localizable.add_address.key.localized()
+                self.addressView.btn.locali = R.string.localizable.add_address.key
             }
             else {
-                self.addressView.btn.locali = R.string.localizable.choose_address.key.localized()
+                self.addressView.btn.locali = R.string.localizable.choose_address.key
             }
         }
     }

@@ -5,7 +5,8 @@
   Created by koofrank on 2018/3/12.
   Copyright © 2018年 Cybex. All rights reserved.
 */
-
+"" = "";
+"--" = "--";
 "nav.watchlist" = "Watchlist";
 "nav.faq" = "FAQ";
 "nav.apply" = "Application";

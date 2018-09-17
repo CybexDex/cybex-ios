@@ -8,7 +8,7 @@ def network
 #    pod 'Kingfisher'
     pod 'ReachabilitySwift'
     pod 'Apollo'
-    pod 'AlamofireNetworkActivityLogger'
+#    pod 'AlamofireNetworkActivityLogger'
 end
 
 def data
@@ -79,7 +79,6 @@ end
 
 def ui
     pod 'TinyConstraints'
-    pod 'ESTabBarController-swift'
     pod 'KMNavigationBarTransition'
     pod 'NVActivityIndicatorView'
     pod 'BeareadToast', :git => 'https://github.com/phpmaple/BeareadToast'
@@ -91,7 +90,7 @@ def ui
     pod 'RxGesture'
     pod 'SwiftRichString', :git => 'https://github.com/malcommac/SwiftRichString', :tag => '2.0.1'
     pod 'ZLaunchAd'
-    pod 'SDCAlertView'
+#    pod 'SDCAlertView'
     pod 'Presentr'
     pod 'Macaw'
 #    pod 'SwiftEntryKit'

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ESTabBarController_swift
+import ESTabBarController
 import Localize_Swift
 import ReSwift
 import SwiftTheme

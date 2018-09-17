@@ -42,7 +42,7 @@ class WithdrawAddressViewController: BaseViewController {
             self.localized_text = self.coordinator!.isEOS() ? R.string.localizable.eos_withdraw_account.key.localizedContainer() : R.string.localizable.withdraw_address.key.localizedContainer()
         }
         if !self.coordinator!.isEOS() {
-            self.leftLabel.locali = R.string.localizable.account_or_address.key.localized()
+            self.leftLabel.locali = R.string.localizable.account_or_address.key
         }
         self.tableView.register(R.nib.withdrawAddressTableViewCell(), forCellReuseIdentifier: R.nib.withdrawAddressTableViewCell.name)
     }

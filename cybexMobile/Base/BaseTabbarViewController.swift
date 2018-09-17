@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ESTabBarController_swift
+import ESTabBarController
 
 class CBTabBarView: ESTabBarItemContentView {
   

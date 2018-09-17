@@ -54,8 +54,8 @@ class AccountOpenedOrdersView:UIView {
     
     headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: 103))
     
-    headerView.sectionTitleView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key.localized()
-    headerView.sectionTitleView.totalTitle.locali = R.string.localizable.my_opened_price.key.localized()
+    headerView.sectionTitleView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key
+    headerView.sectionTitleView.totalTitle.locali = R.string.localizable.my_opened_price.key
     tableView.tableHeaderView = headerView
   }
   

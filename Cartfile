@@ -1,4 +1,7 @@
+github "sberrevoets/SDCAlertView"
+github "konkab/AlamofireNetworkActivityLogger"
 github "xmartlabs/XLPagerTabStrip"
+github "eggswift/ESTabBarController"
 git "https://github.com/Moya/Moya" "12.0.0-beta.1"
 github "onevcat/Kingfisher"
 github "alibaba/HandyJSON"

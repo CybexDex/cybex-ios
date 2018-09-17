@@ -29,8 +29,8 @@ class MyOpenedOrdersView: UIView {
   fileprivate func setup() {
     let name = UINib.init(nibName: String.init(describing:OpenedOrdersCell.self), bundle: nil)
     self.tableView.register(name, forCellReuseIdentifier: String.init(describing:OpenedOrdersCell.self))
-    sectionView.totalTitle.locali = R.string.localizable.my_opened_price.key.localized()
-    sectionView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key.localized()
+    sectionView.totalTitle.locali = R.string.localizable.my_opened_price.key
+    sectionView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key
     self.tableView.tableFooterView = UIView()
   }
   

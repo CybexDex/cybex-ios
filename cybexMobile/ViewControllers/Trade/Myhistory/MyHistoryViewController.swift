@@ -89,8 +89,8 @@ extension MyHistoryViewController : UITableViewDelegate,UITableViewDataSource{
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: define.sectionHeaderHeight))
     
-    lockupAssetsSectionView.totalTitle.locali = R.string.localizable.order_history_first_title.key.localized()
-    lockupAssetsSectionView.cybPriceTitle.locali = R.string.localizable.order_history_second_title.key.localized()
+    lockupAssetsSectionView.totalTitle.locali = R.string.localizable.order_history_first_title.key
+    lockupAssetsSectionView.cybPriceTitle.locali = R.string.localizable.order_history_second_title.key
     return lockupAssetsSectionView
   }
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
