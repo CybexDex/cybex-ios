@@ -18,6 +18,7 @@ default_platform(:ios)
 platform :ios do
   desc "Description of what the lane does"
   lane :fir do
+    xcode_select("/Applications/Xcode.app")
     app_identifier="com.nbltrustdev.cybex.fir"
     update_app_identifier(
       xcodeproj: "cybexMobile.xcodeproj", # Optional path to xcodeproj, will use the first .xcodeproj if not set
@@ -45,6 +46,7 @@ platform :ios do
   end
 
   lane :publish do
+    xcode_select("/Applications/Xcode.app")
     app_identifier="com.nbltrustdev.cybex"
     update_app_identifier(
       xcodeproj: "cybexMobile.xcodeproj", # Optional path to xcodeproj, will use the first .xcodeproj if not set
@@ -71,6 +73,7 @@ platform :ios do
   end
   
    lane :test do
+      xcode_select("/Applications/Xcode.app")
       app_identifier="com.nbltrustdev.cybex"
       update_app_identifier(
         xcodeproj: "cybexMobile.xcodeproj", # Optional path to xcodeproj, will use the first .xcodeproj if not set
