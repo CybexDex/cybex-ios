@@ -19,8 +19,10 @@ class ETOViewController: BaseViewController {
     @IBOutlet weak var homeView: ETOHomeView!
 //    var timerRepeater: Repeater?
     var infosRepeater: Repeater?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupData()
         setupUI()
         setupEvent()
@@ -58,6 +60,8 @@ class ETOViewController: BaseViewController {
     }
     
     func setupNaviUI() {
+        self.automaticallyAdjustsScrollViewInsets = true
+        self.extendedLayoutIncludesOpaqueBars = false
         self.navigationItem.titleView = UIImageView(image: R.image.img_etologo())
         configRightNavButton(R.image.ic_records_24_px())
     }

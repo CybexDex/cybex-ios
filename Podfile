@@ -1,24 +1,15 @@
 platform :ios, '9.0'
 
 def network
-#    pod 'Starscream'
-#    pod 'SocketRocket', :git => 'https://github.com/facebook/SocketRocket', :branch => 'master'
     pod 'JSONRPCKit', :git => 'https://github.com/phpmaple/JSONRPCKit', :branch => 'master'
-#    pod 'Moya', :git => 'https://github.com/Moya/Moya', :tag => '12.0.0-beta.1'
-#    pod 'Kingfisher'
     pod 'ReachabilitySwift'
     pod 'Apollo'
-#    pod 'AlamofireNetworkActivityLogger'
 end
 
 def data
     pod 'ObjectMapper'
-#    pod 'HandyJSON'
     pod 'SwiftyJSON'
-#    pod 'BigInt'
-#    pod 'GRDB.swift'
     pod 'CryptoSwift'
-#    pod 'RxGRDB'
     pod 'SwiftyUserDefaults',:git => 'https://github.com/radex/SwiftyUserDefaults', :tag => '4.0.0-alpha.1'
     pod 'Zephyr'
     pod 'Cache'
@@ -26,7 +17,6 @@ def data
     pod 'Then'
     pod 'FCUUID'
     pod 'IQKeyboardManagerSwift'
-#    pod 'Guitar'
     pod 'DifferenceKit'
     pod 'Dollar'
     pod 'Validator'
@@ -38,8 +28,6 @@ def resource
 end
 
 def architecture
-#   pod 'ReSwift'
-#   pod 'RxSwift'
    pod 'ObservableArray-RxSwift'
    pod 'RxSwiftExt'
    pod 'RxDataSources'
@@ -65,10 +53,7 @@ def permission
 end
 
 def animation
-#    pod 'EasyAnimation'
-#    pod 'Hero'
-#    pod 'ChainableAnimations'
-#    pod 'TableFlip'
+
 end
 
 def extension
@@ -89,8 +74,7 @@ def ui
     pod 'Typist'
     pod 'RxGesture'
     pod 'SwiftRichString', :git => 'https://github.com/malcommac/SwiftRichString', :tag => '2.0.1'
-    pod 'ZLaunchAd'
-#    pod 'SDCAlertView'
+#    pod 'ZLaunchAd'
     pod 'Presentr'
     pod 'Macaw'
 #    pod 'SwiftEntryKit'
@@ -102,13 +86,12 @@ def ui
     pod 'ESPullToRefresh'
     pod 'FSPagerView'
     pod 'ActiveLabel'
-    pod 'SkeletonView'
+#    pod 'SkeletonView'
 end
 
 def other
     pod 'Siren'
-    pod 'LifetimeTracker'
-    pod 'MLeaksFinder'
+#    pod 'MLeaksFinder'
     pod 'Device'
     pod 'SwiftNotificationCenter'
     pod 'AsyncSwift'
@@ -116,8 +99,8 @@ def other
 end
 
 def scripts
-    pod 'SwiftGen'
-    pod 'Sourcery'
+#    pod 'SwiftGen'
+#    pod 'Sourcery'
 end
 
 def fabric

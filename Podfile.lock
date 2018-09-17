@@ -30,7 +30,6 @@ PODS:
   - ESPullToRefresh (2.7)
   - Fabric (1.7.9)
   - Fakery (3.3.0)
-  - FBRetainCycleDetector (0.1.4)
   - FCUUID (1.3.1):
     - UICKeyChainStore (~> 2.1.0)
   - FSPagerView (0.7.2)
@@ -42,15 +41,12 @@ PODS:
   - "Keyboard+LayoutGuide (1.2.2)"
   - KeychainAccess (3.1.1)
   - KMNavigationBarTransition (1.1.5)
-  - LifetimeTracker (1.4.0)
   - Lightning (2.0.0)
   - Localize-Swift (2.0.0)
   - Locksmith (4.0.0)
   - Macaw (0.9.2):
     - SWXMLHash
   - MJRefresh (3.1.15.3)
-  - MLeaksFinder (1.0.0):
-    - FBRetainCycleDetector
   - MonkeyKing (1.8.0)
   - Nimble (7.1.3)
   - NVActivityIndicatorView (4.3.0):
@@ -99,8 +95,6 @@ PODS:
     - RxCocoa (>= 4.1.0)
     - RxSwift (>= 4.1.0)
   - Siren (3.4.3)
-  - SkeletonView (1.4)
-  - Sourcery (0.14.0)
   - SwifterSwift (4.4.0):
     - SwifterSwift/AppKit (= 4.4.0)
     - SwifterSwift/CoreGraphics (= 4.4.0)
@@ -118,7 +112,6 @@ PODS:
   - SwifterSwift/SpriteKit (4.4.0)
   - SwifterSwift/SwiftStdlib (4.4.0)
   - SwifterSwift/UIKit (4.4.0)
-  - SwiftGen (5.3.0)
   - SwiftNotificationCenter (1.0.3)
   - SwiftRichString (2.0.1)
   - SwiftTheme (0.4.1)
@@ -143,7 +136,6 @@ PODS:
     - XLActionController/Core (= 4.0.1)
   - XLActionController/Core (4.0.1)
   - Zephyr (3.1.2)
-  - ZLaunchAd (2.0.4)
 
 DEPENDENCIES:
   - Action
@@ -174,13 +166,11 @@ DEPENDENCIES:
   - "Keyboard+LayoutGuide"
   - KeychainAccess
   - KMNavigationBarTransition
-  - LifetimeTracker
   - Lightning
   - Localize-Swift
   - Locksmith
   - Macaw
   - MJRefresh
-  - MLeaksFinder
   - MonkeyKing
   - Nimble
   - NVActivityIndicatorView
@@ -200,10 +190,7 @@ DEPENDENCIES:
   - RxSwiftExt
   - RxValidator
   - Siren
-  - SkeletonView
-  - Sourcery
   - SwifterSwift
-  - SwiftGen
   - SwiftNotificationCenter
   - SwiftRichString (from `https://github.com/malcommac/SwiftRichString`, tag `2.0.1`)
   - SwiftTheme
@@ -223,7 +210,6 @@ DEPENDENCIES:
   - Validator
   - XLActionController
   - Zephyr
-  - ZLaunchAd
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -246,7 +232,6 @@ SPEC REPOS:
     - ESPullToRefresh
     - Fabric
     - Fakery
-    - FBRetainCycleDetector
     - FCUUID
     - FSPagerView
     - GrowingTextView
@@ -255,13 +240,11 @@ SPEC REPOS:
     - "Keyboard+LayoutGuide"
     - KeychainAccess
     - KMNavigationBarTransition
-    - LifetimeTracker
     - Lightning
     - Localize-Swift
     - Locksmith
     - Macaw
     - MJRefresh
-    - MLeaksFinder
     - MonkeyKing
     - Nimble
     - NVActivityIndicatorView
@@ -285,10 +268,7 @@ SPEC REPOS:
     - RxSwiftExt
     - RxValidator
     - Siren
-    - SkeletonView
-    - Sourcery
     - SwifterSwift
-    - SwiftGen
     - SwiftNotificationCenter
     - SwiftTheme
     - SwiftyBeaver
@@ -308,7 +288,6 @@ SPEC REPOS:
     - Validator
     - XLActionController
     - Zephyr
-    - ZLaunchAd
 
 EXTERNAL SOURCES:
   BeareadToast:
@@ -358,7 +337,6 @@ SPEC CHECKSUMS:
   ESPullToRefresh: 119e2710b82b75536aab2bbe4883ba119fca35c8
   Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
   Fakery: 3aae11a87721c807c18c6456500d088c1230d3e5
-  FBRetainCycleDetector: 46f8179bbb1c587deee3ea838a1a3ee02acf5015
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
   FSPagerView: 7515f63c424da71623d299d4fbbfb3dd884642ff
   GrowingTextView: 8958f4fb7419de58dd622021b2d0696487e00e70
@@ -368,13 +346,11 @@ SPEC CHECKSUMS:
   "Keyboard+LayoutGuide": 4c33aa1749cee1af43c3c32a988b58ad1918bdef
   KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
   KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
-  LifetimeTracker: 51b52d559ffd4570584996b4b94b8779e525ee62
   Lightning: c6a02102c761491a4957c6265d9161dc5452c3bf
   Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
   Macaw: 6db42cb10c1e018ee940a906b42a1ead5557e080
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
-  MLeaksFinder: 8c435bd2f6d070af18cff082b503b21adc130fc0
   MonkeyKing: a09f77048f3dd8ee94143dc70fc7b47a2362188e
   Nimble: 2839b01d1b31f6a6a7777a221f0d91cf52e8e27b
   NVActivityIndicatorView: 963f62bf9f993fcf23218e55958e5b1761b9504c
@@ -398,10 +374,7 @@ SPEC CHECKSUMS:
   RxSwiftExt: 81afb48ab0602f503147417baeb3989d64c7687d
   RxValidator: 37303537f39c0a764d7552bd26d27d086cfd61c6
   Siren: e3cf1a93fa0fa73c03452107e95e5c10768d1d08
-  SkeletonView: 50f7a9b04e3a62bd0ae964859c19317fabaea367
-  Sourcery: 51332d15c2fc40e4ac5956e149a5d95607c63154
   SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
-  SwiftGen: 4379bd3640b0a212a0f6ea3c494adba385513d10
   SwiftNotificationCenter: 309e912a10d664ef68979deb1df7f17c2bdbe2ea
   SwiftRichString: 3b29b5f2eb0eb244497532f2fd2ec26318eae584
   SwiftTheme: 36d71c4eed4b2c401c782cf036e4586c749a8173
@@ -423,8 +396,7 @@ SPEC CHECKSUMS:
   Validator: bf211c1d71b3f910d230c09c70e62429d0fef63a
   XLActionController: 007868251c0eed70d649d06c1625259b73b3a600
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
-  ZLaunchAd: 34f79abb60018f2e2a5168d6287d90473024ab81
 
-PODFILE CHECKSUM: 60e2c536c5993b1bf384f28f4eab17238a3b92ba
+PODFILE CHECKSUM: 7e58adbdc53b11041baf2950c8d132dea2b5febc
 
 COCOAPODS: 1.5.3
