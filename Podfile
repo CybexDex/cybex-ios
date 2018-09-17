@@ -68,7 +68,7 @@ def animation
 #    pod 'EasyAnimation'
 #    pod 'Hero'
 #    pod 'ChainableAnimations'
-    pod 'TableFlip'
+#    pod 'TableFlip'
 end
 
 def extension
@@ -96,7 +96,7 @@ def ui
     pod 'Macaw'
 #    pod 'SwiftEntryKit'
     pod 'Keyboard+LayoutGuide'
-    pod 'XLPagerTabStrip'
+#    pod 'XLPagerTabStrip'
     pod 'EFQRCode'
     pod 'GrowingTextView'
     pod 'XLActionController'

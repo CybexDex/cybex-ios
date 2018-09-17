@@ -383,6 +383,8 @@
 		731C11C7214D045E00761955 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B9214D045D00761955 /* Result.framework */; };
 		731C11C8214D045E00761955 /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11BA214D045E00761955 /* Moya.framework */; };
 		7323B4B02A3A6EFE54C1B30D7491D953 /* MyHistoryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E17D1C068A4ED09DD447E3434E5E550 /* MyHistoryCellView.xib */; };
+		7336B79B214F569F0086A9DF /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7336B79A214F569E0086A9DF /* XLPagerTabStrip.framework */; };
+		7336B79F214F5ABE0086A9DF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CF75C7E63B1305DDDE74491D7E5C9AB /* Localizable.strings */; };
 		733714B12122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714AF2122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift */; };
 		733714B22122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714B02122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib */; };
 		733714B52122D2B400B2ED90 /* WithdrawAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714B32122D2B400B2ED90 /* WithdrawAddressTableViewCell.swift */; };
@@ -607,7 +609,6 @@
 		DC9C7889A0A2E47D006896DEAE7B534C /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B263F47A6EA634EA51861A23F6CE1C9 /* SettingCell.swift */; };
 		DD53E4DB5C321358D6C1AB4A303C62BA /* iomanip.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = CE9B246B79A8742BBBD110A1DB42B670 /* iomanip.SUNWCCh */; };
 		DEB016D2DCEE16701CFE117CA91D6A6E /* limits.SUNWCCh in Resources */ = {isa = PBXBuildFile; fileRef = F02C95044B36EC86D4787A437D698ED4 /* limits.SUNWCCh */; };
-		DF032043A699E690FA00D8C90B72773F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CF75C7E63B1305DDDE74491D7E5C9AB /* Localizable.strings */; };
 		DFA46607407072808EE78AEA1A37D728 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B814F64ED665AF18577542DDD16C9010 /* ColorTheme.swift */; };
 		E03900031A3D0D695E0419C5FECD70C3 /* gateway.graphql in Resources */ = {isa = PBXBuildFile; fileRef = FD63D8CFE0CA92FF685951A2511B4EB2 /* gateway.graphql */; };
 		E0AD8E2E835D84754C63BA76FBA8582E /* AccountReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D3052EA7FC58D19807D2ECFF133440 /* AccountReducers.swift */; };
@@ -6073,6 +6074,9 @@
 		7332B0A4E530EEDF4F5295A267932B23 /* static_binding.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = static_binding.hpp; sourceTree = "<group>"; };
 		73335AC821476AA700CEF254 /* cybexMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cybexMobile.entitlements; sourceTree = "<group>"; };
 		7335642E20FF2C0500426FE4 /* cybex_gateway_query.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cybex_gateway_query.hpp; sourceTree = "<group>"; };
+		7336B799214F55160086A9DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7336B79A214F569E0086A9DF /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XLPagerTabStrip.framework; path = Carthage/Build/iOS/XLPagerTabStrip.framework; sourceTree = "<group>"; };
+		7336B79E214F5A310086A9DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7336D47B5E14FBBBDC4A985A8613F59A /* recursive_wrapper_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = recursive_wrapper_fwd.hpp; sourceTree = "<group>"; };
 		733714AF2122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAddressHomeTableViewCell.swift; sourceTree = "<group>"; };
 		733714B02122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithdrawAddressHomeTableViewCell.xib; sourceTree = "<group>"; };
@@ -12540,6 +12544,7 @@
 				731C11C1214D045E00761955 /* RxCocoa.framework in Frameworks */,
 				731C11C2214D045E00761955 /* RxSwift.framework in Frameworks */,
 				731C11C3214D045E00761955 /* Kingfisher.framework in Frameworks */,
+				7336B79B214F569F0086A9DF /* XLPagerTabStrip.framework in Frameworks */,
 				731C11C4214D045E00761955 /* HandyJSON.framework in Frameworks */,
 				731C11C5214D045E00761955 /* ReSwift.framework in Frameworks */,
 				731C11C6214D045E00761955 /* SocketRocket.framework in Frameworks */,
@@ -29701,6 +29706,7 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7336B79A214F569E0086A9DF /* XLPagerTabStrip.framework */,
 				731C11B0214D045900761955 /* Alamofire.framework */,
 				731C11B2214D045A00761955 /* Guitar.framework */,
 				731C11B6214D045C00761955 /* HandyJSON.framework */,
@@ -33219,7 +33225,6 @@
 				BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */,
 				4C503C5D3E59634F44E3149DFE8EA11D /* [CP] Embed Pods Frameworks */,
 				A6D55984F0239A7067AB1555 /* [CP] Copy Pods Resources */,
-				738FCEEA214914BD0042331A /* icon */,
 				736E5369214BBC2D00A04140 /* Embed Frameworks */,
 				7384FD58214CF5F900AFF5BE /* appstore bug */,
 				738FCE312148D7EC0042331A /* carthage */,
@@ -33347,6 +33352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7336B79F214F5ABE0086A9DF /* Localizable.strings in Resources */,
 				72199D7E210450F500575226 /* RecodeCellView.xib in Resources */,
 				A081A5FE86C0AC44E299840DD8C1DE00 /* AccessoryCollectionView.xib in Resources */,
 				D971C57B81B4A2FBB083235DDE5057A2 /* AccessoryCollectionViewCell.xib in Resources */,
@@ -33387,7 +33393,6 @@
 				59662228CB1D233B02EF357CA563A486 /* Launch Screen.storyboard in Resources */,
 				7267DA2321363BEE004AF9AF /* ETOHomeView.xib in Resources */,
 				221EC253210609B20059F856 /* TransferView.xib in Resources */,
-				DF032043A699E690FA00D8C90B72773F /* Localizable.strings in Resources */,
 				082F8D06A9EF700C8EB3A8BC62D8F1A8 /* LockupAssetsCell.xib in Resources */,
 				089679AF63200358A2B8B9059A9824A0 /* LockupAssetsSectionView.xib in Resources */,
 				72C844D8214A3F000078448C /* en_dark.html in Resources */,
@@ -33685,7 +33690,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n";
+			shellScript = "#APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\n#find \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\n#do\n#FRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\n#FRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\n#echo \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\n#EXTRACTED_ARCHS=()\n\n#for ARCH in $ARCHS\n#do\n#echo \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\n#lipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\n#EXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\n#done\n\n#echo \"Merging extracted architectures: ${ARCHS}\"\n#lipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\n#rm \"${EXTRACTED_ARCHS[@]}\"\n\n#echo \"Replacing original executable with thinned version\"\n#rm \"$FRAMEWORK_EXECUTABLE_PATH\"\n#mv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\n#done\n";
 		};
 		738FCE312148D7EC0042331A /* carthage */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -33707,6 +33712,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxMoya.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Guitar.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SocketRocket.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/XLPagerTabStrip.framework",
 			);
 			name = carthage;
 			outputPaths = (
@@ -33724,24 +33730,11 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxMoya.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Guitar.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SocketRocket.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/XLPagerTabStrip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		738FCEEA214914BD0042331A /* icon */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = icon;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n$SRCROOT/scripts/LLIconVersioning.sh\n#fi";
 		};
 		A6D55984F0239A7067AB1555 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -33770,7 +33763,6 @@
 				"${PODS_ROOT}/Siren/Sources/Siren.bundle",
 				"${PODS_ROOT}/UMCCommonLog/UMCommonLog/UMCommonLog.bundle",
 				"${PODS_ROOT}/XLActionController/Resource/ActionCell.xib",
-				"${PODS_CONFIGURATION_BUILD_DIR}/XLPagerTabStrip/XLPagerTabStrip.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -33794,7 +33786,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Siren.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMCommonLog.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ActionCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/XLPagerTabStrip.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -34262,6 +34253,7 @@
 			children = (
 				003AE75215C04437A3E7C94FE503578A /* en */,
 				ED1CB62B761ED3D7C495B63C70CA617D /* zh-Hans */,
+				7336B79E214F5A310086A9DF /* Base */,
 			);
 			name = InfoPlist.strings;
 			path = .;
@@ -34272,6 +34264,7 @@
 			children = (
 				63EF62CFA8789EFBA1311F43D8313D44 /* en */,
 				A2360707185A0DEC4ACAAFBA8C503994 /* zh-Hans */,
+				7336B799214F55160086A9DF /* Base */,
 			);
 			name = Localizable.strings;
 			path = .;

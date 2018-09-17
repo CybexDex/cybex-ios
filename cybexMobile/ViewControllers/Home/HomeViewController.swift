@@ -10,7 +10,6 @@ import Foundation
 import ReSwift
 import RxCocoa
 import RxSwift
-import TableFlip
 import SwiftyJSON
 import TinyConstraints
 import Repeat

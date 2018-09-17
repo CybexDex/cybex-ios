@@ -131,7 +131,6 @@ PODS:
   - SwiftyJSON (4.1.0)
   - SwiftyUserDefaults (4.0.0-alpha.1)
   - SWXMLHash (4.7.1)
-  - TableFlip (1.2)
   - TextFieldEffects (1.4.0)
   - Then (2.3.0)
   - TinyConstraints (3.1.1)
@@ -148,7 +147,6 @@ PODS:
   - XLActionController (4.0.1):
     - XLActionController/Core (= 4.0.1)
   - XLActionController/Core (4.0.1)
-  - XLPagerTabStrip (8.0.1)
   - Zephyr (3.1.2)
   - ZLaunchAd (2.0.4)
 
@@ -220,7 +218,6 @@ DEPENDENCIES:
   - SwiftyBeaver
   - SwiftyJSON
   - SwiftyUserDefaults (from `https://github.com/radex/SwiftyUserDefaults`, tag `4.0.0-alpha.1`)
-  - TableFlip
   - TextFieldEffects
   - Then
   - TinyConstraints
@@ -233,7 +230,6 @@ DEPENDENCIES:
   - URLNavigator
   - Validator
   - XLActionController
-  - XLPagerTabStrip
   - Zephyr
   - ZLaunchAd
 
@@ -310,7 +306,6 @@ SPEC REPOS:
     - SwiftyBeaver
     - SwiftyJSON
     - SWXMLHash
-    - TableFlip
     - TextFieldEffects
     - Then
     - TinyConstraints
@@ -324,7 +319,6 @@ SPEC REPOS:
     - URLNavigator
     - Validator
     - XLActionController
-    - XLPagerTabStrip
     - Zephyr
     - ZLaunchAd
 
@@ -431,7 +425,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   SwiftyUserDefaults: cebe0ff9472f52699772a514b6f7155861d8069b
   SWXMLHash: 661b67bc94a01fe71a6ad4ca690cf2cafa5d1d6f
-  TableFlip: 2ae22773412b295a7cbc54d95b44085bb28092f6
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
   Then: ee21c97b85ff6062b9b0080c9abb1eea46743345
   TinyConstraints: c15ce864e9ef87dfd18ee3bd746d510a38d84198
@@ -445,10 +438,9 @@ SPEC CHECKSUMS:
   URLNavigator: 2357a32f3b3787b748bf87deb927761f8b0f7f53
   Validator: bf211c1d71b3f910d230c09c70e62429d0fef63a
   XLActionController: 007868251c0eed70d649d06c1625259b73b3a600
-  XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
   ZLaunchAd: 34f79abb60018f2e2a5168d6287d90473024ab81
 
-PODFILE CHECKSUM: af1a0b7f140ba70500ae11a53c2eeeb9a66dc4c7
+PODFILE CHECKSUM: 97bb4a476113cdada345b95e7ff42a7c9f642c92
 
 COCOAPODS: 1.5.3
