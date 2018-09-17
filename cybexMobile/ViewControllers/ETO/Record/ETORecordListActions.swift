@@ -28,4 +28,7 @@ struct ETORecordListFetchedAction: Action {
     var add: Bool 
 }
 
+struct ETONextPageAction: Action {
+    var page: Int
+}
 

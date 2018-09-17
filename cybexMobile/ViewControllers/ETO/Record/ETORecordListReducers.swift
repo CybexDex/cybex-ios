@@ -27,7 +27,8 @@ func ETORecordListReducer(action:Action, state:ETORecordListState?) -> ETORecord
             let changeset = StagedChangeset(source: state.data.value, target: appendModel)
             state.changeSet.accept(changeset)
         }
-        
+    case let action as ETONextPageAction:
+        state.page.accept(action.page)
     default:
         break
     }

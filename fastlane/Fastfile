@@ -19,9 +19,10 @@ platform :ios do
   desc "Description of what the lane does"
   lane :fir do
     app_identifier="com.nbltrustdev.cybex.fir"
-    update_info_plist(
-      plist_path:"cybexMobile/Info.plist",
-      app_identifier: "#{app_identifier}"
+    update_app_identifier(
+      xcodeproj: "cybexMobile.xcodeproj", # Optional path to xcodeproj, will use the first .xcodeproj if not set
+      plist_path: "cybexMobile/Info.plist", # Path to info plist file, relative to xcodeproj
+      app_identifier: "com.nbltrustdev.cybex.fir" # The App Identifier
     )
     gym(
       xcargs: "-UseNewBuildSystem=YES",
@@ -40,14 +41,15 @@ platform :ios do
       }
     )
     firim(firim_api_token:"92fc2819f9894e4890c9fd27d4c1d234")
-    slack(message: "Successfully distributed cybex to fir")
+    slack(message: "Successfully distributed cybex to fir, download_url: https://fir.im/7zma ", slack_url:"https://hooks.slack.com/services/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")
   end
 
   lane :publish do
     app_identifier="com.nbltrustdev.cybex"
-    update_info_plist(
-      plist_path:"cybexMobile/Info.plist",
-      app_identifier: "#{app_identifier}"
+    update_app_identifier(
+      xcodeproj: "cybexMobile.xcodeproj", # Optional path to xcodeproj, will use the first .xcodeproj if not set
+      plist_path: "cybexMobile/Info.plist", # Path to info plist file, relative to xcodeproj
+      app_identifier: "com.nbltrustdev.cybex" # The App Identifier
     )
     gym(
       output_name: "cybex-appstore",
@@ -65,14 +67,15 @@ platform :ios do
       }
     )
     appstore
-    slack(message: "Successfully distributed cybex to appstore")
+    slack(message: "Successfully distributed cybex to appstore", slack_url:"https://hooks.slack.com/services/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")
   end
   
    lane :test do
       app_identifier="com.nbltrustdev.cybex"
-      update_info_plist(
-        plist_path:"cybexMobile/Info.plist",
-        app_identifier: "#{app_identifier}"
+      update_app_identifier(
+        xcodeproj: "cybexMobile.xcodeproj", # Optional path to xcodeproj, will use the first .xcodeproj if not set
+        plist_path: "cybexMobile/Info.plist", # Path to info plist file, relative to xcodeproj
+        app_identifier: "com.nbltrustdev.cybex" # The App Identifier
       )
       gym(
         output_name: "cybex-testflight",
@@ -90,7 +93,7 @@ platform :ios do
         }
       )
       upload_to_testflight
-      slack(message: "Successfully distributed cybex to testflight")
+      slack(message: "Successfully distributed cybex to testflight", slack_url:"https://hooks.slack.com/services/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")
     end
 
 end
