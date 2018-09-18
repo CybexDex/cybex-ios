@@ -28,12 +28,6 @@ class ContainerView: CornerAndShadowView {
         }
     }
     
-    override var cornerRadius: CGFloat {
-        didSet {
-            self.newCornerRadius = cornerRadius
-            layer.masksToBounds = false
-        }
-    }
     
     override func setup() {
         super.setup()
