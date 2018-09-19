@@ -22327,6 +22327,7 @@
 		72E2A8E62151F8E900FBB3CB /* Comprehensive */ = {
 			isa = PBXGroup;
 			children = (
+				72E2A8F52151FCC500FBB3CB /* Views */,
 				72E2A8E92151F9DB00FBB3CB /* ComprehensiveCoordinator.swift */,
 				72E2A8EA2151F9DB00FBB3CB /* ComprehensiveActions.swift */,
 				72E2A8EB2151F9DB00FBB3CB /* ComprehensiveViewController.swift */,
@@ -22334,6 +22335,13 @@
 				72E2A8F32151FB0C00FBB3CB /* Comprehensive.storyboard */,
 			);
 			path = Comprehensive;
+			sourceTree = "<group>";
+		};
+		72E2A8F52151FCC500FBB3CB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		72EC6A4E20F4611500CEAFF6 /* Views */ = {
@@ -33293,7 +33301,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Cybex;
 				TargetAttributes = {
 					6597A0AC6C29D30281EBD879E45F3BAF = {

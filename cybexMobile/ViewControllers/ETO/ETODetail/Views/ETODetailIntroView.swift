@@ -10,7 +10,7 @@ import Foundation
 import ActiveLabel
 
 @IBDesignable
-class ETODetailIntroView: BaseView {
+class ETODetailIntroView: CybexBaseView {
     
     @IBOutlet weak var downUpButton: UIButton!
     @IBOutlet weak var contentLabel: ActiveLabel!
@@ -36,7 +36,6 @@ class ETODetailIntroView: BaseView {
     }
     
     func setContentAttribute(contentLabelStr:String, attLabelArray: [String]) {
-
         for att in attLabelArray {
             let customType = ActiveType.custom(pattern: att)
             contentLabel.enabledTypes.append(customType)
@@ -47,13 +46,13 @@ class ETODetailIntroView: BaseView {
                     atts[NSAttributedStringKey.underlineStyle] = NSUnderlineStyle.styleSingle.rawValue
                     return atts
                 }
-                label.handleCustomTap(for: customType, handler: { (str) in
+                label.handleCustomTap(for: customType, handler: { [weak self](str) in
+                    guard let `self` = self else { return }
                     self.next?.sendEventWith(Event.labelClick.rawValue, userinfo: ["clicklabel":str])
                 })
             }
         }
         content = contentLabelStr
-
     }
 
     override func setup() {
@@ -81,5 +80,9 @@ class ETODetailIntroView: BaseView {
     
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.ETODetailIntroViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+    }
+    
+    deinit {
+        log.debug("ETODetailIntroView delloc -- \(self)")
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 @IBDesignable
-class ETOCrowdGridItemView: BaseView {
+class ETOCrowdGridItemView: CybexBaseView {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!

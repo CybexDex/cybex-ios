@@ -10,7 +10,7 @@ import Foundation
 import NBLCommonModule
 
 @IBDesignable
-class BaseView: UIControl {
+class CybexBaseView: UIControl {
     
     var xibView:UIView!
     var foreView:UIView!

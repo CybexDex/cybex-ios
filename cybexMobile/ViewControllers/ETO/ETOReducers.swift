@@ -8,29 +8,36 @@
 
 import UIKit
 import ReSwift
+import Localize_Swift
 
 func ETOReducer(action:Action, state:ETOState?) -> ETOState {
     let state = state ?? ETOState()
     switch action {
     case let action as FetchProjectModelAction:
         state.data.accept(transferModelToViewModel(action.data))
-        break
     case let action as FetchBannerModelAction:
         state.banners.accept(action.data)
+        state.bannerUrls.accept(transferBannersToUrls(action.data))
     case let action as SetSelectedProjectModelAction:
         state.selectedProjectModel.accept(action.data)
     case let action as SetSelectedBannerModelAction:
         state.selectedProjectModel.accept(nil)
         state.selectedBannerModel.accept(action.data)
+    case let action as ResetBannerUrlsAction:
+        state.bannerUrls.accept(transferBannersToUrls(action.data))
     default:break
     }
     return state
 }
 
-func transferModelToViewModel(_ data : [ETOProjectModel]) -> [ETOProjectViewModel] {
+func transferModelToViewModel(_ data: [ETOProjectModel]) -> [ETOProjectViewModel] {
     var viewModels = [ETOProjectViewModel]()
     for model in data {
         viewModels.append(ETOProjectViewModel(model))
     }
     return viewModels
+}
+
+func transferBannersToUrls(_ data: [ETOBannerModel]) -> [String]? {
+    return data.map({ Localize.currentLanguage() == "en" ? $0.adds_banner_mobile__lang_en : $0.adds_banner_mobile })
 }
