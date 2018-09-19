@@ -93,7 +93,7 @@ def other
     pod 'Siren'
 #    pod 'MLeaksFinder'
     pod 'Device'
-    pod 'SwiftNotificationCenter'
+#    pod 'SwiftNotificationCenter'
     pod 'AsyncSwift'
     pod 'MonkeyKing' #share
 end
