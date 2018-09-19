@@ -8,7 +8,7 @@
 
 import UIKit
 import ReSwift
-import SwiftNotificationCenter
+import NBLCommonModule
 
 protocol AddressHomeCoordinatorProtocol {
     func openWithDrawAddressHomeViewController()

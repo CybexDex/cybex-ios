@@ -8,7 +8,7 @@
 
 import UIKit
 import ReSwift
-import SwiftNotificationCenter
+import NBLCommonModule
 import XLActionController
 import Async
 import Dollar

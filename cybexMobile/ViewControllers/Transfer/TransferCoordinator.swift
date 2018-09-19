@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 import Presentr
-import SwiftNotificationCenter
+import NBLCommonModule
 
 protocol TransferCoordinatorProtocol {
     func pushToRecordVC()

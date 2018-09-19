@@ -8,7 +8,7 @@
 
 import UIKit
 import ReSwift
-import SwiftNotificationCenter
+import NBLCommonModule
 
 enum address_type : String {
     case withdraw
