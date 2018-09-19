@@ -10,12 +10,10 @@ import Foundation
 
 class ComprehensiveRootCoordinator: NavCoordinator {
     override func start() {
-        let vc = R.storyboard.account.accountViewController()!
-        
-        let coordinator = ComprehensiveCoordinator(rootVC: self.rootVC)
-        vc.localized_text = R.string.localizable.accountTitle.key.localizedContainer()
-        
-        // vc.coordinator = coordinat as! (AccountCoordinatorProtocol & AccountStateManagerProtocol)or
-        self.rootVC.pushViewController(vc, animated: true)
+        if let vc = R.storyboard.comprehensive.comprehensiveViewController() {
+            let coordinator = ComprehensiveCoordinator(rootVC: self.rootVC)
+            vc.coordinator = coordinator
+            self.rootVC.pushViewController(vc, animated: true)
+        }
     }
 }

@@ -11,7 +11,7 @@ import Fakery
 import SwiftTheme
 
 @IBDesignable
-class ETODetailHeaderView: BaseView {
+class ETODetailHeaderView: CybexBaseView {
     
     @IBOutlet weak var iconImgView: UIImageView!
     @IBOutlet weak var progressView: LockupProgressView!

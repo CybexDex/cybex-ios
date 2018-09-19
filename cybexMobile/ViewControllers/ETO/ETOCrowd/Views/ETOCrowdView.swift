@@ -9,7 +9,7 @@
 import Foundation
 
 @IBDesignable
-class ETOCrowdView: BaseView {
+class ETOCrowdView: CybexBaseView {
     
     @IBOutlet weak var gridView: GridContentView!
     @IBOutlet weak var titleTextView: TitleTextfieldView!

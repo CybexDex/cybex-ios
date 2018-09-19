@@ -13,7 +13,7 @@ protocol CybexWaitingProtocol {
 }
 
 @IBDesignable
-class CybexWaitingView: BaseView {
+class CybexWaitingView: CybexBaseView {
     
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!

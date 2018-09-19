@@ -112,7 +112,6 @@ PODS:
   - SwifterSwift/SpriteKit (4.4.0)
   - SwifterSwift/SwiftStdlib (4.4.0)
   - SwifterSwift/UIKit (4.4.0)
-  - SwiftNotificationCenter (1.0.3)
   - SwiftRichString (2.0.1)
   - SwiftTheme (0.4.1)
   - SwiftyBeaver (1.6.0)
@@ -191,7 +190,6 @@ DEPENDENCIES:
   - RxValidator
   - Siren
   - SwifterSwift
-  - SwiftNotificationCenter
   - SwiftRichString (from `https://github.com/malcommac/SwiftRichString`, tag `2.0.1`)
   - SwiftTheme
   - SwiftyBeaver
@@ -269,7 +267,6 @@ SPEC REPOS:
     - RxValidator
     - Siren
     - SwifterSwift
-    - SwiftNotificationCenter
     - SwiftTheme
     - SwiftyBeaver
     - SwiftyJSON
@@ -375,7 +372,6 @@ SPEC CHECKSUMS:
   RxValidator: 37303537f39c0a764d7552bd26d27d086cfd61c6
   Siren: e3cf1a93fa0fa73c03452107e95e5c10768d1d08
   SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
-  SwiftNotificationCenter: 309e912a10d664ef68979deb1df7f17c2bdbe2ea
   SwiftRichString: 3b29b5f2eb0eb244497532f2fd2ec26318eae584
   SwiftTheme: 36d71c4eed4b2c401c782cf036e4586c749a8173
   SwiftyBeaver: e45759613e50b522b0e6f53b1f0f14389b45ca34
@@ -397,6 +393,6 @@ SPEC CHECKSUMS:
   XLActionController: 007868251c0eed70d649d06c1625259b73b3a600
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
 
-PODFILE CHECKSUM: c9200fe4fb8187da61722a30b439bbb06f1ad2c6
+PODFILE CHECKSUM: 246dd27ee8e64b9e670a8b78db2e86097aaebc6a
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.1

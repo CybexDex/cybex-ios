@@ -9,7 +9,7 @@
 import Foundation
 
 @IBDesignable
-class ETOProjectView: BaseView {
+class ETOProjectView: CybexBaseView {
     
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!

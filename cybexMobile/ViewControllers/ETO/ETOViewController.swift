@@ -105,10 +105,11 @@ class ETOViewController: BaseViewController {
             
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
-        coordinator?.state.banners.asObservable().subscribe(onNext: { [weak self](banners) in
+        coordinator?.state.bannerUrls.asObservable().subscribe(onNext: { [weak self](banners) in
             guard let `self` = self else { return }
             self.endLoading()
-            self.homeView.pageView.data = banners
+            guard let data = banners else { return }
+            self.homeView.pageView.adapterModelToETOHomeBannerView(data)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }
@@ -121,8 +122,8 @@ extension ETOViewController {
     }
     
     @objc func ETOHomeBannerViewDidClicked(_ data:[String:Any]) {
-        if let banner = data["data"] as? ETOBannerModel {
-            self.coordinator?.setSelectedBannerData(banner)
+        if let models = self.coordinator?.state.banners.value, let index = data["data"] as? Int, models.count >= index {
+            self.coordinator?.setSelectedBannerData(models[index])
         }
     }
 }

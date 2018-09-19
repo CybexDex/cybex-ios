@@ -22327,6 +22327,7 @@
 		72E2A8E62151F8E900FBB3CB /* Comprehensive */ = {
 			isa = PBXGroup;
 			children = (
+				72E2A8F52151FCC500FBB3CB /* Views */,
 				72E2A8E92151F9DB00FBB3CB /* ComprehensiveCoordinator.swift */,
 				72E2A8EA2151F9DB00FBB3CB /* ComprehensiveActions.swift */,
 				72E2A8EB2151F9DB00FBB3CB /* ComprehensiveViewController.swift */,
@@ -22334,6 +22335,13 @@
 				72E2A8F32151FB0C00FBB3CB /* Comprehensive.storyboard */,
 			);
 			path = Comprehensive;
+			sourceTree = "<group>";
+		};
+		72E2A8F52151FCC500FBB3CB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		72EC6A4E20F4611500CEAFF6 /* Views */ = {
@@ -33293,7 +33301,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Cybex;
 				TargetAttributes = {
 					6597A0AC6C29D30281EBD879E45F3BAF = {
@@ -33663,7 +33671,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-17/iOS/RevealServer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -33672,7 +33680,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		63B89CB4897862A41FC84BA0 /* [CP] Check Pods Manifest.lock */ = {
@@ -33777,7 +33785,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-resources.sh",
 				"${PODS_ROOT}/Apollo/scripts/check-and-run-apollo-cli.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/BeareadToast/BeareadToast.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/ESPullToRefresh/ESPullToRefresh.bundle",
@@ -33808,7 +33816,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */ = {
