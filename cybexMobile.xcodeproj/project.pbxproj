@@ -333,6 +333,12 @@
 		72DBCA7521391A4300905303 /* CybexWebActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7121391A4300905303 /* CybexWebActions.swift */; };
 		72DBCA7621391A4300905303 /* CybexWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7221391A4300905303 /* CybexWebViewController.swift */; };
 		72DBCA7721391A4300905303 /* CybexWebReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA7321391A4300905303 /* CybexWebReducers.swift */; };
+		72E2A8ED2151F9DB00FBB3CB /* ComprehensiveCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8E92151F9DB00FBB3CB /* ComprehensiveCoordinator.swift */; };
+		72E2A8EE2151F9DB00FBB3CB /* ComprehensiveActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8EA2151F9DB00FBB3CB /* ComprehensiveActions.swift */; };
+		72E2A8EF2151F9DB00FBB3CB /* ComprehensiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8EB2151F9DB00FBB3CB /* ComprehensiveViewController.swift */; };
+		72E2A8F02151F9DB00FBB3CB /* ComprehensiveReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8EC2151F9DB00FBB3CB /* ComprehensiveReducers.swift */; };
+		72E2A8F22151F9F300FBB3CB /* ComprehensiveRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8F12151F9F300FBB3CB /* ComprehensiveRootCoordinator.swift */; };
+		72E2A8F42151FB0C00FBB3CB /* Comprehensive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E2A8F32151FB0C00FBB3CB /* Comprehensive.storyboard */; };
 		72E3A4CC214560580083E417 /* CybexWaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E3A4C9214560580083E417 /* CybexWaitingView.swift */; };
 		72E3A4CD214560580083E417 /* CybexWaitingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72E3A4CA214560580083E417 /* CybexWaitingView.xib */; };
 		72E4DF702147C7BD00D9584B /* ETOUserAgreementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E4DF6C2147C7BD00D9584B /* ETOUserAgreementCoordinator.swift */; };
@@ -6005,6 +6011,12 @@
 		72DBCA7121391A4300905303 /* CybexWebActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebActions.swift; sourceTree = "<group>"; };
 		72DBCA7221391A4300905303 /* CybexWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebViewController.swift; sourceTree = "<group>"; };
 		72DBCA7321391A4300905303 /* CybexWebReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebReducers.swift; sourceTree = "<group>"; };
+		72E2A8E92151F9DB00FBB3CB /* ComprehensiveCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveCoordinator.swift; sourceTree = "<group>"; };
+		72E2A8EA2151F9DB00FBB3CB /* ComprehensiveActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveActions.swift; sourceTree = "<group>"; };
+		72E2A8EB2151F9DB00FBB3CB /* ComprehensiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveViewController.swift; sourceTree = "<group>"; };
+		72E2A8EC2151F9DB00FBB3CB /* ComprehensiveReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveReducers.swift; sourceTree = "<group>"; };
+		72E2A8F12151F9F300FBB3CB /* ComprehensiveRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveRootCoordinator.swift; sourceTree = "<group>"; };
+		72E2A8F32151FB0C00FBB3CB /* Comprehensive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Comprehensive.storyboard; sourceTree = "<group>"; };
 		72E3A4C9214560580083E417 /* CybexWaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWaitingView.swift; sourceTree = "<group>"; };
 		72E3A4CA214560580083E417 /* CybexWaitingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CybexWaitingView.xib; sourceTree = "<group>"; };
 		72E4468D71171890A95A24639B6298E1 /* qi_distinct.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = qi_distinct.hpp; sourceTree = "<group>"; };
@@ -22312,6 +22324,18 @@
 			path = Web;
 			sourceTree = "<group>";
 		};
+		72E2A8E62151F8E900FBB3CB /* Comprehensive */ = {
+			isa = PBXGroup;
+			children = (
+				72E2A8E92151F9DB00FBB3CB /* ComprehensiveCoordinator.swift */,
+				72E2A8EA2151F9DB00FBB3CB /* ComprehensiveActions.swift */,
+				72E2A8EB2151F9DB00FBB3CB /* ComprehensiveViewController.swift */,
+				72E2A8EC2151F9DB00FBB3CB /* ComprehensiveReducers.swift */,
+				72E2A8F32151FB0C00FBB3CB /* Comprehensive.storyboard */,
+			);
+			path = Comprehensive;
+			sourceTree = "<group>";
+		};
 		72EC6A4E20F4611500CEAFF6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -27684,6 +27708,7 @@
 				E8E395E7B5D2617408E203CD024E8818 /* HomeRootCoordinator.swift */,
 				32EED361030B4F9C7CFFB90076C4437F /* TradeRootCoordinator.swift */,
 				7267D9FF213502AE004AF9AF /* ETORootCoordinator.swift */,
+				72E2A8F12151F9F300FBB3CB /* ComprehensiveRootCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -31822,6 +31847,7 @@
 		F189D4AC3A5BB2DB266277BAD8CB0EA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				72E2A8E62151F8E900FBB3CB /* Comprehensive */,
 				72DBCA6F21391A2500905303 /* Web */,
 				7267DA0121350317004AF9AF /* ETO */,
 				72199D7F21045CEA00575226 /* Transfer */,
@@ -33545,6 +33571,7 @@
 				72C844DC214B50930078448C /* en_light.html in Resources */,
 				05802DA2E7EDEEA258806461FCCFF8DD /* set in Resources */,
 				922CBDB730EBC9FC4D98119AD58C8A0E /* set.SUNWCCh in Resources */,
+				72E2A8F42151FB0C00FBB3CB /* Comprehensive.storyboard in Resources */,
 				56368B5447BA035D8DA7B2F5DD5495F4 /* sstream in Resources */,
 				72199DAF2104687D00575226 /* TransferLineView.xib in Resources */,
 				43A6A4507174D761F8591B6EAD54A7DC /* sstream.SUNWCCh in Resources */,
@@ -33636,7 +33663,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-17/iOS/RevealServer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -33645,7 +33672,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		63B89CB4897862A41FC84BA0 /* [CP] Check Pods Manifest.lock */ = {
@@ -33750,7 +33777,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-resources.sh",
 				"${PODS_ROOT}/Apollo/scripts/check-and-run-apollo-cli.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/BeareadToast/BeareadToast.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/ESPullToRefresh/ESPullToRefresh.bundle",
@@ -33781,7 +33808,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cybexMobile/Pods-cybexMobile-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */ = {
@@ -33935,17 +33962,20 @@
 				C4B9965B38DBF143FD1862CF88F9DAE1 /* CybexTextView.swift in Sources */,
 				CD7ECF264F6C16A3649CE586A93D6269 /* CybexTitleView.swift in Sources */,
 				8C00D47D4D9F9CB040B6855F6CC7D757 /* DataBaseApi.swift in Sources */,
+				72E2A8EF2151F9DB00FBB3CB /* ComprehensiveViewController.swift in Sources */,
 				7217B07E2122AAFD00608531 /* AddAddressViewController.swift in Sources */,
 				61096350D887C3728E3B617E993C2365 /* Demo.swift in Sources */,
 				51FB3EBF69DA6AF015F0DF92781986BF /* DemoCache.swift in Sources */,
 				A1EF7FAAA7F0B4F6C9FE153714C1ED47 /* ShowToastManager.swift in Sources */,
 				72DBCA7421391A4300905303 /* CybexWebCoordinator.swift in Sources */,
 				72199DA5210466C000575226 /* TransferTopView.swift in Sources */,
+				72E2A8EE2151F9DB00FBB3CB /* ComprehensiveActions.swift in Sources */,
 				221C615D213685C00021C007 /* GridContentView.swift in Sources */,
 				730229A1212E52B50073D5CE /* ETOManager.swift in Sources */,
 				BD76C30DD5E6DF9195A2DF3218C62F70 /* EmptySegue.swift in Sources */,
 				054514C4C6457A51CC46615D25768574 /* EntryActions.swift in Sources */,
 				E5401ED6E9547DC2097AC58606842B84 /* EntryCoordinator.swift in Sources */,
+				72E2A8F02151F9DB00FBB3CB /* ComprehensiveReducers.swift in Sources */,
 				44195E9AD82F1EA4A629372891EC8157 /* EntryReducers.swift in Sources */,
 				D68AC2564E8A2DB5B8D2B787AD3F02CD /* EntryRootCoordinator.swift in Sources */,
 				9D03533C82BDEC45C76E2419E0489874 /* EntryViewController.swift in Sources */,
@@ -34041,6 +34071,7 @@
 				AC784AB46820FFF7BD6DBFCD8132C403 /* NoticeBoardView.swift in Sources */,
 				41AC38B585A5D36715B3161B49381FB5 /* NoticeBoardViewController.swift in Sources */,
 				CC7617050BB0397377BB75D99DE68B3A /* OpenedOrdersActions.swift in Sources */,
+				72E2A8F22151F9F300FBB3CB /* ComprehensiveRootCoordinator.swift in Sources */,
 				225746DB210707DD0017FA1A /* PickerCoordinator.swift in Sources */,
 				D1612139CDC75BB4ACC08A1D78FD0AEE /* OpenedOrdersCell.swift in Sources */,
 				5F25028208C6665DE69B50E5D5ECBEF6 /* OpenedOrdersCoordinator.swift in Sources */,
@@ -34212,6 +34243,7 @@
 				72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */,
 				911CFA6B3FC228D25DBD994B8E6AAEDD /* get_dev_key.cpp in Sources */,
 				AA4E21B5AB76E4FEA62F38545E25868C /* memo.cpp in Sources */,
+				72E2A8ED2151F9DB00FBB3CB /* ComprehensiveCoordinator.swift in Sources */,
 				9CA15199365825CE26938B0E719EC4CC /* pts_address.cpp in Sources */,
 				7307A91F212518DC00BD6444 /* IonIcons.swift in Sources */,
 				7386F2B821216B3A00ABC924 /* WithdrawAddressHomeReducers.swift in Sources */,
@@ -34406,6 +34438,7 @@
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
