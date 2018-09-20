@@ -17,6 +17,25 @@ default_platform(:ios)
 
 platform :ios do
   desc "Description of what the lane does"
+  keychain_name = "ios-build.keychain"
+  keychain_password = ENV["KEY_PASSWORD"]
+
+  create_keychain(
+    name: keychain_name,
+    password: keychain_password,
+    default_keychain: true,
+    unlock: true,
+    timeout: 3600,
+    add_to_search_list: true
+  )
+
+  import_certificate(
+    certificate_path: ".travis/nbl-dis.p12",
+    certificate_password: ENV["KEY_PASSWORD"],
+    keychain_name: keychain_name,
+    keychain_password: keychain_password
+  )
+  
   lane :fir do
     xcode_select("/Applications/Xcode.app")
     app_identifier="com.nbltrustdev.cybex.fir"
