@@ -6156,6 +6156,7 @@
 		738FCEE3214909CC0042331A /* ZYNetworkAccessibity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYNetworkAccessibity.h; sourceTree = "<group>"; };
 		738FCEE4214909CC0042331A /* ZYNetworkAccessibity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYNetworkAccessibity.m; sourceTree = "<group>"; };
 		73905E38FD41E7F65B811029DCAADED6 /* banded.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = banded.hpp; sourceTree = "<group>"; };
+		739221342153A6D500744811 /* rswift */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = rswift; sourceTree = "<group>"; };
 		7395B10A36CA7EBBE9AFABCDCC97095A /* results_collector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = results_collector.hpp; sourceTree = "<group>"; };
 		73983BB9CB6A4759E1777B89783F2430 /* implementation_help.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = implementation_help.hpp; sourceTree = "<group>"; };
 		739A3F8927AA538FBDC507F3A38D5CBA /* result_of_iterate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = result_of_iterate.hpp; sourceTree = "<group>"; };
@@ -31993,6 +31994,7 @@
 		F3EBF4E6D2E2492B42F25C18354E14EB = {
 			isa = PBXGroup;
 			children = (
+				739221342153A6D500744811 /* rswift */,
 				7386F28D2121204A00ABC924 /* cybexMobileTests */,
 				D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */,
 				867DC13D64BFE1ECAC8B7E12A480E38F /* Pods */,
@@ -33645,7 +33647,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT\"\n";
+			shellScript = "\"$SRCROOT/rswift\" generate \"$SRCROOT\"\n";
 		};
 		1EA8820F2E5233647069A236E776F659 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
