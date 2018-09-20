@@ -51,8 +51,6 @@ platform :ios do
       workspace:"cybexMobile.xcworkspace",
       configuration:"Release",
       export_method:"ad-hoc",
-      output_directory:"~/Documents/ipa",
-      export_xcargs: "-allowProvisioningUpdates",
       export_options: {
         compileBitcode: false,
         provisioningProfiles: {
