@@ -1,2 +1,4 @@
 language: swift
 osx_image: xcode10.0
+before_script:
+- "brew install lvillani/tap/carthage-copy-frameworks"
