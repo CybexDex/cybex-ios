@@ -46,6 +46,9 @@ platform :ios do
       plist_path: "cybexMobile/Info.plist", # Path to info plist file, relative to xcodeproj
       app_identifier: "com.nbltrustdev.cybex.fir" # The App Identifier
     )
+    disable_automatic_code_signing(
+      path: "cybexMobile.xcodeproj"
+    )
     update_project_provisioning(
       xcodeproj: "cybexMobile.xcodeproj",
       profile: ".travis/AdHoc_cybex.mobileprovision", # optional if you use sigh
@@ -60,7 +63,6 @@ platform :ios do
       workspace:"cybexMobile.xcworkspace",
       configuration:"Release",
       export_method:"ad-hoc",
-      export_xcargs: "-allowProvisioningUpdates",
       export_options: {
         compileBitcode: false,
         provisioningProfiles: {
