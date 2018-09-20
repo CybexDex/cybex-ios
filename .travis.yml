@@ -8,5 +8,7 @@ before_install:
   - bundle install
   - bundle update
   - bundle exec pod repo update --silent
+  - carthage bootstrap
+  - cd "./NBLCommonModule/" && carthage bootstrap
 script:
   - fastlane fir
