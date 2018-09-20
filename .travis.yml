@@ -5,6 +5,7 @@ cache:
   - Carthage
   - NBLCommonModule/Carthage
 before_install:
+- pip install xUnique
 - wget $LIBRARYURL -O tmp.zip && unzip tmp.zip && rm tmp.zip
 - brew install lvillani/tap/carthage-copy-frameworks
 - bundle install
