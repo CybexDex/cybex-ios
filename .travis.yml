@@ -1,13 +1,15 @@
 language: swift
 osx_image: xcode10.0
 cache:
-  - bundler
+  directories:
+    - Carthage
+    - NBLCommonModule/Carthage
 before_install:
   - brew install lvillani/tap/carthage-copy-frameworks
   - bundle install
   - bundle update
   - bundle exec pod repo update --silent
-  - carthage bootstrap --platform iOS
-  - cd "./NBLCommonModule/" && carthage bootstrap --platform iOS
+  - carthage bootstrap --verbose --no-use-binaries --platform iOS --cache-builds
+  - cd "./NBLCommonModule/" && carthage bootstrap --verbose --no-use-binaries --platform iOS --cache-builds
 script:
   - fastlane fir
