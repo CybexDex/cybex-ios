@@ -50,7 +50,7 @@ platform :ios do
       target_filter: "cybexMobile", # matches name or type of a target
       build_configuration: "Release",
       code_signing_identity: "iPhone Distribution" # optionally specify the codesigning identity
-)   )
+    )
     gym(
       xcargs: "-UseNewBuildSystem=YES",
       output_name: "cybex-fir",
