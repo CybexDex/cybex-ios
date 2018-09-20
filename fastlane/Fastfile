@@ -56,7 +56,7 @@ platform :ios do
       export_options: {
         compileBitcode: false,
         provisioningProfiles: {
-          "com.nbltrustdev.cybex.fir" => "AdHoc_cybex"
+          "com.nbltrustdev.cybex.fir" => "AdHoc com.nbltrustdev.cybex.fir"
         }
       }
     )
@@ -83,7 +83,7 @@ platform :ios do
       export_options: {
         compileBitcode: false,
         provisioningProfiles: {
-          "com.nbltrustdev.cybex" => "AppStore_cybex"
+          "com.nbltrustdev.cybex" => "AppStore com.nbltrustdev.cybex"
         }
       }
     )
@@ -110,7 +110,7 @@ platform :ios do
         export_options: {
           compileBitcode: false,
           provisioningProfiles: {
-            "com.nbltrustdev.cybex" => "AppStore_cybex"
+            "com.nbltrustdev.cybex" => "AppStore com.nbltrustdev.cybex"
           }
         }
       )
