@@ -44,6 +44,13 @@ platform :ios do
       plist_path: "cybexMobile/Info.plist", # Path to info plist file, relative to xcodeproj
       app_identifier: "com.nbltrustdev.cybex.fir" # The App Identifier
     )
+    update_project_provisioning(
+      xcodeproj: "cybexMobile.xcodeproj",
+      profile: ".travis/AdHoc_cybex.mobileprovision", # optional if you use sigh
+      target_filter: "cybexMobile", # matches name or type of a target
+      build_configuration: "Release",
+      code_signing_identity: "iPhone Distribution" # optionally specify the codesigning identity
+)   )
     gym(
       xcargs: "-UseNewBuildSystem=YES",
       output_name: "cybex-fir",
