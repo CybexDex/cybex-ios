@@ -13,4 +13,4 @@ before_install:
   - carthage bootstrap --verbose --no-use-binaries --platform iOS --cache-builds
   - cd "./NBLCommonModule/" && carthage bootstrap --verbose --no-use-binaries --platform iOS --cache-builds
 script:
-  - fastlane fir
+  - .travis/build.sh
