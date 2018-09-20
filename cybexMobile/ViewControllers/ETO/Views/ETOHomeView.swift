@@ -12,7 +12,7 @@ import TinyConstraints
 import Device
 
 @IBDesignable
-class ETOHomeView: BaseView {
+class ETOHomeView: CybexBaseView {
     enum Event:String {
         case ETOHomeViewDidClicked
         case ChangeNavigationBarEvent

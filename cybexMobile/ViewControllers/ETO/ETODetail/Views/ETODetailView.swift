@@ -11,7 +11,7 @@ import Localize_Swift
 import SwiftTheme
 
 @IBDesignable
-class ETODetailView: BaseView {
+class ETODetailView: CybexBaseView {
     
     @IBOutlet weak var agreeButton: UIButton!
     @IBOutlet weak var stateButton: LGButton!

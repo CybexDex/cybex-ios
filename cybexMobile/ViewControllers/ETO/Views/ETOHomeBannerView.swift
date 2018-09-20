@@ -8,28 +8,15 @@
 
 import Foundation
 import FSPagerView
-import TinyConstraints
-import Fakery
-import Localize_Swift
-import SwiftTheme
-import Device
 
 @IBDesignable
-class ETOHomeBannerView: BaseView {
+class ETOHomeBannerView: CybexBaseView {
     @IBOutlet weak var pagerView: FSPagerView!
     @IBOutlet weak var pagerControl: FSPageControl!
     
     override var data: Any? {
         didSet{
-            if let banners = data as? [ETOBannerModel] {
-                pagerControl.numberOfPages = banners.count
-                pagerControl.currentPage = 0
-                if banners.count < 2 {
-                    self.pagerView.automaticSlidingInterval = 0
-                }
-                else {
-                    self.pagerView.automaticSlidingInterval = 3
-                }
+            if let _ = data as? [String] {
                 pagerView.reloadData()
             }
         }
@@ -46,11 +33,7 @@ class ETOHomeBannerView: BaseView {
         
         setupUI()
         setupSubViewEvent()
-        
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: self, queue: nil) { [weak self](notification) in
-            guard let `self` = self else { return }
-            self.pagerView.reloadData()
-        }
+
     }
     
     func setupUI() {
@@ -67,7 +50,7 @@ class ETOHomeBannerView: BaseView {
     }
     
     func setPagerViewStyle() {
-        self.pagerView.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 191)
+        self.pagerView.itemSize = CGSize(width: UIScreen.main.bounds.width, height: self.frame.height)
     }
     
     func setupSubViewEvent() {
@@ -77,7 +60,7 @@ class ETOHomeBannerView: BaseView {
 
 extension ETOHomeBannerView : FSPagerViewDataSource,FSPagerViewDelegate {
     func numberOfItems(in pagerView: FSPagerView) -> Int {
-        if let banners = self.data as? [ETOBannerModel] {
+        if let banners = self.data as? [String] {
             return banners.count
         }
         return 0
@@ -86,18 +69,20 @@ extension ETOHomeBannerView : FSPagerViewDataSource,FSPagerViewDelegate {
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: String(describing: FSPagerViewCell.self), at: index) as FSPagerViewCell
         cell.imageView?.contentMode = .scaleAspectFill
-        if let banners = self.data as? [ETOBannerModel] {
+        if let banners = self.data as? [String] {
             let banner = banners[index]
-            let bannerUrl = Localize.currentLanguage() == "en" ? banner.adds_banner_mobile__lang_en : banner.adds_banner_mobile
-            cell.imageView?.kf.setImage(with: URL(string: bannerUrl))
+            if banner.contains("https://") || banner.contains("http://") {
+                cell.imageView?.kf.setImage(with: URL(string: banner))
+            }
+            else {
+                cell.imageView?.image = UIImage(named: banner)
+            }
         }
         return cell
     }
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        if let data = self.data as? [ETOBannerModel], index < data.count {
-            self.next?.sendEventWith(Event.ETOHomeBannerViewDidClicked.rawValue, userinfo: ["data": data[index] , "self": self])
-        }
+        self.next?.sendEventWith(Event.ETOHomeBannerViewDidClicked.rawValue, userinfo: ["data": index , "self": self])
     }
     
     func pagerViewDidScroll(_ pagerView: FSPagerView) {

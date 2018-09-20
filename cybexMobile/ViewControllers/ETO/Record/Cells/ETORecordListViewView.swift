@@ -9,7 +9,7 @@
 import Foundation
 
 @IBDesignable
-class ETORecordListViewView: BaseView {
+class ETORecordListViewView: CybexBaseView {
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var actionLabel: UILabel!

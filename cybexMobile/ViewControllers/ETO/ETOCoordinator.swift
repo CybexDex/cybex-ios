@@ -30,6 +30,8 @@ protocol ETOStateManagerProtocol {
     func refreshProjectDatas()
     
     func refreshTime()
+    
+    func resetBannersUrl()
 }
 
 class ETOCoordinator: ETORootCoordinator {
@@ -154,6 +156,12 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                     }
                 }
             }
+        }
+    }
+    
+    func resetBannersUrl() {
+        if let models = state.banners.value {
+            self.store.dispatch(ResetBannerUrlsAction(data: models))
         }
     }
     

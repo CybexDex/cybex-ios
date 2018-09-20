@@ -92,16 +92,19 @@ class OpenedOrdersViewController: BaseViewController {
                     if order.isBuy{
                         let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
                         let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-                        totalInfo = baseAmount.string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
-                        amountInfo = quoteAmount.string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
-                        priceInfo =  (baseAmount / quoteAmount).string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
+                        priceInfo = (baseAmount / quoteAmount).string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
+                        let total = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
+                        let amounts = total / (baseAmount / quoteAmount)
+                        amountInfo = amounts.string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
+                        totalInfo = total.string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
                     }else{
                         let baseAmount  = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
                         let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
-                        
-                        totalInfo = baseAmount.string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
-                        amountInfo = quoteAmount.string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
                         priceInfo =  (baseAmount / quoteAmount).string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
+                        let amounts = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
+                        let total = amounts * (baseAmount / quoteAmount)
+                        totalInfo = total.string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
+                        amountInfo = amounts.string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
                     }
                     
                     if self.isVisible {
