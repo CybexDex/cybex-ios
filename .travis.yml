@@ -1,4 +1,12 @@
 language: swift
 osx_image: xcode10.0
-before_script:
-- "brew install lvillani/tap/carthage-copy-frameworks"
+cache:
+  - bundler
+before_install:
+  - brew update
+  - brew install lvillani/tap/carthage-copy-frameworks
+  - bundle install
+  - bundle update
+  - bundle exec pod repo update --silent
+script:
+  - fastlane fir
