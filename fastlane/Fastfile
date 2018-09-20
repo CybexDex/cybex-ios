@@ -51,10 +51,11 @@ platform :ios do
       workspace:"cybexMobile.xcworkspace",
       configuration:"Release",
       export_method:"ad-hoc",
+      export_xcargs: "-allowProvisioningUpdates",
       export_options: {
         compileBitcode: false,
         provisioningProfiles: {
-          "com.nbltrustdev.cybex.fir" => "AdHoc com.nbltrustdev.cybex.fir"
+          "com.nbltrustdev.cybex.fir" => "match adhoc com.nbltrustdev.cybex.fir"
         }
       }
     )
