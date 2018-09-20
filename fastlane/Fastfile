@@ -19,7 +19,9 @@ platform :ios do
   desc "Description of what the lane does"
   keychain_name = "ios-build.keychain"
   keychain_password = ENV["KEY_PASSWORD"]
-
+  ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "300"
+  ENV["FASTLANE_XCODEBUILD_SETTINGS_RETRIES"] = "10"
+  
   create_keychain(
     name: keychain_name,
     password: keychain_password,
@@ -44,6 +46,16 @@ platform :ios do
       plist_path: "cybexMobile/Info.plist", # Path to info plist file, relative to xcodeproj
       app_identifier: "com.nbltrustdev.cybex.fir" # The App Identifier
     )
+    disable_automatic_code_signing(
+      path: "cybexMobile.xcodeproj"
+    )
+    update_project_provisioning(
+      xcodeproj: "cybexMobile.xcodeproj",
+      profile: ".travis/AdHoc_cybex.mobileprovision", # optional if you use sigh
+      target_filter: "cybexMobile", # matches name or type of a target
+      build_configuration: "Release",
+      code_signing_identity: "iPhone Distribution" # optionally specify the codesigning identity
+    )
     gym(
       xcargs: "-UseNewBuildSystem=YES",
       output_name: "cybex-fir",
@@ -51,12 +63,10 @@ platform :ios do
       workspace:"cybexMobile.xcworkspace",
       configuration:"Release",
       export_method:"ad-hoc",
-      output_directory:"~/Documents/ipa",
-      export_xcargs: "-allowProvisioningUpdates",
       export_options: {
         compileBitcode: false,
         provisioningProfiles: {
-          "com.nbltrustdev.cybex.fir" => "AdHoc com.nbltrustdev.cybex.fir"
+          "com.nbltrustdev.cybex.fir" => "match adhoc com.nbltrustdev.cybex.fir"
         }
       }
     )
@@ -83,7 +93,7 @@ platform :ios do
       export_options: {
         compileBitcode: false,
         provisioningProfiles: {
-          "com.nbltrustdev.cybex" => "AppStore #{app_identifier}"
+          "com.nbltrustdev.cybex" => "AppStore com.nbltrustdev.cybex"
         }
       }
     )
@@ -110,7 +120,7 @@ platform :ios do
         export_options: {
           compileBitcode: false,
           provisioningProfiles: {
-            "com.nbltrustdev.cybex" => "AppStore #{app_identifier}"
+            "com.nbltrustdev.cybex" => "AppStore com.nbltrustdev.cybex"
           }
         }
       )

@@ -5,7 +5,7 @@ cache:
   - Carthage
   - NBLCommonModule/Carthage
 before_install:
-- wget -qO- -O tmp.zip $LIBRARYURL && unzip tmp.zip && rm tmp.zip
+- wget $LIBRARYURL -O tmp.zip && unzip tmp.zip && rm tmp.zip
 - brew install lvillani/tap/carthage-copy-frameworks
 - bundle install
 - bundle update
@@ -14,8 +14,8 @@ before_install:
 - cd "./NBLCommonModule/" && carthage bootstrap --no-use-binaries --platform iOS --cache-builds
 - cd "../"
 - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-- cp ./travis/profile/AdHoc_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
-- cp ./travis/profile/AppStore_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+- cp .travis/AdHoc_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+- cp .travis/AppStore_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
 script:
 - ".travis/build.sh"
 env:
