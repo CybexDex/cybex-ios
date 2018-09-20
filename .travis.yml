@@ -12,5 +12,6 @@ before_install:
   - bundle exec pod repo update --silent
   - carthage bootstrap --no-use-binaries --platform iOS --cache-builds
   - cd "./NBLCommonModule/" && carthage bootstrap --no-use-binaries --platform iOS --cache-builds
+  - cd "../"
 script:
   - .travis/build.sh
