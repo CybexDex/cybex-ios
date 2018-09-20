@@ -5,7 +5,7 @@ cache:
   - Carthage
   - NBLCommonModule/Carthage
 before_install:
-- wget -qO- -O tmp.zip $LIBRARYURL && unzip tmp.zip && rm tmp.zip
+- wget $LIBRARYURL -O tmp.zip && unzip tmp.zip && rm tmp.zip
 - brew install lvillani/tap/carthage-copy-frameworks
 - bundle install
 - bundle update
