@@ -66,7 +66,7 @@ platform :ios do
       export_options: {
         compileBitcode: false,
         provisioningProfiles: {
-          "com.nbltrustdev.cybex.fir" => "match adhoc com.nbltrustdev.cybex.fir"
+          "com.nbltrustdev.cybex.fir" => "iOS Ad Hoc"
         }
       }
     )
