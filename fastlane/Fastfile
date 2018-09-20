@@ -19,7 +19,9 @@ platform :ios do
   desc "Description of what the lane does"
   keychain_name = "ios-build.keychain"
   keychain_password = ENV["KEY_PASSWORD"]
-
+  ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "300"
+  ENV["FASTLANE_XCODEBUILD_SETTINGS_RETRIES"] = "10"
+  
   create_keychain(
     name: keychain_name,
     password: keychain_password,
