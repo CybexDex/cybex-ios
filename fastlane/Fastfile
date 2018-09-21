@@ -139,7 +139,7 @@ platform :ios do
           }
         }
       )
-      upload_to_testflight
+      upload_to_testflight(skip_waiting_for_build_processing:true)
       slack(message: "Successfully distributed cybex to testflight", slack_url:"https://hooks.slack.com/services/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")
     end
 
