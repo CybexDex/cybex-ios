@@ -55,6 +55,7 @@ platform :ios do
       build_configuration: "Release",
       code_signing_identity: "iPhone Distribution" # optionally specify the codesigning identity
     )
+    increment_build_number
     gym(
       xcargs: "-UseNewBuildSystem=YES",
       output_name: "cybex-fir",
@@ -91,6 +92,7 @@ platform :ios do
       build_configuration: "Release",
       code_signing_identity: "iPhone Distribution" # optionally specify the codesigning identity
     )
+    increment_build_number
     gym(
       output_name: "cybex-appstore",
       scheme:"cybexMobile",
@@ -126,6 +128,7 @@ platform :ios do
         build_configuration: "Release",
         code_signing_identity: "iPhone Distribution" # optionally specify the codesigning identity
       )
+      increment_build_number
       gym(
         output_name: "cybex-testflight",
         scheme:"cybexMobile",
