@@ -401,8 +401,7 @@
 		733714BD2122D32500B2ED90 /* AddressCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714BB2122D32500B2ED90 /* AddressCellView.swift */; };
 		733714BE2122D32500B2ED90 /* AddressCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714BC2122D32500B2ED90 /* AddressCellView.xib */; };
 		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
-		734CC7E32154FC920009EEE6 /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73752FC3214C13430089BD21 /* NBLCommonModule.framework */; };
-		734CC7E42154FC920009EEE6 /* NBLCommonModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73752FC3214C13430089BD21 /* NBLCommonModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		734CC823215503710009EEE6 /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73752FC3214C13430089BD21 /* NBLCommonModule.framework */; };
 		73587E9D2133EB15006CF8A6 /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */; };
 		73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9F21352AD8006CF8A6 /* ETOMGService.swift */; };
 		73587EAB2137C057006CF8A6 /* ETOCrowdActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EA72137C057006CF8A6 /* ETOCrowdActions.swift */; };
@@ -669,13 +668,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		734CC7E52154FC920009EEE6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 73752FBE214C13420089BD21 /* NBLCommonModule.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 7336B7A9214F5F1D0086A9DF;
-			remoteInfo = NBLCommonModule;
-		};
 		73752FC2214C13430089BD21 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 73752FBE214C13420089BD21 /* NBLCommonModule.xcodeproj */;
@@ -691,20 +683,6 @@
 			remoteInfo = cybexMobile;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		736E5369214BBC2D00A04140 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				734CC7E42154FC920009EEE6 /* NBLCommonModule.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0000A7A30F75E4593CC5ED85A4C32E58 /* cpp_defined_grammar.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cpp_defined_grammar.hpp; sourceTree = "<group>"; };
@@ -12551,6 +12529,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				734CC823215503710009EEE6 /* NBLCommonModule.framework in Frameworks */,
 				6257D6A4A5ED0C635B89E55C84FA1215 /* libboost.a in Frameworks */,
 				786DA36D390BADA15DF7637951260BE0 /* libcrypto.a in Frameworks */,
 				8899C4D33A4F31180D755A486B4A6B6C /* libfc.a in Frameworks */,
@@ -12575,7 +12554,6 @@
 				ECF5D8036B47223BDDD5184927710C20 /* libssl.a in Frameworks */,
 				642738CE26AA31C2FAA06F203B5D5A57 /* secp256k1.a in Frameworks */,
 				FCBCB514EB84E1F2472EA3F9 /* libPods-cybexMobile.a in Frameworks */,
-				734CC7E32154FC920009EEE6 /* NBLCommonModule.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -33265,14 +33243,12 @@
 				BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */,
 				4C503C5D3E59634F44E3149DFE8EA11D /* [CP] Embed Pods Frameworks */,
 				A6D55984F0239A7067AB1555 /* [CP] Copy Pods Resources */,
-				736E5369214BBC2D00A04140 /* Embed Frameworks */,
 				738FCE312148D7EC0042331A /* carthage */,
 				7384FD58214CF5F900AFF5BE /* appstore bug */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				734CC7E62154FC920009EEE6 /* PBXTargetDependency */,
 			);
 			name = cybexMobile;
 			productName = "Hello World";
@@ -34235,11 +34211,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		734CC7E62154FC920009EEE6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = NBLCommonModule;
-			targetProxy = 734CC7E52154FC920009EEE6 /* PBXContainerItemProxy */;
-		};
 		7386F2922121204A00ABC924 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6597A0AC6C29D30281EBD879E45F3BAF /* cybexMobile */;
@@ -34277,7 +34248,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EE7A1A7462092B8F170A7056A093228E /* Pods-cybexMobile.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -34375,7 +34345,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 730115CA9351045A5CEE4B396B055387 /* Pods-cybexMobile.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
