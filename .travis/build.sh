@@ -3,5 +3,5 @@
 if [[ $TRAVIS_BRANCH == 'master' ]];then
 	fastlane test
 else
-	fastlane fir
+	fastlane test
 fi

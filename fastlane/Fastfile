@@ -16,7 +16,6 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
   keychain_name = "ios-build.keychain"
   keychain_password = ENV["KEY_PASSWORD"]
   ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "300"
@@ -66,7 +65,7 @@ platform :ios do
       export_options: {
         compileBitcode: false,
         provisioningProfiles: {
-          "com.nbltrustdev.cybex.fir" => "match adhoc com.nbltrustdev.cybex.fir"
+          "com.nbltrustdev.cybex.fir" => "iOS Ad Hoc"
         }
       }
     )
@@ -82,18 +81,26 @@ platform :ios do
       plist_path: "cybexMobile/Info.plist", # Path to info plist file, relative to xcodeproj
       app_identifier: "com.nbltrustdev.cybex" # The App Identifier
     )
+    disable_automatic_code_signing(
+      path: "cybexMobile.xcodeproj"
+    )
+    update_project_provisioning(
+      xcodeproj: "cybexMobile.xcodeproj",
+      profile: ".travis/AppStore_cybex.mobileprovision", # optional if you use sigh
+      target_filter: "cybexMobile", # matches name or type of a target
+      build_configuration: "Release",
+      code_signing_identity: "iPhone Distribution" # optionally specify the codesigning identity
+    )
     gym(
       output_name: "cybex-appstore",
       scheme:"cybexMobile",
       workspace:"cybexMobile.xcworkspace",
       configuration:"Release",
       export_method:"app-store",
-      output_directory:"~/Documents/ipa",
-      export_xcargs: "-allowProvisioningUpdates",
       export_options: {
         compileBitcode: false,
         provisioningProfiles: {
-          "com.nbltrustdev.cybex" => "AppStore com.nbltrustdev.cybex"
+          "com.nbltrustdev.cybex" => "iOS AppStore cybex"
         }
       }
     )
@@ -109,18 +116,26 @@ platform :ios do
         plist_path: "cybexMobile/Info.plist", # Path to info plist file, relative to xcodeproj
         app_identifier: "com.nbltrustdev.cybex" # The App Identifier
       )
+      disable_automatic_code_signing(
+        path: "cybexMobile.xcodeproj"
+      )
+      update_project_provisioning(
+        xcodeproj: "cybexMobile.xcodeproj",
+        profile: ".travis/AppStore_cybex.mobileprovision", # optional if you use sigh
+        target_filter: "cybexMobile", # matches name or type of a target
+        build_configuration: "Release",
+        code_signing_identity: "iPhone Distribution" # optionally specify the codesigning identity
+      )
       gym(
         output_name: "cybex-testflight",
         scheme:"cybexMobile",
         workspace:"cybexMobile.xcworkspace",
         configuration:"Release",
         export_method:"app-store",
-        output_directory:"~/Documents/ipa",
-        export_xcargs: "-allowProvisioningUpdates",
         export_options: {
           compileBitcode: false,
           provisioningProfiles: {
-            "com.nbltrustdev.cybex" => "AppStore com.nbltrustdev.cybex"
+            "com.nbltrustdev.cybex" => "iOS AppStore cybex"
           }
         }
       )

@@ -1,5 +1,7 @@
 language: swift
 osx_image: xcode10
+notifications:
+  slack: cybexio:Km9uGhorR7XtYUVoaA8WQ3i6
 cache:
   directories:
   - Carthage
