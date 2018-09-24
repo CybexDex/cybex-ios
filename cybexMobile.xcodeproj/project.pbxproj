@@ -33235,12 +33235,12 @@
 			buildPhases = (
 				1EA8820F2E5233647069A236E776F659 /* [CP] Check Pods Manifest.lock */,
 				02A4601F42D25E8414E0B1DB5D0ED37C /* R.swift */,
+				BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */,
 				CAC8A0CC95B3841C82679AB79574101B /* Sources */,
 				81E9E579D70A5E3A5E8EE6FFCBAE50CD /* Frameworks */,
 				1F1278CDBFA95B0E46D9562DAFE69F12 /* Resources */,
 				64CA9F24897CCC8641D07FEE1CB77EA5 /* fabric */,
 				EE22259AA50E1965825123B5D2382194 /* color set */,
-				BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */,
 				4C503C5D3E59634F44E3149DFE8EA11D /* [CP] Embed Pods Frameworks */,
 				A6D55984F0239A7067AB1555 /* [CP] Copy Pods Resources */,
 				738FCE312148D7EC0042331A /* carthage */,
@@ -33775,7 +33775,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
+			shellScript = "if [ ${CONFIGURATION} == \"Release\" ]; then\nbuildNumber=$(git rev-list HEAD | wc -l | tr -d ' ')\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\nfi\n";
 		};
 		EE22259AA50E1965825123B5D2382194 /* color set */ = {
 			isa = PBXShellScriptBuildPhase;
