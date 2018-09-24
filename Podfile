@@ -16,11 +16,11 @@ def data
     pod 'Locksmith'
     pod 'Then'
     pod 'FCUUID'
-    pod 'IQKeyboardManagerSwift'
+    pod 'IQKeyboardManagerSwift', :git => 'https://github.com/hackiftekhar/IQKeyboardManager', :tag => 'v6.1.1'
     pod 'DifferenceKit'
     pod 'Dollar'
     pod 'Validator'
-    pod 'Fakery'
+    pod 'Fakery', :git => 'https://github.com/vadymmarkov/Fakery', :branch => 'master'
 end
 
 def resource
