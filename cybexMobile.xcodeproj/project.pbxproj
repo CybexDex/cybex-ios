@@ -33789,7 +33789,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    chmod -R 777 Pods/ &\n    python scripts/named_colors_compat.py\n#fi";
+			shellScript = "#if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    chmod -R 777 Pods/ &\n    python scripts/named_colors_compat.py\n#fi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
