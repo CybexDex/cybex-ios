@@ -24,6 +24,9 @@
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name" value="record_currency"/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="content" value="opened.all"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="subtype">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Cj-6S-QUN" customClass="RecordChooseView" customModule="cybexMobile" customModuleProvider="target">
@@ -31,6 +34,9 @@
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="name" value="record_types"/>
                                 <userDefinedRuntimeAttribute type="string" keyPath="content" value="opened.all"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="subtype">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>

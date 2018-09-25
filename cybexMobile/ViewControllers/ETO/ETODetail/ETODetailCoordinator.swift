@@ -27,7 +27,7 @@ protocol ETODetailStateManagerProtocol {
     func fetchUserState()
 }
 
-class ETODetailCoordinator: ETORootCoordinator {
+class ETODetailCoordinator: NavCoordinator {
     var store = Store(
         reducer: ETODetailReducer,
         state: nil,
@@ -36,6 +36,14 @@ class ETODetailCoordinator: ETORootCoordinator {
     
     var state: ETODetailState {
         return store.state
+    }
+    
+    override class func start(_ root: BaseNavigationController, context:RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.etoDetail.etoDetailViewController()!
+        let coordinator = ETODetailCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+        return vc
     }
     
     override func register() {
@@ -92,6 +100,11 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                     }, failure: { (error) in
                         self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
                     })
+                }
+                else {
+                    if let context = self.state.context.value as? ETODetailContext {
+                        
+                    }
                 }
             }
         }

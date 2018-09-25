@@ -30,6 +30,9 @@ let TrackingMiddleware: Middleware<Any> = { dispatch, getState in
             if let action = action as? PageStateAction, let state = getState() as? BaseState {
                 state.pageState.accept(action.state)
             }
+            else if let action = action as? RouteContextAction, let state = getState() as? BaseState {
+                state.context.accept(action.context)
+            }
             else if let action = action as? RefreshState {
                 _ = action.vc?.perform(action.sel)
             }

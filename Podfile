@@ -16,11 +16,11 @@ def data
     pod 'Locksmith'
     pod 'Then'
     pod 'FCUUID'
-    pod 'IQKeyboardManagerSwift'
+    pod 'IQKeyboardManagerSwift', :git => 'https://github.com/hackiftekhar/IQKeyboardManager', :tag => 'v6.1.1'
     pod 'DifferenceKit'
     pod 'Dollar'
     pod 'Validator'
-    pod 'Fakery'
+    pod 'Fakery', :git => 'https://github.com/vadymmarkov/Fakery', :branch => 'master'
 end
 
 def resource
@@ -155,6 +155,9 @@ post_install do |installer|
         if target.name == 'cybexMobile'
             target.build_configurations.each do |config|
                 config.build_settings['SWIFT_VERSION'] = '4.0'
+                if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 8.0
+                    config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '8.0'
+                end
             end
         end
     end

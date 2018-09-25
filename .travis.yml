@@ -1,0 +1,27 @@
+language: swift
+osx_image: xcode10
+notifications:
+  slack: cybexio:Km9uGhorR7XtYUVoaA8WQ3i6
+cache:
+  directories:
+  - Carthage
+  - NBLCommonModule/Carthage
+before_install:
+- pip install xUnique
+- wget $LIBRARYURL -O tmp.zip && unzip -o tmp.zip && rm tmp.zip
+- brew install lvillani/tap/carthage-copy-frameworks
+- bundle install
+- bundle update
+- bundle exec pod repo update --silent
+- carthage bootstrap --no-use-binaries --platform iOS --cache-builds
+- cd "./NBLCommonModule/" && carthage bootstrap --no-use-binaries --platform iOS --cache-builds
+- cd "../"
+- mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+- cp .travis/AdHoc_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+- cp .travis/AppStore_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+- touch R.generated.swift && chmod 777 R.generated.swift
+script:
+- ".travis/build.sh"
+env:
+  global:
+    secure: OBVz9stgy3vbiNrZLZhh47YpQfz/eN3nd0C7l2V9Cy6NUD5H6ymDno3FejtXU4P5VWZOoNDPjRxm2arpXUThI+hPBdM7Vfp+vdvH3//X0MwyJHDSHrwpHAFJDT5I2ONhsX0Bld4TOdtnRlYLpUrCMfMl1Y1XMmHcUCagGyXmglaeOuxfu1/6Rh4Tv5yjY4C3TRAU9LpoIcK573c9jOPjZs1zRU09KHQbpNRW1w9m5GnQxDw9IQYRodhodOkc2hj/NNhbaKrSErCbiOyygfkoK/9BNCFO/KTRZUS0rKxWwKvMq/KEBxYdbPGSANhby3YUx/zv2lkNDt+1KJcUdZVPxntcgEQHyxPB/48cD1Lbb8zUL7yislqkdpt9HD4mxhmomTYwy1XgAtS42FRPqLv+PgcKJXc93AVf2UjgHnthVLxS1hjV421/9OCap994hO5UftwvX8GuaQCqy2Z8IDab3zgWlj1fJPgGT08QubMcYFfTh9Z2yROoKAWMjivE9s3sQS4WcDWU9lBd38H2xb8bKYIT3jZatanhENfHjiNnNyhB011fKTlCl1+cWR5UfgBdJgFZMjO/KEwE9gbxqV6MlmaYMJDd6/CtcgX0UEnfVVNnW5FXW41A1pDVjY0ABLWRMCjLKKzHru+MBGJ4X0vKvXW+N9vEQVsgsvIF7xcHwvA=

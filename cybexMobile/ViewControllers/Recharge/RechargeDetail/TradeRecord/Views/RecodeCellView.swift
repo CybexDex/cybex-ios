@@ -23,20 +23,27 @@ class RecodeCellView: UIView {
     didSet{
       if let data = data as? Record {
         let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "node_dark" : "node_white"
-        let withdrawAddress = AddressManager.shared.containAddressOfWithDraw(data.address, currency: data.asset_id)
-        let attributedString = withdrawAddress.0 == true ? "<\(contentStyle)>\(withdrawAddress.1.first!.name)</\(contentStyle)>\n<address>\(data.address)</address>".set(style: StyleNames.address.rawValue) :  "<address>\(data.address)</address>".set(style: StyleNames.address.rawValue)
-        address.attributedText = attributedString
         time.text = data.updateAt.string(withFormat: "MM/dd HH:mm:ss")
         name.text = data.asset.filterJade
         state.text = data.state.desccription()
-        icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + data.asset_id.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
-        if let asset_info = app_data.assetInfo[data.asset_id] {
+        
+        var assetInfo: AssetInfo?
+        for (_, value) in app_data.assetInfo {
+            if value.symbol.filterJade == data.asset.filterJade {
+                assetInfo = value
+                break
+            }
+        }
+        if let asset_info = assetInfo {
+            let withdrawAddress = AddressManager.shared.containAddressOfWithDraw(data.address, currency: asset_info.id)
+            let attributedString = withdrawAddress.0 == true ? "<\(contentStyle)>\(withdrawAddress.1.first!.name)</\(contentStyle)>\n<address>\(data.address)</address>".set(style: StyleNames.address.rawValue) :  "<address>\(data.address)</address>".set(style: StyleNames.address.rawValue)
+            address.attributedText = attributedString
+            icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + asset_info.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
             amount.text = getRealAmount(asset_info.id, amount: String(data.amount)).string.formatCurrency(digitNum: asset_info.precision) + " " +  asset_info.symbol.filterJade
         }
         else {
             amount.text = "-"
         }
-        
         inComeOrSend.image = data.fundType == "WITHDRAW" ? R.image.ic_income() : R.image.ic_send()
         updateHeight()
       }

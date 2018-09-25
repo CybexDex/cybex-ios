@@ -144,6 +144,7 @@ class ComprehensiveViewController: BaseViewController {
 extension ComprehensiveViewController {
     @objc func ComprehensiveItemViewDidClicked(_ data: [String: Any]) {
         guard  let index = data["index"] as? Int else { return }
+        
     }
 }
 

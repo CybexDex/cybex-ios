@@ -12,6 +12,8 @@ import RxCocoa
 
 //MARK: - State
 struct ImageShareState: BaseState {
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+    
    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 }
 

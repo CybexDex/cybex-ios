@@ -12,6 +12,7 @@ import RxCocoa
 import ReSwift
 
 class RechargeViewController: BaseViewController {
+
     
     enum CELL_TYPE : Int{
         case RECHARGE
@@ -48,7 +49,8 @@ class RechargeViewController: BaseViewController {
     }
     
     override func configureObserveState() {
-        self.coordinator?.state.property.depositIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
+
+        self.coordinator?.state.depositIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let `self` = self else {return}
             self.depositData = self.filterData(data)
             if self.selectedIndex == .RECHARGE{
@@ -57,7 +59,7 @@ class RechargeViewController: BaseViewController {
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
-        self.coordinator?.state.property.withdrawIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
+        self.coordinator?.state.withdrawIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let `self` = self else { return }
             self.withdrawData = self.filterData(data)
             if self.selectedIndex == .WITHDRAW{

@@ -29,7 +29,7 @@ PODS:
   - EFQRCode (4.2.2)
   - ESPullToRefresh (2.7)
   - Fabric (1.7.9)
-  - Fakery (3.3.0)
+  - Fakery (3.4.0)
   - FCUUID (1.3.1):
     - UICKeyChainStore (~> 2.1.0)
   - FSPagerView (0.7.2)
@@ -155,12 +155,12 @@ DEPENDENCIES:
   - EFQRCode
   - ESPullToRefresh
   - Fabric
-  - Fakery
+  - Fakery (from `https://github.com/vadymmarkov/Fakery`, branch `master`)
   - FCUUID
   - FSPagerView
   - GrowingTextView
   - IHKeyboardAvoiding
-  - IQKeyboardManagerSwift
+  - IQKeyboardManagerSwift (from `https://github.com/hackiftekhar/IQKeyboardManager`, tag `v6.1.1`)
   - JSONRPCKit (from `https://github.com/phpmaple/JSONRPCKit`, branch `master`)
   - "Keyboard+LayoutGuide"
   - KeychainAccess
@@ -229,12 +229,10 @@ SPEC REPOS:
     - EFQRCode
     - ESPullToRefresh
     - Fabric
-    - Fakery
     - FCUUID
     - FSPagerView
     - GrowingTextView
     - IHKeyboardAvoiding
-    - IQKeyboardManagerSwift
     - "Keyboard+LayoutGuide"
     - KeychainAccess
     - KMNavigationBarTransition
@@ -289,6 +287,12 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   BeareadToast:
     :git: https://github.com/phpmaple/BeareadToast
+  Fakery:
+    :branch: master
+    :git: https://github.com/vadymmarkov/Fakery
+  IQKeyboardManagerSwift:
+    :git: https://github.com/hackiftekhar/IQKeyboardManager
+    :tag: v6.1.1
   JSONRPCKit:
     :branch: master
     :git: https://github.com/phpmaple/JSONRPCKit
@@ -303,6 +307,12 @@ CHECKOUT OPTIONS:
   BeareadToast:
     :commit: 1e82fc7338e9ab176168af234900f5fc61ade947
     :git: https://github.com/phpmaple/BeareadToast
+  Fakery:
+    :commit: a80054138d5854f7e834602e6e71427d36fea42f
+    :git: https://github.com/vadymmarkov/Fakery
+  IQKeyboardManagerSwift:
+    :git: https://github.com/hackiftekhar/IQKeyboardManager
+    :tag: v6.1.1
   JSONRPCKit:
     :commit: 389b9feaae3983e6f632e083fb75c62f7985accf
     :git: https://github.com/phpmaple/JSONRPCKit
@@ -333,7 +343,7 @@ SPEC CHECKSUMS:
   EFQRCode: 203846c7b135b5f7c1d18bb7923bc32a74c8b363
   ESPullToRefresh: 119e2710b82b75536aab2bbe4883ba119fca35c8
   Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
-  Fakery: 3aae11a87721c807c18c6456500d088c1230d3e5
+  Fakery: 885e894a3e7c392e1da96c6e46a1abe5a0b28686
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
   FSPagerView: 7515f63c424da71623d299d4fbbfb3dd884642ff
   GrowingTextView: 8958f4fb7419de58dd622021b2d0696487e00e70
@@ -393,6 +403,6 @@ SPEC CHECKSUMS:
   XLActionController: 007868251c0eed70d649d06c1625259b73b3a600
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
 
-PODFILE CHECKSUM: 246dd27ee8e64b9e670a8b78db2e86097aaebc6a
+PODFILE CHECKSUM: 35cdaad99b8556d0df496ebaefebd82c5245bc9b
 
 COCOAPODS: 1.6.0.beta.1

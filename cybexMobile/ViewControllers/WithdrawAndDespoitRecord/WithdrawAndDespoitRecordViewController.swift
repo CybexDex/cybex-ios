@@ -25,6 +25,7 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.endLoading()
     }
     
     override func refreshViewController() {
@@ -59,7 +60,7 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
                 
             case .loading(let reason):
                 if reason == .initialRefresh {
-                    self.startLoading()
+//                    self.startLoading()
                 }
                 
             case .refresh(let type):
@@ -119,8 +120,12 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
 //MARK: - View Event
 
 extension WithdrawAndDespoitRecordViewController {
-    @objc func RecprdContainerViewDidClicked(_ data: [String: Any]) {
-        
+    @objc func presentChooseVC(_ data: [String: Any]) {
+        if let vc = data["data"] as? UIViewController {
+            self.present(vc, animated: true) {
+                vc.view.superview?.layer.cornerRadius = 0
+            }
+        }
     }
 }
 

@@ -43,7 +43,8 @@ class RecordChooseView: CybexBaseView {
     
     enum Event:String {
         case RecordChooseViewDidClicked
-        case RecprdContainerViewDidClicked
+        case RecordContainerViewDidClicked
+        case presentChooseVC
     }
         
     override func setup() {
@@ -60,11 +61,37 @@ class RecordChooseView: CybexBaseView {
     func setupSubViewEvent() {
         self.containerView.rx.tapGesture().when(UIGestureRecognizerState.recognized).asObservable().subscribe(onNext: { [weak self](tap) in
             guard let `self` = self else { return }
-            self.next?.sendEventWith(Event.RecprdContainerViewDidClicked.rawValue, userinfo: ["index": self.subtype])
+            self.sendEventWith(Event.RecordContainerViewDidClicked.rawValue, userinfo: ["index": self.subtype])
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.RecordChooseViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+    }
+}
+
+extension RecordChooseView {
+    @objc func RecordContainerViewDidClicked(_ data: [String: Any]) {
+        let vc = UIViewController()
+        vc.view.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.white.hexString(true)]
+        vc.preferredContentSize = CGSize(width: self.containerView.width, height: 165)
+        vc.modalPresentationStyle = .popover
+        vc.popoverPresentationController?.sourceView = self.containerView
+        vc.popoverPresentationController?.sourceRect = self.containerView.bounds
+        vc.popoverPresentationController?.delegate = self
+        vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
+        vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.white.hexString(true)]
+        self.next?.sendEventWith(Event.presentChooseVC.rawValue , userinfo: ["data": vc])
+    }
+}
+
+extension RecordChooseView: UIPopoverPresentationControllerDelegate {
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return true
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
     }
 }

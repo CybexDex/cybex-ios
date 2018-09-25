@@ -52,7 +52,7 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
     func fetchRechargeRecodeList(_ accountName : String ,asset : String ,fundType : fundType ,size : Int , offset : Int ,expiration : Int ,asset_id : String, callback:@escaping (Bool)->()) {
         getWithdrawAndDepositRecords(accountName, asset: asset, fundType: fundType, size: size, offset: offset, expiration: expiration) { [weak self](result) in
             guard let `self` = self else { return }
-            self.store.dispatch(FetchDepositRecordsAction(data : result, asset_id: asset_id))
+            self.store.dispatch(FetchDepositRecordsAction(data : result))
             if result != nil {
                 callback(true)
             }else {

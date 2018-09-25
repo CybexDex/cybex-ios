@@ -25,7 +25,6 @@ struct RechargeRecodePropertyState {
 
 struct FetchDepositRecordsAction : Action {
     var data : TradeRecord?
-    var asset_id : String
 }
 
 struct SetWithdrawListAssetAction : Action {
