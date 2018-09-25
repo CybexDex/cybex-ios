@@ -10,12 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import Localize_Swift
 
 class ComprehensiveViewController: BaseViewController {
 
 	var coordinator: (ComprehensiveCoordinatorProtocol & ComprehensiveStateManagerProtocol)?
 
-	override func viewDidLoad() {
+    @IBOutlet weak var contentView: ComprehensiveView!
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         setupData()
@@ -25,6 +27,7 @@ class ComprehensiveViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.coordinator?.fetchData()
     }
     
     override func refreshViewController() {
@@ -32,7 +35,7 @@ class ComprehensiveViewController: BaseViewController {
     }
     
     func setupUI() {
-        
+        self.navigationItem.titleView = UIImageView(image: R.image.img_etologo())
     }
 
     func setupData() {
@@ -94,31 +97,53 @@ class ComprehensiveViewController: BaseViewController {
 //                }
             }
         }).disposed(by: disposeBag)
+        
+        app_data.data.asObservable().filter { (bucket) -> Bool in
+            return bucket.count == AssetConfiguration.shared.asset_ids.count
+            }.subscribe(onNext: { [weak self](bucket) in
+                guard let `self` = self else { return }
+                if let hotPairs = self.coordinator?.state.hotPairs.value {
+                    var bucketModel = [HomeBucket]()
+                    for pair in hotPairs {
+                        if let hotPair = bucket.filter({ (homeBucket) -> Bool in
+                            return homeBucket.base == pair.base && homeBucket.quote == pair.quote
+                        }).first {
+                            bucketModel.append(hotPair)
+                        }
+                    }
+                    // MARK: 交易对
+                    self.contentView.hotAssetsView.adapterModelToHotAssetsView(bucketModel)
+                }
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        self.coordinator?.state.announces.asObservable().subscribe(onNext: { [weak self](announces) in
+            guard let `self` = self else { return }
+            
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        self.coordinator?.state.banners.asObservable().subscribe(onNext: { [weak self](banners) in
+            guard let `self` = self, let bannerInfos = banners else { return }
+            let images = bannerInfos.map({ (banner) -> String in
+                return banner.image
+            })
+            self.contentView.bannerView.adapterModelToETOHomeBannerView(images)
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        self.coordinator?.state.middleItems.asObservable().subscribe(onNext: { [weak self](middleItems) in
+            guard let `self` = self, let items = middleItems else { return }
+            self.contentView.moudlesView.adapterModelToComprehensiveItemsView(items)
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](notification) in
+            guard let `self` = self else { return }
+            self.coordinator?.fetchData()
+        }
     }
 }
 
-//MARK: - TableViewDelegate
-
-//extension ComprehensiveViewController: UITableViewDataSource, UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 10
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//          let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.<#cell#>.name, for: indexPath) as! <#cell#>
-//
-//        return cell
-//    }
-//}
-
-
-//MARK: - View Event
-
-//extension ComprehensiveViewController {
-//    @objc func <#view#>DidClicked(_ data:[String: Any]) {
-//        if let addressdata = data["data"] as? <#model#>, let view = data["self"] as? <#view#>  {
-//
-//        }
-//    }
-//}
+extension ComprehensiveViewController {
+    @objc func ComprehensiveItemViewDidClicked(_ data: [String: Any]) {
+        guard  let index = data["index"] as? Int else { return }
+    }
+}
 

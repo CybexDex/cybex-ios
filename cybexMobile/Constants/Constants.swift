@@ -91,6 +91,7 @@ struct AppConfiguration {
     static var RECODE_BASE_URLString = "https://gateway-query.cybex.io/"
     static var RECODE_LOGIN = RECODE_BASE_URLString + "login"
     static var RECODE_RECODES = RECODE_BASE_URLString + "records"
+    static var RECODE_ACCOUNT_ASSET = RECODE_BASE_URLString + "account-assets"
     
     static var HELP_NIGHT_URL = "http://47.75.154.39:3009/cybexnight?lang="
     static var HELP_LIGHT_URL = "http://47.75.154.39:3009/cybexday?lang="
@@ -101,6 +102,22 @@ struct AppConfiguration {
     
     static var BASE_SETTING_JSON: String {
         return SERVER_BASE_URLString + "json/settings.json"
+    }
+    
+    static var HOTASSETS_JSON: String {
+        return SERVER_TEST_BASE_URLString + "v1/api/hotpair"
+    }
+    
+    static var ANNOUNCE_JSON: String {
+        return SERVER_TEST_BASE_URLString + "v1/api/announce?lang="
+    }
+    
+    static var HOME_ITEMS_JSON: String {
+        return SERVER_TEST_BASE_URLString + "v1/api/app_sublinks?lang="
+    }
+    
+    static var HOME_BANNER_JSON: String {
+        return SERVER_TEST_BASE_URLString + "v1/api/banners?lang="
     }
 }
 

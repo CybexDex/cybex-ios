@@ -17,7 +17,8 @@ class RecodeCellView: UIView {
   @IBOutlet weak var state: UILabel!
   @IBOutlet weak var time: UILabel!
   @IBOutlet weak var address: UILabel!
-  
+    @IBOutlet weak var inComeOrSend: UIImageView!
+    
   var data : Any? {
     didSet{
       if let data = data as? Record {
@@ -36,6 +37,7 @@ class RecodeCellView: UIView {
             amount.text = "-"
         }
         
+        inComeOrSend.image = data.fundType == "WITHDRAW" ? R.image.ic_income() : R.image.ic_send()
         updateHeight()
       }
     }

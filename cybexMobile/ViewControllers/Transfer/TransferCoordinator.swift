@@ -132,7 +132,6 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         self.rootVC.popViewController(animated: true, nil)
     }
     
-    
     func openAddAddress() {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)

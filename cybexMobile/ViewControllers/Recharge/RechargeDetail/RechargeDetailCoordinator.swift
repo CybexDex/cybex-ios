@@ -257,8 +257,4 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
             showPicker(sender)
         }
     }
-    
-    
-    
-    
 }

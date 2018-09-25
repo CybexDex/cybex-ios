@@ -22,6 +22,8 @@ import Foundation
     @objc optional func lineMaxItemNum(_ view: GridContentView) -> Int
     
     @objc optional func lineHeightForView(_ view: GridContentView, lineNum: Int) -> CGFloat
+    
+    @objc optional func lineSpaceForView(_ view: GridContentView) -> CGFloat
 }
 
 class GridContentView: UIView {
@@ -43,6 +45,7 @@ class GridContentView: UIView {
     
     private var collectionViews: [UIView] = []
     
+    private var space: CGFloat = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -71,6 +74,7 @@ class GridContentView: UIView {
                 lineView.axis = .horizontal
                 lineView.distribution = .fillEqually
                 lineView.alignment = .fill
+                lineView.spacing = self.space
                 contentView.addArrangedSubview(lineView)
                 lineView.left(to: contentView, offset:0)
                 lineView.right(to: contentView, offset:0)
@@ -121,6 +125,9 @@ class GridContentView: UIView {
                 self.lineNum = dataSource.lineMaxItemNum!(self)
             }
             
+            if dataSource.responds(to: #selector(GridContentViewDataSource.lineSpaceForView(_:))) {
+                self.space = dataSource.lineSpaceForView!(self)
+            }
             
             self.collectionViews = dataSource.itemsForView(self)
         }

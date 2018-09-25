@@ -7,6 +7,7 @@
 */
 "" = "";
 "--" = "--";
+"nav.home" = "Home";
 "nav.watchlist" = "Watchlist";
 "nav.faq" = "FAQ";
 "nav.apply" = "Application";
@@ -15,6 +16,7 @@
 "nav.trade"   = "Exchange";
 "nav.eto" = "ETO";
 
+"home_blockchain" = "Blockchain";
 
 "market" = "Market";
 
@@ -493,3 +495,8 @@
 "eto_detail_user_agreement_error" = "Please check 《User Agreement》 first.";
 
 "eto_appointment_success" = "Successful appointment, please wait for the audit result patiently";
+
+"record_all" = "Deposit&withdraw records";
+
+"record_types" = "Types";
+"record_currency" = "Currency";

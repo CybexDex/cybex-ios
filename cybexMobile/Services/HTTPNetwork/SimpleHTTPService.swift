@@ -293,6 +293,7 @@ extension SimpleHTTPService {
     }
     
     
+    
     static func fetchETOHiddenRequest() -> Promise<ETOHidden?>{
         var request  = URLRequest(url: URL(string: AppConfiguration.BASE_SETTING_JSON)!)
         request.cachePolicy = .reloadIgnoringCacheData
@@ -309,15 +310,14 @@ extension SimpleHTTPService {
     }
     
     
-    static func fetchRecords(_ sender : [String:Any]) -> Promise<TradeRecord?> {
-        
-        var request = try! URLRequest(url: URL(string: AppConfiguration.RECODE_RECODES)!, method: .post, headers: ["Content-Type": "application/json"])
+    static func fetchRecords(_ url: String, signer: String) -> Promise<TradeRecord?> {
+        let headers = ["Content-Type": "application/json", "authorization": "bearer " + signer]
+        var request = try! URLRequest(url: URL(string: url)!, method: .get, headers: headers)
         request.timeoutInterval = 5
         request.cachePolicy = .reloadIgnoringCacheData
-        let encodedURLRequest = try! JSONEncoding.default.encode(request, with: sender)
         
         let (promise ,seal) = Promise<TradeRecord?>.pending()
-        Alamofire.request(encodedURLRequest).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+        Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
             guard let value = response.result.value else {
                 seal.fulfill(nil)
                 return
@@ -338,4 +338,120 @@ extension SimpleHTTPService {
         }
         return promise
     }
+    
+    static func fetchAccountAsset(_ url: String, signer: String) -> Promise<AccountAssets?> {
+        let headers = ["Content-Type": "application/json", "authorization": "bearer" + signer]
+        var request = try! URLRequest(url: URL(string: url)!, method: .get, headers: headers)
+        request.timeoutInterval = 5
+        request.cachePolicy = .reloadIgnoringCacheData
+        
+        let (promise ,seal) = Promise<AccountAssets?>.pending()
+        Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+            guard let value = response.result.value else {
+                seal.fulfill(nil)
+                return
+            }
+            let data = JSON(value).dictionaryValue
+            if let code = data["code"]?.int ,code == 200 {
+                if let result = data["data"]?.dictionaryObject {
+                    if let callbackData = AccountAssets.deserialize(from: result) {
+                        seal.fulfill(callbackData)
+                    }
+                    else {
+                        seal.fulfill(nil)
+                    }
+                }
+            }else{
+                seal.fulfill(nil)
+            }
+        }
+        return promise
+    }
+    
+    
+    static func fetchHomeHotAssetJson() -> Promise<[Pair]?> {
+        var request  = URLRequest(url: URL(string: AppConfiguration.HOTASSETS_JSON)!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        let (promise ,seal) = Promise<[Pair]?>.pending()
+        Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+            guard let value = response.result.value else {
+                seal.fulfill([])
+                return
+            }
+            
+            guard let data = JSON(value).dictionaryValue["data"] else {
+                seal.fulfill([])
+                return
+            }
+            
+            let pairs = data.arrayValue.map({ Pair(base: $0.dictionaryValue["base"]?.stringValue ?? "", quote: $0.dictionaryValue["quote"]?.stringValue ?? "") })
+            seal.fulfill(pairs)
+        }
+        return promise
+    }
+    
+    
+    static func fetchAnnounceJson(_ url: String) -> Promise<[ComprehensiveAnnounce]?> {
+        var request  = URLRequest(url: URL(string: url)!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        let (promise ,seal) = Promise<[ComprehensiveAnnounce]?>.pending()
+        Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+            guard let value = response.result.value else {
+                seal.fulfill([])
+                return
+            }
+            
+            guard let data = JSON(value).dictionaryValue["data"] else {
+                seal.fulfill([])
+                return
+            }
+            
+            let pairs = data.arrayValue.map({ ComprehensiveAnnounce.deserialize(from: $0.dictionaryObject)})
+            seal.fulfill(pairs as? [ComprehensiveAnnounce])
+        }
+        return promise
+    }
+    
+    static func fetchHomeItemInfo(_ url: String) -> Promise<[ComprehensiveItem]?> {
+        var request  = URLRequest(url: URL(string: url)!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        let (promise ,seal) = Promise<[ComprehensiveItem]?>.pending()
+        Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+            guard let value = response.result.value else {
+                seal.fulfill([])
+                return
+            }
+            
+            guard let data = JSON(value).dictionaryValue["data"] else {
+                seal.fulfill([])
+                return
+            }
+            
+            let items = data.arrayValue.map({ ComprehensiveItem.deserialize(from: $0.dictionaryObject)})
+            seal.fulfill(items as? [ComprehensiveItem])
+        }
+        return promise
+    }
+    
+    static func fetchHomeBannerInfos(_ url: String) -> Promise<[ComprehensiveBanner]?> {
+        var request  = URLRequest(url: URL(string: url)!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        let (promise ,seal) = Promise<[ComprehensiveBanner]?>.pending()
+        Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+            guard let value = response.result.value else {
+                seal.fulfill([])
+                return
+            }
+            
+            guard let data = JSON(value).dictionaryValue["data"] else {
+                seal.fulfill([])
+                return
+            }
+            
+            let banners = data.arrayValue.map({ ComprehensiveBanner.deserialize(from: $0.dictionaryObject)})
+            seal.fulfill(banners as? [ComprehensiveBanner])
+        }
+        return promise
+    }
+    
 }

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,28 +32,28 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9h5-WD-fuk">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9h5-WD-fuk">
                                 <rect key="frame" x="0.0" y="52" width="375" height="615"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qfk-Ue-uhf">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qfk-Ue-uhf">
                                         <rect key="frame" x="0.0" y="0.0" width="1125" height="615"/>
                                         <subviews>
-                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jac-cH-uZ5">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="615"/>
-                                                <connections>
-                                                    <segue destination="Fdf-gi-ksD" kind="embed" identifier="ExchangeViewControllerBuy" id="6xO-gd-IjE"/>
-                                                </connections>
-                                            </containerView>
-                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y8d-pJ-zNu">
+                                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y8d-pJ-zNu">
                                                 <rect key="frame" x="375" y="0.0" width="375" height="615"/>
                                                 <connections>
                                                     <segue destination="0g1-Ao-zfw" kind="embed" identifier="ExchangeViewControllerSell" id="Is8-tK-ZT7"/>
                                                 </connections>
                                             </containerView>
-                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kvr-lP-awK">
+                                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kvr-lP-awK">
                                                 <rect key="frame" x="750" y="0.0" width="375" height="615"/>
                                                 <connections>
                                                     <segue destination="ogn-X9-Efg" kind="embed" identifier="OpenedOrdersViewController" id="LVv-cy-Lxu"/>
+                                                </connections>
+                                            </containerView>
+                                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jac-cH-uZ5">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="615"/>
+                                                <connections>
+                                                    <segue destination="Fdf-gi-ksD" kind="embed" identifier="ExchangeViewControllerBuy" id="6xO-gd-IjE"/>
                                                 </connections>
                                             </containerView>
                                         </subviews>
@@ -108,7 +107,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c9j-cr-KtW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2023" y="-559"/>
+            <point key="canvasLocation" x="-2126" y="-686"/>
         </scene>
         <!--ExchangeViewController-->
         <scene sceneID="Ek7-f0-BYL">

@@ -92,6 +92,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
         try? reachability.startNotifier()
         
+        SimpleHTTPService.fetchHomeHotAssetJson()
+        
         configApplication()
         
         return true
@@ -156,9 +158,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didChangeStatusBarOrientation oldStatusBarOrientation: UIInterfaceOrientation) {
-        
+
     }
-    
 }
 
 extension AppDelegate {

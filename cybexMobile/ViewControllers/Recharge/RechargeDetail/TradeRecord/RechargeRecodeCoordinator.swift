@@ -35,7 +35,7 @@ class RechargeRecodeCoordinator: AccountRootCoordinator {
 }
 
 extension RechargeRecodeCoordinator: RechargeRecodeCoordinatorProtocol {
-    
+  
 }
 
 extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {

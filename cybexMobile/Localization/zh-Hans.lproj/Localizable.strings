@@ -7,6 +7,7 @@
 */
 "" = "";
 "--" = "--";
+"nav.home" = "首页";
 "nav.watchlist" = "行情";
 "nav.faq" = "FAQ";
 "nav.apply" = "申请";
@@ -14,6 +15,8 @@
 "nav.setting" = "设置";
 "nav.trade"   = "交易";
 "nav.eto" = "ETO";
+
+"home_blockchain" = "区块信息";
 
 "market" = "交易中心";
 "language" = "语言";
@@ -473,3 +476,7 @@
 "eto_detail_user_agreement_error" = "请先勾选《用户协议》";
 "eto_appointment_success" = "预约成功，请耐心等待审核结果";
 
+"record_all" = "充提记录";
+
+"record_types" = "类型";
+"record_currency" = "币种";
