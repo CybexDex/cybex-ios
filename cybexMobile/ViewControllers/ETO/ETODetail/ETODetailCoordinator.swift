@@ -9,6 +9,13 @@
 import UIKit
 import ReSwift
 import NBLCommonModule
+import HandyJSON
+
+struct ETODetailContext:RouteContext,HandyJSON {
+    init() {}
+    
+    var pid:Int = 0
+}
 
 protocol ETODetailCoordinatorProtocol {
     func openShare()
@@ -27,7 +34,7 @@ protocol ETODetailStateManagerProtocol {
     func fetchUserState()
 }
 
-class ETODetailCoordinator: ETORootCoordinator {
+class ETODetailCoordinator: NavCoordinator {
     var store = Store(
         reducer: ETODetailReducer,
         state: nil,
@@ -36,6 +43,14 @@ class ETODetailCoordinator: ETORootCoordinator {
     
     var state: ETODetailState {
         return store.state
+    }
+    
+    override class func start(_ root: BaseNavigationController, context:RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.etoDetail.etoDetailViewController()!
+        let coordinator = ETODetailCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+        return vc
     }
     
     override func register() {

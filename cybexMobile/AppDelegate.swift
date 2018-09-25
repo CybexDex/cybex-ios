@@ -23,9 +23,11 @@ import SwiftRichString
 import SwiftyBeaver
 import AlamofireNetworkActivityLogger
 import NBLCommonModule
+import URLNavigator
 
 let log = SwiftyBeaver.self
 let reachability = Reachability()!
+let navigator = Navigator()
 
 fileprivate let UM_APPKEY = "5b6bf4a8b27b0a3429000016"
 
@@ -36,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self, Answers.self])
+        URLNavigationMap.initialize(navigator: navigator)
         
         setupAnalytics()
         
@@ -94,6 +97,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         configApplication()
         
+        if let url = launchOptions?[.url] as? URL {
+            let opened = navigator.open(url)
+            if !opened {
+                navigator.present(url)
+            }
+        }
         return true
     }
     
@@ -153,6 +162,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        // URLNavigator Handler
+        if navigator.open(url) {
+            return true
+        }
+        
+        // URLNavigator View Controller
+        if navigator.present(url, wrap: UINavigationController.self) != nil {
+            return true
+        }
+        
+        return false
     }
     
 }

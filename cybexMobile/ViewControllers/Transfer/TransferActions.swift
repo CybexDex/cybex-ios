@@ -11,13 +11,6 @@ import ReSwift
 import RxCocoa
 
 //MARK: - State
-struct TransferState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage:String?
-    var property: TransferPropertyState
-}
-
 enum AccountValidStatus: Int {
   case unValided = 0
   case validSuccessed
@@ -25,7 +18,11 @@ enum AccountValidStatus: Int {
   case validding
 }
 
-struct TransferPropertyState {  
+struct TransferState:BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+    
   var accountValid: BehaviorRelay<AccountValidStatus> = BehaviorRelay(value: .unValided)
   
   var amountValid: BehaviorRelay<Bool> = BehaviorRelay(value: false)

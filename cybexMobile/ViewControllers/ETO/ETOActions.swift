@@ -12,6 +12,8 @@ import RxCocoa
 
 //MARK: - State
 struct ETOState: BaseState {
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
     var data: BehaviorRelay<[ETOProjectViewModel]?> = BehaviorRelay(value: nil)
     var banners: BehaviorRelay<[ETOBannerModel]?> = BehaviorRelay(value: nil)

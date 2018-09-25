@@ -9,12 +9,8 @@
 import UIKit
 import ReSwift
 
-func RechargeReducer(action:Action, state:RechargeState?) -> RechargeState {
-    return RechargeState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: RechargePropertyReducer(state?.property, action: action))
-}
-
-func RechargePropertyReducer(_ state: RechargePropertyState?, action: Action) -> RechargePropertyState {
-    var state = state ?? RechargePropertyState()
+func RechargeReducer(action: Action, state: RechargeState?) -> RechargeState {
+    let state = state ?? RechargeState()
     
     switch action {
     case let action as FecthDepositIds:state.depositIds.accept(action.data)

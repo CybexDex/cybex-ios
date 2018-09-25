@@ -173,3 +173,34 @@ class AppCoordinator {
     }
 }
 
+extension AppCoordinator {
+    func pushVC<T:NavCoordinator>(_ coordinator: T.Type, animated:Bool = true, context:RouteContext? = nil) {
+        let topside = curDisplayingCoordinator().rootVC!
+        let vc = coordinator.start(topside, context: context)
+        topside.pushViewController(vc, animated: animated)
+    }
+    
+    func presentVC<T:NavCoordinator>(_ coordinator: T.Type, animated:Bool = true, context:RouteContext? = nil,
+                                     navSetup: ((BaseNavigationController) -> Void)?,
+                                     presentSetup:((_ top:BaseNavigationController, _ target:BaseNavigationController) -> Void)?) {
+        let nav = BaseNavigationController()
+        navSetup?(nav)
+        let coor = NavCoordinator(rootVC: nav)
+        coor.pushVC(coordinator, animated: false, context: context)
+        
+        var topside = curDisplayingCoordinator().rootVC!
+        
+        while topside.presentedViewController != nil  {
+            topside = topside.presentedViewController as! BaseNavigationController
+        }
+        
+        if presentSetup == nil {
+            SwifterSwift.delay(milliseconds: 100) {
+                topside.present(nav, animated: animated, completion: nil)
+            }
+        }
+        else {
+            presentSetup?(topside, nav)
+        }
+    }
+}

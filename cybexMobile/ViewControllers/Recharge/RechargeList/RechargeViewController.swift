@@ -28,6 +28,7 @@ class RechargeViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     startLoading()
+    
     self.coordinator?.fetchDepositIdsInfo()
     self.coordinator?.fetchWithdrawIdsInfo()
     setupUI()
@@ -42,7 +43,7 @@ class RechargeViewController: BaseViewController {
   }
   
   override func configureObserveState() {
-    self.coordinator?.state.property.depositIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
+    self.coordinator?.state.depositIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
         guard let `self` = self else {return}
         self.depositData = self.filterData(data)
         if self.selectedIndex == .RECHARGE{
@@ -51,7 +52,7 @@ class RechargeViewController: BaseViewController {
         }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     
-    self.coordinator?.state.property.withdrawIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
+    self.coordinator?.state.withdrawIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
         guard let `self` = self else { return }
         self.withdrawData = self.filterData(data)
         if self.selectedIndex == .WITHDRAW{
@@ -59,6 +60,14 @@ class RechargeViewController: BaseViewController {
             self.tableView.reloadData()
         }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
+    self.coordinator?.state.context.asObservable().subscribe(onNext: { [weak self] (context) in
+        guard let `self` = self else { return }
+
+        if let context = context as? RechargeContext {
+            self.selectedIndex = context.selectedIndex
+        }
+    }).disposed(by: disposeBag)
   }
   
   func filterData(_ trades:[Trade]) ->[Trade] {

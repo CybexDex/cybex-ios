@@ -12,6 +12,12 @@ import SwiftTheme
 import SwiftyJSON
 import SwiftyUserDefaults
 
+func openPage(_ urlString:String) {
+    if let url = urlString.url {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+}
+
 func getChainId(callback:@escaping(String)->()){
   if AppConfiguration.shared.chainID.isEmpty {
     let requeset = GetChainIDRequest { (id) in

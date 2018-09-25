@@ -35,6 +35,8 @@ enum ETOValidStatus: Int {
 
 //MARK: - State
 struct ETOCrowdState: BaseState {
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
     var data: BehaviorRelay<ETOProjectModel?> = BehaviorRelay(value: nil)
     var userData: BehaviorRelay<ETOUserModel?> = BehaviorRelay(value: nil)

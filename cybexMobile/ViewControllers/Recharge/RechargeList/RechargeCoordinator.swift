@@ -8,6 +8,14 @@
 
 import UIKit
 import ReSwift
+import HandyJSON
+import NBLCommonModule
+
+struct RechargeContext:RouteContext,HandyJSON {
+    init() {}
+    
+    var selectedIndex: RechargeViewController.CELL_TYPE = .RECHARGE
+}
 
 protocol RechargeCoordinatorProtocol {
   func openRechargeDetail(_ trade:Trade)
@@ -24,15 +32,32 @@ protocol RechargeStateManagerProtocol {
   func fetchDepositIdsInfo()
 }
 
-class RechargeCoordinator: AccountRootCoordinator {
+class RechargeCoordinator: NavCoordinator {
     
     lazy var creator = RechargePropertyActionCreate()
     
-    var store = Store<RechargeState>(
+    var store = Store(
         reducer: RechargeReducer,
         state: nil,
         middleware:[TrackingMiddleware]
     )
+    
+    override func register() {
+        Broadcaster.register(RechargeCoordinatorProtocol.self, observer: self)
+        Broadcaster.register(RechargeStateManagerProtocol.self, observer: self)
+        
+        
+    }
+    
+    override class func start(_ root: BaseNavigationController, context:RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.account.rechargeViewController()!
+        let coordinator = RechargeCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+
+        return vc
+    }
+
 }
 
 extension RechargeCoordinator: RechargeCoordinatorProtocol {

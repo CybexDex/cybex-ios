@@ -65,5 +65,5 @@ class CBTabBarView: ESTabBarItemContentView {
 }
 
 class BaseTabbarViewController: ESTabBarController {
-  
+
 }

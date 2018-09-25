@@ -14,6 +14,8 @@ import DifferenceKit
 
 //MARK: - State
 struct ETORecordListState: BaseState {
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+    
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
     var data:BehaviorRelay<[ETOTradeHistoryModel]> = BehaviorRelay(value: [])
     var changeSet:BehaviorRelay<StagedChangeset<[ETOTradeHistoryModel]>> = BehaviorRelay(value: StagedChangeset<[ETOTradeHistoryModel]>())
