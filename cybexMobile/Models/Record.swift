@@ -37,7 +37,7 @@ struct Record : HandyJSON {
     var fundType : String = ""
     var state : String = ""
     var updateAt : Date!
-    var asset_id : String = ""
+    var details: [RecordDetail]?
     
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
@@ -45,6 +45,12 @@ struct Record : HandyJSON {
     }
     
     init() {}
+}
+
+struct RecordDetail: HandyJSON {
+    var id: String = ""
+    var state: String = ""
+    var hash: String = ""
 }
 
 open class GemmaDateFormatTransform: DateFormatterTransform {
@@ -119,7 +125,6 @@ struct TransferRecord : HandyJSON {
     
 }
 
-
 struct TransferRecordViewModel {
     var isSend : Bool = false
     var from : String = ""
@@ -132,4 +137,21 @@ struct TransferRecordViewModel {
 }
 
 
+struct AccountAssetModel: HandyJSON {
+    var count: Int = 0
+    var groupInfo: GroupInfo?
+}
+
+
+struct GroupInfo: HandyJSON {
+    var asset: String = ""
+    var fundType: String = ""
+}
+
+struct AccountAssets: HandyJSON{
+    var total: Int = 0
+    var offset: Int = 0
+    var size: Int = 0
+    var records: [AccountAssetModel]?
+}
 

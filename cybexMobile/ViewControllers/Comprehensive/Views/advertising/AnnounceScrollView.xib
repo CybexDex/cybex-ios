@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnnounceScrollView">
+            <connections>
+                <outlet property="scrollView" destination="OWP-eJ-qAQ" id="34s-sE-A3e"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="btM-Yo-6kI">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OWP-eJ-qAQ">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="OWP-eJ-qAQ" firstAttribute="top" secondItem="btM-Yo-6kI" secondAttribute="top" id="LnX-IM-81u"/>
+                <constraint firstItem="OWP-eJ-qAQ" firstAttribute="leading" secondItem="Lhl-p8-24W" secondAttribute="leading" id="ZMo-bY-7zc"/>
+                <constraint firstAttribute="bottom" secondItem="OWP-eJ-qAQ" secondAttribute="bottom" id="g7b-Ds-Ezx"/>
+                <constraint firstItem="Lhl-p8-24W" firstAttribute="trailing" secondItem="OWP-eJ-qAQ" secondAttribute="trailing" id="zSM-6L-SeT"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Lhl-p8-24W"/>
+            <point key="canvasLocation" x="-452" y="-206"/>
+        </view>
+    </objects>
+</document>

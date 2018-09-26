@@ -15,7 +15,8 @@ import Repeat
 class ETODetailViewController: BaseViewController {
 
 	var coordinator: (ETODetailCoordinatorProtocol & ETODetailStateManagerProtocol)?
-
+    private(set) var context:ETODetailContext?
+    
     @IBOutlet weak var contentView: ETODetailView!
 
     var timerRepeater: Repeater?
@@ -76,7 +77,7 @@ class ETODetailViewController: BaseViewController {
             guard let `self` = self else { return }
             
             if let context = context as? ETODetailContext {
-                
+                self.context = context
             }
         }).disposed(by: disposeBag)
         

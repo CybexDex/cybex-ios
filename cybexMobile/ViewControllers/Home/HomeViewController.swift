@@ -68,7 +68,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         
         if VC_TYPE == view_type.homeContent.rawValue {
             handlerUpdateVersion(nil)
-            
         }
     }
     

@@ -260,10 +260,10 @@ string cybex_gateway_query(
   digest_type::encoder enc;
   
   trx.op.accountName = accountName;
-  trx.op.asset = asset;
-  trx.op.fundType = fundType;
-  trx.op.size = size;
-  trx.op.offset = offset;
+//  trx.op.asset = asset;
+//  trx.op.fundType = fundType;
+//  trx.op.size = size;
+//  trx.op.offset = offset;
   trx.op.expiration = expiration; //fc::time_point_sec(expiration);
   
   fc::ecc::private_key active_priv_key = get_private_key("");

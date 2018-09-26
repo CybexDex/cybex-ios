@@ -52,10 +52,11 @@ class AppCoordinator {
     var homeCoordinator: HomeRootCoordinator!
     var explorerCoordinator: ExplorerRootCoordinator!
     //  var faqCoordinator: FAQRootCoordinator!
-    var tradeCoordinator : TradeRootCoordinator!
+    var tradeCoordinator: TradeRootCoordinator!
     var accountCoordinator: AccountRootCoordinator!
     var entryCoordinator: EntryRootCoordinator!
-    var etoCoordinator : ETORootCoordinator!
+    var etoCoordinator: ETORootCoordinator!
+    var comprehensiveCoordinator: ComprehensiveRootCoordinator!
     var container : [NavCoordinator]!
     
     var etoStatus: BehaviorRelay<ETOHidden?> = BehaviorRelay(value:nil)
@@ -83,8 +84,11 @@ class AppCoordinator {
             tabBar.backgroundImage = UIImage()
         }
         
-        let home = BaseNavigationController()
+        let comprehensive = BaseNavigationController()
+        comprehensiveCoordinator = ComprehensiveRootCoordinator(rootVC: comprehensive)
+        comprehensive.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navHome.key.localized(), image: R.image.ic_nav_home(), selectedImage: R.image.ic_nav_home_active())
         
+        let home = BaseNavigationController()
         homeCoordinator = HomeRootCoordinator(rootVC: home)
         home.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navWatchlist.key.localized(), image: R.image.ic_watchlist_24px(), selectedImage: R.image.ic_watchlist_active_24px())
         
@@ -103,7 +107,7 @@ class AppCoordinator {
         
         //        home.tabBarItem.badgeValue = ""
         //        message.tabBarItem.badgeValue = "99+"
-        
+        comprehensiveCoordinator.start()
         homeCoordinator.start()
         tradeCoordinator.start()
         accountCoordinator.start()
@@ -114,8 +118,8 @@ class AppCoordinator {
             rootVC.viewControllers = [home, trade, eto, account]
         }
         else {
-            self.container = [homeCoordinator, tradeCoordinator, accountCoordinator] as [NavCoordinator]
-            rootVC.viewControllers = [home, trade, account]
+            self.container = [comprehensiveCoordinator,homeCoordinator, tradeCoordinator, accountCoordinator] as [NavCoordinator]
+            rootVC.viewControllers = [comprehensive, home, trade, account]
         }
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: {notification in

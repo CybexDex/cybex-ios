@@ -46,5 +46,8 @@ extension ETOUserAgreementCoordinator: ETOUserAgreementStateManagerProtocol {
         Async.main {
             self.store.dispatch(PageStateAction(state: state))
         }
+//        var context = ETODetailContext()
+//        context.pid = 100
+//        self.pushVC(ETODetailCoordinator.self, animated: true, context: context)
     }
 }

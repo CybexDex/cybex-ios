@@ -9,13 +9,6 @@
 import UIKit
 import ReSwift
 import NBLCommonModule
-import HandyJSON
-
-struct ETODetailContext:RouteContext,HandyJSON {
-    init() {}
-    
-    var pid:Int = 0
-}
 
 protocol ETODetailCoordinatorProtocol {
     func openShare()
@@ -107,6 +100,11 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                     }, failure: { (error) in
                         self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
                     })
+                }
+                else {
+                    if let context = self.state.context.value as? ETODetailContext {
+                        
+                    }
                 }
             }
         }

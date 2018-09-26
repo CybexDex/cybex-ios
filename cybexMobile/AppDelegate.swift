@@ -95,6 +95,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
         try? reachability.startNotifier()
         
+        SimpleHTTPService.fetchHomeHotAssetJson()
+        
         configApplication()
         
         if let url = launchOptions?[.url] as? URL {
