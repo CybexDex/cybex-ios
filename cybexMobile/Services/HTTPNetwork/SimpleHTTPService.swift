@@ -340,7 +340,7 @@ extension SimpleHTTPService {
     }
     
     static func fetchAccountAsset(_ url: String, signer: String) -> Promise<AccountAssets?> {
-        let headers = ["Content-Type": "application/json", "authorization": "bearer" + signer]
+        let headers = ["Content-Type": "application/json", "authorization": "bearer " + signer]
         var request = try! URLRequest(url: URL(string: url)!, method: .get, headers: headers)
         request.timeoutInterval = 5
         request.cachePolicy = .reloadIgnoringCacheData
@@ -454,4 +454,20 @@ extension SimpleHTTPService {
         return promise
     }
     
+    static func fetchBlockexplorerJson() -> Promise<[BlockExplorer]> {
+        var request  = URLRequest(url: URL(string: AppConfiguration.BLOCKEXPLORER_JSON)!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        let (promise ,seal) = Promise<[BlockExplorer]>.pending()
+        Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+            guard let value = response.result.value else {
+                seal.fulfill([])
+                return
+            }
+            let explorers = JSON(value).arrayValue.map({ (item) -> BlockExplorer in
+                return BlockExplorer(asset: item["asset"].stringValue, explorer:item["explorer"].stringValue)
+            })
+            seal.fulfill(explorers)
+        }
+        return promise
+    }
 }

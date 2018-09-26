@@ -14,6 +14,8 @@ import ReSwift
 class WithdrawAndDespoitRecordViewController: BaseViewController {
     
     var coordinator: (WithdrawAndDespoitRecordCoordinatorProtocol & WithdrawAndDespoitRecordStateManagerProtocol)?
+    @IBOutlet weak var headerView: RecordHeaderView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,30 +104,65 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
     }
 }
 
-//MARK: - TableViewDelegate
-
-//extension WithdrawAndDespoitRecordViewController: UITableViewDataSource, UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 10
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//          let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.<#cell#>.name, for: indexPath) as! <#cell#>
-//
-//        return cell
-//    }
-//}
-
-
 //MARK: - View Event
 
 extension WithdrawAndDespoitRecordViewController {
     @objc func presentChooseVC(_ data: [String: Any]) {
-        if let vc = data["data"] as? UIViewController {
+        if let vc = data["data"] as? RecordChooseViewController {
             self.present(vc, animated: true) {
                 vc.view.superview?.layer.cornerRadius = 0
             }
         }
     }
+    
+    @objc func RecordContainerViewDidClicked(_ data: [String: Any]) {
+        guard let index = data["index"] as? Int, let chooseView = data["self"] as? RecordChooseView else { return }
+        let vc = R.storyboard.comprehensive.recordChooseViewController()!
+        vc.preferredContentSize = CGSize(width: chooseView.containerView.width, height: index == 1 ? 165 : 122)
+        vc.modalPresentationStyle = .popover
+        vc.popoverPresentationController?.sourceView = chooseView.containerView
+        vc.popoverPresentationController?.sourceRect = chooseView.containerView.bounds
+        vc.popoverPresentationController?.delegate = self
+        vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
+        vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.white.hexString(true)]
+        vc.popoverPresentationController?.popoverBackgroundViewClass = pictPopBGView.self
+        vc.typeIndex = index == 1 ? .Asset : .FoudType
+        vc.delegate = self
+        vc.coordinator = RecordChooseCoordinator(rootVC:self.navigationController as! BaseNavigationController)
+        self.present(vc, animated: true) {
+            self.view.superview?.cornerRadius = 2
+        }
+    }
+}
+extension WithdrawAndDespoitRecordViewController: UIPopoverPresentationControllerDelegate {
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return true
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
 }
 
+extension WithdrawAndDespoitRecordViewController: RecordChooseViewControllerDelegate {
+    func returnSelectedRow(_ sender: RecordChooseViewController, info: String) {
+        
+        switch sender.typeIndex {
+        case .Asset:
+            self.headerView.assetInfoView.contentLabel.text = info.filterJade
+            self.headerView.assetInfoView.contentLabel.textColor = UIColor.steel
+            self.headerView.assetInfoView.stateImage.image = R.image.ic2()
+            self.coordinator?.childrenFetchData(info, index: RecordChooseType.Asset)
+            break
+        case .FoudType:
+            self.headerView.typeInfoView.contentLabel.text = info.filterJade
+            self.headerView.typeInfoView.contentLabel.textColor = UIColor.steel
+            self.headerView.typeInfoView.stateImage.image = R.image.ic2()
+            self.coordinator?.childrenFetchData(info, index: RecordChooseType.FoudType)
+            break
+        default:
+            break
+        }
+        sender.dismiss(animated: true, completion: nil)
+    }
+}

@@ -31,3 +31,9 @@ struct ComprehensiveBanner: HandyJSON {
     var score: Int = 0
     var name: String = ""
 }
+
+
+struct BlockExplorer: HandyJSON {
+    var asset: String = ""
+    var explorer: String = ""
+}

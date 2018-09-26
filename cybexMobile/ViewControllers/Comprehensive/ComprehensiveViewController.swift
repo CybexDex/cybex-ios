@@ -117,7 +117,10 @@ class ComprehensiveViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         self.coordinator?.state.announces.asObservable().subscribe(onNext: { [weak self](announces) in
-            guard let `self` = self else { return }
+            guard let `self` = self, let announces = announces else { return }
+            self.contentView.announceView.scrollLableView.data = announces.map({ (announce) -> String in
+                return announce.title
+            })
             
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
@@ -143,8 +146,33 @@ class ComprehensiveViewController: BaseViewController {
 
 extension ComprehensiveViewController {
     @objc func ComprehensiveItemViewDidClicked(_ data: [String: Any]) {
-        guard  let index = data["index"] as? Int else { return }
+        guard let middleItems = self.coordinator?.state.middleItems.value,  let index = data["index"] as? Int else { return }
+        let midlleItem = middleItems[index]
+        openUrl(midlleItem.link)
+    }
+    
+    @objc func ETOHomeBannerViewDidClicked(_ data: [String: Any]){
+        guard let banners = self.coordinator?.state.banners.value, let index = data["data"] as? Int  else { return }
+        let banner = banners[index]
         
+        openUrl(banner.link)
+    }
+    
+    @objc func AnnounceScrollViewDidClicked(_ data: [String: Any]) {
+        guard let announces = self.coordinator?.state.announces.value, let index = data["index"] as? Int else {
+            return
+        }
+        let announce = announces[index]
+        openUrl(announce.url)
+    }
+    
+    func openUrl(_ url: String) {
+        if url.contains("https://") || url.contains("http://") {
+            self.coordinator?.openWebVCUrl(url)
+        }
+        else {
+            openPage(url)
+        }
     }
 }
 

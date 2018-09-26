@@ -516,16 +516,18 @@ enum fundType : String {
 
 func getWithdrawAndDepositRecords(_ accountName : String, asset : String, fundType : fundType, size : Int, offset : Int, expiration : Int ,callback:@escaping (TradeRecord?)->()) {
     
-    var paragram = ["op":["accountName": accountName, "asset":asset, "fundType": fundType.rawValue, "size": Int32(size), "offset": Int32(offset),"expiration":expiration],"signer":"" ] as [String : Any]
+    var paragram = ["op":["accountName": accountName,"expiration":expiration],"signer":"" ] as [String : Any]
     
     let operation = BitShareCoordinator.getRecodeLoginOperation(accountName, asset: asset, fundType: fundType.rawValue, size: Int32(size), offset: Int32(offset), expiration: Int32(expiration))
     if let operation = operation {
         let json = JSON(parseJSON: operation)
         let signer = json["signer"].stringValue
         paragram["signer"] = signer
+        
         SimpleHTTPService.recordLogin(paragram).done { (result) in
             if let result = result {
-                let url = AppConfiguration.RECODE_RECODES + "/" + accountName + "/?asset=" + asset + "&fundType=" + fundType.rawValue + "&size=" + "\(Int32(size))&offset=\(Int32(offset))"
+                let fundTypeString = fundType == .ALL ? "" : fundType.rawValue
+                let url = AppConfiguration.RECODE_RECODES + "/" + accountName + "/?asset=" + asset + "&fundType=" + fundTypeString + "&size=" + "\(Int32(size))&offset=\(Int32(offset))"
                 SimpleHTTPService.fetchRecords(url, signer: result).done({ (data) in
                     callback(data)
                 }).catch({ (error) in
@@ -597,22 +599,12 @@ func changeEnvironmentAction() {
         AppConfiguration.SERVER_BASE_URLString = AppConfiguration.SERVER_TEST_BASE_URLString
         AppConfiguration.SERVER_REGISTER_BASE_URLString = AppConfiguration.SERVER_REGISTER_BASE_TEST_URLString
         AppConfiguration.GATEWAY_URLString = AppConfiguration.SERVER_TEST_BASE_URLString
-        
-        AssetConfiguration.CYB = "1.3.0"
-        AssetConfiguration.BTC = "1.3.25"
-        AssetConfiguration.ETH = "1.3.18"
-        AssetConfiguration.EOS = "1.3.967"
         AssetConfiguration.market_base_assets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.BTC]
     }
     else {
         AppConfiguration.SERVER_BASE_URLString = "https://app.cybex.io/"
         AppConfiguration.SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
         AppConfiguration.GATEWAY_URLString = "https://gateway.cybex.io/gateway"
-        
-        AssetConfiguration.CYB = "1.3.0"
-        AssetConfiguration.BTC = "1.3.3"
-        AssetConfiguration.ETH = "1.3.2"
-        AssetConfiguration.EOS = "1.3.4"
         AssetConfiguration.market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.CYB,AssetConfiguration.USDT,AssetConfiguration.BTC]
     }
 }

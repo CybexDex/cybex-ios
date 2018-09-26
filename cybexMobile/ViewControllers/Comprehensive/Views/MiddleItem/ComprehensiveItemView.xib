@@ -26,7 +26,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mte-f6-iUI" customClass="BaseLabel" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="12" y="12" width="298" height="17"/>
+                            <rect key="frame" x="12" y="12" width="305" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -43,15 +43,15 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDF-4N-u4s">
-                            <rect key="frame" x="12" y="34" width="298" height="13.5"/>
+                            <rect key="frame" x="12" y="34" width="305" height="13.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yP8-Ri-dj8">
-                            <rect key="frame" x="320" y="27.5" width="45" height="45"/>
+                            <rect key="frame" x="327" y="27.5" width="38" height="45"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="45" id="h7g-nJ-NtM"/>
+                                <constraint firstAttribute="width" constant="38" id="h7g-nJ-NtM"/>
                                 <constraint firstAttribute="height" constant="45" id="yu5-eM-cdf"/>
                             </constraints>
                         </imageView>

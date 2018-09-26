@@ -13,7 +13,10 @@ class RecordHeaderView: CybexBaseView {
     enum Event:String {
         case RecordHeaderViewDidClicked
     }
-        
+    
+    @IBOutlet weak var assetInfoView: RecordChooseView!
+    @IBOutlet weak var typeInfoView: RecordChooseView!
+    
     override func setup() {
         super.setup()
         

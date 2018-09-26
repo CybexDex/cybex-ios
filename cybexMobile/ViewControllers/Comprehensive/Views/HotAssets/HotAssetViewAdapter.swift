@@ -18,7 +18,7 @@ extension HotAssetView {
             trendLabel.text = "-"
         }
         else {
-            amountLabel.text = matrix.quote_volume
+            amountLabel.text = matrix.price
             amountLabel.textColor = matrix.incre.color()
             self.trendLabel.text = (matrix.incre == .greater ? "+" : "") + matrix.change.formatCurrency(digitNum: 2) + "%"
             self.trendLabel.textColor = matrix.incre.color()

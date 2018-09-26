@@ -37,6 +37,7 @@ class ETOHomeBannerView: CybexBaseView {
     }
     
     func setupUI() {
+        clearBgColor()
         self.setPagerViewStyle()
         self.setPageControlStyle()
     }

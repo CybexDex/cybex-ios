@@ -72,10 +72,47 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xz7-bj-LXq"/>
                     </view>
+                    <connections>
+                        <outlet property="headerView" destination="JV9-GA-6oe" id="8q2-M1-m5x"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nr7-1c-JI8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="484" y="237"/>
+        </scene>
+        <!--Record Choose View Controller-->
+        <scene sceneID="QRf-yi-15W">
+            <objects>
+                <viewController storyboardIdentifier="RecordChooseViewController" id="lmF-0A-TYo" customClass="RecordChooseViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2SU-H8-SNH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0rf-Gz-87g">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="lmF-0A-TYo" id="IJq-eX-YQc"/>
+                                    <outlet property="delegate" destination="lmF-0A-TYo" id="vXP-Oi-Z0c"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0rf-Gz-87g" firstAttribute="leading" secondItem="6DK-xV-IxG" secondAttribute="leading" id="NOf-Pk-32e"/>
+                            <constraint firstItem="6DK-xV-IxG" firstAttribute="trailing" secondItem="0rf-Gz-87g" secondAttribute="trailing" id="Ufg-UH-ce7"/>
+                            <constraint firstItem="6DK-xV-IxG" firstAttribute="bottom" secondItem="0rf-Gz-87g" secondAttribute="bottom" id="gep-MP-PGk"/>
+                            <constraint firstItem="0rf-Gz-87g" firstAttribute="top" secondItem="6DK-xV-IxG" secondAttribute="top" id="iMJ-LI-Tg7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6DK-xV-IxG"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="0rf-Gz-87g" id="wJx-nC-Uoh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mVD-Ix-wIY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1913" y="236"/>
         </scene>
         <!--RechargeRecodeViewController-->
         <scene sceneID="3b3-Y1-0K0">

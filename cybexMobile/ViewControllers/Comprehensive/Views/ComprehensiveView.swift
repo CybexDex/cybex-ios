@@ -7,15 +7,17 @@
 //
 
 import Foundation
+import FSPagerView
 
 @IBDesignable
 class ComprehensiveView: CybexBaseView {
     
     @IBOutlet weak var bannerView: ETOHomeBannerView!
+    @IBOutlet weak var announceView: AnnounceView!
+    
     @IBOutlet weak var hotAssetsView: HotAssetsView!
     @IBOutlet weak var moudlesView: ComprehensiveItemsView!
-    @IBOutlet weak var blockItemsView: ComprehensiveBlockItemsView!
-    
+
     
     enum Event:String {
         case ComprehensiveViewDidClicked
@@ -30,6 +32,13 @@ class ComprehensiveView: CybexBaseView {
     
     func setupUI() {
         clearBgColor()
+        self.bannerView.pagerView.transformer = FSPagerViewTransformer(type: .linear)
+        self.bannerView.pagerView.itemSize = CGSize(width: 309, height: self.bannerView.height)
+        self.bannerView.pagerView.interitemSpacing = 16
+        
+        self.bannerView.pagerControl.setFillColor(.pastelOrange, for: .selected)
+        self.bannerView.pagerControl.setFillColor(.steel50, for: .normal)
+        self.bannerView.pagerControl.numberOfPages = 5
     }
     
     func setupSubViewEvent() {

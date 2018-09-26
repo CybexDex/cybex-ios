@@ -337,6 +337,22 @@
 		7279867F20F49B3300FFB2DA /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 7279867E20F49B3200FFB2DA /* schema.json */; };
 		728C15792129AE9300053555 /* CybexShowTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C15782129AE9300053555 /* CybexShowTitleView.swift */; };
 		728C157B2129AEA400053555 /* CybexShowTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728C157A2129AEA400053555 /* CybexShowTitleView.xib */; };
+		728C2807215A36F70097840A /* RecordChooseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2803215A36F70097840A /* RecordChooseCoordinator.swift */; };
+		728C2808215A36F70097840A /* RecordChooseActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2804215A36F70097840A /* RecordChooseActions.swift */; };
+		728C2809215A36F70097840A /* RecordChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2805215A36F70097840A /* RecordChooseViewController.swift */; };
+		728C280A215A36F70097840A /* RecordChooseReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2806215A36F70097840A /* RecordChooseReducers.swift */; };
+		728C280F215A3A540097840A /* RecordChooseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C280D215A3A540097840A /* RecordChooseCell.swift */; };
+		728C2810215A3A540097840A /* RecordChooseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728C280E215A3A540097840A /* RecordChooseCell.xib */; };
+		728C2814215A3A910097840A /* RecordChooseCellViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2811215A3A910097840A /* RecordChooseCellViewAdapter.swift */; };
+		728C2815215A3A910097840A /* RecordChooseCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2812215A3A910097840A /* RecordChooseCellView.swift */; };
+		728C2816215A3A910097840A /* RecordChooseCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728C2813215A3A910097840A /* RecordChooseCellView.xib */; };
+		728C281B215B6D6E0097840A /* AnnounceViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2818215B6D6E0097840A /* AnnounceViewAdapter.swift */; };
+		728C281C215B6D6E0097840A /* AnnounceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2819215B6D6E0097840A /* AnnounceView.swift */; };
+		728C281D215B6D6E0097840A /* AnnounceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728C281A215B6D6E0097840A /* AnnounceView.xib */; };
+		728C2822215B7B0B0097840A /* pictPopBGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2821215B7B0B0097840A /* pictPopBGView.swift */; };
+		728C2826215B80480097840A /* AnnounceScrollViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2823215B80480097840A /* AnnounceScrollViewAdapter.swift */; };
+		728C2827215B80480097840A /* AnnounceScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2824215B80480097840A /* AnnounceScrollView.swift */; };
+		728C2828215B80480097840A /* AnnounceScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728C2825215B80480097840A /* AnnounceScrollView.xib */; };
 		72968D212158CEAC00B0AA77 /* WithdrawAndDespoitRecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72968D1D2158CEAC00B0AA77 /* WithdrawAndDespoitRecordCoordinator.swift */; };
 		72968D222158CEAC00B0AA77 /* WithdrawAndDespoitRecordActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72968D1E2158CEAC00B0AA77 /* WithdrawAndDespoitRecordActions.swift */; };
 		72968D232158CEAC00B0AA77 /* WithdrawAndDespoitRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72968D1F2158CEAC00B0AA77 /* WithdrawAndDespoitRecordViewController.swift */; };
@@ -6019,6 +6035,22 @@
 		727AE54235841DBD27700416DA7C59A7 /* begin_end.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = begin_end.hpp; sourceTree = "<group>"; };
 		728C15782129AE9300053555 /* CybexShowTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexShowTitleView.swift; sourceTree = "<group>"; };
 		728C157A2129AEA400053555 /* CybexShowTitleView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CybexShowTitleView.xib; sourceTree = "<group>"; };
+		728C2803215A36F70097840A /* RecordChooseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordChooseCoordinator.swift; sourceTree = "<group>"; };
+		728C2804215A36F70097840A /* RecordChooseActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordChooseActions.swift; sourceTree = "<group>"; };
+		728C2805215A36F70097840A /* RecordChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordChooseViewController.swift; sourceTree = "<group>"; };
+		728C2806215A36F70097840A /* RecordChooseReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordChooseReducers.swift; sourceTree = "<group>"; };
+		728C280D215A3A540097840A /* RecordChooseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordChooseCell.swift; sourceTree = "<group>"; };
+		728C280E215A3A540097840A /* RecordChooseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordChooseCell.xib; sourceTree = "<group>"; };
+		728C2811215A3A910097840A /* RecordChooseCellViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordChooseCellViewAdapter.swift; sourceTree = "<group>"; };
+		728C2812215A3A910097840A /* RecordChooseCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordChooseCellView.swift; sourceTree = "<group>"; };
+		728C2813215A3A910097840A /* RecordChooseCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordChooseCellView.xib; sourceTree = "<group>"; };
+		728C2818215B6D6E0097840A /* AnnounceViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceViewAdapter.swift; sourceTree = "<group>"; };
+		728C2819215B6D6E0097840A /* AnnounceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceView.swift; sourceTree = "<group>"; };
+		728C281A215B6D6E0097840A /* AnnounceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnounceView.xib; sourceTree = "<group>"; };
+		728C2821215B7B0B0097840A /* pictPopBGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pictPopBGView.swift; sourceTree = "<group>"; };
+		728C2823215B80480097840A /* AnnounceScrollViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceScrollViewAdapter.swift; sourceTree = "<group>"; };
+		728C2824215B80480097840A /* AnnounceScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceScrollView.swift; sourceTree = "<group>"; };
+		728C2825215B80480097840A /* AnnounceScrollView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnounceScrollView.xib; sourceTree = "<group>"; };
 		7294ACA094774CBC3A232CCF3B94FB3C /* forward_skeleton_iarchive.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = forward_skeleton_iarchive.hpp; sourceTree = "<group>"; };
 		72968D1D2158CEAC00B0AA77 /* WithdrawAndDespoitRecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAndDespoitRecordCoordinator.swift; sourceTree = "<group>"; };
 		72968D1E2158CEAC00B0AA77 /* WithdrawAndDespoitRecordActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawAndDespoitRecordActions.swift; sourceTree = "<group>"; };
@@ -22329,9 +22361,42 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		728C2801215A36B70097840A /* Choose */ = {
+			isa = PBXGroup;
+			children = (
+				728C280C215A38DC0097840A /* Views */,
+				728C280B215A38D50097840A /* Cell */,
+				728C2803215A36F70097840A /* RecordChooseCoordinator.swift */,
+				728C2804215A36F70097840A /* RecordChooseActions.swift */,
+				728C2805215A36F70097840A /* RecordChooseViewController.swift */,
+				728C2806215A36F70097840A /* RecordChooseReducers.swift */,
+			);
+			path = Choose;
+			sourceTree = "<group>";
+		};
+		728C280B215A38D50097840A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				728C280D215A3A540097840A /* RecordChooseCell.swift */,
+				728C280E215A3A540097840A /* RecordChooseCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		728C280C215A38DC0097840A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				728C2811215A3A910097840A /* RecordChooseCellViewAdapter.swift */,
+				728C2812215A3A910097840A /* RecordChooseCellView.swift */,
+				728C2813215A3A910097840A /* RecordChooseCellView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		72968D162158CE7B00B0AA77 /* WithdrawAndDespoitRecord */ = {
 			isa = PBXGroup;
 			children = (
+				728C2801215A36B70097840A /* Choose */,
 				72968D252158D6E500B0AA77 /* Views */,
 				72968D1D2158CEAC00B0AA77 /* WithdrawAndDespoitRecordCoordinator.swift */,
 				72968D1E2158CEAC00B0AA77 /* WithdrawAndDespoitRecordActions.swift */,
@@ -22350,6 +22415,7 @@
 				72968D2C2158DC4E00B0AA77 /* RecordHeaderViewAdapter.swift */,
 				72968D2D2158DC4E00B0AA77 /* RecordHeaderView.swift */,
 				72968D2E2158DC4E00B0AA77 /* RecordHeaderView.xib */,
+				728C2821215B7B0B0097840A /* pictPopBGView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -22357,6 +22423,12 @@
 		729B869E2154C71E00C6E0E4 /* advertising */ = {
 			isa = PBXGroup;
 			children = (
+				728C2818215B6D6E0097840A /* AnnounceViewAdapter.swift */,
+				728C2819215B6D6E0097840A /* AnnounceView.swift */,
+				728C281A215B6D6E0097840A /* AnnounceView.xib */,
+				728C2823215B80480097840A /* AnnounceScrollViewAdapter.swift */,
+				728C2824215B80480097840A /* AnnounceScrollView.swift */,
+				728C2825215B80480097840A /* AnnounceScrollView.xib */,
 			);
 			path = advertising;
 			sourceTree = "<group>";
@@ -33537,6 +33609,7 @@
 				7336B79F214F5ABE0086A9DF /* Localizable.strings in Resources */,
 				72199D7E210450F500575226 /* RecodeCellView.xib in Resources */,
 				A081A5FE86C0AC44E299840DD8C1DE00 /* AccessoryCollectionView.xib in Resources */,
+				728C281D215B6D6E0097840A /* AnnounceView.xib in Resources */,
 				D971C57B81B4A2FBB083235DDE5057A2 /* AccessoryCollectionViewCell.xib in Resources */,
 				FE75674B7C6A22FAFA051C9CE0E95A1D /* AccessoryHorizentalView.xib in Resources */,
 				607DB9C515F6376EF477F0C62C46B8F2 /* AccountAssetOperationView.xib in Resources */,
@@ -33605,6 +33678,7 @@
 				FDFA2C6266D88980D2E29CCFF6D98441 /* PairDetailView.xib in Resources */,
 				0ED42A2E6A4E84AEF46AFE2E669A6EC7 /* PairListHorizantalView.xib in Resources */,
 				165A81AE46EF4E77603EE09ED7D761D7 /* PairRechargeView.xib in Resources */,
+				728C2816215A3A910097840A /* RecordChooseCellView.xib in Resources */,
 				6D56D7D9D38BE89CB6BD8D314E0E6370 /* QuotesTitleView.xib in Resources */,
 				26DBFE949DEA6BC4379A397564804816 /* README.md in Resources */,
 				ACE7BA86B00F181D50D549AA91EED07E /* RechargeItemView.xib in Resources */,
@@ -33669,6 +33743,7 @@
 				B5656257089A0683E33E4AD84A8FBAA2 /* deque in Resources */,
 				EF1711F1556779794DCD9F9C097F4B27 /* deque.SUNWCCh in Resources */,
 				B092CA3EF1CCD7607CBD3DF06D135FF3 /* exception in Resources */,
+				728C2828215B80480097840A /* AnnounceScrollView.xib in Resources */,
 				DABA4FA4206C0B423BF6C8FC627694EC /* exception.SUNWCCh in Resources */,
 				3B0EB66A2103158300F19C31 /* YourPorfolioView.xib in Resources */,
 				253FA678E24480209F5F9418FE39D896 /* fstream in Resources */,
@@ -33705,6 +33780,7 @@
 				7307A92A212518DC00BD6444 /* LGButton.xib in Resources */,
 				A5056283C24CDC308A84C34723B9999D /* map in Resources */,
 				7307A92E212518DC00BD6444 /* open-iconic.ttf in Resources */,
+				728C2810215A3A540097840A /* RecordChooseCell.xib in Resources */,
 				A74A9391C9FC80F533BB168C6F09C5BD /* map.SUNWCCh in Resources */,
 				0AA525ED6C44D673ABDA5E34FE8BAF65 /* memory in Resources */,
 				C5DB709236E31D29681C3DAA03E03D48 /* memory.SUNWCCh in Resources */,
@@ -33995,6 +34071,7 @@
 				221C6176213926570021C007 /* ETORecordListActions.swift in Sources */,
 				305DB17562E3D02F04E0122C1C4674A4 /* AccountAssetOperationsItemView.swift in Sources */,
 				65A0AB87E09E879EFAFA04DBA6B15D3E /* AccountCoordinator.swift in Sources */,
+				728C2808215A36F70097840A /* RecordChooseActions.swift in Sources */,
 				C37CA15215CBB1B064E0514AB9D0EFE5 /* AccountOpenedOrdersView.swift in Sources */,
 				225746DE210707DD0017FA1A /* PickerReducers.swift in Sources */,
 				7307A94521257BE900BD6444 /* AddressCellViewAdapter.swift in Sources */,
@@ -34004,6 +34081,7 @@
 				32BED01405F6D7B22B348057E0BDE3C8 /* AccountPortfolioView.swift in Sources */,
 				72199DA92104680000575226 /* TransferContentView.swift in Sources */,
 				7307A921212518DC00BD6444 /* MapIcon.swift in Sources */,
+				728C281B215B6D6E0097840A /* AnnounceViewAdapter.swift in Sources */,
 				E0AD8E2E835D84754C63BA76FBA8582E /* AccountReducers.swift in Sources */,
 				7267DA1521351D40004AF9AF /* ETOProjectViewAdapter.swift in Sources */,
 				C44F04354B1B9F8051BA2651AC620D65 /* AccountRootCoordinator.swift in Sources */,
@@ -34135,6 +34213,7 @@
 				FF9F0639B5927B79A3EFC30AF470DE97 /* GradientLayer.swift in Sources */,
 				221C6175213926570021C007 /* ETORecordListCoordinator.swift in Sources */,
 				9FFDE7661D05B455AFBA92F553A193FC /* GraphQLAPI.swift in Sources */,
+				728C280A215A36F70097840A /* RecordChooseReducers.swift in Sources */,
 				BDFF205572EB31DAD4702C934B9A81D1 /* GraphQLManager.swift in Sources */,
 				CA894F0EB69EF4448C0142CE0BE7D9C5 /* HistoryApi.swift in Sources */,
 				105EA57407E74D316C2918BA41771E3B /* HomeActions.swift in Sources */,
@@ -34164,6 +34243,7 @@
 				8552FAA729612482DC7F7878860378AC /* JsonRPCGenerator.swift in Sources */,
 				5895D5BFE7B77EDC996C7CF7ADCF92ED /* KLineConfiguration.swift in Sources */,
 				AA2AF8469235125BB11F791F769C6392 /* LocalCache.swift in Sources */,
+				728C2814215A3A910097840A /* RecordChooseCellViewAdapter.swift in Sources */,
 				F74EE738D8577FC258E7874D0FBB773C /* Localization_Extensions.swift in Sources */,
 				0B0FFCE74BC73BD13EB049B68CD7E5AE /* LockupAssetsActions.swift in Sources */,
 				421AAF66E862B29FD286626A32636875 /* LockupAssetsCell.swift in Sources */,
@@ -34176,6 +34256,7 @@
 				72E4DF702147C7BD00D9584B /* ETOUserAgreementCoordinator.swift in Sources */,
 				7267DA0821350327004AF9AF /* ETOViewController.swift in Sources */,
 				221EC2352105B1930059F856 /* TitleTextView.swift in Sources */,
+				728C280F215A3A540097840A /* RecordChooseCell.swift in Sources */,
 				6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */,
 				8DFD3022184642B3A8D4D8A8FE04F655 /* LockupProgressView.swift in Sources */,
 				3BF5B7E42134F5A800E8BFC9 /* ETODetailHeaderViewAdapter.swift in Sources */,
@@ -34256,6 +34337,7 @@
 				D3C87D3A247487C8D834A828782FC472 /* PairListHorizantalView.swift in Sources */,
 				72968D292158D72200B0AA77 /* RecordChooseViewAdapter.swift in Sources */,
 				733714B52122D2B400B2ED90 /* WithdrawAddressTableViewCell.swift in Sources */,
+				728C2815215A3A910097840A /* RecordChooseCellView.swift in Sources */,
 				A819B2C87ADE04838AE8D44CF16C53B4 /* PairRechargeView.swift in Sources */,
 				70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */,
 				72199D6821044FD100575226 /* RechargeRecodeViewController.swift in Sources */,
@@ -34316,6 +34398,7 @@
 				73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */,
 				A806E796D672D304574E9E46E50F16EC /* TradeActions.swift in Sources */,
 				8528FA970144D53CB71EF87725B0AAE9 /* TradeCell.swift in Sources */,
+				728C281C215B6D6E0097840A /* AnnounceView.swift in Sources */,
 				72199D6921044FD100575226 /* RechargeRecodeReducers.swift in Sources */,
 				724C5D392153472800FF1DE7 /* GatewayService.swift in Sources */,
 				4E2B0C9A04FD5D11C7AFA4CC9DF8492F /* TradeCoordinator.swift in Sources */,
@@ -34332,6 +34415,7 @@
 				73587EAC2137C057006CF8A6 /* ETOCrowdCoordinator.swift in Sources */,
 				F8B52B20C9737C584DECE7D52285A92D /* TradeItemView.swift in Sources */,
 				72E4DF712147C7BD00D9584B /* ETOUserAgreementActions.swift in Sources */,
+				728C2807215A36F70097840A /* RecordChooseCoordinator.swift in Sources */,
 				07D976BEA2F5A840607DE4D526DB1420 /* TradeLineView.swift in Sources */,
 				221EC24C2105CF310059F856 /* TransferCoordinator.swift in Sources */,
 				73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */,
@@ -34339,10 +34423,12 @@
 				72D9DD58210EB60F00963915 /* Periscope.swift in Sources */,
 				640657C00CD9588E73E0F0280F245348 /* TradeRootCoordinator.swift in Sources */,
 				72968D212158CEAC00B0AA77 /* WithdrawAndDespoitRecordCoordinator.swift in Sources */,
+				728C2826215B80480097840A /* AnnounceScrollViewAdapter.swift in Sources */,
 				7217B07F2122AAFD00608531 /* AddAddressReducers.swift in Sources */,
 				221C617C213926A50021C007 /* ETORecordCell.swift in Sources */,
 				7386F2B121216B2200ABC924 /* TransferAddressHomeViewController.swift in Sources */,
 				7267DA0721350327004AF9AF /* ETOActions.swift in Sources */,
+				728C2822215B7B0B0097840A /* pictPopBGView.swift in Sources */,
 				73587EAE2137C057006CF8A6 /* ETOCrowdViewController.swift in Sources */,
 				3B0EB65C210313B200F19C31 /* YourPortfolioHeadView.swift in Sources */,
 				C02132F00200B408020442C307CEE0B6 /* TradeView.swift in Sources */,
@@ -34360,6 +34446,7 @@
 				7267DA1A21351D5A004AF9AF /* ETOProjectCell.swift in Sources */,
 				225746E821073E480017FA1A /* PickerView.swift in Sources */,
 				7386F2B721216B3A00ABC924 /* WithdrawAddressHomeCoordinator.swift in Sources */,
+				728C2827215B80480097840A /* AnnounceScrollView.swift in Sources */,
 				72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */,
 				0FF6C4A7AAF40F0AC67CBDAEAA2406E2 /* UITextField+Extensions.swift in Sources */,
 				3B0EB6672103155C00F19C31 /* YourPortfolioCoordinator.swift in Sources */,
@@ -34388,6 +34475,7 @@
 				7386F2A22121665100ABC924 /* AddressHomeActions.swift in Sources */,
 				60502E37A09ABFC6DD95A24F6A855B65 /* YourPortfolioActions.swift in Sources */,
 				480BE6AB9D3A7CCE75BCB6BBF9525FFD /* YourPortfolioCell.swift in Sources */,
+				728C2809215A36F70097840A /* RecordChooseViewController.swift in Sources */,
 				73587EAB2137C057006CF8A6 /* ETOCrowdActions.swift in Sources */,
 				ACCB7267D22FD99349666A34A7079245 /* YourPortfolioReducers.swift in Sources */,
 				344BC9FA73F9380AE43608848D803A6F /* address.cpp in Sources */,

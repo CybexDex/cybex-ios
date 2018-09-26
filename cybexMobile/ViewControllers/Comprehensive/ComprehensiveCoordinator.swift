@@ -13,6 +13,8 @@ import Async
 import Localize_Swift
 
 protocol ComprehensiveCoordinatorProtocol {
+    
+    func openWebVCUrl(_ url: String)
 }
 
 protocol ComprehensiveStateManagerProtocol {
@@ -49,7 +51,14 @@ class ComprehensiveCoordinator: ComprehensiveRootCoordinator {
 }
 
 extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
-    
+    func openWebVCUrl(_ url: String) {
+        if let vc = R.storyboard.main.cybexWebViewController() {
+            vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
+            vc.vc_type = .homeBanner
+            vc.url = URL(string: url)
+            self.rootVC.pushViewController(vc ,animated: true)
+        }
+    }
 }
 
 extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {

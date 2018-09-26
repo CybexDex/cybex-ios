@@ -143,7 +143,7 @@ struct AccountAssetModel: HandyJSON {
 }
 
 
-struct GroupInfo {
+struct GroupInfo: HandyJSON {
     var asset: String = ""
     var fundType: String = ""
 }

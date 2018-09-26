@@ -119,6 +119,10 @@ struct AppConfiguration {
     static var HOME_BANNER_JSON: String {
         return SERVER_TEST_BASE_URLString + "v1/api/banners?lang="
     }
+    
+    static var BLOCKEXPLORER_JSON: String {
+        return SERVER_BASE_URLString + "json/blockexplorer.json"
+    }
 }
 
 enum exchangeType {

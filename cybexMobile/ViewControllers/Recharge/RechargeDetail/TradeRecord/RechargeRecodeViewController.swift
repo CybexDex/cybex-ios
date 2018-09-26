@@ -19,7 +19,7 @@ class RechargeRecodeViewController: BaseViewController {
     var assetInfo: AssetInfo?
     var data: [Record] = [Record]()
     var isNoMoreData: Bool = false
-    var record_type: fundType = .DEPOSIT
+    var record_type: fundType = .ALL
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +29,12 @@ class RechargeRecodeViewController: BaseViewController {
     }
     
     func fetchRecords() {
+        self.coordinator?.fetchAssetUrl()
         if UserManager.shared.isLocked {
             self.showPasswordBox()
         }else {
             fetchDepositRecords(offset: 0) {}
+            
         }
     }
     
@@ -124,6 +126,19 @@ extension RechargeRecodeViewController : UITableViewDelegate,UITableViewDataSour
         
         cell.setup(self.data[indexPath.row], indexPath: indexPath)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let details = self.data[indexPath.row].details {
+            var hash = ""
+            for detail in details {
+                if detail.hash.count != 0 {
+                    hash = detail.hash
+                    break
+                }
+            }
+            self.coordinator?.openRecordDetailUrl(hash, asset: self.data[indexPath.row].asset.filterJade)
+        }
     }
 }
 

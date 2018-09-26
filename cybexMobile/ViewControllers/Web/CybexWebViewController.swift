@@ -23,6 +23,8 @@ class CybexWebViewController: BaseWebViewController {
         case project_website
         case whitepaper
         case agreement
+        case recordDetail
+        case homeBanner
     }
     
     var coordinator: (CybexWebCoordinatorProtocol & CybexWebStateManagerProtocol)?
