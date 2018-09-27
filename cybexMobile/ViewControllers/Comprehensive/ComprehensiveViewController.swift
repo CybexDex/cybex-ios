@@ -153,7 +153,7 @@ class ComprehensiveViewController: BaseViewController {
             }
             
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
+
         NotificationCenter.default.addObserver(forName: NotificationName.NetWorkChanged, object: nil, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
             self.coordinator?.fetchData()
