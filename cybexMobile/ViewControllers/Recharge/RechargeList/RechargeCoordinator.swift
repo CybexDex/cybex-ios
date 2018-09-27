@@ -54,6 +54,9 @@ class RechargeCoordinator: NavCoordinator {
         let vc = R.storyboard.account.rechargeViewController()!
         let coordinator = RechargeCoordinator(rootVC: root)
         vc.coordinator = coordinator
+        if let con = context as? RechargeContext {
+            vc.selectedIndex = con.selectedIndex
+        }
         coordinator.store.dispatch(RouteContextAction(context: context))
 
         return vc

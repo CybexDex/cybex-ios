@@ -15,7 +15,7 @@ import Localize_Swift
 class ComprehensiveViewController: BaseViewController {
 
 	var coordinator: (ComprehensiveCoordinatorProtocol & ComprehensiveStateManagerProtocol)?
-
+    
     @IBOutlet weak var contentView: ComprehensiveView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +27,7 @@ class ComprehensiveViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.startLoading()
         self.coordinator?.fetchData()
     }
     
@@ -51,7 +52,7 @@ class ComprehensiveViewController: BaseViewController {
         self.coordinator?.state.pageState.asObservable().distinctUntilChanged().subscribe(onNext: {[weak self] (state) in
             guard let `self` = self else { return }
             
-            self.endLoading()
+//            self.endLoading()
             
             switch state {
             case .initial:
@@ -144,6 +145,13 @@ class ComprehensiveViewController: BaseViewController {
             self.coordinator?.fetchData()
         }
         
+        Observable.combineLatest(self.coordinator!.state.hotPairs.asObservable(), self.coordinator!.state.middleItems.asObservable(), self.coordinator!.state.banners.asObservable(), self.coordinator!.state.announces.asObservable()).subscribe(onNext: { [weak self](hotPairs, middleItems, banners, announces) in
+            guard let `self` = self else { return }
+            if let _ = hotPairs, let _ = middleItems, let _ = banners, let _ = announces {
+                self.endLoading()
+            }
+            
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         NotificationCenter.default.addObserver(forName: NotificationName.NetWorkChanged, object: nil, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
             self.coordinator?.fetchData()
