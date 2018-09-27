@@ -23,14 +23,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1f-9z-3XO">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="255" horizontalCompressionResistancePriority="755" verticalCompressionResistancePriority="755" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1f-9z-3XO">
                     <rect key="frame" x="16" y="43" width="31" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zi2-WO-NnC">
-                    <rect key="frame" x="67" y="35" width="112" height="30"/>
+                    <rect key="frame" x="55" y="35" width="112" height="30"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kx4-nZ-HOe">
                             <rect key="frame" x="22" y="6.5" width="36" height="17"/>
@@ -71,7 +71,7 @@
                 <constraint firstItem="I1f-9z-3XO" firstAttribute="leading" secondItem="Lhl-p8-24W" secondAttribute="leading" constant="16" id="IUG-ST-NES"/>
                 <constraint firstItem="Zi2-WO-NnC" firstAttribute="centerY" secondItem="btM-Yo-6kI" secondAttribute="centerY" id="NTz-jg-uHk"/>
                 <constraint firstItem="Lhl-p8-24W" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Zi2-WO-NnC" secondAttribute="trailing" constant="10" id="QUm-4B-Iqp"/>
-                <constraint firstItem="Zi2-WO-NnC" firstAttribute="leading" secondItem="I1f-9z-3XO" secondAttribute="trailing" constant="20" id="f3N-q2-kz0"/>
+                <constraint firstItem="Zi2-WO-NnC" firstAttribute="leading" secondItem="I1f-9z-3XO" secondAttribute="trailing" constant="8" id="f3N-q2-kz0"/>
                 <constraint firstItem="I1f-9z-3XO" firstAttribute="centerY" secondItem="btM-Yo-6kI" secondAttribute="centerY" id="z5M-Sv-R4z"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

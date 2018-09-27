@@ -41,7 +41,7 @@ class RechargeViewController: BaseViewController {
         tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
         tableView.tableFooterView = UIView()
         rechargeSegmentView.segmentControl.selectedSegmentIndex = selectedIndex.rawValue
-        configRightNavButton(R.image.ic_star_border_24_px())
+        configRightNavButton(R.image.ic_w_drecords())
     }
     
     override func rightAction(_ sender: UIButton) {

@@ -48,5 +48,4 @@ class ComprehensiveView: CybexBaseView {
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.ComprehensiveViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
-  
 }

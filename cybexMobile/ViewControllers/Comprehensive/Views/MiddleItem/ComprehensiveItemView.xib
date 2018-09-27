@@ -26,7 +26,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mte-f6-iUI" customClass="BaseLabel" customModule="cybexMobile" customModuleProvider="target">
-                            <rect key="frame" x="12" y="12" width="305" height="17"/>
+                            <rect key="frame" x="12" y="12" width="317" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -42,14 +42,14 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDF-4N-u4s">
-                            <rect key="frame" x="12" y="34" width="305" height="13.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDF-4N-u4s">
+                            <rect key="frame" x="12" y="34" width="317" height="13.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yP8-Ri-dj8">
-                            <rect key="frame" x="327" y="27.5" width="38" height="45"/>
+                            <rect key="frame" x="329" y="27.5" width="38" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="38" id="h7g-nJ-NtM"/>
                                 <constraint firstAttribute="height" constant="45" id="yu5-eM-cdf"/>
@@ -57,13 +57,13 @@
                         </imageView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="yP8-Ri-dj8" firstAttribute="leading" secondItem="Mte-f6-iUI" secondAttribute="trailing" constant="10" id="DtF-47-ejg"/>
-                        <constraint firstItem="yP8-Ri-dj8" firstAttribute="leading" secondItem="XDF-4N-u4s" secondAttribute="trailing" constant="10" id="FbM-hm-dnV"/>
+                        <constraint firstItem="yP8-Ri-dj8" firstAttribute="leading" secondItem="Mte-f6-iUI" secondAttribute="trailing" id="DtF-47-ejg"/>
+                        <constraint firstItem="yP8-Ri-dj8" firstAttribute="leading" secondItem="XDF-4N-u4s" secondAttribute="trailing" id="FbM-hm-dnV"/>
                         <constraint firstItem="yP8-Ri-dj8" firstAttribute="centerY" secondItem="ywn-5R-U1v" secondAttribute="centerY" id="ITh-eK-5NQ"/>
                         <constraint firstItem="XDF-4N-u4s" firstAttribute="top" secondItem="Mte-f6-iUI" secondAttribute="bottom" constant="5" id="OHf-sa-A5g"/>
                         <constraint firstItem="Mte-f6-iUI" firstAttribute="leading" secondItem="ywn-5R-U1v" secondAttribute="leading" constant="12" id="TkG-3G-fLi"/>
                         <constraint firstItem="XDF-4N-u4s" firstAttribute="leading" secondItem="ywn-5R-U1v" secondAttribute="leading" constant="12" id="Ugj-FO-2ON"/>
-                        <constraint firstAttribute="trailing" secondItem="yP8-Ri-dj8" secondAttribute="trailing" constant="10" id="hRQ-Iw-vv5"/>
+                        <constraint firstAttribute="trailing" secondItem="yP8-Ri-dj8" secondAttribute="trailing" constant="8" id="hRQ-Iw-vv5"/>
                         <constraint firstItem="Mte-f6-iUI" firstAttribute="top" secondItem="ywn-5R-U1v" secondAttribute="top" constant="12" id="pDL-Lb-pph"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>

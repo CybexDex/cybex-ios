@@ -46,7 +46,6 @@ class AnnounceScrollView: CybexBaseView {
     
     fileprivate func createSubViews() {
         guard let data = self.data as? [String] else { return }
-        
         topLabel = UILabel(frame: self.scrollView.bounds)
         topLabel.font = UIFont.systemFont(ofSize: 12)
         topLabel.theme_textColor = [UIColor.paleGrey.hexString(true), UIColor.darkTwo.hexString(true)]
@@ -75,7 +74,7 @@ class AnnounceScrollView: CybexBaseView {
     }
     
     func setupSubViewEvent() {
-        
+
     }
     
     @objc override func didClicked() {
