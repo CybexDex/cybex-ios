@@ -30,6 +30,7 @@ class ComprehensiveViewController: BaseViewController {
         self.coordinator?.fetchData()
     }
     
+    
     override func refreshViewController() {
         
     }
@@ -112,6 +113,7 @@ class ComprehensiveViewController: BaseViewController {
                         }
                     }
                     // MARK: 交易对
+                    self.contentView.hotAssetsView.isHidden = false
                     self.contentView.hotAssetsView.adapterModelToHotAssetsView(bucketModel)
                 }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -138,6 +140,11 @@ class ComprehensiveViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](notification) in
+            guard let `self` = self else { return }
+            self.coordinator?.fetchData()
+        }
+        
+        NotificationCenter.default.addObserver(forName: NotificationName.NetWorkChanged, object: nil, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
             self.coordinator?.fetchData()
         }
@@ -171,6 +178,10 @@ extension ComprehensiveViewController {
             self.coordinator?.openWebVCUrl(url)
         }
         else {
+            if !UserManager.shared.isLoginIn {
+                app_coodinator.showLogin()
+                return
+            }
             openPage(url)
         }
     }
