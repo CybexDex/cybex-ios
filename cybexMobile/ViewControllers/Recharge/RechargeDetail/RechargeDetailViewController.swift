@@ -204,6 +204,7 @@ class RechargeDetailViewController: BaseViewController {
             guard let `self` = self , let address = address else { return }
             self.contentView.addressView.content.text = address.address
             self.contentView.addressView.address_state = .Success
+            self.contentView.memoView.content.text = address.memo
             self.isTrueAddress = true
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
@@ -228,7 +229,7 @@ class RechargeDetailViewController: BaseViewController {
             }
         }
     }
-
+    
     override func configureObserveState() {
         self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext: {[weak self] (withdrawInfo) in
             guard let `self` = self, let data = withdrawInfo else { return }
@@ -354,7 +355,6 @@ extension RechargeDetailViewController{
             self.coordinator?.pop()
         }
     }
-
 }
 
 extension RechargeDetailViewController {
@@ -369,7 +369,7 @@ extension RechargeDetailViewController {
                 ShowToastManager.shared.hide()
                 if self.isVisible{
                     if String(describing: data) == "<null>"{
-        
+                        
                         if AddressManager.shared.containAddressOfWithDraw(address,currency:self.trade!.id).0 == false {
                             self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.withdraw_success_title.key.localized(), content: R.string.localizable.withdraw_success_content.key.localized())
                         }
@@ -392,6 +392,5 @@ extension RechargeDetailViewController {
             let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: address, currency: trade.id, memo: memo)
             self.coordinator?.openAddAddressWithAddress(withdrawAddress)
         }
-     
     }
 }

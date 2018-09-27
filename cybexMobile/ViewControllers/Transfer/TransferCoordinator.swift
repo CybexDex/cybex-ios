@@ -136,7 +136,6 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
                 }
             }
             vc.coordinator = coordinator
-            
             newNav.pushViewController(vc, animated: true)
         }
     }
