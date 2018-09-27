@@ -62,6 +62,10 @@ class BaseViewController: UIViewController {
         let color = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
         navigationController?.navigationBar.setBackgroundImage(UIImage(color: color), for: .default)
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.view.endEditing(true)
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

@@ -14,6 +14,7 @@ class ETOHomeBannerView: CybexBaseView {
     @IBOutlet weak var pagerView: FSPagerView!
     @IBOutlet weak var pagerControl: FSPageControl!
     
+    var view_type: Int = 0
     override var data: Any? {
         didSet{
             if let _ = data as? [String] {
@@ -33,7 +34,6 @@ class ETOHomeBannerView: CybexBaseView {
         
         setupUI()
         setupSubViewEvent()
-
     }
     
     func setupUI() {
@@ -46,7 +46,7 @@ class ETOHomeBannerView: CybexBaseView {
         self.pagerControl.contentHorizontalAlignment = .center
         self.pagerControl.numberOfPages = 5
         self.pagerControl.currentPage = 1
-        self.pagerControl.setFillColor(.paleGrey, for: .selected)
+        self.pagerControl.setFillColor(.pastelOrange, for: .selected)
         self.pagerControl.setFillColor(.steel50, for: .normal)
     }
     
@@ -69,7 +69,9 @@ extension ETOHomeBannerView : FSPagerViewDataSource,FSPagerViewDelegate {
 
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: String(describing: FSPagerViewCell.self), at: index) as FSPagerViewCell
-        cell.imageView?.contentMode = .scaleAspectFill
+        if view_type == 0 {
+            cell.imageView?.contentMode = .scaleAspectFill
+        }
         if let banners = self.data as? [String] {
             let banner = banners[index]
             if banner.contains("https://") || banner.contains("http://") {

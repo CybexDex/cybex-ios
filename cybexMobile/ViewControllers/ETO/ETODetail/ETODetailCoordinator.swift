@@ -84,7 +84,9 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
     }
     
     func fetchData() {
+        var isFetchCoor = false
         Broadcaster.notify(ETOStateManagerProtocol.self) { (coor) in
+            isFetchCoor = true
             if let model = coor.state.selectedProjectModel.value, let projectModel = model.projectModel {
                 self.store.dispatch(SetProjectDetailAction(data: projectModel))
             }
@@ -93,10 +95,13 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                     fetchProjectModelWithId(bannerId)
                 }
                 else {
-                    if let context = self.state.context.value as? ETODetailContext {
-                        fetchProjectModelWithId(context.pid)
-                    }
+                    
                 }
+            }
+        }
+        if isFetchCoor == false {
+            if let context = self.state.context.value as? ETODetailContext {
+                fetchProjectModelWithId(context.pid)
             }
         }
     }
