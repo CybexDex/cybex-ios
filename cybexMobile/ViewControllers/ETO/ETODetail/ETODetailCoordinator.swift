@@ -90,24 +90,28 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             }
             else {
                 if let bannerModel = coor.state.selectedBannerModel.value, let bannerId = bannerModel.id.int {
-                    ETOMGService.request(target: ETOMGAPI.getProjectDetail(id: bannerId), success: { json in
-                        if let model = ETOProjectModel.deserialize(from: json.dictionaryObject) {
-                            self.store.dispatch(SetProjectDetailAction(data: model))
-                        }
-                        self.switchPageState(PageState.normal(reason: .initialRefresh))
-                    }, error: { (error) in
-                        self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
-                    }, failure: { (error) in
-                        self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
-                    })
+                    fetchProjectModelWithId(bannerId)
                 }
                 else {
                     if let context = self.state.context.value as? ETODetailContext {
-                        
+                        fetchProjectModelWithId(context.pid)
                     }
                 }
             }
         }
+    }
+    
+    func fetchProjectModelWithId(_ id: Int){
+        ETOMGService.request(target: ETOMGAPI.getProjectDetail(id: id), success: { json in
+            if let model = ETOProjectModel.deserialize(from: json.dictionaryObject) {
+                self.store.dispatch(SetProjectDetailAction(data: model))
+            }
+            self.switchPageState(PageState.normal(reason: .initialRefresh))
+        }, error: { (error) in
+            self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
+        }, failure: { (error) in
+            self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
+        })
     }
     
     func fetchUserState() {

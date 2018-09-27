@@ -115,7 +115,7 @@ class AppCoordinator {
         if let status = self.etoStatus.value, status.isETOEnabled == true {
             etoCoordinator.start()
             self.container = [homeCoordinator, tradeCoordinator, etoCoordinator,accountCoordinator] as [NavCoordinator]
-            rootVC.viewControllers = [home, trade, eto, account]
+            rootVC.viewControllers = [comprehensive, home, trade, eto, account]
         }
         else {
             self.container = [comprehensiveCoordinator,homeCoordinator, tradeCoordinator, accountCoordinator] as [NavCoordinator]

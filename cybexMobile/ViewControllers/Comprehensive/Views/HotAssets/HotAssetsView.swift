@@ -20,7 +20,9 @@ class HotAssetsView: CybexBaseView {
     
     override var data: Any? {
         didSet {
-            self.contentView.reloadData()
+            if let data = data as? [HomeBucket], data.count != 0 {
+                self.contentView.reloadData()
+            }
         }
     }
         

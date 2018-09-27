@@ -81,6 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ZYNetworkAccessibity.setStateDidUpdateNotifier { (state) in
             if state == ZYNetworkAccessibleState.accessible {
                 self.fetchEtoHiddenRequest()
+                NotificationCenter.default.post(name: NotificationName.NetWorkChanged, object: nil)
             }
         }
         ZYNetworkAccessibity.start()

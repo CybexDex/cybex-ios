@@ -125,7 +125,6 @@ extension WithdrawAndDespoitRecordViewController {
         vc.popoverPresentationController?.delegate = self
         vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
         vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.white.hexString(true)]
-        vc.popoverPresentationController?.popoverBackgroundViewClass = pictPopBGView.self
         vc.typeIndex = index == 1 ? .Asset : .FoudType
         vc.delegate = self
         vc.coordinator = RecordChooseCoordinator(rootVC:self.navigationController as! BaseNavigationController)

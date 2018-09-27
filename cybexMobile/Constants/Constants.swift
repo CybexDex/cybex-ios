@@ -22,6 +22,10 @@ var app_coodinator:AppCoordinator {
     return AppConfiguration.shared.appCoordinator
 }
 
+struct NotificationName {
+    static var NetWorkChanged = Notification.Name(rawValue: "NetWorkChanged")
+}
+
 struct AppConfiguration {
     static let shared = AppConfiguration()
     var appCoordinator: AppCoordinator!
