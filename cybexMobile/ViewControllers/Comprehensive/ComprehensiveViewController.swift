@@ -121,9 +121,10 @@ class ComprehensiveViewController: BaseViewController {
         
         self.coordinator?.state.announces.asObservable().subscribe(onNext: { [weak self](announces) in
             guard let `self` = self, let announces = announces else { return }
-            self.contentView.announceView.scrollLableView.data = announces.map({ (announce) -> String in
+            let titles = announces.map({ (announce) -> String in
                 return announce.title
             })
+            self.contentView.announceView.scrollLableView.data = titles
             
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
@@ -152,6 +153,7 @@ class ComprehensiveViewController: BaseViewController {
             }
             
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+
         NotificationCenter.default.addObserver(forName: NotificationName.NetWorkChanged, object: nil, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
             self.coordinator?.fetchData()
@@ -188,6 +190,9 @@ extension ComprehensiveViewController {
         else {
             if !UserManager.shared.isLoginIn {
                 app_coodinator.showLogin()
+                return
+            }
+            if url.count == 0 {
                 return
             }
             openPage(url)

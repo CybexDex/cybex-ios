@@ -17,7 +17,7 @@ class AnnounceScrollView: CybexBaseView {
     @IBOutlet weak var scrollView: UIScrollView!
     
     var selectedIndex: Int = 0
-    var time: TimeInterval = 3
+    var time: TimeInterval = 5
     fileprivate var timer: Timer!
     fileprivate var topLabel: UILabel!
     fileprivate var bottomLabel: UILabel!
@@ -74,7 +74,7 @@ class AnnounceScrollView: CybexBaseView {
     }
     
     func setupSubViewEvent() {
-
+        
     }
     
     @objc override func didClicked() {
@@ -90,7 +90,7 @@ class AnnounceScrollView: CybexBaseView {
 
 extension AnnounceScrollView {
     @objc func scrollLabelAction() {
-        guard let data = self.data as? [String] else { return }
+        guard let data = self.data as? [String], data.count != 0 else { return }
         if selectedIndex < data.count - 1 {
             selectedIndex = selectedIndex + 1
         }
@@ -98,7 +98,9 @@ extension AnnounceScrollView {
             selectedIndex = 0
         }
         let label = UILabel(frame: CGRect(x: 0, y: self.topLabel.bottom, width: self.topLabel.width, height: self.topLabel.height))
-        label.text = data[selectedIndex]
+        if data.count > selectedIndex {
+            label.text = data[selectedIndex]
+        }
         label.font = topLabel.font
         label.theme_textColor = [UIColor.paleGrey.hexString(true), UIColor.darkTwo.hexString(true)]
         self.scrollView.addSubview(label)

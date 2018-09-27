@@ -400,14 +400,13 @@ extension SimpleHTTPService {
                 seal.fulfill([])
                 return
             }
-            
             guard let data = JSON(value).dictionaryValue["data"] else {
                 seal.fulfill([])
                 return
             }
+            let announces = data.arrayValue.map({ ComprehensiveAnnounce.deserialize(from: $0.dictionaryObject)!})
             
-            let pairs = data.arrayValue.map({ ComprehensiveAnnounce.deserialize(from: $0.dictionaryObject)})
-            seal.fulfill(pairs as? [ComprehensiveAnnounce])
+            seal.fulfill(announces)
         }
         return promise
     }

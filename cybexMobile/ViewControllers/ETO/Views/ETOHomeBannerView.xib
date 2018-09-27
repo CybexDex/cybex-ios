@@ -41,7 +41,7 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y3w-05-77e" customClass="FSPageControl" customModule="FSPagerView">
-                    <rect key="frame" x="0.0" y="645" width="375" height="10"/>
+                    <rect key="frame" x="0.0" y="651" width="375" height="10"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="VnQ-9r-5iw"/>
                     </constraints>
@@ -55,8 +55,8 @@
                 <constraint firstItem="Y3w-05-77e" firstAttribute="trailing" secondItem="fN0-YM-14k" secondAttribute="trailing" id="LbH-SQ-WtL"/>
                 <constraint firstItem="fN0-YM-14k" firstAttribute="trailing" secondItem="79F-0r-jJz" secondAttribute="trailing" id="TAn-vL-PZc"/>
                 <constraint firstItem="79F-0r-jJz" firstAttribute="top" secondItem="gzD-2m-dpl" secondAttribute="top" id="Ty2-8x-s34"/>
-                <constraint firstItem="fN0-YM-14k" firstAttribute="bottom" secondItem="Y3w-05-77e" secondAttribute="bottom" constant="12" id="WeS-2l-Tb5"/>
-                <constraint firstItem="Y3w-05-77e" firstAttribute="top" secondItem="79F-0r-jJz" secondAttribute="bottom" id="bxu-60-aUI"/>
+                <constraint firstItem="fN0-YM-14k" firstAttribute="bottom" secondItem="Y3w-05-77e" secondAttribute="bottom" constant="6" id="WeS-2l-Tb5"/>
+                <constraint firstItem="Y3w-05-77e" firstAttribute="top" secondItem="79F-0r-jJz" secondAttribute="bottom" constant="6" id="bxu-60-aUI"/>
                 <constraint firstItem="79F-0r-jJz" firstAttribute="leading" secondItem="fN0-YM-14k" secondAttribute="leading" id="tDv-Id-ync"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fN0-YM-14k"/>

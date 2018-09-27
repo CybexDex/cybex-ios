@@ -44,7 +44,7 @@ class RecodeCellView: UIView {
                 else {
                     amount.text = "-"
                 }
-                inComeOrSend.image = data.fundType == "WITHDRAW" ? R.image.ic_income() : R.image.ic_send()
+                inComeOrSend.image = data.fundType == "WITHDRAW" ? R.image.ic_send() : R.image.ic_income()
                 updateHeight()
             }
         }
