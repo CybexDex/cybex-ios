@@ -56,7 +56,6 @@ class BaseNavigationController: UINavigationController {
             let image = UIImage.init(color:UIColor.paleGrey)
             self.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.dark]
             self.navigationBar.setBackgroundImage(image, for: .default)
-            
         }
     }
     

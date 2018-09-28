@@ -30,6 +30,7 @@ class ComprehensiveViewController: BaseViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.barTintColor = UIColor.clear
+        self.navigationController?.navigationBar.tintColor = UIColor.clear
     }
     
     override func viewWillAppear(_ animated: Bool) {
