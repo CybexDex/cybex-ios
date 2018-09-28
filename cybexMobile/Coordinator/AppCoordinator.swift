@@ -130,6 +130,17 @@ class AppCoordinator {
             CBConfiguration.sharedConfiguration.theme.dashColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.white
         })
         
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: {notification in
+            comprehensive.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navHome.key.localized(), image: R.image.ic_nav_home(), selectedImage: R.image.ic_nav_home_active())
+
+            home.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navWatchlist.key.localized(), image: R.image.ic_watchlist_24px(), selectedImage: R.image.ic_watchlist_active_24px())
+            trade.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navTrade.key.localized(), image: R.image.icon_apply(), selectedImage: R.image.icon_apply_active())
+            
+            eto.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navEto.key.localized(), image: R.image.ic_eto_24_px(), selectedImage: R.image.ic_eto_active_24_px())
+            account.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navAccount.key.localized(), image: R.image.ic_account_box_24px(), selectedImage: R.image.ic_account_box_active_24px())
+            self.rootVC.selectedIndex = self.rootVC.viewControllers!.count - 1
+        })
+        
         aspect()
     }
     

@@ -10,6 +10,7 @@ import Foundation
 
 extension HotAssetView {
     func adapterModelToHotAssetView(_ model:HomeBucket) {
+        self.data = model
         assetName.text = model.quote_info.symbol.filterJade + "/" + model.base_info.symbol.filterJade
         let matrix = getCachedBucket(model)
         if model.bucket.count == 0 {

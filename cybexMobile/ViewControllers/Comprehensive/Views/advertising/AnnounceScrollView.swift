@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwifterSwift
 
 @IBDesignable
 class AnnounceScrollView: CybexBaseView {
@@ -16,7 +17,7 @@ class AnnounceScrollView: CybexBaseView {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var selectedIndex: Int = 0
+    var selectedIndex: Int = 1
     var time: TimeInterval = 5
     fileprivate var timer: Timer!
     fileprivate var topLabel: UILabel!
@@ -24,9 +25,7 @@ class AnnounceScrollView: CybexBaseView {
     
     override func setup() {
         super.setup()
-        
         setupUI()
-        setupSubViewEvent()
     }
     
     override var data: Any? {
@@ -51,21 +50,7 @@ class AnnounceScrollView: CybexBaseView {
         topLabel.theme_textColor = [UIColor.paleGrey.hexString(true), UIColor.darkTwo.hexString(true)]
         topLabel.text = data.first!
         self.scrollView.addSubview(topLabel)
-        startTimer()
-    }
-    
-    func startTimer() {
-        if self.timer != nil {
-            self.timer.invalidate()
-            self.timer = nil
-        }
-        self.timer = Timer.scheduledTimer(timeInterval: self.time, target: self, selector: #selector(scrollLabelAction), userInfo: nil, repeats: true)
-        self.timer.fire()
-    }
-    
-    func pauseTimer() {
-        self.timer.invalidate()
-        self.timer = nil
+        setupSubViewEvent()
     }
     
     func setupUI() {
@@ -74,7 +59,31 @@ class AnnounceScrollView: CybexBaseView {
     }
     
     func setupSubViewEvent() {
-        
+        guard let data = self.data as? [String], data.count > 1 else { return }
+        let label = UILabel(frame: CGRect(x: 0, y: self.topLabel.bottom, width: self.topLabel.width, height: self.topLabel.height))
+        label.text = data[1]
+        label.font = self.topLabel.font
+        label.theme_textColor = [UIColor.paleGrey.hexString(true), UIColor.darkTwo.hexString(true)]
+        self.scrollView.addSubview(label)
+        UIView.animate(withDuration: 1.5, delay: 3, options: UIViewAnimationOptions.curveLinear, animations: {
+            var frameTop = self.topLabel.frame
+            frameTop.origin.y -= frameTop.size.height
+            self.topLabel.frame = frameTop
+            
+            var frameLabel = label.frame
+            frameLabel.origin.y -= frameLabel.size.height
+            label.frame = frameLabel
+        }) { (success) in
+            if success {
+                self.topLabel.removeFromSuperview()
+                self.topLabel = label
+                SwifterSwift.delay(milliseconds: 3000, completion: {
+                    main {
+                        self.setupSubViewEvent()
+                    }
+                })
+            }
+        }
     }
     
     @objc override func didClicked() {
@@ -88,29 +97,3 @@ class AnnounceScrollView: CybexBaseView {
     }
 }
 
-extension AnnounceScrollView {
-    @objc func scrollLabelAction() {
-        guard let data = self.data as? [String], data.count != 0 else { return }
-        if selectedIndex < data.count - 1 {
-            selectedIndex = selectedIndex + 1
-        }
-        else {
-            selectedIndex = 0
-        }
-        let label = UILabel(frame: CGRect(x: 0, y: self.topLabel.bottom, width: self.topLabel.width, height: self.topLabel.height))
-        if data.count > selectedIndex {
-            label.text = data[selectedIndex]
-        }
-        label.font = topLabel.font
-        label.theme_textColor = [UIColor.paleGrey.hexString(true), UIColor.darkTwo.hexString(true)]
-        self.scrollView.addSubview(label)
-        let point = self.scrollView.contentOffset
-        
-        UIView.animate(withDuration: 1.5, animations: {
-            self.scrollView.contentOffset = CGPoint(x: 0, y: point.y + self.scrollView.height)
-        }) { (success) in
-            self.topLabel.removeFromSuperview()
-            self.topLabel = label
-        }
-    }
-}

@@ -26,10 +26,10 @@ class ETOHomeBannerView: CybexBaseView {
     enum Event:String {
         case ETOHomeBannerViewDidClicked
     }
-        
+    
     override func setup() {
         self.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: String(describing: FSPagerViewCell.self))
-
+        
         super.setup()
         
         setupUI()
@@ -55,7 +55,7 @@ class ETOHomeBannerView: CybexBaseView {
     }
     
     func setupSubViewEvent() {
-    
+        
     }
 }
 
@@ -66,11 +66,18 @@ extension ETOHomeBannerView : FSPagerViewDataSource,FSPagerViewDelegate {
         }
         return 0
     }
-
+    
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: String(describing: FSPagerViewCell.self), at: index) as FSPagerViewCell
         if view_type == 0 {
             cell.imageView?.contentMode = .scaleAspectFill
+        }
+        else {
+            cell.contentView.layer.shadowColor = UIColor.black.cgColor
+            cell.contentView.layer.shadowRadius = 5
+            cell.contentView.layer.shadowOpacity = 0.75
+            cell.contentView.layer.shadowOffset = .zero
+            cell.contentView.cornerRadius = 4
         }
         if let banners = self.data as? [String] {
             let banner = banners[index]

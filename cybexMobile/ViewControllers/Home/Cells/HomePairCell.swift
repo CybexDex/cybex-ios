@@ -9,18 +9,24 @@
 import Foundation
 
 class HomePairCell: BaseTableViewCell {
-  
-  @IBOutlet weak var pairView: HomePairView!
-  
-  override func setup(_ data: Any?) {
-    self.pairView.store = ["index": indexPath!.row]
-
-    self.pairView.data = data
-  }
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-
-  }
-  
+    enum HomePairCellType: Int {
+        case normal = 0
+        case topGainers
+    }
+    
+    @IBOutlet weak var pairView: HomePairView!
+    var cellType: HomePairCellType = HomePairCellType.normal
+    
+    override func setup(_ data: Any?) {
+        self.pairView.store = ["index": indexPath!.row]
+        self.pairView.data = data
+        if cellType == HomePairCellType.topGainers {
+            self.pairView.replaceIconToLabel()
+        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
 }

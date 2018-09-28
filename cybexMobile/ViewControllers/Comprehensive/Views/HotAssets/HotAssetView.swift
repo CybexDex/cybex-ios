@@ -16,8 +16,6 @@ class HotAssetView: CybexBaseView {
     @IBOutlet weak var rmbLabel: BaseLabel!
     @IBOutlet weak var trendLabel: BaseLabel!
     
-    
-    
     enum Event:String {
         case HotAssetViewDidClicked
     }

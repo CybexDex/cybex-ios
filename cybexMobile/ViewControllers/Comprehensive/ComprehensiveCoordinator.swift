@@ -15,6 +15,8 @@ import Localize_Swift
 protocol ComprehensiveCoordinatorProtocol {
     
     func openWebVCUrl(_ url: String)
+    
+    func openMarketList(_ pair: Pair)
 }
 
 protocol ComprehensiveStateManagerProtocol {
@@ -31,6 +33,8 @@ protocol ComprehensiveStateManagerProtocol {
     func fetchHotAssetsInfos()
     
     func fetchMiddleItemInfos()
+    
+    func setupChildrenVC(_ sender: ComprehensiveViewController)
 }
 
 class ComprehensiveCoordinator: ComprehensiveRootCoordinator {
@@ -58,6 +62,30 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
             vc.url = URL(string: url)
             self.rootVC.pushViewController(vc ,animated: true)
         }
+    }
+    
+    func openMarketList(_ pair: Pair) {
+        let vc = R.storyboard.main.marketViewController()!
+        var currentBaseIndex = 0
+        for index in 0..<AssetConfiguration.market_base_assets.count {
+            if pair.base == AssetConfiguration.market_base_assets[index] {
+               currentBaseIndex = index
+            }
+        }
+        let homeBuckets = app_data.filterQuoteAsset(pair.base)
+        var curIndex = 0
+        for index in 0..<homeBuckets.count {
+            let homebucket = homeBuckets[index]
+            if homebucket.base == pair.base && homebucket.quote == pair.quote {
+                curIndex = index
+            }
+        }
+        vc.curIndex = curIndex
+        vc.currentBaseIndex = currentBaseIndex
+        vc.rechargeShowType = PairRechargeView.show_type.show.rawValue
+        let coordinator = MarketCoordinator(rootVC: self.rootVC)
+        vc.coordinator = coordinator
+        self.rootVC.pushViewController(vc, animated: true)
     }
 }
 
@@ -111,6 +139,17 @@ extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
                 self.store.dispatch(FetchMiddleItemAction(data: data))
             }
             }.catch { (error) in
+        }
+    }
+    
+    func setupChildrenVC(_ sender: ComprehensiveViewController) {
+        if let homeVC = R.storyboard.main.homeViewController(){
+            homeVC.coordinator = HomeCoordinator(rootVC: self.rootVC)
+            homeVC.VC_TYPE = view_type.Comprehensive.rawValue
+            sender.addChildViewController(homeVC)
+            sender.contentView.topGainersView.addSubview(homeVC.view)
+            homeVC.contentView?.edges(to: sender.contentView.topGainersView)
+            homeVC.didMove(toParentViewController: sender)
         }
     }
 }

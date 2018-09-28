@@ -16,10 +16,20 @@ class RechargeRecodeViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     var coordinator: (RechargeRecodeCoordinatorProtocol & RechargeRecodeStateManagerProtocol)?
     
-    var assetInfo: AssetInfo?
+    var assetInfo: AssetInfo? {
+        didSet{
+            self.tableView.es.resetNoMoreData()
+            self.isNoMoreData = false
+        }
+    }
     var data: [Record] = [Record]()
     var isNoMoreData: Bool = false
-    var record_type: fundType = .ALL
+    var record_type: fundType = .ALL{
+        didSet{
+            self.tableView.es.resetNoMoreData()
+            self.isNoMoreData = false
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +44,6 @@ class RechargeRecodeViewController: BaseViewController {
             self.showPasswordBox()
         }else {
             fetchDepositRecords(offset: 0) {}
-            
         }
     }
     
@@ -148,7 +157,6 @@ extension RechargeRecodeViewController {
     }
     
     override func passwordPassed(_ passed: Bool) {
-        self.endLoading()
         if passed {
             if self.data.count == 0 {
                 fetchDepositRecords(offset:0) {}
@@ -161,6 +169,7 @@ extension RechargeRecodeViewController {
                 }
             }
         }else {
+            self.endLoading()
             if self.isVisible{
                 self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
             }
