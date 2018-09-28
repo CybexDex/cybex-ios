@@ -46,7 +46,6 @@ extension UIViewController {
     }
     
     func addInfiniteScrolling(_ tableView : UITableView ,callback:@escaping(((Bool)->())?)->()){
-        
          let footerView = tableView.es.addInfiniteScrolling {
             callback({[weak self] isNoMoreData in
                 self?.stopInfiniteScrolling(tableView, haveNoMore: isNoMoreData)

@@ -16,7 +16,7 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
     var coordinator: (WithdrawAndDespoitRecordCoordinatorProtocol & WithdrawAndDespoitRecordStateManagerProtocol)?
     @IBOutlet weak var headerView: RecordHeaderView!
     
-    
+    var selectedIndex: RecordChooseType = RecordChooseType.Asset
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -126,6 +126,7 @@ extension WithdrawAndDespoitRecordViewController {
         vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
         vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.white.hexString(true)]
         vc.typeIndex = index == 1 ? .Asset : .FoudType
+        self.selectedIndex = vc.typeIndex
         vc.delegate = self
         vc.coordinator = RecordChooseCoordinator(rootVC:self.navigationController as! BaseNavigationController)
         self.present(vc, animated: true) {
@@ -135,6 +136,14 @@ extension WithdrawAndDespoitRecordViewController {
 }
 extension WithdrawAndDespoitRecordViewController: UIPopoverPresentationControllerDelegate {
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        if self.selectedIndex == .Asset {
+            self.headerView.assetInfoView.contentLabel.textColor = UIColor.steel
+            self.headerView.assetInfoView.stateImage.image = R.image.ic2()
+        }
+        else {
+            self.headerView.typeInfoView.contentLabel.textColor = UIColor.steel
+            self.headerView.typeInfoView.stateImage.image = R.image.ic2()
+        }
         return true
     }
     

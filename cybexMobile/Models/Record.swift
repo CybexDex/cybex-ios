@@ -40,7 +40,7 @@ struct Record : HandyJSON {
     
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
-            self.updateAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.zzz'Z'")
+            self.updateAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     }
     
     init() {}

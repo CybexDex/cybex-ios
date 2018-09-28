@@ -17,6 +17,7 @@ import Repeat
 enum view_type : Int{
     case homeContent    = 1
     case businessTitle
+    case Comprehensive
 }
 class HomeViewController: BaseViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
     
@@ -52,9 +53,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
                 return AssetConfiguration.market_base_assets[titleView.currentBaseIndex]
             }
             return ""
-            
         }
-        
     }
     var VC_TYPE : Int = 1 {
         didSet {
@@ -80,16 +79,15 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         switchContainerView()
     }
     
-    
-    
     func switchContainerView() {
         contentView?.removeFromSuperview()
         businessTitleView?.removeFromSuperview()
-        if self.VC_TYPE == view_type.homeContent.rawValue{
+        if self.VC_TYPE == view_type.homeContent.rawValue || self.VC_TYPE == view_type.Comprehensive.rawValue{
             contentView = HomeContentView()
+            contentView?.viewType = view_type.init(rawValue: self.VC_TYPE) ?? view_type.homeContent
             self.view.addSubview(contentView!)
             contentView?.edgesToDevice(vc:self, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
-            
+         
         }else{
             businessTitleView = BusinessTitleView(frame: self.view.bounds)
             self.view.addSubview(businessTitleView!)
@@ -105,22 +103,25 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     override func configureObserveState() {
         app_data.data.asObservable().filter({[weak self] (s) -> Bool in
             guard let `self` = self else { return false}
-            
-            let buckets = s.filter { (homebucket) -> Bool in
-                return homebucket.base == self.base
+            if self.VC_TYPE == view_type.Comprehensive.rawValue {
+                if s.count == AssetConfiguration.shared.asset_ids.count {
+                    return true
+                }
             }
-            
-            if buckets.count == AssetConfiguration.shared.asset_ids.filter( { $0.base == self.base} ).count, buckets.count != 0 {
-                return true
+            else {
+                let buckets = s.filter { (homebucket) -> Bool in
+                    return homebucket.base == self.base
+                }
+                
+                if buckets.count == AssetConfiguration.shared.asset_ids.filter( { $0.base == self.base} ).count, buckets.count != 0 {
+                    return true
+                }
             }
-            
             return false
         }).take(1)
             .subscribe(onNext: {[weak self] (s) in
                 guard let `self` = self else { return }
-                
                 self.updateUI()
-                
                 self.timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.updateUI), userInfo: nil, repeats: true)
                 
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -133,9 +134,10 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     @objc func refreshTableView() {
         if self.isVisible {
             self.endLoading()
-            if self.VC_TYPE == 1{
+            if self.VC_TYPE == 1 || self.VC_TYPE == view_type.Comprehensive.rawValue{
                 self.contentView?.tableView.reloadData()
                 self.contentView?.tableView.isHidden = false
+                self.contentView?.viewType = view_type(rawValue: self.VC_TYPE) ?? .homeContent
             }else{
                 self.businessTitleView?.tableView.reloadData()
                 //        self.businessTitleView?.tableView.isHidden = false
@@ -147,7 +149,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
 extension HomeViewController {
     @objc func cellClicked(_ data:[String: Any]) {
-        if VC_TYPE == view_type.homeContent.rawValue{//首页
+        if VC_TYPE == view_type.homeContent.rawValue || VC_TYPE == view_type.Comprehensive.rawValue {//首页
             if let index = data["index"] as? Int {
                 self.coordinator?.openMarket(index:index, currentBaseIndex:self.contentView!.currentBaseIndex)
             }

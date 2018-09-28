@@ -18,6 +18,7 @@ class HomePairView: UIView {
         case cellClicked
     }
     
+    @IBOutlet weak var rankingLabel: UILabel!
     
     @IBOutlet weak var asset2: UILabel!
     
@@ -41,9 +42,7 @@ class HomePairView: UIView {
             
             self.asset2.text =  markets.quote_info.symbol.filterJade
             self.asset1.text = "/" + markets.base_info.symbol.filterJade
-            let matrix = getCachedBucket(markets)
-            //      self.icon.kf.setImage(with: URL(string: matrix.icon), placeholder: nil, options: [.targetCache], progressBlock: nil, completionHandler: nil)
-            
+            let matrix = getCachedBucket(markets)            
             self.icon.kf.setImage(with: URL(string: matrix.icon))
             if markets.bucket.count == 0 {
                 self.volume.text = " -"
@@ -52,14 +51,11 @@ class HomePairView: UIView {
                 self.bulking.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 self.high_lowContain.backgroundColor = .coolGrey
                 self.rbmL.text  = "-"
-                
             }
             else {
                 self.volume.text = " " + matrix.quote_volume
-                
                 self.price.text = matrix.price
                 self.bulking.text = (matrix.incre == .greater ? "+" : "") + matrix.change.formatCurrency(digitNum: 2) + "%"
-                
                 if let change = matrix.change.toDouble() ,change > 1000{
                     self.bulking.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
                 }else{
@@ -96,6 +92,19 @@ class HomePairView: UIView {
         }
     }
     
+    func replaceIconToLabel() {
+        if let index = self.store["index"] as? Int {
+            self.icon.isHidden = true
+            self.rankingLabel.isHidden = false
+            if index < 3 {
+                self.rankingLabel.backgroundColor = UIColor.turtleGreen
+            }
+            else {
+                self.rankingLabel.backgroundColor = UIColor.steel50
+            }
+            self.rankingLabel.text = "\(index + 1)"
+        }
+    }
     
     fileprivate func setup() {
         self.isUserInteractionEnabled = true

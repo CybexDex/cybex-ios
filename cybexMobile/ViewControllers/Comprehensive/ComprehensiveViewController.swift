@@ -25,23 +25,29 @@ class ComprehensiveViewController: BaseViewController {
         setupEvent()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.startLoading()
-        self.coordinator?.fetchData()
+    func setupNavi() {
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.barTintColor = UIColor.clear
+        self.navigationController?.navigationBar.tintColor = UIColor.clear
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setupNavi()
+    }
     
     override func refreshViewController() {
-        
     }
     
     func setupUI() {
-        self.navigationItem.titleView = UIImageView(image: R.image.img_etologo())
+        self.startLoading()
+        self.coordinator?.setupChildrenVC(self)
     }
 
     func setupData() {
-        
+        self.coordinator?.fetchData()
     }
     
     func setupEvent() {
@@ -51,9 +57,7 @@ class ComprehensiveViewController: BaseViewController {
     override func configureObserveState() {
         self.coordinator?.state.pageState.asObservable().distinctUntilChanged().subscribe(onNext: {[weak self] (state) in
             guard let `self` = self else { return }
-            
-//            self.endLoading()
-            
+                        
             switch state {
             case .initial:
                 self.coordinator?.switchPageState(PageState.refresh(type: PageRefreshType.initial))
@@ -138,7 +142,7 @@ class ComprehensiveViewController: BaseViewController {
         
         self.coordinator?.state.middleItems.asObservable().subscribe(onNext: { [weak self](middleItems) in
             guard let `self` = self, let items = middleItems else { return }
-            self.contentView.moudlesView.adapterModelToComprehensiveItemsView(items)
+            self.contentView.middleItemsView.adapterModelToComprehensiveItemsView(items)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](notification) in
@@ -181,6 +185,12 @@ extension ComprehensiveViewController {
         }
         let announce = announces[index]
         openUrl(announce.url)
+    }
+    
+    @objc func HotAssetViewDidClicked(_ data: [String: Any]) {
+        if let data = data["data"] as? HomeBucket {
+            self.coordinator?.openMarketList(Pair(base: data.base, quote: data.quote))
+        }
     }
     
     func openUrl(_ url: String) {

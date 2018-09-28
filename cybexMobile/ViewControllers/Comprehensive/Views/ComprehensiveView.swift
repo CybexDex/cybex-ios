@@ -14,10 +14,12 @@ class ComprehensiveView: CybexBaseView {
     
     @IBOutlet weak var bannerView: ETOHomeBannerView!
     @IBOutlet weak var announceView: AnnounceView!
-    
     @IBOutlet weak var hotAssetsView: HotAssetsView!
-    @IBOutlet weak var moudlesView: ComprehensiveItemsView!
-
+    
+    @IBOutlet weak var middleItemsView: ComprehensiveItemsView!
+    
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var topGainersView: UIView!
     
     enum Event:String {
         case ComprehensiveViewDidClicked
@@ -35,7 +37,7 @@ class ComprehensiveView: CybexBaseView {
         self.bannerView.view_type = 1
         self.bannerView.pagerView.transformer = FSPagerViewTransformer(type: .linear)
         self.bannerView.pagerView.itemSize = CGSize(width: 334, height: self.bannerView.height)
-        self.bannerView.pagerView.interitemSpacing = 16
+        self.bannerView.pagerView.interitemSpacing = 10
     }
     
     func setupSubViewEvent() {

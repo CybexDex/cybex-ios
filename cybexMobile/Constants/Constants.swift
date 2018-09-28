@@ -109,19 +109,19 @@ struct AppConfiguration {
     }
     
     static var HOTASSETS_JSON: String {
-        return SERVER_TEST_BASE_URLString + "v1/api/hotpair"
+        return SERVER_BASE_URLString + "v1/api/hotpair"
     }
     
     static var ANNOUNCE_JSON: String {
-        return SERVER_TEST_BASE_URLString + "v1/api/announce?lang="
+        return SERVER_BASE_URLString + "v1/api/announce?lang="
     }
     
     static var HOME_ITEMS_JSON: String {
-        return SERVER_TEST_BASE_URLString + "v1/api/app_sublinks?lang="
+        return SERVER_BASE_URLString + "v1/api/app_sublinks?lang="
     }
     
     static var HOME_BANNER_JSON: String {
-        return SERVER_TEST_BASE_URLString + "v1/api/banners?lang="
+        return SERVER_BASE_URLString + "v1/api/banners?lang="
     }
     
     static var BLOCKEXPLORER_JSON: String {

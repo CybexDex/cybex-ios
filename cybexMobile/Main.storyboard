@@ -234,7 +234,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="KDV-f5-Nyx" secondAttribute="trailing" id="rSM-td-obb"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hT-8l-4k3" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hT-8l-4k3" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
                                                 <rect key="frame" x="13" y="272" width="294" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="mMo-cU-BbU"/>
