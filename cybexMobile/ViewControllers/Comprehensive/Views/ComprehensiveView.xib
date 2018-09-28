@@ -33,6 +33,7 @@
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dVu-pG-uuE">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="727"/>
+
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aiZ-49-g8l" customClass="ETOHomeBannerView" customModule="cybexMobile" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
@@ -93,6 +94,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="Mdn-bC-eGH" secondAttribute="bottom" id="ojS-ap-LHo"/>
                                             </constraints>
                                             <viewLayoutGuide key="safeArea" id="gYn-Ao-XsZ"/>
+
                                         </view>
                                     </subviews>
                                 </stackView>

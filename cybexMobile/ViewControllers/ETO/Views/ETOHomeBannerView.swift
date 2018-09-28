@@ -73,12 +73,13 @@ extension ETOHomeBannerView : FSPagerViewDataSource,FSPagerViewDelegate {
             cell.imageView?.contentMode = .scaleAspectFill
         }
         else {
-            cell.contentView.layer.shadowColor = UIColor.black.cgColor
-            cell.contentView.layer.shadowRadius = 5
-            cell.contentView.layer.shadowOpacity = 0.75
+            cell.contentView.layer.shadowColor = UIColor.clear.cgColor
+            cell.contentView.layer.shadowRadius = 0
+            cell.contentView.layer.shadowOpacity = 1.0
             cell.contentView.layer.shadowOffset = .zero
             cell.contentView.cornerRadius = 4
         }
+
         if let banners = self.data as? [String] {
             let banner = banners[index]
             if banner.contains("https://") || banner.contains("http://") {

@@ -59,6 +59,7 @@ class AnnounceScrollView: CybexBaseView {
     }
     
     func setupSubViewEvent() {
+<<<<<<< HEAD
         guard let data = self.data as? [String], data.count > 1 else { return }
         let label = UILabel(frame: CGRect(x: 0, y: self.topLabel.bottom, width: self.topLabel.width, height: self.topLabel.height))
         label.text = data[1]
@@ -84,6 +85,9 @@ class AnnounceScrollView: CybexBaseView {
                 })
             }
         }
+=======
+        
+>>>>>>> 339378a5b70abbff81625fd6487e97a68840c859
     }
     
     @objc override func didClicked() {
@@ -97,3 +101,32 @@ class AnnounceScrollView: CybexBaseView {
     }
 }
 
+<<<<<<< HEAD
+=======
+extension AnnounceScrollView {
+    @objc func scrollLabelAction() {
+        guard let data = self.data as? [String], data.count != 0 else { return }
+        if selectedIndex < data.count - 1 {
+            selectedIndex = selectedIndex + 1
+        }
+        else {
+            selectedIndex = 0
+        }
+        let label = UILabel(frame: CGRect(x: 0, y: self.topLabel.bottom, width: self.topLabel.width, height: self.topLabel.height))
+        if data.count > selectedIndex {
+            label.text = data[selectedIndex]
+        }
+        label.font = topLabel.font
+        label.theme_textColor = [UIColor.paleGrey.hexString(true), UIColor.darkTwo.hexString(true)]
+        self.scrollView.addSubview(label)
+        let point = self.scrollView.contentOffset
+        
+        UIView.animate(withDuration: 1.5, animations: {
+            self.scrollView.contentOffset = CGPoint(x: 0, y: point.y + self.scrollView.height)
+        }) { (success) in
+            self.topLabel.removeFromSuperview()
+            self.topLabel = label
+        }
+    }
+}
+>>>>>>> 339378a5b70abbff81625fd6487e97a68840c859
