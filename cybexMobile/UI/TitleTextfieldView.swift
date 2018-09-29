@@ -146,7 +146,7 @@ class TitleTextfieldView: UIView {
             return
         }
         if actionsView.arrangedSubviews.count > 0 {
-            actionsView.removeArrangedSubviews()
+            actionsView.removeSubviews()
         }
         for (index, value) in (buttonSettings?.enumerated())! {
             if value.imageName == "loading_state" {
@@ -165,7 +165,7 @@ class TitleTextfieldView: UIView {
                 btn.setImage(UIImage(named: value.selectedImageName), for: .selected)
                 btn.addTarget(self, action: #selector(handleAction(sender:)), for: .touchUpInside)
                 btn.isShowWhenEditing = value.isShowWhenEditing
-                btn.width((image?.size.width)! + 5)
+                btn.width(image?.size.width ?? -5 + 5)
                 actionsView.addArrangedSubview(btn)
                 btn.isHidden = value.isShowWhenEditing
             }

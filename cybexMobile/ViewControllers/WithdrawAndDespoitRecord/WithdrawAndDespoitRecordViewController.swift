@@ -110,7 +110,9 @@ extension WithdrawAndDespoitRecordViewController {
     @objc func presentChooseVC(_ data: [String: Any]) {
         if let vc = data["data"] as? RecordChooseViewController {
             self.present(vc, animated: true) {
-                vc.view.superview?.layer.cornerRadius = 0
+                vc.view.superview?.cornerRadius = 2
+                vc.view.cornerRadius = 2
+                
             }
         }
     }

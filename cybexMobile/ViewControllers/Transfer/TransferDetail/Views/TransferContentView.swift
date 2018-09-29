@@ -71,7 +71,8 @@ class TransferContentView: UIView {
   }
   
   func setup() {
-    
+    addressView.content.textContainer.maximumNumberOfLines = 1
+    addressView.content.textContainer.lineBreakMode = .byTruncatingMiddle
   }
   
   fileprivate func updateHeight() {

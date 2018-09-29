@@ -19,7 +19,7 @@ class AnnounceScrollView: CybexBaseView {
     
     var selectedIndex: Int = 1
     var time: TimeInterval = 5
-    fileprivate var timer: Timer!
+    fileprivate var timer: Timer?
     fileprivate var topLabel: UILabel!
     fileprivate var bottomLabel: UILabel!
     var animating: Bool = false
@@ -37,6 +37,8 @@ class AnnounceScrollView: CybexBaseView {
                         label.removeFromSuperview()
                     }
                 }
+                timer?.invalidate()
+                timer = nil
                 selectedIndex = 1
                 animating = false
                 self.scrollView.contentOffset = CGPoint(x: 0, y: 0)
@@ -63,9 +65,7 @@ class AnnounceScrollView: CybexBaseView {
         
         if !animating {
             animating = true
-            SwifterSwift.delay(milliseconds: 3000) {
-                self.setupSubViewEvent()
-            }
+            self.setupSubViewEvent()
         }
     }
     
@@ -80,7 +80,7 @@ class AnnounceScrollView: CybexBaseView {
         let bottom = self.bottomLabel!
         var reverse = false
         
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {_ in
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {_ in
             UIView.animate(withDuration: 1.5, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
                 if !reverse {
                     top.frame = CGRect(x: 0, y: -self.scrollView.bottom, width: self.scrollView.width, height: self.scrollView.height)
@@ -114,12 +114,6 @@ class AnnounceScrollView: CybexBaseView {
     
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.AnnounceScrollViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self ,"index": self.selectedIndex - 1])
-    }
-    
-    deinit {
-        if let timers = self.timer {
-            timers.invalidate()
-        }
     }
 }
 
