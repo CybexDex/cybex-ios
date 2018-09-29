@@ -38,6 +38,7 @@ class AnnounceScrollView: CybexBaseView {
                     }
                 }
                 selectedIndex = 1
+                animating = false
                 self.scrollView.contentOffset = CGPoint(x: 0, y: 0)
                 self.createSubViews()
             }
