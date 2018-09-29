@@ -20,6 +20,12 @@ class CybexBaseView: UIControl {
         case untouched = 1.0
     }
     
+    override var backgroundColor: UIColor? {
+        didSet {
+            self.foreView.backgroundColor = backgroundColor
+        }
+    }
+    
     var touchAlpha : TouchAlphaValues = .untouched {
         didSet {
             updateTouchAlpha()

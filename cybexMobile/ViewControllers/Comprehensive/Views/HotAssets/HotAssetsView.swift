@@ -51,6 +51,8 @@ extension HotAssetsView : GridContentViewDataSource{
         if let data = self.data as? [HomeBucket] {
             let views = Array(0...data.count - 1).map({ (index) -> HotAssetView in
                 let item = HotAssetView(frame: .zero)
+                item.theme1BgColor = .dark
+                item.theme2BgColor = .paleGrey
                 item.adapterModelToHotAssetView(data[index])
                 return item
             })

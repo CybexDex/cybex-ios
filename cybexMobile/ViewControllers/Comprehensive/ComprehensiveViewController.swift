@@ -26,16 +26,18 @@ class ComprehensiveViewController: BaseViewController {
     }
     
     func setupNavi() {
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.barTintColor = UIColor.clear
-        self.navigationController?.navigationBar.tintColor = UIColor.clear
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupNavi()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     override func refreshViewController() {

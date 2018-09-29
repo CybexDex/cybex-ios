@@ -108,7 +108,17 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Lhl-p8-24W"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                    <color key="value" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                    <color key="value" name="paleGrey" red="0.969" green="0.973" blue="0.980" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="-193" y="-171"/>
         </view>
     </objects>
+    <resources>
+    </resources>
 </document>
