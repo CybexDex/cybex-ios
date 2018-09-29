@@ -180,7 +180,7 @@ extension ComprehensiveViewController {
     }
     
     @objc func AnnounceScrollViewDidClicked(_ data: [String: Any]) {
-        guard let announces = self.coordinator?.state.announces.value, let index = data["index"] as? Int else {
+        guard let announces = self.coordinator?.state.announces.value, let index = data["index"] as? Int, index >= 0, index < announces.count else {
             return
         }
         let announce = announces[index]

@@ -22,6 +22,7 @@ class AnnounceScrollView: CybexBaseView {
     fileprivate var timer: Timer!
     fileprivate var topLabel: UILabel!
     fileprivate var bottomLabel: UILabel!
+    var animating: Bool = false
     
     override func setup() {
         super.setup()
@@ -36,7 +37,7 @@ class AnnounceScrollView: CybexBaseView {
                         label.removeFromSuperview()
                     }
                 }
-                selectedIndex = 0
+                selectedIndex = 1
                 self.scrollView.contentOffset = CGPoint(x: 0, y: 0)
                 self.createSubViews()
             }
@@ -50,7 +51,21 @@ class AnnounceScrollView: CybexBaseView {
         topLabel.theme_textColor = [UIColor.paleGrey.hexString(true), UIColor.darkTwo.hexString(true)]
         topLabel.text = data.first!
         self.scrollView.addSubview(topLabel)
-        setupSubViewEvent()
+        
+        guard data.count > 1 else { return }
+        let label = UILabel(frame: CGRect(x: 0, y: self.topLabel.bottom, width: self.topLabel.width, height: self.topLabel.height))
+        label.text = data[1]
+        label.font = self.topLabel.font
+        label.theme_textColor = [UIColor.paleGrey.hexString(true), UIColor.darkTwo.hexString(true)]
+        self.scrollView.addSubview(label)
+        bottomLabel = label
+        
+        if !animating {
+            animating = true
+            SwifterSwift.delay(milliseconds: 3000) {
+                self.setupSubViewEvent()
+            }
+        }
     }
     
     func setupUI() {
@@ -60,35 +75,44 @@ class AnnounceScrollView: CybexBaseView {
     
     func setupSubViewEvent() {
         guard let data = self.data as? [String], data.count > 1 else { return }
-        let label = UILabel(frame: CGRect(x: 0, y: self.topLabel.bottom, width: self.topLabel.width, height: self.topLabel.height))
-        label.text = data[1]
-        label.font = self.topLabel.font
-        label.theme_textColor = [UIColor.paleGrey.hexString(true), UIColor.darkTwo.hexString(true)]
-        self.scrollView.addSubview(label)
-        UIView.animate(withDuration: 1.5, delay: 3, options: UIViewAnimationOptions.curveLinear, animations: {
-            var frameTop = self.topLabel.frame
-            frameTop.origin.y -= frameTop.size.height
-            self.topLabel.frame = frameTop
-            
-            var frameLabel = label.frame
-            frameLabel.origin.y -= frameLabel.size.height
-            label.frame = frameLabel
-        }) { (success) in
-            if success {
-                self.topLabel.removeFromSuperview()
-                self.topLabel = label
-                SwifterSwift.delay(milliseconds: 3000, completion: {
-                    main {
-                        self.setupSubViewEvent()
+        let top = self.topLabel!
+        let bottom = self.bottomLabel!
+        var reverse = false
+        
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {_ in
+            UIView.animate(withDuration: 1.5, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+                if !reverse {
+                    top.frame = CGRect(x: 0, y: -self.scrollView.bottom, width: self.scrollView.width, height: self.scrollView.height)
+                    bottom.frame = self.scrollView.bounds
+                }
+                else {
+                    bottom.frame = CGRect(x: 0, y: -self.scrollView.bottom, width: self.scrollView.width, height: self.scrollView.height)
+                    top.frame = self.scrollView.bounds
+                }
+            }) { (success) in
+                if success {
+                    self.selectedIndex += 1
+                    if self.selectedIndex >= data.count {
+                        self.selectedIndex = 0
                     }
-                })
+                    
+                    if !reverse {
+                        top.frame = CGRect(x: 0, y: self.scrollView.bottom, width: self.scrollView.width, height: self.scrollView.height)
+                        top.text = data[self.selectedIndex]
+                        reverse = true
+                    }
+                    else {
+                        bottom.frame = CGRect(x: 0, y: self.scrollView.bottom, width: self.scrollView.width, height: self.scrollView.height)
+                        bottom.text = data[self.selectedIndex]
+                        reverse = false
+                    }
+                }
             }
         }
-
     }
     
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.AnnounceScrollViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self ,"index": self.selectedIndex])
+        self.next?.sendEventWith(Event.AnnounceScrollViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self ,"index": self.selectedIndex - 1])
     }
     
     deinit {
