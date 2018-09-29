@@ -149,11 +149,24 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
 extension HomeViewController {
     @objc func cellClicked(_ data:[String: Any]) {
-        if VC_TYPE == view_type.homeContent.rawValue || VC_TYPE == view_type.Comprehensive.rawValue {//首页
+        if VC_TYPE == view_type.homeContent.rawValue {//首页
             if let index = data["index"] as? Int {
                 self.coordinator?.openMarket(index:index, currentBaseIndex:self.contentView!.currentBaseIndex)
             }
-        }else{
+        }
+        else if VC_TYPE == view_type.Comprehensive.rawValue {
+            if let index = data["index"] as? Int {
+                let buckets = app_data.filterTopgainers()[index]
+                
+                if let baseIndex = AssetConfiguration.market_base_assets.firstIndex(of: buckets.base) {
+                    let markets = app_data.filterQuoteAsset(buckets.base)
+                    if let curIndex = markets.firstIndex(of: buckets) {
+                        self.coordinator?.openMarket(index: curIndex, currentBaseIndex:baseIndex)
+                    }
+                }
+            }
+        }
+        else{
             if let value = data["info"] as? Pair{
                 if let superVC = self.parent as? TradeViewController{
                     superVC.pair = value
