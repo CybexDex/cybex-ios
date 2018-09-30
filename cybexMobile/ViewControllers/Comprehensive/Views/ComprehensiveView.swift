@@ -35,9 +35,7 @@ class ComprehensiveView: CybexBaseView {
     func setupUI() {
         clearBgColor()
         self.bannerView.view_type = 1
-        self.bannerView.pagerView.transformer = FSPagerViewTransformer(type: .linear)
-        self.bannerView.pagerView.itemSize = CGSize(width: 334, height: self.bannerView.height)
-        self.bannerView.pagerView.interitemSpacing = 10
+        self.bannerView.pagerView.itemSize = CGSize(width: UIScreen.main.bounds.width, height: self.bannerView.height)
     }
     
     func setupSubViewEvent() {

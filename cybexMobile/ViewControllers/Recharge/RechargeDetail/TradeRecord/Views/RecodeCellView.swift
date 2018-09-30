@@ -51,7 +51,7 @@ class RecodeCellView: UIView {
     }
     
     func setup() {
-        
+        updateHeight()
     }
     
     fileprivate func updateHeight() {

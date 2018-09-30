@@ -8,3 +8,5 @@ git "https://github.com/alibaba/HandyJSON" "4.2.0-beta1"
 github "ReSwift/ReSwift"
 github "ArtSabintsev/Guitar"
 git "https://github.com/phpmaple/SocketRocket" "master"
+
+git "https://github.com/phpmaple/NBLCommonModule" "master"

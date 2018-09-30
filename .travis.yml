@@ -14,8 +14,6 @@ before_install:
 - bundle update
 - bundle exec pod repo update --silent
 - carthage bootstrap --no-use-binaries --platform iOS --cache-builds
-- cd "./NBLCommonModule/" && carthage bootstrap --no-use-binaries --platform iOS --cache-builds
-- cd "../"
 - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 - cp .travis/AdHoc_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
 - cp .travis/AppStore_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxGesture
 
 @IBDesignable
 class HotAssetView: CybexBaseView {
@@ -28,7 +29,11 @@ class HotAssetView: CybexBaseView {
     }
     
     func setupUI() {
-        clearBgColor()
+//        clearBgColor()
+        self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] (tap) in
+            guard let `self` = self else { return }
+            self.next?.sendEventWith(Event.HotAssetViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        }).disposed(by: disposeBag)
     }
     
     func setupSubViewEvent() {
@@ -36,6 +41,5 @@ class HotAssetView: CybexBaseView {
     }
     
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.HotAssetViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }
