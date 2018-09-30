@@ -450,7 +450,6 @@
 		733714BD2122D32500B2ED90 /* AddressCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714BB2122D32500B2ED90 /* AddressCellView.swift */; };
 		733714BE2122D32500B2ED90 /* AddressCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714BC2122D32500B2ED90 /* AddressCellView.xib */; };
 		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
-		734CC823215503710009EEE6 /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73752FC3214C13430089BD21 /* NBLCommonModule.framework */; };
 		73587E9D2133EB15006CF8A6 /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */; };
 		73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9F21352AD8006CF8A6 /* ETOMGService.swift */; };
 		73587EAB2137C057006CF8A6 /* ETOCrowdActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EA72137C057006CF8A6 /* ETOCrowdActions.swift */; };
@@ -460,6 +459,7 @@
 		73587EB42137C69B006CF8A6 /* ETOCrowdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB12137C69B006CF8A6 /* ETOCrowdView.swift */; };
 		73587EB52137C69B006CF8A6 /* ETOCrowdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */; };
 		73587EB62137C69B006CF8A6 /* ETOCrowdViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */; };
+		735A3D022160A73200FC8922 /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735A3D012160A73000FC8922 /* NBLCommonModule.framework */; };
 		737F8C352145532A00DD522A /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F8C342145532A00DD522A /* String+Extensions.swift */; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
@@ -718,13 +718,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		73752FC2214C13430089BD21 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 73752FBE214C13420089BD21 /* NBLCommonModule.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 73752FAE214C12D50089BD21;
-			remoteInfo = NBLCommonModule;
-		};
 		7386F2912121204A00ABC924 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 86D7094F24AAA52C797AF890376BB10F /* Project object */;
@@ -6195,11 +6188,10 @@
 		73587EB12137C69B006CF8A6 /* ETOCrowdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdView.swift; sourceTree = "<group>"; };
 		73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdView.xib; sourceTree = "<group>"; };
 		73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdViewAdapter.swift; sourceTree = "<group>"; };
+		735A3D012160A73000FC8922 /* NBLCommonModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NBLCommonModule.framework; path = Carthage/Build/iOS/Static/NBLCommonModule.framework; sourceTree = "<group>"; };
 		735EA8642354E31CA8166DA44203A684 /* shift_right.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shift_right.hpp; sourceTree = "<group>"; };
 		735FA00E9301F0DB45760B1C0D7FEC09 /* extreme_value.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = extreme_value.hpp; sourceTree = "<group>"; };
 		737258FAB6762972136E4188BF20F602 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
-		73752FBB214C13420089BD21 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		73752FBE214C13420089BD21 /* NBLCommonModule.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = NBLCommonModule.xcodeproj; sourceTree = "<group>"; };
 		737F8C342145532A00DD522A /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		7386291A788FC7DE14BE446D1B0B59FF /* get_dev_key.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = get_dev_key.cpp; sourceTree = "<group>"; };
 		7386F28C2121204A00ABC924 /* cybexMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cybexMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -12629,7 +12621,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				734CC823215503710009EEE6 /* NBLCommonModule.framework in Frameworks */,
+				735A3D022160A73200FC8922 /* NBLCommonModule.framework in Frameworks */,
 				6257D6A4A5ED0C635B89E55C84FA1215 /* libboost.a in Frameworks */,
 				786DA36D390BADA15DF7637951260BE0 /* libcrypto.a in Frameworks */,
 				8899C4D33A4F31180D755A486B4A6B6C /* libfc.a in Frameworks */,
@@ -22691,23 +22683,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		73752FBA214C13420089BD21 /* NBLCommonModule */ = {
-			isa = PBXGroup;
-			children = (
-				73752FBB214C13420089BD21 /* .gitignore */,
-				73752FBE214C13420089BD21 /* NBLCommonModule.xcodeproj */,
-			);
-			path = NBLCommonModule;
-			sourceTree = "<group>";
-		};
-		73752FBF214C13420089BD21 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				73752FC3214C13430089BD21 /* NBLCommonModule.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		7386F28D2121204A00ABC924 /* cybexMobileTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -29956,6 +29931,7 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				735A3D012160A73000FC8922 /* NBLCommonModule.framework */,
 				738E15C8214F82EC00F0BFAF /* SDCAlertView.framework */,
 				738E15C6214F81F300F0BFAF /* AlamofireNetworkActivityLogger.framework */,
 				7336B7BC214F717D0086A9DF /* ESTabBarController.framework */,
@@ -29974,7 +29950,6 @@
 				731C11B1214D045900761955 /* RxMoya.framework */,
 				731C11B4214D045B00761955 /* RxSwift.framework */,
 				731C11B8214D045D00761955 /* SocketRocket.framework */,
-				73752FBA214C13420089BD21 /* NBLCommonModule */,
 				0A7304F2BEF3C98AC05E5F01EC7205E8 /* libboost.a */,
 				AA9D354E1FFC86DF9A64FE653BD6840F /* libcrypto.a */,
 				8B6A666082254B4BA4CBD399FCAEC435 /* libfc.a */,
@@ -33577,12 +33552,6 @@
 			mainGroup = F3EBF4E6D2E2492B42F25C18354E14EB;
 			productRefGroup = B1CE0949A770A9355E35EABBD4213DAB /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 73752FBF214C13420089BD21 /* Products */;
-					ProjectRef = 73752FBE214C13420089BD21 /* NBLCommonModule.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				6597A0AC6C29D30281EBD879E45F3BAF /* cybexMobile */,
@@ -33590,16 +33559,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		73752FC3214C13430089BD21 /* NBLCommonModule.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = NBLCommonModule.framework;
-			remoteRef = 73752FC2214C13430089BD21 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1F1278CDBFA95B0E46D9562DAFE69F12 /* Resources */ = {
@@ -34551,6 +34510,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -34653,6 +34613,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
