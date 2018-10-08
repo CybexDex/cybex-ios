@@ -77,25 +77,8 @@ class TradeHistoryViewController: BaseViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
   }
-  
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-  }
-  
-  override func configureObserveState() {
-    commonObserveState()
-    
 
+  override func configureObserveState() {
     self.coordinator!.state.property.data.asObservable()
       .subscribe(onNext: {[weak self] (s) in
         guard let `self` = self else { return }

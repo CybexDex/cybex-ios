@@ -20,21 +20,49 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Olc-tr-ygY" customClass="RecodeCellView" customModule="cybexMobile" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="42.5"/>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xf6-OM-PiN">
+                        <rect key="frame" x="13" y="42.5" width="294" height="1"/>
+                        <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="FaH-dI-G1y"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Olc-tr-ygY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Snr-jC-JH5"/>
                     <constraint firstItem="Olc-tr-ygY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Tgo-ah-VCd"/>
                     <constraint firstAttribute="trailing" secondItem="Olc-tr-ygY" secondAttribute="trailing" id="bDK-sX-ffJ"/>
-                    <constraint firstAttribute="bottom" secondItem="Olc-tr-ygY" secondAttribute="bottom" id="pae-GP-1iO"/>
+                    <constraint firstItem="xf6-OM-PiN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="mLH-8c-x6j"/>
+                    <constraint firstItem="xf6-OM-PiN" firstAttribute="top" secondItem="Olc-tr-ygY" secondAttribute="bottom" id="pae-GP-1iO"/>
+                    <constraint firstAttribute="trailing" secondItem="xf6-OM-PiN" secondAttribute="trailing" constant="13" id="r1S-OG-qso"/>
+                    <constraint firstAttribute="bottom" secondItem="xf6-OM-PiN" secondAttribute="bottom" id="xWG-Za-mct"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                    <color key="value" name="darkTwo" red="0.106" green="0.133" blue="0.188" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="cellView" destination="Olc-tr-ygY" id="6VH-l0-y8e"/>
             </connections>
             <point key="canvasLocation" x="-46" y="-34"/>
         </tableViewCell>
     </objects>
+    <resources>
+    </resources>
 </document>

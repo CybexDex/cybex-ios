@@ -159,6 +159,39 @@ extension UITextField {
   }
 }
 
+extension UIView {
+    @IBInspectable
+    var theme1ShadowColor:UIColor {
+        set {
+            if let theme2 = self.store["shadow_theme2"] as? String {
+                layer.theme_shadowColor = [newValue.hexString(true), theme2]
+            }
+            else {
+                self.store["shadow_theme1"] = newValue.hexString(true)
+            }
+        }
+        
+        get {
+            return layer.theme_shadowColor?.value() as! UIColor
+        }
+    }
+    
+    @IBInspectable
+    var theme2ShadowColor:UIColor {
+        set {
+            if let theme1 = self.store["shadow_theme1"] as? String {
+                layer.theme_shadowColor = [theme1, newValue.hexString(true)]
+            }
+            else {
+                self.store["shadow_theme2"] = newValue.hexString(true)
+            }
+        }
+        
+        get {
+            return layer.theme_shadowColor?.value() as! UIColor
+        }
+    }
+}
 
 extension UIView {
   @IBInspectable

@@ -1,0 +1,502 @@
+/* 
+  Localizable.strings
+  cybexMobile
+
+  Created by koofrank on 2018/3/12.
+  Copyright © 2018年 Cybex. All rights reserved.
+*/
+"" = "";
+"--" = "--";
+"nav.home" = "Home";
+"nav.watchlist" = "Watchlist";
+"nav.faq" = "FAQ";
+"nav.apply" = "Application";
+"nav.account" = "Account";
+"nav.setting" = "Settings";
+"nav.trade"   = "Exchange";
+"nav.eto" = "ETO";
+"home_blockchain" = "Blockchain";
+
+
+"market" = "Market";
+
+"language" = "Language";
+"theme" = "Theme";
+"dark" = "Dark";
+"light" = "Light";
+"version" = "Version";
+"frequency" = "Frequency";
+
+"environment" = "environment";
+
+
+"frequency_normal" = "Ordinary Market";
+"frequency_time" = "Real-time Market";
+"frequency_wifi" = "Real-time Market(WiFi Only)";
+
+
+"login.hint" = "Use Cloud Wallet mode to login Account";
+"register.hint" = "Use Cloud Wallet mode to create Account";
+"account" = "Account Name";
+"password" = "Password";
+"confirm_password" = "Confirm Password";
+"account.create" = "Create Account";
+
+"opened.all" = "All";
+"opened.buy" = "Buy";
+"opened.sell" = "Sell";
+"opened.allMoney" = "Total Value:";
+"opened.buyMoney" = "Buy Total Value:";
+"opened.sellMoney" = "Sell Total Value:";
+
+"login" = "LOGIN";
+"logout" = "Log Out";
+
+"login.tip" = "Login";
+"login.already" = "Already have an account? ";
+
+"register" = "Sign Up";
+
+"opened.title"    = "Opened Orders";
+"confirm" = "CONFIRM";
+"attention" = "ATTENTIONS";
+"pin.code"= "Pin Code";
+
+"lockupAssets.title"           = "Lockup Assets";
+
+"portfolio.title"              = "Your Portfolio";
+"portfolio.price"              = "Price (CYB):";
+"portfolio.time"               = "24h Change:";
+
+"account.title"                = "Account";
+"account.yourPortfolio"        = "Your Portfolio";
+"account.viewAll"              = "View All";
+"account.yourTotalBalance"     = "Your Total Balance (CYB):";
+"account.assetOperations"      = "Asset Operations";
+"account.basicMember"          = "Basic Member";
+"account.superMember"          = "Lifetime Member";
+"account.login"                = "Log in Cybex";
+"account.introduce"            = "CYBEX is a decentralized exchange that seeks to improve the liquidity of crypto-assets that’s more transparent, highly efficient and secure.";
+"account.nonMatch" = "Incorrect Account Name or Password";
+"ok" = "OK";
+"account.validate.error.1" = "account name is already taken";
+"account.validate.error.2" = "account name should start with a lowercase letter";
+"account.validate.error.3" = "account name should be longer/shorter";
+"account.validate.error.4" = "account name should contain at least one dash or a number";
+"account.validate.error.5" = "account name should not contain continuous dashes";
+"account.validate.error.6" = "account name should only contain lowercase letter, dash or numbers";
+"account.validate.error.7" = "account name should end with a lowercase letter or number";
+
+"password.validate.error.1" = "The password must at least 12 characters";
+"password.validate.error.2" = "The password is not consistent";
+
+"password.validate.error.3" = "Password must be at least 12 characters and must contain upper case, lower case, numbers and special characters";
+
+
+"register.fail" = "fail to register";
+"register.fail403" = "Incorrect verify code";
+"register.fail429" = "The operation is too frequent. Please try again later.";
+
+"register.confirm" = "CURRENT PASSWORD:\n<password></password>\n· I UNDERSTAND THAT I WILL LOSE ACCESS TO MY FUNDS IF I LOSE MY PASSWORD\n· I UNDERSTAND THAT NO ONE CAN RECOVER MY PASSWORD IF I LOSE OR FORGET IT\n· I HAVE WRITTEN DOWN OR OTHERWISE STORED MY PASSWORD\n";
+
+
+"home_name_vol"                 = "Name/Vol";
+"home_last_price"               = "Last Price";
+"home_change"                   = "24h Chg%";
+
+"asset_mount"                   = "Asset/Amount";
+"progress_expiration"           = "Progress/Expiration Time";
+"cyb_value"                     = "Value(CYB)";
+
+"balance_introduce"             = "This is the estimated value of all your assets,including any hidden assets,open orders,debt and collateral.The estimate is done using only live blockchain data and may not be perfectly accurate.";
+"balance_introduce_title"       = "BALANCE";
+"balance_ensuer"                = "OK";
+
+"home_vol"                      = "Vol";
+
+"opened_amount"                 = "Amount:";
+
+"opened_asset_amount"                 = "Asset/Amount";
+"opened_order_value"                  = "Price";
+
+
+"updata_available_title"              = "Update Available";
+"updata_available_message"            = "A new version of CybexDex is available. Please update to newest version now";
+"updata_next_time"                    = "Next Time";
+"updata_updata"                       = "Update";
+"unupdata_title"                      = "No Update Available";
+"unupdata_message"                    = "Current Version is the newest";
+"unupdata_ok"                         = "OK";
+
+"noNetwork"                           = "network is not available.";
+
+
+"orderbook_buy_price"     = "Buy Price";
+"orderbook_volume"        = "Volume";
+"orderbook_sell_price"    = "Sell Price";
+
+
+
+"trade_base"    = "Markets";
+"trade_double"  = "Pairs";
+"trade_change"  = "24 Chg%";
+"trade_value"   = "24 Volume";
+"account_trade" = "Gateway";
+"order_cancle"  = "Cancel";
+
+
+"trade_buy"             = "BUY";
+"trade_sell"            = "SELL";
+"trade_open_orders"     = "Open Orders";
+"trade_limit"           = "Limit";
+"trade_available"       = "Available";
+"trade_fee"             = "Fee";
+"trade_total"           = "Total";
+
+"trade_history"         = "Market Trades";
+
+
+
+"my_opened_price" = "Order Price/Order Amount";
+"my_opened_filled" = "Filled/Cancel";
+
+"withdraw_nomore" = "Not enough";
+"withdraw_address_fault" = "Invalid address";
+"withdraw_available" = "Available";
+"withdraw_address"   = "Withdraw Address";
+"withdraw_address_placehold"   = "Enter or paste address";
+
+"eos_withdraw_account" = "Withdraw Account";
+"eos_withdraw_account_placehold" = "Enter or paste address address";
+
+"withdraw_amount" = "Amount";
+"withdraw_amount_all" = "ALL";
+"withdraw_fee"        = "Gateway Fee";
+"withdraw_gateway_fee" = "Transfer Fee";
+"withdraw_receive_amount" = "Receive Amount";
+"withdraw_min_value"      = "Less than the minimum withdrawal";
+"recharge_deposit"        = "Deposit";
+"recharge_withdraw"       = "Withdraw";
+"recharge_selectCoin"     = "Select Coin";
+
+"withdraw"                = "WITHDRAW";
+
+"withdraw_miss_authority" = "Missing authority\nfor withdrawal";
+"withdraw_unlock_wallet"  = "Unlock Wallet";
+
+"deposit_save"     = "Save QR Code";
+"deposit_copy"     = "Copy Address";
+"deposti_get"      = "Get New Address";
+
+"alert_cancle"     = "CANCEL";
+"alert_ensure"      = "CONFIRM";
+
+"withdraw_success"  = "Withdrawal request has been sent";
+"recharge_copy"     = "Copied";
+"recharge_save"     = "Saved";
+"recharge_retry"    = "Please retry 5 minutes later";
+
+"order_create_success" = "Place order successfully";
+"order_create_fail" = "Place order fail";
+
+
+"utils_address"      = "Withdrawal Address";
+"utils_amount"       = "Amount";
+"utils_withdrawfee"  = "Transfer Fee";
+"utils_gatewayfee"   = "Gateway Fee";
+"utils_receiveamount" = "Receive Amount";
+"withdraw_memo" = "Memo";
+
+
+"password_placeholder" = "Password";
+"tip_title"   = "Tip";
+"tip_message" = "Please open photo album permissions in Settings";
+
+"recharge_title"  = " Withdraw";
+"recharge_min"    = "Minimum ";
+"withdraw_title"  = " Deposit";
+
+"recharge_invalid_password" = "Invalid password";
+"recharge_withdraw_success" = "Withdrawal application successful";
+"recharge_withdraw_failed" = "Withdrawal application failed";
+
+"orderbook_price"     = "Price";
+"orderbook_amount"    = "Amount";
+
+"trade_history_price" = "Price";
+"trade_history_amount" = "Amount";
+"trade_history_total" = "Total";
+
+"setting_language"    = "English";
+"setting_help" = "Help&Feedback";
+
+"mark_order_book"     = "Order Book";
+"mark_trade_history"  = "Trade History";
+
+"my_history_amount"   = "Amount";
+"my_history_time"     = "Time";
+"my_history_state"    = "Done";
+"my_history_title"    = "Order History";
+
+"order_history_first_title" = "Assert/Amount";
+"order_history_second_title" = "Filled/Price";
+
+
+"cancel_create_success" = "Cancel order successfully";
+"cancel_create_fail" = "Cancel order fail";
+
+"withdraw_ensure_title" = "CONFIERMATION";
+
+"openedorder_buy_ensure" = "CONFIRMATION";
+"openedorder_sell_ensure" = "CONFIRMATION";
+"openedorder_fee_title" = "Cancellation Fee";
+
+
+"cancle_openedorder_sell" = "CONFIRMATION";
+"cancle_openedorder_buy" = "CONFIRMATION";
+
+"withdraw_fee_fail"      = "fee failed";
+
+"openedorder_nodata"     = "No open orders";
+"myhistory_nodata"       = "No exchange history";
+
+"eos_account_title" = "EOS Deposit Account";
+"eos_copy_account" = "Copy Account Name";
+"eos_code"  = "Verification code";
+"eos_code_tip" = "(Must transfer your EOS to deposit account with this verification code in memo)";
+"eos_copy_code" = "Copy Code";
+"eos_reset_code" = "Get New Code";
+
+"business_login_title" = "Log in to exchange";
+
+"update_version" = "Version update";
+
+// 充提现
+"withdraw_list" = "Withdraw Records";
+"deposit_list" = "Deposit Records";
+"update_time" = "Update time:";
+"recode_address" = "Address:";
+"recode_state_new" = "New";
+"recode_state_upping" = "Init";
+"recode_state_noensure" = "Pending";
+"recode_state_fail" = "Failed";
+"recode_state_success" = "Done";
+
+
+
+// 转账记录
+
+"transfer_list_title" = "Transfer Records";
+"transfer_done" = "Received";
+"transfer_send" = "Sent";
+
+
+
+
+// 转账详情
+"transfer_detail" = "Transfer Details";
+"transfer_detail_send" = "Out";
+"transfer_detail_income" = "In";
+"transfer_detail_income_address" = "From";
+"transfer_detail_send_address" = "To";
+"transfer_detail_time" = "Vesting Period";
+"transfer_detail_fee" = "Fee";
+"transfer_detail_mome" = "Memo";
+"transfer_detail_click" = "Click to view";
+"transfer_detail_nodata" = "None";
+"transfer_ensure_title" = "CONFIRMATION";
+
+
+//转账
+"transfer_title" = "Transfer";
+"transfer_transfer" = "Send";
+"transfer_account_title" = "Account";
+"transfer_account_pla" = "To Account name";
+"transfer_crypto" = "Crypto";
+"transfer_crypto_pla" = "Please select crypto type";
+"transfer_quantity" = "Quantity";
+"transfer_memo" = "Memo";
+"transfer_fee" = "Fee";
+"transfer_balance" = "Available";
+
+"picker_comfirm" = "Confirm";
+
+"transfer_unit_day" = "d";
+"transfer_unit_hour" = "h";
+"transfer_unit_minite" = "m";
+"transfer_unit_second" = "s";
+
+
+"transfer_failed" = "Transfer failed";
+"transfer_successed" = "Transfer successfully";
+"transfer_account_unexist" = "Account doesn’t exist.";
+"transfer_balance_unenough" = "There are no enough coins in your account.";
+
+//zsy add
+"my_property" = "My Balance";
+"order_value" = "Opened Orders";
+"transfer" = "Transfer";
+"account_property" = "Your Total Balance(CYB)";
+"hello" = "Hello，";
+"deposit_withdraw" = "Deposit/Withdraw";
+"frozen" = "Frozen：";
+"get_white_list" = "Get Whitelist";
+"ETO_detail" = "ETO Details";
+"project_intro" = "Project Introduction";
+"project_website" = "Project Website";
+"user_agreement" = "《User Agreement》";
+
+//zsy end
+
+"eto_project_detail_title" = "Project Details";
+
+
+"recode_nodata" = "No Record";
+"balance_nodata" = "No Asset";
+
+"Loading more" = "Loading more";
+"No more data" = "No More Data";
+"Loading..." = "Loading...";
+"Pull to refresh" = "Pull to refresh";
+"Release to refresh" = "Release to refresh";
+
+"address_manager" = "Address Management";
+
+"address_asset" = "Crypto";
+"address_mark" = "Note";
+"address_add" = "Add";
+
+"transfer_account" = "Account";
+"transfer_account_name" = "Transfer Account";
+
+"address_or_account" = "Note/Account";
+"account_or_address" = "Note/Address";
+
+"account_exit" = "The account is already existed";
+"address_exit" = "The address is already existed";
+
+"account_title_add" = "Add Transfer Account";
+"address_title_add" = "Add Withdraw Address";
+"address_title_add_eos" = "Add Withdraw Account";
+
+"address_add_success" = "Added";
+"address_note_placeholder" = "Less than 15 characters";
+
+"choose_address" = "Select";
+"add_address" = "Add";
+
+"choose_account" = "Select";
+"add_account" = "Add";
+
+"address" = "Address";
+
+"withdraw_success_title" = "Withdraw applicatation has been sent.";
+"withdraw_success_content" = "Add this account to list?";
+
+"transfer_success_title" = "Transfer success";
+"transfer_success_content" = "Add to transfer account list?";
+
+"transfer_account_manager" = "Transfer Account";
+"withdraw_address_manager" = "Withdraw Address";
+
+"copy" = "Copy";
+"copied" = "Copied";
+
+"delete" = "Delete";
+"deleted" = "Deleted";
+
+
+"delete_confirm_address" = "Confirm to delete this address?";
+"delete_confirm_account" = "Confirm to delete this account?";
+"address_nodata"       = "No withdraw address";
+"account_nodata"       = "No withdraw account";
+"account_transfer_nodata"       = "No transfer account";
+
+"address_delete_confirm" = "CONFIRMATION";
+
+"hot_project" = "Popular ETOs";
+
+"eto_personal_cap" = "Personal Cap";
+"eto_subscription_unit" = "Subscription Unit";
+"eto_remaining" = "Remaining";
+"eto_min_subscription" = "Min.Subscription";
+"eto_subscribed" = "Subscribed";
+
+"eto_available" = "Available %@ %@";
+"eto_join" = "Join in ETO";
+"eto_project_detail" = "Project Details：";
+
+"eto_share" = "Share";
+"eto_records" = "ETO Records";
+"eto_record_receive" = "Receive Token";
+"eto_record_send" = "Join ETO";
+
+"eto_invalid_sub" = "Invalid Subscription";
+"eto_invalid_partly_sub" = "Subscription partly valid";
+"eto_refund" = "Refund";
+"eto_receive_success" = "Received";
+
+"eto_quantity" = "Quantity";
+
+"eto_user_agreenment" = "Terms and Conditions";
+
+
+
+"eto_project_finish" = "Ended";
+"eto_project_comming" = "Coming";
+"eto_project_progress" = "In Progress";
+
+"eto_project_time_finish" = "Ended：";
+"eto_project_time_comming" = "Left：";
+"eto_project_time_pre" = "In：";
+
+"eto_project_name" = "Project Name：";
+"eto_token_name" = "Token Name：";
+"eto_start_time" = "ETO Time：";
+"eto_end_time" = "End at：";
+"eto_start_at" = "Circulation on Cybex Starts at：";
+"eto_token_releasing_time" = "Token Releasing Time：";
+"eto_currency" = "Currency：";
+"eto_exchange_ratio" = "Exchange Ratio：";
+"eto_total_supply" = "Total Token Supply：";
+
+
+"eto_project_online" = "Official Website：";
+"eto_project_white_Paper" = "Whitepaper：";
+
+"eto_project_immediate" = "Immediate";
+
+"eto_project_reserve_now" = "Reserve Now";
+"eto_project_verifying" = "Verifying";
+"eto_project_stop_reserve" = "Stop Reserve";
+"eto_project_waiting" = "Waiting for ETO";
+"eto_project_join" = "Join ETO Now";
+"eto_project_rejected" = "Rejected";
+"eto_project_kyc" = "KYC Verification";
+"eto_project_login" = "Login";
+
+"eto_submit_title" = "You will join in ETO of %@";
+"eto_submit_check_error_1" = "Not enough";
+"eto_submit_check_error_2" = "beyond personal hard cap";
+"eto_submit_check_error_3" = "insufficient remaining quota";
+"eto_submit_check_error_4" = "must beyond minimum purchasing unit";
+"eto_submit_check_error_5" = "must purchase an integer multiple of minimum purchasing unit";
+"eto_submit_confirm" = "ETO Confirm";
+
+
+"eto_transfer_title" = "Verifying";
+"eto_transfer_content" = "Do not repeat transfers";
+
+"eto_invite_code_error" = "Please enter a valid invitation code";
+"eto_invite_code_title" = "Invitation code";
+
+"eto_time_less_minite" = "less than one minute";
+
+"eto_detail_user_agreement_error" = "Please check 《User Agreement》 first.";
+
+"eto_appointment_success" = "Successful appointment, please wait for the audit result patiently";
+
+"record_all" = "Deposit&withdraw records";
+"record_types" = "Types";
+"record_currency" = "Currency";
+"home_top_gainers" = "Top Gainers";

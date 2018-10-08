@@ -42,12 +42,10 @@ class WithdrawView: UIView {
     didSet{
       if let data = data as? AccountAddressRecord {
         self.address.text = data.address
-        if let tryImage = EFQRCode.generate(
-          content: data.address,
-          size: EFIntSize(width: 100, height: 100),
-          watermark: UIImage(named: R.image.artboard.name)?.toCGImage()
-          ) {
-          self.codeImg.image = UIImage(cgImage: tryImage)
+        let generator = EFQRCodeGenerator(content: data.address, size: EFIntSize(width: 155, height: 155))
+        generator.setIcon(icon: UIImage(named: R.image.artboard.name)?.toCGImage(), size: EFIntSize(width: 42, height: 42))
+        if let image = generator.generate() {
+            self.codeImg.image = UIImage(cgImage: image)
         }
       }
     }

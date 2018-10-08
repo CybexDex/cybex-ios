@@ -77,7 +77,6 @@ void add_user_key(string public_key, fc::ecc::private_key key)
 fc::ecc::private_key& get_private_key(string public_key)
 {
     map<string, fc::ecc::private_key>::iterator iter;
-    fc::ecc::private_key memo_priv_key = fc::ecc::private_key();
 
     if(public_key == "")
         iter = stored_keys.find(default_public_key);
@@ -85,9 +84,8 @@ fc::ecc::private_key& get_private_key(string public_key)
         iter = stored_keys.find(public_key);
     if(iter != stored_keys.end())
         return iter->second;
-    else
-        return memo_priv_key;
-//    FC_THROW_EXCEPTION(fc::exception, "private key not found");
+
+    FC_THROW_EXCEPTION(fc::exception, "private key not found");
 }
 
 fc::mutable_variant_object get_dev_key(string type, string secret)

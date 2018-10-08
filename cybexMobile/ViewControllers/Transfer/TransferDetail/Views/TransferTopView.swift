@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftTheme
 
 class TransferTopView: UIView {
   
@@ -20,8 +21,15 @@ class TransferTopView: UIView {
         self.icon.image = data.isSend ? R.image.ic_sent_40_px() : R.image.ic_income_40_px()
         self.state.text = data.isSend ? R.string.localizable.transfer_detail_send.key.localized() : R.string.localizable.transfer_detail_income.key.localized()
         if let amountInfo = data.amount, let assetInfo = app_data.assetInfo[amountInfo.asset_id] {
-          self.amount.text = getRealAmount(amountInfo.asset_id, amount: amountInfo.amount).stringValue.formatCurrency(digitNum: assetInfo.precision) + assetInfo.symbol.filterJade
-          self.amount.text = data.isSend ? "-" + self.amount.text! : "+" + self.amount.text!
+          self.amount.text = getRealAmount(amountInfo.asset_id, amount: amountInfo.amount).string(digits: assetInfo.precision, roundingMode: .down) + " " + assetInfo.symbol.filterJade
+          if data.isSend {
+            self.amount.text = "-" + self.amount.text!
+            self.amount.textColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
+          }
+          else {
+            self.amount.text = "+" + self.amount.text!
+          }
+          
         }
         if UIScreen.main.bounds.width == 320 {
           self.amount.font = UIFont.systemFont(ofSize: 20.0, weight: .medium)

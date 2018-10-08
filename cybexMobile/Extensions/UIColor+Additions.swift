@@ -2,7 +2,7 @@
 //  UIColor+Additions.swift
 //  Cybex IOS
 //
-//  Generated on Zeplin. (2018/6/27).
+//  Generated on Zeplin. (2018/8/31).
 //  Copyright (c) 2018 __MyCompanyName__. All rights reserved.
 //
 
@@ -32,10 +32,6 @@ extension UIColor {
 
   @nonobjc class var steel: UIColor {
     return UIColor(red: 120.0 / 255.0, green: 129.0 / 255.0, blue: 154.0 / 255.0, alpha: 1.0)
-  }
-
-  @nonobjc class var dark: UIColor {
-    return UIColor(red: 23.0 / 255.0, green: 29.0 / 255.0, blue: 42.0 / 255.0, alpha: 1.0)
   }
 
   @nonobjc class var darkTwo: UIColor {
@@ -161,9 +157,44 @@ extension UIColor {
   @nonobjc class var steelTwo80: UIColor {
     return UIColor(red: 120.0 / 255.0, green: 129.0 / 255.0, blue: 154.0 / 255.0, alpha: 0.8)
   }
-  
-  @nonobjc class var white30: UIColor {
-    return UIColor(white: 1.0, alpha: 0.3)
+
+  @nonobjc class var apricot: UIColor {
+    return UIColor(red: 1.0, green: 199.0 / 255.0, blue: 106.0 / 255.0, alpha: 1.0)
   }
 
+  @nonobjc class var orangeish: UIColor {
+    return UIColor(red: 253.0 / 255.0, green: 134.0 / 255.0, blue: 50.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var almostBlack: UIColor {
+    return UIColor(red: 8.0 / 255.0, green: 10.0 / 255.0, blue: 15.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var cloudyBlue: UIColor {
+    return UIColor(red: 188.0 / 255.0, green: 196.0 / 255.0, blue: 220.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var slate: UIColor {
+    return UIColor(red: 80.0 / 255.0, green: 90.0 / 255.0, blue: 118.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var paleGreyFour: UIColor {
+    return UIColor(red: 222.0 / 255.0, green: 224.0 / 255.0, blue: 230.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var paleGreyFive: UIColor {
+    return UIColor(red: 240.0 / 255.0, green: 240.0 / 255.0, blue: 242.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var darkFive: UIColor {
+    return UIColor(red: 20.0 / 255.0, green: 23.0 / 255.0, blue: 31.0 / 255.0, alpha: 1.0)
+  }
+
+  @nonobjc class var dark: UIColor {
+    return UIColor(red: 23.0 / 255.0, green: 29.0 / 255.0, blue: 42.0 / 255.0, alpha: 1.0)
+  }
+    
+  @nonobjc class var white30: UIColor {
+        return UIColor(white: 1.0, alpha: 0.3)
+  }
 }

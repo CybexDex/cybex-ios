@@ -10,11 +10,7 @@ import UIKit
 import ReSwift
 
 func TransferReducer(action:Action, state:TransferState?) -> TransferState {
-  return TransferState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: TransferPropertyReducer(state?.property, action: action))
-}
-
-func TransferPropertyReducer(_ state: TransferPropertyState?, action: Action) -> TransferPropertyState {
-  let state = state ?? TransferPropertyState()
+  let state = state ?? TransferState()
   
   switch action {
   case let action as ValidAccountAction:
@@ -27,12 +23,26 @@ func TransferPropertyReducer(_ state: TransferPropertyState?, action: Action) ->
     state.fee.accept(action.fee)
   case let action as SetToAccountAction:
     state.to_account.accept(action.account)
+  case let action as ResetDataAction:
+    state.accountValid.accept(.unValided)
+    state.amountValid.accept(false)
+    state.balance.accept(nil)
+    state.fee.accept(nil)
+    state.account.accept("")
+    state.amount.accept("")
+    state.memo.accept("")
+    state.to_account.accept(nil)
+  case let action as ChooseAccountAction:
+    state.account.accept(action.account.address)
+    state.accountValid.accept(AccountValidStatus.validSuccessed)
+    
+  case let action as CleanToAccountAction:
+    state.to_account.accept(nil)
   default:
     break
   }
   
   return state
 }
-
 
 

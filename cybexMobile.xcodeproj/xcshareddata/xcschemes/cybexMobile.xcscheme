@@ -3,7 +3,7 @@
    LastUpgradeVersion = "1000"
    version = "1.7">
    <BuildAction
-      parallelizeBuildables = "NO"
+      parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
       <PostActions>
          <ExecutionAction
@@ -40,13 +40,13 @@
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7998D82CE27B9E810C917C51EF95D775"
+               BlueprintIdentifier = "7386F28B2121204A00ABC924"
                BuildableName = "cybexMobileTests.xctest"
                BlueprintName = "cybexMobileTests"
                ReferencedContainer = "container:cybexMobile.xcodeproj">
@@ -64,7 +64,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7998D82CE27B9E810C917C51EF95D775"
+               BlueprintIdentifier = "7386F28B2121204A00ABC924"
                BuildableName = "cybexMobileTests.xctest"
                BlueprintName = "cybexMobileTests"
                ReferencedContainer = "container:cybexMobile.xcodeproj">

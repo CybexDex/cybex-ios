@@ -12,20 +12,27 @@ import TinyConstraints
 import SwiftTheme
 
 protocol CybexTextViewDelegate {
-    func returnPassword(_ password:String)
-    func clickCancle()
+    func returnPassword(_ password:String, sender: CybexTextView)
+    func clickCancle(_ sender : CybexTextView)
     func returnEnsureAction()
+    func returnEnsureImageAction()
 }
 
 
 
 class CybexTextView: UIView {
+    
+    enum textView_type : Int {
+        case normal
+        case time
+    }
+    
     var middleView : (UIView&Views)? {
         didSet{
             contentView.addSubview(middleView!)
             middleView?.leading(to: contentView,offset:20)
             middleView?.trailing(to: contentView,offset:-20)
-            middleView?.top(to:contentView,offset:20)
+            middleView?.top(to:contentView,offset:16)
             middleView?.bottom(to:contentView,offset:0)
         }
     }
@@ -38,7 +45,13 @@ class CybexTextView: UIView {
         }
     }
     
-  
+    var view_type : textView_type? {
+        didSet{
+            
+        }
+    }
+    
+    @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var hSeparateView: UIView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var cancle: UIButton!
@@ -46,17 +59,21 @@ class CybexTextView: UIView {
     
     @IBOutlet weak var contentView: UIView!
     @IBAction func cancleClick(_ sender: Any) {
-        self.delegate?.clickCancle()
+        self.delegate?.clickCancle(self)
     }
     
     @IBAction func ensureClick(_ sender: Any) {
         if let tf = self.middleView as? CybexPasswordView{
-            self.delegate?.returnPassword(tf.textField.text!)
+            self.delegate?.returnPassword(tf.textField.text!,sender: self)
         }else{
-            self.delegate?.returnEnsureAction()
+            if titleImageView.isHidden == true {
+                self.delegate?.returnEnsureAction()
+            }
+            else {
+                self.delegate?.returnEnsureImageAction()
+            }
         }
     }
-    
     
     func setup() {
         self.cancle.setTitleColor(ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo , for: .normal)

@@ -5,14 +5,18 @@
   Created by koofrank on 2018/3/12.
   Copyright © 2018年 Cybex. All rights reserved.
 */
-
+"" = "";
+"--" = "--";
+"nav.home" = "Home";
 "nav.watchlist" = "Watchlist";
 "nav.faq" = "FAQ";
 "nav.apply" = "Application";
 "nav.account" = "Account";
 "nav.setting" = "Settings";
 "nav.trade"   = "Exchange";
+"nav.eto" = "ETO";
 
+"home_blockchain" = "Blockchain";
 
 "market" = "Market";
 
@@ -22,6 +26,9 @@
 "light" = "Light";
 "version" = "Version";
 "frequency" = "Frequency";
+
+"environment" = "environment";
+
 
 "frequency_normal" = "Ordinary Market";
 "frequency_time" = "Real-time Market";
@@ -82,6 +89,9 @@
 
 "password.validate.error.1" = "The password must at least 12 characters";
 "password.validate.error.2" = "The password is not consistent";
+
+"password.validate.error.3" = "Password must be at least 12 characters and must contain upper case, lower case, numbers and special characters";
+
 
 "register.fail" = "fail to register";
 "register.fail403" = "Incorrect verify code";
@@ -153,10 +163,10 @@
 "withdraw_nomore" = "Not enough";
 "withdraw_address_fault" = "Invalid address";
 "withdraw_available" = "Available";
-"withdraw_address"   = "Withdrawal Address";
+"withdraw_address"   = "Withdraw Address";
 "withdraw_address_placehold"   = "Enter or paste address";
 
-"eos_withdraw_account" = "Withdrawal Account";
+"eos_withdraw_account" = "Withdraw Account";
 "eos_withdraw_account_placehold" = "Enter or paste address address";
 
 "withdraw_amount" = "Amount";
@@ -178,7 +188,7 @@
 "deposit_copy"     = "Copy Address";
 "deposti_get"      = "Get New Address";
 
-"alert_cancle"     = "CANCLE";
+"alert_cancle"     = "CANCEL";
 "alert_ensure"      = "CONFIRM";
 
 "withdraw_success"  = "Withdrawal request has been sent";
@@ -190,11 +200,13 @@
 "order_create_fail" = "Place order fail";
 
 
-"utils_address"      = "Withdrawal Address:";
-"utils_amount"       = "Amount:";
-"utils_withdrawfee"  = "Transfer Fee:";
-"utils_gatewayfee"   = "Gateway Fee:";
-"utils_receiveamount" = "Receive Amount:";
+"utils_address"      = "Withdrawal Address";
+"utils_amount"       = "Amount";
+"utils_withdrawfee"  = "Transfer Fee";
+"utils_gatewayfee"   = "Gateway Fee";
+"utils_receiveamount" = "Receive Amount";
+"withdraw_memo" = "Memo";
+
 
 "password_placeholder" = "Password";
 "tip_title"   = "Tip";
@@ -216,14 +228,15 @@
 "trade_history_total" = "Total";
 
 "setting_language"    = "English";
+"setting_help" = "Help&Feedback";
 
 "mark_order_book"     = "Order Book";
 "mark_trade_history"  = "Trade History";
 
-"my_history_amount"          = "Amount";
-"my_history_time"           = "Time";
-"my_history_state"          = "Done";
-"my_history_title"          = "Order History";
+"my_history_amount"   = "Amount";
+"my_history_time"     = "Time";
+"my_history_state"    = "Done";
+"my_history_title"    = "Order History";
 
 "order_history_first_title" = "Assert/Amount";
 "order_history_second_title" = "Filled/Price";
@@ -291,11 +304,13 @@
 "transfer_detail_mome" = "Memo";
 "transfer_detail_click" = "Click to view";
 "transfer_detail_nodata" = "None";
+"transfer_ensure_title" = "CONFIRMATION";
+
 
 //转账
 "transfer_title" = "Transfer";
 "transfer_transfer" = "Send";
-"transfer_account" = "Account Name";
+"transfer_account_title" = "Account";
 "transfer_account_pla" = "To Account name";
 "transfer_crypto" = "Crypto";
 "transfer_crypto_pla" = "Please select crypto type";
@@ -303,8 +318,14 @@
 "transfer_memo" = "Memo";
 "transfer_fee" = "Fee";
 "transfer_balance" = "Available";
+
 "picker_comfirm" = "Confirm";
-"transfer_unit_time" = "minutes";
+
+"transfer_unit_day" = "d";
+"transfer_unit_hour" = "h";
+"transfer_unit_minite" = "m";
+"transfer_unit_second" = "s";
+
 
 "transfer_failed" = "Transfer failed";
 "transfer_successed" = "Transfer successfully";
@@ -319,15 +340,164 @@
 "hello" = "Hello，";
 "deposit_withdraw" = "Deposit/Withdraw";
 "frozen" = "Frozen：";
+"get_white_list" = "Get Whitelist";
+"ETO_detail" = "ETO Details";
+"project_intro" = "Project Introduction";
+"project_website" = "Project Website";
+"user_agreement" = "《User Agreement》";
 
 //zsy end
 
-"recode_nodata" = "No record";
-"balance_nodata" = "No assert";
+"eto_project_detail_title" = "Project Details";
+
+
+"recode_nodata" = "No Record";
+"balance_nodata" = "No Asset";
 
 "Loading more" = "Loading more";
-"No more data" = "No more data";
+"No more data" = "No More Data";
 "Loading..." = "Loading...";
 "Pull to refresh" = "Pull to refresh";
 "Release to refresh" = "Release to refresh";
 
+"address_manager" = "Address Management";
+
+"address_asset" = "Crypto";
+"address_mark" = "Note";
+"address_add" = "Add";
+
+"transfer_account" = "Account";
+"transfer_account_name" = "Transfer Account";
+
+"address_or_account" = "Note/Account";
+"account_or_address" = "Note/Address";
+
+"account_exit" = "The account is already existed";
+"address_exit" = "The address is already existed";
+
+"account_title_add" = "Add Transfer Account";
+"address_title_add" = "Add Withdraw Address";
+"address_title_add_eos" = "Add Withdraw Account";
+
+"address_add_success" = "Added";
+"address_note_placeholder" = "Less than 15 characters";
+
+"choose_address" = "Select";
+"add_address" = "Add";
+
+"choose_account" = "Select";
+"add_account" = "Add";
+
+"address" = "Address";
+
+"withdraw_success_title" = "Withdraw applicatation has been sent.";
+"withdraw_success_content" = "Add this account to list?";
+
+"transfer_success_title" = "Transfer success";
+"transfer_success_content" = "Add to transfer account list?";
+
+"transfer_account_manager" = "Transfer Account";
+"withdraw_address_manager" = "Withdraw Address";
+
+"copy" = "Copy";
+"copied" = "Copied";
+
+"delete" = "Delete";
+"deleted" = "Deleted";
+
+
+"delete_confirm_address" = "Confirm to delete this address?";
+"delete_confirm_account" = "Confirm to delete this account?";
+"address_nodata"       = "No withdraw address";
+"account_nodata"       = "No withdraw account";
+"account_transfer_nodata"       = "No transfer account";
+
+"address_delete_confirm" = "CONFIRMATION";
+
+"hot_project" = "Popular ETOs";
+
+"eto_personal_cap" = "Personal Cap";
+"eto_subscription_unit" = "Subscription Unit";
+"eto_remaining" = "Remaining";
+"eto_min_subscription" = "Min.Subscription";
+"eto_subscribed" = "Subscribed";
+
+"eto_available" = "Available %@ %@";
+"eto_join" = "Join in ETO";
+"eto_project_detail" = "Project Details：";
+
+"eto_share" = "Share";
+"eto_records" = "ETO Records";
+"eto_record_receive" = "Receive Token";
+"eto_record_send" = "Join ETO";
+
+"eto_invalid_sub" = "Invalid Subscription";
+"eto_invalid_partly_sub" = "Subscription partly valid";
+"eto_refund" = "Refund";
+"eto_receive_success" = "Received";
+
+"eto_quantity" = "Quantity";
+
+"eto_user_agreenment" = "Terms and Conditions";
+
+
+
+"eto_project_finish" = "Ended";
+"eto_project_comming" = "Coming";
+"eto_project_progress" = "In Progress";
+
+"eto_project_time_finish" = "Ended：";
+"eto_project_time_comming" = "Left：";
+"eto_project_time_pre" = "In：";
+
+"eto_project_name" = "Project Name：";
+"eto_token_name" = "Token Name：";
+"eto_start_time" = "ETO Time：";
+"eto_end_time" = "End at：";
+"eto_start_at" = "Circulation on Cybex Starts at：";
+"eto_token_releasing_time" = "Token Releasing Time：";
+"eto_currency" = "Currency：";
+"eto_exchange_ratio" = "Exchange Ratio：";
+"eto_total_supply" = "Total Token Supply：";
+
+
+"eto_project_online" = "Official Website：";
+"eto_project_white_Paper" = "Whitepaper：";
+
+"eto_project_immediate" = "Immediate";
+
+"eto_project_reserve_now" = "Reserve Now";
+"eto_project_verifying" = "Verifying";
+"eto_project_stop_reserve" = "Stop Reserve";
+"eto_project_waiting" = "Waiting for ETO";
+"eto_project_join" = "Join ETO Now";
+"eto_project_rejected" = "Rejected";
+"eto_project_kyc" = "KYC Verification";
+"eto_project_login" = "Login";
+
+"eto_submit_title" = "You will join in ETO of %@";
+"eto_submit_check_error_1" = "Not enough";
+"eto_submit_check_error_2" = "beyond personal hard cap";
+"eto_submit_check_error_3" = "insufficient remaining quota";
+"eto_submit_check_error_4" = "must beyond minimum purchasing unit";
+"eto_submit_check_error_5" = "must purchase an integer multiple of minimum purchasing unit";
+"eto_submit_confirm" = "ETO Confirm";
+
+
+"eto_transfer_title" = "Verifying";
+"eto_transfer_content" = "Do not repeat transfers";
+
+"eto_invite_code_error" = "Please enter a valid invitation code";
+"eto_invite_code_title" = "Invitation code";
+
+"eto_time_less_minite" = "less than one minute";
+
+"eto_detail_user_agreement_error" = "Please check 《User Agreement》 first.";
+
+"eto_appointment_success" = "Successful appointment, please wait for the audit result patiently";
+
+"record_all" = "Deposit&withdraw records";
+
+"record_types" = "Types";
+"record_currency" = "Currency";
+"home_top_gainers" = "Top Gainers";

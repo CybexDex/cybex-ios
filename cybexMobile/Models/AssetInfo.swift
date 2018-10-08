@@ -8,6 +8,7 @@
 
 import Foundation
 import ObjectMapper
+import HandyJSON
 
 class AssetInfo : Mappable {
   var precision: Int = 0
@@ -95,5 +96,12 @@ extension AssetInfo: Equatable {
 struct  RMBPrices{
   var name : String      = ""
   var rmb_price : String = ""
-} 
+}
+
+
+
+struct ImportantMarketPair {
+  var base : String = ""
+  var quotes : [String] = [String]()
+}
 

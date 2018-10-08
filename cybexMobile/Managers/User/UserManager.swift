@@ -10,7 +10,6 @@ import Foundation
 import SwiftyJSON
 import CryptoSwift
 import KeychainAccess
-import FCUUID
 import RxCocoa
 import RxSwift
 import PromiseKit
@@ -98,7 +97,8 @@ extension UserManager {
   func logout() {
     BitShareCoordinator.cancelUserKey()
     
-    UserDefaults.standard.remove("com.nbltrust.cybex.username")
+    Defaults.remove(.username)
+    
     self.name.accept(nil)
     self.avatarString = nil
     self.keys = nil
@@ -136,12 +136,14 @@ extension UserManager {
     let request = GetAccountHistoryRequest(accountID: id) { (data) in
       if let data = data as? (fillOrders:[FillOrder],transferRecords:[TransferRecord]) {
         var fillorders = data.fillOrders
+        if !self.isLoginIn {
+          return
+        }
         if data.transferRecords.count == 0 {
           self.transferRecords.accept(nil)
         }
-        if fillorders.count == 0 || !self.isLoginIn {
+        if fillorders.count == 0  {
           self.fillOrder.accept(nil)
-          return
         }
         fillorders = fillorders.filter({
           let base_name = app_data.assetInfo[$0.fill_price.base.assetID]
@@ -161,7 +163,7 @@ extension UserManager {
               self.fillOrder.accept(result)
             }
           }, block_num: fillOrder.block_num)
-          CybexWebSocketService.shared.send(request: timeRequest)
+          CybexWebSocketService.shared.send(request: timeRequest,priority: Operation.QueuePriority.high)
         }
         
         let transferRecordList = data.transferRecords
@@ -322,8 +324,9 @@ extension UserManager {
     if let balances = data.balances {
       self.balances.accept(balances.filter({ (balance) -> Bool in
         let name = app_data.assetInfo[balance.asset_type]
-        return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
-          (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
+        return (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
+//        return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
+//          (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
       }))
       
     }else{
@@ -351,7 +354,8 @@ class UserManager {
   var disposeBag = DisposeBag()
   
   var isLoginIn : Bool {
-    if let name = UserDefaults.standard.object(forKey: "com.nbltrust.cybex.username") as? String {
+    let name = Defaults[.username]
+    if name.count > 0 {
       if self.name.value == nil {
         self.name.accept(name)
         self.avatarString = name.sha256()
@@ -369,9 +373,9 @@ class UserManager {
     
     func description() -> String {
       switch self {
-      case .normal:return R.string.localizable.frequency_normal.key.localized()
-      case .time:return R.string.localizable.frequency_time.key.localized()
-      case .WiFi:return R.string.localizable.frequency_wifi.key.localized()
+      case .normal:return R.string.localizable.frequency_normal.key
+      case .time:return R.string.localizable.frequency_time.key
+      case .WiFi:return R.string.localizable.frequency_wifi.key
       }
     }
   }
@@ -387,8 +391,8 @@ class UserManager {
       case .normal:self.refreshTime = 6
       case .time:self.refreshTime = 3
       case .WiFi:
-        let status = RealReachability.sharedInstance().currentReachabilityStatus()
-        if status == .RealStatusViaWiFi {
+        let status = reachability.connection
+        if status == .wifi {
           self.refreshTime = 3
         }else {
           self.refreshTime = 6
@@ -416,7 +420,34 @@ class UserManager {
   
   var timer:Repeater?
   
-  var limitOrderValue:Double = 0
+  var limitOrderValue : Double {
+    var _limitOrderValue:Double = 0
+    var _limitOrder_buy_value:Double = 0
+    if let limitOrder = limitOrder.value{
+      for limitOrder_value in limitOrder{
+        let assetA_info = app_data.assetInfo[limitOrder_value.sellPrice.base.assetID]
+        let assetB_info = app_data.assetInfo[limitOrder_value.sellPrice.quote.assetID]
+        
+        let (base,_) = calculateAssetRelation(assetID_A_name: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetID_B_name: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
+        let isBuy = base == ((assetA_info != nil) ? assetA_info!.symbol.filterJade : "")
+        
+        if isBuy {
+          if let eth_cyb = changeToETHAndCYB(limitOrder_value.sellPrice.base.assetID).cyb.toDouble() {
+            let buy_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale).doubleValue * eth_cyb
+            _limitOrderValue += buy_value
+            _limitOrder_buy_value += buy_value
+          }
+        }
+        else{
+          if let eth_cyb = changeToETHAndCYB(limitOrder_value.sellPrice.base.assetID).cyb.toDouble() {
+            let sell_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale).doubleValue * eth_cyb
+            _limitOrderValue += sell_value
+          }
+        }
+      }
+    }
+    return _limitOrderValue
+  }
   var limitOrder_buy_value: Double = 0
   
   var limit_reset_address_time : TimeInterval = 0
@@ -461,7 +492,7 @@ class UserManager {
       }
     }
     
-    limitOrderValue = _limitOrderValue
+//    limitOrderValue = _limitOrderValue
     limitOrder_buy_value = _limitOrder_buy_value
     
     return balance_values
@@ -500,7 +531,7 @@ class UserManager {
   
   
   private func saveName(_ name:String) {
-    UserDefaults.standard.set(name, forKey: "com.nbltrust.cybex.username")
+    Defaults[.username] = name
   }
   
   
@@ -519,7 +550,14 @@ class UserManager {
     var datas = [MyPortfolioData]()
     if let balances = self.balances.value {
       for balance in balances{
-        datas.append(MyPortfolioData.init(balance: balance)!)
+        if let foloiData = MyPortfolioData.init(balance: balance) {
+          if (foloiData.realAmount == "" || foloiData.realAmount.toDouble() == 0) && foloiData.limitAmount.contains("--") {
+            
+          }
+          else {
+            datas.append(foloiData)
+          }
+        }
       }
     }
     return datas

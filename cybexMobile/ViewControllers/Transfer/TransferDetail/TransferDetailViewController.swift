@@ -27,27 +27,13 @@ class TransferDetailViewController: BaseViewController {
   }
   
   func setupUI() {
-    self.title = R.string.localizable.transfer_detail()
+    self.title = R.string.localizable.transfer_detail.key.localized()
     self.headerView.data = data
     self.contentView.data = data
   }
-  
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
-    }
-  }
+
   
   override func configureObserveState() {
-    commonObserveState()
     
   }
 }

@@ -8,11 +8,12 @@
 
 import UIKit
 import ReSwift
+import NBLCommonModule
 
 protocol YourPortfolioCoordinatorProtocol {
   func pushToRechargeVC()
   func pushToWithdrawDepositVC()
-  func pushToTransferVC()
+  func pushToTransferVC(_ animate: Bool)
 }
 
 protocol YourPortfolioStateManagerProtocol {
@@ -31,6 +32,10 @@ class YourPortfolioCoordinator: AccountRootCoordinator {
         state: nil,
         middleware:[TrackingMiddleware]
     )
+    override func register() {
+        Broadcaster.register(YourPortfolioCoordinatorProtocol.self, observer: self)
+        Broadcaster.register(YourPortfolioStateManagerProtocol.self, observer: self)
+    }
 }
 
 extension YourPortfolioCoordinator: YourPortfolioCoordinatorProtocol {
@@ -50,11 +55,11 @@ extension YourPortfolioCoordinator: YourPortfolioCoordinatorProtocol {
     self.rootVC.pushViewController(vc, animated: true)
   }
   
-  func pushToTransferVC() {
+  func pushToTransferVC(_ animate: Bool) {
     let transferVC = R.storyboard.recode.transferViewController()!
     let coordinator = TransferCoordinator(rootVC: self.rootVC)
     transferVC.coordinator = coordinator
-    self.rootVC.pushViewController(transferVC, animated: true)
+    self.rootVC.pushViewController(transferVC, animated: animate)
   }
 }
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import NBLCommonModule
 
 protocol HomeCoordinatorProtocol {
   func openMarket(index:Int, currentBaseIndex: Int)
@@ -15,15 +16,12 @@ protocol HomeCoordinatorProtocol {
 
 protocol HomeStateManagerProtocol {
     var state: HomeState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<HomeState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
+    
+    func switchPageState(_ state:PageState)
 }
 
 class HomeCoordinator: HomeRootCoordinator {
-    lazy var creator = HomePropertyActionCreate()
-    
-    var store = Store<HomeState>(
+    var store = Store(
         reducer: HomeReducer,
         state: nil,
         middleware:[TrackingMiddleware]
@@ -45,12 +43,12 @@ extension HomeCoordinator: HomeCoordinatorProtocol {
     vc.coordinator = coordinator
     self.rootVC.pushViewController(vc, animated: true)
   }
+    
+ 
 }
 
 extension HomeCoordinator: HomeStateManagerProtocol {
-  func subscribe<SelectedState, S: StoreSubscriber>(
-      _ subscriber: S, transform: ((Subscription<HomeState>) -> Subscription<SelectedState>)?
-      ) where S.StoreSubscriberStateType == SelectedState {
-      store.subscribe(subscriber, transform: transform)
-  }
+    func switchPageState(_ state:PageState) {
+        self.store.dispatch(PageStateAction(state: state))
+    }
 }

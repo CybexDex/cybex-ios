@@ -22,7 +22,7 @@ enum settingPage {
 
 class SettingDetailViewController: BaseViewController {
  
-  var pageType:settingPage!
+  var pageType:settingPage = .language
   
   @IBOutlet weak var tableView: UITableView!
 
@@ -36,22 +36,7 @@ class SettingDetailViewController: BaseViewController {
     self.tableView.contentInset = UIEdgeInsetsMake(self.tableView.contentInset.top + 10, 0, 0, 0)
   }
 
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-        return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-            return false
-        })
-    }
-    
-    coordinator?.subscribe(loadingSubscriber) { sub in
-        return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-            return false
-        })
-    }
-  }
-
   override func configureObserveState() {
-    commonObserveState()
     
   }
 }
@@ -70,7 +55,7 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
     cell.accessoryView = UIImageView(image: #imageLiteral(resourceName: "ic_check_active_circle_24px"))
     
     switch self.pageType {
-    case .theme:
+    case settingPage.theme:
       if (indexPath.row == 0) {
         cell.textLabel?.localized_text = R.string.localizable.dark.key.localizedContainer()
       }
@@ -79,7 +64,7 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
       }
       
       cell.textLabel?.isHighlighted = ThemeManager.currentThemeIndex == indexPath.row
-    case .language:
+    case settingPage.language:
       cell.textLabel?.text = ["English", "简体中文"][indexPath.row]
       
       if indexPath.row == 0 && Localize.currentLanguage() == "en" {
@@ -105,7 +90,7 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
     let index  = indexPath.row
     
     switch self.pageType {
-    case .theme:
+    case settingPage.theme:
       self.coordinator?.popViewController(false)
       
       SwifterSwift.delay(milliseconds: 10) {
@@ -113,7 +98,7 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
         ThemeManager.setTheme(index: index)
       }
      
-    case .language:
+    case settingPage.language:
       self.coordinator?.popViewController(false)
 
       SwifterSwift.delay(milliseconds: 10) {

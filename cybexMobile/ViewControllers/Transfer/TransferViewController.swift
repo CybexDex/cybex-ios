@@ -14,154 +14,252 @@ import RxGesture
 import SwifterSwift
 
 class TransferViewController: BaseViewController {
-  
-  @IBOutlet weak var transferView: TransferView!
-  var coordinator: (TransferCoordinatorProtocol & TransferStateManagerProtocol)?
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setupUI()
-    getFee()
-  }
-  
-  func commonObserveState() {
-    coordinator?.subscribe(errorSubscriber) { sub in
-      return sub.select { state in state.errorMessage }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
+    
+    @IBOutlet weak var transferView: TransferView!
+    var account_name : String = ""
+    
+    var coordinator: (TransferCoordinatorProtocol & TransferStateManagerProtocol)?
+    
+    var isFetchFee : Bool = true
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+        getFee()
     }
     
-    coordinator?.subscribe(loadingSubscriber) { sub in
-      return sub.select { state in state.isLoading }.skipRepeats({ (old, new) -> Bool in
-        return false
-      })
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.transferView.accountView.reloadData()
     }
-  }
-  
-  override func configureObserveState() {
-    commonObserveState()
     
-    self.transferView.transferButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] tap in
-      guard let `self` = self else { return }
-      self.transferComfirm()
-    }).disposed(by: disposeBag)
+    override func configureObserveState() {
+        self.transferView.transferButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] tap in
+            guard let `self` = self else { return }
+            
+            self.clickTransferAction()
+        }).disposed(by: disposeBag)
+        
+        //按钮状态监听
+        Observable.combineLatest(self.coordinator!.state.accountValid.asObservable(),
+                                 self.coordinator!.state.amountValid.asObservable()).subscribe(onNext: {[weak self] (accountValid,amountValid) in
+                                    guard let `self` = self else { return }
+                                    if let _ = self.coordinator?.state.balance.value, let transferAmount = self.coordinator?.state.amount.value.toDouble() {
+                                        self.transferView.buttonIsEnable = accountValid == .validSuccessed && amountValid && transferAmount > 0
+                                    } else {
+                                        self.transferView.buttonIsEnable = false
+                                    }
+                                    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        //账户监听
+        self.coordinator!.state.accountValid.asObservable().subscribe(onNext: {[weak self] (status) in
+            guard let `self` = self else { return }
+            self.transferView.accountValidStatus = status
+            if status == .validFailed && !(self.coordinator?.state.account.value.isEmpty)!,self.transferView.accountView.textField.text!.count != 0 {
+                self.transferView.accountView.loading_state = .Fail
+//                self.showToastBox(false, message: R.string.localizable.transfer_account_unexist.key.localized())
+            }
+            else {
+                self.transferView.accountView.loading_state = .Success
+            }
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        //余额监听
+        self.coordinator!.state.amountValid.asObservable().subscribe(onNext: {[weak self] (result) in
+            guard let `self` = self else { return }
+            if !result, ((self.coordinator?.state.fee.value) != nil),self.coordinator?.state.balance.value != nil ,self.transferView.balance.count != 0{
+                self.showToastBox(false, message: R.string.localizable.transfer_balance_unenough.key.localized())
+            }
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        //币种及余额监听
+        self.coordinator!.state.balance.asObservable().subscribe(onNext: {[weak self] (balance) in
+            guard let `self` = self else { return }
+            if let balance = balance {
+                if let info = app_data.assetInfo[balance.asset_type] {
+                    self.transferView.crypto = info.symbol.filterJade
+                    self.transferView.precision = info.precision
+                    let realBalance = getRealAmountDouble(balance.asset_type, amount: balance.balance)
+                    self.transferView.balance = R.string.localizable.transfer_balance.key.localized() + realBalance.string(digits: info.precision) + " " +  (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!
+                }
+            }
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        //手续费监听
+        self.coordinator!.state.fee.asObservable().subscribe(onNext: {[weak self] (result) in
+            guard let `self` = self else { return }
+            if let data = result,let feeInfo = app_data.assetInfo[data.asset_id]{
+                let fee = data
+                self.transferView.fee = (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade
+            }
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        self.transferView.accountView.unitLabel.rx.tapGesture().when(.recognized).asObservable().subscribe(onNext: { [weak self](tap) in
+            guard let `self` = self else { return }
+            self.coordinator?.chooseOrAddAddress()
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        self.coordinator?.state.account.asObservable().skip(1).subscribe(onNext: { [weak self](account) in
+            guard let `self` = self else { return }
+            self.transferView.accountView.textField.text = account
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    }
     
-    //按钮状态监听
-    Observable.combineLatest(self.coordinator!.state.property.accountValid.asObservable(),
-                             self.coordinator!.state.property.amountValid.asObservable()).subscribe(onNext: {[weak self] (accountValid,amountValid) in
-                              guard let `self` = self else { return }
-                              if let _ = self.coordinator?.state.property.balance.value, let transferAmount = self.coordinator?.state.property.amount.value.toDouble() {
-                                self.transferView.buttonIsEnable = accountValid == .validSuccessed && amountValid && transferAmount > 0
-                              } else {
-                                self.transferView.buttonIsEnable = false
-                              }
-                              }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    func setupUI() {
+        self.title = R.string.localizable.transfer_title.key.localized()
+        self.configRightNavButton(R.image.ic_records_24_px())
+        self.configLeftNavigationButton(nil)
+    }
     
-    //账户监听
-    self.coordinator!.state.property.accountValid.asObservable().subscribe(onNext: {[weak self] (status) in
-      self?.transferView.accountValidStatus = status
-      if status == .validFailed && !(self?.coordinator?.state.property.account.value.isEmpty)! {
-        self?.showToastBox(false, message: R.string.localizable.transfer_account_unexist.key.localized())
-      }
-    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    
-    //余额监听
-    self.coordinator!.state.property.amountValid.asObservable().subscribe(onNext: {[weak self] (result) in
-      if !result, ((self?.coordinator?.state.property.fee.value) != nil) {
-        self?.showToastBox(false, message: R.string.localizable.transfer_balance_unenough.key.localized())
-      }
-    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    
-    //币种及余额监听
-    self.coordinator!.state.property.balance.asObservable().subscribe(onNext: {[weak self] (balance) in
-      guard let `self` = self else { return }
-      if let balance = balance {
-        if let info = app_data.assetInfo[balance.asset_type] {
-          self.transferView.crypto = info.symbol.filterJade
-          self.transferView.precision = info.precision
-          let realBalance = getRealAmountDouble(balance.asset_type, amount: balance.balance)
-          self.transferView.balance = R.string.localizable.transfer_balance.key.localized() + realBalance.string(digits: info.precision) + (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!
+    func getFee() {
+        if !UserManager.shared.isLocked {
+            self.coordinator?.validAmount()
         }
-      }
-      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    
-    //手续费监听
-    self.coordinator!.state.property.fee.asObservable().subscribe(onNext: {[weak self] (result) in
-      guard let `self` = self else { return }
-      if let data = result,let feeInfo = app_data.assetInfo[data.asset_id]{
-        let fee = data
-        self.transferView.fee = (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade
-      }
-    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-  }
-  
-  func setupUI() {
-    self.title = R.string.localizable.transfer_title.key.localized()
-    self.configRightNavButton(R.image.ic_records_24_px())
-  }
-  
-  func getFee() {
-    self.coordinator?.validAmount()
-  }
-  
-  func transferComfirm() {
-    if let account = self.transferView.accountView.textField.text,
-      let balance = self.coordinator?.state.property.balance.value,
-      let amount = self.transferView.quantityView.textField.text,
-      let memo = self.transferView.memoView.textView.text,
-      let fee = self.coordinator?.state.property.fee.value {
-      if let feeInfo = app_data.assetInfo[fee.asset_id] {
-        let data = getTransferInfo(account, quanitity: amount + (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!, fee: (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade, memo: memo)
-        showConfirm(R.string.localizable.withdraw_ensure_title.key.localized(), attributes: data)
-      }
+        else {
+            self.showPasswordBox()
+        }
     }
-  }
-  
-  override func rightAction(_ sender: UIButton) {
-    self.coordinator?.pushToRecordVC()
-  }
+    
+    func clickTransferAction() {
+        self.view.endEditing(true)
+        if self.transferView.accountView.loading_state != .Success || self.coordinator!.state.accountValid.value != AccountValidStatus.validSuccessed {
+            self.transferView.accountView.loading_state = .normal
+            return
+        }
+        if !UserManager.shared.isLocked {
+            self.transferComfirm()
+        }
+        else {
+            self.showPasswordBox()
+        }
+    }
+    
+    func transferComfirm() {
+        if let account = self.transferView.accountView.textField.text,
+            let balance = self.coordinator?.state.balance.value,
+            let amount = self.transferView.quantityView.textField.text,
+            let memo = self.transferView.memoView.textView.text,
+            let fee = self.coordinator?.state.fee.value {
+            if let feeInfo = app_data.assetInfo[fee.asset_id] {
+                let data = getTransferInfo(account, quanitity: amount + " " + (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!, fee: (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade, memo: memo)
+                showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data)
+            }
+        }
+    }
+    
+    override func rightAction(_ sender: UIButton) {
+        self.coordinator?.pushToRecordVC()
+    }
 }
 
 
 extension TransferViewController {
-  override func returnEnsureAction() {
-    if !UserManager.shared.isLocked {
-      self.startLoading()
-      self.coordinator?.transfer({ (data) in
+    override func passwordDetecting() {
+        self.startLoading()
+    }
+    
+    override func passwordPassed(_ passed: Bool) {
         self.endLoading()
-        main {
-          ShowToastManager.shared.hide()
-          if self.isVisible{
-            if String(describing: data) == "<null>"{
-              self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())
-              SwifterSwift.delay(milliseconds: 100) {
-                self.coordinator?.pop()
-              }
-            }else{
-              self.showToastBox(false, message: R.string.localizable.transfer_failed.key.localized())
+        if passed {
+            if self.isFetchFee == true {
+                self.isFetchFee = false
+                self.coordinator?.validAmount()
             }
-          }
+            else {
+                self.transferComfirm()
+                
+            }
         }
-      })
+        else {
+            self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+        }
     }
-    else {
-      self.showPasswordBox()
+    
+    
+    override func returnEnsureAction() {
+        ShowToastManager.shared.hide()
+        if !UserManager.shared.isLocked {
+
+            if !UserManager.shared.isWithDraw, self.coordinator?.state.memo.value.count != 0{
+                showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
+                return
+            }
+            
+            self.startLoading()
+            self.coordinator?.transfer({ [weak self](data) in
+                guard let `self` = self else { return }
+                self.endLoading()
+                main {
+                    ShowToastManager.shared.hide()
+                    if self.isVisible{
+                        if String(describing: data) == "<null>"{
+                            if AddressManager.shared.containAddressOfTransfer(self.coordinator!.state.account.value).0 == false {
+                                self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.transfer_success_title.key.localized(), content: R.string.localizable.transfer_success_content.key.localized())
+                                self.account_name = self.coordinator!.state.account.value
+                            }
+                            else {
+                                self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())
+                                self.coordinator?.reopenAction()
+                            }
+                        }else{
+                            self.showToastBox(false, message: R.string.localizable.transfer_failed.key.localized())
+                        }
+                    }
+                }
+            })
+        }
+        else {
+            SwifterSwift.delay(milliseconds: 300) {
+                self.showPasswordBox()
+            }
+        }
     }
-  }
-  
-  @objc func selectCrypto(_ data: [String : Any]) {
-    self.coordinator?.showPicker()
-  }
-  
-  @objc func account(_ data: [String : Any]) {
-    self.coordinator?.setAccount(data["content"] as! String)
-  }
-  
-  @objc func amount(_ data: [String : Any]) {
-    self.coordinator?.setAmount(data["content"] as! String)
-  }
-  
-  @objc func memo(_ data: [String : Any]) {
-    self.coordinator?.setMemo(data["content"] as! String)
-  }
+    
+    override func returnEnsureImageAction() {
+       
+        let transferAddress = TransferAddress(id: AddressManager.shared.getUUID(), name: "", address: self.account_name)
+        self.coordinator?.reopenAction()
+        self.coordinator?.openAddTransferAddress(transferAddress)
+    }
+    
+    override func cancelImageAction(_ sender : CybexTextView) {
+        if sender.title.isHidden == true {
+            self.coordinator?.reopenAction()
+        }
+    }
+    
+    
+    @objc func selectCrypto(_ data: [String : Any]) {
+        self.coordinator?.showPicker()
+    }
+    
+    @objc func account(_ data: [String : Any]) {
+        if let text = data["content"] as? String {
+            self.coordinator?.dispatchAccountAction(AccountValidStatus.unValided)
+            if text.count != 0 {
+                self.coordinator?.setAccount(text)
+            }
+            else {
+                self.transferView.accountView.loading_state = .normal
+            }
+        }
+    }
+    
+    @objc func amount(_ data: [String : Any]) {
+        self.coordinator?.setAmount(data["content"] as! String,canFetchFee:!UserManager.shared.isLocked)
+        if UserManager.shared.isLocked {
+            self.isFetchFee = true
+            self.showPasswordBox()
+        }
+    }
+    
+    @objc func memo(_ data: [String : Any]) {
+        if !UserManager.shared.isWithDraw{
+            showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
+            return
+        }
+        self.coordinator?.setMemo(data["content"] as! String,canFetchFee:!UserManager.shared.isLocked)
+        if UserManager.shared.isLocked {
+            self.isFetchFee = true
+            self.showPasswordBox()
+        }
+    }
 }

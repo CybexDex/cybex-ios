@@ -30,9 +30,9 @@ static void _set_transfer_operation(
                                     transfer_operation& o,
                                     unsigned_int from_id, /* instance id of from account */
                                     unsigned_int to_id, /* instance id of to account */
-                                    int amount, /* amount to be transfered */
+                                    amount_type amount, /* amount to be transfered */
                                     unsigned_int asset_id, /* instance id of asset to be transfered */
-                                    int fee_amount, /* amount of fee */
+                                    amount_type fee_amount, /* amount of fee */
                                     unsigned_int fee_asset_id, /* instance id of asset to pay fee */
                                     string memo, /* memo data to be transfered, if no memo data, just use empty string */
                                     string from_memo_pub_key, /* public memo, in base58 str */
@@ -68,9 +68,9 @@ string transfer(
                 string chain_id_str, /* chain id in base58 */
                 unsigned_int from_id, /* instance id of from account */
                 unsigned_int to_id, /* instance id of to account */
-                int amount, /* amount to be transfered */
+                amount_type amount, /* amount to be transfered */
                 unsigned_int asset_id, /* instance id of asset to be transfered */
-                int fee_amount, /* amount of fee */
+                amount_type fee_amount, /* amount of fee */
                 unsigned_int fee_asset_id, /* instance id of asset to pay fee */
                 string memo, /* memo data to be transfered, if no memo data, just use empty string */
                 string from_memo_pub_key, /* public memo, in base58 str */
@@ -97,9 +97,9 @@ string transfer(
 string get_transfer_op_json(
                             unsigned_int from_id, /* instance id of from account */
                             unsigned_int to_id, /* instance id of to account */
-                            int amount, /* amount to be transfered */
+                            amount_type amount, /* amount to be transfered */
                             unsigned_int asset_id, /* instance id of asset to be transfered */
-                            int fee_amount, /* amount of fee */
+                            amount_type fee_amount, /* amount of fee */
                             unsigned_int fee_asset_id, /* instance id of asset to pay fee */
                             string memo, /* memo data to be transfered, if no memo data, just use empty string */
                             string from_memo_pub_key, /* public memo */
@@ -117,11 +117,11 @@ void _set_limit_order_create_operation(
                                        unsigned_int seller_id, /* instance id of seller account */
                                        uint32_t order_expiration,
                                        unsigned_int sell_asset_id, /* instance id fo asset to be sold */
-                                       int sell_amount, /* amount to be sold */
+                                       amount_type sell_amount, /* amount to be sold */
                                        unsigned_int receive_asset_id, /* instance id of asset to receive */
-                                       int min_to_receive, /* min asset to receive */
+                                       amount_type min_to_receive, /* min asset to receive */
                                        int fill_or_kill, /* 1 for true, 0 for false */
-                                       int fee_amount, /* amount of fee */
+                                       amount_type fee_amount, /* amount of fee */
                                        unsigned_int fee_asset_id /* instance id of asset to pay fee*/
 )
 {
@@ -144,11 +144,11 @@ string limit_order_create(
                           unsigned_int seller_id, /* instance id of seller account */
                           uint32_t order_expiration,
                           unsigned_int sell_asset_id, /* instance id fo asset to be sold */
-                          int sell_amount, /* amount to be sold */
+                          amount_type sell_amount, /* amount to be sold */
                           unsigned_int receive_asset_id, /* instance id of asset to receive */
-                          int min_to_receive, /* min asset to receive */
+                          amount_type min_to_receive, /* min asset to receive */
                           int fill_or_kill, /* 1 for true, 0 for false */
-                          int fee_amount, /* amount of fee */
+                          amount_type fee_amount, /* amount of fee */
                           unsigned_int fee_asset_id /* instance id of asset to pay fee*/
 )
 { try {
@@ -173,11 +173,11 @@ string get_limit_order_create_json(
                                    unsigned_int seller_id, /* instance id of seller account */
                                    uint32_t order_expiration,
                                    unsigned_int sell_asset_id, /* instance id fo asset to be sold */
-                                   int sell_amount, /* amount to be sold */
+                                   amount_type sell_amount, /* amount to be sold */
                                    unsigned_int receive_asset_id, /* instance id of asset to receive */
-                                   int min_to_receive, /* min asset to receive */
+                                   amount_type min_to_receive, /* min asset to receive */
                                    int fill_or_kill, /* 1 for true, 0 for false */
-                                   int fee_amount, /* amount of fee */
+                                   amount_type fee_amount, /* amount of fee */
                                    unsigned_int fee_asset_id /* instance id of asset to pay fee*/
 )
 { try {
@@ -192,7 +192,7 @@ static void _set_cancel_order_operation(
                                         limit_order_cancel_operation &o,
                                         unsigned_int order_id, /* instance id of order */
                                         unsigned_int fee_paying_account_id, /* instance id of fee paying account */
-                                        int fee_amount, /* amount of fee */
+                                        amount_type fee_amount, /* amount of fee */
                                         unsigned_int fee_asset_id /* instance id of asset to pay fee */
 )
 {
@@ -210,7 +210,7 @@ string cancel_order(
                     
                     unsigned_int order_id, /* instance id of order */
                     unsigned_int fee_paying_account_id, /* instance id of fee paying account */
-                    int fee_amount, /* amount of fee */
+                    amount_type fee_amount, /* amount of fee */
                     unsigned_int fee_asset_id /* instance id of asset to pay fee */
 )
 { try {
@@ -234,7 +234,7 @@ string cancel_order(
 string get_cancel_order_json(
                              unsigned_int order_id, /* instance id of order */
                              unsigned_int fee_paying_account_id, /* instance id of fee paying account */
-                             int fee_amount, /* amount of fee */
+                             amount_type fee_amount, /* amount of fee */
                              unsigned_int fee_asset_id /* instance id of asset to pay fee */
 )
 { try {
@@ -260,10 +260,10 @@ string cybex_gateway_query(
   digest_type::encoder enc;
   
   trx.op.accountName = accountName;
-  trx.op.asset = asset;
-  trx.op.fundType = fundType;
-  trx.op.size = size;
-  trx.op.offset = offset;
+//  trx.op.asset = asset;
+//  trx.op.fundType = fundType;
+//  trx.op.size = size;
+//  trx.op.offset = offset;
   trx.op.expiration = expiration; //fc::time_point_sec(expiration);
   
   fc::ecc::private_key active_priv_key = get_private_key("");

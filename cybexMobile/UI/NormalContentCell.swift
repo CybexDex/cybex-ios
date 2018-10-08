@@ -25,7 +25,7 @@ class NormalContentCell: BaseTableViewCell {
   
   override func setup(_ data: Any?, indexPath: IndexPath) {
     if let data = data as? AccountViewModel {
-      cellView.name_text = data.name
+      cellView.name_text_origin = data.name
       cellView.index = indexPath.row
       cellView.leftIconImg = data.leftImage
       cellView.rightIconName = selectedIndex == indexPath.row ? "icArrowLight24Px" : "icArrowLight24Px"

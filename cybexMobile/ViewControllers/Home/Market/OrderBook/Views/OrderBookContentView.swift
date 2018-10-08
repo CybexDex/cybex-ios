@@ -32,10 +32,10 @@ class OrderBookContentView: UIView {
       self.sellVolume.font = UIFont.systemFont(ofSize: 10)
     }
     
-    self.buyPrice.locali =  R.string.localizable.orderbook_buy_price.key.localized()
-    self.buyVolume.locali = R.string.localizable.orderbook_volume.key.localized()
-    self.sellPrice.locali = R.string.localizable.orderbook_sell_price.key.localized()
-    self.sellVolume.locali = R.string.localizable.orderbook_volume.key.localized()
+    self.buyPrice.locali =  R.string.localizable.orderbook_buy_price.key
+    self.buyVolume.locali = R.string.localizable.orderbook_volume.key
+    self.sellPrice.locali = R.string.localizable.orderbook_sell_price.key
+    self.sellVolume.locali = R.string.localizable.orderbook_volume.key
     
     let cell = String.init(describing: OrderBookCell.self)
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)  }

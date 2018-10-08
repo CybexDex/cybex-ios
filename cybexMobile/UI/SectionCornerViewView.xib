@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SectionCornerViewView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="shadowView" destination="JpB-cq-9nS" id="Gru-MO-S1L"/>
+                <outlet property="stackView" destination="0sv-6y-sqJ" id="Szm-vW-9XH"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="WqU-T4-l5a">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="386"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JpB-cq-9nS" customClass="CornerAndShadowView" customModule="cybexMobile" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="386"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8oc-cE-Nm0">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="386"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0sv-6y-sqJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="386"/>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="0sv-6y-sqJ" firstAttribute="top" secondItem="8oc-cE-Nm0" secondAttribute="top" id="8Bz-Dz-zq7"/>
+                                <constraint firstAttribute="trailing" secondItem="0sv-6y-sqJ" secondAttribute="trailing" id="B7X-70-ok9"/>
+                                <constraint firstItem="0sv-6y-sqJ" firstAttribute="leading" secondItem="8oc-cE-Nm0" secondAttribute="leading" id="C05-tu-YqD"/>
+                                <constraint firstAttribute="bottom" secondItem="0sv-6y-sqJ" secondAttribute="bottom" id="iLi-2F-PyO"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="8oc-cE-Nm0" firstAttribute="leading" secondItem="JpB-cq-9nS" secondAttribute="leading" id="ITI-2L-nkZ"/>
+                        <constraint firstItem="8oc-cE-Nm0" firstAttribute="top" secondItem="JpB-cq-9nS" secondAttribute="top" id="bMX-s9-mpv"/>
+                        <constraint firstAttribute="bottom" secondItem="8oc-cE-Nm0" secondAttribute="bottom" id="ex5-lz-4vX"/>
+                        <constraint firstAttribute="trailing" secondItem="8oc-cE-Nm0" secondAttribute="trailing" id="mGg-fo-hnm"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="spread">
+                            <real key="value" value="-4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="newCornerRadius">
+                            <real key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="newShadowRadius">
+                            <real key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="size" keyPath="newShadowOffset">
+                            <size key="value" width="0.0" height="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="newSpread">
+                            <real key="value" value="-4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="newShadowOpcity">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="newTheme1ShadowColor">
+                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="newTheme2ShadowColor">
+                            <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="s23-za-Fff" firstAttribute="bottom" secondItem="JpB-cq-9nS" secondAttribute="bottom" id="CiQ-MA-daR"/>
+                <constraint firstItem="JpB-cq-9nS" firstAttribute="top" secondItem="s23-za-Fff" secondAttribute="top" id="Ggk-sM-he3"/>
+                <constraint firstItem="s23-za-Fff" firstAttribute="trailing" secondItem="JpB-cq-9nS" secondAttribute="trailing" id="abf-pF-8Vm"/>
+                <constraint firstItem="JpB-cq-9nS" firstAttribute="leading" secondItem="s23-za-Fff" secondAttribute="leading" id="qdl-kf-LDZ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="s23-za-Fff"/>
+            <point key="canvasLocation" x="-70.5" y="229"/>
+        </view>
+    </objects>
+</document>

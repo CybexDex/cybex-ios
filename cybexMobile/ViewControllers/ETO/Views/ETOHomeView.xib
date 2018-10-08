@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ETOHomeView" customModule="cybexMobile" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="Mk1-om-Gmu" id="h3T-TH-56n"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="piM-xb-e7v">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Mk1-om-Gmu">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                            <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="F60-S3-4zY"/>
+                        <outlet property="delegate" destination="-1" id="PLt-sf-mfC"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Mk1-om-Gmu" firstAttribute="top" secondItem="piM-xb-e7v" secondAttribute="top" id="6LZ-2s-rpc"/>
+                <constraint firstItem="7rj-Ss-YUG" firstAttribute="bottom" secondItem="Mk1-om-Gmu" secondAttribute="bottom" id="9EB-9F-J3R"/>
+                <constraint firstItem="7rj-Ss-YUG" firstAttribute="trailing" secondItem="Mk1-om-Gmu" secondAttribute="trailing" id="KEe-0t-58V"/>
+                <constraint firstItem="Mk1-om-Gmu" firstAttribute="leading" secondItem="7rj-Ss-YUG" secondAttribute="leading" id="eFW-th-i4s"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="7rj-Ss-YUG"/>
+            <point key="canvasLocation" x="-318" y="-96"/>
+        </view>
+    </objects>
+</document>

@@ -66,7 +66,6 @@ class CybexPasswordView: UIView {
     setup()
   }
   
-  
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     loadFromXIB()

@@ -1,0 +1,12 @@
+github "sberrevoets/SDCAlertView"
+github "konkab/AlamofireNetworkActivityLogger"
+github "xmartlabs/XLPagerTabStrip"
+github "eggswift/ESTabBarController"
+git "https://github.com/Moya/Moya" "12.0.0-beta.1"
+github "onevcat/Kingfisher"
+git "https://github.com/alibaba/HandyJSON" "4.2.0-beta1"
+github "ReSwift/ReSwift"
+github "ArtSabintsev/Guitar"
+git "https://github.com/phpmaple/SocketRocket" "master"
+
+git "https://github.com/phpmaple/NBLCommonModule" "master"
