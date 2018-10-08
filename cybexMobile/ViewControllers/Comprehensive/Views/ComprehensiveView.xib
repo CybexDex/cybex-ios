@@ -63,6 +63,7 @@
                                         </view>
                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-dQ-b1J" customClass="ComprehensiveItemsView" customModule="cybexMobile" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="226" width="375" height="90"/>
+
                                         </view>
                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EZn-fH-M19">
                                             <rect key="frame" x="0.0" y="316" width="375" height="457"/>

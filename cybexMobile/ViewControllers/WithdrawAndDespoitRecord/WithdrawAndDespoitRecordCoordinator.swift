@@ -70,6 +70,8 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
         if let vc = self.rootVC.topViewController as? WithdrawAndDespoitRecordViewController {
             for childrenVC in vc.childViewControllers {
                 if let childVC = childrenVC as? RechargeRecodeViewController {
+                    childVC.tableView.es.resetNoMoreData()
+                    childVC.isNoMoreData = false
                     switch index {
                     case .Asset:
                         if info == R.string.localizable.openedAll.key.localized() {

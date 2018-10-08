@@ -18,21 +18,18 @@ class RechargeRecodeViewController: BaseViewController {
     
     var assetInfo: AssetInfo? {
         didSet{
-            self.tableView.es.resetNoMoreData()
-            self.isNoMoreData = false
         }
     }
     var data: [Record] = [Record]()
     var isNoMoreData: Bool = false
     var record_type: fundType = .ALL{
         didSet{
-            self.tableView.es.resetNoMoreData()
-            self.isNoMoreData = false
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUI()
         setupEvent()
         fetchRecords()

@@ -17,12 +17,12 @@ protocol OrderBookStateManagerProtocol {
     var state: OrderBookState { get }
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<OrderBookState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
-  
-  func resetData(_ pair:Pair)
-
-  func fetchData(_ pair:Pair)
-  func updateMarketListHeight(_ height:CGFloat)
+        ) where S.StoreSubscriberStateType == SelectedState
+    
+    func resetData(_ pair:Pair)
+    
+    func fetchData(_ pair:Pair)
+    func updateMarketListHeight(_ height:CGFloat)
 }
 
 class OrderBookCoordinator: HomeRootCoordinator {
@@ -50,28 +50,27 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
-  
-  func resetData(_ pair:Pair) {
-    self.store.dispatch(FetchedLimitData(data:[], pair:pair))
-  }
-  
-  func fetchData(_ pair:Pair) {
-    if CybexWebSocketService.shared.overload() {
-      return
+    
+    func resetData(_ pair:Pair) {
+        self.store.dispatch(FetchedLimitData(data:[], pair:pair))
     }
-    store.dispatch(creator.fetchLimitOrders(with: pair, callback: {[weak self] (data) in
-      guard let `self` = self else { return }
-      
-      if let data = data as? [LimitOrder] {
-        self.store.dispatch(FetchedLimitData(data:data, pair:pair))
-      }
-    }))
-  }
-  
-  func updateMarketListHeight(_ height:CGFloat) {
-    if let vc = self.rootVC.viewControllers[self.rootVC.viewControllers.count - 1] as? MarketViewController {
-      vc.pageContentViewHeight.constant = height + 50
+    
+    func fetchData(_ pair:Pair) {
+        if CybexWebSocketService.shared.overload() {
+            return
+        }
+        store.dispatch(creator.fetchLimitOrders(with: pair, callback: {[weak self] (data) in
+            guard let `self` = self else { return }
+            
+            if let data = data as? [LimitOrder] {
+                self.store.dispatch(FetchedLimitData(data:data, pair:pair))
+            }
+        }))
     }
-  }
-
+    
+    func updateMarketListHeight(_ height:CGFloat) {
+        if let vc = self.rootVC.viewControllers[self.rootVC.viewControllers.count - 1] as? MarketViewController {
+            vc.pageContentViewHeight.constant = height + 50
+        }
+    }
 }

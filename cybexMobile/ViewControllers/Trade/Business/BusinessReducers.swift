@@ -42,7 +42,6 @@ func BusinessPropertyReducer(_ state: BusinessPropertyState?, action: Action) ->
     default:
         break
     }
-    
     return state
 }
 
