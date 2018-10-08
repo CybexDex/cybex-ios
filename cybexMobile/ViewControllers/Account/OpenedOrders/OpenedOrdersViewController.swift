@@ -35,6 +35,7 @@ class OpenedOrdersViewController: BaseViewController {
     
     var containerView:UIView?
     var order:LimitOrder?
+    var cancleOrderInfo: [String:Any]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +103,13 @@ class OpenedOrdersViewController: BaseViewController {
                         let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
                         priceInfo =  (baseAmount / quoteAmount).string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
                         let amounts = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
-                        let total = amounts * (baseAmount / quoteAmount)
+                        var total: Decimal = 0
+                        if order.forSale == order.sellPrice.base.amount {
+                            total = baseAmount
+                        }
+                        else {
+                            total = amounts * (baseAmount / quoteAmount)
+                        }
                         totalInfo = total.string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
                         amountInfo = amounts.string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
                     }

@@ -86,7 +86,6 @@ class OpenedOrdersView:  UIView{
                         if self.basePriceView.isHidden == false{
                             self.price.text = baseAmount.string(digits:  base_info.precision,roundingMode:.down) + " " + base_info.symbol.filterJade
                             self.basePrice.text = base_price.string(digits: base_info.precision,roundingMode:.down) + " " + base_info.symbol.filterJade
-                            
                         }else{
                             self.price.text = base_price.string(digits: base_info.precision,roundingMode:.down) + " " + base_info.symbol.filterJade
                         }
