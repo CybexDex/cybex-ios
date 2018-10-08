@@ -87,7 +87,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
             contentView?.viewType = view_type.init(rawValue: self.VC_TYPE) ?? view_type.homeContent
             self.view.addSubview(contentView!)
             contentView?.edgesToDevice(vc:self, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
-         
+            
         }else{
             businessTitleView = BusinessTitleView(frame: self.view.bounds)
             self.view.addSubview(businessTitleView!)
@@ -149,6 +149,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
 extension HomeViewController {
     @objc func cellClicked(_ data:[String: Any]) {
+        
         if VC_TYPE == view_type.homeContent.rawValue {//首页
             if let index = data["index"] as? Int {
                 self.coordinator?.openMarket(index:index, currentBaseIndex:self.contentView!.currentBaseIndex)
@@ -156,12 +157,15 @@ extension HomeViewController {
         }
         else if VC_TYPE == view_type.Comprehensive.rawValue {
             if let index = data["index"] as? Int {
-                let buckets = app_data.filterTopgainers()[index]
-                
-                if let baseIndex = AssetConfiguration.market_base_assets.firstIndex(of: buckets.base) {
-                    let markets = app_data.filterQuoteAsset(buckets.base)
-                    if let curIndex = markets.firstIndex(of: buckets) {
-                        self.coordinator?.openMarket(index: curIndex, currentBaseIndex:baseIndex)
+                let datas = app_data.filterTopgainers()
+                if datas.count > index {
+                    let buckets = app_data.filterTopgainers()[index]
+                    
+                    if let baseIndex = AssetConfiguration.market_base_assets.firstIndex(of: buckets.base) {
+                        let markets = app_data.filterQuoteAsset(buckets.base)
+                        if let curIndex = markets.firstIndex(of: buckets) {
+                            self.coordinator?.openMarket(index: curIndex, currentBaseIndex:baseIndex)
+                        }
                     }
                 }
             }

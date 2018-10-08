@@ -31,7 +31,6 @@ class OrderBookViewController: BaseViewController {
             guard let pair = pair else { return }
             if self.tradeView != nil {
                 //        self.coordinator?.resetData(pair)
-                
                 showMarketPrice()
             }
             self.coordinator?.fetchData(pair)
@@ -77,7 +76,6 @@ class OrderBookViewController: BaseViewController {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] notification in
             guard let `self` = self else { return }
             self.setTopTitle()
-            
         })
     }
     deinit{

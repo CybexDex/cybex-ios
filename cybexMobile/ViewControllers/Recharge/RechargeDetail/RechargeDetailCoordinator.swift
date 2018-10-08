@@ -63,9 +63,8 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
     func openWithdrawRecodeList(_ asset_id : String) {
         if let vc = R.storyboard.recode.rechargeRecodeViewController() {
             vc.coordinator = RechargeRecodeCoordinator(rootVC: self.rootVC)
-            vc.view.backgroundColor = vc.view.backgroundColor
-            vc.assetInfo = app_data.assetInfo[asset_id]
             vc.record_type = .WITHDRAW
+            vc.assetInfo = app_data.assetInfo[asset_id]
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
