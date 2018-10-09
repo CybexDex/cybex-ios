@@ -197,18 +197,17 @@ extension ComprehensiveViewController {
     }
     
     func openUrl(_ url: String) {
-        if url.contains("https://") || url.contains("http://") {
-            self.coordinator?.openWebVCUrl(url)
-        }
-        else {
+        if url.contains("cybexapp://") {
             if !UserManager.shared.isLoginIn {
                 app_coodinator.showLogin()
                 return
             }
-            if url.count == 0 {
-                return
-            }
             openPage(url)
+        }
+        else {
+            if url.contains("http://") || url.contains("https://") {
+                self.coordinator?.openWebVCUrl(url)
+            }
         }
     }
 }
