@@ -65,9 +65,10 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         super.viewDidLoad()
         setupUI()
         
-        if VC_TYPE == view_type.homeContent.rawValue {
-            handlerUpdateVersion(nil)
-        }
+//        if VC_TYPE == view_type.homeContent.rawValue {
+//            handlerUpdateVersion(nil)
+//        }
+        
     }
     
     func setupUI() {
