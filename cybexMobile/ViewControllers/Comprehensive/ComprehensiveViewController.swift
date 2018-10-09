@@ -34,7 +34,6 @@ class ComprehensiveViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.setupNavi()
     }
-    
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
