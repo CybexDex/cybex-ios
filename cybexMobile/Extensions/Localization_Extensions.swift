@@ -164,14 +164,14 @@ final class StateValueContainer: ValueContainer {
   
   var values = ValuesType()
   
-  convenience init?(picker: ValueContainer?, withState state: UIControlState) {
+    convenience init?(picker: ValueContainer?, withState state: UIControl.State) {
     guard let picker = picker else { return nil }
     
     self.init(v: { 0 })
     values[state.rawValue] = picker
   }
   
-  func setPicker(_ picker: ValueContainer?, forState state: UIControlState) -> Self {
+    func setPicker(_ picker: ValueContainer?, forState state: UIControl.State) -> Self {
     values[state.rawValue] = picker
     return self
   }
@@ -248,7 +248,7 @@ extension NSObject {
     }
     else if let statePicker = picker as? StateValueContainer {
       let setState = unsafeBitCast(method(for: sel), to: setLocalizedTextForStateIMP.self)
-      statePicker.values.forEach { setState(self, sel, ($1.value()! as! String).localized(), UIControlState(rawValue: $0)) }
+        statePicker.values.forEach { setState(self, sel, ($1.value()! as! String).localized(), UIControl.State(rawValue: $0)) }
     }
     else if let statePicker = picker as? SegmentValueContainer {
       let setState = unsafeBitCast(method(for: sel), to: setLocalizedTextForSegmentIMP.self)
@@ -260,7 +260,7 @@ extension NSObject {
     
   }
   fileprivate typealias setLocalizedTextIMP        = @convention(c) (NSObject, Selector, String) -> Void
-  fileprivate typealias setLocalizedTextForStateIMP       = @convention(c) (NSObject, Selector, String, UIControlState) -> Void
+    fileprivate typealias setLocalizedTextForStateIMP       = @convention(c) (NSObject, Selector, String, UIControl.State) -> Void
   fileprivate typealias setLocalizedTextForSegmentIMP       = @convention(c) (NSObject, Selector, String, Int) -> Void
 
 }

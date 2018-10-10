@@ -86,7 +86,7 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
         //    tradeVC.customPresentViewController(presenter, viewController: vc, animated: true, completion: nil)
         
         
-        tradeVC.addChildViewController(vc)
+        tradeVC.addChild(vc)
         
         tradeVC.view.addSubview(homeView)
         vc.pair = tradeVC.pair
@@ -96,7 +96,7 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
         homeView.rightToSuperview(nil, offset: 0, relation: .equal, priority: .required, isActive:true, usingSafeArea: true)
         homeView.height(397)
         
-        vc.didMove(toParentViewController: tradeVC)
+        vc.didMove(toParent: tradeVC)
         
         tradeVC.view.layoutIfNeeded()
         homeVCTopConstaint.constant = 0
@@ -107,11 +107,11 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
     
     func removeHomeVC(_ completion:@escaping () -> Void) {
         guard let tradeVC = self.rootVC.topViewController as? TradeViewController else { return }
-        guard let home = tradeVC.childViewControllers.filter({ $0 is HomeViewController}).first as? HomeViewController else { return }
+        guard let home = tradeVC.children.filter({ $0 is HomeViewController}).first as? HomeViewController else { return }
         
-        home.willMove(toParentViewController: tradeVC)
+        home.willMove(toParent: tradeVC)
         home.view.removeFromSuperview()
-        home.removeFromParentViewController()
+        home.removeFromParent()
         
         
         homeVCTopConstaint.constant = -tradeVC.view.height

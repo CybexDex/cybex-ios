@@ -16,7 +16,7 @@ import Macaw
 import Repeat
 import PromiseKit
 import Device
-import IHKeyboardAvoiding
+//import IHKeyboardAvoiding
 
 
 class RegisterViewController: BaseViewController {
@@ -124,9 +124,9 @@ class RegisterViewController: BaseViewController {
 extension RegisterViewController {
   func setupEvent() {
   
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: nil) { (notification) in
+    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (notification) in
       let userinfo: NSDictionary = notification.userInfo! as NSDictionary
-      let nsValue = userinfo.object(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let nsValue = userinfo.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
       let keyboardRec = nsValue.cgRectValue
       
       if self.iconTopContainer.constant == 15 {
@@ -135,12 +135,12 @@ extension RegisterViewController {
       }
     }
     
-    NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: nil) { (notification) in
+    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { (notification) in
       self.iconTopContainer.constant = 15
       
     }
     
-    NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidChange, object: accountTextField, queue: nil) {[weak self] (notifi) in
+    NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: accountTextField, queue: nil) {[weak self] (notifi) in
       self?.errorStackView.isHidden = true
       self?.accountTextField.activityView?.isHidden = true
       self?.accountTextField.tailImage = nil

@@ -137,7 +137,7 @@ class ShowToastManager {
                 }
             }else if animationShow == .small_big{
                 showView?.transform = CGAffineTransform.init(scaleX: 0.3, y: 0.3)
-                UIView.animate(withDuration: ShowToastManager.durationTime, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                UIView.animate(withDuration: ShowToastManager.durationTime, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseIn, animations: {
                     self.showView?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
                 }, completion:{ (isFinished) in
                     
@@ -281,7 +281,7 @@ class ShowToastManager {
         }
         if cybexTextViewType == .time, self.timer_time != 30, self.timer_time != 0 {
             textView.ensure.isEnabled = false
-            textView.ensure.setTitle(String(self.timer_time), for: UIControlState.normal)
+            textView.ensure.setTitle(String(self.timer_time), for: UIControl.State.normal)
         }
         showView = textView
     }

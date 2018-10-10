@@ -172,7 +172,7 @@ class TradeViewController: BaseViewController {
             self.endLoading()
             
             self.tradeTitltView.title.text = info.quote.symbol.filterJade + "/" + info.base.symbol.filterJade
-            self.childViewControllers.forEach { (viewController) in
+            self.children.forEach { (viewController) in
                 if var viewController = viewController as? TradePair{
                     viewController.pariInfo = self.pair
                     if self.isfirstRefresh {
@@ -189,7 +189,7 @@ class TradeViewController: BaseViewController {
     }
     
     func moveToMyOpenedOrders(){
-        if let viewController = childViewControllers[2] as? TradePair{
+        if let viewController = children[2] as? TradePair{
             viewController.refresh()
         }
         self.scrollView.setContentOffset(CGPoint(x: pageOffsetForChild(at: 2), y: 0), animated: false)
@@ -197,7 +197,7 @@ class TradeViewController: BaseViewController {
     
     func moveToTradeView(isBuy:Bool){
         let index = isBuy ? 0 : 1
-        if let viewController = childViewControllers[index] as? TradePair{
+        if let viewController = children[index] as? TradePair{
             viewController.refresh()
         }
         self.scrollView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: 0), animated: false)
@@ -222,7 +222,7 @@ extension TradeViewController : TradeNavTitleViewDelegate {
             self.chooseTitleView?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             self.view.addSubview(self.chooseTitleView!)
             
-            self.chooseTitleView?.edges(to: self.view, insets: UIEdgeInsetsMake(0, 0, 0, 0), priority: .required, isActive: true)
+            self.chooseTitleView?.edges(to: self.view, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true)
             self.view.layoutIfNeeded()
             
             self.coordinator?.addHomeVC()

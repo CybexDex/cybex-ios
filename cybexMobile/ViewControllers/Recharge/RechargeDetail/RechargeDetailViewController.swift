@@ -87,7 +87,7 @@ class RechargeDetailViewController: BaseViewController {
     }
     
     func setupEvent() {
-        self.contentView.amountView.btn.rx.controlEvent(UIControlEvents.touchUpInside)
+        self.contentView.amountView.btn.rx.controlEvent(UIControl.Event.touchUpInside)
             .asControlEvent()
             .subscribe(onNext: { [weak self](tap) in
                 guard let `self` = self else { return }
@@ -98,7 +98,7 @@ class RechargeDetailViewController: BaseViewController {
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
-        self.contentView.addressView.btn.rx.controlEvent(UIControlEvents.touchUpInside)
+        self.contentView.addressView.btn.rx.controlEvent(UIControl.Event.touchUpInside)
             .asControlEvent()
             .subscribe(onNext: { [weak self](tap) in
                 guard let `self` = self else { return }
@@ -106,7 +106,7 @@ class RechargeDetailViewController: BaseViewController {
                 self.coordinator?.chooseOrAddAddress(self.trade!.id)
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
-        NotificationCenter.default.rx.notification(Notification.Name.UIKeyboardWillShow)
+        NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
             .asObservable()
             .subscribe(onNext: { [weak self](notification) in
                 guard let `self` = self else { return }
@@ -117,7 +117,7 @@ class RechargeDetailViewController: BaseViewController {
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
-        NotificationCenter.default.rx.notification(Notification.Name.UIKeyboardWillHide)
+        NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
             .asObservable()
             .subscribe(onNext: { [weak self](notification) in
                 guard let `self` = self else { return }
@@ -131,7 +131,7 @@ class RechargeDetailViewController: BaseViewController {
             self.withDrawAction()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
-        NotificationCenter.default.rx.notification(Notification.Name.UITextFieldTextDidEndEditing, object: contentView.amountView.content)
+        NotificationCenter.default.rx.notification(UITextField.textDidEndEditingNotification, object: contentView.amountView.content)
             .asObservable()
             .subscribe(onNext: { [weak self](notification) in
                 guard let `self` = self else { return }
@@ -152,7 +152,7 @@ class RechargeDetailViewController: BaseViewController {
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
-        NotificationCenter.default.rx.notification(Notification.Name.UITextFieldTextDidEndEditing, object: contentView.addressView.content)
+        NotificationCenter.default.rx.notification(UITextField.textDidEndEditingNotification, object: contentView.addressView.content)
             .asObservable()
             .subscribe(onNext: { [weak self](notification) in
                 guard let `self` = self else { return }
@@ -190,7 +190,7 @@ class RechargeDetailViewController: BaseViewController {
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
-        NotificationCenter.default.rx.notification(Notification.Name.UITextFieldTextDidEndEditing, object: contentView.memoView.content)
+        NotificationCenter.default.rx.notification(UITextField.textDidEndEditingNotification, object: contentView.memoView.content)
             .asObservable()
             .subscribe(onNext: { [weak self](notification) in
                 guard let `self` = self else { return }

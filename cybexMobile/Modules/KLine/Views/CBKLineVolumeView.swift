@@ -155,9 +155,9 @@ extension CBKLineVolumeView {
     let drawAttrsString = NSMutableAttributedString()
     let volumeStr = String(format: "VOLUME %.2f  ", drawModel.volume)
     
-    let volumeAttrs: [NSAttributedStringKey : Any]? = [
-      NSAttributedStringKey.foregroundColor : configuration.main.dateAssistTextColor,
-      NSAttributedStringKey.font : configuration.main.dateAssistTextFont
+    let volumeAttrs: [NSAttributedString.Key : Any]? = [
+      NSAttributedString.Key.foregroundColor : configuration.main.dateAssistTextColor,
+      NSAttributedString.Key.font : configuration.main.dateAssistTextFont
     ]
     drawAttrsString.append(NSAttributedString(string: volumeStr, attributes: volumeAttrs))
     
@@ -166,9 +166,9 @@ extension CBKLineVolumeView {
       
       for (idx, color) in [configuration.theme.MA1, configuration.theme.MA2, configuration.theme.MA3].enumerated() {
 
-        let attrs: [NSAttributedStringKey : Any]? = [
-          NSAttributedStringKey.foregroundColor : color,
-          NSAttributedStringKey.font : configuration.main.dateAssistTextFont
+        let attrs: [NSAttributedString.Key : Any]? = [
+          NSAttributedString.Key.foregroundColor : color,
+          NSAttributedString.Key.font : configuration.main.dateAssistTextFont
         ]
         if let value = drawModel.MA_VOLUMEs![idx] {
           let maStr = String(format: "MAVOL\(days[idx]): %.2f ", value)
@@ -179,9 +179,9 @@ extension CBKLineVolumeView {
     case .EMA_VOLUME(let days):
       for (idx, color) in [configuration.theme.EMA1, configuration.theme.EMA2].enumerated() {
 
-        let attrs: [NSAttributedStringKey : Any]? = [
-          NSAttributedStringKey.foregroundColor : color,
-          NSAttributedStringKey.font : configuration.main.dateAssistTextFont
+        let attrs: [NSAttributedString.Key : Any]? = [
+          NSAttributedString.Key.foregroundColor : color,
+          NSAttributedString.Key.font : configuration.main.dateAssistTextFont
         ]
         if let value = drawModel.EMA_VOLUMEs![idx] {
           let maStr = String(format: "EMAVOL\(days[idx]): %.2f ", value)

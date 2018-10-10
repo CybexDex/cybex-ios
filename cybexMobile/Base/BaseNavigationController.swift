@@ -32,9 +32,9 @@ class BaseNavigationController: UINavigationController {
         self.navigationBar.shadowImage = UIImage()
         
         self.navigationBar.isTranslucent = false
-        self.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.paleGrey]
+        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedString.Key.foregroundColor:UIColor.paleGrey]
         if #available(iOS 11.0, *) {
-            self.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:#colorLiteral(red: 1, green: 0.6386402845, blue: 0.3285836577, alpha: 1)]
+            self.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:#colorLiteral(red: 1, green: 0.6386402845, blue: 0.3285836577, alpha: 1)]
         }
         self.navigationBar.tintColor = #colorLiteral(red: 0.5436816812, green: 0.5804407597, blue: 0.6680644155, alpha: 1)
         
@@ -48,13 +48,13 @@ class BaseNavigationController: UINavigationController {
     func setNavigationBarStyleAction() {
         if ThemeManager.currentThemeIndex == 0 {
             let image = UIImage.init(color: UIColor.dark)
-            self.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.paleGrey]
+            self.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedString.Key.foregroundColor:UIColor.paleGrey]
             self.navigationBar.setBackgroundImage(image, for: .default)
             
         }
         else {
             let image = UIImage.init(color:UIColor.paleGrey)
-            self.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.dark]
+            self.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedString.Key.foregroundColor:UIColor.dark]
             self.navigationBar.setBackgroundImage(image, for: .default)
         }
     }
@@ -65,13 +65,13 @@ class BaseNavigationController: UINavigationController {
             
             if ThemeManager.currentThemeIndex == 0 {
                 let image = UIImage.init(color: UIColor.dark)
-                self.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.paleGrey]
+                self.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedString.Key.foregroundColor:UIColor.paleGrey]
                 self.navigationBar.setBackgroundImage(image, for: .default)
                 
             }
             else {
                 let image = UIImage.init(color:UIColor.paleGrey)
-                self.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedStringKey.foregroundColor:UIColor.dark]
+                self.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 17),NSAttributedString.Key.foregroundColor:UIColor.dark]
                 self.navigationBar.setBackgroundImage(image, for: .default)
                 
             }

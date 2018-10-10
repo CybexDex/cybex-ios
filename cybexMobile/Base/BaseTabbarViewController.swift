@@ -51,7 +51,7 @@ class CBTabBarView: ESTabBarItemContentView {
     let moveAni = CAKeyframeAnimation(keyPath: "transform.translation.y")
     moveAni.values = [0.0 ,-8.0, 4.0, -4.0, 3.0, -2.0, 0.0]
     moveAni.duration = duration * 2
-    moveAni.calculationMode = kCAAnimationCubic
+    moveAni.calculationMode = CAAnimationCalculationMode.cubic
     badgeView.layer.add(moveAni, forKey: nil)
   }
   
@@ -59,7 +59,7 @@ class CBTabBarView: ESTabBarItemContentView {
     let bounceAni = CAKeyframeAnimation.init(keyPath: "transform.scale")
     bounceAni.values = [1.0 ,1.4, 0.9, 1.15, 0.95, 1.02, 1.0]
     bounceAni.duration = duration * 2
-    bounceAni.calculationMode = kCAAnimationCubic
+    bounceAni.calculationMode = CAAnimationCalculationMode.cubic
     imageView.layer.add(bounceAni, forKey: nil)
   }
 }

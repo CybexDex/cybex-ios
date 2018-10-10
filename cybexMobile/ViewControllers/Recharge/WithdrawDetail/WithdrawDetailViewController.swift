@@ -128,7 +128,7 @@ extension WithdrawDetailViewController {
         }
         let photos: PrivateResource = .photos
         proposeToAccess(photos, agreed: {
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.savedPhotosAlbum) {
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.savedPhotosAlbum) {
                 saveImageToPhotos()
                 
                 self.showToastBox(true, message:R.string.localizable.recharge_save.key.localized())

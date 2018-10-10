@@ -43,7 +43,7 @@ class ETODetailIntroView: CybexBaseView {
                 label.customColor[customType] = UIColor.steel
                 label.configureLinkAttribute = { (type, attributes, isSelected) in
                     var atts = attributes
-                    atts[NSAttributedStringKey.underlineStyle] = NSUnderlineStyle.styleSingle.rawValue
+                    atts[NSAttributedString.Key.underlineStyle] = NSUnderlineStyle.single.rawValue
                     return atts
                 }
                 label.handleCustomTap(for: customType, handler: { [weak self](str) in

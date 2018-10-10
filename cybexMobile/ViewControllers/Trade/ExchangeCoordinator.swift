@@ -40,12 +40,12 @@ extension ExchangeCoordinator: ExchangeCoordinatorProtocol {
       if let container = exchange.containerView, let leftView = container.leftView {
         business.coordinator = BusinessCoordinator(rootVC: self.rootVC)
         business.type = exchange.type
-        exchange.addChildViewController(business)
+        exchange.addChild(business)
         
         leftView.addSubview(business.view)
         business.view.edges(to: leftView)
       
-        business.didMove(toParentViewController: exchange)
+        business.didMove(toParent: exchange)
       }
     }
     
@@ -53,32 +53,32 @@ extension ExchangeCoordinator: ExchangeCoordinatorProtocol {
       if let container = exchange.containerView, let rightView = container.rightView {
         orderbook.coordinator = OrderBookCoordinator(rootVC: self.rootVC)
         orderbook.VC_TYPE = orderbook_type.tradeView.rawValue
-        exchange.addChildViewController(orderbook)
+        exchange.addChild(orderbook)
         
         rightView.addSubview(orderbook.view)
         orderbook.view.edges(to: rightView)
         
-        orderbook.didMove(toParentViewController: exchange)
+        orderbook.didMove(toParent: exchange)
       }
     }
     
     if let tradeHistory = R.storyboard.business.tradeHistoryViewController() {
       if let container = exchange.containerView, let bottomView = container.bottomView {
         tradeHistory.coordinator = TradeHistoryCoordinator(rootVC: self.rootVC)
-        exchange.addChildViewController(tradeHistory)
+        exchange.addChild(tradeHistory)
         
         tradeHistory.pageType = .trade
         bottomView.addSubview(tradeHistory.view)
         tradeHistory.view.edges(to: bottomView)
         
-        tradeHistory.didMove(toParentViewController: exchange)
+        tradeHistory.didMove(toParent: exchange)
       }
     }    
   }
   
   func switchPriceToBusinessVC(_ price:String, isBuy:Bool) {
     guard let tradeVC = self.rootVC.topViewController as? TradeViewController,
-      let exchange = tradeVC.childViewControllers.filter({ (vc) -> Bool in
+        let exchange = tradeVC.children.filter({ (vc) -> Bool in
         if let vc = vc as? ExchangeViewController {
           let type = isBuy ? exchangeType.buy : exchangeType.sell
           if type == vc.type {
@@ -89,7 +89,7 @@ extension ExchangeCoordinator: ExchangeCoordinatorProtocol {
         
         return false
       }).first as? ExchangeViewController ,
-      let business = exchange.childViewControllers.filter({ $0 is BusinessViewController}).first as? BusinessViewController else {
+        let business = exchange.children.filter({ $0 is BusinessViewController}).first as? BusinessViewController else {
         return
     }
     business.coordinator?.switchPrice(price)
