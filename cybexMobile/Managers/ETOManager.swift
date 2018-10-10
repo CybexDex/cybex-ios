@@ -37,40 +37,60 @@ struct ETOStateOption:OptionSet {
 enum ETOClauseState {
     case normal
     case notShow
-    case checked
     case checkedAndImmutable
 }
 
 enum ETOJoinButtonStyle {
     case normal
+    case wait
+    case notPassed
     case disable
 }
 
-enum ETOJoinButtonAction {
+enum ETOJoinButtonAction: String {
     case unset
-    case auditPage
-    case transferPage
+    case inputCode
+    case crowdPage
     case icoapePage
-    case unlockPage
+    case loginPage
 }
 
 enum ETOJoinButtonState {
     case normal(title: String, style: ETOJoinButtonStyle, action: ETOJoinButtonAction)
     case disable(title: String, style: ETOJoinButtonStyle)
     case notShow
+    
 }
+
+extension ETOJoinButtonState: Equatable {
+    static func == (lhs: ETOJoinButtonState, rhs: ETOJoinButtonState) -> Bool {
+        switch (lhs, rhs) {
+        case (.normal(let titlelhs, let stylelhs, let actionlhs), .normal(let titlerhs, let stylerhs, let actionrhs)):
+            return titlelhs == titlerhs && stylelhs == stylerhs && actionlhs == actionrhs
+        case let (.disable(titlelhs, stylelhs), .disable(titlerhs, stylerhs)):
+            return titlelhs == titlerhs && stylelhs == stylerhs
+        case let (.notShow, .notShow):
+            return true
+        default:
+            return false
+        }
+    }
+}
+
+
 
 class ETOManager {
     static let shared = ETOManager()
     
-    private var state = ETOStateOption.unset
+    private(set) var state = ETOStateOption.unset
+    
     
     private init() {
         
     }
     
     func changeState(_ state:ETOStateOption) {
-        let loginState:ETOStateOption = [.login, .notStarted]
+        let loginState:ETOStateOption = [.login, .notLogin]
         let kycState:ETOStateOption = [.KYCPassed, .KYCNotPassed]
         let userReserveState:ETOStateOption = [.reserved, .notReserved]
         let projectBookState:ETOStateOption = [.bookable, .notBookable]
@@ -78,7 +98,7 @@ class ETOManager {
         let projectState:ETOStateOption = [.notStarted, .underway, .finished]
         
         for stateSet in [loginState, kycState, userReserveState, projectBookState, auditState, projectState] {
-            if stateSet.contains(state) {
+            if stateSet.contains(state.intersection(stateSet)) {
                 self.state.remove(stateSet)
                 self.state.insert(state.intersection(stateSet))
             }
@@ -86,14 +106,11 @@ class ETOManager {
     }
     
     func getClauseState() -> ETOClauseState {
-        if state.contains([.login, .KYCPassed, .notReserved, .bookable]) {
+        if state.contains([.login, .KYCPassed, .notReserved, .bookable]) && !state.contains(.finished) {
             return .normal
         }
-        else if state.contains([.login, .KYCPassed, .reserved, .bookable, .auditPassed, .waitAudit]) {
+        else if state.contains([.login, .KYCPassed, .reserved]) && !state.contains(.finished) {
             return .checkedAndImmutable
-        }
-        else if state.contains([.notLogin, .bookable, .notStarted, .underway]) {
-            return .checked
         }
         
         return .notShow
@@ -101,42 +118,35 @@ class ETOManager {
     
     func getETOJoinButtonState() -> ETOJoinButtonState {
         let clause = getClauseState()
-        
         switch clause {
         case .normal:
-            return .normal(title: "立即参与", style: .normal, action: .auditPage)
+            return .normal(title: R.string.localizable.eto_project_reserve_now.key.localized(), style: .normal, action: .inputCode)
         case .checkedAndImmutable:
-            if state.contains(.notStarted) || state.contains(.finished) {
-                return .disable(title: "已通过审核", style: .disable)
+            if state.contains(.auditPassed) {
+                if state.contains(.notStarted) {
+                    return .disable(title: R.string.localizable.eto_project_waiting.key.localized(), style: .wait)
+                }
+                return .normal(title: R.string.localizable.eto_project_join.key.localized(), style: .normal, action: .crowdPage)
             }
-            else if state.contains(.underway) {
-                return .normal(title: "立即参与", style: .normal, action: .transferPage)
+            else if state.contains(.waitAudit) {
+                return .disable(title: R.string.localizable.eto_project_verifying.key.localized(), style: .wait)
             }
             else {
-                return .disable(title: "审核中", style: .disable)
+                return .disable(title: R.string.localizable.eto_project_rejected.key.localized(), style: .notPassed)
             }
-        case .checked:
-            return .normal(title: "立即参与", style: .normal, action: .unlockPage)
         case .notShow:
             if state.contains(.notReserved) {
-                return .disable(title: "立即参与", style: .disable)
+                if !state.contains(.finished) {
+                    return .disable(title: R.string.localizable.eto_project_stop_reserve.key.localized(), style: .disable)
+                }
             }
-            else if state.contains([.login, .bookable]) {
-                return .disable(title: "未通过审核", style: .disable)
+            else if state.contains(.KYCNotPassed) {
+                return .normal(title: R.string.localizable.eto_project_kyc.key.localized(), style: .normal, action: .icoapePage)
             }
-            else if state.contains([.login, .notBookable]) {
-                return .disable(title: "立即参与", style: .disable)
+            else if state.contains(.notLogin) && !state.contains(.finished) {
+                return .normal(title: R.string.localizable.eto_project_login.key.localized(), style: .normal, action: .loginPage)
             }
-            else if state.contains([.login]) {
-                return .normal(title: "进行KYC", style: .normal, action: .icoapePage)
-            }
-            else if state.contains([.notLogin, .finished]) {
-                return .notShow
-            }
-            else {
-                return .disable(title: "停止预约", style: .disable)
-            }
+            return .notShow
         }
-      
     }
 }

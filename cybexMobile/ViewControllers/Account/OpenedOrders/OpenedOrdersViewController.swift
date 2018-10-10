@@ -35,6 +35,7 @@ class OpenedOrdersViewController: BaseViewController {
     
     var containerView:UIView?
     var order:LimitOrder?
+    var cancleOrderInfo: [String:Any]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,20 +54,20 @@ class OpenedOrdersViewController: BaseViewController {
             guard let `self` = self else { return }
             if let account_view = self.containerView as? MyOpenedOrdersView {
                 
-                account_view.sectionView.totalTitle.locali = R.string.localizable.my_opened_price.key.localized()
-                account_view.sectionView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key.localized()
+                account_view.sectionView.totalTitle.locali = R.string.localizable.my_opened_price.key
+                account_view.sectionView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key
             }
         })
         
-//        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] notification in
-//            guard let `self` = self else { return }
-//            if let account_view = self.containerView as? MyOpenedOrdersView {
-//                account_view.tableView.reloadData()
-//            }
-//            else if let accountView = self.containerView as? AccountOpenedOrdersView {
-//                accountView.tableView.reloadData()
-//            }
-//        })
+        //        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] notification in
+        //            guard let `self` = self else { return }
+        //            if let account_view = self.containerView as? MyOpenedOrdersView {
+        //                account_view.tableView.reloadData()
+        //            }
+        //            else if let accountView = self.containerView as? AccountOpenedOrdersView {
+        //                accountView.tableView.reloadData()
+        //            }
+        //        })
     }
     
     func showOrderInfo(){
@@ -83,7 +84,7 @@ class OpenedOrdersViewController: BaseViewController {
             
             if success,let order = self.order{
                 let ensure_title = order.isBuy ? R.string.localizable.cancle_openedorder_buy.key.localized() : R.string.localizable.cancle_openedorder_sell.key.localized()
-                
+
                 if let baseInfo = app_data.assetInfo[order.sellPrice.base.assetID], let quoteInfo = app_data.assetInfo[order.sellPrice.quote.assetID],let fee_info = app_data.assetInfo[assetId]{
                     var priceInfo = ""
                     var amountInfo = ""
@@ -92,16 +93,25 @@ class OpenedOrdersViewController: BaseViewController {
                     if order.isBuy{
                         let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
                         let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-                        totalInfo = baseAmount.string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
-                        amountInfo = quoteAmount.string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
-                        priceInfo =  (baseAmount / quoteAmount).string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
+                        priceInfo = (baseAmount / quoteAmount).string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
+                        let total = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
+                        let amounts = total / (baseAmount / quoteAmount)
+                        amountInfo = amounts.string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
+                        totalInfo = total.string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
                     }else{
                         let baseAmount  = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
                         let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
-                        
-                        totalInfo = baseAmount.string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
-                        amountInfo = quoteAmount.string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
                         priceInfo =  (baseAmount / quoteAmount).string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
+                        let amounts = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
+                        var total: Decimal = 0
+                        if order.forSale == order.sellPrice.base.amount {
+                            total = baseAmount
+                        }
+                        else {
+                            total = amounts * (baseAmount / quoteAmount)
+                        }
+                        totalInfo = total.string(digits: quoteInfo.precision,roundingMode:.down) + " " + quoteInfo.symbol.filterJade
+                        amountInfo = amounts.string(digits: baseInfo.precision,roundingMode:.down) + " " + baseInfo.symbol.filterJade
                     }
                     
                     if self.isVisible {

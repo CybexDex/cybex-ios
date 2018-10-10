@@ -9,7 +9,12 @@
 import UIKit
 import ReSwift
 import Presentr
-import SwiftNotificationCenter
+import NBLCommonModule
+import HandyJSON
+
+struct TransferContext: RouteContext,HandyJSON {
+    init() {}
+}
 
 protocol TransferCoordinatorProtocol {
     func pushToRecordVC()
@@ -54,7 +59,7 @@ protocol TransferStateManagerProtocol {
 
 }
 
-class TransferCoordinator: AccountRootCoordinator {
+class TransferCoordinator: NavCoordinator {
     
     lazy var creator = TransferPropertyActionCreate()
     
@@ -64,6 +69,14 @@ class TransferCoordinator: AccountRootCoordinator {
         middleware:[TrackingMiddleware]
     )
     
+    override class func start(_ root: BaseNavigationController, context:RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.recode.transferViewController()!
+        let coordinator = TransferCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+
+        return vc
+    }
     
     override func register() {
         Broadcaster.register(TransferCoordinatorProtocol.self, observer: self)
@@ -123,7 +136,6 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
                 }
             }
             vc.coordinator = coordinator
-            
             newNav.pushViewController(vc, animated: true)
         }
     }
@@ -131,7 +143,6 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
     func pop() {
         self.rootVC.popViewController(animated: true, nil)
     }
-    
     
     func openAddAddress() {
         if let vc = R.storyboard.account.addAddressViewController() {
@@ -186,7 +197,6 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
     }
     
     func reopenAction() {
-        
         let transferVC = R.storyboard.recode.transferViewController()!
         let coordinator = TransferCoordinator(rootVC: self.rootVC)
         transferVC.coordinator = coordinator
@@ -202,37 +212,41 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     
     func transfer(_ callback: @escaping (Any) -> ()) {
         getChainId { (id) in
-            guard let balance = self.state.property.balance.value else {
+            guard let balance = self.state.balance.value else {
                 return
             }
-            guard let to_account = self.state.property.to_account.value else {
+            guard let to_account = self.state.to_account.value else {
                 return
             }
-            guard let fee = self.state.property.fee.value else {
+            guard let fee = self.state.fee.value else {
                 return
             }
-            let amount = self.state.property.amount.value
+            let amount = self.state.amount.value
             let requeset = GetObjectsRequest(ids: [objectID.dynamic_global_property_object.rawValue]) { (infos) in
                 if let infos = infos as? (block_id:String,block_num:String){
                     if var amount = amount.toDouble() ,let assetInfo = app_data.assetInfo[balance.asset_type] ,let feeInfo = app_data.assetInfo[fee.asset_id]{
                         let value = pow(10, assetInfo.precision)
                         amount = amount * Double(truncating: value as NSNumber)
                         
-                        let fee_amout = fee.amount.toDouble()! * Double(truncating: pow(10, feeInfo.precision) as NSNumber)
+                        guard let fee_amount = fee.amount.toDouble() ,let from_account = UserManager.shared.account.value ,let to_account = self.state.to_account.value else {
+                                return
+                        }
                         
+                        let fee_amout = fee_amount * Double(truncating: pow(10, feeInfo.precision) as NSNumber)
+                       
                         let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
                                                                           block_id: infos.block_id,
                                                                           expiration: Date().timeIntervalSince1970 + 10 * 3600,
                                                                           chain_id: id,
-                                                                          from_user_id: Int32(getUserId((UserManager.shared.account.value?.id)!)),
-                                                                          to_user_id: Int32(getUserId((self.state.property.to_account.value?.id)!)),
+                                                                          from_user_id: Int32(getUserId(from_account.id)),
+                                                                          to_user_id: Int32(getUserId(to_account.id)),
                                                                           asset_id: Int32(getUserId(balance.asset_type)),
                                                                           receive_asset_id: Int32(getUserId(balance.asset_type)),
                                                                           amount: Int64(Int32(amount)),
                                                                           fee_id: Int32(getUserId(fee.asset_id)),
                                                                           fee_amount: Int64(fee_amout),
-                                                                          memo: self.state.property.memo.value,
-                                                                          from_memo_key: UserManager.shared.account.value?.memo_key,
+                                                                          memo: self.state.memo.value,
+                                                                          from_memo_key: from_account.memo_key,
                                                                           to_memo_key: to_account.memo_key)
                         
                         let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
@@ -249,11 +263,11 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     }
     
     func validAccount() {
-        if !self.state.property.account.value.isEmpty {
+        if !self.state.account.value.isEmpty {
             if let vc = self.rootVC.topViewController as? TransferViewController {
                 vc.transferView.accountView.loading_state = .Loading
             }
-            UserManager.shared.checkUserName(self.state.property.account.value).done({[weak self] (exist) in
+            UserManager.shared.checkUserName(self.state.account.value).done({[weak self] (exist) in
                 main {
                     guard let `self` = self else { return }
                     self.store.dispatch(ValidAccountAction(status: exist ? .validSuccessed : .validFailed))
@@ -266,35 +280,35 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     }
     
     func setAccount(_ account: String) {
-        if !self.state.property.account.value.isEmpty,self.state.property.account.value != account {
+        if !self.state.account.value.isEmpty,self.state.account.value != account {
             self.store.dispatch(ValidAccountAction(status: .unValided))
         }
-        self.state.property.account.accept(account)
+        self.state.account.accept(account)
         validAccount()
     }
     
     func setAmount(_ amount: String ,canFetchFee : Bool) {
-        self.state.property.amount.accept(amount)
+        self.state.amount.accept(amount)
         if canFetchFee {
             validAmount()
         }
     }
     
     func setMemo(_ memo: String ,canFetchFee : Bool) {
-        self.state.property.memo.accept(memo)
+        self.state.memo.accept(memo)
         if canFetchFee {
             validAmount()
         }
     }
     
     func validAmount() {
-        let balance = self.state.property.balance.value
-        getGatewayFee(balance?.asset_type ?? "", amount: self.state.property.amount.value, memo: self.state.property.memo.value)
+        let balance = self.state.balance.value
+        getGatewayFee(balance?.asset_type ?? "", amount: self.state.amount.value, memo: self.state.memo.value)
     }
     
     func getTransferAccountInfo() {
-        if self.state.property.accountValid.value == .validSuccessed {
-            let requeset = GetFullAccountsRequest(name: self.state.property.account.value) { (response) in
+        if self.state.accountValid.value == .validSuccessed {
+            let requeset = GetFullAccountsRequest(name: self.state.account.value) { (response) in
                 if let data = response as? FullAccount, let account = data.account {
                     self.store.dispatch(SetToAccountAction(account: account))
                 }
@@ -309,8 +323,8 @@ extension TransferCoordinator: TransferStateManagerProtocol {
             amount = amount * Double(truncating: value as NSNumber)
             let from_user_id = UserManager.shared.account.value?.id ?? "0"
             let from_memo_key = UserManager.shared.account.value?.memo_key ?? ""
-            let to_user_id = self.state.property.to_account.value?.id ?? "0"
-            let to_memo_key = self.state.property.to_account.value?.memo_key ?? from_memo_key
+            let to_user_id = self.state.to_account.value?.id ?? "0"
+            let to_memo_key = self.state.to_account.value?.memo_key ?? from_memo_key
             if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId(from_user_id)),
                                                                               to_user_id: Int32(getUserId(to_user_id)),
                                                                               asset_id: Int32(getUserId(assetId)),
@@ -324,7 +338,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                     let dictionary = ["asset_id":fee_id,"amount":amount.stringValue]
                     self.store.dispatch(SetFeeAction(fee: Fee(JSON: dictionary)!))
                     if success {
-                        if var transferAmount = self.state.property.amount.value.toDouble() {
+                        if var transferAmount = self.state.amount.value.toDouble() {
                             let value = assetId.isEmpty ? 1 : pow(10, (app_data.assetInfo[assetId]?.precision)!)
                             transferAmount = transferAmount * Double(truncating: value as NSNumber)
                             self.checkAmount(transferAmount)
@@ -332,7 +346,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                             self.store.dispatch(ValidAmountAction(isValid: true))
                         }
                     } else {
-                        if let transferAmount = self.state.property.amount.value.toDouble(), transferAmount != 0 {
+                        if let transferAmount = self.state.amount.value.toDouble(), transferAmount != 0 {
                             self.store.dispatch(ValidAmountAction(isValid: false))
                         }
                         //            self.store.dispatch(ValidAmountAction(isValid: false))
@@ -343,9 +357,9 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     }
     
     func checkAmount(_ transferAmount: Double) {
-        if let balance = self.state.property.balance.value,let totalAmount = balance.balance.toDouble() {
+        if let balance = self.state.balance.value,let totalAmount = balance.balance.toDouble() {
             var feeAmount: Double = 0
-            if let fee = self.state.property.fee.value {
+            if let fee = self.state.fee.value {
                 if fee.asset_id == balance.asset_type {
                     feeAmount = fee.amount.toDouble() ?? 0
                     let value = fee.asset_id.isEmpty ? 1 : pow(10, (app_data.assetInfo[fee.asset_id]?.precision)!)

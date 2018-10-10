@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ESTabBarController_swift
+import ESTabBarController
 
 class CBTabBarView: ESTabBarItemContentView {
   
@@ -33,6 +33,11 @@ class CBTabBarView: ESTabBarItemContentView {
     completion?()
   }
   
+    override func deselectAnimation(animated: Bool, completion: (() -> ())?) {
+        super.deselectAnimation(animated: animated, completion: completion)
+        
+    }
+    
   override func reselectAnimation(animated: Bool, completion: (() -> ())?) {
     bounceAnimation()
     completion?()
@@ -60,5 +65,5 @@ class CBTabBarView: ESTabBarItemContentView {
 }
 
 class BaseTabbarViewController: ESTabBarController {
-  
+
 }

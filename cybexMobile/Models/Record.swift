@@ -25,11 +25,9 @@ extension String {
             return R.string.localizable.recode_state_upping.key.localized()
         }
     }
-    
 }
 
 struct Record : HandyJSON {
-    
     var accountName : String = ""
     var address : String = ""
     var amount : Int = 0
@@ -38,14 +36,20 @@ struct Record : HandyJSON {
     var fundType : String = ""
     var state : String = ""
     var updateAt : Date!
-    var asset_id : String = ""
+    var details: [RecordDetail]?
     
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
-            self.updateAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.zzz'Z'")
+            self.updateAt <-- GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     }
     
     init() {}
+}
+
+struct RecordDetail: HandyJSON {
+    var id: String = ""
+    var state: String = ""
+    var hash: String = ""
 }
 
 open class GemmaDateFormatTransform: DateFormatterTransform {
@@ -57,9 +61,22 @@ open class GemmaDateFormatTransform: DateFormatterTransform {
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         formatter.dateFormat = formatString
         
+
         super.init(dateFormatter: formatter)
     }
     
+    override open func transformFromJSON(_ value: Any?) -> Date? {
+        if let dateString = value as? String, let date = dateFormatter.date(from: dateString) {
+            return date
+        }
+        else {
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSSSS"
+            if let dateString = value as? String {
+                return dateFormatter.date(from: dateString)
+            }
+            return nil
+        }
+    }
 }
 
 
@@ -107,7 +124,6 @@ struct TransferRecord : HandyJSON {
     
 }
 
-
 struct TransferRecordViewModel {
     var isSend : Bool = false
     var from : String = ""
@@ -117,5 +133,24 @@ struct TransferRecordViewModel {
     var memo : String = ""
     var vesting_period : String = ""
     var fee : HandyAsset?
+}
+
+
+struct AccountAssetModel: HandyJSON {
+    var count: Int = 0
+    var groupInfo: GroupInfo?
+}
+
+
+struct GroupInfo: HandyJSON {
+    var asset: String = ""
+    var fundType: String = ""
+}
+
+struct AccountAssets: HandyJSON{
+    var total: Int = 0
+    var offset: Int = 0
+    var size: Int = 0
+    var records: [AccountAssetModel]?
 }
 

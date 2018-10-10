@@ -29,7 +29,6 @@ protocol RechargeDetailStateManagerProtocol {
     static func verifyAddress(_ assetName:String,address:String,callback:@escaping (Bool)->())
     func getGatewayFee(_ assetId : String,amount:String,address:String,isEOS:Bool)
     func getObjects(assetId:String,amount:String,address:String,fee_id:String,fee_amount:String,isEOS:Bool,callback:@escaping (Any)->())
-    func fetchWithDrawMessage(callback:@escaping (String)->())
     func getFinalAmount(fee_id:String,amount:Decimal,available:Double) -> (Decimal,String)
     
     func chooseOrAddAddress(_ sender : String)
@@ -64,8 +63,8 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
     func openWithdrawRecodeList(_ asset_id : String) {
         if let vc = R.storyboard.recode.rechargeRecodeViewController() {
             vc.coordinator = RechargeRecodeCoordinator(rootVC: self.rootVC)
-            vc.assetInfo = app_data.assetInfo[asset_id]
             vc.record_type = .WITHDRAW
+            vc.assetInfo = app_data.assetInfo[asset_id]
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
@@ -226,23 +225,6 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         }
     }
     
-    func fetchWithDrawMessage(callback:@escaping (String)->()){
-        async {
-            let message = try? await(SimpleHTTPService.fetchWithdrawJsonInfo())
-            main {
-                if let message = message{
-                    if Localize.currentLanguage() == "en" {
-                        callback(message.enMsg)
-                    }else{
-                        callback(message.cnMsg)
-                    }
-                }else{
-                    callback("")
-                }
-            }
-        }
-    }
-    
     func getFinalAmount(fee_id:String,amount:Decimal,available:Double) -> (Decimal,String) {
         
         let allAmount = Decimal(available)
@@ -275,8 +257,4 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
             showPicker(sender)
         }
     }
-    
-    
-    
-    
 }

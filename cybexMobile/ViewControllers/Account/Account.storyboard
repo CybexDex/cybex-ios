@@ -322,10 +322,10 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="naz-JZ-H8Z">
-                                        <rect key="frame" x="0.0" y="270" width="375" height="128"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="413"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dSw-lA-TwX" customClass="AddAddressView" customModule="cybexMobile" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="413"/>
                                             </view>
                                         </subviews>
                                         <constraints>

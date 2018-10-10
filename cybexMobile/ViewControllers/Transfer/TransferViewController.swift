@@ -40,10 +40,10 @@ class TransferViewController: BaseViewController {
         }).disposed(by: disposeBag)
         
         //按钮状态监听
-        Observable.combineLatest(self.coordinator!.state.property.accountValid.asObservable(),
-                                 self.coordinator!.state.property.amountValid.asObservable()).subscribe(onNext: {[weak self] (accountValid,amountValid) in
+        Observable.combineLatest(self.coordinator!.state.accountValid.asObservable(),
+                                 self.coordinator!.state.amountValid.asObservable()).subscribe(onNext: {[weak self] (accountValid,amountValid) in
                                     guard let `self` = self else { return }
-                                    if let _ = self.coordinator?.state.property.balance.value, let transferAmount = self.coordinator?.state.property.amount.value.toDouble() {
+                                    if let _ = self.coordinator?.state.balance.value, let transferAmount = self.coordinator?.state.amount.value.toDouble() {
                                         self.transferView.buttonIsEnable = accountValid == .validSuccessed && amountValid && transferAmount > 0
                                     } else {
                                         self.transferView.buttonIsEnable = false
@@ -51,10 +51,10 @@ class TransferViewController: BaseViewController {
                                     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         //账户监听
-        self.coordinator!.state.property.accountValid.asObservable().subscribe(onNext: {[weak self] (status) in
+        self.coordinator!.state.accountValid.asObservable().subscribe(onNext: {[weak self] (status) in
             guard let `self` = self else { return }
             self.transferView.accountValidStatus = status
-            if status == .validFailed && !(self.coordinator?.state.property.account.value.isEmpty)!,self.transferView.accountView.textField.text!.count != 0 {
+            if status == .validFailed && !(self.coordinator?.state.account.value.isEmpty)!,self.transferView.accountView.textField.text!.count != 0 {
                 self.transferView.accountView.loading_state = .Fail
 //                self.showToastBox(false, message: R.string.localizable.transfer_account_unexist.key.localized())
             }
@@ -64,15 +64,15 @@ class TransferViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         //余额监听
-        self.coordinator!.state.property.amountValid.asObservable().subscribe(onNext: {[weak self] (result) in
+        self.coordinator!.state.amountValid.asObservable().subscribe(onNext: {[weak self] (result) in
             guard let `self` = self else { return }
-            if !result, ((self.coordinator?.state.property.fee.value) != nil),self.coordinator?.state.property.balance.value != nil ,self.transferView.balance.count != 0{
+            if !result, ((self.coordinator?.state.fee.value) != nil),self.coordinator?.state.balance.value != nil ,self.transferView.balance.count != 0{
                 self.showToastBox(false, message: R.string.localizable.transfer_balance_unenough.key.localized())
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         //币种及余额监听
-        self.coordinator!.state.property.balance.asObservable().subscribe(onNext: {[weak self] (balance) in
+        self.coordinator!.state.balance.asObservable().subscribe(onNext: {[weak self] (balance) in
             guard let `self` = self else { return }
             if let balance = balance {
                 if let info = app_data.assetInfo[balance.asset_type] {
@@ -85,7 +85,7 @@ class TransferViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         //手续费监听
-        self.coordinator!.state.property.fee.asObservable().subscribe(onNext: {[weak self] (result) in
+        self.coordinator!.state.fee.asObservable().subscribe(onNext: {[weak self] (result) in
             guard let `self` = self else { return }
             if let data = result,let feeInfo = app_data.assetInfo[data.asset_id]{
                 let fee = data
@@ -97,7 +97,7 @@ class TransferViewController: BaseViewController {
             guard let `self` = self else { return }
             self.coordinator?.chooseOrAddAddress()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        self.coordinator?.state.property.account.asObservable().skip(1).subscribe(onNext: { [weak self](account) in
+        self.coordinator?.state.account.asObservable().skip(1).subscribe(onNext: { [weak self](account) in
             guard let `self` = self else { return }
             self.transferView.accountView.textField.text = account
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -120,7 +120,7 @@ class TransferViewController: BaseViewController {
     
     func clickTransferAction() {
         self.view.endEditing(true)
-        if self.transferView.accountView.loading_state != .Success || self.coordinator!.state.property.accountValid.value != AccountValidStatus.validSuccessed {
+        if self.transferView.accountView.loading_state != .Success || self.coordinator!.state.accountValid.value != AccountValidStatus.validSuccessed {
             self.transferView.accountView.loading_state = .normal
             return
         }
@@ -134,10 +134,10 @@ class TransferViewController: BaseViewController {
     
     func transferComfirm() {
         if let account = self.transferView.accountView.textField.text,
-            let balance = self.coordinator?.state.property.balance.value,
+            let balance = self.coordinator?.state.balance.value,
             let amount = self.transferView.quantityView.textField.text,
             let memo = self.transferView.memoView.textView.text,
-            let fee = self.coordinator?.state.property.fee.value {
+            let fee = self.coordinator?.state.fee.value {
             if let feeInfo = app_data.assetInfo[fee.asset_id] {
                 let data = getTransferInfo(account, quanitity: amount + " " + (app_data.assetInfo[balance.asset_type]?.symbol.filterJade)!, fee: (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade, memo: memo)
                 showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data)
@@ -165,6 +165,7 @@ extension TransferViewController {
             }
             else {
                 self.transferComfirm()
+                
             }
         }
         else {
@@ -176,6 +177,12 @@ extension TransferViewController {
     override func returnEnsureAction() {
         ShowToastManager.shared.hide()
         if !UserManager.shared.isLocked {
+
+            if !UserManager.shared.isWithDraw, self.coordinator?.state.memo.value.count != 0{
+                showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
+                return
+            }
+            
             self.startLoading()
             self.coordinator?.transfer({ [weak self](data) in
                 guard let `self` = self else { return }
@@ -184,9 +191,9 @@ extension TransferViewController {
                     ShowToastManager.shared.hide()
                     if self.isVisible{
                         if String(describing: data) == "<null>"{
-                            if AddressManager.shared.containAddressOfTransfer(self.coordinator!.state.property.account.value).0 == false {
+                            if AddressManager.shared.containAddressOfTransfer(self.coordinator!.state.account.value).0 == false {
                                 self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.transfer_success_title.key.localized(), content: R.string.localizable.transfer_success_content.key.localized())
-                                self.account_name = self.coordinator!.state.property.account.value
+                                self.account_name = self.coordinator!.state.account.value
                             }
                             else {
                                 self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())
@@ -245,6 +252,10 @@ extension TransferViewController {
     }
     
     @objc func memo(_ data: [String : Any]) {
+        if !UserManager.shared.isWithDraw{
+            showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
+            return
+        }
         self.coordinator?.setMemo(data["content"] as! String,canFetchFee:!UserManager.shared.isLocked)
         if UserManager.shared.isLocked {
             self.isFetchFee = true

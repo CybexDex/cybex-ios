@@ -9,7 +9,7 @@
 import Foundation
 
 @IBDesignable
-class AddressCellView: BaseView {
+class AddressCellView: CybexBaseView {
     
     @IBOutlet weak var nickName: UILabel!
     @IBOutlet weak var address: UILabel!

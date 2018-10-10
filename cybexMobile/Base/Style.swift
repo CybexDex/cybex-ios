@@ -8,6 +8,8 @@
 
 import Foundation
 import SwiftRichString
+import Localize_Swift
+import SwiftTheme
 
 enum StyleNames:String {
     case introduce_normal
@@ -16,6 +18,11 @@ enum StyleNames:String {
     case withdraw_introduce
     case alertContent
     case address
+    case bold_12_20
+    
+    func tagText(_ nestText: String) -> String {
+        return "<\(self.rawValue)>" + nestText + "</\(self.rawValue)>"
+    }
 }
 
 enum LineViewStyleNames:String {
@@ -24,8 +31,60 @@ enum LineViewStyleNames:String {
     case transfer_confirm
 }
 
+extension Style {
+    func setupLineHeight(_ lineHeight:CGFloat, fontHeight:CGFloat) {
+        self.maximumLineHeight = lineHeight
+        self.minimumLineHeight = lineHeight
+        self.baselineOffset = labelBaselineOffset(lineHeight, fontHeight: lineHeight)
+    }
+}
+
 class RichStyle {
-    init() {
+    static var shared = RichStyle()
+    
+    func start() {
+        
+    }
+    
+    private init() {
+        changeStyleFromTheme()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: {notification in
+            self.start()
+            self.changeStyleFromTheme()
+        })
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: {notification in
+            self.start()
+            self.changeStyleFromTheme()
+        })
+    }
+    
+    
+    
+    //PingFangSC-Regular_12_#F7F8FAFF_20
+    func constructStyle(_ fontSize: CGFloat = 12, color:UIColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo, lineHeight: CGFloat = 20, font: SystemFonts = SystemFonts.PingFangSC_Regular) {
+        let style = Style {
+            let realfont = font.font(size: fontSize)
+            $0.font = realfont
+            $0.color = color
+            
+            $0.setupLineHeight(lineHeight, fontHeight: realfont.lineHeight)
+        }
+        
+        Styles.register("\(font.rawValue)_\(fontSize)_\(color.hexString(true))_\(lineHeight)", style: style)
+    }
+    
+    func tagText(_ nestText: String, fontSize: CGFloat = 12, color:UIColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo, lineHeight: CGFloat = 20, font: SystemFonts = SystemFonts.PingFangSC_Regular) -> String {
+        let tag = "\(font.rawValue)_\(fontSize)_\(color.hexString(true))_\(lineHeight)"
+        
+        if !StylesManager.shared.styles.keys.contains(tag) {
+            constructStyle(fontSize, color: color, lineHeight: lineHeight, font: font)
+        }
+        return "<\(tag)>" + nestText + "</\(tag)>"
+    }
+    
+    func changeStyleFromTheme() {
         let style = Style {
             $0.font = SystemFonts.PingFangSC_Regular.font(size: 14.0)
             $0.color = UIColor.steel
@@ -46,6 +105,16 @@ class RichStyle {
             $0.lineSpacing = 4.0
         }
         Styles.register(StyleNames.withdraw_introduce.rawValue, style: with_style)
+        
+        let bold_12_20 = Style {
+            let font = SystemFonts.PingFangHK_Regular.font(size: 12)
+            $0.font = font
+            $0.color = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
+            
+            $0.setupLineHeight(20, fontHeight: font.lineHeight)
+        }
+        
+        Styles.register(StyleNames.bold_12_20.rawValue, style: bold_12_20)
         
         passwordStyle()
         alertDetailStyle()

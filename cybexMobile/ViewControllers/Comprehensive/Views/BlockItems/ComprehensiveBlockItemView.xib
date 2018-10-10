@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComprehensiveBlockItemView">
+            <connections>
+                <outlet property="blockContentLabel" destination="JJm-1v-zJr" id="jGh-ng-uL8"/>
+                <outlet property="blockTitle" destination="3ww-Le-NUa" id="QuZ-N1-ORl"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="btM-Yo-6kI">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="428"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ww-Le-NUa" customClass="BaseLabel" customModule="cybexMobile" customModuleProvider="target">
+                    <rect key="frame" x="10" y="12" width="352" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                            <real key="value" value="32"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJm-1v-zJr" customClass="BaseLabel" customModule="cybexMobile" customModuleProvider="target">
+                    <rect key="frame" x="10" y="38" width="352" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                            <real key="value" value="16"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Lhl-p8-24W" firstAttribute="trailing" secondItem="3ww-Le-NUa" secondAttribute="trailing" constant="13" id="BXH-wO-2iM"/>
+                <constraint firstItem="JJm-1v-zJr" firstAttribute="top" secondItem="3ww-Le-NUa" secondAttribute="bottom" constant="5" id="C9W-OV-2d0"/>
+                <constraint firstItem="Lhl-p8-24W" firstAttribute="trailing" secondItem="JJm-1v-zJr" secondAttribute="trailing" constant="13" id="DLc-HS-Ymb"/>
+                <constraint firstItem="3ww-Le-NUa" firstAttribute="leading" secondItem="Lhl-p8-24W" secondAttribute="leading" constant="10" id="NRE-7j-aU3"/>
+                <constraint firstItem="3ww-Le-NUa" firstAttribute="top" secondItem="Lhl-p8-24W" secondAttribute="top" constant="12" id="QRd-oN-uXV"/>
+                <constraint firstItem="JJm-1v-zJr" firstAttribute="leading" secondItem="Lhl-p8-24W" secondAttribute="leading" constant="10" id="tUs-VG-CeT"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Lhl-p8-24W"/>
+            <point key="canvasLocation" x="-782" y="14"/>
+        </view>
+    </objects>
+</document>

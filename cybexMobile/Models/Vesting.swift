@@ -116,16 +116,9 @@ class MyPortfolioData{
     
     if let limitArray = UserManager.shared.limitOrder.value {
       for limit in limitArray {
-        if limit.isBuy {
-          if limit.sellPrice.base.assetID == balance.asset_type {
-            let amount = getRealAmount(balance.asset_type, amount: limit.sellPrice.base.amount)
+        if limit.sellPrice.base.assetID == balance.asset_type {
+            let amount = getRealAmount(balance.asset_type, amount: limit.forSale)
             limitDecimal = limitDecimal + amount
-          }
-        } else {
-          if limit.sellPrice.base.assetID == balance.asset_type {
-            let amount = getRealAmount(balance.asset_type, amount: limit.sellPrice.base.amount)
-            limitDecimal = limitDecimal + amount
-          }
         }
       }
       if let asset_info = app_data.assetInfo[balance.asset_type] {

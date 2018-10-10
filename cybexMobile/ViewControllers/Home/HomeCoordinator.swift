@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import NBLCommonModule
 
 protocol HomeCoordinatorProtocol {
   func openMarket(index:Int, currentBaseIndex: Int)

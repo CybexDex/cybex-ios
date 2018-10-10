@@ -12,7 +12,7 @@ import TinyConstraints
 import SwiftTheme
 
 protocol CybexTextViewDelegate {
-    func returnPassword(_ password:String)
+    func returnPassword(_ password:String, sender: CybexTextView)
     func clickCancle(_ sender : CybexTextView)
     func returnEnsureAction()
     func returnEnsureImageAction()
@@ -21,6 +21,12 @@ protocol CybexTextViewDelegate {
 
 
 class CybexTextView: UIView {
+    
+    enum textView_type : Int {
+        case normal
+        case time
+    }
+    
     var middleView : (UIView&Views)? {
         didSet{
             contentView.addSubview(middleView!)
@@ -39,6 +45,12 @@ class CybexTextView: UIView {
         }
     }
     
+    var view_type : textView_type? {
+        didSet{
+            
+        }
+    }
+    
     @IBOutlet weak var titleImageView: UIImageView!
     @IBOutlet weak var hSeparateView: UIView!
     @IBOutlet weak var title: UILabel!
@@ -52,7 +64,7 @@ class CybexTextView: UIView {
     
     @IBAction func ensureClick(_ sender: Any) {
         if let tf = self.middleView as? CybexPasswordView{
-            self.delegate?.returnPassword(tf.textField.text!)
+            self.delegate?.returnPassword(tf.textField.text!,sender: self)
         }else{
             if titleImageView.isHidden == true {
                 self.delegate?.returnEnsureAction()
@@ -62,7 +74,6 @@ class CybexTextView: UIView {
             }
         }
     }
-    
     
     func setup() {
         self.cancle.setTitleColor(ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo , for: .normal)

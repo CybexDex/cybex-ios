@@ -5,14 +5,18 @@
   Created by koofrank on 2018/3/12.
   Copyright © 2018年 Cybex. All rights reserved.
 */
-
+"" = "";
+"--" = "--";
+"nav.home" = "首页";
 "nav.watchlist" = "行情";
 "nav.faq" = "FAQ";
 "nav.apply" = "申请";
 "nav.account" = "账号";
 "nav.setting" = "设置";
 "nav.trade"   = "交易";
+"nav.eto" = "ETO";
 
+"home_blockchain" = "区块信息";
 
 "market" = "交易中心";
 "language" = "语言";
@@ -21,6 +25,7 @@
 "light" = "白色";
 "version" = "版本";
 "frequency" = "行情刷新频率";
+"environment" = "切换环境";
 
 "frequency_normal" = "普通行情";
 "frequency_time" = "实时行情";
@@ -210,6 +215,7 @@
 "trade_history_total" = "成交额";
 
 "setting_language"    = "简体中文";
+"setting_help" = "帮助与反馈";
 
 "mark_order_book"     = "买卖单";
 "mark_trade_history"  = "交易历史";
@@ -300,6 +306,7 @@
 "transfer_unit_minite" = "分";
 "transfer_unit_second" = "秒";
 
+"eto_quantity" = "金额";
 
 
 "transfer_failed" = "转账失败";
@@ -315,6 +322,11 @@
 "hello" = "您好，";
 "deposit_withdraw" = "充值提现";
 "frozen" = "冻结：";
+"get_white_list" = "获取白名单";
+"ETO_detail" = "ETO详情";
+"project_intro" = "项目介绍";
+"project_website" = "项目官网";
+"user_agreement" = "《用户协议》";
 
 //zsy end
 
@@ -377,3 +389,95 @@
 "account_transfer_nodata"       = "暂无转账账户";
 
 "address_delete_confirm" = "删除确认";
+
+
+"hot_project" = "热门项目";
+
+"eto_personal_cap" = "单账号限额";
+"eto_subscription_unit" = "最小认购单位";
+"eto_remaining" = "剩余可认购额度";
+"eto_min_subscription" = "单笔最低限额";
+"eto_subscribed" = "已认购限额";
+"eto_available" = "可用余额 %@ %@";
+"eto_join" = "参与ETO";
+
+"eto_project_detail_title" = "Project Details";
+
+"eto_project_detail" = "项目详情：";
+
+"eto_share" = "分享";
+"eto_records" = "ETO记录";
+"eto_record_receive" = "收到Token";
+"eto_record_send" = "参与ETO";
+
+"eto_invalid_sub" = "无效认购";
+"eto_invalid_partly_sub" = "部分有效";
+"eto_refund" = "退款";
+"eto_receive_success" = "到账成功";
+
+
+"eto_project_finish" = "已经结束";
+"eto_project_comming" = "即将开始";
+"eto_project_progress" = "正在进行";
+
+"eto_project_time_finish" = "完成时间:";
+"eto_project_time_comming" = "距离结束:";
+"eto_project_time_pre" = "距离开始:";
+
+"eto_submit_title" = "你将参与 %@ 的ETO";
+"eto_submit_check_error_1" = "余额不足";
+"eto_submit_check_error_2" = "超出单账号限额";
+"eto_submit_check_error_3" = "剩余可认购额度不足";
+"eto_submit_check_error_4" = "不可低于单笔最低限额";
+"eto_submit_check_error_5" = "认购金额为最小认购单位整数倍";
+"eto_submit_confirm" = "ETO确认";
+
+"eto_project_time_finish" = "完成时间：";
+"eto_project_time_comming" = "距离结束：";
+"eto_project_time_pre" = "距离开始：";
+
+
+"eto_project_name" = "项目名称：";
+"eto_token_name" = "代币名称：";
+"eto_start_time" = "ETO时间：";
+"eto_end_time" = "结束时间：";
+"eto_start_at" = "开放交易时间：";
+"eto_token_releasing_time" = "发币时间：";
+"eto_currency" = "使用币种：";
+"eto_exchange_ratio" = "兑换比例：";
+"eto_total_supply" = "代币总量：";
+
+"eto_project_online" = "官网：";
+"eto_project_white_Paper" = "白皮书：";
+"eto_project_immediate" = "实时";
+
+"eto_user_agreenment" = "服务条款与协议";
+
+
+"eto_project_reserve_now" = "立即预约";
+"eto_project_verifying" = "审核中";
+"eto_project_stop_reserve" = "停止预约";
+"eto_project_waiting" = "等待ETO开始";
+"eto_project_join" = "立即ETO";
+"eto_project_rejected" = "审核未通过";
+"eto_project_kyc" = "进行KYC";
+"eto_project_login" = "请登录";
+
+
+
+"eto_transfer_title" = "转账待确认中";
+"eto_transfer_content" = "请勿重复转账";
+
+"eto_invite_code_error" = "请输入正确的邀请码";
+"eto_invite_code_title" = "输入邀请码";
+
+"eto_time_less_minite" = "小于1分钟";
+
+"eto_detail_user_agreement_error" = "请先勾选《用户协议》";
+"eto_appointment_success" = "预约成功，请耐心等待审核结果";
+
+"record_all" = "充提记录";
+
+"record_types" = "类型";
+"record_currency" = "币种";
+"home_top_gainers" = "涨幅榜";

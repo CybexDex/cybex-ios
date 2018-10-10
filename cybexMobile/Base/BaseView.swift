@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import SwiftNotificationCenter
+import NBLCommonModule
 
 @IBDesignable
-class BaseView: UIControl {
+class CybexBaseView: UIControl {
     
     var xibView:UIView!
     var foreView:UIView!
@@ -18,6 +18,12 @@ class BaseView: UIControl {
     enum TouchAlphaValues : CGFloat {
         case touched = 0.3
         case untouched = 1.0
+    }
+    
+    override var backgroundColor: UIColor? {
+        didSet {
+            self.foreView.backgroundColor = backgroundColor
+        }
     }
     
     var touchAlpha : TouchAlphaValues = .untouched {
@@ -76,6 +82,11 @@ class BaseView: UIControl {
         
     }
     
+    func clearBgColor() {
+        self.foreView.theme_backgroundColor = nil
+        self.foreView.backgroundColor = .clear
+    }
+    
     //MARK: Touch
     
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
@@ -120,7 +131,7 @@ class BaseView: UIControl {
         return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
     }
     
-    fileprivate func updateHeight() {
+    func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
@@ -129,11 +140,6 @@ class BaseView: UIControl {
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView?.bottom ?? 0
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layoutIfNeeded()
     }
     
     override init(frame: CGRect) {
@@ -160,7 +166,8 @@ class BaseView: UIControl {
         let foreView = UIView()
         foreView.frame = self.bounds
         foreView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        foreView.theme_backgroundColor = [UIColor.darkTwo.hexString(true), UIColor.white.hexString(true)]
+        foreView.theme1BgColor = UIColor.darkTwo
+        foreView.theme2BgColor = UIColor.white
         insertSubview(foreView, at: 0)
 
         self.xibView = view

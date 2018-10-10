@@ -1,36 +1,26 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 
 def network
-#    pod 'Starscream'
-    pod 'SocketRocket', :git => 'https://github.com/facebook/SocketRocket', :branch => 'master'
     pod 'JSONRPCKit', :git => 'https://github.com/phpmaple/JSONRPCKit', :branch => 'master'
-    pod 'Moya', :git => 'https://github.com/Moya/Moya', :tag => '12.0.0-beta.1'
-    pod 'Kingfisher'
-    pod 'RealReachability'
+    pod 'ReachabilitySwift'
     pod 'Apollo'
-    pod 'AlamofireNetworkActivityLogger'
 end
 
 def data
     pod 'ObjectMapper'
-    pod 'HandyJSON'
     pod 'SwiftyJSON'
-    pod 'BigInt'
-    pod 'GRDB.swift'
     pod 'CryptoSwift'
-    pod 'RxGRDB'
     pod 'SwiftyUserDefaults',:git => 'https://github.com/radex/SwiftyUserDefaults', :tag => '4.0.0-alpha.1'
     pod 'Zephyr'
     pod 'Cache'
     pod 'Locksmith'
     pod 'Then'
     pod 'FCUUID'
-    pod 'IQKeyboardManagerSwift'
-    pod 'Guitar'
+    pod 'IQKeyboardManagerSwift', :git => 'https://github.com/hackiftekhar/IQKeyboardManager', :tag => 'v6.1.1'
     pod 'DifferenceKit'
     pod 'Dollar'
     pod 'Validator'
-    pod 'Fakery'
+    pod 'Fakery', :git => 'https://github.com/vadymmarkov/Fakery', :branch => 'master'
 end
 
 def resource
@@ -38,8 +28,6 @@ def resource
 end
 
 def architecture
-   pod 'ReSwift'
-   pod 'RxSwift'
    pod 'ObservableArray-RxSwift'
    pod 'RxSwiftExt'
    pod 'RxDataSources'
@@ -56,6 +44,7 @@ def architecture
    pod 'AwaitKit'
    
    pod 'AsyncOperation'
+   pod 'URLNavigator'
 end
 
 def permission
@@ -64,10 +53,7 @@ def permission
 end
 
 def animation
-    pod 'EasyAnimation'
-#    pod 'Hero'
-    pod 'ChainableAnimations'
-    pod 'TableFlip'
+
 end
 
 def extension
@@ -78,7 +64,6 @@ end
 
 def ui
     pod 'TinyConstraints'
-    pod 'ESTabBarController-swift'
     pod 'KMNavigationBarTransition'
     pod 'NVActivityIndicatorView'
     pod 'BeareadToast', :git => 'https://github.com/phpmaple/BeareadToast'
@@ -89,27 +74,33 @@ def ui
     pod 'Typist'
     pod 'RxGesture'
     pod 'SwiftRichString', :git => 'https://github.com/malcommac/SwiftRichString', :tag => '2.0.1'
-    pod 'ZLaunchAd'
-    pod 'SDCAlertView'
+#    pod 'ZLaunchAd'
     pod 'Presentr'
     pod 'Macaw'
-    pod 'SwiftEntryKit'
+#    pod 'SwiftEntryKit'
     pod 'Keyboard+LayoutGuide'
-    pod 'XLPagerTabStrip'
+#    pod 'XLPagerTabStrip'
     pod 'EFQRCode'
     pod 'GrowingTextView'
     pod 'XLActionController'
     pod 'ESPullToRefresh'
     pod 'FSPagerView'
+    pod 'ActiveLabel'
+#    pod 'SkeletonView'
 end
 
 def other
     pod 'Siren'
-    pod 'LifetimeTracker'
-    pod 'MLeaksFinder'
+#    pod 'MLeaksFinder'
     pod 'Device'
-    pod 'SwiftNotificationCenter'
+#    pod 'SwiftNotificationCenter'
     pod 'AsyncSwift'
+    pod 'MonkeyKing' #share
+end
+
+def scripts
+#    pod 'SwiftGen'
+#    pod 'Sourcery'
 end
 
 def fabric
@@ -132,7 +123,7 @@ end
 
 target 'cybexMobile' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
+#  use_frameworks!
   inhibit_all_warnings!
 
   pod 'Reveal-SDK', :configurations => ['Debug']
@@ -149,6 +140,7 @@ target 'cybexMobile' do
   other
   debug
   um
+  scripts
   
   target 'cybexMobileTests' do
       inherit! :search_paths
@@ -156,4 +148,17 @@ target 'cybexMobile' do
       pod 'Nimble'
       pod 'Quick'
   end
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        if target.name == 'cybexMobile'
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '4.0'
+                if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 8.0
+                    config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '8.0'
+                end
+            end
+        end
+    end
 end

@@ -43,11 +43,11 @@ class AddAddressViewController: BaseViewController {
             self.containerView.asset.content.text = app_data.assetInfo[self.asset]?.symbol.filterJade
             if self.asset == AssetConfiguration.EOS {
                 self.title = R.string.localizable.address_title_add_eos.key.localized()
-                self.containerView.address.title = R.string.localizable.eos_withdraw_account.key.localized()
+                self.containerView.address.title = R.string.localizable.eos_withdraw_account.key
             }
             else {
                 self.title = R.string.localizable.address_title_add.key.localized()
-                self.containerView.address.title = R.string.localizable.withdraw_address.key.localized()
+                self.containerView.address.title = R.string.localizable.withdraw_address.key
                 self.containerView.memo.isHidden = true
             }
             if self.withdrawAddress != nil {

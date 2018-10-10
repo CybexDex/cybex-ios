@@ -18,15 +18,15 @@ class CybexAlertView: UIView {
         didSet{
             if let data = data as? [String:String] {
                 if let titleString = data["title"]{
-                    title.text          = titleString
+                    title.text = titleString
                 }
                 
                 if let messageString = data["message"]{
-                    message.text          = messageString
+                    message.text = messageString
                 }
                 
                 if let titleImageString = data["title_image"]{
-                    titleImage.image    = UIImage(named: titleImageString)
+                    titleImage.image = UIImage(named: titleImageString)
                 }
                 updateHeight()
             }

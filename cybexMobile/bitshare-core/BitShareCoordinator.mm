@@ -74,6 +74,7 @@
   
   
 + (NSString *)getRecodeLoginOperation:(NSString *)accountName asset:(NSString *)asset fundType:(NSString *)fundType size:(int)size offset:(int)offset expiration:(int)expiration {
+    
   string jsonString = cybex_gateway_query([accountName UTF8String], [asset UTF8String], [fundType UTF8String], size, offset, expiration);
   return @(jsonString.c_str());
 }

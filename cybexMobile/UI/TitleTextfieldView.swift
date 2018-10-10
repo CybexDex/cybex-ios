@@ -95,9 +95,9 @@ class TitleTextfieldView: UIView {
         }
     }
     func startAnimation() {
-        self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: self.loadingBtn!.width, height: self.loadingBtn!.height))
-        self.activityIndicator?.activityIndicatorViewStyle = .gray
-        self.activityIndicator?.center = CGPoint(x: self.loadingBtn!.width * 0.5, y: self.loadingBtn!.height * 0.5)
+        self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+        self.activityIndicator?.activityIndicatorViewStyle = .white
+        self.activityIndicator?.center = CGPoint(x: 12, y: self.actionsView.height * 0.5)
         self.loadingBtn?.addSubview(self.activityIndicator!);
         self.activityIndicator?.startAnimating()
     }
@@ -146,7 +146,7 @@ class TitleTextfieldView: UIView {
             return
         }
         if actionsView.arrangedSubviews.count > 0 {
-            actionsView.removeArrangedSubviews()
+            actionsView.removeSubviews()
         }
         for (index, value) in (buttonSettings?.enumerated())! {
             if value.imageName == "loading_state" {
@@ -165,7 +165,7 @@ class TitleTextfieldView: UIView {
                 btn.setImage(UIImage(named: value.selectedImageName), for: .selected)
                 btn.addTarget(self, action: #selector(handleAction(sender:)), for: .touchUpInside)
                 btn.isShowWhenEditing = value.isShowWhenEditing
-                btn.width((image?.size.width)! + 5)
+                btn.width(image?.size.width ?? -5 + 5)
                 actionsView.addArrangedSubview(btn)
                 btn.isHidden = value.isShowWhenEditing
             }

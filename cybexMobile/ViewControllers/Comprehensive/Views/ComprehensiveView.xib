@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComprehensiveView">
+            <connections>
+                <outlet property="announceView" destination="Kme-f7-KkW" id="SM3-WY-3af"/>
+                <outlet property="bannerView" destination="aiZ-49-g8l" id="mNI-za-oMC"/>
+                <outlet property="containerView" destination="EZn-fH-M19" id="qhh-DE-Zzd"/>
+                <outlet property="hotAssetsView" destination="44G-7F-E3W" id="cth-6I-cOe"/>
+                <outlet property="middleItemsView" destination="dYL-dQ-b1J" id="uqo-iS-eIc"/>
+                <outlet property="topGainersView" destination="Mdn-bC-eGH" id="WKn-Tu-zb0"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="btM-Yo-6kI">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WPE-rN-dMX">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XZA-ba-mfx">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="727"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dVu-pG-uuE">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="773"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aiZ-49-g8l" customClass="ETOHomeBannerView" customModule="cybexMobile" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="190" id="MVb-uu-qJW"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kme-f7-KkW" customClass="AnnounceView" customModule="cybexMobile" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="190" width="375" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="36" id="gvW-bZ-T0v"/>
+                                            </constraints>
+                                        </view>
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44G-7F-E3W" customClass="HotAssetsView" customModule="cybexMobile" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="226" width="375" height="110"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="110" id="NVK-8e-nVS"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                    <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                    <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="showTouchFeedback" value="NO"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-dQ-b1J" customClass="ComprehensiveItemsView" customModule="cybexMobile" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="226" width="375" height="90"/>
+
+                                        </view>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EZn-fH-M19">
+                                            <rect key="frame" x="0.0" y="316" width="375" height="457"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3CG-Jz-SPa">
+                                                    <rect key="frame" x="0.0" y="10" width="375" height="39"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoV-8S-jc7">
+                                                            <rect key="frame" x="13" y="0.0" width="35.5" height="39"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="home_top_gainers"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="NoV-8S-jc7" firstAttribute="top" secondItem="3CG-Jz-SPa" secondAttribute="top" id="GS4-4E-Hze"/>
+                                                        <constraint firstAttribute="height" constant="39" id="R9r-7Q-FfZ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="NoV-8S-jc7" secondAttribute="bottom" id="SOa-6b-Z9Y"/>
+                                                        <constraint firstItem="NoV-8S-jc7" firstAttribute="leading" secondItem="3CG-Jz-SPa" secondAttribute="leading" constant="13" id="uIu-e8-HqQ"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mdn-bC-eGH">
+                                                    <rect key="frame" x="0.0" y="49" width="375" height="408"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="3CG-Jz-SPa" secondAttribute="trailing" id="CjV-GI-Src"/>
+                                                <constraint firstItem="3CG-Jz-SPa" firstAttribute="top" secondItem="EZn-fH-M19" secondAttribute="top" constant="10" id="Liz-Na-VK5"/>
+                                                <constraint firstAttribute="height" constant="457" id="OTj-wA-nbh"/>
+                                                <constraint firstItem="Mdn-bC-eGH" firstAttribute="top" secondItem="3CG-Jz-SPa" secondAttribute="bottom" id="Ra0-1B-yaS"/>
+                                                <constraint firstItem="Mdn-bC-eGH" firstAttribute="leading" secondItem="EZn-fH-M19" secondAttribute="leading" id="U3D-xA-gvi"/>
+                                                <constraint firstAttribute="trailing" secondItem="Mdn-bC-eGH" secondAttribute="trailing" id="jsF-df-DTx"/>
+                                                <constraint firstItem="3CG-Jz-SPa" firstAttribute="leading" secondItem="EZn-fH-M19" secondAttribute="leading" id="nvA-dS-Ncw"/>
+                                                <constraint firstAttribute="bottom" secondItem="Mdn-bC-eGH" secondAttribute="bottom" id="ojS-ap-LHo"/>
+                                            </constraints>
+                                            <viewLayoutGuide key="safeArea" id="gYn-Ao-XsZ"/>
+                                        </view>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="dVu-pG-uuE" firstAttribute="leading" secondItem="XZA-ba-mfx" secondAttribute="leading" id="1q3-GP-BB6"/>
+                                <constraint firstAttribute="trailing" secondItem="dVu-pG-uuE" secondAttribute="trailing" id="SE6-iC-Uxd"/>
+                                <constraint firstItem="dVu-pG-uuE" firstAttribute="top" secondItem="XZA-ba-mfx" secondAttribute="top" id="SKn-Ft-AFK"/>
+                                <constraint firstAttribute="bottom" secondItem="dVu-pG-uuE" secondAttribute="bottom" id="bIJ-gl-6Zf"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="XZA-ba-mfx" firstAttribute="top" secondItem="WPE-rN-dMX" secondAttribute="top" id="Y5U-ow-Prz"/>
+                        <constraint firstItem="XZA-ba-mfx" firstAttribute="leading" secondItem="WPE-rN-dMX" secondAttribute="leading" id="bIY-Z8-jZ5"/>
+                        <constraint firstAttribute="bottom" secondItem="XZA-ba-mfx" secondAttribute="bottom" id="pZp-Sa-a06"/>
+                        <constraint firstAttribute="trailing" secondItem="XZA-ba-mfx" secondAttribute="trailing" id="u2h-O9-WMq"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="XZA-ba-mfx" firstAttribute="width" secondItem="btM-Yo-6kI" secondAttribute="width" id="Eoe-wh-MG4"/>
+                <constraint firstItem="WPE-rN-dMX" firstAttribute="top" secondItem="btM-Yo-6kI" secondAttribute="top" id="LkF-O3-MUD"/>
+                <constraint firstAttribute="trailing" secondItem="WPE-rN-dMX" secondAttribute="trailing" id="b9n-9g-s98"/>
+                <constraint firstItem="WPE-rN-dMX" firstAttribute="leading" secondItem="btM-Yo-6kI" secondAttribute="leading" id="gSL-VY-032"/>
+                <constraint firstItem="Lhl-p8-24W" firstAttribute="bottom" secondItem="WPE-rN-dMX" secondAttribute="bottom" id="wUQ-AJ-pKL"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Lhl-p8-24W"/>
+            <point key="canvasLocation" x="-633" y="-128"/>
+        </view>
+    </objects>
+</document>

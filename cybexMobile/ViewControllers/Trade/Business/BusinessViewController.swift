@@ -22,22 +22,25 @@ class BusinessViewController: BaseViewController {
                 fetchLatestPrice()
                 refreshView()
             }
+            
+            if self.price_pricision == 0 {
+                fetchLatestPrice()
+            }
         }
     }
     
     @IBOutlet weak var containerView: BusinessView!
     
-    var type : exchangeType = .buy
+    var type: exchangeType = .buy
     
     var coordinator: (BusinessCoordinatorProtocol & BusinessStateManagerProtocol)?
     
-    var price_pricision : Int = 0
-    var amount_pricision : Int = 0
+    var price_pricision: Int = 0
+    var amount_pricision: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
-        
         setupEvent()
     }
     
@@ -126,13 +129,13 @@ class BusinessViewController: BaseViewController {
         if UserManager.shared.isLoginIn {
             guard let pair = pair, let quote_info = app_data.assetInfo[pair.quote] else { return }
             
-            self.containerView.button.locali = self.type == .buy ? R.string.localizable.openedBuy.key.localized() : R.string.localizable.openedSell.key.localized()
+            self.containerView.button.locali = self.type == .buy ? R.string.localizable.openedBuy.key : R.string.localizable.openedSell.key
             if let title = self.containerView.button.button.titleLabel?.text {
-                self.containerView.button.locali = "\(title) \(quote_info.symbol.filterJade)"
+                self.containerView.button.button.setTitle("\(title) \(quote_info.symbol.filterJade)", for: .normal)
             }
         }
         else {
-            self.containerView.button.locali = R.string.localizable.business_login_title.key.localized()
+            self.containerView.button.locali = R.string.localizable.business_login_title.key
         }
     }
     
@@ -165,12 +168,12 @@ class BusinessViewController: BaseViewController {
             guard let `self` = self else { return }
             
             self.checkBalance()
-            guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0, text.components(separatedBy: ".").count <= 2 && text != "." else {
+            guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0, text.components(separatedBy: ".").count <= 2 && text != ".", let textDouble = text.toDouble() else {
                 self.containerView.value.text = "≈¥0.00"
                 return
             }
             
-            self.containerView.value.text = "≈¥" + String(describing: changeToETHAndCYB(base_info.id).eth.toDouble()! * text.toDouble()! * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
+            self.containerView.value.text = "≈¥" + String(describing: changeToETHAndCYB(base_info.id).eth.toDouble()! * textDouble * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
             
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
@@ -380,6 +383,9 @@ extension BusinessViewController {
     }
     
     @objc func adjustPrice(_ data:[String : Bool]) {
+        if self.price_pricision == 0 {
+            return
+        }
         self.coordinator?.adjustPrice(data["plus"]!,price_pricision:self.price_pricision)
     }
     

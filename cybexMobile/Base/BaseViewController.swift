@@ -62,6 +62,10 @@ class BaseViewController: UIViewController {
         let color = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
         navigationController?.navigationBar.setBackgroundImage(UIImage(color: color), for: .default)
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.view.endEditing(true)
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -125,7 +129,7 @@ class BaseViewController: UIViewController {
         toast?.hide(true, after: after)
     }
     
-   
+    
     
     func configRightNavButton(_ image:UIImage? = nil) {
         rightNavButton = UIButton.init(type: .custom)
@@ -162,7 +166,7 @@ extension UIViewController {
     @objc open func leftAction(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
-
+    
     func configLeftNavigationButton(_ image:UIImage?) {
         let leftNavButton = UIButton.init(type: .custom)
         leftNavButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
@@ -174,22 +178,19 @@ extension UIViewController {
 }
 
 extension UIViewController : ShowManagerDelegate {
-    
-    
-    func showPasswordBox(_ title:String = R.string.localizable.withdraw_unlock_wallet.key.localized()){
+    func showPasswordBox(_ title:String = R.string.localizable.withdraw_unlock_wallet.key.localized(),middleType:CybexTextView.textView_type = .normal){
         if ShowToastManager.shared.showView != nil {
             ShowToastManager.shared.hide(0)
         }
         SwifterSwift.delay(milliseconds: 100) {
-            ShowToastManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big)
+            ShowToastManager.shared.setUp(title: title, contentView: CybexPasswordView(frame: .zero), animationType: .small_big, middleType: middleType)
             ShowToastManager.shared.delegate = self
-            
             ShowToastManager.shared.showAnimationInView(self.view)
         }
     }
     
-    func showToastBox(_ success:Bool, message:String) {
-        if ShowToastManager.shared.showView != nil {
+    func showToastBox(_ success:Bool, message:String, manager:ShowToastManager = ShowToastManager.shared) {
+        if manager.showView != nil {
             ShowToastManager.shared.hide(0)
         }
         SwifterSwift.delay(milliseconds: 100) {
@@ -219,7 +220,7 @@ extension UIViewController : ShowManagerDelegate {
             subView.data = attributes
             setup?(subView.labels)
             
-            ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .small_big)
+            ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .small_big, middleType: .normal)
             ShowToastManager.shared.showAnimationInView(self.view)
             ShowToastManager.shared.delegate = self
         }
@@ -240,6 +241,20 @@ extension UIViewController : ShowManagerDelegate {
         }
     }
     
+    
+    func showWaiting(_ title: String, content: String, time: Int) {
+        if ShowToastManager.shared.showView != nil {
+            ShowToastManager.shared.hide(0)
+        }
+        SwifterSwift.delay(milliseconds: 100) {
+            ShowToastManager.shared.setUp(title, content: content, time: time, animationType: ShowToastManager.ShowAnimationType.small_big)
+            ShowToastManager.shared.showAnimationInView(self.view)
+            ShowToastManager.shared.delegate = self
+        }
+    }
+    
+    
+    
     func returnEnsureAction() {
         
     }
@@ -253,6 +268,7 @@ extension UIViewController : ShowManagerDelegate {
     @objc func passwordPassed(_ passed:Bool) {
         
     }
+    
     @objc func passwordDetecting() {
         
     }
@@ -268,4 +284,11 @@ extension UIViewController : ShowManagerDelegate {
         }
     }
     
+    func ensureWaitingAction(_ sender: CybexWaitingView) {
+        
+    }
+    
+    func returnInviteCode(_ sender: String) {
+        
+    }
 }

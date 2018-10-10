@@ -161,7 +161,7 @@ class RechargeDetailViewController: BaseViewController {
                     if !letterBegin.test(string: address){
                         self.isTrueAddress = false
                         self.contentView.errorView.isHidden = false
-                        self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key.localized()
+                        self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key
                         self.contentView.addressView.address_state = .Fail
                         return
                     }
@@ -180,7 +180,7 @@ class RechargeDetailViewController: BaseViewController {
                                 self.contentView.addressView.address_state = .Fail
                                 self.isTrueAddress = false
                                 self.contentView.errorView.isHidden = false
-                                self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key.localized()
+                                self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key
                             }
                         })
                     }
@@ -204,6 +204,7 @@ class RechargeDetailViewController: BaseViewController {
             guard let `self` = self , let address = address else { return }
             self.contentView.addressView.content.text = address.address
             self.contentView.addressView.address_state = .Success
+            self.contentView.memoView.content.text = address.memo
             self.isTrueAddress = true
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
@@ -214,21 +215,21 @@ class RechargeDetailViewController: BaseViewController {
             self.contentView.errorView.isHidden = false
             self.contentView.withdraw.isEnable = false
             if amount < data.minValue{
-                self.contentView.errorL.locali = R.string.localizable.withdraw_min_value.key.localized()
+                self.contentView.errorL.locali = R.string.localizable.withdraw_min_value.key
             }else if amount > self.available || self.available < data.fee {
-                self.contentView.errorL.locali =  R.string.localizable.withdraw_nomore.key.localized()
+                self.contentView.errorL.locali =  R.string.localizable.withdraw_nomore.key
             }else{
                 self.isAvalibaleAmount = true
                 self.contentView.errorView.isHidden = true
                 self.setFinalAmount()
                 if let addressText = self.contentView.addressView.content.text,addressText.count != 0,!self.isTrueAddress{
                     self.contentView.errorView.isHidden = false
-                    self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key.localized()
+                    self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key
                 }
             }
         }
     }
-
+    
     override func configureObserveState() {
         self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext: {[weak self] (withdrawInfo) in
             guard let `self` = self, let data = withdrawInfo else { return }
@@ -354,7 +355,6 @@ extension RechargeDetailViewController{
             self.coordinator?.pop()
         }
     }
-
 }
 
 extension RechargeDetailViewController {
@@ -369,7 +369,7 @@ extension RechargeDetailViewController {
                 ShowToastManager.shared.hide()
                 if self.isVisible{
                     if String(describing: data) == "<null>"{
-        
+                        
                         if AddressManager.shared.containAddressOfWithDraw(address,currency:self.trade!.id).0 == false {
                             self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.withdraw_success_title.key.localized(), content: R.string.localizable.withdraw_success_content.key.localized())
                         }
@@ -392,6 +392,5 @@ extension RechargeDetailViewController {
             let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: address, currency: trade.id, memo: memo)
             self.coordinator?.openAddAddressWithAddress(withdrawAddress)
         }
-     
     }
 }
