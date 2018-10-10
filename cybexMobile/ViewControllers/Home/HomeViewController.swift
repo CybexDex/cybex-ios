@@ -19,6 +19,7 @@ enum view_type : Int{
     case businessTitle
     case Comprehensive
 }
+
 class HomeViewController: BaseViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
     
     var timer:Timer?
@@ -65,9 +66,10 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         super.viewDidLoad()
         setupUI()
         
-        if VC_TYPE == view_type.homeContent.rawValue {
-            handlerUpdateVersion(nil)
-        }
+//        if VC_TYPE == view_type.homeContent.rawValue {
+//            handlerUpdateVersion(nil)
+//        }
+        
     }
     
     func setupUI() {
@@ -111,7 +113,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
             else {
                 let buckets = s.filter { (homebucket) -> Bool in
                     return homebucket.base == self.base
-                }
+                    }
                 
                 if buckets.count == AssetConfiguration.shared.asset_ids.filter( { $0.base == self.base} ).count, buckets.count != 0 {
                     return true
@@ -156,7 +158,7 @@ extension HomeViewController {
             }
         }
         else if VC_TYPE == view_type.Comprehensive.rawValue {
-            if let index = data["index"] as? Int {
+            if let index = data["index"] as? Int, app_data.data.value.count == AssetConfiguration.market_base_assets.count {
                 let datas = app_data.filterTopgainers()
                 if datas.count > index {
                     let buckets = app_data.filterTopgainers()[index]

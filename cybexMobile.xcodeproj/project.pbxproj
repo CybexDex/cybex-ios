@@ -33918,7 +33918,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = scripts/appstore.sh;
+			shellScript = "scripts/appstore.sh\n";
 		};
 		738FCE312148D7EC0042331A /* carthage */ = {
 			isa = PBXShellScriptBuildPhase;
