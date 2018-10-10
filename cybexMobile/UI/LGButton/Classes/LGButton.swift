@@ -608,7 +608,7 @@ public class LGButton: UIControl {
     fileprivate func xibSetup() {
         rootView = loadViewFromNib()
         rootView.frame = bounds
-        rootView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        rootView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
         addSubview(rootView)
         leadingLoadingConstraint.isActive = false
         trailingLoadingConstraint.isActive = false

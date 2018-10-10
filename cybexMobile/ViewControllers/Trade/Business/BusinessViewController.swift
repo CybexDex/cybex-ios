@@ -185,7 +185,7 @@ class BusinessViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         //precision
-        NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.containerView.priceTextfield, queue: nil) {[weak self] (notifi) in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification, object: self.containerView.priceTextfield, queue: nil) {[weak self] (notifi) in
             guard let `self` = self else { return }
             
             //      if self.containerView.tipView.isHidden == true ,self.coordinator?.state.property.balance.value == 0{
@@ -203,7 +203,7 @@ class BusinessViewController: BaseViewController {
             self.coordinator?.state.property.price.accept(self.containerView.priceTextfield.text!)
         }
         
-        NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.containerView.amountTextfield, queue: nil) {[weak self] (notifi) in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification, object: self.containerView.amountTextfield, queue: nil) {[weak self] (notifi) in
             guard let `self` = self else { return }
             //      if self.containerView.tipView.isHidden == true ,self.coordinator?.state.property.balance.value == 0{
             //        self.containerView.tipView.isHidden = false
@@ -224,7 +224,7 @@ class BusinessViewController: BaseViewController {
             self.coordinator?.state.property.amount.accept(self.containerView.amountTextfield.text!)
         }
         
-        NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self.containerView.amountTextfield, queue: nil) {[weak self](notifi) in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidBeginEditingNotification, object: self.containerView.amountTextfield, queue: nil) {[weak self](notifi) in
             guard let `self` = self else {return}
             if !UserManager.shared.isLoginIn {
                 self.containerView.amountTextfield.resignFirstResponder()
@@ -233,7 +233,7 @@ class BusinessViewController: BaseViewController {
             }
         }
         
-        NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self.containerView.priceTextfield, queue: nil) {[weak self](notifi) in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidBeginEditingNotification, object: self.containerView.priceTextfield, queue: nil) {[weak self](notifi) in
             guard let `self` = self else {return}
             
             if !UserManager.shared.isLoginIn {

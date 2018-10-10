@@ -140,34 +140,34 @@ extension CBKLineAccessoryView {
     let drawAttrsString = NSMutableAttributedString()
     switch configuration.accessory.indicatorType {
     case .MACD:
-      let attrs: [NSAttributedStringKey : Any]? = [
-        NSAttributedStringKey.foregroundColor : configuration.main.dateAssistTextColor,
-        NSAttributedStringKey.font : configuration.main.dateAssistTextFont
+        let attrs: [NSAttributedString.Key : Any]? = [
+            NSAttributedString.Key.foregroundColor : configuration.main.dateAssistTextColor,
+            NSAttributedString.Key.font : configuration.main.dateAssistTextFont
       ]
       drawAttrsString.append(NSAttributedString(string: "MACD(12,26,9) ", attributes: attrs))
       
       
       if let dif = drawModel.DIF {
-        let difAttrs: [NSAttributedStringKey : Any]? = [
-          NSAttributedStringKey.foregroundColor : configuration.theme.DIFColor,
-          NSAttributedStringKey.font : configuration.main.dateAssistTextFont
+        let difAttrs: [NSAttributedString.Key : Any]? = [
+            NSAttributedString.Key.foregroundColor : configuration.theme.DIFColor,
+            NSAttributedString.Key.font : configuration.main.dateAssistTextFont
         ]
         let difAttrsStr = NSAttributedString(string: String(format: "DIF: %.2f ", dif), attributes: difAttrs)
         drawAttrsString.append(difAttrsStr)
       }
       if let dea = drawModel.DEA {
-        let deaAttrs: [NSAttributedStringKey : Any]? = [
-          NSAttributedStringKey.foregroundColor : configuration.theme.DEAColor,
-          NSAttributedStringKey.font : configuration.main.dateAssistTextFont
+        let deaAttrs: [NSAttributedString.Key : Any]? = [
+            NSAttributedString.Key.foregroundColor : configuration.theme.DEAColor,
+            NSAttributedString.Key.font : configuration.main.dateAssistTextFont
         ]
         let deaAttrsStr = NSAttributedString(string: String(format: "DEA: %.2f ", dea), attributes: deaAttrs)
         drawAttrsString.append(deaAttrsStr)
       }
       if let macd = drawModel.MACD {
         
-        let macdAttrs: [NSAttributedStringKey : Any]? = [
-          NSAttributedStringKey.foregroundColor : configuration.theme.MACDColor,
-          NSAttributedStringKey.font : configuration.main.dateAssistTextFont
+        let macdAttrs: [NSAttributedString.Key : Any]? = [
+            NSAttributedString.Key.foregroundColor : configuration.theme.MACDColor,
+            NSAttributedString.Key.font : configuration.main.dateAssistTextFont
         ]
         let macdAttrsStr = NSAttributedString(string: String(format: "MACD: %.2f ", macd), attributes: macdAttrs)
         drawAttrsString.append(macdAttrsStr)

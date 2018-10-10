@@ -26,7 +26,7 @@ class CBKLineMainView: UIView {
   var focusModel: CBKLineModel?
   
   // 绘制区域的最大Y值
-  fileprivate let padding: UIEdgeInsets = UIEdgeInsetsMake(CBConfiguration.sharedConfiguration.main.valueAssistViewHeight, 0, CBConfiguration.sharedConfiguration.main.valueAssistViewHeight, 0)
+    fileprivate let padding: UIEdgeInsets = UIEdgeInsets(top: CBConfiguration.sharedConfiguration.main.valueAssistViewHeight, left: 0, bottom: CBConfiguration.sharedConfiguration.main.valueAssistViewHeight, right: 0)
   
   var drawMaxY: CGFloat {
     return height - padding.bottom
@@ -221,9 +221,9 @@ extension CBKLineMainView {
       dateString = dateString.components(separatedBy: " ")[1]
     }
     
-    var dateAttributes: [NSAttributedStringKey: Any]? = [
-      NSAttributedStringKey.foregroundColor: configuration.main.dateAssistTextColor,
-      NSAttributedStringKey.font: configuration.main.dateAssistTextFont
+    var dateAttributes: [NSAttributedString.Key: Any]? = [
+        NSAttributedString.Key.foregroundColor: configuration.main.dateAssistTextColor,
+        NSAttributedString.Key.font: configuration.main.dateAssistTextFont
     ]
     
     if let model = focusModel {
@@ -231,8 +231,8 @@ extension CBKLineMainView {
         return
       }
       else {
-        dateAttributes![NSAttributedStringKey.backgroundColor] = configuration.theme.longPressLineColor
-        dateAttributes![NSAttributedStringKey.foregroundColor] = configuration.theme.dashColor
+        dateAttributes![NSAttributedString.Key.backgroundColor] = configuration.theme.longPressLineColor
+        dateAttributes![NSAttributedString.Key.foregroundColor] = configuration.theme.dashColor
       }
     }
     
@@ -327,15 +327,15 @@ extension CBKLineMainView {
     case let .MA(days):
       
       for (idx, color) in [configuration.theme.MA1, configuration.theme.MA2, configuration.theme.MA3].enumerated() {
-        let maAttrs: [NSAttributedStringKey: Any]? = [
-          NSAttributedStringKey.foregroundColor: configuration.theme.markColor,
-          NSAttributedStringKey.font: configuration.main.dateAssistTextFont,
-          NSAttributedStringKey.backgroundColor: configuration.theme.markbgColor,
+        let maAttrs: [NSAttributedString.Key: Any]? = [
+            NSAttributedString.Key.foregroundColor: configuration.theme.markColor,
+            NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
+            NSAttributedString.Key.backgroundColor: configuration.theme.markbgColor,
           ]
         
-        let attrs: [NSAttributedStringKey: Any]? = [
-          NSAttributedStringKey.foregroundColor: color,
-          NSAttributedStringKey.font: configuration.main.dateAssistTextFont,
+        let attrs: [NSAttributedString.Key: Any]? = [
+            NSAttributedString.Key.foregroundColor: color,
+            NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
           ]
         
         if let value = drawModel.MAs![idx] {
@@ -349,15 +349,15 @@ extension CBKLineMainView {
       
     case let .EMA(days):
       for (idx, color) in [configuration.theme.EMA1, configuration.theme.EMA2].enumerated() {
-        let maAttrs: [NSAttributedStringKey: Any]? = [
-          NSAttributedStringKey.foregroundColor: configuration.theme.markColor,
-          NSAttributedStringKey.font: configuration.main.dateAssistTextFont,
-          NSAttributedStringKey.backgroundColor: configuration.theme.markbgColor,
+        let maAttrs: [NSAttributedString.Key: Any]? = [
+            NSAttributedString.Key.foregroundColor: configuration.theme.markColor,
+            NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
+            NSAttributedString.Key.backgroundColor: configuration.theme.markbgColor,
           ]
         
-        let attrs: [NSAttributedStringKey: Any]? = [
-          NSAttributedStringKey.foregroundColor: color,
-          NSAttributedStringKey.font: configuration.main.dateAssistTextFont,
+        let attrs: [NSAttributedString.Key: Any]? = [
+            NSAttributedString.Key.foregroundColor: color,
+            NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
           ]
         
         if let value = drawModel.EMAs![idx] {
@@ -369,36 +369,36 @@ extension CBKLineMainView {
         }
       }
     case .BOLL:
-      let maAttrs: [NSAttributedStringKey: Any]? = [
-        NSAttributedStringKey.foregroundColor: configuration.theme.markColor,
-        NSAttributedStringKey.font: configuration.main.dateAssistTextFont,
-        NSAttributedStringKey.backgroundColor: configuration.theme.markbgColor,
+        let maAttrs: [NSAttributedString.Key: Any]? = [
+            NSAttributedString.Key.foregroundColor: configuration.theme.markColor,
+            NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
+            NSAttributedString.Key.backgroundColor: configuration.theme.markbgColor,
         ]
       let maStr = String(format: "BOLL: ")
       drawAttrsString.append(NSAttributedString(string: maStr, attributes: maAttrs))
       
       if let value = drawModel.BOLL_MB {
-        let mbAttrs: [NSAttributedStringKey: Any]? = [
-          NSAttributedStringKey.foregroundColor: configuration.theme.BOLL_MBColor,
-          NSAttributedStringKey.font: configuration.main.dateAssistTextFont,
+        let mbAttrs: [NSAttributedString.Key: Any]? = [
+            NSAttributedString.Key.foregroundColor: configuration.theme.BOLL_MBColor,
+            NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
           ]
         let mbAttrsStr = NSAttributedString(string: String(format: "  %.\(drawModel.precision)f  ", value), attributes: mbAttrs)
         drawAttrsString.append(mbAttrsStr)
       }
       
       if let value = drawModel.BOLL_UP {
-        let upAttrs: [NSAttributedStringKey: Any]? = [
-          NSAttributedStringKey.foregroundColor: configuration.theme.BOLL_UPColor,
-          NSAttributedStringKey.font: configuration.main.dateAssistTextFont,
+        let upAttrs: [NSAttributedString.Key: Any]? = [
+            NSAttributedString.Key.foregroundColor: configuration.theme.BOLL_UPColor,
+            NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
           ]
         let upAttrsStr = NSAttributedString(string: String(format: " %.\(drawModel.precision)f  ", value), attributes: upAttrs)
         drawAttrsString.append(upAttrsStr)
       }
       
       if let value = drawModel.BOLL_DN {
-        let dnAttrs: [NSAttributedStringKey: Any]? = [
-          NSAttributedStringKey.foregroundColor: configuration.theme.BOLL_DNColor,
-          NSAttributedStringKey.font: configuration.main.dateAssistTextFont,
+        let dnAttrs: [NSAttributedString.Key: Any]? = [
+            NSAttributedString.Key.foregroundColor: configuration.theme.BOLL_DNColor,
+            NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
           ]
         let dnAttrsStr = NSAttributedString(string: String(format: " %.\(drawModel.precision)f  ", value), attributes: dnAttrs)
         drawAttrsString.append(dnAttrsStr)
@@ -411,9 +411,9 @@ extension CBKLineMainView {
   }
   
   fileprivate func drawMaxMin(context _: CGContext, low_klineModel: CBKLineModel, high_klineModel: CBKLineModel, low_position: CGPoint, high_position: CGPoint) {
-    let attributes: [NSAttributedStringKey: Any]? = [
-      NSAttributedStringKey.foregroundColor: configuration.main.valueAssistTextColor,
-      NSAttributedStringKey.font: configuration.main.valueAssistTextFont,
+    let attributes: [NSAttributedString.Key: Any]? = [
+        NSAttributedString.Key.foregroundColor: configuration.main.valueAssistTextColor,
+        NSAttributedString.Key.font: configuration.main.valueAssistTextFont,
       ]
     
     let mindrawAttrsString = NSMutableAttributedString(string: "←" + low_klineModel.low.string(digits: low_klineModel.precision), attributes: attributes)

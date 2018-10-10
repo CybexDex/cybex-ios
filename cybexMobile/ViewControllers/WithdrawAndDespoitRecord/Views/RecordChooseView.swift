@@ -59,7 +59,7 @@ class RecordChooseView: CybexBaseView {
     }
     
     func setupSubViewEvent() {
-        self.containerView.rx.tapGesture().when(UIGestureRecognizerState.recognized).asObservable().subscribe(onNext: { [weak self](tap) in
+        self.containerView.rx.tapGesture().when(UIGestureRecognizer.State.recognized).asObservable().subscribe(onNext: { [weak self](tap) in
             guard let `self` = self else { return }
             self.contentLabel.textColor = UIColor.pastelOrange
             self.stateImage.image = R.image.ic()

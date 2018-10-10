@@ -65,7 +65,7 @@ class WithdrawView: UIView {
     }
     
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIViewNoIntrinsicMetric, height: dynamicHeight())
+        return CGSize(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
     
     

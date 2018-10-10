@@ -145,7 +145,7 @@ class AppCoordinator {
     }
     
     func aspect() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) {[weak self] (notifi) in
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) {[weak self] (notifi) in
             guard let `self` = self else { return }
             self.curDisplayingCoordinator().rootVC.topViewController?.refreshViewController()
         }

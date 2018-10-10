@@ -57,7 +57,7 @@ class HomeContentView: UIView {
     }
     
     override var intrinsicContentSize: CGSize {
-        return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
+        return CGSize.init(width: UIView.noIntrinsicMetric,height: dynamicHeight())
     }
     
     fileprivate func updateHeight() {
@@ -104,7 +104,15 @@ extension HomeContentView:UITableViewDataSource,UITableViewDelegate{
         if self.viewType == .Comprehensive{
             return 6
         }
-        return app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).count
+        
+        
+        return app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (homebucket) -> Bool in
+            if homebucket.bucket.count == 0 {
+                return false
+            }
+            let matrix = getCachedBucket(homebucket)
+            return matrix.change != "0.00"
+        }).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,7 +129,13 @@ extension HomeContentView:UITableViewDataSource,UITableViewDelegate{
             }
         }
         else {
-            let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex])
+            let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (homebucket) -> Bool in
+                if homebucket.bucket.count == 0 {
+                    return false
+                }
+                let matrix = getCachedBucket(homebucket)
+                return matrix.change != "0.00"
+            })
             let data = markets[indexPath.row]
             cell.setup(data, indexPath: indexPath)
         }

@@ -69,7 +69,7 @@ class AddAddressView: UIView {
     
     func startAnimation() {
         self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: self.address.icon.width, height: self.address.icon.height))
-        self.activityIndicator?.activityIndicatorViewStyle = .gray
+        self.activityIndicator?.style = .gray
         self.activityIndicator?.center = CGPoint(x: self.address.icon.width * 0.5, y: self.address.icon.height * 0.5)
         self.address.icon.addSubview(self.activityIndicator!);
         self.activityIndicator?.startAnimating()
@@ -82,19 +82,19 @@ class AddAddressView: UIView {
     fileprivate func setup() {
         updateHeight()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidChange, object: self.address.content, queue: nil) { [weak self](notification) in
+        NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification, object: self.address.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else {return}
             self.updateHeight()
         }
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidChange, object: self.memo.content, queue: nil) { [weak self](notification) in
+        NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification, object: self.memo.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else {return}
             self.updateHeight()
         }
     }
     
     override var intrinsicContentSize: CGSize {
-        return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
+        return CGSize.init(width: UIView.noIntrinsicMetric,height: dynamicHeight())
     }
     
     func updateHeight() {

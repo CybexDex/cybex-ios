@@ -146,10 +146,10 @@ extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
         if let homeVC = R.storyboard.main.homeViewController(){
             homeVC.coordinator = HomeCoordinator(rootVC: self.rootVC)
             homeVC.VC_TYPE = view_type.Comprehensive.rawValue
-            sender.addChildViewController(homeVC)
+            sender.addChild(homeVC)
             sender.contentView.topGainersView.addSubview(homeVC.view)
             homeVC.contentView?.edges(to: sender.contentView.topGainersView)
-            homeVC.didMove(toParentViewController: sender)
+            homeVC.didMove(toParent: sender)
         }
     }
 }

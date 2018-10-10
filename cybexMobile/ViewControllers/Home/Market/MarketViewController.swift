@@ -85,7 +85,13 @@ class MarketViewController: BaseViewController {
     }()
     
     lazy var buckets: [HomeBucket] = {
-        let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex])
+        let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (homebucket) -> Bool in
+            if homebucket.bucket.count == 0 {
+                return false
+            }
+            let matrix = getCachedBucket(homebucket)
+            return matrix.change != "0.00"
+        })
         return markets
     }()
     
@@ -200,7 +206,13 @@ class MarketViewController: BaseViewController {
     }
     
     func updateIndex() {
-        let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).map({ Pair(base: $0.base, quote: $0.quote) })
+        let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (homebucket) -> Bool in
+            if homebucket.bucket.count == 0 {
+                return false
+            }
+            let matrix = getCachedBucket(homebucket)
+            return matrix.change != "0.00"
+        }).map({ Pair(base: $0.base, quote: $0.quote) })
         curIndex = markets.index(of: pair)!
         homeBucket = buckets[self.curIndex]
         pair = markets[self.curIndex]

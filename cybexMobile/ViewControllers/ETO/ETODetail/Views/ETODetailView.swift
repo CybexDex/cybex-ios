@@ -131,9 +131,9 @@ class ETODetailView: CybexBaseView {
     }
     
     func updateAgreeBtnImg(normal: UIImage, selected: UIImage, highlighted: UIImage) {
-        agreeButton.setImage(normal, for: UIControlState.normal)
-        agreeButton.setImage(highlighted, for: UIControlState.highlighted)
-        agreeButton.setImage(selected, for: UIControlState.selected)
+        agreeButton.setImage(normal, for: UIControl.State.normal)
+        agreeButton.setImage(highlighted, for: UIControl.State.highlighted)
+        agreeButton.setImage(selected, for: UIControl.State.selected)
     }
     
     func updateClauseViewHidden(isHidden: Bool) {
@@ -143,7 +143,7 @@ class ETODetailView: CybexBaseView {
     
     func setupSubViewEvent() {
         
-        stateLabel.rx.tapGesture().when(UIGestureRecognizerState.recognized).asObservable().subscribe(onNext: { [weak self](tap) in
+        stateLabel.rx.tapGesture().when(UIGestureRecognizer.State.recognized).asObservable().subscribe(onNext: { [weak self](tap) in
             guard let `self` = self else { return }
             self.sendEventWith(Event.showAgreement.rawValue, userinfo: [:])
             

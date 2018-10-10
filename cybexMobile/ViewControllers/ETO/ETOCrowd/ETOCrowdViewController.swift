@@ -62,13 +62,13 @@ class ETOCrowdViewController: BaseViewController {
     }
     
     func setupEvent() {
-        NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidBeginEditing, object: self.contentView.titleTextView.textField, queue: nil) {[weak self] (notifi) in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidBeginEditingNotification, object: self.contentView.titleTextView.textField, queue: nil) {[weak self] (notifi) in
             guard let `self` = self else { return }
             
             self.coordinator?.unsetValidStatus()
         }
         
-        NotificationCenter.default.addObserver(forName: Notification.Name.UITextFieldTextDidEndEditing, object: self.contentView.titleTextView.textField, queue: nil) {[weak self] (notifi) in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification, object: self.contentView.titleTextView.textField, queue: nil) {[weak self] (notifi) in
             guard let `self` = self, let amount = self.contentView.titleTextView.textField.text?.toDouble() else { return }
             
             self.coordinator?.checkValidStatus(amount)
