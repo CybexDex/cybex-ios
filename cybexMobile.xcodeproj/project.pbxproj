@@ -400,6 +400,7 @@
 		72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A5220F4611500CEAFF6 /* WithdrawView.swift */; };
 		72EC6A5920F4612200CEAFF6 /* RechargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A5720F4612100CEAFF6 /* RechargeView.swift */; };
 		72EC6A5A20F4612200CEAFF6 /* RechargeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5820F4612200CEAFF6 /* RechargeView.xib */; };
+		72FF06B6216F4CD2003B09A8 /* ComprehensiveCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8E92151F9DB00FBB3CB /* ComprehensiveCoordinator.swift */; };
 		730229A1212E52B50073D5CE /* ETOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730229A0212E52B50073D5CE /* ETOManager.swift */; };
 		7307A91B212518DC00BD6444 /* LGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A8FF212518DB00BD6444 /* LGButton.swift */; };
 		7307A91C212518DC00BD6444 /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A901212518DB00BD6444 /* FontAwesome.swift */; };
@@ -34010,6 +34011,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7386F29A212120F200ABC924 /* RPCTest.swift in Sources */,
+				72FF06B6216F4CD2003B09A8 /* ComprehensiveCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

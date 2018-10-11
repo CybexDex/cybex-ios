@@ -158,7 +158,7 @@ extension HomeViewController {
             }
         }
         else if VC_TYPE == view_type.Comprehensive.rawValue {
-            if let index = data["index"] as? Int, app_data.data.value.count == AssetConfiguration.market_base_assets.count {
+            if let index = data["index"] as? Int, app_data.data.value.count == AssetConfiguration.shared.asset_ids.count {
                 let datas = app_data.filterTopgainers()
                 if datas.count > index {
                     let buckets = app_data.filterTopgainers()[index]
