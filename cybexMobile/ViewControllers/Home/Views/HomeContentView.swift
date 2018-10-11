@@ -46,6 +46,7 @@ class HomeContentView: UIView {
     var data : Any? {
         didSet{
             if let _ = data as? [HomeBucket]{
+                
                 self.tableView.reloadData()
             }
         }

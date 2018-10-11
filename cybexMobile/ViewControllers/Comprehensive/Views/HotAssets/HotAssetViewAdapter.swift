@@ -52,11 +52,10 @@ extension HotAssetView {
                 }
             }
         }
-        
-        
         assetName.textAlignment = .center
         amountLabel.textAlignment = .center
         rmbLabel.textAlignment = .center
         trendLabel.textAlignment = .center
+        updateHeight()
     }
 }

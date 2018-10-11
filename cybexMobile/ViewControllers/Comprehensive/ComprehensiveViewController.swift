@@ -107,11 +107,11 @@ class ComprehensiveViewController: BaseViewController {
             }
         }).disposed(by: disposeBag)
         
-        app_data.data.asObservable().filter { (bucket) -> Bool in
+        app_data.data.asObservable().distinctUntilChanged().filter { (bucket) -> Bool in
             return bucket.count == AssetConfiguration.shared.asset_ids.count
             }.subscribe(onNext: { [weak self](bucket) in
                 guard let `self` = self else { return }
-                if let hotPairs = self.coordinator?.state.hotPairs.value {
+                if let hotPairs = self.coordinator?.state.hotPairs.value, self.isVisible {
                     var bucketModel = [HomeBucket]()
                     for pair in hotPairs {
                         if let hotPair = bucket.filter({ (homeBucket) -> Bool in
