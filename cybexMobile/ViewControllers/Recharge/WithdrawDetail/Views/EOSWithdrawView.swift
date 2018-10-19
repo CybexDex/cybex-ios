@@ -47,6 +47,7 @@ class EOSWithdrawView: UIView {
                 if let addressURL = projectInfo.contractExplorerUrl {
                     projectInfoView.addressURL = addressURL
                 }
+                self.updateHeight()
             }
         }
     }

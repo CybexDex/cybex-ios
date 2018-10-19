@@ -168,7 +168,7 @@ class BusinessViewController: BaseViewController {
             guard let `self` = self else { return }
             
             self.checkBalance()
-            guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0, text.components(separatedBy: ".").count <= 2 && text != ".", let textDouble = text.toDouble() else {
+            guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0, text.components(separatedBy: ".").count <= 2 && text != ".", let _ = text.toDouble() else {
                 self.containerView.value.text = "≈¥0.00"
                 return
             }

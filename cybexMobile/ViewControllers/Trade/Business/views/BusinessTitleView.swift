@@ -82,9 +82,10 @@ class BusinessTitleView: UIView {
 extension BusinessTitleView:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return app_data.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
-            return ticker.latest != "0"
+            return ticker.base_volume != "0"
         }).count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: BusinessTitleCell.self), for: indexPath) as! BusinessTitleCell
