@@ -16,6 +16,7 @@ import AwaitKit
 import Guitar
 import Repeat
 import SwiftyUserDefaults
+import cybex_ios_core_cpp
 
 extension UserManager {
     

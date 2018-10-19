@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import cybex_ios_core_cpp
 
 // 跳转
 protocol OpenedOrdersCoordinatorProtocol {

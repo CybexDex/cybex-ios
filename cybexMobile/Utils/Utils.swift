@@ -11,6 +11,7 @@ import Localize_Swift
 import SwiftTheme
 import SwiftyJSON
 import SwiftyUserDefaults
+import cybex_ios_core_cpp
 
 func openPage(_ urlString:String) {
     if let url = urlString.url {

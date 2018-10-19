@@ -4,8 +4,6 @@
 
 #import <KMNavigationBarTransition/KMNavigationBarTransition.h>
 
-#import "BitShareCoordinator.h"
-
 #import "ZYNetworkAccessibity.h"
 #import <UMAnalytics/MobClick.h>
 #import <UMCommon/UMCommon.h>
