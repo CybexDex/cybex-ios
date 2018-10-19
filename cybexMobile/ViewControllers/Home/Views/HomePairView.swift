@@ -54,6 +54,7 @@ class HomePairView: UIView {
             }
             
             let price = getAssetRMBPrice(ticker.quote,base: ticker.base)
+
             self.rbmL.text = price == 0 ? "-" : "≈¥" + "\(price)".formatCurrency(digitNum: 2)
 
             

@@ -47,7 +47,7 @@ class RegisterViewController: BaseViewController {
     var passwordValid = false
     var confirmValid = false
     var codeValid = false
-    
+
     var userNameValid = false {
         didSet {
             if userNameValid , let password = self.passwordTextField.text, password.count > 11 , self.passwordTextField.text == self.confirmPasswordTextField.text, let code = self.codeTextField.text, code.count == 4 {
@@ -127,6 +127,7 @@ class RegisterViewController: BaseViewController {
 
 extension RegisterViewController {
     func setupEvent() {
+
         
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (notification) in
             let userinfo: NSDictionary = notification.userInfo! as NSDictionary
@@ -248,7 +249,6 @@ extension RegisterViewController {
 //
 //                self.passwordTextField.tailImage = nil
 //            }
-            
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         confirmPasswordValid.subscribe(onNext: {[weak self] (validate) in
@@ -332,6 +332,7 @@ extension RegisterViewController {
 //                }
 //            }
             
+
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         let consistent = Observable.combineLatest(self.passwordTextField.rx.text, self.confirmPasswordTextField.rx.text).map({$0 == $1})

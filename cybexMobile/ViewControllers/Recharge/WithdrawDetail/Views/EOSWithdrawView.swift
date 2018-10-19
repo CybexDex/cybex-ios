@@ -48,6 +48,7 @@ class EOSWithdrawView: UIView {
                     projectInfoView.addressURL = addressURL
                 }
                 self.updateHeight()
+
             }
         }
     }

@@ -28,6 +28,7 @@ extension PairDetailDateViewView {
                 model.incre = .greater
                 model.changeAmount = "+" + (model.close - beforeModel.close).formatCurrency(digitNum: model.precision)
                 model.change = "+" + (((model.close - beforeModel.close) / beforeModel.close) * 100).formatCurrency(digitNum: 2) + "%"
+
             }
             else if beforeModel.close > model.close {
                 model.incre = .less
@@ -37,6 +38,7 @@ extension PairDetailDateViewView {
             else {
                 model.changeAmount = "0".formatCurrency(digitNum: model.precision)
                 model.change = "0.00" + "%"
+
             }
         }
         

@@ -47,3 +47,4 @@ github "SwiftyBeaver/SwiftyBeaver"
 github "Ekhoo/Device" ~> 3.1.2
 binary "https://building42.github.io/Specs/Carthage/iOS/Fabric.json"
 binary "https://building42.github.io/Specs/Carthage/iOS/Crashlytics.json"
+github "CybexDex/cybex-ios-core-cpp"

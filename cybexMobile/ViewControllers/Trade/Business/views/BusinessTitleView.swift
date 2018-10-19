@@ -83,6 +83,7 @@ extension BusinessTitleView:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return app_data.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
             return ticker.base_volume != "0"
+
         }).count
     }
     

@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 import Localize_Swift
 import Presentr
-
+import cybex_ios_core_cpp
 
 protocol RechargeDetailCoordinatorProtocol {
     func pop()

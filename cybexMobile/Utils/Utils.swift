@@ -11,6 +11,7 @@ import Localize_Swift
 import SwiftTheme
 import SwiftyJSON
 import SwiftyUserDefaults
+import cybex_ios_core_cpp
 
 func openPage(_ urlString:String) {
     if let url = urlString.url {
@@ -140,6 +141,7 @@ func calculateAssetRelation(assetID_A_name:String, assetID_B_name:String) -> (ba
 
 
 func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
+
     guard let assetInfo = app_data.assetInfo[asset] else { return 0 }
     if AssetConfiguration.order_name.contains(assetInfo.symbol.filterJade) {
         if let data = app_data.rmb_prices.filter({return $0.name == assetInfo.symbol.filterJade}).first {
@@ -178,7 +180,7 @@ func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
     return latest * base_price
 }
 
-//func getTruePrice
+
 
 
 

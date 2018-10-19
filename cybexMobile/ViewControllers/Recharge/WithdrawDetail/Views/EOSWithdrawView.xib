@@ -25,10 +25,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TAw-t7-1QE">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TAw-t7-1QE">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZ9-q8-2yD">
+                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gZ9-q8-2yD">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="393"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYj-q0-d90">
@@ -256,6 +256,7 @@
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="4oE-QE-TPo" secondAttribute="trailing" constant="13" id="1J5-gv-evZ"/>
                                 <constraint firstAttribute="bottom" secondItem="hTI-RE-ZMj" secondAttribute="bottom" constant="40" id="1e0-ZL-6EX"/>
+
                                 <constraint firstItem="hTI-RE-ZMj" firstAttribute="leading" secondItem="gZ9-q8-2yD" secondAttribute="leading" constant="25" id="4Wm-U1-K2z"/>
                                 <constraint firstItem="7OK-Zp-uQV" firstAttribute="top" secondItem="Hbd-9z-yvc" secondAttribute="bottom" id="5xS-DW-0y2"/>
                                 <constraint firstAttribute="trailing" secondItem="351-7G-9Jr" secondAttribute="trailing" constant="13" id="8FV-Pv-eW2"/>

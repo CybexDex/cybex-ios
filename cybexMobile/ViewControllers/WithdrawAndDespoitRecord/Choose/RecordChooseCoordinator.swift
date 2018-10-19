@@ -10,6 +10,7 @@ import UIKit
 import ReSwift
 import NBLCommonModule
 import SwiftyJSON
+import cybex_ios_core_cpp
 
 protocol RecordChooseCoordinatorProtocol {
 }

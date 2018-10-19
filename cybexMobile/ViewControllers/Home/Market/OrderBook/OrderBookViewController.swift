@@ -126,6 +126,7 @@ class OrderBookViewController: BaseViewController {
             }
             
             self.tradeView.rmbPrice.text = "≈¥" + getAssetRMBPrice(pair.quote, base:pair.base).string(digits: 2, roundingMode: .down)
+
 //            let (eth,cyb) = changeToETHAndCYB(pair.quote)
 //            if eth == "0" && cyb == "0"{
 //                self.tradeView.rmbPrice.text  = "≈¥"
