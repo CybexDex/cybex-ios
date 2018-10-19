@@ -9,7 +9,6 @@
 import UIKit
 
 class HomeContentView: UIView {
-    
     struct define {
         static let sectionHeaderHeight : Double = 71.0
     }
@@ -26,7 +25,7 @@ class HomeContentView: UIView {
         didSet {
             if self.viewType == .Comprehensive {
                 self.tableView.isScrollEnabled = false
-                var buckets = app_data.filterTopgainers()
+                var buckets = app_data.filterPopAssetsCurrency()
                 if buckets.count >= 6 {
                     self.data = Array(buckets[0..<6])
                 }
@@ -42,10 +41,9 @@ class HomeContentView: UIView {
         return sectionHeader
     }()
     
-    
     var data : Any? {
         didSet{
-            if let _ = data as? [HomeBucket]{
+            if let _ = data as? [Ticker]{
                 self.tableView.reloadData()
             }
         }
@@ -105,13 +103,8 @@ extension HomeContentView:UITableViewDataSource,UITableViewDelegate{
             return 6
         }
         
-        
-        return app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (homebucket) -> Bool in
-            if homebucket.bucket.count == 0 {
-                return false
-            }
-            let matrix = getCachedBucket(homebucket)
-            return matrix.change != "0.00"
+        return app_data.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+            return ticker.base_volume != "0"
         }).count
     }
     
@@ -119,7 +112,7 @@ extension HomeContentView:UITableViewDataSource,UITableViewDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: HomePairCell.self), for: indexPath) as! HomePairCell
         if self.viewType == .Comprehensive {
             cell.cellType = .topGainers
-            if let data = self.data as? [HomeBucket] {
+            if let data = self.data as? [Ticker] {
                 if indexPath.row < data.count {
                     cell.setup(data[indexPath.row], indexPath: indexPath)
                 }
@@ -129,12 +122,9 @@ extension HomeContentView:UITableViewDataSource,UITableViewDelegate{
             }
         }
         else {
-            let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (homebucket) -> Bool in
-                if homebucket.bucket.count == 0 {
-                    return false
-                }
-                let matrix = getCachedBucket(homebucket)
-                return matrix.change != "0.00"
+            let markets = app_data.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+                return ticker.base_volume != "0"
+                
             })
             let data = markets[indexPath.row]
             cell.setup(data, indexPath: indexPath)

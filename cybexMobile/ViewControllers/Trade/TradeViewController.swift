@@ -81,11 +81,9 @@ class TradeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
-        if app_data.data.value.count == 0 {
+        if app_data.ticker_data.value.count == 0 {
             return
         }
-        
         if self.isVisible {
             self.getPairInfo()
             self.refreshView()
@@ -140,8 +138,8 @@ class TradeViewController: BaseViewController {
     }
     
     @objc override func leftAction(_ sender: UIButton){
-        if let baseIndex = AssetConfiguration.market_base_assets.index(of: pair.base), let index = app_data.filterQuoteAsset(pair.base).index(where: { (bucket) -> Bool in
-            return bucket.base == pair.base && bucket.quote == pair.quote
+        if let baseIndex = AssetConfiguration.market_base_assets.index(of: pair.base), let index = app_data.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+            return ticker.base == pair.base && ticker.quote == pair.quote
         }) {
             self.coordinator?.openMarket(index: index, currentBaseIndex: baseIndex)
         }
@@ -154,7 +152,7 @@ class TradeViewController: BaseViewController {
     override func configureObserveState() {
         app_data.otherRequestRelyData.asObservable()
             .subscribe(onNext: { (s) in
-                if app_data.data.value.count == 0 {
+                if app_data.ticker_data.value.count == 0 {
                     return
                 }
                 
@@ -206,7 +204,7 @@ class TradeViewController: BaseViewController {
 
 extension TradeViewController : TradeNavTitleViewDelegate {
     @discardableResult func sendEventActionWith() -> Bool {
-        if app_data.data.value.count == 0 {
+        if app_data.ticker_data.value.count == 0 {
             return false
         }
         

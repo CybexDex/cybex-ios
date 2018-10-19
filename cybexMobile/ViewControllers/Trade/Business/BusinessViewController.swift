@@ -47,14 +47,14 @@ class BusinessViewController: BaseViewController {
     func fetchLatestPrice() {
         guard let pair = pair , let _ = AssetConfiguration.market_base_assets.index(of: pair.base) else { return }
         
-        if let selectedIndex = app_data.filterQuoteAsset(pair.base).index(where: { (bucket) -> Bool in
-            return bucket.quote == pair.quote
+        if let selectedIndex = app_data.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+            return ticker.quote == pair.quote
         }) {
-            let markets = app_data.filterQuoteAsset(pair.base)
+            let markets = app_data.filterQuoteAssetTicker(pair.base)
             let data = markets[selectedIndex]
-            let matrix = getCachedBucket(data)
-            price_pricision = matrix.price.tradePrice.pricision
-            amount_pricision = matrix.price.tradePrice.amountPricision
+//            let matrix = getCachedBucket(data)
+            price_pricision = data.latest.tradePrice.pricision
+            amount_pricision = data.latest.tradePrice.amountPricision
         }
     }
     
@@ -172,8 +172,7 @@ class BusinessViewController: BaseViewController {
                 self.containerView.value.text = "≈¥0.00"
                 return
             }
-            
-            self.containerView.value.text = "≈¥" + String(describing: changeToETHAndCYB(base_info.id).eth.toDouble()! * textDouble * app_state.property.eth_rmb_price).formatCurrency(digitNum: 2)
+            self.containerView.value.text = "≈¥" + String(describing: getAssetRMBPrice(base_info.id)).formatCurrency(digitNum: 2)
             
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         

@@ -147,76 +147,97 @@ func calculateAssetRelation(assetID_A_name:String, assetID_B_name:String) -> (ba
  1 如果返回的都非0/都为0，则直接返回
  2 先判断CYB/ETH 或者ETH/CYB 是否有值，如果其中一个有值就转换，反之没有数据的币对返回0
  **/
-func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
-    let eth_base = AssetConfiguration.ETH
-    let cyb_base = AssetConfiguration.CYB
-    let eth_cyb  = changeCYB_ETH()
-    if sender == eth_base {
-        return ("1",eth_cyb)
-    }else if (sender == cyb_base){
-        if let eth_cyb_double = Double(eth_cyb), eth_cyb_double != 0 {
-            return (String(1.0/Double(eth_cyb)!),"1")
+//func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
+//    let eth_base = AssetConfiguration.ETH
+//    let cyb_base = AssetConfiguration.CYB
+//    let eth_cyb  = changeCYB_ETH()
+//    if sender == eth_base {
+//        return ("1",eth_cyb)
+//    }else if (sender == cyb_base){
+//        if let eth_cyb_double = Double(eth_cyb), eth_cyb_double != 0 {
+//            return (String(1.0/Double(eth_cyb)!),"1")
+//        }
+//    }
+//
+//
+//    var result = (eth:"0",cyb:"0")
+//    let tickers : [Ticker] = app_data.ticker_data.value
+//    for ticker in tickers {
+//        //        let bucket = getCachedBucket(homeBuck)
+//        if ticker.base == eth_base && ticker.quote == sender {
+//            if ticker.latest == "0"{
+//                continue
+//            }
+//            result.eth = ticker.latest.replacingOccurrences(of: ",", with: "")
+//        }else if ticker.base == cyb_base && ticker.quote == sender {
+//            if ticker.latest == ""{
+//                continue
+//            }
+//            result.cyb = ticker.latest.replacingOccurrences(of: ",", with: "")
+//        }
+//    }
+//
+//    if (result.eth == "0" && result.cyb == "0") {
+//        var sender_rmb_price = "0"
+//        var eth_rmb_price = "0"
+//        var cyb_rmb_price = "0"
+//        for price in app_data.rmb_prices{
+//            if app_data.assetInfo[sender]?.symbol.filterJade == price.name{
+//                sender_rmb_price = price.rmb_price
+//            }else if "CYB" == price.name{
+//                cyb_rmb_price = price.rmb_price
+//            }else if "ETH" == price.name{
+//                eth_rmb_price = price.rmb_price
+//            }
+//        }
+//        if sender_rmb_price == "0"{
+//            return result
+//        }
+//        if eth_rmb_price != "0" {
+//            result.eth = String(sender_rmb_price.toDouble()! / eth_rmb_price.toDouble()!)
+//            result.cyb = String (eth_cyb.toDouble()! * result.eth.toDouble()!)
+//        }else if cyb_rmb_price != "0"{
+//            result.cyb = String(sender_rmb_price.toDouble()! / cyb_rmb_price.toDouble()!)
+//            result.eth = String (eth_cyb.toDouble()! * 1 / result.cyb.toDouble()!)
+//        }
+//        return result
+//
+//    }else if (result.eth != "0" && result.cyb != "0"){
+//        return result
+//    }else {
+//        if eth_cyb != "0" {
+//            if(result.eth == "0"){
+//                result.eth = String(Double(result.cyb)! * Double(1 / Double(eth_cyb)!))
+//            }else if(result.cyb == "0"){
+//                result.cyb = String(Double(result.eth)! * Double(changeCYB_ETH())!)
+//            }
+//            return result
+//        }
+//        return result
+//    }
+//}
+
+
+func getAssetRMBPrice(_ asset: String) -> Double {
+    guard let assetInfo = app_data.assetInfo[asset] else { return 0 }
+    if AssetConfiguration.order_name.contains(assetInfo.symbol.filterJade) {
+        if let data = app_data.rmb_prices.filter({return $0.name == assetInfo.symbol.filterJade}).first {
+            return data.rmb_price.toDouble() ?? 0
         }
+        return 0
     }
     
+    guard let ticker = app_data.ticker_data.value.filter({ return $0.quote == asset }).first else { return 0 }
     
-    var result = (eth:"0",cyb:"0")
-    let homeBuckets : [HomeBucket] = app_data.data.value
-    for homeBuck : HomeBucket in homeBuckets {
-        let bucket = getCachedBucket(homeBuck)
-        
-        if homeBuck.base == eth_base && homeBuck.quote == sender {
-            if bucket.price == ""{
-                continue
-            }
-            result.eth = bucket.price.replacingOccurrences(of: ",", with: "")
-        }else if homeBuck.base == cyb_base && homeBuck.quote == sender {
-            if bucket.price == ""{
-                continue
-            }
-            result.cyb = bucket.price.replacingOccurrences(of: ",", with: "")
-        }
-    }
+    let base_price = getAssetRMBPrice(ticker.base)
     
-    if (result.eth == "0" && result.cyb == "0") {
-        var sender_rmb_price = "0"
-        var eth_rmb_price = "0"
-        var cyb_rmb_price = "0"
-        for price in app_data.rmb_prices{
-            if app_data.assetInfo[sender]?.symbol.filterJade == price.name{
-                sender_rmb_price = price.rmb_price
-            }else if "CYB" == price.name{
-                cyb_rmb_price = price.rmb_price
-            }else if "ETH" == price.name{
-                eth_rmb_price = price.rmb_price
-            }
-        }
-        if sender_rmb_price == "0"{
-            return result
-        }
-        if eth_rmb_price != "0" {
-            result.eth = String(sender_rmb_price.toDouble()! / eth_rmb_price.toDouble()!)
-            result.cyb = String (eth_cyb.toDouble()! * result.eth.toDouble()!)
-        }else if cyb_rmb_price != "0"{
-            result.cyb = String(sender_rmb_price.toDouble()! / cyb_rmb_price.toDouble()!)
-            result.eth = String (eth_cyb.toDouble()! * 1 / result.cyb.toDouble()!)
-        }
-        return result
-        
-    }else if (result.eth != "0" && result.cyb != "0"){
-        return result
-    }else {
-        if eth_cyb != "0" {
-            if(result.eth == "0"){
-                result.eth = String(Double(result.cyb)! * Double(1 / Double(eth_cyb)!))
-            }else if(result.cyb == "0"){
-                result.cyb = String(Double(result.eth)! * Double(changeCYB_ETH())!)
-            }
-            return result
-        }
-        return result
+    guard let latest = ticker.latest.toDouble() else {
+        return 0
     }
+    return latest * base_price
 }
+
+
 
 
 
@@ -225,64 +246,60 @@ func changeToETHAndCYB(_ sender : String) -> (eth:String,cyb:String){
  如果CYB作为base  ETH作为quote。没有值，则ETH作为quote  CYB作为base，如果都没有值返回0
  **/
 // CYB:base  ETH:quote
-func changeCYB_ETH() -> String{
-    //  return "0"
-    let cyb_base   = AssetConfiguration.CYB
-    let eth_quote  = AssetConfiguration.ETH
-    var result     = getRelationWithIds(base: cyb_base, quote: eth_quote)
-    if result != "0"{
-        return result
-    }
-    let homeBuckets : [HomeBucket] = app_data.data.value
-    for homeBuck : HomeBucket in homeBuckets {
-        if homeBuck.base == cyb_base && homeBuck.quote == eth_quote {
-            
-            let bucket = getCachedBucket(homeBuck)
-            result = bucket.price.replacingOccurrences(of: ",", with: "")
-            break
-        }
-    }
-    if result == "0"{
-        for homeBuck : HomeBucket in homeBuckets {
-            if homeBuck.base == eth_quote && homeBuck.quote == cyb_base {
-                let bucket = getCachedBucket(homeBuck)
-                result = bucket.price.replacingOccurrences(of: ",", with: "")
-                break
-            }
-        }
-        if result != "0"{
-            if result == "" {
-                return "0"
-            }
-            result = String(1 / result.toDouble()!)
-        }
-    }
-    
-    return result
-}
+//func changeCYB_ETH() -> String{
+//    //  return "0"
+//    let cyb_base   = AssetConfiguration.CYB
+//    let eth_quote  = AssetConfiguration.ETH
+//    var result     = getRelationWithIds(base: cyb_base, quote: eth_quote)
+//    if result != "0"{
+//        return result
+//    }
+//    let tickers: [Ticker] = app_data.ticker_data.value
+//    for ticker in tickers {
+//        if ticker.base == cyb_base && ticker.quote == eth_quote {
+//            //            let bucket = getCachedBucket(homeBuck)
+//            result = ticker.latest.replacingOccurrences(of: ",", with: "")
+//            break
+//        }
+//    }
+//    if result == "0"{
+//        for ticker in tickers {
+//            if ticker.base == eth_quote && ticker.quote == cyb_base {
+//                result = ticker.latest.replacingOccurrences(of: ",", with: "")
+//                break
+//            }
+//        }
+//        if result != "0"{
+//            if result == "" {
+//                return "0"
+//            }
+//            result = String(1 / result.toDouble()!)
+//        }
+//    }
+//
+//    return result
+//}
 
 // 根据base 和quote对比的RMB 然后转换
-func getRelationWithIds(base:String,quote:String) -> String{
-    let rmb_prices = AppConfiguration.shared.appCoordinator.state.property.rmb_prices
-    let base_name  = app_data.assetInfo[base]?.symbol.filterJade ?? "--"
-    let quote_name = app_data.assetInfo[quote]?.symbol.filterJade ?? "--"
-    var base_rmb = "0"
-    var quote_rmb = "0"
-    for price in rmb_prices {
-        if price.name == base_name{
-            base_rmb = price.rmb_price
-        }else if price.name == quote_name{
-            quote_rmb = price.rmb_price
-        }
-    }
-    
-    if base_rmb != "0" && quote_rmb != "0" {
-        return String(quote_rmb.toDouble()! / base_rmb.toDouble()!)
-    }
-    return "0"
-}
-
-
+//func getRelationWithIds(base:String,quote:String) -> String{
+//    let rmb_prices = AppConfiguration.shared.appCoordinator.state.property.rmb_prices
+//    let base_name  = app_data.assetInfo[base]?.symbol.filterJade ?? "--"
+//    let quote_name = app_data.assetInfo[quote]?.symbol.filterJade ?? "--"
+//    var base_rmb = "0"
+//    var quote_rmb = "0"
+//    for price in rmb_prices {
+//        if price.name == base_name{
+//            base_rmb = price.rmb_price
+//        }else if price.name == quote_name{
+//            quote_rmb = price.rmb_price
+//        }
+//    }
+//
+//    if base_rmb != "0" && quote_rmb != "0" {
+//        return String(quote_rmb.toDouble()! / base_rmb.toDouble()!)
+//    }
+//    return "0"
+//}
 
 
 

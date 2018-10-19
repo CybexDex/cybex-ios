@@ -168,4 +168,10 @@ extension WithdrawDetailViewController {
         fetchDepositAddress()
     }
     
+    @objc func openProtocolAddressEvent(_ sender: Any) {
+        guard let data = sender as? [String: Any], let url = data["address"] as? String else {
+            return
+        }
+        openPage(url)
+    }
 }

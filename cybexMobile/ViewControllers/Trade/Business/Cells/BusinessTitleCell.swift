@@ -9,13 +9,13 @@
 import UIKit
 
 class BusinessTitleCell: BaseTableViewCell {
-
+    
     @IBOutlet weak var businessTitleCellView: BusinessTitleItemView!
     
-  override func setup(_ data: Any?) {
-    self.businessTitleCellView.selectedIndex = indexPath!.row
-    self.businessTitleCellView.data = data
-  }
+    override func setup(_ data: Any?) {
+        self.businessTitleCellView.selectedIndex = indexPath!.row
+        self.businessTitleCellView.data = data
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

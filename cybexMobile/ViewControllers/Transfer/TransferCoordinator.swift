@@ -242,7 +242,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                                                                           to_user_id: Int32(getUserId(to_account.id)),
                                                                           asset_id: Int32(getUserId(balance.asset_type)),
                                                                           receive_asset_id: Int32(getUserId(balance.asset_type)),
-                                                                          amount: Int64(Int32(amount)),
+                                                                          amount: Int64(amount),
                                                                           fee_id: Int32(getUserId(fee.asset_id)),
                                                                           fee_amount: Int64(fee_amout),
                                                                           memo: self.state.memo.value,
