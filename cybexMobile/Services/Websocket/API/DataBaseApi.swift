@@ -276,11 +276,10 @@ struct getBlockRequest : JSONRPCKit.Request , JSONRPCResponse {
     }
 }
 
-struct changeToCybRequest : JSONRPCKit.Request , JSONRPCResponse {
-    var response: RPCSResponse
-    
+struct GetTickerRequest : JSONRPCKit.Request , JSONRPCResponse {
     var baseName : String
     var quoteName : String
+    var response: RPCSResponse
     var method:String{
         return "call"
     }
@@ -290,8 +289,8 @@ struct changeToCybRequest : JSONRPCKit.Request , JSONRPCResponse {
     }
     
     func transferResponse(from resultObject: Any) throws -> Any {
-        let data = JSON(resultObject).dictionaryValue
-        let latest = data["latest"]?.stringValue
-        return latest ?? ""
+        let data = JSON(resultObject).dictionaryObject
+        let ticker = Ticker.deserialize(from: data)
+        return ticker ?? nil
     }
 }

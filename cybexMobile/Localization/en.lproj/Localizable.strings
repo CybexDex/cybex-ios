@@ -450,6 +450,7 @@
 "eto_project_time_comming" = "Left：";
 "eto_project_time_pre" = "In：";
 
+"desposit_address" = "Protocol Address：";
 "eto_project_name" = "Project Name：";
 "eto_token_name" = "Token Name：";
 "eto_start_time" = "ETO Time：";
@@ -501,3 +502,12 @@
 "record_types" = "Types";
 "record_currency" = "Currency";
 "home_top_gainers" = "Top Gainers";
+
+
+"pair_open" = "O:%@";
+"pair_close" = "C:%@";
+"pair_high" = "H:%@";
+"pair_low" = "L:%@";
+"pair_vol" = "Vol:%@";
+"pair_change_amount" = "Chg:%@";
+"pair_change_persent" = "Chg%%:%@";

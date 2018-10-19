@@ -81,12 +81,8 @@ class BusinessTitleView: UIView {
 
 extension BusinessTitleView:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (homebucket) -> Bool in
-            if homebucket.bucket.count == 0 {
-                return false
-            }
-            let matrix = getCachedBucket(homebucket)
-            return matrix.change != "0.00"
+        return app_data.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+            return ticker.latest != "0"
         }).count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,12 +97,8 @@ extension BusinessTitleView:UITableViewDataSource,UITableViewDelegate{
             cell.theme_backgroundColor = [UIColor.darkTwo.hexString(true), UIColor.white.hexString(true)]
             cell.businessTitleCellView.paris.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
         }
-        let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (homebucket) -> Bool in
-            if homebucket.bucket.count == 0 {
-                return false
-            }
-            let matrix = getCachedBucket(homebucket)
-            return matrix.change != "0.00"
+        let markets = app_data.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+            return ticker.base_volume != "0"
         })
         let data = markets[indexPath.row]
         cell.setup(data, indexPath: indexPath)
