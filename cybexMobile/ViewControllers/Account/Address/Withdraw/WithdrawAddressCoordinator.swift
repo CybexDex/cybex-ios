@@ -10,7 +10,6 @@ import UIKit
 import ReSwift
 import NBLCommonModule
 import XLActionController
-import Async
 
 protocol WithdrawAddressCoordinatorProtocol {
     func openActionVC(_ dismissCallback:CommonCallback?)
@@ -174,7 +173,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
         if let addressData = self.state.property.selectedAddress.value {
             AddressManager.shared.removeWithDrawAddress(addressData.id)
             
-            Async.main {
+            DispatchQueue.main.async {
                 self.rootVC.topViewController?.showToastBox(true, message: R.string.localizable.deleted.key.localized())
             }
         }

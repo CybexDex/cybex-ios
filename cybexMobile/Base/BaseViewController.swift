@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import BeareadToast
+import BeareadToast_swift
 
 import SwiftTheme
 import RxCocoa

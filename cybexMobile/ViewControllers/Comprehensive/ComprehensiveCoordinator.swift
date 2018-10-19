@@ -9,7 +9,6 @@
 import UIKit
 import ReSwift
 import NBLCommonModule
-import Async
 import Localize_Swift
 
 protocol ComprehensiveCoordinatorProtocol {
@@ -91,7 +90,7 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
 
 extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
     func switchPageState(_ state:PageState) {
-        Async.main {
+        DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }
     }
