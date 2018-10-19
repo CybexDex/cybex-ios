@@ -6,8 +6,8 @@ cache:
   directories:
   - Carthage
 before_install:
-- wget $LIBRARYURL -O tmp.zip && unzip -o tmp.zip && rm tmp.zip
 - brew install lvillani/tap/carthage-copy-frameworks
+- brew install git-lfs
 - bundle install
 - bundle update
 - carthage bootstrap --no-use-binaries --platform iOS --cache-builds
