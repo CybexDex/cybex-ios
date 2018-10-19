@@ -9,7 +9,6 @@
 import UIKit
 import ReSwift
 import NBLCommonModule
-import Async
 
 protocol ETOUserAgreementCoordinatorProtocol {
 }
@@ -43,7 +42,7 @@ extension ETOUserAgreementCoordinator: ETOUserAgreementCoordinatorProtocol {
 
 extension ETOUserAgreementCoordinator: ETOUserAgreementStateManagerProtocol {
     func switchPageState(_ state:PageState) {
-        Async.main {
+        DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }
 //        var context = ETODetailContext()

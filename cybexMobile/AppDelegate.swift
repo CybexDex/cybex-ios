@@ -13,7 +13,7 @@ import Localize_Swift
 import SwiftTheme
 import Reachability
 import SwiftyUserDefaults
-import BeareadToast
+import BeareadToast_swift
 import IQKeyboardManagerSwift
 import Kingfisher
 
@@ -23,7 +23,6 @@ import SwiftRichString
 import SwiftyBeaver
 import AlamofireNetworkActivityLogger
 import NBLCommonModule
-import URLNavigator
 
 let log = SwiftyBeaver.self
 let reachability = Reachability()!
@@ -123,7 +122,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupAnalytics() {
-        UMCommonLogManager.setUp()
         MobClick.setCrashReportEnabled(true)
         UMConfigure.setLogEnabled(true)
         UMConfigure.setEncryptEnabled(true)

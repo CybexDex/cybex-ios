@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RxGesture
 
 @IBDesignable
 class HotAssetView: CybexBaseView {

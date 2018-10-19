@@ -9,7 +9,6 @@
 import UIKit
 import ReSwift
 import NBLCommonModule
-import Async
 
 protocol ETORecordListCoordinatorProtocol {
 }
@@ -44,7 +43,7 @@ extension ETORecordListCoordinator: ETORecordListCoordinatorProtocol {
 
 extension ETORecordListCoordinator: ETORecordListStateManagerProtocol {
     func switchPageState(_ state:PageState) {
-        Async.main {
+        DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }
     }

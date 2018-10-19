@@ -6,7 +6,6 @@
 
 #import "BitShareCoordinator.h"
 
-#import <UMCommon/UMCommon.h>
-#import <UMAnalytics/MobClick.h>
-#import <UMCommonLog/UMCommonLogHeaders.h>
 #import "ZYNetworkAccessibity.h"
+#import <UMAnalytics/MobClick.h>
+#import <UMCommon/UMCommon.h>

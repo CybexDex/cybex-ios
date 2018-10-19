@@ -10,7 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
-import RxGesture
 import SwifterSwift
 
 class TransferViewController: BaseViewController {

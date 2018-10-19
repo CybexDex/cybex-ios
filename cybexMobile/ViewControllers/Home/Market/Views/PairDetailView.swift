@@ -68,11 +68,18 @@ class PairDetailView: UIView {
             DispatchQueue.main.async {
                 self.baseVolume.text = self.base_name + ": " + ticker.base_volume.suffixNumber(digitNum: 2)
                 self.quoteVolume.text = self.quote_name + ": " + ticker.quote_volume.suffixNumber(digitNum: 2)
-                self.highLabel.text = "High: " + ticker.highest_bid.formatCurrency(digitNum: base_info.precision)
-                self.lowLabel.text = "Low: " + ticker.lowest_ask.formatCurrency(digitNum: base_info.precision)
+                
+                
+                
+//                detailView.highLabel.text = "High: " + last_model.high.formatCurrency(digitNum: base_info.precision)
+//                detailView.lowLabel.text = "Low: " + last_model.low.formatCurrency(digitNum: base_info.precision)
+                
+                
+//                self.highLabel.text = "High: " + ticker.highest_bid.formatCurrency(digitNum: base_info.precision)
+//                self.lowLabel.text = "Low: " + ticker.lowest_ask.formatCurrency(digitNum: base_info.precision)
                 
                 self.price.text = ticker.latest.formatCurrency(digitNum: base_info.precision)
-                self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percent_change + "%"
+                self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percent_change.formatCurrency(digitNum: 2) + "%"
                 self.bulking.textColor = ticker.incre.color()
                 self.bulkingIcon.image = ticker.incre.icon()
             }
@@ -83,6 +90,9 @@ class PairDetailView: UIView {
         detailDateView.base_name = self.base_name
         detailDateView.quote_name = self.quote_name
         detailDateView.isHidden = false
+        
+//        var lineModels = CBConfiguration.sharedConfiguration.dataSource.drawKLineModels
+
         detailDateView.adapterModelToPairDetailDateViewView(model)
         
 //        self.openLabel.textColor = (ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.dark)

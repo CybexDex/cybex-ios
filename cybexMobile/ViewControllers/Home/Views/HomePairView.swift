@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-import RxGesture
 import Kingfisher
 
 @IBDesignable

@@ -117,28 +117,7 @@ class CBKLineModel: ObjectDescriptable {
         self.towardsVolume = towardsVolume
         self.precision = precision
         
-        var lineModels = CBConfiguration.sharedConfiguration.dataSource.drawKLineModels
-        let (contain, index) = lineModels.containHashable(self)
-        if !contain{
-            return
-        }
-        if index != 0 {
-            let model = lineModels[index - 1]
-            if model.close < self.close {
-                incre = .greater
-                self.changeAmount = "+" + (self.close - model.close).formatCurrency(digitNum: self.precision)
-                self.change = "+" + (((self.close - model.close) / model.close) * 100).formatCurrency(digitNum: 2) + "%"
-            }
-            else if model.close > self.close {
-                incre = .less
-                self.changeAmount = "-" + (model.close - self.close).formatCurrency(digitNum: self.precision)
-                self.change = "-" + (((model.close - self.close) / model.close) * 100).formatCurrency(digitNum: 2) + "%"
-            }
-            else {
-                self.changeAmount = "0"
-                self.change = "0.00"
-            }
-        }
+        
     }
 }
 

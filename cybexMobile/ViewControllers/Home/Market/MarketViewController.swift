@@ -6,7 +6,6 @@
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
-import DNSPageView
 import Localize_Swift
 import ReSwift
 import RxSwift
@@ -152,7 +151,7 @@ class MarketViewController: BaseViewController {
         style.isShowBottomLine = true
         style.titleColor = #colorLiteral(red: 0.5436816812, green: 0.5804407597, blue: 0.6680644155, alpha: 1)
         style.titleSelectedColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : #colorLiteral(red: 0.1399003565, green: 0.1798574626, blue: 0.2467218637, alpha: 1)
-        style.titleFontSize = 14
+        style.titleFont = UIFont.systemFont(ofSize: 14)
         
         // 设置标题内容
         let titles = [R.string.localizable.mark_order_book.key.localized(),R.string.localizable.mark_trade_history.key.localized()]
@@ -294,11 +293,10 @@ class MarketViewController: BaseViewController {
                     }
                 }
                 
-                if let base_info = app_data.assetInfo[self.ticker.base] {
+                if let base_info = app_data.assetInfo[self.ticker.base], timeGap == .one_day {
                     last_model = dataArray.last!
-                    
                     detailView.highLabel.text = "High: " + last_model.high.formatCurrency(digitNum: base_info.precision)
-                    detailView.lowLabel.text = "Low: " + last_model.high.formatCurrency(digitNum: base_info.precision)
+                    detailView.lowLabel.text = "Low: " + last_model.low.formatCurrency(digitNum: base_info.precision)
                 }
             }
             
