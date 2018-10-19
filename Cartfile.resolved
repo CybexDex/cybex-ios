@@ -2,7 +2,7 @@ binary "https://building42.github.io/Specs/Carthage/iOS/Crashlytics.json" "3.10.
 binary "https://building42.github.io/Specs/Carthage/iOS/Fabric.json" "1.7.13"
 github "Alamofire/Alamofire" "4.7.3"
 github "ArtSabintsev/Guitar" "0.5.0"
-github "CybexDex/cybex-ios-core-cpp" "1.0.2"
+github "CybexDex/cybex-ios-core-cpp" "1.0.3"
 github "Ekhoo/Device" "3.1.2"
 github "EyreFree/EFQRCode" "4.3.0"
 github "Hearst-DD/ObjectMapper" "3.4.0"
