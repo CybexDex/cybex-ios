@@ -6,7 +6,6 @@ cache:
   directories:
   - Carthage
 before_install:
-- wget $LIBRARYURL -O tmp.zip && unzip -o tmp.zip && rm tmp.zip
 - brew install lvillani/tap/carthage-copy-frameworks
 - bundle install
 - bundle update
