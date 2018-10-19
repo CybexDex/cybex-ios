@@ -93,7 +93,7 @@ PODS:
   - SwiftyUserDefaults (4.0.0-alpha.1)
   - SWXMLHash (4.7.2)
   - Then (2.3.0)
-  - TinyConstraints (3.2.1)
+  - TinyConstraints (3.3.0)
   - UICKeyChainStore (2.1.1)
   - UIFontComplete (3.0.0)
   - UMCAnalytics (5.5.0):
@@ -156,7 +156,7 @@ DEPENDENCIES:
   - SwiftyJSON
   - SwiftyUserDefaults (from `https://github.com/radex/SwiftyUserDefaults`, tag `4.0.0-alpha.1`)
   - Then
-  - TinyConstraints (from `https://github.com/roberthein/TinyConstraints`, branch `release/Swift-4.2`)
+  - TinyConstraints (from `https://github.com/roberthein/TinyConstraints`, branch `master`)
   - UIFontComplete
   - UMCAnalytics
   - UMCCommon
@@ -269,7 +269,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/radex/SwiftyUserDefaults
     :tag: 4.0.0-alpha.1
   TinyConstraints:
-    :branch: release/Swift-4.2
+    :branch: master
     :git: https://github.com/roberthein/TinyConstraints
   XLActionController:
     :branch: Swift4.2
@@ -331,7 +331,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/radex/SwiftyUserDefaults
     :tag: 4.0.0-alpha.1
   TinyConstraints:
-    :commit: 6e7e5bcb68368bac126adb2d847b164dc033249e
+    :commit: 8b30528f8c592d4c4983353d7f7a966c7275eb50
     :git: https://github.com/roberthein/TinyConstraints
   XLActionController:
     :commit: 4eb887254acae18c58da4dafb9ee72a205dede69
@@ -392,7 +392,7 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: cebe0ff9472f52699772a514b6f7155861d8069b
   SWXMLHash: f0761e5c5d1a49f6553609bd0f5696a61738c5b9
   Then: ee21c97b85ff6062b9b0080c9abb1eea46743345
-  TinyConstraints: 5ca700872f726c49d10829d7b00f31e4ec731f36
+  TinyConstraints: 6d0e495e72372556b31a0cc9b60983d5f780ef2f
   UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
   UIFontComplete: 5b0f59a83308816c610164b79a2540b3520f9b72
   UMCAnalytics: 4667788559a72f2fa5077117d1b8802a3b6eb6bb
@@ -403,6 +403,6 @@ SPEC CHECKSUMS:
   XLActionController: 007868251c0eed70d649d06c1625259b73b3a600
   Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
 
-PODFILE CHECKSUM: 25587de1f39069f3dc8caad6da51bed23b282268
+PODFILE CHECKSUM: fdcca48bcd5d02fc6b731f60be61be9d4bc42eca
 
 COCOAPODS: 1.6.0.beta.1

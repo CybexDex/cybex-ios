@@ -38,6 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self, Answers.self])
+        #if DEBUG
+        Fabric.sharedSDK().debug = true
+        #endif
         URLNavigationMap.initialize(navigator: navigator)
         
         setupAnalytics()
@@ -206,7 +209,7 @@ extension AppDelegate {
             Localize.setCurrentLanguage(Defaults[.language])
         }
         
-        app_data.data.asObservable()
+        app_data.ticker_data.asObservable()
             .subscribe(onNext: { (s) in
                 if let vc = app_coodinator.startLoadingVC, !(vc is HomeViewController) {
                     app_coodinator.startLoadingVC = nil

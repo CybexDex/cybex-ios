@@ -21,11 +21,13 @@ protocol AppStateManagerProtocol {
         _ subscriber: S, transform: ((Subscription<AppState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
     
-    func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority, callback:@escaping ()->())
+//    func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority, callback:@escaping ()->())
     func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority)
+    
+    func fetchTickerData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority)
     func fetchEthToRmbPrice()
     
-    func fetchGetToCyb(_ callback:@escaping(Double)->())
+    func fetchGetToCyb(_ callback:@escaping(Decimal)->())
 }
 
 class AppCoordinator {
@@ -35,7 +37,7 @@ class AppCoordinator {
     
     var fetchPariTimer:Repeater?
     
-    var getToCybRelation : Double?
+    var getToCybRelation : Decimal?
     
     var store = Store<AppState> (
         reducer: AppReducer,

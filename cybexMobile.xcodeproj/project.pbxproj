@@ -371,6 +371,11 @@
 		729B86A62154C7BB00C6E0E4 /* ComprehensiveBlockItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729B86A32154C7BB00C6E0E4 /* ComprehensiveBlockItemsView.swift */; };
 		729B86A72154C7BB00C6E0E4 /* ComprehensiveBlockItemsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 729B86A42154C7BB00C6E0E4 /* ComprehensiveBlockItemsView.xib */; };
 		72AAC8B02106FC840040793F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AAC8AF2106FC840040793F /* Record.swift */; };
+		72B42E7C217723DD00587403 /* PairDetailDateViewViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B42E79217723DD00587403 /* PairDetailDateViewViewAdapter.swift */; };
+		72B42E7D217723DD00587403 /* PairDetailDateViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B42E7A217723DD00587403 /* PairDetailDateViewView.swift */; };
+		72B42E7E217723DD00587403 /* PairDetailDateViewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72B42E7B217723DD00587403 /* PairDetailDateViewView.xib */; };
+		72B42E8321774CFD00587403 /* DespositNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B42E8021774CFD00587403 /* DespositNameView.swift */; };
+		72B42E8421774CFD00587403 /* DespositNameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72B42E8121774CFD00587403 /* DespositNameView.xib */; };
 		72C844D7214A3F000078448C /* cn_dark.html in Resources */ = {isa = PBXBuildFile; fileRef = 72C844D1214A3EFE0078448C /* cn_dark.html */; };
 		72C844D8214A3F000078448C /* en_dark.html in Resources */ = {isa = PBXBuildFile; fileRef = 72C844D6214A3EFF0078448C /* en_dark.html */; };
 		72C844DB214B50930078448C /* cn_light.html in Resources */ = {isa = PBXBuildFile; fileRef = 72C844D9214B50920078448C /* cn_light.html */; };
@@ -6068,6 +6073,11 @@
 		72A51EE54D9E5C89454B054CA7DD0F70 /* numbered.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = numbered.hpp; sourceTree = "<group>"; };
 		72AAC8AF2106FC840040793F /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		72B10CF944E9655A243A7B1F18CFD950 /* permutation_iterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = permutation_iterator.hpp; sourceTree = "<group>"; };
+		72B42E79217723DD00587403 /* PairDetailDateViewViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairDetailDateViewViewAdapter.swift; sourceTree = "<group>"; };
+		72B42E7A217723DD00587403 /* PairDetailDateViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairDetailDateViewView.swift; sourceTree = "<group>"; };
+		72B42E7B217723DD00587403 /* PairDetailDateViewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PairDetailDateViewView.xib; sourceTree = "<group>"; };
+		72B42E8021774CFD00587403 /* DespositNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DespositNameView.swift; sourceTree = "<group>"; };
+		72B42E8121774CFD00587403 /* DespositNameView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DespositNameView.xib; sourceTree = "<group>"; };
 		72B5A43FDA3A2D535F9A553CDD8D84F8 /* karma_auxiliary.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = karma_auxiliary.hpp; sourceTree = "<group>"; };
 		72C0CBAF353545F721F9FBB2E9712DE3 /* make_vector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = make_vector.hpp; sourceTree = "<group>"; };
 		72C844D1214A3EFE0078448C /* cn_dark.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = cn_dark.html; sourceTree = "<group>"; };
@@ -15570,6 +15580,9 @@
 				7C47DE7D9EA3C0F39E8C76762D2DFF7D /* PairListHorizantalView.xib */,
 				93AA08C50F42A7D121A14CF241089D7D /* PairRechargeView.swift */,
 				15763F4D0858712960CE513D0F020B2A /* PairRechargeView.xib */,
+				72B42E79217723DD00587403 /* PairDetailDateViewViewAdapter.swift */,
+				72B42E7A217723DD00587403 /* PairDetailDateViewView.swift */,
+				72B42E7B217723DD00587403 /* PairDetailDateViewView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -22553,6 +22566,8 @@
 				72EC6A5120F4611500CEAFF6 /* EOSWithdrawView.xib */,
 				72EC6A5220F4611500CEAFF6 /* WithdrawView.swift */,
 				72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */,
+				72B42E8021774CFD00587403 /* DespositNameView.swift */,
+				72B42E8121774CFD00587403 /* DespositNameView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -33588,6 +33603,7 @@
 				192C3ADF0D3E049D53C92A483D63CD03 /* BusinessTitleCell.xib in Resources */,
 				56D03074319AE5D578E9B4CD28B6C1F9 /* BusinessTitleItemView.xib in Resources */,
 				E7F391C513AB0D96277BECAC9BE9672E /* BusinessTitleView.xib in Resources */,
+				72B42E7E217723DD00587403 /* PairDetailDateViewView.xib in Resources */,
 				7942D21C3BB4CBA2FC681C256E01BE57 /* BusinessView.xib in Resources */,
 				64F0077FC05CD2AC44BC6F16C2C71938 /* Button.xib in Resources */,
 				46F7A3A53678AB032E1CC75D7F95FA04 /* CybexActionView.xib in Resources */,
@@ -33623,6 +33639,7 @@
 				7307A92C212518DC00BD6444 /* MaterialIcons-Regular.ttf in Resources */,
 				16AF9C856D66092D87065E969141D71F /* MyOpenedOrdersView.xib in Resources */,
 				4EFDB6FA81BF7FB9600D4A6E07374864 /* NoticeBoardView.xib in Resources */,
+				72B42E8421774CFD00587403 /* DespositNameView.xib in Resources */,
 				7307A92B212518DC00BD6444 /* map-icons.ttf in Resources */,
 				ED699787C0E757F3F46A0E2B5D6BF947 /* OpenedOrdersCell.xib in Resources */,
 				6C1820B3CDFFEBD3CF821B6CDB3F4691 /* OpenedOrdersHeaderView.xib in Resources */,
@@ -34154,6 +34171,7 @@
 				D68AC2564E8A2DB5B8D2B787AD3F02CD /* EntryRootCoordinator.swift in Sources */,
 				9D03533C82BDEC45C76E2419E0489874 /* EntryViewController.swift in Sources */,
 				ADB937770A84BC394C0F50DF0631CDEC /* ExchangeActions.swift in Sources */,
+				72B42E8321774CFD00587403 /* DespositNameView.swift in Sources */,
 				FC8F317187D539852A834267F3F427FA /* ExchangeCoordinator.swift in Sources */,
 				98CCDC7B05741EEDF9AF05992AA2A8DF /* ExchangeReducers.swift in Sources */,
 				A9ADC5BE1460E34FCA1B4F52F30FDE5F /* ExchangeView.swift in Sources */,
@@ -34188,6 +34206,7 @@
 				3D400D51F52AE73941E3134046491BA5 /* HomePairView.swift in Sources */,
 				9ED2AB33B2CDBB57B605BE26C2D455C2 /* HomeReducers.swift in Sources */,
 				24401F60F82FEDDA35FBCCED409C1102 /* HomeRootCoordinator.swift in Sources */,
+				72B42E7C217723DD00587403 /* PairDetailDateViewViewAdapter.swift in Sources */,
 				9F391D11D2B1C4522215117016EAA2F7 /* HomeSectionHeaderView.swift in Sources */,
 				733714B92122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.swift in Sources */,
 				DBBB81526F86E5409BB4D8C0D8A6CF1B /* HomeTitleView.swift in Sources */,
@@ -34398,6 +34417,7 @@
 				221C616E2137FCCF0021C007 /* ImageShareViewController.swift in Sources */,
 				7386F2C021216B9E00ABC924 /* WithdrawAddressReducers.swift in Sources */,
 				A0205CDF8595D10C5D9367EBCBBA714A /* UIColor+Additions.swift in Sources */,
+				72B42E7D217723DD00587403 /* PairDetailDateViewView.swift in Sources */,
 				7307A91C212518DC00BD6444 /* FontAwesome.swift in Sources */,
 				1885C2EE1E25930F2E94702A8C05C2BC /* UIColor+Cybexblack.swift in Sources */,
 				492A4075DDD845005D90DD5201F32F26 /* UIColorExtension.swift in Sources */,

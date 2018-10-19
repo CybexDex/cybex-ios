@@ -47,7 +47,7 @@ class ComprehensiveCoordinator: ComprehensiveRootCoordinator {
     var state: ComprehensiveState {
         return store.state
     }
-            
+    
     override func register() {
         Broadcaster.register(ComprehensiveCoordinatorProtocol.self, observer: self)
         Broadcaster.register(ComprehensiveStateManagerProtocol.self, observer: self)
@@ -69,14 +69,14 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
         var currentBaseIndex = 0
         for index in 0..<AssetConfiguration.market_base_assets.count {
             if pair.base == AssetConfiguration.market_base_assets[index] {
-               currentBaseIndex = index
+                currentBaseIndex = index
             }
         }
-        let homeBuckets = app_data.filterQuoteAsset(pair.base)
+        let tickers = app_data.filterQuoteAssetTicker(pair.base)
         var curIndex = 0
-        for index in 0..<homeBuckets.count {
-            let homebucket = homeBuckets[index]
-            if homebucket.base == pair.base && homebucket.quote == pair.quote {
+        for index in 0..<tickers.count {
+            let ticker = tickers[index]
+            if ticker.base == pair.base && ticker.quote == pair.quote {
                 curIndex = index
             }
         }

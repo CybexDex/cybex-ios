@@ -436,7 +436,7 @@ extension String {
 func transferTimeType(_ time: Int, type: Bool = false) -> String {
     var result = ""
     var times = 0
-
+    
     if time == 0 {
         result = "0"
         return result + R.string.localizable.transfer_unit_second.key.localized()

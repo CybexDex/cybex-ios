@@ -63,7 +63,7 @@ def extension
 end
 
 def ui
-    pod 'TinyConstraints', :git => 'https://github.com/roberthein/TinyConstraints', :branch => 'release/Swift-4.2'
+    pod 'TinyConstraints', :git => 'https://github.com/roberthein/TinyConstraints', :branch => 'master'
     pod 'KMNavigationBarTransition'
 #    pod 'NVActivityIndicatorView'
     pod 'BeareadToast', :git => 'https://github.com/phpmaple/BeareadToast', :branch => 'master'
