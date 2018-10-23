@@ -238,7 +238,7 @@ extension RegisterViewController {
                     return
                 }
                 
-                if !self.userNameValid {
+                if !self.userNameValid, let account = self.accountTextField.text, account.count > 0 {
                     self.errorStackView.isHidden = false
                     self.errorMessage.text = R.string.localizable.accountValidateError6.key.localized()
                     return
@@ -247,12 +247,12 @@ extension RegisterViewController {
             else {
                 self.confirmPasswordTextField.tailImage = nil
                 if let text = self.confirmPasswordTextField.text, text.count == 0 {
-                    if !self.passwordValid {
+                    if !self.passwordValid, let password = self.passwordTextField.text, password.count > 0 {
                         self.errorStackView.isHidden = false
                         self.errorMessage.text = R.string.localizable.passwordValidateError3.key.localized()
                         return
                     }
-                    if !self.userNameValid {
+                    if !self.userNameValid, let account = self.accountTextField.text, account.count > 0  {
                         self.errorStackView.isHidden = false
                         self.errorMessage.text = R.string.localizable.accountValidateError6.key.localized()
                         return

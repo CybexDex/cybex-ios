@@ -175,16 +175,16 @@ func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
                 ticker = item
                 indexs.append(1)
             }
-            else if item.base = AssetConfiguration.ETH {
+            else if item.base == AssetConfiguration.ETH {
                 ticker = item
                 indexs.append(2)
             }
-            else if item.base = AssetConfiguration.BTC {
+            else if item.base == AssetConfiguration.BTC {
                 ticker = item
                 indexs.append(3)
             }
         }
-        indexs = indexs.sort(by: {$0 < $1})
+        indexs = indexs.sorted(by: {$0 < $1})
         base_price = getAssetRMBPrice(base_assets[indexs[0]])
         ticker = tickers.filter({$0.base == base_assets[indexs[0]] && $0.quote == asset}).first!
     }

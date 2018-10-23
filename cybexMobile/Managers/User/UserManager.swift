@@ -426,15 +426,20 @@ class UserManager {
         if let limitOrder = limitOrder.value{
             for limitOrder_value in limitOrder{
                 
-                //                let assetA_info = app_data.assetInfo[limitOrder_value.sellPrice.base.assetID]
-                //                let assetB_info = app_data.assetInfo[limitOrder_value.sellPrice.quote.assetID]
-                
-                //                let (base,_) = calculateAssetRelation(assetID_A_name: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetID_B_name: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
+//                let assetA_info = app_data.assetInfo[limitOrder_value.sellPrice.base.assetID]
+//                let assetB_info = app_data.assetInfo[limitOrder_value.sellPrice.quote.assetID]
+//
+//                let (base,_) = calculateAssetRelation(assetID_A_name: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetID_B_name: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
                 //                let isBuy = base == ((assetA_info != nil) ? assetA_info!.symbol.filterJade : "")
                 
                 let realAmount = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale)
                 let price_value = getAssetRMBPrice(limitOrder_value.sellPrice.base.assetID)
                 _limitOrderValue += realAmount * Decimal(price_value)
+                print("总价格价格: \(_limitOrderValue.doubleValue)")
+
+//                let realAmount = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale)
+//                let price_value = getAssetRMBPrice(limitOrder_value.sellPrice.base.assetID)
+//                _limitOrderValue += realAmount * Decimal(price_value)
                 
                 //                if isBuy {
                 //                    let realAmount = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale)
@@ -500,6 +505,7 @@ class UserManager {
                     _limitOrder_buy_value += _limitOrderValue
                 }
                 else {
+                    print("卖出价格: \(_limitOrderValue.doubleValue)")
                     _limitOrder_sell_value += _limitOrderValue
                 }
                 

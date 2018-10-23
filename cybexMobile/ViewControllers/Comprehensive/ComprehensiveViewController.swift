@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import ReSwift
 import Localize_Swift
+import SwifterSwift
 
 class ComprehensiveViewController: BaseViewController {
     
@@ -147,7 +148,11 @@ class ComprehensiveViewController: BaseViewController {
         
         NotificationCenter.default.addObserver(forName: NotificationName.NetWorkChanged, object: nil, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
-            self.coordinator?.fetchData()
+            SwifterSwift.delay(milliseconds: 1000, completion: {
+                main {
+                    self.coordinator?.fetchData()
+                }
+            })
         }
     }
 }

@@ -52,7 +52,7 @@ class BusinessViewController: BaseViewController {
         }) {
             let markets = app_data.filterQuoteAssetTicker(pair.base)
             let data = markets[selectedIndex]
-//            let matrix = getCachedBucket(data)
+//            let matrix = =(data)
             price_pricision = data.latest.tradePrice.pricision
             amount_pricision = data.latest.tradePrice.amountPricision
         }
@@ -192,15 +192,15 @@ class BusinessViewController: BaseViewController {
                 return
             }
             
-            let texts = text.components(separatedBy: ".")
+            let texts = text.replacingOccurrences(of: ",", with: "").components(separatedBy: ".")
             if let price = texts.first, price.count > 8 {
                 self.containerView.priceTextfield.text = price.substring(from: 0, length: 8)
                 if texts.count > 1 {
-                    self.containerView.priceTextfield.text += texts.last!
+                    self.containerView.priceTextfield.text = self.containerView.priceTextfield.text! + "." + texts.last!
                 }
             }
-            
-            self.containerView.priceTextfield.text = text.toDecimal()?.string(digits: self.price_pricision, roundingMode: .down)
+          
+            self.containerView.priceTextfield.text = self.containerView.priceTextfield.text!.formatCurrency(digitNum: self.price_pricision)
             guard let amountText = self.containerView.amountTextfield.text, amountText != "", amountText.toDouble() != 0 else {
                 return
             }
@@ -210,25 +210,21 @@ class BusinessViewController: BaseViewController {
         
         NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification, object: self.containerView.amountTextfield, queue: nil) {[weak self] (notifi) in
             guard let `self` = self else { return }
-            //      if self.containerView.tipView.isHidden == true ,self.coordinator?.state.property.balance.value == 0{
-            //        self.containerView.tipView.isHidden = false
-            //      }
+
             guard let text = self.containerView.amountTextfield.text, text != "", text.toDouble() != 0 else {
                 self.containerView.amountTextfield.text = ""
                 return
             }
             
-            let texts = text.components(separatedBy: ".")
+            let texts = text.replacingOccurrences(of: ",", with: "").components(separatedBy: ".")
             if let amount = texts.first, amount.count > 8 {
                 self.containerView.amountTextfield.text = amount.substring(from: 0, length: 8)
                 if texts.count > 1 {
-                    self.containerView.amountTextfield.text += texts.last!
+                    self.containerView.amountTextfield.text = self.containerView.amountTextfield.text! + "." + texts.last!
                 }
             }
-            
-            self.containerView.amountTextfield.text = text.toDecimal()?.string(digits: self.amount_pricision, roundingMode: .down)
+            self.containerView.amountTextfield.text = self.containerView.amountTextfield.text!.formatCurrency(digitNum: self.amount_pricision)
             guard let priceText = self.containerView.priceTextfield.text, priceText != "", priceText.toDouble() != 0 else {
-                
                 return
             }
             self.coordinator?.state.property.amount.accept(self.containerView.amountTextfield.text!)
