@@ -206,15 +206,13 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
             }
             
         }
-        let balanceDouble = Int(round(self.state.property.balance.value.doubleValue * pow(10, base_info.precision).doubleValue))
-        let totalDouble = Int(round(total.doubleValue * pow(10, base_info.precision).doubleValue))
+        let balanceDouble = self.state.property.balance.value.doubleValue
+        let totalDouble = total.doubleValue
         
         
         if balanceDouble >= totalDouble {
             return true
         }
-        
-        
         return false
     }
 }

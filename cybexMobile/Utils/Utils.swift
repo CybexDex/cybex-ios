@@ -162,17 +162,35 @@ func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
     guard var ticker = tickers.first else {
         return 0
     }
-    
-//    if tickers.count > 1 {
-//        var isTruePrice = false
-//        for item in tickers {
-//            if item.base == AssetConfiguration.CYB {
-//                ticker =
-//            }
-//        }
-//    }
-    
-    let base_price = getAssetRMBPrice(ticker.base)
+    var base_price: Double = 0
+    if tickers.count > 1 {
+        var base_assets = [AssetConfiguration.CYB, AssetConfiguration.USDT, AssetConfiguration.ETH, AssetConfiguration.BTC]
+        var indexs = [Int]()
+        for item in tickers {
+            if item.base == AssetConfiguration.CYB {
+                ticker = item
+                indexs.append(0)
+            }
+            else if item.base == AssetConfiguration.USDT {
+                ticker = item
+                indexs.append(1)
+            }
+            else if item.base = AssetConfiguration.ETH {
+                ticker = item
+                indexs.append(2)
+            }
+            else if item.base = AssetConfiguration.BTC {
+                ticker = item
+                indexs.append(3)
+            }
+        }
+        indexs = indexs.sort(by: {$0 < $1})
+        base_price = getAssetRMBPrice(base_assets[indexs[0]])
+        ticker = tickers.filter({$0.base == base_assets[indexs[0]] && $0.quote == asset}).first!
+    }
+    else {
+        base_price = getAssetRMBPrice(ticker.base)
+    }
     
     guard let latest = ticker.latest.toDouble() else {
         return 0

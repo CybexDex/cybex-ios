@@ -43,7 +43,7 @@ class AccountOpenedOrdersView:UIView {
         }
         else {
             headerView.totalValue_tip.localized_text = R.string.localizable.openedSellMoney.key.localizedContainer()
-            headerView.data = "\(UserManager.shared.limitOrderValue - UserManager.shared.limitOrder_buy_value)"
+            headerView.data = "\(UserManager.shared.limitOrder_sell_value)"
         }
     }
     
