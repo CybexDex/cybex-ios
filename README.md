@@ -4,7 +4,6 @@
 
 ## Pre Build
 
-- brew install git-lfs
 - brew install carthage
 - brew install lvillani/tap/carthage-copy-frameworks
 - carthage bootstrap --no-use-binaries --platform iOS
