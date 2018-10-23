@@ -467,8 +467,6 @@
 		73539C5E2179A282008395AC /* DNSPageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C572179A281008395AC /* DNSPageViewManager.swift */; };
 		73539C5F2179A282008395AC /* DNSPageCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C582179A281008395AC /* DNSPageCollectionViewFlowLayout.swift */; };
 		73539C602179A282008395AC /* DNSPageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C592179A281008395AC /* DNSPageStyle.swift */; };
-		73539C672179A71B008395AC /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C662179A71A008395AC /* UMAnalytics.framework */; };
-		73539C6D2179AA32008395AC /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C6C2179AA31008395AC /* UMCommon.framework */; };
 		73539C6F2179AAA8008395AC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C6E2179AAA8008395AC /* libsqlite3.tbd */; };
 		73587E9D2133EB15006CF8A6 /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */; };
 		73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9F21352AD8006CF8A6 /* ETOMGService.swift */; };
@@ -480,6 +478,8 @@
 		73587EB52137C69B006CF8A6 /* ETOCrowdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */; };
 		73587EB62137C69B006CF8A6 /* ETOCrowdViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */; };
 		735A3D022160A73200FC8922 /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735A3D012160A73000FC8922 /* NBLCommonModule.framework */; };
+		7374B381217ED39200B63982 /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7374B37F217ED39100B63982 /* UMCommon.framework */; };
+		7374B382217ED39200B63982 /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7374B380217ED39200B63982 /* UMAnalytics.framework */; };
 		737F8C352145532A00DD522A /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F8C342145532A00DD522A /* String+Extensions.swift */; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
@@ -1155,8 +1155,6 @@
 		73539C572179A281008395AC /* DNSPageViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageViewManager.swift; sourceTree = "<group>"; };
 		73539C582179A281008395AC /* DNSPageCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		73539C592179A281008395AC /* DNSPageStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageStyle.swift; sourceTree = "<group>"; };
-		73539C662179A71A008395AC /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAnalytics.framework; path = library/UMAnalytics.framework; sourceTree = "<group>"; };
-		73539C6C2179AA31008395AC /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommon.framework; path = library/UMCommon.framework; sourceTree = "<group>"; };
 		73539C6E2179AAA8008395AC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPCircularProgress.swift; sourceTree = "<group>"; };
 		73587E9F21352AD8006CF8A6 /* ETOMGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOMGService.swift; sourceTree = "<group>"; };
@@ -1169,6 +1167,8 @@
 		73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdViewAdapter.swift; sourceTree = "<group>"; };
 		735A3D012160A73000FC8922 /* NBLCommonModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NBLCommonModule.framework; path = Carthage/Build/iOS/Static/NBLCommonModule.framework; sourceTree = "<group>"; };
 		737258FAB6762972136E4188BF20F602 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
+		7374B37F217ED39100B63982 /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommon.framework; path = Carthage/Build/iOS/UMCommon.framework; sourceTree = "<group>"; };
+		7374B380217ED39200B63982 /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAnalytics.framework; path = Carthage/Build/iOS/UMAnalytics.framework; sourceTree = "<group>"; };
 		737F8C342145532A00DD522A /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		7386F28C2121204A00ABC924 /* cybexMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cybexMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7386F2902121204A00ABC924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1391,7 +1391,6 @@
 				73539BFE217980CF008395AC /* BiometricAuthentication.framework in Frameworks */,
 				7336B7BD214F717E0086A9DF /* ESTabBarController.framework in Frameworks */,
 				73539C37217992F1008395AC /* Fabric.framework in Frameworks */,
-				73539C672179A71B008395AC /* UMAnalytics.framework in Frameworks */,
 				73539C38217992F1008395AC /* Crashlytics.framework in Frameworks */,
 				73539C3A217992F1008395AC /* Device.framework in Frameworks */,
 				731C11BB214D045E00761955 /* RxBlocking.framework in Frameworks */,
@@ -1406,13 +1405,14 @@
 				73539BAA2178A391008395AC /* Apollo.framework in Frameworks */,
 				73539C1321798D26008395AC /* Presentr.framework in Frameworks */,
 				73539C1421798D26008395AC /* Fakery.framework in Frameworks */,
+				7374B381217ED39200B63982 /* UMCommon.framework in Frameworks */,
+				7374B382217ED39200B63982 /* UMAnalytics.framework in Frameworks */,
 				73539C1521798D26008395AC /* Reachability.framework in Frameworks */,
 				73539C1621798D26008395AC /* Repeat.framework in Frameworks */,
 				73539C1721798D26008395AC /* GrowingTextView.framework in Frameworks */,
 				73539C1821798D26008395AC /* IQKeyboardManagerSwift.framework in Frameworks */,
 				73539C1921798D26008395AC /* UIFontComplete.framework in Frameworks */,
 				73539C2921799039008395AC /* Macaw.framework in Frameworks */,
-				73539C6D2179AA32008395AC /* UMCommon.framework in Frameworks */,
 				73539C2A21799039008395AC /* SwiftTheme.framework in Frameworks */,
 				73539C2B21799039008395AC /* XLActionController.framework in Frameworks */,
 				73539C2C21799039008395AC /* Rswift.framework in Frameworks */,
@@ -3028,10 +3028,10 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7374B380217ED39200B63982 /* UMAnalytics.framework */,
+				7374B37F217ED39100B63982 /* UMCommon.framework */,
 				7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */,
 				73539C6E2179AAA8008395AC /* libsqlite3.tbd */,
-				73539C6C2179AA31008395AC /* UMCommon.framework */,
-				73539C662179A71A008395AC /* UMAnalytics.framework */,
 				73539C34217992EF008395AC /* Crashlytics.framework */,
 				73539C36217992F0008395AC /* Device.framework */,
 				73539C33217992EF008395AC /* Fabric.framework */,
@@ -3285,7 +3285,6 @@
 				1F1278CDBFA95B0E46D9562DAFE69F12 /* Resources */,
 				64CA9F24897CCC8641D07FEE1CB77EA5 /* fabric */,
 				738FCE312148D7EC0042331A /* carthage */,
-				73539C652179A67F008395AC /* carthage custom */,
 				7384FD58214CF5F900AFF5BE /* appstore bug */,
 				73539C702179ABCF008395AC /* Integrate Reveal Server */,
 			);
@@ -3603,24 +3602,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Carthage/Build/iOS/Fabric.framework/run\" a0bbb6d623feca529afaf6ed110e62a77f47b16a 3b264ff6cab506aaf14bce576c156ea66229ad7b6dfb666b4fbb91089deb17e2\n";
 		};
-		73539C652179A67F008395AC /* carthage custom */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "carthage custom";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
 		73539C702179ABCF008395AC /* Integrate Reveal Server */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3659,6 +3640,8 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/UMCommon.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/UMAnalytics.framework",
 			);
 			name = carthage;
 			outputPaths = (
@@ -4229,16 +4212,11 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
-					"$(PROJECT_DIR)/library",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = cybexMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/library/",
-					"$(PROJECT_DIR)/library",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -4326,16 +4304,11 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Carthage/Build/iOS/Static",
-					"$(PROJECT_DIR)/library",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = cybexMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/library/",
-					"$(PROJECT_DIR)/library",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
