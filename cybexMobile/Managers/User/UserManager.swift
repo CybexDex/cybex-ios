@@ -324,7 +324,8 @@ extension UserManager {
         if let balances = data.balances {
             self.balances.accept(balances.filter({ (balance) -> Bool in
                 let name = app_data.assetInfo[balance.asset_type]
-                return (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
+                return name != nil
+//                return (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
                 //        return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
                 //          (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
             }))
@@ -337,8 +338,11 @@ extension UserManager {
             self.limitOrder.accept(limitOrders.filter({ (limitOrder) -> Bool in
                 let base_name = app_data.assetInfo[limitOrder.sellPrice.base.assetID]
                 let quote_name = app_data.assetInfo[limitOrder.sellPrice.quote.assetID]
-                let base_bool = base_name != nil && ((base_name?.symbol.hasPrefix("JADE"))! || base_name?.symbol == "CYB")
-                let quote_bool = quote_name != nil && ((quote_name?.symbol.hasPrefix("JADE"))! || quote_name?.symbol == "CYB")
+                let base_bool = base_name != nil
+                let quote_bool = quote_name != nil
+                
+//                let base_bool = base_name != nil && ((base_name?.symbol.hasPrefix("JADE"))! || base_name?.symbol == "CYB")
+//                let quote_bool = quote_name != nil && ((quote_name?.symbol.hasPrefix("JADE"))! || quote_name?.symbol == "CYB")
                 
                 return base_bool && quote_bool
             }))
@@ -425,43 +429,11 @@ class UserManager {
         //        var _limitOrder_buy_value:Double = 0
         if let limitOrder = limitOrder.value{
             for limitOrder_value in limitOrder{
-                
-//                let assetA_info = app_data.assetInfo[limitOrder_value.sellPrice.base.assetID]
-//                let assetB_info = app_data.assetInfo[limitOrder_value.sellPrice.quote.assetID]
-//
-//                let (base,_) = calculateAssetRelation(assetID_A_name: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetID_B_name: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
-                //                let isBuy = base == ((assetA_info != nil) ? assetA_info!.symbol.filterJade : "")
-                
                 let realAmount = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale)
                 let price_value = getAssetRMBPrice(limitOrder_value.sellPrice.base.assetID)
-                _limitOrderValue += realAmount * Decimal(price_value)
-                print("总价格价格: \(_limitOrderValue.doubleValue)")
-
-//                let realAmount = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale)
-//                let price_value = getAssetRMBPrice(limitOrder_value.sellPrice.base.assetID)
-//                _limitOrderValue += realAmount * Decimal(price_value)
-                
-                //                if isBuy {
-                //                    let realAmount = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale)
-                //                    let price_value = getAssetRMBPrice(limitOrder_value.sellPrice.base.assetID)
-                //                    _limitOrderValue += realAmount * Decimal(price_value)
-                
-                //                    if let eth_cyb = changeToETHAndCYB(limitOrder_value.sellPrice.base.assetID).cyb.toDouble() {
-                //                        let buy_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale).doubleValue * eth_cyb
-                //                        _limitOrderValue += buy_value
-                ////                        _limitOrder_buy_value += buy_value
-                //                    }
-                //                }
-                //                else{
-                
-                //                    if let eth_cyb = changeToETHAndCYB(limitOrder_value.sellPrice.base.assetID).cyb.toDouble() {
-                //                        let sell_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale).doubleValue * eth_cyb
-                //                        _limitOrderValue += sell_value
-                //                    }
-                //                }
+                _limitOrderValue += (realAmount * Decimal(price_value))
             }
         }
-        
         return _limitOrderValue.doubleValue
     }
     
@@ -482,10 +454,6 @@ class UserManager {
                 let realAmount = getRealAmount(balance_value.asset_type,amount: balance_value.balance)
                 let real_rmb_price = getAssetRMBPrice(balance_value.asset_type)
                 balance_values += realAmount * Decimal(real_rmb_price)
-                
-                //                if let eth_cyb = changeToETHAndCYB(balance_value.asset_type).cyb.toDouble() {
-                //                    balance_values += getRealAmount(balance_value.asset_type,amount: balance_value.balance).doubleValue * eth_cyb
-                //                }
             }
         }
         
@@ -502,28 +470,11 @@ class UserManager {
                 _limitOrderValue += realAmount * Decimal(price_value)
                 balance_values += _limitOrderValue
                 if isBuy {
-                    _limitOrder_buy_value += _limitOrderValue
+                    _limitOrder_buy_value += realAmount * Decimal(price_value)
                 }
                 else {
-                    print("卖出价格: \(_limitOrderValue.doubleValue)")
-                    _limitOrder_sell_value += _limitOrderValue
+                    _limitOrder_sell_value += realAmount * Decimal(price_value)
                 }
-                
-                //                if isBuy {
-                //                    if let eth_cyb = changeToETHAndCYB(limitOrder_value.sellPrice.base.assetID).cyb.toDouble() {
-                //                        let buy_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale).doubleValue * eth_cyb
-                //                        _limitOrderValue += buy_value
-                //                        _limitOrder_buy_value += buy_value
-                //                        balance_values += buy_value
-                //                    }
-                //                }
-                //                else{
-                //                    if let eth_cyb = changeToETHAndCYB(limitOrder_value.sellPrice.base.assetID).cyb.toDouble() {
-                //                        let sell_value = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale).doubleValue * eth_cyb
-                //                        _limitOrderValue += sell_value
-                //                        balance_values += sell_value
-                //                    }
-                //                }
             }
         }
         

@@ -126,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UMConfigure.setLogEnabled(true)
         UMConfigure.setEncryptEnabled(true)
         UMConfigure.initWithAppkey(UM_APPKEY, channel: Bundle.main.bundleIdentifier!)
-        
+
     }
     
     

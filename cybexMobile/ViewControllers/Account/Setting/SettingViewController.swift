@@ -50,6 +50,8 @@ class SettingViewController: BaseViewController {
     }
     
     func setupUI() {
+        
+//        self.environment.isHidden = false
         language.content_locali =  R.string.localizable.setting_language.key
         version.content.text = Bundle.main.version
         theme.content_locali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key : R.string.localizable.light.key
@@ -71,6 +73,7 @@ class SettingViewController: BaseViewController {
     }
     
     func clickCellView(_ sender : NormalCellView) {
+        
         if sender == language {
             self.coordinator?.openSettingDetail(type: .language)
         }

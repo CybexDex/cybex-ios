@@ -243,6 +243,7 @@ extension RegisterViewController {
                     self.errorMessage.text = R.string.localizable.accountValidateError6.key.localized()
                     return
                 }
+                self.errorStackView.isHidden = true
             }
             else {
                 self.confirmPasswordTextField.tailImage = nil

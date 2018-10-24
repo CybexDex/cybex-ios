@@ -250,7 +250,7 @@ struct getBalanceObjectsRequest : JSONRPCKit.Request , JSONRPCResponse{
         if result.count > 0 {
             var data:[LockUpAssetsMData] = []
             for i in result{
-                guard let dic = i.dictionaryObject else{ return [] }
+                guard let dic = i.dictionaryObject else { return [] }
                 guard let lockup = LockUpAssetsMData(JSON: dic) else{ return[] }
                 data.append(lockup)
             }

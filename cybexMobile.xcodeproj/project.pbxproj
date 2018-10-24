@@ -252,6 +252,8 @@
 		72199DAB2104680900575226 /* TransferContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199DAA2104680900575226 /* TransferContentView.xib */; };
 		72199DAD2104687400575226 /* TransferLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199DAC2104687400575226 /* TransferLineView.swift */; };
 		72199DAF2104687D00575226 /* TransferLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199DAE2104687D00575226 /* TransferLineView.xib */; };
+		7231103B21805D7F0007E95D /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7231103921805D7E0007E95D /* UMCommon.framework */; };
+		7231103C21805D7F0007E95D /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7231103A21805D7F0007E95D /* UMAnalytics.framework */; };
 		7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25010BD1F86818F3968A6D9DEF12AD52 /* BusinessViewController.swift */; };
 		724C5D392153472800FF1DE7 /* GatewayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D382153472800FF1DE7 /* GatewayService.swift */; };
 		724C5D4121538ABD00FF1DE7 /* ComprehensiveViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D3E21538ABD00FF1DE7 /* ComprehensiveViewAdapter.swift */; };
@@ -478,8 +480,6 @@
 		73587EB52137C69B006CF8A6 /* ETOCrowdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */; };
 		73587EB62137C69B006CF8A6 /* ETOCrowdViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */; };
 		735A3D022160A73200FC8922 /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735A3D012160A73000FC8922 /* NBLCommonModule.framework */; };
-		7374B381217ED39200B63982 /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7374B37F217ED39100B63982 /* UMCommon.framework */; };
-		7374B382217ED39200B63982 /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7374B380217ED39200B63982 /* UMAnalytics.framework */; };
 		737F8C352145532A00DD522A /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F8C342145532A00DD522A /* String+Extensions.swift */; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
@@ -939,6 +939,8 @@
 		72199DAA2104680900575226 /* TransferContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferContentView.xib; sourceTree = "<group>"; };
 		72199DAC2104687400575226 /* TransferLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferLineView.swift; sourceTree = "<group>"; };
 		72199DAE2104687D00575226 /* TransferLineView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferLineView.xib; sourceTree = "<group>"; };
+		7231103921805D7E0007E95D /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommon.framework; path = Carthage/Build/iOS/UMCommon.framework; sourceTree = "<group>"; };
+		7231103A21805D7F0007E95D /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAnalytics.framework; path = Carthage/Build/iOS/UMAnalytics.framework; sourceTree = "<group>"; };
 		724C5D382153472800FF1DE7 /* GatewayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayService.swift; sourceTree = "<group>"; };
 		724C5D3E21538ABD00FF1DE7 /* ComprehensiveViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveViewAdapter.swift; sourceTree = "<group>"; };
 		724C5D3F21538ABD00FF1DE7 /* ComprehensiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveView.swift; sourceTree = "<group>"; };
@@ -1167,8 +1169,6 @@
 		73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdViewAdapter.swift; sourceTree = "<group>"; };
 		735A3D012160A73000FC8922 /* NBLCommonModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NBLCommonModule.framework; path = Carthage/Build/iOS/Static/NBLCommonModule.framework; sourceTree = "<group>"; };
 		737258FAB6762972136E4188BF20F602 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
-		7374B37F217ED39100B63982 /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommon.framework; path = Carthage/Build/iOS/UMCommon.framework; sourceTree = "<group>"; };
-		7374B380217ED39200B63982 /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAnalytics.framework; path = Carthage/Build/iOS/UMAnalytics.framework; sourceTree = "<group>"; };
 		737F8C342145532A00DD522A /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		7386F28C2121204A00ABC924 /* cybexMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cybexMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7386F2902121204A00ABC924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1385,6 +1385,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				73539C6F2179AAA8008395AC /* libsqlite3.tbd in Frameworks */,
+				7231103B21805D7F0007E95D /* UMCommon.framework in Frameworks */,
+				7231103C21805D7F0007E95D /* UMAnalytics.framework in Frameworks */,
 				7398323D2179EED400C4A594 /* cybex_ios_core_cpp.framework in Frameworks */,
 				735A3D022160A73200FC8922 /* NBLCommonModule.framework in Frameworks */,
 				73539BFC2179764E008395AC /* BeareadToast_swift.framework in Frameworks */,
@@ -1405,8 +1407,6 @@
 				73539BAA2178A391008395AC /* Apollo.framework in Frameworks */,
 				73539C1321798D26008395AC /* Presentr.framework in Frameworks */,
 				73539C1421798D26008395AC /* Fakery.framework in Frameworks */,
-				7374B381217ED39200B63982 /* UMCommon.framework in Frameworks */,
-				7374B382217ED39200B63982 /* UMAnalytics.framework in Frameworks */,
 				73539C1521798D26008395AC /* Reachability.framework in Frameworks */,
 				73539C1621798D26008395AC /* Repeat.framework in Frameworks */,
 				73539C1721798D26008395AC /* GrowingTextView.framework in Frameworks */,
@@ -3028,8 +3028,8 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7374B380217ED39200B63982 /* UMAnalytics.framework */,
-				7374B37F217ED39100B63982 /* UMCommon.framework */,
+				7231103A21805D7F0007E95D /* UMAnalytics.framework */,
+				7231103921805D7E0007E95D /* UMCommon.framework */,
 				7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */,
 				73539C6E2179AAA8008395AC /* libsqlite3.tbd */,
 				73539C34217992EF008395AC /* Crashlytics.framework */,
@@ -3642,6 +3642,8 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/UMCommon.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/UMAnalytics.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Fabric.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Crashlytics.framework",
 			);
 			name = carthage;
 			outputPaths = (
@@ -4222,7 +4224,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4315,7 +4317,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

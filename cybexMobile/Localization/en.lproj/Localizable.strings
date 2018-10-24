@@ -167,7 +167,7 @@
 "withdraw_address_placehold"   = "Enter or paste address";
 
 "eos_withdraw_account" = "Withdraw Account";
-"eos_withdraw_account_placehold" = "Enter or paste address address";
+"eos_withdraw_account_placehold" = "Enter or paste address";
 
 "withdraw_amount" = "Amount";
 "withdraw_amount_all" = "ALL";

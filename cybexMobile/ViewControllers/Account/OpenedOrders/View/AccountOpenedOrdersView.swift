@@ -20,6 +20,7 @@ class AccountOpenedOrdersView:UIView {
     
     var data : Any?{
         didSet{
+            let _ = UserManager.shared.balance
             updateHeaderView()
             self.tableView.reloadData()
         }

@@ -39,6 +39,8 @@ func BusinessPropertyReducer(_ state: BusinessPropertyState?, action: Action) ->
         state.balance.accept(0)
         state.feeID.accept("")
         state.amount.accept("")
+    case let action as ChangeAmountAction:
+        state.amount.accept(action.amount)
     default:
         break
     }

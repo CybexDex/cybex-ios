@@ -32,7 +32,7 @@ class RechargeDetailViewController: BaseViewController {
     }
     var isAvalibaleAmount : Bool = false {
         didSet{
-            if isAvalibaleAmount != oldValue {
+            if isAvalibaleAmount == true {
                 self.changeWithdrawState()
             }
         }
@@ -136,13 +136,14 @@ class RechargeDetailViewController: BaseViewController {
             .subscribe(onNext: { [weak self](notification) in
                 guard let `self` = self else { return }
                 
-                if let text = self.contentView.amountView.content.text,let amount = text.toDouble(),amount >= 0,let balance = self.balance,let balance_info = app_data.assetInfo[balance.asset_type]{
+                if let text = self.contentView.amountView.content.text,var amount = text.toDouble(),amount >= 0,let balance = self.balance,let balance_info = app_data.assetInfo[balance.asset_type]{
                     if let coordinator =  self.coordinator, let value = coordinator.state.property.data.value ,let precision = value.precision{
                         self.precision = precision
                         self.contentView.amountView.content.text = checkMaxLength(text, maxLength: value.precision ?? balance_info.precision)
                     }else{
                         self.contentView.amountView.content.text = checkMaxLength(text, maxLength: balance_info.precision)
                     }
+                    amount = self.contentView.amountView.content.text!.toDouble()!
                     self.checkAmountIsAvailable(amount)
                 }else{
                     if let text = self.contentView.amountView.content.text {
@@ -211,12 +212,13 @@ class RechargeDetailViewController: BaseViewController {
     
     func checkAmountIsAvailable(_ amount:Double) {
         if let data = self.coordinator?.state.property.data.value {
-            self.isAvalibaleAmount  = false
             self.contentView.errorView.isHidden = false
             self.contentView.withdraw.isEnable = false
             if amount < data.minValue{
+                self.isAvalibaleAmount  = false
                 self.contentView.errorL.locali = R.string.localizable.withdraw_min_value.key
             }else if amount > self.available || self.available < data.fee {
+                self.isAvalibaleAmount  = false
                 self.contentView.errorL.locali =  R.string.localizable.withdraw_nomore.key
             }else{
                 self.isAvalibaleAmount = true
@@ -344,6 +346,7 @@ extension RechargeDetailViewController{
             ShowToastManager.shared.hide()
             self.changeWithdrawState()
         }else{
+            
             if self.isVisible{
                 self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
             }

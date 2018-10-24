@@ -168,11 +168,12 @@ class BusinessViewController: BaseViewController {
             guard let `self` = self else { return }
             
             self.checkBalance()
-            guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0, text.components(separatedBy: ".").count <= 2 && text != ".", let _ = text.toDouble() else {
+            guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0, text.components(separatedBy: ".").count <= 2 && text != ".", let textDouble = text.toDouble() else {
                 self.containerView.value.text = "≈¥0.00"
                 return
             }
-            self.containerView.value.text = "≈¥" + String(describing: getAssetRMBPrice(base_info.id)).formatCurrency(digitNum: 2)
+        
+            self.containerView.value.text = "≈¥" + String(describing: getAssetRMBPrice(base_info.id) * textDouble).formatCurrency(digitNum: 2)
             
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
@@ -189,6 +190,7 @@ class BusinessViewController: BaseViewController {
 
             guard let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0 else {
                 self.containerView.priceTextfield.text = ""
+                self.coordinator?.switchPrice("")
                 return
             }
             
@@ -201,6 +203,8 @@ class BusinessViewController: BaseViewController {
             }
           
             self.containerView.priceTextfield.text = self.containerView.priceTextfield.text!.formatCurrency(digitNum: self.price_pricision)
+            self.coordinator?.switchPrice(self.containerView.priceTextfield.text!)
+
             guard let amountText = self.containerView.amountTextfield.text, amountText != "", amountText.toDouble() != 0 else {
                 return
             }
@@ -224,6 +228,8 @@ class BusinessViewController: BaseViewController {
                 }
             }
             self.containerView.amountTextfield.text = self.containerView.amountTextfield.text!.formatCurrency(digitNum: self.amount_pricision)
+            
+            self.coordinator?.changeAmountAction(self.containerView.amountTextfield.text!)
             guard let priceText = self.containerView.priceTextfield.text, priceText != "", priceText.toDouble() != 0 else {
                 return
             }

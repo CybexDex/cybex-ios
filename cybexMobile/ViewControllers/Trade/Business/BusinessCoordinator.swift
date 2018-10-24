@@ -25,6 +25,8 @@ protocol BusinessStateManagerProtocol {
     func switchPrice(_ price:String)
     func adjustPrice(_ plus:Bool,price_pricision:Int)
     
+    func changeAmountAction(_ amount: String)
+    
     func changePercent(_ percent:Double, isBuy:Bool, assetID:String,pricision:Int)
     func getBalance(_ assetID:String)
     
@@ -81,6 +83,11 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
+    
+    func changeAmountAction(_ amount: String) {
+        self.store.dispatch(ChangeAmountAction(amount:amount))
+    }
+    
     
     func switchPrice(_ price:String) {
         self.store.dispatch(changePriceAction(price: price))
