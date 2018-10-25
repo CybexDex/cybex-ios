@@ -30,7 +30,7 @@ class WithdrawAddressViewController: BaseViewController {
     func setupUI() {
         configRightNavButton(R.image.ic_add_24_px())
         self.rightLabel.isHidden = !self.coordinator!.isEOS()
-        if let asset_info = app_data.assetInfo[self.asset] {
+        if let asset_info = appData.assetInfo[self.asset] {
             if self.coordinator!.isEOS() {
                 self.title = asset_info.symbol.filterJade + " " + R.string.localizable.eos_withdraw_account.key.localized()
             } else {

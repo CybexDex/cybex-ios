@@ -59,7 +59,9 @@ class LockupAssetsSectionView: UIView {
     let bundle = Bundle(for: type(of: self))
     let nibName = String(describing: type(of: self))
     let nib = UINib.init(nibName: nibName, bundle: bundle)
-    let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+    guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
 
     addSubview(view)
     view.frame = self.bounds

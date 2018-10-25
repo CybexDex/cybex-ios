@@ -60,7 +60,7 @@ class OrderBookViewController: BaseViewController {
     }
 
     func setTopTitle() {
-        guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
+        guard let pair = self.pair, let base_info = appData.assetInfo[pair.base], let quote_info = appData.assetInfo[pair.quote] else { return }
         if VC_TYPE == orderbook_type.tradeView.rawValue {
             self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized() + "(" + base_info.symbol.filterJade + ")"
             self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized() + "(" + quote_info.symbol.filterJade + ")"
@@ -111,10 +111,10 @@ class OrderBookViewController: BaseViewController {
     func showMarketPrice() {
         guard let pair = pair, let _ = AssetConfiguration.market_base_assets.index(of: pair.base) else { return }
 
-        if let selectedIndex = app_data.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+        if let selectedIndex = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
             return ticker.quote == pair.quote
         }) {
-            let tickers = app_data.filterQuoteAssetTicker(pair.base)
+            let tickers = appData.filterQuoteAssetTicker(pair.base)
             let data = tickers[selectedIndex]
 
             self.tradeView.amount.text = data.latest.tradePrice.price

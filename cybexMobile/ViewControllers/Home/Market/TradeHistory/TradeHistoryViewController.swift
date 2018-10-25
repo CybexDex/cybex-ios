@@ -48,7 +48,7 @@ class TradeHistoryViewController: BaseViewController {
     }
 
     func refreshView() {
-        guard let pair = pair, let base_info = app_data.assetInfo[(pair.base)], let quote_info = app_data.assetInfo[(pair.quote)] else { return }
+        guard let pair = pair, let base_info = appData.assetInfo[(pair.base)], let quote_info = appData.assetInfo[(pair.quote)] else { return }
         if self.view.width == 320 {
             self.historyView.price.font  = UIFont.systemFont(ofSize: 11)
             self.historyView.amount.font  = UIFont.systemFont(ofSize: 11)
@@ -100,8 +100,8 @@ class TradeHistoryViewController: BaseViewController {
                 let receive = curData[1]
                 let time = curData[2].stringValue
 
-                let base_info = app_data.assetInfo[pair!.base]!
-                let quote_info = app_data.assetInfo[pair!.quote]!
+                let base_info = appData.assetInfo[pair!.base]!
+                let quote_info = appData.assetInfo[pair!.quote]!
                 let base_precision = pow(10, base_info.precision.double)
                 let quote_precision = pow(10, quote_info.precision.double)
 

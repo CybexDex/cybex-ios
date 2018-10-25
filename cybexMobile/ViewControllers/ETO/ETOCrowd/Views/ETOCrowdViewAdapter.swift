@@ -14,14 +14,14 @@ extension ETOCrowdView {
         guard let balances = UserManager.shared.balances.value else { return }
 
         let balance = balances.filter { (balance) -> Bool in
-            if let name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade {
+            if let name = appData.assetInfo[balance.asset_type]?.symbol.filterJade {
                 return name == model.base_token_name
             }
 
             return false
         }.first
 
-        if let balance = balance, let info = app_data.assetInfo[balance.asset_type] {
+        if let balance = balance, let info = appData.assetInfo[balance.asset_type] {
             let amount = getRealAmount(balance.asset_type, amount: balance.balance).string(digits: info.precision, roundingMode: .down)
             self.titleTextView.unitLabel.text = R.string.localizable.eto_available.key.localizedFormat(amount, model.base_token_name)
         } else {

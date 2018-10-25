@@ -25,7 +25,7 @@ class HomeContentView: UIView {
         didSet {
             if self.viewType == .Comprehensive {
                 self.tableView.isScrollEnabled = false
-                var buckets = app_data.filterPopAssetsCurrency()
+                var buckets = appData.filterPopAssetsCurrency()
                 if buckets.count >= 6 {
                     self.data = Array(buckets[0..<6])
                 } else {
@@ -88,7 +88,9 @@ class HomeContentView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
 
         addSubview(view)
         view.frame = self.bounds
@@ -102,7 +104,7 @@ extension HomeContentView: UITableViewDataSource, UITableViewDelegate {
             return 6
         }
 
-        return app_data.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+        return appData.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
             return ticker.base_volume != "0"
         }).count
     }
@@ -119,7 +121,7 @@ extension HomeContentView: UITableViewDataSource, UITableViewDelegate {
                 }
             }
         } else {
-            let markets = app_data.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+            let markets = appData.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
                 return ticker.base_volume != "0"
 
             })

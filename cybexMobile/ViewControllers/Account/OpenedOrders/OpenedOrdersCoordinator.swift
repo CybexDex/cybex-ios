@@ -56,7 +56,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     calculateFee(operation, focus_asset_id: fee_id, operationID: .limit_order_cancel, filterRepeat: false) { (success, amount, assetID) in
       if success {
         blockchainParams { (blockchain_params) in
-          guard let asset = app_data.assetInfo[assetID] else {return}
+          guard let asset = appData.assetInfo[assetID] else {return}
             if let jsonStr = BitShareCoordinator.cancelLimitOrder(blockchain_params.block_num, block_id: blockchain_params.block_id, expiration: Date().timeIntervalSince1970 + 10 * 3600, chain_id: blockchain_params.chain_id, user_id: userid.getID, order_id: orderID.getID, fee_id: assetID.getID, fee_amount: Int64(amount.doubleValue * pow(10, asset.precision.double))) {
             let request = BroadcastTransactionRequest(response: { (data) in
               if String(describing: data) == "<null>" {

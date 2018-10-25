@@ -47,10 +47,10 @@ class BusinessViewController: BaseViewController {
     func fetchLatestPrice() {
         guard let pair = pair, let _ = AssetConfiguration.market_base_assets.index(of: pair.base) else { return }
 
-        if let selectedIndex = app_data.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+        if let selectedIndex = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
             return ticker.quote == pair.quote
         }) {
-            let markets = app_data.filterQuoteAssetTicker(pair.base)
+            let markets = appData.filterQuoteAssetTicker(pair.base)
             let data = markets[selectedIndex]
 //            let matrix = =(data)
             price_pricision = data.latest.tradePrice.pricision
@@ -88,7 +88,7 @@ class BusinessViewController: BaseViewController {
     }
 
     func refreshView() {
-        guard let pair = pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
+        guard let pair = pair, let base_info = appData.assetInfo[pair.base], let quote_info = appData.assetInfo[pair.quote] else { return }
 
         self.containerView.quoteName.text = quote_info.symbol.filterJade
 
@@ -126,7 +126,7 @@ class BusinessViewController: BaseViewController {
 
     func changeButtonState() {
         if UserManager.shared.isLoginIn {
-            guard let pair = pair, let quote_info = app_data.assetInfo[pair.quote] else { return }
+            guard let pair = pair, let quote_info = appData.assetInfo[pair.quote] else { return }
 
             self.containerView.button.locali = self.type == .buy ? R.string.localizable.openedBuy.key : R.string.localizable.openedSell.key
             if let title = self.containerView.button.button.titleLabel?.text {
@@ -138,7 +138,7 @@ class BusinessViewController: BaseViewController {
     }
 
     func showOpenedOrderInfo() {
-        guard let base_info = app_data.assetInfo[(self.pair?.base)!], let quote_info = app_data.assetInfo[(self.pair?.quote)!], let _ = app_data.assetInfo[(self.coordinator?.state.property.feeID.value)!], self.coordinator?.state.property.fee_amount.value != 0, let cur_amount = self.coordinator?.state.property.amount.value, let decimal_amount = cur_amount.toDecimal(), decimal_amount != 0, let price = self.coordinator?.state.property.price.value, let decimal_price = price.toDecimal(), decimal_price != 0 else { return }
+        guard let base_info = appData.assetInfo[(self.pair?.base)!], let quote_info = appData.assetInfo[(self.pair?.quote)!], let _ = appData.assetInfo[(self.coordinator?.state.property.feeID.value)!], self.coordinator?.state.property.fee_amount.value != 0, let cur_amount = self.coordinator?.state.property.amount.value, let decimal_amount = cur_amount.toDecimal(), decimal_amount != 0, let price = self.coordinator?.state.property.price.value, let decimal_price = price.toDecimal(), decimal_price != 0 else { return }
 
         let openedOrderDetailView = StyleContentView(frame: .zero)
         let ensure_title = self.type == .buy ? R.string.localizable.openedorder_buy_ensure.key.localized() : R.string.localizable.openedorder_sell_ensure.key.localized()
@@ -164,7 +164,7 @@ class BusinessViewController: BaseViewController {
             guard let `self` = self else { return }
 
             self.checkBalance()
-            guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0, text.components(separatedBy: ".").count <= 2 && text != ".", let textDouble = text.toDouble() else {
+            guard let pair = self.pair, let base_info = appData.assetInfo[pair.base], let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0, text.components(separatedBy: ".").count <= 2 && text != ".", let textDouble = text.toDouble() else {
                 self.containerView.value.text = "≈¥0.00"
                 return
             }
@@ -235,7 +235,7 @@ class BusinessViewController: BaseViewController {
             guard let `self` = self else {return}
             if !UserManager.shared.isLoginIn {
                 self.containerView.amountTextfield.resignFirstResponder()
-                app_coodinator.showLogin()
+                appCoodinator.showLogin()
                 return
             }
         }
@@ -245,7 +245,7 @@ class BusinessViewController: BaseViewController {
 
             if !UserManager.shared.isLoginIn {
                 self.containerView.priceTextfield.resignFirstResponder()
-                app_coodinator.showLogin()
+                appCoodinator.showLogin()
                 return
             }
         }
@@ -253,7 +253,7 @@ class BusinessViewController: BaseViewController {
         UserManager.shared.balances.asObservable().subscribe(onNext: {[weak self] (_) in
             guard let `self` = self else { return }
 
-            guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else { return }
+            guard let pair = self.pair, let base_info = appData.assetInfo[pair.base], let quote_info = appData.assetInfo[pair.quote] else { return }
 
             self.coordinator?.getBalance((self.type == .buy ? base_info.id : quote_info.id))
             self.coordinator?.getFee(self.type == .buy ? base_info.id : quote_info.id)
@@ -264,7 +264,7 @@ class BusinessViewController: BaseViewController {
         self.coordinator?.state.property.balance.asObservable().skip(1).subscribe(onNext: {[weak self] (balance) in
             guard let `self` = self else { return }
 
-            guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote], balance != 0 else {
+            guard let pair = self.pair, let base_info = appData.assetInfo[pair.base], let quote_info = appData.assetInfo[pair.quote], balance != 0 else {
                 self.containerView.balance.text = "--"
 
                 if let amount =  self.containerView.amountTextfield.text, let amountDouble = amount.toDouble(), amountDouble > 0, let price =  self.containerView.priceTextfield.text, let priceDouble = price.toDouble(), priceDouble > 0 {
@@ -287,7 +287,7 @@ class BusinessViewController: BaseViewController {
         Observable.combineLatest(coordinator!.state.property.feeID.asObservable(), coordinator!.state.property.fee_amount.asObservable()).subscribe(onNext: {[weak self] (fee_id, fee_amount) in
             guard let `self` = self else { return }
 
-            guard let info = app_data.assetInfo[fee_id] else {
+            guard let info = appData.assetInfo[fee_id] else {
                 self.containerView.fee.text = "--"
                 return
             }
@@ -299,7 +299,7 @@ class BusinessViewController: BaseViewController {
         //total
         Observable.combineLatest(coordinator!.state.property.feeID.asObservable(), self.coordinator!.state.property.amount, self.coordinator!.state.property.price, coordinator!.state.property.fee_amount.asObservable()).subscribe(onNext: {[weak self] (_, amount, price, fee) in
             guard let `self` = self else { return }
-            guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base] else {
+            guard let pair = self.pair, let base_info = appData.assetInfo[pair.base] else {
                 self.containerView.endMoney.text = "--"
                 return
             }
@@ -358,7 +358,7 @@ extension BusinessViewController: TradePair {
 extension BusinessViewController {
     @objc func amountPercent(_ data: [String: Any]) {
         if let percent = data["percent"] as? String {
-            guard let pair = self.pair, let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote]  else { return }
+            guard let pair = self.pair, let base_info = appData.assetInfo[pair.base], let quote_info = appData.assetInfo[pair.quote]  else { return }
             self.coordinator?.changePercent(percent.toDouble()! / 100.0, isBuy: self.type == .buy, assetID: self.type == .buy ? base_info.id : quote_info.id, pricision: self.amount_pricision)
         }
     }
@@ -371,7 +371,7 @@ extension BusinessViewController {
         }
 
         if !UserManager.shared.isLoginIn {
-            app_coodinator.showLogin()
+            appCoodinator.showLogin()
             return
         }
 

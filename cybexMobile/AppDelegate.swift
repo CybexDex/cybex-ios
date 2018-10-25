@@ -28,7 +28,7 @@ let log = SwiftyBeaver.self
 let reachability = Reachability()!
 let navigator = Navigator()
 
-private let UM_APPKEY = "5b6bf4a8b27b0a3429000016"
+private let UMAppkey = "5b6bf4a8b27b0a3429000016"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -125,14 +125,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MobClick.setCrashReportEnabled(true)
         UMConfigure.setLogEnabled(true)
         UMConfigure.setEncryptEnabled(true)
-        UMConfigure.initWithAppkey(UM_APPKEY, channel: Bundle.main.bundleIdentifier!)
+        UMConfigure.initWithAppkey(UMAppkey, channel: Bundle.main.bundleIdentifier!)
 
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         if CybexWebSocketService.shared.checkNetworConnected() {
-            if let vc = app_coodinator.startLoadingVC {
-                app_coodinator.startLoadingVC = nil
+            if let vc = appCoodinator.startLoadingVC {
+                appCoodinator.startLoadingVC = nil
                 vc.endLoading()
             }
         }
@@ -141,8 +141,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        app_coodinator.fetchPariTimer?.pause()
-        app_coodinator.fetchPariTimer = nil
+        appCoodinator.fetchPariTimer?.pause()
+        appCoodinator.fetchPariTimer = nil
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -153,8 +153,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let reactable = (status != .none)
 
         if !CybexWebSocketService.shared.checkNetworConnected() && !CybexWebSocketService.shared.needAutoConnect && reactable {//避免第一次 不是主动断开的链接
-            if let vc = app_coodinator.topViewController() {
-                app_coodinator.startLoadingVC = vc
+            if let vc = appCoodinator.topViewController() {
+                appCoodinator.startLoadingVC = vc
                 vc.startLoading()
             }
             CybexWebSocketService.shared.connect()
@@ -203,23 +203,25 @@ extension AppDelegate {
             Localize.setCurrentLanguage(Defaults[.language])
         }
 
-        app_data.ticker_data.asObservable()
+        appData.ticker_data.asObservable()
             .subscribe(onNext: { (_) in
-                if let vc = app_coodinator.startLoadingVC, !(vc is HomeViewController) {
-                    app_coodinator.startLoadingVC = nil
+                if let vc = appCoodinator.startLoadingVC, !(vc is HomeViewController) {
+                    appCoodinator.startLoadingVC = nil
                     vc.endLoading()
                 }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 
     @objc func handlerNetworkChanged(note: Notification) {
-        let reachability = note.object as! Reachability
+        guard let reachability = note.object as? Reachability else {
+            return
+        }
 
         switch reachability.connection {
         case .none:
             CybexWebSocketService.shared.disconnect()
-            if let vc = app_coodinator.startLoadingVC {
-                app_coodinator.startLoadingVC = nil
+            if let vc = appCoodinator.startLoadingVC {
+                appCoodinator.startLoadingVC = nil
                 vc.endLoading()
             }
 
@@ -238,8 +240,8 @@ extension AppDelegate {
             }
             let connected = CybexWebSocketService.shared.checkNetworConnected()
             if !connected {
-                if let vc = app_coodinator.topViewController() {
-                    app_coodinator.startLoadingVC = vc
+                if let vc = appCoodinator.topViewController() {
+                    appCoodinator.startLoadingVC = vc
 
                     vc.startLoading()
                 }

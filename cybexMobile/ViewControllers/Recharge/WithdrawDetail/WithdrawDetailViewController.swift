@@ -30,7 +30,7 @@ class WithdrawDetailViewController: BaseViewController {
 
     func setupUI() {
         self.configRightNavButton(R.image.icDepositNew24Px())
-        if let trade = self.trade, let name = app_data.assetInfo[trade.id]?.symbol.filterJade {
+        if let trade = self.trade, let name = appData.assetInfo[trade.id]?.symbol.filterJade {
             self.title = name + R.string.localizable.withdraw_title.key.localized()
             let message = Localize.currentLanguage() == "en" ? trade.enInfo: trade.cnInfo
             if name == "EOS" {
@@ -55,7 +55,7 @@ class WithdrawDetailViewController: BaseViewController {
                 showToastBox(false, message: errorMsg)
             }
         } else {
-            if let balance = self.trade?.id, let name = app_data.assetInfo[balance]?.symbol.filterJade {
+            if let balance = self.trade?.id, let name = appData.assetInfo[balance]?.symbol.filterJade {
                 startLoading()
                 self.coordinator?.fetchDepositAddress(name)
             }
@@ -99,7 +99,7 @@ class WithdrawDetailViewController: BaseViewController {
         }
         startLoading()
         self.isFetching = true
-        let name = app_data.assetInfo[(self.trade?.id)!]?.symbol.filterJade
+        let name = appData.assetInfo[(self.trade?.id)!]?.symbol.filterJade
         self.coordinator?.resetDepositAddress(name!)
     }
 }

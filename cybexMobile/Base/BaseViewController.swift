@@ -202,7 +202,10 @@ extension UIViewController: ShowManagerDelegate {
             ShowToastManager.shared.hide(0)
         }
         SwifterSwift.delay(milliseconds: 100) {
-            ShowToastManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name, message: message, animationType: ShowToastManager.ShowAnimationType.up_down, showType: ShowToastManager.ShowManagerType.sheet_image)
+            ShowToastManager.shared.setUp(title_image: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name,
+                                          message: message,
+                                          animationType: ShowToastManager.ShowAnimationType.up_down,
+                                          showType: ShowToastManager.ShowManagerType.sheet_image)
             ShowToastManager.shared.showAnimationInView(self.view)
             ShowToastManager.shared.hide(2.0)
         }
@@ -223,7 +226,7 @@ extension UIViewController: ShowManagerDelegate {
         }
     }
 
-    func showConfirmImage(_ title_image: String, title: String, content: String) {
+    func showConfirmImage(_ titleImage: String, title: String, content: String) {
         if ShowToastManager.shared.showView != nil {
             ShowToastManager.shared.hide(0)
         }
@@ -231,7 +234,7 @@ extension UIViewController: ShowManagerDelegate {
             let subView = CybexShowTitleView(frame: .zero)
             subView.title.locali = title
             subView.contentLable.locali = content
-            ShowToastManager.shared.setUp(title_image: title_image, contentView: subView, animationType: .small_big)
+            ShowToastManager.shared.setUp(title_image: titleImage, contentView: subView, animationType: .small_big)
             ShowToastManager.shared.showAnimationInView(self.view)
             ShowToastManager.shared.delegate = self
         }

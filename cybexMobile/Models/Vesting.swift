@@ -62,13 +62,13 @@ class PortfolioData {
 
         icon = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"
         // 获得自己的个数
-        if let asset_info = app_data.assetInfo[balance.asset_type] {
+        if let asset_info = appData.assetInfo[balance.asset_type] {
             realAmount = getRealAmount(balance.asset_type, amount: balance.balance).string(digits: asset_info.precision, roundingMode: .down)
             name = asset_info.symbol.filterJade
         }
 
         // 获取对应CYB的个数
-        let amountCYB = app_data.cyb_rmb_price == 0 ? "-" :  String(getAssetRMBPrice(balance.asset_type) / app_data.cyb_rmb_price * (realAmount.toDouble())!)
+        let amountCYB = appData.cyb_rmb_price == 0 ? "-" :  String(getAssetRMBPrice(balance.asset_type) / appData.cyb_rmb_price * (realAmount.toDouble())!)
 
         if amountCYB == "-"{
             cybPrice = amountCYB + " CYB"
@@ -95,14 +95,14 @@ class MyPortfolioData {
     required init?(balance: Balance) {
         icon = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"
 
-        name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
+        name = appData.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
         // 获得自己的个数
-        if let asset_info = app_data.assetInfo[balance.asset_type] {
+        if let asset_info = appData.assetInfo[balance.asset_type] {
             realAmount = getRealAmount(balance.asset_type, amount: balance.balance).string(digits: asset_info.precision, roundingMode: .down)
         }
 
         // 获取对应CYB的个数
-        let amountCYB = app_data.cyb_rmb_price == 0 ? "-" :  String(getAssetRMBPrice(balance.asset_type) / app_data.cyb_rmb_price * (realAmount.toDouble())!)
+        let amountCYB = appData.cyb_rmb_price == 0 ? "-" :  String(getAssetRMBPrice(balance.asset_type) / appData.cyb_rmb_price * (realAmount.toDouble())!)
 
 //        let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "0" ? "-" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.toDouble())!)
 
@@ -122,7 +122,7 @@ class MyPortfolioData {
                     limitDecimal = limitDecimal + amount
                 }
             }
-            if let asset_info = app_data.assetInfo[balance.asset_type] {
+            if let asset_info = appData.assetInfo[balance.asset_type] {
                 if limitDecimal == 0 {
                     limitAmount = R.string.localizable.frozen.key.localized() + "--"
                 } else {

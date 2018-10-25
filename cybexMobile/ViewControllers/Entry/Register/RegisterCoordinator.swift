@@ -79,7 +79,7 @@ extension RegisterCoordinator: RegisterCoordinatorProtocol {
   }
 
   func dismiss() {
-    app_coodinator.rootVC.dismiss(animated: true, completion: nil)
+    appCoodinator.rootVC.dismiss(animated: true, completion: nil)
   }
 }
 

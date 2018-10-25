@@ -94,7 +94,7 @@ class YourPortfolioViewController: BaseViewController {
 //
 //      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-    app_data.otherRequestRelyData.asObservable()
+    appData.otherRequestRelyData.asObservable()
       .subscribe(onNext: {[weak self] (_) in
         guard let `self` = self else { return }
 

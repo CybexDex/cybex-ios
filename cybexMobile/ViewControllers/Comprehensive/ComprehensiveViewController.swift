@@ -92,7 +92,7 @@ class ComprehensiveViewController: BaseViewController {
             }
         }).disposed(by: disposeBag)
 
-        app_data.ticker_data.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
+        appData.ticker_data.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
             return tickers.count == AssetConfiguration.shared.asset_ids.count
             }.subscribe(onNext: { [weak self](tickers) in
                 guard let `self` = self else { return }
@@ -188,7 +188,7 @@ extension ComprehensiveViewController {
     func openUrl(_ url: String) {
         if url.contains("cybexapp://") {
             if !UserManager.shared.isLoginIn {
-                app_coodinator.showLogin()
+                appCoodinator.showLogin()
                 return
             }
             openPage(url)

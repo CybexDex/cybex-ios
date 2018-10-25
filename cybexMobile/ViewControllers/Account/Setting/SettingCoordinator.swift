@@ -82,7 +82,7 @@ extension SettingCoordinator: SettingStateManagerProtocol {
         AssetConfiguration.shared.asset_ids = []
         AssetConfiguration.shared.unique_ids = []
 
-        app_data.ticker_data.accept([])
+        appData.ticker_data.accept([])
 
         CybexWebSocketService.shared.disconnect()
         UserManager.shared.logout()

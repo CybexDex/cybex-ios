@@ -94,7 +94,7 @@ class ETOCrowdViewController: BaseViewController {
         }).disposed(by: disposeBag)
 
         coordinator?.state.fee.asObservable().subscribe(onNext: {[weak self] (model) in
-            if let `self` = self, let data = model, let feeInfo = app_data.assetInfo[data.asset_id], let feeAmount = data.amount.toDouble()?.string(digits: feeInfo.precision, roundingMode: .down) {
+            if let `self` = self, let data = model, let feeInfo = appData.assetInfo[data.asset_id], let feeAmount = data.amount.toDouble()?.string(digits: feeInfo.precision, roundingMode: .down) {
                 self.contentView.priceLabel.text = feeAmount + " " + feeInfo.symbol.filterJade
             }
         }).disposed(by: disposeBag)

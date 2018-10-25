@@ -132,7 +132,7 @@ extension ETODetailViewController {
     }
 
     @objc func loginPage(_ data: [String: Any]) {
-        app_coodinator.showLogin()
+        appCoodinator.showLogin()
     }
 
     @objc func unset(_ data: [String: Any]) {

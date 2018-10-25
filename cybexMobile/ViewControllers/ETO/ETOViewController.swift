@@ -68,7 +68,7 @@ class ETOViewController: BaseViewController {
 
     override func rightAction(_ sender: UIButton) {
         if !UserManager.shared.isLoginIn {
-            app_coodinator.showLogin()
+            appCoodinator.showLogin()
             return
         }
         self.coordinator?.openProjectHistroy()

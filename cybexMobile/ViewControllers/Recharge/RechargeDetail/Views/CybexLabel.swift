@@ -63,7 +63,9 @@ class CybexLabel: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
         view.layer.cornerRadius = 4.0
         view.clipsToBounds = true
         addSubview(view)

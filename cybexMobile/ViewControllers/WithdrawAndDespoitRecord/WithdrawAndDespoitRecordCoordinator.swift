@@ -77,7 +77,7 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
                             childVC.assetInfo = nil
                         } else {
                             var assetInfo: AssetInfo?
-                            for (_, value) in app_data.assetInfo {
+                            for (_, value) in appData.assetInfo {
                                 if value.symbol.filterJade == info.filterJade {
                                     assetInfo = value
                                     break

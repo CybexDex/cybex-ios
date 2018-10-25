@@ -40,7 +40,7 @@ class YourPortfolioHeadView: UIView {
             totalBalance.text = "0.00000"
             balanceRMB.text   = "≈¥0.00"
         } else {
-            totalBalance.text = (UserManager.shared.balance / app_data.cyb_rmb_price).string(digits: 5, roundingMode: .down)
+            totalBalance.text = (UserManager.shared.balance / appData.cyb_rmb_price).string(digits: 5, roundingMode: .down)
             balanceRMB.text   = "≈¥" + UserManager.shared.balance.string(digits: 2, roundingMode: .down)
         }
 
@@ -97,7 +97,9 @@ class YourPortfolioHeadView: UIView {
     func loadXIB() {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib.init(nibName: String.init(describing: type(of: self)), bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]

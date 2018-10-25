@@ -87,7 +87,7 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
             }).cauterize()
 
         case .withdraw:
-            if let asset_info = app_data.assetInfo[self.state.property.asset.value] {
+            if let asset_info = appData.assetInfo[self.state.property.asset.value] {
 
                 RechargeDetailCoordinator.verifyAddress(asset_info.symbol.filterJade, address: address, callback: { (isSuccess) in
                     self.store.dispatch(VerificationAddressAction(success: isSuccess))

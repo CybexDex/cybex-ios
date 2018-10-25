@@ -151,7 +151,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
     }
 
     func postLimitOrder(_ pair: Pair, isBuy: Bool, callback: @escaping (_ success: Bool) -> Void) {
-        guard let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote], let fee_info = app_data.assetInfo[self.state.property.feeID.value], let userid = UserManager.shared.account.value?.id, self.state.property.fee_amount.value != 0, let cur_amount = self.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.state.property.price.value.toDouble(), price != 0 else { return }
+        guard let base_info = appData.assetInfo[pair.base], let quote_info = appData.assetInfo[pair.quote], let fee_info = appData.assetInfo[self.state.property.feeID.value], let userid = UserManager.shared.account.value?.id, self.state.property.fee_amount.value != 0, let cur_amount = self.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.state.property.price.value.toDouble(), price != 0 else { return }
         guard  let cur_amount_Decimal = self.state.property.amount.value.toDecimal(), cur_amount_Decimal != 0, let price_Decimal = self.state.property.price.value.toDecimal(), price_Decimal != 0 else { return }
 
         let total = cur_amount_Decimal * price_Decimal
@@ -185,7 +185,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
     }
 
     func checkBalance(_ pair: Pair, isBuy: Bool) -> Bool? {
-        guard let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote], self.state.property.fee_amount.value != 0, let cur_amount = self.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.state.property.price.value.toDouble(), price != 0 else { return nil }
+        guard let base_info = appData.assetInfo[pair.base], let quote_info = appData.assetInfo[pair.quote], self.state.property.fee_amount.value != 0, let cur_amount = self.state.property.amount.value.toDouble(), cur_amount != 0, let price = self.state.property.price.value.toDouble(), price != 0 else { return nil }
 
         var total: Decimal = Decimal(floatLiteral: 0)
         let priceDecimal = self.state.property.price.value.toDecimal()!

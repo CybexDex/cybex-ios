@@ -23,8 +23,8 @@ class LimitOrder: Mappable {
      4 手续费拿取。  买的时候是真正的base
      */
     var isBuy: Bool {
-        let assetA_info = app_data.assetInfo[sellPrice.base.assetID]
-        let assetB_info = app_data.assetInfo[sellPrice.quote.assetID]
+        let assetA_info = appData.assetInfo[sellPrice.base.assetID]
+        let assetB_info = appData.assetInfo[sellPrice.quote.assetID]
 
         let (base, _) = calculateAssetRelation(assetID_A_name: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetID_B_name: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
 

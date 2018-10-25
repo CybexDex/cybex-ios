@@ -50,7 +50,7 @@ class ETOCrowdCoordinator: ETORootCoordinator {
 
 extension ETOCrowdCoordinator: ETOCrowdCoordinatorProtocol {
     func showConfirm(_ transferAmount: Double) {
-        guard let data = self.state.data.value, let fee = self.state.fee.value, let feeInfo = app_data.assetInfo[fee.asset_id], let feeAmount = fee.amount.toDouble()?.string(digits: feeInfo.precision, roundingMode: .down) else { return }
+        guard let data = self.state.data.value, let fee = self.state.fee.value, let feeInfo = appData.assetInfo[fee.asset_id], let feeAmount = fee.amount.toDouble()?.string(digits: feeInfo.precision, roundingMode: .down) else { return }
 
         self.rootVC.topViewController?.showConfirm(R.string.localizable.eto_submit_confirm.key.localized(), attributes: confirmSubmitCrowd(data.name, amount: "\(transferAmount) \(data.base_token_name)", fee: "\(feeAmount) \(feeInfo.symbol.filterJade)"), setup: { (_) in
                 //            for label in labels {
@@ -73,7 +73,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         guard let data = self.state.data.value else { return }
 
         var assetID = ""
-        for (_, value) in app_data.assetInfo {
+        for (_, value) in appData.assetInfo {
             if value.symbol.filterJade == data.base_token_name {
                 assetID = value.id
                 break
@@ -106,14 +106,14 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         guard let balances = UserManager.shared.balances.value, let data = self.state.data.value, let userModel = self.state.userData.value else { return }
 
         let balance = balances.filter { (balance) -> Bool in
-            if let name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade {
+            if let name = appData.assetInfo[balance.asset_type]?.symbol.filterJade {
                 return name == data.base_token_name
             }
 
             return false
         }.first
 
-        if let balance = balance, let info = app_data.assetInfo[balance.asset_type] {
+        if let balance = balance, let info = appData.assetInfo[balance.asset_type] {
             let amount = getRealAmount(balance.asset_type, amount: balance.balance).string(digits: info.precision, roundingMode: .down)
 
             if transferAmount > amount.toDouble()! {
@@ -158,14 +158,14 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         guard let fee = self.state.fee.value, let data = self.state.data.value else { return }
 
         var assetID = ""
-        for (_, value) in app_data.assetInfo {
+        for (_, value) in appData.assetInfo {
             if value.symbol.filterJade == data.base_token_name {
                 assetID = value.id
                 break
             }
         }
 
-        guard !assetID.isEmpty, let uid = UserManager.shared.account.value?.id, let info = app_data.assetInfo[assetID], let fee_amount = fee.amount.toDouble(), let feeInfo = app_data.assetInfo[fee.asset_id] else { return }
+        guard !assetID.isEmpty, let uid = UserManager.shared.account.value?.id, let info = appData.assetInfo[assetID], let fee_amount = fee.amount.toDouble(), let feeInfo = appData.assetInfo[fee.asset_id] else { return }
         let value = pow(10, info.precision)
         let amount = transferAmount * Double(truncating: value as NSNumber)
 

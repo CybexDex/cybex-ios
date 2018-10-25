@@ -69,7 +69,7 @@ class RechargeViewController: BaseViewController {
     }
 
     func filterData(_ trades: [Trade]) -> [Trade] {
-        let data = trades.filter({return app_data.assetInfo[$0.id] != nil})
+        let data = trades.filter({return appData.assetInfo[$0.id] != nil})
         var tradesInfo: [Trade] = []
         if var balances = UserManager.shared.balances.value {
             balances = balances.filter { (balance) -> Bool in

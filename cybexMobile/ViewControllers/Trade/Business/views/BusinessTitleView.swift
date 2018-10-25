@@ -71,7 +71,9 @@ class BusinessTitleView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
 
         addSubview(view)
         view.frame = self.bounds
@@ -81,7 +83,7 @@ class BusinessTitleView: UIView {
 
 extension BusinessTitleView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return app_data.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+        return appData.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
             return ticker.base_volume != "0"
 
         }).count
@@ -98,7 +100,7 @@ extension BusinessTitleView: UITableViewDataSource, UITableViewDelegate {
             cell.theme_backgroundColor = [UIColor.darkTwo.hexString(true), UIColor.white.hexString(true)]
             cell.businessTitleCellView.paris.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
         }
-        let markets = app_data.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+        let markets = appData.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
             return ticker.base_volume != "0"
         })
         let data = markets[indexPath.row]
