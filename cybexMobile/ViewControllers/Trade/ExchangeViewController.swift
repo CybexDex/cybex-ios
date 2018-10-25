@@ -20,7 +20,7 @@ class ExchangeViewController: BaseViewController {
     didSet{
       if self.isVisible {
         print("exchangeType : \(type)")
-        self.childViewControllers.forEach { (viewController) in
+        self.children.forEach { (viewController) in
           if var viewController = viewController as? TradePair{
             viewController.pariInfo = pair!
           }
@@ -55,7 +55,7 @@ extension ExchangeViewController : TradePair {
   
   func refresh() {
     if self.isVisible {
-      self.childViewControllers.forEach { (viewController) in
+        self.children.forEach { (viewController) in
         if let vc = viewController as? TradePair{
           vc.refresh()
         }

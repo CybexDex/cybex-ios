@@ -9,7 +9,7 @@
 import Foundation
 
 extension HotAssetsView {
-    func adapterModelToHotAssetsView(_ model: [HomeBucket]) {
+    func adapterModelToHotAssetsView(_ model: [Ticker]) {
         self.data = model
     }
 }

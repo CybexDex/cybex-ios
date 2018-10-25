@@ -9,7 +9,6 @@
 import UIKit
 import ReSwift
 import NBLCommonModule
-import Async
 
 protocol WithdrawAddressHomeCoordinatorProtocol {
     func openWithDrawAddressVC()
@@ -79,7 +78,7 @@ extension WithdrawAddressHomeCoordinator: WithdrawAddressHomeStateManagerProtoco
             data[viewmodel.model.id] = AddressManager.shared.getWithDrawAddressListWith(viewmodel.model.id)
         }
         
-        Async.main {
+        DispatchQueue.main.async {
             self.store.dispatch(WithdrawAddressHomeAddressDataAction(data: data))
         }
     }

@@ -39,7 +39,7 @@ class NoticeBoardView: UIView {
   }
   
   override var intrinsicContentSize: CGSize {
-    return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
+    return CGSize.init(width: UIView.noIntrinsicMetric,height: dynamicHeight())
   }
   
   fileprivate func updateHeight() {

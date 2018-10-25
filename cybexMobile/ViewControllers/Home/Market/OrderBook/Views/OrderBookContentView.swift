@@ -41,7 +41,7 @@ class OrderBookContentView: UIView {
     tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)  }
   
   override var intrinsicContentSize: CGSize {
-    return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
+    return CGSize.init(width: UIView.noIntrinsicMetric,height: dynamicHeight())
   }
   
   fileprivate func updateHeight() {

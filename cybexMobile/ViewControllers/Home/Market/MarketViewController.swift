@@ -6,7 +6,6 @@
 //  Copyright © 2018年 Cybex. All rights reserved.
 //
 
-import DNSPageView
 import Localize_Swift
 import ReSwift
 import RxSwift
@@ -76,16 +75,18 @@ class MarketViewController: BaseViewController {
     var coordinator: (MarketCoordinatorProtocol & MarketStateManagerProtocol)?
     
     lazy var pair: Pair = {
-        Pair(base: self.homeBucket.base, quote: self.homeBucket.quote)
+        Pair(base: self.ticker.base, quote: self.ticker.quote)
     }()
     
-    lazy var homeBucket: HomeBucket = {
-        let market = self.buckets[self.curIndex]
+    lazy var ticker: Ticker = {
+        let market = self.tickers[self.curIndex]
         return market
     }()
     
-    lazy var buckets: [HomeBucket] = {
-        let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex])
+    lazy var tickers: [Ticker] = {
+        let markets = app_data.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+            return ticker.base_volume != "0"
+        })
         return markets
     }()
     
@@ -99,10 +100,14 @@ class MarketViewController: BaseViewController {
         }
         setupNotificatin()
         setupEvent()
+        var quote_name = ""
+        var base_name = ""
         
-        let quote_name = homeBucket.quote_info.symbol.filterJade
-        let base_name = homeBucket.base_info.symbol.filterJade
-        
+        if let quote_info = app_data.assetInfo[ticker.quote], let base_info = app_data.assetInfo[ticker.base]{
+            quote_name = quote_info.symbol.filterJade
+            base_name = base_info.symbol.filterJade
+        }
+
         title = quote_name + "/" + base_name
         view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
         automaticallyAdjustsScrollViewInsets = false
@@ -146,7 +151,7 @@ class MarketViewController: BaseViewController {
         style.isShowBottomLine = true
         style.titleColor = #colorLiteral(red: 0.5436816812, green: 0.5804407597, blue: 0.6680644155, alpha: 1)
         style.titleSelectedColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : #colorLiteral(red: 0.1399003565, green: 0.1798574626, blue: 0.2467218637, alpha: 1)
-        style.titleFontSize = 14
+        style.titleFont = UIFont.systemFont(ofSize: 14)
         
         // 设置标题内容
         let titles = [R.string.localizable.mark_order_book.key.localized(),R.string.localizable.mark_trade_history.key.localized()]
@@ -180,9 +185,9 @@ class MarketViewController: BaseViewController {
     }
     
     func refreshDetailView() {
-        detailView.data = homeBucket
+        detailView.data = ticker
         
-        pairListView.data = [self.curIndex, self.buckets]
+        pairListView.data = [self.curIndex, self.tickers]
     }
     
     func refreshView(_ hiddenKLine: Bool = true) {
@@ -200,19 +205,20 @@ class MarketViewController: BaseViewController {
     }
     
     func updateIndex() {
-        let markets = app_data.filterQuoteAsset(AssetConfiguration.market_base_assets[currentBaseIndex]).map({ Pair(base: $0.base, quote: $0.quote) })
-        curIndex = markets.index(of: pair)!
-        homeBucket = buckets[self.curIndex]
-        pair = markets[self.curIndex]
+        let pairs = tickers.map({ Pair(base: $0.base, quote: $0.quote) })
+        curIndex = pairs.index(of: pair)!
+        ticker = tickers[self.curIndex]
+        pair = pairs[self.curIndex]
     }
     
     @objc func refreshKLine() {
-        if homeBucket.bucket.count == 0 {
+        if ticker.latest == "0" {
             endLoading()
             return
         }
         
         if let klineDatas = app_data.detailData, let klineData = klineDatas[pair] {
+        
             guard let response = klineData[timeGap] else {
                 endLoading()
                 return
@@ -269,8 +275,7 @@ class MarketViewController: BaseViewController {
                 }
                 
                 if let last_model = dataArray.last, (model.date - last_model.date) != 3600 {
-                    //          print(model.date - last_model.date)
-                    //          print("\r\n")
+                 
                 }
                 
                 dataArray.append(model)
@@ -287,7 +292,14 @@ class MarketViewController: BaseViewController {
                         dataArray.append(gap_model)
                     }
                 }
+                
+                if let base_info = app_data.assetInfo[self.ticker.base], timeGap == .one_day {
+                    last_model = dataArray.last!
+                    detailView.highLabel.text = "High: " + last_model.high.formatCurrency(digitNum: base_info.precision)
+                    detailView.lowLabel.text = "Low: " + last_model.low.formatCurrency(digitNum: base_info.precision)
+                }
             }
+            
             kLineView.drawKLineView(klineModels: dataArray, initialize: resetKLinePosition)
         }
     }
@@ -312,16 +324,16 @@ class MarketViewController: BaseViewController {
 }
 
 extension MarketViewController {
-    @objc func cellClicked(_ data: [String: Any]) {
-        if let index = data["index"] as? Int {
-            curIndex = index
-            let markets = buckets.map({ Pair(base: $0.base, quote: $0.quote) })
-            pair = markets[self.curIndex]
-            
-            startLoading()
-            refreshView()
-        }
-    }
+//    @objc func cellClicked(_ data: [String: Any]) {
+//        if let index = data["index"] as? Int {
+//            curIndex = index
+//            let markets = buckets.map({ Pair(base: $0.base, quote: $0.quote) })
+//            pair = markets[self.curIndex]
+//            
+//            startLoading()
+//            refreshView()
+//        }
+//    }
     
     @objc func timeClicked(_ data: [String: Any]) {
         if let candlestick = data["candlestick"] as? candlesticks {

@@ -163,7 +163,7 @@ extension ShareView: GridContentViewDelegate,GridContentViewDataSource {
     }
     
     func edgeInsetsForView(_ view: GridContentView) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(30, 0, 30, 0)
+        return UIEdgeInsets(top: 30, left: 0, bottom: 30, right: 0)
     }
     
     func lineHeightForView(_ view: GridContentView, lineNum: Int) -> CGFloat {

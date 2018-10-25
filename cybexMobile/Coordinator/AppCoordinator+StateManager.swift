@@ -14,19 +14,20 @@ import SwifterSwift
 import Reachability
 
 extension AppCoordinator: AppStateManagerProtocol {
+    
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<AppState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
     
-    func fetchData(_ params: AssetPairQueryParams, sub: Bool = true, priority: Foundation.Operation.QueuePriority = .normal, callback:@escaping ()->()) {
-        store.dispatch(creator.fetchMarket(with: sub, params: params, priority:priority, callback: { [weak self] (assets) in
-            guard let `self` = self else { return }
-            callback()
-            self.store.dispatch(MarketsFetched(pair: params, assets: assets))
-        }))
-    }
+//    func fetchData(_ params: AssetPairQueryParams, sub: Bool = true, priority: Foundation.Operation.QueuePriority = .normal, callback:@escaping ()->()) {
+//        store.dispatch(creator.fetchMarket(with: sub, params: params, priority:priority, callback: { [weak self] (assets) in
+//            guard let `self` = self else { return }
+//            callback()
+//            self.store.dispatch(MarketsFetched(pair: params, assets: assets))
+//        }))
+//    }
     
     func fetchData(_ params: AssetPairQueryParams, sub: Bool = true, priority: Foundation.Operation.QueuePriority = .normal) {
         store.dispatch(creator.fetchMarket(with: sub, params: params, priority: priority, callback: { [weak self] (assets) in
@@ -34,6 +35,13 @@ extension AppCoordinator: AppStateManagerProtocol {
             
             self.store.dispatch(MarketsFetched(pair: params, assets: assets))
         }))
+    }
+    
+    func fetchTickerData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority) {
+        creator.fetchCurrencyList(params) { [weak self](asset) in
+            guard let `self` = self else { return }
+            self.store.dispatch(TickerFetched(asset: asset))
+        }
     }
     
     func fetchKline(_ params: AssetPairQueryParams, gap: candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
@@ -50,7 +58,6 @@ extension AppCoordinator: AppStateManagerProtocol {
     func fetchAsset(_ callback:@escaping (()->Void)) {
         async {
             let data = try! await(SimpleHTTPService.fetchIdsInfo())
-            
             main {
                 AssetConfiguration.shared.unique_ids = data
                 let request = GetObjectsRequest(ids: data) { response in
@@ -93,26 +100,22 @@ extension AppCoordinator: AppStateManagerProtocol {
         }
         
         timer?.start()
-        
     }
     
     
-    
-    func fetchGetToCyb(_ callback:@escaping(Double)->()) {
-        let request = changeToCybRequest(response: { [weak self](data) in
+    func fetchGetToCyb(_ callback:@escaping(Decimal)->()) {
+        let request = GetTickerRequest(baseName: AssetConfiguration.ETH, quoteName: AssetConfiguration.CYB, response: { [weak self](data) in
             guard let `self` = self else { return }
-            if let data = data as? String ,let dataDouble = data.toDouble(), dataDouble != 0 {
-                self.getToCybRelation = 1 / dataDouble
+            if let data = data as? Ticker, let dataDouble = data.latest.toDecimal(), dataDouble != 0 {
+                self.getToCybRelation = Decimal(floatLiteral: 1) / dataDouble
                 callback(1 / dataDouble)
             }
             else {
                 callback(0)
             }
-            
-            }, baseName: AssetConfiguration.CYB, quoteName: "1.3.17")
+        })
         CybexWebSocketService.shared.send(request: request)
     }
-    
 }
 
 extension AppCoordinator {
@@ -141,7 +144,9 @@ extension AppCoordinator {
         if isNoFirst {
             for pair in filterPairs {
                 
-                AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority)
+                AppConfiguration.shared.appCoordinator.fetchTickerData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority: priority)
+                
+//                AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority)
             }
         }else {
             fetch24Markets(UserManager.shared.refreshTime, startTime: start, now: now,sub: sub,priority: priority)
@@ -159,12 +164,13 @@ extension AppCoordinator {
             refreshTime = Double(index) * timeSpace
             let pairs = AssetConfiguration.shared.asset_ids.filter({return $0.base == base})
             SwifterSwift.delay(milliseconds: refreshTime * 1000.0) {
-                
                 for pair in pairs {
                     if CybexWebSocketService.shared.overload() {
                         return
                     }
-                    AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: startTime, endTime: now), sub: sub, priority:priority)
+                    AppConfiguration.shared.appCoordinator.fetchTickerData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: startTime, endTime: now), sub: sub, priority: priority)
+
+//                    AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: startTime, endTime: now), sub: sub, priority:priority)
                 }
             }
         }

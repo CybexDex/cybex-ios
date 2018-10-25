@@ -117,7 +117,7 @@ class ETORecordListViewController: BaseViewController {
         self.coordinator!.state.changeSet.asObservable().skip(1).subscribe(onNext: {[weak self] (changeset) in
             guard let `self` = self else { return }
             
-            self.recordTableView.reload(using: changeset, with: UITableViewRowAnimation.fade) {[weak self] data in
+            self.recordTableView.reload(using: changeset, with: UITableView.RowAnimation.fade) {[weak self] data in
                 guard let `self` = self else { return }
 
                 self.coordinator?.state.data.accept(data)
@@ -133,7 +133,7 @@ extension ETORecordListViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let nibString = String.init(describing:type(of: ETORecordCell()))
+        let nibString = R.nib.etoRecordCell.identifier
         
         let cell = tableView.dequeueReusableCell(withIdentifier: nibString, for: indexPath) as! ETORecordCell
         

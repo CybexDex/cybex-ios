@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import cybex_ios_core_cpp
 
 protocol BusinessCoordinatorProtocol {
     func parentIsLoading(_ vc:UIViewController?) -> Bool
@@ -23,6 +24,8 @@ protocol BusinessStateManagerProtocol {
     
     func switchPrice(_ price:String)
     func adjustPrice(_ plus:Bool,price_pricision:Int)
+    
+    func changeAmountAction(_ amount: String)
     
     func changePercent(_ percent:Double, isBuy:Bool, assetID:String,pricision:Int)
     func getBalance(_ assetID:String)
@@ -80,6 +83,11 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
+    
+    func changeAmountAction(_ amount: String) {
+        self.store.dispatch(ChangeAmountAction(amount:amount))
+    }
+    
     
     func switchPrice(_ price:String) {
         self.store.dispatch(changePriceAction(price: price))
@@ -205,15 +213,13 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
             }
             
         }
-        let balanceDouble = Int(round(self.state.property.balance.value.doubleValue * pow(10, base_info.precision).doubleValue))
-        let totalDouble = Int(round(total.doubleValue * pow(10, base_info.precision).doubleValue))
+        let balanceDouble = self.state.property.balance.value.doubleValue
+        let totalDouble = total.doubleValue
         
         
         if balanceDouble >= totalDouble {
             return true
         }
-        
-        
         return false
     }
 }

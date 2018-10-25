@@ -20,12 +20,17 @@ class HotAssetsView: CybexBaseView {
     
     override var data: Any? {
         didSet {
-            if let data = data as? [HomeBucket], data.count != 0 {
-                self.contentView.reloadData()
+            if let data = data as? [Ticker], data.count != 0 {
+                if self.itemViews == nil || self.itemViews.count == 0{
+                    self.contentView.reloadData()
+                }
+                for index in 0..<data.count {
+                    self.itemViews[index].adapterModelToHotAssetView(data[index])
+                }
             }
         }
     }
-        
+    
     override func setup() {
         super.setup()
         contentView.datasource = self
@@ -38,7 +43,7 @@ class HotAssetsView: CybexBaseView {
     }
     
     func setupSubViewEvent() {
-    
+        
     }
     
     @objc override func didClicked() {
@@ -48,7 +53,7 @@ class HotAssetsView: CybexBaseView {
 
 extension HotAssetsView : GridContentViewDataSource{
     func itemsForView(_ view: GridContentView) -> [UIView] {
-        if let data = self.data as? [HomeBucket] {
+        if let data = self.data as? [Ticker] {
             let views = Array(0...data.count - 1).map({ (index) -> HotAssetView in
                 let item = HotAssetView(frame: .zero)
                 item.theme1BgColor = .dark
@@ -59,7 +64,7 @@ extension HotAssetsView : GridContentViewDataSource{
             itemViews = views
             return views
         }
-      
+        
         return []
     }
     

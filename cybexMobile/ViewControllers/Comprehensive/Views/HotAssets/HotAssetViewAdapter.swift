@@ -9,54 +9,33 @@
 import Foundation
 
 extension HotAssetView {
-    func adapterModelToHotAssetView(_ model:HomeBucket) {
+    func adapterModelToHotAssetView(_ model:Ticker) {
         self.data = model
-        assetName.text = model.quote_info.symbol.filterJade + "/" + model.base_info.symbol.filterJade
-        let matrix = getCachedBucket(model)
-        if model.bucket.count == 0 {
+        guard let base_info = app_data.assetInfo[model.base], let quote_info = app_data.assetInfo[model.quote] else {return}
+        assetName.text = quote_info.symbol.filterJade + "/" + base_info.symbol.filterJade
+        
+        if model.latest == "0" {
             amountLabel.text = "-"
             rmbLabel.text = "-"
             trendLabel.text = "-"
         }
         else {
-            amountLabel.text = matrix.price
-            amountLabel.textColor = matrix.incre.color()
-            self.trendLabel.text = (matrix.incre == .greater ? "+" : "") + matrix.change.formatCurrency(digitNum: 2) + "%"
-            self.trendLabel.textColor = matrix.incre.color()
-            if let change = matrix.change.toDouble() ,change > 1000{
+            amountLabel.text = model.latest.formatCurrency(digitNum: base_info.precision)
+            amountLabel.textColor = model.incre.color()
+            self.trendLabel.text = (model.incre == .greater ? "+" : "") + model.percent_change.formatCurrency(digitNum: 2) + "%"
+            self.trendLabel.textColor = model.incre.color()
+            if let change = model.percent_change.toDouble() ,change > 1000{
                 self.trendLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
             }else{
                 self.trendLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
             }
-            let (eth,cyb) = changeToETHAndCYB(model.quote_info.id)
             
-            if eth.toDouble() == 0 && cyb.toDouble() == 0 {
-                self.rmbLabel.text  = "-"
-                
-            }else if (eth == "0"){
-                if let cyb_eth = changeCYB_ETH().toDouble(),cyb_eth != 0{
-                    let eth_count = cyb.toDouble()! / cyb_eth
-                    if eth_count * app_data.eth_rmb_price == 0{
-                        self.rmbLabel.text  = "-"
-                    }else{
-                        self.rmbLabel.text  = "≈¥" + (eth_count * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
-                    }
-                }else{
-                    self.rmbLabel.text  = "-"
-                }
-            }else{
-                if eth.toDouble()! * app_data.eth_rmb_price == 0 {
-                    self.rmbLabel.text  = "-"
-                }else{
-                    self.rmbLabel.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
-                }
-            }
+            self.rmbLabel.text = "≈¥" + getAssetRMBPrice(quote_info.id, base:base_info.id).string(digits: 2, roundingMode: .down)
         }
-        
-        
         assetName.textAlignment = .center
         amountLabel.textAlignment = .center
         rmbLabel.textAlignment = .center
         trendLabel.textAlignment = .center
+        updateHeight()
     }
 }

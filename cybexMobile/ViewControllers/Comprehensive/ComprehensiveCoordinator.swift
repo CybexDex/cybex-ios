@@ -9,7 +9,6 @@
 import UIKit
 import ReSwift
 import NBLCommonModule
-import Async
 import Localize_Swift
 
 protocol ComprehensiveCoordinatorProtocol {
@@ -47,7 +46,7 @@ class ComprehensiveCoordinator: ComprehensiveRootCoordinator {
     var state: ComprehensiveState {
         return store.state
     }
-            
+    
     override func register() {
         Broadcaster.register(ComprehensiveCoordinatorProtocol.self, observer: self)
         Broadcaster.register(ComprehensiveStateManagerProtocol.self, observer: self)
@@ -69,14 +68,14 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
         var currentBaseIndex = 0
         for index in 0..<AssetConfiguration.market_base_assets.count {
             if pair.base == AssetConfiguration.market_base_assets[index] {
-               currentBaseIndex = index
+                currentBaseIndex = index
             }
         }
-        let homeBuckets = app_data.filterQuoteAsset(pair.base)
+        let tickers = app_data.filterQuoteAssetTicker(pair.base)
         var curIndex = 0
-        for index in 0..<homeBuckets.count {
-            let homebucket = homeBuckets[index]
-            if homebucket.base == pair.base && homebucket.quote == pair.quote {
+        for index in 0..<tickers.count {
+            let ticker = tickers[index]
+            if ticker.base == pair.base && ticker.quote == pair.quote {
                 curIndex = index
             }
         }
@@ -91,7 +90,7 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
 
 extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
     func switchPageState(_ state:PageState) {
-        Async.main {
+        DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }
     }
@@ -116,7 +115,7 @@ extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
     func fetchHomeBannerInfos() {
         let url = AppConfiguration.HOME_BANNER_JSON + (Localize.currentLanguage() == "en" ? "en" : "zh")
         SimpleHTTPService.fetchHomeBannerInfos(url).done { (data) in
-            if let data = data {
+            if let data = data, data.count > 0 {
                 self.store.dispatch(FetchHomeBannerAction(data: data))
             }
             }.catch { (error) in
@@ -146,10 +145,10 @@ extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
         if let homeVC = R.storyboard.main.homeViewController(){
             homeVC.coordinator = HomeCoordinator(rootVC: self.rootVC)
             homeVC.VC_TYPE = view_type.Comprehensive.rawValue
-            sender.addChildViewController(homeVC)
+            sender.addChild(homeVC)
             sender.contentView.topGainersView.addSubview(homeVC.view)
             homeVC.contentView?.edges(to: sender.contentView.topGainersView)
-            homeVC.didMove(toParentViewController: sender)
+            homeVC.didMove(toParent: sender)
         }
     }
 }

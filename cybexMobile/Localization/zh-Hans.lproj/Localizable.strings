@@ -436,7 +436,7 @@
 "eto_project_time_comming" = "距离结束：";
 "eto_project_time_pre" = "距离开始：";
 
-
+"desposit_address" = "协议地址：";
 "eto_project_name" = "项目名称：";
 "eto_token_name" = "代币名称：";
 "eto_start_time" = "ETO时间：";
@@ -481,3 +481,12 @@
 "record_types" = "类型";
 "record_currency" = "币种";
 "home_top_gainers" = "涨幅榜";
+
+
+"pair_open" = "开:%@";
+"pair_close" = "收:%@";
+"pair_high" = "高:%@";
+"pair_low" = "低:%@";
+"pair_vol" = "量:%@";
+"pair_change_amount" = "额:%@";
+"pair_change_persent" = "幅:%@";

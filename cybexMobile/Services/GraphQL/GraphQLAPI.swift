@@ -349,6 +349,7 @@ public final class GetDepositAddressQuery: GraphQLQuery {
         GraphQLField("jadeOrders", type: .nonNull(.list(.scalar(String.self)))),
         GraphQLField("latest", type: .nonNull(.scalar(Bool.self))),
         GraphQLField("createAt", type: .scalar(String.self)),
+        GraphQLField("projectInfo", type: .object(ProjectInfo.selections)),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -357,8 +358,8 @@ public final class GetDepositAddressQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(accountName: String, address: String, type: String? = nil, asset: String, jadeOrders: [String?], latest: Bool, createAt: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "AccountAddressRecord", "accountName": accountName, "address": address, "type": type, "asset": asset, "jadeOrders": jadeOrders, "latest": latest, "createAt": createAt])
+      public init(accountName: String, address: String, type: String? = nil, asset: String, jadeOrders: [String?], latest: Bool, createAt: String? = nil, projectInfo: ProjectInfo? = nil) {
+        self.init(unsafeResultMap: ["__typename": "AccountAddressRecord", "accountName": accountName, "address": address, "type": type, "asset": asset, "jadeOrders": jadeOrders, "latest": latest, "createAt": createAt, "projectInfo": projectInfo.flatMap { (value: ProjectInfo) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -433,6 +434,15 @@ public final class GetDepositAddressQuery: GraphQLQuery {
         }
       }
 
+      public var projectInfo: ProjectInfo? {
+        get {
+          return (resultMap["projectInfo"] as? ResultMap).flatMap { ProjectInfo(unsafeResultMap: $0) }
+        }
+        set {
+          resultMap.updateValue(newValue?.resultMap, forKey: "projectInfo")
+        }
+      }
+
       public var fragments: Fragments {
         get {
           return Fragments(unsafeResultMap: resultMap)
@@ -455,6 +465,73 @@ public final class GetDepositAddressQuery: GraphQLQuery {
           }
           set {
             resultMap += newValue.resultMap
+          }
+        }
+      }
+
+      public struct ProjectInfo: GraphQLSelectionSet {
+        public static let possibleTypes = ["ProjectInfo"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("projectName", type: .scalar(String.self)),
+          GraphQLField("logoUrl", type: .scalar(String.self)),
+          GraphQLField("contractAddress", type: .scalar(String.self)),
+          GraphQLField("contractExplorerUrl", type: .scalar(String.self)),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(projectName: String? = nil, logoUrl: String? = nil, contractAddress: String? = nil, contractExplorerUrl: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "ProjectInfo", "projectName": projectName, "logoUrl": logoUrl, "contractAddress": contractAddress, "contractExplorerUrl": contractExplorerUrl])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var projectName: String? {
+          get {
+            return resultMap["projectName"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "projectName")
+          }
+        }
+
+        public var logoUrl: String? {
+          get {
+            return resultMap["logoUrl"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "logoUrl")
+          }
+        }
+
+        public var contractAddress: String? {
+          get {
+            return resultMap["contractAddress"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "contractAddress")
+          }
+        }
+
+        public var contractExplorerUrl: String? {
+          get {
+            return resultMap["contractExplorerUrl"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "contractExplorerUrl")
           }
         }
       }
@@ -519,6 +596,7 @@ public final class NewDepositAddressMutation: GraphQLMutation {
         GraphQLField("jadeOrders", type: .nonNull(.list(.scalar(String.self)))),
         GraphQLField("latest", type: .nonNull(.scalar(Bool.self))),
         GraphQLField("createAt", type: .scalar(String.self)),
+        GraphQLField("projectInfo", type: .object(ProjectInfo.selections)),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -527,8 +605,8 @@ public final class NewDepositAddressMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(accountName: String, address: String, type: String? = nil, asset: String, jadeOrders: [String?], latest: Bool, createAt: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "AccountAddressRecord", "accountName": accountName, "address": address, "type": type, "asset": asset, "jadeOrders": jadeOrders, "latest": latest, "createAt": createAt])
+      public init(accountName: String, address: String, type: String? = nil, asset: String, jadeOrders: [String?], latest: Bool, createAt: String? = nil, projectInfo: ProjectInfo? = nil) {
+        self.init(unsafeResultMap: ["__typename": "AccountAddressRecord", "accountName": accountName, "address": address, "type": type, "asset": asset, "jadeOrders": jadeOrders, "latest": latest, "createAt": createAt, "projectInfo": projectInfo.flatMap { (value: ProjectInfo) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -603,6 +681,15 @@ public final class NewDepositAddressMutation: GraphQLMutation {
         }
       }
 
+      public var projectInfo: ProjectInfo? {
+        get {
+          return (resultMap["projectInfo"] as? ResultMap).flatMap { ProjectInfo(unsafeResultMap: $0) }
+        }
+        set {
+          resultMap.updateValue(newValue?.resultMap, forKey: "projectInfo")
+        }
+      }
+
       public var fragments: Fragments {
         get {
           return Fragments(unsafeResultMap: resultMap)
@@ -625,6 +712,73 @@ public final class NewDepositAddressMutation: GraphQLMutation {
           }
           set {
             resultMap += newValue.resultMap
+          }
+        }
+      }
+
+      public struct ProjectInfo: GraphQLSelectionSet {
+        public static let possibleTypes = ["ProjectInfo"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("projectName", type: .scalar(String.self)),
+          GraphQLField("logoUrl", type: .scalar(String.self)),
+          GraphQLField("contractAddress", type: .scalar(String.self)),
+          GraphQLField("contractExplorerUrl", type: .scalar(String.self)),
+        ]
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(projectName: String? = nil, logoUrl: String? = nil, contractAddress: String? = nil, contractExplorerUrl: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "ProjectInfo", "projectName": projectName, "logoUrl": logoUrl, "contractAddress": contractAddress, "contractExplorerUrl": contractExplorerUrl])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var projectName: String? {
+          get {
+            return resultMap["projectName"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "projectName")
+          }
+        }
+
+        public var logoUrl: String? {
+          get {
+            return resultMap["logoUrl"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "logoUrl")
+          }
+        }
+
+        public var contractAddress: String? {
+          get {
+            return resultMap["contractAddress"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "contractAddress")
+          }
+        }
+
+        public var contractExplorerUrl: String? {
+          get {
+            return resultMap["contractExplorerUrl"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "contractExplorerUrl")
           }
         }
       }
@@ -784,7 +938,7 @@ public struct WithdrawinfoObject: GraphQLFragment {
 
 public struct AccountAddressRecord: GraphQLFragment {
   public static let fragmentDefinition =
-    "fragment accountAddressRecord on AccountAddressRecord {\n  __typename\n  accountName\n  address\n  type\n  asset\n  jadeOrders\n  latest\n  createAt\n}"
+    "fragment accountAddressRecord on AccountAddressRecord {\n  __typename\n  accountName\n  address\n  type\n  asset\n  jadeOrders\n  latest\n  createAt\n  projectInfo {\n    __typename\n    projectName\n    logoUrl\n    contractAddress\n    contractExplorerUrl\n  }\n}"
 
   public static let possibleTypes = ["AccountAddressRecord"]
 
@@ -797,6 +951,7 @@ public struct AccountAddressRecord: GraphQLFragment {
     GraphQLField("jadeOrders", type: .nonNull(.list(.scalar(String.self)))),
     GraphQLField("latest", type: .nonNull(.scalar(Bool.self))),
     GraphQLField("createAt", type: .scalar(String.self)),
+    GraphQLField("projectInfo", type: .object(ProjectInfo.selections)),
   ]
 
   public private(set) var resultMap: ResultMap
@@ -805,8 +960,8 @@ public struct AccountAddressRecord: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(accountName: String, address: String, type: String? = nil, asset: String, jadeOrders: [String?], latest: Bool, createAt: String? = nil) {
-    self.init(unsafeResultMap: ["__typename": "AccountAddressRecord", "accountName": accountName, "address": address, "type": type, "asset": asset, "jadeOrders": jadeOrders, "latest": latest, "createAt": createAt])
+  public init(accountName: String, address: String, type: String? = nil, asset: String, jadeOrders: [String?], latest: Bool, createAt: String? = nil, projectInfo: ProjectInfo? = nil) {
+    self.init(unsafeResultMap: ["__typename": "AccountAddressRecord", "accountName": accountName, "address": address, "type": type, "asset": asset, "jadeOrders": jadeOrders, "latest": latest, "createAt": createAt, "projectInfo": projectInfo.flatMap { (value: ProjectInfo) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -878,6 +1033,82 @@ public struct AccountAddressRecord: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "createAt")
+    }
+  }
+
+  public var projectInfo: ProjectInfo? {
+    get {
+      return (resultMap["projectInfo"] as? ResultMap).flatMap { ProjectInfo(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "projectInfo")
+    }
+  }
+
+  public struct ProjectInfo: GraphQLSelectionSet {
+    public static let possibleTypes = ["ProjectInfo"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("projectName", type: .scalar(String.self)),
+      GraphQLField("logoUrl", type: .scalar(String.self)),
+      GraphQLField("contractAddress", type: .scalar(String.self)),
+      GraphQLField("contractExplorerUrl", type: .scalar(String.self)),
+    ]
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(projectName: String? = nil, logoUrl: String? = nil, contractAddress: String? = nil, contractExplorerUrl: String? = nil) {
+      self.init(unsafeResultMap: ["__typename": "ProjectInfo", "projectName": projectName, "logoUrl": logoUrl, "contractAddress": contractAddress, "contractExplorerUrl": contractExplorerUrl])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var projectName: String? {
+      get {
+        return resultMap["projectName"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "projectName")
+      }
+    }
+
+    public var logoUrl: String? {
+      get {
+        return resultMap["logoUrl"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "logoUrl")
+      }
+    }
+
+    public var contractAddress: String? {
+      get {
+        return resultMap["contractAddress"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "contractAddress")
+      }
+    }
+
+    public var contractExplorerUrl: String? {
+      get {
+        return resultMap["contractExplorerUrl"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "contractExplorerUrl")
+      }
     }
   }
 }

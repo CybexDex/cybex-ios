@@ -24,7 +24,7 @@ class ComprehensiveView: CybexBaseView {
     enum Event:String {
         case ComprehensiveViewDidClicked
     }
-        
+    
     override func setup() {
         super.setup()
         
@@ -39,7 +39,7 @@ class ComprehensiveView: CybexBaseView {
     }
     
     func setupSubViewEvent() {
-     
+        
     }
     
     @objc override func didClicked() {

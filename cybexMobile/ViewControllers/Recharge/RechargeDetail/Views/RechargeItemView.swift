@@ -47,7 +47,7 @@ class RechargeItemView: UIView {
         didSet{
             content.locali = textplaceholder
             content.attributedPlaceholder = NSAttributedString(string:self.content.placeholder!,
-                                                               attributes:[NSAttributedStringKey.foregroundColor: UIColor.steel50])
+                                                               attributes:[NSAttributedString.Key.foregroundColor: UIColor.steel50])
         }
     }
     
@@ -104,7 +104,7 @@ class RechargeItemView: UIView {
     
     func startAnimation() {
         self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: self.addressStateImageView.width, height: self.addressStateImageView.height))
-        self.activityIndicator?.activityIndicatorViewStyle = .gray
+        self.activityIndicator?.style = .gray
         self.activityIndicator?.center = CGPoint(x: self.addressStateImageView.width * 0.5, y: self.addressStateImageView.height * 0.5)
         self.addressStateImageView.addSubview(self.activityIndicator!);
         self.activityIndicator?.startAnimating()
@@ -127,7 +127,7 @@ class RechargeItemView: UIView {
     }
     
     override var intrinsicContentSize: CGSize{
-        return CGSize.init(width:UIViewNoIntrinsicMetric,height:dynamicHeight())
+        return CGSize.init(width:UIView.noIntrinsicMetric,height:dynamicHeight())
     }
     
     fileprivate func dynamicHeight() -> CGFloat{

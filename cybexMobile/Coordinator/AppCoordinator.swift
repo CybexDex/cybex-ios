@@ -21,11 +21,13 @@ protocol AppStateManagerProtocol {
         _ subscriber: S, transform: ((Subscription<AppState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
     
-    func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority, callback:@escaping ()->())
+//    func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority, callback:@escaping ()->())
     func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority)
+    
+    func fetchTickerData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority)
     func fetchEthToRmbPrice()
     
-    func fetchGetToCyb(_ callback:@escaping(Double)->())
+    func fetchGetToCyb(_ callback:@escaping(Decimal)->())
 }
 
 class AppCoordinator {
@@ -35,7 +37,7 @@ class AppCoordinator {
     
     var fetchPariTimer:Repeater?
     
-    var getToCybRelation : Double?
+    var getToCybRelation : Decimal?
     
     var store = Store<AppState> (
         reducer: AppReducer,
@@ -145,7 +147,7 @@ class AppCoordinator {
     }
     
     func aspect() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) {[weak self] (notifi) in
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) {[weak self] (notifi) in
             guard let `self` = self else { return }
             self.curDisplayingCoordinator().rootVC.topViewController?.refreshViewController()
         }

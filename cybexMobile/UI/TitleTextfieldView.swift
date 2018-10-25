@@ -96,7 +96,7 @@ class TitleTextfieldView: UIView {
     }
     func startAnimation() {
         self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-        self.activityIndicator?.activityIndicatorViewStyle = .white
+        self.activityIndicator?.style = .white
         self.activityIndicator?.center = CGPoint(x: 12, y: self.actionsView.height * 0.5)
         self.loadingBtn?.addSubview(self.activityIndicator!);
         self.activityIndicator?.startAnimating()
@@ -115,7 +115,7 @@ class TitleTextfieldView: UIView {
             let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(introduce))
             introduceLabel.addGestureRecognizer(tapGestureRecognizer)
             
-            textField.attributedPlaceholder = NSMutableAttributedString.init(string: setting.placeholder, attributes: [NSAttributedStringKey.foregroundColor: UIColor.steel50])
+            textField.attributedPlaceholder = NSMutableAttributedString.init(string: setting.placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.steel50])
             textField.isSecureTextEntry = setting.isSecureTextEntry
             gapView.alpha = setting.showLine ? 1.0 : 0.0
         }
@@ -220,7 +220,7 @@ class TitleTextfieldView: UIView {
     }
     
     override var intrinsicContentSize: CGSize {
-        return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
+        return CGSize.init(width: UIView.noIntrinsicMetric,height: dynamicHeight())
     }
     
     func updateContentSize() {

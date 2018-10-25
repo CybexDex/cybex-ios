@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import URLNavigator
-import Async
 
 /// example: openPage("cybexapp://eto/home")
 struct URLNavigationMap {

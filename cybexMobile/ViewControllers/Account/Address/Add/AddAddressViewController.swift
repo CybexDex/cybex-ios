@@ -74,7 +74,7 @@ class AddAddressViewController: BaseViewController {
         (self.containerView.memo.content.rx.text.orEmpty <-> self.coordinator!.state.property.memo).disposed(by: disposeBag)
         
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidEndEditing, object: self.containerView.mark.content, queue: nil) { [weak self](notification) in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification, object: self.containerView.mark.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
             if let text = self.containerView.mark.content.text ,text.trimmed.count != 0 {
                 self.coordinator?.verityNote(true)
@@ -87,7 +87,7 @@ class AddAddressViewController: BaseViewController {
             }
         }
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextViewTextDidEndEditing, object: self.containerView.address.content, queue: nil) { [weak self](notification) in
+        NotificationCenter.default.addObserver(forName: UITextView.textDidEndEditingNotification, object: self.containerView.address.content, queue: nil) { [weak self](notification) in
             guard let `self` = self else {return}
             if let text = self.containerView.address.content.text, text.trimmed.count > 0 {
                 self.containerView.address_state = .Loading

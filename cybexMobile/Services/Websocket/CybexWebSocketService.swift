@@ -11,7 +11,6 @@ import SocketRocket
 import JSONRPCKit
 import SwifterSwift
 import SwiftyJSON
-import AsyncOperation
 import SwiftyUserDefaults
 
 enum NodeURLString:String {

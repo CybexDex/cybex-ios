@@ -9,7 +9,6 @@
 import UIKit
 import ReSwift
 import NBLCommonModule
-import Async
 
 protocol WithdrawAndDespoitRecordCoordinatorProtocol {
     func openRecordDetailUrl(_ url: String)
@@ -55,7 +54,7 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordCoordinat
 
 extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateManagerProtocol {
     func switchPageState(_ state:PageState) {
-        Async.main {
+        DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }
     }
@@ -68,7 +67,7 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
     
     func childrenFetchData(_ info: String, index: RecordChooseType) {
         if let vc = self.rootVC.topViewController as? WithdrawAndDespoitRecordViewController {
-            for childrenVC in vc.childViewControllers {
+            for childrenVC in vc.children {
                 if let childVC = childrenVC as? RechargeRecodeViewController {
                     childVC.tableView.es.resetNoMoreData()
                     childVC.isNoMoreData = false

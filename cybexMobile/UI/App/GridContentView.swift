@@ -35,7 +35,7 @@ class GridContentView: UIView {
         }
     }
     
-    private var edgeInsets: UIEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+    private var edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
     private var lineGap: CGFloat = 25
     
@@ -150,7 +150,7 @@ class GridContentView: UIView {
     }
     
     override var intrinsicContentSize: CGSize {
-        return CGSize.init(width: UIViewNoIntrinsicMetric,height: dynamicHeight())
+        return CGSize.init(width: UIView.noIntrinsicMetric,height: dynamicHeight())
     }
     
     @objc func updateHeight() {
@@ -166,6 +166,6 @@ class GridContentView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        layoutIfNeeded()
+//        layoutIfNeeded()
     }
 }

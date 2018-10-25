@@ -81,7 +81,7 @@ class AnnounceScrollView: CybexBaseView {
         var reverse = false
         
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {_ in
-            UIView.animate(withDuration: 1.5, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            UIView.animate(withDuration: 1.5, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
                 if !reverse {
                     top.frame = CGRect(x: 0, y: -self.scrollView.bottom, width: self.scrollView.width, height: self.scrollView.height)
                     bottom.frame = self.scrollView.bounds

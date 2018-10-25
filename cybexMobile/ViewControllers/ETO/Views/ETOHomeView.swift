@@ -9,7 +9,6 @@
 import Foundation
 import FSPagerView
 import TinyConstraints
-import Device
 
 @IBDesignable
 class ETOHomeView: CybexBaseView {

@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import ReSwift
 import SwiftTheme
+import cybex_ios_core_cpp
 
 class TransferDetailViewController: BaseViewController {
   

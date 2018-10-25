@@ -81,11 +81,9 @@ class TradeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
-        if app_data.data.value.count == 0 {
+        if app_data.ticker_data.value.count == 0 {
             return
         }
-        
         if self.isVisible {
             self.getPairInfo()
             self.refreshView()
@@ -140,8 +138,8 @@ class TradeViewController: BaseViewController {
     }
     
     @objc override func leftAction(_ sender: UIButton){
-        if let baseIndex = AssetConfiguration.market_base_assets.index(of: pair.base), let index = app_data.filterQuoteAsset(pair.base).index(where: { (bucket) -> Bool in
-            return bucket.base == pair.base && bucket.quote == pair.quote
+        if let baseIndex = AssetConfiguration.market_base_assets.index(of: pair.base), let index = app_data.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+            return ticker.base == pair.base && ticker.quote == pair.quote
         }) {
             self.coordinator?.openMarket(index: index, currentBaseIndex: baseIndex)
         }
@@ -154,7 +152,7 @@ class TradeViewController: BaseViewController {
     override func configureObserveState() {
         app_data.otherRequestRelyData.asObservable()
             .subscribe(onNext: { (s) in
-                if app_data.data.value.count == 0 {
+                if app_data.ticker_data.value.count == 0 {
                     return
                 }
                 
@@ -172,7 +170,7 @@ class TradeViewController: BaseViewController {
             self.endLoading()
             
             self.tradeTitltView.title.text = info.quote.symbol.filterJade + "/" + info.base.symbol.filterJade
-            self.childViewControllers.forEach { (viewController) in
+            self.children.forEach { (viewController) in
                 if var viewController = viewController as? TradePair{
                     viewController.pariInfo = self.pair
                     if self.isfirstRefresh {
@@ -189,7 +187,7 @@ class TradeViewController: BaseViewController {
     }
     
     func moveToMyOpenedOrders(){
-        if let viewController = childViewControllers[2] as? TradePair{
+        if let viewController = children[2] as? TradePair{
             viewController.refresh()
         }
         self.scrollView.setContentOffset(CGPoint(x: pageOffsetForChild(at: 2), y: 0), animated: false)
@@ -197,7 +195,7 @@ class TradeViewController: BaseViewController {
     
     func moveToTradeView(isBuy:Bool){
         let index = isBuy ? 0 : 1
-        if let viewController = childViewControllers[index] as? TradePair{
+        if let viewController = children[index] as? TradePair{
             viewController.refresh()
         }
         self.scrollView.setContentOffset(CGPoint(x: pageOffsetForChild(at: index), y: 0), animated: false)
@@ -206,7 +204,7 @@ class TradeViewController: BaseViewController {
 
 extension TradeViewController : TradeNavTitleViewDelegate {
     @discardableResult func sendEventActionWith() -> Bool {
-        if app_data.data.value.count == 0 {
+        if app_data.ticker_data.value.count == 0 {
             return false
         }
         
@@ -222,7 +220,7 @@ extension TradeViewController : TradeNavTitleViewDelegate {
             self.chooseTitleView?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             self.view.addSubview(self.chooseTitleView!)
             
-            self.chooseTitleView?.edges(to: self.view, insets: UIEdgeInsetsMake(0, 0, 0, 0), priority: .required, isActive: true)
+            self.chooseTitleView?.edges(to: self.view, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true)
             self.view.layoutIfNeeded()
             
             self.coordinator?.addHomeVC()

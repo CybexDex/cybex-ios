@@ -10,8 +10,6 @@ import UIKit
 import ReSwift
 import NBLCommonModule
 import XLActionController
-import Async
-import Dollar
 
 protocol TransferAddressHomeCoordinatorProtocol {
     func openAddTransferAddress()
@@ -137,7 +135,7 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtoco
         if let addressData = self.state.property.selectedAddress.value {
             AddressManager.shared.removeTransferAddress(addressData.id)
             
-            Async.main {
+            DispatchQueue.main.async {
                 self.rootVC.topViewController?.showToastBox(true, message: R.string.localizable.deleted.key.localized())
             }
         }
