@@ -108,7 +108,7 @@
 "balance_introduce_title"       = "账户总余额";
 "balance_ensuer"                = "我知道了";
 
-"home_vol"                      = "成交额";
+"home_vol"                      = "成交额 ";
 
 "opened_amount"                 = "数量:";
 "opened_asset_amount"                 = "资产/委托数量";
