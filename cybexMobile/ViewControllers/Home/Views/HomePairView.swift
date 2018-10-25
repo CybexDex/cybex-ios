@@ -53,7 +53,8 @@ class HomePairView: UIView {
                 self.bulking.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
             }
             
-            let price = getAssetRMBPrice(ticker.quote)
+            let price = getAssetRMBPrice(ticker.quote,base: ticker.base)
+
             self.rbmL.text = price == 0 ? "-" : "≈¥" + "\(price)".formatCurrency(digitNum: 2)
 
             

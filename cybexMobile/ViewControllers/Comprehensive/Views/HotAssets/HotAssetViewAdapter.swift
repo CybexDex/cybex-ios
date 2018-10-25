@@ -30,7 +30,7 @@ extension HotAssetView {
                 self.trendLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
             }
             
-            self.rmbLabel.text = "≈¥" + getAssetRMBPrice(quote_info.id).string(digits: 2, roundingMode: .down)
+            self.rmbLabel.text = "≈¥" + getAssetRMBPrice(quote_info.id, base:base_info.id).string(digits: 2, roundingMode: .down)
         }
         assetName.textAlignment = .center
         amountLabel.textAlignment = .center

@@ -20,6 +20,7 @@ class AccountOpenedOrdersView:UIView {
     
     var data : Any?{
         didSet{
+            let _ = UserManager.shared.balance
             updateHeaderView()
             self.tableView.reloadData()
         }
@@ -43,7 +44,7 @@ class AccountOpenedOrdersView:UIView {
         }
         else {
             headerView.totalValue_tip.localized_text = R.string.localizable.openedSellMoney.key.localizedContainer()
-            headerView.data = "\(UserManager.shared.limitOrderValue - UserManager.shared.limitOrder_buy_value)"
+            headerView.data = "\(UserManager.shared.limitOrder_sell_value)"
         }
     }
     

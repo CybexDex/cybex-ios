@@ -89,13 +89,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ZYNetworkAccessibity.start()
         
         NotificationCenter.default.addObserver(self, selector: #selector(handlerNetworkChanged(note:)), name: .reachabilityChanged, object: reachability)
-
-//        RealReachability.sharedInstance().startNotifier()
-//        NotificationCenter.default.addObserver(forName: NSNotification.Name.realReachabilityChanged, object: nil, queue: nil) { (notifi) in
-//            main {
-//                self.handlerNetworkChanged()
-//            }
-//        }
+        
+        //        RealReachability.sharedInstance().startNotifier()
+        //        NotificationCenter.default.addObserver(forName: NSNotification.Name.realReachabilityChanged, object: nil, queue: nil) { (notifi) in
+        //            main {
+        //                self.handlerNetworkChanged()
+        //            }
+        //        }
         try? reachability.startNotifier()
         
         SimpleHTTPService.fetchHomeHotAssetJson()
@@ -126,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UMConfigure.setLogEnabled(true)
         UMConfigure.setEncryptEnabled(true)
         UMConfigure.initWithAppkey(UM_APPKEY, channel: Bundle.main.bundleIdentifier!)
-        
+
     }
     
     
@@ -218,7 +218,7 @@ extension AppDelegate {
     
     @objc func handlerNetworkChanged(note: Notification) {
         let reachability = note.object as! Reachability
-
+        
         switch reachability.connection {
         case .none:
             CybexWebSocketService.shared.disconnect()
@@ -249,6 +249,7 @@ extension AppDelegate {
                     vc.startLoading()
                 }
                 CybexWebSocketService.shared.connect()
+                
                 NotificationCenter.default.post(name: NotificationName.NetWorkChanged, object: nil)
             }
         }

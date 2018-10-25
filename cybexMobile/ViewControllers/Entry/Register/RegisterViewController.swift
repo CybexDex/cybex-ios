@@ -44,6 +44,10 @@ class RegisterViewController: BaseViewController {
     var timer:Repeater?
     
     var pinID:String = ""
+    var passwordValid = false
+    var confirmValid = false
+    var codeValid = false
+
     var userNameValid = false {
         didSet {
             if userNameValid , let password = self.passwordTextField.text, password.count > 11 , self.passwordTextField.text == self.confirmPasswordTextField.text, let code = self.codeTextField.text, code.count == 4 {
@@ -140,36 +144,40 @@ extension RegisterViewController {
         }
         
         NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: accountTextField, queue: nil) {[weak self] (notifi) in
-            self?.errorStackView.isHidden = true
-            self?.accountTextField.activityView?.isHidden = true
-            self?.accountTextField.tailImage = nil
-            self?.userNameValid = false
+            guard let `self` = self else { return }
+            self.errorStackView.isHidden = true
+            self.accountTextField.activityView?.isHidden = true
+            self.accountTextField.tailImage = nil
+            self.userNameValid = false
             
-            guard let name = self?.accountTextField.text, name.count > 0 else {
-                self?.errorStackView.isHidden = true
+            guard let name = self.accountTextField.text, name.count > 0 else {
+                
+                self.passwordTextField.text = self.passwordTextField.text
+                self.confirmPasswordTextField.text = self.confirmPasswordTextField.text
                 return
             }
             
             let (passed, message) = UserManager.shared.validateUserName(name)
-            
             if !passed {
-                self?.errorStackView.isHidden = false
-                self?.errorMessage.text = message
+                self.errorStackView.isHidden = false
+                self.errorMessage.text = message
             }
             else {
-                self?.errorStackView.isHidden = true
+                self.errorStackView.isHidden = true
                 
-                self?.accountTextField.activityView?.isHidden = false
+                self.accountTextField.activityView?.isHidden = false
                 UserManager.shared.checkUserName(name).done({ (exist) in
                     main {
-                        self?.accountTextField.activityView?.isHidden = true
+                        self.accountTextField.activityView?.isHidden = true
                         if !exist {
-                            self?.accountTextField.tailImage = #imageLiteral(resourceName: "check_complete")
-                            self?.userNameValid = true
+                            self.accountTextField.tailImage = #imageLiteral(resourceName: "check_complete")
+                            self.userNameValid = true
+                            self.passwordTextField.text = self.passwordTextField.text
+                            self.confirmPasswordTextField.text = self.confirmPasswordTextField.text
                         }
                         else {
-                            self?.errorStackView.isHidden = false
-                            self?.errorMessage.text = R.string.localizable.accountValidateError1.key.localized()
+                            self.errorStackView.isHidden = false
+                            self.errorMessage.text = R.string.localizable.accountValidateError1.key.localized()
                         }
                     }
                 }).cauterize()
@@ -177,80 +185,85 @@ extension RegisterViewController {
         }
         
         let passwordValid = self.passwordTextField.rx.text.orEmpty.map({ verifyPassword($0) }).share(replay: 1)
-        
-        //    let passwordValid = self.passwordTextField.rx.text.orEmpty.map({ $0.count > 11}).share(replay: 1)
         let confirmPasswordValid = self.confirmPasswordTextField.rx.text.orEmpty.map({ verifyPassword($0) }).share(replay: 1)
         
         passwordValid.subscribe(onNext: {[weak self] (validate) in
             guard let `self` = self else { return }
-            if let text = self.passwordTextField.text,text.count == 0 {
-                self.passwordTextField.tailImage = nil
-                if let passwordText = self.confirmPasswordTextField.text,passwordText.count == 0 ,self.userNameValid{
-                    self.errorStackView.isHidden = true
-                }
-                return
-            }
+            self.passwordValid = validate
             if validate {
                 self.passwordTextField.tailImage = #imageLiteral(resourceName: "check_complete")
-                if self.userNameValid {
-                    self.errorStackView.isHidden = true
+                if let confirm = self.confirmPasswordTextField.text, confirm.count > 0, self.passwordTextField.text != confirm {
+                    self.errorStackView.isHidden = false
+                    self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
+                    return
                 }
-                if let confirmText = self.confirmPasswordTextField.text, confirmText.count > 0 && (self.passwordTextField.text != self.confirmPasswordTextField.text) {
-                    if self.userNameValid {
-                        self.errorStackView.isHidden = false
-                        self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
-                    }
+
+                if !self.userNameValid, let account = self.accountTextField.text, account.count > 0 {
+                    self.errorStackView.isHidden = false
+                    self.errorMessage.text = R.string.localizable.accountValidateError6.key.localized()
+                    return
                 }
+                self.errorStackView.isHidden = true
             }
             else {
-                if self.userNameValid {
-                    self.errorStackView.isHidden = false
-                    self.errorMessage.text = R.string.localizable.passwordValidateError3.key.localized()
-                }
-                
                 self.passwordTextField.tailImage = nil
+                if let text = self.passwordTextField.text, text.count == 0 {
+                    if !self.confirmValid, let confirm = self.confirmPasswordTextField.text, confirm.count > 0 {
+                        self.errorStackView.isHidden = false
+                        self.errorMessage.text = R.string.localizable.passwordValidateError3.key.localized()
+                        return
+                    }
+                    if !self.userNameValid, let account = self.accountTextField.text, account.count > 0 {
+                        self.errorStackView.isHidden = false
+                        self.errorMessage.text = R.string.localizable.accountValidateError6.key.localized()
+                        return
+                    }
+                    self.errorStackView.isHidden = true
+                    return
+                }
+                self.errorStackView.isHidden = false
+                self.errorMessage.text = R.string.localizable.passwordValidateError3.key.localized()
             }
-            
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         confirmPasswordValid.subscribe(onNext: {[weak self] (validate) in
             guard let `self` = self else { return }
-            if let text = self.confirmPasswordTextField.text,text.count == 0 {
-                self.confirmPasswordTextField.tailImage = nil
-                if let passwordText = self.passwordTextField.text,passwordText.count == 0 ,self.userNameValid{
-                    self.errorStackView.isHidden = true
-                }
-                return
-            }
-            if let text = self.passwordTextField.text ,text.count > 0 ,!verifyPassword(text) {
-                self.errorStackView.isHidden = false
-                self.errorMessage.text = R.string.localizable.passwordValidateError3.key.localized()
-                return
-            }
+            self.confirmValid = validate
             
-            if !validate {
-                self.errorStackView.isHidden = false
-                self.errorMessage.text = self.passwordTextField.text!.count > 0 ? R.string.localizable.passwordValidateError2.key.localized() : R.string.localizable.passwordValidateError3.key.localized()
-                self.confirmPasswordTextField.tailImage = nil
-                return
-            }
-            if self.passwordTextField.text == self.confirmPasswordTextField.text {
-                if self.userNameValid ,let passwordText = self.passwordTextField.text, passwordText.count > 11 {
-                    self.errorStackView.isHidden = true
+            if validate {
+                self.confirmPasswordTextField.tailImage = #imageLiteral(resourceName: "check_complete")
+                if !self.passwordValid || self.passwordTextField.text != self.confirmPasswordTextField.text {
+                    self.errorStackView.isHidden = false
+                    self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
+                    return
                 }
+                
+                if !self.userNameValid, let account = self.accountTextField.text, account.count > 0 {
+                    self.errorStackView.isHidden = false
+                    self.errorMessage.text = R.string.localizable.accountValidateError6.key.localized()
+                    return
+                }
+                self.errorStackView.isHidden = true
             }
             else {
-                if self.userNameValid {
-                    self.errorStackView.isHidden = false
-                    if let passwordText = self.passwordTextField.text, passwordText.count > 11 {
-                        self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
+                self.confirmPasswordTextField.tailImage = nil
+                if let text = self.confirmPasswordTextField.text, text.count == 0 {
+                    if !self.passwordValid, let password = self.passwordTextField.text, password.count > 0 {
+                        self.errorStackView.isHidden = false
+                        self.errorMessage.text = R.string.localizable.passwordValidateError3.key.localized()
+                        return
                     }
-                    else {
-                        
+                    if !self.userNameValid, let account = self.accountTextField.text, account.count > 0  {
+                        self.errorStackView.isHidden = false
+                        self.errorMessage.text = R.string.localizable.accountValidateError6.key.localized()
+                        return
                     }
+                    self.errorStackView.isHidden = true
+                    return
                 }
+                self.errorStackView.isHidden = false
+                self.errorMessage.text = R.string.localizable.passwordValidateError3.key.localized()
             }
-            
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         let consistent = Observable.combineLatest(self.passwordTextField.rx.text, self.confirmPasswordTextField.rx.text).map({$0 == $1})
@@ -258,18 +271,18 @@ extension RegisterViewController {
         
         let twoPasswordValid = Observable.combineLatest(passwordValid, confirmPasswordValid, consistent).map({ $0 && $1 && $2})
         
-        twoPasswordValid.subscribe(onNext: {[weak self] (validate) in
-            guard let `self` = self else { return }
-            
-            if validate {
-                self.confirmPasswordTextField.tailImage = #imageLiteral(resourceName: "check_complete")
-            }
-            else {
-                self.confirmPasswordTextField.tailImage = nil
-            }
-            
-            
-            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+//        twoPasswordValid.subscribe(onNext: {[weak self] (validate) in
+//            guard let `self` = self else { return }
+//
+//            if validate {
+//                self.confirmPasswordTextField.tailImage = #imageLiteral(resourceName: "check_complete")
+//            }
+//            else {
+//                self.confirmPasswordTextField.tailImage = nil
+//            }
+//
+//
+//            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         
         Observable.combineLatest(codeTextField.rx.text.orEmpty.map { $0.count == 4 }, accountTextField.rx.text.orEmpty.map { $0.count > 2 }, twoPasswordValid).subscribe(onNext: {[weak self] (validate) in

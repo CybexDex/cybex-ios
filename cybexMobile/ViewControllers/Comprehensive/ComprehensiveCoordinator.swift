@@ -115,7 +115,7 @@ extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
     func fetchHomeBannerInfos() {
         let url = AppConfiguration.HOME_BANNER_JSON + (Localize.currentLanguage() == "en" ? "en" : "zh")
         SimpleHTTPService.fetchHomeBannerInfos(url).done { (data) in
-            if let data = data {
+            if let data = data, data.count > 0 {
                 self.store.dispatch(FetchHomeBannerAction(data: data))
             }
             }.catch { (error) in

@@ -24,6 +24,7 @@ class DespositNameView: CybexBaseView {
             guard let projectName = project_name else { return }
             self.nameView.isHidden = false
             self.projectNameLabel.text = projectName
+            self.updateHeight()
         }
     }
     
@@ -39,6 +40,7 @@ class DespositNameView: CybexBaseView {
                                       NSAttributedString.Key.foregroundColor: color] as [NSAttributedString.Key : Any]
             let underlineAttributedString = NSAttributedString(string: address, attributes: underlineAttribute)
             self.protocolAddressLabel.attributedText = underlineAttributedString
+            self.updateHeight()
         }
     }
     

@@ -117,7 +117,6 @@ class CBKLineModel: ObjectDescriptable {
         self.towardsVolume = towardsVolume
         self.precision = precision
         
-        
     }
 }
 
