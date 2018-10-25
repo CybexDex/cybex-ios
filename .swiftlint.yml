@@ -1,0 +1,6 @@
+included:
+  - cybexMobile
+# excluded:
+cyclomatic_complexity:
+  - 10
+  - 30
