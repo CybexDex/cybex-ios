@@ -111,42 +111,43 @@ class OrderBookViewController: BaseViewController {
     func showMarketPrice() {
         guard let pair = pair , let _ = AssetConfiguration.market_base_assets.index(of: pair.base) else { return }
         
-        if let selectedIndex = app_data.filterQuoteAsset(pair.base).index(where: { (bucket) -> Bool in
-            return bucket.quote == pair.quote
+        if let selectedIndex = app_data.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+            return ticker.quote == pair.quote
         }) {
-            let markets = app_data.filterQuoteAsset(pair.base)
-            let data = markets[selectedIndex]
+            let tickers = app_data.filterQuoteAssetTicker(pair.base)
+            let data = tickers[selectedIndex]
             
-            let matrix = getCachedBucket(data)
+            self.tradeView.amount.text = data.latest.tradePrice.price
+            self.tradeView.amount.textColor = data.incre.color()
             
-            self.tradeView.amount.text = matrix.price.tradePrice.price
-            self.tradeView.amount.textColor = matrix.incre.color()
-            
-            if matrix.price == "" {
+            if data.latest == "0" {
                 self.tradeView.rmbPrice.text  = "≈¥"
                 return
             }
-            let (eth,cyb) = changeToETHAndCYB(pair.quote)
-            if eth == "0" && cyb == "0"{
-                self.tradeView.rmbPrice.text  = "≈¥"
-            }else if (eth == "0"){
-                if let cyb_eth = changeCYB_ETH().toDouble(),cyb_eth != 0{
-                    let eth_count = cyb.toDouble()! / cyb_eth
-                    if eth_count * app_data.eth_rmb_price == 0{
-                        self.tradeView.rmbPrice.text  = "≈¥"
-                    }else{
-                        self.tradeView.rmbPrice.text  = "≈¥" + (eth_count * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
-                    }
-                }else{
-                    self.tradeView.rmbPrice.text  = "≈¥"
-                }
-            }else{
-                if eth.toDouble()! * app_data.eth_rmb_price == 0 {
-                    self.tradeView.rmbPrice.text  = "≈¥"
-                }else{
-                    self.tradeView.rmbPrice.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
-                }
-            }
+            
+            self.tradeView.rmbPrice.text = "≈¥" + getAssetRMBPrice(pair.quote, base:pair.base).string(digits: 2, roundingMode: .down)
+
+//            let (eth,cyb) = changeToETHAndCYB(pair.quote)
+//            if eth == "0" && cyb == "0"{
+//                self.tradeView.rmbPrice.text  = "≈¥"
+//            }else if (eth == "0"){
+//                if let cyb_eth = changeCYB_ETH().toDouble(),cyb_eth != 0{
+//                    let eth_count = cyb.toDouble()! / cyb_eth
+//                    if eth_count * app_data.eth_rmb_price == 0{
+//                        self.tradeView.rmbPrice.text  = "≈¥"
+//                    }else{
+//                        self.tradeView.rmbPrice.text  = "≈¥" + (eth_count * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
+//                    }
+//                }else{
+//                    self.tradeView.rmbPrice.text  = "≈¥"
+//                }
+//            }else{
+//                if eth.toDouble()! * app_data.eth_rmb_price == 0 {
+//                    self.tradeView.rmbPrice.text  = "≈¥"
+//                }else{
+//                    self.tradeView.rmbPrice.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
+//                }
+//            }
         }
     }
 }

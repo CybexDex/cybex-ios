@@ -5,14 +5,10 @@ notifications:
 cache:
   directories:
   - Carthage
-  - NBLCommonModule/Carthage
 before_install:
-- pip install xUnique
-- wget $LIBRARYURL -O tmp.zip && unzip -o tmp.zip && rm tmp.zip
 - brew install lvillani/tap/carthage-copy-frameworks
 - bundle install
 - bundle update
-- bundle exec pod repo update --silent
 - carthage bootstrap --no-use-binaries --platform iOS --cache-builds
 - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 - cp .travis/AdHoc_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/

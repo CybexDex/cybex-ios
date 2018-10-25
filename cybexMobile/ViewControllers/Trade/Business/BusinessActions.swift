@@ -33,6 +33,10 @@ struct changePriceAction:Action {
     var price: String
 }
 
+struct ChangeAmountAction: Action {
+    var amount: String
+}
+
 struct adjustPriceAction:Action {
     var plus: Bool
     var pricision:Int

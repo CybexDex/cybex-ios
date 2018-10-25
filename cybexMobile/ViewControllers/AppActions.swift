@@ -75,7 +75,8 @@ struct AppState:StateType {
     var property: AppPropertyState
 }
 struct AppPropertyState {
-    var data:BehaviorRelay<[HomeBucket]> = BehaviorRelay(value: [])
+//    var data:BehaviorRelay<[HomeBucket]> = BehaviorRelay(value: [])
+    var ticker_data: BehaviorRelay<[Ticker]> = BehaviorRelay(value: [])
     
     var matrixs:BehaviorRelay<[Pair:BucketMatrix]> = BehaviorRelay(value:[:])
     
@@ -88,41 +89,30 @@ struct AppPropertyState {
     
     var assetInfo:[String:AssetInfo] = [:]
     
-    var rmb_prices : [RMBPrices] = []
+    var rmb_prices: [RMBPrices] = []
     
-    var eth_rmb_price : Double  = 0
+//    var eth_rmb_price: Double = 0
+    var cyb_rmb_price: Double = 0
     
     var importMarketLists : [ImportantMarketPair] = []
     
-    func filterQuoteAsset(_ base:String) -> [HomeBucket] {
-        
-        return self.data.value.filter({ (bucket) -> Bool in
-            return bucket.base == base
+    func filterQuoteAssetTicker(_ base: String) -> [Ticker] {
+        return self.ticker_data.value.filter({ (currency) -> Bool in
+            return currency.base == base
         })
-        
-        //    var data = self.data.value.filter({ (bucket) -> Bool in
-        //      return bucket.base == base
-        //    })
-        //
-        //    for market in self.importMarketLists {
-        //      if base == market.base {
-        //        data = data.filter({market.quotes.contains($0.quote)}) + data.filter({!market.quotes.contains($0.quote)})
-        //      }
-        //    }
-        //    return data
     }
     
-    func filterTopgainers() -> [HomeBucket] {
-        let counts = self.data.value.filter({ (bucket) -> Bool in
-            let matrix = getCachedBucket(bucket)
-            return matrix.incre == .greater
-        })
-        return counts.sorted { (bucket1, bucket2) -> Bool in
-            let matrixFirst = getCachedBucket(bucket1)
-            let matrixSecond = getCachedBucket(bucket2)
-            return matrixFirst.change.formatCurrency(digitNum: 2).toDouble()! > matrixSecond.change.formatCurrency(digitNum: 2).toDouble()!
+    func filterPopAssetsCurrency() -> [Ticker] {
+        let counts = self.ticker_data.value.filter { (currency) -> Bool in
+            return !currency.percent_change.contains("-")
         }
+        return counts.sorted(by: { (currency1, currency2) -> Bool in
+            let change1 = currency1.percent_change
+            let change2 = currency2.percent_change
+            return change1.toDecimal()! > change2.toDecimal()!
+        })
     }
+
 }
 
 struct HomeBucket:Equatable,Hashable {
@@ -190,6 +180,10 @@ struct MarketsFetched:Action {
     let assets:[Bucket]
 }
 
+struct TickerFetched: Action {
+    let asset: Ticker
+}
+
 struct kLineFetched:Action {
     let pair:Pair
     let stick:candlesticks
@@ -219,6 +213,7 @@ struct FecthUSDTToRmbPriceAction:Action{
 }
 
 typealias MarketDataCallback = ([Bucket]) -> Void
+typealias CurrencyDataCallback = (Ticker) -> Void
 
 class AppPropertyActionCreate: LoadingActionCreator {
     public typealias ActionCreator = (_ state: AppState, _ store: Store<AppState>) -> Action?
@@ -228,6 +223,7 @@ class AppPropertyActionCreate: LoadingActionCreator {
         _ store: Store <AppState>,
         _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
         ) -> Void
+    
     
     func fetchMarket(with sub:Bool = true, params:AssetPairQueryParams, priority: Operation.QueuePriority = .normal, callback:MarketDataCallback?) -> ActionCreator {
         return { state, store in
@@ -261,39 +257,36 @@ class AppPropertyActionCreate: LoadingActionCreator {
                                     assets.prepend(addAsset)
                                 }
                                 callback?(assets)
-                                
                             })
-                            
                         }
                         else {
                             callback?(assets)
                         }
-                        
                     }
                     else {
                         callback?([])
                     }
                 }
                 else {
-                    
                 }
             })
-            
-            
-            
             if sub {
-                //        let subRequest = SubscribeMarketRequest(ids: [params.firstAssetId, params.secondAssetId]) { response in
-                //          if let id = response as? Int {
-                //            store.dispatch(SubscribeSuccess(pair: Pair(base: params.firstAssetId, quote: params.secondAssetId), id: id))
-                //          }
-                //        }
-                //        CybexWebSocketService.shared.send(request: subRequest)
+     
             }
-            
             return nil
             
         }
     }
+    
+    func fetchCurrencyList(_ params: AssetPairQueryParams, priority: Operation.QueuePriority = .normal, callback: CurrencyDataCallback?) {
+        let request = GetTickerRequest(baseName: params.firstAssetId,quoteName: params.secondAssetId) { response in
+            if let callback = callback, let data = response as? Ticker {
+                callback(data)
+            }
+        }
+        CybexWebSocketService.shared.send(request: request, priority: priority)
+    }
+    
     
     func fetchingMarketList(_  params:AssetPairQueryParams, priority: Operation.QueuePriority = .normal, callback:CommonAnyCallback?) {
         

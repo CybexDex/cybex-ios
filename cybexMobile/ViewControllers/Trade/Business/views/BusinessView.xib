@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -345,7 +345,7 @@
                                 <userDefinedRuntimeAttribute type="string" keyPath="locali" value="trade_fee"/>
                             </userDefinedRuntimeAttributes>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zvn-7D-O3W">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" text="--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zvn-7D-O3W">
                             <rect key="frame" x="0.0" y="51" width="13" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -360,8 +360,8 @@
                             <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JwC-XK-pdl">
-                            <rect key="frame" x="336.5" y="51" width="13.5" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JwC-XK-pdl">
+                            <rect key="frame" x="23" y="51" width="327" height="17"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -384,6 +384,7 @@
                         <constraint firstItem="05y-DO-DFx" firstAttribute="leading" secondItem="JI7-RF-YE4" secondAttribute="leading" id="NAN-yz-gI1"/>
                         <constraint firstItem="05y-DO-DFx" firstAttribute="top" secondItem="JI7-RF-YE4" secondAttribute="top" constant="3" id="WH0-Gt-unf"/>
                         <constraint firstItem="ieb-C0-pfZ" firstAttribute="top" secondItem="05y-DO-DFx" secondAttribute="bottom" constant="8" id="a1C-hv-rRb"/>
+                        <constraint firstItem="JwC-XK-pdl" firstAttribute="leading" secondItem="Zvn-7D-O3W" secondAttribute="trailing" constant="10" id="a5M-TE-F60"/>
                         <constraint firstAttribute="trailing" secondItem="Pz1-mT-c4i" secondAttribute="trailing" id="bwa-HQ-i7W"/>
                         <constraint firstAttribute="trailing" secondItem="7C3-1T-dKy" secondAttribute="trailing" id="dx6-hS-Cro"/>
                         <constraint firstItem="ieb-C0-pfZ" firstAttribute="leading" secondItem="JI7-RF-YE4" secondAttribute="leading" id="fzJ-aS-I1T"/>

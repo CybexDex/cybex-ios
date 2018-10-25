@@ -13,6 +13,7 @@ import ReSwift
 import SwiftTheme
 import TinyConstraints
 import Localize_Swift
+import cybex_ios_core_cpp
 
 enum openedOrdersViewControllerPageType {
     case exchange
@@ -58,16 +59,6 @@ class OpenedOrdersViewController: BaseViewController {
                 account_view.sectionView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key
             }
         })
-        
-        //        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] notification in
-        //            guard let `self` = self else { return }
-        //            if let account_view = self.containerView as? MyOpenedOrdersView {
-        //                account_view.tableView.reloadData()
-        //            }
-        //            else if let accountView = self.containerView as? AccountOpenedOrdersView {
-        //                accountView.tableView.reloadData()
-        //            }
-        //        })
     }
     
     func showOrderInfo(){

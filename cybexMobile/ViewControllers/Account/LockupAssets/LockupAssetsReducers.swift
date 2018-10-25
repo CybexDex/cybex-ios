@@ -29,23 +29,27 @@ func LockupAssetsPropertyReducer(_ state: LockupAssetsPropertyState?, action: Ac
 
 func lockupAssteToLockUpAssetsDate(datas : [LockUpAssetsMData]) -> LockUpAssetsVMData{
     var sources = [LockupAssteData]()
-    let value   = app_state.property.eth_rmb_price
+//    let value = app_state.property.eth_rmb_price
     for data in datas{
         let quote  = data.balance.assetID
         let amount = data.balance.amount
         if let assetsInfo = app_data.assetInfo[quote] {
-            let result = changeToETHAndCYB(quote)
+//            let result = changeToETHAndCYB(quote)
             // 目前显示的是针对ETH的换算
             var count = "--"
             var price = "≈¥--"
-            var name = ""
-            if result.eth != "",let amount_double = Double(amount) {
-                count = (amount_double / pow(10,Double(assetsInfo.precision))).string(digits: assetsInfo.precision)
-                if let count_double = Double(count) ,let resultEth = Double(result.eth) {
-                    price = "≈¥" + (count_double * resultEth * value).string(digits: 2)
-                }
-                name = assetsInfo.symbol
-            }
+            let name = assetsInfo.symbol
+            
+            count = getRealAmountDouble(quote, amount: amount).string(digits: assetsInfo.precision, roundingMode: .down)
+            price = "≈¥" + (Decimal(getAssetRMBPrice(quote)) * getRealAmount(quote, amount: amount)).string(digits: 2, roundingMode: .down)
+            
+//            if result.eth != "",let amount_double = Double(amount) {
+//                count = (amount_double / pow(10,Double(assetsInfo.precision))).string(digits: assetsInfo.precision)
+//                if let count_double = Double(count) ,let resultEth = Double(result.eth) {
+//                    price = "≈¥" + (count_double * resultEth * value).string(digits: 2)
+//                }
+//                name = assetsInfo.symbol
+//            }
             let icon = AppConfiguration.SERVER_ICONS_BASE_URLString + data.balance.assetID.replacingOccurrences(of: ".", with: "_") + "_grey.png"
             let vesting_duration_seconds = data.vesting_policy.vesting_duration_seconds.toDouble() ?? 0
             if let begin_time = data.vesting_policy.begin_timestamp.dateFromISO8601 {
@@ -59,8 +63,6 @@ func lockupAssteToLockUpAssetsDate(datas : [LockUpAssetsMData]) -> LockUpAssetsV
         else {
             continue
         }
-        
-        
     }
     return LockUpAssetsVMData(datas: sources)
 }

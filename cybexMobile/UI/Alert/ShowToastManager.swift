@@ -121,10 +121,10 @@ class ShowToastManager {
         self.superView?.addSubview(showView!)
         showView?.content       = data
         let leading : CGFloat   = showType == .sheet_image ? 0 : 52
-        let trailing : CGFloat  = showType == .sheet_image ? 0 : 52
+        let trailing : CGFloat  = showType == .sheet_image ? 0 : -52
         if animationShow == .none || animationShow == .fadeIn_Out || animationShow == .small_big{
-            showView?.leftToSuperview(nil, offset: leading, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
-            showView?.rightToSuperview(nil, offset: trailing, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
+            showView?.leftToSuperview(nil, offset: leading, relation: .equal, priority: .required, isActive: true, usingSafeArea: false)
+            showView?.rightToSuperview(nil, offset: trailing, relation: .equal, priority: .required, isActive: true, usingSafeArea: false)
             showView?.centerXToSuperview(nil, offset: 0, priority: .required, isActive: true, usingSafeArea: true)
             showView?.centerYToSuperview(nil, offset: -32, priority: .required, isActive: true, usingSafeArea: true)
             self.superView?.layoutIfNeeded()
@@ -152,7 +152,7 @@ class ShowToastManager {
             if showType == .sheet_image{
                 showViewTop = showView?.topToSuperview(nil, offset: top, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
             }else{
-                showView?.centerXToSuperview(nil, offset: 0,  priority: .required, isActive: true, usingSafeArea: true)
+//                showView?.centerXToSuperview(nil, offset: 0,  priority: .required, isActive: true, usingSafeArea: true)
                 showViewTop = showView?.centerYToSuperview(nil, offset: top, priority: .required, isActive: true, usingSafeArea: true)
             }
             self.superView?.layoutIfNeeded()

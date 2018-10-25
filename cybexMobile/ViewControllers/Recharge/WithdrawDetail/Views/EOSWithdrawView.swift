@@ -24,19 +24,37 @@ class EOSWithdrawView: UIView {
     @IBOutlet weak var copyAddress: UIButton!
     @IBOutlet weak var resetAddress: UIButton!
     
+    @IBOutlet weak var projectInfoView: DespositNameView!
     
-  var data : Any?{
-    didSet{
-      if let data = data as? AccountAddressRecord{
-        let address = data.address
-        self.memo.text = address.components(separatedBy: "[").last?.replacingOccurrences(of: "]", with: "")
-        self.account.text = address.components(separatedBy: "[").first
-      }
+    var data : Any?{
+        didSet{
+            if let data = data as? AccountAddressRecord{
+                self.memo.text = data.address.components(separatedBy: "[").last?.replacingOccurrences(of: "]", with: "")
+                self.account.text = data.address.components(separatedBy: "[").first
+                
+                guard let projectInfo = data.projectInfo else {
+                    self.projectInfoView.isHidden = true
+                    return
+                }
+                if let projectName = projectInfo.projectName {
+                    self.projectInfoView.isHidden = false
+                    projectInfoView.project_name = projectName
+                }
+                if let address = projectInfo.contractAddress {
+                    self.projectInfoView.isHidden = false
+                    projectInfoView.url = address
+                }
+                if let addressURL = projectInfo.contractExplorerUrl {
+                    projectInfoView.addressURL = addressURL
+                }
+                self.updateHeight()
+
+            }
+        }
     }
-  }
     
     @IBAction func copyAccount(_ sender: Any) {
-      self.next?.sendEventWith(event_name.copyAccount.rawValue, userinfo: ["account":self.account.text ?? ""])
+        self.next?.sendEventWith(event_name.copyAccount.rawValue, userinfo: ["account":self.account.text ?? ""])
     }
     
     @IBAction func copyCode(_ sender: Any) {
@@ -46,15 +64,15 @@ class EOSWithdrawView: UIView {
     @IBAction func resetCode(_ sender: Any) {
         self.next?.sendEventWith(event_name.resetCode.rawValue, userinfo: [:])
     }
-  
-  
-  func setup(){
-    if UIScreen.main.bounds.width == 320 {
-      resetAddress.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
-      copyAddress.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
+    
+    
+    func setup(){
+        if UIScreen.main.bounds.width == 320 {
+            resetAddress.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
+            copyAddress.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
+        }
     }
-  }
-  
+    
     
     fileprivate func updateHeight(){
         layoutIfNeeded()
@@ -81,13 +99,13 @@ class EOSWithdrawView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadFromXIB()
-      setup()
+        setup()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadFromXIB()
-      setup()
+        setup()
     }
     
     

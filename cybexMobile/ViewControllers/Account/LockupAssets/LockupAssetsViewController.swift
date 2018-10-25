@@ -38,7 +38,7 @@ class LockupAssetsViewController: BaseViewController {
     }
     
     override func configureObserveState() {
-        self.coordinator?.state.property.data.asObservable().distinctUntilChanged().skip(1).subscribe(onNext:{[weak self] (s) in
+        self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext:{[weak self] (s) in
             guard let `self` = self else{return}
             self.endLoading()
             self.tableView.reloadData()

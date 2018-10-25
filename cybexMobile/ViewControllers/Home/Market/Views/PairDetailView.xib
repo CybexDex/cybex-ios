@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,6 +16,7 @@
                 <outlet property="bulking" destination="4tL-70-xwn" id="oT2-CT-JQr"/>
                 <outlet property="bulkingIcon" destination="1cc-zy-VLA" id="fLf-6e-wvh"/>
                 <outlet property="closeLabel" destination="TVQ-NZ-nrt" id="IQE-Vt-iaV"/>
+                <outlet property="detailDateView" destination="CDt-Ry-rPa" id="oVu-ma-wFi"/>
                 <outlet property="highLabel" destination="EES-CT-zlS" id="XYC-ez-1BF"/>
                 <outlet property="lowLabel" destination="hkD-bz-ook" id="Rkp-oY-GOW"/>
                 <outlet property="openLabel" destination="zla-XZ-NPL" id="Ffi-IL-sJ4"/>
@@ -168,10 +169,15 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="bA4-Op-Hr8"/>
                 </stackView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CDt-Ry-rPa" customClass="PairDetailDateViewView" customModule="cybexMobile" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="42" width="375" height="62"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="CDt-Ry-rPa" secondAttribute="bottom" id="0Ht-NP-OvI"/>
                 <constraint firstItem="L3T-Fw-rlr" firstAttribute="trailing" secondItem="xdj-Mu-sHy" secondAttribute="trailing" id="49L-gh-cgZ"/>
+                <constraint firstItem="CDt-Ry-rPa" firstAttribute="top" secondItem="bOG-Uk-SPP" secondAttribute="top" constant="42" id="6py-N4-piS"/>
                 <constraint firstItem="xdj-Mu-sHy" firstAttribute="leading" secondItem="BWl-U1-u5v" secondAttribute="trailing" id="BhT-fW-70q"/>
                 <constraint firstAttribute="bottom" secondItem="ut1-r4-ReW" secondAttribute="bottom" constant="12" id="GJC-WA-2tE"/>
                 <constraint firstItem="xdj-Mu-sHy" firstAttribute="width" secondItem="ut1-r4-ReW" secondAttribute="width" id="J2g-a0-epM"/>
@@ -181,7 +187,9 @@
                 <constraint firstItem="ut1-r4-ReW" firstAttribute="leading" secondItem="L3T-Fw-rlr" secondAttribute="leading" id="TDk-Fh-g92"/>
                 <constraint firstItem="BWl-U1-u5v" firstAttribute="width" secondItem="ut1-r4-ReW" secondAttribute="width" id="ZWB-tP-EwF"/>
                 <constraint firstItem="xdj-Mu-sHy" firstAttribute="top" secondItem="L3T-Fw-rlr" secondAttribute="top" id="aLW-fm-K1w"/>
+                <constraint firstItem="CDt-Ry-rPa" firstAttribute="leading" secondItem="L3T-Fw-rlr" secondAttribute="leading" id="fJ3-rw-fBp"/>
                 <constraint firstItem="BWl-U1-u5v" firstAttribute="leading" secondItem="ut1-r4-ReW" secondAttribute="trailing" id="gHE-E9-rAn"/>
+                <constraint firstItem="L3T-Fw-rlr" firstAttribute="trailing" secondItem="CDt-Ry-rPa" secondAttribute="trailing" id="sec-dd-xvP"/>
                 <constraint firstItem="BWl-U1-u5v" firstAttribute="top" secondItem="L3T-Fw-rlr" secondAttribute="top" id="tgC-qa-LOk"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

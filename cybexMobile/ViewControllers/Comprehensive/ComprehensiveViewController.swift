@@ -11,10 +11,11 @@ import RxSwift
 import RxCocoa
 import ReSwift
 import Localize_Swift
+import SwifterSwift
 
 class ComprehensiveViewController: BaseViewController {
-
-	var coordinator: (ComprehensiveCoordinatorProtocol & ComprehensiveStateManagerProtocol)?
+    
+    var coordinator: (ComprehensiveCoordinatorProtocol & ComprehensiveStateManagerProtocol)?
     
     @IBOutlet weak var contentView: ComprehensiveView!
     override func viewDidLoad() {
@@ -34,7 +35,7 @@ class ComprehensiveViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.setupNavi()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -48,7 +49,7 @@ class ComprehensiveViewController: BaseViewController {
         self.startLoading()
         self.coordinator?.setupChildrenVC(self)
     }
-
+    
     func setupData() {
         self.coordinator?.fetchData()
     }
@@ -60,7 +61,7 @@ class ComprehensiveViewController: BaseViewController {
     override func configureObserveState() {
         self.coordinator?.state.pageState.asObservable().distinctUntilChanged().subscribe(onNext: {[weak self] (state) in
             guard let `self` = self else { return }
-                        
+            
             switch state {
             case .initial:
                 self.coordinator?.switchPageState(PageState.refresh(type: PageRefreshType.initial))
@@ -77,54 +78,38 @@ class ComprehensiveViewController: BaseViewController {
                 self.coordinator?.switchPageState(.loading(reason: PageLoadReason.manualLoadMore))
                 
             case .noMore:
-//                self.stopInfiniteScrolling(self.tableView, haveNoMore: true)
                 break
                 
             case .noData:
-//                self.view.showNoData(<#title#>, icon: <#imageName#>)
                 break
                 
             case .normal(let reason):
-//                self.view.hiddenNoData()
-//
-//                if reason == PageLoadReason.manualLoadMore {
-//                    self.stopInfiniteScrolling(self.tableView, haveNoMore: false)
-//                }
-//                else if reason == PageLoadReason.manualRefresh {
-//                    self.stopPullRefresh(self.tableView)
-//                }
+                
                 break
                 
             case .error(let error, let reason):
                 self.showToastBox(false, message: error.localizedDescription)
-                
-//                if reason == PageLoadReason.manualLoadMore {
-//                    self.stopInfiniteScrolling(self.tableView, haveNoMore: false)
-//                }
-//                else if reason == PageLoadReason.manualRefresh {
-//                    self.stopPullRefresh(self.tableView)
-//                }
             }
         }).disposed(by: disposeBag)
         
-        app_data.data.asObservable().filter { (bucket) -> Bool in
-            return bucket.count == AssetConfiguration.shared.asset_ids.count
-            }.subscribe(onNext: { [weak self](bucket) in
+        app_data.ticker_data.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
+            return tickers.count == AssetConfiguration.shared.asset_ids.count
+            }.subscribe(onNext: { [weak self](tickers) in
                 guard let `self` = self else { return }
-                if let hotPairs = self.coordinator?.state.hotPairs.value {
-                    var bucketModel = [HomeBucket]()
+                if let hotPairs = self.coordinator?.state.hotPairs.value, self.isVisible {
+                    var tickerModel = [Ticker]()
                     for pair in hotPairs {
-                        if let hotPair = bucket.filter({ (homeBucket) -> Bool in
-                            return homeBucket.base == pair.base && homeBucket.quote == pair.quote
+                        if let hotPair = tickers.filter({ (ticker) -> Bool in
+                            return ticker.base == pair.base && ticker.quote == pair.quote
                         }).first {
-                            bucketModel.append(hotPair)
+                            tickerModel.append(hotPair)
                         }
                     }
                     // MARK: 交易对
                     self.contentView.hotAssetsView.isHidden = false
-                    self.contentView.hotAssetsView.adapterModelToHotAssetsView(bucketModel)
+                    self.contentView.hotAssetsView.adapterModelToHotAssetsView(tickerModel)
                 }
-            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+                }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         self.coordinator?.state.announces.asObservable().subscribe(onNext: { [weak self](announces) in
             guard let `self` = self, let announces = announces else { return }
@@ -133,7 +118,7 @@ class ComprehensiveViewController: BaseViewController {
             })
             self.contentView.announceView.scrollLableView.data = titles
             
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         self.coordinator?.state.banners.asObservable().subscribe(onNext: { [weak self](banners) in
             guard let `self` = self, let bannerInfos = banners else { return }
@@ -159,11 +144,15 @@ class ComprehensiveViewController: BaseViewController {
                 self.endLoading()
             }
             
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
         NotificationCenter.default.addObserver(forName: NotificationName.NetWorkChanged, object: nil, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
-            self.coordinator?.fetchData()
+            SwifterSwift.delay(milliseconds: 1000, completion: {
+                main {
+                    self.coordinator?.fetchData()
+                }
+            })
         }
     }
 }
@@ -191,7 +180,7 @@ extension ComprehensiveViewController {
     }
     
     @objc func HotAssetViewDidClicked(_ data: [String: Any]) {
-        if let data = data["data"] as? HomeBucket {
+        if let data = data["data"] as? Ticker {
             self.coordinator?.openMarketList(Pair(base: data.base, quote: data.quote))
         }
     }

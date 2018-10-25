@@ -13,7 +13,7 @@ import Localize_Swift
 import SwiftTheme
 import Reachability
 import SwiftyUserDefaults
-import BeareadToast
+import BeareadToast_swift
 import IQKeyboardManagerSwift
 import Kingfisher
 
@@ -23,7 +23,6 @@ import SwiftRichString
 import SwiftyBeaver
 import AlamofireNetworkActivityLogger
 import NBLCommonModule
-import URLNavigator
 
 let log = SwiftyBeaver.self
 let reachability = Reachability()!
@@ -38,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Fabric.with([Crashlytics.self, Answers.self])
+        #if DEBUG
+        Fabric.sharedSDK().debug = true
+        #endif
         URLNavigationMap.initialize(navigator: navigator)
         
         setupAnalytics()
@@ -87,13 +89,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ZYNetworkAccessibity.start()
         
         NotificationCenter.default.addObserver(self, selector: #selector(handlerNetworkChanged(note:)), name: .reachabilityChanged, object: reachability)
-
-//        RealReachability.sharedInstance().startNotifier()
-//        NotificationCenter.default.addObserver(forName: NSNotification.Name.realReachabilityChanged, object: nil, queue: nil) { (notifi) in
-//            main {
-//                self.handlerNetworkChanged()
-//            }
-//        }
+        
+        //        RealReachability.sharedInstance().startNotifier()
+        //        NotificationCenter.default.addObserver(forName: NSNotification.Name.realReachabilityChanged, object: nil, queue: nil) { (notifi) in
+        //            main {
+        //                self.handlerNetworkChanged()
+        //            }
+        //        }
         try? reachability.startNotifier()
         
         SimpleHTTPService.fetchHomeHotAssetJson()
@@ -120,12 +122,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupAnalytics() {
-        UMCommonLogManager.setUp()
         MobClick.setCrashReportEnabled(true)
         UMConfigure.setLogEnabled(true)
         UMConfigure.setEncryptEnabled(true)
         UMConfigure.initWithAppkey(UM_APPKEY, channel: Bundle.main.bundleIdentifier!)
-        
+
     }
     
     
@@ -206,7 +207,7 @@ extension AppDelegate {
             Localize.setCurrentLanguage(Defaults[.language])
         }
         
-        app_data.data.asObservable()
+        app_data.ticker_data.asObservable()
             .subscribe(onNext: { (s) in
                 if let vc = app_coodinator.startLoadingVC, !(vc is HomeViewController) {
                     app_coodinator.startLoadingVC = nil
@@ -217,7 +218,7 @@ extension AppDelegate {
     
     @objc func handlerNetworkChanged(note: Notification) {
         let reachability = note.object as! Reachability
-
+        
         switch reachability.connection {
         case .none:
             CybexWebSocketService.shared.disconnect()
@@ -248,6 +249,7 @@ extension AppDelegate {
                     vc.startLoading()
                 }
                 CybexWebSocketService.shared.connect()
+                
                 NotificationCenter.default.post(name: NotificationName.NetWorkChanged, object: nil)
             }
         }

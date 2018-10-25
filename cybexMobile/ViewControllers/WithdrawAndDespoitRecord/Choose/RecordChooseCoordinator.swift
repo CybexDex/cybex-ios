@@ -9,8 +9,8 @@
 import UIKit
 import ReSwift
 import NBLCommonModule
-import Async
 import SwiftyJSON
+import cybex_ios_core_cpp
 
 protocol RecordChooseCoordinatorProtocol {
 }
@@ -54,7 +54,7 @@ extension RecordChooseCoordinator: RecordChooseCoordinatorProtocol {
 
 extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
     func switchPageState(_ state:PageState) {
-        Async.main {
+        DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }
     }
