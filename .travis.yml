@@ -9,7 +9,6 @@ before_install:
 - brew install lvillani/tap/carthage-copy-frameworks
 - bundle install
 - bundle update
-- carthage bootstrap --no-use-binaries --platform iOS --cache-builds
 - mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
 - cp .travis/AdHoc_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
 - cp .travis/AppStore_cybex.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
