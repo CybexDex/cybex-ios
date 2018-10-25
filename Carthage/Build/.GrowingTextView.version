@@ -1,0 +1,9 @@
+{
+  "commitish" : "0.6.1",
+  "iOS" : [
+    {
+      "name" : "GrowingTextView",
+      "hash" : "b022b1e37c979accb8e345471b5b6727822033233ef149534f869a16fadd7830"
+    }
+  ]
+}

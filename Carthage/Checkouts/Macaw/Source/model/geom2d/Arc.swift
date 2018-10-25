@@ -1,0 +1,20 @@
+open class Arc: Locus {
+
+    public let ellipse: Ellipse
+    public let shift: Double
+    public let extent: Double
+
+    public init(ellipse: Ellipse, shift: Double = 0, extent: Double = 0) {
+        self.ellipse = ellipse
+        self.shift = shift
+        self.extent = extent
+    }
+
+    override open func bounds() -> Rect {
+        return Rect(
+            x: ellipse.cx - ellipse.rx,
+            y: ellipse.cy - ellipse.ry,
+            w: ellipse.rx * 2.0,
+            h: ellipse.ry * 2.0)
+    }
+}

@@ -1,0 +1,17 @@
+{
+  "commitish" : "2074d687dac6f30815f29b2f7d918b0fcc06f2c3",
+  "iOS" : [
+    {
+      "name" : "ApolloSQLite",
+      "hash" : "0e36429a6774da42a574aad233c1baa2d7b7fd1d5047ac5cba0cc98bd67e36eb"
+    },
+    {
+      "name" : "ApolloWebSocket",
+      "hash" : "7cd22e1e5fc5e451c25525704950791decaf89517303833d0e7efbaabdeb01d6"
+    },
+    {
+      "name" : "Apollo",
+      "hash" : "b9db887047af44db1292d7b50108f1c9d1b5115e3f72580fbe877e1b4cda74ea"
+    }
+  ]
+}

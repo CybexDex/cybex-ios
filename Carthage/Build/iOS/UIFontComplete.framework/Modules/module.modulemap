@@ -1,0 +1,4 @@
+framework module UIFontComplete {
+  header "UIFontComplete-Swift.h"
+  requires objc
+}

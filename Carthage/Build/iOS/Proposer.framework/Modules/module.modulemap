@@ -1,0 +1,11 @@
+framework module Proposer {
+  umbrella header "Proposer.h"
+
+  export *
+  module * { export * }
+}
+
+module Proposer.Swift {
+    header "Proposer-Swift.h"
+    requires objc
+}

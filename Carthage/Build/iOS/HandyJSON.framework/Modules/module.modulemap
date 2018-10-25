@@ -1,0 +1,11 @@
+framework module HandyJSON {
+  umbrella header "HandyJSON.h"
+
+  export *
+  module * { export * }
+}
+
+module HandyJSON.Swift {
+    header "HandyJSON-Swift.h"
+    requires objc
+}

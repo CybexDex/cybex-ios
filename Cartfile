@@ -15,7 +15,6 @@ git "https://github.com/phpmaple/NBLCommonModule" "master"
 git "https://github.com/phpmaple/BeareadToast" "master"
 github "rushisangani/BiometricAuthentication"
 github "nixzhu/Proposer"
-github "devxoul/URLNavigator"
 github "krzyzanowskim/CryptoSwift"
 github "SwiftyJSON/SwiftyJSON" ~> 4.0
 github "Hearst-DD/ObjectMapper" ~> 3.4
