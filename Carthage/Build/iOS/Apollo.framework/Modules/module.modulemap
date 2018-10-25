@@ -1,0 +1,11 @@
+framework module Apollo {
+  umbrella header "Apollo.h"
+
+  export *
+  module * { export * }
+}
+
+module Apollo.Swift {
+    header "Apollo-Swift.h"
+    requires objc
+}

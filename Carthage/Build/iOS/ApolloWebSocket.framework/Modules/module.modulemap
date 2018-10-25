@@ -1,0 +1,4 @@
+framework module ApolloWebSocket {
+  header "ApolloWebSocket-Swift.h"
+  requires objc
+}

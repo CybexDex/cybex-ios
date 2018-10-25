@@ -1,0 +1,9 @@
+{
+  "commitish" : "0.5.7",
+  "iOS" : [
+    {
+      "name" : "Repeat",
+      "hash" : "1659a0ea743d92e2db745d7766269d86a5b7fd29fe051516c5fe5c9e13d6059c"
+    }
+  ]
+}

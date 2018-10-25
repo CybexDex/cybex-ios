@@ -1,0 +1,18 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "1.0.0",
+  "iOS" : [
+    {
+      "name" : "UMAnalytics",
+      "hash" : "b08a8ce86cad29b1968e8642d1420be4650e24d173e1bdb7ae7d80716959f09e"
+    }
+  ]
+}

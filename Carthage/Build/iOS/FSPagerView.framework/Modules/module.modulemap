@@ -1,0 +1,11 @@
+framework module FSPagerView {
+  umbrella header "FSPagerView.h"
+
+  export *
+  module * { export * }
+}
+
+module FSPagerView.Swift {
+    header "FSPagerView-Swift.h"
+    requires objc
+}

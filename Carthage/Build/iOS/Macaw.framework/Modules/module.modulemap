@@ -1,0 +1,4 @@
+framework module Macaw {
+  header "Macaw-Swift.h"
+  requires objc
+}

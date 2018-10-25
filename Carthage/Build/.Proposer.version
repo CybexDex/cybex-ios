@@ -1,0 +1,9 @@
+{
+  "commitish" : "1.2.1",
+  "iOS" : [
+    {
+      "name" : "Proposer",
+      "hash" : "68ab5e15453e64f9e9f41f13a4ae19e29de4a71e5de2d740b19ae15991c867ce"
+    }
+  ]
+}

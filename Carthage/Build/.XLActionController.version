@@ -1,0 +1,9 @@
+{
+  "commitish" : "4.1.0",
+  "iOS" : [
+    {
+      "name" : "XLActionController",
+      "hash" : "8209bbb0f8af34786b7395f7361f4eaff96dcc2881009fef813bfe759fdf664b"
+    }
+  ]
+}

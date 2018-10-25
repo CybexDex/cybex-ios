@@ -1,0 +1,9 @@
+{
+  "commitish" : "1.1.5",
+  "iOS" : [
+    {
+      "name" : "KMNavigationBarTransition",
+      "hash" : "5f44241273c001c22af4894250e324a9f94c72cc58c3ddc16e8f1e0f9e01d8ed"
+    }
+  ]
+}

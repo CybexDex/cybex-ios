@@ -1,0 +1,9 @@
+{
+  "commitish" : "3.0.0",
+  "iOS" : [
+    {
+      "name" : "UIFontComplete",
+      "hash" : "f46059c8f2744cea942bc2757c0a511c090a1c68b7e19872b63597f78192a596"
+    }
+  ]
+}

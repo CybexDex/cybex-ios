@@ -1,0 +1,11 @@
+framework module EFQRCode {
+  umbrella header "EFQRCode.h"
+
+  export *
+  module * { export * }
+}
+
+module EFQRCode.Swift {
+    header "EFQRCode-Swift.h"
+    requires objc
+}

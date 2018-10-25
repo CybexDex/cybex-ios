@@ -1,0 +1,4 @@
+framework module SwiftRichString {
+  header "SwiftRichString-Swift.h"
+  requires objc
+}

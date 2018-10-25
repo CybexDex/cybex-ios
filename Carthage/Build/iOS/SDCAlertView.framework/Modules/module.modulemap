@@ -1,0 +1,11 @@
+framework module SDCAlertView {
+  umbrella header "SDCAlertView.h"
+
+  export *
+  module * { export * }
+}
+
+module SDCAlertView.Swift {
+    header "SDCAlertView-Swift.h"
+    requires objc
+}
