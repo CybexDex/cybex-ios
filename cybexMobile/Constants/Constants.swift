@@ -18,7 +18,7 @@ var app_data: AppPropertyState {
 var app_state: AppState {
     return AppConfiguration.shared.appCoordinator.state
 }
-var app_coodinator:AppCoordinator {
+var app_coodinator: AppCoordinator {
     return AppConfiguration.shared.appCoordinator
 }
 
@@ -29,45 +29,45 @@ struct NotificationName {
 struct AppConfiguration {
     static let shared = AppConfiguration()
     var appCoordinator: AppCoordinator!
-    var chainID:String = ""
-    
+    var chainID: String = ""
+
     private init() {
         let rootVC = BaseTabbarViewController()
         appCoordinator = AppCoordinator(rootVC: rootVC)
     }
-    
+
     static let APPID = ""
     static var SERVER_BASE_URLString = "https://app.cybex.io/"
     static var SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
     static var GATEWAY_URLString = "https://gateway.cybex.io/gateway"
-    static var ETO_MG_BASE_URLString = URL(string:"https://eto.cybex.io/api")!
-    static var ETO_MG_BASE_TEST_URLString = URL(string:"https://ieo-apitest.cybex.io/api")!
+    static var ETO_MG_BASE_URLString = URL(string: "https://eto.cybex.io/api")!
+    static var ETO_MG_BASE_TEST_URLString = URL(string: "https://ieo-apitest.cybex.io/api")!
     static var GATEWAY_ID = "CybexGateway" //CybexGatewayDev
-    
+
     static var SERVER_ICONS_BASE_URLString = "https://app.cybex.io/icons/"
-    
+
     static var SERVER_REGISTER_PINCODE_URLString: String {
         return SERVER_REGISTER_BASE_URLString + "captcha"
     }
     static var SERVER_REGISTER_URLString: String {
         return SERVER_REGISTER_BASE_URLString + "register"
     }
-    
+
     static var SERVER_VERSION_URLString: String {
         return SERVER_BASE_URLString + "iOS_update.json"
     }
-    
+
     static var SERVER_VERSION_APPSTORE_URLString: String {
         return SERVER_BASE_URLString + "iOS_store_update.json"
     }
-    
+
     static var SERVER_MARKETLIST_URLString: String {
         return SERVER_BASE_URLString + "market_list?base="
     }
-    
+
     static var FAQ_NIGHT_THEME            = "https://cybex.io/token_applications/new?style=night"
     static var FAQ_LIGHT_THEME            = "https://cybex.io/token_applications/new"
-    
+
     static var ETH_PRICE: String {
         return SERVER_BASE_URLString + "price"
     }
@@ -87,43 +87,43 @@ struct AppConfiguration {
     static var DEPOSIT_MSG: String {
         return SERVER_BASE_URLString + "json/deposit_msg.json"
     }
-    
+
     static var MARKETLISTS: String {
         return  SERVER_BASE_URLString + "json/marketlists.json"
     }
-    
+
     static var RECODE_BASE_URLString = "https://gateway-query.cybex.io/"
     static var RECODE_LOGIN = RECODE_BASE_URLString + "login"
     static var RECODE_RECODES = RECODE_BASE_URLString + "records"
     static var RECODE_ACCOUNT_ASSET = RECODE_BASE_URLString + "account-assets"
-    
+
     static var HELP_NIGHT_URL = "http://47.75.154.39:3009/cybexnight?lang="
     static var HELP_LIGHT_URL = "http://47.75.154.39:3009/cybexday?lang="
-    
+
     static var GATEWAY_TEST_URLStringa = "https://gatewaytest.cybex.io/gateway"
     static var SERVER_REGISTER_BASE_TEST_URLString = "https://faucet.51nebula.com/"
     static var SERVER_TEST_BASE_URLString = "http://47.91.242.71:3039/"
-    
+
     static var BASE_SETTING_JSON: String {
         return SERVER_BASE_URLString + "json/settings.json"
     }
-    
+
     static var HOTASSETS_JSON: String {
         return SERVER_BASE_URLString + "v1/api/hotpair"
     }
-    
+
     static var ANNOUNCE_JSON: String {
         return SERVER_BASE_URLString + "v1/api/announce?lang="
     }
-    
+
     static var HOME_ITEMS_JSON: String {
         return SERVER_BASE_URLString + "v1/api/app_sublinks?lang="
     }
-    
+
     static var HOME_BANNER_JSON: String {
         return SERVER_BASE_URLString + "v1/api/banners?lang="
     }
-    
+
     static var BLOCKEXPLORER_JSON: String {
         return SERVER_BASE_URLString + "json/blockexplorer.json"
     }
@@ -134,33 +134,33 @@ enum exchangeType {
     case sell
 }
 
-enum indicator:String {
+enum indicator: String {
     case none
     case macd = "MACD"
     case ema = "EMA"
     case ma = "MA"
     case boll = "BOLL"
-    
-    static let all:[indicator] = [.ma, .ema, .macd, .boll]
+
+    static let all: [indicator] = [.ma, .ema, .macd, .boll]
 }
 
-enum candlesticks:Double,Hashable {
+enum candlesticks: Double, Hashable {
     case five_minute = 300.0
     case one_hour = 3600.0
     case one_day = 86400.0
-    
+
     static func ==(lhs: candlesticks, rhs: candlesticks) -> Bool {
         return lhs.rawValue == rhs.rawValue
     }
-    
+
     var hashValue: Int {
         return self.rawValue.int
     }
-    
-    static let all:[candlesticks] = [.five_minute, .one_hour, .one_day]
+
+    static let all: [candlesticks] = [.five_minute, .one_hour, .one_day]
 }
 
-enum ChainTypesObjectType:Int {
+enum ChainTypesObjectType: Int {
     case null = 0
     case base
     case account
@@ -181,7 +181,7 @@ enum ChainTypesObjectType:Int {
     case crowdfund_contract
 }
 
-enum ChainTypesOperations:Int {
+enum ChainTypesOperations: Int {
     case transfer = 0
     case limit_order_create
     case limit_order_cancel
@@ -231,7 +231,7 @@ enum ChainTypesOperations:Int {
     case withdraw_crowdfund
 }
 
-enum objectID:String {
+enum objectID: String {
     case base_object = "1.1.0"
     case account_object = "1.2.0"
     case asset_object = "1.3.0"
@@ -263,29 +263,26 @@ enum objectID:String {
     case special_authority_object = "2.14.0"
 }
 
-class AssetConfiguration {  
-    var asset_ids:[Pair] = []
-    
+class AssetConfiguration {
+    var asset_ids: [Pair] = []
+
     static var CYB = "1.3.0"
     static var BTC = "1.3.3"
     static var ETH = "1.3.2"
     static var EOS = "1.3.4"
     static let USDT = "1.3.27"
-    
-    static let order_name = ["USDT","ETH", "BTC", "CYB"]
-    static var market_base_assets = [AssetConfiguration.ETH,AssetConfiguration.CYB,AssetConfiguration.USDT,AssetConfiguration.BTC]
-    
-    var unique_ids:[String] = []
+
+    static let order_name = ["USDT", "ETH", "BTC", "CYB"]
+    static var market_base_assets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.USDT, AssetConfiguration.BTC]
+
+    var unique_ids: [String] = []
     //    return asset_ids.map({[$0.base, $0.quote]}).flatMap({ $0 }).withoutDuplicates()
-    
-    
+
     private init() {
     }
-    
+
     static let shared = AssetConfiguration()
 }
-
-
 
 protocol ObjectDescriptable {
     func propertyDescription() -> String
@@ -301,4 +298,3 @@ extension ObjectDescriptable {
         return string
     }
 }
-

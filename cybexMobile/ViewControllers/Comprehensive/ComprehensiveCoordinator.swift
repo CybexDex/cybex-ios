@@ -12,27 +12,27 @@ import NBLCommonModule
 import Localize_Swift
 
 protocol ComprehensiveCoordinatorProtocol {
-    
+
     func openWebVCUrl(_ url: String)
-    
+
     func openMarketList(_ pair: Pair)
 }
 
 protocol ComprehensiveStateManagerProtocol {
     var state: ComprehensiveState { get }
-    
-    func switchPageState(_ state:PageState)
-    
+
+    func switchPageState(_ state: PageState)
+
     func fetchData()
-    
+
     func fetchAnnounceInfos()
-    
+
     func fetchHomeBannerInfos()
-    
+
     func fetchHotAssetsInfos()
-    
+
     func fetchMiddleItemInfos()
-    
+
     func setupChildrenVC(_ sender: ComprehensiveViewController)
 }
 
@@ -40,13 +40,13 @@ class ComprehensiveCoordinator: ComprehensiveRootCoordinator {
     var store = Store(
         reducer: ComprehensiveReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
-    
+
     var state: ComprehensiveState {
         return store.state
     }
-    
+
     override func register() {
         Broadcaster.register(ComprehensiveCoordinatorProtocol.self, observer: self)
         Broadcaster.register(ComprehensiveStateManagerProtocol.self, observer: self)
@@ -59,10 +59,10 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
             vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
             vc.vc_type = .homeBanner
             vc.url = URL(string: url)
-            self.rootVC.pushViewController(vc ,animated: true)
+            self.rootVC.pushViewController(vc, animated: true)
         }
     }
-    
+
     func openMarketList(_ pair: Pair) {
         let vc = R.storyboard.main.marketViewController()!
         var currentBaseIndex = 0
@@ -89,60 +89,60 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
 }
 
 extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
-    func switchPageState(_ state:PageState) {
+    func switchPageState(_ state: PageState) {
         DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }
     }
-    
+
     func fetchData() {
         fetchAnnounceInfos()
         fetchHomeBannerInfos()
         fetchHotAssetsInfos()
         fetchMiddleItemInfos()
     }
-    
+
     func fetchAnnounceInfos() {
         let url = AppConfiguration.ANNOUNCE_JSON + (Localize.currentLanguage() == "en" ? "en" : "zh")
         SimpleHTTPService.fetchAnnounceJson(url).done { (data) in
             if let data = data {
                 self.store.dispatch(FetchAnnouncesAction(data: data))
             }
-            }.catch { (error) in
+            }.catch { (_) in
         }
     }
-    
+
     func fetchHomeBannerInfos() {
         let url = AppConfiguration.HOME_BANNER_JSON + (Localize.currentLanguage() == "en" ? "en" : "zh")
         SimpleHTTPService.fetchHomeBannerInfos(url).done { (data) in
             if let data = data, data.count > 0 {
                 self.store.dispatch(FetchHomeBannerAction(data: data))
             }
-            }.catch { (error) in
+            }.catch { (_) in
         }
     }
-    
+
     func fetchHotAssetsInfos() {
         SimpleHTTPService.fetchHomeHotAssetJson().done { (data) in
             if let data = data {
                 self.store.dispatch(FetchHotAssetsAction(data: data))
             }
-            }.catch { (error) in
+            }.catch { (_) in
         }
     }
-    
+
     func fetchMiddleItemInfos() {
         let url = AppConfiguration.HOME_ITEMS_JSON + (Localize.currentLanguage() == "en" ? "en" : "zh")
         SimpleHTTPService.fetchHomeItemInfo(url).done { (data) in
             if let data = data, data.count != 0 {
                 self.store.dispatch(FetchMiddleItemAction(data: data))
             }
-            }.catch { (error) in
+            }.catch { (_) in
         }
     }
-    
+
     func setupChildrenVC(_ sender: ComprehensiveViewController) {
-        if let homeVC = R.storyboard.main.homeViewController(){
+        if let homeVC = R.storyboard.main.homeViewController() {
             homeVC.coordinator = HomeCoordinator(rootVC: self.rootVC)
             homeVC.VC_TYPE = view_type.Comprehensive.rawValue
             sender.addChild(homeVC)

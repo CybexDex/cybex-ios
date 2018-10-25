@@ -10,28 +10,28 @@ import Foundation
 
 @IBDesignable
 class RecordHeaderView: CybexBaseView {
-    enum Event:String {
+    enum Event: String {
         case RecordHeaderViewDidClicked
     }
-    
+
     @IBOutlet weak var assetInfoView: RecordChooseView!
     @IBOutlet weak var typeInfoView: RecordChooseView!
-    
+
     override func setup() {
         super.setup()
-        
+
         setupUI()
         setupSubViewEvent()
     }
-    
+
     func setupUI() {
         clearBgColor()
     }
-    
+
     func setupSubViewEvent() {
-    
+
     }
-    
+
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.RecordHeaderViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }

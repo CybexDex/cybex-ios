@@ -9,20 +9,17 @@
 import UIKit
 import ReSwift
 
-func SettingReducer(action:Action, state:SettingState?) -> SettingState {
+func SettingReducer(action: Action, state: SettingState?) -> SettingState {
     return SettingState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: SettingPropertyReducer(state?.property, action: action))
 }
 
 func SettingPropertyReducer(_ state: SettingPropertyState?, action: Action) -> SettingPropertyState {
     let state = state ?? SettingPropertyState()
-    
+
     switch action {
     default:
         break
     }
-    
+
     return state
 }
-
-
-

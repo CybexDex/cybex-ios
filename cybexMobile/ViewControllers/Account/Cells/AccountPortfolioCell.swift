@@ -10,9 +10,9 @@ import UIKit
 import SwiftTheme
 
 class AccountPortfolioCell: BaseCollectionViewCell {
-  
+
   @IBOutlet weak var contentview: UIView!
-  
+
   @IBOutlet weak var portfolioCellView: AccountPortfolioCellView!
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -22,7 +22,7 @@ class AccountPortfolioCell: BaseCollectionViewCell {
     self.contentview.shadowRadius  = 4
     self.contentview.shadowOpacity = 1.0
   }
-  
+
   override func setup(_ data: Any?) {
     portfolioCellView.data = data
   }

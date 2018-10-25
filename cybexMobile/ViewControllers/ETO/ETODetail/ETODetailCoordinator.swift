@@ -13,16 +13,16 @@ import NBLCommonModule
 protocol ETODetailCoordinatorProtocol {
     func openShare()
     func openETOCrowdVC()
-    func openWebWithUrl(_ sender: String,type: CybexWebViewController.web_type)
+    func openWebWithUrl(_ sender: String, type: CybexWebViewController.web_type)
 }
 
 protocol ETODetailStateManagerProtocol {
     var state: ETODetailState { get }
-    
-    func switchPageState(_ state:PageState)
+
+    func switchPageState(_ state: PageState)
     func fetchData()
     func fetchUpState()
-    func checkInviteCode(code: String, callback:@escaping(Bool,String)->())
+    func checkInviteCode(code: String, callback:@escaping(Bool, String)->Void)
     func updateETOProjectDetailAction()
     func fetchUserState()
 }
@@ -31,21 +31,21 @@ class ETODetailCoordinator: NavCoordinator {
     var store = Store(
         reducer: ETODetailReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
-    
+
     var state: ETODetailState {
         return store.state
     }
-    
-    override class func start(_ root: BaseNavigationController, context:RouteContext? = nil) -> BaseViewController {
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
         let vc = R.storyboard.etoDetail.etoDetailViewController()!
         let coordinator = ETODetailCoordinator(rootVC: root)
         vc.coordinator = coordinator
         coordinator.store.dispatch(RouteContextAction(context: context))
         return vc
     }
-    
+
     override func register() {
         Broadcaster.register(ETODetailCoordinatorProtocol.self, observer: self)
         Broadcaster.register(ETODetailStateManagerProtocol.self, observer: self)
@@ -59,43 +59,41 @@ extension ETODetailCoordinator: ETODetailCoordinatorProtocol {
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
-    
+
     func openETOCrowdVC() {
         let vc = R.storyboard.etO.etoCrowdViewController()!
         let coor = ETOCrowdCoordinator(rootVC: self.rootVC)
         vc.coordinator = coor
         self.rootVC.pushViewController(vc)
     }
-    
-    func openWebWithUrl(_ sender: String,type: CybexWebViewController.web_type) {
+
+    func openWebWithUrl(_ sender: String, type: CybexWebViewController.web_type) {
         if let vc = R.storyboard.main.cybexWebViewController() {
             vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
             vc.vc_type = type
             vc.url = URL(string: sender)
-            self.rootVC.pushViewController(vc ,animated: true)
+            self.rootVC.pushViewController(vc, animated: true)
         }
     }
 }
 
 extension ETODetailCoordinator: ETODetailStateManagerProtocol {
-    
-    func switchPageState(_ state:PageState) {
+
+    func switchPageState(_ state: PageState) {
         self.store.dispatch(PageStateAction(state: state))
     }
-    
+
     func fetchData() {
         var isFetchCoor = false
         Broadcaster.notify(ETOStateManagerProtocol.self) { (coor) in
             isFetchCoor = true
             if let model = coor.state.selectedProjectModel.value, let projectModel = model.projectModel {
                 self.store.dispatch(SetProjectDetailAction(data: projectModel))
-            }
-            else {
+            } else {
                 if let bannerModel = coor.state.selectedBannerModel.value, let bannerId = bannerModel.id.int {
                     fetchProjectModelWithId(bannerId)
-                }
-                else {
-                    
+                } else {
+
                 }
             }
         }
@@ -105,8 +103,8 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             }
         }
     }
-    
-    func fetchProjectModelWithId(_ id: Int){
+
+    func fetchProjectModelWithId(_ id: Int) {
         ETOMGService.request(target: ETOMGAPI.getProjectDetail(id: id), success: { json in
             if let model = ETOProjectModel.deserialize(from: json.dictionaryObject) {
                 self.store.dispatch(SetProjectDetailAction(data: model))
@@ -118,29 +116,26 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
         })
     }
-    
+
     func fetchUserState() {
         if let name = UserManager.shared.name.value, let data = self.state.data.value, let projectModel = data.projectModel, let projectId = projectModel.project.int {
-            
+
             ETOMGService.request(target: ETOMGAPI.checkUserState(name: name, id: projectId), success: { (json) in
-                if let data = json.dictionaryObject, let model = ETOUserAuditModel.deserialize(from: data){
-               
-                    self.store.dispatch(FetchUserStateAction(data:model))
+                if let data = json.dictionaryObject, let model = ETOUserAuditModel.deserialize(from: data) {
+
+                    self.store.dispatch(FetchUserStateAction(data: model))
                 }
                 self.switchPageState(PageState.normal(reason: .initialRefresh))
             }, error: { (error) in
-            }) { (error) in
+            }) { (_) in
             }
-        }
-        else {
-            if let data = self.state.data.value, let projectModel = data.projectModel ,let projectState = projectModel.status{
+        } else {
+            if let data = self.state.data.value, let projectModel = data.projectModel, let projectState = projectModel.status {
                 if projectState == .finish {
                     ETOManager.shared.changeState([.notLogin, .finished])
-                }
-                else if projectState == .pre {
+                } else if projectState == .pre {
                     ETOManager.shared.changeState([.notLogin, .notStarted])
-                }
-                else if projectState == .ok {
+                } else if projectState == .ok {
                     ETOManager.shared.changeState([.notLogin, .underway])
                 }
                 if let vc = self.rootVC.topViewController as? ETODetailViewController {
@@ -149,15 +144,14 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             }
         }
     }
-    
+
     func fetchUpState() {
         guard  let model = self.state.data.value?.projectModel, let projectState = model.status, let state = self.state.userState.value else { return }
         var etoState: ETOStateOption = .unset
         etoState.remove(.unset)
         if !UserManager.shared.isLoginIn {
             etoState.insert(.notLogin)
-        }
-        else {
+        } else {
             etoState.insert(.login)
             if state.kyc_status == .not_start {
                 etoState.insert(.KYCNotPassed)
@@ -166,41 +160,34 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                     vc.contentView.getJoinButtonState()
                 }
                 return
-            }
-            else if state.kyc_status == .ok {
+            } else if state.kyc_status == .ok {
                 etoState.insert(.KYCPassed)
                 if state.status == .unstart {
                     etoState.insert(.notReserved)
-                }
-                else {
+                } else {
                     etoState.insert(.reserved)
                 }
-                
+
                 if model.is_user_in == "0" {
                     etoState.insert(.notBookable)
-                }
-                else {
+                } else {
                     etoState.insert(.bookable)
                 }
-                
+
                 if state.status == .waiting {
                     etoState.insert(.waitAudit)
-                }
-                else if state.status == .ok {
+                } else if state.status == .ok {
                     etoState.insert(.auditPassed)
-                }
-                else if state.status == .reject {
+                } else if state.status == .reject {
                     etoState.insert(.auditNotPassed)
                 }
             }
         }
         if projectState == .finish {
             etoState.insert(.finished)
-        }
-        else if projectState == .pre {
+        } else if projectState == .pre {
             etoState.insert(.notStarted)
-        }
-        else if projectState == .ok {
+        } else if projectState == .ok {
             etoState.insert(.underway)
         }
         let stateBefore = ETOManager.shared.getClauseState()
@@ -208,50 +195,47 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
         ETOManager.shared.changeState(etoState)
         let stateEnd = ETOManager.shared.getClauseState()
         let btnEnd = ETOManager.shared.getETOJoinButtonState()
-        
+
         if (stateBefore != stateEnd || btnBefore != btnEnd), let vc = self.rootVC.topViewController as? ETODetailViewController {
             vc.contentView.getJoinButtonState()
         }
     }
-    
-    func checkInviteCode(code: String, callback:@escaping(Bool,String)->()) {
+
+    func checkInviteCode(code: String, callback:@escaping(Bool, String)->Void) {
         guard let name = UserManager.shared.name.value, let projectModel = self.state.data.value?.projectModel else {
-            callback(false,"")
+            callback(false, "")
             return
         }
-        
-        ETOMGService.request(target: ETOMGAPI.validCode(name: name, pid: projectModel.id, code: code), success: { json in
-            callback(true,"")
+
+        ETOMGService.request(target: ETOMGAPI.validCode(name: name, pid: projectModel.id, code: code), success: { _ in
+            callback(true, "")
         }, error: { error in
-            callback(false,error.localizedDescription)
+            callback(false, error.localizedDescription)
         }) { error in
-            callback(false,error.localizedDescription)
+            callback(false, error.localizedDescription)
         }
     }
-    
+
     func updateETOProjectDetailAction() {
-        guard let model = self.state.data.value, let projectModel = model.projectModel else { return }        
+        guard let model = self.state.data.value, let projectModel = model.projectModel else { return }
         ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { json in
             if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
                 projectModel.finish_at = refreshModel.finish_at
                 projectModel.status = refreshModel.status
-                model.current_percent.accept((refreshModel.current_percent * 100).string(digits:2, roundingMode: .down) + "%")
+                model.current_percent.accept((refreshModel.current_percent * 100).string(digits: 2, roundingMode: .down) + "%")
                 model.progress.accept(refreshModel.current_percent)
                 model.status.accept(refreshModel.status!.description())
                 model.project_state.accept(refreshModel.status)
-                
+
                 if refreshModel.status! == .pre {
                     model.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                }
-                else if refreshModel.status! == .ok {
+                } else if refreshModel.status! == .ok {
                     model.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                }
-                else if refreshModel.status! == .finish {
+                } else if refreshModel.status! == .finish {
                     if refreshModel.finish_at != nil {
                         if projectModel.t_total_time == "" {
                             model.detail_time.accept(timeHandle(refreshModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
-                        }
-                        else {
+                        } else {
                             model.detail_time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
                         }
                     }
@@ -259,10 +243,10 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             }
             self.switchPageState(PageState.normal(reason: .initialRefresh))
         }, error: { (error) in
-        }) { error in
+        }) { _ in
         }
 //        }
-        
+
 //        if projectModel.status! == .pre {
 //            model.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
 //        }

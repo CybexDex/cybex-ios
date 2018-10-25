@@ -28,9 +28,9 @@ class AddressHomeCoordinator: AccountRootCoordinator {
     var store = Store<AddressHomeState>(
         reducer: AddressHomeReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
-        
+
     override func register() {
         Broadcaster.register(AddressHomeCoordinatorProtocol.self, observer: self)
         Broadcaster.register(AddressHomeStateManagerProtocol.self, observer: self)
@@ -44,7 +44,7 @@ extension AddressHomeCoordinator: AddressHomeCoordinatorProtocol {
         vc.coordinator = coor
         self.rootVC.pushViewController(vc, animated: true)
     }
-    
+
     func openTransferAddressHomeViewController() {
         let vc = R.storyboard.account.transferAddressHomeViewController()!
         let coor = TransferAddressHomeCoordinator(rootVC: self.rootVC)
@@ -57,11 +57,11 @@ extension AddressHomeCoordinator: AddressHomeStateManagerProtocol {
     var state: AddressHomeState {
         return store.state
     }
-    
+
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<AddressHomeState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
-    
+
 }

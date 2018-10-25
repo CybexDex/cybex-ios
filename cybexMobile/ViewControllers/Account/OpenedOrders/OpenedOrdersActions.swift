@@ -9,22 +9,22 @@
 import Foundation
 import ReSwift
 
-//MARK: - State
+// MARK: - State
 struct OpenedOrdersState: StateType {
     var isLoading = false
     var page: Int = 1
-    var errorMessage:String?
+    var errorMessage: String?
     var property: OpenedOrdersPropertyState
 }
 
 struct OpenedOrdersPropertyState {
-  var data : [Any] = []
+  var data: [Any] = []
 }
 
-//MARK: - Action Creator
+// MARK: - Action Creator
 class OpenedOrdersPropertyActionCreate: LoadingActionCreator {
     public typealias ActionCreator = (_ state: OpenedOrdersState, _ store: Store<OpenedOrdersState>) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         _ state: OpenedOrdersState,
         _ store: Store <OpenedOrdersState>,

@@ -10,26 +10,26 @@ import Foundation
 
 @IBDesignable
 class RecordChooseCellView: CybexBaseView {
-    enum Event:String {
+    enum Event: String {
         case RecordChooseCellViewDidClicked
     }
     @IBOutlet weak var nameLabel: UILabel!
-    
+
     override func setup() {
         super.setup()
-        
+
         setupUI()
         setupSubViewEvent()
     }
-    
+
     func setupUI() {
-        
+
     }
-    
+
     func setupSubViewEvent() {
-    
+
     }
-    
+
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.RecordChooseCellViewDidClicked.rawValue, userinfo: ["data": self.nameLabel.text ?? "", "self": self])
     }

@@ -11,10 +11,10 @@ import Foundation
 class TradeRootCoordinator: NavCoordinator {
   override func start() {
     let vc = R.storyboard.business.tradeViewController()!
-    
+
     let coordinator = TradeCoordinator(rootVC: self.rootVC)
     vc.localized_text = R.string.localizable.navTrade.key.localizedContainer()
-    
+
     vc.coordinator = coordinator
     self.rootVC.pushViewController(vc, animated: true)
   }

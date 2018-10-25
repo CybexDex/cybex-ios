@@ -10,7 +10,7 @@ import UIKit
 import SwiftTheme
 
 class RecodeCellView: UIView {
-    
+
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var amount: UILabel!
@@ -18,15 +18,15 @@ class RecodeCellView: UIView {
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var address: UILabel!
     @IBOutlet weak var inComeOrSend: UIImageView!
-    
-    var data : Any? {
-        didSet{
+
+    var data: Any? {
+        didSet {
             if let data = data as? Record {
                 let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "node_dark" : "node_white"
                 time.text = data.updateAt.string(withFormat: "MM/dd HH:mm:ss")
                 name.text = data.asset.filterJade
                 state.text = data.state.desccription()
-                
+
                 var assetInfo: AssetInfo?
                 for (_, value) in app_data.assetInfo {
                     if value.symbol.filterJade == data.asset.filterJade {
@@ -40,8 +40,7 @@ class RecodeCellView: UIView {
                     address.attributedText = attributedString
                     icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + asset_info.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
                     amount.text = getRealAmount(asset_info.id, amount: String(data.amount)).string.formatCurrency(digitNum: asset_info.precision) + " " +  asset_info.symbol.filterJade
-                }
-                else {
+                } else {
                     amount.text = "-"
                 }
                 inComeOrSend.image = data.fundType == "WITHDRAW" ? R.image.ic_send() : R.image.ic_income()
@@ -49,37 +48,37 @@ class RecodeCellView: UIView {
             }
         }
     }
-    
+
     func setup() {
         updateHeight()
     }
-    
+
     fileprivate func updateHeight() {
         layoutIfNeeded()
         self.frame.size.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     override var intrinsicContentSize: CGSize {
-        return CGSize.init(width:UIView.noIntrinsicMetric,height:dynamicHeight())
+        return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView!.bottom
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadFromXIB()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadFromXIB()
@@ -89,7 +88,7 @@ class RecodeCellView: UIView {
         super.awakeFromNib()
         setup()
     }
-    
+
     private func loadFromXIB() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
@@ -97,8 +96,7 @@ class RecodeCellView: UIView {
         let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
         addSubview(view)
         view.frame = self.bounds
-        view.autoresizingMask = [.flexibleHeight,.flexibleWidth]
+        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-    
-    
+
 }

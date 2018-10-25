@@ -10,8 +10,7 @@ import UIKit
 import ReSwift
 import SwiftTheme
 
-
-func LockupAssetsReducer(action:Action, state:LockupAssetsState?) -> LockupAssetsState {
+func LockupAssetsReducer(action: Action, state: LockupAssetsState?) -> LockupAssetsState {
     return LockupAssetsState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: LockupAssetsPropertyReducer(state?.property, action: action))
 }
 
@@ -26,11 +25,10 @@ func LockupAssetsPropertyReducer(_ state: LockupAssetsPropertyState?, action: Ac
     return state
 }
 
-
-func lockupAssteToLockUpAssetsDate(datas : [LockUpAssetsMData]) -> LockUpAssetsVMData{
+func lockupAssteToLockUpAssetsDate(datas: [LockUpAssetsMData]) -> LockUpAssetsVMData {
     var sources = [LockupAssteData]()
 //    let value = app_state.property.eth_rmb_price
-    for data in datas{
+    for data in datas {
         let quote  = data.balance.assetID
         let amount = data.balance.amount
         if let assetsInfo = app_data.assetInfo[quote] {
@@ -39,10 +37,10 @@ func lockupAssteToLockUpAssetsDate(datas : [LockUpAssetsMData]) -> LockUpAssetsV
             var count = "--"
             var price = "≈¥--"
             let name = assetsInfo.symbol
-            
+
             count = getRealAmountDouble(quote, amount: amount).string(digits: assetsInfo.precision, roundingMode: .down)
             price = "≈¥" + (Decimal(getAssetRMBPrice(quote)) * getRealAmount(quote, amount: amount)).string(digits: 2, roundingMode: .down)
-            
+
 //            if result.eth != "",let amount_double = Double(amount) {
 //                count = (amount_double / pow(10,Double(assetsInfo.precision))).string(digits: assetsInfo.precision)
 //                if let count_double = Double(count) ,let resultEth = Double(result.eth) {
@@ -59,14 +57,9 @@ func lockupAssteToLockUpAssetsDate(datas : [LockUpAssetsMData]) -> LockUpAssetsV
                     sources.append(LockupAssteData(icon: icon, name: name, amount: count, RMBCount: price, progress: String(progress), endTime: end_time))
                 }
             }
-        }
-        else {
+        } else {
             continue
         }
     }
     return LockUpAssetsVMData(datas: sources)
 }
-
-
-
-

@@ -11,16 +11,16 @@ import UIKit
 class RecordChooseCell: BaseTableViewCell {
 
     @IBOutlet weak var cellView: RecordChooseCellView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     override func setup(_ data: Any?) {
         if let data = data as? String {
             cellView.adapterModelToRecordChooseCellView(data)

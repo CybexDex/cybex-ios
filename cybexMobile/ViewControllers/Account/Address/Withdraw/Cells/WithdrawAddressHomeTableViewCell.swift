@@ -12,7 +12,7 @@ import Kingfisher
 class WithdrawAddressHomeTableViewCell: BaseTableViewCell {
 
     @IBOutlet weak var foreView: TradeItemView!
-  
+
     override func setup(_ data: Any?) {
         if let data = data as? WithdrawAddressHomeViewModel {
             foreView.icon.kf.setImage(with: URL(string: data.imageURLString))
@@ -21,5 +21,5 @@ class WithdrawAddressHomeTableViewCell: BaseTableViewCell {
             foreView.amount.text = data.count.value
         }
     }
-    
+
 }

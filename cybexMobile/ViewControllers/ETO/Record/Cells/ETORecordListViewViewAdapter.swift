@@ -9,10 +9,10 @@
 import Foundation
 
 extension ETORecordListViewView {
-    func adapterModelToETORecordListViewView(_ model:ETOTradeHistoryModel) {
+    func adapterModelToETORecordListViewView(_ model: ETOTradeHistoryModel) {
         nameLabel.text = model.project_name
         actionLabel.text = model.ieo_type.showTitle()
-        
+
         amountLabel.text = "\(model.token_count) \(model.token.filterJade)"
         timeLabel.text = model.created_at.string(withFormat: "yyyy-MM-dd HH:mm:ss")
         statusLabel.text = model.reason.showTitle()

@@ -10,48 +10,48 @@ import UIKit
 import SwiftTheme
 
 class CybexTitleView: UIView {
-  
-  enum event : String {
+
+  enum event: String {
     case sendBtnAction
   }
-  
-  var data : [String]? {
-    didSet{
+
+  var data: [String]? {
+    didSet {
       setup()
     }
   }
-  
-  let space : CGFloat = 10.0
-  var buttons : [UIButton] = []
-  var lineView : UIView = {
+
+  let space: CGFloat = 10.0
+  var buttons: [UIButton] = []
+  var lineView: UIView = {
     let view = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 1))
     view.backgroundColor = .pastelOrange
     return view
   }()
-  
-  var selectedIndex : Int = 0{
-    didSet{
-      for button in buttons{
-        if selectedIndex == button.tag{
+
+  var selectedIndex: Int = 0 {
+    didSet {
+      for button in buttons {
+        if selectedIndex == button.tag {
           button.isSelected = true
-        }else{
+        } else {
           button.isSelected = false
         }
       }
       self.lineView.center = CGPoint(x: buttons[selectedIndex].center.x, y: self.height - 0.5)
     }
   }
-  
-  func setup(){
-    for view in self.subviews{
+
+  func setup() {
+    for view in self.subviews {
       view.removeFromSuperview()
     }
     let view = UIView(frame: CGRect(x: 0, y: frame.height - 1, width: frame.width, height: 1))
     view.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white4 : UIColor.steel11
     self.addSubview(view)
     if let data = data {
-      let btn_width : CGFloat = (self.frame.width - CGFloat(data.count - 1) * space) / CGFloat(data.count)
-      
+      let btn_width: CGFloat = (self.frame.width - CGFloat(data.count - 1) * space) / CGFloat(data.count)
+
       for i in 0...data.count - 1 {
         let btn = UIButton(frame: CGRect(x: CGFloat(i) * (btn_width + space), y: 0, width: btn_width, height: self.height-1))
         btn.locali = data[i]
@@ -61,7 +61,7 @@ class CybexTitleView: UIView {
         btn.addTarget(self, action: #selector(selectedBtn(_:)), for: .touchUpInside)
         btn.tag = i
         self.addSubview(btn)
-        if i == 0{
+        if i == 0 {
           btn.isSelected = true
         }
         buttons.append(btn)
@@ -70,32 +70,27 @@ class CybexTitleView: UIView {
       self.addSubview(self.lineView)
     }
   }
-  
-  
-  @objc func selectedBtn(_ sender:UIButton){
-    for button in buttons{
-      if sender == button{
+
+  @objc func selectedBtn(_ sender: UIButton) {
+    for button in buttons {
+      if sender == button {
         sender.isSelected = true
-      }else{
+      } else {
         button.isSelected = false
       }
     }
-    
+
     self.lineView.center = CGPoint(x: sender.center.x, y: self.height - 0.5)
-    self.next?.sendEventWith(event.sendBtnAction.rawValue, userinfo: ["selectedIndex":sender.tag])
+    self.next?.sendEventWith(event.sendBtnAction.rawValue, userinfo: ["selectedIndex": sender.tag])
   }
-  
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
+
   }
-  
+
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
-  
-  
-  
-  
+
 }

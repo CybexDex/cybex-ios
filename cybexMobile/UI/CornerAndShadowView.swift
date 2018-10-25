@@ -11,9 +11,9 @@ import SwiftTheme
 
 @IBDesignable
 class CornerAndShadowView: UIView {
-    
+
     @IBOutlet weak var cornerView: UIView!
-    
+
     @IBInspectable
     var newCornerRadius: CGFloat = 4 {
         didSet {
@@ -26,7 +26,7 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var newShadowRadius: CGFloat = 4 {
         didSet {
@@ -37,8 +37,7 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
-    
+
     @IBInspectable
     var newShadowColor: UIColor = UIColor.dark20 {
         didSet {
@@ -51,7 +50,7 @@ class CornerAndShadowView: UIView {
     }
 
     @IBInspectable
-    var newTheme1ShadowColor:UIColor = UIColor.dark20 {
+    var newTheme1ShadowColor: UIColor = UIColor.dark20 {
         didSet {
             self.subviews.forEach { (subView) in
                 if subView.shadowOpacity == 1 {
@@ -60,9 +59,9 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
-    var newTheme2ShadowColor:UIColor = UIColor.dark20 {
+    var newTheme2ShadowColor: UIColor = UIColor.dark20 {
         didSet {
             self.subviews.forEach { (subView) in
                 if subView.shadowOpacity == 1 {
@@ -71,7 +70,7 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var newShadowOffset: CGSize = CGSize(width: 0, height: 0) {
         didSet {
@@ -82,7 +81,7 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var newShadowOpcity: Float = 1 {
         didSet {
@@ -93,8 +92,7 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
-    
+
     @IBInspectable
     var newSpread: CGFloat = 0 {
         didSet {
@@ -102,8 +100,7 @@ class CornerAndShadowView: UIView {
                 if subView.shadowOpacity == 1 {
                     if subView.spread == 0 {
                         subView.layer.shadowPath = nil
-                    }
-                    else {
+                    } else {
                         let rect = subView.bounds.insetBy(dx: -newSpread, dy: -newSpread)
                         subView.layer.shadowPath = UIBezierPath(rect: rect).cgPath
                     }
@@ -115,34 +112,34 @@ class CornerAndShadowView: UIView {
     func setup() {
         print("\(self.cornerView)")
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
-        
+
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
-        let bundle = Bundle(for:CornerAndShadowView.self)
+        let bundle = Bundle(for: CornerAndShadowView.self)
         let nibName = String(describing: CornerAndShadowView.self)
         let nib = UINib.init(nibName: nibName, bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
-        
+
         self.insertSubview(view, at: 0)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-    
+
 }

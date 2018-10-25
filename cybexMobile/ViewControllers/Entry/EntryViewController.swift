@@ -18,13 +18,13 @@ class EntryViewController: BaseViewController {
 
   @IBOutlet weak var accountTextField: ImageTextField!
   @IBOutlet weak var passwordTextField: ImageTextField!
-  
+
   @IBOutlet weak var createTitle: UILabel!
   @IBOutlet weak var loginButton: Button!
-    
+
   override func viewDidLoad() {
     super.viewDidLoad()
-        
+
     setupUI()
     setupEvent()
   }
@@ -36,7 +36,7 @@ class EntryViewController: BaseViewController {
     accountTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
     passwordTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
   }
-  
+
   @objc override func leftAction(_ sender: UIButton) {
     coordinator?.dismiss()
   }
@@ -49,9 +49,9 @@ class EntryViewController: BaseViewController {
 extension EntryViewController {
   func setupEvent() {
     let accountValid = accountTextField.rx.text.orEmpty.map { $0.count > 0 }.share(replay: 1)
-    
+
     let passwordValid = passwordTextField.rx.text.orEmpty.map { $0.count > 0}.share(replay: 1)
-    
+
     Observable.combineLatest(accountValid, passwordValid) {
       return $0 && $1
     }.bind {[weak self] (valid) in
@@ -59,33 +59,30 @@ extension EntryViewController {
 
       if valid {
         self.loginButton.isEnable = true
-      }
-      else {
+      } else {
         self.loginButton.isEnable = false
       }
     }.disposed(by: disposeBag)
-    
-    self.createTitle.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+
+    self.createTitle.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
       guard let `self` = self else { return }
-      
+
       self.coordinator?.switchToRegister()
     }).disposed(by: disposeBag)
-    
-    self.loginButton.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+
+    self.loginButton.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
       guard let `self` = self else { return }
-      
+
       self.startLoading()
       UserManager.shared.login(self.accountTextField.text!, password: self.passwordTextField.text!) { success in
         self.endLoading()
         if success {
           self.coordinator?.dismiss()
-        }
-        else {
+        } else {
          self.showAlert(R.string.localizable.accountNonMatch.key.localized(), buttonTitle: R.string.localizable.ok.key.localized())
         }
       }
     }).disposed(by: disposeBag)
   }
-  
-  
+
 }

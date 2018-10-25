@@ -9,13 +9,13 @@
 import UIKit
 import ReSwift
 
-func WithdrawAddressReducer(action:Action, state:WithdrawAddressState?) -> WithdrawAddressState {
-    return WithdrawAddressState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: WithdrawAddressPropertyReducer(state?.property, action: action), callback:state?.callback ?? WithdrawAddressCallbackState())
+func WithdrawAddressReducer(action: Action, state: WithdrawAddressState?) -> WithdrawAddressState {
+    return WithdrawAddressState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: WithdrawAddressPropertyReducer(state?.property, action: action), callback: state?.callback ?? WithdrawAddressCallbackState())
 }
 
 func WithdrawAddressPropertyReducer(_ state: WithdrawAddressPropertyState?, action: Action) -> WithdrawAddressPropertyState {
     let state = state ?? WithdrawAddressPropertyState()
-    
+
     switch action {
     case let action as WithdrawAddressDataAction:
         state.data.accept(action.data)
@@ -26,9 +26,6 @@ func WithdrawAddressPropertyReducer(_ state: WithdrawAddressPropertyState?, acti
     default:
         break
     }
-    
+
     return state
 }
-
-
-

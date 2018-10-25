@@ -11,14 +11,11 @@ import ReSwift
 
 func HomeReducer(action: Action, state: HomeState?) -> HomeState {
     let state = state ?? HomeState()
-    
+
     switch action {
     default:
         break
     }
-    
+
     return state
 }
-
-
-

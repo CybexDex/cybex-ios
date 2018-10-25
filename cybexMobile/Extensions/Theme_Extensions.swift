@@ -10,39 +10,36 @@ import Foundation
 import SwiftTheme
 
 extension UILabel {
-  
-  
+
   @IBInspectable
-  var theme1TitleColor:UIColor {
+  var theme1TitleColor: UIColor {
     set {
       if let theme2 = self.store["label_theme2"] as? String {
         theme_textColor = [newValue.hexString(true), theme2]
-      }
-      else {
+      } else {
         self.store["label_theme1"] = newValue.hexString(true)
       }
     }
-    
+
     get {
       return theme_textColor?.value() as! UIColor
     }
   }
-  
-  var themeTitleColor:UIColor {
+
+  var themeTitleColor: UIColor {
     return theme_textColor?.value() as! UIColor
   }
-  
+
   @IBInspectable
-  var theme2TitleColor:UIColor {
+  var theme2TitleColor: UIColor {
     set {
       if let theme1 = self.store["label_theme1"] as? String {
         theme_textColor = [theme1, newValue.hexString(true)]
-      }
-      else {
+      } else {
         self.store["label_theme2"] = newValue.hexString(true)
       }
     }
-    
+
     get {
       return theme_textColor?.value() as! UIColor
     }
@@ -51,36 +48,34 @@ extension UILabel {
 
 extension UITextView {
   @IBInspectable
-  var theme1TitleColor:UIColor {
+  var theme1TitleColor: UIColor {
     set {
       if let theme2 = self.store["label_theme2"] as? String {
         theme_textColor = [newValue.hexString(true), theme2]
-      }
-      else {
+      } else {
         self.store["label_theme1"] = newValue.hexString(true)
       }
     }
-    
+
     get {
       return theme_textColor?.value() as! UIColor
     }
   }
-  
-  var themeTitleColor:UIColor {
+
+  var themeTitleColor: UIColor {
     return theme_textColor?.value() as! UIColor
   }
-  
+
   @IBInspectable
-  var theme2TitleColor:UIColor {
+  var theme2TitleColor: UIColor {
     set {
       if let theme1 = self.store["label_theme1"] as? String {
         theme_textColor = [theme1, newValue.hexString(true)]
-      }
-      else {
+      } else {
         self.store["label_theme2"] = newValue.hexString(true)
       }
     }
-    
+
     get {
       return theme_textColor?.value() as! UIColor
     }
@@ -89,32 +84,30 @@ extension UITextView {
 
 extension UIImageView {
   @IBInspectable
-  var theme1ImageName:String {
+  var theme1ImageName: String {
     set {
       if let theme2 = self.store["image_theme2"] as? String {
         theme_image = [newValue, theme2]
-      }
-      else {
+      } else {
         self.store["image_theme1"] = newValue
       }
     }
-    
+
     get {
       return theme_image?.value() as! String
     }
   }
-  
+
   @IBInspectable
-  var theme2ImageName:String {
+  var theme2ImageName: String {
     set {
       if let theme1 = self.store["image_theme1"] as? String {
         theme_image = [theme1, newValue]
-      }
-      else {
+      } else {
         self.store["image_theme2"] = newValue
       }
     }
-    
+
     get {
       return theme_image?.value() as! String
     }
@@ -123,36 +116,34 @@ extension UIImageView {
 
 extension UITextField {
   @IBInspectable
-  var theme1TitleColor:UIColor {
+  var theme1TitleColor: UIColor {
     set {
       if let theme2 = self.store["label_theme2"] as? String {
         theme_textColor = [newValue.hexString(true), theme2]
-      }
-      else {
+      } else {
         self.store["label_theme1"] = newValue.hexString(true)
       }
     }
-    
+
     get {
       return theme_textColor?.value() as! UIColor
     }
   }
-  
-  var themeTitleColor:UIColor {
+
+  var themeTitleColor: UIColor {
     return theme_textColor?.value() as! UIColor
   }
-  
+
   @IBInspectable
-  var theme2TitleColor:UIColor {
+  var theme2TitleColor: UIColor {
     set {
       if let theme1 = self.store["label_theme1"] as? String {
         theme_textColor = [theme1, newValue.hexString(true)]
-      }
-      else {
+      } else {
         self.store["label_theme2"] = newValue.hexString(true)
       }
     }
-    
+
     get {
       return theme_textColor?.value() as! UIColor
     }
@@ -161,32 +152,30 @@ extension UITextField {
 
 extension UIView {
     @IBInspectable
-    var theme1ShadowColor:UIColor {
+    var theme1ShadowColor: UIColor {
         set {
             if let theme2 = self.store["shadow_theme2"] as? String {
                 layer.theme_shadowColor = [newValue.hexString(true), theme2]
-            }
-            else {
+            } else {
                 self.store["shadow_theme1"] = newValue.hexString(true)
             }
         }
-        
+
         get {
             return layer.theme_shadowColor?.value() as! UIColor
         }
     }
-    
+
     @IBInspectable
-    var theme2ShadowColor:UIColor {
+    var theme2ShadowColor: UIColor {
         set {
             if let theme1 = self.store["shadow_theme1"] as? String {
                 layer.theme_shadowColor = [theme1, newValue.hexString(true)]
-            }
-            else {
+            } else {
                 self.store["shadow_theme2"] = newValue.hexString(true)
             }
         }
-        
+
         get {
             return layer.theme_shadowColor?.value() as! UIColor
         }
@@ -195,77 +184,72 @@ extension UIView {
 
 extension UIView {
   @IBInspectable
-  var theme1BgColor:UIColor {
+  var theme1BgColor: UIColor {
     set {
       if let theme2 = self.store["bg_theme2"] as? String {
         theme_backgroundColor = [newValue.hexString(true), theme2]
-      }
-      else {
+      } else {
         self.store["bg_theme1"] = newValue.hexString(true)
       }
     }
-    
+
     get {
       return theme_backgroundColor?.value() as! UIColor
     }
   }
-  
+
   @IBInspectable
-  var theme2BgColor:UIColor {
+  var theme2BgColor: UIColor {
     set {
       if let theme1 = self.store["bg_theme1"] as? String {
         theme_backgroundColor = [theme1, newValue.hexString(true)]
-      }
-      else {
+      } else {
         self.store["bg_theme2"] = newValue.hexString(true)
       }
     }
-    
+
     get {
       return theme_backgroundColor?.value() as! UIColor
     }
   }
-  
-  var themeBgColor:UIColor {
+
+  var themeBgColor: UIColor {
     return theme_backgroundColor?.value() as! UIColor
   }
 }
 
 extension UIPickerView {
   @IBInspectable
-  var theme1TintColor:UIColor {
+  var theme1TintColor: UIColor {
     set {
       if let theme2 = self.store["picker_theme2"] as? String {
         theme_tintColor = [newValue.hexString(true), theme2]
-      }
-      else {
+      } else {
         self.store["picker_theme1"] = newValue.hexString(true)
       }
     }
-    
+
     get {
       return theme_tintColor?.value() as! UIColor
     }
   }
-  
-  var themeTintColor:UIColor {
+
+  var themeTintColor: UIColor {
     return theme_tintColor?.value() as! UIColor
   }
-  
+
   @IBInspectable
-  var theme2TintColor:UIColor {
+  var theme2TintColor: UIColor {
     set {
       if let theme1 = self.store["picker_theme1"] as? String {
         theme_tintColor = [theme1, newValue.hexString(true)]
-      }
-      else {
+      } else {
         self.store["picker_theme2"] = newValue.hexString(true)
       }
     }
-    
+
     get {
       return theme_tintColor?.value() as! UIColor
     }
   }
 }
-

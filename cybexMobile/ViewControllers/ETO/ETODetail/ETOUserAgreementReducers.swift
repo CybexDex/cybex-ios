@@ -9,15 +9,13 @@
 import UIKit
 import ReSwift
 
-func ETOUserAgreementReducer(action:Action, state:ETOUserAgreementState?) -> ETOUserAgreementState {
+func ETOUserAgreementReducer(action: Action, state: ETOUserAgreementState?) -> ETOUserAgreementState {
     let state = state ?? ETOUserAgreementState()
-        
+
     switch action {
     default:
         break
     }
-        
+
     return state
 }
-
-

@@ -9,7 +9,7 @@
 import Foundation
 
 extension ETODetailIntroView {
-    func adapterModelToETODetailIntroView(_ model:ETOProjectModel) {
-        
+    func adapterModelToETODetailIntroView(_ model: ETOProjectModel) {
+
     }
 }

@@ -11,59 +11,59 @@ import SwiftTheme
 
 @IBDesignable
 class ImageTextField: UITextField {
-  
+
     var textFieldBorderStyle: UITextField.BorderStyle = .none
-  
+
   // Provides left padding for image
   override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
     var textRect = super.leftViewRect(forBounds: bounds)
     textRect.origin.x += padding
     return textRect
   }
-  
+
   // Provides right padding for image
   override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
     var textRect = super.rightViewRect(forBounds: bounds)
     textRect.origin.x -= padding
     return textRect
   }
-  
-  @IBInspectable var locali:String {
+
+  @IBInspectable var locali: String {
     set {
       localized_text = newValue.localizedContainer()
       updateView()
     }
-    
+
     get {
       return (localized_text?.value() as! String).localized()
     }
   }
-  
+
   @IBInspectable var fieldImage: UIImage? = nil {
     didSet {
         NotificationCenter.default.removeObserver(self, name: UITextField.textDidBeginEditingNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UITextField.textDidEndEditingNotification, object: nil)
-      
-        NotificationCenter.default.addObserver(forName: UITextField.textDidBeginEditingNotification, object: self, queue: nil) {[weak self] (notifi) in
+
+        NotificationCenter.default.addObserver(forName: UITextField.textDidBeginEditingNotification, object: self, queue: nil) {[weak self] (_) in
         self?.leftView?.alpha = 1
       }
-      
-        NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification, object: self, queue: nil) {[weak self] (notifi) in
+
+        NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification, object: self, queue: nil) {[weak self] (_) in
         self?.leftView?.alpha = 0.5
       }
-      
+
       updateView()
     }
   }
-  
+
   @IBInspectable var tailImage: UIImage? = nil {
     didSet {
       updateView()
     }
   }
-  
-  var activityView: UIActivityIndicatorView? = nil
-  
+
+  var activityView: UIActivityIndicatorView?
+
   @IBInspectable var padding: CGFloat = 0
   @IBInspectable var color: UIColor = UIColor.gray {
     didSet {
@@ -80,7 +80,7 @@ class ImageTextField: UITextField {
       self.setNeedsDisplay()
     }
   }
-  
+
   func updateView() {
     if let image = fieldImage {
         leftViewMode = UITextField.ViewMode.always
@@ -89,7 +89,7 @@ class ImageTextField: UITextField {
       // Note: In order for your image to use the tint color, you have to select the image in the Assets.xcassets and change the "Render As" property to "Template Image".
       imageView.tintColor = color
       imageView.alpha = leftView?.alpha ?? 0.5
-      
+
       leftView = imageView
     } else {
         leftViewMode = UITextField.ViewMode.never
@@ -119,11 +119,11 @@ class ImageTextField: UITextField {
     }
     // Placeholder text color
 
-    attributedPlaceholder = NSAttributedString(string: placeholder != nil ?  placeholder! : "", attributes:[NSAttributedString.Key.foregroundColor: color])
+    attributedPlaceholder = NSAttributedString(string: placeholder != nil ?  placeholder! : "", attributes: [NSAttributedString.Key.foregroundColor: color])
   }
-  
+
   override func draw(_ rect: CGRect) {
-    
+
     let path = UIBezierPath()
     path.move(to: CGPoint(x: self.bounds.origin.x, y: self.bounds.height
       - 1))
@@ -133,7 +133,7 @@ class ImageTextField: UITextField {
     self.bottomColor.setStroke()
     path.stroke()
   }
-  
+
   @objc func willDealloc() -> Bool {
     return false
   }

@@ -15,10 +15,8 @@ enum CBKLineDataType: Int {
     case other
 }
 
-
-
 class CBKLineModel: ObjectDescriptable {
-    
+
     var klineDataType: CBKLineDataType
     // 日期
     var date: Double
@@ -34,42 +32,42 @@ class CBKLineModel: ObjectDescriptable {
     var volume: Double
     // 成交量
     var towardsVolume: Double
-    
+
     // MARK: 指标
     // 该model以及之前所有开盘价之和
     var sumOpen: Double?
-    
+
     // 该model以及之前所有收盘价之和
     var sumClose: Double?
-    
+
     // 该model以及之前所有最高价之和
     var sumHigh: Double?
-    
+
     // 该model以及之前所有最低价之和
     var sumLow: Double?
-    
+
     // 该model以及之前所有成交量之和
     var sumVolume: Double?
-    
-    var precision:Int
-    
+
+    var precision: Int
+
     // MARK: MA - MA(N) = (C1+C2+……CN) / N, C:收盘价
     var MAs: [Double?]?
     var MA_VOLUMEs: [Double?]?
-    
+
     // MARK: EMA - EMA(N) = 2 / (N+1) * (C-昨日EMA) + 昨日EMA, C:收盘价
     var EMAs: [Double?]?
     var EMA_VOLUMEs: [Double?]?
-    
+
     // MARK: MACD
-    
+
     // DIF = EMA(12) - EMA(26)
     var DIF: Double?
     // DEA = （前一日DEA X 8/10 + 今日DIF X 2/10）
     var DEA: Double?
     // MACD(12,26,9) = (DIF - DEA) * 2
     var MACD: Double?
-    
+
     // MARK: KDJ(9,3,3) 代表指标分析周期为9天，K值D值为3天
     // 九个交易日内最低价
     var minPriceOfNineClock: Double?
@@ -83,7 +81,7 @@ class CBKLineModel: ObjectDescriptable {
     var KDJ_D: Double?
     // J = 3K － 2D
     var KDJ_J: Double?
-    
+
     // MARK: BOLL
     // 中轨线
     var BOLL_MB: Double?
@@ -91,20 +89,20 @@ class CBKLineModel: ObjectDescriptable {
     var BOLL_UP: Double?
     // 下轨线
     var BOLL_DN: Double?
-    
+
     var change: String = "-"
-    
+
     var changeAmount: String = "-"
-    
-    var incre:changeScope = .equal
-    
+
+    var incre: changeScope = .equal
+
     init(klineDataType: CBKLineDataType = .CYB,
          date: Double,
          open: Double,
          close: Double,
          high: Double,
          low: Double,
-         towardsVolume:Double,
+         towardsVolume: Double,
          volume: Double,
          precision: Int) {
         self.klineDataType = klineDataType
@@ -116,7 +114,7 @@ class CBKLineModel: ObjectDescriptable {
         self.volume = volume
         self.towardsVolume = towardsVolume
         self.precision = precision
-        
+
     }
 }
 
@@ -124,7 +122,7 @@ extension CBKLineModel: Hashable {
     public var hashValue: Int {
         return Int(self.date + self.open + self.close + self.high + self.low +  self.volume + self.towardsVolume) + self.precision
     }
-    
+
     static func == (lhs: CBKLineModel, rhs: CBKLineModel) -> Bool {
         return lhs.date == rhs.date &&
             lhs.open == rhs.open &&

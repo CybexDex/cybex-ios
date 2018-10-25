@@ -14,23 +14,22 @@ import SwiftyUserDefaults
 import SwifterSwift
 import XLActionController
 
-
 class SettingViewController: BaseViewController {
-    
+
     @IBOutlet weak var environment: NormalCellView!
-    
+
     @IBOutlet weak var help: NormalCellView!
     @IBOutlet weak var language: NormalCellView!
     @IBOutlet weak var frequency: NormalCellView!
     @IBOutlet weak var version: NormalCellView!
     @IBOutlet weak var theme: NormalCellView!
-    
+
     @IBOutlet weak var logoutView: Button!
     var coordinator: (SettingCoordinatorProtocol & SettingStateManagerProtocol)?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.localized_text = R.string.localizable.navSetting.key.localizedContainer()
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .always
@@ -38,30 +37,29 @@ class SettingViewController: BaseViewController {
         setupUI()
         setupNotification()
         setupEvent()
-        if !UserManager.shared.isLoginIn{
+        if !UserManager.shared.isLoginIn {
             self.logoutView.isHidden = true
         }
-        self.logoutView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+        self.logoutView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
             guard let `self` = self else { return }
-            
+
             UserManager.shared.logout()
             self.coordinator?.dismiss()
         }).disposed(by: disposeBag)
     }
-    
+
     func setupUI() {
-        
+
 //        self.environment.isHidden = false
         language.content_locali =  R.string.localizable.setting_language.key
         version.content.text = Bundle.main.version
         theme.content_locali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key : R.string.localizable.light.key
         frequency.content_locali = UserManager.shared.frequency_type.description()
     }
-    
-    
+
     func setupEvent() {
-        let itemsView = [language,frequency,version,help,theme,environment]
-        
+        let itemsView = [language, frequency, version, help, theme, environment]
+
         for itemView in itemsView {
             itemView?.rx.tapGesture().when(.ended).asObservable().subscribe(onNext: { [weak self](tap) in
                 guard let `self` = self else { return }
@@ -71,24 +69,20 @@ class SettingViewController: BaseViewController {
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         }
     }
-    
-    func clickCellView(_ sender : NormalCellView) {
-        
+
+    func clickCellView(_ sender: NormalCellView) {
+
         if sender == language {
             self.coordinator?.openSettingDetail(type: .language)
-        }
-        else if sender == frequency {
+        } else if sender == frequency {
             self.chooseRefreshStyle()
-        }
-        else if sender == version {
+        } else if sender == version {
             handlerUpdateVersion({
                 self.endLoading()
             }, showNoUpdate: true)
-        }
-        else if sender == help {
+        } else if sender == help {
             self.coordinator?.openHelpWebView()
-        }
-        else if sender == theme {
+        } else if sender == theme {
             self.coordinator?.openSettingDetail(type: .theme)
         }
 //        else if sender == environment {
@@ -97,26 +91,25 @@ class SettingViewController: BaseViewController {
 //            })
 //        }
     }
-    
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
     }
-    
+
     func setupNotification() {
-        
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] notification in
+
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
             guard let `self` = self else { return }
-            
+
             let color = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: color), for: .default)
         })
     }
-    
+
     override func configureObserveState() {
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil)
@@ -127,31 +120,30 @@ extension SettingViewController {
     func chooseRefreshStyle() {
         let actionController = PeriscopeActionController()
         actionController.selectedIndex = IndexPath(row: UserManager.shared.frequency_type.rawValue, section: 0)
-        actionController.addAction(Action(R.string.localizable.frequency_normal.key.localized(), style: .destructive, handler: {[weak self] action in
+        actionController.addAction(Action(R.string.localizable.frequency_normal.key.localized(), style: .destructive, handler: {[weak self] _ in
             guard let `self` = self else {return}
             UserManager.shared.frequency_type = .normal
             self.frequency.content_locali = UserManager.shared.frequency_type.description()
         }))
-        
-        actionController.addAction(Action(R.string.localizable.frequency_time.key.localized(), style: .destructive, handler: { [weak self]action in
+
+        actionController.addAction(Action(R.string.localizable.frequency_time.key.localized(), style: .destructive, handler: { [weak self]_ in
             guard let `self` = self else {return}
-            
+
             UserManager.shared.frequency_type = .time
             self.frequency.content_locali = UserManager.shared.frequency_type.description()
-            
+
         }))
-        
-        actionController.addAction(Action(R.string.localizable.frequency_wifi.key.localized(), style: .destructive, handler: { [weak self]action in
+
+        actionController.addAction(Action(R.string.localizable.frequency_wifi.key.localized(), style: .destructive, handler: { [weak self]_ in
             guard let `self` = self else {return}
             UserManager.shared.frequency_type = .WiFi
             self.frequency.content_locali = UserManager.shared.frequency_type.description()
         }))
-        
+
         actionController.addSection(PeriscopeSection())
-        actionController.addAction(Action(R.string.localizable.alert_cancle.key.localized(), style: .cancel, handler: { action in
+        actionController.addAction(Action(R.string.localizable.alert_cancle.key.localized(), style: .cancel, handler: { _ in
         }))
-        
+
         present(actionController, animated: true, completion: nil)
     }
 }
-

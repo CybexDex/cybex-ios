@@ -9,14 +9,14 @@
 import Foundation
 import SwiftTheme
 class CBKLineAccessoryView: UIView {
-  
+
   // MARK: - Property
   public var limitValueChanged: ((_ limitValue: (minValue: Double, maxValue: Double)?) -> Void)?
-  
+
   fileprivate let configuration = CBConfiguration.sharedConfiguration
   fileprivate var accessoryDrawKLineModels: [CBKLineModel]?
   fileprivate var drawAssistString: NSAttributedString?
-  
+
   fileprivate var drawMaxY: CGFloat {
     get {
       return bounds.height
@@ -27,64 +27,63 @@ class CBKLineAccessoryView: UIView {
       return bounds.height
     }
   }
-  
-  
+
 //  fileprivate var drawIndicationModels: [CBKLineModel] {
 //    get {
 //      let kdjModel = OKKDJModel(klineModels: configuration.dataSource.klineModels)
 //      return kdjModel.fetchDrawKDJData(drawRange: configuration.dataSource.drawRange)
 //    }
 //  }
-  
+
   //    convenience init(configuration: OKConfiguration) {
   //        self.init()
   //        self.configuration = configuration
   //    }
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
   }
-  
+
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   // MARK: - Public
-  
+
   public func drawAccessoryView() {
-    
+
     fetchAccessoryDrawKLineModels()
     setNeedsDisplay()
   }
-  
+
   public func drawAssistView(model: CBKLineModel?) {
-    
+
     fetchAssistString(model: model)
     let displayRect = CGRect(x: 0,
                              y: 0,
                              width: bounds.width,
                              height: configuration.accessory.topViewHeight)
-    
+
     setNeedsDisplay(displayRect)
   }
-  
+
   override func draw(_ rect: CGRect) {
     super.draw(rect)
-    
+
     guard let context = UIGraphicsGetCurrentContext() else {
       return
     }
-    
+
     // 背景色
     context.clear(rect)
 //    context.setFillColor(configuration.accessory.backgroundColor[configuration.themeIndex].cgColor)
 //    context.fill(rect)
-    
+
     // 没有数据 不绘制
     guard let accessoryDrawKLineModels = accessoryDrawKLineModels else {
       return
     }
-    
+
 //    guard CGRect.isSame(rect, bounds)
 //      else {
 //
@@ -93,26 +92,26 @@ class CBKLineAccessoryView: UIView {
 //    }
 //
     context.saveGState()
-    
-    context.move(to: CGPoint(x: 15, y:0))
+
+    context.move(to: CGPoint(x: 15, y: 0))
     context.addLine(to: CGPoint(x: width - 15, y: 0))
     context.setStrokeColor(configuration.theme.dashColor.cgColor)
     context.setLineWidth(configuration.theme.dashWidth)
     context.setLineDash(phase: 0, lengths: [1, 5])
     context.strokePath()
-    
+
     context.restoreGState()
-    
+
 //    fetchAssistString(model: accessoryDrawKLineModels.last!)
 //    drawAssistString?.draw(in: rect)
-    
+
     switch configuration.accessory.indicatorType {
     case .MACD:
       drawMACD(context: context, drawModels: accessoryDrawKLineModels)
-      
+
     case .KDJ:
       drawKDJ(context: context, drawModels: accessoryDrawKLineModels)
-      
+
     default:
       break
     }
@@ -121,13 +120,13 @@ class CBKLineAccessoryView: UIView {
 
 // MARK: - 辅助视图相关
 extension CBKLineAccessoryView {
-  
+
   fileprivate func fetchAssistString(model: CBKLineModel?) {
-    
+
     guard let accessoryDrawKLineModels = accessoryDrawKLineModels else { return }
-    
+
     var drawModel = accessoryDrawKLineModels.last!
-    
+
     if let model = model {
       for accessoryModel in accessoryDrawKLineModels {
         if model.date == accessoryModel.date {
@@ -136,43 +135,42 @@ extension CBKLineAccessoryView {
         }
       }
     }
-    
+
     let drawAttrsString = NSMutableAttributedString()
     switch configuration.accessory.indicatorType {
     case .MACD:
-        let attrs: [NSAttributedString.Key : Any]? = [
-            NSAttributedString.Key.foregroundColor : configuration.main.dateAssistTextColor,
-            NSAttributedString.Key.font : configuration.main.dateAssistTextFont
+        let attrs: [NSAttributedString.Key: Any]? = [
+            NSAttributedString.Key.foregroundColor: configuration.main.dateAssistTextColor,
+            NSAttributedString.Key.font: configuration.main.dateAssistTextFont
       ]
       drawAttrsString.append(NSAttributedString(string: "MACD(12,26,9) ", attributes: attrs))
-      
-      
+
       if let dif = drawModel.DIF {
-        let difAttrs: [NSAttributedString.Key : Any]? = [
-            NSAttributedString.Key.foregroundColor : configuration.theme.DIFColor,
-            NSAttributedString.Key.font : configuration.main.dateAssistTextFont
+        let difAttrs: [NSAttributedString.Key: Any]? = [
+            NSAttributedString.Key.foregroundColor: configuration.theme.DIFColor,
+            NSAttributedString.Key.font: configuration.main.dateAssistTextFont
         ]
         let difAttrsStr = NSAttributedString(string: String(format: "DIF: %.2f ", dif), attributes: difAttrs)
         drawAttrsString.append(difAttrsStr)
       }
       if let dea = drawModel.DEA {
-        let deaAttrs: [NSAttributedString.Key : Any]? = [
-            NSAttributedString.Key.foregroundColor : configuration.theme.DEAColor,
-            NSAttributedString.Key.font : configuration.main.dateAssistTextFont
+        let deaAttrs: [NSAttributedString.Key: Any]? = [
+            NSAttributedString.Key.foregroundColor: configuration.theme.DEAColor,
+            NSAttributedString.Key.font: configuration.main.dateAssistTextFont
         ]
         let deaAttrsStr = NSAttributedString(string: String(format: "DEA: %.2f ", dea), attributes: deaAttrs)
         drawAttrsString.append(deaAttrsStr)
       }
       if let macd = drawModel.MACD {
-        
-        let macdAttrs: [NSAttributedString.Key : Any]? = [
-            NSAttributedString.Key.foregroundColor : configuration.theme.MACDColor,
-            NSAttributedString.Key.font : configuration.main.dateAssistTextFont
+
+        let macdAttrs: [NSAttributedString.Key: Any]? = [
+            NSAttributedString.Key.foregroundColor: configuration.theme.MACDColor,
+            NSAttributedString.Key.font: configuration.main.dateAssistTextFont
         ]
         let macdAttrsStr = NSAttributedString(string: String(format: "MACD: %.2f ", macd), attributes: macdAttrs)
         drawAttrsString.append(macdAttrsStr)
       }
-      
+
     case .KDJ:
       break
 //      let attrs: [NSAttributedStringKey : Any]? = [
@@ -205,7 +203,7 @@ extension CBKLineAccessoryView {
 //        let jAttrsStr = NSAttributedString(string: String(format: "J: %.2f ", value), attributes: jAttrs)
 //        drawAttrsString.append(jAttrsStr)
 //      }
-      
+
     default:
       break
     }
@@ -215,49 +213,49 @@ extension CBKLineAccessoryView {
 
 // MARK: - 绘制指标
 extension CBKLineAccessoryView {
-  
+
   // MARK: 绘制MACD
   fileprivate func drawMACD(context: CGContext, drawModels: [CBKLineModel]) {
-    
+
     guard let limitValue = fetchLimitValue() else {
       return
     }
-    
+
     let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
     let middleY = drawMaxY - CGFloat(abs(limitValue.minValue) / unitValue)
-    
+
     // 画柱状图
     for (index, model) in drawModels.enumerated() {
-      
+
       let xPosition = CGFloat(index) * (configuration.theme.klineWidth + configuration.theme.klineSpace)
-      
+
       var startPoint = CGPoint(x: xPosition, y: middleY)
       var endPoint = CGPoint(x: xPosition, y: middleY)
       if let macd = model.MACD {
-        
+
         let offsetValue = CGFloat(abs(macd) / unitValue)
-        
+
         startPoint.y = macd > 0 ? middleY - offsetValue : middleY
         endPoint.y = macd > 0 ? middleY : middleY + offsetValue
-        
+
         let strokeColor = macd > 0 ?
           configuration.theme.increaseColor : configuration.theme.decreaseColor
-        
-        let path = UIBezierPath(roundedRect: CGRect(x:xPosition, y:startPoint.y, width: configuration.theme.klineWidth, height:abs(endPoint.y - startPoint.y)), cornerRadius: configuration.theme.klineRadius).cgPath
+
+        let path = UIBezierPath(roundedRect: CGRect(x: xPosition, y: startPoint.y, width: configuration.theme.klineWidth, height: abs(endPoint.y - startPoint.y)), cornerRadius: configuration.theme.klineRadius).cgPath
         context.addPath(path)
         context.setFillColor(strokeColor.withAlphaComponent(0.2).cgColor)
         context.fillPath()
       }
     }
     context.strokePath()
-    
+
     // 画DIF线
     let difLineBrush = CBLineBrush(indicatorType: .DIF,
                                    context: context)
     difLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
-      
+
       let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
-      
+
       if let value = model.DIF {
         let yPosition = CGFloat(-(value) / unitValue) + middleY
         return CGPoint(x: xPosition, y: yPosition)
@@ -265,12 +263,12 @@ extension CBKLineAccessoryView {
       return nil
     }
     difLineBrush.draw(drawModels: drawModels)
-    
+
     // 画DEA线
     let deaLineBrush = CBLineBrush(indicatorType: .DEA,
                                    context: context)
     deaLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
-      
+
       if let value = model.DEA {
         let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
         let yPosition = CGFloat(-(value) / unitValue) + middleY
@@ -280,17 +278,17 @@ extension CBKLineAccessoryView {
     }
     deaLineBrush.draw(drawModels: drawModels)
   }
-  
+
   // MARK: 绘制KDJ
   fileprivate func drawKDJ(context: CGContext, drawModels: [CBKLineModel]) {
-    
+
     guard let limitValue = fetchLimitValue() else { return }
-    
+
     let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
-    
+
     let KDJ_KLineBrush = CBLineBrush(indicatorType: .KDJ_K, context: context)
     KDJ_KLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
-      
+
       if let value = model.KDJ_K {
         let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
         let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
@@ -299,10 +297,10 @@ extension CBKLineAccessoryView {
       return nil
     }
     KDJ_KLineBrush.draw(drawModels: drawModels)
-    
+
     let KDJ_DLineBrush = CBLineBrush(indicatorType: .KDJ_D, context: context)
     KDJ_DLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
-      
+
       if let value = model.KDJ_D {
         let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
         let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
@@ -311,10 +309,10 @@ extension CBKLineAccessoryView {
       return nil
     }
     KDJ_DLineBrush.draw(drawModels: drawModels)
-    
+
     let KDJ_JLineBrush = CBLineBrush(indicatorType: .KDJ_J, context: context)
     KDJ_JLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
-      
+
       if let value = model.KDJ_J {
         let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
         let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
@@ -328,19 +326,19 @@ extension CBKLineAccessoryView {
 
 // MARK: - 获取相关数据
 extension CBKLineAccessoryView {
-  
+
   fileprivate func fetchAccessoryDrawKLineModels() {
-    
+
     guard configuration.dataSource.klineModels.count > 0 else {
       accessoryDrawKLineModels = nil
       return
     }
-    
+
     switch configuration.accessory.indicatorType {
     case .MACD:
       let macdModel = CBMACDModel(klineModels: configuration.dataSource.klineModels)
       accessoryDrawKLineModels = macdModel.fetchDrawMACDData(drawRange: configuration.dataSource.drawRange)
-      
+
     case .KDJ:
 //      let kdjModel = OKKDJModel(klineModels: configuration.dataSource.klineModels)
 //      accessoryDrawKLineModels = kdjModel.fetchDrawKDJData(drawRange: configuration.dataSource.drawRange)
@@ -349,17 +347,17 @@ extension CBKLineAccessoryView {
       break
     }
   }
-  
+
   // MARK: - 获取指标数据最大最小值
   fileprivate func fetchLimitValue() -> (minValue: Double, maxValue: Double)? {
-    
+
     guard let accessoryDrawKLineModels = accessoryDrawKLineModels else {
       return nil
     }
-    
+
     var minValue = 0.0
     var maxValue = 0.0
-    
+
     switch configuration.accessory.indicatorType {
     case .MACD:
       for model in accessoryDrawKLineModels {
@@ -376,16 +374,16 @@ extension CBKLineAccessoryView {
           maxValue = value > maxValue ? value : maxValue
         }
       }
-      
+
     case .KDJ:
-      
+
       for model in accessoryDrawKLineModels {
-        
+
         if let value = model.KDJ_K {
           minValue = value < minValue ? value : minValue
           maxValue = value > maxValue ? value : maxValue
         }
-        
+
         if let value = model.KDJ_D {
           minValue = value < minValue ? value : minValue
           maxValue = value > maxValue ? value : maxValue
@@ -395,7 +393,7 @@ extension CBKLineAccessoryView {
           maxValue = value > maxValue ? value : maxValue
         }
       }
-      
+
     default:
       break
     }

@@ -10,13 +10,13 @@ import Foundation
 
 struct ShareModes: OptionSet {
     let rawValue: Int
-    
+
     static let wechat = ShareModes(rawValue: 1)
-    
+
     static let timeLine = ShareModes(rawValue: 2)
-    
+
     static let qq = ShareModes(rawValue: 4)
-    
+
     static let sina = ShareModes(rawValue: 8)
 }
 
@@ -27,13 +27,13 @@ enum ShareType: Int {
 }
 
 class ShareData: NSObject {
-    
+
 }
 
 class ShareImageData: ShareData {
-    
+
 }
 
 class ShareWebData: ShareData {
-    
+
 }

@@ -9,13 +9,13 @@
 import UIKit
 import ReSwift
 
-func RechargeDetailReducer(action:Action, state:RechargeDetailState?) -> RechargeDetailState {
+func RechargeDetailReducer(action: Action, state: RechargeDetailState?) -> RechargeDetailState {
     return RechargeDetailState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: RechargeDetailPropertyReducer(state?.property, action: action))
 }
 
 func RechargeDetailPropertyReducer(_ state: RechargeDetailPropertyState?, action: Action) -> RechargeDetailPropertyState {
     var state = state ?? RechargeDetailPropertyState()
-    
+
     switch action {
     case let action as FetchWithdrawInfo:
         state.data.accept(action.data)
@@ -28,9 +28,6 @@ func RechargeDetailPropertyReducer(_ state: RechargeDetailPropertyState?, action
     default:
         break
     }
-    
+
     return state
 }
-
-
-

@@ -12,11 +12,11 @@ import Moya
 import RxSwift
 import RxCocoa
 
-//MARK: - State
+// MARK: - State
 struct AccountState: StateType {
     var isLoading = false
     var page: Int = 1
-    var errorMessage:String?
+    var errorMessage: String?
     var property: AccountPropertyState
 }
 
@@ -29,10 +29,10 @@ struct AccountViewModel {
   var name: String = ""
 }
 
-//MARK: - Action Creator
+// MARK: - Action Creator
 class AccountPropertyActionCreate: LoadingActionCreator {
     public typealias ActionCreator = (_ state: AccountState, _ store: Store<AccountState>) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         _ state: AccountState,
         _ store: Store <AccountState>,

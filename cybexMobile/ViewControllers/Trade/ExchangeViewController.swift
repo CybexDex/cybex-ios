@@ -12,38 +12,37 @@ import RxCocoa
 import ReSwift
 
 class ExchangeViewController: BaseViewController {
-  
+
   var coordinator: (ExchangeCoordinatorProtocol & ExchangeStateManagerProtocol)?
-  var type : exchangeType = .buy
+  var type: exchangeType = .buy
 
   var pair: Pair? {
-    didSet{
+    didSet {
       if self.isVisible {
         print("exchangeType : \(type)")
         self.children.forEach { (viewController) in
-          if var viewController = viewController as? TradePair{
+          if var viewController = viewController as? TradePair {
             viewController.pariInfo = pair!
           }
         }
       }
     }
   }
-  
+
   @IBOutlet weak var containerView: ExchangeView!
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     self.coordinator?.setupChildVC(self)
   }
 
-  
   override func configureObserveState() {
-    
+
   }
 }
 
-extension ExchangeViewController : TradePair {
+extension ExchangeViewController: TradePair {
   var pariInfo: Pair {
     get {
       return self.pair!
@@ -52,11 +51,11 @@ extension ExchangeViewController : TradePair {
       self.pair = newValue
     }
   }
-  
+
   func refresh() {
     if self.isVisible {
         self.children.forEach { (viewController) in
-        if let vc = viewController as? TradePair{
+        if let vc = viewController as? TradePair {
           vc.refresh()
         }
       }
@@ -65,11 +64,9 @@ extension ExchangeViewController : TradePair {
 }
 
 extension ExchangeViewController {
-  @objc func orderbookClicked(_ data:[String: Any]) {
+  @objc func orderbookClicked(_ data: [String: Any]) {
     if let price = data["price"] as? String {
       self.coordinator?.switchPriceToBusinessVC(price, isBuy: self.type == .buy)
     }
   }
 }
-
-

@@ -10,18 +10,18 @@ import Foundation
 
 @IBDesignable
 class HotAssetsView: CybexBaseView {
-    
+
     @IBOutlet weak var contentView: GridContentView!
     var itemViews: [HotAssetView]!
-    
-    enum Event:String {
+
+    enum Event: String {
         case HotAssetsViewDidClicked
     }
-    
+
     override var data: Any? {
         didSet {
             if let data = data as? [Ticker], data.count != 0 {
-                if self.itemViews == nil || self.itemViews.count == 0{
+                if self.itemViews == nil || self.itemViews.count == 0 {
                     self.contentView.reloadData()
                 }
                 for index in 0..<data.count {
@@ -30,28 +30,28 @@ class HotAssetsView: CybexBaseView {
             }
         }
     }
-    
+
     override func setup() {
         super.setup()
         contentView.datasource = self
         setupUI()
         setupSubViewEvent()
     }
-    
+
     func setupUI() {
         clearBgColor()
     }
-    
+
     func setupSubViewEvent() {
-        
+
     }
-    
+
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.HotAssetsViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }
 
-extension HotAssetsView : GridContentViewDataSource{
+extension HotAssetsView: GridContentViewDataSource {
     func itemsForView(_ view: GridContentView) -> [UIView] {
         if let data = self.data as? [Ticker] {
             let views = Array(0...data.count - 1).map({ (index) -> HotAssetView in
@@ -64,18 +64,18 @@ extension HotAssetsView : GridContentViewDataSource{
             itemViews = views
             return views
         }
-        
+
         return []
     }
-    
+
     @objc func lineGapForView(_ view: GridContentView) -> CGFloat {
         return 0
     }
-    
+
     @objc func lineMaxItemNum(_ view: GridContentView) -> Int {
         return 3
     }
-    
+
     @objc func lineHeightForView(_ view: GridContentView, lineNum: Int) -> CGFloat {
         return 90
     }

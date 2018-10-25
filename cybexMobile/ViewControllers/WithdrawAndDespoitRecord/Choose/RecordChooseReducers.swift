@@ -9,9 +9,9 @@
 import UIKit
 import ReSwift
 
-func RecordChooseReducer(action:Action, state:RecordChooseState?) -> RecordChooseState {
+func RecordChooseReducer(action: Action, state: RecordChooseState?) -> RecordChooseState {
     let state = state ?? RecordChooseState()
-        
+
     switch action {
     case let action as FetchDataAction:
         state.data.accept(action.data)
@@ -20,7 +20,7 @@ func RecordChooseReducer(action:Action, state:RecordChooseState?) -> RecordChoos
     default:
         break
     }
-        
+
     return state
 }
 
@@ -34,4 +34,3 @@ func transferAccountAsset(_ sender: AccountAssets) -> [String] {
     }
     return [R.string.localizable.openedAll.key.localized()]
 }
-

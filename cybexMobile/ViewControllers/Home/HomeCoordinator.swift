@@ -11,29 +11,29 @@ import ReSwift
 import NBLCommonModule
 
 protocol HomeCoordinatorProtocol {
-  func openMarket(index:Int, currentBaseIndex: Int)
+  func openMarket(index: Int, currentBaseIndex: Int)
 }
 
 protocol HomeStateManagerProtocol {
     var state: HomeState { get }
-    
-    func switchPageState(_ state:PageState)
+
+    func switchPageState(_ state: PageState)
 }
 
 class HomeCoordinator: HomeRootCoordinator {
     var store = Store(
         reducer: HomeReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
-    
+
     var state: HomeState {
         return store.state
     }
 }
 
 extension HomeCoordinator: HomeCoordinatorProtocol {
-  func openMarket(index:Int, currentBaseIndex:Int) {
+  func openMarket(index: Int, currentBaseIndex: Int) {
     let vc = R.storyboard.main.marketViewController()!
     vc.curIndex = index
     vc.currentBaseIndex = currentBaseIndex
@@ -43,12 +43,11 @@ extension HomeCoordinator: HomeCoordinatorProtocol {
     vc.coordinator = coordinator
     self.rootVC.pushViewController(vc, animated: true)
   }
-    
- 
+
 }
 
 extension HomeCoordinator: HomeStateManagerProtocol {
-    func switchPageState(_ state:PageState) {
+    func switchPageState(_ state: PageState) {
         self.store.dispatch(PageStateAction(state: state))
     }
 }

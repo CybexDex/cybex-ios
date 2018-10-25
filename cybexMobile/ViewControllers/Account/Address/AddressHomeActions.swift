@@ -9,11 +9,11 @@
 import Foundation
 import ReSwift
 
-//MARK: - State
+// MARK: - State
 struct AddressHomeState: StateType {
     var isLoading = false
     var page: Int = 1
-    var errorMessage:String?
+    var errorMessage: String?
     var property: AddressHomePropertyState
     var callback: AddressHomeCallbackState
 }
@@ -24,10 +24,10 @@ struct AddressHomePropertyState {
 struct AddressHomeCallbackState {
 }
 
-//MARK: - Action Creator
+// MARK: - Action Creator
 class AddressHomePropertyActionCreate {
     public typealias ActionCreator = (_ state: AddressHomeState, _ store: Store<AddressHomeState>) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         _ state: AddressHomeState,
         _ store: Store <AddressHomeState>,
