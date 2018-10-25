@@ -11,16 +11,13 @@ import ReSwift
 
 func RechargeReducer(action: Action, state: RechargeState?) -> RechargeState {
     let state = state ?? RechargeState()
-    
+
     switch action {
     case let action as FecthDepositIds:state.depositIds.accept(action.data)
     case let action as FecthWithdrawIds:state.withdrawIds.accept(action.data)
     default:
         break
     }
-    
+
     return state
 }
-
-
-

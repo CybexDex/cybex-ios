@@ -22,13 +22,13 @@ protocol EntryStateManagerProtocol {
 }
 
 class EntryCoordinator: EntryRootCoordinator {
-    
+
     lazy var creator = EntryPropertyActionCreate()
-    
+
     var store = Store<EntryState>(
         reducer: EntryReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
 }
 
@@ -37,7 +37,7 @@ extension EntryCoordinator: EntryCoordinatorProtocol {
     let vc = R.storyboard.main.registerViewController()!
     let coordinator = RegisterCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator
-    
+
     UIView.beginAnimations("register", context: nil)
     UIView.setAnimationCurve(.easeInOut)
     UIView.setAnimationDuration(0.7)
@@ -45,7 +45,7 @@ extension EntryCoordinator: EntryCoordinatorProtocol {
     self.rootVC.pushViewController(vc, animated: false)
     UIView.commitAnimations()
   }
-  
+
   func dismiss() {
     app_coodinator.rootVC.dismiss(animated: true, completion: nil)
   }
@@ -55,7 +55,7 @@ extension EntryCoordinator: EntryStateManagerProtocol {
     var state: EntryState {
         return store.state
     }
-    
+
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<EntryState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState {

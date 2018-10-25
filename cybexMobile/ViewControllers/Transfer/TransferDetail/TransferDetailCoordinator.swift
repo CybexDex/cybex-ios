@@ -17,29 +17,29 @@ protocol TransferDetailStateManagerProtocol {
   func subscribe<SelectedState, S: StoreSubscriber>(
     _ subscriber: S, transform: ((Subscription<TransferDetailState>) -> Subscription<SelectedState>)?
   ) where S.StoreSubscriberStateType == SelectedState
-  
+
 }
 
 class TransferDetailCoordinator: AccountRootCoordinator {
-  
+
   lazy var creator = TransferDetailPropertyActionCreate()
-  
+
   var store = Store<TransferDetailState>(
     reducer: TransferDetailReducer,
     state: nil,
-    middleware:[TrackingMiddleware]
+    middleware: [TrackingMiddleware]
   )
 }
 
 extension TransferDetailCoordinator: TransferDetailCoordinatorProtocol {
-  
+
 }
 
 extension TransferDetailCoordinator: TransferDetailStateManagerProtocol {
   var state: TransferDetailState {
     return store.state
   }
-  
+
   func subscribe<SelectedState, S: StoreSubscriber>(
     _ subscriber: S, transform: ((Subscription<TransferDetailState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState {

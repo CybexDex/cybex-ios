@@ -16,7 +16,7 @@ protocol AccountCoordinatorProtocol {
     func openYourProtfolio()
     func openSetting()
     func openRecharge()
-    
+
     func openTransfreList()
 }
 
@@ -25,26 +25,26 @@ protocol AccountStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<AccountState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
-    
+
 }
 
 class AccountCoordinator: AccountRootCoordinator {
-    
+
     lazy var creator = AccountPropertyActionCreate()
-    
+
     var store = Store<AccountState>(
         reducer: AccountReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
-    
+
     var state: AccountState {
         return store.state
     }
 }
 
 extension AccountCoordinator: AccountCoordinatorProtocol {
-    func openOpenedOrders(){
+    func openOpenedOrders() {
         // 跳转到其他页面的时候
         // 1 创建跳转的页面
         // 2 创建跳转页面的路由coordinator。而且根路由要转换成当前VC
@@ -55,53 +55,52 @@ extension AccountCoordinator: AccountCoordinatorProtocol {
         vc.coordinator = coordinator
         self.rootVC.pushViewController(vc, animated: true)
     }
-    
+
     func openAddressManager() {
         let vc = R.storyboard.account.addressHomeViewController()!
         let coordinator = AddressHomeCoordinator(rootVC: self.rootVC)
         vc.coordinator  = coordinator
         self.rootVC.pushViewController(vc, animated: true)
     }
-    
+
     // MARK: 锁定期资产
-    func openLockupAssets(){
+    func openLockupAssets() {
         let vc = R.storyboard.account.lockupAssetsViewController()!
         let coordinator = LockupAssetsCoordinator(rootVC: self.rootVC)
         vc.coordinator  = coordinator
         self.rootVC.pushViewController(vc, animated: true)
     }
-    
+
     // MARK: 可用资产
-    func openYourProtfolio(){
+    func openYourProtfolio() {
         let vc = R.storyboard.account.yourProtfolioViewController()!
         let coordinator = YourPortfolioCoordinator(rootVC: self.rootVC)
         vc.coordinator  = coordinator
         self.rootVC.pushViewController(vc, animated: true)
     }
-    
+
     // MARK: 设置
-    func openSetting(){
-        
+    func openSetting() {
+
         //    let vc = R.storyboard.business.businessViewController()!
         //    let coordinator = BusinessCoordinator(rootVC: self.rootVC)
         //    vc.coordinator = coordinator
         //    self.rootVC.pushViewController(vc, animated: true)
-        
-        
+
         let vc = R.storyboard.main.settingViewController()!
         let coordinator = SettingCoordinator(rootVC: self.rootVC)
         vc.coordinator  = coordinator
         self.rootVC.pushViewController(vc, animated: true)
     }
-    
-    // MARK : 交易
-    func openRecharge(){
+
+    // MARK: 交易
+    func openRecharge() {
         let vc = R.storyboard.account.rechargeViewController()!
         let coordinator = RechargeCoordinator(rootVC: self.rootVC)
         vc.coordinator = coordinator
         self.rootVC.pushViewController(vc, animated: true)
     }
-    
+
     func openTransfreList() {
         let vc = R.storyboard.recode.transferListViewController()!
         vc.coordinator = TransferListCoordinator(rootVC: self.rootVC)
@@ -110,12 +109,11 @@ extension AccountCoordinator: AccountCoordinatorProtocol {
 }
 
 extension AccountCoordinator: AccountStateManagerProtocol {
-    
+
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<AccountState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
-    
-    
+
 }

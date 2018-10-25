@@ -14,11 +14,11 @@ import SwifterSwift
 public class BlockSubscriber<S>: StoreSubscriber {
     public typealias StoreSubscriberStateType = S
     private let block: (S) -> Void
-    
+
     public init(block: @escaping (S) -> Void) {
         self.block = block
     }
-    
+
     public func newState(state: S) {
         self.block(state)
     }
@@ -29,23 +29,20 @@ let TrackingMiddleware: Middleware<Any> = { dispatch, getState in
         return { action in
             if let action = action as? PageStateAction, let state = getState() as? BaseState {
                 state.pageState.accept(action.state)
-            }
-            else if let action = action as? RouteContextAction, let state = getState() as? BaseState {
+            } else if let action = action as? RouteContextAction, let state = getState() as? BaseState {
                 state.context.accept(action.context)
-            }
-            else if let action = action as? RefreshState {
+            } else if let action = action as? RefreshState {
                 _ = action.vc?.perform(action.sel)
             }
-            
+
             return next(action)
         }
     }
 }
 
-
 func loadingReducer(_ state: Bool?, action: Action) -> Bool {
     var state = state ?? false
-    
+
     switch action {
     case _ as StartLoading:
         state = true
@@ -54,13 +51,13 @@ func loadingReducer(_ state: Bool?, action: Action) -> Bool {
     default:
         break
     }
-    
+
     return state
 }
 
 func errorMessageReducer(_ state: String?, action: Action) -> String {
     var state = state ?? ""
-    
+
     switch action {
     case let action as NetworkErrorMessage:
         state = action.errorMessage
@@ -69,13 +66,13 @@ func errorMessageReducer(_ state: String?, action: Action) -> String {
     default:
         break
     }
-    
+
     return state
 }
 
 func pageReducer(_ state: Int?, action: Action) -> Int {
     var state = state ?? 1
-    
+
     switch action {
     case _ as NextPage:
         state = state + 1
@@ -84,25 +81,23 @@ func pageReducer(_ state: Int?, action: Action) -> Int {
     default:
         break
     }
-    
+
     return state
 }
 
-
-func AppReducer(action:Action, state:AppState?) -> AppState {
+func AppReducer(action: Action, state: AppState?) -> AppState {
     return AppState(property: AppPropertyReducer(state?.property, action: action))
 }
-
 
 let s = DispatchSemaphore(value: 1)
 
 func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppPropertyState {
     var state = state ?? AppPropertyState()
-    
+
     var ids = state.subscribeIds ?? [:]
     var refreshTimes = state.pairsRefreshTimes ?? [:]
     var klineDatas = state.detailData ?? [:]
-    
+
     switch action {
 //    case let action as MarketsFetched:
 //        async {
@@ -118,29 +113,28 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
 //                }
 //            }
 //        }
-        
+
     case let action as SubscribeSuccess:
         ids[action.pair] = action.id
         refreshTimes[action.pair] = Date().timeIntervalSince1970
         state.subscribeIds = ids
         state.pairsRefreshTimes = refreshTimes
-        
+
     case let action as AssetInfoAction:
         state.assetInfo[action.assetID] = action.info
     case let action as kLineFetched:
-        
+
         if klineDatas.has(key: action.pair) {
             var klineData = klineDatas[action.pair]!
             klineData[action.stick] = action.assets
             klineDatas[action.pair] = klineData
-        }
-        else {
+        } else {
             klineDatas[action.pair] = [action.stick: action.assets]
         }
         state.detailData = klineDatas
     case let action as FecthEthToRmbPriceAction:
         if action.price.count > 0 {
-            for rmbPrices in action.price{
+            for rmbPrices in action.price {
                 if rmbPrices.name == "CYB"{
                     if rmbPrices.rmb_price != "" && rmbPrices.rmb_price != "0"{
                         state.cyb_rmb_price = rmbPrices.rmb_price.toDouble()!
@@ -151,30 +145,28 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
         state.rmb_prices = action.price
     case let action as FecthMarketListAction:
         state.importMarketLists = action.data
-        
+
     case let action as TickerFetched:
         async {
             if s.wait(timeout: .distantFuture) == .success {
                 main {
-                    refreshTimes[Pair(base:action.asset.base, quote:action.asset.quote)] = Date().timeIntervalSince1970
+                    refreshTimes[Pair(base: action.asset.base, quote: action.asset.quote)] = Date().timeIntervalSince1970
                     state.ticker_data.accept(applyTickersToState(state, action: action))
                     s.signal()
                 }
             }
         }
-        
+
     default:
         break
     }
-    
+
     return state
 }
 
-
-
 func applyTickersToState(_ state: AppPropertyState, action: TickerFetched) -> [Ticker] {
     var data = state.ticker_data.value
-    guard  let _ = state.assetInfo[action.asset.base] ,let _ = state.assetInfo[action.asset.quote] else {
+    guard  let _ = state.assetInfo[action.asset.base], let _ = state.assetInfo[action.asset.quote] else {
         return data
     }
     if data.count == 0 {
@@ -183,21 +175,17 @@ func applyTickersToState(_ state: AppPropertyState, action: TickerFetched) -> [T
     let (contain, index) = data.containHashable(action.asset)
     if !contain {
         data.append(action.asset)
-    }
-    else {
+    } else {
         data[index] = action.asset
     }
-    
+
     if data.count > 1 {
         let scored = data.sorted(by: {return $0.base_volume.toDecimal()! > $1.base_volume.toDecimal()!})
         return scored
-    }
-    else {
+    } else {
         return data
     }
 }
-
-
 
 //func applyMarketsToState(_ state: AppPropertyState, action:MarketsFetched) -> (matrix:[Pair:BucketMatrix], bucket:[HomeBucket]) {
 //    var data = state.data.value

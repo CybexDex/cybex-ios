@@ -12,7 +12,7 @@ import SwiftTheme
 
 @IBDesignable
 class ETODetailView: CybexBaseView {
-    
+
     @IBOutlet weak var agreeButton: UIButton!
     @IBOutlet weak var stateButton: LGButton!
     @IBOutlet weak var stateView: UIView!
@@ -22,10 +22,10 @@ class ETODetailView: CybexBaseView {
     @IBOutlet weak var introView: ETODetailIntroView!
     @IBOutlet weak var websiteView: ETODetailIntroView!
     @IBOutlet weak var headerView: ETODetailHeaderView!
-    
-    fileprivate var action : ETOJoinButtonAction?
-    
-    enum Event:String {
+
+    fileprivate var action: ETOJoinButtonAction?
+
+    enum Event: String {
         case ETODetailViewDidClicked
         case inputCode
         case crowdPage
@@ -34,14 +34,14 @@ class ETODetailView: CybexBaseView {
         case showToastError
         case showAgreement
     }
-        
+
     override func setup() {
         super.setup()
-        
+
         setupUI()
         setupSubViewEvent()
     }
-    
+
     func setupUI() {
         clearBgColor()
         self.stateView.isHidden = true
@@ -49,30 +49,30 @@ class ETODetailView: CybexBaseView {
         getWhiteListView.rightIcon.image = R.image.icwhitelist()
         getWhiteListView.name.textColor = UIColor.pastelOrange
     }
-    
+
     func getJoinButtonState() {
         let clause = ETOManager.shared.getClauseState()
         let state = ETOManager.shared.getETOJoinButtonState()
-        
+
         switch state {
         case .normal(let title, let style, let action):
             stateView.isHidden = false
-            updateStateView(clauseState:clause, title: title, style: style, action: action)
+            updateStateView(clauseState: clause, title: title, style: style, action: action)
         case .disable(let title, let style):
             stateView.isHidden = false
-            updateStateView(clauseState:clause, title: title, style: style, action: nil)
+            updateStateView(clauseState: clause, title: title, style: style, action: nil)
         case .notShow:
             stateView.isHidden = true
         }
     }
-    
+
     func updateStateView(clauseState: ETOClauseState, title: String, style: ETOJoinButtonStyle, action: ETOJoinButtonAction?) {
         stateButton.titleString = title
         updateClauseState(clauseState: clauseState)
         updateJoinButton(style: style)
         self.action = action
     }
-    
+
     func updateJoinButton(style: ETOJoinButtonStyle) {
         switch style {
         case .normal:
@@ -111,7 +111,7 @@ class ETODetailView: CybexBaseView {
             stateButton.isUserInteractionEnabled = false
         }
     }
-    
+
     func updateClauseState(clauseState: ETOClauseState) {
         switch clauseState {
         case .normal:
@@ -129,27 +129,27 @@ class ETODetailView: CybexBaseView {
         }
 
     }
-    
+
     func updateAgreeBtnImg(normal: UIImage, selected: UIImage, highlighted: UIImage) {
         agreeButton.setImage(normal, for: UIControl.State.normal)
         agreeButton.setImage(highlighted, for: UIControl.State.highlighted)
         agreeButton.setImage(selected, for: UIControl.State.selected)
     }
-    
+
     func updateClauseViewHidden(isHidden: Bool) {
         stateLabel.isHidden = isHidden
         agreeButton.isHidden = isHidden
     }
-    
+
     func setupSubViewEvent() {
-        
-        stateLabel.rx.tapGesture().when(UIGestureRecognizer.State.recognized).asObservable().subscribe(onNext: { [weak self](tap) in
+
+        stateLabel.rx.tapGesture().when(UIGestureRecognizer.State.recognized).asObservable().subscribe(onNext: { [weak self](_) in
             guard let `self` = self else { return }
             self.sendEventWith(Event.showAgreement.rawValue, userinfo: [:])
-            
+
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
-        stateButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] touch in
+
+        stateButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] _ in
             guard let `self` = self else { return }
             guard let action =  self.action else { return }
             if self.agreeButton.isHidden == false, self.agreeButton.isSelected == false {
@@ -158,23 +158,22 @@ class ETODetailView: CybexBaseView {
             }
             self.next?.sendEventWith(action.rawValue, userinfo: [:])
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
-        agreeButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] touch in
+
+        agreeButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] _ in
             guard let `self` = self else { return }
             self.agreeButton.isSelected = !self.agreeButton.isSelected
 //            self.next?.sendEventWith(Event.crowdPage.rawValue, userinfo: ["data": self.data ?? "", "self": self])
 
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
-    
+
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.ETODetailViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
-    
+
     @objc func clickCellView(_ data: [String: Any]) {
         if let data = self.data as? ETOProjectViewModel, let model = data.projectModel {
             self.next?.sendEventWith("clickCellView", userinfo: ["data": Localize.currentLanguage() == "en" ? model.adds_whitelist__lang_en : model.adds_whitelist])
         }
     }
 }
-

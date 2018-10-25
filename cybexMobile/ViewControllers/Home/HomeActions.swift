@@ -10,14 +10,11 @@ import Foundation
 import ReSwift
 import RxCocoa
 
-//MARK: - State
+// MARK: - State
 struct HomeState: BaseState {
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
-    
+
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 }
 
-
-//MARK: - Action
-
-
+// MARK: - Action

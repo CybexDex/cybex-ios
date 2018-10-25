@@ -9,21 +9,21 @@
 import Foundation
 import ReSwift
 
-//MARK: - State
+// MARK: - State
 struct YourPortfolioState: StateType {
     var isLoading = false
     var page: Int = 1
-    var errorMessage:String?
+    var errorMessage: String?
     var property: YourPortfolioPropertyState
 }
 
 struct YourPortfolioPropertyState {
 }
 
-//MARK: - Action Creator
+// MARK: - Action Creator
 class YourPortfolioPropertyActionCreate: LoadingActionCreator {
     public typealias ActionCreator = (_ state: YourPortfolioState, _ store: Store<YourPortfolioState>) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         _ state: YourPortfolioState,
         _ store: Store <YourPortfolioState>,

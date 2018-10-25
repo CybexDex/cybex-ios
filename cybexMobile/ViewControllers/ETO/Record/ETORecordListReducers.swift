@@ -10,20 +10,19 @@ import UIKit
 import ReSwift
 import DifferenceKit
 
-func ETORecordListReducer(action:Action, state:ETORecordListState?) -> ETORecordListState {
+func ETORecordListReducer(action: Action, state: ETORecordListState?) -> ETORecordListState {
     let state = state ?? ETORecordListState()
-        
+
     switch action {
     case let action as ETORecordListFetchedAction:
         if let model = [ETOTradeHistoryModel].deserialize(from: action.data.arrayObject!)?.compactMap({ $0 }) {
             var appendModel = state.data.value
             if action.add {
                 appendModel += model
-            }
-            else {
+            } else {
                 appendModel = model
             }
-            
+
             let changeset = StagedChangeset(source: state.data.value, target: appendModel)
             state.changeSet.accept(changeset)
         }
@@ -32,8 +31,6 @@ func ETORecordListReducer(action:Action, state:ETORecordListState?) -> ETORecord
     default:
         break
     }
-        
+
     return state
 }
-
-

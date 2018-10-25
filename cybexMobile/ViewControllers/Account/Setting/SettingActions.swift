@@ -10,22 +10,22 @@ import Foundation
 import ReSwift
 import Moya
 
-//MARK: - State
+// MARK: - State
 struct SettingState: StateType {
     var isLoading = false
     var page: Int = 1
-    var errorMessage:String?
+    var errorMessage: String?
     var property: SettingPropertyState
 }
 
 struct SettingPropertyState {
-    
+
 }
 
-//MARK: - Action Creator
+// MARK: - Action Creator
 class SettingPropertyActionCreate: LoadingActionCreator {
     public typealias ActionCreator = (_ state: SettingState, _ store: Store<SettingState>) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         _ state: SettingState,
         _ store: Store <SettingState>,

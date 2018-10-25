@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ETORootCoordinator : NavCoordinator {
+class ETORootCoordinator: NavCoordinator {
     override func start() {
         let vc = R.storyboard.main.etoViewController()!
         let coordinator = ETOCoordinator(rootVC: self.rootVC)

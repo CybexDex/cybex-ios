@@ -11,114 +11,112 @@ import NBLCommonModule
 
 @IBDesignable
 class CybexBaseView: UIControl {
-    
-    var xibView:UIView!
-    var foreView:UIView!
 
-    enum TouchAlphaValues : CGFloat {
+    var xibView: UIView!
+    var foreView: UIView!
+
+    enum TouchAlphaValues: CGFloat {
         case touched = 0.3
         case untouched = 1.0
     }
-    
+
     override var backgroundColor: UIColor? {
         didSet {
             self.foreView.backgroundColor = backgroundColor
         }
     }
-    
-    var touchAlpha : TouchAlphaValues = .untouched {
+
+    var touchAlpha: TouchAlphaValues = .untouched {
         didSet {
             updateTouchAlpha()
         }
     }
-    
-    var pressed : Bool = false {
+
+    var pressed: Bool = false {
         didSet {
             if !showTouchFeedback {
                 return
             }
-            
+
             touchAlpha = (pressed) ? .touched : .untouched
         }
     }
-  
+
     override var isSelected: Bool {
         didSet {
             if isSelected {
                 self.foreView.alpha = TouchAlphaValues.touched.rawValue
-            }
-            else {
+            } else {
                 self.foreView.alpha = self.touchAlpha.rawValue
             }
         }
     }
-    
-    let touchDisableRadius : CGFloat = 20
+
+    let touchDisableRadius: CGFloat = 20
 
     @IBInspectable public var showTouchFeedback: Bool = true
 
     var data: Any?
-    
-    func updateUI<T>(_ model:T, handler:((T)->Void)?) {
+
+    func updateUI<T>(_ model: T, handler: ((T) -> Void)?) {
         self.data = model
-        
+
         handler?(model)
     }
-        
+
     func setup() {
         Broadcaster.unregister(type(of: self), observer: self)
         Broadcaster.register(type(of: self), observer: self)
 
         updateHeight()
-        
+
         setupEvent()
     }
-    
+
     func setupEvent() {
         self.addTarget(self, action: #selector(didClicked), for: .touchUpInside)
     }
-    
+
     @objc func didClicked() {
-        
+
     }
-    
+
     func clearBgColor() {
         self.foreView.theme_backgroundColor = nil
         self.foreView.backgroundColor = .clear
     }
-    
-    //MARK: Touch
-    
-    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+
+    // MARK: Touch
+
+    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         pressed = true
     }
-    
-    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?){
+
+    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let shouldSendActions = pressed
         pressed = false
-        if shouldSendActions{
+        if shouldSendActions {
             sendActions(for: .touchUpInside)
         }
     }
-    
-    override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?){
-        if let touchLoc = touches.first?.location(in: self){
+
+    override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touchLoc = touches.first?.location(in: self) {
             if (touchLoc.x < -touchDisableRadius ||
                 touchLoc.y < -touchDisableRadius ||
                 touchLoc.x > self.bounds.size.width + touchDisableRadius ||
-                touchLoc.y > self.bounds.size.height + touchDisableRadius){
+                touchLoc.y > self.bounds.size.height + touchDisableRadius) {
                 pressed = false
-            }
-            else if self.touchAlpha == .untouched {
+            } else if self.touchAlpha == .untouched {
                 pressed = true
             }
         }
     }
-    
+
     override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         pressed = false
     }
-    
+
     func updateTouchAlpha() {
         if self.foreView.alpha != self.touchAlpha.rawValue {
             UIView.animate(withDuration: 0.3) {
@@ -126,34 +124,34 @@ class CybexBaseView: UIControl {
             }
         }
     }
-    
+
     override var intrinsicContentSize: CGSize {
-        return CGSize.init(width: UIView.noIntrinsicMetric,height: dynamicHeight())
+        return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView?.bottom ?? 0
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
@@ -162,7 +160,7 @@ class CybexBaseView: UIControl {
         insertSubview(view, at: 1)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        
+
         let foreView = UIView()
         foreView.frame = self.bounds
         foreView.autoresizingMask = [.flexibleHeight, .flexibleWidth]

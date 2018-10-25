@@ -15,28 +15,28 @@ import SwiftRichString
 class BaseLabel: UILabel {
     @IBInspectable
     var lineHeight: CGFloat = 0
-    
+
     override var text: String? {
         didSet {
             decorate()
         }
     }
-    
+
     override var font: UIFont! {
         didSet {
             decorate()
         }
     }
-    
+
     override var textColor: UIColor! {
         didSet {
             decorate()
         }
     }
-    
+
     func decorate() {
         guard let text = text else { return }
-        
+
         let style = Style {
             $0.font = self.font
             $0.color = self.textColor
@@ -44,7 +44,7 @@ class BaseLabel: UILabel {
                 $0.setupLineHeight(self.lineHeight, fontHeight: self.font.lineHeight)
             }
         }
-        
+
         let myGroup = StyleGroup(base: style, StylesManager.shared.styles)
         self.attributedText = text.set(style: myGroup)
     }

@@ -15,21 +15,21 @@ protocol ETOUserAgreementCoordinatorProtocol {
 
 protocol ETOUserAgreementStateManagerProtocol {
     var state: ETOUserAgreementState { get }
-    
-    func switchPageState(_ state:PageState)
+
+    func switchPageState(_ state: PageState)
 }
 
-class ETOUserAgreementCoordinator: ETORootCoordinator{
+class ETOUserAgreementCoordinator: ETORootCoordinator {
     var store = Store(
         reducer: ETOUserAgreementReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
-    
+
     var state: ETOUserAgreementState {
         return store.state
     }
-            
+
     override func register() {
         Broadcaster.register(ETOUserAgreementCoordinatorProtocol.self, observer: self)
         Broadcaster.register(ETOUserAgreementStateManagerProtocol.self, observer: self)
@@ -37,11 +37,11 @@ class ETOUserAgreementCoordinator: ETORootCoordinator{
 }
 
 extension ETOUserAgreementCoordinator: ETOUserAgreementCoordinatorProtocol {
-    
+
 }
 
 extension ETOUserAgreementCoordinator: ETOUserAgreementStateManagerProtocol {
-    func switchPageState(_ state:PageState) {
+    func switchPageState(_ state: PageState) {
         DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }

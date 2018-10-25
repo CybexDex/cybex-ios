@@ -23,15 +23,15 @@ protocol PickerStateManagerProtocol {
 }
 
 class PickerCoordinator: PickerRootCoordinator {
-    
+
     lazy var creator = PickerPropertyActionCreate()
-  
+
   var pickerDidSelected: PickerDidSelected?
-  
+
     var store = Store<PickerState>(
         reducer: PickerReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
 }
 
@@ -48,11 +48,11 @@ extension PickerCoordinator: PickerStateManagerProtocol {
     var state: PickerState {
         return store.state
     }
-    
+
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<PickerState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
-    
+
 }

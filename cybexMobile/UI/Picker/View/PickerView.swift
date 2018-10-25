@@ -16,11 +16,11 @@ struct PickerData {
 
 class PickerView: UIView {
   @IBOutlet weak var picker: UIPickerView!
-  
+
   var selectedValues: [Int: Int]?
-  
+
   var components: Int = 0
-  
+
   open var items: AnyObject? {
     didSet {
       selectedValues = [Int: Int]()
@@ -32,87 +32,87 @@ class PickerView: UIView {
     selectedValues![component] = row
     picker.selectRow(row, inComponent: component, animated: true)
   }
-  
+
   fileprivate func setup() {
-    picker.centerY(to: self,offset: 0)
+    picker.centerY(to: self, offset: 0)
   }
-  
+
   override var intrinsicContentSize: CGSize {
-    return CGSize.init(width: UIView.noIntrinsicMetric,height: dynamicHeight())
+    return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
   }
-  
+
   fileprivate func updateHeight() {
     layoutIfNeeded()
     self.height = dynamicHeight()
     invalidateIntrinsicContentSize()
   }
-  
+
   fileprivate func dynamicHeight() -> CGFloat {
     let lastView = self.subviews.last?.subviews.last
     return lastView!.bottom
   }
-  
+
   override func layoutSubviews() {
     super.layoutSubviews()
     layoutIfNeeded()
   }
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     loadViewFromNib()
     setup()
   }
-  
+
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     loadViewFromNib()
     setup()
   }
-  
+
   fileprivate func loadViewFromNib() {
     let bundle = Bundle(for: type(of: self))
     let nibName = String(describing: type(of: self))
     let nib = UINib.init(nibName: nibName, bundle: bundle)
     let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
-    
+
     addSubview(view)
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
   }
 }
 
-extension PickerView: UIPickerViewDelegate,UIPickerViewDataSource {
+extension PickerView: UIPickerViewDelegate, UIPickerViewDataSource {
   func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
     return 41
   }
-  
+
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     if items != nil {
       return self.numberOfComponents()
     }
     return 0
   }
-  
+
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     if items != nil {
       return self.numberOfRowsInComponent(component)
     }
     return 0
   }
-  
+
   func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
     if items != nil {
       if let title = self.titleForRow(row, component: component) {
-        return NSAttributedString(string: title, attributes:[NSAttributedString.Key.foregroundColor: ThemeManager.currentThemeIndex == 0 ? pickerView.theme1TintColor : pickerView.theme2TintColor,NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16, weight: .medium)])
+        return NSAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor: ThemeManager.currentThemeIndex == 0 ? pickerView.theme1TintColor : pickerView.theme2TintColor, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .medium)])
       }
     }
     return nil
   }
-  
+
 }
 
 extension PickerView {
-  
+
   func numberOfComponents() -> Int {
     if items is [String] {
       return 1
@@ -122,7 +122,7 @@ extension PickerView {
     }
     if let items = self.items as? [Int: AnyObject] {
       if components == 0 {
-        var obj:AnyObject? = items[0]
+        var obj: AnyObject? = items[0]
         while obj != nil {
           components += 1
           if obj is [Int: AnyObject] {
@@ -141,15 +141,15 @@ extension PickerView {
     }
     return 0
   }
-  
+
   func numberOfRowsInComponent(_ component: Int) -> Int {
     if items is [String] {
       return (items as! [String]).count
     }
     if let items = self.items as? [[String]] {
-      let components:Int = items.count
+      let components: Int = items.count
       if components > 0 && component < components {
-        let items:[String] = items[component]
+        let items: [String] = items[component]
         return items.count
       }
     }
@@ -176,7 +176,7 @@ extension PickerView {
     }
     return 0
   }
-  
+
   func titleForRow(_ row: Int, component: Int) -> String? {
     if items is [String] {
       return (items as! [String])[row]
@@ -202,8 +202,7 @@ extension PickerView {
           if row < (obj as! [String]).count {
             return (obj as! [String])[row]
           }
-        }
-        else if obj is [Int: [String: AnyObject]] {
+        } else if obj is [Int: [String: AnyObject]] {
           let d: [Int: [String: AnyObject]] = (obj as! [Int: [String: AnyObject]])
           let d1: [String: AnyObject] = d[row]! as [String: AnyObject]
           return d1[PickerData.key] as? String

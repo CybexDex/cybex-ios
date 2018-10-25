@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct ETOStateOption:OptionSet {
+struct ETOStateOption: OptionSet {
     let rawValue: Int
-    
+
     static let unset = ETOStateOption(rawValue: 1 << 0)
 
     static let login = ETOStateOption(rawValue: 1 << 1)
     static let notLogin = ETOStateOption(rawValue: 1 << 2)
-   
+
     static let KYCPassed = ETOStateOption(rawValue: 1 << 3)
     static let KYCNotPassed = ETOStateOption(rawValue: 1 << 4)
 
@@ -59,7 +59,7 @@ enum ETOJoinButtonState {
     case normal(title: String, style: ETOJoinButtonStyle, action: ETOJoinButtonAction)
     case disable(title: String, style: ETOJoinButtonStyle)
     case notShow
-    
+
 }
 
 extension ETOJoinButtonState: Equatable {
@@ -77,26 +77,23 @@ extension ETOJoinButtonState: Equatable {
     }
 }
 
-
-
 class ETOManager {
     static let shared = ETOManager()
-    
+
     private(set) var state = ETOStateOption.unset
-    
-    
+
     private init() {
-        
+
     }
-    
-    func changeState(_ state:ETOStateOption) {
-        let loginState:ETOStateOption = [.login, .notLogin]
-        let kycState:ETOStateOption = [.KYCPassed, .KYCNotPassed]
-        let userReserveState:ETOStateOption = [.reserved, .notReserved]
-        let projectBookState:ETOStateOption = [.bookable, .notBookable]
-        let auditState:ETOStateOption = [.auditPassed, .auditNotPassed, .waitAudit]
-        let projectState:ETOStateOption = [.notStarted, .underway, .finished]
-        
+
+    func changeState(_ state: ETOStateOption) {
+        let loginState: ETOStateOption = [.login, .notLogin]
+        let kycState: ETOStateOption = [.KYCPassed, .KYCNotPassed]
+        let userReserveState: ETOStateOption = [.reserved, .notReserved]
+        let projectBookState: ETOStateOption = [.bookable, .notBookable]
+        let auditState: ETOStateOption = [.auditPassed, .auditNotPassed, .waitAudit]
+        let projectState: ETOStateOption = [.notStarted, .underway, .finished]
+
         for stateSet in [loginState, kycState, userReserveState, projectBookState, auditState, projectState] {
             if stateSet.contains(state.intersection(stateSet)) {
                 self.state.remove(stateSet)
@@ -104,18 +101,17 @@ class ETOManager {
             }
         }
     }
-    
+
     func getClauseState() -> ETOClauseState {
         if state.contains([.login, .KYCPassed, .notReserved, .bookable]) && !state.contains(.finished) {
             return .normal
-        }
-        else if state.contains([.login, .KYCPassed, .reserved]) && !state.contains(.finished) {
+        } else if state.contains([.login, .KYCPassed, .reserved]) && !state.contains(.finished) {
             return .checkedAndImmutable
         }
-        
+
         return .notShow
     }
-    
+
     func getETOJoinButtonState() -> ETOJoinButtonState {
         let clause = getClauseState()
         switch clause {
@@ -127,11 +123,9 @@ class ETOManager {
                     return .disable(title: R.string.localizable.eto_project_waiting.key.localized(), style: .wait)
                 }
                 return .normal(title: R.string.localizable.eto_project_join.key.localized(), style: .normal, action: .crowdPage)
-            }
-            else if state.contains(.waitAudit) {
+            } else if state.contains(.waitAudit) {
                 return .disable(title: R.string.localizable.eto_project_verifying.key.localized(), style: .wait)
-            }
-            else {
+            } else {
                 return .disable(title: R.string.localizable.eto_project_rejected.key.localized(), style: .notPassed)
             }
         case .notShow:
@@ -139,11 +133,9 @@ class ETOManager {
                 if !state.contains(.finished) {
                     return .disable(title: R.string.localizable.eto_project_stop_reserve.key.localized(), style: .disable)
                 }
-            }
-            else if state.contains(.KYCNotPassed) {
+            } else if state.contains(.KYCNotPassed) {
                 return .normal(title: R.string.localizable.eto_project_kyc.key.localized(), style: .normal, action: .icoapePage)
-            }
-            else if state.contains(.notLogin) && !state.contains(.finished) {
+            } else if state.contains(.notLogin) && !state.contains(.finished) {
                 return .normal(title: R.string.localizable.eto_project_login.key.localized(), style: .normal, action: .loginPage)
             }
             return .notShow

@@ -11,14 +11,14 @@ import ReSwift
 import RxCocoa
 import SwiftyJSON
 
-//MARK: - State
+// MARK: - State
 struct ETOUserAgreementState: BaseState {
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 }
 
-//MARK: - Action
+// MARK: - Action
 struct ETOUserAgreementFetchedAction: Action {
-    var data:JSON
+    var data: JSON
 }

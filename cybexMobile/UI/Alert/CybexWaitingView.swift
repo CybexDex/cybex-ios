@@ -14,40 +14,40 @@ protocol CybexWaitingProtocol {
 
 @IBDesignable
 class CybexWaitingView: CybexBaseView {
-    
+
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var ensureBtn: UIButton!
-    
+
     var delegate: CybexWaitingProtocol?
     var angle: CGFloat = 1.0
     var timer: Timer?
     var time: Int? {
-        didSet{
+        didSet {
             if self.timer == nil {
                 ensureBtn.setTitle(String(describing: self.time!), for: .normal)
                 self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
                 self.timer?.fire()
                 self.iconTransformAnimation()
-               
+
             }
         }
     }
-    
+
     override func setup() {
         super.setup()
-        
+
         setupUI()
     }
-    
+
     func setupUI() {
         self.titleLabel.textAlignment = .center
         self.contentLabel.textAlignment = .center
         ensureBtn.isEnabled = false
         ensureBtn.addTarget(self, action: #selector(ensureBtnAction), for: .touchUpInside)
     }
-    
+
     func iconTransformAnimation() {
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.01)
@@ -65,18 +65,17 @@ extension CybexWaitingView {
             ensureBtn.setTitle(R.string.localizable.alert_ensure.key.localized(), for: .normal)
             ensureBtn.isEnabled = true
             self.delegate?.waitingEnsureAction(sender: self)
-        }
-        else {
+        } else {
             self.time = self.time! - 1
             ensureBtn.setTitle(String(describing: self.time!), for: .normal)
         }
     }
-    
+
     @objc func endAnimation() {
         self.angle += 10
         self.iconTransformAnimation()
     }
-    
+
     @objc func ensureBtnAction() {
         self.delegate?.waitingEnsureAction(sender: self)
     }

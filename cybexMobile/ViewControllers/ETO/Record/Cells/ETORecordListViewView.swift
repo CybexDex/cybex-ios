@@ -11,33 +11,33 @@ import Foundation
 @IBDesignable
 class ETORecordListViewView: CybexBaseView {
     @IBOutlet weak var nameLabel: UILabel!
-    
+
     @IBOutlet weak var actionLabel: UILabel!
-    
+
     @IBOutlet weak var amountLabel: UILabel!
-    
+
     @IBOutlet weak var timeLabel: UILabel!
-    
+
     @IBOutlet weak var statusLabel: UILabel!
-    
-    enum Event:String {
+
+    enum Event: String {
         case ETORecordListViewViewDidClicked
     }
-        
+
     override func setup() {
         super.setup()
-        
+
         setupUI()
         setupSubViewEvent()
     }
-    
+
     func setupUI() {
     }
-    
+
     func setupSubViewEvent() {
-    
+
     }
-    
+
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.ETORecordListViewViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }

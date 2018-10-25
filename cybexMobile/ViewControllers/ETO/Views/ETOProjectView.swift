@@ -10,7 +10,7 @@ import Foundation
 
 @IBDesignable
 class ETOProjectView: CybexBaseView {
-    
+
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var markLabel: UILabel!
@@ -20,27 +20,26 @@ class ETOProjectView: CybexBaseView {
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var timeState: UILabel!
-    
-    enum Event:String {
+
+    enum Event: String {
         case ETOProjectViewDidClicked
     }
-        
+
     override func setup() {
         super.setup()
-        
+
         setupUI()
         setupSubViewEvent()
     }
-    
-    
+
     func setupUI() {
-        
+
     }
-    
+
     func setupSubViewEvent() {
-    
+
     }
-    
+
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.ETOProjectViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }

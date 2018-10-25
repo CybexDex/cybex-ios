@@ -9,17 +9,16 @@
 import UIKit
 
 class RecodeCell: BaseTableViewCell {
-    
-    
+
     @IBOutlet var cellView: RecodeCellView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+
     }
     override func setup(_ data: Any?, indexPath: IndexPath) {
         cellView.data = data

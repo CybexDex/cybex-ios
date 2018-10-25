@@ -19,10 +19,10 @@ protocol WithdrawAddressHomeStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<WithdrawAddressHomeState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
-    
+
     func fetchData()
     func fetchAddressData()
-    func selectCell(_ index:Int)
+    func selectCell(_ index: Int)
 }
 
 class WithdrawAddressHomeCoordinator: AccountRootCoordinator {
@@ -31,9 +31,9 @@ class WithdrawAddressHomeCoordinator: AccountRootCoordinator {
     var store = Store<WithdrawAddressHomeState>(
         reducer: WithdrawAddressHomeReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
-        
+
     override func register() {
         Broadcaster.register(WithdrawAddressHomeCoordinatorProtocol.self, observer: self)
         Broadcaster.register(WithdrawAddressHomeStateManagerProtocol.self, observer: self)
@@ -56,34 +56,34 @@ extension WithdrawAddressHomeCoordinator: WithdrawAddressHomeStateManagerProtoco
     var state: WithdrawAddressHomeState {
         return store.state
     }
-    
+
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<WithdrawAddressHomeState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
-    
+
     func fetchData() {
         SimpleHTTPService.fetchWithdrawIdsInfo().done { (ids) in
             self.store.dispatch(FecthWithdrawIds(data: ids))
         }.cauterize()
     }
-    
+
     func fetchAddressData() {
         guard self.state.property.data.value.count > 0 else { return }
-        
-        var data:[String: [WithdrawAddress]] = [:]
-        
+
+        var data: [String: [WithdrawAddress]] = [:]
+
         for viewmodel in self.state.property.data.value {
             data[viewmodel.model.id] = AddressManager.shared.getWithDrawAddressListWith(viewmodel.model.id)
         }
-        
+
         DispatchQueue.main.async {
             self.store.dispatch(WithdrawAddressHomeAddressDataAction(data: data))
         }
     }
-    
-    func selectCell(_ index:Int) {
+
+    func selectCell(_ index: Int) {
         self.store.dispatch(WithdrawAddressHomeSelectedAction(index: index))
     }
 }

@@ -11,33 +11,33 @@ import Kingfisher
 
 @IBDesignable
 class HomePairView: UIView {
-    
-    enum event:String {
+
+    enum event: String {
         case cellClicked
     }
-    
+
     @IBOutlet weak var rankingLabel: UILabel!
-    
+
     @IBOutlet weak var asset2: UILabel!
-    
+
     @IBOutlet weak var volume: UILabel!
-    
+
     @IBOutlet weak var price: UILabel!
-    
+
     @IBOutlet weak var bulking: UILabel!
-    
+
     @IBOutlet weak var asset1: UILabel!
     @IBOutlet weak var rbmL: UILabel!
     @IBOutlet weak var high_lowContain: UIView!
-    
+
     @IBOutlet weak var icon: UIImageView!
-    
-    var base:String!
-    var quote:String!
+
+    var base: String!
+    var quote: String!
     var data: Any? {
         didSet {
             guard let ticker = data as? Ticker, let base_info = app_data.assetInfo[ticker.base], let quote_info = app_data.assetInfo[ticker.quote] else { return }
-            
+
             self.asset2.text =  quote_info.symbol.filterJade
             self.asset1.text = "/" + base_info.symbol.filterJade
             let url = AppConfiguration.SERVER_ICONS_BASE_URLString + ticker.quote.replacingOccurrences(of: ".", with: "_") + "_grey.png"
@@ -45,85 +45,84 @@ class HomePairView: UIView {
             self.volume.text = ticker.base_volume.suffixNumber(digitNum: 2)
             self.price.text = ticker.latest.formatCurrency(digitNum: base_info.precision)
             self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percent_change.formatCurrency(digitNum: 2) + "%"
-            
+
             self.high_lowContain.backgroundColor = ticker.incre.color()
-            if let change = ticker.percent_change.toDouble() ,change > 1000{
+            if let change = ticker.percent_change.toDouble(), change > 1000 {
                 self.bulking.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
-            }else{
+            } else {
                 self.bulking.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
             }
-            
-            let price = getAssetRMBPrice(ticker.quote,base: ticker.base)
-            
+
+            let price = getAssetRMBPrice(ticker.quote, base: ticker.base)
+
             self.rbmL.text = price == 0 ? "-" : "≈¥" + "\(price)".formatCurrency(digitNum: 2)
         }
     }
-    
+
     func replaceIconToLabel() {
         if let index = self.store["index"] as? Int {
             self.icon.isHidden = true
             self.rankingLabel.isHidden = false
             if index < 3 {
                 self.rankingLabel.backgroundColor = UIColor.turtleGreen
-            }
-            else {
+            } else {
                 self.rankingLabel.backgroundColor = UIColor.steel50
             }
             self.rankingLabel.text = "\(index + 1)"
         }
     }
-    
+
     fileprivate func setup() {
         self.isUserInteractionEnabled = true
-        self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] tap in
+        self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
             guard let `self` = self else { return }
-            
+
             self.next?.sendEventWith(event.cellClicked.rawValue, userinfo: ["index": self.store["index"] ?? []])
-            
+
         }).disposed(by: disposeBag)
     }
-    
+
     override var intrinsicContentSize: CGSize {
-        return CGSize.init(width: UIView.noIntrinsicMetric,height: dynamicHeight())
+        return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     fileprivate func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView!.bottom
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
-        
+
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-    
+
 }

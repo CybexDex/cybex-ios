@@ -17,9 +17,9 @@ protocol RecordChooseCoordinatorProtocol {
 
 protocol RecordChooseStateManagerProtocol {
     var state: RecordChooseState { get }
-    
-    func switchPageState(_ state:PageState)
-    
+
+    func switchPageState(_ state: PageState)
+
     func fetchData(_ type: Int)
 }
 
@@ -27,14 +27,14 @@ class RecordChooseCoordinator: NavCoordinator {
     var store = Store(
         reducer: RecordChooseReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
-    
+
     var state: RecordChooseState {
         return store.state
     }
-    
-    override class func start(_ root: BaseNavigationController, context:RouteContext? = nil) -> BaseViewController {
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
         let vc = R.storyboard.comprehensive.recordChooseViewController()!
         let coordinator = RecordChooseCoordinator(rootVC: root)
         vc.coordinator = coordinator
@@ -49,23 +49,23 @@ class RecordChooseCoordinator: NavCoordinator {
 }
 
 extension RecordChooseCoordinator: RecordChooseCoordinatorProtocol {
-    
+
 }
 
 extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
-    func switchPageState(_ state:PageState) {
+    func switchPageState(_ state: PageState) {
         DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }
     }
-    
+
     func fetchData(_ type: Int) {
         switch type {
         case RecordChooseType.Asset.rawValue:
             let accountName = UserManager.shared.name.value ?? ""
             let expiration = Int(Date().timeIntervalSince1970 + 600)
-            var paragram = ["op":["accountName": accountName,"expiration":expiration],"signer":"" ] as [String : Any]
-            let operation = BitShareCoordinator.getRecodeLoginOperation(accountName , asset: "", fundType: "", size: Int32(0), offset: Int32(0), expiration: Int32(expiration))
+            var paragram = ["op": ["accountName": accountName, "expiration": expiration], "signer": "" ] as [String: Any]
+            let operation = BitShareCoordinator.getRecodeLoginOperation(accountName, asset: "", fundType: "", size: Int32(0), offset: Int32(0), expiration: Int32(expiration))
             if let operation = operation {
                 let json = JSON(parseJSON: operation)
                 let signer = json["signer"].stringValue
@@ -77,15 +77,15 @@ extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
                             if let data = accountAssets {
                                 self.store.dispatch(FetchAccountAssetAction(data: data))
                             }
-                        }).catch({ (error) in
+                        }).catch({ (_) in
                         })
                     }
-                    }.catch { (error) in
+                    }.catch { (_) in
                 }
             }
             break
         case RecordChooseType.FoudType.rawValue:
-            
+
             self.store.dispatch(FetchDataAction(data: [R.string.localizable.openedAll.key.localized(),
                                                        R.string.localizable.recharge_deposit.key.localized(),
                                                        R.string.localizable.recharge_withdraw.key.localized()]))

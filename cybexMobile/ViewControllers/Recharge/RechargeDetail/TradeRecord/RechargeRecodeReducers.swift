@@ -9,13 +9,13 @@
 import UIKit
 import ReSwift
 
-func RechargeRecodeReducer(action:Action, state:RechargeRecodeState?) -> RechargeRecodeState {
+func RechargeRecodeReducer(action: Action, state: RechargeRecodeState?) -> RechargeRecodeState {
     return RechargeRecodeState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: RechargeRecodePropertyReducer(state?.property, action: action))
 }
 
 func RechargeRecodePropertyReducer(_ state: RechargeRecodePropertyState?, action: Action) -> RechargeRecodePropertyState {
     var state = state ?? RechargeRecodePropertyState()
-    
+
     switch action {
     case let action as FetchDepositRecordsAction:
         state.data.accept(action.data)
@@ -28,8 +28,3 @@ func RechargeRecodePropertyReducer(_ state: RechargeRecodePropertyState?, action
     }
     return state
 }
-
-
-
-
-

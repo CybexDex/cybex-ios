@@ -9,7 +9,7 @@
 import UIKit
 @IBDesignable
 class OpenedOrdersStatesView: UIView {
-  lazy var label : UILabel = {
+  lazy var label: UILabel = {
     let label = UILabel(frame: self.bounds)
     label.textColor = UIColor.white
     label.textAlignment = .center
@@ -19,8 +19,8 @@ class OpenedOrdersStatesView: UIView {
     return label
   }()
   @IBInspectable
-  var opened_status : Int = 0{
-    didSet{
+  var opened_status: Int = 0 {
+    didSet {
       switch opened_status {
       case 0:
         label.backgroundColor = buy_color
@@ -36,18 +36,18 @@ class OpenedOrdersStatesView: UIView {
     }
   }
   @IBInspectable
-  var sell_color : UIColor = UIColor.reddish {
-    didSet{
+  var sell_color: UIColor = UIColor.reddish {
+    didSet {
       label.backgroundColor = sell_color
     }
   }
   @IBInspectable
-  var buy_color : UIColor = UIColor.turtleGreen{
-    didSet{
+  var buy_color: UIColor = UIColor.turtleGreen {
+    didSet {
       label.backgroundColor = buy_color
     }
   }
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupUI()
@@ -60,8 +60,8 @@ class OpenedOrdersStatesView: UIView {
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
-  
-  private func setupUI(){
+
+  private func setupUI() {
     self.addSubview(label)
   }
 }

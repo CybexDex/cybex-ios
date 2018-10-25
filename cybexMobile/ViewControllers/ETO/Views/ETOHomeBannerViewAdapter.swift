@@ -9,13 +9,12 @@
 import Foundation
 
 extension ETOHomeBannerView {
-    func adapterModelToETOHomeBannerView(_ model:[String]) {
+    func adapterModelToETOHomeBannerView(_ model: [String]) {
         self.pagerControl.numberOfPages = model.count
         self.pagerControl.currentPage = 0
         if model.count < 2 {
             self.pagerView.automaticSlidingInterval = 0
-        }
-        else {
+        } else {
             self.pagerView.automaticSlidingInterval = 3
         }
         self.data = model

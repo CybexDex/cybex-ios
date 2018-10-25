@@ -11,7 +11,7 @@ import Foundation
 class AccountRootCoordinator: NavCoordinator {
   override func start() {
     let vc = R.storyboard.account.accountViewController()!
-    
+
     let coordinator = AccountCoordinator(rootVC: self.rootVC)
     vc.localized_text = R.string.localizable.accountTitle.key.localizedContainer()
 

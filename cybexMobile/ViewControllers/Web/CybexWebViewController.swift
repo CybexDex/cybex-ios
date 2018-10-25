@@ -15,7 +15,7 @@ import SwiftyUserDefaults
 import Localize_Swift
 
 class CybexWebViewController: BaseWebViewController {
-    
+
     enum web_type: Int {
         case help = 0
         case kyc
@@ -26,17 +26,16 @@ class CybexWebViewController: BaseWebViewController {
         case recordDetail
         case homeBanner
     }
-    
+
     var coordinator: (CybexWebCoordinatorProtocol & CybexWebStateManagerProtocol)?
-    
+
     var vc_type: web_type = .help
-    
+
     override func viewDidLoad() {
         if vc_type == .help {
             let url = Defaults[.theme] == 0 ?AppConfiguration.HELP_NIGHT_URL + Localize.currentLanguage() : AppConfiguration.HELP_LIGHT_URL + Localize.currentLanguage()
             self.url = URL(string: url)
-        }
-        else if vc_type == .agreement {
+        } else if vc_type == .agreement {
             self.navigationItem.title = R.string.localizable.eto_user_agreenment.key.localized()
             var urlString = ""
             urlString = Localize.currentLanguage() == "en" ? "en" : "cn"
@@ -44,31 +43,30 @@ class CybexWebViewController: BaseWebViewController {
             self.url = Bundle.main.url(forResource: urlString, withExtension: ".html")
         }
         super.viewDidLoad()
-        
+
         setupUI()
         setupEvent()
-       
+
     }
-    
+
     override func leftAction(_ sender: UIButton) {
         if self.webView.canGoBack {
             if case .none = self.webView.goBack() {
                 super.leftAction(sender)
             }
-        }
-        else {
+        } else {
             super.leftAction(sender)
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
+
     override func refreshViewController() {
-        
+
     }
-    
+
     func setupUI() {
         switch self.vc_type {
         case .help:
@@ -79,19 +77,19 @@ class CybexWebViewController: BaseWebViewController {
             break
         }
     }
-    
+
     func setupEvent() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] notification in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] _ in
             guard let `self` = self else { return }
             self.setURL()
         })
 
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](notification) in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](_) in
             guard let `self` = self else { return }
             self.setURL()
         }
     }
-    
+
     func setURL() {
         if ThemeManager.currentThemeIndex == 0 {
             self.url = URL(string: AppConfiguration.HELP_NIGHT_URL + Localize.currentLanguage())
@@ -99,12 +97,11 @@ class CybexWebViewController: BaseWebViewController {
             self.url = URL(string: AppConfiguration.FAQ_LIGHT_THEME + Localize.currentLanguage())
         }
     }
-    
+
     override func configureObserveState() {
-        coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self] (state) in
+        coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self] (_) in
             guard let `self` = self else { return }
-            
+
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }
-

@@ -10,25 +10,25 @@ import UIKit
 import ReSwift
 import RxCocoa
 
-func WithdrawAddressHomeReducer(action:Action, state:WithdrawAddressHomeState?) -> WithdrawAddressHomeState {
-    return WithdrawAddressHomeState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: WithdrawAddressHomePropertyReducer(state?.property, action: action), callback:state?.callback ?? WithdrawAddressHomeCallbackState())
+func WithdrawAddressHomeReducer(action: Action, state: WithdrawAddressHomeState?) -> WithdrawAddressHomeState {
+    return WithdrawAddressHomeState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: WithdrawAddressHomePropertyReducer(state?.property, action: action), callback: state?.callback ?? WithdrawAddressHomeCallbackState())
 }
 
 func WithdrawAddressHomePropertyReducer(_ state: WithdrawAddressHomePropertyState?, action: Action) -> WithdrawAddressHomePropertyState {
     let state = state ?? WithdrawAddressHomePropertyState()
-    
+
     switch action {
-        
+
     case let action as FecthWithdrawIds:
         state.data.accept(convertTradeToWithDrawAddressHomeViewModel(action.data))
     case let action as WithdrawAddressHomeSelectedAction:
         if action.index < state.data.value.count {
             let viewModel = state.data.value[action.index]
-        
+
             if let address = state.addressData.value[viewModel.model.id] {
                 state.selectedViewModel.accept((viewModel, address))
             }
-            
+
         }
     case let action as WithdrawAddressHomeAddressDataAction:
         let data = state.data.value
@@ -37,30 +37,28 @@ func WithdrawAddressHomePropertyReducer(_ state: WithdrawAddressHomePropertyStat
                 viewmodel.count.accept("\(addressData.count)")
             }
         }
-        
+
         state.addressData.accept(action.data)
 
     default:
         break
     }
-    
+
     return state
 }
 
-func convertTradeToWithDrawAddressHomeViewModel(_ data:[Trade]) -> [WithdrawAddressHomeViewModel] {
-    var viewmodels:[WithdrawAddressHomeViewModel] = []
-    
+func convertTradeToWithDrawAddressHomeViewModel(_ data: [Trade]) -> [WithdrawAddressHomeViewModel] {
+    var viewmodels: [WithdrawAddressHomeViewModel] = []
+
     for trade in data {
         let imageURLString = AppConfiguration.SERVER_ICONS_BASE_URLString + trade.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"
         guard let info = app_data.assetInfo[trade.id] else {
             break
         }
 
-        let viewmodel = WithdrawAddressHomeViewModel(imageURLString: imageURLString, count: BehaviorRelay(value:""), name: info.symbol.filterJade, model: trade)
+        let viewmodel = WithdrawAddressHomeViewModel(imageURLString: imageURLString, count: BehaviorRelay(value: ""), name: info.symbol.filterJade, model: trade)
         viewmodels.append(viewmodel)
     }
-    
+
     return viewmodels
 }
-
-

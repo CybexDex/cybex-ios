@@ -19,42 +19,41 @@ protocol OpenedOrdersStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<OpenedOrdersState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
-  
- 
-  func cancelOrder(_ orderID:String, fee_id:String, callback: @escaping (_ success: Bool) -> ())
+
+  func cancelOrder(_ orderID: String, fee_id: String, callback: @escaping (_ success: Bool) -> Void)
 }
 
 class OpenedOrdersCoordinator: AccountRootCoordinator {
-    
+
     lazy var creator = OpenedOrdersPropertyActionCreate()
-    
+
     var store = Store<OpenedOrdersState>(
         reducer: OpenedOrdersReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
 }
 
 extension OpenedOrdersCoordinator: OpenedOrdersCoordinatorProtocol {
-    
+
 }
 
 extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     var state: OpenedOrdersState {
         return store.state
     }
-    
+
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<OpenedOrdersState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
-  
-  func cancelOrder(_ orderID:String, fee_id:String, callback: @escaping (_ success: Bool) -> ()) {
+
+  func cancelOrder(_ orderID: String, fee_id: String, callback: @escaping (_ success: Bool) -> Void) {
     guard let userid = UserManager.shared.account.value?.id else { return }
     guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0) else { return }
-    
-    calculateFee(operation, focus_asset_id: fee_id, operationID: .limit_order_cancel, filterRepeat:false) { (success, amount, assetID) in
+
+    calculateFee(operation, focus_asset_id: fee_id, operationID: .limit_order_cancel, filterRepeat: false) { (success, amount, assetID) in
       if success {
         blockchainParams { (blockchain_params) in
           guard let asset = app_data.assetInfo[assetID] else {return}
@@ -62,16 +61,14 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
             let request = BroadcastTransactionRequest(response: { (data) in
               if String(describing: data) == "<null>" {
                 callback(true)
-              }
-              else {
+              } else {
                 callback(false)
               }
             }, jsonstr: jsonStr)
             CybexWebSocketService.shared.send(request: request)
           }
         }
-      }
-      else {
+      } else {
         callback(false)
       }
     }

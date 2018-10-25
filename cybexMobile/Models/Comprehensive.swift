@@ -19,7 +19,7 @@ struct ComprehensiveItem: HandyJSON {
     var name: String = ""
 }
 
-struct ComprehensiveAnnounce: HandyJSON{
+struct ComprehensiveAnnounce: HandyJSON {
     var title: String = ""
     var url: String = ""
 }
@@ -31,7 +31,6 @@ struct ComprehensiveBanner: HandyJSON {
     var score: Int = 0
     var name: String = ""
 }
-
 
 struct BlockExplorer: HandyJSON {
     var asset: String = ""

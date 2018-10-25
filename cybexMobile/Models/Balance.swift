@@ -10,16 +10,15 @@ import Foundation
 import ObjectMapper
 
 class Balance: Mappable {
-  var asset_type:String = ""
-  var balance:String = ""
-  
+  var asset_type: String = ""
+  var balance: String = ""
+
   required init?(map: Map) {
-    
+
   }
-  
+
   func mapping(map: Map) {
     asset_type <- (map["asset_type"], ToStringTransform())
     balance <- (map["balance"], ToStringTransform())
   }
 }
-

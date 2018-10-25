@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 
 class pictPopBGView: UIPopoverBackgroundView {
-    
+
     override var arrowOffset: CGFloat {
-        get{
+        get {
             return self.arrowOffset
         }
-        set{
+        set {
             self.arrowOffset = newValue
         }
     }
@@ -27,27 +27,27 @@ class pictPopBGView: UIPopoverBackgroundView {
             self.arrowDirection = newValue
         }
     }
-    
+
     var arrowView: UIView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0),
                                                  size: CGSize(width: 60, height: 60)))
     var backgroundView: UIView
-    
+
     override init(frame: CGRect) {
         backgroundView = UIView(frame: frame)
         backgroundView.backgroundColor = UIColor.purple
         arrowView.backgroundColor = UIColor.red
-        super.init(frame:frame)
+        super.init(frame: frame)
         backgroundColor = UIColor.red
-        
+
         self.addSubview(arrowView)
         self.addSubview(backgroundView)
     }
-    
+
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func setArrowOffset(offset:CGFloat){
+
+    func setArrowOffset(offset: CGFloat) {
         arrowOffset = offset
     }
 }

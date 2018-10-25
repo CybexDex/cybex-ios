@@ -9,7 +9,7 @@
 import Foundation
 
 extension TimeInterval {
-  
+
   /**
    Checks if `since` has passed since `self`.
    
@@ -19,7 +19,7 @@ extension TimeInterval {
   func hasPassed(since: TimeInterval) -> Bool {
     return Date().timeIntervalSinceReferenceDate - self > since
   }
-  
+
 }
 
 /**

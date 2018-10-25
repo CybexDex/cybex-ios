@@ -11,15 +11,15 @@ import ReSwift
 import HandyJSON
 import NBLCommonModule
 
-struct RechargeContext:RouteContext,HandyJSON {
+struct RechargeContext: RouteContext, HandyJSON {
     init() {}
-    
+
     var selectedIndex: RechargeViewController.CELL_TYPE = .RECHARGE
 }
 
 protocol RechargeCoordinatorProtocol {
-    func openRechargeDetail(_ trade:Trade)
-    func openWithDrawDetail(_ trade:Trade)
+    func openRechargeDetail(_ trade: Trade)
+    func openWithDrawDetail(_ trade: Trade)
     func openRecordList()
 }
 
@@ -28,29 +28,28 @@ protocol RechargeStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<RechargeState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState
-    
+
     func fetchWithdrawIdsInfo()
     func fetchDepositIdsInfo()
 }
 
 class RechargeCoordinator: NavCoordinator {
-    
+
     lazy var creator = RechargePropertyActionCreate()
-    
+
     var store = Store(
         reducer: RechargeReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
-    
+
     override func register() {
         Broadcaster.register(RechargeCoordinatorProtocol.self, observer: self)
         Broadcaster.register(RechargeStateManagerProtocol.self, observer: self)
-        
-        
+
     }
-    
-    override class func start(_ root: BaseNavigationController, context:RouteContext? = nil) -> BaseViewController {
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
         let vc = R.storyboard.account.rechargeViewController()!
         let coordinator = RechargeCoordinator(rootVC: root)
         vc.coordinator = coordinator
@@ -65,7 +64,7 @@ class RechargeCoordinator: NavCoordinator {
 }
 
 extension RechargeCoordinator: RechargeCoordinatorProtocol {
-    func openRechargeDetail(_ trade:Trade){
+    func openRechargeDetail(_ trade: Trade) {
         let vc = R.storyboard.account.rechargeDetailViewController()!
         let coordinator   = RechargeDetailCoordinator(rootVC: self.rootVC)
         vc.coordinator    = coordinator
@@ -73,8 +72,8 @@ extension RechargeCoordinator: RechargeCoordinatorProtocol {
         vc.isWithdraw     = trade.enable
         self.rootVC.pushViewController(vc, animated: true)
     }
-    
-    func openWithDrawDetail(_ trade:Trade){
+
+    func openWithDrawDetail(_ trade: Trade) {
         let vc = R.storyboard.account.withdrawDetailViewController()!
         let coordinator = WithdrawDetailCoordinator(rootVC: self.rootVC)
         vc.coordinator = coordinator
@@ -94,21 +93,21 @@ extension RechargeCoordinator: RechargeStateManagerProtocol {
     var state: RechargeState {
         return store.state
     }
-    
+
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<RechargeState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
-    func fetchWithdrawIdsInfo(){
+    func fetchWithdrawIdsInfo() {
         SimpleHTTPService.fetchWithdrawIdsInfo().done { (ids) in
             self.store.dispatch(FecthWithdrawIds(data: ids))
             }.cauterize()
     }
-    func fetchDepositIdsInfo(){
+    func fetchDepositIdsInfo() {
         SimpleHTTPService.fetchDesipotInfo().done { (ids) in
             self.store.dispatch(FecthDepositIds(data: ids))
             }.cauterize()
     }
-    
+
 }

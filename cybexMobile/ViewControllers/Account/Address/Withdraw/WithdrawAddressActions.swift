@@ -10,19 +10,19 @@ import Foundation
 import ReSwift
 import RxCocoa
 
-//MARK: - State
+// MARK: - State
 struct WithdrawAddressState: StateType {
     var isLoading = false
     var page: Int = 1
-    var errorMessage:String?
+    var errorMessage: String?
     var property: WithdrawAddressPropertyState
     var callback: WithdrawAddressCallbackState
 }
 
 struct WithdrawAddressPropertyState {
     var data: BehaviorRelay<[WithdrawAddress]> = BehaviorRelay(value: [])
-    var selectedAddress: BehaviorRelay<WithdrawAddress?> = BehaviorRelay(value:nil)
-    var selectedAsset : BehaviorRelay<String?> = BehaviorRelay(value: "")
+    var selectedAddress: BehaviorRelay<WithdrawAddress?> = BehaviorRelay(value: nil)
+    var selectedAsset: BehaviorRelay<String?> = BehaviorRelay(value: "")
 }
 
 struct WithdrawAddressDataAction: Action {
@@ -36,14 +36,14 @@ struct WithdrawAddressSelectDataAction: Action {
 struct WithdrawAddressCallbackState {
 }
 
-struct SetSelectedAssetAction : Action {
-    var asset : String
+struct SetSelectedAssetAction: Action {
+    var asset: String
 }
 
-//MARK: - Action Creator
+// MARK: - Action Creator
 class WithdrawAddressPropertyActionCreate {
     public typealias ActionCreator = (_ state: WithdrawAddressState, _ store: Store<WithdrawAddressState>) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         _ state: WithdrawAddressState,
         _ store: Store <WithdrawAddressState>,

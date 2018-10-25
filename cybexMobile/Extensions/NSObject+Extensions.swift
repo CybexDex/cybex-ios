@@ -24,7 +24,7 @@ extension NSObject {
                                      .OBJC_ASSOCIATION_RETAIN)
             return associated
     }
-    
+
     func associateObject<ValueType: AnyObject>(
         base: AnyObject,
         key: UnsafePointer<UInt8>,
@@ -40,10 +40,10 @@ private var throttleKey: UInt8 = 2
 private var canrepeatKey: UInt8 = 3
 
 extension NSObject {
-    var store: [String:Any] {
+    var store: [String: Any] {
         get {
             if let storeData = objc_getAssociatedObject(self, &storeKey) {
-                return storeData as! [String : Any]
+                return storeData as! [String: Any]
             }
             return [:]
         }
@@ -51,11 +51,11 @@ extension NSObject {
             objc_setAssociatedObject(self, &storeKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
-    var canRepeatContainer: [String:Bool] {
+
+    var canRepeatContainer: [String: Bool] {
         get {
             if let storeData = objc_getAssociatedObject(self, &throttleKey) {
-                return storeData as! [String : Bool]
+                return storeData as! [String: Bool]
             }
             return [:]
         }
@@ -63,7 +63,7 @@ extension NSObject {
             objc_setAssociatedObject(self, &throttleKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
+
     var canRepeat: Bool {
         get {
             if let storeData = objc_getAssociatedObject(self, &canrepeatKey) {
@@ -87,11 +87,11 @@ extension NSObject {
             associateObject(base: self, key: &bagKey, value: newValue)
         }
     }
-    
+
     var className: String {
         return String(describing: type(of: self)).components(separatedBy: ".").last!
     }
-    
+
     class var className: String {
         return String(describing: self).components(separatedBy: ".").last!
     }
@@ -109,7 +109,7 @@ extension TypeName {
     }
 }
 
-extension UIViewController:TypeName {
+extension UIViewController: TypeName {
 }
 
 extension NSObject: TypeName {

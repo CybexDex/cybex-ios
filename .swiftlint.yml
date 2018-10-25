@@ -1,6 +1,7 @@
 included:
   - cybexMobile
-# excluded:
+excluded:
+  - cybexMobile/addons
 cyclomatic_complexity:
   - 10
   - 30

@@ -16,11 +16,11 @@ protocol WithdrawAndDespoitRecordCoordinatorProtocol {
 
 protocol WithdrawAndDespoitRecordStateManagerProtocol {
     var state: WithdrawAndDespoitRecordState { get }
-    
-    func switchPageState(_ state:PageState)
-    
+
+    func switchPageState(_ state: PageState)
+
     func setupChildrenVC(_ segue: UIStoryboardSegue)
-    
+
     func childrenFetchData(_ info: String, index: RecordChooseType)
 }
 
@@ -28,13 +28,13 @@ class WithdrawAndDespoitRecordCoordinator: AccountRootCoordinator {
     var store = Store(
         reducer: WithdrawAndDespoitRecordReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
-    
+
     var state: WithdrawAndDespoitRecordState {
         return store.state
     }
-            
+
     override func register() {
         Broadcaster.register(WithdrawAndDespoitRecordCoordinatorProtocol.self, observer: self)
         Broadcaster.register(WithdrawAndDespoitRecordStateManagerProtocol.self, observer: self)
@@ -47,24 +47,24 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordCoordinat
             vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
             vc.vc_type = .recordDetail
             vc.url = URL(string: url)
-            self.rootVC.pushViewController(vc ,animated: true)
+            self.rootVC.pushViewController(vc, animated: true)
         }
     }
 }
 
 extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateManagerProtocol {
-    func switchPageState(_ state:PageState) {
+    func switchPageState(_ state: PageState) {
         DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }
     }
-    
+
     func setupChildrenVC(_ segue: UIStoryboardSegue) {
         if let segueInfo = R.segue.withdrawAndDespoitRecordViewController.withdrawAndDespoitRecordViewController(segue: segue) {
             segueInfo.destination.coordinator = RechargeRecodeCoordinator(rootVC: self.rootVC)
         }
     }
-    
+
     func childrenFetchData(_ info: String, index: RecordChooseType) {
         if let vc = self.rootVC.topViewController as? WithdrawAndDespoitRecordViewController {
             for childrenVC in vc.children {
@@ -75,8 +75,7 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
                     case .Asset:
                         if info == R.string.localizable.openedAll.key.localized() {
                             childVC.assetInfo = nil
-                        }
-                        else {
+                        } else {
                             var assetInfo: AssetInfo?
                             for (_, value) in app_data.assetInfo {
                                 if value.symbol.filterJade == info.filterJade {
@@ -90,11 +89,9 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
                     case .FoudType:
                         if info == R.string.localizable.openedAll.key.localized() {
                             childVC.record_type = .ALL
-                        }
-                        else if info == R.string.localizable.recharge_deposit.key.localized() {
+                        } else if info == R.string.localizable.recharge_deposit.key.localized() {
                             childVC.record_type = .DEPOSIT
-                        }
-                        else if info == R.string.localizable.recharge_withdraw.key.localized() {
+                        } else if info == R.string.localizable.recharge_withdraw.key.localized() {
                             childVC.record_type = .WITHDRAW
                         }
                         break

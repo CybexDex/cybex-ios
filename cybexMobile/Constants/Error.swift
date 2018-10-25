@@ -24,12 +24,10 @@ enum CybexError: Error {
         case let .ServiceFriendlyError(_, desc):
             if let localized = desc.string {
                 return localized
-            }
-            else if let dic = desc.dictionaryObject {
+            } else if let dic = desc.dictionaryObject {
                 if Localize.currentLanguage() == "en", let enString = dic["en"] as? String {
                     return enString
-                }
-                else if let zhString = dic["zh"] as? String {
+                } else if let zhString = dic["zh"] as? String {
                     return zhString
                 }
             }
@@ -41,15 +39,15 @@ enum CybexError: Error {
 extension CybexError {
     enum NetworkErrorCode: Int {
         case demo
-        
+
         func desc() -> String {
             switch self {
-                
+
             default:
                 return ""
             }
         }
-        
+
     }
 }
 
@@ -66,6 +64,5 @@ extension CybexError: Equatable {
             return false
         }
     }
-    
-}
 
+}

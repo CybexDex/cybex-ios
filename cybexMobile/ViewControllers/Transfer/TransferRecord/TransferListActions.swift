@@ -11,26 +11,26 @@ import ReSwift
 import SwiftyJSON
 import RxCocoa
 
-//MARK: - State
+// MARK: - State
 struct TransferListState: StateType {
     var isLoading = false
     var page: Int = 1
-    var errorMessage:String?
+    var errorMessage: String?
     var property: TransferListPropertyState
 }
 
 struct TransferListPropertyState {
-  var data : BehaviorRelay<[TransferRecordViewModel]?> = BehaviorRelay(value: nil)
+  var data: BehaviorRelay<[TransferRecordViewModel]?> = BehaviorRelay(value: nil)
 }
 
-struct ReduceTansferRecordsAction : Action {
-  var data : [(TransferRecord,time:String)]
+struct ReduceTansferRecordsAction: Action {
+  var data: [(TransferRecord, time: String)]
 }
 
-//MARK: - Action Creator
+// MARK: - Action Creator
 class TransferListPropertyActionCreate: LoadingActionCreator {
     public typealias ActionCreator = (_ state: TransferListState, _ store: Store<TransferListState>) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         _ state: TransferListState,
         _ store: Store <TransferListState>,

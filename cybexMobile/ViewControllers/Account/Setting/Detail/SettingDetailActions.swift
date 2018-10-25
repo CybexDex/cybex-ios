@@ -9,21 +9,21 @@
 import Foundation
 import ReSwift
 
-//MARK: - State
+// MARK: - State
 struct SettingDetailState: StateType {
     var isLoading = false
     var page: Int = 1
-    var errorMessage:String?
+    var errorMessage: String?
     var property: SettingDetailPropertyState
 }
 
 struct SettingDetailPropertyState {
 }
 
-//MARK: - Action Creator
+// MARK: - Action Creator
 class SettingDetailPropertyActionCreate: LoadingActionCreator {
     public typealias ActionCreator = (_ state: SettingDetailState, _ store: Store<SettingDetailState>) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         _ state: SettingDetailState,
         _ store: Store <SettingDetailState>,

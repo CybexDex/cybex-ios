@@ -26,7 +26,7 @@ public final class VerifyAddressQuery: GraphQLQuery {
     public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("verifyAddress", arguments: ["asset": GraphQLVariable("asset"), "address": GraphQLVariable("address"), "accountName": GraphQLVariable("accountName")], type: .nonNull(.object(VerifyAddress.selections))),
+      GraphQLField("verifyAddress", arguments: ["asset": GraphQLVariable("asset"), "address": GraphQLVariable("address"), "accountName": GraphQLVariable("accountName")], type: .nonNull(.object(VerifyAddress.selections)))
     ]
 
     public private(set) var resultMap: ResultMap
@@ -56,7 +56,7 @@ public final class VerifyAddressQuery: GraphQLQuery {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("address", type: .nonNull(.scalar(String.self))),
         GraphQLField("asset", type: .scalar(String.self)),
-        GraphQLField("valid", type: .nonNull(.scalar(Bool.self))),
+        GraphQLField("valid", type: .nonNull(.scalar(Bool.self)))
       ]
 
       public private(set) var resultMap: ResultMap
@@ -154,7 +154,7 @@ public final class GetWithdrawInfoQuery: GraphQLQuery {
     public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("withdrawInfo", arguments: ["type": GraphQLVariable("type")], type: .nonNull(.object(WithdrawInfo.selections))),
+      GraphQLField("withdrawInfo", arguments: ["type": GraphQLVariable("type")], type: .nonNull(.object(WithdrawInfo.selections)))
     ]
 
     public private(set) var resultMap: ResultMap
@@ -187,7 +187,7 @@ public final class GetWithdrawInfoQuery: GraphQLQuery {
         GraphQLField("type", type: .nonNull(.scalar(String.self))),
         GraphQLField("asset", type: .nonNull(.scalar(String.self))),
         GraphQLField("gatewayAccount", type: .nonNull(.scalar(String.self))),
-        GraphQLField("precision", type: .scalar(Int.self)),
+        GraphQLField("precision", type: .scalar(Int.self))
       ]
 
       public private(set) var resultMap: ResultMap
@@ -314,7 +314,7 @@ public final class GetDepositAddressQuery: GraphQLQuery {
     public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("getDepositAddress", arguments: ["accountName": GraphQLVariable("accountName"), "asset": GraphQLVariable("asset")], type: .object(GetDepositAddress.selections)),
+      GraphQLField("getDepositAddress", arguments: ["accountName": GraphQLVariable("accountName"), "asset": GraphQLVariable("asset")], type: .object(GetDepositAddress.selections))
     ]
 
     public private(set) var resultMap: ResultMap
@@ -349,7 +349,7 @@ public final class GetDepositAddressQuery: GraphQLQuery {
         GraphQLField("jadeOrders", type: .nonNull(.list(.scalar(String.self)))),
         GraphQLField("latest", type: .nonNull(.scalar(Bool.self))),
         GraphQLField("createAt", type: .scalar(String.self)),
-        GraphQLField("projectInfo", type: .object(ProjectInfo.selections)),
+        GraphQLField("projectInfo", type: .object(ProjectInfo.selections))
       ]
 
       public private(set) var resultMap: ResultMap
@@ -477,7 +477,7 @@ public final class GetDepositAddressQuery: GraphQLQuery {
           GraphQLField("projectName", type: .scalar(String.self)),
           GraphQLField("logoUrl", type: .scalar(String.self)),
           GraphQLField("contractAddress", type: .scalar(String.self)),
-          GraphQLField("contractExplorerUrl", type: .scalar(String.self)),
+          GraphQLField("contractExplorerUrl", type: .scalar(String.self))
         ]
 
         public private(set) var resultMap: ResultMap
@@ -561,7 +561,7 @@ public final class NewDepositAddressMutation: GraphQLMutation {
     public static let possibleTypes = ["Mutation"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("newDepositAddress", arguments: ["accountName": GraphQLVariable("accountName"), "asset": GraphQLVariable("asset")], type: .nonNull(.object(NewDepositAddress.selections))),
+      GraphQLField("newDepositAddress", arguments: ["accountName": GraphQLVariable("accountName"), "asset": GraphQLVariable("asset")], type: .nonNull(.object(NewDepositAddress.selections)))
     ]
 
     public private(set) var resultMap: ResultMap
@@ -596,7 +596,7 @@ public final class NewDepositAddressMutation: GraphQLMutation {
         GraphQLField("jadeOrders", type: .nonNull(.list(.scalar(String.self)))),
         GraphQLField("latest", type: .nonNull(.scalar(Bool.self))),
         GraphQLField("createAt", type: .scalar(String.self)),
-        GraphQLField("projectInfo", type: .object(ProjectInfo.selections)),
+        GraphQLField("projectInfo", type: .object(ProjectInfo.selections))
       ]
 
       public private(set) var resultMap: ResultMap
@@ -724,7 +724,7 @@ public final class NewDepositAddressMutation: GraphQLMutation {
           GraphQLField("projectName", type: .scalar(String.self)),
           GraphQLField("logoUrl", type: .scalar(String.self)),
           GraphQLField("contractAddress", type: .scalar(String.self)),
-          GraphQLField("contractExplorerUrl", type: .scalar(String.self)),
+          GraphQLField("contractExplorerUrl", type: .scalar(String.self))
         ]
 
         public private(set) var resultMap: ResultMap
@@ -796,7 +796,7 @@ public struct WithdrawAddressInfo: GraphQLFragment {
     GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
     GraphQLField("address", type: .nonNull(.scalar(String.self))),
     GraphQLField("asset", type: .scalar(String.self)),
-    GraphQLField("valid", type: .nonNull(.scalar(Bool.self))),
+    GraphQLField("valid", type: .nonNull(.scalar(Bool.self)))
   ]
 
   public private(set) var resultMap: ResultMap
@@ -859,7 +859,7 @@ public struct WithdrawinfoObject: GraphQLFragment {
     GraphQLField("type", type: .nonNull(.scalar(String.self))),
     GraphQLField("asset", type: .nonNull(.scalar(String.self))),
     GraphQLField("gatewayAccount", type: .nonNull(.scalar(String.self))),
-    GraphQLField("precision", type: .scalar(Int.self)),
+    GraphQLField("precision", type: .scalar(Int.self))
   ]
 
   public private(set) var resultMap: ResultMap
@@ -951,7 +951,7 @@ public struct AccountAddressRecord: GraphQLFragment {
     GraphQLField("jadeOrders", type: .nonNull(.list(.scalar(String.self)))),
     GraphQLField("latest", type: .nonNull(.scalar(Bool.self))),
     GraphQLField("createAt", type: .scalar(String.self)),
-    GraphQLField("projectInfo", type: .object(ProjectInfo.selections)),
+    GraphQLField("projectInfo", type: .object(ProjectInfo.selections))
   ]
 
   public private(set) var resultMap: ResultMap
@@ -1053,7 +1053,7 @@ public struct AccountAddressRecord: GraphQLFragment {
       GraphQLField("projectName", type: .scalar(String.self)),
       GraphQLField("logoUrl", type: .scalar(String.self)),
       GraphQLField("contractAddress", type: .scalar(String.self)),
-      GraphQLField("contractExplorerUrl", type: .scalar(String.self)),
+      GraphQLField("contractExplorerUrl", type: .scalar(String.self))
     ]
 
     public private(set) var resultMap: ResultMap

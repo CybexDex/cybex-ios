@@ -15,22 +15,22 @@ protocol ETORecordListCoordinatorProtocol {
 
 protocol ETORecordListStateManagerProtocol {
     var state: ETORecordListState { get }
-    
+
     func fetchETORecord(_ page: Int, reason: PageLoadReason)
-    func switchPageState(_ state:PageState)
+    func switchPageState(_ state: PageState)
 }
 
 class ETORecordListCoordinator: ETORootCoordinator {
     var store = Store(
         reducer: ETORecordListReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [TrackingMiddleware]
     )
-    
+
     var state: ETORecordListState {
         return store.state
     }
-            
+
     override func register() {
         Broadcaster.register(ETORecordListCoordinatorProtocol.self, observer: self)
         Broadcaster.register(ETORecordListStateManagerProtocol.self, observer: self)
@@ -38,16 +38,16 @@ class ETORecordListCoordinator: ETORootCoordinator {
 }
 
 extension ETORecordListCoordinator: ETORecordListCoordinatorProtocol {
-    
+
 }
 
 extension ETORecordListCoordinator: ETORecordListStateManagerProtocol {
-    func switchPageState(_ state:PageState) {
+    func switchPageState(_ state: PageState) {
         DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }
     }
-    
+
     func fetchETORecord(_ page: Int, reason: PageLoadReason) {
         guard let name = UserManager.shared.name.value else { return }
         ETOMGService.request(target: .getUserTradeList(name: name, page: page, limit: 20), success: { (json) in
@@ -56,16 +56,14 @@ extension ETORecordListCoordinator: ETORecordListStateManagerProtocol {
             let data = json["data"]
             if data.arrayValue.count == 0 && reason != .manualLoadMore {
                 self.switchPageState(.noData)
-            }
-            else if data.arrayValue.count < 20 {
+            } else if data.arrayValue.count < 20 {
                 self.switchPageState(.noMore)
-            }
-            else {
+            } else {
                 self.switchPageState(.normal(reason: reason))
             }
-            
+
             let add = reason == .manualLoadMore
-            
+
             self.store.dispatch(ETORecordListFetchedAction(data: data, add: add))
         }, error: { (error) in
             self.store.dispatch(ETONextPageAction(page: page))

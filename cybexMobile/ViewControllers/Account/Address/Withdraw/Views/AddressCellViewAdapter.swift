@@ -9,25 +9,21 @@
 import Foundation
 
 extension AddressCellView {
-    func adapterWithdrawModelToAddressCellView(_ model:WithdrawAddress) {
+    func adapterWithdrawModelToAddressCellView(_ model: WithdrawAddress) {
         nickName.text = model.name
         address.text = model.address
-        
+
         if let memoText = model.memo, !memoText.isEmpty {
             memo.text = memoText
-        }
-        else {
+        } else {
             memo.text = ""
         }
     }
 }
 
 extension AddressCellView {
-    func adapterTransferModelToAddressCellView(_ model:TransferAddress) {
+    func adapterTransferModelToAddressCellView(_ model: TransferAddress) {
         nickName.text = model.name
         address.text = model.address
     }
 }
-
-
-

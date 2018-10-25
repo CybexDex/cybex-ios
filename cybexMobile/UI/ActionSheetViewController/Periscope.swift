@@ -26,27 +26,26 @@ import Foundation
 import XLActionController
 
 public class PeriscopeCell: XLActionController.ActionCell {
-    
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         initialize()
     }
-    
+
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     public override func awakeFromNib() {
         super.awakeFromNib()
         initialize()
     }
-    
+
     func initialize() {
         let backgroundView = UIView()
         selectedBackgroundView = backgroundView
     }
 }
-
 
 public class PeriscopeSection: Section<String, Void> {
     public override init() {
@@ -64,39 +63,39 @@ public class PeriscopeHeader: UICollectionReusableView {
         label.font = .systemFont(ofSize: 16.0)
         return label
     }()
-    
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor(white: 0.95, alpha: 1.0)
         addSubview(label)
     }
-    
+
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 public class PeriscopeActionController: ActionController<PeriscopeCell, String, PeriscopeHeader, String, UICollectionReusableView, Void> {
-    var tapMaskCallback:CommonCallback?
+    var tapMaskCallback: CommonCallback?
 
-    var selectedIndex : IndexPath?
+    var selectedIndex: IndexPath?
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     public override init(nibName nibNameOrNil: String? = nil, bundle nibBundleOrNil: Bundle? = nil) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
+
         collectionViewLayout.minimumLineSpacing = -0.5
         collectionViewLayout.sectionInset = UIEdgeInsets(top: -0.5, left: 0, bottom: 0, right: 0)
-        
+
         settings.behavior.hideOnScrollDown = false
         settings.animation.scale = nil
         settings.animation.present.duration = 0.6
         settings.animation.dismiss.duration = 0.5
         settings.animation.dismiss.options = .curveEaseIn
         settings.animation.dismiss.offset = 30
-        
+
         cellSpec = .nibFile(nibName: "PeriscopeCell", bundle: Bundle(for: PeriscopeCell.self), height: { _ in 60})
         sectionHeaderSpec = .cellClass(height: { _ in 12 })
         headerSpec = .cellClass(height: { [weak self] (headerData: String) in
@@ -108,13 +107,13 @@ public class PeriscopeActionController: ActionController<PeriscopeCell, String, 
             label.sizeToFit()
             return label.frame.size.height + 20
         })
-        
+
         onConfigureHeader = { [weak self] header, headerData in
             guard let me = self else { return }
             header.label.frame = CGRect(x: 0, y: 0, width: me.view.frame.size.width - 40, height: CGFloat.greatestFiniteMagnitude)
             header.label.text = headerData
             header.label.sizeToFit()
-            header.label.center = CGPoint(x: header.frame.size.width  / 2, y:header.frame.size.height / 2)
+            header.label.center = CGPoint(x: header.frame.size.width  / 2, y: header.frame.size.height / 2)
         }
         onConfigureSectionHeader = { sectionHeader, sectionHeaderData in
             sectionHeader.backgroundColor = UIColor.clear
@@ -128,11 +127,11 @@ public class PeriscopeActionController: ActionController<PeriscopeCell, String, 
             }
         }
     }
-    
+
     public override func onWillDismissView() {
         tapMaskCallback?()
     }
-    
+
     public override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         super.collectionView(collectionView, didSelectItemAt: indexPath)
         if let cell = collectionView.cellForItem(at: indexPath) as? PeriscopeCell {
@@ -140,4 +139,3 @@ public class PeriscopeActionController: ActionController<PeriscopeCell, String, 
         }
     }
 }
-

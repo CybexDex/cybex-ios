@@ -10,29 +10,29 @@ import Foundation
 
 @IBDesignable
 class ComprehensiveBlockItemView: CybexBaseView {
-    
+
     @IBOutlet weak var blockTitle: BaseLabel!
     @IBOutlet weak var blockContentLabel: BaseLabel!
-    
-    enum Event:String {
+
+    enum Event: String {
         case ComprehensiveBlockItemViewDidClicked
     }
-        
+
     override func setup() {
         super.setup()
-        
+
         setupUI()
         setupSubViewEvent()
     }
-    
+
     func setupUI() {
         clearBgColor()
     }
-    
+
     func setupSubViewEvent() {
-    
+
     }
-    
+
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.ComprehensiveBlockItemViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }

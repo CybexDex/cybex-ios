@@ -9,20 +9,17 @@
 import UIKit
 import ReSwift
 
-func YourPortfolioReducer(action:Action, state:YourPortfolioState?) -> YourPortfolioState {
+func YourPortfolioReducer(action: Action, state: YourPortfolioState?) -> YourPortfolioState {
     return YourPortfolioState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: YourPortfolioPropertyReducer(state?.property, action: action))
 }
 
 func YourPortfolioPropertyReducer(_ state: YourPortfolioPropertyState?, action: Action) -> YourPortfolioPropertyState {
     let state = state ?? YourPortfolioPropertyState()
-    
+
     switch action {
     default:
         break
     }
-    
+
     return state
 }
-
-
-

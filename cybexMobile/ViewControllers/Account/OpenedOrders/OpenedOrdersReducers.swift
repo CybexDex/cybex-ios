@@ -9,20 +9,17 @@
 import UIKit
 import ReSwift
 
-func OpenedOrdersReducer(action:Action, state:OpenedOrdersState?) -> OpenedOrdersState {
+func OpenedOrdersReducer(action: Action, state: OpenedOrdersState?) -> OpenedOrdersState {
     return OpenedOrdersState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: OpenedOrdersPropertyReducer(state?.property, action: action))
 }
 
 func OpenedOrdersPropertyReducer(_ state: OpenedOrdersPropertyState?, action: Action) -> OpenedOrdersPropertyState {
     let state = state ?? OpenedOrdersPropertyState()
-  
+
     switch action {
     default:
         break
     }
-    
+
     return state
 }
-
-
-

@@ -9,32 +9,32 @@
 import Foundation
 
 struct CBEMAVOLUMEModel {
-  
+
   let indicatorType: CBIndicatorType
   let klineModels: [CBKLineModel]
-  
+
   init(indicatorType: CBIndicatorType, klineModels: [CBKLineModel]) {
     self.indicatorType = indicatorType
     self.klineModels = klineModels
   }
-  
+
   public func fetchDrawEMAVOLUMEData(drawRange: NSRange?) -> [CBKLineModel] {
-    
+
     var datas = [CBKLineModel]()
-    
+
     guard klineModels.count > 0 else {
       return datas
     }
-    
+
     for (index, model) in klineModels.enumerated() {
-      
+
       switch indicatorType {
       case .EMA_VOLUME(let days):
-        
+
         var values = [Double?]()
-        
+
         for (idx, day) in days.enumerated() {
-          
+
           let previousEMA_VOLUME: Double? = index > 0 ? datas[index - 1].EMA_VOLUMEs?[idx] : nil
           values.append(handleEMA_VOLUME(day: day, model: model, index: index, previousEMA_VOLUME: previousEMA_VOLUME))
         }
@@ -44,14 +44,14 @@ struct CBEMAVOLUMEModel {
       }
       datas.append(model)
     }
-    
+
     if let range = drawRange {
       return Array(datas[range.location..<range.location+range.length])
     } else {
       return datas
     }
   }
-  
+
   private func handleEMA_VOLUME(day: Int, model: CBKLineModel, index: Int, previousEMA_VOLUME: Double?) -> Double? {
     if day <= 0 || index < (day - 1) {
       return nil

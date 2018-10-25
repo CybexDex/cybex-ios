@@ -9,65 +9,64 @@
 import Foundation
 import ObjectMapper
 
-class Bucket : Mappable, NSCopying {
+class Bucket: Mappable, NSCopying {
   var id: String = ""
-  
+
   var base_volume: String = ""
   var quote_volume: String = ""
-  
+
   var high_base: String = ""
   var high_quote: String = ""
   var low_base: String = ""
   var low_quote: String = ""
-  
+
   var open_base: String = ""
   var open_quote: String = ""
   var close_base: String = ""
   var close_quote: String = ""
-  
-  var open:TimeInterval = 0
-  var base:String = ""
-  var quote:String = ""
-  var seconds:String = ""
 
+  var open: TimeInterval = 0
+  var base: String = ""
+  var quote: String = ""
+  var seconds: String = ""
 
   required init?(map: Map) {
   }
 
   func mapping(map: Map) {
-    id                   <- (map["id"],ToStringTransform())
-    base_volume          <- (map["base_volume"],ToStringTransform())
-    quote_volume         <- (map["quote_volume"],ToStringTransform())
-    high_base            <- (map["high_base"],ToStringTransform())
-    high_quote           <- (map["high_quote"],ToStringTransform())
-    low_base             <- (map["low_base"],ToStringTransform())
-    low_quote            <- (map["low_quote"],ToStringTransform())
-    open_base            <- (map["open_base"],ToStringTransform())
-    open_quote           <- (map["open_quote"],ToStringTransform())
-    close_base           <- (map["close_base"],ToStringTransform())
-    close_quote          <- (map["close_quote"],ToStringTransform())
+    id                   <- (map["id"], ToStringTransform())
+    base_volume          <- (map["base_volume"], ToStringTransform())
+    quote_volume         <- (map["quote_volume"], ToStringTransform())
+    high_base            <- (map["high_base"], ToStringTransform())
+    high_quote           <- (map["high_quote"], ToStringTransform())
+    low_base             <- (map["low_base"], ToStringTransform())
+    low_quote            <- (map["low_quote"], ToStringTransform())
+    open_base            <- (map["open_base"], ToStringTransform())
+    open_quote           <- (map["open_quote"], ToStringTransform())
+    close_base           <- (map["close_base"], ToStringTransform())
+    close_quote          <- (map["close_quote"], ToStringTransform())
     open                 <- (map["key.open"], DateIntervalTransform())
-    base          <- (map["key.base"],ToStringTransform())
-    quote          <- (map["key.quote"],ToStringTransform())
-    seconds         <- (map["key.seconds"],ToStringTransform())
+    base          <- (map["key.base"], ToStringTransform())
+    quote          <- (map["key.quote"], ToStringTransform())
+    seconds         <- (map["key.seconds"], ToStringTransform())
   }
-  
+
   func copy(with zone: NSZone? = nil) -> Any {
     let copy = Bucket(JSON: self.toJSON())!
     return copy
   }
-  
+
   static func empty() -> Bucket {
     return Bucket(JSON: [:])!
   }
-  
+
 }
 
 enum changeScope {
   case greater
   case less
   case equal
-  
+
   func icon() -> UIImage {
     switch self {
     case .greater:
@@ -78,7 +77,7 @@ enum changeScope {
       return #imageLiteral(resourceName: "ic_arrow_grey2.pdf")
     }
   }
-  
+
   func color() -> UIColor {
     switch self {
     case .greater:
@@ -92,36 +91,34 @@ enum changeScope {
 }
 
 struct BucketMatrix {
-  var price:String = ""
-  
-  var asset:[Bucket]
-  
-  var base_volume_origin:Double = 0
+  var price: String = ""
 
-  var base_volume:String = ""
-  var quote_volume:String = ""
-  
-  var high:String = ""
-  var low:String = ""
-  
-  var change:String = ""
-  var base:String = ""
-  var quote:String = ""
-  
-  var incre:changeScope = .equal
-  
-  var icon : String = ""
-  init(_ homebucket:HomeBucket) {
+  var asset: [Bucket]
+
+  var base_volume_origin: Double = 0
+
+  var base_volume: String = ""
+  var quote_volume: String = ""
+
+  var high: String = ""
+  var low: String = ""
+
+  var change: String = ""
+  var base: String = ""
+  var quote: String = ""
+
+  var incre: changeScope = .equal
+
+  var icon: String = ""
+  init(_ homebucket: HomeBucket) {
     self.asset = homebucket.bucket
     self.base = homebucket.base
     self.quote = homebucket.quote
-    
 
-    
     self.icon = AppConfiguration.SERVER_ICONS_BASE_URLString + quote.replacingOccurrences(of: ".", with: "_") + "_grey.png"
 
     guard let last = self.asset.last else { return }
-    
+
     let first = self.asset.first!
 
     let flip = homebucket.base != last.base
@@ -132,7 +129,6 @@ struct BucketMatrix {
     let first_openbase_amount = flip ? Double(first.open_quote)! : Double(first.open_base)!
     let first_openquote_amount = flip ? Double(first.open_base)! : Double(first.open_quote)!
 
-
     let base_info = homebucket.base_info
     let quote_info = homebucket.quote_info
 
@@ -142,34 +138,32 @@ struct BucketMatrix {
     let lastClose_price = (last_closebase_amount / base_precision) / (last_closequote_amount / quote_precision)
     let firseOpen_price = (first_openbase_amount / base_precision) / (first_openquote_amount / quote_precision)
 
-    var high_price_collection:[Double] = []
-    var low_price_collection:[Double] = []
-    
+    var high_price_collection: [Double] = []
+    var low_price_collection: [Double] = []
+
     for bucket in self.asset {
       let high_base = flip ? (Double(bucket.low_quote)! / base_precision) : (Double(bucket.high_base)! / base_precision)
       let quote_base = flip ? (Double(bucket.low_base)! / quote_precision) : (Double(bucket.high_quote)! / quote_precision)
       high_price_collection.append(high_base / quote_base)
-      
+
       let low_base = flip ? (Double(bucket.high_quote)! / base_precision) : (Double(bucket.low_base)! / base_precision)
       let low_quote = flip ? (Double(bucket.high_base)! / quote_precision) : (Double(bucket.low_quote)! / quote_precision)
       low_price_collection.append(low_base / low_quote)
 
     }
 
-
     let high = high_price_collection.max()!
     let low = low_price_collection.min()!
 
     let now = Date().addingTimeInterval(-24 * 3600).timeIntervalSince1970
 
-    let base_volume = self.asset.filter({$0.open > now}).map{flip ? $0.quote_volume : $0.base_volume}.reduce(0) { (last, cur) -> Double in
+    let base_volume = self.asset.filter({$0.open > now}).map {flip ? $0.quote_volume : $0.base_volume}.reduce(0) { (last, cur) -> Double in
       last + Double(cur)!
     } / base_precision
 
-    let quote_volume = self.asset.filter({$0.open > now}).map{flip ? $0.base_volume: $0.quote_volume}.reduce(0) { (last, cur) -> Double in
+    let quote_volume = self.asset.filter({$0.open > now}).map {flip ? $0.base_volume: $0.quote_volume}.reduce(0) { (last, cur) -> Double in
       last + Double(cur)!
       } / quote_precision
-
 
     self.base_volume_origin = base_volume
     self.base_volume = base_volume.suffixNumber(digitNum: 2)
@@ -178,42 +172,39 @@ struct BucketMatrix {
     self.high = high.formatCurrency(digitNum: base_info.precision)
     self.low = low.formatCurrency(digitNum: base_info.precision)
 
-    
     self.price = lastClose_price.formatCurrency(digitNum: base_info.precision)
 
     let change = (lastClose_price - firseOpen_price) * 100 / firseOpen_price
     let percent = round(change * 100) / 100.0
 
-    self.change = percent.formatCurrency(digitNum: 2,usesGroupingSeparator: false)
+    self.change = percent.formatCurrency(digitNum: 2, usesGroupingSeparator: false)
 
     if percent == 0 {
       self.incre = .equal
-    }
-    else if percent < 0 {
+    } else if percent < 0 {
       self.incre = .less
-    }
-    else {
+    } else {
       self.incre = .greater
     }
-    
+
   }
-  
+
 }
 
 class DateIntervalTransform: TransformType {
   public typealias Object = Double
   public typealias JSON = String
-  
+
   public init() {}
-  
+
   open func transformFromJSON(_ value: Any?) -> Double? {
     if let time = value as? String {
       return time.dateFromISO8601?.timeIntervalSince1970
     }
-    
+
     return nil
   }
-  
+
   open func transformToJSON(_ value: Double?) -> String? {
     if let date = value {
       let d = Date(timeIntervalSince1970: date)
@@ -226,23 +217,21 @@ class DateIntervalTransform: TransformType {
 class ToStringTransform: TransformType {
   public typealias Object = String
   public typealias JSON = String
-  
+
   public init() {}
-  
+
   open func transformFromJSON(_ value: Any?) -> String? {
     if let v = value as? Double {
       return v.description
-    }
-    else if let v = value as? String {
+    } else if let v = value as? String {
       return v
-    }
-    else if let v = value as? Int {
+    } else if let v = value as? Int {
       return v.description
     }
-    
+
     return nil
   }
-  
+
   open func transformToJSON(_ value: String?) -> String? {
     if let v = value {
       return v
@@ -250,7 +239,6 @@ class ToStringTransform: TransformType {
     return nil
   }
 }
-
 
 extension Bucket: Equatable {
   static func ==(lhs: Bucket, rhs: Bucket) -> Bool {

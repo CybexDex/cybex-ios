@@ -10,12 +10,12 @@ import Foundation
 import ObjectMapper
 
 class AccountKeys: Mappable {
-  var active_key:Key?
-  var owner_key:Key?
-  var memo_key:Key?
+  var active_key: Key?
+  var owner_key: Key?
+  var memo_key: Key?
 
   required init?(map: Map) {
-    
+
   }
 
   func mapping(map: Map) {

@@ -14,26 +14,26 @@ import SwiftTheme
 import Repeat
 
 class ETOViewController: BaseViewController {
-    
+
     var coordinator: (ETOCoordinatorProtocol & ETOStateManagerProtocol)?
     @IBOutlet weak var homeView: ETOHomeView!
 //    var timerRepeater: Repeater?
     var infosRepeater: Repeater?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupData()
         setupUI()
         setupEvent()
     }
 
     override func refreshViewController() {
-        
+
     }
-    
+
     func startInfosRepeatAction() {
-        self.infosRepeater = Repeater.every(.seconds(3), { [weak self](timer) in
+        self.infosRepeater = Repeater.every(.seconds(3), { [weak self](_) in
             main {
                 guard let `self` = self else { return }
                 self.coordinator?.refreshProjectDatas()
@@ -41,31 +41,31 @@ class ETOViewController: BaseViewController {
             }
         })
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fetchProjectData()
         self.fetchBannder()
         self.startInfosRepeatAction()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.infosRepeater?.pause()
         self.infosRepeater = nil
     }
-    
+
     func setupUI() {
         setupNaviUI()
     }
-    
+
     func setupNaviUI() {
         self.automaticallyAdjustsScrollViewInsets = true
         self.extendedLayoutIncludesOpaqueBars = false
         self.navigationItem.titleView = UIImageView(image: R.image.img_etologo())
         configRightNavButton(R.image.ic_records_24_px())
     }
-    
+
     override func rightAction(_ sender: UIButton) {
         if !UserManager.shared.isLoginIn {
             app_coodinator.showLogin()
@@ -73,38 +73,38 @@ class ETOViewController: BaseViewController {
         }
         self.coordinator?.openProjectHistroy()
     }
-    
+
     func setupData() {
         self.view.showNoData("")
         self.startLoading()
     }
-    
+
     func fetchProjectData() {
         self.coordinator?.fetchProjectData()
     }
-    
+
     func fetchBannder() {
         self.coordinator?.fetchBannersData()
     }
-    
+
     func setupEvent() {
-   
+
     }
-    
+
     override func configureObserveState() {
-        coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self](state) in
+        coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self](_) in
             guard let `self` = self else { return }
-            
+
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
+
         coordinator?.state.data.asObservable().subscribe(onNext: { [weak self](data) in
             guard let `self` = self else { return }
             self.endLoading()
             self.view.hiddenNoData()
             self.homeView.data = data
-            
+
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
+
         coordinator?.state.bannerUrls.asObservable().subscribe(onNext: { [weak self](banners) in
             guard let `self` = self else { return }
             self.endLoading()
@@ -115,18 +115,15 @@ class ETOViewController: BaseViewController {
 }
 
 extension ETOViewController {
-    @objc func ETOProjectViewDidClicked(_ data:[String: Any]) {
-        if let viewModel = data["data"] as? ETOProjectViewModel{
+    @objc func ETOProjectViewDidClicked(_ data: [String: Any]) {
+        if let viewModel = data["data"] as? ETOProjectViewModel {
             self.coordinator?.setSelectedProjectData(viewModel)
         }
     }
-    
-    @objc func ETOHomeBannerViewDidClicked(_ data:[String:Any]) {
+
+    @objc func ETOHomeBannerViewDidClicked(_ data: [String: Any]) {
         if let models = self.coordinator?.state.banners.value, let index = data["data"] as? Int, models.count >= index {
             self.coordinator?.setSelectedBannerData(models[index])
         }
     }
 }
-
-
-

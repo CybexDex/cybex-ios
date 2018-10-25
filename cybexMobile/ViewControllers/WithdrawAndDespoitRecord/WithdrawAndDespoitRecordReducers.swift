@@ -9,15 +9,13 @@
 import UIKit
 import ReSwift
 
-func WithdrawAndDespoitRecordReducer(action:Action, state:WithdrawAndDespoitRecordState?) -> WithdrawAndDespoitRecordState {
+func WithdrawAndDespoitRecordReducer(action: Action, state: WithdrawAndDespoitRecordState?) -> WithdrawAndDespoitRecordState {
     let state = state ?? WithdrawAndDespoitRecordState()
-        
+
     switch action {
     default:
         break
     }
-        
+
     return state
 }
-
-

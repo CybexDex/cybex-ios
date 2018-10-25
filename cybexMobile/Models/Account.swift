@@ -10,20 +10,20 @@ import Foundation
 import ObjectMapper
 
 class Account: Mappable {
-    var membership_expiration_date:String = ""
-    var name:String = ""
-    var active_auths:[Any] = []
-    var owner_auths:[Any] = []
-    var memo_key:String = ""
-    var id:String = ""
-    
+    var membership_expiration_date: String = ""
+    var name: String = ""
+    var active_auths: [Any] = []
+    var owner_auths: [Any] = []
+    var memo_key: String = ""
+    var id: String = ""
+
     required init?(map: Map) {
-        
+
     }
-    
+
     func mapping(map: Map) {
-        membership_expiration_date    <- (map["membership_expiration_date"],ToStringTransform())
-        name                   <- (map["name"],ToStringTransform())
+        membership_expiration_date    <- (map["membership_expiration_date"], ToStringTransform())
+        name                   <- (map["name"], ToStringTransform())
         active_auths <- map["active.key_auths"]
         owner_auths <- map["owner.key_auths"]
         id           <- map["id"]
@@ -32,9 +32,9 @@ class Account: Mappable {
 }
 
 extension Account {
-    var superMember:Bool {
+    var superMember: Bool {
         let second = membership_expiration_date.dateFromISO8601?.timeIntervalSince1970 ?? 1
-        
+
         return second < 0
     }
 }
