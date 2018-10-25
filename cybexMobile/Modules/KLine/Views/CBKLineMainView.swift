@@ -413,7 +413,7 @@ extension CBKLineMainView {
             NSAttributedString.Key.font: configuration.main.valueAssistTextFont,
             ]
         
-        let mindrawAttrsString = NSMutableAttributedString(string: "←" + low_klineModel.low.string(digits: low_klineModel.precision), attributes: attributes)
+        let mindrawAttrsString = NSMutableAttributedString(string: "←" + low_klineModel.low.string(digits: low_klineModel.precision, roundingMode: .down), attributes: attributes)
         
         var min_X = low_position.x
         

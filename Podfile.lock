@@ -1,0 +1,408 @@
+PODS:
+  - ActiveLabel (1.0.1)
+  - Apollo (0.9.2):
+    - Apollo/Core (= 0.9.2)
+  - Apollo/Core (0.9.2)
+  - AsyncOperation (1.1.0)
+  - AsyncSwift (2.0.4)
+  - AwaitKit (5.0.0):
+    - PromiseKit (~> 6)
+  - BeareadToast (0.0.3)
+  - BiometricAuthentication (2.0.2)
+  - Crashlytics (3.10.5):
+    - Fabric (~> 1.7.9)
+  - CryptoSwift (0.11.0)
+  - Device (3.1.0)
+  - DifferenceKit (0.7.2):
+    - DifferenceKit/Core (= 0.7.2)
+    - DifferenceKit/UIKitExtension (= 0.7.2)
+  - DifferenceKit/Core (0.7.2)
+  - DifferenceKit/UIKitExtension (0.7.2):
+    - DifferenceKit/Core
+  - DNSPageView (1.0.1)
+  - Dollar (7.1.0)
+  - EFQRCode (4.2.2)
+  - ESPullToRefresh (2.7)
+  - Fabric (1.7.9)
+  - Fakery (3.4.0)
+  - FCUUID (1.3.1):
+    - UICKeyChainStore (~> 2.1.0)
+  - FSPagerView (0.8.1)
+  - GrowingTextView (0.5.6)
+  - IQKeyboardManagerSwift (6.1.1)
+  - JSONRPCKit (3.0.0):
+    - Result (~> 4.0.0)
+  - KeychainAccess (3.1.1)
+  - KMNavigationBarTransition (1.1.5)
+  - Lightning (2.0.0)
+  - Localize-Swift (2.0.0)
+  - Locksmith (4.0.0)
+  - Macaw (0.9.3):
+    - SWXMLHash
+  - MJRefresh (3.1.15.3)
+  - MonkeyKing (1.12.1)
+  - Nimble (7.1.3)
+  - ObjectMapper (3.3.0)
+  - Presentr (1.3.2)
+  - PromiseKit (6.3.4):
+    - PromiseKit/CorePromise (= 6.3.4)
+    - PromiseKit/Foundation (= 6.3.4)
+    - PromiseKit/UIKit (= 6.3.4)
+  - PromiseKit/CorePromise (6.3.4)
+  - PromiseKit/Foundation (6.3.4):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.3.4):
+    - PromiseKit/CorePromise
+  - Proposer (1.2.1)
+  - Quick (1.3.1)
+  - R.swift (5.0.0.alpha.2):
+    - R.swift.Library (~> 5.0.0.alpha.2)
+  - R.swift.Library (5.0.0.alpha.2)
+  - ReachabilitySwift (4.2.1)
+  - Repeat (0.5.6)
+  - Result (4.0.0)
+  - Reveal-SDK (18)
+  - RxCocoa (4.3.1):
+    - RxSwift (~> 4.0)
+  - RxGesture (2.0.1):
+    - RxCocoa (~> 4.3.1)
+    - RxSwift (~> 4.3.1)
+  - RxSwift (4.3.1)
+  - Siren (3.4.3)
+  - SwifterSwift (4.6.0):
+    - SwifterSwift/AppKit (= 4.6.0)
+    - SwifterSwift/CoreGraphics (= 4.6.0)
+    - SwifterSwift/CoreLocation (= 4.6.0)
+    - SwifterSwift/Foundation (= 4.6.0)
+    - SwifterSwift/MapKit (= 4.6.0)
+    - SwifterSwift/SpriteKit (= 4.6.0)
+    - SwifterSwift/SwiftStdlib (= 4.6.0)
+    - SwifterSwift/UIKit (= 4.6.0)
+  - SwifterSwift/AppKit (4.6.0)
+  - SwifterSwift/CoreGraphics (4.6.0)
+  - SwifterSwift/CoreLocation (4.6.0)
+  - SwifterSwift/Foundation (4.6.0)
+  - SwifterSwift/MapKit (4.6.0)
+  - SwifterSwift/SpriteKit (4.6.0)
+  - SwifterSwift/SwiftStdlib (4.6.0)
+  - SwifterSwift/UIKit (4.6.0)
+  - SwiftRichString (2.0.4)
+  - SwiftTheme (0.4.2)
+  - SwiftyBeaver (1.6.0)
+  - SwiftyJSON (4.1.0)
+  - SwiftyUserDefaults (4.0.0-alpha.1)
+  - SWXMLHash (4.7.2)
+  - Then (2.3.0)
+  - TinyConstraints (3.2.1)
+  - UICKeyChainStore (2.1.1)
+  - UIFontComplete (3.0.0)
+  - UMCAnalytics (5.5.0):
+    - UMCCommon
+  - UMCCommon (1.5.2)
+  - UMCCommonLog (1.0.0)
+  - UMCSecurityPlugins (1.0.6)
+  - URLNavigator (2.0.6)
+  - XLActionController (4.0.1):
+    - XLActionController/Core (= 4.0.1)
+  - XLActionController/Core (4.0.1)
+  - Zephyr (3.1.2)
+
+DEPENDENCIES:
+  - ActiveLabel (from `https://github.com/optonaut/ActiveLabel.swift`, branch `master`)
+  - Apollo
+  - AsyncOperation
+  - AsyncSwift
+  - AwaitKit
+  - BeareadToast (from `https://github.com/phpmaple/BeareadToast`, branch `master`)
+  - BiometricAuthentication
+  - Crashlytics
+  - CryptoSwift
+  - Device
+  - DifferenceKit (from `https://github.com/ra1028/DifferenceKit`, branch `master`)
+  - DNSPageView
+  - Dollar
+  - EFQRCode
+  - ESPullToRefresh (from `https://github.com/phpmaple/pull-to-refresh`, branch `swift-4.2`)
+  - Fabric
+  - Fakery (from `https://github.com/vadymmarkov/Fakery`, branch `master`)
+  - FCUUID
+  - FSPagerView (from `https://github.com/WenchaoD/FSPagerView`, tag `0.8.1`)
+  - GrowingTextView (from `https://github.com/phpmaple/GrowingTextView`, branch `swift4.2`)
+  - IQKeyboardManagerSwift (from `https://github.com/hackiftekhar/IQKeyboardManager`, tag `v6.1.1`)
+  - JSONRPCKit (from `https://github.com/phpmaple/JSONRPCKit`, branch `master`)
+  - KeychainAccess
+  - KMNavigationBarTransition
+  - Lightning
+  - Localize-Swift
+  - Locksmith
+  - Macaw (from `https://github.com/exyte/Macaw`, branch `master`)
+  - MJRefresh
+  - MonkeyKing (from `https://github.com/nixzhu/MonkeyKing`, branch `master`)
+  - Nimble
+  - ObjectMapper
+  - Presentr
+  - Proposer (from `https://github.com/nixzhu/Proposer`, branch `master`)
+  - Quick
+  - R.swift (from `https://github.com/mac-cain13/R.swift`, branch `master`)
+  - ReachabilitySwift
+  - Repeat
+  - Reveal-SDK
+  - RxGesture (from `https://github.com/RxSwiftCommunity/RxGesture`, tag `2.0.1`)
+  - Siren
+  - SwifterSwift (from `https://github.com/SwifterSwift/SwifterSwift`, branch `master`)
+  - SwiftRichString (from `https://github.com/mezhevikin/SwiftRichString`, branch `swift4.2`)
+  - SwiftTheme (from `https://github.com/jiecao-fm/SwiftTheme`, branch `master`)
+  - SwiftyBeaver
+  - SwiftyJSON
+  - SwiftyUserDefaults (from `https://github.com/radex/SwiftyUserDefaults`, tag `4.0.0-alpha.1`)
+  - Then
+  - TinyConstraints (from `https://github.com/roberthein/TinyConstraints`, branch `release/Swift-4.2`)
+  - UIFontComplete
+  - UMCAnalytics
+  - UMCCommon
+  - UMCCommonLog
+  - UMCSecurityPlugins
+  - URLNavigator
+  - XLActionController (from `https://github.com/xmartlabs/XLActionController`, branch `Swift4.2`)
+  - Zephyr
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Apollo
+    - AsyncOperation
+    - AsyncSwift
+    - AwaitKit
+    - BiometricAuthentication
+    - Crashlytics
+    - CryptoSwift
+    - Device
+    - DNSPageView
+    - Dollar
+    - EFQRCode
+    - Fabric
+    - FCUUID
+    - KeychainAccess
+    - KMNavigationBarTransition
+    - Lightning
+    - Localize-Swift
+    - Locksmith
+    - MJRefresh
+    - Nimble
+    - ObjectMapper
+    - Presentr
+    - PromiseKit
+    - Quick
+    - R.swift.Library
+    - ReachabilitySwift
+    - Repeat
+    - Result
+    - Reveal-SDK
+    - RxCocoa
+    - RxSwift
+    - Siren
+    - SwiftyBeaver
+    - SwiftyJSON
+    - SWXMLHash
+    - Then
+    - UICKeyChainStore
+    - UIFontComplete
+    - UMCAnalytics
+    - UMCCommon
+    - UMCCommonLog
+    - UMCSecurityPlugins
+    - URLNavigator
+    - Zephyr
+
+EXTERNAL SOURCES:
+  ActiveLabel:
+    :branch: master
+    :git: https://github.com/optonaut/ActiveLabel.swift
+  BeareadToast:
+    :branch: master
+    :git: https://github.com/phpmaple/BeareadToast
+  DifferenceKit:
+    :branch: master
+    :git: https://github.com/ra1028/DifferenceKit
+  ESPullToRefresh:
+    :branch: swift-4.2
+    :git: https://github.com/phpmaple/pull-to-refresh
+  Fakery:
+    :branch: master
+    :git: https://github.com/vadymmarkov/Fakery
+  FSPagerView:
+    :git: https://github.com/WenchaoD/FSPagerView
+    :tag: 0.8.1
+  GrowingTextView:
+    :branch: swift4.2
+    :git: https://github.com/phpmaple/GrowingTextView
+  IQKeyboardManagerSwift:
+    :git: https://github.com/hackiftekhar/IQKeyboardManager
+    :tag: v6.1.1
+  JSONRPCKit:
+    :branch: master
+    :git: https://github.com/phpmaple/JSONRPCKit
+  Macaw:
+    :branch: master
+    :git: https://github.com/exyte/Macaw
+  MonkeyKing:
+    :branch: master
+    :git: https://github.com/nixzhu/MonkeyKing
+  Proposer:
+    :branch: master
+    :git: https://github.com/nixzhu/Proposer
+  R.swift:
+    :branch: master
+    :git: https://github.com/mac-cain13/R.swift
+  RxGesture:
+    :git: https://github.com/RxSwiftCommunity/RxGesture
+    :tag: 2.0.1
+  SwifterSwift:
+    :branch: master
+    :git: https://github.com/SwifterSwift/SwifterSwift
+  SwiftRichString:
+    :branch: swift4.2
+    :git: https://github.com/mezhevikin/SwiftRichString
+  SwiftTheme:
+    :branch: master
+    :git: https://github.com/jiecao-fm/SwiftTheme
+  SwiftyUserDefaults:
+    :git: https://github.com/radex/SwiftyUserDefaults
+    :tag: 4.0.0-alpha.1
+  TinyConstraints:
+    :branch: release/Swift-4.2
+    :git: https://github.com/roberthein/TinyConstraints
+  XLActionController:
+    :branch: Swift4.2
+    :git: https://github.com/xmartlabs/XLActionController
+
+CHECKOUT OPTIONS:
+  ActiveLabel:
+    :commit: 2463840022b8031b4b2fe70f9c2083d178373cbc
+    :git: https://github.com/optonaut/ActiveLabel.swift
+  BeareadToast:
+    :commit: 4d73223d5a741d16c7ef13f549dd651ca1e5bfff
+    :git: https://github.com/phpmaple/BeareadToast
+  DifferenceKit:
+    :commit: dc186d7493e749b776ef325c721b9871dd8a405d
+    :git: https://github.com/ra1028/DifferenceKit
+  ESPullToRefresh:
+    :commit: be717f439d6e805c6ed085aab51836467cef9ea2
+    :git: https://github.com/phpmaple/pull-to-refresh
+  Fakery:
+    :commit: a80054138d5854f7e834602e6e71427d36fea42f
+    :git: https://github.com/vadymmarkov/Fakery
+  FSPagerView:
+    :git: https://github.com/WenchaoD/FSPagerView
+    :tag: 0.8.1
+  GrowingTextView:
+    :commit: 38293475cc99083164083e6fb46411d15c1fae66
+    :git: https://github.com/phpmaple/GrowingTextView
+  IQKeyboardManagerSwift:
+    :git: https://github.com/hackiftekhar/IQKeyboardManager
+    :tag: v6.1.1
+  JSONRPCKit:
+    :commit: 389b9feaae3983e6f632e083fb75c62f7985accf
+    :git: https://github.com/phpmaple/JSONRPCKit
+  Macaw:
+    :commit: 2a1423dce16d8da2ab7a225e1489478a1d6ec3ea
+    :git: https://github.com/exyte/Macaw
+  MonkeyKing:
+    :commit: 23f407a62ff41624a3888ff4b8ed65de0c2e7051
+    :git: https://github.com/nixzhu/MonkeyKing
+  Proposer:
+    :commit: a5ab4fd78d562c5da0a469dabf56effc78a2f133
+    :git: https://github.com/nixzhu/Proposer
+  R.swift:
+    :commit: e57846d139ad4b2f15c7c2258200b5c8771d05b4
+    :git: https://github.com/mac-cain13/R.swift
+  RxGesture:
+    :git: https://github.com/RxSwiftCommunity/RxGesture
+    :tag: 2.0.1
+  SwifterSwift:
+    :commit: 6ff84b417aa5d7e1f10146c648ecc1be29343d8b
+    :git: https://github.com/SwifterSwift/SwifterSwift
+  SwiftRichString:
+    :commit: b1f2d15d7c274c1b64321d43b7aec404b12b38d8
+    :git: https://github.com/mezhevikin/SwiftRichString
+  SwiftTheme:
+    :commit: a3cbb87b7b01cb38507e36ea02583bdd3d1e3feb
+    :git: https://github.com/jiecao-fm/SwiftTheme
+  SwiftyUserDefaults:
+    :git: https://github.com/radex/SwiftyUserDefaults
+    :tag: 4.0.0-alpha.1
+  TinyConstraints:
+    :commit: 6e7e5bcb68368bac126adb2d847b164dc033249e
+    :git: https://github.com/roberthein/TinyConstraints
+  XLActionController:
+    :commit: 4eb887254acae18c58da4dafb9ee72a205dede69
+    :git: https://github.com/xmartlabs/XLActionController
+
+SPEC CHECKSUMS:
+  ActiveLabel: b8b2396fe25308d563601437d6605bf691c3b5db
+  Apollo: 39d1adfceb6f262fc58286ec9425fd7c332877fb
+  AsyncOperation: db1c082553a0f6332e0bf7d03814acdd3d59e6a7
+  AsyncSwift: 65775a7b32e740609b24969ece3de58723b9dc3e
+  AwaitKit: d8a6e30eeb2da916630270b44636b31033388bd8
+  BeareadToast: 17ff7f5ac9609b186543d6a45df8f15f78c9ca7a
+  BiometricAuthentication: ce2f923d4df7a4b340e154137e7b47e544abc1ae
+  Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
+  CryptoSwift: ad5208dd2aae0a764ea4ce2c2d34bd067cae67f0
+  Device: 8a21a61f5f938a12dadd44d82287996081b6919b
+  DifferenceKit: 5179eaf0e76a1b9fbaeb93f4c1a82510be63ca65
+  DNSPageView: 93b0f9c9ab0e2f8c1d9aa5b0d44740bd2d775d78
+  Dollar: dc69a2997fa5df12ae7a91fec897963664c26750
+  EFQRCode: 203846c7b135b5f7c1d18bb7923bc32a74c8b363
+  ESPullToRefresh: 6ad8838e5c89b2039fa10ea097a3b3948594441e
+  Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
+  Fakery: 885e894a3e7c392e1da96c6e46a1abe5a0b28686
+  FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
+  FSPagerView: 4e865526acc0b0e3077e2abb29b8d10a9f395476
+  GrowingTextView: 8958f4fb7419de58dd622021b2d0696487e00e70
+  IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
+  JSONRPCKit: eb41d88efb88d4cbf2b66aa6c34fb62339c0ef14
+  KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
+  KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
+  Lightning: c6a02102c761491a4957c6265d9161dc5452c3bf
+  Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
+  Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
+  Macaw: e370d81f465ea1daa8a72d2afa218000bcd24f0a
+  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
+  MonkeyKing: 280cdc68eb39f8b899b17fdfe994a695f6fdc636
+  Nimble: 2839b01d1b31f6a6a7777a221f0d91cf52e8e27b
+  ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
+  Presentr: 797ae6ec8904eaba4ec58a4c2065bd66e31569ea
+  PromiseKit: e1425568123ec844a944c93f2bcb29d511d39cf5
+  Proposer: 97409ade1f80d8b19bba20972c03c9253bdd59b1
+  Quick: d17304d58d0d169dd0bd1c6e5c28e3318de32a1a
+  R.swift: 31fa1bd537fa81307815cc622122f33331f32174
+  R.swift.Library: 3c21b823839bf5a6769dc7f96cb44479dab51b1b
+  ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
+  Repeat: 79fae833c601ef457148ba6ffae276e5c629ab0a
+  Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
+  Reveal-SDK: cce79388da3fd0bbb6ae19d769b906cfc3a33a89
+  RxCocoa: 78763c7b07d02455598d9fc3c1ad091a28b73635
+  RxGesture: 26ede4ed13ffc6336d29dbd9a8dff229bdb72de7
+  RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
+  Siren: e3cf1a93fa0fa73c03452107e95e5c10768d1d08
+  SwifterSwift: 812ffec6f301922f5430e75be3f2939ea3a80024
+  SwiftRichString: 2905437b6eb14a24e2e42f65ecaea582a8bcf6b8
+  SwiftTheme: cfaeee3881332c23c433f3cf092b2a95c792b4ff
+  SwiftyBeaver: e45759613e50b522b0e6f53b1f0f14389b45ca34
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  SwiftyUserDefaults: cebe0ff9472f52699772a514b6f7155861d8069b
+  SWXMLHash: f0761e5c5d1a49f6553609bd0f5696a61738c5b9
+  Then: ee21c97b85ff6062b9b0080c9abb1eea46743345
+  TinyConstraints: 5ca700872f726c49d10829d7b00f31e4ec731f36
+  UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
+  UIFontComplete: 5b0f59a83308816c610164b79a2540b3520f9b72
+  UMCAnalytics: 4667788559a72f2fa5077117d1b8802a3b6eb6bb
+  UMCCommon: 4392868ac47ff1b101663106bb114ba616fabbad
+  UMCCommonLog: 05a2d5de21858e3d870551562cff405c1366d244
+  UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
+  URLNavigator: 2357a32f3b3787b748bf87deb927761f8b0f7f53
+  XLActionController: 007868251c0eed70d649d06c1625259b73b3a600
+  Zephyr: 7a3c2678c6bb935a13d7215ec9154956e8b4d209
+
+PODFILE CHECKSUM: 25587de1f39069f3dc8caad6da51bed23b282268
+
+COCOAPODS: 1.6.0.beta.1

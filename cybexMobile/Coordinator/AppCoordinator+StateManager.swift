@@ -21,13 +21,6 @@ extension AppCoordinator: AppStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
     
-//    func fetchData(_ params: AssetPairQueryParams, sub: Bool = true, priority: Foundation.Operation.QueuePriority = .normal, callback:@escaping ()->()) {
-//        store.dispatch(creator.fetchMarket(with: sub, params: params, priority:priority, callback: { [weak self] (assets) in
-//            guard let `self` = self else { return }
-//            callback()
-//            self.store.dispatch(MarketsFetched(pair: params, assets: assets))
-//        }))
-//    }
     
     func fetchData(_ params: AssetPairQueryParams, sub: Bool = true, priority: Foundation.Operation.QueuePriority = .normal) {
         store.dispatch(creator.fetchMarket(with: sub, params: params, priority: priority, callback: { [weak self] (assets) in
