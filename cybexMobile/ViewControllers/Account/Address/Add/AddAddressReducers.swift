@@ -14,7 +14,7 @@ func AddAddressReducer(action: Action, state: AddAddressState?) -> AddAddressSta
 }
 
 func AddAddressPropertyReducer(_ state: AddAddressPropertyState?, action: Action) -> AddAddressPropertyState {
-    var state = state ?? AddAddressPropertyState()
+    let state = state ?? AddAddressPropertyState()
 
     switch action {
     case let action as SetAssetAction:

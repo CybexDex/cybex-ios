@@ -14,7 +14,7 @@ func TradeReducer(action: Action, state: TradeState?) -> TradeState {
 }
 
 func TradePropertyReducer(_ state: TradePropertyState?, action: Action) -> TradePropertyState {
-    var state = state ?? TradePropertyState()
+    let state = state ?? TradePropertyState()
 
     switch action {
     default:
