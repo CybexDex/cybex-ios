@@ -74,7 +74,7 @@ class ComprehensiveViewController: BaseViewController {
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
 
-            case .loadMore(let page):
+            case .loadMore(_):
                 self.coordinator?.switchPageState(.loading(reason: PageLoadReason.manualLoadMore))
 
             case .noMore:
@@ -83,11 +83,11 @@ class ComprehensiveViewController: BaseViewController {
             case .noData:
                 break
 
-            case .normal(let reason):
+            case .normal(_):
 
                 break
 
-            case .error(let error, let reason):
+            case .error(let error, _):
                 self.showToastBox(false, message: error.localizedDescription)
             }
         }).disposed(by: disposeBag)

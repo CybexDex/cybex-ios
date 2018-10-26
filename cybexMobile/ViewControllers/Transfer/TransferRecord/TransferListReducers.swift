@@ -15,7 +15,7 @@ func TransferListReducer(action: Action, state: TransferListState?) -> TransferL
 }
 
 func TransferListPropertyReducer(_ state: TransferListPropertyState?, action: Action) -> TransferListPropertyState {
-    var state = state ?? TransferListPropertyState()
+    let state = state ?? TransferListPropertyState()
 
     switch action {
     case let action as ReduceTansferRecordsAction :

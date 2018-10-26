@@ -37,12 +37,13 @@ class WithdrawAddressViewController: BaseViewController {
                 self.title = asset_info.symbol.filterJade + " " + R.string.localizable.withdraw_address.key.localized()
             }
         } else {
-            self.localized_text = self.coordinator!.isEOS() ? R.string.localizable.eos_withdraw_account.key.localizedContainer() : R.string.localizable.withdraw_address.key.localizedContainer()
+            self.localizedText = self.coordinator!.isEOS() ? R.string.localizable.eos_withdraw_account.key.localizedContainer() : R.string.localizable.withdraw_address.key.localizedContainer()
         }
         if !self.coordinator!.isEOS() {
             self.leftLabel.locali = R.string.localizable.account_or_address.key
         }
-        self.tableView.register(R.nib.withdrawAddressTableViewCell(), forCellReuseIdentifier: R.nib.withdrawAddressTableViewCell.name)
+        self.tableView.register(UINib(resource: R.nib.withdrawAddressHomeTableViewCell), forCellReuseIdentifier: R.nib.withdrawAddressTableViewCell.name)
+
     }
 
     override func viewWillAppear(_ animated: Bool) {

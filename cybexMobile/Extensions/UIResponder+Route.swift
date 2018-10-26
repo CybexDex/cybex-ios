@@ -16,9 +16,9 @@ extension UIResponder {
       return
     }
 
-    let setEvent = unsafeBitCast(method(for: sel), to: setEventIMP.self)
+    let setEvent = unsafeBitCast(method(for: sel), to: SetEventIMP.self)
     setEvent(self, sel, userinfo)
   }
 
-  fileprivate typealias setEventIMP        = @convention(c) (NSObject, Selector, [String: Any]) -> Void
+  fileprivate typealias SetEventIMP        = @convention(c) (NSObject, Selector, [String: Any]) -> Void
 }

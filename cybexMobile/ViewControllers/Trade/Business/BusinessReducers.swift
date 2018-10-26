@@ -14,7 +14,7 @@ func BusinessReducer(action: Action, state: BusinessState?) -> BusinessState {
 }
 
 func BusinessPropertyReducer(_ state: BusinessPropertyState?, action: Action) -> BusinessPropertyState {
-    var state = state ?? BusinessPropertyState()
+    let state = state ?? BusinessPropertyState()
 
     switch action {
     case let action as changePriceAction:

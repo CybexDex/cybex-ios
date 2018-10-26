@@ -110,7 +110,7 @@ class CornerAndShadowView: UIView {
     }
 
     func setup() {
-        print("\(self.cornerView)")
+        print("\(String(describing: self.cornerView))")
     }
 
     override func layoutSubviews() {

@@ -28,8 +28,6 @@ extension GatewayAPI: TargetType {
             return "login"
         case.records:
             return "records/cybex-test"
-        default:
-            return ""
         }
     }
 

@@ -129,7 +129,9 @@ extension CBKLineDrawView {
         var curView: UIView = self
         while let parentView = curView.superview {
             if parentView.isKind(of: UIScrollView.self) {
-                scrollView = parentView as! UIScrollView
+                if let parent = parentView as? UIScrollView {
+                    scrollView = parent
+                }
                 break
             }
             curView = parentView
@@ -440,7 +442,7 @@ extension CBKLineDrawView: UIGestureRecognizerDelegate {
         if let pan = gestureRecognizer as? UIPanGestureRecognizer {
             let velocity = pan.velocity(in: self)
 
-            return fabs(velocity.y) < fabs(velocity.x)
+            return abs(velocity.y) < abs(velocity.x)
         }
 
         return true

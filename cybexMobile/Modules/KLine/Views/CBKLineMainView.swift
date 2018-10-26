@@ -211,7 +211,7 @@ extension CBKLineMainView {
     fileprivate func drawDateLine(context: CGContext, klineModel: CBKLineModel, positionX: CGFloat) {
 
         let date = Date(timeIntervalSince1970: klineModel.date)
-        var dateString = configuration.dateFormatter.string(from: date)
+        let dateString = configuration.dateFormatter.string(from: date)
 //        if configuration.main.timeLineType == .oneDay {
 //
 //        } else {

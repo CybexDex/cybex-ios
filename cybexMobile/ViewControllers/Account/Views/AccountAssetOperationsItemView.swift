@@ -33,7 +33,7 @@ class AccountAssetOperationsItemView: UIView {
   }
 
   func changeViewType() {
-    nameL.localized_text = view_type == 0 ? R.string.localizable.openedTitle.key.localizedContainer() : R.string.localizable.lockupAssetsTitle.key.localizedContainer()
+    nameL.localizedText = view_type == 0 ? R.string.localizable.openedTitle.key.localizedContainer() : R.string.localizable.lockupAssetsTitle.key.localizedContainer()
   }
 
   override var intrinsicContentSize: CGSize {

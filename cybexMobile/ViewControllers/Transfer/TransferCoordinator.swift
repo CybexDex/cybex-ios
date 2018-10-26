@@ -216,7 +216,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
             guard let balance = self.state.balance.value else {
                 return
             }
-            guard let to_account = self.state.to_account.value else {
+            guard self.state.to_account.value != nil else {
                 return
             }
             guard let fee = self.state.fee.value else {

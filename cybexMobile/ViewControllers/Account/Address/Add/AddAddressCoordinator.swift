@@ -94,8 +94,6 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
                     self.store.dispatch(SetAddressAction(data: address))
                 })
             }
-        default:
-            break
         }
     }
 

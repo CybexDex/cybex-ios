@@ -55,12 +55,6 @@ public struct Version: Equatable, Comparable {
 
 }
 
-func prettyPrint(with json: [String: Any]) -> String {
-    let data = try! JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
-    let string = String(data: data, encoding: .utf8)!
-    return string
-}
-
 extension UIViewController {
 
     func openStoreProductWithiTunesItemIdentifier(_ identifier: String) {
@@ -88,7 +82,14 @@ extension UIViewController {
 
     func handlerUpdateVersion(_ completion: CommonCallback?, showNoUpdate: Bool = false ) {
         async {
-            let (update, url, force, content) = try! await(SimpleHTTPService.checkVersion())
+            guard let (update, url, force, content) = try? await(SimpleHTTPService.checkVersion()) else {
+                main {
+                    if let completion = completion {
+                        completion()
+                    }
+                }
+                return
+            }
             main {
                 if let completion = completion {
                     completion()
@@ -112,7 +113,7 @@ extension UIViewController {
 
                     ShowToastManager.shared.ensureClickBlock = {
                         if force {
-                            UIApplication.shared.openURL(URL(string: url)!)
+                            UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
                             return
                         }
                         if url.contains("itunes") {
@@ -121,38 +122,6 @@ extension UIViewController {
                             self.openSafariViewController(url)
                         }
                     }
-
-                    //          let alert = AlertController(title: R.string.localizable.updata_available_title.key.localized(), message: R.string.localizable.updata_available_message.key.localized(), preferredStyle: .alert)
-                    //
-                    //          if !force {
-                    //            alert.addAction(AlertAction(title: R.string.localizable.updata_next_time.key.localized(), style: .normal, handler: nil))
-                    //          }
-                    //          else {
-                    //            alert.shouldDismissHandler = { (action) in
-                    //              if action?.title == R.string.localizable.updata_next_time.key.localized() {
-                    //                return true
-                    //              }
-                    //              else {
-                    //                action!.handler!(action!)
-                    //                return false
-                    //              }
-                    //            }
-                    //          }
-                    //
-                    //          let action = AlertAction(title: R.string.localizable.updata_updata.key.localized(), style: .preferred, handler: { (action) in
-                    //                      if force {
-                    //                        UIApplication.shared.openURL(URL(string: url)!)
-                    //                        return
-                    //                      }
-                    //                      if url.contains("itunes") {
-                    //                        self.openStoreProductWithiTunesItemIdentifier(AppConfiguration.APPID)
-                    //                      }
-                    //                      else {
-                    //                        self.openSafariViewController(url)
-                    //                      }
-                    //          })
-                    //          alert.addAction(action)
-                    //          alert.present()
                 } else if showNoUpdate {
                     let alert = AlertController(title: R.string.localizable.unupdata_title.key.localized(), message: R.string.localizable.unupdata_message.key.localized(), preferredStyle: .alert)
                     alert.addAction(AlertAction(title: R.string.localizable.unupdata_ok.key.localized(), style: .normal, handler: nil))
@@ -177,7 +146,10 @@ extension UIViewController: SFSafariViewControllerDelegate {
 
 extension Bundle {
     var version: String {
-        return infoDictionary!["CFBundleShortVersionString"] as! String
+        guard let ver = infoDictionary?["CFBundleShortVersionString"] as? String else {
+            return ""
+        }
+        return ver
     }
 }
 
@@ -225,8 +197,8 @@ extension Decimal { // 解决double 计算精度丢失
     var doubleValue: Double {
         let str = self.stringValue
 
-        if let d = Double(str) {
-            return d
+        if let dou = Double(str) {
+            return dou
         }
         return 0
     }

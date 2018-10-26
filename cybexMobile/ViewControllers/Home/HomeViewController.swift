@@ -70,7 +70,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
             navigationItem.largeTitleDisplayMode = .always
         }
 
-        self.localized_text = R.string.localizable.navWatchlist.key.localizedContainer()
+        self.localizedText = R.string.localizable.navWatchlist.key.localizedContainer()
         switchContainerView()
     }
 

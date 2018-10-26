@@ -14,7 +14,7 @@ func MyHistoryReducer(action: Action, state: MyHistoryState?) -> MyHistoryState 
 }
 
 func MyHistoryPropertyReducer(_ state: MyHistoryPropertyState?, action: Action) -> MyHistoryPropertyState {
-    var state = state ?? MyHistoryPropertyState()
+    let state = state ?? MyHistoryPropertyState()
 
     switch action {
     default:

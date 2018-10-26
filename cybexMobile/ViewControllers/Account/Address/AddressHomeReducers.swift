@@ -14,7 +14,7 @@ func AddressHomeReducer(action: Action, state: AddressHomeState?) -> AddressHome
 }
 
 func AddressHomePropertyReducer(_ state: AddressHomePropertyState?, action: Action) -> AddressHomePropertyState {
-    var state = state ?? AddressHomePropertyState()
+    let state = state ?? AddressHomePropertyState()
 
     switch action {
     default:

@@ -27,8 +27,6 @@ public enum PinchGestureRecognizerDefaults {
     public static var configuration: ((UIPinchGestureRecognizer, RxGestureRecognizerDelegate) -> Void)?
 }
 
-fileprivate typealias Defaults = PinchGestureRecognizerDefaults
-
 /// A `GestureRecognizerFactory` for `UIPinchGestureRecognizer`
 public struct PinchGestureRecognizerFactory: GestureRecognizerFactory {
     public typealias Gesture = UIPinchGestureRecognizer
@@ -39,7 +37,7 @@ public struct PinchGestureRecognizerFactory: GestureRecognizerFactory {
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
     public init(
-        configuration: ((UIPinchGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = Defaults.configuration
+        configuration: ((UIPinchGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = PinchGestureRecognizerDefaults.configuration
         ) {
         self.configuration = configuration ?? { _, _  in }
     }
@@ -52,7 +50,7 @@ extension AnyGestureRecognizerFactory {
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
     public static func pinch(
-        configuration: ((UIPinchGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = Defaults.configuration
+        configuration: ((UIPinchGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = PinchGestureRecognizerDefaults.configuration
         ) -> AnyGestureRecognizerFactory {
         let gesture = PinchGestureRecognizerFactory(
             configuration: configuration
@@ -68,7 +66,7 @@ public extension Reactive where Base: UIView {
      - parameter configuration: A closure that allows to fully configure the gesture recognizer
      */
     public func pinchGesture(
-        configuration: ((UIPinchGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = Defaults.configuration
+        configuration: ((UIPinchGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = PinchGestureRecognizerDefaults.configuration
         ) -> ControlEvent<UIPinchGestureRecognizer> {
 
         return gesture(PinchGestureRecognizerFactory(

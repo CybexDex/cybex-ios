@@ -37,6 +37,14 @@ class BaseViewController: UIViewController {
         super.init(coder: aDswicoder)
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return ThemeManager.currentThemeIndex == 0 ? .lightContent : .default
+    }
+
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -77,11 +85,6 @@ class BaseViewController: UIViewController {
 
     }
 
-    override var prefersStatusBarHidden: Bool {
-        get {
-            return false
-        }
-    }
 
     func changeNavBar(isUserInteractionEnabled: Bool) {
         self.navigationController?.navigationBar.rx.observe(Bool.self, "isUserInteractionEnabled").subscribe(onNext: { [weak self] (_) in

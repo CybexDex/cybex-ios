@@ -32,7 +32,7 @@ class RechargeItemView: UIView {
 
     @IBInspectable var name: String = "" {
         didSet {
-            title.localized_text = name.localizedContainer()
+            title.localizedText = name.localizedContainer()
         }
     }
 

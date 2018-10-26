@@ -147,7 +147,7 @@ class OpenedOrdersView: UIView {
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 
-    func setupData(_ data: Any, indexPath: IndexPath) {
+    func setupData(_ data: Any?, indexPath: IndexPath) {
         self.data = data
         self.selectedIndex = indexPath
     }

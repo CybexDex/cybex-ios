@@ -35,7 +35,7 @@ class RechargeViewController: BaseViewController {
     }
 
     func setupUI() {
-        self.localized_text = R.string.localizable.account_trade.key.localizedContainer()
+        self.localizedText = R.string.localizable.account_trade.key.localizedContainer()
         let cell = R.nib.tradeCell.name
         tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
         tableView.tableFooterView = UIView()

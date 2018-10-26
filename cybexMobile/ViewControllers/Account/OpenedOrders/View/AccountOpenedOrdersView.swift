@@ -35,13 +35,13 @@ class AccountOpenedOrdersView: UIView {
         guard let _ = UserManager.shared.limitOrder.value else { return }
 
         if segment.selectedSegmentIndex == 0 {
-            headerView.totalValue_tip.localized_text = R.string.localizable.openedAllMoney.key.localizedContainer()
+            headerView.totalValue_tip.localizedText = R.string.localizable.openedAllMoney.key.localizedContainer()
             headerView.data = "\(UserManager.shared.limitOrderValue)"
         } else if segment.selectedSegmentIndex == 1 {
-            headerView.totalValue_tip.localized_text = R.string.localizable.openedBuyMoney.key.localizedContainer()
+            headerView.totalValue_tip.localizedText = R.string.localizable.openedBuyMoney.key.localizedContainer()
             headerView.data = "\(UserManager.shared.limitOrder_buy_value)"
         } else {
-            headerView.totalValue_tip.localized_text = R.string.localizable.openedSellMoney.key.localizedContainer()
+            headerView.totalValue_tip.localizedText = R.string.localizable.openedSellMoney.key.localizedContainer()
             headerView.data = "\(UserManager.shared.limitOrder_sell_value)"
         }
     }

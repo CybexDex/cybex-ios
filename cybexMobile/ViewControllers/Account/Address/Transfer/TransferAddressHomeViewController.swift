@@ -25,9 +25,9 @@ class TransferAddressHomeViewController: BaseViewController {
     func setupUI() {
         configRightNavButton(R.image.ic_add_24_px())
 
-        self.localized_text = R.string.localizable.transfer_account_manager.key.localizedContainer()
+        self.localizedText = R.string.localizable.transfer_account_manager.key.localizedContainer()
 
-        self.tableView.register(R.nib.transferAddressHomeTableViewCell(), forCellReuseIdentifier: R.nib.transferAddressHomeTableViewCell.name)
+        self.tableView.register(UINib(resource: R.nib.transferAddressHomeTableViewCell), forCellReuseIdentifier: R.nib.transferAddressHomeTableViewCell.name)
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -32,7 +32,7 @@ class LockupAssetsViewController: BaseViewController {
 
     func setupUI() {
         self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
-        self.localized_text = R.string.localizable.lockupAssetsTitle.key.localizedContainer()
+        self.localizedText = R.string.localizable.lockupAssetsTitle.key.localizedContainer()
         let cell = String.init(describing: LockupAssetsCell.self)
         tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
     }

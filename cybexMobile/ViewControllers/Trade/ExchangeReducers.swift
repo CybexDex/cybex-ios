@@ -14,7 +14,7 @@ func ExchangeReducer(action: Action, state: ExchangeState?) -> ExchangeState {
 }
 
 func ExchangePropertyReducer(_ state: ExchangePropertyState?, action: Action) -> ExchangePropertyState {
-    var state = state ?? ExchangePropertyState()
+    let state = state ?? ExchangePropertyState()
 
     switch action {
     default:

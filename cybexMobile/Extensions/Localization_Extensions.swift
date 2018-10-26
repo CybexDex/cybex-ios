@@ -11,272 +11,287 @@ import Localize_Swift
 import SwiftTheme
 
 extension UILabel {
-  @IBInspectable
-  var locali: String {
-    set {
-      localized_text = newValue.localizedContainer()
-    }
+    @IBInspectable
+    var locali: String {
+        set {
+            localizedText = newValue.localizedContainer()
+        }
 
-    get {
-      return (localized_text?.value() as! String).localized()
+        get {
+            if let val = localizedText?.value() as? String {
+                return val.localized()
+            }
+            return ""
+        }
     }
-  }
 }
 
 extension UIButton {
-  @IBInspectable
-  var locali: String {
-    set {
-      localized_text = newValue.localizedContainer()
-    }
+    @IBInspectable
+    var locali: String {
+        set {
+            localizedText = newValue.localizedContainer()
+        }
 
-    get {
-      return (localized_text?.value() as! String).localized()
+        get {
+            if let val = localizedText?.value() as? String {
+                return val.localized()
+            }
+            return ""
+        }
     }
-  }
 }
 
 extension UISegmentedControl {
-  @IBInspectable
-  var locali0: String {
-    set {
-      localized_text0 = newValue.localizedContainer()
+    @IBInspectable
+    var locali0: String {
+        set {
+            localizedText0 = newValue.localizedContainer()
+        }
+
+        get {
+            return ""
+        }
     }
 
-    get {
-      return ""
-    }
-  }
+    @IBInspectable
+    var locali1: String {
+        set {
+            localizedText1 = newValue.localizedContainer()
+        }
 
-  @IBInspectable
-  var locali1: String {
-    set {
-      localized_text1 = newValue.localizedContainer()
-    }
-
-    get {
-      return ""
-    }
-  }
-
-  @IBInspectable
-  var locali2: String {
-    set {
-      localized_text2 = newValue.localizedContainer()
+        get {
+            return ""
+        }
     }
 
-    get {
-      return ""
+    @IBInspectable
+    var locali2: String {
+        set {
+            localizedText2 = newValue.localizedContainer()
+        }
+
+        get {
+            return ""
+        }
     }
-  }
 }
 
 extension UISegmentedControl {
-  var localized_text0: LocalizedValueContainer? {
-    get { return nil }
-    set { setOperation(self, #selector(UISegmentedControl.setTitle(_:forSegmentAt:)), SegmentValueContainer(picker: newValue, withIndex: 0)) }
-  }
-  var localized_text1: LocalizedValueContainer? {
-    get { return nil }
-    set { setOperation(self, #selector(UISegmentedControl.setTitle(_:forSegmentAt:)), SegmentValueContainer(picker: newValue, withIndex: 1)) }
-  }
-  var localized_text2: LocalizedValueContainer? {
-    get { return nil }
-    set { setOperation(self, #selector(UISegmentedControl.setTitle(_:forSegmentAt:)), SegmentValueContainer(picker: newValue, withIndex: 2)) }
-  }
+    var localizedText0: LocalizedValueContainer? {
+        get { return nil }
+        set { setOperation(self, #selector(UISegmentedControl.setTitle(_:forSegmentAt:)), SegmentValueContainer(picker: newValue, withIndex: 0)) }
+    }
+    var localizedText1: LocalizedValueContainer? {
+        get { return nil }
+        set { setOperation(self, #selector(UISegmentedControl.setTitle(_:forSegmentAt:)), SegmentValueContainer(picker: newValue, withIndex: 1)) }
+    }
+    var localizedText2: LocalizedValueContainer? {
+        get { return nil }
+        set { setOperation(self, #selector(UISegmentedControl.setTitle(_:forSegmentAt:)), SegmentValueContainer(picker: newValue, withIndex: 2)) }
+    }
 }
 
 extension UIButton {
-  var localized_text: LocalizedValueContainer? {
-    get { return nil }
-    set { setOperation(self, #selector(UIButton.setTitle(_:for:)), StateValueContainer(picker: newValue, withState: .normal)) }
-  }
+    var localizedText: LocalizedValueContainer? {
+        get { return nil }
+        set { setOperation(self, #selector(UIButton.setTitle(_:for:)), StateValueContainer(picker: newValue, withState: .normal)) }
+    }
 }
 
 extension UILabel {
-  var localized_text: LocalizedValueContainer? {
-    get { return getOperation(self, #selector(getter: UILabel.text)) as? LocalizedValueContainer }
-    set { setOperation(self, #selector(setter: UILabel.text), newValue) }
-  }
+    var localizedText: LocalizedValueContainer? {
+        get { return getOperation(self, #selector(getter: UILabel.text)) as? LocalizedValueContainer }
+        set { setOperation(self, #selector(setter: UILabel.text), newValue) }
+    }
 }
 
 extension UITextField {
-  var localized_text: LocalizedValueContainer? {
-    get { return getOperation(self, #selector(getter: UITextField.placeholder)) as? LocalizedValueContainer }
-    set { setOperation(self, #selector(setter: UITextField.placeholder), newValue) }
-  }
+    var localizedText: LocalizedValueContainer? {
+        get { return getOperation(self, #selector(getter: UITextField.placeholder)) as? LocalizedValueContainer }
+        set { setOperation(self, #selector(setter: UITextField.placeholder), newValue) }
+    }
 }
 
 extension UIViewController {
-  var localized_text: LocalizedValueContainer? {
-    get { return getOperation(self, #selector(getter: UIViewController.title)) as? LocalizedValueContainer }
-    set { setOperation(self, #selector(setter: UIViewController.title), newValue) }
-  }
+    var localizedText: LocalizedValueContainer? {
+        get { return getOperation(self, #selector(getter: UIViewController.title)) as? LocalizedValueContainer }
+        set { setOperation(self, #selector(setter: UIViewController.title), newValue) }
+    }
 }
 
 extension UITabBarItem {
-  var localized_text: LocalizedValueContainer? {
-    get { return getOperation(self, #selector(getter: UITabBarItem.title)) as? LocalizedValueContainer }
-    set { setOperation(self, #selector(setter: UITabBarItem.title), newValue) }
-  }
+    var localizedText: LocalizedValueContainer? {
+        get { return getOperation(self, #selector(getter: UITabBarItem.title)) as? LocalizedValueContainer }
+        set { setOperation(self, #selector(setter: UITabBarItem.title), newValue) }
+    }
 }
 
 extension NSString {
-  func localizedContainer() -> LocalizedValueContainer {
-    return LocalizedValueContainer(v: { self })
-  }
+    func localizedContainer() -> LocalizedValueContainer {
+        return LocalizedValueContainer(val: { self })
+    }
 }
 
 private func getOperation(
-  _ object: NSObject,
-  _ selector: Selector
-  ) -> ValueContainer? {
-  return object.changeOperations[selector]
+    _ object: NSObject,
+    _ selector: Selector
+    ) -> ValueContainer? {
+    return object.changeOperations[selector]
 }
 
 private func setOperation(
-  _ object: NSObject,
-  _ selector: Selector,
-  _ picker: ValueContainer?
-  ) {
-  object.changeOperations[selector] = picker
-  object.performOperations(sel: selector, picker: picker)
+    _ object: NSObject,
+    _ selector: Selector,
+    _ picker: ValueContainer?
+    ) {
+    object.changeOperations[selector] = picker
+    object.performOperations(sel: selector, picker: picker)
 }
 
 class ValueContainer: NSObject, NSCopying {
 
-  public typealias ValueType = () -> Any?
+    public typealias ValueType = () -> Any?
 
-  public var value: ValueType
+    public var value: ValueType
 
-  required public init(v: @escaping ValueType) {
-    value = v
-  }
+    required public init(val: @escaping ValueType) {
+        value = val
+    }
 
-  public func copy(with zone: NSZone?) -> Any {
-    return type(of: self).init(v: value)
-  }
+    public func copy(with zone: NSZone?) -> Any {
+        return type(of: self).init(val: value)
+    }
 }
 
 final class StateValueContainer: ValueContainer {
 
-  typealias ValuesType = [UInt: ValueContainer]
+    typealias ValuesType = [UInt: ValueContainer]
 
-  var values = ValuesType()
+    var values = ValuesType()
 
     convenience init?(picker: ValueContainer?, withState state: UIControl.State) {
-    guard let picker = picker else { return nil }
+        guard let picker = picker else { return nil }
 
-    self.init(v: { 0 })
-    values[state.rawValue] = picker
-  }
+        self.init(val: { 0 })
+        values[state.rawValue] = picker
+    }
 
     func setPicker(_ picker: ValueContainer?, forState state: UIControl.State) -> Self {
-    values[state.rawValue] = picker
-    return self
-  }
+        values[state.rawValue] = picker
+        return self
+    }
 }
 
 final class SegmentValueContainer: ValueContainer {
 
-  typealias ValuesType = [Int: ValueContainer]
+    typealias ValuesType = [Int: ValueContainer]
 
-  var values = ValuesType()
+    var values = ValuesType()
 
-  convenience init?(picker: ValueContainer?, withIndex index: Int) {
-    guard let picker = picker else { return nil }
+    convenience init?(picker: ValueContainer?, withIndex index: Int) {
+        guard let picker = picker else { return nil }
 
-    self.init(v: { 0 })
-    values[index] = picker
-  }
+        self.init(val: { 0 })
+        values[index] = picker
+    }
 
-  func setPicker(_ picker: ValueContainer?, withIndex index: Int) -> Self {
-    values[index] = picker
-    return self
-  }
+    func setPicker(_ picker: ValueContainer?, withIndex index: Int) -> Self {
+        values[index] = picker
+        return self
+    }
 }
 
 final class LocalizedValueContainer: ValueContainer, ExpressibleByStringLiteral {
-  public required convenience init(stringLiteral value: String) {
-    self.init(v: { value })
-  }
+    public required convenience init(stringLiteral value: String) {
+        self.init(val: { value })
+    }
 
-  public required convenience init(unicodeScalarLiteral value: String) {
-    self.init(v: { value })
-  }
+    public required convenience init(unicodeScalarLiteral value: String) {
+        self.init(val: { value })
+    }
 
-  public required convenience init(extendedGraphemeClusterLiteral value: String) {
-    self.init(v: { value })
-  }
+    public required convenience init(extendedGraphemeClusterLiteral value: String) {
+        self.init(val: { value })
+    }
 }
 
 // MARK: - Perform Stored Operation
 
 private var operationKey = 2018
 extension NSObject {
-  typealias Operations = [Selector: ValueContainer]
+    typealias Operations = [Selector: ValueContainer]
 
-  var changeOperations: Operations {
-    get {
-      if let themePickers = objc_getAssociatedObject(self, &operationKey) as? Operations {
-        return themePickers
-      }
+    var changeOperations: Operations {
+        get {
+            if let themePickers = objc_getAssociatedObject(self, &operationKey) as? Operations {
+                return themePickers
+            }
 
-      let initValue = Operations()
-      objc_setAssociatedObject(self, &operationKey, initValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-      return initValue
+            let initValue = Operations()
+            objc_setAssociatedObject(self, &operationKey, initValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            return initValue
+        }
+        set {
+            objc_setAssociatedObject(self, &operationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            _removeNotification()
+            if newValue.isEmpty == false { _setupNotification() }
+        }
     }
-    set {
-      objc_setAssociatedObject(self, &operationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-      _removeNotification()
-      if newValue.isEmpty == false { _setupNotification() }
+
+    func performOperations(sel: Selector, picker: ValueContainer?) {
+        guard responds(to: sel)           else { return }
+        guard let value = picker?.value() else { return }
+
+        if picker is LocalizedValueContainer {
+            let setLocalizedText = unsafeBitCast(method(for: sel), to: SetLocalizedTextIMP.self)
+            if let val = value as? String {
+                setLocalizedText(self, sel, val.localized())
+            }
+            //Compatible Swift Rich String
+            if let label = self as? UILabel, let _ = label.styleName {
+                label.styledText = label.text
+            }
+        } else if let statePicker = picker as? StateValueContainer {
+            let setState = unsafeBitCast(method(for: sel), to: SetLocalizedTextForStateIMP.self)
+            statePicker.values.forEach {
+                if let val = $1.value() as? String {
+                    setState(self, sel, val.localized(), UIControl.State(rawValue: $0))
+                }
+            }
+        } else if let statePicker = picker as? SegmentValueContainer {
+            let setState = unsafeBitCast(method(for: sel), to: SetLocalizedTextForSegmentIMP.self)
+            statePicker.values.forEach {
+                if let val = $1.value() as? String {
+                    setState(self, sel, val.localized(), $0)
+                }
+            }
+        } else { perform(sel, with: value) }
+
     }
-  }
-
-  func performOperations(sel: Selector, picker: ValueContainer?) {
-    guard responds(to: sel)           else { return }
-    guard let value = picker?.value() else { return }
-
-    if picker is LocalizedValueContainer {
-      let setLocalizedText = unsafeBitCast(method(for: sel), to: setLocalizedTextIMP.self)
-      setLocalizedText(self, sel, (value as! String).localized())
-
-      //Compatible Swift Rich String
-      if let label = self as? UILabel, let _ = label.styleName {
-        label.styledText = label.text
-      }
-    } else if let statePicker = picker as? StateValueContainer {
-      let setState = unsafeBitCast(method(for: sel), to: setLocalizedTextForStateIMP.self)
-        statePicker.values.forEach { setState(self, sel, ($1.value()! as! String).localized(), UIControl.State(rawValue: $0)) }
-    } else if let statePicker = picker as? SegmentValueContainer {
-      let setState = unsafeBitCast(method(for: sel), to: setLocalizedTextForSegmentIMP.self)
-      statePicker.values.forEach { setState(self, sel, ($1.value()! as! String).localized(), $0) }
-    } else { perform(sel, with: value) }
-
-  }
-  fileprivate typealias setLocalizedTextIMP        = @convention(c) (NSObject, Selector, String) -> Void
-    fileprivate typealias setLocalizedTextForStateIMP       = @convention(c) (NSObject, Selector, String, UIControl.State) -> Void
-  fileprivate typealias setLocalizedTextForSegmentIMP       = @convention(c) (NSObject, Selector, String, Int) -> Void
+    fileprivate typealias SetLocalizedTextIMP        = @convention(c) (NSObject, Selector, String) -> Void
+    fileprivate typealias SetLocalizedTextForStateIMP       = @convention(c) (NSObject, Selector, String, UIControl.State) -> Void
+    fileprivate typealias SetLocalizedTextForSegmentIMP       = @convention(c) (NSObject, Selector, String, Int) -> Void
 
 }
 
 // MARK: - Observe Localization Changed
 
 @objc extension NSObject {
-  fileprivate func _setupNotification() {
-    NotificationCenter.default.addObserver(self, selector: #selector(_resetOperation), name: NSNotification.Name(LCLLanguageChangeNotification), object: nil)
-  }
-
-  fileprivate func _removeNotification() {
-    NotificationCenter.default.removeObserver(self, name: NSNotification.Name(LCLLanguageChangeNotification), object: nil)
-  }
-
-  fileprivate func _resetOperation() {
-    self.changeOperations.forEach {[weak self] selector, picker in
-      UIView.animate(withDuration: 0.3) {
-        guard let `self` = self else { return }
-        self.performOperations(sel: selector, picker: picker)
-      }
+    fileprivate func _setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(_resetOperation), name: NSNotification.Name(LCLLanguageChangeNotification), object: nil)
     }
-  }
+
+    fileprivate func _removeNotification() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(LCLLanguageChangeNotification), object: nil)
+    }
+
+    fileprivate func _resetOperation() {
+        self.changeOperations.forEach {[weak self] selector, picker in
+            UIView.animate(withDuration: 0.3) {
+                guard let `self` = self else { return }
+                self.performOperations(sel: selector, picker: picker)
+            }
+        }
+    }
 }

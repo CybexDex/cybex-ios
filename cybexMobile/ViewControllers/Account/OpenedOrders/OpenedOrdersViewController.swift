@@ -45,7 +45,7 @@ class OpenedOrdersViewController: BaseViewController {
     }
 
     func setupUI() {
-        self.localized_text = R.string.localizable.openedTitle.key.localizedContainer()
+        self.localizedText = R.string.localizable.openedTitle.key.localizedContainer()
 
         switchContainerView()
     }

@@ -17,7 +17,7 @@ class AddressItemView: UIView {
 
     @IBInspectable var title: String = "" {
         didSet {
-            name.localized_text = title.localizedContainer()
+            name.localizedText = title.localizedContainer()
         }
     }
 

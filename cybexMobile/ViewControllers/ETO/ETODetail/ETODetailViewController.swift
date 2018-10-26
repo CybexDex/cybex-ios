@@ -54,7 +54,7 @@ class ETODetailViewController: BaseViewController {
     }
 
     func setupUI() {
-        self.localized_text = R.string.localizable.eto_project_detail_title.key.localizedContainer()
+        self.localizedText = R.string.localizable.eto_project_detail_title.key.localizedContainer()
 //        configRightNavButton(R.image.ic_share_24_px())
     }
 

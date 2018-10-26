@@ -13,7 +13,7 @@ class AccountRootCoordinator: NavCoordinator {
     let vc = R.storyboard.account.accountViewController()!
 
     let coordinator = AccountCoordinator(rootVC: self.rootVC)
-    vc.localized_text = R.string.localizable.accountTitle.key.localizedContainer()
+    vc.localizedText = R.string.localizable.accountTitle.key.localizedContainer()
 
     vc.coordinator = coordinator
     self.rootVC.pushViewController(vc, animated: true)

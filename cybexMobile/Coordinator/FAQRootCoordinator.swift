@@ -12,7 +12,7 @@ import SwiftyUserDefaults
 class FAQRootCoordinator: NavCoordinator {
   override func start() {
     let vc = R.storyboard.main.faqViewController()!
-    vc.localized_text = R.string.localizable.navApply.key.localizedContainer()
+    vc.localizedText = R.string.localizable.navApply.key.localizedContainer()
 
     let faqCoordinator = FAQCoordinator(rootVC: self.rootVC)
     vc.coordinator = faqCoordinator

@@ -35,7 +35,7 @@ class YourPortfolioHeadView: UIView {
     }
 
     func setup() {
-        memberLevel.localized_text = R.string.localizable.account_property.key.localizedContainer()
+        memberLevel.localizedText = R.string.localizable.account_property.key.localizedContainer()
         if UserManager.shared.balance == 0 {
             totalBalance.text = "0.00000"
             balanceRMB.text   = "≈¥0.00"

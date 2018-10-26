@@ -99,9 +99,7 @@ class CybexWebViewController: BaseWebViewController {
     }
 
     override func configureObserveState() {
-        coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self] (_) in
-            guard let `self` = self else { return }
-
+        coordinator?.state.pageState.asObservable().subscribe(onNext: { (_) in
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }
