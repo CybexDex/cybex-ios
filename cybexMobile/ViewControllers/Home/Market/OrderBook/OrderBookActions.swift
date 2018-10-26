@@ -55,7 +55,7 @@ class OrderBookPropertyActionCreate: LoadingActionCreator {
   func fetchLimitOrders(with pair: Pair, callback: CommonAnyCallback?) -> ActionCreator {
     return { state, store in
 
-      let request = getLimitOrdersRequest(pair: pair) { response in
+      let request = GetLimitOrdersRequest(pair: pair) { response in
         if let callback = callback {
           callback(response)
         }

@@ -12,7 +12,7 @@ import Localize_Swift
 
 class RechargeView: UIView {
 
-    enum event_name: String {
+    enum EventName: String {
         case addAllAmount
         case cleanAddress
     }
@@ -25,10 +25,10 @@ class RechargeView: UIView {
 
     var trade: Trade? {
         didSet {
-            if let trade = self.trade, let trade_info = app_data.assetInfo[trade.id] {
+            if let trade = self.trade, let tradeInfo = app_data.assetInfo[trade.id] {
                 self.introduce.content.attributedText = Localize.currentLanguage() == "en" ? trade.enInfo.set(style: StyleNames.withdraw_introduce.rawValue) : trade.cnInfo.set(style: StyleNames.withdraw_introduce.rawValue)
 
-                updateViewWithAssetName(trade_info.id)
+                updateViewWithAssetName(tradeInfo.id)
             }
         }
     }
@@ -56,11 +56,13 @@ class RechargeView: UIView {
     @IBOutlet weak var memoView: RechargeItemView!
 
     func updateView() {
-        if let balance = self.balance, let balance_info = app_data.assetInfo[balance.asset_type] {
-            avaliableView.content.text = getRealAmountDouble(balance.asset_type, amount: balance.balance).string(digits: balance_info.precision) + " " + balance_info.symbol.filterJade
+        if let balance = self.balance, let balanceInfo = app_data.assetInfo[balance.asset_type] {
+            avaliableView.content.text = getRealAmountDouble(balance.asset_type, amount: balance.balance).string(digits: balanceInfo.precision) +
+                " " +
+                balanceInfo.symbol.filterJade
         } else {
-            if let trade = self.trade, let trade_info = app_data.assetInfo[trade.id] {
-                avaliableView.content.text = "--" + trade_info.symbol.filterJade
+            if let trade = self.trade, let tradeInfo = app_data.assetInfo[trade.id] {
+                avaliableView.content.text = "--" + tradeInfo.symbol.filterJade
             }
         }
     }
@@ -131,9 +133,10 @@ class RechargeView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
-        addSubview(view)
-        view.frame = self.bounds
-        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
+            addSubview(view)
+            view.frame = self.bounds
+            view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        }
     }
 }

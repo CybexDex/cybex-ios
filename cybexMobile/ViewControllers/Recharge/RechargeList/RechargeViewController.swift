@@ -12,20 +12,20 @@ import RxCocoa
 import ReSwift
 
 class RechargeViewController: BaseViewController {
-
-    enum CELL_TYPE: Int {
+    
+    enum CellType: Int {
         case RECHARGE
         case WITHDRAW
     }
-    var selectedIndex: CELL_TYPE = .RECHARGE
-
+    var selectedIndex: CellType = .RECHARGE
+    
     @IBOutlet weak var rechargeSegmentView: RechargeSegment!
     @IBOutlet weak var tableView: UITableView!
     var coordinator: (RechargeCoordinatorProtocol & RechargeStateManagerProtocol)?
-
+    
     var depositData: [Trade]?
     var withdrawData: [Trade]?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         startLoading()
@@ -33,7 +33,7 @@ class RechargeViewController: BaseViewController {
         self.coordinator?.fetchWithdrawIdsInfo()
         setupUI()
     }
-
+    
     func setupUI() {
         self.localized_text = R.string.localizable.account_trade.key.localizedContainer()
         let cell = R.nib.tradeCell.name
@@ -42,13 +42,13 @@ class RechargeViewController: BaseViewController {
         rechargeSegmentView.segmentControl.selectedSegmentIndex = selectedIndex.rawValue
         configRightNavButton(R.image.ic_w_drecords())
     }
-
+    
     override func rightAction(_ sender: UIButton) {
         self.coordinator?.openRecordList()
     }
-
+    
     override func configureObserveState() {
-
+        
         self.coordinator?.state.depositIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let `self` = self else {return}
             self.depositData = self.filterData(data)
@@ -57,7 +57,7 @@ class RechargeViewController: BaseViewController {
                 self.tableView.reloadData()
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-
+        
         self.coordinator?.state.withdrawIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let `self` = self else { return }
             self.withdrawData = self.filterData(data)
@@ -67,7 +67,7 @@ class RechargeViewController: BaseViewController {
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
-
+    
     func filterData(_ trades: [Trade]) -> [Trade] {
         let data = trades.filter({return app_data.assetInfo[$0.id] != nil})
         var tradesInfo: [Trade] = []
@@ -98,7 +98,7 @@ class RechargeViewController: BaseViewController {
 
 extension RechargeViewController {
     @objc func segmentTouch(_ data: [String: Any]) {
-        selectedIndex = (data["selectedIndex"] as! Int) == 0 ? CELL_TYPE.RECHARGE : CELL_TYPE.WITHDRAW
+        selectedIndex = (data["selectedIndex"] as! Int) == 0 ? CellType.RECHARGE : CellType.WITHDRAW
         self.tableView!.reloadData()
     }
 }
@@ -115,21 +115,24 @@ extension RechargeViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return 0
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: TradeCell.self), for: indexPath) as! TradeCell
-        if selectedIndex == .WITHDRAW {
-            if let data = self.withdrawData {
-                cell.setup(data[indexPath.row])
+        if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: TradeCell.self), for: indexPath) as? TradeCell {
+            if selectedIndex == .WITHDRAW {
+                if let data = self.withdrawData {
+                    cell.setup(data[indexPath.row])
+                }
+            } else {
+                if let data = self.depositData {
+                    cell.setup(data[indexPath.row])
+                }
             }
-        } else {
-            if let data = self.depositData {
-                cell.setup(data[indexPath.row])
-            }
+            return cell
         }
-        return cell
+        
+        return TradeCell()
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch selectedIndex.rawValue {
         case 0:

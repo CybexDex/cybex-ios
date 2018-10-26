@@ -52,7 +52,7 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
   // 2 调用store去发送一个Action(creator创建一个Action)
   // 3 
   func fetchLockupAssetsData(_ address: [String]) {
-    let request = getBalanceObjectsRequest(address: address) { response in
+    let request = GetBalanceObjectsRequest(address: address) { response in
       if let data = response as? [LockUpAssetsMData] {
         self.store.dispatch(FetchedLockupAssetsData(data: data))
       }

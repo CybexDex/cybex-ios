@@ -10,7 +10,7 @@ import UIKit
 
 class EOSWithdrawView: UIView {
 
-    enum event_name: String {
+    enum EventName: String {
         case copyAccount
         case copyCode
         case resetCode
@@ -37,7 +37,7 @@ class EOSWithdrawView: UIView {
                 }
                 if let projectName = projectInfo.projectName {
                     self.projectInfoView.isHidden = false
-                    projectInfoView.project_name = projectName
+                    projectInfoView.projectName = projectName
                 }
                 if let address = projectInfo.contractAddress {
                     self.projectInfoView.isHidden = false
@@ -53,15 +53,15 @@ class EOSWithdrawView: UIView {
     }
 
     @IBAction func copyAccount(_ sender: Any) {
-        self.next?.sendEventWith(event_name.copyAccount.rawValue, userinfo: ["account": self.account.text ?? ""])
+        self.next?.sendEventWith(EventName.copyAccount.rawValue, userinfo: ["account": self.account.text ?? ""])
     }
 
     @IBAction func copyCode(_ sender: Any) {
-        self.next?.sendEventWith(event_name.copyCode.rawValue, userinfo: ["memo": self.memo.text ?? ""])
+        self.next?.sendEventWith(EventName.copyCode.rawValue, userinfo: ["memo": self.memo.text ?? ""])
     }
 
     @IBAction func resetCode(_ sender: Any) {
-        self.next?.sendEventWith(event_name.resetCode.rawValue, userinfo: [:])
+        self.next?.sendEventWith(EventName.resetCode.rawValue, userinfo: [:])
     }
 
     func setup() {
@@ -106,9 +106,10 @@ class EOSWithdrawView: UIView {
     func loadFromXIB() {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
-        addSubview(view)
-        view.frame = self.bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
+            addSubview(view)
+            view.frame = self.bounds
+            view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        }
     }
 }

@@ -247,8 +247,8 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                                                                           fee_id: Int32(getUserId(fee.asset_id)),
                                                                           fee_amount: Int64(fee_amout),
                                                                           memo: self.state.memo.value,
-                                                                          from_memo_key: from_account.memo_key,
-                                                                          to_memo_key: to_account.memo_key)
+                                                                          from_memo_key: from_account.memoKey,
+                                                                          to_memo_key: to_account.memoKey)
 
                         let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
                             main {
@@ -323,9 +323,9 @@ extension TransferCoordinator: TransferStateManagerProtocol {
             let value = assetId.isEmpty ? 1 : pow(10, (app_data.assetInfo[assetId]?.precision)!)
             amount = amount * Double(truncating: value as NSNumber)
             let from_user_id = UserManager.shared.account.value?.id ?? "0"
-            let from_memo_key = UserManager.shared.account.value?.memo_key ?? ""
+            let from_memo_key = UserManager.shared.account.value?.memoKey ?? ""
             let to_user_id = self.state.to_account.value?.id ?? "0"
-            let to_memo_key = self.state.to_account.value?.memo_key ?? from_memo_key
+            let to_memo_key = self.state.to_account.value?.memoKey ?? from_memo_key
             if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId(from_user_id)),
                                                                               to_user_id: Int32(getUserId(to_user_id)),
                                                                               asset_id: Int32(getUserId(assetId)),
@@ -335,7 +335,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                                                                               memo: memo,
                                                                               from_memo_key: from_memo_key,
                                                                               to_memo_key: to_memo_key) {
-                calculateFee(operationString, focus_asset_id: assetId, operationID: .transfer) { (success, amount, fee_id) in
+                calculateFee(operationString, focusAssetId: assetId, operationID: .transfer) { (success, amount, fee_id) in
                     let dictionary = ["asset_id": fee_id, "amount": amount.stringValue]
                     self.store.dispatch(SetFeeAction(fee: Fee(JSON: dictionary)!))
                     if success {

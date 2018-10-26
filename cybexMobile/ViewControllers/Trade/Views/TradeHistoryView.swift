@@ -92,8 +92,10 @@ extension TradeHistoryView: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: TradeHistoryCell.self), for: indexPath) as! TradeHistoryCell
-        cell.setup(self.data?[(indexPath.row + 1) * 2 - 2], indexPath: indexPath)
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: TradeHistoryCell.self), for: indexPath) as? TradeHistoryCell {
+            cell.setup(self.data?[(indexPath.row + 1) * 2 - 2], indexPath: indexPath)
+            return cell
+        }
+        return TradeHistoryCell()
     }
 }

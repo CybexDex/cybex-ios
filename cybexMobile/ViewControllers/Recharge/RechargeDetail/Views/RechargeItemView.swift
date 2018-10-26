@@ -9,7 +9,7 @@
 import UIKit
 import SwiftTheme
 
-enum Recharge_Type: Int {
+enum RechargeType: Int {
     case none = 0
     case address
     case photo
@@ -36,9 +36,9 @@ class RechargeItemView: UIView {
         }
     }
 
-    @IBInspectable var SOURCE_TYPE: Int = 0 {
+    @IBInspectable var SOURCETYPE: Int = 0 {
         didSet {
-            btn_type = Recharge_Type(rawValue: SOURCE_TYPE)
+            btnType = RechargeType(rawValue: SOURCETYPE)
         }
     }
 
@@ -56,9 +56,9 @@ class RechargeItemView: UIView {
         }
     }
 
-    var btn_type: Recharge_Type? {
+    var btnType: RechargeType? {
         didSet {
-            switch btn_type! {
+            switch btnType! {
             case .none:
                 btn.isHidden = true
                 content.isEnabled = false
@@ -73,12 +73,12 @@ class RechargeItemView: UIView {
         }
     }
 
-    var address_state: image_state = .normal {
+    var addressState: image_state = .normal {
         didSet {
-            if self.btn_type != .address {
+            if self.btnType != .address {
                 return
             }
-            switch address_state {
+            switch addressState {
             case .normal:
                 self.addressStateImageView.isHidden = true
                 break
@@ -159,12 +159,13 @@ class RechargeItemView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
-        view.layer.cornerRadius = 4.0
-        view.clipsToBounds = true
-        addSubview(view)
-
-        view.frame = self.bounds
-        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
+            view.layer.cornerRadius = 4.0
+            view.clipsToBounds = true
+            addSubview(view)
+            
+            view.frame = self.bounds
+            view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        }
     }
 }

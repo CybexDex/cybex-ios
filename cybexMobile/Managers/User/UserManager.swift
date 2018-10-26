@@ -153,7 +153,7 @@ extension UserManager {
                 var result = [(FillOrder, time:String)]()
                 var count = 0
                 for fillOrder in fillorders {
-                    let timeRequest = getBlockRequest(response: { (time) in
+                    let timeRequest = GetBlockRequest(response: { (time) in
                         count += 1
                         if let time = time as? String, let date = time.dateFromISO8601 {
                             result.append((fillOrder, time:(date.string(withFormat: "MM/dd HH:mm:ss"))))
@@ -161,7 +161,7 @@ extension UserManager {
                         if count == fillorders.count {
                             self.fillOrder.accept(result)
                         }
-                    }, block_num: fillOrder.block_num)
+                    }, blockNum: fillOrder.block_num)
                     CybexWebSocketService.shared.send(request: timeRequest, priority: Operation.QueuePriority.high)
                 }
 
@@ -174,7 +174,7 @@ extension UserManager {
                 var records = [(TransferRecord, time:String)]()
                 var recordCount = 0
                 for transferRecord in transferRecordList {
-                    let timeRequest = getBlockRequest(response: { (time) in
+                    let timeRequest = GetBlockRequest(response: { (time) in
                         recordCount += 1
                         if let time = time as? String, let date = time.dateFromISO8601 {
                             records.append((transferRecord, time:(date.string(withFormat: "MM/dd HH:mm:ss"))))
@@ -182,7 +182,7 @@ extension UserManager {
                         if recordCount == transferRecordList.count {
                             self.transferRecords.accept(records)
                         }
-                    }, block_num: transferRecord.block_num)
+                    }, blockNum: transferRecord.block_num)
                     CybexWebSocketService.shared.send(request: timeRequest)
                 }
             }
@@ -212,7 +212,7 @@ extension UserManager {
                 var result = [(FillOrder, time:String)]()
                 var count = 0
                 for fillOrder in fillorders {
-                    let timeRequest = getBlockRequest(response: { (time) in
+                    let timeRequest = GetBlockRequest(response: { (time) in
                         count += 1
                         if let time = time as? String, let date = time.dateFromISO8601 {
                             result.append((fillOrder, time:(date.string(withFormat: "MM/dd HH:mm:ss"))))
@@ -220,7 +220,7 @@ extension UserManager {
                         if count == fillorders.count {
                             self.fillOrder.accept(result)
                         }
-                    }, block_num: fillOrder.block_num)
+                    }, blockNum: fillOrder.block_num)
                     CybexWebSocketService.shared.send(request: timeRequest)
                 }
             }
@@ -255,8 +255,8 @@ extension UserManager {
 
             let request = GetFullAccountsRequest(name: name) { response in
                 if let data = response as? FullAccount, let account = data.account {
-                    let active_auths = account.active_auths
-                    let owner_auths = account.owner_auths
+                    let active_auths = account.activeAuths
+                    let owner_auths = account.ownerAuths
 
                     for auth in active_auths {
                         if let auth = auth as? [Any], let key = auth[0] as? String {
@@ -285,12 +285,12 @@ extension UserManager {
 
                         if let newAccount = data.account {
                             if let memoKey = keys.memo_key, let ownKey = keys.owner_key, let activeKey = keys.active_key {
-                                if [memoKey.public_key, ownKey.public_key, activeKey.public_key].contains(newAccount.memo_key) {
+                                if [memoKey.public_key, ownKey.public_key, activeKey.public_key].contains(newAccount.memoKey) {
                                     self.isWithDraw = true
                                 }
                             }
                             if let memoKey = keys.memo_key, let ownKey = keys.owner_key, let activeKey = keys.active_key {
-                                if let activeKeys = newAccount.active_auths as? [String] {
+                                if let activeKeys = newAccount.activeAuths as? [String] {
                                     for activekey in activeKeys {
                                         if [memoKey.public_key, ownKey.public_key, activeKey.public_key].contains(activekey) {
                                             self.isTrade = true
@@ -386,7 +386,7 @@ class UserManager {
 
     var frequency_type: frequency_type = .WiFi {
         didSet {
-            Defaults[.frequency_type] = self.frequency_type.rawValue
+            Defaults[.frequencyType] = self.frequency_type.rawValue
             switch self.frequency_type {
             case .normal:self.refreshTime = 6
             case .time:self.refreshTime = 3
@@ -458,7 +458,7 @@ class UserManager {
                 let assetA_info = app_data.assetInfo[limitOrder_value.sellPrice.base.assetID]
                 let assetB_info = app_data.assetInfo[limitOrder_value.sellPrice.quote.assetID]
 
-                let (base, _) = calculateAssetRelation(assetID_A_name: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetID_B_name: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
+                let (base, _) = calculateAssetRelation(assetIDAName: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetIDBName: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
                 let isBuy = base == ((assetA_info != nil) ? assetA_info!.symbol.filterJade : "")
 
                 let realAmount = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale)

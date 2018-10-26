@@ -46,39 +46,45 @@ func blockchainParams(callback: @escaping(BlockChainParamsType)->Void) {
     }
 }
 
-func calculateFee(_ operation: String, focus_asset_id: String, operationID: ChainTypesOperations = .limit_order_create, filterRepeat: Bool = true, completion:@escaping (_ success: Bool, _ amount: Decimal, _ assetID: String)->Void) {
+func calculateFee(_ operation: String,
+                  focusAssetId: String,
+                  operationID: ChainTypesOperations = .limit_order_create,
+                  filterRepeat: Bool = true,
+                  completion:@escaping (_ success: Bool,
+                                        _ amount: Decimal,
+                                        _ assetID: String)->Void) {
     let request = GetRequiredFees(response: { (data) in
-        if let fees = data as? [Fee], let cyb_amount = fees.first?.amount.toDouble() {
+        if let fees = data as? [Fee], let cybAmount = fees.first?.amount.toDouble() {
 
             let cyb = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
                 return balance.asset_type == AssetConfiguration.CYB
             }).first?.balance.toDouble() ?? 0
 
-            if cyb >= cyb_amount {
-                let amount = getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string)
+            if cyb >= cybAmount {
+                let amount = getRealAmount(AssetConfiguration.CYB, amount: cybAmount.string)
 
                 completion(true, amount, AssetConfiguration.CYB)
             } else {
                 let request = GetRequiredFees(response: { (data) in
-                    if let fees = data as? [Fee], let base_amount = fees.first?.amount.toDouble() {
+                    if let fees = data as? [Fee], let baseAmount = fees.first?.amount.toDouble() {
                         if let base = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
-                            return balance.asset_type == focus_asset_id
+                            return balance.asset_type == focusAssetId
                         }).first {
-                            if base.balance.toDouble()! >= base_amount {
-                                let amount = getRealAmount(focus_asset_id, amount: base_amount.string)
+                            if base.balance.toDouble()! >= baseAmount {
+                                let amount = getRealAmount(focusAssetId, amount: baseAmount.string)
 
-                                completion(true, amount, focus_asset_id)
+                                completion(true, amount, focusAssetId)
                             } else {//余额不足
-                                completion(false, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
+                                completion(false, getRealAmount(AssetConfiguration.CYB, amount: cybAmount.string), AssetConfiguration.CYB)
 
                             }
                         } else {
-                            completion(false, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
+                            completion(false, getRealAmount(AssetConfiguration.CYB, amount: cybAmount.string), AssetConfiguration.CYB)
                         }
                     } else {
-                        completion(false, getRealAmount(AssetConfiguration.CYB, amount: cyb_amount.string), AssetConfiguration.CYB)
+                        completion(false, getRealAmount(AssetConfiguration.CYB, amount: cybAmount.string), AssetConfiguration.CYB)
                     }
-                }, operationStr: operation, assetID: focus_asset_id, operationID: operationID)
+                }, operationStr: operation, assetID: focusAssetId, operationID: operationID)
 
                 CybexWebSocketService.shared.send(request: request)
             }
@@ -91,35 +97,35 @@ func calculateFee(_ operation: String, focus_asset_id: String, operationID: Chai
     CybexWebSocketService.shared.send(request: request)
 }
 
-func calculateAssetRelation(assetID_A_name: String, assetID_B_name: String) -> (base: String, quote: String) {
+func calculateAssetRelation(assetIDAName: String, assetIDBName: String) -> (base: String, quote: String) {
     let relation: [String] = AssetConfiguration.order_name
 
     var indexA = -1
     var indexB = -1
 
-    if let index = relation.index(of: assetID_A_name) {
+    if let index = relation.index(of: assetIDAName) {
         indexA = index
     }
 
-    if let index = relation.index(of: assetID_B_name) {
+    if let index = relation.index(of: assetIDBName) {
         indexB = index
     }
 
     if indexA > -1 && indexB > -1 {
         if indexA < indexB {
-            return (assetID_A_name, assetID_B_name)
+            return (assetIDAName, assetIDBName)
         } else {
-            return (assetID_B_name, assetID_A_name)
+            return (assetIDBName, assetIDAName)
         }
     } else if indexA < indexB {
-        return (assetID_B_name, assetID_A_name)
+        return (assetIDBName, assetIDAName)
     } else if indexA > indexB {
-        return (assetID_A_name, assetID_B_name)
+        return (assetIDAName, assetIDBName)
     } else {
-        if assetID_A_name < assetID_B_name {
-            return (assetID_A_name, assetID_B_name)
+        if assetIDAName < assetIDBName {
+            return (assetIDAName, assetIDBName)
         } else {
-            return (assetID_B_name, assetID_A_name)
+            return (assetIDBName, assetIDAName)
         }
     }
 
@@ -146,9 +152,9 @@ func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
     guard var ticker = tickers.first else {
         return 0
     }
-    var base_price: Double = 0
+    var basePrice: Double = 0
     if tickers.count > 1 {
-        var base_assets = [AssetConfiguration.CYB, AssetConfiguration.USDT, AssetConfiguration.ETH, AssetConfiguration.BTC]
+        var baseAssets = [AssetConfiguration.CYB, AssetConfiguration.USDT, AssetConfiguration.ETH, AssetConfiguration.BTC]
         var indexs = [Int]()
         for item in tickers {
             if item.base == AssetConfiguration.CYB {
@@ -166,16 +172,16 @@ func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
             }
         }
         indexs = indexs.sorted(by: {$0 < $1})
-        base_price = getAssetRMBPrice(base_assets[indexs[0]])
-        ticker = tickers.filter({$0.base == base_assets[indexs[0]] && $0.quote == asset}).first!
+        basePrice = getAssetRMBPrice(baseAssets[indexs[0]])
+        ticker = tickers.filter({$0.base == baseAssets[indexs[0]] && $0.quote == asset}).first!
     } else {
-        base_price = getAssetRMBPrice(ticker.base)
+        basePrice = getAssetRMBPrice(ticker.base)
     }
 
     guard let latest = ticker.latest.toDouble() else {
         return 0
     }
-    return latest * base_price
+    return latest * basePrice
 }
 
 func getCachedBucket(_ homebucket: HomeBucket) -> BucketMatrix {
@@ -209,8 +215,8 @@ func getRealAmountDouble(_ id: String, amount: String) -> Double {
         return 0
     }
 
-    if let d = Double(amount) {
-        return d / pow(10, asset.precision.double)
+    if let doubleAmount = Double(amount) {
+        return doubleAmount / pow(10, asset.precision.double)
     }
 
     return 0
@@ -249,17 +255,17 @@ func getWithdrawDetailInfo(addressInfo: String, amountInfo: String, withdrawFeeI
     let content = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
 
     return (isEOS && memoInfo.count > 0) ?
-        (["<name>\(String(describing: address)):</name><\(content)>\n\(String(describing: addressInfo))</\(content)>".set(style: "alertContent"),
-          "<name>\(String(describing: memo)):</name><\(content)>  \(String(describing: memoInfo))</\(content)>".set(style: "alertContent"),
-          "<name>\(String(describing: amount)):</name><\(content)>  \(String(describing: amountInfo))</\(content)>".set(style: "alertContent"),
-          "<name>\(String(describing: withdrawFee)):</name><\(content)>  \(String(describing: withdrawFeeInfo))</\(content)>".set(style: "alertContent"),
-          "<name>\(String(describing: gatewayFee)):</name><\(content)>  \(String(describing: gatewayFeeInfo))</\(content)>".set(style: "alertContent"),
-          "<name>\(String(describing: receiveAmount)):</name><\(content)>  \(String(describing: receiveAmountInfo))</\(content)>".set(style: "alertContent")] as? [NSAttributedString])! :
-        (["<name>\(String(describing: address)):</name><\(content)>\n\(String(describing: addressInfo))</\(content)>".set(style: "alertContent"),
-          "<name>\(String(describing: amount)):</name><\(content)>  \(String(describing: amountInfo))</\(content)>".set(style: "alertContent"),
-          "<name>\(String(describing: withdrawFee)):</name><\(content)>  \(String(describing: withdrawFeeInfo))</\(content)>".set(style: "alertContent"),
-          "<name>\(String(describing: gatewayFee)):</name><\(content)>  \(String(describing: gatewayFeeInfo))</\(content)>".set(style: "alertContent"),
-          "<name>\(String(describing: receiveAmount)):</name><\(content)>  \(String(describing: receiveAmountInfo))</\(content)>".set(style: "alertContent")] as? [NSAttributedString])!
+        (["<name>\(address):</name><\(content)>\n\(addressInfo)</\(content)>".set(style: "alertContent"),
+          "<name>\(memo):</name><\(content)>  \(memoInfo)</\(content)>".set(style: "alertContent"),
+          "<name>\(amount):</name><\(content)>  \(amountInfo)</\(content)>".set(style: "alertContent"),
+          "<name>\(withdrawFee):</name><\(content)>  \(withdrawFeeInfo)</\(content)>".set(style: "alertContent"),
+          "<name>\(gatewayFee):</name><\(content)>  \(gatewayFeeInfo)</\(content)>".set(style: "alertContent"),
+          "<name>\(receiveAmount):</name><\(content)>  \(receiveAmountInfo)</\(content)>".set(style: "alertContent")] as? [NSAttributedString])! :
+        (["<name>\(address):</name><\(content)>\n\(addressInfo)</\(content)>".set(style: "alertContent"),
+          "<name>\(amount):</name><\(content)>  \(amountInfo)</\(content)>".set(style: "alertContent"),
+          "<name>\(withdrawFee):</name><\(content)>  \(withdrawFeeInfo)</\(content)>".set(style: "alertContent"),
+          "<name>\(gatewayFee):</name><\(content)>  \(gatewayFeeInfo)</\(content)>".set(style: "alertContent"),
+          "<name>\(receiveAmount):</name><\(content)>  \(receiveAmountInfo)</\(content)>".set(style: "alertContent")] as? [NSAttributedString])!
 }
 
 func getOpenedOrderInfo(price: String, amount: String, total: String, fee: String, isBuy: Bool) -> [NSAttributedString] {
@@ -290,13 +296,13 @@ func getTransferInfo(_ account: String, quanitity: String, fee: String, memo: St
 
     let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
 
-    return memo.trimmed.count != 0 ? (["<name>\(String(describing: accountTitle)):</name>  <\(contentStyle)>\(String(describing: account))</\(contentStyle)>".set(style: "alertContent"),
-                                       "<name>\(String(describing: quantityTitle)):</name><\(contentStyle)>  \(String(describing: quanitity))</\(contentStyle)>".set(style: "alertContent"),
-                                       "<name>\(String(describing: feeTitle)):</name><\(contentStyle)>  \(String(describing: fee))</\(contentStyle)>".set(style: "alertContent"),
-                                       "<name>\(String(describing: memoTitle)):</name><\(contentStyle)>  \(String(describing: memo))</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])! :
-        (["<name>\(String(describing: accountTitle)):</name>  <\(contentStyle)>\(String(describing: account))</\(contentStyle)>".set(style: "alertContent"),
-          "<name>\(String(describing: quantityTitle)):</name><\(contentStyle)>  \(String(describing: quanitity))</\(contentStyle)>".set(style: "alertContent"),
-          "<name>\(String(describing: feeTitle)):</name><\(contentStyle)>  \(String(describing: fee))</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])!
+    return memo.trimmed.count != 0 ? (["<name>\(accountTitle):</name>  <\(contentStyle)>\(account)</\(contentStyle)>".set(style: "alertContent"),
+                                       "<name>\(quantityTitle):</name><\(contentStyle)>  \(quanitity)</\(contentStyle)>".set(style: "alertContent"),
+                                       "<name>\(feeTitle):</name><\(contentStyle)>  \(fee)</\(contentStyle)>".set(style: "alertContent"),
+                                       "<name>\(memoTitle):</name><\(contentStyle)>  \(memo)</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])! :
+        (["<name>\(accountTitle):</name>  <\(contentStyle)>\(account)</\(contentStyle)>".set(style: "alertContent"),
+          "<name>\(quantityTitle):</name><\(contentStyle)>  \(quanitity)</\(contentStyle)>".set(style: "alertContent"),
+          "<name>\(feeTitle):</name><\(contentStyle)>  \(fee)</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])!
 }
 
 func confirmDeleteWithDrawAddress(_ info: WithdrawAddress) -> [NSAttributedString] {
@@ -308,13 +314,24 @@ func confirmDeleteWithDrawAddress(_ info: WithdrawAddress) -> [NSAttributedStrin
 
     var result: [NSAttributedString] = []
 
-    let title = "<\(contentStyle)>" + (isEOS ? R.string.localizable.delete_confirm_account.key.localized() : R.string.localizable.delete_confirm_address.key.localized()) + "</\(contentStyle)>"
+    let title = "<\(contentStyle)>" +
+        (isEOS ? R.string.localizable.delete_confirm_account.key.localized() : R.string.localizable.delete_confirm_address.key.localized()) +
+        "</\(contentStyle)>"
     result.append(title.set(style: StyleNames.alertContent.rawValue)!)
 
-    let note = "<name>" + R.string.localizable.address_mark.key.localized() + "：</name>" + "<\(contentStyle)>" + "\(info.name)" + "</\(contentStyle)>"
+    let note = "<name>" +
+        R.string.localizable.address_mark.key.localized() +
+        "：</name>" + "<\(contentStyle)>" +
+        "\(info.name)" +
+        "</\(contentStyle)>"
     result.append(note.set(style: StyleNames.alertContent.rawValue)!)
 
-    let address = "<name>" + (isEOS ? R.string.localizable.accountTitle.key.localized() : R.string.localizable.address.key.localized()) + "：</name>" + "<\(contentStyle)>" + "\(info.address)" + "</\(contentStyle)>"
+    let address = "<name>" +
+        (isEOS ? R.string.localizable.accountTitle.key.localized() : R.string.localizable.address.key.localized()) +
+        "：</name>" +
+        "<\(contentStyle)>" +
+        "\(info.address)" +
+        "</\(contentStyle)>"
     result.append(address.set(style: StyleNames.alertContent.rawValue)!)
 
     if existMemo {
@@ -370,12 +387,12 @@ func checkMaxLength(_ sender: String, maxLength: Int) -> String {
     return sender
 }
 
-func addressOf(_ o: UnsafeRawPointer) -> Int {
-    return Int(bitPattern: o)
+func addressOf(_ pointer: UnsafeRawPointer) -> Int {
+    return Int(bitPattern: pointer)
 }
 
-func addressOf<T: AnyObject>(_ o: T) -> Int {
-    return unsafeBitCast(o, to: Int.self)
+func addressOf<T: AnyObject>(_ point: T) -> Int {
+    return unsafeBitCast(point, to: Int.self)
 }
 
 func getBalanceWithAssetId(_ asset: String) -> Balance? {
@@ -395,13 +412,13 @@ func getTimeZone() -> TimeInterval {
     return TimeInterval(timeZone.secondsFromGMT(for: Date()))
 }
 
-enum fundType: String {
+enum FundType: String {
     case WITHDRAW
     case DEPOSIT
     case ALL
 }
 
-func getWithdrawAndDepositRecords(_ accountName: String, asset: String, fundType: fundType, size: Int, offset: Int, expiration: Int, callback:@escaping (TradeRecord?)->Void) {
+func getWithdrawAndDepositRecords(_ accountName: String, asset: String, fundType: FundType, size: Int, offset: Int, expiration: Int, callback:@escaping (TradeRecord?)->Void) {
 
     var paragram = ["op": ["accountName": accountName, "expiration": expiration], "signer": "" ] as [String: Any]
 
@@ -447,11 +464,11 @@ func sortNameBasedonAddress(_ names: [AddressName]) -> [String] {
         newSectionsArray[sectionNumber] = sectionBeans
     }
 
-    for i in 0 ..< collation.sectionTitles.count {
-        let beansArrayForSection = newSectionsArray[i]
+    for item in 0 ..< collation.sectionTitles.count {
+        let beansArrayForSection = newSectionsArray[item]
 
         let sortedBeansArrayForSection = collation.sortedArray(from: beansArrayForSection, collationStringSelector: #selector(getter: AddressName.name))
-        newSectionsArray[i] = sortedBeansArrayForSection as! [AddressName]
+        newSectionsArray[item] = sortedBeansArrayForSection as! [AddressName]
     }
 
     let sortedNames = newSectionsArray.flatMap({ $0 }).map({ $0.name })

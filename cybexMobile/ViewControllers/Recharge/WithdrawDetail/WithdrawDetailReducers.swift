@@ -9,11 +9,14 @@
 import UIKit
 import ReSwift
 
-func WithdrawDetailReducer(action: Action, state: WithdrawDetailState?) -> WithdrawDetailState {
-    return WithdrawDetailState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: WithdrawDetailPropertyReducer(state?.property, action: action))
+func withdrawDetailReducer(action: Action, state: WithdrawDetailState?) -> WithdrawDetailState {
+    return WithdrawDetailState(isLoading: loadingReducer(state?.isLoading, action: action),
+                               page: pageReducer(state?.page, action: action),
+                               errorMessage: errorMessageReducer(state?.errorMessage, action: action),
+                               property: withdrawDetailPropertyReducer(state?.property, action: action))
 }
 
-func WithdrawDetailPropertyReducer(_ state: WithdrawDetailPropertyState?, action: Action) -> WithdrawDetailPropertyState {
+func withdrawDetailPropertyReducer(_ state: WithdrawDetailPropertyState?, action: Action) -> WithdrawDetailPropertyState {
     var state = state ?? WithdrawDetailPropertyState()
     switch action {
     case let action as FetchAddressInfo:

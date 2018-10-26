@@ -63,12 +63,13 @@ class CybexLabel: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
-        view.layer.cornerRadius = 4.0
-        view.clipsToBounds = true
-        addSubview(view)
-
-        view.frame = self.bounds
-        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
+            view.layer.cornerRadius = 4.0
+            view.clipsToBounds = true
+            addSubview(view)
+            
+            view.frame = self.bounds
+            view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        }
     }
 }

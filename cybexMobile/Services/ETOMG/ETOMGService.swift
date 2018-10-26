@@ -148,7 +148,10 @@ extension ETOMGAPI: TargetType {
     }
 
     var sampleData: Data {
-        return try! JSON(parameters).rawData()
+        if let data = try? JSON(parameters).rawData() {
+            return data
+        }
+        return Data()
     }
 
     var headers: [String: String]? {
