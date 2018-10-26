@@ -71,6 +71,7 @@ class BusinessTitleView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
+
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
@@ -91,22 +92,22 @@ extension BusinessTitleView: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: BusinessTitleCell.self), for: indexPath) as! BusinessTitleCell
-
-        if let selectedIndex = self.selectedIndex, selectedIndex == indexPath.row && saveBaseIndex == currentBaseIndex {
-            cell.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.paleGrey.hexString(true)]
-            cell.businessTitleCellView.paris.theme_textColor = [UIColor.pastelOrange.hexString(true), UIColor.pastelOrange.hexString(true)]
-        } else {
-            cell.theme_backgroundColor = [UIColor.darkTwo.hexString(true), UIColor.white.hexString(true)]
-            cell.businessTitleCellView.paris.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
+        if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: BusinessTitleCell.self), for: indexPath) as? BusinessTitleCell {
+            if let selectedIndex = self.selectedIndex, selectedIndex == indexPath.row && saveBaseIndex == currentBaseIndex {
+                cell.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.paleGrey.hexString(true)]
+                cell.businessTitleCellView.paris.theme_textColor = [UIColor.pastelOrange.hexString(true), UIColor.pastelOrange.hexString(true)]
+            } else {
+                cell.theme_backgroundColor = [UIColor.darkTwo.hexString(true), UIColor.white.hexString(true)]
+                cell.businessTitleCellView.paris.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
+            }
+            let markets = appData.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+                return ticker.base_volume != "0"
+            })
+            let data = markets[indexPath.row]
+            cell.setup(data, indexPath: indexPath)
+            return cell
         }
-        let markets = appData.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
-            return ticker.base_volume != "0"
-        })
-        let data = markets[indexPath.row]
-        cell.setup(data, indexPath: indexPath)
-
-        return cell
+        return BusinessTitleCell()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 

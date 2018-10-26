@@ -82,7 +82,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 
         guard !assetID.isEmpty, let operation = BitShareCoordinator.getTransterOperation(0, to_user_id: 0, asset_id: Int32(getUserId(assetID)), amount: 0, fee_id: 0, fee_amount: 0, memo: "", from_memo_key: "", to_memo_key: "") else { return }
 
-        calculateFee(operation, focus_asset_id: assetID, operationID: .transfer) { (success, amount, fee_id) in
+        calculateFee(operation, focusAssetId: assetID, operationID: .transfer) { (success, amount, fee_id) in
             let dictionary = ["asset_id": fee_id, "amount": amount.stringValue]
 
             if success {

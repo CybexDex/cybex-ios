@@ -93,5 +93,4 @@ class BusinessTitleItemView: UIView {
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-
 }

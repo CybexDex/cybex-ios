@@ -60,7 +60,7 @@ class CybexWebSocketService: NSObject {
 
     private var queue: OperationQueue!
 
-    var ids: [apiCategory: Int] = [:]
+    var ids: [ApiCategory: Int] = [:]
 
     static let shared = CybexWebSocketService()
 
@@ -199,30 +199,30 @@ class CybexWebSocketService: NSObject {
 
     private func register() {
         self.ids.removeAll()
-        let registerID_re = [RegisterIDRequest(api: .database) { re_id in
-            if let re_id = re_id as? Int {
-                var n_ids = self.ids
-                n_ids[.database] = re_id
-                self.ids = n_ids
+        let registerIDRe = [RegisterIDRequest(api: .database) { reId in
+            if let reId = reId as? Int {
+                var nIds = self.ids
+                nIds[.database] = reId
+                self.ids = nIds
             }
 
-            }, RegisterIDRequest(api: .network_broadcast) { re_id in
-                if let re_id = re_id as? Int {
-                    var n_ids = self.ids
-                    n_ids[.network_broadcast] = re_id
-                    self.ids = n_ids
+            }, RegisterIDRequest(api: .networkBroadcast) { reId in
+                if let reId = reId as? Int {
+                    var nIds = self.ids
+                    nIds[.networkBroadcast] = reId
+                    self.ids = nIds
                 }
 
-            }, RegisterIDRequest(api: .history) { re_id in
-                if let re_id = re_id as? Int {
-                    var n_ids = self.ids
-                    n_ids[.history] = re_id
-                    self.ids = n_ids
+            }, RegisterIDRequest(api: .history) { reId in
+                if let reId = reId as? Int {
+                    var nIds = self.ids
+                    nIds[.history] = reId
+                    self.ids = nIds
                 }
 
             }]
 
-        for request in registerID_re {
+        for request in registerIDRe {
             send(request: request, priority: .veryHigh)
         }
     }
@@ -232,8 +232,8 @@ class CybexWebSocketService: NSObject {
 
         var writeJSON: JSON
 
-        if let revision_request = request as? RevisionRequest {
-            writeJSON = JSON(revision_request.revisionParameters(batch.requestObject))
+        if let revisionRequest = request as? RevisionRequest {
+            writeJSON = JSON(revisionRequest.revisionParameters(batch.requestObject))
         } else {
             writeJSON = JSON(batch.requestObject)
         }
@@ -255,7 +255,7 @@ class CybexWebSocketService: NSObject {
             if self.checkNetworConnected() {
                 var json = sendData.0
                 if var oldParams = request.parameters as? [Any] {
-                    if let api = oldParams[0] as? apiCategory, let rid = self.ids[api] {
+                    if let api = oldParams[0] as? ApiCategory, let rid = self.ids[api] {
                         oldParams[0] = rid
                     } else {
                         oldParams[0] = 1

@@ -14,7 +14,7 @@ import NBLCommonModule
 struct RechargeContext: RouteContext, HandyJSON {
     init() {}
 
-    var selectedIndex: RechargeViewController.CELL_TYPE = .RECHARGE
+    var selectedIndex: RechargeViewController.CellType = .RECHARGE
 }
 
 protocol RechargeCoordinatorProtocol {
@@ -38,7 +38,7 @@ class RechargeCoordinator: NavCoordinator {
     lazy var creator = RechargePropertyActionCreate()
 
     var store = Store(
-        reducer: RechargeReducer,
+        reducer: rechargeReducer,
         state: nil,
         middleware: [TrackingMiddleware]
     )

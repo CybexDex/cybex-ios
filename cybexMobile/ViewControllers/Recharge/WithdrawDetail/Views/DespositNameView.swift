@@ -18,9 +18,9 @@ class DespositNameView: CybexBaseView {
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var addressView: UIView!
 
-    var project_name: String? {
+    var projectName: String? {
         didSet {
-            guard let projectName = project_name else { return }
+            guard let projectName = projectName else { return }
             self.nameView.isHidden = false
             self.projectNameLabel.text = projectName
             self.updateHeight()
@@ -50,7 +50,7 @@ class DespositNameView: CybexBaseView {
     }
 
     enum Event: String {
-        case DespositNameViewDidClicked
+        case despositNameViewDidClicked
         case openProtocolAddressEvent
     }
 
@@ -73,6 +73,6 @@ class DespositNameView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.DespositNameViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.despositNameViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }

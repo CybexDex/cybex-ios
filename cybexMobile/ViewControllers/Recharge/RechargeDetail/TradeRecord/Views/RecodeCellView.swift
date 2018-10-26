@@ -34,12 +34,19 @@ class RecodeCellView: UIView {
                         break
                     }
                 }
-                if let asset_info = assetInfo {
-                    let withdrawAddress = AddressManager.shared.containAddressOfWithDraw(data.address, currency: asset_info.id)
-                    let attributedString = withdrawAddress.0 == true ? "<\(contentStyle)>\(withdrawAddress.1.first!.name)</\(contentStyle)>\n<address>\(data.address)</address>".set(style: StyleNames.address.rawValue) :  "<address>\(data.address)</address>".set(style: StyleNames.address.rawValue)
-                    address.attributedText = attributedString
-                    icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + asset_info.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
-                    amount.text = getRealAmount(asset_info.id, amount: String(data.amount)).string.formatCurrency(digitNum: asset_info.precision) + " " +  asset_info.symbol.filterJade
+                if let assetInfo = assetInfo {
+                    let withdrawAddress = AddressManager.shared.containAddressOfWithDraw(data.address,
+                                                                                         currency: assetInfo.id)
+                    let attributedString = withdrawAddress.0 == true ?
+                        "<\(contentStyle)>\(withdrawAddress.1.first!.name)</\(contentStyle)>\n<address>\(data.address)</address>" :
+                        "<address>\(data.address)</address>"
+                    address.attributedText = attributedString.set(style: StyleNames.address.rawValue)
+                    icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString +
+                        assetInfo.id.replacingOccurrences(of: ".", with: "_") +
+                        "_grey.png"))
+                    amount.text = getRealAmount(assetInfo.id, amount: String(data.amount)).string.formatCurrency(digitNum: assetInfo.precision) +
+                        " " +
+                        assetInfo.symbol.filterJade
                 } else {
                     amount.text = "-"
                 }
@@ -93,6 +100,7 @@ class RecodeCellView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
+
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
@@ -100,5 +108,4 @@ class RecodeCellView: UIView {
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-
 }

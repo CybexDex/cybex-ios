@@ -26,7 +26,7 @@ class LimitOrder: Mappable {
         let assetA_info = appData.assetInfo[sellPrice.base.assetID]
         let assetB_info = appData.assetInfo[sellPrice.quote.assetID]
 
-        let (base, _) = calculateAssetRelation(assetID_A_name: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetID_B_name: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
+        let (base, _) = calculateAssetRelation(assetIDAName: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetIDBName: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
 
         return (base == ((assetA_info != nil) ? assetA_info!.symbol.filterJade : ""))
     }
