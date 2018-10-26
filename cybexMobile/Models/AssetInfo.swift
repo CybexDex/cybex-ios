@@ -40,13 +40,13 @@ class Asset: Mappable {
     }
 
     func volume() -> Double {
-        let info = app_data.assetInfo[assetID]!
+        let info = appData.assetInfo[assetID]!
 
         return Double(amount)! / pow(10, info.precision.double)
     }
 
     func info() -> AssetInfo {
-        return app_data.assetInfo[self.assetID] ?? AssetInfo(JSON: [:])!
+        return appData.assetInfo[self.assetID] ?? AssetInfo(JSON: [:])!
     }
 }
 

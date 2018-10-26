@@ -20,8 +20,8 @@ class BusinessTitleItemView: UIView {
 
     var data: Any? {
         didSet {
-            guard let ticker = data as? Ticker, let baseInfo = app_data.assetInfo[ticker.base], let quoteInfo = app_data.assetInfo[ticker.quote] else { return }
-            self.paris.text = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade
+            guard let ticker = data as? Ticker, let base_info = appData.assetInfo[ticker.base], let quote_info = appData.assetInfo[ticker.quote] else { return }
+            self.paris.text = quote_info.symbol.filterJade + "/" + base_info.symbol.filterJade
             if ticker.latest == "0" {
                 self.total.text = "-"
                 self.change.text = "-"
@@ -85,10 +85,12 @@ class BusinessTitleItemView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
-            addSubview(view)
-            view.frame = self.bounds
-            view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
         }
+
+        addSubview(view)
+        view.frame = self.bounds
+        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 }

@@ -45,7 +45,7 @@ class OpenedOrdersViewController: BaseViewController {
     }
 
     func setupUI() {
-        self.localized_text = R.string.localizable.openedTitle.key.localizedContainer()
+        self.localizedText = R.string.localizable.openedTitle.key.localizedContainer()
 
         switchContainerView()
     }
@@ -76,7 +76,7 @@ class OpenedOrdersViewController: BaseViewController {
             if success, let order = self.order {
                 let ensure_title = order.isBuy ? R.string.localizable.cancle_openedorder_buy.key.localized() : R.string.localizable.cancle_openedorder_sell.key.localized()
 
-                if let baseInfo = app_data.assetInfo[order.sellPrice.base.assetID], let quoteInfo = app_data.assetInfo[order.sellPrice.quote.assetID], let fee_info = app_data.assetInfo[assetId] {
+                if let baseInfo = appData.assetInfo[order.sellPrice.base.assetID], let quoteInfo = appData.assetInfo[order.sellPrice.quote.assetID], let fee_info = appData.assetInfo[assetId] {
                     var priceInfo = ""
                     var amountInfo = ""
                     var totalInfo = ""

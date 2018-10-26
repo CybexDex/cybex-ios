@@ -32,8 +32,7 @@ class MyHistoryCellView: UIView {
     
     func updateUI(_ orderInfo: (FillOrder, time: String)) {
         let order = orderInfo.0
-        
-        if let payInfo = app_data.assetInfo[order.pays.assetID], let receiveInfo = app_data.assetInfo[order.receives.assetID] {
+        if let payInfo = appData.assetInfo[order.pays.assetID], let receiveInfo = appData.assetInfo[order.receives.assetID] {
             // 从首页筛选出交易对
             let result = calculateAssetRelation(assetIDAName: payInfo.symbol.filterJade, assetIDBName: receiveInfo.symbol.filterJade)
             if result.base == payInfo.symbol.filterJade && result.quote == receiveInfo.symbol.filterJade {
@@ -106,10 +105,13 @@ class MyHistoryCellView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
-            addSubview(view)
-            view.frame = self.bounds
-            view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
         }
+
+        addSubview(view)
+        view.frame = self.bounds
+        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 }

@@ -40,7 +40,7 @@ class OpenedOrdersView: UIView {
                 if order.isBuy {
                     self.orderType.opened_status = 0
 
-                    if let quote_info = app_data.assetInfo[order.sellPrice.quote.assetID], let base_info = app_data.assetInfo[order.sellPrice.base.assetID] {
+                    if let quote_info = appData.assetInfo[order.sellPrice.quote.assetID], let base_info = appData.assetInfo[order.sellPrice.base.assetID] {
                         quote.text = quote_info.symbol.filterJade
                         base.text = "/" + base_info.symbol.filterJade
 
@@ -65,7 +65,7 @@ class OpenedOrdersView: UIView {
                     }
                 } else {
                     self.orderType.opened_status = 1
-                    if let quote_info = app_data.assetInfo[order.sellPrice.base.assetID], let base_info = app_data.assetInfo[order.sellPrice.quote.assetID] {
+                    if let quote_info = appData.assetInfo[order.sellPrice.base.assetID], let base_info = appData.assetInfo[order.sellPrice.quote.assetID] {
                         self.quote.text = quote_info.symbol.filterJade
                         self.base.text = "/" + base_info.symbol.filterJade
 
@@ -138,14 +138,16 @@ class OpenedOrdersView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
 
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 
-    func setupData(_ data: Any, indexPath: IndexPath) {
+    func setupData(_ data: Any?, indexPath: IndexPath) {
         self.data = data
         self.selectedIndex = indexPath
     }

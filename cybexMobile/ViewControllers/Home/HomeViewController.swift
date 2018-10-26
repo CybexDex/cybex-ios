@@ -29,7 +29,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         didSet {
             guard let pair = pair, let index = AssetConfiguration.market_base_assets.index(of: pair.base) else { return }
 
-            if let selectedIndex = app_data.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+            if let selectedIndex = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
                 return ticker.quote == pair.quote
             }) {
                 self.businessTitleView?.selectedIndex = selectedIndex
@@ -70,7 +70,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
             navigationItem.largeTitleDisplayMode = .always
         }
 
-        self.localized_text = R.string.localizable.navWatchlist.key.localizedContainer()
+        self.localizedText = R.string.localizable.navWatchlist.key.localizedContainer()
         switchContainerView()
     }
 
@@ -96,7 +96,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     }
 
     override func configureObserveState() {
-        app_data.ticker_data.asObservable().filter({[weak self] (s) -> Bool in
+        appData.ticker_data.asObservable().filter({[weak self] (s) -> Bool in
             guard let `self` = self else { return false}
             if self.VC_TYPE == view_type.Comprehensive.rawValue {
                 if s.count == AssetConfiguration.shared.asset_ids.count {
@@ -147,13 +147,13 @@ extension HomeViewController {
                 self.coordinator?.openMarket(index: index, currentBaseIndex: self.contentView!.currentBaseIndex)
             }
         } else if VC_TYPE == view_type.Comprehensive.rawValue {
-            if let index = data["index"] as? Int, app_data.ticker_data.value.count == AssetConfiguration.shared.asset_ids.count {
-                let datas = app_data.filterPopAssetsCurrency()
+            if let index = data["index"] as? Int, appData.ticker_data.value.count == AssetConfiguration.shared.asset_ids.count {
+                let datas = appData.filterPopAssetsCurrency()
                 if datas.count > index {
-                    let buckets = app_data.filterPopAssetsCurrency()[index]
+                    let buckets = appData.filterPopAssetsCurrency()[index]
 
                     if let baseIndex = AssetConfiguration.market_base_assets.firstIndex(of: buckets.base) {
-                        let markets = app_data.filterQuoteAssetTicker(buckets.base)
+                        let markets = appData.filterQuoteAssetTicker(buckets.base)
                         if let curIndex = markets.firstIndex(of: buckets) {
                             self.coordinator?.openMarket(index: curIndex, currentBaseIndex: baseIndex)
                         }

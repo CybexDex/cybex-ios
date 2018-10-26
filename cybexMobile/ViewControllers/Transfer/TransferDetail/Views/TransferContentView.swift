@@ -44,7 +44,7 @@ class TransferContentView: UIView {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
           }
 
-          if let feeInfo = data.fee, let assetInfo = app_data.assetInfo[feeInfo.asset_id] {
+          if let feeInfo = data.fee, let assetInfo = appData.assetInfo[feeInfo.asset_id] {
             feeView.content_locali = getRealAmount(feeInfo.asset_id, amount: feeInfo.amount).string(digits: assetInfo.precision, roundingMode: .down) + " " + assetInfo.symbol.filterJade
           }
           updateHeight()
@@ -112,7 +112,9 @@ class TransferContentView: UIView {
     let bundle = Bundle(for: type(of: self))
     let nibName = String(describing: type(of: self))
     let nib = UINib.init(nibName: nibName, bundle: bundle)
-    let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+    guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
     addSubview(view)
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]

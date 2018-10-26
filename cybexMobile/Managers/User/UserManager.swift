@@ -73,8 +73,17 @@ extension UserManager {
         return async {
             let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
 
-            if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key, let owner_key = keys.owner_key, let memo_key = keys.memo_key {
-                let params = ["cap": ["id": pinID, "captcha": captcha], "account": ["name": username, "owner_key": owner_key.public_key, "active_key": active_key.public_key, "memo_key": memo_key.public_key, "refcode": "", "referrer": ""]]
+            if let keys = AccountKeys(JSONString: keysString),
+                let active_key = keys.active_key,
+                let owner_key = keys.owner_key,
+                let memo_key = keys.memo_key {
+                let params = ["cap": ["id": pinID, "captcha": captcha],
+                              "account": ["name": username,
+                                          "owner_key": owner_key.public_key,
+                                          "active_key": active_key.public_key,
+                                          "memo_key": memo_key.public_key,
+                                          "refcode": "",
+                                          "referrer": ""]]
 
                 let data = try! await(SimpleHTTPService.requestRegister(params))
                 if data.0 {
@@ -145,8 +154,8 @@ extension UserManager {
                     self.fillOrder.accept(nil)
                 }
                 fillorders = fillorders.filter({
-                    let base_name = app_data.assetInfo[$0.fill_price.base.assetID]
-                    let quote_name = app_data.assetInfo[$0.fill_price.quote.assetID]
+                    let base_name = appData.assetInfo[$0.fill_price.base.assetID]
+                    let quote_name = appData.assetInfo[$0.fill_price.quote.assetID]
                     return base_name != nil && quote_name != nil
                 })
 
@@ -204,8 +213,8 @@ extension UserManager {
                     return
                 }
                 fillorders = fillorders.filter({
-                    let base_name = app_data.assetInfo[$0.fill_price.base.assetID]
-                    let quote_name = app_data.assetInfo[$0.fill_price.quote.assetID]
+                    let base_name = appData.assetInfo[$0.fill_price.base.assetID]
+                    let quote_name = appData.assetInfo[$0.fill_price.quote.assetID]
                     return base_name != nil && quote_name != nil
                 })
 
@@ -319,7 +328,7 @@ extension UserManager {
 
         if let balances = data.balances {
             self.balances.accept(balances.filter({ (balance) -> Bool in
-                let name = app_data.assetInfo[balance.asset_type]
+                let name = appData.assetInfo[balance.asset_type]
                 return name != nil
 //                return (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
                 //        return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
@@ -332,8 +341,8 @@ extension UserManager {
 
         if let limitOrders = data.limitOrder {
             self.limitOrder.accept(limitOrders.filter({ (limitOrder) -> Bool in
-                let base_name = app_data.assetInfo[limitOrder.sellPrice.base.assetID]
-                let quote_name = app_data.assetInfo[limitOrder.sellPrice.quote.assetID]
+                let base_name = appData.assetInfo[limitOrder.sellPrice.base.assetID]
+                let quote_name = appData.assetInfo[limitOrder.sellPrice.quote.assetID]
                 let base_bool = base_name != nil
                 let quote_bool = quote_name != nil
 
@@ -403,7 +412,7 @@ class UserManager {
 
     var refreshTime: TimeInterval = 6 {
         didSet {
-            app_coodinator.repeatFetchPairInfo(.veryLow)
+            appCoodinator.repeatFetchPairInfo(.veryLow)
         }
     }
     var isWithDraw: Bool = false
@@ -455,8 +464,8 @@ class UserManager {
 
         if let limitOrder = limitOrder.value {
             for limitOrder_value in limitOrder {
-                let assetA_info = app_data.assetInfo[limitOrder_value.sellPrice.base.assetID]
-                let assetB_info = app_data.assetInfo[limitOrder_value.sellPrice.quote.assetID]
+                let assetA_info = appData.assetInfo[limitOrder_value.sellPrice.base.assetID]
+                let assetB_info = appData.assetInfo[limitOrder_value.sellPrice.quote.assetID]
 
                 let (base, _) = calculateAssetRelation(assetIDAName: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetIDBName: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
                 let isBuy = base == ((assetA_info != nil) ? assetA_info!.symbol.filterJade : "")
@@ -490,7 +499,7 @@ class UserManager {
 
     private init() {
 
-        app_data.otherRequestRelyData.asObservable()
+        appData.otherRequestRelyData.asObservable()
             .subscribe(onNext: { (_) in
                 DispatchQueue.main.async {
                     if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 && !CybexWebSocketService.shared.overload() {

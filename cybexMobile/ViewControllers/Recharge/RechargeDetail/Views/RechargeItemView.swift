@@ -32,7 +32,7 @@ class RechargeItemView: UIView {
 
     @IBInspectable var name: String = "" {
         didSet {
-            title.localized_text = name.localizedContainer()
+            title.localizedText = name.localizedContainer()
         }
     }
 
@@ -159,13 +159,15 @@ class RechargeItemView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
-            view.layer.cornerRadius = 4.0
-            view.clipsToBounds = true
-            addSubview(view)
-            
-            view.frame = self.bounds
-            view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
         }
+        view.layer.cornerRadius = 4.0
+        view.clipsToBounds = true
+        addSubview(view)
+
+        view.frame = self.bounds
+        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 }

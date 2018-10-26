@@ -330,7 +330,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
 
             self.queue.isSuspended = false
 
-            app_coodinator.getLatestData()
+            appCoodinator.getLatestData()
         }
 
     }

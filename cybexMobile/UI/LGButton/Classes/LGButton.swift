@@ -349,12 +349,12 @@ public class LGButton: UIControl {
 
     var locali: String {
         set {
-            self.titleLbl.localized_text = newValue.localizedContainer()
+            self.titleLbl.localizedText = newValue.localizedContainer()
             self.titleString = newValue.localized()
         }
 
         get {
-            return (self.titleLbl.localized_text?.value() as! String).localized()
+            return (self.titleLbl.localizedText?.value() as! String).localized()
         }
     }
 

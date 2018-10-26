@@ -69,7 +69,7 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
         if let vc = R.storyboard.recode.rechargeRecodeViewController() {
             vc.coordinator = RechargeRecodeCoordinator(rootVC: self.rootVC)
             vc.recordType = .WITHDRAW
-            vc.assetInfo = app_data.assetInfo[assetId]
+            vc.assetInfo = appData.assetInfo[assetId]
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
@@ -148,10 +148,11 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
 
     func getGatewayFee(_ assetId: String, amount: String, address: String, isEOS: Bool) {
         if let memoKey = self.state.property.memoKey.value {
-            let name = app_data.assetInfo[assetId]?.symbol.filterJade
+            let name = appData.assetInfo[assetId]?.symbol.filterJade
+
             let memo = self.state.property.memo.value
             if var amount = amount.toDouble() {
-                let value = pow(10, (app_data.assetInfo[assetId]?.precision)!)
+                let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
                 amount = amount * Double(truncating: value as NSNumber)
 
                 if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId((UserManager.shared.account.value?.id)!)),
@@ -191,15 +192,17 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     func getObjects(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, isEOS: Bool, callback:@escaping (Any)->Void) {
         getChainId { (id) in
             if let memoKey = self.state.property.memoKey.value {
-                let name = app_data.assetInfo[assetId]?.symbol.filterJade
+                let name = appData.assetInfo[assetId]?.symbol.filterJade
+
                 let memo = self.state.property.memo.value
                 let requeset = GetObjectsRequest(ids: [objectID.dynamic_global_property_object.rawValue]) { (infos) in
                     if let infos = infos as? (block_id: String, block_num: String) {
                         if var amount = amount.toDouble() {
-                            let value = pow(10, (app_data.assetInfo[assetId]?.precision)!)
+                            let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
                             amount = amount * Double(truncating: value as NSNumber)
 
-                            let feeAmout = feeAmount.toDouble()! * Double(truncating: pow(10, (app_data.assetInfo[feeId]?.precision)!) as NSNumber)
+                            let feeAmout = feeAmount.toDouble()! * Double(truncating: pow(10, (appData.assetInfo[feeId]?.precision)!) as NSNumber)
+
 
                             let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
                                                                               block_id: infos.block_id,

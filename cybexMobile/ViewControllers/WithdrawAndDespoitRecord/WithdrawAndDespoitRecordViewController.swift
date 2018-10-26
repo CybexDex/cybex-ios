@@ -35,7 +35,7 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
     }
 
     func setupUI() {
-        self.localized_text = R.string.localizable.record_all.key.localizedContainer()
+        self.localizedText = R.string.localizable.record_all.key.localizedContainer()
     }
 
     func setupData() {
@@ -68,7 +68,7 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
 
-            case .loadMore(let page):
+            case .loadMore(_):
                 self.coordinator?.switchPageState(.loading(reason: PageLoadReason.manualLoadMore))
 
             case .noMore:
@@ -79,7 +79,7 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
                 //                self.view.showNoData(<#title#>, icon: <#imageName#>)
                 break
 
-            case .normal(let reason):
+            case .normal(_):
                 //                self.view.hiddenNoData()
                 //
                 //                if reason == PageLoadReason.manualLoadMore {
@@ -90,7 +90,7 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
                 //                }
                 break
 
-            case .error(let error, let reason):
+            case .error(let error, _):
                 self.showToastBox(false, message: error.localizedDescription)
 
                 //                if reason == PageLoadReason.manualLoadMore {
@@ -168,8 +168,6 @@ extension WithdrawAndDespoitRecordViewController: RecordChooseViewControllerDele
             self.headerView.typeInfoView.contentLabel.textColor = UIColor.steel
             self.headerView.typeInfoView.stateImage.image = R.image.ic2()
             self.coordinator?.childrenFetchData(info, index: RecordChooseType.FoudType)
-            break
-        default:
             break
         }
         sender.dismiss(animated: true, completion: nil)

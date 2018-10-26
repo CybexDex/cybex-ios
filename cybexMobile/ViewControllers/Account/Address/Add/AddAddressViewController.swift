@@ -40,7 +40,7 @@ class AddAddressViewController: BaseViewController {
 
     func setupUI() {
         if address_type == .withdraw {
-            self.containerView.asset.content.text = app_data.assetInfo[self.asset]?.symbol.filterJade
+            self.containerView.asset.content.text = appData.assetInfo[self.asset]?.symbol.filterJade
             if self.asset == AssetConfiguration.EOS {
                 self.title = R.string.localizable.address_title_add_eos.key.localized()
                 self.containerView.address.title = R.string.localizable.eos_withdraw_account.key

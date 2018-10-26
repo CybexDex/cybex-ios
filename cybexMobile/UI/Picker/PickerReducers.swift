@@ -14,7 +14,7 @@ func PickerReducer(action: Action, state: PickerState?) -> PickerState {
 }
 
 func PickerPropertyReducer(_ state: PickerPropertyState?, action: Action) -> PickerPropertyState {
-    var state = state ?? PickerPropertyState()
+    let state = state ?? PickerPropertyState()
 
     switch action {
     default:

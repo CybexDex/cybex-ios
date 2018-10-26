@@ -133,15 +133,15 @@ func calculateAssetRelation(assetIDAName: String, assetIDBName: String) -> (base
 
 func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
 
-    guard let assetInfo = app_data.assetInfo[asset] else { return 0 }
+    guard let assetInfo = appData.assetInfo[asset] else { return 0 }
     if AssetConfiguration.order_name.contains(assetInfo.symbol.filterJade) {
-        if let data = app_data.rmb_prices.filter({return $0.name == assetInfo.symbol.filterJade}).first {
+        if let data = appData.rmb_prices.filter({return $0.name == assetInfo.symbol.filterJade}).first {
             return data.rmb_price.toDouble() ?? 0
         }
         return 0
     }
 
-    let tickers = app_data.ticker_data.value.filter({ (ticker) -> Bool in
+    let tickers = appData.ticker_data.value.filter({ (ticker) -> Bool in
         if base == "" {
             return ticker.quote == asset
         } else {
@@ -186,7 +186,7 @@ func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
 
 func getCachedBucket(_ homebucket: HomeBucket) -> BucketMatrix {
     var result: BucketMatrix?
-    var matrixs = app_state.property.matrixs.value
+    var matrixs = appState.property.matrixs.value
 
     if let bucket = matrixs[Pair(base: homebucket.base, quote: homebucket.quote)] {
         result = bucket
@@ -197,7 +197,7 @@ func getCachedBucket(_ homebucket: HomeBucket) -> BucketMatrix {
 }
 
 func getRealAmount(_ id: String, amount: String) -> Decimal {
-    guard let asset = app_data.assetInfo[id] else {
+    guard let asset = appData.assetInfo[id] else {
         return 0
     }
 
@@ -211,7 +211,7 @@ func getRealAmount(_ id: String, amount: String) -> Decimal {
 }
 
 func getRealAmountDouble(_ id: String, amount: String) -> Double {
-    guard let asset = app_data.assetInfo[id] else {
+    guard let asset = appData.assetInfo[id] else {
         return 0
     }
 

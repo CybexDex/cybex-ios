@@ -11,17 +11,17 @@ import SwiftyJSON
 import Localize_Swift
 
 enum CybexError: Error {
-    case NetworkError(code: NetworkErrorCode)
-    case ServiceHTTPError(desc: String)
-    case ServiceFriendlyError(code:Int, desc: JSON)
+    case networkError(code: NetworkErrorCode)
+    case serviceHTTPError(desc: String)
+    case serviceFriendlyError(code:Int, desc: JSON)
 
     var localizedDescription: String {
         switch self {
-        case let .NetworkError(code):
+        case let .networkError(code):
             return code.desc()
-        case let .ServiceHTTPError(desc):
+        case let .serviceHTTPError(desc):
             return desc
-        case let .ServiceFriendlyError(_, desc):
+        case let .serviceFriendlyError(_, desc):
             if let localized = desc.string {
                 return localized
             } else if let dic = desc.dictionaryObject {
@@ -54,11 +54,11 @@ extension CybexError {
 extension CybexError: Equatable {
     static func == (lhs: CybexError, rhs: CybexError) -> Bool {
         switch (lhs, rhs) {
-        case (.NetworkError(let lhsCode), .NetworkError(let rhsCode)):
+        case (.networkError(let lhsCode), .networkError(let rhsCode)):
             return lhsCode.rawValue == rhsCode.rawValue
-        case let (.ServiceHTTPError(lhsCode), .ServiceHTTPError(rhsCode)):
+        case let (.serviceHTTPError(lhsCode), .serviceHTTPError(rhsCode)):
             return lhsCode == rhsCode
-        case let (.ServiceFriendlyError(lhsCode, lhsMsg), .ServiceFriendlyError(rhsCode, rhsMsg)):
+        case let (.serviceFriendlyError(lhsCode, lhsMsg), .serviceFriendlyError(rhsCode, rhsMsg)):
             return lhsCode == rhsCode && lhsMsg == rhsMsg
         default:
             return false

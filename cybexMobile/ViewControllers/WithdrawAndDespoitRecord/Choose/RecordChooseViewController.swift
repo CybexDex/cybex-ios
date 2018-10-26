@@ -85,7 +85,7 @@ class RecordChooseViewController: BaseViewController {
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
 
-            case .loadMore(let page):
+            case .loadMore(_):
                 self.coordinator?.switchPageState(.loading(reason: PageLoadReason.manualLoadMore))
 
             case .noMore:
@@ -96,7 +96,7 @@ class RecordChooseViewController: BaseViewController {
                 //                self.view.showNoData(<#title#>, icon: <#imageName#>)
                 break
 
-            case .normal(let reason):
+            case .normal(_):
                 //                self.view.hiddenNoData()
                 //
                 //                if reason == PageLoadReason.manualLoadMore {
@@ -107,7 +107,7 @@ class RecordChooseViewController: BaseViewController {
                 //                }
                 break
 
-            case .error(let error, let reason):
+            case .error(_, _):
                 //                self.showToastBox(false, message: error.localizedDescription)
 
                 //                if reason == PageLoadReason.manualLoadMore {

@@ -11,7 +11,7 @@ import Foundation
 extension HotAssetView {
     func adapterModelToHotAssetView(_ model: Ticker) {
         self.data = model
-        guard let base_info = app_data.assetInfo[model.base], let quote_info = app_data.assetInfo[model.quote] else {return}
+        guard let base_info = appData.assetInfo[model.base], let quote_info = appData.assetInfo[model.quote] else {return}
         assetName.text = quote_info.symbol.filterJade + "/" + base_info.symbol.filterJade
 
         if model.latest == "0" {

@@ -58,7 +58,7 @@ class PairDetailView: UIView {
             return
         }
 
-        guard let base_info = app_data.assetInfo[ticker.base], let _ = app_data.assetInfo[ticker.quote] else {
+        guard let base_info = appData.assetInfo[ticker.base], let _ = appData.assetInfo[ticker.quote] else {
             return
         }
 
@@ -151,7 +151,9 @@ class PairDetailView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
 
         addSubview(view)
         view.frame = self.bounds

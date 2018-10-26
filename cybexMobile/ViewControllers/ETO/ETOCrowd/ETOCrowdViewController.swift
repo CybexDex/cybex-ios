@@ -76,9 +76,7 @@ class ETOCrowdViewController: BaseViewController {
     }
 
     override func configureObserveState() {
-        coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self] (_) in
-            guard let `self` = self else { return }
-
+        coordinator?.state.pageState.asObservable().subscribe(onNext: { (_) in
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         coordinator?.state.data.asObservable().subscribe(onNext: {[weak self] (model) in
@@ -94,7 +92,7 @@ class ETOCrowdViewController: BaseViewController {
         }).disposed(by: disposeBag)
 
         coordinator?.state.fee.asObservable().subscribe(onNext: {[weak self] (model) in
-            if let `self` = self, let data = model, let feeInfo = app_data.assetInfo[data.asset_id], let feeAmount = data.amount.toDouble()?.string(digits: feeInfo.precision, roundingMode: .down) {
+            if let `self` = self, let data = model, let feeInfo = appData.assetInfo[data.asset_id], let feeAmount = data.amount.toDouble()?.string(digits: feeInfo.precision, roundingMode: .down) {
                 self.contentView.priceLabel.text = feeAmount + " " + feeInfo.symbol.filterJade
             }
         }).disposed(by: disposeBag)

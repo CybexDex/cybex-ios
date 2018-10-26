@@ -125,7 +125,7 @@ extension AppCoordinator {
         let timePassed = (-start.minute * 60 - start.second).double
         start = start.addingTimeInterval(timePassed)
         let filterPairs = pairs.filter { (pair) -> Bool in
-            if let refreshTimes = app_data.pairsRefreshTimes, let oldTime = refreshTimes[pair] {
+            if let refreshTimes = appData.pairsRefreshTimes, let oldTime = refreshTimes[pair] {
                 return curTime - oldTime >= 5
             }
             return true
@@ -176,7 +176,7 @@ extension AppCoordinator {
                 guard let `self` = self else {return}
                 if reachability.connection == .none ||
                     !CybexWebSocketService.shared.checkNetworConnected() {
-                        app_coodinator.fetchPariTimer = nil
+                        appCoodinator.fetchPariTimer = nil
                         timer.pause()
                         return
                 }
@@ -214,20 +214,20 @@ extension AppCoordinator {
                     }).cauterize()
                 }
 
-                if app_coodinator.fetchPariTimer == nil || !(app_coodinator.fetchPariTimer!.state.isRunning) {
+                if appCoodinator.fetchPariTimer == nil || !(appCoodinator.fetchPariTimer!.state.isRunning) {
                     AppConfiguration.shared.appCoordinator.repeatFetchPairInfo(.veryLow)
                 }
 
             }
 
         } else {
-            if app_data.assetInfo.count != AssetConfiguration.shared.unique_ids.count {
+            if appData.assetInfo.count != AssetConfiguration.shared.unique_ids.count {
                 fetchAsset {
                     self.request24hMarkets(AssetConfiguration.shared.asset_ids, priority: .high)
                 }
             }
             request24hMarkets(AssetConfiguration.shared.asset_ids, priority: .high)
-            if app_coodinator.fetchPariTimer == nil || !(app_coodinator.fetchPariTimer!.state.isRunning) {
+            if appCoodinator.fetchPariTimer == nil || !(appCoodinator.fetchPariTimer!.state.isRunning) {
                 AppConfiguration.shared.appCoordinator.repeatFetchPairInfo(.veryLow)
             }
         }

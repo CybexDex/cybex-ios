@@ -12,13 +12,13 @@ import SwiftyUserDefaults
 typealias CommonCallback = () -> Void
 typealias CommonAnyCallback = (Any) -> Void
 
-var app_data: AppPropertyState {
+var appData: AppPropertyState {
     return AppConfiguration.shared.appCoordinator.state.property
 }
-var app_state: AppState {
+var appState: AppState {
     return AppConfiguration.shared.appCoordinator.state
 }
-var app_coodinator: AppCoordinator {
+var appCoodinator: AppCoordinator {
     return AppConfiguration.shared.appCoordinator
 }
 

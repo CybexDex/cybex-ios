@@ -30,7 +30,7 @@ class SettingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.localized_text = R.string.localizable.navSetting.key.localizedContainer()
+        self.localizedText = R.string.localizable.navSetting.key.localizedContainer()
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .always
         }

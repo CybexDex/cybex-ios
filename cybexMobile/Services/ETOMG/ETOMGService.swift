@@ -54,19 +54,19 @@ struct ETOMGService {
                         let result = json["result"]
                         successCallback(result)
                     } else {
-                        errorCallback(CybexError.ServiceFriendlyError(code: json["code"].intValue, desc: json["result"]))
+                        errorCallback(CybexError.serviceFriendlyError(code: json["code"].intValue, desc: json["result"]))
                     }
                 } catch let serverError {
                     if let json = try? JSON(response.mapJSON()) {
                         if json["code"].intValue != 0 {
-                            errorCallback(CybexError.ServiceFriendlyError(code: json["code"].intValue, desc: json["result"]))
+                            errorCallback(CybexError.serviceFriendlyError(code: json["code"].intValue, desc: json["result"]))
                         } else {
-                            failureCallback(CybexError.ServiceHTTPError(desc: serverError.localizedDescription))
+                            failureCallback(CybexError.serviceHTTPError(desc: serverError.localizedDescription))
                         }
                     }
                 }
             case let .failure(error):
-                failureCallback(CybexError.ServiceHTTPError(desc: error.localizedDescription))
+                failureCallback(CybexError.serviceHTTPError(desc: error.localizedDescription))
             }
         }
     }

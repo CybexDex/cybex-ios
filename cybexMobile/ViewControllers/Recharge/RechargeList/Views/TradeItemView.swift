@@ -12,9 +12,10 @@ import Localize_Swift
 import SwiftTheme
 
 class TradeItemView: UIView {
+    
     var data: Any? {
         didSet {
-            if let data = data as? Trade, let info = app_data.assetInfo[data.id] {
+            if let data = data as? Trade, let info = appData.assetInfo[data.id] {
                 
                 self.icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + data.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
                 if info.symbol.filterJade == "NKN"{
@@ -28,7 +29,6 @@ class TradeItemView: UIView {
                             return
                         }
                     }
-                    amount.text = "-"
                 }
             }
         }

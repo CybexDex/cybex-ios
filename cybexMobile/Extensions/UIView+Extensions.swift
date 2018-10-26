@@ -13,16 +13,6 @@ import Localize_Swift
 import ESPullToRefresh
 
 extension UIView {
-    var x: CGFloat {
-        get { return self.frame.origin.x }
-        set { self.frame.origin.x = newValue }
-    }
-
-    var y: CGFloat {
-        get { return self.frame.origin.y }
-        set { self.frame.origin.y = newValue }
-    }
-
     var width: CGFloat {
         get { return self.frame.size.width }
         set { self.frame.size.width = newValue }

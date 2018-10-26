@@ -121,7 +121,9 @@ class TransferView: UIView {
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib.init(nibName: String.init(describing: type(of: self)), bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]

@@ -343,10 +343,6 @@
 		72E2A8F42151FB0C00FBB3CB /* Comprehensive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E2A8F32151FB0C00FBB3CB /* Comprehensive.storyboard */; };
 		72E3A4CC214560580083E417 /* CybexWaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E3A4C9214560580083E417 /* CybexWaitingView.swift */; };
 		72E3A4CD214560580083E417 /* CybexWaitingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72E3A4CA214560580083E417 /* CybexWaitingView.xib */; };
-		72E4DF702147C7BD00D9584B /* ETOUserAgreementCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E4DF6C2147C7BD00D9584B /* ETOUserAgreementCoordinator.swift */; };
-		72E4DF712147C7BD00D9584B /* ETOUserAgreementActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E4DF6D2147C7BD00D9584B /* ETOUserAgreementActions.swift */; };
-		72E4DF722147C7BD00D9584B /* ETOUserAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E4DF6E2147C7BD00D9584B /* ETOUserAgreementViewController.swift */; };
-		72E4DF732147C7BD00D9584B /* ETOUserAgreementReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E4DF6F2147C7BD00D9584B /* ETOUserAgreementReducers.swift */; };
 		72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */; };
 		72EC6A5420F4611500CEAFF6 /* WithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */; };
 		72EC6A5520F4611500CEAFF6 /* EOSWithdrawView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5120F4611500CEAFF6 /* EOSWithdrawView.xib */; };
@@ -406,19 +402,6 @@
 		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
 		73539BA82178A0D7008395AC /* ActiveLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BA72178A0D6008395AC /* ActiveLabel.framework */; };
 		73539BAA2178A391008395AC /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BA92178A390008395AC /* Apollo.framework */; };
-		73539BBA2178A762008395AC /* GestureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BAC2178A761008395AC /* GestureFactory.swift */; };
-		73539BBB2178A762008395AC /* RxGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BAD2178A761008395AC /* RxGestureRecognizerDelegate.swift */; };
-		73539BBC2178A762008395AC /* UIGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BAF2178A761008395AC /* UIGestureRecognizer+RxGesture.swift */; };
-		73539BBD2178A762008395AC /* UISwipeGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BB02178A761008395AC /* UISwipeGestureRecognizer+RxGesture.swift */; };
-		73539BBE2178A762008395AC /* TransformGestureRecognizers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BB12178A761008395AC /* TransformGestureRecognizers.swift */; };
-		73539BBF2178A762008395AC /* UIScreenEdgePanGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BB22178A761008395AC /* UIScreenEdgePanGestureRecognizer+RxGesture.swift */; };
-		73539BC02178A762008395AC /* UIPinchGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BB32178A761008395AC /* UIPinchGestureRecognizer+RxGesture.swift */; };
-		73539BC12178A762008395AC /* UIRotationGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BB42178A761008395AC /* UIRotationGestureRecognizer+RxGesture.swift */; };
-		73539BC22178A762008395AC /* UITapGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BB52178A761008395AC /* UITapGestureRecognizer+RxGesture.swift */; };
-		73539BC32178A762008395AC /* UILongPressGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BB62178A761008395AC /* UILongPressGestureRecognizer+RxGesture.swift */; };
-		73539BC42178A762008395AC /* UIPanGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BB72178A761008395AC /* UIPanGestureRecognizer+RxGesture.swift */; };
-		73539BC52178A762008395AC /* SharedTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BB82178A761008395AC /* SharedTypes.swift */; };
-		73539BC62178A762008395AC /* View+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BB92178A761008395AC /* View+RxGesture.swift */; };
 		73539BC82178A7CB008395AC /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BC72178A7CA008395AC /* AsyncOperation.swift */; };
 		73539BCA2178A978008395AC /* AwaitKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BC92178A978008395AC /* AwaitKit.framework */; };
 		73539BFC2179764E008395AC /* BeareadToast_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BFB2179764D008395AC /* BeareadToast_swift.framework */; };
@@ -511,6 +494,19 @@
 		7398323D2179EED400C4A594 /* cybex_ios_core_cpp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */; };
 		7398BEBF2181BFD3004C042E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398BEBE2181BFD3004C042E /* Style.swift */; };
 		7398BEC32181C1AE004C042E /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398BEC22181C1AE004C042E /* R.generated.swift */; };
+		739EFB5B2181D10E00424061 /* GestureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB4D2181D10E00424061 /* GestureFactory.swift */; };
+		739EFB5C2181D10E00424061 /* RxGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB4E2181D10E00424061 /* RxGestureRecognizerDelegate.swift */; };
+		739EFB5D2181D10E00424061 /* UIGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB502181D10E00424061 /* UIGestureRecognizer+RxGesture.swift */; };
+		739EFB5E2181D10E00424061 /* UISwipeGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB512181D10E00424061 /* UISwipeGestureRecognizer+RxGesture.swift */; };
+		739EFB5F2181D10E00424061 /* TransformGestureRecognizers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB522181D10E00424061 /* TransformGestureRecognizers.swift */; };
+		739EFB602181D10E00424061 /* UIScreenEdgePanGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB532181D10E00424061 /* UIScreenEdgePanGestureRecognizer+RxGesture.swift */; };
+		739EFB612181D10E00424061 /* UIPinchGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB542181D10E00424061 /* UIPinchGestureRecognizer+RxGesture.swift */; };
+		739EFB622181D10E00424061 /* UIRotationGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB552181D10E00424061 /* UIRotationGestureRecognizer+RxGesture.swift */; };
+		739EFB632181D10E00424061 /* UITapGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB562181D10E00424061 /* UITapGestureRecognizer+RxGesture.swift */; };
+		739EFB642181D10E00424061 /* UILongPressGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB572181D10E00424061 /* UILongPressGestureRecognizer+RxGesture.swift */; };
+		739EFB652181D10E00424061 /* UIPanGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB582181D10E00424061 /* UIPanGestureRecognizer+RxGesture.swift */; };
+		739EFB662181D10E00424061 /* SharedTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB592181D10E00424061 /* SharedTypes.swift */; };
+		739EFB672181D10E00424061 /* View+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB5A2181D10E00424061 /* View+RxGesture.swift */; };
 		73D012992159D71800C95896 /* URLNavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D012982159D71800C95896 /* URLNavigationMap.swift */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
@@ -1028,10 +1024,6 @@
 		72E2A8F32151FB0C00FBB3CB /* Comprehensive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Comprehensive.storyboard; sourceTree = "<group>"; };
 		72E3A4C9214560580083E417 /* CybexWaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWaitingView.swift; sourceTree = "<group>"; };
 		72E3A4CA214560580083E417 /* CybexWaitingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CybexWaitingView.xib; sourceTree = "<group>"; };
-		72E4DF6C2147C7BD00D9584B /* ETOUserAgreementCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOUserAgreementCoordinator.swift; sourceTree = "<group>"; };
-		72E4DF6D2147C7BD00D9584B /* ETOUserAgreementActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOUserAgreementActions.swift; sourceTree = "<group>"; };
-		72E4DF6E2147C7BD00D9584B /* ETOUserAgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOUserAgreementViewController.swift; sourceTree = "<group>"; };
-		72E4DF6F2147C7BD00D9584B /* ETOUserAgreementReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOUserAgreementReducers.swift; sourceTree = "<group>"; };
 		72EC6A4F20F4611500CEAFF6 /* EOSWithdrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EOSWithdrawView.swift; sourceTree = "<group>"; };
 		72EC6A5020F4611500CEAFF6 /* WithdrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WithdrawView.xib; sourceTree = "<group>"; };
 		72EC6A5120F4611500CEAFF6 /* EOSWithdrawView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EOSWithdrawView.xib; sourceTree = "<group>"; };
@@ -1093,19 +1085,6 @@
 		73481176210815BF000BF1B8 /* CybexWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebSocketService.swift; sourceTree = "<group>"; };
 		73539BA72178A0D6008395AC /* ActiveLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActiveLabel.framework; path = Carthage/Build/iOS/ActiveLabel.framework; sourceTree = "<group>"; };
 		73539BA92178A390008395AC /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/iOS/Apollo.framework; sourceTree = "<group>"; };
-		73539BAC2178A761008395AC /* GestureFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureFactory.swift; sourceTree = "<group>"; };
-		73539BAD2178A761008395AC /* RxGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxGestureRecognizerDelegate.swift; sourceTree = "<group>"; };
-		73539BAF2178A761008395AC /* UIGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
-		73539BB02178A761008395AC /* UISwipeGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISwipeGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
-		73539BB12178A761008395AC /* TransformGestureRecognizers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformGestureRecognizers.swift; sourceTree = "<group>"; };
-		73539BB22178A761008395AC /* UIScreenEdgePanGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreenEdgePanGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
-		73539BB32178A761008395AC /* UIPinchGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPinchGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
-		73539BB42178A761008395AC /* UIRotationGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIRotationGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
-		73539BB52178A761008395AC /* UITapGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
-		73539BB62178A761008395AC /* UILongPressGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILongPressGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
-		73539BB72178A761008395AC /* UIPanGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPanGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
-		73539BB82178A761008395AC /* SharedTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedTypes.swift; sourceTree = "<group>"; };
-		73539BB92178A761008395AC /* View+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+RxGesture.swift"; sourceTree = "<group>"; };
 		73539BC72178A7CA008395AC /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		73539BC92178A978008395AC /* AwaitKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AwaitKit.framework; path = Carthage/Build/iOS/AwaitKit.framework; sourceTree = "<group>"; };
 		73539BFB2179764D008395AC /* BeareadToast_swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BeareadToast_swift.framework; path = Carthage/Build/iOS/BeareadToast_swift.framework; sourceTree = "<group>"; };
@@ -1204,6 +1183,19 @@
 		7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = cybex_ios_core_cpp.framework; path = Carthage/Build/iOS/cybex_ios_core_cpp.framework; sourceTree = "<group>"; };
 		7398BEBE2181BFD3004C042E /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		7398BEC22181C1AE004C042E /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		739EFB4D2181D10E00424061 /* GestureFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureFactory.swift; sourceTree = "<group>"; };
+		739EFB4E2181D10E00424061 /* RxGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxGestureRecognizerDelegate.swift; sourceTree = "<group>"; };
+		739EFB502181D10E00424061 /* UIGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
+		739EFB512181D10E00424061 /* UISwipeGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISwipeGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
+		739EFB522181D10E00424061 /* TransformGestureRecognizers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformGestureRecognizers.swift; sourceTree = "<group>"; };
+		739EFB532181D10E00424061 /* UIScreenEdgePanGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreenEdgePanGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
+		739EFB542181D10E00424061 /* UIPinchGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPinchGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
+		739EFB552181D10E00424061 /* UIRotationGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIRotationGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
+		739EFB562181D10E00424061 /* UITapGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
+		739EFB572181D10E00424061 /* UILongPressGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILongPressGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
+		739EFB582181D10E00424061 /* UIPanGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPanGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
+		739EFB592181D10E00424061 /* SharedTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedTypes.swift; sourceTree = "<group>"; };
+		739EFB5A2181D10E00424061 /* View+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+RxGesture.swift"; sourceTree = "<group>"; };
 		73BAB6CB839C8F409C3061833343A527 /* LockupAssetsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsSectionView.xib; sourceTree = "<group>"; };
 		73C298F5E89ECC37094FCC901A6B8D49 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		73D012982159D71800C95896 /* URLNavigationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLNavigationMap.swift; sourceTree = "<group>"; };
@@ -1753,10 +1745,6 @@
 				3B824A282135350200D7A4A7 /* ETODetailCoordinator.swift */,
 				3B824A2B2135350200D7A4A7 /* ETODetailReducers.swift */,
 				3B824A2A2135350200D7A4A7 /* ETODetailViewController.swift */,
-				72E4DF6D2147C7BD00D9584B /* ETOUserAgreementActions.swift */,
-				72E4DF6C2147C7BD00D9584B /* ETOUserAgreementCoordinator.swift */,
-				72E4DF6F2147C7BD00D9584B /* ETOUserAgreementReducers.swift */,
-				72E4DF6E2147C7BD00D9584B /* ETOUserAgreementViewController.swift */,
 			);
 			path = ETODetail;
 			sourceTree = "<group>";
@@ -2379,34 +2367,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		73539BAB2178A761008395AC /* RxGesture */ = {
-			isa = PBXGroup;
-			children = (
-				73539BAE2178A761008395AC /* iOS */,
-				73539BAC2178A761008395AC /* GestureFactory.swift */,
-				73539BAD2178A761008395AC /* RxGestureRecognizerDelegate.swift */,
-				73539BB82178A761008395AC /* SharedTypes.swift */,
-				73539BB92178A761008395AC /* View+RxGesture.swift */,
-			);
-			path = RxGesture;
-			sourceTree = "<group>";
-		};
-		73539BAE2178A761008395AC /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				73539BB12178A761008395AC /* TransformGestureRecognizers.swift */,
-				73539BAF2178A761008395AC /* UIGestureRecognizer+RxGesture.swift */,
-				73539BB62178A761008395AC /* UILongPressGestureRecognizer+RxGesture.swift */,
-				73539BB72178A761008395AC /* UIPanGestureRecognizer+RxGesture.swift */,
-				73539BB32178A761008395AC /* UIPinchGestureRecognizer+RxGesture.swift */,
-				73539BB42178A761008395AC /* UIRotationGestureRecognizer+RxGesture.swift */,
-				73539BB22178A761008395AC /* UIScreenEdgePanGestureRecognizer+RxGesture.swift */,
-				73539BB02178A761008395AC /* UISwipeGestureRecognizer+RxGesture.swift */,
-				73539BB52178A761008395AC /* UITapGestureRecognizer+RxGesture.swift */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
 		73539C3B2179A20F008395AC /* URLNavigator */ = {
 			isa = PBXGroup;
 			children = (
@@ -2607,6 +2567,34 @@
 			path = ZYNetworkAccessibity;
 			sourceTree = "<group>";
 		};
+		739EFB4C2181D10E00424061 /* RxGesture */ = {
+			isa = PBXGroup;
+			children = (
+				739EFB4D2181D10E00424061 /* GestureFactory.swift */,
+				739EFB4E2181D10E00424061 /* RxGestureRecognizerDelegate.swift */,
+				739EFB4F2181D10E00424061 /* iOS */,
+				739EFB592181D10E00424061 /* SharedTypes.swift */,
+				739EFB5A2181D10E00424061 /* View+RxGesture.swift */,
+			);
+			path = RxGesture;
+			sourceTree = "<group>";
+		};
+		739EFB4F2181D10E00424061 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				739EFB502181D10E00424061 /* UIGestureRecognizer+RxGesture.swift */,
+				739EFB512181D10E00424061 /* UISwipeGestureRecognizer+RxGesture.swift */,
+				739EFB522181D10E00424061 /* TransformGestureRecognizers.swift */,
+				739EFB532181D10E00424061 /* UIScreenEdgePanGestureRecognizer+RxGesture.swift */,
+				739EFB542181D10E00424061 /* UIPinchGestureRecognizer+RxGesture.swift */,
+				739EFB552181D10E00424061 /* UIRotationGestureRecognizer+RxGesture.swift */,
+				739EFB562181D10E00424061 /* UITapGestureRecognizer+RxGesture.swift */,
+				739EFB572181D10E00424061 /* UILongPressGestureRecognizer+RxGesture.swift */,
+				739EFB582181D10E00424061 /* UIPanGestureRecognizer+RxGesture.swift */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
 		73D012972159D70500C95896 /* Route */ = {
 			isa = PBXGroup;
 			children = (
@@ -2681,9 +2669,9 @@
 		8B5274A9974EFCDE3D932E9EA52C257A /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				739EFB4C2181D10E00424061 /* RxGesture */,
 				73539C522179A281008395AC /* DNSPageView */,
 				BF3F4A11835F406941DE98690F1996FF /* Jdenticon */,
-				73539BAB2178A761008395AC /* RxGesture */,
 				73539C3B2179A20F008395AC /* URLNavigator */,
 				73539BC72178A7CA008395AC /* AsyncOperation.swift */,
 				73C298F5E89ECC37094FCC901A6B8D49 /* Operators.swift */,
@@ -3669,7 +3657,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\necho \"ok\"\nswiftlint\nelse\necho \"warning: SwiftLint not installed, please brew install SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\necho \"ok\"\n#swiftlint\nelse\necho \"warning: SwiftLint not installed, please brew install SwiftLint\"\nfi\n";
 		};
 		BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3729,6 +3717,7 @@
 				221C6176213926570021C007 /* ETORecordListActions.swift in Sources */,
 				305DB17562E3D02F04E0122C1C4674A4 /* AccountAssetOperationsItemView.swift in Sources */,
 				65A0AB87E09E879EFAFA04DBA6B15D3E /* AccountCoordinator.swift in Sources */,
+				739EFB602181D10E00424061 /* UIScreenEdgePanGestureRecognizer+RxGesture.swift in Sources */,
 				728C2808215A36F70097840A /* RecordChooseActions.swift in Sources */,
 				C37CA15215CBB1B064E0514AB9D0EFE5 /* AccountOpenedOrdersView.swift in Sources */,
 				225746DE210707DD0017FA1A /* PickerReducers.swift in Sources */,
@@ -3737,10 +3726,10 @@
 				7386F2D42121735800ABC924 /* AddressHomeTableViewCell.swift in Sources */,
 				9708F7C8EA5B8E107E937306846BE6F0 /* AccountPortfolioCellView.swift in Sources */,
 				32BED01405F6D7B22B348057E0BDE3C8 /* AccountPortfolioView.swift in Sources */,
+				739EFB622181D10E00424061 /* UIRotationGestureRecognizer+RxGesture.swift in Sources */,
 				72199DA92104680000575226 /* TransferContentView.swift in Sources */,
 				7307A921212518DC00BD6444 /* MapIcon.swift in Sources */,
 				728C281B215B6D6E0097840A /* AnnounceViewAdapter.swift in Sources */,
-				73539BC52178A762008395AC /* SharedTypes.swift in Sources */,
 				E0AD8E2E835D84754C63BA76FBA8582E /* AccountReducers.swift in Sources */,
 				7267DA1521351D40004AF9AF /* ETOProjectViewAdapter.swift in Sources */,
 				C44F04354B1B9F8051BA2651AC620D65 /* AccountRootCoordinator.swift in Sources */,
@@ -3760,6 +3749,7 @@
 				AAEB2ADE1A954767CBCDED7BE011631A /* BaseTabbarViewController.swift in Sources */,
 				E173B41881E536F07501B0784F9660CF /* BaseTableViewCell.swift in Sources */,
 				7217B07C2122AAFD00608531 /* AddAddressCoordinator.swift in Sources */,
+				739EFB5D2181D10E00424061 /* UIGestureRecognizer+RxGesture.swift in Sources */,
 				7204FFBF2153A0FD00EB0FC7 /* ComprehensiveBlockItemView.swift in Sources */,
 				3B0EB65A210313B200F19C31 /* AccountTableHeadView.swift in Sources */,
 				7386F2A32121665100ABC924 /* AddressHomeCoordinator.swift in Sources */,
@@ -3789,7 +3779,6 @@
 				73539C492179A210008395AC /* UIViewController+TopMostViewController.swift in Sources */,
 				188394B25D1EF3596A01900469FACBFB /* BusinessTitleView.swift in Sources */,
 				7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */,
-				73539BC22178A762008395AC /* UITapGestureRecognizer+RxGesture.swift in Sources */,
 				221EC2382105B1930059F856 /* GrowContentView.swift in Sources */,
 				221EC2392105B1930059F856 /* TitleTextfieldView.swift in Sources */,
 				C0AC3C1A58448D06655DCE0994FDC33A /* BusinessView.swift in Sources */,
@@ -3820,7 +3809,6 @@
 				7F38CC71354724DD10BBC3E8BF37C44A /* CBMAModel.swift in Sources */,
 				7267DA2D21364BF7004AF9AF /* ETOHomeBannerViewAdapter.swift in Sources */,
 				51ED56491B9169BC8F1E25548D3387D8 /* CBMAVOLUMEModel.swift in Sources */,
-				73539BBF2178A762008395AC /* UIScreenEdgePanGestureRecognizer+RxGesture.swift in Sources */,
 				7386F2BF21216B9E00ABC924 /* WithdrawAddressCoordinator.swift in Sources */,
 				221C616D2137FCCF0021C007 /* ImageShareActions.swift in Sources */,
 				E13AE68F78264232722CD68636FC433B /* CGContextExtension.swift in Sources */,
@@ -3833,7 +3821,6 @@
 				BE882BD38F3D40A56E08366BC6C20DDC /* CybexActionView.swift in Sources */,
 				7267DA2121363BEE004AF9AF /* ETOHomeViewAdapter.swift in Sources */,
 				50C985D347323594C1A8239536E6AAAD /* CybexAlertView.swift in Sources */,
-				73539BBB2178A762008395AC /* RxGestureRecognizerDelegate.swift in Sources */,
 				B708A685A32CF984A16E8AA133B5032A /* CybexLabel.swift in Sources */,
 				C96D0912126309ECA43CED968127E06E /* CybexPasswordView.swift in Sources */,
 				C4B9965B38DBF143FD1862CF88F9DAE1 /* CybexTextView.swift in Sources */,
@@ -3890,7 +3877,6 @@
 				7386F2AF21216B2200ABC924 /* TransferAddressHomeCoordinator.swift in Sources */,
 				4420DD3F31DC377E0DB1DEC13E7708A5 /* HomeCoordinator.swift in Sources */,
 				7307A91D212518DC00BD6444 /* FontLoader.swift in Sources */,
-				73539BC62178A762008395AC /* View+RxGesture.swift in Sources */,
 				3B0EB659210313B200F19C31 /* NormalContentCell.swift in Sources */,
 				8C20E983876A75B5AF1B2B1CC5B7FA6C /* HomePairCell.swift in Sources */,
 				3D400D51F52AE73941E3134046491BA5 /* HomePairView.swift in Sources */,
@@ -3924,13 +3910,11 @@
 				80258D6F4C94ACC78C20B5ACE8BEAD2F /* LockupAssetsReducers.swift in Sources */,
 				85D46A1F0D3BBF12CF72903D466D9239 /* LockupAssetsSectionView.swift in Sources */,
 				B2B05000B81768D84E3FBE9B46392133 /* LockupAssetsView.swift in Sources */,
-				72E4DF702147C7BD00D9584B /* ETOUserAgreementCoordinator.swift in Sources */,
 				7267DA0821350327004AF9AF /* ETOViewController.swift in Sources */,
 				221EC2352105B1930059F856 /* TitleTextView.swift in Sources */,
 				728C280F215A3A540097840A /* RecordChooseCell.swift in Sources */,
 				6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */,
 				8DFD3022184642B3A8D4D8A8FE04F655 /* LockupProgressView.swift in Sources */,
-				73539BC12178A762008395AC /* UIRotationGestureRecognizer+RxGesture.swift in Sources */,
 				3BF5B7E42134F5A800E8BFC9 /* ETODetailHeaderViewAdapter.swift in Sources */,
 				AF84FCBA2E7219D1FC633DA7881BD0ED /* MarketActions.swift in Sources */,
 				3B0EB652210313B200F19C31 /* YourPortfolioTableHeadView.swift in Sources */,
@@ -3952,12 +3936,11 @@
 				41143CEDF6A8910D9C2E8BCEE8C47A38 /* MyHistoryViewController.swift in Sources */,
 				7307A91E212518DC00BD6444 /* Iconic.swift in Sources */,
 				724C5D4E2153956900FF1DE7 /* ComprehensiveItemView.swift in Sources */,
-				73539BC02178A762008395AC /* UIPinchGestureRecognizer+RxGesture.swift in Sources */,
 				3B0EB65B210313B200F19C31 /* YourPortfolioHandleView.swift in Sources */,
 				CD017D1C374A5B06D3ECEC24936E0911 /* MyOpenedOrdersView.swift in Sources */,
 				D3008B984211AFE152859658DC6B773B /* NSNotification+Extensions.swift in Sources */,
 				031F69CC95D2906A4F8F4063776327F6 /* NSObject+Extensions.swift in Sources */,
-				72E4DF732147C7BD00D9584B /* ETOUserAgreementReducers.swift in Sources */,
+				739EFB652181D10E00424061 /* UIPanGestureRecognizer+RxGesture.swift in Sources */,
 				7267DA2221363BEE004AF9AF /* ETOHomeView.swift in Sources */,
 				009625463316961A6BB07A49EB88D5D5 /* NavCoordinator.swift in Sources */,
 				8E9524F703A8466022C2D28281507174 /* NetworkBroadcastAPI.swift in Sources */,
@@ -3974,8 +3957,8 @@
 				7217B07D2122AAFD00608531 /* AddAddressActions.swift in Sources */,
 				3B0EB655210313B200F19C31 /* AccountContentView.swift in Sources */,
 				26827458BC8C2CF5494505DA58315BBF /* OpenedOrdersHeaderView.swift in Sources */,
+				739EFB612181D10E00424061 /* UIPinchGestureRecognizer+RxGesture.swift in Sources */,
 				733714B12122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift in Sources */,
-				73539BBE2178A762008395AC /* TransformGestureRecognizers.swift in Sources */,
 				6DBCCB0ED729AC68AF493B54C15A81CF /* OpenedOrdersReducers.swift in Sources */,
 				729B869C2154C71300C6E0E4 /* ComprehensiveItemsView.swift in Sources */,
 				1DCCD247499C6FA4753D44CA869E6EB4 /* OpenedOrdersStatesView.swift in Sources */,
@@ -3995,6 +3978,7 @@
 				72DBCA7621391A4300905303 /* CybexWebViewController.swift in Sources */,
 				73539BC82178A7CB008395AC /* AsyncOperation.swift in Sources */,
 				4C5E6FF343C8DA25EC51F44EF725069E /* OrderBookCell.swift in Sources */,
+				739EFB5B2181D10E00424061 /* GestureFactory.swift in Sources */,
 				D898B818223D8DD3B304D2D7F5A3E2AB /* OrderBookCellView.swift in Sources */,
 				7267DA0921350327004AF9AF /* ETOReducers.swift in Sources */,
 				72199D79210450C900575226 /* RecodeCell.swift in Sources */,
@@ -4026,7 +4010,8 @@
 				ED57B29BDB18C8B97035E7DA20DF26E5 /* RechargeActions.swift in Sources */,
 				665FBB42152A37B183D011D45A4A0F22 /* RechargeCoordinator.swift in Sources */,
 				7386F2C821216FC700ABC924 /* SectionCornerViewView.swift in Sources */,
-				72E4DF722147C7BD00D9584B /* ETOUserAgreementViewController.swift in Sources */,
+				739EFB5C2181D10E00424061 /* RxGestureRecognizerDelegate.swift in Sources */,
+				739EFB5F2181D10E00424061 /* TransformGestureRecognizers.swift in Sources */,
 				10F92CEABF192DAC227A5005DD4F12BF /* RechargeDetailActions.swift in Sources */,
 				133E7DE8927D9AD19315D14E638939BE /* RechargeDetailCoordinator.swift in Sources */,
 				D1C63B5AAC5552A99528E306AC7F57E0 /* RechargeDetailReducers.swift in Sources */,
@@ -4044,7 +4029,6 @@
 				60FB6241E99099A751F12BD01130832D /* RegisterActions.swift in Sources */,
 				D1A397322CB34E638C9DFE14F5C0B4BC /* RegisterCoordinator.swift in Sources */,
 				89BE803D714EF0B7126DCF66439F86A9 /* RegisterReducers.swift in Sources */,
-				73539BBD2178A762008395AC /* UISwipeGestureRecognizer+RxGesture.swift in Sources */,
 				0D989B23FC27CC92FAF32E53754D6330 /* RegisterViewController.swift in Sources */,
 				5FA8151B70B4FFED7B6D2206D2E13F14 /* SettingActions.swift in Sources */,
 				DC9C7889A0A2E47D006896DEAE7B534C /* SettingCell.swift in Sources */,
@@ -4055,6 +4039,8 @@
 				73D012992159D71800C95896 /* URLNavigationMap.swift in Sources */,
 				72EC6A5920F4612200CEAFF6 /* RechargeView.swift in Sources */,
 				221C614E213535CC0021C007 /* ShareView.swift in Sources */,
+				739EFB662181D10E00424061 /* SharedTypes.swift in Sources */,
+				739EFB642181D10E00424061 /* UILongPressGestureRecognizer+RxGesture.swift in Sources */,
 				73539C512179A210008395AC /* URLMatchResult.swift in Sources */,
 				3B0EB654210313B200F19C31 /* NormalCellView.swift in Sources */,
 				D3551784962B5675BB3A8DD9DA31F698 /* SettingDetailViewController.swift in Sources */,
@@ -4095,8 +4081,8 @@
 				894D811521F19A8670D0A6C61B11C600 /* TradeHistoryViewController.swift in Sources */,
 				73587EAC2137C057006CF8A6 /* ETOCrowdCoordinator.swift in Sources */,
 				F8B52B20C9737C584DECE7D52285A92D /* TradeItemView.swift in Sources */,
-				72E4DF712147C7BD00D9584B /* ETOUserAgreementActions.swift in Sources */,
 				728C2807215A36F70097840A /* RecordChooseCoordinator.swift in Sources */,
+				739EFB5E2181D10E00424061 /* UISwipeGestureRecognizer+RxGesture.swift in Sources */,
 				07D976BEA2F5A840607DE4D526DB1420 /* TradeLineView.swift in Sources */,
 				221EC24C2105CF310059F856 /* TransferCoordinator.swift in Sources */,
 				73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */,
@@ -4107,6 +4093,7 @@
 				72968D212158CEAC00B0AA77 /* WithdrawAndDespoitRecordCoordinator.swift in Sources */,
 				728C2826215B80480097840A /* AnnounceScrollViewAdapter.swift in Sources */,
 				7217B07F2122AAFD00608531 /* AddAddressReducers.swift in Sources */,
+				739EFB672181D10E00424061 /* View+RxGesture.swift in Sources */,
 				221C617C213926A50021C007 /* ETORecordCell.swift in Sources */,
 				7386F2B121216B2200ABC924 /* TransferAddressHomeViewController.swift in Sources */,
 				7267DA0721350327004AF9AF /* ETOActions.swift in Sources */,
@@ -4119,6 +4106,7 @@
 				73539C5C2179A282008395AC /* DNSPageView.swift in Sources */,
 				221C616E2137FCCF0021C007 /* ImageShareViewController.swift in Sources */,
 				73539C4D2179A210008395AC /* URLConvertible.swift in Sources */,
+				739EFB632181D10E00424061 /* UITapGestureRecognizer+RxGesture.swift in Sources */,
 				7386F2C021216B9E00ABC924 /* WithdrawAddressReducers.swift in Sources */,
 				A0205CDF8595D10C5D9367EBCBBA714A /* UIColor+Additions.swift in Sources */,
 				72B42E7D217723DD00587403 /* PairDetailDateViewView.swift in Sources */,
@@ -4140,7 +4128,6 @@
 				C2728D465891E65690FBF4E868796852 /* UIView+Extensions.swift in Sources */,
 				01D3990C8F03B94C2207F37FF3C7C895 /* UIViewController+Extension.swift in Sources */,
 				221C6182213940140021C007 /* ETORecordListViewView.swift in Sources */,
-				73539BBC2178A762008395AC /* UIGestureRecognizer+RxGesture.swift in Sources */,
 				696EB2454DD46A9C497C7C719B12BF12 /* UserDefaults.swift in Sources */,
 				73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */,
 				73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */,
@@ -4161,19 +4148,16 @@
 				EC446CED4809CD57D338FB866A5AE631 /* YourPorfolioView.swift in Sources */,
 				7386F2A22121665100ABC924 /* AddressHomeActions.swift in Sources */,
 				60502E37A09ABFC6DD95A24F6A855B65 /* YourPortfolioActions.swift in Sources */,
-				73539BC42178A762008395AC /* UIPanGestureRecognizer+RxGesture.swift in Sources */,
 				480BE6AB9D3A7CCE75BCB6BBF9525FFD /* YourPortfolioCell.swift in Sources */,
 				728C2809215A36F70097840A /* RecordChooseViewController.swift in Sources */,
 				73587EAB2137C057006CF8A6 /* ETOCrowdActions.swift in Sources */,
 				ACCB7267D22FD99349666A34A7079245 /* YourPortfolioReducers.swift in Sources */,
 				8CC6E7829BCE9117984B6237F79C5180 /* debounce-throttle.swift in Sources */,
-				73539BBA2178A762008395AC /* GestureFactory.swift in Sources */,
 				728C15792129AE9300053555 /* CybexShowTitleView.swift in Sources */,
 				72EC6A5320F4611500CEAFF6 /* EOSWithdrawView.swift in Sources */,
 				72E2A8ED2151F9DB00FBB3CB /* ComprehensiveCoordinator.swift in Sources */,
 				7307A91F212518DC00BD6444 /* IonIcons.swift in Sources */,
 				7386F2B821216B3A00ABC924 /* WithdrawAddressHomeReducers.swift in Sources */,
-				73539BC32178A762008395AC /* UILongPressGestureRecognizer+RxGesture.swift in Sources */,
 				221C616F2137FCCF0021C007 /* ImageShareReducers.swift in Sources */,
 				225746DD210707DD0017FA1A /* PickerViewController.swift in Sources */,
 			);
@@ -4317,7 +4301,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Z4LN46787D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

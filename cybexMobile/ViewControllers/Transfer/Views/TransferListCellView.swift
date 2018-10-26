@@ -27,7 +27,7 @@ class TransferListCellView: UIView {
 
                 self.address.text = transferAddress.0 == true ? transferAddress.1.first?.name : addressString
                 self.state.text = data.isSend ? R.string.localizable.transfer_send.key.localized() : R.string.localizable.transfer_done.key.localized()
-                if let transferAmount = data.amount, let assetInfo = app_data.assetInfo[transferAmount.asset_id] {
+                if let transferAmount = data.amount, let assetInfo = appData.assetInfo[transferAmount.asset_id] {
                     self.amount.text = getRealAmount(transferAmount.asset_id, amount: transferAmount.amount).string(digits: assetInfo.precision, roundingMode: .down) + " " + assetInfo.symbol.filterJade
                     if data.isSend {
                         self.amount.text = "-" + self.amount.text!
@@ -85,7 +85,9 @@ class TransferListCellView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]

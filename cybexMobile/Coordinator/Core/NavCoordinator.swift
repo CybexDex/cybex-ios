@@ -15,7 +15,11 @@ protocol NavProtocol {
     func openWebVC(url: URL)
 
     func pushVC<T: NavCoordinator>(_ coordinator: T.Type, animated: Bool, context: RouteContext?)
-    func presentVC<T: NavCoordinator>(_ coordinator: T.Type, animated: Bool, context: RouteContext?, navSetup: ((BaseNavigationController) -> Void)?, presentSetup:((_ top: BaseNavigationController, _ target: BaseNavigationController) -> Void)?)
+    func presentVC<T: NavCoordinator>(_ coordinator: T.Type,
+                                      animated: Bool,
+                                      context: RouteContext?,
+                                      navSetup: ((BaseNavigationController) -> Void)?,
+                                      presentSetup:((_ top: BaseNavigationController, _ target: BaseNavigationController) -> Void)?)
 
     func register()
 }

@@ -74,7 +74,7 @@ class ComprehensiveViewController: BaseViewController {
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
 
-            case .loadMore(let page):
+            case .loadMore(_):
                 self.coordinator?.switchPageState(.loading(reason: PageLoadReason.manualLoadMore))
 
             case .noMore:
@@ -83,16 +83,16 @@ class ComprehensiveViewController: BaseViewController {
             case .noData:
                 break
 
-            case .normal(let reason):
+            case .normal(_):
 
                 break
 
-            case .error(let error, let reason):
+            case .error(let error, _):
                 self.showToastBox(false, message: error.localizedDescription)
             }
         }).disposed(by: disposeBag)
 
-        app_data.ticker_data.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
+        appData.ticker_data.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
             return tickers.count == AssetConfiguration.shared.asset_ids.count
             }.subscribe(onNext: { [weak self](tickers) in
                 guard let `self` = self else { return }
@@ -188,7 +188,7 @@ extension ComprehensiveViewController {
     func openUrl(_ url: String) {
         if url.contains("cybexapp://") {
             if !UserManager.shared.isLoginIn {
-                app_coodinator.showLogin()
+                appCoodinator.showLogin()
                 return
             }
             openPage(url)

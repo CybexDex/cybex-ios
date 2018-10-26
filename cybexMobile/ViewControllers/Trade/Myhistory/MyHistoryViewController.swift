@@ -39,7 +39,7 @@ class MyHistoryViewController: BaseViewController {
     }
 
     func setupUI() {
-        self.localized_text = R.string.localizable.my_history_title.key.localizedContainer()
+        self.localizedText = R.string.localizable.my_history_title.key.localizedContainer()
         let name = String.init(describing: MyHistoryCell.self)
 
         tableView.register(UINib(nibName: name, bundle: nil), forCellReuseIdentifier: name)

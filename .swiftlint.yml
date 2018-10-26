@@ -2,6 +2,7 @@ included:
   - cybexMobile
 excluded:
   - cybexMobile/addons
+  - cybexMobile/Services/GraphQL
 cyclomatic_complexity:
   - 10
   - 30

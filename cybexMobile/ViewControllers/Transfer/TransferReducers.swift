@@ -23,7 +23,7 @@ func TransferReducer(action: Action, state: TransferState?) -> TransferState {
     state.fee.accept(action.fee)
   case let action as SetToAccountAction:
     state.to_account.accept(action.account)
-  case let action as ResetDataAction:
+  case _ as ResetDataAction:
     state.accountValid.accept(.unValided)
     state.amountValid.accept(false)
     state.balance.accept(nil)
@@ -36,7 +36,7 @@ func TransferReducer(action: Action, state: TransferState?) -> TransferState {
     state.account.accept(action.account.address)
     state.accountValid.accept(AccountValidStatus.validSuccessed)
 
-  case let action as CleanToAccountAction:
+  case _ as CleanToAccountAction:
     state.to_account.accept(nil)
   default:
     break

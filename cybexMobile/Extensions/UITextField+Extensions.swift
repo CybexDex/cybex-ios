@@ -30,12 +30,15 @@ class ImageTextField: UITextField {
 
   @IBInspectable var locali: String {
     set {
-      localized_text = newValue.localizedContainer()
+      localizedText = newValue.localizedContainer()
       updateView()
     }
 
     get {
-      return (localized_text?.value() as! String).localized()
+        if let val = localizedText?.value() as? String {
+            return val.localized()
+        }
+        return ""
     }
   }
 

@@ -106,10 +106,12 @@ class EOSWithdrawView: UIView {
     func loadFromXIB() {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-        if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
-            addSubview(view)
-            view.frame = self.bounds
-            view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
         }
+        addSubview(view)
+        view.frame = self.bounds
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
 }

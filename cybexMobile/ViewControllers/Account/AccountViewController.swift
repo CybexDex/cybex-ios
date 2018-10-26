@@ -134,7 +134,7 @@ extension AccountViewController {
 
   @objc func login(_ data: [String: Any]) {
     if !UserManager.shared.isLoginIn {
-      app_coodinator.showLogin()
+      appCoodinator.showLogin()
     }
   }
 
@@ -143,32 +143,32 @@ extension AccountViewController {
     switch index {
     case 0:
       if !UserManager.shared.isLoginIn {
-        app_coodinator.showLogin()
+        appCoodinator.showLogin()
       } else {
 
         self.coordinator?.openYourProtfolio()
       }
     case 1:
       if !UserManager.shared.isLoginIn {
-        app_coodinator.showLogin()
+        appCoodinator.showLogin()
       } else {
         self.coordinator?.openRecharge()
       }
     case 2:
         if !UserManager.shared.isLoginIn {
-            app_coodinator.showLogin()
+            appCoodinator.showLogin()
         } else {
             self.coordinator?.openAddressManager()
         }
     case 3:
       if !UserManager.shared.isLoginIn {
-        app_coodinator.showLogin()
+        appCoodinator.showLogin()
       } else {
         self.coordinator?.openOpenedOrders()
       }
     default:
       if !UserManager.shared.isLoginIn {
-        app_coodinator.showLogin()
+        appCoodinator.showLogin()
       } else {
         openLockupAssets([:])
       }

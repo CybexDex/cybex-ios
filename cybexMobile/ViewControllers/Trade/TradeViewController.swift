@@ -80,7 +80,7 @@ class TradeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if app_data.ticker_data.value.count == 0 {
+        if appData.ticker_data.value.count == 0 {
             return
         }
         if self.isVisible {
@@ -125,7 +125,7 @@ class TradeViewController: BaseViewController {
     }
 
     func getPairInfo() {
-        guard let base_info = app_data.assetInfo[pair.base], let quote_info = app_data.assetInfo[pair.quote] else {
+        guard let base_info = appData.assetInfo[pair.base], let quote_info = appData.assetInfo[pair.quote] else {
             self.info = nil
             return
         }
@@ -137,7 +137,7 @@ class TradeViewController: BaseViewController {
     }
 
     @objc override func leftAction(_ sender: UIButton) {
-        if let baseIndex = AssetConfiguration.market_base_assets.index(of: pair.base), let index = app_data.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+        if let baseIndex = AssetConfiguration.market_base_assets.index(of: pair.base), let index = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
             return ticker.base == pair.base && ticker.quote == pair.quote
         }) {
             self.coordinator?.openMarket(index: index, currentBaseIndex: baseIndex)
@@ -149,9 +149,9 @@ class TradeViewController: BaseViewController {
     }
 
     override func configureObserveState() {
-        app_data.otherRequestRelyData.asObservable()
+        appData.otherRequestRelyData.asObservable()
             .subscribe(onNext: { (_) in
-                if app_data.ticker_data.value.count == 0 {
+                if appData.ticker_data.value.count == 0 {
                     return
                 }
 
@@ -202,7 +202,7 @@ class TradeViewController: BaseViewController {
 
 extension TradeViewController: TradeNavTitleViewDelegate {
     @discardableResult func sendEventActionWith() -> Bool {
-        if app_data.ticker_data.value.count == 0 {
+        if appData.ticker_data.value.count == 0 {
             return false
         }
 

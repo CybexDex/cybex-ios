@@ -290,7 +290,10 @@ struct GetTickerRequest: JSONRPCKit.Request, JSONRPCResponse {
 
     func transferResponse(from resultObject: Any) throws -> Any {
         let data = JSON(resultObject).dictionaryObject
-        let ticker = Ticker.deserialize(from: data)
-        return ticker ?? nil
+        if let ticker = Ticker.deserialize(from: data) {
+            return ticker
+        }
+
+        return Ticker()
     }
 }

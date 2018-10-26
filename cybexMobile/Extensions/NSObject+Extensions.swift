@@ -42,8 +42,8 @@ private var canrepeatKey: UInt8 = 3
 extension NSObject {
     var store: [String: Any] {
         get {
-            if let storeData = objc_getAssociatedObject(self, &storeKey) {
-                return storeData as! [String: Any]
+            if let storeData = objc_getAssociatedObject(self, &storeKey), let data = storeData as? [String: Any] {
+                return data
             }
             return [:]
         }
@@ -54,8 +54,8 @@ extension NSObject {
 
     var canRepeatContainer: [String: Bool] {
         get {
-            if let storeData = objc_getAssociatedObject(self, &throttleKey) {
-                return storeData as! [String: Bool]
+            if let storeData = objc_getAssociatedObject(self, &throttleKey), let data = storeData as? [String: Bool] {
+                return data
             }
             return [:]
         }
@@ -66,8 +66,8 @@ extension NSObject {
 
     var canRepeat: Bool {
         get {
-            if let storeData = objc_getAssociatedObject(self, &canrepeatKey) {
-                return storeData as! Bool
+            if let storeData = objc_getAssociatedObject(self, &canrepeatKey) as? Bool {
+                return storeData
             }
             return true
         }
@@ -107,9 +107,6 @@ extension TypeName {
         let type = String(describing: self)
         return type
     }
-}
-
-extension UIViewController: TypeName {
 }
 
 extension NSObject: TypeName {

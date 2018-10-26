@@ -31,7 +31,7 @@ func lockupAssteToLockUpAssetsDate(datas: [LockUpAssetsMData]) -> LockUpAssetsVM
     for data in datas {
         let quote  = data.balance.assetID
         let amount = data.balance.amount
-        if let assetsInfo = app_data.assetInfo[quote] {
+        if let assetsInfo = appData.assetInfo[quote] {
 //            let result = changeToETHAndCYB(quote)
             // 目前显示的是针对ETH的换算
             var count = "--"

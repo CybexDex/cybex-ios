@@ -42,7 +42,7 @@ class RechargeDetailViewController: BaseViewController {
         didSet {
             if let trade = self.trade {
                 self.balance = getBalanceWithAssetId(trade.id)
-                self.precision = app_data.assetInfo[trade.id]?.precision
+                self.precision = appData.assetInfo[trade.id]?.precision
                 self.isEOS = trade.id == AssetConfiguration.EOS
             }
         }
@@ -59,7 +59,7 @@ class RechargeDetailViewController: BaseViewController {
     var isEOS: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let trade = self.trade, let trade_Info = app_data.assetInfo[trade.id] {
+        if let trade = self.trade, let trade_Info = appData.assetInfo[trade.id] {
             self.title = trade_Info.symbol.filterJade + R.string.localizable.recharge_title.key.localized()
             
             self.startLoading()
@@ -134,12 +134,12 @@ class RechargeDetailViewController: BaseViewController {
             .asObservable()
             .subscribe(onNext: { [weak self](_) in
                 guard let `self` = self else { return }
-                
                 if let text = self.contentView.amountView.content.text,
                     var amount = text.toDouble(),
                     amount >= 0,
                     let balance = self.balance,
-                    let balanceInfo = app_data.assetInfo[balance.asset_type] {
+                    let balanceInfo = appData.assetInfo[balance.asset_type] {
+                    
                     if let coordinator =  self.coordinator, let value = coordinator.state.property.data.value, let precision = value.precision {
                         self.precision = precision
                         self.contentView.amountView.content.text = checkMaxLength(text, maxLength: value.precision ?? balanceInfo.precision)
@@ -169,9 +169,10 @@ class RechargeDetailViewController: BaseViewController {
                         self.contentView.addressView.addressState = .Fail
                         return
                     }
-                    if let balance = self.balance, let balanceInfo = app_data.assetInfo[balance.asset_type] {
+                    if let balance = self.balance, let balanceInfo = appData.assetInfo[balance.asset_type] {
                         let assetName = balanceInfo.symbol.filterJade
                         self.contentView.addressView.addressState = .Loading
+                        
                         RechargeDetailCoordinator.verifyAddress(assetName, address: address, callback: { (success) in
                             if success {
                                 self.isTrueAddress = true
@@ -241,9 +242,10 @@ class RechargeDetailViewController: BaseViewController {
             if let precision = data.precision {
                 self.precision = precision
             }
-            if let trade = self.trade, let tradeInfo = app_data.assetInfo[trade.id], let precision = self.precision, let balance = self.balance {
-                self.contentView.insideFee.text = data.fee.string(digits: precision) + " " + tradeInfo.symbol.filterJade
-                self.contentView.avaliableView.content.text = getRealAmountDouble(balance.asset_type, amount: balance.balance).string(digits: tradeInfo.precision) + " " + tradeInfo.symbol.filterJade
+            
+            if let trade = self.trade, let trade_info = appData.assetInfo[trade.id], let precision = self.precision, let balance = self.balance {
+                self.contentView.insideFee.text = data.fee.string(digits: precision) + " " + trade_info.symbol.filterJade
+                self.contentView.avaliableView.content.text = getRealAmountDouble(balance.asset_type, amount: balance.balance).string(digits: trade_info.precision) + " " + trade_info.symbol.filterJade
             }
             self.setFinalAmount()
             SwifterSwift.delay(milliseconds: 300) {
@@ -255,7 +257,7 @@ class RechargeDetailViewController: BaseViewController {
         self.coordinator?.state.property.gatewayFee.asObservable().subscribe(onNext: { [weak self](result) in
             guard let `self` = self else { return }
             self.endLoading()
-            if let data = result, data.success, let feeInfo = app_data.assetInfo[data.0.asset_id] {
+            if let data = result, data.success, let feeInfo = appData.assetInfo[data.0.asset_id] {
                 let fee = data.0
                 if let trade = self.trade, let precision = self.precision, feeInfo.id == trade.id {
                     self.contentView.gateAwayFee.text = (fee.amount.toDouble()?.string(digits: precision))! + " " + feeInfo.symbol.filterJade
@@ -277,10 +279,15 @@ class RechargeDetailViewController: BaseViewController {
         guard let text = self.contentView.amountView.content.text, let amount = Decimal(string: text) else { return }
         guard let (finalAmount, requireAmount) = self.coordinator?.getFinalAmount(feeId: self.feeAssetId, amount: amount, available: self.available) else { return }
         self.requireAmount = requireAmount
-        guard finalAmount.doubleValue > 0, let balance = self.balance, let balanceInfo = app_data.assetInfo[balance.asset_type], let precision = self.precision else { return }
+        guard finalAmount.doubleValue > 0,
+            let balance = self.balance,
+            let balanceInfo = appData.assetInfo[balance.asset_type],
+            let precision = self.precision else { return }
         self.contentView.finalAmount.text = finalAmount.doubleValue.string(digits: precision) + " " + balanceInfo.symbol.filterJade
     }
 }
+
+
 
 extension RechargeDetailViewController {
     /*
@@ -329,7 +336,7 @@ extension RechargeDetailViewController {
         if self.contentView.addressView.addressState != .Success {
             return
         }
-        if self.contentView.withdraw.isEnable, let trade = self.trade, let tradeInfo = app_data.assetInfo[trade.id] {
+        if self.contentView.withdraw.isEnable, let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
             let data = getWithdrawDetailInfo(addressInfo: self.contentView.addressView.content.text!,
                                              amountInfo: self.contentView.amountView.content.text! + " " + tradeInfo.symbol.filterJade,
                                              withdrawFeeInfo: self.contentView.insideFee.text!,
@@ -380,28 +387,28 @@ extension RechargeDetailViewController {
                                      feeAmount: gatewayFee.0.amount,
                                      isEOS: self.isEOS,
                                      callback: {[weak self] (data) in
-            guard let `self` = self else { return }
-            self.endLoading()
-            main {
-                ShowToastManager.shared.hide()
-                if self.isVisible {
-                    if String(describing: data) == "<null>"{
-                        
-                        if AddressManager.shared.containAddressOfWithDraw(address, currency: self.trade!.id).0 == false {
-                            self.showConfirmImage(R.image.icCheckCircleGreen.name,
-                                                  title: R.string.localizable.withdraw_success_title.key.localized(),
-                                                  content: R.string.localizable.withdraw_success_content.key.localized())
-                        } else {
-                            self.showToastBox(true, message: R.string.localizable.recharge_withdraw_success.key.localized())
-                            SwifterSwift.delay(milliseconds: 100) {
-                                self.coordinator?.pop()
-                            }
-                        }
-                    } else {
-                        self.showToastBox(false, message: R.string.localizable.recharge_withdraw_failed.key.localized())
-                    }
-                }
-            }
+                                        guard let `self` = self else { return }
+                                        self.endLoading()
+                                        main {
+                                            ShowToastManager.shared.hide()
+                                            if self.isVisible {
+                                                if String(describing: data) == "<null>"{
+                                                    
+                                                    if AddressManager.shared.containAddressOfWithDraw(address, currency: self.trade!.id).0 == false {
+                                                        self.showConfirmImage(R.image.icCheckCircleGreen.name,
+                                                                              title: R.string.localizable.withdraw_success_title.key.localized(),
+                                                                              content: R.string.localizable.withdraw_success_content.key.localized())
+                                                    } else {
+                                                        self.showToastBox(true, message: R.string.localizable.recharge_withdraw_success.key.localized())
+                                                        SwifterSwift.delay(milliseconds: 100) {
+                                                            self.coordinator?.pop()
+                                                        }
+                                                    }
+                                                } else {
+                                                    self.showToastBox(false, message: R.string.localizable.recharge_withdraw_failed.key.localized())
+                                                }
+                                            }
+                                        }
         })
     }
     

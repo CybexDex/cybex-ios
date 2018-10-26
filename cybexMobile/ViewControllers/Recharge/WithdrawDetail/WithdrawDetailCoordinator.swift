@@ -69,7 +69,7 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
     func openDepositRecode(_ assetId: String) {
         if let vc = R.storyboard.recode.rechargeRecodeViewController() {
             vc.recordType = .DEPOSIT
-            vc.assetInfo = app_data.assetInfo[assetId]
+            vc.assetInfo = appData.assetInfo[assetId]
             vc.coordinator = RechargeRecodeCoordinator(rootVC: self.rootVC)
             self.rootVC.pushViewController(vc, animated: true)
         }

@@ -31,7 +31,7 @@ class SettingDetailViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    self.localized_text = self.pageType == .language ? R.string.localizable.language.key.localizedContainer() : R.string.localizable.theme.key.localizedContainer()
+    self.localizedText = self.pageType == .language ? R.string.localizable.language.key.localizedContainer() : R.string.localizable.theme.key.localizedContainer()
     self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: 0.01))
     self.tableView.contentInset = UIEdgeInsets(top: self.tableView.contentInset.top + 10, left: 0, bottom: 0, right: 0)
   }
@@ -57,9 +57,9 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
     switch self.pageType {
     case settingPage.theme:
       if (indexPath.row == 0) {
-        cell.textLabel?.localized_text = R.string.localizable.dark.key.localizedContainer()
+        cell.textLabel?.localizedText = R.string.localizable.dark.key.localizedContainer()
       } else {
-        cell.textLabel?.localized_text = R.string.localizable.light.key.localizedContainer()
+        cell.textLabel?.localizedText = R.string.localizable.light.key.localizedContainer()
       }
 
       cell.textLabel?.isHighlighted = ThemeManager.currentThemeIndex == indexPath.row
@@ -73,9 +73,6 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
       } else {
         cell.textLabel?.isHighlighted = false
       }
-
-    default:
-      break
     }
 
     cell.accessoryView?.isHidden = !cell.textLabel!.isHighlighted
@@ -104,9 +101,6 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
         Localize.setCurrentLanguage(language)
         NotificationCenter.default.post(name: Notification.Name(rawValue: "changeLocalizeAction"), object: nil)
       }
-
-    default:
-      break
     }
 
   }

@@ -206,8 +206,6 @@ enum ProjectState: String, HandyJSONEnum {
             return R.string.localizable.eto_project_comming.key.localized()
         case .ok:
             return R.string.localizable.eto_project_progress.key.localized()
-        default:
-            return ""
         }
     }
 }

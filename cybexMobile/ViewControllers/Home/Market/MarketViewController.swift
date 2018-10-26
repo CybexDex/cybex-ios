@@ -83,7 +83,7 @@ class MarketViewController: BaseViewController {
     }()
 
     lazy var tickers: [Ticker] = {
-        let markets = app_data.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+        let markets = appData.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
             return ticker.base_volume != "0"
         })
         return markets
@@ -102,7 +102,7 @@ class MarketViewController: BaseViewController {
         var quote_name = ""
         var base_name = ""
 
-        if let quote_info = app_data.assetInfo[ticker.quote], let base_info = app_data.assetInfo[ticker.base] {
+        if let quote_info = appData.assetInfo[ticker.quote], let base_info = appData.assetInfo[ticker.base] {
             quote_name = quote_info.symbol.filterJade
             base_name = base_info.symbol.filterJade
         }
@@ -216,7 +216,7 @@ class MarketViewController: BaseViewController {
             return
         }
 
-        if let klineDatas = app_data.detailData, let klineData = klineDatas[pair] {
+        if let klineDatas = appData.detailData, let klineData = klineDatas[pair] {
 
             guard let response = klineData[timeGap] else {
                 endLoading()
@@ -234,8 +234,8 @@ class MarketViewController: BaseViewController {
 
                 let is_base = data.base == base_assetid
 
-                let base_info = app_data.assetInfo[base_assetid]!
-                let quote_info = app_data.assetInfo[quote_assetid]!
+                let base_info = appData.assetInfo[base_assetid]!
+                let quote_info = appData.assetInfo[quote_assetid]!
 
                 let base_precision = pow(10, base_info.precision.double)
                 let quote_precision = pow(10, quote_info.precision.double)
@@ -292,7 +292,7 @@ class MarketViewController: BaseViewController {
                     }
                 }
 
-                if let base_info = app_data.assetInfo[self.ticker.base], timeGap == .one_day {
+                if let base_info = appData.assetInfo[self.ticker.base], timeGap == .one_day {
                     last_model = dataArray.last!
                     detailView.highLabel.text = "High: " + last_model.high.formatCurrency(digitNum: base_info.precision)
                     detailView.lowLabel.text = "Low: " + last_model.low.formatCurrency(digitNum: base_info.precision)
@@ -305,7 +305,7 @@ class MarketViewController: BaseViewController {
 
     override func configureObserveState() {
 
-        app_data.otherRequestRelyData.asObservable()
+        appData.otherRequestRelyData.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 guard let `self` = self else { return }
                 if !CybexWebSocketService.shared.overload() {

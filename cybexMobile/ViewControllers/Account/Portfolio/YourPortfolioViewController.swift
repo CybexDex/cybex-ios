@@ -23,11 +23,21 @@ class YourPortfolioViewController: BaseViewController {
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var imgBgView: UIImageView!
 
+    var lightModel = false {
+        didSet {
+            setNeedsStatusBarAppearanceUpdate()
+        }
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return lightModel ? .lightContent : .default
+    }
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
     let tradeTitltView = TradeNavTitleView(frame: CGRect(x: 0, y: 0, width: 100, height: 64))
-    tradeTitltView.title.localized_text =  R.string.localizable.my_property.key.localizedContainer()
+    tradeTitltView.title.localizedText =  R.string.localizable.my_property.key.localizedContainer()
     tradeTitltView.title.textColor = UIColor.white
     tradeTitltView.icon.isHidden = true
     self.navigationItem.titleView = tradeTitltView
@@ -52,14 +62,14 @@ class YourPortfolioViewController: BaseViewController {
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     if ThemeManager.currentThemeIndex == 0 {
-      UIApplication.shared.statusBarStyle = .lightContent
+        lightModel = true
     } else {
-      UIApplication.shared.statusBarStyle = .default
+        lightModel = false
     }
   }
 
   func setupUI() {
-    UIApplication.shared.statusBarStyle = .lightContent
+    lightModel = true
 
     let height = UIScreen.main.bounds.height
     if height == 812 {
@@ -94,7 +104,7 @@ class YourPortfolioViewController: BaseViewController {
 //
 //      }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-    app_data.otherRequestRelyData.asObservable()
+    appData.otherRequestRelyData.asObservable()
       .subscribe(onNext: {[weak self] (_) in
         guard let `self` = self else { return }
 

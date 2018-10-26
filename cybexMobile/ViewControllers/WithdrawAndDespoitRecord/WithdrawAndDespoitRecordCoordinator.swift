@@ -77,7 +77,7 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
                             childVC.assetInfo = nil
                         } else {
                             var assetInfo: AssetInfo?
-                            for (_, value) in app_data.assetInfo {
+                            for (_, value) in appData.assetInfo {
                                 if value.symbol.filterJade == info.filterJade {
                                     assetInfo = value
                                     break
@@ -88,11 +88,11 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
                         break
                     case .FoudType:
                         if info == R.string.localizable.openedAll.key.localized() {
-                            childVC.record_type = .ALL
+                            childVC.recordType = .ALL
                         } else if info == R.string.localizable.recharge_deposit.key.localized() {
-                            childVC.record_type = .DEPOSIT
+                            childVC.recordType = .DEPOSIT
                         } else if info == R.string.localizable.recharge_withdraw.key.localized() {
-                            childVC.record_type = .WITHDRAW
+                            childVC.recordType = .WITHDRAW
                         }
                         break
                     }

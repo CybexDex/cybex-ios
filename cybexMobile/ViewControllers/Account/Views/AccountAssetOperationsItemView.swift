@@ -33,7 +33,7 @@ class AccountAssetOperationsItemView: UIView {
   }
 
   func changeViewType() {
-    nameL.localized_text = view_type == 0 ? R.string.localizable.openedTitle.key.localizedContainer() : R.string.localizable.lockupAssetsTitle.key.localizedContainer()
+    nameL.localizedText = view_type == 0 ? R.string.localizable.openedTitle.key.localizedContainer() : R.string.localizable.lockupAssetsTitle.key.localizedContainer()
   }
 
   override var intrinsicContentSize: CGSize {
@@ -72,7 +72,9 @@ class AccountAssetOperationsItemView: UIView {
     let bundle = Bundle(for: type(of: self))
     let nibName = String(describing: type(of: self))
     let nib = UINib.init(nibName: nibName, bundle: bundle)
-    let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+    guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
     addSubview(view)
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]

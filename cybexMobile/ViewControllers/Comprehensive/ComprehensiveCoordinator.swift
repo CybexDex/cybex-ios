@@ -71,7 +71,7 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
                 currentBaseIndex = index
             }
         }
-        let tickers = app_data.filterQuoteAssetTicker(pair.base)
+        let tickers = appData.filterQuoteAssetTicker(pair.base)
         var curIndex = 0
         for index in 0..<tickers.count {
             let ticker = tickers[index]

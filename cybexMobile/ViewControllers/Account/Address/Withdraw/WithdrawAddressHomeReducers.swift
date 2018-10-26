@@ -52,7 +52,7 @@ func convertTradeToWithDrawAddressHomeViewModel(_ data: [Trade]) -> [WithdrawAdd
 
     for trade in data {
         let imageURLString = AppConfiguration.SERVER_ICONS_BASE_URLString + trade.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"
-        guard let info = app_data.assetInfo[trade.id] else {
+        guard let info = appData.assetInfo[trade.id] else {
             break
         }
 

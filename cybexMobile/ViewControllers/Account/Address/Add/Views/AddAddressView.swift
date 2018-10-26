@@ -30,7 +30,7 @@ class AddAddressView: UIView {
     var data: Any? {
         didSet {
             if let address = data as? WithdrawAddress {
-                self.asset.content.text = app_data.assetInfo[address.currency]?.symbol.filterJade
+                self.asset.content.text = appData.assetInfo[address.currency]?.symbol.filterJade
                 self.address.content.text = address.address
                 self.memo.content.text = address.memo
             } else if let address = data as? TransferAddress {
@@ -127,7 +127,9 @@ class AddAddressView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
 
         insertSubview(view, at: 0)
         view.frame = self.bounds

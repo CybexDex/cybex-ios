@@ -20,7 +20,7 @@ class TransferTopView: UIView {
       if let data = data as? TransferRecordViewModel {
         self.icon.image = data.isSend ? R.image.ic_sent_40_px() : R.image.ic_income_40_px()
         self.state.text = data.isSend ? R.string.localizable.transfer_detail_send.key.localized() : R.string.localizable.transfer_detail_income.key.localized()
-        if let amountInfo = data.amount, let assetInfo = app_data.assetInfo[amountInfo.asset_id] {
+        if let amountInfo = data.amount, let assetInfo = appData.assetInfo[amountInfo.asset_id] {
           self.amount.text = getRealAmount(amountInfo.asset_id, amount: amountInfo.amount).string(digits: assetInfo.precision, roundingMode: .down) + " " + assetInfo.symbol.filterJade
           if data.isSend {
             self.amount.text = "-" + self.amount.text!
@@ -83,7 +83,9 @@ class TransferTopView: UIView {
     let bundle = Bundle(for: type(of: self))
     let nibName = String(describing: type(of: self))
     let nib = UINib.init(nibName: nibName, bundle: bundle)
-    let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+    guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
     addSubview(view)
     view.frame = self.bounds
     view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
