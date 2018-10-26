@@ -14,7 +14,7 @@ func TransferDetailReducer(action: Action, state: TransferDetailState?) -> Trans
 }
 
 func TransferDetailPropertyReducer(_ state: TransferDetailPropertyState?, action: Action) -> TransferDetailPropertyState {
-    var state = state ?? TransferDetailPropertyState()
+    let state = state ?? TransferDetailPropertyState()
 
     switch action {
     default:

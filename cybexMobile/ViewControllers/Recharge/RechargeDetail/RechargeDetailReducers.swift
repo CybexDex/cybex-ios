@@ -17,7 +17,7 @@ func rechargeDetailReducer(action: Action, state: RechargeDetailState?) -> Recha
 }
 
 func rechargeDetailPropertyReducer(_ state: RechargeDetailPropertyState?, action: Action) -> RechargeDetailPropertyState {
-    var state = state ?? RechargeDetailPropertyState()
+    let state = state ?? RechargeDetailPropertyState()
 
     switch action {
     case let action as FetchWithdrawInfo:
