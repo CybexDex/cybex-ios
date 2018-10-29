@@ -24,7 +24,7 @@ class IntroduceView: UIView {
   }
 
   @IBInspectable
-  var locail_style: String = StyleNames.withdraw_introduce.rawValue
+  var locail_style: String = StyleNames.withdrawIntroduce.rawValue
 
   func setup() {
   }

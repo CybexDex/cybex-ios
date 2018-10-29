@@ -191,7 +191,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         let feeAmout = feeAmount * Double(truncating: pow(10, feeInfo.precision) as NSNumber)
 
         getChainId { (id) in
-            let requeset = GetObjectsRequest(ids: [objectID.dynamic_global_property_object.rawValue]) { (infos) in
+            let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
                 if let infos = infos as? (block_id: String, block_num: String) {
                     let accountRequeset = GetFullAccountsRequest(name: data.receiveAddress) { (response) in
                         if let response = response as? FullAccount, let account = response.account {

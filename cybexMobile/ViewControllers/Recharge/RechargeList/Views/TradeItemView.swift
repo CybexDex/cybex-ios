@@ -17,9 +17,9 @@ class TradeItemView: UIView {
         didSet {
             if let data = data as? Trade, let info = appData.assetInfo[data.id] {
                 
-                self.icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString + data.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
+                self.icon.kf.setImage(with: URL(string: AppConfiguration.ServerIconsBaseURLString + data.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"))
                 if info.symbol.filterJade == "NKN"{
-                    print("URL : \(AppConfiguration.SERVER_ICONS_BASE_URLString + data.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"))")
+                    print("URL : \(AppConfiguration.ServerIconsBaseURLString + data.id.replacingOccurrences(of: ".", with: "_") + "_grey.png"))")
                 }
                 name.text = info.symbol.filterJade
                 if let balances = UserManager.shared.balances.value {

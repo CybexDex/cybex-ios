@@ -93,7 +93,7 @@ class ComprehensiveViewController: BaseViewController {
         }).disposed(by: disposeBag)
 
         appData.tickerData.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
-            return tickers.count == AssetConfiguration.shared.asset_ids.count
+            return tickers.count == AssetConfiguration.shared.assetIds.count
             }.subscribe(onNext: { [weak self](tickers) in
                 guard let `self` = self else { return }
                 if let hotPairs = self.coordinator?.state.hotPairs.value, self.isVisible {

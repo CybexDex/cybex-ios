@@ -40,8 +40,7 @@ class MarketViewController: BaseViewController {
     var currentBaseIndex: Int = 0
     var kLineSpecial = false
     var canExchange = false
-    
-    var timeGap: candlesticks = .one_day {
+    var timeGap: Candlesticks = .oneDay {
         didSet {
             kLineView.timeGap = timeGap
             CBConfiguration.sharedConfiguration.main.timeLineType = CBTimeLineType(rawValue: Int(timeGap.rawValue))!
@@ -49,8 +48,7 @@ class MarketViewController: BaseViewController {
     }
     
     var resetKLinePosition: Bool = true
-    
-    var indicator: indicator = .ma {
+    var indicator: Indicator = .ma {
         didSet {
             switch indicator {
             case .ma:
@@ -83,7 +81,7 @@ class MarketViewController: BaseViewController {
     }()
     
     lazy var tickers: [Ticker] = {
-        let markets = appData.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+        let markets = appData.filterQuoteAssetTicker(AssetConfiguration.marketBaseAssets[currentBaseIndex]).filter({ (ticker) -> Bool in
             return ticker.baseVolume != "0"
         })
         return markets
@@ -311,7 +309,7 @@ class MarketViewController: BaseViewController {
                         dataArray.append(gapModel)
                     }
                 }
-                if let baseInfo = appData.assetInfo[self.ticker.base], timeGap == .one_day {
+                if let baseInfo = appData.assetInfo[self.ticker.base], timeGap == .oneDay {
                     lastModel = dataArray.last!
                     detailView.highLabel.text = "High: " + lastModel.high.formatCurrency(digitNum: baseInfo.precision)
                     detailView.lowLabel.text = "Low: " + lastModel.low.formatCurrency(digitNum: baseInfo.precision)
@@ -353,7 +351,7 @@ extension MarketViewController {
     //    }
     
     @objc func timeClicked(_ data: [String: Any]) {
-        if let candlestick = data["candlestick"] as? candlesticks {
+        if let candlestick = data["candlestick"] as? Candlesticks {
             timeGap = candlestick
             
             startLoading()
@@ -362,7 +360,7 @@ extension MarketViewController {
     }
     
     @objc func indicatorClicked(_ data: [String: Any]) {
-        if let indicator = data["indicator"] as? indicator {
+        if let indicator = data["indicator"] as? Indicator {
             self.indicator = indicator
             kLineView.indicator = indicator
             

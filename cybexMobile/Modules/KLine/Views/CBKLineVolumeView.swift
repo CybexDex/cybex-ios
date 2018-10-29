@@ -97,13 +97,13 @@ class CBKLineVolumeView: UIView {
       let endPoint = CGPoint(x: xPosition, y: bounds.height)
 
       var strokeColor: UIColor = configuration.theme.increaseColor
-      let last_model: CBKLineModel? = index >= 1 ? volumeDrawKLineModels[index - 1] : nil
+      let lastModel: CBKLineModel? = index >= 1 ? volumeDrawKLineModels[index - 1] : nil
 
-      if klineModel.volume == 0, let _ = last_model {
+      if klineModel.volume == 0, let _ = lastModel {
         strokeColor = strokeColors[index - 1]
       }
 
-      if klineModel.open == klineModel.close, let lastmodel = last_model {
+      if klineModel.open == klineModel.close, let lastmodel = lastModel {
         strokeColor = klineModel.close < lastmodel.close ? configuration.theme.decreaseColor : configuration.theme.increaseColor
       }
 
@@ -113,7 +113,12 @@ class CBKLineVolumeView: UIView {
 
       strokeColors.append(strokeColor)
 
-      let path = UIBezierPath(roundedRect: CGRect(x: xPosition, y: startPoint.y, width: configuration.theme.klineWidth, height: abs(endPoint.y - startPoint.y)), cornerRadius: configuration.theme.klineRadius).cgPath
+      let path = UIBezierPath(
+        roundedRect: CGRect(x: xPosition,
+                            y: startPoint.y,
+                            width: configuration.theme.klineWidth,
+                            height: abs(endPoint.y - startPoint.y)),
+        cornerRadius: configuration.theme.klineRadius).cgPath
       context.addPath(path)
       context.setFillColor(strokeColor.withAlphaComponent(0.2).cgColor)
       context.fillPath()
@@ -123,9 +128,9 @@ class CBKLineVolumeView: UIView {
 
     // 画指标线
     switch configuration.volume.indicatorType {
-    case .MA_VOLUME:
+    case .MAVolume:
       drawMA_VOLUME(context: context, limitValue: limitValue, drawModels: volumeDrawKLineModels)
-    case .EMA_VOLUME:
+    case .EMAVolume:
       drawEMA_VOLUME(context: context, limitValue: limitValue, drawModels: volumeDrawKLineModels)
     default:
       break
@@ -160,7 +165,7 @@ extension CBKLineVolumeView {
     drawAttrsString.append(NSAttributedString(string: volumeStr, attributes: volumeAttrs))
 
     switch configuration.volume.indicatorType {
-    case .MA_VOLUME(let days):
+    case .MAVolume(let days):
 
       for (idx, color) in [configuration.theme.MA1, configuration.theme.MA2, configuration.theme.MA3].enumerated() {
 
@@ -168,20 +173,20 @@ extension CBKLineVolumeView {
           NSAttributedString.Key.foregroundColor: color,
           NSAttributedString.Key.font: configuration.main.dateAssistTextFont
         ]
-        if let value = drawModel.MA_VOLUMEs![idx] {
+        if let value = drawModel.MAVolumes![idx] {
           let maStr = String(format: "MAVOL\(days[idx]): %.2f ", value)
           drawAttrsString.append(NSAttributedString(string: maStr, attributes: attrs))
         }
       }
 
-    case .EMA_VOLUME(let days):
+    case .EMAVolume(let days):
       for (idx, color) in [configuration.theme.EMA1, configuration.theme.EMA2].enumerated() {
 
         let attrs: [NSAttributedString.Key: Any]? = [
           NSAttributedString.Key.foregroundColor: color,
           NSAttributedString.Key.font: configuration.main.dateAssistTextFont
         ]
-        if let value = drawModel.EMA_VOLUMEs![idx] {
+        if let value = drawModel.EMAVolumes![idx] {
           let maStr = String(format: "EMAVOL\(days[idx]): %.2f ", value)
           drawAttrsString.append(NSAttributedString(string: maStr, attributes: attrs))
         }
@@ -279,13 +284,13 @@ extension CBKLineVolumeView {
     }
 
     switch configuration.volume.indicatorType {
-    case .MA_VOLUME:
+    case .MAVolume:
 
       let maModel = CBMAVOLUMEModel(indicatorType: configuration.volume.indicatorType,
                                     klineModels: configuration.dataSource.klineModels)
       volumeDrawKLineModels = maModel.fetchDrawMAVOLUMEData(drawRange: configuration.dataSource.drawRange)
 
-    case .EMA_VOLUME:
+    case .EMAVolume:
 
       let emaModel = CBEMAVOLUMEModel(indicatorType: configuration.volume.indicatorType,
                                       klineModels: configuration.dataSource.klineModels)
@@ -317,8 +322,8 @@ extension CBKLineVolumeView {
 
       // 求指标数据的最大最小
       switch configuration.volume.indicatorType {
-      case .MA_VOLUME:
-        if let MAs = model.MA_VOLUMEs {
+      case .MAVolume:
+        if let MAs = model.MAVolumes {
           for value in MAs {
             if let value = value {
               minValue = value < minValue ? value : minValue
@@ -326,8 +331,8 @@ extension CBKLineVolumeView {
             }
           }
         }
-      case .EMA_VOLUME:
-        if let EMAs = model.EMA_VOLUMEs {
+      case .EMAVolume:
+        if let EMAs = model.EMAVolumes {
           for value in EMAs {
             if let value = value {
               minValue = value < minValue ? value : minValue

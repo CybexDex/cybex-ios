@@ -37,10 +37,9 @@ class HomePairView: UIView {
     var data: Any? {
         didSet {
             guard let ticker = data as? Ticker, let baseInfo = appData.assetInfo[ticker.base], let quoteInfo = appData.assetInfo[ticker.quote] else { return }
-
             self.asset2.text =  quoteInfo.symbol.filterJade
             self.asset1.text = "/" + baseInfo.symbol.filterJade
-            let url = AppConfiguration.SERVER_ICONS_BASE_URLString + ticker.quote.replacingOccurrences(of: ".", with: "_") + "_grey.png"
+            let url = AppConfiguration.ServerIconsBaseURLString + ticker.quote.replacingOccurrences(of: ".", with: "_") + "_grey.png"
             self.icon.kf.setImage(with: URL(string: url))
             self.volume.text = ticker.baseVolume.suffixNumber(digitNum: 2)
             self.price.text = ticker.latest.formatCurrency(digitNum: baseInfo.precision)

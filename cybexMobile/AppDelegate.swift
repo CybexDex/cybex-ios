@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NetworkActivityLogger.shared.startLogging()
         NetworkActivityLogger.shared.level = .error
         if Defaults.hasKey(.frequencyType) {
-            UserManager.shared.frequency_type = UserManager.frequency_type(rawValue: Defaults[.frequencyType])!
+            UserManager.shared.frequencyType = UserManager.FrequencyType(rawValue: Defaults[.frequencyType])!
         }
         changeEnvironmentAction()
 
@@ -225,9 +225,9 @@ extension AppDelegate {
 
             _ = BeareadToast.showError(text: R.string.localizable.noNetwork.key.localized(), inView: self.window!, hide: 2)
         default:
-            if UserManager.shared.frequency_type == .normal {
+            if UserManager.shared.frequencyType == .normal {
                 UserManager.shared.refreshTime = 6
-            } else if UserManager.shared.frequency_type == .time {
+            } else if UserManager.shared.frequencyType == .time {
                 UserManager.shared.refreshTime = 3
             } else {
                 if reachability.connection == .wifi {

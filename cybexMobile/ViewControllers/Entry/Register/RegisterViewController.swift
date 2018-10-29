@@ -134,7 +134,7 @@ extension RegisterViewController {
     func setupEvent() {
         
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self](notification) in
-            guard let `self` = self, let userinfo = notification.userInfo as? NSDictionary, let nsValue = userinfo.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue else { return }
+            guard let `self` = self, let userinfo = notification.userInfo as NSDictionary?, let nsValue = userinfo.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue else { return }
             let keyboardRec = nsValue.cgRectValue
             
             if self.iconTopContainer.constant == 15 {
@@ -346,7 +346,7 @@ extension RegisterViewController {
                             self.registerButton.canRepeat = true
                         }
                     }
-                    catch let error {
+                    catch _ {
                         
                     }
                   

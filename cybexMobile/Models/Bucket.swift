@@ -62,7 +62,7 @@ class Bucket: HandyJSON, NSCopying {
 
 }
 
-enum changeScope {
+enum ChangeScope {
   case greater
   case less
   case equal
@@ -107,7 +107,7 @@ struct BucketMatrix {
   var base: String = ""
   var quote: String = ""
 
-  var incre: changeScope = .equal
+  var incre: ChangeScope = .equal
 
   var icon: String = ""
   init(_ homebucket: HomeBucket) {
@@ -115,7 +115,7 @@ struct BucketMatrix {
     self.base = homebucket.base
     self.quote = homebucket.quote
 
-    self.icon = AppConfiguration.SERVER_ICONS_BASE_URLString + quote.replacingOccurrences(of: ".", with: "_") + "_grey.png"
+    self.icon = AppConfiguration.ServerIconsBaseURLString + quote.replacingOccurrences(of: ".", with: "_") + "_grey.png"
 
     guard let last = self.asset.last else { return }
 

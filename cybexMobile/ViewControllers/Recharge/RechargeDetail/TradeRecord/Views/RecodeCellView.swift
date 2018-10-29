@@ -41,7 +41,7 @@ class RecodeCellView: UIView {
                         "<\(contentStyle)>\(withdrawAddress.1.first!.name)</\(contentStyle)>\n<address>\(data.address)</address>" :
                         "<address>\(data.address)</address>"
                     address.attributedText = attributedString.set(style: StyleNames.address.rawValue)
-                    icon.kf.setImage(with: URL(string: AppConfiguration.SERVER_ICONS_BASE_URLString +
+                    icon.kf.setImage(with: URL(string: AppConfiguration.ServerIconsBaseURLString +
                         assetInfo.id.replacingOccurrences(of: ".", with: "_") +
                         "_grey.png"))
                     amount.text = getRealAmount(assetInfo.id, amount: String(data.amount)).string.formatCurrency(digitNum: assetInfo.precision) +

@@ -408,31 +408,31 @@ extension CBKLineDrawView {
     }
 
     func addDashLine() {
-        let ver_layer = CAShapeLayer()
-        ver_layer.fillColor = UIColor.white.cgColor
-        ver_layer.strokeColor = configuration.theme.longPressLineColor.cgColor
-        ver_layer.lineWidth = configuration.theme.longPressLineWidth
-        ver_layer.lineDashPattern = [3, 3]
-        ver_layer.frame = indicatorVerticalView.bounds
-        let ver_path = UIBezierPath()
-        ver_path.move(to: CGPoint(x: 0, y: 0))
-        ver_path.addLine(to: CGPoint(x: 0, y: indicatorVerticalView.bounds.size.height))
-        ver_layer.path = ver_path.cgPath
+        let verLayer = CAShapeLayer()
+        verLayer.fillColor = UIColor.white.cgColor
+        verLayer.strokeColor = configuration.theme.longPressLineColor.cgColor
+        verLayer.lineWidth = configuration.theme.longPressLineWidth
+        verLayer.lineDashPattern = [3, 3]
+        verLayer.frame = indicatorVerticalView.bounds
+        let verPath = UIBezierPath()
+        verPath.move(to: CGPoint(x: 0, y: 0))
+        verPath.addLine(to: CGPoint(x: 0, y: indicatorVerticalView.bounds.size.height))
+        verLayer.path = verPath.cgPath
 
-        indicatorVerticalView.layer.addSublayer(ver_layer)
+        indicatorVerticalView.layer.addSublayer(verLayer)
 
-        let hor_layer = CAShapeLayer()
-        hor_layer.fillColor = UIColor.white.cgColor
-        hor_layer.strokeColor = configuration.theme.longPressLineColor.cgColor
-        hor_layer.lineWidth = configuration.theme.longPressLineWidth
-        hor_layer.lineDashPattern = [3, 3]
-        hor_layer.frame = indicatorVerticalView.bounds
-        let hor_path = UIBezierPath()
-        hor_path.move(to: CGPoint(x: 0, y: 0))
-        hor_path.addLine(to: CGPoint(x: indicatorHorizontalView.bounds.size.width, y: 0))
-        hor_layer.path = hor_path.cgPath
+        let horLayer = CAShapeLayer()
+        horLayer.fillColor = UIColor.white.cgColor
+        horLayer.strokeColor = configuration.theme.longPressLineColor.cgColor
+        horLayer.lineWidth = configuration.theme.longPressLineWidth
+        horLayer.lineDashPattern = [3, 3]
+        horLayer.frame = indicatorVerticalView.bounds
+        let horPath = UIBezierPath()
+        horPath.move(to: CGPoint(x: 0, y: 0))
+        horPath.addLine(to: CGPoint(x: indicatorHorizontalView.bounds.size.width, y: 0))
+        horLayer.path = horPath.cgPath
 
-        indicatorHorizontalView.layer.addSublayer(hor_layer)
+        indicatorHorizontalView.layer.addSublayer(horLayer)
 
     }
 }

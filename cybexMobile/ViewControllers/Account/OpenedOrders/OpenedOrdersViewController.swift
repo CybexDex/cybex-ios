@@ -65,7 +65,7 @@ class OpenedOrdersViewController: BaseViewController {
         guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0) else { return }
         guard let order = self.order else {return}
         startLoading()
-        calculateFee(operation, focusAssetId: order.sellPrice.base.assetID, operationID: .limit_order_cancel) { [weak self](success, amount, assetId) in
+        calculateFee(operation, focusAssetId: order.sellPrice.base.assetID, operationID: .limitOrderCancel) { [weak self](success, amount, assetId) in
             guard let `self` = self else {return}
             self.endLoading()
 

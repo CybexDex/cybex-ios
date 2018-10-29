@@ -19,7 +19,7 @@ enum GatewayAPI {
 
 extension GatewayAPI: TargetType {
     var baseURL: URL {
-        return URL(string: AppConfiguration.RECODE_BASE_URLString)!
+        return URL(string: AppConfiguration.RecodeBaseURLString)!
     }
 
     var path: String {
@@ -40,7 +40,10 @@ extension GatewayAPI: TargetType {
     }
 
     var sampleData: Data {
-        return try! JSON(paragrames).rawData()
+        guard let data = try? JSON(paragrames).rawData() else {
+            return Data()
+        }
+        return data
     }
 
     var task: Task {

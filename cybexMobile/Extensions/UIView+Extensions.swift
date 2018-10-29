@@ -166,7 +166,12 @@ extension UIView {
 
     }
 
-    public func topToDevice( _ vc: UIViewController, offset: CGFloat = 0, relation: ConstraintRelation = .equal, priority: LayoutPriority = .required, isActive: Bool = true, usingSafeArea: Bool = false) -> Constraint {
+    public func topToDevice( _ vc: UIViewController,
+                             offset: CGFloat = 0,
+                             relation: ConstraintRelation = .equal,
+                             priority: LayoutPriority = .required,
+                             isActive: Bool = true,
+                             usingSafeArea: Bool = false) -> Constraint {
         if #available(iOS 11.0, *) {
             return topToSuperview(nil, offset: offset, relation: relation, priority: priority, isActive: isActive, usingSafeArea: usingSafeArea)
         } else {

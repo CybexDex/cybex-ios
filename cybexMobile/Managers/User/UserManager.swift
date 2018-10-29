@@ -74,18 +74,20 @@ extension UserManager {
             let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
 
             if let keys = AccountKeys.deserialize(from: keysString),
-                let active_key = keys.activeKey,
-                let owner_key = keys.ownerKey,
-                let memo_key = keys.memoKey {
+                let activeKey = keys.activeKey,
+                let ownerKey = keys.ownerKey,
+                let memoKey = keys.memoKey {
                 let params = ["cap": ["id": pinID, "captcha": captcha],
                               "account": ["name": username,
-                                          "owner_key": owner_key.publicKey,
-                                          "active_key": active_key.publicKey,
-                                          "memo_key": memo_key.publicKey,
+                                          "owner_key": ownerKey.publicKey,
+                                          "active_key": activeKey.publicKey,
+                                          "memo_key": memoKey.publicKey,
                                           "refcode": "",
                                           "referrer": ""]]
+                guard let data = try? await(SimpleHTTPService.requestRegister(params)) else {
+                    return (false, 0)
+                }
 
-                let data = try! await(SimpleHTTPService.requestRegister(params))
                 if data.0 {
                     self.saveName(username)
                     self.avatarString = username.sha256()
@@ -154,9 +156,9 @@ extension UserManager {
                     self.fillOrder.accept(nil)
                 }
                 fillorders = fillorders.filter({
-                    let base_name = appData.assetInfo[$0.fillPrice.base.assetID]
-                    let quote_name = appData.assetInfo[$0.fillPrice.quote.assetID]
-                    return base_name != nil && quote_name != nil
+                    let baseName = appData.assetInfo[$0.fillPrice.base.assetID]
+                    let quoteName = appData.assetInfo[$0.fillPrice.quote.assetID]
+                    return baseName != nil && quoteName != nil
                 })
 
                 var result = [(FillOrder, time:String)]()
@@ -213,9 +215,9 @@ extension UserManager {
                     return
                 }
                 fillorders = fillorders.filter({
-                    let base_name = appData.assetInfo[$0.fillPrice.base.assetID]
-                    let quote_name = appData.assetInfo[$0.fillPrice.quote.assetID]
-                    return base_name != nil && quote_name != nil
+                    let baseName = appData.assetInfo[$0.fillPrice.base.assetID]
+                    let quoteName = appData.assetInfo[$0.fillPrice.quote.assetID]
+                    return baseName != nil && quoteName != nil
                 })
 
                 var result = [(FillOrder, time:String)]()
@@ -259,17 +261,20 @@ extension UserManager {
         }
 
         let keysString = BitShareCoordinator.getUserKeys(name, password: password)!
-        if let keys = AccountKeys.deserialize(from: keysString), let active_key = keys.activeKey, let memoKey = keys.memoKey, let ownKey = keys.ownerKey {
+        if let keys = AccountKeys.deserialize(from: keysString),
+            let activeKey = keys.activeKey,
+            let memoKey = keys.memoKey,
+            let ownKey = keys.ownerKey {
             var canLock = false
 
             let request = GetFullAccountsRequest(name: name) { response in
                 if let data = response as? FullAccount, let account = data.account {
-                    let active_auths = account.activeAuths
-                    let owner_auths = account.ownerAuths
+                    let activeAuths = account.activeAuths
+                    let ownerAuths = account.ownerAuths
 
-                    for auth in active_auths {
+                    for auth in activeAuths {
                         if let auth = auth as? [Any], let key = auth[0] as? String {
-                            if [memoKey.publicKey, ownKey.publicKey, active_key.publicKey].contains(key) {
+                            if [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey].contains(key) {
                                 canLock = true
                                 BitShareCoordinator.resetDefaultPublicKey(key)
                                 break
@@ -278,9 +283,9 @@ extension UserManager {
                     }
 
                     if !canLock {
-                        for auth in owner_auths {
+                        for auth in ownerAuths {
                             if let auth = auth as? [Any], let key = auth[0] as? String {
-                                if [memoKey.publicKey, ownKey.publicKey, active_key.publicKey].contains(key) {
+                                if [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey].contains(key) {
                                     canLock = true
                                     BitShareCoordinator.resetDefaultPublicKey(key)
                                     break
@@ -341,15 +346,15 @@ extension UserManager {
 
         if let limitOrders = data.limitOrder {
             self.limitOrder.accept(limitOrders.filter({ (limitOrder) -> Bool in
-                let base_name = appData.assetInfo[limitOrder.sellPrice.base.assetID]
-                let quote_name = appData.assetInfo[limitOrder.sellPrice.quote.assetID]
-                let base_bool = base_name != nil
-                let quote_bool = quote_name != nil
+                let baseName = appData.assetInfo[limitOrder.sellPrice.base.assetID]
+                let quoteName = appData.assetInfo[limitOrder.sellPrice.quote.assetID]
+                let baseBool = baseName != nil
+                let quoteBool = quoteName != nil
 
 //                let base_bool = base_name != nil && ((base_name?.symbol.hasPrefix("JADE"))! || base_name?.symbol == "CYB")
 //                let quote_bool = quote_name != nil && ((quote_name?.symbol.hasPrefix("JADE"))! || quote_name?.symbol == "CYB")
 
-                return base_bool && quote_bool
+                return baseBool && quoteBool
             }))
         } else {
             self.limitOrder.accept(data.limitOrder)
@@ -375,16 +380,16 @@ class UserManager {
         return false
     }
 
-    enum frequency_type: Int {
+    enum FrequencyType: Int {
         case normal = 0
         case time
-        case WiFi
+        case wiFi
 
         func description() -> String {
             switch self {
             case .normal:return R.string.localizable.frequency_normal.key
             case .time:return R.string.localizable.frequency_time.key
-            case .WiFi:return R.string.localizable.frequency_wifi.key
+            case .wiFi:return R.string.localizable.frequency_wifi.key
             }
         }
     }
@@ -393,13 +398,13 @@ class UserManager {
         return self.keys == nil
     }
 
-    var frequency_type: frequency_type = .WiFi {
+    var frequencyType: FrequencyType = .wiFi {
         didSet {
-            Defaults[.frequencyType] = self.frequency_type.rawValue
-            switch self.frequency_type {
+            Defaults[.frequencyType] = self.frequencyType.rawValue
+            switch self.frequencyType {
             case .normal:self.refreshTime = 6
             case .time:self.refreshTime = 3
-            case .WiFi:
+            case .wiFi:
                 let status = reachability.connection
                 if status == .wifi {
                     self.refreshTime = 3
@@ -430,62 +435,62 @@ class UserManager {
     var timer: Repeater?
 
     var limitOrderValue: Double {
-        var _limitOrderValue: Decimal = 0
+        var decimallimitOrderValue: Decimal = 0
         //        var _limitOrder_buy_value:Double = 0
         if let limitOrder = limitOrder.value {
-            for limitOrder_value in limitOrder {
-                let realAmount = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale)
-                let price_value = getAssetRMBPrice(limitOrder_value.sellPrice.base.assetID)
-                _limitOrderValue += (realAmount * Decimal(price_value))
+            for limitOrderValue in limitOrder {
+                let realAmount = getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
+                let priceValue = getAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
+                decimallimitOrderValue += (realAmount * Decimal(priceValue))
             }
         }
-        return _limitOrderValue.doubleValue
+        return decimallimitOrderValue.doubleValue
     }
 
-    var limitOrder_buy_value: Double = 0
+    var limitOrderBuyValue: Double = 0
 
-    var limitOrder_sell_value: Double = 0
+    var limitOrderSellValue: Double = 0
 
-    var limit_reset_address_time: TimeInterval = 0
+    var limitResetAddressTime: TimeInterval = 0
 
     var balance: Double {
 
-        var balance_values: Decimal = 0
-        var _limitOrderValue: Decimal = 0
-        var _limitOrder_buy_value: Decimal = 0
-        var _limitOrder_sell_value: Decimal = 0
+        var balanceValues: Decimal = 0
+        var decimallimitOrderValue: Decimal = 0
+        var decimallimitOrderBuyValue: Decimal = 0
+        var decimallimitOrderSellValue: Decimal = 0
         if let balances = balances.value {
-            for balance_value in balances {
-                let realAmount = getRealAmount(balance_value.assetType, amount: balance_value.balance)
-                let real_rmb_price = getAssetRMBPrice(balance_value.assetType)
-                balance_values += realAmount * Decimal(real_rmb_price)
+            for balanceValue in balances {
+                let realAmount = getRealAmount(balanceValue.assetType, amount: balanceValue.balance)
+                let realRMBPrice = getAssetRMBPrice(balanceValue.assetType)
+                balanceValues += realAmount * Decimal(realRMBPrice)
             }
         }
 
         if let limitOrder = limitOrder.value {
-            for limitOrder_value in limitOrder {
-                let assetA_info = appData.assetInfo[limitOrder_value.sellPrice.base.assetID]
-                let assetB_info = appData.assetInfo[limitOrder_value.sellPrice.quote.assetID]
+            for limitOrderValue in limitOrder {
+                let assetAInfo = appData.assetInfo[limitOrderValue.sellPrice.base.assetID]
+                let assetBInfo = appData.assetInfo[limitOrderValue.sellPrice.quote.assetID]
 
-                let (base, _) = calculateAssetRelation(assetIDAName: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetIDBName: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
-                let isBuy = base == ((assetA_info != nil) ? assetA_info!.symbol.filterJade : "")
+                let (base, _) = calculateAssetRelation(assetIDAName: (assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "", assetIDBName: (assetBInfo != nil) ? assetBInfo!.symbol.filterJade : "")
+                let isBuy = base == ((assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "")
 
-                let realAmount = getRealAmount(limitOrder_value.sellPrice.base.assetID, amount: limitOrder_value.forSale)
-                let price_value = getAssetRMBPrice(limitOrder_value.sellPrice.base.assetID)
-                _limitOrderValue += realAmount * Decimal(price_value)
-                balance_values += _limitOrderValue
+                let realAmount = getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
+                let priceValue = getAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
+                decimallimitOrderValue += realAmount * Decimal(priceValue)
+                balanceValues += decimallimitOrderValue
                 if isBuy {
-                    _limitOrder_buy_value += realAmount * Decimal(price_value)
+                    decimallimitOrderBuyValue += realAmount * Decimal(priceValue)
                 } else {
-                    _limitOrder_sell_value += realAmount * Decimal(price_value)
+                    decimallimitOrderSellValue += realAmount * Decimal(priceValue)
                 }
             }
         }
 
         //    limitOrderValue = _limitOrderValue
-        limitOrder_buy_value = _limitOrder_buy_value.doubleValue
-        limitOrder_sell_value = _limitOrder_sell_value.doubleValue
-        return balance_values.doubleValue
+        limitOrderBuyValue = decimallimitOrderBuyValue.doubleValue
+        limitOrderSellValue = decimallimitOrderSellValue.doubleValue
+        return balanceValues.doubleValue
     }
 
     func timingLock() {
@@ -502,7 +507,7 @@ class UserManager {
         appData.otherRequestRelyData.asObservable()
             .subscribe(onNext: { (_) in
                 DispatchQueue.main.async {
-                    if UserManager.shared.isLoginIn && AssetConfiguration.shared.asset_ids.count > 0 && !CybexWebSocketService.shared.overload() {
+                    if UserManager.shared.isLoginIn && AssetConfiguration.shared.assetIds.count > 0 && !CybexWebSocketService.shared.overload() {
                         UserManager.shared.fetchAccountInfo()
                     }
 

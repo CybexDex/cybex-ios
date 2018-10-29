@@ -36,7 +36,7 @@ extension AppCoordinator: AppStateManagerProtocol {
         }
     }
 
-    func fetchKline(_ params: AssetPairQueryParams, gap: candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
+    func fetchKline(_ params: AssetPairQueryParams, gap: Candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
         store.dispatch(creator.fetchMarket(with: false, params: params, priority: .high, callback: { [weak self] (assets) in
             guard let `self` = self else { return }
 
@@ -49,9 +49,15 @@ extension AppCoordinator: AppStateManagerProtocol {
 
     func fetchAsset(_ callback:@escaping (() -> Void)) {
         async {
-            let data = try! await(SimpleHTTPService.fetchIdsInfo())
+            guard let data = try? await(SimpleHTTPService.fetchIdsInfo()) else {
+                main {
+                    callback()
+                }
+                return
+            }
+
             main {
-                AssetConfiguration.shared.unique_ids = data
+                AssetConfiguration.shared.uniqueIds = data
                 let request = GetObjectsRequest(ids: data) { response in
                     if let assetinfo = response as? [AssetInfo] {
                         for info in assetinfo {
@@ -67,7 +73,9 @@ extension AppCoordinator: AppStateManagerProtocol {
 
     func fetchEthToRmbPrice() {
         async {
-            let value = try! await(SimpleHTTPService.requestETHPrice())
+            guard let value = try? await(SimpleHTTPService.requestETHPrice()) else {
+                return
+            }
             if value.count == 0 {
                 return
             }
@@ -77,7 +85,9 @@ extension AppCoordinator: AppStateManagerProtocol {
         }
 
         self.timer = Repeater.every(.seconds(3)) {[weak self] _ in
-            let value = try! await(SimpleHTTPService.requestETHPrice())
+            guard let value = try? await(SimpleHTTPService.requestETHPrice()) else {
+                return
+            }
             if value.count == 0 {
                 return
             }
@@ -85,7 +95,9 @@ extension AppCoordinator: AppStateManagerProtocol {
                 self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
             }
 
-            let marketList = try! await(SimpleHTTPService.fetchMarketListJson())
+            guard let marketList = try? await(SimpleHTTPService.fetchMarketListJson()) else {
+                return
+            }
             main { [weak self] in
                 self?.store.dispatch(FecthMarketListAction(data: marketList))
             }
@@ -133,10 +145,14 @@ extension AppCoordinator {
 
         if isNoFirst {
             for pair in filterPairs {
-
-                AppConfiguration.shared.appCoordinator.fetchTickerData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority: priority)
-
-//                AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority)
+                AppConfiguration.shared.appCoordinator.fetchTickerData(
+                    AssetPairQueryParams(firstAssetId: pair.base,
+                                         secondAssetId: pair.quote,
+                                         timeGap: 60 * 60,
+                                         startTime: start,
+                                         endTime: now),
+                    sub: sub,
+                    priority: priority)
             }
         } else {
             fetch24Markets(UserManager.shared.refreshTime, startTime: start, now: now, sub: sub, priority: priority)
@@ -145,21 +161,26 @@ extension AppCoordinator {
 
     func fetch24Markets(_ time: TimeInterval, startTime: Date, now: Date, sub: Bool = true, priority: Operation.QueuePriority = .normal) {
 
-        let timeSpace = time / Double(AssetConfiguration.market_base_assets.count)
+        let timeSpace = time / Double(AssetConfiguration.marketBaseAssets.count)
 
         var refreshTime: TimeInterval = 0
-        for index in 0..<AssetConfiguration.market_base_assets.count {
-            let base = AssetConfiguration.market_base_assets[index]
+        for index in 0..<AssetConfiguration.marketBaseAssets.count {
+            let base = AssetConfiguration.marketBaseAssets[index]
             refreshTime = Double(index) * timeSpace
-            let pairs = AssetConfiguration.shared.asset_ids.filter({return $0.base == base})
+            let pairs = AssetConfiguration.shared.assetIds.filter({return $0.base == base})
             SwifterSwift.delay(milliseconds: refreshTime * 1000.0) {
                 for pair in pairs {
                     if CybexWebSocketService.shared.overload() {
                         return
                     }
-                    AppConfiguration.shared.appCoordinator.fetchTickerData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: startTime, endTime: now), sub: sub, priority: priority)
-
-//                    AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: startTime, endTime: now), sub: sub, priority:priority)
+                    AppConfiguration.shared.appCoordinator.fetchTickerData(
+                        AssetPairQueryParams(firstAssetId: pair.base,
+                                             secondAssetId: pair.quote,
+                                             timeGap: 60 * 60,
+                                             startTime: startTime,
+                                             endTime: now),
+                        sub: sub,
+                        priority: priority)
                 }
             }
         }
@@ -181,35 +202,43 @@ extension AppCoordinator {
                         return
                 }
                 self.state.property.otherRequestRelyData.accept(1)
-                self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority: priority, isNoFirst: false)
+                self.request24hMarkets(AssetConfiguration.shared.assetIds, sub: false, priority: priority, isNoFirst: false)
             }
         })
     }
 
-    func requestKlineDetailData(pair: Pair, gap: candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
+    func requestKlineDetailData(pair: Pair, gap: Candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
         let now = Date()
         let start = now.addingTimeInterval(-gap.rawValue * 199)
 
-        AppConfiguration.shared.appCoordinator.fetchKline(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: gap.rawValue.int, startTime: start, endTime: now), gap: gap, vc: vc, selector: selector)
+        AppConfiguration.shared.appCoordinator.fetchKline(
+            AssetPairQueryParams(firstAssetId: pair.base,
+                                 secondAssetId: pair.quote,
+                                 timeGap: gap.rawValue.int,
+                                 startTime: start,
+                                 endTime: now),
+            gap: gap,
+            vc: vc,
+            selector: selector)
     }
 
     func getLatestData() {
-        if AssetConfiguration.shared.asset_ids.isEmpty {
+        if AssetConfiguration.shared.assetIds.isEmpty {
             fetchAsset {
                 var pairs: [Pair] = []
                 var count = 0
-                for base in AssetConfiguration.market_base_assets {
+                for base in AssetConfiguration.marketBaseAssets {
                     SimpleHTTPService.requestMarketList(base: base).done({ (pair) in
 
-                        let piece_pair = pair.filter({ (p) -> Bool in
-                            return AssetConfiguration.shared.unique_ids.contains([p.base, p.quote])
+                        let piecePair = pair.filter({ (pair) -> Bool in
+                            return AssetConfiguration.shared.uniqueIds.contains([pair.base, pair.quote])
                         })
                         count += 1
 
-                        pairs += piece_pair
-                        if count == AssetConfiguration.market_base_assets.count {
-                            AssetConfiguration.shared.asset_ids = pairs
-                            self.request24hMarkets(AssetConfiguration.shared.asset_ids, priority: .high)
+                        pairs += piecePair
+                        if count == AssetConfiguration.marketBaseAssets.count {
+                            AssetConfiguration.shared.assetIds = pairs
+                            self.request24hMarkets(AssetConfiguration.shared.assetIds, priority: .high)
                         }
                     }).cauterize()
                 }
@@ -221,12 +250,12 @@ extension AppCoordinator {
             }
 
         } else {
-            if appData.assetInfo.count != AssetConfiguration.shared.unique_ids.count {
+            if appData.assetInfo.count != AssetConfiguration.shared.uniqueIds.count {
                 fetchAsset {
-                    self.request24hMarkets(AssetConfiguration.shared.asset_ids, priority: .high)
+                    self.request24hMarkets(AssetConfiguration.shared.assetIds, priority: .high)
                 }
             }
-            request24hMarkets(AssetConfiguration.shared.asset_ids, priority: .high)
+            request24hMarkets(AssetConfiguration.shared.assetIds, priority: .high)
             if appCoodinator.fetchPariTimer == nil || !(appCoodinator.fetchPariTimer!.state.isRunning) {
                 AppConfiguration.shared.appCoordinator.repeatFetchPairInfo(.veryLow)
             }

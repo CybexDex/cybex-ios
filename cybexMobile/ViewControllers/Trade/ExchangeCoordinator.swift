@@ -80,7 +80,7 @@ extension ExchangeCoordinator: ExchangeCoordinatorProtocol {
     guard let tradeVC = self.rootVC.topViewController as? TradeViewController,
         let exchange = tradeVC.children.filter({ (vc) -> Bool in
         if let vc = vc as? ExchangeViewController {
-          let type = isBuy ? exchangeType.buy : exchangeType.sell
+          let type = isBuy ? ExchangeType.buy : ExchangeType.sell
           if type == vc.type {
             return true
           }

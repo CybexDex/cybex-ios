@@ -12,11 +12,11 @@ import Foundation
 class TimeGapView: UIView {
   @IBOutlet var buttons: [UIView]!
 
-  enum event: String {
+  enum Event: String {
     case timeClicked = "timeClicked"
   }
 
-  enum tags: Int {
+  enum Tags: Int {
     case timeLabel = 1
     case line
   }
@@ -33,7 +33,7 @@ class TimeGapView: UIView {
         guard let `self` = self else { return }
 
         self.switchButton(idx)
-        self.next?.sendEventWith(event.timeClicked.rawValue, userinfo: ["candlestick": candlesticks.all[idx]])
+        self.next?.sendEventWith(Event.timeClicked.rawValue, userinfo: ["candlestick": Candlesticks.all[idx]])
 
       }).disposed(by: disposeBag)
     }
@@ -41,8 +41,8 @@ class TimeGapView: UIView {
 
   func switchButton(_ index: Int) {
     for (idx, button) in buttons.enumerated() {
-      let timeLabel = button.viewWithTag(tags.timeLabel.rawValue) as! UILabel
-      let line = button.viewWithTag(tags.line.rawValue)
+      let timeLabel = button.viewWithTag(Tags.timeLabel.rawValue) as! UILabel
+      let line = button.viewWithTag(Tags.line.rawValue)
       if idx == index {
         timeLabel.textColor = #colorLiteral(red: 1, green: 0.6386402845, blue: 0.3285836577, alpha: 1)
         line?.isHidden = false

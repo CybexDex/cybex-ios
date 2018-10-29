@@ -29,16 +29,16 @@ struct CBEMAVOLUMEModel {
     for (index, model) in klineModels.enumerated() {
 
       switch indicatorType {
-      case .EMA_VOLUME(let days):
+      case .EMAVolume(let days):
 
         var values = [Double?]()
 
         for (idx, day) in days.enumerated() {
 
-          let previousEMA_VOLUME: Double? = index > 0 ? datas[index - 1].EMA_VOLUMEs?[idx] : nil
-          values.append(handleEMA_VOLUME(day: day, model: model, index: index, previousEMA_VOLUME: previousEMA_VOLUME))
+          let previousEMAVolume: Double? = index > 0 ? datas[index - 1].EMAVolumes?[idx] : nil
+          values.append(handleEMA_VOLUME(day: day, model: model, index: index, previousEMA_VOLUME: previousEMAVolume))
         }
-        model.EMA_VOLUMEs = values
+        model.EMAVolumes = values
       default:
         break
       }

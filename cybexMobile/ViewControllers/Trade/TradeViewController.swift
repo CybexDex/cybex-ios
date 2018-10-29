@@ -134,7 +134,7 @@ class TradeViewController: BaseViewController {
     }
 
     @objc override func leftAction(_ sender: UIButton) {
-        if let baseIndex = AssetConfiguration.market_base_assets.index(of: pair.base), let index = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+        if let baseIndex = AssetConfiguration.marketBaseAssets.index(of: pair.base), let index = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
             return ticker.base == pair.base && ticker.quote == pair.quote
         }) {
             self.coordinator?.openMarket(index: index, currentBaseIndex: baseIndex)

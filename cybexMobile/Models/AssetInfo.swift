@@ -66,17 +66,17 @@ class Price: HandyJSON {
     }
 
     func toReal() -> Double {
-        let base_info = base.info()
-        let quote_info = quote.info()
+        let baseInfo = base.info()
+        let quoteInfo = quote.info()
 
-        let price_ratio =  Double(base.amount)! / Double(quote.amount)!
+        let priceRatio =  Double(base.amount)! / Double(quote.amount)!
 
-        let baseNumber = NSDecimalNumber(floatLiteral: pow(10, base_info.precision.double))
-        let quoteNumber = NSDecimalNumber(floatLiteral: pow(10, quote_info.precision.double))
+        let baseNumber = NSDecimalNumber(floatLiteral: pow(10, baseInfo.precision.double))
+        let quoteNumber = NSDecimalNumber(floatLiteral: pow(10, quoteInfo.precision.double))
 
-        let precision_ratio = baseNumber.dividing(by: quoteNumber).stringValue
+        let precisionRatio = baseNumber.dividing(by: quoteNumber).stringValue
 
-        return price_ratio / precision_ratio.toDouble()!
+        return priceRatio / precisionRatio.toDouble()!
     }
 
 }
@@ -89,7 +89,7 @@ extension AssetInfo: Equatable {
 
 struct RMBPrices {
     var name: String      = ""
-    var rmb_price: String = ""
+    var rmbPrice: String = ""
 }
 
 struct ImportantMarketPair {

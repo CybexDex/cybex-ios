@@ -53,11 +53,11 @@ class CBKLineModel: ObjectDescriptable {
 
     // MARK: MA - MA(N) = (C1+C2+……CN) / N, C:收盘价
     var MAs: [Double?]?
-    var MA_VOLUMEs: [Double?]?
+    var MAVolumes: [Double?]?
 
     // MARK: EMA - EMA(N) = 2 / (N+1) * (C-昨日EMA) + 昨日EMA, C:收盘价
     var EMAs: [Double?]?
-    var EMA_VOLUMEs: [Double?]?
+    var EMAVolumes: [Double?]?
 
     // MARK: MACD
 
@@ -76,25 +76,25 @@ class CBKLineModel: ObjectDescriptable {
     // RSV(9) =（今日收盘价－9日内最低价）/（9日内最高价－9日内最低价）* 100
     var RSV9: Double?
     // K(3) =（当日RSV值+2*前一日K值）/ 3
-    var KDJ_K: Double?
+    var KDJk: Double?
     // D(3) =（当日K值 + 2*前一日D值）/ 3
-    var KDJ_D: Double?
+    var KDJd: Double?
     // J = 3K － 2D
-    var KDJ_J: Double?
+    var KDJj: Double?
 
     // MARK: BOLL
     // 中轨线
-    var BOLL_MB: Double?
+    var BollMB: Double?
     // 上轨线
-    var BOLL_UP: Double?
+    var BollUP: Double?
     // 下轨线
-    var BOLL_DN: Double?
+    var BollDN: Double?
 
     var change: String = "-"
 
     var changeAmount: String = "-"
 
-    var incre: changeScope = .equal
+    var incre: ChangeScope = .equal
 
     init(klineDataType: CBKLineDataType = .CYB,
          date: Double,
@@ -134,16 +134,16 @@ extension CBKLineModel: Hashable {
             lhs.towardsVolume == rhs.towardsVolume &&
             lhs.precision == rhs.precision &&
             lhs.sumOpen == rhs.sumOpen &&
-            lhs.BOLL_DN == rhs.BOLL_DN &&
-            lhs.BOLL_MB == rhs.BOLL_MB &&
-            lhs.BOLL_UP == rhs.BOLL_UP &&
+            lhs.BollDN == rhs.BollDN &&
+            lhs.BollMB == rhs.BollMB &&
+            lhs.BollUP == rhs.BollUP &&
             lhs.DEA == rhs.DEA &&
             lhs.DIF == rhs.DIF &&
-            lhs.EMA_VOLUMEs == rhs.EMA_VOLUMEs &&
+            lhs.EMAVolumes == rhs.EMAVolumes &&
             lhs.EMAs == rhs.EMAs &&
-            lhs.KDJ_D == rhs.KDJ_D &&
-            lhs.KDJ_J == rhs.KDJ_J &&
-            lhs.KDJ_K == rhs.KDJ_K &&
+            lhs.KDJd == rhs.KDJd &&
+            lhs.KDJj == rhs.KDJj &&
+            lhs.KDJk == rhs.KDJk &&
             lhs.MACD == rhs.MACD
     }
 }

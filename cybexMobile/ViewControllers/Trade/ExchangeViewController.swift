@@ -12,9 +12,8 @@ import RxCocoa
 import ReSwift
 
 class ExchangeViewController: BaseViewController {
-    
     var coordinator: (ExchangeCoordinatorProtocol & ExchangeStateManagerProtocol)?
-    var type: exchangeType = .buy
+    var type: ExchangeType = .buy
     
     var pair: Pair? {
         didSet {

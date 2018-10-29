@@ -79,8 +79,8 @@ extension SettingCoordinator: SettingStateManagerProtocol {
             isTest = true
         }
         changeEnvironmentAction()
-        AssetConfiguration.shared.asset_ids = []
-        AssetConfiguration.shared.unique_ids = []
+        AssetConfiguration.shared.assetIds = []
+        AssetConfiguration.shared.uniqueIds = []
 
         appData.tickerData.accept([])
 

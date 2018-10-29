@@ -16,7 +16,7 @@ class CBKLineView: UIView {
     private var timeGapView: TimeGapView!
 
     private let configuration = CBConfiguration.sharedConfiguration
-    var indicator: indicator = .ma {
+    var indicator: Indicator = .ma {
         didSet {
             refreshAccessoryHorizentalView(indicator)
             klineDrawView.switchToAccessory(indicator == .macd)
@@ -24,9 +24,9 @@ class CBKLineView: UIView {
         }
     }
 
-    var timeGap: candlesticks = .one_day {
+    var timeGap: Candlesticks = .oneDay {
         didSet {
-            timeGapView.switchButton(candlesticks.all.index(of: timeGap)!)
+            timeGapView.switchButton(Candlesticks.all.index(of: timeGap)!)
             klineDrawView.removeIndicatorLine()
         }
     }
@@ -67,7 +67,7 @@ class CBKLineView: UIView {
         accessHorizentalView.height(56)
     }
 
-    func refreshAccessoryHorizentalView(_ indicator: indicator) {
+    func refreshAccessoryHorizentalView(_ indicator: Indicator) {
         accessHorizentalView.data = indicator
     }
 

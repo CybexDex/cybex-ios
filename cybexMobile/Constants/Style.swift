@@ -12,13 +12,13 @@ import Localize_Swift
 import SwiftTheme
 
 enum StyleNames: String {
-    case introduce_normal
+    case introduceNormal
     case introduce
     case password
-    case withdraw_introduce
+    case withdrawIntroduce
     case alertContent
     case address
-    case bold_12_20
+    case bold12With20
 
     func tagText(_ nestText: String) -> String {
         return "<\(self.rawValue)>" + nestText + "</\(self.rawValue)>"
@@ -26,9 +26,9 @@ enum StyleNames: String {
 }
 
 enum LineViewStyleNames: String {
-    case normal_name
-    case normal_content
-    case transfer_confirm
+    case normalName
+    case normalContent
+    case transferConfirm
 }
 
 extension Style {
@@ -61,7 +61,10 @@ class RichStyle {
     }
 
     //PingFangSC-Regular_12_#F7F8FAFF_20
-    func constructStyle(_ fontSize: CGFloat = 12, color: UIColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo, lineHeight: CGFloat = 20, font: SystemFonts = SystemFonts.PingFangSC_Regular) {
+    func constructStyle(_ fontSize: CGFloat = 12,
+                        color: UIColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo,
+                        lineHeight: CGFloat = 20,
+                        font: SystemFonts = SystemFonts.PingFangSC_Regular) {
         let style = Style {
             let realfont = font.font(size: fontSize)
             $0.font = realfont
@@ -73,7 +76,11 @@ class RichStyle {
         Styles.register("\(font.rawValue)_\(fontSize)_\(color.hexString(true))_\(lineHeight)", style: style)
     }
 
-    func tagText(_ nestText: String, fontSize: CGFloat = 12, color: UIColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo, lineHeight: CGFloat = 20, font: SystemFonts = SystemFonts.PingFangSC_Regular) -> String {
+    func tagText(_ nestText: String,
+                 fontSize: CGFloat = 12,
+                 color: UIColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo,
+                 lineHeight: CGFloat = 20,
+                 font: SystemFonts = SystemFonts.PingFangSC_Regular) -> String {
         let tag = "\(font.rawValue)_\(fontSize)_\(color.hexString(true))_\(lineHeight)"
 
         if !StylesManager.shared.styles.keys.contains(tag) {
@@ -88,23 +95,23 @@ class RichStyle {
             $0.color = UIColor.steel
             $0.lineSpacing = 8.0
         }
-        Styles.register(StyleNames.introduce_normal.rawValue, style: style)
+        Styles.register(StyleNames.introduceNormal.rawValue, style: style)
 
-        let introduce_style = Style {
+        let introduceStyle = Style {
             $0.font = SystemFonts.PingFangSC_Regular.font(size: 14.0)
             $0.color = UIColor.steel
             $0.lineSpacing = 4.0
         }
-        Styles.register(StyleNames.introduce.rawValue, style: introduce_style)
+        Styles.register(StyleNames.introduce.rawValue, style: introduceStyle)
 
-        let with_style = Style {
+        let withStyle = Style {
             $0.font = SystemFonts.PingFangSC_Regular.font(size: 14.0)
             $0.color = UIColor.steel
             $0.lineSpacing = 4.0
         }
-        Styles.register(StyleNames.withdraw_introduce.rawValue, style: with_style)
+        Styles.register(StyleNames.withdrawIntroduce.rawValue, style: withStyle)
 
-        let bold_12_20 = Style {
+        let bold12With20 = Style {
             let font = SystemFonts.PingFangHK_Regular.font(size: 12)
             $0.font = font
             $0.color = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
@@ -112,7 +119,7 @@ class RichStyle {
             $0.setupLineHeight(20, fontHeight: font.lineHeight)
         }
 
-        Styles.register(StyleNames.bold_12_20.rawValue, style: bold_12_20)
+        Styles.register(StyleNames.bold12With20.rawValue, style: bold12With20)
 
         passwordStyle()
         alertDetailStyle()
@@ -125,13 +132,13 @@ class RichStyle {
             $0.font = SystemFonts.PingFangSC_Regular.font(size: 12.0)
         }
 
-        let node_dark = Style {
+        let nodeDark = Style {
             $0.font = SystemFonts.PingFangSC_Regular.font(size: 12)
             $0.lineSpacing = 4
             $0.color = UIColor.white
         }
 
-        let node_white = Style {
+        let nodeWhite = Style {
             $0.font = SystemFonts.PingFangSC_Regular.font(size: 12)
             $0.lineSpacing = 4
             $0.color = UIColor.darkTwo
@@ -143,7 +150,7 @@ class RichStyle {
             $0.color = UIColor.steel
         }
 
-        let myGroup = StyleGroup(base: base, ["node_dark": node_dark, "node_white": node_white, "address": address])
+        let myGroup = StyleGroup(base: base, ["node_dark": nodeDark, "node_white": nodeWhite, "address": address])
         StylesManager.shared.register(StyleNames.address.rawValue, style: myGroup)
     }
 
@@ -173,45 +180,45 @@ class RichStyle {
             $0.color = UIColor.steel
         }
 
-        let content_buy = Style {
+        let contentBuy = Style {
             $0.font = SystemFonts.PingFangSC_Medium.font(size: 14.0)
             $0.color = UIColor.turtleGreen
         }
 
-        let content_sell = Style {
+        let contentSell = Style {
             $0.font = SystemFonts.PingFangSC_Medium.font(size: 14.0)
             $0.color = UIColor.reddish
         }
 
-        let content_dark = Style {
+        let contentDark = Style {
             $0.font = SystemFonts.PingFangSC_Medium.font(size: 14.0)
             $0.color = UIColor.white
         }
 
-        let content_light = Style {
+        let contentLight = Style {
             $0.font = SystemFonts.PingFangSC_Medium.font(size: 14.0)
             $0.color = UIColor.darkTwo
         }
 
-        let myGroup = StyleGroup(base: base, ["name": name, "content_dark": content_dark, "content_light": content_light, "content_sell": content_sell, "content_buy": content_buy])
+        let myGroup = StyleGroup(base: base, ["name": name, "content_dark": contentDark, "content_light": contentLight, "content_sell": contentSell, "content_buy": contentBuy])
         StylesManager.shared.register(StyleNames.alertContent.rawValue, style: myGroup)
     }
 
     func initLineViewStyle() {
-        let name_style = Style {
+        let nameStyle = Style {
             $0.font = SystemFonts.PingFangSC_Regular.font(size: 16.0)
         }
-        Styles.register(LineViewStyleNames.normal_name.rawValue, style: name_style)
+        Styles.register(LineViewStyleNames.normalName.rawValue, style: nameStyle)
 
-        let content_style = Style {
+        let contentStyle = Style {
             $0.font = SystemFonts.PingFangSC_Regular.font(size: 14.0)
         }
-        Styles.register(LineViewStyleNames.normal_content.rawValue, style: content_style)
+        Styles.register(LineViewStyleNames.normalContent.rawValue, style: contentStyle)
 
-        let confirm_style = Style {
+        let confirmStyle = Style {
             $0.font = SystemFonts.PingFangSC_Semibold.font(size: 16.0)
         }
-        Styles.register(LineViewStyleNames.transfer_confirm.rawValue, style: confirm_style)
+        Styles.register(LineViewStyleNames.transferConfirm.rawValue, style: confirmStyle)
 
     }
 }

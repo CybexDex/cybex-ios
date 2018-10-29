@@ -10,7 +10,7 @@ import Foundation
 
 @IBDesignable
 class AccessoryCollectionView: UIView {
-  enum event: String {
+  enum Event: String {
     case indicatorClicked = "indicatorClicked"
   }
 
@@ -29,7 +29,7 @@ class AccessoryCollectionView: UIView {
 
   var data: Any? {
     didSet {
-      guard let indicator = data as? indicator else { return }
+      guard let indicator = data as? Indicator else { return }
 
       self.title.text = indicator.rawValue
     }
@@ -39,7 +39,7 @@ class AccessoryCollectionView: UIView {
     self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
       guard let `self` = self else { return }
 
-      self.next?.sendEventWith(event.indicatorClicked.rawValue, userinfo: ["indicator": self.data ?? []])
+      self.next?.sendEventWith(Event.indicatorClicked.rawValue, userinfo: ["indicator": self.data ?? []])
 
     }).disposed(by: disposeBag)
   }
