@@ -33,7 +33,7 @@ class AccountCoordinator: AccountRootCoordinator {
     lazy var creator = AccountPropertyActionCreate()
 
     var store = Store<AccountState>(
-        reducer: AccountReducer,
+        reducer: gAccountReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )

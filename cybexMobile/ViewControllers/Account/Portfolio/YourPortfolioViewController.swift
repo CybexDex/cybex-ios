@@ -13,7 +13,7 @@ import ReSwift
 import SwiftTheme
 
 class YourPortfolioViewController: BaseViewController {
-  struct define {
+  struct Define {
     static let sectionHeaderHeight: CGFloat = 44.0
   }
   var data: [MyPortfolioData] = [MyPortfolioData]()
@@ -137,7 +137,9 @@ extension YourPortfolioViewController: UITableViewDataSource, UITableViewDelegat
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: YourPortfolioCell.self), for: indexPath) as! YourPortfolioCell
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: YourPortfolioCell.self), for: indexPath) as? YourPortfolioCell else {
+        return YourPortfolioCell()
+    }
 
     cell.setup(self.data[indexPath.row], indexPath: indexPath)
     return cell

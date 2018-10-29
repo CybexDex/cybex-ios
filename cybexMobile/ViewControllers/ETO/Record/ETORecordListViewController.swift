@@ -133,7 +133,9 @@ extension ETORecordListViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let nibString = R.nib.etoRecordCell.identifier
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: nibString, for: indexPath) as! ETORecordCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: nibString, for: indexPath) as? ETORecordCell else {
+            return ETORecordCell()
+        }
 
         if let model = self.coordinator?.state.data.value[indexPath.row] {
             cell.setup(model, indexPath: indexPath)

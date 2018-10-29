@@ -10,11 +10,14 @@ import UIKit
 import ReSwift
 import SwiftTheme
 
-func LockupAssetsReducer(action: Action, state: LockupAssetsState?) -> LockupAssetsState {
-    return LockupAssetsState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: LockupAssetsPropertyReducer(state?.property, action: action))
+func gLockupAssetsReducer(action: Action, state: LockupAssetsState?) -> LockupAssetsState {
+    return LockupAssetsState(isLoading: loadingReducer(state?.isLoading, action: action),
+                             page: pageReducer(state?.page, action: action),
+                             errorMessage: errorMessageReducer(state?.errorMessage, action: action),
+                             property: gLockupAssetsPropertyReducer(state?.property, action: action))
 }
 
-func LockupAssetsPropertyReducer(_ state: LockupAssetsPropertyState?, action: Action) -> LockupAssetsPropertyState {
+func gLockupAssetsPropertyReducer(_ state: LockupAssetsPropertyState?, action: Action) -> LockupAssetsPropertyState {
     let state = state ?? LockupAssetsPropertyState()
     switch action {
     case let action as FetchedLockupAssetsData:
@@ -49,12 +52,12 @@ func lockupAssteToLockUpAssetsDate(datas: [LockUpAssetsMData]) -> LockUpAssetsVM
 //                name = assetsInfo.symbol
 //            }
             let icon = AppConfiguration.ServerIconsBaseURLString + data.balance.assetID.replacingOccurrences(of: ".", with: "_") + "_grey.png"
-            let vesting_duration_seconds = data.vestingPolicy.vestingDurationSeconds.toDouble() ?? 0
-            if let begin_time = data.vestingPolicy.beginTimestamp.dateFromISO8601 {
-                let progress = (Date().timeIntervalSince1970 - begin_time.timeIntervalSince1970) / vesting_duration_seconds
-                let end_time = begin_time.addingTimeInterval(vesting_duration_seconds).string(withFormat: "yyyy/MM/dd")
+            let vestingDurationSeconds = data.vestingPolicy.vestingDurationSeconds.toDouble() ?? 0
+            if let beginTime = data.vestingPolicy.beginTimestamp.dateFromISO8601 {
+                let progress = (Date().timeIntervalSince1970 - beginTime.timeIntervalSince1970) / vestingDurationSeconds
+                let endTime = beginTime.addingTimeInterval(vestingDurationSeconds).string(withFormat: "yyyy/MM/dd")
                 if progress < 1 && progress >= 0 {
-                    sources.append(LockupAssteData(icon: icon, name: name, amount: count, RMBCount: price, progress: String(progress), endTime: end_time))
+                    sources.append(LockupAssteData(icon: icon, name: name, amount: count, RMBCount: price, progress: String(progress), endTime: endTime))
                 }
             }
         } else {

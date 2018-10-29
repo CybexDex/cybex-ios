@@ -189,7 +189,10 @@ extension TransferViewController {
                     if self.isVisible {
                         if String(describing: data) == "<null>"{
                             if AddressManager.shared.containAddressOfTransfer(self.coordinator!.state.account.value).0 == false {
-                                self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.transfer_success_title.key.localized(), content: R.string.localizable.transfer_success_content.key.localized())
+                                self.showConfirmImage(
+                                    R.image.icCheckCircleGreen.name,
+                                    title: R.string.localizable.transfer_success_title.key.localized(),
+                                    content: R.string.localizable.transfer_success_content.key.localized())
                                 self.accountName = self.coordinator!.state.account.value
                             } else {
                                 self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())

@@ -124,7 +124,7 @@ extension PickerView {
         }
         if let items = self.items as? [Int: AnyObject] {
             if components == 0 {
-                var obj: AnyObject? = items[0]
+                let obj: AnyObject? = items[0]
                 while obj != nil {
                     components += 1
                     if let result = obj as? [Int: AnyObject] {

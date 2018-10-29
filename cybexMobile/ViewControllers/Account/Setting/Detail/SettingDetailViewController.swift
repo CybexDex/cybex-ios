@@ -15,14 +15,14 @@ import Localize_Swift
 import SwiftyUserDefaults
 import SwifterSwift
 
-enum settingPage {
+enum SettingPage {
   case language
   case theme
 }
 
 class SettingDetailViewController: BaseViewController {
 
-  var pageType: settingPage = .language
+  var pageType: SettingPage = .language
 
   @IBOutlet weak var tableView: UITableView!
 
@@ -51,11 +51,13 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: SettingCell.self), for: indexPath) as! SettingCell
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: SettingCell.self), for: indexPath) as? SettingCell else {
+        return SettingCell()
+    }
     cell.accessoryView = UIImageView(image: #imageLiteral(resourceName: "ic_check_active_circle_24px"))
 
     switch self.pageType {
-    case settingPage.theme:
+    case SettingPage.theme:
       if (indexPath.row == 0) {
         cell.textLabel?.localizedText = R.string.localizable.dark.key.localizedContainer()
       } else {
@@ -63,7 +65,7 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
       }
 
       cell.textLabel?.isHighlighted = ThemeManager.currentThemeIndex == indexPath.row
-    case settingPage.language:
+    case SettingPage.language:
       cell.textLabel?.text = ["English", "简体中文"][indexPath.row]
 
       if indexPath.row == 0 && Localize.currentLanguage() == "en" {
@@ -84,7 +86,7 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
     let index  = indexPath.row
 
     switch self.pageType {
-    case settingPage.theme:
+    case SettingPage.theme:
       self.coordinator?.popViewController(false)
 
       SwifterSwift.delay(milliseconds: 10) {
@@ -92,7 +94,7 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
         ThemeManager.setTheme(index: index)
       }
 
-    case settingPage.language:
+    case SettingPage.language:
       self.coordinator?.popViewController(false)
 
       SwifterSwift.delay(milliseconds: 10) {

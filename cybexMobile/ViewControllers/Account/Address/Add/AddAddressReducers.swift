@@ -10,7 +10,10 @@ import UIKit
 import ReSwift
 
 func addAddressReducer(action: Action, state: AddAddressState?) -> AddAddressState {
-    return AddAddressState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: addAddressPropertyReducer(state?.property, action: action))
+    return AddAddressState(isLoading: loadingReducer(state?.isLoading, action: action),
+                           page: pageReducer(state?.page, action: action),
+                           errorMessage: errorMessageReducer(state?.errorMessage, action: action),
+                           property: addAddressPropertyReducer(state?.property, action: action))
 }
 
 func addAddressPropertyReducer(_ state: AddAddressPropertyState?, action: Action) -> AddAddressPropertyState {

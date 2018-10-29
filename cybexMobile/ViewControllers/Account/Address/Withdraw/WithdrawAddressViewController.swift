@@ -61,7 +61,11 @@ class WithdrawAddressViewController: BaseViewController {
             guard let `self` = self else { return }
             
             if data.count == 0 {
-                self.view.showNoData(self.coordinator!.isEOS() ? R.string.localizable.account_nodata.key.localized() : R.string.localizable.address_nodata.key.localized(), icon: R.image.img_no_address.name)
+                self.view.showNoData(
+                    self.coordinator!.isEOS() ?
+                        R.string.localizable.account_nodata.key.localized() :
+                        R.string.localizable.address_nodata.key.localized(),
+                    icon: R.image.img_no_address.name)
             } else {
                 self.view.hiddenNoData()
             }
@@ -76,8 +80,10 @@ extension WithdrawAddressViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.withdrawAddressTableViewCell.name, for: indexPath) as! WithdrawAddressTableViewCell
-        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.withdrawAddressTableViewCell.name, for: indexPath) as? WithdrawAddressTableViewCell else {
+            return WithdrawAddressTableViewCell()
+        }
+
         if let data = self.coordinator?.state.property.data.value {
             cell.setup(data[indexPath.row], indexPath: indexPath)
         }

@@ -16,7 +16,7 @@ enum AddressType: String {
 }
 
 protocol AddAddressCoordinatorProtocol {
-    func pop(_ sender: pop_type)
+    func pop(_ sender: PopType)
 }
 
 protocol AddAddressStateManagerProtocol {
@@ -51,7 +51,7 @@ class AddAddressCoordinator: AccountRootCoordinator {
 }
 
 extension AddAddressCoordinator: AddAddressCoordinatorProtocol {
-    func pop(_ sender: pop_type) {
+    func pop(_ sender: PopType) {
         if sender == .normal {
             self.rootVC.popViewController()
         } else {

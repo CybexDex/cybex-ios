@@ -97,10 +97,10 @@ class AccountViewController: BaseViewController {
                      R.string.localizable.lockupAssetsTitle.key.localized()]
 
     dataArray.removeAll()
-    for i in 0..<nameArray.count {
+    for index in 0..<nameArray.count {
       var model = AccountViewModel()
-      model.leftImage = imgArray[i]
-      model.name = nameArray[i]
+      model.leftImage = imgArray[index]
+      model.name = nameArray[index]
 
       dataArray.append(model)
     }
@@ -139,7 +139,9 @@ extension AccountViewController {
   }
 
   @objc func clickCellView(_ sender: [String: Any]) {
-    let index = sender["index"] as! Int
+    guard let index = sender["index"] as? Int else {
+        return
+    }
     switch index {
     case 0:
       if !UserManager.shared.isLoginIn {

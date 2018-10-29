@@ -12,7 +12,7 @@ import RxCocoa
 import ReSwift
 import SwifterSwift
 
-enum pop_type: Int {
+enum PopType: Int {
     case normal = 0
     case selectVC
 }
@@ -30,7 +30,7 @@ class AddAddressViewController: BaseViewController {
 
     var transferAddress: TransferAddress?
 
-    var popActionType: pop_type = .normal
+    var popActionType: PopType = .normal
 	override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -108,9 +108,12 @@ class AddAddressViewController: BaseViewController {
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        Observable.combineLatest(self.coordinator!.state.property.addressVailed.asObservable(), self.coordinator!.state.property.noteVailed.asObservable()).subscribe(onNext: { [weak self](address_success, note_success) in
+        Observable.combineLatest(
+            self.coordinator!.state.property.addressVailed.asObservable(),
+            self.coordinator!.state.property.noteVailed.asObservable()
+            ).subscribe(onNext: { [weak self](addressSuccess, noteSuccess) in
             guard let `self` = self else { return }
-            guard address_success, note_success else {
+            guard addressSuccess, noteSuccess else {
                 self.containerView.addBtn.isEnable = false
                 return
             }

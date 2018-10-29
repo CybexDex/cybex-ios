@@ -40,10 +40,11 @@ extension AddressHomeViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.addressHomeTableViewCell.name, for: indexPath) as? AddressHomeTableViewCell {
-            return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.addressHomeTableViewCell.name, for: indexPath) as? AddressHomeTableViewCell else {
+            return AddressHomeTableViewCell()
         }
-        return AddressHomeTableViewCell()
+
+        return cell
     }
 }
 

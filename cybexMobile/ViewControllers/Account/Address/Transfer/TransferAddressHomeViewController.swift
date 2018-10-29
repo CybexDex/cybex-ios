@@ -60,10 +60,11 @@ extension TransferAddressHomeViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.transferAddressHomeTableViewCell.name, for: indexPath) as? TransferAddressHomeTableViewCell {
-            if let data = self.coordinator?.state.property.data.value {
-                cell.setup(data[indexPath.row], indexPath: indexPath)
-            }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.transferAddressHomeTableViewCell.name, for: indexPath) as? TransferAddressHomeTableViewCell else {
+            return TransferAddressHomeTableViewCell()
+        }
+        if let data = self.coordinator?.state.property.data.value {
+            cell.setup(data[indexPath.row], indexPath: indexPath)
             return cell
         }
         return TransferAddressHomeTableViewCell()

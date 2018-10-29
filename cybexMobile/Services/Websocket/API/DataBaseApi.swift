@@ -221,8 +221,8 @@ struct GetLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
         let result = JSON(resultObject).arrayValue
         if result.count >= 1 {
             var data: [LimitOrder] = []
-            for i in result {
-                if let order = LimitOrder.deserialize(from: i.dictionaryObject!) {
+            for index in result {
+                if let order = LimitOrder.deserialize(from: index.dictionaryObject!) {
                     data.append(order)
                 }
             }
@@ -249,8 +249,8 @@ struct GetBalanceObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
         let result = JSON(resultObject).arrayValue
         if result.count > 0 {
             var data: [LockUpAssetsMData] = []
-            for i in result {
-                guard let dic = i.dictionaryObject else { return [] }
+            for index in result {
+                guard let dic = index.dictionaryObject else { return [] }
                 guard let lockup = LockUpAssetsMData.deserialize(from: dic) else { return[] }
                 data.append(lockup)
             }

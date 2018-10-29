@@ -26,7 +26,7 @@ class LockupAssetsCoordinator: AccountRootCoordinator {
   lazy var creator = LockupAssetsPropertyActionCreate()
 
   var store = Store<LockupAssetsState>(
-    reducer: LockupAssetsReducer,
+    reducer: gLockupAssetsReducer,
     state: nil,
     middleware: [trackingMiddleware]
   )
