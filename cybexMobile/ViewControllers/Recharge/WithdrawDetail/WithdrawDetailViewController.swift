@@ -40,13 +40,13 @@ class WithdrawDetailViewController: BaseViewController {
                 
                 eosContainerView?.edgesToDevice(vc: self, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
                 
-                self.eosContainerView?.introduce.attributedText = message.set(style: StyleNames.withdraw_introduce.rawValue)
+                self.eosContainerView?.introduce.attributedText = message.set(style: StyleNames.withdrawIntroduce.rawValue)
             } else {
                 containerView = WithdrawView(frame: .zero)
                 self.view.addSubview(containerView!)
                 
                 containerView?.edgesToDevice(vc: self, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
-                self.containerView?.introduce.attributedText = message.set(style: StyleNames.withdraw_introduce.rawValue)
+                self.containerView?.introduce.attributedText = message.set(style: StyleNames.withdrawIntroduce.rawValue)
             }
         }
         

@@ -19,9 +19,9 @@ protocol AppStateManagerProtocol {
     var state: AppState { get }
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<AppState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
+        ) where S.StoreSubscriberStateType == SelectedState
 
-//    func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority, callback:@escaping ()->())
+    //    func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority, callback:@escaping ()->())
     func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority)
 
     func fetchTickerData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority)
@@ -207,25 +207,51 @@ extension AppCoordinator {
     }
 
     func presentVC<T: NavCoordinator>(_ coordinator: T.Type, animated: Bool = true, context: RouteContext? = nil,
-                                     navSetup: ((BaseNavigationController) -> Void)?,
-                                     presentSetup:((_ top: BaseNavigationController, _ target: BaseNavigationController) -> Void)?) {
+                                      navSetup: ((BaseNavigationController) -> Void)?,
+                                      presentSetup:((_ top: BaseNavigationController, _ target: BaseNavigationController) -> Void)?) {
         let nav = BaseNavigationController()
         navSetup?(nav)
         let coor = NavCoordinator(rootVC: nav)
         coor.pushVC(coordinator, animated: false, context: context)
 
-        var topside = curDisplayingCoordinator().rootVC!
+        var topside = curDisplayingCoordinator().rootVC
 
-        while topside.presentedViewController != nil {
-            topside = topside.presentedViewController as! BaseNavigationController
+        while topside?.presentedViewController != nil {
+            topside = topside?.presentedViewController as? BaseNavigationController
         }
 
         if presentSetup == nil {
             SwifterSwift.delay(milliseconds: 100) {
-                topside.present(nav, animated: animated, completion: nil)
+                topside?.present(nav, animated: animated, completion: nil)
+            }
+        } else if let top = topside {
+            presentSetup?(top, nav)
+        }
+    }
+
+    func presentVCNoNav<T: NavCoordinator>(_ coordinator: T.Type,
+                                           animated: Bool = true,
+                                           context: RouteContext? = nil,
+                                           presentSetup:((_ top: BaseNavigationController,
+        _ target: BaseViewController) -> Void)?) {
+        guard var topside = curDisplayingCoordinator().rootVC else {
+            return
+        }
+
+        let viewController = coordinator.start(topside, context: context)
+
+        while topside.presentedViewController != nil {
+            if let presented = topside.presentedViewController as? BaseNavigationController {
+                topside = presented
+            }
+        }
+
+        if presentSetup == nil {
+            SwifterSwift.delay(milliseconds: 100) {
+                topside.present(viewController, animated: animated, completion: nil)
             }
         } else {
-            presentSetup?(topside, nav)
+            presentSetup?(topside, viewController)
         }
     }
 }

@@ -104,7 +104,7 @@ extension HomeContentView: UITableViewDataSource, UITableViewDelegate {
             return 6
         }
 
-        return appData.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+        return appData.filterQuoteAssetTicker(AssetConfiguration.marketBaseAssets[currentBaseIndex]).filter({ (ticker) -> Bool in
             return ticker.baseVolume != "0"
         }).count
     }
@@ -121,7 +121,7 @@ extension HomeContentView: UITableViewDataSource, UITableViewDelegate {
                 }
             }
         } else {
-            let markets = appData.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
+            let markets = appData.filterQuoteAssetTicker(AssetConfiguration.marketBaseAssets[currentBaseIndex]).filter({ (ticker) -> Bool in
                 return ticker.baseVolume != "0"
 
             })

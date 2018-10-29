@@ -34,9 +34,9 @@ struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
     var parameters: Any? {
         return [ApiCategory.history,
                 HistoryCatogery.getAccountHistory.rawValue.snakeCased(),
-                [accountID, objectID.operation_history_object.rawValue.snakeCased(),
+                [accountID, ObjectID.operationHistoryObject.rawValue.snakeCased(),
                  "100",
-                 objectID.operation_history_object.rawValue.snakeCased()]
+                 ObjectID.operationHistoryObject.rawValue.snakeCased()]
         ]
     }
 
@@ -47,7 +47,7 @@ struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
             for item in response {
                 if let opItem = item["op"] as? [Any], let opcode = opItem[0] as? Int, var operation = opItem[1] as? [String: Any], let blockNum = item["block_num"] {
                     operation["block_num"] = blockNum
-                    if opcode == ChainTypesOperations.fill_order.rawValue {
+                    if opcode == ChainTypesOperations.fillOrder.rawValue {
                         if let fillorder = FillOrder.deserialize(from: operation) {
                             fillOrders.append(fillorder)
                         }

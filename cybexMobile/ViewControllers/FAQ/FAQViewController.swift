@@ -17,7 +17,7 @@ class FAQViewController: BaseWebViewController {
 
 	override func viewDidLoad() {
 
-    let url = Defaults[.theme] == 0 ?AppConfiguration.FAQ_NIGHT_THEME : AppConfiguration.FAQ_LIGHT_THEME
+    let url = Defaults[.theme] == 0 ?AppConfiguration.FAQNightTheme : AppConfiguration.FAQLightTheme
     self.url = URL(string: url)
 
     super.viewDidLoad()
@@ -29,9 +29,9 @@ class FAQViewController: BaseWebViewController {
     NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] _ in
       guard let `self` = self else { return }
       if ThemeManager.currentThemeIndex == 0 {
-        self.url = URL(string: AppConfiguration.FAQ_NIGHT_THEME)
+        self.url = URL(string: AppConfiguration.FAQNightTheme)
       } else {
-        self.url = URL(string: AppConfiguration.FAQ_LIGHT_THEME)
+        self.url = URL(string: AppConfiguration.FAQLightTheme)
       }
     })
   }

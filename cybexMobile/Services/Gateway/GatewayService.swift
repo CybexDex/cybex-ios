@@ -19,7 +19,7 @@ enum GatewayAPI {
 
 extension GatewayAPI: TargetType {
     var baseURL: URL {
-        return URL(string: AppConfiguration.RECODE_BASE_URLString)!
+        return URL(string: AppConfiguration.RecodeBaseURLString)!
     }
 
     var path: String {

@@ -26,7 +26,7 @@ class RechargeView: UIView {
     var trade: Trade? {
         didSet {
             if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
-                self.introduce.content.attributedText = Localize.currentLanguage() == "en" ? trade.enInfo.set(style: StyleNames.withdraw_introduce.rawValue) : trade.cnInfo.set(style: StyleNames.withdraw_introduce.rawValue)
+                self.introduce.content.attributedText = Localize.currentLanguage() == "en" ? trade.enInfo.set(style: StyleNames.withdrawIntroduce.rawValue) : trade.cnInfo.set(style: StyleNames.withdrawIntroduce.rawValue)
 
                 updateViewWithAssetName(tradeInfo.id)
             }

@@ -39,10 +39,10 @@ class AccountOpenedOrdersView: UIView {
             headerView.data = "\(UserManager.shared.limitOrderValue)"
         } else if segment.selectedSegmentIndex == 1 {
             headerView.totalValue_tip.localizedText = R.string.localizable.openedBuyMoney.key.localizedContainer()
-            headerView.data = "\(UserManager.shared.limitOrder_buy_value)"
+            headerView.data = "\(UserManager.shared.limitOrderBuyValue)"
         } else {
             headerView.totalValue_tip.localizedText = R.string.localizable.openedSellMoney.key.localizedContainer()
-            headerView.data = "\(UserManager.shared.limitOrder_sell_value)"
+            headerView.data = "\(UserManager.shared.limitOrderSellValue)"
         }
     }
 

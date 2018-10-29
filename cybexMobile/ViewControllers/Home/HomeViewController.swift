@@ -27,7 +27,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
     var pair: Pair? {
         didSet {
-            guard let pair = pair, let index = AssetConfiguration.market_base_assets.index(of: pair.base) else { return }
+            guard let pair = pair, let index = AssetConfiguration.marketBaseAssets.index(of: pair.base) else { return }
 
             if let selectedIndex = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
                 return ticker.quote == pair.quote
@@ -44,12 +44,12 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     var base: String {
         if self.VC_TYPE == 1 {
             if let titleView = self.contentView {
-                return AssetConfiguration.market_base_assets[titleView.currentBaseIndex]
+                return AssetConfiguration.marketBaseAssets[titleView.currentBaseIndex]
             }
             return ""
         } else {
             if let titleView = self.businessTitleView {
-                return AssetConfiguration.market_base_assets[titleView.currentBaseIndex]
+                return AssetConfiguration.marketBaseAssets[titleView.currentBaseIndex]
             }
             return ""
         }
@@ -99,7 +99,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         appData.ticker_data.asObservable().filter({[weak self] (s) -> Bool in
             guard let `self` = self else { return false}
             if self.VC_TYPE == view_type.Comprehensive.rawValue {
-                if s.count == AssetConfiguration.shared.asset_ids.count {
+                if s.count == AssetConfiguration.shared.assetIds.count {
                     return true
                 }
             } else {
@@ -107,7 +107,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
                     return ticker.base == self.base
                     }
 
-                if tickers.count == AssetConfiguration.shared.asset_ids.filter({ $0.base == self.base}).count, tickers.count != 0 {
+                if tickers.count == AssetConfiguration.shared.assetIds.filter({ $0.base == self.base}).count, tickers.count != 0 {
                     return true
                 }
             }
@@ -147,12 +147,12 @@ extension HomeViewController {
                 self.coordinator?.openMarket(index: index, currentBaseIndex: self.contentView!.currentBaseIndex)
             }
         } else if VC_TYPE == view_type.Comprehensive.rawValue {
-            if let index = data["index"] as? Int, appData.ticker_data.value.count == AssetConfiguration.shared.asset_ids.count {
+            if let index = data["index"] as? Int, appData.ticker_data.value.count == AssetConfiguration.shared.assetIds.count {
                 let datas = appData.filterPopAssetsCurrency()
                 if datas.count > index {
                     let buckets = appData.filterPopAssetsCurrency()[index]
 
-                    if let baseIndex = AssetConfiguration.market_base_assets.firstIndex(of: buckets.base) {
+                    if let baseIndex = AssetConfiguration.marketBaseAssets.firstIndex(of: buckets.base) {
                         let markets = appData.filterQuoteAssetTicker(buckets.base)
                         if let curIndex = markets.firstIndex(of: buckets) {
                             self.coordinator?.openMarket(index: curIndex, currentBaseIndex: baseIndex)

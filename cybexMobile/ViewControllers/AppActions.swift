@@ -80,7 +80,7 @@ struct AppPropertyState {
 
     var matrixs: BehaviorRelay<[Pair: BucketMatrix]> = BehaviorRelay(value: [:])
 
-    var detailData: [Pair: [candlesticks: [Bucket]]]?
+    var detailData: [Pair: [Candlesticks: [Bucket]]]?
 
     var subscribeIds: [Pair: Int]?
     var pairsRefreshTimes: [Pair: Double]?
@@ -184,7 +184,7 @@ struct TickerFetched: Action {
 
 struct kLineFetched: Action {
     let pair: Pair
-    let stick: candlesticks
+    let stick: Candlesticks
     let assets: [Bucket]
 }
 

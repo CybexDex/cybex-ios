@@ -16,7 +16,7 @@ import PromiseKit
  apollo-codegen print-schema schema.json
  **/
 class GraphQLManager {
-    let apollo = ApolloClient(url: URL(string: AppConfiguration.GATEWAY_URLString)!)
+    let apollo = ApolloClient(url: URL(string: AppConfiguration.GatewayURLString)!)
 
     static let shared = GraphQLManager()
 
@@ -25,7 +25,7 @@ class GraphQLManager {
     }
 
     func memo(_ assetName: String, address: String) -> String {
-        return "withdraw:\(AppConfiguration.GATEWAY_ID):\(assetName):\(address)"
+        return "withdraw:\(AppConfiguration.GatewayID):\(assetName):\(address)"
     }
 
     func verifyAddress(assetName: String, address: String) -> PromiseKit.Promise<WithdrawAddressInfo?> {

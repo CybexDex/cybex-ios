@@ -61,7 +61,7 @@ class SimpleHTTPService {
 
 extension SimpleHTTPService {
     static func requestMarketList(base: String) -> Promise<[Pair]> {
-        var request = URLRequest(url: URL(string: AppConfiguration.SERVER_MARKETLIST_URLString + base)!)
+        var request = URLRequest(url: URL(string: AppConfiguration.ServerMarketListURLString + base)!)
         request.timeoutInterval = 5
         request.cachePolicy = .reloadIgnoringCacheData
 
@@ -86,10 +86,10 @@ extension SimpleHTTPService {
     }
 
     static func checkVersion() -> Promise<(update: Bool, url: String, force: Bool, content: String)> {
-        var urlString = AppConfiguration.SERVER_VERSION_APPSTORE_URLString
+        var urlString = AppConfiguration.ServerVersionAppstoreURLString
 
         if let bundleID = Bundle.main.bundleIdentifier, bundleID.contains("fir") {
-            urlString = AppConfiguration.SERVER_VERSION_URLString
+            urlString = AppConfiguration.ServerVersionURLString
         }
         var request = URLRequest(url: URL(string: urlString)!)
         request.timeoutInterval = 5
@@ -126,7 +126,7 @@ extension SimpleHTTPService {
     }
 
     static func requestETHPrice() -> Promise<[RMBPrices]> {
-        var request = URLRequest(url: URL(string: AppConfiguration.ETH_PRICE)!)
+        var request = URLRequest(url: URL(string: AppConfiguration.ETHPrice)!)
         request.cachePolicy = .reloadIgnoringCacheData
         request.timeoutInterval = 5
 
@@ -149,7 +149,7 @@ extension SimpleHTTPService {
     }
 
     static func requestPinCode() -> Promise<(id: String, data: String)> {
-        var request = URLRequest(url: URL(string: AppConfiguration.SERVER_REGISTER_PINCODE_URLString)!)
+        var request = URLRequest(url: URL(string: AppConfiguration.ServerRegisterPincodeURLString)!)
         request.cachePolicy = .reloadIgnoringCacheData
         request.timeoutInterval = 5
 
@@ -169,7 +169,7 @@ extension SimpleHTTPService {
     }
 
     static func requestRegister(_ params: [String: Any]) -> Promise<(Bool, Int)> {
-        var request = try! URLRequest(url: URL(string: AppConfiguration.SERVER_REGISTER_URLString)!, method: .post, headers: ["Content-Type": "application/json"])
+        var request = try! URLRequest(url: URL(string: AppConfiguration.ServerRegisterURLString)!, method: .post, headers: ["Content-Type": "application/json"])
         request.timeoutInterval = 5
         let encodedURLRequest = try! JSONEncoding.default.encode(request, with: params)
 
@@ -259,7 +259,7 @@ extension SimpleHTTPService {
     }
 
     static func recordLogin(_ sender: [String: Any]) -> Promise<String?> {
-        var request = try! URLRequest(url: URL(string: AppConfiguration.RECODE_LOGIN)!, method: .post, headers: ["Content-Type": "application/json"])
+        var request = try! URLRequest(url: URL(string: AppConfiguration.RecodeLogin)!, method: .post, headers: ["Content-Type": "application/json"])
         request.timeoutInterval = 5
         request.cachePolicy = .reloadIgnoringCacheData
 
@@ -286,7 +286,7 @@ extension SimpleHTTPService {
     }
 
     static func fetchETOHiddenRequest() -> Promise<ETOHidden?> {
-        var request  = URLRequest(url: URL(string: AppConfiguration.BASE_SETTING_JSON)!)
+        var request  = URLRequest(url: URL(string: AppConfiguration.BaseSettingJson)!)
         request.cachePolicy = .reloadIgnoringCacheData
         let (promise, seal) = Promise<ETOHidden?>.pending()
         Alamofire.request(request).responseJSON(queue: DispatchQueue.main, options: .allowFragments) { (response) in
@@ -357,7 +357,7 @@ extension SimpleHTTPService {
     }
 
     static func fetchHomeHotAssetJson() -> Promise<[Pair]?> {
-        var request  = URLRequest(url: URL(string: AppConfiguration.HOTASSETS_JSON)!)
+        var request  = URLRequest(url: URL(string: AppConfiguration.HotAssetsJson)!)
         request.cachePolicy = .reloadIgnoringCacheData
         let (promise, seal) = Promise<[Pair]?>.pending()
         Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
@@ -440,7 +440,7 @@ extension SimpleHTTPService {
     }
 
     static func fetchBlockexplorerJson() -> Promise<[BlockExplorer]> {
-        var request  = URLRequest(url: URL(string: AppConfiguration.BLOCKEXPLORER_JSON)!)
+        var request  = URLRequest(url: URL(string: AppConfiguration.BlockExplorerJson)!)
         request.cachePolicy = .reloadIgnoringCacheData
         let (promise, seal) = Promise<[BlockExplorer]>.pending()
         Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in

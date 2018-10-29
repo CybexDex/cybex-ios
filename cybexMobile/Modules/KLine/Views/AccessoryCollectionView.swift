@@ -29,7 +29,7 @@ class AccessoryCollectionView: UIView {
 
   var data: Any? {
     didSet {
-      guard let indicator = data as? indicator else { return }
+      guard let indicator = data as? Indicator else { return }
 
       self.title.text = indicator.rawValue
     }

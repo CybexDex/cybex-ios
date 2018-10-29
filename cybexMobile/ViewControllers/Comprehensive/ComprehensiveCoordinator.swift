@@ -66,8 +66,8 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
     func openMarketList(_ pair: Pair) {
         let vc = R.storyboard.main.marketViewController()!
         var currentBaseIndex = 0
-        for index in 0..<AssetConfiguration.market_base_assets.count {
-            if pair.base == AssetConfiguration.market_base_assets[index] {
+        for index in 0..<AssetConfiguration.marketBaseAssets.count {
+            if pair.base == AssetConfiguration.marketBaseAssets[index] {
                 currentBaseIndex = index
             }
         }
@@ -103,7 +103,7 @@ extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
     }
 
     func fetchAnnounceInfos() {
-        let url = AppConfiguration.ANNOUNCE_JSON + (Localize.currentLanguage() == "en" ? "en" : "zh")
+        let url = AppConfiguration.AnnounceJson + (Localize.currentLanguage() == "en" ? "en" : "zh")
         SimpleHTTPService.fetchAnnounceJson(url).done { (data) in
             if let data = data {
                 self.store.dispatch(FetchAnnouncesAction(data: data))
@@ -113,7 +113,7 @@ extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
     }
 
     func fetchHomeBannerInfos() {
-        let url = AppConfiguration.HOME_BANNER_JSON + (Localize.currentLanguage() == "en" ? "en" : "zh")
+        let url = AppConfiguration.HomeBannerJson + (Localize.currentLanguage() == "en" ? "en" : "zh")
         SimpleHTTPService.fetchHomeBannerInfos(url).done { (data) in
             if let data = data, data.count > 0 {
                 self.store.dispatch(FetchHomeBannerAction(data: data))
@@ -132,7 +132,7 @@ extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
     }
 
     func fetchMiddleItemInfos() {
-        let url = AppConfiguration.HOME_ITEMS_JSON + (Localize.currentLanguage() == "en" ? "en" : "zh")
+        let url = AppConfiguration.HomeItemsJson + (Localize.currentLanguage() == "en" ? "en" : "zh")
         SimpleHTTPService.fetchHomeItemInfo(url).done { (data) in
             if let data = data, data.count != 0 {
                 self.store.dispatch(FetchMiddleItemAction(data: data))

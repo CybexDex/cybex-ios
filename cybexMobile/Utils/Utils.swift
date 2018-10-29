@@ -37,7 +37,7 @@ func getChainId(callback:@escaping(String)->Void) {
 typealias BlockChainParamsType = (chain_id: String, block_id: String, block_num: Int32)
 func blockchainParams(callback: @escaping(BlockChainParamsType)->Void) {
     getChainId { (chainID) in
-        let requeset = GetObjectsRequest(ids: [objectID.dynamic_global_property_object.rawValue]) { (infos) in
+        let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
             if let infos = infos as? (block_id: String, block_num: String) {
                 callback((chain_id: chainID, block_id: infos.block_id, block_num: Int32(infos.block_num)!))
             }
@@ -48,7 +48,7 @@ func blockchainParams(callback: @escaping(BlockChainParamsType)->Void) {
 
 func calculateFee(_ operation: String,
                   focusAssetId: String,
-                  operationID: ChainTypesOperations = .limit_order_create,
+                  operationID: ChainTypesOperations = .limitOrderCreate,
                   filterRepeat: Bool = true,
                   completion:@escaping (_ success: Bool,
                                         _ amount: Decimal,
@@ -98,7 +98,7 @@ func calculateFee(_ operation: String,
 }
 
 func calculateAssetRelation(assetIDAName: String, assetIDBName: String) -> (base: String, quote: String) {
-    let relation: [String] = AssetConfiguration.order_name
+    let relation: [String] = AssetConfiguration.orderName
 
     var indexA = -1
     var indexB = -1
@@ -134,7 +134,7 @@ func calculateAssetRelation(assetIDAName: String, assetIDBName: String) -> (base
 func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
 
     guard let assetInfo = appData.assetInfo[asset] else { return 0 }
-    if AssetConfiguration.order_name.contains(assetInfo.symbol.filterJade) {
+    if AssetConfiguration.orderName.contains(assetInfo.symbol.filterJade) {
         if let data = appData.rmb_prices.filter({return $0.name == assetInfo.symbol.filterJade}).first {
             return data.rmb_price.toDouble() ?? 0
         }
@@ -431,7 +431,7 @@ func getWithdrawAndDepositRecords(_ accountName: String, asset: String, fundType
         SimpleHTTPService.recordLogin(paragram).done { (result) in
             if let result = result {
                 let fundTypeString = fundType == .ALL ? "" : fundType.rawValue
-                let url = AppConfiguration.RECODE_RECODES + "/" + accountName + "/?asset=" + asset + "&fundType=" + fundTypeString + "&size=" + "\(Int32(size))&offset=\(Int32(offset))"
+                let url = AppConfiguration.RecodeRecodes + "/" + accountName + "/?asset=" + asset + "&fundType=" + fundTypeString + "&size=" + "\(Int32(size))&offset=\(Int32(offset))"
                 SimpleHTTPService.fetchRecords(url, signer: result).done({ (data) in
                     callback(data)
                 }).catch({ (_) in
@@ -497,14 +497,14 @@ func labelBaselineOffset(_ lineHeight: CGFloat, fontHeight: CGFloat) -> Float {
 
 func changeEnvironmentAction() {
     if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
-        AppConfiguration.SERVER_BASE_URLString = AppConfiguration.SERVER_TEST_BASE_URLString
-        AppConfiguration.SERVER_REGISTER_BASE_URLString = AppConfiguration.SERVER_REGISTER_BASE_TEST_URLString
-        AppConfiguration.GATEWAY_URLString = AppConfiguration.SERVER_TEST_BASE_URLString
-        AssetConfiguration.market_base_assets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.BTC]
+        AppConfiguration.ServerBaseURLString = AppConfiguration.ServerTestBaseURLString
+        AppConfiguration.ServerRegisterBaseURLString = AppConfiguration.ServerRegisterBaseTestURLString
+        AppConfiguration.GatewayURLString = AppConfiguration.ServerTestBaseURLString
+        AssetConfiguration.marketBaseAssets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.BTC]
     } else {
-        AppConfiguration.SERVER_BASE_URLString = "https://app.cybex.io/"
-        AppConfiguration.SERVER_REGISTER_BASE_URLString = "https://faucet.cybex.io/"
-        AppConfiguration.GATEWAY_URLString = "https://gateway.cybex.io/gateway"
-        AssetConfiguration.market_base_assets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.USDT, AssetConfiguration.BTC]
+        AppConfiguration.ServerBaseURLString = "https://app.cybex.io/"
+        AppConfiguration.ServerRegisterBaseURLString = "https://faucet.cybex.io/"
+        AppConfiguration.GatewayURLString = "https://gateway.cybex.io/gateway"
+        AssetConfiguration.marketBaseAssets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.USDT, AssetConfiguration.BTC]
     }
 }

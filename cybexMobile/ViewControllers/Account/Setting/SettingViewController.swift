@@ -54,7 +54,7 @@ class SettingViewController: BaseViewController {
         language.content_locali =  R.string.localizable.setting_language.key
         version.content.text = Bundle.main.version
         theme.content_locali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key : R.string.localizable.light.key
-        frequency.content_locali = UserManager.shared.frequency_type.description()
+        frequency.content_locali = UserManager.shared.frequencyType.description()
     }
 
     func setupEvent() {
@@ -119,25 +119,25 @@ class SettingViewController: BaseViewController {
 extension SettingViewController {
     func chooseRefreshStyle() {
         let actionController = PeriscopeActionController()
-        actionController.selectedIndex = IndexPath(row: UserManager.shared.frequency_type.rawValue, section: 0)
+        actionController.selectedIndex = IndexPath(row: UserManager.shared.frequencyType.rawValue, section: 0)
         actionController.addAction(Action(R.string.localizable.frequency_normal.key.localized(), style: .destructive, handler: {[weak self] _ in
             guard let `self` = self else {return}
-            UserManager.shared.frequency_type = .normal
-            self.frequency.content_locali = UserManager.shared.frequency_type.description()
+            UserManager.shared.frequencyType = .normal
+            self.frequency.content_locali = UserManager.shared.frequencyType.description()
         }))
 
         actionController.addAction(Action(R.string.localizable.frequency_time.key.localized(), style: .destructive, handler: { [weak self]_ in
             guard let `self` = self else {return}
 
-            UserManager.shared.frequency_type = .time
-            self.frequency.content_locali = UserManager.shared.frequency_type.description()
+            UserManager.shared.frequencyType = .time
+            self.frequency.content_locali = UserManager.shared.frequencyType.description()
 
         }))
 
         actionController.addAction(Action(R.string.localizable.frequency_wifi.key.localized(), style: .destructive, handler: { [weak self]_ in
             guard let `self` = self else {return}
-            UserManager.shared.frequency_type = .WiFi
-            self.frequency.content_locali = UserManager.shared.frequency_type.description()
+            UserManager.shared.frequencyType = .wiFi
+            self.frequency.content_locali = UserManager.shared.frequencyType.description()
         }))
 
         actionController.addSection(PeriscopeSection())

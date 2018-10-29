@@ -60,7 +60,7 @@ class PortfolioData {
 
     required init?(balance: Balance) {
 
-        icon = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.assetType.replacingOccurrences(of: ".", with: "_") + "_grey.png"
+        icon = AppConfiguration.ServerIconsBaseURLString + balance.assetType.replacingOccurrences(of: ".", with: "_") + "_grey.png"
         // 获得自己的个数
         if let assetInfo = appData.assetInfo[balance.assetType] {
             realAmount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: assetInfo.precision, roundingMode: .down)
@@ -93,7 +93,7 @@ class MyPortfolioData {
     var limitAmount: String = ""
 
     required init?(balance: Balance) {
-        icon = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.assetType.replacingOccurrences(of: ".", with: "_") + "_grey.png"
+        icon = AppConfiguration.ServerIconsBaseURLString + balance.assetType.replacingOccurrences(of: ".", with: "_") + "_grey.png"
 
         name = appData.assetInfo[balance.assetType]?.symbol.filterJade ?? "--"
         // 获得自己的个数

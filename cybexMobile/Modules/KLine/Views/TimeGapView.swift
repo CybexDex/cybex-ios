@@ -33,7 +33,7 @@ class TimeGapView: UIView {
         guard let `self` = self else { return }
 
         self.switchButton(idx)
-        self.next?.sendEventWith(event.timeClicked.rawValue, userinfo: ["candlestick": candlesticks.all[idx]])
+        self.next?.sendEventWith(event.timeClicked.rawValue, userinfo: ["candlestick": Candlesticks.all[idx]])
 
       }).disposed(by: disposeBag)
     }

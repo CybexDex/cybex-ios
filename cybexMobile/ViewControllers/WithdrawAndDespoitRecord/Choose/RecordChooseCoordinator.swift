@@ -72,7 +72,7 @@ extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
                 paragram["signer"] = signer
                 SimpleHTTPService.recordLogin(paragram).done { (result) in
                     if let _ = result {
-                        let url = AppConfiguration.RECODE_ACCOUNT_ASSET + "/" + accountName
+                        let url = AppConfiguration.RecodeAccountAsset + "/" + accountName
                         SimpleHTTPService.fetchAccountAsset(url, signer: signer).done({ (accountAssets) in
                             if let data = accountAssets {
                                 self.store.dispatch(FetchAccountAssetAction(data: data))

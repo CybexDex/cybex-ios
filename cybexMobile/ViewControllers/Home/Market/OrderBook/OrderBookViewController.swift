@@ -109,7 +109,7 @@ class OrderBookViewController: BaseViewController {
     }
 
     func showMarketPrice() {
-        guard let pair = pair, let _ = AssetConfiguration.market_base_assets.index(of: pair.base) else { return }
+        guard let pair = pair, let _ = AssetConfiguration.marketBaseAssets.index(of: pair.base) else { return }
 
         if let selectedIndex = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
             return ticker.quote == pair.quote

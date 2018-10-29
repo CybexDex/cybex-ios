@@ -75,9 +75,9 @@ struct ETOMGService {
 extension ETOMGAPI: TargetType {
     var baseURL: URL {
         if Defaults[.environment] == "test" {
-            return AppConfiguration.ETO_MG_BASE_TEST_URLString
+            return AppConfiguration.ETOMGBaseTestURLString
         }
-        return AppConfiguration.ETO_MG_BASE_URLString
+        return AppConfiguration.ETOMGBaseURLString
     }
 
     var path: String {
