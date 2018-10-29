@@ -9,11 +9,11 @@
 import UIKit
 import SwiftTheme
 
-enum image_state: Int {
+enum ImageState: Int {
     case normal = 0
-    case Loading
-    case Fail
-    case Success
+    case loading
+    case fail
+    case success
 }
 
 class AddAddressView: UIView {
@@ -40,23 +40,23 @@ class AddAddressView: UIView {
         }
     }
 
-    var address_state: image_state = .normal {
+    var addressState: ImageState = .normal {
         didSet {
-            switch self.address_state {
+            switch self.addressState {
             case .normal:
                 self.address.icon.isHidden = true
                 break
-            case .Loading:
+            case .loading:
                 self.address.icon.isHidden = false
                 self.address.icon.setBackgroundImage(nil, for: .normal)
                 self.startAnimation()
                 break
-            case .Fail:
+            case .fail:
                 self.address.icon.isHidden = false
                 self.stop()
                 self.address.icon.setBackgroundImage(R.image.ic_close_24_px(), for: .normal)
                 break
-            case .Success:
+            case .success:
                 self.address.icon.isHidden = false
                 self.stop()
                 self.address.icon.setBackgroundImage(R.image.check_complete(), for: .normal)

@@ -38,7 +38,7 @@ protocol ComprehensiveStateManagerProtocol {
 
 class ComprehensiveCoordinator: ComprehensiveRootCoordinator {
     var store = Store(
-        reducer: ComprehensiveReducer,
+        reducer: comprehensiveReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )

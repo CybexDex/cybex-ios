@@ -16,7 +16,7 @@ class TradeHistoryView: UIView {
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var tableView: UITableView!
 
-    var data: [(Bool, String, String, String, String)]? {
+    var data: [TradeHistoryViewModel]? {
         didSet {
             self.tableView.reloadData()
 
@@ -25,13 +25,13 @@ class TradeHistoryView: UIView {
     }
 
     // 绑定的数据
-    fileprivate var reloadData: [(Bool, String, String, String, String)]? {
+    fileprivate var reloadData: [TradeHistoryViewModel]? {
         didSet {
         }
     }
 
     // 重置绑定的数据
-    fileprivate func resetReloadData(_ sender: [(Bool, String, String, String, String)]) {
+    fileprivate func resetReloadData(_ sender: [TradeHistoryViewModel]) {
 
     }
 

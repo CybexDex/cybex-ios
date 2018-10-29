@@ -11,7 +11,7 @@ import ReSwift
 import SwiftyUserDefaults
 
 protocol SettingCoordinatorProtocol {
-    func openSettingDetail(type: settingPage)
+    func openSettingDetail(type: SettingPage)
     func dismiss()
     func openHelpWebView()
 }
@@ -45,7 +45,7 @@ extension SettingCoordinator: SettingCoordinatorProtocol {
         self.rootVC.popToRootViewController(animated: true)
     }
 
-    func openSettingDetail(type: settingPage) {
+    func openSettingDetail(type: SettingPage) {
         let vc = R.storyboard.main.settingDetailViewController()!
         vc.pageType = type
         let coordinator = SettingDetailCoordinator(rootVC: self.rootVC)

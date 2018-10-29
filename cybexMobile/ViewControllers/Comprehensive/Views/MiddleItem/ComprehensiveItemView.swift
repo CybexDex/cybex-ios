@@ -16,7 +16,7 @@ class ComprehensiveItemView: CybexBaseView {
     @IBOutlet weak var subTitleLabel: UILabel!
 
     enum Event: String {
-        case ComprehensiveItemViewDidClicked
+        case comprehensiveItemViewDidClicked
     }
 
     var tapIndex: Int = 0
@@ -36,6 +36,6 @@ class ComprehensiveItemView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.ComprehensiveItemViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self, "index": self.tapIndex])
+        self.next?.sendEventWith(Event.comprehensiveItemViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self, "index": self.tapIndex])
     }
 }

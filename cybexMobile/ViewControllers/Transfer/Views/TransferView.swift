@@ -306,11 +306,11 @@ extension TransferView: TitleTextFieldViewDelegate, TitleTextFieldViewDataSource
                                       isShowWhenEditing: false)]
         } else if titleTextFieldView == accountView {
             if accountValidStatus != .unValided && accountValidStatus != .validding {
-                accountView.loading_state = accountValidStatus == .validSuccessed ? .Success : .Fail
+                accountView.loadingState = accountValidStatus == .validSuccessed ? .success : .fail
             } else if accountValidStatus == .validding {
-                accountView.loading_state = .Loading
+                accountView.loadingState = .loading
             } else {
-                accountView.loading_state = .normal
+                accountView.loadingState = .normal
             }
             return [TextButtonSetting(imageName: "loading_state",
                                       selectedImageName: "",
@@ -351,7 +351,7 @@ extension TransferView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField.tag {
         case InputType.account.rawValue:
-            self.accountView.loading_state = .normal
+            self.accountView.loadingState = .normal
             self.sendEventWith(TextChangeEvent.account.rawValue, userinfo: ["content": textField.text ?? ""])
         case InputType.amount.rawValue:
             if textField.text?.trimmed.count == 0 {

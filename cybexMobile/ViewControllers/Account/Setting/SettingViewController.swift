@@ -51,10 +51,10 @@ class SettingViewController: BaseViewController {
     func setupUI() {
 
 //        self.environment.isHidden = false
-        language.content_locali =  R.string.localizable.setting_language.key
+        language.contentLocali =  R.string.localizable.setting_language.key
         version.content.text = Bundle.main.version
-        theme.content_locali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key : R.string.localizable.light.key
-        frequency.content_locali = UserManager.shared.frequencyType.description()
+        theme.contentLocali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key : R.string.localizable.light.key
+        frequency.contentLocali = UserManager.shared.frequencyType.description()
     }
 
     func setupEvent() {
@@ -123,21 +123,21 @@ extension SettingViewController {
         actionController.addAction(Action(R.string.localizable.frequency_normal.key.localized(), style: .destructive, handler: {[weak self] _ in
             guard let `self` = self else {return}
             UserManager.shared.frequencyType = .normal
-            self.frequency.content_locali = UserManager.shared.frequencyType.description()
+            self.frequency.contentLocali = UserManager.shared.frequencyType.description()
         }))
 
         actionController.addAction(Action(R.string.localizable.frequency_time.key.localized(), style: .destructive, handler: { [weak self]_ in
             guard let `self` = self else {return}
 
             UserManager.shared.frequencyType = .time
-            self.frequency.content_locali = UserManager.shared.frequencyType.description()
+            self.frequency.contentLocali = UserManager.shared.frequencyType.description()
 
         }))
 
         actionController.addAction(Action(R.string.localizable.frequency_wifi.key.localized(), style: .destructive, handler: { [weak self]_ in
             guard let `self` = self else {return}
             UserManager.shared.frequencyType = .wiFi
-            self.frequency.content_locali = UserManager.shared.frequencyType.description()
+            self.frequency.contentLocali = UserManager.shared.frequencyType.description()
         }))
 
         actionController.addSection(PeriscopeSection())

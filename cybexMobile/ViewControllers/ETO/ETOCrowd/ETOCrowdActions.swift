@@ -46,10 +46,10 @@ struct ETOCrowdState: BaseState {
 
 // MARK: - Action
 
-struct fetchCurrentTokenCountAction: Action {
+struct FetchCurrentTokenCountAction: Action {
     var userModel: ETOUserModel
 }
 
-struct changeETOValidStatusAction: Action {
+struct ChangeETOValidStatusAction: Action {
     var status: ETOValidStatus
 }

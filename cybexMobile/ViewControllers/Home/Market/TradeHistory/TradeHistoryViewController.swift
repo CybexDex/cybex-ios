@@ -17,6 +17,15 @@ enum TradeHistoryPageType {
     case trade
 }
 
+
+struct TradeHistoryViewModel {
+    var pay: Bool
+    var price: String
+    var quoteVolume: String
+    var baseVolume: String
+    var time: String
+}
+
 class TradeHistoryViewController: BaseViewController {
     
     @IBOutlet weak var historyView: TradeHistoryView!
@@ -34,7 +43,7 @@ class TradeHistoryViewController: BaseViewController {
         }
     }
     
-    var data: [(Bool, String, String, String, String)]? {
+    var data: [TradeHistoryViewModel]? {
         didSet {
             if self.historyView != nil {
                 self.historyView.data = data
@@ -91,7 +100,7 @@ class TradeHistoryViewController: BaseViewController {
     
     func convertToData() {
         if let data = self.coordinator?.state.property.data.value {
-            var showData: [(Bool, String, String, String, String)] = []
+            var showData: [TradeHistoryViewModel] = []
             
             for itemData in data {
                 let curData = itemData
@@ -111,12 +120,15 @@ class TradeHistoryViewController: BaseViewController {
                     
                     let price = baseVolume / quoteVolume
                     let tradePrice = price.tradePrice()
-                    
-                    showData.append((false,
-                                     tradePrice.price,
-                                     quoteVolume.suffixNumber(digitNum: 10 - tradePrice.pricision),
-                                     baseVolume.suffixNumber(digitNum: tradePrice.pricision),
-                                     time.dateFromISO8601!.string(withFormat: "HH:mm:ss")))
+
+                    let viewModel = TradeHistoryViewModel(
+                        pay: false,
+                        price: tradePrice.price,
+                        quoteVolume: quoteVolume.suffixNumber(digitNum: 10 - tradePrice.pricision),
+                        baseVolume: baseVolume.suffixNumber(digitNum: tradePrice.pricision),
+                        time: time.dateFromISO8601!.string(withFormat: "HH:mm:ss"))
+                    showData.append(viewModel)
+
                 } else {
                     let quoteVolume = Double(pay["amount"].stringValue)! / quotePrecision
                     let baseVolume = Double(receive["amount"].stringValue)! / basePrecision
@@ -124,11 +136,13 @@ class TradeHistoryViewController: BaseViewController {
                     let price = baseVolume / quoteVolume
                     
                     let tradePrice = price.tradePrice()
-                    showData.append((true,
-                                     tradePrice.price,
-                                     quoteVolume.suffixNumber(digitNum: 10 - tradePrice.pricision),
-                                     baseVolume.suffixNumber(digitNum: tradePrice.pricision),
-                                     time.dateFromISO8601!.string(withFormat: "HH:mm:ss")))
+                    let viewModel = TradeHistoryViewModel(
+                        pay: true,
+                        price: tradePrice.price,
+                        quoteVolume: quoteVolume.suffixNumber(digitNum: 10 - tradePrice.pricision),
+                        baseVolume: baseVolume.suffixNumber(digitNum: tradePrice.pricision),
+                        time: time.dateFromISO8601!.string(withFormat: "HH:mm:ss"))
+                    showData.append(viewModel)
                 }
                 
             }

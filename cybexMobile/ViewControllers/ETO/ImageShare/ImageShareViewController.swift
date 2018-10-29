@@ -35,7 +35,11 @@ class ImageShareViewController: BaseViewController {
     }
 
     func setupUI() {
-        if let url = URL(string: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535699127775&di=9b05e71fe836bd1e8482a4699e9f4249&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201512%2F28%2F20151228084800_axmt5.jpeg") {
+        let urlString = "https://timgsa.baidu.com/timg?" +
+            "image&quality=80&size=b9999_10000&sec=1535699127775&" +
+            "di=9b05e71fe836bd1e8482a4699e9f4249&" +
+            "imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201512%2F28%2F20151228084800_axmt5.jpeg"
+        if let url = URL(string: urlString) {
             imgContentView.kf.setImage(with: url)
         }
 

@@ -15,7 +15,7 @@ import TinyConstraints
 import Localize_Swift
 import cybex_ios_core_cpp
 
-enum openedOrdersViewControllerPageType {
+enum OpenedOrdersViewControllerPageType {
     case exchange
     case account
 }
@@ -24,12 +24,12 @@ class OpenedOrdersViewController: BaseViewController {
 
     var coordinator: (OpenedOrdersCoordinatorProtocol & OpenedOrdersStateManagerProtocol)?
 
-    var pageType: openedOrdersViewControllerPageType = .account
+    var pageType: OpenedOrdersViewControllerPageType = .account
 
     var pair: Pair? {
         didSet {
-            if let pair_order = self.containerView as? MyOpenedOrdersView {
-                pair_order.data = self.pair
+            if let pairOrder = self.containerView as? MyOpenedOrdersView {
+                pairOrder.data = self.pair
             }
         }
     }
@@ -53,10 +53,10 @@ class OpenedOrdersViewController: BaseViewController {
     func setupEvent() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
             guard let `self` = self else { return }
-            if let account_view = self.containerView as? MyOpenedOrdersView {
+            if let accountView = self.containerView as? MyOpenedOrdersView {
 
-                account_view.sectionView.totalTitle.locali = R.string.localizable.my_opened_price.key
-                account_view.sectionView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key
+                accountView.sectionView.totalTitle.locali = R.string.localizable.my_opened_price.key
+                accountView.sectionView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key
             }
         })
     }
@@ -74,13 +74,13 @@ class OpenedOrdersViewController: BaseViewController {
             }
 
             if success, let order = self.order {
-                let ensure_title = order.isBuy ? R.string.localizable.cancle_openedorder_buy.key.localized() : R.string.localizable.cancle_openedorder_sell.key.localized()
+                let ensureTitle = order.isBuy ? R.string.localizable.cancle_openedorder_buy.key.localized() : R.string.localizable.cancle_openedorder_sell.key.localized()
 
-                if let baseInfo = appData.assetInfo[order.sellPrice.base.assetID], let quoteInfo = appData.assetInfo[order.sellPrice.quote.assetID], let fee_info = appData.assetInfo[assetId] {
+                if let baseInfo = appData.assetInfo[order.sellPrice.base.assetID], let quoteInfo = appData.assetInfo[order.sellPrice.quote.assetID], let feeInfoValue = appData.assetInfo[assetId] {
                     var priceInfo = ""
                     var amountInfo = ""
                     var totalInfo = ""
-                    let feeInfo = amount.string(digits: fee_info.precision, roundingMode: .down) + " " + fee_info.symbol.filterJade
+                    let feeInfo = amount.string(digits: feeInfoValue.precision, roundingMode: .down) + " " + feeInfoValue.symbol.filterJade
                     if order.isBuy {
                         let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
                         let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
@@ -105,7 +105,7 @@ class OpenedOrdersViewController: BaseViewController {
                     }
 
                     if self.isVisible {
-                        self.showConfirm(ensure_title, attributes: getOpenedOrderInfo(price: priceInfo, amount: amountInfo, total: totalInfo, fee: feeInfo, isBuy: order.isBuy))
+                        self.showConfirm(ensureTitle, attributes: getOpenedOrderInfo(price: priceInfo, amount: amountInfo, total: totalInfo, fee: feeInfo, isBuy: order.isBuy))
                     }
                 }
             } else {
@@ -121,8 +121,8 @@ class OpenedOrdersViewController: BaseViewController {
 
         containerView = pageType == .account ? AccountOpenedOrdersView() : MyOpenedOrdersView()
         self.view.addSubview(containerView!)
-        if let account_view = self.containerView as? AccountOpenedOrdersView {
-            account_view.data = nil
+        if let accountView = self.containerView as? AccountOpenedOrdersView {
+            accountView.data = nil
         } else {
             setupEvent()
         }
@@ -133,10 +133,10 @@ class OpenedOrdersViewController: BaseViewController {
         UserManager.shared.limitOrder.asObservable().skip(1).subscribe(onNext: {[weak self] (_) in
             guard let `self` = self else { return }
 
-            if let account_view = self.containerView as? AccountOpenedOrdersView {
-                account_view.data = nil
-            } else if let pair_order = self.containerView as? MyOpenedOrdersView {
-                pair_order.data = self.pair
+            if let accountView = self.containerView as? AccountOpenedOrdersView {
+                accountView.data = nil
+            } else if let pairOrder = self.containerView as? MyOpenedOrdersView {
+                pairOrder.data = self.pair
             }
 
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -176,7 +176,7 @@ extension OpenedOrdersViewController {
         // order.isBuy ? pair.base : pair.quote
         if let order = self.order {
 
-            self.coordinator?.cancelOrder(order.id, fee_id: order.sellPrice.base.assetID, callback: {[weak self] (success) in
+            self.coordinator?.cancelOrder(order.id, feeId: order.sellPrice.base.assetID, callback: {[weak self] (success) in
                 guard let `self` = self else { return }
 
                 self.endLoading()

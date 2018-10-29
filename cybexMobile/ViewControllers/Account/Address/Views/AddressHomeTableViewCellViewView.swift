@@ -20,17 +20,17 @@ class AddressHomeTableViewCellViewView: UIView {
     }
 
     func appendView() {
-        let v = NormalCellView(frame: CGRect.zero)
-        v.index = 0
-        v.name_locali = R.string.localizable.withdraw_address.key
-        v.height(54)
-        sectionView.stackView.addArrangedSubview(v)
+        let normalView = NormalCellView(frame: CGRect.zero)
+        normalView.index = 0
+        normalView.nameLocali = R.string.localizable.withdraw_address.key
+        normalView.height(54)
+        sectionView.stackView.addArrangedSubview(normalView)
 
-        let v2 = NormalCellView(frame: CGRect.zero)
-        v2.index = 1
-        v2.name_locali = R.string.localizable.transfer_account_name.key
-        v2.isShowLineView = false
-        sectionView.stackView.addArrangedSubview(v2)
+        let secondView = NormalCellView(frame: CGRect.zero)
+        secondView.index = 1
+        secondView.nameLocali = R.string.localizable.transfer_account_name.key
+        secondView.isShowLineView = false
+        sectionView.stackView.addArrangedSubview(secondView)
     }
 
     fileprivate func setup() {

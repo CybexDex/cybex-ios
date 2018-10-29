@@ -9,11 +9,14 @@
 import UIKit
 import ReSwift
 
-func AccountReducer(action: Action, state: AccountState?) -> AccountState {
-    return AccountState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: AccountPropertyReducer(state?.property, action: action))
+func gAccountReducer(action: Action, state: AccountState?) -> AccountState {
+    return AccountState(isLoading: loadingReducer(state?.isLoading, action: action),
+                        page: pageReducer(state?.page, action: action),
+                        errorMessage: errorMessageReducer(state?.errorMessage, action: action),
+                        property: gAccountPropertyReducer(state?.property, action: action))
 }
 
-func AccountPropertyReducer(_ state: AccountPropertyState?, action: Action) -> AccountPropertyState {
+func gAccountPropertyReducer(_ state: AccountPropertyState?, action: Action) -> AccountPropertyState {
     let state = state ?? AccountPropertyState()
 
     switch action {

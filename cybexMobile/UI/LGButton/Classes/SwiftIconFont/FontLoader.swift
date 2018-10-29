@@ -38,6 +38,5 @@ class FontLoader: NSObject {
         } catch {
 
         }
-
     }
 }

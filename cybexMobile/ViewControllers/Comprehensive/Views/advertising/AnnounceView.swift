@@ -11,7 +11,7 @@ import Foundation
 @IBDesignable
 class AnnounceView: CybexBaseView {
     enum Event: String {
-        case AnnounceViewDidClicked
+        case announceViewDidClicked
     }
 
     @IBOutlet weak var scrollLableView: AnnounceScrollView!
@@ -33,6 +33,6 @@ class AnnounceView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.AnnounceViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.announceViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }

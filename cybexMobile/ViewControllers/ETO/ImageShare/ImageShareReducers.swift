@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func ImageShareReducer(action: Action, state: ImageShareState?) -> ImageShareState {
+func imageShareReducer(action: Action, state: ImageShareState?) -> ImageShareState {
     let state = state ?? ImageShareState()
 
     switch action {

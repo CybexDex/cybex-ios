@@ -108,7 +108,7 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
     func openAddAddress(_ asset: String) {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
-            vc.address_type = .withdraw
+            vc.addressType = .withdraw
             vc.asset = asset
             self.rootVC.pushViewController(vc, animated: true)
         }

@@ -29,7 +29,7 @@ class WithdrawAddressHomeCoordinator: AccountRootCoordinator {
     lazy var creator = WithdrawAddressHomePropertyActionCreate()
 
     var store = Store<WithdrawAddressHomeState>(
-        reducer: WithdrawAddressHomeReducer,
+        reducer: withdrawAddressHomeReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )

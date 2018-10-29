@@ -19,7 +19,7 @@ protocol CybexTextViewDelegate {
 
 class CybexTextView: UIView {
 
-    enum textView_type: Int {
+    enum TextViewType: Int {
         case normal
         case time
     }
@@ -42,7 +42,7 @@ class CybexTextView: UIView {
         }
     }
 
-    var view_type: textView_type? {
+    var viewType: TextViewType? {
         didSet {
 
         }

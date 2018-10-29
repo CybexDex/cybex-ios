@@ -19,7 +19,7 @@ class RechargeRecodeViewController: BaseViewController {
     var assetInfo: AssetInfo?
     var data: [Record] = [Record]()
     var isNoMoreData: Bool = false
-    var record_type: fundType = .DEPOSIT
+    var recordType: fundType = .DEPOSIT
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ class RechargeRecodeViewController: BaseViewController {
     }
 
     func setupUI() {
-        self.title = record_type == .DEPOSIT ? R.string.localizable.deposit_list.key.localized() : R.string.localizable.withdraw_list.key.localized()
+        self.title = recordType == .DEPOSIT ? R.string.localizable.deposit_list.key.localized() : R.string.localizable.withdraw_list.key.localized()
         let nibString = String(describing: RecodeCell.self)
         self.tableView.register(UINib(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
     }
@@ -75,8 +75,16 @@ class RechargeRecodeViewController: BaseViewController {
 
     func fetchDepositRecords(offset: Int = 0, callback:@escaping ()->Void) {
         self.startLoading()
-        if let asset_info = self.assetInfo, let name = UserManager.shared.name.value {
-            self.coordinator?.fetchRechargeRecodeList(name, asset: asset_info.symbol, fundType: record_type, size: 20, offset: offset, expiration: Int(Date().timeIntervalSince1970 + 600), asset_id: asset_info.id, callback: { [weak self] success in
+        if let assetInfo = self.assetInfo, let name = UserManager.shared.name.value {
+            self.coordinator?.fetchRechargeRecodeList(
+                name,
+                asset: assetInfo.symbol,
+                fundType: recordType,
+                size: 20,
+                offset: offset,
+                expiration: Int(Date().timeIntervalSince1970 + 600),
+                asset_id: assetInfo.id,
+                callback: { [weak self] success in
 
                 guard let `self` = self else {return}
                 self.endLoading()
@@ -115,7 +123,9 @@ extension RechargeRecodeViewController: UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellString = String(describing: RecodeCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellString, for: indexPath) as! RecodeCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellString, for: indexPath) as? RecodeCell else {
+            return RecodeCell()
+        }
 
         cell.setup(self.data[indexPath.row], indexPath: indexPath)
         return cell

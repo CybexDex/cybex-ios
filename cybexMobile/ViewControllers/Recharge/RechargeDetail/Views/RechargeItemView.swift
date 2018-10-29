@@ -73,7 +73,7 @@ class RechargeItemView: UIView {
         }
     }
 
-    var addressState: image_state = .normal {
+    var addressState: ImageState = .normal {
         didSet {
             if self.btnType != .address {
                 return
@@ -82,17 +82,17 @@ class RechargeItemView: UIView {
             case .normal:
                 self.addressStateImageView.isHidden = true
                 break
-            case .Loading:
+            case .loading:
                 self.addressStateImageView.isHidden = false
                 self.addressStateImageView.image = nil
                 self.startAnimation()
                 break
-            case .Fail:
+            case .fail:
                 self.addressStateImageView.isHidden = false
                 self.stop()
                 self.addressStateImageView.image = R.image.ic_close_24_px()
                 break
-            case .Success:
+            case .success:
                 self.addressStateImageView.isHidden = false
                 self.stop()
                 self.addressStateImageView.image = R.image.check_complete()

@@ -138,7 +138,10 @@ class ComprehensiveViewController: BaseViewController {
             self.coordinator?.fetchData()
         }
 
-        Observable.combineLatest(self.coordinator!.state.hotPairs.asObservable(), self.coordinator!.state.middleItems.asObservable(), self.coordinator!.state.banners.asObservable(), self.coordinator!.state.announces.asObservable()).subscribe(onNext: { [weak self](hotPairs, middleItems, banners, announces) in
+        Observable.combineLatest(self.coordinator!.state.hotPairs.asObservable(),
+                                 self.coordinator!.state.middleItems.asObservable(),
+                                 self.coordinator!.state.banners.asObservable(),
+                                 self.coordinator!.state.announces.asObservable()).subscribe(onNext: { [weak self](hotPairs, middleItems, banners, announces) in
             guard let `self` = self else { return }
             if let _ = hotPairs, let _ = middleItems, let _ = banners, let _ = announces {
                 self.endLoading()
@@ -158,20 +161,20 @@ class ComprehensiveViewController: BaseViewController {
 }
 
 extension ComprehensiveViewController {
-    @objc func ComprehensiveItemViewDidClicked(_ data: [String: Any]) {
+    @objc func comprehensiveItemViewDidClicked(_ data: [String: Any]) {
         guard let middleItems = self.coordinator?.state.middleItems.value, let index = data["index"] as? Int else { return }
         let midlleItem = middleItems[index]
         openUrl(midlleItem.link)
     }
 
-    @objc func ETOHomeBannerViewDidClicked(_ data: [String: Any]) {
+    @objc func eTOHomeBannerViewDidClicked(_ data: [String: Any]) {
         guard let banners = self.coordinator?.state.banners.value, let index = data["data"] as? Int  else { return }
         let banner = banners[index]
 
         openUrl(banner.link)
     }
 
-    @objc func AnnounceScrollViewDidClicked(_ data: [String: Any]) {
+    @objc func announceScrollViewDidClicked(_ data: [String: Any]) {
         guard let announces = self.coordinator?.state.announces.value, let index = data["index"] as? Int, index >= 0, index < announces.count else {
             return
         }
@@ -179,7 +182,7 @@ extension ComprehensiveViewController {
         openUrl(announce.url)
     }
 
-    @objc func HotAssetViewDidClicked(_ data: [String: Any]) {
+    @objc func hotAssetViewDidClicked(_ data: [String: Any]) {
         if let data = data["data"] as? Ticker {
             self.coordinator?.openMarketList(Pair(base: data.base, quote: data.quote))
         }
