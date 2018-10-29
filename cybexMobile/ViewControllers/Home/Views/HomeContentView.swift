@@ -110,25 +110,27 @@ extension HomeContentView: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: HomePairCell.self), for: indexPath) as! HomePairCell
-        if self.viewType == .comprehensive {
-            cell.cellType = .topGainers
-            if let data = self.data as? [Ticker] {
-                if indexPath.row < data.count {
-                    cell.setup(data[indexPath.row], indexPath: indexPath)
-                } else {
-                    cell.setup(nil, indexPath: indexPath)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: HomePairCell.self), for: indexPath) as? HomePairCell {
+            if self.viewType == .comprehensive {
+                cell.cellType = .topGainers
+                if let data = self.data as? [Ticker] {
+                    if indexPath.row < data.count {
+                        cell.setup(data[indexPath.row], indexPath: indexPath)
+                    } else {
+                        cell.setup(nil, indexPath: indexPath)
+                    }
                 }
+            } else {
+                let markets = appData.filterQuoteAssetTicker(AssetConfiguration.marketBaseAssets[currentBaseIndex]).filter({ (ticker) -> Bool in
+                    return ticker.baseVolume != "0"
+                    
+                })
+                let data = markets[indexPath.row]
+                cell.setup(data, indexPath: indexPath)
             }
-        } else {
-            let markets = appData.filterQuoteAssetTicker(AssetConfiguration.marketBaseAssets[currentBaseIndex]).filter({ (ticker) -> Bool in
-                return ticker.baseVolume != "0"
-
-            })
-            let data = markets[indexPath.row]
-            cell.setup(data, indexPath: indexPath)
+            return cell
         }
-        return cell
+        return HomePairCell()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

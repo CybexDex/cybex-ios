@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,12 +11,12 @@
                 <outlet property="amount" destination="miR-34-EvR" id="7bg-aG-Y3d"/>
                 <outlet property="bottomView" destination="zMT-d8-Ima" id="aZL-Fc-EXp"/>
                 <outlet property="cybAmount" destination="aiS-AU-zA1" id="QjQ-or-5PL"/>
-                <outlet property="high_low_icon" destination="DIh-4h-BRs" id="j5u-hZ-p8c"/>
-                <outlet property="high_low_label" destination="MlI-Ss-2QF" id="c8f-28-Jgp"/>
-                <outlet property="high_low_view" destination="zi6-aM-KCY" id="xlN-iv-Jkt"/>
+                <outlet property="highLowIcon" destination="DIh-4h-BRs" id="j5u-hZ-p8c"/>
+                <outlet property="highLowLabel" destination="MlI-Ss-2QF" id="c8f-28-Jgp"/>
+                <outlet property="highLowView" destination="zi6-aM-KCY" id="xlN-iv-Jkt"/>
                 <outlet property="icon" destination="Epg-bd-VZJ" id="2yw-PO-37k"/>
                 <outlet property="name" destination="l4V-9a-rOH" id="Y0u-bF-LIt"/>
-                <outlet property="price_cyb" destination="hY9-3G-DxI" id="5jz-8z-6BO"/>
+                <outlet property="priceCyb" destination="hY9-3G-DxI" id="5jz-8z-6BO"/>
                 <outlet property="rmbPrice" destination="YRg-NO-d4e" id="fns-N3-nXL"/>
             </connections>
         </placeholder>
@@ -43,7 +39,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4V-9a-rOH">
-                                    <rect key="frame" x="24" y="16" width="15" height="19.5"/>
+                                    <rect key="frame" x="24" y="15.5" width="15" height="19.5"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -57,7 +53,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiS-AU-zA1">
-                                    <rect key="frame" x="306.5" y="15" width="39.5" height="19.5"/>
+                                    <rect key="frame" x="306.5" y="15.5" width="39.5" height="19.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -71,7 +67,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRg-NO-d4e">
-                                    <rect key="frame" x="315" y="54" width="31" height="14.5"/>
+                                    <rect key="frame" x="315" y="53.5" width="31" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -83,7 +79,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zc1-RL-cEB">
-                                    <rect key="frame" x="0.0" y="91.5" width="346" height="0.5"/>
+                                    <rect key="frame" x="0.0" y="91" width="346" height="1"/>
                                     <color key="backgroundColor" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="HZa-Fo-vO8"/>

@@ -23,10 +23,10 @@ class YourPorfolioView: UIView {
     @IBOutlet weak var bottomView: UIStackView!
 
     // 如果是CYB 就不显示的下层view
-    @IBOutlet weak var high_low_view: UIView!
-    @IBOutlet weak var price_cyb: UILabel!
-    @IBOutlet weak var high_low_icon: UIImageView!
-    @IBOutlet weak var high_low_label: UILabel!
+    @IBOutlet weak var highLowView: UIView!
+    @IBOutlet weak var priceCyb: UILabel!
+    @IBOutlet weak var highLowIcon: UIImageView!
+    @IBOutlet weak var highLowLabel: UILabel!
 
     var data: Any? {
         didSet {
