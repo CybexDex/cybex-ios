@@ -11,7 +11,7 @@ import Foundation
 @IBDesignable
 class RecordChooseCellView: CybexBaseView {
     enum Event: String {
-        case RecordChooseCellViewDidClicked
+        case recordChooseCellViewDidClicked
     }
     @IBOutlet weak var nameLabel: UILabel!
 
@@ -31,6 +31,6 @@ class RecordChooseCellView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.RecordChooseCellViewDidClicked.rawValue, userinfo: ["data": self.nameLabel.text ?? "", "self": self])
+        self.next?.sendEventWith(Event.recordChooseCellViewDidClicked.rawValue, userinfo: ["data": self.nameLabel.text ?? "", "self": self])
     }
 }

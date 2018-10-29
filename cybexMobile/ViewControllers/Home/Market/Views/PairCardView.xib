@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,9 +9,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PairCardView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
                 <outlet property="arrowIcon" destination="qWN-9t-L6e" id="TaS-9m-LHc"/>
-                <outlet property="base_name" destination="D9y-ag-xLn" id="vtc-vC-t2l"/>
+                <outlet property="baseName" destination="D9y-ag-xLn" id="vtc-vC-t2l"/>
                 <outlet property="change" destination="Kun-1A-eDe" id="wD0-4Y-cRW"/>
-                <outlet property="quote_name" destination="lfl-62-5Wn" id="eQV-Ay-8Vz"/>
+                <outlet property="quoteName" destination="lfl-62-5Wn" id="eQV-Ay-8Vz"/>
                 <outlet property="timeLabel" destination="mPm-lK-fyg" id="ZAB-HH-JbG"/>
             </connections>
         </placeholder>
@@ -31,7 +27,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="82" height="19.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CYB" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9y-ag-xLn">
-                                    <rect key="frame" x="0.0" y="0.5" width="33.5" height="19.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="33.5" height="19.5"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -46,7 +42,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/ETH" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfl-62-5Wn">
-                                    <rect key="frame" x="33.5" y="0.0" width="38" height="19.5"/>
+                                    <rect key="frame" x="33.5" y="0.0" width="38.5" height="19.5"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                     <color key="textColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="0.69999998807907104" colorSpace="calibratedRGB"/>

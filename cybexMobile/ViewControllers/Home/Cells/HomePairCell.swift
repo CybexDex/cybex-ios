@@ -13,10 +13,10 @@ class HomePairCell: BaseTableViewCell {
         case normal = 0
         case topGainers
     }
-
+    
     @IBOutlet weak var pairView: HomePairView!
     var cellType: HomePairCellType = HomePairCellType.normal
-
+    
     override func setup(_ data: Any?) {
         self.pairView.store = ["index": indexPath!.row]
         self.pairView.data = data
@@ -24,9 +24,9 @@ class HomePairCell: BaseTableViewCell {
             self.pairView.replaceIconToLabel()
         }
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
 }

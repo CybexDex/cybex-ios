@@ -32,7 +32,7 @@ class SettingCoordinator: AccountRootCoordinator {
     var store = Store<SettingState>(
         reducer: SettingReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: SettingState {
@@ -82,7 +82,7 @@ extension SettingCoordinator: SettingStateManagerProtocol {
         AssetConfiguration.shared.assetIds = []
         AssetConfiguration.shared.uniqueIds = []
 
-        appData.ticker_data.accept([])
+        appData.tickerData.accept([])
 
         CybexWebSocketService.shared.disconnect()
         UserManager.shared.logout()

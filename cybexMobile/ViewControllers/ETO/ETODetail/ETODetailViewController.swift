@@ -123,7 +123,7 @@ class ETODetailViewController: BaseViewController {
 extension ETODetailViewController {
     @objc func clickCellView(_ data: [String: Any]) {
         if let url = data["data"] as? String {
-            self.coordinator?.openWebWithUrl(url, type: CybexWebViewController.web_type.whitelist)
+            self.coordinator?.openWebWithUrl(url, type: CybexWebViewController.WebType.whitelist)
         }
     }
 
@@ -144,7 +144,7 @@ extension ETODetailViewController {
     }
 
     @objc func icoapePage(_ data: [String: Any]) {
-        self.coordinator?.openWebWithUrl("https://icoape.com/", type: CybexWebViewController.web_type.kyc)
+        self.coordinator?.openWebWithUrl("https://icoape.com/", type: CybexWebViewController.WebType.kyc)
     }
 
     override func returnInviteCode(_ sender: String) {
@@ -160,7 +160,7 @@ extension ETODetailViewController {
 
     @objc func labelClick(_ sender: [String: Any]) {
         if let url = sender["clicklabel"] as? String {
-            self.coordinator?.openWebWithUrl(url, type: CybexWebViewController.web_type.project_website)
+            self.coordinator?.openWebWithUrl(url, type: CybexWebViewController.WebType.projectWebsite)
         }
     }
 
@@ -169,6 +169,6 @@ extension ETODetailViewController {
     }
 
     @objc func showAgreement(_ sender: [String: Any]) {
-        self.coordinator?.openWebWithUrl("", type: CybexWebViewController.web_type.agreement)
+        self.coordinator?.openWebWithUrl("", type: CybexWebViewController.WebType.agreement)
     }
 }

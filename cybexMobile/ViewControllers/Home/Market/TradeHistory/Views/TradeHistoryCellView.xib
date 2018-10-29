@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TradeHistoryCellView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
-                <outlet property="asset_base" destination="vwS-BA-CAV" id="jU7-23-tel"/>
-                <outlet property="asset_quote" destination="v9A-GG-Eur" id="RHm-dl-ffw"/>
+                <outlet property="assetBase" destination="vwS-BA-CAV" id="jU7-23-tel"/>
+                <outlet property="assetQuote" destination="v9A-GG-Eur" id="RHm-dl-ffw"/>
                 <outlet property="dateLabel" destination="ING-rR-MUX" id="44r-mT-V1y"/>
                 <outlet property="price" destination="gcP-Mo-TkO" id="Fbd-sv-jZe"/>
             </connections>

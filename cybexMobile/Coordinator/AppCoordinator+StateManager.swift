@@ -40,7 +40,7 @@ extension AppCoordinator: AppStateManagerProtocol {
         store.dispatch(creator.fetchMarket(with: false, params: params, priority: .high, callback: { [weak self] (assets) in
             guard let `self` = self else { return }
 
-            self.store.dispatch(kLineFetched(pair: Pair(base: params.firstAssetId, quote: params.secondAssetId), stick: gap, assets: assets))
+            self.store.dispatch(KLineFetched(pair: Pair(base: params.firstAssetId, quote: params.secondAssetId), stick: gap, assets: assets))
             if let vc = vc, let sel = selector {
                 self.store.dispatch(RefreshState(sel: sel, vc: vc))
             }

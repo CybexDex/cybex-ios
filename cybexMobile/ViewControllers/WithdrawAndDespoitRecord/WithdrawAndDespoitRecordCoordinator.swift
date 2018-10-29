@@ -26,9 +26,9 @@ protocol WithdrawAndDespoitRecordStateManagerProtocol {
 
 class WithdrawAndDespoitRecordCoordinator: AccountRootCoordinator {
     var store = Store(
-        reducer: WithdrawAndDespoitRecordReducer,
+        reducer: withdrawAndDespoitRecordReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: WithdrawAndDespoitRecordState {
@@ -45,7 +45,7 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordCoordinat
     func openRecordDetailUrl(_ url: String) {
         if let vc = R.storyboard.main.cybexWebViewController() {
             vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
-            vc.vc_type = .recordDetail
+            vc.vcType = .recordDetail
             vc.url = URL(string: url)
             self.rootVC.pushViewController(vc, animated: true)
         }
@@ -72,7 +72,7 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
                     childVC.tableView.es.resetNoMoreData()
                     childVC.isNoMoreData = false
                     switch index {
-                    case .Asset:
+                    case .asset:
                         if info == R.string.localizable.openedAll.key.localized() {
                             childVC.assetInfo = nil
                         } else {
@@ -86,7 +86,7 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
                             childVC.assetInfo = assetInfo
                         }
                         break
-                    case .FoudType:
+                    case .foudType:
                         if info == R.string.localizable.openedAll.key.localized() {
                             childVC.recordType = .ALL
                         } else if info == R.string.localizable.recharge_deposit.key.localized() {

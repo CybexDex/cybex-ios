@@ -201,7 +201,7 @@ extension AppDelegate {
             Localize.setCurrentLanguage(Defaults[.language])
         }
 
-        appData.ticker_data.asObservable()
+        appData.tickerData.asObservable()
             .subscribe(onNext: { (_) in
                 if let vc = appCoodinator.startLoadingVC, !(vc is HomeViewController) {
                     appCoodinator.startLoadingVC = nil

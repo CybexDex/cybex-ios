@@ -104,7 +104,10 @@ extension MyOpenedOrdersView: UITableViewDelegate, UITableViewDataSource {
             
             guard let pair = data as? Pair else { return cell }
             let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
-                return (limitorder.sellPrice.base.assetID == pair.base && limitorder.sellPrice.quote.assetID == pair.quote) || (limitorder.sellPrice.base.assetID == pair.quote && limitorder.sellPrice.quote.assetID == pair.base)
+                return (limitorder.sellPrice.base.assetID == pair.base &&
+                    limitorder.sellPrice.quote.assetID == pair.quote) ||
+                    (limitorder.sellPrice.base.assetID == pair.quote &&
+                        limitorder.sellPrice.quote.assetID == pair.base)
             }) ?? []
             cell.setup(orderes[indexPath.row], indexPath: indexPath)
             return cell

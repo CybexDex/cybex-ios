@@ -22,8 +22,8 @@ class PairDetailView: UIView {
     @IBOutlet weak var closeLabel: UILabel!
     @IBOutlet weak var detailDateView: PairDetailDateViewView!
 
-    var base_name: String = ""
-    var quote_name: String = ""
+    var baseName: String = ""
+    var quoteName: String = ""
 
     var data: Any? {
         didSet {
@@ -47,8 +47,8 @@ class PairDetailView: UIView {
         self.closeLabel.text = ""
 
         if ticker.latest == "0" {
-            self.baseVolume.text = self.base_name + ": -"
-            self.quoteVolume.text = self.quote_name + ":-"
+            self.baseVolume.text = self.baseName + ": -"
+            self.quoteVolume.text = self.quoteName + ":-"
             self.highLabel.text = "High: -"
             self.lowLabel.text = "Low: -"
             self.price.text = "-"
@@ -58,15 +58,14 @@ class PairDetailView: UIView {
             return
         }
 
-        guard let base_info = appData.assetInfo[ticker.base], let _ = appData.assetInfo[ticker.quote] else {
+        guard let baseInfo = appData.assetInfo[ticker.base], let _ = appData.assetInfo[ticker.quote] else {
             return
         }
 
         DispatchQueue.global().async {
-
             DispatchQueue.main.async {
-                self.baseVolume.text = self.base_name + ": " + ticker.baseVolume.suffixNumber(digitNum: 2)
-                self.quoteVolume.text = self.quote_name + ": " + ticker.quoteVolume.suffixNumber(digitNum: 2)
+                self.baseVolume.text = self.baseName + ": " + ticker.baseVolume.suffixNumber(digitNum: 2)
+                self.quoteVolume.text = self.quoteName + ": " + ticker.quoteVolume.suffixNumber(digitNum: 2)
 
 //                detailView.highLabel.text = "High: " + last_model.high.formatCurrency(digitNum: base_info.precision)
 //                detailView.lowLabel.text = "Low: " + last_model.low.formatCurrency(digitNum: base_info.precision)
@@ -74,7 +73,7 @@ class PairDetailView: UIView {
 //                self.highLabel.text = "High: " + ticker.highest_bid.formatCurrency(digitNum: base_info.precision)
 //                self.lowLabel.text = "Low: " + ticker.lowest_ask.formatCurrency(digitNum: base_info.precision)
 
-                self.price.text = ticker.latest.formatCurrency(digitNum: base_info.precision)
+                self.price.text = ticker.latest.formatCurrency(digitNum: baseInfo.precision)
                 self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percentChange.formatCurrency(digitNum: 2) + "%"
                 self.bulking.textColor = ticker.incre.color()
                 self.bulkingIcon.image = ticker.incre.icon()
@@ -83,8 +82,8 @@ class PairDetailView: UIView {
     }
 
     func refreshViewWith(_ model: CBKLineModel) {
-        detailDateView.base_name = self.base_name
-        detailDateView.quote_name = self.quote_name
+        detailDateView.baseName = self.baseName
+        detailDateView.quoteName = self.quoteName
         detailDateView.isHidden = false
 
 //        var lineModels = CBConfiguration.sharedConfiguration.dataSource.drawKLineModels

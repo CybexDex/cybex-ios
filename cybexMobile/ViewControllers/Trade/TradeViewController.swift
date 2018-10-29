@@ -80,7 +80,7 @@ class TradeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if appData.ticker_data.value.count == 0 {
+        if appData.tickerData.value.count == 0 {
             return
         }
         if self.isVisible {
@@ -91,14 +91,11 @@ class TradeViewController: BaseViewController {
 
     func setupUI() {
         setupNavi()
-
         titlesView = CybexTitleView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 32))
         topView.addSubview(self.titlesView!)
-
         self.titlesView!.data = [R.string.localizable.trade_buy.key,
                                  R.string.localizable.trade_sell.key,
                                  R.string.localizable.trade_open_orders.key]
-
     }
 
     func setupEvent() {
@@ -125,11 +122,11 @@ class TradeViewController: BaseViewController {
     }
 
     func getPairInfo() {
-        guard let base_info = appData.assetInfo[pair.base], let quote_info = appData.assetInfo[pair.quote] else {
+        guard let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else {
             self.info = nil
             return
         }
-        self.info = (base_info, quote_info)
+        self.info = (baseInfo, quoteInfo)
     }
 
     @objc override func rightAction(_ sender: UIButton) {
@@ -151,7 +148,7 @@ class TradeViewController: BaseViewController {
     override func configureObserveState() {
         appData.otherRequestRelyData.asObservable()
             .subscribe(onNext: { (_) in
-                if appData.ticker_data.value.count == 0 {
+                if appData.tickerData.value.count == 0 {
                     return
                 }
 
@@ -202,7 +199,7 @@ class TradeViewController: BaseViewController {
 
 extension TradeViewController: TradeNavTitleViewDelegate {
     @discardableResult func sendEventActionWith() -> Bool {
-        if appData.ticker_data.value.count == 0 {
+        if appData.tickerData.value.count == 0 {
             return false
         }
 
@@ -230,6 +227,8 @@ extension TradeViewController: TradeNavTitleViewDelegate {
 
 extension TradeViewController {
     @objc func sendBtnAction(_ data: [String: Any]) {
-        selectedIndex = data["selectedIndex"] as! Int
+        if let seleIndex = data["selectedIndex"] as? Int {
+            selectedIndex = seleIndex
+        }
     }
 }

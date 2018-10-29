@@ -33,7 +33,7 @@ class RechargeRecodeCoordinator: AccountRootCoordinator {
     var store = Store<RechargeRecodeState>(
         reducer: rechargeRecodeReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 
@@ -58,7 +58,7 @@ extension RechargeRecodeCoordinator: RechargeRecodeCoordinatorProtocol {
         } else {
             if let webVC = R.storyboard.main.cybexWebViewController() {
                 webVC.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
-                webVC.vc_type = .recordDetail
+                webVC.vcType = .recordDetail
                 webVC.url = URL(string: url)
                 self.rootVC.pushViewController(webVC, animated: true)
             }

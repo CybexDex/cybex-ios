@@ -87,14 +87,14 @@ class BusinessViewController: BaseViewController {
     }
     
     func refreshView() {
-        guard let pair = pair, let base_info = appData.assetInfo[pair.base], let quote_info = appData.assetInfo[pair.quote] else { return }
-
-        self.containerView.quoteName.text = quote_info.symbol.filterJade
-
-        self.coordinator?.getFee(self.type == .buy ? base_info.id : quote_info.id)
-
-        self.coordinator?.getBalance((self.type == .buy ? base_info.id : quote_info.id))
-
+        guard let pair = pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else { return }
+        
+        self.containerView.quoteName.text = quoteInfo.symbol.filterJade
+        
+        self.coordinator?.getFee(self.type == .buy ? baseInfo.id : quoteInfo.id)
+        
+        self.coordinator?.getBalance((self.type == .buy ? baseInfo.id : quoteInfo.id))
+        
         changeButtonState()
     }
     
@@ -139,7 +139,7 @@ class BusinessViewController: BaseViewController {
     }
     
     func showOpenedOrderInfo() {
-
+        
         guard let baseInfo = appData.assetInfo[(self.pair?.base)!], let quoteInfo = appData.assetInfo[(self.pair?.quote)!],
             let _ = appData.assetInfo[(self.coordinator?.state.property.feeID.value)!],
             self.coordinator?.state.property.feeAmount.value != 0,
@@ -147,7 +147,7 @@ class BusinessViewController: BaseViewController {
             let decimalAmount = curAmount.toDecimal(), decimalAmount != 0,
             let price = self.coordinator?.state.property.price.value,
             let decimalPrice = price.toDecimal(), decimalPrice != 0 else { return }
-
+        
         let openedOrderDetailView = StyleContentView(frame: .zero)
         let ensureTitle = self.type == .buy ?
             R.string.localizable.openedorder_buy_ensure.key.localized() :
@@ -168,21 +168,104 @@ class BusinessViewController: BaseViewController {
         (self.containerView.amountTextfield.rx.text.orEmpty <-> self.coordinator!.state.property.amount).disposed(by: disposeBag)
         (self.containerView.priceTextfield.rx.text.orEmpty <-> self.coordinator!.state.property.price).disposed(by: disposeBag)
         
-        //RMB
-        self.coordinator!.state.property.price.subscribe(onNext: {[weak self] (text) in
+        self.addObserverSubscribeAction()
+        self.addNotificationSubscribeAction()
+        self.addUserManagerObserverSubscribeAction()
+       
+        //balance
+        self.coordinator?.state.property.balance.asObservable().skip(1).subscribe(onNext: {[weak self] (balance) in
+            guard let `self` = self else { return }
+            guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote], balance != 0 else {
+                self.containerView.balance.text = "--"
+                
+                if let amount =  self.containerView.amountTextfield.text, let amountDouble = amount.toDouble(),
+                    amountDouble > 0,
+                    let price =  self.containerView.priceTextfield.text,
+                    let priceDouble = price.toDouble(), priceDouble > 0 {
+                    self.containerView.tipView.isHidden = false
+                }
+                return
+            }
+            //      self.containerView.tipView.isHidden = true
+            
+            let info = self.type == .buy ? baseInfo : quoteInfo
+            let symbol = info.symbol.filterJade
+            let realAmount = balance.doubleValue.string(digits: info.precision)
+            
+            self.containerView.balance.text = "\(realAmount) \(symbol)"
+            
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        //fee
+        Observable.combineLatest(coordinator!.state.property.feeID.asObservable(), coordinator!.state.property.feeAmount.asObservable()).subscribe(onNext: {[weak self] (feeId, feeAmount) in
             guard let `self` = self else { return }
             
-            self.checkBalance()
-
-            guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base],
-                let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0,
-                text.components(separatedBy: ".").count <= 2 && text != ".", let textDouble = text.toDouble() else {
-                self.containerView.value.text = "≈¥0.00"
+            guard let info = appData.assetInfo[feeId] else {
+                self.containerView.fee.text = "--"
+                return
+            }
+            self.containerView.fee.text = feeAmount.doubleValue.string(digits: info.precision) + " \(info.symbol.filterJade)"
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        //total
+        Observable.combineLatest(coordinator!.state.property.feeID.asObservable(),
+                                 self.coordinator!.state.property.amount,
+                                 self.coordinator!.state.property.price,
+                                 coordinator!.state.property.feeAmount.asObservable())
+            .subscribe(onNext: {[weak self] (_, amount, price, fee) in
+                guard let `self` = self else { return }
+                guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base] else {
+                    self.containerView.endMoney.text = "--"
+                    return
+                }
+                guard let limit = price.toDouble(), let amount = amount.toDouble(), limit != 0, amount != 0, fee != 0 else {
+                    self.containerView.endMoney.text = "--"
+                    return
+                }
+                let total = Decimal(floatLiteral: limit) * Decimal(floatLiteral: amount)
+                guard let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0 else {
+                    self.containerView.endMoney.text = "\(total.string(digits: self.pricePricision, roundingMode: .down)) \(baseInfo.symbol.filterJade)"
+                    return
+                }
+                self.containerView.endMoney.text = "\(total.string(digits: self.pricePricision, roundingMode: .down)) \(baseInfo.symbol.filterJade)"
+                }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    }
+    
+    func addUserManagerObserverSubscribeAction() {
+        
+        UserManager.shared.balances.asObservable().subscribe(onNext: {[weak self] (_) in
+            guard let `self` = self else { return }
+            guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else { return }
+            self.coordinator?.getBalance((self.type == .buy ? baseInfo.id : quoteInfo.id))
+            self.coordinator?.getFee(self.type == .buy ? baseInfo.id : quoteInfo.id)
+            
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        UserManager.shared.name.skip(1).asObservable().subscribe(onNext: {[weak self] (name) in
+            guard let `self` = self else { return }
+            
+            self.changeButtonState()
+            
+            guard let _ = name else {
+                self.coordinator?.resetState()
                 return
             }
             
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    }
+    
+    func addObserverSubscribeAction() {
+        //RMB
+        self.coordinator!.state.property.price.subscribe(onNext: {[weak self] (text) in
+            guard let `self` = self else { return }
+            self.checkBalance()
+            guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base],
+                let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0,
+                text.components(separatedBy: ".").count <= 2 && text != ".", let textDouble = text.toDouble() else {
+                    self.containerView.value.text = "≈¥0.00"
+                    return
+            }
             self.containerView.value.text = "≈¥" + String(describing: getAssetRMBPrice(baseInfo.id) * textDouble).formatCurrency(digitNum: 2)
-            
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         self.coordinator!.state.property.amount.subscribe(onNext: {[weak self] (_) in
@@ -190,7 +273,9 @@ class BusinessViewController: BaseViewController {
             
             self.checkBalance()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
+    }
+    
+    func addNotificationSubscribeAction() {
         //precision
         NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification, object: self.containerView.priceTextfield, queue: nil) {[weak self] (_) in
             guard let `self` = self else { return }
@@ -261,89 +346,9 @@ class BusinessViewController: BaseViewController {
                 return
             }
         }
-        
-        UserManager.shared.balances.asObservable().subscribe(onNext: {[weak self] (_) in
-            guard let `self` = self else { return }
-            guard let pair = self.pair, let base_info = appData.assetInfo[pair.base], let quote_info = appData.assetInfo[pair.quote] else { return }
-            self.coordinator?.getBalance((self.type == .buy ? base_info.id : quote_info.id))
-            self.coordinator?.getFee(self.type == .buy ? base_info.id : quote_info.id)
-
-            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
-        //balance
-        self.coordinator?.state.property.balance.asObservable().skip(1).subscribe(onNext: {[weak self] (balance) in
-            guard let `self` = self else { return }
-            guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote], balance != 0 else {
-                self.containerView.balance.text = "--"
-
-                if let amount =  self.containerView.amountTextfield.text, let amountDouble = amount.toDouble(),
-                    amountDouble > 0,
-                    let price =  self.containerView.priceTextfield.text,
-                    let priceDouble = price.toDouble(), priceDouble > 0 {
-                    self.containerView.tipView.isHidden = false
-                }
-                return
-            }
-            //      self.containerView.tipView.isHidden = true
-            
-            let info = self.type == .buy ? baseInfo : quoteInfo
-            let symbol = info.symbol.filterJade
-            let realAmount = balance.doubleValue.string(digits: info.precision)
-            
-            self.containerView.balance.text = "\(realAmount) \(symbol)"
-            
-            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
-        //fee
-        Observable.combineLatest(coordinator!.state.property.feeID.asObservable(), coordinator!.state.property.feeAmount.asObservable()).subscribe(onNext: {[weak self] (fee_id, fee_amount) in
-            guard let `self` = self else { return }
-
-            guard let info = appData.assetInfo[fee_id] else {
-                self.containerView.fee.text = "--"
-                return
-            }
-
-            self.containerView.fee.text = fee_amount.doubleValue.string(digits: info.precision) + " \(info.symbol.filterJade)"
-
-            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-
-        //total
-        Observable.combineLatest(coordinator!.state.property.feeID.asObservable(), self.coordinator!.state.property.amount, self.coordinator!.state.property.price, coordinator!.state.property.feeAmount.asObservable()).subscribe(onNext: {[weak self] (_, amount, price, fee) in
-            guard let `self` = self else { return }
-            guard let pair = self.pair, let base_info = appData.assetInfo[pair.base] else {
-                self.containerView.endMoney.text = "--"
-                return
-            }
-
-            guard let limit = price.toDouble(), let amount = amount.toDouble(), limit != 0, amount != 0, fee != 0 else {
-                self.containerView.endMoney.text = "--"
-                return
-            }
-
-            let total = Decimal(floatLiteral: limit) * Decimal(floatLiteral: amount)
-
-            guard let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0 else {
-                self.containerView.endMoney.text = "\(total.string(digits: self.pricePricision, roundingMode: .down)) \(base_info.symbol.filterJade)"
-                return
-            }
-
-            self.containerView.endMoney.text = "\(total.string(digits: self.pricePricision, roundingMode: .down)) \(base_info.symbol.filterJade)"
-
-            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-
-
-        UserManager.shared.name.skip(1).asObservable().subscribe(onNext: {[weak self] (name) in
-            guard let `self` = self else { return }
-            
-            self.changeButtonState()
-            
-            guard let _ = name else {
-                self.coordinator?.resetState()
-                return
-            }
-            
-            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
+    
+    
     
     deinit {
         NotificationCenter.default.removeObserver(self.containerView.priceTextfield)
@@ -370,10 +375,10 @@ extension BusinessViewController: TradePair {
 extension BusinessViewController {
     @objc func amountPercent(_ data: [String: Any]) {
         if let percent = data["percent"] as? String {
-            guard let pair = self.pair, let base_info = appData.assetInfo[pair.base], let quote_info = appData.assetInfo[pair.quote]  else { return }
+            guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else { return }
             self.coordinator?.changePercent(percent.toDouble()! / 100.0,
                                             isBuy: self.type == .buy,
-                                            assetID: self.type == .buy ? base_info.id : quote_info.id,
+                                            assetID: self.type == .buy ? baseInfo.id : quoteInfo.id,
                                             pricision: self.amountPricision)
         }
     }
@@ -404,7 +409,7 @@ extension BusinessViewController {
         if self.pricePricision == 0 {
             return
         }
-        self.coordinator?.adjustPrice(data["plus"]!, price_pricision: self.pricePricision)
+        self.coordinator?.adjustPrice(data["plus"]!, pricePricision: self.pricePricision)
     }
     
     func postOrder() {
@@ -442,7 +447,7 @@ extension BusinessViewController {
     
     override func passwordPassed(_ passed: Bool) {
         
-
+        
         
         if passed {
             postOrder()

@@ -35,7 +35,7 @@ class AccountCoordinator: AccountRootCoordinator {
     var store = Store<AccountState>(
         reducer: AccountReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: AccountState {

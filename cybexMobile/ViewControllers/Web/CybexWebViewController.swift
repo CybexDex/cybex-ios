@@ -16,11 +16,11 @@ import Localize_Swift
 
 class CybexWebViewController: BaseWebViewController {
 
-    enum web_type: Int {
+    enum WebType: Int {
         case help = 0
         case kyc
         case whitelist
-        case project_website
+        case projectWebsite
         case whitepaper
         case agreement
         case recordDetail
@@ -29,13 +29,13 @@ class CybexWebViewController: BaseWebViewController {
 
     var coordinator: (CybexWebCoordinatorProtocol & CybexWebStateManagerProtocol)?
 
-    var vc_type: web_type = .help
+    var vcType: WebType = .help
 
     override func viewDidLoad() {
-        if vc_type == .help {
+        if vcType == .help {
             let url = Defaults[.theme] == 0 ?AppConfiguration.HelpNightURL + Localize.currentLanguage() : AppConfiguration.HelpLightURL + Localize.currentLanguage()
             self.url = URL(string: url)
-        } else if vc_type == .agreement {
+        } else if vcType == .agreement {
             self.navigationItem.title = R.string.localizable.eto_user_agreenment.key.localized()
             var urlString = ""
             urlString = Localize.currentLanguage() == "en" ? "en" : "cn"
@@ -68,7 +68,7 @@ class CybexWebViewController: BaseWebViewController {
     }
 
     func setupUI() {
-        switch self.vc_type {
+        switch self.vcType {
         case .help:
             self.title = R.string.localizable.setting_help.key.localized()
         case .kyc:

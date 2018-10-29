@@ -27,7 +27,7 @@ class SettingDetailCoordinator: AccountRootCoordinator {
     var store = Store<SettingDetailState>(
         reducer: SettingDetailReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 

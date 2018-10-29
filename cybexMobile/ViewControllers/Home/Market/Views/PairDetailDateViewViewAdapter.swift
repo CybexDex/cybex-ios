@@ -15,7 +15,7 @@ extension PairDetailDateViewView {
         self.high.text = R.string.localizable.pair_high.key.localizedFormat(model.high.formatCurrency(digitNum: model.precision))
         self.low.text = R.string.localizable.pair_low.key.localizedFormat(model.low.formatCurrency(digitNum: model.precision))
         self.close.text = R.string.localizable.pair_close.key.localizedFormat(model.close.formatCurrency(digitNum: model.precision))
-        self.baseAmount.text = R.string.localizable.pair_vol.key.localizedFormat(model.volume.suffixNumber(digitNum: 2)) + " " +  self.base_name
+        self.baseAmount.text = R.string.localizable.pair_vol.key.localizedFormat(model.volume.suffixNumber(digitNum: 2)) + " " +  self.baseName
 
         var lineModels = CBConfiguration.sharedConfiguration.dataSource.drawKLineModels
         let (contain, index) = lineModels.containHashable(model)

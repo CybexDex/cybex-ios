@@ -68,7 +68,7 @@ class PortfolioData {
         }
 
         // 获取对应CYB的个数
-        let amountCYB = appData.cyb_rmb_price == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cyb_rmb_price * (realAmount.toDouble())!)
+        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice * (realAmount.toDouble())!)
 
         if amountCYB == "-"{
             cybPrice = amountCYB + " CYB"
@@ -102,7 +102,7 @@ class MyPortfolioData {
         }
 
         // 获取对应CYB的个数
-        let amountCYB = appData.cyb_rmb_price == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cyb_rmb_price * (realAmount.toDouble())!)
+        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice * (realAmount.toDouble())!)
 
 //        let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "0" ? "-" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.toDouble())!)
 

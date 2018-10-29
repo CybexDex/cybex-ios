@@ -92,7 +92,7 @@ class ComprehensiveViewController: BaseViewController {
             }
         }).disposed(by: disposeBag)
 
-        appData.ticker_data.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
+        appData.tickerData.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
             return tickers.count == AssetConfiguration.shared.assetIds.count
             }.subscribe(onNext: { [weak self](tickers) in
                 guard let `self` = self else { return }

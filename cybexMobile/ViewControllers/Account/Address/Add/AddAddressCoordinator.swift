@@ -46,7 +46,7 @@ class AddAddressCoordinator: AccountRootCoordinator {
     var store = Store<AddAddressState>(
         reducer: AddAddressReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 

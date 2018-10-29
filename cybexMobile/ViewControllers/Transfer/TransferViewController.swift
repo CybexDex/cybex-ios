@@ -15,7 +15,7 @@ import SwifterSwift
 class TransferViewController: BaseViewController {
 
     @IBOutlet weak var transferView: TransferView!
-    var account_name: String = ""
+    var accountName: String = ""
 
     var coordinator: (TransferCoordinatorProtocol & TransferStateManagerProtocol)?
 
@@ -72,12 +72,13 @@ class TransferViewController: BaseViewController {
         //币种及余额监听
         self.coordinator!.state.balance.asObservable().subscribe(onNext: {[weak self] (balance) in
             guard let `self` = self else { return }
-            if let balance = balance {
+            if let balance = balance, let balanceInfo = appData.assetInfo[balance.assetType] {
                 if let info = appData.assetInfo[balance.assetType] {
                     self.transferView.crypto = info.symbol.filterJade
                     self.transferView.precision = info.precision
                     let realBalance = getRealAmountDouble(balance.assetType, amount: balance.balance)
-                    self.transferView.balance = R.string.localizable.transfer_balance.key.localized() + realBalance.string(digits: info.precision) + " " +  (appData.assetInfo[balance.assetType]?.symbol.filterJade)!
+                    let transferBalanceKey = R.string.localizable.transfer_balance.key.localized()
+                    self.transferView.balance = transferBalanceKey + realBalance.string(digits: info.precision) + " " + balanceInfo.symbol.filterJade
                 }
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -135,7 +136,10 @@ class TransferViewController: BaseViewController {
             let memo = self.transferView.memoView.textView.text,
             let fee = self.coordinator?.state.fee.value {
             if let feeInfo = appData.assetInfo[fee.assetId] {
-                let data = getTransferInfo(account, quanitity: amount + " " + (appData.assetInfo[balance.assetType]?.symbol.filterJade)!, fee: (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade, memo: memo)
+                let data = getTransferInfo(account,
+                                           quanitity: amount + " " + (appData.assetInfo[balance.assetType]?.symbol.filterJade)!,
+                                           fee: (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade,
+                                           memo: memo)
                 showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data)
             }
         }
@@ -185,7 +189,7 @@ extension TransferViewController {
                         if String(describing: data) == "<null>"{
                             if AddressManager.shared.containAddressOfTransfer(self.coordinator!.state.account.value).0 == false {
                                 self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.transfer_success_title.key.localized(), content: R.string.localizable.transfer_success_content.key.localized())
-                                self.account_name = self.coordinator!.state.account.value
+                                self.accountName = self.coordinator!.state.account.value
                             } else {
                                 self.showToastBox(true, message: R.string.localizable.transfer_successed.key.localized())
                                 self.coordinator?.reopenAction()
@@ -205,7 +209,7 @@ extension TransferViewController {
 
     override func returnEnsureImageAction() {
 
-        let transferAddress = TransferAddress(id: AddressManager.shared.getUUID(), name: "", address: self.account_name)
+        let transferAddress = TransferAddress(id: AddressManager.shared.getUUID(), name: "", address: self.accountName)
         self.coordinator?.reopenAction()
         self.coordinator?.openAddTransferAddress(transferAddress)
     }
@@ -232,7 +236,10 @@ extension TransferViewController {
     }
 
     @objc func amount(_ data: [String: Any]) {
-        self.coordinator?.setAmount(data["content"] as! String, canFetchFee: !UserManager.shared.isLocked)
+        guard let content = data["content"] as? String else {
+            return
+        }
+        self.coordinator?.setAmount(content, canFetchFee: !UserManager.shared.isLocked)
         if UserManager.shared.isLocked {
             self.isFetchFee = true
             self.showPasswordBox()
@@ -240,11 +247,12 @@ extension TransferViewController {
     }
 
     @objc func memo(_ data: [String: Any]) {
+        guard let content = data["content"] as? String else { return }
         if !UserManager.shared.isWithDraw {
             showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
             return
         }
-        self.coordinator?.setMemo(data["content"] as! String, canFetchFee: !UserManager.shared.isLocked)
+        self.coordinator?.setMemo(content, canFetchFee: !UserManager.shared.isLocked)
         if UserManager.shared.isLocked {
             self.isFetchFee = true
             self.showPasswordBox()
