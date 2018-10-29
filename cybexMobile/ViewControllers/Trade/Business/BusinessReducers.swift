@@ -17,7 +17,7 @@ func businessReducer(action: Action, state: BusinessState?) -> BusinessState {
 }
 
 func businessPropertyReducer(_ state: BusinessPropertyState?, action: Action) -> BusinessPropertyState {
-    var state = state ?? BusinessPropertyState()
+    let state = state ?? BusinessPropertyState()
 
 
     switch action {

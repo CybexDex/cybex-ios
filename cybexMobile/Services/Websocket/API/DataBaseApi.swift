@@ -40,7 +40,7 @@ struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {
     func transferResponse(from resultObject: Any) throws -> Any {
         let result = JSON(resultObject)
         if let data = result.arrayObject as? [[String: Any]] {
-            return data.compactMap({Fee(JSON: $0)})
+            return data.compactMap({Fee.deserialize(from: $0)})
         }
         return []
     }
@@ -97,17 +97,17 @@ struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
                 return resultValue
         }
 
-        let account = Account(JSON: accountDic)
+        let account = Account.deserialize(from: accountDic)
 
         let balancesArr = full["balances"].arrayValue
         let limitOrderArr = full["limit_orders"].arrayValue
 
         let balances = balancesArr.map { (obj) -> Balance in
-            return Balance(JSON: obj.dictionaryObject!)!
+            return Balance.deserialize(from: obj.dictionaryObject!) ?? Balance()
         }
 
         let limitOrders = limitOrderArr.map { (obj) -> LimitOrder in
-            return LimitOrder(JSON: obj.dictionaryObject!)!
+            return LimitOrder.deserialize(from: obj.dictionaryObject!) ?? LimitOrder()
         }
 
         return (account, balances, limitOrders)
@@ -162,7 +162,7 @@ struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
 
             return response.map { data in
 
-                return AssetInfo(JSON: data)!
+                return AssetInfo.deserialize(from: data)
             }
         } else {
             throw CastError(actualValue: resultObject, expectedType: Response.self)
@@ -221,8 +221,8 @@ struct GetLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
         let result = JSON(resultObject).arrayValue
         if result.count >= 1 {
             var data: [LimitOrder] = []
-            for item in result {
-                if let order = LimitOrder(JSON: item.dictionaryObject!) {
+            for i in result {
+                if let order = LimitOrder.deserialize(from: i.dictionaryObject!) {
                     data.append(order)
                 }
             }
@@ -249,9 +249,9 @@ struct GetBalanceObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
         let result = JSON(resultObject).arrayValue
         if result.count > 0 {
             var data: [LockUpAssetsMData] = []
-            for item in result {
-                guard let dic = item.dictionaryObject else { return [] }
-                guard let lockup = LockUpAssetsMData(JSON: dic) else { return[] }
+            for i in result {
+                guard let dic = i.dictionaryObject else { return [] }
+                guard let lockup = LockUpAssetsMData.deserialize(from: dic) else { return[] }
                 data.append(lockup)
             }
             return data

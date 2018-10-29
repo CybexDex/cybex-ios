@@ -110,11 +110,11 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         
         var items = [String]()
         let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
-            return getRealAmountDouble(balance.asset_type, amount: balance.balance) != 0
+            return getRealAmountDouble(balance.assetType, amount: balance.balance) != 0
         })
         if let balances = balances {
             for balance in balances {
-                if let info = appData.assetInfo[balance.asset_type] {
+                if let info = appData.assetInfo[balance.assetType] {
                     items.append(info.symbol.filterJade)
                 }
             }
@@ -225,7 +225,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
             let amount = self.state.amount.value
             let requeset = GetObjectsRequest(ids: [objectID.dynamic_global_property_object.rawValue]) { (infos) in
                 if let infos = infos as? (block_id: String, block_num: String) {
-                    if var amount = amount.toDouble(), let assetInfo = appData.assetInfo[balance.asset_type], let feeInfo = appData.assetInfo[fee.asset_id] {
+                    if var amount = amount.toDouble(), let assetInfo = appData.assetInfo[balance.assetType], let feeInfo = appData.assetInfo[fee.assetId] {
                         let value = pow(10, assetInfo.precision)
                         amount = amount * Double(truncating: value as NSNumber)
                         
@@ -241,10 +241,10 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                                                                           chain_id: id,
                                                                           from_user_id: Int32(getUserId(fromAccount.id)),
                                                                           to_user_id: Int32(getUserId(toAccount.id)),
-                                                                          asset_id: Int32(getUserId(balance.asset_type)),
-                                                                          receive_asset_id: Int32(getUserId(balance.asset_type)),
+                                                                          asset_id: Int32(getUserId(balance.assetType)),
+                                                                          receive_asset_id: Int32(getUserId(balance.assetType)),
                                                                           amount: Int64(amount),
-                                                                          fee_id: Int32(getUserId(fee.asset_id)),
+                                                                          fee_id: Int32(getUserId(fee.assetId)),
                                                                           fee_amount: Int64(feeAmout),
                                                                           memo: self.state.memo.value,
                                                                           from_memo_key: fromAccount.memoKey,
@@ -304,7 +304,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     
     func validAmount() {
         let balance = self.state.balance.value
-        getGatewayFee(balance?.asset_type ?? "", amount: self.state.amount.value, memo: self.state.memo.value)
+        getGatewayFee(balance?.assetType ?? "", amount: self.state.amount.value, memo: self.state.memo.value)
     }
     
     func getTransferAccountInfo() {
@@ -337,7 +337,8 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                                                                               to_memo_key: toMemoKey) {
                 calculateFee(operationString, focusAssetId: assetId, operationID: .transfer) { (success, amount, feeId) in
                     let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
-                    self.store.dispatch(SetFeeAction(fee: Fee(JSON: dictionary)!))
+                    
+                    self.store.dispatch(SetFeeAction(fee: Fee.deserialize(from: dictionary)!))
                     if success {
                         if var transferAmount = self.state.amount.value.toDouble() {
                             let value = assetId.isEmpty ? 1 : pow(10, (appData.assetInfo[assetId]?.precision)!)
@@ -361,9 +362,9 @@ extension TransferCoordinator: TransferStateManagerProtocol {
         if let balance = self.state.balance.value, let totalAmount = balance.balance.toDouble() {
             var feeAmount: Double = 0
             if let fee = self.state.fee.value {
-                if fee.asset_id == balance.asset_type {
+                if fee.assetId == balance.assetType {
                     feeAmount = fee.amount.toDouble() ?? 0
-                    let value = fee.asset_id.isEmpty ? 1 : pow(10, (appData.assetInfo[fee.asset_id]?.precision)!)
+                    let value = fee.assetId.isEmpty ? 1 : pow(10, (appData.assetInfo[fee.assetId]?.precision)!)
                     feeAmount = feeAmount * Double(truncating: value as NSNumber)
                 }
             }

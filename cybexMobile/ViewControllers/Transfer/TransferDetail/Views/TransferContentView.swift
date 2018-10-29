@@ -27,10 +27,10 @@ class TransferContentView: UIView {
                 addressView.contentLocali = data.isSend ? data.to : data.from
                 timeView.contentLocali = data.time
                 
-                if data.vesting_period == "" {
+                if data.vestingPeriod == "" {
                     vestingPeriodView.contentLocali = R.string.localizable.transfer_detail_nodata.key.localized()
                 } else {
-                    vestingPeriodView.contentLocali = transferTimeType(Int(data.vesting_period)!)
+                    vestingPeriodView.contentLocali = transferTimeType(Int(data.vestingPeriod)!)
                 }
                 if data.memo == "" {
                     memoView.contentLocali = R.string.localizable.transfer_detail_nodata.key.localized()
@@ -44,8 +44,8 @@ class TransferContentView: UIView {
                         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
                 }
                 
-                if let feeInfo = data.fee, let assetInfo = appData.assetInfo[feeInfo.asset_id] {
-                    feeView.contentLocali = getRealAmount(feeInfo.asset_id, amount: feeInfo.amount).string(digits: assetInfo.precision, roundingMode: .down) + " " + assetInfo.symbol.filterJade
+                if let feeInfo = data.fee, let assetInfo = appData.assetInfo[feeInfo.assetId] {
+                    feeView.contentLocali = getRealAmount(feeInfo.assetId, amount: feeInfo.amount).string(digits: assetInfo.precision, roundingMode: .down) + " " + assetInfo.symbol.filterJade
                 }
                 updateHeight()
             }

@@ -50,7 +50,7 @@ func transferRecordsToViewModels(_ sender: [(TransferRecord, time: String)], cal
                                                                     to: source.0.from == account.id ? requesetName : account.name,
                                                                     time: source.time, amount: source.0.amount,
                                                                     memo: source.0.memo?.toJSONString() ?? "",
-                                                                    vesting_period: source.0.vesting_period,
+                                                                    vestingPeriod: source.0.vestingPeriod,
                                                                     fee: source.0.fee)
                     result.append(transferViewModel)
                     if result.count == sender.count {

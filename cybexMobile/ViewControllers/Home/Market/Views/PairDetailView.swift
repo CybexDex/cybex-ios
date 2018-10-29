@@ -64,8 +64,8 @@ class PairDetailView: UIView {
 
         DispatchQueue.global().async {
             DispatchQueue.main.async {
-                self.baseVolume.text = self.baseName + ": " + ticker.base_volume.suffixNumber(digitNum: 2)
-                self.quoteVolume.text = self.quoteName + ": " + ticker.quote_volume.suffixNumber(digitNum: 2)
+                self.baseVolume.text = self.baseName + ": " + ticker.baseVolume.suffixNumber(digitNum: 2)
+                self.quoteVolume.text = self.quoteName + ": " + ticker.quoteVolume.suffixNumber(digitNum: 2)
 
 //                detailView.highLabel.text = "High: " + last_model.high.formatCurrency(digitNum: base_info.precision)
 //                detailView.lowLabel.text = "Low: " + last_model.low.formatCurrency(digitNum: base_info.precision)
@@ -74,7 +74,7 @@ class PairDetailView: UIView {
 //                self.lowLabel.text = "Low: " + ticker.lowest_ask.formatCurrency(digitNum: base_info.precision)
 
                 self.price.text = ticker.latest.formatCurrency(digitNum: baseInfo.precision)
-                self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percent_change.formatCurrency(digitNum: 2) + "%"
+                self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percentChange.formatCurrency(digitNum: 2) + "%"
                 self.bulking.textColor = ticker.incre.color()
                 self.bulkingIcon.image = ticker.incre.icon()
             }

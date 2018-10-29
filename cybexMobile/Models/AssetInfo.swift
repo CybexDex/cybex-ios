@@ -7,36 +7,33 @@
 //
 
 import Foundation
-import ObjectMapper
 import HandyJSON
 
-class AssetInfo: Mappable {
+class AssetInfo: HandyJSON {
     var precision: Int = 0
     var id: String = ""
     var symbol: String = ""
-    var dynamic_asset_data_id: String = ""
+    var dynamicAssetDataId: String = ""
 
-    required init?(map: Map) {
-    }
+    required init() {}
 
-    func mapping(map: Map) {
-        precision            <- map["precision"]
-        id                   <-  map["id"]
-        symbol               <-  map["symbol"]
-        dynamic_asset_data_id <-  map["dynamic_asset_data_id"]
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< precision            <-- "precision"
+        mapper <<< id                   <--  "id"
+        mapper <<< symbol               <--  "symbol"
+        mapper <<< dynamicAssetDataId <--  "dynamic_asset_data_id"
     }
 }
 
-class Asset: Mappable {
+class Asset: HandyJSON {
     var amount: String = ""
     var assetID: String = ""
 
-    required init?(map: Map) {
-    }
+    required init() {}
 
-    func mapping(map: Map) {
-        amount               <- (map["amount"], ToStringTransform())
-        assetID              <- map["asset_id"]
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< amount               <-- ("amount", ToStringTransform())
+        mapper <<< assetID              <-- "asset_id"
     }
 
     func volume() -> Double {
@@ -46,7 +43,7 @@ class Asset: Mappable {
     }
 
     func info() -> AssetInfo {
-        return appData.assetInfo[self.assetID] ?? AssetInfo(JSON: [:])!
+        return appData.assetInfo[self.assetID] ?? AssetInfo()
     }
 }
 
@@ -56,16 +53,16 @@ extension Asset: Equatable {
     }
 }
 
-class Price: Mappable {
-    var base: Asset = Asset(JSON: [:])!
-    var quote: Asset = Asset(JSON: [:])!
+class Price: HandyJSON {
+    var base: Asset = Asset()
+    var quote: Asset = Asset()
 
-    required init?(map: Map) {
+    required init() {
     }
 
-    func mapping(map: Map) {
-        base                    <- map["base"]
-        quote                   <- map["quote"]
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< base                    <-- "base"
+        mapper <<< quote                   <-- "quote"
     }
 
     func toReal() -> Double {
@@ -86,7 +83,7 @@ class Price: Mappable {
 
 extension AssetInfo: Equatable {
     static func ==(lhs: AssetInfo, rhs: AssetInfo) -> Bool {
-        return lhs.precision == rhs.precision && lhs.id == rhs.id && lhs.symbol == rhs.symbol && lhs.dynamic_asset_data_id == rhs.dynamic_asset_data_id
+        return lhs.precision == rhs.precision && lhs.id == rhs.id && lhs.symbol == rhs.symbol && lhs.dynamicAssetDataId == rhs.dynamicAssetDataId
     }
 }
 

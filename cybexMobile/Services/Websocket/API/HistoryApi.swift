@@ -48,7 +48,7 @@ struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
                 if let opItem = item["op"] as? [Any], let opcode = opItem[0] as? Int, var operation = opItem[1] as? [String: Any], let blockNum = item["block_num"] {
                     operation["block_num"] = blockNum
                     if opcode == ChainTypesOperations.fill_order.rawValue {
-                        if let fillorder = FillOrder(JSON: operation) {
+                        if let fillorder = FillOrder.deserialize(from: operation) {
                             fillOrders.append(fillorder)
                         }
                     } else if opcode == ChainTypesOperations.transfer.rawValue {
@@ -96,7 +96,7 @@ struct GetMarketHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
     func transferResponse(from resultObject: Any) throws -> Any {
         if let response = resultObject as? [[String: Any]] {
             return response.map { data in
-                return Bucket(JSON: data)!
+                return Bucket.deserialize(from: data)
             }
         } else {
             throw CastError(actualValue: resultObject, expectedType: Response.self)

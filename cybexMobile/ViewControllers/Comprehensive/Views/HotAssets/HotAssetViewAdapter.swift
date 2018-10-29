@@ -21,9 +21,9 @@ extension HotAssetView {
         } else {
             amountLabel.text = model.latest.formatCurrency(digitNum: base_info.precision)
             amountLabel.textColor = model.incre.color()
-            self.trendLabel.text = (model.incre == .greater ? "+" : "") + model.percent_change.formatCurrency(digitNum: 2) + "%"
+            self.trendLabel.text = (model.incre == .greater ? "+" : "") + model.percentChange.formatCurrency(digitNum: 2) + "%"
             self.trendLabel.textColor = model.incre.color()
-            if let change = model.percent_change.toDouble(), change > 1000 {
+            if let change = model.percentChange.toDouble(), change > 1000 {
                 self.trendLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
             } else {
                 self.trendLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)

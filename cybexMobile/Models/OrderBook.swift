@@ -7,14 +7,14 @@
 //
 
 import Foundation
-import ObjectMapper
+import HandyJSON
 
-class LimitOrder: Mappable {
+class LimitOrder: HandyJSON {
     var id: String = ""
     var expiration: String = ""
     var seller: String = ""
     var forSale: String = ""
-    var sellPrice: Price = Price(JSON: [:])!
+    var sellPrice: Price = Price()
 
     /*
      1 sellPrice里面的base 和quote
@@ -23,23 +23,23 @@ class LimitOrder: Mappable {
      4 手续费拿取。  买的时候是真正的base
      */
     var isBuy: Bool {
-        let assetA_info = appData.assetInfo[sellPrice.base.assetID]
-        let assetB_info = appData.assetInfo[sellPrice.quote.assetID]
+        let assetAInfo = appData.assetInfo[sellPrice.base.assetID]
+        let assetBInfo = appData.assetInfo[sellPrice.quote.assetID]
 
-        let (base, _) = calculateAssetRelation(assetIDAName: (assetA_info != nil) ? assetA_info!.symbol.filterJade : "", assetIDBName: (assetB_info != nil) ? assetB_info!.symbol.filterJade : "")
+        let (base, _) = calculateAssetRelation(assetIDAName: (assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "", assetIDBName: (assetBInfo != nil) ? assetBInfo!.symbol.filterJade : "")
 
-        return (base == ((assetA_info != nil) ? assetA_info!.symbol.filterJade : ""))
+        return (base == ((assetAInfo != nil) ? assetAInfo!.symbol.filterJade : ""))
     }
 
-    required init?(map: Map) {
+    required init() {
     }
 
-    func mapping(map: Map) {
-        id                   <- map["id"]
-        expiration           <- map["expiration"]
-        seller               <- map["seller"]
-        forSale              <- (map["for_sale"], ToStringTransform())
-        sellPrice            <- map["sell_price"]
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< id                   <-- "id"
+        mapper <<< expiration           <-- "expiration"
+        mapper <<< seller               <-- "seller"
+        mapper <<< forSale              <-- ("for_sale", ToStringTransform())
+        mapper <<< sellPrice            <-- "sell_price"
     }
 
 }

@@ -165,11 +165,10 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                                     GraphQLManager.shared.memo(name!, address: address),
                                                                                   from_memo_key: UserManager.shared.account.value?.memoKey,
                                                                                   to_memo_key: memoKey) {
-
                     calculateFee(operationString, focusAssetId: assetId, operationID: .transfer) { (success, amount, feeId) in
-
                         let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
-                        self.store.dispatch(FetchGatewayFee(data: (Fee(JSON: dictionary)!, success:success)))
+                        guard let fee = Fee.deserialize(from: dictionary) else { return }
+                        self.store.dispatch(FetchGatewayFee(data: (fee, success:success)))
                     }
                 }
             }
@@ -219,7 +218,6 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                                 GraphQLManager.shared.memo(name!, address: address),
                                                                               from_memo_key: UserManager.shared.account.value?.memoKey,
                                                                               to_memo_key: memoKey)
-
                             let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
                                 main {
                                     callback(data)

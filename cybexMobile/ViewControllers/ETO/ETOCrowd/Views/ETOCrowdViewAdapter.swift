@@ -14,27 +14,27 @@ extension ETOCrowdView {
         guard let balances = UserManager.shared.balances.value else { return }
 
         let balance = balances.filter { (balance) -> Bool in
-            if let name = appData.assetInfo[balance.asset_type]?.symbol.filterJade {
-                return name == model.base_token_name
+            if let name = appData.assetInfo[balance.assetType]?.symbol.filterJade {
+                return name == model.baseTokenName
             }
 
             return false
         }.first
 
-        if let balance = balance, let info = appData.assetInfo[balance.asset_type] {
-            let amount = getRealAmount(balance.asset_type, amount: balance.balance).string(digits: info.precision, roundingMode: .down)
-            self.titleTextView.unitLabel.text = R.string.localizable.eto_available.key.localizedFormat(amount, model.base_token_name)
+        if let balance = balance, let info = appData.assetInfo[balance.assetType] {
+            let amount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: info.precision, roundingMode: .down)
+            self.titleTextView.unitLabel.text = R.string.localizable.eto_available.key.localizedFormat(amount, model.baseTokenName)
         } else {
-            self.titleTextView.unitLabel.text = R.string.localizable.eto_available.key.localizedFormat("--", model.base_token_name)
+            self.titleTextView.unitLabel.text = R.string.localizable.eto_available.key.localizedFormat("--", model.baseTokenName)
         }
 
 //        let accountName = StyleNames.bold_12_20.tagText("test1")
-        self.descLabel.text = Localize.currentLanguage() == "en" ? model.adds_buy_desc__lang_en : model.adds_buy_desc
+        self.descLabel.text = Localize.currentLanguage() == "en" ? model.addsBuyDescLangEn : model.addsBuyDesc
 
-        let unit = 1.0 / pow(10, model.base_accuracy)
-        let max = model.base_max_quota
+        let unit = 1.0 / pow(10, model.baseAccuracy)
+        let max = model.baseMaxQuota
 
-        let itemValues = ["\(max) \(model.base_token_name)", "\(unit) \(model.base_token_name)", "-- \(model.base_token_name)", "\(model.base_min_quota) \(model.base_token_name)", "--  \(model.base_token_name)"]
+        let itemValues = ["\(max) \(model.baseTokenName)", "\(unit) \(model.baseTokenName)", "-- \(model.baseTokenName)", "\(model.baseMinQuota) \(model.baseTokenName)", "--  \(model.baseTokenName)"]
 
         for (idx, item) in itemViews.enumerated() {
             item.valueLabel.text = itemValues[idx]
@@ -44,11 +44,11 @@ extension ETOCrowdView {
 
     func adapterModelToUserCrowdView(_ model:(projectModel: ETOProjectModel, userModel: ETOUserModel)) {
         let subView = itemViews.last!
-        subView.valueLabel.text = "\(model.userModel.current_base_token_count) \(model.projectModel.base_token_name)"
+        subView.valueLabel.text = "\(model.userModel.currentBaseTokenCount) \(model.projectModel.baseTokenName)"
 
         let remainView = itemViews[2]
-        let remain = model.projectModel.base_max_quota - model.userModel.current_base_token_count
-        remainView.valueLabel.text = "\(remain) \(model.projectModel.base_token_name)"
+        let remain = model.projectModel.baseMaxQuota - model.userModel.currentBaseTokenCount
+        remainView.valueLabel.text = "\(remain) \(model.projectModel.baseTokenName)"
     }
 
 }

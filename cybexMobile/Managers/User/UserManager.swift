@@ -73,15 +73,15 @@ extension UserManager {
         return async {
             let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
 
-            if let keys = AccountKeys(JSONString: keysString),
-                let active_key = keys.active_key,
-                let owner_key = keys.owner_key,
-                let memo_key = keys.memo_key {
+            if let keys = AccountKeys.deserialize(from: keysString),
+                let active_key = keys.activeKey,
+                let owner_key = keys.ownerKey,
+                let memo_key = keys.memoKey {
                 let params = ["cap": ["id": pinID, "captcha": captcha],
                               "account": ["name": username,
-                                          "owner_key": owner_key.public_key,
-                                          "active_key": active_key.public_key,
-                                          "memo_key": memo_key.public_key,
+                                          "owner_key": owner_key.publicKey,
+                                          "active_key": active_key.publicKey,
+                                          "memo_key": memo_key.publicKey,
                                           "refcode": "",
                                           "referrer": ""]]
 
@@ -154,8 +154,8 @@ extension UserManager {
                     self.fillOrder.accept(nil)
                 }
                 fillorders = fillorders.filter({
-                    let base_name = appData.assetInfo[$0.fill_price.base.assetID]
-                    let quote_name = appData.assetInfo[$0.fill_price.quote.assetID]
+                    let base_name = appData.assetInfo[$0.fillPrice.base.assetID]
+                    let quote_name = appData.assetInfo[$0.fillPrice.quote.assetID]
                     return base_name != nil && quote_name != nil
                 })
 
@@ -170,7 +170,7 @@ extension UserManager {
                         if count == fillorders.count {
                             self.fillOrder.accept(result)
                         }
-                    }, blockNum: fillOrder.block_num)
+                    }, blockNum: fillOrder.blockNum)
                     CybexWebSocketService.shared.send(request: timeRequest, priority: Operation.QueuePriority.high)
                 }
 
@@ -191,7 +191,7 @@ extension UserManager {
                         if recordCount == transferRecordList.count {
                             self.transferRecords.accept(records)
                         }
-                    }, blockNum: transferRecord.block_num)
+                    }, blockNum: transferRecord.blockNum)
                     CybexWebSocketService.shared.send(request: timeRequest)
                 }
             }
@@ -213,8 +213,8 @@ extension UserManager {
                     return
                 }
                 fillorders = fillorders.filter({
-                    let base_name = appData.assetInfo[$0.fill_price.base.assetID]
-                    let quote_name = appData.assetInfo[$0.fill_price.quote.assetID]
+                    let base_name = appData.assetInfo[$0.fillPrice.base.assetID]
+                    let quote_name = appData.assetInfo[$0.fillPrice.quote.assetID]
                     return base_name != nil && quote_name != nil
                 })
 
@@ -229,7 +229,7 @@ extension UserManager {
                         if count == fillorders.count {
                             self.fillOrder.accept(result)
                         }
-                    }, blockNum: fillOrder.block_num)
+                    }, blockNum: fillOrder.blockNum)
                     CybexWebSocketService.shared.send(request: timeRequest)
                 }
             }
@@ -259,7 +259,7 @@ extension UserManager {
         }
 
         let keysString = BitShareCoordinator.getUserKeys(name, password: password)!
-        if let keys = AccountKeys(JSONString: keysString), let active_key = keys.active_key, let memoKey = keys.memo_key, let ownKey = keys.owner_key {
+        if let keys = AccountKeys.deserialize(from: keysString), let active_key = keys.activeKey, let memoKey = keys.memoKey, let ownKey = keys.ownerKey {
             var canLock = false
 
             let request = GetFullAccountsRequest(name: name) { response in
@@ -269,7 +269,7 @@ extension UserManager {
 
                     for auth in active_auths {
                         if let auth = auth as? [Any], let key = auth[0] as? String {
-                            if [memoKey.public_key, ownKey.public_key, active_key.public_key].contains(key) {
+                            if [memoKey.publicKey, ownKey.publicKey, active_key.publicKey].contains(key) {
                                 canLock = true
                                 BitShareCoordinator.resetDefaultPublicKey(key)
                                 break
@@ -280,7 +280,7 @@ extension UserManager {
                     if !canLock {
                         for auth in owner_auths {
                             if let auth = auth as? [Any], let key = auth[0] as? String {
-                                if [memoKey.public_key, ownKey.public_key, active_key.public_key].contains(key) {
+                                if [memoKey.publicKey, ownKey.publicKey, active_key.publicKey].contains(key) {
                                     canLock = true
                                     BitShareCoordinator.resetDefaultPublicKey(key)
                                     break
@@ -293,15 +293,15 @@ extension UserManager {
                         self.keys = keys
 
                         if let newAccount = data.account {
-                            if let memoKey = keys.memo_key, let ownKey = keys.owner_key, let activeKey = keys.active_key {
-                                if [memoKey.public_key, ownKey.public_key, activeKey.public_key].contains(newAccount.memoKey) {
+                            if let memoKey = keys.memoKey, let ownKey = keys.ownerKey, let activeKey = keys.activeKey {
+                                if [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey].contains(newAccount.memoKey) {
                                     self.isWithDraw = true
                                 }
                             }
-                            if let memoKey = keys.memo_key, let ownKey = keys.owner_key, let activeKey = keys.active_key {
+                            if let memoKey = keys.memoKey, let ownKey = keys.ownerKey, let activeKey = keys.activeKey {
                                 if let activeKeys = newAccount.activeAuths as? [String] {
                                     for activekey in activeKeys {
-                                        if [memoKey.public_key, ownKey.public_key, activeKey.public_key].contains(activekey) {
+                                        if [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey].contains(activekey) {
                                             self.isTrade = true
                                         }
                                     }
@@ -328,7 +328,7 @@ extension UserManager {
 
         if let balances = data.balances {
             self.balances.accept(balances.filter({ (balance) -> Bool in
-                let name = appData.assetInfo[balance.asset_type]
+                let name = appData.assetInfo[balance.assetType]
                 return name != nil
 //                return (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
                 //        return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
@@ -456,8 +456,8 @@ class UserManager {
         var _limitOrder_sell_value: Decimal = 0
         if let balances = balances.value {
             for balance_value in balances {
-                let realAmount = getRealAmount(balance_value.asset_type, amount: balance_value.balance)
-                let real_rmb_price = getAssetRMBPrice(balance_value.asset_type)
+                let realAmount = getRealAmount(balance_value.assetType, amount: balance_value.balance)
+                let real_rmb_price = getAssetRMBPrice(balance_value.assetType)
                 balance_values += realAmount * Decimal(real_rmb_price)
             }
         }

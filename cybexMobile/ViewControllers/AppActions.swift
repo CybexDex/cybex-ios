@@ -104,11 +104,11 @@ struct AppPropertyState {
 
     func filterPopAssetsCurrency() -> [Ticker] {
         let counts = self.tickerData.value.filter { (currency) -> Bool in
-            return !currency.percent_change.contains("-")
+            return !currency.percentChange.contains("-")
         }
         return counts.sorted(by: { (currency1, currency2) -> Bool in
-            let change1 = currency1.percent_change
-            let change2 = currency2.percent_change
+            let change1 = currency1.percentChange
+            let change2 = currency2.percentChange
             return change1.toDecimal()! > change2.toDecimal()!
         })
     }
@@ -237,20 +237,20 @@ class AppPropertyActionCreate: LoadingActionCreator {
                         if asset.open > params.startTime.timeIntervalSince1970 {
                             self.cycleFetch(asset, params: params, priority: priority, callback: { (oAsset) in
                                 if let oAsset = oAsset as? Bucket {
-                                    let close = oAsset.open_base
-                                    let quoteClose = oAsset.open_quote
+                                    let close = oAsset.openBase
+                                    let quoteClose = oAsset.openQuote
                                     if let addAsset = asset.copy() as? Bucket {
                                         let gapCount = ceil((asset.open - params.startTime.timeIntervalSince1970) / Double(asset.seconds)!)
-                                        addAsset.close_base = close
-                                        addAsset.close_quote = quoteClose
-                                        addAsset.open_base = close
-                                        addAsset.open_quote = quoteClose
-                                        addAsset.high_base = close
-                                        addAsset.high_quote = quoteClose
-                                        addAsset.low_base = close
-                                        addAsset.low_quote = quoteClose
-                                        addAsset.base_volume = "0"
-                                        addAsset.quote_volume = "0"
+                                        addAsset.closeBase = close
+                                        addAsset.closeQuote = quoteClose
+                                        addAsset.openBase = close
+                                        addAsset.openQuote = quoteClose
+                                        addAsset.highBase = close
+                                        addAsset.highQuote = quoteClose
+                                        addAsset.lowBase = close
+                                        addAsset.lowQuote = quoteClose
+                                        addAsset.baseVolume = "0"
+                                        addAsset.quoteVolume = "0"
                                         addAsset.open = asset.open - gapCount * Double(asset.seconds)!
                                         assets.prepend(addAsset)
                                     }

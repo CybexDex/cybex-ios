@@ -15,24 +15,24 @@ import RxCocoa
 extension ETODetailHeaderView {
     func adapterModelToETODetailHeaderView(_ model: ETOProjectViewModel) {
         self.nameLabel.text = model.name
-        self.iconImgView.kf.setImage(with: URL(string: Localize.currentLanguage() == "en" ? model.icon_en : model.icon))
+        self.iconImgView.kf.setImage(with: URL(string: Localize.currentLanguage() == "en" ? model.iconEn : model.icon))
         model.progress.asObservable().subscribe(onNext: { [weak self](progress) in
             guard let `self` = self else { return }
             self.progressView.progress = progress
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        model.detail_time.asObservable().subscribe(onNext: { [weak self](time) in
+        model.detailTime.asObservable().subscribe(onNext: { [weak self](time) in
             guard let `self` = self else {return}
             log.debug("timeState :: \(model.timeState)")
             self.timeLabel.text = model.timeState + time
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        model.current_percent.asObservable().subscribe(onNext: { [weak self](progress) in
+        model.currentPercent.asObservable().subscribe(onNext: { [weak self](progress) in
             guard let `self` = self else { return }
             self.progressLabel.text = progress
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        model.project_state.asObservable().subscribe(onNext: { [weak self](state) in
+        model.projectState.asObservable().subscribe(onNext: { [weak self](state) in
             guard let `self` = self, let project_state = state else { return }
             switch project_state {
             case .finish:

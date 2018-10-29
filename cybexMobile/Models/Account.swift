@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import ObjectMapper
+import HandyJSON
 
-class Account: Mappable {
+class Account: HandyJSON {
     var membershipExpirationDate: String = ""
     var name: String = ""
     var activeAuths: [Any] = []
@@ -17,17 +17,16 @@ class Account: Mappable {
     var memoKey: String = ""
     var id: String = ""
 
-    required init?(map: Map) {
+    required init() {}
 
-    }
-
-    func mapping(map: Map) {
-        membershipExpirationDate    <- (map["membership_expiration_date"], ToStringTransform())
-        name                   <- (map["name"], ToStringTransform())
-        activeAuths <- map["active.key_auths"]
-        ownerAuths <- map["owner.key_auths"]
-        id           <- map["id"]
-        memoKey  <- map["options.memo_key"]
+    func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            membershipExpirationDate <-- ("membership_expiration_date", ToStringTransform())
+        mapper <<< name <-- ("name", ToStringTransform())
+        mapper <<< activeAuths <-- "active.key_auths"
+        mapper <<< ownerAuths <-- "owner.key_auths"
+        mapper <<< id <-- "id"
+        mapper <<< memoKey <-- "options.memo_key"
     }
 }
 

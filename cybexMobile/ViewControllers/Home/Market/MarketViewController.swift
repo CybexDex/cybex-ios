@@ -84,7 +84,7 @@ class MarketViewController: BaseViewController {
     
     lazy var tickers: [Ticker] = {
         let markets = appData.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
-            return ticker.base_volume != "0"
+            return ticker.baseVolume != "0"
         })
         return markets
     }()
@@ -241,16 +241,16 @@ class MarketViewController: BaseViewController {
                 let basePrecision = pow(10, baseInfo.precision.double)
                 let quotePrecision = pow(10, quoteInfo.precision.double)
                 
-                var openPrice = (Double(data.open_base)! / basePrecision) / (Double(data.open_quote)! / quotePrecision)
-                var closePrice = (Double(data.close_base)! / basePrecision) / (Double(data.close_quote)! / quotePrecision)
-                var highPrice = (Double(data.high_base)! / basePrecision) / (Double(data.high_quote)! / quotePrecision)
-                var lowPrice = (Double(data.low_base)! / basePrecision) / (Double(data.low_quote)! / quotePrecision)
+                var openPrice = (Double(data.openBase)! / basePrecision) / (Double(data.openQuote)! / quotePrecision)
+                var closePrice = (Double(data.closeBase)! / basePrecision) / (Double(data.closeQuote)! / quotePrecision)
+                var highPrice = (Double(data.highBase)! / basePrecision) / (Double(data.highQuote)! / quotePrecision)
+                var lowPrice = (Double(data.lowBase)! / basePrecision) / (Double(data.lowQuote)! / quotePrecision)
                 
                 if !isBase {
-                    openPrice = (Double(data.open_quote)! / basePrecision) / (Double(data.open_base)! / quotePrecision)
-                    closePrice = (Double(data.close_quote)! / basePrecision) / (Double(data.close_base)! / quotePrecision)
-                    highPrice = (Double(data.low_quote)! / basePrecision) / (Double(data.low_base)! / quotePrecision)
-                    lowPrice = (Double(data.high_quote)! / basePrecision) / (Double(data.high_base)! / quotePrecision)
+                    openPrice = (Double(data.openQuote)! / basePrecision) / (Double(data.openBase)! / quotePrecision)
+                    closePrice = (Double(data.closeQuote)! / basePrecision) / (Double(data.closeBase)! / quotePrecision)
+                    highPrice = (Double(data.lowQuote)! / basePrecision) / (Double(data.lowBase)! / quotePrecision)
+                    lowPrice = (Double(data.highQuote)! / basePrecision) / (Double(data.highBase)! / quotePrecision)
                 }
                 
                 if highPrice > 1.3 * (openPrice + closePrice) * 0.5 {
@@ -265,8 +265,8 @@ class MarketViewController: BaseViewController {
                                          close: closePrice,
                                          high: highPrice,
                                          low: lowPrice,
-                                         towardsVolume: (isBase ? Double(data.quote_volume)! : Double(data.base_volume)!) / quotePrecision,
-                                         volume: (isBase ? Double(data.base_volume)! : Double(data.quote_volume)!) / basePrecision,
+                                         towardsVolume: (isBase ? Double(data.quoteVolume)! : Double(data.baseVolume)!) / quotePrecision,
+                                         volume: (isBase ? Double(data.baseVolume)! : Double(data.quoteVolume)!) / basePrecision,
                                          precision: baseInfo.precision)
                 
                 let lastIdx = dataArray.count - 1

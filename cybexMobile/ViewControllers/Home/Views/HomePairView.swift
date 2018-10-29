@@ -42,12 +42,12 @@ class HomePairView: UIView {
             self.asset1.text = "/" + baseInfo.symbol.filterJade
             let url = AppConfiguration.SERVER_ICONS_BASE_URLString + ticker.quote.replacingOccurrences(of: ".", with: "_") + "_grey.png"
             self.icon.kf.setImage(with: URL(string: url))
-            self.volume.text = ticker.base_volume.suffixNumber(digitNum: 2)
+            self.volume.text = ticker.baseVolume.suffixNumber(digitNum: 2)
             self.price.text = ticker.latest.formatCurrency(digitNum: baseInfo.precision)
-            self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percent_change.formatCurrency(digitNum: 2) + "%"
+            self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percentChange.formatCurrency(digitNum: 2) + "%"
 
             self.highLowContain.backgroundColor = ticker.incre.color()
-            if let change = ticker.percent_change.toDouble(), change > 1000 {
+            if let change = ticker.percentChange.toDouble(), change > 1000 {
                 self.bulking.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
             } else {
                 self.bulking.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)

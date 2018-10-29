@@ -87,11 +87,12 @@ struct TradeRecord: HandyJSON {
 
 struct HandyAsset: HandyJSON {
     var amount: String = ""
-    var asset_id: String = ""
+    var assetId: String = ""
     init() {}
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<<
             amount <-- "amount"
+        mapper <<< self.assetId <-- "asset_id"
     }
 }
 
@@ -108,12 +109,17 @@ struct TransferRecord: HandyJSON {
     var to: String = ""
     var amount: HandyAsset?
     var memo: Memo?
-    var block_num: Int = 0
-    var vesting_period: String = ""
-    var public_key: String = ""
+    var blockNum: Int = 0
+    var vestingPeriod: String = ""
+    var publicKey: String = ""
 
     init() {}
 
+    mutating func mapping(mapper: HelpingMapper) {
+        mapper <<< self.blockNum <-- "block_num"
+        mapper <<< self.vestingPeriod <-- "vesting_period"
+        mapper <<< self.publicKey <-- "public_key"
+    }
 }
 
 struct TransferRecordViewModel {
@@ -123,7 +129,7 @@ struct TransferRecordViewModel {
     var time: String = ""
     var amount: HandyAsset?
     var memo: String = ""
-    var vesting_period: String = ""
+    var vestingPeriod: String = ""
     var fee: HandyAsset?
 }
 

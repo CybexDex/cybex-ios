@@ -39,5 +39,5 @@ func transferModelToViewModel(_ data: [ETOProjectModel]) -> [ETOProjectViewModel
 }
 
 func transferBannersToUrls(_ data: [ETOBannerModel]) -> [String]? {
-    return data.map({ Localize.currentLanguage() == "en" ? $0.adds_banner_mobile__lang_en : $0.adds_banner_mobile })
+    return data.map({ Localize.currentLanguage() == "en" ? $0.addsBannerMobileLangEn : $0.addsBannerMobile })
 }

@@ -49,8 +49,8 @@ func lockupAssteToLockUpAssetsDate(datas: [LockUpAssetsMData]) -> LockUpAssetsVM
 //                name = assetsInfo.symbol
 //            }
             let icon = AppConfiguration.SERVER_ICONS_BASE_URLString + data.balance.assetID.replacingOccurrences(of: ".", with: "_") + "_grey.png"
-            let vesting_duration_seconds = data.vesting_policy.vesting_duration_seconds.toDouble() ?? 0
-            if let begin_time = data.vesting_policy.begin_timestamp.dateFromISO8601 {
+            let vesting_duration_seconds = data.vestingPolicy.vestingDurationSeconds.toDouble() ?? 0
+            if let begin_time = data.vestingPolicy.beginTimestamp.dateFromISO8601 {
                 let progress = (Date().timeIntervalSince1970 - begin_time.timeIntervalSince1970) / vesting_duration_seconds
                 let end_time = begin_time.addingTimeInterval(vesting_duration_seconds).string(withFormat: "yyyy/MM/dd")
                 if progress < 1 && progress >= 0 {
