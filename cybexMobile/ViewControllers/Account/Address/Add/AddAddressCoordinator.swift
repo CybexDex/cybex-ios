@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 import NBLCommonModule
 
-enum address_type: String {
+enum AddressType: String {
     case withdraw
     case transfer
 }
@@ -25,13 +25,13 @@ protocol AddAddressStateManagerProtocol {
         _ subscriber: S, transform: ((Subscription<AddAddressState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
 
-    func verityAddress(_ address: String, type: address_type)
+    func verityAddress(_ address: String, type: AddressType)
 
     func setAsset(_ asset: String)
 
     func verityNote(_ success: Bool)
 
-    func addAddress(_ type: address_type)
+    func addAddress(_ type: AddressType)
 
     func veritiedAddress(_ type: Bool)
 
@@ -44,7 +44,7 @@ class AddAddressCoordinator: AccountRootCoordinator {
     lazy var creator = AddAddressPropertyActionCreate()
 
     var store = Store<AddAddressState>(
-        reducer: AddAddressReducer,
+        reducer: addAddressReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )
@@ -75,7 +75,7 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
 
-    func verityAddress(_ address: String, type: address_type) {
+    func verityAddress(_ address: String, type: AddressType) {
         switch type {
         case .transfer:
 
@@ -87,9 +87,9 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
             }).cauterize()
 
         case .withdraw:
-            if let asset_info = appData.assetInfo[self.state.property.asset.value] {
+            if let assetInfo = appData.assetInfo[self.state.property.asset.value] {
 
-                RechargeDetailCoordinator.verifyAddress(asset_info.symbol.filterJade, address: address, callback: { (isSuccess) in
+                RechargeDetailCoordinator.verifyAddress(assetInfo.symbol.filterJade, address: address, callback: { (isSuccess) in
                     self.store.dispatch(VerificationAddressAction(success: isSuccess))
                     self.store.dispatch(SetAddressAction(data: address))
                 })
@@ -109,10 +109,14 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
         self.store.dispatch(VerificationNoteAction(data: success))
     }
 
-    func addAddress(_ type: address_type) {
+    func addAddress(_ type: AddressType) {
 
         if type == .withdraw {
-            AddressManager.shared.addWithDrawAddress(WithdrawAddress(id: AddressManager.shared.getUUID(), name: self.state.property.note.value, address: self.state.property.address.value, currency: self.state.property.asset.value, memo: self.state.property.memo.value))
+            AddressManager.shared.addWithDrawAddress(WithdrawAddress(id: AddressManager.shared.getUUID(),
+                                                                     name: self.state.property.note.value,
+                                                                     address: self.state.property.address.value,
+                                                                     currency: self.state.property.asset.value,
+                                                                     memo: self.state.property.memo.value))
         } else {
             AddressManager.shared.addTransferAddress(TransferAddress(id: AddressManager.shared.getUUID(), name: self.state.property.note.value, address: self.state.property.address.value))
         }

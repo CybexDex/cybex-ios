@@ -33,8 +33,8 @@ extension ETODetailHeaderView {
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         model.projectState.asObservable().subscribe(onNext: { [weak self](state) in
-            guard let `self` = self, let project_state = state else { return }
-            switch project_state {
+            guard let `self` = self, let projectState = state else { return }
+            switch projectState {
             case .finish:
                 if ThemeManager.currentThemeIndex == 0 {
                     self.stateImgView.image = Localize.currentLanguage() == "en" ? R.image.end_en_dark() : R.image.end_cn_dark()

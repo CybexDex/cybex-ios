@@ -34,7 +34,7 @@ class TransferAddressHomeCoordinator: AccountRootCoordinator {
     lazy var creator = TransferAddressHomePropertyActionCreate()
 
     var store = Store<TransferAddressHomeState>(
-        reducer: TransferAddressHomeReducer,
+        reducer: transferAddressHomeReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )
@@ -49,7 +49,7 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeCoordinatorProtocol
     func openAddTransferAddress() {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
-            vc.address_type = .transfer
+            vc.addressType = .transfer
             self.rootVC.pushViewController(vc, animated: true)
         }
     }

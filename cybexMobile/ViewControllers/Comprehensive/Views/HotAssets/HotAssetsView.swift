@@ -15,7 +15,7 @@ class HotAssetsView: CybexBaseView {
     var itemViews: [HotAssetView]!
 
     enum Event: String {
-        case HotAssetsViewDidClicked
+        case hotAssetsViewDidClicked
     }
 
     override var data: Any? {
@@ -47,7 +47,7 @@ class HotAssetsView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.HotAssetsViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.hotAssetsViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }
 

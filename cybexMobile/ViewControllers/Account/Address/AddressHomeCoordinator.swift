@@ -26,7 +26,7 @@ class AddressHomeCoordinator: AccountRootCoordinator {
     lazy var creator = AddressHomePropertyActionCreate()
 
     var store = Store<AddressHomeState>(
-        reducer: AddressHomeReducer,
+        reducer: addressHomeReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )

@@ -36,7 +36,7 @@ class WithdrawAddressCoordinator: AccountRootCoordinator {
     lazy var creator = WithdrawAddressPropertyActionCreate()
 
     var store = Store<WithdrawAddressState>(
-        reducer: WithdrawAddressReducer,
+        reducer: withdrawAddressReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )
@@ -81,7 +81,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressCoordinatorProtocol {
                 let id = viewmodel.viewModel.model.id
                 if let vc = R.storyboard.account.addAddressViewController() {
                     vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
-                    vc.address_type = .withdraw
+                    vc.addressType = .withdraw
                     vc.asset = id
                     self.rootVC.pushViewController(vc, animated: true)
                 }

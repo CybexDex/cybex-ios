@@ -148,7 +148,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
     func openAddAddress() {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
-            vc.address_type = .transfer
+            vc.addressType = .transfer
             vc.asset = AssetConfiguration.CYB
             self.rootVC.pushViewController(vc, animated: true)
         }
@@ -191,7 +191,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
     func openAddTransferAddress(_ sender: TransferAddress) {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
-            vc.address_type = .transfer
+            vc.addressType = .transfer
             vc.transferAddress = sender
             self.rootVC.pushViewController(vc, animated: true)
         }
@@ -266,7 +266,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     func validAccount() {
         if !self.state.account.value.isEmpty {
             if let vc = self.rootVC.topViewController as? TransferViewController {
-                vc.transferView.accountView.loading_state = .Loading
+                vc.transferView.accountView.loadingState = .loading
             }
             UserManager.shared.checkUserName(self.state.account.value).done({[weak self] (exist) in
                 main {

@@ -21,19 +21,19 @@ class ContainerView: CornerAndShadowView {
             }
         }
     }
-
+    
     override var backgroundColor: UIColor? {
         didSet {
             cornerView.backgroundColor = backgroundColor
         }
     }
-
+    
     override func setup() {
         super.setup()
-
+        
         setupUI()
     }
-
+    
     func setupUI() {
         if !isHiddenShadow {
             self.cornerRadius = 4

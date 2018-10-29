@@ -15,7 +15,7 @@ class ComprehensiveBlockItemView: CybexBaseView {
     @IBOutlet weak var blockContentLabel: BaseLabel!
 
     enum Event: String {
-        case ComprehensiveBlockItemViewDidClicked
+        case comprehensiveBlockItemViewDidClicked
     }
 
     override func setup() {
@@ -34,6 +34,6 @@ class ComprehensiveBlockItemView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.ComprehensiveBlockItemViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.comprehensiveBlockItemViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }

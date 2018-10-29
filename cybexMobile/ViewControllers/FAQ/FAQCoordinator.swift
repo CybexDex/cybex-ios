@@ -24,7 +24,7 @@ class FAQCoordinator: FAQRootCoordinator {
     lazy var creator = FAQPropertyActionCreate()
 
     var store = Store<FAQState>(
-        reducer: FAQReducer,
+        reducer: fAQReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )

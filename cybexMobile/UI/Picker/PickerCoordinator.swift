@@ -29,7 +29,7 @@ class PickerCoordinator: PickerRootCoordinator {
   var pickerDidSelected: PickerDidSelected?
 
     var store = Store<PickerState>(
-        reducer: PickerReducer,
+        reducer: pickerReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )

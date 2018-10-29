@@ -50,9 +50,14 @@ class ETOCrowdCoordinator: ETORootCoordinator {
 
 extension ETOCrowdCoordinator: ETOCrowdCoordinatorProtocol {
     func showConfirm(_ transferAmount: Double) {
-        guard let data = self.state.data.value, let fee = self.state.fee.value, let feeInfo = appData.assetInfo[fee.assetId], let feeAmount = fee.amount.toDouble()?.string(digits: feeInfo.precision, roundingMode: .down) else { return }
+        guard let data = self.state.data.value,
+            let fee = self.state.fee.value,
+            let feeInfo = appData.assetInfo[fee.assetId],
+            let feeAmount = fee.amount.toDouble()?.string(digits: feeInfo.precision, roundingMode: .down) else { return }
 
-        self.rootVC.topViewController?.showConfirm(R.string.localizable.eto_submit_confirm.key.localized(), attributes: confirmSubmitCrowd(data.name, amount: "\(transferAmount) \(data.baseTokenName)", fee: "\(feeAmount) \(feeInfo.symbol.filterJade)"), setup: { (_) in
+        self.rootVC.topViewController?.showConfirm(R.string.localizable.eto_submit_confirm.key.localized(),
+                                                   attributes: confirmSubmitCrowd(data.name, amount: "\(transferAmount) \(data.baseTokenName)",
+                                                    fee: "\(feeAmount) \(feeInfo.symbol.filterJade)"), setup: { (_) in
                 //            for label in labels {
                 //                label.content.numberOfLines = 1
                 //                label.content.lineBreakMode = .byTruncatingMiddle
@@ -80,16 +85,25 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
             }
         }
 
-        guard !assetID.isEmpty, let operation = BitShareCoordinator.getTransterOperation(0, to_user_id: 0, asset_id: Int32(getUserId(assetID)), amount: 0, fee_id: 0, fee_amount: 0, memo: "", from_memo_key: "", to_memo_key: "") else { return }
+        guard !assetID.isEmpty,
+            let operation = BitShareCoordinator.getTransterOperation(0,
+                                                                     to_user_id: 0,
+                                                                     asset_id: Int32(getUserId(assetID)),
+                                                                     amount: 0,
+                                                                     fee_id: 0,
+                                                                     fee_amount: 0,
+                                                                     memo: "",
+                                                                     from_memo_key: "",
+                                                                     to_memo_key: "") else { return }
 
-        calculateFee(operation, focusAssetId: assetID, operationID: .transfer) { (success, amount, fee_id) in
-            let dictionary = ["asset_id": fee_id, "amount": amount.stringValue]
+        calculateFee(operation, focusAssetId: assetID, operationID: .transfer) { (success, amount, feeId) in
+            let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
 
             if success {
                 guard let fee = Fee.deserialize(from: dictionary) else { return }
                 self.store.dispatch(SetFeeAction(fee: fee))
             } else {
-                self.store.dispatch(changeETOValidStatusAction(status: .feeNotEnough))
+                self.store.dispatch(ChangeETOValidStatusAction(status: .feeNotEnough))
             }
 
         }
@@ -98,7 +112,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
     func unsetValidStatus() {
         guard self.state.validStatus.value != .feeNotEnough else { return }
 
-        self.store.dispatch(changeETOValidStatusAction(status: .notValid))
+        self.store.dispatch(ChangeETOValidStatusAction(status: .notValid))
     }
 
     func checkValidStatus(_ transferAmount: Double) {
@@ -118,28 +132,28 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
             let amount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: info.precision, roundingMode: .down)
 
             if transferAmount > amount.toDouble()! {
-                self.store.dispatch(changeETOValidStatusAction(status: .notEnough))
+                self.store.dispatch(ChangeETOValidStatusAction(status: .notEnough))
                 return
             }
         } else {
-            self.store.dispatch(changeETOValidStatusAction(status: .notEnough))
+            self.store.dispatch(ChangeETOValidStatusAction(status: .notEnough))
             return
         }
 
         if transferAmount > data.baseMaxQuota {
-            self.store.dispatch(changeETOValidStatusAction(status: .moreThanLimit))
+            self.store.dispatch(ChangeETOValidStatusAction(status: .moreThanLimit))
             return
         }
 
         let remain = data.baseMaxQuota - userModel.currentBaseTokenCount
 
         if transferAmount > remain {
-            self.store.dispatch(changeETOValidStatusAction(status: .notAvaliableLimit))
+            self.store.dispatch(ChangeETOValidStatusAction(status: .notAvaliableLimit))
             return
         }
 
         if transferAmount < data.baseMinQuota {
-            self.store.dispatch(changeETOValidStatusAction(status: .lessThanLeastLimit))
+            self.store.dispatch(ChangeETOValidStatusAction(status: .lessThanLeastLimit))
             return
         }
 
@@ -149,10 +163,10 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         let mantissa = Decimal(floatLiteral: floor(multiple.doubleValue))
 
         if (multiple - mantissa) > Decimal(floatLiteral: 0) {
-            self.store.dispatch(changeETOValidStatusAction(status: .precisionError))
+            self.store.dispatch(ChangeETOValidStatusAction(status: .precisionError))
             return
         }
-        self.store.dispatch(changeETOValidStatusAction(status: .ok))
+        self.store.dispatch(ChangeETOValidStatusAction(status: .ok))
     }
 
     func joinCrowd(_ transferAmount: Double, callback: @escaping CommonAnyCallback) {
@@ -166,11 +180,15 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
             }
         }
 
-        guard !assetID.isEmpty, let uid = UserManager.shared.account.value?.id, let info = appData.assetInfo[assetID], let fee_amount = fee.amount.toDouble(), let feeInfo = appData.assetInfo[fee.assetId] else { return }
+        guard !assetID.isEmpty,
+            let uid = UserManager.shared.account.value?.id,
+            let info = appData.assetInfo[assetID],
+            let feeAmount = fee.amount.toDouble(),
+            let feeInfo = appData.assetInfo[fee.assetId] else { return }
         let value = pow(10, info.precision)
         let amount = transferAmount * Double(truncating: value as NSNumber)
 
-        let fee_amout = fee_amount * Double(truncating: pow(10, feeInfo.precision) as NSNumber)
+        let feeAmout = feeAmount * Double(truncating: pow(10, feeInfo.precision) as NSNumber)
 
         getChainId { (id) in
             let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
@@ -187,7 +205,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
                                                                               receive_asset_id: Int32(getUserId(assetID)),
                                                                               amount: Int64(amount),
                                                                               fee_id: Int32(getUserId(fee.assetId)),
-                                                                              fee_amount: Int64(fee_amout),
+                                                                              fee_amount: Int64(feeAmout),
                                                                               memo: "",
                                                                               from_memo_key: "",
                                                                               to_memo_key: "")
@@ -229,7 +247,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 
         ETOMGService.request(target: .refreshUserState(name: name, pid: data.id), success: { (json) in
             if let model = ETOUserModel.deserialize(from: json.dictionaryObject) {
-                self.store.dispatch(fetchCurrentTokenCountAction(userModel: model))
+                self.store.dispatch(FetchCurrentTokenCountAction(userModel: model))
             }
 
         }, error: { (error) in

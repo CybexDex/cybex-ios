@@ -153,7 +153,7 @@ class BusinessViewController: BaseViewController {
             R.string.localizable.openedorder_buy_ensure.key.localized() :
             R.string.localizable.openedorder_sell_ensure.key.localized()
         
-        ShowToastManager.shared.setUp(title: ensureTitle, contentView: openedOrderDetailView, animationType: .up_down)
+        ShowToastManager.shared.setUp(title: ensureTitle, contentView: openedOrderDetailView, animationType: .upDown)
         ShowToastManager.shared.showAnimationInView(self.view)
         ShowToastManager.shared.delegate = self
         

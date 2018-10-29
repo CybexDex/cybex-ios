@@ -22,7 +22,7 @@ class AddAddressViewController: BaseViewController {
     @IBOutlet weak var containerView: AddAddressView!
     var coordinator: (AddAddressCoordinatorProtocol & AddAddressStateManagerProtocol)?
 
-    var address_type: address_type = .withdraw
+    var addressType: AddressType = .withdraw
 
     var asset: String = ""
 
@@ -39,7 +39,7 @@ class AddAddressViewController: BaseViewController {
     }
 
     func setupUI() {
-        if address_type == .withdraw {
+        if addressType == .withdraw {
             self.containerView.asset.content.text = appData.assetInfo[self.asset]?.symbol.filterJade
             if self.asset == AssetConfiguration.EOS {
                 self.title = R.string.localizable.address_title_add_eos.key.localized()
@@ -87,24 +87,24 @@ class AddAddressViewController: BaseViewController {
         NotificationCenter.default.addObserver(forName: UITextView.textDidEndEditingNotification, object: self.containerView.address.content, queue: nil) { [weak self](_) in
             guard let `self` = self else {return}
             if let text = self.containerView.address.content.text, text.trimmed.count > 0 {
-                self.containerView.address_state = .Loading
-                self.coordinator?.verityAddress(text.trimmed, type: self.address_type)
+                self.containerView.addressState = .loading
+                self.coordinator?.verityAddress(text.trimmed, type: self.addressType)
             } else {
-                self.containerView.address_state = .normal
+                self.containerView.addressState = .normal
                 self.coordinator?.veritiedAddress(false)
             }
         }
 
-        self.coordinator?.state.property.addressVailed.asObservable().skip(1).subscribe(onNext: { [weak self](address_success) in
+        self.coordinator?.state.property.addressVailed.asObservable().skip(1).subscribe(onNext: { [weak self](addressSuccess) in
             guard let `self` = self else {return}
-            if !address_success {
+            if !addressSuccess {
                 if self.containerView.address.content.text.count != 0 {
-                    self.containerView.address_state = .Fail
+                    self.containerView.addressState = .fail
                 } else {
-                    self.containerView.address_state = .normal
+                    self.containerView.addressState = .normal
                 }
             } else {
-                self.containerView.address_state = .Success
+                self.containerView.addressState = .success
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
@@ -121,16 +121,21 @@ class AddAddressViewController: BaseViewController {
             guard let `self` = self else { return }
             self.view.endEditing(true)
 
-            if self.containerView.addBtn.isEnable == false || self.containerView.address_state != .Success {
+            if self.containerView.addBtn.isEnable == false || self.containerView.addressState != .success {
                 return
             }
-            let exit = self.address_type == .withdraw ?  AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text, currency: self.asset).0 : AddressManager.shared.containAddressOfTransfer(self.containerView.address.content.text).0
+            let exit = self.addressType == .withdraw ?
+                AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text, currency: self.asset).0 :
+                AddressManager.shared.containAddressOfTransfer(self.containerView.address.content.text).0
             if exit {
                 if self.isVisible {
-                    self.showToastBox(false, message: self.address_type == .withdraw ? R.string.localizable.address_exit.key.localized() : R.string.localizable.account_exit.key.localized())
+                    self.showToastBox(false,
+                                      message: self.addressType == .withdraw ?
+                                        R.string.localizable.address_exit.key.localized() :
+                                        R.string.localizable.account_exit.key.localized())
                 }
             } else {
-                self.coordinator?.addAddress(self.address_type)
+                self.coordinator?.addAddress(self.addressType)
                 self.showToastBox(true, message: R.string.localizable.address_add_success.key.localized())
                 SwifterSwift.delay(milliseconds: 1000, completion: {
                     ShowToastManager.shared.hide(0)

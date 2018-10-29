@@ -11,16 +11,16 @@
 import UIKit
 
 open class RPCircularProgress: UIView {
-
+    
     // MARK: - Completion
-
+    
     public typealias CompletionBlock = () -> Void
-
+    
     // MARK: - Public API
-
+    
     /**
-      The color of the empty progress track (gets drawn over)
-    */
+     The color of the empty progress track (gets drawn over)
+     */
     @IBInspectable open var trackTintColor: UIColor {
         get {
             return progressLayer.trackTintColor
@@ -30,9 +30,9 @@ open class RPCircularProgress: UIView {
             progressLayer.setNeedsDisplay()
         }
     }
-
+    
     /**
-      The color of the progress bar
+     The color of the progress bar
      */
     @IBInspectable open var progressTintColor: UIColor {
         get {
@@ -43,9 +43,9 @@ open class RPCircularProgress: UIView {
             progressLayer.setNeedsDisplay()
         }
     }
-
+    
     /**
-      The color the notched out circle within the progress area (if there is one)
+     The color the notched out circle within the progress area (if there is one)
      */
     @IBInspectable open var innerTintColor: UIColor? {
         get {
@@ -56,9 +56,9 @@ open class RPCircularProgress: UIView {
             progressLayer.setNeedsDisplay()
         }
     }
-
+    
     /**
-      Sets whether or not the corners of the progress bar should be rounded
+     Sets whether or not the corners of the progress bar should be rounded
      */
     @IBInspectable open var roundedCorners: Bool {
         get {
@@ -69,9 +69,9 @@ open class RPCircularProgress: UIView {
             progressLayer.setNeedsDisplay()
         }
     }
-
+    
     /**
-      Sets how thick the progress bar should be (pinned between `0.01` and `1`)
+     Sets how thick the progress bar should be (pinned between `0.01` and `1`)
      */
     @IBInspectable open var thicknessRatio: CGFloat {
         get {
@@ -82,9 +82,9 @@ open class RPCircularProgress: UIView {
             progressLayer.setNeedsDisplay()
         }
     }
-
+    
     /**
-      Sets whether or not the animation should be clockwise
+     Sets whether or not the animation should be clockwise
      */
     @IBInspectable open var clockwiseProgress: Bool {
         get {
@@ -95,25 +95,25 @@ open class RPCircularProgress: UIView {
             progressLayer.setNeedsDisplay()
         }
     }
-
+    
     /**
-      A timing function defining the pacing of the animation. Defaults to ease in, ease out.
+     A timing function defining the pacing of the animation. Defaults to ease in, ease out.
      */
     open var timingFunction: CAMediaTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-
+    
     /**
-      Getter for the current progress (not observed from any active animations)
+     Getter for the current progress (not observed from any active animations)
      */
     @IBInspectable open var progress: CGFloat {
         get {
             return progressLayer.progress
         }
     }
-
+    
     /**
-      Sets how much of the progress bar should be filled during an indeterminate animation, pinned between `0.05` and `0.9`
+     Sets how much of the progress bar should be filled during an indeterminate animation, pinned between `0.05` and `0.9`
      
-      **Note:** This can be overriden / animated from by using updateProgress(...)
+     **Note:** This can be overriden / animated from by using updateProgress(...)
      */
     @IBInspectable open var indeterminateProgress: CGFloat {
         get {
@@ -123,14 +123,14 @@ open class RPCircularProgress: UIView {
             progressLayer.indeterminateProgress = pin(newValue, minValue: 0.05, maxValue: 0.9)
         }
     }
-
+    
     /**
-      Controls the speed at which the indeterminate progress bar animates
+     Controls the speed at which the indeterminate progress bar animates
      */
     @IBInspectable open var indeterminateDuration: CFTimeInterval = Defaults.indeterminateDuration
-
+    
     // MARK: - Custom Base Layer
-
+    
     fileprivate var progressLayer: ProgressLayer! {
         get {
             if let layer = layer as? ProgressLayer {
@@ -139,44 +139,44 @@ open class RPCircularProgress: UIView {
             return ProgressLayer()
         }
     }
-
+    
     open override class var layerClass: AnyClass {
         return ProgressLayer.self
     }
-
+    
     // Lifecycle
-
+    
     /**
      Default initializer for the class
-
+     
      - returns: A configured instance of self
      */
     required public init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-
+        
         setupDefaults()
     }
-
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
+        
         setupDefaults()
     }
-
+    
     open override func didMoveToWindow() {
         super.didMoveToWindow()
-
+        
         if let window = window {
             progressLayer.contentsScale = window.screen.scale
             progressLayer.setNeedsDisplay()
         }
     }
-
+    
     // MARK: - Indeterminate
-
+    
     /**
      Enables or disables the indeterminate (spinning) animation
-
+     
      - parameter enabled:    Whether or not to enable the animation (defaults to `true`)
      - parameter completion: An optional closure to execute after the animation completes
      */
@@ -187,21 +187,21 @@ open class RPCircularProgress: UIView {
                 block.action()
             }
             progressLayer.removeAnimation(forKey: AnimationKeys.indeterminate)
-
+            
             // And notify of disabling completion
             completion?()
         }
-
+        
         guard enabled else { return }
-
+        
         addIndeterminateAnimation(completion)
     }
-
+    
     // MARK: - Progress
-
+    
     /**
      Updates the progress bar to the given value with the optional properties
-
+     
      - parameter progress:     The progress to update to, pinned between `0` and `1`
      - parameter animated:     Whether or not the update should be animated (defaults to `true`)
      - parameter initialDelay: Sets an initial delay before the animation begins
@@ -211,7 +211,7 @@ open class RPCircularProgress: UIView {
     open func updateProgress(_ progress: CGFloat, animated: Bool = true, initialDelay: CFTimeInterval = 0, duration: CFTimeInterval? = nil, completion: CompletionBlock? = nil) {
         let pinnedProgress = pin(progress)
         if animated {
-
+            
             // Get duration
             let animationDuration: CFTimeInterval
             if let duration = duration, duration != 0 {
@@ -220,7 +220,7 @@ open class RPCircularProgress: UIView {
                 // Same duration as UIProgressView animation
                 animationDuration = CFTimeInterval(fabsf(Float(self.progress) - Float(pinnedProgress)))
             }
-
+            
             // Get current progress (to avoid jumpy behavior)
             // Basic animations have their value reset to the original once the animation is finished
             // since only the presentation layer is animating
@@ -229,15 +229,15 @@ open class RPCircularProgress: UIView {
                 currentProgress = presentationLayer.progress
             }
             progressLayer.progress = currentProgress
-
+            
             progressLayer.removeAnimation(forKey: AnimationKeys.progress)
             animate(progress, currentProgress: currentProgress, initialDelay: initialDelay, duration: animationDuration, completion: completion)
         } else {
             progressLayer.removeAnimation(forKey: AnimationKeys.progress)
-
+            
             progressLayer.progress = pinnedProgress
             progressLayer.setNeedsDisplay()
-
+            
             completion?()
         }
     }
@@ -246,9 +246,9 @@ open class RPCircularProgress: UIView {
 // MARK: - Private API
 
 private extension RPCircularProgress {
-
+    
     // MARK: - Defaults
-
+    
     func setupDefaults() {
         progressLayer.trackTintColor = Defaults.trackTintColor
         progressLayer.progressTintColor = Defaults.progressTintColor
@@ -260,14 +260,14 @@ private extension RPCircularProgress {
         indeterminateDuration = Defaults.indeterminateDuration
         progressLayer.indeterminateProgress = Defaults.indeterminateProgress
     }
-
+    
     // MARK: - Progress
-
+    
     // Pin certain values between 0.0 and 1.0
     func pin(_ value: CGFloat, minValue: CGFloat = 0, maxValue: CGFloat = 1) -> CGFloat {
         return min(max(value, minValue), maxValue)
     }
-
+    
     func animate(_ pinnedProgress: CGFloat, currentProgress: CGFloat, initialDelay: CFTimeInterval, duration: CFTimeInterval, completion: CompletionBlock?) {
         let animation = CABasicAnimation(keyPath: AnimationKeys.progress)
         animation.duration = duration
@@ -284,12 +284,12 @@ private extension RPCircularProgress {
         }
         progressLayer.add(animation, forKey: AnimationKeys.progress)
     }
-
+    
     // MARK: - Indeterminate 
-
+    
     func addIndeterminateAnimation(_ completion: CompletionBlock?) {
         guard progressLayer.animation(forKey: AnimationKeys.indeterminate) == nil else { return }
-
+        
         let animation = CABasicAnimation(keyPath: AnimationKeys.transformRotation)
         animation.byValue = clockwiseProgress ? 2 * Double.pi : -2 * Double.pi
         animation.duration = indeterminateDuration
@@ -302,41 +302,41 @@ private extension RPCircularProgress {
         }
         progressLayer.add(animation, forKey: AnimationKeys.indeterminate)
     }
-
+    
     // Completion
-
+    
     class CompletionBlockObject: NSObject {
         var action: CompletionBlock
-
+        
         required init(action: @escaping CompletionBlock) {
             self.action = action
         }
     }
-
+    
     // MARK: - Private Classes / Structs
-
+    
     class ProgressLayer: CALayer {
         @NSManaged var trackTintColor: UIColor
         @NSManaged var progressTintColor: UIColor
         @NSManaged var innerTintColor: UIColor?
-
+        
         @NSManaged var roundedCorners: Bool
         @NSManaged var clockwiseProgress: Bool
         @NSManaged var thicknessRatio: CGFloat
-
+        
         @NSManaged var indeterminateProgress: CGFloat
         // This needs to have a setter/getter for it to work with CoreAnimation
         @NSManaged var progress: CGFloat
-
+        
         override class func needsDisplay(forKey key: String) -> Bool {
             return key == AnimationKeys.progress ? true : super.needsDisplay(forKey: key)
         }
-
+        
         override func draw(in ctx: CGContext) {
             let rect = bounds
             let centerPoint = CGPoint(x: rect.size.width / 2, y: rect.size.height / 2)
             let radius = min(rect.size.height, rect.size.width) / 2
-
+            
             let progress: CGFloat = min(self.progress, CGFloat(1 - Float.ulpOfOne))
             var radians: CGFloat = 0
             if clockwiseProgress {
@@ -344,7 +344,7 @@ private extension RPCircularProgress {
             } else {
                 radians = CGFloat(3 * (Double.pi / 2) - (Double(progress) * 2 * Double.pi))
             }
-
+            
             func fillTrack() {
                 ctx.setFillColor(trackTintColor.cgColor)
                 let trackPath = CGMutablePath()
@@ -354,12 +354,12 @@ private extension RPCircularProgress {
                 ctx.addPath(trackPath)
                 ctx.fillPath()
             }
-
+            
             func fillProgressIfNecessary() {
                 if progress == 0.0 {
                     return
                 }
-
+                
                 func fillProgress() {
                     ctx.setFillColor(progressTintColor.cgColor)
                     let progressPath = CGMutablePath()
@@ -369,37 +369,37 @@ private extension RPCircularProgress {
                     ctx.addPath(progressPath)
                     ctx.fillPath()
                 }
-
+                
                 func roundCornersIfNecessary() {
                     if !roundedCorners {
                         return
                     }
-
+                    
                     let pathWidth = radius * thicknessRatio
                     let xOffset = radius * (1 + ((1 - (thicknessRatio / 2)) * CGFloat(cosf(Float(radians)))))
                     let yOffset = radius * (1 + ((1 - (thicknessRatio / 2)) * CGFloat(sinf(Float(radians)))))
                     let endpoint = CGPoint(x: xOffset, y: yOffset)
-
+                    
                     let startEllipseRect = CGRect(x: centerPoint.x - pathWidth / 2, y: 0, width: pathWidth, height: pathWidth)
                     ctx.addEllipse(in: startEllipseRect)
                     ctx.fillPath()
-
+                    
                     let endEllipseRect = CGRect(x: endpoint.x - pathWidth / 2, y: endpoint.y - pathWidth / 2, width: pathWidth, height: pathWidth)
                     ctx.addEllipse(in: endEllipseRect)
                     ctx.fillPath()
                 }
-
+                
                 fillProgress()
                 roundCornersIfNecessary()
             }
-
+            
             func notchCenterCircle() {
                 ctx.setBlendMode(.clear)
                 let innerRadius = radius * (1 - thicknessRatio)
                 let clearRect = CGRect(x: centerPoint.x - innerRadius, y: centerPoint.y - innerRadius, width: innerRadius * 2, height: innerRadius * 2)
                 ctx.addEllipse(in: clearRect)
                 ctx.fillPath()
-
+                
                 func fillInnerTintIfNecessary() {
                     if let innerTintColor = innerTintColor {
                         ctx.setBlendMode(.normal)
@@ -408,21 +408,21 @@ private extension RPCircularProgress {
                         ctx.fillPath()
                     }
                 }
-
+                
                 fillInnerTintIfNecessary()
             }
-
+            
             fillTrack()
             fillProgressIfNecessary()
             notchCenterCircle()
         }
     }
-
+    
     struct Defaults {
         static let trackTintColor = UIColor(white: 1.0, alpha: 0.3)
         static let progressTintColor = UIColor.white
         static let backgroundColor = UIColor.clear
-
+        
         static let progress: CGFloat = 0
         static let thicknessRatio: CGFloat = 0.3
         static let roundedCorners = true
@@ -430,7 +430,7 @@ private extension RPCircularProgress {
         static let indeterminateDuration: CFTimeInterval = 1.0
         static let indeterminateProgress: CGFloat = 0.3
     }
-
+    
     struct AnimationKeys {
         static let indeterminate = "indeterminateAnimation"
         static let progress = "progress"
@@ -438,22 +438,22 @@ private extension RPCircularProgress {
         static let completionBlock = "completionBlock"
         static let toValue = "toValue"
     }
-
+    
 }
 
 // MARK: - Animation Delegate
 
 extension RPCircularProgress: CAAnimationDelegate {
-
+    
     public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         let completedValue = anim.value(forKey: AnimationKeys.toValue)
         if let completedValue = completedValue as? CGFloat {
             progressLayer.progress = completedValue
         }
-
+        
         if let block = anim.value(forKey: AnimationKeys.completionBlock) as? CompletionBlockObject {
             block.action()
         }
     }
-
+    
 }

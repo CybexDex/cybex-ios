@@ -19,7 +19,7 @@ protocol ImageShareStateManagerProtocol {
 
 class ImageShareCoordinator: ETORootCoordinator {
     var store = Store(
-        reducer: ImageShareReducer,
+        reducer: imageShareReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )

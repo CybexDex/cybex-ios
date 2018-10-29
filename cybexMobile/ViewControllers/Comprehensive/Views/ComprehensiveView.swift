@@ -22,7 +22,7 @@ class ComprehensiveView: CybexBaseView {
     @IBOutlet weak var topGainersView: UIView!
 
     enum Event: String {
-        case ComprehensiveViewDidClicked
+        case comprehensiveViewDidClicked
     }
 
     override func setup() {
@@ -34,7 +34,7 @@ class ComprehensiveView: CybexBaseView {
 
     func setupUI() {
         clearBgColor()
-        self.bannerView.view_type = 1
+        self.bannerView.viewType = 1
         self.bannerView.pagerView.itemSize = CGSize(width: UIScreen.main.bounds.width, height: self.bannerView.height)
     }
 
@@ -43,6 +43,6 @@ class ComprehensiveView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.ComprehensiveViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.comprehensiveViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }

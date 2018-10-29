@@ -207,23 +207,23 @@ extension UIView {
 
     func showNoData(_ noticeWord: String, icon: String) {
         if let _ = self.noDataView {
-            self.noDataView?.notice_word = noticeWord
-            self.noDataView?.icon_name = icon
+            self.noDataView?.noticeWord = noticeWord
+            self.noDataView?.iconName = icon
         } else {
             let nodata = WithNoDataView(frame: self.bounds)
             self.noDataView = nodata
-            self.noDataView?.notice_word = noticeWord
-            self.noDataView?.icon_name = icon
+            self.noDataView?.noticeWord = noticeWord
+            self.noDataView?.iconName = icon
         }
     }
 
     func showNoData(_ noticeWord: String) {
         if let _ = self.noDataView {
-            self.noDataView?.notice_word = noticeWord
+            self.noDataView?.noticeWord = noticeWord
         } else {
             let nodata = WithNoDataView(frame: self.bounds)
             self.noDataView = nodata
-            self.noDataView?.notice_word = noticeWord
+            self.noDataView?.noticeWord = noticeWord
             self.noDataView?.noticeContairner.constant = -64
         }
     }

@@ -11,15 +11,15 @@ import Foundation
 extension HotAssetView {
     func adapterModelToHotAssetView(_ model: Ticker) {
         self.data = model
-        guard let base_info = appData.assetInfo[model.base], let quote_info = appData.assetInfo[model.quote] else {return}
-        assetName.text = quote_info.symbol.filterJade + "/" + base_info.symbol.filterJade
+        guard let baseInfo = appData.assetInfo[model.base], let quoteInfo = appData.assetInfo[model.quote] else {return}
+        assetName.text = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade
 
         if model.latest == "0" {
             amountLabel.text = "-"
             rmbLabel.text = "-"
             trendLabel.text = "-"
         } else {
-            amountLabel.text = model.latest.formatCurrency(digitNum: base_info.precision)
+            amountLabel.text = model.latest.formatCurrency(digitNum: baseInfo.precision)
             amountLabel.textColor = model.incre.color()
             self.trendLabel.text = (model.incre == .greater ? "+" : "") + model.percentChange.formatCurrency(digitNum: 2) + "%"
             self.trendLabel.textColor = model.incre.color()
@@ -29,7 +29,7 @@ extension HotAssetView {
                 self.trendLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
             }
 
-            self.rmbLabel.text = "≈¥" + getAssetRMBPrice(quote_info.id, base: base_info.id).string(digits: 2, roundingMode: .down)
+            self.rmbLabel.text = "≈¥" + getAssetRMBPrice(quoteInfo.id, base: baseInfo.id).string(digits: 2, roundingMode: .down)
         }
         assetName.textAlignment = .center
         amountLabel.textAlignment = .center

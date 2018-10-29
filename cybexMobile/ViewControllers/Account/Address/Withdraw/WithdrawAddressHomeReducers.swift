@@ -10,11 +10,15 @@ import UIKit
 import ReSwift
 import RxCocoa
 
-func WithdrawAddressHomeReducer(action: Action, state: WithdrawAddressHomeState?) -> WithdrawAddressHomeState {
-    return WithdrawAddressHomeState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: WithdrawAddressHomePropertyReducer(state?.property, action: action), callback: state?.callback ?? WithdrawAddressHomeCallbackState())
+func withdrawAddressHomeReducer(action: Action, state: WithdrawAddressHomeState?) -> WithdrawAddressHomeState {
+    return WithdrawAddressHomeState(isLoading: loadingReducer(state?.isLoading, action: action),
+                                    page: pageReducer(state?.page, action: action),
+                                    errorMessage: errorMessageReducer(state?.errorMessage, action: action),
+                                    property: withdrawAddressHomePropertyReducer(state?.property, action: action),
+                                    callback: state?.callback ?? WithdrawAddressHomeCallbackState())
 }
 
-func WithdrawAddressHomePropertyReducer(_ state: WithdrawAddressHomePropertyState?, action: Action) -> WithdrawAddressHomePropertyState {
+func withdrawAddressHomePropertyReducer(_ state: WithdrawAddressHomePropertyState?, action: Action) -> WithdrawAddressHomePropertyState {
     let state = state ?? WithdrawAddressHomePropertyState()
 
     switch action {

@@ -14,7 +14,7 @@ class ETOHomeBannerView: CybexBaseView {
     @IBOutlet weak var pagerView: FSPagerView!
     @IBOutlet weak var pagerControl: FSPageControl!
 
-    var view_type: Int = 0
+    var viewType: Int = 0
     override var data: Any? {
         didSet {
             if let _ = data as? [String] {
@@ -69,7 +69,7 @@ extension ETOHomeBannerView: FSPagerViewDataSource, FSPagerViewDelegate {
 
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: String(describing: FSPagerViewCell.self), at: index) as FSPagerViewCell
-        if view_type == 0 {
+        if viewType == 0 {
             cell.imageView?.contentMode = .scaleAspectFill
         } else {
             cell.contentView.layer.shadowColor = UIColor.clear.cgColor
