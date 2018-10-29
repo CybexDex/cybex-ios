@@ -143,13 +143,13 @@ class CBKLineMainView: UIView {
 
                 // 决定K线颜色
                 var strokeColor: UIColor = configuration.theme.increaseColor
-                let last_model: CBKLineModel? = index >= 1 ? mainDrawKLineModels[index - 1] : nil
+                let lastModel: CBKLineModel? = index >= 1 ? mainDrawKLineModels[index - 1] : nil
 
-                if klineModel.volume == 0, let _ = last_model {
+                if klineModel.volume == 0, let _ = lastModel {
                     strokeColor = strokeColors[index - 1]
                 }
 
-                if klineModel.open == klineModel.close, let lastmodel = last_model {
+                if klineModel.open == klineModel.close, let lastmodel = lastModel {
                     strokeColor = klineModel.close < lastmodel.close ? configuration.theme.decreaseColor : configuration.theme.increaseColor
                 }
 
@@ -205,7 +205,7 @@ class CBKLineMainView: UIView {
         // max min value
 
         if let highPointY = highPointY, let lowPointY = lowPointY, let highPointX = highPointX, let lowPointX = lowPointX, let minModel = minModel, let maxModel = maxModel {
-            drawMaxMin(context: context, low_klineModel: minModel, high_klineModel: maxModel, low_position: CGPoint(x: lowPointX, y: lowPointY), high_position: CGPoint(x: highPointX, y: highPointY))
+            drawMaxMin(context: context, lowKlineModel: minModel, highKlineModel: maxModel, lowPosition: CGPoint(x: lowPointX, y: lowPointY), highPosition: CGPoint(x: highPointX, y: highPointY))
         }
     }
 }
@@ -384,27 +384,27 @@ extension CBKLineMainView {
             let maStr = String(format: "BOLL: ")
             drawAttrsString.append(NSAttributedString(string: maStr, attributes: maAttrs))
 
-            if let value = drawModel.BollMB {
+            if let value = drawModel.bollMB {
                 let mbAttrs: [NSAttributedString.Key: Any]? = [
-                    NSAttributedString.Key.foregroundColor: configuration.theme.BollMBColor,
+                    NSAttributedString.Key.foregroundColor: configuration.theme.bollMBColor,
                     NSAttributedString.Key.font: configuration.main.dateAssistTextFont
                     ]
                 let mbAttrsStr = NSAttributedString(string: String(format: "  %.\(drawModel.precision)f  ", value), attributes: mbAttrs)
                 drawAttrsString.append(mbAttrsStr)
             }
 
-            if let value = drawModel.BollUP {
+            if let value = drawModel.bollUP {
                 let upAttrs: [NSAttributedString.Key: Any]? = [
-                    NSAttributedString.Key.foregroundColor: configuration.theme.BollUPColor,
+                    NSAttributedString.Key.foregroundColor: configuration.theme.bollUPColor,
                     NSAttributedString.Key.font: configuration.main.dateAssistTextFont
                     ]
                 let upAttrsStr = NSAttributedString(string: String(format: " %.\(drawModel.precision)f  ", value), attributes: upAttrs)
                 drawAttrsString.append(upAttrsStr)
             }
 
-            if let value = drawModel.BollDN {
+            if let value = drawModel.bollDN {
                 let dnAttrs: [NSAttributedString.Key: Any]? = [
-                    NSAttributedString.Key.foregroundColor: configuration.theme.BollDNColor,
+                    NSAttributedString.Key.foregroundColor: configuration.theme.bollDNColor,
                     NSAttributedString.Key.font: configuration.main.dateAssistTextFont
                     ]
                 let dnAttrsStr = NSAttributedString(string: String(format: " %.\(drawModel.precision)f  ", value), attributes: dnAttrs)
@@ -418,41 +418,41 @@ extension CBKLineMainView {
     }
 
     fileprivate func drawMaxMin(context _: CGContext,
-                                low_klineModel: CBKLineModel,
-                                high_klineModel: CBKLineModel,
-                                low_position: CGPoint,
-                                high_position: CGPoint) {
+                                lowKlineModel: CBKLineModel,
+                                highKlineModel: CBKLineModel,
+                                lowPosition: CGPoint,
+                                highPosition: CGPoint) {
         let attributes: [NSAttributedString.Key: Any]? = [
             NSAttributedString.Key.foregroundColor: configuration.main.valueAssistTextColor,
             NSAttributedString.Key.font: configuration.main.valueAssistTextFont
             ]
 
-        let mindrawAttrsString = NSMutableAttributedString(string: "←" + low_klineModel.low.string(digits: low_klineModel.precision, roundingMode: .down), attributes: attributes)
+        let mindrawAttrsString = NSMutableAttributedString(string: "←" + lowKlineModel.low.string(digits: lowKlineModel.precision, roundingMode: .down), attributes: attributes)
 
-        var minX = low_position.x
+        var minX = lowPosition.x
 
-        if (low_position.x + mindrawAttrsString.size().width) > bounds.width {
+        if (lowPosition.x + mindrawAttrsString.size().width) > bounds.width {
             minX -= mindrawAttrsString.size().width
-            mindrawAttrsString.setAttributedString(NSAttributedString(string: low_klineModel.low.string(digits: low_klineModel.precision) + "→", attributes: attributes))
+            mindrawAttrsString.setAttributedString(NSAttributedString(string: lowKlineModel.low.string(digits: lowKlineModel.precision) + "→", attributes: attributes))
         }
 
         let minrect = CGRect(x: minX,
-                             y: low_position.y,
+                             y: lowPosition.y,
                              width: mindrawAttrsString.size().width,
                              height: configuration.main.valueAssistViewHeight)
 
         mindrawAttrsString.draw(in: minrect)
 
-        let maxdrawAttrsString = NSMutableAttributedString(string: "←" + high_klineModel.high.string(digits: high_klineModel.precision), attributes: attributes)
+        let maxdrawAttrsString = NSMutableAttributedString(string: "←" + highKlineModel.high.string(digits: highKlineModel.precision), attributes: attributes)
 
-        var maxX = high_position.x
-        if (high_position.x + mindrawAttrsString.size().width) > bounds.width {
+        var maxX = highPosition.x
+        if (highPosition.x + mindrawAttrsString.size().width) > bounds.width {
             maxX -= maxdrawAttrsString.size().width
-            maxdrawAttrsString.setAttributedString(NSAttributedString(string: high_klineModel.high.string(digits: high_klineModel.precision) + "→", attributes: attributes))
+            maxdrawAttrsString.setAttributedString(NSAttributedString(string: highKlineModel.high.string(digits: highKlineModel.precision) + "→", attributes: attributes))
         }
 
         let maxrect = CGRect(x: maxX,
-                             y: high_position.y - configuration.main.valueAssistViewHeight,
+                             y: highPosition.y - configuration.main.valueAssistViewHeight,
                              width: maxdrawAttrsString.size().width,
                              height: configuration.main.valueAssistViewHeight)
 
@@ -537,10 +537,10 @@ extension CBKLineMainView {
                               drawModels: [CBKLineModel]) {
         let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
 
-        let MBLineBrush = CBLineBrush(indicatorType: .BollMB, context: context)
+        let MBLineBrush = CBLineBrush(indicatorType: .bollMB, context: context)
         MBLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
 
-            if let value = model.BollMB {
+            if let value = model.bollMB {
                 let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
                 let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
                 return CGPoint(x: xPosition, y: yPosition)
@@ -549,10 +549,10 @@ extension CBKLineMainView {
         }
         MBLineBrush.draw(drawModels: drawModels)
 
-        let UPLineBrush = CBLineBrush(indicatorType: .BollUp, context: context)
+        let UPLineBrush = CBLineBrush(indicatorType: .bollUp, context: context)
         UPLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
 
-            if let value = model.BollUP {
+            if let value = model.bollUP {
                 let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
                 let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
                 return CGPoint(x: xPosition, y: yPosition)
@@ -561,10 +561,10 @@ extension CBKLineMainView {
         }
         UPLineBrush.draw(drawModels: drawModels)
 
-        let DNLineBrush = CBLineBrush(indicatorType: .BollDN, context: context)
+        let DNLineBrush = CBLineBrush(indicatorType: .bollDN, context: context)
         DNLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
 
-            if let value = model.BollDN {
+            if let value = model.bollDN {
                 let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
 
                 let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
@@ -642,16 +642,16 @@ extension CBKLineMainView {
                     }
                 }
             case .BOLL:
-                if let value = model.BollMB {
+                if let value = model.bollMB {
                     minValue = value < minValue ? value : minValue
                     maxValue = value > maxValue ? value : maxValue
                 }
 
-                if let value = model.BollUP {
+                if let value = model.bollUP {
                     minValue = value < minValue ? value : minValue
                     maxValue = value > maxValue ? value : maxValue
                 }
-                if let value = model.BollDN {
+                if let value = model.bollDN {
                     minValue = value < minValue ? value : minValue
                     maxValue = value > maxValue ? value : maxValue
                 }

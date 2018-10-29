@@ -36,7 +36,7 @@ struct CBEMAVOLUMEModel {
         for (idx, day) in days.enumerated() {
 
           let previousEMAVolume: Double? = index > 0 ? datas[index - 1].EMAVolumes?[idx] : nil
-          values.append(handleEMA_VOLUME(day: day, model: model, index: index, previousEMA_VOLUME: previousEMAVolume))
+            values.append(handleEMA_VOLUME(day: day, model: model, index: index, previousEMAVolume: previousEMAVolume))
         }
         model.EMAVolumes = values
       default:
@@ -52,12 +52,12 @@ struct CBEMAVOLUMEModel {
     }
   }
 
-  private func handleEMA_VOLUME(day: Int, model: CBKLineModel, index: Int, previousEMA_VOLUME: Double?) -> Double? {
+  private func handleEMA_VOLUME(day: Int, model: CBKLineModel, index: Int, previousEMAVolume: Double?) -> Double? {
     if day <= 0 || index < (day - 1) {
       return nil
     } else {
-      if previousEMA_VOLUME != nil {
-        return Double(day - 1) / Double(day + 1) * previousEMA_VOLUME! + 2 / Double(day + 1) * model.volume
+      if previousEMAVolume != nil {
+        return Double(day - 1) / Double(day + 1) * previousEMAVolume! + 2 / Double(day + 1) * model.volume
       } else {
         return 2 / Double(day + 1) * model.volume
       }

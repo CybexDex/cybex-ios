@@ -98,7 +98,10 @@ class RechargeViewController: BaseViewController {
 
 extension RechargeViewController {
     @objc func segmentTouch(_ data: [String: Any]) {
-        selectedIndex = (data["selectedIndex"] as! Int) == 0 ? CellType.RECHARGE : CellType.WITHDRAW
+        guard let index = data["selectedIndex"] as? Int else {
+            return
+        }
+        selectedIndex = index == 0 ? CellType.RECHARGE : CellType.WITHDRAW
         self.tableView?.reloadData()
     }
 }

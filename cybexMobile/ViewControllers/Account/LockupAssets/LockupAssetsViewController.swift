@@ -16,7 +16,7 @@ import SwiftyJSON
 
 class LockupAssetsViewController: BaseViewController {
 
-    struct define {
+    struct Define {
         static let sectionHeaderHeight: CGFloat = 44.0
     }
 
@@ -27,7 +27,16 @@ class LockupAssetsViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
         self.startLoading()
-        self.coordinator?.fetchLockupAssetsData([UserManager.shared.keys!.activeKey!.address, UserManager.shared.keys!.activeKey!.compressed, UserManager.shared.keys!.activeKey!.uncompressed, UserManager.shared.keys!.ownerKey!.address, UserManager.shared.keys!.ownerKey!.compressed, UserManager.shared.keys!.ownerKey!.uncompressed, UserManager.shared.keys!.memoKey!.address, UserManager.shared.keys!.memoKey!.compressed, UserManager.shared.keys!.memoKey!.uncompressed])
+        self.coordinator?.fetchLockupAssetsData(
+            [UserManager.shared.keys!.activeKey!.address,
+             UserManager.shared.keys!.activeKey!.compressed,
+             UserManager.shared.keys!.activeKey!.uncompressed,
+             UserManager.shared.keys!.ownerKey!.address,
+             UserManager.shared.keys!.ownerKey!.compressed,
+             UserManager.shared.keys!.ownerKey!.uncompressed,
+             UserManager.shared.keys!.memoKey!.address,
+             UserManager.shared.keys!.memoKey!.compressed,
+             UserManager.shared.keys!.memoKey!.uncompressed])
     }
 
     func setupUI() {
@@ -56,7 +65,9 @@ extension LockupAssetsViewController: UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: LockupAssetsCell.self), for: indexPath) as! LockupAssetsCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: LockupAssetsCell.self), for: indexPath) as? LockupAssetsCell else {
+            return LockupAssetsCell()
+        }
         let data = coordinator!.state.property.data.value
 
         cell.setup(data.datas[indexPath.row], indexPath: indexPath)
@@ -64,13 +75,13 @@ extension LockupAssetsViewController: UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: define.sectionHeaderHeight))
+        let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: Define.sectionHeaderHeight))
 
         return lockupAssetsSectionView
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return define.sectionHeaderHeight
+        return Define.sectionHeaderHeight
     }
 
 }

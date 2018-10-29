@@ -3,6 +3,7 @@ included:
 excluded:
   - cybexMobile/addons
   - cybexMobile/Services/GraphQL
+  - cybexMobile/UI/LGButton
 cyclomatic_complexity:
   - 10
   - 30

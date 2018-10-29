@@ -33,9 +33,9 @@ struct CBBOLLModel {
       case .BOLL(let day):
         let MA = handleMA(day: day, model: model, index: index, models: klineModels)
         let MD = handleMD(day: day, model: model, MAValue: MA)
-        model.BollMB = MA
-        model.BollUP = handleUP(MB: model.BollMB, MD: MD)
-        model.BollDN = handleDN(MB: model.BollMB, MD: MD)
+        model.bollMB = MA
+        model.bollUP = handleUP(MB: model.bollMB, MD: MD)
+        model.bollDN = handleDN(MB: model.bollMB, MD: MD)
 
       default:
         break

@@ -290,7 +290,7 @@ extension CBKLineAccessoryView {
 
     let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
 
-    let KDJKLineBrush = CBLineBrush(indicatorType: .KdjK, context: context)
+    let KDJKLineBrush = CBLineBrush(indicatorType: .kdjK, context: context)
     KDJKLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
 
       if let value = model.KDJk {
@@ -302,7 +302,7 @@ extension CBKLineAccessoryView {
     }
     KDJKLineBrush.draw(drawModels: drawModels)
 
-    let KDJDLineBrush = CBLineBrush(indicatorType: .KDJd, context: context)
+    let KDJDLineBrush = CBLineBrush(indicatorType: .kdjD, context: context)
     KDJDLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
 
       if let value = model.KDJd {
@@ -314,7 +314,7 @@ extension CBKLineAccessoryView {
     }
     KDJDLineBrush.draw(drawModels: drawModels)
 
-    let KDJJLineBrush = CBLineBrush(indicatorType: .KDJj, context: context)
+    let KDJJLineBrush = CBLineBrush(indicatorType: .kdjJ, context: context)
     KDJJLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
 
       if let value = model.KDJj {

@@ -30,11 +30,11 @@ class WithdrawAddressViewController: BaseViewController {
     func setupUI() {
         configRightNavButton(R.image.ic_add_24_px())
         self.rightLabel.isHidden = !self.coordinator!.isEOS()
-        if let asset_info = appData.assetInfo[self.asset] {
+        if let assetInfo = appData.assetInfo[self.asset] {
             if self.coordinator!.isEOS() {
-                self.title = asset_info.symbol.filterJade + " " + R.string.localizable.eos_withdraw_account.key.localized()
+                self.title = assetInfo.symbol.filterJade + " " + R.string.localizable.eos_withdraw_account.key.localized()
             } else {
-                self.title = asset_info.symbol.filterJade + " " + R.string.localizable.withdraw_address.key.localized()
+                self.title = assetInfo.symbol.filterJade + " " + R.string.localizable.withdraw_address.key.localized()
             }
         } else {
             self.localizedText = self.coordinator!.isEOS() ? R.string.localizable.eos_withdraw_account.key.localizedContainer() : R.string.localizable.withdraw_address.key.localizedContainer()
@@ -61,7 +61,11 @@ class WithdrawAddressViewController: BaseViewController {
             guard let `self` = self else { return }
 
             if data.count == 0 {
-                self.view.showNoData(self.coordinator!.isEOS() ? R.string.localizable.account_nodata.key.localized() : R.string.localizable.address_nodata.key.localized(), icon: R.image.img_no_address.name)
+                self.view.showNoData(
+                    self.coordinator!.isEOS() ?
+                        R.string.localizable.account_nodata.key.localized() :
+                        R.string.localizable.address_nodata.key.localized(),
+                    icon: R.image.img_no_address.name)
             } else {
                 self.view.hiddenNoData()
             }
@@ -76,7 +80,9 @@ extension WithdrawAddressViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.withdrawAddressTableViewCell.name, for: indexPath) as! WithdrawAddressTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.withdrawAddressTableViewCell.name, for: indexPath) as? WithdrawAddressTableViewCell else {
+            return WithdrawAddressTableViewCell()
+        }
 
         if let data = self.coordinator?.state.property.data.value {
             cell.setup(data[indexPath.row], indexPath: indexPath)
@@ -87,7 +93,7 @@ extension WithdrawAddressViewController: UITableViewDelegate, UITableViewDataSou
 }
 
 extension WithdrawAddressViewController {
-    @objc func AddressCellViewDidClicked(_ data: [String: Any]) {
+    @objc func addressCellViewDidClicked(_ data: [String: Any]) {
         if let addressdata = data["data"] as? WithdrawAddress, let view = data["self"] as? AddressCellView {
             self.coordinator?.select(addressdata)
 

@@ -84,11 +84,11 @@ class CBKLineModel: ObjectDescriptable {
 
     // MARK: BOLL
     // 中轨线
-    var BollMB: Double?
+    var bollMB: Double?
     // 上轨线
-    var BollUP: Double?
+    var bollUP: Double?
     // 下轨线
-    var BollDN: Double?
+    var bollDN: Double?
 
     var change: String = "-"
 
@@ -134,9 +134,9 @@ extension CBKLineModel: Hashable {
             lhs.towardsVolume == rhs.towardsVolume &&
             lhs.precision == rhs.precision &&
             lhs.sumOpen == rhs.sumOpen &&
-            lhs.BollDN == rhs.BollDN &&
-            lhs.BollMB == rhs.BollMB &&
-            lhs.BollUP == rhs.BollUP &&
+            lhs.bollDN == rhs.bollDN &&
+            lhs.bollMB == rhs.bollMB &&
+            lhs.bollUP == rhs.bollUP &&
             lhs.DEA == rhs.DEA &&
             lhs.DIF == rhs.DIF &&
             lhs.EMAVolumes == rhs.EMAVolumes &&

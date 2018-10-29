@@ -22,8 +22,8 @@ enum CBIndicatorType {
     case EMA([Int])
     case EMAVolume([Int])
     case DIF, DEA, MACD
-    case KDJ, KdjK, KDJd, KDJj
-    case BOLL(Int), BollMB, BollUp, BollDN
+    case KDJ, kdjK, kdjD, kdjJ
+    case BOLL(Int), bollMB, bollUp, bollDN
     case RSI
     case VOL
     case DMI
@@ -139,10 +139,10 @@ protocol CBTheme {
     var DEAColor: UIColor { get }
     var MACDColor: UIColor { get }
 
-    var BollMBColor: UIColor { get }
-    var BollUPColor: UIColor { get }
-    var BollDNColor: UIColor { get }
-    var BollFillColor: UIColor { get }
+    var bollMBColor: UIColor { get }
+    var bollUPColor: UIColor { get }
+    var bollDNColor: UIColor { get }
+    var bollFillColor: UIColor { get }
 }
 
 public class CBMainConfiguration {
@@ -238,13 +238,13 @@ class BlackKLineTheme: CBTheme {
 
     var MACDColor: UIColor = #colorLiteral(red: 0.302782774, green: 0.4453626275, blue: 0.7515279055, alpha: 1)
 
-    var BollMBColor: UIColor = #colorLiteral(red: 0.6275084615, green: 0.2648866773, blue: 0.2499080598, alpha: 1)
+    var bollMBColor: UIColor = #colorLiteral(red: 0.6275084615, green: 0.2648866773, blue: 0.2499080598, alpha: 1)
 
-    var BollUPColor: UIColor = #colorLiteral(red: 0.302782774, green: 0.4453626275, blue: 0.7515279055, alpha: 1)
+    var bollUPColor: UIColor = #colorLiteral(red: 0.302782774, green: 0.4453626275, blue: 0.7515279055, alpha: 1)
 
-    var BollDNColor: UIColor = #colorLiteral(red: 0.302782774, green: 0.4453626275, blue: 0.7515279055, alpha: 1)
+    var bollDNColor: UIColor = #colorLiteral(red: 0.302782774, green: 0.4453626275, blue: 0.7515279055, alpha: 1)
 
-    var BollFillColor: UIColor = #colorLiteral(red: 0.4470589161, green: 0.5843137503, blue: 0.9921568036, alpha: 0.05999999866)
+    var bollFillColor: UIColor = #colorLiteral(red: 0.4470589161, green: 0.5843137503, blue: 0.9921568036, alpha: 0.05999999866)
 }
 
 public class CBVolumeConfiguration {

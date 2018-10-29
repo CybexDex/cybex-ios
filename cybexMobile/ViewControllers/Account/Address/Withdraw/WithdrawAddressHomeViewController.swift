@@ -59,7 +59,9 @@ extension WithdrawAddressHomeViewController: UITableViewDelegate, UITableViewDat
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.withdrawAddressHomeTableViewCell.name, for: indexPath) as! WithdrawAddressHomeTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.withdrawAddressHomeTableViewCell.name, for: indexPath) as? WithdrawAddressHomeTableViewCell else {
+            return WithdrawAddressHomeTableViewCell()
+        }
 
         if let data = self.coordinator?.state.property.data.value {
             cell.setup(data[indexPath.row], indexPath: indexPath)

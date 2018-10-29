@@ -82,7 +82,7 @@ extension UIViewController {
 
     func handlerUpdateVersion(_ completion: CommonCallback?, showNoUpdate: Bool = false ) {
         async {
-            guard let (update, url, force, content) = try? await(SimpleHTTPService.checkVersion()) else {
+            guard let result = try? await(SimpleHTTPService.checkVersion()) else {
                 main {
                     if let completion = completion {
                         completion()
@@ -94,32 +94,32 @@ extension UIViewController {
                 if let completion = completion {
                     completion()
                 }
-                if update {
+                if result.update {
 
                     let contentView = StyleContentView(frame: .zero)
                     ShowToastManager.shared.setUp(title: R.string.localizable.update_version.key.localized(), contentView: contentView, animationType: ShowToastManager.ShowAnimationType.small_big)
                     ShowToastManager.shared.showAnimationInView(self.view)
 
                     let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
-                    if content.contains("\n") {
-                        contentView.data = content.replacingOccurrences(of: "\n", with: "\\").components(separatedBy: "\\").map({ (string) in
+                    if result.content.contains("\n") {
+                        contentView.data = result.content.replacingOccurrences(of: "\n", with: "\\").components(separatedBy: "\\").map({ (string) in
                             "<\(contentStyle)>\(string)</\(contentStyle)>".set(style: "alertContent")!
                         })
                     } else {
-                        contentView.data = ["<\(contentStyle)>\(content)</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString]
+                        contentView.data = ["<\(contentStyle)>\(result.content)</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString]
                     }
 
-                    ShowToastManager.shared.isShowSingleBtn = force
+                    ShowToastManager.shared.isShowSingleBtn = result.force
 
                     ShowToastManager.shared.ensureClickBlock = {
-                        if force {
-                            UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+                        if result.force {
+                            UIApplication.shared.open(URL(string: result.url)!, options: [:], completionHandler: nil)
                             return
                         }
-                        if url.contains("itunes") {
+                        if result.url.contains("itunes") {
                             self.openStoreProductWithiTunesItemIdentifier(AppConfiguration.APPID)
                         } else {
-                            self.openSafariViewController(url)
+                            self.openSafariViewController(result.url)
                         }
                     }
                 } else if showNoUpdate {

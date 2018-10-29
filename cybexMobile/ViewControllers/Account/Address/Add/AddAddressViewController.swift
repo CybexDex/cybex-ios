@@ -95,9 +95,9 @@ class AddAddressViewController: BaseViewController {
             }
         }
 
-        self.coordinator?.state.property.addressVailed.asObservable().skip(1).subscribe(onNext: { [weak self](address_success) in
+        self.coordinator?.state.property.addressVailed.asObservable().skip(1).subscribe(onNext: { [weak self](addressSuccess) in
             guard let `self` = self else {return}
-            if !address_success {
+            if !addressSuccess {
                 if self.containerView.address.content.text.count != 0 {
                     self.containerView.address_state = .Fail
                 } else {
@@ -108,9 +108,9 @@ class AddAddressViewController: BaseViewController {
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        Observable.combineLatest(self.coordinator!.state.property.addressVailed.asObservable(), self.coordinator!.state.property.noteVailed.asObservable()).subscribe(onNext: { [weak self](address_success, note_success) in
+        Observable.combineLatest(self.coordinator!.state.property.addressVailed.asObservable(), self.coordinator!.state.property.noteVailed.asObservable()).subscribe(onNext: { [weak self](addressSuccess, noteSuccess) in
             guard let `self` = self else { return }
-            guard address_success, note_success else {
+            guard addressSuccess, noteSuccess else {
                 self.containerView.addBtn.isEnable = false
                 return
             }
@@ -124,7 +124,11 @@ class AddAddressViewController: BaseViewController {
             if self.containerView.addBtn.isEnable == false || self.containerView.address_state != .Success {
                 return
             }
-            let exit = self.address_type == .withdraw ?  AddressManager.shared.containAddressOfWithDraw(self.containerView.address.content.text, currency: self.asset).0 : AddressManager.shared.containAddressOfTransfer(self.containerView.address.content.text).0
+            let exit = self.address_type == .withdraw ?
+                AddressManager.shared.containAddressOfWithDraw(
+                    self.containerView.address.content.text,
+                    currency: self.asset).0 :
+                AddressManager.shared.containAddressOfTransfer(self.containerView.address.content.text).0
             if exit {
                 if self.isVisible {
                     self.showToastBox(false, message: self.address_type == .withdraw ? R.string.localizable.address_exit.key.localized() : R.string.localizable.account_exit.key.localized())

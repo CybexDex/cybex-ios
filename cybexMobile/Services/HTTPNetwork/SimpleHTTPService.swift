@@ -85,7 +85,14 @@ extension SimpleHTTPService {
         return promise
     }
 
-    static func checkVersion() -> Promise<(update: Bool, url: String, force: Bool, content: String)> {
+    struct AppVersionResult {
+        var update: Bool = false
+        var url: String = ""
+        var force: Bool = false
+        var content: String = ""
+    }
+
+    static func checkVersion() -> Promise<AppVersionResult> {
         var urlString = AppConfiguration.ServerVersionAppstoreURLString
 
         if let bundleID = Bundle.main.bundleIdentifier, bundleID.contains("fir") {
@@ -95,31 +102,35 @@ extension SimpleHTTPService {
         request.timeoutInterval = 5
         request.cachePolicy = .reloadIgnoringCacheData
 
-        let (promise, seal) = Promise<(update: Bool, url: String, force: Bool, content: String)>.pending()
+        let (promise, seal) = Promise<AppVersionResult>.pending()
 
         Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments, completionHandler: { (response) in
             guard let value = response.result.value else {
-                seal.fulfill((false, "", false, ""))
+                seal.fulfill(AppVersionResult())
                 return
             }
 
             let json = JSON(value)
 
-            let lastest_version = json["version"].stringValue
+            let lastestVersion = json["version"].stringValue
 
-            if let cur = Version(Bundle.main.version), let remote = Version(lastest_version) {
+            if let cur = Version(Bundle.main.version), let remote = Version(lastestVersion) {
                 if cur >= remote {
-                    seal.fulfill((false, "", false, ""))
+                    seal.fulfill(AppVersionResult())
                     return
                 }
 
-                let force_data = json["force"]
+                let forceData = json["force"]
 
-                seal.fulfill((true, json["url"].stringValue, force_data[Bundle.main.version].boolValue, Localize.currentLanguage() == "en" ?  json["enUpdateInfo"].stringValue : json["cnUpdateInfo"].stringValue))
+                let result = AppVersionResult(update: true, url: json["url"].stringValue,
+                                              force: forceData[Bundle.main.version].boolValue,
+                                              content: Localize.currentLanguage() == "en" ?  json["enUpdateInfo"].stringValue : json["cnUpdateInfo"].stringValue)
+
+                seal.fulfill(result)
                 return
             }
 
-            seal.fulfill((false, "", false, ""))
+            seal.fulfill(AppVersionResult())
         })
 
         return promise
@@ -169,11 +180,20 @@ extension SimpleHTTPService {
     }
 
     static func requestRegister(_ params: [String: Any]) -> Promise<(Bool, Int)> {
-        var request = try! URLRequest(url: URL(string: AppConfiguration.ServerRegisterURLString)!, method: .post, headers: ["Content-Type": "application/json"])
-        request.timeoutInterval = 5
-        let encodedURLRequest = try! JSONEncoding.default.encode(request, with: params)
-
         let (promise, seal) = Promise<(Bool, Int)>.pending()
+
+        guard var request = try? URLRequest(url: URL(string: AppConfiguration.ServerRegisterURLString)!, method: .post, headers: ["Content-Type": "application/json"]) else {
+            seal.fulfill((true, 0))
+            return promise
+        }
+
+        request.timeoutInterval = 5
+
+        guard let encodedURLRequest = try? JSONEncoding.default.encode(request, with: params) else {
+            seal.fulfill((true, 0))
+            return promise
+        }
+
 
         Alamofire.request(encodedURLRequest).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
             guard let value = response.result.value else {
@@ -220,7 +240,13 @@ extension SimpleHTTPService {
             }
             //  var enMsg : String = ""
             //  var cnMsg : String = ""
-            let trades = JSON(value).arrayValue.map({Trade(id: $0["id"].stringValue, enable: $0["enable"].boolValue, enMsg: $0["enMsg"].stringValue, cnMsg: $0["cnMsg"].stringValue, enInfo: $0["enInfo"].stringValue, cnInfo: $0["cnInfo"].stringValue)})
+            let trades = JSON(value).arrayValue.map({
+                Trade(id: $0["id"].stringValue,
+                      enable: $0["enable"].boolValue,
+                      enMsg: $0["enMsg"].stringValue,
+                      cnMsg: $0["cnMsg"].stringValue,
+                      enInfo: $0["enInfo"].stringValue,
+                      cnInfo: $0["cnInfo"].stringValue)})
             seal.fulfill(trades)
         }
         return promise
@@ -235,7 +261,13 @@ extension SimpleHTTPService {
                 seal.fulfill([])
                 return
             }
-            let trades = JSON(value).arrayValue.map({Trade(id: $0["id"].stringValue, enable: $0["enable"].boolValue, enMsg: $0["enMsg"].stringValue, cnMsg: $0["cnMsg"].stringValue, enInfo: $0["enInfo"].stringValue, cnInfo: $0["cnInfo"].stringValue)})
+            let trades = JSON(value).arrayValue.map({
+                Trade(id: $0["id"].stringValue,
+                      enable: $0["enable"].boolValue,
+                      enMsg: $0["enMsg"].stringValue,
+                      cnMsg: $0["cnMsg"].stringValue,
+                      enInfo: $0["enInfo"].stringValue,
+                      cnInfo: $0["cnInfo"].stringValue)})
             seal.fulfill(trades)
         }
         return promise
@@ -259,12 +291,19 @@ extension SimpleHTTPService {
     }
 
     static func recordLogin(_ sender: [String: Any]) -> Promise<String?> {
-        var request = try! URLRequest(url: URL(string: AppConfiguration.RecodeLogin)!, method: .post, headers: ["Content-Type": "application/json"])
+        let (promise, seal) = Promise<String?>.pending()
+
+        guard var request = try? URLRequest(url: URL(string: AppConfiguration.RecodeLogin)!, method: .post, headers: ["Content-Type": "application/json"]) else {
+            seal.fulfill(nil)
+            return promise
+        }
         request.timeoutInterval = 5
         request.cachePolicy = .reloadIgnoringCacheData
 
-        let encodedURLRequest = try! JSONEncoding.default.encode(request, with: sender)
-        let (promise, seal) = Promise<String?>.pending()
+        guard let encodedURLRequest = try? JSONEncoding.default.encode(request, with: sender) else {
+            seal.fulfill(nil)
+            return promise
+        }
 
         Alamofire.request(encodedURLRequest).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
             guard let value = response.result.value else {
@@ -301,12 +340,16 @@ extension SimpleHTTPService {
     }
 
     static func fetchRecords(_ url: String, signer: String) -> Promise<TradeRecord?> {
+        let (promise, seal) = Promise<TradeRecord?>.pending()
+
         let headers = ["Content-Type": "application/json", "authorization": "bearer " + signer]
-        var request = try! URLRequest(url: URL(string: url)!, method: .get, headers: headers)
+        guard var request = try? URLRequest(url: URL(string: url)!, method: .get, headers: headers) else {
+            seal.fulfill(nil)
+            return promise
+        }
         request.timeoutInterval = 5
         request.cachePolicy = .reloadIgnoringCacheData
 
-        let (promise, seal) = Promise<TradeRecord?>.pending()
         Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
             guard let value = response.result.value else {
                 seal.fulfill(nil)
@@ -329,12 +372,16 @@ extension SimpleHTTPService {
     }
 
     static func fetchAccountAsset(_ url: String, signer: String) -> Promise<AccountAssets?> {
+        let (promise, seal) = Promise<AccountAssets?>.pending()
+
         let headers = ["Content-Type": "application/json", "authorization": "bearer " + signer]
-        var request = try! URLRequest(url: URL(string: url)!, method: .get, headers: headers)
+        guard var request = try? URLRequest(url: URL(string: url)!, method: .get, headers: headers) else {
+            seal.fulfill(nil)
+            return promise
+        }
         request.timeoutInterval = 5
         request.cachePolicy = .reloadIgnoringCacheData
 
-        let (promise, seal) = Promise<AccountAssets?>.pending()
         Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
             guard let value = response.result.value else {
                 seal.fulfill(nil)

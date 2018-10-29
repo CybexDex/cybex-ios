@@ -41,7 +41,9 @@ class TimeGapView: UIView {
 
   func switchButton(_ index: Int) {
     for (idx, button) in buttons.enumerated() {
-      let timeLabel = button.viewWithTag(Tags.timeLabel.rawValue) as! UILabel
+        guard let timeLabel = button.viewWithTag(Tags.timeLabel.rawValue) as? UILabel else {
+            continue
+        }
       let line = button.viewWithTag(Tags.line.rawValue)
       if idx == index {
         timeLabel.textColor = #colorLiteral(red: 1, green: 0.6386402845, blue: 0.3285836577, alpha: 1)
