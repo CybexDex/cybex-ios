@@ -241,7 +241,11 @@ extension CBKLineAccessoryView {
         let strokeColor = macd > 0 ?
           configuration.theme.increaseColor : configuration.theme.decreaseColor
 
-        let path = UIBezierPath(roundedRect: CGRect(x: xPosition, y: startPoint.y, width: configuration.theme.klineWidth, height: abs(endPoint.y - startPoint.y)), cornerRadius: configuration.theme.klineRadius).cgPath
+        let path = UIBezierPath(roundedRect: CGRect(x: xPosition,
+                                                    y: startPoint.y,
+                                                    width: configuration.theme.klineWidth,
+                                                    height: abs(endPoint.y - startPoint.y)),
+                                cornerRadius: configuration.theme.klineRadius).cgPath
         context.addPath(path)
         context.setFillColor(strokeColor.withAlphaComponent(0.2).cgColor)
         context.fillPath()
@@ -286,41 +290,41 @@ extension CBKLineAccessoryView {
 
     let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
 
-    let KDJ_KLineBrush = CBLineBrush(indicatorType: .KDJ_K, context: context)
-    KDJ_KLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
+    let KDJKLineBrush = CBLineBrush(indicatorType: .KdjK, context: context)
+    KDJKLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
 
-      if let value = model.KDJ_K {
+      if let value = model.KDJk {
         let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
         let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
         return CGPoint(x: xPosition, y: yPosition)
       }
       return nil
     }
-    KDJ_KLineBrush.draw(drawModels: drawModels)
+    KDJKLineBrush.draw(drawModels: drawModels)
 
-    let KDJ_DLineBrush = CBLineBrush(indicatorType: .KDJ_D, context: context)
-    KDJ_DLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
+    let KDJDLineBrush = CBLineBrush(indicatorType: .KDJd, context: context)
+    KDJDLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
 
-      if let value = model.KDJ_D {
+      if let value = model.KDJd {
         let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
         let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
         return CGPoint(x: xPosition, y: yPosition)
       }
       return nil
     }
-    KDJ_DLineBrush.draw(drawModels: drawModels)
+    KDJDLineBrush.draw(drawModels: drawModels)
 
-    let KDJ_JLineBrush = CBLineBrush(indicatorType: .KDJ_J, context: context)
-    KDJ_JLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
+    let KDJJLineBrush = CBLineBrush(indicatorType: .KDJj, context: context)
+    KDJJLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
 
-      if let value = model.KDJ_J {
+      if let value = model.KDJj {
         let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
         let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
         return CGPoint(x: xPosition, y: yPosition)
       }
       return nil
     }
-    KDJ_JLineBrush.draw(drawModels: drawModels)
+    KDJJLineBrush.draw(drawModels: drawModels)
   }
 }
 
@@ -379,16 +383,16 @@ extension CBKLineAccessoryView {
 
       for model in accessoryDrawKLineModels {
 
-        if let value = model.KDJ_K {
+        if let value = model.KDJk {
           minValue = value < minValue ? value : minValue
           maxValue = value > maxValue ? value : maxValue
         }
 
-        if let value = model.KDJ_D {
+        if let value = model.KDJd {
           minValue = value < minValue ? value : minValue
           maxValue = value > maxValue ? value : maxValue
         }
-        if let value = model.KDJ_J {
+        if let value = model.KDJj {
           minValue = value < minValue ? value : minValue
           maxValue = value > maxValue ? value : maxValue
         }

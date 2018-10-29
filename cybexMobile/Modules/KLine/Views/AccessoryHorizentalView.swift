@@ -14,10 +14,10 @@ class AccessoryHorizentalView: UIView {
 
   var data: Any? {
     didSet {
-      guard let cur_indicator = data as? Indicator else { return }
+      guard let curIndicator = data as? Indicator else { return }
 
       self.collectionView.reloadData()
-      self.collectionView.selectItem(at: IndexPath(item: Indicator.all.index(of: cur_indicator) ?? 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+      self.collectionView.selectItem(at: IndexPath(item: Indicator.all.index(of: curIndicator) ?? 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     }
   }
 
@@ -81,7 +81,9 @@ extension AccessoryHorizentalView: UICollectionViewDelegate, UICollectionViewDat
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: AccessoryCollectionViewCell.self), for: indexPath) as! AccessoryCollectionViewCell
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: AccessoryCollectionViewCell.self), for: indexPath) as? AccessoryCollectionViewCell else {
+        return AccessoryCollectionViewCell()
+    }
 
     cell.setup(Indicator.all[indexPath.item], indexPath: indexPath)
 

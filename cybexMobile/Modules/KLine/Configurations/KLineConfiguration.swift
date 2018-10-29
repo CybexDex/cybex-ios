@@ -18,12 +18,12 @@ enum CBKLineType: Int {
 enum CBIndicatorType {
     case NONE
     case MA([Int])
-    case MA_VOLUME([Int])
+    case MAVolume([Int])
     case EMA([Int])
-    case EMA_VOLUME([Int])
+    case EMAVolume([Int])
     case DIF, DEA, MACD
-    case KDJ, KDJ_K, KDJ_D, KDJ_J
-    case BOLL(Int), BOLL_MB, BOLL_UP, BOLL_DN
+    case KDJ, KdjK, KDJd, KDJj
+    case BOLL(Int), BollMB, BollUp, BollDN
     case RSI
     case VOL
     case DMI
@@ -139,10 +139,10 @@ protocol CBTheme {
     var DEAColor: UIColor { get }
     var MACDColor: UIColor { get }
 
-    var BOLL_MBColor: UIColor { get }
-    var BOLL_UPColor: UIColor { get }
-    var BOLL_DNColor: UIColor { get }
-    var BOLL_FillColor: UIColor { get }
+    var BollMBColor: UIColor { get }
+    var BollUPColor: UIColor { get }
+    var BollDNColor: UIColor { get }
+    var BollFillColor: UIColor { get }
 }
 
 public class CBMainConfiguration {
@@ -238,13 +238,13 @@ class BlackKLineTheme: CBTheme {
 
     var MACDColor: UIColor = #colorLiteral(red: 0.302782774, green: 0.4453626275, blue: 0.7515279055, alpha: 1)
 
-    var BOLL_MBColor: UIColor = #colorLiteral(red: 0.6275084615, green: 0.2648866773, blue: 0.2499080598, alpha: 1)
+    var BollMBColor: UIColor = #colorLiteral(red: 0.6275084615, green: 0.2648866773, blue: 0.2499080598, alpha: 1)
 
-    var BOLL_UPColor: UIColor = #colorLiteral(red: 0.302782774, green: 0.4453626275, blue: 0.7515279055, alpha: 1)
+    var BollUPColor: UIColor = #colorLiteral(red: 0.302782774, green: 0.4453626275, blue: 0.7515279055, alpha: 1)
 
-    var BOLL_DNColor: UIColor = #colorLiteral(red: 0.302782774, green: 0.4453626275, blue: 0.7515279055, alpha: 1)
+    var BollDNColor: UIColor = #colorLiteral(red: 0.302782774, green: 0.4453626275, blue: 0.7515279055, alpha: 1)
 
-    var BOLL_FillColor: UIColor = #colorLiteral(red: 0.4470589161, green: 0.5843137503, blue: 0.9921568036, alpha: 0.05999999866)
+    var BollFillColor: UIColor = #colorLiteral(red: 0.4470589161, green: 0.5843137503, blue: 0.9921568036, alpha: 0.05999999866)
 }
 
 public class CBVolumeConfiguration {
@@ -264,7 +264,7 @@ public class CBVolumeConfiguration {
     var lineWidth: CGFloat = 0.5
 
     /// 成交量指标类型
-    var indicatorType: CBIndicatorType = .EMA_VOLUME([12, 26])
+    var indicatorType: CBIndicatorType = .EMAVolume([12, 26])
 }
 
 // MARK: - 指标图Configuration(accessory)

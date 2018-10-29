@@ -31,13 +31,13 @@ struct CBMAVOLUMEModel {
       model.sumVolume = model.volume + (index > 0 ? klineModels[index - 1].sumVolume! : 0)
 
       switch indicatorType {
-      case .MA_VOLUME(let days):
+      case .MAVolume(let days):
         var values = [Double?]()
         for day in days {
 
           values.append(handleMA_VOLUME(day: day, model: model, index: index, models: klineModels))
         }
-        model.MA_VOLUMEs = values
+        model.MAVolumes = values
       default:
         break
       }

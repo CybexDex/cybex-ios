@@ -30,12 +30,12 @@ class CBLineBrush {
       context.setStrokeColor(configuration.theme.DIFColor.cgColor)
     case .DEA:
       context.setStrokeColor(configuration.theme.DEAColor.cgColor)
-    case .BOLL_MB:
-      context.setStrokeColor(configuration.theme.BOLL_MBColor.cgColor)
-    case .BOLL_UP:
-      context.setStrokeColor(configuration.theme.BOLL_UPColor.cgColor)
-    case .BOLL_DN:
-      context.setStrokeColor(configuration.theme.BOLL_DNColor.cgColor)
+    case .BollMB:
+      context.setStrokeColor(configuration.theme.BollMBColor.cgColor)
+    case .BollUp:
+      context.setStrokeColor(configuration.theme.BollUPColor.cgColor)
+    case .BollDN:
+      context.setStrokeColor(configuration.theme.BollDNColor.cgColor)
     default: break
     }
   }

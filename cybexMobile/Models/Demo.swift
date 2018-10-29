@@ -20,7 +20,7 @@ struct Ticker: HandyJSON, Hashable {
     var quote: String = ""
     var percentChange: String = ""
 
-    var incre: changeScope {
+    var incre: ChangeScope {
         if self.percentChange == "0" {
             return .equal
         } else if self.percentChange.contains("-") {

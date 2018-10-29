@@ -222,7 +222,7 @@ enum ChainTypesOperations: Int {
     case balanceClaim
     case overrideTransfer
     case transferToBlind
-    case blind_transfer
+    case blindTransfer
     case transferFromBlind
     case assetSettleCancel
     case assetClaimFees

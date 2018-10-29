@@ -136,7 +136,7 @@ func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
     guard let assetInfo = appData.assetInfo[asset] else { return 0 }
     if AssetConfiguration.orderName.contains(assetInfo.symbol.filterJade) {
         if let data = appData.rmbPrices.filter({return $0.name == assetInfo.symbol.filterJade}).first {
-            return data.rmb_price.toDouble() ?? 0
+            return data.rmbPrice.toDouble() ?? 0
         }
         return 0
     }

@@ -119,7 +119,7 @@ class MyPortfolioData {
             for limit in limitArray {
                 if limit.sellPrice.base.assetID == balance.assetType {
                     let amount = getRealAmount(balance.assetType, amount: limit.forSale)
-                    limitDecimal = limitDecimal + amount
+                    limitDecimal += amount
                 }
             }
             if let assetInfo = appData.assetInfo[balance.assetType] {

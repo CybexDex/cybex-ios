@@ -141,7 +141,7 @@ extension SimpleHTTPService {
 
             let prices = json["prices"].arrayValue
             for price in prices {
-                rmbPrices.append(RMBPrices(name: price["name"].stringValue, rmb_price: price["value"].stringValue == "" ? "0" : price["value"].stringValue))
+                rmbPrices.append(RMBPrices(name: price["name"].stringValue, rmbPrice: price["value"].stringValue == "" ? "0" : price["value"].stringValue))
             }
             seal.fulfill(rmbPrices)
         }

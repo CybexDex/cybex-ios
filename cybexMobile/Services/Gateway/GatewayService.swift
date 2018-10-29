@@ -40,7 +40,10 @@ extension GatewayAPI: TargetType {
     }
 
     var sampleData: Data {
-        return try! JSON(paragrames).rawData()
+        guard let data = try? JSON(paragrames).rawData() else {
+            return Data()
+        }
+        return data
     }
 
     var task: Task {
