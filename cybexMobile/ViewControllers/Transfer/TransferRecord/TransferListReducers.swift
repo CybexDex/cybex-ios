@@ -42,7 +42,7 @@ func transferRecordsToViewModels(_ sender: [(TransferRecord, time: String)], cal
       let request = GetFullAccountsRequest(name: requeset_id) { (response) in
         if let data = response as? FullAccount, let account = data.account {
           let requeset_name = account.name
-          let transferViewModel = TransferRecordViewModel(isSend: source.0.from == UserManager.shared.account.value?.id, from: source.0.from == account.id ? account.name : requeset_name, to: source.0.from == account.id ? requeset_name : account.name, time: source.time, amount: source.0.amount, memo: source.0.memo?.toJSONString() ?? "", vesting_period: source.0.vesting_period, fee: source.0.fee)
+          let transferViewModel = TransferRecordViewModel(isSend: source.0.from == UserManager.shared.account.value?.id, from: source.0.from == account.id ? account.name : requeset_name, to: source.0.from == account.id ? requeset_name : account.name, time: source.time, amount: source.0.amount, memo: source.0.memo?.toJSONString() ?? "", vestingPeriod: source.0.vestingPeriod, fee: source.0.fee)
           result.append(transferViewModel)
           if result.count == sender.count {
 

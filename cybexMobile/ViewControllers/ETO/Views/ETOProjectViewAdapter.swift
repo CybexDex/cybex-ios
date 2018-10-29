@@ -20,7 +20,7 @@ extension ETOProjectView {
             self.stateLabel.text = status
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        model.current_percent.asObservable().subscribe(onNext: { [weak self](current_progress) in
+        model.currentPercent.asObservable().subscribe(onNext: { [weak self](current_progress) in
             guard let `self` = self else { return }
             self.progressLabel.text = current_progress
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -30,7 +30,7 @@ extension ETOProjectView {
             self.progressView.progress = progress
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        model.project_state.asObservable().subscribe(onNext: { [weak self](projectState) in
+        model.projectState.asObservable().subscribe(onNext: { [weak self](projectState) in
             guard let `self` = self, let state = projectState  else { return }
             self.timeState.text = model.timeState
             switch state {
@@ -55,11 +55,11 @@ extension ETOProjectView {
 
         self.nameLabel.text = model.name
         if Localize.currentLanguage() == "en" {
-            self.icon.kf.setImage(with: URL(string: model.icon_en))
-            self.markLabel.text = model.key_words_en
+            self.icon.kf.setImage(with: URL(string: model.iconEn))
+            self.markLabel.text = model.keyWordsEn
         } else {
             self.icon.kf.setImage(with: URL(string: model.icon))
-            self.markLabel.text = model.key_words
+            self.markLabel.text = model.keyWords
         }
         self.updateHeight()
     }

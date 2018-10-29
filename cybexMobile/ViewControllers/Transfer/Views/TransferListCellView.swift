@@ -27,8 +27,8 @@ class TransferListCellView: UIView {
 
                 self.address.text = transferAddress.0 == true ? transferAddress.1.first?.name : addressString
                 self.state.text = data.isSend ? R.string.localizable.transfer_send.key.localized() : R.string.localizable.transfer_done.key.localized()
-                if let transferAmount = data.amount, let assetInfo = appData.assetInfo[transferAmount.asset_id] {
-                    self.amount.text = getRealAmount(transferAmount.asset_id, amount: transferAmount.amount).string(digits: assetInfo.precision, roundingMode: .down) + " " + assetInfo.symbol.filterJade
+                if let transferAmount = data.amount, let assetInfo = appData.assetInfo[transferAmount.assetId] {
+                    self.amount.text = getRealAmount(transferAmount.assetId, amount: transferAmount.amount).string(digits: assetInfo.precision, roundingMode: .down) + " " + assetInfo.symbol.filterJade
                     if data.isSend {
                         self.amount.text = "-" + self.amount.text!
                         self.amount.textColor = ThemeManager.currentThemeIndex == 0 ? self.amount.theme1TitleColor : self.amount.theme2TitleColor

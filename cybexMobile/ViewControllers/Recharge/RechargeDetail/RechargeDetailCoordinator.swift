@@ -134,7 +134,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     func getWithdrawAccountInfo(_ userID: String) {
         let requeset = GetFullAccountsRequest(name: userID) { (response) in
             if let data = response as? FullAccount, let account = data.account {
-                self.store.dispatch(FetchWithdrawMemokey(data: account.memo_key))
+                self.store.dispatch(FetchWithdrawMemokey(data: account.memoKey))
             }
         }
         CybexWebSocketService.shared.send(request: requeset)
@@ -155,13 +155,14 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                                   fee_id: 0,
                                                                                   fee_amount: 0,
                                                                                   memo: isEOS ? GraphQLManager.shared.memo(name!, address: address + "[\(memo)]") : GraphQLManager.shared.memo(name!, address: address),
-                                                                                  from_memo_key: UserManager.shared.account.value?.memo_key,
+                                                                                  from_memo_key: UserManager.shared.account.value?.memoKey,
                                                                                   to_memo_key: memo_key) {
 
                     calculateFee(operationString, focus_asset_id: assetId, operationID: .transfer) { (success, amount, fee_id) in
 
                         let dictionary = ["asset_id": fee_id, "amount": amount.stringValue]
-                        self.store.dispatch(FetchGatewayFee(data: (Fee(JSON: dictionary)!, success:success)))
+                        guard let fee = Fee.deserialize(from: dictionary) else { return }
+                        self.store.dispatch(FetchGatewayFee(data: (fee, success:success)))
                     }
                 }
             }
@@ -206,7 +207,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                               fee_id: Int32(getUserId(fee_id)),
                                                                               fee_amount: Int64(fee_amout),
                                                                               memo: isEOS ? GraphQLManager.shared.memo(name!, address: address + "[\(memo)]") : GraphQLManager.shared.memo(name!, address: address),
-                                                                              from_memo_key: UserManager.shared.account.value?.memo_key,
+                                                                              from_memo_key: UserManager.shared.account.value?.memoKey,
                                                                               to_memo_key: memo_key)
 
                             let withdrawRequest = BroadcastTransactionRequest(response: { (data) in

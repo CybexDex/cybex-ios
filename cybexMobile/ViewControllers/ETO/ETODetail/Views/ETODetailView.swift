@@ -173,7 +173,7 @@ class ETODetailView: CybexBaseView {
 
     @objc func clickCellView(_ data: [String: Any]) {
         if let data = self.data as? ETOProjectViewModel, let model = data.projectModel {
-            self.next?.sendEventWith("clickCellView", userinfo: ["data": Localize.currentLanguage() == "en" ? model.adds_whitelist__lang_en : model.adds_whitelist])
+            self.next?.sendEventWith("clickCellView", userinfo: ["data": Localize.currentLanguage() == "en" ? model.addsWhitelistLangEn : model.addsWhitelist])
         }
     }
 }

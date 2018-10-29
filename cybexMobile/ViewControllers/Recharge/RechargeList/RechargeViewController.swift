@@ -73,11 +73,11 @@ class RechargeViewController: BaseViewController {
         var tradesInfo: [Trade] = []
         if var balances = UserManager.shared.balances.value {
             balances = balances.filter { (balance) -> Bool in
-                return getRealAmount(balance.asset_type, amount: balance.balance).doubleValue != 0
+                return getRealAmount(balance.assetType, amount: balance.balance).doubleValue != 0
             }
             for balance in balances {
                 for trade in data {
-                    if trade.id == balance.asset_type {
+                    if trade.id == balance.assetType {
                         tradesInfo.append(trade)
                     }
                 }

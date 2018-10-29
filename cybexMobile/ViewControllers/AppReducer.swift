@@ -180,7 +180,7 @@ func applyTickersToState(_ state: AppPropertyState, action: TickerFetched) -> [T
     }
 
     if data.count > 1 {
-        let scored = data.sorted(by: {return $0.base_volume.toDecimal()! > $1.base_volume.toDecimal()!})
+        let scored = data.sorted(by: {return $0.baseVolume.toDecimal()! > $1.baseVolume.toDecimal()!})
         return scored
     } else {
         return data

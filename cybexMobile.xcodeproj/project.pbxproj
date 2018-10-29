@@ -407,7 +407,6 @@
 		73539BFC2179764E008395AC /* BeareadToast_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BFB2179764D008395AC /* BeareadToast_swift.framework */; };
 		73539BFE217980CF008395AC /* BiometricAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BFD217980CE008395AC /* BiometricAuthentication.framework */; };
 		73539C00217980D6008395AC /* Proposer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BFF217980D6008395AC /* Proposer.framework */; };
-		73539C04217989D7008395AC /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C01217989D6008395AC /* ObjectMapper.framework */; };
 		73539C05217989D7008395AC /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C02217989D6008395AC /* SwiftyJSON.framework */; };
 		73539C06217989D7008395AC /* DifferenceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C03217989D7008395AC /* DifferenceKit.framework */; };
 		73539C1321798D26008395AC /* Presentr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C0721798D21008395AC /* Presentr.framework */; };
@@ -1090,7 +1089,6 @@
 		73539BFB2179764D008395AC /* BeareadToast_swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BeareadToast_swift.framework; path = Carthage/Build/iOS/BeareadToast_swift.framework; sourceTree = "<group>"; };
 		73539BFD217980CE008395AC /* BiometricAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BiometricAuthentication.framework; path = Carthage/Build/iOS/BiometricAuthentication.framework; sourceTree = "<group>"; };
 		73539BFF217980D6008395AC /* Proposer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Proposer.framework; path = Carthage/Build/iOS/Proposer.framework; sourceTree = "<group>"; };
-		73539C01217989D6008395AC /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		73539C02217989D6008395AC /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		73539C03217989D7008395AC /* DifferenceKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DifferenceKit.framework; path = Carthage/Build/iOS/DifferenceKit.framework; sourceTree = "<group>"; };
 		73539C0721798D21008395AC /* Presentr.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Presentr.framework; path = Carthage/Build/iOS/Presentr.framework; sourceTree = "<group>"; };
@@ -1389,7 +1387,6 @@
 				73539C3A217992F1008395AC /* Device.framework in Frameworks */,
 				731C11BB214D045E00761955 /* RxBlocking.framework in Frameworks */,
 				731C11BC214D045E00761955 /* ReactiveSwift.framework in Frameworks */,
-				73539C04217989D7008395AC /* ObjectMapper.framework in Frameworks */,
 				73539C05217989D7008395AC /* SwiftyJSON.framework in Frameworks */,
 				73539C06217989D7008395AC /* DifferenceKit.framework in Frameworks */,
 				731C11BD214D045E00761955 /* ReactiveMoya.framework in Frameworks */,
@@ -3046,7 +3043,6 @@
 				73539C1021798D25008395AC /* SwiftyUserDefaults.framework */,
 				73539C0D21798D24008395AC /* UIFontComplete.framework */,
 				73539C03217989D7008395AC /* DifferenceKit.framework */,
-				73539C01217989D6008395AC /* ObjectMapper.framework */,
 				73539C02217989D6008395AC /* SwiftyJSON.framework */,
 				73539BFF217980D6008395AC /* Proposer.framework */,
 				73539BFD217980CE008395AC /* BiometricAuthentication.framework */,
@@ -3657,7 +3653,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\necho \"ok\"\nswiftlint\nelse\necho \"warning: SwiftLint not installed, please brew install SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\necho \"ok\"\n#swiftlint\nelse\necho \"warning: SwiftLint not installed, please brew install SwiftLint\"\nfi\n";
 		};
 		BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */ = {
 			isa = PBXShellScriptBuildPhase;

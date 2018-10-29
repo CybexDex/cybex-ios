@@ -153,14 +153,14 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
             etoState.insert(.notLogin)
         } else {
             etoState.insert(.login)
-            if state.kyc_status == .not_start {
+            if state.kycStatus == .notStart {
                 etoState.insert(.KYCNotPassed)
                 ETOManager.shared.changeState(etoState)
                 if let vc = self.rootVC.topViewController as? ETODetailViewController {
                     vc.contentView.getJoinButtonState()
                 }
                 return
-            } else if state.kyc_status == .ok {
+            } else if state.kycStatus == .ok {
                 etoState.insert(.KYCPassed)
                 if state.status == .unstart {
                     etoState.insert(.notReserved)
@@ -168,7 +168,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                     etoState.insert(.reserved)
                 }
 
-                if model.is_user_in == "0" {
+                if model.isUserIn == "0" {
                     etoState.insert(.notBookable)
                 } else {
                     etoState.insert(.bookable)
@@ -220,23 +220,23 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
         guard let model = self.state.data.value, let projectModel = model.projectModel else { return }
         ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { json in
             if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
-                projectModel.finish_at = refreshModel.finish_at
+                projectModel.finishAt = refreshModel.finishAt
                 projectModel.status = refreshModel.status
-                model.current_percent.accept((refreshModel.current_percent * 100).string(digits: 2, roundingMode: .down) + "%")
-                model.progress.accept(refreshModel.current_percent)
+                model.currentPercent.accept((refreshModel.currentPercent * 100).string(digits: 2, roundingMode: .down) + "%")
+                model.progress.accept(refreshModel.currentPercent)
                 model.status.accept(refreshModel.status!.description())
-                model.project_state.accept(refreshModel.status)
+                model.projectState.accept(refreshModel.status)
 
                 if refreshModel.status! == .pre {
-                    model.detail_time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                    model.detailTime.accept(timeHandle(projectModel.startAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
                 } else if refreshModel.status! == .ok {
-                    model.detail_time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                    model.detailTime.accept(timeHandle(projectModel.endAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
                 } else if refreshModel.status! == .finish {
-                    if refreshModel.finish_at != nil {
-                        if projectModel.t_total_time == "" {
-                            model.detail_time.accept(timeHandle(refreshModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
+                    if refreshModel.finishAt != nil {
+                        if projectModel.tTotalTime == "" {
+                            model.detailTime.accept(timeHandle(refreshModel.finishAt!.timeIntervalSince1970 - projectModel.startAt!.timeIntervalSince1970, isHiddenSecond: false))
                         } else {
-                            model.detail_time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
+                            model.detailTime.accept(timeHandle(Double(projectModel.tTotalTime)!, isHiddenSecond: false))
                         }
                     }
                 }

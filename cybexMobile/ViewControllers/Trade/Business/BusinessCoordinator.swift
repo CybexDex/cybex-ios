@@ -139,9 +139,9 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
 
     func getBalance(_ assetID: String) {
         if let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
-            return balance.asset_type.filterJade == assetID
+            return balance.assetType.filterJade == assetID
         }).first {
-            let amount = getRealAmount(balances.asset_type, amount: balances.balance)
+            let amount = getRealAmount(balances.assetType, amount: balances.balance)
             self.store.dispatch(BalanceFetchedAction(amount: amount))
         }
     }

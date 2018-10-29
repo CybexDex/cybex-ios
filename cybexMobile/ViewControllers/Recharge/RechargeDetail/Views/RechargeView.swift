@@ -56,8 +56,8 @@ class RechargeView: UIView {
     @IBOutlet weak var memoView: RechargeItemView!
 
     func updateView() {
-        if let balance = self.balance, let balance_info = appData.assetInfo[balance.asset_type] {
-            avaliableView.content.text = getRealAmountDouble(balance.asset_type, amount: balance.balance).string(digits: balance_info.precision) + " " + balance_info.symbol.filterJade
+        if let balance = self.balance, let balance_info = appData.assetInfo[balance.assetType] {
+            avaliableView.content.text = getRealAmountDouble(balance.assetType, amount: balance.balance).string(digits: balance_info.precision) + " " + balance_info.symbol.filterJade
         } else {
             if let trade = self.trade, let trade_info = appData.assetInfo[trade.id] {
                 avaliableView.content.text = "--" + trade_info.symbol.filterJade

@@ -73,11 +73,11 @@ class TransferViewController: BaseViewController {
         self.coordinator!.state.balance.asObservable().subscribe(onNext: {[weak self] (balance) in
             guard let `self` = self else { return }
             if let balance = balance {
-                if let info = appData.assetInfo[balance.asset_type] {
+                if let info = appData.assetInfo[balance.assetType] {
                     self.transferView.crypto = info.symbol.filterJade
                     self.transferView.precision = info.precision
-                    let realBalance = getRealAmountDouble(balance.asset_type, amount: balance.balance)
-                    self.transferView.balance = R.string.localizable.transfer_balance.key.localized() + realBalance.string(digits: info.precision) + " " +  (appData.assetInfo[balance.asset_type]?.symbol.filterJade)!
+                    let realBalance = getRealAmountDouble(balance.assetType, amount: balance.balance)
+                    self.transferView.balance = R.string.localizable.transfer_balance.key.localized() + realBalance.string(digits: info.precision) + " " +  (appData.assetInfo[balance.assetType]?.symbol.filterJade)!
                 }
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -85,7 +85,7 @@ class TransferViewController: BaseViewController {
         //手续费监听
         self.coordinator!.state.fee.asObservable().subscribe(onNext: {[weak self] (result) in
             guard let `self` = self else { return }
-            if let data = result, let feeInfo = appData.assetInfo[data.asset_id] {
+            if let data = result, let feeInfo = appData.assetInfo[data.assetId] {
                 let fee = data
                 self.transferView.fee = (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade
             }
@@ -134,8 +134,8 @@ class TransferViewController: BaseViewController {
             let amount = self.transferView.quantityView.textField.text,
             let memo = self.transferView.memoView.textView.text,
             let fee = self.coordinator?.state.fee.value {
-            if let feeInfo = appData.assetInfo[fee.asset_id] {
-                let data = getTransferInfo(account, quanitity: amount + " " + (appData.assetInfo[balance.asset_type]?.symbol.filterJade)!, fee: (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade, memo: memo)
+            if let feeInfo = appData.assetInfo[fee.assetId] {
+                let data = getTransferInfo(account, quanitity: amount + " " + (appData.assetInfo[balance.assetType]?.symbol.filterJade)!, fee: (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade, memo: memo)
                 showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data)
             }
         }

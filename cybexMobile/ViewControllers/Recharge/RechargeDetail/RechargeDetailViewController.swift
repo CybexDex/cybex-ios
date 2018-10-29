@@ -50,7 +50,7 @@ class RechargeDetailViewController: BaseViewController {
     var balance: Balance? {
         didSet {
             if let balance = balance {
-                self.available = getRealAmountDouble(balance.asset_type, amount: balance.balance)
+                self.available = getRealAmountDouble(balance.assetType, amount: balance.balance)
             }
         }
     }
@@ -91,8 +91,8 @@ class RechargeDetailViewController: BaseViewController {
             .subscribe(onNext: { [weak self](_) in
                 guard let `self` = self else { return }
                 if let balance = self.balance, let precision = self.precision {
-                    self.contentView.amountView.content.text = getRealAmount(balance.asset_type, amount: balance.balance).string(digits: precision, roundingMode: .down)
-                    self.checkAmountIsAvailable(getRealAmount(balance.asset_type, amount: balance.balance).doubleValue)
+                    self.contentView.amountView.content.text = getRealAmount(balance.assetType, amount: balance.balance).string(digits: precision, roundingMode: .down)
+                    self.checkAmountIsAvailable(getRealAmount(balance.assetType, amount: balance.balance).doubleValue)
                     self.setFinalAmount()
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -135,7 +135,7 @@ class RechargeDetailViewController: BaseViewController {
             .subscribe(onNext: { [weak self](_) in
                 guard let `self` = self else { return }
 
-                if let text = self.contentView.amountView.content.text, var amount = text.toDouble(), amount >= 0, let balance = self.balance, let balance_info = appData.assetInfo[balance.asset_type] {
+                if let text = self.contentView.amountView.content.text, var amount = text.toDouble(), amount >= 0, let balance = self.balance, let balance_info = appData.assetInfo[balance.assetType] {
                     if let coordinator =  self.coordinator, let value = coordinator.state.property.data.value, let precision = value.precision {
                         self.precision = precision
                         self.contentView.amountView.content.text = checkMaxLength(text, maxLength: value.precision ?? balance_info.precision)
@@ -165,7 +165,7 @@ class RechargeDetailViewController: BaseViewController {
                         self.contentView.addressView.address_state = .Fail
                         return
                     }
-                    if let balance = self.balance, let balance_info = appData.assetInfo[balance.asset_type] {
+                    if let balance = self.balance, let balance_info = appData.assetInfo[balance.assetType] {
                         let assetName = balance_info.symbol.filterJade
                         self.contentView.addressView.address_state = .Loading
                         RechargeDetailCoordinator.verifyAddress(assetName, address: address, callback: { (success) in
@@ -239,7 +239,7 @@ class RechargeDetailViewController: BaseViewController {
             }
             if let trade = self.trade, let trade_info = appData.assetInfo[trade.id], let precision = self.precision, let balance = self.balance {
                 self.contentView.insideFee.text = data.fee.string(digits: precision) + " " + trade_info.symbol.filterJade
-                self.contentView.avaliableView.content.text = getRealAmountDouble(balance.asset_type, amount: balance.balance).string(digits: trade_info.precision) + " " + trade_info.symbol.filterJade
+                self.contentView.avaliableView.content.text = getRealAmountDouble(balance.assetType, amount: balance.balance).string(digits: trade_info.precision) + " " + trade_info.symbol.filterJade
             }
             self.setFinalAmount()
             SwifterSwift.delay(milliseconds: 300) {
@@ -251,14 +251,14 @@ class RechargeDetailViewController: BaseViewController {
         self.coordinator?.state.property.gatewayFee.asObservable().subscribe(onNext: { [weak self](result) in
             guard let `self` = self else { return }
             self.endLoading()
-            if let data = result, data.success, let feeInfo = appData.assetInfo[data.0.asset_id] {
+            if let data = result, data.success, let feeInfo = appData.assetInfo[data.0.assetId] {
                 let fee = data.0
                 if let trade = self.trade, let precision = self.precision, feeInfo.id == trade.id {
                     self.contentView.gateAwayFee.text = (fee.amount.toDouble()?.string(digits: precision))! + " " + feeInfo.symbol.filterJade
                 } else {
                     self.contentView.gateAwayFee.text = (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade
                 }
-                self.feeAssetId = AssetConfiguration.CYB != fee.asset_id ? fee.asset_id : AssetConfiguration.CYB
+                self.feeAssetId = AssetConfiguration.CYB != fee.assetId ? fee.assetId : AssetConfiguration.CYB
                 self.setFinalAmount()
                 SwifterSwift.delay(milliseconds: 300, completion: {
                     self.changeWithdrawState()
@@ -273,7 +273,7 @@ class RechargeDetailViewController: BaseViewController {
         guard let text = self.contentView.amountView.content.text, let amount = Decimal(string: text) else { return }
         guard let (finalAmount, requireAmount) = self.coordinator?.getFinalAmount(fee_id: self.feeAssetId, amount: amount, available: self.available) else { return }
         self.requireAmount = requireAmount
-        guard finalAmount.doubleValue > 0, let balance = self.balance, let balance_info = appData.assetInfo[balance.asset_type], let precision = self.precision else { return }
+        guard finalAmount.doubleValue > 0, let balance = self.balance, let balance_info = appData.assetInfo[balance.assetType], let precision = self.precision else { return }
         self.contentView.finalAmount.text = finalAmount.doubleValue.string(digits: precision) + " " + balance_info.symbol.filterJade
     }
 }

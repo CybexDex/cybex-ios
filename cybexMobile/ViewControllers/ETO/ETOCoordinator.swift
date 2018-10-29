@@ -128,22 +128,22 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                     ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { (json) in
                         if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
                             projectModel.status = refreshModel.status
-                            projectModel.finish_at = refreshModel.finish_at
-                            viewModel.current_percent.accept((refreshModel.current_percent * 100).string(digits: 2, roundingMode: .down) + "%")
-                            viewModel.progress.accept(refreshModel.current_percent)
+                            projectModel.finishAt = refreshModel.finishAt
+                            viewModel.currentPercent.accept((refreshModel.currentPercent * 100).string(digits: 2, roundingMode: .down) + "%")
+                            viewModel.progress.accept(refreshModel.currentPercent)
                             viewModel.status.accept(refreshModel.status!.description())
-                            viewModel.project_state.accept(refreshModel.status)
+                            viewModel.projectState.accept(refreshModel.status)
 
                             if refreshModel.status! == .pre {
-                                viewModel.time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                                viewModel.time.accept(timeHandle(projectModel.startAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
                             } else if refreshModel.status! == .ok {
-                                viewModel.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                                viewModel.time.accept(timeHandle(projectModel.endAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
                             } else if refreshModel.status! == .finish {
-                                if refreshModel.finish_at != nil {
-                                    if projectModel.t_total_time == "" {
-                                        viewModel.time.accept(timeHandle(refreshModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970, isHiddenSecond: false))
+                                if refreshModel.finishAt != nil {
+                                    if projectModel.tTotalTime == "" {
+                                        viewModel.time.accept(timeHandle(refreshModel.finishAt!.timeIntervalSince1970 - projectModel.startAt!.timeIntervalSince1970, isHiddenSecond: false))
                                     } else {
-                                        viewModel.time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
+                                        viewModel.time.accept(timeHandle(Double(projectModel.tTotalTime)!, isHiddenSecond: false))
                                     }
                                 }
                             }

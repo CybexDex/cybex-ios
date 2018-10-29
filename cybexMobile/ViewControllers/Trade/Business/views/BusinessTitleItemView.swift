@@ -28,9 +28,9 @@ class BusinessTitleItemView: UIView {
                 return
             }
 
-            self.total.text = " " + ticker.quote_volume.suffixNumber(digitNum: 2)
-            self.change.text = (ticker.incre == .greater ? "+" : "") + ticker.percent_change.formatCurrency(digitNum: 2) + "%"
-            if let change = ticker.percent_change.toDouble(), change > 1000 {
+            self.total.text = " " + ticker.quoteVolume.suffixNumber(digitNum: 2)
+            self.change.text = (ticker.incre == .greater ? "+" : "") + ticker.percentChange.formatCurrency(digitNum: 2) + "%"
+            if let change = ticker.percentChange.toDouble(), change > 1000 {
                 self.change.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
             } else {
                 self.change.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)

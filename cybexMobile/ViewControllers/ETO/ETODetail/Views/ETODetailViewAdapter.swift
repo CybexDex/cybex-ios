@@ -13,23 +13,23 @@ extension ETODetailView {
     func adapterModelToETODetailView(_ model: ETOProjectViewModel) {
         if let data = model.projectModel {
             if Localize.currentLanguage() == "en" {
-                if data.adds_detail.count != 0 {
-                    websiteView.setContentAttribute(contentLabelStr: model.project_website, attLabelArray: [data.adds_website, data.adds_whitepaper, data.adds_detail])
+                if data.addsDetail.count != 0 {
+                    websiteView.setContentAttribute(contentLabelStr: model.projectWebsite, attLabelArray: [data.addsWebsite, data.addsWhitepaper, data.addsDetail])
                 } else {
-                    websiteView.setContentAttribute(contentLabelStr: model.project_website, attLabelArray: [data.adds_website, data.adds_whitepaper])
+                    websiteView.setContentAttribute(contentLabelStr: model.projectWebsite, attLabelArray: [data.addsWebsite, data.addsWhitepaper])
                 }
-                introView.content = data.adds_advantage__lang_en
+                introView.content = data.addsAdvantageLangEn
             } else {
 
-                if data.adds_detail.count != 0 {
-                   websiteView.setContentAttribute(contentLabelStr: model.project_website_en, attLabelArray: [data.adds_website__lang_en, data.adds_whitepaper__lang_en, data.adds_detail__lang_en])
+                if data.addsDetail.count != 0 {
+                   websiteView.setContentAttribute(contentLabelStr: model.projectWebsiteEn, attLabelArray: [data.addsWebsiteLangEn, data.addsWhitepaperLangEn, data.addsDetailLangEn])
                 } else {
-                    websiteView.setContentAttribute(contentLabelStr: model.project_website, attLabelArray: [data.adds_website__lang_en, data.adds_whitepaper__lang_en])
+                    websiteView.setContentAttribute(contentLabelStr: model.projectWebsite, attLabelArray: [data.addsWebsiteLangEn, data.addsWhitepaperLangEn])
                 }
 
-                introView.content = data.adds_advantage
+                introView.content = data.addsAdvantage
             }
-            if data.adds_whitelist == "" && data.adds_whitelist__lang_en == "" {
+            if data.addsWhitelist == "" && data.addsWhitelistLangEn == "" {
                 self.getWhiteListView.isHidden = true
             }
         }

@@ -51,7 +51,7 @@ func calculateFee(_ operation: String, focus_asset_id: String, operationID: Chai
         if let fees = data as? [Fee], let cyb_amount = fees.first?.amount.toDouble() {
 
             let cyb = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
-                return balance.asset_type == AssetConfiguration.CYB
+                return balance.assetType == AssetConfiguration.CYB
             }).first?.balance.toDouble() ?? 0
 
             if cyb >= cyb_amount {
@@ -62,7 +62,7 @@ func calculateFee(_ operation: String, focus_asset_id: String, operationID: Chai
                 let request = GetRequiredFees(response: { (data) in
                     if let fees = data as? [Fee], let base_amount = fees.first?.amount.toDouble() {
                         if let base = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
-                            return balance.asset_type == focus_asset_id
+                            return balance.assetType == focus_asset_id
                         }).first {
                             if base.balance.toDouble()! >= base_amount {
                                 let amount = getRealAmount(focus_asset_id, amount: base_amount.string)
@@ -381,7 +381,7 @@ func addressOf<T: AnyObject>(_ o: T) -> Int {
 func getBalanceWithAssetId(_ asset: String) -> Balance? {
     if let balances = UserManager.shared.balances.value {
         for balance in balances {
-            if balance.asset_type == asset {
+            if balance.assetType == asset {
                 return balance
             }
         }

@@ -7,40 +7,39 @@
 //
 
 import Foundation
-import ObjectMapper
+import HandyJSON
 
-class AccountKeys: Mappable {
-  var active_key: Key?
-  var owner_key: Key?
-  var memo_key: Key?
+class AccountKeys: HandyJSON {
+  var activeKey: Key?
+  var ownerKey: Key?
+  var memoKey: Key?
 
-  required init?(map: Map) {
+  required init() {
 
   }
 
-  func mapping(map: Map) {
-    active_key <- map["active-key"]
-    owner_key <- map["owner-key"]
-    memo_key <- map["memo-key"]
+  func mapping(mapper: HelpingMapper) {
+    mapper <<< activeKey <-- "active-key"
+    mapper <<< ownerKey <-- "owner-key"
+    mapper <<< memoKey <-- "memo-key"
   }
 }
 
-class Key: Mappable {
-  var private_key = ""
-  var public_key = ""
+class Key: HandyJSON {
+  var privateKey = ""
+  var publicKey = ""
   var address = ""
   var compressed = ""
   var uncompressed = ""
 
-  required init?(map: Map) {
-
+  required init() {
   }
 
-  func mapping(map: Map) {
-    private_key <- map["private_key"]
-    public_key <- map["public_key"]
-    address <- map["address"]
-    compressed <- map["compressed"]
-    uncompressed <- map["uncompressed"]
+  func mapping(mapper: HelpingMapper) {
+    mapper <<< privateKey <-- "private_key"
+    mapper <<< publicKey <-- "public_key"
+    mapper <<< address <-- "address"
+    mapper <<< compressed <-- "compressed"
+    mapper <<< uncompressed <-- "uncompressed"
   }
 }

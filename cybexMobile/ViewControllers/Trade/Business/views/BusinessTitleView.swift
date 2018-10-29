@@ -84,7 +84,7 @@ class BusinessTitleView: UIView {
 extension BusinessTitleView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return appData.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
-            return ticker.base_volume != "0"
+            return ticker.baseVolume != "0"
 
         }).count
     }
@@ -101,7 +101,7 @@ extension BusinessTitleView: UITableViewDataSource, UITableViewDelegate {
             cell.businessTitleCellView.paris.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
         }
         let markets = appData.filterQuoteAssetTicker(AssetConfiguration.market_base_assets[currentBaseIndex]).filter({ (ticker) -> Bool in
-            return ticker.base_volume != "0"
+            return ticker.baseVolume != "0"
         })
         let data = markets[indexPath.row]
         cell.setup(data, indexPath: indexPath)
