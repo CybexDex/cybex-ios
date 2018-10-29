@@ -14,7 +14,7 @@ import cybex_ios_core_cpp
 
 protocol RechargeDetailCoordinatorProtocol {
     func pop()
-    func openWithdrawRecodeList(_ asset_id: String)
+    func openWithdrawRecodeList(_ assetId: String)
     func openAddAddressWithAddress(_ withdrawAddress: WithdrawAddress)
 }
 
@@ -27,8 +27,14 @@ protocol RechargeDetailStateManagerProtocol {
     func fetchWithDrawInfoData(_ assetName: String)
     static func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool)->Void)
     func getGatewayFee(_ assetId: String, amount: String, address: String, isEOS: Bool)
-    func getObjects(assetId: String, amount: String, address: String, fee_id: String, fee_amount: String, isEOS: Bool, callback:@escaping (Any)->Void)
-    func getFinalAmount(fee_id: String, amount: Decimal, available: Double) -> (Decimal, String)
+    func getObjects(assetId: String,
+                    amount: String,
+                    address: String,
+                    feeId: String,
+                    feeAmount: String,
+                    isEOS: Bool,
+                    callback:@escaping (Any)->Void)
+    func getFinalAmount(feeId: String, amount: Decimal, available: Double) -> (Decimal, String)
 
     func chooseOrAddAddress(_ sender: String)
 }
@@ -38,7 +44,7 @@ class RechargeDetailCoordinator: AccountRootCoordinator {
     lazy var creator = RechargeDetailPropertyActionCreate()
 
     var store = Store<RechargeDetailState>(
-        reducer: RechargeDetailReducer,
+        reducer: rechargeDetailReducer,
         state: nil,
         middleware: [TrackingMiddleware]
     )
@@ -59,11 +65,11 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
         }
     }
 
-    func openWithdrawRecodeList(_ asset_id: String) {
+    func openWithdrawRecodeList(_ assetId: String) {
         if let vc = R.storyboard.recode.rechargeRecodeViewController() {
             vc.coordinator = RechargeRecodeCoordinator(rootVC: self.rootVC)
-            vc.record_type = .WITHDRAW
-            vc.assetInfo = appData.assetInfo[asset_id]
+            vc.recordType = .WITHDRAW
+            vc.assetInfo = appData.assetInfo[assetId]
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
@@ -141,8 +147,9 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
 
     func getGatewayFee(_ assetId: String, amount: String, address: String, isEOS: Bool) {
-        if let memo_key = self.state.property.memo_key.value {
+        if let memoKey = self.state.property.memoKey.value {
             let name = appData.assetInfo[assetId]?.symbol.filterJade
+
             let memo = self.state.property.memo.value
             if var amount = amount.toDouble() {
                 let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
@@ -154,13 +161,12 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                                   amount: Int64(amount),
                                                                                   fee_id: 0,
                                                                                   fee_amount: 0,
-                                                                                  memo: isEOS ? GraphQLManager.shared.memo(name!, address: address + "[\(memo)]") : GraphQLManager.shared.memo(name!, address: address),
+                                                                                  memo: isEOS ? GraphQLManager.shared.memo(name!, address: address + "[\(memo)]") :
+                                                                                    GraphQLManager.shared.memo(name!, address: address),
                                                                                   from_memo_key: UserManager.shared.account.value?.memoKey,
-                                                                                  to_memo_key: memo_key) {
-
-                    calculateFee(operationString, focus_asset_id: assetId, operationID: .transfer) { (success, amount, fee_id) in
-
-                        let dictionary = ["asset_id": fee_id, "amount": amount.stringValue]
+                                                                                  to_memo_key: memoKey) {
+                    calculateFee(operationString, focusAssetId: assetId, operationID: .transfer) { (success, amount, feeId) in
+                        let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
                         guard let fee = Fee.deserialize(from: dictionary) else { return }
                         self.store.dispatch(FetchGatewayFee(data: (fee, success:success)))
                     }
@@ -182,10 +188,11 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         }
     }
 
-    func getObjects(assetId: String, amount: String, address: String, fee_id: String, fee_amount: String, isEOS: Bool, callback:@escaping (Any)->Void) {
+    func getObjects(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, isEOS: Bool, callback:@escaping (Any)->Void) {
         getChainId { (id) in
-            if let memo_key = self.state.property.memo_key.value {
+            if let memoKey = self.state.property.memoKey.value {
                 let name = appData.assetInfo[assetId]?.symbol.filterJade
+
                 let memo = self.state.property.memo.value
                 let requeset = GetObjectsRequest(ids: [objectID.dynamic_global_property_object.rawValue]) { (infos) in
                     if let infos = infos as? (block_id: String, block_num: String) {
@@ -193,7 +200,8 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                             let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
                             amount = amount * Double(truncating: value as NSNumber)
 
-                            let fee_amout = fee_amount.toDouble()! * Double(truncating: pow(10, (appData.assetInfo[fee_id]?.precision)!) as NSNumber)
+                            let feeAmout = feeAmount.toDouble()! * Double(truncating: pow(10, (appData.assetInfo[feeId]?.precision)!) as NSNumber)
+
 
                             let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
                                                                               block_id: infos.block_id,
@@ -204,12 +212,12 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                               asset_id: Int32(getUserId(assetId)),
                                                                               receive_asset_id: Int32(getUserId(assetId)),
                                                                               amount: Int64(amount),
-                                                                              fee_id: Int32(getUserId(fee_id)),
-                                                                              fee_amount: Int64(fee_amout),
-                                                                              memo: isEOS ? GraphQLManager.shared.memo(name!, address: address + "[\(memo)]") : GraphQLManager.shared.memo(name!, address: address),
+                                                                              fee_id: Int32(getUserId(feeId)),
+                                                                              fee_amount: Int64(feeAmout),
+                                                                              memo: isEOS ? GraphQLManager.shared.memo(name!, address: address + "[\(memo)]") :
+                                                                                GraphQLManager.shared.memo(name!, address: address),
                                                                               from_memo_key: UserManager.shared.account.value?.memoKey,
-                                                                              to_memo_key: memo_key)
-
+                                                                              to_memo_key: memoKey)
                             let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
                                 main {
                                     callback(data)
@@ -224,16 +232,16 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         }
     }
 
-    func getFinalAmount(fee_id: String, amount: Decimal, available: Double) -> (Decimal, String) {
+    func getFinalAmount(feeId: String, amount: Decimal, available: Double) -> (Decimal, String) {
 
         let allAmount = Decimal(available)
         var requestAmount: String = ""
 
         var finalAmount: Decimal = amount
-        if fee_id != AssetConfiguration.CYB {
-            if let gateway_fee = self.state.property.gatewayFee.value?.0, let gatewayFee = Decimal(string: gateway_fee.amount) {
+        if feeId != AssetConfiguration.CYB {
+            if let gatewayFeeAmount = self.state.property.gatewayFee.value?.0, let gatewayFee = Decimal(string: gatewayFeeAmount.amount) {
                 if allAmount < gatewayFee + amount {
-                    finalAmount = finalAmount - gatewayFee
+                    finalAmount -= gatewayFee
                     requestAmount = (amount - gatewayFee).stringValue
                 } else {
                     requestAmount = amount.stringValue
@@ -243,7 +251,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
             requestAmount = amount.stringValue
         }
         if let data = self.state.property.data.value {
-            finalAmount = finalAmount - Decimal(data.fee)
+            finalAmount -= Decimal(data.fee)
         }
         return (finalAmount, requestAmount)
     }

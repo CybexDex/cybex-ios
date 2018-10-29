@@ -14,7 +14,7 @@ import Alamofire
 import Localize_Swift
 
 enum SimpleHttpError: Error {
-    case NotExistData
+    case notExistData
 }
 
 struct Await {
@@ -132,7 +132,7 @@ extension SimpleHTTPService {
 
         let (promise, seal) = Promise<[RMBPrices]>.pending()
         Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
-            var rmb_prices = [RMBPrices]()
+            var rmbPrices = [RMBPrices]()
             guard let value = response.result.value else {
                 seal.fulfill([])
                 return
@@ -141,9 +141,9 @@ extension SimpleHTTPService {
 
             let prices = json["prices"].arrayValue
             for price in prices {
-                rmb_prices.append(RMBPrices(name: price["name"].stringValue, rmb_price: price["value"].stringValue == "" ? "0" : price["value"].stringValue))
+                rmbPrices.append(RMBPrices(name: price["name"].stringValue, rmb_price: price["value"].stringValue == "" ? "0" : price["value"].stringValue))
             }
-            seal.fulfill(rmb_prices)
+            seal.fulfill(rmbPrices)
         }
         return promise
     }

@@ -19,7 +19,7 @@ protocol RechargeRecodeStateManagerProtocol {
         _ subscriber: S, transform: ((Subscription<RechargeRecodeState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
 
-    func fetchRechargeRecodeList(_ accountName: String, asset: String, fundType: fundType, size: Int, offset: Int, expiration: Int, asset_id: String, callback:@escaping (Bool)->Void)
+    func fetchRechargeRecodeList(_ accountName: String, asset: String, fundType: FundType, size: Int, offset: Int, expiration: Int, assetId: String, callback:@escaping (Bool)->Void)
 
     func setAssetAction(_ asset: String)
 
@@ -31,7 +31,7 @@ class RechargeRecodeCoordinator: AccountRootCoordinator {
     lazy var creator = RechargeRecodePropertyActionCreate()
 
     var store = Store<RechargeRecodeState>(
-        reducer: RechargeRecodeReducer,
+        reducer: rechargeRecodeReducer,
         state: nil,
         middleware: [TrackingMiddleware]
     )
@@ -53,14 +53,14 @@ extension RechargeRecodeCoordinator: RechargeRecodeCoordinatorProtocol {
                 }
             }
         }
-        if let vc = self.rootVC.topViewController as? WithdrawAndDespoitRecordViewController {
-            vc.coordinator?.openRecordDetailUrl(url)
+        if let recordVC = self.rootVC.topViewController as? WithdrawAndDespoitRecordViewController {
+            recordVC.coordinator?.openRecordDetailUrl(url)
         } else {
-            if let vc = R.storyboard.main.cybexWebViewController() {
-                vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
-                vc.vc_type = .recordDetail
-                vc.url = URL(string: url)
-                self.rootVC.pushViewController(vc, animated: true)
+            if let webVC = R.storyboard.main.cybexWebViewController() {
+                webVC.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
+                webVC.vc_type = .recordDetail
+                webVC.url = URL(string: url)
+                self.rootVC.pushViewController(webVC, animated: true)
             }
         }
     }
@@ -77,8 +77,20 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
 
-    func fetchRechargeRecodeList(_ accountName: String, asset: String, fundType: fundType, size: Int, offset: Int, expiration: Int, asset_id: String, callback:@escaping (Bool)->Void) {
-        getWithdrawAndDepositRecords(accountName, asset: asset, fundType: fundType, size: size, offset: offset, expiration: expiration) { [weak self](result) in
+    func fetchRechargeRecodeList(_ accountName: String,
+                                 asset: String,
+                                 fundType: FundType,
+                                 size: Int,
+                                 offset: Int,
+                                 expiration: Int,
+                                 assetId: String,
+                                 callback:@escaping (Bool)->Void) {
+        getWithdrawAndDepositRecords(accountName,
+                                     asset: asset,
+                                     fundType: fundType,
+                                     size: size,
+                                     offset: offset,
+                                     expiration: expiration) { [weak self](result) in
             guard let `self` = self else { return }
             self.store.dispatch(FetchDepositRecordsAction(data: result))
             if result != nil {

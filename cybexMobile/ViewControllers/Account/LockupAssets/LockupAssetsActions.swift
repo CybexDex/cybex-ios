@@ -54,7 +54,7 @@ class LockupAssetsPropertyActionCreate: LoadingActionCreator {
   func fetchLockupAssets(with address: [String], callback: CommonAnyCallback?) -> ActionCreator {
     return { state, store in
 
-      let request = getBalanceObjectsRequest(address: address) { response in
+      let request = GetBalanceObjectsRequest(address: address) { response in
         if let callback = callback {
           callback(response)
         }

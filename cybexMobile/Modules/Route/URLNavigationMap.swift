@@ -31,7 +31,7 @@ struct URLNavigationMap {
 
         navigator.handle("cybexapp://deposit") { (_, _, context) -> Bool in
             var context = RechargeContext()
-            context.selectedIndex = RechargeViewController.CELL_TYPE.RECHARGE
+            context.selectedIndex = RechargeViewController.CellType.RECHARGE
 
             appCoodinator.pushVC(RechargeCoordinator.self, animated: true, context: context)
 
@@ -40,8 +40,9 @@ struct URLNavigationMap {
 
         navigator.handle("cybexapp://withdraw") { (_, _, context) -> Bool in
             var context = RechargeContext()
-            context.selectedIndex = RechargeViewController.CELL_TYPE.WITHDRAW
+            context.selectedIndex = RechargeViewController.CellType.WITHDRAW
             appCoodinator.pushVC(RechargeCoordinator.self, animated: true, context: context)
+
             return true
         }
 

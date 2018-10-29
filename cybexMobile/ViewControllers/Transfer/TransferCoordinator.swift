@@ -335,7 +335,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                                                                               memo: memo,
                                                                               from_memo_key: from_memo_key,
                                                                               to_memo_key: to_memo_key) {
-                calculateFee(operationString, focus_asset_id: assetId, operationID: .transfer) { (success, amount, fee_id) in
+                calculateFee(operationString, focusAssetId: assetId, operationID: .transfer) { (success, amount, fee_id) in
                     let dictionary = ["asset_id": fee_id, "amount": amount.stringValue]
                     guard let fee = Fee.deserialize(from: dictionary) else { return }
                     self.store.dispatch(SetFeeAction(fee: fee))

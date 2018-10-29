@@ -12,7 +12,7 @@ import RxCocoa
 import ReSwift
 
 class MyHistoryViewController: BaseViewController {
-    struct define {
+    struct Define {
         static let sectionHeaderHeight: CGFloat = 44.0
     }
 
@@ -78,23 +78,24 @@ extension MyHistoryViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let name = String.init(describing: MyHistoryCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: name, for: indexPath) as! MyHistoryCell
-        if let fillOrders = self.data {
-            cell.setup(fillOrders[indexPath.row], indexPath: indexPath)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: name, for: indexPath) as? MyHistoryCell {
+            if let fillOrders = self.data {
+                cell.setup(fillOrders[indexPath.row], indexPath: indexPath)
+            }
+            return cell
         }
-        return cell
-
+        return MyHistoryCell()
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: define.sectionHeaderHeight))
+        let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: Define.sectionHeaderHeight))
 
         lockupAssetsSectionView.totalTitle.locali = R.string.localizable.order_history_first_title.key
         lockupAssetsSectionView.cybPriceTitle.locali = R.string.localizable.order_history_second_title.key
         return lockupAssetsSectionView
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return define.sectionHeaderHeight
+        return Define.sectionHeaderHeight
     }
 
 }

@@ -53,7 +53,7 @@ class Bucket: HandyJSON, NSCopying {
 
   func copy(with zone: NSZone? = nil) -> Any {
     let copy = Bucket.deserialize(from: self.toJSON())
-    return copy
+    return copy ?? Bucket()
   }
 
   static func empty() -> Bucket {

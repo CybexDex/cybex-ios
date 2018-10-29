@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 class TradeView: UIView {
-    enum event: String {
+    enum Event: String {
         case orderbookClicked
     }
 
@@ -32,31 +32,31 @@ class TradeView: UIView {
                 let bids = data.bids
                 let asks = data.asks
 
-                for i in 6...10 {
-                    let sell = sells.viewWithTag(i) as! TradeLineView
-                    if asks.count - 1 >= (i - 6) {
-                        sell.isBuy    = true
-                        sell.alpha = 1
-
-                        let max = asks.count >= 5 ? 4 : asks.count - 1
-                        let percent = asks[i - 6].volume_percent / asks[max].volume_percent
-
-                        sell.data     = (asks[i - 6], percent)
-
-                    } else {
-                        sell.alpha = 0
-                    }
-                    let buy = buies.viewWithTag(i) as! TradeLineView
-                    if bids.count - 1 >= (i - 6) {
-                        sell.isBuy   = false
-                        buy.alpha = 1
-
-                        let max = bids.count >= 5 ? 4 : bids.count - 1
-                        let percent = bids[i - 6].volume_percent / bids[max].volume_percent
-
-                        buy.data     = (bids[i - 6], percent)
-                    } else {
-                        buy.alpha = 0
+                for index in 6...10 {
+                    if let sell = sells.viewWithTag(index) as? TradeLineView {
+                        if asks.count - 1 >= (index - 6) {
+                            sell.isBuy = true
+                            sell.alpha = 1
+                            let max = asks.count >= 5 ? 4 : asks.count - 1
+                            let percent = asks[index - 6].volume_percent / asks[max].volume_percent
+                            sell.data = (asks[index - 6], percent)
+                            
+                        } else {
+                            sell.alpha = 0
+                        }
+                        if let buy = buies.viewWithTag(index) as? TradeLineView {
+                            if bids.count - 1 >= (index - 6) {
+                                sell.isBuy   = false
+                                buy.alpha = 1
+                                
+                                let max = bids.count >= 5 ? 4 : bids.count - 1
+                                let percent = bids[index - 6].volume_percent / bids[max].volume_percent
+                                
+                                buy.data     = (bids[index - 6], percent)
+                            } else {
+                                buy.alpha = 0
+                            }
+                        }
                     }
                 }
             }
@@ -74,7 +74,7 @@ class TradeView: UIView {
             item.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
                 guard let `self` = self else { return }
 
-                self.next?.sendEventWith(event.orderbookClicked.rawValue, userinfo: ["price": item.price.text ?? "0"])
+                self.next?.sendEventWith(Event.orderbookClicked.rawValue, userinfo: ["price": item.price.text ?? "0"])
 
             }).disposed(by: disposeBag)
         }

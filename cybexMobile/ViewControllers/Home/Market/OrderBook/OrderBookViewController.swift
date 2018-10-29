@@ -126,28 +126,6 @@ class OrderBookViewController: BaseViewController {
             }
 
             self.tradeView.rmbPrice.text = "≈¥" + getAssetRMBPrice(pair.quote, base: pair.base).string(digits: 2, roundingMode: .down)
-
-//            let (eth,cyb) = changeToETHAndCYB(pair.quote)
-//            if eth == "0" && cyb == "0"{
-//                self.tradeView.rmbPrice.text  = "≈¥"
-//            }else if (eth == "0"){
-//                if let cyb_eth = changeCYB_ETH().toDouble(),cyb_eth != 0{
-//                    let eth_count = cyb.toDouble()! / cyb_eth
-//                    if eth_count * app_data.eth_rmb_price == 0{
-//                        self.tradeView.rmbPrice.text  = "≈¥"
-//                    }else{
-//                        self.tradeView.rmbPrice.text  = "≈¥" + (eth_count * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
-//                    }
-//                }else{
-//                    self.tradeView.rmbPrice.text  = "≈¥"
-//                }
-//            }else{
-//                if eth.toDouble()! * app_data.eth_rmb_price == 0 {
-//                    self.tradeView.rmbPrice.text  = "≈¥"
-//                }else{
-//                    self.tradeView.rmbPrice.text  = "≈¥" + (eth.toDouble()! * app_data.eth_rmb_price).formatCurrency(digitNum: 2)
-//                }
-//            }
         }
     }
 }

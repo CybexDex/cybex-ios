@@ -10,10 +10,10 @@ import Foundation
 import JSONRPCKit
 import SwiftyJSON
 
-enum historyCatogery: String {
-    case get_market_history
-    case get_fill_order_history
-    case get_account_history
+enum HistoryCatogery: String {
+    case getMarketHistory
+    case getFillOrderHistory
+    case getAccountHistory
 }
 
 struct AssetPairQueryParams {
@@ -32,15 +32,20 @@ struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-        return [apiCategory.history, historyCatogery.get_account_history.rawValue, [accountID, objectID.operation_history_object.rawValue, "100", objectID.operation_history_object.rawValue]]
+        return [ApiCategory.history,
+                HistoryCatogery.getAccountHistory.rawValue.snakeCased(),
+                [accountID, objectID.operation_history_object.rawValue.snakeCased(),
+                 "100",
+                 objectID.operation_history_object.rawValue.snakeCased()]
+        ]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
         if let response = resultObject as? [[String: Any]] {
             var fillOrders: [FillOrder] = []
             var transferRecords: [TransferRecord] = []
-            for i in response {
-                if let op = i["op"] as? [Any], let opcode = op[0] as? Int, var operation = op[1] as? [String: Any], let blockNum = i["block_num"] {
+            for item in response {
+                if let opItem = item["op"] as? [Any], let opcode = opItem[0] as? Int, var operation = opItem[1] as? [String: Any], let blockNum = item["block_num"] {
                     operation["block_num"] = blockNum
                     if opcode == ChainTypesOperations.fill_order.rawValue {
                         if let fillorder = FillOrder.deserialize(from: operation) {
@@ -48,7 +53,11 @@ struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
                         }
                     } else if opcode == ChainTypesOperations.transfer.rawValue {
                         // 转账记录
-                        if let extensions = operation["extensions"] as? [Any], extensions.count > 0, let lockUpInfos = extensions[0] as? [Any], lockUpInfos.count >= 2, let lockUpInfo = lockUpInfos[1] as? [String: Any] {
+                        if let extensions = operation["extensions"] as? [Any],
+                            extensions.count > 0,
+                            let lockUpInfos = extensions[0] as? [Any],
+                            lockUpInfos.count >= 2,
+                            let lockUpInfo = lockUpInfos[1] as? [String: Any] {
                             operation["vesting_period"] = lockUpInfo["vesting_period"]
                             operation["public_key"] = lockUpInfo["public_key"]
                         }
@@ -75,7 +84,13 @@ struct GetMarketHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-        return [apiCategory.history, historyCatogery.get_market_history.rawValue, [queryParams.firstAssetId, queryParams.secondAssetId, queryParams.timeGap, queryParams.startTime.iso8601, queryParams.endTime.iso8601]]
+        return [ApiCategory.history,
+                HistoryCatogery.getMarketHistory.rawValue.snakeCased(),
+                [queryParams.firstAssetId,
+                 queryParams.secondAssetId,
+                 queryParams.timeGap,
+                 queryParams.startTime.iso8601,
+                 queryParams.endTime.iso8601]]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -98,7 +113,7 @@ struct GetFillOrderHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-        return [apiCategory.history, historyCatogery.get_fill_order_history.rawValue, [pair.base, pair.quote, 40]]
+        return [ApiCategory.history, HistoryCatogery.getFillOrderHistory.rawValue.snakeCased(), [pair.base, pair.quote, 40]]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {

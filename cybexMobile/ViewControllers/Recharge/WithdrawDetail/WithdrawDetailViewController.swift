@@ -14,20 +14,20 @@ import Proposer
 import Localize_Swift
 
 class WithdrawDetailViewController: BaseViewController {
-
+    
     var containerView: WithdrawView?
     var eosContainerView: EOSWithdrawView?
-
+    
     var trade: Trade?
     var coordinator: (WithdrawDetailCoordinatorProtocol & WithdrawDetailStateManagerProtocol)?
     var isFetching: Bool = false
-
+    
     var isEOS: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
-
+    
     func setupUI() {
         self.configRightNavButton(R.image.icDepositNew24Px())
         if let trade = self.trade, let name = appData.assetInfo[trade.id]?.symbol.filterJade {
@@ -37,19 +37,19 @@ class WithdrawDetailViewController: BaseViewController {
                 self.isEOS = true
                 eosContainerView = EOSWithdrawView(frame: .zero)
                 self.view.addSubview(eosContainerView!)
-
+                
                 eosContainerView?.edgesToDevice(vc: self, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
-
+                
                 self.eosContainerView?.introduce.attributedText = message.set(style: StyleNames.withdraw_introduce.rawValue)
             } else {
                 containerView = WithdrawView(frame: .zero)
                 self.view.addSubview(containerView!)
-
+                
                 containerView?.edgesToDevice(vc: self, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
                 self.containerView?.introduce.attributedText = message.set(style: StyleNames.withdraw_introduce.rawValue)
             }
         }
-
+        
         if self.trade?.enable == false {
             if let errorMsg = Localize.currentLanguage() == "en" ? self.trade?.enMsg : self.trade?.cnMsg {
                 showToastBox(false, message: errorMsg)
@@ -61,17 +61,17 @@ class WithdrawDetailViewController: BaseViewController {
             }
         }
     }
-
+    
     override func rightAction(_ sender: UIButton) {
         self.coordinator?.openDepositRecode((self.trade?.id)!)
     }
-
+    
     override func configureObserveState() {
         self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext: {[weak self] (addressInfo) in
             guard let `self` = self else {return}
             self.endLoading()
             self.isFetching = false
-
+            
             if let info = addressInfo {
                 if self.isEOS {
                     self.eosContainerView?.data = info
@@ -87,9 +87,9 @@ class WithdrawDetailViewController: BaseViewController {
                 }
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-
+        
     }
-
+    
     func fetchDepositAddress() {
         if self.trade?.enable == false {
             return
@@ -108,17 +108,17 @@ extension WithdrawDetailViewController {
     @objc func resetAddress(_ sender: Any) {
         fetchDepositAddress()
     }
-
+    
     @objc func copyAddress(_ sender: Any) {
         if self.trade?.enable == false {
             return
         }
         let board = UIPasteboard.general
         board.string = containerView?.address.text
-
+        
         self.showToastBox(true, message: R.string.localizable.recharge_copy.key.localized())
     }
-
+    
     @objc func saveCode(_ sender: Any) {
         if self.trade?.enable == false {
             return
@@ -130,16 +130,16 @@ extension WithdrawDetailViewController {
         proposeToAccess(photos, agreed: {
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.savedPhotosAlbum) {
                 saveImageToPhotos()
-
+                
                 self.showToastBox(true, message: R.string.localizable.recharge_save.key.localized())
             }
         }, rejected: {
             let message = R.string.localizable.tip_message.key.localized()
-
+            
             self.showToastBox(false, message: message)
         })
     }
-
+    
     @objc func copyAccount(_ sender: Any) {
         if self.trade?.enable == false {
             return
@@ -150,7 +150,7 @@ extension WithdrawDetailViewController {
             self.showToastBox(true, message: R.string.localizable.eos_copy_account.key.localized())
         }
     }
-
+    
     @objc func copyCode(_ sender: Any) {
         if self.trade?.enable == false {
             return
@@ -161,11 +161,11 @@ extension WithdrawDetailViewController {
             self.showToastBox(true, message: R.string.localizable.eos_copy_code.key.localized())
         }
     }
-
+    
     @objc func resetCode(_ sender: Any) {
         fetchDepositAddress()
     }
-
+    
     @objc func openProtocolAddressEvent(_ sender: Any) {
         guard let data = sender as? [String: Any], let url = data["address"] as? String else {
             return

@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func RechargeReducer(action: Action, state: RechargeState?) -> RechargeState {
+func rechargeReducer(action: Action, state: RechargeState?) -> RechargeState {
     let state = state ?? RechargeState()
 
     switch action {

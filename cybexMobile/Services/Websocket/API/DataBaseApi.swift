@@ -10,17 +10,17 @@ import Foundation
 import JSONRPCKit
 import SwiftyJSON
 
-enum dataBaseCatogery: String {
-    case get_full_accounts
-    case get_chain_id
-    case get_objects
-    case subscribe_to_market
-    case get_limit_orders
-    case get_balance_objects
-    case get_account_by_name
-    case get_required_fees
-    case get_block
-    case get_ticker
+enum DataBaseCatogery: String {
+    case getFullAccounts
+    case getChainId
+    case getObjects
+    case subscribeToMarket
+    case getLimitOrders
+    case getBalanceObjects
+    case getAccountByName
+    case getRequiredFees
+    case getBlock
+    case getTicker
 }
 
 struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {
@@ -34,7 +34,7 @@ struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-        return [apiCategory.database, dataBaseCatogery.get_required_fees.rawValue, [[[operationID.rawValue, JSON(parseJSON: operationStr).dictionaryObject ?? [:]]], assetID]]
+        return [ApiCategory.database, DataBaseCatogery.getRequiredFees.rawValue.snakeCased(), [[[operationID.rawValue, JSON(parseJSON: operationStr).dictionaryObject ?? [:]]], assetID]]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -56,7 +56,7 @@ struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-        return [apiCategory.database, dataBaseCatogery.get_account_by_name.rawValue, [name]]
+        return [ApiCategory.database, DataBaseCatogery.getAccountByName.rawValue.snakeCased(), [name]]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -80,33 +80,33 @@ struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-        return [apiCategory.database, dataBaseCatogery.get_full_accounts.rawValue, [[name], true]]
+        return [ApiCategory.database, DataBaseCatogery.getFullAccounts.rawValue.snakeCased(), [[name], true]]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
         let result = JSON(resultObject).arrayValue
 
-        let result_value: FullAccount = (nil, nil, nil)
+        let resultValue: FullAccount = (nil, nil, nil)
         if result.count == 0 {
-            return result_value
+            return resultValue
         }
 
         guard let full = result.first?.arrayValue[1],
-            let account_dic = full["account"].dictionaryObject
+            let accountDic = full["account"].dictionaryObject
             else {
-                return result_value
+                return resultValue
         }
 
-        let account = Account.deserialize(from: account_dic)
+        let account = Account.deserialize(from: accountDic)
 
-        let balances_arr = full["balances"].arrayValue
-        let limitOrder_arr = full["limit_orders"].arrayValue
+        let balancesArr = full["balances"].arrayValue
+        let limitOrderArr = full["limit_orders"].arrayValue
 
-        let balances = balances_arr.map { (obj) -> Balance in
+        let balances = balancesArr.map { (obj) -> Balance in
             return Balance.deserialize(from: obj.dictionaryObject!) ?? Balance()
         }
 
-        let limitOrders = limitOrder_arr.map { (obj) -> LimitOrder in
+        let limitOrders = limitOrderArr.map { (obj) -> LimitOrder in
             return LimitOrder.deserialize(from: obj.dictionaryObject!) ?? LimitOrder()
         }
 
@@ -121,7 +121,7 @@ struct GetChainIDRequest: JSONRPCKit.Request, JSONRPCResponse {
     var response: RPCSResponse
 
     var parameters: Any? {
-        return [apiCategory.database, dataBaseCatogery.get_chain_id.rawValue, []]
+        return [ApiCategory.database, DataBaseCatogery.getChainId.rawValue.snakeCased(), []]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -142,22 +142,22 @@ struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-        return [apiCategory.database, dataBaseCatogery.get_objects.rawValue, [ids]]
+        return [ApiCategory.database, DataBaseCatogery.getObjects.rawValue.snakeCased(), [ids]]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
         if let response = resultObject as? [[String: Any]] {
             if ids.first == "2.1.0"{
-                var head_block_id = ""
-                var head_block_number = ""
+                var headBlockId = ""
+                var headBlockNumber = ""
                 for res in response.first! {
                     if res.key == "head_block_id"{
-                        head_block_id = String(describing: res.value)
+                        headBlockId = String(describing: res.value)
                     } else if res.key == "head_block_number"{
-                        head_block_number = String(describing: res.value)
+                        headBlockNumber = String(describing: res.value)
                     }
                 }
-                return (block_id:head_block_id, block_num:head_block_number)
+                return (block_id:headBlockId, block_num:headBlockNumber)
             }
 
             return response.map { data in
@@ -181,14 +181,18 @@ struct SubscribeMarketRequest: JSONRPCKit.Request, RevisionRequest, JSONRPCRespo
     var response: RPCSResponse
 
     var parameters: Any? {
-        return [apiCategory.database, dataBaseCatogery.subscribe_to_market.rawValue, [CybexWebSocketService.shared.idGenerator.currentId + 1, ids[0], ids[1]]]
+        return [ApiCategory.database, DataBaseCatogery.subscribeToMarket.rawValue.snakeCased(), [CybexWebSocketService.shared.idGenerator.currentId + 1, ids[0], ids[1]]]
     }
 
     func revisionParameters(_ data: Any) -> Any {
         var data = JSON(data)
 
-        if var params = data["params"].array, let id = data["id"].int, let event = params[1].string, event == dataBaseCatogery.subscribe_to_market.rawValue, var subParams = params[2].array {
-            subParams[0] = JSON(id)
+        if var params = data["params"].array,
+            let marketId = data["id"].int,
+            let event = params[1].string,
+            event == DataBaseCatogery.subscribeToMarket.rawValue.snakeCased(),
+            var subParams = params[2].array {
+            subParams[0] = JSON(marketId)
             params[2] = JSON(subParams)
             data["params"] = JSON(params)
         }
@@ -201,7 +205,7 @@ struct SubscribeMarketRequest: JSONRPCKit.Request, RevisionRequest, JSONRPCRespo
     }
 }
 
-struct getLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
     var pair: Pair
     var response: RPCSResponse
 
@@ -210,7 +214,7 @@ struct getLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-        return [apiCategory.database, dataBaseCatogery.get_limit_orders.rawValue, [pair.base, pair.quote, 500]]
+        return [ApiCategory.database, DataBaseCatogery.getLimitOrders.rawValue.snakeCased(), [pair.base, pair.quote, 500]]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -229,7 +233,7 @@ struct getLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct getBalanceObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetBalanceObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
     var address: [String]
     var response: RPCSResponse
 
@@ -238,7 +242,7 @@ struct getBalanceObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-        return [apiCategory.database, dataBaseCatogery.get_balance_objects.rawValue, [address]]
+        return [ApiCategory.database, DataBaseCatogery.getBalanceObjects.rawValue.snakeCased(), [address]]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -256,15 +260,15 @@ struct getBalanceObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-struct getBlockRequest: JSONRPCKit.Request, JSONRPCResponse {
+struct GetBlockRequest: JSONRPCKit.Request, JSONRPCResponse {
     var response: RPCSResponse
 
-    var block_num: Int
+    var blockNum: Int
     var method: String {
         return "call"
     }
     var parameters: Any? {
-        return [apiCategory.database, dataBaseCatogery.get_block.rawValue, [block_num]]
+        return [ApiCategory.database, DataBaseCatogery.getBlock.rawValue.snakeCased(), [blockNum]]
     }
     func transferResponse(from resultObject: Any) throws -> Any {
         let data = JSON(resultObject).dictionaryValue
@@ -281,7 +285,7 @@ struct GetTickerRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-        return [apiCategory.database, dataBaseCatogery.get_ticker.rawValue, [baseName, quoteName]]
+        return [ApiCategory.database, DataBaseCatogery.getTicker.rawValue.snakeCased(), [baseName, quoteName]]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {

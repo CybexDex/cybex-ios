@@ -11,7 +11,7 @@ import EFQRCode
 
 class WithdrawView: UIView {
 
-    enum event_name: String {
+    enum EventName: String {
         case saveCode
         case copyAddress
         case resetAddress
@@ -27,15 +27,15 @@ class WithdrawView: UIView {
     @IBOutlet weak var resetAddress: UIButton!
 
     @IBAction func saveCode(_ sender: Any) {
-        self.next?.sendEventWith(event_name.saveCode.rawValue, userinfo: [:])
+        self.next?.sendEventWith(EventName.saveCode.rawValue, userinfo: [:])
     }
 
     @IBAction func copyAddress(_ sender: Any) {
-        self.next?.sendEventWith(event_name.copyAddress.rawValue, userinfo: [:])
+        self.next?.sendEventWith(EventName.copyAddress.rawValue, userinfo: [:])
     }
 
     @IBAction func resetAddress(_ sender: Any) {
-        self.next?.sendEventWith(event_name.resetAddress.rawValue, userinfo: [:])
+        self.next?.sendEventWith(EventName.resetAddress.rawValue, userinfo: [:])
     }
 
     var data: Any? {
@@ -54,7 +54,7 @@ class WithdrawView: UIView {
                 }
                 if let projectName = projectInfo.projectName {
                     self.projectInfoView.isHidden = false
-                    projectInfoView.project_name = projectName
+                    projectInfoView.projectName = projectName
                 }
                 if let address = projectInfo.contractAddress {
                     self.projectInfoView.isHidden = false
@@ -109,6 +109,7 @@ class WithdrawView: UIView {
     func loadFromXIB() {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
+
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
@@ -116,5 +117,4 @@ class WithdrawView: UIView {
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
-
 }

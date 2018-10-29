@@ -27,7 +27,7 @@ class Transfer: HandyJSON, NSCopying {
 
   func copy(with zone: NSZone? = nil) -> Any {
     let copy = Transfer.deserialize(from: self.toJSON())
-    return copy
+    return copy ?? Transfer()
   }
 
   static func empty() -> Transfer {
@@ -57,7 +57,7 @@ class FillOrder: HandyJSON, NSCopying {
 
   func copy(with zone: NSZone? = nil) -> Any {
     let copy = FillOrder.deserialize(from: self.toJSON())
-    return copy
+    return copy ?? FillOrder()
   }
 
   static func empty() -> FillOrder {

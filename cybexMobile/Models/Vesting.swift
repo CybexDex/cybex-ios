@@ -21,7 +21,7 @@ class LockUpAssetsMData: HandyJSON, NSCopying {
 
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = LockUpAssetsMData.deserialize(from: self.toJSON())
-        return copy
+        return copy ?? LockUpAssetsMData()
     }
 
     func mapping(mapper: HelpingMapper) {

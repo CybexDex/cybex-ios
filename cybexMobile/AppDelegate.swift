@@ -46,8 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NetworkActivityLogger.shared.startLogging()
         NetworkActivityLogger.shared.level = .error
-        if Defaults.hasKey(.frequency_type) {
-            UserManager.shared.frequency_type = UserManager.frequency_type(rawValue: Defaults[.frequency_type])!
+        if Defaults.hasKey(.frequencyType) {
+            UserManager.shared.frequency_type = UserManager.frequency_type(rawValue: Defaults[.frequencyType])!
         }
         changeEnvironmentAction()
 
