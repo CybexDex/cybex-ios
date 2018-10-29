@@ -11,7 +11,7 @@ import RxCocoa
 import SwiftTheme
 
 class NoticeBoardView: UIView {
-    enum event: String {
+    enum Event: String {
         case confirm
     }
     
@@ -32,7 +32,7 @@ class NoticeBoardView: UIView {
         self.confirm.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
             guard let `self` = self else { return }
             
-            self.next?.sendEventWith(event.confirm.rawValue, userinfo: ["data": self.data ?? []])
+            self.next?.sendEventWith(Event.confirm.rawValue, userinfo: ["data": self.data ?? []])
             
         }).disposed(by: disposeBag)
     }

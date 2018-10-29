@@ -10,7 +10,7 @@ import UIKit
 
 @IBDesignable
 class NormalCellView: UIView {
-    enum event_name: String {
+    enum EventName: String {
         case clickCellView
     }
     
@@ -225,9 +225,9 @@ extension NormalCellView {
         
         switch self.state {
         case NormalCellViewState.normal.rawValue:
-            self.sendEventWith(event_name.clickCellView.rawValue, userinfo: ["index": index])
+            self.sendEventWith(EventName.clickCellView.rawValue, userinfo: ["index": index])
         case NormalCellViewState.choose.rawValue :
-            self.sendEventWith(event_name.clickCellView.rawValue, userinfo: ["index": index])
+            self.sendEventWith(EventName.clickCellView.rawValue, userinfo: ["index": index])
         case NormalCellViewState.transform.rawValue:
             print("")
         default:break

@@ -11,7 +11,7 @@ import UIKit
 class OpenedOrdersHeaderView: UIView {
 
   @IBOutlet weak var totalValueL: UILabel!
-  @IBOutlet weak var totalValue_tip: UILabel!
+  @IBOutlet weak var totalValueTip: UILabel!
 
     @IBOutlet weak var sectionTitleView: LockupAssetsSectionView!
     var data: Any? {

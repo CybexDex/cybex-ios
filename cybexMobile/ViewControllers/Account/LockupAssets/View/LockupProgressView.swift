@@ -84,10 +84,10 @@ class LockupProgressView: UIView {
         } else {
             gradient.colors = colorArr
         }
-        let x = self.direction == 0 ? 1 : 0
-        let y = self.direction == 1 ? 1 : 0
+        let xLocation = self.direction == 0 ? 1 : 0
+        let yLocation = self.direction == 1 ? 1 : 0
         gradient.startPoint = CGPoint(x: 0, y: 0)
-        gradient.endPoint = CGPoint(x: x, y: y)
+        gradient.endPoint = CGPoint(x: xLocation, y: yLocation)
         gradient.opacity = 1.0
         gradient.frame = self.bounds
         return gradient

@@ -9,13 +9,20 @@
 import UIKit
 import TinyConstraints
 
+struct GrowContentViewShadowModel {
+    var color: UIColor = .clear
+    var offset: CGSize = CGSize(width: 0, height: 0)
+    var radius: CGFloat = 0
+    var opacity: Float = 1
+}
+
 protocol GrowContentViewDataSource {
     func numberOfSection(_ contentView: GrowContentView) -> NSInteger
     func numberOfRowWithSection(_ contentView: GrowContentView, section: NSInteger) -> NSInteger
     func marginOfContentView(_ contentView: GrowContentView) -> CGFloat
     func heightWithSectionHeader(_ contentView: GrowContentView, section: NSInteger) -> CGFloat
     func cornerRadiusOfSection(_ contentView: GrowContentView, section: NSInteger) -> CGFloat
-    func shadowSettingOfSection(_ contentView: GrowContentView, section: NSInteger) -> (color: UIColor, offset: CGSize, radius: CGFloat, opacity: Float)
+    func shadowSettingOfSection(_ contentView: GrowContentView, section: NSInteger) -> GrowContentViewShadowModel
     func viewOfIndexpath(_ contentView: GrowContentView, indexpath: NSIndexPath) -> (view: UIView, key: String)
 }
 

@@ -12,7 +12,7 @@ class MyOpenedOrdersView: UIView {
     @IBOutlet weak var sectionView: LockupAssetsSectionView!
     @IBOutlet weak var tableView: UITableView!
     
-    enum event: String {
+    enum Event: String {
         case cancelOrder
     }
     
@@ -100,7 +100,7 @@ extension MyOpenedOrdersView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: OpenedOrdersCell.self), for: indexPath) as? OpenedOrdersCell {
-            cell.Cell_Type = 0
+            cell.cellType = 0
             
             guard let pair = data as? Pair else { return cell }
             let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
@@ -127,7 +127,7 @@ extension MyOpenedOrdersView {
                         limitorder.sellPrice.quote.assetID == pair.base)
             }) ?? []
             let order = orderes[index]
-            self.next?.sendEventWith(event.cancelOrder.rawValue, userinfo: ["order": order])
+            self.next?.sendEventWith(Event.cancelOrder.rawValue, userinfo: ["order": order])
         }
     }
 }

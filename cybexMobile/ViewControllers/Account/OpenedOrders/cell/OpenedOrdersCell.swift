@@ -13,9 +13,9 @@ class OpenedOrdersCell: BaseTableViewCell {
 
   @IBOutlet weak var orderView: OpenedOrdersView!
 
-  var Cell_Type: Int = 1 {
+  var cellType: Int = 1 {
     didSet {
-      if Cell_Type != 1 {
+      if cellType != 1 {
         orderView.basePriceView.isHidden = false
         orderView.cancleL.isHidden       = false
         orderView.cancleImg.isHidden     = false
