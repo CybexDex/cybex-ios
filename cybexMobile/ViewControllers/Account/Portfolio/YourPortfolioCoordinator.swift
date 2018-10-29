@@ -28,7 +28,7 @@ class YourPortfolioCoordinator: AccountRootCoordinator {
     lazy var creator = YourPortfolioPropertyActionCreate()
 
     var store = Store<YourPortfolioState>(
-        reducer: YourPortfolioReducer,
+        reducer: gYourPortfolioReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )

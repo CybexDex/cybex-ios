@@ -25,7 +25,7 @@ class SettingDetailCoordinator: AccountRootCoordinator {
     lazy var creator = SettingDetailPropertyActionCreate()
 
     var store = Store<SettingDetailState>(
-        reducer: SettingDetailReducer,
+        reducer: gSettingDetailReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )
