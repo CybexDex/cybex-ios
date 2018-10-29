@@ -129,8 +129,8 @@ struct BucketMatrix {
     let firstOpenbaseAmount = flip ? Double(first.openQuote)! : Double(first.openBase)!
     let firstOpenquoteAmount = flip ? Double(first.openBase)! : Double(first.openQuote)!
 
-    let baseInfo = homebucket.base_info
-    let quoteInfo = homebucket.quote_info
+    let baseInfo = homebucket.baseInfo
+    let quoteInfo = homebucket.quoteInfo
 
     let basePrecision = pow(10, baseInfo.precision.double)
     let quotePrecision = pow(10, quoteInfo.precision.double)

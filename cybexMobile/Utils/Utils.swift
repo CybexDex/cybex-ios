@@ -135,13 +135,13 @@ func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
 
     guard let assetInfo = appData.assetInfo[asset] else { return 0 }
     if AssetConfiguration.order_name.contains(assetInfo.symbol.filterJade) {
-        if let data = appData.rmb_prices.filter({return $0.name == assetInfo.symbol.filterJade}).first {
+        if let data = appData.rmbPrices.filter({return $0.name == assetInfo.symbol.filterJade}).first {
             return data.rmb_price.toDouble() ?? 0
         }
         return 0
     }
 
-    let tickers = appData.ticker_data.value.filter({ (ticker) -> Bool in
+    let tickers = appData.tickerData.value.filter({ (ticker) -> Bool in
         if base == "" {
             return ticker.quote == asset
         } else {
@@ -468,7 +468,9 @@ func sortNameBasedonAddress(_ names: [AddressName]) -> [String] {
         let beansArrayForSection = newSectionsArray[item]
 
         let sortedBeansArrayForSection = collation.sortedArray(from: beansArrayForSection, collationStringSelector: #selector(getter: AddressName.name))
-        newSectionsArray[item] = sortedBeansArrayForSection as! [AddressName]
+        if let sortedBeans = sortedBeansArrayForSection as? [AddressName] {
+            newSectionsArray[item] = sortedBeans
+        }
     }
 
     let sortedNames = newSectionsArray.flatMap({ $0 }).map({ $0.name })

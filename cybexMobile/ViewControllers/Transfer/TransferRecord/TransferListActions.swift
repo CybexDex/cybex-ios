@@ -20,17 +20,17 @@ struct TransferListState: StateType {
 }
 
 struct TransferListPropertyState {
-  var data: BehaviorRelay<[TransferRecordViewModel]?> = BehaviorRelay(value: nil)
+    var data: BehaviorRelay<[TransferRecordViewModel]?> = BehaviorRelay(value: nil)
 }
 
 struct ReduceTansferRecordsAction: Action {
-  var data: [(TransferRecord, time: String)]
+    var data: [(TransferRecord, time: String)]
 }
 
 // MARK: - Action Creator
 class TransferListPropertyActionCreate: LoadingActionCreator {
     public typealias ActionCreator = (_ state: TransferListState, _ store: Store<TransferListState>) -> Action?
-
+    
     public typealias AsyncActionCreator = (
         _ state: TransferListState,
         _ store: Store <TransferListState>,

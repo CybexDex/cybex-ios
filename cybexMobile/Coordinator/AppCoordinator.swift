@@ -40,9 +40,9 @@ class AppCoordinator {
     var getToCybRelation: Decimal?
 
     var store = Store<AppState> (
-        reducer: AppReducer,
+        reducer: appReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: AppState {

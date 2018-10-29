@@ -12,7 +12,7 @@ import Kingfisher
 @IBDesignable
 class HomePairView: UIView {
 
-    enum event: String {
+    enum Event: String {
         case cellClicked
     }
 
@@ -28,7 +28,7 @@ class HomePairView: UIView {
 
     @IBOutlet weak var asset1: UILabel!
     @IBOutlet weak var rbmL: UILabel!
-    @IBOutlet weak var high_lowContain: UIView!
+    @IBOutlet weak var highLowContain: UIView!
 
     @IBOutlet weak var icon: UIImageView!
 
@@ -36,17 +36,17 @@ class HomePairView: UIView {
     var quote: String!
     var data: Any? {
         didSet {
-            guard let ticker = data as? Ticker, let base_info = appData.assetInfo[ticker.base], let quote_info = appData.assetInfo[ticker.quote] else { return }
+            guard let ticker = data as? Ticker, let baseInfo = appData.assetInfo[ticker.base], let quoteInfo = appData.assetInfo[ticker.quote] else { return }
 
-            self.asset2.text =  quote_info.symbol.filterJade
-            self.asset1.text = "/" + base_info.symbol.filterJade
+            self.asset2.text =  quoteInfo.symbol.filterJade
+            self.asset1.text = "/" + baseInfo.symbol.filterJade
             let url = AppConfiguration.SERVER_ICONS_BASE_URLString + ticker.quote.replacingOccurrences(of: ".", with: "_") + "_grey.png"
             self.icon.kf.setImage(with: URL(string: url))
             self.volume.text = ticker.baseVolume.suffixNumber(digitNum: 2)
-            self.price.text = ticker.latest.formatCurrency(digitNum: base_info.precision)
+            self.price.text = ticker.latest.formatCurrency(digitNum: baseInfo.precision)
             self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percentChange.formatCurrency(digitNum: 2) + "%"
 
-            self.high_lowContain.backgroundColor = ticker.incre.color()
+            self.highLowContain.backgroundColor = ticker.incre.color()
             if let change = ticker.percentChange.toDouble(), change > 1000 {
                 self.bulking.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
             } else {
@@ -77,7 +77,7 @@ class HomePairView: UIView {
         self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
             guard let `self` = self else { return }
 
-            self.next?.sendEventWith(event.cellClicked.rawValue, userinfo: ["index": self.store["index"] ?? []])
+            self.next?.sendEventWith(Event.cellClicked.rawValue, userinfo: ["index": self.store["index"] ?? []])
 
         }).disposed(by: disposeBag)
     }

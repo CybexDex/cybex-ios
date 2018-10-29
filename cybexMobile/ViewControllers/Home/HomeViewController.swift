@@ -14,10 +14,10 @@ import SwiftyJSON
 import TinyConstraints
 import Repeat
 
-enum view_type: Int {
+enum ViewType: Int {
     case homeContent    = 1
     case businessTitle
-    case Comprehensive
+    case comprehensive
 }
 
 class HomeViewController: BaseViewController, UINavigationControllerDelegate, UIScrollViewDelegate {
@@ -42,7 +42,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     var businessTitleView: BusinessTitleView?
 
     var base: String {
-        if self.VC_TYPE == 1 {
+        if self.vcType == 1 {
             if let titleView = self.contentView {
                 return AssetConfiguration.market_base_assets[titleView.currentBaseIndex]
             }
@@ -54,7 +54,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
             return ""
         }
     }
-    var VC_TYPE: Int = 1 {
+    var vcType: Int = 1 {
         didSet {
             switchContainerView()
         }
@@ -77,9 +77,9 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     func switchContainerView() {
         contentView?.removeFromSuperview()
         businessTitleView?.removeFromSuperview()
-        if self.VC_TYPE == view_type.homeContent.rawValue || self.VC_TYPE == view_type.Comprehensive.rawValue {
+        if self.vcType == ViewType.homeContent.rawValue || self.vcType == ViewType.comprehensive.rawValue {
             contentView = HomeContentView()
-            contentView?.viewType = view_type.init(rawValue: self.VC_TYPE) ?? view_type.homeContent
+            contentView?.viewType = ViewType.init(rawValue: self.vcType) ?? ViewType.homeContent
             self.view.addSubview(contentView!)
             contentView?.edgesToDevice(vc: self, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
 
@@ -96,14 +96,14 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     }
 
     override func configureObserveState() {
-        appData.ticker_data.asObservable().filter({[weak self] (s) -> Bool in
+        appData.tickerData.asObservable().filter({[weak self] (result) -> Bool in
             guard let `self` = self else { return false}
-            if self.VC_TYPE == view_type.Comprehensive.rawValue {
-                if s.count == AssetConfiguration.shared.asset_ids.count {
+            if self.vcType == ViewType.comprehensive.rawValue {
+                if result.count == AssetConfiguration.shared.asset_ids.count {
                     return true
                 }
             } else {
-                let tickers = s.filter { (ticker) -> Bool in
+                let tickers = result.filter { (ticker) -> Bool in
                     return ticker.base == self.base
                     }
 
@@ -129,10 +129,10 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     @objc func refreshTableView() {
         if self.isVisible {
             self.endLoading()
-            if self.VC_TYPE == view_type.homeContent.rawValue || self.VC_TYPE == view_type.Comprehensive.rawValue {
+            if self.vcType == ViewType.homeContent.rawValue || self.vcType == ViewType.comprehensive.rawValue {
                 self.contentView?.tableView.reloadData()
                 self.contentView?.tableView.isHidden = false
-                self.contentView?.viewType = view_type(rawValue: self.VC_TYPE) ?? .homeContent
+                self.contentView?.viewType = ViewType(rawValue: self.vcType) ?? .homeContent
             } else {
                 self.businessTitleView?.tableView.reloadData()
             }
@@ -142,12 +142,12 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
 extension HomeViewController {
     @objc func cellClicked(_ data: [String: Any]) {
-        if VC_TYPE == view_type.homeContent.rawValue {//首页
+        if vcType == ViewType.homeContent.rawValue {//首页
             if let index = data["index"] as? Int {
                 self.coordinator?.openMarket(index: index, currentBaseIndex: self.contentView!.currentBaseIndex)
             }
-        } else if VC_TYPE == view_type.Comprehensive.rawValue {
-            if let index = data["index"] as? Int, appData.ticker_data.value.count == AssetConfiguration.shared.asset_ids.count {
+        } else if vcType == ViewType.comprehensive.rawValue {
+            if let index = data["index"] as? Int, appData.tickerData.value.count == AssetConfiguration.shared.asset_ids.count {
                 let datas = appData.filterPopAssetsCurrency()
                 if datas.count > index {
                     let buckets = appData.filterPopAssetsCurrency()[index]

@@ -42,10 +42,15 @@ class MyHistoryCellView: UIView {
                 self.base.text  = "/" + result.base
                 self.kindL.text = "BUY"
                 self.typeView.backgroundColor = .turtleGreen
-                self.amount.text = getRealAmount(receiveInfo.id, amount: order.receives.amount).string(digits: receiveInfo.precision, roundingMode: .down) + " " + receiveInfo.symbol.filterJade
-                self.orderAmount.text = getRealAmount(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision, roundingMode: .down) + " " + payInfo.symbol.filterJade
                 
-                self.orderPrice.text = (getRealAmount(payInfo.id, amount: order.pays.amount) / getRealAmount(receiveInfo.id, amount: order.receives.amount)).string(digits: payInfo.precision, roundingMode: .down) + " " + payInfo.symbol.filterJade
+                let realAmount = getRealAmount(receiveInfo.id, amount: order.receives.amount)
+                let paysAmount = getRealAmount(payInfo.id, amount: order.pays.amount)
+                self.amount.text = realAmount.string(digits: receiveInfo.precision, roundingMode: .down) + " " + receiveInfo.symbol.filterJade
+                self.orderAmount.text = getRealAmount(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision, roundingMode: .down) +
+                    " " + payInfo.symbol.filterJade
+                
+                self.orderPrice.text = (paysAmount / realAmount).string(digits: payInfo.precision, roundingMode: .down) +
+                    " " +  payInfo.symbol.filterJade
                 
             } else {
                 // SELL   pay -> quote receive -> base
@@ -53,13 +58,14 @@ class MyHistoryCellView: UIView {
                 self.asset.text = result.quote
                 self.base.text  = "/" + result.base
                 self.typeView.backgroundColor = .reddish
-                self.amount.text = getRealAmount(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision, roundingMode: .down) +
-                    " " +
-                    payInfo.symbol.filterJade
-                self.orderAmount.text = getRealAmount(receiveInfo.id, amount: order.receives.amount).string(digits: receiveInfo.precision, roundingMode: .down) + " " +  receiveInfo.symbol.filterJade
-                self.orderPrice.text = (getRealAmount(receiveInfo.id, amount: order.receives.amount) / getRealAmount(payInfo.id, amount: order.pays.amount)).string(digits: receiveInfo.precision, roundingMode: .down) +
-                    " " +
-                    receiveInfo.symbol.filterJade
+                let realAmount = getRealAmount(payInfo.id, amount: order.pays.amount)
+                let receivesAmount = getRealAmount(receiveInfo.id, amount: order.receives.amount)
+                let payAmount = getRealAmount(payInfo.id, amount: order.pays.amount)
+                self.amount.text = realAmount.string(digits: payInfo.precision, roundingMode: .down) +
+                    " " + payInfo.symbol.filterJade
+                self.orderAmount.text = receivesAmount.string(digits: receiveInfo.precision, roundingMode: .down) + " " +  receiveInfo.symbol.filterJade
+                self.orderPrice.text = (receivesAmount / payAmount).string(digits: receiveInfo.precision, roundingMode: .down) +
+                    " " + receiveInfo.symbol.filterJade
             }
             self.time.text = orderInfo.time
         }

@@ -40,7 +40,7 @@ class RechargeCoordinator: NavCoordinator {
     var store = Store(
         reducer: rechargeReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     override func register() {

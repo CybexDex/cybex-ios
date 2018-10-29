@@ -95,12 +95,13 @@ extension PairListHorizantalView: UICollectionViewDataSource, UICollectionViewDe
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PairCardCell.self), for: indexPath) as! PairCardCell
-
-        let data = pairData[indexPath.item]
-        cell.setup(data, indexPath: indexPath)
-        cell.isSelected = indexPath.item == self.curIndex
-
-        return cell
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PairCardCell.self), for: indexPath) as? PairCardCell {
+            let data = pairData[indexPath.item]
+            cell.setup(data, indexPath: indexPath)
+            cell.isSelected = indexPath.item == self.curIndex
+            
+            return cell
+        }
+        return PairCardCell()
     }
 }

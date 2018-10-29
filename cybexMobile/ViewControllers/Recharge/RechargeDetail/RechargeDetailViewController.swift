@@ -59,11 +59,11 @@ class RechargeDetailViewController: BaseViewController {
     var isEOS: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let trade = self.trade, let trade_Info = appData.assetInfo[trade.id] {
-            self.title = trade_Info.symbol.filterJade + R.string.localizable.recharge_title.key.localized()
+        if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
+            self.title = tradeInfo.symbol.filterJade + R.string.localizable.recharge_title.key.localized()
             
             self.startLoading()
-            self.coordinator?.fetchWithDrawInfoData(trade_Info.symbol.filterJade)
+            self.coordinator?.fetchWithDrawInfoData(tradeInfo.symbol.filterJade)
         }
         
         setupUI()

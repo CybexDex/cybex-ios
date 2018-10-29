@@ -33,9 +33,9 @@ class TradeCoordinator: TradeRootCoordinator {
     lazy var creator = TradePropertyActionCreate()
 
     var store = Store<TradeState>(
-        reducer: TradeReducer,
+        reducer: tradeReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var homeVCTopConstaint: NSLayoutConstraint!
@@ -56,7 +56,7 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
         let vc = R.storyboard.main.marketViewController()!
         vc.curIndex = index
         vc.currentBaseIndex = currentBaseIndex
-        vc.rechargeShowType = PairRechargeView.show_type.hidden.rawValue
+        vc.rechargeShowType = PairRechargeView.ShowType.hidden.rawValue
         let coordinator = MarketCoordinator(rootVC: self.rootVC)
         vc.coordinator = coordinator
         self.rootVC.pushViewController(vc, animated: true)
@@ -75,7 +75,7 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
         guard let tradeVC = self.rootVC.topViewController as? TradeViewController else { return }
 
         guard let vc = R.storyboard.main.homeViewController() else { return }
-        vc.VC_TYPE = view_type.businessTitle.rawValue
+        vc.vcType = ViewType.businessTitle.rawValue
 
         guard let homeView = vc.view else { return }
         let coordinator = HomeCoordinator(rootVC: self.rootVC)

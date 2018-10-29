@@ -25,9 +25,9 @@ protocol RecordChooseStateManagerProtocol {
 
 class RecordChooseCoordinator: NavCoordinator {
     var store = Store(
-        reducer: RecordChooseReducer,
+        reducer: recordChooseReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: RecordChooseState {
@@ -61,7 +61,7 @@ extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
 
     func fetchData(_ type: Int) {
         switch type {
-        case RecordChooseType.Asset.rawValue:
+        case RecordChooseType.asset.rawValue:
             let accountName = UserManager.shared.name.value ?? ""
             let expiration = Int(Date().timeIntervalSince1970 + 600)
             var paragram = ["op": ["accountName": accountName, "expiration": expiration], "signer": "" ] as [String: Any]
@@ -84,7 +84,7 @@ extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
                 }
             }
             break
-        case RecordChooseType.FoudType.rawValue:
+        case RecordChooseType.foudType.rawValue:
 
             self.store.dispatch(FetchDataAction(data: [R.string.localizable.openedAll.key.localized(),
                                                        R.string.localizable.recharge_deposit.key.localized(),

@@ -29,7 +29,7 @@ class MyHistoryCoordinator: TradeRootCoordinator {
     var store = Store<MyHistoryState>(
         reducer: myHistoryReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 

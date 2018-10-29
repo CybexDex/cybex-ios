@@ -23,14 +23,14 @@ protocol BusinessStateManagerProtocol {
         ) where S.StoreSubscriberStateType == SelectedState
     
     func switchPrice(_ price: String)
-    func adjustPrice(_ plus: Bool, price_pricision: Int)
+    func adjustPrice(_ plus: Bool, pricePricision: Int)
     
     func changeAmountAction(_ amount: String)
     
     func changePercent(_ percent: Double, isBuy: Bool, assetID: String, pricision: Int)
     func getBalance(_ assetID: String)
     
-    func getFee(_ focus_asset_id: String)
+    func getFee(_ focusAssetId: String)
     func resetState()
     
     func postLimitOrder(_ pair: Pair, isBuy: Bool, callback: @escaping (_ success: Bool) -> Void)
@@ -44,7 +44,7 @@ class BusinessCoordinator: AccountRootCoordinator {
     var store = Store<BusinessState>(
         reducer: businessReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 
@@ -92,8 +92,8 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
         self.store.dispatch(ChangePriceAction(price: price))
     }
     
-    func adjustPrice(_ plus: Bool, price_pricision: Int) {
-        self.store.dispatch(AdjustPriceAction(plus: plus, pricision: price_pricision))
+    func adjustPrice(_ plus: Bool, pricePricision: Int) {
+        self.store.dispatch(AdjustPriceAction(plus: plus, pricision: pricePricision))
     }
     
     func getFee(_ focusAssetId: String) {
@@ -179,11 +179,11 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
         
         let feeAmount = Int64(round(self.state.property.feeAmount.value.doubleValue * pow(10, feeInfo.precision.double)))
         
-        blockchainParams { (blockchain_params) in
-            if let jsonStr = BitShareCoordinator.getLimitOrder(blockchain_params.block_num,
-                                                               block_id: blockchain_params.block_id,
+        blockchainParams { (blockchainParams) in
+            if let jsonStr = BitShareCoordinator.getLimitOrder(blockchainParams.block_num,
+                                                               block_id: blockchainParams.block_id,
                                                                expiration: Date().timeIntervalSince1970 + 10 * 3600,
-                                                               chain_id: blockchain_params.chain_id,
+                                                               chain_id: blockchainParams.chain_id,
                                                                user_id: userid.getID,
                                                                order_expiration: Date().timeIntervalSince1970 + 3600 * 24 * 365,
                                                                asset_id: assetID.getID,

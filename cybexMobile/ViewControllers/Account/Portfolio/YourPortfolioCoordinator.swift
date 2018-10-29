@@ -30,7 +30,7 @@ class YourPortfolioCoordinator: AccountRootCoordinator {
     var store = Store<YourPortfolioState>(
         reducer: YourPortfolioReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
     override func register() {
         Broadcaster.register(YourPortfolioCoordinatorProtocol.self, observer: self)

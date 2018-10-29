@@ -11,16 +11,16 @@ import Foundation
 class NoticeBoardViewController: BaseViewController {
     var coordinator: RegisterCoordinatorProtocol?
     var password: String?
-
+    
     @IBOutlet weak var noticeView: NoticeBoardView!
-
+    
     override func viewDidLoad() {
         self.noticeView.data = password
     }
 }
 
 extension NoticeBoardViewController {
-  @objc func confirm(_ data: [String: Any]) {
-    self.coordinator?.dismiss()
-  }
+    @objc func confirm(_ data: [String: Any]) {
+        self.coordinator?.dismiss()
+    }
 }

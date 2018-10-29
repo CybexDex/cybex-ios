@@ -13,7 +13,7 @@ import NBLCommonModule
 protocol ETODetailCoordinatorProtocol {
     func openShare()
     func openETOCrowdVC()
-    func openWebWithUrl(_ sender: String, type: CybexWebViewController.web_type)
+    func openWebWithUrl(_ sender: String, type: CybexWebViewController.WebType)
 }
 
 protocol ETODetailStateManagerProtocol {
@@ -31,7 +31,7 @@ class ETODetailCoordinator: NavCoordinator {
     var store = Store(
         reducer: ETODetailReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: ETODetailState {
@@ -67,10 +67,10 @@ extension ETODetailCoordinator: ETODetailCoordinatorProtocol {
         self.rootVC.pushViewController(vc)
     }
 
-    func openWebWithUrl(_ sender: String, type: CybexWebViewController.web_type) {
+    func openWebWithUrl(_ sender: String, type: CybexWebViewController.WebType) {
         if let vc = R.storyboard.main.cybexWebViewController() {
             vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
-            vc.vc_type = type
+            vc.vcType = type
             vc.url = URL(string: sender)
             self.rootVC.pushViewController(vc, animated: true)
         }

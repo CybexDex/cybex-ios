@@ -31,7 +31,7 @@ class WithdrawAddressHomeCoordinator: AccountRootCoordinator {
     var store = Store<WithdrawAddressHomeState>(
         reducer: WithdrawAddressHomeReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     override func register() {

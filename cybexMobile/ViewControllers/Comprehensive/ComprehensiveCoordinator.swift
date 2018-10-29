@@ -40,7 +40,7 @@ class ComprehensiveCoordinator: ComprehensiveRootCoordinator {
     var store = Store(
         reducer: ComprehensiveReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: ComprehensiveState {
@@ -57,7 +57,7 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
     func openWebVCUrl(_ url: String) {
         if let vc = R.storyboard.main.cybexWebViewController() {
             vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
-            vc.vc_type = .homeBanner
+            vc.vcType = .homeBanner
             vc.url = URL(string: url)
             self.rootVC.pushViewController(vc, animated: true)
         }
@@ -81,7 +81,7 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
         }
         vc.curIndex = curIndex
         vc.currentBaseIndex = currentBaseIndex
-        vc.rechargeShowType = PairRechargeView.show_type.show.rawValue
+        vc.rechargeShowType = PairRechargeView.ShowType.show.rawValue
         let coordinator = MarketCoordinator(rootVC: self.rootVC)
         vc.coordinator = coordinator
         self.rootVC.pushViewController(vc, animated: true)
@@ -144,7 +144,7 @@ extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
     func setupChildrenVC(_ sender: ComprehensiveViewController) {
         if let homeVC = R.storyboard.main.homeViewController() {
             homeVC.coordinator = HomeCoordinator(rootVC: self.rootVC)
-            homeVC.VC_TYPE = view_type.Comprehensive.rawValue
+            homeVC.vcType = ViewType.comprehensive.rawValue
             sender.addChild(homeVC)
             sender.contentView.topGainersView.addSubview(homeVC.view)
             homeVC.contentView?.edges(to: sender.contentView.topGainersView)

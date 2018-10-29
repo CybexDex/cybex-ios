@@ -36,6 +36,7 @@ func defaultManager() -> Alamofire.SessionManager {
 
 struct ETOMGService {
     static let provider = MoyaProvider<ETOMGAPI>(callbackQueue: nil, manager: defaultManager(), plugins: [NetworkLoggerPlugin(verbose: true)], trackInflights: false)
+    
 
     static func request(
         target: ETOMGAPI,

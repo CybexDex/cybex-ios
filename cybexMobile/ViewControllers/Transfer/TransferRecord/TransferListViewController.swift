@@ -13,23 +13,23 @@ import ReSwift
 
 class TransferListViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
-
+    
     var coordinator: (TransferListCoordinatorProtocol & TransferListStateManagerProtocol)?
     var data: [TransferRecordViewModel]?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         UserManager.shared.fetchHistoryOfFillOrdersAndTransferRecords()
         self.startLoading()
     }
-
+    
     func setupUI() {
         self.title = R.string.localizable.transfer_list_title.key.localized()
         let nibString = String(describing: TransferListCell.self)
         self.tableView.register(UINib(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
     }
-
+    
     override func configureObserveState() {
         UserManager.shared.transferRecords.asObservable().subscribe(onNext: { [weak self](data) in
             guard let `self` = self else { return }
@@ -41,7 +41,7 @@ class TransferListViewController: BaseViewController {
                 self.view.showNoData(R.string.localizable.recode_nodata.key.localized(), icon: R.image.img_no_records.name)
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-
+        
         self.coordinator?.state.property.data.asObservable().subscribe(onNext: { [weak self](data) in
             guard let `self` = self else { return }
             self.endLoading()
@@ -60,25 +60,27 @@ class TransferListViewController: BaseViewController {
 }
 
 extension TransferListViewController: UITableViewDataSource, UITableViewDelegate {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let data = self.data {
             return data.count
         }
         return 0
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellString = String(describing: TransferListCell.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellString, for: indexPath) as! TransferListCell
-        cell.setup(self.data![indexPath.row], indexPath: indexPath)
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellString, for: indexPath) as? TransferListCell {
+            cell.setup(self.data![indexPath.row], indexPath: indexPath)
+            return cell
+        }
+        return TransferListCell()
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let data = self.data {
             self.coordinator?.openTransferDetail(data[indexPath.row])
         }
     }
-
+    
 }

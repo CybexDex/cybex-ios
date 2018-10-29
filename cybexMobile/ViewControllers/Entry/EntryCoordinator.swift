@@ -26,9 +26,9 @@ class EntryCoordinator: EntryRootCoordinator {
     lazy var creator = EntryPropertyActionCreate()
 
     var store = Store<EntryState>(
-        reducer: EntryReducer,
+        reducer: entryReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 

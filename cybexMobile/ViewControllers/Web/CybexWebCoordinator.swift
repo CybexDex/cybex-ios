@@ -21,9 +21,9 @@ protocol CybexWebStateManagerProtocol {
 
 class CybexWebCoordinator: AccountRootCoordinator {
     var store = Store(
-        reducer: CybexWebReducer,
+        reducer: cybexWebReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: CybexWebState {

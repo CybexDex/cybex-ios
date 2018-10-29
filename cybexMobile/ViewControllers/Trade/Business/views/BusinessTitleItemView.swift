@@ -9,7 +9,7 @@
 import UIKit
 
 class BusinessTitleItemView: UIView {
-    enum event: String {
+    enum Event: String {
         case cellClicked
     }
 
@@ -20,8 +20,8 @@ class BusinessTitleItemView: UIView {
 
     var data: Any? {
         didSet {
-            guard let ticker = data as? Ticker, let base_info = appData.assetInfo[ticker.base], let quote_info = appData.assetInfo[ticker.quote] else { return }
-            self.paris.text = quote_info.symbol.filterJade + "/" + base_info.symbol.filterJade
+            guard let ticker = data as? Ticker, let baseInfo = appData.assetInfo[ticker.base], let quoteInfo = appData.assetInfo[ticker.quote] else { return }
+            self.paris.text = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade
             if ticker.latest == "0" {
                 self.total.text = "-"
                 self.change.text = "-"
@@ -44,7 +44,7 @@ class BusinessTitleItemView: UIView {
         self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
             guard let `self` = self else { return }
             if let ticker = self.data as? Ticker {
-                self.next?.sendEventWith(event.cellClicked.rawValue, userinfo: ["info": Pair(base: ticker.base, quote: ticker.quote), "index": self.selectedIndex ?? 0])
+                self.next?.sendEventWith(Event.cellClicked.rawValue, userinfo: ["info": Pair(base: ticker.base, quote: ticker.quote), "index": self.selectedIndex ?? 0])
             }
         }).disposed(by: disposeBag)
     }
