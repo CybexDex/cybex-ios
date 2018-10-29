@@ -12,7 +12,7 @@ import SwifterSwift
 @IBDesignable
 class AnnounceScrollView: CybexBaseView {
     enum Event: String {
-        case AnnounceScrollViewDidClicked
+        case announceScrollViewDidClicked
     }
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -111,6 +111,6 @@ class AnnounceScrollView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.AnnounceScrollViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self, "index": self.selectedIndex - 1])
+        self.next?.sendEventWith(Event.announceScrollViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self, "index": self.selectedIndex - 1])
     }
 }

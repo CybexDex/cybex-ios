@@ -306,9 +306,9 @@ extension TransferView: TitleTextFieldViewDelegate, TitleTextFieldViewDataSource
                                       isShowWhenEditing: false)]
         } else if titleTextFieldView == accountView {
             if accountValidStatus != .unValided && accountValidStatus != .validding {
-                accountView.loading_state = accountValidStatus == .validSuccessed ? .Success : .Fail
+                accountView.loading_state = accountValidStatus == .validSuccessed ? .success : .fail
             } else if accountValidStatus == .validding {
-                accountView.loading_state = .Loading
+                accountView.loading_state = .loading
             } else {
                 accountView.loading_state = .normal
             }

@@ -15,7 +15,7 @@ class ComprehensiveItemsView: CybexBaseView {
     var itemViews: [ComprehensiveItemView]!
 
     enum Event: String {
-        case ComprehensiveItemsViewDidClicked
+        case comprehensiveItemsViewDidClicked
     }
 
     override func setup() {
@@ -40,7 +40,7 @@ class ComprehensiveItemsView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.ComprehensiveItemsViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.comprehensiveItemsViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }
 

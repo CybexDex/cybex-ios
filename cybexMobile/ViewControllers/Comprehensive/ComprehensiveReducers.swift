@@ -9,7 +9,7 @@
 import UIKit
 import ReSwift
 
-func ComprehensiveReducer(action: Action, state: ComprehensiveState?) -> ComprehensiveState {
+func comprehensiveReducer(action: Action, state: ComprehensiveState?) -> ComprehensiveState {
     let state = state ?? ComprehensiveState()
 
     switch action {

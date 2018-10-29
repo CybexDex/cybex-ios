@@ -17,7 +17,7 @@ class AddressCellView: CybexBaseView {
     @IBOutlet weak var memo: UILabel!
 
     enum Event: String {
-        case AddressCellViewDidClicked
+        case addressCellViewDidClicked
     }
 
     override func setup() {
@@ -31,6 +31,6 @@ class AddressCellView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.AddressCellViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.addressCellViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }

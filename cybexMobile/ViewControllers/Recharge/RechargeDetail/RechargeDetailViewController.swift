@@ -166,22 +166,22 @@ class RechargeDetailViewController: BaseViewController {
                         self.isTrueAddress = false
                         self.contentView.errorView.isHidden = false
                         self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key
-                        self.contentView.addressView.addressState = .Fail
+                        self.contentView.addressView.addressState = .fail
                         return
                     }
                     if let balance = self.balance, let balanceInfo = appData.assetInfo[balance.assetType] {
                         let assetName = balanceInfo.symbol.filterJade
-                        self.contentView.addressView.addressState = .Loading
+                        self.contentView.addressView.addressState = .loading
                         RechargeDetailCoordinator.verifyAddress(assetName, address: address, callback: { (success) in
                             if success {
                                 self.isTrueAddress = true
-                                self.contentView.addressView.addressState = .Success
+                                self.contentView.addressView.addressState = .success
                                 self.contentView.errorView.isHidden = true
                                 if let amount = self.contentView.amountView.content.text, amount.count != 0, let amountDouble = amount.toDouble() {
                                     self.checkAmountIsAvailable(amountDouble)
                                 }
                             } else {
-                                self.contentView.addressView.addressState = .Fail
+                                self.contentView.addressView.addressState = .fail
                                 self.isTrueAddress = false
                                 self.contentView.errorView.isHidden = false
                                 self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key
@@ -206,7 +206,7 @@ class RechargeDetailViewController: BaseViewController {
         self.coordinator?.state.property.withdrawAddress.asObservable().subscribe(onNext: { [weak self](address) in
             guard let `self` = self, let address = address else { return }
             self.contentView.addressView.content.text = address.address
-            self.contentView.addressView.addressState = .Success
+            self.contentView.addressView.addressState = .success
             self.contentView.memoView.content.text = address.memo
             self.isTrueAddress = true
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -332,7 +332,7 @@ extension RechargeDetailViewController {
     
     func withDrawAction() {
         self.view.endEditing(true)
-        if self.contentView.addressView.addressState != .Success {
+        if self.contentView.addressView.addressState != .success {
             return
         }
         if self.contentView.withdraw.isEnable, let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {

@@ -13,15 +13,15 @@ import TinyConstraints
 @IBDesignable
 class ETOHomeView: CybexBaseView {
     enum Event: String {
-        case ETOHomeViewDidClicked
-        case ChangeNavigationBarEvent
+        case eTOHomeViewDidClicked
+        case changeNavigationBarEvent
     }
 
     var tableViewHeaderViewHeight: CGFloat {
         return 191
     }
 
-    static let section_height: CGFloat = 40
+    static let sectionHeight: CGFloat = 40
     @IBOutlet weak var tableView: UITableView!
     var pageView: ETOHomeBannerView!
 
@@ -39,8 +39,8 @@ class ETOHomeView: CybexBaseView {
 
     func setupUI() {
         clearBgColor()
-        let cell_name = R.nib.etoProjectCell.name
-        tableView.register(UINib.init(nibName: cell_name, bundle: nil), forCellReuseIdentifier: cell_name)
+        let cellName = R.nib.etoProjectCell.name
+        tableView.register(UINib.init(nibName: cellName, bundle: nil), forCellReuseIdentifier: cellName)
         createFSPagerView()
     }
 
@@ -54,12 +54,12 @@ class ETOHomeView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.ETOHomeViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.eTOHomeViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 
     func createSectionHeight() -> UIView {
-        let sectionView = UIView(frame: CGRect(x: 0, y: 0, width: self.width, height: ETOHomeView.section_height))
-        let label = UILabel(frame: CGRect(x: 12, y: 0, width: self.width - 24, height: ETOHomeView.section_height))
+        let sectionView = UIView(frame: CGRect(x: 0, y: 0, width: self.width, height: ETOHomeView.sectionHeight))
+        let label = UILabel(frame: CGRect(x: 12, y: 0, width: self.width - 24, height: ETOHomeView.sectionHeight))
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .steel
         label.locali = R.string.localizable.hot_project.key
@@ -78,12 +78,14 @@ extension ETOHomeView: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.etoProjectCell.name, for: indexPath) as! ETOProjectCell
-        cell.prepareForReuse()
-        if let datas = self.data as? [ETOProjectViewModel] {
-            cell.setup(datas[indexPath.row])
+        if let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.etoProjectCell.name, for: indexPath) as? ETOProjectCell {
+            cell.prepareForReuse()
+            if let datas = self.data as? [ETOProjectViewModel] {
+                cell.setup(datas[indexPath.row])
+            }
+            return cell
         }
-        return cell
+        return ETOProjectCell()
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

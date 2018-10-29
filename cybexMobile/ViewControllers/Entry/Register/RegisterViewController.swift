@@ -74,16 +74,21 @@ class RegisterViewController: BaseViewController {
         self.pinCodeActivityView.startAnimating()
         
         async {
-            let data = try! await(SimpleHTTPService.requestPinCode())
-            
-            main {
-                self.pinCodeActivityView.stopAnimating()
-                self.pinID = data.id
-                
-                if let parser = try? SVGParser.parse(text: data.data) {
-                    self.macawView.node = parser
+            do {
+                let data = try await(SimpleHTTPService.requestPinCode())
+                main {
+                    self.pinCodeActivityView.stopAnimating()
+                    self.pinID = data.id
+                    
+                    if let parser = try? SVGParser.parse(text: data.data) {
+                        self.macawView.node = parser
+                    }
                 }
             }
+            catch let error {
+                
+            }
+           
         }
     }
     
