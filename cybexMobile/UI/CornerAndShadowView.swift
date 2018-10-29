@@ -11,9 +11,9 @@ import SwiftTheme
 
 @IBDesignable
 class CornerAndShadowView: UIView {
-    
+
     @IBOutlet weak var cornerView: UIView!
-    
+
     @IBInspectable
     var newCornerRadius: CGFloat = 4 {
         didSet {
@@ -26,7 +26,7 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var newShadowRadius: CGFloat = 4 {
         didSet {
@@ -37,7 +37,7 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var newShadowColor: UIColor = UIColor.dark20 {
         didSet {
@@ -48,7 +48,7 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var newTheme1ShadowColor: UIColor = UIColor.dark20 {
         didSet {
@@ -59,7 +59,7 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var newTheme2ShadowColor: UIColor = UIColor.dark20 {
         didSet {
@@ -70,7 +70,7 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var newShadowOffset: CGSize = CGSize(width: 0, height: 0) {
         didSet {
@@ -81,7 +81,7 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var newShadowOpcity: Float = 1 {
         didSet {
@@ -92,7 +92,7 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var newSpread: CGFloat = 0 {
         didSet {
@@ -108,29 +108,29 @@ class CornerAndShadowView: UIView {
             }
         }
     }
-    
+
     func setup() {
         print("\(String(describing: self.cornerView))")
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
-        
+
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: CornerAndShadowView.self)
         let nibName = String(describing: CornerAndShadowView.self)
@@ -138,10 +138,10 @@ class CornerAndShadowView: UIView {
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
-        
+
         self.insertSubview(view, at: 0)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-    
+
 }

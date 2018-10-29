@@ -11,20 +11,20 @@ import UIKit
 class MyOpenedOrdersView: UIView {
     @IBOutlet weak var sectionView: LockupAssetsSectionView!
     @IBOutlet weak var tableView: UITableView!
-    
+
     enum Event: String {
         case cancelOrder
     }
-    
+
     var data: Any? {
         didSet {
             if let _ = data as? Pair {
-                
+
                 self.tableView.reloadData()
             }
         }
     }
-    
+
     fileprivate func setup() {
         let name = UINib.init(nibName: String.init(describing: OpenedOrdersCell.self), bundle: nil)
         self.tableView.register(name, forCellReuseIdentifier: String.init(describing: OpenedOrdersCell.self))
@@ -32,39 +32,39 @@ class MyOpenedOrdersView: UIView {
         sectionView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key
         self.tableView.tableFooterView = UIView()
     }
-    
+
     override var intrinsicContentSize: CGSize {
         return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     fileprivate func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView!.bottom
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
@@ -89,7 +89,7 @@ extension MyOpenedOrdersView: UITableViewDelegate, UITableViewDataSource {
                 (limitorder.sellPrice.base.assetID == pair.quote &&
                     limitorder.sellPrice.quote.assetID == pair.base)
         }) ?? []
-        
+
         if orderes.count == 0 {
             self.showNoData(R.string.localizable.openedorder_nodata.key.localized())
         } else {
@@ -97,11 +97,11 @@ extension MyOpenedOrdersView: UITableViewDelegate, UITableViewDataSource {
         }
         return orderes.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: OpenedOrdersCell.self), for: indexPath) as? OpenedOrdersCell {
             cell.cellType = 0
-            
+
             guard let pair = data as? Pair else { return cell }
             let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
                 return (limitorder.sellPrice.base.assetID == pair.base &&

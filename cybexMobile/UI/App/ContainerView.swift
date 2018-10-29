@@ -30,10 +30,10 @@ class ContainerView: CornerAndShadowView {
 
     override func setup() {
         super.setup()
-        
+
         setupUI()
     }
-    
+
     func setupUI() {
         if !isHiddenShadow {
             self.cornerRadius = 4

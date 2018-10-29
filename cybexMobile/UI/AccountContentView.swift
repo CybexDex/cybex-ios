@@ -9,17 +9,17 @@
 import Foundation
 
 class AccountContentView: UIView {
-    
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerView: AccountTableHeadView!
-    
+
     enum Event: String {
         case myproperty
         case accounttrade
         case ordervalue
         case lockupassets
     }
-    
+
     var data: Any? {
         didSet {
             if data is [AccountViewModel] {
@@ -27,7 +27,7 @@ class AccountContentView: UIView {
             }
         }
     }
-    
+
     func setup() {
         let nibString = R.nib.normalContentCell.name
         tableView.register(UINib.init(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
@@ -56,7 +56,7 @@ class AccountContentView: UIView {
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     override var intrinsicContentSize: CGSize {
         return CGSize(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
@@ -65,7 +65,7 @@ class AccountContentView: UIView {
         let view = self.subviews.last?.subviews.last
         return (view?.frame.origin.y)! + (view?.frame.size.height)!
     }
-    
+
     func loadXIB() {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib.init(nibName: String.init(describing: type(of: self)), bundle: bundle)

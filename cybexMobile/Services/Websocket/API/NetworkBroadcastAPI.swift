@@ -16,12 +16,12 @@ enum BroadcastCatogery: String {
 
 struct BroadcastTransactionRequest: JSONRPCKit.Request, JSONRPCResponse {
     var response: RPCSResponse
-    
+
     var jsonstr: String
     var method: String {
         return "call"
     }
-    
+
     var parameters: Any? {
         return [ApiCategory.networkBroadcast.rawValue.snakeCased(),
                 BroadcastCatogery.broadcastTransactionWithCallback.rawValue.snakeCased(),
@@ -29,7 +29,7 @@ struct BroadcastTransactionRequest: JSONRPCKit.Request, JSONRPCResponse {
                  JSON(parseJSON: jsonstr).dictionaryObject ?? [:]]
         ]
     }
-    
+
     func transferResponse(from resultObject: Any) throws -> Any {
         return resultObject
     }

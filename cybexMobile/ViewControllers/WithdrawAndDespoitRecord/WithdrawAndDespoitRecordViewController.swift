@@ -68,7 +68,7 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
 
-            case .loadMore(_):
+            case .loadMore:
                 self.coordinator?.switchPageState(.loading(reason: PageLoadReason.manualLoadMore))
 
             case .noMore:
@@ -79,7 +79,7 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
                 //                self.view.showNoData(<#title#>, icon: <#imageName#>)
                 break
 
-            case .normal(_):
+            case .normal:
                 //                self.view.hiddenNoData()
                 //
                 //                if reason == PageLoadReason.manualLoadMore {

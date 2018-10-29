@@ -9,9 +9,9 @@
 import UIKit
 
 class TransferAddressHomeTableViewCell: BaseTableViewCell {
-    
+
     @IBOutlet weak var foreView: AddressCellView!
-    
+
     override func setup(_ data: Any?) {
         if let data = data as? TransferAddress {
             foreView.updateUI(data, handler: AddressCellView.adapterTransferModelToAddressCellView(foreView))

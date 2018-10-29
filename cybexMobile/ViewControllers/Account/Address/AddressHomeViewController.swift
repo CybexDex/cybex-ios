@@ -12,25 +12,25 @@ import RxCocoa
 import ReSwift
 
 class AddressHomeViewController: BaseViewController {
-    
+
     @IBOutlet weak var tableView: UITableView!
-    
+
     var coordinator: (AddressHomeCoordinatorProtocol & AddressHomeStateManagerProtocol)?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupUI()
     }
-    
+
     func setupUI() {
         self.localizedText = R.string.localizable.address_manager.key.localizedContainer()
-        
+
         self.tableView.register(UINib(resource: R.nib.addressHomeTableViewCell), forCellReuseIdentifier: R.nib.addressHomeTableViewCell.name)
     }
-    
+
     override func configureObserveState() {
-        
+
     }
 }
 
@@ -38,7 +38,7 @@ extension AddressHomeViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.addressHomeTableViewCell.name, for: indexPath) as? AddressHomeTableViewCell else {
             return AddressHomeTableViewCell()

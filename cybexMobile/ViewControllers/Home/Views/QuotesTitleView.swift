@@ -14,12 +14,12 @@ class QuotesTitleView: UIView {
     enum Event: String {
         case tagDidSelected
     }
-    
+
     @IBOutlet weak var line: UIView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet var titleViews: [UIView]!
     @IBOutlet weak var stackViewLeft: NSLayoutConstraint!
-    
+
     @IBInspectable
     var viewType: Int = 0 {
         didSet {
@@ -40,7 +40,7 @@ class QuotesTitleView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var normalColor: UIColor = UIColor.steel {
         didSet {
@@ -53,32 +53,32 @@ class QuotesTitleView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var selectedColor: UIColor = UIColor.white {
         didSet {
-            
+
         }
     }
-    
+
     fileprivate func setup() {
         for titleView in titleViews {
             if titleView.tag == 3 {
                 titleView.isHidden = Defaults[.environment] == "test" ? true : false
             }
-            
+
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickViewAction))
             titleView.addGestureRecognizer(tapGesture)
         }
     }
-    
+
     @objc func clickViewAction(_ sender: UITapGestureRecognizer) {
         guard let titleView = sender.view else {
             return
         }
         changeToHighStatus(titleView.tag)
     }
-    
+
     func changeToHighStatus(_ index: Int, save: Bool = false) {
         for titleView in titleViews {
             if titleView.tag  == index {
@@ -116,39 +116,39 @@ class QuotesTitleView: UIView {
             }
         }
     }
-    
+
     override var intrinsicContentSize: CGSize {
         return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     fileprivate func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView!.bottom
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
@@ -156,10 +156,10 @@ class QuotesTitleView: UIView {
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
-        
+
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-    
+
 }

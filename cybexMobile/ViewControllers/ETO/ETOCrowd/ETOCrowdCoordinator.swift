@@ -250,7 +250,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
                 self.store.dispatch(FetchCurrentTokenCountAction(userModel: model))
             }
 
-        }, error: { (error) in
+        }, error: { (_) in
 
         }) { (_) in
 

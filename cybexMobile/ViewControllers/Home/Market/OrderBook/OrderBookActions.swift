@@ -29,10 +29,10 @@ struct OrderBook: Equatable {
     struct Order: Equatable {
         let price: String
         let volume: String
-        
+
         let volumePercent: Double
     }
-    
+
     let bids: [Order]
     let asks: [Order]
 }
@@ -45,26 +45,26 @@ struct FetchedLimitData: Action {
 // MARK: - Action Creator
 class OrderBookPropertyActionCreate: LoadingActionCreator {
     public typealias ActionCreator = (_ state: OrderBookState, _ store: Store<OrderBookState>) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         _ state: OrderBookState,
         _ store: Store <OrderBookState>,
         _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
         ) -> Void
-    
+
     func fetchLimitOrders(with pair: Pair, callback: CommonAnyCallback?) -> ActionCreator {
         return { state, store in
-            
+
             let request = GetLimitOrdersRequest(pair: pair) { response in
                 if let callback = callback {
                     callback(response)
                 }
             }
-            
+
             CybexWebSocketService.shared.send(request: request)
-            
+
             return nil
-            
+
         }
     }
 }

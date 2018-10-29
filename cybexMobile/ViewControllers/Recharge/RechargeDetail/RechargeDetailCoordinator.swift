@@ -25,7 +25,7 @@ protocol RechargeDetailStateManagerProtocol {
     ) where S.StoreSubscriberStateType == SelectedState
 
     func fetchWithDrawInfoData(_ assetName: String)
-    static func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool)->Void)
+    static func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool) -> Void)
     func getGatewayFee(_ assetId: String, amount: String, address: String, isEOS: Bool)
     func getObjects(assetId: String,
                     amount: String,
@@ -33,7 +33,7 @@ protocol RechargeDetailStateManagerProtocol {
                     feeId: String,
                     feeAmount: String,
                     isEOS: Bool,
-                    callback:@escaping (Any)->Void)
+                    callback:@escaping (Any) -> Void)
     func getFinalAmount(feeId: String, amount: Decimal, available: Double) -> (Decimal, String)
 
     func chooseOrAddAddress(_ sender: String)
@@ -175,7 +175,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         }
     }
 
-   class func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool)->Void) {
+   class func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool) -> Void) {
         async {
             let data = try? await(GraphQLManager.shared.verifyAddress(assetName: assetName, address: address))
             main {
@@ -188,7 +188,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         }
     }
 
-    func getObjects(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, isEOS: Bool, callback:@escaping (Any)->Void) {
+    func getObjects(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, isEOS: Bool, callback:@escaping (Any) -> Void) {
         getChainId { (id) in
             if let memoKey = self.state.property.memoKey.value {
                 let name = appData.assetInfo[assetId]?.symbol.filterJade
@@ -201,7 +201,6 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                             amount = amount * Double(truncating: value as NSNumber)
 
                             let feeAmout = feeAmount.toDouble()! * Double(truncating: pow(10, (appData.assetInfo[feeId]?.precision)!) as NSNumber)
-
 
                             let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
                                                                               block_id: infos.block_id,

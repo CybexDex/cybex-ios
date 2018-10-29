@@ -194,7 +194,6 @@ extension SimpleHTTPService {
             return promise
         }
 
-
         Alamofire.request(encodedURLRequest).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
             guard let value = response.result.value else {
                 seal.fulfill((false, 0))

@@ -22,7 +22,7 @@ protocol ETODetailStateManagerProtocol {
     func switchPageState(_ state: PageState)
     func fetchData()
     func fetchUpState()
-    func checkInviteCode(code: String, callback:@escaping(Bool, String)->Void)
+    func checkInviteCode(code: String, callback:@escaping(Bool, String) -> Void)
     func updateETOProjectDetailAction()
     func fetchUserState()
 }
@@ -126,7 +126,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                     self.store.dispatch(FetchUserStateAction(data: model))
                 }
                 self.switchPageState(PageState.normal(reason: .initialRefresh))
-            }, error: { (error) in
+            }, error: { (_) in
             }) { (_) in
             }
         } else {
@@ -201,7 +201,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
         }
     }
 
-    func checkInviteCode(code: String, callback:@escaping(Bool, String)->Void) {
+    func checkInviteCode(code: String, callback:@escaping(Bool, String) -> Void) {
         guard let name = UserManager.shared.name.value, let projectModel = self.state.data.value?.projectModel else {
             callback(false, "")
             return
@@ -242,7 +242,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
                 }
             }
             self.switchPageState(PageState.normal(reason: .initialRefresh))
-        }, error: { (error) in
+        }, error: { (_) in
         }) { _ in
         }
 //        }

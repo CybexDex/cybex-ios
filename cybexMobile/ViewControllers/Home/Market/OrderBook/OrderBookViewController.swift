@@ -20,9 +20,9 @@ enum OrderbookType: Int {
 }
 
 class OrderBookViewController: BaseViewController {
-    
+
     var coordinator: (OrderBookCoordinatorProtocol & OrderBookStateManagerProtocol)?
-    
+
     var contentView: OrderBookContentView!
     var tradeView: TradeView!
     var VCType: Int = OrderbookType.contentView.rawValue
@@ -39,7 +39,7 @@ class OrderBookViewController: BaseViewController {
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -52,13 +52,13 @@ class OrderBookViewController: BaseViewController {
         } else {
             tradeView = TradeView(frame: self.view.bounds)
             self.view.addSubview(tradeView)
-            
+
             tradeView.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
             setupEvent()
         }
         setTopTitle()
     }
-    
+
     func setTopTitle() {
         guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else { return }
         if VCType == OrderbookType.tradeView.rawValue {
@@ -71,7 +71,7 @@ class OrderBookViewController: BaseViewController {
             self.contentView.sellVolume.text = R.string.localizable.orderbook_volume.key.localized() + "(" + quoteInfo.symbol.filterJade + ")"
         }
     }
-    
+
     func setupEvent() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
             guard let `self` = self else { return }
@@ -81,11 +81,11 @@ class OrderBookViewController: BaseViewController {
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
+
     override func configureObserveState() {
         self.coordinator!.state.property.data.asObservable().skip(1).distinctUntilChanged()
             .subscribe(onNext: {[weak self] (result) in
@@ -107,7 +107,7 @@ class OrderBookViewController: BaseViewController {
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
-    
+
     func showMarketPrice() {
         guard let pair = pair, let _ = AssetConfiguration.marketBaseAssets.index(of: pair.base) else { return }
         if let selectedIndex = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
@@ -115,15 +115,15 @@ class OrderBookViewController: BaseViewController {
         }) {
             let tickers = appData.filterQuoteAssetTicker(pair.base)
             let data = tickers[selectedIndex]
-            
+
             self.tradeView.amount.text = data.latest.tradePrice.price
             self.tradeView.amount.textColor = data.incre.color()
-            
+
             if data.latest == "0" {
                 self.tradeView.rmbPrice.text  = "≈¥"
                 return
             }
-            
+
             self.tradeView.rmbPrice.text = "≈¥" + getAssetRMBPrice(pair.quote, base: pair.base).string(digits: 2, roundingMode: .down)
         }
     }
@@ -138,12 +138,12 @@ extension OrderBookViewController: TradePair {
             self.pair = newValue
         }
     }
-    
+
     func refresh() {
         guard let pair = pair else { return }
         if self.tradeView != nil {
             //      self.coordinator?.resetData(pair)
-            
+
             showMarketPrice()
         }
         self.coordinator?.fetchData(pair)

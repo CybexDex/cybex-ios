@@ -31,26 +31,26 @@ struct FetchedFillOrderData: Action {
 // MARK: - Action Creator
 class TradeHistoryPropertyActionCreate: LoadingActionCreator {
     public typealias ActionCreator = (_ state: TradeHistoryState, _ store: Store<TradeHistoryState>) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         _ state: TradeHistoryState,
         _ store: Store <TradeHistoryState>,
         _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
         ) -> Void
-    
+
     func fetchFillOrders(with pair: Pair, callback: CommonAnyCallback?) -> ActionCreator {
         return { state, store in
-            
+
             let request = GetFillOrderHistoryRequest(pair: pair) { (response) in
                 if let callback = callback {
                     callback(response)
                 }
             }
-            
+
             CybexWebSocketService.shared.send(request: request)
-            
+
             return nil
-            
+
         }
     }
 }

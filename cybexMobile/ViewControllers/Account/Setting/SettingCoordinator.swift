@@ -22,7 +22,7 @@ protocol SettingStateManagerProtocol {
         _ subscriber: S, transform: ((Subscription<SettingState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
 
-    func changeEnveronment(_ callback:@escaping(Bool)->Void)
+    func changeEnveronment(_ callback:@escaping(Bool) -> Void)
 }
 
 class SettingCoordinator: AccountRootCoordinator {
@@ -69,7 +69,7 @@ extension SettingCoordinator: SettingStateManagerProtocol {
         store.subscribe(subscriber, transform: transform)
     }
 
-    func changeEnveronment(_ callback:@escaping(Bool)->Void) {
+    func changeEnveronment(_ callback:@escaping(Bool) -> Void) {
         var isTest = false
         if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
             Defaults[.environment] = ""

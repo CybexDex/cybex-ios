@@ -13,25 +13,25 @@ class NormalCellView: UIView {
     enum EventName: String {
         case clickCellView
     }
-    
+
     enum NormalCellViewState: Int {
         case normal = 0
         case choose
         case transform
     }
-    
+
     @IBOutlet weak var lineView: UIView!
     @IBOutlet weak var leftIcon: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var content: UILabel!
     @IBOutlet weak var rightIcon: UIImageView!
-    
+
     @IBOutlet weak var nameLeftConstraint: NSLayoutConstraint!
-    
+
     @IBOutlet weak var rightIconHeightConstraint: NSLayoutConstraint!
-    
+
     @IBOutlet weak var rightIconWidthConstraint: NSLayoutConstraint!
-    
+
     @IBInspectable
     var state: Int = NormalCellViewState.normal.rawValue {
         didSet {
@@ -47,7 +47,7 @@ class NormalCellView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var nameLocali: String? {
         didSet {
@@ -56,7 +56,7 @@ class NormalCellView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var contentLocali: String? {
         didSet {
@@ -68,10 +68,10 @@ class NormalCellView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var index: Int = 0
-    
+
     @IBInspectable
     var nameText: String? {
         didSet {
@@ -80,7 +80,7 @@ class NormalCellView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var nameTextOrigin: String? {
         didSet {
@@ -89,7 +89,7 @@ class NormalCellView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var contentText: String? {
         didSet {
@@ -101,7 +101,7 @@ class NormalCellView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var nameStyle: String? {
         didSet {
@@ -109,7 +109,7 @@ class NormalCellView: UIView {
             name.attributedText = text.localized().set(style: nameStyle ?? "")
         }
     }
-    
+
     @IBInspectable
     var contentStyle: String? {
         didSet {
@@ -117,7 +117,7 @@ class NormalCellView: UIView {
             content.attributedText = text.localized().set(style: contentStyle ?? "")
         }
     }
-    
+
     @IBInspectable
     var leftIconImg: UIImage? {
         didSet {
@@ -131,7 +131,7 @@ class NormalCellView: UIView {
             //            }
         }
     }
-    
+
     @IBInspectable
     var rightIconName: String? {
         didSet {
@@ -145,66 +145,66 @@ class NormalCellView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var isShowLineView: Bool = true {
         didSet {
             self.lineView.isHidden = !isShowLineView
         }
     }
-    
+
     @IBInspectable
     var isEnable: Bool = true {
         didSet {
             self.isUserInteractionEnabled = isEnable
         }
     }
-    
+
     var data: Any? {
         didSet {
-            
+
         }
     }
-    
+
     func setup() {
         self.state = NormalCellViewState.normal.rawValue
         let tap = UITapGestureRecognizer(target: self, action: #selector(clickCellView))
         self.addGestureRecognizer(tap)
-        
+
     }
-    
+
     override var intrinsicContentSize: CGSize {
         return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView!.bottom
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
@@ -212,17 +212,17 @@ class NormalCellView: UIView {
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
-        
+
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-    
+
 }
 
 extension NormalCellView {
     @objc func clickCellView() {
-        
+
         switch self.state {
         case NormalCellViewState.normal.rawValue:
             self.sendEventWith(EventName.clickCellView.rawValue, userinfo: ["index": index])

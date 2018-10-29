@@ -22,10 +22,10 @@ struct BusinessState: StateType {
 struct BusinessPropertyState {
     var price: BehaviorRelay<String> = BehaviorRelay(value: "")
     var amount: BehaviorRelay<String> = BehaviorRelay(value: "")
-    
+
     var feeAmount: BehaviorRelay<Decimal> = BehaviorRelay(value: Decimal(floatLiteral: 0))
     var feeID: BehaviorRelay<String> = BehaviorRelay(value: "")
-    
+
     var balance: BehaviorRelay<Decimal> = BehaviorRelay(value: Decimal(floatLiteral: 0))
 }
 
@@ -63,7 +63,7 @@ struct ResetTrade: Action {
 // MARK: - Action Creator
 class BusinessPropertyActionCreate: LoadingActionCreator {
     public typealias ActionCreator = (_ state: BusinessState, _ store: Store<BusinessState>) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         _ state: BusinessState,
         _ store: Store <BusinessState>,

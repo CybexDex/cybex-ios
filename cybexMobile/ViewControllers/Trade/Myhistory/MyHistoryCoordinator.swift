@@ -17,15 +17,15 @@ protocol MyHistoryStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<MyHistoryState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState
-    
+
     //  func filterFillOrder(_ pair:Pair) ->[FillOrder]
     func getOrderTime(_ blockNum: Int)
 }
 
 class MyHistoryCoordinator: TradeRootCoordinator {
-    
+
     lazy var creator = MyHistoryPropertyActionCreate()
-    
+
     var store = Store<MyHistoryState>(
         reducer: myHistoryReducer,
         state: nil,
@@ -34,23 +34,23 @@ class MyHistoryCoordinator: TradeRootCoordinator {
 }
 
 extension MyHistoryCoordinator: MyHistoryCoordinatorProtocol {
-    
+
 }
 
 extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
     var state: MyHistoryState {
         return store.state
     }
-    
+
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<MyHistoryState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
-    
+
     func getOrderTime(_ blockNum: Int) {
         let request = GetBlockRequest(response: { (results) in
-            
+
             print("results : \(results)")
         }, blockNum: blockNum)
         CybexWebSocketService.shared.send(request: request)

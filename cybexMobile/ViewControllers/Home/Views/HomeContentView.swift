@@ -123,7 +123,7 @@ extension HomeContentView: UITableViewDataSource, UITableViewDelegate {
             } else {
                 let markets = appData.filterQuoteAssetTicker(AssetConfiguration.marketBaseAssets[currentBaseIndex]).filter({ (ticker) -> Bool in
                     return ticker.baseVolume != "0"
-                    
+
                 })
                 let data = markets[indexPath.row]
                 cell.setup(data, indexPath: indexPath)

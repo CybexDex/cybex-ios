@@ -19,7 +19,7 @@ func transferListReducer(action: Action, state: TransferListState?) -> TransferL
 
 func transferListPropertyReducer(_ state: TransferListPropertyState?, action: Action) -> TransferListPropertyState {
     let state = state ?? TransferListPropertyState()
-    
+
     switch action {
     case let action as ReduceTansferRecordsAction :
         transferRecordsToViewModels(action.data) { (result) in
@@ -29,15 +29,15 @@ func transferListPropertyReducer(_ state: TransferListPropertyState?, action: Ac
     default:
         break
     }
-    
+
     return state
 }
 
-func transferRecordsToViewModels(_ sender: [(TransferRecord, time: String)], callback:@escaping([TransferRecordViewModel])->Void) {
+func transferRecordsToViewModels(_ sender: [(TransferRecord, time: String)], callback:@escaping([TransferRecordViewModel]) -> Void) {
     if sender.count == 0 {
         callback([])
     }
-    
+
     if let account = UserManager.shared.account.value {
         var result: [TransferRecordViewModel] = [TransferRecordViewModel]()
         for source: (TransferRecord, time: String) in sender {
@@ -54,7 +54,7 @@ func transferRecordsToViewModels(_ sender: [(TransferRecord, time: String)], cal
                                                                     fee: source.0.fee)
                     result.append(transferViewModel)
                     if result.count == sender.count {
-                        
+
                         callback(result.filter({ (transferResult) -> Bool in
                             if transferResult.isSend {
                                 return transferResult.to != "cybex-jadegateway"

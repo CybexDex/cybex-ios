@@ -19,13 +19,13 @@ struct TransferContext: RouteContext, HandyJSON {
 
 protocol TransferCoordinatorProtocol {
     func pushToRecordVC()
-    
+
     func showPicker()
-    
+
     func pop()
-    
+
     func openAddTransferAddress(_ sender: TransferAddress)
-    
+
     func reopenAction()
 }
 
@@ -34,51 +34,51 @@ protocol TransferStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<TransferState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState
-    
+
     //获取转账收款人信息
     func getTransferAccountInfo()
-    
+
     func setAccount(_ account: String)
-    
+
     func setAmount(_ amount: String, canFetchFee: Bool)
-    
+
     func setMemo(_ memo: String, canFetchFee: Bool)
-    
+
     func validAmount()
-    
+
     func validAccount()
-    
+
     func checkAmount(_ transferAmount: Double)
-    
-    func transfer(_ callback: @escaping (Any)->Void)
-    
+
+    func transfer(_ callback: @escaping (Any) -> Void)
+
     func getGatewayFee(_ assetId: String, amount: String, memo: String)
-    
+
     func chooseOrAddAddress()
-    
+
     func dispatchAccountAction(_ type: AccountValidStatus)
-    
+
 }
 
 class TransferCoordinator: NavCoordinator {
-    
+
     lazy var creator = TransferPropertyActionCreate()
-    
+
     var store = Store<TransferState>(
         reducer: transferReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )
-    
+
     override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
         let vc = R.storyboard.recode.transferViewController()!
         let coordinator = TransferCoordinator(rootVC: root)
         vc.coordinator = coordinator
         coordinator.store.dispatch(RouteContextAction(context: context))
-        
+
         return vc
     }
-    
+
     override func register() {
         Broadcaster.register(TransferCoordinatorProtocol.self, observer: self)
         Broadcaster.register(TransferStateManagerProtocol.self, observer: self)
@@ -91,23 +91,23 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         let coordinator = TransferListCoordinator(rootVC: self.rootVC)
         recordVC?.coordinator = coordinator
         self.rootVC.pushViewController(recordVC!, animated: true)
-        
+
     }
-    
+
     func showPicker() {
         let width = ModalSize.full
         let height = ModalSize.custom(size: 244)
         let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: UIScreen.main.bounds.height - 244))
         let customType = PresentationType.custom(width: width, height: height, center: center)
-        
+
         let presenter = Presentr(presentationType: customType)
         presenter.dismissOnTap = true
         presenter.keyboardTranslationType = .moveUp
-        
+
         let newNav = BaseNavigationController()
         let pickerCoordinator = PickerRootCoordinator(rootVC: newNav)
         self.rootVC.topViewController?.customPresentViewController(presenter, viewController: newNav, animated: true, completion: nil)
-        
+
         var items = [String]()
         let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
             return getRealAmountDouble(balance.assetType, amount: balance.balance) != 0
@@ -119,11 +119,11 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
                 }
             }
         }
-        
+
         if items.count == 0 {
             items.append(R.string.localizable.balance_nodata.key.localized())
         }
-        
+
         if let vc = R.storyboard.components.pickerViewController() {
             vc.items = items as AnyObject
             vc.selectedValue =  (0, 0)
@@ -140,11 +140,11 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
             newNav.pushViewController(vc, animated: true)
         }
     }
-    
+
     func pop() {
         self.rootVC.popViewController(animated: true, nil)
     }
-    
+
     func openAddAddress() {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
@@ -153,23 +153,23 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
-    
+
     func chooseAddress() {
         let width = ModalSize.full
         let height = ModalSize.custom(size: 244)
         let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: UIScreen.main.bounds.height - 244))
         let customType = PresentationType.custom(width: width, height: height, center: center)
-        
+
         let presenter = Presentr(presentationType: customType)
         presenter.dismissOnTap = true
         presenter.keyboardTranslationType = .moveUp
-        
+
         let newNav = BaseNavigationController()
         let pickerCoordinator = PickerRootCoordinator(rootVC: newNav)
         self.rootVC.topViewController?.customPresentViewController(presenter, viewController: newNav, animated: true, completion: nil)
-        
+
         let items = AddressManager.shared.getTransferAddressList()
-        
+
         if let vc = R.storyboard.components.pickerViewController() {
             vc.items = items.map({ $0.name }) as AnyObject
             vc.selectedValue =  (0, 0)
@@ -183,11 +183,11 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
                 self.getTransferAccountInfo()
             }
             vc.coordinator = coordinator
-            
+
             newNav.pushViewController(vc, animated: true)
         }
     }
-    
+
     func openAddTransferAddress(_ sender: TransferAddress) {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
@@ -196,7 +196,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
-    
+
     func reopenAction() {
         let transferVC = R.storyboard.recode.transferViewController()!
         let coordinator = TransferCoordinator(rootVC: self.rootVC)
@@ -206,11 +206,11 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
 }
 
 extension TransferCoordinator: TransferStateManagerProtocol {
-    
+
     func dispatchAccountAction(_ type: AccountValidStatus) {
         self.store.dispatch(ValidAccountAction(status: type))
     }
-    
+
     func transfer(_ callback: @escaping (Any) -> Void) {
         getChainId { (id) in
             guard let balance = self.state.balance.value else {
@@ -228,13 +228,13 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                     if var amount = amount.toDouble(), let assetInfo = appData.assetInfo[balance.assetType], let feeInfo = appData.assetInfo[fee.assetId] {
                         let value = pow(10, assetInfo.precision)
                         amount = amount * Double(truncating: value as NSNumber)
-                        
+
                         guard let feeAmountDouble = fee.amount.toDouble(), let fromAccount = UserManager.shared.account.value, let toAccount = self.state.toAccount.value else {
                             return
                         }
-                        
+
                         let feeAmout = feeAmountDouble * Double(truncating: pow(10, feeInfo.precision) as NSNumber)
-                        
+
                         let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
                                                                           block_id: infos.block_id,
                                                                           expiration: Date().timeIntervalSince1970 + 10 * 3600,
@@ -249,7 +249,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                                                                           memo: self.state.memo.value,
                                                                           from_memo_key: fromAccount.memoKey,
                                                                           to_memo_key: toAccount.memoKey)
-                        
+
                         let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
                             main {
                                 callback(data)
@@ -262,7 +262,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
             CybexWebSocketService.shared.send(request: requeset)
         }
     }
-    
+
     func validAccount() {
         if !self.state.account.value.isEmpty {
             if let vc = self.rootVC.topViewController as? TransferViewController {
@@ -279,7 +279,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
             }).cauterize()
         }
     }
-    
+
     func setAccount(_ account: String) {
         if !self.state.account.value.isEmpty, self.state.account.value != account {
             self.store.dispatch(ValidAccountAction(status: .unValided))
@@ -287,26 +287,26 @@ extension TransferCoordinator: TransferStateManagerProtocol {
         self.state.account.accept(account)
         validAccount()
     }
-    
+
     func setAmount(_ amount: String, canFetchFee: Bool) {
         self.state.amount.accept(amount)
         if canFetchFee {
             validAmount()
         }
     }
-    
+
     func setMemo(_ memo: String, canFetchFee: Bool) {
         self.state.memo.accept(memo)
         if canFetchFee {
             validAmount()
         }
     }
-    
+
     func validAmount() {
         let balance = self.state.balance.value
         getGatewayFee(balance?.assetType ?? "", amount: self.state.amount.value, memo: self.state.memo.value)
     }
-    
+
     func getTransferAccountInfo() {
         if self.state.accountValid.value == .validSuccessed {
             let requeset = GetFullAccountsRequest(name: self.state.account.value) { (response) in
@@ -317,7 +317,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
             CybexWebSocketService.shared.send(request: requeset)
         }
     }
-    
+
     func getGatewayFee(_ assetId: String, amount: String, memo: String) {
         if var amount = amount.toDouble() {
             let value = assetId.isEmpty ? 1 : pow(10, (appData.assetInfo[assetId]?.precision)!)
@@ -337,7 +337,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                                                                               to_memo_key: toMemoKey) {
                 calculateFee(operationString, focusAssetId: assetId, operationID: .transfer) { (success, amount, feeId) in
                     let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
-                    
+
                     self.store.dispatch(SetFeeAction(fee: Fee.deserialize(from: dictionary)!))
                     if success {
                         if var transferAmount = self.state.amount.value.toDouble() {
@@ -357,7 +357,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
             }
         }
     }
-    
+
     func checkAmount(_ transferAmount: Double) {
         if let balance = self.state.balance.value, let totalAmount = balance.balance.toDouble() {
             var feeAmount: Double = 0
@@ -377,17 +377,17 @@ extension TransferCoordinator: TransferStateManagerProtocol {
             self.store.dispatch(ValidAmountAction(isValid: true))
         }
     }
-    
+
     var state: TransferState {
         return store.state
     }
-    
+
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<TransferState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
-    
+
     func chooseOrAddAddress() {
         if AddressManager.shared.getTransferAddressList().count == 0 {
             self.openAddAddress()
@@ -395,5 +395,5 @@ extension TransferCoordinator: TransferStateManagerProtocol {
             self.chooseAddress()
         }
     }
-    
+
 }

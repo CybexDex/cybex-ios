@@ -23,7 +23,7 @@ struct TransferDetailPropertyState {
 // MARK: - Action Creator
 class TransferDetailPropertyActionCreate: LoadingActionCreator {
     public typealias ActionCreator = (_ state: TransferDetailState, _ store: Store<TransferDetailState>) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         _ state: TransferDetailState,
         _ store: Store <TransferDetailState>,
