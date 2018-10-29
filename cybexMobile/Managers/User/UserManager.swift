@@ -360,7 +360,6 @@ extension UserManager {
             self.limitOrder.accept(data.limitOrder)
         }
     }
-
 }
 
 class UserManager {

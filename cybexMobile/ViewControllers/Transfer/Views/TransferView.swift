@@ -211,8 +211,11 @@ extension TransferView: GrowContentViewDataSource {
         return 4.0
     }
 
-    func shadowSettingOfSection(_ contentView: GrowContentView, section: NSInteger) -> (color: UIColor, offset: CGSize, radius: CGFloat, opacity: Float) {
-        return (ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20, CGSize(width: 0, height: 4), 4, 0.2)
+    func shadowSettingOfSection(_ contentView: GrowContentView, section: NSInteger) -> GrowContentViewShadowModel {
+        return GrowContentViewShadowModel(color: ThemeManager.currentThemeIndex == 0 ? UIColor.black10 : UIColor.steel20,
+                                          offset: CGSize(width: 0, height: 4),
+                                          radius: 4,
+                                          opacity: 0.2)
     }
 
     func viewOfIndexpath(_ contentView: GrowContentView, indexpath: NSIndexPath) -> (view: UIView, key: String) {
