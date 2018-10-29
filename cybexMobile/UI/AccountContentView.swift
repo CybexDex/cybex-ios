@@ -33,24 +33,24 @@ class AccountContentView: UIView {
         tableView.register(UINib.init(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
         updateHeight()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadXIB()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXIB()
         setup()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     private func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
@@ -60,7 +60,7 @@ class AccountContentView: UIView {
     override var intrinsicContentSize: CGSize {
         return CGSize(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let view = self.subviews.last?.subviews.last
         return (view?.frame.origin.y)! + (view?.frame.size.height)!
@@ -85,7 +85,7 @@ extension AccountContentView: UITableViewDelegate, UITableViewDataSource {
         }
         return 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: NormalContentCell.self), for: indexPath) as? NormalContentCell {
             if let data = data as? [AccountViewModel] {
@@ -95,11 +95,11 @@ extension AccountContentView: UITableViewDelegate, UITableViewDataSource {
         }
         return NormalContentCell()
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 54
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
@@ -112,6 +112,6 @@ extension AccountContentView: UITableViewDelegate, UITableViewDataSource {
         default:
             self.sendEventWith(Event.lockupassets.rawValue, userinfo: [:])
         }
-        
+
     }
 }

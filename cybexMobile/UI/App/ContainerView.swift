@@ -21,13 +21,13 @@ class ContainerView: CornerAndShadowView {
             }
         }
     }
-    
+
     override var backgroundColor: UIColor? {
         didSet {
             cornerView.backgroundColor = backgroundColor
         }
     }
-    
+
     override func setup() {
         super.setup()
         
