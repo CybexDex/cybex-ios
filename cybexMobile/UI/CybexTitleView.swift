@@ -50,23 +50,23 @@ class CybexTitleView: UIView {
         view.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white4 : UIColor.steel11
         self.addSubview(view)
         if let data = data {
-            let btn_width: CGFloat = (self.frame.width - CGFloat(data.count - 1) * space) / CGFloat(data.count)
+            let btnWidth: CGFloat = (self.frame.width - CGFloat(data.count - 1) * space) / CGFloat(data.count)
             
-            for i in 0...data.count - 1 {
-                let btn = UIButton(frame: CGRect(x: CGFloat(i) * (btn_width + space), y: 0, width: btn_width, height: self.height-1))
-                btn.locali = data[i]
+            for index in 0...data.count - 1 {
+                let btn = UIButton(frame: CGRect(x: CGFloat(index) * (btnWidth + space), y: 0, width: btnWidth, height: self.height-1))
+                btn.locali = data[index]
                 btn.setTitleColor(.steel, for: .normal)
                 btn.setTitleColor(.pastelOrange, for: .selected)
                 btn.titleLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
                 btn.addTarget(self, action: #selector(selectedBtn(_:)), for: .touchUpInside)
-                btn.tag = i
+                btn.tag = index
                 self.addSubview(btn)
-                if i == 0 {
+                if index == 0 {
                     btn.isSelected = true
                 }
                 buttons.append(btn)
             }
-            self.lineView.center = CGPoint(x: btn_width * 0.5, y: self.height - 0.5)
+            self.lineView.center = CGPoint(x: btnWidth * 0.5, y: self.height - 0.5)
             self.addSubview(self.lineView)
         }
     }

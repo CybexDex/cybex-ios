@@ -18,16 +18,16 @@ class WithNoDataView: UIView {
 
     var noticeWord: String? {
         didSet {
-            if let notice_word = noticeWord {
-                notice.text = notice_word
+            if let noticeWord = noticeWord {
+                notice.text = noticeWord
             }
         }
     }
 
     var iconName: String? {
         didSet {
-            if let icon_name = iconName {
-                icon.image = UIImage.init(named: icon_name)
+            if let iconName = iconName {
+                icon.image = UIImage.init(named: iconName)
             }
         }
     }

@@ -105,9 +105,7 @@ extension PickerView: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         if items != nil {
             if let title = self.titleForRow(row, component: component) {
-                return NSAttributedString(string: title,
-                                          attributes: [NSAttributedString.Key.foregroundColor: ThemeManager.currentThemeIndex == 0 ? pickerView.theme1TintColor : pickerView.theme2TintColor,
-                                                       NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .medium)])
+                return NSAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor: ThemeManager.currentThemeIndex == 0 ? pickerView.theme1TintColor : pickerView.theme2TintColor, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .medium)])
             }
         }
         return nil
@@ -121,19 +119,19 @@ extension PickerView {
         if items is [String] {
             return 1
         }
-        if let items = items as? [[String]] {
-            return items.count
+        if let result = items as? [[String]] {
+            return result.count
         }
         if let items = self.items as? [Int: AnyObject] {
             if components == 0 {
                 var obj: AnyObject? = items[0]
                 while obj != nil {
                     components += 1
-                    if var obj = obj as? [Int: AnyObject] {
-                        obj = obj[0] as! [Int : AnyObject]
+                    if let result = obj as? [Int: AnyObject] {
+                        obj = result[0]
                     }
-                    if var obj = obj as? [String: AnyObject] {
-                        obj = obj[PickerData.items] as! [String : AnyObject]
+                    if let result = obj as? [String: AnyObject] {
+                        obj = result[PickerData.items]
                     }
                     if obj is [String] {
                         components += 1
@@ -158,23 +156,23 @@ extension PickerView {
             }
         }
         if let items = self.items as? [Int: [String: AnyObject]] {
-            var componentIndex: Int = 0
+            var componentCount: Int = 0
             var obj: AnyObject? = items as AnyObject?
-            if componentIndex < component {
-                while componentIndex < component && obj != nil {
-                    obj = (obj as! [Int: [String: AnyObject]])[picker.selectedRow(inComponent: componentIndex)] as AnyObject?
-                    if obj is [String: AnyObject] {
-                        obj = (obj as! [String: AnyObject])[PickerData.items]
+            if componentCount < component {
+                while componentCount < component && obj != nil {
+                    obj = items[picker.selectedRow(inComponent: componentCount)] as AnyObject?
+                    if let result = obj as? [String: AnyObject] {
+                        obj = result[PickerData.items]
                     }
-                    componentIndex += 1
+                    componentCount += 1
                 }
             }
-            if componentIndex == component {
-                if let obj = obj as? [String] {
-                    return obj.count
+            if componentCount == component {
+                if let result = obj is [String] {
+                    return result.count
                 }
-                if let obj = obj as? [Int: [String: AnyObject]] {
-                    return obj.keys.count
+                if let result = obj is [Int: [String: AnyObject]] {
+                    return result.keys.count
                 }
             }
         }
@@ -182,34 +180,36 @@ extension PickerView {
     }
     
     func titleForRow(_ row: Int, component: Int) -> String? {
-        if let items = items as? [String] {
-            return items[row]
+        if let result = items as? [String] {
+            return result[row]
         }
         if let items = self.items as? [[String]] {
             var items: [String] = items[component]
             return items[row]
         }
         if let items = self.items as? [Int: [String: AnyObject]] {
-            var componentIndex: Int = 0
+            var componentCount: Int = 0
             var obj: AnyObject? = items as AnyObject?
-            if componentIndex < component {
-                while componentIndex < component && obj != nil {
-                    obj = (obj as! [Int: [String: AnyObject]])[picker.selectedRow(inComponent: componentIndex)] as AnyObject?
-                    if obj is [String: AnyObject] {
-                        obj = (obj as! [String: AnyObject])["items"]
+            if componentCount < component {
+                while componentCount < component && obj != nil {
+                    obj = items[picker.selectedRow(inComponent: componentCount)] as AnyObject?
+                    if let result = obj as? [String: AnyObject] {
+                        obj = result["items"]
                     }
-                    componentIndex += 1
+                    componentCount += 1
                 }
             }
-            if componentIndex == component {
-                if obj is [String] {
-                    if row < (obj as! [String]).count {
-                        return (obj as! [String])[row]
+            if componentCount == component {
+                if let result = obj as? [String] {
+                    if row < result.count {
+                        return result[row]
                     }
-                } else if obj is [Int: [String: AnyObject]] {
-                    let d: [Int: [String: AnyObject]] = (obj as! [Int: [String: AnyObject]])
-                    let d1: [String: AnyObject] = d[row]! as [String: AnyObject]
-                    return d1[PickerData.key] as? String
+                }
+                else if let result = obj as? [Int: [String: AnyObject]] {
+                    let indexData: [Int: [String: AnyObject]] = result
+                    if let content: [String: AnyObject] = indexData[row] {
+                        return content[PickerData.key] as? String
+                    }
                 }
             }
         }
