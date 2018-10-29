@@ -23,7 +23,7 @@ class AccountPortfolioView: UIView {
         }
     }
     
-    enum event: String {
+    enum Event: String {
         case openPortfolio
     }
     fileprivate func setup() {
@@ -36,7 +36,7 @@ class AccountPortfolioView: UIView {
         
     }
     @objc func openPortfolio() {
-        openPortfolioView.next?.sendEventWith(event.openPortfolio.rawValue, userinfo: [:])
+        openPortfolioView.next?.sendEventWith(Event.openPortfolio.rawValue, userinfo: [:])
     }
     
     override var intrinsicContentSize: CGSize {
@@ -92,11 +92,14 @@ extension AccountPortfolioView: UICollectionViewDataSource, UICollectionViewDele
         let balances = data as? [PortfolioData] ?? []
         return balances.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String.init(describing: AccountPortfolioCell.self), for: indexPath) as! AccountPortfolioCell
-        let portfolios = data as? [PortfolioData] ?? []
-        
-        cell.setup(portfolios[indexPath.row])
-        return cell
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String.init(describing: AccountPortfolioCell.self), for: indexPath) as? AccountPortfolioCell {
+            let portfolios = data as? [PortfolioData] ?? []
+            
+            cell.setup(portfolios[indexPath.row])
+            return cell
+        }
+        return AccountPortfolioCell()
     }
 }

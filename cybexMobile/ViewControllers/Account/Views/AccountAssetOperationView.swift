@@ -21,14 +21,14 @@ class AccountAssetOperationView: UIView {
             lockupAssetsView.data = data
         }
     }
-    enum event: String {
+    enum Event: String {
         case openOpenedOrders
         case openLockupAssets
     }
     
     fileprivate func setup() {
-        openedOrdersView.view_type = 0
-        lockupAssetsView.view_type = 1
+        openedOrdersView.viewType = 0
+        lockupAssetsView.viewType = 1
         
         let openedGesture = UITapGestureRecognizer.init(target: self, action: #selector(openOpenedOrders))
         openedOrdersView.addGestureRecognizer(openedGesture)
@@ -38,10 +38,10 @@ class AccountAssetOperationView: UIView {
     }
     
     @objc func openOpenedOrders() {
-        openedOrdersView.next?.sendEventWith(event.openOpenedOrders.rawValue, userinfo: [:])
+        openedOrdersView.next?.sendEventWith(Event.openOpenedOrders.rawValue, userinfo: [:])
     }
     @objc func openLockupAssets() {
-        lockupAssetsView.next?.sendEventWith(event.openLockupAssets.rawValue, userinfo: [:])
+        lockupAssetsView.next?.sendEventWith(Event.openLockupAssets.rawValue, userinfo: [:])
     }
     
     override var intrinsicContentSize: CGSize {

@@ -26,7 +26,9 @@ class RechargeView: UIView {
     var trade: Trade? {
         didSet {
             if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
-                self.introduce.content.attributedText = Localize.currentLanguage() == "en" ? trade.enInfo.set(style: StyleNames.withdrawIntroduce.rawValue) : trade.cnInfo.set(style: StyleNames.withdrawIntroduce.rawValue)
+                self.introduce.content.attributedText = Localize.currentLanguage() == "en" ?
+                    trade.enInfo.set(style: StyleNames.withdrawIntroduce.rawValue) :
+                    trade.cnInfo.set(style: StyleNames.withdrawIntroduce.rawValue)
 
                 updateViewWithAssetName(tradeInfo.id)
             }
@@ -56,8 +58,8 @@ class RechargeView: UIView {
     @IBOutlet weak var memoView: RechargeItemView!
 
     func updateView() {
-        if let balance = self.balance, let balance_info = appData.assetInfo[balance.assetType] {
-            avaliableView.content.text = getRealAmountDouble(balance.assetType, amount: balance.balance).string(digits: balance_info.precision) + " " + balance_info.symbol.filterJade
+        if let balance = self.balance, let balanceInfo = appData.assetInfo[balance.assetType] {
+            avaliableView.content.text = getRealAmountDouble(balance.assetType, amount: balance.balance).string(digits: balanceInfo.precision) + " " + balanceInfo.symbol.filterJade
         } else {
             if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
                 avaliableView.content.text = "--" + tradeInfo.symbol.filterJade

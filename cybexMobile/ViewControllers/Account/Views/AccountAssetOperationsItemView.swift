@@ -26,14 +26,14 @@ class AccountAssetOperationsItemView: UIView {
         self.subviews.last?.shadowOpacity = 1.0
     }
     
-    var view_type: Int = 0 {
+    var viewType: Int = 0 {
         didSet {
             changeViewType()
         }
     }
     
     func changeViewType() {
-        nameL.localizedText = view_type == 0 ? R.string.localizable.openedTitle.key.localizedContainer() : R.string.localizable.lockupAssetsTitle.key.localizedContainer()
+        nameL.localizedText = viewType == 0 ? R.string.localizable.openedTitle.key.localizedContainer() : R.string.localizable.lockupAssetsTitle.key.localizedContainer()
     }
     
     override var intrinsicContentSize: CGSize {
