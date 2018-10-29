@@ -16,17 +16,17 @@ class WithNoDataView: UIView {
 
     @IBOutlet weak var noticeContairner: NSLayoutConstraint!
 
-    var notice_word: String? {
+    var noticeWord: String? {
         didSet {
-            if let notice_word = notice_word {
+            if let notice_word = noticeWord {
                 notice.text = notice_word
             }
         }
     }
 
-    var icon_name: String? {
+    var iconName: String? {
         didSet {
-            if let icon_name = icon_name {
+            if let icon_name = iconName {
                 icon.image = UIImage.init(named: icon_name)
             }
         }

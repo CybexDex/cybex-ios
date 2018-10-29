@@ -97,7 +97,7 @@ extension UIViewController {
                 if update {
 
                     let contentView = StyleContentView(frame: .zero)
-                    ShowToastManager.shared.setUp(title: R.string.localizable.update_version.key.localized(), contentView: contentView, animationType: ShowToastManager.ShowAnimationType.small_big)
+                    ShowToastManager.shared.setUp(title: R.string.localizable.update_version.key.localized(), contentView: contentView, animationType: ShowToastManager.ShowAnimationType.smallBig)
                     ShowToastManager.shared.showAnimationInView(self.view)
 
                     let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"

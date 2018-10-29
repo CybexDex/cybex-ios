@@ -17,7 +17,7 @@ class ShareView: UIView {
             }
         }
     }
-
+    
     var contentColor: UIColor? = UIColor.white {
         didSet {
             if let contentView = contentView {
@@ -25,33 +25,33 @@ class ShareView: UIView {
             }
         }
     }
-
+    
     var title: String? {
         didSet {
-
+            
         }
     }
-
+    
     var shareModes: ShareModes = [.wechat, .timeLine, .qq, .sina]
-
+    
     var canTapClose = true
-
+    
     var needAnimation = false
-
+    
     var shareData: ShareData?
-
+    
     fileprivate var _maskView: UIView?
-
+    
     fileprivate var contentView: GridContentView?
-
+    
     convenience public init () {
         self.init(frame: CGRect.zero)
     }
-
+    
     func show() {
         self.showInView(UIApplication.shared.keyWindow!)
     }
-
+    
     func showInView(_ view: UIView) {
         self.frame = view.bounds
         setupUI()
@@ -60,7 +60,7 @@ class ShareView: UIView {
             self.contentView?.frame.origin.y = self.frame.size.height - (self.contentView?.frame.size.height)!
         }
     }
-
+    
     func close() {
         UIView.animate(withDuration: 0.3, animations: {
             self.contentView?.frame.origin.y = self.frame.size.height
@@ -78,7 +78,7 @@ class ShareView: UIView {
             }
         }
     }
-
+    
     func shareType() -> ShareType {
         if let data = shareData {
             if data.isKind(of: ShareWebData.self) {
@@ -89,17 +89,17 @@ class ShareView: UIView {
         }
         return ShareType.none
     }
-
+    
     func setupUI() {
         if _maskView == nil {
             _maskView = UIView(frame: self.bounds)
             _maskView?.backgroundColor = maskColor
             self.addSubview(_maskView!)
-
+            
             let tap = UITapGestureRecognizer(target: self, action: #selector(tapMaskView))
             _maskView?.addGestureRecognizer(tap)
         }
-
+        
         if contentView == nil {
             var rect = self.bounds
             rect.origin.y = self.bounds.size.height
@@ -112,11 +112,11 @@ class ShareView: UIView {
             self.addSubview(contentView!)
         }
     }
-
+    
     override func removeFromSuperview() {
         super.removeFromSuperview()
     }
-
+    
     func shareItemViews() -> [UIView] {
         var views: [UIView] = []
         if shareModes.contains(.wechat) {
@@ -133,41 +133,41 @@ class ShareView: UIView {
         }
         return views
     }
-
+    
     func viewWithImgName(_ name: String) -> UIImageView {
         let view = UIImageView.init()
         view.contentMode = .center
         view.image = UIImage.init(named: name)
         return view
     }
-
+    
     @objc fileprivate func tapMaskView() {
         if canTapClose {
             self.close()
         }
     }
-
+    
 }
 
 extension ShareView: GridContentViewDelegate, GridContentViewDataSource {
     func itemDidSelect(_ view: GridContentView, index: NSInteger) {
-
+        
     }
-
+    
     func itemsForView(_ view: GridContentView) -> [UIView] {
         return shareItemViews()
     }
-
+    
     func lineMaxItemNum(_ view: GridContentView) -> Int {
         return 4
     }
-
+    
     func edgeInsetsForView(_ view: GridContentView) -> UIEdgeInsets {
         return UIEdgeInsets(top: 30, left: 0, bottom: 30, right: 0)
     }
-
+    
     func lineHeightForView(_ view: GridContentView, lineNum: Int) -> CGFloat {
         return 120
     }
-
+    
 }

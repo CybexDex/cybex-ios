@@ -22,13 +22,13 @@ class AddressHomeTableViewCellViewView: UIView {
     func appendView() {
         let normalView = NormalCellView(frame: CGRect.zero)
         normalView.index = 0
-        normalView.name_locali = R.string.localizable.withdraw_address.key
+        normalView.nameLocali = R.string.localizable.withdraw_address.key
         normalView.height(54)
         sectionView.stackView.addArrangedSubview(normalView)
 
         let secondView = NormalCellView(frame: CGRect.zero)
         secondView.index = 1
-        secondView.name_locali = R.string.localizable.transfer_account_name.key
+        secondView.nameLocali = R.string.localizable.transfer_account_name.key
         secondView.isShowLineView = false
         sectionView.stackView.addArrangedSubview(secondView)
     }

@@ -266,7 +266,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     func validAccount() {
         if !self.state.account.value.isEmpty {
             if let vc = self.rootVC.topViewController as? TransferViewController {
-                vc.transferView.accountView.loading_state = .loading
+                vc.transferView.accountView.loadingState = .loading
             }
             UserManager.shared.checkUserName(self.state.account.value).done({[weak self] (exist) in
                 main {
