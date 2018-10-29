@@ -50,9 +50,9 @@ class RegisterCoordinator: EntryRootCoordinator {
   lazy var creator = RegisterPropertyActionCreate()
 
   var store = Store<RegisterState>(
-    reducer: RegisterReducer,
+    reducer: registerReducer,
     state: nil,
-    middleware: [TrackingMiddleware]
+    middleware: [trackingMiddleware]
   )
 }
 

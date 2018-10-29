@@ -40,7 +40,7 @@ class YourPortfolioHeadView: UIView {
             totalBalance.text = "0.00000"
             balanceRMB.text   = "≈¥0.00"
         } else {
-            totalBalance.text = (UserManager.shared.balance / appData.cyb_rmb_price).string(digits: 5, roundingMode: .down)
+            totalBalance.text = (UserManager.shared.balance / appData.cybRmbPrice).string(digits: 5, roundingMode: .down)
             balanceRMB.text   = "≈¥" + UserManager.shared.balance.string(digits: 2, roundingMode: .down)
         }
 

@@ -297,7 +297,6 @@
 		728C281B215B6D6E0097840A /* AnnounceViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2818215B6D6E0097840A /* AnnounceViewAdapter.swift */; };
 		728C281C215B6D6E0097840A /* AnnounceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2819215B6D6E0097840A /* AnnounceView.swift */; };
 		728C281D215B6D6E0097840A /* AnnounceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728C281A215B6D6E0097840A /* AnnounceView.xib */; };
-		728C2822215B7B0B0097840A /* pictPopBGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2821215B7B0B0097840A /* pictPopBGView.swift */; };
 		728C2826215B80480097840A /* AnnounceScrollViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2823215B80480097840A /* AnnounceScrollViewAdapter.swift */; };
 		728C2827215B80480097840A /* AnnounceScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728C2824215B80480097840A /* AnnounceScrollView.swift */; };
 		728C2828215B80480097840A /* AnnounceScrollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728C2825215B80480097840A /* AnnounceScrollView.xib */; };
@@ -978,7 +977,6 @@
 		728C2818215B6D6E0097840A /* AnnounceViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceViewAdapter.swift; sourceTree = "<group>"; };
 		728C2819215B6D6E0097840A /* AnnounceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceView.swift; sourceTree = "<group>"; };
 		728C281A215B6D6E0097840A /* AnnounceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnounceView.xib; sourceTree = "<group>"; };
-		728C2821215B7B0B0097840A /* pictPopBGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pictPopBGView.swift; sourceTree = "<group>"; };
 		728C2823215B80480097840A /* AnnounceScrollViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceScrollViewAdapter.swift; sourceTree = "<group>"; };
 		728C2824215B80480097840A /* AnnounceScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceScrollView.swift; sourceTree = "<group>"; };
 		728C2825215B80480097840A /* AnnounceScrollView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnnounceScrollView.xib; sourceTree = "<group>"; };
@@ -2198,7 +2196,6 @@
 				72968D2D2158DC4E00B0AA77 /* RecordHeaderView.swift */,
 				72968D2E2158DC4E00B0AA77 /* RecordHeaderView.xib */,
 				72968D2C2158DC4E00B0AA77 /* RecordHeaderViewAdapter.swift */,
-				728C2821215B7B0B0097840A /* pictPopBGView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4097,7 +4094,6 @@
 				221C617C213926A50021C007 /* ETORecordCell.swift in Sources */,
 				7386F2B121216B2200ABC924 /* TransferAddressHomeViewController.swift in Sources */,
 				7267DA0721350327004AF9AF /* ETOActions.swift in Sources */,
-				728C2822215B7B0B0097840A /* pictPopBGView.swift in Sources */,
 				73587EAE2137C057006CF8A6 /* ETOCrowdViewController.swift in Sources */,
 				3B0EB65C210313B200F19C31 /* YourPortfolioHeadView.swift in Sources */,
 				C02132F00200B408020442C307CEE0B6 /* TradeView.swift in Sources */,

@@ -16,8 +16,8 @@ protocol RecordChooseViewControllerDelegate {
 }
 
 enum RecordChooseType: Int {
-    case Asset = 0
-    case FoudType
+    case asset = 0
+    case foudType
 }
 
 class RecordChooseViewController: BaseViewController {
@@ -26,7 +26,7 @@ class RecordChooseViewController: BaseViewController {
     var delegate: RecordChooseViewControllerDelegate?
     var coordinator: (RecordChooseCoordinatorProtocol & RecordChooseStateManagerProtocol)?
     private(set) var context: RecordChooseContext?
-    var typeIndex: RecordChooseType = .Asset
+    var typeIndex: RecordChooseType = .asset
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -137,11 +137,13 @@ extension RecordChooseViewController: UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.recordChooseCell.name, for: indexPath) as! RecordChooseCell
-        if let data = self.coordinator?.state.data.value {
-            cell.setup(data[indexPath.row])
+        if let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.recordChooseCell.name, for: indexPath) as? RecordChooseCell {
+            if let data = self.coordinator?.state.data.value {
+                cell.setup(data[indexPath.row])
+            }
+            return cell
         }
-        return cell
+        return RecordChooseCell()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -150,7 +152,7 @@ extension RecordChooseViewController: UITableViewDataSource, UITableViewDelegate
 }
 
 extension RecordChooseViewController {
-    @objc func RecordChooseCellViewDidClicked(_ data: [String: Any]) {
+    @objc func recordChooseCellViewDidClicked(_ data: [String: Any]) {
         if let data = data["data"] as? String {
             self.delegate?.returnSelectedRow(self, info: data)
         }

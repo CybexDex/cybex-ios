@@ -11,7 +11,7 @@ import RxCocoa
 import SwiftTheme
 
 class BusinessView: UIView {
-    enum event: String {
+    enum Event: String {
         case amountPercent
         case buttonDidClicked
         case adjustPrice
@@ -34,10 +34,10 @@ class BusinessView: UIView {
     
     @IBAction func changePrice(_ sender: UIButton) {
         if sender.tag == 1001 {
-            self.next?.sendEventWith(event.adjustPrice.rawValue, userinfo: ["plus": false])
+            self.next?.sendEventWith(Event.adjustPrice.rawValue, userinfo: ["plus": false])
             
         } else {
-            self.next?.sendEventWith(event.adjustPrice.rawValue, userinfo: ["plus": true])
+            self.next?.sendEventWith(Event.adjustPrice.rawValue, userinfo: ["plus": true])
         }
     }
     
@@ -64,7 +64,7 @@ class BusinessView: UIView {
             percentLabel.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
                 guard let `self` = self else { return }
                 
-                self.next?.sendEventWith(event.amountPercent.rawValue, userinfo: ["percent": percentLabel.text!.replacingOccurrences(of: "%", with: "")])
+                self.next?.sendEventWith(Event.amountPercent.rawValue, userinfo: ["percent": percentLabel.text!.replacingOccurrences(of: "%", with: "")])
                 
             }).disposed(by: disposeBag)
         }
@@ -72,7 +72,7 @@ class BusinessView: UIView {
         button.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
             guard let `self` = self else { return }
             
-            self.next?.sendEventWith(event.buttonDidClicked.rawValue, userinfo: [:])
+            self.next?.sendEventWith(Event.buttonDidClicked.rawValue, userinfo: [:])
             
         }).disposed(by: disposeBag)
         

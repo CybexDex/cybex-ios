@@ -9,7 +9,7 @@
 import UIKit
 
 class HomeContentView: UIView {
-    struct define {
+    struct Define {
         static let sectionHeaderHeight: Double = 71.0
     }
 
@@ -21,9 +21,9 @@ class HomeContentView: UIView {
         }
     }
 
-    var viewType: view_type = view_type.homeContent {
+    var viewType: ViewType = ViewType.homeContent {
         didSet {
-            if self.viewType == .Comprehensive {
+            if self.viewType == .comprehensive {
                 self.tableView.isScrollEnabled = false
                 var buckets = appData.filterPopAssetsCurrency()
                 if buckets.count >= 6 {
@@ -36,7 +36,7 @@ class HomeContentView: UIView {
     }
 
     lazy var sectionHeader: HomeSectionHeaderView = {
-        let sectionHeader = HomeSectionHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: CGFloat(define.sectionHeaderHeight)))
+        let sectionHeader = HomeSectionHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: CGFloat(Define.sectionHeaderHeight)))
         return sectionHeader
     }()
 
@@ -100,7 +100,7 @@ class HomeContentView: UIView {
 
 extension HomeContentView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.viewType == .Comprehensive {
+        if self.viewType == .comprehensive {
             return 6
         }
 
@@ -111,7 +111,7 @@ extension HomeContentView: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: HomePairCell.self), for: indexPath) as! HomePairCell
-        if self.viewType == .Comprehensive {
+        if self.viewType == .comprehensive {
             cell.cellType = .topGainers
             if let data = self.data as? [Ticker] {
                 if indexPath.row < data.count {
@@ -136,16 +136,16 @@ extension HomeContentView: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if self.viewType == .Comprehensive {
+        if self.viewType == .comprehensive {
             return nil
         }
         return sectionHeader
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if self.viewType == .Comprehensive {
+        if self.viewType == .comprehensive {
             return 0.0
         }
-        return CGFloat(define.sectionHeaderHeight)
+        return CGFloat(Define.sectionHeaderHeight)
     }
 }
 

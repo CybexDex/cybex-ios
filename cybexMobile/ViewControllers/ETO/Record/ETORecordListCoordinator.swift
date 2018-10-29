@@ -24,7 +24,7 @@ class ETORecordListCoordinator: ETORootCoordinator {
     var store = Store(
         reducer: ETORecordListReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: ETORecordListState {

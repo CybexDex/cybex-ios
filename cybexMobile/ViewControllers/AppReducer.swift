@@ -24,7 +24,7 @@ public class BlockSubscriber<S>: StoreSubscriber {
     }
 }
 
-let TrackingMiddleware: Middleware<Any> = { dispatch, getState in
+let trackingMiddleware: Middleware<Any> = { dispatch, getState in
     return { next in
         return { action in
             if let action = action as? PageStateAction, let state = getState() as? BaseState {
@@ -75,7 +75,7 @@ func pageReducer(_ state: Int?, action: Action) -> Int {
 
     switch action {
     case _ as NextPage:
-        state = state + 1
+        state += 1
     case _ as ResetPage:
         state = 1
     default:
@@ -85,13 +85,13 @@ func pageReducer(_ state: Int?, action: Action) -> Int {
     return state
 }
 
-func AppReducer(action: Action, state: AppState?) -> AppState {
-    return AppState(property: AppPropertyReducer(state?.property, action: action))
+func appReducer(action: Action, state: AppState?) -> AppState {
+    return AppState(property: appPropertyReducer(state?.property, action: action))
 }
 
-let s = DispatchSemaphore(value: 1)
+let semaphore = DispatchSemaphore(value: 1)
 
-func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppPropertyState {
+func appPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppPropertyState {
     var state = state ?? AppPropertyState()
 
     var ids = state.subscribeIds ?? [:]
@@ -122,7 +122,7 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
 
     case let action as AssetInfoAction:
         state.assetInfo[action.assetID] = action.info
-    case let action as kLineFetched:
+    case let action as KLineFetched:
 
         if klineDatas.has(key: action.pair) {
             var klineData = klineDatas[action.pair]!
@@ -137,22 +137,22 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
             for rmbPrices in action.price {
                 if rmbPrices.name == "CYB"{
                     if rmbPrices.rmb_price != "" && rmbPrices.rmb_price != "0"{
-                        state.cyb_rmb_price = rmbPrices.rmb_price.toDouble()!
+                        state.cybRmbPrice = rmbPrices.rmb_price.toDouble()!
                     }
                 }
             }
         }
-        state.rmb_prices = action.price
+        state.rmbPrices = action.price
     case let action as FecthMarketListAction:
         state.importMarketLists = action.data
 
     case let action as TickerFetched:
         async {
-            if s.wait(timeout: .distantFuture) == .success {
+            if semaphore.wait(timeout: .distantFuture) == .success {
                 main {
                     refreshTimes[Pair(base: action.asset.base, quote: action.asset.quote)] = Date().timeIntervalSince1970
-                    state.ticker_data.accept(applyTickersToState(state, action: action))
-                    s.signal()
+                    state.tickerData.accept(applyTickersToState(state, action: action))
+                    semaphore.signal()
                 }
             }
         }
@@ -165,7 +165,7 @@ func AppPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
 }
 
 func applyTickersToState(_ state: AppPropertyState, action: TickerFetched) -> [Ticker] {
-    var data = state.ticker_data.value
+    var data = state.tickerData.value
     guard  let _ = state.assetInfo[action.asset.base], let _ = state.assetInfo[action.asset.quote] else {
         return data
     }

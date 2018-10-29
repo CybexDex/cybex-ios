@@ -19,11 +19,11 @@ class PairDetailDateViewView: CybexBaseView {
     @IBOutlet weak var changeAmount: UILabel!
     @IBOutlet weak var change: UILabel!
 
-    var base_name: String = ""
-    var quote_name: String = ""
+    var baseName: String = ""
+    var quoteName: String = ""
 
     enum Event: String {
-        case PairDetailDateViewViewDidClicked
+        case pairDetailDateViewViewDidClicked
     }
 
     override func setup() {
@@ -42,6 +42,6 @@ class PairDetailDateViewView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.PairDetailDateViewViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.pairDetailDateViewViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }

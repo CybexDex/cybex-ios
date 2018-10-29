@@ -31,7 +31,7 @@ class PickerCoordinator: PickerRootCoordinator {
     var store = Store<PickerState>(
         reducer: PickerReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 

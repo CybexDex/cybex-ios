@@ -11,7 +11,7 @@ import Foundation
 @IBDesignable
 class RecordHeaderView: CybexBaseView {
     enum Event: String {
-        case RecordHeaderViewDidClicked
+        case recordHeaderViewDidClicked
     }
 
     @IBOutlet weak var assetInfoView: RecordChooseView!
@@ -33,6 +33,6 @@ class RecordHeaderView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.RecordHeaderViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.recordHeaderViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }

@@ -10,7 +10,10 @@ import UIKit
 import ReSwift
 
 func businessReducer(action: Action, state: BusinessState?) -> BusinessState {
-    return BusinessState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: businessPropertyReducer(state?.property, action: action))
+    return BusinessState(isLoading: loadingReducer(state?.isLoading, action: action),
+                         page: pageReducer(state?.page, action: action),
+                         errorMessage: errorMessageReducer(state?.errorMessage, action: action),
+                         property: businessPropertyReducer(state?.property, action: action))
 }
 
 func businessPropertyReducer(_ state: BusinessPropertyState?, action: Action) -> BusinessPropertyState {

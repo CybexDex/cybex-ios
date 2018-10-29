@@ -16,7 +16,7 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
     var coordinator: (WithdrawAndDespoitRecordCoordinatorProtocol & WithdrawAndDespoitRecordStateManagerProtocol)?
     @IBOutlet weak var headerView: RecordHeaderView!
 
-    var selectedIndex: RecordChooseType = RecordChooseType.Asset
+    var selectedIndex: RecordChooseType = RecordChooseType.asset
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -117,9 +117,9 @@ extension WithdrawAndDespoitRecordViewController {
         }
     }
 
-    @objc func RecordContainerViewDidClicked(_ data: [String: Any]) {
+    @objc func recordContainerViewDidClicked(_ data: [String: Any]) {
         guard let index = data["index"] as? Int, let chooseView = data["self"] as? RecordChooseView else { return }
-        let vc = R.storyboard.comprehensive.recordChooseViewController()!
+        guard let vc = R.storyboard.comprehensive.recordChooseViewController() else { return }
         vc.preferredContentSize = CGSize(width: chooseView.containerView.width, height: index == 1 ? 165 : 122)
         vc.modalPresentationStyle = .popover
         vc.popoverPresentationController?.sourceView = chooseView.containerView
@@ -127,10 +127,12 @@ extension WithdrawAndDespoitRecordViewController {
         vc.popoverPresentationController?.delegate = self
         vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
         vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.white.hexString(true)]
-        vc.typeIndex = index == 1 ? .Asset : .FoudType
+        vc.typeIndex = index == 1 ? .asset : .foudType
         self.selectedIndex = vc.typeIndex
         vc.delegate = self
-        vc.coordinator = RecordChooseCoordinator(rootVC: self.navigationController as! BaseNavigationController)
+        if let navigationController = self.navigationController as? BaseNavigationController {
+            vc.coordinator = RecordChooseCoordinator(rootVC: navigationController)
+        }
         self.present(vc, animated: true) {
             self.view.superview?.cornerRadius = 2
         }
@@ -138,7 +140,7 @@ extension WithdrawAndDespoitRecordViewController {
 }
 extension WithdrawAndDespoitRecordViewController: UIPopoverPresentationControllerDelegate {
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        if self.selectedIndex == .Asset {
+        if self.selectedIndex == .asset {
             self.headerView.assetInfoView.contentLabel.textColor = UIColor.steel
             self.headerView.assetInfoView.stateImage.image = R.image.ic2()
         } else {
@@ -157,17 +159,17 @@ extension WithdrawAndDespoitRecordViewController: RecordChooseViewControllerDele
     func returnSelectedRow(_ sender: RecordChooseViewController, info: String) {
 
         switch sender.typeIndex {
-        case .Asset:
+        case .asset:
             self.headerView.assetInfoView.contentLabel.text = info.filterJade
             self.headerView.assetInfoView.contentLabel.textColor = UIColor.steel
             self.headerView.assetInfoView.stateImage.image = R.image.ic2()
-            self.coordinator?.childrenFetchData(info, index: RecordChooseType.Asset)
+            self.coordinator?.childrenFetchData(info, index: RecordChooseType.asset)
             break
-        case .FoudType:
+        case .foudType:
             self.headerView.typeInfoView.contentLabel.text = info.filterJade
             self.headerView.typeInfoView.contentLabel.textColor = UIColor.steel
             self.headerView.typeInfoView.stateImage.image = R.image.ic2()
-            self.coordinator?.childrenFetchData(info, index: RecordChooseType.FoudType)
+            self.coordinator?.childrenFetchData(info, index: RecordChooseType.foudType)
             break
         }
         sender.dismiss(animated: true, completion: nil)

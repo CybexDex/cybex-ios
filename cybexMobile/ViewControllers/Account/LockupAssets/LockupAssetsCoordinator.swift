@@ -28,7 +28,7 @@ class LockupAssetsCoordinator: AccountRootCoordinator {
   var store = Store<LockupAssetsState>(
     reducer: LockupAssetsReducer,
     state: nil,
-    middleware: [TrackingMiddleware]
+    middleware: [trackingMiddleware]
   )
 }
 

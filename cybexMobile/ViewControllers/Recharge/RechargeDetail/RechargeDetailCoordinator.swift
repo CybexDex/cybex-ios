@@ -46,7 +46,7 @@ class RechargeDetailCoordinator: AccountRootCoordinator {
     var store = Store<RechargeDetailState>(
         reducer: rechargeDetailReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 

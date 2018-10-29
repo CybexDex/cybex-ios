@@ -21,7 +21,7 @@ class ImageShareCoordinator: ETORootCoordinator {
     var store = Store(
         reducer: ImageShareReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: ImageShareState {

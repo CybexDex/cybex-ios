@@ -22,9 +22,9 @@ protocol HomeStateManagerProtocol {
 
 class HomeCoordinator: HomeRootCoordinator {
     var store = Store(
-        reducer: HomeReducer,
+        reducer: homeReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: HomeState {
@@ -37,7 +37,7 @@ extension HomeCoordinator: HomeCoordinatorProtocol {
     let vc = R.storyboard.main.marketViewController()!
     vc.curIndex = index
     vc.currentBaseIndex = currentBaseIndex
-    vc.rechargeShowType = PairRechargeView.show_type.show.rawValue
+    vc.rechargeShowType = PairRechargeView.ShowType.show.rawValue
 
     let coordinator = MarketCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator

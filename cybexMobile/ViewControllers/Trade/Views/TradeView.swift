@@ -38,7 +38,7 @@ class TradeView: UIView {
                             sell.isBuy = true
                             sell.alpha = 1
                             let max = asks.count >= 5 ? 4 : asks.count - 1
-                            let percent = asks[index - 6].volume_percent / asks[max].volume_percent
+                            let percent = asks[index - 6].volumePercent / asks[max].volumePercent
                             sell.data = (asks[index - 6], percent)
                             
                         } else {
@@ -50,7 +50,7 @@ class TradeView: UIView {
                                 buy.alpha = 1
                                 
                                 let max = bids.count >= 5 ? 4 : bids.count - 1
-                                let percent = bids[index - 6].volume_percent / bids[max].volume_percent
+                                let percent = bids[index - 6].volumePercent / bids[max].volumePercent
                                 
                                 buy.data     = (bids[index - 6], percent)
                             } else {

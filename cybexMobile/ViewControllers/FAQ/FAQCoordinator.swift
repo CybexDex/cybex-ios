@@ -26,7 +26,7 @@ class FAQCoordinator: FAQRootCoordinator {
     var store = Store<FAQState>(
         reducer: FAQReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: FAQState {

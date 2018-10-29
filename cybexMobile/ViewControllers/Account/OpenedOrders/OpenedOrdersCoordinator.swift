@@ -30,7 +30,7 @@ class OpenedOrdersCoordinator: AccountRootCoordinator {
     var store = Store<OpenedOrdersState>(
         reducer: OpenedOrdersReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 

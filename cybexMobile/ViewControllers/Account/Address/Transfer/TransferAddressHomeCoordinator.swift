@@ -36,7 +36,7 @@ class TransferAddressHomeCoordinator: AccountRootCoordinator {
     var store = Store<TransferAddressHomeState>(
         reducer: TransferAddressHomeReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     override func register() {

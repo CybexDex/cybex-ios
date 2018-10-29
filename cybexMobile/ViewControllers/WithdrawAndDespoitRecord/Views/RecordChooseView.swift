@@ -40,8 +40,8 @@ class RecordChooseView: CybexBaseView {
     }
 
     enum Event: String {
-        case RecordChooseViewDidClicked
-        case RecordContainerViewDidClicked
+        case recordChooseViewDidClicked
+        case recordContainerViewDidClicked
         case presentChooseVC
     }
 
@@ -61,12 +61,12 @@ class RecordChooseView: CybexBaseView {
             guard let `self` = self else { return }
             self.contentLabel.textColor = UIColor.pastelOrange
             self.stateImage.image = R.image.ic()
-            self.next?.sendEventWith(Event.RecordContainerViewDidClicked.rawValue, userinfo: ["index": self.subtype, "self": self])
+            self.next?.sendEventWith(Event.recordContainerViewDidClicked.rawValue, userinfo: ["index": self.subtype, "self": self])
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.RecordChooseViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.recordChooseViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }
 

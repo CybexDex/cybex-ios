@@ -28,9 +28,9 @@ class ExchangeCoordinator: TradeRootCoordinator {
     lazy var creator = ExchangePropertyActionCreate()
 
     var store = Store<ExchangeState>(
-        reducer: ExchangeReducer,
+        reducer: exchangeReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 
@@ -52,7 +52,7 @@ extension ExchangeCoordinator: ExchangeCoordinatorProtocol {
     if let orderbook = R.storyboard.main.orderBookViewController() {
       if let container = exchange.containerView, let rightView = container.rightView {
         orderbook.coordinator = OrderBookCoordinator(rootVC: self.rootVC)
-        orderbook.VC_TYPE = orderbook_type.tradeView.rawValue
+        orderbook.VCType = OrderbookType.tradeView.rawValue
         exchange.addChild(orderbook)
 
         rightView.addSubview(orderbook.view)

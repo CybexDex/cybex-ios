@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,7 +11,7 @@
                 <outlet property="asset1" destination="fnd-Lm-9EJ" id="aqs-GY-2ij"/>
                 <outlet property="asset2" destination="if0-NA-7zZ" id="WpZ-QB-K6M"/>
                 <outlet property="bulking" destination="iqm-Sw-TzX" id="Zjt-Yk-Uh3"/>
-                <outlet property="high_lowContain" destination="xCw-AT-elF" id="6b7-CK-RpL"/>
+                <outlet property="highLowContain" destination="xCw-AT-elF" id="6b7-CK-RpL"/>
                 <outlet property="icon" destination="nhE-E3-zBr" id="j4f-c0-2rQ"/>
                 <outlet property="price" destination="IXo-8A-91i" id="2DS-fb-vpS"/>
                 <outlet property="rankingLabel" destination="cM7-pn-i3Z" id="aaQ-FO-Mdi"/>

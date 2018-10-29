@@ -9,11 +9,14 @@
 import UIKit
 import ReSwift
 
-func TradeReducer(action: Action, state: TradeState?) -> TradeState {
-    return TradeState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: TradePropertyReducer(state?.property, action: action))
+func tradeReducer(action: Action, state: TradeState?) -> TradeState {
+    return TradeState(isLoading: loadingReducer(state?.isLoading, action: action),
+                      page: pageReducer(state?.page, action: action),
+                      errorMessage: errorMessageReducer(state?.errorMessage, action: action),
+                      property: tradePropertyReducer(state?.property, action: action))
 }
 
-func TradePropertyReducer(_ state: TradePropertyState?, action: Action) -> TradePropertyState {
+func tradePropertyReducer(_ state: TradePropertyState?, action: Action) -> TradePropertyState {
     let state = state ?? TradePropertyState()
 
     switch action {

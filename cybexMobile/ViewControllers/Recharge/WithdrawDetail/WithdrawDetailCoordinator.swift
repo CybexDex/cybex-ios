@@ -31,7 +31,7 @@ class WithdrawDetailCoordinator: AccountRootCoordinator {
     var store = Store<WithdrawDetailState>(
         reducer: withdrawDetailReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 

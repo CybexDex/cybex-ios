@@ -35,7 +35,7 @@ class ETOCrowdCoordinator: ETORootCoordinator {
     var store = Store(
         reducer: ETOCrowdReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: ETOCrowdState {

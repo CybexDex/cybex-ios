@@ -30,9 +30,9 @@ class MarketCoordinator: HomeRootCoordinator {
     lazy var creator = MarketPropertyActionCreate()
 
     var store = Store<MarketState>(
-        reducer: MarketReducer,
+        reducer: marketReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     var state: MarketState {

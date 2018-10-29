@@ -28,7 +28,7 @@ class AddressHomeCoordinator: AccountRootCoordinator {
     var store = Store<AddressHomeState>(
         reducer: AddressHomeReducer,
         state: nil,
-        middleware: [TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 
     override func register() {
