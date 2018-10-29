@@ -82,8 +82,8 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair: Pair) -> OrderBook {
     }
     
     for order in combineOrders {
-        let sellPrice_base = order.sellPrice.base
-        if sellPrice_base.assetID == pair.base {
+        let sellPriceBase = order.sellPrice.base
+        if sellPriceBase.assetID == pair.base {
             bidsTotalAmount.append(Double(order.forSale)!)
         } else {
             asksTotalAmount.append(Double(order.forSale)!)
