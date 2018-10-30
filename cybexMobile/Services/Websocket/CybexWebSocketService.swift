@@ -262,7 +262,7 @@ class CybexWebSocketService: NSObject {
                     }
                     json["params"] = JSON(oldParams)
 
-                    //          log.info("request: \(json.rawString()!)")
+//                    log.info("request: \(json.rawString()!)")
 
                     let data = try? json.rawData()
                     try? self.socket.send(data: data)
@@ -377,7 +377,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
 
         //    log.info("enter receieveMessage --- current operations Count: \(queue.operationCount)")
         let data = JSON(parseJSON: message)
-        //    log.info("receive message: \(data.rawString()!)")
+//            log.info("receive message: \(data.rawString()!)")
 
         guard let id = data["id"].int else {
             return

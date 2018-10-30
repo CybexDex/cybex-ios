@@ -36,24 +36,26 @@ class HomePairView: UIView {
     var quote: String!
     var data: Any? {
         didSet {
-            guard let ticker = data as? Ticker, let baseInfo = appData.assetInfo[ticker.base], let quoteInfo = appData.assetInfo[ticker.quote] else { return }
+            guard let ticker = data as? Ticker,
+                let baseInfo = appData.assetInfo[ticker.base],
+                let quoteInfo = appData.assetInfo[ticker.quote] else { return }
             self.asset2.text =  quoteInfo.symbol.filterJade
             self.asset1.text = "/" + baseInfo.symbol.filterJade
-            let url = AppConfiguration.ServerIconsBaseURLString + ticker.quote.replacingOccurrences(of: ".", with: "_") + "_grey.png"
+            let url = AppConfiguration.ServerIconsBaseURLString +
+                ticker.quote.replacingOccurrences(of: ".", with: "_") +
+                "_grey.png"
             self.icon.kf.setImage(with: URL(string: url))
             self.volume.text = ticker.baseVolume.suffixNumber(digitNum: 2)
             self.price.text = ticker.latest.formatCurrency(digitNum: baseInfo.precision)
-            self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percentChange.formatCurrency(digitNum: 2) + "%"
-
+            self.bulking.text = (ticker.incre == .greater ? "+" : "") +
+                ticker.percentChange.formatCurrency(digitNum: 2) + "%"
             self.highLowContain.backgroundColor = ticker.incre.color()
             if let change = ticker.percentChange.toDouble(), change > 1000 {
                 self.bulking.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
             } else {
                 self.bulking.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
             }
-
             let price = getAssetRMBPrice(ticker.quote, base: ticker.base)
-
             self.rbmL.text = price == 0 ? "-" : "≈¥" + "\(price)".formatCurrency(digitNum: 2)
         }
     }

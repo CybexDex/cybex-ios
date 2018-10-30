@@ -150,6 +150,7 @@ class AppCoordinator {
                                                    title: R.string.localizable.navAccount.key.localized(),
                                                    image: R.image.ic_account_box_24px(),
                                                    selectedImage: R.image.ic_account_box_active_24px())
+            account.topViewController?.navigationItem.title = ""
             self.rootVC.selectedIndex = self.rootVC.viewControllers!.count - 1
         })
 

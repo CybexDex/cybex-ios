@@ -58,5 +58,4 @@ class HomeTitleView: UIView {
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-
 }

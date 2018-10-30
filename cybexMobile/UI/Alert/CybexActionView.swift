@@ -21,11 +21,11 @@ class CybexActionView: UIView {
             if let data = data as? [String: String] {
 
                 if let messageString = data["message"] {
-                    message.text          = messageString
+                    message.text = messageString
                 }
 
-                if let titleImageString = data["title_image"] {
-                    icon.image    = UIImage(named: titleImageString)
+                if let titleImageString = data["titleImage"] {
+                    icon.image = UIImage(named: titleImageString)
                 }
                 updateHeight()
             }

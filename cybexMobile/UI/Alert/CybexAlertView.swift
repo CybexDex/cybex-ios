@@ -25,7 +25,7 @@ class CybexAlertView: UIView {
                     message.text = messageString
                 }
 
-                if let titleImageString = data["title_image"] {
+                if let titleImageString = data["titleImage"] {
                     titleImage.image = UIImage(named: titleImageString)
                 }
                 updateHeight()

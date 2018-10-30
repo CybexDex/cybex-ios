@@ -18,13 +18,12 @@ class TradeHistoryCellView: UIView {
 
     var data: Any? {
         didSet {
-            guard let showData = data as? (Bool, String, String, String, String)else { return }
-
-            self.price.textColor = showData.0 ? #colorLiteral(red: 0.4922918081, green: 0.7674361467, blue: 0.356476903, alpha: 1) : #colorLiteral(red: 0.7984321713, green: 0.3588138223, blue: 0.2628142834, alpha: 1)
-            self.price.text = showData.1
-            self.assetQuote.text = showData.2
-            self.assetBase.text = showData.3
-            self.dateLabel.text = showData.4
+            guard let showData = data as? TradeHistoryViewModel else { return }
+            self.price.textColor = showData.pay == true ? #colorLiteral(red: 0.4922918081, green: 0.7674361467, blue: 0.356476903, alpha: 1) : #colorLiteral(red: 0.7984321713, green: 0.3588138223, blue: 0.2628142834, alpha: 1)
+            self.price.text = showData.price
+            self.assetQuote.text = showData.quoteVolume
+            self.assetBase.text = showData.baseVolume
+            self.dateLabel.text = showData.time
         }
     }
 
