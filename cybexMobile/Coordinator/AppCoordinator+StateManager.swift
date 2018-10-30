@@ -106,7 +106,7 @@ extension AppCoordinator: AppStateManagerProtocol {
         timer?.start()
     }
 
-    func fetchGetToCyb(_ callback:@escaping(Decimal)->Void) {
+    func fetchGetToCyb(_ callback:@escaping(Decimal) -> Void) {
         let request = GetTickerRequest(baseName: AssetConfiguration.ETH, quoteName: AssetConfiguration.CYB, response: { [weak self](data) in
             guard let `self` = self else { return }
             if let data = data as? Ticker, let dataDouble = data.latest.toDecimal(), dataDouble != 0 {

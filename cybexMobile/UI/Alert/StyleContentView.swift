@@ -21,16 +21,16 @@ class StyleContentView: UIView, Views {
             }
         }
     }
-    
+
     var data: [NSAttributedString]? {
         didSet {
             setupUI()
             updateHeight()
         }
     }
-    
+
     var labels: [StyleLabel] = []
-    
+
     func setupUI() {
         if let data = data {
             for view in self.subviews {
@@ -40,12 +40,12 @@ class StyleContentView: UIView, Views {
             for index in 0...data.count-1 {
                 let lable = StyleLabel(frame: CGRect.zero)
                 addSubview(lable)
-                
+
                 if testLabel == nil {
                     lable.top(to: self)
                     lable.leading(to: self)
                     lable.trailing(to: self)
-                    
+
                 } else {
                     lable.numberOfLines = 1
                     lable.topToBottom(of: testLabel)
@@ -57,12 +57,12 @@ class StyleContentView: UIView, Views {
                 }
                 labels.append(lable)
                 testLabel = lable
-                
+
                 lable.data = data[index]
             }
         }
     }
-    
+
     func updateHeight() {
         guard let _ = self.subviews.last else {
             return
@@ -74,7 +74,7 @@ class StyleContentView: UIView, Views {
         self.height = height
         invalidateIntrinsicContentSize()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -82,5 +82,5 @@ class StyleContentView: UIView, Views {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
 }

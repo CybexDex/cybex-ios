@@ -31,11 +31,11 @@ class ShowToastManager {
     static let shared = ShowToastManager()
     var timerTime: TimeInterval = 30
     var timer: Timer?
-    
+
     var delegate: ShowManagerDelegate?
-    
+
     var ensureClickBlock: CommonCallback!
-    
+
     var isShowSingleBtn: Bool? {
         didSet {
             if isShowSingleBtn == true, let textView = self.showView as? CybexTextView {
@@ -44,7 +44,7 @@ class ShowToastManager {
             }
         }
     }
-    
+
     var showViewTop: Constraint!
     enum ShowManagerType: String {
         case alert
@@ -60,19 +60,19 @@ class ShowToastManager {
         case fadeInOut
         case smallBig
     }
-    
+
     var data: Any? {
         didSet {
             showView?.content = data
         }
     }
-    
+
     var showView: (UIView & Views)? {
         didSet {
-            
+
         }
     }
-    
+
     private var superView: UIView? {
         didSet {
             self.shadowView = UIView.init(frame: UIScreen.main.bounds)
@@ -84,32 +84,32 @@ class ShowToastManager {
             superView?.addSubview(self.shadowView!)
         }
     }
-    
+
     private var middleView: UIView? {
         didSet {
-            
+
         }
     }
-    
+
     private var shadowView: UIView? {
         didSet {
-            
+
         }
     }
-    
+
     private var animationShow: ShowAnimationType = .fadeInOut
-    
+
     private  var showType: ShowManagerType?
-    
+
     private init() {
-        
+
     }
-    
+
     // 倒计时
     func startCountDown() {
-        
+
     }
-    
+
     // MARK: 展示
     // 动画效果。
     func showAnimationInView(_ sender: UIView) {
@@ -141,7 +141,7 @@ class ShowToastManager {
                                animations: {
                                 self.showView?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
                 }, completion: { (_) in
-                    
+
                 })
             }
             return
@@ -149,7 +149,7 @@ class ShowToastManager {
             let top: CGFloat  = showType == .sheetImage ? -200 : -800
             showView?.leftToSuperview(nil, offset: leading, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
             showView?.rightToSuperview(nil, offset: trailing, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
-            
+
             if showType == .sheetImage {
                 showViewTop = showView?.topToSuperview(nil, offset: top, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
             } else {
@@ -167,7 +167,7 @@ class ShowToastManager {
             }
         }
     }
-    
+
     // MARK: 隐藏
     // 动画效果。
     func hide() {
@@ -177,7 +177,7 @@ class ShowToastManager {
         self.shadowView = nil
         self.data = nil
     }
-    
+
     func hide(_ time: TimeInterval) {
         if animationShow == .none || animationShow == .smallBig {
             SwifterSwift.delay(milliseconds: time * 1000) {
@@ -214,15 +214,15 @@ class ShowToastManager {
             }
         }
     }
-    
+
     func setUp(title: String, message: String, animationType: ShowAnimationType, showType: ShowManagerType = .alert) {
         self.data          = ["title": title, "message": message]
         self.animationShow = animationType
         self.showType      = showType
-        
+
         self.setupAlert()
     }
-    
+
     func setUp(titleImage: String, message: String, animationType: ShowAnimationType, showType: ShowManagerType) {
         self.data = ["titleImage": titleImage, "message": message]
         self.animationShow = animationType
@@ -233,42 +233,42 @@ class ShowToastManager {
             self.setupSheetImage()
         }
     }
-    
+
     func setUp(title: String, contentView: (UIView&Views), animationType: ShowAnimationType, middleType: CybexTextView.TextViewType = .normal) {
         self.animationShow  = animationType
         self.showType       = ShowManagerType.alertImage
         self.setupText(contentView, title: title, cybexTextViewType: middleType)
     }
-    
+
     func setUp(titleImage: String, contentView: (UIView&Views), animationType: ShowAnimationType) {
         self.animationShow  = animationType
         self.showType       = ShowManagerType.alertImage
         self.setupTextImage(contentView, titleImage: titleImage)
     }
-    
+
     func setUp(_ title: String, content: String, time: Int, animationType: ShowAnimationType) {
         self.animationShow = animationType
         self.showType = ShowManagerType.waiting
         self.setupWaiting(title, content: content, time: time)
     }
-    
+
     fileprivate func setupAlert() {
         let alertView            = CybexAlertView(frame: CGRect.zero)
         alertView.isShowImage    = false
         showView                 = alertView
     }
-    
+
     fileprivate func setupAlertImage() {
         let alertView            = CybexAlertView(frame: CGRect.zero)
         alertView.isShowImage    = true
         showView                 = alertView
     }
-    
+
     fileprivate func setupSheetImage() {
         let sheetView = CybexActionView(frame: .zero)
         showView     = sheetView
     }
-    
+
     fileprivate func setupText(_ sender: (UIView&Views), title: String, cybexTextViewType: CybexTextView.TextViewType) {
         let textView = CybexTextView(frame: .zero)
         textView.delegate = self
@@ -285,7 +285,7 @@ class ShowToastManager {
         }
         showView = textView
     }
-    
+
     fileprivate func setupTextImage(_ sender: (UIView&Views), titleImage: String) {
         let textView = CybexTextView(frame: .zero)
         textView.delegate = self
@@ -295,7 +295,7 @@ class ShowToastManager {
         textView.titleImageView.image = UIImage(named: titleImage)
         showView = textView
     }
-    
+
     fileprivate func setupWaiting(_ title: String, content: String, time: Int) {
         let waitView = CybexWaitingView(frame: .zero)
         waitView.titleLabel.text = title
@@ -304,7 +304,7 @@ class ShowToastManager {
         waitView.delegate = self
         showView = waitView
     }
-    
+
     func updateCybexTextViewType(_ sender: CybexTextView) {
         sender.ensure.isEnabled = false
         sender.ensure.setTitle(self.timerTime.string(digits: 0, roundingMode: .down) + R.string.localizable.transfer_unit_second.key.localized(), for: .normal)
@@ -312,7 +312,7 @@ class ShowToastManager {
         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(changeTimerTimeAction), userInfo: nil, repeats: true)
         self.timer?.fire()
     }
-    
+
     @objc func changeTimerTimeAction() {
         if self.timerTime <= 0 {
             self.timer?.invalidate()
@@ -320,9 +320,9 @@ class ShowToastManager {
         } else {
             self.timerTime -= 1
         }
-        
+
         guard let textview = self.showView as? CybexTextView, textview.viewType == .time else { return }
-        
+
         if self.timerTime <= 0 {
             textview.ensure.setTitle(R.string.localizable.alert_ensure.key.localized(), for: .normal)
             textview.ensure.isEnabled = true
@@ -341,12 +341,12 @@ extension ShowToastManager: CybexTextViewDelegate {
             self.delegate?.returnUserPassword(password)
         }
     }
-    
+
     func clickCancle(_ sender: CybexTextView) {
         self.hide(0)
         self.delegate?.cancelImageAction(sender)
     }
-    
+
     func returnEnsureAction() {
         self.hide(0)
         self.delegate?.returnEnsureAction()
@@ -354,7 +354,7 @@ extension ShowToastManager: CybexTextViewDelegate {
             self.ensureClickBlock()
         }
     }
-    
+
     func returnEnsureImageAction() {
         self.hide(0)
         self.delegate?.returnEnsureImageAction()

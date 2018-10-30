@@ -20,23 +20,23 @@ enum AccountValidStatus: Int {
 
 struct TransferState: BaseState {
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
-    
+
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
-    
+
     var accountValid: BehaviorRelay<AccountValidStatus> = BehaviorRelay(value: .unValided)
-    
+
     var amountValid: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    
+
     var balance: BehaviorRelay<Balance?> = BehaviorRelay(value: nil)
-    
+
     var fee: BehaviorRelay<Fee?> = BehaviorRelay(value: nil)
-    
+
     var account: BehaviorRelay<String> = BehaviorRelay(value: "")
-    
+
     var amount: BehaviorRelay<String> = BehaviorRelay(value: "")
-    
+
     var memo: BehaviorRelay<String> = BehaviorRelay(value: "")
-    
+
     var toAccount: BehaviorRelay<Account?> = BehaviorRelay(value: nil)
 }
 
@@ -61,11 +61,11 @@ struct SetToAccountAction: Action {
 }
 
 struct ResetDataAction: Action {
-    
+
 }
 
 struct CleanToAccountAction: Action {
-    
+
 }
 
 struct ChooseAccountAction: Action {
@@ -75,7 +75,7 @@ struct ChooseAccountAction: Action {
 // MARK: - Action Creator
 class TransferPropertyActionCreate {
     public typealias ActionCreator = (_ state: TransferState, _ store: Store<TransferState>) -> Action?
-    
+
     public typealias AsyncActionCreator = (
         _ state: TransferState,
         _ store: Store <TransferState>,

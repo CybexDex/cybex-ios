@@ -74,7 +74,7 @@ class ComprehensiveViewController: BaseViewController {
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
 
-            case .loadMore(_):
+            case .loadMore:
                 self.coordinator?.switchPageState(.loading(reason: PageLoadReason.manualLoadMore))
 
             case .noMore:
@@ -83,7 +83,7 @@ class ComprehensiveViewController: BaseViewController {
             case .noData:
                 break
 
-            case .normal(_):
+            case .normal:
 
                 break
 

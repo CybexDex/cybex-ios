@@ -14,7 +14,7 @@ import ReSwift
 class ExchangeViewController: BaseViewController {
     var coordinator: (ExchangeCoordinatorProtocol & ExchangeStateManagerProtocol)?
     var type: ExchangeType = .buy
-    
+
     var pair: Pair? {
         didSet {
             if self.isVisible {
@@ -27,17 +27,17 @@ class ExchangeViewController: BaseViewController {
             }
         }
     }
-    
+
     @IBOutlet weak var containerView: ExchangeView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.coordinator?.setupChildVC(self)
     }
-    
+
     override func configureObserveState() {
-        
+
     }
 }
 
@@ -50,7 +50,7 @@ extension ExchangeViewController: TradePair {
             self.pair = newValue
         }
     }
-    
+
     func refresh() {
         if self.isVisible {
             self.children.forEach { (viewController) in

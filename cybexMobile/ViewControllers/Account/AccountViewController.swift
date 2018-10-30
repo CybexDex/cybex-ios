@@ -16,14 +16,14 @@ import SwiftRichString
 import SwifterSwift
 
 class AccountViewController: BaseViewController {
-    
+
     var coordinator: (AccountCoordinatorProtocol & AccountStateManagerProtocol)?
-    
+
     @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var accountContentView: AccountContentView!
-    
+
     var dataArray: [AccountViewModel] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let height = UIScreen.main.bounds.height
@@ -34,11 +34,11 @@ class AccountViewController: BaseViewController {
         }
         setupUI()
         setupEvent()
-        
+
         if  UserManager.shared.isLoginIn {
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -46,18 +46,18 @@ class AccountViewController: BaseViewController {
             self.setupUI()
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
     }
-    
+
     func setupIconImg() {
-        
+
         if UserManager.shared.isLoginIn == false {
             accountContentView.headerView.icon = R.image.accountAvatar()
         } else {
@@ -70,7 +70,7 @@ class AccountViewController: BaseViewController {
             }
         }
     }
-    
+
     func setupTitle() {
         if let name = UserManager.shared.account.value?.name {
             accountContentView.headerView.title = R.string.localizable.hello.key.localized() + name
@@ -78,22 +78,22 @@ class AccountViewController: BaseViewController {
             accountContentView.headerView.title = R.string.localizable.accountLogin.key.localized()
         }
     }
-    
+
     // UI的初始化设置
     func setupUI() {
         self.navigationItem.title = ""
         setupTitle()
         setupIconImg()
         self.configRightNavButton(R.image.icSettings24Px())
-        
+
         let imgArray = [R.image.icBalance(), R.image.w(), R.image.ic_address_28_px(), R.image.icOrder28Px(), R.image.icLockAsset()]
-        
+
         let nameArray = [R.string.localizable.my_property.key.localized(),
                          R.string.localizable.deposit_withdraw.key.localized(),
                          R.string.localizable.address_manager.key.localized(),
                          R.string.localizable.order_value.key.localized(),
                          R.string.localizable.lockupAssetsTitle.key.localized()]
-        
+
         dataArray.removeAll()
         for index in 0..<nameArray.count {
             var model = AccountViewModel()
@@ -103,16 +103,16 @@ class AccountViewController: BaseViewController {
         }
         accountContentView.data = dataArray
     }
-    
+
     func setupEvent() {
-        
+
     }
-    
+
     // 跳转到设置界面
     override func rightAction(_ sender: UIButton) {
         self.coordinator?.openSetting()
     }
-    
+
     override func configureObserveState() {
         UserManager.shared.account.asObservable()
             .skip(1)
@@ -128,13 +128,13 @@ class AccountViewController: BaseViewController {
 }
 
 extension AccountViewController {
-    
+
     @objc func login(_ data: [String: Any]) {
         if !UserManager.shared.isLoginIn {
             appCoodinator.showLogin()
         }
     }
-    
+
     @objc func clickCellView(_ sender: [String: Any]) {
         guard let index = sender["index"] as? Int else {
             return
@@ -144,7 +144,7 @@ extension AccountViewController {
             if !UserManager.shared.isLoginIn {
                 appCoodinator.showLogin()
             } else {
-                
+
                 self.coordinator?.openYourProtfolio()
             }
         case 1:
@@ -173,20 +173,20 @@ extension AccountViewController {
             }
         }
     }
-    
+
     @objc func openLockupAssets(_ data: [String: Any]) {
         guard !isLoading() else { return }
-        
+
         if !UserManager.shared.isLocked {
             self.coordinator?.openLockupAssets()
         } else {
             self.showPasswordBox()
         }
     }
-    
+
     override func passwordPassed(_ passed: Bool) {
         self.endLoading()
-        
+
         if self.isVisible {
             if passed {
                 self.coordinator?.openLockupAssets()
@@ -194,9 +194,9 @@ extension AccountViewController {
                 self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
             }
         }
-        
+
     }
-    
+
     override func passwordDetecting() {
         self.startLoading()
     }

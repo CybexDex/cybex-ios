@@ -19,34 +19,34 @@ import Device
 //import IHKeyboardAvoiding
 
 class RegisterViewController: BaseViewController {
-    
+
     @IBOutlet weak var iconTopContainer: NSLayoutConstraint!
     var coordinator: (RegisterCoordinatorProtocol & RegisterStateManagerProtocol)?
-    
+
     @IBOutlet weak var accountTextField: ImageTextField!
     @IBOutlet weak var passwordTextField: ImageTextField!
     @IBOutlet weak var confirmPasswordTextField: ImageTextField!
-    
+
     @IBOutlet weak var loginTitle: UILabel!
     @IBOutlet weak var tip: UIImageView!
     @IBOutlet weak var registerButton: Button!
-    
+
     @IBOutlet weak var codeTextField: ImageTextField!
-    
+
     @IBOutlet weak var macawView: MacawView!
     @IBOutlet weak var errorStackView: UIStackView!
     @IBOutlet weak var pinCodeActivityView: UIActivityIndicatorView!
     @IBOutlet weak var errorMessage: UILabel!
-    
+
     @IBOutlet weak var titleL: UILabel!
-    
+
     var timer: Repeater?
-    
+
     var pinID: String = ""
     var passwordValid = false
     var confirmValid = false
     var codeValid = false
-    
+
     var userNameValid = false {
         didSet {
             if userNameValid,
@@ -59,71 +59,70 @@ class RegisterViewController: BaseViewController {
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupUI()
         setupEvent()
-        
+
         updateSvgView()
-        
+
     }
-    
+
     func updateSvgView() {
         self.pinCodeActivityView.startAnimating()
-        
+
         async {
             do {
                 let data = try await(SimpleHTTPService.requestPinCode())
                 main {
                     self.pinCodeActivityView.stopAnimating()
                     self.pinID = data.id
-                    
+
                     if let parser = try? SVGParser.parse(text: data.data) {
                         self.macawView.node = parser
                     }
                 }
+            } catch _ {
+
             }
-            catch _ {
-                
-            }
-           
+
         }
     }
-    
+
     func setupUI() {
         accountTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
         passwordTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
         confirmPasswordTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
         codeTextField.textColor = ThemeManager.currentThemeIndex == 0 ? .white : .darkTwo
-        
+
         accountTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
         passwordTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
         confirmPasswordTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
         codeTextField.bottomColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
-        
+
         accountTextField.activityView?.isHidden = true
         accountTextField.tailImage = nil
         passwordTextField.activityView?.isHidden = true
         passwordTextField.tailImage = nil
         confirmPasswordTextField.activityView?.isHidden = true
         confirmPasswordTextField.tailImage = nil
-        
+
         macawView.backgroundColor = UIColor.peach
         if Device.size() == .screen3_5Inch || Device.size() == .screen4Inch {
             titleL.font = UIFont.systemFont(ofSize: 11)
         }
     }
-    
+
     @objc override func leftAction(_ sender: UIButton) {
         coordinator?.dismiss()
     }
-    
+
     override func configureObserveState() {
-        
+
     }
-    
+
     deinit {
         self.timer?.pause()
         self.timer = nil
@@ -263,28 +262,28 @@ extension RegisterViewController {
 
     func setupEvent() {
         setUpKeyboardEvent()
-        
+
         NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: accountTextField, queue: nil) {[weak self] (_) in
             guard let `self` = self else { return }
             self.errorStackView.isHidden = true
             self.accountTextField.activityView?.isHidden = true
             self.accountTextField.tailImage = nil
             self.userNameValid = false
-            
+
             guard let name = self.accountTextField.text, name.count > 0 else {
-                
+
                 self.passwordTextField.text = self.passwordTextField.text
                 self.confirmPasswordTextField.text = self.confirmPasswordTextField.text
                 return
             }
-            
+
             let (passed, message) = UserManager.shared.validateUserName(name)
             if !passed {
                 self.errorStackView.isHidden = false
                 self.errorMessage.text = message
             } else {
                 self.errorStackView.isHidden = true
-                
+
                 self.accountTextField.activityView?.isHidden = false
                 UserManager.shared.checkUserName(name).done({ (exist) in
                     main {
@@ -302,24 +301,23 @@ extension RegisterViewController {
                 }).cauterize()
             }
         }
-        
 
         setupPasswordEvent()
-        
+
         self.loginTitle.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
             guard let `self` = self else { return }
-            
+
             self.coordinator?.switchToLogin()
         }).disposed(by: disposeBag)
-        
+
         self.tip.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
             guard let `self` = self else { return }
-            
+
             self.coordinator?.pushCreateTip()
         }).disposed(by: disposeBag)
-        
+
         setupValidCodeEvent()
-        
+
         setupRegisterButtonEvent()
     }
 
@@ -361,8 +359,7 @@ extension RegisterViewController {
                             }
                             self.registerButton.canRepeat = true
                         }
-                    }
-                    catch _ {
+                    } catch _ {
 
                     }
 

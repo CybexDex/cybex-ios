@@ -99,7 +99,7 @@ extension PairListHorizantalView: UICollectionViewDataSource, UICollectionViewDe
             let data = pairData[indexPath.item]
             cell.setup(data, indexPath: indexPath)
             cell.isSelected = indexPath.item == self.curIndex
-            
+
             return cell
         }
         return PairCardCell()

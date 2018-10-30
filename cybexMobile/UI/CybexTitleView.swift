@@ -10,17 +10,17 @@ import UIKit
 import SwiftTheme
 
 class CybexTitleView: UIView {
-    
+
     enum Event: String {
         case sendBtnAction
     }
-    
+
     var data: [String]? {
         didSet {
             setup()
         }
     }
-    
+
     let space: CGFloat = 10.0
     var buttons: [UIButton] = []
     var lineView: UIView = {
@@ -28,7 +28,7 @@ class CybexTitleView: UIView {
         view.backgroundColor = .pastelOrange
         return view
     }()
-    
+
     var selectedIndex: Int = 0 {
         didSet {
             for button in buttons {
@@ -41,7 +41,7 @@ class CybexTitleView: UIView {
             self.lineView.center = CGPoint(x: buttons[selectedIndex].center.x, y: self.height - 0.5)
         }
     }
-    
+
     func setup() {
         for view in self.subviews {
             view.removeFromSuperview()
@@ -51,7 +51,7 @@ class CybexTitleView: UIView {
         self.addSubview(view)
         if let data = data {
             let btnWidth: CGFloat = (self.frame.width - CGFloat(data.count - 1) * space) / CGFloat(data.count)
-            
+
             for index in 0...data.count - 1 {
                 let btn = UIButton(frame: CGRect(x: CGFloat(index) * (btnWidth + space), y: 0, width: btnWidth, height: self.height-1))
                 btn.locali = data[index]
@@ -70,7 +70,7 @@ class CybexTitleView: UIView {
             self.addSubview(self.lineView)
         }
     }
-    
+
     @objc func selectedBtn(_ sender: UIButton) {
         for button in buttons {
             if sender == button {
@@ -79,18 +79,18 @@ class CybexTitleView: UIView {
                 button.isSelected = false
             }
         }
-        
+
         self.lineView.center = CGPoint(x: sender.center.x, y: self.height - 0.5)
         self.next?.sendEventWith(Event.sendBtnAction.rawValue, userinfo: ["selectedIndex": sender.tag])
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
 }

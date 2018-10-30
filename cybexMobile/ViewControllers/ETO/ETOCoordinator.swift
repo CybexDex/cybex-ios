@@ -148,7 +148,7 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                                 }
                             }
                         }
-                    }, error: { (error) in
+                    }, error: { (_) in
                     }) { (_) in
                     }
                 }

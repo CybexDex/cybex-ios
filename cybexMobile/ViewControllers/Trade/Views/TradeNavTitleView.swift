@@ -13,24 +13,24 @@ protocol TradeNavTitleViewDelegate {
 }
 
 class TradeNavTitleView: UIView {
-    
+
     @IBOutlet weak var title: UILabel!
-    
+
     @IBOutlet weak var icon: UIImageView!
-    
+
     var isSetUp: Bool?
-    
+
     enum EventAction: String {
         case changeTitle
     }
-    
+
     var data: String? {
         didSet {
             title.text = data
         }
     }
     var delegate: TradeNavTitleViewDelegate?
-    
+
     fileprivate func setup() {
         self.isSetUp = false
         self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
@@ -41,39 +41,39 @@ class TradeNavTitleView: UIView {
             }
         }).disposed(by: disposeBag)
     }
-    
+
     override var intrinsicContentSize: CGSize {
         return self.size
     }
-    
+
     fileprivate func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView!.bottom
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))

@@ -19,7 +19,7 @@ func openPage(_ urlString: String) {
     }
 }
 
-func getChainId(callback:@escaping(String)->Void) {
+func getChainId(callback:@escaping(String) -> Void) {
     if AppConfiguration.shared.chainID.isEmpty {
         let requeset = GetChainIDRequest { (id) in
             if let id = id as? String {
@@ -35,7 +35,7 @@ func getChainId(callback:@escaping(String)->Void) {
 }
 
 typealias BlockChainParamsType = (chain_id: String, block_id: String, block_num: Int32)
-func blockchainParams(callback: @escaping(BlockChainParamsType)->Void) {
+func blockchainParams(callback: @escaping(BlockChainParamsType) -> Void) {
     getChainId { (chainID) in
         let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
             if let infos = infos as? (block_id: String, block_num: String) {
@@ -52,7 +52,7 @@ func calculateFee(_ operation: String,
                   filterRepeat: Bool = true,
                   completion:@escaping (_ success: Bool,
                                         _ amount: Decimal,
-                                        _ assetID: String)->Void) {
+                                        _ assetID: String) -> Void) {
     let request = GetRequiredFees(response: { (data) in
         if let fees = data as? [Fee], let cybAmount = fees.first?.amount.toDouble() {
 
@@ -418,7 +418,7 @@ enum FundType: String {
     case ALL
 }
 
-func getWithdrawAndDepositRecords(_ accountName: String, asset: String, fundType: FundType, size: Int, offset: Int, expiration: Int, callback:@escaping (TradeRecord?)->Void) {
+func getWithdrawAndDepositRecords(_ accountName: String, asset: String, fundType: FundType, size: Int, offset: Int, expiration: Int, callback:@escaping (TradeRecord?) -> Void) {
 
     var paragram = ["op": ["accountName": accountName, "expiration": expiration], "signer": "" ] as [String: Any]
 

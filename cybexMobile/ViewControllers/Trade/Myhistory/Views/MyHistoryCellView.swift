@@ -9,19 +9,19 @@
 import UIKit
 
 class MyHistoryCellView: UIView {
-    
+
     @IBOutlet weak var asset: UILabel!
     @IBOutlet weak var typeView: UIView!
     @IBOutlet weak var base: UILabel!
-    
+
     @IBOutlet weak var kindL: UILabel!
     @IBOutlet weak var orderAmount: UILabel!
     @IBOutlet weak var amount: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var orderPrice: UILabel!
-    
+
     @IBOutlet weak var state: UILabel!
-    
+
     var data: Any? {
         didSet {
             if let fillOrder = data as? (FillOrder, time: String) {
@@ -29,7 +29,7 @@ class MyHistoryCellView: UIView {
             }
         }
     }
-    
+
     func updateUI(_ orderInfo: (FillOrder, time: String)) {
         let order = orderInfo.0
         if let payInfo = appData.assetInfo[order.pays.assetID], let receiveInfo = appData.assetInfo[order.receives.assetID] {
@@ -42,16 +42,16 @@ class MyHistoryCellView: UIView {
                 self.base.text  = "/" + result.base
                 self.kindL.text = "BUY"
                 self.typeView.backgroundColor = .turtleGreen
-                
+
                 let realAmount = getRealAmount(receiveInfo.id, amount: order.receives.amount)
                 let paysAmount = getRealAmount(payInfo.id, amount: order.pays.amount)
                 self.amount.text = realAmount.string(digits: receiveInfo.precision, roundingMode: .down) + " " + receiveInfo.symbol.filterJade
                 self.orderAmount.text = getRealAmount(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision, roundingMode: .down) +
                     " " + payInfo.symbol.filterJade
-                
+
                 self.orderPrice.text = (paysAmount / realAmount).string(digits: payInfo.precision, roundingMode: .down) +
                     " " +  payInfo.symbol.filterJade
-                
+
             } else {
                 // SELL   pay -> quote receive -> base
                 self.kindL.text = "SELL"
@@ -70,43 +70,43 @@ class MyHistoryCellView: UIView {
             self.time.text = orderInfo.time
         }
     }
-    
+
     func setup() {
-        
+
     }
-    
+
     override var intrinsicContentSize: CGSize {
         return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     fileprivate func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView!.bottom
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))

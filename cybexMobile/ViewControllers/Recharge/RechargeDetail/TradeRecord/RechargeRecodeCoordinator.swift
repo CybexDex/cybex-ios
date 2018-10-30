@@ -19,7 +19,7 @@ protocol RechargeRecodeStateManagerProtocol {
         _ subscriber: S, transform: ((Subscription<RechargeRecodeState>) -> Subscription<SelectedState>)?
     ) where S.StoreSubscriberStateType == SelectedState
 
-    func fetchRechargeRecodeList(_ accountName: String, asset: String, fundType: FundType, size: Int, offset: Int, expiration: Int, assetId: String, callback:@escaping (Bool)->Void)
+    func fetchRechargeRecodeList(_ accountName: String, asset: String, fundType: FundType, size: Int, offset: Int, expiration: Int, assetId: String, callback:@escaping (Bool) -> Void)
 
     func setAssetAction(_ asset: String)
 
@@ -84,7 +84,7 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
                                  offset: Int,
                                  expiration: Int,
                                  assetId: String,
-                                 callback:@escaping (Bool)->Void) {
+                                 callback:@escaping (Bool) -> Void) {
         getWithdrawAndDepositRecords(accountName,
                                      asset: asset,
                                      fundType: fundType,

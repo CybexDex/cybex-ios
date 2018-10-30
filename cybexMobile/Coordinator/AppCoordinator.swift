@@ -27,7 +27,7 @@ protocol AppStateManagerProtocol {
     func fetchTickerData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority)
     func fetchEthToRmbPrice()
 
-    func fetchGetToCyb(_ callback:@escaping(Decimal)->Void)
+    func fetchGetToCyb(_ callback:@escaping(Decimal) -> Void)
 }
 
 class AppCoordinator {

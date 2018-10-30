@@ -54,7 +54,7 @@ extension UserManager {
         return (true, "")
     }
 
-    func login(_ username: String, password: String, completion:@escaping (Bool)->Void) {
+    func login(_ username: String, password: String, completion:@escaping (Bool) -> Void) {
         self.unlock(username, password: password) {[weak self] (locked, data) in
             guard let `self` = self else { return }
             if locked {
@@ -254,7 +254,7 @@ extension UserManager {
         return promise
     }
 
-    func unlock(_ username: String?, password: String, completion:@escaping (Bool, FullAccount?)->Void) {
+    func unlock(_ username: String?, password: String, completion:@escaping (Bool, FullAccount?) -> Void) {
         guard let name = username ?? self.name.value else {
             completion(false, nil)
             return

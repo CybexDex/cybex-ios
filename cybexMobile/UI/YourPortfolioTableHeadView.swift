@@ -12,7 +12,7 @@ import SwiftTheme
 @IBDesignable
 
 class YourPortfolioTableHeadView: UIView {
-    
+
     func setup() {
         self.shadowOffset = CGSize(width: 0, height: 8)
         self.shadowColor   = ThemeManager.currentThemeIndex == 0 ? .black10 : .steel20
@@ -20,39 +20,39 @@ class YourPortfolioTableHeadView: UIView {
         self.shadowOpacity = 1.0
         updateHeight()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadXIB()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadXIB()
         setup()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     private func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     override var intrinsicContentSize: CGSize {
         return CGSize(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let view = self.subviews.last?.subviews.last
         return (view?.frame.origin.y)! + (view?.frame.size.height)!
     }
-    
+
     func loadXIB() {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib.init(nibName: String.init(describing: type(of: self)), bundle: bundle)

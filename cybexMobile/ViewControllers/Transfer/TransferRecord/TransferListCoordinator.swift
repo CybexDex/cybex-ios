@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 
 protocol TransferListCoordinatorProtocol {
-    
+
     func openTransferDetail(_ sender: TransferRecordViewModel)
 }
 
@@ -19,14 +19,14 @@ protocol TransferListStateManagerProtocol {
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<TransferListState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState
-    
+
     func reduceTransferRecords()
 }
 
 class TransferListCoordinator: AccountRootCoordinator {
-    
+
     lazy var creator = TransferListPropertyActionCreate()
-    
+
     var store = Store<TransferListState>(
         reducer: transferListReducer,
         state: nil,
@@ -48,13 +48,13 @@ extension TransferListCoordinator: TransferListStateManagerProtocol {
     var state: TransferListState {
         return store.state
     }
-    
+
     func subscribe<SelectedState, S: StoreSubscriber>(
         _ subscriber: S, transform: ((Subscription<TransferListState>) -> Subscription<SelectedState>)?
         ) where S.StoreSubscriberStateType == SelectedState {
         store.subscribe(subscriber, transform: transform)
     }
-    
+
     func reduceTransferRecords() {
         if let data = UserManager.shared.transferRecords.value {
             self.store.dispatch(ReduceTansferRecordsAction(data: data))

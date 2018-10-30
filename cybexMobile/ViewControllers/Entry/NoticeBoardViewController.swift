@@ -11,9 +11,9 @@ import Foundation
 class NoticeBoardViewController: BaseViewController {
     var coordinator: RegisterCoordinatorProtocol?
     var password: String?
-    
+
     @IBOutlet weak var noticeView: NoticeBoardView!
-    
+
     override func viewDidLoad() {
         self.noticeView.data = password
     }

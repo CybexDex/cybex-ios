@@ -19,7 +19,6 @@ func businessReducer(action: Action, state: BusinessState?) -> BusinessState {
 func businessPropertyReducer(_ state: BusinessPropertyState?, action: Action) -> BusinessPropertyState {
     let state = state ?? BusinessPropertyState()
 
-
     switch action {
     case let action as ChangePriceAction:
         state.price.accept(action.price)

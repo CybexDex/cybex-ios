@@ -12,39 +12,39 @@ import RxCocoa
 import ReSwift
 
 class WithdrawAddressHomeViewController: BaseViewController {
-    
+
     @IBOutlet weak var tableView: UITableView!
-    
+
     var coordinator: (WithdrawAddressHomeCoordinatorProtocol & WithdrawAddressHomeStateManagerProtocol)?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupUI()
         startLoading()
         self.coordinator?.fetchData()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.coordinator?.fetchAddressData()
     }
-    
+
     func setupUI() {
         self.localizedText = R.string.localizable.withdraw_address_manager.key.localizedContainer()
-        
+
         self.tableView.register(UINib(resource: R.nib.withdrawAddressHomeTableViewCell), forCellReuseIdentifier: R.nib.withdrawAddressHomeTableViewCell.name)
     }
-    
+
     override func configureObserveState() {
-        
+
         self.coordinator?.state.property.data.asObservable().subscribe(onNext: {[weak self] (data) in
             guard let `self` = self, data.count > 0 else { return }
-            
+
             self.coordinator?.fetchAddressData()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
+
         self.coordinator?.state.property.addressData.asObservable().subscribe(onNext: {[weak self] (_) in
             guard let `self` = self else { return }
             self.endLoading()
@@ -57,7 +57,7 @@ extension WithdrawAddressHomeViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.coordinator?.state.property.data.value.count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.withdrawAddressHomeTableViewCell.name, for: indexPath) as? WithdrawAddressHomeTableViewCell else {
             return WithdrawAddressHomeTableViewCell()
@@ -70,7 +70,7 @@ extension WithdrawAddressHomeViewController: UITableViewDelegate, UITableViewDat
         }
         return WithdrawAddressHomeTableViewCell()
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.coordinator?.selectCell(indexPath.row)
         self.coordinator?.openWithDrawAddressVC()

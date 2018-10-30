@@ -10,12 +10,12 @@ import Foundation
 
 @IBDesignable
 class TradeHistoryCellView: UIView {
-    
+
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var assetQuote: UILabel!
     @IBOutlet weak var assetBase: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    
+
     var data: Any? {
         didSet {
             guard let showData = data as? TradeHistoryViewModel else { return }
@@ -26,43 +26,43 @@ class TradeHistoryCellView: UIView {
             self.dateLabel.text = showData.time
         }
     }
-    
+
     fileprivate func setup() {
-        
+
     }
-    
+
     override var intrinsicContentSize: CGSize {
         return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     fileprivate func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView!.bottom
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
@@ -70,10 +70,10 @@ class TradeHistoryCellView: UIView {
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
-        
+
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-    
+
 }

@@ -47,7 +47,7 @@ class OpenedOrdersStatesView: UIView {
             label.backgroundColor = buyColor
         }
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -56,11 +56,11 @@ class OpenedOrdersStatesView: UIView {
         super.awakeFromNib()
         setupUI()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     private func setupUI() {
         self.addSubview(label)
     }

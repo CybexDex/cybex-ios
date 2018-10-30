@@ -11,12 +11,12 @@ import SwiftTheme
 
 @IBDesignable
 class TransferLineView: UIView {
-    
+
     @IBOutlet weak var name: UILabel!
     //    @IBOutlet weak var content: UILabel!
-    
+
     @IBOutlet weak var content: UITextView!
-    
+
     @IBInspectable
     var nameLocali: String? {
         didSet {
@@ -25,7 +25,7 @@ class TransferLineView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
     var contentLocali: String? {
         didSet {
@@ -38,43 +38,43 @@ class TransferLineView: UIView {
             }
         }
     }
-    
+
     func setup() {
         self.content.isUserInteractionEnabled = false
     }
-    
+
     fileprivate func updateHeight() {
         layoutIfNeeded()
         self.frame.size.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     override var intrinsicContentSize: CGSize {
         return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return (lastView?.frame.origin.y)! + (lastView?.frame.size.height)! + 13
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadFromXIB()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadFromXIB()
         setup()
     }
-    
+
     private func loadFromXIB() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))

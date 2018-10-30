@@ -11,7 +11,7 @@ import ReSwift
 
 func transferReducer(action: Action, state: TransferState?) -> TransferState {
     let state = state ?? TransferState()
-    
+
     switch action {
     case let action as ValidAccountAction:
         state.accountValid.accept(action.status)
@@ -35,12 +35,12 @@ func transferReducer(action: Action, state: TransferState?) -> TransferState {
     case let action as ChooseAccountAction:
         state.account.accept(action.account.address)
         state.accountValid.accept(AccountValidStatus.validSuccessed)
-        
+
     case _ as CleanToAccountAction:
         state.toAccount.accept(nil)
     default:
         break
     }
-    
+
     return state
 }

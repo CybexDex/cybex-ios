@@ -16,11 +16,11 @@ struct PickerData {
 
 class PickerView: UIView {
     @IBOutlet weak var picker: UIPickerView!
-    
+
     var selectedValues: [Int: Int]?
-    
+
     var components: Int = 0
-    
+
     open var items: AnyObject? {
         didSet {
             selectedValues = [Int: Int]()
@@ -32,43 +32,43 @@ class PickerView: UIView {
         selectedValues![component] = row
         picker.selectRow(row, inComponent: component, animated: true)
     }
-    
+
     fileprivate func setup() {
         picker.centerY(to: self, offset: 0)
     }
-    
+
     override var intrinsicContentSize: CGSize {
         return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     fileprivate func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView!.bottom
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
@@ -76,7 +76,7 @@ class PickerView: UIView {
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
-        
+
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -87,21 +87,21 @@ extension PickerView: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 41
     }
-    
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         if items != nil {
             return self.numberOfComponents()
         }
         return 0
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if items != nil {
             return self.numberOfRowsInComponent(component)
         }
         return 0
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         if items != nil {
             if let title = self.titleForRow(row, component: component) {
@@ -112,11 +112,11 @@ extension PickerView: UIPickerViewDelegate, UIPickerViewDataSource {
         }
         return nil
     }
-    
+
 }
 
 extension PickerView {
-    
+
     func numberOfComponents() -> Int {
         if items is [String] {
             return 1
@@ -145,7 +145,7 @@ extension PickerView {
         }
         return 0
     }
-    
+
     func numberOfRowsInComponent(_ component: Int) -> Int {
         if let items = items as? [String] {
             return items.count
@@ -180,7 +180,7 @@ extension PickerView {
         }
         return 0
     }
-    
+
     func titleForRow(_ row: Int, component: Int) -> String? {
         if let result = items as? [String] {
             return result[row]
@@ -206,8 +206,7 @@ extension PickerView {
                     if row < result.count {
                         return result[row]
                     }
-                }
-                else if let result = obj as? [Int: [String: AnyObject]] {
+                } else if let result = obj as? [Int: [String: AnyObject]] {
                     let indexData: [Int: [String: AnyObject]] = result
                     if let content: [String: AnyObject] = indexData[row] {
                         return content[PickerData.key] as? String
