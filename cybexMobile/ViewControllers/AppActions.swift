@@ -10,7 +10,6 @@ import Foundation
 import ReSwift
 import RxCocoa
 
-
 enum PageRefreshType: Int {
     case initial = 0
     case manual
