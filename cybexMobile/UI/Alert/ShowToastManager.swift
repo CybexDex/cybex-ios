@@ -224,9 +224,9 @@ class ShowToastManager {
     }
     
     func setUp(titleImage: String, message: String, animationType: ShowAnimationType, showType: ShowManagerType) {
-        self.data          = ["titleImage": titleImage, "message": message]
+        self.data = ["titleImage": titleImage, "message": message]
         self.animationShow = animationType
-        self.showType      = showType
+        self.showType = showType
         if showType == .alertImage {
             self.setupAlertImage()
         } else if showType == .sheetImage {

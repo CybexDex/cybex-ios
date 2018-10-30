@@ -40,3 +40,32 @@ extension String {
         return regex?.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: "$1_$2").lowercased() ?? self
     }
 }
+
+
+//extension String {
+//    static private let SNAKECASE_PATTERN:String = "(\\w{0,1})_"
+//    static private let CAMELCASE_PATTERN:String = "[A-Z][a-z,\\d]*"
+//    func snake_caseToCamelCase() -> String{
+//        let buf:NSString = self.capitalized.replacingOccurrences( of: String.SNAKECASE_PATTERN,
+//                                                                  with: "$1",
+//                                                                  options: .regularExpression,
+//                                                                  range: nil) as NSString
+//        return buf.replacingCharacters(in: NSMakeRange(0,1), with: buf.substring(to: 1).lowercased()) as String
+//    }
+//    func camelCaseTosnake_case() throws -> String {
+//        guard let pattern: NSRegularExpression = try? NSRegularExpression(pattern: String.CAMELCASE_PATTERN,
+//                                                                          options: []) else {
+//                                                                            throw NSError(domain: "NSRegularExpression fatal error occured.", code:-1, userInfo: nil)
+//        }
+//        
+//        let input:NSString = (self as NSString).replacingCharacters(in: NSMakeRange(0,1), with: (self as NSString).substring(to: 1).capitalized) as NSString
+//        var array = [String]()
+//        let matches = pattern.matches(in: input as String, options:[], range: NSRange(location:0, length: input.length))
+//        for match in matches {
+//            for index in 0..<match.numberOfRanges {
+//                array.append(input.substring(with: match.range(at: index)).lowercased())
+//            }
+//        }
+//        return array.joined(separator: "_")
+//    }
+//}

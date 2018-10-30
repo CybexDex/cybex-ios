@@ -31,7 +31,7 @@ class NormalContentCell: BaseTableViewCell {
             cellView.rightIconName = selectedIndex == indexPath.row ? "icArrowLight24Px" : "icArrowLight24Px"
             cellView.nameLeftConstraint.constant = 54
             cellView.lineView.backgroundColor = UIColor.steel11
+            cellView.updateHeight()
         }
     }
-    
 }

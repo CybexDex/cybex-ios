@@ -51,7 +51,9 @@ class OpenedOrdersViewController: BaseViewController {
     }
 
     func setupEvent() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification),
+                                               object: nil, queue: nil,
+                                               using: { [weak self] _ in
             guard let `self` = self else { return }
             if let accountView = self.containerView as? MyOpenedOrdersView {
 
@@ -65,7 +67,9 @@ class OpenedOrdersViewController: BaseViewController {
         guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0) else { return }
         guard let order = self.order else {return}
         startLoading()
-        calculateFee(operation, focusAssetId: order.sellPrice.base.assetID, operationID: .limitOrderCancel) { [weak self](success, amount, assetId) in
+        calculateFee(operation,
+                     focusAssetId: order.sellPrice.base.assetID,
+                     operationID: .limitOrderCancel) { [weak self](success, amount, assetId) in
             guard let `self` = self else {return}
             self.endLoading()
 
@@ -74,7 +78,9 @@ class OpenedOrdersViewController: BaseViewController {
             }
 
             if success, let order = self.order {
-                let ensureTitle = order.isBuy ? R.string.localizable.cancle_openedorder_buy.key.localized() : R.string.localizable.cancle_openedorder_sell.key.localized()
+                let ensureTitle = order.isBuy ?
+                    R.string.localizable.cancle_openedorder_buy.key.localized() :
+                    R.string.localizable.cancle_openedorder_sell.key.localized()
 
                 if let baseInfo = appData.assetInfo[order.sellPrice.base.assetID], let quoteInfo = appData.assetInfo[order.sellPrice.quote.assetID], let feeInfoValue = appData.assetInfo[assetId] {
                     var priceInfo = ""
@@ -82,17 +88,25 @@ class OpenedOrdersViewController: BaseViewController {
                     var totalInfo = ""
                     let feeInfo = amount.string(digits: feeInfoValue.precision, roundingMode: .down) + " " + feeInfoValue.symbol.filterJade
                     if order.isBuy {
-                        let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
-                        let quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-                        priceInfo = (baseAmount / quoteAmount).string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
+                        let baseAmount = getRealAmount(order.sellPrice.base.assetID,
+                                                       amount: order.sellPrice.base.amount)
+                        let quoteAmount = getRealAmount(order.sellPrice.quote.assetID,
+                                                        amount: order.sellPrice.quote.amount)
+                        priceInfo = (baseAmount / quoteAmount).string(digits: baseInfo.precision,
+                                                                      roundingMode: .down) + " " + baseInfo.symbol.filterJade
                         let total = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
                         let amounts = total / (baseAmount / quoteAmount)
-                        amountInfo = amounts.string(digits: quoteInfo.precision, roundingMode: .down) + " " + quoteInfo.symbol.filterJade
-                        totalInfo = total.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
+                        amountInfo = amounts.string(digits: quoteInfo.precision,
+                                                    roundingMode: .down) + " " + quoteInfo.symbol.filterJade
+                        totalInfo = total.string(digits: baseInfo.precision,
+                                                 roundingMode: .down) + " " + baseInfo.symbol.filterJade
                     } else {
-                        let baseAmount  = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-                        let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.sellPrice.base.amount)
-                        priceInfo =  (baseAmount / quoteAmount).string(digits: quoteInfo.precision, roundingMode: .down) + " " + quoteInfo.symbol.filterJade
+                        let baseAmount  = getRealAmount(order.sellPrice.quote.assetID,
+                                                        amount: order.sellPrice.quote.amount)
+                        let quoteAmount = getRealAmount(order.sellPrice.base.assetID,
+                                                        amount: order.sellPrice.base.amount)
+                        priceInfo =  (baseAmount / quoteAmount).string(digits: quoteInfo.precision,
+                                                                       roundingMode: .down) + " " + quoteInfo.symbol.filterJade
                         let amounts = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
                         var total: Decimal = 0
                         if order.forSale == order.sellPrice.base.amount {
@@ -100,12 +114,19 @@ class OpenedOrdersViewController: BaseViewController {
                         } else {
                             total = amounts * (baseAmount / quoteAmount)
                         }
-                        totalInfo = total.string(digits: quoteInfo.precision, roundingMode: .down) + " " + quoteInfo.symbol.filterJade
-                        amountInfo = amounts.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
+                        totalInfo = total.string(digits: quoteInfo.precision,
+                                                 roundingMode: .down) + " " + quoteInfo.symbol.filterJade
+                        amountInfo = amounts.string(digits: baseInfo.precision,
+                                                    roundingMode: .down) + " " + baseInfo.symbol.filterJade
                     }
 
                     if self.isVisible {
-                        self.showConfirm(ensureTitle, attributes: getOpenedOrderInfo(price: priceInfo, amount: amountInfo, total: totalInfo, fee: feeInfo, isBuy: order.isBuy))
+                        self.showConfirm(ensureTitle,
+                                         attributes: getOpenedOrderInfo(price: priceInfo,
+                                                                        amount: amountInfo,
+                                                                        total: totalInfo,
+                                                                        fee: feeInfo,
+                                                                        isBuy: order.isBuy))
                     }
                 }
             } else {
@@ -175,12 +196,13 @@ extension OpenedOrdersViewController {
     func postCancelOrder() {
         // order.isBuy ? pair.base : pair.quote
         if let order = self.order {
-
             self.coordinator?.cancelOrder(order.id, feeId: order.sellPrice.base.assetID, callback: {[weak self] (success) in
                 guard let `self` = self else { return }
-
                 self.endLoading()
-                self.showToastBox(success, message: success ? R.string.localizable.cancel_create_success.key.localized() : R.string.localizable.cancel_create_fail.key.localized())
+                self.showToastBox(success,
+                                  message: success ?
+                                    R.string.localizable.cancel_create_success.key.localized() :
+                                    R.string.localizable.cancel_create_fail.key.localized())
             })
 
         }

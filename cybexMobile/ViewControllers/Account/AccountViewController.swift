@@ -41,6 +41,7 @@ class AccountViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         SwifterSwift.delay(milliseconds: 100) {
             self.setupUI()
         }
@@ -52,9 +53,7 @@ class AccountViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //    if let nav = self.navigationController as? BaseNavigationController {
-        //      nav.setupNavUI()
-        //    }
+
     }
     
     func setupIconImg() {
@@ -82,7 +81,6 @@ class AccountViewController: BaseViewController {
     
     // UI的初始化设置
     func setupUI() {
-        
         self.navigationItem.title = ""
         setupTitle()
         setupIconImg()

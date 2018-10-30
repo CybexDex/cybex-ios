@@ -85,7 +85,8 @@ struct RegisterIDRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
     
     var parameters: Any? {
-        return [ApiCategory.none, api.rawValue, []]
+        print("注册ID。 \([ApiCategory.none, api.rawValue.snakeCased(), []])")
+        return [ApiCategory.none, api.rawValue.snakeCased(), []]
     }
     
     var digist: String {

@@ -167,7 +167,7 @@ extension ComprehensiveViewController {
         openUrl(midlleItem.link)
     }
 
-    @objc func eTOHomeBannerViewDidClicked(_ data: [String: Any]) {
+    @objc func ETOHomeBannerViewDidClicked(_ data: [String: Any]) {
         guard let banners = self.coordinator?.state.banners.value, let index = data["data"] as? Int  else { return }
         let banner = banners[index]
 

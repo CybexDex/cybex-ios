@@ -298,7 +298,7 @@ extension Double {
         let sign = ((num < 0) ? "-" : "")
         num = fabs(num)
         if (num < 1000.0) {
-            return "\(sign)\(num.string(digits: digitNum))"
+            return "\(sign)\(num.string(digits: digitNum, roundingMode:.down))"
         }
 
         let exp: Int = Int(log10(num) / 3.0)
@@ -373,7 +373,7 @@ extension String {
 
     func formatCurrency(digitNum: Int) -> String {
 
-        if let str = toDouble()?.formatCurrency(digitNum: digitNum) {
+        if let str = toDecimal()?.string(digits: digitNum, roundingMode: .down) {
             return str
         }
         return ""

@@ -46,7 +46,7 @@ class QuotesTitleView: UIView {
         didSet {
             for titleView in titleViews {
                 titleView.viewWithTag(10)?.isHidden = true
-                if let titleL =  titleView.viewWithTag(9) as? UILabel {
+                if let titleL = titleView.viewWithTag(9) as? UILabel {
                     titleL.theme1TitleColor = normalColor
                     titleL.theme2TitleColor = normalColor
                 }

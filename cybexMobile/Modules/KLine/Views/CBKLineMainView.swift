@@ -433,7 +433,7 @@ extension CBKLineMainView {
 
         if (lowPosition.x + mindrawAttrsString.size().width) > bounds.width {
             minX -= mindrawAttrsString.size().width
-            mindrawAttrsString.setAttributedString(NSAttributedString(string: lowKlineModel.low.string(digits: lowKlineModel.precision) + "→", attributes: attributes))
+            mindrawAttrsString.setAttributedString(NSAttributedString(string: lowKlineModel.low.string(digits: lowKlineModel.precision, roundingMode: .down) + "→", attributes: attributes))
         }
 
         let minrect = CGRect(x: minX,
@@ -443,12 +443,12 @@ extension CBKLineMainView {
 
         mindrawAttrsString.draw(in: minrect)
 
-        let maxdrawAttrsString = NSMutableAttributedString(string: "←" + highKlineModel.high.string(digits: highKlineModel.precision), attributes: attributes)
+        let maxdrawAttrsString = NSMutableAttributedString(string: "←" + highKlineModel.high.string(digits: highKlineModel.precision,roundingMode: .down), attributes: attributes)
 
         var maxX = highPosition.x
         if (highPosition.x + mindrawAttrsString.size().width) > bounds.width {
             maxX -= maxdrawAttrsString.size().width
-            maxdrawAttrsString.setAttributedString(NSAttributedString(string: highKlineModel.high.string(digits: highKlineModel.precision) + "→", attributes: attributes))
+            maxdrawAttrsString.setAttributedString(NSAttributedString(string: highKlineModel.high.string(digits: highKlineModel.precision,roundingMode: .down) + "→", attributes: attributes))
         }
 
         let maxrect = CGRect(x: maxX,
