@@ -34,7 +34,9 @@ struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.getRequiredFees.rawValue.snakeCased(), [[[operationID.rawValue, JSON(parseJSON: operationStr).dictionaryObject ?? [:]]], assetID]]
+        return [ApiCategory.database,
+                DataBaseCatogery.getRequiredFees.rawValue.snakeCased(),
+                [[[operationID.rawValue, JSON(parseJSON: operationStr).dictionaryObject ?? [:]]], assetID]]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -61,7 +63,7 @@ struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
 
     func transferResponse(from resultObject: Any) throws -> Any {
         let result = JSON(resultObject)
-        if let _ = result.dictionaryObject {
+        if result.dictionaryObject != nil {
             return true
         }
 
@@ -181,7 +183,9 @@ struct SubscribeMarketRequest: JSONRPCKit.Request, RevisionRequest, JSONRPCRespo
     var response: RPCSResponse
 
     var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.subscribeToMarket.rawValue.snakeCased(), [CybexWebSocketService.shared.idGenerator.currentId + 1, ids[0], ids[1]]]
+        return [ApiCategory.database,
+                DataBaseCatogery.subscribeToMarket.rawValue.snakeCased(),
+                [CybexWebSocketService.shared.idGenerator.currentId + 1, ids[0], ids[1]]]
     }
 
     func revisionParameters(_ data: Any) -> Any {
@@ -214,7 +218,9 @@ struct GetLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-        return [ApiCategory.database, DataBaseCatogery.getLimitOrders.rawValue.snakeCased(), [pair.base, pair.quote, 500]]
+        return [ApiCategory.database,
+                DataBaseCatogery.getLimitOrders.rawValue.snakeCased(),
+                [pair.base, pair.quote, 500]]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {

@@ -11,7 +11,7 @@
 import UIKit
 
 open class RPCircularProgress: UIView {
-
+  
     // MARK: - Completion
 
     public typealias CompletionBlock = () -> Void
@@ -99,15 +99,14 @@ open class RPCircularProgress: UIView {
     /**
      A timing function defining the pacing of the animation. Defaults to ease in, ease out.
      */
-    open var timingFunction: CAMediaTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+    open var timingFunction: CAMediaTimingFunction = CAMediaTimingFunction(
+        name: CAMediaTimingFunctionName.easeInEaseOut)
 
     /**
      Getter for the current progress (not observed from any active animations)
      */
     @IBInspectable open var progress: CGFloat {
-        get {
-            return progressLayer.progress
-        }
+        return progressLayer?.progress ?? 0
     }
 
     /**
@@ -117,7 +116,7 @@ open class RPCircularProgress: UIView {
      */
     @IBInspectable open var indeterminateProgress: CGFloat {
         get {
-            return progressLayer.indeterminateProgress
+            return progressLayer?.indeterminateProgress ?? 0
         }
         set {
             progressLayer.indeterminateProgress = pin(newValue, minValue: 0.05, maxValue: 0.9)
@@ -132,12 +131,10 @@ open class RPCircularProgress: UIView {
     // MARK: - Custom Base Layer
 
     fileprivate var progressLayer: ProgressLayer! {
-        get {
-            if let layer = layer as? ProgressLayer {
-                return layer
-            }
-            return ProgressLayer()
+        if let layer = layer as? ProgressLayer {
+            return layer
         }
+        return ProgressLayer()
     }
 
     open override class var layerClass: AnyClass {
@@ -208,7 +205,11 @@ open class RPCircularProgress: UIView {
      - parameter duration:     Sets the overal duration that the animation should complete within
      - parameter completion:   An optional closure to execute after the animation completes
      */
-    open func updateProgress(_ progress: CGFloat, animated: Bool = true, initialDelay: CFTimeInterval = 0, duration: CFTimeInterval? = nil, completion: CompletionBlock? = nil) {
+    open func updateProgress(_ progress: CGFloat,
+                             animated: Bool = true,
+                             initialDelay: CFTimeInterval = 0,
+                             duration: CFTimeInterval? = nil,
+                             completion: CompletionBlock? = nil) {
         let pinnedProgress = pin(progress)
         if animated {
 
@@ -231,7 +232,11 @@ open class RPCircularProgress: UIView {
             progressLayer.progress = currentProgress
 
             progressLayer.removeAnimation(forKey: AnimationKeys.progress)
-            animate(progress, currentProgress: currentProgress, initialDelay: initialDelay, duration: animationDuration, completion: completion)
+            animate(progress,
+                    currentProgress:currentProgress,
+                    initialDelay: initialDelay,
+                    duration: animationDuration,
+                    completion: completion)
         } else {
             progressLayer.removeAnimation(forKey: AnimationKeys.progress)
 
@@ -268,7 +273,11 @@ private extension RPCircularProgress {
         return min(max(value, minValue), maxValue)
     }
 
-    func animate(_ pinnedProgress: CGFloat, currentProgress: CGFloat, initialDelay: CFTimeInterval, duration: CFTimeInterval, completion: CompletionBlock?) {
+    func animate(_ pinnedProgress: CGFloat,
+                 currentProgress: CGFloat,
+                 initialDelay: CFTimeInterval,
+                 duration: CFTimeInterval,
+                 completion: CompletionBlock?) {
         let animation = CABasicAnimation(keyPath: AnimationKeys.progress)
         animation.duration = duration
         animation.timingFunction = timingFunction

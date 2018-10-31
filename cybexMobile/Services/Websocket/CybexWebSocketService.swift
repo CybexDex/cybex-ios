@@ -158,8 +158,8 @@ class CybexWebSocketService: NSObject {
         self.idGenerator = JsonIdGenerator()
         self.batchFactory.idGenerator = self.idGenerator
         self.queue.cancelAllOperations()
-        self.queue.operations.forEach { (op) in
-            if let operation = op as? AsyncRequestOperation {
+        self.queue.operations.forEach { (operation) in
+            if let operation = operation as? AsyncRequestOperation {
                 if operation.state == .executing {
                     operation.state = .finished
                 }
@@ -238,14 +238,16 @@ class CybexWebSocketService: NSObject {
             writeJSON = JSON(batch.requestObject)
         }
 
-        let id = writeJSON["id"].stringValue
+        let sendId = writeJSON["id"].stringValue
 
-        return (writeJSON, id)
+        return (writeJSON, sendId)
     }
 
-    private func appendRequestToQueue<Request: JSONRPCKit.Request>(_ request: Request, priority: Operation.QueuePriority = .normal, response:@escaping CybexWebSocketResponse) {
+    private func appendRequestToQueue<Request: JSONRPCKit.Request>(_ request: Request,
+                                                                   priority: Operation.QueuePriority = .normal,
+                                                                   response:@escaping CybexWebSocketResponse) {
         let sendData = self.constructSendData(request: request)
-        let id = sendData.1
+        let sendId = sendData.1
 
         let operation = AsyncRequestOperation(response) {[weak self] operation in
             guard let `self` = self else { return }
@@ -277,12 +279,12 @@ class CybexWebSocketService: NSObject {
             operation.qualityOfService = .default
         }
 
-        if let idInt = id.int, idInt > 3, self.ids.count < 3 {
-            registerOperations().forEach { (op) in
-                operation.addDependency(op)
+        if let idInt = sendId.int, idInt > 3, self.ids.count < 3 {
+            registerOperations().forEach { (opera) in
+                operation.addDependency(opera)
             }
         }
-        operation.name = id
+        operation.name = sendId
 
         self.queue.addOperation(operation)
     }
@@ -379,12 +381,12 @@ extension CybexWebSocketService: SRWebSocketDelegate {
         let data = JSON(parseJSON: message)
 //            log.info("receive message: \(data.rawString()!)")
 
-        guard let id = data["id"].int else {
+        guard let sendId = data["id"].int else {
             return
         }
 
-        self.queue.operations.filter({ $0.name == id.description }).forEach { (op) in
-            if let operation = op as? AsyncRequestOperation, operation.state == .executing {
+        self.queue.operations.filter({ $0.name == sendId.description }).forEach { (operation) in
+            if let operation = operation as? AsyncRequestOperation, operation.state == .executing {
                 operation.response(data)
                 operation.state = .finished
             }

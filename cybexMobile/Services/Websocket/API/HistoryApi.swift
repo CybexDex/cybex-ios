@@ -45,7 +45,10 @@ struct GetAccountHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
             var fillOrders: [FillOrder] = []
             var transferRecords: [TransferRecord] = []
             for item in response {
-                if let opItem = item["op"] as? [Any], let opcode = opItem[0] as? Int, var operation = opItem[1] as? [String: Any], let blockNum = item["block_num"] {
+                if let opItem = item["op"] as? [Any],
+                    let opcode = opItem[0] as? Int,
+                    var operation = opItem[1] as? [String: Any],
+                    let blockNum = item["block_num"] {
                     operation["block_num"] = blockNum
                     if opcode == ChainTypesOperations.fillOrder.rawValue {
                         if let fillorder = FillOrder.deserialize(from: operation) {
@@ -113,7 +116,9 @@ struct GetFillOrderHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-        return [ApiCategory.history, HistoryCatogery.getFillOrderHistory.rawValue.snakeCased(), [pair.base, pair.quote, 40]]
+        return [ApiCategory.history,
+                HistoryCatogery.getFillOrderHistory.rawValue.snakeCased(),
+                [pair.base, pair.quote, 40]]
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
@@ -121,8 +126,8 @@ struct GetFillOrderHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
 
         var data: [JSON] = []
 
-        for re in result {
-            data.append([re["op"]["pays"], re["op"]["receives"], re["time"]])
+        for value in result {
+            data.append([value["op"]["pays"], value["op"]["receives"], value["time"]])
         }
         return data
     }

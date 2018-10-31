@@ -9,16 +9,16 @@
 import Foundation
 import NBLCommonModule
 
+enum BaseViewTouchAlphaValues: CGFloat {
+    case touched = 0.3
+    case untouched = 1.0
+}
+
 @IBDesignable
 class CybexBaseView: UIControl {
 
     var xibView: UIView!
     var foreView: UIView!
-
-    enum TouchAlphaValues: CGFloat {
-        case touched = 0.3
-        case untouched = 1.0
-    }
 
     override var backgroundColor: UIColor? {
         didSet {
@@ -26,7 +26,7 @@ class CybexBaseView: UIControl {
         }
     }
 
-    var touchAlpha: TouchAlphaValues = .untouched {
+    var touchAlpha: BaseViewTouchAlphaValues = .untouched {
         didSet {
             updateTouchAlpha()
         }
@@ -45,7 +45,7 @@ class CybexBaseView: UIControl {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.foreView.alpha = TouchAlphaValues.touched.rawValue
+                self.foreView.alpha = BaseViewTouchAlphaValues.touched.rawValue
             } else {
                 self.foreView.alpha = self.touchAlpha.rawValue
             }
@@ -140,7 +140,7 @@ class CybexBaseView: UIControl {
         return lastView?.bottom ?? 0
     }
 
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
