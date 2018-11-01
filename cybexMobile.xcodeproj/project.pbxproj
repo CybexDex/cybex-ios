@@ -1080,6 +1080,7 @@
 		733714BB2122D32500B2ED90 /* AddressCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCellView.swift; sourceTree = "<group>"; };
 		733714BC2122D32500B2ED90 /* AddressCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCellView.xib; sourceTree = "<group>"; };
 		73481176210815BF000BF1B8 /* CybexWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebSocketService.swift; sourceTree = "<group>"; };
+		73534F442189B78900FE1853 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		73539BA72178A0D6008395AC /* ActiveLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActiveLabel.framework; path = Carthage/Build/iOS/ActiveLabel.framework; sourceTree = "<group>"; };
 		73539BA92178A390008395AC /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/iOS/Apollo.framework; sourceTree = "<group>"; };
 		73539BC72178A7CA008395AC /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
@@ -2361,6 +2362,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		73534F432189B78800FE1853 /* ModuleMap */ = {
+			isa = PBXGroup;
+			children = (
+				73534F442189B78900FE1853 /* module.modulemap */,
+			);
+			path = ModuleMap;
+			sourceTree = "<group>";
+		};
 		73539C3B2179A20F008395AC /* URLNavigator */ = {
 			isa = PBXGroup;
 			children = (
@@ -3203,6 +3212,7 @@
 		F3EBF4E6D2E2492B42F25C18354E14EB = {
 			isa = PBXGroup;
 			children = (
+				73534F432189B78800FE1853 /* ModuleMap */,
 				D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */,
 				B1CE0949A770A9355E35EABBD4213DAB /* Products */,
 				CDB5CFC7D170B0A1511D4AD336877512 /* cybexMobile */,
@@ -4222,6 +4232,7 @@
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/ModuleMap";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				VALID_ARCHS = arm64;
@@ -4312,7 +4323,8 @@
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/ModuleMap";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				VALID_ARCHS = arm64;
