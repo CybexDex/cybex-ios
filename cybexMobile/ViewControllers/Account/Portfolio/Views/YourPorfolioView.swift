@@ -38,7 +38,7 @@ class YourPorfolioView: UIView {
                 name.text      = portfolioData.name
                 amount.text    = portfolioData.limitAmount
                 if portfolioData.rbmPrice == "-"{
-                    rmbPrice.text = "≈¥0.00"
+                    rmbPrice.text = "≈¥0.0000"
 
                 } else {
                     rmbPrice.text  = portfolioData.rbmPrice
