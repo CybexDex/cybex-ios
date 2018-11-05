@@ -51,18 +51,22 @@ class BusinessViewController: BaseViewController {
         }) {
             let markets = appData.filterQuoteAssetTicker(pair.base)
             let data = markets[selectedIndex]
-            //            let matrix = =(data)
             pricePricision = data.latest.tradePrice.pricision
             amountPricision = data.latest.tradePrice.amountPricision
         }
     }
 
     func setupUI() {
-        containerView.button.gradientLayer.colors = type == .buy ? [UIColor.paleOliveGreen.cgColor, UIColor.apple.cgColor] : [UIColor.pastelRed.cgColor, UIColor.reddish.cgColor]
+        containerView.button.gradientLayer.colors = type == .buy ?
+            [UIColor.paleOliveGreen.cgColor, UIColor.apple.cgColor] :
+            [UIColor.pastelRed.cgColor, UIColor.reddish.cgColor]
     }
 
     func setupEvent() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification),
+                                               object: nil,
+                                               queue: nil,
+                                               using: { [weak self] _ in
             guard let `self` = self else { return }
 
             if ThemeManager.currentThemeIndex == 0 {
@@ -140,7 +144,8 @@ class BusinessViewController: BaseViewController {
 
     func showOpenedOrderInfo() {
 
-        guard let baseInfo = appData.assetInfo[(self.pair?.base)!], let quoteInfo = appData.assetInfo[(self.pair?.quote)!],
+        guard let baseInfo = appData.assetInfo[(self.pair?.base)!],
+            let quoteInfo = appData.assetInfo[(self.pair?.quote)!],
             let _ = appData.assetInfo[(self.coordinator?.state.property.feeID.value)!],
             self.coordinator?.state.property.feeAmount.value != 0,
             let curAmount = self.coordinator?.state.property.amount.value,
@@ -186,7 +191,6 @@ class BusinessViewController: BaseViewController {
                 }
                 return
             }
-            //      self.containerView.tipView.isHidden = true
 
             let info = self.type == .buy ? baseInfo : quoteInfo
             let symbol = info.symbol.filterJade
@@ -218,7 +222,9 @@ class BusinessViewController: BaseViewController {
                     self.containerView.endMoney.text = "--"
                     return
                 }
-                guard let limit = price.toDouble(), let amount = amount.toDouble(), limit != 0, amount != 0, fee != 0 else {
+                guard let limit = price.toDouble(),
+                    let amount = amount.toDouble(),
+                    limit != 0, amount != 0, fee != 0 else {
                     self.containerView.endMoney.text = "--"
                     return
                 }
@@ -262,10 +268,10 @@ class BusinessViewController: BaseViewController {
             guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base],
                 let text = self.containerView.priceTextfield.text, text != "", text.toDouble() != 0,
                 text.components(separatedBy: ".").count <= 2 && text != ".", let textDouble = text.toDouble() else {
-                    self.containerView.value.text = "≈¥0.00"
+                    self.containerView.value.text = "≈¥0.0000"
                     return
             }
-            self.containerView.value.text = "≈¥" + String(describing: getAssetRMBPrice(baseInfo.id) * textDouble).formatCurrency(digitNum: 2)
+            self.containerView.value.text = "≈¥" + String(describing: getAssetRMBPrice(baseInfo.id) * textDouble).formatCurrency(digitNum: 4)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         self.coordinator!.state.property.amount.subscribe(onNext: {[weak self] (_) in

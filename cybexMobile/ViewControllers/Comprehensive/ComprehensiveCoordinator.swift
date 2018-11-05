@@ -55,36 +55,37 @@ class ComprehensiveCoordinator: ComprehensiveRootCoordinator {
 
 extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
     func openWebVCUrl(_ url: String) {
-        if let vc = R.storyboard.main.cybexWebViewController() {
-            vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
-            vc.vcType = .homeBanner
-            vc.url = URL(string: url)
-            self.rootVC.pushViewController(vc, animated: true)
+        if let webVC = R.storyboard.main.cybexWebViewController() {
+            webVC.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
+            webVC.vcType = .homeBanner
+            webVC.url = URL(string: url)
+            self.rootVC.pushViewController(webVC, animated: true)
         }
     }
 
     func openMarketList(_ pair: Pair) {
-        let vc = R.storyboard.main.marketViewController()!
-        var currentBaseIndex = 0
-        for index in 0..<AssetConfiguration.marketBaseAssets.count {
-            if pair.base == AssetConfiguration.marketBaseAssets[index] {
-                currentBaseIndex = index
+        if let marketVC = R.storyboard.main.marketViewController() {
+            var currentBaseIndex = 0
+            for index in 0..<AssetConfiguration.marketBaseAssets.count {
+                if pair.base == AssetConfiguration.marketBaseAssets[index] {
+                    currentBaseIndex = index
+                }
             }
-        }
-        let tickers = appData.filterQuoteAssetTicker(pair.base)
-        var curIndex = 0
-        for index in 0..<tickers.count {
-            let ticker = tickers[index]
-            if ticker.base == pair.base && ticker.quote == pair.quote {
-                curIndex = index
+            let tickers = appData.filterQuoteAssetTicker(pair.base)
+            var curIndex = 0
+            for index in 0..<tickers.count {
+                let ticker = tickers[index]
+                if ticker.base == pair.base && ticker.quote == pair.quote {
+                    curIndex = index
+                }
             }
+            marketVC.curIndex = curIndex
+            marketVC.currentBaseIndex = currentBaseIndex
+            marketVC.rechargeShowType = PairRechargeView.ShowType.show.rawValue
+            let coordinator = MarketCoordinator(rootVC: self.rootVC)
+            marketVC.coordinator = coordinator
+            self.rootVC.pushViewController(marketVC, animated: true)
         }
-        vc.curIndex = curIndex
-        vc.currentBaseIndex = currentBaseIndex
-        vc.rechargeShowType = PairRechargeView.ShowType.show.rawValue
-        let coordinator = MarketCoordinator(rootVC: self.rootVC)
-        vc.coordinator = coordinator
-        self.rootVC.pushViewController(vc, animated: true)
     }
 }
 

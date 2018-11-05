@@ -49,8 +49,9 @@ class SettingViewController: BaseViewController {
     }
 
     func setupUI() {
-
-//        self.environment.isHidden = false
+        #if DEBUG
+        self.environment.isHidden = false
+        #endif
         language.contentLocali =  R.string.localizable.setting_language.key
         version.content.text = Bundle.main.version
         theme.contentLocali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key : R.string.localizable.light.key
@@ -85,11 +86,11 @@ class SettingViewController: BaseViewController {
         } else if sender == theme {
             self.coordinator?.openSettingDetail(type: .theme)
         }
-//        else if sender == environment {
-//            self.coordinator?.changeEnveronment({ isTest in
-//                self.showToastBox(true, message: isTest == true ? "当前为测试环境" : "当前为正式环境")
-//            })
-//        }
+        else if sender == environment {
+            self.coordinator?.changeEnveronment({ isTest in
+                self.showToastBox(true, message: isTest == true ? "当前为测试环境" : "当前为正式环境")
+            })
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -34,7 +34,8 @@ class WithdrawAddressHomeViewController: BaseViewController {
     func setupUI() {
         self.localizedText = R.string.localizable.withdraw_address_manager.key.localizedContainer()
 
-        self.tableView.register(UINib(resource: R.nib.withdrawAddressHomeTableViewCell), forCellReuseIdentifier: R.nib.withdrawAddressHomeTableViewCell.name)
+        self.tableView.register(UINib(resource: R.nib.withdrawAddressHomeTableViewCell),
+                                forCellReuseIdentifier: R.nib.withdrawAddressHomeTableViewCell.name)
     }
 
     override func configureObserveState() {

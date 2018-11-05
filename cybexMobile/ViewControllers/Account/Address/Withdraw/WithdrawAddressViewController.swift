@@ -42,7 +42,9 @@ class WithdrawAddressViewController: BaseViewController {
         if !self.coordinator!.isEOS() {
             self.leftLabel.locali = R.string.localizable.account_or_address.key
         }
-        self.tableView.register(UINib(resource: R.nib.withdrawAddressHomeTableViewCell), forCellReuseIdentifier: R.nib.withdrawAddressTableViewCell.name)
+        
+        
+        self.tableView.register(UINib(resource: R.nib.withdrawAddressTableViewCell), forCellReuseIdentifier: R.nib.withdrawAddressTableViewCell.name)
 
     }
 
@@ -82,6 +84,7 @@ extension WithdrawAddressViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.withdrawAddressTableViewCell.name, for: indexPath) as? WithdrawAddressTableViewCell else {
             return WithdrawAddressTableViewCell()
+            
         }
 
         if let data = self.coordinator?.state.property.data.value {

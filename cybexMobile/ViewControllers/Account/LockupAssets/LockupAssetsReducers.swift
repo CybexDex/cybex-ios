@@ -42,7 +42,7 @@ func lockupAssteToLockUpAssetsDate(datas: [LockUpAssetsMData]) -> LockUpAssetsVM
             let name = assetsInfo.symbol
 
             count = getRealAmountDouble(quote, amount: amount).string(digits: assetsInfo.precision, roundingMode: .down)
-            price = "≈¥" + (Decimal(getAssetRMBPrice(quote)) * getRealAmount(quote, amount: amount)).string(digits: 2, roundingMode: .down)
+            price = "≈¥" + (Decimal(getAssetRMBPrice(quote)) * getRealAmount(quote, amount: amount)).string(digits: 4, roundingMode: .down)
 
 //            if result.eth != "",let amount_double = Double(amount) {
 //                count = (amount_double / pow(10,Double(assetsInfo.precision))).string(digits: assetsInfo.precision)

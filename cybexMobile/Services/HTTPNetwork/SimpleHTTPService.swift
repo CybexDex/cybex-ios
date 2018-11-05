@@ -237,16 +237,17 @@ extension SimpleHTTPService {
                 seal.fulfill([])
                 return
             }
-            //  var enMsg : String = ""
-            //  var cnMsg : String = ""
+
             let trades = JSON(value).arrayValue.map({
                 Trade(id: $0["id"].stringValue,
                       enable: $0["enable"].boolValue,
                       enMsg: $0["enMsg"].stringValue,
                       cnMsg: $0["cnMsg"].stringValue,
                       enInfo: $0["enInfo"].stringValue,
-                      cnInfo: $0["cnInfo"].stringValue)})
-            seal.fulfill(trades)
+                      cnInfo: $0["cnInfo"].stringValue,
+                      amount: "0")
+            })
+           seal.fulfill(trades)
         }
         return promise
     }
@@ -260,13 +261,16 @@ extension SimpleHTTPService {
                 seal.fulfill([])
                 return
             }
+            
             let trades = JSON(value).arrayValue.map({
                 Trade(id: $0["id"].stringValue,
                       enable: $0["enable"].boolValue,
                       enMsg: $0["enMsg"].stringValue,
                       cnMsg: $0["cnMsg"].stringValue,
                       enInfo: $0["enInfo"].stringValue,
-                      cnInfo: $0["cnInfo"].stringValue)})
+                      cnInfo: $0["cnInfo"].stringValue,
+                      amount: "0")
+            })
             seal.fulfill(trades)
         }
         return promise
@@ -292,7 +296,9 @@ extension SimpleHTTPService {
     static func recordLogin(_ sender: [String: Any]) -> Promise<String?> {
         let (promise, seal) = Promise<String?>.pending()
 
-        guard var request = try? URLRequest(url: URL(string: AppConfiguration.RecodeLogin)!, method: .post, headers: ["Content-Type": "application/json"]) else {
+        guard var request = try? URLRequest(url: URL(string: AppConfiguration.RecodeLogin)!,
+                                            method: .post,
+                                            headers: ["Content-Type": "application/json"]) else {
             seal.fulfill(nil)
             return promise
         }
