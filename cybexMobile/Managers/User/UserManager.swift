@@ -130,7 +130,6 @@ extension UserManager {
                     if !self.isLoginIn {
                         return
                     }
-
                     self.handlerFullAcount(data)
                 }
             }
@@ -335,9 +334,6 @@ extension UserManager {
             self.balances.accept(balances.filter({ (balance) -> Bool in
                 let name = appData.assetInfo[balance.assetType]
                 return name != nil
-//                return (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
-                //        return getRealAmount(balance.asset_type, amount: balance.balance) != 0 &&
-                //          (name != nil) && ((name?.symbol.hasPrefix("JADE"))! ||  name?.symbol == "CYB")
             }))
 
         } else {
@@ -350,10 +346,6 @@ extension UserManager {
                 let quoteName = appData.assetInfo[limitOrder.sellPrice.quote.assetID]
                 let baseBool = baseName != nil
                 let quoteBool = quoteName != nil
-
-//                let base_bool = base_name != nil && ((base_name?.symbol.hasPrefix("JADE"))! || base_name?.symbol == "CYB")
-//                let quote_bool = quote_name != nil && ((quote_name?.symbol.hasPrefix("JADE"))! || quote_name?.symbol == "CYB")
-
                 return baseBool && quoteBool
             }))
         } else {
@@ -435,7 +427,6 @@ class UserManager {
 
     var limitOrderValue: Double {
         var decimallimitOrderValue: Decimal = 0
-        //        var _limitOrder_buy_value:Double = 0
         if let limitOrder = limitOrder.value {
             for limitOrderValue in limitOrder {
                 let realAmount = getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
@@ -455,7 +446,6 @@ class UserManager {
     var balance: Double {
 
         var balanceValues: Decimal = 0
-        var decimallimitOrderValue: Decimal = 0
         var decimallimitOrderBuyValue: Decimal = 0
         var decimallimitOrderSellValue: Decimal = 0
         if let balances = balances.value {
@@ -465,19 +455,16 @@ class UserManager {
                 balanceValues += realAmount * Decimal(realRMBPrice)
             }
         }
-
         if let limitOrder = limitOrder.value {
             for limitOrderValue in limitOrder {
                 let assetAInfo = appData.assetInfo[limitOrderValue.sellPrice.base.assetID]
                 let assetBInfo = appData.assetInfo[limitOrderValue.sellPrice.quote.assetID]
-
-                let (base, _) = calculateAssetRelation(assetIDAName: (assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "", assetIDBName: (assetBInfo != nil) ? assetBInfo!.symbol.filterJade : "")
+                let (base, _) = calculateAssetRelation(assetIDAName: (assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "",
+                                                       assetIDBName: (assetBInfo != nil) ? assetBInfo!.symbol.filterJade : "")
                 let isBuy = base == ((assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "")
-
                 let realAmount = getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
                 let priceValue = getAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
-                decimallimitOrderValue += realAmount * Decimal(priceValue)
-                balanceValues += decimallimitOrderValue
+                balanceValues += realAmount * Decimal(priceValue)
                 if isBuy {
                     decimallimitOrderBuyValue += realAmount * Decimal(priceValue)
                 } else {
@@ -485,8 +472,6 @@ class UserManager {
                 }
             }
         }
-
-        //    limitOrderValue = _limitOrderValue
         limitOrderBuyValue = decimallimitOrderBuyValue.doubleValue
         limitOrderSellValue = decimallimitOrderSellValue.doubleValue
         return balanceValues.doubleValue
@@ -497,7 +482,6 @@ class UserManager {
             guard let `self` = self else { return }
             self.keys = nil
         })
-
         timer?.start()
     }
 
@@ -506,10 +490,11 @@ class UserManager {
         appData.otherRequestRelyData.asObservable()
             .subscribe(onNext: { (_) in
                 DispatchQueue.main.async {
-                    if UserManager.shared.isLoginIn && AssetConfiguration.shared.assetIds.count > 0 && !CybexWebSocketService.shared.overload() {
+                    if UserManager.shared.isLoginIn &&
+                        AssetConfiguration.shared.assetIds.count > 0 &&
+                        !CybexWebSocketService.shared.overload() {
                         UserManager.shared.fetchAccountInfo()
                     }
-
                 }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 

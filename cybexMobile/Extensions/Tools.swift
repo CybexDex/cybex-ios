@@ -324,6 +324,7 @@ extension String {
     }
 
     var filterJade: String {
+        // 正式
         return self.replacingOccurrences(of: "JADE.", with: "")
     }
 

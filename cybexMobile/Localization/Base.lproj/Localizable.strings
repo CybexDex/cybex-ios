@@ -100,24 +100,25 @@
 "register.confirm" = "CURRENT PASSWORD:\n<password></password>\n· I UNDERSTAND THAT I WILL LOSE ACCESS TO MY FUNDS IF I LOSE MY PASSWORD\n· I UNDERSTAND THAT NO ONE CAN RECOVER MY PASSWORD IF I LOSE OR FORGET IT\n· I HAVE WRITTEN DOWN OR OTHERWISE STORED MY PASSWORD\n";
 
 
-"home_name_vol"                 = "Name/Vol";
-"home_last_price"               = "Last Price";
-"home_change"                   = "24h Chg%";
+"home_name_vol" = "Name";
+"home_vol_name" = "Vol";
+"home_last_price" = "Last Price";
+"home_change" = "24h Chg%";
 
-"asset_mount"                   = "Asset/Amount";
-"progress_expiration"           = "Progress/Expiration Time";
-"cyb_value"                     = "Value(CYB)";
+"asset_mount" = "Asset/Amount";
+"progress_expiration" = "Progress/Expiration Time";
+"cyb_value" = "Value(CYB)";
 
-"balance_introduce"             = "This is the estimated value of all your assets,including any hidden assets,open orders,debt and collateral.The estimate is done using only live blockchain data and may not be perfectly accurate.";
-"balance_introduce_title"       = "BALANCE";
-"balance_ensuer"                = "OK";
+"balance_introduce" = "This is the estimated value of all your assets,including any hidden assets,open orders,debt and collateral.The estimate is done using only live blockchain data and may not be perfectly accurate.";
+"balance_introduce_title" = "BALANCE";
+"balance_ensuer" = "OK";
 
-"home_vol"                      = "Vol ";
+"home_vol" = "Vol ";
 
-"opened_amount"                 = "Amount:";
+"opened_amount" = "Amount:";
 
-"opened_asset_amount"                 = "Asset/Amount";
-"opened_order_value"                  = "Price";
+"opened_asset_amount" = "Asset/Amount";
+"opened_order_value" = "Price";
 
 
 "updata_available_title"              = "Update Available";
@@ -511,4 +512,5 @@
 "pair_change_amount" = "Chg:%@";
 "pair_change_persent" = "Chg%%:%@";
 
-
+"recharge_hidden_asset" = "Hide 0 balance";
+"recharge_search_asset" = "Search";
