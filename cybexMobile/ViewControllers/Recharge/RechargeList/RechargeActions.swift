@@ -18,6 +18,10 @@ struct RechargeState: BaseState {
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var withdrawIds: BehaviorRelay<[Trade]> = BehaviorRelay(value: [])
     var depositIds: BehaviorRelay<[Trade]> = BehaviorRelay(value: [])
+    var withdrawData: BehaviorRelay<[Trade]> = BehaviorRelay(value: [])
+    var depositData: BehaviorRelay<[Trade]> = BehaviorRelay(value: [])
+    var isEmpty: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var sortedName: BehaviorRelay<String> = BehaviorRelay(value: "")
 }
 
 struct FecthWithdrawIds: Action {
@@ -26,6 +30,14 @@ struct FecthWithdrawIds: Action {
 
 struct FecthDepositIds: Action {
     let data: [Trade]
+}
+
+struct SortedByEmptyAssetAction: Action {
+    let data: Bool
+}
+
+struct SortedByNameAssetAction: Action {
+    let data: String
 }
 
 // MARK: - Action Creator
