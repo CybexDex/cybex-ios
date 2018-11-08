@@ -146,6 +146,12 @@ class CybexBaseView: UIControl {
         setup()
     }
 
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        loadViewFromNib()
+        setup()
+    }
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
