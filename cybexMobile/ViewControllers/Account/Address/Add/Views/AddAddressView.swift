@@ -80,12 +80,14 @@ class AddAddressView: UIView {
     fileprivate func setup() {
         updateHeight()
 
-        NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification, object: self.address.content, queue: nil) { [weak self](_) in
+        NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification,
+                                               object: self.address.content, queue: nil) { [weak self](_) in
             guard let `self` = self else {return}
             self.updateHeight()
         }
 
-        NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification, object: self.memo.content, queue: nil) { [weak self](_) in
+        NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification,
+                                               object: self.memo.content, queue: nil) { [weak self](_) in
             guard let `self` = self else {return}
             self.updateHeight()
         }

@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RechargeHeaderView">
             <connections>
+                <outlet property="hiddenButton" destination="4tI-6Z-hFR" id="xHl-DX-AdT"/>
+                <outlet property="hiddenLabel" destination="rwY-Lg-c3t" id="GFy-Om-WvT"/>
                 <outlet property="searchTextField" destination="WcC-9v-ED0" id="Nl2-yE-pxw"/>
             </connections>
         </placeholder>
@@ -67,7 +69,7 @@
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WcC-9v-ED0">
                             <rect key="frame" x="13" y="12" width="349" height="36"/>
-                            <color key="textColor" name="steel50" red="0.471" green="0.506" blue="0.604" alpha="0.500" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                             <userDefinedRuntimeAttributes>
@@ -75,7 +77,7 @@
                                     <color key="value" red="0.129" green="0.161" blue="0.224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                    <color key="value" name="paleGrey" red="0.969" green="0.973" blue="0.980" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
                                     <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -108,7 +110,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Lhl-p8-24W"/>
-            <point key="canvasLocation" x="-193" y="-171"/>
+            <point key="canvasLocation" x="-1257" y="-430"/>
         </view>
     </objects>
     <resources>

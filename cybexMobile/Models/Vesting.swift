@@ -68,7 +68,7 @@ class PortfolioData {
         }
         
         // 获取对应CYB的个数
-        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice * (realAmount.toDouble())!)
+        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice.doubleValue * (realAmount.toDouble())!)
         
         if amountCYB == "-"{
             cybPrice = amountCYB + " CYB"
@@ -101,7 +101,7 @@ class MyPortfolioData {
             realAmount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: assetInfo.precision, roundingMode: .down)
         }
         // 获取对应CYB的个数
-        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice * (realAmount.toDouble())!)
+        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice.doubleValue * (realAmount.toDouble())!)
         
         if let _ = amountCYB.toDouble() {
             rbmPrice = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * Decimal(getAssetRMBPrice(balance.assetType))).string(digits: 4, roundingMode: .down)

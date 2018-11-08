@@ -137,7 +137,6 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     }
     
     @objc func refreshTableView() {
-        
         if self.isVisible {
             self.endLoading()
             let data = appData.tickerData.value
@@ -154,8 +153,15 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 extension HomeViewController {
     @objc func cellClicked(_ data: [String: Any]) {
         if vcType == ViewType.homeContent.rawValue {//首页
-            if let index = data["index"] as? Int {
-                self.coordinator?.openMarket(index: index, currentBaseIndex: self.contentView!.currentBaseIndex)
+            if let selectedPair = data["pair"] as? Pair {
+                let tickers = appData.tickerData.value.filter({$0.base == AssetConfiguration.marketBaseAssets[self.contentView!.currentBaseIndex]})
+                for index in 0..<tickers.count {
+                    let item = tickers[index]
+                    if item.base == selectedPair.base && item.quote == selectedPair.quote {
+                        self.coordinator?.openMarket(index: index, currentBaseIndex: self.contentView!.currentBaseIndex)
+                        return
+                    }
+                }
             }
         }
         else if vcType == ViewType.comprehensive.rawValue {
@@ -182,5 +188,4 @@ extension HomeViewController {
             }
         }
     }
-    
 }

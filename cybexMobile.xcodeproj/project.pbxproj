@@ -4241,7 +4241,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4332,7 +4332,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
