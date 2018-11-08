@@ -116,11 +116,8 @@ extension UIViewController {
                             UIApplication.shared.open(URL(string: result.url)!, options: [:], completionHandler: nil)
                             return
                         }
-                        if result.url.contains("itunes") {
-                            self.openStoreProductWithiTunesItemIdentifier(AppConfiguration.APPID)
-                        } else {
-                            self.openSafariViewController(result.url)
-                        }
+
+                        self.openSafariViewController(result.url)
                     }
                 } else if showNoUpdate {
                     let alert = AlertController(title: R.string.localizable.unupdata_title.key.localized(), message: R.string.localizable.unupdata_message.key.localized(), preferredStyle: .alert)
