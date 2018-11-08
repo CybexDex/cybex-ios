@@ -110,7 +110,6 @@ extension UIViewController {
                     }
                     
                     ShowToastManager.shared.isShowSingleBtn = result.force
-                    
                     ShowToastManager.shared.ensureClickBlock = {
                         if result.force {
                             UIApplication.shared.open(URL(string: result.url)!, options: [:], completionHandler: nil)
