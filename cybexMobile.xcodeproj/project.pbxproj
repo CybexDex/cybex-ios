@@ -508,6 +508,78 @@
 		739EFB652181D10E00424061 /* UIPanGestureRecognizer+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB582181D10E00424061 /* UIPanGestureRecognizer+RxGesture.swift */; };
 		739EFB662181D10E00424061 /* SharedTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB592181D10E00424061 /* SharedTypes.swift */; };
 		739EFB672181D10E00424061 /* View+RxGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EFB5A2181D10E00424061 /* View+RxGesture.swift */; };
+		73A3306A219420B900707D8F /* ChatRoom.h in Headers */ = {isa = PBXBuildFile; fileRef = 73A33068219420B900707D8F /* ChatRoom.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		73A3306D219420B900707D8F /* ChatRoom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A33066219420B900707D8F /* ChatRoom.framework */; };
+		73A3306E219420B900707D8F /* ChatRoom.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 73A33066219420B900707D8F /* ChatRoom.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		73A330CD2194215B00707D8F /* MessengerKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330742194215B00707D8F /* MessengerKit.swift */; };
+		73A330CE2194215B00707D8F /* MSGMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330772194215B00707D8F /* MSGMessageCell.swift */; };
+		73A330CF2194215B00707D8F /* MSGEmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330792194215B00707D8F /* MSGEmojiCollectionViewCell.swift */; };
+		73A330D02194215B00707D8F /* MSGIncomingEmojiCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A3307A2194215B00707D8F /* MSGIncomingEmojiCollectionViewCell.xib */; };
+		73A330D12194215B00707D8F /* MSGOutgoingEmojiCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A3307B2194215B00707D8F /* MSGOutgoingEmojiCollectionViewCell.xib */; };
+		73A330D22194215B00707D8F /* MSGMessageCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3307C2194215B00707D8F /* MSGMessageCellDelegate.swift */; };
+		73A330D32194215B00707D8F /* MSGIncomingTravCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A3307F2194215B00707D8F /* MSGIncomingTravCollectionViewCell.xib */; };
+		73A330D42194215B00707D8F /* MSGOutgoingTravCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A330802194215B00707D8F /* MSGOutgoingTravCollectionViewCell.xib */; };
+		73A330D52194215B00707D8F /* MSGTravCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330812194215B00707D8F /* MSGTravCollectionViewCell.swift */; };
+		73A330D62194215B00707D8F /* MSGIncomingTailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A330832194215B00707D8F /* MSGIncomingTailCollectionViewCell.xib */; };
+		73A330D72194215B00707D8F /* MSGOutgoingTailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A330842194215B00707D8F /* MSGOutgoingTailCollectionViewCell.xib */; };
+		73A330D82194215B00707D8F /* MSGTailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330852194215B00707D8F /* MSGTailCollectionViewCell.swift */; };
+		73A330D92194215B00707D8F /* MSGImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330872194215B00707D8F /* MSGImageCollectionViewCell.swift */; };
+		73A330DA2194215B00707D8F /* MSGOutgoingImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A330882194215B00707D8F /* MSGOutgoingImageCollectionViewCell.xib */; };
+		73A330DB2194215B00707D8F /* MSGIncomingImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A330892194215B00707D8F /* MSGIncomingImageCollectionViewCell.xib */; };
+		73A330DC2194215B00707D8F /* MSGTravCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3308C2194215B00707D8F /* MSGTravCollectionView.swift */; };
+		73A330DD2194215B00707D8F /* MSGTravCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3308D2194215B00707D8F /* MSGTravCollectionViewFlowLayout.swift */; };
+		73A330DE2194215B00707D8F /* MSGImessageTravCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3308F2194215B00707D8F /* MSGImessageTravCollectionViewFlowLayout.swift */; };
+		73A330DF2194215B00707D8F /* MSGImessageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330902194215B00707D8F /* MSGImessageCollectionView.swift */; };
+		73A330E02194215B00707D8F /* MSGCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330912194215B00707D8F /* MSGCollectionView.swift */; };
+		73A330E12194215B00707D8F /* MSGSectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330932194215B00707D8F /* MSGSectionReusableView.swift */; };
+		73A330E22194215B00707D8F /* MSGTravCollectionViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330952194215B00707D8F /* MSGTravCollectionViewSectionHeader.swift */; };
+		73A330E32194215B00707D8F /* MSGTravIncomingCollectionViewSectionFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A330962194215B00707D8F /* MSGTravIncomingCollectionViewSectionFooter.xib */; };
+		73A330E42194215B00707D8F /* MSGTravIncomingCollectionViewSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A330972194215B00707D8F /* MSGTravIncomingCollectionViewSectionHeader.xib */; };
+		73A330E52194215B00707D8F /* MSGTravOutgoingCollectionViewSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A330982194215B00707D8F /* MSGTravOutgoingCollectionViewSectionHeader.xib */; };
+		73A330E62194215B00707D8F /* MSGTravCollectionViewSectionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330992194215B00707D8F /* MSGTravCollectionViewSectionFooter.swift */; };
+		73A330E72194215B00707D8F /* MSGTravOutgoingCollectionViewSectionFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A3309A2194215B00707D8F /* MSGTravOutgoingCollectionViewSectionFooter.xib */; };
+		73A330E82194215B00707D8F /* MSGSectionReusableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3309B2194215B00707D8F /* MSGSectionReusableViewDelegate.swift */; };
+		73A330E92194215B00707D8F /* MSGImessageIncomingHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A3309D2194215B00707D8F /* MSGImessageIncomingHeaderView.xib */; };
+		73A330EA2194215B00707D8F /* MSGImessageOutgoingFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A3309E2194215B00707D8F /* MSGImessageOutgoingFooterView.xib */; };
+		73A330EB2194215B00707D8F /* MSGImessageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3309F2194215B00707D8F /* MSGImessageHeaderView.swift */; };
+		73A330EC2194215B00707D8F /* MSGImessageFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330A02194215B00707D8F /* MSGImessageFooterView.swift */; };
+		73A330ED2194215B00707D8F /* MSGImessageIncomingFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A330A12194215B00707D8F /* MSGImessageIncomingFooterView.xib */; };
+		73A330EE2194215B00707D8F /* MSGImessageOutgoingHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A330A22194215B00707D8F /* MSGImessageOutgoingHeaderView.xib */; };
+		73A330EF2194215B00707D8F /* MSGDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330A32194215B00707D8F /* MSGDataSource.swift */; };
+		73A330F02194215B00707D8F /* MSGDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330A42194215B00707D8F /* MSGDelegate.swift */; };
+		73A330F12194215B00707D8F /* MSGPlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330A62194215B00707D8F /* MSGPlaceholderTextView.swift */; };
+		73A330F22194215B00707D8F /* MSGTravInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330A92194215B00707D8F /* MSGTravInputView.swift */; };
+		73A330F32194215B00707D8F /* MSGInputSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330AA2194215B00707D8F /* MSGInputSeparatorView.swift */; };
+		73A330F42194215B00707D8F /* MSGImessageInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A330AC2194215B00707D8F /* MSGImessageInputView.xib */; };
+		73A330F52194215B00707D8F /* MSGImessageSendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330AD2194215B00707D8F /* MSGImessageSendButton.swift */; };
+		73A330F62194215B00707D8F /* MSGImessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330AE2194215B00707D8F /* MSGImessageInputView.swift */; };
+		73A330F72194215B00707D8F /* MSGInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330AF2194215B00707D8F /* MSGInputView.swift */; };
+		73A330F92194215B00707D8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A330B22194215B00707D8F /* Assets.xcassets */; };
+		73A330FA2194215B00707D8F /* MSGUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330B42194215B00707D8F /* MSGUser.swift */; };
+		73A330FB2194215B00707D8F /* MSGMessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330B52194215B00707D8F /* MSGMessageBody.swift */; };
+		73A330FC2194215B00707D8F /* MSGMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330B62194215B00707D8F /* MSGMessage.swift */; };
+		73A330FD2194215B00707D8F /* MSGTravamigosStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330B82194215B00707D8F /* MSGTravamigosStyle.swift */; };
+		73A330FE2194215B00707D8F /* MSGIMessageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330B92194215B00707D8F /* MSGIMessageStyle.swift */; };
+		73A330FF2194215B00707D8F /* MSGMessengerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330BA2194215B00707D8F /* MSGMessengerStyle.swift */; };
+		73A331002194215B00707D8F /* MSGMessengerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330BC2194215B00707D8F /* MSGMessengerView.swift */; };
+		73A331012194215B00707D8F /* MSGMessengerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A330BD2194215B00707D8F /* MSGMessengerView.xib */; };
+		73A331022194215B00707D8F /* MSGMessengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330BE2194215B00707D8F /* MSGMessengerViewController.swift */; };
+		73A331032194215B00707D8F /* MSGMessengerViewController + Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330BF2194215B00707D8F /* MSGMessengerViewController + Helpers.swift */; };
+		73A331042194215B00707D8F /* MSGMessengerViewController + DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330C02194215B00707D8F /* MSGMessengerViewController + DataSource.swift */; };
+		73A331052194215B00707D8F /* MSGMessengerViewController + CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330C12194215B00707D8F /* MSGMessengerViewController + CellDelegate.swift */; };
+		73A331062194215B00707D8F /* MSGTravOutgoingBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330C42194215B00707D8F /* MSGTravOutgoingBubble.swift */; };
+		73A331072194215B00707D8F /* MSGTravIncomingBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330C52194215B00707D8F /* MSGTravIncomingBubble.swift */; };
+		73A331082194215B00707D8F /* MSGTailIncomingBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330C72194215B00707D8F /* MSGTailIncomingBubble.swift */; };
+		73A331092194215B00707D8F /* MSGTailOutgoingBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330C82194215B00707D8F /* MSGTailOutgoingBubble.swift */; };
+		73A3310A2194215B00707D8F /* KeyboardLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330CA2194215B00707D8F /* KeyboardLayoutGuide.swift */; };
+		73A3310B2194215B00707D8F /* KeyboardFrameObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330CB2194215B00707D8F /* KeyboardFrameObserver.swift */; };
+		73A3310C2194215B00707D8F /* KeyboardFrameObserversManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A330CC2194215B00707D8F /* KeyboardFrameObserversManager.swift */; };
+		73A331142194244800707D8F /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A331102194244800707D8F /* ChatCoordinator.swift */; };
+		73A331152194244800707D8F /* ChatActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A331112194244800707D8F /* ChatActions.swift */; };
+		73A331162194244800707D8F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A331122194244800707D8F /* ChatViewController.swift */; };
+		73A331172194244800707D8F /* ChatReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A331132194244800707D8F /* ChatReducers.swift */; };
+		73A331192194248800707D8F /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73A331182194248800707D8F /* Chat.storyboard */; };
+		73A3311C219425DA00707D8F /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3311B219425DA00707D8F /* ChatUser.swift */; };
 		73D012992159D71800C95896 /* URLNavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D012982159D71800C95896 /* URLNavigationMap.swift */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
@@ -682,7 +754,28 @@
 			remoteGlobalIDString = 6597A0AC6C29D30281EBD879E45F3BAF;
 			remoteInfo = cybexMobile;
 		};
+		73A3306B219420B900707D8F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 86D7094F24AAA52C797AF890376BB10F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 73A33065219420B900707D8F;
+			remoteInfo = ChatRoom;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		73A33072219420B900707D8F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				73A3306E219420B900707D8F /* ChatRoom.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		003AE75215C04437A3E7C94FE503578A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1086,7 +1179,6 @@
 		733714BB2122D32500B2ED90 /* AddressCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCellView.swift; sourceTree = "<group>"; };
 		733714BC2122D32500B2ED90 /* AddressCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCellView.xib; sourceTree = "<group>"; };
 		73481176210815BF000BF1B8 /* CybexWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebSocketService.swift; sourceTree = "<group>"; };
-		73534F442189B78900FE1853 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		73539BA72178A0D6008395AC /* ActiveLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActiveLabel.framework; path = Carthage/Build/iOS/ActiveLabel.framework; sourceTree = "<group>"; };
 		73539BA92178A390008395AC /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/iOS/Apollo.framework; sourceTree = "<group>"; };
 		73539BC72178A7CA008395AC /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
@@ -1199,6 +1291,78 @@
 		739EFB582181D10E00424061 /* UIPanGestureRecognizer+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPanGestureRecognizer+RxGesture.swift"; sourceTree = "<group>"; };
 		739EFB592181D10E00424061 /* SharedTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedTypes.swift; sourceTree = "<group>"; };
 		739EFB5A2181D10E00424061 /* View+RxGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+RxGesture.swift"; sourceTree = "<group>"; };
+		73A33066219420B900707D8F /* ChatRoom.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ChatRoom.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73A33068219420B900707D8F /* ChatRoom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatRoom.h; sourceTree = "<group>"; };
+		73A33069219420B900707D8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73A330742194215B00707D8F /* MessengerKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessengerKit.swift; sourceTree = "<group>"; };
+		73A330772194215B00707D8F /* MSGMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGMessageCell.swift; sourceTree = "<group>"; };
+		73A330792194215B00707D8F /* MSGEmojiCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGEmojiCollectionViewCell.swift; sourceTree = "<group>"; };
+		73A3307A2194215B00707D8F /* MSGIncomingEmojiCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGIncomingEmojiCollectionViewCell.xib; sourceTree = "<group>"; };
+		73A3307B2194215B00707D8F /* MSGOutgoingEmojiCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGOutgoingEmojiCollectionViewCell.xib; sourceTree = "<group>"; };
+		73A3307C2194215B00707D8F /* MSGMessageCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGMessageCellDelegate.swift; sourceTree = "<group>"; };
+		73A3307F2194215B00707D8F /* MSGIncomingTravCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGIncomingTravCollectionViewCell.xib; sourceTree = "<group>"; };
+		73A330802194215B00707D8F /* MSGOutgoingTravCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGOutgoingTravCollectionViewCell.xib; sourceTree = "<group>"; };
+		73A330812194215B00707D8F /* MSGTravCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGTravCollectionViewCell.swift; sourceTree = "<group>"; };
+		73A330832194215B00707D8F /* MSGIncomingTailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGIncomingTailCollectionViewCell.xib; sourceTree = "<group>"; };
+		73A330842194215B00707D8F /* MSGOutgoingTailCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGOutgoingTailCollectionViewCell.xib; sourceTree = "<group>"; };
+		73A330852194215B00707D8F /* MSGTailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGTailCollectionViewCell.swift; sourceTree = "<group>"; };
+		73A330872194215B00707D8F /* MSGImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		73A330882194215B00707D8F /* MSGOutgoingImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGOutgoingImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		73A330892194215B00707D8F /* MSGIncomingImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGIncomingImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		73A3308C2194215B00707D8F /* MSGTravCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGTravCollectionView.swift; sourceTree = "<group>"; };
+		73A3308D2194215B00707D8F /* MSGTravCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGTravCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		73A3308F2194215B00707D8F /* MSGImessageTravCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGImessageTravCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		73A330902194215B00707D8F /* MSGImessageCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGImessageCollectionView.swift; sourceTree = "<group>"; };
+		73A330912194215B00707D8F /* MSGCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGCollectionView.swift; sourceTree = "<group>"; };
+		73A330932194215B00707D8F /* MSGSectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGSectionReusableView.swift; sourceTree = "<group>"; };
+		73A330952194215B00707D8F /* MSGTravCollectionViewSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGTravCollectionViewSectionHeader.swift; sourceTree = "<group>"; };
+		73A330962194215B00707D8F /* MSGTravIncomingCollectionViewSectionFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGTravIncomingCollectionViewSectionFooter.xib; sourceTree = "<group>"; };
+		73A330972194215B00707D8F /* MSGTravIncomingCollectionViewSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGTravIncomingCollectionViewSectionHeader.xib; sourceTree = "<group>"; };
+		73A330982194215B00707D8F /* MSGTravOutgoingCollectionViewSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGTravOutgoingCollectionViewSectionHeader.xib; sourceTree = "<group>"; };
+		73A330992194215B00707D8F /* MSGTravCollectionViewSectionFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGTravCollectionViewSectionFooter.swift; sourceTree = "<group>"; };
+		73A3309A2194215B00707D8F /* MSGTravOutgoingCollectionViewSectionFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGTravOutgoingCollectionViewSectionFooter.xib; sourceTree = "<group>"; };
+		73A3309B2194215B00707D8F /* MSGSectionReusableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGSectionReusableViewDelegate.swift; sourceTree = "<group>"; };
+		73A3309D2194215B00707D8F /* MSGImessageIncomingHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGImessageIncomingHeaderView.xib; sourceTree = "<group>"; };
+		73A3309E2194215B00707D8F /* MSGImessageOutgoingFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGImessageOutgoingFooterView.xib; sourceTree = "<group>"; };
+		73A3309F2194215B00707D8F /* MSGImessageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGImessageHeaderView.swift; sourceTree = "<group>"; };
+		73A330A02194215B00707D8F /* MSGImessageFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGImessageFooterView.swift; sourceTree = "<group>"; };
+		73A330A12194215B00707D8F /* MSGImessageIncomingFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGImessageIncomingFooterView.xib; sourceTree = "<group>"; };
+		73A330A22194215B00707D8F /* MSGImessageOutgoingHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGImessageOutgoingHeaderView.xib; sourceTree = "<group>"; };
+		73A330A32194215B00707D8F /* MSGDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGDataSource.swift; sourceTree = "<group>"; };
+		73A330A42194215B00707D8F /* MSGDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGDelegate.swift; sourceTree = "<group>"; };
+		73A330A62194215B00707D8F /* MSGPlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGPlaceholderTextView.swift; sourceTree = "<group>"; };
+		73A330A92194215B00707D8F /* MSGTravInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGTravInputView.swift; sourceTree = "<group>"; };
+		73A330AA2194215B00707D8F /* MSGInputSeparatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGInputSeparatorView.swift; sourceTree = "<group>"; };
+		73A330AC2194215B00707D8F /* MSGImessageInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGImessageInputView.xib; sourceTree = "<group>"; };
+		73A330AD2194215B00707D8F /* MSGImessageSendButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGImessageSendButton.swift; sourceTree = "<group>"; };
+		73A330AE2194215B00707D8F /* MSGImessageInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGImessageInputView.swift; sourceTree = "<group>"; };
+		73A330AF2194215B00707D8F /* MSGInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGInputView.swift; sourceTree = "<group>"; };
+		73A330B22194215B00707D8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		73A330B42194215B00707D8F /* MSGUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGUser.swift; sourceTree = "<group>"; };
+		73A330B52194215B00707D8F /* MSGMessageBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGMessageBody.swift; sourceTree = "<group>"; };
+		73A330B62194215B00707D8F /* MSGMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGMessage.swift; sourceTree = "<group>"; };
+		73A330B82194215B00707D8F /* MSGTravamigosStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGTravamigosStyle.swift; sourceTree = "<group>"; };
+		73A330B92194215B00707D8F /* MSGIMessageStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGIMessageStyle.swift; sourceTree = "<group>"; };
+		73A330BA2194215B00707D8F /* MSGMessengerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGMessengerStyle.swift; sourceTree = "<group>"; };
+		73A330BC2194215B00707D8F /* MSGMessengerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGMessengerView.swift; sourceTree = "<group>"; };
+		73A330BD2194215B00707D8F /* MSGMessengerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGMessengerView.xib; sourceTree = "<group>"; };
+		73A330BE2194215B00707D8F /* MSGMessengerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGMessengerViewController.swift; sourceTree = "<group>"; };
+		73A330BF2194215B00707D8F /* MSGMessengerViewController + Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MSGMessengerViewController + Helpers.swift"; sourceTree = "<group>"; };
+		73A330C02194215B00707D8F /* MSGMessengerViewController + DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MSGMessengerViewController + DataSource.swift"; sourceTree = "<group>"; };
+		73A330C12194215B00707D8F /* MSGMessengerViewController + CellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MSGMessengerViewController + CellDelegate.swift"; sourceTree = "<group>"; };
+		73A330C42194215B00707D8F /* MSGTravOutgoingBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGTravOutgoingBubble.swift; sourceTree = "<group>"; };
+		73A330C52194215B00707D8F /* MSGTravIncomingBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGTravIncomingBubble.swift; sourceTree = "<group>"; };
+		73A330C72194215B00707D8F /* MSGTailIncomingBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGTailIncomingBubble.swift; sourceTree = "<group>"; };
+		73A330C82194215B00707D8F /* MSGTailOutgoingBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGTailOutgoingBubble.swift; sourceTree = "<group>"; };
+		73A330CA2194215B00707D8F /* KeyboardLayoutGuide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutGuide.swift; sourceTree = "<group>"; };
+		73A330CB2194215B00707D8F /* KeyboardFrameObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameObserver.swift; sourceTree = "<group>"; };
+		73A330CC2194215B00707D8F /* KeyboardFrameObserversManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameObserversManager.swift; sourceTree = "<group>"; };
+		73A331102194244800707D8F /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
+		73A331112194244800707D8F /* ChatActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatActions.swift; sourceTree = "<group>"; };
+		73A331122194244800707D8F /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		73A331132194244800707D8F /* ChatReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatReducers.swift; sourceTree = "<group>"; };
+		73A331182194248800707D8F /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		73A3311B219425DA00707D8F /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		73BAB6CB839C8F409C3061833343A527 /* LockupAssetsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsSectionView.xib; sourceTree = "<group>"; };
 		73C298F5E89ECC37094FCC901A6B8D49 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		73D012982159D71800C95896 /* URLNavigationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLNavigationMap.swift; sourceTree = "<group>"; };
@@ -1375,6 +1539,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		73A33063219420B900707D8F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81E9E579D70A5E3A5E8EE6FFCBAE50CD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1416,6 +1587,7 @@
 				73539C3021799039008395AC /* ESPullToRefresh.framework in Frameworks */,
 				73539C3121799039008395AC /* SwiftyBeaver.framework in Frameworks */,
 				73539C3221799039008395AC /* TinyConstraints.framework in Frameworks */,
+				73A3306D219420B900707D8F /* ChatRoom.framework in Frameworks */,
 				73539C1A21798D26008395AC /* EFQRCode.framework in Frameworks */,
 				73539C1B21798D26008395AC /* JSONRPCKit.framework in Frameworks */,
 				73539C1C21798D26008395AC /* SwiftyUserDefaults.framework in Frameworks */,
@@ -1831,6 +2003,7 @@
 		52E831991663F5942874636E6DF23660 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				73A3310D2194232700707D8F /* Chat */,
 				6AECDF77E4F1B7CED0D80BFB268EDFC5 /* KLine */,
 				73D012972159D70500C95896 /* Route */,
 			);
@@ -2368,14 +2541,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		73534F432189B78800FE1853 /* ModuleMap */ = {
-			isa = PBXGroup;
-			children = (
-				73534F442189B78900FE1853 /* module.modulemap */,
-			);
-			path = ModuleMap;
-			sourceTree = "<group>";
-		};
 		73539C3B2179A20F008395AC /* URLNavigator */ = {
 			isa = PBXGroup;
 			children = (
@@ -2604,6 +2769,299 @@
 			path = iOS;
 			sourceTree = "<group>";
 		};
+		73A33067219420B900707D8F /* ChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				73A330732194215B00707D8F /* MessengerKit */,
+				73A33068219420B900707D8F /* ChatRoom.h */,
+				73A33069219420B900707D8F /* Info.plist */,
+			);
+			path = ChatRoom;
+			sourceTree = "<group>";
+		};
+		73A330732194215B00707D8F /* MessengerKit */ = {
+			isa = PBXGroup;
+			children = (
+				73A330742194215B00707D8F /* MessengerKit.swift */,
+				73A330752194215B00707D8F /* Collection View */,
+				73A330A52194215B00707D8F /* Input */,
+				73A330B22194215B00707D8F /* Assets.xcassets */,
+				73A330B32194215B00707D8F /* Models */,
+				73A330B72194215B00707D8F /* Styles */,
+				73A330BB2194215B00707D8F /* Messenger View */,
+				73A330C22194215B00707D8F /* Bubbles */,
+				73A330C92194215B00707D8F /* Keyboard Utility */,
+			);
+			path = MessengerKit;
+			sourceTree = "<group>";
+		};
+		73A330752194215B00707D8F /* Collection View */ = {
+			isa = PBXGroup;
+			children = (
+				73A330762194215B00707D8F /* Cells */,
+				73A3308A2194215B00707D8F /* Styles */,
+				73A330912194215B00707D8F /* MSGCollectionView.swift */,
+				73A330922194215B00707D8F /* Header Footers */,
+				73A330A32194215B00707D8F /* MSGDataSource.swift */,
+				73A330A42194215B00707D8F /* MSGDelegate.swift */,
+			);
+			path = "Collection View";
+			sourceTree = "<group>";
+		};
+		73A330762194215B00707D8F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				73A330772194215B00707D8F /* MSGMessageCell.swift */,
+				73A330782194215B00707D8F /* Emoji */,
+				73A3307C2194215B00707D8F /* MSGMessageCellDelegate.swift */,
+				73A3307D2194215B00707D8F /* Text */,
+				73A330862194215B00707D8F /* Media */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		73A330782194215B00707D8F /* Emoji */ = {
+			isa = PBXGroup;
+			children = (
+				73A330792194215B00707D8F /* MSGEmojiCollectionViewCell.swift */,
+				73A3307A2194215B00707D8F /* MSGIncomingEmojiCollectionViewCell.xib */,
+				73A3307B2194215B00707D8F /* MSGOutgoingEmojiCollectionViewCell.xib */,
+			);
+			path = Emoji;
+			sourceTree = "<group>";
+		};
+		73A3307D2194215B00707D8F /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				73A3307E2194215B00707D8F /* Travamigos */,
+				73A330822194215B00707D8F /* iMessage */,
+			);
+			path = Text;
+			sourceTree = "<group>";
+		};
+		73A3307E2194215B00707D8F /* Travamigos */ = {
+			isa = PBXGroup;
+			children = (
+				73A3307F2194215B00707D8F /* MSGIncomingTravCollectionViewCell.xib */,
+				73A330802194215B00707D8F /* MSGOutgoingTravCollectionViewCell.xib */,
+				73A330812194215B00707D8F /* MSGTravCollectionViewCell.swift */,
+			);
+			path = Travamigos;
+			sourceTree = "<group>";
+		};
+		73A330822194215B00707D8F /* iMessage */ = {
+			isa = PBXGroup;
+			children = (
+				73A330832194215B00707D8F /* MSGIncomingTailCollectionViewCell.xib */,
+				73A330842194215B00707D8F /* MSGOutgoingTailCollectionViewCell.xib */,
+				73A330852194215B00707D8F /* MSGTailCollectionViewCell.swift */,
+			);
+			path = iMessage;
+			sourceTree = "<group>";
+		};
+		73A330862194215B00707D8F /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				73A330872194215B00707D8F /* MSGImageCollectionViewCell.swift */,
+				73A330882194215B00707D8F /* MSGOutgoingImageCollectionViewCell.xib */,
+				73A330892194215B00707D8F /* MSGIncomingImageCollectionViewCell.xib */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
+		73A3308A2194215B00707D8F /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				73A3308B2194215B00707D8F /* Travamigos */,
+				73A3308E2194215B00707D8F /* iMessage */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		73A3308B2194215B00707D8F /* Travamigos */ = {
+			isa = PBXGroup;
+			children = (
+				73A3308C2194215B00707D8F /* MSGTravCollectionView.swift */,
+				73A3308D2194215B00707D8F /* MSGTravCollectionViewFlowLayout.swift */,
+			);
+			path = Travamigos;
+			sourceTree = "<group>";
+		};
+		73A3308E2194215B00707D8F /* iMessage */ = {
+			isa = PBXGroup;
+			children = (
+				73A3308F2194215B00707D8F /* MSGImessageTravCollectionViewFlowLayout.swift */,
+				73A330902194215B00707D8F /* MSGImessageCollectionView.swift */,
+			);
+			path = iMessage;
+			sourceTree = "<group>";
+		};
+		73A330922194215B00707D8F /* Header Footers */ = {
+			isa = PBXGroup;
+			children = (
+				73A330932194215B00707D8F /* MSGSectionReusableView.swift */,
+				73A330942194215B00707D8F /* Travamigos */,
+				73A3309B2194215B00707D8F /* MSGSectionReusableViewDelegate.swift */,
+				73A3309C2194215B00707D8F /* iMessage */,
+			);
+			path = "Header Footers";
+			sourceTree = "<group>";
+		};
+		73A330942194215B00707D8F /* Travamigos */ = {
+			isa = PBXGroup;
+			children = (
+				73A330952194215B00707D8F /* MSGTravCollectionViewSectionHeader.swift */,
+				73A330962194215B00707D8F /* MSGTravIncomingCollectionViewSectionFooter.xib */,
+				73A330972194215B00707D8F /* MSGTravIncomingCollectionViewSectionHeader.xib */,
+				73A330982194215B00707D8F /* MSGTravOutgoingCollectionViewSectionHeader.xib */,
+				73A330992194215B00707D8F /* MSGTravCollectionViewSectionFooter.swift */,
+				73A3309A2194215B00707D8F /* MSGTravOutgoingCollectionViewSectionFooter.xib */,
+			);
+			path = Travamigos;
+			sourceTree = "<group>";
+		};
+		73A3309C2194215B00707D8F /* iMessage */ = {
+			isa = PBXGroup;
+			children = (
+				73A3309D2194215B00707D8F /* MSGImessageIncomingHeaderView.xib */,
+				73A3309E2194215B00707D8F /* MSGImessageOutgoingFooterView.xib */,
+				73A3309F2194215B00707D8F /* MSGImessageHeaderView.swift */,
+				73A330A02194215B00707D8F /* MSGImessageFooterView.swift */,
+				73A330A12194215B00707D8F /* MSGImessageIncomingFooterView.xib */,
+				73A330A22194215B00707D8F /* MSGImessageOutgoingHeaderView.xib */,
+			);
+			path = iMessage;
+			sourceTree = "<group>";
+		};
+		73A330A52194215B00707D8F /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				73A330A62194215B00707D8F /* MSGPlaceholderTextView.swift */,
+				73A330A72194215B00707D8F /* Styles */,
+				73A330AF2194215B00707D8F /* MSGInputView.swift */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		73A330A72194215B00707D8F /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				73A330A82194215B00707D8F /* Travamigos */,
+				73A330AB2194215B00707D8F /* iMessage */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		73A330A82194215B00707D8F /* Travamigos */ = {
+			isa = PBXGroup;
+			children = (
+				73A330A92194215B00707D8F /* MSGTravInputView.swift */,
+				73A330AA2194215B00707D8F /* MSGInputSeparatorView.swift */,
+			);
+			path = Travamigos;
+			sourceTree = "<group>";
+		};
+		73A330AB2194215B00707D8F /* iMessage */ = {
+			isa = PBXGroup;
+			children = (
+				73A330AC2194215B00707D8F /* MSGImessageInputView.xib */,
+				73A330AD2194215B00707D8F /* MSGImessageSendButton.swift */,
+				73A330AE2194215B00707D8F /* MSGImessageInputView.swift */,
+			);
+			path = iMessage;
+			sourceTree = "<group>";
+		};
+		73A330B32194215B00707D8F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				73A330B42194215B00707D8F /* MSGUser.swift */,
+				73A330B52194215B00707D8F /* MSGMessageBody.swift */,
+				73A330B62194215B00707D8F /* MSGMessage.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		73A330B72194215B00707D8F /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				73A330B82194215B00707D8F /* MSGTravamigosStyle.swift */,
+				73A330B92194215B00707D8F /* MSGIMessageStyle.swift */,
+				73A330BA2194215B00707D8F /* MSGMessengerStyle.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		73A330BB2194215B00707D8F /* Messenger View */ = {
+			isa = PBXGroup;
+			children = (
+				73A330BC2194215B00707D8F /* MSGMessengerView.swift */,
+				73A330BD2194215B00707D8F /* MSGMessengerView.xib */,
+				73A330BE2194215B00707D8F /* MSGMessengerViewController.swift */,
+				73A330BF2194215B00707D8F /* MSGMessengerViewController + Helpers.swift */,
+				73A330C02194215B00707D8F /* MSGMessengerViewController + DataSource.swift */,
+				73A330C12194215B00707D8F /* MSGMessengerViewController + CellDelegate.swift */,
+			);
+			path = "Messenger View";
+			sourceTree = "<group>";
+		};
+		73A330C22194215B00707D8F /* Bubbles */ = {
+			isa = PBXGroup;
+			children = (
+				73A330C32194215B00707D8F /* Travamigos */,
+				73A330C62194215B00707D8F /* iMessage */,
+			);
+			path = Bubbles;
+			sourceTree = "<group>";
+		};
+		73A330C32194215B00707D8F /* Travamigos */ = {
+			isa = PBXGroup;
+			children = (
+				73A330C42194215B00707D8F /* MSGTravOutgoingBubble.swift */,
+				73A330C52194215B00707D8F /* MSGTravIncomingBubble.swift */,
+			);
+			path = Travamigos;
+			sourceTree = "<group>";
+		};
+		73A330C62194215B00707D8F /* iMessage */ = {
+			isa = PBXGroup;
+			children = (
+				73A330C72194215B00707D8F /* MSGTailIncomingBubble.swift */,
+				73A330C82194215B00707D8F /* MSGTailOutgoingBubble.swift */,
+			);
+			path = iMessage;
+			sourceTree = "<group>";
+		};
+		73A330C92194215B00707D8F /* Keyboard Utility */ = {
+			isa = PBXGroup;
+			children = (
+				73A330CA2194215B00707D8F /* KeyboardLayoutGuide.swift */,
+				73A330CB2194215B00707D8F /* KeyboardFrameObserver.swift */,
+				73A330CC2194215B00707D8F /* KeyboardFrameObserversManager.swift */,
+			);
+			path = "Keyboard Utility";
+			sourceTree = "<group>";
+		};
+		73A3310D2194232700707D8F /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				73A3311A219425CE00707D8F /* Model */,
+				73A331102194244800707D8F /* ChatCoordinator.swift */,
+				73A331112194244800707D8F /* ChatActions.swift */,
+				73A331122194244800707D8F /* ChatViewController.swift */,
+				73A331132194244800707D8F /* ChatReducers.swift */,
+				73A331182194248800707D8F /* Chat.storyboard */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		73A3311A219425CE00707D8F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				73A3311B219425DA00707D8F /* ChatUser.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		73D012972159D70500C95896 /* Route */ = {
 			isa = PBXGroup;
 			children = (
@@ -2799,6 +3257,7 @@
 			children = (
 				5EB62FECB47867CB67A0E608894CF362 /* cybexMobile.app */,
 				7386F28C2121204A00ABC924 /* cybexMobileTests.xctest */,
+				73A33066219420B900707D8F /* ChatRoom.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3221,7 +3680,7 @@
 		F3EBF4E6D2E2492B42F25C18354E14EB = {
 			isa = PBXGroup;
 			children = (
-				73534F432189B78800FE1853 /* ModuleMap */,
+				73A33067219420B900707D8F /* ChatRoom */,
 				D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */,
 				B1CE0949A770A9355E35EABBD4213DAB /* Products */,
 				CDB5CFC7D170B0A1511D4AD336877512 /* cybexMobile */,
@@ -3272,6 +3731,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		73A33061219420B900707D8F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73A3306A219420B900707D8F /* ChatRoom.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		6597A0AC6C29D30281EBD879E45F3BAF /* cybexMobile */ = {
 			isa = PBXNativeTarget;
@@ -3288,10 +3758,12 @@
 				7384FD58214CF5F900AFF5BE /* appstore bug */,
 				73539C702179ABCF008395AC /* Integrate Reveal Server */,
 				7398BEC42181C209004C042E /* swiftlint */,
+				73A33072219420B900707D8F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				73A3306C219420B900707D8F /* PBXTargetDependency */,
 			);
 			name = cybexMobile;
 			productName = "Hello World";
@@ -3316,6 +3788,24 @@
 			productName = cybexMobileTests;
 			productReference = 7386F28C2121204A00ABC924 /* cybexMobileTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		73A33065219420B900707D8F /* ChatRoom */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73A33071219420B900707D8F /* Build configuration list for PBXNativeTarget "ChatRoom" */;
+			buildPhases = (
+				73A33061219420B900707D8F /* Headers */,
+				73A33062219420B900707D8F /* Sources */,
+				73A33063219420B900707D8F /* Frameworks */,
+				73A33064219420B900707D8F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChatRoom;
+			productName = ChatRoom;
+			productReference = 73A33066219420B900707D8F /* ChatRoom.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -3368,6 +3858,11 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6597A0AC6C29D30281EBD879E45F3BAF;
 					};
+					73A33065219420B900707D8F = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = Z4LN46787D;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = F2463CE10B3BCCDB7560E546B4D5BE9A /* Build configuration list for PBXProject "cybexMobile" */;
@@ -3386,6 +3881,7 @@
 			targets = (
 				6597A0AC6C29D30281EBD879E45F3BAF /* cybexMobile */,
 				7386F28B2121204A00ABC924 /* cybexMobileTests */,
+				73A33065219420B900707D8F /* ChatRoom */,
 			);
 		};
 /* End PBXProject section */
@@ -3533,6 +4029,7 @@
 				72C844DC214B50930078448C /* en_light.html in Resources */,
 				72E2A8F42151FB0C00FBB3CB /* Comprehensive.storyboard in Resources */,
 				72199DAF2104687D00575226 /* TransferLineView.xib in Resources */,
+				73A331192194248800707D8F /* Chat.storyboard in Resources */,
 				7279867F20F49B3300FFB2DA /* schema.json in Resources */,
 				3BF5B7E62134F5A800E8BFC9 /* ETODetailHeaderView.xib in Resources */,
 				3B125C8521366BEE000A9F97 /* ETODetail.storyboard in Resources */,
@@ -3551,6 +4048,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		73A33064219420B900707D8F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73A330D72194215B00707D8F /* MSGOutgoingTailCollectionViewCell.xib in Resources */,
+				73A330D62194215B00707D8F /* MSGIncomingTailCollectionViewCell.xib in Resources */,
+				73A330D32194215B00707D8F /* MSGIncomingTravCollectionViewCell.xib in Resources */,
+				73A330F92194215B00707D8F /* Assets.xcassets in Resources */,
+				73A330EA2194215B00707D8F /* MSGImessageOutgoingFooterView.xib in Resources */,
+				73A330DA2194215B00707D8F /* MSGOutgoingImageCollectionViewCell.xib in Resources */,
+				73A330EE2194215B00707D8F /* MSGImessageOutgoingHeaderView.xib in Resources */,
+				73A330ED2194215B00707D8F /* MSGImessageIncomingFooterView.xib in Resources */,
+				73A330E32194215B00707D8F /* MSGTravIncomingCollectionViewSectionFooter.xib in Resources */,
+				73A330E92194215B00707D8F /* MSGImessageIncomingHeaderView.xib in Resources */,
+				73A330DB2194215B00707D8F /* MSGIncomingImageCollectionViewCell.xib in Resources */,
+				73A330E72194215B00707D8F /* MSGTravOutgoingCollectionViewSectionFooter.xib in Resources */,
+				73A330E42194215B00707D8F /* MSGTravIncomingCollectionViewSectionHeader.xib in Resources */,
+				73A330F42194215B00707D8F /* MSGImessageInputView.xib in Resources */,
+				73A330E52194215B00707D8F /* MSGTravOutgoingCollectionViewSectionHeader.xib in Resources */,
+				73A331012194215B00707D8F /* MSGMessengerView.xib in Resources */,
+				73A330D42194215B00707D8F /* MSGOutgoingTravCollectionViewCell.xib in Resources */,
+				73A330D02194215B00707D8F /* MSGIncomingEmojiCollectionViewCell.xib in Resources */,
+				73A330D12194215B00707D8F /* MSGOutgoingEmojiCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3712,6 +4235,57 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		73A33062219420B900707D8F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73A330F62194215B00707D8F /* MSGImessageInputView.swift in Sources */,
+				73A330FA2194215B00707D8F /* MSGUser.swift in Sources */,
+				73A331022194215B00707D8F /* MSGMessengerViewController.swift in Sources */,
+				73A330F12194215B00707D8F /* MSGPlaceholderTextView.swift in Sources */,
+				73A330F52194215B00707D8F /* MSGImessageSendButton.swift in Sources */,
+				73A330E02194215B00707D8F /* MSGCollectionView.swift in Sources */,
+				73A331032194215B00707D8F /* MSGMessengerViewController + Helpers.swift in Sources */,
+				73A331082194215B00707D8F /* MSGTailIncomingBubble.swift in Sources */,
+				73A330EC2194215B00707D8F /* MSGImessageFooterView.swift in Sources */,
+				73A331062194215B00707D8F /* MSGTravOutgoingBubble.swift in Sources */,
+				73A330CD2194215B00707D8F /* MessengerKit.swift in Sources */,
+				73A330DF2194215B00707D8F /* MSGImessageCollectionView.swift in Sources */,
+				73A330DC2194215B00707D8F /* MSGTravCollectionView.swift in Sources */,
+				73A330E82194215B00707D8F /* MSGSectionReusableViewDelegate.swift in Sources */,
+				73A330F72194215B00707D8F /* MSGInputView.swift in Sources */,
+				73A331072194215B00707D8F /* MSGTravIncomingBubble.swift in Sources */,
+				73A330D52194215B00707D8F /* MSGTravCollectionViewCell.swift in Sources */,
+				73A330FD2194215B00707D8F /* MSGTravamigosStyle.swift in Sources */,
+				73A330DE2194215B00707D8F /* MSGImessageTravCollectionViewFlowLayout.swift in Sources */,
+				73A330FB2194215B00707D8F /* MSGMessageBody.swift in Sources */,
+				73A331042194215B00707D8F /* MSGMessengerViewController + DataSource.swift in Sources */,
+				73A3310B2194215B00707D8F /* KeyboardFrameObserver.swift in Sources */,
+				73A331092194215B00707D8F /* MSGTailOutgoingBubble.swift in Sources */,
+				73A330E12194215B00707D8F /* MSGSectionReusableView.swift in Sources */,
+				73A330D82194215B00707D8F /* MSGTailCollectionViewCell.swift in Sources */,
+				73A330F02194215B00707D8F /* MSGDelegate.swift in Sources */,
+				73A330CE2194215B00707D8F /* MSGMessageCell.swift in Sources */,
+				73A330FF2194215B00707D8F /* MSGMessengerStyle.swift in Sources */,
+				73A3310A2194215B00707D8F /* KeyboardLayoutGuide.swift in Sources */,
+				73A330D22194215B00707D8F /* MSGMessageCellDelegate.swift in Sources */,
+				73A330F32194215B00707D8F /* MSGInputSeparatorView.swift in Sources */,
+				73A331052194215B00707D8F /* MSGMessengerViewController + CellDelegate.swift in Sources */,
+				73A3310C2194215B00707D8F /* KeyboardFrameObserversManager.swift in Sources */,
+				73A330E22194215B00707D8F /* MSGTravCollectionViewSectionHeader.swift in Sources */,
+				73A330FE2194215B00707D8F /* MSGIMessageStyle.swift in Sources */,
+				73A330EF2194215B00707D8F /* MSGDataSource.swift in Sources */,
+				73A331002194215B00707D8F /* MSGMessengerView.swift in Sources */,
+				73A330EB2194215B00707D8F /* MSGImessageHeaderView.swift in Sources */,
+				73A330FC2194215B00707D8F /* MSGMessage.swift in Sources */,
+				73A330D92194215B00707D8F /* MSGImageCollectionViewCell.swift in Sources */,
+				73A330F22194215B00707D8F /* MSGTravInputView.swift in Sources */,
+				73A330CF2194215B00707D8F /* MSGEmojiCollectionViewCell.swift in Sources */,
+				73A330E62194215B00707D8F /* MSGTravCollectionViewSectionFooter.swift in Sources */,
+				73A330DD2194215B00707D8F /* MSGTravCollectionViewFlowLayout.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAC8A0CC95B3841C82679AB79574101B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3848,6 +4422,7 @@
 				72DBCA7421391A4300905303 /* CybexWebCoordinator.swift in Sources */,
 				72199DA5210466C000575226 /* TransferTopView.swift in Sources */,
 				72E2A8EE2151F9DB00FBB3CB /* ComprehensiveActions.swift in Sources */,
+				73A331172194244800707D8F /* ChatReducers.swift in Sources */,
 				221C615D213685C00021C007 /* GridContentView.swift in Sources */,
 				730229A1212E52B50073D5CE /* ETOManager.swift in Sources */,
 				BD76C30DD5E6DF9195A2DF3218C62F70 /* EmptySegue.swift in Sources */,
@@ -3953,6 +4528,7 @@
 				CD017D1C374A5B06D3ECEC24936E0911 /* MyOpenedOrdersView.swift in Sources */,
 				D3008B984211AFE152859658DC6B773B /* NSNotification+Extensions.swift in Sources */,
 				031F69CC95D2906A4F8F4063776327F6 /* NSObject+Extensions.swift in Sources */,
+				73A331162194244800707D8F /* ChatViewController.swift in Sources */,
 				739EFB652181D10E00424061 /* UIPanGestureRecognizer+RxGesture.swift in Sources */,
 				7267DA2221363BEE004AF9AF /* ETOHomeView.swift in Sources */,
 				009625463316961A6BB07A49EB88D5D5 /* NavCoordinator.swift in Sources */,
@@ -3969,6 +4545,7 @@
 				5F25028208C6665DE69B50E5D5ECBEF6 /* OpenedOrdersCoordinator.swift in Sources */,
 				7217B07D2122AAFD00608531 /* AddAddressActions.swift in Sources */,
 				3B0EB655210313B200F19C31 /* AccountContentView.swift in Sources */,
+				73A331152194244800707D8F /* ChatActions.swift in Sources */,
 				26827458BC8C2CF5494505DA58315BBF /* OpenedOrdersHeaderView.swift in Sources */,
 				739EFB612181D10E00424061 /* UIPinchGestureRecognizer+RxGesture.swift in Sources */,
 				733714B12122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift in Sources */,
@@ -4040,6 +4617,7 @@
 				29C911F371D5F143FB814E54626700D5 /* RechargeSegment.swift in Sources */,
 				E593AB226F596677B1664A82995509CA /* RechargeViewController.swift in Sources */,
 				60FB6241E99099A751F12BD01130832D /* RegisterActions.swift in Sources */,
+				73A3311C219425DA00707D8F /* ChatUser.swift in Sources */,
 				D1A397322CB34E638C9DFE14F5C0B4BC /* RegisterCoordinator.swift in Sources */,
 				89BE803D714EF0B7126DCF66439F86A9 /* RegisterReducers.swift in Sources */,
 				0D989B23FC27CC92FAF32E53754D6330 /* RegisterViewController.swift in Sources */,
@@ -4111,6 +4689,7 @@
 				7386F2B121216B2200ABC924 /* TransferAddressHomeViewController.swift in Sources */,
 				7267DA0721350327004AF9AF /* ETOActions.swift in Sources */,
 				73587EAE2137C057006CF8A6 /* ETOCrowdViewController.swift in Sources */,
+				73A331142194244800707D8F /* ChatCoordinator.swift in Sources */,
 				3B0EB65C210313B200F19C31 /* YourPortfolioHeadView.swift in Sources */,
 				C02132F00200B408020442C307CEE0B6 /* TradeView.swift in Sources */,
 				7CA82BA6BC1F22AAA929D52CD5C4434F /* TradeViewController.swift in Sources */,
@@ -4185,6 +4764,11 @@
 			target = 6597A0AC6C29D30281EBD879E45F3BAF /* cybexMobile */;
 			targetProxy = 7386F2912121204A00ABC924 /* PBXContainerItemProxy */;
 		};
+		73A3306C219420B900707D8F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 73A33065219420B900707D8F /* ChatRoom */;
+			targetProxy = 73A3306B219420B900707D8F /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -4216,6 +4800,7 @@
 		0DEA2D3ABA7BF666011D972A16C5B728 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -4240,12 +4825,12 @@
 					"-ObjC",
 					"-lc++",
 				);
-				OTHER_SWIFT_FLAGS = "";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/ModuleMap";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				VALID_ARCHS = arm64;
@@ -4306,6 +4891,7 @@
 		26695AD676D4F3122177FD6581ACB0F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -4314,6 +4900,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				"DEBUG_INFORMATION_FORMAT[sdk=iphoneos*]" = "dwarf-with-dsym";
+				"DEBUG_INFORMATION_FORMAT[sdk=iphonesimulator*]" = dwarf;
 				DEVELOPMENT_TEAM = Z4LN46787D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4331,14 +4919,15 @@
 					"-ObjC",
 					"-lc++",
 				);
-				OTHER_SWIFT_FLAGS = "";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/ModuleMap";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "cybexMobile/cybexMobile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				VALID_ARCHS = arm64;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -4461,6 +5050,79 @@
 			};
 			name = Release;
 		};
+		73A3306F219420B900707D8F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Z4LN46787D;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ChatRoom/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.ChatRoom;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		73A33070219420B900707D8F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Z4LN46787D;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ChatRoom/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.ChatRoom;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4478,6 +5140,15 @@
 			buildConfigurations = (
 				7386F2942121204B00ABC924 /* Debug */,
 				7386F2952121204B00ABC924 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73A33071219420B900707D8F /* Build configuration list for PBXNativeTarget "ChatRoom" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73A3306F219420B900707D8F /* Debug */,
+				73A33070219420B900707D8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -17,7 +17,6 @@ protocol HomeCoordinatorProtocol {
 protocol HomeStateManagerProtocol {
     var state: HomeState { get }
     func switchPageState(_ state: PageState)
-    func sortedHomeDataWith()
 }
 
 class HomeCoordinator: HomeRootCoordinator {
@@ -48,29 +47,5 @@ extension HomeCoordinator: HomeCoordinatorProtocol {
 extension HomeCoordinator: HomeStateManagerProtocol {
     func switchPageState(_ state: PageState) {
         self.store.dispatch(PageStateAction(state: state))
-    }
-    
-    func sortedHomeDataWith() {
-        let nameData = appData.tickerData.value.sorted { (first, second) -> Bool in
-            guard let firstInfo = appData.assetInfo[first.quote], let secondInfo = appData.assetInfo[second.quote] else { return false}
-            return firstInfo.symbol.filterJade < secondInfo.symbol.filterJade
-        }
-        
-        let volumeData = appData.tickerData.value.sorted { (first, second) -> Bool in
-            guard let firstDecimal = first.baseVolume.toDecimal(), let secondDecimal = second.baseVolume.toDecimal()
-                else { return false}
-            return firstDecimal > secondDecimal
-        }
-        
-        let priceData = appData.tickerData.value.sorted { (first, second) -> Bool in
-            guard let firstPrice = first.latest.toDecimal(), let secondPrice = second.latest.toDecimal() else {return false}
-            return firstPrice > secondPrice
-        }
-        
-        let appliesData = appData.tickerData.value.sorted { (first, second) -> Bool in
-            guard let firstApplies = first.percentChange.toDecimal(), let secondApplies = second.percentChange.toDecimal() else {return false}
-            return firstApplies > secondApplies
-        }
-        
     }
 }

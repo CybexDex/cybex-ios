@@ -80,19 +80,19 @@ class HomeTitleView: UIView {
         nameL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](tap) in
             guard let `self` = self else { return }
             self.sorted(self.nameBtn)
-        }
+        }.disposed(by: disposeBag)
         volL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](tap) in
             guard let `self` = self else { return }
             self.sorted(self.volBtn)
-        }
+        }.disposed(by: disposeBag)
         priceL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](tap) in
             guard let `self` = self else { return }
             self.sorted(self.priceBtn)
-        }
+        }.disposed(by: disposeBag)
         appliesL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](tap) in
             guard let `self` = self else { return }
             self.sorted(self.appliesBtn)
-        }
+        }.disposed(by: disposeBag)
     }
 
     override var intrinsicContentSize: CGSize {
