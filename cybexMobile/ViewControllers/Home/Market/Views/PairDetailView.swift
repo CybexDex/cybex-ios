@@ -67,12 +67,6 @@ class PairDetailView: UIView {
                 self.baseVolume.text = self.baseName + ": " + ticker.baseVolume.suffixNumber(digitNum: 2)
                 self.quoteVolume.text = self.quoteName + ": " + ticker.quoteVolume.suffixNumber(digitNum: 2)
 
-//                detailView.highLabel.text = "High: " + last_model.high.formatCurrency(digitNum: base_info.precision)
-//                detailView.lowLabel.text = "Low: " + last_model.low.formatCurrency(digitNum: base_info.precision)
-
-//                self.highLabel.text = "High: " + ticker.highest_bid.formatCurrency(digitNum: base_info.precision)
-//                self.lowLabel.text = "Low: " + ticker.lowest_ask.formatCurrency(digitNum: base_info.precision)
-
                 self.price.text = ticker.latest.formatCurrency(digitNum: baseInfo.precision)
                 self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percentChange.formatCurrency(digitNum: 2) + "%"
                 self.bulking.textColor = ticker.incre.color()

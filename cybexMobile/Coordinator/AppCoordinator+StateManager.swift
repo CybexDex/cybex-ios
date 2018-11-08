@@ -229,12 +229,10 @@ extension AppCoordinator {
                 var count = 0
                 for base in AssetConfiguration.marketBaseAssets {
                     SimpleHTTPService.requestMarketList(base: base).done({ (pair) in
-
                         let piecePair = pair.filter({ (pair) -> Bool in
                             return AssetConfiguration.shared.uniqueIds.contains([pair.base, pair.quote])
                         })
                         count += 1
-
                         pairs += piecePair
                         if count == AssetConfiguration.marketBaseAssets.count {
                             AssetConfiguration.shared.assetIds = pairs
@@ -242,13 +240,10 @@ extension AppCoordinator {
                         }
                     }).cauterize()
                 }
-
                 if appCoodinator.fetchPariTimer == nil || !(appCoodinator.fetchPariTimer!.state.isRunning) {
                     AppConfiguration.shared.appCoordinator.repeatFetchPairInfo(.veryLow)
                 }
-
             }
-
         } else {
             if appData.assetInfo.count != AssetConfiguration.shared.uniqueIds.count {
                 fetchAsset {

@@ -104,7 +104,6 @@ class TradeViewController: BaseViewController {
             self.titlesView!.data = [R.string.localizable.trade_buy.key,
                                      R.string.localizable.trade_sell.key,
                                      R.string.localizable.trade_open_orders.key]
-            self.rightNavButton?.setTitle(R.string.localizable.my_history_title.key.localized(), for: .normal)
         })
     }
 

@@ -21,5 +21,4 @@ class WithdrawAddressHomeTableViewCell: BaseTableViewCell {
             foreView.amount.text = data.count.value
         }
     }
-
 }

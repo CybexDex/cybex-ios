@@ -73,13 +73,18 @@ class TradeHistoryViewController: BaseViewController {
     }
 
     func setupEvent() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification),
+                                               object: nil,
+                                               queue: nil,
+                                               using: { [weak self] _ in
             guard let `self` = self else { return }
             self.refreshView()
         })
     }
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name(rawValue: LCLLanguageChangeNotification),
+                                                  object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -99,38 +104,47 @@ class TradeHistoryViewController: BaseViewController {
 
     func convertToData() {
         if let data = self.coordinator?.state.property.data.value {
+            
             var showData: [TradeHistoryViewModel] = []
 
             for itemData in data {
                 let curData = itemData
 
-                let pay = curData[0]
-                let receive = curData[1]
-                let time = curData[2].stringValue
-
+                let operation = curData[0]
+//                let receive = curData[1]
+                let time = curData[1].stringValue
+                let pay = operation["pays"]
+                let receive = operation["receives"]
+                let base = operation["fill_price"]["base"]
+                let quote = operation["fill_price"]["quote"]
                 let baseInfo = appData.assetInfo[pair!.base]!
                 let quoteInfo = appData.assetInfo[pair!.quote]!
-                let basePrecision = pow(10, baseInfo.precision.double)
-                let quotePrecision = pow(10, quoteInfo.precision.double)
+                let basePrecision = pow(10, baseInfo.precision)
+                let quotePrecision = pow(10, quoteInfo.precision)
 
-                if pay["asset_id"].stringValue == pair?.base {
-                    let quoteVolume = Double(receive["amount"].stringValue)! / quotePrecision
-                    let baseVolume = Double(pay["amount"].stringValue)! / basePrecision
+                if base["asset_id"].stringValue == pair?.base {
+                
+                    let quoteVolume = Decimal(string: quote["amount"].stringValue)! / quotePrecision
+                    let baseVolume = Decimal(string: base["amount"].stringValue)! / basePrecision
+                    let payVolume = Decimal(string: receive["amount"].stringValue)! / quotePrecision
+                    let receiveVolume = Decimal(string: pay["amount"].stringValue)! / basePrecision
 
                     let price = baseVolume / quoteVolume
                     let tradePrice = price.tradePrice()
-
                     let viewModel = TradeHistoryViewModel(
                         pay: false,
                         price: tradePrice.price,
-                        quoteVolume: quoteVolume.suffixNumber(digitNum: 10 - tradePrice.pricision),
-                        baseVolume: baseVolume.suffixNumber(digitNum: tradePrice.pricision),
+                        quoteVolume: payVolume.stringValue.suffixNumber(digitNum: 10 - tradePrice.pricision),
+                        baseVolume: receiveVolume.stringValue.suffixNumber(digitNum: tradePrice.pricision),
                         time: time.dateFromISO8601!.string(withFormat: "HH:mm:ss"))
                     showData.append(viewModel)
-
-                } else {
-                    let quoteVolume = Double(pay["amount"].stringValue)! / quotePrecision
-                    let baseVolume = Double(receive["amount"].stringValue)! / basePrecision
+                }
+                else {
+                    let quoteVolume = Decimal(string: base["amount"].stringValue)! / quotePrecision
+                    let baseVolume = Decimal(string: quote["amount"].stringValue)! / basePrecision
+                    
+                    let payVolume = Decimal(string: pay["amount"].stringValue)! / quotePrecision
+                    let receiveVolume = Decimal(string: receive["amount"].stringValue)! / basePrecision
 
                     let price = baseVolume / quoteVolume
 
@@ -138,8 +152,8 @@ class TradeHistoryViewController: BaseViewController {
                     let viewModel = TradeHistoryViewModel(
                         pay: true,
                         price: tradePrice.price,
-                        quoteVolume: quoteVolume.suffixNumber(digitNum: 10 - tradePrice.pricision),
-                        baseVolume: baseVolume.suffixNumber(digitNum: tradePrice.pricision),
+                        quoteVolume: payVolume.stringValue.suffixNumber(digitNum: 10 - tradePrice.pricision),
+                        baseVolume: receiveVolume.stringValue.suffixNumber(digitNum: tradePrice.pricision),
                         time: time.dateFromISO8601!.string(withFormat: "HH:mm:ss"))
                     showData.append(viewModel)
                 }

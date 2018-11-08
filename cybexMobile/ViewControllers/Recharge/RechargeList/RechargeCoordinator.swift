@@ -31,6 +31,8 @@ protocol RechargeStateManagerProtocol {
 
     func fetchWithdrawIdsInfo()
     func fetchDepositIdsInfo()
+    func sortedEmptyAsset(_ isEmpty: Bool)
+    func sortedNameAsset(_ name: String)
 }
 
 class RechargeCoordinator: NavCoordinator {
@@ -74,17 +76,18 @@ extension RechargeCoordinator: RechargeCoordinatorProtocol {
     }
 
     func openWithDrawDetail(_ trade: Trade) {
-        let vc = R.storyboard.account.withdrawDetailViewController()!
-        let coordinator = WithdrawDetailCoordinator(rootVC: self.rootVC)
-        vc.coordinator = coordinator
-        vc.trade     = trade
-        self.rootVC.pushViewController(vc, animated: true)
+        if let withdrawDetailVC = R.storyboard.account.withdrawDetailViewController() {
+            let coordinator = WithdrawDetailCoordinator(rootVC: self.rootVC)
+            withdrawDetailVC.coordinator = coordinator
+            withdrawDetailVC.trade = trade
+            self.rootVC.pushViewController(withdrawDetailVC, animated: true)
+        }
     }
 
     func openRecordList() {
-        if let vc = R.storyboard.comprehensive.withdrawAndDespoitRecordViewController() {
-            vc.coordinator = WithdrawAndDespoitRecordCoordinator(rootVC: self.rootVC)
-            self.rootVC.pushViewController(vc, animated: true)
+        if let recordVC = R.storyboard.comprehensive.withdrawAndDespoitRecordViewController() {
+            recordVC.coordinator = WithdrawAndDespoitRecordCoordinator(rootVC: self.rootVC)
+            self.rootVC.pushViewController(recordVC, animated: true)
         }
     }
 }
@@ -109,5 +112,10 @@ extension RechargeCoordinator: RechargeStateManagerProtocol {
             self.store.dispatch(FecthDepositIds(data: ids))
             }.cauterize()
     }
-
+    func sortedEmptyAsset(_ isEmpty: Bool) {
+        self.store.dispatch(SortedByEmptyAssetAction(data: isEmpty))
+    }
+    func sortedNameAsset(_ name: String) {
+        self.store.dispatch(SortedByNameAssetAction(data: name))
+    }
 }

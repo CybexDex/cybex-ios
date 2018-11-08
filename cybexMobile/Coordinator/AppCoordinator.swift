@@ -128,7 +128,10 @@ class AppCoordinator {
             rootVC.viewControllers = [comprehensive, home, trade, account]
         }
 
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: {_ in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification),
+                                               object: nil,
+                                               queue: nil,
+                                               using: {_ in
             CBConfiguration.sharedConfiguration.themeIndex = ThemeManager.currentThemeIndex
             CBConfiguration.sharedConfiguration.main.valueAssistTextColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1) : #colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1)
             CBConfiguration.sharedConfiguration.theme.longPressLineColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1) : #colorLiteral(red: 0.1058823529, green: 0.1333333333, blue: 0.1882352941, alpha: 1)
@@ -136,16 +139,28 @@ class AppCoordinator {
             CBConfiguration.sharedConfiguration.theme.dashColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.white
         })
 
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: {_ in
-            comprehensive.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navHome.key.localized(), image: R.image.ic_nav_home(), selectedImage: R.image.ic_nav_home_active())
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification),
+                                               object: nil,
+                                               queue: nil,
+                                               using: {_ in
+            comprehensive.tabBarItem = ESTabBarItem.init(CBTabBarView(),
+                                                         title: R.string.localizable.navHome.key.localized(),
+                                                         image: R.image.ic_nav_home(),
+                                                         selectedImage: R.image.ic_nav_home_active())
 
             home.tabBarItem = ESTabBarItem.init(CBTabBarView(),
                                                 title: R.string.localizable.navWatchlist.key.localized(),
                                                 image: R.image.ic_watchlist_24px(),
                                                 selectedImage: R.image.ic_watchlist_active_24px())
-            trade.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navTrade.key.localized(), image: R.image.icon_apply(), selectedImage: R.image.icon_apply_active())
+            trade.tabBarItem = ESTabBarItem.init(CBTabBarView(),
+                                                 title: R.string.localizable.navTrade.key.localized(),
+                                                 image: R.image.icon_apply(),
+                                                 selectedImage: R.image.icon_apply_active())
 
-            eto.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navEto.key.localized(), image: R.image.ic_eto_24_px(), selectedImage: R.image.ic_eto_active_24_px())
+            eto.tabBarItem = ESTabBarItem.init(CBTabBarView(),
+                                               title: R.string.localizable.navEto.key.localized(),
+                                               image: R.image.ic_eto_24_px(),
+                                               selectedImage: R.image.ic_eto_active_24_px())
             account.tabBarItem = ESTabBarItem.init(CBTabBarView(),
                                                    title: R.string.localizable.navAccount.key.localized(),
                                                    image: R.image.ic_account_box_24px(),
@@ -158,7 +173,9 @@ class AppCoordinator {
     }
 
     func aspect() {
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) {[weak self] (_) in
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
+                                               object: nil,
+                                               queue: nil) {[weak self] (_) in
             guard let `self` = self else { return }
             self.curDisplayingCoordinator().rootVC.topViewController?.refreshViewController()
         }

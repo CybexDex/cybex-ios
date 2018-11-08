@@ -10,14 +10,35 @@ import UIKit
 
 class HomeContentView: UIView {
     struct Define {
-        static let sectionHeaderHeight: Double = 71.0
+        static let sectionHeaderHeight: Double = 73.0
+    }
+    
+    enum SortedByKindAction: String {
+        case none
+        case nameUp
+        case nameDown
+        case volUp
+        case volDown
+        case priceUp
+        case priceDown
+        case appliesUp
+        case appliesDown
+    }
+    
+    var sortedAction: SortedByKindAction = .none {
+        didSet {
+            if let data = self.data as? [Ticker] {
+                self.reloadData = dealWithReloadData(data)
+            }
+        }
     }
 
     @IBOutlet weak var tableView: UITableView!
     var currentBaseIndex = 0 {
         didSet {
-            self.tableView.reloadData()
-            self.tableView.isHidden = false
+            if let data = self.data as? [Ticker] {
+                self.reloadData = dealWithReloadData(data)
+            }
         }
     }
 
@@ -27,24 +48,86 @@ class HomeContentView: UIView {
                 self.tableView.isScrollEnabled = false
                 var buckets = appData.filterPopAssetsCurrency()
                 if buckets.count >= 6 {
-                    self.data = Array(buckets[0..<6])
+                    self.reloadData = Array(buckets[0..<6])
                 } else {
-                    self.data = buckets
+                    self.reloadData = buckets
                 }
             }
         }
     }
 
     lazy var sectionHeader: HomeSectionHeaderView = {
-        let sectionHeader = HomeSectionHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: CGFloat(Define.sectionHeaderHeight)))
+        let sectionHeader = HomeSectionHeaderView(frame: CGRect(x: 0, y: 0, width: self.width,
+                                                                height: CGFloat(Define.sectionHeaderHeight)))
         return sectionHeader
     }()
 
     var data: Any? {
         didSet {
-            if let _ = data as? [Ticker] {
+            if let data = data as? [Ticker] {
+                self.reloadData = dealWithReloadData(data)
+            }
+        }
+    }
+    
+    var reloadData: [Ticker]? {
+        didSet{
+            if let _ = reloadData {
                 self.tableView.reloadData()
             }
+        }
+    }
+    
+    func dealWithReloadData(_ sender: [Ticker]) -> [Ticker] {
+        let originalData = sender.filter({$0.base == AssetConfiguration.marketBaseAssets[currentBaseIndex]})
+        switch self.sortedAction {
+        case .none:
+            return originalData
+        case .nameUp:
+            return originalData.sorted(by: { (first, second) -> Bool in
+                guard let firstInfo = appData.assetInfo[first.quote], let secondInfo = appData.assetInfo[second.quote] else {return false}
+                
+                return firstInfo.symbol.filterJade < secondInfo.symbol.filterJade
+            })
+        case .nameDown:
+            return originalData.sorted(by: { (first, second) -> Bool in
+                guard let firstInfo = appData.assetInfo[first.quote], let secondInfo = appData.assetInfo[second.quote] else {return false}
+                
+                return firstInfo.symbol.filterJade > secondInfo.symbol.filterJade
+            })
+        case .volUp:
+            return originalData.sorted(by: { (first, second) -> Bool in
+                guard let firstDecimal = first.baseVolume.toDecimal(), let secondDecimal = second.baseVolume.toDecimal() else { return false}
+                return firstDecimal < secondDecimal
+            })
+        case .volDown:
+            return originalData.sorted(by: { (first, second) -> Bool in
+                guard let firstDecimal = first.baseVolume.toDecimal(), let secondDecimal = second.baseVolume.toDecimal() else { return false}
+                return firstDecimal > secondDecimal
+            })
+        case .priceUp:
+            return originalData.sorted(by: { (first, second) -> Bool in
+                guard let firstDecimal = first.latest.toDecimal(), let secondDecimal = second.latest.toDecimal() else { return false}
+                return firstDecimal < secondDecimal
+            })
+        case .priceDown:
+            return originalData.sorted(by: { (first, second) -> Bool in
+                guard let firstDecimal = first.latest.toDecimal(), let secondDecimal = second.latest.toDecimal() else { return false}
+                return firstDecimal > secondDecimal
+            })
+        case .appliesUp:
+            return originalData.sorted(by: { (first, second) -> Bool in
+                guard let firstDecimal = first.percentChange.toDouble(), let secondDecimal = second.percentChange.toDouble() else { return false}
+                return firstDecimal < secondDecimal
+            })
+        case .appliesDown:
+            return originalData.sorted(by: { (first, second) -> Bool in
+                guard let firstDecimal = first.percentChange.toDouble(), let secondDecimal = second.percentChange.toDouble() else { return false}
+                return firstDecimal > secondDecimal
+            })
+        default:
+            return []
+            break
         }
     }
 
@@ -103,29 +186,23 @@ extension HomeContentView: UITableViewDataSource, UITableViewDelegate {
         if self.viewType == .comprehensive {
             return 6
         }
-
-        return appData.filterQuoteAssetTicker(AssetConfiguration.marketBaseAssets[currentBaseIndex]).filter({ (ticker) -> Bool in
-            return ticker.baseVolume != "0"
-        }).count
+        if let data = self.reloadData {
+            return data.count
+        }
+        return 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: HomePairCell.self), for: indexPath) as? HomePairCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: HomePairCell.self), for: indexPath) as? HomePairCell, let result = self.reloadData {
             if self.viewType == .comprehensive {
                 cell.cellType = .topGainers
-                if let data = self.data as? [Ticker] {
-                    if indexPath.row < data.count {
-                        cell.setup(data[indexPath.row], indexPath: indexPath)
-                    } else {
-                        cell.setup(nil, indexPath: indexPath)
-                    }
+                if indexPath.row < result.count {
+                    cell.setup(result[indexPath.row], indexPath: indexPath)
+                } else {
+                    cell.setup(nil, indexPath: indexPath)
                 }
             } else {
-                let markets = appData.filterQuoteAssetTicker(AssetConfiguration.marketBaseAssets[currentBaseIndex]).filter({ (ticker) -> Bool in
-                    return ticker.baseVolume != "0"
-
-                })
-                let data = markets[indexPath.row]
+                let data = result[indexPath.row]
                 cell.setup(data, indexPath: indexPath)
             }
             return cell
@@ -155,6 +232,50 @@ extension HomeContentView {
     @objc func tagDidSelected(_ data: [String: Any]) {
         if let index = data["selectedIndex"] as? Int {
             self.currentBaseIndex = index
+        }
+    }
+    
+    @objc func sortedByName(_ data: [String: Any]) {
+        guard let kind = data["data"] as? Int else { return }
+        switch kind {
+        case 0:self.sortedAction = .none
+        case 1:self.sortedAction = .nameUp
+        case 2:self.sortedAction = .nameDown
+        default:
+            break
+        }
+    }
+    
+    @objc func sortedByPrice(_ data: [String: Any]) {
+        guard let kind = data["data"] as? Int else { return }
+        switch kind {
+        case 0:self.sortedAction = .none
+        case 1:self.sortedAction = .priceUp
+        case 2:self.sortedAction = .priceDown
+        default:
+            break
+        }
+    }
+    
+    @objc func sortedByApplies(_ data: [String: Any]) {
+        guard let kind = data["data"] as? Int else { return }
+        switch kind {
+        case 0:self.sortedAction = .none
+        case 1:self.sortedAction = .appliesUp
+        case 2:self.sortedAction = .appliesDown
+        default:
+            break
+        }
+    }
+    
+    @objc func sortedByVol(_ data: [String: Any]) {
+        guard let kind = data["data"] as? Int else { return }
+        switch kind {
+        case 0:self.sortedAction = .none
+        case 1:self.sortedAction = .volUp
+        case 2:self.sortedAction = .volDown
+        default:
+            break
         }
     }
 }

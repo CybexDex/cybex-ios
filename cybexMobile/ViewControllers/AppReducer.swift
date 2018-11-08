@@ -14,11 +14,11 @@ import SwifterSwift
 public class BlockSubscriber<S>: StoreSubscriber {
     public typealias StoreSubscriberStateType = S
     private let block: (S) -> Void
-
+    
     public init(block: @escaping (S) -> Void) {
         self.block = block
     }
-
+    
     public func newState(state: S) {
         self.block(state)
     }
@@ -34,7 +34,7 @@ let trackingMiddleware: Middleware<Any> = { dispatch, getState in
             } else if let action = action as? RefreshState {
                 _ = action.vc?.perform(action.sel)
             }
-
+            
             return next(action)
         }
     }
@@ -42,7 +42,7 @@ let trackingMiddleware: Middleware<Any> = { dispatch, getState in
 
 func loadingReducer(_ state: Bool?, action: Action) -> Bool {
     var state = state ?? false
-
+    
     switch action {
     case _ as StartLoading:
         state = true
@@ -51,13 +51,13 @@ func loadingReducer(_ state: Bool?, action: Action) -> Bool {
     default:
         break
     }
-
+    
     return state
 }
 
 func errorMessageReducer(_ state: String?, action: Action) -> String {
     var state = state ?? ""
-
+    
     switch action {
     case let action as NetworkErrorMessage:
         state = action.errorMessage
@@ -66,13 +66,13 @@ func errorMessageReducer(_ state: String?, action: Action) -> String {
     default:
         break
     }
-
+    
     return state
 }
 
 func pageReducer(_ state: Int?, action: Action) -> Int {
     var state = state ?? 1
-
+    
     switch action {
     case _ as NextPage:
         state += 1
@@ -81,7 +81,6 @@ func pageReducer(_ state: Int?, action: Action) -> Int {
     default:
         break
     }
-
     return state
 }
 
@@ -93,37 +92,37 @@ let semaphore = DispatchSemaphore(value: 1)
 
 func appPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppPropertyState {
     var state = state ?? AppPropertyState()
-
+    
     var ids = state.subscribeIds ?? [:]
     var refreshTimes = state.pairsRefreshTimes ?? [:]
     var klineDatas = state.detailData ?? [:]
-
+    
     switch action {
-//    case let action as MarketsFetched:
-//        async {
-//            if s.wait(timeout: .distantFuture) == .success {
-//
-//                let (matrixs, data) = applyMarketsToState(state, action: action)
-//                main {
-//                    state.matrixs.accept(matrixs)
-//                    state.data.accept(data)
-//                    refreshTimes[Pair(base:action.pair.firstAssetId, quote:action.pair.secondAssetId)] = Date().timeIntervalSince1970
-//                    state.pairsRefreshTimes = refreshTimes
-//                    s.signal()
-//                }
-//            }
-//        }
-
+        //    case let action as MarketsFetched:
+        //        async {
+        //            if s.wait(timeout: .distantFuture) == .success {
+        //
+        //                let (matrixs, data) = applyMarketsToState(state, action: action)
+        //                main {
+        //                    state.matrixs.accept(matrixs)
+        //                    state.data.accept(data)
+        //                    refreshTimes[Pair(base:action.pair.firstAssetId, quote:action.pair.secondAssetId)] = Date().timeIntervalSince1970
+        //                    state.pairsRefreshTimes = refreshTimes
+        //                    s.signal()
+        //                }
+        //            }
+        //        }
+        
     case let action as SubscribeSuccess:
         ids[action.pair] = action.id
         refreshTimes[action.pair] = Date().timeIntervalSince1970
         state.subscribeIds = ids
         state.pairsRefreshTimes = refreshTimes
-
+        
     case let action as AssetInfoAction:
         state.assetInfo[action.assetID] = action.info
     case let action as KLineFetched:
-
+        
         if klineDatas.has(key: action.pair) {
             var klineData = klineDatas[action.pair]!
             klineData[action.stick] = action.assets
@@ -135,9 +134,21 @@ func appPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
     case let action as FecthEthToRmbPriceAction:
         if action.price.count > 0 {
             for rmbPrices in action.price {
-                if rmbPrices.name == "CYB"{
+                if rmbPrices.name == "CYB" {
                     if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
-                        state.cybRmbPrice = rmbPrices.rmbPrice.toDouble()!
+                        state.cybRmbPrice = rmbPrices.rmbPrice.toDecimal()!
+                    }
+                } else if rmbPrices.name == "BTC" {
+                    if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
+                        state.btcRmbPrice = rmbPrices.rmbPrice.toDecimal()!
+                    }
+                } else if rmbPrices.name == "USDT" {
+                    if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
+                        state.usdtRmbPrice = rmbPrices.rmbPrice.toDecimal()!
+                    }
+                } else if rmbPrices.name == "ETH" {
+                    if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
+                        state.ethRmbPrice = rmbPrices.rmbPrice.toDecimal()!
                     }
                 }
             }
@@ -145,7 +156,7 @@ func appPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
         state.rmbPrices = action.price
     case let action as FecthMarketListAction:
         state.importMarketLists = action.data
-
+        
     case let action as TickerFetched:
         async {
             if semaphore.wait(timeout: .distantFuture) == .success {
@@ -156,11 +167,11 @@ func appPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
                 }
             }
         }
-
+        
     default:
         break
     }
-
+    
     return state
 }
 
@@ -178,7 +189,7 @@ func applyTickersToState(_ state: AppPropertyState, action: TickerFetched) -> [T
     } else {
         data[index] = action.asset
     }
-
+    
     if data.count > 1 {
         let scored = data.sorted(by: {return $0.baseVolume.toDecimal()! > $1.baseVolume.toDecimal()!})
         return scored

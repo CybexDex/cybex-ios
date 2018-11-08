@@ -36,7 +36,7 @@ struct AppConfiguration {
         appCoordinator = AppCoordinator(rootVC: rootVC)
     }
 
-    static let APPID = ""
+    static let APPID = "1435025350"
     static var ServerBaseURLString = "https://app.cybex.io/"
     static var ServerRegisterBaseURLString = "https://faucet.cybex.io/"
     static var GatewayURLString = "https://gateway.cybex.io/gateway"
@@ -266,11 +266,21 @@ enum ObjectID: String {
 class AssetConfiguration {
     var assetIds: [Pair] = []
 
+    // 正式
     static var CYB = "1.3.0"
     static var BTC = "1.3.3"
     static var ETH = "1.3.2"
     static var EOS = "1.3.4"
     static let USDT = "1.3.27"
+    
+    // 测试
+//    static var CYB = "1.3.0"
+//    static var USDT = "1.3.56"
+//    static var BTC = "1.3.58"
+//    static var ETH = "1.3.53"
+//    static var EOS = "1.3.57"
+//    static var LTC = "1.3.60"
+//    static var KEY = "1.3.59"
 
     static let orderName = ["USDT", "ETH", "BTC", "CYB"]
     static var marketBaseAssets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.USDT, AssetConfiguration.BTC]

@@ -55,8 +55,22 @@ class HomePairView: UIView {
             } else {
                 self.bulking.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
             }
-            let price = getAssetRMBPrice(ticker.quote, base: ticker.base)
-            self.rbmL.text = price == 0 ? "-" : "≈¥" + "\(price)".formatCurrency(digitNum: 2)
+            var price: Decimal = 0
+            if let latest = ticker.latest.toDecimal() {
+                switch ticker.base {
+                case AssetConfiguration.CYB:
+                    price = latest * appData.cybRmbPrice
+                case AssetConfiguration.ETH:
+                    price = latest * appData.ethRmbPrice
+                case AssetConfiguration.BTC:
+                    price = latest * appData.btcRmbPrice
+                case AssetConfiguration.USDT:
+                    price = latest * appData.usdtRmbPrice
+                default:
+                    break
+                }
+            }
+            self.rbmL.text = price == 0 ? "-" : "≈¥" + price.string(digits: 4, roundingMode: .down)
         }
     }
 
@@ -76,10 +90,12 @@ class HomePairView: UIView {
     fileprivate func setup() {
         self.isUserInteractionEnabled = true
         self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
-
-            self.next?.sendEventWith(Event.cellClicked.rawValue, userinfo: ["index": self.store["index"] ?? []])
-
+            guard let `self` = self, let data = self.data as? Ticker else { return }
+            
+            self.next?.sendEventWith(Event.cellClicked.rawValue,
+                                     userinfo: ["pair": Pair(base: data.base,
+                                                             quote: data.quote),
+                                                "index": self.store["index"] ?? 0])
         }).disposed(by: disposeBag)
     }
 

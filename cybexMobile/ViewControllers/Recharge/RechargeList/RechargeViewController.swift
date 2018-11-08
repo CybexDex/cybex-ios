@@ -12,20 +12,20 @@ import RxCocoa
 import ReSwift
 
 class RechargeViewController: BaseViewController {
-
+    
     enum CellType: Int {
         case RECHARGE
         case WITHDRAW
     }
     var selectedIndex: CellType = .RECHARGE
-
+    
     @IBOutlet weak var rechargeSegmentView: RechargeSegment!
     @IBOutlet weak var tableView: UITableView!
     var coordinator: (RechargeCoordinatorProtocol & RechargeStateManagerProtocol)?
-
+    
     var depositData: [Trade]?
     var withdrawData: [Trade]?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         startLoading()
@@ -33,7 +33,7 @@ class RechargeViewController: BaseViewController {
         self.coordinator?.fetchWithdrawIdsInfo()
         setupUI()
     }
-
+    
     func setupUI() {
         self.localizedText = R.string.localizable.account_trade.key.localizedContainer()
         let cell = R.nib.tradeCell.name
@@ -42,57 +42,42 @@ class RechargeViewController: BaseViewController {
         rechargeSegmentView.segmentControl.selectedSegmentIndex = selectedIndex.rawValue
         configRightNavButton(R.image.ic_w_drecords())
     }
-
+    
     override func rightAction(_ sender: UIButton) {
         self.coordinator?.openRecordList()
     }
-
+    
     override func configureObserveState() {
-
+        
         self.coordinator?.state.depositIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let `self` = self else {return}
-            self.depositData = self.filterData(data)
+            self.depositData = data
             if self.selectedIndex == .RECHARGE {
                 self.endLoading()
                 self.tableView.reloadData()
+                if data.count == 0 {
+                    self.tableView.showNoData(R.string.localizable.recode_nodata.key.localized(), icon: R.image.img_no_records.name)
+                }
+                else {
+                    self.tableView.hiddenNoData()
+                }
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-
+        
         self.coordinator?.state.withdrawIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let `self` = self else { return }
-            self.withdrawData = self.filterData(data)
+            self.withdrawData = data
             if self.selectedIndex == .WITHDRAW {
                 self.endLoading()
                 self.tableView.reloadData()
+                if data.count == 0 {
+                    self.tableView.showNoData(R.string.localizable.recode_nodata.key.localized(), icon: R.image.img_no_records.name)
+                }
+                else {
+                    self.tableView.hiddenNoData()
+                }
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    }
-
-    func filterData(_ trades: [Trade]) -> [Trade] {
-        let data = trades.filter({return appData.assetInfo[$0.id] != nil})
-        var tradesInfo: [Trade] = []
-        if var balances = UserManager.shared.balances.value {
-            balances = balances.filter { (balance) -> Bool in
-                return getRealAmount(balance.assetType, amount: balance.balance).doubleValue != 0
-            }
-            for balance in balances {
-                for trade in data {
-                    if trade.id == balance.assetType {
-                        tradesInfo.append(trade)
-                    }
-                }
-            }
-            let filterData = data.filter { (trade) -> Bool in
-                for tradeInfo in tradesInfo {
-                    if tradeInfo.id == trade.id {
-                        return false
-                    }
-                }
-                return true
-            }
-            return tradesInfo + filterData
-        }
-        return data
     }
 }
 
@@ -118,7 +103,7 @@ extension RechargeViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return 0
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: TradeCell.self), for: indexPath) as? TradeCell {
             if selectedIndex == .WITHDRAW {
@@ -132,10 +117,10 @@ extension RechargeViewController: UITableViewDataSource, UITableViewDelegate {
             }
             return cell
         }
-
+        
         return TradeCell()
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch selectedIndex.rawValue {
         case 0:
@@ -149,5 +134,19 @@ extension RechargeViewController: UITableViewDataSource, UITableViewDelegate {
         default:
             break
         }
+    }
+}
+
+extension RechargeViewController {
+    @objc func rechargeHiddenAsset(_ data: [String: Any]) {
+        guard let isEmpty = data["data"] as? Bool else {
+            return
+        }
+        self.coordinator?.sortedEmptyAsset(isEmpty)
+    }
+    
+    @objc func rechargeSortedName(_ data: [String: Any]) {
+        guard let name = data["data"] as? String else { return }
+        self.coordinator?.sortedNameAsset(name)
     }
 }

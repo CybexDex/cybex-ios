@@ -14,19 +14,28 @@ class BusinessTitleView: UIView {
     @IBOutlet weak var tableView: UITableView!
 
     var selectedIndex: Int?
-
     var saveBaseIndex = 0
-
     var currentBaseIndex = 0 {
         didSet {
-            self.tableView.reloadData()
-            //      self.tableView.isHidden = false
+            if let data = self.data as? [Ticker] {
+                self.reloadData = data.filter({$0.base == AssetConfiguration.marketBaseAssets[currentBaseIndex]})
+            }
         }
     }
 
     var data: Any? {
         didSet {
-
+            if let data = data as? [Ticker]{
+                self.reloadData = data.filter({$0.base == AssetConfiguration.marketBaseAssets[currentBaseIndex]})
+            }
+        }
+    }
+    
+    var reloadData: [Ticker]? {
+        didSet{
+            if let _ = reloadData {
+                self.tableView.reloadData()
+            }
         }
     }
 
@@ -84,26 +93,27 @@ class BusinessTitleView: UIView {
 
 extension BusinessTitleView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appData.filterQuoteAssetTicker(AssetConfiguration.marketBaseAssets[currentBaseIndex]).filter({ (ticker) -> Bool in
-            return ticker.baseVolume != "0"
-
-        }).count
+        guard let data = self.reloadData else {
+            return 0
+        }
+        return data.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: BusinessTitleCell.self), for: indexPath) as? BusinessTitleCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: BusinessTitleCell.self),
+                                                    for: indexPath) as? BusinessTitleCell,
+            let tickers = self.reloadData {
             if let selectedIndex = self.selectedIndex, selectedIndex == indexPath.row && saveBaseIndex == currentBaseIndex {
                 cell.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.paleGrey.hexString(true)]
                 cell.businessTitleCellView.paris.theme_textColor = [UIColor.pastelOrange.hexString(true), UIColor.pastelOrange.hexString(true)]
             } else {
-                cell.theme_backgroundColor = [UIColor.darkTwo.hexString(true), UIColor.white.hexString(true)]
-                cell.businessTitleCellView.paris.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
+                cell.theme_backgroundColor = [UIColor.darkTwo.hexString(true),
+                                              UIColor.white.hexString(true)]
+                cell.businessTitleCellView.paris.theme_textColor = [UIColor.white.hexString(true),
+                                                                    UIColor.darkTwo.hexString(true)]
             }
-            let markets = appData.filterQuoteAssetTicker(AssetConfiguration.marketBaseAssets[currentBaseIndex]).filter({ (ticker) -> Bool in
-                return ticker.baseVolume != "0"
-            })
-            let data = markets[indexPath.row]
+            let data = tickers[indexPath.row]
             cell.setup(data, indexPath: indexPath)
             return cell
         }

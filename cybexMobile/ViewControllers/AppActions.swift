@@ -10,7 +10,6 @@ import Foundation
 import ReSwift
 import RxCocoa
 
-
 enum PageRefreshType: Int {
     case initial = 0
     case manual
@@ -93,8 +92,10 @@ struct AppPropertyState {
     var rmbPrices: [RMBPrices] = []
 
 //    var eth_rmb_price: Double = 0
-    var cybRmbPrice: Double = 0
-
+    var cybRmbPrice: Decimal = 0
+    var ethRmbPrice: Decimal = 0
+    var btcRmbPrice: Decimal = 0
+    var usdtRmbPrice: Decimal = 0
     var importMarketLists: [ImportantMarketPair] = []
 
     func filterQuoteAssetTicker(_ base: String) -> [Ticker] {

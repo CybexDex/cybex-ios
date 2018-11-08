@@ -100,7 +100,8 @@
 "register.confirm" = "CURRENT PASSWORD:\n<password></password>\n· I UNDERSTAND THAT I WILL LOSE ACCESS TO MY FUNDS IF I LOSE MY PASSWORD\n· I UNDERSTAND THAT NO ONE CAN RECOVER MY PASSWORD IF I LOSE OR FORGET IT\n· I HAVE WRITTEN DOWN OR OTHERWISE STORED MY PASSWORD\n";
 
 
-"home_name_vol"                 = "Name/Vol";
+"home_name_vol" = "Name";
+"home_vol_name" = "Vol";
 "home_last_price"               = "Last Price";
 "home_change"                   = "24h Chg%";
 
@@ -511,3 +512,6 @@
 "pair_vol" = "Vol:%@";
 "pair_change_amount" = "Chg:%@";
 "pair_change_persent" = "Chg%%:%@";
+
+"recharge_hidden_asset" = "Hide 0 balance";
+"recharge_search_asset" = "Search";

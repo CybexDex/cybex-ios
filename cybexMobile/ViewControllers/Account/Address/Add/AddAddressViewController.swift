@@ -21,15 +21,10 @@ class AddAddressViewController: BaseViewController {
 
     @IBOutlet weak var containerView: AddAddressView!
     var coordinator: (AddAddressCoordinatorProtocol & AddAddressStateManagerProtocol)?
-
     var addressType: AddressType = .withdraw
-
     var asset: String = ""
-
     var withdrawAddress: WithdrawAddress?
-
     var transferAddress: TransferAddress?
-
     var popActionType: PopType = .normal
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +66,8 @@ class AddAddressViewController: BaseViewController {
         (self.containerView.mark.content.rx.text.orEmpty <-> self.coordinator!.state.property.note).disposed(by: disposeBag)
         (self.containerView.memo.content.rx.text.orEmpty <-> self.coordinator!.state.property.memo).disposed(by: disposeBag)
 
-        NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification, object: self.containerView.mark.content, queue: nil) { [weak self](_) in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification,
+                                               object: self.containerView.mark.content, queue: nil) { [weak self](_) in
             guard let `self` = self else { return }
             if let text = self.containerView.mark.content.text, text.trimmed.count != 0 {
                 self.coordinator?.verityNote(true)

@@ -15,15 +15,15 @@ class LockUpAssetsMData: HandyJSON, NSCopying {
     var balance: Asset = Asset()
     var vestingPolicy: VestingPolicy = VestingPolicy()
     var lastClaimDate: String = ""
-
+    
     required init() {
     }
-
+    
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = LockUpAssetsMData.deserialize(from: self.toJSON())
         return copy ?? LockUpAssetsMData()
     }
-
+    
     func mapping(mapper: HelpingMapper) {
         mapper <<< id                  <-- ("id", ToStringTransform())
         mapper <<< owner               <-- ("owner", ToStringTransform())
@@ -38,10 +38,10 @@ class VestingPolicy: HandyJSON {
     var vestingCliffSeconds: String = ""
     var vestingDurationSeconds: String = ""
     var beginBalance: String = ""
-
+    
     required init() {
     }
-
+    
     func mapping(mapper: HelpingMapper) {
         mapper <<< beginTimestamp                <-- ("begin_timestamp", ToStringTransform())
         mapper <<< vestingCliffSeconds          <-- ("vesting_cliff_seconds", ToStringTransform())
@@ -57,27 +57,27 @@ class PortfolioData {
     var realAmount: String = ""
     var cybPrice: String = ""
     var rbmPrice: String = ""
-
+    
     required init?(balance: Balance) {
-
+        
         icon = AppConfiguration.ServerIconsBaseURLString + balance.assetType.replacingOccurrences(of: ".", with: "_") + "_grey.png"
         // 获得自己的个数
         if let assetInfo = appData.assetInfo[balance.assetType] {
             realAmount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: assetInfo.precision, roundingMode: .down)
             name = assetInfo.symbol.filterJade
         }
-
+        
         // 获取对应CYB的个数
-        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice * (realAmount.toDouble())!)
-
+        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice.doubleValue * (realAmount.toDouble())!)
+        
         if amountCYB == "-"{
             cybPrice = amountCYB + " CYB"
         } else {
             cybPrice = amountCYB.formatCurrency(digitNum: 5) + " CYB"
         }
-
+        
         if let _ = amountCYB.toDouble() {
-            rbmPrice    = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * Decimal(getAssetRMBPrice(balance.assetType))).string(digits: 2, roundingMode: .down)
+            rbmPrice    = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * Decimal(getAssetRMBPrice(balance.assetType))).string(digits: 4, roundingMode: .down)
         } else {
             rbmPrice    = "-"
         }
@@ -91,30 +91,27 @@ class MyPortfolioData {
     var realAmount: String = ""
     var rbmPrice: String = ""
     var limitAmount: String = ""
-
+    
     required init?(balance: Balance) {
         icon = AppConfiguration.ServerIconsBaseURLString + balance.assetType.replacingOccurrences(of: ".", with: "_") + "_grey.png"
-
+        
         name = appData.assetInfo[balance.assetType]?.symbol.filterJade ?? "--"
         // 获得自己的个数
         if let assetInfo = appData.assetInfo[balance.assetType] {
             realAmount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: assetInfo.precision, roundingMode: .down)
         }
-
         // 获取对应CYB的个数
-        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice * (realAmount.toDouble())!)
-
-//        let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "0" ? "-" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.toDouble())!)
-
+        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice.doubleValue * (realAmount.toDouble())!)
+        
         if let _ = amountCYB.toDouble() {
-            rbmPrice = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * Decimal(getAssetRMBPrice(balance.assetType))).string(digits: 2, roundingMode: .down)
+            rbmPrice = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * Decimal(getAssetRMBPrice(balance.assetType))).string(digits: 4, roundingMode: .down)
         } else {
             rbmPrice = "-"
         }
-
+        
         //获取冻结资产
         var limitDecimal: Decimal = 0
-
+        
         if let limitArray = UserManager.shared.limitOrder.value {
             for limit in limitArray {
                 if limit.sellPrice.base.assetID == balance.assetType {
@@ -126,8 +123,9 @@ class MyPortfolioData {
                 if limitDecimal == 0 {
                     limitAmount = R.string.localizable.frozen.key.localized() + "--"
                 } else {
-                    log.debug("limitAmountlimitAmount\(limitDecimal.doubleValue)")
-                    limitAmount = R.string.localizable.frozen.key.localized() + limitDecimal.string(digits: assetInfo.precision, roundingMode: .down)
+                    limitAmount = R.string.localizable.frozen.key.localized() +
+                        limitDecimal.string(digits: assetInfo.precision,
+                                            roundingMode: .down)
                 }
             }
         }

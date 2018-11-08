@@ -96,7 +96,8 @@
 
 "register.confirm" = "当前密码：<password></password>\n• 我明确知晓，一旦忘记密码，我将会失去获取并使用该账户资金的途径\n• 我明确知晓，一旦忘记或丢失了密码，将没有任何人能够帮助我恢复\n• 我已经记录下来，或者用其它方式保存了我的密码\n";
 
-"home_name_vol"                 = "名称/成交额";
+"home_name_vol" = "名称";
+"home_vol_name" = "成交量";
 "home_last_price"               = "最新价格";
 "home_change"                   = "24h涨跌幅";
 
@@ -108,7 +109,7 @@
 "balance_introduce_title"       = "账户总余额";
 "balance_ensuer"                = "我知道了";
 
-"home_vol"                      = "成交额 ";
+"home_vol"                      = "成交量 ";
 
 "opened_amount"                 = "数量:";
 "opened_asset_amount"                 = "资产/委托数量";
@@ -490,3 +491,6 @@
 "pair_vol" = "量:%@";
 "pair_change_amount" = "额:%@";
 "pair_change_persent" = "幅:%@";
+
+"recharge_hidden_asset" = "隐藏资产为0的币种";
+"recharge_search_asset" = "搜索币种";
