@@ -36,7 +36,7 @@ struct AppConfiguration {
         appCoordinator = AppCoordinator(rootVC: rootVC)
     }
 
-    static let APPID = ""
+    static let APPID = "1435025350"
     static var ServerBaseURLString = "https://app.cybex.io/"
     static var ServerRegisterBaseURLString = "https://faucet.cybex.io/"
     static var GatewayURLString = "https://gateway.cybex.io/gateway"
