@@ -125,6 +125,9 @@ class HomeContentView: UIView {
                 guard let firstDecimal = first.percentChange.toDouble(), let secondDecimal = second.percentChange.toDouble() else { return false}
                 return firstDecimal > secondDecimal
             })
+//        default:
+//            return []
+//            break
         }
     }
 
