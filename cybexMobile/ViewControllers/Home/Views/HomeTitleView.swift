@@ -77,7 +77,7 @@ class HomeTitleView: UIView {
     }
     
     func setUpSubviewsEvent() {
-        nameL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](tap) in
+       nameL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](tap) in
             guard let `self` = self else { return }
             self.sorted(self.nameBtn)
         }.disposed(by: disposeBag)
