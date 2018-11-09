@@ -118,7 +118,6 @@ open class MSGPlaceholderTextView: UIView {
         textView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         textView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         textView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
     }
     
     private func styleLabel() {

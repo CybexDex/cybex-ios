@@ -16,6 +16,8 @@ protocol ComprehensiveCoordinatorProtocol {
     func openWebVCUrl(_ url: String)
 
     func openMarketList(_ pair: Pair)
+    
+    func openChatVC()
 }
 
 protocol ComprehensiveStateManagerProtocol {
@@ -54,6 +56,16 @@ class ComprehensiveCoordinator: ComprehensiveRootCoordinator {
 }
 
 extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
+    // test
+    func openChatVC() {
+        // test
+        if let chatVC = R.storyboard.chat.chatViewController() {
+            chatVC.coordinator = ChatCoordinator(rootVC: self.rootVC)
+            self.rootVC.pushViewController(chatVC, animated: true)
+        }
+    }
+    
+    
     func openWebVCUrl(_ url: String) {
         if let webVC = R.storyboard.main.cybexWebViewController() {
             webVC.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
