@@ -48,4 +48,6 @@ extension HomeCoordinator: HomeStateManagerProtocol {
     func switchPageState(_ state: PageState) {
         self.store.dispatch(PageStateAction(state: state))
     }
+    
+   
 }
