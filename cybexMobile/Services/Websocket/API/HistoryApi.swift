@@ -127,7 +127,7 @@ struct GetFillOrderHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
         var data: [JSON] = []
 
         for value in result {
-            data.append([value["op"]["pays"], value["op"]["receives"], value["time"]])
+            data.append([value["op"], value["time"]])
         }
         return data
     }
