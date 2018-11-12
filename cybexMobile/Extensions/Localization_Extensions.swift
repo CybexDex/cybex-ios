@@ -256,18 +256,9 @@ extension NSObject {
             if let label = self as? UILabel, let _ = label.styleName {
                 label.styledText = label.text
             }
-        } else if let statePicker = picker as? SegmentValueContainer {
-            let setState = unsafeBitCast(method(for: sel), to: SetLocalizedTextForSegmentIMP.self)
-            statePicker.values.forEach {
-                if let val = $1.value() as? String {
-                    setState(self, sel, val.localized(), $0)
-                }
-            }
         } else { perform(sel, with: value) }
     }
     fileprivate typealias SetLocalizedTextIMP        = @convention(c) (NSObject, Selector, String) -> Void
-    fileprivate typealias SetLocalizedTextForSegmentIMP       = @convention(c) (NSObject, Selector, String, Int) -> Void
-
 }
 
 extension UIControl {
@@ -283,11 +274,19 @@ extension UIControl {
                     setState(self, sel, val.localized(), UIControl.State(rawValue: $0))
                 }
             }
-        }  else { perform(sel, with: value) }
+        } else if let statePicker = picker as? SegmentValueContainer {
+            let setState = unsafeBitCast(method(for: sel), to: SetLocalizedTextForSegmentIMP.self)
+            statePicker.values.forEach {
+                if let val = $1.value() as? String {
+                    setState(self, sel, val.localized(), $0)
+                }
+            }
+        } else { perform(sel, with: value) }
 
     }
 
     fileprivate typealias SetLocalizedTextForStateIMP       = @convention(c) (NSObject, Selector, String, UIControl.State) -> Void
+    fileprivate typealias SetLocalizedTextForSegmentIMP       = @convention(c) (NSObject, Selector, String, Int) -> Void
 
 }
 
