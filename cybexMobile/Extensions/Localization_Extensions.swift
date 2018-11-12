@@ -146,6 +146,10 @@ private func setOperation(
     _ picker: ValueContainer?
     ) {
     object.changeOperations[selector] = picker
+    if let control = object as? UIControl {
+        control.performControlOperations(sel: selector, picker: picker)
+        return
+    }
     object.performOperations(sel: selector, picker: picker)
 }
 
@@ -252,13 +256,6 @@ extension NSObject {
             if let label = self as? UILabel, let _ = label.styleName {
                 label.styledText = label.text
             }
-        } else if let statePicker = picker as? StateValueContainer {
-            let setState = unsafeBitCast(method(for: sel), to: SetLocalizedTextForStateIMP.self)
-            statePicker.values.forEach {
-                if let val = $1.value() as? String {
-                    setState(self, sel, val.localized(), UIControl.State(rawValue: $0))
-                }
-            }
         } else if let statePicker = picker as? SegmentValueContainer {
             let setState = unsafeBitCast(method(for: sel), to: SetLocalizedTextForSegmentIMP.self)
             statePicker.values.forEach {
@@ -267,11 +264,30 @@ extension NSObject {
                 }
             }
         } else { perform(sel, with: value) }
-
     }
     fileprivate typealias SetLocalizedTextIMP        = @convention(c) (NSObject, Selector, String) -> Void
-    fileprivate typealias SetLocalizedTextForStateIMP       = @convention(c) (NSObject, Selector, String, UIControl.State) -> Void
     fileprivate typealias SetLocalizedTextForSegmentIMP       = @convention(c) (NSObject, Selector, String, Int) -> Void
+
+}
+
+extension UIControl {
+    func performControlOperations(sel: Selector, picker: ValueContainer?) {
+        guard responds(to: sel)           else { return }
+        guard let value = picker?.value() else { return }
+
+        if let statePicker = picker as? StateValueContainer {
+            let setState = unsafeBitCast(method(for: sel), to: SetLocalizedTextForStateIMP.self)
+
+            statePicker.values.forEach {
+                if let val = $1.value() as? String {
+                    setState(self, sel, val.localized(), UIControl.State(rawValue: $0))
+                }
+            }
+        }  else { perform(sel, with: value) }
+
+    }
+
+    fileprivate typealias SetLocalizedTextForStateIMP       = @convention(c) (NSObject, Selector, String, UIControl.State) -> Void
 
 }
 
@@ -290,6 +306,10 @@ extension NSObject {
         self.changeOperations.forEach {[weak self] selector, picker in
             UIView.animate(withDuration: 0.3) {
                 guard let `self` = self else { return }
+                if let control = self as? UIControl {
+                    control.performControlOperations(sel: selector, picker: picker)
+                    return
+                }
                 self.performOperations(sel: selector, picker: picker)
             }
         }
