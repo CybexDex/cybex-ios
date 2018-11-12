@@ -82,7 +82,7 @@ class ___VARIABLE_productName:identifier___ViewController: BaseViewController {
 //                self.view.showNoData(<#title#>, icon: <#imageName#>)
                 break
                 
-            case .normal(let reason):
+            case .normal(_):
 //                self.view.hiddenNoData()
 //
 //                if reason == PageLoadReason.manualLoadMore {
@@ -93,7 +93,7 @@ class ___VARIABLE_productName:identifier___ViewController: BaseViewController {
 //                }
                 break
                 
-            case .error(let error, let reason):
+            case .error(_, _):
 //                self.showToastBox(false, message: error.localizedDescription)
                 
 //                if reason == PageLoadReason.manualLoadMore {

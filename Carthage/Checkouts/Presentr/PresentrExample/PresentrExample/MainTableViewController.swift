@@ -35,7 +35,7 @@ enum ExampleSection {
         case .other:
             return [.backgroundBlur, .customBackground, .keyboardTest, .fullScreen, .fullScreenFlip]
         case .advanced:
-            return [.custom, .customAnimation, .modifiedAnimation, .coverVerticalWithSpring, .dynamicSize, .currentContext]
+            return [.custom, .customAnimation, .modifiedAnimation, .coverVerticalWithSpring, .dynamicSize, .currentContext, .passthrough]
         }
     }
 
@@ -68,6 +68,7 @@ enum ExampleItem: String {
     case coverVerticalWithSpring = "Cover vertical with spring"
     case currentContext = "Using a custom context"
     case dynamicSize = "Using dynamic sizing (Auto Layout)"
+	case passthrough = "Using passthrough"
 
     var action: Selector {
         switch self {
@@ -104,7 +105,6 @@ enum ExampleItem: String {
         case .customBackground:
             return #selector(MainTableViewController.customBackgroundPresentation)
 
-
         case .custom:
             return #selector(MainTableViewController.customPresentation)
         case .customAnimation:
@@ -117,6 +117,8 @@ enum ExampleItem: String {
             return #selector(MainTableViewController.currentContext)
         case .dynamicSize:
             return #selector(MainTableViewController.dynamicSize)
+		case .passthrough:
+			return #selector(MainTableViewController.passthrough)
         }
     }
 
@@ -191,11 +193,12 @@ class MainTableViewController: UITableViewController {
     }()
 
     lazy var alertController: AlertViewController = {
-        let alertController = Presentr.alertViewController(title: "Are you sure? ⚠️", body: "This action can't be undone!")
-        let cancelAction = AlertAction(title: "NO, SORRY! 😱", style: .cancel) { alert in
+		let font = UIFont.boldSystemFont(ofSize: 18)
+		let alertController = AlertViewController(title: "Are you sure? ⚠️", body: "This action can't be undone!", titleFont: nil, bodyFont: nil, buttonFont: nil)
+        let cancelAction = AlertAction(title: "NO, SORRY! 😱", style: .cancel) {
             print("CANCEL!!")
         }
-        let okAction = AlertAction(title: "DO IT! 🤘", style: .destructive) { alert in
+        let okAction = AlertAction(title: "DO IT! 🤘", style: .destructive) {
             print("OK!!")
         }
         alertController.addAction(cancelAction)
@@ -280,11 +283,13 @@ extension MainTableViewController {
     @objc func alertCustom() {
         presenter.presentationType = .alert
 
-		presenter.transitionType = .coverFromCorner(.topLeft)
-		presenter.dismissTransitionType = .coverFromCorner(.bottomRight)
+		presenter.transitionType = .flipHorizontal
+		presenter.dismissTransitionType = .flipHorizontal
 
-//		presenter.transitionType = .flipHorizontal
-//		presenter.dismissTransitionType = .flipHorizontal
+//		presenter.dropShadow = PresentrShadow(shadowColor: .yellow,
+//											  shadowOpacity: 0.3,
+//											  shadowOffset: CGSize.init(width: 3.0, height: 3.0),
+//											  shadowRadius: 5)
 
 //        presenter.transitionType = .coverHorizontalFromLeft
 //        presenter.dismissTransitionType = .coverHorizontalFromRight
@@ -378,7 +383,10 @@ extension MainTableViewController {
         presenter.dismissTransitionType = nil
         presenter.keyboardTranslationType = .compress
         presenter.dismissOnSwipe = true
-        customPresentViewController(presenter, viewController: popupViewController, animated: true)
+
+		let viewController = popupViewController
+		let navigationViewController = UINavigationController(rootViewController: viewController)
+        customPresentViewController(presenter, viewController: navigationViewController, animated: true)
     }
 
     @objc func backgroundBlurTest() {
@@ -430,5 +438,10 @@ extension MainTableViewController {
         let splitVC = storyboard!.instantiateViewController(withIdentifier: "SplitViewController")
         navigationController?.pushViewController(splitVC, animated: true)
     }
+
+	@objc func passthrough() {
+		let passtroughVC = storyboard!.instantiateViewController(withIdentifier: "PasstroughExampleViewController")
+		navigationController?.pushViewController(passtroughVC, animated: true)
+	}
 
 }

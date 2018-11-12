@@ -21,9 +21,9 @@ protocol ___VARIABLE_productName:identifier___StateManagerProtocol {
 
 class ___VARIABLE_productName:identifier___Coordinator: NavCoordinator {
     var store = Store(
-        reducer: ___VARIABLE_productName:identifier___Reducer,
+        reducer: g___VARIABLE_productName:identifier___Reducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware:[trackingMiddleware]
     )
     
     var state: ___VARIABLE_productName:identifier___State {

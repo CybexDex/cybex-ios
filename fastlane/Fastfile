@@ -51,7 +51,6 @@ platform :ios do
     update_project_provisioning(
       xcodeproj: "cybexMobile.xcodeproj",
       profile: ".travis/AdHoc_cybex.mobileprovision", # optional if you use sigh
-      target_filter: "cybexMobile", # matches name or type of a target
       build_configuration: "Release",
       code_signing_identity: "iPhone Distribution" # optionally specify the codesigning identity
     )
