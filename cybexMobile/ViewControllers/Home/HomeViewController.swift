@@ -152,6 +152,9 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
 extension HomeViewController {
     @objc func cellClicked(_ data: [String: Any]) {
+        let viewc = R.storyboard.chat.chatViewController()!
+        self.navigationController?.pushViewController(viewc)
+        return
         if vcType == ViewType.homeContent.rawValue {//首页
             if let selectedPair = data["pair"] as? Pair {
                 let tickers = appData.tickerData.value.filter({$0.base == AssetConfiguration.marketBaseAssets[self.contentView!.currentBaseIndex]})
