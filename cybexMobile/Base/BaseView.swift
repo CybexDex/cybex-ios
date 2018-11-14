@@ -17,12 +17,12 @@ enum BaseViewTouchAlphaValues: CGFloat {
 @IBDesignable
 class CybexBaseView: UIControl {
 
-    var xibView: UIView!
-    var foreView: UIView!
+    var xibView: UIView?
+    var foreView: UIView?
 
-    override var backgroundColor: UIColor? {
+    override open var backgroundColor: UIColor? {
         didSet {
-            self.foreView.backgroundColor = backgroundColor
+            self.foreView?.backgroundColor = backgroundColor
         }
     }
 
@@ -45,9 +45,9 @@ class CybexBaseView: UIControl {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.foreView.alpha = BaseViewTouchAlphaValues.touched.rawValue
+                self.foreView?.alpha = BaseViewTouchAlphaValues.touched.rawValue
             } else {
-                self.foreView.alpha = self.touchAlpha.rawValue
+                self.foreView?.alpha = self.touchAlpha.rawValue
             }
         }
     }
@@ -82,8 +82,8 @@ class CybexBaseView: UIControl {
     }
 
     func clearBgColor() {
-        self.foreView.theme_backgroundColor = nil
-        self.foreView.backgroundColor = .clear
+        self.foreView?.theme_backgroundColor = nil
+        self.foreView?.backgroundColor = .clear
     }
 
     // MARK: Touch
@@ -118,9 +118,9 @@ class CybexBaseView: UIControl {
     }
 
     func updateTouchAlpha() {
-        if self.foreView.alpha != self.touchAlpha.rawValue {
+        if self.foreView?.alpha != self.touchAlpha.rawValue {
             UIView.animate(withDuration: 0.3) {
-                self.foreView.alpha = self.touchAlpha.rawValue
+                self.foreView?.alpha = self.touchAlpha.rawValue
             }
         }
     }
