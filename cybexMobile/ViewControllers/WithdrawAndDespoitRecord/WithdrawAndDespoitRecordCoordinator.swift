@@ -95,6 +95,7 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
                             childVC.recordType = .WITHDRAW
                         }
                         break
+                    default:break
                     }
                     childVC.fetchDepositRecords(offset: 0) {}
                 }

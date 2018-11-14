@@ -494,3 +494,9 @@
 
 "recharge_hidden_asset" = "隐藏资产为0的币种";
 "recharge_search_asset" = "搜索币种";
+
+"market_comment_now" = "快来评论吧";
+
+"chat_input_realname" = "实名";
+"chat_input_send" = "发送";
+"chat_input_placeholder" = "我来说两句";

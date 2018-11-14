@@ -226,6 +226,10 @@
 		7204FFC42153A62B00EB0FC7 /* HotAssetsViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7204FFC12153A62B00EB0FC7 /* HotAssetsViewAdapter.swift */; };
 		7204FFC52153A62B00EB0FC7 /* HotAssetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7204FFC22153A62B00EB0FC7 /* HotAssetsView.swift */; };
 		7204FFC62153A62B00EB0FC7 /* HotAssetsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7204FFC32153A62B00EB0FC7 /* HotAssetsView.xib */; };
+		7208CA5D219C208E0094B8E5 /* TestCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208CA59219C208E0094B8E5 /* TestCoordinator.swift */; };
+		7208CA5E219C208E0094B8E5 /* TestActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208CA5A219C208E0094B8E5 /* TestActions.swift */; };
+		7208CA5F219C208E0094B8E5 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208CA5B219C208E0094B8E5 /* TestViewController.swift */; };
+		7208CA60219C208E0094B8E5 /* TestReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7208CA5C219C208E0094B8E5 /* TestReducers.swift */; };
 		7217B07C2122AAFD00608531 /* AddAddressCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B0782122AAFD00608531 /* AddAddressCoordinator.swift */; };
 		7217B07D2122AAFD00608531 /* AddAddressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B0792122AAFD00608531 /* AddAddressActions.swift */; };
 		7217B07E2122AAFD00608531 /* AddAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7217B07A2122AAFD00608531 /* AddAddressViewController.swift */; };
@@ -338,6 +342,18 @@
 		72C844D8214A3F000078448C /* en_dark.html in Resources */ = {isa = PBXBuildFile; fileRef = 72C844D6214A3EFF0078448C /* en_dark.html */; };
 		72C844DB214B50930078448C /* cn_light.html in Resources */ = {isa = PBXBuildFile; fileRef = 72C844D9214B50920078448C /* cn_light.html */; };
 		72C844DC214B50930078448C /* en_light.html in Resources */ = {isa = PBXBuildFile; fileRef = 72C844DA214B50930078448C /* en_light.html */; };
+		72D5828F219C188700BB9842 /* ChatUpInputViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D58289219C188700BB9842 /* ChatUpInputViewAdapter.swift */; };
+		72D58290219C188700BB9842 /* ChatUpInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D5828A219C188700BB9842 /* ChatUpInputView.swift */; };
+		72D58291219C188700BB9842 /* ChatDownInputViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D5828B219C188700BB9842 /* ChatDownInputViewAdapter.swift */; };
+		72D58292219C188700BB9842 /* ChatDownInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D5828C219C188700BB9842 /* ChatDownInputView.swift */; };
+		72D58293219C188700BB9842 /* ChatDownInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D5828D219C188700BB9842 /* ChatDownInputView.xib */; };
+		72D58294219C188700BB9842 /* ChatUpInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D5828E219C188700BB9842 /* ChatUpInputView.xib */; };
+		72D58297219C18B100BB9842 /* CBKMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D58295219C18B000BB9842 /* CBKMessageView.xib */; };
+		72D58298219C18B100BB9842 /* CBKMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D58296219C18B100BB9842 /* CBKMessageView.swift */; };
+		72D5829B219C18F800BB9842 /* CBKKindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D58299219C18F700BB9842 /* CBKKindView.swift */; };
+		72D5829C219C18F800BB9842 /* CBKKindView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D5829A219C18F700BB9842 /* CBKKindView.xib */; };
+		72D5829F219C196200BB9842 /* DropDownBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D5829D219C196100BB9842 /* DropDownBoxView.xib */; };
+		72D582A0219C196200BB9842 /* DropDownBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D5829E219C196200BB9842 /* DropDownBoxView.swift */; };
 		72D9DD58210EB60F00963915 /* Periscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9DD56210EB60E00963915 /* Periscope.swift */; };
 		72D9DD59210EB60F00963915 /* PeriscopeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D9DD57210EB60E00963915 /* PeriscopeCell.xib */; };
 		72DBCA652138D94200905303 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA622138D94200905303 /* ContainerView.swift */; };
@@ -1015,6 +1031,10 @@
 		7204FFC12153A62B00EB0FC7 /* HotAssetsViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotAssetsViewAdapter.swift; sourceTree = "<group>"; };
 		7204FFC22153A62B00EB0FC7 /* HotAssetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotAssetsView.swift; sourceTree = "<group>"; };
 		7204FFC32153A62B00EB0FC7 /* HotAssetsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HotAssetsView.xib; sourceTree = "<group>"; };
+		7208CA59219C208E0094B8E5 /* TestCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoordinator.swift; sourceTree = "<group>"; };
+		7208CA5A219C208E0094B8E5 /* TestActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestActions.swift; sourceTree = "<group>"; };
+		7208CA5B219C208E0094B8E5 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		7208CA5C219C208E0094B8E5 /* TestReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestReducers.swift; sourceTree = "<group>"; };
 		7217B0782122AAFD00608531 /* AddAddressCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressCoordinator.swift; sourceTree = "<group>"; };
 		7217B0792122AAFD00608531 /* AddAddressActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressActions.swift; sourceTree = "<group>"; };
 		7217B07A2122AAFD00608531 /* AddAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewController.swift; sourceTree = "<group>"; };
@@ -1126,6 +1146,18 @@
 		72C844D6214A3EFF0078448C /* en_dark.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = en_dark.html; sourceTree = "<group>"; };
 		72C844D9214B50920078448C /* cn_light.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = cn_light.html; sourceTree = "<group>"; };
 		72C844DA214B50930078448C /* en_light.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = en_light.html; sourceTree = "<group>"; };
+		72D58289219C188700BB9842 /* ChatUpInputViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUpInputViewAdapter.swift; sourceTree = "<group>"; };
+		72D5828A219C188700BB9842 /* ChatUpInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUpInputView.swift; sourceTree = "<group>"; };
+		72D5828B219C188700BB9842 /* ChatDownInputViewAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDownInputViewAdapter.swift; sourceTree = "<group>"; };
+		72D5828C219C188700BB9842 /* ChatDownInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDownInputView.swift; sourceTree = "<group>"; };
+		72D5828D219C188700BB9842 /* ChatDownInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatDownInputView.xib; sourceTree = "<group>"; };
+		72D5828E219C188700BB9842 /* ChatUpInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatUpInputView.xib; sourceTree = "<group>"; };
+		72D58295219C18B000BB9842 /* CBKMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBKMessageView.xib; sourceTree = "<group>"; };
+		72D58296219C18B100BB9842 /* CBKMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBKMessageView.swift; sourceTree = "<group>"; };
+		72D58299219C18F700BB9842 /* CBKKindView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBKKindView.swift; sourceTree = "<group>"; };
+		72D5829A219C18F700BB9842 /* CBKKindView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBKKindView.xib; sourceTree = "<group>"; };
+		72D5829D219C196100BB9842 /* DropDownBoxView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownBoxView.xib; sourceTree = "<group>"; };
+		72D5829E219C196200BB9842 /* DropDownBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownBoxView.swift; sourceTree = "<group>"; };
 		72D9DD56210EB60E00963915 /* Periscope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Periscope.swift; sourceTree = "<group>"; };
 		72D9DD57210EB60E00963915 /* PeriscopeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeriscopeCell.xib; sourceTree = "<group>"; };
 		72DBCA622138D94200905303 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
@@ -2476,6 +2508,19 @@
 			path = BlockItems;
 			sourceTree = "<group>";
 		};
+		72D58288219C188700BB9842 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72D58289219C188700BB9842 /* ChatUpInputViewAdapter.swift */,
+				72D5828A219C188700BB9842 /* ChatUpInputView.swift */,
+				72D5828E219C188700BB9842 /* ChatUpInputView.xib */,
+				72D5828B219C188700BB9842 /* ChatDownInputViewAdapter.swift */,
+				72D5828C219C188700BB9842 /* ChatDownInputView.swift */,
+				72D5828D219C188700BB9842 /* ChatDownInputView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		72D9DD55210EB5FC00963915 /* ActionSheetViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3081,6 +3126,7 @@
 		73A3310D2194232700707D8F /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				72D58288219C188700BB9842 /* Views */,
 				73A3311A219425CE00707D8F /* Model */,
 				73A331102194244800707D8F /* ChatCoordinator.swift */,
 				73A331112194244800707D8F /* ChatActions.swift */,
@@ -3403,6 +3449,8 @@
 				3B0EB650210313B100F19C31 /* YourPortfolioHeadView.xib */,
 				3B0EB644210313AA00F19C31 /* YourPortfolioTableHeadView.swift */,
 				3B0EB648210313AC00F19C31 /* YourPortfolioTableHeadView.xib */,
+				72D5829E219C196200BB9842 /* DropDownBoxView.swift */,
+				72D5829D219C196100BB9842 /* DropDownBoxView.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -3612,6 +3660,10 @@
 				55F27C08A4D37E9DECD3AD611FCE4845 /* CBKLineMainView.swift */,
 				5DFE42BE9F95886821D524A4445FFA86 /* CBKLineView.swift */,
 				0D964BF5B38EBF2F80A562403D0FC416 /* CBKLineVolumeView.swift */,
+				72D58299219C18F700BB9842 /* CBKKindView.swift */,
+				72D5829A219C18F700BB9842 /* CBKKindView.xib */,
+				72D58296219C18B100BB9842 /* CBKMessageView.swift */,
+				72D58295219C18B000BB9842 /* CBKMessageView.xib */,
 				97734B2586861015B1E6C9FD64E71FA4 /* TimeGapView.swift */,
 				C2B3D305EEAE6BCDA06146FBD1860EA4 /* TimeGapView.xib */,
 			);
@@ -3703,6 +3755,10 @@
 				72968D162158CE7B00B0AA77 /* WithdrawAndDespoitRecord */,
 				E66F4589374DD221E8CAA0D5A0BC3175 /* AppActions.swift */,
 				F91D80DAE8FB3D4D5CB5EEA1D46D8402 /* AppReducer.swift */,
+				7208CA59219C208E0094B8E5 /* TestCoordinator.swift */,
+				7208CA5A219C208E0094B8E5 /* TestActions.swift */,
+				7208CA5B219C208E0094B8E5 /* TestViewController.swift */,
+				7208CA5C219C208E0094B8E5 /* TestReducers.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -3932,6 +3988,7 @@
 				D971C57B81B4A2FBB083235DDE5057A2 /* AccessoryCollectionViewCell.xib in Resources */,
 				FE75674B7C6A22FAFA051C9CE0E95A1D /* AccessoryHorizentalView.xib in Resources */,
 				607DB9C515F6376EF477F0C62C46B8F2 /* AccountAssetOperationView.xib in Resources */,
+				72D5829C219C18F800BB9842 /* CBKKindView.xib in Resources */,
 				733714BE2122D32500B2ED90 /* AddressCellView.xib in Resources */,
 				334F0C20FD029ABA79FC1F141026A0AB /* AccountAssetOperationsItemView.xib in Resources */,
 				729B869D2154C71300C6E0E4 /* ComprehensiveItemsView.xib in Resources */,
@@ -3945,6 +4002,7 @@
 				72E3A4CD214560580083E417 /* CybexWaitingView.xib in Resources */,
 				7217B0892122BBE500608531 /* AddressItemView.xib in Resources */,
 				192C3ADF0D3E049D53C92A483D63CD03 /* BusinessTitleCell.xib in Resources */,
+				72D58294219C188700BB9842 /* ChatUpInputView.xib in Resources */,
 				56D03074319AE5D578E9B4CD28B6C1F9 /* BusinessTitleItemView.xib in Resources */,
 				E7F391C513AB0D96277BECAC9BE9672E /* BusinessTitleView.xib in Resources */,
 				72B42E7E217723DD00587403 /* PairDetailDateViewView.xib in Resources */,
@@ -4046,6 +4104,7 @@
 				221EC23D2105B3110059F856 /* CornerAndShadowView.xib in Resources */,
 				3B0EB656210313B200F19C31 /* YourPortfolioTableHeadView.xib in Resources */,
 				3B0EB66C2103158A00F19C31 /* YourPortfolioCell.xib in Resources */,
+				72D58293219C188700BB9842 /* ChatDownInputView.xib in Resources */,
 				221EC23A2105B1930059F856 /* TitleTextView.xib in Resources */,
 				7307A92A212518DC00BD6444 /* LGButton.xib in Resources */,
 				7307A92E212518DC00BD6444 /* open-iconic.ttf in Resources */,
@@ -4072,6 +4131,8 @@
 				72199D7A210450C900575226 /* RecodeCell.xib in Resources */,
 				3B0EB653210313B200F19C31 /* NormalContentCell.xib in Resources */,
 				72199D9521045DD000575226 /* TransferListCell.xib in Resources */,
+				72D58297219C18B100BB9842 /* CBKMessageView.xib in Resources */,
+				72D5829F219C196200BB9842 /* DropDownBoxView.xib in Resources */,
 				728C157B2129AEA400053555 /* CybexShowTitleView.xib in Resources */,
 				221C6183213940140021C007 /* ETORecordListViewView.xib in Resources */,
 				221EC2362105B1930059F856 /* TitleTextfieldView.xib in Resources */,
@@ -4460,6 +4521,7 @@
 				7307A925212518DC00BD6444 /* SwiftIconLabel.swift in Sources */,
 				72199D8D21045D4700575226 /* TransferListActions.swift in Sources */,
 				72968D242158CEAC00B0AA77 /* WithdrawAndDespoitRecordReducers.swift in Sources */,
+				7208CA5F219C208E0094B8E5 /* TestViewController.swift in Sources */,
 				72199DA12104636900575226 /* TransferDetailViewController.swift in Sources */,
 				72199D8F21045D4700575226 /* TransferListReducers.swift in Sources */,
 				72199D6621044FD100575226 /* RechargeRecodeCoordinator.swift in Sources */,
@@ -4474,6 +4536,7 @@
 				7386F2B621216B3A00ABC924 /* WithdrawAddressHomeActions.swift in Sources */,
 				7267DA1621351D40004AF9AF /* ETOProjectView.swift in Sources */,
 				221EC2372105B1930059F856 /* GrowSectionView.swift in Sources */,
+				7208CA5D219C208E0094B8E5 /* TestCoordinator.swift in Sources */,
 				7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */,
 				221C6177213926570021C007 /* ETORecordListViewController.swift in Sources */,
 				3D856B5FBCBB3B250D34CFA99756374F /* Button.swift in Sources */,
@@ -4536,6 +4599,8 @@
 				7204FFC52153A62B00EB0FC7 /* HotAssetsView.swift in Sources */,
 				72E2A8F02151F9DB00FBB3CB /* ComprehensiveReducers.swift in Sources */,
 				44195E9AD82F1EA4A629372891EC8157 /* EntryReducers.swift in Sources */,
+				7208CA5E219C208E0094B8E5 /* TestActions.swift in Sources */,
+				D68AC2564E8A2DB5B8D2B787AD3F02CD /* EntryRootCoordinator.swift in Sources */,
 				9D03533C82BDEC45C76E2419E0489874 /* EntryViewController.swift in Sources */,
 				ADB937770A84BC394C0F50DF0631CDEC /* ExchangeActions.swift in Sources */,
 				72B42E8321774CFD00587403 /* DespositNameView.swift in Sources */,
@@ -4547,6 +4612,8 @@
 				3B824A2E2135350200D7A4A7 /* ETODetailViewController.swift in Sources */,
 				3BF5B7EB2135001B00E8BFC9 /* ETODetailIntroView.swift in Sources */,
 				72199D8E21045D4700575226 /* TransferListViewController.swift in Sources */,
+				72D58292219C188700BB9842 /* ChatDownInputView.swift in Sources */,
+				2BE29FBC5EBC24621C616DCA7C58F109 /* FAQCoordinator.swift in Sources */,
 				72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */,
 				737E596D21A541E6001199E4 /* JWK.swift in Sources */,
 				7386F2C121216B9E00ABC924 /* WithdrawAddressViewController.swift in Sources */,
@@ -4585,6 +4652,7 @@
 				59EC4E5138ECE3D4E7570F3EE0EF28E0 /* IconGenerator.swift in Sources */,
 				61804E3238064ADBE771CD78E212AB6A /* IntroduceView.swift in Sources */,
 				8552FAA729612482DC7F7878860378AC /* JsonRPCGenerator.swift in Sources */,
+				7208CA60219C208E0094B8E5 /* TestReducers.swift in Sources */,
 				5895D5BFE7B77EDC996C7CF7ADCF92ED /* KLineConfiguration.swift in Sources */,
 				AA2AF8469235125BB11F791F769C6392 /* LocalCache.swift in Sources */,
 				728C2814215A3A910097840A /* RecordChooseCellViewAdapter.swift in Sources */,
@@ -4593,8 +4661,10 @@
 				421AAF66E862B29FD286626A32636875 /* LockupAssetsCell.swift in Sources */,
 				1262E9F910FE9F357F1D1857B4FD93A4 /* LockupAssetsCoordinator.swift in Sources */,
 				73539C4F2179A210008395AC /* URLPatchComponentMatchResult.swift in Sources */,
+				72D58290219C188700BB9842 /* ChatUpInputView.swift in Sources */,
 				7386F2B021216B2200ABC924 /* TransferAddressHomeReducers.swift in Sources */,
 				72AAC8B02106FC840040793F /* Record.swift in Sources */,
+				72D58298219C18B100BB9842 /* CBKMessageView.swift in Sources */,
 				80258D6F4C94ACC78C20B5ACE8BEAD2F /* LockupAssetsReducers.swift in Sources */,
 				85D46A1F0D3BBF12CF72903D466D9239 /* LockupAssetsSectionView.swift in Sources */,
 				B2B05000B81768D84E3FBE9B46392133 /* LockupAssetsView.swift in Sources */,
@@ -4617,6 +4687,7 @@
 				56C9CE8FDE2020EA4F72F21F30D27087 /* MyHistoryActions.swift in Sources */,
 				221C615121364DFF0021C007 /* ShareData.swift in Sources */,
 				D97554A68B333ECF6F33B4558E08E005 /* MyHistoryCell.swift in Sources */,
+				72D582A0219C196200BB9842 /* DropDownBoxView.swift in Sources */,
 				E432C445702EFB8154F16B502E4EE186 /* MyHistoryCellView.swift in Sources */,
 				5CB67D4A0FFFF2D433936B9A36216722 /* MyHistoryCoordinator.swift in Sources */,
 				406AB4BA0BF043D771D15D751F7AB45D /* MyHistoryReducers.swift in Sources */,
@@ -4677,6 +4748,7 @@
 				724C5D4D2153956900FF1DE7 /* ComprehensiveItemViewAdapter.swift in Sources */,
 				562EE9FB61A1D1EBCB263F8C8DE265B6 /* OrderBookViewController.swift in Sources */,
 				7307A926212518DC00BD6444 /* ThemifyIcon.swift in Sources */,
+				72D58291219C188700BB9842 /* ChatDownInputViewAdapter.swift in Sources */,
 				73539C4E2179A210008395AC /* URLMatcher.swift in Sources */,
 				73539C602179A282008395AC /* DNSPageStyle.swift in Sources */,
 				CEC8E5E6CEBF33DC5FED8EBCA2AFAAE7 /* PairCardCell.swift in Sources */,
@@ -4782,6 +4854,7 @@
 				73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */,
 				2E3DB3499E75C0D06068C979CD788B00 /* TradeReducers.swift in Sources */,
 				73539C5A2179A282008395AC /* DNSPageContentView.swift in Sources */,
+				72D5828F219C188700BB9842 /* ChatUpInputViewAdapter.swift in Sources */,
 				72D9DD58210EB60F00963915 /* Periscope.swift in Sources */,
 				72968D212158CEAC00B0AA77 /* WithdrawAndDespoitRecordCoordinator.swift in Sources */,
 				728C2826215B80480097840A /* AnnounceScrollViewAdapter.swift in Sources */,
@@ -4822,6 +4895,7 @@
 				73539C4C2179A210008395AC /* Navigator.swift in Sources */,
 				C2728D465891E65690FBF4E868796852 /* UIView+Extensions.swift in Sources */,
 				01D3990C8F03B94C2207F37FF3C7C895 /* UIViewController+Extension.swift in Sources */,
+				72D5829B219C18F800BB9842 /* CBKKindView.swift in Sources */,
 				221C6182213940140021C007 /* ETORecordListViewView.swift in Sources */,
 				696EB2454DD46A9C497C7C719B12BF12 /* UserDefaults.swift in Sources */,
 				73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */,

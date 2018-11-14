@@ -514,3 +514,9 @@
 
 "recharge_hidden_asset" = "Hide 0 balance";
 "recharge_search_asset" = "Search";
+
+"market_comment_now" = "Comment now";
+
+"chat_input_realname" = "Onymously";
+"chat_input_send" = "Send";
+"chat_input_placeholder" = "My comment";

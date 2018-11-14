@@ -25,5 +25,34 @@
             </objects>
             <point key="canvasLocation" x="-486" y="9"/>
         </scene>
+        <!--Test View Controller-->
+        <scene sceneID="GgJ-iY-gvx">
+            <objects>
+                <viewController storyboardIdentifier="TestViewController" id="krG-ET-XNh" customClass="TestViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A3W-Eq-tAx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7dZ-VY-Qsh" customClass="ChatUpInputView" customModule="cybexMobile" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="611" width="375" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="zFT-C6-Lse"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dSy-Qw-1s2" firstAttribute="bottom" secondItem="7dZ-VY-Qsh" secondAttribute="bottom" id="JIy-QZ-Yak"/>
+                            <constraint firstItem="7dZ-VY-Qsh" firstAttribute="leading" secondItem="dSy-Qw-1s2" secondAttribute="leading" id="Sj0-2p-Tix"/>
+                            <constraint firstItem="dSy-Qw-1s2" firstAttribute="trailing" secondItem="7dZ-VY-Qsh" secondAttribute="trailing" id="Unf-VL-rGS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dSy-Qw-1s2"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BwZ-6r-s78" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="334" y="9"/>
+        </scene>
     </scenes>
 </document>

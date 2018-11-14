@@ -40,6 +40,7 @@ class MarketViewController: BaseViewController {
     var currentBaseIndex: Int = 0
     var kLineSpecial = false
     var canExchange = false
+    var selectedDropKindView: DropDownBoxView?
     var timeGap: Candlesticks = .oneDay {
         didSet {
             kLineView.timeGap = timeGap
@@ -342,17 +343,6 @@ class MarketViewController: BaseViewController {
 }
 
 extension MarketViewController {
-    //    @objc func cellClicked(_ data: [String: Any]) {
-    //        if let index = data["index"] as? Int {
-    //            curIndex = index
-    //            let markets = buckets.map({ Pair(base: $0.base, quote: $0.quote) })
-    //            pair = markets[self.curIndex]
-    //
-    //            startLoading()
-    //            refreshView()
-    //        }
-    //    }
-
     @objc func timeClicked(_ data: [String: Any]) {
         if let candlestick = data["candlestick"] as? Candlesticks {
             timeGap = candlestick
@@ -377,5 +367,44 @@ extension MarketViewController {
     }
     @objc func sell() {
         self.coordinator?.openTradeViewChontroller(false, pair: self.pair)
+    }
+    
+    @objc func dropDownBoxViewDidClicked(_ data: [String: Any]) {
+        guard let dropView = data["self"] as? DropDownBoxView else {
+            return
+        }
+        self.selectedDropKindView = dropView
+        self.coordinator?.setDropBoxViewController()
+    }
+    
+    @objc func openMessageVC(_ data: [String: Any]) {
+        self.coordinator?.openChatVC()
+    }
+}
+
+
+extension MarketViewController: UIPopoverPresentationControllerDelegate {
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        selectedDropKindView?.resetState()
+        return true
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+}
+
+extension MarketViewController: RecordChooseViewControllerDelegate {
+    func returnSelectedRow(_ sender: RecordChooseViewController, info: String) {
+        selectedDropKindView?.nameLabel.text = info
+        selectedDropKindView?.resetState()
+        
+        if selectedDropKindView?.dropKind == .time {
+            self.timeClicked(["candlestick": Candlesticks.all[sender.selectedIndex]])
+        }else if selectedDropKindView?.dropKind == .kind {
+            self.indicatorClicked(["indicator": Indicator.all[sender.selectedIndex]])
+        }
+        //        Candlesticks.all[idx]
+        sender.dismiss(animated: true, completion: nil)
     }
 }
