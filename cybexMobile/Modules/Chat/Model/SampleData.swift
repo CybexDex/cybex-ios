@@ -47,7 +47,7 @@ final internal class SampleData {
             let maxValue = Custom.rawValue
             
             let rand = arc4random_uniform(maxValue+1)
-            return MessageTypes(rawValue: rand)!
+            return MessageTypes(rawValue: 1)!
         }
     }
 
@@ -59,7 +59,7 @@ final internal class SampleData {
     lazy var senders = [nathan, steven, wu]
 
     var currentSender: Sender {
-        return nathan
+        return system
     }
 
     var now = Date()
@@ -89,12 +89,21 @@ final internal class SampleData {
     func attributedString(with text: String) -> NSAttributedString {
         let nsString = NSString(string: text)
         var mutableAttributedString = NSMutableAttributedString(string: text)
-        let randomAttribute = Int(arc4random_uniform(UInt32(attributes.count)))
+        let randomAttribute = 0
         let range = NSRange(location: 0, length: nsString.length)
-        
+        let paragraph = NSMutableParagraphStyle()
+        let font = UIFont.systemFont(ofSize: 14)
+        paragraph.firstLineHeadIndent = 8
+        paragraph.maximumLineHeight = 22
+        paragraph.minimumLineHeight = 22
+
         switch attributes[randomAttribute] {
         case "Font1":
-            mutableAttributedString.addAttribute(NSAttributedString.Key.font, value: UIFont.preferredFont(forTextStyle: .body), range: range)
+            mutableAttributedString.addAttribute(NSAttributedString.Key.font, value: font, range: range)
+            mutableAttributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraph, range: range)
+            mutableAttributedString.addAttribute(NSAttributedString.Key.baselineOffset, value:labelBaselineOffset(22, fontHeight: font.lineHeight), range: range)
+            mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white80, range: range)
+
         case "Font2":
             mutableAttributedString.addAttributes([NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize, weight: UIFont.Weight.bold)], range: range)
         case "Font3":
@@ -104,7 +113,7 @@ final internal class SampleData {
         case "Color":
             mutableAttributedString.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], range: range)
         case "Combo":
-            let msg9String = "Use .attributedText() to add bold, italic, colored text and more..."
+            let msg9String = "十月一号之前就是这样，来回震荡，出不来趋势的。不过相信接下来的一个星期会有趋势出来的，破6800还是6300。应该很快出来结果，这个价位拖的时间太长了，多空都耗不起。"
             let msg9Text = NSString(string: msg9String)
             let msg9AttributedText = NSMutableAttributedString(string: String(msg9Text))
             
@@ -151,10 +160,10 @@ final internal class SampleData {
 
         switch randomMessageType() {
         case .Text:
-            let randomSentence = "alias"
+            let randomSentence = "十月一号之前就是这样，来回震荡，出不来趋势的。不过相信接下来的一个星期会有趋势出来的，破6800还是6300。应该很快出来结果，这个价位拖的时间太长了，多空都耗不起。"
             return ChatMessage(text: randomSentence, sender: sender, messageId: uniqueID, date: date)
         case .AttributedText:
-            let randomSentence = "alias"
+            let randomSentence = "sasd_ss:    十月一号之前就是这样😀😀，来回震荡，出不来趋势的。不过相信接下来的一个星期会有趋势出来的，破6800还是6300。应该很快出来结果，这个价位拖的时间太长了，多空都耗不起。"
             let attributedText = attributedString(with: randomSentence)
             return ChatMessage(attributedText: attributedText, sender: senders[randomNumberSender], messageId: uniqueID, date: date)
         case .Photo:
@@ -176,7 +185,7 @@ final internal class SampleData {
         case .Phone:
             return ChatMessage(text: "123-456-7890", sender: sender, messageId: uniqueID, date: date)
         case .Custom:
-            return ChatMessage(custom: "Someone left the conversation", sender: system, messageId: uniqueID, date: date)
+            return ChatMessage(custom: "                十月一号之前就是这样，来回震荡，出不来趋势的。不过相信接下来的一个星期会有趋势出来的，破6800还是6300。应该很快出来结果，这个价位拖的时间太长了，多空都耗不起。", sender: system, messageId: uniqueID, date: date)
         }
     }
 

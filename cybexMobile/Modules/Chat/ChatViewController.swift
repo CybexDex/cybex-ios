@@ -14,7 +14,7 @@ import ChatRoom
 import MapKit
 
 class ChatViewController: MessagesViewController {
-    let outgoingAvatarOverlap: CGFloat = 17.5
+    let sectionInset = UIEdgeInsets(top: 12, left: 13, bottom: 12, right: 13)
 
 	var coordinator: (ChatCoordinatorProtocol & ChatStateManagerProtocol)?
     private(set) var context: ChatContext?
@@ -29,9 +29,9 @@ class ChatViewController: MessagesViewController {
 
 	override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupData()
+
         setupUI()
+        setupData()
         setupEvent()
     }
     
@@ -45,7 +45,7 @@ class ChatViewController: MessagesViewController {
 
     func loadFirstMessages() {
         DispatchQueue.global(qos: .userInitiated).async {
-            SampleData.shared.getMessages(count: 10) { messages in
+            SampleData.shared.getAdvancedMessages(count: 10) { messages in
                 DispatchQueue.main.async {
                     self.messageList = messages
                     self.messagesCollectionView.reloadData()
@@ -87,40 +87,56 @@ class ChatViewController: MessagesViewController {
             navigationItem.largeTitleDisplayMode = .never
         }
 
-        messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: CustomMessagesFlowLayout())
-        messagesCollectionView.register(CustomCell.self)
-
+        scrollsToBottomOnKeyboardBeginsEditing = true // default false
+        maintainPositionOnKeyboardFrameChanged = true // default false
+        messageInputBar.delegate = self
+        messagesCollectionView.messagesLayoutDelegate = self
+        messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messageCellDelegate = self
 
-        scrollsToBottomOnKeyboardBeginsEditing = true // default false
-        maintainPositionOnKeyboardFrameChanged = true // default false
-
-
-        messageInputBar.delegate = self
-//        messageInputBar.inputTextView.tintColor = .primaryColor
-//        messageInputBar.sendButton.tintColor = .primaryColor
+        messagesCollectionView.backgroundColor = UIColor.darkTwo
         let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
-        layout?.sectionInset = UIEdgeInsets(top: 1, left: 8, bottom: 1, right: 8)
+        layout?.sectionInset = sectionInset
 
-        // Hide the outgoing avatar and adjust the label alignment to line up with the messages
-        layout?.setMessageOutgoingAvatarSize(.zero)
-        layout?.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)))
-        layout?.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)))
+        layout?.setMessageIncomingAvatarSize(.zero)
+        layout?.setMessageIncomingMessagePadding(.zero)
+        layout?.attributedTextMessageSizeCalculator.incomingMessageLabelInsets = .zero
 
-        // Set outgoing avatar to overlap with the message bubble
-        layout?.setMessageIncomingMessageTopLabelAlignment(LabelAlignment(textAlignment: .left, textInsets: UIEdgeInsets(top: 0, left: 18, bottom: outgoingAvatarOverlap, right: 0)))
-        layout?.setMessageIncomingAvatarSize(CGSize(width: 30, height: 30))
-        layout?.setMessageIncomingMessagePadding(UIEdgeInsets(top: -outgoingAvatarOverlap, left: -18, bottom: outgoingAvatarOverlap, right: 18))
-
-        layout?.setMessageIncomingAccessoryViewSize(CGSize(width: 30, height: 30))
-        layout?.setMessageIncomingAccessoryViewPadding(HorizontalEdgeInsets(left: 8, right: 0))
-        layout?.setMessageOutgoingAccessoryViewSize(CGSize(width: 30, height: 30))
-        layout?.setMessageOutgoingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 8))
-
-        messagesCollectionView.messagesLayoutDelegate = self
-        messagesCollectionView.messagesDisplayDelegate = self
     }
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let messagesCollectionView = collectionView as? MessagesCollectionView else {
+            fatalError("")
+        }
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! TextMessageCell
+
+        let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath, in: messagesCollectionView)
+
+        if case let .attributedText(attr) = message!.kind, let range = attr.string.range(of: "sasd_ss: ") {
+            let frame = cell.messageLabel.nameRect(range.nsRange)
+
+            var focusView: UIView!
+            if let lastView = cell.messageContainerView.viewWithTag(2018) {
+                focusView = lastView
+            }
+            else {
+                focusView = UIView()
+                focusView.tag = 2018
+                cell.messageContainerView.insertSubview(focusView, at: 0)
+            }
+
+            focusView.frame = CGRect(x: frame.origin.x - 8, y: frame.origin.y + 2, width: frame.width + 12, height: frame.height + 2 )
+            focusView.backgroundColor = UIColor.pastelOrange.withAlphaComponent(0.1)
+            focusView.borderWidth = 1
+            focusView.borderColor = UIColor.pastelOrange.withAlphaComponent(0.04)
+            focusView.cornerRadius = 4
+        }
+
+
+        return cell
+    }
+
 
     func setupData() {
         loadFirstMessages()
@@ -229,101 +245,34 @@ extension ChatViewController: MessageInputBarDelegate {
 
 extension ChatViewController: MessagesDisplayDelegate {
 
-    // MARK: - Text Messages
-
-    func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return isFromCurrentSender(message: message) ? .white : .darkText
-    }
-
-    func detectorAttributes(for detector: DetectorType, and message: MessageType, at indexPath: IndexPath) -> [NSAttributedString.Key: Any] {
-        return MessageLabel.defaultAttributes
-    }
-
-    func enabledDetectors(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> [DetectorType] {
-        return [.url, .address, .phoneNumber, .date, .transitInformation]
-    }
-
-    // MARK: - All Messages
-
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
+        return UIColor.clear
     }
 
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
-
-        var corners: UIRectCorner = []
-
-        if isFromCurrentSender(message: message) {
-            corners.formUnion(.topLeft)
-            corners.formUnion(.bottomLeft)
-//            if !isPreviousMessageSameSender(at: indexPath) {
-//                corners.formUnion(.topRight)
-//            }
-//            if !isNextMessageSameSender(at: indexPath) {
-//                corners.formUnion(.bottomRight)
-//            }
-        } else {
-            corners.formUnion(.topRight)
-            corners.formUnion(.bottomRight)
-//            if !isPreviousMessageSameSender(at: indexPath) {
-//                corners.formUnion(.topLeft)
-//            }
-//            if !isNextMessageSameSender(at: indexPath) {
-//                corners.formUnion(.bottomLeft)
-//            }
-        }
-
-        return .custom { view in
-            let radius: CGFloat = 16
-            let path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-            let mask = CAShapeLayer()
-            mask.path = path.cgPath
-            view.layer.mask = mask
-        }
+       return .none
     }
 
-    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        let avatar = SampleData.shared.getAvatarFor(sender: message.sender)
-        avatarView.set(avatar: avatar)
-//        avatarView.isHidden = isNextMessageSameSender(at: indexPath)
-        avatarView.layer.borderWidth = 2
-//        avatarView.layer.borderColor = UIColor.primaryColor.cgColor
+    func messageFooterView(for indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageReusableView {
+        let view = messagesCollectionView.dequeueReusableFooterView(MessageReusableView.self, for: indexPath)
+        var frame = view.frame
+        frame.origin.x = sectionInset.left
+        frame.size.width = messagesCollectionView.bounds.width - sectionInset.left - sectionInset.right
+
+        view.frame = frame
+        view.backgroundColor = UIColor.dark
+        return view
     }
-
-    func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        // Cells are reused, so only add a button here once. For real use you would need to
-        // ensure any subviews are removed if not needed
-        guard accessoryView.subviews.isEmpty else { return }
-        let button = UIButton(type: .infoLight)
-//        button.tintColor = .primaryColor
-        accessoryView.addSubview(button)
-        button.frame = accessoryView.bounds
-        button.isUserInteractionEnabled = false // respond to accessoryView tap through `MessageCellDelegate`
-        accessoryView.layer.cornerRadius = accessoryView.frame.height / 2
-//        accessoryView.backgroundColor = UIColor.primaryColor.withAlphaComponent(0.3)
-    }
-
-
-
-    func animationBlockForLocation(message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> ((UIImageView) -> Void)? {
-        return { view in
-            view.layer.transform = CATransform3DMakeScale(2, 2, 2)
-            UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: [], animations: {
-                view.layer.transform = CATransform3DIdentity
-            }, completion: nil)
-        }
-    }
-
-    func snapshotOptionsForLocation(message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> LocationMessageSnapshotOptions {
-
-        return LocationMessageSnapshotOptions(showsBuildings: true, showsPointsOfInterest: true, span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
-    }
-
 }
 
 // MARK: - MessagesLayoutDelegate
 
 extension ChatViewController: MessagesLayoutDelegate {
+ 
+    func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
+        return CGSize(width: messagesCollectionView.bounds.width - sectionInset.left - sectionInset.right, height: 1)
+    }
+
 
 
 }

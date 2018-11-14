@@ -567,8 +567,6 @@
 		7392F5EB219ABA1E007FFCD0 /* InputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392F5E0219ABA1E007FFCD0 /* InputItem.swift */; };
 		7392F5ED219AC055007FFCD0 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392F5EC219AC055007FFCD0 /* SampleData.swift */; };
 		7392F5EF219AC6A8007FFCD0 /* MessageKitAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7392F5EE219AC6A8007FFCD0 /* MessageKitAssets.bundle */; };
-		7392F5F1219ACABF007FFCD0 /* CustomMessageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392F5F0219ACABE007FFCD0 /* CustomMessageFlowLayout.swift */; };
-		7392F5F3219ACAE5007FFCD0 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392F5F2219ACAE5007FFCD0 /* CustomCell.swift */; };
 		7398323D2179EED400C4A594 /* cybex_ios_core_cpp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */; };
 		7398BEBF2181BFD3004C042E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398BEBE2181BFD3004C042E /* Style.swift */; };
 		7398BEC32181C1AE004C042E /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398BEC22181C1AE004C042E /* R.generated.swift */; };
@@ -1349,8 +1347,6 @@
 		7392F5E0219ABA1E007FFCD0 /* InputItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputItem.swift; sourceTree = "<group>"; };
 		7392F5EC219AC055007FFCD0 /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		7392F5EE219AC6A8007FFCD0 /* MessageKitAssets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MessageKitAssets.bundle; sourceTree = "<group>"; };
-		7392F5F0219ACABE007FFCD0 /* CustomMessageFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMessageFlowLayout.swift; sourceTree = "<group>"; };
-		7392F5F2219ACAE5007FFCD0 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = cybex_ios_core_cpp.framework; path = Carthage/Build/iOS/cybex_ios_core_cpp.framework; sourceTree = "<group>"; };
 		7398BEBE2181BFD3004C042E /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		7398BEC22181C1AE004C042E /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
@@ -2977,7 +2973,6 @@
 				73A331102194244800707D8F /* ChatCoordinator.swift */,
 				73A331112194244800707D8F /* ChatActions.swift */,
 				73A331122194244800707D8F /* ChatViewController.swift */,
-				7392F5F2219ACAE5007FFCD0 /* CustomCell.swift */,
 				73A331132194244800707D8F /* ChatReducers.swift */,
 				73A331182194248800707D8F /* Chat.storyboard */,
 			);
@@ -2989,7 +2984,6 @@
 			children = (
 				7392F5EC219AC055007FFCD0 /* SampleData.swift */,
 				73A3311B219425DA00707D8F /* ChatUser.swift */,
-				7392F5F0219ACABE007FFCD0 /* CustomMessageFlowLayout.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4576,7 +4570,6 @@
 				73587E9D2133EB15006CF8A6 /* RPCircularProgress.swift in Sources */,
 				724C5D4D2153956900FF1DE7 /* ComprehensiveItemViewAdapter.swift in Sources */,
 				562EE9FB61A1D1EBCB263F8C8DE265B6 /* OrderBookViewController.swift in Sources */,
-				7392F5F3219ACAE5007FFCD0 /* CustomCell.swift in Sources */,
 				7307A926212518DC00BD6444 /* ThemifyIcon.swift in Sources */,
 				73539C4E2179A210008395AC /* URLMatcher.swift in Sources */,
 				73539C602179A282008395AC /* DNSPageStyle.swift in Sources */,
@@ -4688,7 +4681,6 @@
 				7267DA0721350327004AF9AF /* ETOActions.swift in Sources */,
 				73587EAE2137C057006CF8A6 /* ETOCrowdViewController.swift in Sources */,
 				73A331142194244800707D8F /* ChatCoordinator.swift in Sources */,
-				7392F5F1219ACABF007FFCD0 /* CustomMessageFlowLayout.swift in Sources */,
 				3B0EB65C210313B200F19C31 /* YourPortfolioHeadView.swift in Sources */,
 				C02132F00200B408020442C307CEE0B6 /* TradeView.swift in Sources */,
 				7CA82BA6BC1F22AAA929D52CD5C4434F /* TradeViewController.swift in Sources */,

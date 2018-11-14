@@ -465,6 +465,15 @@ open class MessageLabel: UILabel {
     
 }
 
+extension MessageLabel {
+    public func nameRect(_ range: NSRange) -> CGRect {
+        var glyphRange = NSRange()
+        layoutManager.characterRange(forGlyphRange: range, actualGlyphRange: &glyphRange)
+
+        return layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+    }
+}
+
 private enum MessageTextCheckingType {
     case addressComponents([NSTextCheckingKey: String]?)
     case date(Date?)
