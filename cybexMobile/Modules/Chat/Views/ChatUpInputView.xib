@@ -23,11 +23,8 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J8h-kZ-Psm">
-                    <rect key="frame" x="16" y="8" width="351" height="91"/>
+                    <rect key="frame" x="16" y="8" width="351" height="92"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="91" id="A4x-JA-0e4"/>
-                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                     <userDefinedRuntimeAttributes>
@@ -46,7 +43,7 @@
                     </userDefinedRuntimeAttributes>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yr0-IB-Ffv">
-                    <rect key="frame" x="16" y="105" width="32" height="24"/>
+                    <rect key="frame" x="16" y="106" width="32" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="Bkr-gO-Fmv"/>
                         <constraint firstAttribute="width" constant="32" id="VaW-Bh-pS8"/>
@@ -58,9 +55,9 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNi-9L-Z8D">
-                    <rect key="frame" x="337" y="102" width="30" height="30"/>
+                    <rect key="frame" x="337" y="103" width="30" height="30"/>
                     <state key="normal">
-                        <color key="titleColor" name="pastelOrange" red="0.996" green="0.608" blue="0.333" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" red="0.996" green="0.60799999999999998" blue="0.33300000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="locali" value="chat_input_send"/>
@@ -70,13 +67,13 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddo-ed-gbj">
-                    <rect key="frame" x="288.5" y="110" width="32.5" height="14.5"/>
+                    <rect key="frame" x="288.5" y="111" width="32.5" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.80400000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQI-Mi-4hZ">
-                    <rect key="frame" x="56" y="117" width="0.0" height="0.0"/>
+                    <rect key="frame" x="56" y="118" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -93,6 +90,7 @@
                 <constraint firstItem="zNi-9L-Z8D" firstAttribute="leading" secondItem="ddo-ed-gbj" secondAttribute="trailing" constant="16" id="OBx-Uu-z86"/>
                 <constraint firstItem="zNi-9L-Z8D" firstAttribute="centerY" secondItem="ddo-ed-gbj" secondAttribute="centerY" id="Uce-6l-x88"/>
                 <constraint firstItem="UQI-Mi-4hZ" firstAttribute="centerY" secondItem="Yr0-IB-Ffv" secondAttribute="centerY" id="YCn-XQ-DQc"/>
+                <constraint firstItem="Lhl-p8-24W" firstAttribute="bottom" secondItem="Yr0-IB-Ffv" secondAttribute="bottom" constant="8" id="b9w-sx-atT"/>
                 <constraint firstItem="UQI-Mi-4hZ" firstAttribute="leading" secondItem="Yr0-IB-Ffv" secondAttribute="trailing" constant="8" id="llS-Qd-Q6O"/>
                 <constraint firstItem="Yr0-IB-Ffv" firstAttribute="top" secondItem="J8h-kZ-Psm" secondAttribute="bottom" constant="6" id="neI-K9-vwn"/>
                 <constraint firstItem="Lhl-p8-24W" firstAttribute="trailing" secondItem="zNi-9L-Z8D" secondAttribute="trailing" constant="16" id="sb1-vy-JSS"/>

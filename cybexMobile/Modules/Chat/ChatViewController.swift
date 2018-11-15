@@ -16,6 +16,14 @@ import MapKit
 class ChatViewController: MessagesViewController {
     let sectionInset = UIEdgeInsets(top: 12, left: 13, bottom: 12, right: 13)
 
+    var downInputView = ChatDownInputView()
+//
+//    open override var inputAccessoryView: UIView? {
+//        return downInputView
+//    }
+    
+    var upInputView: ChatUpInputView?
+    
 	var coordinator: (ChatCoordinatorProtocol & ChatStateManagerProtocol)?
     private(set) var context: ChatContext?
 
@@ -33,6 +41,17 @@ class ChatViewController: MessagesViewController {
         setupUI()
         setupData()
         setupEvent()
+        test()
+    }
+    
+    func test() {
+        self.messageInputBar.padding = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        self.messageInputBar.subviews.forEach { (subView) in
+            subView.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.paleGrey.hexString(true)]
+        }
+        self.messageInputBar.contentView.addSubview(self.downInputView)
+        self.downInputView.edges(to: self.messageInputBar.contentView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -109,7 +128,6 @@ class ChatViewController: MessagesViewController {
         layout?.setMessageIncomingAvatarSize(.zero)
         layout?.setMessageIncomingMessagePadding(.zero)
         layout?.attributedTextMessageSizeCalculator.incomingMessageLabelInsets = .zero
-
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -224,13 +242,11 @@ extension ChatViewController: MessageLabelDelegate {
     func didSelectTransitInformation(_ transitInformation: [String: String]) {
         print("TransitInformation Selected: \(transitInformation)")
     }
-
 }
 
 // MARK: - MessageInputBarDelegate
 
 extension ChatViewController: MessageInputBarDelegate {
-
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
 
         for component in inputBar.inputTextView.components {
@@ -247,7 +263,6 @@ extension ChatViewController: MessageInputBarDelegate {
         inputBar.inputTextView.text = String()
         messagesCollectionView.scrollToBottom(animated: true)
     }
-
 }
 
 // MARK: - MessagesDisplayDelegate
@@ -281,5 +296,31 @@ extension ChatViewController: MessagesLayoutDelegate {
     func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
         return CGSize(width: messagesCollectionView.bounds.width - sectionInset.left - sectionInset.right, height: 1)
     }
+}
 
+
+extension ChatViewController {
+    @objc func callKeyboard(_ data: [String: Any]) {
+        self.createChatUpInputView()
+    }
+    
+    
+    func createChatUpInputView() {
+        if let upInputView = self.upInputView {
+            upInputView.isHidden = false
+            upInputView.textView.becomeFirstResponder()
+        }
+        else {
+            self.upInputView = ChatUpInputView()
+            self.messagesCollectionView.addSubview(self.upInputView!)
+            self.upInputView?.bottom(to: self.messagesCollectionView)
+            self.upInputView?.left(to: self.messagesCollectionView)
+            self.upInputView?.right(to: self.messagesCollectionView)
+            self.upInputView?.height(138)
+        }
+    }
+    
+    @objc func sendMessage(_ data: [String: Any]) {
+        
+    }
 }

@@ -11,11 +11,12 @@ import Foundation
 @IBDesignable
 class ChatDownInputView: CybexBaseView {
     
-    @IBOutlet weak var inputTextField: UITextField!
+    @IBOutlet weak var inputTextField: ImageTextField!
     
     enum Event:String {
         case ChatDownInputViewDidClicked
         case sendMessage
+        case callKeyboard
     }
         
     override func setup() {
@@ -27,6 +28,9 @@ class ChatDownInputView: CybexBaseView {
     
     func setupUI() {
         self.inputTextField.placeholder = R.string.localizable.chat_input_placeholder.key.localized()
+        self.inputTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        self.inputTextField.leftViewMode = .always
+        self.inputTextField.delegate = self
     }
     
     func setupSubViewEvent() {
@@ -45,5 +49,13 @@ class ChatDownInputView: CybexBaseView {
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.ChatDownInputViewDidClicked.rawValue,
                                  userinfo: ["data": self.data ?? "", "self": self])
+    }
+}
+
+extension ChatDownInputView: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.next?.sendEventWith(Event.callKeyboard.rawValue,
+                                 userinfo: ["info": self.inputTextField.text ?? ""])
+        return false
     }
 }
