@@ -5,6 +5,7 @@ $(SRCROOT)/Carthage/Build/iOS/Apollo.framework
 $(SRCROOT)/Carthage/Build/iOS/AwaitKit.framework
 $(SRCROOT)/Carthage/Build/iOS/BeareadToast_swift.framework
 $(SRCROOT)/Carthage/Build/iOS/BiometricAuthentication.framework
+$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/Device.framework
 $(SRCROOT)/Carthage/Build/iOS/DifferenceKit.framework
 $(SRCROOT)/Carthage/Build/iOS/EFQRCode.framework
@@ -23,6 +24,7 @@ $(SRCROOT)/Carthage/Build/iOS/Localize_Swift.framework
 $(SRCROOT)/Carthage/Build/iOS/Macaw.framework
 $(SRCROOT)/Carthage/Build/iOS/Moya.framework
 $(SRCROOT)/Carthage/Build/iOS/Presentr.framework
+$(SRCROOT)/Carthage/Build/iOS/PromiseKit.framework
 $(SRCROOT)/Carthage/Build/iOS/Proposer.framework
 $(SRCROOT)/Carthage/Build/iOS/ReSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/Reachability.framework

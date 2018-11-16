@@ -415,6 +415,8 @@
 		733714BA2122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714B82122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.xib */; };
 		733714BD2122D32500B2ED90 /* AddressCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714BB2122D32500B2ED90 /* AddressCellView.swift */; };
 		733714BE2122D32500B2ED90 /* AddressCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714BC2122D32500B2ED90 /* AddressCellView.xib */; };
+		7345FD7A219E7D320066BD0E /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7345FD79219E7D310066BD0E /* CryptoSwift.framework */; };
+		7345FD7C219E7DE40066BD0E /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7345FD7B219E7DE40066BD0E /* PromiseKit.framework */; };
 		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
 		73539BA82178A0D7008395AC /* ActiveLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BA72178A0D6008395AC /* ActiveLabel.framework */; };
 		73539BAA2178A391008395AC /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BA92178A390008395AC /* Apollo.framework */; };
@@ -1190,6 +1192,8 @@
 		733714B82122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferAddressHomeTableViewCell.xib; sourceTree = "<group>"; };
 		733714BB2122D32500B2ED90 /* AddressCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCellView.swift; sourceTree = "<group>"; };
 		733714BC2122D32500B2ED90 /* AddressCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCellView.xib; sourceTree = "<group>"; };
+		7345FD79219E7D310066BD0E /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
+		7345FD7B219E7DE40066BD0E /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		73481176210815BF000BF1B8 /* CybexWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebSocketService.swift; sourceTree = "<group>"; };
 		73539BA72178A0D6008395AC /* ActiveLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActiveLabel.framework; path = Carthage/Build/iOS/ActiveLabel.framework; sourceTree = "<group>"; };
 		73539BA92178A390008395AC /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/iOS/Apollo.framework; sourceTree = "<group>"; };
@@ -1586,9 +1590,11 @@
 				73539C1721798D26008395AC /* GrowingTextView.framework in Frameworks */,
 				73539C1821798D26008395AC /* IQKeyboardManagerSwift.framework in Frameworks */,
 				73539C1921798D26008395AC /* UIFontComplete.framework in Frameworks */,
+				7345FD7A219E7D320066BD0E /* CryptoSwift.framework in Frameworks */,
 				73539C2921799039008395AC /* Macaw.framework in Frameworks */,
 				73539C2A21799039008395AC /* SwiftTheme.framework in Frameworks */,
 				73539C2B21799039008395AC /* XLActionController.framework in Frameworks */,
+				7345FD7C219E7DE40066BD0E /* PromiseKit.framework in Frameworks */,
 				73539C2C21799039008395AC /* Rswift.framework in Frameworks */,
 				73539C2D21799039008395AC /* FSPagerView.framework in Frameworks */,
 				73539C2E21799039008395AC /* SwifterSwift.framework in Frameworks */,
@@ -3410,6 +3416,8 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7345FD7B219E7DE40066BD0E /* PromiseKit.framework */,
+				7345FD79219E7D310066BD0E /* CryptoSwift.framework */,
 				7231103A21805D7F0007E95D /* UMAnalytics.framework */,
 				7231103921805D7E0007E95D /* UMCommon.framework */,
 				7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */,
@@ -4178,7 +4186,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 			showEnvVarsInLog = 0;
 		};
 		EE22259AA50E1965825123B5D2382194 /* color set */ = {
