@@ -9,8 +9,12 @@
 import UIKit
 import ReSwift
 import NBLCommonModule
+import ChatRoom
 
 protocol ChatCoordinatorProtocol {
+    func connectChat()
+
+    func send(_ message: String)
 }
 
 protocol ChatStateManagerProtocol {
@@ -29,6 +33,8 @@ class ChatCoordinator: NavCoordinator {
     var state: ChatState {
         return store.state
     }
+
+    let service = ChatService()
     
     override class func start(_ root: BaseNavigationController, context:RouteContext? = nil) -> BaseViewController {
 //        let vc = R.storyboard.chat.chatViewController()!
@@ -45,7 +51,14 @@ class ChatCoordinator: NavCoordinator {
 }
 
 extension ChatCoordinator: ChatCoordinatorProtocol {
-    
+    func connectChat() {
+        service.connect()
+    }
+
+    func send(_ message: String) {
+        service.send(message)
+    }
+
 }
 
 extension ChatCoordinator: ChatStateManagerProtocol {

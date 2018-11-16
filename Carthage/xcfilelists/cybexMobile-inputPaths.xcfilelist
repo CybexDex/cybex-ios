@@ -46,6 +46,7 @@ $(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework
 $(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework
 $(SRCROOT)/Carthage/Build/iOS/SwiftyUserDefaults.framework
 $(SRCROOT)/Carthage/Build/iOS/TinyConstraints.framework
+$(SRCROOT)/Carthage/Build/iOS/UICKeyChainStore.framework
 $(SRCROOT)/Carthage/Build/iOS/UIFontComplete.framework
 $(SRCROOT)/Carthage/Build/iOS/XLActionController.framework
 $(SRCROOT)/Carthage/Build/iOS/XLPagerTabStrip.framework

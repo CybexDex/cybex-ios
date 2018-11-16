@@ -44,6 +44,7 @@ class ChatViewController: MessagesViewController {
     }
 
     func loadFirstMessages() {
+        self.coordinator?.connectChat()
         DispatchQueue.global(qos: .userInitiated).async {
             SampleData.shared.getAdvancedMessages(count: 10) { messages in
                 DispatchQueue.main.async {
@@ -174,6 +175,7 @@ extension ChatViewController: MessageCellDelegate {
 
     func didTapMessage(in cell: MessageCollectionViewCell) {
         print("Message tapped")
+        self.coordinator?.send("test")
     }
 
     func didTapCellTopLabel(in cell: MessageCollectionViewCell) {
