@@ -130,14 +130,14 @@ class ChatViewController: MessagesViewController {
             else {
                 focusView = UIView()
                 focusView.tag = 2018
-                cell.messageContainerView.insertSubview(focusView, at: 0)
+                cell.addSubview(focusView)
+                focusView.rx.tapGesture().skip(1).asObservable().subscribe(onNext: { (ges) in
+                    print(11111)
+                }).disposed(by: cell.disposeBag)
             }
 
-            focusView.frame = CGRect(x: frame.origin.x - 8, y: frame.origin.y + 2, width: frame.width + 12, height: frame.height + 2 )
-            focusView.backgroundColor = UIColor.pastelOrange.withAlphaComponent(0.1)
-            focusView.borderWidth = 1
-            focusView.borderColor = UIColor.pastelOrange.withAlphaComponent(0.04)
-            focusView.cornerRadius = 4
+            focusView.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: frame.height )
+            focusView.backgroundColor = UIColor.clear
         }
 
 

@@ -23,9 +23,11 @@
  */
 
 import UIKit
+import RxSwift
 
 /// A subclass of `MessageContentCell` used to display text messages.
 open class TextMessageCell: MessageContentCell {
+    var disposeBag = DisposeBag()
 
     // MARK: - Properties
 
@@ -54,6 +56,7 @@ open class TextMessageCell: MessageContentCell {
         super.prepareForReuse()
         messageLabel.attributedText = nil
         messageLabel.text = nil
+        disposeBag = DisposeBag()
     }
 
     open override func setupSubviews() {

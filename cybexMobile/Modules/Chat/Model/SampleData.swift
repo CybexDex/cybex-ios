@@ -93,7 +93,6 @@ final internal class SampleData {
         let range = NSRange(location: 0, length: nsString.length)
         let paragraph = NSMutableParagraphStyle()
         let font = UIFont.systemFont(ofSize: 14)
-        paragraph.firstLineHeadIndent = 8
         paragraph.maximumLineHeight = 22
         paragraph.minimumLineHeight = 22
 
@@ -102,7 +101,7 @@ final internal class SampleData {
             mutableAttributedString.addAttribute(NSAttributedString.Key.font, value: font, range: range)
             mutableAttributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraph, range: range)
             mutableAttributedString.addAttribute(NSAttributedString.Key.baselineOffset, value:labelBaselineOffset(22, fontHeight: font.lineHeight), range: range)
-            mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white80, range: range)
+            mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.pastelOrange, range: range)
 
         case "Font2":
             mutableAttributedString.addAttributes([NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize, weight: UIFont.Weight.bold)], range: range)
@@ -163,7 +162,7 @@ final internal class SampleData {
             let randomSentence = "十月一号之前就是这样，来回震荡，出不来趋势的。不过相信接下来的一个星期会有趋势出来的，破6800还是6300。应该很快出来结果，这个价位拖的时间太长了，多空都耗不起。"
             return ChatCommonMessage(text: randomSentence, sender: sender, messageId: uniqueID, date: date)
         case .AttributedText:
-            let randomSentence = "sasd_ss:    十月一号之前就是这样😀😀，来回震荡，出不来趋势的。不过相信接下来的一个星期会有趋势出来的，破6800还是6300。应该很快出来结果，这个价位拖的时间太长了，多空都耗不起。"
+            let randomSentence = "sasd_ss: 十月一号之前就是这样😀😀，来回震荡，出不来趋势的。不过相信接下来的一个星期会有趋势出来的，破6800还是6300。应该很快出来结果，这个价位拖的时间太长了，多空都耗不起。"
             let attributedText = attributedString(with: randomSentence)
             return ChatCommonMessage(attributedText: attributedText, sender: senders[randomNumberSender], messageId: uniqueID, date: date)
         case .Photo:
