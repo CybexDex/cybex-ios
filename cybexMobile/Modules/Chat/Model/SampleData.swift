@@ -150,7 +150,7 @@ final internal class SampleData {
         return messageType
     }
 
-    func randomMessage(allowedSenders: [Sender]) -> ChatMessage {
+    func randomMessage(allowedSenders: [Sender]) -> ChatCommonMessage {
 
         let randomNumberSender = Int(arc4random_uniform(UInt32(allowedSenders.count)))
         
@@ -161,36 +161,36 @@ final internal class SampleData {
         switch randomMessageType() {
         case .Text:
             let randomSentence = "十月一号之前就是这样，来回震荡，出不来趋势的。不过相信接下来的一个星期会有趋势出来的，破6800还是6300。应该很快出来结果，这个价位拖的时间太长了，多空都耗不起。"
-            return ChatMessage(text: randomSentence, sender: sender, messageId: uniqueID, date: date)
+            return ChatCommonMessage(text: randomSentence, sender: sender, messageId: uniqueID, date: date)
         case .AttributedText:
             let randomSentence = "sasd_ss:    十月一号之前就是这样😀😀，来回震荡，出不来趋势的。不过相信接下来的一个星期会有趋势出来的，破6800还是6300。应该很快出来结果，这个价位拖的时间太长了，多空都耗不起。"
             let attributedText = attributedString(with: randomSentence)
-            return ChatMessage(attributedText: attributedText, sender: senders[randomNumberSender], messageId: uniqueID, date: date)
+            return ChatCommonMessage(attributedText: attributedText, sender: senders[randomNumberSender], messageId: uniqueID, date: date)
         case .Photo:
             let randomNumberImage = Int(arc4random_uniform(UInt32(messageImages.count)))
             let image = messageImages[randomNumberImage]
-            return ChatMessage(image: image, sender: sender, messageId: uniqueID, date: date)
+            return ChatCommonMessage(image: image, sender: sender, messageId: uniqueID, date: date)
         case .Video:
             let randomNumberImage = Int(arc4random_uniform(UInt32(messageImages.count)))
             let image = messageImages[randomNumberImage]
-            return ChatMessage(thumbnail: image, sender: sender, messageId: uniqueID, date: date)
+            return ChatCommonMessage(thumbnail: image, sender: sender, messageId: uniqueID, date: date)
         case .Emoji:
             let randomNumberEmoji = Int(arc4random_uniform(UInt32(emojis.count)))
-            return ChatMessage(emoji: emojis[randomNumberEmoji], sender: sender, messageId: uniqueID, date: date)
+            return ChatCommonMessage(emoji: emojis[randomNumberEmoji], sender: sender, messageId: uniqueID, date: date)
         case .Location:
             let randomNumberLocation = Int(arc4random_uniform(UInt32(locations.count)))
-            return ChatMessage(location: locations[randomNumberLocation], sender: sender, messageId: uniqueID, date: date)
+            return ChatCommonMessage(location: locations[randomNumberLocation], sender: sender, messageId: uniqueID, date: date)
         case .Url:
-            return ChatMessage(text: "https://github.com/MessageKit", sender: sender, messageId: uniqueID, date: date)
+            return ChatCommonMessage(text: "https://github.com/MessageKit", sender: sender, messageId: uniqueID, date: date)
         case .Phone:
-            return ChatMessage(text: "123-456-7890", sender: sender, messageId: uniqueID, date: date)
+            return ChatCommonMessage(text: "123-456-7890", sender: sender, messageId: uniqueID, date: date)
         case .Custom:
-            return ChatMessage(custom: "                十月一号之前就是这样，来回震荡，出不来趋势的。不过相信接下来的一个星期会有趋势出来的，破6800还是6300。应该很快出来结果，这个价位拖的时间太长了，多空都耗不起。", sender: system, messageId: uniqueID, date: date)
+            return ChatCommonMessage(custom: "                十月一号之前就是这样，来回震荡，出不来趋势的。不过相信接下来的一个星期会有趋势出来的，破6800还是6300。应该很快出来结果，这个价位拖的时间太长了，多空都耗不起。", sender: system, messageId: uniqueID, date: date)
         }
     }
 
-    func getMessages(count: Int, completion: ([ChatMessage]) -> Void) {
-        var messages: [ChatMessage] = []
+    func getMessages(count: Int, completion: ([ChatCommonMessage]) -> Void) {
+        var messages: [ChatCommonMessage] = []
         // Disable Custom Messages
         UserDefaults.standard.set(false, forKey: "Custom Messages")
         for _ in 0..<count {
@@ -200,8 +200,8 @@ final internal class SampleData {
         completion(messages)
     }
     
-    func getAdvancedMessages(count: Int, completion: ([ChatMessage]) -> Void) {
-        var messages: [ChatMessage] = []
+    func getAdvancedMessages(count: Int, completion: ([ChatCommonMessage]) -> Void) {
+        var messages: [ChatCommonMessage] = []
         // Enable Custom Messages
         UserDefaults.standard.set(true, forKey: "Custom Messages")
         for _ in 0..<count {
@@ -211,8 +211,8 @@ final internal class SampleData {
         completion(messages)
     }
     
-    func getMessages(count: Int, allowedSenders: [Sender], completion: ([ChatMessage]) -> Void) {
-        var messages: [ChatMessage] = []
+    func getMessages(count: Int, allowedSenders: [Sender], completion: ([ChatCommonMessage]) -> Void) {
+        var messages: [ChatCommonMessage] = []
         // Disable Custom Messages
         UserDefaults.standard.set(false, forKey: "Custom Messages")
         for _ in 0..<count {

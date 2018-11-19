@@ -8,48 +8,78 @@
 
 import Foundation
 import SocketRocket
+import Repeat
 
 public class ChatService: NSObject {
     static let host = "ws://47.91.242.71:9099/ws"
     lazy var socket = SRWebSocket(url: URL(string: ChatService.host)!)
 
-    public override init() {
+    public var provider: ChatServiceProvider!
+    var timer: Repeater?
 
+    public var messageReceived: (([ChatMessage]) -> Void)?
+
+    public convenience init(_ uuid: String) {
+        self.init()
+
+        self.provider = ChatServiceProvider(uuid, channel: "")
     }
 
-    public func connect() {
+    private override init() {
+        super.init()
+        openHeart()
+    }
 
+    public func connect(_ chanel: String) {
+        self.provider.switchChanel(chanel)
+
+        reconnect()
+    }
+
+    public func disconnect() {
+        self.socket.close()
+    }
+
+    func reconnect() {
         socket.delegate = self
         socket.open()
     }
 
     public func send(_ str: String) {
-        try? socket.send(string: """
-{ "Type": 2, "Data": { "UserName": "daizong798", "Message": "nihao", "Sign":"209dae8ac1e36372223fc5092bb6c494b097b10e5365ed37dd4710a240727c1f933c3b48cc77ca65df123697b8095895f17ec6b91fd605bb60fc1d55043b49d86b" } }
-""")
+        if checkNetworConnected() {
+            try? socket.send(string: str)
+        }
+        else {
+            reconnect()
+            try? socket.send(string: str)
+        }
     }
+
+    func checkNetworConnected() -> Bool {
+        if socket.readyState == SRReadyState.OPEN {
+            return true
+        }
+
+        return false
+    }
+
+    func openHeart() {
+        self.timer = Repeater.every(.seconds(30), { [weak self] _ in
+            guard let self = self else { return }
+            if self.checkNetworConnected() {
+                try? self.socket.sendPing(nil)
+            }
+        })
+    }
+
 }
 
 extension ChatService: SRWebSocketDelegate {
     public func webSocketDidOpen(_ webSocket: SRWebSocket) {
-        try? socket.send(string: """
-{
-    "Type":    1,
-    "Data":    {
-        "Channel": "BTC/ETH",
-        "MessageSize": "300",
-        "DeviceID": "abc-edf-lgh"
-    }
-}
-""")
-
-        let result = try? socket.sendPing(nil)
-        print(result)
-        
+        try? socket.send(string: self.provider.login())
     }
 
     public func webSocket(_ webSocket: SRWebSocket, didFailWithError error: Error) {
-
     }
 
     public func webSocket(_ webSocket: SRWebSocket, didCloseWithCode code: Int, reason: String?, wasClean: Bool) {
@@ -65,7 +95,7 @@ extension ChatService: SRWebSocketDelegate {
     }
 
     public func webSocket(_ webSocket: SRWebSocket, didReceiveMessageWith string: String) {
-
+        messageReceived?(self.provider.parse(string))
     }
 
 

@@ -424,6 +424,10 @@
 		7345FD93219EC0A80066BD0E /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */; };
 		7345FD96219EC1210066BD0E /* ChatOriginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7345FD95219EC1210066BD0E /* ChatOriginModel.swift */; };
 		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
+		734AB3F921A289400091BE82 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C02217989D6008395AC /* SwiftyJSON.framework */; };
+		734AB3FB21A289640091BE82 /* NBLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734AB3FA21A289640091BE82 /* NBLModel.swift */; };
+		734AB3FD21A28B9F0091BE82 /* ChatServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734AB3FC21A28B9F0091BE82 /* ChatServiceProvider.swift */; };
+		734AB3FE21A299A80091BE82 /* Repeat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C0A21798D22008395AC /* Repeat.framework */; };
 		73539BA82178A0D7008395AC /* ActiveLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BA72178A0D6008395AC /* ActiveLabel.framework */; };
 		73539BAA2178A391008395AC /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539BA92178A390008395AC /* Apollo.framework */; };
 		73539BC82178A7CB008395AC /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539BC72178A7CA008395AC /* AsyncOperation.swift */; };
@@ -1208,6 +1212,8 @@
 		7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UICKeyChainStore.framework; path = Carthage/Build/iOS/UICKeyChainStore.framework; sourceTree = "<group>"; };
 		7345FD95219EC1210066BD0E /* ChatOriginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatOriginModel.swift; sourceTree = "<group>"; };
 		73481176210815BF000BF1B8 /* CybexWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebSocketService.swift; sourceTree = "<group>"; };
+		734AB3FA21A289640091BE82 /* NBLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBLModel.swift; sourceTree = "<group>"; };
+		734AB3FC21A28B9F0091BE82 /* ChatServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceProvider.swift; sourceTree = "<group>"; };
 		73539BA72178A0D6008395AC /* ActiveLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActiveLabel.framework; path = Carthage/Build/iOS/ActiveLabel.framework; sourceTree = "<group>"; };
 		73539BA92178A390008395AC /* Apollo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Apollo.framework; path = Carthage/Build/iOS/Apollo.framework; sourceTree = "<group>"; };
 		73539BC72178A7CA008395AC /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
@@ -1570,6 +1576,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7345FD88219EAE140066BD0E /* SocketRocket.framework in Frameworks */,
+				734AB3F921A289400091BE82 /* SwiftyJSON.framework in Frameworks */,
+				734AB3FE21A299A80091BE82 /* Repeat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2576,6 +2584,7 @@
 			children = (
 				7345FD94219EC1030066BD0E /* Model */,
 				7345FD86219EADC40066BD0E /* ChatService.swift */,
+				734AB3FC21A28B9F0091BE82 /* ChatServiceProvider.swift */,
 			);
 			path = ChatService;
 			sourceTree = "<group>";
@@ -2595,6 +2604,7 @@
 			isa = PBXGroup;
 			children = (
 				7345FD95219EC1210066BD0E /* ChatOriginModel.swift */,
+				734AB3FA21A289640091BE82 /* NBLModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4277,6 +4287,7 @@
 				7345FD96219EC1210066BD0E /* ChatOriginModel.swift in Sources */,
 				7392F5EB219ABA1E007FFCD0 /* InputItem.swift in Sources */,
 				7392F5BB219AB948007FFCD0 /* LocationMessageCell.swift in Sources */,
+				734AB3FD21A28B9F0091BE82 /* ChatServiceProvider.swift in Sources */,
 				7392F5CC219AB948007FFCD0 /* LocationItem.swift in Sources */,
 				7392F5E9219ABA1E007FFCD0 /* InputPlugin.swift in Sources */,
 				7392F5C4219AB948007FFCD0 /* AvatarView.swift in Sources */,
@@ -4287,6 +4298,7 @@
 				7392F5C9219AB948007FFCD0 /* MessageType.swift in Sources */,
 				7392F5AE219AB948007FFCD0 /* AvatarPosition.swift in Sources */,
 				7392F5E7219ABA1E007FFCD0 /* InputTextView.swift in Sources */,
+				734AB3FB21A289640091BE82 /* NBLModel.swift in Sources */,
 				7392F5B8219AB948007FFCD0 /* MessagesViewController+Keyboard.swift in Sources */,
 				7392F5B0219AB948007FFCD0 /* NSConstraintLayoutSet.swift in Sources */,
 				7392F5B7219AB948007FFCD0 /* MessageKit+Availability.swift in Sources */,

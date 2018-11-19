@@ -19,13 +19,13 @@ class ChatViewController: MessagesViewController {
 	var coordinator: (ChatCoordinatorProtocol & ChatStateManagerProtocol)?
     private(set) var context: ChatContext?
 
-    var messageList: [ChatMessage] = []
-
     let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         return formatter
     }()
+
+    var messageList: [ChatCommonMessage] = []
 
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +34,15 @@ class ChatViewController: MessagesViewController {
         setupData()
         setupEvent()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        self.coordinator?.disconnect()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -44,7 +50,7 @@ class ChatViewController: MessagesViewController {
     }
 
     func loadFirstMessages() {
-        self.coordinator?.connectChat()
+        self.coordinator?.connectChat("BTC/ETH")
         DispatchQueue.global(qos: .userInitiated).async {
             SampleData.shared.getAdvancedMessages(count: 10) { messages in
                 DispatchQueue.main.async {
@@ -56,7 +62,7 @@ class ChatViewController: MessagesViewController {
         }
     }
 
-    func insertMessage(_ message: ChatMessage) {
+    func insertMessage(_ message: ChatCommonMessage) {
         messageList.append(message)
         // Reload last section to update header/footer labels and insert a new one
         messagesCollectionView.performBatchUpdates({
@@ -144,7 +150,10 @@ class ChatViewController: MessagesViewController {
     }
     
     func setupEvent() {
-        
+        self.coordinator?.state.messages.asObservable().subscribe(onNext: {[weak self] (messages) in
+            guard let self = self else { return }
+            
+        }).disposed(by: disposeBag)
     }
     
 }
@@ -175,7 +184,7 @@ extension ChatViewController: MessageCellDelegate {
 
     func didTapMessage(in cell: MessageCollectionViewCell) {
         print("Message tapped")
-        self.coordinator?.send("test")
+        self.coordinator?.send("xxx", username: "", sign: "")
     }
 
     func didTapCellTopLabel(in cell: MessageCollectionViewCell) {
@@ -228,10 +237,10 @@ extension ChatViewController: MessageInputBarDelegate {
         for component in inputBar.inputTextView.components {
 
             if let str = component as? String {
-                let message = ChatMessage(text: str, sender: currentSender(), messageId: UUID().uuidString, date: Date())
+                let message = ChatCommonMessage(text: str, sender: currentSender(), messageId: UUID().uuidString, date: Date())
                 insertMessage(message)
             } else if let img = component as? UIImage {
-                let message = ChatMessage(image: img, sender: currentSender(), messageId: UUID().uuidString, date: Date())
+                let message = ChatCommonMessage(image: img, sender: currentSender(), messageId: UUID().uuidString, date: Date())
                 insertMessage(message)
             }
 

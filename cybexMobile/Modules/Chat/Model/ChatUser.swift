@@ -37,7 +37,7 @@ private struct CoordinateItem: LocationItem {
 
 }
 
-struct ChatMessage: MessageType {
+struct ChatCommonMessage: MessageType {
     var sender: Sender
     /// The unique identifier for the message.
     var messageId: String

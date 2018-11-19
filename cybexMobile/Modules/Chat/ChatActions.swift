@@ -11,8 +11,10 @@ import ReSwift
 import RxCocoa
 import SwiftyJSON
 import HandyJSON
+import ChatRoom
 
 struct ChatContext: RouteContext, HandyJSON {
+    var chanel: String = ""
     init() {}
     
 }
@@ -21,9 +23,11 @@ struct ChatContext: RouteContext, HandyJSON {
 struct ChatState: BaseState {
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+
+    var messages: BehaviorRelay<[ChatMessage]> = BehaviorRelay(value: [])
 }
 
 //MARK: - Action
 struct ChatFetchedAction: Action {
-    var data:JSON
+    var data:[ChatMessage]
 }

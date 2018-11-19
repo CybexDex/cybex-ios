@@ -12,9 +12,10 @@ import NBLCommonModule
 import ChatRoom
 
 protocol ChatCoordinatorProtocol {
-    func connectChat()
+    func connectChat(_ channel: String)
+    func disconnect()
 
-    func send(_ message: String)
+    func send(_ message: String, username: String, sign: String)
 }
 
 protocol ChatStateManagerProtocol {
@@ -34,7 +35,7 @@ class ChatCoordinator: NavCoordinator {
         return store.state
     }
 
-    let service = ChatService()
+    let service = ChatService(FCUUID.uuid())
     
     override class func start(_ root: BaseNavigationController, context:RouteContext? = nil) -> BaseViewController {
 //        let vc = R.storyboard.chat.chatViewController()!
@@ -51,14 +52,21 @@ class ChatCoordinator: NavCoordinator {
 }
 
 extension ChatCoordinator: ChatCoordinatorProtocol {
-    func connectChat() {
-        service.connect()
+    func connectChat(_ channel: String) {
+        service.messageReceived = {[weak self] messages in
+            guard let self = self else { return }
+            self.store.dispatch(ChatFetchedAction(data: messages))
+        }
+        service.connect(channel)
     }
 
-    func send(_ message: String) {
-        service.send(message)
+    func disconnect() {
+        service.disconnect()
     }
 
+    func send(_ message: String, username: String, sign: String) {
+        service.send(service.provider.message(username, msg: message, sign: sign))
+    }
 }
 
 extension ChatCoordinator: ChatStateManagerProtocol {

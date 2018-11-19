@@ -13,6 +13,8 @@ func gChatReducer(action:Action, state:ChatState?) -> ChatState {
     let state = state ?? ChatState()
         
     switch action {
+    case let action as ChatFetchedAction :
+        state.messages.accept(action.data)
     default:
         break
     }
