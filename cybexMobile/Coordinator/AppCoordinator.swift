@@ -34,17 +34,16 @@ class AppCoordinator {
 
     var rootVC: BaseTabbarViewController
 
-    var homeCoordinator: HomeRootCoordinator!
-    var tradeCoordinator: TradeRootCoordinator!
-    var accountCoordinator: AccountRootCoordinator!
-    var entryCoordinator: EntryRootCoordinator!
-    var etoCoordinator: ETORootCoordinator!
-    var comprehensiveCoordinator: ComprehensiveRootCoordinator!
+    var comprehensiveCoordinator: NavCoordinator!
+    var homeCoordinator: NavCoordinator!
+    var tradeCoordinator: NavCoordinator!
+    var etoCoordinator: NavCoordinator!
+    var accountCoordinator: NavCoordinator!
     var container: [NavCoordinator]!
 
-    var etoStatus: BehaviorRelay<ETOHidden?> = BehaviorRelay(value: nil)
+    var entryCoordinator: NavCoordinator?
 
-    weak var currentPresentedRootCoordinator: NavCoordinator?
+    var etoStatus: BehaviorRelay<ETOHidden?> = BehaviorRelay(value: nil)
 
     weak var startLoadingVC: BaseViewController?
 
@@ -68,18 +67,19 @@ class AppCoordinator {
         }
 
         let comprehensive = BaseNavigationController()
-        comprehensiveCoordinator = ComprehensiveRootCoordinator(rootVC: comprehensive)
+        comprehensiveCoordinator = ComprehensiveCoordinator(rootVC: comprehensive)
         comprehensive.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navHome.key.localized(), image: R.image.ic_nav_home(), selectedImage: R.image.ic_nav_home_active())
+        
 
         let home = BaseNavigationController()
-        homeCoordinator = HomeRootCoordinator(rootVC: home)
+        homeCoordinator = HomeCoordinator(rootVC: home)
         home.tabBarItem = ESTabBarItem.init(CBTabBarView(),
                                             title: R.string.localizable.navWatchlist.key.localized(),
                                             image: R.image.ic_watchlist_24px(),
                                             selectedImage: R.image.ic_watchlist_active_24px())
 
         let trade = BaseNavigationController()
-        tradeCoordinator = TradeRootCoordinator(rootVC: trade)
+        tradeCoordinator = TradeCoordinator(rootVC: trade)
         trade.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navTrade.key.localized(), image: R.image.icon_apply(), selectedImage: R.image.icon_apply_active())
 
         let account = BaseNavigationController()
@@ -90,18 +90,17 @@ class AppCoordinator {
                                                selectedImage: R.image.ic_account_box_active_24px())
 
         let eto = BaseNavigationController()
-        etoCoordinator = ETORootCoordinator(rootVC: eto)
+        etoCoordinator = ETOCoordinator(rootVC: eto)
         eto.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navEto.key.localized(), image: R.image.ic_eto_24_px(), selectedImage: R.image.ic_eto_active_24_px())
 
-        //        home.tabBarItem.badgeValue = ""
-        //        message.tabBarItem.badgeValue = "99+"
-        comprehensiveCoordinator.start()
-        homeCoordinator.start()
-        tradeCoordinator.start()
-        accountCoordinator.start()
+
+        comprehensiveCoordinator.pushVC(ComprehensiveCoordinator.self, animated: false, context: nil)
+        homeCoordinator.pushVC(HomeCoordinator.self, animated: false, context: nil)
+        tradeCoordinator.pushVC(TradeCoordinator.self, animated: false, context: nil)
+        accountCoordinator.pushVC(AccountCoordinator.self, animated: false, context: nil)
 
         if let status = self.etoStatus.value, status.isETOEnabled == true {
-            etoCoordinator.start()
+            etoCoordinator.pushVC(ETOCoordinator.self, animated: false, context: nil)
             self.container = [homeCoordinator, tradeCoordinator, etoCoordinator, accountCoordinator] as [NavCoordinator]
             rootVC.viewControllers = [comprehensive, home, trade, eto, account]
         } else {
@@ -187,14 +186,7 @@ class AppCoordinator {
     }
 
     func showLogin() {
-        let nav = BaseNavigationController()
-        entryCoordinator = EntryRootCoordinator(rootVC: nav)
-        entryCoordinator.start()
-        currentPresentedRootCoordinator = entryCoordinator
-
-        SwifterSwift.delay(milliseconds: 100) {
-            self.rootVC.present(nav, animated: true, completion: nil)
-        }
+        presentVC(EntryCoordinator.self, navSetup: nil, presentSetup: nil)
     }
 }
 

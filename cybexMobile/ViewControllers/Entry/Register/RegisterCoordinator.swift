@@ -21,7 +21,7 @@ protocol RegisterStateManagerProtocol {
   var state: RegisterState { get }
 }
 
-class RegisterCoordinator: EntryRootCoordinator {
+class RegisterCoordinator: NavCoordinator {
   let presenter: Presentr = {
     let width = ModalSize.custom(size: 272)
     let height = ModalSize.custom(size: 340)

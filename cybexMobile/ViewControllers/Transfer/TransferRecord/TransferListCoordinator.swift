@@ -20,7 +20,7 @@ protocol TransferListStateManagerProtocol {
     func reduceTransferRecords()
 }
 
-class TransferListCoordinator: AccountRootCoordinator {
+class TransferListCoordinator: NavCoordinator {
     var store = Store<TransferListState>(
         reducer: transferListReducer,
         state: nil,

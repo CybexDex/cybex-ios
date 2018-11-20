@@ -24,13 +24,22 @@ protocol TradeStateManagerProtocol {
     var state: TradeState { get }
 }
 
-class TradeCoordinator: TradeRootCoordinator {
+class TradeCoordinator: NavCoordinator {
     var store = Store<TradeState>(
         reducer: tradeReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )
 
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.business.tradeViewController()!
+        vc.localizedText = R.string.localizable.navTrade.key.localizedContainer()
+        let coordinator = TradeCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+        return vc
+    }
+    
     var homeVCTopConstaint: NSLayoutConstraint!
 }
 

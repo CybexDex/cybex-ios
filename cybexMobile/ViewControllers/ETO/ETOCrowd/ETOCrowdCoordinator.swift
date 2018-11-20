@@ -31,7 +31,7 @@ protocol ETOCrowdStateManagerProtocol {
     func joinCrowd(_ transferAmount: Double, callback: @escaping CommonAnyCallback)
 }
 
-class ETOCrowdCoordinator: ETORootCoordinator {
+class ETOCrowdCoordinator: NavCoordinator {
     var store = Store(
         reducer: ETOCrowdReducer,
         state: nil,

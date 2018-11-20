@@ -29,7 +29,7 @@ protocol WithdrawAddressStateManagerProtocol {
     func isEOS() -> Bool
 }
 
-class WithdrawAddressCoordinator: AccountRootCoordinator {
+class WithdrawAddressCoordinator: NavCoordinator {
 
     var store = Store<WithdrawAddressState>(
         reducer: withdrawAddressReducer,

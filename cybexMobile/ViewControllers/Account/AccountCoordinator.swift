@@ -22,7 +22,7 @@ protocol AccountStateManagerProtocol {
     var state: AccountState { get }
 }
 
-class AccountCoordinator: AccountRootCoordinator {
+class AccountCoordinator: NavCoordinator {
     var store = Store<AccountState>(
         reducer: gAccountReducer,
         state: nil,
@@ -31,6 +31,15 @@ class AccountCoordinator: AccountRootCoordinator {
 
     var state: AccountState {
         return store.state
+    }
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.account.accountViewController()!
+        vc.localizedText = R.string.localizable.accountTitle.key.localizedContainer()
+        let coordinator = AccountCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+        return vc
     }
 }
 

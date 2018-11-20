@@ -16,7 +16,7 @@ protocol TransferDetailStateManagerProtocol {
     var state: TransferDetailState { get }
 }
 
-class TransferDetailCoordinator: AccountRootCoordinator {
+class TransferDetailCoordinator: NavCoordinator {
     var store = Store<TransferDetailState>(
         reducer: transferDetailReducer,
         state: nil,

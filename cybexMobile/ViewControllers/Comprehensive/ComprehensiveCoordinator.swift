@@ -36,7 +36,7 @@ protocol ComprehensiveStateManagerProtocol {
     func setupChildrenVC(_ sender: ComprehensiveViewController)
 }
 
-class ComprehensiveCoordinator: ComprehensiveRootCoordinator {
+class ComprehensiveCoordinator: NavCoordinator {
     var store = Store(
         reducer: comprehensiveReducer,
         state: nil,
@@ -45,6 +45,14 @@ class ComprehensiveCoordinator: ComprehensiveRootCoordinator {
 
     var state: ComprehensiveState {
         return store.state
+    }
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.comprehensive.comprehensiveViewController()!
+        let coordinator = ComprehensiveCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+        return vc
     }
 
     override func register() {

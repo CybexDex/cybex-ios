@@ -21,7 +21,7 @@ protocol WithdrawDetailStateManagerProtocol {
     var state: WithdrawDetailState { get }
 }
 
-class WithdrawDetailCoordinator: AccountRootCoordinator {
+class WithdrawDetailCoordinator: NavCoordinator {
     var store = Store<WithdrawDetailState>(
         reducer: withdrawDetailReducer,
         state: nil,

@@ -22,7 +22,7 @@ protocol MarketStateManagerProtocol {
     func openTradeViewChontroller(_ isBuy: Bool, pair: Pair)
 }
 
-class MarketCoordinator: HomeRootCoordinator {
+class MarketCoordinator: NavCoordinator {
     var store = Store<MarketState>(
         reducer: marketReducer,
         state: nil,

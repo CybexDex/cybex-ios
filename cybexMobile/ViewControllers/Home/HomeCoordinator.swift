@@ -19,7 +19,7 @@ protocol HomeStateManagerProtocol {
     func switchPageState(_ state: PageState)
 }
 
-class HomeCoordinator: HomeRootCoordinator {
+class HomeCoordinator: NavCoordinator {
     var store = Store(
         reducer: homeReducer,
         state: nil,
@@ -28,6 +28,14 @@ class HomeCoordinator: HomeRootCoordinator {
     
     var state: HomeState {
         return store.state
+    }
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.main.homeViewController()!
+        let coordinator = HomeCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+        return vc
     }
 }
 

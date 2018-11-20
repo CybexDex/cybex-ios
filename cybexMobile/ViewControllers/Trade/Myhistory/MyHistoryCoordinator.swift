@@ -17,7 +17,7 @@ protocol MyHistoryStateManagerProtocol {
 
 }
 
-class MyHistoryCoordinator: TradeRootCoordinator {
+class MyHistoryCoordinator: NavCoordinator {
     var store = Store<MyHistoryState>(
         reducer: myHistoryReducer,
         state: nil,

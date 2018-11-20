@@ -18,7 +18,7 @@ protocol SettingDetailStateManagerProtocol {
 
 }
 
-class SettingDetailCoordinator: AccountRootCoordinator {
+class SettingDetailCoordinator: NavCoordinator {
     var store = Store<SettingDetailState>(
         reducer: gSettingDetailReducer,
         state: nil,

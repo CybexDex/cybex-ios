@@ -32,10 +32,6 @@ class NavCoordinator: NavProtocol {
         register()
     }
 
-    func start() {
-
-    }
-
     class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
         return BaseViewController()
     }

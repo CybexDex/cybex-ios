@@ -34,7 +34,7 @@ protocol BusinessStateManagerProtocol {
     func checkBalance(_ pair: Pair, isBuy: Bool) -> Bool?
 }
 
-class BusinessCoordinator: AccountRootCoordinator {
+class BusinessCoordinator: NavCoordinator {
     var store = Store<BusinessState>(
         reducer: businessReducer,
         state: nil,

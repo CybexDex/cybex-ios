@@ -19,7 +19,7 @@ protocol AddressHomeStateManagerProtocol {
     var state: AddressHomeState { get }
 }
 
-class AddressHomeCoordinator: AccountRootCoordinator {
+class AddressHomeCoordinator: NavCoordinator {
     var store = Store<AddressHomeState>(
         reducer: addressHomeReducer,
         state: nil,

@@ -23,7 +23,7 @@ protocol RechargeRecodeStateManagerProtocol {
     func fetchAssetUrl()
 }
 
-class RechargeRecodeCoordinator: AccountRootCoordinator {
+class RechargeRecodeCoordinator: NavCoordinator {
     var store = Store<RechargeRecodeState>(
         reducer: rechargeRecodeReducer,
         state: nil,

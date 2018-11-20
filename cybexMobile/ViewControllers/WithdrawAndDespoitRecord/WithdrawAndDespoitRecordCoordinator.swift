@@ -24,7 +24,7 @@ protocol WithdrawAndDespoitRecordStateManagerProtocol {
     func childrenFetchData(_ info: String, index: RecordChooseType)
 }
 
-class WithdrawAndDespoitRecordCoordinator: AccountRootCoordinator {
+class WithdrawAndDespoitRecordCoordinator: NavCoordinator {
     var store = Store(
         reducer: withdrawAndDespoitRecordReducer,
         state: nil,

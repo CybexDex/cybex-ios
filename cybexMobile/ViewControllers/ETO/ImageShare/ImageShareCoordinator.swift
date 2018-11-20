@@ -17,7 +17,7 @@ protocol ImageShareStateManagerProtocol {
     var state: ImageShareState { get }
 }
 
-class ImageShareCoordinator: ETORootCoordinator {
+class ImageShareCoordinator: NavCoordinator {
     var store = Store(
         reducer: imageShareReducer,
         state: nil,

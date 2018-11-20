@@ -20,7 +20,7 @@ protocol OpenedOrdersStateManagerProtocol {
     func cancelOrder(_ orderID: String, feeId: String, callback: @escaping (_ success: Bool) -> Void)
 }
 
-class OpenedOrdersCoordinator: AccountRootCoordinator {
+class OpenedOrdersCoordinator: NavCoordinator {
     var store = Store<OpenedOrdersState>(
         reducer: gOpenedOrdersReducer,
         state: nil,

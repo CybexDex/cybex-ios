@@ -16,6 +16,7 @@ typealias OnPickerComfirm = () -> Void
 class PickerViewController: BaseViewController {
 
     var coordinator: (PickerCoordinatorProtocol & PickerStateManagerProtocol)?
+    private(set) var context: PickerContext?
 
     var onPickerComfirm: OnPickerComfirm?
 
@@ -43,6 +44,18 @@ class PickerViewController: BaseViewController {
     }
 
     override func configureObserveState() {
+        self.coordinator?.state.context.asObservable().subscribe(onNext: { [weak self] (context) in
+            guard let `self` = self else { return }
 
+            if let context = context as? PickerContext {
+                self.context = context
+                self.selectedValue = context.selectedValue
+                self.items = context.items
+                if let items = self.items {
+                    self.pickerView.items = items
+                    self.pickerView.selectRow(self.selectedValue.component, inComponent: self.selectedValue.row)
+                }
+            }
+        }).disposed(by: disposeBag)
     }
 }

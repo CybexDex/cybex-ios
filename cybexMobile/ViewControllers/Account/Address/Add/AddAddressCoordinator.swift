@@ -36,7 +36,7 @@ protocol AddAddressStateManagerProtocol {
 
 }
 
-class AddAddressCoordinator: AccountRootCoordinator {
+class AddAddressCoordinator: NavCoordinator {
     var store = Store<AddAddressState>(
         reducer: addAddressReducer,
         state: nil,

@@ -18,12 +18,20 @@ protocol EntryStateManagerProtocol {
     var state: EntryState { get }
 }
 
-class EntryCoordinator: EntryRootCoordinator {
+class EntryCoordinator: NavCoordinator {
     var store = Store<EntryState>(
         reducer: entryReducer,
         state: nil,
         middleware: [trackingMiddleware]
     )
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.main.entryViewController()!
+        let coordinator = EntryCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+        return vc
+    }
 }
 
 extension EntryCoordinator: EntryCoordinatorProtocol {

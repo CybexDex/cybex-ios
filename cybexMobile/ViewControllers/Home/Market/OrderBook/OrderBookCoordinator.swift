@@ -22,7 +22,7 @@ protocol OrderBookStateManagerProtocol {
     func updateMarketListHeight(_ height: CGFloat)
 }
 
-class OrderBookCoordinator: HomeRootCoordinator {
+class OrderBookCoordinator: NavCoordinator {
     var store = Store<OrderBookState>(
         reducer: orderBookReducer,
         state: nil,

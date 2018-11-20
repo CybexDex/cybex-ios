@@ -10,19 +10,8 @@ import UIKit
 import ReSwift
 
 func pickerReducer(action: Action, state: PickerState?) -> PickerState {
-    return PickerState(isLoading: loadingReducer(state?.isLoading, action: action),
-                       page: pageReducer(state?.page, action: action),
-                       errorMessage: errorMessageReducer(state?.errorMessage, action: action),
-                       property: pickerPropertyReducer(state?.property, action: action))
-}
-
-func pickerPropertyReducer(_ state: PickerPropertyState?, action: Action) -> PickerPropertyState {
-    let state = state ?? PickerPropertyState()
-
-    switch action {
-    default:
-        break
-    }
+    let state = state ?? PickerState()
 
     return state
 }
+

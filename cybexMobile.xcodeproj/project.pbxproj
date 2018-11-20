@@ -95,12 +95,10 @@
 		225746DC210707DD0017FA1A /* PickerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746D8210707DD0017FA1A /* PickerActions.swift */; };
 		225746DD210707DD0017FA1A /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746D9210707DD0017FA1A /* PickerViewController.swift */; };
 		225746DE210707DD0017FA1A /* PickerReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746DA210707DD0017FA1A /* PickerReducers.swift */; };
-		225746E02107089A0017FA1A /* PickerRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746DF2107089A0017FA1A /* PickerRootCoordinator.swift */; };
 		225746E4210715890017FA1A /* Components.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 225746E3210715890017FA1A /* Components.storyboard */; };
 		225746E821073E480017FA1A /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225746E721073E480017FA1A /* PickerView.swift */; };
 		225746EA21073E8C0017FA1A /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225746E921073E8C0017FA1A /* PickerView.xib */; };
 		22BB2BC362DB5BB21C3699A31111523E /* AccountPortfolioCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115F2B194BC4D206A29A5A90BF6DDACE /* AccountPortfolioCellView.xib */; };
-		24401F60F82FEDDA35FBCCED409C1102 /* HomeRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E395E7B5D2617408E203CD024E8818 /* HomeRootCoordinator.swift */; };
 		26827458BC8C2CF5494505DA58315BBF /* OpenedOrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABDEB18F3DC6A39D5E8D8EA57AF7EF4 /* OpenedOrdersHeaderView.swift */; };
 		29C911F371D5F143FB814E54626700D5 /* RechargeSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F999943C67E4ED6E626A8BA802C612 /* RechargeSegment.swift */; };
 		2E3DB3499E75C0D06068C979CD788B00 /* TradeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B134B85F2EADB461B1D5BB2F4C52C1A7 /* TradeReducers.swift */; };
@@ -205,7 +203,6 @@
 		60FB6241E99099A751F12BD01130832D /* RegisterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D832D97F66172004BA431C498669E /* RegisterActions.swift */; };
 		61096350D887C3728E3B617E993C2365 /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8523917C4FD1D9E870906B5689B1609A /* Demo.swift */; };
 		61804E3238064ADBE771CD78E212AB6A /* IntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7613EACA01D245EB0E55FEB856A9B54D /* IntroduceView.swift */; };
-		640657C00CD9588E73E0F0280F245348 /* TradeRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EED361030B4F9C7CFFB90076C4437F /* TradeRootCoordinator.swift */; };
 		64F0077FC05CD2AC44BC6F16C2C71938 /* Button.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4869E5D42420E772C6FC2589A1D9B03 /* Button.xib */; };
 		65A0AB87E09E879EFAFA04DBA6B15D3E /* AccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4FDA98A150BD654049D01D15F1AE0 /* AccountCoordinator.swift */; };
 		665FBB42152A37B183D011D45A4A0F22 /* RechargeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA52DB9F7B13F75FCF7C39FBC99A67F /* RechargeCoordinator.swift */; };
@@ -280,7 +277,6 @@
 		724C5D4D2153956900FF1DE7 /* ComprehensiveItemViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D4A2153956900FF1DE7 /* ComprehensiveItemViewAdapter.swift */; };
 		724C5D4E2153956900FF1DE7 /* ComprehensiveItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D4B2153956900FF1DE7 /* ComprehensiveItemView.swift */; };
 		724C5D4F2153956900FF1DE7 /* ComprehensiveItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 724C5D4C2153956900FF1DE7 /* ComprehensiveItemView.xib */; };
-		7267DA00213502AE004AF9AF /* ETORootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267D9FF213502AE004AF9AF /* ETORootCoordinator.swift */; };
 		7267DA0621350327004AF9AF /* ETOCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA0221350327004AF9AF /* ETOCoordinator.swift */; };
 		7267DA0721350327004AF9AF /* ETOActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA0321350327004AF9AF /* ETOActions.swift */; };
 		7267DA0821350327004AF9AF /* ETOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA0421350327004AF9AF /* ETOViewController.swift */; };
@@ -353,7 +349,6 @@
 		72E2A8EE2151F9DB00FBB3CB /* ComprehensiveActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8EA2151F9DB00FBB3CB /* ComprehensiveActions.swift */; };
 		72E2A8EF2151F9DB00FBB3CB /* ComprehensiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8EB2151F9DB00FBB3CB /* ComprehensiveViewController.swift */; };
 		72E2A8F02151F9DB00FBB3CB /* ComprehensiveReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8EC2151F9DB00FBB3CB /* ComprehensiveReducers.swift */; };
-		72E2A8F22151F9F300FBB3CB /* ComprehensiveRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8F12151F9F300FBB3CB /* ComprehensiveRootCoordinator.swift */; };
 		72E2A8F42151FB0C00FBB3CB /* Comprehensive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E2A8F32151FB0C00FBB3CB /* Comprehensive.storyboard */; };
 		72E3A4CC214560580083E417 /* CybexWaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E3A4C9214560580083E417 /* CybexWaitingView.swift */; };
 		72E3A4CD214560580083E417 /* CybexWaitingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72E3A4CA214560580083E417 /* CybexWaitingView.xib */; };
@@ -700,7 +695,6 @@
 		C2728D465891E65690FBF4E868796852 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C2110BFFD03771C03869732E3464D5 /* UIView+Extensions.swift */; };
 		C281A4038187FCD131A006BA4689D2BD /* AppCoordinator+StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160539B7708CCFAE0C8E56461CBAAC44 /* AppCoordinator+StateManager.swift */; };
 		C37CA15215CBB1B064E0514AB9D0EFE5 /* AccountOpenedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FF8329A7AFC8D994A046019EFEE53D /* AccountOpenedOrdersView.swift */; };
-		C44F04354B1B9F8051BA2651AC620D65 /* AccountRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD84BA4078EF75A9B9026D233590AFDB /* AccountRootCoordinator.swift */; };
 		C4B9965B38DBF143FD1862CF88F9DAE1 /* CybexTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B0874829089357398AE129E9C4B67DC /* CybexTextView.swift */; };
 		C6701BBC918D15D20650CF726BA483EA /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD9516DB7B3ECF8651E0B2A8702D273 /* Tools.swift */; };
 		C860BE92032F361E51995DB61C68774C /* RechargeSegment.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB525835351EF4ABDC6B1B30A5A7DF8F /* RechargeSegment.xib */; };
@@ -720,7 +714,6 @@
 		D3694E6115F5ED50F0FFE4108E64BAEE /* AccountPortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB2C6198513BBE464900C9565F6D751 /* AccountPortfolioCell.swift */; };
 		D3C87D3A247487C8D834A828782FC472 /* PairListHorizantalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C067DE56B8690D69E601011F04E37B3 /* PairListHorizantalView.swift */; };
 		D519E052461ED8221B6CF5C9D9B7741C /* StyleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56299B4E9395DEA09802901B4057FB7B /* StyleContentView.swift */; };
-		D68AC2564E8A2DB5B8D2B787AD3F02CD /* EntryRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A665043B18963DD992AA85C17D188504 /* EntryRootCoordinator.swift */; };
 		D6EF2CA9447A80749A341523EA37E613 /* AccessoryHorizentalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B84348EBEF7ECB83B1CB628B471F3E6 /* AccessoryHorizentalView.swift */; };
 		D7D9A9DE89519CA3D6E61C32D3DDC7B8 /* SettingDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6540994D41CA4578B6323D1A7C5D726 /* SettingDetailCoordinator.swift */; };
 		D898B818223D8DD3B304D2D7F5A3E2AB /* OrderBookCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00DB97742C15FE315C5FD5FEC260024 /* OrderBookCellView.swift */; };
@@ -749,7 +742,6 @@
 		ED57B29BDB18C8B97035E7DA20DF26E5 /* RechargeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC62805ABCFD5E4F2A84E1F3E061A11D /* RechargeActions.swift */; };
 		ED699787C0E757F3F46A0E2B5D6BF947 /* OpenedOrdersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34476D1CE18378AE9DCE481FCA73DB6B /* OpenedOrdersCell.xib */; };
 		EEC52B0701FDE9B489D4D61193C9B420 /* RechargeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8382753BAEF516983F1C18FCE77A64A /* RechargeDetailViewController.swift */; };
-		F0CE8D5A02461E239914DF75E18C23FA /* ExplorerRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4CB904E1C8FCF8AA656A9851C65296 /* ExplorerRootCoordinator.swift */; };
 		F1B88753DCA13AC5B42338848EEC8DBF /* OpenedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C264445F2C3263F5F8AD02F1ABE4A0D /* OpenedOrdersView.swift */; };
 		F5DDA9E8ED5A5AA3D7A8F0705CFBA4BD /* OpenedOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD6F13246E773CDB0FBCFF806F8A69B /* OpenedOrdersViewController.swift */; };
 		F61A4020689A1596B862EDC3AD38A3BC /* OpenedOrdersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 579603A4523D2CED2D326CF0958D7A81 /* OpenedOrdersView.xib */; };
@@ -876,7 +868,6 @@
 		225746D8210707DD0017FA1A /* PickerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerActions.swift; sourceTree = "<group>"; };
 		225746D9210707DD0017FA1A /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		225746DA210707DD0017FA1A /* PickerReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerReducers.swift; sourceTree = "<group>"; };
-		225746DF2107089A0017FA1A /* PickerRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerRootCoordinator.swift; sourceTree = "<group>"; };
 		225746E3210715890017FA1A /* Components.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Components.storyboard; sourceTree = "<group>"; };
 		225746E721073E480017FA1A /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
 		225746E921073E8C0017FA1A /* PickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
@@ -894,7 +885,6 @@
 		3026120F89EDE7AE570FE9E3D4D21AB8 /* RechargeDetailReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailReducers.swift; sourceTree = "<group>"; };
 		3146A5E2119E16E559812803A8E18B8B /* TradeHistoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeHistoryCellView.swift; sourceTree = "<group>"; };
 		328194B664D1402156370883F413DD70 /* MarketCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCache.swift; sourceTree = "<group>"; };
-		32EED361030B4F9C7CFFB90076C4437F /* TradeRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeRootCoordinator.swift; sourceTree = "<group>"; };
 		33D554D2BDB71F16685FFE7768E315B7 /* BusinessTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessTitleCell.swift; sourceTree = "<group>"; };
 		34476D1CE18378AE9DCE481FCA73DB6B /* OpenedOrdersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenedOrdersCell.xib; sourceTree = "<group>"; };
 		367F19AE8091D840AF715D984C8EA751 /* OrderBookActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBookActions.swift; sourceTree = "<group>"; };
@@ -1057,7 +1047,6 @@
 		724C5D4A2153956900FF1DE7 /* ComprehensiveItemViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveItemViewAdapter.swift; sourceTree = "<group>"; };
 		724C5D4B2153956900FF1DE7 /* ComprehensiveItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveItemView.swift; sourceTree = "<group>"; };
 		724C5D4C2153956900FF1DE7 /* ComprehensiveItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComprehensiveItemView.xib; sourceTree = "<group>"; };
-		7267D9FF213502AE004AF9AF /* ETORootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETORootCoordinator.swift; sourceTree = "<group>"; };
 		7267DA0221350327004AF9AF /* ETOCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCoordinator.swift; sourceTree = "<group>"; };
 		7267DA0321350327004AF9AF /* ETOActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOActions.swift; sourceTree = "<group>"; };
 		7267DA0421350327004AF9AF /* ETOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOViewController.swift; sourceTree = "<group>"; };
@@ -1130,7 +1119,6 @@
 		72E2A8EA2151F9DB00FBB3CB /* ComprehensiveActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveActions.swift; sourceTree = "<group>"; };
 		72E2A8EB2151F9DB00FBB3CB /* ComprehensiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveViewController.swift; sourceTree = "<group>"; };
 		72E2A8EC2151F9DB00FBB3CB /* ComprehensiveReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveReducers.swift; sourceTree = "<group>"; };
-		72E2A8F12151F9F300FBB3CB /* ComprehensiveRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveRootCoordinator.swift; sourceTree = "<group>"; };
 		72E2A8F32151FB0C00FBB3CB /* Comprehensive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Comprehensive.storyboard; sourceTree = "<group>"; };
 		72E3A4C9214560580083E417 /* CybexWaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWaitingView.swift; sourceTree = "<group>"; };
 		72E3A4CA214560580083E417 /* CybexWaitingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CybexWaitingView.xib; sourceTree = "<group>"; };
@@ -1459,14 +1447,12 @@
 		A4CC22AA9CB81600F41DDDED43729F72 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A594949DD908310B30266DF5349ACA42 /* Vesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vesting.swift; sourceTree = "<group>"; };
 		A5E4FDA98A150BD654049D01D15F1AE0 /* AccountCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinator.swift; sourceTree = "<group>"; };
-		A665043B18963DD992AA85C17D188504 /* EntryRootCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryRootCoordinator.swift; sourceTree = "<group>"; };
 		A74E04925F8AE6063EBCE534A5894CA8 /* OrderBookCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderBookCell.xib; sourceTree = "<group>"; };
 		AA0D07DB98352D7EDB8BBA07BAE762B7 /* BalanceIntroduceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceIntroduceView.swift; sourceTree = "<group>"; };
 		AA8E2003073C4075637070F403905C00 /* CybexAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybexAlertView.swift; sourceTree = "<group>"; };
 		AACFB944EDB70A5A08C74591698A0C57 /* GraphQLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLManager.swift; sourceTree = "<group>"; };
 		AB35725C14DABB1B03FF5CC611CBA655 /* TradeHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeHistoryCell.swift; sourceTree = "<group>"; };
 		ABA998072FECB6775C8C12638DB4F7B0 /* AssetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInfo.swift; sourceTree = "<group>"; };
-		AD84BA4078EF75A9B9026D233590AFDB /* AccountRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRootCoordinator.swift; sourceTree = "<group>"; };
 		ADA779DE36FE60947508691E83755D82 /* PairCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PairCardView.xib; sourceTree = "<group>"; };
 		AE429108D7D23DA4BF5306BC38743C95 /* EntryReducers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryReducers.swift; sourceTree = "<group>"; };
 		AF5F52335C560DAEC42638FA4C736235 /* TradeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeCell.swift; sourceTree = "<group>"; };
@@ -1481,7 +1467,6 @@
 		BB0CBD31CA874ACE70FC838C624124BA /* MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewController.swift; sourceTree = "<group>"; };
 		BC10B159BF035F5E71D11A1E611B870D /* BusinessReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessReducers.swift; sourceTree = "<group>"; };
 		BDB2C6198513BBE464900C9565F6D751 /* AccountPortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPortfolioCell.swift; sourceTree = "<group>"; };
-		BF4CB904E1C8FCF8AA656A9851C65296 /* ExplorerRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerRootCoordinator.swift; sourceTree = "<group>"; };
 		C1F63E39C4DBB774B63AE34CC8BD5476 /* CBMAVOLUMEModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBMAVOLUMEModel.swift; sourceTree = "<group>"; };
 		C29B8BF509E927487D5B6946156296C1 /* DataBaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseApi.swift; sourceTree = "<group>"; };
 		C2B3D305EEAE6BCDA06146FBD1860EA4 /* TimeGapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeGapView.xib; sourceTree = "<group>"; };
@@ -1523,7 +1508,6 @@
 		E733F11F37A6A399AD7DC995A3985502 /* NSObject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
 		E8382753BAEF516983F1C18FCE77A64A /* RechargeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailViewController.swift; sourceTree = "<group>"; };
 		E84928E21FFBC4F2CE9B9E99DB30918B /* UIColor+Cybexblack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Cybexblack.swift"; sourceTree = "<group>"; };
-		E8E395E7B5D2617408E203CD024E8818 /* HomeRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRootCoordinator.swift; sourceTree = "<group>"; };
 		E9385075C042AC240E36D35EBA28F5B7 /* cybexMobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cybexMobile-Bridging-Header.h"; sourceTree = "<group>"; };
 		EAB7B6751E737BF366347CBB56D68EEC /* OpenedOrdersStatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersStatesView.swift; sourceTree = "<group>"; };
 		EC0A989A98071289EB9EF77251C873A5 /* AccessoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccessoryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1816,7 +1800,6 @@
 				225746D8210707DD0017FA1A /* PickerActions.swift */,
 				225746D7210707DD0017FA1A /* PickerCoordinator.swift */,
 				225746DA210707DD0017FA1A /* PickerReducers.swift */,
-				225746DF2107089A0017FA1A /* PickerRootCoordinator.swift */,
 				225746D9210707DD0017FA1A /* PickerViewController.swift */,
 			);
 			path = Picker;
@@ -3254,15 +3237,8 @@
 			isa = PBXGroup;
 			children = (
 				C53F589DD03A0C3BAD04E481C41411E8 /* Core */,
-				AD84BA4078EF75A9B9026D233590AFDB /* AccountRootCoordinator.swift */,
 				160539B7708CCFAE0C8E56461CBAAC44 /* AppCoordinator+StateManager.swift */,
 				28738F6A042E14EF506F09A1B5A4B519 /* AppCoordinator.swift */,
-				72E2A8F12151F9F300FBB3CB /* ComprehensiveRootCoordinator.swift */,
-				7267D9FF213502AE004AF9AF /* ETORootCoordinator.swift */,
-				A665043B18963DD992AA85C17D188504 /* EntryRootCoordinator.swift */,
-				BF4CB904E1C8FCF8AA656A9851C65296 /* ExplorerRootCoordinator.swift */,
-				E8E395E7B5D2617408E203CD024E8818 /* HomeRootCoordinator.swift */,
-				32EED361030B4F9C7CFFB90076C4437F /* TradeRootCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -4353,7 +4329,6 @@
 				728C281B215B6D6E0097840A /* AnnounceViewAdapter.swift in Sources */,
 				E0AD8E2E835D84754C63BA76FBA8582E /* AccountReducers.swift in Sources */,
 				7267DA1521351D40004AF9AF /* ETOProjectViewAdapter.swift in Sources */,
-				C44F04354B1B9F8051BA2651AC620D65 /* AccountRootCoordinator.swift in Sources */,
 				0960C892D63D17ABEB447BCE5525D299 /* AppActions.swift in Sources */,
 				C281A4038187FCD131A006BA4689D2BD /* AppCoordinator+StateManager.swift in Sources */,
 				19864A14CDDAB9987FBB0457B007B23E /* AppCoordinator.swift in Sources */,
@@ -4467,7 +4442,6 @@
 				7204FFC52153A62B00EB0FC7 /* HotAssetsView.swift in Sources */,
 				72E2A8F02151F9DB00FBB3CB /* ComprehensiveReducers.swift in Sources */,
 				44195E9AD82F1EA4A629372891EC8157 /* EntryReducers.swift in Sources */,
-				D68AC2564E8A2DB5B8D2B787AD3F02CD /* EntryRootCoordinator.swift in Sources */,
 				9D03533C82BDEC45C76E2419E0489874 /* EntryViewController.swift in Sources */,
 				ADB937770A84BC394C0F50DF0631CDEC /* ExchangeActions.swift in Sources */,
 				72B42E8321774CFD00587403 /* DespositNameView.swift in Sources */,
@@ -4476,7 +4450,6 @@
 				A9ADC5BE1460E34FCA1B4F52F30FDE5F /* ExchangeView.swift in Sources */,
 				41369312624D03C488017E7D88E4D41E /* ExchangeViewController.swift in Sources */,
 				3B824A2E2135350200D7A4A7 /* ETODetailViewController.swift in Sources */,
-				F0CE8D5A02461E239914DF75E18C23FA /* ExplorerRootCoordinator.swift in Sources */,
 				3BF5B7EB2135001B00E8BFC9 /* ETODetailIntroView.swift in Sources */,
 				72199D8E21045D4700575226 /* TransferListViewController.swift in Sources */,
 				72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */,
@@ -4500,7 +4473,6 @@
 				8C20E983876A75B5AF1B2B1CC5B7FA6C /* HomePairCell.swift in Sources */,
 				3D400D51F52AE73941E3134046491BA5 /* HomePairView.swift in Sources */,
 				9ED2AB33B2CDBB57B605BE26C2D455C2 /* HomeReducers.swift in Sources */,
-				24401F60F82FEDDA35FBCCED409C1102 /* HomeRootCoordinator.swift in Sources */,
 				72B42E7C217723DD00587403 /* PairDetailDateViewViewAdapter.swift in Sources */,
 				9F391D11D2B1C4522215117016EAA2F7 /* HomeSectionHeaderView.swift in Sources */,
 				733714B92122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.swift in Sources */,
@@ -4542,7 +4514,6 @@
 				A91E01A343738BBD63B5015631CE57A7 /* MarketCoordinator.swift in Sources */,
 				729B86A52154C7BB00C6E0E4 /* ComprehensiveBlockItemsViewAdapter.swift in Sources */,
 				46CD7B2787FFCD483A5A723E52C54292 /* MarketReducers.swift in Sources */,
-				7267DA00213502AE004AF9AF /* ETORootCoordinator.swift in Sources */,
 				221EC24D2105CF310059F856 /* TransferActions.swift in Sources */,
 				73539C5D2179A282008395AC /* DNSPageTitleView.swift in Sources */,
 				6B64E2B67481907BE9CFCAE4FCF346A6 /* MarketViewController.swift in Sources */,
@@ -4568,7 +4539,6 @@
 				72968D332158EC2F00B0AA77 /* Comprehensive.swift in Sources */,
 				41AC38B585A5D36715B3161B49381FB5 /* NoticeBoardViewController.swift in Sources */,
 				CC7617050BB0397377BB75D99DE68B3A /* OpenedOrdersActions.swift in Sources */,
-				72E2A8F22151F9F300FBB3CB /* ComprehensiveRootCoordinator.swift in Sources */,
 				225746DB210707DD0017FA1A /* PickerCoordinator.swift in Sources */,
 				72968D302158DC4E00B0AA77 /* RecordHeaderView.swift in Sources */,
 				D1612139CDC75BB4ACC08A1D78FD0AEE /* OpenedOrdersCell.swift in Sources */,
@@ -4710,7 +4680,6 @@
 				2E3DB3499E75C0D06068C979CD788B00 /* TradeReducers.swift in Sources */,
 				73539C5A2179A282008395AC /* DNSPageContentView.swift in Sources */,
 				72D9DD58210EB60F00963915 /* Periscope.swift in Sources */,
-				640657C00CD9588E73E0F0280F245348 /* TradeRootCoordinator.swift in Sources */,
 				72968D212158CEAC00B0AA77 /* WithdrawAndDespoitRecordCoordinator.swift in Sources */,
 				728C2826215B80480097840A /* AnnounceScrollViewAdapter.swift in Sources */,
 				7217B07F2122AAFD00608531 /* AddAddressReducers.swift in Sources */,
@@ -4746,7 +4715,6 @@
 				0FF6C4A7AAF40F0AC67CBDAEAA2406E2 /* UITextField+Extensions.swift in Sources */,
 				3B0EB6672103155C00F19C31 /* YourPortfolioCoordinator.swift in Sources */,
 				73539C4C2179A210008395AC /* Navigator.swift in Sources */,
-				225746E02107089A0017FA1A /* PickerRootCoordinator.swift in Sources */,
 				C2728D465891E65690FBF4E868796852 /* UIView+Extensions.swift in Sources */,
 				01D3990C8F03B94C2207F37FF3C7C895 /* UIViewController+Extension.swift in Sources */,
 				221C6182213940140021C007 /* ETORecordListViewView.swift in Sources */,

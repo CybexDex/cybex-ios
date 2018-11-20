@@ -21,7 +21,7 @@ protocol TradeHistoryStateManagerProtocol {
     func updateMarketListHeight(_ height: CGFloat)
 }
 
-class TradeHistoryCoordinator: HomeRootCoordinator {
+class TradeHistoryCoordinator: NavCoordinator {
     var store = Store<TradeHistoryState>(
         reducer: tradeHistoryReducer,
         state: nil,

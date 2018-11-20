@@ -19,7 +19,7 @@ protocol CybexWebStateManagerProtocol {
     func switchPageState(_ state: PageState)
 }
 
-class CybexWebCoordinator: AccountRootCoordinator {
+class CybexWebCoordinator: NavCoordinator {
     var store = Store(
         reducer: cybexWebReducer,
         state: nil,

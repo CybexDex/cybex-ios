@@ -27,7 +27,7 @@ protocol TransferAddressHomeStateManagerProtocol {
     func delete()
 }
 
-class TransferAddressHomeCoordinator: AccountRootCoordinator {
+class TransferAddressHomeCoordinator: NavCoordinator {
     var store = Store<TransferAddressHomeState>(
         reducer: transferAddressHomeReducer,
         state: nil,

@@ -21,7 +21,7 @@ protocol YourPortfolioStateManagerProtocol {
 
 }
 
-class YourPortfolioCoordinator: AccountRootCoordinator {
+class YourPortfolioCoordinator: NavCoordinator {
     var store = Store<YourPortfolioState>(
         reducer: gYourPortfolioReducer,
         state: nil,

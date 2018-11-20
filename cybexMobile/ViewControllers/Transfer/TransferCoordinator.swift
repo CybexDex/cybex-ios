@@ -96,10 +96,6 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         presenter.dismissOnTap = true
         presenter.keyboardTranslationType = .moveUp
 
-        let newNav = BaseNavigationController()
-        let pickerCoordinator = PickerRootCoordinator(rootVC: newNav)
-        self.rootVC.topViewController?.customPresentViewController(presenter, viewController: newNav, animated: true, completion: nil)
-
         var items = [String]()
         let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
             return getRealAmountDouble(balance.assetType, amount: balance.balance) != 0
@@ -116,20 +112,19 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
             items.append(R.string.localizable.balance_nodata.key.localized())
         }
 
-        if let vc = R.storyboard.components.pickerViewController() {
-            vc.items = items as AnyObject
-            vc.selectedValue =  (0, 0)
-            let coordinator = PickerCoordinator(rootVC: pickerCoordinator.rootVC)
-            coordinator.pickerDidSelected = { [weak self] (picker: UIPickerView) -> Void in
-                guard let `self` = self else { return }
-                self.getTransferAccountInfo()
-                if let balance = balances, balance.count > 0 {
-                    self.store.dispatch(SetBalanceAction(balance: balances![picker.selectedRow(inComponent: 0)]))
-                    self.validAmount()
-                }
+        var context = PickerContext()
+        context.items = items as AnyObject
+        context.pickerDidSelected = { [weak self] (picker: UIPickerView) -> Void in
+            guard let `self` = self else { return }
+            self.getTransferAccountInfo()
+            if let balance = balances, balance.count > 0 {
+                self.store.dispatch(SetBalanceAction(balance: balances![picker.selectedRow(inComponent: 0)]))
+                self.validAmount()
             }
-            vc.coordinator = coordinator
-            newNav.pushViewController(vc, animated: true)
+        }
+
+        presentVC(PickerCoordinator.self, animated: true, context: nil, navSetup: nil) { (top, target) in
+            top.customPresentViewController(presenter, viewController: target, animated: true)
         }
     }
 
@@ -156,27 +151,20 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         presenter.dismissOnTap = true
         presenter.keyboardTranslationType = .moveUp
 
-        let newNav = BaseNavigationController()
-        let pickerCoordinator = PickerRootCoordinator(rootVC: newNav)
-        self.rootVC.topViewController?.customPresentViewController(presenter, viewController: newNav, animated: true, completion: nil)
-
         let items = AddressManager.shared.getTransferAddressList()
+        var context = PickerContext()
+        context.items = items.map({ $0.name }) as AnyObject
+        context.pickerDidSelected = { [weak self] (picker: UIPickerView) -> Void in
+            guard let `self` = self else { return }
+            let selectedIndex = picker.selectedRow(inComponent: 0)
+            self.store.dispatch(CleanToAccountAction())
+            self.store.dispatch(ValidAccountAction(status: .validSuccessed))
+            self.store.dispatch(ChooseAccountAction(account: items[selectedIndex]))
+            self.getTransferAccountInfo()
+        }
 
-        if let vc = R.storyboard.components.pickerViewController() {
-            vc.items = items.map({ $0.name }) as AnyObject
-            vc.selectedValue =  (0, 0)
-            let coordinator = PickerCoordinator(rootVC: pickerCoordinator.rootVC)
-            coordinator.pickerDidSelected = { [weak self] (picker: UIPickerView) -> Void in
-                guard let `self` = self else { return }
-                let selectedIndex = picker.selectedRow(inComponent: 0)
-                self.store.dispatch(CleanToAccountAction())
-                self.store.dispatch(ValidAccountAction(status: .validSuccessed))
-                self.store.dispatch(ChooseAccountAction(account: items[selectedIndex]))
-                self.getTransferAccountInfo()
-            }
-            vc.coordinator = coordinator
-
-            newNav.pushViewController(vc, animated: true)
+        presentVC(PickerCoordinator.self, animated: true, context: context, navSetup: nil) { (top, target) in
+            top.customPresentViewController(presenter, viewController: target, animated: true)
         }
     }
 

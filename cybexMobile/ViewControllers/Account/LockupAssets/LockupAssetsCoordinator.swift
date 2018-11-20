@@ -20,7 +20,7 @@ protocol LockupAssetsStateManagerProtocol {
   func fetchLockupAssetsData(_ address: [String])
 }
 
-class LockupAssetsCoordinator: AccountRootCoordinator {
+class LockupAssetsCoordinator: NavCoordinator {
   var store = Store<LockupAssetsState>(
     reducer: gLockupAssetsReducer,
     state: nil,

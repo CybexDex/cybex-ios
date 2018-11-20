@@ -20,7 +20,7 @@ protocol ExchangeStateManagerProtocol {
     var state: ExchangeState { get }
 }
 
-class ExchangeCoordinator: TradeRootCoordinator {
+class ExchangeCoordinator: NavCoordinator {
     var store = Store<ExchangeState>(
         reducer: exchangeReducer,
         state: nil,

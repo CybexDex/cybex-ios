@@ -20,7 +20,7 @@ protocol ETORecordListStateManagerProtocol {
     func switchPageState(_ state: PageState)
 }
 
-class ETORecordListCoordinator: ETORootCoordinator {
+class ETORecordListCoordinator: NavCoordinator {
     var store = Store(
         reducer: ETORecordListReducer,
         state: nil,

@@ -36,7 +36,7 @@ protocol RechargeDetailStateManagerProtocol {
     func chooseOrAddAddress(_ sender: String)
 }
 
-class RechargeDetailCoordinator: AccountRootCoordinator {
+class RechargeDetailCoordinator: NavCoordinator {
     var store = Store<RechargeDetailState>(
         reducer: rechargeDetailReducer,
         state: nil,
@@ -78,24 +78,17 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
         presenter.dismissOnTap = true
         presenter.keyboardTranslationType = .moveUp
 
-        let newNav = BaseNavigationController()
-        let pickerCoordinator = PickerRootCoordinator(rootVC: newNav)
-        self.rootVC.topViewController?.customPresentViewController(presenter, viewController: newNav, animated: true, completion: nil)
-
         let items = AddressManager.shared.getWithDrawAddressListWith(asset)
+        var context = PickerContext()
+        context.items = items.map({ $0.name }) as AnyObject
+        context.pickerDidSelected = { [weak self] (picker: UIPickerView) -> Void in
+            guard let `self` = self else { return }
+            let selectedIndex =  picker.selectedRow(inComponent: 0)
+            self.store.dispatch(SelectedAddressAction(data: items[selectedIndex]))
+        }
 
-        if let vc = R.storyboard.components.pickerViewController() {
-            vc.items = items.map({ $0.name }) as AnyObject
-            vc.selectedValue =  (0, 0)
-            let coordinator = PickerCoordinator(rootVC: pickerCoordinator.rootVC)
-            coordinator.pickerDidSelected = { [weak self] (picker: UIPickerView) -> Void in
-                guard let `self` = self else { return }
-                let selectedIndex =  picker.selectedRow(inComponent: 0)
-                self.store.dispatch(SelectedAddressAction(data: items[selectedIndex]))
-            }
-            vc.coordinator = coordinator
-
-            newNav.pushViewController(vc, animated: true)
+        presentVC(PickerCoordinator.self, animated: true, context: context, navSetup: nil) { (top, target) in
+            top.customPresentViewController(presenter, viewController: target, animated: true)
         }
     }
 

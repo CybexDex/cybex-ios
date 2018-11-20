@@ -34,7 +34,7 @@ protocol ETOStateManagerProtocol {
     func resetBannersUrl()
 }
 
-class ETOCoordinator: ETORootCoordinator {
+class ETOCoordinator: NavCoordinator {
     var store = Store(
         reducer: ETOReducer,
         state: nil,
@@ -43,6 +43,14 @@ class ETOCoordinator: ETORootCoordinator {
 
     var state: ETOState {
         return store.state
+    }
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.main.etoViewController()!
+        let coordinator = ETOCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+        return vc
     }
 
     override func register() {

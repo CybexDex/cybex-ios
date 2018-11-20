@@ -22,7 +22,7 @@ protocol WithdrawAddressHomeStateManagerProtocol {
     func selectCell(_ index: Int)
 }
 
-class WithdrawAddressHomeCoordinator: AccountRootCoordinator {
+class WithdrawAddressHomeCoordinator: NavCoordinator {
     var store = Store<WithdrawAddressHomeState>(
         reducer: withdrawAddressHomeReducer,
         state: nil,

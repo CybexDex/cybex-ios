@@ -22,7 +22,7 @@ protocol SettingStateManagerProtocol {
     func changeEnveronment(_ callback:@escaping(Bool) -> Void)
 }
 
-class SettingCoordinator: AccountRootCoordinator {
+class SettingCoordinator: NavCoordinator {
     var store = Store<SettingState>(
         reducer: gSettingReducer,
         state: nil,
