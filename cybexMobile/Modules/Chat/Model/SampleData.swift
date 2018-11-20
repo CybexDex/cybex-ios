@@ -24,6 +24,7 @@
 
 import CoreLocation
 import ChatRoom
+import SwiftTheme
 
 final internal class SampleData {
 
@@ -100,8 +101,9 @@ final internal class SampleData {
         case "Font1":
             mutableAttributedString.addAttribute(NSAttributedString.Key.font, value: font, range: range)
             mutableAttributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraph, range: range)
-            mutableAttributedString.addAttribute(NSAttributedString.Key.baselineOffset, value: labelBaselineOffset(22, fontHeight: font.lineHeight), range: range)
-            mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.pastelOrange, range: range)
+
+            mutableAttributedString.addAttribute(NSAttributedString.Key.baselineOffset, value:labelBaselineOffset(22, fontHeight: font.lineHeight), range: range)
+            mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: ThemeManager.currentThemeIndex == 0 ? UIColor.white80 : UIColor.darkTwo, range: range)
 
         case "Font2":
             mutableAttributedString.addAttributes([NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize, weight: UIFont.Weight.bold)], range: range)

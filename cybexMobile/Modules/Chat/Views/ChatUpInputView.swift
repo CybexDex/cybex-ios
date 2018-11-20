@@ -26,15 +26,23 @@ class ChatUpInputView: CybexBaseView {
         
         setupUI()
         setupSubViewEvent()
+        
     }
+    
+//    override func didMoveToSuperview() {
+//        super.didMoveToSuperview()
+//        self.textView.becomeFirstResponder()
+//    }
     
     func setupUI() {
         
     }
     
     func setupSubViewEvent() {
-        NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification,object: self.textView,queue: nil) { [weak self](notification) in
+        NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification,
+                                               object: self.textView,queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
+                                                
             let count = self.textView.text.count
             if count < 100 {
                 self.numberOfTextLabel.text = "\(self.textView.text.count)/100"
@@ -42,7 +50,7 @@ class ChatUpInputView: CybexBaseView {
             }
             else {
                 self.numberOfTextLabel.text = "100/100"
-                self.numberOfTextLabel.textColor = UIColor.pastelOrange
+                self.numberOfTextLabel.textColor = UIColor.reddish
                 
                 self.textView.text = self.textView.text.substring(from: 0, length: 100)
             }
@@ -54,12 +62,14 @@ class ChatUpInputView: CybexBaseView {
     }
     
     @IBAction func sendMessageAction(_ sender: UIButton) {
+        self.textView.resignFirstResponder()
         self.next?.sendEventWith(Event.sendMessage.rawValue,
                                  userinfo: ["message": self.textView.text,
                                             "isRealName": self.realNameBtn.isSelected])
     }
     
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.ChatUpInputViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.ChatUpInputViewDidClicked.rawValue,
+                                 userinfo: ["data": self.data ?? "", "self": self])
     }
 }

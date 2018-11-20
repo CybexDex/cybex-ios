@@ -500,3 +500,5 @@
 "chat_input_realname" = "实名";
 "chat_input_send" = "发送";
 "chat_input_placeholder" = "我来说两句";
+
+"chat_new_message" = "有%d条新消息";

@@ -28,6 +28,7 @@ class ChatDownInputView: CybexBaseView {
     
     func setupUI() {
         self.inputTextField.placeholder = R.string.localizable.chat_input_placeholder.key.localized()
+        self.inputTextField.setPlaceHolderTextColor(UIColor.steel50)
         self.inputTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.inputTextField.leftViewMode = .always
         self.inputTextField.delegate = self
@@ -54,8 +55,7 @@ class ChatDownInputView: CybexBaseView {
 
 extension ChatDownInputView: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        self.next?.sendEventWith(Event.callKeyboard.rawValue,
-                                 userinfo: ["info": self.inputTextField.text ?? ""])
+        self.sendEventWith(Event.callKeyboard.rawValue, userinfo: [:])
         return false
     }
 }

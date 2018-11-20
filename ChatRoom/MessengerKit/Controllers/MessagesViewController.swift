@@ -89,7 +89,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
         super.viewDidLoad()
         setupDefaults()
         setupSubviews()
-        setupConstraints()
+//        setupConstraints()
         setupDelegates()
         addMenuControllerObservers()
         addObservers()
@@ -114,7 +114,7 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
         // Hack to prevent animation of the contentInset after viewDidAppear
         if isFirstLayout {
             defer { isFirstLayout = false }
-            addKeyboardObservers()
+//            addKeyboardObservers()
             messageCollectionViewBottomInset = requiredInitialScrollViewBottomInset()
         }
         adjustScrollViewTopInset()

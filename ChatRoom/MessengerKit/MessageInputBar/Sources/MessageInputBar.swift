@@ -751,7 +751,7 @@ open class MessageInputBar: UIView {
     /// Calls each items `keyboardEditingEndsAction` method
     @objc
     open func inputTextViewDidEndEditing() {
-        items.forEach { $0.keyboardEditingEndsAction() }
+//        items.forEach { $0.keyboardEditingEndsAction() }
     }
     
     // MARK: - Plugins

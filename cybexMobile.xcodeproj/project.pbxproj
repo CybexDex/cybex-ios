@@ -278,6 +278,17 @@
 		724C5D4D2153956900FF1DE7 /* ComprehensiveItemViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D4A2153956900FF1DE7 /* ComprehensiveItemViewAdapter.swift */; };
 		724C5D4E2153956900FF1DE7 /* ComprehensiveItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D4B2153956900FF1DE7 /* ComprehensiveItemView.swift */; };
 		724C5D4F2153956900FF1DE7 /* ComprehensiveItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 724C5D4C2153956900FF1DE7 /* ComprehensiveItemView.xib */; };
+		7260DDB421A2A25C00A5E3D6 /* ChatDirectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7260DDB021A2A25C00A5E3D6 /* ChatDirectionCoordinator.swift */; };
+		7260DDB521A2A25C00A5E3D6 /* ChatDirectionActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7260DDB121A2A25C00A5E3D6 /* ChatDirectionActions.swift */; };
+		7260DDB621A2A25C00A5E3D6 /* ChatDirectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7260DDB221A2A25C00A5E3D6 /* ChatDirectionViewController.swift */; };
+		7260DDB721A2A25C00A5E3D6 /* ChatDirectionReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7260DDB321A2A25C00A5E3D6 /* ChatDirectionReducers.swift */; };
+		7260DDBC21A2A2CC00A5E3D6 /* ChatDirectionLabelViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7260DDB921A2A2CC00A5E3D6 /* ChatDirectionLabelViewAdapter.swift */; };
+		7260DDBD21A2A2CC00A5E3D6 /* ChatDirectionLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7260DDBA21A2A2CC00A5E3D6 /* ChatDirectionLabelView.swift */; };
+		7260DDBE21A2A2CC00A5E3D6 /* ChatDirectionLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7260DDBB21A2A2CC00A5E3D6 /* ChatDirectionLabelView.xib */; };
+		7260DDC221A2A3CB00A5E3D6 /* ChatDirectionIconViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7260DDBF21A2A3CB00A5E3D6 /* ChatDirectionIconViewAdapter.swift */; };
+		7260DDC321A2A3CB00A5E3D6 /* ChatDirectionIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7260DDC021A2A3CB00A5E3D6 /* ChatDirectionIconView.swift */; };
+		7260DDC421A2A3CB00A5E3D6 /* ChatDirectionIconView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7260DDC121A2A3CB00A5E3D6 /* ChatDirectionIconView.xib */; };
+		7267DA00213502AE004AF9AF /* ETORootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267D9FF213502AE004AF9AF /* ETORootCoordinator.swift */; };
 		7267DA0621350327004AF9AF /* ETOCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA0221350327004AF9AF /* ETOCoordinator.swift */; };
 		7267DA0721350327004AF9AF /* ETOActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA0321350327004AF9AF /* ETOActions.swift */; };
 		7267DA0821350327004AF9AF /* ETOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA0421350327004AF9AF /* ETOViewController.swift */; };
@@ -1080,6 +1091,17 @@
 		724C5D4A2153956900FF1DE7 /* ComprehensiveItemViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveItemViewAdapter.swift; sourceTree = "<group>"; };
 		724C5D4B2153956900FF1DE7 /* ComprehensiveItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveItemView.swift; sourceTree = "<group>"; };
 		724C5D4C2153956900FF1DE7 /* ComprehensiveItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComprehensiveItemView.xib; sourceTree = "<group>"; };
+		7260DDB021A2A25C00A5E3D6 /* ChatDirectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDirectionCoordinator.swift; sourceTree = "<group>"; };
+		7260DDB121A2A25C00A5E3D6 /* ChatDirectionActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDirectionActions.swift; sourceTree = "<group>"; };
+		7260DDB221A2A25C00A5E3D6 /* ChatDirectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDirectionViewController.swift; sourceTree = "<group>"; };
+		7260DDB321A2A25C00A5E3D6 /* ChatDirectionReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDirectionReducers.swift; sourceTree = "<group>"; };
+		7260DDB921A2A2CC00A5E3D6 /* ChatDirectionLabelViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDirectionLabelViewAdapter.swift; sourceTree = "<group>"; };
+		7260DDBA21A2A2CC00A5E3D6 /* ChatDirectionLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDirectionLabelView.swift; sourceTree = "<group>"; };
+		7260DDBB21A2A2CC00A5E3D6 /* ChatDirectionLabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatDirectionLabelView.xib; sourceTree = "<group>"; };
+		7260DDBF21A2A3CB00A5E3D6 /* ChatDirectionIconViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDirectionIconViewAdapter.swift; sourceTree = "<group>"; };
+		7260DDC021A2A3CB00A5E3D6 /* ChatDirectionIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDirectionIconView.swift; sourceTree = "<group>"; };
+		7260DDC121A2A3CB00A5E3D6 /* ChatDirectionIconView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatDirectionIconView.xib; sourceTree = "<group>"; };
+		7267D9FF213502AE004AF9AF /* ETORootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETORootCoordinator.swift; sourceTree = "<group>"; };
 		7267DA0221350327004AF9AF /* ETOCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCoordinator.swift; sourceTree = "<group>"; };
 		7267DA0321350327004AF9AF /* ETOActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOActions.swift; sourceTree = "<group>"; };
 		7267DA0421350327004AF9AF /* ETOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOViewController.swift; sourceTree = "<group>"; };
@@ -2350,6 +2372,19 @@
 			path = Gateway;
 			sourceTree = "<group>";
 		};
+		7260DDB821A2A2B500A5E3D6 /* directionViews */ = {
+			isa = PBXGroup;
+			children = (
+				7260DDB921A2A2CC00A5E3D6 /* ChatDirectionLabelViewAdapter.swift */,
+				7260DDBA21A2A2CC00A5E3D6 /* ChatDirectionLabelView.swift */,
+				7260DDBB21A2A2CC00A5E3D6 /* ChatDirectionLabelView.xib */,
+				7260DDBF21A2A3CB00A5E3D6 /* ChatDirectionIconViewAdapter.swift */,
+				7260DDC021A2A3CB00A5E3D6 /* ChatDirectionIconView.swift */,
+				7260DDC121A2A3CB00A5E3D6 /* ChatDirectionIconView.xib */,
+			);
+			path = directionViews;
+			sourceTree = "<group>";
+		};
 		7267DA0121350317004AF9AF /* ETO */ = {
 			isa = PBXGroup;
 			children = (
@@ -3127,6 +3162,11 @@
 				73A331112194244800707D8F /* ChatActions.swift */,
 				73A331122194244800707D8F /* ChatViewController.swift */,
 				73A331132194244800707D8F /* ChatReducers.swift */,
+				7260DDB021A2A25C00A5E3D6 /* ChatDirectionCoordinator.swift */,
+				7260DDB121A2A25C00A5E3D6 /* ChatDirectionActions.swift */,
+				7260DDB221A2A25C00A5E3D6 /* ChatDirectionViewController.swift */,
+				7260DDB321A2A25C00A5E3D6 /* ChatDirectionReducers.swift */,
+				7260DDB821A2A2B500A5E3D6 /* directionViews */,
 				73A331182194248800707D8F /* Chat.storyboard */,
 			);
 			path = Chat;
@@ -4000,6 +4040,7 @@
 				72B42E7E217723DD00587403 /* PairDetailDateViewView.xib in Resources */,
 				7942D21C3BB4CBA2FC681C256E01BE57 /* BusinessView.xib in Resources */,
 				64F0077FC05CD2AC44BC6F16C2C71938 /* Button.xib in Resources */,
+				7260DDC421A2A3CB00A5E3D6 /* ChatDirectionIconView.xib in Resources */,
 				46F7A3A53678AB032E1CC75D7F95FA04 /* CybexActionView.xib in Resources */,
 				119C20AD642DDDABBE26CB6AF841B609 /* CybexAlertView.xib in Resources */,
 				5B3C22F0CD0A4F093EDD33D80F76C5C1 /* CybexLabel.xib in Resources */,
@@ -4064,6 +4105,7 @@
 				72968D312158DC4E00B0AA77 /* RecordHeaderView.xib in Resources */,
 				3B0EB65D210313B200F19C31 /* YourPortfolioHandleView.xib in Resources */,
 				3F6CBB1D8AC88D546B003B8A585E4EEB /* TradeHistoryCellView.xib in Resources */,
+				7260DDBE21A2A2CC00A5E3D6 /* ChatDirectionLabelView.xib in Resources */,
 				E4EC6E667A50D907DF7D0113D3486006 /* TradeHistoryView.xib in Resources */,
 				733714B22122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.xib in Resources */,
 				693EC4E5D05D82D8A27851ECF6FB867F /* TradeItemView.xib in Resources */,
@@ -4447,6 +4489,7 @@
 				98ED9D145EF3DAA0FD242984364B676F /* AccessoryCollectionViewCell.swift in Sources */,
 				3B824A2D2135350200D7A4A7 /* ETODetailActions.swift in Sources */,
 				3BF5B7E52134F5A800E8BFC9 /* ETODetailHeaderView.swift in Sources */,
+				7260DDB421A2A25C00A5E3D6 /* ChatDirectionCoordinator.swift in Sources */,
 				73539C502179A210008395AC /* URLPathComponent.swift in Sources */,
 				D6EF2CA9447A80749A341523EA37E613 /* AccessoryHorizentalView.swift in Sources */,
 				738FCEE9214909CC0042331A /* ZYNetworkAccessibity.m in Sources */,
@@ -4460,6 +4503,7 @@
 				728C2808215A36F70097840A /* RecordChooseActions.swift in Sources */,
 				C37CA15215CBB1B064E0514AB9D0EFE5 /* AccountOpenedOrdersView.swift in Sources */,
 				225746DE210707DD0017FA1A /* PickerReducers.swift in Sources */,
+				7260DDB721A2A25C00A5E3D6 /* ChatDirectionReducers.swift in Sources */,
 				7307A94521257BE900BD6444 /* AddressCellViewAdapter.swift in Sources */,
 				D3694E6115F5ED50F0FFE4108E64BAEE /* AccountPortfolioCell.swift in Sources */,
 				7386F2D42121735800ABC924 /* AddressHomeTableViewCell.swift in Sources */,
@@ -4501,6 +4545,7 @@
 				CB5F7115F86F33FA0B26878FC117A884 /* Bucket.swift in Sources */,
 				BD11B7517E2B6A4051899973BEAEF8BC /* BusinessActions.swift in Sources */,
 				4FEB6E47ECB698CEDE290B109E474660 /* BusinessCoordinator.swift in Sources */,
+				7260DDC221A2A3CB00A5E3D6 /* ChatDirectionIconViewAdapter.swift in Sources */,
 				56FC707000D714C2C1294918AFBB33B6 /* BusinessReducers.swift in Sources */,
 				7398BEC32181C1AE004C042E /* R.generated.swift in Sources */,
 				72968D232158CEAC00B0AA77 /* WithdrawAndDespoitRecordViewController.swift in Sources */,
@@ -4513,6 +4558,7 @@
 				7307A925212518DC00BD6444 /* SwiftIconLabel.swift in Sources */,
 				72199D8D21045D4700575226 /* TransferListActions.swift in Sources */,
 				72968D242158CEAC00B0AA77 /* WithdrawAndDespoitRecordReducers.swift in Sources */,
+				7260DDC321A2A3CB00A5E3D6 /* ChatDirectionIconView.swift in Sources */,
 				72199DA12104636900575226 /* TransferDetailViewController.swift in Sources */,
 				72199D8F21045D4700575226 /* TransferListReducers.swift in Sources */,
 				72199D6621044FD100575226 /* RechargeRecodeCoordinator.swift in Sources */,
@@ -4672,6 +4718,7 @@
 				221EC24D2105CF310059F856 /* TransferActions.swift in Sources */,
 				73539C5D2179A282008395AC /* DNSPageTitleView.swift in Sources */,
 				6B64E2B67481907BE9CFCAE4FCF346A6 /* MarketViewController.swift in Sources */,
+				7260DDBC21A2A2CC00A5E3D6 /* ChatDirectionLabelViewAdapter.swift in Sources */,
 				56C9CE8FDE2020EA4F72F21F30D27087 /* MyHistoryActions.swift in Sources */,
 				221C615121364DFF0021C007 /* ShareData.swift in Sources */,
 				D97554A68B333ECF6F33B4558E08E005 /* MyHistoryCell.swift in Sources */,
@@ -4750,6 +4797,7 @@
 				733714B52122D2B400B2ED90 /* WithdrawAddressTableViewCell.swift in Sources */,
 				7398BEBF2181BFD3004C042E /* Style.swift in Sources */,
 				728C2815215A3A910097840A /* RecordChooseCellView.swift in Sources */,
+				7260DDBD21A2A2CC00A5E3D6 /* ChatDirectionLabelView.swift in Sources */,
 				A819B2C87ADE04838AE8D44CF16C53B4 /* PairRechargeView.swift in Sources */,
 				73539C5F2179A282008395AC /* DNSPageCollectionViewFlowLayout.swift in Sources */,
 				70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */,
@@ -4793,6 +4841,7 @@
 				72EC6A5920F4612200CEAFF6 /* RechargeView.swift in Sources */,
 				221C614E213535CC0021C007 /* ShareView.swift in Sources */,
 				739EFB662181D10E00424061 /* SharedTypes.swift in Sources */,
+				7260DDB621A2A25C00A5E3D6 /* ChatDirectionViewController.swift in Sources */,
 				739EFB642181D10E00424061 /* UILongPressGestureRecognizer+RxGesture.swift in Sources */,
 				73539C512179A210008395AC /* URLMatchResult.swift in Sources */,
 				3B0EB654210313B200F19C31 /* NormalCellView.swift in Sources */,
@@ -4890,6 +4939,7 @@
 				73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */,
 				72DBCA652138D94200905303 /* ContainerView.swift in Sources */,
 				1EE747D219462D96F1597B374E8338E8 /* UserManager.swift in Sources */,
+				7260DDB521A2A25C00A5E3D6 /* ChatDirectionActions.swift in Sources */,
 				20C5C352A5EE76CE53F6F1F8C7CE1FB6 /* Utils.swift in Sources */,
 				7386F2AE21216B2200ABC924 /* TransferAddressHomeActions.swift in Sources */,
 				E3A0DE7C4852EA18DEEC292ADE0A8F49 /* Vesting.swift in Sources */,

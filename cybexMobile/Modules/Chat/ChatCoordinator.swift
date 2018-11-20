@@ -20,8 +20,12 @@ protocol ChatCoordinatorProtocol {
 
 protocol ChatStateManagerProtocol {
     var state: ChatState { get }
-
-    func switchPageState(_ state: PageState)
+    
+    func switchPageState(_ state:PageState)
+    
+    func openNewMessageVC(_ sender: UIView)
+    
+    func openNameVC(_ sender: UIView)
 }
 
 class ChatCoordinator: NavCoordinator {
@@ -72,6 +76,32 @@ extension ChatCoordinator: ChatStateManagerProtocol {
     func switchPageState(_ state: PageState) {
         DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
+        }
+    }
+    
+    func openNewMessageVC(_ sender: UIView) {
+//        self.createChatDirectionVC(sender, direction: .down, type: ChatDirectionViewController.ChatDirectionType.newMessage)
+
+    }
+    
+    func openNameVC(_ sender: UIView) {
+        self.createChatDirectionVC(sender, direction: .unknown, type: ChatDirectionViewController.ChatDirectionType.icon)
+    }
+    
+    func createChatDirectionVC(_ sender: UIView, direction: UIPopoverArrowDirection, type: ChatDirectionViewController.ChatDirectionType) {
+        guard let vc = R.storyboard.chat.chatDirectionViewController(), let mainVC = self.rootVC.topViewController as? ChatViewController else { return }
+        vc.preferredContentSize = CGSize(width: 120, height: 45)
+        vc.modalPresentationStyle = .popover
+        vc.popoverPresentationController?.sourceView = sender
+        vc.popoverPresentationController?.sourceRect = sender.bounds
+        vc.popoverPresentationController?.delegate = mainVC
+        vc.popoverPresentationController?.permittedArrowDirections = direction
+        vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.paleGrey.hexString(true)]
+        vc.viewType = type
+        vc.delegate = mainVC
+        vc.coordinator = ChatDirectionCoordinator(rootVC: self.rootVC)
+        mainVC.present(vc, animated: true) {
+            mainVC.view.superview?.cornerRadius = 4
         }
     }
 }
