@@ -41,7 +41,7 @@ class TransferAddressHomeViewController: BaseViewController {
     }
 
     override func configureObserveState() {
-        self.coordinator?.state.property.data.asObservable().subscribe(onNext: {[weak self] (data) in
+        self.coordinator?.state.data.asObservable().subscribe(onNext: {[weak self] (data) in
             guard let `self` = self else { return }
 
             if data.count == 0 {
@@ -56,14 +56,14 @@ class TransferAddressHomeViewController: BaseViewController {
 
 extension TransferAddressHomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.coordinator?.state.property.data.value.count ?? 0
+        return self.coordinator?.state.data.value.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.transferAddressHomeTableViewCell.name, for: indexPath) as? TransferAddressHomeTableViewCell else {
             return TransferAddressHomeTableViewCell()
         }
-        if let data = self.coordinator?.state.property.data.value {
+        if let data = self.coordinator?.state.data.value {
             cell.setup(data[indexPath.row], indexPath: indexPath)
             return cell
         }

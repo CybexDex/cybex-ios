@@ -11,14 +11,7 @@ import ReSwift
 import SwiftTheme
 
 func gLockupAssetsReducer(action: Action, state: LockupAssetsState?) -> LockupAssetsState {
-    return LockupAssetsState(isLoading: loadingReducer(state?.isLoading, action: action),
-                             page: pageReducer(state?.page, action: action),
-                             errorMessage: errorMessageReducer(state?.errorMessage, action: action),
-                             property: gLockupAssetsPropertyReducer(state?.property, action: action))
-}
-
-func gLockupAssetsPropertyReducer(_ state: LockupAssetsPropertyState?, action: Action) -> LockupAssetsPropertyState {
-    let state = state ?? LockupAssetsPropertyState()
+    let state = state ?? LockupAssetsState()
     switch action {
     case let action as FetchedLockupAssetsData:
         state.data.accept(lockupAssteToLockUpAssetsDate(datas: action.data))

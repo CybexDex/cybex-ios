@@ -41,7 +41,6 @@ extension String {
     }
 }
 
-
 //extension String {
 //    static private let SNAKECASE_PATTERN:String = "(\\w{0,1})_"
 //    static private let CAMELCASE_PATTERN:String = "[A-Z][a-z,\\d]*"

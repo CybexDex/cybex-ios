@@ -91,7 +91,7 @@ class CybexWebViewController: BaseWebViewController {
     }
 
     func setURL() {
-    
+
     }
 
     override func configureObserveState() {

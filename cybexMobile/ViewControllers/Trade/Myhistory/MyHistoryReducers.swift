@@ -10,18 +10,7 @@ import UIKit
 import ReSwift
 
 func myHistoryReducer(action: Action, state: MyHistoryState?) -> MyHistoryState {
-    return MyHistoryState(isLoading: loadingReducer(state?.isLoading, action: action),
-                          page: pageReducer(state?.page, action: action),
-                          errorMessage: errorMessageReducer(state?.errorMessage, action: action),
-                          property: myHistoryPropertyReducer(state?.property, action: action))
-}
-
-func myHistoryPropertyReducer(_ state: MyHistoryPropertyState?, action: Action) -> MyHistoryPropertyState {
-    let state = state ?? MyHistoryPropertyState()
-    switch action {
-    default:
-        break
-    }
+    let state = state ?? MyHistoryState()
 
     return state
 }

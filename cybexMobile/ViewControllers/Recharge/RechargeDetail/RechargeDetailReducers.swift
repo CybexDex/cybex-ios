@@ -10,14 +10,7 @@ import UIKit
 import ReSwift
 
 func rechargeDetailReducer(action: Action, state: RechargeDetailState?) -> RechargeDetailState {
-    return RechargeDetailState(isLoading: loadingReducer(state?.isLoading, action: action),
-                               page: pageReducer(state?.page, action: action),
-                               errorMessage: errorMessageReducer(state?.errorMessage, action: action),
-                               property: rechargeDetailPropertyReducer(state?.property, action: action))
-}
-
-func rechargeDetailPropertyReducer(_ state: RechargeDetailPropertyState?, action: Action) -> RechargeDetailPropertyState {
-    let state = state ?? RechargeDetailPropertyState()
+    let state = state ?? RechargeDetailState()
 
     switch action {
     case let action as FetchWithdrawInfo:

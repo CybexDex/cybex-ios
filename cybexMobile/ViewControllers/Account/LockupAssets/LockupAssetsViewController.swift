@@ -47,7 +47,7 @@ class LockupAssetsViewController: BaseViewController {
     }
 
     override func configureObserveState() {
-        self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext: {[weak self] (_) in
+        self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: {[weak self] (_) in
             guard let `self` = self else {return}
             self.endLoading()
             self.tableView.reloadData()
@@ -60,7 +60,7 @@ class LockupAssetsViewController: BaseViewController {
 
 extension LockupAssetsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let data = coordinator!.state.property.data.value
+        let data = coordinator!.state.data.value
         return data.datas.count
     }
 
@@ -68,7 +68,7 @@ extension LockupAssetsViewController: UITableViewDataSource, UITableViewDelegate
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: LockupAssetsCell.self), for: indexPath) as? LockupAssetsCell else {
             return LockupAssetsCell()
         }
-        let data = coordinator!.state.property.data.value
+        let data = coordinator!.state.data.value
 
         cell.setup(data.datas[indexPath.row], indexPath: indexPath)
         return cell

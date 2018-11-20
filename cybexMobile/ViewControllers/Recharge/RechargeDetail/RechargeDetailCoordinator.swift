@@ -128,16 +128,16 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
 
     func getGatewayFee(_ assetId: String, amount: String, address: String, isEOS: Bool) {
-        if let memoKey = self.state.property.memoKey.value {
+        if let memoKey = self.state.memoKey.value {
             let name = appData.assetInfo[assetId]?.symbol.filterJade
 
-            let memo = self.state.property.memo.value
+            let memo = self.state.memo.value
             if var amount = amount.toDouble() {
                 let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
                 amount = amount * Double(truncating: value as NSNumber)
 
                 if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId((UserManager.shared.account.value?.id)!)),
-                                                                                  to_user_id: Int32(getUserId((self.state.property.data.value?.gatewayAccount)!)),
+                                                                                  to_user_id: Int32(getUserId((self.state.data.value?.gatewayAccount)!)),
                                                                                   asset_id: Int32(getUserId(assetId)),
                                                                                   amount: Int64(amount),
                                                                                   fee_id: 0,
@@ -171,10 +171,10 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
 
     func getObjects(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, isEOS: Bool, callback:@escaping (Any) -> Void) {
         getChainId { (id) in
-            if let memoKey = self.state.property.memoKey.value {
+            if let memoKey = self.state.memoKey.value {
                 let name = appData.assetInfo[assetId]?.symbol.filterJade
 
-                let memo = self.state.property.memo.value
+                let memo = self.state.memo.value
                 let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
                     if let infos = infos as? (block_id: String, block_num: String) {
                         if var amount = amount.toDouble() {
@@ -188,7 +188,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                               expiration: Date().timeIntervalSince1970 + 10 * 3600,
                                                                               chain_id: id,
                                                                               from_user_id: Int32(getUserId((UserManager.shared.account.value?.id)!)),
-                                                                              to_user_id: Int32(getUserId((self.state.property.data.value?.gatewayAccount)!)),
+                                                                              to_user_id: Int32(getUserId((self.state.data.value?.gatewayAccount)!)),
                                                                               asset_id: Int32(getUserId(assetId)),
                                                                               receive_asset_id: Int32(getUserId(assetId)),
                                                                               amount: Int64(amount),
@@ -219,7 +219,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
 
         var finalAmount: Decimal = amount
         if feeId != AssetConfiguration.CYB {
-            if let gatewayFeeAmount = self.state.property.gatewayFee.value?.0, let gatewayFee = Decimal(string: gatewayFeeAmount.amount) {
+            if let gatewayFeeAmount = self.state.gatewayFee.value?.0, let gatewayFee = Decimal(string: gatewayFeeAmount.amount) {
                 if allAmount < gatewayFee + amount {
                     finalAmount -= gatewayFee
                     requestAmount = (amount - gatewayFee).stringValue
@@ -230,7 +230,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         } else {
             requestAmount = amount.stringValue
         }
-        if let data = self.state.property.data.value {
+        if let data = self.state.data.value {
             finalAmount -= Decimal(data.fee)
         }
         return (finalAmount, requestAmount)

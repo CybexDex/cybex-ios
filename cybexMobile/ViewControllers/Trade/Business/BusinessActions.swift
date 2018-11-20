@@ -12,14 +12,10 @@ import RxCocoa
 import RxSwift
 
 // MARK: - State
-struct BusinessState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: BusinessPropertyState
-}
+struct BusinessState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 
-struct BusinessPropertyState {
     var price: BehaviorRelay<String> = BehaviorRelay(value: "")
     var amount: BehaviorRelay<String> = BehaviorRelay(value: "")
 

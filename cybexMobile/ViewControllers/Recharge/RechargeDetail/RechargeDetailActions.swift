@@ -12,14 +12,9 @@ import RxSwift
 import RxCocoa
 
 // MARK: - State
-struct RechargeDetailState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: RechargeDetailPropertyState
-}
-
-struct RechargeDetailPropertyState {
+struct RechargeDetailState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var data: BehaviorRelay<WithdrawinfoObject?> = BehaviorRelay(value: nil)
     var memoKey: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     var gatewayFee: BehaviorRelay<(Fee, success: Bool)?> = BehaviorRelay(value: nil)

@@ -11,15 +11,9 @@ import ReSwift
 import RxCocoa
 
 // MARK: - State
-struct WithdrawAddressState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: WithdrawAddressPropertyState
-    var callback: WithdrawAddressCallbackState
-}
-
-struct WithdrawAddressPropertyState {
+struct WithdrawAddressState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var data: BehaviorRelay<[WithdrawAddress]> = BehaviorRelay(value: [])
     var selectedAddress: BehaviorRelay<WithdrawAddress?> = BehaviorRelay(value: nil)
     var selectedAsset: BehaviorRelay<String?> = BehaviorRelay(value: "")
@@ -31,9 +25,6 @@ struct WithdrawAddressDataAction: Action {
 
 struct WithdrawAddressSelectDataAction: Action {
     var data: WithdrawAddress?
-}
-
-struct WithdrawAddressCallbackState {
 }
 
 struct SetSelectedAssetAction: Action {

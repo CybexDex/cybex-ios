@@ -126,12 +126,11 @@ class ChatViewController: MessagesViewController {
             var focusView: UIView!
             if let lastView = cell.messageContainerView.viewWithTag(2018) {
                 focusView = lastView
-            }
-            else {
+            } else {
                 focusView = UIView()
                 focusView.tag = 2018
                 cell.addSubview(focusView)
-                focusView.rx.tapGesture().skip(1).asObservable().subscribe(onNext: { (ges) in
+                focusView.rx.tapGesture().skip(1).asObservable().subscribe(onNext: { (_) in
                     print(11111)
                 }).disposed(by: cell.disposeBag)
             }
@@ -140,22 +139,20 @@ class ChatViewController: MessagesViewController {
             focusView.backgroundColor = UIColor.clear
         }
 
-
         return cell
     }
-
 
     func setupData() {
         loadFirstMessages()
     }
-    
+
     func setupEvent() {
-        self.coordinator?.state.messages.asObservable().subscribe(onNext: {[weak self] (messages) in
+        self.coordinator?.state.messages.asObservable().subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
-            
+
         }).disposed(by: disposeBag)
     }
-    
+
 }
 
 extension ChatViewController: MessagesDataSource {
@@ -251,7 +248,6 @@ extension ChatViewController: MessageInputBarDelegate {
 
 }
 
-
 // MARK: - MessagesDisplayDelegate
 
 extension ChatViewController: MessagesDisplayDelegate {
@@ -279,11 +275,9 @@ extension ChatViewController: MessagesDisplayDelegate {
 // MARK: - MessagesLayoutDelegate
 
 extension ChatViewController: MessagesLayoutDelegate {
- 
+
     func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
         return CGSize(width: messagesCollectionView.bounds.width - sectionInset.left - sectionInset.right, height: 1)
     }
-
-
 
 }

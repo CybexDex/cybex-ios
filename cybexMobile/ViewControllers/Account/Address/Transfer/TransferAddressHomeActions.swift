@@ -11,15 +11,9 @@ import ReSwift
 import RxCocoa
 
 // MARK: - State
-struct TransferAddressHomeState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: TransferAddressHomePropertyState
-    var callback: TransferAddressHomeCallbackState
-}
-
-struct TransferAddressHomePropertyState {
+struct TransferAddressHomeState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var data: BehaviorRelay<[TransferAddress]> = BehaviorRelay(value: [])
     var selectedAddress: BehaviorRelay<TransferAddress?> = BehaviorRelay(value: nil)
 }
@@ -30,7 +24,4 @@ struct TransferAddressHomeDataAction: Action {
 
 struct TransferAddressSelectDataAction: Action {
     var data: TransferAddress?
-}
-
-struct TransferAddressHomeCallbackState {
 }

@@ -23,7 +23,7 @@ struct BroadcastTransactionRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     var parameters: Any? {
-       
+
         return [ApiCategory.networkBroadcast,
                 BroadcastCatogery.broadcastTransactionWithCallback.rawValue.snakeCased(),
                 [CybexWebSocketService.shared.idGenerator.currentId + 1,

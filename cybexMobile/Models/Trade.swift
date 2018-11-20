@@ -13,9 +13,9 @@ class Fee: HandyJSON {
     var assetId: String = ""
     var amount: String = ""
     var success: Bool = false
-    
+
     required init() {
-        
+
     }
     func mapping(mapper: HelpingMapper) {
         mapper <<< assetId    <-- "asset_id"
@@ -28,7 +28,7 @@ class Current: HandyJSON {
     var headBlockId: String = ""
     var lastIrreversibleBlockNum: String = ""
     required init() {
-        
+
     }
     func mapping(mapper: HelpingMapper) {
         mapper <<< headBlockId               <-- "head_block_id"

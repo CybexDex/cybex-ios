@@ -11,14 +11,10 @@ import ReSwift
 import RxCocoa
 
 // MARK: - State
-struct AddAddressState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: AddAddressPropertyState
-}
+struct AddAddressState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 
-struct AddAddressPropertyState {
     var asset: BehaviorRelay<String> = BehaviorRelay(value: "")
     var address: BehaviorRelay<String> = BehaviorRelay(value: "")
     var note: BehaviorRelay<String> = BehaviorRelay(value: "")

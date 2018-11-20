@@ -11,14 +11,9 @@ import ReSwift
 import RxCocoa
 
 // MARK: - State
-struct RechargeRecodeState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: RechargeRecodePropertyState
-}
-
-struct RechargeRecodePropertyState {
+struct RechargeRecodeState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var data: BehaviorRelay<TradeRecord?> = BehaviorRelay(value: nil)
     var asset: String = ""
     var explorers: BehaviorRelay<[BlockExplorer]?> = BehaviorRelay(value: nil)

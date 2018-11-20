@@ -104,5 +104,4 @@ extension AccountCoordinator: AccountCoordinatorProtocol {
 
 extension AccountCoordinator: AccountStateManagerProtocol {
 
-
 }

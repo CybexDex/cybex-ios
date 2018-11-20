@@ -69,7 +69,6 @@ class AppCoordinator {
         let comprehensive = BaseNavigationController()
         comprehensiveCoordinator = ComprehensiveCoordinator(rootVC: comprehensive)
         comprehensive.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navHome.key.localized(), image: R.image.ic_nav_home(), selectedImage: R.image.ic_nav_home_active())
-        
 
         let home = BaseNavigationController()
         homeCoordinator = HomeCoordinator(rootVC: home)
@@ -92,7 +91,6 @@ class AppCoordinator {
         let eto = BaseNavigationController()
         etoCoordinator = ETOCoordinator(rootVC: eto)
         eto.tabBarItem = ESTabBarItem.init(CBTabBarView(), title: R.string.localizable.navEto.key.localized(), image: R.image.ic_eto_24_px(), selectedImage: R.image.ic_eto_active_24_px())
-
 
         comprehensiveCoordinator.pushVC(ComprehensiveCoordinator.self, animated: false, context: nil)
         homeCoordinator.pushVC(HomeCoordinator.self, animated: false, context: nil)

@@ -62,9 +62,9 @@ class AddAddressViewController: BaseViewController {
     }
 
     override func configureObserveState() {
-        (self.containerView.address.content.rx.text.orEmpty <-> self.coordinator!.state.property.address).disposed(by: disposeBag)
-        (self.containerView.mark.content.rx.text.orEmpty <-> self.coordinator!.state.property.note).disposed(by: disposeBag)
-        (self.containerView.memo.content.rx.text.orEmpty <-> self.coordinator!.state.property.memo).disposed(by: disposeBag)
+        (self.containerView.address.content.rx.text.orEmpty <-> self.coordinator!.state.address).disposed(by: disposeBag)
+        (self.containerView.mark.content.rx.text.orEmpty <-> self.coordinator!.state.note).disposed(by: disposeBag)
+        (self.containerView.memo.content.rx.text.orEmpty <-> self.coordinator!.state.memo).disposed(by: disposeBag)
 
         NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification,
                                                object: self.containerView.mark.content, queue: nil) { [weak self](_) in
@@ -91,7 +91,7 @@ class AddAddressViewController: BaseViewController {
             }
         }
 
-        self.coordinator?.state.property.addressVailed.asObservable().skip(1).subscribe(onNext: { [weak self](addressSuccess) in
+        self.coordinator?.state.addressVailed.asObservable().skip(1).subscribe(onNext: { [weak self](addressSuccess) in
             guard let `self` = self else {return}
             if !addressSuccess {
                 if self.containerView.address.content.text.count != 0 {
@@ -105,8 +105,8 @@ class AddAddressViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         Observable.combineLatest(
-            self.coordinator!.state.property.addressVailed.asObservable(),
-            self.coordinator!.state.property.noteVailed.asObservable()
+            self.coordinator!.state.addressVailed.asObservable(),
+            self.coordinator!.state.noteVailed.asObservable()
             ).subscribe(onNext: { [weak self](addressSuccess, noteSuccess) in
             guard let `self` = self else { return }
             guard addressSuccess, noteSuccess else {

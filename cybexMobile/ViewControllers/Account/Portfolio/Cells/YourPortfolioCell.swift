@@ -10,13 +10,13 @@ import UIKit
 import SwiftTheme
 
 class YourPortfolioCell: BaseTableViewCell {
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     @IBOutlet weak var yourPortfolioCellView: YourPorfolioView!
-    
+
     override func setup(_ data: Any?, indexPath: IndexPath) {
         yourPortfolioCellView.data = data
-    }    
+    }
 }

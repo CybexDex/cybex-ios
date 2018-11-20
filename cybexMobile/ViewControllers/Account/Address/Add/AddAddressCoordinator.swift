@@ -75,7 +75,7 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
             }).cauterize()
 
         case .withdraw:
-            if let assetInfo = appData.assetInfo[self.state.property.asset.value] {
+            if let assetInfo = appData.assetInfo[self.state.asset.value] {
 
                 RechargeDetailCoordinator.verifyAddress(assetInfo.symbol.filterJade, address: address, callback: { (isSuccess) in
                     self.store.dispatch(VerificationAddressAction(success: isSuccess))
@@ -101,12 +101,12 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
 
         if type == .withdraw {
             AddressManager.shared.addWithDrawAddress(WithdrawAddress(id: AddressManager.shared.getUUID(),
-                                                                     name: self.state.property.note.value,
-                                                                     address: self.state.property.address.value,
-                                                                     currency: self.state.property.asset.value,
-                                                                     memo: self.state.property.memo.value))
+                                                                     name: self.state.note.value,
+                                                                     address: self.state.address.value,
+                                                                     currency: self.state.asset.value,
+                                                                     memo: self.state.memo.value))
         } else {
-            AddressManager.shared.addTransferAddress(TransferAddress(id: AddressManager.shared.getUUID(), name: self.state.property.note.value, address: self.state.property.address.value))
+            AddressManager.shared.addTransferAddress(TransferAddress(id: AddressManager.shared.getUUID(), name: self.state.note.value, address: self.state.address.value))
         }
     }
 

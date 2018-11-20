@@ -10,15 +10,7 @@ import UIKit
 import ReSwift
 
 func transferAddressHomeReducer(action: Action, state: TransferAddressHomeState?) -> TransferAddressHomeState {
-    return TransferAddressHomeState(isLoading: loadingReducer(state?.isLoading, action: action),
-                                    page: pageReducer(state?.page, action: action),
-                                    errorMessage: errorMessageReducer(state?.errorMessage, action: action),
-                                    property: transferAddressHomePropertyReducer(state?.property, action: action),
-                                    callback: state?.callback ?? TransferAddressHomeCallbackState())
-}
-
-func transferAddressHomePropertyReducer(_ state: TransferAddressHomePropertyState?, action: Action) -> TransferAddressHomePropertyState {
-    let state = state ?? TransferAddressHomePropertyState()
+    let state = state ?? TransferAddressHomeState()
 
     switch action {
     case let action as TransferAddressHomeDataAction:

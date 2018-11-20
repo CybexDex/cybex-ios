@@ -10,14 +10,7 @@ import UIKit
 import ReSwift
 
 func rechargeRecodeReducer(action: Action, state: RechargeRecodeState?) -> RechargeRecodeState {
-    return RechargeRecodeState(isLoading: loadingReducer(state?.isLoading, action: action),
-                               page: pageReducer(state?.page, action: action),
-                               errorMessage: errorMessageReducer(state?.errorMessage, action: action),
-                               property: rechargeRecodePropertyReducer(state?.property, action: action))
-}
-
-func rechargeRecodePropertyReducer(_ state: RechargeRecodePropertyState?, action: Action) -> RechargeRecodePropertyState {
-    var state = state ?? RechargeRecodePropertyState()
+    var state = state ?? RechargeRecodeState()
 
     switch action {
     case let action as FetchDepositRecordsAction:

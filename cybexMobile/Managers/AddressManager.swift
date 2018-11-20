@@ -108,7 +108,6 @@ class AddressManager {
         return false
     }
 
-
     // MARK: - - Transfer
 
     func getTransferAddressList() -> [TransferAddress] {

@@ -92,7 +92,7 @@ class TradeHistoryViewController: BaseViewController {
     }
 
     override func configureObserveState() {
-        self.coordinator!.state.property.data.asObservable()
+        self.coordinator!.state.data.asObservable()
             .subscribe(onNext: {[weak self] (_) in
                 guard let `self` = self else { return }
 
@@ -103,8 +103,8 @@ class TradeHistoryViewController: BaseViewController {
     }
 
     func convertToData() {
-        if let data = self.coordinator?.state.property.data.value {
-            
+        if let data = self.coordinator?.state.data.value {
+
             var showData: [TradeHistoryViewModel] = []
 
             for itemData in data {
@@ -123,7 +123,7 @@ class TradeHistoryViewController: BaseViewController {
                 let quotePrecision = pow(10, quoteInfo.precision)
 
                 if base["asset_id"].stringValue == pair?.base {
-                
+
                     let quoteVolume = Decimal(string: quote["amount"].stringValue)! / quotePrecision
                     let baseVolume = Decimal(string: base["amount"].stringValue)! / basePrecision
                     let payVolume = Decimal(string: receive["amount"].stringValue)! / quotePrecision
@@ -138,11 +138,10 @@ class TradeHistoryViewController: BaseViewController {
                         baseVolume: receiveVolume.stringValue.suffixNumber(digitNum: tradePrice.pricision),
                         time: time.dateFromISO8601!.string(withFormat: "HH:mm:ss"))
                     showData.append(viewModel)
-                }
-                else {
+                } else {
                     let quoteVolume = Decimal(string: base["amount"].stringValue)! / quotePrecision
                     let baseVolume = Decimal(string: quote["amount"].stringValue)! / basePrecision
-                    
+
                     let payVolume = Decimal(string: pay["amount"].stringValue)! / quotePrecision
                     let receiveVolume = Decimal(string: receive["amount"].stringValue)! / basePrecision
 

@@ -87,7 +87,7 @@ class OrderBookViewController: BaseViewController {
     }
 
     override func configureObserveState() {
-        self.coordinator!.state.property.data.asObservable().skip(1).distinctUntilChanged()
+        self.coordinator!.state.data.asObservable().skip(1).distinctUntilChanged()
             .subscribe(onNext: {[weak self] (result) in
                 guard let `self` = self else { return }
                 if let parentVC = self.parent?.parent as? TradeViewController {
@@ -101,7 +101,7 @@ class OrderBookViewController: BaseViewController {
                     self.contentView.tableView.isHidden = false
                     self.coordinator?.updateMarketListHeight(500)
                 } else {
-                    if self.coordinator?.state.property.pair.value == self.pair {
+                    if self.coordinator?.state.pair.value == self.pair {
                         self.tradeView.data = result
                     }
                 }

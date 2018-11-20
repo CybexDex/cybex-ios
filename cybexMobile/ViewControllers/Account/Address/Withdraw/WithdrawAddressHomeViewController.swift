@@ -40,13 +40,13 @@ class WithdrawAddressHomeViewController: BaseViewController {
 
     override func configureObserveState() {
 
-        self.coordinator?.state.property.data.asObservable().subscribe(onNext: {[weak self] (data) in
+        self.coordinator?.state.data.asObservable().subscribe(onNext: {[weak self] (data) in
             guard let `self` = self, data.count > 0 else { return }
 
             self.coordinator?.fetchAddressData()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        self.coordinator?.state.property.addressData.asObservable().subscribe(onNext: {[weak self] (_) in
+        self.coordinator?.state.addressData.asObservable().subscribe(onNext: {[weak self] (_) in
             guard let `self` = self else { return }
             self.endLoading()
             self.tableView.reloadData()
@@ -56,7 +56,7 @@ class WithdrawAddressHomeViewController: BaseViewController {
 
 extension WithdrawAddressHomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.coordinator?.state.property.data.value.count ?? 0
+        return self.coordinator?.state.data.value.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,7 +64,7 @@ extension WithdrawAddressHomeViewController: UITableViewDelegate, UITableViewDat
             return WithdrawAddressHomeTableViewCell()
         }
 
-        if let data = self.coordinator?.state.property.data.value {
+        if let data = self.coordinator?.state.data.value {
             cell.setup(data[indexPath.row], indexPath: indexPath)
 
             return cell

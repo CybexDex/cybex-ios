@@ -38,7 +38,7 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
                     if case let data?? = data {
                         self.store.dispatch(FetchAddressInfo(data: data))
                     } else {
-                        self.state.property.data.accept(nil)
+                        self.state.data.accept(nil)
                     }
                 }
             }
@@ -53,7 +53,7 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
                     if case let data?? = data {
                         self.store.dispatch(FetchAddressInfo(data: data))
                     } else {
-                        self.state.property.data.accept(nil)
+                        self.state.data.accept(nil)
                     }
                 }
             }

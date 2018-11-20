@@ -8,15 +8,12 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
 
 // MARK: - State
-struct OpenedOrdersState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: OpenedOrdersPropertyState
-}
+struct OpenedOrdersState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 
-struct OpenedOrdersPropertyState {
-  var data: [Any] = []
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+    var data: [Any] = []
 }

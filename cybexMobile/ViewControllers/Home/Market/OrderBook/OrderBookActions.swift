@@ -13,14 +13,9 @@ import RxCocoa
 import RxSwift
 
 // MARK: - State
-struct OrderBookState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: OrderBookPropertyState
-}
-
-struct OrderBookPropertyState {
+struct OrderBookState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var data: BehaviorRelay<OrderBook?> = BehaviorRelay(value: nil)
     var pair: BehaviorRelay<Pair?> = BehaviorRelay(value: nil)
 }

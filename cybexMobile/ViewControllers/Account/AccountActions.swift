@@ -13,19 +13,13 @@ import RxSwift
 import RxCocoa
 
 // MARK: - State
-struct AccountState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: AccountPropertyState
-}
+struct AccountState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 
-struct AccountPropertyState {
-
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 }
 
 struct AccountViewModel {
   var leftImage: UIImage?
   var name: String = ""
 }
-

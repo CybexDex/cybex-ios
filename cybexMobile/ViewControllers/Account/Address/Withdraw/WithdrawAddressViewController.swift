@@ -42,8 +42,7 @@ class WithdrawAddressViewController: BaseViewController {
         if !self.coordinator!.isEOS() {
             self.leftLabel.locali = R.string.localizable.account_or_address.key
         }
-        
-        
+
         self.tableView.register(UINib(resource: R.nib.withdrawAddressTableViewCell), forCellReuseIdentifier: R.nib.withdrawAddressTableViewCell.name)
 
     }
@@ -59,7 +58,7 @@ class WithdrawAddressViewController: BaseViewController {
     }
 
     override func configureObserveState() {
-        self.coordinator?.state.property.data.asObservable().subscribe(onNext: {[weak self] (data) in
+        self.coordinator?.state.data.asObservable().subscribe(onNext: {[weak self] (data) in
             guard let `self` = self else { return }
 
             if data.count == 0 {
@@ -78,16 +77,16 @@ class WithdrawAddressViewController: BaseViewController {
 
 extension WithdrawAddressViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.coordinator?.state.property.data.value.count ?? 0
+        return self.coordinator?.state.data.value.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.withdrawAddressTableViewCell.name, for: indexPath) as? WithdrawAddressTableViewCell else {
             return WithdrawAddressTableViewCell()
-            
+
         }
 
-        if let data = self.coordinator?.state.property.data.value {
+        if let data = self.coordinator?.state.data.value {
             cell.setup(data[indexPath.row], indexPath: indexPath)
         }
 

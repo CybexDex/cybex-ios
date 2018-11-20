@@ -11,29 +11,29 @@ import TinyConstraints
 
 @IBDesignable
 class RechargeHeaderView: CybexBaseView {
-    
+
     @IBOutlet weak var hiddenButton: UIButton!
     @IBOutlet weak var searchTextField: UITextField!
     var clearSearchBtn: UIButton!
-    
+
     @IBOutlet weak var hiddenLabel: UILabel!
     @IBAction func hiddenAssetAction(_ sender: UIButton) {
         self.next?.sendEventWith(Event.rechargeHiddenAsset.rawValue, userinfo: ["data": !sender.isSelected])
         sender.isSelected = !sender.isSelected
     }
-    enum Event:String {
+    enum Event: String {
         case rechargeHeaderViewDidClicked
         case rechargeHiddenAsset
         case rechargeSortedName
     }
-    
-    override func setup(){
+
+    override func setup() {
         super.setup()
         self.showTouchFeedback = false
         setupUI()
         setupSubViewEvent()
     }
-    
+
     func setupUI() {
         self.searchTextField.placeholder = R.string.localizable.recharge_search_asset.key.localized()
         let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
@@ -42,7 +42,7 @@ class RechargeHeaderView: CybexBaseView {
         self.searchTextField.leftViewMode = .always
         leftView.addSubview(leftImageView)
         self.searchTextField.leftView = leftView
-        
+
         self.searchTextField.rightViewMode = .whileEditing
         let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
         self.clearSearchBtn = UIButton(frame: CGRect(x: 10, y: 10, width: 16, height: 16))
@@ -50,26 +50,25 @@ class RechargeHeaderView: CybexBaseView {
         rightView.addSubview(clearSearchBtn)
         self.searchTextField.rightView = rightView
         self.clearSearchBtn.addTarget(self, action: #selector(btnClick), for: UIControl.Event.touchUpInside)
-        
+
         self.searchTextField.setPlaceHolderTextColor(UIColor.steel50)
     }
-    
+
     func setupSubViewEvent() {
-        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification
-        , object: self.searchTextField, queue: nil) { [weak self](notification) in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: self.searchTextField, queue: nil) { [weak self](_) in
             guard let `self` = self, let text = self.searchTextField.text else { return }
             self.next?.sendEventWith(Event.rechargeSortedName.rawValue, userinfo: ["data": text])
         }
-        
-        hiddenLabel.rx.tapGesture().when(GestureRecognizerState.recognized).asObservable().subscribe(onNext: { [weak self](tap) in
+
+        hiddenLabel.rx.tapGesture().when(GestureRecognizerState.recognized).asObservable().subscribe(onNext: { [weak self](_) in
             guard let `self` = self else { return }
             self.hiddenAssetAction(self.hiddenButton)
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
-    
+
     @objc func btnClick() {
         self.searchTextField.text = ""
         self.next?.sendEventWith(Event.rechargeSortedName.rawValue, userinfo: ["data": ""])
     }
-    
+
 }

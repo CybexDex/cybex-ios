@@ -13,12 +13,7 @@ import RxCocoa
 import RxSwift
 
 // MARK: - State
-struct TradeState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: TradePropertyState
-}
-
-struct TradePropertyState {
+struct TradeState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 }

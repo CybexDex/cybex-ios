@@ -11,7 +11,7 @@
 import UIKit
 
 open class RPCircularProgress: UIView {
-  
+
     // MARK: - Completion
 
     public typealias CompletionBlock = () -> Void
@@ -233,7 +233,7 @@ open class RPCircularProgress: UIView {
 
             progressLayer.removeAnimation(forKey: AnimationKeys.progress)
             animate(progress,
-                    currentProgress:currentProgress,
+                    currentProgress: currentProgress,
                     initialDelay: initialDelay,
                     duration: animationDuration,
                     completion: completion)

@@ -93,14 +93,14 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
     }
 
     func changePercent(_ percent: Double, isBuy: Bool, assetID: String, pricision: Int) {
-        let feeAmount = self.state.property.feeAmount.value
-        let balance = self.state.property.balance.value
-        let feeId = self.state.property.feeID.value
+        let feeAmount = self.state.feeAmount.value
+        let balance = self.state.balance.value
+        let feeId = self.state.feeID.value
 
-        if let price = self.state.property.price.value.toDouble(), price != 0, feeAmount != 0, balance != 0 {
+        if let price = self.state.price.value.toDouble(), price != 0, feeAmount != 0, balance != 0 {
             var amount: Decimal = Decimal(floatLiteral: 0)
 
-            let priceDecimal = self.state.property.price.value.toDecimal()!
+            let priceDecimal = self.state.price.value.toDecimal()!
             let percentDecimal = Decimal(floatLiteral: percent)
 
             if isBuy {
@@ -141,14 +141,14 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
     func postLimitOrder(_ pair: Pair, isBuy: Bool, callback: @escaping (_ success: Bool) -> Void) {
         guard let baseInfo = appData.assetInfo[pair.base],
             let quoteInfo = appData.assetInfo[pair.quote],
-            let feeInfo = appData.assetInfo[self.state.property.feeID.value],
+            let feeInfo = appData.assetInfo[self.state.feeID.value],
             let userid = UserManager.shared.account.value?.id,
-            self.state.property.feeAmount.value != 0,
-            let curAmount = self.state.property.amount.value.toDouble(), curAmount != 0,
-            let price = self.state.property.price.value.toDouble(), price != 0 else { return }
-        guard  let curAmountDecimal = self.state.property.amount.value.toDecimal(),
+            self.state.feeAmount.value != 0,
+            let curAmount = self.state.amount.value.toDouble(), curAmount != 0,
+            let price = self.state.price.value.toDouble(), price != 0 else { return }
+        guard  let curAmountDecimal = self.state.amount.value.toDecimal(),
             curAmountDecimal != 0,
-            let priceDecimal = self.state.property.price.value.toDecimal(),
+            let priceDecimal = self.state.price.value.toDecimal(),
             priceDecimal != 0 else { return }
 
         let total = curAmountDecimal * priceDecimal
@@ -165,7 +165,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
             Int64((curAmountDecimal * pow(10, quoteInfo.precision)).string(digits: 0, roundingMode: .down)) :
             Int64((total * pow(10, baseInfo.precision)).string(digits: 0, roundingMode: .down))
 
-        let feeAmount = Int64(round(self.state.property.feeAmount.value.doubleValue * pow(10, feeInfo.precision.double)))
+        let feeAmount = Int64(round(self.state.feeAmount.value.doubleValue * pow(10, feeInfo.precision.double)))
 
         blockchainParams { (blockchainParams) in
             if let jsonStr = BitShareCoordinator.getLimitOrder(blockchainParams.block_num,
@@ -178,7 +178,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
                                                                amount: amount!,
                                                                receive_asset_id: receiveAssetID.getID,
                                                                receive_amount: receiveAmount!,
-                                                               fee_id: self.state.property.feeID.value.getID,
+                                                               fee_id: self.state.feeID.value.getID,
                                                                fee_amount: feeAmount) {
 
                 let request = BroadcastTransactionRequest(response: { (data) in
@@ -198,29 +198,29 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
     func checkBalance(_ pair: Pair, isBuy: Bool) -> Bool? {
         guard let baseInfo = appData.assetInfo[pair.base],
             let quoteInfo = appData.assetInfo[pair.quote],
-            self.state.property.feeAmount.value != 0,
-            let curAmount = self.state.property.amount.value.toDouble(), curAmount != 0,
-            let price = self.state.property.price.value.toDouble(), price != 0 else { return nil }
+            self.state.feeAmount.value != 0,
+            let curAmount = self.state.amount.value.toDouble(), curAmount != 0,
+            let price = self.state.price.value.toDouble(), price != 0 else { return nil }
 
         var total: Decimal = Decimal(floatLiteral: 0)
-        let priceDecimal = self.state.property.price.value.toDecimal()!
-        let amountDecimal = self.state.property.amount.value.toDecimal()!
+        let priceDecimal = self.state.price.value.toDecimal()!
+        let amountDecimal = self.state.amount.value.toDecimal()!
 
         if isBuy {
-            if self.state.property.feeID.value == baseInfo.id {
-                total = priceDecimal * amountDecimal + self.state.property.feeAmount.value
+            if self.state.feeID.value == baseInfo.id {
+                total = priceDecimal * amountDecimal + self.state.feeAmount.value
             } else {
                 total = priceDecimal * amountDecimal
             }
         } else {
-            if self.state.property.feeID.value == quoteInfo.id {
-                total = amountDecimal + self.state.property.feeAmount.value
+            if self.state.feeID.value == quoteInfo.id {
+                total = amountDecimal + self.state.feeAmount.value
             } else {
                 total = amountDecimal
             }
 
         }
-        let balanceDouble = self.state.property.balance.value.doubleValue
+        let balanceDouble = self.state.balance.value.doubleValue
         let totalDouble = total.doubleValue
 
         if balanceDouble >= totalDouble {

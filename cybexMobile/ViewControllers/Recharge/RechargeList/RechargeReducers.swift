@@ -16,16 +16,16 @@ func rechargeReducer(action: Action, state: RechargeState?) -> RechargeState {
     case let action as FecthDepositIds:
         state.depositData.accept(filterData(action.data))
         state.depositIds.accept(filterData(action.data))
-        
+
     case let action as FecthWithdrawIds:
         state.withdrawData.accept(filterData(action.data))
         state.withdrawIds.accept(filterData(action.data))
-        
+
     case let action as SortedByEmptyAssetAction:
         state.isEmpty.accept(action.data)
         state.depositIds.accept(filterEmptyOrSortedNameTrades(state.depositData.value, isEmpty: state.isEmpty.value, name: state.sortedName.value))
         state.withdrawIds.accept(filterEmptyOrSortedNameTrades(state.withdrawData.value, isEmpty: state.isEmpty.value, name: state.sortedName.value))
-      
+
     case let action as SortedByNameAssetAction:
         state.sortedName.accept(action.data)
         state.depositIds.accept(filterEmptyOrSortedNameTrades(state.depositData.value, isEmpty: state.isEmpty.value, name: state.sortedName.value))
@@ -68,15 +68,13 @@ func filterData(_ trades: [Trade]) -> [Trade] {
     return data
 }
 
-
 func filterEmptyOrSortedNameTrades(_ trades: [Trade], isEmpty: Bool, name: String) -> [Trade] {
     if name.isEmpty {
         if isEmpty {
             return trades.filter({$0.amount != "0"})
         }
         return trades
-    }
-    else {
+    } else {
         let data = trades.filter({ (trade) -> Bool in
             guard let tradeInfo = appData.assetInfo[trade.id] else { return false }
             return tradeInfo.symbol.filterJade.contains(name.uppercased())
@@ -87,4 +85,3 @@ func filterEmptyOrSortedNameTrades(_ trades: [Trade], isEmpty: Bool, name: Strin
         return data
     }
 }
-

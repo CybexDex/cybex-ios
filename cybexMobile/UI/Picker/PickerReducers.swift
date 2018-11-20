@@ -14,4 +14,3 @@ func pickerReducer(action: Action, state: PickerState?) -> PickerState {
 
     return state
 }
-

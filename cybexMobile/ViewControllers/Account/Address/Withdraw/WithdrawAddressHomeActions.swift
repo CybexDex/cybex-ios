@@ -11,12 +11,14 @@ import ReSwift
 import RxCocoa
 
 // MARK: - State
-struct WithdrawAddressHomeState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: WithdrawAddressHomePropertyState
-    var callback: WithdrawAddressHomeCallbackState
+struct WithdrawAddressHomeState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+    typealias WithdrawAddressHomeData = (viewModel: WithdrawAddressHomeViewModel, addressData: [WithdrawAddress])
+
+    var data: BehaviorRelay<[WithdrawAddressHomeViewModel]> = BehaviorRelay(value: [])
+    var selectedViewModel: BehaviorRelay<WithdrawAddressHomeData?> = BehaviorRelay(value: nil)
+    var addressData: BehaviorRelay<[String: [WithdrawAddress]]> = BehaviorRelay(value: [:])
 }
 
 struct WithdrawAddressHomeViewModel {
@@ -26,21 +28,10 @@ struct WithdrawAddressHomeViewModel {
     var model: Trade = Trade()
 }
 
-struct WithdrawAddressHomePropertyState {
-    typealias WithdrawAddressHomeData = (viewModel: WithdrawAddressHomeViewModel, addressData: [WithdrawAddress])
-
-    var data: BehaviorRelay<[WithdrawAddressHomeViewModel]> = BehaviorRelay(value: [])
-    var selectedViewModel: BehaviorRelay<WithdrawAddressHomeData?> = BehaviorRelay(value: nil)
-    var addressData: BehaviorRelay<[String: [WithdrawAddress]]> = BehaviorRelay(value: [:])
-}
-
 struct WithdrawAddressHomeSelectedAction: Action {
     var index: Int
 }
 
 struct WithdrawAddressHomeAddressDataAction: Action {
     var data: [String: [WithdrawAddress]]
-}
-
-struct WithdrawAddressHomeCallbackState {
 }

@@ -16,7 +16,7 @@ protocol OpenedOrdersCoordinatorProtocol {
 // 业务处理
 protocol OpenedOrdersStateManagerProtocol {
     var state: OpenedOrdersState { get }
-    
+
     func cancelOrder(_ orderID: String, feeId: String, callback: @escaping (_ success: Bool) -> Void)
 }
 
@@ -29,18 +29,18 @@ class OpenedOrdersCoordinator: NavCoordinator {
 }
 
 extension OpenedOrdersCoordinator: OpenedOrdersCoordinatorProtocol {
-    
+
 }
 
 extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     var state: OpenedOrdersState {
         return store.state
     }
-    
+
     func cancelOrder(_ orderID: String, feeId: String, callback: @escaping (_ success: Bool) -> Void) {
         guard let userid = UserManager.shared.account.value?.id else { return }
         guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0) else { return }
-        
+
         calculateFee(operation,
                      focusAssetId: feeId,
                      operationID: .limitOrderCancel, filterRepeat: false) { (success, amount, assetID) in
@@ -57,12 +57,12 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
                                     order_id: orderID.getID,
                                     fee_id: assetID.getID,
                                     fee_amount: Int64(amount.doubleValue * pow(10, asset.precision.double))) {
-                                    
+
                                     print("blockchainParams:\(jsonStr)")
-                                    
+
                                     let request = BroadcastTransactionRequest(response: { (data) in
                                         print("提交信息---\(data)")
-                                        
+
                                         if String(describing: data) == "<null>" {
                                             callback(true)
                                         } else {

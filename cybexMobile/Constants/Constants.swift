@@ -239,7 +239,7 @@ class AssetConfiguration {
     static var ETH = "1.3.2"
     static var EOS = "1.3.4"
     static let USDT = "1.3.27"
-    
+
     // 测试
 //    static var CYB = "1.3.0"
 //    static var USDT = "1.3.56"

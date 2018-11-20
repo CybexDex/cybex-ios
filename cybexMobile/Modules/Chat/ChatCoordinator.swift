@@ -20,24 +20,24 @@ protocol ChatCoordinatorProtocol {
 
 protocol ChatStateManagerProtocol {
     var state: ChatState { get }
-    
-    func switchPageState(_ state:PageState)
+
+    func switchPageState(_ state: PageState)
 }
 
 class ChatCoordinator: NavCoordinator {
     var store = Store(
         reducer: gChatReducer,
         state: nil,
-        middleware:[trackingMiddleware]
+        middleware: [trackingMiddleware]
     )
-    
+
     var state: ChatState {
         return store.state
     }
 
     let service = ChatService(FCUUID.uuid())
-    
-    override class func start(_ root: BaseNavigationController, context:RouteContext? = nil) -> BaseViewController {
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
 //        let vc = R.storyboard.chat.chatViewController()!
 //        let coordinator = ChatCoordinator(rootVC: root)
 //        vc.coordinator = coordinator
@@ -70,7 +70,7 @@ extension ChatCoordinator: ChatCoordinatorProtocol {
 }
 
 extension ChatCoordinator: ChatStateManagerProtocol {
-    func switchPageState(_ state:PageState) {
+    func switchPageState(_ state: PageState) {
         DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }

@@ -146,11 +146,11 @@ class BusinessViewController: BaseViewController {
 
         guard let baseInfo = appData.assetInfo[(self.pair?.base)!],
             let quoteInfo = appData.assetInfo[(self.pair?.quote)!],
-            let _ = appData.assetInfo[(self.coordinator?.state.property.feeID.value)!],
-            self.coordinator?.state.property.feeAmount.value != 0,
-            let curAmount = self.coordinator?.state.property.amount.value,
+            let _ = appData.assetInfo[(self.coordinator?.state.feeID.value)!],
+            self.coordinator?.state.feeAmount.value != 0,
+            let curAmount = self.coordinator?.state.amount.value,
             let decimalAmount = curAmount.toDecimal(), decimalAmount != 0,
-            let price = self.coordinator?.state.property.price.value,
+            let price = self.coordinator?.state.price.value,
             let decimalPrice = price.toDecimal(), decimalPrice != 0 else { return }
 
         let openedOrderDetailView = StyleContentView(frame: .zero)
@@ -170,15 +170,15 @@ class BusinessViewController: BaseViewController {
 
     override func configureObserveState() {
 
-        (self.containerView.amountTextfield.rx.text.orEmpty <-> self.coordinator!.state.property.amount).disposed(by: disposeBag)
-        (self.containerView.priceTextfield.rx.text.orEmpty <-> self.coordinator!.state.property.price).disposed(by: disposeBag)
+        (self.containerView.amountTextfield.rx.text.orEmpty <-> self.coordinator!.state.amount).disposed(by: disposeBag)
+        (self.containerView.priceTextfield.rx.text.orEmpty <-> self.coordinator!.state.price).disposed(by: disposeBag)
 
         self.addObserverSubscribeAction()
         self.addNotificationSubscribeAction()
         self.addUserManagerObserverSubscribeAction()
 
         //balance
-        self.coordinator?.state.property.balance.asObservable().skip(1).subscribe(onNext: {[weak self] (balance) in
+        self.coordinator?.state.balance.asObservable().skip(1).subscribe(onNext: {[weak self] (balance) in
             guard let `self` = self else { return }
             guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote], balance != 0 else {
                 self.containerView.balance.text = "--"
@@ -201,7 +201,7 @@ class BusinessViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         //fee
-        Observable.combineLatest(coordinator!.state.property.feeID.asObservable(), coordinator!.state.property.feeAmount.asObservable()).subscribe(onNext: {[weak self] (feeId, feeAmount) in
+        Observable.combineLatest(coordinator!.state.feeID.asObservable(), coordinator!.state.feeAmount.asObservable()).subscribe(onNext: {[weak self] (feeId, feeAmount) in
             guard let `self` = self else { return }
 
             guard let info = appData.assetInfo[feeId] else {
@@ -212,10 +212,10 @@ class BusinessViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         //total
-        Observable.combineLatest(coordinator!.state.property.feeID.asObservable(),
-                                 self.coordinator!.state.property.amount,
-                                 self.coordinator!.state.property.price,
-                                 coordinator!.state.property.feeAmount.asObservable())
+        Observable.combineLatest(coordinator!.state.feeID.asObservable(),
+                                 self.coordinator!.state.amount,
+                                 self.coordinator!.state.price,
+                                 coordinator!.state.feeAmount.asObservable())
             .subscribe(onNext: {[weak self] (_, amount, price, fee) in
                 guard let `self` = self else { return }
                 guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base] else {
@@ -262,7 +262,7 @@ class BusinessViewController: BaseViewController {
 
     func addObserverSubscribeAction() {
         //RMB
-        self.coordinator!.state.property.price.subscribe(onNext: {[weak self] (text) in
+        self.coordinator!.state.price.subscribe(onNext: {[weak self] (text) in
             guard let `self` = self else { return }
             self.checkBalance()
             guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base],
@@ -274,7 +274,7 @@ class BusinessViewController: BaseViewController {
             self.containerView.value.text = "≈¥" + String(describing: getAssetRMBPrice(baseInfo.id) * textDouble).formatCurrency(digitNum: 4)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        self.coordinator!.state.property.amount.subscribe(onNext: {[weak self] (_) in
+        self.coordinator!.state.amount.subscribe(onNext: {[weak self] (_) in
             guard let `self` = self else { return }
 
             self.checkBalance()
@@ -307,7 +307,7 @@ class BusinessViewController: BaseViewController {
                 return
             }
             self.containerView.amountTextfield.text = amountText.toDecimal()?.string(digits: self.amountPricision, roundingMode: .down)
-            self.coordinator?.state.property.price.accept(self.containerView.priceTextfield.text!)
+            self.coordinator?.state.price.accept(self.containerView.priceTextfield.text!)
         }
 
         NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification, object: self.containerView.amountTextfield, queue: nil) {[weak self] (_) in
@@ -331,7 +331,7 @@ class BusinessViewController: BaseViewController {
             guard let priceText = self.containerView.priceTextfield.text, priceText != "", priceText.toDouble() != 0 else {
                 return
             }
-            self.coordinator?.state.property.amount.accept(self.containerView.amountTextfield.text!)
+            self.coordinator?.state.amount.accept(self.containerView.amountTextfield.text!)
         }
 
         NotificationCenter.default.addObserver(forName: UITextField.textDidBeginEditingNotification, object: self.containerView.amountTextfield, queue: nil) {[weak self](_) in

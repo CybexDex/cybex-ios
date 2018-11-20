@@ -1,4 +1,3 @@
-
 //
 //  NSObject+Extensions.swift
 //  cybexMobile

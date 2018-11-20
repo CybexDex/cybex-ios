@@ -64,7 +64,7 @@ class WithdrawDetailViewController: BaseViewController {
     }
 
     override func configureObserveState() {
-        self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext: {[weak self] (addressInfo) in
+        self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: {[weak self] (addressInfo) in
             guard let `self` = self else {return}
             self.endLoading()
             self.isFetching = false

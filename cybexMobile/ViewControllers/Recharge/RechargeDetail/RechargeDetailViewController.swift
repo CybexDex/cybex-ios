@@ -118,7 +118,7 @@ class RechargeDetailViewController: BaseViewController {
                     let balance = self.balance,
                     let balanceInfo = appData.assetInfo[balance.assetType] {
 
-                    if let coordinator =  self.coordinator, let value = coordinator.state.property.data.value, let precision = value.precision {
+                    if let coordinator =  self.coordinator, let value = coordinator.state.data.value, let precision = value.precision {
                         self.precision = precision
                         self.contentView.amountView.content.text = checkMaxLength(text, maxLength: value.precision ?? balanceInfo.precision)
                     } else {
@@ -211,7 +211,7 @@ class RechargeDetailViewController: BaseViewController {
 
         setupEndEditingEvent()
 
-        self.coordinator?.state.property.withdrawAddress.asObservable().subscribe(onNext: { [weak self](address) in
+        self.coordinator?.state.withdrawAddress.asObservable().subscribe(onNext: { [weak self](address) in
             guard let `self` = self, let address = address else { return }
             self.contentView.addressView.content.text = address.address
             self.contentView.addressView.addressState = .success
@@ -221,7 +221,7 @@ class RechargeDetailViewController: BaseViewController {
     }
 
     func checkAmountIsAvailable(_ amount: Double) {
-        if let data = self.coordinator?.state.property.data.value {
+        if let data = self.coordinator?.state.data.value {
             self.contentView.errorView.isHidden = false
             self.contentView.withdraw.isEnable = false
             if amount < data.minValue {
@@ -243,7 +243,7 @@ class RechargeDetailViewController: BaseViewController {
     }
 
     override func configureObserveState() {
-        self.coordinator?.state.property.data.asObservable().skip(1).subscribe(onNext: {[weak self] (withdrawInfo) in
+        self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: {[weak self] (withdrawInfo) in
             guard let `self` = self, let data = withdrawInfo else { return }
             self.endLoading()
             if let precision = data.precision {
@@ -261,7 +261,7 @@ class RechargeDetailViewController: BaseViewController {
             self.contentView.amountView.textplaceholder = R.string.localizable.recharge_min.key.localized() + String(describing: data.minValue)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        self.coordinator?.state.property.gatewayFee.asObservable().subscribe(onNext: { [weak self](result) in
+        self.coordinator?.state.gatewayFee.asObservable().subscribe(onNext: { [weak self](result) in
             guard let `self` = self else { return }
             self.endLoading()
             if let data = result, data.success, let feeInfo = appData.assetInfo[data.0.assetId] {
@@ -279,7 +279,7 @@ class RechargeDetailViewController: BaseViewController {
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        (self.contentView.memoView.content.rx.text.orEmpty <-> self.coordinator!.state.property.memo).disposed(by: disposeBag)
+        (self.contentView.memoView.content.rx.text.orEmpty <-> self.coordinator!.state.memo).disposed(by: disposeBag)
     }
 
     func setFinalAmount() {
@@ -322,7 +322,7 @@ extension RechargeDetailViewController {
             return
         } else {
             if self.isTrueAddress, self.isAvalibaleAmount {
-                if let _ = self.coordinator?.state.property.gatewayFee.value, let _ = self.coordinator?.state.property.data.value {
+                if let _ = self.coordinator?.state.gatewayFee.value, let _ = self.coordinator?.state.data.value {
                     self.contentView.withdraw.isEnable = true
                 } else {
                     if let trade = self.trade, let amount = self.contentView.amountView.content.text, let address = self.contentView.addressView.content.text {
@@ -382,7 +382,7 @@ extension RechargeDetailViewController {
 extension RechargeDetailViewController {
     // 提现操作
     override func returnEnsureAction() {
-        guard let address = self.contentView.addressView.content.text, let gatewayFee = self.coordinator?.state.property.gatewayFee.value
+        guard let address = self.contentView.addressView.content.text, let gatewayFee = self.coordinator?.state.gatewayFee.value
             else { return }
         startLoading()
         self.coordinator?.getObjects(assetId: (self.trade?.id)!,

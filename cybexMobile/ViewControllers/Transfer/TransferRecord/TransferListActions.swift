@@ -12,14 +12,9 @@ import SwiftyJSON
 import RxCocoa
 
 // MARK: - State
-struct TransferListState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: TransferListPropertyState
-}
-
-struct TransferListPropertyState {
+struct TransferListState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var data: BehaviorRelay<[TransferRecordViewModel]?> = BehaviorRelay(value: nil)
 }
 

@@ -12,16 +12,13 @@ import RxCocoa
 import RxSwift
 
 // MARK: - State
-struct WithdrawDetailState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: WithdrawDetailPropertyState
+struct WithdrawDetailState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+
+    var data: BehaviorRelay<AccountAddressRecord?> = BehaviorRelay(value: nil)
 }
 
-struct WithdrawDetailPropertyState {
-  var data: BehaviorRelay<AccountAddressRecord?> = BehaviorRelay(value: nil)
-}
 struct FetchAddressInfo: Action {
-  let data: AccountAddressRecord
+    let data: AccountAddressRecord
 }

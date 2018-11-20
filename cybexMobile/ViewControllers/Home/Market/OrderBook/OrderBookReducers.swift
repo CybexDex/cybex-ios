@@ -10,14 +10,7 @@ import UIKit
 import ReSwift
 
 func orderBookReducer(action: Action, state: OrderBookState?) -> OrderBookState {
-    return OrderBookState(isLoading: loadingReducer(state?.isLoading, action: action),
-                          page: pageReducer(state?.page, action: action),
-                          errorMessage: errorMessageReducer(state?.errorMessage, action: action),
-                          property: orderBookPropertyReducer(state?.property, action: action))
-}
-
-func orderBookPropertyReducer(_ state: OrderBookPropertyState?, action: Action) -> OrderBookPropertyState {
-    let state = state ?? OrderBookPropertyState()
+    let state = state ?? OrderBookState()
 
     switch action {
     case let action as FetchedLimitData:

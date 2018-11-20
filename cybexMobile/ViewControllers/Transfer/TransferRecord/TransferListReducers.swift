@@ -11,14 +11,7 @@ import ReSwift
 import HandyJSON
 
 func transferListReducer(action: Action, state: TransferListState?) -> TransferListState {
-    return TransferListState(isLoading: loadingReducer(state?.isLoading, action: action),
-                             page: pageReducer(state?.page, action: action),
-                             errorMessage: errorMessageReducer(state?.errorMessage, action: action),
-                             property: transferListPropertyReducer(state?.property, action: action))
-}
-
-func transferListPropertyReducer(_ state: TransferListPropertyState?, action: Action) -> TransferListPropertyState {
-    let state = state ?? TransferListPropertyState()
+    let state = state ?? TransferListState()
 
     switch action {
     case let action as ReduceTansferRecordsAction :

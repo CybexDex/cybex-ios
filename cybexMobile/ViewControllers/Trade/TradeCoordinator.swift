@@ -39,7 +39,7 @@ class TradeCoordinator: NavCoordinator {
         coordinator.store.dispatch(RouteContextAction(context: context))
         return vc
     }
-    
+
     var homeVCTopConstaint: NSLayoutConstraint!
 }
 

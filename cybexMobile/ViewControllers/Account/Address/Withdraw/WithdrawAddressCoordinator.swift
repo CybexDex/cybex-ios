@@ -73,7 +73,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressCoordinatorProtocol {
 
     func openAddWithdrawAddress() {
         Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
-            if let viewmodel = coor.state.property.selectedViewModel.value {
+            if let viewmodel = coor.state.selectedViewModel.value {
                 let id = viewmodel.viewModel.model.id
                 if let vc = R.storyboard.account.addAddressViewController() {
                     vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
@@ -93,7 +93,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
 
     func refreshData() {
         Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
-            if let viewmodel = coor.state.property.selectedViewModel.value {
+            if let viewmodel = coor.state.selectedViewModel.value {
                 let id = viewmodel.viewModel.model.id
 
                 let list = AddressManager.shared.getWithDrawAddressListWith(id)
@@ -120,7 +120,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
     func isEOS() -> Bool {
         var result = false
         Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
-            if let viewmodel = coor.state.property.selectedViewModel.value {
+            if let viewmodel = coor.state.selectedViewModel.value {
                 if viewmodel.viewModel.model.id == AssetConfiguration.EOS {
                     result = true
                 }
@@ -130,7 +130,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
     }
 
     func copy() {
-        if let addressData = self.state.property.selectedAddress.value {
+        if let addressData = self.state.selectedAddress.value {
             if addressData.currency == AssetConfiguration.EOS {
                 if let memo = addressData.memo {
                     UIPasteboard.general.string = addressData.address + "(\(memo))"
@@ -146,7 +146,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
     }
 
     func confirmdelete() {
-        if let addressData = self.state.property.selectedAddress.value {
+        if let addressData = self.state.selectedAddress.value {
             self.rootVC.topViewController?.showConfirm(R.string.localizable.address_delete_confirm.key.localized(), attributes: confirmDeleteWithDrawAddress(addressData), setup: { (labels) in
                 for label in labels {
                     label.content.numberOfLines = 1
@@ -158,7 +158,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
     }
 
     func delete() {
-        if let addressData = self.state.property.selectedAddress.value {
+        if let addressData = self.state.selectedAddress.value {
             AddressManager.shared.removeWithDrawAddress(addressData.id)
 
             DispatchQueue.main.async {

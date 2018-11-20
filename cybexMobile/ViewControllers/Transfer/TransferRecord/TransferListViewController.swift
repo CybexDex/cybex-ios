@@ -42,7 +42,7 @@ class TransferListViewController: BaseViewController {
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        self.coordinator?.state.property.data.asObservable().subscribe(onNext: { [weak self](data) in
+        self.coordinator?.state.data.asObservable().subscribe(onNext: { [weak self](data) in
             guard let `self` = self else { return }
             self.endLoading()
             if self.isVisible {

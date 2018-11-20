@@ -30,7 +30,7 @@ final internal class SampleData {
     static let shared = SampleData()
 
     private init() {}
-    
+
     enum MessageTypes: UInt32, CaseIterable {
         case Text = 0
         case AttributedText = 1
@@ -41,11 +41,11 @@ final internal class SampleData {
         case Url = 6
         case Phone = 7
         case Custom = 8
-        
+
         static func random() -> MessageTypes {
             // Update as new enumerations are added
             let maxValue = Custom.rawValue
-            
+
             let rand = arc4random_uniform(maxValue+1)
             return MessageTypes(rawValue: 1)!
         }
@@ -63,7 +63,7 @@ final internal class SampleData {
     }
 
     var now = Date()
-    
+
     let messageImages: [UIImage] = [R.image.img_etologo()!, R.image.img_etologo()!]
 
     let emojis = [
@@ -74,9 +74,9 @@ final internal class SampleData {
         "😃😃😃",
         "❤️"
     ]
-    
+
     let attributes = ["Font1", "Font2", "Font3", "Font4", "Color", "Combo"]
-    
+
     let locations: [CLLocation] = [
         CLLocation(latitude: 37.3118, longitude: -122.0312),
         CLLocation(latitude: 33.6318, longitude: -100.0386),
@@ -85,7 +85,7 @@ final internal class SampleData {
         CLLocation(latitude: 35.3218, longitude: -127.4314),
         CLLocation(latitude: 39.3218, longitude: -113.3317)
     ]
-    
+
     func attributedString(with text: String) -> NSAttributedString {
         let nsString = NSString(string: text)
         var mutableAttributedString = NSMutableAttributedString(string: text)
@@ -100,7 +100,7 @@ final internal class SampleData {
         case "Font1":
             mutableAttributedString.addAttribute(NSAttributedString.Key.font, value: font, range: range)
             mutableAttributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraph, range: range)
-            mutableAttributedString.addAttribute(NSAttributedString.Key.baselineOffset, value:labelBaselineOffset(22, fontHeight: font.lineHeight), range: range)
+            mutableAttributedString.addAttribute(NSAttributedString.Key.baselineOffset, value: labelBaselineOffset(22, fontHeight: font.lineHeight), range: range)
             mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.pastelOrange, range: range)
 
         case "Font2":
@@ -115,7 +115,7 @@ final internal class SampleData {
             let msg9String = "十月一号之前就是这样，来回震荡，出不来趋势的。不过相信接下来的一个星期会有趋势出来的，破6800还是6300。应该很快出来结果，这个价位拖的时间太长了，多空都耗不起。"
             let msg9Text = NSString(string: msg9String)
             let msg9AttributedText = NSMutableAttributedString(string: String(msg9Text))
-            
+
             msg9AttributedText.addAttribute(NSAttributedString.Key.font, value: UIFont.preferredFont(forTextStyle: .body), range: NSRange(location: 0, length: msg9Text.length))
             msg9AttributedText.addAttributes([NSAttributedString.Key.font: UIFont.monospacedDigitSystemFont(ofSize: UIFont.systemFontSize, weight: UIFont.Weight.bold)], range: msg9Text.range(of: ".attributedText()"))
             msg9AttributedText.addAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)], range: msg9Text.range(of: "bold"))
@@ -125,7 +125,7 @@ final internal class SampleData {
         default:
             fatalError("Unrecognized attribute for mock message")
         }
-        
+
         return NSAttributedString(attributedString: mutableAttributedString)
     }
 
@@ -142,7 +142,7 @@ final internal class SampleData {
             return date
         }
     }
-    
+
     func randomMessageType() -> MessageTypes {
         let messageType = MessageTypes.random()
 
@@ -152,7 +152,7 @@ final internal class SampleData {
     func randomMessage(allowedSenders: [Sender]) -> ChatCommonMessage {
 
         let randomNumberSender = Int(arc4random_uniform(UInt32(allowedSenders.count)))
-        
+
         let uniqueID = NSUUID().uuidString
         let sender = allowedSenders[randomNumberSender]
         let date = dateAddingRandomTime()
@@ -198,7 +198,7 @@ final internal class SampleData {
         }
         completion(messages)
     }
-    
+
     func getAdvancedMessages(count: Int, completion: ([ChatCommonMessage]) -> Void) {
         var messages: [ChatCommonMessage] = []
         // Enable Custom Messages
@@ -209,7 +209,7 @@ final internal class SampleData {
         }
         completion(messages)
     }
-    
+
     func getMessages(count: Int, allowedSenders: [Sender], completion: ([ChatCommonMessage]) -> Void) {
         var messages: [ChatCommonMessage] = []
         // Disable Custom Messages

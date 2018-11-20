@@ -10,19 +10,7 @@ import UIKit
 import ReSwift
 
 func exchangeReducer(action: Action, state: ExchangeState?) -> ExchangeState {
-    return ExchangeState(isLoading: loadingReducer(state?.isLoading, action: action),
-                         page: pageReducer(state?.page, action: action),
-                         errorMessage: errorMessageReducer(state?.errorMessage, action: action),
-                         property: exchangePropertyReducer(state?.property, action: action))
-}
-
-func exchangePropertyReducer(_ state: ExchangePropertyState?, action: Action) -> ExchangePropertyState {
-    let state = state ?? ExchangePropertyState()
-
-    switch action {
-    default:
-        break
-    }
+    let state = state ?? ExchangeState()
 
     return state
 }

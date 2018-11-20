@@ -13,20 +13,16 @@ import RxCocoa
 import RxSwift
 
 // MARK: - State
-struct LockupAssetsState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: LockupAssetsPropertyState
+struct LockupAssetsState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+
+    var data: BehaviorRelay<LockUpAssetsVMData> = BehaviorRelay(value: LockUpAssetsVMData(datas: []))
+    var ethPrice: Double = 0
 }
 
 struct FetchedLockupAssetsData: Action {
   let data: [LockUpAssetsMData]
-}
-
-struct LockupAssetsPropertyState {
-  var data: BehaviorRelay<LockUpAssetsVMData> = BehaviorRelay(value: LockUpAssetsVMData(datas: []))
-  var ethPrice: Double = 0
 }
 
 struct LockUpAssetsVMData: Equatable {

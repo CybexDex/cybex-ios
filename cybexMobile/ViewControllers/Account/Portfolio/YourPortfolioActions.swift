@@ -8,15 +8,10 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
 
 // MARK: - State
-struct YourPortfolioState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: YourPortfolioPropertyState
+struct YourPortfolioState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 }
-
-struct YourPortfolioPropertyState {
-}
-

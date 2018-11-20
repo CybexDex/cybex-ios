@@ -102,7 +102,7 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtoco
     }
 
     func copy() {
-        if let addressData = self.state.property.selectedAddress.value {
+        if let addressData = self.state.selectedAddress.value {
             UIPasteboard.general.string = addressData.address
 
             self.rootVC.topViewController?.showToastBox(true, message: R.string.localizable.copied.key.localized())
@@ -110,7 +110,7 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtoco
     }
 
     func confirmdelete() {
-        if let addressData = self.state.property.selectedAddress.value {
+        if let addressData = self.state.selectedAddress.value {
             self.rootVC.topViewController?.showConfirm(R.string.localizable.address_delete_confirm.key.localized(), attributes: confirmDeleteTransferAddress(addressData), setup: { (labels) in
                 for label in labels {
                     label.content.numberOfLines = 1
@@ -121,7 +121,7 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtoco
     }
 
     func delete() {
-        if let addressData = self.state.property.selectedAddress.value {
+        if let addressData = self.state.selectedAddress.value {
             AddressManager.shared.removeTransferAddress(addressData.id)
 
             DispatchQueue.main.async {

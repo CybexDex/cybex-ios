@@ -8,14 +8,10 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
 
 // MARK: - State
-struct TransferDetailState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: TransferDetailPropertyState
-}
-
-struct TransferDetailPropertyState {
+struct TransferDetailState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 }

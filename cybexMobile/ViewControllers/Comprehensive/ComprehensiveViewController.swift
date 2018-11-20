@@ -14,84 +14,84 @@ import Localize_Swift
 import SwifterSwift
 
 class ComprehensiveViewController: BaseViewController {
-    
+
     var coordinator: (ComprehensiveCoordinatorProtocol & ComprehensiveStateManagerProtocol)?
-    
+
     @IBOutlet weak var contentView: ComprehensiveView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupData()
         setupUI()
         setupEvent()
         handlerUpdateVersion(nil)
     }
-    
+
     func setupNavi() {
         self.navigationController?.navigationBar.isHidden = true
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupNavi()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         self.navigationController?.navigationBar.isHidden = false
     }
-    
+
     override func refreshViewController() {
     }
-    
+
     func setupUI() {
         self.startLoading()
         self.coordinator?.setupChildrenVC(self)
     }
-    
+
     func setupData() {
         self.coordinator?.fetchData()
     }
-    
+
     func setupEvent() {
-        
+
     }
-    
+
     override func configureObserveState() {
         self.coordinator?.state.pageState.asObservable().distinctUntilChanged().subscribe(onNext: {[weak self] (state) in
             guard let `self` = self else { return }
-            
+
             switch state {
             case .initial:
                 self.coordinator?.switchPageState(PageState.refresh(type: PageRefreshType.initial))
-                
+
             case .loading(let reason):
                 if reason == .initialRefresh {
                     self.startLoading()
                 }
-                
+
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
-                
+
             case .loadMore:
                 self.coordinator?.switchPageState(.loading(reason: PageLoadReason.manualLoadMore))
-                
+
             case .noMore:
                 break
-                
+
             case .noData:
                 break
-                
+
             case .normal:
-                
+
                 break
-                
+
             case .error(let error, _):
                 self.showToastBox(false, message: error.localizedDescription)
             }
         }).disposed(by: disposeBag)
-        
+
         appData.tickerData.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
             return tickers.count == AssetConfiguration.shared.assetIds.count
             }.subscribe(onNext: { [weak self](tickers) in
@@ -110,16 +110,16 @@ class ComprehensiveViewController: BaseViewController {
                     self.contentView.hotAssetsView.adapterModelToHotAssetsView(tickerModel)
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
+
         self.coordinator?.state.announces.asObservable().subscribe(onNext: { [weak self](announces) in
             guard let `self` = self, let announces = announces else { return }
             let titles = announces.map({ (announce) -> String in
                 return announce.title
             })
             self.contentView.announceView.scrollLableView.data = titles
-            
+
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
+
         self.coordinator?.state.banners.asObservable().subscribe(onNext: { [weak self](banners) in
             guard let `self` = self, let bannerInfos = banners else { return }
             let images = bannerInfos.map({ (banner) -> String in
@@ -127,17 +127,17 @@ class ComprehensiveViewController: BaseViewController {
             })
             self.contentView.bannerView.adapterModelToETOHomeBannerView(images)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
+
         self.coordinator?.state.middleItems.asObservable().subscribe(onNext: { [weak self](middleItems) in
             guard let `self` = self, let items = middleItems else { return }
             self.contentView.middleItemsView.adapterModelToComprehensiveItemsView(items)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
+
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](_) in
             guard let `self` = self else { return }
             self.coordinator?.fetchData()
         }
-        
+
         Observable.combineLatest(self.coordinator!.state.hotPairs.asObservable(),
                                  self.coordinator!.state.middleItems.asObservable(),
                                  self.coordinator!.state.banners.asObservable(),
@@ -146,9 +146,9 @@ class ComprehensiveViewController: BaseViewController {
                                     if let _ = hotPairs, let _ = middleItems, let _ = banners, let _ = announces {
                                         self.endLoading()
                                     }
-                                    
+
                                     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
+
         NotificationCenter.default.addObserver(forName: NotificationName.NetWorkChanged, object: nil, queue: nil) { [weak self](_) in
             guard let `self` = self else { return }
             SwifterSwift.delay(milliseconds: 1000, completion: {
@@ -183,7 +183,7 @@ extension ComprehensiveViewController {
             self.coordinator?.openMarketList(Pair(base: data.base, quote: data.quote))
         }
     }
-    
+
     func openUrl(_ url: String) {
         if url.contains("cybexapp://") {
             if !UserManager.shared.isLoginIn {

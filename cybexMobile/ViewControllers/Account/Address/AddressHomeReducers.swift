@@ -10,15 +10,7 @@ import UIKit
 import ReSwift
 
 func addressHomeReducer(action: Action, state: AddressHomeState?) -> AddressHomeState {
-    return AddressHomeState(isLoading: loadingReducer(state?.isLoading, action: action),
-                            page: pageReducer(state?.page, action: action),
-                            errorMessage: errorMessageReducer(state?.errorMessage, action: action),
-                            property: addressHomePropertyReducer(state?.property, action: action),
-                            callback: state?.callback ?? AddressHomeCallbackState())
-}
-
-func addressHomePropertyReducer(_ state: AddressHomePropertyState?, action: Action) -> AddressHomePropertyState {
-    let state = state ?? AddressHomePropertyState()
+    let state = state ?? AddressHomeState()
 
     switch action {
     default:

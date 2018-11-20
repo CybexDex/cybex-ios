@@ -14,20 +14,19 @@ class HomeTitleView: UIView {
     @IBOutlet weak var volBtn: UIButton!
     @IBOutlet weak var priceBtn: UIButton!
     @IBOutlet weak var appliesBtn: UIButton!
-    
+
     @IBOutlet weak var nameL: UILabel!
     @IBOutlet weak var volL: UILabel!
     @IBOutlet weak var priceL: UILabel!
     @IBOutlet weak var appliesL: UILabel!
-    
-    
+
     enum Event: String {
         case sortedByName
         case sortedByVol
         case sortedByPrice
         case sortedByApplies
     }
-    
+
     @IBAction func sorted(_ sender: UIButton) {
         let tag = sender.tag
         clearBtnState(sender)
@@ -58,9 +57,7 @@ class HomeTitleView: UIView {
             break
         }
     }
-    
-   
-    
+
     func clearBtnState(_ sender: UIButton) {
         volBtn.tag = 0
         nameBtn.tag = 0
@@ -71,25 +68,25 @@ class HomeTitleView: UIView {
         priceBtn.setImage(R.image.ic_filtrate_nor(), for: .normal)
         appliesBtn.setImage(R.image.ic_filtrate_nor(), for: .normal)
     }
-    
+
     func setup() {
         setUpSubviewsEvent()
     }
-    
+
     func setUpSubviewsEvent() {
-       nameL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](tap) in
+       nameL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](_) in
             guard let `self` = self else { return }
             self.sorted(self.nameBtn)
         }.disposed(by: disposeBag)
-        volL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](tap) in
+        volL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](_) in
             guard let `self` = self else { return }
             self.sorted(self.volBtn)
         }.disposed(by: disposeBag)
-        priceL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](tap) in
+        priceL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](_) in
             guard let `self` = self else { return }
             self.sorted(self.priceBtn)
         }.disposed(by: disposeBag)
-        appliesL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](tap) in
+        appliesL.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe { [weak self](_) in
             guard let `self` = self else { return }
             self.sorted(self.appliesBtn)
         }.disposed(by: disposeBag)

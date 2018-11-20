@@ -12,7 +12,7 @@ class HomeContentView: UIView {
     struct Define {
         static let sectionHeaderHeight: Double = 73.0
     }
-    
+
     enum SortedByKindAction: String {
         case none
         case nameUp
@@ -24,7 +24,7 @@ class HomeContentView: UIView {
         case appliesUp
         case appliesDown
     }
-    
+
     var sortedAction: SortedByKindAction = .none {
         didSet {
             if let data = self.data as? [Ticker] {
@@ -69,15 +69,15 @@ class HomeContentView: UIView {
             }
         }
     }
-    
+
     var reloadData: [Ticker]? {
-        didSet{
+        didSet {
             if let _ = reloadData {
                 self.tableView.reloadData()
             }
         }
     }
-    
+
     func dealWithReloadData(_ sender: [Ticker]) -> [Ticker] {
         let originalData = sender.filter({$0.base == AssetConfiguration.marketBaseAssets[currentBaseIndex]})
         switch self.sortedAction {
@@ -86,13 +86,13 @@ class HomeContentView: UIView {
         case .nameUp:
             return originalData.sorted(by: { (first, second) -> Bool in
                 guard let firstInfo = appData.assetInfo[first.quote], let secondInfo = appData.assetInfo[second.quote] else {return false}
-                
+
                 return firstInfo.symbol.filterJade < secondInfo.symbol.filterJade
             })
         case .nameDown:
             return originalData.sorted(by: { (first, second) -> Bool in
                 guard let firstInfo = appData.assetInfo[first.quote], let secondInfo = appData.assetInfo[second.quote] else {return false}
-                
+
                 return firstInfo.symbol.filterJade > secondInfo.symbol.filterJade
             })
         case .volUp:
@@ -234,7 +234,7 @@ extension HomeContentView {
             self.currentBaseIndex = index
         }
     }
-    
+
     @objc func sortedByName(_ data: [String: Any]) {
         guard let kind = data["data"] as? Int else { return }
         switch kind {
@@ -245,7 +245,7 @@ extension HomeContentView {
             break
         }
     }
-    
+
     @objc func sortedByPrice(_ data: [String: Any]) {
         guard let kind = data["data"] as? Int else { return }
         switch kind {
@@ -256,7 +256,7 @@ extension HomeContentView {
             break
         }
     }
-    
+
     @objc func sortedByApplies(_ data: [String: Any]) {
         guard let kind = data["data"] as? Int else { return }
         switch kind {
@@ -267,7 +267,7 @@ extension HomeContentView {
             break
         }
     }
-    
+
     @objc func sortedByVol(_ data: [String: Any]) {
         guard let kind = data["data"] as? Int else { return }
         switch kind {

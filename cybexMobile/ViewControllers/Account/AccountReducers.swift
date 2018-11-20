@@ -10,20 +10,6 @@ import UIKit
 import ReSwift
 
 func gAccountReducer(action: Action, state: AccountState?) -> AccountState {
-    return AccountState(isLoading: loadingReducer(state?.isLoading, action: action),
-                        page: pageReducer(state?.page, action: action),
-                        errorMessage: errorMessageReducer(state?.errorMessage, action: action),
-                        property: gAccountPropertyReducer(state?.property, action: action))
-}
-
-func gAccountPropertyReducer(_ state: AccountPropertyState?, action: Action) -> AccountPropertyState {
-    let state = state ?? AccountPropertyState()
-
-    switch action {
-
-    default:
-        break
-    }
-
+    let state = state ?? AccountState()
     return state
 }

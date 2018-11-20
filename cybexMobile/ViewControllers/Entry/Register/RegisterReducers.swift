@@ -10,19 +10,7 @@ import UIKit
 import ReSwift
 
 func registerReducer(action: Action, state: RegisterState?) -> RegisterState {
-    return RegisterState(isLoading: loadingReducer(state?.isLoading, action: action),
-                         page: pageReducer(state?.page, action: action),
-                         errorMessage: errorMessageReducer(state?.errorMessage, action: action),
-                         property: registerPropertyReducer(state?.property, action: action))
-}
-
-func registerPropertyReducer(_ state: RegisterPropertyState?, action: Action) -> RegisterPropertyState {
-    let state = state ?? RegisterPropertyState()
-
-    switch action {
-    default:
-        break
-    }
+    let state = state ?? RegisterState()
 
     return state
 }

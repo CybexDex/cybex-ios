@@ -76,7 +76,7 @@ class RechargeRecodeViewController: BaseViewController {
                 completion?(true)
                 return
             }
-            if let tradeRecords = self.coordinator?.state.property.data.value {
+            if let tradeRecords = self.coordinator?.state.data.value {
                 self.fetchDepositRecords(offset: tradeRecords.offset + tradeRecords.size) {
                     completion?(self.isNoMoreData)
                 }
@@ -98,7 +98,7 @@ class RechargeRecodeViewController: BaseViewController {
 
                 guard let `self` = self else {return}
                 self.endLoading()
-                if success, let tradeRecords = self.coordinator?.state.property.data.value, let records = tradeRecords.records {
+                if success, let tradeRecords = self.coordinator?.state.data.value, let records = tradeRecords.records {
                     if offset == 0 {
                         self.data.removeAll()
                     }
@@ -164,7 +164,7 @@ extension RechargeRecodeViewController {
             if self.data.count == 0 {
                 fetchDepositRecords(offset: 0) {}
             } else {
-                if let tradeRecords = self.coordinator?.state.property.data.value {
+                if let tradeRecords = self.coordinator?.state.data.value {
                     if self.isNoMoreData {
                         return
                     }

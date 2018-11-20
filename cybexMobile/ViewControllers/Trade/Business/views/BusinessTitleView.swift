@@ -25,14 +25,14 @@ class BusinessTitleView: UIView {
 
     var data: Any? {
         didSet {
-            if let data = data as? [Ticker]{
+            if let data = data as? [Ticker] {
                 self.reloadData = data.filter({$0.base == AssetConfiguration.marketBaseAssets[currentBaseIndex]})
             }
         }
     }
-    
+
     var reloadData: [Ticker]? {
-        didSet{
+        didSet {
             if let _ = reloadData {
                 self.tableView.reloadData()
             }

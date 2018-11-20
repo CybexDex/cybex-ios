@@ -11,9 +11,9 @@ import Localize_Swift
 import SwiftTheme
 
 class CybexPasswordView: UIView {
-    
+
     @IBOutlet weak var textField: UITextField!
-    
+
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var error: UILabel!
     var data: Any? {
@@ -30,10 +30,10 @@ class CybexPasswordView: UIView {
             }
         }
     }
-    
+
     func setup() {
         self.textField.placeholder = R.string.localizable.password_placeholder.key.localized()
-        
+
         if ThemeManager.currentThemeIndex == 0 {
             self.textField.textColor = .white
         } else {
@@ -41,36 +41,36 @@ class CybexPasswordView: UIView {
         }
         self.textField.setPlaceHolderTextColor(UIColor.steel50)
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return (lastView?.frame.origin.y)! + (lastView?.frame.size.height)!
     }
-    
+
     fileprivate func updateHeight() {
         layoutIfNeeded()
         self.frame.size.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         loadFromXIB()
         setup()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadFromXIB()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadFromXIB()
         setup()
     }
-    
+
     func loadFromXIB() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
@@ -81,7 +81,7 @@ class CybexPasswordView: UIView {
         view.layer.cornerRadius = 4.0
         view.clipsToBounds = true
         addSubview(view)
-        
+
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }

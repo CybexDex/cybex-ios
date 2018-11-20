@@ -9,14 +9,11 @@
 import Foundation
 import ReSwift
 import Moya
+import HandyJSON
+import RxCocoa
 
 // MARK: - State
-struct MarketState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage: String?
-    var property: MarketPropertyState
-}
-
-struct MarketPropertyState {
+struct MarketState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 }

@@ -91,7 +91,7 @@ class HomePairView: UIView {
         self.isUserInteractionEnabled = true
         self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
             guard let `self` = self, let data = self.data as? Ticker else { return }
-            
+
             self.next?.sendEventWith(Event.cellClicked.rawValue,
                                      userinfo: ["pair": Pair(base: data.base,
                                                              quote: data.quote),

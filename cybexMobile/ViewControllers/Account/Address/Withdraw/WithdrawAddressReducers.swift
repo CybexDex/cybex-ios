@@ -10,15 +10,7 @@ import UIKit
 import ReSwift
 
 func withdrawAddressReducer(action: Action, state: WithdrawAddressState?) -> WithdrawAddressState {
-    return WithdrawAddressState(isLoading: loadingReducer(state?.isLoading, action: action),
-                                page: pageReducer(state?.page, action: action),
-                                errorMessage: errorMessageReducer(state?.errorMessage, action: action),
-                                property: withdrawAddressPropertyReducer(state?.property, action: action),
-                                callback: state?.callback ?? WithdrawAddressCallbackState())
-}
-
-func withdrawAddressPropertyReducer(_ state: WithdrawAddressPropertyState?, action: Action) -> WithdrawAddressPropertyState {
-    let state = state ?? WithdrawAddressPropertyState()
+    let state = state ?? WithdrawAddressState()
 
     switch action {
     case let action as WithdrawAddressDataAction:

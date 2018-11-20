@@ -25,7 +25,7 @@ class HomeCoordinator: NavCoordinator {
         state: nil,
         middleware: [trackingMiddleware]
     )
-    
+
     var state: HomeState {
         return store.state
     }
@@ -45,7 +45,7 @@ extension HomeCoordinator: HomeCoordinatorProtocol {
         vc.curIndex = index
         vc.currentBaseIndex = currentBaseIndex
         vc.rechargeShowType = PairRechargeView.ShowType.show.rawValue
-        
+
         let coordinator = MarketCoordinator(rootVC: self.rootVC)
         vc.coordinator = coordinator
         self.rootVC.pushViewController(vc, animated: true)
@@ -56,6 +56,5 @@ extension HomeCoordinator: HomeStateManagerProtocol {
     func switchPageState(_ state: PageState) {
         self.store.dispatch(PageStateAction(state: state))
     }
-    
-   
+
 }

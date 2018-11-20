@@ -33,7 +33,7 @@ class RechargeRecodeCoordinator: NavCoordinator {
 
 extension RechargeRecodeCoordinator: RechargeRecodeCoordinatorProtocol {
     func openRecordDetailUrl(_ hash: String, asset: String) {
-        guard let explorers = self.state.property.explorers.value else { return }
+        guard let explorers = self.state.explorers.value else { return }
         var url = ""
         for explorer in explorers {
             if explorer.asset.filterJade == asset {

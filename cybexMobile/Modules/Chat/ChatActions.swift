@@ -16,10 +16,10 @@ import ChatRoom
 struct ChatContext: RouteContext, HandyJSON {
     var chanel: String = ""
     init() {}
-    
+
 }
 
-//MARK: - State
+// MARK: - State
 struct ChatState: BaseState {
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
@@ -27,7 +27,7 @@ struct ChatState: BaseState {
     var messages: BehaviorRelay<[ChatMessage]> = BehaviorRelay(value: [])
 }
 
-//MARK: - Action
+// MARK: - Action
 struct ChatFetchedAction: Action {
-    var data:[ChatMessage]
+    var data: [ChatMessage]
 }
