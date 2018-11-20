@@ -19,14 +19,3 @@ struct EntryState: StateType {
 
 struct EntryPropertyState {
 }
-
-// MARK: - Action Creator
-class EntryPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: EntryState, _ store: Store<EntryState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: EntryState,
-        _ store: Store <EntryState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

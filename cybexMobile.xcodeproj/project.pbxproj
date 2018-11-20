@@ -38,7 +38,6 @@
 		0B0FFCE74BC73BD13EB049B68CD7E5AE /* LockupAssetsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A334064DC199864ED9C36B30B03E0CE1 /* LockupAssetsActions.swift */; };
 		0C46B30A32343632C135B84DDEB47F80 /* UIResponder+Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E77A8823885D8C5A0743A5D3FFB8798 /* UIResponder+Route.swift */; };
 		0D989B23FC27CC92FAF32E53754D6330 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BAB4A18965EC766C190FBD33E2586 /* RegisterViewController.swift */; };
-		0E785072E0FFD5C3B2BE5B7EAB012755 /* FAQActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42707DC1AAD7F1D11DB5BA48EEC25F99 /* FAQActions.swift */; };
 		0ED42A2E6A4E84AEF46AFE2E669A6EC7 /* PairListHorizantalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C47DE7D9EA3C0F39E8C76762D2DFF7D /* PairListHorizantalView.xib */; };
 		0F5B4C2ED5AA414537D2D058FEF73238 /* HomeTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3B1BC6E6B9C1548B8ABF70B7E2D31C4 /* HomeTitleView.xib */; };
 		0FF6C4A7AAF40F0AC67CBDAEAA2406E2 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E6F236626C719C549D1184F4BB4696 /* UITextField+Extensions.swift */; };
@@ -104,7 +103,6 @@
 		24401F60F82FEDDA35FBCCED409C1102 /* HomeRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E395E7B5D2617408E203CD024E8818 /* HomeRootCoordinator.swift */; };
 		26827458BC8C2CF5494505DA58315BBF /* OpenedOrdersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABDEB18F3DC6A39D5E8D8EA57AF7EF4 /* OpenedOrdersHeaderView.swift */; };
 		29C911F371D5F143FB814E54626700D5 /* RechargeSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F999943C67E4ED6E626A8BA802C612 /* RechargeSegment.swift */; };
-		2BE29FBC5EBC24621C616DCA7C58F109 /* FAQCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6517201700BBB3CC3C3F12A7F3C9D /* FAQCoordinator.swift */; };
 		2E3DB3499E75C0D06068C979CD788B00 /* TradeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B134B85F2EADB461B1D5BB2F4C52C1A7 /* TradeReducers.swift */; };
 		305DB17562E3D02F04E0122C1C4674A4 /* AccountAssetOperationsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621C7F5E00C093647E89239BDBF84218 /* AccountAssetOperationsItemView.swift */; };
 		31C896C3EDB9257E2EBC0DAFC5097A7B /* SettingDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00FB3F4329945CA3897EC4D9DB48C26 /* SettingDetailActions.swift */; };
@@ -142,7 +140,6 @@
 		3B824A2D2135350200D7A4A7 /* ETODetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B824A292135350200D7A4A7 /* ETODetailActions.swift */; };
 		3B824A2E2135350200D7A4A7 /* ETODetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B824A2A2135350200D7A4A7 /* ETODetailViewController.swift */; };
 		3B824A2F2135350200D7A4A7 /* ETODetailReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B824A2B2135350200D7A4A7 /* ETODetailReducers.swift */; };
-		3B824D5C362724DE4C1048A35CDC37E0 /* FAQRootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76A60156D4654017DDEA67DEC3EAAD /* FAQRootCoordinator.swift */; };
 		3BF5B7DE2134F1F200E8BFC9 /* ETODetailViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5B7DB2134F1F200E8BFC9 /* ETODetailViewAdapter.swift */; };
 		3BF5B7DF2134F1F200E8BFC9 /* ETODetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5B7DC2134F1F200E8BFC9 /* ETODetailView.swift */; };
 		3BF5B7E02134F1F200E8BFC9 /* ETODetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BF5B7DD2134F1F200E8BFC9 /* ETODetailView.xib */; };
@@ -650,7 +647,6 @@
 		9708F7C8EA5B8E107E937306846BE6F0 /* AccountPortfolioCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBE603FCFEF2D30A37D5274733C347F /* AccountPortfolioCellView.swift */; };
 		975938BD454B9AB3D5F1AD8C06CDFCA8 /* WithdrawDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C14509E978A6A84AD1A5E97E1E66761 /* WithdrawDetailCoordinator.swift */; };
 		98CCDC7B05741EEDF9AF05992AA2A8DF /* ExchangeReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6BABC4BDEAA7E9A4A2DED29A82767 /* ExchangeReducers.swift */; };
-		98D200C38B81D27DAF59438FCB5EF646 /* FAQReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18191E16CD0822E88274D18BE8D2D0F /* FAQReducers.swift */; };
 		98ED9D145EF3DAA0FD242984364B676F /* AccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6792EE4EA0606E54008867475EAEBFC /* AccessoryCollectionViewCell.swift */; };
 		9BCE0C555EEF2323C99CCDA652AABAE5 /* HomeContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AAFE37FBA002EC9690645C11A0D723A /* HomeContentView.xib */; };
 		9BDA71F68E64FDF8BBAE5E8A3391FFA1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444887A40A212BFF9EE0524690C69956 /* HomeViewController.swift */; };
@@ -720,7 +716,6 @@
 		D1612139CDC75BB4ACC08A1D78FD0AEE /* OpenedOrdersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623052513C73A6D0C0CE01380B402F4E /* OpenedOrdersCell.swift */; };
 		D1A397322CB34E638C9DFE14F5C0B4BC /* RegisterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869BD1986B2A46B921485BD3E2316BB2 /* RegisterCoordinator.swift */; };
 		D1C63B5AAC5552A99528E306AC7F57E0 /* RechargeDetailReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3026120F89EDE7AE570FE9E3D4D21AB8 /* RechargeDetailReducers.swift */; };
-		D3008B984211AFE152859658DC6B773B /* NSNotification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F65F55A11F4245338A23EE073808CB8 /* NSNotification+Extensions.swift */; };
 		D3551784962B5675BB3A8DD9DA31F698 /* SettingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711D9493826E545A145471E51FB87DB6 /* SettingDetailViewController.swift */; };
 		D3694E6115F5ED50F0FFE4108E64BAEE /* AccountPortfolioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB2C6198513BBE464900C9565F6D751 /* AccountPortfolioCell.swift */; };
 		D3C87D3A247487C8D834A828782FC472 /* PairListHorizantalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C067DE56B8690D69E601011F04E37B3 /* PairListHorizantalView.swift */; };
@@ -758,7 +753,6 @@
 		F1B88753DCA13AC5B42338848EEC8DBF /* OpenedOrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C264445F2C3263F5F8AD02F1ABE4A0D /* OpenedOrdersView.swift */; };
 		F5DDA9E8ED5A5AA3D7A8F0705CFBA4BD /* OpenedOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD6F13246E773CDB0FBCFF806F8A69B /* OpenedOrdersViewController.swift */; };
 		F61A4020689A1596B862EDC3AD38A3BC /* OpenedOrdersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 579603A4523D2CED2D326CF0958D7A81 /* OpenedOrdersView.xib */; };
-		F6AF1D76C51578A4EC2438427711F783 /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEE55775A3F1411CD0B3ED73DEC2524 /* FAQViewController.swift */; };
 		F74EE738D8577FC258E7874D0FBB773C /* Localization_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F884D56B10D138121BA6666F4E345338 /* Localization_Extensions.swift */; };
 		F7886D0310C612E91619D84DDA4182F5 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452467669B03D0BE24EE0606AEB37EC /* BaseNavigationController.swift */; };
 		F7C39F3DD49909044D9E8FF34ABF3F2D /* SimpleHTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD40C5E84A00D4E3920E1AFF7D89F87 /* SimpleHTTPService.swift */; };
@@ -844,8 +838,6 @@
 		1AD6F13246E773CDB0FBCFF806F8A69B /* OpenedOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersViewController.swift; sourceTree = "<group>"; };
 		1BF8145AB9B72F9B7DDBD35D7F421C2A /* TradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeView.swift; sourceTree = "<group>"; };
 		1DA52DB9F7B13F75FCF7C39FBC99A67F /* RechargeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeCoordinator.swift; sourceTree = "<group>"; };
-		1EEE55775A3F1411CD0B3ED73DEC2524 /* FAQViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
-		1F76A60156D4654017DDEA67DEC3EAAD /* FAQRootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQRootCoordinator.swift; sourceTree = "<group>"; };
 		1FD9516DB7B3ECF8651E0B2A8702D273 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		20F3AA0D8AC0AD8589280BEDDD5926AB /* AccountAssetOperationsItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountAssetOperationsItemView.xib; sourceTree = "<group>"; };
 		21696A68C7DB2269A52E166892D0EA60 /* WithdrawDetailReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailReducers.swift; sourceTree = "<group>"; };
@@ -899,7 +891,6 @@
 		2BCE6ED625648B248C391722FFDBCC7F /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		2E77A8823885D8C5A0743A5D3FFB8798 /* UIResponder+Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Route.swift"; sourceTree = "<group>"; };
 		2F21F1216DA97DB6B9533C60345C322B /* AccountOpenedOrdersView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountOpenedOrdersView.xib; sourceTree = "<group>"; };
-		2F65F55A11F4245338A23EE073808CB8 /* NSNotification+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extensions.swift"; sourceTree = "<group>"; };
 		3026120F89EDE7AE570FE9E3D4D21AB8 /* RechargeDetailReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeDetailReducers.swift; sourceTree = "<group>"; };
 		3146A5E2119E16E559812803A8E18B8B /* TradeHistoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeHistoryCellView.swift; sourceTree = "<group>"; };
 		328194B664D1402156370883F413DD70 /* MarketCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketCache.swift; sourceTree = "<group>"; };
@@ -949,11 +940,9 @@
 		3CCB3C0AFB17090A4505E27B0E6CD5B9 /* LockupAssetsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsCell.swift; sourceTree = "<group>"; };
 		3CECD94F28EDABA6FD96C7F93ADB0C06 /* BusinessTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessTitleCell.xib; sourceTree = "<group>"; };
 		3D7E2A2D24A9C012D33C1E4DC944C935 /* HomePairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePairCell.swift; sourceTree = "<group>"; };
-		3ED6517201700BBB3CC3C3F12A7F3C9D /* FAQCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQCoordinator.swift; sourceTree = "<group>"; };
 		3F1D9B0736C3E3A8217BF2FA63618656 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		3FA6BABC4BDEAA7E9A4A2DED29A82767 /* ExchangeReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeReducers.swift; sourceTree = "<group>"; };
 		41798F47D921274B133BA2F69B2DA49C /* AccountPortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPortfolioView.swift; sourceTree = "<group>"; };
-		42707DC1AAD7F1D11DB5BA48EEC25F99 /* FAQActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQActions.swift; sourceTree = "<group>"; };
 		444887A40A212BFF9EE0524690C69956 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		44988AC3DD3CDF143C1110A85E06F788 /* SettingDetailReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailReducers.swift; sourceTree = "<group>"; };
 		49E6EAA94348BAE36CA858BA5045D6D3 /* NoticeBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBoardView.swift; sourceTree = "<group>"; };
@@ -1461,7 +1450,6 @@
 		A01D48BF96CC0F162468A8FFAE6198A3 /* CBMACDModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBMACDModel.swift; sourceTree = "<group>"; };
 		A021AF2A28B8F961031441755E89AC24 /* ExchangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewController.swift; sourceTree = "<group>"; };
 		A0BD0C5B42031D1C4DFFD51560AF9178 /* WithdrawDetailActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailActions.swift; sourceTree = "<group>"; };
-		A18191E16CD0822E88274D18BE8D2D0F /* FAQReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQReducers.swift; sourceTree = "<group>"; };
 		A1DC24E9FDDDB36D801701F39834088C /* AccountAssetOperationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAssetOperationView.swift; sourceTree = "<group>"; };
 		A2360707185A0DEC4ACAAFBA8C503994 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A334064DC199864ED9C36B30B03E0CE1 /* LockupAssetsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsActions.swift; sourceTree = "<group>"; };
@@ -2084,7 +2072,6 @@
 			children = (
 				56B6DE7540D68B490C2D5E1A65CFF1C5 /* Collection+Extensions.swift */,
 				F884D56B10D138121BA6666F4E345338 /* Localization_Extensions.swift */,
-				2F65F55A11F4245338A23EE073808CB8 /* NSNotification+Extensions.swift */,
 				E733F11F37A6A399AD7DC995A3985502 /* NSObject+Extensions.swift */,
 				3AB0B155D51A3B4BB9BBE8DD11F1A846 /* Optional+Extensions.swift */,
 				737F8C342145532A00DD522A /* String+Extensions.swift */,
@@ -3162,17 +3149,6 @@
 			path = OpenedOrders;
 			sourceTree = "<group>";
 		};
-		95C45586F4A469DCB5A1CFCC4CB80A62 /* FAQ */ = {
-			isa = PBXGroup;
-			children = (
-				42707DC1AAD7F1D11DB5BA48EEC25F99 /* FAQActions.swift */,
-				3ED6517201700BBB3CC3C3F12A7F3C9D /* FAQCoordinator.swift */,
-				A18191E16CD0822E88274D18BE8D2D0F /* FAQReducers.swift */,
-				1EEE55775A3F1411CD0B3ED73DEC2524 /* FAQViewController.swift */,
-			);
-			path = FAQ;
-			sourceTree = "<group>";
-		};
 		99BA08948A7490717821708BF7DDB811 /* HTTPNetwork */ = {
 			isa = PBXGroup;
 			children = (
@@ -3285,7 +3261,6 @@
 				7267D9FF213502AE004AF9AF /* ETORootCoordinator.swift */,
 				A665043B18963DD992AA85C17D188504 /* EntryRootCoordinator.swift */,
 				BF4CB904E1C8FCF8AA656A9851C65296 /* ExplorerRootCoordinator.swift */,
-				1F76A60156D4654017DDEA67DEC3EAAD /* FAQRootCoordinator.swift */,
 				E8E395E7B5D2617408E203CD024E8818 /* HomeRootCoordinator.swift */,
 				32EED361030B4F9C7CFFB90076C4437F /* TradeRootCoordinator.swift */,
 			);
@@ -3656,7 +3631,6 @@
 				72E2A8E62151F8E900FBB3CB /* Comprehensive */,
 				7267DA0121350317004AF9AF /* ETO */,
 				9D2617B8E4636D7B44A5583FD0A56039 /* Entry */,
-				95C45586F4A469DCB5A1CFCC4CB80A62 /* FAQ */,
 				23687B68A6A1F7547C6F212DD3DF7D61 /* Home */,
 				C80FEB0292960827F61645F8CC19905F /* Recharge */,
 				5A4919BA264F4C3F3E191C315F75F4A6 /* Trade */,
@@ -4071,7 +4045,6 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(SRCROOT)/R.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4134,7 +4107,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "periphery scan --project \"cybexMobile.xcodeproj\" --schemes \"cybexMobile\" --targets \"cybexMobile\" --format xcode\n";
+			shellScript = "periphery scan --project \"cybexMobile.xcodeproj\" --schemes \"cybexMobile\" --targets \"cybexMobile\" --format xcode --index-exclude \"R.generated.swift\"\n";
 		};
 		730E59A72199224A006DDCDD /* unuse pic */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4504,16 +4477,11 @@
 				41369312624D03C488017E7D88E4D41E /* ExchangeViewController.swift in Sources */,
 				3B824A2E2135350200D7A4A7 /* ETODetailViewController.swift in Sources */,
 				F0CE8D5A02461E239914DF75E18C23FA /* ExplorerRootCoordinator.swift in Sources */,
-				0E785072E0FFD5C3B2BE5B7EAB012755 /* FAQActions.swift in Sources */,
 				3BF5B7EB2135001B00E8BFC9 /* ETODetailIntroView.swift in Sources */,
 				72199D8E21045D4700575226 /* TransferListViewController.swift in Sources */,
-				2BE29FBC5EBC24621C616DCA7C58F109 /* FAQCoordinator.swift in Sources */,
 				72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */,
-				98D200C38B81D27DAF59438FCB5EF646 /* FAQReducers.swift in Sources */,
-				3B824D5C362724DE4C1048A35CDC37E0 /* FAQRootCoordinator.swift in Sources */,
 				7386F2C121216B9E00ABC924 /* WithdrawAddressViewController.swift in Sources */,
 				72199D8C21045D4700575226 /* TransferListCoordinator.swift in Sources */,
-				F6AF1D76C51578A4EC2438427711F783 /* FAQViewController.swift in Sources */,
 				8691BEEE7629D4BE41D13D82D9AF29A9 /* GradientLabelView.swift in Sources */,
 				FF9F0639B5927B79A3EFC30AF470DE97 /* GradientLayer.swift in Sources */,
 				221C6175213926570021C007 /* ETORecordListCoordinator.swift in Sources */,
@@ -4589,7 +4557,6 @@
 				724C5D4E2153956900FF1DE7 /* ComprehensiveItemView.swift in Sources */,
 				3B0EB65B210313B200F19C31 /* YourPortfolioHandleView.swift in Sources */,
 				CD017D1C374A5B06D3ECEC24936E0911 /* MyOpenedOrdersView.swift in Sources */,
-				D3008B984211AFE152859658DC6B773B /* NSNotification+Extensions.swift in Sources */,
 				031F69CC95D2906A4F8F4063776327F6 /* NSObject+Extensions.swift in Sources */,
 				73A331162194244800707D8F /* ChatViewController.swift in Sources */,
 				739EFB652181D10E00424061 /* UIPanGestureRecognizer+RxGesture.swift in Sources */,

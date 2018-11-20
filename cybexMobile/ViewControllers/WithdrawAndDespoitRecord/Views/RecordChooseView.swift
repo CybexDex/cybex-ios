@@ -8,11 +8,6 @@
 
 import Foundation
 
-enum RecordChooseViewType: Int {
-    case name = 0
-    case type
-}
-
 @IBDesignable
 class RecordChooseView: CybexBaseView {
 

@@ -22,13 +22,3 @@ struct SettingPropertyState {
 
 }
 
-// MARK: - Action Creator
-class SettingPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: SettingState, _ store: Store<SettingState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: SettingState,
-        _ store: Store <SettingState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

@@ -17,15 +17,9 @@ protocol PickerCoordinatorProtocol {
 
 protocol PickerStateManagerProtocol {
     var state: PickerState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<PickerState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
 }
 
 class PickerCoordinator: PickerRootCoordinator {
-
-    lazy var creator = PickerPropertyActionCreate()
-
   var pickerDidSelected: PickerDidSelected?
 
     var store = Store<PickerState>(
@@ -48,11 +42,4 @@ extension PickerCoordinator: PickerStateManagerProtocol {
     var state: PickerState {
         return store.state
     }
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<PickerState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-
 }

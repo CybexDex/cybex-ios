@@ -27,11 +27,9 @@ extension String {
 }
 
 struct Record: HandyJSON {
-    var accountName: String = ""
     var address: String = ""
     var amount: Int = 0
     var asset: String = ""
-    var coinType: String = ""
     var fundType: String = ""
     var state: String = ""
     var updateAt: Date!

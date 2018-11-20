@@ -39,14 +39,3 @@ struct SortedByEmptyAssetAction: Action {
 struct SortedByNameAssetAction: Action {
     let data: String
 }
-
-// MARK: - Action Creator
-class RechargePropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: RechargeState, _ store: Store<RechargeState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: RechargeState,
-        _ store: Store <RechargeState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

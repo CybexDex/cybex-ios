@@ -26,14 +26,3 @@ struct TransferListPropertyState {
 struct ReduceTansferRecordsAction: Action {
     var data: [(TransferRecord, time: String)]
 }
-
-// MARK: - Action Creator
-class TransferListPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: TransferListState, _ store: Store<TransferListState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: TransferListState,
-        _ store: Store <TransferListState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

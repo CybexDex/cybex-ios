@@ -40,27 +40,3 @@ struct LockupAssteData: Equatable {
   var progress: String = ""
   var endTime: String = ""
 }
-
-// MARK: - Action Creator
-class LockupAssetsPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: LockupAssetsState, _ store: Store<LockupAssetsState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: LockupAssetsState,
-        _ store: Store <LockupAssetsState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-
-  func fetchLockupAssets(with address: [String], callback: CommonAnyCallback?) -> ActionCreator {
-    return { state, store in
-
-      let request = GetBalanceObjectsRequest(address: address) { response in
-        if let callback = callback {
-          callback(response)
-        }
-      }
-      CybexWebSocketService.shared.send(request: request)
-      return nil
-    }
-  }
-}

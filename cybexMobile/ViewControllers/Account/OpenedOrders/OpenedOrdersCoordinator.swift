@@ -16,17 +16,11 @@ protocol OpenedOrdersCoordinatorProtocol {
 // 业务处理
 protocol OpenedOrdersStateManagerProtocol {
     var state: OpenedOrdersState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<OpenedOrdersState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState
     
     func cancelOrder(_ orderID: String, feeId: String, callback: @escaping (_ success: Bool) -> Void)
 }
 
 class OpenedOrdersCoordinator: AccountRootCoordinator {
-    
-    lazy var creator = OpenedOrdersPropertyActionCreate()
-    
     var store = Store<OpenedOrdersState>(
         reducer: gOpenedOrdersReducer,
         state: nil,
@@ -41,12 +35,6 @@ extension OpenedOrdersCoordinator: OpenedOrdersCoordinatorProtocol {
 extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     var state: OpenedOrdersState {
         return store.state
-    }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<OpenedOrdersState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
     }
     
     func cancelOrder(_ orderID: String, feeId: String, callback: @escaping (_ success: Bool) -> Void) {

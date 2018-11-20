@@ -215,14 +215,6 @@ class ShowToastManager {
         }
     }
 
-    func setUp(title: String, message: String, animationType: ShowAnimationType, showType: ShowManagerType = .alert) {
-        self.data          = ["title": title, "message": message]
-        self.animationShow = animationType
-        self.showType      = showType
-
-        self.setupAlert()
-    }
-
     func setUp(titleImage: String, message: String, animationType: ShowAnimationType, showType: ShowManagerType) {
         self.data = ["titleImage": titleImage, "message": message]
         self.animationShow = animationType

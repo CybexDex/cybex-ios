@@ -29,13 +29,3 @@ struct AccountViewModel {
   var name: String = ""
 }
 
-// MARK: - Action Creator
-class AccountPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: AccountState, _ store: Store<AccountState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: AccountState,
-        _ store: Store <AccountState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

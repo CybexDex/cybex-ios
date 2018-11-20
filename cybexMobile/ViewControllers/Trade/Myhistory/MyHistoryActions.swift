@@ -19,14 +19,3 @@ struct MyHistoryState: StateType {
 
 struct MyHistoryPropertyState {
 }
-
-// MARK: - Action Creator
-class MyHistoryPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: MyHistoryState, _ store: Store<MyHistoryState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: MyHistoryState,
-        _ store: Store <MyHistoryState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

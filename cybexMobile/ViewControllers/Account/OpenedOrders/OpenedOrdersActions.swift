@@ -20,14 +20,3 @@ struct OpenedOrdersState: StateType {
 struct OpenedOrdersPropertyState {
   var data: [Any] = []
 }
-
-// MARK: - Action Creator
-class OpenedOrdersPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: OpenedOrdersState, _ store: Store<OpenedOrdersState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: OpenedOrdersState,
-        _ store: Store <OpenedOrdersState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

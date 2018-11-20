@@ -16,17 +16,11 @@ protocol TransferListCoordinatorProtocol {
 
 protocol TransferListStateManagerProtocol {
     var state: TransferListState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<TransferListState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState
 
     func reduceTransferRecords()
 }
 
 class TransferListCoordinator: AccountRootCoordinator {
-
-    lazy var creator = TransferListPropertyActionCreate()
-
     var store = Store<TransferListState>(
         reducer: transferListReducer,
         state: nil,
@@ -47,12 +41,6 @@ extension TransferListCoordinator: TransferListCoordinatorProtocol {
 extension TransferListCoordinator: TransferListStateManagerProtocol {
     var state: TransferListState {
         return store.state
-    }
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<TransferListState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
     }
 
     func reduceTransferRecords() {

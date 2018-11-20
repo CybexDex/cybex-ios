@@ -15,29 +15,12 @@ import SwifterSwift
 import Repeat
 import RxCocoa
 
-protocol AppStateManagerProtocol {
-    var state: AppState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<AppState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState
-
-    //    func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority, callback:@escaping ()->())
-    func fetchData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority)
-
-    func fetchTickerData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority)
-    func fetchEthToRmbPrice()
-
-    func fetchGetToCyb(_ callback:@escaping(Decimal) -> Void)
-}
-
 class AppCoordinator {
     lazy var creator = AppPropertyActionCreate()
 
     var timer: Repeater?
 
     var fetchPariTimer: Repeater?
-
-    var getToCybRelation: Decimal?
 
     var store = Store<AppState> (
         reducer: appReducer,
@@ -52,8 +35,6 @@ class AppCoordinator {
     var rootVC: BaseTabbarViewController
 
     var homeCoordinator: HomeRootCoordinator!
-    var explorerCoordinator: ExplorerRootCoordinator!
-    //  var faqCoordinator: FAQRootCoordinator!
     var tradeCoordinator: TradeRootCoordinator!
     var accountCoordinator: AccountRootCoordinator!
     var entryCoordinator: EntryRootCoordinator!

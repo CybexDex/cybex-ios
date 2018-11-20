@@ -52,12 +52,6 @@ class TransferContentView: UIView {
         }
     }
 
-    var addressContent: String? {
-        didSet {
-            self.addressView.contentLocali = self.addressContent
-        }
-    }
-
     var contentText: String? {
         didSet {
             if let text = contentText {

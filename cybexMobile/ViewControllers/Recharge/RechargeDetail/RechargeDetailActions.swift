@@ -42,14 +42,3 @@ struct FetchGatewayFee: Action {
 struct SelectedAddressAction: Action {
     var data: WithdrawAddress
 }
-
-// MARK: - Action Creator
-class RechargeDetailPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: RechargeDetailState, _ store: Store<RechargeDetailState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: RechargeDetailState,
-        _ store: Store <RechargeDetailState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

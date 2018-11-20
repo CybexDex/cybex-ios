@@ -17,14 +17,9 @@ protocol AddressHomeCoordinatorProtocol {
 
 protocol AddressHomeStateManagerProtocol {
     var state: AddressHomeState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<AddressHomeState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
 }
 
 class AddressHomeCoordinator: AccountRootCoordinator {
-    lazy var creator = AddressHomePropertyActionCreate()
-
     var store = Store<AddressHomeState>(
         reducer: addressHomeReducer,
         state: nil,
@@ -56,12 +51,6 @@ extension AddressHomeCoordinator: AddressHomeCoordinatorProtocol {
 extension AddressHomeCoordinator: AddressHomeStateManagerProtocol {
     var state: AddressHomeState {
         return store.state
-    }
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<AddressHomeState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
     }
 
 }

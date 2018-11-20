@@ -201,43 +201,6 @@ extension UserManager {
         CybexWebSocketService.shared.send(request: request)
     }
 
-    func fetchHistoryOfOperation() {
-        guard let id = self.account.value?.id else {
-            return
-        }
-
-        let request = GetAccountHistoryRequest(accountID: id) { (data) in
-
-            if var fillorders = data as? [FillOrder] {
-                if fillorders.count == 0 || !self.isLoginIn {
-                    self.fillOrder.accept(nil)
-                    return
-                }
-                fillorders = fillorders.filter({
-                    let baseName = appData.assetInfo[$0.fillPrice.base.assetID]
-                    let quoteName = appData.assetInfo[$0.fillPrice.quote.assetID]
-                    return baseName != nil && quoteName != nil
-                })
-
-                var result = [(FillOrder, time:String)]()
-                var count = 0
-                for fillOrder in fillorders {
-                    let timeRequest = GetBlockRequest(response: { (time) in
-                        count += 1
-                        if let time = time as? String, let date = time.dateFromISO8601 {
-                            result.append((fillOrder, time:(date.string(withFormat: "MM/dd HH:mm:ss"))))
-                        }
-                        if count == fillorders.count {
-                            self.fillOrder.accept(result)
-                        }
-                    }, blockNum: fillOrder.blockNum)
-                    CybexWebSocketService.shared.send(request: timeRequest)
-                }
-            }
-        }
-        CybexWebSocketService.shared.send(request: request)
-    }
-
     func checkUserName(_ name: String) -> Promise<Bool> {
         let (promise, seal) = Promise<Bool>.pending()
 
@@ -441,8 +404,6 @@ class UserManager {
 
     var limitOrderSellValue: Double = 0
 
-    var limitResetAddressTime: TimeInterval = 0
-
     var balance: Double {
 
         var balanceValues: Decimal = 0
@@ -510,16 +471,6 @@ class UserManager {
 
     private func saveName(_ name: String) {
         Defaults[.username] = name
-    }
-
-    func getPortfolioDatas() -> [PortfolioData] {
-        var datas = [PortfolioData]()
-        if let balances = self.balances.value {
-            for balance in balances {
-                datas.append(PortfolioData.init(balance: balance)!)
-            }
-        }
-        return datas
     }
 
     func getMyPortfolioDatas() -> [MyPortfolioData] {

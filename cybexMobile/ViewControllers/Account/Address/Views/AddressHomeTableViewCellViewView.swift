@@ -13,12 +13,6 @@ class AddressHomeTableViewCellViewView: UIView {
 
     @IBOutlet weak var sectionView: SectionCornerViewView!
 
-    var data: Any? {
-        didSet {
-
-        }
-    }
-
     func appendView() {
         let normalView = NormalCellView(frame: CGRect.zero)
         normalView.index = 0

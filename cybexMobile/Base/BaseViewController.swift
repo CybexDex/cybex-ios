@@ -16,17 +16,7 @@ import SwifterSwift
 
 class BaseViewController: UIViewController {
     weak var toast: BeareadToast?
-    var table: UITableView?
     var rightNavButton: UIButton?
-    var isNavBarShadowHidden: Bool = false {
-        didSet {
-            if isNavBarShadowHidden {
-                navigationController?.navigationBar.shadowImage = UIImage()
-            } else {
-                navigationController?.navigationBar.shadowImage = UIImage()
-            }
-        }
-    }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -85,28 +75,6 @@ class BaseViewController: UIViewController {
 
     }
 
-    func changeNavBar(isUserInteractionEnabled: Bool) {
-        self.navigationController?.navigationBar.rx.observe(Bool.self, "isUserInteractionEnabled").subscribe(onNext: { [weak self] (_) in
-            guard let `self` = self else { return }
-
-            if self.navigationController?.visibleViewController != self {
-                return
-            }
-            //      print("Change Change Change")
-            if isUserInteractionEnabled {
-                self.navigationController?.navigationBar.isUserInteractionEnabled = true
-                self.navigationController?.navigationBar.subviews.forEach({ (view) in
-                    view.isUserInteractionEnabled = true
-                })
-            } else {
-                self.navigationController?.navigationBar.isUserInteractionEnabled = false
-                self.navigationController?.navigationBar.subviews.forEach({ (view) in
-                    view.isUserInteractionEnabled = false
-                })
-            }
-        }).disposed(by: disposeBag)
-    }
-
     func startLoading() {
         guard let hud = toast else {
             toast = BeareadToast.showLoading(inView: self.view)
@@ -124,10 +92,6 @@ class BaseViewController: UIViewController {
 
     func endLoading() {
         toast?.hide(true)
-    }
-
-    func endLoading(_ after: TimeInterval) {
-        toast?.hide(true, after: after)
     }
 
     func configRightNavButton(_ image: UIImage? = nil) {
@@ -196,20 +160,6 @@ extension UIViewController: ShowManagerDelegate {
             ShowToastManager.shared.setUp(titleImage: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name,
                                           message: message,
                                           animationType: .smallBig, showType: .alertImage)
-            ShowToastManager.shared.showAnimationInView(self.view)
-            ShowToastManager.shared.hide(2.0)
-        }
-    }
-
-    func showTopToastBox(_ success: Bool, message: String) {
-        if ShowToastManager.shared.showView != nil {
-            ShowToastManager.shared.hide(0)
-        }
-        SwifterSwift.delay(milliseconds: 100) {
-            ShowToastManager.shared.setUp(titleImage: success ? R.image.icCheckCircleGreen.name : R.image.erro16Px.name,
-                                          message: message,
-                                          animationType: ShowToastManager.ShowAnimationType.upDown,
-                                          showType: ShowToastManager.ShowManagerType.sheetImage)
             ShowToastManager.shared.showAnimationInView(self.view)
             ShowToastManager.shared.hide(2.0)
         }

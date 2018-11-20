@@ -53,15 +53,6 @@ class BaseWebViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-
-    func clearCahce() {
-        guard let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache]) as? Set<String> else {
-            return
-        }
-        let date = NSDate(timeIntervalSince1970: 0)
-
-        WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes, modifiedSince: date as Date, completionHandler: { })
-    }
 }
 
 extension BaseWebViewController: WKUIDelegate, WKNavigationDelegate {

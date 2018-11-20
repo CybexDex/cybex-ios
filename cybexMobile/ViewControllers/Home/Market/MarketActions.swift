@@ -20,14 +20,3 @@ struct MarketState: StateType {
 
 struct MarketPropertyState {
 }
-
-// MARK: - Action Creator
-class MarketPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: MarketState, _ store: Store<MarketState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: MarketState,
-        _ store: Store <MarketState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

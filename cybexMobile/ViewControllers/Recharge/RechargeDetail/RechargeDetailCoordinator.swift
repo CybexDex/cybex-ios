@@ -20,9 +20,6 @@ protocol RechargeDetailCoordinatorProtocol {
 
 protocol RechargeDetailStateManagerProtocol {
     var state: RechargeDetailState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<RechargeDetailState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
 
     func fetchWithDrawInfoData(_ assetName: String)
     static func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool) -> Void)
@@ -40,9 +37,6 @@ protocol RechargeDetailStateManagerProtocol {
 }
 
 class RechargeDetailCoordinator: AccountRootCoordinator {
-
-    lazy var creator = RechargeDetailPropertyActionCreate()
-
     var store = Store<RechargeDetailState>(
         reducer: rechargeDetailReducer,
         state: nil,
@@ -117,12 +111,6 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
 extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     var state: RechargeDetailState {
         return store.state
-    }
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<RechargeDetailState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
     }
 
     func fetchWithDrawInfoData(_ assetName: String) {

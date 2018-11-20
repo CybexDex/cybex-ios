@@ -19,10 +19,6 @@ enum StyleNames: String {
     case alertContent
     case address
     case bold12With20
-    
-    func tagText(_ nestText: String) -> String {
-        return "<\(self.rawValue)>" + nestText + "</\(self.rawValue)>"
-    }
 }
 
 enum LineViewStyleNames: String {
@@ -74,19 +70,6 @@ class RichStyle {
         }
         
         Styles.register("\(font.rawValue)_\(fontSize)_\(color.hexString(true))_\(lineHeight)", style: style)
-    }
-    
-    func tagText(_ nestText: String,
-                 fontSize: CGFloat = 12,
-                 color: UIColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo,
-                 lineHeight: CGFloat = 20,
-                 font: SystemFonts = SystemFonts.PingFangSC_Regular) -> String {
-        let tag = "\(font.rawValue)_\(fontSize)_\(color.hexString(true))_\(lineHeight)"
-        
-        if !StylesManager.shared.styles.keys.contains(tag) {
-            constructStyle(fontSize, color: color, lineHeight: lineHeight, font: font)
-        }
-        return "<\(tag)>" + nestText + "</\(tag)>"
     }
     
     func changeStyleFromTheme() {

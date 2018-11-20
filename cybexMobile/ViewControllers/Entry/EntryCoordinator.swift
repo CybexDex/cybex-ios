@@ -16,15 +16,9 @@ protocol EntryCoordinatorProtocol {
 
 protocol EntryStateManagerProtocol {
     var state: EntryState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<EntryState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
 }
 
 class EntryCoordinator: EntryRootCoordinator {
-
-    lazy var creator = EntryPropertyActionCreate()
-
     var store = Store<EntryState>(
         reducer: entryReducer,
         state: nil,
@@ -56,9 +50,4 @@ extension EntryCoordinator: EntryStateManagerProtocol {
         return store.state
     }
 
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<EntryState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
 }

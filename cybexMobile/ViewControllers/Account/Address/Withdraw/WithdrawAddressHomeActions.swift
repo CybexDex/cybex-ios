@@ -44,14 +44,3 @@ struct WithdrawAddressHomeAddressDataAction: Action {
 
 struct WithdrawAddressHomeCallbackState {
 }
-
-// MARK: - Action Creator
-class WithdrawAddressHomePropertyActionCreate {
-    public typealias ActionCreator = (_ state: WithdrawAddressHomeState, _ store: Store<WithdrawAddressHomeState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: WithdrawAddressHomeState,
-        _ store: Store <WithdrawAddressHomeState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

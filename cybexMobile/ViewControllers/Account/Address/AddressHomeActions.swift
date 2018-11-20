@@ -23,14 +23,3 @@ struct AddressHomePropertyState {
 
 struct AddressHomeCallbackState {
 }
-
-// MARK: - Action Creator
-class AddressHomePropertyActionCreate {
-    public typealias ActionCreator = (_ state: AddressHomeState, _ store: Store<AddressHomeState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: AddressHomeState,
-        _ store: Store <AddressHomeState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

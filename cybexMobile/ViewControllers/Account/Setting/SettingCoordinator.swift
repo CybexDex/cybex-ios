@@ -18,17 +18,11 @@ protocol SettingCoordinatorProtocol {
 
 protocol SettingStateManagerProtocol {
     var state: SettingState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<SettingState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
 
     func changeEnveronment(_ callback:@escaping(Bool) -> Void)
 }
 
 class SettingCoordinator: AccountRootCoordinator {
-
-    lazy var creator = SettingPropertyActionCreate()
-
     var store = Store<SettingState>(
         reducer: gSettingReducer,
         state: nil,
@@ -62,13 +56,6 @@ extension SettingCoordinator: SettingCoordinatorProtocol {
 }
 
 extension SettingCoordinator: SettingStateManagerProtocol {
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<SettingState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-
     func changeEnveronment(_ callback:@escaping(Bool) -> Void) {
         var isTest = false
         if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {

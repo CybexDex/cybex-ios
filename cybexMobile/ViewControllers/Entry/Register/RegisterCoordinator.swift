@@ -19,9 +19,6 @@ protocol RegisterCoordinatorProtocol {
 
 protocol RegisterStateManagerProtocol {
   var state: RegisterState { get }
-  func subscribe<SelectedState, S: StoreSubscriber>(
-    _ subscriber: S, transform: ((Subscription<RegisterState>) -> Subscription<SelectedState>)?
-  ) where S.StoreSubscriberStateType == SelectedState
 }
 
 class RegisterCoordinator: EntryRootCoordinator {
@@ -46,8 +43,6 @@ class RegisterCoordinator: EntryRootCoordinator {
     customPresenter.roundCorners = true
     return customPresenter
   }()
-
-  lazy var creator = RegisterPropertyActionCreate()
 
   var store = Store<RegisterState>(
     reducer: registerReducer,
@@ -87,11 +82,4 @@ extension RegisterCoordinator: RegisterStateManagerProtocol {
   var state: RegisterState {
     return store.state
   }
-
-  func subscribe<SelectedState, S: StoreSubscriber>(
-    _ subscriber: S, transform: ((Subscription<RegisterState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState {
-    store.subscribe(subscriber, transform: transform)
-  }
-
 }

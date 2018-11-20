@@ -16,9 +16,6 @@ protocol MarketCoordinatorProtocol {
 
 protocol MarketStateManagerProtocol {
     var state: MarketState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<MarketState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState
 
     func setupChildViewControllers(_ pair: Pair) -> [BaseViewController]
     func refreshChildViewController(_ vcs: [BaseViewController], pair: Pair)
@@ -26,9 +23,6 @@ protocol MarketStateManagerProtocol {
 }
 
 class MarketCoordinator: HomeRootCoordinator {
-
-    lazy var creator = MarketPropertyActionCreate()
-
     var store = Store<MarketState>(
         reducer: marketReducer,
         state: nil,
@@ -69,13 +63,6 @@ extension MarketCoordinator: MarketCoordinatorProtocol {
 }
 
 extension MarketCoordinator: MarketStateManagerProtocol {
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<MarketState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-
     func openTradeViewChontroller(_ isBuy: Bool, pair: Pair) {
         self.rootVC.tabBarController?.selectedIndex = 2
         self.rootVC.popToRootViewController(animated: false)

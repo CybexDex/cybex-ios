@@ -35,14 +35,3 @@ struct SetWithdrawListAssetAction: Action {
 struct FetchAssetUrlAction: Action {
     var data: [BlockExplorer]
 }
-
-// MARK: - Action Creator
-class RechargeRecodePropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: RechargeRecodeState, _ store: Store<RechargeRecodeState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: RechargeRecodeState,
-        _ store: Store <RechargeRecodeState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

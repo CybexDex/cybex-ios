@@ -18,9 +18,6 @@ protocol BusinessCoordinatorProtocol {
 
 protocol BusinessStateManagerProtocol {
     var state: BusinessState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<BusinessState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState
 
     func switchPrice(_ price: String)
     func adjustPrice(_ plus: Bool, pricePricision: Int)
@@ -38,9 +35,6 @@ protocol BusinessStateManagerProtocol {
 }
 
 class BusinessCoordinator: AccountRootCoordinator {
-
-    lazy var creator = BusinessPropertyActionCreate()
-
     var store = Store<BusinessState>(
         reducer: businessReducer,
         state: nil,
@@ -76,12 +70,6 @@ extension BusinessCoordinator: BusinessCoordinatorProtocol {
 extension BusinessCoordinator: BusinessStateManagerProtocol {
     var state: BusinessState {
         return store.state
-    }
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<BusinessState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
     }
 
     func changeAmountAction(_ amount: String) {

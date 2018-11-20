@@ -18,15 +18,9 @@ protocol ExchangeCoordinatorProtocol {
 
 protocol ExchangeStateManagerProtocol {
     var state: ExchangeState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<ExchangeState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
 }
 
 class ExchangeCoordinator: TradeRootCoordinator {
-
-    lazy var creator = ExchangePropertyActionCreate()
-
     var store = Store<ExchangeState>(
         reducer: exchangeReducer,
         state: nil,
@@ -100,11 +94,4 @@ extension ExchangeCoordinator: ExchangeStateManagerProtocol {
     var state: ExchangeState {
         return store.state
     }
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<ExchangeState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-
 }

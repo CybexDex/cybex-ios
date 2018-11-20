@@ -34,14 +34,3 @@ struct TransferAddressSelectDataAction: Action {
 
 struct TransferAddressHomeCallbackState {
 }
-
-// MARK: - Action Creator
-class TransferAddressHomePropertyActionCreate {
-    public typealias ActionCreator = (_ state: TransferAddressHomeState, _ store: Store<TransferAddressHomeState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: TransferAddressHomeState,
-        _ store: Store <TransferAddressHomeState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

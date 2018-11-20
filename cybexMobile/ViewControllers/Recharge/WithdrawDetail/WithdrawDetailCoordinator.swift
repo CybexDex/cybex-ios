@@ -19,15 +19,9 @@ protocol WithdrawDetailCoordinatorProtocol {
 
 protocol WithdrawDetailStateManagerProtocol {
     var state: WithdrawDetailState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<WithdrawDetailState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState
 }
 
 class WithdrawDetailCoordinator: AccountRootCoordinator {
-
-    lazy var creator = WithdrawDetailPropertyActionCreate()
-
     var store = Store<WithdrawDetailState>(
         reducer: withdrawDetailReducer,
         state: nil,
@@ -81,9 +75,4 @@ extension WithdrawDetailCoordinator: WithdrawDetailStateManagerProtocol {
         return store.state
     }
 
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<WithdrawDetailState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
 }

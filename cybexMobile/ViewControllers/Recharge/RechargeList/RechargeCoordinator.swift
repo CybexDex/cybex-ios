@@ -25,9 +25,6 @@ protocol RechargeCoordinatorProtocol {
 
 protocol RechargeStateManagerProtocol {
     var state: RechargeState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<RechargeState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState
 
     func fetchWithdrawIdsInfo()
     func fetchDepositIdsInfo()
@@ -36,9 +33,6 @@ protocol RechargeStateManagerProtocol {
 }
 
 class RechargeCoordinator: NavCoordinator {
-
-    lazy var creator = RechargePropertyActionCreate()
-
     var store = Store(
         reducer: rechargeReducer,
         state: nil,
@@ -97,11 +91,6 @@ extension RechargeCoordinator: RechargeStateManagerProtocol {
         return store.state
     }
 
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<RechargeState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
     func fetchWithdrawIdsInfo() {
         SimpleHTTPService.fetchWithdrawIdsInfo().done { (ids) in
             self.store.dispatch(FecthWithdrawIds(data: ids))

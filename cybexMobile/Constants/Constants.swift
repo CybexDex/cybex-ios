@@ -13,7 +13,7 @@ typealias CommonCallback = () -> Void
 typealias CommonAnyCallback = (Any) -> Void
 
 var appData: AppPropertyState {
-    return AppConfiguration.shared.appCoordinator.state.property
+    return appState.property
 }
 var appState: AppState {
     return AppConfiguration.shared.appCoordinator.state
@@ -36,7 +36,6 @@ struct AppConfiguration {
         appCoordinator = AppCoordinator(rootVC: rootVC)
     }
 
-    static let APPID = "1435025350"
     static var ServerBaseURLString = "https://app.cybex.io/"
     static var ServerRegisterBaseURLString = "https://faucet.cybex.io/"
     static var GatewayURLString = "https://gateway.cybex.io/gateway"
@@ -65,9 +64,6 @@ struct AppConfiguration {
         return ServerBaseURLString + "market_list?base="
     }
 
-    static var FAQNightTheme            = "https://cybex.io/token_applications/new?style=night"
-    static var FAQLightTheme            = "https://cybex.io/token_applications/new"
-
     static var ETHPrice: String {
         return ServerBaseURLString + "price"
     }
@@ -79,13 +75,6 @@ struct AppConfiguration {
     }
     static var ASSET: String {
         return ServerBaseURLString + "json/assets.json"
-    }
-    //  json/withdraw_msg.json
-    static var WithdrawMSG: String {
-        return ServerBaseURLString + "json/withdraw_msg.json"
-    }
-    static var DepositMSG: String {
-        return ServerBaseURLString + "json/deposit_msg.json"
     }
 
     static var MARKETLISTS: String {
@@ -100,7 +89,6 @@ struct AppConfiguration {
     static var HelpNightURL = "http://47.75.154.39:3009/cybexnight?lang="
     static var HelpLightURL = "http://47.75.154.39:3009/cybexday?lang="
 
-    static var GatewayTestURLStringa = "https://gatewaytest.cybex.io/gateway"
     static var ServerRegisterBaseTestURLString = "https://faucet.51nebula.com/"
     static var ServerTestBaseURLString = "http://47.91.242.71:3039/"
 
@@ -158,27 +146,6 @@ enum Candlesticks: Double, Hashable {
     }
 
     static let all: [Candlesticks] = [.fiveMinute, .oneHour, .oneDay]
-}
-
-enum ChainTypesObjectType: Int {
-    case null = 0
-    case base
-    case account
-    case asset
-    case forceSettlement
-    case committeeMember
-    case witness
-    case limitOrder
-    case callOrder
-    case custom
-    case proposal
-    case operationHistory
-    case withdrawPermission
-    case vestingBalance
-    case worker
-    case balance
-    case crowdfund
-    case crowdfundContract
 }
 
 enum ChainTypesOperations: Int {

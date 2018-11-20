@@ -22,15 +22,3 @@ struct TradeState: StateType {
 
 struct TradePropertyState {
 }
-
-// MARK: - Action Creator
-class TradePropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: TradeState, _ store: Store<TradeState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: TradeState,
-        _ store: Store <TradeState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-
-}

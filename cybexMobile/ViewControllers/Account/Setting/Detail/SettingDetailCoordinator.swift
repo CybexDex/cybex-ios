@@ -15,15 +15,10 @@ protocol SettingDetailCoordinatorProtocol {
 
 protocol SettingDetailStateManagerProtocol {
     var state: SettingDetailState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<SettingDetailState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
+
 }
 
 class SettingDetailCoordinator: AccountRootCoordinator {
-
-    lazy var creator = SettingDetailPropertyActionCreate()
-
     var store = Store<SettingDetailState>(
         reducer: gSettingDetailReducer,
         state: nil,
@@ -42,11 +37,4 @@ extension SettingDetailCoordinator: SettingDetailStateManagerProtocol {
     var state: SettingDetailState {
         return store.state
     }
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<SettingDetailState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-
 }

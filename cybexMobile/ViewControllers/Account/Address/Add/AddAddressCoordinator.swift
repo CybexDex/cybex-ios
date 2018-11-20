@@ -21,9 +21,6 @@ protocol AddAddressCoordinatorProtocol {
 
 protocol AddAddressStateManagerProtocol {
     var state: AddAddressState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<AddAddressState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
 
     func verityAddress(_ address: String, type: AddressType)
 
@@ -40,9 +37,6 @@ protocol AddAddressStateManagerProtocol {
 }
 
 class AddAddressCoordinator: AccountRootCoordinator {
-
-    lazy var creator = AddAddressPropertyActionCreate()
-
     var store = Store<AddAddressState>(
         reducer: addAddressReducer,
         state: nil,
@@ -67,12 +61,6 @@ extension AddAddressCoordinator: AddAddressCoordinatorProtocol {
 extension AddAddressCoordinator: AddAddressStateManagerProtocol {
     var state: AddAddressState {
         return store.state
-    }
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<AddAddressState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
     }
 
     func verityAddress(_ address: String, type: AddressType) {

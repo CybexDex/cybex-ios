@@ -9,7 +9,5 @@
 import Foundation
 
 extension ETOCrowdGridItemView {
-    func adapterModelToETOCrowdGridItemView(_ model: Any) {
-
-    }
+ 
 }

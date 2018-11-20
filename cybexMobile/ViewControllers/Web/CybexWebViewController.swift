@@ -91,11 +91,7 @@ class CybexWebViewController: BaseWebViewController {
     }
 
     func setURL() {
-        if ThemeManager.currentThemeIndex == 0 {
-            self.url = URL(string: AppConfiguration.HelpNightURL + Localize.currentLanguage())
-        } else {
-            self.url = URL(string: AppConfiguration.FAQLightTheme + Localize.currentLanguage())
-        }
+    
     }
 
     override func configureObserveState() {

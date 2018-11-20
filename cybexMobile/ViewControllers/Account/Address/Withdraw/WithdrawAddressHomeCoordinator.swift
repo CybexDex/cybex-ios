@@ -16,9 +16,6 @@ protocol WithdrawAddressHomeCoordinatorProtocol {
 
 protocol WithdrawAddressHomeStateManagerProtocol {
     var state: WithdrawAddressHomeState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<WithdrawAddressHomeState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
 
     func fetchData()
     func fetchAddressData()
@@ -26,8 +23,6 @@ protocol WithdrawAddressHomeStateManagerProtocol {
 }
 
 class WithdrawAddressHomeCoordinator: AccountRootCoordinator {
-    lazy var creator = WithdrawAddressHomePropertyActionCreate()
-
     var store = Store<WithdrawAddressHomeState>(
         reducer: withdrawAddressHomeReducer,
         state: nil,
@@ -55,12 +50,6 @@ extension WithdrawAddressHomeCoordinator: WithdrawAddressHomeCoordinatorProtocol
 extension WithdrawAddressHomeCoordinator: WithdrawAddressHomeStateManagerProtocol {
     var state: WithdrawAddressHomeState {
         return store.state
-    }
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<WithdrawAddressHomeState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
     }
 
     func fetchData() {

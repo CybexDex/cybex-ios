@@ -71,14 +71,3 @@ struct CleanToAccountAction: Action {
 struct ChooseAccountAction: Action {
     var account: TransferAddress
 }
-
-// MARK: - Action Creator
-class TransferPropertyActionCreate {
-    public typealias ActionCreator = (_ state: TransferState, _ store: Store<TransferState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: TransferState,
-        _ store: Store <TransferState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

@@ -13,22 +13,7 @@ import Repeat
 import SwifterSwift
 import Reachability
 
-extension AppCoordinator: AppStateManagerProtocol {
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<AppState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-
-    func fetchData(_ params: AssetPairQueryParams, sub: Bool = true, priority: Foundation.Operation.QueuePriority = .normal) {
-        store.dispatch(creator.fetchMarket(with: sub, params: params, priority: priority, callback: { [weak self] (assets) in
-            guard let `self` = self else { return }
-
-            self.store.dispatch(MarketsFetched(pair: params, assets: assets))
-        }))
-    }
-
+extension AppCoordinator {
     func fetchTickerData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority) {
         creator.fetchCurrencyList(params) { [weak self](asset) in
             guard let `self` = self else { return }
@@ -104,19 +89,6 @@ extension AppCoordinator: AppStateManagerProtocol {
         }
 
         timer?.start()
-    }
-
-    func fetchGetToCyb(_ callback:@escaping(Decimal) -> Void) {
-        let request = GetTickerRequest(baseName: AssetConfiguration.ETH, quoteName: AssetConfiguration.CYB, response: { [weak self](data) in
-            guard let `self` = self else { return }
-            if let data = data as? Ticker, let dataDouble = data.latest.toDecimal(), dataDouble != 0 {
-                self.getToCybRelation = Decimal(floatLiteral: 1) / dataDouble
-                callback(1 / dataDouble)
-            } else {
-                callback(0)
-            }
-        })
-        CybexWebSocketService.shared.send(request: request)
     }
 }
 

@@ -19,14 +19,3 @@ struct PickerState: StateType {
 
 struct PickerPropertyState {
 }
-
-// MARK: - Action Creator
-class PickerPropertyActionCreate {
-    public typealias ActionCreator = (_ state: PickerState, _ store: Store<PickerState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: PickerState,
-        _ store: Store <PickerState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

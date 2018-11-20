@@ -17,8 +17,3 @@ struct WithdrawAndDespoitRecordState: BaseState {
 
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 }
-
-// MARK: - Action
-struct WithdrawAndDespoitRecordFetchedAction: Action {
-    var data: JSON
-}

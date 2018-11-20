@@ -15,9 +15,6 @@ protocol TradeHistoryCoordinatorProtocol {
 
 protocol TradeHistoryStateManagerProtocol {
     var state: TradeHistoryState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<TradeHistoryState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState
 
     func resetData()
     func fetchData(_ pair: Pair)
@@ -25,9 +22,6 @@ protocol TradeHistoryStateManagerProtocol {
 }
 
 class TradeHistoryCoordinator: HomeRootCoordinator {
-
-    lazy var creator = TradeHistoryPropertyActionCreate()
-
     var store = Store<TradeHistoryState>(
         reducer: tradeHistoryReducer,
         state: nil,
@@ -44,12 +38,6 @@ extension TradeHistoryCoordinator: TradeHistoryStateManagerProtocol {
         return store.state
     }
 
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<TradeHistoryState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-
     func resetData() {
         self.store.dispatch(FetchedFillOrderData(data: []))
     }
@@ -58,13 +46,23 @@ extension TradeHistoryCoordinator: TradeHistoryStateManagerProtocol {
         if CybexWebSocketService.shared.overload() {
             return
         }
-        store.dispatch(creator.fetchFillOrders(with: pair, callback: {[weak self] (data) in
+        fetchFillOrders(with: pair, callback: {[weak self] (data) in
             guard let `self` = self else { return }
 
             if let data = data as? [JSON] {
                 self.store.dispatch(FetchedFillOrderData(data: data))
             }
-        }))
+        })
+    }
+
+    func fetchFillOrders(with pair: Pair, callback: CommonAnyCallback?) {
+        let request = GetFillOrderHistoryRequest(pair: pair) { (response) in
+            if let callback = callback {
+                callback(response)
+            }
+        }
+
+        CybexWebSocketService.shared.send(request: request)
     }
 
     func updateMarketListHeight(_ height: CGFloat) {

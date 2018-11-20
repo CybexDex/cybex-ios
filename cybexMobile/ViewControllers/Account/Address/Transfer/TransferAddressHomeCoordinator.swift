@@ -18,9 +18,6 @@ protocol TransferAddressHomeCoordinatorProtocol {
 
 protocol TransferAddressHomeStateManagerProtocol {
     var state: TransferAddressHomeState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<TransferAddressHomeState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
 
     func refreshData()
 
@@ -31,8 +28,6 @@ protocol TransferAddressHomeStateManagerProtocol {
 }
 
 class TransferAddressHomeCoordinator: AccountRootCoordinator {
-    lazy var creator = TransferAddressHomePropertyActionCreate()
-
     var store = Store<TransferAddressHomeState>(
         reducer: transferAddressHomeReducer,
         state: nil,
@@ -85,12 +80,6 @@ extension TransferAddressHomeCoordinator: TransferAddressHomeCoordinatorProtocol
 extension TransferAddressHomeCoordinator: TransferAddressHomeStateManagerProtocol {
     var state: TransferAddressHomeState {
         return store.state
-    }
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<TransferAddressHomeState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
     }
 
     func refreshData() {

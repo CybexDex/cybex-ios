@@ -25,14 +25,3 @@ struct WithdrawDetailPropertyState {
 struct FetchAddressInfo: Action {
   let data: AccountAddressRecord
 }
-
-// MARK: - Action Creator
-class WithdrawDetailPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: WithdrawDetailState, _ store: Store<WithdrawDetailState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: WithdrawDetailState,
-        _ store: Store <WithdrawDetailState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

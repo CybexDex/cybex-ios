@@ -24,17 +24,6 @@ class TradeHistoryView: UIView {
         }
     }
 
-    // 绑定的数据
-    fileprivate var reloadData: [TradeHistoryViewModel]? {
-        didSet {
-        }
-    }
-
-    // 重置绑定的数据
-    fileprivate func resetReloadData(_ sender: [TradeHistoryViewModel]) {
-
-    }
-
     func setup() {
         let cell = String.init(describing: TradeHistoryCell.self)
         tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)

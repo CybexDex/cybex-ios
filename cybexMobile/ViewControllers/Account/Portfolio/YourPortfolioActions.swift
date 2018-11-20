@@ -20,13 +20,3 @@ struct YourPortfolioState: StateType {
 struct YourPortfolioPropertyState {
 }
 
-// MARK: - Action Creator
-class YourPortfolioPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: YourPortfolioState, _ store: Store<YourPortfolioState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: YourPortfolioState,
-        _ store: Store <YourPortfolioState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

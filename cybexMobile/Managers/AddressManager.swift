@@ -49,12 +49,6 @@ class AddressManager {
         return NSUUID().uuidString
     }
 
-    func getWithDrawAddressList() -> [WithdrawAddress] {
-        let list = Defaults[.withdrawAddressList]
-
-        return list
-    }
-
     func getWithDrawAddressListWith(_ currency: String) -> [WithdrawAddress] {
         let list = Defaults[.withdrawAddressList]
 
@@ -114,14 +108,6 @@ class AddressManager {
         return false
     }
 
-    func updateWithDrawAddress(_ info: WithdrawAddress) {
-        let result = containWithDrawAddress(info.id)
-
-        if result.0, let old = result.1 {
-            removeWithDrawAddress(old.id)
-            addWithDrawAddress(info)
-        }
-    }
 
     // MARK: - - Transfer
 
@@ -180,15 +166,5 @@ class AddressManager {
         }
 
         return false
-    }
-
-    func updateTransferAddress(_ info: TransferAddress) {
-        let result = containTransferAddress(info.id)
-
-        if result.0, let old = result.1 {
-            removeTransferAddress(old.id)
-            addTransferAddress(info)
-        }
-
     }
 }

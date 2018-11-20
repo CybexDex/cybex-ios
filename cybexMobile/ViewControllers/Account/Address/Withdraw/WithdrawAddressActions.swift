@@ -39,14 +39,3 @@ struct WithdrawAddressCallbackState {
 struct SetSelectedAssetAction: Action {
     var asset: String
 }
-
-// MARK: - Action Creator
-class WithdrawAddressPropertyActionCreate {
-    public typealias ActionCreator = (_ state: WithdrawAddressState, _ store: Store<WithdrawAddressState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: WithdrawAddressState,
-        _ store: Store <WithdrawAddressState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

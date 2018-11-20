@@ -47,14 +47,3 @@ struct SetNoteAction: Action {
 struct SetAddressAction: Action {
     var data: String
 }
-
-// MARK: - Action Creator
-class AddAddressPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: AddAddressState, _ store: Store<AddAddressState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: AddAddressState,
-        _ store: Store <AddAddressState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}

@@ -22,8 +22,6 @@ protocol TransferCoordinatorProtocol {
 
     func showPicker()
 
-    func pop()
-
     func openAddTransferAddress(_ sender: TransferAddress)
 
     func reopenAction()
@@ -31,9 +29,6 @@ protocol TransferCoordinatorProtocol {
 
 protocol TransferStateManagerProtocol {
     var state: TransferState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<TransferState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState
 
     //获取转账收款人信息
     func getTransferAccountInfo()
@@ -61,9 +56,6 @@ protocol TransferStateManagerProtocol {
 }
 
 class TransferCoordinator: NavCoordinator {
-
-    lazy var creator = TransferPropertyActionCreate()
-
     var store = Store<TransferState>(
         reducer: transferReducer,
         state: nil,
@@ -380,12 +372,6 @@ extension TransferCoordinator: TransferStateManagerProtocol {
 
     var state: TransferState {
         return store.state
-    }
-
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<TransferState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
     }
 
     func chooseOrAddAddress() {

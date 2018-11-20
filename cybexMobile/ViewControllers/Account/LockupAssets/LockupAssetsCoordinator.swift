@@ -15,16 +15,12 @@ protocol LockupAssetsCoordinatorProtocol {
 
 protocol LockupAssetsStateManagerProtocol {
   var state: LockupAssetsState { get }
-  func subscribe<SelectedState, S: StoreSubscriber>(
-    _ subscriber: S, transform: ((Subscription<LockupAssetsState>) -> Subscription<SelectedState>)?
-  ) where S.StoreSubscriberStateType == SelectedState
+
   // 定义拉取数据的方法
   func fetchLockupAssetsData(_ address: [String])
 }
 
 class LockupAssetsCoordinator: AccountRootCoordinator {
-  lazy var creator = LockupAssetsPropertyActionCreate()
-
   var store = Store<LockupAssetsState>(
     reducer: gLockupAssetsReducer,
     state: nil,
@@ -39,12 +35,6 @@ extension LockupAssetsCoordinator: LockupAssetsCoordinatorProtocol {
 extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
   var state: LockupAssetsState {
     return store.state
-  }
-
-  func subscribe<SelectedState, S: StoreSubscriber>(
-    _ subscriber: S, transform: ((Subscription<LockupAssetsState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState {
-    store.subscribe(subscriber, transform: transform)
   }
 
   // 拉取数据的方法

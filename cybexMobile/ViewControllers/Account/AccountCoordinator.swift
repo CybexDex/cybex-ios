@@ -16,22 +16,13 @@ protocol AccountCoordinatorProtocol {
     func openYourProtfolio()
     func openSetting()
     func openRecharge()
-
-    func openTransfreList()
 }
 
 protocol AccountStateManagerProtocol {
     var state: AccountState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<AccountState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
-
 }
 
 class AccountCoordinator: AccountRootCoordinator {
-
-    lazy var creator = AccountPropertyActionCreate()
-
     var store = Store<AccountState>(
         reducer: gAccountReducer,
         state: nil,
@@ -100,20 +91,9 @@ extension AccountCoordinator: AccountCoordinatorProtocol {
         vc.coordinator = coordinator
         self.rootVC.pushViewController(vc, animated: true)
     }
-
-    func openTransfreList() {
-        let vc = R.storyboard.recode.transferListViewController()!
-        vc.coordinator = TransferListCoordinator(rootVC: self.rootVC)
-        self.rootVC.pushViewController(vc, animated: true)
-    }
 }
 
 extension AccountCoordinator: AccountStateManagerProtocol {
 
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<AccountState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
 
 }

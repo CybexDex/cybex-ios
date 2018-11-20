@@ -59,14 +59,3 @@ struct SwitchPercentAction: Action {
 
 struct ResetTrade: Action {
 }
-
-// MARK: - Action Creator
-class BusinessPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: BusinessState, _ store: Store<BusinessState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: BusinessState,
-        _ store: Store <BusinessState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-}
