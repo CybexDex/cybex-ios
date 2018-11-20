@@ -24,6 +24,10 @@ class ChatViewController: MessagesViewController {
         return nil
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     var shadowView: UIView?
     var upInputView: ChatUpInputView?
     var coordinator: (ChatCoordinatorProtocol & ChatStateManagerProtocol)?
@@ -44,6 +48,7 @@ class ChatViewController: MessagesViewController {
         setupData()
         setupEvent()
     }
+    
     
     func setupShadowView() {
         self.shadowView = UIView(frame: self.view.bounds)

@@ -166,6 +166,7 @@
 "withdraw_available" = "Available";
 "withdraw_address"   = "Withdraw Address";
 "withdraw_address_placehold"   = "Enter or paste address";
+"withdraw_tag_placehold" = "Enter or paste";
 
 "eos_withdraw_account" = "Withdraw Account";
 "eos_withdraw_account_placehold" = "Enter or paste address address";
@@ -187,6 +188,8 @@
 
 "deposit_save"     = "Save QR Code";
 "deposit_copy"     = "Copy Address";
+"deposit_tag_copy" = "Copy Tag";
+
 "deposti_get"      = "Get New Address";
 
 "alert_cancle"     = "CANCEL";
@@ -263,10 +266,15 @@
 
 "eos_account_title" = "EOS Deposit Account";
 "eos_copy_account" = "Copy Account Name";
+"tag_copy_account" = "Copy Tag";
+
 "eos_code"  = "Verification code";
 "eos_code_tip" = "(Must transfer your EOS to deposit account with this verification code in memo)";
 "eos_copy_code" = "Copy Code";
 "eos_reset_code" = "Get New Code";
+
+"xrp_code" = "XRP Deposit Tag";
+"xrp_code_tip" = "(Please send your XRP with the tag displayed below. please do not put any other information on Tag)";
 
 "business_login_title" = "Log in to exchange";
 

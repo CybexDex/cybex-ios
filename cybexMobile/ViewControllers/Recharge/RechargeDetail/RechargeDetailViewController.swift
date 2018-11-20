@@ -72,11 +72,11 @@ class RechargeDetailViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.contentView.trade  = self.trade
+        self.contentView.trade = self.trade
     }
     func setupUI() {
-        self.contentView.trade  = self.trade
-        self.contentView.balance  = self.balance
+        self.contentView.trade = self.trade
+        self.contentView.balance = self.balance
 
         self.configRightNavButton(R.image.icWithdrawNew24Px())
     }

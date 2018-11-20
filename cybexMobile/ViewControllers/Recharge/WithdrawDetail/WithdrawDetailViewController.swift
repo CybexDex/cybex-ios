@@ -43,6 +43,12 @@ class WithdrawDetailViewController: BaseViewController {
             } else {
                 containerView = WithdrawView(frame: .zero)
                 self.view.addSubview(containerView!)
+                if name == "XRP" {
+                    containerView?.tagView.isHidden = false
+                }
+                else {
+                    containerView?.tagView.isHidden = true
+                }
                 containerView?.edgesToDevice(vc: self, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true, usingSafeArea: true)
                 self.containerView?.introduce.attributedText = message.set(style: StyleNames.withdrawIntroduce.rawValue)
             }
@@ -136,16 +142,25 @@ extension WithdrawDetailViewController {
             self.showToastBox(false, message: message)
         })
     }
-
-    @objc func copyAccount(_ sender: Any) {
+    
+    @objc func copyTag(_ sender: Any) {
         if self.trade?.enable == false {
             return
         }
         if let info = sender as? [String: String] {
             let board = UIPasteboard.general
-            board.string = info["account"]
-            self.showToastBox(true, message: R.string.localizable.eos_copy_account.key.localized())
+            board.string = info["tag"]
+            self.showToastBox(true, message: R.string.localizable.recharge_copy.key.localized())
         }
+    }
+
+    @objc func copyAccount(_ sender: Any) {
+        if self.trade?.enable == false {
+            return
+        }
+        let board = UIPasteboard.general
+        board.string = containerView?.address.text
+        self.showToastBox(true, message: R.string.localizable.tag_copy_account.key.localized())
     }
 
     @objc func copyCode(_ sender: Any) {
