@@ -75,7 +75,6 @@ class ChatViewController: MessagesViewController {
         self.coordinator?.disconnect()
     }
     
-    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -435,6 +434,11 @@ extension ChatViewController {
                 self.downInputView?.inputTextField.text = message
                 self.showPasswordBox()
             }
+        }
+        else {
+            self.coordinator?.send(message,
+                                   username: UserManager.shared.name.value!,
+                                   sign: "")
         }
     }
     
