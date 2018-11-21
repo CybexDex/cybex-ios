@@ -14,6 +14,8 @@ enum CybexError: Error {
     case networkError(code: NetworkErrorCode)
     case serviceHTTPError(desc: String)
     case serviceFriendlyError(code:Int, desc: JSON)
+    case keychainOperation(status: OSStatus)
+    case generalError(reason: GeneralErrorReason)
 
     var localizedDescription: String {
         switch self {
@@ -32,6 +34,29 @@ enum CybexError: Error {
                 }
             }
             return ""
+        case let .keychainOperation(status):
+            return "\(status)"
+        case .generalError(let reason):
+            return reason.errorDescription
+        }
+    }
+}
+
+extension CybexError {
+    enum GeneralErrorReason {
+        /// Cannot convert `string` to valid data with `encoding`. Code 4001.
+        case conversionError(string: String, encoding: String.Encoding)
+
+        /// The method is invoked with an invalid parameter. Code 4002.
+        case parameterError(parameterName: String, description: String)
+
+        var errorDescription: String {
+            switch self {
+            case .conversionError(let text, let encoding):
+                return "Cannot convert target \"\(text)\" to valid data under \(encoding) encoding."
+            case .parameterError(let parameterName, let reason):
+                return "Method invoked with an invalid parameter \"\(parameterName)\". Reason: \(reason)"
+            }
         }
     }
 }
@@ -65,4 +90,24 @@ extension CybexError: Equatable {
         }
     }
 
+}
+
+public enum CybexErrorUserInfoKey: String {
+    case underlyingError
+    case statusCode
+    case resultCode
+    case type
+    case data
+    case APIError
+    case raw
+    case url
+    case message
+    case status
+    case text
+    case encoding
+    case parameterName
+    case reason
+    case index
+    case key
+    case got
 }

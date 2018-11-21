@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>InputPlugin Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/InputPlugin" class="dashAnchor"></a>
+    <a title="InputPlugin Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (47% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        InputPlugin Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AvatarView.html">AvatarView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CellSizeCalculator.html">CellSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatService.html">ChatService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatServiceProvider.html">ChatServiceProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatServiceProvider/SendType.html">– SendType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatServiceProvider/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputBarButtonItem.html">InputBarButtonItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputBarButtonItem/Spacing.html">– Spacing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputStackView.html">InputStackView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputStackView/Position.html">– Position</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputTextView.html">InputTextView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InsetLabel.html">InsetLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LocationMessageCell.html">LocationMessageCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LocationMessageSizeCalculator.html">LocationMessageSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MediaMessageCell.html">MediaMessageCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MediaMessageSizeCalculator.html">MediaMessageSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageCollectionViewCell.html">MessageCollectionViewCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageContainerView.html">MessageContainerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageContentCell.html">MessageContentCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageInputBar.html">MessageInputBar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageKitDateFormatter.html">MessageKitDateFormatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageLabel.html">MessageLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageReusableView.html">MessageReusableView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesCollectionView.html">MessagesCollectionView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesCollectionViewFlowLayout.html">MessagesCollectionViewFlowLayout</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesViewController.html">MessagesViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NSLayoutConstraintSet.html">NSLayoutConstraintSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PlayButtonView.html">PlayButtonView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SeparatorLine.html">SeparatorLine</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TextMessageCell.html">TextMessageCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TextMessageSizeCalculator.html">TextMessageSizeCalculator</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/DetectorType.html">DetectorType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageKind.html">MessageKind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageKitError.html">MessageKitError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageStyle.html">MessageStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageStyle/TailCorner.html">– TailCorner</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageStyle/TailStyle.html">– TailStyle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Bundle.html">Bundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CGRect.html">CGRect</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSON.html">JSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSAttributedString.html">NSAttributedString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSMutableAttributedString.html">NSMutableAttributedString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIEdgeInsets.html">UIEdgeInsets</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIView.html">UIView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/InputItem.html">InputItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/InputPlugin.html">InputPlugin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LocationItem.html">LocationItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MediaItem.html">MediaItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageCellDelegate.html">MessageCellDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageInputBarDelegate.html">MessageInputBarDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageLabelDelegate.html">MessageLabelDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageType.html">MessageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessagesDataSource.html">MessagesDataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessagesDisplayDelegate.html">MessagesDisplayDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessagesLayoutDelegate.html">MessagesLayoutDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NBLConvertable.html">NBLConvertable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NBLModel.html">NBLModel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Avatar.html">Avatar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AvatarPosition.html">AvatarPosition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AvatarPosition/Horizontal.html">– Horizontal</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AvatarPosition/Vertical.html">– Vertical</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChatMessage.html">ChatMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HorizontalEdgeInsets.html">HorizontalEdgeInsets</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LabelAlignment.html">LabelAlignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LocationMessageSnapshotOptions.html">LocationMessageSnapshotOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Sender.html">Sender</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>InputPlugin</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">InputPlugin</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
+
+                </div>
+              </div>
+            <p><code>InputPlugin</code> is a protocol that makes integrating plugins to the <code><a href="../Classes/MessageInputBar.html">MessageInputBar</a></code> easy.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom11InputPluginP10reloadDatayyF"></a>
+                    <a name="//apple_ref/swift/Method/reloadData()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom11InputPluginP10reloadDatayyF">reloadData()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Should reload the state if the <code>InputPlugin</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">reloadData</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom11InputPluginP10invalidateyyF"></a>
+                    <a name="//apple_ref/swift/Method/invalidate()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom11InputPluginP10invalidateyyF">invalidate()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Should remove any content that the <code>InputPlugin</code> is managing</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">invalidate</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom11InputPluginP06handleC02ofSbyXl_tF"></a>
+                    <a name="//apple_ref/swift/Method/handleInput(of:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom11InputPluginP06handleC02ofSbyXl_tF">handleInput(of:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Should handle the input of data types that an <code>InputPlugin</code> manages</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">handleInput</span><span class="p">(</span><span class="n">of</span> <span class="nv">object</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>object</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The object to input</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-11-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

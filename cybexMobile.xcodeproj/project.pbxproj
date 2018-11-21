@@ -483,6 +483,23 @@
 		73587EB62137C69B006CF8A6 /* ETOCrowdViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */; };
 		735A3D022160A73200FC8922 /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735A3D012160A73000FC8922 /* NBLCommonModule.framework */; };
 		73731D7D21A2CE68005B9B3C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B4214D045B00761955 /* RxSwift.framework */; };
+		73731D8321A5378E005B9B3C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8221A5378E005B9B3C /* Helpers.swift */; };
+		73731D8521A5382A005B9B3C /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8421A5382A005B9B3C /* Delegate.swift */; };
+		73731D8721A53846005B9B3C /* CallbackQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8621A53846005B9B3C /* CallbackQueue.swift */; };
+		73731D8921A53894005B9B3C /* NotificationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8821A53894005B9B3C /* NotificationToken.swift */; };
+		73731D8B21A538AF005B9B3C /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8A21A538AF005B9B3C /* KeychainStore.swift */; };
+		73731D8D21A538CF005B9B3C /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8C21A538CF005B9B3C /* Result.swift */; };
+		73731D9021A53C45005B9B3C /* CryptoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8F21A53C45005B9B3C /* CryptoData.swift */; };
+		73731D9221A53C60005B9B3C /* CryptoAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D9121A53C60005B9B3C /* CryptoAlgorithm.swift */; };
+		737E596021A53C8D001199E4 /* CryptoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E595F21A53C8D001199E4 /* CryptoKey.swift */; };
+		737E596221A53CA5001199E4 /* CryptoHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E596121A53CA5001199E4 /* CryptoHelpers.swift */; };
+		737E596421A53CC7001199E4 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E596321A53CC7001199E4 /* CryptoError.swift */; };
+		737E596621A53D42001199E4 /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E596521A53D42001199E4 /* RSA.swift */; };
+		737E596921A53D69001199E4 /* ECDSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E596821A53D69001199E4 /* ECDSA.swift */; };
+		737E596D21A541E6001199E4 /* JWK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E596C21A541E6001199E4 /* JWK.swift */; };
+		737E596F21A54211001199E4 /* JWA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E596E21A54211001199E4 /* JWA.swift */; };
+		737E597121A5422B001199E4 /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E597021A5422B001199E4 /* JWT.swift */; };
+		737E597321A5423E001199E4 /* JWTHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E597221A5423E001199E4 /* JWTHelpers.swift */; };
 		737F8C352145532A00DD522A /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737F8C342145532A00DD522A /* String+Extensions.swift */; };
 		7386F29A212120F200ABC924 /* RPCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F299212120F200ABC924 /* RPCTest.swift */; };
 		7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386F29B212124BF00ABC924 /* AddressManager.swift */; };
@@ -1255,6 +1272,23 @@
 		73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdViewAdapter.swift; sourceTree = "<group>"; };
 		735A3D012160A73000FC8922 /* NBLCommonModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NBLCommonModule.framework; path = Carthage/Build/iOS/Static/NBLCommonModule.framework; sourceTree = "<group>"; };
 		737258FAB6762972136E4188BF20F602 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
+		73731D8221A5378E005B9B3C /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		73731D8421A5382A005B9B3C /* Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
+		73731D8621A53846005B9B3C /* CallbackQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallbackQueue.swift; sourceTree = "<group>"; };
+		73731D8821A53894005B9B3C /* NotificationToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationToken.swift; sourceTree = "<group>"; };
+		73731D8A21A538AF005B9B3C /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
+		73731D8C21A538CF005B9B3C /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		73731D8F21A53C45005B9B3C /* CryptoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoData.swift; sourceTree = "<group>"; };
+		73731D9121A53C60005B9B3C /* CryptoAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoAlgorithm.swift; sourceTree = "<group>"; };
+		737E595F21A53C8D001199E4 /* CryptoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoKey.swift; sourceTree = "<group>"; };
+		737E596121A53CA5001199E4 /* CryptoHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelpers.swift; sourceTree = "<group>"; };
+		737E596321A53CC7001199E4 /* CryptoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoError.swift; sourceTree = "<group>"; };
+		737E596521A53D42001199E4 /* RSA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSA.swift; sourceTree = "<group>"; };
+		737E596821A53D69001199E4 /* ECDSA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECDSA.swift; sourceTree = "<group>"; };
+		737E596C21A541E6001199E4 /* JWK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWK.swift; sourceTree = "<group>"; };
+		737E596E21A54211001199E4 /* JWA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWA.swift; sourceTree = "<group>"; };
+		737E597021A5422B001199E4 /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
+		737E597221A5423E001199E4 /* JWTHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTHelpers.swift; sourceTree = "<group>"; };
 		737F8C342145532A00DD522A /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		7386F28C2121204A00ABC924 /* cybexMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cybexMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7386F2902121204A00ABC924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2059,7 +2093,6 @@
 				3AB0B155D51A3B4BB9BBE8DD11F1A846 /* Optional+Extensions.swift */,
 				737F8C342145532A00DD522A /* String+Extensions.swift */,
 				00878102F90DA574CA4B3BD6A1755724 /* Theme_Extensions.swift */,
-				1FD9516DB7B3ECF8651E0B2A8702D273 /* Tools.swift */,
 				68FF14A7E45FCF7451B32FD5FDA5EABE /* UIColor+Additions.swift */,
 				E84928E21FFBC4F2CE9B9E99DB30918B /* UIColor+Cybexblack.swift */,
 				C90916C662B8C64E050E0CCC9F5D950B /* UIImage+Extensions.swift */,
@@ -2659,6 +2692,48 @@
 				73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		73731D8E21A53C32005B9B3C /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				73731D8F21A53C45005B9B3C /* CryptoData.swift */,
+				73731D9121A53C60005B9B3C /* CryptoAlgorithm.swift */,
+				737E595F21A53C8D001199E4 /* CryptoKey.swift */,
+				737E596121A53CA5001199E4 /* CryptoHelpers.swift */,
+				737E596321A53CC7001199E4 /* CryptoError.swift */,
+				737E596B21A541CE001199E4 /* JWK */,
+				737E596A21A541C8001199E4 /* JWT */,
+				737E596721A53D56001199E4 /* Algorithm */,
+			);
+			path = Crypto;
+			sourceTree = "<group>";
+		};
+		737E596721A53D56001199E4 /* Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				737E596521A53D42001199E4 /* RSA.swift */,
+				737E596821A53D69001199E4 /* ECDSA.swift */,
+			);
+			path = Algorithm;
+			sourceTree = "<group>";
+		};
+		737E596A21A541C8001199E4 /* JWT */ = {
+			isa = PBXGroup;
+			children = (
+				737E597021A5422B001199E4 /* JWT.swift */,
+				737E597221A5423E001199E4 /* JWTHelpers.swift */,
+			);
+			path = JWT;
+			sourceTree = "<group>";
+		};
+		737E596B21A541CE001199E4 /* JWK */ = {
+			isa = PBXGroup;
+			children = (
+				737E596C21A541E6001199E4 /* JWK.swift */,
+				737E596E21A54211001199E4 /* JWA.swift */,
+			);
+			path = JWK;
 			sourceTree = "<group>";
 		};
 		7386F28D2121204A00ABC924 /* cybexMobileTests */ = {
@@ -3348,6 +3423,7 @@
 		CDB5CFC7D170B0A1511D4AD336877512 /* cybexMobile */ = {
 			isa = PBXGroup;
 			children = (
+				73731D8E21A53C32005B9B3C /* Crypto */,
 				45513F547AB0EFB7BD213DB2BFAC9168 /* Base */,
 				001CE5518F8A5D177DC13712C25E1325 /* Constants */,
 				B597FD23132156F1CD884836F3169B37 /* Coordinator */,
@@ -3490,8 +3566,15 @@
 		D81AB8D8584B64ADAFF37AA7BF174C4D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1FD9516DB7B3ECF8651E0B2A8702D273 /* Tools.swift */,
 				E58821AB0DBC6F8D25C15C288A13EEC6 /* Utils.swift */,
 				0700F9114B418AA4174389E04F53D3F7 /* debounce-throttle.swift */,
+				73731D8221A5378E005B9B3C /* Helpers.swift */,
+				73731D8421A5382A005B9B3C /* Delegate.swift */,
+				73731D8621A53846005B9B3C /* CallbackQueue.swift */,
+				73731D8821A53894005B9B3C /* NotificationToken.swift */,
+				73731D8A21A538AF005B9B3C /* KeychainStore.swift */,
+				73731D8C21A538CF005B9B3C /* Result.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -4155,7 +4238,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\necho \"ok\"\n#swiftlint\nelse\necho \"warning: SwiftLint not installed, please brew install SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\necho \"ok\"\nswiftlint\nelse\necho \"warning: SwiftLint not installed, please brew install SwiftLint\"\nfi\n";
 		};
 		BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4348,6 +4431,7 @@
 				739EFB5D2181D10E00424061 /* UIGestureRecognizer+RxGesture.swift in Sources */,
 				7204FFBF2153A0FD00EB0FC7 /* ComprehensiveBlockItemView.swift in Sources */,
 				3B0EB65A210313B200F19C31 /* AccountTableHeadView.swift in Sources */,
+				737E596F21A54211001199E4 /* JWA.swift in Sources */,
 				7386F2A32121665100ABC924 /* AddressHomeCoordinator.swift in Sources */,
 				72968D2F2158DC4E00B0AA77 /* RecordHeaderViewAdapter.swift in Sources */,
 				73539C4A2179A210008395AC /* UIViewControllerType.swift in Sources */,
@@ -4363,6 +4447,7 @@
 				72968D232158CEAC00B0AA77 /* WithdrawAndDespoitRecordViewController.swift in Sources */,
 				B9DE00DA8B7EDD0F9BEA00881C4924C1 /* BusinessTitleCell.swift in Sources */,
 				3B0EB6642103150D00F19C31 /* AccountActions.swift in Sources */,
+				737E597121A5422B001199E4 /* JWT.swift in Sources */,
 				73539C5B2179A282008395AC /* DNSPageHelper.swift in Sources */,
 				73F50BAA213FB5B60071B08D /* Error.swift in Sources */,
 				66A5DD971B80802DF72977E071CAB84D /* BusinessTitleItemView.swift in Sources */,
@@ -4375,6 +4460,7 @@
 				7345FD90219EBF7F0066BD0E /* FCUUID.m in Sources */,
 				73539C492179A210008395AC /* UIViewController+TopMostViewController.swift in Sources */,
 				188394B25D1EF3596A01900469FACBFB /* BusinessTitleView.swift in Sources */,
+				73731D9221A53C60005B9B3C /* CryptoAlgorithm.swift in Sources */,
 				7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */,
 				221EC2382105B1930059F856 /* GrowContentView.swift in Sources */,
 				221EC2392105B1930059F856 /* TitleTextfieldView.swift in Sources */,
@@ -4402,6 +4488,7 @@
 				BAB27405E1C42F6C20B9DBF1FDDBC100 /* CBKLineView.swift in Sources */,
 				B7631744A19B452081A71269BF881246 /* CBKLineVolumeView.swift in Sources */,
 				8C3E5CB53A30AD3221992CCA44A8D332 /* CBMACDModel.swift in Sources */,
+				737E596221A53CA5001199E4 /* CryptoHelpers.swift in Sources */,
 				92AF8740929C204D86A85866576BC844 /* CBMALineBrush.swift in Sources */,
 				7217B0832122AD9D00608531 /* AddAddressView.swift in Sources */,
 				7F38CC71354724DD10BBC3E8BF37C44A /* CBMAModel.swift in Sources */,
@@ -4423,6 +4510,7 @@
 				C96D0912126309ECA43CED968127E06E /* CybexPasswordView.swift in Sources */,
 				C4B9965B38DBF143FD1862CF88F9DAE1 /* CybexTextView.swift in Sources */,
 				CD7ECF264F6C16A3649CE586A93D6269 /* CybexTitleView.swift in Sources */,
+				737E596021A53C8D001199E4 /* CryptoKey.swift in Sources */,
 				8C00D47D4D9F9CB040B6855F6CC7D757 /* DataBaseApi.swift in Sources */,
 				72E2A8EF2151F9DB00FBB3CB /* ComprehensiveViewController.swift in Sources */,
 				7217B07E2122AAFD00608531 /* AddAddressViewController.swift in Sources */,
@@ -4447,18 +4535,21 @@
 				72B42E8321774CFD00587403 /* DespositNameView.swift in Sources */,
 				FC8F317187D539852A834267F3F427FA /* ExchangeCoordinator.swift in Sources */,
 				98CCDC7B05741EEDF9AF05992AA2A8DF /* ExchangeReducers.swift in Sources */,
+				737E596921A53D69001199E4 /* ECDSA.swift in Sources */,
 				A9ADC5BE1460E34FCA1B4F52F30FDE5F /* ExchangeView.swift in Sources */,
 				41369312624D03C488017E7D88E4D41E /* ExchangeViewController.swift in Sources */,
 				3B824A2E2135350200D7A4A7 /* ETODetailViewController.swift in Sources */,
 				3BF5B7EB2135001B00E8BFC9 /* ETODetailIntroView.swift in Sources */,
 				72199D8E21045D4700575226 /* TransferListViewController.swift in Sources */,
 				72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */,
+				737E596D21A541E6001199E4 /* JWK.swift in Sources */,
 				7386F2C121216B9E00ABC924 /* WithdrawAddressViewController.swift in Sources */,
 				72199D8C21045D4700575226 /* TransferListCoordinator.swift in Sources */,
 				8691BEEE7629D4BE41D13D82D9AF29A9 /* GradientLabelView.swift in Sources */,
 				FF9F0639B5927B79A3EFC30AF470DE97 /* GradientLayer.swift in Sources */,
 				221C6175213926570021C007 /* ETORecordListCoordinator.swift in Sources */,
 				9FFDE7661D05B455AFBA92F553A193FC /* GraphQLAPI.swift in Sources */,
+				73731D8D21A538CF005B9B3C /* Result.swift in Sources */,
 				728C280A215A36F70097840A /* RecordChooseReducers.swift in Sources */,
 				BDFF205572EB31DAD4702C934B9A81D1 /* GraphQLManager.swift in Sources */,
 				CA894F0EB69EF4448C0142CE0BE7D9C5 /* HistoryApi.swift in Sources */,
@@ -4583,8 +4674,10 @@
 				73539C4E2179A210008395AC /* URLMatcher.swift in Sources */,
 				73539C602179A282008395AC /* DNSPageStyle.swift in Sources */,
 				CEC8E5E6CEBF33DC5FED8EBCA2AFAAE7 /* PairCardCell.swift in Sources */,
+				737E596421A53CC7001199E4 /* CryptoError.swift in Sources */,
 				7386F2D82121737600ABC924 /* AddressHomeTableViewCellViewView.swift in Sources */,
 				806E6CA899929830A51F0FBB79089A80 /* PairCardView.swift in Sources */,
+				73731D8521A5382A005B9B3C /* Delegate.swift in Sources */,
 				48373055E74D836258CD46891945EF38 /* PairDetailView.swift in Sources */,
 				D3C87D3A247487C8D834A828782FC472 /* PairListHorizantalView.swift in Sources */,
 				72968D292158D72200B0AA77 /* RecordChooseViewAdapter.swift in Sources */,
@@ -4604,6 +4697,7 @@
 				739EFB5F2181D10E00424061 /* TransformGestureRecognizers.swift in Sources */,
 				10F92CEABF192DAC227A5005DD4F12BF /* RechargeDetailActions.swift in Sources */,
 				133E7DE8927D9AD19315D14E638939BE /* RechargeDetailCoordinator.swift in Sources */,
+				73731D8921A53894005B9B3C /* NotificationToken.swift in Sources */,
 				D1C63B5AAC5552A99528E306AC7F57E0 /* RechargeDetailReducers.swift in Sources */,
 				221C6181213940140021C007 /* ETORecordListViewViewAdapter.swift in Sources */,
 				EEC52B0701FDE9B489D4D61193C9B420 /* RechargeDetailViewController.swift in Sources */,
@@ -4615,9 +4709,11 @@
 				221EC24E2105CF310059F856 /* TransferViewController.swift in Sources */,
 				72968D2A2158D72200B0AA77 /* RecordChooseView.swift in Sources */,
 				29C911F371D5F143FB814E54626700D5 /* RechargeSegment.swift in Sources */,
+				73731D8321A5378E005B9B3C /* Helpers.swift in Sources */,
 				E593AB226F596677B1664A82995509CA /* RechargeViewController.swift in Sources */,
 				60FB6241E99099A751F12BD01130832D /* RegisterActions.swift in Sources */,
 				73A3311C219425DA00707D8F /* ChatUser.swift in Sources */,
+				73731D8721A53846005B9B3C /* CallbackQueue.swift in Sources */,
 				D1A397322CB34E638C9DFE14F5C0B4BC /* RegisterCoordinator.swift in Sources */,
 				89BE803D714EF0B7126DCF66439F86A9 /* RegisterReducers.swift in Sources */,
 				0D989B23FC27CC92FAF32E53754D6330 /* RegisterViewController.swift in Sources */,
@@ -4676,6 +4772,7 @@
 				739EFB5E2181D10E00424061 /* UISwipeGestureRecognizer+RxGesture.swift in Sources */,
 				07D976BEA2F5A840607DE4D526DB1420 /* TradeLineView.swift in Sources */,
 				221EC24C2105CF310059F856 /* TransferCoordinator.swift in Sources */,
+				73731D8B21A538AF005B9B3C /* KeychainStore.swift in Sources */,
 				73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */,
 				2E3DB3499E75C0D06068C979CD788B00 /* TradeReducers.swift in Sources */,
 				73539C5A2179A282008395AC /* DNSPageContentView.swift in Sources */,
@@ -4694,10 +4791,12 @@
 				7CA82BA6BC1F22AAA929D52CD5C4434F /* TradeViewController.swift in Sources */,
 				72199DA22104636900575226 /* TransferDetailReducers.swift in Sources */,
 				73539C5C2179A282008395AC /* DNSPageView.swift in Sources */,
+				73731D9021A53C45005B9B3C /* CryptoData.swift in Sources */,
 				221C616E2137FCCF0021C007 /* ImageShareViewController.swift in Sources */,
 				73539C4D2179A210008395AC /* URLConvertible.swift in Sources */,
 				722EC86521895F490091F1BF /* RechargeHeaderView.swift in Sources */,
 				739EFB632181D10E00424061 /* UITapGestureRecognizer+RxGesture.swift in Sources */,
+				737E596621A53D42001199E4 /* RSA.swift in Sources */,
 				7386F2C021216B9E00ABC924 /* WithdrawAddressReducers.swift in Sources */,
 				A0205CDF8595D10C5D9367EBCBBA714A /* UIColor+Additions.swift in Sources */,
 				72B42E7D217723DD00587403 /* PairDetailDateViewView.swift in Sources */,
@@ -4738,6 +4837,7 @@
 				221EC23E2105B3110059F856 /* CornerAndShadowView.swift in Sources */,
 				EC446CED4809CD57D338FB866A5AE631 /* YourPorfolioView.swift in Sources */,
 				7386F2A22121665100ABC924 /* AddressHomeActions.swift in Sources */,
+				737E597321A5423E001199E4 /* JWTHelpers.swift in Sources */,
 				60502E37A09ABFC6DD95A24F6A855B65 /* YourPortfolioActions.swift in Sources */,
 				480BE6AB9D3A7CCE75BCB6BBF9525FFD /* YourPortfolioCell.swift in Sources */,
 				728C2809215A36F70097840A /* RecordChooseViewController.swift in Sources */,

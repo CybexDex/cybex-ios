@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MessagesCollectionViewFlowLayout Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/MessagesCollectionViewFlowLayout" class="dashAnchor"></a>
+    <a title="MessagesCollectionViewFlowLayout Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (47% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        MessagesCollectionViewFlowLayout Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AvatarView.html">AvatarView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CellSizeCalculator.html">CellSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatService.html">ChatService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatServiceProvider.html">ChatServiceProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatServiceProvider/SendType.html">– SendType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatServiceProvider/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputBarButtonItem.html">InputBarButtonItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputBarButtonItem/Spacing.html">– Spacing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputStackView.html">InputStackView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputStackView/Position.html">– Position</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputTextView.html">InputTextView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InsetLabel.html">InsetLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LocationMessageCell.html">LocationMessageCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LocationMessageSizeCalculator.html">LocationMessageSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MediaMessageCell.html">MediaMessageCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MediaMessageSizeCalculator.html">MediaMessageSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageCollectionViewCell.html">MessageCollectionViewCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageContainerView.html">MessageContainerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageContentCell.html">MessageContentCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageInputBar.html">MessageInputBar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageKitDateFormatter.html">MessageKitDateFormatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageLabel.html">MessageLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageReusableView.html">MessageReusableView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesCollectionView.html">MessagesCollectionView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesCollectionViewFlowLayout.html">MessagesCollectionViewFlowLayout</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesViewController.html">MessagesViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NSLayoutConstraintSet.html">NSLayoutConstraintSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PlayButtonView.html">PlayButtonView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SeparatorLine.html">SeparatorLine</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TextMessageCell.html">TextMessageCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TextMessageSizeCalculator.html">TextMessageSizeCalculator</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/DetectorType.html">DetectorType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageKind.html">MessageKind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageKitError.html">MessageKitError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageStyle.html">MessageStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageStyle/TailCorner.html">– TailCorner</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageStyle/TailStyle.html">– TailStyle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Bundle.html">Bundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CGRect.html">CGRect</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSON.html">JSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSAttributedString.html">NSAttributedString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSMutableAttributedString.html">NSMutableAttributedString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIEdgeInsets.html">UIEdgeInsets</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIView.html">UIView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/InputItem.html">InputItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/InputPlugin.html">InputPlugin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LocationItem.html">LocationItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MediaItem.html">MediaItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageCellDelegate.html">MessageCellDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageInputBarDelegate.html">MessageInputBarDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageLabelDelegate.html">MessageLabelDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageType.html">MessageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessagesDataSource.html">MessagesDataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessagesDisplayDelegate.html">MessagesDisplayDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessagesLayoutDelegate.html">MessagesLayoutDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NBLConvertable.html">NBLConvertable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NBLModel.html">NBLModel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Avatar.html">Avatar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AvatarPosition.html">AvatarPosition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AvatarPosition/Horizontal.html">– Horizontal</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AvatarPosition/Vertical.html">– Vertical</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChatMessage.html">ChatMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HorizontalEdgeInsets.html">HorizontalEdgeInsets</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LabelAlignment.html">LabelAlignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LocationMessageSnapshotOptions.html">LocationMessageSnapshotOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Sender.html">Sender</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>MessagesCollectionViewFlowLayout</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">MessagesCollectionViewFlowLayout</span> <span class="p">:</span> <span class="kt">UICollectionViewFlowLayout</span></code></pre>
+
+                </div>
+              </div>
+            <p>The layout object used by <code><a href="../Classes/MessagesCollectionView.html">MessagesCollectionView</a></code> to determine the size of all
+framework provided <code><a href="../Classes/MessageCollectionViewCell.html">MessageCollectionViewCell</a></code> subclasses.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(cpy)layoutAttributesClass"></a>
+                    <a name="//apple_ref/swift/Variable/layoutAttributesClass" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(cpy)layoutAttributesClass">layoutAttributesClass</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">override</span> <span class="kd">class</span> <span class="k">var</span> <span class="nv">layoutAttributesClass</span><span class="p">:</span> <span class="kt">AnyClass</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC08messagesdE0AA0cdE0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/messagesCollectionView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC08messagesdE0AA0cdE0Cvp">messagesCollectionView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The <code><a href="../Classes/MessagesCollectionView.html">MessagesCollectionView</a></code> that owns this layout object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">messagesCollectionView</span><span class="p">:</span> <span class="kt"><a href="../Classes/MessagesCollectionView.html">MessagesCollectionView</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC18messagesDataSourceAA0ciJ0_pvp"></a>
+                    <a name="//apple_ref/swift/Property/messagesDataSource" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC18messagesDataSourceAA0ciJ0_pvp">messagesDataSource</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The <code><a href="../Protocols/MessagesDataSource.html">MessagesDataSource</a></code> for the layout&rsquo;s collection view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">messagesDataSource</span><span class="p">:</span> <span class="kt"><a href="../Protocols/MessagesDataSource.html">MessagesDataSource</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC08messagesG8DelegateAA0cgI0_pvp"></a>
+                    <a name="//apple_ref/swift/Property/messagesLayoutDelegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC08messagesG8DelegateAA0cgI0_pvp">messagesLayoutDelegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The <code><a href="../Protocols/MessagesLayoutDelegate.html">MessagesLayoutDelegate</a></code> for the layout&rsquo;s collection view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">messagesLayoutDelegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/MessagesLayoutDelegate.html">MessagesLayoutDelegate</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC9itemWidth12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/itemWidth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC9itemWidth12CoreGraphics7CGFloatVvp">itemWidth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">itemWidth</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initializers"></a>
+                <a name="//apple_ref/swift/Section/Initializers" class="dashAnchor"></a>
+                <a href="#/Initializers">
+                  <h3 class="section-name">Initializers</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)init"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)init">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">override</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)initWithCoder:"></a>
+                    <a name="//apple_ref/swift/Method/init(coder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)initWithCoder:">init(coder:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">required</span> <span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="n">coder</span> <span class="nv">aDecoder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)dealloc"></a>
+                    <a name="//apple_ref/swift/Method/deinit" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)dealloc">deinit</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">deinit</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Attributes"></a>
+                <a name="//apple_ref/swift/Section/Attributes" class="dashAnchor"></a>
+                <a href="#/Attributes">
+                  <h3 class="section-name">Attributes</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)layoutAttributesForElementsInRect:"></a>
+                    <a name="//apple_ref/swift/Method/layoutAttributesForElements(in:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)layoutAttributesForElementsInRect:">layoutAttributesForElements(in:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">layoutAttributesForElements</span><span class="p">(</span><span class="k">in</span> <span class="nv">rect</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">UICollectionViewLayoutAttributes</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)layoutAttributesForItemAtIndexPath:"></a>
+                    <a name="//apple_ref/swift/Method/layoutAttributesForItem(at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)layoutAttributesForItemAtIndexPath:">layoutAttributesForItem(at:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">layoutAttributesForItem</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UICollectionViewLayoutAttributes</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Layout%20Invalidation"></a>
+                <a name="//apple_ref/swift/Section/Layout Invalidation" class="dashAnchor"></a>
+                <a href="#/Layout%20Invalidation">
+                  <h3 class="section-name">Layout Invalidation</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)shouldInvalidateLayoutForBoundsChange:"></a>
+                    <a name="//apple_ref/swift/Method/shouldInvalidateLayout(forBoundsChange:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)shouldInvalidateLayoutForBoundsChange:">shouldInvalidateLayout(forBoundsChange:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">shouldInvalidateLayout</span><span class="p">(</span><span class="n">forBoundsChange</span> <span class="nv">newBounds</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)invalidationContextForBoundsChange:"></a>
+                    <a name="//apple_ref/swift/Method/invalidationContext(forBoundsChange:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessagesCollectionViewFlowLayout(im)invalidationContextForBoundsChange:">invalidationContext(forBoundsChange:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">invalidationContext</span><span class="p">(</span><span class="n">forBoundsChange</span> <span class="nv">newBounds</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UICollectionViewLayoutInvalidationContext</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Cell%20Sizing"></a>
+                <a name="//apple_ref/swift/Section/Cell Sizing" class="dashAnchor"></a>
+                <a href="#/Cell%20Sizing">
+                  <h3 class="section-name">Cell Sizing</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC25textMessageSizeCalculatorAA04TextijK0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/textMessageSizeCalculator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC25textMessageSizeCalculatorAA04TextijK0Cvp">textMessageSizeCalculator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">lazy</span> <span class="kd">open</span> <span class="k">var</span> <span class="nv">textMessageSizeCalculator</span><span class="p">:</span> <span class="kt"><a href="../Classes/TextMessageSizeCalculator.html">TextMessageSizeCalculator</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC35attributedTextMessageSizeCalculatorAA0ijkL0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/attributedTextMessageSizeCalculator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC35attributedTextMessageSizeCalculatorAA0ijkL0Cvp">attributedTextMessageSizeCalculator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">lazy</span> <span class="kd">open</span> <span class="k">var</span> <span class="nv">attributedTextMessageSizeCalculator</span><span class="p">:</span> <span class="kt"><a href="../Classes/TextMessageSizeCalculator.html">TextMessageSizeCalculator</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC26emojiMessageSizeCalculatorAA04TextijK0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/emojiMessageSizeCalculator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC26emojiMessageSizeCalculatorAA04TextijK0Cvp">emojiMessageSizeCalculator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">lazy</span> <span class="kd">open</span> <span class="k">var</span> <span class="nv">emojiMessageSizeCalculator</span><span class="p">:</span> <span class="kt"><a href="../Classes/TextMessageSizeCalculator.html">TextMessageSizeCalculator</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC26photoMessageSizeCalculatorAA05MediaijK0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/photoMessageSizeCalculator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC26photoMessageSizeCalculatorAA05MediaijK0Cvp">photoMessageSizeCalculator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">lazy</span> <span class="kd">open</span> <span class="k">var</span> <span class="nv">photoMessageSizeCalculator</span><span class="p">:</span> <span class="kt"><a href="../Classes/MediaMessageSizeCalculator.html">MediaMessageSizeCalculator</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC26videoMessageSizeCalculatorAA05MediaijK0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/videoMessageSizeCalculator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC26videoMessageSizeCalculatorAA05MediaijK0Cvp">videoMessageSizeCalculator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">lazy</span> <span class="kd">open</span> <span class="k">var</span> <span class="nv">videoMessageSizeCalculator</span><span class="p">:</span> <span class="kt"><a href="../Classes/MediaMessageSizeCalculator.html">MediaMessageSizeCalculator</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC29locationMessageSizeCalculatorAA08LocationijK0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/locationMessageSizeCalculator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC29locationMessageSizeCalculatorAA08LocationijK0Cvp">locationMessageSizeCalculator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">lazy</span> <span class="kd">open</span> <span class="k">var</span> <span class="nv">locationMessageSizeCalculator</span><span class="p">:</span> <span class="kt"><a href="../Classes/LocationMessageSizeCalculator.html">LocationMessageSizeCalculator</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC25cellSizeCalculatorForItem2atAA04CelliJ0C10Foundation9IndexPathV_tF"></a>
+                    <a name="//apple_ref/swift/Method/cellSizeCalculatorForItem(at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC25cellSizeCalculatorForItem2atAA04CelliJ0C10Foundation9IndexPathV_tF">cellSizeCalculatorForItem(at:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    If you override this method, remember to call MessageLayoutDelegate&rsquo;s customCellSizeCalculator(for:at:in:) method for MessageKind.custom messages, if necessary
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">cellSizeCalculatorForItem</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/CellSizeCalculator.html">CellSizeCalculator</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC11sizeForItem2atSo6CGSizeV10Foundation9IndexPathV_tF"></a>
+                    <a name="//apple_ref/swift/Method/sizeForItem(at:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC11sizeForItem2atSo6CGSizeV10Foundation9IndexPathV_tF">sizeForItem(at:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">sizeForItem</span><span class="p">(</span><span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CGSize</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC28setMessageIncomingAvatarSizeyySo6CGSizeVF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageIncomingAvatarSize(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC28setMessageIncomingAvatarSizeyySo6CGSizeVF">setMessageIncomingAvatarSize(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>incomingAvatarSize</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageIncomingAvatarSize</span><span class="p">(</span><span class="n">_</span> <span class="nv">newSize</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC28setMessageOutgoingAvatarSizeyySo6CGSizeVF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageOutgoingAvatarSize(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC28setMessageOutgoingAvatarSizeyySo6CGSizeVF">setMessageOutgoingAvatarSize(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>outgoingAvatarSize</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageOutgoingAvatarSize</span><span class="p">(</span><span class="n">_</span> <span class="nv">newSize</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC32setMessageIncomingAvatarPositionyyAA0kL0VF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageIncomingAvatarPosition(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC32setMessageIncomingAvatarPositionyyAA0kL0VF">setMessageIncomingAvatarPosition(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>incomingAvatarPosition</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageIncomingAvatarPosition</span><span class="p">(</span><span class="n">_</span> <span class="nv">newPosition</span><span class="p">:</span> <span class="kt"><a href="../Structs/AvatarPosition.html">AvatarPosition</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC32setMessageOutgoingAvatarPositionyyAA0kL0VF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageOutgoingAvatarPosition(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC32setMessageOutgoingAvatarPositionyyAA0kL0VF">setMessageOutgoingAvatarPosition(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>outgoingAvatarPosition</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageOutgoingAvatarPosition</span><span class="p">(</span><span class="n">_</span> <span class="nv">newPosition</span><span class="p">:</span> <span class="kt"><a href="../Structs/AvatarPosition.html">AvatarPosition</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC018setMessageIncomingI7PaddingyySo12UIEdgeInsetsVF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageIncomingMessagePadding(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC018setMessageIncomingI7PaddingyySo12UIEdgeInsetsVF">setMessageIncomingMessagePadding(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>incomingMessagePadding</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageIncomingMessagePadding</span><span class="p">(</span><span class="n">_</span> <span class="nv">newPadding</span><span class="p">:</span> <span class="kt">UIEdgeInsets</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC018setMessageOutgoingI7PaddingyySo12UIEdgeInsetsVF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageOutgoingMessagePadding(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC018setMessageOutgoingI7PaddingyySo12UIEdgeInsetsVF">setMessageOutgoingMessagePadding(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>outgoingMessagePadding</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageOutgoingMessagePadding</span><span class="p">(</span><span class="n">_</span> <span class="nv">newPadding</span><span class="p">:</span> <span class="kt">UIEdgeInsets</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC39setMessageIncomingCellTopLabelAlignmentyyAA0mN0VF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageIncomingCellTopLabelAlignment(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC39setMessageIncomingCellTopLabelAlignmentyyAA0mN0VF">setMessageIncomingCellTopLabelAlignment(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>incomingCellTopLabelAlignment</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageIncomingCellTopLabelAlignment</span><span class="p">(</span><span class="n">_</span> <span class="nv">newAlignment</span><span class="p">:</span> <span class="kt"><a href="../Structs/LabelAlignment.html">LabelAlignment</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC39setMessageOutgoingCellTopLabelAlignmentyyAA0mN0VF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageOutgoingCellTopLabelAlignment(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC39setMessageOutgoingCellTopLabelAlignmentyyAA0mN0VF">setMessageOutgoingCellTopLabelAlignment(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>outgoingCellTopLabelAlignment</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageOutgoingCellTopLabelAlignment</span><span class="p">(</span><span class="n">_</span> <span class="nv">newAlignment</span><span class="p">:</span> <span class="kt"><a href="../Structs/LabelAlignment.html">LabelAlignment</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC018setMessageIncomingI17TopLabelAlignmentyyAA0lM0VF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageIncomingMessageTopLabelAlignment(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC018setMessageIncomingI17TopLabelAlignmentyyAA0lM0VF">setMessageIncomingMessageTopLabelAlignment(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>incomingMessageTopLabelAlignment</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageIncomingMessageTopLabelAlignment</span><span class="p">(</span><span class="n">_</span> <span class="nv">newAlignment</span><span class="p">:</span> <span class="kt"><a href="../Structs/LabelAlignment.html">LabelAlignment</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC018setMessageOutgoingI17TopLabelAlignmentyyAA0lM0VF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageOutgoingMessageTopLabelAlignment(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC018setMessageOutgoingI17TopLabelAlignmentyyAA0lM0VF">setMessageOutgoingMessageTopLabelAlignment(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>outgoingMessageTopLabelAlignment</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageOutgoingMessageTopLabelAlignment</span><span class="p">(</span><span class="n">_</span> <span class="nv">newAlignment</span><span class="p">:</span> <span class="kt"><a href="../Structs/LabelAlignment.html">LabelAlignment</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC018setMessageIncomingI20BottomLabelAlignmentyyAA0lM0VF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageIncomingMessageBottomLabelAlignment(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC018setMessageIncomingI20BottomLabelAlignmentyyAA0lM0VF">setMessageIncomingMessageBottomLabelAlignment(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>incomingMessageBottomLabelAlignment</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageIncomingMessageBottomLabelAlignment</span><span class="p">(</span><span class="n">_</span> <span class="nv">newAlignment</span><span class="p">:</span> <span class="kt"><a href="../Structs/LabelAlignment.html">LabelAlignment</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC018setMessageOutgoingI20BottomLabelAlignmentyyAA0lM0VF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageOutgoingMessageBottomLabelAlignment(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC018setMessageOutgoingI20BottomLabelAlignmentyyAA0lM0VF">setMessageOutgoingMessageBottomLabelAlignment(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>outgoingMessageBottomLabelAlignment</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageOutgoingMessageBottomLabelAlignment</span><span class="p">(</span><span class="n">_</span> <span class="nv">newAlignment</span><span class="p">:</span> <span class="kt"><a href="../Structs/LabelAlignment.html">LabelAlignment</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC027setMessageIncomingAccessoryE4SizeyySo6CGSizeVF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageIncomingAccessoryViewSize(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC027setMessageIncomingAccessoryE4SizeyySo6CGSizeVF">setMessageIncomingAccessoryViewSize(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>incomingAccessoryViewSize</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageIncomingAccessoryViewSize</span><span class="p">(</span><span class="n">_</span> <span class="nv">newSize</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC027setMessageOutgoingAccessoryE4SizeyySo6CGSizeVF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageOutgoingAccessoryViewSize(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC027setMessageOutgoingAccessoryE4SizeyySo6CGSizeVF">setMessageOutgoingAccessoryViewSize(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>outgoingAvatarSize</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageOutgoingAccessoryViewSize</span><span class="p">(</span><span class="n">_</span> <span class="nv">newSize</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC027setMessageIncomingAccessoryE7PaddingyyAA20HorizontalEdgeInsetsVF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageIncomingAccessoryViewPadding(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC027setMessageIncomingAccessoryE7PaddingyyAA20HorizontalEdgeInsetsVF">setMessageIncomingAccessoryViewPadding(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>incomingAccessoryViewSize</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageIncomingAccessoryViewPadding</span><span class="p">(</span><span class="n">_</span> <span class="nv">newPadding</span><span class="p">:</span> <span class="kt"><a href="../Structs/HorizontalEdgeInsets.html">HorizontalEdgeInsets</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC027setMessageOutgoingAccessoryE7PaddingyyAA20HorizontalEdgeInsetsVF"></a>
+                    <a name="//apple_ref/swift/Method/setMessageOutgoingAccessoryViewPadding(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC027setMessageOutgoingAccessoryE7PaddingyyAA20HorizontalEdgeInsetsVF">setMessageOutgoingAccessoryViewPadding(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set <code>outgoingAvatarSize</code> of all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setMessageOutgoingAccessoryViewPadding</span><span class="p">(</span><span class="n">_</span> <span class="nv">newPadding</span><span class="p">:</span> <span class="kt"><a href="../Structs/HorizontalEdgeInsets.html">HorizontalEdgeInsets</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom32MessagesCollectionViewFlowLayoutC22messageSizeCalculatorsSayAA07MessageI10CalculatorCGyF"></a>
+                    <a name="//apple_ref/swift/Method/messageSizeCalculators()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom32MessagesCollectionViewFlowLayoutC22messageSizeCalculatorsSayAA07MessageI10CalculatorCGyF">messageSizeCalculators()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get all <code><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></code>s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">messageSizeCalculators</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-11-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

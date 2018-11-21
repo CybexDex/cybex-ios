@@ -116,7 +116,9 @@ class ChatViewController: MessagesViewController {
         guard let messagesCollectionView = collectionView as? MessagesCollectionView else {
             fatalError("")
         }
-        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! TextMessageCell
+        guard let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as? TextMessageCell else {
+            return UICollectionViewCell()
+        }
 
         let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath, in: messagesCollectionView)
 

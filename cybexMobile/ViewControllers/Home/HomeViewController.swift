@@ -152,7 +152,8 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 extension HomeViewController {
     @objc func cellClicked(_ data: [String: Any]) {
         let viewc = R.storyboard.chat.chatViewController()!
-        viewc.coordinator = ChatCoordinator(rootVC: self.navigationController as! BaseNavigationController)
+        guard let nav = self.navigationController as? BaseNavigationController else { return }
+        viewc.coordinator = ChatCoordinator(rootVC: nav)
         self.navigationController?.pushViewController(viewc)
         return
         if vcType == ViewType.homeContent.rawValue {//首页
