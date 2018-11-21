@@ -1,0 +1,12 @@
+//
+//  Config.xcconfig
+//  cybexMobile
+//
+//  Created by koofrank on 2018/11/21.
+//  Copyright © 2018 Cybex. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+Cybex_Base_URL = "https://app.cybex.io/"

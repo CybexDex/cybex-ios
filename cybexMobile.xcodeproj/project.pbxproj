@@ -1289,6 +1289,7 @@
 		737E596E21A54211001199E4 /* JWA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWA.swift; sourceTree = "<group>"; };
 		737E597021A5422B001199E4 /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
 		737E597221A5423E001199E4 /* JWTHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTHelpers.swift; sourceTree = "<group>"; };
+		737E597421A5487C001199E4 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		737F8C342145532A00DD522A /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		7386F28C2121204A00ABC924 /* cybexMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cybexMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7386F2902121204A00ABC924 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1665,6 +1666,7 @@
 				B3305C1C418372FA9FA71DED7DFCFA48 /* Constants.swift */,
 				73F50BA9213FB5B60071B08D /* Error.swift */,
 				7398BEBE2181BFD3004C042E /* Style.swift */,
+				737E597421A5487C001199E4 /* Config.xcconfig */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -4897,6 +4899,7 @@
 /* Begin XCBuildConfiguration section */
 		0DEA2D3ABA7BF666011D972A16C5B728 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 737E597421A5487C001199E4 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -4992,6 +4995,7 @@
 		};
 		26695AD676D4F3122177FD6581ACB0F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 737E597421A5487C001199E4 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -5155,6 +5159,7 @@
 		};
 		730E599E219921F9006DDCDD /* Tests */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 737E597421A5487C001199E4 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
