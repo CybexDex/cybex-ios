@@ -24,7 +24,7 @@ struct ChatState: BaseState {
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 
-    var messages: BehaviorRelay<[ChatMessage]> = BehaviorRelay(value: [])
+    var messages: BehaviorRelay<[ChatCommonMessage]> = BehaviorRelay(value: [])
 }
 
 // MARK: - Action

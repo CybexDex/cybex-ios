@@ -11,7 +11,7 @@ import ReSwift
 import SwifterSwift
 
 protocol MarketCoordinatorProtocol {
-    func openChatVC()
+    func openChatVC(_ sender: Pair)
 }
 
 protocol MarketStateManagerProtocol {
@@ -38,10 +38,11 @@ class MarketCoordinator: NavCoordinator {
 }
 
 extension MarketCoordinator: MarketCoordinatorProtocol {
-    func openChatVC() {
+    func openChatVC(_ sender: Pair) {
         if let chatVC = R.storyboard.chat.chatViewController() {
             let coordinator = ChatCoordinator(rootVC: self.rootVC)
             chatVC.coordinator = coordinator
+            chatVC.pair = sender
             self.rootVC.pushViewController(chatVC, animated: true)
         }
     }

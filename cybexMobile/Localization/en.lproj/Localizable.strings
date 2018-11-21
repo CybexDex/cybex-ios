@@ -531,3 +531,5 @@
 "chat_input_placeholder" = "My comment";
 
 "chat_new_message" = "%d new message";
+
+"chat_message_guest" = "Guest";

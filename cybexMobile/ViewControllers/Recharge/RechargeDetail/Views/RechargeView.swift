@@ -90,7 +90,7 @@ class RechargeView: CybexBaseView {
     func updateViewWithAssetName(_ tradeInfo: AssetInfo) {
         if tradeInfo.symbol.filterJade == "EOS" {
             self.addressView.name = R.string.localizable.eos_withdraw_account.key
-            self.addressView.textplaceholder = R.string.localizable.eos_withdraw_account_placehold.key
+            self.addressView.content.placeholder = R.string.localizable.eos_withdraw_account_placehold.key.localized()
             
             if AddressManager.shared.getWithDrawAddressListWith(tradeInfo.id).count == 0 {
                 self.addressView.btn.locali = R.string.localizable.add_account.key
@@ -102,8 +102,12 @@ class RechargeView: CybexBaseView {
             self.memoView.title.text = "Tag"
             self.memoView.content.placeholder = R.string.localizable.withdraw_tag_placehold.key.localized()
             self.memoView.content.setPlaceHolderTextColor(UIColor.steel50)
+            self.addressView.content.placeholder = R.string.localizable.withdraw_address_placehold.key.localized()
+
         }
         else {
+            self.addressView.content.placeholder = R.string.localizable.withdraw_address_placehold.key.localized()
+
             self.memoView.isHidden = true
             if AddressManager.shared.getWithDrawAddressListWith(tradeInfo.id).count == 0 {
                 self.addressView.btn.locali = R.string.localizable.add_address.key

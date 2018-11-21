@@ -41,9 +41,10 @@ class RechargeDetailViewController: BaseViewController {
     var trade: Trade? {
         didSet {
             if let trade = self.trade {
+                
                 self.balance = getBalanceWithAssetId(trade.id)
                 self.precision = appData.assetInfo[trade.id]?.precision
-                self.isEOS = trade.id == AssetConfiguration.EOS
+                self.isEOS = trade.id == AssetConfiguration.EOS || appData.assetInfo[trade.id]?.symbol.filterJade == "XRP"
             }
         }
     }

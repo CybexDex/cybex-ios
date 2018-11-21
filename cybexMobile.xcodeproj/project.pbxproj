@@ -288,7 +288,6 @@
 		7260DDC221A2A3CB00A5E3D6 /* ChatDirectionIconViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7260DDBF21A2A3CB00A5E3D6 /* ChatDirectionIconViewAdapter.swift */; };
 		7260DDC321A2A3CB00A5E3D6 /* ChatDirectionIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7260DDC021A2A3CB00A5E3D6 /* ChatDirectionIconView.swift */; };
 		7260DDC421A2A3CB00A5E3D6 /* ChatDirectionIconView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7260DDC121A2A3CB00A5E3D6 /* ChatDirectionIconView.xib */; };
-		7267DA00213502AE004AF9AF /* ETORootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267D9FF213502AE004AF9AF /* ETORootCoordinator.swift */; };
 		7267DA0621350327004AF9AF /* ETOCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA0221350327004AF9AF /* ETOCoordinator.swift */; };
 		7267DA0721350327004AF9AF /* ETOActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA0321350327004AF9AF /* ETOActions.swift */; };
 		7267DA0821350327004AF9AF /* ETOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7267DA0421350327004AF9AF /* ETOViewController.swift */; };
@@ -431,15 +430,12 @@
 		733714BA2122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714B82122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.xib */; };
 		733714BD2122D32500B2ED90 /* AddressCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733714BB2122D32500B2ED90 /* AddressCellView.swift */; };
 		733714BE2122D32500B2ED90 /* AddressCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 733714BC2122D32500B2ED90 /* AddressCellView.xib */; };
-		7345FD7A219E7D320066BD0E /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7345FD79219E7D310066BD0E /* CryptoSwift.framework */; };
-		7345FD7C219E7DE40066BD0E /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7345FD7B219E7DE40066BD0E /* PromiseKit.framework */; };
 		7345FD87219EADC40066BD0E /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7345FD86219EADC40066BD0E /* ChatService.swift */; };
 		7345FD88219EAE140066BD0E /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B8214D045D00761955 /* SocketRocket.framework */; };
 		7345FD90219EBF7F0066BD0E /* FCUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 7345FD8C219EBF7E0066BD0E /* FCUUID.m */; };
 		7345FD91219EBF7F0066BD0E /* UIDevice+FCUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 7345FD8D219EBF7E0066BD0E /* UIDevice+FCUUID.m */; };
 		7345FD93219EC0A80066BD0E /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */; };
 		7345FD96219EC1210066BD0E /* ChatOriginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7345FD95219EC1210066BD0E /* ChatOriginModel.swift */; };
-
 		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
 		734AB3F921A289400091BE82 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C02217989D6008395AC /* SwiftyJSON.framework */; };
 		734AB3FB21A289640091BE82 /* NBLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734AB3FA21A289640091BE82 /* NBLModel.swift */; };
@@ -1101,7 +1097,6 @@
 		7260DDBF21A2A3CB00A5E3D6 /* ChatDirectionIconViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDirectionIconViewAdapter.swift; sourceTree = "<group>"; };
 		7260DDC021A2A3CB00A5E3D6 /* ChatDirectionIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDirectionIconView.swift; sourceTree = "<group>"; };
 		7260DDC121A2A3CB00A5E3D6 /* ChatDirectionIconView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatDirectionIconView.xib; sourceTree = "<group>"; };
-		7267D9FF213502AE004AF9AF /* ETORootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETORootCoordinator.swift; sourceTree = "<group>"; };
 		7267DA0221350327004AF9AF /* ETOCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCoordinator.swift; sourceTree = "<group>"; };
 		7267DA0321350327004AF9AF /* ETOActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOActions.swift; sourceTree = "<group>"; };
 		7267DA0421350327004AF9AF /* ETOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOViewController.swift; sourceTree = "<group>"; };
@@ -1256,7 +1251,6 @@
 		7345FD8F219EBF7E0066BD0E /* UIDevice+FCUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+FCUUID.h"; sourceTree = "<group>"; };
 		7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UICKeyChainStore.framework; path = Carthage/Build/iOS/UICKeyChainStore.framework; sourceTree = "<group>"; };
 		7345FD95219EC1210066BD0E /* ChatOriginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatOriginModel.swift; sourceTree = "<group>"; };
-
 		73481176210815BF000BF1B8 /* CybexWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebSocketService.swift; sourceTree = "<group>"; };
 		734AB3FA21A289640091BE82 /* NBLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBLModel.swift; sourceTree = "<group>"; };
 		734AB3FC21A28B9F0091BE82 /* ChatServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceProvider.swift; sourceTree = "<group>"; };
@@ -2538,6 +2532,14 @@
 			path = BlockItems;
 			sourceTree = "<group>";
 		};
+		72C9149921A4FAB900B38084 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				72457119219D5BF9007595CC /* CryptoSwift.framework */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		72D58288219C188700BB9842 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -3591,7 +3593,6 @@
 				7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */,
 				7345FD7B219E7DE40066BD0E /* PromiseKit.framework */,
 				7345FD79219E7D310066BD0E /* CryptoSwift.framework */,
-
 				7231103A21805D7F0007E95D /* UMAnalytics.framework */,
 				7231103921805D7E0007E95D /* UMCommon.framework */,
 				7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */,
@@ -3804,6 +3805,7 @@
 				CDB5CFC7D170B0A1511D4AD336877512 /* cybexMobile */,
 				7386F28D2121204A00ABC924 /* cybexMobileTests */,
 				739221342153A6D500744811 /* rswift */,
+				72C9149921A4FAB900B38084 /* Recovered References */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
@@ -3936,9 +3938,7 @@
 				ORGANIZATIONNAME = Cybex;
 				TargetAttributes = {
 					6597A0AC6C29D30281EBD879E45F3BAF = {
-						DevelopmentTeam = Z4LN46787D;
 						LastSwiftMigration = 920;
-						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -4635,7 +4635,6 @@
 				7204FFC52153A62B00EB0FC7 /* HotAssetsView.swift in Sources */,
 				72E2A8F02151F9DB00FBB3CB /* ComprehensiveReducers.swift in Sources */,
 				44195E9AD82F1EA4A629372891EC8157 /* EntryReducers.swift in Sources */,
-				D68AC2564E8A2DB5B8D2B787AD3F02CD /* EntryRootCoordinator.swift in Sources */,
 				9D03533C82BDEC45C76E2419E0489874 /* EntryViewController.swift in Sources */,
 				ADB937770A84BC394C0F50DF0631CDEC /* ExchangeActions.swift in Sources */,
 				72B42E8321774CFD00587403 /* DespositNameView.swift in Sources */,
@@ -4648,7 +4647,6 @@
 				3BF5B7EB2135001B00E8BFC9 /* ETODetailIntroView.swift in Sources */,
 				72199D8E21045D4700575226 /* TransferListViewController.swift in Sources */,
 				72D58292219C188700BB9842 /* ChatDownInputView.swift in Sources */,
-				2BE29FBC5EBC24621C616DCA7C58F109 /* FAQCoordinator.swift in Sources */,
 				72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */,
 				737E596D21A541E6001199E4 /* JWK.swift in Sources */,
 				7386F2C121216B9E00ABC924 /* WithdrawAddressViewController.swift in Sources */,

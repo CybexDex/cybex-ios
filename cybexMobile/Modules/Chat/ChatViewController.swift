@@ -12,6 +12,8 @@ import RxCocoa
 import ReSwift
 import ChatRoom
 import MapKit
+import cybex_ios_core_cpp
+
 
 import IQKeyboardManagerSwift
 
@@ -19,15 +21,17 @@ class ChatViewController: MessagesViewController {
     let sectionInset = UIEdgeInsets(top: 12, left: 13, bottom: 12, right: 13)
     
     var downInputView: ChatDownInputView?
-    
+    var messageView: ChatDirectionIconView?
     open override var inputAccessoryView: UIView? {
         return nil
     }
-    
+    var pair: Pair?
+    var isRealName: Bool = false
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
+    var iconView: ChatDirectionIconView?
     var shadowView: UIView?
     var upInputView: ChatUpInputView?
     var coordinator: (ChatCoordinatorProtocol & ChatStateManagerProtocol)?
@@ -37,18 +41,17 @@ class ChatViewController: MessagesViewController {
         formatter.dateStyle = .medium
         return formatter
     }()
-
+    
     var messageList: [ChatCommonMessage] = []
-
-	override func viewDidLoad() {
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         IQKeyboardManager.shared.enableAutoToolbar = false
-
+        
         setupUI()
         setupData()
         setupEvent()
     }
-    
     
     func setupShadowView() {
         self.shadowView = UIView(frame: self.view.bounds)
@@ -59,19 +62,19 @@ class ChatViewController: MessagesViewController {
                 return
             }
             upInputView.textView.resignFirstResponder()
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-
+        
         self.coordinator?.disconnect()
     }
-
+    
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -80,7 +83,7 @@ class ChatViewController: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification,object: nil, queue: nil) { [weak self](notification) in
-            guard let `self` = self, let downInputView = self.downInputView, let userinfo = notification.userInfo as NSDictionary?, let nsValue = userinfo.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue else { return }
+            guard let `self` = self, let userinfo = notification.userInfo as NSDictionary?, let nsValue = userinfo.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue else { return }
             let keyboardRec = nsValue.cgRectValue
             var rectOfView = self.view.frame
             rectOfView.origin.y -= keyboardRec.size.height
@@ -92,6 +95,7 @@ class ChatViewController: MessagesViewController {
             else {
                 self.setupShadowView()
             }
+            self.messagesCollectionView.scrollToBottom(animated: true)
         }
         
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { [weak self](notification) in
@@ -110,20 +114,10 @@ class ChatViewController: MessagesViewController {
     }
     
     func loadFirstMessages() {
-        self.coordinator?.connectChat("BTC/ETH")
-        DispatchQueue.global(qos: .userInitiated).async {
-            SampleData.shared.getAdvancedMessages(count: 10) { messages in
-                DispatchQueue.main.async {
-                    self.messageList = messages
-                    self.messagesCollectionView.reloadData()
-                    self.messagesCollectionView.scrollToBottom()
-                }
-            }
-        }
+        self.coordinator?.connectChat(self.title ?? "")
     }
-
+    
     func insertMessage(_ message: ChatCommonMessage) {
-
         messageList.append(message)
         // Reload last section to update header/footer labels and insert a new one
         messagesCollectionView.performBatchUpdates({
@@ -132,22 +126,34 @@ class ChatViewController: MessagesViewController {
                 messagesCollectionView.reloadSections([messageList.count - 2])
             }
         }, completion: { [weak self] _ in
-            if self?.isLastSectionVisible() == true {
-                self?.messagesCollectionView.scrollToBottom(animated: true)
+            guard let `self` = self else { return }
+            if self.isLastSectionVisible() == true {
+                self.messagesCollectionView.scrollToBottom(animated: true)
             }
         })
     }
     
+    
+    func scrollToBottomAnimationAction() {
+        if abs(self.messagesCollectionView.contentSize.height - self.messagesCollectionView.bounds.height + self.messagesCollectionView.contentInset.bottom - self.messagesCollectionView.contentOffset.y) < 1 {
+            self.messagesCollectionView.scrollToBottom(animated: true)
+        }
+        else {
+            setupNewMessageTipView()
+        }
+    }
+    
+    
     func isLastSectionVisible() -> Bool {
-        
         guard !messageList.isEmpty else { return false }
-        
         let lastIndexPath = IndexPath(item: 0, section: messageList.count - 1)
-        
         return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
     }
     
     func setupUI() {
+        if let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] {
+            self.title = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade
+        }
         
         self.view.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.paleGrey.hexString(true)]
         self.automaticallyAdjustsScrollViewInsets = false
@@ -164,7 +170,7 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messageCellDelegate = self
-        messagesCollectionView.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.white.hexString(true)]
+        messagesCollectionView.theme_backgroundColor = [UIColor.darkTwo.hexString(true), UIColor.white.hexString(true)]
         
         let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
         layout?.sectionInset = sectionInset
@@ -181,13 +187,12 @@ class ChatViewController: MessagesViewController {
         self.downInputView = ChatDownInputView()
         self.view.addSubview(self.downInputView!)
         self.downInputView?.topToBottom(of: self.messagesCollectionView)
-    
+        
         self.downInputView?.bottomToSuperview(nil, offset: 0, relation: .equal, priority: .required, isActive: true, usingSafeArea: true)
         
         self.downInputView?.left(to: self.view)
         self.downInputView?.right(to: self.view)
         self.downInputView?.height(56)
-    
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -197,9 +202,10 @@ class ChatViewController: MessagesViewController {
         guard let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as? TextMessageCell else {
             return UICollectionViewCell()
         }
+
         let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath, in: messagesCollectionView)
         
-        if case let .attributedText(attr) = message!.kind, let range = attr.string.range(of: "sasd_ss: ") {
+        if case let .attributedText(attr) = message!.kind, let range = attr.string.range(of: message!.sender.displayName + ":") {
             let frame = cell.messageLabel.nameRect(range.nsRange)
             
             var focusView: UIView!
@@ -209,8 +215,18 @@ class ChatViewController: MessagesViewController {
                 focusView = UIView()
                 focusView.tag = 2018
                 cell.addSubview(focusView)
-                focusView.rx.tapGesture().skip(1).asObservable().subscribe(onNext: { (_) in
-                    print(11111)
+                focusView.rx.tapGesture().when(GestureRecognizerState.recognized).asObservable().subscribe(onNext: { [weak self](ges) in
+                    guard let `self` = self else { return }
+                    if let icView = self.iconView {
+                        icView.removeFromSuperview()
+                    }
+                    else {
+                        self.iconView = ChatDirectionIconView()
+                        focusView.superview?.addSubview(self.iconView!)
+                        self.iconView?.left(to: focusView)
+                        self.iconView?.bottomToTop(of: focusView, offset: 0)
+                        self.iconView?.contentLabel.text = message!.sender.displayName
+                    }
                 }).disposed(by: cell.disposeBag)
             }
             focusView.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height: frame.height )
@@ -226,8 +242,43 @@ class ChatViewController: MessagesViewController {
     func setupEvent() {
         self.coordinator?.state.messages.asObservable().subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
-
+            if messages.count > 1 {
+                self.messageList = messages
+                self.messagesCollectionView.reloadData()
+                self.messagesCollectionView.scrollToBottom()
+            }
+            else if messages.count == 1  {
+                self.insertMessage(messages.first!)
+                self.scrollToBottomAnimationAction()
+            }
         }).disposed(by: disposeBag)
+    }
+    
+    
+    func setupNewMessageTipView() {
+        if let msgView = self.messageView {
+            if msgView.isHidden == false {
+                msgView.notReadCount += 1
+                msgView.contentLabel.text = R.string.localizable.chat_new_message(msgView.notReadCount)
+            }
+            else {
+                msgView.isHidden = false
+                msgView.notReadCount = 1
+                msgView.contentLabel.text = R.string.localizable.chat_new_message(1)
+            }
+        }
+        else {
+            self.messageView = ChatDirectionIconView()
+            self.view.addSubview(messageView!)
+            messageView?.contentLabel.textColor = UIColor.pastelOrange
+            messageView?.notReadCount += 1
+            messageView?.contentLabel.text = R.string.localizable.chat_new_message(messageView!.notReadCount)
+            messageView?.icon.theme1ImageName = R.image.watchlist_new_message.name
+            messageView?.icon.theme2ImageName = R.image.watchlist_new_message_white.name
+            
+            messageView?.bottomToTop(of: self.downInputView!)
+            messageView?.centerX(to: self.downInputView!)
+        }
     }
 }
 
@@ -257,7 +308,7 @@ extension ChatViewController: MessageCellDelegate {
     
     func didTapMessage(in cell: MessageCollectionViewCell) {
         print("Message tapped")
-        self.coordinator?.send("xxx", username: "", sign: "")
+        //        self.coordinator?.send("xxx", username: "", sign: "")
     }
     
     func didTapCellTopLabel(in cell: MessageCollectionViewCell) {
@@ -305,24 +356,10 @@ extension ChatViewController: MessageLabelDelegate {
 extension ChatViewController: MessageInputBarDelegate {
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
         
-        for component in inputBar.inputTextView.components {
-            
-            if let str = component as? String {
-                let message = ChatCommonMessage(text: str, sender: currentSender(), messageId: UUID().uuidString, date: Date())
-                insertMessage(message)
-            } else if let img = component as? UIImage {
-                let message = ChatCommonMessage(image: img, sender: currentSender(), messageId: UUID().uuidString, date: Date())
-                insertMessage(message)
-            }
-            
-        }
-        inputBar.inputTextView.text = String()
-        messagesCollectionView.scrollToBottom(animated: true)
     }
 }
 
 // MARK: - MessagesDisplayDelegate
-
 extension ChatViewController: MessagesDisplayDelegate {
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
@@ -366,32 +403,46 @@ extension ChatViewController {
             self.upInputView?.leftToSuperview()
             self.upInputView?.height(138)
             self.upInputView?.textView.becomeFirstResponder()
-
             return
         }
-        upInputView.textView.text = ""
+        upInputView.textView.text = self.downInputView?.inputTextField.text
         upInputView.isHidden = false
         upInputView.textView.becomeFirstResponder()
+        
+        self.messageView?.isHidden = true
+        self.messageView?.notReadCount = 0
+        self.messagesCollectionView.scrollToBottom(animated: true)
+    }
+    
+    @objc func sendRealName(_ data: [String: Any]) {
+        if let isRealName = data["isRealName"] as? Bool {
+            self.isRealName = isRealName
+        }
     }
     
     @objc func sendMessage(_ data: [String: Any]) {
-//        self.coordinator?.openNewMessageVC(self.downInputView!)
-        // create new message
+        guard let message = data["message"] as? String else {
+            return
+        }
         
-        let messageView = ChatDirectionIconView()
-        self.view.addSubview(messageView)
-        messageView.contentLabel.textColor = UIColor.pastelOrange
-        messageView.contentLabel.text = R.string.localizable.chat_new_message(100)
-        messageView.icon.theme1ImageName = R.image.watchlist_new_message.name
-        messageView.icon.theme2ImageName = R.image.watchlist_new_message_white.name
-        
-        messageView.bottomToTop(of: self.downInputView!)
-        messageView.centerX(to: self.downInputView!)
+        if self.isRealName {
+            if !UserManager.shared.isLocked {
+                self.coordinator?.send(message,
+                                       username: UserManager.shared.name.value!,
+                                       sign: self.isRealName ? BitShareCoordinator.signMessage(UserManager.shared.name.value!, message: message)!.replacingOccurrences(of: "\"", with: "") : "")
+            }
+            else {
+                self.downInputView?.inputTextField.text = message
+                self.showPasswordBox()
+            }
+        }
     }
     
     @objc func chatDirectionIconViewDidClicked(_ data: [String: Any]) {
         guard let messageView = data["self"] as? ChatDirectionIconView else { return }
-        messageView.removeFromSuperview()
+        messageView.isHidden = true
+        messageView.notReadCount = 0
+        self.messagesCollectionView.scrollToBottom(animated: true)
     }
 }
 
@@ -403,11 +454,32 @@ extension ChatViewController: ChatDirectionViewControllerDelegate {
 
 extension ChatViewController: UIPopoverPresentationControllerDelegate {
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-       
+        
         return false
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
+    }
+}
+
+extension ChatViewController {
+    override func passwordDetecting() {
+        
+    }
+    
+    override func passwordPassed(_ passed: Bool) {
+        if passed {
+            guard let message = self.downInputView?.inputTextField.text else {
+                return
+            }
+            self.coordinator?.send(message,
+                                   username: UserManager.shared.name.value!,
+                                   sign: self.isRealName ? BitShareCoordinator.signMessage(UserManager.shared.name.value!, message: message)!.replacingOccurrences(of: "\"", with: "") : "")
+            self.downInputView?.inputTextField.text = ""
+        }
+        else {
+            self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+        }
     }
 }

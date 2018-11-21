@@ -17,6 +17,8 @@ class ChatDirectionIconView: CybexBaseView {
     
     @IBOutlet weak var contentLabel: UILabel!
     
+    var notReadCount: Int = 0
+    
     override func setup() {
         super.setup()
         

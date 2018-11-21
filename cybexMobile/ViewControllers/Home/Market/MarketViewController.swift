@@ -378,7 +378,7 @@ extension MarketViewController {
     }
     
     @objc func openMessageVC(_ data: [String: Any]) {
-        self.coordinator?.openChatVC()
+        self.coordinator?.openChatVC(self.pair)
     }
 }
 

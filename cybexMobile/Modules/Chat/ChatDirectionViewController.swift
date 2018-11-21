@@ -29,6 +29,7 @@ class ChatDirectionViewController: BaseViewController {
     
     var viewType: ChatDirectionType = .icon
     
+    var name: String = ""
     var coordinator: (ChatDirectionCoordinatorProtocol & ChatDirectionStateManagerProtocol)?
     private(set) var context: ChatDirectionContext?
     
@@ -51,8 +52,9 @@ class ChatDirectionViewController: BaseViewController {
     func setupUI() {
         switch viewType {
         case .icon:
-            contentView = ChatDirectionIconView()
-            
+            let iconView = ChatDirectionIconView()
+            iconView.contentLabel.text = self.name
+            contentView = iconView
         case .newMessage:
             contentView = ChatDirectionLabelView()
             

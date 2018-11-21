@@ -510,3 +510,6 @@
 "chat_input_placeholder" = "我来说两句";
 
 "chat_new_message" = "有%d条新消息";
+
+
+"chat_message_guest" = "游客";

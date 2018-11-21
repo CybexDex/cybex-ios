@@ -25,7 +25,7 @@ protocol ChatStateManagerProtocol {
     
     func openNewMessageVC(_ sender: UIView)
     
-    func openNameVC(_ sender: UIView)
+    func openNameVC(_ sender: UIView, name: String)
 }
 
 class ChatCoordinator: NavCoordinator {
@@ -40,12 +40,9 @@ class ChatCoordinator: NavCoordinator {
     }
 
     let service = ChatService(FCUUID.uuid())
-
     override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
-//        let vc = R.storyboard.chat.chatViewController()!
-//        let coordinator = ChatCoordinator(rootVC: root)
-//        vc.coordinator = coordinator
-//        coordinator.store.dispatch(RouteContextAction(context: context))
+
+
         return BaseViewController()
     }
 
@@ -80,17 +77,16 @@ extension ChatCoordinator: ChatStateManagerProtocol {
     }
     
     func openNewMessageVC(_ sender: UIView) {
-//        self.createChatDirectionVC(sender, direction: .down, type: ChatDirectionViewController.ChatDirectionType.newMessage)
 
     }
     
-    func openNameVC(_ sender: UIView) {
-        self.createChatDirectionVC(sender, direction: .unknown, type: ChatDirectionViewController.ChatDirectionType.icon)
+    func openNameVC(_ sender: UIView, name: String) {
+        self.createChatDirectionVC(sender, direction: .unknown, type: ChatDirectionViewController.ChatDirectionType.icon, name: name)
     }
     
-    func createChatDirectionVC(_ sender: UIView, direction: UIPopoverArrowDirection, type: ChatDirectionViewController.ChatDirectionType) {
+    func createChatDirectionVC(_ sender: UIView, direction: UIPopoverArrowDirection, type: ChatDirectionViewController.ChatDirectionType, name: String) {
         guard let vc = R.storyboard.chat.chatDirectionViewController(), let mainVC = self.rootVC.topViewController as? ChatViewController else { return }
-        vc.preferredContentSize = CGSize(width: 120, height: 45)
+        vc.preferredContentSize = CGSize(width: UIScreen.main.bounds.width - 100, height: 45)
         vc.modalPresentationStyle = .popover
         vc.popoverPresentationController?.sourceView = sender
         vc.popoverPresentationController?.sourceRect = sender.bounds
@@ -99,6 +95,7 @@ extension ChatCoordinator: ChatStateManagerProtocol {
         vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.paleGrey.hexString(true)]
         vc.viewType = type
         vc.delegate = mainVC
+        vc.name = name
         vc.coordinator = ChatDirectionCoordinator(rootVC: self.rootVC)
         mainVC.present(vc, animated: true) {
             mainVC.view.superview?.cornerRadius = 4

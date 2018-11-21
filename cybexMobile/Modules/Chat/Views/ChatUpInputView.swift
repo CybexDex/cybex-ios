@@ -19,6 +19,7 @@ class ChatUpInputView: CybexBaseView {
     enum Event:String {
         case ChatUpInputViewDidClicked
         case sendMessage
+        case sendRealName
     }
         
     override func setup() {
@@ -28,11 +29,6 @@ class ChatUpInputView: CybexBaseView {
         setupSubViewEvent()
         
     }
-    
-//    override func didMoveToSuperview() {
-//        super.didMoveToSuperview()
-//        self.textView.becomeFirstResponder()
-//    }
     
     func setupUI() {
         
@@ -59,13 +55,14 @@ class ChatUpInputView: CybexBaseView {
     
     @IBAction func changeRealNameAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        
+        self.next?.sendEventWith(Event.sendRealName.rawValue, userinfo: ["isRealName": self.realNameBtn.isSelected])
     }
     
     @IBAction func sendMessageAction(_ sender: UIButton) {
         self.textView.resignFirstResponder()
         self.next?.sendEventWith(Event.sendMessage.rawValue,
-                                 userinfo: ["message": self.textView.text,
-                                            "isRealName": self.realNameBtn.isSelected])
+                                 userinfo: ["message": self.textView.text])
     }
     
     @objc override func didClicked() {
