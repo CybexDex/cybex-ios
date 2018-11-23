@@ -17,7 +17,7 @@ class ChatDownInputView: CybexBaseView {
     
     enum Event:String {
         case chatDownInputViewDidClicked
-        case sendMessage
+        case sendMessageEvent
         case callKeyboard
     }
         
@@ -70,7 +70,7 @@ class ChatDownInputView: CybexBaseView {
             return
         }
         self.inputTextField.text = ""
-        self.next?.sendEventWith(Event.sendMessage.rawValue,
+        self.next?.sendEventWith(Event.sendMessageEvent.rawValue,
                                  userinfo: ["message": text])
     }
     
