@@ -315,6 +315,26 @@ class ChatViewController: MessagesViewController {
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
+        self.coordinator?.state.chatState.asObservable().subscribe(onNext: { [weak self](connectState) in
+            guard let `self` = self, let connectState = connectState else { return }
+           
+            var message = ""
+            switch connectState{
+            case .chatServiceDidClosed:
+                message = "chatServiceDidClosed"
+            case .chatServiceDidFail:
+                message = "chatServiceDidFail"
+            case .chatServiceDidDisConnected:
+                message = "chatServiceDidDisConnected"
+            case .chatServiceDidConnected:
+                break
+            }
+            if message.count != 0 {
+                self.showToastBox(false, message: message)
+            }
+            
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
         NotificationCenter.default.addObserver(forName: NSNotification.Name.init("login_success"), object: nil, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
             if let downInputView = self.downInputView {

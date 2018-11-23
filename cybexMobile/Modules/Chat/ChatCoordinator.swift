@@ -61,6 +61,20 @@ extension ChatCoordinator: ChatCoordinatorProtocol {
         service.provider.onlineUpdated.delegate(on: self, block: { (self, numberOfMember) in
             self.store.dispatch(ChatUpdateMemberAction(data: numberOfMember))
         })
+        
+        service.chatServiceDidDisConnected.delegate(on: self) { (self, _) in
+            self.store.dispatch(ChatConnectStateAcion(data: ChatConnectState.chatServiceDidDisConnected))
+        }
+        service.chatServiceDidFail.delegate(on: self) { (self, _) in
+            self.store.dispatch(ChatConnectStateAcion(data: ChatConnectState.chatServiceDidFail))
+        }
+        service.chatServiceDidClosed.delegate(on: self) { (self, _) in
+            self.store.dispatch(ChatConnectStateAcion(data: ChatConnectState.chatServiceDidClosed))
+        }
+        service.chatServiceDidConnected.delegate(on: self) { (self, _) in
+            self.store.dispatch(ChatConnectStateAcion(data: ChatConnectState.chatServiceDidConnected))
+        }
+        
         service.connect(channel)
     }
     

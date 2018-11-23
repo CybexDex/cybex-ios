@@ -16,16 +16,26 @@ import ChatRoom
 struct ChatContext: RouteContext, HandyJSON {
     var chanel: String = ""
     init() {}
-
 }
+
+enum ChatConnectState: String {
+    case chatServiceDidClosed
+    case chatServiceDidFail
+    case chatServiceDidDisConnected
+    case chatServiceDidConnected
+}
+
 
 // MARK: - State
 struct ChatState: BaseState {
+    
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 
     var messages: BehaviorRelay<[ChatCommonMessage]> = BehaviorRelay(value: [])
     var numberOfMember: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+    
+    var chatState: BehaviorRelay<ChatConnectState?> = BehaviorRelay(value: nil)
 }
 
 // MARK: - Action
@@ -35,4 +45,8 @@ struct ChatFetchedAction: Action {
 
 struct ChatUpdateMemberAction: Action {
     var data: Int
+}
+
+struct ChatConnectStateAcion: Action{
+    var data: ChatConnectState
 }
