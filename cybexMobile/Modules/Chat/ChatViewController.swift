@@ -259,6 +259,8 @@ class ChatViewController: MessagesViewController {
         
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification,object: nil, queue: nil) { [weak self](notification) in
             guard let `self` = self, let userinfo = notification.userInfo as NSDictionary?, let nsValue = userinfo.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue else { return }
+            guard let upInputView = self.upInputView, upInputView.textView.isFirstResponder else { return }
+            
             if let shadowView = self.shadowView {
                 shadowView.isHidden = false
             }
@@ -490,7 +492,7 @@ extension ChatViewController {
         }
     }
     
-    @objc func sendMessage(_ data: [String: Any]) {
+    @objc func sendMessageEvent(_ data: [String: Any]) {
         guard let message = data["message"] as? String else {
             return
         }
@@ -564,6 +566,7 @@ extension ChatViewController {
                                    username: UserManager.shared.name.value!,
                                    sign: self.isRealName ? BitShareCoordinator.signMessage(UserManager.shared.name.value!, message: message)!.replacingOccurrences(of: "\"", with: "") : "")
             self.downInputView?.inputTextField.text = ""
+            self.downInputView?.setupBtnState()
         }
         else {
             self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())

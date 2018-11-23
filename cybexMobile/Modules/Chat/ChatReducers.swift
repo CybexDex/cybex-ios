@@ -52,21 +52,20 @@ func changeModelToViewModel(_ sender: [ChatMessage]) -> [ChatCommonMessage] {
     return sender.map({ (message) -> ChatCommonMessage in
         var name = ""
         var isRealName = false
+        if let userName = UserManager.shared.name.value {
+            if message.userName == userName {
+                isRealName = true
+            }
+        }
         if message.signed {
             if message.userName.count > 15 {
                 name = message.userName.substring(from: 0, length: 15)! + "..." + ":"
             }
             else {
-                name = message.userName
+                name = message.userName + ":"
             }
-            isRealName = true
         }
         else {
-            if let userName = UserManager.shared.name.value {
-                if message.userName == userName {
-                    isRealName = true
-                }
-            }
             name = R.string.localizable.chat_message_guest.key.localized() + ":"
         }
         

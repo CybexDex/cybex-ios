@@ -19,7 +19,7 @@ class ChatUpInputView: CybexBaseView {
     
     enum Event:String {
         case chatUpInputViewDidClicked
-        case sendMessage
+        case sendMessageEvent
         case sendRealName
     }
         
@@ -84,7 +84,7 @@ class ChatUpInputView: CybexBaseView {
             return
         }
         self.textView.resignFirstResponder()
-        self.next?.sendEventWith(Event.sendMessage.rawValue,
+        self.next?.sendEventWith(Event.sendMessageEvent.rawValue,
                                  userinfo: ["message": self.textView.text])
     }
     
