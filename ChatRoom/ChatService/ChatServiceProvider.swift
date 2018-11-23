@@ -22,6 +22,8 @@ public class ChatServiceProvider {
 
     private var deviceID: String
     private var channel: String
+    public var onlineUpdated: Delegate<Int, Void>?
+    public var messageReceived: Delegate<[ChatMessage], Void>?
 
     var online: Int = 0
 
@@ -67,6 +69,7 @@ public class ChatServiceProvider {
 
     // MARK: -- parse response
 
+    @discardableResult
     func parse(_ str: String) -> [ChatMessage] {
         let multiData = str.components(separatedBy: "\n").map({ JSON(parseJSON: $0) })
         var messages: [ChatMessage] = []
@@ -83,6 +86,8 @@ public class ChatServiceProvider {
             messages.append(contentsOf: message)
         }
 
+        self.messageReceived?.call(messages)
+        
         return messages
     }
 
@@ -92,5 +97,6 @@ public class ChatServiceProvider {
         }
 
         self.online = num
+        self.onlineUpdated?.call(num)
     }
 }

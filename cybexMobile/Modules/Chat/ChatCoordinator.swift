@@ -53,10 +53,9 @@ class ChatCoordinator: NavCoordinator {
 
 extension ChatCoordinator: ChatCoordinatorProtocol {
     func connectChat(_ channel: String) {
-        service.messageReceived = {[weak self] messages in
-            guard let self = self else { return }
+        service.provider.messageReceived?.delegate(on: self, block: { (self, messages) in
             self.store.dispatch(ChatFetchedAction(data: messages))
-        }
+        })
         service.connect(channel)
     }
 

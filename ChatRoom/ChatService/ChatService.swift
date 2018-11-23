@@ -16,9 +16,7 @@ public class ChatService: NSObject {
 
     public var provider: ChatServiceProvider!
     var timer: Repeater?
-
-    public var messageReceived: (([ChatMessage]) -> Void)?
-
+    
     public convenience init(_ uuid: String) {
         self.init()
 
@@ -95,7 +93,7 @@ extension ChatService: SRWebSocketDelegate {
     }
 
     public func webSocket(_ webSocket: SRWebSocket, didReceiveMessageWith string: String) {
-        messageReceived?(self.provider.parse(string))
+        self.provider.parse(string)
     }
 
 
