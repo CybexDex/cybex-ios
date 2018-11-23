@@ -135,7 +135,12 @@ class ChatViewController: MessagesViewController {
             return
         }
         
-        if abs(self.messagesCollectionView.contentSize.height - self.messagesCollectionView.bounds.height + self.messagesCollectionView.contentInset.bottom - self.messagesCollectionView.contentOffset.y) < 1 {
+        let contentSizeHeight = self.messagesCollectionView.contentSize.height
+        let boundsHeight = self.messagesCollectionView.bounds.height
+        let inSetBottom = self.messagesCollectionView.contentInset.bottom
+        let offSetY = self.messagesCollectionView.contentOffset.y
+        
+        if abs(contentSizeHeight - boundsHeight + inSetBottom - offSetY) < 1 {
             self.messagesCollectionView.scrollToBottom(animated: true)
         }
         else {
@@ -300,6 +305,14 @@ class ChatViewController: MessagesViewController {
         }).disposed(by: disposeBag)
         
         
+        self.coordinator?.state.numberOfMember.asObservable().subscribe(onNext: { [weak self](numberOfMember) in
+            guard let `self` = self else { return }
+            
+            if let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] {
+                self.title = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade + "(\(numberOfMember))"
+            }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
         NotificationCenter.default.addObserver(forName: NSNotification.Name.init("login_success"), object: nil, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
             if let downInputView = self.downInputView {
@@ -462,7 +475,7 @@ extension ChatViewController {
             return
         }
         upInputView.textView.text = self.downInputView?.inputTextField.text
-        upInputView.numberOfTextLabel.text = "\(upInputView.textView.text.count)"
+        upInputView.numberOfTextLabel.text = "\(upInputView.textView.text.count)/100"
         upInputView.setupBtnState()
         upInputView.isHidden = false
         upInputView.textView.becomeFirstResponder()

@@ -54,11 +54,17 @@ class ChatCoordinator: NavCoordinator {
 
 extension ChatCoordinator: ChatCoordinatorProtocol {
     func connectChat(_ channel: String) {
-        service.provider.messageReceived?.delegate(on: self, block: { (self, messages) in
+        service.provider.messageReceived.delegate(on: self, block: { (self, messages) in
             self.store.dispatch(ChatFetchedAction(data: messages))
+        })
+        
+        service.provider.onlineUpdated.delegate(on: self, block: { (self, numberOfMember) in
+            self.store.dispatch(ChatUpdateMemberAction(data: numberOfMember))
         })
         service.connect(channel)
     }
+    
+    
 
     func disconnect() {
         service.disconnect()

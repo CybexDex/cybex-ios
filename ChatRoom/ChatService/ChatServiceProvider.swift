@@ -22,8 +22,8 @@ public class ChatServiceProvider {
 
     private var deviceID: String
     private var channel: String
-    public var onlineUpdated: Delegate<Int, Void>?
-    public var messageReceived: Delegate<[ChatMessage], Void>?
+    public var onlineUpdated = Delegate<Int, Void>()
+    public var messageReceived = Delegate<[ChatMessage], Void>()
 
     var online: Int = 0
 
@@ -86,7 +86,7 @@ public class ChatServiceProvider {
             messages.append(contentsOf: message)
         }
 
-        self.messageReceived?.call(messages)
+        self.messageReceived.call(messages)
         
         return messages
     }
@@ -97,6 +97,6 @@ public class ChatServiceProvider {
         }
 
         self.online = num
-        self.onlineUpdated?.call(num)
+        self.onlineUpdated.call(num)
     }
 }

@@ -18,7 +18,7 @@ class ChatUpInputView: CybexBaseView {
     
     
     enum Event:String {
-        case ChatUpInputViewDidClicked
+        case chatUpInputViewDidClicked
         case sendMessage
         case sendRealName
     }
@@ -89,7 +89,7 @@ class ChatUpInputView: CybexBaseView {
     }
     
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.ChatUpInputViewDidClicked.rawValue,
+        self.next?.sendEventWith(Event.chatUpInputViewDidClicked.rawValue,
                                  userinfo: ["data": self.data ?? "", "self": self])
     }
 }

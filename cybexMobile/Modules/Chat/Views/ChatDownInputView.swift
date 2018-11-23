@@ -16,7 +16,7 @@ class ChatDownInputView: CybexBaseView {
     
     
     enum Event:String {
-        case ChatDownInputViewDidClicked
+        case chatDownInputViewDidClicked
         case sendMessage
         case callKeyboard
     }
@@ -74,8 +74,9 @@ class ChatDownInputView: CybexBaseView {
                                  userinfo: ["message": text])
     }
     
+    
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.ChatDownInputViewDidClicked.rawValue,
+        self.next?.sendEventWith(Event.chatDownInputViewDidClicked.rawValue,
                                  userinfo: ["data": self.data ?? "", "self": self])
     }
 }
