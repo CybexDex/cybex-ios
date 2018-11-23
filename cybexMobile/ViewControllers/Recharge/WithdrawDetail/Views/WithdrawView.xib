@@ -162,7 +162,7 @@
                                                     <color key="textColor" red="0.84299999999999997" green="0.20000000000000001" blue="0.23899999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="eos_code_tip"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="xrp_code_tip"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VQH-h2-uDN">

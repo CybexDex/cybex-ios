@@ -115,6 +115,10 @@ struct AppConfiguration {
     static var BlockExplorerJson: String {
         return ServerBaseURLString + "json/blockexplorer.json"
     }
+    
+    static var LastMessageIdURL: String {
+        return "http://47.91.242.71:9099/lastestMsgID?channel="
+    }
 }
 
 enum ExchangeType {

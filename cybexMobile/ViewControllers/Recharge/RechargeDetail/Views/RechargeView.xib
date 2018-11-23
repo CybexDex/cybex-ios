@@ -48,15 +48,15 @@
                                                 <constraint firstAttribute="height" constant="80" id="kae-T1-EjD"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="SOURCE_TYPE">
-                                                    <integer key="value" value="0"/>
-                                                </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_available"/>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                                     <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                     <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="SOURCETYPE">
+                                                    <integer key="value" value="0"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
@@ -69,18 +69,17 @@
                                                         <constraint firstAttribute="height" constant="67" id="Wfe-3S-XZp"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="SOURCE_TYPE">
-                                                            <integer key="value" value="1"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_address"/>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="输入或长按粘贴地址"/>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                                             <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="SOURCETYPE">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_address"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gnP-R6-llI" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
@@ -96,10 +95,10 @@
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="SOURCE_TYPE">
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_memo"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="SOURCETYPE">
                                                             <integer key="value" value="2"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_memo"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cTf-Z4-7CG" customClass="RechargeItemView" customModule="cybexMobile" customModuleProvider="target">
@@ -108,11 +107,7 @@
                                                         <constraint firstAttribute="height" constant="67" id="lxL-sQ-Rld"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="SOURCE_TYPE">
-                                                            <integer key="value" value="2"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="name" value="withdraw_amount"/>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="最小提现数量"/>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                                                             <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </userDefinedRuntimeAttribute>
@@ -120,6 +115,9 @@
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="SOURCETYPE">
+                                                            <integer key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>

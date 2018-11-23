@@ -200,10 +200,14 @@ extension AppCoordinator {
                 var pairs: [Pair] = []
                 var count = 0
                 for base in AssetConfiguration.marketBaseAssets {
+                   
                     SimpleHTTPService.requestMarketList(base: base).done({ (pair) in
                         let piecePair = pair.filter({ (pair) -> Bool in
                             return AssetConfiguration.shared.uniqueIds.contains([pair.base, pair.quote])
                         })
+                        if base == AssetConfiguration.ETH {
+                            print("base ETH")
+                        }
                         count += 1
                         pairs += piecePair
                         if count == AssetConfiguration.marketBaseAssets.count {

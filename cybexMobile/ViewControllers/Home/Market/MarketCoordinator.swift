@@ -21,7 +21,7 @@ protocol MarketStateManagerProtocol {
     func refreshChildViewController(_ vcs: [BaseViewController], pair: Pair)
     func openTradeViewChontroller(_ isBuy: Bool, pair: Pair)
     func setDropBoxViewController()
-    
+    func fetchLastMessageId(_ channel: String, callback:@escaping (Int)->())
 }
 
 class MarketCoordinator: NavCoordinator {
@@ -105,6 +105,17 @@ extension MarketCoordinator: MarketStateManagerProtocol {
         vc.coordinator = RecordChooseCoordinator(rootVC: self.rootVC)
         marketVC.present(vc, animated: true) {
             vc.view.superview?.cornerRadius = 2
+        }
+    }
+    
+    func fetchLastMessageId(_ channel: String, callback:@escaping (Int)->()) {
+        async {
+            guard let data = try? await(SimpleHTTPService.fetchLastMessageIdWithChannel(channel)) else {
+                return
+            }
+            main {
+                callback(data)
+            }
         }
     }
 }

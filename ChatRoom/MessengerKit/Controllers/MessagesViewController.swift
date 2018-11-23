@@ -311,3 +311,6 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
         MessageStyle.bubbleImageCache.removeAllObjects()
     }
 }
+
+
+

@@ -12,6 +12,8 @@ import Foundation
 class ChatDownInputView: CybexBaseView {
     
     @IBOutlet weak var inputTextField: ImageTextField!
+    @IBOutlet weak var sendBtn: UIButton!
+    
     
     enum Event:String {
         case ChatDownInputViewDidClicked
@@ -27,6 +29,8 @@ class ChatDownInputView: CybexBaseView {
     }
     
     func setupUI() {
+        setupBtnState()
+        
         self.inputTextField.placeholder = R.string.localizable.chat_input_placeholder.key.localized()
         self.inputTextField.setPlaceHolderTextColor(UIColor.steel50)
         self.inputTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -34,11 +38,34 @@ class ChatDownInputView: CybexBaseView {
         self.inputTextField.delegate = self
     }
     
+    func setupBtnState() {
+        if !UserManager.shared.isLoginIn {
+            self.sendBtn.setTitle(R.string.localizable.eto_project_login.key.localized(), for: .normal)
+            return
+        }
+        
+        if let text = self.inputTextField.text {
+            if text.count == 0 {
+                self.sendBtn.setTitleColor(UIColor.steel, for: .normal)
+                self.sendBtn.isEnabled = false
+            }
+            else {
+                self.sendBtn.setTitleColor(UIColor.pastelOrange, for: .normal)
+                self.sendBtn.isEnabled = true
+            }
+        }
+    }
+    
     func setupSubViewEvent() {
     
     }
     
     @IBAction func sendMessage(_ sender: UIButton) {
+        if !UserManager.shared.isLoginIn {
+            appCoodinator.showLogin()
+            return
+        }
+        
         guard let text = self.inputTextField.text, text.count != 0  else {
             return
         }

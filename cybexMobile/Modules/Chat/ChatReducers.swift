@@ -25,17 +25,15 @@ func gChatReducer(action: Action, state: ChatState?) -> ChatState {
 }
 
 
-func nameAttributeString(_ sender: String) -> NSAttributedString {
+func nameAttributeString(_ sender: String, isRealName: Bool) -> NSAttributedString {
     var attributeKeys = [NSAttributedString.Key: Any]()
-    attributeKeys[NSAttributedString.Key.foregroundColor] = UIColor.steel
-    if let name = UserManager.shared.name.value {
-        if sender == name + ":" {
-            attributeKeys[NSAttributedString.Key.foregroundColor] = UIColor.pastelOrange
-        }
+    if isRealName {
+        attributeKeys[NSAttributedString.Key.foregroundColor] = UIColor.pastelOrange
+    }
+    else {
+        attributeKeys[NSAttributedString.Key.foregroundColor] = UIColor.steel
     }
     attributeKeys[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: 14)
-    
-    
     return NSAttributedString(string: sender, attributes: attributeKeys)
 }
 
@@ -50,16 +48,27 @@ func messageAttributeString(_ sender: String) -> NSAttributedString {
 func changeModelToViewModel(_ sender: [ChatMessage]) -> [ChatCommonMessage] {
     
     return sender.map({ (message) -> ChatCommonMessage in
-        
         var name = ""
+        var isRealName = false
         if message.signed {
-            name = message.userName + ":"
+            if message.userName.count > 15 {
+                name = message.userName.substring(from: 0, length: 15)! + "..." + ":"
+            }
+            else {
+                name = message.userName
+            }
+            isRealName = true
         }
         else {
+            if let userName = UserManager.shared.name.value {
+                if message.userName == userName {
+                    isRealName = true
+                }
+            }
             name = R.string.localizable.chat_message_guest.key.localized() + ":"
         }
         
-        let nameAttribute = nameAttributeString(name)
+        let nameAttribute = nameAttributeString(name, isRealName: isRealName)
         let messageAttribute = messageAttributeString("  " + message.message)
         
         let attributedText = NSMutableAttributedString(attributedString: nameAttribute)

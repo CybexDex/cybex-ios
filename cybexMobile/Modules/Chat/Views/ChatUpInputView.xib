@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="numberOfTextLabel" destination="ddo-ed-gbj" id="gyN-Sa-Q0c"/>
                 <outlet property="realNameBtn" destination="Yr0-IB-Ffv" id="Y3W-Wn-lAj"/>
+                <outlet property="sendBtn" destination="zNi-9L-Z8D" id="PXa-PC-M1o"/>
                 <outlet property="textView" destination="J8h-kZ-Psm" id="n55-Bu-mve"/>
             </connections>
         </placeholder>
@@ -26,7 +27,7 @@
                     <rect key="frame" x="16" y="8" width="351" height="92"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
                             <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.11" colorSpace="custom" customColorSpace="sRGB"/>

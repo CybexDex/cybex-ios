@@ -38,6 +38,12 @@ class CBKLineView: UIView {
         }
     }
     
+    var messageCount: Int = 0 {
+        didSet {
+            messageView.messageNumberLabel.text = "\(messageCount)"
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

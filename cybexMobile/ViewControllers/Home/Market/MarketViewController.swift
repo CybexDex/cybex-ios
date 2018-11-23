@@ -119,6 +119,25 @@ class MarketViewController: BaseViewController {
         fetchKlineData()
     }
 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchNotReadMessageIdData()
+    }
+    
+    func fetchNotReadMessageIdData(){
+        var lastMessageId = 0
+        if var dic = UserDefaults.standard.value(forKey: "lastReadIds") as? [Pair: String], let cacheMessageId = dic[pair] {
+            lastMessageId = Int(cacheMessageId) ?? 0
+        }
+        self.coordinator?.fetchLastMessageId(self.title!, callback: { [weak self](lastId) in
+            guard let `self` = self else {
+                return
+            }
+            self.kLineView.messageCount = lastId
+        })
+    }
+    
     func setupNotificatin() {
         NotificationCenter.default.addObserver(forName: .SpecialPairDidClicked,
                                                object: nil,

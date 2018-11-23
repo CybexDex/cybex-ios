@@ -45,7 +45,6 @@ class RecordChooseViewController: BaseViewController {
     }
 
     override func refreshViewController() {
-
     }
 
     func setupUI() {

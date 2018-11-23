@@ -130,6 +130,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     }
 
     @objc func updateUI() {
+        
         self.performSelector(onMainThread: #selector(self.refreshTableView),
                              with: nil,
                              waitUntilDone: false)// non block tracking mode

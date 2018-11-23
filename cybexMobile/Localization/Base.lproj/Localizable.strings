@@ -525,9 +525,11 @@
 
 "market_comment_now" = "Comment now";
 
-"chat_input_realname" = "Onymously";
+"chat_input_realname" = "Real Name";
 "chat_input_send" = "Send";
 "chat_input_placeholder" = "My comment";
 
 "chat_new_message" = "%d new message";
 "chat_message_guest" = "Guest";
+
+"chat_space_message" = "Unable to send blank message";

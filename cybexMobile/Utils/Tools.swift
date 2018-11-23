@@ -306,8 +306,7 @@ extension Double {
         let result = num.rounded() / 100.0
 
         //    let roundedNum = round(100.0 * num / pow(1000.0, Double(exp))) / 100.0
-
-        return "\(sign)\(result.string(digits: 2))" + "\(units[exp - 1])"
+        return "\(sign)\(result.string(digits: 2,roundingMode: .down))" + "\(units[exp - 1])"
     }
 }
 

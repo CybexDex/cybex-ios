@@ -14,6 +14,7 @@ class ChatUpInputView: CybexBaseView {
     @IBOutlet weak var realNameBtn: UIButton!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var numberOfTextLabel: UILabel!
+    @IBOutlet weak var sendBtn: UIButton!
     
     
     enum Event:String {
@@ -31,14 +32,31 @@ class ChatUpInputView: CybexBaseView {
     }
     
     func setupUI() {
+        setupBtnState()
+    }
+    
+    func setupBtnState() {
+        if !UserManager.shared.isLoginIn {
+            self.sendBtn.setTitle(R.string.localizable.eto_project_login.key.localized(), for: .normal)
+            return
+        }
         
+        if let text = self.textView.text {
+            if text.count == 0 {
+                self.sendBtn.setTitleColor(UIColor.steel, for: .normal)
+                self.sendBtn.isEnabled = false
+            }
+            else {
+                self.sendBtn.setTitleColor(UIColor.pastelOrange, for: .normal)
+                self.sendBtn.isEnabled = true
+            }
+        }
     }
     
     func setupSubViewEvent() {
         NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification,
                                                object: self.textView,queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
-                                                
             let count = self.textView.text.count
             if count < 100 {
                 self.numberOfTextLabel.text = "\(self.textView.text.count)/100"
@@ -50,16 +68,21 @@ class ChatUpInputView: CybexBaseView {
                 
                 self.textView.text = self.textView.text.substring(from: 0, length: 100)
             }
+            self.setupBtnState()
         }
     }
     
+    
     @IBAction func changeRealNameAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        
         self.next?.sendEventWith(Event.sendRealName.rawValue, userinfo: ["isRealName": self.realNameBtn.isSelected])
     }
     
     @IBAction func sendMessageAction(_ sender: UIButton) {
+        if !UserManager.shared.isLoginIn {
+            appCoodinator.showLogin()
+            return
+        }
         self.textView.resignFirstResponder()
         self.next?.sendEventWith(Event.sendMessage.rawValue,
                                  userinfo: ["message": self.textView.text])

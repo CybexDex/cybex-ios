@@ -77,7 +77,6 @@ extension SimpleHTTPService {
                 seal.fulfill([])
                 return
             }
-
             let pairs = data.arrayValue.map({ Pair(base: base, quote: $0.stringValue) })
             seal.fulfill(pairs)
         })
@@ -504,6 +503,25 @@ extension SimpleHTTPService {
                 return BlockExplorer(asset: item["asset"].stringValue, explorer: item["explorer"].stringValue)
             })
             seal.fulfill(explorers)
+        }
+        return promise
+    }
+    
+    
+    static func fetchLastMessageIdWithChannel(_ channel: String) -> Promise<Int> {
+        var request  = URLRequest(url: URL(string: AppConfiguration.LastMessageIdURL + channel)!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        let (promise, seal) = Promise<Int>.pending()
+        Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+            guard let value = response.result.value else {
+                seal.fulfill(0)
+                return
+            }
+            guard let messageId = value as? Int else {
+                seal.fulfill(0)
+                return
+            }
+            seal.fulfill(messageId)
         }
         return promise
     }

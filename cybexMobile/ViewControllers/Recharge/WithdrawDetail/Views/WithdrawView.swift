@@ -22,7 +22,6 @@ class WithdrawView: UIView {
     @IBOutlet weak var introduce: UILabel!
     @IBOutlet weak var copyAddress: UIButton!
     @IBOutlet weak var tagLabel: UILabel!
-    
     @IBOutlet weak var tagView: UIView!
     
     @IBAction func saveTag(_ sender: Any) {

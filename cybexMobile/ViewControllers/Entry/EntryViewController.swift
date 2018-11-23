@@ -77,6 +77,7 @@ extension EntryViewController {
             UserManager.shared.login(self.accountTextField.text!, password: self.passwordTextField.text!) { success in
                 self.endLoading()
                 if success {
+                    NotificationCenter.default.post(name: NSNotification.Name.init("login_success"), object: nil)
                     self.coordinator?.dismiss()
                 } else {
                     self.showAlert(R.string.localizable.accountNonMatch.key.localized(), buttonTitle: R.string.localizable.ok.key.localized())
