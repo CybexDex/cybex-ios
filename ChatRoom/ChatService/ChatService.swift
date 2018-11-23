@@ -16,7 +16,12 @@ public class ChatService: NSObject {
 
     public var provider: ChatServiceProvider!
     var timer: Repeater?
-    
+
+    public let chatServiceDidClosed = Delegate<(code: Int, reason: String), Void>()
+    public let chatServiceDidFail = Delegate<Error, Void>()
+    public let chatServiceDidDisConnected = Delegate<(), Void>()
+    public let chatServiceDidConnected = Delegate<(), Void>()
+
     public convenience init(_ uuid: String) {
         self.init()
 
@@ -48,8 +53,8 @@ public class ChatService: NSObject {
             try? socket.send(string: str)
         }
         else {
+            chatServiceDidDisConnected.call()
             reconnect()
-            try? socket.send(string: str)
         }
     }
 
@@ -75,13 +80,15 @@ public class ChatService: NSObject {
 extension ChatService: SRWebSocketDelegate {
     public func webSocketDidOpen(_ webSocket: SRWebSocket) {
         try? socket.send(string: self.provider.login())
+        chatServiceDidConnected.call()
     }
 
     public func webSocket(_ webSocket: SRWebSocket, didFailWithError error: Error) {
+        chatServiceDidFail.call(error)
     }
 
     public func webSocket(_ webSocket: SRWebSocket, didCloseWithCode code: Int, reason: String?, wasClean: Bool) {
-
+        chatServiceDidClosed.call((code: code, reason: reason ?? ""))
     }
 
     public func webSocket(_ webSocket: SRWebSocket, didReceivePingWith data: Data?) {
