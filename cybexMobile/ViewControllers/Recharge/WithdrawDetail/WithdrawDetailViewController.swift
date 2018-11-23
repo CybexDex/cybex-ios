@@ -159,8 +159,8 @@ extension WithdrawDetailViewController {
             return
         }
         let board = UIPasteboard.general
-        board.string = containerView?.address.text
-        self.showToastBox(true, message: R.string.localizable.tag_copy_account.key.localized())
+        board.string = eosContainerView?.account.text
+        self.showToastBox(true, message: R.string.localizable.eos_copy_account.key.localized())
     }
     
     @objc func copyCode(_ sender: Any) {
