@@ -51,8 +51,8 @@ class ChatViewController: MessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         IQKeyboardManager.shared.enableAutoToolbar = false
-        
         setupUI()
+        self.startLoading()
         setupData()
         setupEvent()
     }
@@ -68,6 +68,8 @@ class ChatViewController: MessagesViewController {
             toast = BeareadToast.showLoading(inView: self.view)
         }
     }
+    
+    
     
     func isLoading() -> Bool {
         return self.toast?.alpha == 1
@@ -293,8 +295,10 @@ class ChatViewController: MessagesViewController {
             downInputView.setupBtnState()
         }
 
-        self.coordinator?.state.messages.asObservable().subscribe(onNext: {[weak self] (messages) in
+        self.coordinator?.state.messages.asObservable().skip(1).subscribe(onNext: {[weak self] (messages) in
             guard let self = self else { return }
+            self.endLoading()
+
             if messages.count > 1 {
                 self.messageList = messages
                 self.messagesCollectionView.reloadData()
@@ -307,7 +311,7 @@ class ChatViewController: MessagesViewController {
         }).disposed(by: disposeBag)
         
         
-        self.coordinator?.state.numberOfMember.asObservable().subscribe(onNext: { [weak self](numberOfMember) in
+        self.coordinator?.state.numberOfMember.asObservable().skip(1).subscribe(onNext: { [weak self](numberOfMember) in
             guard let `self` = self else { return }
             
             if let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] {
@@ -315,22 +319,25 @@ class ChatViewController: MessagesViewController {
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
-        self.coordinator?.state.chatState.asObservable().subscribe(onNext: { [weak self](connectState) in
+        self.coordinator?.state.chatState.asObservable().skip(1).subscribe(onNext: { [weak self](connectState) in
             guard let `self` = self, let connectState = connectState else { return }
            
             var message = ""
             switch connectState{
             case .chatServiceDidClosed:
-                message = "chatServiceDidClosed"
+                message = "链接关闭"
             case .chatServiceDidFail:
-                message = "chatServiceDidFail"
+                message = "链接失败"
             case .chatServiceDidDisConnected:
-                message = "chatServiceDidDisConnected"
+                message = "断开链接"
             case .chatServiceDidConnected:
-                break
+                message = "已链接"
             }
-            if message.count != 0 {
-                self.showToastBox(false, message: message)
+            if message != "已链接" {
+                BeareadToast.showError(text: message, inView: self.view, hide: 1)
+            }
+            else {
+                BeareadToast.showSucceed(text: message, inView: self.view, hide: 1)
             }
             
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)

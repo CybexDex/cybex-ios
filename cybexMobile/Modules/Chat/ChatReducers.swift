@@ -19,6 +19,8 @@ func gChatReducer(action: Action, state: ChatState?) -> ChatState {
         state.messages.accept(changeModelToViewModel(action.data))
     case let action as ChatUpdateMemberAction:
         state.numberOfMember.accept(action.data)
+    case let action as ChatConnectStateAcion:
+        state.chatState.accept(action.data)
     default:
         break
     }
