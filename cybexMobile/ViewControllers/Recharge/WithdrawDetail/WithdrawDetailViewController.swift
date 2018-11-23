@@ -150,7 +150,7 @@ extension WithdrawDetailViewController {
         if let info = sender as? [String: String] {
             let board = UIPasteboard.general
             board.string = info["tag"]
-            self.showToastBox(true, message: R.string.localizable.recharge_copy.key.localized())
+            self.showToastBox(true, message: R.string.localizable.deposit_tag_copy_success.key.localized())
         }
     }
     

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,22 +32,22 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="727"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dVu-pG-uuE">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="773"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="789"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aiZ-49-g8l" customClass="ETOHomeBannerView" customModule="cybexMobile" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="206"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="190" id="MVb-uu-qJW"/>
+                                                <constraint firstAttribute="height" constant="206" id="MVb-uu-qJW"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kme-f7-KkW" customClass="AnnounceView" customModule="cybexMobile" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="190" width="375" height="36"/>
+                                            <rect key="frame" x="0.0" y="206" width="375" height="36"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="36" id="gvW-bZ-T0v"/>
                                             </constraints>
                                         </view>
                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44G-7F-E3W" customClass="HotAssetsView" customModule="cybexMobile" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="226" width="375" height="110"/>
+                                            <rect key="frame" x="0.0" y="242" width="375" height="110"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="110" id="NVK-8e-nVS"/>
                                             </constraints>
@@ -62,11 +62,10 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-dQ-b1J" customClass="ComprehensiveItemsView" customModule="cybexMobile" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="226" width="375" height="90"/>
-
+                                            <rect key="frame" x="0.0" y="242" width="375" height="90"/>
                                         </view>
                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EZn-fH-M19">
-                                            <rect key="frame" x="0.0" y="316" width="375" height="457"/>
+                                            <rect key="frame" x="0.0" y="332" width="375" height="457"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3CG-Jz-SPa">
                                                     <rect key="frame" x="0.0" y="10" width="375" height="39"/>

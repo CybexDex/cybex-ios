@@ -189,6 +189,8 @@
 "deposit_save"     = "Save QR Code";
 "deposit_copy"     = "Copy Address";
 "deposit_tag_copy" = "Copy Tag";
+"deposit_tag_copy_success" = "Copied";
+
 
 "deposti_get"      = "Get New Address";
 

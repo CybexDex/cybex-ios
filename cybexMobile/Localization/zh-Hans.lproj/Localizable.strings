@@ -179,6 +179,7 @@
 "deposit_save"     = "保存二维码";
 "deposit_copy"     = "复制地址";
 "deposit_tag_copy" = "复制Tag";
+"deposit_tag_copy_success" = "已复制Tag";
 
 "deposti_get"      = "生成新地址";
 
