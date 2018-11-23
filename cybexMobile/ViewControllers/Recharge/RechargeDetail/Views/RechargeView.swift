@@ -104,8 +104,12 @@ class RechargeView: CybexBaseView {
             self.memoView.content.placeholder = R.string.localizable.withdraw_tag_placehold.key.localized()
             self.memoView.content.setPlaceHolderTextColor(UIColor.steel50)
             self.addressView.content.placeholder = R.string.localizable.withdraw_address_placehold.key.localized()
-            self.addressView.content.placeholder = R.string.localizable.withdraw_address_placehold.key.localized()
             self.addressView.content.setPlaceHolderTextColor(UIColor.steel50)
+            if AddressManager.shared.getWithDrawAddressListWith(tradeInfo.id).count == 0 {
+                self.addressView.btn.locali = R.string.localizable.add_address.key
+            } else {
+                self.addressView.btn.locali = R.string.localizable.choose_address.key
+            }
         }
         else {
             self.addressView.content.placeholder = R.string.localizable.withdraw_address_placehold.key.localized()
