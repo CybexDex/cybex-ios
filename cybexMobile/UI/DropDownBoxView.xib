@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DropDownBoxView">
+            <connections>
+                <outlet property="icon" destination="vIe-WW-7jf" id="OrP-i1-AWN"/>
+                <outlet property="nameLabel" destination="VsX-QA-EtR" id="VAf-hU-hY3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="btM-Yo-6kI">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VsX-QA-EtR">
+                    <rect key="frame" x="0.0" y="0.0" width="351" height="44"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vIe-WW-7jf">
+                    <rect key="frame" x="351" y="14" width="16" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="16" id="flQ-sG-d9u"/>
+                        <constraint firstAttribute="height" constant="16" id="sOH-Ug-Woh"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="VsX-QA-EtR" firstAttribute="leading" secondItem="Lhl-p8-24W" secondAttribute="leading" id="Cr9-Sl-sKU"/>
+                <constraint firstItem="VsX-QA-EtR" firstAttribute="top" secondItem="Lhl-p8-24W" secondAttribute="top" id="GeA-Yj-xcd"/>
+                <constraint firstItem="vIe-WW-7jf" firstAttribute="centerY" secondItem="VsX-QA-EtR" secondAttribute="centerY" id="J6w-LD-fDw"/>
+                <constraint firstItem="vIe-WW-7jf" firstAttribute="leading" secondItem="VsX-QA-EtR" secondAttribute="trailing" id="NGY-Ig-3O5"/>
+                <constraint firstItem="Lhl-p8-24W" firstAttribute="bottom" secondItem="VsX-QA-EtR" secondAttribute="bottom" id="YM5-Nu-bIx"/>
+                <constraint firstAttribute="trailing" secondItem="vIe-WW-7jf" secondAttribute="trailing" constant="8" id="dlY-hl-Qms"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Lhl-p8-24W"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="-193" y="-171"/>
+        </view>
+    </objects>
+</document>

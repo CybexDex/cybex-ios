@@ -171,6 +171,7 @@ extension WithdrawAndDespoitRecordViewController: RecordChooseViewControllerDele
             self.headerView.typeInfoView.stateImage.image = R.image.ic2()
             self.coordinator?.childrenFetchData(info, index: RecordChooseType.foudType)
             break
+        default:break
         }
         sender.dismiss(animated: true, completion: nil)
     }

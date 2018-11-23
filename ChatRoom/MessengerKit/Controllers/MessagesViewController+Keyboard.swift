@@ -136,5 +136,4 @@ extension MessagesViewController {
             return 0
         }
     }
-
 }

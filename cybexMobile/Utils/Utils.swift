@@ -250,10 +250,12 @@ func getWithdrawDetailInfo(addressInfo: String, amountInfo: String, withdrawFeeI
     let gatewayFee: String = R.string.localizable.utils_withdrawfee.key.localized()
     let withdrawFee: String = R.string.localizable.utils_gatewayfee.key.localized()
     let receiveAmount: String = R.string.localizable.utils_receiveamount.key.localized()
-    let memo: String = R.string.localizable.withdraw_memo.key.localized()
+    var memo: String = R.string.localizable.withdraw_memo.key.localized()
 
     let content = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
-
+    if isEOS && memoInfo.count > 0 && receiveAmountInfo.contains("XRP") {
+        memo = "Tag"
+    }
     return (isEOS && memoInfo.count > 0) ?
         (["<name>\(address):</name><\(content)>\n\(addressInfo)</\(content)>".set(style: "alertContent"),
           "<name>\(memo):</name><\(content)>  \(memoInfo)</\(content)>".set(style: "alertContent"),

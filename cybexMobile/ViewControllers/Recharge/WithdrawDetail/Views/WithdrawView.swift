@@ -14,18 +14,20 @@ class WithdrawView: UIView {
     enum EventName: String {
         case saveCode
         case copyAddress
-        case resetAddress
+        case copyTag
     }
-
     @IBOutlet weak var projectInfoView: DespositNameView!
-
     @IBOutlet weak var codeImg: UIImageView!
     @IBOutlet weak var address: UILabel!
     @IBOutlet weak var introduce: UILabel!
-
     @IBOutlet weak var copyAddress: UIButton!
-    @IBOutlet weak var resetAddress: UIButton!
-
+    @IBOutlet weak var tagLabel: UILabel!
+    @IBOutlet weak var tagView: UIView!
+    
+    @IBAction func saveTag(_ sender: Any) {
+        self.next?.sendEventWith(EventName.copyTag.rawValue, userinfo: ["tag": tagLabel.text])
+    }
+    
     @IBAction func saveCode(_ sender: Any) {
         self.next?.sendEventWith(EventName.saveCode.rawValue, userinfo: [:])
     }
@@ -34,14 +36,16 @@ class WithdrawView: UIView {
         self.next?.sendEventWith(EventName.copyAddress.rawValue, userinfo: [:])
     }
 
-    @IBAction func resetAddress(_ sender: Any) {
-        self.next?.sendEventWith(EventName.resetAddress.rawValue, userinfo: [:])
-    }
-
     var data: Any? {
         didSet {
             if let data = data as? AccountAddressRecord {
-                self.address.text = data.address
+                if data.asset.filterJade == "XRP" {
+                    self.tagLabel.text = data.address.components(separatedBy: "[").last?.replacingOccurrences(of: "]", with: "")
+                    self.address.text = data.address.components(separatedBy: "[").first
+                }
+                else {
+                    self.address.text = data.address
+                }
                 let generator = EFQRCodeGenerator(content: data.address, size: EFIntSize(width: 155, height: 155))
                 generator.setIcon(icon: UIImage(named: R.image.artboard.name)?.toCGImage(), size: EFIntSize(width: 42, height: 42))
                 if let image = generator.generate() {
@@ -69,7 +73,6 @@ class WithdrawView: UIView {
 
     func setup() {
         if UIScreen.main.bounds.width == 320 {
-            resetAddress.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
             copyAddress.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
         }
     }

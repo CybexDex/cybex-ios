@@ -158,6 +158,7 @@
 "withdraw_available" = "可用余额";
 "withdraw_address"   = "提现地址";
 "withdraw_address_placehold"   = "输入或长按粘贴地址";
+"withdraw_tag_placehold" = "输入或长按粘贴";
 
 "eos_withdraw_account" = "提现账户";
 "eos_withdraw_account_placehold" = "输入或长按粘贴账户";
@@ -177,6 +178,9 @@
 
 "deposit_save"     = "保存二维码";
 "deposit_copy"     = "复制地址";
+"deposit_tag_copy" = "复制Tag";
+"deposit_tag_copy_success" = "已复制Tag";
+
 "deposti_get"      = "生成新地址";
 
 "alert_cancle"     = "取消";
@@ -250,10 +254,15 @@
 
 "eos_account_title" = "EOS充值帐户";
 "eos_copy_account" = "复制账户";
+"tag_copy_account" = "复制Tag";
+
 "eos_code"  = "备注验证码";
 "eos_code_tip" = "(请务必在转账备注中填写并核对正确)";
 "eos_copy_code" = "复制验证码";
 "eos_reset_code" = "重新生成";
+
+"xrp_code" = "XRP充值Tag";
+"xrp_code_tip" = "(请务必在转账备注中填写并核对正确)";
 
 "business_login_title" = "请登录";
 
@@ -494,3 +503,14 @@
 
 "recharge_hidden_asset" = "隐藏资产为0的币种";
 "recharge_search_asset" = "搜索币种";
+
+"market_comment_now" = "快来评论吧";
+
+"chat_input_realname" = "实名";
+"chat_input_send" = "发送";
+"chat_input_placeholder" = "我来说两句";
+
+"chat_new_message" = "有%d条新消息";
+"chat_message_guest" = "游客";
+
+"chat_space_message" = "不能发空白消息";

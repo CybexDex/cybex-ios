@@ -21,7 +21,6 @@ class EOSWithdrawView: UIView {
     @IBOutlet weak var introduce: UILabel!
 
     @IBOutlet weak var copyAddress: UIButton!
-    @IBOutlet weak var resetAddress: UIButton!
 
     @IBOutlet weak var projectInfoView: DespositNameView!
 
@@ -60,13 +59,10 @@ class EOSWithdrawView: UIView {
         self.next?.sendEventWith(EventName.copyCode.rawValue, userinfo: ["memo": self.memo.text ?? ""])
     }
 
-    @IBAction func resetCode(_ sender: Any) {
-        self.next?.sendEventWith(EventName.resetCode.rawValue, userinfo: [:])
-    }
+   
 
     func setup() {
         if UIScreen.main.bounds.width == 320 {
-            resetAddress.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
             copyAddress.titleLabel?.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
         }
     }

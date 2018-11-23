@@ -79,7 +79,8 @@ class AddAddressView: UIView {
 
     fileprivate func setup() {
         updateHeight()
-
+        self.mark.content.placeholder = R.string.localizable.address_note_placeholder.key.localized()
+        self.mark.content.setPlaceHolderTextColor(UIColor.steel50)
         NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification,
                                                object: self.address.content, queue: nil) { [weak self](_) in
             guard let `self` = self else {return}

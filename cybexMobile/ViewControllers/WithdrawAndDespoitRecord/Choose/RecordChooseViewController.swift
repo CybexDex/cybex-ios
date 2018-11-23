@@ -18,6 +18,8 @@ protocol RecordChooseViewControllerDelegate {
 enum RecordChooseType: Int {
     case asset = 0
     case foudType
+    case time
+    case kind
 }
 
 class RecordChooseViewController: BaseViewController {
@@ -27,6 +29,8 @@ class RecordChooseViewController: BaseViewController {
     var coordinator: (RecordChooseCoordinatorProtocol & RecordChooseStateManagerProtocol)?
     private(set) var context: RecordChooseContext?
     var typeIndex: RecordChooseType = .asset
+    var selectedIndex: Int = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,7 +45,6 @@ class RecordChooseViewController: BaseViewController {
     }
 
     override func refreshViewController() {
-
     }
 
     func setupUI() {
@@ -153,8 +156,16 @@ extension RecordChooseViewController: UITableViewDataSource, UITableViewDelegate
 
 extension RecordChooseViewController {
     @objc func recordChooseCellViewDidClicked(_ data: [String: Any]) {
-        if let data = data["data"] as? String {
-            self.delegate?.returnSelectedRow(self, info: data)
+        if let result = data["data"] as? String,
+            let data = self.coordinator?.state.data.value {
+            
+            for(index, info) in data.enumerated() {
+                if info == result {
+                    self.selectedIndex = index
+                    break
+                }
+            }
+            self.delegate?.returnSelectedRow(self, info: result)
         }
     }
 }

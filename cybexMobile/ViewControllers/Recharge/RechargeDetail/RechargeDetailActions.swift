@@ -15,6 +15,7 @@ import RxCocoa
 struct RechargeDetailState: BaseState {
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+
     var data: BehaviorRelay<WithdrawinfoObject?> = BehaviorRelay(value: nil)
     var memoKey: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     var gatewayFee: BehaviorRelay<(Fee, success: Bool)?> = BehaviorRelay(value: nil)

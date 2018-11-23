@@ -10,12 +10,13 @@ import Foundation
 import SwiftyJSON
 
 public struct ChatMessage: NBLModel {
-    var userName: String = ""
-    var message: String = ""
-    var deviceID: String = ""
-    var msgID: Int = 0
-    var timestamp: String = ""
-    var signed: Bool = false
+    
+    public var userName: String = ""
+    public var message: String = ""
+    public var deviceID: String = ""
+    public var msgID: Int = 0
+    public var timestamp: String = ""
+    public var signed: Bool = false
 
     public init() {
 

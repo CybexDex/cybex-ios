@@ -180,10 +180,8 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                         if var amount = amount.toDouble() {
                             let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
                             amount = amount * Double(truncating: value as NSNumber)
-
                             let feeAmout = feeAmount.toDouble()! * Double(truncating: pow(10, (appData.assetInfo[feeId]?.precision)!) as NSNumber)
-
-                            let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
+                            let jsonstr = BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
                                                                               block_id: infos.block_id,
                                                                               expiration: Date().timeIntervalSince1970 + 10 * 3600,
                                                                               chain_id: id,

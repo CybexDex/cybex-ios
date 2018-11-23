@@ -20,8 +20,12 @@ protocol ChatCoordinatorProtocol {
 
 protocol ChatStateManagerProtocol {
     var state: ChatState { get }
-
-    func switchPageState(_ state: PageState)
+    
+    func switchPageState(_ state:PageState)
+    
+    func openNewMessageVC(_ sender: UIView)
+    
+    func openNameVC(_ sender: UIView, name: String)
 }
 
 class ChatCoordinator: NavCoordinator {
@@ -36,12 +40,9 @@ class ChatCoordinator: NavCoordinator {
     }
 
     let service = ChatService(FCUUID.uuid())
-
     override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
-//        let vc = R.storyboard.chat.chatViewController()!
-//        let coordinator = ChatCoordinator(rootVC: root)
-//        vc.coordinator = coordinator
-//        coordinator.store.dispatch(RouteContextAction(context: context))
+
+
         return BaseViewController()
     }
 
@@ -53,11 +54,17 @@ class ChatCoordinator: NavCoordinator {
 
 extension ChatCoordinator: ChatCoordinatorProtocol {
     func connectChat(_ channel: String) {
-        service.provider.messageReceived?.delegate(on: self, block: { (self, messages) in
+        service.provider.messageReceived.delegate(on: self, block: { (self, messages) in
             self.store.dispatch(ChatFetchedAction(data: messages))
+        })
+        
+        service.provider.onlineUpdated.delegate(on: self, block: { (self, numberOfMember) in
+            self.store.dispatch(ChatUpdateMemberAction(data: numberOfMember))
         })
         service.connect(channel)
     }
+    
+    
 
     func disconnect() {
         service.disconnect()
@@ -72,6 +79,32 @@ extension ChatCoordinator: ChatStateManagerProtocol {
     func switchPageState(_ state: PageState) {
         DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
+        }
+    }
+    
+    func openNewMessageVC(_ sender: UIView) {
+
+    }
+    
+    func openNameVC(_ sender: UIView, name: String) {
+        self.createChatDirectionVC(sender, direction: .unknown, type: ChatDirectionViewController.ChatDirectionType.icon, name: name)
+    }
+    
+    func createChatDirectionVC(_ sender: UIView, direction: UIPopoverArrowDirection, type: ChatDirectionViewController.ChatDirectionType, name: String) {
+        guard let vc = R.storyboard.chat.chatDirectionViewController(), let mainVC = self.rootVC.topViewController as? ChatViewController else { return }
+        vc.preferredContentSize = CGSize(width: UIScreen.main.bounds.width - 100, height: 45)
+        vc.modalPresentationStyle = .popover
+        vc.popoverPresentationController?.sourceView = sender
+        vc.popoverPresentationController?.sourceRect = sender.bounds
+        vc.popoverPresentationController?.delegate = mainVC
+        vc.popoverPresentationController?.permittedArrowDirections = direction
+        vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.paleGrey.hexString(true)]
+        vc.viewType = type
+        vc.delegate = mainVC
+        vc.name = name
+        vc.coordinator = ChatDirectionCoordinator(rootVC: self.rootVC)
+        mainVC.present(vc, animated: true) {
+            mainVC.view.superview?.cornerRadius = 4
         }
     }
 }

@@ -44,9 +44,9 @@ class RechargeItemView: UIView {
 
     @IBInspectable var textplaceholder: String = "" {
         didSet {
-            content.locali = textplaceholder
-            content.attributedPlaceholder = NSAttributedString(string: self.content.placeholder!,
-                                                               attributes: [NSAttributedString.Key.foregroundColor: UIColor.steel50])
+            content.localizedText = textplaceholder.localizedContainer()
+//            content.placeholder = self.content.placeholder!
+            content.setPlaceHolderTextColor(UIColor.steel50)
         }
     }
 

@@ -42,7 +42,13 @@ class AddAddressViewController: BaseViewController {
             } else {
                 self.title = R.string.localizable.address_title_add.key.localized()
                 self.containerView.address.title = R.string.localizable.withdraw_address.key
-                self.containerView.memo.isHidden = true
+                if appData.assetInfo[self.asset]?.symbol.filterJade == "XRP" {
+                    self.containerView.memo.isHidden = false
+                    self.containerView.memo.name.text = "Tag"
+                }
+                else {
+                    self.containerView.memo.isHidden = true
+                }
             }
             if self.withdrawAddress != nil {
                 self.containerView.data = withdrawAddress
