@@ -33,7 +33,7 @@ protocol RechargeDetailStateManagerProtocol {
                     callback:@escaping (Any) -> Void)
     func getFinalAmount(feeId: String, amount: Decimal, available: Double) -> (Decimal, String)
 
-    func chooseOrAddAddress(_ sender: String)
+    func chooseOrAddAddress(_ sender: WithdrawAddress)
 }
 
 class RechargeDetailCoordinator: NavCoordinator {
@@ -92,11 +92,12 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
         }
     }
 
-    func openAddAddress(_ asset: String) {
+    func openAddAddress(_ withdrawAddress: WithdrawAddress) {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
             vc.addressType = .withdraw
-            vc.asset = asset
+            vc.withdrawAddress = withdrawAddress
+            vc.asset = withdrawAddress.currency
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
@@ -234,11 +235,11 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         return (finalAmount, requestAmount)
     }
 
-    func chooseOrAddAddress(_ sender: String) {
-        if AddressManager.shared.getWithDrawAddressListWith(sender).count == 0 {
+    func chooseOrAddAddress(_ sender: WithdrawAddress) {
+        if AddressManager.shared.getWithDrawAddressListWith(sender.currency).count == 0 {
             self.openAddAddress(sender)
         } else {
-            showPicker(sender)
+            showPicker(sender.currency)
         }
     }
 }

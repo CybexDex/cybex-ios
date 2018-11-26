@@ -25,13 +25,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WPE-rN-dMX">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPE-rN-dMX">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                     <subviews>
-                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XZA-ba-mfx">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="727"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZA-ba-mfx">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="789"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dVu-pG-uuE">
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dVu-pG-uuE">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="789"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aiZ-49-g8l" customClass="ETOHomeBannerView" customModule="cybexMobile" customModuleProvider="target">
@@ -61,10 +61,10 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="showTouchFeedback" value="NO"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-dQ-b1J" customClass="ComprehensiveItemsView" customModule="cybexMobile" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-dQ-b1J" customClass="ComprehensiveItemsView" customModule="cybexMobile" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="242" width="375" height="90"/>
                                         </view>
-                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EZn-fH-M19">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZn-fH-M19">
                                             <rect key="frame" x="0.0" y="332" width="375" height="457"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3CG-Jz-SPa">
