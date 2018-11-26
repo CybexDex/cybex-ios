@@ -75,7 +75,7 @@
                                                         <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isShowLineView" value="YES"/>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="SOURCETYPE">
                                                             <integer key="value" value="1"/>
                                                         </userDefinedRuntimeAttribute>

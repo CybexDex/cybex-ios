@@ -69,6 +69,11 @@ class ChatViewController: MessagesViewController {
         }
     }
     
+    override func leftAction(_ sender: UIButton) {
+        self.coordinator?.disconnect()
+        super.leftAction(sender)
+    }
+    
     
     
     func isLoading() -> Bool {
@@ -97,7 +102,6 @@ class ChatViewController: MessagesViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.coordinator?.disconnect()
         guard let lastMessage = self.messageList.last, let pair = self.pair else {
             return
         }

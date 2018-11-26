@@ -32,7 +32,7 @@ class RechargeDetailViewController: BaseViewController {
     }
     var isAvalibaleAmount: Bool = false {
         didSet {
-            if isAvalibaleAmount == true {
+            if isAvalibaleAmount != oldValue {
                 self.changeWithdrawState()
             }
         }
@@ -41,7 +41,6 @@ class RechargeDetailViewController: BaseViewController {
     var trade: Trade? {
         didSet {
             if let trade = self.trade {
-                
                 self.balance = getBalanceWithAssetId(trade.id)
                 self.precision = appData.assetInfo[trade.id]?.precision
                 self.isEOS = trade.id == AssetConfiguration.EOS || appData.assetInfo[trade.id]?.symbol.filterJade == "XRP"
@@ -129,6 +128,9 @@ class RechargeDetailViewController: BaseViewController {
                     self.checkAmountIsAvailable(amount)
                 } else {
                     if let text = self.contentView.amountView.content.text {
+                        if text.isEmpty {
+                            self.contentView.errorView.isHidden = true
+                        }
                         self.contentView.amountView.content.text = text.substring(from: 0, length: text.count - 1)
                     }
                     self.isAvalibaleAmount = false
@@ -199,8 +201,15 @@ class RechargeDetailViewController: BaseViewController {
             .asControlEvent()
             .subscribe(onNext: { [weak self](_) in
                 guard let `self` = self else { return }
-
-                self.coordinator?.chooseOrAddAddress(self.trade!.id)
+                
+                if let address = self.contentView.addressView.content.text,
+                    let memo = self.contentView.memoView.content.text,
+                    let trade = self.trade {
+                    if address.isEmpty == false, self.isTrueAddress == true {
+                        let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: address, currency: trade.id, memo: memo)
+                        self.coordinator?.chooseOrAddAddress(withdrawAddress)
+                    }
+                }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         setupKeyboardEvent()
