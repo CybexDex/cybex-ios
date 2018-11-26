@@ -63,6 +63,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        self.startLoading()
     }
 
     func setupUI() {
@@ -121,6 +122,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
             .subscribe(onNext: {[weak self] (_) in
                 guard let `self` = self else { return }
                 self.updateUI()
+                self.endLoading()
                 self.timer = Timer.scheduledTimer(timeInterval: 3,
                                                   target: self,
                                                   selector: #selector(self.updateUI),

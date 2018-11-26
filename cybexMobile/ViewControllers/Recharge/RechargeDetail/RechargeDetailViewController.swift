@@ -113,7 +113,7 @@ class RechargeDetailViewController: BaseViewController {
             .asObservable()
             .subscribe(onNext: { [weak self](_) in
                 guard let `self` = self else { return }
-                if let text = self.contentView.amountView.content.text,
+                if let text = self.contentView.amountView.content.text, text.isEmpty == false,
                     var amount = text.toDouble(),
                     amount >= 0,
                     let balance = self.balance,

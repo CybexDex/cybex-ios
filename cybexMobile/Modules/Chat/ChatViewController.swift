@@ -108,6 +108,7 @@ class ChatViewController: MessagesViewController {
     }
     
     deinit {
+        IQKeyboardManager.shared.enableAutoToolbar = true
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -528,7 +529,6 @@ extension ChatViewController {
             self.showToastBox(false, message: R.string.localizable.chat_space_message.key.localized())
             return
         }
-        self.downInputView?.setupBtnState()
         if let upInputView = self.upInputView {
             upInputView.textView.text = ""
             upInputView.numberOfTextLabel.text = "0/100"
@@ -536,6 +536,8 @@ extension ChatViewController {
             upInputView.setupBtnState()
         }
         
+        self.downInputView?.inputTextField.text = ""
+        self.downInputView?.setupBtnState()
         if self.isRealName {
             if !UserManager.shared.isLocked {
                 self.coordinator?.send(message,
@@ -544,6 +546,7 @@ extension ChatViewController {
             }
             else {
                 self.downInputView?.inputTextField.text = message
+                self.downInputView?.setupBtnState()
                 self.showPasswordBox()
             }
         }
