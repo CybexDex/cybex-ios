@@ -7,4 +7,4 @@
 #import "ZYNetworkAccessibity.h"
 #import <UMAnalytics/MobClick.h>
 #import <UMCommon/UMCommon.h>
-#import "FCUUID.h"
+#import "UIDevice+FCUUID.h"

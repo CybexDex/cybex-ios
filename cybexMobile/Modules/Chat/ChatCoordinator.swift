@@ -39,7 +39,7 @@ class ChatCoordinator: NavCoordinator {
         return store.state
     }
 
-    let service = ChatService(FCUUID.uuid())
+    let service = ChatService(UIDevice.current.uuid())
     override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
 
 
