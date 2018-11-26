@@ -83,9 +83,9 @@ class ChatUpInputView: CybexBaseView {
             appCoodinator.showLogin()
             return
         }
-        self.textView.resignFirstResponder()
         self.next?.sendEventWith(Event.sendMessageEvent.rawValue,
                                  userinfo: ["message": self.textView.text])
+        self.textView.resignFirstResponder()
     }
     
     @objc override func didClicked() {
