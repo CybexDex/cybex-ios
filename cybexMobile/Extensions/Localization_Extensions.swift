@@ -266,7 +266,12 @@ extension UIControl {
         guard responds(to: sel)           else { return }
         guard let value = picker?.value() else { return }
 
-        if let statePicker = picker as? StateValueContainer {
+        if picker is LocalizedValueContainer {
+            let setLocalizedText = unsafeBitCast(method(for: sel), to: SetLocalizedTextIMP.self)
+            if let val = value as? String {
+                setLocalizedText(self, sel, val.localized())
+            }
+        } else if let statePicker = picker as? StateValueContainer {
             let setState = unsafeBitCast(method(for: sel), to: SetLocalizedTextForStateIMP.self)
 
             statePicker.values.forEach {
