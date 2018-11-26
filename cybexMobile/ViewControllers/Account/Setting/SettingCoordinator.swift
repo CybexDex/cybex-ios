@@ -73,8 +73,11 @@ extension SettingCoordinator: SettingStateManagerProtocol {
 
         CybexWebSocketService.shared.disconnect()
         UserManager.shared.logout()
-        CybexWebSocketService.shared.connect()
         callback(isTest)
         self.rootVC.popViewController()
+        if let appdelegate =  UIApplication.shared.delegate as? AppDelegate {
+            appdelegate.fetchEtoHiddenRequest(true)
+            CybexWebSocketService.shared.connect()
+        }
     }
 }

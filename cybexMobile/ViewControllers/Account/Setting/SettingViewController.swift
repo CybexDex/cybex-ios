@@ -49,9 +49,9 @@ class SettingViewController: BaseViewController {
     }
     
     func setupUI() {
-//        #if DEBUG
-//        self.environment.isHidden = false
-//        #endif
+        #if DEBUG
+        self.environment.isHidden = false
+        #endif
         language.contentLocali =  R.string.localizable.setting_language.key
         version.content.text = Bundle.main.version
         theme.contentLocali = ThemeManager.currentThemeIndex == 0 ? R.string.localizable.dark.key : R.string.localizable.light.key

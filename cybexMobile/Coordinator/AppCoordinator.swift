@@ -147,6 +147,7 @@ class AppCoordinator {
             self.rootVC.selectedIndex = self.rootVC.viewControllers!.count - 1
         })
 
+        self.rootVC.selectedIndex = 0
         aspect()
     }
 
@@ -160,7 +161,11 @@ class AppCoordinator {
     }
 
     func curDisplayingCoordinator() -> NavCoordinator {
-        return self.container[self.rootVC.selectedIndex]
+        if self.rootVC.selectedIndex < self.container.count {
+            return self.container[self.rootVC.selectedIndex]
+        }
+
+        return NavCoordinator(rootVC: BaseNavigationController())
     }
 
     func presentedViewController() -> BaseViewController? {

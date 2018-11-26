@@ -32,3 +32,11 @@ extension Delegate where Input == Void {
         return call(())
     }
 }
+
+
+func guardSharedProperty<T>(_ input: T?) -> T {
+    guard let shared = input else {
+        fatalError("Use \(T.self) before setup. ")
+    }
+    return shared
+}

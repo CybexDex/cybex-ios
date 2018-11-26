@@ -14,6 +14,11 @@ public class ChatService: NSObject {
     static let host = "ws://47.91.242.71:9099/ws"
     lazy var socket = SRWebSocket(url: URL(string: ChatService.host)!)
 
+    static var _shared: ChatService?
+    public static var shared: ChatService {
+        return guardSharedProperty(_shared)
+    }
+
     public var provider: ChatServiceProvider!
     var timer: Repeater?
 
@@ -26,6 +31,7 @@ public class ChatService: NSObject {
         self.init()
 
         self.provider = ChatServiceProvider(uuid, channel: "")
+        ChatService._shared = self
     }
 
     private override init() {
@@ -36,25 +42,26 @@ public class ChatService: NSObject {
     public func connect(_ chanel: String) {
         self.provider.switchChanel(chanel)
 
-        reconnect()
+        socket.delegate = self
+        socket.open()
     }
 
     public func disconnect() {
         self.socket.close()
     }
 
-    func reconnect() {
-        socket.delegate = self
-        socket.open()
+    public func reconnect() {
+        if socket.readyState == SRReadyState.CLOSED {
+            socket.close()
+            socket = SRWebSocket(url: URL(string: ChatService.host)!)
+            socket.delegate = self
+            socket.open()
+        }
     }
 
     public func send(_ str: String) {
         if checkNetworConnected() {
             try? socket.send(string: str)
-        }
-        else {
-            chatServiceDidDisConnected.call()
-            reconnect()
         }
     }
 

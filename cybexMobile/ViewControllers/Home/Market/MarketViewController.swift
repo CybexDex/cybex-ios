@@ -77,8 +77,11 @@ class MarketViewController: BaseViewController {
     }()
 
     lazy var ticker: Ticker = {
-        let market = self.tickers[self.curIndex]
-        return market
+        if self.curIndex < self.tickers.count {
+            let market = self.tickers[self.curIndex]
+            return market
+        }
+        return Ticker()
     }()
 
     lazy var tickers: [Ticker] = {
@@ -228,9 +231,11 @@ class MarketViewController: BaseViewController {
 
     func updateIndex() {
         let pairs = tickers.map({ Pair(base: $0.base, quote: $0.quote) })
-        curIndex = pairs.index(of: pair)!
-        ticker = tickers[self.curIndex]
-        pair = pairs[self.curIndex]
+        if let index = pairs.index(of: pair), index < tickers.count, index < pairs.count {
+            curIndex = index
+            ticker = tickers[self.curIndex]
+            pair = pairs[self.curIndex]
+        }
     }
 
     @objc func refreshKLine() {

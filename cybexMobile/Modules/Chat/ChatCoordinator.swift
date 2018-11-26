@@ -10,6 +10,7 @@ import UIKit
 import ReSwift
 import NBLCommonModule
 import ChatRoom
+import Reachability
 
 protocol ChatCoordinatorProtocol {
     func connectChat(_ channel: String)
@@ -52,6 +53,10 @@ class ChatCoordinator: NavCoordinator {
     }
 }
 
+extension Notification.Name {
+    public static let LineSDKAccessTokenDidUpdate = Notification.Name("com.linecorp.linesdk.AccessTokenDidUpdate")
+}
+
 extension ChatCoordinator: ChatCoordinatorProtocol {
     func connectChat(_ channel: String) {
         service.provider.messageReceived.delegate(on: self, block: { (self, messages) in
@@ -73,9 +78,25 @@ extension ChatCoordinator: ChatCoordinatorProtocol {
         }
         service.chatServiceDidConnected.delegate(on: self) { (self, _) in
             self.store.dispatch(ChatConnectStateAcion(data: ChatConnectState.chatServiceDidConnected))
+            self.monitorService()
         }
         
         service.connect(channel)
+    }
+
+    func monitorService() {
+        NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { (note) in
+            guard let reachability = note.object as? Reachability else {
+                return
+            }
+
+            switch reachability.connection {
+            case .wifi, .cellular:
+                self.service.reconnect()
+            case .none:
+                break
+            }
+        }
     }
     
     

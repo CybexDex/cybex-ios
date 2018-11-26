@@ -23,6 +23,7 @@ import SwiftRichString
 import SwiftyBeaver
 import AlamofireNetworkActivityLogger
 import NBLCommonModule
+import ChatRoom
 
 let log = SwiftyBeaver.self
 let reachability = Reachability()!
@@ -109,10 +110,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func fetchEtoHiddenRequest() {
+    func fetchEtoHiddenRequest(_ refresh:Bool = false) {
         SimpleHTTPService.fetchETOHiddenRequest().done { (etoStatus) in
             AppConfiguration.shared.appCoordinator.etoStatus.accept(etoStatus)
             if let status = etoStatus, status.isETOEnabled == true {
+                AppConfiguration.shared.appCoordinator.start()
+            } else if refresh {
                 AppConfiguration.shared.appCoordinator.start()
             }
             }.catch { (_) in
