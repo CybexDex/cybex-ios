@@ -278,7 +278,12 @@ class ChatViewController: MessagesViewController {
             self.messagesCollectionView.scrollToBottom(animated: true)
             let keyboardRec = nsValue.cgRectValue
             var rectOfView = self.view.frame
-            rectOfView.origin.y = -keyboardRec.size.height
+            if #available(iOS 11.0, *) {
+                let insets = self.view.safeAreaInsets
+                rectOfView.origin.y = -(keyboardRec.size.height - insets.bottom)
+            } else {
+                rectOfView.origin.y = -keyboardRec.size.height
+            }
             self.view.frame = rectOfView
         }
         
@@ -291,10 +296,6 @@ class ChatViewController: MessagesViewController {
             self.view.frame = rectOfView
             self.downInputViewHeightConstraint?.constant = 56
             self.view.setNeedsLayout()
-//            guard let text = upInputView.textView.text, text.isEmpty == false, text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty == false else {
-//                downInputView.setupBtnState()
-//                return
-//            }
             downInputView.inputTextField.text = upInputView.textView.text
             downInputView.setupBtnState()
         }
@@ -532,15 +533,8 @@ extension ChatViewController {
             self.showToastBox(false, message: R.string.localizable.chat_space_message.key.localized())
             return
         }
-        if let upInputView = self.upInputView {
-            upInputView.textView.text = ""
-            upInputView.numberOfTextLabel.text = "0/100"
-            upInputView.numberOfTextLabel.textColor = UIColor.steel
-            upInputView.setupBtnState()
-        }
         
-        self.downInputView?.inputTextField.text = ""
-        self.downInputView?.setupBtnState()
+       
         if self.isRealName {
             if !UserManager.shared.isLocked {
                 self.coordinator?.send(message,
@@ -551,12 +545,21 @@ extension ChatViewController {
                 self.downInputView?.inputTextField.text = message
                 self.downInputView?.setupBtnState()
                 self.showPasswordBox()
+                return
             }
         }
         else {
             self.coordinator?.send(message,
                                    username: UserManager.shared.name.value!,
                                    sign: "")
+        }
+        self.downInputView?.inputTextField.text = ""
+        self.downInputView?.setupBtnState()
+        if let upInputView = self.upInputView {
+            upInputView.textView.text = ""
+            upInputView.numberOfTextLabel.text = "0/100"
+            upInputView.numberOfTextLabel.textColor = UIColor.steel
+            upInputView.setupBtnState()
         }
     }
     
