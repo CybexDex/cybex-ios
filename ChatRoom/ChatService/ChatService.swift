@@ -109,7 +109,4 @@ extension ChatService: SRWebSocketDelegate {
     public func webSocket(_ webSocket: SRWebSocket, didReceiveMessageWith string: String) {
         self.provider.parse(string)
     }
-
-
-
 }

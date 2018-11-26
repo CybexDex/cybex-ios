@@ -242,6 +242,7 @@ class RechargeDetailViewController: BaseViewController {
                 self.contentView.errorL.locali =  R.string.localizable.withdraw_nomore.key
             } else {
                 self.isAvalibaleAmount = true
+                self.changeWithdrawState()
                 self.contentView.errorView.isHidden = true
                 self.setFinalAmount()
                 if let addressText = self.contentView.addressView.content.text, addressText.count != 0, !self.isTrueAddress {
