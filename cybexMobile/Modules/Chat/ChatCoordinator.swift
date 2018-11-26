@@ -97,6 +97,10 @@ extension ChatCoordinator: ChatCoordinatorProtocol {
                 break
             }
         }
+
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
+            self.service.reconnect()
+        }
     }
     
     

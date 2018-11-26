@@ -249,6 +249,7 @@ extension AppDelegate {
                 CybexWebSocketService.shared.connect()
                 NotificationCenter.default.post(name: NotificationName.NetWorkChanged, object: nil)
             }
+
         }
     }
 }
