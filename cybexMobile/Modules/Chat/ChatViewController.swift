@@ -108,6 +108,7 @@ class ChatViewController: MessagesViewController {
     }
     
     deinit {
+        IQKeyboardManager.shared.enableAutoToolbar = true
         NotificationCenter.default.removeObserver(self)
     }
     
