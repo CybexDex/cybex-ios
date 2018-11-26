@@ -15,7 +15,7 @@ import MapKit
 import cybex_ios_core_cpp
 import TinyConstraints
 import BeareadToast_swift
-
+import SwiftTheme
 
 import IQKeyboardManagerSwift
 
@@ -31,7 +31,7 @@ class ChatViewController: MessagesViewController {
     var pair: Pair?
     var isRealName: Bool = false
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return ThemeManager.currentThemeIndex == 0 ? .lightContent : .default
     }
     
     var downInputViewHeightConstraint: Constraint?
@@ -141,7 +141,6 @@ class ChatViewController: MessagesViewController {
         if self.messagesCollectionView.contentOffset.y < 10 {
             return
         }
-        
         let contentSizeHeight = self.messagesCollectionView.contentSize.height
         let boundsHeight = self.messagesCollectionView.bounds.height
         let inSetBottom = self.messagesCollectionView.contentInset.bottom
@@ -292,11 +291,11 @@ class ChatViewController: MessagesViewController {
             self.view.frame = rectOfView
             self.downInputViewHeightConstraint?.constant = 56
             self.view.setNeedsLayout()
-            guard let text = upInputView.textView.text, text.isEmpty == false, text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty == false else {
-                downInputView.setupBtnState()
-                return
-            }
-            downInputView.inputTextField.text = text
+//            guard let text = upInputView.textView.text, text.isEmpty == false, text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty == false else {
+//                downInputView.setupBtnState()
+//                return
+//            }
+            downInputView.inputTextField.text = upInputView.textView.text
             downInputView.setupBtnState()
         }
 
@@ -612,5 +611,14 @@ extension ChatViewController {
 extension ChatViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.iconView?.removeFromSuperview()
+        let contentSizeHeight = self.messagesCollectionView.contentSize.height
+        let boundsHeight = self.messagesCollectionView.bounds.height
+        let inSetBottom = self.messagesCollectionView.contentInset.bottom
+        let offSetY = self.messagesCollectionView.contentOffset.y
+        
+        if abs(contentSizeHeight - boundsHeight + inSetBottom - offSetY) < 10 {
+            self.messageView?.isHidden = true
+            self.messageView?.notReadCount = 0
+        }
     }
 }

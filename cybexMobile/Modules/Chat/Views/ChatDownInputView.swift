@@ -69,7 +69,6 @@ class ChatDownInputView: CybexBaseView {
         guard let text = self.inputTextField.text, text.count != 0  else {
             return
         }
-        self.inputTextField.text = ""
         self.next?.sendEventWith(Event.sendMessageEvent.rawValue,
                                  userinfo: ["message": text])
     }
