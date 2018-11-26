@@ -410,7 +410,12 @@ extension MarketViewController {
 extension MarketViewController: UIPopoverPresentationControllerDelegate {
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         selectedDropKindView?.resetState()
-        return true
+        guard let superVC = popoverPresentationController.presentedViewController as? RecordChooseViewController else {
+            return true
+        }
+    
+        superVC.dismiss(animated: false, completion: nil)
+        return false
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -428,7 +433,6 @@ extension MarketViewController: RecordChooseViewControllerDelegate {
         }else if selectedDropKindView?.dropKind == .kind {
             self.indicatorClicked(["indicator": Indicator.all[sender.selectedIndex]])
         }
-        //        Candlesticks.all[idx]
-        sender.dismiss(animated: true, completion: nil)
+        sender.dismiss(animated: false, completion: nil)
     }
 }
