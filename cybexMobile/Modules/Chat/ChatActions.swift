@@ -40,13 +40,16 @@ struct ChatState: BaseState {
     
     var sendState: BehaviorRelay<ChatConnectState?> = BehaviorRelay(value: nil)
     
-    var refreshMessage: BehaviorRelay<([ChatCommonMessage])> = BehaviorRelay(value: [])
+    var refreshMessage: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 }
 
 // MARK: - Action
 struct ChatFetchedAction: Action {
     var data: [ChatMessage]
-    var isRefresh: Bool = false
+}
+
+struct ChatRefreshAction: Action {
+    var data: Bool = false
 }
 
 struct ChatUpdateMemberAction: Action {
