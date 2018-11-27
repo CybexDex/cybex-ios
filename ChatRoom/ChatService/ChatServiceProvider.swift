@@ -12,18 +12,22 @@ import SwiftyJSON
 public class ChatServiceProvider {
     enum SendType: Int {
         case login = 1
-        case message
+        case message = 2
     }
 
     enum ResponseType: Int {
-        case response = 0
-        case message = 2
+        case pushMessage = 2
+
+        //响应
+        case login = 101
+        case message = 102
     }
 
     private var deviceID: String
     private var channel: String
     public var onlineUpdated = Delegate<Int, Void>()
     public var messageReceived = Delegate<[ChatMessage], Void>()
+    public var refreshMessageReceived = Delegate<[ChatMessage], Void>()
 
     var online: Int = 0
 
@@ -74,10 +78,18 @@ public class ChatServiceProvider {
         let multiData = str.components(separatedBy: "\n").map({ JSON(parseJSON: $0) })
         var messages: [ChatMessage] = []
 
+        var refresh = false
         for data in multiData {
             updateOnline(data)
 
-            guard let type = ResponseType(rawValue: data["type"].intValue), type == .message else {
+            guard let type = ResponseType(rawValue: data["type"].intValue) else {
+                continue
+            }
+
+            if type == .message {
+                continue
+            } else if type == .login {
+                refresh = true
                 continue
             }
 
@@ -86,8 +98,12 @@ public class ChatServiceProvider {
             messages.append(contentsOf: message)
         }
 
-        self.messageReceived.call(messages)
-        
+        if refresh {
+            self.refreshMessageReceived.call(messages)
+        } else {
+            self.messageReceived.call(messages)
+        }
+
         return messages
     }
 
