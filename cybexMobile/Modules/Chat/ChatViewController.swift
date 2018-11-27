@@ -307,7 +307,12 @@ class ChatViewController: MessagesViewController {
         self.coordinator?.state.messages.asObservable().skip(1).subscribe(onNext: {[weak self] (messages) in
             guard let self = self else { return }
             self.endLoading()
-
+            if self.messageList.count == 0 {
+                self.messageList = messages
+                self.messagesCollectionView.reloadData()
+                self.messagesCollectionView.scrollToBottom()
+                return
+            }
             if messages.count > 1 {
                 self.messageList = messages
                 self.messagesCollectionView.reloadData()
@@ -317,6 +322,13 @@ class ChatViewController: MessagesViewController {
                 self.insertMessage(messages.first!)
                 self.scrollToBottomAnimationAction()
             }
+        }).disposed(by: disposeBag)
+        
+        
+        self.coordinator?.state.refreshMessage.asObservable().skip(1).subscribe(onNext: {[weak self] (_) in
+            guard let self = self else { return }
+            self.endLoading()
+            self.messageList.removeAll()
         }).disposed(by: disposeBag)
         
         

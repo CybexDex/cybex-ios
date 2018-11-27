@@ -27,7 +27,7 @@ public class ChatServiceProvider {
     private var channel: String
     public var onlineUpdated = Delegate<Int, Void>()
     public var messageReceived = Delegate<[ChatMessage], Void>()
-    public var refreshMessageReceived = Delegate<[ChatMessage], Void>()
+    public var refreshMessageReceived = Delegate<(), Void>()
 
     var online: Int = 0
 
@@ -99,7 +99,7 @@ public class ChatServiceProvider {
         }
 
         if refresh {
-            self.refreshMessageReceived.call(messages)
+            self.refreshMessageReceived.call()
         } else {
             self.messageReceived.call(messages)
         }
