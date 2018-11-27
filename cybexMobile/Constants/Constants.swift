@@ -118,9 +118,9 @@ struct AppConfiguration {
     
     static var LastMessageIdURL: String {
         // test
-//        return "http://47.91.242.71:9099/lastestMsgID?channel="
+        return "http://47.91.242.71:9099/lastestMsgID?channel="
         // 正式
-        return "https://chat.cybex.io/lastestMsgID?channel="
+//        return "https://chat.cybex.io/lastestMsgID?channel="
     }
 }
 
