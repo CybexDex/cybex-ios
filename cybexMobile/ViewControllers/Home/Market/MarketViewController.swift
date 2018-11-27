@@ -280,13 +280,13 @@ class MarketViewController: BaseViewController {
                     lowPrice = (Double(data.highQuote)! / basePrecision) / (Double(data.highBase)! / quotePrecision)
                 }
 
-                if highPrice > 1.3 * (openPrice + closePrice) * 0.5 {
-                    highPrice = max(openPrice, closePrice)
-                }
-
-                if lowPrice < 0.7 * (openPrice + closePrice) * 0.5 {
-                    lowPrice = min(openPrice, closePrice)
-                }
+//                if highPrice > 1.3 * (openPrice + closePrice) * 0.5 {
+//                    highPrice = max(openPrice, closePrice)
+//                }
+//
+//                if lowPrice < 0.7 * (openPrice + closePrice) * 0.5 {
+//                    lowPrice = min(openPrice, closePrice)
+//                }
                 let model = CBKLineModel(date: data.open,
                                          open: openPrice,
                                          close: closePrice,

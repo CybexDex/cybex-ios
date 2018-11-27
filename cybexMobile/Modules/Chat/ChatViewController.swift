@@ -366,6 +366,7 @@ class ChatViewController: MessagesViewController {
         
         self.coordinator?.state.sendState.asObservable().subscribe(onNext: { [weak self](state) in
             guard let `self` = self, let sendState = state else { return }
+            guard let name = UserManager.shared.name.value, name.isEmpty == false else { return }
             self.downInputView?.inputTextField.text = ""
             self.downInputView?.setupBtnState()
             self.upInputView?.textView.text = ""

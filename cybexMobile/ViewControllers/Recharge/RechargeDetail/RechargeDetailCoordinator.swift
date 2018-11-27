@@ -174,8 +174,16 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         getChainId { (id) in
             if let memoKey = self.state.memoKey.value {
                 let name = appData.assetInfo[assetId]?.symbol.filterJade
-
                 let memo = self.state.memo.value
+                var memoAddress = ""
+                if isEOS {
+                    if memo.isEmpty {
+                        memoAddress = GraphQLManager.shared.memo(name!, address: address)
+                    }
+                    else {
+                        memoAddress = GraphQLManager.shared.memo(name!, address: address + "[\(memo)]")
+                    }
+                }
                 let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
                     if let infos = infos as? (block_id: String, block_num: String) {
                         if var amount = amount.toDouble() {
@@ -193,7 +201,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                               amount: Int64(amount),
                                                                               fee_id: Int32(getUserId(feeId)),
                                                                               fee_amount: Int64(feeAmout),
-                                                                              memo: isEOS ? GraphQLManager.shared.memo(name!, address: address + "[\(memo)]") :
+                                                                              memo: isEOS ? memoAddress :
                                                                                 GraphQLManager.shared.memo(name!, address: address),
                                                                               from_memo_key: UserManager.shared.account.value?.memoKey,
                                                                               to_memo_key: memoKey)

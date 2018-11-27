@@ -65,8 +65,10 @@ class ChatUpInputView: CybexBaseView {
             else {
                 self.numberOfTextLabel.text = "100/100"
                 self.numberOfTextLabel.textColor = UIColor.reddish
-                
                 self.textView.text = self.textView.text.substring(from: 0, length: 100)
+                DispatchQueue.main.async {
+                    self.textView.selectedRange = NSMakeRange(100, 0)
+                }
             }
             self.setupBtnState()
         }
