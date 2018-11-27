@@ -26,6 +26,7 @@ public class ChatService: NSObject {
     public let chatServiceDidFail = Delegate<Error, Void>()
     public let chatServiceDidDisConnected = Delegate<(), Void>()
     public let chatServiceDidConnected = Delegate<(), Void>()
+    public let chatServiceDidSended = Delegate<(), Void>()
 
     public convenience init(_ uuid: String) {
         self.init()
@@ -62,6 +63,7 @@ public class ChatService: NSObject {
     public func send(_ str: String) {
         if checkNetworConnected() {
             try? socket.send(string: str)
+            chatServiceDidSended.call()
         }
     }
 
