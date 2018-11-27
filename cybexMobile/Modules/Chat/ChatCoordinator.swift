@@ -17,6 +17,8 @@ protocol ChatCoordinatorProtocol {
     func disconnect()
 
     func send(_ message: String, username: String, sign: String)
+    
+    func resetRefreshMessage(_ isRefresh: Bool)
 }
 
 protocol ChatStateManagerProtocol {
@@ -61,7 +63,7 @@ extension Notification.Name {
 extension ChatCoordinator: ChatCoordinatorProtocol {
     func connectChat(_ channel: String) {
         service.provider.messageReceived.delegate(on: self, block: { (self, messages) in
-            self.store.dispatch(ChatFetchedAction(data: messages, isRefresh: false))
+            self.store.dispatch(ChatFetchedAction(data: messages))
         })
         
         service.provider.onlineUpdated.delegate(on: self, block: { (self, numberOfMember) in
@@ -69,7 +71,7 @@ extension ChatCoordinator: ChatCoordinatorProtocol {
         })
         
         service.provider.refreshMessageReceived.delegate(on: self) { (self, _) in
-            self.store.dispatch(ChatFetchedAction(data: [], isRefresh: true))
+            self.resetRefreshMessage(true)
         }
         
         service.chatServiceDidDisConnected.delegate(on: self) { (self, _) in
@@ -125,6 +127,10 @@ extension ChatCoordinator: ChatCoordinatorProtocol {
 
     func send(_ message: String, username: String, sign: String) {
         service.send(service.provider.message(username, msg: message, sign: sign))
+    }
+    
+    func resetRefreshMessage(_ isRefresh: Bool) {
+        self.store.dispatch(ChatRefreshAction(data: isRefresh))
     }
 }
 
