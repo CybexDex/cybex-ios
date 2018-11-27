@@ -18,6 +18,7 @@ class ComprehensiveViewController: BaseViewController {
     var coordinator: (ComprehensiveCoordinatorProtocol & ComprehensiveStateManagerProtocol)?
 
     @IBOutlet weak var contentView: ComprehensiveView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
