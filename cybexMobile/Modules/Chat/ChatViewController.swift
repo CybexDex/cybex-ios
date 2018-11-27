@@ -337,6 +337,8 @@ class ChatViewController: MessagesViewController {
                 message = "断开链接"
             case .chatServiceDidConnected:
                 message = "已链接"
+            default:
+                break
             }
             if message != "已链接" {
                 BeareadToast.showError(text: message, inView: self.view, hide: 1)
@@ -356,6 +358,17 @@ class ChatViewController: MessagesViewController {
                 upInputView.sendBtn.setTitle(R.string.localizable.chat_input_send.key.localized(), for: UIControl.State.normal)
             }
         }
+        
+        
+        self.coordinator?.state.sendState.asObservable().subscribe(onNext: { [weak self](state) in
+            guard let `self` = self, let sendState = state else { return }
+            self.downInputView?.inputTextField.text = ""
+            self.downInputView?.setupBtnState()
+            self.upInputView?.textView.text = ""
+            self.upInputView?.numberOfTextLabel.text = "0/100"
+            self.upInputView?.numberOfTextLabel.textColor = UIColor.steel
+            self.upInputView?.setupBtnState()
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     
     
@@ -553,14 +566,7 @@ extension ChatViewController {
                                    username: UserManager.shared.name.value!,
                                    sign: "")
         }
-        self.downInputView?.inputTextField.text = ""
-        self.downInputView?.setupBtnState()
-        if let upInputView = self.upInputView {
-            upInputView.textView.text = ""
-            upInputView.numberOfTextLabel.text = "0/100"
-            upInputView.numberOfTextLabel.textColor = UIColor.steel
-            upInputView.setupBtnState()
-        }
+       
     }
     
     @objc func chatDirectionIconViewDidClicked(_ data: [String: Any]) {

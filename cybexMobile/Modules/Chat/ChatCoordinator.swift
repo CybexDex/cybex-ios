@@ -80,6 +80,9 @@ extension ChatCoordinator: ChatCoordinatorProtocol {
             self.store.dispatch(ChatConnectStateAcion(data: ChatConnectState.chatServiceDidConnected))
             self.monitorService()
         }
+        service.chatServiceDidSended.delegate(on: self) { (self, _) in
+            self.store.dispatch(ChatSendStateAction(data: ChatConnectState.chatServiceDidSend))
+        }
         
         service.connect(channel)
     }

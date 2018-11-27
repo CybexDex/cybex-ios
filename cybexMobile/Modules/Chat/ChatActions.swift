@@ -23,6 +23,7 @@ enum ChatConnectState: String {
     case chatServiceDidFail
     case chatServiceDidDisConnected
     case chatServiceDidConnected
+    case chatServiceDidSend
 }
 
 
@@ -36,6 +37,8 @@ struct ChatState: BaseState {
     var numberOfMember: BehaviorRelay<Int> = BehaviorRelay(value: 0)
     
     var chatState: BehaviorRelay<ChatConnectState?> = BehaviorRelay(value: nil)
+    
+    var sendState: BehaviorRelay<ChatConnectState?> = BehaviorRelay(value: nil)
 }
 
 // MARK: - Action
@@ -48,5 +51,9 @@ struct ChatUpdateMemberAction: Action {
 }
 
 struct ChatConnectStateAcion: Action{
+    var data: ChatConnectState
+}
+
+struct ChatSendStateAction: Action {
     var data: ChatConnectState
 }
