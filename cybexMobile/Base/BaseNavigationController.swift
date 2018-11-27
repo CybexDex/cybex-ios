@@ -17,6 +17,8 @@ class BaseNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.delegate = self
+
         setupNavUI()
     }
 
@@ -94,7 +96,7 @@ class BaseNavigationController: UINavigationController {
     }
 }
 
-extension BaseNavigationController: UIGestureRecognizerDelegate {
+extension BaseNavigationController: UIGestureRecognizerDelegate, UINavigationControllerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
 
         // Ignore interactive pop gesture when there is only one view controller on the navigation stack
@@ -102,5 +104,14 @@ extension BaseNavigationController: UIGestureRecognizerDelegate {
             return false
         }
         return true
+    }
+
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+
+        if let coordinator = navigationController.topViewController?.transitionCoordinator {
+            coordinator.notifyWhenInteractionChanges { (context) in
+                context.viewController(forKey: UITransitionContextViewControllerKey.from)?.interactivePopOver(context.isCancelled)
+            }
+        }
     }
 }

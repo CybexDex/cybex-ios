@@ -73,9 +73,13 @@ class ChatViewController: MessagesViewController {
         self.coordinator?.disconnect()
         super.leftAction(sender)
     }
-    
-    
-    
+
+    override func interactivePopOver(_ isCanceled: Bool) {
+        if !isCanceled {
+            self.coordinator?.disconnect()
+        }
+    }
+
     func isLoading() -> Bool {
         return self.toast?.alpha == 1
     }

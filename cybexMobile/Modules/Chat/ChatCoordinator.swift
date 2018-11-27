@@ -41,6 +41,7 @@ class ChatCoordinator: NavCoordinator {
     }
 
     let service = ChatService(UIDevice.current.uuid())
+
     override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
 
 
@@ -97,12 +98,18 @@ extension ChatCoordinator: ChatCoordinatorProtocol {
             case .wifi, .cellular:
                 self.service.reconnect()
             case .none:
+                self.service.disconnect()
                 break
             }
+
         }
 
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
             self.service.reconnect()
+        }
+
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
+            self.service.disconnect()
         }
     }
     

@@ -137,6 +137,10 @@ extension UIViewController {
         leftNavButton.isHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftNavButton)
     }
+
+    @objc func interactivePopOver(_ isCanceled: Bool) {
+
+    }
 }
 
 extension UIViewController: ShowManagerDelegate {

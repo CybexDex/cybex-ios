@@ -22,8 +22,11 @@ public class ChatService: NSObject {
         return guardSharedProperty(_shared)
     }
 
+    let lock = NSLock()
+
     public var provider: ChatServiceProvider!
     var timer: Repeater?
+    var isConnecting = false
 
     public let chatServiceDidClosed = Delegate<(code: Int, reason: String), Void>()
     public let chatServiceDidFail = Delegate<Error, Void>()
@@ -55,7 +58,18 @@ public class ChatService: NSObject {
     }
 
     public func reconnect() {
-        if socket.readyState == SRReadyState.CLOSED {
+        lock.lock()
+        defer {
+            lock.unlock()
+        }
+
+        if isConnecting {
+            return
+        }
+
+        isConnecting = true
+
+        if !checkNetworConnected()  {
             socket.close()
             socket = SRWebSocket(url: URL(string: ChatService.host)!)
             socket.delegate = self
@@ -92,14 +106,19 @@ public class ChatService: NSObject {
 extension ChatService: SRWebSocketDelegate {
     public func webSocketDidOpen(_ webSocket: SRWebSocket) {
         try? socket.send(string: self.provider.login())
+        isConnecting = false
         chatServiceDidConnected.call()
     }
 
     public func webSocket(_ webSocket: SRWebSocket, didFailWithError error: Error) {
+        //可能网络已经断开
+        isConnecting = false
         chatServiceDidFail.call(error)
     }
 
     public func webSocket(_ webSocket: SRWebSocket, didCloseWithCode code: Int, reason: String?, wasClean: Bool) {
+        //100 主动断开
+        isConnecting = false
         chatServiceDidClosed.call((code: code, reason: reason ?? ""))
     }
 
