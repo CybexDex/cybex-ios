@@ -12,9 +12,9 @@ import Repeat
 
 public class ChatService: NSObject {
     // test
-//    static let host = "ws://47.91.242.71:9099/ws"
+    static let host = "ws://47.91.242.71:9099/ws"
     // 正式
-    static let host = "wss://chat.cybex.io/ws"
+//    static let host = "wss://chat.cybex.io/ws"
     lazy var socket = SRWebSocket(url: URL(string: ChatService.host)!)
 
     static var _shared: ChatService?
