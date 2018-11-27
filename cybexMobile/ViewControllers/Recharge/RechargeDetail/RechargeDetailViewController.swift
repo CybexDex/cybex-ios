@@ -170,6 +170,9 @@ class RechargeDetailViewController: BaseViewController {
                         })
                     }
                 } else {
+                    if self.isTrueAddress == false, self.contentView.errorView.isHidden == false, self.contentView.addressView.addressState == .fail {
+                        self.contentView.errorView.isHidden = true
+                    }
                     self.contentView.addressView.addressState = .normal
                     self.isTrueAddress = false
                 }
@@ -205,7 +208,13 @@ class RechargeDetailViewController: BaseViewController {
                 if let address = self.contentView.addressView.content.text,
                     let memo = self.contentView.memoView.content.text,
                     let trade = self.trade {
-                    if address.isEmpty == false, self.isTrueAddress == true {
+                    if address.isEmpty == false {
+                        if self.isTrueAddress == true {
+                            let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: address, currency: trade.id, memo: memo)
+                            self.coordinator?.chooseOrAddAddress(withdrawAddress)
+                        }
+                    }
+                    else {
                         let withdrawAddress = WithdrawAddress(id: AddressManager.shared.getUUID(), name: "", address: address, currency: trade.id, memo: memo)
                         self.coordinator?.chooseOrAddAddress(withdrawAddress)
                     }

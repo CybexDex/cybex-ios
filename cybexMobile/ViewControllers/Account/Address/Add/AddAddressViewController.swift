@@ -52,7 +52,9 @@ class AddAddressViewController: BaseViewController {
             }
             if self.withdrawAddress != nil {
                 self.containerView.data = withdrawAddress
-                self.coordinator?.veritiedAddress(true)
+                if withdrawAddress?.address.isEmpty == false {
+                    self.coordinator?.veritiedAddress(true)
+                }
             }
         } else {
             self.title = R.string.localizable.account_title_add.key.localized()
@@ -62,7 +64,9 @@ class AddAddressViewController: BaseViewController {
             }
             if self.transferAddress != nil {
                 self.containerView.data = transferAddress
-                self.coordinator?.veritiedAddress(true)
+                if transferAddress?.address.isEmpty == false {
+                    self.coordinator?.veritiedAddress(true)
+                }
             }
         }
     }
