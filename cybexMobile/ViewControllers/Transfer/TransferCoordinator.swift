@@ -123,7 +123,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
             }
         }
 
-        presentVC(PickerCoordinator.self, animated: true, context: nil, navSetup: nil) { (top, target) in
+        presentVC(PickerCoordinator.self, animated: true, context: context, navSetup: nil) { (top, target) in
             top.customPresentViewController(presenter, viewController: target, animated: true)
         }
     }

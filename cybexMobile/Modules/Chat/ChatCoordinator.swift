@@ -63,7 +63,14 @@ extension Notification.Name {
 extension ChatCoordinator: ChatCoordinatorProtocol {
     func connectChat(_ channel: String) {
         service.provider.messageReceived.delegate(on: self, block: { (self, messages) in
-            self.store.dispatch(ChatFetchedAction(data: messages))
+            // MARK: 元祖判断
+            if self.state.refreshMessage.value == true {
+                self.store.dispatch(ChatFetchedAction(data: messages,isRefresh: true))
+                self.resetRefreshMessage(false)
+            }
+            else {
+                self.store.dispatch(ChatFetchedAction(data: messages,isRefresh: false))
+            }
         })
         
         service.provider.onlineUpdated.delegate(on: self, block: { (self, numberOfMember) in
