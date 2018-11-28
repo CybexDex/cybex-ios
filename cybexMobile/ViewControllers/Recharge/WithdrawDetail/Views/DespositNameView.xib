@@ -20,11 +20,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="btM-Yo-6kI">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="11"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Fnq-96-cDs">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Fnq-96-cDs">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="11"/>
                     <subviews>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KV9-Sv-G9l">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
@@ -103,6 +103,10 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="ei7-tn-V0S" firstAttribute="leading" secondItem="Fnq-96-cDs" secondAttribute="leading" id="LQW-6y-VtM"/>
+                        <constraint firstAttribute="trailing" secondItem="ei7-tn-V0S" secondAttribute="trailing" id="Z8n-Ke-lYm"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <constraints>
