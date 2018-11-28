@@ -131,20 +131,23 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     func getGatewayFee(_ assetId: String, amount: String, address: String, isEOS: Bool) {
         if let memoKey = self.state.memoKey.value {
             let name = appData.assetInfo[assetId]?.symbol.filterJade
-
             let memo = self.state.memo.value
             if var amount = amount.toDouble() {
                 let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
                 amount = amount * Double(truncating: value as NSNumber)
-
+                var memoAddress = GraphQLManager.shared.memo(name!, address: address)
+                if isEOS {
+                    if !memo.isEmpty {
+                        memoAddress = GraphQLManager.shared.memo(name!, address: address + "[\(memo)]")
+                    }
+                }
                 if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId((UserManager.shared.account.value?.id)!)),
                                                                                   to_user_id: Int32(getUserId((self.state.data.value?.gatewayAccount)!)),
                                                                                   asset_id: Int32(getUserId(assetId)),
                                                                                   amount: Int64(amount),
                                                                                   fee_id: 0,
                                                                                   fee_amount: 0,
-                                                                                  memo: isEOS ? GraphQLManager.shared.memo(name!, address: address + "[\(memo)]") :
-                                                                                    GraphQLManager.shared.memo(name!, address: address),
+                                                                                  memo: memoAddress,
                                                                                   from_memo_key: UserManager.shared.account.value?.memoKey,
                                                                                   to_memo_key: memoKey) {
                     calculateFee(operationString, focusAssetId: assetId, operationID: .transfer) { (success, amount, feeId) in
@@ -175,12 +178,9 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
             if let memoKey = self.state.memoKey.value {
                 let name = appData.assetInfo[assetId]?.symbol.filterJade
                 let memo = self.state.memo.value
-                var memoAddress = ""
+                var memoAddress = GraphQLManager.shared.memo(name!, address: address)
                 if isEOS {
-                    if memo.isEmpty {
-                        memoAddress = GraphQLManager.shared.memo(name!, address: address)
-                    }
-                    else {
+                    if !memo.isEmpty {
                         memoAddress = GraphQLManager.shared.memo(name!, address: address + "[\(memo)]")
                     }
                 }
@@ -201,8 +201,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                               amount: Int64(amount),
                                                                               fee_id: Int32(getUserId(feeId)),
                                                                               fee_amount: Int64(feeAmout),
-                                                                              memo: isEOS ? memoAddress :
-                                                                                GraphQLManager.shared.memo(name!, address: address),
+                                                                              memo: memoAddress,
                                                                               from_memo_key: UserManager.shared.account.value?.memoKey,
                                                                               to_memo_key: memoKey)
                             let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
