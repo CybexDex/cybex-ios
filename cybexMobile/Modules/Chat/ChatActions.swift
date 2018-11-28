@@ -33,7 +33,7 @@ struct ChatState: BaseState {
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 
-    var messages: BehaviorRelay<([ChatCommonMessage])> = BehaviorRelay(value: [])
+    var messages: BehaviorRelay<([ChatCommonMessage], isRefresh: Bool)> = BehaviorRelay(value: ([], isRefresh: false))
     var numberOfMember: BehaviorRelay<Int> = BehaviorRelay(value: 0)
     
     var chatState: BehaviorRelay<ChatConnectState?> = BehaviorRelay(value: nil)
@@ -46,6 +46,7 @@ struct ChatState: BaseState {
 // MARK: - Action
 struct ChatFetchedAction: Action {
     var data: [ChatMessage]
+    var isRefresh: Bool = false
 }
 
 struct ChatRefreshAction: Action {

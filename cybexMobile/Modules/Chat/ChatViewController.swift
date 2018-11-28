@@ -307,17 +307,13 @@ class ChatViewController: MessagesViewController {
         self.coordinator?.state.messages.asObservable().skip(1).subscribe(onNext: {[weak self] (messages) in
             guard let self = self else { return }
             self.endLoading()
-            guard let refreshMessage = self.coordinator?.state.refreshMessage.value else { return }
-            if refreshMessage {
-                DispatchQueue.main.async {
-                    self.coordinator?.resetRefreshMessage(false)
-                }
-                self.messageList = messages
+            if messages.isRefresh {
+                self.messageList = messages.0
                 self.messagesCollectionView.reloadData()
                 self.messagesCollectionView.scrollToBottom(animated: true)
             }
             else {
-                if let lastMessage = messages.first {
+                if let lastMessage = messages.0.first {
                     self.insertMessage(lastMessage)
                     self.scrollToBottomAnimationAction()
                 }

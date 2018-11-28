@@ -19,6 +19,8 @@ class ComprehensiveViewController: BaseViewController {
 
     @IBOutlet weak var contentView: ComprehensiveView!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

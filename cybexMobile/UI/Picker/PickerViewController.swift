@@ -29,6 +29,7 @@ class PickerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        
     }
 
     func setupUI() {
