@@ -39,6 +39,7 @@ class WithdrawView: UIView {
     var data: Any? {
         didSet {
             if let data = data as? AccountAddressRecord {
+                self.projectInfoView.isHidden = false
                 if data.asset.filterJade == "XRP" {
                     self.tagLabel.text = data.address.components(separatedBy: "[").last?.replacingOccurrences(of: "]", with: "")
                     self.address.text = data.address.components(separatedBy: "[").first

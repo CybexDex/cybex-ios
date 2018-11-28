@@ -20,7 +20,10 @@ class DespositNameView: CybexBaseView {
 
     var projectName: String? {
         didSet {
-            guard let projectName = projectName else { return }
+            guard let projectName = projectName else {
+                self.nameView.isHidden = true
+                return                
+            }
             self.nameView.isHidden = false
             self.projectNameLabel.text = projectName
             self.updateHeight()
@@ -30,6 +33,7 @@ class DespositNameView: CybexBaseView {
     var url: String? {
         didSet {
             guard let address = url else {
+                self.addressView.isHidden = true
                 return
             }
             self.addressView.isHidden = false
