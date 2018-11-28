@@ -47,4 +47,34 @@
 
 + (NSString *)signMessage:(NSString *)username message:(NSString *)message;
 
+
+/*
+ unsigned_int fee_asset_id,
+ amount_type fee_amount,
+ unsigned_int deposit_to_account_id,
+ unsigned_int claimed_id,
+ string to_account_pub_key,
+ unsigned_int claimed_asset_id,
+ amount_type claimed_amount
+ */
+//锁定期资产
++ (NSString *)getClaimedSign:(int)block_num
+                    block_id:(NSString *)block_id
+                  expiration:(NSTimeInterval)expiration
+                    chain_id:(NSString *)chain_id
+                fee_asset_id:(int)fee_asset_id
+                  fee_amount:(int)fee_amount
+       deposit_to_account_id:(int)deposit_to_account_id
+                  claimed_id:(int)claimed_id
+            claimed_asset_id:(int)claimed_asset_id
+              claimed_amount:(int)claimed_amount
+          to_account_pub_key:(NSString *)to_account_pub_key;
+
++ (NSString *)getClaimedOperation:(int)fee_asset_id
+                       fee_amount:(int)fee_amount
+            deposit_to_account_id:(int)deposit_to_account_id
+                           claimed_id:(int)claimed_id
+                           claimed_asset_id:(int)claimed_asset_id
+                       claimed_amount:(int)claimed_amount
+                             to_account_pub_key:(NSString *)to_account_pub_key;
   @end
