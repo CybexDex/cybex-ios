@@ -23,7 +23,7 @@ class NoticeBoardView: UIView {
             if let password = data as? String {
                 let str = R.string.localizable.registerConfirm.key.localized().replacingOccurrences(of: "<password></password>", with: "<password>\(password)</password>")
 
-                self.textView.styledText = str
+                self.textView.attributedText = str.set(style: StyleNames.password.rawValue)
             }
         }
     }

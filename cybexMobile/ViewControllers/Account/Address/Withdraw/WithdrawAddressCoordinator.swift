@@ -27,6 +27,8 @@ protocol WithdrawAddressStateManagerProtocol {
     func delete()
 
     func isEOS() -> Bool
+    
+    func isXRP() -> Bool
 }
 
 class WithdrawAddressCoordinator: NavCoordinator {
@@ -122,6 +124,18 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
         Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
             if let viewmodel = coor.state.selectedViewModel.value {
                 if viewmodel.viewModel.model.id == AssetConfiguration.EOS {
+                    result = true
+                }
+            }
+        }
+        return result
+    }
+    
+    func isXRP() -> Bool {
+        var result = false
+        Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
+            if let viewmodel = coor.state.selectedViewModel.value {
+                if viewmodel.viewModel.model.id == "1.3.999" {
                     result = true
                 }
             }

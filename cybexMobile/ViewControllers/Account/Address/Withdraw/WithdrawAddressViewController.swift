@@ -36,11 +36,16 @@ class WithdrawAddressViewController: BaseViewController {
             } else {
                 self.title = assetInfo.symbol.filterJade + " " + R.string.localizable.withdraw_address.key.localized()
             }
-        } else {
+        }
+        else {
             self.localizedText = self.coordinator!.isEOS() ? R.string.localizable.eos_withdraw_account.key.localizedContainer() : R.string.localizable.withdraw_address.key.localizedContainer()
         }
         if !self.coordinator!.isEOS() {
             self.leftLabel.locali = R.string.localizable.account_or_address.key
+            if let isXRP = self.coordinator?.isXRP(), isXRP == true {
+                self.rightLabel.isHidden = false
+                self.rightLabel.locali = "Tag"
+            }
         }
 
         self.tableView.register(UINib(resource: R.nib.withdrawAddressTableViewCell), forCellReuseIdentifier: R.nib.withdrawAddressTableViewCell.name)
