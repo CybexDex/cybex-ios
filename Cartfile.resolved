@@ -1,6 +1,6 @@
 binary "https://building42.github.io/Specs/Carthage/iOS/Crashlytics.json" "3.11.1"
 binary "https://building42.github.io/Specs/Carthage/iOS/Fabric.json" "1.8.0"
-binary "https://cybexdex.github.io/cybex-ios-core-cpp/Carthage/iOS/cybex-ios-core-cpp.json" "1.0.6"
+binary "https://cybexdex.github.io/cybex-ios-core-cpp/Carthage/iOS/cybex-ios-core-cpp.json" "1.0.7"
 binary "https://cybexdex.github.io/cybex-ios-lib-spec/Carthage/iOS/UMAnalytics.json" "1.0.0"
 binary "https://cybexdex.github.io/cybex-ios-lib-spec/Carthage/iOS/UMCommon.json" "1.0.0"
 github "Alamofire/Alamofire" "4.7.3"
