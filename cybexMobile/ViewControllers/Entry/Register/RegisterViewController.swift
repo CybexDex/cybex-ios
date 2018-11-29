@@ -173,6 +173,7 @@ extension RegisterViewController {
                 if let confirm = self.confirmPasswordTextField.text, confirm.count > 0, self.passwordTextField.text != confirm {
                     self.errorStackView.isHidden = false
                     self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
+                    self.passwordTextField.tailImage = nil
                     return
                 }
 
@@ -211,6 +212,7 @@ extension RegisterViewController {
                 self.confirmPasswordTextField.tailImage = #imageLiteral(resourceName: "check_complete")
                 if !self.passwordValid || self.passwordTextField.text != self.confirmPasswordTextField.text {
                     self.errorStackView.isHidden = false
+                    self.confirmPasswordTextField.tailImage = nil
                     self.errorMessage.text = R.string.localizable.passwordValidateError2.key.localized()
                     return
                 }

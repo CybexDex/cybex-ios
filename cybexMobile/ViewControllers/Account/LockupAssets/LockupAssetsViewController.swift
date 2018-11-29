@@ -91,6 +91,17 @@ extension LockupAssetsViewController {
         guard let indexPathData = data["data"] as? LockupAssteData  else {
             return
         }
-        self.coordinator?.applyLockupAsset(indexPathData)
+        
+        self.coordinator?.applyLockupAsset(indexPathData,callback: { [weak self] success in
+            guard let `self` = self else { return }
+            if self.isVisible {
+                if success == true {
+                    self.showToastBox(true, message: R.string.localizable.lockup_asset_claim_success.key.localized())
+                }
+                else {
+                    self.showToastBox(false, message: R.string.localizable.lockup_asset_claim_fail.key.localized())
+                }
+            }
+        })
     }
 }

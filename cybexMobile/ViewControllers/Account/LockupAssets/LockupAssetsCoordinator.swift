@@ -20,7 +20,7 @@ protocol LockupAssetsStateManagerProtocol {
     // 定义拉取数据的方法
     func fetchLockupAssetsData(_ address: [String])
     
-    func applyLockupAsset(_ sender: LockupAssteData)
+    func applyLockupAsset(_ sender: LockupAssteData, callback: @escaping (Bool)->())
 }
 
 class LockupAssetsCoordinator: NavCoordinator {
@@ -39,10 +39,7 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
     var state: LockupAssetsState {
         return store.state
     }
-    // 拉取数据的方法
-    // 1 coordinator 是定义方法
-    // 2 调用store去发送一个Action(creator创建一个Action)
-    // 3
+    
     func fetchLockupAssetsData(_ address: [String]) {
         let request = GetBalanceObjectsRequest(address: address) { response in
             if let data = response as? [LockUpAssetsMData] {
@@ -52,24 +49,16 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
         CybexWebSocketService.shared.send(request: request)
     }
     
-    func applyLockupAsset(_ sender: LockupAssteData) {
-        
+    func applyLockupAsset(_ sender: LockupAssteData, callback: @escaping (Bool)->()) {
         getChainId { (id) in
-            if let fromAccount = UserManager.shared.account.value, let keys = UserManager.shared.keys{
+            if let fromAccount = UserManager.shared.account.value{
                 let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
                     if let infos = infos as? (block_id: String, block_num: String) {
-                        if let balance = sender.balance, let assetInfo = appData.assetInfo[balance.assetID], let amount = balance.amount.toDecimal() {
+                        if let balance = sender.balance, let amount = balance.amount.toDecimal() {
                             let balanceAmount = amount
                             guard let fromAccount = UserManager.shared.account.value else {
                                 return
                             }
-                            
-                            let jsonStr1 = BitShareCoordinator.getClaimedOperation(0, fee_amount: 0,
-                                                                                   deposit_to_account_id: Int32(getUserId(fromAccount.id)),
-                                                                                   claimed_id: Int32(getUserId(sender.id)),
-                                                                                   claimed_asset_id: Int32(getUserId(balance.assetID)),
-                                                                                   claimed_amount: Int32(balanceAmount.doubleValue),
-                                                                                   to_account_pub_key: fromAccount.memoKey)
                             
                             let jsonstr = BitShareCoordinator.getClaimedSign(Int32(infos.block_num)!,
                                                                              block_id: infos.block_id,
@@ -80,17 +69,25 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
                                                                              deposit_to_account_id: Int32(getUserId(fromAccount.id)),
                                                                              claimed_id: Int32(getUserId(sender.id)),
                                                                              claimed_asset_id: Int32(getUserId(balance.assetID)),
-                                                                             claimed_amount: Int32(balanceAmount.doubleValue),
-                                                                             to_account_pub_key: fromAccount.memoKey)
+                                                                             claimed_amount: Int64(balanceAmount.doubleValue),
+                                                                             claimed_own: sender.owner)
                             
                             let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
                                 print("BroadcastTransactionRequest 转账请求 \(data)")
+                                if String(describing: data) == "<null>"{
+                                    callback(true)
+                                } else {
+                                    callback(false)
+                                }
                             }, jsonstr: jsonstr!)
                             CybexWebSocketService.shared.send(request: withdrawRequest)
                         }
                     }
                 }
                 CybexWebSocketService.shared.send(request: requeset)
+            }
+            else {
+                callback(false)
             }
         }
         
