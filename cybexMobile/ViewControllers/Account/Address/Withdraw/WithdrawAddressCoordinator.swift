@@ -145,13 +145,14 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
 
     func copy() {
         if let addressData = self.state.selectedAddress.value {
-            if addressData.currency == AssetConfiguration.EOS {
+            if addressData.currency == AssetConfiguration.EOS || addressData.currency == AssetConfiguration.XRP{
                 if let memo = addressData.memo {
                     UIPasteboard.general.string = addressData.address + "(\(memo))"
                 } else {
                      UIPasteboard.general.string = addressData.address
                 }
-            } else {
+            }
+            else {
                 UIPasteboard.general.string = addressData.address
             }
 
