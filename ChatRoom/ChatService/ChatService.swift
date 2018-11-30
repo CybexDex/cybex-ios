@@ -17,11 +17,6 @@ public class ChatService: NSObject {
     static let host = "wss://chat.cybex.io/ws"
     lazy var socket = SRWebSocket(url: URL(string: ChatService.host)!)
 
-    static var _shared: ChatService?
-    public static var shared: ChatService {
-        return guardSharedProperty(_shared)
-    }
-
     let lock = NSLock()
 
     public var provider: ChatServiceProvider!
@@ -38,7 +33,6 @@ public class ChatService: NSObject {
         self.init()
 
         self.provider = ChatServiceProvider(uuid, channel: "")
-        ChatService._shared = self
     }
 
     private override init() {
@@ -100,7 +94,6 @@ public class ChatService: NSObject {
             }
         })
     }
-
 }
 
 extension ChatService: SRWebSocketDelegate {

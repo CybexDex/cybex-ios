@@ -109,7 +109,9 @@ extension ChatCoordinator: ChatCoordinatorProtocol {
 
             switch reachability.connection {
             case .wifi, .cellular:
-                self.service.reconnect()
+                if self.rootVC.topViewController is ChatViewController {
+                    self.service.reconnect()
+                }
             case .none:
                 self.service.disconnect()
                 break
@@ -118,7 +120,9 @@ extension ChatCoordinator: ChatCoordinatorProtocol {
         }
 
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
-            self.service.reconnect()
+            if self.rootVC.topViewController is ChatViewController {
+                self.service.reconnect()
+            }
         }
 
         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
