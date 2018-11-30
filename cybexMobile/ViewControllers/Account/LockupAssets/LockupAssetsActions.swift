@@ -16,23 +16,38 @@ import RxSwift
 struct LockupAssetsState: BaseState {
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
-
+    
     var data: BehaviorRelay<LockUpAssetsVMData> = BehaviorRelay(value: LockUpAssetsVMData(datas: []))
     var ethPrice: Double = 0
 }
 
 struct FetchedLockupAssetsData: Action {
-  let data: [LockUpAssetsMData]
+    let data: [LockUpAssetsMData]
 }
 
 struct LockUpAssetsVMData: Equatable {
-  var datas: [LockupAssteData]
+    var datas: [LockupAssteData]
 }
 struct LockupAssteData: Equatable {
-  var icon: String = ""
-  var name: String = ""
-  var amount: String = ""
-  var RMBCount: String = ""
-  var progress: String = ""
-  var endTime: String = ""
+    static func == (lhs: LockupAssteData, rhs: LockupAssteData) -> Bool {
+        return lhs.amount == rhs.amount &&
+            lhs.name == rhs.name &&
+            lhs.amount == rhs.amount &&
+            lhs.RMBCount == rhs.RMBCount &&
+            lhs.progress == rhs.progress &&
+            lhs.endTime == rhs.endTime &&
+            lhs.id == rhs.id &&
+            lhs.balance == rhs.balance &&
+            lhs.owner == rhs.owner
+    }
+    
+    var icon: String = ""
+    var name: String = ""
+    var amount: String = ""
+    var RMBCount: String = ""
+    var progress: String = ""
+    var endTime: String = ""
+    var id: String = ""
+    var balance: Asset?
+    var owner: String = ""
 }

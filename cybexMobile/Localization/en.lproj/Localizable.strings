@@ -536,3 +536,8 @@
 
 "chat_message_guest" = "Guest";
 "chat_space_message" = "Unable to send blank message";
+
+
+"lockup_asset_claim_success" = "Claim success";
+"lockup_asset_claim_fail" = "Claim fail";
+"lockup_asset_claim_ensure" = "CONFIRMATION";

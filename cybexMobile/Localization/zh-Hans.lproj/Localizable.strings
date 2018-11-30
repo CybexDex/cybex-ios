@@ -512,5 +512,11 @@
 
 "chat_new_message" = "有%d条新消息";
 "chat_message_guest" = "游客";
-
 "chat_space_message" = "不能发空白消息";
+
+"lockup_asset_claim_success" = "申领成功";
+"lockup_asset_claim_fail" = "申领失败";
+"lockup_asset_claim_ensure" = "申领确认";
+
+
+

@@ -15,14 +15,14 @@ import TinyConstraints
 import SwiftyJSON
 
 class LockupAssetsViewController: BaseViewController {
-
+    
     struct Define {
         static let sectionHeaderHeight: CGFloat = 44.0
     }
-
+    
     @IBOutlet weak var tableView: UITableView!
     var coordinator: (LockupAssetsCoordinatorProtocol & LockupAssetsStateManagerProtocol)?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -38,14 +38,14 @@ class LockupAssetsViewController: BaseViewController {
              UserManager.shared.keys!.memoKey!.compressed,
              UserManager.shared.keys!.memoKey!.uncompressed])
     }
-
+    
     func setupUI() {
         self.edgesForExtendedLayout = UIRectEdge.init(rawValue: 0)
         self.localizedText = R.string.localizable.lockupAssetsTitle.key.localizedContainer()
         let cell = String.init(describing: LockupAssetsCell.self)
         tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
     }
-
+    
     override func configureObserveState() {
         self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: {[weak self] (_) in
             guard let `self` = self else {return}
@@ -63,25 +63,45 @@ extension LockupAssetsViewController: UITableViewDataSource, UITableViewDelegate
         let data = coordinator!.state.data.value
         return data.datas.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: LockupAssetsCell.self), for: indexPath) as? LockupAssetsCell else {
             return LockupAssetsCell()
         }
         let data = coordinator!.state.data.value
-
+        
         cell.setup(data.datas[indexPath.row], indexPath: indexPath)
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let lockupAssetsSectionView = LockupAssetsSectionView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: Define.sectionHeaderHeight))
-
+        
         return lockupAssetsSectionView
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Define.sectionHeaderHeight
     }
+    
+}
 
+extension LockupAssetsViewController {
+//    @objc func clickLockupAssetsViewEvent(_ data: [String: Any]) {
+//        guard let indexPathData = data["data"] as? LockupAssteData  else {
+//            return
+//        }
+//
+//        self.coordinator?.applyLockupAsset(indexPathData,callback: { [weak self] success in
+//            guard let `self` = self else { return }
+//            if self.isVisible {
+//                if success == true {
+//                    self.showToastBox(true, message: R.string.localizable.lockup_asset_claim_success.key.localized())
+//                }
+//                else {
+//                    self.showToastBox(false, message: R.string.localizable.lockup_asset_claim_fail.key.localized())
+//                }
+//            }
+//        })
+//    }
 }
