@@ -344,12 +344,12 @@ class ChatViewController: MessagesViewController {
             default:
                 break
             }
-            if message != "已链接" {
-                BeareadToast.showError(text: message, inView: self.view, hide: 1)
-            }
-            else {
-                BeareadToast.showSucceed(text: message, inView: self.view, hide: 1)
-            }
+//            if message != "已链接" {
+//                BeareadToast.showError(text: message, inView: self.view, hide: 1)
+//            }
+//            else {
+//                BeareadToast.showSucceed(text: message, inView: self.view, hide: 1)
+//            }
             
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
