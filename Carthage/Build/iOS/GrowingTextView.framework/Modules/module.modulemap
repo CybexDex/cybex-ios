@@ -1,0 +1,11 @@
+framework module GrowingTextView {
+  umbrella header "GrowingTextView-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module GrowingTextView.Swift {
+    header "GrowingTextView-Swift.h"
+    requires objc
+}

@@ -8,10 +8,10 @@
 
 import Foundation
 
-class OrderBookCell:BaseTableViewCell {
-  
+class OrderBookCell: BaseTableViewCell {
+
     @IBOutlet weak var ownView: OrderBookCellView!
-    
+
     override func setup(_ data: Any?) {
         self.ownView.data = data
     }

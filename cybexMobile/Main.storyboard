@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BnL-rZ-2Qv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BnL-rZ-2Qv">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,21 +24,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JX1-NA-R1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="108" y="-207"/>
-        </scene>
-        <!--faq-->
-        <scene sceneID="Ruo-wW-7L0">
-            <objects>
-                <viewController storyboardIdentifier="FAQViewController" id="OVH-NV-nYE" userLabel="faq" customClass="FAQViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5Fk-ga-4gf">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="CvL-MU-7Kd"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qd0-zi-nRM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="75" y="1353"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="h4u-Pj-qgP">
@@ -69,7 +54,7 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="language"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="nameLocali" value="language"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCO-l7-dlp" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
@@ -84,7 +69,7 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="frequency"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="nameLocali" value="frequency"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qJ6-Af-LNN" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
@@ -100,7 +85,7 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="version"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="nameLocali" value="version"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4b-wr-Ums" customClass="NormalCellView" customModule="cybexMobile" customModuleProvider="target">
@@ -116,7 +101,7 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="setting_help"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="nameLocali" value="setting_help"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                 </subviews>
@@ -175,7 +160,7 @@
                                                             <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="theme"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="nameLocali" value="theme"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                 </subviews>
@@ -247,7 +232,7 @@
                                                     <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
                                                         <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="environment"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="nameLocali" value="environment"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
@@ -1328,34 +1313,6 @@ Cg
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0N-o0-wYd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="851" y="-207"/>
-        </scene>
-        <!--Table View Controller-->
-        <scene sceneID="DKT-FW-czZ">
-            <objects>
-                <tableViewController id="WL5-51-CzU" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7SB-hu-nlZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="cqU-yW-Oa6">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cqU-yW-Oa6" id="6K3-n3-cT9">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="WL5-51-CzU" id="7XY-Zx-AYj"/>
-                            <outlet property="delegate" destination="WL5-51-CzU" id="5B0-Xq-afD"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gme-5j-eUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="39" y="644"/>
         </scene>
         <!--Image Share View Controller-->
         <scene sceneID="Bqp-tx-VEK">

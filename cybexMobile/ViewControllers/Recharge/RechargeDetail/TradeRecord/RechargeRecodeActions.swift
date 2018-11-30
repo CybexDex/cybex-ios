@@ -10,40 +10,23 @@ import Foundation
 import ReSwift
 import RxCocoa
 
-//MARK: - State
-struct RechargeRecodeState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage:String?
-    var property: RechargeRecodePropertyState
-}
-
-struct RechargeRecodePropertyState {
-    var data : BehaviorRelay<TradeRecord?> = BehaviorRelay(value: nil)
-    var asset : String = ""
+// MARK: - State
+struct RechargeRecodeState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+    var data: BehaviorRelay<TradeRecord?> = BehaviorRelay(value: nil)
+    var asset: String = ""
     var explorers: BehaviorRelay<[BlockExplorer]?> = BehaviorRelay(value: nil)
 }
 
-struct FetchDepositRecordsAction : Action {
-    var data : TradeRecord?
+struct FetchDepositRecordsAction: Action {
+    var data: TradeRecord?
 }
 
-struct SetWithdrawListAssetAction : Action {
-    var asset : String
+struct SetWithdrawListAssetAction: Action {
+    var asset: String
 }
 
 struct FetchAssetUrlAction: Action {
     var data: [BlockExplorer]
-}
-
-
-//MARK: - Action Creator
-class RechargeRecodePropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: RechargeRecodeState, _ store: Store<RechargeRecodeState>) -> Action?
-    
-    public typealias AsyncActionCreator = (
-        _ state: RechargeRecodeState,
-        _ store: Store <RechargeRecodeState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
 }

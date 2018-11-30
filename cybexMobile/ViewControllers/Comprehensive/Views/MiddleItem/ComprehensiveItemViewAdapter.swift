@@ -9,7 +9,7 @@
 import Foundation
 
 extension ComprehensiveItemView {
-    func adapterModelToComprehensiveItemView(_ model:ComprehensiveItem) {
+    func adapterModelToComprehensiveItemView(_ model: ComprehensiveItem) {
         icon.kf.setImage(with: URL(string: model.icon))
         titleLabel.text = model.title
         subTitleLabel.text = model.desc

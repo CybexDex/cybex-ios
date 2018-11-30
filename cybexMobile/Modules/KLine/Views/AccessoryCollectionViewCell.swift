@@ -10,17 +10,17 @@ import Foundation
 
 class AccessoryCollectionViewCell: BaseCollectionViewCell {
   @IBOutlet weak var accessoryView: AccessoryCollectionView!
-  
+
   override func setup(_ data: Any?) {
     self.accessoryView.data = data
   }
-  
+
   override var isSelected: Bool {
     didSet {
       self.accessoryView.isSelected = isSelected
     }
   }
-  
+
   override func prepareForReuse() {
     self.accessoryView.isSelected = false
   }

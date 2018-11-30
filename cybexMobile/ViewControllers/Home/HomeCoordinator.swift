@@ -11,44 +11,50 @@ import ReSwift
 import NBLCommonModule
 
 protocol HomeCoordinatorProtocol {
-  func openMarket(index:Int, currentBaseIndex: Int)
+    func openMarket(index: Int, currentBaseIndex: Int)
 }
 
 protocol HomeStateManagerProtocol {
     var state: HomeState { get }
-    
-    func switchPageState(_ state:PageState)
+    func switchPageState(_ state: PageState)
 }
 
-class HomeCoordinator: HomeRootCoordinator {
+class HomeCoordinator: NavCoordinator {
     var store = Store(
-        reducer: HomeReducer,
+        reducer: homeReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
-    
+
     var state: HomeState {
         return store.state
+    }
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.main.homeViewController()!
+        let coordinator = HomeCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+        return vc
     }
 }
 
 extension HomeCoordinator: HomeCoordinatorProtocol {
-  func openMarket(index:Int, currentBaseIndex:Int) {
-    let vc = R.storyboard.main.marketViewController()!
-    vc.curIndex = index
-    vc.currentBaseIndex = currentBaseIndex
-    vc.rechargeShowType = PairRechargeView.show_type.show.rawValue
+    func openMarket(index: Int, currentBaseIndex: Int) {
+        let vc = R.storyboard.main.marketViewController()!
+        vc.curIndex = index
+        vc.currentBaseIndex = currentBaseIndex
+        vc.rechargeShowType = PairRechargeView.ShowType.show.rawValue
 
-    let coordinator = MarketCoordinator(rootVC: self.rootVC)
-    vc.coordinator = coordinator
-    self.rootVC.pushViewController(vc, animated: true)
-  }
-    
- 
+        let coordinator = MarketCoordinator(rootVC: self.rootVC)
+        vc.coordinator = coordinator
+        self.rootVC.pushViewController(vc, animated: true)
+    }
 }
 
 extension HomeCoordinator: HomeStateManagerProtocol {
-    func switchPageState(_ state:PageState) {
+    func switchPageState(_ state: PageState) {
         self.store.dispatch(PageStateAction(state: state))
     }
+
 }

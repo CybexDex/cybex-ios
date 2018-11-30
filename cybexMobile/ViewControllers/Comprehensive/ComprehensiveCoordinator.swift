@@ -12,41 +12,49 @@ import NBLCommonModule
 import Localize_Swift
 
 protocol ComprehensiveCoordinatorProtocol {
-    
+
     func openWebVCUrl(_ url: String)
-    
+
     func openMarketList(_ pair: Pair)
 }
 
 protocol ComprehensiveStateManagerProtocol {
     var state: ComprehensiveState { get }
-    
-    func switchPageState(_ state:PageState)
-    
+
+    func switchPageState(_ state: PageState)
+
     func fetchData()
-    
+
     func fetchAnnounceInfos()
-    
+
     func fetchHomeBannerInfos()
-    
+
     func fetchHotAssetsInfos()
-    
+
     func fetchMiddleItemInfos()
-    
+
     func setupChildrenVC(_ sender: ComprehensiveViewController)
 }
 
-class ComprehensiveCoordinator: ComprehensiveRootCoordinator {
+class ComprehensiveCoordinator: NavCoordinator {
     var store = Store(
-        reducer: ComprehensiveReducer,
+        reducer: comprehensiveReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
-    
+
     var state: ComprehensiveState {
         return store.state
     }
-    
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.comprehensive.comprehensiveViewController()!
+        let coordinator = ComprehensiveCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+        return vc
+    }
+
     override func register() {
         Broadcaster.register(ComprehensiveCoordinatorProtocol.self, observer: self)
         Broadcaster.register(ComprehensiveStateManagerProtocol.self, observer: self)
@@ -55,96 +63,97 @@ class ComprehensiveCoordinator: ComprehensiveRootCoordinator {
 
 extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
     func openWebVCUrl(_ url: String) {
-        if let vc = R.storyboard.main.cybexWebViewController() {
-            vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
-            vc.vc_type = .homeBanner
-            vc.url = URL(string: url)
-            self.rootVC.pushViewController(vc ,animated: true)
+        if let webVC = R.storyboard.main.cybexWebViewController() {
+            webVC.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
+            webVC.vcType = .homeBanner
+            webVC.url = URL(string: url)
+            self.rootVC.pushViewController(webVC, animated: true)
         }
     }
-    
+
     func openMarketList(_ pair: Pair) {
-        let vc = R.storyboard.main.marketViewController()!
-        var currentBaseIndex = 0
-        for index in 0..<AssetConfiguration.market_base_assets.count {
-            if pair.base == AssetConfiguration.market_base_assets[index] {
-                currentBaseIndex = index
+        if let marketVC = R.storyboard.main.marketViewController() {
+            var currentBaseIndex = 0
+            for index in 0..<AssetConfiguration.marketBaseAssets.count {
+                if pair.base == AssetConfiguration.marketBaseAssets[index] {
+                    currentBaseIndex = index
+                }
             }
-        }
-        let tickers = app_data.filterQuoteAssetTicker(pair.base)
-        var curIndex = 0
-        for index in 0..<tickers.count {
-            let ticker = tickers[index]
-            if ticker.base == pair.base && ticker.quote == pair.quote {
-                curIndex = index
+            let tickers = appData.filterQuoteAssetTicker(pair.base)
+            var curIndex = 0
+            for index in 0..<tickers.count {
+                let ticker = tickers[index]
+                if ticker.base == pair.base && ticker.quote == pair.quote {
+                    curIndex = index
+                }
             }
+            marketVC.curIndex = curIndex
+            marketVC.currentBaseIndex = currentBaseIndex
+            marketVC.rechargeShowType = PairRechargeView.ShowType.show.rawValue
+            let coordinator = MarketCoordinator(rootVC: self.rootVC)
+            marketVC.coordinator = coordinator
+            self.rootVC.pushViewController(marketVC, animated: true)
         }
-        vc.curIndex = curIndex
-        vc.currentBaseIndex = currentBaseIndex
-        vc.rechargeShowType = PairRechargeView.show_type.show.rawValue
-        let coordinator = MarketCoordinator(rootVC: self.rootVC)
-        vc.coordinator = coordinator
-        self.rootVC.pushViewController(vc, animated: true)
     }
 }
 
 extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
-    func switchPageState(_ state:PageState) {
+    func switchPageState(_ state: PageState) {
         DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }
     }
-    
+
     func fetchData() {
         fetchAnnounceInfos()
         fetchHomeBannerInfos()
         fetchHotAssetsInfos()
         fetchMiddleItemInfos()
     }
-    
+
     func fetchAnnounceInfos() {
-        let url = AppConfiguration.ANNOUNCE_JSON + (Localize.currentLanguage() == "en" ? "en" : "zh")
+        let url = AppConfiguration.AnnounceJson + (Localize.currentLanguage() == "en" ? "en" : "zh")
         SimpleHTTPService.fetchAnnounceJson(url).done { (data) in
             if let data = data {
                 self.store.dispatch(FetchAnnouncesAction(data: data))
             }
-            }.catch { (error) in
+            }.catch { (_) in
         }
     }
-    
+
     func fetchHomeBannerInfos() {
-        let url = AppConfiguration.HOME_BANNER_JSON + (Localize.currentLanguage() == "en" ? "en" : "zh")
+        let url = AppConfiguration.HomeBannerJson + (Localize.currentLanguage() == "en" ? "en" : "zh")
         SimpleHTTPService.fetchHomeBannerInfos(url).done { (data) in
             if let data = data, data.count > 0 {
                 self.store.dispatch(FetchHomeBannerAction(data: data))
             }
-            }.catch { (error) in
+            }.catch { (_) in
         }
     }
-    
+
     func fetchHotAssetsInfos() {
         SimpleHTTPService.fetchHomeHotAssetJson().done { (data) in
             if let data = data {
                 self.store.dispatch(FetchHotAssetsAction(data: data))
             }
-            }.catch { (error) in
+            }.catch { (_) in
         }
     }
-    
+
     func fetchMiddleItemInfos() {
-        let url = AppConfiguration.HOME_ITEMS_JSON + (Localize.currentLanguage() == "en" ? "en" : "zh")
+        let url = AppConfiguration.HomeItemsJson + (Localize.currentLanguage() == "en" ? "en" : "zh")
         SimpleHTTPService.fetchHomeItemInfo(url).done { (data) in
             if let data = data, data.count != 0 {
                 self.store.dispatch(FetchMiddleItemAction(data: data))
             }
-            }.catch { (error) in
+            }.catch { (_) in
         }
     }
-    
+
     func setupChildrenVC(_ sender: ComprehensiveViewController) {
-        if let homeVC = R.storyboard.main.homeViewController(){
+        if let homeVC = R.storyboard.main.homeViewController() {
             homeVC.coordinator = HomeCoordinator(rootVC: self.rootVC)
-            homeVC.VC_TYPE = view_type.Comprehensive.rawValue
+            homeVC.vcType = ViewType.comprehensive.rawValue
             sender.addChild(homeVC)
             sender.contentView.topGainersView.addSubview(homeVC.view)
             homeVC.contentView?.edges(to: sender.contentView.topGainersView)

@@ -10,32 +10,30 @@ import UIKit
 
 @IBDesignable
 class NormalCellView: UIView {
-    enum event_name : String {
+    enum EventName: String {
         case clickCellView
     }
-    
-    enum NormalCellViewState : Int {
+
+    enum NormalCellViewState: Int {
         case normal = 0
         case choose
         case transform
     }
-    
-    
+
     @IBOutlet weak var lineView: UIView!
     @IBOutlet weak var leftIcon: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var content: UILabel!
     @IBOutlet weak var rightIcon: UIImageView!
-    
+
     @IBOutlet weak var nameLeftConstraint: NSLayoutConstraint!
-    
+
     @IBOutlet weak var rightIconHeightConstraint: NSLayoutConstraint!
-    
+
     @IBOutlet weak var rightIconWidthConstraint: NSLayoutConstraint!
-    
-    
+
     @IBInspectable
-    var state : Int = NormalCellViewState.normal.rawValue {
+    var state: Int = NormalCellViewState.normal.rawValue {
         didSet {
             switch state {
             case NormalCellViewState.normal.rawValue:
@@ -49,20 +47,20 @@ class NormalCellView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
-    var name_locali : String? {
+    var nameLocali: String? {
         didSet {
-            if let nameLocali = name_locali {
+            if let nameLocali = nameLocali {
                 self.name.locali = nameLocali
             }
         }
     }
-    
+
     @IBInspectable
-    var content_locali : String? {
+    var contentLocali: String? {
         didSet {
-            if let contentLocali = content_locali {
+            if let contentLocali = contentLocali {
                 self.content.locali = contentLocali
                 if UIScreen.main.bounds.width == 320 {
                     content.font = UIFont.systemFont(ofSize: 13)
@@ -70,58 +68,58 @@ class NormalCellView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
-    var index : Int = 0
-    
+    var index: Int = 0
+
     @IBInspectable
-    var name_text : String? {
+    var nameText: String? {
         didSet {
-            if let text = name_text {
-                name.attributedText = text.localized().set(style: name_style ?? "")
+            if let text = nameText {
+                name.attributedText = text.localized().set(style: nameStyle ?? "")
             }
         }
     }
-    
+
     @IBInspectable
-    var name_text_origin : String? {
+    var nameTextOrigin: String? {
         didSet {
-            if let text = name_text_origin {
-                name.attributedText = text.set(style: name_style ?? "")
+            if let text = nameTextOrigin {
+                name.attributedText = text.set(style: nameStyle ?? "")
             }
         }
     }
-    
+
     @IBInspectable
-    var content_text : String? {
-        didSet{
-            if let text = content_text {
-                content.attributedText = text.localized().set(style: content_style ?? "")
+    var contentText: String? {
+        didSet {
+            if let text = contentText {
+                content.attributedText = text.localized().set(style: contentStyle ?? "")
                 if UIScreen.main.bounds.width == 320 {
                     content.font = UIFont.systemFont(ofSize: 13)
                 }
             }
         }
     }
-    
+
     @IBInspectable
-    var name_style : String? {
+    var nameStyle: String? {
         didSet {
-            let text = name_text ?? ""
-            name.attributedText = text.localized().set(style: name_style ?? "")
+            let text = nameText ?? ""
+            name.attributedText = text.localized().set(style: nameStyle ?? "")
         }
     }
-    
+
     @IBInspectable
-    var content_style : String? {
+    var contentStyle: String? {
         didSet {
-            let text = content_text ?? ""
-            content.attributedText = text.localized().set(style: content_style ?? "")
+            let text = contentText ?? ""
+            content.attributedText = text.localized().set(style: contentStyle ?? "")
         }
     }
-    
+
     @IBInspectable
-    var leftIconImg : UIImage? {
+    var leftIconImg: UIImage? {
         didSet {
             //            if let img = leftIconImg {
             //                if self.state != NormalCellViewState.normal.rawValue {
@@ -133,10 +131,10 @@ class NormalCellView: UIView {
             //            }
         }
     }
-    
+
     @IBInspectable
-    var rightIconName : String? {
-        didSet{
+    var rightIconName: String? {
+        didSet {
             if let name = rightIconName {
                 if self.state == NormalCellViewState.normal.rawValue {
                     return
@@ -147,95 +145,92 @@ class NormalCellView: UIView {
             }
         }
     }
-    
+
     @IBInspectable
-    var isShowLineView : Bool = true {
-        didSet{
+    var isShowLineView: Bool = true {
+        didSet {
             self.lineView.isHidden = !isShowLineView
         }
     }
-    
+
     @IBInspectable
-    var isEnable : Bool = true {
+    var isEnable: Bool = true {
         didSet {
             self.isUserInteractionEnabled = isEnable
         }
     }
-    
-    
-    var data : Any? {
+
+    var data: Any? {
         didSet {
-            
+
         }
     }
-    
+
     func setup() {
         self.state = NormalCellViewState.normal.rawValue
         let tap = UITapGestureRecognizer(target: self, action: #selector(clickCellView))
         self.addGestureRecognizer(tap)
-        
-        
+
     }
-    
+
     override var intrinsicContentSize: CGSize {
-        return CGSize.init(width: UIView.noIntrinsicMetric,height: dynamicHeight())
+        return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView!.bottom
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
-        
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
+
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-    
-    
+
 }
 
 extension NormalCellView {
-    @objc func clickCellView(){
-        
+    @objc func clickCellView() {
+
         switch self.state {
         case NormalCellViewState.normal.rawValue:
-            self.sendEventWith(event_name.clickCellView.rawValue, userinfo: ["index":index])
+            self.sendEventWith(EventName.clickCellView.rawValue, userinfo: ["index": index])
         case NormalCellViewState.choose.rawValue :
-            self.sendEventWith(event_name.clickCellView.rawValue, userinfo: ["index":index])
+            self.sendEventWith(EventName.clickCellView.rawValue, userinfo: ["index": index])
         case NormalCellViewState.transform.rawValue:
             print("")
         default:break
         }
     }
 }
-
-

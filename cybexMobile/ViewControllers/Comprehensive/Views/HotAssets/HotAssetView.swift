@@ -10,35 +10,35 @@ import Foundation
 
 @IBDesignable
 class HotAssetView: CybexBaseView {
-    
+
     @IBOutlet weak var assetName: BaseLabel!
     @IBOutlet weak var amountLabel: BaseLabel!
     @IBOutlet weak var rmbLabel: BaseLabel!
     @IBOutlet weak var trendLabel: BaseLabel!
-    
-    enum Event:String {
-        case HotAssetViewDidClicked
+
+    enum Event: String {
+        case hotAssetViewDidClicked
     }
-        
+
     override func setup() {
         super.setup()
-        
+
         setupUI()
         setupSubViewEvent()
     }
-    
+
     func setupUI() {
-//        clearBgColor()
-        
+        //        clearBgColor()
+
     }
-    
+
     func setupSubViewEvent() {
-        self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] (tap) in
+        self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] (_) in
             guard let `self` = self else { return }
-            self.next?.sendEventWith(Event.HotAssetViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+            self.next?.sendEventWith(Event.hotAssetViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
         }).disposed(by: disposeBag)
     }
-    
+
     @objc override func didClicked() {
     }
 }

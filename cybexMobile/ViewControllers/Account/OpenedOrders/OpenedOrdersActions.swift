@@ -8,26 +8,12 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
 
-//MARK: - State
-struct OpenedOrdersState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage:String?
-    var property: OpenedOrdersPropertyState
-}
+// MARK: - State
+struct OpenedOrdersState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 
-struct OpenedOrdersPropertyState {
-  var data : [Any] = []
-}
-
-//MARK: - Action Creator
-class OpenedOrdersPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: OpenedOrdersState, _ store: Store<OpenedOrdersState>) -> Action?
-    
-    public typealias AsyncActionCreator = (
-        _ state: OpenedOrdersState,
-        _ store: Store <OpenedOrdersState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+    var data: [Any] = []
 }

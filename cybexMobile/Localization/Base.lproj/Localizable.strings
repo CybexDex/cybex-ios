@@ -100,24 +100,25 @@
 "register.confirm" = "CURRENT PASSWORD:\n<password></password>\n· I UNDERSTAND THAT I WILL LOSE ACCESS TO MY FUNDS IF I LOSE MY PASSWORD\n· I UNDERSTAND THAT NO ONE CAN RECOVER MY PASSWORD IF I LOSE OR FORGET IT\n· I HAVE WRITTEN DOWN OR OTHERWISE STORED MY PASSWORD\n";
 
 
-"home_name_vol"                 = "Name/Vol";
-"home_last_price"               = "Last Price";
-"home_change"                   = "24h Chg%";
+"home_name_vol" = "Name";
+"home_vol_name" = "Vol";
+"home_last_price" = "Last Price";
+"home_change" = "24h Chg%";
 
-"asset_mount"                   = "Asset/Amount";
-"progress_expiration"           = "Progress/Expiration Time";
-"cyb_value"                     = "Value(CYB)";
+"asset_mount" = "Asset/Amount";
+"progress_expiration" = "Progress/Expiration Time";
+"cyb_value" = "Value(CYB)";
 
-"balance_introduce"             = "This is the estimated value of all your assets,including any hidden assets,open orders,debt and collateral.The estimate is done using only live blockchain data and may not be perfectly accurate.";
-"balance_introduce_title"       = "BALANCE";
-"balance_ensuer"                = "OK";
+"balance_introduce" = "This is the estimated value of all your assets,including any hidden assets,open orders,debt and collateral.The estimate is done using only live blockchain data and may not be perfectly accurate.";
+"balance_introduce_title" = "BALANCE";
+"balance_ensuer" = "OK";
 
-"home_vol"                      = "Vol";
+"home_vol" = "Vol ";
 
-"opened_amount"                 = "Amount:";
+"opened_amount" = "Amount:";
 
-"opened_asset_amount"                 = "Asset/Amount";
-"opened_order_value"                  = "Price";
+"opened_asset_amount" = "Asset/Amount";
+"opened_order_value" = "Price";
 
 
 "updata_available_title"              = "Update Available";
@@ -165,6 +166,7 @@
 "withdraw_available" = "Available";
 "withdraw_address"   = "Withdraw Address";
 "withdraw_address_placehold"   = "Enter or paste address";
+"withdraw_tag_placehold" = "Enter or paste";
 
 "eos_withdraw_account" = "Withdraw Account";
 "eos_withdraw_account_placehold" = "Enter or paste address address";
@@ -186,6 +188,9 @@
 
 "deposit_save"     = "Save QR Code";
 "deposit_copy"     = "Copy Address";
+"deposit_tag_copy" = "Copy Tag";
+"deposit_tag_copy_success" = "Copied";
+
 "deposti_get"      = "Get New Address";
 
 "alert_cancle"     = "CANCEL";
@@ -262,10 +267,15 @@
 
 "eos_account_title" = "EOS Deposit Account";
 "eos_copy_account" = "Copy Account Name";
+"tag_copy_account" = "Copy Tag";
+
 "eos_code"  = "Verification code";
 "eos_code_tip" = "(Must transfer your EOS to deposit account with this verification code in memo)";
 "eos_copy_code" = "Copy Code";
 "eos_reset_code" = "Get New Code";
+
+"xrp_code" = "XRP Deposit Tag";
+"xrp_code_tip" = "(Please send your XRP with the tag displayed below. please do not put any other information on Tag)";
 
 "business_login_title" = "Log in to exchange";
 
@@ -510,5 +520,24 @@
 "pair_vol" = "Vol:%@";
 "pair_change_amount" = "Chg:%@";
 "pair_change_persent" = "Chg%%:%@";
+
+"recharge_hidden_asset" = "Hide 0 balance";
+"recharge_search_asset" = "Search";
+
+"market_comment_now" = "Comment now";
+
+"chat_input_realname" = "Real Name";
+"chat_input_send" = "Send";
+"chat_input_placeholder" = "My comment";
+
+"chat_new_message" = "%d new message";
+"chat_message_guest" = "Guest";
+
+"chat_space_message" = "Unable to send blank message";
+
+
+"lockup_asset_claim_success" = "Claim success";
+"lockup_asset_claim_fail" = "Claim fail";
+"lockup_asset_claim_ensure" = "CONFIRMATION";
 
 

@@ -18,19 +18,14 @@ protocol YourPortfolioCoordinatorProtocol {
 
 protocol YourPortfolioStateManagerProtocol {
     var state: YourPortfolioState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<YourPortfolioState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
+
 }
 
-class YourPortfolioCoordinator: AccountRootCoordinator {
-    
-    lazy var creator = YourPortfolioPropertyActionCreate()
-    
+class YourPortfolioCoordinator: NavCoordinator {
     var store = Store<YourPortfolioState>(
-        reducer: YourPortfolioReducer,
+        reducer: gYourPortfolioReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
     override func register() {
         Broadcaster.register(YourPortfolioCoordinatorProtocol.self, observer: self)
@@ -46,7 +41,7 @@ extension YourPortfolioCoordinator: YourPortfolioCoordinatorProtocol {
     vc.selectedIndex = .RECHARGE
     self.rootVC.pushViewController(vc, animated: true)
   }
-  
+
   func pushToWithdrawDepositVC() {
     let vc = R.storyboard.account.rechargeViewController()!
     let coordinator = RechargeCoordinator(rootVC: self.rootVC)
@@ -54,7 +49,7 @@ extension YourPortfolioCoordinator: YourPortfolioCoordinatorProtocol {
     vc.selectedIndex = .WITHDRAW
     self.rootVC.pushViewController(vc, animated: true)
   }
-  
+
   func pushToTransferVC(_ animate: Bool) {
     let transferVC = R.storyboard.recode.transferViewController()!
     let coordinator = TransferCoordinator(rootVC: self.rootVC)
@@ -67,11 +62,4 @@ extension YourPortfolioCoordinator: YourPortfolioStateManagerProtocol {
     var state: YourPortfolioState {
         return store.state
     }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<YourPortfolioState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-    
 }

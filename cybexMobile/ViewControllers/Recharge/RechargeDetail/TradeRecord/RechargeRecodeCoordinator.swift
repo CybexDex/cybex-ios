@@ -10,36 +10,30 @@ import UIKit
 import ReSwift
 
 protocol RechargeRecodeCoordinatorProtocol {
-    func openRecordDetailUrl(_ hash:String, asset: String)
+    func openRecordDetailUrl(_ hash: String, asset: String)
 }
 
 protocol RechargeRecodeStateManagerProtocol {
     var state: RechargeRecodeState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<RechargeRecodeState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
-    
-    func fetchRechargeRecodeList(_ accountName : String ,asset : String ,fundType : fundType ,size : Int , offset : Int ,expiration : Int ,asset_id : String ,callback:@escaping (Bool)->())
-    
-    func setAssetAction(_ asset : String)
-    
+
+    func fetchRechargeRecodeList(_ accountName: String, asset: String, fundType: FundType, size: Int, offset: Int, expiration: Int, assetId: String, callback:@escaping (Bool) -> Void)
+
+    func setAssetAction(_ asset: String)
+
     func fetchAssetUrl()
 }
 
-class RechargeRecodeCoordinator: AccountRootCoordinator {
-    
-    lazy var creator = RechargeRecodePropertyActionCreate()
-    
+class RechargeRecodeCoordinator: NavCoordinator {
     var store = Store<RechargeRecodeState>(
-        reducer: RechargeRecodeReducer,
+        reducer: rechargeRecodeReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 
 extension RechargeRecodeCoordinator: RechargeRecodeCoordinatorProtocol {
-    func openRecordDetailUrl(_ hash:String, asset: String) {
-        guard let explorers = self.state.property.explorers.value else { return }
+    func openRecordDetailUrl(_ hash: String, asset: String) {
+        guard let explorers = self.state.explorers.value else { return }
         var url = ""
         for explorer in explorers {
             if explorer.asset.filterJade == asset {
@@ -53,15 +47,14 @@ extension RechargeRecodeCoordinator: RechargeRecodeCoordinatorProtocol {
                 }
             }
         }
-        if let vc = self.rootVC.topViewController as? WithdrawAndDespoitRecordViewController{
-            vc.coordinator?.openRecordDetailUrl(url)
-        }
-        else {
-            if let vc = R.storyboard.main.cybexWebViewController() {
-                vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
-                vc.vc_type = .recordDetail
-                vc.url = URL(string: url)
-                self.rootVC.pushViewController(vc ,animated: true)
+        if let recordVC = self.rootVC.topViewController as? WithdrawAndDespoitRecordViewController {
+            recordVC.coordinator?.openRecordDetailUrl(url)
+        } else {
+            if let webVC = R.storyboard.main.cybexWebViewController() {
+                webVC.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
+                webVC.vcType = .recordDetail
+                webVC.url = URL(string: url)
+                self.rootVC.pushViewController(webVC, animated: true)
             }
         }
     }
@@ -71,34 +64,40 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
     var state: RechargeRecodeState {
         return store.state
     }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<RechargeRecodeState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-    
-    func fetchRechargeRecodeList(_ accountName : String ,asset : String ,fundType : fundType ,size : Int , offset : Int ,expiration : Int ,asset_id : String, callback:@escaping (Bool)->()) {
-        getWithdrawAndDepositRecords(accountName, asset: asset, fundType: fundType, size: size, offset: offset, expiration: expiration) { [weak self](result) in
+
+    func fetchRechargeRecodeList(_ accountName: String,
+                                 asset: String,
+                                 fundType: FundType,
+                                 size: Int,
+                                 offset: Int,
+                                 expiration: Int,
+                                 assetId: String,
+                                 callback:@escaping (Bool) -> Void) {
+        getWithdrawAndDepositRecords(accountName,
+                                     asset: asset,
+                                     fundType: fundType,
+                                     size: size,
+                                     offset: offset,
+                                     expiration: expiration) { [weak self](result) in
             guard let `self` = self else { return }
-            self.store.dispatch(FetchDepositRecordsAction(data : result))
+            self.store.dispatch(FetchDepositRecordsAction(data: result))
             if result != nil {
                 callback(true)
-            }else {
+            } else {
                 callback(false)
             }
         }
     }
-    
-    func setAssetAction(_ asset : String) {
-        self.store.dispatch(SetWithdrawListAssetAction(asset : asset))
+
+    func setAssetAction(_ asset: String) {
+        self.store.dispatch(SetWithdrawListAssetAction(asset: asset))
     }
-    
+
     func fetchAssetUrl() {
         SimpleHTTPService.fetchBlockexplorerJson().done { [weak self](explorers) in
             guard let `self` = self else { return }
             self.store.dispatch(FetchAssetUrlAction(data: explorers))
-            }.catch { (error) in
+            }.catch { (_) in
         }
     }
 }

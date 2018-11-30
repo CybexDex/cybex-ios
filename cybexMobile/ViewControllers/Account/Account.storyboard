@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -74,28 +74,14 @@
                                     <constraint firstAttribute="height" constant="29" id="L09-9Y-j25"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAi-U3-bqh">
-                                <rect key="frame" x="0.0" y="51" width="375" height="39"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMb-E7-Hts">
-                                        <rect key="frame" x="13" y="10" width="0.0" height="20"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="locali" value="recharge_selectCoin"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </label>
-                                </subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAi-U3-bqh" customClass="RechargeHeaderView" customModule="cybexMobile" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="51" width="375" height="100"/>
                                 <constraints>
-                                    <constraint firstItem="gMb-E7-Hts" firstAttribute="top" secondItem="jAi-U3-bqh" secondAttribute="top" constant="10" id="4MU-of-0G7"/>
-                                    <constraint firstAttribute="height" constant="39" id="ADb-az-URC"/>
-                                    <constraint firstItem="gMb-E7-Hts" firstAttribute="leading" secondItem="jAi-U3-bqh" secondAttribute="leading" constant="13" id="Xbk-Vl-8MN"/>
-                                    <constraint firstAttribute="bottom" secondItem="gMb-E7-Hts" secondAttribute="bottom" constant="9" id="s4F-UH-78Y"/>
+                                    <constraint firstAttribute="height" constant="100" id="ADb-az-URC"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="68" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="brH-te-cSq">
-                                <rect key="frame" x="0.0" y="92" width="375" height="575"/>
+                                <rect key="frame" x="0.0" y="151" width="375" height="516"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
@@ -112,7 +98,7 @@
                             </tableView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="brH-te-cSq" firstAttribute="top" secondItem="jAi-U3-bqh" secondAttribute="bottom" constant="2" id="03u-MQ-AEv"/>
+                            <constraint firstItem="brH-te-cSq" firstAttribute="top" secondItem="jAi-U3-bqh" secondAttribute="bottom" id="03u-MQ-AEv"/>
                             <constraint firstItem="T3R-pk-lLR" firstAttribute="trailing" secondItem="jAi-U3-bqh" secondAttribute="trailing" id="0JB-xC-0rc"/>
                             <constraint firstItem="bnF-ZF-IRj" firstAttribute="leading" secondItem="T3R-pk-lLR" secondAttribute="leading" id="1Vl-3Z-h1v"/>
                             <constraint firstItem="T3R-pk-lLR" firstAttribute="trailing" secondItem="bnF-ZF-IRj" secondAttribute="trailing" id="6Mg-9a-nbc"/>
@@ -222,7 +208,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIk-Mt-c8W">
-                                            <rect key="frame" x="13" y="13.5" width="31" height="14.5"/>
+                                            <rect key="frame" x="13" y="13" width="31" height="14.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>

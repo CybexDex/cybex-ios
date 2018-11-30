@@ -15,60 +15,59 @@ protocol OrderBookCoordinatorProtocol {
 
 protocol OrderBookStateManagerProtocol {
     var state: OrderBookState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<OrderBookState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState
-    
-    func resetData(_ pair:Pair)
-    
-    func fetchData(_ pair:Pair)
-    func updateMarketListHeight(_ height:CGFloat)
+
+    func resetData(_ pair: Pair)
+
+    func fetchData(_ pair: Pair)
+    func updateMarketListHeight(_ height: CGFloat)
 }
 
-class OrderBookCoordinator: HomeRootCoordinator {
-    
-    lazy var creator = OrderBookPropertyActionCreate()
-    
+class OrderBookCoordinator: NavCoordinator {
     var store = Store<OrderBookState>(
-        reducer: OrderBookReducer,
+        reducer: orderBookReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 
 extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
-    
+
 }
 
 extension OrderBookCoordinator: OrderBookStateManagerProtocol {
     var state: OrderBookState {
         return store.state
     }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<OrderBookState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
+
+    func resetData(_ pair: Pair) {
+        self.store.dispatch(FetchedLimitData(data: [], pair: pair))
     }
-    
-    func resetData(_ pair:Pair) {
-        self.store.dispatch(FetchedLimitData(data:[], pair:pair))
-    }
-    
-    func fetchData(_ pair:Pair) {
+
+    func fetchData(_ pair: Pair) {
         if CybexWebSocketService.shared.overload() {
             return
         }
-        store.dispatch(creator.fetchLimitOrders(with: pair, callback: {[weak self] (data) in
+
+        fetchLimitOrders(with: pair, callback: {[weak self] (data) in
             guard let `self` = self else { return }
-            
+
             if let data = data as? [LimitOrder] {
-                self.store.dispatch(FetchedLimitData(data:data, pair:pair))
+                self.store.dispatch(FetchedLimitData(data: data, pair: pair))
             }
-        }))
+        })
     }
-    
-    func updateMarketListHeight(_ height:CGFloat) {
+
+    func fetchLimitOrders(with pair: Pair, callback: CommonAnyCallback?) {
+        let request = GetLimitOrdersRequest(pair: pair) { response in
+            if let callback = callback {
+                callback(response)
+            }
+        }
+
+        CybexWebSocketService.shared.send(request: request)
+    }
+
+    func updateMarketListHeight(_ height: CGFloat) {
         if let vc = self.rootVC.viewControllers[self.rootVC.viewControllers.count - 1] as? MarketViewController {
             vc.pageContentViewHeight.constant = height + 50
         }

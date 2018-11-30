@@ -1,0 +1,9 @@
+{
+  "commitish" : "2.0.0",
+  "iOS" : [
+    {
+      "name" : "Localize_Swift",
+      "hash" : "4f76e00a024befe655068fec88388736d32a382ba8ab4fc1593d274855dc9803"
+    }
+  ]
+}

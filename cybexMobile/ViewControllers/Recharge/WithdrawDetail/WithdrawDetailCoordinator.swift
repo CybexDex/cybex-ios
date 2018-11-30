@@ -11,65 +11,59 @@ import ReSwift
 import Localize_Swift
 
 protocol WithdrawDetailCoordinatorProtocol {
-    func fetchDepositAddress(_ asset_name:String)
-    func resetDepositAddress(_ asset_name:String)
-    func openDepositRecode(_ asset_id : String)
-    
+    func fetchDepositAddress(_ assetName: String)
+    func resetDepositAddress(_ assetName: String)
+    func openDepositRecode(_ assetId: String)
+
 }
 
 protocol WithdrawDetailStateManagerProtocol {
     var state: WithdrawDetailState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<WithdrawDetailState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState
 }
 
-class WithdrawDetailCoordinator: AccountRootCoordinator {
-    
-    lazy var creator = WithdrawDetailPropertyActionCreate()
-    
+class WithdrawDetailCoordinator: NavCoordinator {
     var store = Store<WithdrawDetailState>(
-        reducer: WithdrawDetailReducer,
+        reducer: withdrawDetailReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 
 extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
-    func fetchDepositAddress(_ asset_name:String){
+    func fetchDepositAddress(_ assetName: String) {
         if let name = UserManager.shared.name.value {
             async {
-                let data = try? await(GraphQLManager.shared.getDepositAddress(accountName: name,assetName: asset_name))
+                let data = try? await(GraphQLManager.shared.getDepositAddress(accountName: name, assetName: assetName))
                 main {
                     if case let data?? = data {
                         self.store.dispatch(FetchAddressInfo(data: data))
-                    }else{
-                        self.state.property.data.accept(nil)
+                    } else {
+                        self.state.data.accept(nil)
                     }
                 }
             }
         }
     }
-    
-    func resetDepositAddress(_ asset_name:String){
+
+    func resetDepositAddress(_ assetName: String) {
         if let name = UserManager.shared.name.value {
             async {
-                let data = try? await(GraphQLManager.shared.updateDepositAddress(accountName: name, assetName: asset_name))
+                let data = try? await(GraphQLManager.shared.updateDepositAddress(accountName: name, assetName: assetName))
                 main {
                     if case let data?? = data {
                         self.store.dispatch(FetchAddressInfo(data: data))
-                    }else{
-                        self.state.property.data.accept(nil)
+                    } else {
+                        self.state.data.accept(nil)
                     }
                 }
             }
         }
     }
-    
-    func openDepositRecode(_ asset_id : String) {
+
+    func openDepositRecode(_ assetId: String) {
         if let vc = R.storyboard.recode.rechargeRecodeViewController() {
-            vc.record_type = .DEPOSIT
-            vc.assetInfo = app_data.assetInfo[asset_id]
+            vc.recordType = .DEPOSIT
+            vc.assetInfo = appData.assetInfo[assetId]
             vc.coordinator = RechargeRecodeCoordinator(rootVC: self.rootVC)
             self.rootVC.pushViewController(vc, animated: true)
         }
@@ -80,10 +74,5 @@ extension WithdrawDetailCoordinator: WithdrawDetailStateManagerProtocol {
     var state: WithdrawDetailState {
         return store.state
     }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<WithdrawDetailState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
+
 }

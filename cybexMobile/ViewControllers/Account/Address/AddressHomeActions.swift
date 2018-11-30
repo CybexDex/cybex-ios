@@ -8,29 +8,10 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
 
-//MARK: - State
-struct AddressHomeState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage:String?
-    var property: AddressHomePropertyState
-    var callback: AddressHomeCallbackState
-}
-
-struct AddressHomePropertyState {
-}
-
-struct AddressHomeCallbackState {
-}
-
-//MARK: - Action Creator
-class AddressHomePropertyActionCreate {
-    public typealias ActionCreator = (_ state: AddressHomeState, _ store: Store<AddressHomeState>) -> Action?
-    
-    public typealias AsyncActionCreator = (
-        _ state: AddressHomeState,
-        _ store: Store <AddressHomeState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
+// MARK: - State
+struct AddressHomeState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 }

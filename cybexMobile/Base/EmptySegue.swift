@@ -10,6 +10,6 @@ import Foundation
 
 class EmptySegue: UIStoryboardSegue {
   override func perform() {
-    
+
   }
 }

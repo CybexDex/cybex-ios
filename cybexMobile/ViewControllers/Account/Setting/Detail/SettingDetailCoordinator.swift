@@ -15,27 +15,21 @@ protocol SettingDetailCoordinatorProtocol {
 
 protocol SettingDetailStateManagerProtocol {
     var state: SettingDetailState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<SettingDetailState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
+
 }
 
-class SettingDetailCoordinator: AccountRootCoordinator {
-    
-    lazy var creator = SettingDetailPropertyActionCreate()
-    
+class SettingDetailCoordinator: NavCoordinator {
     var store = Store<SettingDetailState>(
-        reducer: SettingDetailReducer,
+        reducer: gSettingDetailReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 
 extension SettingDetailCoordinator: SettingDetailCoordinatorProtocol {
   func popViewController(_ animated: Bool) {
     self.rootVC.popToRootViewController(animated: animated)
-    
-    
+
   }
 }
 
@@ -43,11 +37,4 @@ extension SettingDetailCoordinator: SettingDetailStateManagerProtocol {
     var state: SettingDetailState {
         return store.state
     }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<SettingDetailState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-    
 }

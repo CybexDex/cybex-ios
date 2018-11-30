@@ -18,22 +18,21 @@ enum CBBrushType {
 }
 
 class CBMALineBrush {
-  
+
   public var calFormula: ((Int, CBKLineModel) -> CGPoint?)?
   public var brushType: CBBrushType
   private var context: CGContext
   private var firstValueIndex: Int?
   private let configuration = CBConfiguration.sharedConfiguration
-  
-  
+
   init(brushType: CBBrushType, context: CGContext) {
     self.brushType = brushType
     self.context = context
-    
+
     context.setLineWidth(configuration.theme.indicatorLineWidth)
     context.setLineCap(.round)
     context.setLineJoin(.round)
-    
+
     switch brushType {
     case .MA:
       context.setStrokeColor(configuration.theme.MA1.cgColor)
@@ -47,17 +46,17 @@ class CBMALineBrush {
       context.setStrokeColor(configuration.theme.EMA1.cgColor)
     }
   }
-  
+
   func draw(drawModels: [CBKLineModel]) {
-    
+
     for (index, model) in drawModels.enumerated() {
-      
+
       if let point = calFormula?(index, model) {
-        
+
         if firstValueIndex == nil {
           firstValueIndex = index
         }
-        
+
         if firstValueIndex == index {
           context.move(to: point)
         } else {

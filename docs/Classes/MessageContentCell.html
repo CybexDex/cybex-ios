@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MessageContentCell Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/MessageContentCell" class="dashAnchor"></a>
+    <a title="MessageContentCell Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (47% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        MessageContentCell Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AvatarView.html">AvatarView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CellSizeCalculator.html">CellSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatService.html">ChatService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatServiceProvider.html">ChatServiceProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatServiceProvider/SendType.html">– SendType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatServiceProvider/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputBarButtonItem.html">InputBarButtonItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputBarButtonItem/Spacing.html">– Spacing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputStackView.html">InputStackView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputStackView/Position.html">– Position</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputTextView.html">InputTextView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InsetLabel.html">InsetLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LocationMessageCell.html">LocationMessageCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LocationMessageSizeCalculator.html">LocationMessageSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MediaMessageCell.html">MediaMessageCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MediaMessageSizeCalculator.html">MediaMessageSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageCollectionViewCell.html">MessageCollectionViewCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageContainerView.html">MessageContainerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageContentCell.html">MessageContentCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageInputBar.html">MessageInputBar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageKitDateFormatter.html">MessageKitDateFormatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageLabel.html">MessageLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageReusableView.html">MessageReusableView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesCollectionView.html">MessagesCollectionView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesCollectionViewFlowLayout.html">MessagesCollectionViewFlowLayout</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesViewController.html">MessagesViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NSLayoutConstraintSet.html">NSLayoutConstraintSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PlayButtonView.html">PlayButtonView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SeparatorLine.html">SeparatorLine</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TextMessageCell.html">TextMessageCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TextMessageSizeCalculator.html">TextMessageSizeCalculator</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/DetectorType.html">DetectorType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageKind.html">MessageKind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageKitError.html">MessageKitError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageStyle.html">MessageStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageStyle/TailCorner.html">– TailCorner</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageStyle/TailStyle.html">– TailStyle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Bundle.html">Bundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CGRect.html">CGRect</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSON.html">JSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSAttributedString.html">NSAttributedString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSMutableAttributedString.html">NSMutableAttributedString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIEdgeInsets.html">UIEdgeInsets</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIView.html">UIView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/InputItem.html">InputItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/InputPlugin.html">InputPlugin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LocationItem.html">LocationItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MediaItem.html">MediaItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageCellDelegate.html">MessageCellDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageInputBarDelegate.html">MessageInputBarDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageLabelDelegate.html">MessageLabelDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageType.html">MessageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessagesDataSource.html">MessagesDataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessagesDisplayDelegate.html">MessagesDisplayDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessagesLayoutDelegate.html">MessagesLayoutDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NBLConvertable.html">NBLConvertable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NBLModel.html">NBLModel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Avatar.html">Avatar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AvatarPosition.html">AvatarPosition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AvatarPosition/Horizontal.html">– Horizontal</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AvatarPosition/Vertical.html">– Vertical</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChatMessage.html">ChatMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HorizontalEdgeInsets.html">HorizontalEdgeInsets</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LabelAlignment.html">LabelAlignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LocationMessageSnapshotOptions.html">LocationMessageSnapshotOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Sender.html">Sender</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>MessageContentCell</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">MessageContentCell</span> <span class="p">:</span> <span class="kt"><a href="../Classes/MessageCollectionViewCell.html">MessageCollectionViewCell</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A subclass of <code><a href="../Classes/MessageCollectionViewCell.html">MessageCollectionViewCell</a></code> used to display text, media, and location messages.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC10avatarViewAA06AvatarG0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/avatarView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC10avatarViewAA06AvatarG0Cvp">avatarView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The image view displaying the avatar.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">avatarView</span><span class="p">:</span> <span class="kt"><a href="../Classes/AvatarView.html">AvatarView</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC20messageContainerViewAA0cgH0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/messageContainerView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC20messageContainerViewAA0cgH0Cvp">messageContainerView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The container used for styling and holding the message&rsquo;s content view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">messageContainerView</span><span class="p">:</span> <span class="kt"><a href="../Classes/MessageContainerView.html">MessageContainerView</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC12cellTopLabelAA05InsetH0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/cellTopLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC12cellTopLabelAA05InsetH0Cvp">cellTopLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The top label of the cell.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">cellTopLabel</span><span class="p">:</span> <span class="kt"><a href="../Classes/InsetLabel.html">InsetLabel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC15messageTopLabelAA05InsetH0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/messageTopLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC15messageTopLabelAA05InsetH0Cvp">messageTopLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The top label of the messageBubble.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">messageTopLabel</span><span class="p">:</span> <span class="kt"><a href="../Classes/InsetLabel.html">InsetLabel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC18messageBottomLabelAA05InsetH0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/messageBottomLabel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC18messageBottomLabelAA05InsetH0Cvp">messageBottomLabel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The bottom label of the messageBubble.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">messageBottomLabel</span><span class="p">:</span> <span class="kt"><a href="../Classes/InsetLabel.html">InsetLabel</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC13accessoryViewSo6UIViewCvp"></a>
+                    <a name="//apple_ref/swift/Property/accessoryView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC13accessoryViewSo6UIViewCvp">accessoryView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">accessoryView</span><span class="p">:</span> <span class="kt">UIView</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC8delegateAA0cE8Delegate_pSgXwvp"></a>
+                    <a name="//apple_ref/swift/Property/delegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC8delegateAA0cE8Delegate_pSgXwvp">delegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The <code><a href="../Protocols/MessageCellDelegate.html">MessageCellDelegate</a></code> for the cell.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/MessageCellDelegate.html">MessageCellDelegate</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageContentCell(im)initWithFrame:"></a>
+                    <a name="//apple_ref/swift/Method/init(frame:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageContentCell(im)initWithFrame:">init(frame:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">override</span> <span class="nf">init</span><span class="p">(</span><span class="nv">frame</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageContentCell(im)initWithCoder:"></a>
+                    <a name="//apple_ref/swift/Method/init(coder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageContentCell(im)initWithCoder:">init(coder:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">required</span> <span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="n">coder</span> <span class="nv">aDecoder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC13setupSubviewsyyF"></a>
+                    <a name="//apple_ref/swift/Method/setupSubviews()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC13setupSubviewsyyF">setupSubviews()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">setupSubviews</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageContentCell(im)prepareForReuse"></a>
+                    <a name="//apple_ref/swift/Method/prepareForReuse()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageContentCell(im)prepareForReuse">prepareForReuse()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">prepareForReuse</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Configuration"></a>
+                <a name="//apple_ref/swift/Section/Configuration" class="dashAnchor"></a>
+                <a href="#/Configuration">
+                  <h3 class="section-name">Configuration</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageContentCell(im)applyLayoutAttributes:"></a>
+                    <a name="//apple_ref/swift/Method/apply(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageContentCell(im)applyLayoutAttributes:">apply(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">apply</span><span class="p">(</span><span class="n">_</span> <span class="nv">layoutAttributes</span><span class="p">:</span> <span class="kt">UICollectionViewLayoutAttributes</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC9configure4with2at3andyAA0C4Type_p_10Foundation9IndexPathVAA22MessagesCollectionViewCtF"></a>
+                    <a name="//apple_ref/swift/Method/configure(with:at:and:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC9configure4with2at3andyAA0C4Type_p_10Foundation9IndexPathVAA22MessagesCollectionViewCtF">configure(with:at:and:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Used to configure the cell.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="n">with</span> <span class="nv">message</span><span class="p">:</span> <span class="kt"><a href="../Protocols/MessageType.html">MessageType</a></span><span class="p">,</span> <span class="n">at</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">,</span> <span class="n">and</span> <span class="nv">messagesCollectionView</span><span class="p">:</span> <span class="kt"><a href="../Classes/MessagesCollectionView.html">MessagesCollectionView</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Protocols/MessageType.html">MessageType</a></code> this cell displays.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>indexPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code>IndexPath</code> for this cell.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>messagesCollectionView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The <code><a href="../Classes/MessagesCollectionView.html">MessagesCollectionView</a></code> in which this cell is contained.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC16handleTapGestureyySo19UIGestureRecognizerCF"></a>
+                    <a name="//apple_ref/swift/Method/handleTapGesture(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC16handleTapGestureyySo19UIGestureRecognizerCF">handleTapGesture(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle tap gesture on contentView and its subviews.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">handleTapGesture</span><span class="p">(</span><span class="n">_</span> <span class="nv">gesture</span><span class="p">:</span> <span class="kt">UIGestureRecognizer</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageContentCell(im)gestureRecognizerShouldBegin:"></a>
+                    <a name="//apple_ref/swift/Method/gestureRecognizerShouldBegin(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageContentCell(im)gestureRecognizerShouldBegin:">gestureRecognizerShouldBegin(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle long press gesture, return true when gestureRecognizer&rsquo;s touch point in <code><a href="../Classes/MessageContentCell.html#/s:8ChatRoom18MessageContentCellC20messageContainerViewAA0cgH0Cvp">messageContainerView</a></code>&lsquo;s frame</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">gestureRecognizerShouldBegin</span><span class="p">(</span><span class="n">_</span> <span class="nv">gestureRecognizer</span><span class="p">:</span> <span class="kt">UIGestureRecognizer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC04cellD4View9canHandleSbSo7CGPointV_tF"></a>
+                    <a name="//apple_ref/swift/Method/cellContentView(canHandle:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC04cellD4View9canHandleSbSo7CGPointV_tF">cellContentView(canHandle:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Handle <code>ContentView</code>&lsquo;s tap gesture, return false when <code>ContentView</code> doesn&rsquo;t needs to handle gesture</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">cellContentView</span><span class="p">(</span><span class="n">canHandle</span> <span class="nv">touchPoint</span><span class="p">:</span> <span class="kt">CGPoint</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Origin%20Calculations"></a>
+                <a name="//apple_ref/swift/Section/Origin Calculations" class="dashAnchor"></a>
+                <a href="#/Origin%20Calculations">
+                  <h3 class="section-name">Origin Calculations</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC16layoutAvatarView4withyAA018MessagesCollectionH16LayoutAttributesC_tF"></a>
+                    <a name="//apple_ref/swift/Method/layoutAvatarView(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC16layoutAvatarView4withyAA018MessagesCollectionH16LayoutAttributesC_tF">layoutAvatarView(with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Positions the cell&rsquo;s <code><a href="../Classes/AvatarView.html">AvatarView</a></code>.</p>
+
+<ul>
+<li>attributes: The <code><a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a></code> for the cell.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">layoutAvatarView</span><span class="p">(</span><span class="n">with</span> <span class="nv">attributes</span><span class="p">:</span> <span class="kt"><a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC06layoutC13ContainerView4withyAA018MessagesCollectionH16LayoutAttributesC_tF"></a>
+                    <a name="//apple_ref/swift/Method/layoutMessageContainerView(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC06layoutC13ContainerView4withyAA018MessagesCollectionH16LayoutAttributesC_tF">layoutMessageContainerView(with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Positions the cell&rsquo;s <code><a href="../Classes/MessageContainerView.html">MessageContainerView</a></code>.</p>
+
+<ul>
+<li>attributes: The <code><a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a></code> for the cell.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">layoutMessageContainerView</span><span class="p">(</span><span class="n">with</span> <span class="nv">attributes</span><span class="p">:</span> <span class="kt"><a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC06layoutE8TopLabel4withyAA38MessagesCollectionViewLayoutAttributesC_tF"></a>
+                    <a name="//apple_ref/swift/Method/layoutCellTopLabel(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC06layoutE8TopLabel4withyAA38MessagesCollectionViewLayoutAttributesC_tF">layoutCellTopLabel(with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Positions the cell&rsquo;s top label.</p>
+
+<ul>
+<li>attributes: The <code><a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a></code> for the cell.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">layoutCellTopLabel</span><span class="p">(</span><span class="n">with</span> <span class="nv">attributes</span><span class="p">:</span> <span class="kt"><a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC06layoutC8TopLabel4withyAA38MessagesCollectionViewLayoutAttributesC_tF"></a>
+                    <a name="//apple_ref/swift/Method/layoutMessageTopLabel(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC06layoutC8TopLabel4withyAA38MessagesCollectionViewLayoutAttributesC_tF">layoutMessageTopLabel(with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Positions the message bubble&rsquo;s top label.</p>
+
+<ul>
+<li>attributes: The <code><a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a></code> for the cell.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">layoutMessageTopLabel</span><span class="p">(</span><span class="n">with</span> <span class="nv">attributes</span><span class="p">:</span> <span class="kt"><a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC17layoutBottomLabel4withyAA38MessagesCollectionViewLayoutAttributesC_tF"></a>
+                    <a name="//apple_ref/swift/Method/layoutBottomLabel(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC17layoutBottomLabel4withyAA38MessagesCollectionViewLayoutAttributesC_tF">layoutBottomLabel(with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Positions the cell&rsquo;s bottom label.</p>
+
+<ul>
+<li>attributes: The <code><a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a></code> for the cell.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">layoutBottomLabel</span><span class="p">(</span><span class="n">with</span> <span class="nv">attributes</span><span class="p">:</span> <span class="kt"><a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom18MessageContentCellC19layoutAccessoryView4withyAA018MessagesCollectionH16LayoutAttributesC_tF"></a>
+                    <a name="//apple_ref/swift/Method/layoutAccessoryView(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom18MessageContentCellC19layoutAccessoryView4withyAA018MessagesCollectionH16LayoutAttributesC_tF">layoutAccessoryView(with:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Positions the cell&rsquo;s accessory view.</p>
+
+<ul>
+<li>attributes: The <code><a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a></code> for the cell.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">layoutAccessoryView</span><span class="p">(</span><span class="n">with</span> <span class="nv">attributes</span><span class="p">:</span> <span class="kt"><a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-11-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -13,35 +13,35 @@ import FSPagerView
 class ETOHomeBannerView: CybexBaseView {
     @IBOutlet weak var pagerView: FSPagerView!
     @IBOutlet weak var pagerControl: FSPageControl!
-    
-    var view_type: Int = 0
+
+    var viewType: Int = 0
     override var data: Any? {
-        didSet{
+        didSet {
             if let _ = data as? [String] {
                 pagerView.reloadData()
             }
         }
     }
-    
-    enum Event:String {
+
+    enum Event: String {
         case ETOHomeBannerViewDidClicked
     }
-    
+
     override func setup() {
         self.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: String(describing: FSPagerViewCell.self))
-        
+
         super.setup()
-        
+
         setupUI()
         setupSubViewEvent()
     }
-    
+
     func setupUI() {
         clearBgColor()
         self.setPagerViewStyle()
         self.setPageControlStyle()
     }
-    
+
     func setPageControlStyle() {
         self.pagerControl.contentHorizontalAlignment = .center
         self.pagerControl.numberOfPages = 5
@@ -49,30 +49,29 @@ class ETOHomeBannerView: CybexBaseView {
         self.pagerControl.setFillColor(.pastelOrange, for: .selected)
         self.pagerControl.setFillColor(.steel50, for: .normal)
     }
-    
+
     func setPagerViewStyle() {
         self.pagerView.itemSize = CGSize(width: UIScreen.main.bounds.width, height: self.frame.height)
     }
-    
+
     func setupSubViewEvent() {
-        
+
     }
 }
 
-extension ETOHomeBannerView : FSPagerViewDataSource,FSPagerViewDelegate {
+extension ETOHomeBannerView: FSPagerViewDataSource, FSPagerViewDelegate {
     func numberOfItems(in pagerView: FSPagerView) -> Int {
         if let banners = self.data as? [String] {
             return banners.count
         }
         return 0
     }
-    
+
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: String(describing: FSPagerViewCell.self), at: index) as FSPagerViewCell
-        if view_type == 0 {
+        if viewType == 0 {
             cell.imageView?.contentMode = .scaleAspectFill
-        }
-        else {
+        } else {
             cell.contentView.layer.shadowColor = UIColor.clear.cgColor
             cell.contentView.layer.shadowRadius = 0
             cell.contentView.layer.shadowOpacity = 1.0
@@ -84,23 +83,20 @@ extension ETOHomeBannerView : FSPagerViewDataSource,FSPagerViewDelegate {
             let banner = banners[index]
             if banner.contains("https://") || banner.contains("http://") {
                 cell.imageView?.kf.setImage(with: URL(string: banner))
-            }
-            else {
+            } else {
                 cell.imageView?.image = UIImage(named: banner)
             }
         }
         return cell
     }
-    
+
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        self.next?.sendEventWith(Event.ETOHomeBannerViewDidClicked.rawValue, userinfo: ["data": index , "self": self])
+        self.next?.sendEventWith(Event.ETOHomeBannerViewDidClicked.rawValue, userinfo: ["data": index, "self": self])
     }
-    
+
     func pagerViewDidScroll(_ pagerView: FSPagerView) {
         if self.pagerControl.currentPage != pagerView.currentIndex {
             self.pagerControl.currentPage = pagerView.currentIndex
         }
     }
 }
-
-

@@ -1,0 +1,6 @@
+framework module KMNavigationBarTransition {
+  umbrella header "KMNavigationBarTransition.h"
+
+  export *
+  module * { export * }
+}

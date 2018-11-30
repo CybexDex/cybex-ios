@@ -27,8 +27,6 @@ public enum UIScreenEdgePanGestureRecognizerDefaults {
     public static var configuration: ((UIScreenEdgePanGestureRecognizer, RxGestureRecognizerDelegate) -> Void)?
 }
 
-fileprivate typealias Defaults = UIScreenEdgePanGestureRecognizerDefaults
-
 /// A `GestureRecognizerFactory` for `UIScreenEdgePanGestureRecognizer`
 public struct ScreenEdgePanGestureRecognizerFactory: GestureRecognizerFactory {
     public typealias Gesture = UIScreenEdgePanGestureRecognizer
@@ -41,7 +39,7 @@ public struct ScreenEdgePanGestureRecognizerFactory: GestureRecognizerFactory {
      */
     public init(
         edges: UIRectEdge,
-        configuration: ((UIScreenEdgePanGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = Defaults.configuration
+        configuration: ((UIScreenEdgePanGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = UIScreenEdgePanGestureRecognizerDefaults.configuration
         ) {
         self.configuration = { gestureRecognizer, delegate in
             gestureRecognizer.edges = edges
@@ -59,7 +57,7 @@ extension AnyGestureRecognizerFactory {
      */
     public static func screenEdgePan(
         edges: UIRectEdge,
-        configuration: ((UIScreenEdgePanGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = Defaults.configuration
+        configuration: ((UIScreenEdgePanGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = UIScreenEdgePanGestureRecognizerDefaults.configuration
         ) -> AnyGestureRecognizerFactory {
         let gesture = ScreenEdgePanGestureRecognizerFactory(
             edges: edges,
@@ -78,7 +76,7 @@ public extension Reactive where Base: UIView {
      */
     public func screenEdgePanGesture(
         edges: UIRectEdge,
-        configuration: ((UIScreenEdgePanGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = Defaults.configuration
+        configuration: ((UIScreenEdgePanGestureRecognizer, RxGestureRecognizerDelegate) -> Void)? = UIScreenEdgePanGestureRecognizerDefaults.configuration
         ) -> ControlEvent<UIScreenEdgePanGestureRecognizer> {
 
         return gesture(ScreenEdgePanGestureRecognizerFactory(

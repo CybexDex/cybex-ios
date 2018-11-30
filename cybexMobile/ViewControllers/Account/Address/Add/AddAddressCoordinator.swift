@@ -10,56 +10,48 @@ import UIKit
 import ReSwift
 import NBLCommonModule
 
-enum address_type : String {
+enum AddressType: String {
     case withdraw
     case transfer
 }
 
 protocol AddAddressCoordinatorProtocol {
-    func pop(_ sender : pop_type)
+    func pop(_ sender: PopType)
 }
 
 protocol AddAddressStateManagerProtocol {
     var state: AddAddressState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<AddAddressState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
-    
-    
-    func verityAddress(_ address : String, type:address_type)
-    
-    func setAsset(_ asset : String)
 
-    func verityNote(_ success : Bool)
+    func verityAddress(_ address: String, type: AddressType)
 
-    func addAddress(_ type : address_type)
-    
-    func veritiedAddress(_ type : Bool)
-    
-    func setNoteAction(_ note : String)
-    
+    func setAsset(_ asset: String)
+
+    func verityNote(_ success: Bool)
+
+    func addAddress(_ type: AddressType)
+
+    func veritiedAddress(_ type: Bool)
+
+    func setNoteAction(_ note: String)
+
 }
 
-class AddAddressCoordinator: AccountRootCoordinator {
-    
-    lazy var creator = AddAddressPropertyActionCreate()
-    
+class AddAddressCoordinator: NavCoordinator {
     var store = Store<AddAddressState>(
-        reducer: AddAddressReducer,
+        reducer: addAddressReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
 }
 
 extension AddAddressCoordinator: AddAddressCoordinatorProtocol {
-    func pop(_ sender : pop_type) {
+    func pop(_ sender: PopType) {
         if sender == .normal {
             self.rootVC.popViewController()
-        }
-        else {
+        } else {
             for viewController in self.rootVC.viewControllers {
                 if viewController is RechargeViewController {
-                    let _ = self.rootVC.popToViewController(viewController, animated: true)
+                    _ = self.rootVC.popToViewController(viewController, animated: true)
                 }
             }
         }
@@ -70,60 +62,55 @@ extension AddAddressCoordinator: AddAddressStateManagerProtocol {
     var state: AddAddressState {
         return store.state
     }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<AddAddressState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-    
-    func verityAddress(_ address: String, type: address_type) {
+
+    func verityAddress(_ address: String, type: AddressType) {
         switch type {
         case .transfer:
-            
+
             UserManager.shared.checkUserName(address).done({ (exist) in
                 main {
-                    self.store.dispatch(VerificationAddressAction(success:exist))
-                    self.store.dispatch(SetAddressAction(data:address))
+                    self.store.dispatch(VerificationAddressAction(success: exist))
+                    self.store.dispatch(SetAddressAction(data: address))
                 }
             }).cauterize()
-            
+
         case .withdraw:
-            if let asset_info = app_data.assetInfo[self.state.property.asset.value] {
-                
-                RechargeDetailCoordinator.verifyAddress(asset_info.symbol.filterJade, address: address, callback: { (isSuccess) in
-                    self.store.dispatch(VerificationAddressAction(success:isSuccess))
-                    self.store.dispatch(SetAddressAction(data:address))
+            if let assetInfo = appData.assetInfo[self.state.asset.value] {
+
+                RechargeDetailCoordinator.verifyAddress(assetInfo.symbol.filterJade, address: address, callback: { (isSuccess) in
+                    self.store.dispatch(VerificationAddressAction(success: isSuccess))
+                    self.store.dispatch(SetAddressAction(data: address))
                 })
             }
-        default:
-            break
         }
     }
-    
-    func veritiedAddress(_ type : Bool) {
-        self.store.dispatch(VerificationAddressAction(success:type))
+
+    func veritiedAddress(_ type: Bool) {
+        self.store.dispatch(VerificationAddressAction(success: type))
     }
-    
-    func setAsset(_ asset : String) {
-        self.store.dispatch(SetAssetAction(data:asset))
+
+    func setAsset(_ asset: String) {
+        self.store.dispatch(SetAssetAction(data: asset))
     }
-    
-    func verityNote(_ success : Bool) {
-        self.store.dispatch(VerificationNoteAction(data : success))
+
+    func verityNote(_ success: Bool) {
+        self.store.dispatch(VerificationNoteAction(data: success))
     }
-    
-    func addAddress(_ type : address_type) {
-        
+
+    func addAddress(_ type: AddressType) {
+
         if type == .withdraw {
-            AddressManager.shared.addWithDrawAddress(WithdrawAddress(id: AddressManager.shared.getUUID(), name: self.state.property.note.value, address: self.state.property.address.value, currency: self.state.property.asset.value, memo: self.state.property.memo.value))
-        }
-        else {
-            AddressManager.shared.addTransferAddress(TransferAddress(id: AddressManager.shared.getUUID(), name: self.state.property.note.value, address: self.state.property.address.value))
+            AddressManager.shared.addWithDrawAddress(WithdrawAddress(id: AddressManager.shared.getUUID(),
+                                                                     name: self.state.note.value,
+                                                                     address: self.state.address.value,
+                                                                     currency: self.state.asset.value,
+                                                                     memo: self.state.memo.value))
+        } else {
+            AddressManager.shared.addTransferAddress(TransferAddress(id: AddressManager.shared.getUUID(), name: self.state.note.value, address: self.state.address.value))
         }
     }
-    
-    func setNoteAction(_ note : String) {
-        self.store.dispatch(SetNoteAction(data : note))
+
+    func setNoteAction(_ note: String) {
+        self.store.dispatch(SetNoteAction(data: note))
     }
 }

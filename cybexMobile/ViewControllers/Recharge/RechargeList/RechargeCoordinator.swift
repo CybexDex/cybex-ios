@@ -11,46 +11,41 @@ import ReSwift
 import HandyJSON
 import NBLCommonModule
 
-struct RechargeContext:RouteContext,HandyJSON {
+struct RechargeContext: RouteContext, HandyJSON {
     init() {}
-    
-    var selectedIndex: RechargeViewController.CELL_TYPE = .RECHARGE
+
+    var selectedIndex: RechargeViewController.CellType = .RECHARGE
 }
 
 protocol RechargeCoordinatorProtocol {
-    func openRechargeDetail(_ trade:Trade)
-    func openWithDrawDetail(_ trade:Trade)
+    func openRechargeDetail(_ trade: Trade)
+    func openWithDrawDetail(_ trade: Trade)
     func openRecordList()
 }
 
 protocol RechargeStateManagerProtocol {
     var state: RechargeState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<RechargeState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState
-    
+
     func fetchWithdrawIdsInfo()
     func fetchDepositIdsInfo()
+    func sortedEmptyAsset(_ isEmpty: Bool)
+    func sortedNameAsset(_ name: String)
 }
 
 class RechargeCoordinator: NavCoordinator {
-    
-    lazy var creator = RechargePropertyActionCreate()
-    
     var store = Store(
-        reducer: RechargeReducer,
+        reducer: rechargeReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
-    
+
     override func register() {
         Broadcaster.register(RechargeCoordinatorProtocol.self, observer: self)
         Broadcaster.register(RechargeStateManagerProtocol.self, observer: self)
-        
-        
+
     }
-    
-    override class func start(_ root: BaseNavigationController, context:RouteContext? = nil) -> BaseViewController {
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
         let vc = R.storyboard.account.rechargeViewController()!
         let coordinator = RechargeCoordinator(rootVC: root)
         vc.coordinator = coordinator
@@ -65,7 +60,7 @@ class RechargeCoordinator: NavCoordinator {
 }
 
 extension RechargeCoordinator: RechargeCoordinatorProtocol {
-    func openRechargeDetail(_ trade:Trade){
+    func openRechargeDetail(_ trade: Trade) {
         let vc = R.storyboard.account.rechargeDetailViewController()!
         let coordinator   = RechargeDetailCoordinator(rootVC: self.rootVC)
         vc.coordinator    = coordinator
@@ -73,19 +68,20 @@ extension RechargeCoordinator: RechargeCoordinatorProtocol {
         vc.isWithdraw     = trade.enable
         self.rootVC.pushViewController(vc, animated: true)
     }
-    
-    func openWithDrawDetail(_ trade:Trade){
-        let vc = R.storyboard.account.withdrawDetailViewController()!
-        let coordinator = WithdrawDetailCoordinator(rootVC: self.rootVC)
-        vc.coordinator = coordinator
-        vc.trade     = trade
-        self.rootVC.pushViewController(vc, animated: true)
+
+    func openWithDrawDetail(_ trade: Trade) {
+        if let withdrawDetailVC = R.storyboard.account.withdrawDetailViewController() {
+            let coordinator = WithdrawDetailCoordinator(rootVC: self.rootVC)
+            withdrawDetailVC.coordinator = coordinator
+            withdrawDetailVC.trade = trade
+            self.rootVC.pushViewController(withdrawDetailVC, animated: true)
+        }
     }
 
     func openRecordList() {
-        if let vc = R.storyboard.comprehensive.withdrawAndDespoitRecordViewController() {
-            vc.coordinator = WithdrawAndDespoitRecordCoordinator(rootVC: self.rootVC)
-            self.rootVC.pushViewController(vc, animated: true)
+        if let recordVC = R.storyboard.comprehensive.withdrawAndDespoitRecordViewController() {
+            recordVC.coordinator = WithdrawAndDespoitRecordCoordinator(rootVC: self.rootVC)
+            self.rootVC.pushViewController(recordVC, animated: true)
         }
     }
 }
@@ -94,21 +90,21 @@ extension RechargeCoordinator: RechargeStateManagerProtocol {
     var state: RechargeState {
         return store.state
     }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<RechargeState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-    func fetchWithdrawIdsInfo(){
+
+    func fetchWithdrawIdsInfo() {
         SimpleHTTPService.fetchWithdrawIdsInfo().done { (ids) in
             self.store.dispatch(FecthWithdrawIds(data: ids))
             }.cauterize()
     }
-    func fetchDepositIdsInfo(){
+    func fetchDepositIdsInfo() {
         SimpleHTTPService.fetchDesipotInfo().done { (ids) in
             self.store.dispatch(FecthDepositIds(data: ids))
             }.cauterize()
     }
-    
+    func sortedEmptyAsset(_ isEmpty: Bool) {
+        self.store.dispatch(SortedByEmptyAssetAction(data: isEmpty))
+    }
+    func sortedNameAsset(_ name: String) {
+        self.store.dispatch(SortedByNameAssetAction(data: name))
+    }
 }

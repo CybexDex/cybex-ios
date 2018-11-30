@@ -9,22 +9,15 @@
 import UIKit
 import ReSwift
 
-func TradeHistoryReducer(action:Action, state:TradeHistoryState?) -> TradeHistoryState {
-    return TradeHistoryState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: TradeHistoryPropertyReducer(state?.property, action: action))
-}
+func tradeHistoryReducer(action: Action, state: TradeHistoryState?) -> TradeHistoryState {
+    let state = state ?? TradeHistoryState()
 
-func TradeHistoryPropertyReducer(_ state: TradeHistoryPropertyState?, action: Action) -> TradeHistoryPropertyState {
-    let state = state ?? TradeHistoryPropertyState()
-    
     switch action {
     case let action as FetchedFillOrderData:
-      state.data.accept(action.data)
+        state.data.accept(action.data)
     default:
         break
     }
-    
+
     return state
 }
-
-
-

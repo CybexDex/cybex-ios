@@ -10,7 +10,7 @@ import Foundation
 
 @IBDesignable
 class PairDetailDateViewView: CybexBaseView {
-    
+
     @IBOutlet weak var open: UILabel!
     @IBOutlet weak var high: UILabel!
     @IBOutlet weak var low: UILabel!
@@ -18,30 +18,30 @@ class PairDetailDateViewView: CybexBaseView {
     @IBOutlet weak var baseAmount: UILabel!
     @IBOutlet weak var changeAmount: UILabel!
     @IBOutlet weak var change: UILabel!
-    
-    var base_name : String = ""
-    var quote_name : String = ""
-    
-    enum Event:String {
-        case PairDetailDateViewViewDidClicked
+
+    var baseName: String = ""
+    var quoteName: String = ""
+
+    enum Event: String {
+        case pairDetailDateViewViewDidClicked
     }
-        
+
     override func setup() {
         super.setup()
-        
+
         setupUI()
         setupSubViewEvent()
     }
-    
+
     func setupUI() {
         clearBgColor()
     }
-    
+
     func setupSubViewEvent() {
-    
+
     }
-    
+
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.PairDetailDateViewViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.pairDetailDateViewViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }

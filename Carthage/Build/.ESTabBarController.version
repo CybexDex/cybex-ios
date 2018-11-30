@@ -1,0 +1,9 @@
+{
+  "commitish" : "2.6.4",
+  "iOS" : [
+    {
+      "name" : "ESTabBarController",
+      "hash" : "3f0dbf1e2f5cd48f00750f1e593b4ed4de659ede30b791b35e06e07b62d4da33"
+    }
+  ]
+}

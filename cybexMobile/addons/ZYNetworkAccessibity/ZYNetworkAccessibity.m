@@ -442,7 +442,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
         [_alertController addAction:[UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
             if([[UIApplication sharedApplication] canOpenURL:settingsURL]) {
-                [[UIApplication sharedApplication] openURL:settingsURL];
+                [[UIApplication sharedApplication] openURL:settingsURL options:@{} completionHandler:nil];
             }
         }]];
     }

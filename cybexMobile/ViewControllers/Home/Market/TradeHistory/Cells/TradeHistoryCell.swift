@@ -8,10 +8,10 @@
 
 import Foundation
 
-class TradeHistoryCell:BaseTableViewCell {
-  
+class TradeHistoryCell: BaseTableViewCell {
+
     @IBOutlet weak var ownView: TradeHistoryCellView!
-    
+
     override func setup(_ data: Any?) {
         self.ownView.data = data
     }

@@ -1,0 +1,6 @@
+framework module cybex_ios_core_cpp {
+  umbrella header "cybex_ios_core_cpp.h"
+
+  export *
+  module * { export * }
+}

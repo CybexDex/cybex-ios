@@ -9,20 +9,7 @@
 import UIKit
 import ReSwift
 
-func TransferDetailReducer(action:Action, state:TransferDetailState?) -> TransferDetailState {
-    return TransferDetailState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: TransferDetailPropertyReducer(state?.property, action: action))
-}
-
-func TransferDetailPropertyReducer(_ state: TransferDetailPropertyState?, action: Action) -> TransferDetailPropertyState {
-    var state = state ?? TransferDetailPropertyState()
-    
-    switch action {
-    default:
-        break
-    }
-    
+func transferDetailReducer(action: Action, state: TransferDetailState?) -> TransferDetailState {
+    let state = state ?? TransferDetailState()
     return state
 }
-
-
-

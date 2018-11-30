@@ -51,15 +51,15 @@ platform :ios do
     update_project_provisioning(
       xcodeproj: "cybexMobile.xcodeproj",
       profile: ".travis/AdHoc_cybex.mobileprovision", # optional if you use sigh
-      target_filter: "cybexMobile", # matches name or type of a target
       build_configuration: "Release",
+      target_filter: "cybexMobile", # matches name or type of a target
       code_signing_identity: "iPhone Distribution" # optionally specify the codesigning identity
     )
     gym(
       xcargs: "-UseNewBuildSystem=YES",
       output_name: "cybex-fir",
       scheme:"cybexMobile",
-      workspace:"cybexMobile.xcworkspace",
+      project:"cybexMobile.xcodeproj",
       configuration:"Release",
       export_method:"ad-hoc",
       export_options: {
@@ -94,7 +94,7 @@ platform :ios do
     gym(
       output_name: "cybex-appstore",
       scheme:"cybexMobile",
-      workspace:"cybexMobile.xcworkspace",
+      project:"cybexMobile.xcodeproj",
       configuration:"Release",
       export_method:"app-store",
       export_options: {
@@ -129,7 +129,7 @@ platform :ios do
       gym(
         output_name: "cybex-testflight",
         scheme:"cybexMobile",
-        workspace:"cybexMobile.xcworkspace",
+        project:"cybexMobile.xcodeproj",
         configuration:"Release",
         export_method:"app-store",
         export_options: {

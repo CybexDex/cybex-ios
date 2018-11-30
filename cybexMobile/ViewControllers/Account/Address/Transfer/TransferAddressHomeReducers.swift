@@ -9,13 +9,9 @@
 import UIKit
 import ReSwift
 
-func TransferAddressHomeReducer(action:Action, state:TransferAddressHomeState?) -> TransferAddressHomeState {
-    return TransferAddressHomeState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: TransferAddressHomePropertyReducer(state?.property, action: action), callback:state?.callback ?? TransferAddressHomeCallbackState())
-}
+func transferAddressHomeReducer(action: Action, state: TransferAddressHomeState?) -> TransferAddressHomeState {
+    let state = state ?? TransferAddressHomeState()
 
-func TransferAddressHomePropertyReducer(_ state: TransferAddressHomePropertyState?, action: Action) -> TransferAddressHomePropertyState {
-    let state = state ?? TransferAddressHomePropertyState()
-    
     switch action {
     case let action as TransferAddressHomeDataAction:
         state.data.accept(action.data)
@@ -24,9 +20,6 @@ func TransferAddressHomePropertyReducer(_ state: TransferAddressHomePropertyStat
     default:
         break
     }
-    
+
     return state
 }
-
-
-

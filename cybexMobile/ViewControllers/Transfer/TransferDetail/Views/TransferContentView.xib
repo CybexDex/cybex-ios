@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,7 +33,7 @@
                                 <constraint firstAttribute="height" constant="54" id="5dx-VK-Qov"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_income_address"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="nameLocali" value="transfer_detail_income_address"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90X-tO-lhd" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
@@ -42,7 +42,7 @@
                                 <constraint firstAttribute="height" constant="54" id="40J-FF-wGo"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="my_history_time"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="nameLocali" value="my_history_time"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t0l-RC-r4P" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
@@ -51,7 +51,7 @@
                                 <constraint firstAttribute="height" constant="54" id="G6N-9q-UsD"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_fee"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="nameLocali" value="transfer_detail_fee"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O32-0m-HlA" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
@@ -60,7 +60,7 @@
                                 <constraint firstAttribute="height" constant="54" id="q2M-8R-qxC"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_time"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="nameLocali" value="transfer_detail_time"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kan-Pk-1BB" customClass="TransferLineView" customModule="cybexMobile" customModuleProvider="target">
@@ -69,7 +69,7 @@
                                 <constraint firstAttribute="height" constant="120" id="nuN-2C-Qf7"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="name_locali" value="transfer_detail_mome"/>
+                                <userDefinedRuntimeAttribute type="string" keyPath="nameLocali" value="transfer_detail_mome"/>
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>

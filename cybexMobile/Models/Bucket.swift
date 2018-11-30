@@ -7,67 +7,66 @@
 //
 
 import Foundation
-import ObjectMapper
+import HandyJSON
 
-class Bucket : Mappable, NSCopying {
+class Bucket: HandyJSON, NSCopying {
   var id: String = ""
-  
-  var base_volume: String = ""
-  var quote_volume: String = ""
-  
-  var high_base: String = ""
-  var high_quote: String = ""
-  var low_base: String = ""
-  var low_quote: String = ""
-  
-  var open_base: String = ""
-  var open_quote: String = ""
-  var close_base: String = ""
-  var close_quote: String = ""
-  
-  var open:TimeInterval = 0
-  var base:String = ""
-  var quote:String = ""
-  var seconds:String = ""
 
+  var baseVolume: String = ""
+  var quoteVolume: String = ""
 
-  required init?(map: Map) {
+  var highBase: String = ""
+  var highQuote: String = ""
+  var lowBase: String = ""
+  var lowQuote: String = ""
+
+  var openBase: String = ""
+  var openQuote: String = ""
+  var closeBase: String = ""
+  var closeQuote: String = ""
+
+  var open: TimeInterval = 0
+  var base: String = ""
+  var quote: String = ""
+  var seconds: String = ""
+
+  required init() {
   }
 
-  func mapping(map: Map) {
-    id                   <- (map["id"],ToStringTransform())
-    base_volume          <- (map["base_volume"],ToStringTransform())
-    quote_volume         <- (map["quote_volume"],ToStringTransform())
-    high_base            <- (map["high_base"],ToStringTransform())
-    high_quote           <- (map["high_quote"],ToStringTransform())
-    low_base             <- (map["low_base"],ToStringTransform())
-    low_quote            <- (map["low_quote"],ToStringTransform())
-    open_base            <- (map["open_base"],ToStringTransform())
-    open_quote           <- (map["open_quote"],ToStringTransform())
-    close_base           <- (map["close_base"],ToStringTransform())
-    close_quote          <- (map["close_quote"],ToStringTransform())
-    open                 <- (map["key.open"], DateIntervalTransform())
-    base          <- (map["key.base"],ToStringTransform())
-    quote          <- (map["key.quote"],ToStringTransform())
-    seconds         <- (map["key.seconds"],ToStringTransform())
+  func mapping(mapper: HelpingMapper) {
+    mapper <<< id                   <-- ("id", ToStringTransform())
+    mapper <<< baseVolume          <-- ("base_volume", ToStringTransform())
+    mapper <<< quoteVolume         <-- ("quote_volume", ToStringTransform())
+    mapper <<< highBase            <-- ("high_base", ToStringTransform())
+    mapper <<< highQuote           <-- ("high_quote", ToStringTransform())
+    mapper <<< lowBase             <-- ("low_base", ToStringTransform())
+    mapper <<< lowQuote            <-- ("low_quote", ToStringTransform())
+    mapper <<< openBase            <-- ("open_base", ToStringTransform())
+    mapper <<< openQuote           <-- ("open_quote", ToStringTransform())
+    mapper <<< closeBase           <-- ("close_base", ToStringTransform())
+    mapper <<< closeQuote          <-- ("close_quote", ToStringTransform())
+    mapper <<< open                 <-- ("key.open", DateIntervalTransform())
+    mapper <<< base          <-- ("key.base", ToStringTransform())
+    mapper <<< quote          <-- ("key.quote", ToStringTransform())
+    mapper <<< seconds         <-- ("key.seconds", ToStringTransform())
   }
-  
+
   func copy(with zone: NSZone? = nil) -> Any {
-    let copy = Bucket(JSON: self.toJSON())!
-    return copy
+    let copy = Bucket.deserialize(from: self.toJSON())
+    return copy ?? Bucket()
   }
-  
+
   static func empty() -> Bucket {
-    return Bucket(JSON: [:])!
+    return Bucket()
   }
-  
+
 }
 
-enum changeScope {
+enum ChangeScope {
   case greater
   case less
   case equal
-  
+
   func icon() -> UIImage {
     switch self {
     case .greater:
@@ -78,7 +77,7 @@ enum changeScope {
       return #imageLiteral(resourceName: "ic_arrow_grey2.pdf")
     }
   }
-  
+
   func color() -> UIColor {
     switch self {
     case .greater:
@@ -92,132 +91,123 @@ enum changeScope {
 }
 
 struct BucketMatrix {
-  var price:String = ""
-  
-  var asset:[Bucket]
-  
-  var base_volume_origin:Double = 0
+  var price: String = ""
 
-  var base_volume:String = ""
-  var quote_volume:String = ""
-  
-  var high:String = ""
-  var low:String = ""
-  
-  var change:String = ""
-  var base:String = ""
-  var quote:String = ""
-  
-  var incre:changeScope = .equal
-  
-  var icon : String = ""
-  init(_ homebucket:HomeBucket) {
+  var asset: [Bucket]
+
+  var baseVolumeOrigin: Double = 0
+
+  var baseVolume: String = ""
+  var quoteVolume: String = ""
+
+  var high: String = ""
+  var low: String = ""
+
+  var change: String = ""
+  var base: String = ""
+  var quote: String = ""
+
+  var incre: ChangeScope = .equal
+
+  var icon: String = ""
+  init(_ homebucket: HomeBucket) {
     self.asset = homebucket.bucket
     self.base = homebucket.base
     self.quote = homebucket.quote
-    
 
-    
-    self.icon = AppConfiguration.SERVER_ICONS_BASE_URLString + quote.replacingOccurrences(of: ".", with: "_") + "_grey.png"
+    self.icon = AppConfiguration.ServerIconsBaseURLString + quote.replacingOccurrences(of: ".", with: "_") + "_grey.png"
 
     guard let last = self.asset.last else { return }
-    
+
     let first = self.asset.first!
 
     let flip = homebucket.base != last.base
 
-    let last_closebase_amount = flip ? Double(last.close_quote)! : Double(last.close_base)!
-    let last_closequote_amount = flip ? Double(last.close_base)! : Double(last.close_quote)!
+    let lastClosebaseAmount = flip ? Double(last.closeQuote)! : Double(last.closeBase)!
+    let lastClosequoteAmount = flip ? Double(last.closeBase)! : Double(last.closeQuote)!
 
-    let first_openbase_amount = flip ? Double(first.open_quote)! : Double(first.open_base)!
-    let first_openquote_amount = flip ? Double(first.open_base)! : Double(first.open_quote)!
+    let firstOpenbaseAmount = flip ? Double(first.openQuote)! : Double(first.openBase)!
+    let firstOpenquoteAmount = flip ? Double(first.openBase)! : Double(first.openQuote)!
 
+    let baseInfo = homebucket.baseInfo
+    let quoteInfo = homebucket.quoteInfo
 
-    let base_info = homebucket.base_info
-    let quote_info = homebucket.quote_info
+    let basePrecision = pow(10, baseInfo.precision.double)
+    let quotePrecision = pow(10, quoteInfo.precision.double)
 
-    let base_precision = pow(10, base_info.precision.double)
-    let quote_precision = pow(10, quote_info.precision.double)
+    let lastClosePrice = (lastClosebaseAmount / basePrecision) / (lastClosequoteAmount / quotePrecision)
+    let firseOpenPrice = (firstOpenbaseAmount / basePrecision) / (firstOpenquoteAmount / quotePrecision)
 
-    let lastClose_price = (last_closebase_amount / base_precision) / (last_closequote_amount / quote_precision)
-    let firseOpen_price = (first_openbase_amount / base_precision) / (first_openquote_amount / quote_precision)
+    var highPriceCollection: [Double] = []
+    var lowPriceCollection: [Double] = []
 
-    var high_price_collection:[Double] = []
-    var low_price_collection:[Double] = []
-    
     for bucket in self.asset {
-      let high_base = flip ? (Double(bucket.low_quote)! / base_precision) : (Double(bucket.high_base)! / base_precision)
-      let quote_base = flip ? (Double(bucket.low_base)! / quote_precision) : (Double(bucket.high_quote)! / quote_precision)
-      high_price_collection.append(high_base / quote_base)
-      
-      let low_base = flip ? (Double(bucket.high_quote)! / base_precision) : (Double(bucket.low_base)! / base_precision)
-      let low_quote = flip ? (Double(bucket.high_base)! / quote_precision) : (Double(bucket.low_quote)! / quote_precision)
-      low_price_collection.append(low_base / low_quote)
+      let highBase = flip ? (Double(bucket.lowQuote)! / basePrecision) : (Double(bucket.highBase)! / basePrecision)
+      let quoteBase = flip ? (Double(bucket.lowBase)! / quotePrecision) : (Double(bucket.highQuote)! / quotePrecision)
+      highPriceCollection.append(highBase / quoteBase)
+
+      let lowBase = flip ? (Double(bucket.highQuote)! / basePrecision) : (Double(bucket.lowBase)! / basePrecision)
+      let lowQuote = flip ? (Double(bucket.highBase)! / quotePrecision) : (Double(bucket.lowQuote)! / quotePrecision)
+      lowPriceCollection.append(lowBase / lowQuote)
 
     }
 
-
-    let high = high_price_collection.max()!
-    let low = low_price_collection.min()!
+    let high = highPriceCollection.max()!
+    let low = lowPriceCollection.min()!
 
     let now = Date().addingTimeInterval(-24 * 3600).timeIntervalSince1970
 
-    let base_volume = self.asset.filter({$0.open > now}).map{flip ? $0.quote_volume : $0.base_volume}.reduce(0) { (last, cur) -> Double in
+    let baseVolume = self.asset.filter({$0.open > now}).map {flip ? $0.quoteVolume : $0.baseVolume}.reduce(0) { (last, cur) -> Double in
       last + Double(cur)!
-    } / base_precision
+    } / basePrecision
 
-    let quote_volume = self.asset.filter({$0.open > now}).map{flip ? $0.base_volume: $0.quote_volume}.reduce(0) { (last, cur) -> Double in
+    let quoteVolume = self.asset.filter({$0.open > now}).map {flip ? $0.baseVolume: $0.quoteVolume}.reduce(0) { (last, cur) -> Double in
       last + Double(cur)!
-      } / quote_precision
+      } / quotePrecision
 
+    self.baseVolumeOrigin = baseVolume
+    self.baseVolume = baseVolume.suffixNumber(digitNum: 2)
+    self.quoteVolume = quoteVolume.suffixNumber(digitNum: 2)
 
-    self.base_volume_origin = base_volume
-    self.base_volume = base_volume.suffixNumber(digitNum: 2)
-    self.quote_volume = quote_volume.suffixNumber(digitNum: 2)
+    self.high = high.formatCurrency(digitNum: baseInfo.precision)
+    self.low = low.formatCurrency(digitNum: baseInfo.precision)
 
-    self.high = high.formatCurrency(digitNum: base_info.precision)
-    self.low = low.formatCurrency(digitNum: base_info.precision)
+    self.price = lastClosePrice.formatCurrency(digitNum: baseInfo.precision)
 
-    
-    self.price = lastClose_price.formatCurrency(digitNum: base_info.precision)
-
-    let change = (lastClose_price - firseOpen_price) * 100 / firseOpen_price
+    let change = (lastClosePrice - firseOpenPrice) * 100 / firseOpenPrice
     let percent = round(change * 100) / 100.0
 
-    self.change = percent.formatCurrency(digitNum: 2,usesGroupingSeparator: false)
+    self.change = percent.formatCurrency(digitNum: 2, usesGroupingSeparator: false)
 
     if percent == 0 {
       self.incre = .equal
-    }
-    else if percent < 0 {
+    } else if percent < 0 {
       self.incre = .less
-    }
-    else {
+    } else {
       self.incre = .greater
     }
-    
+
   }
-  
+
 }
 
 class DateIntervalTransform: TransformType {
   public typealias Object = Double
   public typealias JSON = String
-  
+
   public init() {}
-  
+
   open func transformFromJSON(_ value: Any?) -> Double? {
     if let time = value as? String {
       return time.dateFromISO8601?.timeIntervalSince1970
     }
-    
+
     return nil
   }
-  
+
   open func transformToJSON(_ value: Double?) -> String? {
     if let date = value {
-      let d = Date(timeIntervalSince1970: date)
-      return d.iso8601
+      return Date(timeIntervalSince1970: date).iso8601
     }
     return nil
   }
@@ -226,34 +216,45 @@ class DateIntervalTransform: TransformType {
 class ToStringTransform: TransformType {
   public typealias Object = String
   public typealias JSON = String
-  
+
   public init() {}
-  
+
   open func transformFromJSON(_ value: Any?) -> String? {
-    if let v = value as? Double {
-      return v.description
+    if let val = value as? Double {
+      return val.description
+    } else if let val = value as? String {
+      return val
+    } else if let val = value as? Int {
+      return val.description
     }
-    else if let v = value as? String {
-      return v
-    }
-    else if let v = value as? Int {
-      return v.description
-    }
-    
+
     return nil
   }
-  
+
   open func transformToJSON(_ value: String?) -> String? {
-    if let v = value {
-      return v
+    if let val = value {
+      return val
     }
     return nil
   }
 }
 
-
 extension Bucket: Equatable {
   static func ==(lhs: Bucket, rhs: Bucket) -> Bool {
-    return lhs.id == rhs.id && lhs.base_volume == rhs.base_volume && lhs.quote_volume == rhs.quote_volume && lhs.high_base == rhs.high_base && lhs.high_quote == rhs.high_quote && lhs.low_base == rhs.low_base && lhs.low_quote == rhs.low_quote && lhs.open_base == rhs.open_base && lhs.open_quote == rhs.open_quote && lhs.close_base == rhs.close_base && lhs.close_quote == rhs.close_quote && lhs.open == rhs.open && lhs.base == rhs.base && lhs.quote == rhs.quote && lhs.seconds == rhs.seconds
+    return lhs.id == rhs.id &&
+        lhs.baseVolume == rhs.baseVolume &&
+        lhs.quoteVolume == rhs.quoteVolume &&
+        lhs.highBase == rhs.highBase &&
+        lhs.highQuote == rhs.highQuote &&
+        lhs.lowBase == rhs.lowBase &&
+        lhs.lowQuote == rhs.lowQuote &&
+        lhs.openBase == rhs.openBase &&
+        lhs.openQuote == rhs.openQuote &&
+        lhs.closeBase == rhs.closeBase &&
+        lhs.closeQuote == rhs.closeQuote &&
+        lhs.open == rhs.open &&
+        lhs.base == rhs.base &&
+        lhs.quote == rhs.quote &&
+        lhs.seconds == rhs.seconds
   }
 }

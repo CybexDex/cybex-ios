@@ -10,72 +10,68 @@ import Foundation
 
 @IBDesignable
 class AddressHomeTableViewCellViewView: UIView {
-    
+
     @IBOutlet weak var sectionView: SectionCornerViewView!
-    
-    var data: Any? {
-        didSet {
-        
-        }
-    }
-    
+
     func appendView() {
-        let v = NormalCellView(frame: CGRect.zero)
-        v.index = 0
-        v.name_locali = R.string.localizable.withdraw_address.key
-        v.height(54)
-        sectionView.stackView.addArrangedSubview(v)
-        
-        let v2 = NormalCellView(frame: CGRect.zero)
-        v2.index = 1
-        v2.name_locali = R.string.localizable.transfer_account_name.key
-        v2.isShowLineView = false
-        sectionView.stackView.addArrangedSubview(v2)
+        let normalView = NormalCellView(frame: CGRect.zero)
+        normalView.index = 0
+        normalView.nameLocali = R.string.localizable.withdraw_address.key
+        normalView.height(54)
+        sectionView.stackView.addArrangedSubview(normalView)
+
+        let secondView = NormalCellView(frame: CGRect.zero)
+        secondView.index = 1
+        secondView.nameLocali = R.string.localizable.transfer_account_name.key
+        secondView.isShowLineView = false
+        sectionView.stackView.addArrangedSubview(secondView)
     }
-    
+
     fileprivate func setup() {
         updateHeight()
         appendView()
     }
-    
+
     override var intrinsicContentSize: CGSize {
-        return CGSize.init(width: UIView.noIntrinsicMetric,height: dynamicHeight())
+        return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     fileprivate func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView?.bottom ?? 0
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
-        
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
+
         insertSubview(view, at: 0)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]

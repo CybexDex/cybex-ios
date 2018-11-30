@@ -1,0 +1,9 @@
+{
+  "commitish" : "0.5.0",
+  "iOS" : [
+    {
+      "name" : "Guitar",
+      "hash" : "2b3aeb1f145fa30e288c68be3ee6c775a978011b4bead26f4eb7476c5ca5e259"
+    }
+  ]
+}

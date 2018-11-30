@@ -1,0 +1,13 @@
+{
+  "commitish" : "v6.1.1",
+  "iOS" : [
+    {
+      "name" : "IQKeyboardManager",
+      "hash" : "99b08e8a7537044fd6ff13a07241b49d328d747534c74493de748c21d1508879"
+    },
+    {
+      "name" : "IQKeyboardManagerSwift",
+      "hash" : "98f4126e7c27f6cf3cf4a1e4a99fc78f5a761d095038243af4705e645edb7268"
+    }
+  ]
+}

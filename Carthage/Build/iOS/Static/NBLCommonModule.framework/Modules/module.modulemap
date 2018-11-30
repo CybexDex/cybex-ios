@@ -1,0 +1,11 @@
+framework module NBLCommonModule {
+  umbrella header "NBLCommonModule.h"
+
+  export *
+  module * { export * }
+}
+
+module NBLCommonModule.Swift {
+    header "NBLCommonModule-Swift.h"
+    requires objc
+}

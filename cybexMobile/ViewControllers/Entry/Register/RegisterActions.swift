@@ -8,25 +8,11 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
 
-//MARK: - State
-struct RegisterState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage:String?
-    var property: RegisterPropertyState
-}
+// MARK: - State
+struct RegisterState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 
-struct RegisterPropertyState {
-}
-
-//MARK: - Action Creator
-class RegisterPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: RegisterState, _ store: Store<RegisterState>) -> Action?
-    
-    public typealias AsyncActionCreator = (
-        _ state: RegisterState,
-        _ store: Store <RegisterState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 }

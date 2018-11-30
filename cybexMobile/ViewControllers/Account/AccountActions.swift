@@ -12,30 +12,14 @@ import Moya
 import RxSwift
 import RxCocoa
 
-//MARK: - State
-struct AccountState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage:String?
-    var property: AccountPropertyState
-}
+// MARK: - State
+struct AccountState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 
-struct AccountPropertyState {
-
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 }
 
 struct AccountViewModel {
   var leftImage: UIImage?
   var name: String = ""
-}
-
-//MARK: - Action Creator
-class AccountPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: AccountState, _ store: Store<AccountState>) -> Action?
-    
-    public typealias AsyncActionCreator = (
-        _ state: AccountState,
-        _ store: Store <AccountState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
 }

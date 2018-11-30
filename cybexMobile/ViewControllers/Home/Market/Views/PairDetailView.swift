@@ -21,21 +21,20 @@ class PairDetailView: UIView {
     @IBOutlet weak var openLabel: UILabel!
     @IBOutlet weak var closeLabel: UILabel!
     @IBOutlet weak var detailDateView: PairDetailDateViewView!
-    
-    var base_name : String = ""
-    var quote_name : String = ""
-    
+
+    var baseName: String = ""
+    var quoteName: String = ""
+
     var data: Any? {
         didSet {
-            if let ticker = data as? Ticker  {
+            if let ticker = data as? Ticker {
                 refreshViewWith(ticker)
-            }
-            else if let markets = data as? CBKLineModel  {
+            } else if let markets = data as? CBKLineModel {
                 refreshViewWith(markets)
             }
         }
     }
-    
+
     func refreshViewWith(_ ticker: Ticker) {
         detailDateView.isHidden = true
         self.openLabel.textColor = UIColor.init(hexString: "#656D88")!.withAlphaComponent(0.5)
@@ -46,10 +45,10 @@ class PairDetailView: UIView {
         self.quoteVolume.textColor = UIColor.init(hexString: "#656D88")!.withAlphaComponent(0.5)
         self.openLabel.text = ""
         self.closeLabel.text = ""
-        
+
         if ticker.latest == "0" {
-            self.baseVolume.text = self.base_name + ": -"
-            self.quoteVolume.text = self.quote_name + ":-"
+            self.baseVolume.text = self.baseName + ": -"
+            self.quoteVolume.text = self.quoteName + ":-"
             self.highLabel.text = "High: -"
             self.lowLabel.text = "Low: -"
             self.price.text = "-"
@@ -58,43 +57,33 @@ class PairDetailView: UIView {
             self.bulking.textColor = #colorLiteral(red: 0.9999966025, green: 0.9999999404, blue: 0.9999999404, alpha: 0.5)
             return
         }
-        
-        guard let base_info = app_data.assetInfo[ticker.base], let _ = app_data.assetInfo[ticker.quote] else {
+
+        guard let baseInfo = appData.assetInfo[ticker.base], let _ = appData.assetInfo[ticker.quote] else {
             return
         }
-        
+
         DispatchQueue.global().async {
-            
             DispatchQueue.main.async {
-                self.baseVolume.text = self.base_name + ": " + ticker.base_volume.suffixNumber(digitNum: 2)
-                self.quoteVolume.text = self.quote_name + ": " + ticker.quote_volume.suffixNumber(digitNum: 2)
-                
-                
-                
-//                detailView.highLabel.text = "High: " + last_model.high.formatCurrency(digitNum: base_info.precision)
-//                detailView.lowLabel.text = "Low: " + last_model.low.formatCurrency(digitNum: base_info.precision)
-                
-                
-//                self.highLabel.text = "High: " + ticker.highest_bid.formatCurrency(digitNum: base_info.precision)
-//                self.lowLabel.text = "Low: " + ticker.lowest_ask.formatCurrency(digitNum: base_info.precision)
-                
-                self.price.text = ticker.latest.formatCurrency(digitNum: base_info.precision)
-                self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percent_change.formatCurrency(digitNum: 2) + "%"
+                self.baseVolume.text = self.baseName + ": " + ticker.baseVolume.suffixNumber(digitNum: 2)
+                self.quoteVolume.text = self.quoteName + ": " + ticker.quoteVolume.suffixNumber(digitNum: 2)
+
+                self.price.text = ticker.latest.formatCurrency(digitNum: baseInfo.precision)
+                self.bulking.text = (ticker.incre == .greater ? "+" : "") + ticker.percentChange.formatCurrency(digitNum: 2) + "%"
                 self.bulking.textColor = ticker.incre.color()
                 self.bulkingIcon.image = ticker.incre.icon()
             }
         }
     }
-    
+
     func refreshViewWith(_ model: CBKLineModel) {
-        detailDateView.base_name = self.base_name
-        detailDateView.quote_name = self.quote_name
+        detailDateView.baseName = self.baseName
+        detailDateView.quoteName = self.quoteName
         detailDateView.isHidden = false
-        
+
 //        var lineModels = CBConfiguration.sharedConfiguration.dataSource.drawKLineModels
 
         detailDateView.adapterModelToPairDetailDateViewView(model)
-        
+
 //        self.openLabel.textColor = (ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.dark)
 //        self.closeLabel.textColor = (ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.dark)
 //        self.highLabel.textColor = (ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.dark)
@@ -114,52 +103,54 @@ class PairDetailView: UIView {
 //        
 //        self.quoteVolume.text = quote_volume_pair[0] + ":" + model.towardsVolume.suffixNumber(digitNum: 2)
     }
-    
+
     fileprivate func setup() {
-        
+
     }
-    
+
     override var intrinsicContentSize: CGSize {
-        return CGSize.init(width: UIView.noIntrinsicMetric,height: dynamicHeight())
+        return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
-    
+
     fileprivate func updateHeight() {
         layoutIfNeeded()
         self.height = dynamicHeight()
         invalidateIntrinsicContentSize()
     }
-    
+
     fileprivate func dynamicHeight() -> CGFloat {
         let lastView = self.subviews.last?.subviews.last
         return lastView!.bottom
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         layoutIfNeeded()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadViewFromNib()
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadViewFromNib()
         setup()
     }
-    
+
     fileprivate func loadViewFromNib() {
         let bundle = Bundle(for: type(of: self))
         let nibName = String(describing: type(of: self))
         let nib = UINib.init(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
-        
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+            return
+        }
+
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-    
+
 }

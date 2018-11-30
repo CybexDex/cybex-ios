@@ -12,74 +12,74 @@ import RxCocoa
 import ReSwift
 
 class WithdrawAndDespoitRecordViewController: BaseViewController {
-    
+
     var coordinator: (WithdrawAndDespoitRecordCoordinatorProtocol & WithdrawAndDespoitRecordStateManagerProtocol)?
     @IBOutlet weak var headerView: RecordHeaderView!
-    
-    var selectedIndex: RecordChooseType = RecordChooseType.Asset
+
+    var selectedIndex: RecordChooseType = RecordChooseType.asset
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupData()
         setupUI()
         setupEvent()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.endLoading()
     }
-    
+
     override func refreshViewController() {
-        
+
     }
-    
+
     func setupUI() {
-        self.localized_text = R.string.localizable.record_all.key.localizedContainer()
+        self.localizedText = R.string.localizable.record_all.key.localizedContainer()
     }
-    
+
     func setupData() {
-        
+
     }
-    
+
     func setupEvent() {
-        
+
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.coordinator?.setupChildrenVC(segue)
     }
-    
+
     override func configureObserveState() {
         self.coordinator?.state.pageState.asObservable().distinctUntilChanged().subscribe(onNext: {[weak self] (state) in
             guard let `self` = self else { return }
-            
+
             self.endLoading()
-            
+
             switch state {
             case .initial:
                 self.coordinator?.switchPageState(PageState.refresh(type: PageRefreshType.initial))
-                
+
             case .loading(let reason):
                 if reason == .initialRefresh {
 //                    self.startLoading()
                 }
-                
+
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
-                
-            case .loadMore(let page):
+
+            case .loadMore:
                 self.coordinator?.switchPageState(.loading(reason: PageLoadReason.manualLoadMore))
-                
+
             case .noMore:
                 //                self.stopInfiniteScrolling(self.tableView, haveNoMore: true)
                 break
-                
+
             case .noData:
                 //                self.view.showNoData(<#title#>, icon: <#imageName#>)
                 break
-                
-            case .normal(let reason):
+
+            case .normal:
                 //                self.view.hiddenNoData()
                 //
                 //                if reason == PageLoadReason.manualLoadMore {
@@ -89,10 +89,10 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
                 //                    self.stopPullRefresh(self.tableView)
                 //                }
                 break
-                
-            case .error(let error, let reason):
+
+            case .error(let error, _):
                 self.showToastBox(false, message: error.localizedDescription)
-                
+
                 //                if reason == PageLoadReason.manualLoadMore {
                 //                    self.stopInfiniteScrolling(self.tableView, haveNoMore: false)
                 //                }
@@ -104,7 +104,7 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
     }
 }
 
-//MARK: - View Event
+// MARK: - View Event
 
 extension WithdrawAndDespoitRecordViewController {
     @objc func presentChooseVC(_ data: [String: Any]) {
@@ -112,14 +112,14 @@ extension WithdrawAndDespoitRecordViewController {
             self.present(vc, animated: true) {
                 vc.view.superview?.cornerRadius = 2
                 vc.view.cornerRadius = 2
-                
+
             }
         }
     }
-    
-    @objc func RecordContainerViewDidClicked(_ data: [String: Any]) {
+
+    @objc func recordContainerViewDidClicked(_ data: [String: Any]) {
         guard let index = data["index"] as? Int, let chooseView = data["self"] as? RecordChooseView else { return }
-        let vc = R.storyboard.comprehensive.recordChooseViewController()!
+        guard let vc = R.storyboard.comprehensive.recordChooseViewController() else { return }
         vc.preferredContentSize = CGSize(width: chooseView.containerView.width, height: index == 1 ? 165 : 122)
         vc.modalPresentationStyle = .popover
         vc.popoverPresentationController?.sourceView = chooseView.containerView
@@ -127,10 +127,12 @@ extension WithdrawAndDespoitRecordViewController {
         vc.popoverPresentationController?.delegate = self
         vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
         vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.white.hexString(true)]
-        vc.typeIndex = index == 1 ? .Asset : .FoudType
+        vc.typeIndex = index == 1 ? .asset : .foudType
         self.selectedIndex = vc.typeIndex
         vc.delegate = self
-        vc.coordinator = RecordChooseCoordinator(rootVC:self.navigationController as! BaseNavigationController)
+        if let navigationController = self.navigationController as? BaseNavigationController {
+            vc.coordinator = RecordChooseCoordinator(rootVC: navigationController)
+        }
         self.present(vc, animated: true) {
             self.view.superview?.cornerRadius = 2
         }
@@ -138,17 +140,16 @@ extension WithdrawAndDespoitRecordViewController {
 }
 extension WithdrawAndDespoitRecordViewController: UIPopoverPresentationControllerDelegate {
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        if self.selectedIndex == .Asset {
+        if self.selectedIndex == .asset {
             self.headerView.assetInfoView.contentLabel.textColor = UIColor.steel
             self.headerView.assetInfoView.stateImage.image = R.image.ic2()
-        }
-        else {
+        } else {
             self.headerView.typeInfoView.contentLabel.textColor = UIColor.steel
             self.headerView.typeInfoView.stateImage.image = R.image.ic2()
         }
         return true
     }
-    
+
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
     }
@@ -156,22 +157,21 @@ extension WithdrawAndDespoitRecordViewController: UIPopoverPresentationControlle
 
 extension WithdrawAndDespoitRecordViewController: RecordChooseViewControllerDelegate {
     func returnSelectedRow(_ sender: RecordChooseViewController, info: String) {
-        
+
         switch sender.typeIndex {
-        case .Asset:
+        case .asset:
             self.headerView.assetInfoView.contentLabel.text = info.filterJade
             self.headerView.assetInfoView.contentLabel.textColor = UIColor.steel
             self.headerView.assetInfoView.stateImage.image = R.image.ic2()
-            self.coordinator?.childrenFetchData(info, index: RecordChooseType.Asset)
+            self.coordinator?.childrenFetchData(info, index: RecordChooseType.asset)
             break
-        case .FoudType:
+        case .foudType:
             self.headerView.typeInfoView.contentLabel.text = info.filterJade
             self.headerView.typeInfoView.contentLabel.textColor = UIColor.steel
             self.headerView.typeInfoView.stateImage.image = R.image.ic2()
-            self.coordinator?.childrenFetchData(info, index: RecordChooseType.FoudType)
+            self.coordinator?.childrenFetchData(info, index: RecordChooseType.foudType)
             break
-        default:
-            break
+        default:break
         }
         sender.dismiss(animated: true, completion: nil)
     }

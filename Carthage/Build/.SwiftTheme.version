@@ -1,0 +1,9 @@
+{
+  "commitish" : "0.4.3",
+  "iOS" : [
+    {
+      "name" : "SwiftTheme",
+      "hash" : "19118309263be1f23130e31e97f1c18b05440dd82da6b97e56aeff4377fe0c08"
+    }
+  ]
+}

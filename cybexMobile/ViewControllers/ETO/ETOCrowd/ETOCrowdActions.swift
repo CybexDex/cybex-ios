@@ -20,7 +20,7 @@ enum ETOValidStatus: Int {
     case lessThanLeastLimit
     case precisionError
     case feeNotEnough
-    
+
     func desc() -> String {
         switch self {
         case .ok, .notValid:
@@ -33,7 +33,7 @@ enum ETOValidStatus: Int {
     }
 }
 
-//MARK: - State
+// MARK: - State
 struct ETOCrowdState: BaseState {
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 
@@ -44,12 +44,12 @@ struct ETOCrowdState: BaseState {
     var validStatus: BehaviorRelay<ETOValidStatus> = BehaviorRelay(value: .notValid)
 }
 
-//MARK: - Action
+// MARK: - Action
 
-struct fetchCurrentTokenCountAction: Action {
+struct FetchCurrentTokenCountAction: Action {
     var userModel: ETOUserModel
 }
 
-struct changeETOValidStatusAction: Action {
+struct ChangeETOValidStatusAction: Action {
     var status: ETOValidStatus
 }

@@ -10,9 +10,9 @@ import Foundation
 
 class SettingCell: BaseTableViewCell {
   override func setup(_ data: Any?) {
-   
+
   }
-  
+
   override func awakeFromNib() {
     super.awakeFromNib()
   }

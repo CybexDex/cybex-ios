@@ -15,32 +15,32 @@ import Repeat
 class ETODetailViewController: BaseViewController {
 
 	var coordinator: (ETODetailCoordinatorProtocol & ETODetailStateManagerProtocol)?
-    private(set) var context:ETODetailContext?
-    
+    private(set) var context: ETODetailContext?
+
     @IBOutlet weak var contentView: ETODetailView!
 
     var timerRepeater: Repeater?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupData()
         setupUI()
         setupEvent()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.startRepeatAction()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.timerRepeater!.pause()
         self.timerRepeater = nil
     }
-    
+
     func startRepeatAction() {
-        self.timerRepeater = Repeater.every(.seconds(1), { [weak self](timer) in
+        self.timerRepeater = Repeater.every(.seconds(1), { [weak self](_) in
             main {
                 guard let `self` = self else { return }
                 self.coordinator?.updateETOProjectDetailAction()
@@ -48,16 +48,16 @@ class ETODetailViewController: BaseViewController {
             }
         })
     }
-    
+
     override func refreshViewController() {
-        
+
     }
-    
+
     func setupUI() {
-        self.localized_text = R.string.localizable.eto_project_detail_title.key.localizedContainer()
+        self.localizedText = R.string.localizable.eto_project_detail_title.key.localizedContainer()
 //        configRightNavButton(R.image.ic_share_24_px())
     }
-    
+
     override func rightAction(_ sender: UIButton) {
         self.coordinator?.openShare()
     }
@@ -67,20 +67,20 @@ class ETODetailViewController: BaseViewController {
         self.coordinator?.fetchData()
         self.coordinator?.fetchUserState()
     }
-    
+
     func setupEvent() {
-        
+
     }
-    
+
     override func configureObserveState() {
         self.coordinator?.state.context.asObservable().subscribe(onNext: { [weak self] (context) in
             guard let `self` = self else { return }
-            
+
             if let context = context as? ETODetailContext {
                 self.context = context
             }
         }).disposed(by: disposeBag)
-        
+
         coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self] (state) in
             guard let `self` = self else { return }
             if case let .error(error, _) = state {
@@ -88,7 +88,7 @@ class ETODetailViewController: BaseViewController {
                 self.showToastBox(false, message: error.localizedDescription)
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
+
         coordinator?.state.data.asObservable().subscribe(onNext: { [weak self] data in
             guard let `self` = self else { return }
             self.endLoading()
@@ -98,7 +98,7 @@ class ETODetailViewController: BaseViewController {
                 self.title = model.name + " ETO"
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
+
         coordinator?.state.refreshData.asObservable().subscribe(onNext: { [weak self] data in
             guard let `self` = self else { return }
             main {
@@ -108,11 +108,11 @@ class ETODetailViewController: BaseViewController {
                 }
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
+
         coordinator?.state.userState.asObservable().subscribe(onNext: { [weak self]data in
             guard let `self` = self else { return }
             main {
-                if let _ = data  {
+                if let _ = data {
                     self.coordinator?.fetchUpState()
                 }
             }
@@ -123,53 +123,52 @@ class ETODetailViewController: BaseViewController {
 extension ETODetailViewController {
     @objc func clickCellView(_ data: [String: Any]) {
         if let url = data["data"] as? String {
-            self.coordinator?.openWebWithUrl(url,type: CybexWebViewController.web_type.whitelist)
+            self.coordinator?.openWebWithUrl(url, type: CybexWebViewController.WebType.whitelist)
         }
     }
-    
-    @objc func crowdPage(_ data : [String:Any]) {
+
+    @objc func crowdPage(_ data: [String: Any]) {
         self.coordinator?.openETOCrowdVC()
     }
-    
-    @objc func loginPage(_ data: [String:Any]) {
-        app_coodinator.showLogin()
+
+    @objc func loginPage(_ data: [String: Any]) {
+        appCoodinator.showLogin()
     }
-    
-    @objc func unset(_ data:[String:Any]) {
-        
+
+    @objc func unset(_ data: [String: Any]) {
+
     }
-   
-    @objc func inputCode(_ data: [String:Any]) {
-        self.showPasswordBox(R.string.localizable.eto_invite_code_title.key.localized(),middleType: .time)
+
+    @objc func inputCode(_ data: [String: Any]) {
+        self.showPasswordBox(R.string.localizable.eto_invite_code_title.key.localized(), middleType: .time)
     }
-    
-    @objc func icoapePage(_ data: [String:Any]) {
-        self.coordinator?.openWebWithUrl("https://icoape.com/",type: CybexWebViewController.web_type.kyc)
+
+    @objc func icoapePage(_ data: [String: Any]) {
+        self.coordinator?.openWebWithUrl("https://icoape.com/", type: CybexWebViewController.WebType.kyc)
     }
-    
+
     override func returnInviteCode(_ sender: String) {
-        self.coordinator?.checkInviteCode(code: sender, callback: { (success,errorDescription) in
+        self.coordinator?.checkInviteCode(code: sender, callback: { (success, errorDescription) in
             if success == true {
                 ShowToastManager.shared.hide(0)
                 self.showConfirmImage(R.image.icCheckCircleGreen.name, title: R.string.localizable.eto_appointment_success.key.localized(), content: "")
-            }
-            else {
+            } else {
                 ShowToastManager.shared.data = errorDescription
             }
         })
     }
-    
-    @objc func labelClick(_ sender: [String:Any]) {
+
+    @objc func labelClick(_ sender: [String: Any]) {
         if let url = sender["clicklabel"] as? String {
-            self.coordinator?.openWebWithUrl(url, type: CybexWebViewController.web_type.project_website)
+            self.coordinator?.openWebWithUrl(url, type: CybexWebViewController.WebType.projectWebsite)
         }
     }
-    
-    @objc func showToastError(_ sender: [String:Any]) {
+
+    @objc func showToastError(_ sender: [String: Any]) {
         self.showToastBox(false, message: R.string.localizable.eto_detail_user_agreement_error.key.localized())
     }
-    
-    @objc func showAgreement(_ sender: [String:Any]) {
-        self.coordinator?.openWebWithUrl("", type: CybexWebViewController.web_type.agreement)
+
+    @objc func showAgreement(_ sender: [String: Any]) {
+        self.coordinator?.openWebWithUrl("", type: CybexWebViewController.WebType.agreement)
     }
 }

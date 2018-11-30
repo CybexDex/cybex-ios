@@ -11,14 +11,9 @@ import ReSwift
 import RxCocoa
 import SwiftyJSON
 
-//MARK: - State
+// MARK: - State
 struct WithdrawAndDespoitRecordState: BaseState {
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
-    
-    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
-}
 
-//MARK: - Action
-struct WithdrawAndDespoitRecordFetchedAction: Action {
-    var data:JSON
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 }

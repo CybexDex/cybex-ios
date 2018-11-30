@@ -1,0 +1,2658 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": null,
+      "symbol": "ChatService",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 13,
+      "symbol": "ChatService",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 14,
+      "symbol": "ChatService.host",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 15,
+      "symbol": "ChatService.socket",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 17,
+      "symbol": "ChatService.provider",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 18,
+      "symbol": "ChatService.timer",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 20,
+      "symbol": "ChatService.messageReceived",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 22,
+      "symbol": "ChatService.init(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 33,
+      "symbol": "ChatService.connect(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 39,
+      "symbol": "ChatService.disconnect()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 43,
+      "symbol": "ChatService.reconnect()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 48,
+      "symbol": "ChatService.send(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 58,
+      "symbol": "ChatService.checkNetworConnected()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 66,
+      "symbol": "ChatService.openHeart()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 78,
+      "symbol": "ChatService.webSocketDidOpen(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 82,
+      "symbol": "ChatService.webSocket(_:didFailWithError:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 85,
+      "symbol": "ChatService.webSocket(_:didCloseWithCode:reason:wasClean:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 89,
+      "symbol": "ChatService.webSocket(_:didReceivePingWith:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 93,
+      "symbol": "ChatService.webSocket(_:didReceivePong:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatService.swift",
+      "line": 97,
+      "symbol": "ChatService.webSocket(_:didReceiveMessageWith:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 12,
+      "symbol": "ChatServiceProvider",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 13,
+      "symbol": "ChatServiceProvider.SendType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 14,
+      "symbol": "ChatServiceProvider.SendType.login",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 15,
+      "symbol": "ChatServiceProvider.SendType.message",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 18,
+      "symbol": "ChatServiceProvider.ResponseType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 19,
+      "symbol": "ChatServiceProvider.ResponseType.response",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 20,
+      "symbol": "ChatServiceProvider.ResponseType.message",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 26,
+      "symbol": "ChatServiceProvider.online",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 28,
+      "symbol": "ChatServiceProvider.init(_:channel:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 34,
+      "symbol": "ChatServiceProvider.switchChanel(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 40,
+      "symbol": "ChatServiceProvider.login(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 54,
+      "symbol": "ChatServiceProvider.message(_:msg:sign:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 70,
+      "symbol": "ChatServiceProvider.parse(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/ChatServiceProvider.swift",
+      "line": 89,
+      "symbol": "ChatServiceProvider.updateOnline(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/ChatOriginModel.swift",
+      "line": 12,
+      "symbol": "ChatMessage",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/ChatOriginModel.swift",
+      "line": 13,
+      "symbol": "ChatMessage.userName",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/ChatOriginModel.swift",
+      "line": 14,
+      "symbol": "ChatMessage.message",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/ChatOriginModel.swift",
+      "line": 15,
+      "symbol": "ChatMessage.deviceID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/ChatOriginModel.swift",
+      "line": 16,
+      "symbol": "ChatMessage.msgID",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/ChatOriginModel.swift",
+      "line": 17,
+      "symbol": "ChatMessage.timestamp",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/ChatOriginModel.swift",
+      "line": 18,
+      "symbol": "ChatMessage.signed",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/ChatOriginModel.swift",
+      "line": 20,
+      "symbol": "ChatMessage.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/ChatOriginModel.swift",
+      "line": 24,
+      "symbol": "ChatMessage.mapping(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": null,
+      "symbol": "NBLConvertable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": null,
+      "symbol": "NBLModel",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": null,
+      "symbol": "NBLModel",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": 12,
+      "symbol": "NBLModel",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": 13,
+      "symbol": "NBLModel.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": 14,
+      "symbol": "NBLModel.mapping(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": 18,
+      "symbol": "NBLModel.mapping(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": 21,
+      "symbol": "NBLConvertable",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": 25,
+      "symbol": "NBLConvertable.toData()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": 31,
+      "symbol": "NBLConvertable.toDictionary()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": 37,
+      "symbol": "NBLConvertable.toJSONString()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": 41,
+      "symbol": "NBLConvertable.toJSON()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": 83,
+      "symbol": "Array.toJSON()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/ChatService/Model/NBLModel.swift",
+      "line": 89,
+      "symbol": "Array.toJSONString()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController+Keyboard.swift",
+      "line": 31,
+      "symbol": "MessagesViewController.addKeyboardObservers()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController+Keyboard.swift",
+      "line": 37,
+      "symbol": "MessagesViewController.removeKeyboardObservers()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController+Keyboard.swift",
+      "line": 97,
+      "symbol": "MessagesViewController.adjustScrollViewTopInset()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController+Keyboard.swift",
+      "line": 123,
+      "symbol": "MessagesViewController.requiredInitialScrollViewBottomInset()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController+Menu.swift",
+      "line": 31,
+      "symbol": "MessagesViewController.addMenuControllerObservers()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController+Menu.swift",
+      "line": 35,
+      "symbol": "MessagesViewController.removeMenuControllerObservers()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 50,
+      "symbol": "MessagesViewController.canBecomeFirstResponder",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 54,
+      "symbol": "MessagesViewController.inputAccessoryView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 58,
+      "symbol": "MessagesViewController.shouldAutorotate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 75,
+      "symbol": "MessagesViewController.isMessagesControllerBeingDismissed",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 77,
+      "symbol": "MessagesViewController.selectedIndexPathForMenu",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 79,
+      "symbol": "MessagesViewController.messageCollectionViewBottomInset",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 88,
+      "symbol": "MessagesViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 98,
+      "symbol": "MessagesViewController.viewDidAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 103,
+      "symbol": "MessagesViewController.viewWillDisappear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 108,
+      "symbol": "MessagesViewController.viewDidDisappear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 113,
+      "symbol": "MessagesViewController.viewDidLayoutSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 125,
+      "symbol": "MessagesViewController.deinit",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 169,
+      "symbol": "MessagesViewController.numberOfSections(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 176,
+      "symbol": "MessagesViewController.collectionView(_:numberOfItemsInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 215,
+      "symbol": "MessagesViewController.collectionView(_:viewForSupplementaryElementOfKind:at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 237,
+      "symbol": "MessagesViewController.collectionView(_:layout:sizeForItemAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 242,
+      "symbol": "MessagesViewController.collectionView(_:layout:referenceSizeForHeaderInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 253,
+      "symbol": "MessagesViewController.collectionView(_:layout:referenceSizeForFooterInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 263,
+      "symbol": "MessagesViewController.collectionView(_:shouldShowMenuForItemAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 276,
+      "symbol": "MessagesViewController.collectionView(_:canPerformAction:forItemAt:withSender:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Controllers/MessagesViewController.swift",
+      "line": 280,
+      "symbol": "MessagesViewController.collectionView(_:performAction:forItemAt:withSender:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/Bundle+Extensions.swift",
+      "line": 29,
+      "symbol": "Bundle.messageKitAssetBundle()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/CGRect+Extensions.swift",
+      "line": 29,
+      "symbol": "CGRect.init(_:_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/NSAttributedString+Extensions.swift",
+      "line": 29,
+      "symbol": "NSAttributedString.width(considering:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/UIColor+Extensions.swift",
+      "line": 29,
+      "symbol": "UIColor.incomingGray",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/UIColor+Extensions.swift",
+      "line": 31,
+      "symbol": "UIColor.outgoingGreen",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/UIColor+Extensions.swift",
+      "line": 33,
+      "symbol": "UIColor.inputBarGray",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/UIColor+Extensions.swift",
+      "line": 35,
+      "symbol": "UIColor.playButtonLightGray",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/UIColor+Extensions.swift",
+      "line": 37,
+      "symbol": "UIColor.sendButtonBlue",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/UIEdgeInsets+Extensions.swift",
+      "line": 29,
+      "symbol": "UIEdgeInsets.vertical",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/UIEdgeInsets+Extensions.swift",
+      "line": 33,
+      "symbol": "UIEdgeInsets.horizontal",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/UIView+Extensions.swift",
+      "line": 29,
+      "symbol": "UIView.fillSuperview()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/UIView+Extensions.swift",
+      "line": 44,
+      "symbol": "UIView.centerInSuperview()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/UIView+Extensions.swift",
+      "line": 56,
+      "symbol": "UIView.constraint(equalTo:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Extensions/UIView+Extensions.swift",
+      "line": 68,
+      "symbol": "UIView.addConstraints(_:left:bottom:right:topConstant:leftConstant:bottomConstant:rightConstant:widthConstant:heightConstant:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/CellSizeCalculator.swift",
+      "line": 48,
+      "symbol": "CellSizeCalculator.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/LocationMessageSizeCalculator.swift",
+      "line": 27,
+      "symbol": "LocationMessageSizeCalculator",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/LocationMessageSizeCalculator.swift",
+      "line": 29,
+      "symbol": "LocationMessageSizeCalculator.messageContainerSize(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MediaMessageSizeCalculator.swift",
+      "line": 27,
+      "symbol": "MediaMessageSizeCalculator",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MediaMessageSizeCalculator.swift",
+      "line": 29,
+      "symbol": "MediaMessageSizeCalculator.messageContainerSize(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 27,
+      "symbol": "MessageSizeCalculator",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 29,
+      "symbol": "MessageSizeCalculator.init(layout:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 35,
+      "symbol": "MessageSizeCalculator.incomingAvatarSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 36,
+      "symbol": "MessageSizeCalculator.outgoingAvatarSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 38,
+      "symbol": "MessageSizeCalculator.incomingAvatarPosition",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 39,
+      "symbol": "MessageSizeCalculator.outgoingAvatarPosition",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 41,
+      "symbol": "MessageSizeCalculator.incomingMessagePadding",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 42,
+      "symbol": "MessageSizeCalculator.outgoingMessagePadding",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 44,
+      "symbol": "MessageSizeCalculator.incomingCellTopLabelAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 45,
+      "symbol": "MessageSizeCalculator.outgoingCellTopLabelAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 47,
+      "symbol": "MessageSizeCalculator.incomingMessageTopLabelAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 48,
+      "symbol": "MessageSizeCalculator.outgoingMessageTopLabelAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 50,
+      "symbol": "MessageSizeCalculator.incomingMessageBottomLabelAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 51,
+      "symbol": "MessageSizeCalculator.outgoingMessageBottomLabelAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 53,
+      "symbol": "MessageSizeCalculator.incomingAccessoryViewSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 54,
+      "symbol": "MessageSizeCalculator.outgoingAccessoryViewSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 56,
+      "symbol": "MessageSizeCalculator.incomingAccessoryViewPadding",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 57,
+      "symbol": "MessageSizeCalculator.outgoingAccessoryViewPadding",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 89,
+      "symbol": "MessageSizeCalculator.cellContentHeight(for:at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 135,
+      "symbol": "MessageSizeCalculator.avatarPosition(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 149,
+      "symbol": "MessageSizeCalculator.avatarSize(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 157,
+      "symbol": "MessageSizeCalculator.cellTopLabelSize(for:at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 164,
+      "symbol": "MessageSizeCalculator.cellTopLabelAlignment(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 172,
+      "symbol": "MessageSizeCalculator.messageTopLabelSize(for:at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 179,
+      "symbol": "MessageSizeCalculator.messageTopLabelAlignment(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 187,
+      "symbol": "MessageSizeCalculator.messageBottomLabelSize(for:at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 194,
+      "symbol": "MessageSizeCalculator.messageBottomLabelAlignment(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 202,
+      "symbol": "MessageSizeCalculator.accessoryViewSize(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 208,
+      "symbol": "MessageSizeCalculator.accessoryViewPadding(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 216,
+      "symbol": "MessageSizeCalculator.messageContainerPadding(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 222,
+      "symbol": "MessageSizeCalculator.messageContainerSize(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 227,
+      "symbol": "MessageSizeCalculator.messageContainerMaxWidth(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 237,
+      "symbol": "MessageSizeCalculator.messagesLayout",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessageSizeCalculator.swift",
+      "line": 244,
+      "symbol": "MessageSizeCalculator.labelSize(for:considering:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 32,
+      "symbol": "MessagesCollectionViewFlowLayout.layoutAttributesClass",
+      "symbol_kind": "source.lang.swift.decl.var.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 60,
+      "symbol": "MessagesCollectionViewFlowLayout.itemWidth",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 67,
+      "symbol": "MessagesCollectionViewFlowLayout.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 74,
+      "symbol": "MessagesCollectionViewFlowLayout.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 81,
+      "symbol": "MessagesCollectionViewFlowLayout.deinit",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 97,
+      "symbol": "MessagesCollectionViewFlowLayout.layoutAttributesForElements(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 108,
+      "symbol": "MessagesCollectionViewFlowLayout.layoutAttributesForItem(at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 121,
+      "symbol": "MessagesCollectionViewFlowLayout.shouldInvalidateLayout(forBoundsChange:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 125,
+      "symbol": "MessagesCollectionViewFlowLayout.invalidationContext(forBoundsChange:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 139,
+      "symbol": "MessagesCollectionViewFlowLayout.textMessageSizeCalculator",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 140,
+      "symbol": "MessagesCollectionViewFlowLayout.attributedTextMessageSizeCalculator",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 141,
+      "symbol": "MessagesCollectionViewFlowLayout.emojiMessageSizeCalculator",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 146,
+      "symbol": "MessagesCollectionViewFlowLayout.photoMessageSizeCalculator",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 147,
+      "symbol": "MessagesCollectionViewFlowLayout.videoMessageSizeCalculator",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 148,
+      "symbol": "MessagesCollectionViewFlowLayout.locationMessageSizeCalculator",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewFlowLayout.swift",
+      "line": 172,
+      "symbol": "MessagesCollectionViewFlowLayout.sizeForItem(at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 32,
+      "symbol": "MessagesCollectionViewLayoutAttributes.avatarSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 33,
+      "symbol": "MessagesCollectionViewLayoutAttributes.avatarPosition",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 35,
+      "symbol": "MessagesCollectionViewLayoutAttributes.messageContainerSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 36,
+      "symbol": "MessagesCollectionViewLayoutAttributes.messageContainerPadding",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 37,
+      "symbol": "MessagesCollectionViewLayoutAttributes.messageLabelFont",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 38,
+      "symbol": "MessagesCollectionViewLayoutAttributes.messageLabelInsets",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 40,
+      "symbol": "MessagesCollectionViewLayoutAttributes.cellTopLabelAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 41,
+      "symbol": "MessagesCollectionViewLayoutAttributes.cellTopLabelSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 43,
+      "symbol": "MessagesCollectionViewLayoutAttributes.messageTopLabelAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 44,
+      "symbol": "MessagesCollectionViewLayoutAttributes.messageTopLabelSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 46,
+      "symbol": "MessagesCollectionViewLayoutAttributes.messageBottomLabelAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 47,
+      "symbol": "MessagesCollectionViewLayoutAttributes.messageBottomLabelSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 49,
+      "symbol": "MessagesCollectionViewLayoutAttributes.accessoryViewSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 50,
+      "symbol": "MessagesCollectionViewLayoutAttributes.accessoryViewPadding",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 54,
+      "symbol": "MessagesCollectionViewLayoutAttributes.copy(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/MessagesCollectionViewLayoutAttributes.swift",
+      "line": 75,
+      "symbol": "MessagesCollectionViewLayoutAttributes.isEqual(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/TextMessageSizeCalculator.swift",
+      "line": 27,
+      "symbol": "TextMessageSizeCalculator",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/TextMessageSizeCalculator.swift",
+      "line": 29,
+      "symbol": "TextMessageSizeCalculator.incomingMessageLabelInsets",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/TextMessageSizeCalculator.swift",
+      "line": 30,
+      "symbol": "TextMessageSizeCalculator.outgoingMessageLabelInsets",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/TextMessageSizeCalculator.swift",
+      "line": 32,
+      "symbol": "TextMessageSizeCalculator.messageLabelFont",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/TextMessageSizeCalculator.swift",
+      "line": 34,
+      "symbol": "TextMessageSizeCalculator.messageLabelInsets(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/TextMessageSizeCalculator.swift",
+      "line": 40,
+      "symbol": "TextMessageSizeCalculator.messageContainerMaxWidth(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Layout/TextMessageSizeCalculator.swift",
+      "line": 46,
+      "symbol": "TextMessageSizeCalculator.messageContainerSize(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Controls/InputBarButtonItem.swift",
+      "line": 41,
+      "symbol": "InputBarButtonItem.Spacing.fixed(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Controls/InputBarButtonItem.swift",
+      "line": 42,
+      "symbol": "InputBarButtonItem.Spacing.flexible",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Controls/InputBarButtonItem.swift",
+      "line": 43,
+      "symbol": "InputBarButtonItem.Spacing.none",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Controls/InputBarButtonItem.swift",
+      "line": 46,
+      "symbol": "InputBarButtonItem.InputBarButtonItemAction",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Controls/InputBarButtonItem.swift",
+      "line": 75,
+      "symbol": "InputBarButtonItem.intrinsicContentSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Controls/InputBarButtonItem.swift",
+      "line": 150,
+      "symbol": "InputBarButtonItem.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Controls/InputBarButtonItem.swift",
+      "line": 154,
+      "symbol": "InputBarButtonItem.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Controls/InputBarButtonItem.swift",
+      "line": 159,
+      "symbol": "InputBarButtonItem.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Extensions/NSMutableAttributedString+Extensions.swift",
+      "line": 30,
+      "symbol": "NSMutableAttributedString.bold(_:fontSize:textColor:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Extensions/NSMutableAttributedString+Extensions.swift",
+      "line": 41,
+      "symbol": "NSMutableAttributedString.normal(_:fontSize:textColor:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Extensions/NSMutableAttributedString+Extensions.swift",
+      "line": 55,
+      "symbol": "NSAttributedString.replacingCharacters(in:with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Extensions/NSMutableAttributedString+Extensions.swift",
+      "line": 61,
+      "symbol": "NSAttributedString.+=(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Extensions/NSMutableAttributedString+Extensions.swift",
+      "line": 67,
+      "symbol": "NSAttributedString.+(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/MessageInputBar.swift",
+      "line": 290,
+      "symbol": "MessageInputBar.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/MessageInputBar.swift",
+      "line": 294,
+      "symbol": "MessageInputBar.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/MessageInputBar.swift",
+      "line": 299,
+      "symbol": "MessageInputBar.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/MessageInputBar.swift",
+      "line": 304,
+      "symbol": "MessageInputBar.deinit",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/MessageInputBar.swift",
+      "line": 308,
+      "symbol": "MessageInputBar.didMoveToWindow()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputStackView.swift",
+      "line": 44,
+      "symbol": "InputStackView.Position.bottom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputStackView.swift",
+      "line": 44,
+      "symbol": "InputStackView.Position.left",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputStackView.swift",
+      "line": 44,
+      "symbol": "InputStackView.Position.right",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputStackView.swift",
+      "line": 44,
+      "symbol": "InputStackView.Position.top",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputStackView.swift",
+      "line": 49,
+      "symbol": "InputStackView.init(axis:spacing:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputStackView.swift",
+      "line": 55,
+      "symbol": "InputStackView.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputStackView.swift",
+      "line": 60,
+      "symbol": "InputStackView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputTextView.swift",
+      "line": 40,
+      "symbol": "InputTextView.text",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputTextView.swift",
+      "line": 46,
+      "symbol": "InputTextView.attributedText",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputTextView.swift",
+      "line": 57,
+      "symbol": "InputTextView.components",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputTextView.swift",
+      "line": 61,
+      "symbol": "InputTextView.isImagePasteEnabled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputTextView.swift",
+      "line": 116,
+      "symbol": "InputTextView.scrollIndicatorInsets",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputTextView.swift",
+      "line": 136,
+      "symbol": "InputTextView.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputTextView.swift",
+      "line": 140,
+      "symbol": "InputTextView.init(frame:textContainer:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputTextView.swift",
+      "line": 145,
+      "symbol": "InputTextView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputTextView.swift",
+      "line": 150,
+      "symbol": "InputTextView.deinit",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputTextView.swift",
+      "line": 221,
+      "symbol": "InputTextView.canPerformAction(_:withSender:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/InputTextView.swift",
+      "line": 229,
+      "symbol": "InputTextView.paste(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/SeparatorLine.swift",
+      "line": 47,
+      "symbol": "SeparatorLine.intrinsicContentSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/SeparatorLine.swift",
+      "line": 53,
+      "symbol": "SeparatorLine.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageInputBar/Sources/Views/SeparatorLine.swift",
+      "line": 58,
+      "symbol": "SeparatorLine.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageKit+Availability.swift",
+      "line": 29,
+      "symbol": "MessagesLayoutDelegate.avatarSize(for:at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageKit+Availability.swift",
+      "line": 33,
+      "symbol": "MessagesLayoutDelegate.avatarPosition(for:at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageKit+Availability.swift",
+      "line": 37,
+      "symbol": "MessagesLayoutDelegate.messageLabelInset(for:at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageKit+Availability.swift",
+      "line": 41,
+      "symbol": "MessagesLayoutDelegate.messagePadding(for:at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageKit+Availability.swift",
+      "line": 45,
+      "symbol": "MessagesLayoutDelegate.cellTopLabelAlignment(for:at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageKit+Availability.swift",
+      "line": 49,
+      "symbol": "MessagesLayoutDelegate.cellBottomLabelAlignment(for:at:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageKit+Availability.swift",
+      "line": 53,
+      "symbol": "MessagesLayoutDelegate.widthForMedia(message:at:with:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageKit+Availability.swift",
+      "line": 57,
+      "symbol": "MessagesLayoutDelegate.heightForMedia(message:at:with:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageKit+Availability.swift",
+      "line": 61,
+      "symbol": "MessagesLayoutDelegate.widthForLocation(message:at:with:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageKit+Availability.swift",
+      "line": 65,
+      "symbol": "MessagesLayoutDelegate.heightForLocation(message:at:with:in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/MessageKit+Availability.swift",
+      "line": 69,
+      "symbol": "MessagesLayoutDelegate.shouldCacheLayoutAttributes(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/Avatar.swift",
+      "line": 42,
+      "symbol": "Avatar.init(image:initials:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/AvatarPosition.swift",
+      "line": null,
+      "symbol": "AvatarPosition",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/AvatarPosition.swift",
+      "line": 29,
+      "symbol": "AvatarPosition",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/AvatarPosition.swift",
+      "line": 72,
+      "symbol": "AvatarPosition.vertical",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/AvatarPosition.swift",
+      "line": 75,
+      "symbol": "AvatarPosition.horizontal",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/AvatarPosition.swift",
+      "line": 79,
+      "symbol": "AvatarPosition.init(horizontal:vertical:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/AvatarPosition.swift",
+      "line": 84,
+      "symbol": "AvatarPosition.init(vertical:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/DetectorType.swift",
+      "line": 27,
+      "symbol": "DetectorType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/DetectorType.swift",
+      "line": 29,
+      "symbol": "DetectorType.address",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/DetectorType.swift",
+      "line": 30,
+      "symbol": "DetectorType.date",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/DetectorType.swift",
+      "line": 31,
+      "symbol": "DetectorType.phoneNumber",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/DetectorType.swift",
+      "line": 32,
+      "symbol": "DetectorType.url",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/DetectorType.swift",
+      "line": 33,
+      "symbol": "DetectorType.transitInformation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/DetectorType.swift",
+      "line": 41,
+      "symbol": "DetectorType.textCheckingType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/HorizontalEdgeInsets.swift",
+      "line": 30,
+      "symbol": "HorizontalEdgeInsets.left",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/HorizontalEdgeInsets.swift",
+      "line": 31,
+      "symbol": "HorizontalEdgeInsets.right",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/HorizontalEdgeInsets.swift",
+      "line": 33,
+      "symbol": "HorizontalEdgeInsets.init(left:right:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/HorizontalEdgeInsets.swift",
+      "line": 38,
+      "symbol": "HorizontalEdgeInsets.zero",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/HorizontalEdgeInsets.swift",
+      "line": 52,
+      "symbol": "HorizontalEdgeInsets.horizontal",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/LabelAlignment.swift",
+      "line": null,
+      "symbol": "LabelAlignment",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/LabelAlignment.swift",
+      "line": 27,
+      "symbol": "LabelAlignment",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/LabelAlignment.swift",
+      "line": 29,
+      "symbol": "LabelAlignment.textAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/LabelAlignment.swift",
+      "line": 30,
+      "symbol": "LabelAlignment.textInsets",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/LabelAlignment.swift",
+      "line": 32,
+      "symbol": "LabelAlignment.init(textAlignment:textInsets:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitDateFormatter.swift",
+      "line": 27,
+      "symbol": "MessageKitDateFormatter",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitDateFormatter.swift",
+      "line": 31,
+      "symbol": "MessageKitDateFormatter.shared",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitDateFormatter.swift",
+      "line": 41,
+      "symbol": "MessageKitDateFormatter.string(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitDateFormatter.swift",
+      "line": 46,
+      "symbol": "MessageKitDateFormatter.attributedString(from:with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitDateFormatter.swift",
+      "line": 51,
+      "symbol": "MessageKitDateFormatter.configureDateFormatter(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitError.swift",
+      "line": 25,
+      "symbol": "MessageKitError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitError.swift",
+      "line": 26,
+      "symbol": "MessageKitError.avatarPositionUnresolved",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitError.swift",
+      "line": 27,
+      "symbol": "MessageKitError.nilMessagesDataSource",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitError.swift",
+      "line": 28,
+      "symbol": "MessageKitError.nilMessagesDisplayDelegate",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitError.swift",
+      "line": 29,
+      "symbol": "MessageKitError.nilMessagesLayoutDelegate",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitError.swift",
+      "line": 30,
+      "symbol": "MessageKitError.notMessagesCollectionView",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitError.swift",
+      "line": 31,
+      "symbol": "MessageKitError.layoutUsedOnForeignType",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitError.swift",
+      "line": 32,
+      "symbol": "MessageKitError.unrecognizedSectionKind",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitError.swift",
+      "line": 33,
+      "symbol": "MessageKitError.unrecognizedCheckingResult",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitError.swift",
+      "line": 34,
+      "symbol": "MessageKitError.couldNotLoadAssetsBundle",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitError.swift",
+      "line": 35,
+      "symbol": "MessageKitError.couldNotCreateAssetsPath",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitError.swift",
+      "line": 36,
+      "symbol": "MessageKitError.customDataUnresolvedCell",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageKitError.swift",
+      "line": 37,
+      "symbol": "MessageKitError.customDataUnresolvedSize",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 27,
+      "symbol": "MessageStyle",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 31,
+      "symbol": "MessageStyle.TailCorner",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 33,
+      "symbol": "MessageStyle.TailCorner.topLeft",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 34,
+      "symbol": "MessageStyle.TailCorner.bottomLeft",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 35,
+      "symbol": "MessageStyle.TailCorner.topRight",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 36,
+      "symbol": "MessageStyle.TailCorner.bottomRight",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 38,
+      "symbol": "MessageStyle.TailCorner.imageOrientation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 50,
+      "symbol": "MessageStyle.TailStyle",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 52,
+      "symbol": "MessageStyle.TailStyle.curved",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 53,
+      "symbol": "MessageStyle.TailStyle.pointedEdge",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 55,
+      "symbol": "MessageStyle.TailStyle.imageNameSuffix",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 67,
+      "symbol": "MessageStyle.none",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 68,
+      "symbol": "MessageStyle.bubble",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 69,
+      "symbol": "MessageStyle.bubbleOutline(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 70,
+      "symbol": "MessageStyle.bubbleTail(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 71,
+      "symbol": "MessageStyle.bubbleTailOutline(_:_:_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 72,
+      "symbol": "MessageStyle.custom(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 76,
+      "symbol": "MessageStyle.image",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/MessageStyle.swift",
+      "line": 104,
+      "symbol": "MessageStyle.bubbleImageCache",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/NSConstraintLayoutSet.swift",
+      "line": 27,
+      "symbol": "NSLayoutConstraintSet",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/NSConstraintLayoutSet.swift",
+      "line": 29,
+      "symbol": "NSLayoutConstraintSet.top",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/NSConstraintLayoutSet.swift",
+      "line": 30,
+      "symbol": "NSLayoutConstraintSet.bottom",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/NSConstraintLayoutSet.swift",
+      "line": 31,
+      "symbol": "NSLayoutConstraintSet.left",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/NSConstraintLayoutSet.swift",
+      "line": 32,
+      "symbol": "NSLayoutConstraintSet.right",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/NSConstraintLayoutSet.swift",
+      "line": 33,
+      "symbol": "NSLayoutConstraintSet.centerX",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/NSConstraintLayoutSet.swift",
+      "line": 34,
+      "symbol": "NSLayoutConstraintSet.centerY",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/NSConstraintLayoutSet.swift",
+      "line": 35,
+      "symbol": "NSLayoutConstraintSet.width",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/NSConstraintLayoutSet.swift",
+      "line": 36,
+      "symbol": "NSLayoutConstraintSet.height",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/NSConstraintLayoutSet.swift",
+      "line": 38,
+      "symbol": "NSLayoutConstraintSet.init(top:bottom:left:right:centerX:centerY:width:height:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Models/Sender.swift",
+      "line": 42,
+      "symbol": "Sender.init(id:displayName:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 27,
+      "symbol": "AvatarView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 31,
+      "symbol": "AvatarView.initials",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 37,
+      "symbol": "AvatarView.placeholderFont",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 43,
+      "symbol": "AvatarView.placeholderTextColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 49,
+      "symbol": "AvatarView.fontMinimumScaleFactor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 51,
+      "symbol": "AvatarView.adjustsFontSizeToFitWidth",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 60,
+      "symbol": "AvatarView.frame",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 66,
+      "symbol": "AvatarView.bounds",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 73,
+      "symbol": "AvatarView.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 78,
+      "symbol": "AvatarView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 83,
+      "symbol": "AvatarView.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 163,
+      "symbol": "AvatarView.prepareView()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 173,
+      "symbol": "AvatarView.set(avatar:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/AvatarView.swift",
+      "line": 181,
+      "symbol": "AvatarView.setCorner(radius:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/LocationMessageCell.swift",
+      "line": 39,
+      "symbol": "LocationMessageCell.setupSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/LocationMessageCell.swift",
+      "line": 53,
+      "symbol": "LocationMessageCell.prepareForReuse()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/MediaMessageCell.swift",
+      "line": 52,
+      "symbol": "MediaMessageCell.setupSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/MessageCollectionViewCell.swift",
+      "line": 32,
+      "symbol": "MessageCollectionViewCell.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/MessageCollectionViewCell.swift",
+      "line": 36,
+      "symbol": "MessageCollectionViewCell.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/MessageContentCell.swift",
+      "line": 64,
+      "symbol": "MessageContentCell.accessoryView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/MessageContentCell.swift",
+      "line": 69,
+      "symbol": "MessageContentCell.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/MessageContentCell.swift",
+      "line": 75,
+      "symbol": "MessageContentCell.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/MessageContentCell.swift",
+      "line": 81,
+      "symbol": "MessageContentCell.setupSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/MessageContentCell.swift",
+      "line": 90,
+      "symbol": "MessageContentCell.prepareForReuse()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/MessageContentCell.swift",
+      "line": 99,
+      "symbol": "MessageContentCell.apply(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/TextMessageCell.swift",
+      "line": 30,
+      "symbol": "TextMessageCell.disposeBag",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/TextMessageCell.swift",
+      "line": 46,
+      "symbol": "TextMessageCell.apply(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/TextMessageCell.swift",
+      "line": 55,
+      "symbol": "TextMessageCell.prepareForReuse()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Cells/TextMessageCell.swift",
+      "line": 62,
+      "symbol": "TextMessageCell.setupSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Headers & Footers/MessageReusableView.swift",
+      "line": 27,
+      "symbol": "MessageReusableView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Headers & Footers/MessageReusableView.swift",
+      "line": 31,
+      "symbol": "MessageReusableView.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/Headers & Footers/MessageReusableView.swift",
+      "line": 35,
+      "symbol": "MessageReusableView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/InsetLabel.swift",
+      "line": 27,
+      "symbol": "InsetLabel",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/InsetLabel.swift",
+      "line": 29,
+      "symbol": "InsetLabel.textInsets",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/InsetLabel.swift",
+      "line": 33,
+      "symbol": "InsetLabel.drawText(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageContainerView.swift",
+      "line": 27,
+      "symbol": "MessageContainerView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageContainerView.swift",
+      "line": 33,
+      "symbol": "MessageContainerView.style",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageContainerView.swift",
+      "line": 39,
+      "symbol": "MessageContainerView.frame",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": null,
+      "symbol": "MessageLabel",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 27,
+      "symbol": "MessageLabel",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 58,
+      "symbol": "MessageLabel.delegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 60,
+      "symbol": "MessageLabel.enabledDetectors",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 66,
+      "symbol": "MessageLabel.attributedText",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 72,
+      "symbol": "MessageLabel.text",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 78,
+      "symbol": "MessageLabel.font",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 84,
+      "symbol": "MessageLabel.textColor",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 90,
+      "symbol": "MessageLabel.lineBreakMode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 97,
+      "symbol": "MessageLabel.numberOfLines",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 104,
+      "symbol": "MessageLabel.textAlignment",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 110,
+      "symbol": "MessageLabel.textInsets",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 116,
+      "symbol": "MessageLabel.intrinsicContentSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 123,
+      "symbol": "MessageLabel.messageLabelFont",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 127,
+      "symbol": "MessageLabel.defaultAttributes",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 135,
+      "symbol": "MessageLabel.addressAttributes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 137,
+      "symbol": "MessageLabel.dateAttributes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 139,
+      "symbol": "MessageLabel.phoneNumberAttributes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 141,
+      "symbol": "MessageLabel.urlAttributes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 143,
+      "symbol": "MessageLabel.transitInformationAttributes",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 145,
+      "symbol": "MessageLabel.setAttributes(_:detector:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 167,
+      "symbol": "MessageLabel.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 172,
+      "symbol": "MessageLabel.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 179,
+      "symbol": "MessageLabel.drawText(in:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 193,
+      "symbol": "MessageLabel.configure(block:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 402,
+      "symbol": "MessageLabel.handleGesture(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessageLabel.swift",
+      "line": 469,
+      "symbol": "MessageLabel.nameRect(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessagesCollectionView.swift",
+      "line": 27,
+      "symbol": "MessagesCollectionView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessagesCollectionView.swift",
+      "line": 31,
+      "symbol": "MessagesCollectionView.messagesDataSource",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessagesCollectionView.swift",
+      "line": 33,
+      "symbol": "MessagesCollectionView.messagesDisplayDelegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessagesCollectionView.swift",
+      "line": 35,
+      "symbol": "MessagesCollectionView.messagesLayoutDelegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessagesCollectionView.swift",
+      "line": 37,
+      "symbol": "MessagesCollectionView.messageCellDelegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessagesCollectionView.swift",
+      "line": 47,
+      "symbol": "MessagesCollectionView.init(frame:collectionViewLayout:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessagesCollectionView.swift",
+      "line": 54,
+      "symbol": "MessagesCollectionView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessagesCollectionView.swift",
+      "line": 58,
+      "symbol": "MessagesCollectionView.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessagesCollectionView.swift",
+      "line": 79,
+      "symbol": "MessagesCollectionView.handleTapGesture(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessagesCollectionView.swift",
+      "line": 89,
+      "symbol": "MessagesCollectionView.scrollToBottom(animated:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/MessagesCollectionView.swift",
+      "line": 97,
+      "symbol": "MessagesCollectionView.reloadDataAndKeepOffset()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/PlayButtonView.swift",
+      "line": 27,
+      "symbol": "PlayButtonView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/PlayButtonView.swift",
+      "line": 31,
+      "symbol": "PlayButtonView.triangleView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/PlayButtonView.swift",
+      "line": 38,
+      "symbol": "PlayButtonView.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/PlayButtonView.swift",
+      "line": 46,
+      "symbol": "PlayButtonView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/koofrank/Documents/CybexDex/cybex-ios/ChatRoom/MessengerKit/Views/PlayButtonView.swift",
+      "line": 56,
+      "symbol": "PlayButtonView.layoutSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/koofrank/Documents/CybexDex/cybex-ios"
+}

@@ -11,7 +11,7 @@ import UIKit
 class MyHistoryCell: BaseTableViewCell {
 
     @IBOutlet weak var containerView: MyHistoryCellView!
-  
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -19,9 +19,9 @@ class MyHistoryCell: BaseTableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-  
-  override func setup(_ data: Any?) {
-    containerView.data = data
-  }
-    
+
+    override func setup(_ data: Any?) {
+        containerView.data = data
+    }
+
 }

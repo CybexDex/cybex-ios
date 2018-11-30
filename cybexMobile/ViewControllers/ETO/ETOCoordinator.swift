@@ -16,35 +16,43 @@ protocol ETOCoordinatorProtocol {
 
 protocol ETOStateManagerProtocol {
     var state: ETOState { get }
-    
-    func switchPageState(_ state:PageState)
-    
+
+    func switchPageState(_ state: PageState)
+
     func fetchProjectData()
-    
+
     func fetchBannersData()
-    
+
     func setSelectedProjectData(_ model: ETOProjectViewModel)
-    
+
     func setSelectedBannerData(_ model: ETOBannerModel)
-    
+
     func refreshProjectDatas()
-    
+
     func refreshTime()
-    
+
     func resetBannersUrl()
 }
 
-class ETOCoordinator: ETORootCoordinator {
+class ETOCoordinator: NavCoordinator {
     var store = Store(
         reducer: ETOReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
-    
+
     var state: ETOState {
         return store.state
     }
-    
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.main.etoViewController()!
+        let coordinator = ETOCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+        return vc
+    }
+
     override func register() {
         Broadcaster.register(ETOCoordinatorProtocol.self, observer: self)
         Broadcaster.register(ETOStateManagerProtocol.self, observer: self)
@@ -58,7 +66,7 @@ extension ETOCoordinator: ETOCoordinatorProtocol {
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
-    
+
     func openProjectHistroy() {
         if let vc = R.storyboard.main.etoRecordListViewController() {
             vc.coordinator = ETORecordListCoordinator(rootVC: self.rootVC)
@@ -68,17 +76,17 @@ extension ETOCoordinator: ETOCoordinatorProtocol {
 }
 
 extension ETOCoordinator: ETOStateManagerProtocol {
-    
-    func switchPageState(_ state:PageState) {
+
+    func switchPageState(_ state: PageState) {
         self.store.dispatch(PageStateAction(state: state))
     }
-    
+
     func fetchProjectData() {
         ETOMGService.request(target: ETOMGAPI.getProjects(offset: 0, limit: 4), success: { json in
             if let projects = json.arrayValue.map({ (data)  in
                 ETOProjectModel.deserialize(from: data.dictionaryObject)
             }) as? [ETOProjectModel] {
-                self.store.dispatch(FetchProjectModelAction(data:projects))
+                self.store.dispatch(FetchProjectModelAction(data: projects))
             }
         }, error: { (error) in
             self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
@@ -86,7 +94,7 @@ extension ETOCoordinator: ETOStateManagerProtocol {
             self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
         }
     }
-    
+
     func fetchBannersData() {
         ETOMGService.request(target: ETOMGAPI.getBanner(), success: { (json) in
             if let banners = json.arrayValue.map({ data in
@@ -100,12 +108,12 @@ extension ETOCoordinator: ETOStateManagerProtocol {
             self.switchPageState(PageState.error(error: error, reason: .initialRefresh))
         }
     }
-    
+
     func setSelectedProjectData(_ model: ETOProjectViewModel) {
         self.store.dispatch(SetSelectedProjectModelAction(data: model))
         self.openProjectItem()
     }
-    
+
     func setSelectedBannerData(_ model: ETOBannerModel) {
         self.store.dispatch(SetSelectedBannerModelAction(data: model))
         if let projectModels = self.state.data.value {
@@ -120,7 +128,7 @@ extension ETOCoordinator: ETOStateManagerProtocol {
         }
         self.openProjectItem()
     }
-    
+
     func refreshProjectDatas() {
         if let projectModels = self.state.data.value {
             for viewModel in projectModels {
@@ -128,43 +136,40 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                     ETOMGService.request(target: ETOMGAPI.refreshProject(id: projectModel.id), success: { (json) in
                         if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
                             projectModel.status = refreshModel.status
-                            projectModel.finish_at = refreshModel.finish_at
-                            viewModel.current_percent.accept((refreshModel.current_percent * 100).string(digits:2, roundingMode: .down) + "%")
-                            viewModel.progress.accept(refreshModel.current_percent)
+                            projectModel.finishAt = refreshModel.finishAt
+                            viewModel.currentPercent.accept((refreshModel.currentPercent * 100).string(digits: 2, roundingMode: .down) + "%")
+                            viewModel.progress.accept(refreshModel.currentPercent)
                             viewModel.status.accept(refreshModel.status!.description())
-                            viewModel.project_state.accept(refreshModel.status)
-                            
+                            viewModel.projectState.accept(refreshModel.status)
+
                             if refreshModel.status! == .pre {
-                                viewModel.time.accept(timeHandle(projectModel.start_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                            }
-                            else if refreshModel.status! == .ok {
-                                viewModel.time.accept(timeHandle(projectModel.end_at!.timeIntervalSince1970 - Date().timeIntervalSince1970))
-                            }
-                            else if refreshModel.status! == .finish {
-                                if refreshModel.finish_at != nil {
-                                    if projectModel.t_total_time == "" {
-                                        viewModel.time.accept(timeHandle(refreshModel.finish_at!.timeIntervalSince1970 - projectModel.start_at!.timeIntervalSince1970,isHiddenSecond: false))
-                                    }
-                                    else {
-                                        viewModel.time.accept(timeHandle(Double(projectModel.t_total_time)!, isHiddenSecond: false))
+                                viewModel.time.accept(timeHandle(projectModel.startAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                            } else if refreshModel.status! == .ok {
+                                viewModel.time.accept(timeHandle(projectModel.endAt!.timeIntervalSince1970 - Date().timeIntervalSince1970))
+                            } else if refreshModel.status! == .finish {
+                                if refreshModel.finishAt != nil {
+                                    if projectModel.tTotalTime == "" {
+                                        viewModel.time.accept(timeHandle(refreshModel.finishAt!.timeIntervalSince1970 - projectModel.startAt!.timeIntervalSince1970, isHiddenSecond: false))
+                                    } else {
+                                        viewModel.time.accept(timeHandle(Double(projectModel.tTotalTime)!, isHiddenSecond: false))
                                     }
                                 }
                             }
                         }
-                    }, error: { (error) in
-                    }) { (error) in
+                    }, error: { (_) in
+                    }) { (_) in
                     }
                 }
             }
         }
     }
-    
+
     func resetBannersUrl() {
         if let models = state.banners.value {
             self.store.dispatch(ResetBannerUrlsAction(data: models))
         }
     }
-    
+
     func refreshTime() {
 //        if let projectModels = self.state.data.value {
 //            for viewModel in projectModels {

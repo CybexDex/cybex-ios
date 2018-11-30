@@ -10,53 +10,36 @@ import Foundation
 import ReSwift
 import RxCocoa
 
-//MARK: - State
-struct AddAddressState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage:String?
-    var property: AddAddressPropertyState
+// MARK: - State
+struct AddAddressState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+
+    var asset: BehaviorRelay<String> = BehaviorRelay(value: "")
+    var address: BehaviorRelay<String> = BehaviorRelay(value: "")
+    var note: BehaviorRelay<String> = BehaviorRelay(value: "")
+    var memo: BehaviorRelay<String> = BehaviorRelay(value: "")
+
+    var addressVailed: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var noteVailed: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 }
 
-struct AddAddressPropertyState {
-    var asset : BehaviorRelay<String> = BehaviorRelay(value: "")
-    var address :BehaviorRelay<String> = BehaviorRelay(value: "")
-    var note : BehaviorRelay<String> = BehaviorRelay(value: "")
-    var memo : BehaviorRelay<String> = BehaviorRelay(value: "")
-    
-    var addressVailed : BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    var noteVailed : BehaviorRelay<Bool> = BehaviorRelay(value: false)
+struct VerificationNoteAction: Action {
+    var data: Bool
 }
 
-
-struct VerificationNoteAction : Action {
-    var data : Bool
+struct SetAssetAction: Action {
+    var data: String
 }
 
-struct SetAssetAction : Action {
-    var data : String
+struct VerificationAddressAction: Action {
+    var success: Bool
 }
 
-struct VerificationAddressAction : Action {
-    var success : Bool
+struct SetNoteAction: Action {
+    var data: String
 }
 
-struct SetNoteAction : Action {
-    var data : String
-}
-
-struct SetAddressAction : Action {
-    var data : String
-}
-
-
-//MARK: - Action Creator
-class AddAddressPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: AddAddressState, _ store: Store<AddAddressState>) -> Action?
-    
-    public typealias AsyncActionCreator = (
-        _ state: AddAddressState,
-        _ store: Store <AddAddressState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
+struct SetAddressAction: Action {
+    var data: String
 }

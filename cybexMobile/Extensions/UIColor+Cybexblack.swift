@@ -12,7 +12,7 @@ extension UIColor {
 	 **/
 
 	public class func klinemacdline() -> UIColor {
-		return UIColor(red: 0.1843137294, green: 0.2117647082, blue: 0.2705882490, alpha: 1.0000000000);
+		return UIColor(red: 0.1843137294, green: 0.2117647082, blue: 0.2705882490, alpha: 1.0000000000)
 	}
 
 	/**
@@ -25,7 +25,7 @@ extension UIColor {
 	 **/
 
 	public class func klinebollmiddle() -> UIColor {
-		return UIColor(red: 0.5529412031, green: 0.1921568662, blue: 0.1921568662, alpha: 1.0000000000);
+		return UIColor(red: 0.5529412031, green: 0.1921568662, blue: 0.1921568662, alpha: 1.0000000000)
 	}
 
 	/**
@@ -38,7 +38,7 @@ extension UIColor {
 	 **/
 
 	public class func klineboll() -> UIColor {
-		return UIColor(red: 0.2392156869, green: 0.3568627536, blue: 0.6980392337, alpha: 1.0000000000);
+		return UIColor(red: 0.2392156869, green: 0.3568627536, blue: 0.6980392337, alpha: 1.0000000000)
 	}
 
 	/**
@@ -51,7 +51,7 @@ extension UIColor {
 	 **/
 
 	public class func klinebollfillcolor() -> UIColor {
-		return UIColor(red: 0.4470588267, green: 0.5843137503, blue: 0.9921568632, alpha: 0.0599999987);
+		return UIColor(red: 0.4470588267, green: 0.5843137503, blue: 0.9921568632, alpha: 0.0599999987)
 	}
 
 	/**
@@ -64,7 +64,7 @@ extension UIColor {
 	 **/
 
 	public class func klineverticalline() -> UIColor {
-		return UIColor(red: 1.0000000000, green: 1.0000000000, blue: 1.0000000000, alpha: 0.0599999987);
+		return UIColor(red: 1.0000000000, green: 1.0000000000, blue: 1.0000000000, alpha: 0.0599999987)
 	}
 
 	/**
@@ -77,7 +77,7 @@ extension UIColor {
 	 **/
 
 	public class func klinemacdmiddle() -> UIColor {
-		return UIColor(red: 0.4313725531, green: 0.2549019754, blue: 0.1254902035, alpha: 1.0000000000);
+		return UIColor(red: 0.4313725531, green: 0.2549019754, blue: 0.1254902035, alpha: 1.0000000000)
 	}
 
 	/**
@@ -90,7 +90,7 @@ extension UIColor {
 	 **/
 
 	public class func klinemathree() -> UIColor {
-		return UIColor(red: 0.1411764771, green: 0.3607843220, blue: 0.1647058874, alpha: 1.0000000000);
+		return UIColor(red: 0.1411764771, green: 0.3607843220, blue: 0.1647058874, alpha: 1.0000000000)
 	}
 
 	/**
@@ -103,7 +103,7 @@ extension UIColor {
 	 **/
 
 	public class func uptitlecolorlow() -> UIColor {
-		return UIColor(red: 0.4274509847, green: 0.7333333492, blue: 0.2862745225, alpha: 0.1000000015);
+		return UIColor(red: 0.4274509847, green: 0.7333333492, blue: 0.2862745225, alpha: 0.1000000015)
 	}
 
 	/**
@@ -116,7 +116,7 @@ extension UIColor {
 	 **/
 
 	public class func uptitlecolormiddle() -> UIColor {
-		return UIColor(red: 0.4274509847, green: 0.7333333492, blue: 0.2862745225, alpha: 0.2000000030);
+		return UIColor(red: 0.4274509847, green: 0.7333333492, blue: 0.2862745225, alpha: 0.2000000030)
 	}
 
 	/**
@@ -129,7 +129,7 @@ extension UIColor {
 	 **/
 
 	public class func klinedashline() -> UIColor {
-		return UIColor(red: 1.0000000000, green: 1.0000000000, blue: 1.0000000000, alpha: 0.1199999973);
+		return UIColor(red: 1.0000000000, green: 1.0000000000, blue: 1.0000000000, alpha: 0.1199999973)
 	}
 
 	/**
@@ -142,7 +142,7 @@ extension UIColor {
 	 **/
 
 	public class func downtitlecolorlow() -> UIColor {
-		return UIColor(red: 0.7450980544, green: 0.2745098174, blue: 0.2039215714, alpha: 0.1000000015);
+		return UIColor(red: 0.7450980544, green: 0.2745098174, blue: 0.2039215714, alpha: 0.1000000015)
 	}
 
 	/**
@@ -155,7 +155,7 @@ extension UIColor {
 	 **/
 
 	public class func downtitlecolormiddle() -> UIColor {
-		return UIColor(red: 0.7450980544, green: 0.2745098174, blue: 0.2039215714, alpha: 0.2000000030);
+		return UIColor(red: 0.7450980544, green: 0.2745098174, blue: 0.2039215714, alpha: 0.2000000030)
 	}
 
 	/**
@@ -168,7 +168,7 @@ extension UIColor {
 	 **/
 
 	public class func mainsubtitlecolormiddle() -> UIColor {
-		return UIColor(red: 0.4705882370, green: 0.5058823824, blue: 0.6039215922, alpha: 0.4961647689);
+		return UIColor(red: 0.4705882370, green: 0.5058823824, blue: 0.6039215922, alpha: 0.4961647689)
 	}
 
 	/**
@@ -181,7 +181,7 @@ extension UIColor {
 	 **/
 
 	public class func cellbgcolor() -> UIColor {
-		return UIColor(red: 0.1058823541, green: 0.1333333403, blue: 0.1882352978, alpha: 1.0000000000);
+		return UIColor(red: 0.1058823541, green: 0.1333333403, blue: 0.1882352978, alpha: 1.0000000000)
 	}
 
 	/**
@@ -194,7 +194,7 @@ extension UIColor {
 	 **/
 
 	public class func selectedtitlecolor() -> UIColor {
-		return UIColor(red: 1.0000000000, green: 0.5686274767, blue: 0.2627451122, alpha: 1.0000000000);
+		return UIColor(red: 1.0000000000, green: 0.5686274767, blue: 0.2627451122, alpha: 1.0000000000)
 	}
 
 	/**
@@ -207,7 +207,7 @@ extension UIColor {
 	 **/
 
 	public class func mainsubtitlecolorlow() -> UIColor {
-		return UIColor(red: 0.4705882370, green: 0.5058823824, blue: 0.6039215922, alpha: 0.3000000119);
+		return UIColor(red: 0.4705882370, green: 0.5058823824, blue: 0.6039215922, alpha: 0.3000000119)
 	}
 
 	/**
@@ -220,7 +220,7 @@ extension UIColor {
 	 **/
 
 	public class func mainsubtitlecolor() -> UIColor {
-		return UIColor(red: 0.4705882370, green: 0.5058823824, blue: 0.6039215922, alpha: 1.0000000000);
+		return UIColor(red: 0.4705882370, green: 0.5058823824, blue: 0.6039215922, alpha: 1.0000000000)
 	}
 
 	/**
@@ -233,7 +233,7 @@ extension UIColor {
 	 **/
 
 	public class func maintitlecolor() -> UIColor {
-		return UIColor(red: 1.0000000000, green: 1.0000000000, blue: 1.0000000000, alpha: 1.0000000000);
+		return UIColor(red: 1.0000000000, green: 1.0000000000, blue: 1.0000000000, alpha: 1.0000000000)
 	}
 
 	/**
@@ -246,7 +246,7 @@ extension UIColor {
 	 **/
 
 	public class func downtitlecolor() -> UIColor {
-		return UIColor(red: 0.7450980544, green: 0.2745098174, blue: 0.2039215714, alpha: 1.0000000000);
+		return UIColor(red: 0.7450980544, green: 0.2745098174, blue: 0.2039215714, alpha: 1.0000000000)
 	}
 
 	/**
@@ -259,7 +259,7 @@ extension UIColor {
 	 **/
 
 	public class func uptitlecolor() -> UIColor {
-		return UIColor(red: 0.4274509847, green: 0.7333333492, blue: 0.2862745225, alpha: 1.0000000000);
+		return UIColor(red: 0.4274509847, green: 0.7333333492, blue: 0.2862745225, alpha: 1.0000000000)
 	}
 
 	/**
@@ -272,7 +272,7 @@ extension UIColor {
 	 **/
 
 	public class func maintitlecolorhigh() -> UIColor {
-		return UIColor(red: 1.0000000000, green: 1.0000000000, blue: 1.0000000000, alpha: 0.6999999881);
+		return UIColor(red: 1.0000000000, green: 1.0000000000, blue: 1.0000000000, alpha: 0.6999999881)
 	}
 
 	/**
@@ -285,7 +285,7 @@ extension UIColor {
 	 **/
 
 	public class func klinematwo() -> UIColor {
-		return UIColor(red: 0.3764705956, green: 0.2509804070, blue: 0.5411764979, alpha: 1.0000000000);
+		return UIColor(red: 0.3764705956, green: 0.2509804070, blue: 0.5411764979, alpha: 1.0000000000)
 	}
 
 	/**
@@ -298,7 +298,7 @@ extension UIColor {
 	 **/
 
 	public class func klinemaone() -> UIColor {
-		return UIColor(red: 0.1686274558, green: 0.4588235319, blue: 0.4235294163, alpha: 1.0000000000);
+		return UIColor(red: 0.1686274558, green: 0.4588235319, blue: 0.4235294163, alpha: 1.0000000000)
 	}
 
 	/**
@@ -311,7 +311,7 @@ extension UIColor {
 	 **/
 
 	public class func klineviewbgcolor() -> UIColor {
-		return UIColor(red: 0.0666666701, green: 0.0862745121, blue: 0.1294117719, alpha: 1.0000000000);
+		return UIColor(red: 0.0666666701, green: 0.0862745121, blue: 0.1294117719, alpha: 1.0000000000)
 	}
 
 	/**
@@ -324,7 +324,7 @@ extension UIColor {
 	 **/
 
 	public class func mainbgcolor() -> UIColor {
-		return UIColor(red: 0.0901960805, green: 0.1137254909, blue: 0.1647058874, alpha: 1.0000000000);
+		return UIColor(red: 0.0901960805, green: 0.1137254909, blue: 0.1647058874, alpha: 1.0000000000)
 	}
 
 }

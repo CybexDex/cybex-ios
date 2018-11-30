@@ -11,11 +11,10 @@ import UIKit
 class TransferAddressHomeTableViewCell: BaseTableViewCell {
 
     @IBOutlet weak var foreView: AddressCellView!
-    
+
     override func setup(_ data: Any?) {
-        if let d = data as? TransferAddress {
-            foreView.updateUI(d, handler: AddressCellView.adapterTransferModelToAddressCellView(foreView))
+        if let data = data as? TransferAddress {
+            foreView.updateUI(data, handler: AddressCellView.adapterTransferModelToAddressCellView(foreView))
         }
     }
-    
 }

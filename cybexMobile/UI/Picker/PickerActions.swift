@@ -8,25 +8,18 @@
 
 import Foundation
 import ReSwift
+import HandyJSON
+import RxCocoa
 
-//MARK: - State
-struct PickerState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage:String?
-    var property: PickerPropertyState
+typealias PickerDidSelected = ((_ picker: UIPickerView) -> Void)
+
+struct PickerContext: RouteContext, HandyJSON {
+    var items: AnyObject?
+    var selectedValue: (component: NSInteger, row: NSInteger) = (0, 0)
+    var pickerDidSelected: PickerDidSelected?
 }
 
-struct PickerPropertyState {
-}
-
-//MARK: - Action Creator
-class PickerPropertyActionCreate {
-    public typealias ActionCreator = (_ state: PickerState, _ store: Store<PickerState>) -> Action?
-    
-    public typealias AsyncActionCreator = (
-        _ state: PickerState,
-        _ store: Store <PickerState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
+struct PickerState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 }

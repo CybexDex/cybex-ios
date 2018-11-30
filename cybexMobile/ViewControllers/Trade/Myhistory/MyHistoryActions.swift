@@ -8,25 +8,10 @@
 
 import Foundation
 import ReSwift
+import RxCocoa
 
-//MARK: - State
-struct MyHistoryState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage:String?
-    var property: MyHistoryPropertyState
-}
-
-struct MyHistoryPropertyState {
-}
-
-//MARK: - Action Creator
-class MyHistoryPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: MyHistoryState, _ store: Store<MyHistoryState>) -> Action?
-    
-    public typealias AsyncActionCreator = (
-        _ state: MyHistoryState,
-        _ store: Store <MyHistoryState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
+// MARK: - State
+struct MyHistoryState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 }

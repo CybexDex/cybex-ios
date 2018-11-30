@@ -1,0 +1,9 @@
+{
+  "commitish" : "3.4.0",
+  "iOS" : [
+    {
+      "name" : "Fakery",
+      "hash" : "fba68e023c9f247add80be47a4b071774542fb66392935c7f5a0c96b9a1d871d"
+    }
+  ]
+}

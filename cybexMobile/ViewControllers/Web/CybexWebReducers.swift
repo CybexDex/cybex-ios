@@ -9,15 +9,13 @@
 import UIKit
 import ReSwift
 
-func CybexWebReducer(action:Action, state:CybexWebState?) -> CybexWebState {
+func cybexWebReducer(action: Action, state: CybexWebState?) -> CybexWebState {
     let state = state ?? CybexWebState()
-        
+
     switch action {
     default:
         break
     }
-        
+
     return state
 }
-
-

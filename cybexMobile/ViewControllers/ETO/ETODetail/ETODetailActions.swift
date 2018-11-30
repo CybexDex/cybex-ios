@@ -11,13 +11,13 @@ import ReSwift
 import RxCocoa
 import HandyJSON
 
-struct ETODetailContext:RouteContext,HandyJSON {
+struct ETODetailContext: RouteContext, HandyJSON {
     init() {}
-    
-    var pid:Int = 0
+
+    var pid: Int = 0
 }
 
-//MARK: - State
+// MARK: - State
 struct ETODetailState: BaseState {
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
@@ -26,7 +26,7 @@ struct ETODetailState: BaseState {
     var refreshData: BehaviorRelay<ETOProjectViewModel?> = BehaviorRelay(value: nil)
 }
 
-//MARK: - Action
+// MARK: - Action
 
 struct SetProjectDetailAction: Action {
     var data: ETOProjectModel

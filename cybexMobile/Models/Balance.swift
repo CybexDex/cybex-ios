@@ -7,19 +7,18 @@
 //
 
 import Foundation
-import ObjectMapper
+import HandyJSON
 
-class Balance: Mappable {
-  var asset_type:String = ""
-  var balance:String = ""
-  
-  required init?(map: Map) {
-    
+class Balance: HandyJSON {
+  var assetType: String = ""
+  var balance: String = ""
+
+  required init() {
+
   }
-  
-  func mapping(map: Map) {
-    asset_type <- (map["asset_type"], ToStringTransform())
-    balance <- (map["balance"], ToStringTransform())
+
+  func mapping(mapper: HelpingMapper) {
+    mapper <<< assetType <-- ("asset_type", ToStringTransform())
+    mapper <<< balance <-- ("balance", ToStringTransform())
   }
 }
-

@@ -7,128 +7,125 @@
 //
 
 import Foundation
-import ObjectMapper
+import HandyJSON
 
-class LockUpAssetsMData : Mappable, NSCopying {
-    var id : String = ""
-    var owner : String = ""
-    var balance : Asset = Asset(JSON: [:])!
-    var vesting_policy : VestingPolicy = VestingPolicy(JSON: [:])!
-    var last_claim_date : String = ""
-    
-    required init?(map: Map) {
+class LockUpAssetsMData: HandyJSON, NSCopying {
+    var id: String = ""
+    var owner: String = ""
+    var balance: Asset = Asset()
+    var vestingPolicy: VestingPolicy = VestingPolicy()
+    var lastClaimDate: String = ""
+
+    required init() {
     }
-    
+
     func copy(with zone: NSZone? = nil) -> Any {
-        let copy = LockUpAssetsMData(JSON: self.toJSON())!
-        return copy
+        let copy = LockUpAssetsMData.deserialize(from: self.toJSON())
+        return copy ?? LockUpAssetsMData()
     }
-    
-    func mapping(map: Map) {
-        id                  <- (map["id"],ToStringTransform())
-        owner               <- (map["owner"],ToStringTransform())
-        balance             <- map["balance"]
-        vesting_policy      <- map["vesting_policy"]
-        last_claim_date     <- (map["last_claim_date"],ToStringTransform())
+
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< id                  <-- ("id", ToStringTransform())
+        mapper <<< owner               <-- ("owner", ToStringTransform())
+        mapper <<< balance             <-- "balance"
+        mapper <<< vestingPolicy      <-- "vesting_policy"
+        mapper <<< lastClaimDate     <-- ("last_claim_date", ToStringTransform())
     }
 }
 
-class VestingPolicy : Mappable{
-    var begin_timestamp : String = ""
-    var vesting_cliff_seconds : String = ""
-    var vesting_duration_seconds : String = ""
-    var begin_balance : String = ""
-    
-    required init?(map: Map) {
+class VestingPolicy: HandyJSON {
+    var beginTimestamp: String = ""
+    var vestingCliffSeconds: String = ""
+    var vestingDurationSeconds: String = ""
+    var beginBalance: String = ""
+
+    required init() {
     }
-    
-    func mapping(map: Map) {
-        begin_timestamp                <- (map["begin_timestamp"],ToStringTransform())
-        vesting_cliff_seconds          <- (map["vesting_cliff_seconds"],ToStringTransform())
-        vesting_duration_seconds       <- (map["vesting_duration_seconds"],ToStringTransform())
-        begin_balance                  <- (map["begin_balance"],ToStringTransform())
+
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< beginTimestamp                <-- ("begin_timestamp", ToStringTransform())
+        mapper <<< vestingCliffSeconds          <-- ("vesting_cliff_seconds", ToStringTransform())
+        mapper <<< vestingDurationSeconds       <-- ("vesting_duration_seconds", ToStringTransform())
+        mapper <<< beginBalance                  <-- ("begin_balance", ToStringTransform())
     }
 }
-
 
 // 可用资产的页面数据
-class PortfolioData{
-    var icon : String = ""
-    var name : String = "--"
-    var realAmount : String = ""
-    var cybPrice : String = ""
-    var rbmPrice : String = ""
-    
-    required init?(balance : Balance){
-        
-        icon = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"
+class PortfolioData {
+    var icon: String = ""
+    var name: String = "--"
+    var realAmount: String = ""
+    var cybPrice: String = ""
+    var rbmPrice: String = ""
+
+    required init?(balance: Balance) {
+
+        icon = AppConfiguration.ServerIconsBaseURLString + balance.assetType.replacingOccurrences(of: ".", with: "_") + "_grey.png"
         // 获得自己的个数
-        if let asset_info = app_data.assetInfo[balance.asset_type] {
-            realAmount = getRealAmount(balance.asset_type, amount: balance.balance).string(digits: asset_info.precision, roundingMode: .down)
-            name = asset_info.symbol.filterJade
+        if let assetInfo = appData.assetInfo[balance.assetType] {
+            realAmount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: assetInfo.precision, roundingMode: .down)
+            name = assetInfo.symbol.filterJade
         }
-        
+
         // 获取对应CYB的个数
-        let amountCYB = app_data.cyb_rmb_price == 0 ? "-" :  String(getAssetRMBPrice(balance.asset_type) / app_data.cyb_rmb_price * (realAmount.toDouble())!)
-        
+        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice.doubleValue * (realAmount.toDouble())!)
+
         if amountCYB == "-"{
             cybPrice = amountCYB + " CYB"
-        }else{
+        } else {
             cybPrice = amountCYB.formatCurrency(digitNum: 5) + " CYB"
         }
-        
+
         if let _ = amountCYB.toDouble() {
-            rbmPrice    = "≈¥" + (getRealAmount(balance.asset_type, amount: balance.balance) * Decimal(getAssetRMBPrice(balance.asset_type))).string(digits: 2, roundingMode: .down)
-        }else{
+            rbmPrice    = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * Decimal(getAssetRMBPrice(balance.assetType))).string(digits: 4, roundingMode: .down)
+        } else {
             rbmPrice    = "-"
         }
     }
 }
 
 // 我的资产的页面数据
-class MyPortfolioData{
-    var icon : String = ""
-    var name : String = ""
-    var realAmount : String = ""
-    var rbmPrice : String = ""
-    var limitAmount : String = ""
-    
-    required init?(balance : Balance){
-        icon = AppConfiguration.SERVER_ICONS_BASE_URLString + balance.asset_type.replacingOccurrences(of: ".", with: "_") + "_grey.png"
-        
-        name = app_data.assetInfo[balance.asset_type]?.symbol.filterJade ?? "--"
+class MyPortfolioData {
+    var icon: String = ""
+    var name: String = ""
+    var realAmount: String = ""
+    var rbmPrice: String = ""
+    var limitAmount: String = ""
+
+    required init?(balance: Balance) {
+        icon = AppConfiguration.ServerIconsBaseURLString + balance.assetType.replacingOccurrences(of: ".", with: "_") + "_grey.png"
+
+        name = appData.assetInfo[balance.assetType]?.symbol.filterJade ?? "--"
         // 获得自己的个数
-        if let asset_info = app_data.assetInfo[balance.asset_type] {
-            realAmount = getRealAmount(balance.asset_type, amount: balance.balance).string(digits: asset_info.precision, roundingMode: .down)
+        if let assetInfo = appData.assetInfo[balance.assetType] {
+            realAmount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: assetInfo.precision, roundingMode: .down)
         }
-        
         // 获取对应CYB的个数
-        let amountCYB = app_data.cyb_rmb_price == 0 ? "-" :  String(getAssetRMBPrice(balance.asset_type) / app_data.cyb_rmb_price * (realAmount.toDouble())!)
-        
-//        let amountCYB = changeToETHAndCYB(balance.asset_type).cyb == "0" ? "-" :  String(changeToETHAndCYB(balance.asset_type).cyb.toDouble()! * (realAmount.toDouble())!)
-        
+        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice.doubleValue * (realAmount.toDouble())!)
+
         if let _ = amountCYB.toDouble() {
-            rbmPrice = "≈¥" + (getRealAmount(balance.asset_type, amount: balance.balance) * Decimal(getAssetRMBPrice(balance.asset_type))).string(digits: 2, roundingMode: .down)
-        }else{
+            rbmPrice = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * Decimal(getAssetRMBPrice(balance.assetType))).string(digits: 4, roundingMode: .down)
+        } else {
             rbmPrice = "-"
         }
-        
+
         //获取冻结资产
         var limitDecimal: Decimal = 0
-        
+
         if let limitArray = UserManager.shared.limitOrder.value {
             for limit in limitArray {
-                if limit.sellPrice.base.assetID == balance.asset_type {
-                    let amount = getRealAmount(balance.asset_type, amount: limit.forSale)
-                    limitDecimal = limitDecimal + amount
+                if limit.sellPrice.base.assetID == balance.assetType {
+                    let amount = getRealAmount(balance.assetType, amount: limit.forSale)
+                    limitDecimal += amount
                 }
             }
-            if let asset_info = app_data.assetInfo[balance.asset_type] {
+            if let assetInfo = appData.assetInfo[balance.assetType] {
                 if limitDecimal == 0 {
                     limitAmount = R.string.localizable.frozen.key.localized() + "--"
                 } else {
-                    log.debug("limitAmountlimitAmount\(limitDecimal.doubleValue)")
-                    limitAmount = R.string.localizable.frozen.key.localized() + limitDecimal.string(digits: asset_info.precision, roundingMode: .down)
+                    limitAmount = R.string.localizable.frozen.key.localized() +
+                        limitDecimal.string(digits: assetInfo.precision,
+                                            roundingMode: .down)
                 }
             }
         }

@@ -13,46 +13,41 @@ import Presentr
 protocol RegisterCoordinatorProtocol {
   func pushCreateTip()
   func switchToLogin()
-  func confirmRegister(_ password:String)
+  func confirmRegister(_ password: String)
   func dismiss()
 }
 
 protocol RegisterStateManagerProtocol {
   var state: RegisterState { get }
-  func subscribe<SelectedState, S: StoreSubscriber>(
-    _ subscriber: S, transform: ((Subscription<RegisterState>) -> Subscription<SelectedState>)?
-  ) where S.StoreSubscriberStateType == SelectedState
 }
 
-class RegisterCoordinator: EntryRootCoordinator {
+class RegisterCoordinator: NavCoordinator {
   let presenter: Presentr = {
     let width = ModalSize.custom(size: 272)
     let height = ModalSize.custom(size: 340)
     let center = ModalCenterPosition.center
     let customType = PresentationType.custom(width: width, height: height, center: center)
-    
+
     let customPresenter = Presentr(presentationType: customType)
     customPresenter.roundCorners = true
     return customPresenter
   }()
-  
+
   let codePresenter: Presentr = {
     let width = ModalSize.custom(size: 272)
     let height = ModalSize.custom(size: 226)
     let center = ModalCenterPosition.custom(centerPoint: CGPoint(x: UIApplication.shared.keyWindow!.width / 2, y: (UIApplication.shared.keyWindow!.height / 2) - 130))
     let customType = PresentationType.custom(width: width, height: height, center: center)
-    
+
     let customPresenter = Presentr(presentationType: customType)
     customPresenter.roundCorners = true
     return customPresenter
   }()
-  
-  lazy var creator = RegisterPropertyActionCreate()
-  
+
   var store = Store<RegisterState>(
-    reducer: RegisterReducer,
+    reducer: registerReducer,
     state: nil,
-    middleware:[TrackingMiddleware]
+    middleware: [trackingMiddleware]
   )
 }
 
@@ -61,14 +56,14 @@ extension RegisterCoordinator: RegisterCoordinatorProtocol {
     let vc = R.storyboard.main.registerTipViewController()!
       self.rootVC.pushViewController(vc, animated: true)
   }
-  
-  func confirmRegister(_ password:String) {
+
+  func confirmRegister(_ password: String) {
     let vc = R.storyboard.main.noticeBoardViewController()!
     vc.password = password
     vc.coordinator = self
     self.rootVC.topViewController?.customPresentViewController(presenter, viewController: vc, animated: true, completion: nil)
   }
-  
+
   func switchToLogin() {
     UIView.beginAnimations("login", context: nil)
     UIView.setAnimationCurve(.easeInOut)
@@ -77,9 +72,9 @@ extension RegisterCoordinator: RegisterCoordinatorProtocol {
     self.rootVC.popViewController(animated: true)
     UIView.commitAnimations()
   }
-  
+
   func dismiss() {
-    app_coodinator.rootVC.dismiss(animated: true, completion: nil)
+    appCoodinator.rootVC.dismiss(animated: true, completion: nil)
   }
 }
 
@@ -87,11 +82,4 @@ extension RegisterCoordinator: RegisterStateManagerProtocol {
   var state: RegisterState {
     return store.state
   }
-  
-  func subscribe<SelectedState, S: StoreSubscriber>(
-    _ subscriber: S, transform: ((Subscription<RegisterState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState {
-    store.subscribe(subscriber, transform: transform)
-  }
-  
 }

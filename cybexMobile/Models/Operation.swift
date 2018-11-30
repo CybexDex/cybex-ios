@@ -7,60 +7,60 @@
 //
 
 import Foundation
-import ObjectMapper
+import HandyJSON
 
-class Transfer : Mappable, NSCopying {
+class Transfer: HandyJSON, NSCopying {
   var from: String = ""
   var to: String = ""
-  var fee: Asset = Asset(JSON: [:])!
-  var amount: Asset = Asset(JSON: [:])!
-  
-  required init?(map: Map) {
+  var fee: Asset = Asset()
+  var amount: Asset = Asset()
+
+  required init() {
   }
-  
-  func mapping(map: Map) {
-    from                   <- (map["from"],ToStringTransform())
-    to          <- (map["to"],ToStringTransform())
-    fee         <- map["fee"]
-    amount            <- map["amount"]
+
+  func mapping(mapper: HelpingMapper) {
+    mapper <<< from                   <-- ("from", ToStringTransform())
+    mapper <<< to          <-- ("to", ToStringTransform())
+    mapper <<< fee         <-- "fee"
+    mapper <<< amount            <-- "amount"
   }
-  
+
   func copy(with zone: NSZone? = nil) -> Any {
-    let copy = Transfer(JSON: self.toJSON())!
-    return copy
+    let copy = Transfer.deserialize(from: self.toJSON())
+    return copy ?? Transfer()
   }
-  
+
   static func empty() -> Transfer {
-    return Transfer(JSON: [:])!
+    return Transfer()
   }
 }
 
-class FillOrder:Mappable, NSCopying {
-  var fill_price: Price = Price(JSON:[:])!
-  var fee: Asset = Asset(JSON: [:])!
-  var pays: Asset = Asset(JSON: [:])!
-  var receives: Asset = Asset(JSON: [:])!
-  var is_maker:Int = 0 //0 1
-  var block_num : Int = 0
-  
-  required init?(map: Map) {
+class FillOrder: HandyJSON, NSCopying {
+  var fillPrice: Price = Price()
+  var fee: Asset = Asset()
+  var pays: Asset = Asset()
+  var receives: Asset = Asset()
+  var isMaker: Int = 0 //0 1
+  var blockNum: Int = 0
+
+  required init() {
   }
-  
-  func mapping(map: Map) {
-    fill_price                   <- map["fill_price"]
-    fee                   <- map["fee"]
-    pays                   <- map["pays"]
-    receives                   <- map["receives"]
-    is_maker                   <- map["is_maker"]
-    block_num                   <- map["block_num"]
+
+  func mapping(mapper: HelpingMapper) {
+    mapper <<< fillPrice                   <-- "fill_price"
+    mapper <<< fee                   <-- "fee"
+    mapper <<< pays                   <-- "pays"
+    mapper <<< receives                   <-- "receives"
+    mapper <<< isMaker                   <-- "is_maker"
+    mapper <<< blockNum                   <-- "block_num"
   }
-  
+
   func copy(with zone: NSZone? = nil) -> Any {
-    let copy = FillOrder(JSON: self.toJSON())!
-    return copy
+    let copy = FillOrder.deserialize(from: self.toJSON())
+    return copy ?? FillOrder()
   }
-  
+
   static func empty() -> FillOrder {
-    return FillOrder(JSON: [:])!
+    return FillOrder()
   }
 }

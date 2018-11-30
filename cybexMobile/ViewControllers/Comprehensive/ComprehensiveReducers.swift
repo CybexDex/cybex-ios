@@ -9,11 +9,11 @@
 import UIKit
 import ReSwift
 
-func ComprehensiveReducer(action:Action, state:ComprehensiveState?) -> ComprehensiveState {
+func comprehensiveReducer(action: Action, state: ComprehensiveState?) -> ComprehensiveState {
     let state = state ?? ComprehensiveState()
-    
+
     switch action {
-        
+
     case let action as FetchHotAssetsAction:
         state.hotPairs.accept(action.data)
     case let action as FetchMiddleItemAction:
@@ -25,7 +25,7 @@ func ComprehensiveReducer(action:Action, state:ComprehensiveState?) -> Comprehen
     default:
         break
     }
-    
+
     return state
 }
 
@@ -35,5 +35,3 @@ func bannerSorting(_ banners: [ComprehensiveBanner]) -> [ComprehensiveBanner] {
     }
     return banners.sorted(by: { return $0.score > $1.score })
 }
-
-

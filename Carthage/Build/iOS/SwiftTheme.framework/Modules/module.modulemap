@@ -1,0 +1,11 @@
+framework module SwiftTheme {
+  umbrella header "SwiftTheme.h"
+
+  export *
+  module * { export * }
+}
+
+module SwiftTheme.Swift {
+    header "SwiftTheme-Swift.h"
+    requires objc
+}

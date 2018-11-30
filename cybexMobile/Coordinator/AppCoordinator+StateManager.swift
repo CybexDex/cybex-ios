@@ -13,53 +13,36 @@ import Repeat
 import SwifterSwift
 import Reachability
 
-extension AppCoordinator: AppStateManagerProtocol {
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<AppState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-    
-//    func fetchData(_ params: AssetPairQueryParams, sub: Bool = true, priority: Foundation.Operation.QueuePriority = .normal, callback:@escaping ()->()) {
-//        store.dispatch(creator.fetchMarket(with: sub, params: params, priority:priority, callback: { [weak self] (assets) in
-//            guard let `self` = self else { return }
-//            callback()
-//            self.store.dispatch(MarketsFetched(pair: params, assets: assets))
-//        }))
-//    }
-    
-    func fetchData(_ params: AssetPairQueryParams, sub: Bool = true, priority: Foundation.Operation.QueuePriority = .normal) {
-        store.dispatch(creator.fetchMarket(with: sub, params: params, priority: priority, callback: { [weak self] (assets) in
-            guard let `self` = self else { return }
-            
-            self.store.dispatch(MarketsFetched(pair: params, assets: assets))
-        }))
-    }
-    
+extension AppCoordinator {
     func fetchTickerData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority) {
         creator.fetchCurrencyList(params) { [weak self](asset) in
             guard let `self` = self else { return }
             self.store.dispatch(TickerFetched(asset: asset))
         }
     }
-    
-    func fetchKline(_ params: AssetPairQueryParams, gap: candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
-        store.dispatch(creator.fetchMarket(with: false, params: params, priority:.high , callback: { [weak self] (assets) in
+
+    func fetchKline(_ params: AssetPairQueryParams, gap: Candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
+        store.dispatch(creator.fetchMarket(with: false, params: params, priority: .high, callback: { [weak self] (assets) in
             guard let `self` = self else { return }
-            
-            self.store.dispatch(kLineFetched(pair: Pair(base: params.firstAssetId, quote: params.secondAssetId), stick: gap, assets: assets))
+
+            self.store.dispatch(KLineFetched(pair: Pair(base: params.firstAssetId, quote: params.secondAssetId), stick: gap, assets: assets))
             if let vc = vc, let sel = selector {
                 self.store.dispatch(RefreshState(sel: sel, vc: vc))
             }
         }))
     }
-    
-    func fetchAsset(_ callback:@escaping (()->Void)) {
+
+    func fetchAsset(_ callback:@escaping (() -> Void)) {
         async {
-            let data = try! await(SimpleHTTPService.fetchIdsInfo())
+            guard let data = try? await(SimpleHTTPService.fetchIdsInfo()) else {
+                main {
+                    callback()
+                }
+                return
+            }
+
             main {
-                AssetConfiguration.shared.unique_ids = data
+                AssetConfiguration.shared.uniqueIds = data
                 let request = GetObjectsRequest(ids: data) { response in
                     if let assetinfo = response as? [AssetInfo] {
                         for info in assetinfo {
@@ -68,14 +51,16 @@ extension AppCoordinator: AppStateManagerProtocol {
                         callback()
                     }
                 }
-                CybexWebSocketService.shared.send(request: request, priority:.veryHigh)
+                CybexWebSocketService.shared.send(request: request, priority: .veryHigh)
             }
         }
     }
-    
-    func fetchEthToRmbPrice(){
+
+    func fetchEthToRmbPrice() {
         async {
-            let value = try! await(SimpleHTTPService.requestETHPrice())
+            guard let value = try? await(SimpleHTTPService.requestETHPrice()) else {
+                return
+            }
             if value.count == 0 {
                 return
             }
@@ -83,168 +68,168 @@ extension AppCoordinator: AppStateManagerProtocol {
                 self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
             }
         }
-        
-        self.timer = Repeater.every(.seconds(3)) {[weak self] timer in
-            let value = try! await(SimpleHTTPService.requestETHPrice())
+
+        self.timer = Repeater.every(.seconds(3)) {[weak self] _ in
+            guard let value = try? await(SimpleHTTPService.requestETHPrice()) else {
+                return
+            }
             if value.count == 0 {
                 return
             }
             main { [weak self] in
                 self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
             }
-            
-            let marketList = try! await(SimpleHTTPService.fetchMarketListJson())
+
+            guard let marketList = try? await(SimpleHTTPService.fetchMarketListJson()) else {
+                return
+            }
             main { [weak self] in
                 self?.store.dispatch(FecthMarketListAction(data: marketList))
             }
         }
-        
+
         timer?.start()
-    }
-    
-    
-    func fetchGetToCyb(_ callback:@escaping(Decimal)->()) {
-        let request = GetTickerRequest(baseName: AssetConfiguration.ETH, quoteName: AssetConfiguration.CYB, response: { [weak self](data) in
-            guard let `self` = self else { return }
-            if let data = data as? Ticker, let dataDouble = data.latest.toDecimal(), dataDouble != 0 {
-                self.getToCybRelation = Decimal(floatLiteral: 1) / dataDouble
-                callback(1 / dataDouble)
-            }
-            else {
-                callback(0)
-            }
-        })
-        CybexWebSocketService.shared.send(request: request)
     }
 }
 
 extension AppCoordinator {
-    
+
     /*
      1 根据base分组
      2 根据refreshTime刷新
      3 延迟函数
      */
-    
-    func request24hMarkets(_ pairs: [Pair], sub: Bool = true ,totalTime:Double = 3,splits:Int = 3, priority:Operation.QueuePriority = .normal ,isNoFirst: Bool = true) {
+
+    func request24hMarkets(_ pairs: [Pair], sub: Bool = true, totalTime: Double = 3, splits: Int = 3, priority: Operation.QueuePriority = .normal, isNoFirst: Bool = true) {
         let now = Date()
         let curTime = now.timeIntervalSince1970
-        
+
         var start = now.addingTimeInterval(-3600 * 24)
-        
+
         let timePassed = (-start.minute * 60 - start.second).double
         start = start.addingTimeInterval(timePassed)
         let filterPairs = pairs.filter { (pair) -> Bool in
-            if let refreshTimes = app_data.pairsRefreshTimes, let oldTime = refreshTimes[pair] {
+            if let refreshTimes = appData.pairsRefreshTimes, let oldTime = refreshTimes[pair] {
                 return curTime - oldTime >= 5
             }
             return true
         }
-        
+
         if isNoFirst {
             for pair in filterPairs {
-                
-                AppConfiguration.shared.appCoordinator.fetchTickerData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority: priority)
-                
-//                AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: start, endTime: now), sub: sub, priority:priority)
+                AppConfiguration.shared.appCoordinator.fetchTickerData(
+                    AssetPairQueryParams(firstAssetId: pair.base,
+                                         secondAssetId: pair.quote,
+                                         timeGap: 60 * 60,
+                                         startTime: start,
+                                         endTime: now),
+                    sub: sub,
+                    priority: priority)
             }
-        }else {
-            fetch24Markets(UserManager.shared.refreshTime, startTime: start, now: now,sub: sub,priority: priority)
+        } else {
+            fetch24Markets(UserManager.shared.refreshTime, startTime: start, now: now, sub: sub, priority: priority)
         }
     }
-    
-    
-    func fetch24Markets(_ time : TimeInterval ,startTime : Date ,now : Date ,sub : Bool = true ,priority:Operation.QueuePriority = .normal) {
-        
-        let timeSpace = time / Double(AssetConfiguration.market_base_assets.count)
-        
-        var refreshTime : TimeInterval = 0
-        for index in 0..<AssetConfiguration.market_base_assets.count {
-            let base = AssetConfiguration.market_base_assets[index]
+
+    func fetch24Markets(_ time: TimeInterval, startTime: Date, now: Date, sub: Bool = true, priority: Operation.QueuePriority = .normal) {
+
+        let timeSpace = time / Double(AssetConfiguration.marketBaseAssets.count)
+
+        var refreshTime: TimeInterval = 0
+        for index in 0..<AssetConfiguration.marketBaseAssets.count {
+            let base = AssetConfiguration.marketBaseAssets[index]
             refreshTime = Double(index) * timeSpace
-            let pairs = AssetConfiguration.shared.asset_ids.filter({return $0.base == base})
+            let pairs = AssetConfiguration.shared.assetIds.filter({return $0.base == base})
             SwifterSwift.delay(milliseconds: refreshTime * 1000.0) {
                 for pair in pairs {
                     if CybexWebSocketService.shared.overload() {
                         return
                     }
-                    AppConfiguration.shared.appCoordinator.fetchTickerData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: startTime, endTime: now), sub: sub, priority: priority)
-
-//                    AppConfiguration.shared.appCoordinator.fetchData(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: 60 * 60, startTime: startTime, endTime: now), sub: sub, priority:priority)
+                    AppConfiguration.shared.appCoordinator.fetchTickerData(
+                        AssetPairQueryParams(firstAssetId: pair.base,
+                                             secondAssetId: pair.quote,
+                                             timeGap: 60 * 60,
+                                             startTime: startTime,
+                                             endTime: now),
+                        sub: sub,
+                        priority: priority)
                 }
             }
         }
     }
-    
-    func repeatFetchPairInfo(_ priority:Operation.QueuePriority = .normal){
+
+    func repeatFetchPairInfo(_ priority: Operation.QueuePriority = .normal) {
         if self.fetchPariTimer != nil {
             self.fetchPariTimer?.pause()
             self.fetchPariTimer = nil
         }
-        
+
         self.fetchPariTimer = Repeater.every(.seconds(UserManager.shared.refreshTime), { [weak self](timer) in
             main {
                 guard let `self` = self else {return}
                 if reachability.connection == .none ||
                     !CybexWebSocketService.shared.checkNetworConnected() {
-                        app_coodinator.fetchPariTimer = nil
+                        appCoodinator.fetchPariTimer = nil
                         timer.pause()
                         return
                 }
                 self.state.property.otherRequestRelyData.accept(1)
-                self.request24hMarkets(AssetConfiguration.shared.asset_ids, sub: false, priority: priority, isNoFirst: false)
+                self.request24hMarkets(AssetConfiguration.shared.assetIds, sub: false, priority: priority, isNoFirst: false)
             }
         })
     }
-    
-    func requestKlineDetailData(pair: Pair, gap: candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
+
+    func requestKlineDetailData(pair: Pair, gap: Candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
         let now = Date()
         let start = now.addingTimeInterval(-gap.rawValue * 199)
-        
-        AppConfiguration.shared.appCoordinator.fetchKline(AssetPairQueryParams(firstAssetId: pair.base, secondAssetId: pair.quote, timeGap: gap.rawValue.int, startTime: start, endTime: now), gap: gap, vc: vc, selector: selector)
+
+        AppConfiguration.shared.appCoordinator.fetchKline(
+            AssetPairQueryParams(firstAssetId: pair.base,
+                                 secondAssetId: pair.quote,
+                                 timeGap: gap.rawValue.int,
+                                 startTime: start,
+                                 endTime: now),
+            gap: gap,
+            vc: vc,
+            selector: selector)
     }
-    
+
     func getLatestData() {
-        if AssetConfiguration.shared.asset_ids.isEmpty {
+        if AssetConfiguration.shared.assetIds.isEmpty {
             fetchAsset {
-                var pairs:[Pair] = []
+                var pairs: [Pair] = []
                 var count = 0
-                for base in AssetConfiguration.market_base_assets {
-                    SimpleHTTPService.requestMarketList(base:base).done({ (pair) in
-                        
-                        let piece_pair = pair.filter({ (p) -> Bool in
-                            return AssetConfiguration.shared.unique_ids.contains([p.base, p.quote])
+                for base in AssetConfiguration.marketBaseAssets {
+                   
+                    SimpleHTTPService.requestMarketList(base: base).done({ (pair) in
+                        let piecePair = pair.filter({ (pair) -> Bool in
+                            return AssetConfiguration.shared.uniqueIds.contains([pair.base, pair.quote])
                         })
+                        if base == AssetConfiguration.ETH {
+                            print("base ETH")
+                        }
                         count += 1
-                        
-                        pairs += piece_pair
-                        if count == AssetConfiguration.market_base_assets.count {
-                            AssetConfiguration.shared.asset_ids = pairs
-                            self.request24hMarkets(AssetConfiguration.shared.asset_ids,priority:.high)
+                        pairs += piecePair
+                        if count == AssetConfiguration.marketBaseAssets.count {
+                            AssetConfiguration.shared.assetIds = pairs
+                            self.request24hMarkets(AssetConfiguration.shared.assetIds, priority: .high)
                         }
                     }).cauterize()
                 }
-                
-                if app_coodinator.fetchPariTimer == nil || !(app_coodinator.fetchPariTimer!.state.isRunning){
+                if appCoodinator.fetchPariTimer == nil || !(appCoodinator.fetchPariTimer!.state.isRunning) {
                     AppConfiguration.shared.appCoordinator.repeatFetchPairInfo(.veryLow)
                 }
-                
             }
-            
-        }
-        else {
-            if app_data.assetInfo.count != AssetConfiguration.shared.unique_ids.count {
+        } else {
+            if appData.assetInfo.count != AssetConfiguration.shared.uniqueIds.count {
                 fetchAsset {
-                    self.request24hMarkets(AssetConfiguration.shared.asset_ids, priority:.high)
+                    self.request24hMarkets(AssetConfiguration.shared.assetIds, priority: .high)
                 }
             }
-            request24hMarkets(AssetConfiguration.shared.asset_ids, priority:.high)
-            if app_coodinator.fetchPariTimer == nil || !(app_coodinator.fetchPariTimer!.state.isRunning){
+            request24hMarkets(AssetConfiguration.shared.assetIds, priority: .high)
+            if appCoodinator.fetchPariTimer == nil || !(appCoodinator.fetchPariTimer!.state.isRunning) {
                 AppConfiguration.shared.appCoordinator.repeatFetchPairInfo(.veryLow)
             }
         }
     }
 }
-
-
-

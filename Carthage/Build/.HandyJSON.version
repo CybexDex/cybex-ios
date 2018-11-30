@@ -1,0 +1,9 @@
+{
+  "commitish" : "4.2.0-beta1",
+  "iOS" : [
+    {
+      "name" : "HandyJSON",
+      "hash" : "bb252ba5c95e0f500d752b448b412b48f8807c359e0afb7aab4ca4f5baae2817"
+    }
+  ]
+}

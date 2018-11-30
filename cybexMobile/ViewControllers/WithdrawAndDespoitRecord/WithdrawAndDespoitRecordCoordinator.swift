@@ -16,25 +16,25 @@ protocol WithdrawAndDespoitRecordCoordinatorProtocol {
 
 protocol WithdrawAndDespoitRecordStateManagerProtocol {
     var state: WithdrawAndDespoitRecordState { get }
-    
-    func switchPageState(_ state:PageState)
-    
+
+    func switchPageState(_ state: PageState)
+
     func setupChildrenVC(_ segue: UIStoryboardSegue)
-    
+
     func childrenFetchData(_ info: String, index: RecordChooseType)
 }
 
-class WithdrawAndDespoitRecordCoordinator: AccountRootCoordinator {
+class WithdrawAndDespoitRecordCoordinator: NavCoordinator {
     var store = Store(
-        reducer: WithdrawAndDespoitRecordReducer,
+        reducer: withdrawAndDespoitRecordReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
-    
+
     var state: WithdrawAndDespoitRecordState {
         return store.state
     }
-            
+
     override func register() {
         Broadcaster.register(WithdrawAndDespoitRecordCoordinatorProtocol.self, observer: self)
         Broadcaster.register(WithdrawAndDespoitRecordStateManagerProtocol.self, observer: self)
@@ -45,26 +45,26 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordCoordinat
     func openRecordDetailUrl(_ url: String) {
         if let vc = R.storyboard.main.cybexWebViewController() {
             vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
-            vc.vc_type = .recordDetail
+            vc.vcType = .recordDetail
             vc.url = URL(string: url)
-            self.rootVC.pushViewController(vc ,animated: true)
+            self.rootVC.pushViewController(vc, animated: true)
         }
     }
 }
 
 extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateManagerProtocol {
-    func switchPageState(_ state:PageState) {
+    func switchPageState(_ state: PageState) {
         DispatchQueue.main.async {
             self.store.dispatch(PageStateAction(state: state))
         }
     }
-    
+
     func setupChildrenVC(_ segue: UIStoryboardSegue) {
         if let segueInfo = R.segue.withdrawAndDespoitRecordViewController.withdrawAndDespoitRecordViewController(segue: segue) {
             segueInfo.destination.coordinator = RechargeRecodeCoordinator(rootVC: self.rootVC)
         }
     }
-    
+
     func childrenFetchData(_ info: String, index: RecordChooseType) {
         if let vc = self.rootVC.topViewController as? WithdrawAndDespoitRecordViewController {
             for childrenVC in vc.children {
@@ -72,13 +72,12 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
                     childVC.tableView.es.resetNoMoreData()
                     childVC.isNoMoreData = false
                     switch index {
-                    case .Asset:
+                    case .asset:
                         if info == R.string.localizable.openedAll.key.localized() {
                             childVC.assetInfo = nil
-                        }
-                        else {
+                        } else {
                             var assetInfo: AssetInfo?
-                            for (_, value) in app_data.assetInfo {
+                            for (_, value) in appData.assetInfo {
                                 if value.symbol.filterJade == info.filterJade {
                                     assetInfo = value
                                     break
@@ -87,17 +86,16 @@ extension WithdrawAndDespoitRecordCoordinator: WithdrawAndDespoitRecordStateMana
                             childVC.assetInfo = assetInfo
                         }
                         break
-                    case .FoudType:
+                    case .foudType:
                         if info == R.string.localizable.openedAll.key.localized() {
-                            childVC.record_type = .ALL
-                        }
-                        else if info == R.string.localizable.recharge_deposit.key.localized() {
-                            childVC.record_type = .DEPOSIT
-                        }
-                        else if info == R.string.localizable.recharge_withdraw.key.localized() {
-                            childVC.record_type = .WITHDRAW
+                            childVC.recordType = .ALL
+                        } else if info == R.string.localizable.recharge_deposit.key.localized() {
+                            childVC.recordType = .DEPOSIT
+                        } else if info == R.string.localizable.recharge_withdraw.key.localized() {
+                            childVC.recordType = .WITHDRAW
                         }
                         break
+                    default:break
                     }
                     childVC.fetchDepositRecords(offset: 0) {}
                 }

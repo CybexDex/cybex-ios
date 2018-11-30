@@ -26,7 +26,11 @@ class CBKLineMainView: UIView {
     var focusModel: CBKLineModel?
     
     // 绘制区域的最大Y值
-    fileprivate let padding: UIEdgeInsets = UIEdgeInsets(top: CBConfiguration.sharedConfiguration.main.valueAssistViewHeight, left: 0, bottom: CBConfiguration.sharedConfiguration.main.valueAssistViewHeight, right: 0)
+    fileprivate let padding: UIEdgeInsets = UIEdgeInsets(
+        top: CBConfiguration.sharedConfiguration.main.valueAssistViewHeight,
+        left: 0,
+        bottom: CBConfiguration.sharedConfiguration.main.valueAssistViewHeight,
+        right: 0)
     
     var drawMaxY: CGFloat {
         return height - padding.bottom
@@ -139,13 +143,13 @@ class CBKLineMainView: UIView {
                 
                 // 决定K线颜色
                 var strokeColor: UIColor = configuration.theme.increaseColor
-                let last_model: CBKLineModel? = index >= 1 ? mainDrawKLineModels[index - 1] : nil
+                let lastModel: CBKLineModel? = index >= 1 ? mainDrawKLineModels[index - 1] : nil
                 
-                if klineModel.volume == 0, let _ = last_model {
+                if klineModel.volume == 0, let _ = lastModel {
                     strokeColor = strokeColors[index - 1]
                 }
                 
-                if klineModel.open == klineModel.close, let lastmodel = last_model {
+                if klineModel.open == klineModel.close, let lastmodel = lastModel {
                     strokeColor = klineModel.close < lastmodel.close ? configuration.theme.decreaseColor : configuration.theme.increaseColor
                 }
                 
@@ -161,7 +165,13 @@ class CBKLineMainView: UIView {
                     context.setLineWidth(configuration.theme.klineShadowLineWidth)
                     context.strokeLineSegments(between: [CGPoint(x: xPosition, y: closePoint.y), CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: closePoint.y)])
                 } else {
-                    let path = UIBezierPath(roundedRect: CGRect(x: xPosition, y: klineModel.open < klineModel.close ? closePoint.y : openPoint.y, width: configuration.theme.klineWidth, height: max(abs(closePoint.y - openPoint.y), configuration.theme.klineShadowLineWidth)), cornerRadius: configuration.theme.klineRadius).cgPath
+                    let path = UIBezierPath(
+                        roundedRect: CGRect(x: xPosition,
+                                            y: klineModel.open < klineModel.close ? closePoint.y : openPoint.y,
+                                            width: configuration.theme.klineWidth,
+                                            height: max(abs(closePoint.y - openPoint.y),
+                                                        configuration.theme.klineShadowLineWidth)),
+                        cornerRadius: configuration.theme.klineRadius).cgPath
                     context.addPath(path)
                     context.setFillColor(strokeColor.cgColor)
                     context.fillPath()
@@ -195,7 +205,7 @@ class CBKLineMainView: UIView {
         // max min value
         
         if let highPointY = highPointY, let lowPointY = lowPointY, let highPointX = highPointX, let lowPointX = lowPointX, let minModel = minModel, let maxModel = maxModel {
-            drawMaxMin(context: context, low_klineModel: minModel, high_klineModel: maxModel, low_position: CGPoint(x: lowPointX, y: lowPointY), high_position: CGPoint(x: highPointX, y: highPointY))
+            drawMaxMin(context: context, lowKlineModel: minModel, highKlineModel: maxModel, lowPosition: CGPoint(x: lowPointX, y: lowPointY), highPosition: CGPoint(x: highPointX, y: highPointY))
         }
     }
 }
@@ -211,12 +221,12 @@ extension CBKLineMainView {
     fileprivate func drawDateLine(context: CGContext, klineModel: CBKLineModel, positionX: CGFloat) {
         
         let date = Date(timeIntervalSince1970: klineModel.date)
-        var dateString = configuration.dateFormatter.string(from: date)
-//        if configuration.main.timeLineType == .oneDay {
-//
-//        } else {
-//            dateString
-//        }
+        let dateString = configuration.dateFormatter.string(from: date)
+        //        if configuration.main.timeLineType == .oneDay {
+        //
+        //        } else {
+        //            dateString
+        //        }
         
         var dateAttributes: [NSAttributedString.Key: Any]? = [
             NSAttributedString.Key.foregroundColor: configuration.main.dateAssistTextColor,
@@ -226,13 +236,11 @@ extension CBKLineMainView {
         if let model = focusModel {
             if model.propertyDescription() != klineModel.propertyDescription() {
                 return
-            }
-            else {
+            } else {
                 dateAttributes![NSAttributedString.Key.backgroundColor] = configuration.theme.longPressLineColor
                 dateAttributes![NSAttributedString.Key.foregroundColor] = configuration.theme.dashColor
             }
         }
-        
         
         let dateAttrString = NSAttributedString(string: dateString, attributes: dateAttributes)
         
@@ -252,7 +260,6 @@ extension CBKLineMainView {
         //            return
         //        }
         
-        
         if lastDrawDatePoint.equalTo(CGPoint.zero) ||
             abs(drawDatePoint.x - lastDrawDatePoint.x) > (dateAttrString.size().width * 2) {
             let rect = CGRect(x: drawDatePoint.x,
@@ -262,11 +269,14 @@ extension CBKLineMainView {
             
             dateAttrString.draw(in: rect)
             
-            
             if focusModel == nil {
                 context.setStrokeColor(configuration.theme.tickColor.cgColor)
                 context.setLineWidth(configuration.theme.tickWidth)
-                context.strokeLineSegments(between: [CGPoint(x: drawDatePoint.x + dateAttrString.size().width / 2, y: configuration.main.assistViewHeight + configuration.main.dateAssistViewHeight), CGPoint(x: drawDatePoint.x + dateAttrString.size().width / 2, y: height)])
+                context.strokeLineSegments(
+                    between: [CGPoint(x: drawDatePoint.x + dateAttrString.size().width / 2,
+                                      y: configuration.main.assistViewHeight + configuration.main.dateAssistViewHeight),
+                              CGPoint(x: drawDatePoint.x + dateAttrString.size().width / 2,
+                                      y: height)])
                 
                 lastDrawDatePoint = drawDatePoint
             }
@@ -327,16 +337,23 @@ extension CBKLineMainView {
                 let maAttrs: [NSAttributedString.Key: Any]? = [
                     NSAttributedString.Key.foregroundColor: configuration.theme.markColor,
                     NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
-                    NSAttributedString.Key.backgroundColor: configuration.theme.markbgColor,
-                    ]
+                    NSAttributedString.Key.backgroundColor: configuration.theme.markbgColor                    ]
+                
                 
                 let attrs: [NSAttributedString.Key: Any]? = [
                     NSAttributedString.Key.foregroundColor: color,
                     NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
+                    
                     ]
                 
+                
+                
                 if let value = drawModel.MAs![idx] {
+                    if idx != 0 {
+                        drawAttrsString.append(NSAttributedString(string: "\n"))
+                    }
                     let maStr = String(format: "MA(\(days[idx])): ")
+                    
                     drawAttrsString.append(NSAttributedString(string: maStr, attributes: maAttrs))
                     
                     let mavalueStr = String(format: "  %.\(drawModel.precision)f   ", value)
@@ -349,15 +366,18 @@ extension CBKLineMainView {
                 let maAttrs: [NSAttributedString.Key: Any]? = [
                     NSAttributedString.Key.foregroundColor: configuration.theme.markColor,
                     NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
-                    NSAttributedString.Key.backgroundColor: configuration.theme.markbgColor,
-                    ]
+                    NSAttributedString.Key.backgroundColor: configuration.theme.markbgColor
+                ]
                 
                 let attrs: [NSAttributedString.Key: Any]? = [
                     NSAttributedString.Key.foregroundColor: color,
-                    NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
-                    ]
+                    NSAttributedString.Key.font: configuration.main.dateAssistTextFont
+                ]
                 
                 if let value = drawModel.EMAs![idx] {
+                    if idx != 0 {
+                        drawAttrsString.append(NSAttributedString(string: "\n"))
+                    }
                     let maStr = String(format: "EMA(\(days[idx])): ")
                     drawAttrsString.append(NSAttributedString(string: maStr, attributes: maAttrs))
                     
@@ -369,34 +389,34 @@ extension CBKLineMainView {
             let maAttrs: [NSAttributedString.Key: Any]? = [
                 NSAttributedString.Key.foregroundColor: configuration.theme.markColor,
                 NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
-                NSAttributedString.Key.backgroundColor: configuration.theme.markbgColor,
-                ]
+                NSAttributedString.Key.backgroundColor: configuration.theme.markbgColor
+            ]
             let maStr = String(format: "BOLL: ")
             drawAttrsString.append(NSAttributedString(string: maStr, attributes: maAttrs))
             
-            if let value = drawModel.BOLL_MB {
+            if let value = drawModel.bollMB {
                 let mbAttrs: [NSAttributedString.Key: Any]? = [
-                    NSAttributedString.Key.foregroundColor: configuration.theme.BOLL_MBColor,
-                    NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
-                    ]
+                    NSAttributedString.Key.foregroundColor: configuration.theme.bollMBColor,
+                    NSAttributedString.Key.font: configuration.main.dateAssistTextFont
+                ]
                 let mbAttrsStr = NSAttributedString(string: String(format: "  %.\(drawModel.precision)f  ", value), attributes: mbAttrs)
                 drawAttrsString.append(mbAttrsStr)
             }
             
-            if let value = drawModel.BOLL_UP {
+            if let value = drawModel.bollUP {
                 let upAttrs: [NSAttributedString.Key: Any]? = [
-                    NSAttributedString.Key.foregroundColor: configuration.theme.BOLL_UPColor,
-                    NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
-                    ]
+                    NSAttributedString.Key.foregroundColor: configuration.theme.bollUPColor,
+                    NSAttributedString.Key.font: configuration.main.dateAssistTextFont
+                ]
                 let upAttrsStr = NSAttributedString(string: String(format: " %.\(drawModel.precision)f  ", value), attributes: upAttrs)
                 drawAttrsString.append(upAttrsStr)
             }
             
-            if let value = drawModel.BOLL_DN {
+            if let value = drawModel.bollDN {
                 let dnAttrs: [NSAttributedString.Key: Any]? = [
-                    NSAttributedString.Key.foregroundColor: configuration.theme.BOLL_DNColor,
-                    NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
-                    ]
+                    NSAttributedString.Key.foregroundColor: configuration.theme.bollDNColor,
+                    NSAttributedString.Key.font: configuration.main.dateAssistTextFont
+                ]
                 let dnAttrsStr = NSAttributedString(string: String(format: " %.\(drawModel.precision)f  ", value), attributes: dnAttrs)
                 drawAttrsString.append(dnAttrsStr)
             }
@@ -407,38 +427,42 @@ extension CBKLineMainView {
         drawAssistString = drawAttrsString
     }
     
-    fileprivate func drawMaxMin(context _: CGContext, low_klineModel: CBKLineModel, high_klineModel: CBKLineModel, low_position: CGPoint, high_position: CGPoint) {
+    fileprivate func drawMaxMin(context _: CGContext,
+                                lowKlineModel: CBKLineModel,
+                                highKlineModel: CBKLineModel,
+                                lowPosition: CGPoint,
+                                highPosition: CGPoint) {
         let attributes: [NSAttributedString.Key: Any]? = [
             NSAttributedString.Key.foregroundColor: configuration.main.valueAssistTextColor,
-            NSAttributedString.Key.font: configuration.main.valueAssistTextFont,
-            ]
+            NSAttributedString.Key.font: configuration.main.valueAssistTextFont
+        ]
         
-        let mindrawAttrsString = NSMutableAttributedString(string: "←" + low_klineModel.low.string(digits: low_klineModel.precision), attributes: attributes)
+        let mindrawAttrsString = NSMutableAttributedString(string: "←" + lowKlineModel.low.string(digits: lowKlineModel.precision, roundingMode: .down), attributes: attributes)
         
-        var min_X = low_position.x
+        var minX = lowPosition.x
         
-        if (low_position.x + mindrawAttrsString.size().width) > bounds.width {
-            min_X -= mindrawAttrsString.size().width
-            mindrawAttrsString.setAttributedString(NSAttributedString(string: low_klineModel.low.string(digits: low_klineModel.precision) + "→", attributes: attributes))
+        if (lowPosition.x + mindrawAttrsString.size().width) > bounds.width {
+            minX -= mindrawAttrsString.size().width
+            mindrawAttrsString.setAttributedString(NSAttributedString(string: lowKlineModel.low.string(digits: lowKlineModel.precision, roundingMode: .down) + "→", attributes: attributes))
         }
         
-        let minrect = CGRect(x: min_X,
-                             y: low_position.y,
+        let minrect = CGRect(x: minX,
+                             y: lowPosition.y,
                              width: mindrawAttrsString.size().width,
                              height: configuration.main.valueAssistViewHeight)
         
         mindrawAttrsString.draw(in: minrect)
         
-        let maxdrawAttrsString = NSMutableAttributedString(string: "←" + high_klineModel.high.string(digits: high_klineModel.precision), attributes: attributes)
+        let maxdrawAttrsString = NSMutableAttributedString(string: "←" + highKlineModel.high.string(digits: highKlineModel.precision,roundingMode: .down), attributes: attributes)
         
-        var max_X = high_position.x
-        if (high_position.x + mindrawAttrsString.size().width) > bounds.width {
-            max_X -= maxdrawAttrsString.size().width
-            maxdrawAttrsString.setAttributedString(NSAttributedString(string: high_klineModel.high.string(digits: high_klineModel.precision) + "→", attributes: attributes))
+        var maxX = highPosition.x
+        if (highPosition.x + mindrawAttrsString.size().width) > bounds.width {
+            maxX -= maxdrawAttrsString.size().width
+            maxdrawAttrsString.setAttributedString(NSAttributedString(string: highKlineModel.high.string(digits: highKlineModel.precision, roundingMode: .down) + "→", attributes: attributes))
         }
         
-        let maxrect = CGRect(x: max_X,
-                             y: high_position.y - configuration.main.valueAssistViewHeight,
+        let maxrect = CGRect(x: maxX,
+                             y: highPosition.y - configuration.main.valueAssistViewHeight,
                              width: maxdrawAttrsString.size().width,
                              height: configuration.main.valueAssistViewHeight)
         
@@ -523,10 +547,10 @@ extension CBKLineMainView {
                               drawModels: [CBKLineModel]) {
         let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
         
-        let MBLineBrush = CBLineBrush(indicatorType: .BOLL_MB, context: context)
+        let MBLineBrush = CBLineBrush(indicatorType: .bollMB, context: context)
         MBLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
             
-            if let value = model.BOLL_MB {
+            if let value = model.bollMB {
                 let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
                 let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
                 return CGPoint(x: xPosition, y: yPosition)
@@ -535,10 +559,10 @@ extension CBKLineMainView {
         }
         MBLineBrush.draw(drawModels: drawModels)
         
-        let UPLineBrush = CBLineBrush(indicatorType: .BOLL_UP, context: context)
+        let UPLineBrush = CBLineBrush(indicatorType: .bollUp, context: context)
         UPLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
             
-            if let value = model.BOLL_UP {
+            if let value = model.bollUP {
                 let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
                 let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
                 return CGPoint(x: xPosition, y: yPosition)
@@ -547,10 +571,10 @@ extension CBKLineMainView {
         }
         UPLineBrush.draw(drawModels: drawModels)
         
-        let DNLineBrush = CBLineBrush(indicatorType: .BOLL_DN, context: context)
+        let DNLineBrush = CBLineBrush(indicatorType: .bollDN, context: context)
         DNLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
             
-            if let value = model.BOLL_DN {
+            if let value = model.bollDN {
                 let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
                 
                 let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
@@ -628,16 +652,16 @@ extension CBKLineMainView {
                     }
                 }
             case .BOLL:
-                if let value = model.BOLL_MB {
+                if let value = model.bollMB {
                     minValue = value < minValue ? value : minValue
                     maxValue = value > maxValue ? value : maxValue
                 }
                 
-                if let value = model.BOLL_UP {
+                if let value = model.bollUP {
                     minValue = value < minValue ? value : minValue
                     maxValue = value > maxValue ? value : maxValue
                 }
-                if let value = model.BOLL_DN {
+                if let value = model.bollDN {
                     minValue = value < minValue ? value : minValue
                     maxValue = value > maxValue ? value : maxValue
                 }

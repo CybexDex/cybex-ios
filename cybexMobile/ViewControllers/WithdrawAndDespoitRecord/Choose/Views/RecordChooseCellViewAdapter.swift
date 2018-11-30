@@ -9,7 +9,7 @@
 import Foundation
 
 extension RecordChooseCellView {
-    func adapterModelToRecordChooseCellView(_ model:String) {
+    func adapterModelToRecordChooseCellView(_ model: String) {
         self.nameLabel.text = model.filterJade
     }
 }

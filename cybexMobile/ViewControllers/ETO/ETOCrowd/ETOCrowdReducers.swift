@@ -9,23 +9,21 @@
 import UIKit
 import ReSwift
 
-func ETOCrowdReducer(action:Action, state:ETOCrowdState?) -> ETOCrowdState {
+func ETOCrowdReducer(action: Action, state: ETOCrowdState?) -> ETOCrowdState {
     let state = state ?? ETOCrowdState()
-        
+
     switch action {
     case let action as SetProjectDetailAction:
         state.data.accept(action.data)
-    case let action as fetchCurrentTokenCountAction:
+    case let action as FetchCurrentTokenCountAction:
         state.userData.accept(action.userModel)
     case let action as SetFeeAction:
         state.fee.accept(action.fee)
-    case let action as changeETOValidStatusAction:
+    case let action as ChangeETOValidStatusAction:
         state.validStatus.accept(action.status)
     default:
         break
     }
-        
+
     return state
 }
-
-

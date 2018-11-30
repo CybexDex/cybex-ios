@@ -10,7 +10,7 @@ import Foundation
 import ReSwift
 import RxCocoa
 
-//MARK: - State
+// MARK: - State
 struct ETOState: BaseState {
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 
@@ -22,7 +22,7 @@ struct ETOState: BaseState {
     var bannerUrls: BehaviorRelay<[String]?> = BehaviorRelay(value: nil)
 }
 
-//MARK: - Action
+// MARK: - Action
 struct FetchProjectModelAction: Action {
     var data: [ETOProjectModel]
 }
@@ -42,4 +42,3 @@ struct SetSelectedBannerModelAction: Action {
 struct ResetBannerUrlsAction: Action {
     var data: [ETOBannerModel]
 }
-

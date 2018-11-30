@@ -16,20 +16,22 @@ protocol EntryCoordinatorProtocol {
 
 protocol EntryStateManagerProtocol {
     var state: EntryState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<EntryState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
 }
 
-class EntryCoordinator: EntryRootCoordinator {
-    
-    lazy var creator = EntryPropertyActionCreate()
-    
+class EntryCoordinator: NavCoordinator {
     var store = Store<EntryState>(
-        reducer: EntryReducer,
+        reducer: entryReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
+
+    override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
+        let vc = R.storyboard.main.entryViewController()!
+        let coordinator = EntryCoordinator(rootVC: root)
+        vc.coordinator = coordinator
+        coordinator.store.dispatch(RouteContextAction(context: context))
+        return vc
+    }
 }
 
 extension EntryCoordinator: EntryCoordinatorProtocol {
@@ -37,7 +39,7 @@ extension EntryCoordinator: EntryCoordinatorProtocol {
     let vc = R.storyboard.main.registerViewController()!
     let coordinator = RegisterCoordinator(rootVC: self.rootVC)
     vc.coordinator = coordinator
-    
+
     UIView.beginAnimations("register", context: nil)
     UIView.setAnimationCurve(.easeInOut)
     UIView.setAnimationDuration(0.7)
@@ -45,9 +47,9 @@ extension EntryCoordinator: EntryCoordinatorProtocol {
     self.rootVC.pushViewController(vc, animated: false)
     UIView.commitAnimations()
   }
-  
+
   func dismiss() {
-    app_coodinator.rootVC.dismiss(animated: true, completion: nil)
+    appCoodinator.rootVC.dismiss(animated: true, completion: nil)
   }
 }
 
@@ -55,10 +57,5 @@ extension EntryCoordinator: EntryStateManagerProtocol {
     var state: EntryState {
         return store.state
     }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<EntryState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
+
 }

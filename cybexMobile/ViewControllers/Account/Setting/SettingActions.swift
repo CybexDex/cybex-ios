@@ -8,27 +8,11 @@
 
 import Foundation
 import ReSwift
-import Moya
+import RxCocoa
 
-//MARK: - State
-struct SettingState: StateType {
-    var isLoading = false
-    var page: Int = 1
-    var errorMessage:String?
-    var property: SettingPropertyState
-}
+// MARK: - State
+struct SettingState: BaseState {
+    var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
 
-struct SettingPropertyState {
-    
-}
-
-//MARK: - Action Creator
-class SettingPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: SettingState, _ store: Store<SettingState>) -> Action?
-    
-    public typealias AsyncActionCreator = (
-        _ state: SettingState,
-        _ store: Store <SettingState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
+    var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 }

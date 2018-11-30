@@ -1,0 +1,18 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "1.0.0",
+  "iOS" : [
+    {
+      "name" : "UMCommon",
+      "hash" : "f0ea70cfc4038ec4b1ed96c9941f27eadc15543a15ce11ecf86292d311207b86"
+    }
+  ]
+}

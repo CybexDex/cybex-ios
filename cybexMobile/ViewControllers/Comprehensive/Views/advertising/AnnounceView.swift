@@ -10,29 +10,29 @@ import Foundation
 
 @IBDesignable
 class AnnounceView: CybexBaseView {
-    enum Event:String {
-        case AnnounceViewDidClicked
+    enum Event: String {
+        case announceViewDidClicked
     }
-        
+
     @IBOutlet weak var scrollLableView: AnnounceScrollView!
     @IBOutlet weak var contentView: UIView!
     override func setup() {
         super.setup()
-        
+
         setupUI()
         setupSubViewEvent()
     }
-    
+
     func setupUI() {
         clearBgColor()
         contentView.cornerRadius = contentView.height * 0.5
     }
-    
+
     func setupSubViewEvent() {
-    
+
     }
-    
+
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.AnnounceViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.announceViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }

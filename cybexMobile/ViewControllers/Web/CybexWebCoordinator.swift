@@ -15,21 +15,21 @@ protocol CybexWebCoordinatorProtocol {
 
 protocol CybexWebStateManagerProtocol {
     var state: CybexWebState { get }
-    
-    func switchPageState(_ state:PageState)
+
+    func switchPageState(_ state: PageState)
 }
 
-class CybexWebCoordinator: AccountRootCoordinator {
+class CybexWebCoordinator: NavCoordinator {
     var store = Store(
-        reducer: CybexWebReducer,
+        reducer: cybexWebReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
-    
+
     var state: CybexWebState {
         return store.state
     }
-            
+
     override func register() {
         Broadcaster.register(CybexWebCoordinatorProtocol.self, observer: self)
         Broadcaster.register(CybexWebStateManagerProtocol.self, observer: self)
@@ -37,11 +37,11 @@ class CybexWebCoordinator: AccountRootCoordinator {
 }
 
 extension CybexWebCoordinator: CybexWebCoordinatorProtocol {
-    
+
 }
 
 extension CybexWebCoordinator: CybexWebStateManagerProtocol {
-    func switchPageState(_ state:PageState) {
+    func switchPageState(_ state: PageState) {
         self.store.dispatch(PageStateAction(state: state))
     }
 }

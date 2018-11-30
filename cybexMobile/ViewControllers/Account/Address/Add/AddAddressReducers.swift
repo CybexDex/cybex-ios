@@ -9,17 +9,13 @@
 import UIKit
 import ReSwift
 
-func AddAddressReducer(action:Action, state:AddAddressState?) -> AddAddressState {
-    return AddAddressState(isLoading: loadingReducer(state?.isLoading, action: action), page: pageReducer(state?.page, action: action), errorMessage: errorMessageReducer(state?.errorMessage, action: action), property: AddAddressPropertyReducer(state?.property, action: action))
-}
+func addAddressReducer(action: Action, state: AddAddressState?) -> AddAddressState {
+    let state = state ?? AddAddressState()
 
-func AddAddressPropertyReducer(_ state: AddAddressPropertyState?, action: Action) -> AddAddressPropertyState {
-    var state = state ?? AddAddressPropertyState()
-    
     switch action {
     case let action as SetAssetAction:
         state.asset.accept(action.data)
-        
+
     case let action as VerificationAddressAction :
         state.addressVailed.accept(action.success)
     case let action as VerificationNoteAction:
@@ -28,13 +24,10 @@ func AddAddressPropertyReducer(_ state: AddAddressPropertyState?, action: Action
         state.note.accept(action.data)
     case let action as SetAddressAction:
         state.address.accept(action.data)
-        
+
     default:
         break
     }
-    
+
     return state
 }
-
-
-

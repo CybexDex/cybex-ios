@@ -11,30 +11,24 @@ import ReSwift
 import SwiftyUserDefaults
 
 protocol SettingCoordinatorProtocol {
-    func openSettingDetail(type:settingPage)
+    func openSettingDetail(type: SettingPage)
     func dismiss()
     func openHelpWebView()
 }
 
 protocol SettingStateManagerProtocol {
     var state: SettingState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<SettingState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
-    
-    func changeEnveronment(_ callback:@escaping(Bool)->())
+
+    func changeEnveronment(_ callback:@escaping(Bool) -> Void)
 }
 
-class SettingCoordinator: AccountRootCoordinator {
-    
-    lazy var creator = SettingPropertyActionCreate()
-    
+class SettingCoordinator: NavCoordinator {
     var store = Store<SettingState>(
-        reducer: SettingReducer,
+        reducer: gSettingReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
-    
+
     var state: SettingState {
         return store.state
     }
@@ -44,51 +38,46 @@ extension SettingCoordinator: SettingCoordinatorProtocol {
     func dismiss() {
         self.rootVC.popToRootViewController(animated: true)
     }
-    
-    func openSettingDetail(type:settingPage) {
+
+    func openSettingDetail(type: SettingPage) {
         let vc = R.storyboard.main.settingDetailViewController()!
         vc.pageType = type
         let coordinator = SettingDetailCoordinator(rootVC: self.rootVC)
         vc.coordinator = coordinator
         self.rootVC.pushViewController(vc, animated: true)
     }
-    
+
     func openHelpWebView() {
         if let vc = R.storyboard.main.cybexWebViewController() {
             vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
-            self.rootVC.pushViewController(vc ,animated: true)
+            self.rootVC.pushViewController(vc, animated: true)
         }
     }
 }
 
 extension SettingCoordinator: SettingStateManagerProtocol {
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<SettingState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-    
-    func changeEnveronment(_ callback:@escaping(Bool)->()) {
+    func changeEnveronment(_ callback:@escaping(Bool) -> Void) {
         var isTest = false
         if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
             Defaults[.environment] = ""
             isTest = false
-        }
-        else {
+        } else {
             Defaults[.environment] = "test"
             isTest = true
         }
         changeEnvironmentAction()
-        AssetConfiguration.shared.asset_ids = []
-        AssetConfiguration.shared.unique_ids = []
-        
-        app_data.ticker_data.accept([])
+        AssetConfiguration.shared.assetIds = []
+        AssetConfiguration.shared.uniqueIds = []
+
+        appData.tickerData.accept([])
 
         CybexWebSocketService.shared.disconnect()
         UserManager.shared.logout()
-        CybexWebSocketService.shared.connect()
         callback(isTest)
         self.rootVC.popViewController()
+        if let appdelegate =  UIApplication.shared.delegate as? AppDelegate {
+            appdelegate.fetchEtoHiddenRequest(true)
+            CybexWebSocketService.shared.connect()
+        }
     }
 }

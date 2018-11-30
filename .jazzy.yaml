@@ -1,0 +1,11 @@
+author: Cybex Corporation
+author_url: https://cybex.io
+clean: true
+github_url: https://github.com/CybexDex/cybex-ios
+hide_documentation_coverage: true
+output: docs/public
+sdk: iphonesimulator
+skip_undocumented: true
+source_directory: cybexMobile/
+theme: "jazzy-templates/devdocs"
+readme: REFERENCETOP.md

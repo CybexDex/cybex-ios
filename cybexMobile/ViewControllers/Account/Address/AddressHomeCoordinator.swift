@@ -17,20 +17,15 @@ protocol AddressHomeCoordinatorProtocol {
 
 protocol AddressHomeStateManagerProtocol {
     var state: AddressHomeState { get }
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<AddressHomeState>) -> Subscription<SelectedState>)?
-    ) where S.StoreSubscriberStateType == SelectedState
 }
 
-class AddressHomeCoordinator: AccountRootCoordinator {
-    lazy var creator = AddressHomePropertyActionCreate()
-
+class AddressHomeCoordinator: NavCoordinator {
     var store = Store<AddressHomeState>(
-        reducer: AddressHomeReducer,
+        reducer: addressHomeReducer,
         state: nil,
-        middleware:[TrackingMiddleware]
+        middleware: [trackingMiddleware]
     )
-        
+
     override func register() {
         Broadcaster.register(AddressHomeCoordinatorProtocol.self, observer: self)
         Broadcaster.register(AddressHomeStateManagerProtocol.self, observer: self)
@@ -44,7 +39,7 @@ extension AddressHomeCoordinator: AddressHomeCoordinatorProtocol {
         vc.coordinator = coor
         self.rootVC.pushViewController(vc, animated: true)
     }
-    
+
     func openTransferAddressHomeViewController() {
         let vc = R.storyboard.account.transferAddressHomeViewController()!
         let coor = TransferAddressHomeCoordinator(rootVC: self.rootVC)
@@ -57,11 +52,5 @@ extension AddressHomeCoordinator: AddressHomeStateManagerProtocol {
     var state: AddressHomeState {
         return store.state
     }
-    
-    func subscribe<SelectedState, S: StoreSubscriber>(
-        _ subscriber: S, transform: ((Subscription<AddressHomeState>) -> Subscription<SelectedState>)?
-        ) where S.StoreSubscriberStateType == SelectedState {
-        store.subscribe(subscriber, transform: transform)
-    }
-    
+
 }

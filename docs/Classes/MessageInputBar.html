@@ -1,0 +1,2124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>MessageInputBar Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/MessageInputBar" class="dashAnchor"></a>
+    <a title="MessageInputBar Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (47% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        MessageInputBar Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/AvatarView.html">AvatarView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CellSizeCalculator.html">CellSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatService.html">ChatService</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatServiceProvider.html">ChatServiceProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatServiceProvider/SendType.html">– SendType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatServiceProvider/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputBarButtonItem.html">InputBarButtonItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputBarButtonItem/Spacing.html">– Spacing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputStackView.html">InputStackView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputStackView/Position.html">– Position</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InputTextView.html">InputTextView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/InsetLabel.html">InsetLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LocationMessageCell.html">LocationMessageCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LocationMessageSizeCalculator.html">LocationMessageSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MediaMessageCell.html">MediaMessageCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MediaMessageSizeCalculator.html">MediaMessageSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageCollectionViewCell.html">MessageCollectionViewCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageContainerView.html">MessageContainerView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageContentCell.html">MessageContentCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageInputBar.html">MessageInputBar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageKitDateFormatter.html">MessageKitDateFormatter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageLabel.html">MessageLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageReusableView.html">MessageReusableView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageSizeCalculator.html">MessageSizeCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesCollectionView.html">MessagesCollectionView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesCollectionViewFlowLayout.html">MessagesCollectionViewFlowLayout</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesCollectionViewLayoutAttributes.html">MessagesCollectionViewLayoutAttributes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessagesViewController.html">MessagesViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NSLayoutConstraintSet.html">NSLayoutConstraintSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PlayButtonView.html">PlayButtonView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SeparatorLine.html">SeparatorLine</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TextMessageCell.html">TextMessageCell</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TextMessageSizeCalculator.html">TextMessageSizeCalculator</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/DetectorType.html">DetectorType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageKind.html">MessageKind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageKitError.html">MessageKitError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageStyle.html">MessageStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageStyle/TailCorner.html">– TailCorner</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/MessageStyle/TailStyle.html">– TailStyle</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Bundle.html">Bundle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/CGRect.html">CGRect</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/JSON.html">JSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSAttributedString.html">NSAttributedString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSMutableAttributedString.html">NSMutableAttributedString</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIEdgeInsets.html">UIEdgeInsets</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIView.html">UIView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/InputItem.html">InputItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/InputPlugin.html">InputPlugin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LocationItem.html">LocationItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MediaItem.html">MediaItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageCellDelegate.html">MessageCellDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageInputBarDelegate.html">MessageInputBarDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageLabelDelegate.html">MessageLabelDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessageType.html">MessageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessagesDataSource.html">MessagesDataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessagesDisplayDelegate.html">MessagesDisplayDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/MessagesLayoutDelegate.html">MessagesLayoutDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NBLConvertable.html">NBLConvertable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/NBLModel.html">NBLModel</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Avatar.html">Avatar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AvatarPosition.html">AvatarPosition</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AvatarPosition/Horizontal.html">– Horizontal</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AvatarPosition/Vertical.html">– Vertical</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChatMessage.html">ChatMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HorizontalEdgeInsets.html">HorizontalEdgeInsets</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LabelAlignment.html">LabelAlignment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LocationMessageSnapshotOptions.html">LocationMessageSnapshotOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Sender.html">Sender</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>MessageInputBar</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">MessageInputBar</span> <span class="p">:</span> <span class="kt">UIView</span></code></pre>
+
+                </div>
+              </div>
+            <p>A powerful InputAccessoryView ideal for messaging applications</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Properties"></a>
+                <a name="//apple_ref/swift/Section/Properties" class="dashAnchor"></a>
+                <a href="#/Properties">
+                  <h3 class="section-name">Properties</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC8delegateAA0cdE8Delegate_pSgXwvp"></a>
+                    <a name="//apple_ref/swift/Property/delegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC8delegateAA0cdE8Delegate_pSgXwvp">delegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A delegate to broadcast notifications from the <code>MessageInputBar</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/MessageInputBarDelegate.html">MessageInputBarDelegate</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC14backgroundViewSo6UIViewCvp"></a>
+                    <a name="//apple_ref/swift/Property/backgroundView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC14backgroundViewSo6UIViewCvp">backgroundView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The background UIView anchored to the bottom, left, and right of the MessageInputBar
+with a top anchor equal to the bottom of the top InputStackView</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">backgroundView</span><span class="p">:</span> <span class="kt">UIView</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC11contentViewSo6UIViewCvp"></a>
+                    <a name="//apple_ref/swift/Property/contentView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC11contentViewSo6UIViewCvp">contentView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A content UIView that holds the left/right/bottom InputStackViews and InputTextView. Anchored to the bottom of the
+topStackView and inset by the padding UIEdgeInsets</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">contentView</span><span class="p">:</span> <span class="kt">UIView</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC8blurViewSo014UIVisualEffectG0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/blurView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC8blurViewSo014UIVisualEffectG0Cvp">blurView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A UIVisualEffectView that adds a blur effect to make the view appear transparent.</p>
+<h2 id='important-notes' class='heading'>Important Notes</h2>
+
+<ol>
+<li>The blurView is initially not added to the backgroundView to improve performance when not needed. When <code><a href="../Classes/MessageInputBar.html#/s:8ChatRoom15MessageInputBarC13isTranslucentSbvp">isTranslucent</a></code> is set to TRUE for the first time the blurView is added and anchored to the <code><a href="../Classes/MessageInputBar.html#/s:8ChatRoom15MessageInputBarC14backgroundViewSo6UIViewCvp">backgroundView</a></code>s edge anchors</li>
+</ol>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">blurView</span><span class="p">:</span> <span class="kt">UIVisualEffectView</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC13isTranslucentSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isTranslucent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC13isTranslucentSbvp">isTranslucent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determines if the MessageInputBar should have a translucent effect</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">isTranslucent</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC13separatorLineAA09SeparatorG0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/separatorLine" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC13separatorLineAA09SeparatorG0Cvp">separatorLine</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A SeparatorLine that is anchored at the top of the MessageInputBar with a height of 1</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">separatorLine</span><span class="p">:</span> <span class="kt"><a href="../Classes/SeparatorLine.html">SeparatorLine</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC12topStackViewAA0dgH0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/topStackView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC12topStackViewAA0dgH0Cvp">topStackView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The InputStackView at the InputStackView.top position</p>
+<h2 id='important-notes' class='heading'>Important Notes</h2>
+
+<ol>
+<li>It&rsquo;s axis is initially set to .vertical</li>
+<li>It&rsquo;s alignment is initially set to .fill</li>
+</ol>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">topStackView</span><span class="p">:</span> <span class="kt"><a href="../Classes/InputStackView.html">InputStackView</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC13leftStackViewAA0dgH0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/leftStackView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC13leftStackViewAA0dgH0Cvp">leftStackView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The InputStackView at the InputStackView.left position</p>
+<h2 id='important-notes' class='heading'>Important Notes</h2>
+
+<ol>
+<li>It&rsquo;s axis is initially set to .horizontal</li>
+</ol>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">leftStackView</span><span class="p">:</span> <span class="kt"><a href="../Classes/InputStackView.html">InputStackView</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC14rightStackViewAA0dgH0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/rightStackView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC14rightStackViewAA0dgH0Cvp">rightStackView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The InputStackView at the InputStackView.right position</p>
+<h2 id='important-notes' class='heading'>Important Notes</h2>
+
+<ol>
+<li>It&rsquo;s axis is initially set to .horizontal</li>
+</ol>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">rightStackView</span><span class="p">:</span> <span class="kt"><a href="../Classes/InputStackView.html">InputStackView</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC15bottomStackViewAA0dgH0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/bottomStackView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC15bottomStackViewAA0dgH0Cvp">bottomStackView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The InputStackView at the InputStackView.bottom position</p>
+<h2 id='important-notes' class='heading'>Important Notes</h2>
+
+<ol>
+<li>It&rsquo;s axis is initially set to .horizontal</li>
+<li>It&rsquo;s spacing is initially set to 15</li>
+</ol>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">bottomStackView</span><span class="p">:</span> <span class="kt"><a href="../Classes/InputStackView.html">InputStackView</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC13inputTextViewAA0dgH0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/inputTextView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC13inputTextViewAA0dgH0Cvp">inputTextView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The InputTextView a user can input a message in</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">inputTextView</span><span class="p">:</span> <span class="kt"><a href="../Classes/InputTextView.html">InputTextView</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC10sendButtonAA0deG4ItemCvp"></a>
+                    <a name="//apple_ref/swift/Property/sendButton" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC10sendButtonAA0deG4ItemCvp">sendButton</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A InputBarButtonItem used as the send button and initially placed in the rightStackView</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">sendButton</span><span class="p">:</span> <span class="kt"><a href="../Classes/InputBarButtonItem.html">InputBarButtonItem</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC7paddingSo12UIEdgeInsetsVvp"></a>
+                    <a name="//apple_ref/swift/Property/padding" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC7paddingSo12UIEdgeInsetsVvp">padding</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The anchor contants used by the InputStackView&rsquo;s and InputTextView to create padding
+within the MessageInputBar</p>
+<h2 id='important-notes' class='heading'>Important Notes</h2>
+<pre class="highlight swift"><code><span class="kt">V</span><span class="p">:</span><span class="o">|...</span><span class="p">[</span><span class="kt">InputStackView</span><span class="o">.</span><span class="n">top</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">padding</span><span class="o">.</span><span class="n">top</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">contentView</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">padding</span><span class="o">.</span><span class="n">bottom</span><span class="p">)</span><span class="o">-|</span>
+
+<span class="kt">H</span><span class="p">:</span><span class="o">|-</span><span class="p">(</span><span class="n">padding</span><span class="o">.</span><span class="n">left</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">contentView</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">padding</span><span class="o">.</span><span class="n">right</span><span class="p">)</span><span class="o">-|</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">padding</span><span class="p">:</span> <span class="kt">UIEdgeInsets</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC19topStackViewPaddingSo12UIEdgeInsetsVvp"></a>
+                    <a name="//apple_ref/swift/Property/topStackViewPadding" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC19topStackViewPaddingSo12UIEdgeInsetsVvp">topStackViewPadding</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The anchor constants used by the top InputStackView</p>
+<h2 id='important-notes' class='heading'>Important Notes</h2>
+
+<ol>
+<li>The topStackViewPadding.bottom property is not used. Use padding.top</li>
+</ol>
+<pre class="highlight swift"><code><span class="kt">V</span><span class="p">:</span><span class="o">|-</span><span class="p">(</span><span class="n">topStackViewPadding</span><span class="o">.</span><span class="n">top</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="kt">InputStackView</span><span class="o">.</span><span class="n">top</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">padding</span><span class="o">.</span><span class="n">top</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="kt">InputTextView</span><span class="p">]</span><span class="o">-...|</span>
+
+<span class="kt">H</span><span class="p">:</span><span class="o">|-</span><span class="p">(</span><span class="n">topStackViewPadding</span><span class="o">.</span><span class="n">left</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="kt">InputStackView</span><span class="o">.</span><span class="n">top</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">topStackViewPadding</span><span class="o">.</span><span class="n">right</span><span class="p">)</span><span class="o">-|</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">topStackViewPadding</span><span class="p">:</span> <span class="kt">UIEdgeInsets</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC15textViewPaddingSo12UIEdgeInsetsVvp"></a>
+                    <a name="//apple_ref/swift/Property/textViewPadding" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC15textViewPaddingSo12UIEdgeInsetsVvp">textViewPadding</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The anchor constants used by the InputStackView</p>
+<pre class="highlight swift"><code><span class="kt">V</span><span class="p">:</span><span class="o">|...-</span><span class="p">(</span><span class="n">padding</span><span class="o">.</span><span class="n">top</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">textViewPadding</span><span class="o">.</span><span class="n">top</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="kt">InputTextView</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">textViewPadding</span><span class="o">.</span><span class="n">bottom</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="kt">InputStackView</span><span class="o">.</span><span class="n">bottom</span><span class="p">]</span><span class="o">-...|</span>
+
+<span class="kt">H</span><span class="p">:</span><span class="o">|...-</span><span class="p">[</span><span class="kt">InputStackView</span><span class="o">.</span><span class="n">left</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">textViewPadding</span><span class="o">.</span><span class="n">left</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="kt">InputTextView</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">textViewPadding</span><span class="o">.</span><span class="n">right</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="kt">InputStackView</span><span class="o">.</span><span class="n">right</span><span class="p">]</span><span class="o">-...|</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">textViewPadding</span><span class="p">:</span> <span class="kt">UIEdgeInsets</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageInputBar(py)intrinsicContentSize"></a>
+                    <a name="//apple_ref/swift/Property/intrinsicContentSize" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageInputBar(py)intrinsicContentSize">intrinsicContentSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the most recent size calculated by <code><a href="../Classes/MessageInputBar.html#/s:8ChatRoom15MessageInputBarC29calculateIntrinsicContentSizeSo6CGSizeVyF">calculateIntrinsicContentSize()</a></code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">override</span> <span class="k">var</span> <span class="nv">intrinsicContentSize</span><span class="p">:</span> <span class="kt">CGSize</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC28previousIntrinsicContentSizeSo6CGSizeVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/previousIntrinsicContentSize" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC28previousIntrinsicContentSizeSo6CGSizeVSgvp">previousIntrinsicContentSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The intrinsicContentSize can change a lot so the delegate method
+<code>inputBar(self, didChangeIntrinsicContentTo: size)</code> only needs to be called
+when it&rsquo;s different</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">previousIntrinsicContentSize</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC23isOverMaxTextViewHeightSbvp"></a>
+                    <a name="//apple_ref/swift/Property/isOverMaxTextViewHeight" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC23isOverMaxTextViewHeightSbvp">isOverMaxTextViewHeight</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A boolean that indicates if the maxTextViewHeight has been met. Keeping track of this
+improves the performance</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">isOverMaxTextViewHeight</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC28shouldForceTextViewMaxHeightSbvp"></a>
+                    <a name="//apple_ref/swift/Property/shouldForceTextViewMaxHeight" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC28shouldForceTextViewMaxHeightSbvp">shouldForceTextViewMaxHeight</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A boolean that when set as <code>TRUE</code> will always enable the <code><a href="../Classes/InputTextView.html">InputTextView</a></code> to be anchored to the
+height of <code><a href="../Classes/MessageInputBar.html#/s:8ChatRoom15MessageInputBarC17maxTextViewHeight12CoreGraphics7CGFloatVvp">maxTextViewHeight</a></code>
+The default value is <code>FALSE</code></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">shouldForceTextViewMaxHeight</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC33shouldAutoUpdateMaxTextViewHeightSbvp"></a>
+                    <a name="//apple_ref/swift/Property/shouldAutoUpdateMaxTextViewHeight" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC33shouldAutoUpdateMaxTextViewHeightSbvp">shouldAutoUpdateMaxTextViewHeight</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A boolean that determines if the <code><a href="../Classes/MessageInputBar.html#/s:8ChatRoom15MessageInputBarC17maxTextViewHeight12CoreGraphics7CGFloatVvp">maxTextViewHeight</a></code> should be maintained automatically.
+To control the maximum height of the view yourself, set this to <code>false</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">shouldAutoUpdateMaxTextViewHeight</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC17maxTextViewHeight12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/maxTextViewHeight" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC17maxTextViewHeight12CoreGraphics7CGFloatVvp">maxTextViewHeight</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The maximum height that the InputTextView can reach.
+This is set automatically when <code><a href="../Classes/MessageInputBar.html#/s:8ChatRoom15MessageInputBarC33shouldAutoUpdateMaxTextViewHeightSbvp">shouldAutoUpdateMaxTextViewHeight</a></code> is true.
+To control the height yourself, make sure to set <code><a href="../Classes/MessageInputBar.html#/s:8ChatRoom15MessageInputBarC33shouldAutoUpdateMaxTextViewHeightSbvp">shouldAutoUpdateMaxTextViewHeight</a></code> to false.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">maxTextViewHeight</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC34shouldManageSendButtonEnabledStateSbvp"></a>
+                    <a name="//apple_ref/swift/Property/shouldManageSendButtonEnabledState" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC34shouldManageSendButtonEnabledStateSbvp">shouldManageSendButtonEnabledState</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A boolean that determines whether the sendButton&rsquo;s <code>isEnabled</code> state should be managed automatically.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">shouldManageSendButtonEnabledState</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC08requiredD14TextViewHeight12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/requiredInputTextViewHeight" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC08requiredD14TextViewHeight12CoreGraphics7CGFloatVvp">requiredInputTextViewHeight</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The height that will fit the current text in the InputTextView based on its current bounds</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">requiredInputTextViewHeight</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC26leftStackViewWidthConstant12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/leftStackViewWidthConstant" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC26leftStackViewWidthConstant12CoreGraphics7CGFloatVvp">leftStackViewWidthConstant</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The fixed widthAnchor constant of the leftStackView</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">leftStackViewWidthConstant</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC27rightStackViewWidthConstant12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/rightStackViewWidthConstant" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC27rightStackViewWidthConstant12CoreGraphics7CGFloatVvp">rightStackViewWidthConstant</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The fixed widthAnchor constant of the rightStackView</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">rightStackViewWidthConstant</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC7pluginsSayAA0D6Plugin_pGvp"></a>
+                    <a name="//apple_ref/swift/Property/plugins" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC7pluginsSayAA0D6Plugin_pGvp">plugins</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Holds the InputPlugin plugins that can be used to extend the functionality of the MessageInputBar</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">plugins</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/InputPlugin.html">InputPlugin</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC18leftStackViewItemsSayAA0D4Item_pGvp"></a>
+                    <a name="//apple_ref/swift/Property/leftStackViewItems" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC18leftStackViewItemsSayAA0D4Item_pGvp">leftStackViewItems</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The InputBarItems held in the leftStackView</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">leftStackViewItems</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/InputItem.html">InputItem</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC19rightStackViewItemsSayAA0D4Item_pGvp"></a>
+                    <a name="//apple_ref/swift/Property/rightStackViewItems" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC19rightStackViewItemsSayAA0D4Item_pGvp">rightStackViewItems</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The InputBarItems held in the rightStackView</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">rightStackViewItems</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/InputItem.html">InputItem</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC20bottomStackViewItemsSayAA0D4Item_pGvp"></a>
+                    <a name="//apple_ref/swift/Property/bottomStackViewItems" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC20bottomStackViewItemsSayAA0D4Item_pGvp">bottomStackViewItems</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The InputBarItems held in the bottomStackView</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">bottomStackViewItems</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/InputItem.html">InputItem</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC17topStackViewItemsSayAA0D4Item_pGvp"></a>
+                    <a name="//apple_ref/swift/Property/topStackViewItems" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC17topStackViewItemsSayAA0D4Item_pGvp">topStackViewItems</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The InputBarItems held in the topStackView</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">topStackViewItems</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/InputItem.html">InputItem</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC17nonStackViewItemsSayAA0D4Item_pGvp"></a>
+                    <a name="//apple_ref/swift/Property/nonStackViewItems" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC17nonStackViewItemsSayAA0D4Item_pGvp">nonStackViewItems</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The InputBarItems held to make use of their hooks but they are not automatically added to a UIStackView</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">var</span> <span class="nv">nonStackViewItems</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/InputItem.html">InputItem</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC5itemsSayAA0D4Item_pGvp"></a>
+                    <a name="//apple_ref/swift/Property/items" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC5itemsSayAA0D4Item_pGvp">items</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a flatMap of all the items in each of the UIStackViews</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/InputItem.html">InputItem</a></span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initialization"></a>
+                <a name="//apple_ref/swift/Section/Initialization" class="dashAnchor"></a>
+                <a href="#/Initialization">
+                  <h3 class="section-name">Initialization</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageInputBar(im)init"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageInputBar(im)init">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageInputBar(im)initWithFrame:"></a>
+                    <a name="//apple_ref/swift/Method/init(frame:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageInputBar(im)initWithFrame:">init(frame:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">override</span> <span class="nf">init</span><span class="p">(</span><span class="nv">frame</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageInputBar(im)initWithCoder:"></a>
+                    <a name="//apple_ref/swift/Method/init(coder:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageInputBar(im)initWithCoder:">init(coder:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">required</span> <span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="n">coder</span> <span class="nv">aDecoder</span><span class="p">:</span> <span class="kt">NSCoder</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageInputBar(im)dealloc"></a>
+                    <a name="//apple_ref/swift/Method/deinit" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageInputBar(im)dealloc">deinit</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">deinit</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageInputBar(im)didMoveToWindow"></a>
+                    <a name="//apple_ref/swift/Method/didMoveToWindow()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageInputBar(im)didMoveToWindow">didMoveToWindow()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">didMoveToWindow</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Setup"></a>
+                <a name="//apple_ref/swift/Section/Setup" class="dashAnchor"></a>
+                <a href="#/Setup">
+                  <h3 class="section-name">Setup</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC5setupyyF"></a>
+                    <a name="//apple_ref/swift/Method/setup()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC5setupyyF">setup()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets up the default properties</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">setup</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Constraint%20Layout%20Updates"></a>
+                <a name="//apple_ref/swift/Section/Constraint Layout Updates" class="dashAnchor"></a>
+                <a href="#/Constraint%20Layout%20Updates">
+                  <h3 class="section-name">Constraint Layout Updates</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageInputBar(im)invalidateIntrinsicContentSize"></a>
+                    <a name="//apple_ref/swift/Method/invalidateIntrinsicContentSize()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageInputBar(im)invalidateIntrinsicContentSize">invalidateIntrinsicContentSize()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Invalidates the view’s intrinsic content size</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">invalidateIntrinsicContentSize</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC29calculateIntrinsicContentSizeSo6CGSizeVyF"></a>
+                    <a name="//apple_ref/swift/Method/calculateIntrinsicContentSize()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC29calculateIntrinsicContentSizeSo6CGSizeVyF">calculateIntrinsicContentSize()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Calculates the correct intrinsicContentSize of the MessageInputBar</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">calculateIntrinsicContentSize</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CGSize</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The required intrinsicContentSize</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC26calculateMaxTextViewHeight12CoreGraphics7CGFloatVyF"></a>
+                    <a name="//apple_ref/swift/Method/calculateMaxTextViewHeight()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC26calculateMaxTextViewHeight12CoreGraphics7CGFloatVyF">calculateMaxTextViewHeight()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the max height the InputTextView can grow to based on the UIScreen</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">calculateMaxTextViewHeight</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CGFloat</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Max Height</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Layout%20Helper%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Layout Helper Methods" class="dashAnchor"></a>
+                <a href="#/Layout%20Helper%20Methods">
+                  <h3 class="section-name">Layout Helper Methods</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC16layoutStackViewsyySayAA0dG4ViewC8PositionOGF"></a>
+                    <a name="//apple_ref/swift/Method/layoutStackViews(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC16layoutStackViewsyySayAA0dG4ViewC8PositionOGF">layoutStackViews(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Layout the given InputStackView&rsquo;s</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">layoutStackViews</span><span class="p">(</span><span class="n">_</span> <span class="nv">positions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/InputStackView.html">InputStackView</a></span><span class="o">.</span><span class="kt">Position</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="o">.</span><span class="n">bottom</span><span class="p">,</span> <span class="o">.</span><span class="n">top</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>positions</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The InputStackView&rsquo;s to layout</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC13performLayoutyySb_yyctF"></a>
+                    <a name="//apple_ref/swift/Method/performLayout(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC13performLayoutyySb_yyctF">performLayout(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Performs layout changes over the main thread</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">internal</span> <span class="kd">func</span> <span class="nf">performLayout</span><span class="p">(</span><span class="n">_</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">_</span> <span class="nv">animations</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>animated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If the layout should be animated</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>animations</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Animation logic</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC17setStackViewItems_03forG08animatedySayAA0D4Item_pG_AA0dgH0C8PositionOSbtF"></a>
+                    <a name="//apple_ref/swift/Method/setStackViewItems(_:forStack:animated:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC17setStackViewItems_03forG08animatedySayAA0D4Item_pG_AA0dgH0C8PositionOSbtF">setStackViewItems(_:forStack:animated:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Removes all of the arranged subviews from the InputStackView and adds the given items.
+Sets the messageInputBar property of the InputBarButtonItem</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">setStackViewItems</span><span class="p">(</span><span class="n">_</span> <span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/InputItem.html">InputItem</a></span><span class="p">],</span> <span class="n">forStack</span> <span class="nv">position</span><span class="p">:</span> <span class="kt"><a href="../Classes/InputStackView.html">InputStackView</a></span><span class="o">.</span><span class="kt">Position</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>items</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New InputStackView arranged views</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>position</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The targeted InputStackView</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>animated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If the layout should be animated</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC29setLeftStackViewWidthConstant2to8animatedy12CoreGraphics7CGFloatV_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/setLeftStackViewWidthConstant(to:animated:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC29setLeftStackViewWidthConstant2to8animatedy12CoreGraphics7CGFloatV_SbtF">setLeftStackViewWidthConstant(to:animated:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the leftStackViewWidthConstant</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">setLeftStackViewWidthConstant</span><span class="p">(</span><span class="n">to</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New widthAnchor constant</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>animated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If the layout should be animated</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC30setRightStackViewWidthConstant2to8animatedy12CoreGraphics7CGFloatV_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/setRightStackViewWidthConstant(to:animated:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC30setRightStackViewWidthConstant2to8animatedy12CoreGraphics7CGFloatV_SbtF">setRightStackViewWidthConstant(to:animated:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the rightStackViewWidthConstant</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">setRightStackViewWidthConstant</span><span class="p">(</span><span class="n">to</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New widthAnchor constant</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>animated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If the layout should be animated</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC31setShouldForceMaxTextViewHeight2to8animatedySb_SbtF"></a>
+                    <a name="//apple_ref/swift/Method/setShouldForceMaxTextViewHeight(to:animated:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC31setShouldForceMaxTextViewHeight2to8animatedySb_SbtF">setShouldForceMaxTextViewHeight(to:animated:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sets the <code><a href="../Classes/MessageInputBar.html#/s:8ChatRoom15MessageInputBarC28shouldForceTextViewMaxHeightSbvp">shouldForceTextViewMaxHeight</a></code> property</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">setShouldForceMaxTextViewHeight</span><span class="p">(</span><span class="n">to</span> <span class="nv">newValue</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New boolean value</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>animated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If the layout should be animated</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Notifications/Hooks"></a>
+                <a name="//apple_ref/swift/Section/Notifications/Hooks" class="dashAnchor"></a>
+                <a href="#/Notifications/Hooks">
+                  <h3 class="section-name">Notifications/Hooks</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageInputBar(im)traitCollectionDidChange:"></a>
+                    <a name="//apple_ref/swift/Method/traitCollectionDidChange(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageInputBar(im)traitCollectionDidChange:">traitCollectionDidChange(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Invalidates the intrinsicContentSize</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">traitCollectionDidChange</span><span class="p">(</span><span class="n">_</span> <span class="nv">previousTraitCollection</span><span class="p">:</span> <span class="kt">UITraitCollection</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageInputBar(im)orientationDidChange"></a>
+                    <a name="//apple_ref/swift/Method/orientationDidChange()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageInputBar(im)orientationDidChange">orientationDidChange()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Invalidates the intrinsicContentSize</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">open</span> <span class="kd">func</span> <span class="nf">orientationDidChange</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageInputBar(im)inputTextViewDidChange"></a>
+                    <a name="//apple_ref/swift/Method/inputTextViewDidChange()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageInputBar(im)inputTextViewDidChange">inputTextViewDidChange()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Enables/Disables the sendButton based on the InputTextView&rsquo;s text being empty
+Calls each items <code>textViewDidChangeAction</code> method
+Calls the delegates <code>textViewTextDidChangeTo</code> method
+Invalidates the intrinsicContentSize</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">open</span> <span class="kd">func</span> <span class="nf">inputTextViewDidChange</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageInputBar(im)inputTextViewDidBeginEditing"></a>
+                    <a name="//apple_ref/swift/Method/inputTextViewDidBeginEditing()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageInputBar(im)inputTextViewDidBeginEditing">inputTextViewDidBeginEditing()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Calls each items <code>keyboardEditingBeginsAction</code> method</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">open</span> <span class="kd">func</span> <span class="nf">inputTextViewDidBeginEditing</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ChatRoom@objc(cs)MessageInputBar(im)inputTextViewDidEndEditing"></a>
+                    <a name="//apple_ref/swift/Method/inputTextViewDidEndEditing()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ChatRoom@objc(cs)MessageInputBar(im)inputTextViewDidEndEditing">inputTextViewDidEndEditing()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Calls each items <code>keyboardEditingEndsAction</code> method</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@objc</span>
+<span class="kd">open</span> <span class="kd">func</span> <span class="nf">inputTextViewDidEndEditing</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Plugins"></a>
+                <a name="//apple_ref/swift/Section/Plugins" class="dashAnchor"></a>
+                <a href="#/Plugins">
+                  <h3 class="section-name">Plugins</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC13reloadPluginsyyF"></a>
+                    <a name="//apple_ref/swift/Method/reloadPlugins()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC13reloadPluginsyyF">reloadPlugins()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reloads each of the plugins</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">reloadPlugins</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC17invalidatePluginsyyF"></a>
+                    <a name="//apple_ref/swift/Method/invalidatePlugins()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC17invalidatePluginsyyF">invalidatePlugins()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Invalidates each of the plugins</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">invalidatePlugins</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/User%20Actions"></a>
+                <a name="//apple_ref/swift/Section/User Actions" class="dashAnchor"></a>
+                <a href="#/User%20Actions">
+                  <h3 class="section-name">User Actions</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8ChatRoom15MessageInputBarC19didSelectSendButtonyyF"></a>
+                    <a name="//apple_ref/swift/Method/didSelectSendButton()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8ChatRoom15MessageInputBarC19didSelectSendButtonyyF">didSelectSendButton()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Calls the delegates <code>didPressSendButtonWith</code> method
+Assumes that the InputTextView&rsquo;s text has been set to empty and calls <code><a href="../Classes/MessageInputBar.html#/c:@M@ChatRoom@objc(cs)MessageInputBar(im)inputTextViewDidChange">inputTextViewDidChange()</a></code>
+Invalidates each of the InputPlugins</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">didSelectSendButton</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-11-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
