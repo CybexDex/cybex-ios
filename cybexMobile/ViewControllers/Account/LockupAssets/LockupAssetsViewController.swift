@@ -87,21 +87,21 @@ extension LockupAssetsViewController: UITableViewDataSource, UITableViewDelegate
 }
 
 extension LockupAssetsViewController {
-    @objc func clickLockupAssetsViewEvent(_ data: [String: Any]) {
-        guard let indexPathData = data["data"] as? LockupAssteData  else {
-            return
-        }
-        
-        self.coordinator?.applyLockupAsset(indexPathData,callback: { [weak self] success in
-            guard let `self` = self else { return }
-            if self.isVisible {
-                if success == true {
-                    self.showToastBox(true, message: R.string.localizable.lockup_asset_claim_success.key.localized())
-                }
-                else {
-                    self.showToastBox(false, message: R.string.localizable.lockup_asset_claim_fail.key.localized())
-                }
-            }
-        })
-    }
+//    @objc func clickLockupAssetsViewEvent(_ data: [String: Any]) {
+//        guard let indexPathData = data["data"] as? LockupAssteData  else {
+//            return
+//        }
+//
+//        self.coordinator?.applyLockupAsset(indexPathData,callback: { [weak self] success in
+//            guard let `self` = self else { return }
+//            if self.isVisible {
+//                if success == true {
+//                    self.showToastBox(true, message: R.string.localizable.lockup_asset_claim_success.key.localized())
+//                }
+//                else {
+//                    self.showToastBox(false, message: R.string.localizable.lockup_asset_claim_fail.key.localized())
+//                }
+//            }
+//        })
+//    }
 }
