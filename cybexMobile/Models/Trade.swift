@@ -50,3 +50,22 @@ struct TradeMsg {
     var enMsg: String = ""
     var cnMsg: String = ""
 }
+
+struct RechargeWorldInfo {
+    var projectNameCn: String = ""
+    var projectAddressCn: String = ""
+    var projectLinkCn: String = ""
+    var projectNameEn: String = ""
+    var projectAddressEn: String = ""
+    var projectLinkEn: String = ""
+    var enInfo: String = ""
+    var cnInfo: String = ""
+}
+
+
+struct RechageWordVMData {
+    var projectName: String = ""
+    var projectAddress: String = ""
+    var projectLink: String = ""
+    var messageInfo: String = ""
+}

@@ -25,6 +25,8 @@ func gChatReducer(action: Action, state: ChatState?) -> ChatState {
         state.sendState.accept(action.data)
     case let action as ChatRefreshAction:
         state.refreshMessage.accept(action.data)
+    case let action as ChatReloadDataAction:
+        state.messages.accept((action.data, isRefresh: true))
     default:
         break
     }

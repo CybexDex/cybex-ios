@@ -225,6 +225,19 @@ class ShowToastManager {
             self.setupSheetImage()
         }
     }
+    
+    func setUp(message: String,
+               animationType: ShowAnimationType,
+               showType: ShowManagerType) {
+        self.data = ["message": message]
+        self.animationShow = animationType
+        self.showType = showType
+        if showType == .alertImage {
+            self.setupAlert()
+        } else if showType == .sheetImage {
+            self.setupAlert()
+        }
+    }
 
     func setUp(title: String, contentView: (UIView&Views), animationType: ShowAnimationType, middleType: CybexTextView.TextViewType = .normal) {
         self.animationShow  = animationType

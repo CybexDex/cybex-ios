@@ -29,35 +29,35 @@ class RechargeView: CybexBaseView {
     var trade: Trade? {
         didSet {
             if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
-                self.introduce.content.attributedText = Localize.currentLanguage() == "en" ?
-                    trade.enInfo.set(style: StyleNames.withdrawIntroduce.rawValue) :
-                    trade.cnInfo.set(style: StyleNames.withdrawIntroduce.rawValue)
-                
                 updateViewWithAssetName(tradeInfo)
             }
+        }
+    }
+    
+    var projectData: Any? {
+        didSet{
+            guard let projectInfo = projectData as? RechageWordVMData  else {
+                return
+            }
+            self.introduce.locailStyle = StyleNames.withdrawIntroduce.rawValue
+            self.introduce.locail = projectInfo.messageInfo
+            self.updateHeight()
         }
     }
     
     @IBOutlet weak var avaliableView: RechargeItemView!
     @IBOutlet weak var addressView: RechargeItemView!
     @IBOutlet weak var amountView: RechargeItemView!
-    
     @IBOutlet weak var gateAwayFee: UILabel!
     @IBOutlet weak var insideFee: UILabel!
-    
     @IBOutlet weak var finalAmount: UILabel!
-    
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var errorL: UILabel!
-    
     @IBOutlet weak var feeView: UIView!
-    
     @IBOutlet weak var introduceView: UIView!
     @IBOutlet weak var withdraw: Button!
     @IBOutlet weak var stackView: UIStackView!
-    
     @IBOutlet weak var introduce: IntroduceView!
-    
     @IBOutlet weak var memoView: RechargeItemView!
 
     override func setup() {

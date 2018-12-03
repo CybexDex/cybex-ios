@@ -122,6 +122,14 @@ struct AppConfiguration {
         // 正式
         return "https://chat.cybex.io/lastestMsgID?channel="
     }
+    
+    func depositWordJson(_ assetId: String) -> String {
+        return AppConfiguration.ServerBaseURLString + "json/deposit/" + assetId + ".json"
+    }
+    
+    func withdrawWordJson(_ assetId: String) -> String {
+        return AppConfiguration.ServerBaseURLString + "json/withdraw/" + assetId + ".json"
+    }
 }
 
 enum ExchangeType {

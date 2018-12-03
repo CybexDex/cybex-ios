@@ -168,6 +168,18 @@ extension UIViewController: ShowManagerDelegate {
             ShowToastManager.shared.hide(2.0)
         }
     }
+    
+    func showToast(message: String, manager: ShowToastManager = ShowToastManager.shared) {
+        if manager.showView != nil {
+            ShowToastManager.shared.hide(0)
+        }
+        SwifterSwift.delay(milliseconds: 100) {
+            ShowToastManager.shared.setUp(message: message,
+                                          animationType: .smallBig, showType: .alertImage)
+            ShowToastManager.shared.showAnimationInView(self.view)
+            ShowToastManager.shared.hide(2.0)
+        }
+    }
 
     func showConfirm(_ title: String, attributes: [NSAttributedString]?, setup: (([StyleLabel]) -> Void)? = nil) {
         if ShowToastManager.shared.showView != nil {

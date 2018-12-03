@@ -14,7 +14,7 @@ protocol WithdrawDetailCoordinatorProtocol {
     func fetchDepositAddress(_ assetName: String)
     func resetDepositAddress(_ assetName: String)
     func openDepositRecode(_ assetId: String)
-
+    func fetchDepositWordInfo(_ assetId: String)
 }
 
 protocol WithdrawDetailStateManagerProtocol {
@@ -68,11 +68,24 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
+    
+    func fetchDepositWordInfo(_ assetId: String) {
+        async {
+            let data = try? await(SimpleHTTPService.fetchWorldsInfoWithAssetId(assetId, url:         AppConfiguration.shared.depositWordJson(assetId)))
+            main {
+                if case let data?? = data {
+                    self.store.dispatch(FetchMsgInfo(data: data))
+                }
+                else {
+                    self.state.msgInfo.accept(nil)
+                }
+            }
+        }
+    }
 }
 
 extension WithdrawDetailCoordinator: WithdrawDetailStateManagerProtocol {
     var state: WithdrawDetailState {
         return store.state
     }
-
 }

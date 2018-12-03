@@ -247,7 +247,7 @@ extension Double {
         return decimal.stringValue
     }
 
-    func tradePrice() -> (price: String, pricision: Int, amountPricision: Int) {
+    func tradePrice(_ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> (price: String, pricision: Int, amountPricision: Int) {
         var pricision = 0
         var amountPricision = 0
         let decimal = Decimal(floatLiteral: self)
@@ -262,7 +262,8 @@ extension Double {
             amountPricision = 6
         }
 
-        return (self.string(digits: pricision), pricision, amountPricision)
+        
+        return (self.string(digits: pricision,roundingMode: roundingMode), pricision, amountPricision)
     }
 
     func formatCurrency(digitNum: Int, usesGroupingSeparator: Bool = true) -> String {

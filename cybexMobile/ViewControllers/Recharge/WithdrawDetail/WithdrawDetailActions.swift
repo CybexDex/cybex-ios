@@ -17,8 +17,13 @@ struct WithdrawDetailState: BaseState {
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 
     var data: BehaviorRelay<AccountAddressRecord?> = BehaviorRelay(value: nil)
+    var msgInfo: BehaviorRelay<RechageWordVMData?> = BehaviorRelay(value: nil)
 }
 
 struct FetchAddressInfo: Action {
     let data: AccountAddressRecord
+}
+
+struct FetchMsgInfo: Action {
+    var data: RechargeWorldInfo
 }

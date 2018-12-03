@@ -18,14 +18,17 @@ class LockupAssetsView: UIView {
     var data: Any? {
         didSet {
             guard let data = data as? LockupAssteData else { return }
-            
             self.iconImgV.kf.setImage(with: URL(string: data.icon))
             nameL.text = data.name.filterJade
-            progressL.text = "\(Int(data.progress.double()! * 100.0))%"
-            if let progress = data.progress.toDouble() {
-                progressView.progress = progress
-            } else {
-                progressView.progress = 0
+            
+            if data.progress.formatCurrency(digitNum: 0) == "1" {
+                self.claimBtn.isEnabled = true
+            }
+            else {
+                self.claimBtn.isEnabled = false
+                self.claimBtn.setBackgroundImage(nil, for: .normal)
+                self.claimBtn.setTitle(R.string.localizable.lockup_asset_locked.key.localized(), for: .normal)
+                self.claimBtn.theme_tintColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
             }
             amountL.text = data.amount
             RMBCountL.text = data.RMBCount
@@ -34,17 +37,19 @@ class LockupAssetsView: UIView {
     }
     @IBOutlet weak var iconImgV: UIImageView!
     @IBOutlet weak var nameL: UILabel!
-    @IBOutlet weak var progressL: UILabel!
-    @IBOutlet weak var progressView: LockupProgressView!
     @IBOutlet weak var amountL: UILabel!
     @IBOutlet weak var RMBCountL: UILabel!
     @IBOutlet weak var endTimeL: UILabel!
+    @IBOutlet weak var claimBtn: UIButton!
     
     fileprivate func setup() {
-        self.rx.tapGesture().when(GestureRecognizerState.recognized).asObservable().subscribe(onNext: { [weak self](tap) in
-            guard let `self` = self, let indexData = self.data as? LockupAssteData else { return }
-            self.next?.sendEventWith(Event.clickLockupAssetsViewEvent.rawValue, userinfo: ["data": indexData])
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+    }
+    
+    
+    @IBAction func clickClaimAction(_ sender: UIButton) {
+        guard let indexData = self.data as? LockupAssteData else { return }
+        self.next?.sendEventWith(Event.clickLockupAssetsViewEvent.rawValue, userinfo: ["data": indexData])
     }
     
     override var intrinsicContentSize: CGSize {
@@ -91,5 +96,4 @@ class LockupAssetsView: UIView {
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-    
 }

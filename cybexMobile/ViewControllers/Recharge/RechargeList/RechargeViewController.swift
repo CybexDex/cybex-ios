@@ -120,13 +120,24 @@ extension RechargeViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         switch selectedIndex.rawValue {
         case 0:
             if let data = self.depositData {
+                let selectedData = data[indexPath.row]
+                if selectedData.enable == false {
+                    self.showToast(message: R.string.localizable.deposit_enable.key.localized())
+                    return
+                }
                 self.coordinator?.openWithDrawDetail(data[indexPath.row])
             }
         case 1:
             if let data = self.withdrawData {
+                let selectedData = data[indexPath.row]
+                if selectedData.enable == false {
+                    self.showToast(message: R.string.localizable.deposit_enable.key.localized())
+                    return
+                }
                 self.coordinator?.openRechargeDetail(data[indexPath.row])
             }
         default:

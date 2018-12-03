@@ -67,7 +67,13 @@ class RechargeDetailViewController: BaseViewController {
         }
         
         setupUI()
+        setupData()
         setupEvent()
+    }
+    
+    func setupData() {
+        guard let trade = self.trade else { return }
+        self.coordinator?.fetchDepositWriteInfo(trade.id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -237,6 +243,7 @@ class RechargeDetailViewController: BaseViewController {
             self.contentView.memoView.content.text = address.memo
             self.isTrueAddress = true
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    
     }
     
     func checkAmountIsAvailable(_ amount: Double) {
@@ -297,6 +304,11 @@ class RechargeDetailViewController: BaseViewController {
                 })
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        self.coordinator?.state.withdrawMsgInfo.asObservable().subscribe(onNext: { [weak self](data) in
+            guard let `self` = self else { return }
+            self.contentView.projectData = data
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         (self.contentView.memoView.content.rx.text.orEmpty <-> self.coordinator!.state.memo).disposed(by: disposeBag)
     }
