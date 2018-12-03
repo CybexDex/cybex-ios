@@ -224,18 +224,7 @@ struct GetLimitOrdersRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
-        let result = JSON(resultObject).arrayValue
-        if result.count >= 1 {
-            var data: [LimitOrder] = []
-            for index in result {
-                if let order = LimitOrder.deserialize(from: index.dictionaryObject!) {
-                    data.append(order)
-                }
-            }
-            return data
-        } else {
-            return []
-        }
+        return resultObject
     }
 }
 

@@ -122,13 +122,6 @@ struct GetFillOrderHistoryRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
-        let result = JSON(resultObject).arrayValue
-
-        var data: [JSON] = []
-
-        for value in result {
-            data.append([value["op"], value["time"]])
-        }
-        return data
+        return resultObject
     }
 }

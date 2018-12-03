@@ -16,7 +16,7 @@ protocol TradeHistoryCoordinatorProtocol {
 protocol TradeHistoryStateManagerProtocol {
     var state: TradeHistoryState { get }
 
-    func resetData()
+    func resetData(_ pair: Pair)
     func fetchData(_ pair: Pair)
     func updateMarketListHeight(_ height: CGFloat)
 }
@@ -38,8 +38,8 @@ extension TradeHistoryCoordinator: TradeHistoryStateManagerProtocol {
         return store.state
     }
 
-    func resetData() {
-        self.store.dispatch(FetchedFillOrderData(data: []))
+    func resetData(_ pair: Pair) {
+        self.store.dispatch(FetchedFillOrderData(data: [], pair: pair))
     }
 
     func fetchData(_ pair: Pair) {
@@ -49,9 +49,18 @@ extension TradeHistoryCoordinator: TradeHistoryStateManagerProtocol {
         fetchFillOrders(with: pair, callback: {[weak self] (data) in
             guard let `self` = self else { return }
 
-            if let data = data as? [JSON] {
-                self.store.dispatch(FetchedFillOrderData(data: data))
+            Await.Queue.serialAsync.async {
+                let result = JSON(data).arrayValue
+
+                var convertedData: [JSON] = []
+
+                for value in result {
+                    convertedData.append([value["op"], value["time"]])
+                }
+
+                self.store.dispatch(FetchedFillOrderData(data: convertedData, pair: pair))
             }
+
         })
     }
 

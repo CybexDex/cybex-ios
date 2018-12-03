@@ -69,14 +69,18 @@ class Price: HandyJSON {
         let baseInfo = base.info()
         let quoteInfo = quote.info()
 
-        let priceRatio =  Double(base.amount)! / Double(quote.amount)!
+        if let baseDouble = Double(base.amount), let quoteDouble = Double(quote.amount), quoteDouble != 0 {
+            let priceRatio =  baseDouble / quoteDouble
 
-        let baseNumber = NSDecimalNumber(floatLiteral: pow(10, baseInfo.precision.double))
-        let quoteNumber = NSDecimalNumber(floatLiteral: pow(10, quoteInfo.precision.double))
+            let baseNumber = NSDecimalNumber(floatLiteral: pow(10, baseInfo.precision.double))
+            let quoteNumber = NSDecimalNumber(floatLiteral: pow(10, quoteInfo.precision.double))
 
-        let precisionRatio = baseNumber.dividing(by: quoteNumber).stringValue
+            let precisionRatio = baseNumber.dividing(by: quoteNumber).stringValue
 
-        return priceRatio / precisionRatio.toDouble()!
+            return priceRatio / precisionRatio.toDouble()!
+        }
+
+        return 0
     }
 
 }

@@ -254,55 +254,81 @@ class MarketViewController: BaseViewController {
             endLoading()
             kLineView.isHidden = false
 
-            var dataArray = [CBKLineModel]()
-            for (_, data) in response.enumerated() {
+            DispatchQueue.global().async {
+                var dataArray = [CBKLineModel]()
+                for (_, data) in response.enumerated() {
 
-                let baseAssetId = pair.base
-                let quoteAssetId = pair.quote
+                    let baseAssetId = self.pair.base
+                    let quoteAssetId = self.pair.quote
 
-                let isBase = data.base == baseAssetId
+                    let isBase = data.base == baseAssetId
 
-                let baseInfo = appData.assetInfo[baseAssetId]!
-                let quoteInfo = appData.assetInfo[quoteAssetId]!
+                    let baseInfo = appData.assetInfo[baseAssetId]!
+                    let quoteInfo = appData.assetInfo[quoteAssetId]!
 
-                let basePrecision = pow(10, baseInfo.precision.double)
-                let quotePrecision = pow(10, quoteInfo.precision.double)
+                    let basePrecision = pow(10, baseInfo.precision.double)
+                    let quotePrecision = pow(10, quoteInfo.precision.double)
 
-                var openPrice = (Double(data.openBase)! / basePrecision) / (Double(data.openQuote)! / quotePrecision)
-                var closePrice = (Double(data.closeBase)! / basePrecision) / (Double(data.closeQuote)! / quotePrecision)
-                var highPrice = (Double(data.highBase)! / basePrecision) / (Double(data.highQuote)! / quotePrecision)
-                var lowPrice = (Double(data.lowBase)! / basePrecision) / (Double(data.lowQuote)! / quotePrecision)
+                    var openPrice = (Double(data.openBase)! / basePrecision) / (Double(data.openQuote)! / quotePrecision)
+                    var closePrice = (Double(data.closeBase)! / basePrecision) / (Double(data.closeQuote)! / quotePrecision)
+                    var highPrice = (Double(data.highBase)! / basePrecision) / (Double(data.highQuote)! / quotePrecision)
+                    var lowPrice = (Double(data.lowBase)! / basePrecision) / (Double(data.lowQuote)! / quotePrecision)
 
-                if !isBase {
-                    openPrice = (Double(data.openQuote)! / basePrecision) / (Double(data.openBase)! / quotePrecision)
-                    closePrice = (Double(data.closeQuote)! / basePrecision) / (Double(data.closeBase)! / quotePrecision)
-                    highPrice = (Double(data.lowQuote)! / basePrecision) / (Double(data.lowBase)! / quotePrecision)
-                    lowPrice = (Double(data.highQuote)! / basePrecision) / (Double(data.highBase)! / quotePrecision)
+                    if !isBase {
+                        openPrice = (Double(data.openQuote)! / basePrecision) / (Double(data.openBase)! / quotePrecision)
+                        closePrice = (Double(data.closeQuote)! / basePrecision) / (Double(data.closeBase)! / quotePrecision)
+                        highPrice = (Double(data.lowQuote)! / basePrecision) / (Double(data.lowBase)! / quotePrecision)
+                        lowPrice = (Double(data.highQuote)! / basePrecision) / (Double(data.highBase)! / quotePrecision)
+                    }
+
+                    //                if highPrice > 1.3 * (openPrice + closePrice) * 0.5 {
+                    //                    highPrice = max(openPrice, closePrice)
+                    //                }
+                    //
+                    //                if lowPrice < 0.7 * (openPrice + closePrice) * 0.5 {
+                    //                    lowPrice = min(openPrice, closePrice)
+                    //                }
+                    let model = CBKLineModel(date: data.open,
+                                             open: openPrice,
+                                             close: closePrice,
+                                             high: highPrice,
+                                             low: lowPrice,
+                                             towardsVolume: (isBase ? Double(data.quoteVolume)! : Double(data.baseVolume)!) / quotePrecision,
+                                             volume: (isBase ? Double(data.baseVolume)! : Double(data.quoteVolume)!) / basePrecision,
+                                             precision: baseInfo.precision)
+
+                    let lastIdx = dataArray.count - 1
+                    if lastIdx >= 0 {
+                        let gapCount = (model.date - dataArray[lastIdx].date) / self.timeGap.rawValue
+                        if gapCount > 1 {
+                            for _ in 1 ..< Int(gapCount) {
+                                let lastModel = dataArray.last!
+                                let gapModel = CBKLineModel(date: lastModel.date + self.timeGap.rawValue,
+                                                            open: lastModel.close,
+                                                            close: lastModel.close,
+                                                            high: lastModel.close,
+                                                            low: lastModel.close,
+                                                            towardsVolume: 0,
+                                                            volume: 0,
+                                                            precision: lastModel.precision)
+                                dataArray.append(gapModel)
+                            }
+                        }
+                    }
+                    if let lastModel = dataArray.last, (model.date - lastModel.date) != 3600 {
+
+                    }
+                    dataArray.append(model)
                 }
 
-//                if highPrice > 1.3 * (openPrice + closePrice) * 0.5 {
-//                    highPrice = max(openPrice, closePrice)
-//                }
-//
-//                if lowPrice < 0.7 * (openPrice + closePrice) * 0.5 {
-//                    lowPrice = min(openPrice, closePrice)
-//                }
-                let model = CBKLineModel(date: data.open,
-                                         open: openPrice,
-                                         close: closePrice,
-                                         high: highPrice,
-                                         low: lowPrice,
-                                         towardsVolume: (isBase ? Double(data.quoteVolume)! : Double(data.baseVolume)!) / quotePrecision,
-                                         volume: (isBase ? Double(data.baseVolume)! : Double(data.quoteVolume)!) / basePrecision,
-                                         precision: baseInfo.precision)
+                if dataArray.count > 0 {
+                    var lastModel = dataArray.last!
 
-                let lastIdx = dataArray.count - 1
-                if lastIdx >= 0 {
-                    let gapCount = (model.date - dataArray[lastIdx].date) / timeGap.rawValue
-                    if gapCount > 1 {
-                        for _ in 1 ..< Int(gapCount) {
-                            let lastModel = dataArray.last!
-                            let gapModel = CBKLineModel(date: lastModel.date + timeGap.rawValue,
+                    let surplusCount = (Date().timeIntervalSince1970 - lastModel.date) / self.timeGap.rawValue
+                    if surplusCount >= 1 {
+                        for _ in 0 ..< Int(surplusCount) {
+                            lastModel = dataArray.last!
+                            let gapModel = CBKLineModel(date: lastModel.date + self.timeGap.rawValue,
                                                         open: lastModel.close,
                                                         close: lastModel.close,
                                                         high: lastModel.close,
@@ -313,38 +339,20 @@ class MarketViewController: BaseViewController {
                             dataArray.append(gapModel)
                         }
                     }
-                }
-                if let lastModel = dataArray.last, (model.date - lastModel.date) != 3600 {
-
-                }
-                dataArray.append(model)
-            }
-
-            if dataArray.count > 0 {
-                var lastModel = dataArray.last!
-
-                let surplusCount = (Date().timeIntervalSince1970 - lastModel.date) / timeGap.rawValue
-                if surplusCount >= 1 {
-                    for _ in 0 ..< Int(surplusCount) {
+                    if let baseInfo = appData.assetInfo[self.ticker.base], self.timeGap == .oneDay {
                         lastModel = dataArray.last!
-                        let gapModel = CBKLineModel(date: lastModel.date + timeGap.rawValue,
-                                                    open: lastModel.close,
-                                                    close: lastModel.close,
-                                                    high: lastModel.close,
-                                                    low: lastModel.close,
-                                                    towardsVolume: 0,
-                                                    volume: 0,
-                                                    precision: lastModel.precision)
-                        dataArray.append(gapModel)
+                        DispatchQueue.main.async {
+                            self.detailView.highLabel.text = "High: " + lastModel.high.formatCurrency(digitNum: baseInfo.precision)
+                            self.detailView.lowLabel.text = "Low: " + lastModel.low.formatCurrency(digitNum: baseInfo.precision)
+                        }
                     }
                 }
-                if let baseInfo = appData.assetInfo[self.ticker.base], timeGap == .oneDay {
-                    lastModel = dataArray.last!
-                    detailView.highLabel.text = "High: " + lastModel.high.formatCurrency(digitNum: baseInfo.precision)
-                    detailView.lowLabel.text = "Low: " + lastModel.low.formatCurrency(digitNum: baseInfo.precision)
+
+                DispatchQueue.main.async {
+                    self.kLineView.drawKLineView(klineModels: dataArray, initialize: self.resetKLinePosition)
                 }
             }
-            kLineView.drawKLineView(klineModels: dataArray, initialize: resetKLinePosition)
+
         }
     }
 

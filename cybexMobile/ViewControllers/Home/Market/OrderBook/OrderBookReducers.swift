@@ -14,9 +14,12 @@ func orderBookReducer(action: Action, state: OrderBookState?) -> OrderBookState 
 
     switch action {
     case let action as FetchedLimitData:
-        state.pair.accept(action.pair)
         let orderbook = limitOrders_to_OrderBook(orders: action.data, pair: action.pair)
-        state.data.accept(orderbook)
+
+        DispatchQueue.main.async {
+            state.pair.accept(action.pair)
+            state.data.accept(orderbook)
+        }
 
     default:
         break

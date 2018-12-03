@@ -51,9 +51,19 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
         fetchLimitOrders(with: pair, callback: {[weak self] (data) in
             guard let `self` = self else { return }
 
-            if let data = data as? [LimitOrder] {
-                self.store.dispatch(FetchedLimitData(data: data, pair: pair))
+            Await.Queue.serialAsync.async {
+                let result = JSON(data).arrayValue
+                if result.count >= 1 {
+                    var data: [LimitOrder] = []
+                    for index in result {
+                        if let order = LimitOrder.deserialize(from: index.dictionaryObject!) {
+                            data.append(order)
+                        }
+                    }
+                    self.store.dispatch(FetchedLimitData(data: data, pair: pair))
+                }
             }
+
         })
     }
 
