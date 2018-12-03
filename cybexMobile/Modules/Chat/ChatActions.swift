@@ -65,4 +65,8 @@ struct ChatSendStateAction: Action {
     var data: ChatConnectState
 }
 
+struct ChatReloadDataAction: Action {
+    var data: [ChatCommonMessage]
+}
+
 

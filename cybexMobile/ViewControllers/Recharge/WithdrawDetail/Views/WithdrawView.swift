@@ -52,23 +52,29 @@ class WithdrawView: UIView {
                 if let image = generator.generate() {
                     self.codeImg.image = UIImage(cgImage: image)
                 }
-
-                guard let projectInfo = data.projectInfo else {
-                    self.projectInfoView.isHidden = true
-                    return
-                }
-                if let projectName = projectInfo.projectName {
-                    self.projectInfoView.isHidden = false
-                    projectInfoView.projectName = projectName
-                }
-                if let address = projectInfo.contractAddress {
-                    self.projectInfoView.isHidden = false
-                    projectInfoView.url = address
-                }
-                if let addressURL = projectInfo.contractExplorerUrl {
-                    projectInfoView.addressURL = addressURL
-                }
             }
+        }
+    }
+    
+    var projectData: Any? {
+        didSet{
+            guard let projectInfo = projectData as? RechageWordVMData  else {
+                self.projectInfoView.isHidden = true
+                return
+            }
+            if projectInfo.projectName != "" {
+                self.projectInfoView.isHidden = false
+                projectInfoView.projectName = projectInfo.projectName
+            }
+            if projectInfo.projectAddress != "" {
+                self.projectInfoView.isHidden = false
+                projectInfoView.url = projectInfo.projectAddress
+            }
+            if projectInfo.projectLink != "" {
+                projectInfoView.addressURL = projectInfo.projectLink
+            }
+            self.introduce.attributedText = projectInfo.messageInfo.set(style: StyleNames.withdrawIntroduce.rawValue)
+            self.updateHeight()
         }
     }
 

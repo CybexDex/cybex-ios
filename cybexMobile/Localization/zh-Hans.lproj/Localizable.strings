@@ -518,5 +518,11 @@
 "lockup_asset_claim_fail" = "申领失败";
 "lockup_asset_claim_ensure" = "申领确认";
 
+"lockup_asset_claim" = "申领";
 
+"lockup_asset_locked" = "未到期";
+
+
+"deposit_enable" = "充值功能即将开放，敬请期待";
+"deposti_enable_tip" = "暂停";
 

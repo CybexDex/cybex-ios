@@ -19,6 +19,7 @@ class IntroduceView: UIView {
         didSet {
             if let locail = self.locail {
                 self.content.attributedText = locail.set(style: self.locailStyle)
+                self.updateHeight()
             }
         }
     }

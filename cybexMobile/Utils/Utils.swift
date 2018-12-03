@@ -307,15 +307,33 @@ func getTransferInfo(_ account: String, quanitity: String, fee: String, memo: St
           "<name>\(feeTitle):</name><\(contentStyle)>  \(fee)</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])!
 }
 
-func confirmDeleteWithDrawAddress(_ info: WithdrawAddress) -> [NSAttributedString] {
-
+func claimLockupAsset(_ info: LockupAssteData) -> [NSAttributedString] {
+    
+    guard let name = UserManager.shared.name.value else { return []}
     let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
+    var result: [NSAttributedString] = []
+    
+    let quantity = R.string.localizable.transfer_quantity.key.localized()
+    let account = R.string.localizable.transfer_account_title.key.localized()
+    
+    let amount = info.amount + " " +  info.name.filterJade
+    let quantityInfo = "<name>\(quantity):</name> <\(contentStyle)>" + amount + "</\(contentStyle)>"
+    let accountInfo = "<name>\(account):</name> <\(contentStyle)>" + name + "</\(contentStyle)>"
+    
+    result.append(quantityInfo.set(style: StyleNames.alertContent.rawValue)!)
+    result.append(accountInfo.set(style: StyleNames.alertContent.rawValue)!)
+    return result
+}
 
+
+
+func confirmDeleteWithDrawAddress(_ info: WithdrawAddress) -> [NSAttributedString] {
+    
+    let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
     let isEOS = info.currency == AssetConfiguration.EOS
     let existMemo = info.memo != nil && !info.memo!.isEmpty
 
     var result: [NSAttributedString] = []
-
     let title = "<\(contentStyle)>" +
         (isEOS ? R.string.localizable.delete_confirm_account.key.localized() : R.string.localizable.delete_confirm_address.key.localized()) +
         "</\(contentStyle)>"

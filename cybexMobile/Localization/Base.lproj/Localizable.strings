@@ -540,4 +540,9 @@
 "lockup_asset_claim_fail" = "Claim fail";
 "lockup_asset_claim_ensure" = "CONFIRMATION";
 
+"lockup_asset_claim" = "Claim";
+"lockup_asset_locked" = "Locked";
+
+"deposit_enable" = "Recharge function is about to open, please look forward to it";
+"deposti_enable_tip" = "Suspend";
 

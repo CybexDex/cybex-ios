@@ -12,18 +12,11 @@ import TinyConstraints
 @IBDesignable
 class RechargeHeaderView: CybexBaseView {
 
-    @IBOutlet weak var hiddenButton: UIButton!
     @IBOutlet weak var searchTextField: UITextField!
     var clearSearchBtn: UIButton!
 
-    @IBOutlet weak var hiddenLabel: UILabel!
-    @IBAction func hiddenAssetAction(_ sender: UIButton) {
-        self.next?.sendEventWith(Event.rechargeHiddenAsset.rawValue, userinfo: ["data": !sender.isSelected])
-        sender.isSelected = !sender.isSelected
-    }
     enum Event: String {
         case rechargeHeaderViewDidClicked
-        case rechargeHiddenAsset
         case rechargeSortedName
     }
 
@@ -60,10 +53,7 @@ class RechargeHeaderView: CybexBaseView {
             self.next?.sendEventWith(Event.rechargeSortedName.rawValue, userinfo: ["data": text])
         }
 
-        hiddenLabel.rx.tapGesture().when(GestureRecognizerState.recognized).asObservable().subscribe(onNext: { [weak self](_) in
-            guard let `self` = self else { return }
-            self.hiddenAssetAction(self.hiddenButton)
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+      
     }
 
     @objc func btnClick() {

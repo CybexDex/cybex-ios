@@ -21,6 +21,7 @@ struct RechargeDetailState: BaseState {
     var gatewayFee: BehaviorRelay<(Fee, success: Bool)?> = BehaviorRelay(value: nil)
     var memo: BehaviorRelay<String> = BehaviorRelay(value: "")
     var withdrawAddress: BehaviorRelay<WithdrawAddress?> = BehaviorRelay(value: nil)
+    var withdrawMsgInfo: BehaviorRelay<RechageWordVMData?> = BehaviorRelay(value: nil)
 }
 
 struct FetchWithdrawInfo: Action {
@@ -37,4 +38,8 @@ struct FetchGatewayFee: Action {
 
 struct SelectedAddressAction: Action {
     var data: WithdrawAddress
+}
+
+struct FetchWithdrawWordInfo: Action {
+    var data: RechargeWorldInfo
 }

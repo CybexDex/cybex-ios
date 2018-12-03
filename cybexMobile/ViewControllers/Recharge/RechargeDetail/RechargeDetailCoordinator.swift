@@ -34,6 +34,7 @@ protocol RechargeDetailStateManagerProtocol {
     func getFinalAmount(feeId: String, amount: Decimal, available: Double) -> (Decimal, String)
 
     func chooseOrAddAddress(_ sender: WithdrawAddress)
+    func fetchDepositWriteInfo(_ assetId: String)
 }
 
 class RechargeDetailCoordinator: NavCoordinator {
@@ -101,6 +102,7 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
+  
 }
 extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     var state: RechargeDetailState {
@@ -247,6 +249,20 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
             self.openAddAddress(sender)
         } else {
             showPicker(sender.currency)
+        }
+    }
+    
+    func fetchDepositWriteInfo(_ assetId: String) {
+        async {
+            let data = try? await(SimpleHTTPService.fetchWorldsInfoWithAssetId(assetId, url:         AppConfiguration.shared.withdrawWordJson(assetId)))
+            main {
+                if case let data?? = data {
+                    self.store.dispatch(FetchWithdrawWordInfo(data: data))
+                }
+                else {
+                    self.state.withdrawMsgInfo.accept(nil)
+                }
+            }
         }
     }
 }

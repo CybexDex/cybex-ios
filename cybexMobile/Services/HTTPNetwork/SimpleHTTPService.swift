@@ -525,4 +525,42 @@ extension SimpleHTTPService {
         }
         return promise
     }
+    
+    static func fetchWorldsInfoWithAssetId(_ assetId: String, url: String) -> Promise<RechargeWorldInfo?> {
+        var request  = URLRequest(url: URL(string: url)!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        let (promise, seal) = Promise<RechargeWorldInfo?>.pending()
+        Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
+            guard let value = response.result.value else {
+                seal.fulfill(nil)
+                return
+            }
+            let projectInfo = JSON(value)
+            let projectNameCn = projectInfo["msg_cn"][0]["value"].stringValue
+            let projectAddressCn = projectInfo["msg_cn"][1]["value"].stringValue
+            let projectLinkCn = projectInfo["msg_cn"][1]["link"].stringValue
+            
+            let projectNameEn = projectInfo["msg_en"][0]["value"].stringValue
+            let projectAddressEn = projectInfo["msg_en"][1]["value"].stringValue
+            let projectLinkEn = projectInfo["msg_en"][1]["link"].stringValue
+            
+            let enInfo = projectInfo["notice_en"]["adds"].arrayValue.map({ (json) -> String in
+                return json["text"].stringValue
+            }).joined(separator: "\n")
+            
+            let cnInfo = projectInfo["notice_cn"]["adds"].arrayValue.map({ (json) -> String in
+                return json["text"].stringValue
+            }).joined(separator: "\n")
+
+            seal.fulfill(RechargeWorldInfo(projectNameCn: projectNameCn,
+                                           projectAddressCn: projectAddressCn,
+                                           projectLinkCn: projectLinkCn,
+                                           projectNameEn: projectNameEn,
+                                           projectAddressEn: projectAddressEn,
+                                           projectLinkEn: projectLinkEn,
+                                           enInfo: enInfo,
+                                           cnInfo: cnInfo))
+        }
+        return promise
+    }
 }

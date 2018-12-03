@@ -102,6 +102,7 @@ class ChatViewController: MessagesViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -328,9 +329,10 @@ class ChatViewController: MessagesViewController {
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
+        #if DEBUG
         self.coordinator?.state.chatState.asObservable().skip(1).subscribe(onNext: { [weak self](connectState) in
             guard let `self` = self, let connectState = connectState else { return }
-           
+            
             var message = ""
             switch connectState{
             case .chatServiceDidClosed:
@@ -344,14 +346,17 @@ class ChatViewController: MessagesViewController {
             default:
                 break
             }
-//            if message != "已链接" {
-//                BeareadToast.showError(text: message, inView: self.view, hide: 1)
-//            }
-//            else {
-//                BeareadToast.showSucceed(text: message, inView: self.view, hide: 1)
-//            }
             
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            if message != "已链接" {
+                BeareadToast.showError(text: message, inView: self.view, hide: 1)
+            }
+            else {
+                BeareadToast.showSucceed(text: message, inView: self.view, hide: 1)
+            }
+            
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        #endif
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.init("login_success"), object: nil, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
@@ -360,6 +365,9 @@ class ChatViewController: MessagesViewController {
             }
             if let upInputView = self.upInputView {
                 upInputView.sendBtn.setTitle(R.string.localizable.chat_input_send.key.localized(), for: UIControl.State.normal)
+            }
+            if self.messageList.count != 0 {
+                self.coordinator?.loginSuccessReloadData(self.messageList)
             }
         }
         
@@ -499,7 +507,6 @@ extension ChatViewController: MessagesDisplayDelegate {
         
         view.frame = frame
         view.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]
-        
         return view
     }
 }

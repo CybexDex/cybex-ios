@@ -28,7 +28,6 @@ class TransferTopView: UIView {
                     } else {
                         self.amount.text = "+" + self.amount.text!
                     }
-
                 }
                 if UIScreen.main.bounds.width == 320 {
                     self.amount.font = UIFont.systemFont(ofSize: 20.0, weight: .medium)
