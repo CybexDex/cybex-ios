@@ -23,6 +23,9 @@ class TradeItemView: UIView {
                 if data.enable == false {
                     amount.text = R.string.localizable.deposti_enable_tip.key.localized()
                 }
+                else {
+                    amount.text = ""
+                }
             }
         }
     }
