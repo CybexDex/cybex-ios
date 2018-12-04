@@ -32,7 +32,7 @@ class RechargeDetailViewController: BaseViewController {
     }
     var isAvalibaleAmount: Bool = false {
         didSet {
-            if isAvalibaleAmount != oldValue {
+            if isAvalibaleAmount != true {
                 self.changeWithdrawState()
             }
         }
@@ -259,6 +259,7 @@ class RechargeDetailViewController: BaseViewController {
             } else {
                 self.isAvalibaleAmount = true
                 self.contentView.errorView.isHidden = true
+                self.changeWithdrawState()
                 self.setFinalAmount()
                 if let addressText = self.contentView.addressView.content.text, addressText.count != 0, !self.isTrueAddress {
                     self.contentView.errorView.isHidden = false
