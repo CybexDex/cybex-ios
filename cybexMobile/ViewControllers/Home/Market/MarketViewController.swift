@@ -85,9 +85,7 @@ class MarketViewController: BaseViewController {
     }()
 
     lazy var tickers: [Ticker] = {
-        let markets = appData.filterQuoteAssetTicker(AssetConfiguration.marketBaseAssets[currentBaseIndex]).filter({ (ticker) -> Bool in
-            return ticker.baseVolume != "0"
-        })
+        let markets = appData.filterQuoteAssetTicker(AssetConfiguration.marketBaseAssets[currentBaseIndex])
         return markets
     }()
 

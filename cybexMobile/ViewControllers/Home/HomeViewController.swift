@@ -143,10 +143,13 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
             self.endLoading()
             let data = appData.tickerData.value
             if self.vcType == ViewType.homeContent.rawValue || self.vcType == ViewType.comprehensive.rawValue {
-                self.contentView?.data = data.filter({$0.baseVolume != "0"})
+//                self.contentView?.data = data.filter({$0.baseVolume != "0"})
+                self.contentView?.data = data
+
                 self.contentView?.viewType = ViewType(rawValue: self.vcType) ?? .homeContent
             } else {
-                self.businessTitleView?.data = data.filter({$0.baseVolume != "0"})
+//                self.businessTitleView?.data = data.filter({$0.baseVolume != "0"})
+                self.businessTitleView?.data = data
             }
         }
     }
