@@ -278,6 +278,8 @@
 		724C5D4D2153956900FF1DE7 /* ComprehensiveItemViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D4A2153956900FF1DE7 /* ComprehensiveItemViewAdapter.swift */; };
 		724C5D4E2153956900FF1DE7 /* ComprehensiveItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D4B2153956900FF1DE7 /* ComprehensiveItemView.swift */; };
 		724C5D4F2153956900FF1DE7 /* ComprehensiveItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 724C5D4C2153956900FF1DE7 /* ComprehensiveItemView.xib */; };
+		7257E39421B68AFB004C4C24 /* CybexMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257E39221B68AFA004C4C24 /* CybexMessageView.swift */; };
+		7257E39521B68AFB004C4C24 /* CybexMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7257E39321B68AFB004C4C24 /* CybexMessageView.xib */; };
 		7260DDB421A2A25C00A5E3D6 /* ChatDirectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7260DDB021A2A25C00A5E3D6 /* ChatDirectionCoordinator.swift */; };
 		7260DDB521A2A25C00A5E3D6 /* ChatDirectionActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7260DDB121A2A25C00A5E3D6 /* ChatDirectionActions.swift */; };
 		7260DDB621A2A25C00A5E3D6 /* ChatDirectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7260DDB221A2A25C00A5E3D6 /* ChatDirectionViewController.swift */; };
@@ -1087,6 +1089,8 @@
 		724C5D4A2153956900FF1DE7 /* ComprehensiveItemViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveItemViewAdapter.swift; sourceTree = "<group>"; };
 		724C5D4B2153956900FF1DE7 /* ComprehensiveItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveItemView.swift; sourceTree = "<group>"; };
 		724C5D4C2153956900FF1DE7 /* ComprehensiveItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComprehensiveItemView.xib; sourceTree = "<group>"; };
+		7257E39221B68AFA004C4C24 /* CybexMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybexMessageView.swift; sourceTree = "<group>"; };
+		7257E39321B68AFB004C4C24 /* CybexMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CybexMessageView.xib; sourceTree = "<group>"; };
 		7260DDB021A2A25C00A5E3D6 /* ChatDirectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDirectionCoordinator.swift; sourceTree = "<group>"; };
 		7260DDB121A2A25C00A5E3D6 /* ChatDirectionActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDirectionActions.swift; sourceTree = "<group>"; };
 		7260DDB221A2A25C00A5E3D6 /* ChatDirectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDirectionViewController.swift; sourceTree = "<group>"; };
@@ -1945,6 +1949,8 @@
 			children = (
 				5C891F35BFFBE7EA6A37CA18CCAF62A4 /* CybexActionView.swift */,
 				D27644E5F0C54838D32FA911513A45ED /* CybexActionView.xib */,
+				7257E39221B68AFA004C4C24 /* CybexMessageView.swift */,
+				7257E39321B68AFB004C4C24 /* CybexMessageView.xib */,
 				AA8E2003073C4075637070F403905C00 /* CybexAlertView.swift */,
 				9E2974E4F9CAD426BA5EA87B501D850E /* CybexAlertView.xib */,
 				9AF65F612F7F7D85BA6BC98FA8C7F91A /* CybexPasswordView.swift */,
@@ -4147,6 +4153,7 @@
 				3B0EB651210313B200F19C31 /* NormalCellView.xib in Resources */,
 				7204FFC02153A0FD00EB0FC7 /* ComprehensiveBlockItemView.xib in Resources */,
 				7267DA2F21364BF7004AF9AF /* ETOHomeBannerView.xib in Resources */,
+				7257E39521B68AFB004C4C24 /* CybexMessageView.xib in Resources */,
 				3B0EB657210313B200F19C31 /* AccountContentView.xib in Resources */,
 				225746EA21073E8C0017FA1A /* PickerView.xib in Resources */,
 				724C5D4F2153956900FF1DE7 /* ComprehensiveItemView.xib in Resources */,
@@ -4926,6 +4933,7 @@
 				728C2827215B80480097840A /* AnnounceScrollView.swift in Sources */,
 				72199D9F2104636900575226 /* TransferDetailCoordinator.swift in Sources */,
 				0FF6C4A7AAF40F0AC67CBDAEAA2406E2 /* UITextField+Extensions.swift in Sources */,
+				7257E39421B68AFB004C4C24 /* CybexMessageView.swift in Sources */,
 				3B0EB6672103155C00F19C31 /* YourPortfolioCoordinator.swift in Sources */,
 				73539C4C2179A210008395AC /* Navigator.swift in Sources */,
 				C2728D465891E65690FBF4E868796852 /* UIView+Extensions.swift in Sources */,
