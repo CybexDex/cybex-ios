@@ -59,8 +59,9 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair: Pair) -> OrderBook {
             lastTradePrice = tradePrice.price
             let lastIndex = isBuy ? combineOrders[0].count - 1 : combineOrders[1].count - 1
             let lastOrder = isBuy ? combineOrders[0][lastIndex] : combineOrders[1][lastIndex]
-            
             lastOrder.forSale = (lastOrder.forSale.toDecimal()! + order.forSale.toDecimal()!).stringValue
+            lastOrder.sellPrice.quote.amount = (lastOrder.sellPrice.quote.amount.toDecimal()! + order.sellPrice.quote.amount.toDecimal()!).stringValue
+            lastOrder.sellPrice.base.amount = (lastOrder.sellPrice.base.amount.toDecimal()! + order.sellPrice.base.amount.toDecimal()!).stringValue
             if isBuy {
                 combineOrders[0][lastIndex] = lastOrder
             }
@@ -92,16 +93,11 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair: Pair) -> OrderBook {
     
     for order in combineOrders[0] {
         let percent = bidsTotalAmount[0...bids.count].reduce(0, +) / bidsTotalAmount.reduce(0, +)
-        
         let precisionRatio = pow(10, order.sellPrice.base.info().precision) / pow(10, order.sellPrice.quote.info().precision)
-        
         let tradePrice = order.sellPrice.toRealDecimal().tradePriceDecimal(.down)
-        
-        let quoteForSale = Decimal(string: order.forSale)! / (precisionRatio * tradePrice.price.toDecimal()!)
-        
+        let quoteForSale = Decimal(string: order.forSale)! / (precisionRatio * order.sellPrice.toRealDecimal())
         let quoteVolume = quoteForSale / pow(10, order.sellPrice.quote.info().precision)
-        
-        let bid = OrderBook.Order(price: tradePrice.price, volume: quoteVolume.string(digits: 4, roundingMode: .down), volumePercent: percent.doubleValue)
+        let bid = OrderBook.Order(price: tradePrice.price, volume: quoteVolume.suffixNumber(digitNum: 10 - tradePrice.pricision), volumePercent: percent.doubleValue)
         bids.append(bid)
     }
     for order in combineOrders[1] {
