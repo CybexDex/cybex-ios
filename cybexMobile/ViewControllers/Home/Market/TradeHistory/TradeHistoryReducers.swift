@@ -16,14 +16,12 @@ func tradeHistoryReducer(action: Action, state: TradeHistoryState?) -> TradeHist
     switch action {
     case let action as FetchedFillOrderData:
         let viewmodels = convertDataToTradeHistoryViewModel(action.pair, data: action.data)
-
         DispatchQueue.main.async {
             state.data.accept(viewmodels)
         }
     default:
         break
     }
-
     return state
 }
 
@@ -46,7 +44,6 @@ func convertDataToTradeHistoryViewModel(_ pair:Pair, data: [JSON]) -> [TradeHist
         let quotePrecision = pow(10, quoteInfo.precision)
 
         if base["asset_id"].stringValue == pair.base {
-
             let quoteVolume = Decimal(string: quote["amount"].stringValue)! / quotePrecision
             let baseVolume = Decimal(string: base["amount"].stringValue)! / basePrecision
             let payVolume = Decimal(string: receive["amount"].stringValue)! / quotePrecision
@@ -57,8 +54,8 @@ func convertDataToTradeHistoryViewModel(_ pair:Pair, data: [JSON]) -> [TradeHist
             let viewModel = TradeHistoryViewModel(
                 pay: false,
                 price: tradePrice.price,
-                quoteVolume: payVolume.stringValue.suffixNumber(digitNum: 10 - tradePrice.pricision),
-                baseVolume: receiveVolume.stringValue.suffixNumber(digitNum: tradePrice.pricision),
+                quoteVolume: payVolume.suffixNumber(digitNum: 10 - tradePrice.pricision),
+                baseVolume: receiveVolume.suffixNumber(digitNum: tradePrice.pricision),
                 time: time.dateFromISO8601!.string(withFormat: "HH:mm:ss"))
             showData.append(viewModel)
         } else {
@@ -74,8 +71,8 @@ func convertDataToTradeHistoryViewModel(_ pair:Pair, data: [JSON]) -> [TradeHist
             let viewModel = TradeHistoryViewModel(
                 pay: true,
                 price: tradePrice.price,
-                quoteVolume: payVolume.stringValue.suffixNumber(digitNum: 10 - tradePrice.pricision),
-                baseVolume: receiveVolume.stringValue.suffixNumber(digitNum: tradePrice.pricision),
+                quoteVolume: payVolume.suffixNumber(digitNum: 10 - tradePrice.pricision),
+                baseVolume: receiveVolume.suffixNumber(digitNum: tradePrice.pricision),
                 time: time.dateFromISO8601!.string(withFormat: "HH:mm:ss"))
             showData.append(viewModel)
         }
