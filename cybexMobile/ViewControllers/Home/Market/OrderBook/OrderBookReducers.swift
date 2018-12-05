@@ -55,7 +55,7 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair: Pair) -> OrderBook {
             isBuy = false
         }
         var lastTradePrice = isBuy ? buyLastTradePrice : sellLastTradePrice
-        if tradePrice.price == lastTradePrice {
+        if tradePrice.price.toDecimal()! == lastTradePrice.toDecimal()! {
             lastTradePrice = tradePrice.price
             let lastIndex = isBuy ? combineOrders[0].count - 1 : combineOrders[1].count - 1
             let lastOrder = isBuy ? combineOrders[0][lastIndex] : combineOrders[1][lastIndex]
