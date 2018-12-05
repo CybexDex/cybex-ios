@@ -73,7 +73,6 @@ class ComprehensiveViewController: BaseViewController {
                 if reason == .initialRefresh {
                     self.startLoading()
                 }
-
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
 
@@ -82,14 +81,10 @@ class ComprehensiveViewController: BaseViewController {
 
             case .noMore:
                 break
-
             case .noData:
                 break
-
             case .normal:
-
                 break
-
             case .error(let error, _):
                 self.showToastBox(false, message: error.localizedDescription)
             }

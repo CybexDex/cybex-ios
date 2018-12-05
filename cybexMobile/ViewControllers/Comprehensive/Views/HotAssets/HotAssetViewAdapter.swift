@@ -28,8 +28,24 @@ extension HotAssetView {
             } else {
                 self.trendLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
             }
-
-            self.rmbLabel.text = "≈¥" + getAssetRMBPrice(quoteInfo.id, base: baseInfo.id).string(digits: 4, roundingMode: .down)
+            
+            var price: Decimal = 0
+            if let latest = model.latest.toDecimal() {
+                switch model.base {
+                case AssetConfiguration.CYB:
+                    price = latest * appData.cybRmbPrice
+                case AssetConfiguration.ETH:
+                    price = latest * appData.ethRmbPrice
+                case AssetConfiguration.BTC:
+                    price = latest * appData.btcRmbPrice
+                case AssetConfiguration.USDT:
+                    price = latest * appData.usdtRmbPrice
+                default:
+                    break
+                }
+            }
+            
+            self.rmbLabel.text = price == 0 ? "-" : "≈¥" + price.string(digits: 4, roundingMode: .down)
         }
         assetName.textAlignment = .center
         amountLabel.textAlignment = .center
