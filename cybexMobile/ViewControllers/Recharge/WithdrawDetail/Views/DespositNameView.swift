@@ -39,9 +39,8 @@ class DespositNameView: CybexBaseView {
                 return
             }
             self.addressView.isHidden = false
-            let color = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo
-            let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
-                                      NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
+            let color = UIColor.steel
+            let underlineAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
                                       NSAttributedString.Key.foregroundColor: color] as [NSAttributedString.Key: Any]
             let underlineAttributedString = NSAttributedString(string: address, attributes: underlineAttribute)
             self.protocolAddressLabel.attributedText = underlineAttributedString

@@ -15,7 +15,7 @@ class LimitOrder: HandyJSON {
     var seller: String = ""
     var forSale: String = ""
     var sellPrice: Price = Price()
-
+    var quoteAmount: String = ""
     /*
      1 sellPrice里面的base 和quote
      2 根据关系判断是买还是卖

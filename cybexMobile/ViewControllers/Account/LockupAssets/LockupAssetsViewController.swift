@@ -109,7 +109,7 @@ extension LockupAssetsViewController {
         self.selectedData = indexPathData
         let confirmData = claimLockupAsset(indexPathData)
         if self.isVisible {
-            showConfirm(R.string.localizable.withdraw_ensure_title.key.localized(), attributes: confirmData)
+            showConfirm(R.string.localizable.lockup_asset_claim_ensure.key.localized(), attributes: confirmData)
         }
     }
     

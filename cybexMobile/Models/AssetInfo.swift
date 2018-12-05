@@ -69,17 +69,43 @@ class Price: HandyJSON {
         let baseInfo = base.info()
         let quoteInfo = quote.info()
 
-        if let baseDouble = Double(base.amount), let quoteDouble = Double(quote.amount), quoteDouble != 0 {
+        if let baseDouble = Decimal(string: base.amount), let quoteDouble = Decimal(string: quote.amount), quoteDouble != 0 {
             let priceRatio =  baseDouble / quoteDouble
 
-            let baseNumber = NSDecimalNumber(floatLiteral: pow(10, baseInfo.precision.double))
-            let quoteNumber = NSDecimalNumber(floatLiteral: pow(10, quoteInfo.precision.double))
+//            let baseNumber = NSDecimalNumber(floatLiteral: pow(10, baseInfo.precision.double))
+//            let quoteNumber = NSDecimalNumber(floatLiteral: pow(10, quoteInfo.precision.double))
+            let baseNumber = pow(10, baseInfo.precision)
+            let quoteNumber = pow(10, quoteInfo.precision)
 
-            let precisionRatio = baseNumber.dividing(by: quoteNumber).stringValue
+//            let precisionRatio = baseNumber.dividing(by: quoteNumber).stringValue
+            let precisionRatio = baseNumber / quoteNumber
 
-            return priceRatio / precisionRatio.toDouble()!
+            return (priceRatio / precisionRatio).doubleValue
         }
 
+        return 0
+    }
+    
+    func toRealDecimal() -> Decimal {
+        let baseInfo = base.info()
+        let quoteInfo = quote.info()
+        
+        if let baseDouble = Decimal(string: base.amount), let quoteDouble = Decimal(string: quote.amount), quoteDouble != 0 {
+            let priceRatio =  baseDouble / quoteDouble
+            
+            //            let baseNumber = NSDecimalNumber(floatLiteral: pow(10, baseInfo.precision.double))
+            //            let quoteNumber = NSDecimalNumber(floatLiteral: pow(10, quoteInfo.precision.double))
+            let baseNumber = pow(10, baseInfo.precision)
+            let quoteNumber = pow(10, quoteInfo.precision)
+            
+            //            let precisionRatio = baseNumber.dividing(by: quoteNumber).stringValue
+            let precisionRatio = baseNumber / quoteNumber
+            
+            
+//            print("base.amount : \(base.amount), baseNumber: \(baseNumber), quote.amount: \(quote.amount), quoteNumber:\(quoteNumber)")
+            return priceRatio / precisionRatio
+        }
+    
         return 0
     }
 

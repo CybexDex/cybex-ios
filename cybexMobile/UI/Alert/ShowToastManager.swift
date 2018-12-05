@@ -229,7 +229,7 @@ class ShowToastManager {
     func setUp(message: String,
                animationType: ShowAnimationType,
                showType: ShowManagerType) {
-        self.data = ["message": message]
+        self.data = ["title": "", "message": message]
         self.animationShow = animationType
         self.showType = showType
         if showType == .alertImage {
@@ -258,8 +258,7 @@ class ShowToastManager {
     }
 
     fileprivate func setupAlert() {
-        let alertView            = CybexAlertView(frame: CGRect.zero)
-        alertView.isShowImage    = false
+        let alertView            = CybexMessageView(frame: CGRect.zero)
         showView                 = alertView
     }
 

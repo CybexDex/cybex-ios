@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import Localize_Swift
 
 class RechargeViewController: BaseViewController {
 
@@ -126,7 +127,7 @@ extension RechargeViewController: UITableViewDataSource, UITableViewDelegate {
             if let data = self.depositData {
                 let selectedData = data[indexPath.row]
                 if selectedData.enable == false {
-                    self.showToast(message: R.string.localizable.deposit_enable.key.localized())
+                    self.showToast(message: Localize.currentLanguage() == "en" ? selectedData.enMsg : selectedData.cnMsg)
                     return
                 }
                 self.coordinator?.openWithDrawDetail(data[indexPath.row])
@@ -135,7 +136,7 @@ extension RechargeViewController: UITableViewDataSource, UITableViewDelegate {
             if let data = self.withdrawData {
                 let selectedData = data[indexPath.row]
                 if selectedData.enable == false {
-                    self.showToast(message: R.string.localizable.deposit_enable.key.localized())
+                    self.showToast(message: Localize.currentLanguage() == "en" ? selectedData.enMsg : selectedData.cnMsg)
                     return
                 }
                 self.coordinator?.openRechargeDetail(data[indexPath.row])
