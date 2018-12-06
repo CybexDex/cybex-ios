@@ -262,24 +262,60 @@ extension Decimal { // 解决double 计算精度丢失
         return (self.string(digits: pricision,roundingMode: roundingMode), pricision, amountPricision)
     }
 
-    func suffixNumber(digitNum: Int = 5) -> String {
+    //小于1000的时候 digitNum 大于1000 统一2位
+    func suffixNumber(digitNum: Int = 5, padZero: Bool = true) -> String {
         var num = self
         let sign = ((num < 0) ? "-" : "")
         num = abs(num)
+
         if num / 1000 < 1 {
-            return "\(sign)\(num.string(digits: digitNum, roundingMode: .down))"
+            let str = num.string(digits: digitNum, roundingMode: .down)
+            let result = padZero ? str.formatCurrency(digitNum: digitNum, usesGroupingSeparator: true) : str
+            return "\(sign)\(result)"
         }
+
         num /= 1000
         if num / 1000 < 1  {
-            return "\(sign)\(num.string(digits: 2, roundingMode: .down))" + "k"
+            let str = num.string(digits: 2, roundingMode: .down)
+            let result = padZero ? str.formatCurrency(digitNum: 2, usesGroupingSeparator: true) : str
+            return "\(sign)\(result)" + "k"
         }
         num /= 1000
         if num / 1000 < 1 {
-            return "\(sign)\(num.string(digits: 2, roundingMode: .down))" + "m"
+            let str = num.string(digits: 2, roundingMode: .down)
+            let result = padZero ? str.formatCurrency(digitNum: 2, usesGroupingSeparator: true) : str
+
+            return "\(sign)\(result)" + "m"
         }
         num /= 1000
-        return "\(sign)\(num.string(digits: 2, roundingMode: .down))" + "b"
+
+        let str = num.string(digits: 2, roundingMode: .down)
+        let result = padZero ? str.formatCurrency(digitNum: 2, usesGroupingSeparator: true) : str
+
+        return "\(sign)\(result)" + "b"
     }
+
+    // 对齐小数位 不足补0
+    func formatCurrency(digitNum: Int, usesGroupingSeparator: Bool = true) -> String {
+        let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
+            return formatter.maximumFractionDigits == digitNum && formatter.usesGroupingSeparator == usesGroupingSeparator
+        })
+
+        if let format = existFormatters.first {
+            let result = format.string(from: NSDecimalNumber(decimal: self))
+            return result!
+        } else {
+            let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .currency
+            numberFormatter.currencySymbol = ""
+            numberFormatter.usesGroupingSeparator = usesGroupingSeparator
+            numberFormatter.maximumFractionDigits = digitNum
+            numberFormatter.minimumFractionDigits = digitNum
+            String.numberFormatters.append(numberFormatter)
+            return self.formatCurrency(digitNum: digitNum)
+        }
+    }
+
 }
 
 extension Double {
@@ -348,12 +384,12 @@ extension String {
         return decimal().decimal(digits: digits, roundingMode: roundingMode).stringValue
     }
 
-    func formatCurrency(digitNum: Int) -> String {
-        return decimal().string(digits: digitNum, roundingMode: .down)
+    func formatCurrency(digitNum: Int, usesGroupingSeparator: Bool = true) -> String {
+        return decimal().formatCurrency(digitNum: digitNum, usesGroupingSeparator: usesGroupingSeparator)
     }
     
-    func suffixNumber(digitNum: Int = 5) -> String {
-        return decimal().suffixNumber(digitNum: digitNum)
+    func suffixNumber(digitNum: Int = 5, padZero: Bool = true) -> String {
+        return decimal().suffixNumber(digitNum: digitNum, padZero: padZero)
     }
 }
 

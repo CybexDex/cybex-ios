@@ -97,7 +97,10 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair: Pair) -> OrderBook {
         let tradePrice = order.sellPrice.toReal().tradePriceAndAmountDecimal(.down)
         let quoteForSale = Decimal(string: order.forSale)! / (precisionRatio * order.sellPrice.toReal())
         let quoteVolume = quoteForSale / pow(10, order.sellPrice.quote.info().precision)
-        let bid = OrderBook.Order(price: tradePrice.price, volume: quoteVolume.suffixNumber(digitNum: 10 - tradePrice.pricision), volumePercent: percent)
+        let bid = OrderBook.Order(price: tradePrice.price.suffixNumber(digitNum: tradePrice.pricision,
+                                                                       padZero: true),
+                                  volume: quoteVolume.suffixNumber(digitNum: tradePrice.amountPricision),
+                                  volumePercent: percent)
         bids.append(bid)
     }
     for order in combineOrders[1] {
@@ -107,7 +110,10 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair: Pair) -> OrderBook {
 
         let tradePrice = (1.0 / order.sellPrice.toReal()).tradePriceAndAmountDecimal(.up)
         
-        let ask = OrderBook.Order(price: tradePrice.price, volume: quoteVolume.suffixNumber(digitNum: 10 - tradePrice.pricision), volumePercent: percent)
+        let ask = OrderBook.Order(price: tradePrice.price.suffixNumber(digitNum: tradePrice.pricision,
+                                                                       padZero: true),
+                                  volume: quoteVolume.suffixNumber(digitNum: tradePrice.amountPricision),
+                                  volumePercent: percent)
         asks.append(ask)
     }
 
