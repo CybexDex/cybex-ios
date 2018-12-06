@@ -109,10 +109,14 @@ class CBKLineMainView: UIView {
         for (index, klineModel) in mainDrawKLineModels.enumerated() {
             let xPosition = CGFloat(index) * (configuration.theme.klineWidth + configuration.theme.klineSpace)
             
-            let openPoint = CGPoint(x: xPosition, y: abs(drawMaxY - CGFloat((klineModel.open - limitValue.minValue) / unitValue)))
-            let closePoint = CGPoint(x: xPosition, y: abs(drawMaxY - CGFloat((klineModel.close - limitValue.minValue) / unitValue)))
-            let highPoint = CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: abs(drawMaxY - CGFloat((klineModel.high - limitValue.minValue) / unitValue)))
-            let lowPoint = CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: abs(drawMaxY - CGFloat((klineModel.low - limitValue.minValue) / unitValue)))
+            let openPoint = unitValue != 0 ? CGPoint(x: xPosition, y: abs(drawMaxY - CGFloat((klineModel.open - limitValue.minValue) / unitValue))) : CGPoint(x: xPosition, y: abs(drawMaxY))
+            let closePoint = unitValue != 0 ? CGPoint(x: xPosition, y: abs(drawMaxY - CGFloat((klineModel.close - limitValue.minValue) / unitValue))) : CGPoint(x: xPosition, y: abs(drawMaxY))
+            let highPoint = unitValue != 0 ? CGPoint(x: xPosition + configuration.theme.klineWidth / 2,
+                                                     y: abs(drawMaxY - CGFloat((klineModel.high - limitValue.minValue) / unitValue))) :
+                CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: abs(drawMaxY))
+            let lowPoint = unitValue != 0 ? CGPoint(x: xPosition + configuration.theme.klineWidth / 2,
+                                                    y: abs(drawMaxY - CGFloat((klineModel.low - limitValue.minValue) / unitValue))) :
+                CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: abs(drawMaxY))
             
             if let highY = highPointY {
                 if highPoint.y < highY {

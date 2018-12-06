@@ -222,7 +222,7 @@ extension CBKLineAccessoryView {
     }
 
     let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(drawHeight)
-    let middleY = drawMaxY - CGFloat(abs(limitValue.minValue) / unitValue)
+    let middleY = unitValue != 0 ? drawMaxY - CGFloat(abs(limitValue.minValue) / unitValue) : drawMaxY
 
     // 画柱状图
     for (index, model) in drawModels.enumerated() {
@@ -295,7 +295,7 @@ extension CBKLineAccessoryView {
 
       if let value = model.KDJk {
         let xPosition = CGFloat(index) * (self.configuration.theme.klineWidth + self.configuration.theme.klineSpace)
-        let yPosition: CGFloat = abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue))
+        let yPosition: CGFloat = unitValue != 0 ? abs(self.drawMaxY - CGFloat((value - limitValue.minValue) / unitValue)) : self.drawMaxY
         return CGPoint(x: xPosition, y: yPosition)
       }
       return nil

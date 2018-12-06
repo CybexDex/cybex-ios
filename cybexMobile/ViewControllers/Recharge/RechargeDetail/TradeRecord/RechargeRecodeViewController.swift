@@ -149,6 +149,10 @@ extension RechargeRecodeViewController: UITableViewDelegate, UITableViewDataSour
                     break
                 }
             }
+            let selectedRecord = self.data[indexPath.row]
+            if selectedRecord.state.desccription() == R.string.localizable.recode_state_new.key.localized() {
+                return
+            }
             self.coordinator?.openRecordDetailUrl(hash, asset: self.data[indexPath.row].asset.filterJade)
         }
     }

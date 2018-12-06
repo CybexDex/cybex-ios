@@ -344,7 +344,6 @@ extension CBKLineDrawView {
             }
 
             var drawModel: CBKLineModel?
-
             horizantalTop.constant = location.y
             indicatorHorizontalView.layoutIfNeeded()
 
@@ -374,8 +373,12 @@ extension CBKLineDrawView {
 
             if let limitValue = mainView.fetchLimitValue(), let model = drawModel {
                 let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(mainView.drawHeight)
-
-                horizantalTop.constant = abs(mainView.drawMaxY - CGFloat((model.close - limitValue.minValue) / unitValue))
+                if unitValue == 0 {
+                    horizantalTop.constant = abs(mainView.drawMaxY)
+                }
+                else {
+                    horizantalTop.constant = abs(mainView.drawMaxY - CGFloat((model.close - limitValue.minValue) / unitValue))
+                }
                 indicatorVolumeLabel.isHidden = false
                 indicatorVolumeLabel.text = model.close.string(digits: model.precision, roundingMode: .down)
 
