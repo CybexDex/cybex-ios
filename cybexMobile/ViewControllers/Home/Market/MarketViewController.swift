@@ -21,19 +21,13 @@ extension NSNotification.Name {
 class MarketViewController: BaseViewController {
     @IBOutlet var pageTitleView: DNSPageTitleView!
     @IBOutlet var pageContentView: DNSPageContentView!
-
     @IBOutlet var pageContentViewHeight: NSLayoutConstraint!
     @IBOutlet var scrollView: UIScrollView!
-
     @IBOutlet var pairListView: PairListHorizantalView!
-
     @IBOutlet var detailView: PairDetailView!
     @IBOutlet var kLineView: CBKLineView!
-
     @IBOutlet var marketDetailView: PairDetailView!
-
     @IBOutlet weak var rechargeView: PairRechargeView!
-
     @IBOutlet weak var rechargeHeight: NSLayoutConstraint!
 
     var rechargeShowType = PairRechargeView.ShowType.show.rawValue
