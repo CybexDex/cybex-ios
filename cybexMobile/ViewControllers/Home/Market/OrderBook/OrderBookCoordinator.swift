@@ -49,7 +49,7 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
         }
 
         fetchLimitOrders(with: pair, callback: {[weak self] (data) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             Await.Queue.serialAsync.async {
                 let result = JSON(data).arrayValue

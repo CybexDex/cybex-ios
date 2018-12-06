@@ -34,7 +34,7 @@ class HotAssetView: CybexBaseView {
 
     func setupSubViewEvent() {
         self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.next?.sendEventWith(Event.hotAssetViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
         }).disposed(by: disposeBag)
     }

@@ -11,11 +11,11 @@ import Foundation
 extension PairDetailDateViewView {
     func adapterModelToPairDetailDateViewView(_ model: CBKLineModel) {
 
-        self.open.text = R.string.localizable.pair_open.key.localizedFormat(model.open.formatCurrency(digitNum: model.precision))
-        self.high.text = R.string.localizable.pair_high.key.localizedFormat(model.high.formatCurrency(digitNum: model.precision))
-        self.low.text = R.string.localizable.pair_low.key.localizedFormat(model.low.formatCurrency(digitNum: model.precision))
-        self.close.text = R.string.localizable.pair_close.key.localizedFormat(model.close.formatCurrency(digitNum: model.precision))
-        self.baseAmount.text = R.string.localizable.pair_vol.key.localizedFormat(model.volume.suffixNumber(digitNum: 2)) + " " +  self.baseName
+        self.open.text = R.string.localizable.pair_open.key.localizedFormat(model.open.string(digits: model.precision, roundingMode: .down))
+        self.high.text = R.string.localizable.pair_high.key.localizedFormat(model.high.string(digits: model.precision, roundingMode: .down))
+        self.low.text = R.string.localizable.pair_low.key.localizedFormat(model.low.string(digits: model.precision, roundingMode: .down))
+        self.close.text = R.string.localizable.pair_close.key.localizedFormat(model.close.string(digits: model.precision, roundingMode: .down))
+        self.baseAmount.text = R.string.localizable.pair_vol.key.localizedFormat(model.volume.decimal.suffixNumber(digitNum: 2)) + " " +  self.baseName
 
         var lineModels = CBConfiguration.sharedConfiguration.dataSource.drawKLineModels
         let (contain, index) = lineModels.containHashable(model)
@@ -26,13 +26,13 @@ extension PairDetailDateViewView {
             let beforeModel = lineModels[index - 1]
             if beforeModel.close < model.close {
                 model.incre = .greater
-                model.changeAmount = "+" + (model.close - beforeModel.close).formatCurrency(digitNum: model.precision)
-                model.change = "+" + (((model.close - beforeModel.close) / beforeModel.close) * 100).formatCurrency(digitNum: 2) + "%"
+                model.changeAmount = "+" + (model.close - beforeModel.close).string(digits: model.precision, roundingMode: .down)
+                model.change = "+" + (((model.close - beforeModel.close) / beforeModel.close) * 100).string(digits: 2, roundingMode: .down) + "%"
 
             } else if beforeModel.close > model.close {
                 model.incre = .less
-                model.changeAmount = "-" + (beforeModel.close - model.close).formatCurrency(digitNum: model.precision)
-                model.change = "-" + (((beforeModel.close - model.close) / beforeModel.close) * 100).formatCurrency(digitNum: 2) + "%"
+                model.changeAmount = "-" + (beforeModel.close - model.close).string(digits: model.precision, roundingMode: .down)
+                model.change = "-" + (((beforeModel.close - model.close) / beforeModel.close) * 100).string(digits: 2, roundingMode: .down) + "%"
             } else {
                 model.changeAmount = "0".formatCurrency(digitNum: model.precision)
                 model.change = "0.00" + "%"

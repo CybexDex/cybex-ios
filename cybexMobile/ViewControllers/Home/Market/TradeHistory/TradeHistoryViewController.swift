@@ -77,7 +77,7 @@ class TradeHistoryViewController: BaseViewController {
                                                object: nil,
                                                queue: nil,
                                                using: { [weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.refreshView()
         })
     }
@@ -94,7 +94,7 @@ class TradeHistoryViewController: BaseViewController {
     override func configureObserveState() {
         self.coordinator!.state.data.asObservable()
             .subscribe(onNext: {[weak self] (data) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
 
                 self.data = data
                 self.coordinator?.updateMarketListHeight(500)

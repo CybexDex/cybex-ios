@@ -30,7 +30,7 @@ class TimeGapView: UIView {
   fileprivate func setup() {
     for (idx, button) in buttons.enumerated() {
       button.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-        guard let `self` = self else { return }
+        guard let self = self else { return }
 
         self.switchButton(idx)
         self.next?.sendEventWith(Event.timeClicked.rawValue, userinfo: ["candlestick": Candlesticks.all[idx]])

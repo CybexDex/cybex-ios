@@ -126,7 +126,7 @@ class MarketViewController: BaseViewController {
             lastMessageId = Int(cacheMessageId) ?? 0
         }
         self.coordinator?.fetchLastMessageId(self.title!, callback: { [weak self](lastId) in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             self.kLineView.messageCount = lastId
@@ -137,13 +137,13 @@ class MarketViewController: BaseViewController {
         NotificationCenter.default.addObserver(forName: .SpecialPairDidClicked,
                                                object: nil,
                                                queue: nil) {[weak self] (notifi) in
-                                                guard let `self` = self else { return }
+                                                guard let self = self else { return }
                                                 self.kLineSpecial = true
                                                 self.detailView.data = notifi.userInfo?["klineModel"]
         }
 
         NotificationCenter.default.addObserver(forName: .SpecialPairDidCanceled, object: nil, queue: nil) {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.kLineSpecial = false
             self.refreshDetailView()
         }
@@ -334,8 +334,8 @@ class MarketViewController: BaseViewController {
                     if let baseInfo = appData.assetInfo[self.ticker.base], self.timeGap == .oneDay {
                         lastModel = dataArray.last!
                         DispatchQueue.main.async {
-                            self.detailView.highLabel.text = "High: " + lastModel.high.formatCurrency(digitNum: baseInfo.precision)
-                            self.detailView.lowLabel.text = "Low: " + lastModel.low.formatCurrency(digitNum: baseInfo.precision)
+                            self.detailView.highLabel.text = "High: " + lastModel.high.decimal.string(digits: baseInfo.precision, roundingMode: .down)
+                            self.detailView.lowLabel.text = "Low: " + lastModel.low.decimal.string(digits: baseInfo.precision, roundingMode: .down)
                         }
                     }
                 }
@@ -351,7 +351,7 @@ class MarketViewController: BaseViewController {
     override func configureObserveState() {
         appData.otherRequestRelyData.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 if !CybexWebSocketService.shared.overload() {
                     self.performSelector(onMainThread: #selector(self.refreshTotalView), with: nil, waitUntilDone: false)
                 }

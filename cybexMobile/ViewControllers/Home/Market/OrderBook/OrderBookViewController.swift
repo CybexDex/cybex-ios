@@ -74,7 +74,7 @@ class OrderBookViewController: BaseViewController {
 
     func setupEvent() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.setTopTitle()
         })
     }
@@ -89,7 +89,7 @@ class OrderBookViewController: BaseViewController {
     override func configureObserveState() {
         self.coordinator!.state.data.asObservable().skip(1).distinctUntilChanged()
             .subscribe(onNext: {[weak self] (result) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 if let parentVC = self.parent?.parent as? TradeViewController {
                     if parentVC.isLoading() {
                         parentVC.endLoading()
@@ -116,7 +116,7 @@ class OrderBookViewController: BaseViewController {
             let tickers = appData.filterQuoteAssetTicker(pair.base)
             let data = tickers[selectedIndex]
 
-            self.tradeView.amount.text = data.latest.tradePrice.price
+            self.tradeView.amount.text = data.latest.tradePriceAndAmountDecimal().price
             self.tradeView.amount.textColor = data.incre.color()
 
             if data.latest == "0" {

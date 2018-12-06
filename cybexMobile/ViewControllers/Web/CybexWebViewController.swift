@@ -80,12 +80,12 @@ class CybexWebViewController: BaseWebViewController {
 
     func setupEvent() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.setURL()
         })
 
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.setURL()
         }
     }

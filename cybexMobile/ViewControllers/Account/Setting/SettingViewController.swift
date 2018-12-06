@@ -41,7 +41,7 @@ class SettingViewController: BaseViewController {
             self.logoutView.isHidden = true
         }
         self.logoutView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             
             UserManager.shared.logout()
             self.coordinator?.dismiss()
@@ -63,7 +63,7 @@ class SettingViewController: BaseViewController {
         
         for itemView in itemsView {
             itemView?.rx.tapGesture().when(.ended).asObservable().subscribe(onNext: { [weak self](tap) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 if let view = tap.view as? NormalCellView {
                     self.clickCellView(view)
                 }
@@ -99,7 +99,7 @@ class SettingViewController: BaseViewController {
     
     func setupNotification() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             
             let color = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(color: color), for: .default)
@@ -120,13 +120,13 @@ extension SettingViewController {
         let actionController = PeriscopeActionController()
         actionController.selectedIndex = IndexPath(row: UserManager.shared.frequencyType.rawValue, section: 0)
         actionController.addAction(Action(R.string.localizable.frequency_normal.key.localized(), style: .destructive, handler: {[weak self] _ in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             UserManager.shared.frequencyType = .normal
             self.frequency.contentLocali = UserManager.shared.frequencyType.description()
         }))
         
         actionController.addAction(Action(R.string.localizable.frequency_time.key.localized(), style: .destructive, handler: { [weak self]_ in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             
             UserManager.shared.frequencyType = .time
             self.frequency.contentLocali = UserManager.shared.frequencyType.description()
@@ -134,7 +134,7 @@ extension SettingViewController {
         }))
         
         actionController.addAction(Action(R.string.localizable.frequency_wifi.key.localized(), style: .destructive, handler: { [weak self]_ in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             UserManager.shared.frequencyType = .wiFi
             self.frequency.contentLocali = UserManager.shared.frequencyType.description()
         }))

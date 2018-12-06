@@ -42,7 +42,7 @@ func filterData(_ trades: [Trade]) -> [Trade] {
     var tradesInfo: [Trade] = []
     if var balances = UserManager.shared.balances.value {
         balances = balances.filter { (balance) -> Bool in
-            return getRealAmount(balance.assetType, amount: balance.balance).doubleValue != 0
+            return getRealAmount(balance.assetType, amount: balance.balance) != 0
         }
         for balance in balances {
             for var trade in data {

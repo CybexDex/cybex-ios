@@ -111,7 +111,7 @@ struct AppPropertyState {
         return counts.sorted(by: { (currency1, currency2) -> Bool in
             let change1 = currency1.percentChange
             let change2 = currency2.percentChange
-            return change1.toDecimal()! > change2.toDecimal()!
+            return change1.decimal() > change2.decimal()
         })
     }
 
@@ -231,7 +231,7 @@ class AppPropertyActionCreate: LoadingActionCreator {
     func fetchMarket(with sub: Bool = true, params: AssetPairQueryParams, priority: Operation.QueuePriority = .normal, callback: MarketDataCallback?) -> ActionCreator {
         return { state, store in
             self.fetchingMarketList(params, priority: priority, callback: {[weak self] (res) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
 
                 if var assets = res as? [Bucket] {
                     if assets.count > 0 {
@@ -304,7 +304,7 @@ class AppPropertyActionCreate: LoadingActionCreator {
         reParams.startTime = params.startTime.addingTimeInterval(-24 * 3600)
         reParams.endTime = params.startTime
         self.fetchingMarketList(reParams, priority: priority, callback: {[weak self] (oRes) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if let oAssets = oRes as? [Bucket] {
                 if oAssets.count > 0, let oAssetLast = oAssets.last {
                     if let callback = callback {

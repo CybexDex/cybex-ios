@@ -43,6 +43,7 @@ struct AppConfiguration {
     static var ETOMGBaseTestURLString = URL(string: "https://ieo-apitest.cybex.io/api")!
     static var GatewayID = "CybexGateway" //CybexGatewayDev
 
+    static var TransactionExpiration: TimeInterval = 45
     static var ServerIconsBaseURLString = "https://app.cybex.io/icons/"
 
     static var ServerRegisterPincodeURLString: String {

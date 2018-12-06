@@ -64,7 +64,7 @@ class WithdrawAddressViewController: BaseViewController {
 
     override func configureObserveState() {
         self.coordinator?.state.data.asObservable().subscribe(onNext: {[weak self] (data) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             if data.count == 0 {
                 self.view.showNoData(

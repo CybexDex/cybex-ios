@@ -112,8 +112,8 @@ extension OrderBookContentView: UITableViewDelegate, UITableViewDataSource {
                 let asksPercent = asks[optional:indexPath.row]?.volumePercent
                 let bidsPercent = bids[optional:indexPath.row]?.volumePercent
 
-                var percentBuy: Double?
-                var percentSell: Double?
+                var percentBuy: Decimal?
+                var percentSell: Decimal?
 
                 if let maxAsksPercent = maxAsksPercent, let asksPercent = asksPercent {
                     percentBuy = asksPercent / maxAsksPercent

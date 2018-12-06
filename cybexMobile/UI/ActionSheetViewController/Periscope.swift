@@ -119,7 +119,7 @@ public class PeriscopeActionController: ActionController<PeriscopeCell, String, 
             sectionHeader.backgroundColor = UIColor.clear
         }
         onConfigureCellForAction = { [weak self] cell, action, indexPath in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             cell.setup(action.data, detail: nil, image: nil)
             cell.separatorView?.isHidden = indexPath.item == self.collectionView.numberOfItems(inSection: indexPath.section) - 1
             if let selectedIndex = self.selectedIndex, selectedIndex == indexPath {

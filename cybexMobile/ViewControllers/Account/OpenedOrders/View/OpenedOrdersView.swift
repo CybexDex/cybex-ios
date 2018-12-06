@@ -100,7 +100,7 @@ class OpenedOrdersView: UIView {
 
     fileprivate func setup() {
         cancleOrder.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.cancleOrder.next?.sendEventWith(CancleOrder.cancleOrderAction.rawValue, userinfo: ["selectedIndex": self.selectedIndex?.row ?? 0])
         }).disposed(by: disposeBag)
 

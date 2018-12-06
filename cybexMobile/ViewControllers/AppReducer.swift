@@ -123,19 +123,19 @@ func appPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
             for rmbPrices in action.price {
                 if rmbPrices.name == "CYB" {
                     if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
-                        state.cybRmbPrice = rmbPrices.rmbPrice.toDecimal()!
+                        state.cybRmbPrice = rmbPrices.rmbPrice.decimal()
                     }
                 } else if rmbPrices.name == "BTC" {
                     if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
-                        state.btcRmbPrice = rmbPrices.rmbPrice.toDecimal()!
+                        state.btcRmbPrice = rmbPrices.rmbPrice.decimal()
                     }
                 } else if rmbPrices.name == "USDT" {
                     if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
-                        state.usdtRmbPrice = rmbPrices.rmbPrice.toDecimal()!
+                        state.usdtRmbPrice = rmbPrices.rmbPrice.decimal()
                     }
                 } else if rmbPrices.name == "ETH" {
                     if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
-                        state.ethRmbPrice = rmbPrices.rmbPrice.toDecimal()!
+                        state.ethRmbPrice = rmbPrices.rmbPrice.decimal()
                     }
                 }
             }
@@ -178,7 +178,7 @@ func applyTickersToState(_ state: AppPropertyState, action: TickerFetched) -> [T
     }
 
     if data.count > 1 {
-        let scored = data.sorted(by: {return $0.baseVolume.toDecimal()! > $1.baseVolume.toDecimal()!})
+        let scored = data.sorted(by: {return $0.baseVolume.decimal() > $1.baseVolume.decimal()})
         return scored
     } else {
         return data

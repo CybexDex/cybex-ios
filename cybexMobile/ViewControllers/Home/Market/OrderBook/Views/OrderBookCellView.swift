@@ -21,12 +21,12 @@ class OrderBookCellView: UIView {
 
     var data: Any? {
         didSet {
-            guard let showData = data as? (OrderBook.Order?, OrderBook.Order?, Double?, Double?) else { return }
+            guard let showData = data as? (OrderBook.Order?, OrderBook.Order?, Decimal?, Decimal?) else { return }
 
             if let bid = showData.0 {
                 self.buyPrice.text = bid.price
                 self.buyVolume.text = bid.volume
-                self.leftBoxWidth = self.leftBoxWidth.changeMultiplier(multiplier: CGFloat(showData.2!))
+                self.leftBoxWidth = self.leftBoxWidth.changeMultiplier(multiplier: showData.2!.cgfloat())
             } else {
                 self.buyPrice.text = ""
                 self.buyVolume.text = ""
@@ -37,7 +37,7 @@ class OrderBookCellView: UIView {
             if let ask = showData.1 {
                 self.sellPrice.text = ask.price
                 self.sellVolume.text = ask.volume
-                self.rightBoxWidth = self.rightBoxWidth.changeMultiplier(multiplier: CGFloat(showData.3!))
+                self.rightBoxWidth = self.rightBoxWidth.changeMultiplier(multiplier: showData.3!.cgfloat())
             } else {
                 self.sellPrice.text = ""
                 self.sellVolume.text = ""

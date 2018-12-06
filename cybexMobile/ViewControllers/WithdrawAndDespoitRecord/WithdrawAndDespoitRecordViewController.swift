@@ -52,7 +52,7 @@ class WithdrawAndDespoitRecordViewController: BaseViewController {
 
     override func configureObserveState() {
         self.coordinator?.state.pageState.asObservable().distinctUntilChanged().subscribe(onNext: {[weak self] (state) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.endLoading()
 

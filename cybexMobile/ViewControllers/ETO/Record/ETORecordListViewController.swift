@@ -44,12 +44,12 @@ class ETORecordListViewController: BaseViewController {
         recordTableView.rowHeight = 88
 
         self.addPullToRefresh(recordTableView) {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.coordinator?.switchPageState(PageState.refresh(type: PageRefreshType.manual))
         }
 
         self.addInfiniteScrolling(recordTableView) {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.coordinator?.switchPageState(PageState.loadMore(page: self.coordinator!.state.page.value + 1))
         }
     }
@@ -64,7 +64,7 @@ class ETORecordListViewController: BaseViewController {
 
     override func configureObserveState() {
         self.coordinator?.state.pageState.asObservable().distinctUntilChanged().subscribe(onNext: {[weak self] (state) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.endLoading()
 
@@ -113,10 +113,10 @@ class ETORecordListViewController: BaseViewController {
         }).disposed(by: disposeBag)
 
         self.coordinator!.state.changeSet.asObservable().skip(1).subscribe(onNext: {[weak self] (changeset) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.recordTableView.reload(using: changeset, with: UITableView.RowAnimation.fade) {[weak self] data in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
 
                 self.coordinator?.state.data.accept(data)
             }

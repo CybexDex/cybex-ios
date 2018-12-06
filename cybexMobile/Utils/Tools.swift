@@ -64,7 +64,7 @@ extension UIViewController {
         let parameters = [SKStoreProductParameterITunesItemIdentifier: identifier]
         storeViewController.loadProduct(withParameters: parameters) { [weak self] (loaded, _) -> Void in
             if loaded {
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 
                 self.present(storeViewController, animated: true)
             }
@@ -172,8 +172,8 @@ extension Formatter {
     static let iso8601: DateFormatter = {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.locale = Locale(identifier: "en_US_POSIX") //不设置系统默认地区 为格式化后的语言
+        formatter.timeZone = TimeZone(secondsFromGMT: 0) // 默认为系统当前的时区
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         return formatter
     }()
@@ -189,16 +189,50 @@ extension Decimal { // 解决double 计算精度丢失
     var stringValue: String {
         return NSDecimalNumber(decimal: self).stringValue
     }
-    
-    var doubleValue: Double {
-        let str = self.stringValue
-        
-        if let dou = Double(str) {
-            return dou
+
+    var int64Value: Int64 {
+        return NSDecimalNumber(decimal: self).int64Value
+    }
+
+    var intValue: Int {
+        return NSDecimalNumber(decimal: self).intValue
+    }
+
+    var floor: Decimal {
+        return decimal(digits: 0, roundingMode: .down)
+    }
+
+    var ceil: Decimal {
+        return decimal(digits: 0, roundingMode: .up)
+    }
+
+    func decimal(digits: Int = 0, roundingMode: NSDecimalNumber.RoundingMode = .plain) -> Decimal {
+        var decimal = self
+        var drounded = Decimal()
+        NSDecimalRound(&drounded, &decimal, digits, roundingMode)
+
+        return drounded
+    }
+
+    func string(digits: Int = 0, roundingMode: NSDecimalNumber.RoundingMode = .plain) -> String {
+        return decimal(digits: digits, roundingMode: roundingMode).stringValue
+    }
+
+    func double(digits: Int = Int.max, roundingMode: NSDecimalNumber.RoundingMode = .plain) -> Double {
+        if digits == Int.max {
+            return Double(stringValue) ?? 0
         }
-        return 0
+        return Double(string(digits: digits, roundingMode: roundingMode)) ?? 0
+    }
+
+    func cgfloat(digits: Int = Int.max, roundingMode: NSDecimalNumber.RoundingMode = .plain) -> CGFloat {
+        if digits == Int.max {
+            return CGFloat(exactly: NSDecimalNumber(decimal: self)) ?? 0
+        }
+        return CGFloat(exactly: NSDecimalNumber(decimal: decimal(digits: digits, roundingMode: roundingMode))) ?? 0
     }
     
+
     func tradePrice(_ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> (price: String, pricision: Int) {
         var pricision = 0
         if self < Decimal(floatLiteral: 0.0001) {
@@ -211,9 +245,8 @@ extension Decimal { // 解决double 计算精度丢失
         
         return (self.string(digits: pricision, roundingMode: roundingMode), pricision)
     }
-    
-    
-    func tradePriceDecimal(_ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> (price: String, pricision: Int, amountPricision: Int) {
+
+    func tradePriceAndAmountDecimal(_ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> (price: String, pricision: Int, amountPricision: Int) {
         var pricision = 0
         var amountPricision = 0
         if self < Decimal(floatLiteral: 0.0001) {
@@ -228,28 +261,7 @@ extension Decimal { // 解决double 计算精度丢失
         }
         return (self.string(digits: pricision,roundingMode: roundingMode), pricision, amountPricision)
     }
-    
-    func string(digits: Int = 0, roundingMode: NSDecimalNumber.RoundingMode = .plain) -> String {
-        var decimal = self
-        var drounded = Decimal()
-        NSDecimalRound(&drounded, &decimal, digits, roundingMode)
-        
-        if digits == 0 {
-            return drounded.stringValue
-        }
-        
-        var formatterString: String = "0."
-        
-        for _ in 0 ..< digits {
-            formatterString.append("0")
-        }
-        
-        let formatter = NumberFormatter()
-        formatter.positiveFormat = formatterString
-        
-        return formatter.string(from: NSDecimalNumber(decimal: drounded)) ?? "0"
-    }
-    
+
     func suffixNumber(digitNum: Int = 5) -> String {
         var num = self
         let sign = ((num < 0) ? "-" : "")
@@ -271,77 +283,24 @@ extension Decimal { // 解决double 计算精度丢失
 }
 
 extension Double {
+    var decimal: Decimal {
+        return Decimal(self)
+    }
+
     func string(digits: Int = 0, roundingMode: NSDecimalNumber.RoundingMode = .plain) -> String {
         let decimal = Decimal(floatLiteral: self)
         
         return decimal.string(digits: digits, roundingMode: roundingMode)
     }
-    
-    func preciseString() -> String {//解决显示科学计数法的格式
-        let decimal = Decimal(floatLiteral: self)
-        
-        return decimal.stringValue
+
+    func tradePriceAndAmountDecimal(_ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> (price: String, pricision: Int, amountPricision: Int) {
+        return self.decimal.tradePriceAndAmountDecimal(roundingMode)
     }
-    
-    func tradePrice(_ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> (price: String, pricision: Int, amountPricision: Int) {
-        var pricision = 0
-        var amountPricision = 0
-        let decimal = Decimal(floatLiteral: self)
-        if decimal < Decimal(floatLiteral: 0.0001) {
-            pricision = 8
-            amountPricision = 2
-        } else if decimal < Decimal(floatLiteral: 1) {
-            pricision = 6
-            amountPricision = 4
-        } else {
-            pricision = 4
-            amountPricision = 6
-        }
-        return (self.string(digits: pricision,roundingMode: roundingMode), pricision, amountPricision)
-    }
-    
-    func formatCurrency(digitNum: Int, usesGroupingSeparator: Bool = true) -> String {
-        if self < 1000 {
-            return string(digits: digitNum, roundingMode: .down)
-        }
-        
-        let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
-            return formatter.maximumFractionDigits == digitNum && formatter.usesGroupingSeparator == usesGroupingSeparator
-        })
-        
-        if let format = existFormatters.first {
-            let result = format.string(from: NSNumber(value: self))
-            return result!
-        } else {
-            let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = .currency
-            numberFormatter.currencySymbol = ""
-            numberFormatter.usesGroupingSeparator = usesGroupingSeparator
-            numberFormatter.maximumFractionDigits = digitNum
-            numberFormatter.minimumFractionDigits = digitNum
-            String.numberFormatters.append(numberFormatter)
-            return self.formatCurrency(digitNum: digitNum)
-        }
-    }
-    
-    func suffixNumber(digitNum: Int = 5) -> String {
-        var num = self
-        let sign = ((num < 0) ? "-" : "")
-        num = fabs(num)
-        if (num < 1000.0) {
-            return "\(sign)\(num.string(digits: digitNum, roundingMode: .down))"
-        }
-        
-        let exp: Int = Int(log10(num) / 3.0)
-        let units: [String] = ["k", "m", "b"]
-        
-        let precision = pow(1000.0, exp.double)
-        num = 100 * num / precision
-        
-        let result = num.rounded() / 100.0
-        
-        //    let roundedNum = round(100.0 * num / pow(1000.0, Double(exp))) / 100.0
-        return "\(sign)\(result.string(digits: 2,roundingMode: .down))" + "\(units[exp - 1])"
+}
+
+extension Int {
+    var decimal: Decimal {
+        return Decimal(self)
     }
 }
 
@@ -370,28 +329,11 @@ extension String {
         return 0
     }
     
-    var tradePrice:(price: String, pricision: Int, amountPricision: Int) {//0.0001  1   8 6 4
-        if let oldPrice = self.toDouble() {
-            return oldPrice.tradePrice()
-        }
-        
-        return (self, 0, 0)
+    func tradePriceAndAmountDecimal(_ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> (price: String, pricision: Int, amountPricision: Int) {
+        return self.decimal().tradePriceAndAmountDecimal(roundingMode)
     }
-    
-    public func toDouble() -> Double? {
-        if self == "" {
-            return 0
-        }
-        
-        var selfString = self
-        if selfString.contains(",") {
-            selfString = selfString.replacingOccurrences( of: "[^0-9.]", with: "", options: .regularExpression)
-        }
-        
-        return Double(selfString)
-    }
-    
-    public func toDecimal() -> Decimal? {
+
+    public func decimal() -> Decimal {
         if self == "" {
             return Decimal(0)
         }
@@ -399,22 +341,19 @@ extension String {
         if selfString.contains(",") {
             selfString = selfString.replacingOccurrences( of: "[^0-9.]", with: "", options: .regularExpression)
         }
-        return Decimal(string: selfString)
+        return Decimal(string: selfString) ?? Decimal(0)
     }
-    
+
+    func string(digits: Int = 0, roundingMode: NSDecimalNumber.RoundingMode = .plain) -> String {
+        return decimal().decimal(digits: digits, roundingMode: roundingMode).stringValue
+    }
+
     func formatCurrency(digitNum: Int) -> String {
-        
-        if let str = toDecimal()?.string(digits: digitNum, roundingMode: .down) {
-            return str
-        }
-        return ""
+        return decimal().string(digits: digitNum, roundingMode: .down)
     }
     
     func suffixNumber(digitNum: Int = 5) -> String {
-        if let str = Double(self)?.suffixNumber(digitNum: digitNum) {
-            return str
-        }
-        return ""
+        return decimal().suffixNumber(digitNum: digitNum)
     }
 }
 

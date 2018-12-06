@@ -18,7 +18,6 @@ class ExchangeViewController: BaseViewController {
     var pair: Pair? {
         didSet {
             if self.isVisible {
-                print("exchangeType : \(type)")
                 self.children.forEach { (viewController) in
                     if var viewController = viewController as? TradePair {
                         viewController.pariInfo = pair!

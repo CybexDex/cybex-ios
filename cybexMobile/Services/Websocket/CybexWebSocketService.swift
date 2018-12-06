@@ -250,7 +250,7 @@ class CybexWebSocketService: NSObject {
         let sendId = sendData.1
 
         let operation = AsyncRequestOperation(response) {[weak self] operation in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             operation.state = .executing
 

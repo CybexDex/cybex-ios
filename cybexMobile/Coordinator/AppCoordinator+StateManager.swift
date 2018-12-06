@@ -16,14 +16,14 @@ import Reachability
 extension AppCoordinator {
     func fetchTickerData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority) {
         creator.fetchCurrencyList(params) { [weak self](asset) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.store.dispatch(TickerFetched(asset: asset))
         }
     }
 
     func fetchKline(_ params: AssetPairQueryParams, gap: Candlesticks, vc: BaseViewController? = nil, selector: Selector?) {
         store.dispatch(creator.fetchMarket(with: false, params: params, priority: .high, callback: { [weak self] (assets) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.store.dispatch(KLineFetched(pair: Pair(base: params.firstAssetId, quote: params.secondAssetId), stick: gap, assets: assets))
             if let vc = vc, let sel = selector {
@@ -166,7 +166,7 @@ extension AppCoordinator {
 
         self.fetchPariTimer = Repeater.every(.seconds(UserManager.shared.refreshTime), { [weak self](timer) in
             main {
-                guard let `self` = self else {return}
+                guard let self = self else {return}
                 if reachability.connection == .none ||
                     !CybexWebSocketService.shared.checkNetworConnected() {
                         appCoodinator.fetchPariTimer = nil

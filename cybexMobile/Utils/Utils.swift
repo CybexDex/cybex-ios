@@ -54,23 +54,20 @@ func calculateFee(_ operation: String,
                                         _ amount: Decimal,
                                         _ assetID: String) -> Void) {
     let request = GetRequiredFees(response: { (data) in
-        if let fees = data as? [Fee], let cybAmount = fees.first?.amount.toDouble() {
-
-            let cyb = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
-                return balance.assetType == AssetConfiguration.CYB
-            }).first?.balance.toDouble() ?? 0
-
+        if let fees = data as? [Fee], let cybAmount = fees.first?.amount.decimal(), let cyb = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
+            return balance.assetType == AssetConfiguration.CYB
+        }).first?.balance.decimal() {
             if cyb >= cybAmount {
                 let amount = getRealAmount(AssetConfiguration.CYB, amount: cybAmount.string)
 
                 completion(true, amount, AssetConfiguration.CYB)
             } else {
                 let request = GetRequiredFees(response: { (data) in
-                    if let fees = data as? [Fee], let baseAmount = fees.first?.amount.toDouble() {
+                    if let fees = data as? [Fee], let baseAmount = fees.first?.amount.decimal() {
                         if let base = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
                             return balance.assetType == focusAssetId
                         }).first {
-                            if base.balance.toDouble()! >= baseAmount {
+                            if base.balance.decimal() >= baseAmount {
                                 let amount = getRealAmount(focusAssetId, amount: baseAmount.string)
 
                                 completion(true, amount, focusAssetId)
@@ -131,12 +128,12 @@ func calculateAssetRelation(assetIDAName: String, assetIDBName: String) -> (base
 
 }
 
-func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
+func getAssetRMBPrice(_ asset: String, base: String = "") -> Decimal {
 
     guard let assetInfo = appData.assetInfo[asset] else { return 0 }
     if AssetConfiguration.orderName.contains(assetInfo.symbol.filterJade) {
         if let data = appData.rmbPrices.filter({return $0.name == assetInfo.symbol.filterJade}).first {
-            return data.rmbPrice.toDouble() ?? 0
+            return data.rmbPrice.decimal()
         }
         return 0
     }
@@ -152,7 +149,7 @@ func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
     guard var ticker = tickers.first else {
         return 0
     }
-    var basePrice: Double = 0
+    var basePrice: Decimal = 0
     if tickers.count > 1 {
         var baseAssets = [AssetConfiguration.CYB, AssetConfiguration.USDT, AssetConfiguration.ETH, AssetConfiguration.BTC]
         var indexs = [Int]()
@@ -178,10 +175,7 @@ func getAssetRMBPrice(_ asset: String, base: String = "") -> Double {
         basePrice = getAssetRMBPrice(ticker.base)
     }
 
-    guard let latest = ticker.latest.toDouble() else {
-        return 0
-    }
-    return latest * basePrice
+    return ticker.latest.decimal() * basePrice
 }
 
 func getCachedBucket(_ homebucket: HomeBucket) -> BucketMatrix {
@@ -203,23 +197,7 @@ func getRealAmount(_ id: String, amount: String) -> Decimal {
 
     let precisionNumber = pow(10, asset.precision)
 
-    if let amountDecimal = amount.toDecimal() {
-        return amountDecimal / precisionNumber
-    }
-
-    return 0
-}
-
-func getRealAmountDouble(_ id: String, amount: String) -> Double {
-    guard let asset = appData.assetInfo[id] else {
-        return 0
-    }
-
-    if let doubleAmount = Double(amount) {
-        return doubleAmount / pow(10, asset.precision.double)
-    }
-
-    return 0
+    return amount.decimal() / precisionNumber
 }
 
 func saveImageToPhotos() {

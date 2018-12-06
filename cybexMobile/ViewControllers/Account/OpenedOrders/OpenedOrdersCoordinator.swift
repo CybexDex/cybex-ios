@@ -51,12 +51,12 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
                                 if let jsonStr = BitShareCoordinator.cancelLimitOrder(
                                     blockchainParams.block_num,
                                     block_id: blockchainParams.block_id,
-                                    expiration: Date().timeIntervalSince1970 + 10 * 3600,
+                                    expiration: Date().timeIntervalSince1970 + AppConfiguration.TransactionExpiration,
                                     chain_id: blockchainParams.chain_id,
                                     user_id: userid.getID,
                                     order_id: orderID.getID,
                                     fee_id: assetID.getID,
-                                    fee_amount: Int64(amount.doubleValue * pow(10, asset.precision.double))) {
+                                    fee_amount: (amount * pow(10, asset.precision)).int64Value) {
 
                                     print("blockchainParams:\(jsonStr)")
 

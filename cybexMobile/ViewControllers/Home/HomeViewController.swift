@@ -103,7 +103,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
     override func configureObserveState() {
         appData.tickerData.asObservable().filter({[weak self] (result) -> Bool in
-            guard let `self` = self else { return false}
+            guard let self = self else { return false}
             if self.vcType == ViewType.comprehensive.rawValue {
                 if result.count == AssetConfiguration.shared.assetIds.count {
                     return true
@@ -120,7 +120,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
             return false
         }).take(1)
             .subscribe(onNext: {[weak self] (_) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 self.updateUI()
                 self.endLoading()
                 self.timer = Timer.scheduledTimer(timeInterval: 3,

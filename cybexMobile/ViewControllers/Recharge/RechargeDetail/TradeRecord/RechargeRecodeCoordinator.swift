@@ -79,7 +79,7 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
                                      size: size,
                                      offset: offset,
                                      expiration: expiration) { [weak self](result) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.store.dispatch(FetchDepositRecordsAction(data: result))
             if result != nil {
                 callback(true)
@@ -95,7 +95,7 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
 
     func fetchAssetUrl() {
         SimpleHTTPService.fetchBlockexplorerJson().done { [weak self](explorers) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.store.dispatch(FetchAssetUrlAction(data: explorers))
             }.catch { (_) in
         }

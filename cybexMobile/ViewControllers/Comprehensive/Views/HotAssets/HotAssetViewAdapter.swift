@@ -23,28 +23,27 @@ extension HotAssetView {
             amountLabel.textColor = model.incre.color()
             self.trendLabel.text = (model.incre == .greater ? "+" : "") + model.percentChange.formatCurrency(digitNum: 2) + "%"
             self.trendLabel.textColor = model.incre.color()
-            if let change = model.percentChange.toDouble(), change > 1000 {
+            if model.percentChange.decimal() > 1000 {
                 self.trendLabel.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
             } else {
                 self.trendLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
             }
             
             var price: Decimal = 0
-            if let latest = model.latest.toDecimal() {
-                switch model.base {
-                case AssetConfiguration.CYB:
-                    price = latest * appData.cybRmbPrice
-                case AssetConfiguration.ETH:
-                    price = latest * appData.ethRmbPrice
-                case AssetConfiguration.BTC:
-                    price = latest * appData.btcRmbPrice
-                case AssetConfiguration.USDT:
-                    price = latest * appData.usdtRmbPrice
-                default:
-                    break
-                }
+            let latest = model.latest.decimal()
+            switch model.base {
+            case AssetConfiguration.CYB:
+                price = latest * appData.cybRmbPrice
+            case AssetConfiguration.ETH:
+                price = latest * appData.ethRmbPrice
+            case AssetConfiguration.BTC:
+                price = latest * appData.btcRmbPrice
+            case AssetConfiguration.USDT:
+                price = latest * appData.usdtRmbPrice
+            default:
+                break
             }
-            
+
             self.rmbLabel.text = price == 0 ? "-" : "≈¥" + price.string(digits: 4, roundingMode: .down)
         }
         assetName.textAlignment = .center

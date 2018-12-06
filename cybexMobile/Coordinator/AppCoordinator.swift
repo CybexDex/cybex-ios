@@ -51,7 +51,7 @@ class AppCoordinator {
         self.rootVC = rootVC
 
         rootVC.shouldHijackHandler = {[weak self] (tab, vc, index) in
-            guard let `self` = self else { return false }
+            guard let self = self else { return false }
             if self.rootVC.selectedIndex == index, let nav = vc as? BaseNavigationController {
                 nav.topViewController?.refreshViewController()
             }
@@ -155,7 +155,7 @@ class AppCoordinator {
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
                                                object: nil,
                                                queue: nil) {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.curDisplayingCoordinator().rootVC.topViewController?.refreshViewController()
         }
     }

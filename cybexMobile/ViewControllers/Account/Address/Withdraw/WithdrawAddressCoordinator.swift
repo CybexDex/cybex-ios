@@ -51,20 +51,20 @@ extension WithdrawAddressCoordinator: WithdrawAddressCoordinatorProtocol {
         actionController.tapMaskCallback = dismissCallback
 
         actionController.addAction(Action(R.string.localizable.copy.key.localized(), style: .destructive, handler: {[weak self] _ in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             self.copy()
             dismissCallback?()
         }))
 
         actionController.addAction(Action(R.string.localizable.delete.key.localized(), style: .destructive, handler: {[weak self] _ in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             self.confirmdelete()
             dismissCallback?()
         }))
 
         actionController.addSection(PeriscopeSection())
         actionController.addAction(Action(R.string.localizable.alert_cancle.key.localized(), style: .cancel, handler: {[weak self] _ in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
 
             self.select(nil)
             dismissCallback?()

@@ -49,7 +49,7 @@ class RechargeHeaderView: CybexBaseView {
 
     func setupSubViewEvent() {
         NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: self.searchTextField, queue: nil) { [weak self](_) in
-            guard let `self` = self, let text = self.searchTextField.text else { return }
+            guard let self = self, let text = self.searchTextField.text else { return }
             self.next?.sendEventWith(Event.rechargeSortedName.rawValue, userinfo: ["data": text])
         }
 

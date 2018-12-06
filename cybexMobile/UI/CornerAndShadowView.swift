@@ -19,7 +19,7 @@ class CornerAndShadowView: UIView {
         didSet {
             cornerView.cornerRadius = newCornerRadius
             self.subviews.forEach { [weak self](subView) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 if subView.shadowOpacity == 0 {
                     subView.cornerRadius = self.cornerView.cornerRadius
                 }

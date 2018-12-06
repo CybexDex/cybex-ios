@@ -144,13 +144,13 @@ class ETODetailView: CybexBaseView {
     func setupSubViewEvent() {
 
         stateLabel.rx.tapGesture().when(UIGestureRecognizer.State.recognized).asObservable().subscribe(onNext: { [weak self](_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.sendEventWith(Event.showAgreement.rawValue, userinfo: [:])
 
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         stateButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             guard let action =  self.action else { return }
             if self.agreeButton.isHidden == false, self.agreeButton.isSelected == false {
                 self.next?.sendEventWith(Event.showToastError.rawValue, userinfo: [:])
@@ -160,7 +160,7 @@ class ETODetailView: CybexBaseView {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         agreeButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.agreeButton.isSelected = !self.agreeButton.isSelected
 //            self.next?.sendEventWith(Event.crowdPage.rawValue, userinfo: ["data": self.data ?? "", "self": self])
 

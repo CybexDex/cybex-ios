@@ -77,7 +77,7 @@ class WithdrawDetailViewController: BaseViewController {
     
     override func configureObserveState() {
         self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: {[weak self] (addressInfo) in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             self.endLoading()
             self.isFetching = false
             
@@ -97,7 +97,7 @@ class WithdrawDetailViewController: BaseViewController {
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         self.coordinator?.state.msgInfo.asObservable().skip(1).subscribe(onNext: {[weak self] (data) in
-            guard let `self` = self, let msgData = data  else { return }
+            guard let self = self else { return }
             self.endLoading()
         
             if self.isEOS {

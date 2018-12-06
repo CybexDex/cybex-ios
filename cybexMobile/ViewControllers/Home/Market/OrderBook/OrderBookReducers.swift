@@ -48,20 +48,20 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair: Pair) -> OrderBook {
         var isBuy: Bool!
 
         if sellPriceBase.assetID == pair.base {
-            tradePrice = order.sellPrice.toRealDecimal().tradePriceDecimal(.down)
+            tradePrice = order.sellPrice.toReal().tradePriceAndAmountDecimal(.down)
             isBuy = true
         } else {
-            tradePrice = (1.0 / order.sellPrice.toRealDecimal()).tradePriceDecimal(.up)
+            tradePrice = (1.0 / order.sellPrice.toReal()).tradePriceAndAmountDecimal(.up)
             isBuy = false
         }
         var lastTradePrice = isBuy ? buyLastTradePrice : sellLastTradePrice
-        if tradePrice.price.toDecimal()! == lastTradePrice.toDecimal()! {
+        if tradePrice.price.decimal() == lastTradePrice.decimal() {
             lastTradePrice = tradePrice.price
             let lastIndex = isBuy ? combineOrders[0].count - 1 : combineOrders[1].count - 1
             let lastOrder = isBuy ? combineOrders[0][lastIndex] : combineOrders[1][lastIndex]
-            lastOrder.forSale = (lastOrder.forSale.toDecimal()! + order.forSale.toDecimal()!).stringValue
-            lastOrder.sellPrice.quote.amount = (lastOrder.sellPrice.quote.amount.toDecimal()! + order.sellPrice.quote.amount.toDecimal()!).stringValue
-            lastOrder.sellPrice.base.amount = (lastOrder.sellPrice.base.amount.toDecimal()! + order.sellPrice.base.amount.toDecimal()!).stringValue
+            lastOrder.forSale = (lastOrder.forSale.decimal() + order.forSale.decimal()).stringValue
+            lastOrder.sellPrice.quote.amount = (lastOrder.sellPrice.quote.amount.decimal() + order.sellPrice.quote.amount.decimal()).stringValue
+            lastOrder.sellPrice.base.amount = (lastOrder.sellPrice.base.amount.decimal() + order.sellPrice.base.amount.decimal()).stringValue
             if isBuy {
                 combineOrders[0][lastIndex] = lastOrder
             }
@@ -84,30 +84,30 @@ func limitOrders_to_OrderBook(orders: [LimitOrder], pair: Pair) -> OrderBook {
         }
     }
     for order in combineOrders[0] {
-        bidsTotalAmount.append(order.forSale.toDecimal()!)
+        bidsTotalAmount.append(order.forSale.decimal())
     }
 
     for order in combineOrders[1] {
-        asksTotalAmount.append(order.forSale.toDecimal()!)
+        asksTotalAmount.append(order.forSale.decimal())
     }
     
     for order in combineOrders[0] {
         let percent = bidsTotalAmount[0...bids.count].reduce(0, +) / bidsTotalAmount.reduce(0, +)
         let precisionRatio = pow(10, order.sellPrice.base.info().precision) / pow(10, order.sellPrice.quote.info().precision)
-        let tradePrice = order.sellPrice.toRealDecimal().tradePriceDecimal(.down)
-        let quoteForSale = Decimal(string: order.forSale)! / (precisionRatio * order.sellPrice.toRealDecimal())
+        let tradePrice = order.sellPrice.toReal().tradePriceAndAmountDecimal(.down)
+        let quoteForSale = Decimal(string: order.forSale)! / (precisionRatio * order.sellPrice.toReal())
         let quoteVolume = quoteForSale / pow(10, order.sellPrice.quote.info().precision)
-        let bid = OrderBook.Order(price: tradePrice.price, volume: quoteVolume.suffixNumber(digitNum: 10 - tradePrice.pricision), volumePercent: percent.doubleValue)
+        let bid = OrderBook.Order(price: tradePrice.price, volume: quoteVolume.suffixNumber(digitNum: 10 - tradePrice.pricision), volumePercent: percent)
         bids.append(bid)
     }
     for order in combineOrders[1] {
         let sellPriceBase = order.sellPrice.base
         let percent = asksTotalAmount[0...asks.count].reduce(0, +) / asksTotalAmount.reduce(0, +)
-        let quoteVolume = order.forSale.toDecimal()! / pow(10, sellPriceBase.info().precision)
+        let quoteVolume = order.forSale.decimal() / pow(10, sellPriceBase.info().precision)
 
-        let tradePrice = (1.0 / order.sellPrice.toRealDecimal()).tradePriceDecimal(.up)
+        let tradePrice = (1.0 / order.sellPrice.toReal()).tradePriceAndAmountDecimal(.up)
         
-        let ask = OrderBook.Order(price: tradePrice.price, volume: quoteVolume.suffixNumber(digitNum: 10 - tradePrice.pricision), volumePercent: percent.doubleValue)
+        let ask = OrderBook.Order(price: tradePrice.price, volume: quoteVolume.suffixNumber(digitNum: 10 - tradePrice.pricision), volumePercent: percent)
         asks.append(ask)
     }
 

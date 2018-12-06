@@ -73,7 +73,7 @@ class DespositNameView: CybexBaseView {
 
     func setupSubViewEvent() {
         protocolAddressLabel.rx.tapGesture().when(UIGestureRecognizer.State.recognized).asObservable().subscribe(onNext: { [weak self](_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.sendEventWith(Event.openProtocolAddressEvent.rawValue, userinfo: ["address": self.addressURL ?? ""])
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }

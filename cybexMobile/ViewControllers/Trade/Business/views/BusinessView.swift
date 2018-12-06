@@ -62,7 +62,7 @@ class BusinessView: UIView {
         self.priceTextfield.setPlaceHolderTextColor(UIColor.steel50)
         for percentLabel in percents {
             percentLabel.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
 
                 self.next?.sendEventWith(Event.amountPercent.rawValue, userinfo: ["percent": percentLabel.text!.replacingOccurrences(of: "%", with: "")])
 
@@ -70,7 +70,7 @@ class BusinessView: UIView {
         }
 
         button.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.next?.sendEventWith(Event.buttonDidClicked.rawValue, userinfo: [:])
 

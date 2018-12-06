@@ -20,7 +20,7 @@ class RechargeDetailViewController: BaseViewController {
     @IBOutlet weak var contentView: RechargeView!
     
     var feeAssetId: String  = AssetConfiguration.CYB
-    var available: Double = 0.0
+    var available: Decimal = 0.0
     var requireAmount: String = ""
     var isWithdraw: Bool = false
     var isTrueAddress: Bool = false {
@@ -50,7 +50,7 @@ class RechargeDetailViewController: BaseViewController {
     var balance: Balance? {
         didSet {
             if let balance = balance {
-                self.available = getRealAmountDouble(balance.assetType, amount: balance.balance)
+                self.available = getRealAmount(balance.assetType, amount: balance.balance)
             }
         }
     }
@@ -95,7 +95,7 @@ class RechargeDetailViewController: BaseViewController {
         NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
             .asObservable()
             .subscribe(onNext: { [weak self](_) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 if self.contentView.addressView.content.isFirstResponder || self.contentView.amountView.content.isFirstResponder {
                     self.contentView.feeView.isHidden       = true
                     self.contentView.introduceView.isHidden = true
@@ -106,7 +106,7 @@ class RechargeDetailViewController: BaseViewController {
         NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
             .asObservable()
             .subscribe(onNext: { [weak self](_) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 self.contentView.feeView.isHidden       = false
                 self.contentView.introduceView.isHidden = false
                 self.view.layoutIfNeeded()
@@ -117,20 +117,19 @@ class RechargeDetailViewController: BaseViewController {
         NotificationCenter.default.rx.notification(UITextField.textDidEndEditingNotification, object: contentView.amountView.content)
             .asObservable()
             .subscribe(onNext: { [weak self](_) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 if let text = self.contentView.amountView.content.text, text.isEmpty == false,
-                    var amount = text.toDouble(),
-                    amount >= 0,
+                    text.decimal() >= 0,
                     let balance = self.balance,
                     let balanceInfo = appData.assetInfo[balance.assetType] {
-                    
+
                     if let coordinator =  self.coordinator, let value = coordinator.state.data.value, let precision = value.precision {
                         self.precision = precision
                         self.contentView.amountView.content.text = checkMaxLength(text, maxLength: value.precision ?? balanceInfo.precision)
                     } else {
                         self.contentView.amountView.content.text = checkMaxLength(text, maxLength: balanceInfo.precision)
                     }
-                    amount = self.contentView.amountView.content.text!.toDouble()!
+                    let amount = self.contentView.amountView.content.text!.decimal()
                     self.checkAmountIsAvailable(amount)
                 } else {
                     if let text = self.contentView.amountView.content.text {
@@ -146,7 +145,7 @@ class RechargeDetailViewController: BaseViewController {
         NotificationCenter.default.rx.notification(UITextField.textDidEndEditingNotification, object: contentView.addressView.content)
             .asObservable()
             .subscribe(onNext: { [weak self](_) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 if let address = self.contentView.addressView.content.text, address.count > 0 {
                     let letterBegin = Guitar(pattern: "^([a-zA-Z0-9])")
                     if !letterBegin.test(string: address) {
@@ -164,8 +163,8 @@ class RechargeDetailViewController: BaseViewController {
                                 self.isTrueAddress = true
                                 self.contentView.addressView.addressState = .success
                                 self.contentView.errorView.isHidden = true
-                                if let amount = self.contentView.amountView.content.text, amount.count != 0, let amountDouble = amount.toDouble() {
-                                    self.checkAmountIsAvailable(amountDouble)
+                                if let amount = self.contentView.amountView.content.text?.decimal(), amount != 0 {
+                                    self.checkAmountIsAvailable(amount)
                                 }
                             } else {
                                 self.contentView.addressView.addressState = .fail
@@ -187,7 +186,7 @@ class RechargeDetailViewController: BaseViewController {
         NotificationCenter.default.rx.notification(UITextField.textDidEndEditingNotification, object: contentView.memoView.content)
             .asObservable()
             .subscribe(onNext: { [weak self](_) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 guard let trade = self.trade, let amount = self.contentView.amountView.content.text, let address = self.contentView.addressView.content.text else { return }
                 self.startLoading()
                 self.coordinator?.getGatewayFee(trade.id, amount: amount, address: address, isEOS: self.isEOS)
@@ -198,10 +197,10 @@ class RechargeDetailViewController: BaseViewController {
         self.contentView.amountView.btn.rx.controlEvent(UIControl.Event.touchUpInside)
             .asControlEvent()
             .subscribe(onNext: { [weak self](_) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 if let balance = self.balance, let precision = self.precision {
                     self.contentView.amountView.content.text = getRealAmount(balance.assetType, amount: balance.balance).string(digits: precision, roundingMode: .down)
-                    self.checkAmountIsAvailable(getRealAmount(balance.assetType, amount: balance.balance).doubleValue)
+                    self.checkAmountIsAvailable(getRealAmount(balance.assetType, amount: balance.balance))
                     self.setFinalAmount()
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -209,7 +208,7 @@ class RechargeDetailViewController: BaseViewController {
         self.contentView.addressView.btn.rx.controlEvent(UIControl.Event.touchUpInside)
             .asControlEvent()
             .subscribe(onNext: { [weak self](_) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 
                 if let address = self.contentView.addressView.content.text,
                     let memo = self.contentView.memoView.content.text,
@@ -230,14 +229,14 @@ class RechargeDetailViewController: BaseViewController {
         setupKeyboardEvent()
         
         self.contentView.withdraw.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self](_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.withDrawAction()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         setupEndEditingEvent()
         
         self.coordinator?.state.withdrawAddress.asObservable().subscribe(onNext: { [weak self](address) in
-            guard let `self` = self, let address = address else { return }
+            guard let self = self, let address = address else { return }
             self.contentView.addressView.content.text = address.address
             self.contentView.addressView.addressState = .success
             self.contentView.memoView.content.text = address.memo
@@ -246,14 +245,14 @@ class RechargeDetailViewController: BaseViewController {
     
     }
     
-    func checkAmountIsAvailable(_ amount: Double) {
+    func checkAmountIsAvailable(_ amount: Decimal) {
         if let data = self.coordinator?.state.data.value {
             self.contentView.errorView.isHidden = false
             self.contentView.withdraw.isEnable = false
-            if amount < data.minValue {
+            if amount < data.minValue.decimal {
                 self.isAvalibaleAmount  = false
                 self.contentView.errorL.locali = R.string.localizable.withdraw_min_value.key
-            } else if amount > self.available || self.available < data.fee {
+            } else if amount > self.available || self.available < data.fee.decimal {
                 self.isAvalibaleAmount  = false
                 self.contentView.errorL.locali =  R.string.localizable.withdraw_nomore.key
             } else {
@@ -271,7 +270,7 @@ class RechargeDetailViewController: BaseViewController {
     
     override func configureObserveState() {
         self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: {[weak self] (withdrawInfo) in
-            guard let `self` = self, let data = withdrawInfo else { return }
+            guard let self = self, let data = withdrawInfo else { return }
             self.endLoading()
             if let precision = data.precision {
                 self.precision = precision
@@ -279,7 +278,7 @@ class RechargeDetailViewController: BaseViewController {
             
             if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id], let precision = self.precision, let balance = self.balance {
                 self.contentView.insideFee.text = data.fee.string(digits: precision) + " " + tradeInfo.symbol.filterJade
-                self.contentView.avaliableView.content.text = getRealAmountDouble(balance.assetType, amount: balance.balance).string(digits: tradeInfo.precision) + " " + tradeInfo.symbol.filterJade
+                self.contentView.avaliableView.content.text = getRealAmount(balance.assetType, amount: balance.balance).string(digits: tradeInfo.precision) + " " + tradeInfo.symbol.filterJade
             }
             self.setFinalAmount()
             SwifterSwift.delay(milliseconds: 300) {
@@ -289,14 +288,14 @@ class RechargeDetailViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         self.coordinator?.state.gatewayFee.asObservable().subscribe(onNext: { [weak self](result) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.endLoading()
             if let data = result, data.success, let feeInfo = appData.assetInfo[data.0.assetId] {
                 let fee = data.0
                 if let trade = self.trade, let precision = self.precision, feeInfo.id == trade.id {
-                    self.contentView.gateAwayFee.text = (fee.amount.toDouble()?.string(digits: precision))! + " " + feeInfo.symbol.filterJade
+                    self.contentView.gateAwayFee.text = fee.amount.string(digits: precision) + " " + feeInfo.symbol.filterJade
                 } else {
-                    self.contentView.gateAwayFee.text = (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade
+                    self.contentView.gateAwayFee.text = fee.amount.string(digits: feeInfo.precision) + " " + feeInfo.symbol.filterJade
                 }
                 self.feeAssetId = AssetConfiguration.CYB != fee.assetId ? fee.assetId : AssetConfiguration.CYB
                 self.setFinalAmount()
@@ -307,7 +306,7 @@ class RechargeDetailViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         self.coordinator?.state.withdrawMsgInfo.asObservable().subscribe(onNext: { [weak self](data) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.contentView.projectData = data
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
@@ -318,11 +317,11 @@ class RechargeDetailViewController: BaseViewController {
         guard let text = self.contentView.amountView.content.text, let amount = Decimal(string: text) else { return }
         guard let (finalAmount, requireAmount) = self.coordinator?.getFinalAmount(feeId: self.feeAssetId, amount: amount, available: self.available) else { return }
         self.requireAmount = requireAmount
-        guard finalAmount.doubleValue > 0,
+        guard finalAmount > 0,
             let balance = self.balance,
             let balanceInfo = appData.assetInfo[balance.assetType],
             let precision = self.precision else { return }
-        self.contentView.finalAmount.text = finalAmount.doubleValue.string(digits: precision) + " " + balanceInfo.symbol.filterJade
+        self.contentView.finalAmount.text = finalAmount.string(digits: precision) + " " + balanceInfo.symbol.filterJade
     }
 }
 
@@ -424,7 +423,7 @@ extension RechargeDetailViewController {
                                      feeAmount: gatewayFee.0.amount,
                                      isEOS: self.isEOS,
                                      callback: {[weak self] (data) in
-                                        guard let `self` = self else { return }
+                                        guard let self = self else { return }
                                         self.endLoading()
                                         main {
                                             ShowToastManager.shared.hide()

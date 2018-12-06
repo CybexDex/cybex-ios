@@ -28,17 +28,17 @@ class YourPortfolioHandleView: UIView {
 
     func setUpEvent() {
         rechargeView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.next?.sendEventWith(Event.recharge.rawValue, userinfo: [:])
         }).disposed(by: disposeBag)
 
         withdrawDepositView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.next?.sendEventWith(Event.withdrawdeposit.rawValue, userinfo: [:])
         }).disposed(by: disposeBag)
 
         transferView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.next?.sendEventWith(Event.transfer.rawValue, userinfo: [:])
         }).disposed(by: disposeBag)
     }

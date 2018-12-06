@@ -65,7 +65,7 @@ class BaseNavigationController: UINavigationController {
 
     func addNotification() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             if ThemeManager.currentThemeIndex == 0 {
                 let image = UIImage.init(color: UIColor.dark)

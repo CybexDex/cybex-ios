@@ -35,7 +35,7 @@ class ETOViewController: BaseViewController {
     func startInfosRepeatAction() {
         self.infosRepeater = Repeater.every(.seconds(3), { [weak self](_) in
             main {
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 self.coordinator?.refreshProjectDatas()
                 self.coordinator?.refreshTime()
             }
@@ -96,7 +96,7 @@ class ETOViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         coordinator?.state.data.asObservable().subscribe(onNext: { [weak self](data) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.endLoading()
             self.view.hiddenNoData()
             self.homeView.data = data
@@ -104,7 +104,7 @@ class ETOViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         coordinator?.state.bannerUrls.asObservable().subscribe(onNext: { [weak self](banners) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.endLoading()
             guard let data = banners else { return }
             self.homeView.pageView.adapterModelToETOHomeBannerView(data)

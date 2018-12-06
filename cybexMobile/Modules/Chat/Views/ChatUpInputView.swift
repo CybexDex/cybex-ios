@@ -56,7 +56,7 @@ class ChatUpInputView: CybexBaseView {
     func setupSubViewEvent() {
         NotificationCenter.default.addObserver(forName: UITextView.textDidChangeNotification,
                                                object: self.textView,queue: nil) { [weak self](notification) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             let count = self.textView.text.count
             if count < 100 {
                 self.numberOfTextLabel.text = "\(self.textView.text.count)/100"

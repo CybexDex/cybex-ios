@@ -52,7 +52,7 @@ class LockupAssetsViewController: BaseViewController {
     
     override func configureObserveState() {
         self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: {[weak self] (_ data) in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             self.endLoading()
             self.data = data.datas
             if self.emptyReloadData() {
@@ -115,7 +115,7 @@ extension LockupAssetsViewController {
     
     @objc override func returnEnsureAction() {
         self.coordinator?.applyLockupAsset(self.selectedData,callback: { [weak self] success in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if self.isVisible {
                 if success == true {
                     self.showToastBox(true, message: R.string.localizable.lockup_asset_claim_success.key.localized())

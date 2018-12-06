@@ -54,7 +54,8 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
             if let fromAccount = UserManager.shared.account.value{
                 let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
                     if let infos = infos as? (block_id: String, block_num: String) {
-                        if let balance = sender.balance, let amount = balance.amount.toDecimal() {
+                        if let balance = sender.balance {
+                            let amount = balance.amount.decimal()
                             let balanceAmount = amount
                             guard let fromAccount = UserManager.shared.account.value else {
                                 return
@@ -62,14 +63,14 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
                             
                             let jsonstr = BitShareCoordinator.getClaimedSign(Int32(infos.block_num)!,
                                                                              block_id: infos.block_id,
-                                                                             expiration: Date().timeIntervalSince1970 + 10 * 3600,
+                                                                             expiration: Date().timeIntervalSince1970 + AppConfiguration.TransactionExpiration,
                                                                              chain_id: id,
                                                                              fee_asset_id: 0,
                                                                              fee_amount: 0,
                                                                              deposit_to_account_id: Int32(getUserId(fromAccount.id)),
                                                                              claimed_id: Int32(getUserId(sender.id)),
                                                                              claimed_asset_id: Int32(getUserId(balance.assetID)),
-                                                                             claimed_amount: Int64(balanceAmount.doubleValue),
+                                                                             claimed_amount: balanceAmount.int64Value,
                                                                              claimed_own: sender.owner)
                             
                             let withdrawRequest = BroadcastTransactionRequest(response: { (data) in

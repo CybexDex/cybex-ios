@@ -51,7 +51,7 @@ class RechargeViewController: BaseViewController {
     override func configureObserveState() {
 
         self.coordinator?.state.depositIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             self.depositData = data
             if self.selectedIndex == .RECHARGE {
                 self.endLoading()
@@ -65,7 +65,7 @@ class RechargeViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         self.coordinator?.state.withdrawIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.withdrawData = data
             if self.selectedIndex == .WITHDRAW {
                 self.endLoading()

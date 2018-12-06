@@ -30,7 +30,7 @@ class BusinessTitleItemView: UIView {
 
             self.total.text = " " + ticker.quoteVolume.suffixNumber(digitNum: 2)
             self.change.text = (ticker.incre == .greater ? "+" : "") + ticker.percentChange.formatCurrency(digitNum: 2) + "%"
-            if let change = ticker.percentChange.toDouble(), change > 1000 {
+            if ticker.percentChange.decimal() > 1000 {
                 self.change.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
             } else {
                 self.change.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
@@ -42,7 +42,7 @@ class BusinessTitleItemView: UIView {
     func setup() {
         self.isUserInteractionEnabled = true
         self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if let ticker = self.data as? Ticker {
                 self.next?.sendEventWith(Event.cellClicked.rawValue, userinfo: ["info": Pair(base: ticker.base, quote: ticker.quote), "index": self.selectedIndex ?? 0])
             }

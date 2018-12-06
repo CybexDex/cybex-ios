@@ -97,33 +97,27 @@ class HomeContentView: UIView {
             })
         case .volUp:
             return originalData.sorted(by: { (first, second) -> Bool in
-                guard let firstDecimal = first.baseVolume.toDecimal(), let secondDecimal = second.baseVolume.toDecimal() else { return false}
-                return firstDecimal < secondDecimal
+                return first.baseVolume.decimal() < second.baseVolume.decimal()
             })
         case .volDown:
             return originalData.sorted(by: { (first, second) -> Bool in
-                guard let firstDecimal = first.baseVolume.toDecimal(), let secondDecimal = second.baseVolume.toDecimal() else { return false}
-                return firstDecimal > secondDecimal
+                return first.baseVolume.decimal() > second.baseVolume.decimal()
             })
         case .priceUp:
             return originalData.sorted(by: { (first, second) -> Bool in
-                guard let firstDecimal = first.latest.toDecimal(), let secondDecimal = second.latest.toDecimal() else { return false}
-                return firstDecimal < secondDecimal
+                return first.latest.decimal() < second.latest.decimal()
             })
         case .priceDown:
             return originalData.sorted(by: { (first, second) -> Bool in
-                guard let firstDecimal = first.latest.toDecimal(), let secondDecimal = second.latest.toDecimal() else { return false}
-                return firstDecimal > secondDecimal
+                return first.latest.decimal() > second.latest.decimal()
             })
         case .appliesUp:
             return originalData.sorted(by: { (first, second) -> Bool in
-                guard let firstDecimal = first.percentChange.toDouble(), let secondDecimal = second.percentChange.toDouble() else { return false}
-                return firstDecimal < secondDecimal
+                return first.percentChange.decimal() < second.percentChange.decimal()
             })
         case .appliesDown:
             return originalData.sorted(by: { (first, second) -> Bool in
-                guard let firstDecimal = first.percentChange.toDouble(), let secondDecimal = second.percentChange.toDouble() else { return false}
-                return firstDecimal > secondDecimal
+                return first.percentChange.decimal() > second.percentChange.decimal()
             })
 //        default:
 //            return []

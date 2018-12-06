@@ -42,7 +42,7 @@ class ETODetailViewController: BaseViewController {
     func startRepeatAction() {
         self.timerRepeater = Repeater.every(.seconds(1), { [weak self](_) in
             main {
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 self.coordinator?.updateETOProjectDetailAction()
                 self.coordinator?.fetchUserState()
             }
@@ -74,7 +74,7 @@ class ETODetailViewController: BaseViewController {
 
     override func configureObserveState() {
         self.coordinator?.state.context.asObservable().subscribe(onNext: { [weak self] (context) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             if let context = context as? ETODetailContext {
                 self.context = context
@@ -82,7 +82,7 @@ class ETODetailViewController: BaseViewController {
         }).disposed(by: disposeBag)
 
         coordinator?.state.pageState.asObservable().subscribe(onNext: {[weak self] (state) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if case let .error(error, _) = state {
                 self.endLoading()
                 self.showToastBox(false, message: error.localizedDescription)
@@ -90,7 +90,7 @@ class ETODetailViewController: BaseViewController {
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         coordinator?.state.data.asObservable().subscribe(onNext: { [weak self] data in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.endLoading()
             if let model = data {
                 self.contentView.adapterModelToETODetailView(model)
@@ -100,7 +100,7 @@ class ETODetailViewController: BaseViewController {
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         coordinator?.state.refreshData.asObservable().subscribe(onNext: { [weak self] data in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             main {
                 if let model = data {
                     self.contentView.headerView.adapterModelToETODetailHeaderView(model)
@@ -110,7 +110,7 @@ class ETODetailViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         coordinator?.state.userState.asObservable().subscribe(onNext: { [weak self]data in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             main {
                 if let _ = data {
                     self.coordinator?.fetchUpState()

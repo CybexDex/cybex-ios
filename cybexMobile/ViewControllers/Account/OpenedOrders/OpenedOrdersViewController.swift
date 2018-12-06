@@ -54,7 +54,7 @@ class OpenedOrdersViewController: BaseViewController {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification),
                                                object: nil, queue: nil,
                                                using: { [weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if let accountView = self.containerView as? MyOpenedOrdersView {
 
                 accountView.sectionView.totalTitle.locali = R.string.localizable.my_opened_price.key
@@ -70,7 +70,7 @@ class OpenedOrdersViewController: BaseViewController {
         calculateFee(operation,
                      focusAssetId: order.sellPrice.base.assetID,
                      operationID: .limitOrderCancel) { [weak self](success, amount, assetId) in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             self.endLoading()
 
             guard self.isVisible else {
@@ -152,7 +152,7 @@ class OpenedOrdersViewController: BaseViewController {
 
     override func configureObserveState() {
         UserManager.shared.limitOrder.asObservable().skip(1).subscribe(onNext: {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             if let accountView = self.containerView as? AccountOpenedOrdersView {
                 accountView.data = nil
@@ -197,7 +197,7 @@ extension OpenedOrdersViewController {
         // order.isBuy ? pair.base : pair.quote
         if let order = self.order {
             self.coordinator?.cancelOrder(order.id, feeId: order.sellPrice.base.assetID, callback: {[weak self] (success) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 self.endLoading()
                 self.showToastBox(success,
                                   message: success ?

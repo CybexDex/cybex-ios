@@ -33,7 +33,7 @@ class TransferViewController: BaseViewController {
 
     override func configureObserveState() {
         self.transferView.transferButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.clickTransferAction()
         }).disposed(by: disposeBag)
@@ -41,8 +41,9 @@ class TransferViewController: BaseViewController {
         //按钮状态监听
         Observable.combineLatest(self.coordinator!.state.accountValid.asObservable(),
                                  self.coordinator!.state.amountValid.asObservable()).subscribe(onNext: {[weak self] (accountValid, amountValid) in
-                                    guard let `self` = self else { return }
-                                    if let _ = self.coordinator?.state.balance.value, let transferAmount = self.coordinator?.state.amount.value.toDouble() {
+                                    guard let self = self else { return }
+                                    if let _ = self.coordinator?.state.balance.value, let transferAmount = self.coordinator?.state.amount.value.decimal() {
+
                                         self.transferView.buttonIsEnable = accountValid == .validSuccessed && amountValid && transferAmount > 0
                                     } else {
                                         self.transferView.buttonIsEnable = false
@@ -51,7 +52,7 @@ class TransferViewController: BaseViewController {
 
         //账户监听
         self.coordinator!.state.accountValid.asObservable().subscribe(onNext: {[weak self] (status) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.transferView.accountValidStatus = status
             if status == .validFailed && !(self.coordinator?.state.account.value.isEmpty)!, self.transferView.accountView.textField.text!.count != 0 {
                 self.transferView.accountView.loadingState = .fail
@@ -63,7 +64,7 @@ class TransferViewController: BaseViewController {
 
         //余额监听
         self.coordinator!.state.amountValid.asObservable().subscribe(onNext: {[weak self] (result) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if !result, ((self.coordinator?.state.fee.value) != nil), self.coordinator?.state.balance.value != nil, self.transferView.balance.count != 0 {
                 self.showToastBox(false, message: R.string.localizable.transfer_balance_unenough.key.localized())
             }
@@ -71,12 +72,12 @@ class TransferViewController: BaseViewController {
 
         //币种及余额监听
         self.coordinator!.state.balance.asObservable().subscribe(onNext: {[weak self] (balance) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if let balance = balance, let balanceInfo = appData.assetInfo[balance.assetType] {
                 if let info = appData.assetInfo[balance.assetType] {
                     self.transferView.crypto = info.symbol.filterJade
                     self.transferView.precision = info.precision
-                    let realBalance = getRealAmountDouble(balance.assetType, amount: balance.balance)
+                    let realBalance = getRealAmount(balance.assetType, amount: balance.balance)
                     let transferBalanceKey = R.string.localizable.transfer_balance.key.localized()
                     self.transferView.balance = transferBalanceKey + realBalance.string(digits: info.precision) + " " + balanceInfo.symbol.filterJade
                 }
@@ -85,19 +86,19 @@ class TransferViewController: BaseViewController {
 
         //手续费监听
         self.coordinator!.state.fee.asObservable().subscribe(onNext: {[weak self] (result) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if let data = result, let feeInfo = appData.assetInfo[data.assetId] {
                 let fee = data
-                self.transferView.fee = (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade
+                self.transferView.fee = fee.amount.string(digits: feeInfo.precision) + " " + feeInfo.symbol.filterJade
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         self.transferView.accountView.unitLabel.rx.tapGesture().when(.recognized).asObservable().subscribe(onNext: { [weak self](_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.coordinator?.chooseOrAddAddress()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         self.coordinator?.state.account.asObservable().skip(1).subscribe(onNext: { [weak self](account) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.transferView.accountView.textField.text = account
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
@@ -139,7 +140,7 @@ class TransferViewController: BaseViewController {
             if let feeInfo = appData.assetInfo[fee.assetId] {
                 let data = getTransferInfo(account,
                                            quanitity: amount + " " + (appData.assetInfo[balance.assetType]?.symbol.filterJade)!,
-                                           fee: (fee.amount.toDouble()?.string(digits: feeInfo.precision))! + " " + feeInfo.symbol.filterJade,
+                                           fee: fee.amount.string(digits: feeInfo.precision) + " " + feeInfo.symbol.filterJade,
                                            memo: memo)
                 showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data)
             }
@@ -182,7 +183,7 @@ extension TransferViewController {
 
             self.startLoading()
             self.coordinator?.transfer({ [weak self](data) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 self.endLoading()
                 main {
                     ShowToastManager.shared.hide()

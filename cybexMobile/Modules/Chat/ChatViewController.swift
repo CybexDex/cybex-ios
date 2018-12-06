@@ -93,7 +93,7 @@ class ChatViewController: MessagesViewController {
         self.shadowView?.theme_backgroundColor = [UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5).hexString(true) ,UIColor.steel50.hexString(true)]
         self.view.insertSubview(self.shadowView!, belowSubview: self.downInputView!)
         self.shadowView!.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe(onNext: { [weak self](tap) in
-            guard let `self` = self, let upInputView = self.upInputView  else {
+            guard let self = self, let upInputView = self.upInputView  else {
                 return
             }
             upInputView.textView.resignFirstResponder()
@@ -134,7 +134,7 @@ class ChatViewController: MessagesViewController {
                 messagesCollectionView.reloadSections([messageList.count - 2])
             }
         }, completion: { [weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if self.isLastSectionVisible() == true {
                 self.messagesCollectionView.scrollToBottom(animated: true)
             }
@@ -237,7 +237,7 @@ class ChatViewController: MessagesViewController {
                 focusView.tag = 2018
                 cell.addSubview(focusView)
                 focusView.rx.tapGesture().when(GestureRecognizerState.recognized).asObservable().subscribe(onNext: { [weak self](ges) in
-                    guard let `self` = self else { return }
+                    guard let self = self else { return }
                    
                     if let icView = self.iconView, let _ = icView.superview {
                         icView.removeFromSuperview()
@@ -269,7 +269,7 @@ class ChatViewController: MessagesViewController {
     func setupEvent() {
         
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification,object: nil, queue: nil) { [weak self](notification) in
-            guard let `self` = self, let userinfo = notification.userInfo as NSDictionary?, let nsValue = userinfo.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue else { return }
+            guard let self = self, let userinfo = notification.userInfo as NSDictionary?, let nsValue = userinfo.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue else { return }
             guard let upInputView = self.upInputView, upInputView.textView.isFirstResponder else { return }
             
             if let shadowView = self.shadowView {
@@ -293,7 +293,7 @@ class ChatViewController: MessagesViewController {
         }
         
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { [weak self](notification) in
-            guard let `self` = self, let upInputView = self.upInputView, let downInputView = self.downInputView else { return }
+            guard let self = self, let upInputView = self.upInputView, let downInputView = self.downInputView else { return }
             upInputView.isHidden = true
             self.shadowView?.isHidden = true
             var rectOfView = self.view.frame
@@ -322,7 +322,7 @@ class ChatViewController: MessagesViewController {
         }).disposed(by: disposeBag)
         
         self.coordinator?.state.numberOfMember.asObservable().skip(1).subscribe(onNext: { [weak self](numberOfMember) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             
             if let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] {
                 self.title = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade + "(\(numberOfMember))"
@@ -331,7 +331,7 @@ class ChatViewController: MessagesViewController {
         
         #if DEBUG
         self.coordinator?.state.chatState.asObservable().skip(1).subscribe(onNext: { [weak self](connectState) in
-            guard let `self` = self, let connectState = connectState else { return }
+            guard let self = self, let connectState = connectState else { return }
             
             var message = ""
             switch connectState{
@@ -359,7 +359,7 @@ class ChatViewController: MessagesViewController {
         #endif
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.init("login_success"), object: nil, queue: nil) { [weak self](notification) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if let downInputView = self.downInputView {
                 downInputView.sendBtn.setTitle(R.string.localizable.chat_input_send.key.localized(), for: UIControl.State.normal)
             }
@@ -373,7 +373,7 @@ class ChatViewController: MessagesViewController {
         
         
         self.coordinator?.state.sendState.asObservable().subscribe(onNext: { [weak self](state) in
-            guard let `self` = self, let sendState = state else { return }
+            guard let self = self, let sendState = state else { return }
             guard let name = UserManager.shared.name.value, name.isEmpty == false else { return }
             self.downInputView?.inputTextField.text = ""
             self.downInputView?.setupBtnState()

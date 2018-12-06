@@ -68,19 +68,16 @@ class PortfolioData {
         }
 
         // 获取对应CYB的个数
-        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice.doubleValue * (realAmount.toDouble())!)
+        let cybDecimal = getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice * realAmount.decimal()
 
-        if amountCYB == "-"{
-            cybPrice = amountCYB + " CYB"
-        } else {
-            cybPrice = amountCYB.formatCurrency(digitNum: 5) + " CYB"
-        }
-
-        if let _ = amountCYB.toDouble() {
-            rbmPrice    = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * Decimal(getAssetRMBPrice(balance.assetType))).string(digits: 4, roundingMode: .down)
-        } else {
+        if appData.cybRmbPrice == 0 {
+            cybPrice = "- CYB"
             rbmPrice    = "-"
+        } else {
+            cybPrice = cybDecimal.string(digits: 5, roundingMode: .down) + " CYB"
+            rbmPrice    = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * getAssetRMBPrice(balance.assetType)).string(digits: 4, roundingMode: .down)
         }
+
     }
 }
 
@@ -100,13 +97,12 @@ class MyPortfolioData {
         if let assetInfo = appData.assetInfo[balance.assetType] {
             realAmount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: assetInfo.precision, roundingMode: .down)
         }
-        // 获取对应CYB的个数
-        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice.doubleValue * (realAmount.toDouble())!)
 
-        if let _ = amountCYB.toDouble() {
-            rbmPrice = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * Decimal(getAssetRMBPrice(balance.assetType))).string(digits: 4, roundingMode: .down)
-        } else {
+        if appData.cybRmbPrice == 0 {
             rbmPrice = "-"
+
+        } else {
+            rbmPrice = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * getAssetRMBPrice(balance.assetType)).string(digits: 4, roundingMode: .down)
         }
 
         //获取冻结资产

@@ -63,7 +63,7 @@ class RecordChooseViewController: BaseViewController {
 
     override func configureObserveState() {
         self.coordinator?.state.context.asObservable().subscribe(onNext: { [weak self] (context) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             if let context = context as? RecordChooseContext {
                 self.context = context
@@ -72,7 +72,7 @@ class RecordChooseViewController: BaseViewController {
         }).disposed(by: disposeBag)
 
         self.coordinator?.state.pageState.asObservable().distinctUntilChanged().subscribe(onNext: {[weak self] (state) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.endLoading()
 
@@ -124,7 +124,7 @@ class RecordChooseViewController: BaseViewController {
         }).disposed(by: disposeBag)
 
         self.coordinator?.state.data.asObservable().distinctUntilChanged().subscribe(onNext: {[weak self] (data) in
-            guard let `self` = self, let _ = data else { return }
+            guard let self = self, let _ = data else { return }
             self.tableView.reloadData()
         }).disposed(by: disposeBag)
     }

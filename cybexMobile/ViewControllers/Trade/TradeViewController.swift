@@ -100,7 +100,7 @@ class TradeViewController: BaseViewController {
 
     func setupEvent() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             self.titlesView!.data = [R.string.localizable.trade_buy.key,
                                      R.string.localizable.trade_sell.key,
                                      R.string.localizable.trade_open_orders.key]
@@ -204,7 +204,7 @@ extension TradeViewController: TradeNavTitleViewDelegate {
 
         if self.chooseTitleView != nil {
             self.coordinator?.removeHomeVC {[weak self] in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 self.chooseTitleView?.removeFromSuperview()
                 self.chooseTitleView = nil
                 self.startLoading()

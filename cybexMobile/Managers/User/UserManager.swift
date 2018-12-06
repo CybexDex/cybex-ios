@@ -56,7 +56,7 @@ extension UserManager {
 
     func login(_ username: String, password: String, completion:@escaping (Bool) -> Void) {
         self.unlock(username, password: password) {[weak self] (locked, data) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if locked {
                 self.saveName(username)
                 self.avatarString = username.sha256()
@@ -388,23 +388,23 @@ class UserManager {
 
     var timer: Repeater?
 
-    var limitOrderValue: Double {
+    var limitOrderValue: Decimal {
         var decimallimitOrderValue: Decimal = 0
         if let limitOrder = limitOrder.value {
             for limitOrderValue in limitOrder {
                 let realAmount = getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
                 let priceValue = getAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
-                decimallimitOrderValue += (realAmount * Decimal(priceValue))
+                decimallimitOrderValue += (realAmount * priceValue)
             }
         }
-        return decimallimitOrderValue.doubleValue
+        return decimallimitOrderValue
     }
 
-    var limitOrderBuyValue: Double = 0
+    var limitOrderBuyValue: Decimal = 0
 
-    var limitOrderSellValue: Double = 0
+    var limitOrderSellValue: Decimal = 0
 
-    var balance: Double {
+    var balance: Decimal {
 
         var balanceValues: Decimal = 0
         var decimallimitOrderBuyValue: Decimal = 0
@@ -413,7 +413,7 @@ class UserManager {
             for balanceValue in balances {
                 let realAmount = getRealAmount(balanceValue.assetType, amount: balanceValue.balance)
                 let realRMBPrice = getAssetRMBPrice(balanceValue.assetType)
-                balanceValues += realAmount * Decimal(realRMBPrice)
+                balanceValues += realAmount * realRMBPrice
             }
         }
         if let limitOrder = limitOrder.value {
@@ -425,22 +425,22 @@ class UserManager {
                 let isBuy = base == ((assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "")
                 let realAmount = getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
                 let priceValue = getAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
-                balanceValues += realAmount * Decimal(priceValue)
+                balanceValues += realAmount * priceValue
                 if isBuy {
-                    decimallimitOrderBuyValue += realAmount * Decimal(priceValue)
+                    decimallimitOrderBuyValue += realAmount * priceValue
                 } else {
-                    decimallimitOrderSellValue += realAmount * Decimal(priceValue)
+                    decimallimitOrderSellValue += realAmount * priceValue
                 }
             }
         }
-        limitOrderBuyValue = decimallimitOrderBuyValue.doubleValue
-        limitOrderSellValue = decimallimitOrderSellValue.doubleValue
-        return balanceValues.doubleValue
+        limitOrderBuyValue = decimallimitOrderBuyValue
+        limitOrderSellValue = decimallimitOrderSellValue
+        return balanceValues
     }
 
     func timingLock() {
         self.timer = Repeater.once(after: .seconds(300), {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.keys = nil
         })
         timer?.start()
@@ -460,7 +460,7 @@ class UserManager {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         account.asObservable().skip(1).subscribe(onNext: {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if CybexWebSocketService.shared.overload() || self.fillOrder.value != nil {
                 return
             }
@@ -478,7 +478,7 @@ class UserManager {
         if let balances = self.balances.value {
             for balance in balances {
                 if let foloiData = MyPortfolioData.init(balance: balance) {
-                    if (foloiData.realAmount == "" || foloiData.realAmount.toDouble() == 0) && foloiData.limitAmount.contains("--") {
+                    if (foloiData.realAmount == "" || foloiData.realAmount.decimal() == 0) && foloiData.limitAmount.contains("--") {
 
                     } else {
                         datas.append(foloiData)

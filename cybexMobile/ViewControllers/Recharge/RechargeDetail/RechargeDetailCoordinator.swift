@@ -31,7 +31,7 @@ protocol RechargeDetailStateManagerProtocol {
                     feeAmount: String,
                     isEOS: Bool,
                     callback:@escaping (Any) -> Void)
-    func getFinalAmount(feeId: String, amount: Decimal, available: Double) -> (Decimal, String)
+    func getFinalAmount(feeId: String, amount: Decimal, available: Decimal) -> (Decimal, String)
 
     func chooseOrAddAddress(_ sender: WithdrawAddress)
     func fetchDepositWriteInfo(_ assetId: String)
@@ -83,7 +83,7 @@ extension RechargeDetailCoordinator: RechargeDetailCoordinatorProtocol {
         var context = PickerContext()
         context.items = items.map({ $0.name }) as AnyObject
         context.pickerDidSelected = { [weak self] (picker: UIPickerView) -> Void in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             let selectedIndex =  picker.selectedRow(inComponent: 0)
             self.store.dispatch(SelectedAddressAction(data: items[selectedIndex]))
         }
@@ -134,31 +134,31 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         if let memoKey = self.state.memoKey.value {
             let name = appData.assetInfo[assetId]?.symbol.filterJade
             let memo = self.state.memo.value
-            if var amount = amount.toDouble() {
-                let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
-                amount = amount * Double(truncating: value as NSNumber)
-                var memoAddress = GraphQLManager.shared.memo(name!, address: address)
-                if isEOS {
-                    if !memo.isEmpty {
-                        memoAddress = GraphQLManager.shared.memo(name!, address: address + "[\(memo)]")
-                    }
-                }
-                if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId((UserManager.shared.account.value?.id)!)),
-                                                                                  to_user_id: Int32(getUserId((self.state.data.value?.gatewayAccount)!)),
-                                                                                  asset_id: Int32(getUserId(assetId)),
-                                                                                  amount: Int64(amount),
-                                                                                  fee_id: 0,
-                                                                                  fee_amount: 0,
-                                                                                  memo: memoAddress,
-                                                                                  from_memo_key: UserManager.shared.account.value?.memoKey,
-                                                                                  to_memo_key: memoKey) {
-                    calculateFee(operationString, focusAssetId: assetId, operationID: .transfer) { (success, amount, feeId) in
-                        let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
-                        guard let fee = Fee.deserialize(from: dictionary) else { return }
-                        self.store.dispatch(FetchGatewayFee(data: (fee, success:success)))
-                    }
+
+            let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
+            let amount = amount.decimal() * value
+            var memoAddress = GraphQLManager.shared.memo(name!, address: address)
+            if isEOS {
+                if !memo.isEmpty {
+                    memoAddress = GraphQLManager.shared.memo(name!, address: address + "[\(memo)]")
                 }
             }
+            if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId((UserManager.shared.account.value?.id)!)),
+                                                                              to_user_id: Int32(getUserId((self.state.data.value?.gatewayAccount)!)),
+                                                                              asset_id: Int32(getUserId(assetId)),
+                                                                              amount: amount.int64Value,
+                                                                              fee_id: 0,
+                                                                              fee_amount: 0,
+                                                                              memo: memoAddress,
+                                                                              from_memo_key: UserManager.shared.account.value?.memoKey,
+                                                                              to_memo_key: memoKey) {
+                calculateFee(operationString, focusAssetId: assetId, operationID: .transfer) { (success, amount, feeId) in
+                    let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
+                    guard let fee = Fee.deserialize(from: dictionary) else { return }
+                    self.store.dispatch(FetchGatewayFee(data: (fee, success:success)))
+                }
+            }
+
         }
     }
 
@@ -188,31 +188,31 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                 }
                 let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
                     if let infos = infos as? (block_id: String, block_num: String) {
-                        if var amount = amount.toDouble() {
-                            let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
-                            amount = amount * Double(truncating: value as NSNumber)
-                            let feeAmout = feeAmount.toDouble()! * Double(truncating: pow(10, (appData.assetInfo[feeId]?.precision)!) as NSNumber)
-                            let jsonstr = BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
-                                                                              block_id: infos.block_id,
-                                                                              expiration: Date().timeIntervalSince1970 + 10 * 3600,
-                                                                              chain_id: id,
-                                                                              from_user_id: Int32(getUserId((UserManager.shared.account.value?.id)!)),
-                                                                              to_user_id: Int32(getUserId((self.state.data.value?.gatewayAccount)!)),
-                                                                              asset_id: Int32(getUserId(assetId)),
-                                                                              receive_asset_id: Int32(getUserId(assetId)),
-                                                                              amount: Int64(amount),
-                                                                              fee_id: Int32(getUserId(feeId)),
-                                                                              fee_amount: Int64(feeAmout),
-                                                                              memo: memoAddress,
-                                                                              from_memo_key: UserManager.shared.account.value?.memoKey,
-                                                                              to_memo_key: memoKey)
-                            let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-                                main {
-                                    callback(data)
-                                }
-                            }, jsonstr: jsonstr!)
-                            CybexWebSocketService.shared.send(request: withdrawRequest)
-                        }
+                        let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
+
+                        let amount = amount.decimal() * value
+                        let feeAmout = feeAmount.decimal() * pow(10, (appData.assetInfo[feeId]?.precision)!)
+                        let jsonstr = BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
+                                                                          block_id: infos.block_id,
+                                                                          expiration: Date().timeIntervalSince1970 + AppConfiguration.TransactionExpiration,
+                                                                          chain_id: id,
+                                                                          from_user_id: Int32(getUserId((UserManager.shared.account.value?.id)!)),
+                                                                          to_user_id: Int32(getUserId((self.state.data.value?.gatewayAccount)!)),
+                                                                          asset_id: Int32(getUserId(assetId)),
+                                                                          receive_asset_id: Int32(getUserId(assetId)),
+                                                                          amount: amount.int64Value,
+                                                                          fee_id: Int32(getUserId(feeId)),
+                                                                          fee_amount: feeAmout.int64Value,
+                                                                          memo: memoAddress,
+                                                                          from_memo_key: UserManager.shared.account.value?.memoKey,
+                                                                          to_memo_key: memoKey)
+                        let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
+                            main {
+                                callback(data)
+                            }
+                        }, jsonstr: jsonstr!)
+                        CybexWebSocketService.shared.send(request: withdrawRequest)
+
                     }
                 }
                 CybexWebSocketService.shared.send(request: requeset)
@@ -220,9 +220,8 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         }
     }
 
-    func getFinalAmount(feeId: String, amount: Decimal, available: Double) -> (Decimal, String) {
-
-        let allAmount = Decimal(available)
+    func getFinalAmount(feeId: String, amount: Decimal, available: Decimal) -> (Decimal, String) {
+        let allAmount = available
         var requestAmount: String = ""
 
         var finalAmount: Decimal = amount

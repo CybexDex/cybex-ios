@@ -34,7 +34,7 @@ class TradeNavTitleView: UIView {
     fileprivate func setup() {
         self.isSetUp = false
         self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if let dele = self.delegate, dele.sendEventActionWith() {
                 self.icon.transform = self.isSetUp == false ? CGAffineTransform(rotationAngle: CGFloat(0.5 * Double.pi)) : CGAffineTransform(rotationAngle: 0)
                 self.isSetUp = !self.isSetUp!

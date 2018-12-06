@@ -25,7 +25,7 @@ struct OrderBook: Equatable {
         let price: String
         let volume: String
 
-        let volumePercent: Double
+        let volumePercent: Decimal
     }
 
     let bids: [Order]

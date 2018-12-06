@@ -55,7 +55,7 @@ class RechargeRecodeViewController: BaseViewController {
 
     func setupEvent() {
         self.addPullToRefresh(self.tableView) {[weak self](completion) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if UserManager.shared.isLocked {
                 self.showPasswordBox()
                 completion?()
@@ -96,7 +96,7 @@ class RechargeRecodeViewController: BaseViewController {
                                                       assetId: self.assetInfo?.id ?? "",
                                                       callback: { [weak self] success in
 
-                guard let `self` = self else {return}
+                guard let self = self else {return}
                 self.endLoading()
                 if success, let tradeRecords = self.coordinator?.state.data.value, let records = tradeRecords.records {
                     if offset == 0 {

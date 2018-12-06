@@ -118,7 +118,7 @@ class AccountViewController: BaseViewController {
             .skip(1)
             .throttle(10, latest: true, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self](_) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 if self.isVisible {
                     self.setupTitle()
                     self.setupIconImg()

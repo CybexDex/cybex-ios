@@ -37,7 +37,7 @@ class AccessoryCollectionView: UIView {
 
     fileprivate func setup() {
         self.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.next?.sendEventWith(Event.indicatorClicked.rawValue, userinfo: ["indicator": self.data ?? []])
 

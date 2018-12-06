@@ -78,7 +78,7 @@ class AddAddressViewController: BaseViewController {
 
         NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification,
                                                object: self.containerView.mark.content, queue: nil) { [weak self](_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if let text = self.containerView.mark.content.text, text.trimmed.count != 0 {
                 self.coordinator?.verityNote(true)
                 if text.trimmed.count > 15 {
@@ -91,7 +91,7 @@ class AddAddressViewController: BaseViewController {
         }
 
         NotificationCenter.default.addObserver(forName: UITextView.textDidEndEditingNotification, object: self.containerView.address.content, queue: nil) { [weak self](_) in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             if let text = self.containerView.address.content.text, text.trimmed.count > 0 {
                 self.containerView.addressState = .loading
                 self.coordinator?.verityAddress(text.trimmed, type: self.addressType)
@@ -102,7 +102,7 @@ class AddAddressViewController: BaseViewController {
         }
 
         self.coordinator?.state.addressVailed.asObservable().skip(1).subscribe(onNext: { [weak self](addressSuccess) in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             if !addressSuccess {
                 if self.containerView.address.content.text.count != 0 {
                     self.containerView.addressState = .fail
@@ -118,7 +118,7 @@ class AddAddressViewController: BaseViewController {
             self.coordinator!.state.addressVailed.asObservable(),
             self.coordinator!.state.noteVailed.asObservable()
             ).subscribe(onNext: { [weak self](addressSuccess, noteSuccess) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             guard addressSuccess, noteSuccess else {
                 self.containerView.addBtn.isEnable = false
                 return
@@ -127,7 +127,7 @@ class AddAddressViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         self.containerView.addBtn.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self](_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.view.endEditing(true)
 
             if self.containerView.addBtn.isEnable == false || self.containerView.addressState != .success {
