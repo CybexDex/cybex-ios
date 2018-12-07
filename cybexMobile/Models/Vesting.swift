@@ -95,14 +95,14 @@ class MyPortfolioData {
         name = appData.assetInfo[balance.assetType]?.symbol.filterJade ?? "--"
         // 获得自己的个数
         if let assetInfo = appData.assetInfo[balance.assetType] {
-            realAmount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: assetInfo.precision, roundingMode: .down)
+            realAmount = getRealAmount(balance.assetType, amount: balance.balance).formatCurrency(digitNum: assetInfo.precision)
         }
 
         if appData.cybRmbPrice == 0 {
             rbmPrice = "-"
 
         } else {
-            rbmPrice = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * getAssetRMBPrice(balance.assetType)).string(digits: 4, roundingMode: .down)
+            rbmPrice = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * getAssetRMBPrice(balance.assetType)).formatCurrency(digitNum: 4)
         }
 
         //获取冻结资产
@@ -120,8 +120,7 @@ class MyPortfolioData {
                     limitAmount = R.string.localizable.frozen.key.localized() + "--"
                 } else {
                     limitAmount = R.string.localizable.frozen.key.localized() +
-                        limitDecimal.string(digits: assetInfo.precision,
-                                            roundingMode: .down)
+                        limitDecimal.formatCurrency(digitNum: assetInfo.precision)
                 }
             }
         }
