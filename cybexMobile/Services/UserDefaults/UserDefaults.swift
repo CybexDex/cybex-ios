@@ -23,3 +23,9 @@ extension DefaultsKeys {
     
     static let isRealName = DefaultsKey<Bool>("isRealName")
 }
+
+extension UserDefaults {
+    var isTestEnv : Bool {
+        return Defaults[.environment] == "test"
+    }
+}

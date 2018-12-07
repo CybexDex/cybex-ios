@@ -292,42 +292,6 @@ extension SimpleHTTPService {
         return promise
     }
 
-    static func recordLogin(_ sender: [String: Any]) -> Promise<String?> {
-        let (promise, seal) = Promise<String?>.pending()
-
-        guard var request = try? URLRequest(url: URL(string: AppConfiguration.RecodeLogin)!,
-                                            method: .post,
-                                            headers: ["Content-Type": "application/json"]) else {
-                                                seal.fulfill(nil)
-                                                return promise
-        }
-        request.timeoutInterval = 5
-        request.cachePolicy = .reloadIgnoringCacheData
-
-        guard let encodedURLRequest = try? JSONEncoding.default.encode(request, with: sender) else {
-            seal.fulfill(nil)
-            return promise
-        }
-
-        Alamofire.request(encodedURLRequest).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
-            guard let value = response.result.value else {
-                seal.fulfill(nil)
-                return
-            }
-            let data = JSON(value).dictionaryValue
-            if let code = data["code"]?.int, code == 200 {
-                if let result = data["data"]?.dictionaryValue {
-                    seal.fulfill(result["signer"]?.string)
-                } else {
-                    seal.fulfill(nil)
-                }
-            } else {
-                seal.fulfill(nil)
-            }
-        }
-        return promise
-    }
-
     static func fetchETOHiddenRequest() -> Promise<ETOHidden?> {
         var request  = URLRequest(url: URL(string: AppConfiguration.BaseSettingJson)!)
         request.cachePolicy = .reloadIgnoringCacheData
@@ -339,70 +303,6 @@ extension SimpleHTTPService {
             }
             let model = ETOHidden.deserialize(from: JSON(value).dictionaryObject)
             seal.fulfill(model)
-        }
-        return promise
-    }
-
-    static func fetchRecords(_ url: String, signer: String) -> Promise<TradeRecord?> {
-        let (promise, seal) = Promise<TradeRecord?>.pending()
-
-        let headers = ["Content-Type": "application/json", "authorization": "bearer " + signer]
-        guard var request = try? URLRequest(url: URL(string: url)!, method: .get, headers: headers) else {
-            seal.fulfill(nil)
-            return promise
-        }
-        request.timeoutInterval = 5
-        request.cachePolicy = .reloadIgnoringCacheData
-
-        Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
-            guard let value = response.result.value else {
-                seal.fulfill(nil)
-                return
-            }
-            let data = JSON(value).dictionaryValue
-            if let code = data["code"]?.int, code == 200 {
-                if let result = data["data"]?.dictionaryObject {
-                    if let callbackData = TradeRecord.deserialize(from: result) {
-                        seal.fulfill(callbackData)
-                    } else {
-                        seal.fulfill(nil)
-                    }
-                }
-            } else {
-                seal.fulfill(nil)
-            }
-        }
-        return promise
-    }
-
-    static func fetchAccountAsset(_ url: String, signer: String) -> Promise<AccountAssets?> {
-        let (promise, seal) = Promise<AccountAssets?>.pending()
-
-        let headers = ["Content-Type": "application/json", "authorization": "bearer " + signer]
-        guard var request = try? URLRequest(url: URL(string: url)!, method: .get, headers: headers) else {
-            seal.fulfill(nil)
-            return promise
-        }
-        request.timeoutInterval = 5
-        request.cachePolicy = .reloadIgnoringCacheData
-
-        Alamofire.request(request).responseJSON(queue: Await.Queue.await, options: .allowFragments) { (response) in
-            guard let value = response.result.value else {
-                seal.fulfill(nil)
-                return
-            }
-            let data = JSON(value).dictionaryValue
-            if let code = data["code"]?.int, code == 200 {
-                if let result = data["data"]?.dictionaryObject {
-                    if let callbackData = AccountAssets.deserialize(from: result) {
-                        seal.fulfill(callbackData)
-                    } else {
-                        seal.fulfill(nil)
-                    }
-                }
-            } else {
-                seal.fulfill(nil)
-            }
         }
         return promise
     }

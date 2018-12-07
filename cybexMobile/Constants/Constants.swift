@@ -38,10 +38,6 @@ struct AppConfiguration {
 
     static var ServerBaseURLString = "https://app.cybex.io/"
     static var ServerRegisterBaseURLString = "https://faucet.cybex.io/"
-    static var GatewayURLString = "https://gateway.cybex.io/gateway"
-    static var ETOMGBaseURLString = URL(string: "https://eto.cybex.io/api")!
-    static var ETOMGBaseTestURLString = URL(string: "https://ieo-apitest.cybex.io/api")!
-    static var GatewayID = "CybexGateway" //CybexGatewayDev
 
     static var TransactionExpiration: TimeInterval = 45
     static var ServerIconsBaseURLString = "https://app.cybex.io/icons/"
@@ -81,11 +77,6 @@ struct AppConfiguration {
     static var MARKETLISTS: String {
         return  ServerBaseURLString + "json/marketlists.json"
     }
-
-    static var RecodeBaseURLString = "https://gateway-query.cybex.io/"
-    static var RecodeLogin = RecodeBaseURLString + "login"
-    static var RecodeRecodes = RecodeBaseURLString + "records"
-    static var RecodeAccountAsset = RecodeBaseURLString + "account-assets"
 
     static var HelpNightURL = "http://47.75.154.39:3009/cybexnight?lang="
     static var HelpLightURL = "http://47.75.154.39:3009/cybexday?lang="

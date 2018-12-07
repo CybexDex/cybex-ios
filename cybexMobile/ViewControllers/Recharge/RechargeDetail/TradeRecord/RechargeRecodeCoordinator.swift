@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import HandyJSON
 
 protocol RechargeRecodeCoordinatorProtocol {
     func openRecordDetailUrl(_ hash: String, asset: String)
@@ -73,20 +74,27 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
                                  expiration: Int,
                                  assetId: String,
                                  callback:@escaping (Bool) -> Void) {
-        getWithdrawAndDepositRecords(accountName,
-                                     asset: asset,
-                                     fundType: fundType,
-                                     size: size,
-                                     offset: offset,
-                                     expiration: expiration) { [weak self](result) in
-            guard let self = self else { return }
-            self.store.dispatch(FetchDepositRecordsAction(data: result))
-            if result != nil {
-                callback(true)
-            } else {
+
+        GatewayQueryService.request(target: .login(accountName: accountName), success: { (_) in
+            GatewayQueryService.request(target: .records(accountName: accountName, asset: asset, fundType: fundType, offset: offset), success: { (json) in
+                
+                if let data = TradeRecord.deserialize(from: json.dictionaryObject) {
+                    self.store.dispatch(FetchDepositRecordsAction(data: data))
+                    callback(true)
+                } else {
+                    callback(false)
+                }
+            }, error: { (_) in
                 callback(false)
-            }
+            }, failure: { (_) in
+                callback(false)
+            })
+        }, error: { (_) in
+            callback(false)
+        }) { (_) in
+            callback(false)
         }
+
     }
 
     func setAssetAction(_ asset: String) {

@@ -268,7 +268,7 @@
 		7231103C21805D7F0007E95D /* UMAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7231103A21805D7F0007E95D /* UMAnalytics.framework */; };
 		7237E287303AD685D7D4B03C1DBD6477 /* BusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25010BD1F86818F3968A6D9DEF12AD52 /* BusinessViewController.swift */; };
 		7245711A219D5BF9007595CC /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72457119219D5BF9007595CC /* CryptoSwift.framework */; };
-		724C5D392153472800FF1DE7 /* GatewayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D382153472800FF1DE7 /* GatewayService.swift */; };
+		724C5D392153472800FF1DE7 /* GatewayQueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D382153472800FF1DE7 /* GatewayQueryService.swift */; };
 		724C5D4121538ABD00FF1DE7 /* ComprehensiveViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D3E21538ABD00FF1DE7 /* ComprehensiveViewAdapter.swift */; };
 		724C5D4221538ABD00FF1DE7 /* ComprehensiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C5D3F21538ABD00FF1DE7 /* ComprehensiveView.swift */; };
 		724C5D4321538ABD00FF1DE7 /* ComprehensiveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 724C5D4021538ABD00FF1DE7 /* ComprehensiveView.xib */; };
@@ -438,7 +438,6 @@
 		7345FD91219EBF7F0066BD0E /* UIDevice+FCUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 7345FD8D219EBF7E0066BD0E /* UIDevice+FCUUID.m */; };
 		7345FD93219EC0A80066BD0E /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */; };
 		7345FD96219EC1210066BD0E /* ChatOriginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7345FD95219EC1210066BD0E /* ChatOriginModel.swift */; };
-		73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73481176210815BF000BF1B8 /* CybexWebSocketService.swift */; };
 		734AB3F921A289400091BE82 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C02217989D6008395AC /* SwiftyJSON.framework */; };
 		734AB3FB21A289640091BE82 /* NBLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734AB3FA21A289640091BE82 /* NBLModel.swift */; };
 		734AB3FD21A28B9F0091BE82 /* ChatServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734AB3FC21A28B9F0091BE82 /* ChatServiceProvider.swift */; };
@@ -551,6 +550,11 @@
 		738E15C7214F81F300F0BFAF /* AlamofireNetworkActivityLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738E15C6214F81F300F0BFAF /* AlamofireNetworkActivityLogger.framework */; };
 		738E15C9214F82ED00F0BFAF /* SDCAlertView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738E15C8214F82EC00F0BFAF /* SDCAlertView.framework */; };
 		738FCEE9214909CC0042331A /* ZYNetworkAccessibity.m in Sources */ = {isa = PBXBuildFile; fileRef = 738FCEE4214909CC0042331A /* ZYNetworkAccessibity.m */; };
+		7391101B21BA509C00412CE1 /* CybexWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391101521BA509C00412CE1 /* CybexWebSocketService.swift */; };
+		7391101C21BA509C00412CE1 /* JsonRPCGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391101621BA509C00412CE1 /* JsonRPCGenerator.swift */; };
+		7391101D21BA509C00412CE1 /* DataBaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391101821BA509C00412CE1 /* DataBaseApi.swift */; };
+		7391101E21BA509C00412CE1 /* HistoryApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391101921BA509C00412CE1 /* HistoryApi.swift */; };
+		7391101F21BA509C00412CE1 /* NetworkBroadcastAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391101A21BA509C00412CE1 /* NetworkBroadcastAPI.swift */; };
 		7392F55521996CC3007FFCD0 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B8214D045D00761955 /* SocketRocket.framework */; };
 		7392F59E219AB948007FFCD0 /* CellSizeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392F566219AB948007FFCD0 /* CellSizeCalculator.swift */; };
 		7392F59F219AB948007FFCD0 /* MessagesCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392F567219AB948007FFCD0 /* MessagesCollectionViewLayoutAttributes.swift */; };
@@ -660,20 +664,17 @@
 		813E625BF1238DDBDC460AFDBCEF4049 /* OrderBookReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EE6878321DE1328C3149C274F65A9B /* OrderBookReducers.swift */; };
 		83AF1421B7FB621C05DD1F98690876BB /* HomePairView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29D3C60E14DE02028501736C899290D4 /* HomePairView.xib */; };
 		8528FA970144D53CB71EF87725B0AAE9 /* TradeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F52335C560DAEC42638FA4C736235 /* TradeCell.swift */; };
-		8552FAA729612482DC7F7878860378AC /* JsonRPCGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BE4472AAF8DE509EE3833B137B92B3 /* JsonRPCGenerator.swift */; };
 		85D46A1F0D3BBF12CF72903D466D9239 /* LockupAssetsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B0221158F989694BC734C29818238C /* LockupAssetsSectionView.swift */; };
 		8691BEEE7629D4BE41D13D82D9AF29A9 /* GradientLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E093755D3EE93945EE2536872B0EFA54 /* GradientLabelView.swift */; };
 		8712B050CE07ED3C160B237CB07116ED /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222D9023D03155C8E60E50C1A2EDDF3D /* Operation.swift */; };
 		8809F4832AD9F2B07F73CDE8C8D41240 /* OrderBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A74E04925F8AE6063EBCE534A5894CA8 /* OrderBookCell.xib */; };
 		894D811521F19A8670D0A6C61B11C600 /* TradeHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56415E8C367D5AD6E1D3A2C0D0A7CA82 /* TradeHistoryViewController.swift */; };
 		89BE803D714EF0B7126DCF66439F86A9 /* RegisterReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE012ABDA856199C8C01B82B417717E /* RegisterReducers.swift */; };
-		8C00D47D4D9F9CB040B6855F6CC7D757 /* DataBaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29B8BF509E927487D5B6946156296C1 /* DataBaseApi.swift */; };
 		8C20E983876A75B5AF1B2B1CC5B7FA6C /* HomePairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7E2A2D24A9C012D33C1E4DC944C935 /* HomePairCell.swift */; };
 		8C3E5CB53A30AD3221992CCA44A8D332 /* CBMACDModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01D48BF96CC0F162468A8FFAE6198A3 /* CBMACDModel.swift */; };
 		8CC6E7829BCE9117984B6237F79C5180 /* debounce-throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0700F9114B418AA4174389E04F53D3F7 /* debounce-throttle.swift */; };
 		8D8F2D36C5546EAF1A176CA54843EC17 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 344D3561BDA811115A7E28BC4203C711 /* InfoPlist.strings */; };
 		8DFD3022184642B3A8D4D8A8FE04F655 /* LockupProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E370F8BE1FD8997B31ED2B99654354 /* LockupProgressView.swift */; };
-		8E9524F703A8466022C2D28281507174 /* NetworkBroadcastAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F081979173502A25539F8B50CFBCD7 /* NetworkBroadcastAPI.swift */; };
 		8F231436DF08E691F844CC01B2AC1845 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCE6ED625648B248C391722FFDBCC7F /* Crypto.swift */; };
 		8FF572CD842115D51EF4E8A116CA56AE /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E446848D77BE15DE0D515068BA38C3C /* SettingCoordinator.swift */; };
 		901F7EEB7579A06B661DD96529FC25E2 /* CBEMAModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F1F43868840D94E48B386B85D32EBD /* CBEMAModel.swift */; };
@@ -726,7 +727,7 @@
 		BD11B7517E2B6A4051899973BEAEF8BC /* BusinessActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983D32E4B826DBC669B51E2EE2A65EFE /* BusinessActions.swift */; };
 		BD6216B952057C6818335BF4AC75B570 /* CybexTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1082CC6A81902CFC0405B8237A949A1B /* CybexTextView.xib */; };
 		BD76C30DD5E6DF9195A2DF3218C62F70 /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD606656A250A840B13C511345FAB615 /* EmptySegue.swift */; };
-		BDFF205572EB31DAD4702C934B9A81D1 /* GraphQLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFB944EDB70A5A08C74591698A0C57 /* GraphQLManager.swift */; };
+		BDFF205572EB31DAD4702C934B9A81D1 /* GatewayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACFB944EDB70A5A08C74591698A0C57 /* GatewayService.swift */; };
 		BE882BD38F3D40A56E08366BC6C20DDC /* CybexActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C891F35BFFBE7EA6A37CA18CCAF62A4 /* CybexActionView.swift */; };
 		BF1E2A89F4A04926CAC7E34A3F384328 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91D80DAE8FB3D4D5CB5EEA1D46D8402 /* AppReducer.swift */; };
 		C02132F00200B408020442C307CEE0B6 /* TradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF8145AB9B72F9B7DDBD35D7F421C2A /* TradeView.swift */; };
@@ -740,7 +741,6 @@
 		C6701BBC918D15D20650CF726BA483EA /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD9516DB7B3ECF8651E0B2A8702D273 /* Tools.swift */; };
 		C860BE92032F361E51995DB61C68774C /* RechargeSegment.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB525835351EF4ABDC6B1B30A5A7DF8F /* RechargeSegment.xib */; };
 		C96D0912126309ECA43CED968127E06E /* CybexPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF65F612F7F7D85BA6BC98FA8C7F91A /* CybexPasswordView.swift */; };
-		CA894F0EB69EF4448C0142CE0BE7D9C5 /* HistoryApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E66F4AF6CA1870B8CEFAF7740212296 /* HistoryApi.swift */; };
 		CB5F7115F86F33FA0B26878FC117A884 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9037BC25051001E9F8FCE16E650544D1 /* Bucket.swift */; };
 		CC7617050BB0397377BB75D99DE68B3A /* OpenedOrdersActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4807AE2A7E878B1F976D5835DED567 /* OpenedOrdersActions.swift */; };
 		CC8DD1E9001CFBB8915E342EDB329B3E /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90916C662B8C64E050E0CCC9F5D950B /* UIImage+Extensions.swift */; };
@@ -849,7 +849,6 @@
 		0BE0D24F43A533ACCEEA9540AD92F1BB /* OpenedOrdersCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersCoordinator.swift; sourceTree = "<group>"; };
 		0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeNavTitleView.swift; sourceTree = "<group>"; };
 		0D964BF5B38EBF2F80A562403D0FC416 /* CBKLineVolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBKLineVolumeView.swift; sourceTree = "<group>"; };
-		0E66F4AF6CA1870B8CEFAF7740212296 /* HistoryApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryApi.swift; sourceTree = "<group>"; };
 		101951300FAFC5192A5E883D926A0C6D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		1082CC6A81902CFC0405B8237A949A1B /* CybexTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CybexTextView.xib; sourceTree = "<group>"; };
 		115F2B194BC4D206A29A5A90BF6DDACE /* AccountPortfolioCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountPortfolioCellView.xib; sourceTree = "<group>"; };
@@ -1022,7 +1021,6 @@
 		646E43E5D248A9501B27C9CBACECBE7D /* JdenticonSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JdenticonSwift.h; sourceTree = "<group>"; };
 		67077E72E40D05B4FE6A4888490D287D /* AccessoryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryCollectionView.swift; sourceTree = "<group>"; };
 		68BACE8EEAA2A59DA44765D421D6502A /* NoticeBoardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeBoardView.xib; sourceTree = "<group>"; };
-		68F081979173502A25539F8B50CFBCD7 /* NetworkBroadcastAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkBroadcastAPI.swift; sourceTree = "<group>"; };
 		68FF14A7E45FCF7451B32FD5FDA5EABE /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		6ABDEB18F3DC6A39D5E8D8EA57AF7EF4 /* OpenedOrdersHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersHeaderView.swift; sourceTree = "<group>"; };
 		6B04572EA494643F2DE9A6C0ACA7159A /* TradeHistoryReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeHistoryReducers.swift; sourceTree = "<group>"; };
@@ -1079,7 +1077,7 @@
 		7231103921805D7E0007E95D /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMCommon.framework; path = Carthage/Build/iOS/UMCommon.framework; sourceTree = "<group>"; };
 		7231103A21805D7F0007E95D /* UMAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UMAnalytics.framework; path = Carthage/Build/iOS/UMAnalytics.framework; sourceTree = "<group>"; };
 		72457119219D5BF9007595CC /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
-		724C5D382153472800FF1DE7 /* GatewayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayService.swift; sourceTree = "<group>"; };
+		724C5D382153472800FF1DE7 /* GatewayQueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayQueryService.swift; sourceTree = "<group>"; };
 		724C5D3E21538ABD00FF1DE7 /* ComprehensiveViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveViewAdapter.swift; sourceTree = "<group>"; };
 		724C5D3F21538ABD00FF1DE7 /* ComprehensiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprehensiveView.swift; sourceTree = "<group>"; };
 		724C5D4021538ABD00FF1DE7 /* ComprehensiveView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComprehensiveView.xib; sourceTree = "<group>"; };
@@ -1255,7 +1253,6 @@
 		7345FD8F219EBF7E0066BD0E /* UIDevice+FCUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+FCUUID.h"; sourceTree = "<group>"; };
 		7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UICKeyChainStore.framework; path = Carthage/Build/iOS/UICKeyChainStore.framework; sourceTree = "<group>"; };
 		7345FD95219EC1210066BD0E /* ChatOriginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatOriginModel.swift; sourceTree = "<group>"; };
-		73481176210815BF000BF1B8 /* CybexWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebSocketService.swift; sourceTree = "<group>"; };
 		734AB3FA21A289640091BE82 /* NBLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBLModel.swift; sourceTree = "<group>"; };
 		734AB3FC21A28B9F0091BE82 /* ChatServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatServiceProvider.swift; sourceTree = "<group>"; };
 		73539BA72178A0D6008395AC /* ActiveLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ActiveLabel.framework; path = Carthage/Build/iOS/ActiveLabel.framework; sourceTree = "<group>"; };
@@ -1371,6 +1368,11 @@
 		738E15C8214F82EC00F0BFAF /* SDCAlertView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDCAlertView.framework; path = Carthage/Build/iOS/SDCAlertView.framework; sourceTree = "<group>"; };
 		738FCEE3214909CC0042331A /* ZYNetworkAccessibity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYNetworkAccessibity.h; sourceTree = "<group>"; };
 		738FCEE4214909CC0042331A /* ZYNetworkAccessibity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYNetworkAccessibity.m; sourceTree = "<group>"; };
+		7391101521BA509C00412CE1 /* CybexWebSocketService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybexWebSocketService.swift; sourceTree = "<group>"; };
+		7391101621BA509C00412CE1 /* JsonRPCGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonRPCGenerator.swift; sourceTree = "<group>"; };
+		7391101821BA509C00412CE1 /* DataBaseApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataBaseApi.swift; sourceTree = "<group>"; };
+		7391101921BA509C00412CE1 /* HistoryApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryApi.swift; sourceTree = "<group>"; };
+		7391101A21BA509C00412CE1 /* NetworkBroadcastAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkBroadcastAPI.swift; sourceTree = "<group>"; };
 		739221342153A6D500744811 /* rswift */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = rswift; sourceTree = "<group>"; };
 		7392F566219AB948007FFCD0 /* CellSizeCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellSizeCalculator.swift; sourceTree = "<group>"; };
 		7392F567219AB948007FFCD0 /* MessagesCollectionViewLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCollectionViewLayoutAttributes.swift; sourceTree = "<group>"; };
@@ -1535,7 +1537,7 @@
 		A74E04925F8AE6063EBCE534A5894CA8 /* OrderBookCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderBookCell.xib; sourceTree = "<group>"; };
 		AA0D07DB98352D7EDB8BBA07BAE762B7 /* BalanceIntroduceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceIntroduceView.swift; sourceTree = "<group>"; };
 		AA8E2003073C4075637070F403905C00 /* CybexAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybexAlertView.swift; sourceTree = "<group>"; };
-		AACFB944EDB70A5A08C74591698A0C57 /* GraphQLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLManager.swift; sourceTree = "<group>"; };
+		AACFB944EDB70A5A08C74591698A0C57 /* GatewayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayService.swift; sourceTree = "<group>"; };
 		AB35725C14DABB1B03FF5CC611CBA655 /* TradeHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeHistoryCell.swift; sourceTree = "<group>"; };
 		ABA998072FECB6775C8C12638DB4F7B0 /* AssetInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInfo.swift; sourceTree = "<group>"; };
 		ADA779DE36FE60947508691E83755D82 /* PairCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PairCardView.xib; sourceTree = "<group>"; };
@@ -1553,7 +1555,6 @@
 		BC10B159BF035F5E71D11A1E611B870D /* BusinessReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessReducers.swift; sourceTree = "<group>"; };
 		BDB2C6198513BBE464900C9565F6D751 /* AccountPortfolioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPortfolioCell.swift; sourceTree = "<group>"; };
 		C1F63E39C4DBB774B63AE34CC8BD5476 /* CBMAVOLUMEModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBMAVOLUMEModel.swift; sourceTree = "<group>"; };
-		C29B8BF509E927487D5B6946156296C1 /* DataBaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseApi.swift; sourceTree = "<group>"; };
 		C2B3D305EEAE6BCDA06146FBD1860EA4 /* TimeGapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeGapView.xib; sourceTree = "<group>"; };
 		C360C842917AEAE6A068E1AA610EB0F8 /* CybexTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybexTitleView.swift; sourceTree = "<group>"; };
 		C90916C662B8C64E050E0CCC9F5D950B /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
@@ -1583,7 +1584,6 @@
 		E2372538C137AE590F07952D446927D2 /* SettingActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingActions.swift; sourceTree = "<group>"; };
 		E23A7899E7F6A8D557A94E81F2014FC5 /* LockupAssetsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockupAssetsCoordinator.swift; sourceTree = "<group>"; };
 		E353A01867231C8CC09DA7A1507BF18D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E3BE4472AAF8DE509EE3833B137B92B3 /* JsonRPCGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRPCGenerator.swift; sourceTree = "<group>"; };
 		E473B25626CA499D56EA2280AB068727 /* HomeContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContentView.swift; sourceTree = "<group>"; };
 		E4FF8329A7AFC8D994A046019EFEE53D /* AccountOpenedOrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOpenedOrdersView.swift; sourceTree = "<group>"; };
 		E58821AB0DBC6F8D25C15C288A13EEC6 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -2108,17 +2108,6 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		563B15E66B3177DAF59BE0B7796A2ABF /* GraphQL */ = {
-			isa = PBXGroup;
-			children = (
-				02AAEF79728CB87F9AB6E3C612E32D8C /* GraphQLAPI.swift */,
-				AACFB944EDB70A5A08C74591698A0C57 /* GraphQLManager.swift */,
-				FD63D8CFE0CA92FF685951A2511B4EB2 /* gateway.graphql */,
-				7279867E20F49B3200FFB2DA /* schema.json */,
-			);
-			path = GraphQL;
-			sourceTree = "<group>";
-		};
 		5A4919BA264F4C3F3E191C315F75F4A6 /* Trade */ = {
 			isa = PBXGroup;
 			children = (
@@ -2362,14 +2351,6 @@
 				221C615A213685C00021C007 /* GridContentView.swift */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		724C5D372153471100FF1DE7 /* Gateway */ = {
-			isa = PBXGroup;
-			children = (
-				724C5D382153472800FF1DE7 /* GatewayService.swift */,
-			);
-			path = Gateway;
 			sourceTree = "<group>";
 		};
 		7260DDB821A2A2B500A5E3D6 /* directionViews */ = {
@@ -2749,14 +2730,6 @@
 			path = DNSPageView;
 			sourceTree = "<group>";
 		};
-		73587E9E21352AA8006CF8A6 /* ETOMG */ = {
-			isa = PBXGroup;
-			children = (
-				73587E9F21352AD8006CF8A6 /* ETOMGService.swift */,
-			);
-			path = ETOMG;
-			sourceTree = "<group>";
-		};
 		73587EA62137C032006CF8A6 /* ETOCrowd */ = {
 			isa = PBXGroup;
 			children = (
@@ -2942,6 +2915,114 @@
 				738FCEE4214909CC0042331A /* ZYNetworkAccessibity.m */,
 			);
 			path = ZYNetworkAccessibity;
+			sourceTree = "<group>";
+		};
+		7391101121BA503700412CE1 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				8CD40C5E84A00D4E3920E1AFF7D89F87 /* SimpleHTTPService.swift */,
+				7391102721BA512A00412CE1 /* IM */,
+				7391102621BA511F00412CE1 /* ETO */,
+				7391102521BA511600412CE1 /* GatewayQuery */,
+				7391102421BA510500412CE1 /* Gateway */,
+				7391102321BA50F600412CE1 /* MOH */,
+				7391102221BA50DC00412CE1 /* Configuation */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
+		7391101221BA504900412CE1 /* WebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				7391102121BA50AD00412CE1 /* OCO */,
+				7391102021BA50A300412CE1 /* MDP */,
+				7391101421BA509C00412CE1 /* Cybex */,
+			);
+			name = WebSocket;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		7391101421BA509C00412CE1 /* Cybex */ = {
+			isa = PBXGroup;
+			children = (
+				7391101521BA509C00412CE1 /* CybexWebSocketService.swift */,
+				7391101621BA509C00412CE1 /* JsonRPCGenerator.swift */,
+				7391101721BA509C00412CE1 /* API */,
+			);
+			name = Cybex;
+			path = cybexMobile/Services/WebSocket/Cybex;
+			sourceTree = SOURCE_ROOT;
+		};
+		7391101721BA509C00412CE1 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				7391101821BA509C00412CE1 /* DataBaseApi.swift */,
+				7391101921BA509C00412CE1 /* HistoryApi.swift */,
+				7391101A21BA509C00412CE1 /* NetworkBroadcastAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		7391102021BA50A300412CE1 /* MDP */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MDP;
+			sourceTree = "<group>";
+		};
+		7391102121BA50AD00412CE1 /* OCO */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = OCO;
+			sourceTree = "<group>";
+		};
+		7391102221BA50DC00412CE1 /* Configuation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Configuation;
+			sourceTree = "<group>";
+		};
+		7391102321BA50F600412CE1 /* MOH */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MOH;
+			sourceTree = "<group>";
+		};
+		7391102421BA510500412CE1 /* Gateway */ = {
+			isa = PBXGroup;
+			children = (
+				AACFB944EDB70A5A08C74591698A0C57 /* GatewayService.swift */,
+				02AAEF79728CB87F9AB6E3C612E32D8C /* GraphQLAPI.swift */,
+				FD63D8CFE0CA92FF685951A2511B4EB2 /* gateway.graphql */,
+				7279867E20F49B3200FFB2DA /* schema.json */,
+			);
+			path = Gateway;
+			sourceTree = "<group>";
+		};
+		7391102521BA511600412CE1 /* GatewayQuery */ = {
+			isa = PBXGroup;
+			children = (
+				724C5D382153472800FF1DE7 /* GatewayQueryService.swift */,
+			);
+			path = GatewayQuery;
+			sourceTree = "<group>";
+		};
+		7391102621BA511F00412CE1 /* ETO */ = {
+			isa = PBXGroup;
+			children = (
+				73587E9F21352AD8006CF8A6 /* ETOMGService.swift */,
+			);
+			path = ETO;
+			sourceTree = "<group>";
+		};
+		7391102721BA512A00412CE1 /* IM */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = IM;
 			sourceTree = "<group>";
 		};
 		7392F564219AB948007FFCD0 /* MessengerKit */ = {
@@ -3301,24 +3382,6 @@
 			path = OpenedOrders;
 			sourceTree = "<group>";
 		};
-		99BA08948A7490717821708BF7DDB811 /* HTTPNetwork */ = {
-			isa = PBXGroup;
-			children = (
-				8CD40C5E84A00D4E3920E1AFF7D89F87 /* SimpleHTTPService.swift */,
-			);
-			path = HTTPNetwork;
-			sourceTree = "<group>";
-		};
-		9A4D62E51FAA92AF00B0E399AF72DD38 /* Websocket */ = {
-			isa = PBXGroup;
-			children = (
-				EBFEECDF952B5773D80F2F6B4F9D391F /* API */,
-				73481176210815BF000BF1B8 /* CybexWebSocketService.swift */,
-				E3BE4472AAF8DE509EE3833B137B92B3 /* JsonRPCGenerator.swift */,
-			);
-			path = Websocket;
-			sourceTree = "<group>";
-		};
 		9D2617B8E4636D7B44A5583FD0A56039 /* Entry */ = {
 			isa = PBXGroup;
 			children = (
@@ -3553,13 +3616,10 @@
 		D20B8449A5999F7E7C8218C87D423298 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7391101221BA504900412CE1 /* WebSocket */,
+				7391101121BA503700412CE1 /* HTTP */,
 				B3A7B2B168414622D5415E459355C157 /* Cache */,
-				73587E9E21352AA8006CF8A6 /* ETOMG */,
-				724C5D372153471100FF1DE7 /* Gateway */,
-				563B15E66B3177DAF59BE0B7796A2ABF /* GraphQL */,
-				99BA08948A7490717821708BF7DDB811 /* HTTPNetwork */,
 				83887C87229474260A6CC0FED97CF07F /* UserDefaults */,
-				9A4D62E51FAA92AF00B0E399AF72DD38 /* Websocket */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -3756,16 +3816,6 @@
 				180662D8DE400CE772AC18F4D9A12F8B /* TradeView.xib */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		EBFEECDF952B5773D80F2F6B4F9D391F /* API */ = {
-			isa = PBXGroup;
-			children = (
-				C29B8BF509E927487D5B6946156296C1 /* DataBaseApi.swift */,
-				0E66F4AF6CA1870B8CEFAF7740212296 /* HistoryApi.swift */,
-				68F081979173502A25539F8B50CFBCD7 /* NetworkBroadcastAPI.swift */,
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 		EFB6D1A6DDEFE714298F3868DB962DDE /* Market */ = {
@@ -4607,6 +4657,7 @@
 				7267DA2D21364BF7004AF9AF /* ETOHomeBannerViewAdapter.swift in Sources */,
 				51ED56491B9169BC8F1E25548D3387D8 /* CBMAVOLUMEModel.swift in Sources */,
 				7386F2BF21216B9E00ABC924 /* WithdrawAddressCoordinator.swift in Sources */,
+				7391101F21BA509C00412CE1 /* NetworkBroadcastAPI.swift in Sources */,
 				221C616D2137FCCF0021C007 /* ImageShareActions.swift in Sources */,
 				E13AE68F78264232722CD68636FC433B /* CGContextExtension.swift in Sources */,
 				1F89EA780689075E3FB3230FDB6EE703 /* Collection+Extensions.swift in Sources */,
@@ -4623,7 +4674,6 @@
 				C4B9965B38DBF143FD1862CF88F9DAE1 /* CybexTextView.swift in Sources */,
 				CD7ECF264F6C16A3649CE586A93D6269 /* CybexTitleView.swift in Sources */,
 				737E596021A53C8D001199E4 /* CryptoKey.swift in Sources */,
-				8C00D47D4D9F9CB040B6855F6CC7D757 /* DataBaseApi.swift in Sources */,
 				72E2A8EF2151F9DB00FBB3CB /* ComprehensiveViewController.swift in Sources */,
 				7217B07E2122AAFD00608531 /* AddAddressViewController.swift in Sources */,
 				61096350D887C3728E3B617E993C2365 /* Demo.swift in Sources */,
@@ -4632,6 +4682,7 @@
 				A1EF7FAAA7F0B4F6C9FE153714C1ED47 /* ShowToastManager.swift in Sources */,
 				72DBCA7421391A4300905303 /* CybexWebCoordinator.swift in Sources */,
 				72199DA5210466C000575226 /* TransferTopView.swift in Sources */,
+				7391101C21BA509C00412CE1 /* JsonRPCGenerator.swift in Sources */,
 				72E2A8EE2151F9DB00FBB3CB /* ComprehensiveActions.swift in Sources */,
 				73A331172194244800707D8F /* ChatReducers.swift in Sources */,
 				221C615D213685C00021C007 /* GridContentView.swift in Sources */,
@@ -4664,8 +4715,7 @@
 				9FFDE7661D05B455AFBA92F553A193FC /* GraphQLAPI.swift in Sources */,
 				73731D8D21A538CF005B9B3C /* Result.swift in Sources */,
 				728C280A215A36F70097840A /* RecordChooseReducers.swift in Sources */,
-				BDFF205572EB31DAD4702C934B9A81D1 /* GraphQLManager.swift in Sources */,
-				CA894F0EB69EF4448C0142CE0BE7D9C5 /* HistoryApi.swift in Sources */,
+				BDFF205572EB31DAD4702C934B9A81D1 /* GatewayService.swift in Sources */,
 				105EA57407E74D316C2918BA41771E3B /* HomeActions.swift in Sources */,
 				73539C482179A210008395AC /* NavigatorType.swift in Sources */,
 				7307A923212518DC00BD6444 /* Octicon.swift in Sources */,
@@ -4674,6 +4724,7 @@
 				4420DD3F31DC377E0DB1DEC13E7708A5 /* HomeCoordinator.swift in Sources */,
 				7307A91D212518DC00BD6444 /* FontLoader.swift in Sources */,
 				3B0EB659210313B200F19C31 /* NormalContentCell.swift in Sources */,
+				7391101E21BA509C00412CE1 /* HistoryApi.swift in Sources */,
 				8C20E983876A75B5AF1B2B1CC5B7FA6C /* HomePairCell.swift in Sources */,
 				3D400D51F52AE73941E3134046491BA5 /* HomePairView.swift in Sources */,
 				9ED2AB33B2CDBB57B605BE26C2D455C2 /* HomeReducers.swift in Sources */,
@@ -4691,7 +4742,6 @@
 				72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */,
 				59EC4E5138ECE3D4E7570F3EE0EF28E0 /* IconGenerator.swift in Sources */,
 				61804E3238064ADBE771CD78E212AB6A /* IntroduceView.swift in Sources */,
-				8552FAA729612482DC7F7878860378AC /* JsonRPCGenerator.swift in Sources */,
 				5895D5BFE7B77EDC996C7CF7ADCF92ED /* KLineConfiguration.swift in Sources */,
 				AA2AF8469235125BB11F791F769C6392 /* LocalCache.swift in Sources */,
 				728C2814215A3A910097840A /* RecordChooseCellViewAdapter.swift in Sources */,
@@ -4741,7 +4791,6 @@
 				739EFB652181D10E00424061 /* UIPanGestureRecognizer+RxGesture.swift in Sources */,
 				7267DA2221363BEE004AF9AF /* ETOHomeView.swift in Sources */,
 				009625463316961A6BB07A49EB88D5D5 /* NavCoordinator.swift in Sources */,
-				8E9524F703A8466022C2D28281507174 /* NetworkBroadcastAPI.swift in Sources */,
 				3BF5B7DF2134F1F200E8BFC9 /* ETODetailView.swift in Sources */,
 				AC784AB46820FFF7BD6DBFCD8132C403 /* NoticeBoardView.swift in Sources */,
 				72968D332158EC2F00B0AA77 /* Comprehensive.swift in Sources */,
@@ -4807,6 +4856,8 @@
 				73539C5F2179A282008395AC /* DNSPageCollectionViewFlowLayout.swift in Sources */,
 				70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */,
 				72199D6821044FD100575226 /* RechargeRecodeViewController.swift in Sources */,
+				7391101D21BA509C00412CE1 /* DataBaseApi.swift in Sources */,
+				7391101B21BA509C00412CE1 /* CybexWebSocketService.swift in Sources */,
 				72199D9721045DDE00575226 /* TransferListCellView.swift in Sources */,
 				3B824A2F2135350200D7A4A7 /* ETODetailReducers.swift in Sources */,
 				ED57B29BDB18C8B97035E7DA20DF26E5 /* RechargeActions.swift in Sources */,
@@ -4874,7 +4925,7 @@
 				8528FA970144D53CB71EF87725B0AAE9 /* TradeCell.swift in Sources */,
 				728C281C215B6D6E0097840A /* AnnounceView.swift in Sources */,
 				72199D6921044FD100575226 /* RechargeRecodeReducers.swift in Sources */,
-				724C5D392153472800FF1DE7 /* GatewayService.swift in Sources */,
+				724C5D392153472800FF1DE7 /* GatewayQueryService.swift in Sources */,
 				4E2B0C9A04FD5D11C7AFA4CC9DF8492F /* TradeCoordinator.swift in Sources */,
 				E549F16D59025C0BE00C28BFA24C9E0D /* TradeHistoryActions.swift in Sources */,
 				221C6178213926570021C007 /* ETORecordListReducers.swift in Sources */,
@@ -4941,7 +4992,6 @@
 				72D5829B219C18F800BB9842 /* CBKKindView.swift in Sources */,
 				221C6182213940140021C007 /* ETORecordListViewView.swift in Sources */,
 				696EB2454DD46A9C497C7C719B12BF12 /* UserDefaults.swift in Sources */,
-				73481177210815BF000BF1B8 /* CybexWebSocketService.swift in Sources */,
 				73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */,
 				72DBCA652138D94200905303 /* ContainerView.swift in Sources */,
 				1EE747D219462D96F1597B374E8338E8 /* UserManager.swift in Sources */,

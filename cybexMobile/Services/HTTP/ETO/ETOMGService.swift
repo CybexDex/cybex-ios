@@ -24,18 +24,16 @@ enum ETOMGAPI {
     case validCode(name:String, pid:Int, code:String)
 }
 
-func defaultManager() -> Alamofire.SessionManager {
-    let configuration = URLSessionConfiguration.default
-    configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
-    configuration.timeoutIntervalForRequest = 15
-
-    let manager = Alamofire.SessionManager(configuration: configuration)
-    manager.startRequestsImmediately = false
-    return manager
-}
-
 struct ETOMGService {
-    static let provider = MoyaProvider<ETOMGAPI>(callbackQueue: nil, manager: defaultManager(), plugins: [NetworkLoggerPlugin(verbose: true)], trackInflights: false)
+    enum Config {
+        static let productURL = URL(string: "https://eto.cybex.io/api")!
+        static let devURL = URL(string: "https://ieo-apitest.cybex.io/api")!
+    }
+
+    static let provider = MoyaProvider<ETOMGAPI>(callbackQueue: nil,
+                                                 manager: defaultManager(),
+                                                 plugins: [NetworkLoggerPlugin(verbose: true)],
+                                                 trackInflights: false)
 
     static func request(
         target: ETOMGAPI,
@@ -70,14 +68,21 @@ struct ETOMGService {
             }
         }
     }
+
+    static func defaultManager() -> Alamofire.SessionManager {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
+        configuration.timeoutIntervalForRequest = 15
+
+        let manager = Alamofire.SessionManager(configuration: configuration)
+        manager.startRequestsImmediately = false
+        return manager
+    }
 }
 
 extension ETOMGAPI: TargetType {
     var baseURL: URL {
-        if Defaults[.environment] == "test" {
-            return AppConfiguration.ETOMGBaseTestURLString
-        }
-        return AppConfiguration.ETOMGBaseURLString
+        return Defaults.isTestEnv ? ETOMGService.Config.devURL : ETOMGService.Config.productURL
     }
 
     var path: String {

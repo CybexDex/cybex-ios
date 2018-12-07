@@ -413,35 +413,7 @@ func getTimeZone() -> TimeInterval {
 enum FundType: String {
     case WITHDRAW
     case DEPOSIT
-    case ALL
-}
-
-func getWithdrawAndDepositRecords(_ accountName: String, asset: String, fundType: FundType, size: Int, offset: Int, expiration: Int, callback:@escaping (TradeRecord?) -> Void) {
-
-    var paragram = ["op": ["accountName": accountName, "expiration": expiration], "signer": "" ] as [String: Any]
-
-    let operation = BitShareCoordinator.getRecodeLoginOperation(accountName, asset: asset, fundType: fundType.rawValue, size: Int32(size), offset: Int32(offset), expiration: Int32(expiration))
-    if let operation = operation {
-        let json = JSON(parseJSON: operation)
-        let signer = json["signer"].stringValue
-        paragram["signer"] = signer
-
-        SimpleHTTPService.recordLogin(paragram).done { (result) in
-            if let result = result {
-                let fundTypeString = fundType == .ALL ? "" : fundType.rawValue
-                let url = AppConfiguration.RecodeRecodes + "/" + accountName + "/?asset=" + asset + "&fundType=" + fundTypeString + "&size=" + "\(Int32(size))&offset=\(Int32(offset))"
-                SimpleHTTPService.fetchRecords(url, signer: result).done({ (data) in
-                    callback(data)
-                }).catch({ (_) in
-                    callback(nil)
-                })
-            } else {
-                callback(nil)
-            }
-            }.catch { (_) in
-                callback(nil)
-        }
-    }
+    case ALL = ""
 }
 
 func sortNameBasedonAddress(_ names: [AddressName]) -> [String] {
@@ -499,12 +471,10 @@ func changeEnvironmentAction() {
     if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
         AppConfiguration.ServerBaseURLString = AppConfiguration.ServerTestBaseURLString
         AppConfiguration.ServerRegisterBaseURLString = AppConfiguration.ServerRegisterBaseTestURLString
-        AppConfiguration.GatewayURLString = AppConfiguration.ServerTestBaseURLString
         AssetConfiguration.marketBaseAssets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.BTC]
     } else {
         AppConfiguration.ServerBaseURLString = "https://app.cybex.io/"
         AppConfiguration.ServerRegisterBaseURLString = "https://faucet.cybex.io/"
-        AppConfiguration.GatewayURLString = "https://gateway.cybex.io/gateway"
         AssetConfiguration.marketBaseAssets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.USDT, AssetConfiguration.BTC]
     }
 }

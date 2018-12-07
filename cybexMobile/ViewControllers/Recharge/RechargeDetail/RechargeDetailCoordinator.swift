@@ -111,7 +111,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
 
     func fetchWithDrawInfoData(_ assetName: String) {
         async {
-            let data = try? await(GraphQLManager.shared.getWithdrawInfo(assetName: assetName))
+            let data = try? await(GatewayService.shared.getWithdrawInfo(assetName: assetName))
             main {
                 if case let data?? = data {
                     self.getWithdrawAccountInfo(data.gatewayAccount)
@@ -137,10 +137,10 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
 
             let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
             let amount = amount.decimal() * value
-            var memoAddress = GraphQLManager.shared.memo(name!, address: address)
+            var memoAddress = GatewayService.withDrawMemo(name!, address: address)
             if isEOS {
                 if !memo.isEmpty {
-                    memoAddress = GraphQLManager.shared.memo(name!, address: address + "[\(memo)]")
+                    memoAddress = GatewayService.withDrawMemo(name!, address: address + "[\(memo)]")
                 }
             }
             if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId((UserManager.shared.account.value?.id)!)),
@@ -164,7 +164,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
 
    class func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool) -> Void) {
         async {
-            let data = try? await(GraphQLManager.shared.verifyAddress(assetName: assetName, address: address))
+            let data = try? await(GatewayService.shared.verifyAddress(assetName: assetName, address: address))
             main {
                 if case let data?? = data {
                     callback(data.valid)
@@ -180,10 +180,10 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
             if let memoKey = self.state.memoKey.value {
                 let name = appData.assetInfo[assetId]?.symbol.filterJade
                 let memo = self.state.memo.value
-                var memoAddress = GraphQLManager.shared.memo(name!, address: address)
+                var memoAddress = GatewayService.withDrawMemo(name!, address: address)
                 if isEOS {
                     if !memo.isEmpty {
-                        memoAddress = GraphQLManager.shared.memo(name!, address: address + "[\(memo)]")
+                        memoAddress = GatewayService.withDrawMemo(name!, address: address + "[\(memo)]")
                     }
                 }
                 let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in

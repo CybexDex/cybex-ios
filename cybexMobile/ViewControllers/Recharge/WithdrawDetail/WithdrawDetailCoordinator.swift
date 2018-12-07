@@ -33,7 +33,7 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
     func fetchDepositAddress(_ assetName: String) {
         if let name = UserManager.shared.name.value {
             async {
-                let data = try? await(GraphQLManager.shared.getDepositAddress(accountName: name, assetName: assetName))
+                let data = try? await(GatewayService.shared.getDepositAddress(accountName: name, assetName: assetName))
                 main {
                     if case let data?? = data {
                         self.store.dispatch(FetchAddressInfo(data: data))
@@ -48,7 +48,7 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
     func resetDepositAddress(_ assetName: String) {
         if let name = UserManager.shared.name.value {
             async {
-                let data = try? await(GraphQLManager.shared.updateDepositAddress(accountName: name, assetName: assetName))
+                let data = try? await(GatewayService.shared.updateDepositAddress(accountName: name, assetName: assetName))
                 main {
                     if case let data?? = data {
                         self.store.dispatch(FetchAddressInfo(data: data))
