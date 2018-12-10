@@ -12,6 +12,8 @@ import AwaitKit
 import Repeat
 import SwifterSwift
 import Reachability
+import SwiftyJSON
+import HandyJSON
 
 extension AppCoordinator {
     func fetchTickerData(_ params: AssetPairQueryParams, sub: Bool, priority: Operation.QueuePriority) {
@@ -33,14 +35,8 @@ extension AppCoordinator {
     }
 
     func fetchAsset(_ callback:@escaping (() -> Void)) {
-        async {
-            guard let data = try? await(SimpleHTTPService.fetchIdsInfo()) else {
-                main {
-                    callback()
-                }
-                return
-            }
-
+        AppService.request(target: AppAPI.assetWhiteList, success: { (json) in
+            let data = JSON(json).arrayValue.compactMap({String(describing: $0.stringValue)})
             main {
                 AssetConfiguration.shared.uniqueIds = data
                 let request = GetObjectsRequest(ids: data) { response in
@@ -53,42 +49,68 @@ extension AppCoordinator {
                 }
                 CybexWebSocketService.shared.send(request: request, priority: .veryHigh)
             }
+        }, error: { (_) in
+            main {
+                callback()
+            }
+        }) { (_) in
+            main {
+                callback()
+            }
         }
+
     }
 
     func fetchEthToRmbPrice() {
-        async {
-            guard let value = try? await(SimpleHTTPService.requestETHPrice()) else {
-                return
-            }
+        self.requestOuterPrice({[weak self] (value) in
+            guard let self = self else { return }
+
             if value.count == 0 {
                 return
             }
-            main { [weak self] in
-                self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
-            }
-        }
+
+            self.store.dispatch(FecthEthToRmbPriceAction(price: value))
+
+        })
 
         self.timer = Repeater.every(.seconds(3)) {[weak self] _ in
-            guard let value = try? await(SimpleHTTPService.requestETHPrice()) else {
-                return
-            }
-            if value.count == 0 {
-                return
-            }
-            main { [weak self] in
-                self?.store.dispatch(FecthEthToRmbPriceAction(price: value))
-            }
+            guard let self = self else { return }
+            self.requestOuterPrice({[weak self] (value) in
+                guard let self = self else { return }
 
-            guard let marketList = try? await(SimpleHTTPService.fetchMarketListJson()) else {
-                return
-            }
-            main { [weak self] in
-                self?.store.dispatch(FecthMarketListAction(data: marketList))
-            }
+                if value.count == 0 {
+                    return
+                }
+
+                self.store.dispatch(FecthEthToRmbPriceAction(price: value))
+
+                AppService.request(target: AppAPI.stickTopMarketPair, success: { (json) in
+                    let marketLists = JSON(json).arrayValue.compactMap({ (item) in
+                        ImportantMarketPair(base: item["base"].stringValue, quotes: (item["quotes"].arrayObject as? [String])!)
+                    })
+
+                    self.store.dispatch(FecthMarketListAction(data: marketLists))
+                }, error: { (_) in
+
+                }, failure: { (_) in
+
+                })
+
+            })
         }
 
         timer?.start()
+    }
+
+    func requestOuterPrice(_ callback: @escaping ([RMBPrices]) -> Void) {
+        AppService.request(target: AppAPI.outerPrice, success: { (json) in
+            let prices = json["prices"].arrayValue.compactMap( { RMBPrices.deserialize(from: $0.dictionaryObject) } )
+            callback(prices)
+        }, error: { (_) in
+            callback([])
+        }) { (_) in
+            callback([])
+        }
     }
 }
 
@@ -200,21 +222,25 @@ extension AppCoordinator {
                 var pairs: [Pair] = []
                 var count = 0
                 for base in AssetConfiguration.marketBaseAssets {
-                   
-                    SimpleHTTPService.requestMarketList(base: base).done({ (pair) in
-                        let piecePair = pair.filter({ (pair) -> Bool in
+                    AppService.request(target: AppAPI.marketlist(base: base), success: { (json) in
+                        let result = json.arrayValue.compactMap({ Pair(base: base, quote: $0.stringValue) })
+
+                        let piecePair = result.filter({ (pair) -> Bool in
                             return AssetConfiguration.shared.uniqueIds.contains([pair.base, pair.quote])
                         })
-                        if base == AssetConfiguration.ETH {
-                            print("base ETH")
-                        }
+
                         count += 1
                         pairs += piecePair
                         if count == AssetConfiguration.marketBaseAssets.count {
                             AssetConfiguration.shared.assetIds = pairs
                             self.request24hMarkets(AssetConfiguration.shared.assetIds, priority: .high)
                         }
-                    }).cauterize()
+                    }, error: { (_) in
+
+                    }, failure: { (_) in
+
+                    })
+
                 }
                 if appCoodinator.fetchPariTimer == nil || !(appCoodinator.fetchPariTimer!.state.isRunning) {
                     AppConfiguration.shared.appCoordinator.repeatFetchPairInfo(.veryLow)

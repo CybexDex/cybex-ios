@@ -111,14 +111,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func fetchEtoHiddenRequest(_ refresh:Bool = false) {
-        SimpleHTTPService.fetchETOHiddenRequest().done { (etoStatus) in
-            AppConfiguration.shared.appCoordinator.etoStatus.accept(etoStatus)
-            if let status = etoStatus, status.isETOEnabled == true {
+        AppService.request(target: .setting, success: { (json) in
+            let model = ETOHidden.deserialize(from: json.dictionaryObject)
+            AppConfiguration.shared.appCoordinator.etoStatus.accept(model)
+            if let status = model, status.isETOEnabled == true {
                 AppConfiguration.shared.appCoordinator.start()
             } else if refresh {
                 AppConfiguration.shared.appCoordinator.start()
             }
-            }.catch { (_) in
+        }, error: { (_) in
+
+        }) { (_) in
+
         }
     }
 

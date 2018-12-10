@@ -112,41 +112,51 @@ extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
     }
 
     func fetchAnnounceInfos() {
-        let url = AppConfiguration.AnnounceJson + (Localize.currentLanguage() == "en" ? "en" : "zh")
-        SimpleHTTPService.fetchAnnounceJson(url).done { (data) in
-            if let data = data {
-                self.store.dispatch(FetchAnnouncesAction(data: data))
-            }
-            }.catch { (_) in
+        AppService.request(target: .announce, success: { (json) in
+            let announces = json.arrayValue.map({ ComprehensiveAnnounce.deserialize(from: $0.dictionaryObject)!})
+            self.store.dispatch(FetchAnnouncesAction(data: announces))
+        }, error: { (_) in
+
+        }) { (_) in
+
         }
     }
 
     func fetchHomeBannerInfos() {
-        let url = AppConfiguration.HomeBannerJson + (Localize.currentLanguage() == "en" ? "en" : "zh")
-        SimpleHTTPService.fetchHomeBannerInfos(url).done { (data) in
-            if let data = data, data.count > 0 {
-                self.store.dispatch(FetchHomeBannerAction(data: data))
+        AppService.request(target: .homebanner, success: { (json) in
+            let banners = json.arrayValue.map({ ComprehensiveBanner.deserialize(from: $0.dictionaryObject)})
+            if banners.count > 0 {
+                self.store.dispatch(FetchHomeBannerAction(data: banners.compactMap({ $0 })))
             }
-            }.catch { (_) in
+        }, error: { (_) in
+
+        }) { (_) in
+
         }
     }
 
     func fetchHotAssetsInfos() {
-        SimpleHTTPService.fetchHomeHotAssetJson().done { (data) in
-            if let data = data {
-                self.store.dispatch(FetchHotAssetsAction(data: data))
-            }
-            }.catch { (_) in
+        AppService.request(target: .hotpair, success: { (json) in
+            let pairs = json.arrayValue.map({ Pair(base: $0.dictionaryValue["base"]?.stringValue ?? "", quote: $0.dictionaryValue["quote"]?.stringValue ?? "") })
+
+            self.store.dispatch(FetchHotAssetsAction(data: pairs))
+        }, error: { (_) in
+
+        }) { (_) in
+
         }
     }
 
     func fetchMiddleItemInfos() {
-        let url = AppConfiguration.HomeItemsJson + (Localize.currentLanguage() == "en" ? "en" : "zh")
-        SimpleHTTPService.fetchHomeItemInfo(url).done { (data) in
-            if let data = data, data.count != 0 {
-                self.store.dispatch(FetchMiddleItemAction(data: data))
+        AppService.request(target: .items, success: { (json) in
+            let data = json.arrayValue.map({ ComprehensiveItem.deserialize(from: $0.dictionaryObject)})
+            if data.count != 0 {
+                self.store.dispatch(FetchMiddleItemAction(data: data.compactMap({ $0 })))
             }
-            }.catch { (_) in
+        }, error: { (_) in
+
+        }) { (_) in
+
         }
     }
 

@@ -97,9 +97,10 @@ extension AssetInfo: Equatable {
     }
 }
 
-struct RMBPrices {
+struct RMBPrices: HandyJSON {
     var name: String      = ""
-    var rmbPrice: String = ""
+    var value: String = "0"
+    var time: Int = 0
 }
 
 struct ImportantMarketPair {

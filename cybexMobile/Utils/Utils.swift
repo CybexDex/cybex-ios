@@ -133,7 +133,7 @@ func getAssetRMBPrice(_ asset: String, base: String = "") -> Decimal {
     guard let assetInfo = appData.assetInfo[asset] else { return 0 }
     if AssetConfiguration.orderName.contains(assetInfo.symbol.filterJade) {
         if let data = appData.rmbPrices.filter({return $0.name == assetInfo.symbol.filterJade}).first {
-            return data.rmbPrice.decimal()
+            return data.value.decimal()
         }
         return 0
     }
@@ -469,12 +469,8 @@ func labelBaselineOffset(_ lineHeight: CGFloat, fontHeight: CGFloat) -> Float {
 
 func changeEnvironmentAction() {
     if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
-        AppConfiguration.ServerBaseURLString = AppConfiguration.ServerTestBaseURLString
-        AppConfiguration.ServerRegisterBaseURLString = AppConfiguration.ServerRegisterBaseTestURLString
         AssetConfiguration.marketBaseAssets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.BTC]
     } else {
-        AppConfiguration.ServerBaseURLString = "https://app.cybex.io/"
-        AppConfiguration.ServerRegisterBaseURLString = "https://faucet.cybex.io/"
         AssetConfiguration.marketBaseAssets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.USDT, AssetConfiguration.BTC]
     }
 }

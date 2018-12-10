@@ -504,6 +504,11 @@
 		73587EB52137C69B006CF8A6 /* ETOCrowdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */; };
 		73587EB62137C69B006CF8A6 /* ETOCrowdViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */; };
 		735A3D022160A73200FC8922 /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735A3D012160A73000FC8922 /* NBLCommonModule.framework */; };
+		736761E321BE464A0065FD35 /* MOHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E221BE464A0065FD35 /* MOHService.swift */; };
+		736761E521BE46750065FD35 /* RegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E421BE46750065FD35 /* RegisterService.swift */; };
+		736761E821BE4C2D0065FD35 /* IMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E721BE4C2D0065FD35 /* IMService.swift */; };
+		736761EA21BE4DEF0065FD35 /* MDPWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */; };
+		736761EC21BE4DFD0065FD35 /* OCOWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761EB21BE4DFD0065FD35 /* OCOWebSocketService.swift */; };
 		73731D7D21A2CE68005B9B3C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B4214D045B00761955 /* RxSwift.framework */; };
 		73731D8321A5378E005B9B3C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8221A5378E005B9B3C /* Helpers.swift */; };
 		73731D8521A5382A005B9B3C /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8421A5382A005B9B3C /* Delegate.swift */; };
@@ -555,6 +560,7 @@
 		7391101D21BA509C00412CE1 /* DataBaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391101821BA509C00412CE1 /* DataBaseApi.swift */; };
 		7391101E21BA509C00412CE1 /* HistoryApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391101921BA509C00412CE1 /* HistoryApi.swift */; };
 		7391101F21BA509C00412CE1 /* NetworkBroadcastAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391101A21BA509C00412CE1 /* NetworkBroadcastAPI.swift */; };
+		7391102B21BA7B5C00412CE1 /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391102A21BA7B5C00412CE1 /* AppService.swift */; };
 		7392F55521996CC3007FFCD0 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B8214D045D00761955 /* SocketRocket.framework */; };
 		7392F59E219AB948007FFCD0 /* CellSizeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392F566219AB948007FFCD0 /* CellSizeCalculator.swift */; };
 		7392F59F219AB948007FFCD0 /* MessagesCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392F567219AB948007FFCD0 /* MessagesCollectionViewLayoutAttributes.swift */; };
@@ -1317,6 +1323,11 @@
 		73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdView.xib; sourceTree = "<group>"; };
 		73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdViewAdapter.swift; sourceTree = "<group>"; };
 		735A3D012160A73000FC8922 /* NBLCommonModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NBLCommonModule.framework; path = Carthage/Build/iOS/Static/NBLCommonModule.framework; sourceTree = "<group>"; };
+		736761E221BE464A0065FD35 /* MOHService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOHService.swift; sourceTree = "<group>"; };
+		736761E421BE46750065FD35 /* RegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterService.swift; sourceTree = "<group>"; };
+		736761E721BE4C2D0065FD35 /* IMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMService.swift; sourceTree = "<group>"; };
+		736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPWebSocketService.swift; sourceTree = "<group>"; };
+		736761EB21BE4DFD0065FD35 /* OCOWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCOWebSocketService.swift; sourceTree = "<group>"; };
 		737258FAB6762972136E4188BF20F602 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
 		73731D8221A5378E005B9B3C /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		73731D8421A5382A005B9B3C /* Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
@@ -1373,6 +1384,7 @@
 		7391101821BA509C00412CE1 /* DataBaseApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataBaseApi.swift; sourceTree = "<group>"; };
 		7391101921BA509C00412CE1 /* HistoryApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryApi.swift; sourceTree = "<group>"; };
 		7391101A21BA509C00412CE1 /* NetworkBroadcastAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkBroadcastAPI.swift; sourceTree = "<group>"; };
+		7391102A21BA7B5C00412CE1 /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
 		739221342153A6D500744811 /* rswift */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = rswift; sourceTree = "<group>"; };
 		7392F566219AB948007FFCD0 /* CellSizeCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellSizeCalculator.swift; sourceTree = "<group>"; };
 		7392F567219AB948007FFCD0 /* MessagesCollectionViewLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesCollectionViewLayoutAttributes.swift; sourceTree = "<group>"; };
@@ -2755,6 +2767,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		736761E621BE4C220065FD35 /* IM */ = {
+			isa = PBXGroup;
+			children = (
+				736761E721BE4C2D0065FD35 /* IMService.swift */,
+			);
+			path = IM;
+			sourceTree = "<group>";
+		};
 		73731D8E21A53C32005B9B3C /* Crypto */ = {
 			isa = PBXGroup;
 			children = (
@@ -2921,7 +2941,8 @@
 			isa = PBXGroup;
 			children = (
 				8CD40C5E84A00D4E3920E1AFF7D89F87 /* SimpleHTTPService.swift */,
-				7391102721BA512A00412CE1 /* IM */,
+				736761E621BE4C220065FD35 /* IM */,
+				7391102721BA512A00412CE1 /* Register */,
 				7391102621BA511F00412CE1 /* ETO */,
 				7391102521BA511600412CE1 /* GatewayQuery */,
 				7391102421BA510500412CE1 /* Gateway */,
@@ -2966,6 +2987,7 @@
 		7391102021BA50A300412CE1 /* MDP */ = {
 			isa = PBXGroup;
 			children = (
+				736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */,
 			);
 			path = MDP;
 			sourceTree = "<group>";
@@ -2973,6 +2995,7 @@
 		7391102121BA50AD00412CE1 /* OCO */ = {
 			isa = PBXGroup;
 			children = (
+				736761EB21BE4DFD0065FD35 /* OCOWebSocketService.swift */,
 			);
 			path = OCO;
 			sourceTree = "<group>";
@@ -2980,6 +3003,7 @@
 		7391102221BA50DC00412CE1 /* Configuation */ = {
 			isa = PBXGroup;
 			children = (
+				7391102A21BA7B5C00412CE1 /* AppService.swift */,
 			);
 			path = Configuation;
 			sourceTree = "<group>";
@@ -2987,6 +3011,7 @@
 		7391102321BA50F600412CE1 /* MOH */ = {
 			isa = PBXGroup;
 			children = (
+				736761E221BE464A0065FD35 /* MOHService.swift */,
 			);
 			path = MOH;
 			sourceTree = "<group>";
@@ -3018,11 +3043,12 @@
 			path = ETO;
 			sourceTree = "<group>";
 		};
-		7391102721BA512A00412CE1 /* IM */ = {
+		7391102721BA512A00412CE1 /* Register */ = {
 			isa = PBXGroup;
 			children = (
+				736761E421BE46750065FD35 /* RegisterService.swift */,
 			);
-			path = IM;
+			path = Register;
 			sourceTree = "<group>";
 		};
 		7392F564219AB948007FFCD0 /* MessengerKit */ = {
@@ -4645,11 +4671,13 @@
 				73539C4B2179A210008395AC /* NavigatorDelegate.swift in Sources */,
 				7307A91B212518DC00BD6444 /* LGButton.swift in Sources */,
 				E286FE83AA3DB3C53DD1FDE1CA1BC208 /* CBKLineModel.swift in Sources */,
+				736761E521BE46750065FD35 /* RegisterService.swift in Sources */,
 				225746DC210707DD0017FA1A /* PickerActions.swift in Sources */,
 				72199DAD2104687400575226 /* TransferLineView.swift in Sources */,
 				BAB27405E1C42F6C20B9DBF1FDDBC100 /* CBKLineView.swift in Sources */,
 				B7631744A19B452081A71269BF881246 /* CBKLineVolumeView.swift in Sources */,
 				8C3E5CB53A30AD3221992CCA44A8D332 /* CBMACDModel.swift in Sources */,
+				736761EC21BE4DFD0065FD35 /* OCOWebSocketService.swift in Sources */,
 				737E596221A53CA5001199E4 /* CryptoHelpers.swift in Sources */,
 				92AF8740929C204D86A85866576BC844 /* CBMALineBrush.swift in Sources */,
 				7217B0832122AD9D00608531 /* AddAddressView.swift in Sources */,
@@ -4723,6 +4751,7 @@
 				7386F2AF21216B2200ABC924 /* TransferAddressHomeCoordinator.swift in Sources */,
 				4420DD3F31DC377E0DB1DEC13E7708A5 /* HomeCoordinator.swift in Sources */,
 				7307A91D212518DC00BD6444 /* FontLoader.swift in Sources */,
+				736761E821BE4C2D0065FD35 /* IMService.swift in Sources */,
 				3B0EB659210313B200F19C31 /* NormalContentCell.swift in Sources */,
 				7391101E21BA509C00412CE1 /* HistoryApi.swift in Sources */,
 				8C20E983876A75B5AF1B2B1CC5B7FA6C /* HomePairCell.swift in Sources */,
@@ -4901,6 +4930,7 @@
 				739EFB642181D10E00424061 /* UILongPressGestureRecognizer+RxGesture.swift in Sources */,
 				73539C512179A210008395AC /* URLMatchResult.swift in Sources */,
 				3B0EB654210313B200F19C31 /* NormalCellView.swift in Sources */,
+				7391102B21BA7B5C00412CE1 /* AppService.swift in Sources */,
 				D3551784962B5675BB3A8DD9DA31F698 /* SettingDetailViewController.swift in Sources */,
 				34DC0886711DBC04C2F6364BB16F838A /* SettingReducers.swift in Sources */,
 				751D31DB62BFC9F2FC1A0EFC4C23A801 /* SettingViewController.swift in Sources */,
@@ -4909,6 +4939,7 @@
 				F7C39F3DD49909044D9E8FF34ABF3F2D /* SimpleHTTPService.swift in Sources */,
 				7267DA2E21364BF7004AF9AF /* ETOHomeBannerView.swift in Sources */,
 				D519E052461ED8221B6CF5C9D9B7741C /* StyleContentView.swift in Sources */,
+				736761E321BE464A0065FD35 /* MOHService.swift in Sources */,
 				737F8C352145532A00DD522A /* String+Extensions.swift in Sources */,
 				345CA96631D318F012F0BB80ACD3BCCD /* StyleLabel.swift in Sources */,
 				733714BD2122D32500B2ED90 /* AddressCellView.swift in Sources */,
@@ -4993,6 +5024,7 @@
 				221C6182213940140021C007 /* ETORecordListViewView.swift in Sources */,
 				696EB2454DD46A9C497C7C719B12BF12 /* UserDefaults.swift in Sources */,
 				73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */,
+				736761EA21BE4DEF0065FD35 /* MDPWebSocketService.swift in Sources */,
 				72DBCA652138D94200905303 /* ContainerView.swift in Sources */,
 				1EE747D219462D96F1597B374E8338E8 /* UserManager.swift in Sources */,
 				7260DDB521A2A25C00A5E3D6 /* ChatDirectionActions.swift in Sources */,

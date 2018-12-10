@@ -70,25 +70,18 @@ extension UserManager {
     }
 
     func register(_ pinID: String, captcha: String, username: String, password: String) -> Promise<(Bool, Int)> {
-        return async {
-            let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
+        let (promise, seal) = Promise<(Bool, Int)>.pending()
 
-            if let keys = AccountKeys.deserialize(from: keysString),
-                let activeKey = keys.activeKey,
-                let ownerKey = keys.ownerKey,
-                let memoKey = keys.memoKey {
-                let params = ["cap": ["id": pinID, "captcha": captcha],
-                              "account": ["name": username,
-                                          "owner_key": ownerKey.publicKey,
-                                          "active_key": activeKey.publicKey,
-                                          "memo_key": memoKey.publicKey,
-                                          "refcode": "",
-                                          "referrer": ""]]
-                guard let data = try? await(SimpleHTTPService.requestRegister(params)) else {
-                    return (false, 0)
-                }
+        let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
+        if let keys = AccountKeys.deserialize(from: keysString),
+            let _ = keys.activeKey,
+            let _ = keys.ownerKey,
+            let _ = keys.memoKey {
 
-                if data.0 {
+            RegisterService.request(target: .register(pinID, captcha: captcha, name: username, keys: keys), success: { (json) in
+                if let code = json["code"].int { //失败
+                    seal.fulfill((false, code))
+                } else {
                     self.saveName(username)
                     self.avatarString = username.sha256()
 
@@ -96,12 +89,17 @@ extension UserManager {
 
                     self.keys = keys
                     self.fetchAccountInfo()
+                    seal.fulfill((true, 0))
                 }
-                return data
-
+            }, error: { (_) in
+                seal.fulfill((false, 0))
+            }) { (_) in
+                seal.fulfill((false, 0))
             }
-            return (false, 0)
+
         }
+
+        return promise
     }
 
     func logout() {

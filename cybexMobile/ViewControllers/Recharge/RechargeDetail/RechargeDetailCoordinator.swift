@@ -252,16 +252,17 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
     }
     
     func fetchDepositWriteInfo(_ assetId: String) {
-        async {
-            let data = try? await(SimpleHTTPService.fetchWorldsInfoWithAssetId(assetId, url:         AppConfiguration.shared.withdrawWordJson(assetId)))
-            main {
-                if case let data?? = data {
-                    self.store.dispatch(FetchWithdrawWordInfo(data: data))
-                }
-                else {
-                    self.state.withdrawMsgInfo.accept(nil)
-                }
+        AppService.request(target: AppAPI.withdrawAnnounce(assetId: assetId), success: { (json) in
+            if let data = RechargeWorldInfo.deserialize(from: json.dictionaryObject) {
+                self.store.dispatch(FetchWithdrawWordInfo(data: data))
             }
+            else {
+                self.state.withdrawMsgInfo.accept(nil)
+            }
+        }, error: { (_) in
+
+        }) { (_) in
+
         }
     }
 }

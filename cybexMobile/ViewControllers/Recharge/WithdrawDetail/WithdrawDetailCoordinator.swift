@@ -9,6 +9,8 @@
 import UIKit
 import ReSwift
 import Localize_Swift
+import HandyJSON
+import SwiftyJSON
 
 protocol WithdrawDetailCoordinatorProtocol {
     func fetchDepositAddress(_ assetName: String)
@@ -70,16 +72,17 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
     }
     
     func fetchDepositWordInfo(_ assetId: String) {
-        async {
-            let data = try? await(SimpleHTTPService.fetchWorldsInfoWithAssetId(assetId, url:         AppConfiguration.shared.depositWordJson(assetId)))
-            main {
-                if case let data?? = data {
-                    self.store.dispatch(FetchMsgInfo(data: data))
-                }
-                else {
-                    self.state.msgInfo.accept(nil)
-                }
+        AppService.request(target: AppAPI.topUpAnnounce(assetId: assetId), success: { (json) in
+            if let data = RechargeWorldInfo.deserialize(from: json.dictionaryObject) {
+                self.store.dispatch(FetchMsgInfo(data: data))
             }
+            else {
+                self.state.msgInfo.accept(nil)
+            }
+        }, error: { (_) in
+
+        }) { (_) in
+
         }
     }
 }

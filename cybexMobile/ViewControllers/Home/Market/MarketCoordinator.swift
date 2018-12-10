@@ -109,13 +109,12 @@ extension MarketCoordinator: MarketStateManagerProtocol {
     }
     
     func fetchLastMessageId(_ channel: String, callback:@escaping (Int)->()) {
-        async {
-            guard let data = try? await(SimpleHTTPService.fetchLastMessageIdWithChannel(channel)) else {
-                return
-            }
-            main {
-                callback(data)
-            }
+        IMService.request(target: IMAPI.messageCount(channel), success: { (json) in
+            callback(json.intValue)
+        }, error: { (_) in
+
+        }) { (_) in
+
         }
     }
 }

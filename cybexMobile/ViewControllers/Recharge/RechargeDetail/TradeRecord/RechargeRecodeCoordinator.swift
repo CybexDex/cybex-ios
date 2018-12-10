@@ -9,6 +9,7 @@
 import UIKit
 import ReSwift
 import HandyJSON
+import SwiftyJSON
 
 protocol RechargeRecodeCoordinatorProtocol {
     func openRecordDetailUrl(_ hash: String, asset: String)
@@ -102,10 +103,15 @@ extension RechargeRecodeCoordinator: RechargeRecodeStateManagerProtocol {
     }
 
     func fetchAssetUrl() {
-        SimpleHTTPService.fetchBlockexplorerJson().done { [weak self](explorers) in
-            guard let self = self else { return }
+        AppService.request(target: AppAPI.explorerURL, success: { (json) in
+            let explorers = json.arrayValue.compactMap({ (item) -> BlockExplorer in
+                return BlockExplorer(asset: item["asset"].stringValue, explorer: item["explorer"].stringValue)
+            })
             self.store.dispatch(FetchAssetUrlAction(data: explorers))
-            }.catch { (_) in
+        }, error: { (_) in
+
+        }) { (_) in
+
         }
     }
 }

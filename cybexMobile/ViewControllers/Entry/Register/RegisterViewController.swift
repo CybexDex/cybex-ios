@@ -73,22 +73,22 @@ class RegisterViewController: BaseViewController {
     func updateSvgView() {
         self.pinCodeActivityView.startAnimating()
 
-        async {
-            do {
-                let data = try await(SimpleHTTPService.requestPinCode())
-                main {
-                    self.pinCodeActivityView.stopAnimating()
-                    self.pinID = data.id
+        RegisterService.request(target: .getPinCode, success: { (json) in
+            let id = json["id"].stringValue
+            let data = json["data"].stringValue
 
-                    if let parser = try? SVGParser.parse(text: data.data) {
-                        self.macawView.node = parser
-                    }
-                }
-            } catch _ {
+            self.pinCodeActivityView.stopAnimating()
+            self.pinID = id
 
+            if let parser = try? SVGParser.parse(text: data) {
+                self.macawView.node = parser
             }
+        }, error: { (_) in
 
+        }) { (_) in
+            
         }
+
     }
 
     func setupUI() {

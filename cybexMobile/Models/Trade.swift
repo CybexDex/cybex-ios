@@ -8,6 +8,7 @@
 
 import Foundation
 import HandyJSON
+import SwiftyJSON
 
 class Fee: HandyJSON {
     var assetId: String = ""
@@ -36,7 +37,7 @@ class Current: HandyJSON {
     }
 }
 
-struct Trade {
+struct Trade: HandyJSON {
     var id: String = ""
     var enable: Bool = true
     var enMsg: String = ""
@@ -51,7 +52,7 @@ struct TradeMsg {
     var cnMsg: String = ""
 }
 
-struct RechargeWorldInfo {
+struct RechargeWorldInfo: HandyJSON {
     var projectNameCn: String = ""
     var projectAddressCn: String = ""
     var projectLinkCn: String = ""
@@ -60,8 +61,71 @@ struct RechargeWorldInfo {
     var projectLinkEn: String = ""
     var enInfo: String = ""
     var cnInfo: String = ""
+
+    mutating func mapping(mapper: HelpingMapper) {
+        mapper <<< projectNameCn               <-- ("msg_cn", ExportArrayValueTransform(0, key: "value"))
+        mapper <<< projectAddressCn               <-- ("msg_cn", ExportArrayValueTransform(1, key: "value"))
+        mapper <<< projectLinkCn               <-- ("msg_cn", ExportArrayValueTransform(1, key: "link"))
+        mapper <<< projectNameEn               <-- ("msg_en", ExportArrayValueTransform(0, key: "value"))
+        mapper <<< projectAddressEn               <-- ("msg_en", ExportArrayValueTransform(1, key: "value"))
+        mapper <<< projectLinkEn               <-- ("msg_en", ExportArrayValueTransform(1, key: "link"))
+        mapper <<< enInfo               <--  ("notice_en.adds", CombineTextTransform())
+        mapper <<< cnInfo               <-- ("notice_cn.adds", CombineTextTransform())
+    }
 }
 
+class CombineTextTransform: TransformType {
+    public typealias Object = String
+    public typealias JSON = [[String: String]]
+
+    public init() {}
+
+    open func transformFromJSON(_ value: Any?) -> String? {
+        if let origin = value as? [[String: String]] {
+            return origin.compactMap({ (dict) -> String in
+                return dict["text"] ?? ""
+            }).joined(separator: "\n")
+        }
+
+        return nil
+    }
+
+    open func transformToJSON(_ value: String?) -> [[String: String]]? {
+        if let val = value {
+            return val.components(separatedBy: "\n").compactMap({ (str) -> [String: String] in
+                return ["text": str]
+            })
+        }
+        return nil
+    }
+}
+
+class ExportArrayValueTransform: TransformType {
+    public typealias Object = String
+    public typealias JSON = [[String: String]]
+
+    var index: Int
+    var key: String
+
+    public init(_ index: Int, key: String) {
+        self.index = index
+        self.key = key
+    }
+
+    open func transformFromJSON(_ value: Any?) -> String? {
+        if let origin = value as? [[String: String]] {
+            if index < origin.count {
+                return origin[index][key]
+            }
+        }
+
+        return nil
+    }
+
+    open func transformToJSON(_ value: String?) -> [[String: String]]? {
+        return nil
+    }
+}
 
 struct RechageWordVMData {
     var projectName: String = ""

@@ -14,6 +14,15 @@ import StoreKit
 import SDCAlertView
 import SwiftTheme
 import Guitar
+import Localize_Swift
+import HandyJSON
+
+struct AppVersionResult {
+    var update: Bool = false
+    var url: String = ""
+    var force: Bool = false
+    var content: String = ""
+}
 
 public struct Version: Equatable, Comparable {
     public let major: Int
@@ -79,50 +88,70 @@ extension UIViewController {
             self.present(vc, animated: true)
         }
     }
+
+    func requestLastestVersion(_ callback: @escaping (AppVersionResult) -> Void) {
+        var target: AppAPI = AppAPI.checkAppStoreVersionUpdate
+        if let bundleID = Bundle.main.bundleIdentifier, bundleID.contains("fir") {
+            target = .checkVersionUpdate
+        }
+
+        AppService.request(target: target, success: { (json) in
+            let lastestVersion = json["version"].stringValue
+
+            if let cur = Version(Bundle.main.version), let remote = Version(lastestVersion) {
+                if cur >= remote {
+                    callback(AppVersionResult())
+                    return
+                }
+
+                let forceData = json["force"]
+
+                let result = AppVersionResult(update: true, url: json["url"].stringValue,
+                                              force: forceData[Bundle.main.version].boolValue,
+                                              content: Localize.currentLanguage() == "en" ?  json["enUpdateInfo"].stringValue : json["cnUpdateInfo"].stringValue)
+                callback(result)
+            }
+        }, error: { (_) in
+            callback(AppVersionResult())
+        }) { (_) in
+            callback(AppVersionResult())
+        }
+
+    }
     
     func handlerUpdateVersion(_ completion: CommonCallback?, showNoUpdate: Bool = false ) {
-        async {
-            guard let result = try? await(SimpleHTTPService.checkVersion()) else {
-                main {
-                    if let completion = completion {
-                        completion()
-                    }
-                }
-                return
+        requestLastestVersion { (result) in
+            if let completion = completion {
+                completion()
             }
-            main {
-                if let completion = completion {
-                    completion()
+            if result.update {
+
+                let contentView = StyleContentView(frame: .zero)
+                ShowToastManager.shared.setUp(title: R.string.localizable.update_version.key.localized(), contentView: contentView, animationType: ShowToastManager.ShowAnimationType.smallBig)
+                ShowToastManager.shared.showAnimationInView(self.view)
+
+                let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
+                if result.content.contains("\n") {
+                    contentView.data = result.content.replacingOccurrences(of: "\n", with: "\\").components(separatedBy: "\\").map({ (string) in
+                        "<\(contentStyle)>\(string)</\(contentStyle)>".set(style: "alertContent")!
+                    })
+                } else {
+                    contentView.data = ["<\(contentStyle)>\(result.content)</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString]
                 }
-                if result.update {
-                    
-                    let contentView = StyleContentView(frame: .zero)
-                    ShowToastManager.shared.setUp(title: R.string.localizable.update_version.key.localized(), contentView: contentView, animationType: ShowToastManager.ShowAnimationType.smallBig)
-                    ShowToastManager.shared.showAnimationInView(self.view)
-                    
-                    let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
-                    if result.content.contains("\n") {
-                        contentView.data = result.content.replacingOccurrences(of: "\n", with: "\\").components(separatedBy: "\\").map({ (string) in
-                            "<\(contentStyle)>\(string)</\(contentStyle)>".set(style: "alertContent")!
-                        })
-                    } else {
-                        contentView.data = ["<\(contentStyle)>\(result.content)</\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString]
+
+                ShowToastManager.shared.isShowSingleBtn = result.force
+                ShowToastManager.shared.ensureClickBlock = {
+                    if result.force {
+                        UIApplication.shared.open(URL(string: result.url)!, options: [:], completionHandler: nil)
+                        return
                     }
-                    
-                    ShowToastManager.shared.isShowSingleBtn = result.force
-                    ShowToastManager.shared.ensureClickBlock = {
-                        if result.force {
-                            UIApplication.shared.open(URL(string: result.url)!, options: [:], completionHandler: nil)
-                            return
-                        }
-                        
-                        self.openSafariViewController(result.url)
-                    }
-                } else if showNoUpdate {
-                    let alert = AlertController(title: R.string.localizable.unupdata_title.key.localized(), message: R.string.localizable.unupdata_message.key.localized(), preferredStyle: .alert)
-                    alert.addAction(AlertAction(title: R.string.localizable.unupdata_ok.key.localized(), style: .normal, handler: nil))
-                    alert.present()
+
+                    self.openSafariViewController(result.url)
                 }
+            } else if showNoUpdate {
+                let alert = AlertController(title: R.string.localizable.unupdata_title.key.localized(), message: R.string.localizable.unupdata_message.key.localized(), preferredStyle: .alert)
+                alert.addAction(AlertAction(title: R.string.localizable.unupdata_ok.key.localized(), style: .normal, handler: nil))
+                alert.present()
             }
         }
     }

@@ -31,97 +31,17 @@ struct AppConfiguration {
     var appCoordinator: AppCoordinator!
     var chainID: String = ""
 
+    static var TransactionExpiration: TimeInterval = 45
+
     private init() {
         let rootVC = BaseTabbarViewController()
         appCoordinator = AppCoordinator(rootVC: rootVC)
     }
 
-    static var ServerBaseURLString = "https://app.cybex.io/"
-    static var ServerRegisterBaseURLString = "https://faucet.cybex.io/"
-
-    static var TransactionExpiration: TimeInterval = 45
     static var ServerIconsBaseURLString = "https://app.cybex.io/icons/"
-
-    static var ServerRegisterPincodeURLString: String {
-        return ServerRegisterBaseURLString + "captcha"
-    }
-    static var ServerRegisterURLString: String {
-        return ServerRegisterBaseURLString + "register"
-    }
-
-    static var ServerVersionURLString: String {
-        return ServerBaseURLString + "iOS_update.json"
-    }
-
-    static var ServerVersionAppstoreURLString: String {
-        return ServerBaseURLString + "iOS_store_update.json"
-    }
-
-    static var ServerMarketListURLString: String {
-        return ServerBaseURLString + "market_list?base="
-    }
-
-    static var ETHPrice: String {
-        return ServerBaseURLString + "price"
-    }
-    static var WITHDRAW: String {
-        return ServerBaseURLString + "json/withdraw.json"
-    }
-    static var DEPOSIT: String {
-        return ServerBaseURLString + "json/deposit.json"
-    }
-    static var ASSET: String {
-        return ServerBaseURLString + "json/assets.json"
-    }
-
-    static var MARKETLISTS: String {
-        return  ServerBaseURLString + "json/marketlists.json"
-    }
 
     static var HelpNightURL = "http://47.75.154.39:3009/cybexnight?lang="
     static var HelpLightURL = "http://47.75.154.39:3009/cybexday?lang="
-
-    static var ServerRegisterBaseTestURLString = "https://faucet.51nebula.com/"
-    static var ServerTestBaseURLString = "http://47.91.242.71:3039/"
-
-    static var BaseSettingJson: String {
-        return ServerBaseURLString + "json/settings.json"
-    }
-
-    static var HotAssetsJson: String {
-        return ServerBaseURLString + "v1/api/hotpair"
-    }
-
-    static var AnnounceJson: String {
-        return ServerBaseURLString + "v1/api/announce?lang="
-    }
-
-    static var HomeItemsJson: String {
-        return ServerBaseURLString + "v1/api/app_sublinks?lang="
-    }
-
-    static var HomeBannerJson: String {
-        return ServerBaseURLString + "v1/api/banners?lang="
-    }
-
-    static var BlockExplorerJson: String {
-        return ServerBaseURLString + "json/blockexplorer.json"
-    }
-    
-    static var LastMessageIdURL: String {
-        // test
-//        return "http://47.91.242.71:9099/lastestMsgID?channel="
-        // 正式
-        return "https://chat.cybex.io/lastestMsgID?channel="
-    }
-    
-    func depositWordJson(_ assetId: String) -> String {
-        return AppConfiguration.ServerBaseURLString + "json/deposit/" + assetId + ".json"
-    }
-    
-    func withdrawWordJson(_ assetId: String) -> String {
-        return AppConfiguration.ServerBaseURLString + "json/withdraw/" + assetId + ".json"
-    }
 }
 
 enum ExchangeType {

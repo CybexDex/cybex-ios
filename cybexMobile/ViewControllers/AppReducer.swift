@@ -122,20 +122,20 @@ func appPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
         if action.price.count > 0 {
             for rmbPrices in action.price {
                 if rmbPrices.name == "CYB" {
-                    if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
-                        state.cybRmbPrice = rmbPrices.rmbPrice.decimal()
+                    if rmbPrices.value != "" && rmbPrices.value != "0"{
+                        state.cybRmbPrice = rmbPrices.value.decimal()
                     }
                 } else if rmbPrices.name == "BTC" {
-                    if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
-                        state.btcRmbPrice = rmbPrices.rmbPrice.decimal()
+                    if rmbPrices.value != "" && rmbPrices.value != "0"{
+                        state.btcRmbPrice = rmbPrices.value.decimal()
                     }
                 } else if rmbPrices.name == "USDT" {
-                    if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
-                        state.usdtRmbPrice = rmbPrices.rmbPrice.decimal()
+                    if rmbPrices.value != "" && rmbPrices.value != "0"{
+                        state.usdtRmbPrice = rmbPrices.value.decimal()
                     }
                 } else if rmbPrices.name == "ETH" {
-                    if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
-                        state.ethRmbPrice = rmbPrices.rmbPrice.decimal()
+                    if rmbPrices.value != "" && rmbPrices.value != "0"{
+                        state.ethRmbPrice = rmbPrices.value.decimal()
                     }
                 }
             }
