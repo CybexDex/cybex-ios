@@ -34,6 +34,8 @@ enum AppAPI {
     case items
 
     case outerPrice
+
+    case precisionSetting
 }
 
 struct AppService {
@@ -135,6 +137,8 @@ extension AppAPI: TargetType {
             return "/json/withdraw/\(assetId).json"
         case let .topUpAnnounce(assetId):
             return "/json/deposit/\(assetId).json"
+        case .precisionSetting:
+            return "/json/pairs.json"
         }
     }
 
@@ -154,7 +158,7 @@ extension AppAPI: TargetType {
         case .items:
             return ["lang": lang]
         case let .marketlist(base):
-            return ["base" : base]
+            return ["base": base]
         default:
             return [:]
         }
