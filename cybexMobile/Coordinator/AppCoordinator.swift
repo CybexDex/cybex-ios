@@ -97,7 +97,7 @@ class AppCoordinator {
 
         if let status = AppConfiguration.shared.enableSetting.value, status.isETOEnabled == true {
             etoCoordinator.pushVC(ETOCoordinator.self, animated: false, context: nil)
-            self.container = [homeCoordinator, tradeCoordinator, etoCoordinator, accountCoordinator] as [NavCoordinator]
+            self.container = [comprehensiveCoordinator, homeCoordinator, tradeCoordinator, etoCoordinator, accountCoordinator] as [NavCoordinator]
             rootVC.viewControllers = [comprehensive, home, trade, eto, account]
         } else {
             self.container = [comprehensiveCoordinator, homeCoordinator, tradeCoordinator, accountCoordinator] as [NavCoordinator]

@@ -39,7 +39,7 @@ class GameViewController: BaseViewController {
     }
 
     func setupData() {
-        if let url = Bundle.main.url(forResource: "portal", withExtension: "html") {
+        if let url = Bundle.main.url(forResource: "game", withExtension: "html") {
             self.setupLoadUrl(url)
         }
     }
@@ -54,7 +54,7 @@ class GameViewController: BaseViewController {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.init("openURL"), object: nil, queue: nil) { [weak self](notification) in
             guard let `self` = self else { return }
             main {
-                if let objc = notification.object as? [String: String], let url = objc["url"] {
+                if let objc = notification.object as? [String: String], let url = objc["url"], url.count != 0 {
                     self.setupLoadUrl(URL(string: url)!)
                 }
             }

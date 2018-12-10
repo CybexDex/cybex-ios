@@ -84,13 +84,13 @@ class SettingViewController: BaseViewController {
         } else if sender == help {
             self.coordinator?.openHelpWebView()
         } else if sender == theme {
-            self.coordinator?.openSettingDetail(type: .theme)
-        } else if sender == environment {
+//            self.coordinator?.openSettingDetail(type: .theme)
             self.coordinator?.openGame()
-            
-//            self.coordinator?.changeEnveronment({ isTest in
-//                self.showToastBox(true, message: isTest == true ? "当前为测试环境" : "当前为正式环境")
-//            })
+
+        } else if sender == environment {
+            self.coordinator?.changeEnveronment({ isTest in
+                self.showToastBox(true, message: isTest == true ? "当前为测试环境" : "当前为正式环境")
+            })
         }
     }
     

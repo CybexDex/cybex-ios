@@ -363,6 +363,10 @@
 		72D5829C219C18F800BB9842 /* CBKKindView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D5829A219C18F700BB9842 /* CBKKindView.xib */; };
 		72D5829F219C196200BB9842 /* DropDownBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D5829D219C196100BB9842 /* DropDownBoxView.xib */; };
 		72D582A0219C196200BB9842 /* DropDownBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D5829E219C196200BB9842 /* DropDownBoxView.swift */; };
+		72D68CB221BE44B60014138F /* game.html in Resources */ = {isa = PBXBuildFile; fileRef = 72D68CAE21BE44B50014138F /* game.html */; };
+		72D68CB321BE44B60014138F /* css in Resources */ = {isa = PBXBuildFile; fileRef = 72D68CAF21BE44B50014138F /* css */; };
+		72D68CB421BE44B60014138F /* img in Resources */ = {isa = PBXBuildFile; fileRef = 72D68CB021BE44B60014138F /* img */; };
+		72D68CB521BE44B60014138F /* js in Resources */ = {isa = PBXBuildFile; fileRef = 72D68CB121BE44B60014138F /* js */; };
 		72D9DD58210EB60F00963915 /* Periscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9DD56210EB60E00963915 /* Periscope.swift */; };
 		72D9DD59210EB60F00963915 /* PeriscopeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D9DD57210EB60E00963915 /* PeriscopeCell.xib */; };
 		72DBCA652138D94200905303 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA622138D94200905303 /* ContainerView.swift */; };
@@ -388,7 +392,6 @@
 		72F817C521BA58F100575F56 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C121BA58F100575F56 /* GameViewController.swift */; };
 		72F817C621BA58F100575F56 /* GameReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C221BA58F100575F56 /* GameReducers.swift */; };
 		72F817C921BA590800575F56 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C821BA590800575F56 /* GameModel.swift */; };
-		72F817CB21BA5AEE00575F56 /* portal.html in Resources */ = {isa = PBXBuildFile; fileRef = 72F817CA21BA5AEE00575F56 /* portal.html */; };
 		72F817CE21BA635600575F56 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817CD21BA635600575F56 /* GameManager.swift */; };
 		72FF06B6216F4CD2003B09A8 /* ComprehensiveCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8E92151F9DB00FBB3CB /* ComprehensiveCoordinator.swift */; };
 		730229A1212E52B50073D5CE /* ETOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730229A0212E52B50073D5CE /* ETOManager.swift */; };
@@ -1212,6 +1215,10 @@
 		72D5829A219C18F700BB9842 /* CBKKindView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBKKindView.xib; sourceTree = "<group>"; };
 		72D5829D219C196100BB9842 /* DropDownBoxView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownBoxView.xib; sourceTree = "<group>"; };
 		72D5829E219C196200BB9842 /* DropDownBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownBoxView.swift; sourceTree = "<group>"; };
+		72D68CAE21BE44B50014138F /* game.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = game.html; path = ../../../dapp_wrap/game/game.html; sourceTree = "<group>"; };
+		72D68CAF21BE44B50014138F /* css */ = {isa = PBXFileReference; lastKnownFileType = folder; name = css; path = ../../../dapp_wrap/game/css; sourceTree = "<group>"; };
+		72D68CB021BE44B60014138F /* img */ = {isa = PBXFileReference; lastKnownFileType = folder; name = img; path = ../../../dapp_wrap/game/img; sourceTree = "<group>"; };
+		72D68CB121BE44B60014138F /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; name = js; path = ../../../dapp_wrap/game/js; sourceTree = "<group>"; };
 		72D9DD56210EB60E00963915 /* Periscope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Periscope.swift; sourceTree = "<group>"; };
 		72D9DD57210EB60E00963915 /* PeriscopeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeriscopeCell.xib; sourceTree = "<group>"; };
 		72DBCA622138D94200905303 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
@@ -1237,7 +1244,6 @@
 		72F817C121BA58F100575F56 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		72F817C221BA58F100575F56 /* GameReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReducers.swift; sourceTree = "<group>"; };
 		72F817C821BA590800575F56 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
-		72F817CA21BA5AEE00575F56 /* portal.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = portal.html; sourceTree = "<group>"; };
 		72F817CD21BA635600575F56 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		730229A0212E52B50073D5CE /* ETOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOManager.swift; sourceTree = "<group>"; };
 		7307A8FF212518DB00BD6444 /* LGButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGButton.swift; sourceTree = "<group>"; };
@@ -2632,6 +2638,17 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		72D68CAD21BE43060014138F /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				72D68CAF21BE44B50014138F /* css */,
+				72D68CAE21BE44B50014138F /* game.html */,
+				72D68CB021BE44B60014138F /* img */,
+				72D68CB121BE44B60014138F /* js */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
 		72D9DD55210EB5FC00963915 /* ActionSheetViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3775,7 +3792,7 @@
 				7398BEC22181C1AE004C042E /* R.generated.swift */,
 				72C844D1214A3EFE0078448C /* cn_dark.html */,
 				72C844D9214B50920078448C /* cn_light.html */,
-				72F817CA21BA5AEE00575F56 /* portal.html */,
+				72D68CAD21BE43060014138F /* Game */,
 				E9385075C042AC240E36D35EBA28F5B7 /* cybexMobile-Bridging-Header.h */,
 				73335AC821476AA700CEF254 /* cybexMobile.entitlements */,
 				72C844D6214A3EFF0078448C /* en_dark.html */,
@@ -4291,6 +4308,7 @@
 				7267DA2321363BEE004AF9AF /* ETOHomeView.xib in Resources */,
 				221EC253210609B20059F856 /* TransferView.xib in Resources */,
 				082F8D06A9EF700C8EB3A8BC62D8F1A8 /* LockupAssetsCell.xib in Resources */,
+				72D68CB221BE44B60014138F /* game.html in Resources */,
 				089679AF63200358A2B8B9059A9824A0 /* LockupAssetsSectionView.xib in Resources */,
 				72C844D8214A3F000078448C /* en_dark.html in Resources */,
 				72199D742104502800575226 /* Recode.storyboard in Resources */,
@@ -4307,7 +4325,6 @@
 				72B42E8421774CFD00587403 /* DespositNameView.xib in Resources */,
 				7307A92B212518DC00BD6444 /* map-icons.ttf in Resources */,
 				ED699787C0E757F3F46A0E2B5D6BF947 /* OpenedOrdersCell.xib in Resources */,
-				72F817CB21BA5AEE00575F56 /* portal.html in Resources */,
 				6C1820B3CDFFEBD3CF821B6CDB3F4691 /* OpenedOrdersHeaderView.xib in Resources */,
 				F61A4020689A1596B862EDC3AD38A3BC /* OpenedOrdersView.xib in Resources */,
 				8809F4832AD9F2B07F73CDE8C8D41240 /* OrderBookCell.xib in Resources */,
@@ -4315,12 +4332,14 @@
 				72D9DD59210EB60F00963915 /* PeriscopeCell.xib in Resources */,
 				3385671DD5F1B6ED220AB916F7859ECF /* OrderBookContentView.xib in Resources */,
 				724C5D4321538ABD00FF1DE7 /* ComprehensiveView.xib in Resources */,
+				72D68CB521BE44B60014138F /* js in Resources */,
 				813174FFD07A88030F54BD2F9B24E36C /* PairCardCell.xib in Resources */,
 				7267DA1B21351D5A004AF9AF /* ETOProjectCell.xib in Resources */,
 				3CB09937C6D6A05CD97DF278F0EFF936 /* PairCardView.xib in Resources */,
 				FDFA2C6266D88980D2E29CCFF6D98441 /* PairDetailView.xib in Resources */,
 				0ED42A2E6A4E84AEF46AFE2E669A6EC7 /* PairListHorizantalView.xib in Resources */,
 				165A81AE46EF4E77603EE09ED7D761D7 /* PairRechargeView.xib in Resources */,
+				72D68CB421BE44B60014138F /* img in Resources */,
 				728C2816215A3A910097840A /* RecordChooseCellView.xib in Resources */,
 				6D56D7D9D38BE89CB6BD8D314E0E6370 /* QuotesTitleView.xib in Resources */,
 				ACE7BA86B00F181D50D549AA91EED07E /* RechargeItemView.xib in Resources */,
@@ -4382,6 +4401,7 @@
 				225746EA21073E8C0017FA1A /* PickerView.xib in Resources */,
 				724C5D4F2153956900FF1DE7 /* ComprehensiveItemView.xib in Resources */,
 				3B0EB662210314A600F19C31 /* Account.storyboard in Resources */,
+				72D68CB321BE44B60014138F /* css in Resources */,
 				3BF5B7EC2135001B00E8BFC9 /* ETODetailIntroView.xib in Resources */,
 				72199DAB2104680900575226 /* TransferContentView.xib in Resources */,
 				72C844DC214B50930078448C /* en_light.html in Resources */,
