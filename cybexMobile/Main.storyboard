@@ -1384,6 +1384,39 @@ Cg
             </objects>
             <point key="canvasLocation" x="1817" y="2885"/>
         </scene>
+        <!--Game View Controller-->
+        <scene sceneID="tJz-a7-2xJ">
+            <objects>
+                <viewController storyboardIdentifier="GameViewController" id="kVG-gc-F4U" customClass="GameViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ey0-Ak-277">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bgv-nz-ppG">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="kVG-gc-F4U" id="ycB-Kr-QgE"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bgv-nz-ppG" firstAttribute="top" secondItem="QyO-Js-IN8" secondAttribute="top" id="LHR-WW-ydu"/>
+                            <constraint firstItem="QyO-Js-IN8" firstAttribute="bottom" secondItem="bgv-nz-ppG" secondAttribute="bottom" id="Mr5-Xa-lHG"/>
+                            <constraint firstItem="bgv-nz-ppG" firstAttribute="leading" secondItem="QyO-Js-IN8" secondAttribute="leading" id="d3k-AM-xX0"/>
+                            <constraint firstItem="QyO-Js-IN8" firstAttribute="trailing" secondItem="bgv-nz-ppG" secondAttribute="trailing" id="yUk-K2-Ccf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QyO-Js-IN8"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="bgv-nz-ppG" id="bVI-aV-Zpa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K0J-1C-klK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4092" y="2117"/>
+        </scene>
     </scenes>
     <resources>
         <image name="check_complete" width="24" height="24"/>

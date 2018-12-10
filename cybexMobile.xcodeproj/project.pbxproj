@@ -383,6 +383,13 @@
 		72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A5220F4611500CEAFF6 /* WithdrawView.swift */; };
 		72EC6A5920F4612200CEAFF6 /* RechargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72EC6A5720F4612100CEAFF6 /* RechargeView.swift */; };
 		72EC6A5A20F4612200CEAFF6 /* RechargeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72EC6A5820F4612200CEAFF6 /* RechargeView.xib */; };
+		72F817C321BA58F100575F56 /* GameCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817BF21BA58F100575F56 /* GameCoordinator.swift */; };
+		72F817C421BA58F100575F56 /* GameActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C021BA58F100575F56 /* GameActions.swift */; };
+		72F817C521BA58F100575F56 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C121BA58F100575F56 /* GameViewController.swift */; };
+		72F817C621BA58F100575F56 /* GameReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C221BA58F100575F56 /* GameReducers.swift */; };
+		72F817C921BA590800575F56 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C821BA590800575F56 /* GameModel.swift */; };
+		72F817CB21BA5AEE00575F56 /* portal.html in Resources */ = {isa = PBXBuildFile; fileRef = 72F817CA21BA5AEE00575F56 /* portal.html */; };
+		72F817CE21BA635600575F56 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817CD21BA635600575F56 /* GameManager.swift */; };
 		72FF06B6216F4CD2003B09A8 /* ComprehensiveCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8E92151F9DB00FBB3CB /* ComprehensiveCoordinator.swift */; };
 		730229A1212E52B50073D5CE /* ETOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730229A0212E52B50073D5CE /* ETOManager.swift */; };
 		7307A91B212518DC00BD6444 /* LGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7307A8FF212518DB00BD6444 /* LGButton.swift */; };
@@ -1225,6 +1232,13 @@
 		72EC6A5220F4611500CEAFF6 /* WithdrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WithdrawView.swift; sourceTree = "<group>"; };
 		72EC6A5720F4612100CEAFF6 /* RechargeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RechargeView.swift; sourceTree = "<group>"; };
 		72EC6A5820F4612200CEAFF6 /* RechargeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RechargeView.xib; sourceTree = "<group>"; };
+		72F817BF21BA58F100575F56 /* GameCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCoordinator.swift; sourceTree = "<group>"; };
+		72F817C021BA58F100575F56 /* GameActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameActions.swift; sourceTree = "<group>"; };
+		72F817C121BA58F100575F56 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		72F817C221BA58F100575F56 /* GameReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReducers.swift; sourceTree = "<group>"; };
+		72F817C821BA590800575F56 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		72F817CA21BA5AEE00575F56 /* portal.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = portal.html; sourceTree = "<group>"; };
+		72F817CD21BA635600575F56 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		730229A0212E52B50073D5CE /* ETOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOManager.swift; sourceTree = "<group>"; };
 		7307A8FF212518DB00BD6444 /* LGButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGButton.swift; sourceTree = "<group>"; };
 		7307A901212518DB00BD6444 /* FontAwesome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontAwesome.swift; sourceTree = "<group>"; };
@@ -2678,6 +2692,35 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		72F817BE21BA58E500575F56 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				72F817CC21BA633900575F56 /* GameManager */,
+				72F817C721BA58F900575F56 /* GameModel */,
+				72F817BF21BA58F100575F56 /* GameCoordinator.swift */,
+				72F817C021BA58F100575F56 /* GameActions.swift */,
+				72F817C121BA58F100575F56 /* GameViewController.swift */,
+				72F817C221BA58F100575F56 /* GameReducers.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		72F817C721BA58F900575F56 /* GameModel */ = {
+			isa = PBXGroup;
+			children = (
+				72F817C821BA590800575F56 /* GameModel.swift */,
+			);
+			path = GameModel;
+			sourceTree = "<group>";
+		};
+		72F817CC21BA633900575F56 /* GameManager */ = {
+			isa = PBXGroup;
+			children = (
+				72F817CD21BA635600575F56 /* GameManager.swift */,
+			);
+			path = GameManager;
+			sourceTree = "<group>";
+		};
 		7307A8F8212518DB00BD6444 /* LGButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -3732,6 +3775,7 @@
 				7398BEC22181C1AE004C042E /* R.generated.swift */,
 				72C844D1214A3EFE0078448C /* cn_dark.html */,
 				72C844D9214B50920078448C /* cn_light.html */,
+				72F817CA21BA5AEE00575F56 /* portal.html */,
 				E9385075C042AC240E36D35EBA28F5B7 /* cybexMobile-Bridging-Header.h */,
 				73335AC821476AA700CEF254 /* cybexMobile.entitlements */,
 				72C844D6214A3EFF0078448C /* en_dark.html */,
@@ -3964,6 +4008,7 @@
 		F189D4AC3A5BB2DB266277BAD8CB0EA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				72F817BE21BA58E500575F56 /* Game */,
 				1957BC4603D51BA58EA334581171C0AD /* Account */,
 				72E2A8E62151F8E900FBB3CB /* Comprehensive */,
 				7267DA0121350317004AF9AF /* ETO */,
@@ -4262,6 +4307,7 @@
 				72B42E8421774CFD00587403 /* DespositNameView.xib in Resources */,
 				7307A92B212518DC00BD6444 /* map-icons.ttf in Resources */,
 				ED699787C0E757F3F46A0E2B5D6BF947 /* OpenedOrdersCell.xib in Resources */,
+				72F817CB21BA5AEE00575F56 /* portal.html in Resources */,
 				6C1820B3CDFFEBD3CF821B6CDB3F4691 /* OpenedOrdersHeaderView.xib in Resources */,
 				F61A4020689A1596B862EDC3AD38A3BC /* OpenedOrdersView.xib in Resources */,
 				8809F4832AD9F2B07F73CDE8C8D41240 /* OrderBookCell.xib in Resources */,
@@ -4868,6 +4914,7 @@
 				8C20E983876A75B5AF1B2B1CC5B7FA6C /* HomePairCell.swift in Sources */,
 				3D400D51F52AE73941E3134046491BA5 /* HomePairView.swift in Sources */,
 				9ED2AB33B2CDBB57B605BE26C2D455C2 /* HomeReducers.swift in Sources */,
+				72F817C621BA58F100575F56 /* GameReducers.swift in Sources */,
 				72B42E7C217723DD00587403 /* PairDetailDateViewViewAdapter.swift in Sources */,
 				9F391D11D2B1C4522215117016EAA2F7 /* HomeSectionHeaderView.swift in Sources */,
 				733714B92122D2CF00B2ED90 /* TransferAddressHomeTableViewCell.swift in Sources */,
@@ -4899,9 +4946,11 @@
 				72D58298219C18B100BB9842 /* CBKMessageView.swift in Sources */,
 				80258D6F4C94ACC78C20B5ACE8BEAD2F /* LockupAssetsReducers.swift in Sources */,
 				85D46A1F0D3BBF12CF72903D466D9239 /* LockupAssetsSectionView.swift in Sources */,
+				72F817C421BA58F100575F56 /* GameActions.swift in Sources */,
 				B2B05000B81768D84E3FBE9B46392133 /* LockupAssetsView.swift in Sources */,
 				7267DA0821350327004AF9AF /* ETOViewController.swift in Sources */,
 				221EC2352105B1930059F856 /* TitleTextView.swift in Sources */,
+				72F817C521BA58F100575F56 /* GameViewController.swift in Sources */,
 				728C280F215A3A540097840A /* RecordChooseCell.swift in Sources */,
 				6F7F4B578F7317ED8FCA3AC5D30323EB /* LockupAssetsViewController.swift in Sources */,
 				8DFD3022184642B3A8D4D8A8FE04F655 /* LockupProgressView.swift in Sources */,
@@ -4965,6 +5014,7 @@
 				019AC681342BD1E978777A6A503E27B6 /* OrderBookActions.swift in Sources */,
 				7307A931212518F300BD6444 /* BaseView.swift in Sources */,
 				7267DA0621350327004AF9AF /* ETOCoordinator.swift in Sources */,
+				72F817C921BA590800575F56 /* GameModel.swift in Sources */,
 				72E3A4CC214560580083E417 /* CybexWaitingView.swift in Sources */,
 				72DBCA7621391A4300905303 /* CybexWebViewController.swift in Sources */,
 				73539BC82178A7CB008395AC /* AsyncOperation.swift in Sources */,
@@ -4984,6 +5034,7 @@
 				7307A926212518DC00BD6444 /* ThemifyIcon.swift in Sources */,
 				72D58291219C188700BB9842 /* ChatDownInputViewAdapter.swift in Sources */,
 				73539C4E2179A210008395AC /* URLMatcher.swift in Sources */,
+				72F817C321BA58F100575F56 /* GameCoordinator.swift in Sources */,
 				73539C602179A282008395AC /* DNSPageStyle.swift in Sources */,
 				CEC8E5E6CEBF33DC5FED8EBCA2AFAAE7 /* PairCardCell.swift in Sources */,
 				737E596421A53CC7001199E4 /* CryptoError.swift in Sources */,
@@ -5017,6 +5068,7 @@
 				7333855D21BF9C620026765F /* AppDelegate+Monitor.swift in Sources */,
 				D1C63B5AAC5552A99528E306AC7F57E0 /* RechargeDetailReducers.swift in Sources */,
 				221C6181213940140021C007 /* ETORecordListViewViewAdapter.swift in Sources */,
+				72F817CE21BA635600575F56 /* GameManager.swift in Sources */,
 				EEC52B0701FDE9B489D4D61193C9B420 /* RechargeDetailViewController.swift in Sources */,
 				221EC251210609A10059F856 /* TransferView.swift in Sources */,
 				10F005E5213C8CAD146ED273B0CDF11F /* RechargeItemView.swift in Sources */,
