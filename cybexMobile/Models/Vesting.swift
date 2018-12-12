@@ -68,14 +68,14 @@ class PortfolioData {
         }
 
         // 获取对应CYB的个数
-        let cybDecimal = getAssetRMBPrice(balance.assetType) / AssetConfiguration.shared.rmbOf(asset: .CYB) * realAmount.decimal()
+        let cybDecimal = singleAssetRMBPrice(balance.assetType) / AssetConfiguration.shared.rmbOf(asset: .CYB) * realAmount.decimal()
 
         if AssetConfiguration.shared.rmbOf(asset: .CYB) == 0 {
             cybPrice = "- CYB"
             rbmPrice    = "-"
         } else {
             cybPrice = cybDecimal.string(digits: 5, roundingMode: .down) + " CYB"
-            rbmPrice    = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * getAssetRMBPrice(balance.assetType)).string(digits: 4, roundingMode: .down)
+            rbmPrice    = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * singleAssetRMBPrice(balance.assetType)).string(digits: 4, roundingMode: .down)
         }
 
     }
@@ -102,7 +102,7 @@ class MyPortfolioData {
             rbmPrice = "-"
 
         } else {
-            rbmPrice = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * getAssetRMBPrice(balance.assetType)).formatCurrency(digitNum: 4)
+            rbmPrice = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * singleAssetRMBPrice(balance.assetType)).formatCurrency(digitNum: 4)
         }
 
         //获取冻结资产

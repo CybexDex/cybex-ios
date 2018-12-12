@@ -391,7 +391,7 @@ class UserManager {
         if let limitOrder = limitOrder.value {
             for limitOrderValue in limitOrder {
                 let realAmount = getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
-                let priceValue = getAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
+                let priceValue = singleAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
                 decimallimitOrderValue += (realAmount * priceValue)
             }
         }
@@ -410,7 +410,7 @@ class UserManager {
         if let balances = balances.value {
             for balanceValue in balances {
                 let realAmount = getRealAmount(balanceValue.assetType, amount: balanceValue.balance)
-                let realRMBPrice = getAssetRMBPrice(balanceValue.assetType)
+                let realRMBPrice = singleAssetRMBPrice(balanceValue.assetType)
                 balanceValues += realAmount * realRMBPrice
             }
         }
@@ -422,7 +422,7 @@ class UserManager {
                                                        assetIDBName: (assetBInfo != nil) ? assetBInfo!.symbol.filterJade : "")
                 let isBuy = base == ((assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "")
                 let realAmount = getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
-                let priceValue = getAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
+                let priceValue = singleAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
                 balanceValues += realAmount * priceValue
                 if isBuy {
                     decimallimitOrderBuyValue += realAmount * priceValue

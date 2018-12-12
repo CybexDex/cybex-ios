@@ -272,7 +272,7 @@ class BusinessViewController: BaseViewController {
                     self.containerView.value.text = "≈¥0.0000"
                     return
             }
-            self.containerView.value.text = "≈¥" + (getAssetRMBPrice(baseInfo.id) * text.decimal()).string(digits: 4, roundingMode: .down)
+            self.containerView.value.text = "≈¥" + (singleAssetRMBPrice(baseInfo.id) * text.decimal()).string(digits: 4, roundingMode: .down)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         self.coordinator!.state.amount.subscribe(onNext: {[weak self] (_) in

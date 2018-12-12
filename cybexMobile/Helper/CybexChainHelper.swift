@@ -125,57 +125,6 @@ func calculateAssetRelation(assetIDAName: String, assetIDBName: String) -> (base
 
 }
 
-func getAssetRMBPrice(_ asset: String, base: String = "") -> Decimal {
-
-//    guard let assetInfo = appData.assetInfo[asset] else { return 0 }
-//    if MarketConfiguration.orderName.map({ $0.rawValue }).contains(assetInfo.symbol.filterJade) {
-//        if let data = AppConfiguration.shared.rmbPrices.filter({return $0.name == assetInfo.symbol.filterJade}).first {
-//            return data.value.decimal()
-//        }
-//        return 0
-//    }
-//
-//    let tickers = appData.tickerData.value.filter({ (ticker) -> Bool in
-//        if base == "" {
-//            return ticker.quote == asset
-//        } else {
-//            return ticker.quote == asset && ticker.base == base
-//        }
-//    })
-//
-//    guard var ticker = tickers.first else {
-//        return 0
-//    }
-//    var basePrice: Decimal = 0
-//    if tickers.count > 1 { //CYB USDT ETH BTC
-//        var baseAssets = MarketConfiguration.marketBaseAssets
-//        var indexs = [Int]()
-//        for item in tickers {
-//            if item.base == AssetConfiguration.CybexAsset.CYB.id {
-//                ticker = item
-//                indexs.append(0)
-//            } else if item.base == AssetConfiguration.USDT {
-//                ticker = item
-//                indexs.append(1)
-//            } else if item.base == AssetConfiguration.ETH {
-//                ticker = item
-//                indexs.append(2)
-//            } else if item.base == AssetConfiguration.BTC {
-//                ticker = item
-//                indexs.append(3)
-//            }
-//        }
-//        indexs = indexs.sorted(by: {$0 < $1})
-//        basePrice = getAssetRMBPrice(baseAssets[indexs[0]])
-//        ticker = tickers.filter({$0.base == baseAssets[indexs[0]] && $0.quote == asset}).first!
-//    } else {
-//        basePrice = getAssetRMBPrice(ticker.base)
-//    }
-
-//    return ticker.latest.decimal() * basePrice
-    return 0
-}
-
 func getRealAmount(_ id: String, amount: String) -> Decimal {
     guard let asset = appData.assetInfo[id] else {
         return 0

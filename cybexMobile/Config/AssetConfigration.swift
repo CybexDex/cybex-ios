@@ -42,7 +42,7 @@ class AssetConfiguration {
     static let shared = AssetConfiguration()
     var whiteListOfIds: BehaviorRelay<[String]> = BehaviorRelay(value: []) //白名单资产id
 
-    private var rmbPrices: [CybexAsset: Decimal] = [:] //assetid:rmb
+    private var baseRmbPrices: [CybexAsset: Decimal] = [:] //assetid:rmb
 
     private init() {
         _ = AppConfiguration.shared.rmbPrices.asObservable().subscribe(onNext: { (prices) in
@@ -51,7 +51,7 @@ class AssetConfiguration {
     }
 
     func rmbOf(asset: CybexAsset) -> Decimal {
-        return rmbPrices[asset] ?? 0
+        return baseRmbPrices[asset] ?? 0
     }
 }
 
@@ -63,8 +63,9 @@ extension AssetConfiguration.CybexAsset {
         if let index = ids.lastIndex(of: id) {
             self = all[index]
         }
-
-        return nil
+        else {
+            return nil
+        }
     }
 }
 
@@ -83,7 +84,7 @@ extension AssetConfiguration {
     func handlerRMBPrices(_ prices: [RMBPrices]) {
         for rmbPrice in prices {
             if let asset = CybexAsset(rawValue: rmbPrice.name), rmbPrice.value != "", rmbPrice.value != "0" {
-                rmbPrices[asset] = rmbPrice.value.decimal()
+                baseRmbPrices[asset] = rmbPrice.value.decimal()
             }
         }
     }

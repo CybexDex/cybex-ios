@@ -12,6 +12,7 @@ import JSONRPCKit
 import SwifterSwift
 import SwiftyJSON
 import SwiftyUserDefaults
+import RxCocoa
 
 enum NodeURLString: String {
     case shanghai = "wss://shanghai.51nebula.com"
@@ -65,6 +66,7 @@ class CybexWebSocketService: NSObject {
     static let shared = CybexWebSocketService()
 
     public let canSendMessage = Delegate<(), Void>()
+    let canSendMessageReactive: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
     private override init() {
         super.init()
@@ -169,6 +171,7 @@ class CybexWebSocketService: NSObject {
             }
         }
         self.queue.isSuspended = true
+        canSendMessageReactive.accept(false)
     }
 
     func send<Request: JSONRPCKit.Request>(request: Request, priority: Operation.QueuePriority = .normal) {
@@ -335,6 +338,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
 
             self.queue.isSuspended = false
 
+            canSendMessageReactive.accept(true)
             canSendMessage.call()
         }
 

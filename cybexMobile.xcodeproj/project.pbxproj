@@ -438,6 +438,9 @@
 		7333856C21BFA7BB0026765F /* CybexChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333856B21BFA7BB0026765F /* CybexChainHelper.swift */; };
 		7333856F21BFA8210026765F /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333856E21BFA8210026765F /* AppHelper.swift */; };
 		7333857121BFC7320026765F /* TradeConfigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333857021BFC7320026765F /* TradeConfigration.swift */; };
+		7333857321C0BD190026765F /* MarketHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333857221C0BD190026765F /* MarketHelper.swift */; };
+		7333857521C0BD380026765F /* AssetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333857421C0BD380026765F /* AssetHelper.swift */; };
+		7333857721C0BD4F0026765F /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333857621C0BD4F0026765F /* UserHelper.swift */; };
 		7336B79B214F569F0086A9DF /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7336B79A214F569E0086A9DF /* XLPagerTabStrip.framework */; };
 		7336B79F214F5ABE0086A9DF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CF75C7E63B1305DDDE74491D7E5C9AB /* Localizable.strings */; };
 		7336B7BD214F717E0086A9DF /* ESTabBarController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7336B7BC214F717D0086A9DF /* ESTabBarController.framework */; };
@@ -1271,6 +1274,9 @@
 		7333856B21BFA7BB0026765F /* CybexChainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexChainHelper.swift; sourceTree = "<group>"; };
 		7333856E21BFA8210026765F /* AppHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
 		7333857021BFC7320026765F /* TradeConfigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeConfigration.swift; sourceTree = "<group>"; };
+		7333857221C0BD190026765F /* MarketHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketHelper.swift; sourceTree = "<group>"; };
+		7333857421C0BD380026765F /* AssetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetHelper.swift; sourceTree = "<group>"; };
+		7333857621C0BD4F0026765F /* UserHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
 		7336B799214F55160086A9DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7336B79A214F569E0086A9DF /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XLPagerTabStrip.framework; path = Carthage/Build/iOS/XLPagerTabStrip.framework; sourceTree = "<group>"; };
 		7336B79E214F5A310086A9DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -3819,7 +3825,10 @@
 		D81AB8D8584B64ADAFF37AA7BF174C4D /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				7333857621C0BD4F0026765F /* UserHelper.swift */,
+				7333857221C0BD190026765F /* MarketHelper.swift */,
 				7333856B21BFA7BB0026765F /* CybexChainHelper.swift */,
+				7333857421C0BD380026765F /* AssetHelper.swift */,
 				7333856E21BFA8210026765F /* AppHelper.swift */,
 				1FD9516DB7B3ECF8651E0B2A8702D273 /* Tools.swift */,
 				E58821AB0DBC6F8D25C15C288A13EEC6 /* Utils.swift */,
@@ -4645,6 +4654,7 @@
 				738FCEE9214909CC0042331A /* ZYNetworkAccessibity.m in Sources */,
 				53079FD90D2B1B6BCB3863CB53111FAA /* Account.swift in Sources */,
 				B53165C099917599B9638053318C729A /* AccountAssetOperationView.swift in Sources */,
+				7333857521C0BD380026765F /* AssetHelper.swift in Sources */,
 				221C6176213926570021C007 /* ETORecordListActions.swift in Sources */,
 				305DB17562E3D02F04E0122C1C4674A4 /* AccountAssetOperationsItemView.swift in Sources */,
 				7333855921BF9B0E0026765F /* AppDelegate+UserSetting.swift in Sources */,
@@ -4837,6 +4847,7 @@
 				7307A924212518DC00BD6444 /* SwiftIconFont.swift in Sources */,
 				72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */,
 				7267DA1D2135244A004AF9AF /* ETO.swift in Sources */,
+				7333857321C0BD190026765F /* MarketHelper.swift in Sources */,
 				221EC24F2105CF310059F856 /* TransferReducers.swift in Sources */,
 				7333855721BF9ABF0026765F /* AppDelegate+Log.swift in Sources */,
 				72DBCA7721391A4300905303 /* CybexWebReducers.swift in Sources */,
@@ -4871,6 +4882,7 @@
 				A91E01A343738BBD63B5015631CE57A7 /* MarketCoordinator.swift in Sources */,
 				729B86A52154C7BB00C6E0E4 /* ComprehensiveBlockItemsViewAdapter.swift in Sources */,
 				46CD7B2787FFCD483A5A723E52C54292 /* MarketReducers.swift in Sources */,
+				7333857721C0BD4F0026765F /* UserHelper.swift in Sources */,
 				221EC24D2105CF310059F856 /* TransferActions.swift in Sources */,
 				73539C5D2179A282008395AC /* DNSPageTitleView.swift in Sources */,
 				6B64E2B67481907BE9CFCAE4FCF346A6 /* MarketViewController.swift in Sources */,

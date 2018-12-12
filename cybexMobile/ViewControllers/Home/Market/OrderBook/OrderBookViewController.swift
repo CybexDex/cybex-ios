@@ -130,7 +130,7 @@ class OrderBookViewController: BaseViewController {
                 return
             }
 
-            self.tradeView.rmbPrice.text = "≈¥" + getAssetRMBPrice(pair.quote, base: pair.base).string(digits: 4, roundingMode: .down)
+            self.tradeView.rmbPrice.text = "≈¥" + singleAssetRMBPrice(pair.quote).string(digits: 4, roundingMode: .down)
         }
     }
 }

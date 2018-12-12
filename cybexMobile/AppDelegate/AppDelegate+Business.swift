@@ -22,10 +22,14 @@ extension AppDelegate {
             AppConfiguration.shared.startFetchOuterPrice()
         }).disposed(by: disposeBag)
 
-        CybexWebSocketService.shared.canSendMessage.delegate(on: self) { (self, _) in
-            appCoodinator.getLatestData()
-        }
-
+        Observable.combineLatest(
+            MarketConfiguration.shared.marketPairs.skip(1).asObservable(),
+            CybexWebSocketService.shared.canSendMessageReactive.skip(1).asObservable()
+            ).subscribe(onNext: { (pairs, canSend) in
+                if !pairs.isEmpty, canSend {
+                    appCoodinator.getLatestData()
+                }
+            }).disposed(by: disposeBag)
     }
 
     func monitorNetworkOfSetting() {

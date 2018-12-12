@@ -32,7 +32,7 @@ func lockupAssteToLockUpAssetsDate(datas: [LockUpAssetsMData]) -> LockUpAssetsVM
             let name = assetsInfo.symbol
 
             count = getRealAmount(quote, amount: amount).string(digits: assetsInfo.precision, roundingMode: .down)
-            let priceAmount = getAssetRMBPrice(quote) * getRealAmount(quote, amount: amount)
+            let priceAmount = singleAssetRMBPrice(quote) * getRealAmount(quote, amount: amount)
 
             price = "≈¥" + priceAmount.string(digits: 4, roundingMode: .down)
             
