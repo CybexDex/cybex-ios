@@ -12,6 +12,8 @@ import RxCocoa
 import ReSwift
 import Localize_Swift
 import SwifterSwift
+import SwiftyUserDefaults
+
 
 class ComprehensiveViewController: BaseViewController {
 
@@ -158,15 +160,30 @@ class ComprehensiveViewController: BaseViewController {
 
 extension ComprehensiveViewController {
     @objc func comprehensiveItemViewDidClicked(_ data: [String: Any]) {
-        guard let middleItems = self.coordinator?.state.middleItems.value, let index = data["index"] as? Int else { return }
+        guard let middleItems = self.coordinator?.state.middleItems.value,
+            let index = data["index"] as? Int else { return }
+        
+        if index == 0 {
+            if Defaults[.hasCode] == true {
+                self.coordinator?.openGame()
+                return
+            }
+
+            let titleName = R.string.localizable.eto_invite_code_title.key.localized()
+            self.showPasswordBox(titleName,middleType: CybexTextView.TextViewType.code)
+            return
+        }
+        
         let midlleItem = middleItems[index]
         openUrl(midlleItem.link)
     }
+    
     @objc func ETOHomeBannerViewDidClicked(_ data: [String: Any]) {
         guard let banners = self.coordinator?.state.banners.value, let index = data["data"] as? Int  else { return }
         let banner = banners[index]
         openUrl(banner.link)
     }
+    
     @objc func announceScrollViewDidClicked(_ data: [String: Any]) {
         guard let announces = self.coordinator?.state.announces.value, let index = data["index"] as? Int, index >= 0, index < announces.count else {
             return
@@ -191,6 +208,17 @@ extension ComprehensiveViewController {
             if url.contains("http://") || url.contains("https://") {
                 self.coordinator?.openWebVCUrl(url)
             }
+        }
+    }
+    
+    
+    override func codePassed(_ passed: Bool) {
+        if passed {
+            Defaults[.hasCode] = true
+            self.coordinator?.openGame()
+        }
+        else {
+            self.showToastBox(false, message: R.string.localizable.eto_invite_code_error.key.localized())
         }
     }
 }

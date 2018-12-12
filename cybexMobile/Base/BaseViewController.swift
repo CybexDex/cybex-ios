@@ -50,7 +50,6 @@ class BaseViewController: UIViewController {
         self.view.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]
 
         configureObserveState()
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -249,15 +248,25 @@ extension UIViewController: ShowManagerDelegate {
     @objc func passwordPassed(_ passed: Bool) {
 
     }
-
+    
     @objc func passwordDetecting() {
 
     }
+    
+    @objc func codePassed(_ passed: Bool) {
+        
+    }
 
-    func returnUserPassword(_ sender: String) {
+    func returnUserPassword(_ sender: String, textView: CybexTextView) {
         ShowToastManager.shared.hide()
+        if textView.viewType == .code {
+            self.codePassed(GameModel.codeArray.contains(sender))
+            return
+        }
+        
+        
         passwordDetecting()
-
+        
         if let name = UserManager.shared.name.value {
             UserManager.shared.unlock(name, password: sender) {[weak self] (success, _) in
                 self?.passwordPassed(success)

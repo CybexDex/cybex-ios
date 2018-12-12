@@ -18,7 +18,7 @@ protocol Views {
 }
 
 @objc protocol ShowManagerDelegate {
-    func returnUserPassword(_ sender: String)
+    func returnUserPassword(_ sender: String, textView: CybexTextView)
     @objc func returnEnsureAction()
     @objc func returnEnsureImageAction()
     @objc func cancelImageAction(_ sender: CybexTextView)
@@ -341,8 +341,12 @@ extension ShowToastManager: CybexTextViewDelegate {
         if let type = sender.viewType, type == .time {
             self.updateCybexTextViewType(sender)
             self.delegate?.returnInviteCode(password)
-        } else {
-            self.delegate?.returnUserPassword(password)
+        }
+        else if let type = sender.viewType, type == .code {
+            self.delegate?.returnUserPassword(password, textView: sender)
+        }
+        else {
+            self.delegate?.returnUserPassword(password, textView: sender)
         }
     }
 

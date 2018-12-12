@@ -14,54 +14,83 @@ import PromiseKit
 
 @objc protocol GameDelegate: JSExport {
     func login() -> String
-    
     func redirected(_ url: String)
-    func collect(_ account: String ,_ amount: String, _ asset: String, _ fee: String, _ feeAsset: String)
+    func collect(_ account: String ,_ feeAsset: String, _ asset: String, _ fee: String, _ amount: String)
+}
+
+enum CallBackMethodName: String {
+    case loginCallback
+    case collectCallback
+}
+
+protocol GameModelCallBackDelegate {
+    func lockAccount()
+    func openURL(_ url: String)
 }
 
 class GameModel: NSObject, GameDelegate {
     
     var context: JSContext?
+    var delegate: GameModelCallBackDelegate?
+    var viewController: BaseViewController!
+    
+    static let codeArray = ["CYBEXGAMECENTER",
+                            "GAMECENTERCYBEX",
+                            "CENTERCYBEXGAME",
+                            "GAMECYBEXCENTER",
+                            "CYBEXCENTERGAME",
+                            "CENTERGAMECYBEX",
+                            "AMEERCYBEXGCENT",
+                            "BEXGAMECYCENTER",
+                            "TERCYBEXGAMECEN",
+                            "EXCENTERMECYBGA"]
+    
+    func signerCallBack() -> String {
+        guard let accountName = UserManager.shared.name.value, let balances = UserManager.shared.balances.value else { return "" }
+        var usdtAmount: Decimal = 0
+        var cybAmount: Decimal = 0
+        if let balance = balances.filter({ return $0.assetType == AssetConfiguration.USDT}).first,
+            let usdtInfo = appData.assetInfo[balance.assetType] {
+            usdtAmount = balance.balance.decimal() / pow(10, usdtInfo.precision)
+        }
+        if let cybBalance = balances.filter({ return $0.assetType == AssetConfiguration.CYB }).first,
+            let cybInfo = appData.assetInfo[cybBalance.assetType] {
+            cybAmount = cybBalance.balance.decimal() / pow(10, cybInfo.precision)
+        }
+        let expiration = Date().timeIntervalSince1970 + AppConfiguration.TransactionExpiration
+        let signer = BitShareCoordinator.getRecodeLoginOperation(accountName,
+                                                                 asset: "",
+                                                                 fundType: "",
+                                                                 size: Int32(0),
+                                                                 offset: Int32(0),
+                                                                 expiration: Int32(expiration))!
+        let result = ["op": [
+            "accountName": accountName,
+            "expiration": Int32(expiration)
+            ],
+                      "signer": JSON(parseJSON: signer)["signer"].stringValue,
+                      "balance": usdtAmount.stringValue,
+                      "fee_balance": cybAmount.stringValue] as [String : Any]
+        return JSON(result).rawString() ?? ""
+    }
+    
+    func loginCallBack() {
+        self.context?.objectForKeyedSubscript(CallBackMethodName.loginCallback.rawValue)?.call(withArguments: [self.signerCallBack()])
+    }
     
     func login() -> String {
         if !UserManager.shared.isLocked {
-            guard let accountName = UserManager.shared.name.value, let balances = UserManager.shared.balances.value else { return ""}
-            var usdtAmount: Decimal = 0
-            var cybAmount: Decimal = 0
-            if let balance = balances.filter({ return $0.assetType == AssetConfiguration.USDT}).first,
-                let usdtInfo = appData.assetInfo[balance.assetType] {
-                usdtAmount = balance.balance.decimal() / pow(10, usdtInfo.precision)
-            }
-            if let cybBalance = balances.filter({ return $0.assetType == AssetConfiguration.CYB }).first,
-                let cybInfo = appData.assetInfo[cybBalance.assetType] {
-                cybAmount = cybBalance.balance.decimal() / pow(10, cybInfo.precision)
-            }
-            let expiration = Date().timeIntervalSince1970 + AppConfiguration.TransactionExpiration
-            let signer = BitShareCoordinator.getRecodeLoginOperation(accountName,
-                                                                     asset: "",
-                                                                     fundType: "",
-                                                                     size: Int32(0),
-                                                                     offset: Int32(0),
-                                                                     expiration: Int32(expiration))!
-            let a = ["op": [
-                "accountName": accountName,
-                "expiration": Int32(expiration)
-                ],
-                     "signer": JSON(parseJSON: signer)["signer"].stringValue,
-                     "balance": usdtAmount.stringValue,
-                     "fee_balance": cybAmount.stringValue] as [String : Any]
-            return JSON(a).rawString() ?? ""
+            return self.signerCallBack()
         }
-        
-        NotificationCenter.default.post(name: NSNotification.Name.init("lockAccount"), object: nil)
+        self.delegate?.lockAccount()
         return ""
     }
     
     func redirected(_ url: String) {
-        NotificationCenter.default.post(name: NSNotification.Name.init("openURL"), object: ["url": url])
+        self.delegate?.openURL(url)
     }
     
-    func collect(_ account: String ,_ amount: String, _ asset: String, _ fee: String, _ feeAsset: String) {
+    func collect(_ account: String ,_ feeAsset: String, _ asset: String, _ fee: String, _ amount: String) {
         let toAccount = account
         UserManager.shared.checkUserName(toAccount).done({[weak self] (exist) in
             main {
@@ -95,7 +124,7 @@ class GameModel: NSObject, GameDelegate {
                                         let withdrawRequest = BroadcastTransactionRequest(response: { [weak self](data) in
                                             guard let `self` = self, let context = self.context else { return }
                                             main {
-                                                context.objectForKeyedSubscript("collectCallback")?.call(withArguments: [String(describing: data) == "<null>" ? "0" : "1"])
+                                                context.objectForKeyedSubscript(CallBackMethodName.collectCallback.rawValue)?.call(withArguments: [String(describing: data) == "<null>" ? "0" : "1"])
                                             }
                                             }, jsonstr: jsonstr!)
                                         CybexWebSocketService.shared.send(request: withdrawRequest)
@@ -105,13 +134,13 @@ class GameModel: NSObject, GameDelegate {
                             }
                         }
                         else {
-                            self?.context?.objectForKeyedSubscript("collectCallback")?.call(withArguments: ["2"])
+                            self?.context?.objectForKeyedSubscript(CallBackMethodName.collectCallback.rawValue)?.call(withArguments: ["2"])
                         }
                     }
                     CybexWebSocketService.shared.send(request: requeset)
                 }
                 else {
-                    self?.context?.objectForKeyedSubscript("collectCallback")?.call(withArguments: ["2"])
+                    self?.context?.objectForKeyedSubscript(CallBackMethodName.collectCallback.rawValue)?.call(withArguments: ["2"])
                 }
             }
         }).cauterize()

@@ -15,7 +15,6 @@ protocol SettingCoordinatorProtocol {
     func dismiss()
     func openHelpWebView()
     
-    func openGame()
 }
 
 protocol SettingStateManagerProtocol {
@@ -53,13 +52,6 @@ extension SettingCoordinator: SettingCoordinatorProtocol {
         if let vc = R.storyboard.main.cybexWebViewController() {
             vc.coordinator = CybexWebCoordinator(rootVC: self.rootVC)
             self.rootVC.pushViewController(vc, animated: true)
-        }
-    }
-    
-    func openGame() {
-        if let gameVC = R.storyboard.main.gameViewController() {
-            gameVC.coordinator = GameCoordinator(rootVC: self.rootVC)
-            self.rootVC.pushViewController(gameVC, animated: true)
         }
     }
 }
