@@ -138,7 +138,19 @@ class OrderBookViewController: BaseViewController {
         }) {
             let tickers = MarketHelper.filterQuoteAssetTicker(pair.base)
             let data = tickers[selectedIndex]
-
+            
+            let lastPrice =  data.latest.tradePriceAndAmountDecimal().price
+            let priceString = data.latest == "0" ?
+                lastPrice + "≈¥" :
+                lastPrice + "≈¥" + singleAssetRMBPrice(pair.quote).string(digits: 4, roundingMode: .down)
+            
+            let priceAttributeString = NSMutableAttributedString(string: priceString, attributes: [NSAttributedString.Key.foregroundColor : data.incre.color()])
+            
+            priceAttributeString.addAttributes([NSAttributedString.Key.font : [UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)]], range: NSMakeRange(0, lastPrice.count - 1))
+            
+            priceAttributeString.addAttributes([NSAttributedString.Key.font : [UIFont.systemFont(ofSize: 12)]], range: NSMakeRange(lastPrice.count - 1, priceString.count - lastPrice.count))
+            self.tradeView.amount.attributedText = priceAttributeString
+            
             self.tradeView.amount.text = data.latest.tradePriceAndAmountDecimal().price
             self.tradeView.amount.textColor = data.incre.color()
 
