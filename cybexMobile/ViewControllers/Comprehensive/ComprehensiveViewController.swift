@@ -162,13 +162,15 @@ extension ComprehensiveViewController {
     @objc func comprehensiveItemViewDidClicked(_ data: [String: Any]) {
         guard let middleItems = self.coordinator?.state.middleItems.value,
             let index = data["index"] as? Int else { return }
-        
+        if !UserManager.shared.isLoginIn {
+            appCoodinator.showLogin()
+            return
+        }
         if index == 0 {
             if Defaults[.hasCode] == true {
                 self.coordinator?.openGame()
                 return
             }
-
             let titleName = R.string.localizable.eto_invite_code_title.key.localized()
             self.showPasswordBox(titleName,middleType: CybexTextView.TextViewType.code)
             return
