@@ -41,7 +41,7 @@ class RechargeDetailViewController: BaseViewController {
     var trade: Trade? {
         didSet {
             if let trade = self.trade {
-                self.balance = getBalanceWithAssetId(trade.id)
+                self.balance = UserHelper.getBalanceWithAssetId(trade.id)
                 self.precision = appData.assetInfo[trade.id]?.precision
                 self.isEOS = trade.id == AssetConfiguration.CybexAsset.EOS.id || appData.assetInfo[trade.id]?.symbol.filterJade == AssetConfiguration.CybexAsset.XRP.rawValue
             }
@@ -50,7 +50,7 @@ class RechargeDetailViewController: BaseViewController {
     var balance: Balance? {
         didSet {
             if let balance = balance {
-                self.available = getRealAmount(balance.assetType, amount: balance.balance)
+                self.available = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance)
             }
         }
     }
@@ -125,9 +125,9 @@ class RechargeDetailViewController: BaseViewController {
 
                     if let coordinator =  self.coordinator, let value = coordinator.state.data.value, let precision = value.precision {
                         self.precision = precision
-                        self.contentView.amountView.content.text = checkMaxLength(text, maxLength: value.precision ?? balanceInfo.precision)
+                        self.contentView.amountView.content.text = CashHelper.checkMaxLength(text, maxLength: value.precision ?? balanceInfo.precision)
                     } else {
-                        self.contentView.amountView.content.text = checkMaxLength(text, maxLength: balanceInfo.precision)
+                        self.contentView.amountView.content.text = CashHelper.checkMaxLength(text, maxLength: balanceInfo.precision)
                     }
                     let amount = self.contentView.amountView.content.text!.decimal()
                     self.checkAmountIsAvailable(amount)
@@ -199,8 +199,8 @@ class RechargeDetailViewController: BaseViewController {
             .subscribe(onNext: { [weak self](_) in
                 guard let self = self else { return }
                 if let balance = self.balance, let precision = self.precision {
-                    self.contentView.amountView.content.text = getRealAmount(balance.assetType, amount: balance.balance).string(digits: precision, roundingMode: .down)
-                    self.checkAmountIsAvailable(getRealAmount(balance.assetType, amount: balance.balance))
+                    self.contentView.amountView.content.text = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).string(digits: precision, roundingMode: .down)
+                    self.checkAmountIsAvailable(AssetHelper.getRealAmount(balance.assetType, amount: balance.balance))
                     self.setFinalAmount()
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -278,7 +278,10 @@ class RechargeDetailViewController: BaseViewController {
             
             if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id], let precision = self.precision, let balance = self.balance {
                 self.contentView.insideFee.text = data.fee.string(digits: precision) + " " + tradeInfo.symbol.filterJade
-                self.contentView.avaliableView.content.text = getRealAmount(balance.assetType, amount: balance.balance).string(digits: tradeInfo.precision) + " " + tradeInfo.symbol.filterJade
+                self.contentView.avaliableView.content.text = AssetHelper.getRealAmount(
+                    balance.assetType,
+                    amount: balance.balance).string(digits:
+                        tradeInfo.precision) + " " + tradeInfo.symbol.filterJade
             }
             self.setFinalAmount()
             SwifterSwift.delay(milliseconds: 300) {
@@ -373,7 +376,7 @@ extension RechargeDetailViewController {
             return
         }
         if self.contentView.withdraw.isEnable, let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
-            let data = getWithdrawDetailInfo(addressInfo: self.contentView.addressView.content.text!,
+            let data = UIHelper.getWithdrawDetailInfo(addressInfo: self.contentView.addressView.content.text!,
                                              amountInfo: self.contentView.amountView.content.text! + " " + tradeInfo.symbol.filterJade,
                                              withdrawFeeInfo: self.contentView.insideFee.text!,
                                              gatewayFeeInfo: self.contentView.gateAwayFee.text!,

@@ -57,7 +57,7 @@ extension ETOCrowdCoordinator: ETOCrowdCoordinatorProtocol {
 
         let feeAmount = fee.amount.string(digits: feeInfo.precision, roundingMode: .down)
         self.rootVC.topViewController?.showConfirm(R.string.localizable.eto_submit_confirm.key.localized(),
-                                                   attributes: confirmSubmitCrowd(data.name, amount: "\(transferAmount) \(data.baseTokenName)",
+                                                   attributes: UIHelper.confirmSubmitCrowd(data.name, amount: "\(transferAmount) \(data.baseTokenName)",
                                                     fee: "\(feeAmount) \(feeInfo.symbol.filterJade)"), setup: { (_) in
                 //            for label in labels {
                 //                label.content.numberOfLines = 1
@@ -89,7 +89,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         guard !assetID.isEmpty,
             let operation = BitShareCoordinator.getTransterOperation(0,
                                                                      to_user_id: 0,
-                                                                     asset_id: Int32(getUserId(assetID)),
+                                                                     asset_id: assetID.getSuffixID,
                                                                      amount: 0,
                                                                      fee_id: 0,
                                                                      fee_amount: 0,
@@ -97,7 +97,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
                                                                      from_memo_key: "",
                                                                      to_memo_key: "") else { return }
 
-        calculateFee(operation, focusAssetId: assetID, operationID: .transfer) { (success, amount, feeId) in
+        CybexChainHelper.calculateFee(operation, operationID: .transfer, focusAssetId: assetID) { (success, amount, feeId) in
             let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
 
             if success {
@@ -130,7 +130,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
         }.first
 
         if let balance = balance, let _ = appData.assetInfo[balance.assetType] {
-            let amount = getRealAmount(balance.assetType, amount: balance.balance)
+            let amount = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance)
 
             if transferAmount > amount {
                 self.store.dispatch(ChangeETOValidStatusAction(status: .notEnough))
@@ -190,21 +190,20 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 
         let feeAmout = fee.amount.decimal() * pow(10, feeInfo.precision)
 
-        getChainId { (id) in
             let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
                 if let infos = infos as? (block_id: String, block_num: String) {
                     let accountRequeset = GetFullAccountsRequest(name: data.receiveAddress) { (response) in
                         if let response = response as? FullAccount, let account = response.account {
-                            let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
+                            let jsonstr =  BitShareCoordinator.getTransaction(infos.block_num.int32,
                                                                               block_id: infos.block_id,
                                                                               expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
-                                                                              chain_id: id,
-                                                                              from_user_id: Int32(getUserId(uid)),
-                                                                              to_user_id: Int32(getUserId(account.id)),
-                                                                              asset_id: Int32(getUserId(assetID)),
-                                                                              receive_asset_id: Int32(getUserId(assetID)),
+                                                                              chain_id: CybexConfiguration.shared.chainID.value,
+                                                                              from_user_id: uid.getSuffixID,
+                                                                              to_user_id: account.id.getSuffixID,
+                                                                              asset_id: assetID.getSuffixID,
+                                                                              receive_asset_id: assetID.getSuffixID,
                                                                               amount: amount.int64Value,
-                                                                              fee_id: Int32(getUserId(fee.assetId)),
+                                                                              fee_id: fee.assetId.getSuffixID,
                                                                               fee_amount: feeAmout.int64Value,
                                                                               memo: "",
                                                                               from_memo_key: "",
@@ -230,8 +229,6 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
                     CybexWebSocketService.shared.send(request: accountRequeset)
                 }
             }
-            CybexWebSocketService.shared.send(request: requeset)
-        }
     }
 
     func fetchData() {

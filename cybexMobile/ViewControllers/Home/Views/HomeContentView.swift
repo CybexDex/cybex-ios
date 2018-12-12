@@ -46,7 +46,7 @@ class HomeContentView: UIView {
         didSet {
             if self.viewType == .comprehensive {
                 self.tableView.isScrollEnabled = false
-                var buckets = appData.filterPopAssetsCurrency()
+                var buckets = MarketHelper.filterPopAssetsCurrency()
                 if buckets.count >= 6 {
                     self.reloadData = Array(buckets[0..<6])
                 } else {

@@ -63,19 +63,19 @@ class PortfolioData {
         icon = AppConfiguration.ServerIconsBaseURLString + balance.assetType.replacingOccurrences(of: ".", with: "_") + "_grey.png"
         // 获得自己的个数
         if let assetInfo = appData.assetInfo[balance.assetType] {
-            realAmount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: assetInfo.precision, roundingMode: .down)
+            realAmount = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).string(digits: assetInfo.precision, roundingMode: .down)
             name = assetInfo.symbol.filterJade
         }
 
         // 获取对应CYB的个数
-        let cybDecimal = singleAssetRMBPrice(balance.assetType) / AssetConfiguration.shared.rmbOf(asset: .CYB) * realAmount.decimal()
+        let cybDecimal = AssetHelper.singleAssetRMBPrice(balance.assetType) / AssetConfiguration.shared.rmbOf(asset: .CYB) * realAmount.decimal()
 
         if AssetConfiguration.shared.rmbOf(asset: .CYB) == 0 {
             cybPrice = "- CYB"
             rbmPrice    = "-"
         } else {
             cybPrice = cybDecimal.string(digits: 5, roundingMode: .down) + " CYB"
-            rbmPrice    = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * singleAssetRMBPrice(balance.assetType)).string(digits: 4, roundingMode: .down)
+            rbmPrice    = "≈¥" + (AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) * AssetHelper.singleAssetRMBPrice(balance.assetType)).string(digits: 4, roundingMode: .down)
         }
 
     }
@@ -95,14 +95,14 @@ class MyPortfolioData {
         name = appData.assetInfo[balance.assetType]?.symbol.filterJade ?? "--"
         // 获得自己的个数
         if let assetInfo = appData.assetInfo[balance.assetType] {
-            realAmount = getRealAmount(balance.assetType, amount: balance.balance).formatCurrency(digitNum: assetInfo.precision)
+            realAmount = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).formatCurrency(digitNum: assetInfo.precision)
         }
 
         if AssetConfiguration.shared.rmbOf(asset: .CYB) == 0 {
             rbmPrice = "-"
 
         } else {
-            rbmPrice = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * singleAssetRMBPrice(balance.assetType)).formatCurrency(digitNum: 4)
+            rbmPrice = "≈¥" + (AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) * AssetHelper.singleAssetRMBPrice(balance.assetType)).formatCurrency(digitNum: 4)
         }
 
         //获取冻结资产
@@ -111,7 +111,7 @@ class MyPortfolioData {
         if let limitArray = UserManager.shared.limitOrder.value {
             for limit in limitArray {
                 if limit.sellPrice.base.assetID == balance.assetType {
-                    let amount = getRealAmount(balance.assetType, amount: limit.forSale)
+                    let amount = AssetHelper.getRealAmount(balance.assetType, amount: limit.forSale)
                     limitDecimal += amount
                 }
             }

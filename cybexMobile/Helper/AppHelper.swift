@@ -8,22 +8,8 @@
 
 import Foundation
 
-func openPage(_ urlString: String) {
-    if let url = urlString.url {
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-}
+enum CybexNotificationKey {}
 
-func saveImageToPhotos() {
-    guard let window = UIApplication.shared.keyWindow else { return }
-
-    UIGraphicsBeginImageContextWithOptions(window.bounds.size, false, 0.0)
-
-    window.layer.render(in: UIGraphicsGetCurrentContext()!)
-
-    let image = UIGraphicsGetImageFromCurrentImageContext()
-
-    UIGraphicsEndImageContext()
-
-    UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+class AppHelper {
+ 
 }

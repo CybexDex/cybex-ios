@@ -390,8 +390,8 @@ class UserManager {
         var decimallimitOrderValue: Decimal = 0
         if let limitOrder = limitOrder.value {
             for limitOrderValue in limitOrder {
-                let realAmount = getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
-                let priceValue = singleAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
+                let realAmount = AssetHelper.getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
+                let priceValue = AssetHelper.singleAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
                 decimallimitOrderValue += (realAmount * priceValue)
             }
         }
@@ -409,8 +409,8 @@ class UserManager {
         var decimallimitOrderSellValue: Decimal = 0
         if let balances = balances.value {
             for balanceValue in balances {
-                let realAmount = getRealAmount(balanceValue.assetType, amount: balanceValue.balance)
-                let realRMBPrice = singleAssetRMBPrice(balanceValue.assetType)
+                let realAmount = AssetHelper.getRealAmount(balanceValue.assetType, amount: balanceValue.balance)
+                let realRMBPrice = AssetHelper.singleAssetRMBPrice(balanceValue.assetType)
                 balanceValues += realAmount * realRMBPrice
             }
         }
@@ -418,11 +418,11 @@ class UserManager {
             for limitOrderValue in limitOrder {
                 let assetAInfo = appData.assetInfo[limitOrderValue.sellPrice.base.assetID]
                 let assetBInfo = appData.assetInfo[limitOrderValue.sellPrice.quote.assetID]
-                let (base, _) = calculateAssetRelation(assetIDAName: (assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "",
+                let (base, _) = MarketHelper.calculateAssetRelation(assetIDAName: (assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "",
                                                        assetIDBName: (assetBInfo != nil) ? assetBInfo!.symbol.filterJade : "")
                 let isBuy = base == ((assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "")
-                let realAmount = getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
-                let priceValue = singleAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
+                let realAmount = AssetHelper.getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
+                let priceValue = AssetHelper.singleAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
                 balanceValues += realAmount * priceValue
                 if isBuy {
                     decimallimitOrderBuyValue += realAmount * priceValue

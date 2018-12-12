@@ -65,5 +65,9 @@ extension AppDelegate {
         if MarketConfiguration.shared.importMarketLists.value.isEmpty {
             MarketConfiguration.shared.fetchTopStickMarkets()
         }
+
+        if CybexConfiguration.shared.chainID.value.isEmpty {
+            CybexConfiguration.shared.getChainId()
+        }
     }
 }

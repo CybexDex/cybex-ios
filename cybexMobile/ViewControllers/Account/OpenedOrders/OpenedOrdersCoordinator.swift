@@ -41,21 +41,20 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
         guard let userid = UserManager.shared.account.value?.id else { return }
         guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0) else { return }
 
-        calculateFee(operation,
-                     focusAssetId: feeId,
-                     operationID: .limitOrderCancel, filterRepeat: false) { (success, amount, assetID) in
+        CybexChainHelper.calculateFee(operation,
+                                      operationID: .limitOrderCancel, focusAssetId: feeId) { (success, amount, assetID) in
                         print("手续费是否成功: \(success)")
                         if success {
-                            blockchainParams { (blockchainParams) in
+                            CybexChainHelper.blockchainParams { (blockchainParams) in
                                 guard let asset = appData.assetInfo[assetID] else {return}
                                 if let jsonStr = BitShareCoordinator.cancelLimitOrder(
-                                    blockchainParams.block_num,
+                                    blockchainParams.block_num.int32,
                                     block_id: blockchainParams.block_id,
                                     expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
-                                    chain_id: blockchainParams.chain_id,
-                                    user_id: userid.getID,
-                                    order_id: orderID.getID,
-                                    fee_id: assetID.getID,
+                                    chain_id: CybexConfiguration.shared.chainID.value,
+                                    user_id: userid.getSuffixID,
+                                    order_id: orderID.getSuffixID,
+                                    fee_id: assetID.getSuffixID,
                                     fee_amount: (amount * pow(10, asset.precision)).int64Value) {
 
                                     print("blockchainParams:\(jsonStr)")

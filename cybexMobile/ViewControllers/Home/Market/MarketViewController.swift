@@ -79,7 +79,7 @@ class MarketViewController: BaseViewController {
     }()
 
     lazy var tickers: [Ticker] = {
-        let markets = appData.filterQuoteAssetTicker(MarketConfiguration.marketBaseAssets.map({ $0.id })[currentBaseIndex])
+        let markets = MarketHelper.filterQuoteAssetTicker(MarketConfiguration.marketBaseAssets.map({ $0.id })[currentBaseIndex])
         return markets
     }()
 

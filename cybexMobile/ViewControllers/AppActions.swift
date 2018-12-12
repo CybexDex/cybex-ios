@@ -74,6 +74,7 @@ protocol BaseState: StateType {
 struct AppState: StateType {
     var property: AppPropertyState
 }
+
 struct AppPropertyState {
     var tickerData: BehaviorRelay<[Ticker]> = BehaviorRelay(value: [])
 
@@ -82,27 +83,6 @@ struct AppPropertyState {
 
     //assetID -> info
     var assetInfo: [String: AssetInfo] = [:]
-
-//    var eth_rmb_price: Double = 0
-  
-
-    func filterQuoteAssetTicker(_ base: String) -> [Ticker] {
-        return self.tickerData.value.filter({ (currency) -> Bool in
-            return currency.base == base
-        })
-    }
-
-    func filterPopAssetsCurrency() -> [Ticker] {
-        let counts = self.tickerData.value.filter { (currency) -> Bool in
-            return !currency.percentChange.contains("-")
-        }
-        return counts.sorted(by: { (currency1, currency2) -> Bool in
-            let change1 = currency1.percentChange
-            let change2 = currency2.percentChange
-            return change1.decimal() > change2.decimal()
-        })
-    }
-
 }
 
 struct HomeBucket: Equatable, Hashable {

@@ -107,7 +107,7 @@ extension LockupAssetsViewController {
             return
         }
         self.selectedData = indexPathData
-        let confirmData = claimLockupAsset(indexPathData)
+        let confirmData = UIHelper.claimLockupAsset(indexPathData)
         if self.isVisible {
             showConfirm(R.string.localizable.lockup_asset_claim_ensure.key.localized(), attributes: confirmData)
         }

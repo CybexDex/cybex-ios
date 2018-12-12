@@ -77,7 +77,7 @@ class TransferViewController: BaseViewController {
                 if let info = appData.assetInfo[balance.assetType] {
                     self.transferView.crypto = info.symbol.filterJade
                     self.transferView.precision = info.precision
-                    let realBalance = getRealAmount(balance.assetType, amount: balance.balance)
+                    let realBalance = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance)
                     let transferBalanceKey = R.string.localizable.transfer_balance.key.localized()
                     self.transferView.balance = transferBalanceKey + realBalance.string(digits: info.precision) + " " + balanceInfo.symbol.filterJade
                 }
@@ -138,7 +138,7 @@ class TransferViewController: BaseViewController {
             let memo = self.transferView.memoView.textView.text,
             let fee = self.coordinator?.state.fee.value {
             if let feeInfo = appData.assetInfo[fee.assetId] {
-                let data = getTransferInfo(account,
+                let data = UIHelper.getTransferInfo(account,
                                            quanitity: amount + " " + (appData.assetInfo[balance.assetType]?.symbol.filterJade)!,
                                            fee: fee.amount.string(digits: feeInfo.precision) + " " + feeInfo.symbol.filterJade,
                                            memo: memo)

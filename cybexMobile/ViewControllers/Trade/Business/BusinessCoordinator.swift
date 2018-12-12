@@ -86,7 +86,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
 
     func getFee(_ focusAssetId: String) {
         if let str = BitShareCoordinator.getLimitOrderOperation(0, expiration: 0, asset_id: 0, amount: 0, receive_asset_id: 0, receive_amount: 0, fee_id: 0, fee_amount: 0) {
-            calculateFee(str, focusAssetId: focusAssetId) { (success, amount, assetID) in
+            CybexChainHelper.calculateFee(str, focusAssetId: focusAssetId) { (success, amount, assetID) in
                 self.store.dispatch(FeeFetchedAction(success: success, amount: amount, assetID: assetID))
             }
         }
@@ -128,7 +128,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
         if let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
             return balance.assetType.filterJade == assetID
         }).first {
-            let amount = getRealAmount(balances.assetType, amount: balances.balance)
+            let amount = AssetHelper.getRealAmount(balances.assetType, amount: balances.balance)
             self.store.dispatch(BalanceFetchedAction(amount: amount))
         }
     }
@@ -168,18 +168,18 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
 
         let feeAmount = (self.state.feeAmount.value * pow(10, feeInfo.precision)).int64Value
 
-        blockchainParams { (blockchainParams) in
-            if let jsonStr = BitShareCoordinator.getLimitOrder(blockchainParams.block_num,
+        CybexChainHelper.blockchainParams { (blockchainParams) in
+            if let jsonStr = BitShareCoordinator.getLimitOrder(blockchainParams.block_num.int32,
                                                                block_id: blockchainParams.block_id,
                                                                expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
-                                                               chain_id: blockchainParams.chain_id,
-                                                               user_id: userid.getID,
+                                                               chain_id: CybexConfiguration.shared.chainID.value,
+                                                               user_id: userid.getSuffixID,
                                                                order_expiration: Date().timeIntervalSince1970 + 3600 * 24 * 365,
-                                                               asset_id: assetID.getID,
+                                                               asset_id: assetID.getSuffixID,
                                                                amount: amount!,
-                                                               receive_asset_id: receiveAssetID.getID,
+                                                               receive_asset_id: receiveAssetID.getSuffixID,
                                                                receive_amount: receiveAmount!,
-                                                               fee_id: self.state.feeID.value.getID,
+                                                               fee_id: self.state.feeID.value.getSuffixID,
                                                                fee_amount: feeAmount) {
 
                 let request = BroadcastTransactionRequest(response: { (data) in

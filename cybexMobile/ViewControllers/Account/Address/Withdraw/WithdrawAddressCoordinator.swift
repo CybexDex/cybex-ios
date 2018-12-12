@@ -104,7 +104,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
                     return AddressName(name: info.name)
                 }
 
-                let sortedNames = sortNameBasedonAddress(names)
+                let sortedNames = AddressHelper.sortNameBasedonAddress(names)
 
                 let data = list.sorted { (front, last) -> Bool in
                     return sortedNames.index(of: front.name)! <= sortedNames.index(of: last.name)!
@@ -162,7 +162,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
 
     func confirmdelete() {
         if let addressData = self.state.selectedAddress.value {
-            self.rootVC.topViewController?.showConfirm(R.string.localizable.address_delete_confirm.key.localized(), attributes: confirmDeleteWithDrawAddress(addressData), setup: { (labels) in
+            self.rootVC.topViewController?.showConfirm(R.string.localizable.address_delete_confirm.key.localized(), attributes: UIHelper.confirmDeleteWithDrawAddress(addressData), setup: { (labels) in
                 for label in labels {
                     label.content.numberOfLines = 1
                     label.content.lineBreakMode = .byTruncatingMiddle

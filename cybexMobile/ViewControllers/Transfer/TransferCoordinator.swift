@@ -98,7 +98,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
 
         var items = [String]()
         let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
-            return getRealAmount(balance.assetType, amount: balance.balance) != 0
+            return AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) != 0
         })
         if let balances = balances {
             for balance in balances {
@@ -192,7 +192,6 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     }
 
     func transfer(_ callback: @escaping (Any) -> Void) {
-        getChainId { (id) in
             guard let balance = self.state.balance.value else {
                 return
             }
@@ -215,16 +214,16 @@ extension TransferCoordinator: TransferStateManagerProtocol {
 
                         let feeAmout = fee.amount.decimal() * pow(10, feeInfo.precision)
 
-                        let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
+                        let jsonstr =  BitShareCoordinator.getTransaction(infos.block_num.int32,
                                                                           block_id: infos.block_id,
                                                                           expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
-                                                                          chain_id: id,
-                                                                          from_user_id: Int32(getUserId(fromAccount.id)),
-                                                                          to_user_id: Int32(getUserId(toAccount.id)),
-                                                                          asset_id: Int32(getUserId(balance.assetType)),
-                                                                          receive_asset_id: Int32(getUserId(balance.assetType)),
+                                                                          chain_id: CybexConfiguration.shared.chainID.value,
+                                                                          from_user_id: fromAccount.id.getSuffixID,
+                                                                          to_user_id: toAccount.id.getSuffixID,
+                                                                          asset_id: balance.assetType.getSuffixID,
+                                                                          receive_asset_id: balance.assetType.getSuffixID,
                                                                           amount: amount.int64Value,
-                                                                          fee_id: Int32(getUserId(fee.assetId)),
+                                                                          fee_id: fee.assetId.getSuffixID,
                                                                           fee_amount: feeAmout.int64Value,
                                                                           memo: self.state.memo.value,
                                                                           from_memo_key: fromAccount.memoKey,
@@ -239,8 +238,6 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                     }
                 }
             }
-            CybexWebSocketService.shared.send(request: requeset)
-        }
     }
 
     func validAccount() {
@@ -304,16 +301,16 @@ extension TransferCoordinator: TransferStateManagerProtocol {
         let fromMemoKey = UserManager.shared.account.value?.memoKey ?? ""
         let toUserId = self.state.toAccount.value?.id ?? "0"
         let toMemoKey = self.state.toAccount.value?.memoKey ?? fromMemoKey
-        if let operationString = BitShareCoordinator.getTransterOperation(Int32(getUserId(fromUserId)),
-                                                                          to_user_id: Int32(getUserId(toUserId)),
-                                                                          asset_id: Int32(getUserId(assetId)),
+        if let operationString = BitShareCoordinator.getTransterOperation(fromUserId.getSuffixID,
+                                                                          to_user_id: toUserId.getSuffixID,
+                                                                          asset_id: assetId.getSuffixID,
                                                                           amount: 0,
                                                                           fee_id: 0,
                                                                           fee_amount: 0,
                                                                           memo: memo,
                                                                           from_memo_key: fromMemoKey,
                                                                           to_memo_key: toMemoKey) {
-            calculateFee(operationString, focusAssetId: assetId, operationID: .transfer) { (success, amount, feeId) in
+            CybexChainHelper.calculateFee(operationString, operationID: .transfer, focusAssetId: assetId) { (success, amount, feeId) in
                 let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
 
                 self.store.dispatch(SetFeeAction(fee: Fee.deserialize(from: dictionary)!))

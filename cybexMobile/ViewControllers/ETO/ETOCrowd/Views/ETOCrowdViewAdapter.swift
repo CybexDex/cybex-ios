@@ -22,7 +22,7 @@ extension ETOCrowdView {
         }.first
 
         if let balance = balance, let info = appData.assetInfo[balance.assetType] {
-            let amount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: info.precision, roundingMode: .down)
+            let amount = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).string(digits: info.precision, roundingMode: .down)
             self.titleTextView.unitLabel.text = R.string.localizable.eto_available.key.localizedFormat(amount, model.baseTokenName)
         } else {
             self.titleTextView.unitLabel.text = R.string.localizable.eto_available.key.localizedFormat("--", model.baseTokenName)

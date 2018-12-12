@@ -46,10 +46,10 @@ class BusinessViewController: BaseViewController {
     
     func fetchLatestPrice() {
         guard let pair = pair, let _ = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base) else { return }
-        if let selectedIndex = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+        if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
             return ticker.quote == pair.quote
         }) {
-            let markets = appData.filterQuoteAssetTicker(pair.base)
+            let markets = MarketHelper.filterQuoteAssetTicker(pair.base)
             let data = markets[selectedIndex]
             pricePricision = data.latest.tradePriceAndAmountDecimal().pricision
             amountPricision = data.latest.tradePriceAndAmountDecimal().amountPricision
@@ -168,7 +168,7 @@ class BusinessViewController: BaseViewController {
         let prirce = decimalPrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
         let amount = decimalAmount.string(digits: quoteInfo.precision, roundingMode: .down)  + " " + quoteInfo.symbol.filterJade
         let total = (decimalPrice * decimalAmount).string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-        openedOrderDetailView.data = getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy)
+        openedOrderDetailView.data = UIHelper.getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy)
     }
     
     override func configureObserveState() {
@@ -272,7 +272,7 @@ class BusinessViewController: BaseViewController {
                     self.containerView.value.text = "≈¥0.0000"
                     return
             }
-            self.containerView.value.text = "≈¥" + (singleAssetRMBPrice(baseInfo.id) * text.decimal()).string(digits: 4, roundingMode: .down)
+            self.containerView.value.text = "≈¥" + (AssetHelper.singleAssetRMBPrice(baseInfo.id) * text.decimal()).string(digits: 4, roundingMode: .down)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         self.coordinator!.state.amount.subscribe(onNext: {[weak self] (_) in

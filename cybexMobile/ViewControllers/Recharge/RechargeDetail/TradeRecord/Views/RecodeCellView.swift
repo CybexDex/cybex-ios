@@ -44,7 +44,7 @@ class RecodeCellView: UIView {
                     icon.kf.setImage(with: URL(string: AppConfiguration.ServerIconsBaseURLString +
                         assetInfo.id.replacingOccurrences(of: ".", with: "_") +
                         "_grey.png"))
-                    amount.text = getRealAmount(assetInfo.id, amount: String(data.amount)).string.formatCurrency(digitNum: assetInfo.precision) +
+                    amount.text = AssetHelper.getRealAmount(assetInfo.id, amount: String(data.amount)).string.formatCurrency(digitNum: assetInfo.precision) +
                         " " +
                         assetInfo.symbol.filterJade
                 } else {

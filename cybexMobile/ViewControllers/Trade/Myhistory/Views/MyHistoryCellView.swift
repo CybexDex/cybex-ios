@@ -34,7 +34,7 @@ class MyHistoryCellView: UIView {
         let order = orderInfo.0
         if let payInfo = appData.assetInfo[order.pays.assetID], let receiveInfo = appData.assetInfo[order.receives.assetID] {
             // 从首页筛选出交易对
-            let result = calculateAssetRelation(assetIDAName: payInfo.symbol.filterJade, assetIDBName: receiveInfo.symbol.filterJade)
+            let result = MarketHelper.calculateAssetRelation(assetIDAName: payInfo.symbol.filterJade, assetIDBName: receiveInfo.symbol.filterJade)
             if result.base == payInfo.symbol.filterJade && result.quote == receiveInfo.symbol.filterJade {
                 // pay -> base   receive -> quote
                 // Buy
@@ -43,10 +43,10 @@ class MyHistoryCellView: UIView {
                 self.kindL.text = "BUY"
                 self.typeView.backgroundColor = .turtleGreen
 
-                let realAmount = getRealAmount(receiveInfo.id, amount: order.receives.amount)
-                let paysAmount = getRealAmount(payInfo.id, amount: order.pays.amount)
+                let realAmount = AssetHelper.getRealAmount(receiveInfo.id, amount: order.receives.amount)
+                let paysAmount = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount)
                 self.amount.text = realAmount.string(digits: receiveInfo.precision, roundingMode: .down) + " " + receiveInfo.symbol.filterJade
-                self.orderAmount.text = getRealAmount(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision, roundingMode: .down) +
+                self.orderAmount.text = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision, roundingMode: .down) +
                     " " + payInfo.symbol.filterJade
 
                 self.orderPrice.text = (paysAmount / realAmount).string(digits: payInfo.precision, roundingMode: .down) +
@@ -58,9 +58,9 @@ class MyHistoryCellView: UIView {
                 self.asset.text = result.quote
                 self.base.text  = "/" + result.base
                 self.typeView.backgroundColor = .reddish
-                let realAmount = getRealAmount(payInfo.id, amount: order.pays.amount)
-                let receivesAmount = getRealAmount(receiveInfo.id, amount: order.receives.amount)
-                let payAmount = getRealAmount(payInfo.id, amount: order.pays.amount)
+                let realAmount = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount)
+                let receivesAmount = AssetHelper.getRealAmount(receiveInfo.id, amount: order.receives.amount)
+                let payAmount = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount)
                 self.amount.text = realAmount.string(digits: payInfo.precision, roundingMode: .down) +
                     " " + payInfo.symbol.filterJade
                 self.orderAmount.text = receivesAmount.string(digits: receiveInfo.precision, roundingMode: .down) + " " +  receiveInfo.symbol.filterJade

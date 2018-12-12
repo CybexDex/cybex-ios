@@ -162,8 +162,8 @@ extension RegisterViewController {
     }
 
     func setupPasswordEvent() {
-        let passwordValid = self.passwordTextField.rx.text.orEmpty.map({ verifyPassword($0) }).share(replay: 1)
-        let confirmPasswordValid = self.confirmPasswordTextField.rx.text.orEmpty.map({ verifyPassword($0) }).share(replay: 1)
+        let passwordValid = self.passwordTextField.rx.text.orEmpty.map({ UserHelper.verifyPassword($0) }).share(replay: 1)
+        let confirmPasswordValid = self.confirmPasswordTextField.rx.text.orEmpty.map({ UserHelper.verifyPassword($0) }).share(replay: 1)
 
         passwordValid.subscribe(onNext: {[weak self] (validate) in
             guard let self = self else { return }

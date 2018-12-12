@@ -28,8 +28,6 @@ struct Log {
     }
 }
 
-enum CybexNotificationKey {}
-
 func guardSharedProperty<T>(_ input: T?) -> T {
     guard let shared = input else {
         Log.fatalError("Use \(T.self) before setup. ")
@@ -64,5 +62,13 @@ struct WeakObject<T: AnyObject>: Equatable, Hashable {
 
     var hashValue: Int {
         if let object = self.object { return ObjectIdentifier(object).hashValue } else { return 0 }
+    }
+}
+
+extension Range where Bound == String.Index {
+    var nsRange: NSRange {
+        return NSRange(location: self.lowerBound.encodedOffset,
+                       length: self.upperBound.encodedOffset -
+                        self.lowerBound.encodedOffset)
     }
 }

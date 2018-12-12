@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxCocoa
 
 class CybexConfiguration {
     static let shared = CybexConfiguration()
@@ -17,11 +18,22 @@ class CybexConfiguration {
         AssetConfiguration.CybexAsset.ETH,
         AssetConfiguration.CybexAsset.BTC]
 
-    var chainID: String = ""
+    var chainID: BehaviorRelay<String> = BehaviorRelay(value: "")
 
     static var TransactionExpiration: TimeInterval = 45
 
     private init() {
 
+    }
+}
+
+extension CybexConfiguration {
+    func getChainId() {
+        let requeset = GetChainIDRequest { (id) in
+            if let id = id as? String {
+                self.chainID.accept(id)
+            }
+        }
+        CybexWebSocketService.shared.send(request: requeset)
     }
 }

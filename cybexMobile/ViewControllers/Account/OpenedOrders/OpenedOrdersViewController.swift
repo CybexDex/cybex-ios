@@ -67,9 +67,8 @@ class OpenedOrdersViewController: BaseViewController {
         guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0) else { return }
         guard let order = self.order else {return}
         startLoading()
-        calculateFee(operation,
-                     focusAssetId: order.sellPrice.base.assetID,
-                     operationID: .limitOrderCancel) { [weak self](success, amount, assetId) in
+        CybexChainHelper.calculateFee(operation,
+                                      operationID: .limitOrderCancel, focusAssetId: order.sellPrice.base.assetID) { [weak self](success, amount, assetId) in
             guard let self = self else {return}
             self.endLoading()
 
@@ -88,26 +87,26 @@ class OpenedOrdersViewController: BaseViewController {
                     var totalInfo = ""
                     let feeInfo = amount.string(digits: feeInfoValue.precision, roundingMode: .down) + " " + feeInfoValue.symbol.filterJade
                     if order.isBuy {
-                        let baseAmount = getRealAmount(order.sellPrice.base.assetID,
+                        let baseAmount = AssetHelper.getRealAmount(order.sellPrice.base.assetID,
                                                        amount: order.sellPrice.base.amount)
-                        let quoteAmount = getRealAmount(order.sellPrice.quote.assetID,
+                        let quoteAmount = AssetHelper.getRealAmount(order.sellPrice.quote.assetID,
                                                         amount: order.sellPrice.quote.amount)
                         priceInfo = (baseAmount / quoteAmount).string(digits: baseInfo.precision,
                                                                       roundingMode: .down) + " " + baseInfo.symbol.filterJade
-                        let total = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
+                        let total = AssetHelper.getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
                         let amounts = total / (baseAmount / quoteAmount)
                         amountInfo = amounts.string(digits: quoteInfo.precision,
                                                     roundingMode: .down) + " " + quoteInfo.symbol.filterJade
                         totalInfo = total.string(digits: baseInfo.precision,
                                                  roundingMode: .down) + " " + baseInfo.symbol.filterJade
                     } else {
-                        let baseAmount  = getRealAmount(order.sellPrice.quote.assetID,
+                        let baseAmount  = AssetHelper.getRealAmount(order.sellPrice.quote.assetID,
                                                         amount: order.sellPrice.quote.amount)
-                        let quoteAmount = getRealAmount(order.sellPrice.base.assetID,
+                        let quoteAmount = AssetHelper.getRealAmount(order.sellPrice.base.assetID,
                                                         amount: order.sellPrice.base.amount)
                         priceInfo =  (baseAmount / quoteAmount).string(digits: quoteInfo.precision,
                                                                        roundingMode: .down) + " " + quoteInfo.symbol.filterJade
-                        let amounts = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
+                        let amounts = AssetHelper.getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
                         var total: Decimal = 0
                         if order.forSale == order.sellPrice.base.amount {
                             total = baseAmount
@@ -122,7 +121,7 @@ class OpenedOrdersViewController: BaseViewController {
 
                     if self.isVisible {
                         self.showConfirm(ensureTitle,
-                                         attributes: getOpenedOrderInfo(price: priceInfo,
+                                         attributes: UIHelper.getOpenedOrderInfo(price: priceInfo,
                                                                         amount: amountInfo,
                                                                         total: totalInfo,
                                                                         fee: feeInfo,

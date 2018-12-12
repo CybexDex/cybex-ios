@@ -44,16 +44,16 @@ class OpenedOrdersView: UIView {
                         quote.text = quoteInfo.symbol.filterJade
                         base.text = "/" + baseInfo.symbol.filterJade
 
-                        let basePrice = getRealAmount(order.sellPrice.base.assetID,
+                        let basePrice = AssetHelper.getRealAmount(order.sellPrice.base.assetID,
                                                       amount: order.sellPrice.base.amount) /
-                            getRealAmount(order.sellPrice.quote.assetID,
+                            AssetHelper.getRealAmount(order.sellPrice.quote.assetID,
                                           amount: order.sellPrice.quote.amount)
 
-                        let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
+                        let baseAmount = AssetHelper.getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
 
                         var quoteAmount: Decimal!
                         if order.forSale == order.sellPrice.base.amount {
-                            quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
+                            quoteAmount = AssetHelper.getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
                         } else {
                             quoteAmount = baseAmount / basePrice
                         }
@@ -72,15 +72,15 @@ class OpenedOrdersView: UIView {
                         self.quote.text = quoteInfo.symbol.filterJade
                         self.base.text = "/" + baseInfo.symbol.filterJade
 
-                        let basePrice = getRealAmount(order.sellPrice.quote.assetID,
+                        let basePrice = AssetHelper.getRealAmount(order.sellPrice.quote.assetID,
                                                       amount: order.sellPrice.quote.amount) /
-                            getRealAmount(order.sellPrice.base.assetID,
+                            AssetHelper.getRealAmount(order.sellPrice.base.assetID,
                                           amount: order.sellPrice.base.amount)
-                        let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
+                        let quoteAmount = AssetHelper.getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
 
                         var baseAmount: Decimal!
                         if order.forSale == order.sellPrice.base.amount {
-                            baseAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
+                            baseAmount = AssetHelper.getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
                         } else {
                             baseAmount = basePrice * quoteAmount
                         }

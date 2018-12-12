@@ -8,20 +8,32 @@
 
 import Foundation
 
-func singleAssetRMBPrice(_ assetID: String) -> Decimal {
-    if let baseAsset = AssetConfiguration.CybexAsset(assetID), MarketConfiguration.marketBaseAssets.contains(baseAsset) {
-        return AssetConfiguration.shared.rmbOf(asset: baseAsset)
-    }
-
-    for asset in CybexConfiguration.portfolioOutPriceBaseOrderAsset {
-        let tickers = appData.tickerData.value.filter { (ticker) -> Bool in
-            return ticker.base == asset.id && ticker.quote == assetID
+class AssetHelper {
+    class func singleAssetRMBPrice(_ assetID: String) -> Decimal {
+        if let baseAsset = AssetConfiguration.CybexAsset(assetID), MarketConfiguration.marketBaseAssets.contains(baseAsset) {
+            return AssetConfiguration.shared.rmbOf(asset: baseAsset)
         }
 
-        if let ticker = tickers.first, let baseAsset = AssetConfiguration.CybexAsset(ticker.base) {
-            return ticker.latest.decimal() * AssetConfiguration.shared.rmbOf(asset: baseAsset)
+        for asset in CybexConfiguration.portfolioOutPriceBaseOrderAsset {
+            let tickers = appData.tickerData.value.filter { (ticker) -> Bool in
+                return ticker.base == asset.id && ticker.quote == assetID
+            }
+
+            if let ticker = tickers.first, let baseAsset = AssetConfiguration.CybexAsset(ticker.base) {
+                return ticker.latest.decimal() * AssetConfiguration.shared.rmbOf(asset: baseAsset)
+            }
         }
+
+        return 0
     }
 
-    return 0
+    class func getRealAmount(_ id: String, amount: String) -> Decimal {
+        guard let asset = appData.assetInfo[id] else {
+            return 0
+        }
+
+        let precisionNumber = pow(10, asset.precision)
+
+        return amount.decimal() / precisionNumber
+    }
 }

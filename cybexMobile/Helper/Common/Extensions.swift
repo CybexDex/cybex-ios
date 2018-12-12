@@ -382,7 +382,7 @@ extension String {
         return self.replacingOccurrences(of: "JADE.", with: "")
     }
     
-    var getID: Int32 {
+    var getSuffixID: Int32 {
         if self == "" {
             return 0
         }
@@ -392,6 +392,14 @@ extension String {
         }
         
         return 0
+    }
+
+    var int32: Int32 {
+        if self == "" {
+            return 0
+        }
+        
+        return Int32(self)!
     }
     
     func tradePriceAndAmountDecimal(_ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> (price: String, pricision: Int, amountPricision: Int) {
@@ -422,77 +430,7 @@ extension String {
     }
 }
 
-func transferTimeType(_ time: Int, type: Bool = false) -> String {
-    var result = ""
-    var times = 0
-    
-    if time == 0 {
-        result = "0"
-        return result + R.string.localizable.transfer_unit_second.key.localized()
-    }
-    
-    if time / (3600 * 24) != 0 {
-        result = "\(time / (3600 * 24))" + R.string.localizable.transfer_unit_day.key.localized()
-    }
-    times = time % (3600 * 24)
-    if times / 3600 != 0 {
-        if type == true, result != "" {
-            result += " \(times / 3600)" + R.string.localizable.transfer_unit_hour.key.localized()
-            return result
-        }
-        result += " \(times / 3600)" + R.string.localizable.transfer_unit_hour.key.localized()
-    }
-    times = times % 3600
-    if times / 60 != 0 {
-        if type == true, result != "" {
-            result += " \(times / 60)" + R.string.localizable.transfer_unit_minite.key.localized()
-            return result
-        }
-        result += " \(times / 60)" + R.string.localizable.transfer_unit_minite.key.localized()
-    }
-    times = times % 60
-    if times != 0 {
-        result += " \(times)" + R.string.localizable.transfer_unit_second.key.localized()
-    }
-    return result
-}
 
-func timeHandle(_ time: Double, isHiddenSecond: Bool = true) -> String {
-    var result = ""
-    var intTime = time.int
-    
-    if isHiddenSecond == true, intTime < 60 {
-        return R.string.localizable.eto_time_less_minite.key.localized()
-    }
-    result += "\(intTime / (3600 * 24))" + R.string.localizable.transfer_unit_day.key.localized() + " "
-    intTime = intTime % (3600 * 24)
-    result += "\(intTime / 3600)" + R.string.localizable.transfer_unit_hour.key.localized() + " "
-    intTime = intTime % 3600
-    result += "\(intTime / 60)" + R.string.localizable.transfer_unit_minite.key.localized()
-    if isHiddenSecond == false {
-        intTime = intTime % 60
-        result += " \(intTime)" + R.string.localizable.transfer_unit_second.key.localized()
-    }
-    return result
-}
 
-func verifyPassword(_ password: String) -> (Bool) {
-    if password.count < 12 {
-        return false
-    }
-    
-    let guiter = Guitar(pattern: "(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{12,}")
-    if !guiter.test(string: password) {
-        return false
-    } else {
-        return true
-    }
-}
 
-extension Range where Bound == String.Index {
-    var nsRange: NSRange {
-        return NSRange(location: self.lowerBound.encodedOffset,
-                       length: self.upperBound.encodedOffset -
-                        self.lowerBound.encodedOffset)
-    }
-}
+

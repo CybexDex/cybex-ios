@@ -29,7 +29,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         didSet {
             guard let pair = pair, let index = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base) else { return }
 
-            if let selectedIndex = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+            if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
                 return ticker.quote == pair.quote
             }) {
                 self.businessTitleView?.selectedIndex = selectedIndex
@@ -171,12 +171,12 @@ extension HomeViewController {
         } else if vcType == ViewType.comprehensive.rawValue {
             if let index = data["index"] as? Int,
                 appData.tickerData.value.count == MarketConfiguration.shared.marketPairs.value.count {
-                let datas = appData.filterPopAssetsCurrency()
+                let datas = MarketHelper.filterPopAssetsCurrency()
                 if datas.count > index {
-                    let buckets = appData.filterPopAssetsCurrency()[index]
+                    let buckets = MarketHelper.filterPopAssetsCurrency()[index]
 
                     if let baseIndex = MarketConfiguration.marketBaseAssets.map({ $0.id }).firstIndex(of: buckets.base) {
-                        let markets = appData.filterQuoteAssetTicker(buckets.base)
+                        let markets = MarketHelper.filterQuoteAssetTicker(buckets.base)
                         if let curIndex = markets.firstIndex(of: buckets) {
                             self.coordinator?.openMarket(index: curIndex, currentBaseIndex: baseIndex)
                         }
