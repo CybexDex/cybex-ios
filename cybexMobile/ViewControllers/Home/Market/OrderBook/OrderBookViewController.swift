@@ -26,14 +26,6 @@ class OrderBookViewController: BaseViewController {
     var contentView: OrderBookContentView!
     var tradeView: TradeView!
     var VCType: Int = OrderbookType.contentView.rawValue
-    lazy var pricePrecision: Int = {
-        if let pair = self.pair, let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair] {
-            return precision.price
-        }
-
-        return 0
-    }()
-
     var pair: Pair? {
         didSet {
             guard let pair = pair, oldValue != pair else { return }
@@ -102,6 +94,7 @@ class OrderBookViewController: BaseViewController {
     }
 
     override func configureObserveState() {
+        
         self.coordinator!.state.data.asObservable().skip(1).distinctUntilChanged()
             .subscribe(onNext: {[weak self] (result) in
                 guard let self = self else { return }
@@ -111,55 +104,31 @@ class OrderBookViewController: BaseViewController {
                     }
                 }
                 if self.VCType == 1 {
-                    if let pair = self.pair, let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair], var order = result {
-                        order.pricePrecision = precision.price
-                        order.amountPrecision = precision.amount
-                        self.contentView.data = order
-                        self.contentView.tableView.reloadData()
-                        self.contentView.tableView.isHidden = false
-                        self.coordinator?.updateMarketListHeight(500)
-                    }
+                    self.contentView.data = result
+                    self.contentView.tableView.reloadData()
+                    self.contentView.tableView.isHidden = false
+                    self.coordinator?.updateMarketListHeight(500)
                 } else {
-                    if let pair = self.pair, let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair], var order = result {
-                        order.pricePrecision = self.pricePrecision
-                        order.amountPrecision = precision.amount
-                        self.tradeView.data = order
-                    }
-
-
+                    self.tradeView.data = result
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 
     func showMarketPrice() {
         guard let pair = pair, let _ = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base) else { return }
-        if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+        if let selectedIndex = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
             return ticker.quote == pair.quote
         }) {
-            let tickers = MarketHelper.filterQuoteAssetTicker(pair.base)
+            let tickers = appData.filterQuoteAssetTicker(pair.base)
             let data = tickers[selectedIndex]
             
             let lastPrice =  data.latest.tradePriceAndAmountDecimal().price
-            let priceString = data.latest == "0" ?
-                lastPrice + "≈¥" :
-                lastPrice + "≈¥" + singleAssetRMBPrice(pair.quote).string(digits: 4, roundingMode: .down)
+            let priceString = data.latest == "0" ? lastPrice + "≈¥" : lastPrice + "≈¥" + singleAssetRMBPrice(pair.quote).string(digits: 4, roundingMode: .down)
             
             let priceAttributeString = NSMutableAttributedString(string: priceString, attributes: [NSAttributedString.Key.foregroundColor : data.incre.color()])
-            
-            priceAttributeString.addAttributes([NSAttributedString.Key.font : [UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)]], range: NSMakeRange(0, lastPrice.count - 1))
-            
-            priceAttributeString.addAttributes([NSAttributedString.Key.font : [UIFont.systemFont(ofSize: 12)]], range: NSMakeRange(lastPrice.count - 1, priceString.count - lastPrice.count))
+            priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)], range: NSMakeRange(0, lastPrice.count))
+            priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)], range: NSMakeRange(lastPrice.count, priceString.count - lastPrice.count))
             self.tradeView.amount.attributedText = priceAttributeString
-            
-            self.tradeView.amount.text = data.latest.tradePriceAndAmountDecimal().price
-            self.tradeView.amount.textColor = data.incre.color()
-
-            if data.latest == "0" {
-                self.tradeView.rmbPrice.text  = "≈¥"
-                return
-            }
-
-            self.tradeView.rmbPrice.text = "≈¥" + AssetHelper.singleAssetRMBPrice(pair.quote).string(digits: AppConfiguration.rmbPrecision, roundingMode: .down)
         }
     }
 }
@@ -182,5 +151,16 @@ extension OrderBookViewController: TradePair {
 //            showMarketPrice()
 //        }
 //        self.coordinator?.subscribe(pair, depth: 2, count: 5)
+    }
+}
+
+extension OrderBookViewController {
+    @objc func chooseDecimalNumberEvent(_ data: [String: Any]) {
+        guard let text = data["data"] as? String, text.count != 0, let senderView = data["self"] as? UIView else {
+            return
+        }
+        
+        
+        
     }
 }

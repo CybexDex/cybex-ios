@@ -13,50 +13,42 @@ import RxCocoa
 class TradeView: UIView {
     enum Event: String {
         case orderbookClicked
+        case chooseDecimalNumberEvent
     }
 
     @IBOutlet weak var titlePrice: UILabel!
-
     @IBOutlet weak var titleAmount: UILabel!
     @IBOutlet weak var amount: UILabel!
-    @IBOutlet weak var rmbPrice: UILabel!
+//    @IBOutlet weak var rmbPrice: UILabel!
 
     @IBOutlet weak var sells: UIStackView!
     @IBOutlet weak var buies: UIStackView!
-
     @IBOutlet var items: [TradeLineView]!
 
     @IBOutlet weak var decimalView: UIView!
     @IBOutlet weak var deciLabel: UILabel!
     @IBOutlet weak var deciImgView: UIImageView!
-    
-    
     var data: Any? {
         didSet {
             if let data = data as? OrderBook {
                 let bids = data.bids
                 let asks = data.asks
-
                 for index in 6...10 {
                     if let sell = sells.viewWithTag(index) as? TradeLineView {
                         if asks.count - 1 >= (index - 6) {
                             sell.isBuy = true
                             sell.alpha = 1
-                            
                             let percent: Decimal = asks[0...index - 6].compactMap( { $0.volumePercent } ).reduce(0, +)
-                            sell.data = (asks[index - 6], percent: percent, pricePrecision: data.pricePrecision, amountPrecision: data.amountPrecision)
-
+                            sell.data = (asks[index - 6], percent)
                         } else {
                             sell.alpha = 0
                         }
                         if let buy = buies.viewWithTag(index) as? TradeLineView {
                             if bids.count - 1 >= (index - 6) {
-                                sell.isBuy   = false
+                                sell.isBuy = false
                                 buy.alpha = 1
-
                                 let percent = bids[0...index - 6].compactMap( { $0.volumePercent } ).reduce(0, +)
-
-                                buy.data     = (bids[index - 6], percent: percent, pricePrecision: data.pricePrecision, amountPrecision: data.amountPrecision)
+                                buy.data = (bids[index - 6], percent)
                             } else {
                                 buy.alpha = 0
                             }
@@ -68,7 +60,6 @@ class TradeView: UIView {
     }
 
     func setup() {
-
         if UIScreen.main.bounds.width == 320 {
             self.titlePrice.font = UIFont.systemFont(ofSize: 10)
             self.titleAmount.font = UIFont.systemFont(ofSize: 10)
@@ -85,7 +76,9 @@ class TradeView: UIView {
         
         decimalView.rx.tapGesture().when(GestureRecognizerState.recognized).subscribe(onNext: { [weak self](tap) in
             guard let `self` = self else { return }
-            //
+            
+            self.next?.sendEventWith(Event.chooseDecimalNumberEvent.rawValue, userinfo: ["data": self.deciLabel.text ?? "", "self": self.decimalView])
+            
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 

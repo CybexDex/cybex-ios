@@ -12,6 +12,8 @@ import SwiftyJSON
 import Reachability
 
 protocol OrderBookCoordinatorProtocol {
+    
+    func openDecimalNumberVC(_ sender: UIView)
 }
 
 protocol OrderBookStateManagerProtocol {
@@ -36,7 +38,9 @@ class OrderBookCoordinator: NavCoordinator {
 }
 
 extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
-
+    func openDecimalNumberVC(_ sender: UIView) {
+        
+    }
 }
 
 extension OrderBookCoordinator: OrderBookStateManagerProtocol {
