@@ -116,14 +116,14 @@ class OrderBookViewController: BaseViewController {
 
     func showMarketPrice() {
         guard let pair = pair, let _ = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base) else { return }
-        if let selectedIndex = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+        if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
             return ticker.quote == pair.quote
         }) {
-            let tickers = appData.filterQuoteAssetTicker(pair.base)
+            let tickers = MarketHelper.filterQuoteAssetTicker(pair.base)
             let data = tickers[selectedIndex]
             
             let lastPrice =  data.latest.tradePriceAndAmountDecimal().price
-            let priceString = data.latest == "0" ? lastPrice + "≈¥" : lastPrice + "≈¥" + singleAssetRMBPrice(pair.quote).string(digits: 4, roundingMode: .down)
+            let priceString = data.latest == "0" ? lastPrice + "≈¥" : lastPrice + "≈¥" + AssetHelper.singleAssetRMBPrice(pair.quote).string(digits: 4, roundingMode: .down)
             
             let priceAttributeString = NSMutableAttributedString(string: priceString, attributes: [NSAttributedString.Key.foregroundColor : data.incre.color()])
             priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)], range: NSMakeRange(0, lastPrice.count))
