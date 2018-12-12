@@ -117,7 +117,7 @@ class GameModel: NSObject, GameDelegate {
                                                                                           amount: amountDecimal.int64Value,
                                                                                           fee_id: Int32(getUserId(feeAssetId)),
                                                                                           fee_amount: feeAmout.int64Value,
-                                                                                          memo: "",
+                                                                                          memo: "game:deposit:" + fromAccount.name,
                                                                                           from_memo_key: fromAccount.memoKey,
                                                                                           to_memo_key: account.memoKey)
                                         
