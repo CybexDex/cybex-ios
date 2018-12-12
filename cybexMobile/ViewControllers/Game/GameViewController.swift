@@ -169,8 +169,8 @@ extension GameViewController: GameModelCallBackDelegate {
     
     func openURL(_ url: String) {
         main {
-            self.openSafariViewController(url)
-//            self.setupLoadUrl(URL(string: url)!)
+            guard let safariURL = URL(string: url) else { return }
+            UIApplication.shared.open(safariURL)
         }
     }
 }
