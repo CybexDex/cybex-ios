@@ -26,6 +26,11 @@ class TradeView: UIView {
 
     @IBOutlet var items: [TradeLineView]!
 
+    @IBOutlet weak var decimalView: UIView!
+    @IBOutlet weak var deciLabel: UILabel!
+    @IBOutlet weak var deciImgView: UIImageView!
+    
+    
     var data: Any? {
         didSet {
             if let data = data as? OrderBook {
@@ -77,6 +82,11 @@ class TradeView: UIView {
 
             }).disposed(by: disposeBag)
         }
+        
+        decimalView.rx.tapGesture().when(GestureRecognizerState.recognized).subscribe(onNext: { [weak self](tap) in
+            guard let `self` = self else { return }
+            //
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 
     override var intrinsicContentSize: CGSize {
