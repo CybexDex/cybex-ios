@@ -68,9 +68,9 @@ class PortfolioData {
         }
 
         // 获取对应CYB的个数
-        let cybDecimal = getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice * realAmount.decimal()
+        let cybDecimal = getAssetRMBPrice(balance.assetType) / AssetConfiguration.shared.rmbOf(asset: .CYB) * realAmount.decimal()
 
-        if appData.cybRmbPrice == 0 {
+        if AssetConfiguration.shared.rmbOf(asset: .CYB) == 0 {
             cybPrice = "- CYB"
             rbmPrice    = "-"
         } else {
@@ -98,7 +98,7 @@ class MyPortfolioData {
             realAmount = getRealAmount(balance.assetType, amount: balance.balance).formatCurrency(digitNum: assetInfo.precision)
         }
 
-        if appData.cybRmbPrice == 0 {
+        if AssetConfiguration.shared.rmbOf(asset: .CYB) == 0 {
             rbmPrice = "-"
 
         } else {

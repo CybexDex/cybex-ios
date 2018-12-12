@@ -197,7 +197,7 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
                         if let response = response as? FullAccount, let account = response.account {
                             let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
                                                                               block_id: infos.block_id,
-                                                                              expiration: Date().timeIntervalSince1970 + AppConfiguration.TransactionExpiration,
+                                                                              expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
                                                                               chain_id: id,
                                                                               from_user_id: Int32(getUserId(uid)),
                                                                               to_user_id: Int32(getUserId(account.id)),

@@ -24,7 +24,7 @@ class OrderBookCellView: UIView {
             guard let showData = data as? (OrderBook.Order?, OrderBook.Order?, Decimal?, Decimal?) else { return }
 
             if let bid = showData.0 {
-                self.buyPrice.text = bid.price
+                self.buyPrice.text = bid.price.formatCurrency(digitNum: 6)
                 self.buyVolume.text = bid.volume
                 self.leftBoxWidth = self.leftBoxWidth.changeMultiplier(multiplier: showData.2!.cgfloat())
             } else {
@@ -35,7 +35,7 @@ class OrderBookCellView: UIView {
 
             //      print("left:\(self.leftBoxWidth.multiplier)  ")
             if let ask = showData.1 {
-                self.sellPrice.text = ask.price
+                self.sellPrice.text = ask.price.formatCurrency(digitNum: 6)
                 self.sellVolume.text = ask.volume
                 self.rightBoxWidth = self.rightBoxWidth.changeMultiplier(multiplier: showData.3!.cgfloat())
             } else {

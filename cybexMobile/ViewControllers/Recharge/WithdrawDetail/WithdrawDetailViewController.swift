@@ -39,7 +39,7 @@ class WithdrawDetailViewController: BaseViewController {
         if let trade = self.trade, let name = appData.assetInfo[trade.id]?.symbol.filterJade {
             self.title = name + R.string.localizable.withdraw_title.key.localized()
 //            let message = Localize.currentLanguage() == "en" ? trade.enInfo: trade.cnInfo
-            if name == "EOS" {
+            if name == AssetConfiguration.CybexAsset.EOS.rawValue {
                 self.isEOS = true
                 eosContainerView = EOSWithdrawView(frame: .zero)
                 self.view.addSubview(eosContainerView!)
@@ -49,7 +49,7 @@ class WithdrawDetailViewController: BaseViewController {
             } else {
                 containerView = WithdrawView(frame: .zero)
                 self.view.addSubview(containerView!)
-                if name == "XRP" {
+                if name == AssetConfiguration.CybexAsset.XRP.rawValue {
                     containerView?.tagView.isHidden = false
                 }
                 else {

@@ -63,7 +63,7 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
                             
                             let jsonstr = BitShareCoordinator.getClaimedSign(Int32(infos.block_num)!,
                                                                              block_id: infos.block_id,
-                                                                             expiration: Date().timeIntervalSince1970 + AppConfiguration.TransactionExpiration,
+                                                                             expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
                                                                              chain_id: id,
                                                                              fee_asset_id: 0,
                                                                              fee_amount: 0,

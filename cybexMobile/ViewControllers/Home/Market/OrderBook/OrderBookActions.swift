@@ -32,7 +32,7 @@ struct OrderBook: Equatable {
     let asks: [Order]
 }
 
-struct FetchedLimitData: Action {
-    let data: [LimitOrder]
+struct FetchedOrderBookData: Action {
+    let data: OrderBook?
     let pair: Pair
 }

@@ -79,7 +79,7 @@ class HomeContentView: UIView {
     }
 
     func dealWithReloadData(_ sender: [Ticker]) -> [Ticker] {
-        let originalData = sender.filter({$0.base == AssetConfiguration.marketBaseAssets[currentBaseIndex]})
+        let originalData = sender.filter({$0.base == MarketConfiguration.marketBaseAssets[currentBaseIndex].id})
         switch self.sortedAction {
         case .none:
             return originalData

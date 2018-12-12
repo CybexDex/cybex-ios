@@ -369,7 +369,7 @@ class UserManager {
 
     var refreshTime: TimeInterval = 6 {
         didSet {
-            appCoodinator.repeatFetchPairInfo(.veryLow)
+            appCoodinator.repeatFetchMarket(.veryLow)
         }
     }
     var isWithDraw: Bool = false
@@ -450,7 +450,7 @@ class UserManager {
             .subscribe(onNext: { (_) in
                 DispatchQueue.main.async {
                     if UserManager.shared.isLoginIn &&
-                        AssetConfiguration.shared.assetIds.count > 0 &&
+                        MarketConfiguration.shared.marketPairs.value.count > 0 &&
                         !CybexWebSocketService.shared.overload() {
                         UserManager.shared.fetchAccountInfo()
                     }

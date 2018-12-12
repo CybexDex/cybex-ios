@@ -19,7 +19,7 @@ class RechargeDetailViewController: BaseViewController {
     
     @IBOutlet weak var contentView: RechargeView!
     
-    var feeAssetId: String  = AssetConfiguration.CYB
+    var feeAssetId: String  = AssetConfiguration.CybexAsset.CYB.id
     var available: Decimal = 0.0
     var requireAmount: String = ""
     var isWithdraw: Bool = false
@@ -43,7 +43,7 @@ class RechargeDetailViewController: BaseViewController {
             if let trade = self.trade {
                 self.balance = getBalanceWithAssetId(trade.id)
                 self.precision = appData.assetInfo[trade.id]?.precision
-                self.isEOS = trade.id == AssetConfiguration.EOS || appData.assetInfo[trade.id]?.symbol.filterJade == "XRP"
+                self.isEOS = trade.id == AssetConfiguration.CybexAsset.EOS.id || appData.assetInfo[trade.id]?.symbol.filterJade == AssetConfiguration.CybexAsset.XRP.rawValue
             }
         }
     }
@@ -297,7 +297,7 @@ class RechargeDetailViewController: BaseViewController {
                 } else {
                     self.contentView.gateAwayFee.text = fee.amount.string(digits: feeInfo.precision) + " " + feeInfo.symbol.filterJade
                 }
-                self.feeAssetId = AssetConfiguration.CYB != fee.assetId ? fee.assetId : AssetConfiguration.CYB
+                self.feeAssetId = AssetConfiguration.CybexAsset.CYB.id != fee.assetId ? fee.assetId : AssetConfiguration.CybexAsset.CYB.id
                 self.setFinalAmount()
                 SwifterSwift.delay(milliseconds: 300, completion: {
                     self.changeWithdrawState()

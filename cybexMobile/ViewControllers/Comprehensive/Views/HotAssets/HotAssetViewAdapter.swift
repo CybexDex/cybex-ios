@@ -31,17 +31,8 @@ extension HotAssetView {
             
             var price: Decimal = 0
             let latest = model.latest.decimal()
-            switch model.base {
-            case AssetConfiguration.CYB:
-                price = latest * appData.cybRmbPrice
-            case AssetConfiguration.ETH:
-                price = latest * appData.ethRmbPrice
-            case AssetConfiguration.BTC:
-                price = latest * appData.btcRmbPrice
-            case AssetConfiguration.USDT:
-                price = latest * appData.usdtRmbPrice
-            default:
-                break
+            if let baseAsset = AssetConfiguration.CybexAsset(model.base) {
+                price = latest * AssetConfiguration.shared.rmbOf(asset: baseAsset)
             }
 
             self.rmbLabel.text = price == 0 ? "-" : "≈¥" + price.string(digits: 4, roundingMode: .down)

@@ -91,7 +91,7 @@ class ComprehensiveViewController: BaseViewController {
         }).disposed(by: disposeBag)
 
         appData.tickerData.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
-            return tickers.count == AssetConfiguration.shared.assetIds.count
+            return tickers.count == MarketConfiguration.shared.marketPairs.value.count
             }.subscribe(onNext: { [weak self](tickers) in
                 guard let self = self else { return }
                 if let hotPairs = self.coordinator?.state.hotPairs.value, self.isVisible {
@@ -147,7 +147,7 @@ class ComprehensiveViewController: BaseViewController {
 
                                     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        NotificationCenter.default.addObserver(forName: NotificationName.NetWorkChanged, object: nil, queue: nil) { [weak self](_) in
+        NotificationCenter.default.addObserver(forName: .NetWorkChanged, object: nil, queue: nil) { [weak self](_) in
             guard let self = self else { return }
             SwifterSwift.delay(milliseconds: 1000, completion: {
                 main {

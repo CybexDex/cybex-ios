@@ -16,10 +16,6 @@ import Repeat
 import RxCocoa
 
 class AppCoordinator {
-    lazy var creator = AppPropertyActionCreate()
-
-    var timer: Repeater?
-
     var fetchPariTimer: Repeater?
 
     var store = Store<AppState> (
@@ -43,8 +39,6 @@ class AppCoordinator {
 
     var entryCoordinator: NavCoordinator?
 
-    var etoStatus: BehaviorRelay<ETOHidden?> = BehaviorRelay(value: nil)
-
     weak var startLoadingVC: BaseViewController?
 
     init(rootVC: BaseTabbarViewController) {
@@ -57,6 +51,12 @@ class AppCoordinator {
             }
 
             return false
+        }
+
+
+        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (note) in
+            self.fetchPariTimer?.pause()
+            self.fetchPariTimer = nil
         }
     }
 
@@ -97,7 +97,7 @@ class AppCoordinator {
         tradeCoordinator.pushVC(TradeCoordinator.self, animated: false, context: nil)
         accountCoordinator.pushVC(AccountCoordinator.self, animated: false, context: nil)
 
-        if let status = self.etoStatus.value, status.isETOEnabled == true {
+        if let status = AppConfiguration.shared.enableSetting.value, status.isETOEnabled == true {
             etoCoordinator.pushVC(ETOCoordinator.self, animated: false, context: nil)
             self.container = [homeCoordinator, tradeCoordinator, etoCoordinator, accountCoordinator] as [NavCoordinator]
             rootVC.viewControllers = [comprehensive, home, trade, eto, account]

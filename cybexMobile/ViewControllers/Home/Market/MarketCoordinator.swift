@@ -12,15 +12,16 @@ import SwifterSwift
 
 protocol MarketCoordinatorProtocol {
     func openChatVC(_ sender: Pair)
+    func setupChildViewControllers(_ pair: Pair) -> [BaseViewController]
+    func refreshChildViewController(_ vcs: [BaseViewController], pair: Pair)
+    func openTradeViewChontroller(_ isBuy: Bool, pair: Pair)
+    func setDropBoxViewController()
 }
 
 protocol MarketStateManagerProtocol {
     var state: MarketState { get }
 
-    func setupChildViewControllers(_ pair: Pair) -> [BaseViewController]
-    func refreshChildViewController(_ vcs: [BaseViewController], pair: Pair)
-    func openTradeViewChontroller(_ isBuy: Bool, pair: Pair)
-    func setDropBoxViewController()
+    func requestKlineDetailData(pair: Pair, gap: Candlesticks)
     func fetchLastMessageId(_ channel: String, callback:@escaping (Int)->())
 }
 
@@ -72,13 +73,11 @@ extension MarketCoordinator: MarketCoordinatorProtocol {
             }
         }
     }
-}
 
-extension MarketCoordinator: MarketStateManagerProtocol {
     func openTradeViewChontroller(_ isBuy: Bool, pair: Pair) {
         self.rootVC.tabBarController?.selectedIndex = 2
         self.rootVC.popToRootViewController(animated: false)
-        
+
         SwifterSwift.delay(milliseconds: 100) {
             if let baseNavi = self.rootVC.tabBarController?.viewControllers![2] as? BaseNavigationController, let vc = baseNavi.topViewController as? TradeViewController {
                 vc.selectedIndex = isBuy ? 0 : 1
@@ -86,9 +85,9 @@ extension MarketCoordinator: MarketStateManagerProtocol {
                 vc.titlesView?.selectedIndex = vc.selectedIndex
             }
         }
-        
+
     }
-    
+
     func setDropBoxViewController() {
         guard let vc = R.storyboard.comprehensive.recordChooseViewController(),
             let marketVC = self.rootVC.topViewController as? MarketViewController,
@@ -107,7 +106,72 @@ extension MarketCoordinator: MarketStateManagerProtocol {
             vc.view.superview?.cornerRadius = 2
         }
     }
-    
+}
+
+extension MarketCoordinator: MarketStateManagerProtocol {
+    func requestKlineDetailData(pair: Pair, gap: Candlesticks) {
+        let now = Date()
+        let start = now.addingTimeInterval(TimeInterval(-gap.rawValue * 199))
+
+        let queryItem = AssetPairQueryParams(firstAssetId: pair.base,
+                                            secondAssetId: pair.quote,
+                                            timeGap: gap.rawValue,
+                                            startTime: start,
+                                            endTime: now)
+
+        let request = GetMarketHistoryRequest(queryParams: queryItem) { response in
+            if let buckets = response as? [Bucket] {
+                self.handlerKlines(queryItem, data: buckets)
+            }
+        }
+
+        CybexWebSocketService.shared.send(request: request, priority: .normal)
+    }
+
+    func handlerKlines(_ queryItem: AssetPairQueryParams, data: [Bucket]) {
+        var data = data
+        guard data.count > 0 else {
+            self.store.dispatch(KLineFetched(pair: Pair(base: queryItem.firstAssetId, quote: queryItem.secondAssetId), stick: Candlesticks(rawValue: queryItem.timeGap)!, assets: []))
+            return
+        }
+
+        let firstTrade = data[0]
+
+        guard firstTrade.open > queryItem.startTime.timeIntervalSince1970 else {
+            self.store.dispatch(KLineFetched(pair: Pair(base: queryItem.firstAssetId, quote: queryItem.secondAssetId), stick: Candlesticks(rawValue: queryItem.timeGap)!, assets:data))
+            return
+        }
+
+        var params = queryItem
+        params.startTime = queryItem.startTime.addingTimeInterval(-24 * 3600)
+        params.endTime = queryItem.startTime
+
+        let request = GetMarketHistoryRequest(queryParams: queryItem) { response in
+            if let buckets = response as? [Bucket], let bucket = buckets.last {
+                let close = bucket.openBase
+                let quoteClose = bucket.openQuote
+                if let addAsset = bucket.copy() as? Bucket {
+                    addAsset.closeBase = close
+                    addAsset.closeQuote = quoteClose
+                    addAsset.openBase = close
+                    addAsset.openQuote = quoteClose
+                    addAsset.highBase = close
+                    addAsset.highQuote = quoteClose
+                    addAsset.lowBase = close
+                    addAsset.lowQuote = quoteClose
+                    addAsset.baseVolume = "0"
+                    addAsset.quoteVolume = "0"
+                    addAsset.open = params.startTime.timeIntervalSince1970
+                    data.prepend(addAsset)
+                }
+            }
+
+            self.store.dispatch(KLineFetched(pair: Pair(base: queryItem.firstAssetId, quote: queryItem.secondAssetId), stick: Candlesticks(rawValue: queryItem.timeGap)!, assets:data))
+
+        }
+        CybexWebSocketService.shared.send(request: request, priority: .normal)
+    }
+
     func fetchLastMessageId(_ channel: String, callback:@escaping (Int)->()) {
         IMService.request(target: IMAPI.messageCount(channel), success: { (json) in
             callback(json.intValue)

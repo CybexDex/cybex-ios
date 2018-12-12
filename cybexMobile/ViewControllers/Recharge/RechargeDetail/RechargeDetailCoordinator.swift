@@ -194,7 +194,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                         let feeAmout = feeAmount.decimal() * pow(10, (appData.assetInfo[feeId]?.precision)!)
                         let jsonstr = BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
                                                                           block_id: infos.block_id,
-                                                                          expiration: Date().timeIntervalSince1970 + AppConfiguration.TransactionExpiration,
+                                                                          expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
                                                                           chain_id: id,
                                                                           from_user_id: Int32(getUserId((UserManager.shared.account.value?.id)!)),
                                                                           to_user_id: Int32(getUserId((self.state.data.value?.gatewayAccount)!)),
@@ -225,7 +225,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         var requestAmount: String = ""
 
         var finalAmount: Decimal = amount
-        if feeId != AssetConfiguration.CYB {
+        if feeId != AssetConfiguration.CybexAsset.CYB.id {
             if let gatewayFeeAmount = self.state.gatewayFee.value?.0, let gatewayFee = Decimal(string: gatewayFeeAmount.amount) {
                 if allAmount < gatewayFee + amount {
                     finalAmount -= gatewayFee

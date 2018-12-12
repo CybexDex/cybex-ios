@@ -9,6 +9,7 @@
 import UIKit
 import ReSwift
 import SwiftyJSON
+import Reachability
 
 protocol OrderBookCoordinatorProtocol {
 }
@@ -16,9 +17,9 @@ protocol OrderBookCoordinatorProtocol {
 protocol OrderBookStateManagerProtocol {
     var state: OrderBookState { get }
 
+    func subscribe(_ pair: Pair, depth: Int, count: Int)
     func resetData(_ pair: Pair)
 
-    func fetchData(_ pair: Pair)
     func updateMarketListHeight(_ height: CGFloat)
 }
 
@@ -28,6 +29,10 @@ class OrderBookCoordinator: NavCoordinator {
         state: nil,
         middleware: [trackingMiddleware]
     )
+
+    let service = MDPWebSocketService("", quoteName: "")
+    var depth: Int = 0
+    var count: Int = 0
 }
 
 extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
@@ -39,42 +44,77 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
         return store.state
     }
 
-    func resetData(_ pair: Pair) {
-        self.store.dispatch(FetchedLimitData(data: [], pair: pair))
+    func subscribe(_ pair: Pair, depth: Int, count: Int) {
+        guard let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else { return }
+
+        service.baseName = baseInfo.symbol
+        service.quoteName = quoteInfo.symbol
+
+        if !service.checkNetworConnected() {
+            service.mdpServiceDidConnected.delegate(on: self) { (self, _) in
+                self.service.subscribeOrderBook(depth, count: count)
+                self.depth = depth
+                self.count = count
+                self.service.subscribeTicker()
+                self.monitorService()
+            }
+
+            service.tickerDataDidReceived.delegate(on: self) { (self, price) in
+                print("----ticker: \(price)")
+            }
+
+            service.orderbookDataDidReceived.delegate(on: self) { (self, orderbook) in
+                print("----order book: \(orderbook)")
+                self.store.dispatch(FetchedOrderBookData(data: orderbook, pair: pair))
+            }
+
+            service.connect()
+        }
+        else {
+            self.service.unSubscribeOrderBook(self.depth, count: self.count)
+            self.service.unSubscribeTicker()
+            self.service.subscribeOrderBook(depth, count: count)
+            self.depth = depth
+            self.count = count
+            self.service.subscribeTicker()
+        }
     }
 
-    func fetchData(_ pair: Pair) {
-        if CybexWebSocketService.shared.overload() {
-            return
-        }
+    func monitorService() {
+        NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { (note) in
+            guard let reachability = note.object as? Reachability else {
+                return
+            }
 
-        fetchLimitOrders(with: pair, callback: {[weak self] (data) in
-            guard let self = self else { return }
-
-            Await.Queue.serialAsync.async {
-                let result = JSON(data).arrayValue
-                if result.count >= 1 {
-                    var data: [LimitOrder] = []
-                    for index in result {
-                        if let order = LimitOrder.deserialize(from: index.dictionaryObject!) {
-                            data.append(order)
-                        }
-                    }
-                    self.store.dispatch(FetchedLimitData(data: data, pair: pair))
+            switch reachability.connection {
+            case .wifi, .cellular:
+                if self.rootVC.topViewController is OrderBookViewController {
+                    self.service.reconnect()
                 }
+            case .none:
+                self.service.disconnect()
+                break
             }
 
-        })
-    }
+        }
 
-    func fetchLimitOrders(with pair: Pair, callback: CommonAnyCallback?) {
-        let request = GetLimitOrdersRequest(pair: pair) { response in
-            if let callback = callback {
-                callback(response)
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
+            if self.rootVC.topViewController is OrderBookViewController {
+                self.service.reconnect()
             }
         }
 
-        CybexWebSocketService.shared.send(request: request)
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
+            self.service.disconnect()
+        }
+    }
+
+    func disconnect() {
+        service.disconnect()
+    }
+
+    func resetData(_ pair: Pair) {
+        self.store.dispatch(FetchedOrderBookData(data: nil, pair: pair))
     }
 
     func updateMarketListHeight(_ height: CGFloat) {

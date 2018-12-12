@@ -57,19 +57,12 @@ class HomePairView: UIView {
             } else {
                 self.bulking.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
             }
+
             var price: Decimal = 0
             let latest = ticker.latest.decimal()
-            switch ticker.base {
-            case AssetConfiguration.CYB:
-                price = latest * appData.cybRmbPrice
-            case AssetConfiguration.ETH:
-                price = latest * appData.ethRmbPrice
-            case AssetConfiguration.BTC:
-                price = latest * appData.btcRmbPrice
-            case AssetConfiguration.USDT:
-                price = latest * appData.usdtRmbPrice
-            default:
-                break
+
+            if let baseAsset = AssetConfiguration.CybexAsset(ticker.base) {
+                price = latest * AssetConfiguration.shared.rmbOf(asset: baseAsset)
             }
 
             self.rbmL.text = price == 0 ? "-" : "≈¥" + price.string(digits: 4, roundingMode: .down)

@@ -75,28 +75,16 @@ struct AppState: StateType {
     var property: AppPropertyState
 }
 struct AppPropertyState {
-//    var data:BehaviorRelay<[HomeBucket]> = BehaviorRelay(value: [])
     var tickerData: BehaviorRelay<[Ticker]> = BehaviorRelay(value: [])
 
-    var matrixs: BehaviorRelay<[Pair: BucketMatrix]> = BehaviorRelay(value: [:])
-
-    var detailData: [Pair: [Candlesticks: [Bucket]]]?
-
-    var subscribeIds: [Pair: Int]?
-    var pairsRefreshTimes: [Pair: Double]?
-
+    //监听行情刷新
     var otherRequestRelyData: BehaviorRelay<Int?> = BehaviorRelay(value: nil)
 
+    //assetID -> info
     var assetInfo: [String: AssetInfo] = [:]
 
-    var rmbPrices: [RMBPrices] = []
-
 //    var eth_rmb_price: Double = 0
-    var cybRmbPrice: Decimal = 0
-    var ethRmbPrice: Decimal = 0
-    var btcRmbPrice: Decimal = 0
-    var usdtRmbPrice: Decimal = 0
-    var importMarketLists: [ImportantMarketPair] = []
+  
 
     func filterQuoteAssetTicker(_ base: String) -> [Ticker] {
         return self.tickerData.value.filter({ (currency) -> Bool in
@@ -139,7 +127,7 @@ struct HomeBucket: Equatable, Hashable {
     }
 }
 
-struct Pair: Hashable {
+struct Pair: Hashable {//id
     let base: String
     let quote: String
 }
@@ -175,23 +163,8 @@ struct NextPage: Action {}
 
 struct ResetPage: Action {}
 
-struct FecthMarketListAction: Action {
-    var data: [ImportantMarketPair]
-}
-
-struct MarketsFetched: Action {
-    let pair: AssetPairQueryParams
-    let assets: [Bucket]
-}
-
 struct TickerFetched: Action {
     let asset: Ticker
-}
-
-struct KLineFetched: Action {
-    let pair: Pair
-    let stick: Candlesticks
-    let assets: [Bucket]
 }
 
 struct RefreshState: Action {
@@ -199,126 +172,10 @@ struct RefreshState: Action {
     let vc: BaseViewController?
 }
 
-struct SubscribeSuccess: Action {
-    let pair: Pair
-    let id: Int
-}
-
 struct AssetInfoAction: Action {
     let assetID: String
     let info: AssetInfo
 }
 
-struct FecthEthToRmbPriceAction: Action {
-    let price: [RMBPrices]
-}
-struct FecthUSDTToRmbPriceAction: Action {
-    let price: Double
-}
-
 typealias MarketDataCallback = ([Bucket]) -> Void
 typealias CurrencyDataCallback = (Ticker) -> Void
-
-class AppPropertyActionCreate: LoadingActionCreator {
-    public typealias ActionCreator = (_ state: AppState, _ store: Store<AppState>) -> Action?
-
-    public typealias AsyncActionCreator = (
-        _ state: AppState,
-        _ store: Store <AppState>,
-        _ actionCreatorCallback: @escaping ((ActionCreator) -> Void)
-        ) -> Void
-
-    func fetchMarket(with sub: Bool = true, params: AssetPairQueryParams, priority: Operation.QueuePriority = .normal, callback: MarketDataCallback?) -> ActionCreator {
-        return { state, store in
-            self.fetchingMarketList(params, priority: priority, callback: {[weak self] (res) in
-                guard let self = self else { return }
-
-                if var assets = res as? [Bucket] {
-                    if assets.count > 0 {
-                        let asset = assets[0]
-                        if asset.open > params.startTime.timeIntervalSince1970 {
-                            self.cycleFetch(asset, params: params, priority: priority, callback: { (oAsset) in
-                                if let oAsset = oAsset as? Bucket {
-                                    let close = oAsset.openBase
-                                    let quoteClose = oAsset.openQuote
-                                    if let addAsset = asset.copy() as? Bucket {
-                                        let gapCount = ceil((asset.open - params.startTime.timeIntervalSince1970) / Double(asset.seconds)!)
-                                        addAsset.closeBase = close
-                                        addAsset.closeQuote = quoteClose
-                                        addAsset.openBase = close
-                                        addAsset.openQuote = quoteClose
-                                        addAsset.highBase = close
-                                        addAsset.highQuote = quoteClose
-                                        addAsset.lowBase = close
-                                        addAsset.lowQuote = quoteClose
-                                        addAsset.baseVolume = "0"
-                                        addAsset.quoteVolume = "0"
-                                        addAsset.open = asset.open - gapCount * Double(asset.seconds)!
-                                        assets.prepend(addAsset)
-                                    }
-                                }
-                                callback?(assets)
-                            })
-                        } else {
-                            callback?(assets)
-                        }
-                    } else {
-                        callback?([])
-                    }
-                } else {
-                }
-            })
-            if sub {
-
-            }
-            return nil
-
-        }
-    }
-
-    func fetchCurrencyList(_ params: AssetPairQueryParams, priority: Operation.QueuePriority = .normal, callback: CurrencyDataCallback?) {
-        let request = GetTickerRequest(baseName: params.firstAssetId, quoteName: params.secondAssetId) { response in
-            if let callback = callback, let data = response as? Ticker {
-                callback(data)
-            }
-        }
-        CybexWebSocketService.shared.send(request: request, priority: priority)
-    }
-
-    func fetchingMarketList(_  params: AssetPairQueryParams, priority: Operation.QueuePriority = .normal, callback: CommonAnyCallback?) {
-
-        let request = GetMarketHistoryRequest(queryParams: params) { response in
-            if let callback = callback {
-                callback(response)
-            }
-        }
-
-        CybexWebSocketService.shared.send(request: request, priority: priority)
-    }
-
-    func cycleFetch(_ asset: Bucket,
-                    params: AssetPairQueryParams,
-                    priority: Operation.QueuePriority = .normal,
-                    callback: CommonAnyCallback?) {
-        var reParams = params
-        reParams.startTime = params.startTime.addingTimeInterval(-24 * 3600)
-        reParams.endTime = params.startTime
-        self.fetchingMarketList(reParams, priority: priority, callback: {[weak self] (oRes) in
-            guard let self = self else { return }
-            if let oAssets = oRes as? [Bucket] {
-                if oAssets.count > 0, let oAssetLast = oAssets.last {
-                    if let callback = callback {
-                        callback(oAssetLast)
-                    }
-                } else if oAssets.count > 0 {
-                    self.cycleFetch(asset, params: reParams, callback: callback)
-                } else {
-                    if let callback = callback {
-                        callback(0)
-                    }
-                }
-            }
-        })
-    }
-
-}

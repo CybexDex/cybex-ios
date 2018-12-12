@@ -36,13 +36,13 @@ class AddAddressViewController: BaseViewController {
     func setupUI() {
         if addressType == .withdraw {
             self.containerView.asset.content.text = appData.assetInfo[self.asset]?.symbol.filterJade
-            if self.asset == AssetConfiguration.EOS {
+            if self.asset == AssetConfiguration.CybexAsset.EOS.id {
                 self.title = R.string.localizable.address_title_add_eos.key.localized()
                 self.containerView.address.title = R.string.localizable.eos_withdraw_account.key
             } else {
                 self.title = R.string.localizable.address_title_add.key.localized()
                 self.containerView.address.title = R.string.localizable.withdraw_address.key
-                if appData.assetInfo[self.asset]?.symbol.filterJade == "XRP" {
+                if appData.assetInfo[self.asset]?.symbol.filterJade == AssetConfiguration.CybexAsset.XRP.rawValue {
                     self.containerView.memo.isHidden = false
                     self.containerView.memo.name.text = "Tag"
                 }
@@ -59,7 +59,7 @@ class AddAddressViewController: BaseViewController {
         } else {
             self.title = R.string.localizable.account_title_add.key.localized()
             self.containerView.assetShadowView.isHidden = true
-            if self.asset != AssetConfiguration.EOS {
+            if self.asset != AssetConfiguration.CybexAsset.EOS.id {
                 self.containerView.memo.isHidden = true
             }
             if self.transferAddress != nil {

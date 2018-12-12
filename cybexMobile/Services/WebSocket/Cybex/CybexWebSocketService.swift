@@ -64,8 +64,12 @@ class CybexWebSocketService: NSObject {
 
     static let shared = CybexWebSocketService()
 
+    public let canSendMessage = Delegate<(), Void>()
+
     private override init() {
         super.init()
+
+        monitor()
         self.queue = OperationQueue()
 
         self.queue.maxConcurrentOperationCount = 3
@@ -131,7 +135,6 @@ class CybexWebSocketService: NSObject {
             isClosing = false
             needAutoConnect = true
             if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
-                log.debug("test detecting node .....https://hangzhou.51nebula.com/")
                 self.currentNode = NodeURLString.test
                 connectNode(node: NodeURLString.test)
                 return
@@ -332,7 +335,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
 
             self.queue.isSuspended = false
 
-            appCoodinator.getLatestData()
+            canSendMessage.call()
         }
 
     }

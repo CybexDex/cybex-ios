@@ -16,4 +16,12 @@ import RxCocoa
 struct MarketState: BaseState {
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+
+    var detailData: BehaviorRelay<[Pair: [Candlesticks: [Bucket]]]?> = BehaviorRelay(value: nil)
+}
+
+struct KLineFetched: Action {
+    let pair: Pair
+    let stick: Candlesticks
+    let assets: [Bucket]
 }

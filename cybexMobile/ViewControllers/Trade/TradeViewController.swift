@@ -47,7 +47,7 @@ class TradeViewController: BaseViewController {
 
     var coordinator: (TradeCoordinatorProtocol & TradeStateManagerProtocol)?
 
-    var pair: Pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB) {
+    var pair: Pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id) {
         didSet {
             if self.chooseTitleView != nil {
                 self.sendEventActionWith()
@@ -74,7 +74,7 @@ class TradeViewController: BaseViewController {
         setupUI()
         setupEvent()
 
-        self.pair = Pair(base: AssetConfiguration.ETH, quote: AssetConfiguration.CYB)
+        self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -133,7 +133,7 @@ class TradeViewController: BaseViewController {
     }
 
     @objc override func leftAction(_ sender: UIButton) {
-        if let baseIndex = AssetConfiguration.marketBaseAssets.index(of: pair.base), let index = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+        if let baseIndex = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base), let index = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
             return ticker.base == pair.base && ticker.quote == pair.quote
         }) {
             self.coordinator?.openMarket(index: index, currentBaseIndex: baseIndex)

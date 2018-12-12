@@ -28,15 +28,20 @@ class OrderBookViewController: BaseViewController {
     var VCType: Int = OrderbookType.contentView.rawValue
     var pair: Pair? {
         didSet {
-            guard let pair = pair else { return }
+            guard let pair = pair, oldValue != pair else { return }
             if self.tradeView != nil {
                 //        self.coordinator?.resetData(pair)
                 showMarketPrice()
+                self.coordinator?.subscribe(pair, depth: 2, count: 5)
             }
-            self.coordinator?.fetchData(pair)
+            else {
+                self.coordinator?.subscribe(pair, depth: 6, count: 20)
+            }
+
             if self.tradeView != nil || self.contentView != nil {
                 setTopTitle()
             }
+
         }
     }
 
@@ -44,6 +49,8 @@ class OrderBookViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
     }
+
+
     func setupUI() {
         if VCType == OrderbookType.contentView.rawValue {
             contentView = OrderBookContentView(frame: .zero)
@@ -87,6 +94,7 @@ class OrderBookViewController: BaseViewController {
     }
 
     override func configureObserveState() {
+        
         self.coordinator!.state.data.asObservable().skip(1).distinctUntilChanged()
             .subscribe(onNext: {[weak self] (result) in
                 guard let self = self else { return }
@@ -101,15 +109,13 @@ class OrderBookViewController: BaseViewController {
                     self.contentView.tableView.isHidden = false
                     self.coordinator?.updateMarketListHeight(500)
                 } else {
-                    if self.coordinator?.state.pair.value == self.pair {
-                        self.tradeView.data = result
-                    }
+                    self.tradeView.data = result
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 
     func showMarketPrice() {
-        guard let pair = pair, let _ = AssetConfiguration.marketBaseAssets.index(of: pair.base) else { return }
+        guard let pair = pair, let _ = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base) else { return }
         if let selectedIndex = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
             return ticker.quote == pair.quote
         }) {
@@ -140,12 +146,12 @@ extension OrderBookViewController: TradePair {
     }
 
     func refresh() {
-        guard let pair = pair else { return }
-        if self.tradeView != nil {
-            //      self.coordinator?.resetData(pair)
-
-            showMarketPrice()
-        }
-        self.coordinator?.fetchData(pair)
+//        guard let pair = pair else { return }
+//        if self.tradeView != nil {
+//            //      self.coordinator?.resetData(pair)
+//
+//            showMarketPrice()
+//        }
+//        self.coordinator?.subscribe(pair, depth: 2, count: 5)
     }
 }

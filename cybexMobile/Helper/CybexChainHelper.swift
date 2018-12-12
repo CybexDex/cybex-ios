@@ -1,9 +1,9 @@
 //
-//  Utils.swift
+//  CybexChainHelper.swift
 //  cybexMobile
 //
-//  Created by koofrank on 2018/5/18.
-//  Copyright © 2018年 Cybex. All rights reserved.
+//  Created by koofrank on 2018/12/11.
+//  Copyright © 2018 Cybex. All rights reserved.
 //
 
 import Foundation
@@ -13,14 +13,8 @@ import SwiftyJSON
 import SwiftyUserDefaults
 import cybex_ios_core_cpp
 
-func openPage(_ urlString: String) {
-    if let url = urlString.url {
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-}
-
 func getChainId(callback:@escaping(String) -> Void) {
-    if AppConfiguration.shared.chainID.isEmpty {
+    if CybexConfiguration.shared.chainID.isEmpty {
         let requeset = GetChainIDRequest { (id) in
             if let id = id as? String {
                 callback(id)
@@ -30,7 +24,7 @@ func getChainId(callback:@escaping(String) -> Void) {
         }
         CybexWebSocketService.shared.send(request: requeset)
     } else {
-        callback(AppConfiguration.shared.chainID)
+        callback(CybexConfiguration.shared.chainID)
     }
 }
 
@@ -51,16 +45,16 @@ func calculateFee(_ operation: String,
                   operationID: ChainTypesOperations = .limitOrderCreate,
                   filterRepeat: Bool = true,
                   completion:@escaping (_ success: Bool,
-                                        _ amount: Decimal,
-                                        _ assetID: String) -> Void) {
+    _ amount: Decimal,
+    _ assetID: String) -> Void) {
     let request = GetRequiredFees(response: { (data) in
         if let fees = data as? [Fee], let cybAmount = fees.first?.amount.decimal(), let cyb = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
-            return balance.assetType == AssetConfiguration.CYB
+            return balance.assetType == AssetConfiguration.CybexAsset.CYB.id
         }).first?.balance.decimal() {
             if cyb >= cybAmount {
-                let amount = getRealAmount(AssetConfiguration.CYB, amount: cybAmount.string)
+                let amount = getRealAmount(AssetConfiguration.CybexAsset.CYB.id, amount: cybAmount.string)
 
-                completion(true, amount, AssetConfiguration.CYB)
+                completion(true, amount, AssetConfiguration.CybexAsset.CYB.id)
             } else {
                 let request = GetRequiredFees(response: { (data) in
                     if let fees = data as? [Fee], let baseAmount = fees.first?.amount.decimal() {
@@ -72,14 +66,14 @@ func calculateFee(_ operation: String,
 
                                 completion(true, amount, focusAssetId)
                             } else {//余额不足
-                                completion(false, getRealAmount(AssetConfiguration.CYB, amount: cybAmount.string), AssetConfiguration.CYB)
+                                completion(false, getRealAmount(AssetConfiguration.CybexAsset.CYB.id, amount: cybAmount.string), AssetConfiguration.CybexAsset.CYB.id)
 
                             }
                         } else {
-                            completion(false, getRealAmount(AssetConfiguration.CYB, amount: cybAmount.string), AssetConfiguration.CYB)
+                            completion(false, getRealAmount(AssetConfiguration.CybexAsset.CYB.id, amount: cybAmount.string), AssetConfiguration.CybexAsset.CYB.id)
                         }
                     } else {
-                        completion(false, getRealAmount(AssetConfiguration.CYB, amount: cybAmount.string), AssetConfiguration.CYB)
+                        completion(false, getRealAmount(AssetConfiguration.CybexAsset.CYB.id, amount: cybAmount.string), AssetConfiguration.CybexAsset.CYB.id)
                     }
                 }, operationStr: operation, assetID: focusAssetId, operationID: operationID)
 
@@ -89,13 +83,16 @@ func calculateFee(_ operation: String,
         } else {
             completion(false, 0, "")
         }
-    }, operationStr: operation, assetID: AssetConfiguration.CYB, operationID: operationID)
+    }, operationStr: operation, assetID: AssetConfiguration.CybexAsset.CYB.id, operationID: operationID)
 
     CybexWebSocketService.shared.send(request: request)
 }
 
 func calculateAssetRelation(assetIDAName: String, assetIDBName: String) -> (base: String, quote: String) {
-    let relation: [String] = AssetConfiguration.orderName
+    let relation: [String] = [AssetConfiguration.CybexAsset.USDT,
+                              AssetConfiguration.CybexAsset.ETH,
+                              AssetConfiguration.CybexAsset.BTC,
+                              AssetConfiguration.CybexAsset.CYB].map({ $0.id })
 
     var indexA = -1
     var indexB = -1
@@ -130,64 +127,53 @@ func calculateAssetRelation(assetIDAName: String, assetIDBName: String) -> (base
 
 func getAssetRMBPrice(_ asset: String, base: String = "") -> Decimal {
 
-    guard let assetInfo = appData.assetInfo[asset] else { return 0 }
-    if AssetConfiguration.orderName.contains(assetInfo.symbol.filterJade) {
-        if let data = appData.rmbPrices.filter({return $0.name == assetInfo.symbol.filterJade}).first {
-            return data.value.decimal()
-        }
-        return 0
-    }
+//    guard let assetInfo = appData.assetInfo[asset] else { return 0 }
+//    if MarketConfiguration.orderName.map({ $0.rawValue }).contains(assetInfo.symbol.filterJade) {
+//        if let data = AppConfiguration.shared.rmbPrices.filter({return $0.name == assetInfo.symbol.filterJade}).first {
+//            return data.value.decimal()
+//        }
+//        return 0
+//    }
+//
+//    let tickers = appData.tickerData.value.filter({ (ticker) -> Bool in
+//        if base == "" {
+//            return ticker.quote == asset
+//        } else {
+//            return ticker.quote == asset && ticker.base == base
+//        }
+//    })
+//
+//    guard var ticker = tickers.first else {
+//        return 0
+//    }
+//    var basePrice: Decimal = 0
+//    if tickers.count > 1 { //CYB USDT ETH BTC
+//        var baseAssets = MarketConfiguration.marketBaseAssets
+//        var indexs = [Int]()
+//        for item in tickers {
+//            if item.base == AssetConfiguration.CybexAsset.CYB.id {
+//                ticker = item
+//                indexs.append(0)
+//            } else if item.base == AssetConfiguration.USDT {
+//                ticker = item
+//                indexs.append(1)
+//            } else if item.base == AssetConfiguration.ETH {
+//                ticker = item
+//                indexs.append(2)
+//            } else if item.base == AssetConfiguration.BTC {
+//                ticker = item
+//                indexs.append(3)
+//            }
+//        }
+//        indexs = indexs.sorted(by: {$0 < $1})
+//        basePrice = getAssetRMBPrice(baseAssets[indexs[0]])
+//        ticker = tickers.filter({$0.base == baseAssets[indexs[0]] && $0.quote == asset}).first!
+//    } else {
+//        basePrice = getAssetRMBPrice(ticker.base)
+//    }
 
-    let tickers = appData.tickerData.value.filter({ (ticker) -> Bool in
-        if base == "" {
-            return ticker.quote == asset
-        } else {
-            return ticker.quote == asset && ticker.base == base
-        }
-    })
-
-    guard var ticker = tickers.first else {
-        return 0
-    }
-    var basePrice: Decimal = 0
-    if tickers.count > 1 {
-        var baseAssets = [AssetConfiguration.CYB, AssetConfiguration.USDT, AssetConfiguration.ETH, AssetConfiguration.BTC]
-        var indexs = [Int]()
-        for item in tickers {
-            if item.base == AssetConfiguration.CYB {
-                ticker = item
-                indexs.append(0)
-            } else if item.base == AssetConfiguration.USDT {
-                ticker = item
-                indexs.append(1)
-            } else if item.base == AssetConfiguration.ETH {
-                ticker = item
-                indexs.append(2)
-            } else if item.base == AssetConfiguration.BTC {
-                ticker = item
-                indexs.append(3)
-            }
-        }
-        indexs = indexs.sorted(by: {$0 < $1})
-        basePrice = getAssetRMBPrice(baseAssets[indexs[0]])
-        ticker = tickers.filter({$0.base == baseAssets[indexs[0]] && $0.quote == asset}).first!
-    } else {
-        basePrice = getAssetRMBPrice(ticker.base)
-    }
-
-    return ticker.latest.decimal() * basePrice
-}
-
-func getCachedBucket(_ homebucket: HomeBucket) -> BucketMatrix {
-    var result: BucketMatrix?
-    var matrixs = appState.property.matrixs.value
-
-    if let bucket = matrixs[Pair(base: homebucket.base, quote: homebucket.quote)] {
-        result = bucket
-    }
-
-    return result ?? BucketMatrix(homebucket)
-
+//    return ticker.latest.decimal() * basePrice
+    return 0
 }
 
 func getRealAmount(_ id: String, amount: String) -> Decimal {
@@ -198,20 +184,6 @@ func getRealAmount(_ id: String, amount: String) -> Decimal {
     let precisionNumber = pow(10, asset.precision)
 
     return amount.decimal() / precisionNumber
-}
-
-func saveImageToPhotos() {
-    guard let window = UIApplication.shared.keyWindow else { return }
-
-    UIGraphicsBeginImageContextWithOptions(window.bounds.size, false, 0.0)
-
-    window.layer.render(in: UIGraphicsGetCurrentContext()!)
-
-    let image = UIGraphicsGetImageFromCurrentImageContext()
-
-    UIGraphicsEndImageContext()
-
-    UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
 }
 
 // 得到一个ID获取最后一个数据
@@ -231,7 +203,7 @@ func getWithdrawDetailInfo(addressInfo: String, amountInfo: String, withdrawFeeI
     var memo: String = R.string.localizable.withdraw_memo.key.localized()
 
     let content = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
-    if isEOS && memoInfo.count > 0 && receiveAmountInfo.contains("XRP") {
+    if isEOS && memoInfo.count > 0 && receiveAmountInfo.contains(AssetConfiguration.CybexAsset.XRP.rawValue) {
         memo = "Tag"
     }
     return (isEOS && memoInfo.count > 0) ?
@@ -286,18 +258,18 @@ func getTransferInfo(_ account: String, quanitity: String, fee: String, memo: St
 }
 
 func claimLockupAsset(_ info: LockupAssteData) -> [NSAttributedString] {
-    
+
     guard let name = UserManager.shared.name.value else { return []}
     let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
     var result: [NSAttributedString] = []
-    
+
     let quantity = R.string.localizable.transfer_quantity.key.localized()
     let account = R.string.localizable.transfer_account_title.key.localized()
-    
+
     let amount = info.amount + " " +  info.name.filterJade
     let quantityInfo = "<name>\(quantity):</name> <\(contentStyle)>" + amount + "</\(contentStyle)>"
     let accountInfo = "<name>\(account):</name> <\(contentStyle)>" + name + "</\(contentStyle)>"
-    
+
     result.append(quantityInfo.set(style: StyleNames.alertContent.rawValue)!)
     result.append(accountInfo.set(style: StyleNames.alertContent.rawValue)!)
     return result
@@ -306,22 +278,22 @@ func claimLockupAsset(_ info: LockupAssteData) -> [NSAttributedString] {
 
 
 func confirmDeleteWithDrawAddress(_ info: WithdrawAddress) -> [NSAttributedString] {
-    
+
     let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
-    let isEOS = info.currency == AssetConfiguration.EOS
+    let isEOS = info.currency == AssetConfiguration.CybexAsset.EOS.id
     let existMemo = info.memo != nil && !info.memo!.isEmpty
 
     var result: [NSAttributedString] = []
     let title = "<\(contentStyle)>" +
         (isEOS ? R.string.localizable.delete_confirm_account.key.localized() : R.string.localizable.delete_confirm_address.key.localized()) +
-        "</\(contentStyle)>"
+    "</\(contentStyle)>"
     result.append(title.set(style: StyleNames.alertContent.rawValue)!)
 
     let note = "<name>" +
         R.string.localizable.address_mark.key.localized() +
         "：</name>" + "<\(contentStyle)>" +
         "\(info.name)" +
-        "</\(contentStyle)>"
+    "</\(contentStyle)>"
     result.append(note.set(style: StyleNames.alertContent.rawValue)!)
 
     let address = "<name>" +
@@ -329,7 +301,7 @@ func confirmDeleteWithDrawAddress(_ info: WithdrawAddress) -> [NSAttributedStrin
         "：</name>" +
         "<\(contentStyle)>" +
         "\(info.address)" +
-        "</\(contentStyle)>"
+    "</\(contentStyle)>"
     result.append(address.set(style: StyleNames.alertContent.rawValue)!)
 
     if existMemo {
@@ -375,24 +347,6 @@ func confirmSubmitCrowd(_ name: String, amount: String, fee: String) -> [NSAttri
     return result
 }
 
-func checkMaxLength(_ sender: String, maxLength: Int) -> String {
-    if sender.contains(".") {
-        let stringArray = sender.components(separatedBy: ".")
-        if let last = stringArray.last, last.count > maxLength, let first = stringArray.first, let maxLast = last.substring(from: 0, length: maxLength) {
-            return first + "." + maxLast
-        }
-    }
-    return sender
-}
-
-func addressOf(_ pointer: UnsafeRawPointer) -> Int {
-    return Int(bitPattern: pointer)
-}
-
-func addressOf<T: AnyObject>(_ point: T) -> Int {
-    return unsafeBitCast(point, to: Int.self)
-}
-
 func getBalanceWithAssetId(_ asset: String) -> Balance? {
     if let balances = UserManager.shared.balances.value {
         for balance in balances {
@@ -403,17 +357,6 @@ func getBalanceWithAssetId(_ asset: String) -> Balance? {
         return nil
     }
     return nil
-}
-
-func getTimeZone() -> TimeInterval {
-    let timeZone = TimeZone.current
-    return TimeInterval(timeZone.secondsFromGMT(for: Date()))
-}
-
-enum FundType: String {
-    case WITHDRAW
-    case DEPOSIT
-    case ALL = ""
 }
 
 func sortNameBasedonAddress(_ names: [AddressName]) -> [String] {
@@ -446,31 +389,4 @@ func sortNameBasedonAddress(_ names: [AddressName]) -> [String] {
     let sortedNames = newSectionsArray.flatMap({ $0 }).map({ $0.name })
 
     return sortedNames
-}
-
-struct WeakObject<T: AnyObject>: Equatable, Hashable {
-    static func == (lhs: WeakObject<T>, rhs: WeakObject<T>) -> Bool {
-        return lhs.object === rhs.object
-    }
-
-    weak var object: T?
-    init(_ object: T) {
-        self.object = object
-    }
-
-    var hashValue: Int {
-        if let object = self.object { return ObjectIdentifier(object).hashValue } else { return 0 }
-    }
-}
-
-func labelBaselineOffset(_ lineHeight: CGFloat, fontHeight: CGFloat) -> Float {
-    return ((lineHeight - lineHeight) / 4.0).float
-}
-
-func changeEnvironmentAction() {
-    if Defaults.hasKey(.environment) && Defaults[.environment] == "test" {
-        AssetConfiguration.marketBaseAssets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.BTC]
-    } else {
-        AssetConfiguration.marketBaseAssets = [AssetConfiguration.ETH, AssetConfiguration.CYB, AssetConfiguration.USDT, AssetConfiguration.BTC]
-    }
 }

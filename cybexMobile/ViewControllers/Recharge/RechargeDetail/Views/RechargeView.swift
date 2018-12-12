@@ -88,7 +88,7 @@ class RechargeView: CybexBaseView {
     }
     
     func updateViewWithAssetName(_ tradeInfo: AssetInfo) {
-        if tradeInfo.symbol.filterJade == "EOS" {
+        if tradeInfo.symbol.filterJade == AssetConfiguration.CybexAsset.EOS.rawValue {
             self.addressView.name = R.string.localizable.eos_withdraw_account.key
             self.addressView.content.placeholder = R.string.localizable.eos_withdraw_account_placehold.key.localized()
             self.addressView.content.setPlaceHolderTextColor(UIColor.steel50)
@@ -99,7 +99,7 @@ class RechargeView: CybexBaseView {
                 self.addressView.btn.locali = R.string.localizable.choose_account.key
             }
         }
-        else if tradeInfo.symbol.filterJade == "XRP" {
+        else if tradeInfo.symbol.filterJade == AssetConfiguration.CybexAsset.XRP.rawValue {
             self.memoView.title.text = "Tag"
             self.memoView.content.placeholder = R.string.localizable.withdraw_tag_placehold.key.localized()
             self.memoView.content.setPlaceHolderTextColor(UIColor.steel50)

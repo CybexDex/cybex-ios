@@ -27,7 +27,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
     var pair: Pair? {
         didSet {
-            guard let pair = pair, let index = AssetConfiguration.marketBaseAssets.index(of: pair.base) else { return }
+            guard let pair = pair, let index = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base) else { return }
 
             if let selectedIndex = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
                 return ticker.quote == pair.quote
@@ -44,12 +44,12 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     var base: String {
         if self.vcType == 1 {
             if let titleView = self.contentView {
-                return AssetConfiguration.marketBaseAssets[titleView.currentBaseIndex]
+                return MarketConfiguration.marketBaseAssets.map({ $0.id })[titleView.currentBaseIndex]
             }
             return ""
         } else {
             if let titleView = self.businessTitleView {
-                return AssetConfiguration.marketBaseAssets[titleView.currentBaseIndex]
+                return MarketConfiguration.marketBaseAssets.map({ $0.id })[titleView.currentBaseIndex]
             }
             return ""
         }
@@ -105,14 +105,14 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         appData.tickerData.asObservable().filter({[weak self] (result) -> Bool in
             guard let self = self else { return false}
             if self.vcType == ViewType.comprehensive.rawValue {
-                if result.count == AssetConfiguration.shared.assetIds.count {
+                if result.count == MarketConfiguration.shared.marketPairs.value.count {
                     return true
                 }
             } else {
                 let tickers = result.filter { (ticker) -> Bool in
                     return ticker.base == self.base
                 }
-                if tickers.count == AssetConfiguration.shared.assetIds.filter({ $0.base == self.base}).count,
+                if tickers.count == MarketConfiguration.shared.marketPairs.value.filter({ $0.base == self.base}).count,
                     tickers.count != 0 {
                     return true
                 }
@@ -159,7 +159,7 @@ extension HomeViewController {
     @objc func cellClicked(_ data: [String: Any]) {
         if vcType == ViewType.homeContent.rawValue {//首页
             if let selectedPair = data["pair"] as? Pair {
-                let tickers = appData.tickerData.value.filter({$0.base == AssetConfiguration.marketBaseAssets[self.contentView!.currentBaseIndex]})
+                let tickers = appData.tickerData.value.filter({$0.base == MarketConfiguration.marketBaseAssets.map({ $0.id })[self.contentView!.currentBaseIndex]})
                 for index in 0..<tickers.count {
                     let item = tickers[index]
                     if item.base == selectedPair.base && item.quote == selectedPair.quote {
@@ -170,12 +170,12 @@ extension HomeViewController {
             }
         } else if vcType == ViewType.comprehensive.rawValue {
             if let index = data["index"] as? Int,
-                appData.tickerData.value.count == AssetConfiguration.shared.assetIds.count {
+                appData.tickerData.value.count == MarketConfiguration.shared.marketPairs.value.count {
                 let datas = appData.filterPopAssetsCurrency()
                 if datas.count > index {
                     let buckets = appData.filterPopAssetsCurrency()[index]
 
-                    if let baseIndex = AssetConfiguration.marketBaseAssets.firstIndex(of: buckets.base) {
+                    if let baseIndex = MarketConfiguration.marketBaseAssets.map({ $0.id }).firstIndex(of: buckets.base) {
                         let markets = appData.filterQuoteAssetTicker(buckets.base)
                         if let curIndex = markets.firstIndex(of: buckets) {
                             self.coordinator?.openMarket(index: curIndex, currentBaseIndex: baseIndex)

@@ -123,7 +123,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
         var result = false
         Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
             if let viewmodel = coor.state.selectedViewModel.value {
-                if viewmodel.viewModel.model.id == AssetConfiguration.EOS {
+                if viewmodel.viewModel.model.id == AssetConfiguration.CybexAsset.EOS.id {
                     result = true
                 }
             }
@@ -145,7 +145,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
 
     func copy() {
         if let addressData = self.state.selectedAddress.value {
-            if addressData.currency == AssetConfiguration.EOS || addressData.currency == AssetConfiguration.XRP{
+            if addressData.currency == AssetConfiguration.CybexAsset.EOS.id || addressData.currency == AssetConfiguration.CybexAsset.XRP.id {
                 if let memo = addressData.memo {
                     UIPasteboard.general.string = addressData.address + "(\(memo))"
                 } else {

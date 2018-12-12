@@ -14,16 +14,18 @@ import SwiftyUserDefaults
 import Localize_Swift
 
 enum AppAPI {
-    case setting
+    case setting  // 是否显示ETO Share
     case checkVersionUpdate
     case checkAppStoreVersionUpdate
     case explorerURL
 
-    case withdrawList
-    case topUpList
-    case assetWhiteList 
+    case assetWhiteList
     case stickTopMarketPair
     case marketlist(base: String)
+    case precisionSetting // 深度图精度
+
+    case withdrawList
+    case topUpList
     case withdrawAnnounce(assetId: String)
     case topUpAnnounce(assetId: String)
 
@@ -34,8 +36,6 @@ enum AppAPI {
     case items
 
     case outerPrice
-
-    case precisionSetting
 }
 
 struct AppService {

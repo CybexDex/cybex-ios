@@ -421,6 +421,23 @@
 		731C11C7214D045E00761955 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B9214D045D00761955 /* Result.framework */; };
 		731C11C8214D045E00761955 /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11BA214D045E00761955 /* Moya.framework */; };
 		7323B4B02A3A6EFE54C1B30D7491D953 /* MyHistoryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E17D1C068A4ED09DD447E3434E5E550 /* MyHistoryCellView.xib */; };
+		7333854F21BF674A0026765F /* PairPrecision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333854E21BF674A0026765F /* PairPrecision.swift */; };
+		7333855121BF943D0026765F /* AppDelegate+Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333855021BF943D0026765F /* AppDelegate+Business.swift */; };
+		7333855321BF9A210026765F /* AppDelegate+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333855221BF9A210026765F /* AppDelegate+Analytics.swift */; };
+		7333855521BF9A510026765F /* AppDelegate+ThirdParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333855421BF9A510026765F /* AppDelegate+ThirdParty.swift */; };
+		7333855721BF9ABF0026765F /* AppDelegate+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333855621BF9ABF0026765F /* AppDelegate+Log.swift */; };
+		7333855921BF9B0E0026765F /* AppDelegate+UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333855821BF9B0E0026765F /* AppDelegate+UserSetting.swift */; };
+		7333855B21BF9B370026765F /* AppDelegate+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333855A21BF9B370026765F /* AppDelegate+UI.swift */; };
+		7333855D21BF9C620026765F /* AppDelegate+Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333855C21BF9C620026765F /* AppDelegate+Monitor.swift */; };
+		7333855F21BF9CAB0026765F /* AppDelegate+Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333855E21BF9CAB0026765F /* AppDelegate+Start.swift */; };
+		7333856221BF9DDB0026765F /* CybexWebSocketServiceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333856121BF9DDB0026765F /* CybexWebSocketServiceMonitor.swift */; };
+		7333856421BFA4160026765F /* AssetConfigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333856321BFA4160026765F /* AssetConfigration.swift */; };
+		7333856621BFA4270026765F /* MarketConfigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333856521BFA4270026765F /* MarketConfigration.swift */; };
+		7333856821BFA4410026765F /* AppConfigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333856721BFA4410026765F /* AppConfigration.swift */; };
+		7333856A21BFA54D0026765F /* CybexConfigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333856921BFA54D0026765F /* CybexConfigration.swift */; };
+		7333856C21BFA7BB0026765F /* CybexChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333856B21BFA7BB0026765F /* CybexChainHelper.swift */; };
+		7333856F21BFA8210026765F /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333856E21BFA8210026765F /* AppHelper.swift */; };
+		7333857121BFC7320026765F /* TradeConfigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333857021BFC7320026765F /* TradeConfigration.swift */; };
 		7336B79B214F569F0086A9DF /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7336B79A214F569E0086A9DF /* XLPagerTabStrip.framework */; };
 		7336B79F214F5ABE0086A9DF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CF75C7E63B1305DDDE74491D7E5C9AB /* Localizable.strings */; };
 		7336B7BD214F717E0086A9DF /* ESTabBarController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7336B7BC214F717D0086A9DF /* ESTabBarController.framework */; };
@@ -1237,6 +1254,23 @@
 		731C11B9214D045D00761955 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		731C11BA214D045E00761955 /* Moya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya.framework; path = Carthage/Build/iOS/Moya.framework; sourceTree = "<group>"; };
 		73335AC821476AA700CEF254 /* cybexMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cybexMobile.entitlements; sourceTree = "<group>"; };
+		7333854E21BF674A0026765F /* PairPrecision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairPrecision.swift; sourceTree = "<group>"; };
+		7333855021BF943D0026765F /* AppDelegate+Business.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Business.swift"; sourceTree = "<group>"; };
+		7333855221BF9A210026765F /* AppDelegate+Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Analytics.swift"; sourceTree = "<group>"; };
+		7333855421BF9A510026765F /* AppDelegate+ThirdParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+ThirdParty.swift"; sourceTree = "<group>"; };
+		7333855621BF9ABF0026765F /* AppDelegate+Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Log.swift"; sourceTree = "<group>"; };
+		7333855821BF9B0E0026765F /* AppDelegate+UserSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+UserSetting.swift"; sourceTree = "<group>"; };
+		7333855A21BF9B370026765F /* AppDelegate+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+UI.swift"; sourceTree = "<group>"; };
+		7333855C21BF9C620026765F /* AppDelegate+Monitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Monitor.swift"; sourceTree = "<group>"; };
+		7333855E21BF9CAB0026765F /* AppDelegate+Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Start.swift"; sourceTree = "<group>"; };
+		7333856121BF9DDB0026765F /* CybexWebSocketServiceMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexWebSocketServiceMonitor.swift; sourceTree = "<group>"; };
+		7333856321BFA4160026765F /* AssetConfigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetConfigration.swift; sourceTree = "<group>"; };
+		7333856521BFA4270026765F /* MarketConfigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketConfigration.swift; sourceTree = "<group>"; };
+		7333856721BFA4410026765F /* AppConfigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigration.swift; sourceTree = "<group>"; };
+		7333856921BFA54D0026765F /* CybexConfigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexConfigration.swift; sourceTree = "<group>"; };
+		7333856B21BFA7BB0026765F /* CybexChainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexChainHelper.swift; sourceTree = "<group>"; };
+		7333856E21BFA8210026765F /* AppHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
+		7333857021BFC7320026765F /* TradeConfigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeConfigration.swift; sourceTree = "<group>"; };
 		7336B799214F55160086A9DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7336B79A214F569E0086A9DF /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XLPagerTabStrip.framework; path = Carthage/Build/iOS/XLPagerTabStrip.framework; sourceTree = "<group>"; };
 		7336B79E214F5A310086A9DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1721,15 +1755,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		001CE5518F8A5D177DC13712C25E1325 /* Constants */ = {
+		001CE5518F8A5D177DC13712C25E1325 /* Config */ = {
 			isa = PBXGroup;
 			children = (
 				B3305C1C418372FA9FA71DED7DFCFA48 /* Constants.swift */,
 				73F50BA9213FB5B60071B08D /* Error.swift */,
 				7398BEBE2181BFD3004C042E /* Style.swift */,
 				737E597421A5487C001199E4 /* Config.xcconfig */,
+				7333856321BFA4160026765F /* AssetConfigration.swift */,
+				7333856521BFA4270026765F /* MarketConfigration.swift */,
+				7333856721BFA4410026765F /* AppConfigration.swift */,
+				7333856921BFA54D0026765F /* CybexConfigration.swift */,
+				7333857021BFC7320026765F /* TradeConfigration.swift */,
 			);
-			path = Constants;
+			path = Config;
 			sourceTree = "<group>";
 		};
 		07AFDEED995508D21891713F6D6AC143 /* Detail */ = {
@@ -2229,6 +2268,7 @@
 				72AAC8AF2106FC840040793F /* Record.swift */,
 				149A7633B62C66BF0A91E02182615CB5 /* Trade.swift */,
 				A594949DD908310B30266DF5349ACA42 /* Vesting.swift */,
+				7333854E21BF674A0026765F /* PairPrecision.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2664,6 +2704,36 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		7333856021BF9D3C0026765F /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				E353A01867231C8CC09DA7A1507BF18D /* AppDelegate.swift */,
+				7333855021BF943D0026765F /* AppDelegate+Business.swift */,
+				7333855221BF9A210026765F /* AppDelegate+Analytics.swift */,
+				7333855421BF9A510026765F /* AppDelegate+ThirdParty.swift */,
+				7333855621BF9ABF0026765F /* AppDelegate+Log.swift */,
+				7333855821BF9B0E0026765F /* AppDelegate+UserSetting.swift */,
+				7333855A21BF9B370026765F /* AppDelegate+UI.swift */,
+				7333855C21BF9C620026765F /* AppDelegate+Monitor.swift */,
+				7333855E21BF9CAB0026765F /* AppDelegate+Start.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		7333856D21BFA7DB0026765F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				0700F9114B418AA4174389E04F53D3F7 /* debounce-throttle.swift */,
+				73731D8221A5378E005B9B3C /* Helpers.swift */,
+				73731D8421A5382A005B9B3C /* Delegate.swift */,
+				73731D8621A53846005B9B3C /* CallbackQueue.swift */,
+				73731D8821A53894005B9B3C /* NotificationToken.swift */,
+				73731D8A21A538AF005B9B3C /* KeychainStore.swift */,
+				73731D8C21A538CF005B9B3C /* Result.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		7345FD85219EADB40066BD0E /* ChatService */ = {
 			isa = PBXGroup;
 			children = (
@@ -2967,6 +3037,7 @@
 			isa = PBXGroup;
 			children = (
 				7391101521BA509C00412CE1 /* CybexWebSocketService.swift */,
+				7333856121BF9DDB0026765F /* CybexWebSocketServiceMonitor.swift */,
 				7391101621BA509C00412CE1 /* JsonRPCGenerator.swift */,
 				7391101721BA509C00412CE1 /* API */,
 			);
@@ -3610,7 +3681,7 @@
 			children = (
 				73731D8E21A53C32005B9B3C /* Crypto */,
 				45513F547AB0EFB7BD213DB2BFAC9168 /* Base */,
-				001CE5518F8A5D177DC13712C25E1325 /* Constants */,
+				001CE5518F8A5D177DC13712C25E1325 /* Config */,
 				B597FD23132156F1CD884836F3169B37 /* Coordinator */,
 				608A4704AAC596F5EFAB29C5AC0A5F63 /* Extensions */,
 				88F1804CF27CB63CB3DC548DEB599783 /* Localization */,
@@ -3619,10 +3690,10 @@
 				52E831991663F5942874636E6DF23660 /* Modules */,
 				D20B8449A5999F7E7C8218C87D423298 /* Services */,
 				C31EC57D28FCC624D48C5CC42DE96975 /* UI */,
-				D81AB8D8584B64ADAFF37AA7BF174C4D /* Utils */,
+				D81AB8D8584B64ADAFF37AA7BF174C4D /* Helper */,
 				F189D4AC3A5BB2DB266277BAD8CB0EA4 /* ViewControllers */,
 				39391F871F58EBD32CBE03CE2DB590CC /* addons */,
-				E353A01867231C8CC09DA7A1507BF18D /* AppDelegate.swift */,
+				7333856021BF9D3C0026765F /* AppDelegate */,
 				0973B8B46EF51BF8FC558A1FED9DA347 /* Images.xcassets */,
 				56A43386E14D074DD3A6AA2AEC1C9808 /* Info.plist */,
 				344D3561BDA811115A7E28BC4203C711 /* InfoPlist.strings */,
@@ -3745,20 +3816,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D81AB8D8584B64ADAFF37AA7BF174C4D /* Utils */ = {
+		D81AB8D8584B64ADAFF37AA7BF174C4D /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				7333856B21BFA7BB0026765F /* CybexChainHelper.swift */,
+				7333856E21BFA8210026765F /* AppHelper.swift */,
 				1FD9516DB7B3ECF8651E0B2A8702D273 /* Tools.swift */,
 				E58821AB0DBC6F8D25C15C288A13EEC6 /* Utils.swift */,
-				0700F9114B418AA4174389E04F53D3F7 /* debounce-throttle.swift */,
-				73731D8221A5378E005B9B3C /* Helpers.swift */,
-				73731D8421A5382A005B9B3C /* Delegate.swift */,
-				73731D8621A53846005B9B3C /* CallbackQueue.swift */,
-				73731D8821A53894005B9B3C /* NotificationToken.swift */,
-				73731D8A21A538AF005B9B3C /* KeychainStore.swift */,
-				73731D8C21A538CF005B9B3C /* Result.swift */,
+				7333856D21BFA7DB0026765F /* Common */,
 			);
-			path = Utils;
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		DD14FDE5A48F0441DA90B4C31EAA9B27 /* Views */ = {
@@ -4580,6 +4647,7 @@
 				B53165C099917599B9638053318C729A /* AccountAssetOperationView.swift in Sources */,
 				221C6176213926570021C007 /* ETORecordListActions.swift in Sources */,
 				305DB17562E3D02F04E0122C1C4674A4 /* AccountAssetOperationsItemView.swift in Sources */,
+				7333855921BF9B0E0026765F /* AppDelegate+UserSetting.swift in Sources */,
 				7345FD91219EBF7F0066BD0E /* UIDevice+FCUUID.m in Sources */,
 				65A0AB87E09E879EFAFA04DBA6B15D3E /* AccountCoordinator.swift in Sources */,
 				739EFB602181D10E00424061 /* UIScreenEdgePanGestureRecognizer+RxGesture.swift in Sources */,
@@ -4648,6 +4716,7 @@
 				7345FD90219EBF7F0066BD0E /* FCUUID.m in Sources */,
 				73539C492179A210008395AC /* UIViewController+TopMostViewController.swift in Sources */,
 				188394B25D1EF3596A01900469FACBFB /* BusinessTitleView.swift in Sources */,
+				7333856A21BFA54D0026765F /* CybexConfigration.swift in Sources */,
 				73731D9221A53C60005B9B3C /* CryptoAlgorithm.swift in Sources */,
 				7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */,
 				221EC2382105B1930059F856 /* GrowContentView.swift in Sources */,
@@ -4667,6 +4736,7 @@
 				5E6C74108A768A913651E001F98CDA92 /* CBKLineAccessoryView.swift in Sources */,
 				461B84D25CFA564E9455211A24902BB7 /* CBKLineBrush.swift in Sources */,
 				A971765C0FF4C52CAA1C001A3ABBC1B1 /* CBKLineDrawView.swift in Sources */,
+				7333856F21BFA8210026765F /* AppHelper.swift in Sources */,
 				45E03EE6B4BBE7286E7287D3DFD1B9D6 /* CBKLineMainView.swift in Sources */,
 				73539C4B2179A210008395AC /* NavigatorDelegate.swift in Sources */,
 				7307A91B212518DC00BD6444 /* LGButton.swift in Sources */,
@@ -4737,6 +4807,7 @@
 				737E596D21A541E6001199E4 /* JWK.swift in Sources */,
 				7386F2C121216B9E00ABC924 /* WithdrawAddressViewController.swift in Sources */,
 				72199D8C21045D4700575226 /* TransferListCoordinator.swift in Sources */,
+				7333856821BFA4410026765F /* AppConfigration.swift in Sources */,
 				8691BEEE7629D4BE41D13D82D9AF29A9 /* GradientLabelView.swift in Sources */,
 				FF9F0639B5927B79A3EFC30AF470DE97 /* GradientLayer.swift in Sources */,
 				221C6175213926570021C007 /* ETORecordListCoordinator.swift in Sources */,
@@ -4767,6 +4838,7 @@
 				72199D6721044FD100575226 /* RechargeRecodeActions.swift in Sources */,
 				7267DA1D2135244A004AF9AF /* ETO.swift in Sources */,
 				221EC24F2105CF310059F856 /* TransferReducers.swift in Sources */,
+				7333855721BF9ABF0026765F /* AppDelegate+Log.swift in Sources */,
 				72DBCA7721391A4300905303 /* CybexWebReducers.swift in Sources */,
 				72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */,
 				59EC4E5138ECE3D4E7570F3EE0EF28E0 /* IconGenerator.swift in Sources */,
@@ -4865,6 +4937,7 @@
 				73587E9D2133EB15006CF8A6 /* RPCircularProgress.swift in Sources */,
 				724C5D4D2153956900FF1DE7 /* ComprehensiveItemViewAdapter.swift in Sources */,
 				562EE9FB61A1D1EBCB263F8C8DE265B6 /* OrderBookViewController.swift in Sources */,
+				7333856C21BFA7BB0026765F /* CybexChainHelper.swift in Sources */,
 				7307A926212518DC00BD6444 /* ThemifyIcon.swift in Sources */,
 				72D58291219C188700BB9842 /* ChatDownInputViewAdapter.swift in Sources */,
 				73539C4E2179A210008395AC /* URLMatcher.swift in Sources */,
@@ -4873,6 +4946,7 @@
 				737E596421A53CC7001199E4 /* CryptoError.swift in Sources */,
 				7386F2D82121737600ABC924 /* AddressHomeTableViewCellViewView.swift in Sources */,
 				806E6CA899929830A51F0FBB79089A80 /* PairCardView.swift in Sources */,
+				7333855321BF9A210026765F /* AppDelegate+Analytics.swift in Sources */,
 				73731D8521A5382A005B9B3C /* Delegate.swift in Sources */,
 				48373055E74D836258CD46891945EF38 /* PairDetailView.swift in Sources */,
 				D3C87D3A247487C8D834A828782FC472 /* PairListHorizantalView.swift in Sources */,
@@ -4897,6 +4971,7 @@
 				10F92CEABF192DAC227A5005DD4F12BF /* RechargeDetailActions.swift in Sources */,
 				133E7DE8927D9AD19315D14E638939BE /* RechargeDetailCoordinator.swift in Sources */,
 				73731D8921A53894005B9B3C /* NotificationToken.swift in Sources */,
+				7333855D21BF9C620026765F /* AppDelegate+Monitor.swift in Sources */,
 				D1C63B5AAC5552A99528E306AC7F57E0 /* RechargeDetailReducers.swift in Sources */,
 				221C6181213940140021C007 /* ETORecordListViewViewAdapter.swift in Sources */,
 				EEC52B0701FDE9B489D4D61193C9B420 /* RechargeDetailViewController.swift in Sources */,
@@ -4907,6 +4982,7 @@
 				7204FFC42153A62B00EB0FC7 /* HotAssetsViewAdapter.swift in Sources */,
 				221EC24E2105CF310059F856 /* TransferViewController.swift in Sources */,
 				72968D2A2158D72200B0AA77 /* RecordChooseView.swift in Sources */,
+				7333856221BF9DDB0026765F /* CybexWebSocketServiceMonitor.swift in Sources */,
 				29C911F371D5F143FB814E54626700D5 /* RechargeSegment.swift in Sources */,
 				73731D8321A5378E005B9B3C /* Helpers.swift in Sources */,
 				E593AB226F596677B1664A82995509CA /* RechargeViewController.swift in Sources */,
@@ -4917,11 +4993,14 @@
 				89BE803D714EF0B7126DCF66439F86A9 /* RegisterReducers.swift in Sources */,
 				0D989B23FC27CC92FAF32E53754D6330 /* RegisterViewController.swift in Sources */,
 				5FA8151B70B4FFED7B6D2206D2E13F14 /* SettingActions.swift in Sources */,
+				7333855F21BF9CAB0026765F /* AppDelegate+Start.swift in Sources */,
 				DC9C7889A0A2E47D006896DEAE7B534C /* SettingCell.swift in Sources */,
 				8FF572CD842115D51EF4E8A116CA56AE /* SettingCoordinator.swift in Sources */,
 				31C896C3EDB9257E2EBC0DAFC5097A7B /* SettingDetailActions.swift in Sources */,
 				D7D9A9DE89519CA3D6E61C32D3DDC7B8 /* SettingDetailCoordinator.swift in Sources */,
 				C02C4003FF83596F8B0016AC9DC90B06 /* SettingDetailReducers.swift in Sources */,
+				7333855521BF9A510026765F /* AppDelegate+ThirdParty.swift in Sources */,
+				7333855121BF943D0026765F /* AppDelegate+Business.swift in Sources */,
 				73D012992159D71800C95896 /* URLNavigationMap.swift in Sources */,
 				72EC6A5920F4612200CEAFF6 /* RechargeView.swift in Sources */,
 				221C614E213535CC0021C007 /* ShareView.swift in Sources */,
@@ -4946,6 +5025,7 @@
 				73539C5E2179A282008395AC /* DNSPageViewManager.swift in Sources */,
 				73587EAD2137C057006CF8A6 /* ETOCrowdReducers.swift in Sources */,
 				666C535B0D6573A3C341FC0208A91E71 /* Theme_Extensions.swift in Sources */,
+				7333856621BFA4270026765F /* MarketConfigration.swift in Sources */,
 				724C5D4821538D3C00FF1DE7 /* HotAssetView.swift in Sources */,
 				72DBCA7521391A4300905303 /* CybexWebActions.swift in Sources */,
 				4C82733DA80E26D923B4A21677ACDE89 /* TimeGapView.swift in Sources */,
@@ -4953,12 +5033,14 @@
 				5012DA167BBBF31D3392DD2453106515 /* Trade.swift in Sources */,
 				73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */,
 				A806E796D672D304574E9E46E50F16EC /* TradeActions.swift in Sources */,
+				7333856421BFA4160026765F /* AssetConfigration.swift in Sources */,
 				8528FA970144D53CB71EF87725B0AAE9 /* TradeCell.swift in Sources */,
 				728C281C215B6D6E0097840A /* AnnounceView.swift in Sources */,
 				72199D6921044FD100575226 /* RechargeRecodeReducers.swift in Sources */,
 				724C5D392153472800FF1DE7 /* GatewayQueryService.swift in Sources */,
 				4E2B0C9A04FD5D11C7AFA4CC9DF8492F /* TradeCoordinator.swift in Sources */,
 				E549F16D59025C0BE00C28BFA24C9E0D /* TradeHistoryActions.swift in Sources */,
+				7333855B21BF9B370026765F /* AppDelegate+UI.swift in Sources */,
 				221C6178213926570021C007 /* ETORecordListReducers.swift in Sources */,
 				B4125FF4D7849714DA71E04BC6D888AB /* TradeHistoryCell.swift in Sources */,
 				1004CC5E6B42E88C009CBF159D123279 /* TradeHistoryCellView.swift in Sources */,
@@ -4992,6 +5074,7 @@
 				3B0EB65C210313B200F19C31 /* YourPortfolioHeadView.swift in Sources */,
 				C02132F00200B408020442C307CEE0B6 /* TradeView.swift in Sources */,
 				7CA82BA6BC1F22AAA929D52CD5C4434F /* TradeViewController.swift in Sources */,
+				7333857121BFC7320026765F /* TradeConfigration.swift in Sources */,
 				72199DA22104636900575226 /* TransferDetailReducers.swift in Sources */,
 				73539C5C2179A282008395AC /* DNSPageView.swift in Sources */,
 				73731D9021A53C45005B9B3C /* CryptoData.swift in Sources */,
@@ -5028,6 +5111,7 @@
 				72DBCA652138D94200905303 /* ContainerView.swift in Sources */,
 				1EE747D219462D96F1597B374E8338E8 /* UserManager.swift in Sources */,
 				7260DDB521A2A25C00A5E3D6 /* ChatDirectionActions.swift in Sources */,
+				7333854F21BF674A0026765F /* PairPrecision.swift in Sources */,
 				20C5C352A5EE76CE53F6F1F8C7CE1FB6 /* Utils.swift in Sources */,
 				7386F2AE21216B2200ABC924 /* TransferAddressHomeActions.swift in Sources */,
 				E3A0DE7C4852EA18DEEC292ADE0A8F49 /* Vesting.swift in Sources */,

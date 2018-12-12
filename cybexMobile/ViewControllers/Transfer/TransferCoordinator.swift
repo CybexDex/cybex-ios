@@ -136,7 +136,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         if let vc = R.storyboard.account.addAddressViewController() {
             vc.coordinator = AddAddressCoordinator(rootVC: self.rootVC)
             vc.addressType = .transfer
-            vc.asset = AssetConfiguration.CYB
+            vc.asset = AssetConfiguration.CybexAsset.CYB.id
             self.rootVC.pushViewController(vc, animated: true)
         }
     }
@@ -217,7 +217,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
 
                         let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
                                                                           block_id: infos.block_id,
-                                                                          expiration: Date().timeIntervalSince1970 + AppConfiguration.TransactionExpiration,
+                                                                          expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
                                                                           chain_id: id,
                                                                           from_user_id: Int32(getUserId(fromAccount.id)),
                                                                           to_user_id: Int32(getUserId(toAccount.id)),

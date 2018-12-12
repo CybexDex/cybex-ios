@@ -74,8 +74,8 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
     func openMarketList(_ pair: Pair) {
         if let marketVC = R.storyboard.main.marketViewController() {
             var currentBaseIndex = 0
-            for index in 0..<AssetConfiguration.marketBaseAssets.count {
-                if pair.base == AssetConfiguration.marketBaseAssets[index] {
+            for index in 0..<MarketConfiguration.marketBaseAssets.count {
+                if pair.base == MarketConfiguration.marketBaseAssets.map({ $0.id })[index] {
                     currentBaseIndex = index
                 }
             }

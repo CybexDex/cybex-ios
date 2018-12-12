@@ -79,7 +79,7 @@ class MarketViewController: BaseViewController {
     }()
 
     lazy var tickers: [Ticker] = {
-        let markets = appData.filterQuoteAssetTicker(AssetConfiguration.marketBaseAssets[currentBaseIndex])
+        let markets = appData.filterQuoteAssetTicker(MarketConfiguration.marketBaseAssets.map({ $0.id })[currentBaseIndex])
         return markets
     }()
 
@@ -218,7 +218,8 @@ class MarketViewController: BaseViewController {
         kLineView.isHidden = hiddenKLine
 
         resetKLinePosition = hiddenKLine
-        AppConfiguration.shared.appCoordinator.requestKlineDetailData(pair: pair, gap: timeGap, vc: self, selector: #selector(refreshKLine))
+
+        self.coordinator?.requestKlineDetailData(pair: pair, gap: timeGap)
     }
 
     func updateIndex() {
@@ -230,13 +231,13 @@ class MarketViewController: BaseViewController {
         }
     }
 
-    @objc func refreshKLine() {
+    func refreshKLine() {
         if ticker.latest == "0" {
             endLoading()
             return
         }
 
-        if let klineDatas = appData.detailData, let klineData = klineDatas[pair] {
+        if let klineDatas = self.coordinator?.state.detailData.value, let klineData = klineDatas[pair] {
 
             guard let response = klineData[timeGap] else {
                 endLoading()
@@ -291,11 +292,11 @@ class MarketViewController: BaseViewController {
 
                     let lastIdx = dataArray.count - 1
                     if lastIdx >= 0 {
-                        let gapCount = (model.date - dataArray[lastIdx].date) / self.timeGap.rawValue
+                        let gapCount = (model.date - dataArray[lastIdx].date) / self.timeGap.rawValue.double
                         if gapCount > 1 {
                             for _ in 1 ..< Int(gapCount) {
                                 let lastModel = dataArray.last!
-                                let gapModel = CBKLineModel(date: lastModel.date + self.timeGap.rawValue,
+                                let gapModel = CBKLineModel(date: lastModel.date + self.timeGap.rawValue.double,
                                                             open: lastModel.close,
                                                             close: lastModel.close,
                                                             high: lastModel.close,
@@ -316,11 +317,11 @@ class MarketViewController: BaseViewController {
                 if dataArray.count > 0 {
                     var lastModel = dataArray.last!
 
-                    let surplusCount = (Date().timeIntervalSince1970 - lastModel.date) / self.timeGap.rawValue
+                    let surplusCount = (Date().timeIntervalSince1970 - lastModel.date) / self.timeGap.rawValue.double
                     if surplusCount >= 1 {
                         for _ in 0 ..< Int(surplusCount) {
                             lastModel = dataArray.last!
-                            let gapModel = CBKLineModel(date: lastModel.date + self.timeGap.rawValue,
+                            let gapModel = CBKLineModel(date: lastModel.date + self.timeGap.rawValue.double,
                                                         open: lastModel.close,
                                                         close: lastModel.close,
                                                         high: lastModel.close,
@@ -356,6 +357,13 @@ class MarketViewController: BaseViewController {
                     self.performSelector(onMainThread: #selector(self.refreshTotalView), with: nil, waitUntilDone: false)
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+
+        coordinator?.state.detailData.asObservable().subscribe(onNext: {[weak self] (data) in
+            guard let self = self else { return }
+
+            self.refreshKLine()
+        }).disposed(by: disposeBag)
+
     }
 
     @objc func refreshTotalView() {

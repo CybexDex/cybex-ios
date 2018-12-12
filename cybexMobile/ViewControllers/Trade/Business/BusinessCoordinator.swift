@@ -171,7 +171,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
         blockchainParams { (blockchainParams) in
             if let jsonStr = BitShareCoordinator.getLimitOrder(blockchainParams.block_num,
                                                                block_id: blockchainParams.block_id,
-                                                               expiration: Date().timeIntervalSince1970 + AppConfiguration.TransactionExpiration,
+                                                               expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
                                                                chain_id: blockchainParams.chain_id,
                                                                user_id: userid.getID,
                                                                order_expiration: Date().timeIntervalSince1970 + 3600 * 24 * 365,
