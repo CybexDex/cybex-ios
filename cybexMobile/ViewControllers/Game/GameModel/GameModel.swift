@@ -57,7 +57,7 @@ class GameModel: NSObject, GameDelegate {
             let cybInfo = appData.assetInfo[cybBalance.assetType] {
             cybAmount = cybBalance.balance.decimal() / pow(10, cybInfo.precision)
         }
-        let expiration = Date().timeIntervalSince1970 + AppConfiguration.TransactionExpiration
+        let expiration = Date().timeIntervalSince1970 + 300
         let signer = BitShareCoordinator.getRecodeLoginOperation(accountName,
                                                                  asset: "",
                                                                  fundType: "",
