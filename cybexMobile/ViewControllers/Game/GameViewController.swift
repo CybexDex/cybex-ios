@@ -140,6 +140,7 @@ extension GameViewController: UIWebViewDelegate {
         object.viewController = self
         object.context = context
         context.setObject(object, forKeyedSubscript: self.jsObjectName as NSCopying & NSObjectProtocol)
+        context.objectForKeyedSubscript("timeout")?.call(withArguments: [])
     }
 }
 
@@ -168,7 +169,8 @@ extension GameViewController: GameModelCallBackDelegate {
     
     func openURL(_ url: String) {
         main {
-            self.setupLoadUrl(URL(string: url)!)
+            self.openSafariViewController(url)
+//            self.setupLoadUrl(URL(string: url)!)
         }
     }
 }
