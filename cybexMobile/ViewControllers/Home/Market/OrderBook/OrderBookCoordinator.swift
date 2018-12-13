@@ -52,6 +52,9 @@ extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
         vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.white.hexString(true)]
         vc.typeIndex = .orderbook
         vc.delegate = orderVC
+        vc.maxCount = maxDecimal
+        vc.count = count
+        vc.selectedIndex = selectedDecimal
         vc.coordinator = RecordChooseCoordinator(rootVC: self.rootVC)
         orderVC.present(vc, animated: true) {
             vc.view.superview?.cornerRadius = 2

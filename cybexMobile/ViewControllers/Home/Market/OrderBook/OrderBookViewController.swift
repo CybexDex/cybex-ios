@@ -124,10 +124,14 @@ class OrderBookViewController: BaseViewController {
             
             let lastPrice =  data.latest.tradePriceAndAmountDecimal().price
             let priceString = data.latest == "0" ? lastPrice + "≈¥" : lastPrice + "≈¥" + AssetHelper.singleAssetRMBPrice(pair.quote).string(digits: 4, roundingMode: .down)
-            
-            let priceAttributeString = NSMutableAttributedString(string: priceString, attributes: [NSAttributedString.Key.foregroundColor : data.incre.color()])
-            priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)], range: NSMakeRange(0, lastPrice.count))
-            priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)], range: NSMakeRange(lastPrice.count, priceString.count - lastPrice.count))
+            let priceAttributeString = NSMutableAttributedString(string: priceString,
+                                                                 attributes: [NSAttributedString.Key.foregroundColor : data.incre.color()])
+            priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14,
+                                                                                                weight: UIFont.Weight.medium)],
+                                               range: NSMakeRange(0, lastPrice.count))
+            priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)],
+                                               range: NSMakeRange(lastPrice.count,
+                                                                  priceString.count - lastPrice.count))
             self.tradeView.amount.attributedText = priceAttributeString
         }
     }
@@ -159,9 +163,7 @@ extension OrderBookViewController {
         guard let text = data["data"] as? String, text.count != 0, let senderView = data["self"] as? UIView else {
             return
         }
-        
-        
-        
+        self.coordinator?.openDecimalNumberVC(senderView, maxDecimal: 4, selectedDecimal: 0)
     }
 }
 
