@@ -260,6 +260,7 @@
 		72199DAB2104680900575226 /* TransferContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199DAA2104680900575226 /* TransferContentView.xib */; };
 		72199DAD2104687400575226 /* TransferLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72199DAC2104687400575226 /* TransferLineView.swift */; };
 		72199DAF2104687D00575226 /* TransferLineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72199DAE2104687D00575226 /* TransferLineView.xib */; };
+		7224386621C2630F002DA6BC /* CybexPopoverBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7224386521C2630F002DA6BC /* CybexPopoverBackgroundView.swift */; };
 		722EC86421895F490091F1BF /* RechargeHeaderViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722EC86121895F490091F1BF /* RechargeHeaderViewAdapter.swift */; };
 		722EC86521895F490091F1BF /* RechargeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722EC86221895F490091F1BF /* RechargeHeaderView.swift */; };
 		722EC86621895F490091F1BF /* RechargeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 722EC86321895F490091F1BF /* RechargeHeaderView.xib */; };
@@ -1102,6 +1103,7 @@
 		72199DAA2104680900575226 /* TransferContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferContentView.xib; sourceTree = "<group>"; };
 		72199DAC2104687400575226 /* TransferLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferLineView.swift; sourceTree = "<group>"; };
 		72199DAE2104687D00575226 /* TransferLineView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferLineView.xib; sourceTree = "<group>"; };
+		7224386521C2630F002DA6BC /* CybexPopoverBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexPopoverBackgroundView.swift; sourceTree = "<group>"; };
 		722EC86121895F490091F1BF /* RechargeHeaderViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeHeaderViewAdapter.swift; sourceTree = "<group>"; };
 		722EC86221895F490091F1BF /* RechargeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeHeaderView.swift; sourceTree = "<group>"; };
 		722EC86321895F490091F1BF /* RechargeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RechargeHeaderView.xib; sourceTree = "<group>"; };
@@ -2421,6 +2423,14 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		7224386421C26286002DA6BC /* PopoverBackgroundView */ = {
+			isa = PBXGroup;
+			children = (
+				7224386521C2630F002DA6BC /* CybexPopoverBackgroundView.swift */,
+			);
+			path = PopoverBackgroundView;
+			sourceTree = "<group>";
+		};
 		7260DDB821A2A2B500A5E3D6 /* directionViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -3629,6 +3639,7 @@
 		C31EC57D28FCC624D48C5CC42DE96975 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				7224386421C26286002DA6BC /* PopoverBackgroundView */,
 				72D9DD55210EB5FC00963915 /* ActionSheetViewController */,
 				296FFE91A389347663BB0BCE840E70F0 /* Alert */,
 				721B5E3B2138050A00F7C86F /* App */,
@@ -4693,6 +4704,7 @@
 				7267DA1521351D40004AF9AF /* ETOProjectViewAdapter.swift in Sources */,
 				0960C892D63D17ABEB447BCE5525D299 /* AppActions.swift in Sources */,
 				C281A4038187FCD131A006BA4689D2BD /* AppCoordinator+StateManager.swift in Sources */,
+				7224386621C2630F002DA6BC /* CybexPopoverBackgroundView.swift in Sources */,
 				19864A14CDDAB9987FBB0457B007B23E /* AppCoordinator.swift in Sources */,
 				BC2357553B9276EF5A8F867AC75534EC /* AppDelegate.swift in Sources */,
 				BF1E2A89F4A04926CAC7E34A3F384328 /* AppReducer.swift in Sources */,

@@ -43,6 +43,7 @@ extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
         guard let vc = R.storyboard.comprehensive.recordChooseViewController() else { return }
         vc.preferredContentSize = CGSize(width: 82, height: 35 * count)
         vc.modalPresentationStyle = .popover
+        vc.popoverPresentationController?.popoverBackgroundViewClass = CybexPopoverBackgroundView.self
         vc.popoverPresentationController?.sourceView = sender
         vc.popoverPresentationController?.sourceRect = CGRect(x: 35, y: 0, width: sender.width, height: sender.height)
         vc.popoverPresentationController?.delegate = senderVC
