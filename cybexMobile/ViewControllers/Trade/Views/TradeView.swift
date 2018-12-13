@@ -58,6 +58,10 @@ class TradeView: UIView {
             }
         }
     }
+    
+    func resetDecimalImage() {
+        deciImgView.image = R.image.ic2()
+    }
 
     func setup() {
         if UIScreen.main.bounds.width == 320 {
@@ -76,7 +80,7 @@ class TradeView: UIView {
         
         decimalView.rx.tapGesture().when(GestureRecognizerState.recognized).subscribe(onNext: { [weak self](tap) in
             guard let `self` = self else { return }
-            
+            self.deciImgView.image = R.image.ic2Up()
             self.next?.sendEventWith(Event.chooseDecimalNumberEvent.rawValue, userinfo: ["data": self.deciLabel.text ?? "", "self": self.decimalView])
             
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)

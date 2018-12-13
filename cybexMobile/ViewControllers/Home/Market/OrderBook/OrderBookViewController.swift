@@ -169,6 +169,7 @@ extension OrderBookViewController {
 
 extension OrderBookViewController: UIPopoverPresentationControllerDelegate {
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        self.tradeView.resetDecimalImage()
         guard let superVC = popoverPresentationController.presentedViewController as? RecordChooseViewController else {
             return true
         }
@@ -184,6 +185,8 @@ extension OrderBookViewController: UIPopoverPresentationControllerDelegate {
 
 extension OrderBookViewController: RecordChooseViewControllerDelegate {
     func returnSelectedRow(_ sender: RecordChooseViewController, info: String) {
-        
+        self.tradeView.deciLabel.text = info
+        self.tradeView.resetDecimalImage()
+        sender.dismiss(animated: false, completion: nil)
     }
 }

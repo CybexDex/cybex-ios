@@ -44,7 +44,7 @@ extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
         vc.preferredContentSize = CGSize(width: 82, height: 35 * count)
         vc.modalPresentationStyle = .popover
         vc.popoverPresentationController?.sourceView = sender
-        vc.popoverPresentationController?.sourceRect = sender.bounds
+        vc.popoverPresentationController?.sourceRect = CGRect(x: 35, y: 0, width: sender.width, height: sender.height)
         vc.popoverPresentationController?.delegate = senderVC
         vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
         vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.white.hexString(true)]
