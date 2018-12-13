@@ -163,7 +163,7 @@ extension OrderBookViewController {
         guard let text = data["data"] as? String, text.count != 0, let senderView = data["self"] as? UIView else {
             return
         }
-        self.coordinator?.openDecimalNumberVC(senderView, maxDecimal: 4, selectedDecimal: 0)
+        self.coordinator?.openDecimalNumberVC(senderView, maxDecimal: 4, selectedDecimal: 0, senderVC: self)
     }
 }
 
