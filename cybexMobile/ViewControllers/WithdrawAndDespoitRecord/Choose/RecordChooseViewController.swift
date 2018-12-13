@@ -20,6 +20,7 @@ enum RecordChooseType: Int {
     case foudType
     case time
     case kind
+    case orderbook
 }
 
 class RecordChooseViewController: BaseViewController {

@@ -13,7 +13,7 @@ import Reachability
 
 protocol OrderBookCoordinatorProtocol {
     
-    func openDecimalNumberVC(_ sender: UIView)
+    func openDecimalNumberVC(_ sender: UIView, maxDecimal: Int, selectedDecimal: Int)
 }
 
 protocol OrderBookStateManagerProtocol {
@@ -38,8 +38,24 @@ class OrderBookCoordinator: NavCoordinator {
 }
 
 extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
-    func openDecimalNumberVC(_ sender: UIView) {
+    func openDecimalNumberVC(_ sender: UIView, maxDecimal: Int, selectedDecimal: Int) {
         
+        let count = (maxDecimal + 1) / 4 != 0 ? 4 : (maxDecimal + 1) % 4
+        guard let vc = R.storyboard.comprehensive.recordChooseViewController(),
+            let orderVC = self.rootVC.topViewController as? OrderBookViewController else { return }
+        vc.preferredContentSize = CGSize(width: 82, height: 35 * count)
+        vc.modalPresentationStyle = .popover
+        vc.popoverPresentationController?.sourceView = sender
+        vc.popoverPresentationController?.sourceRect = sender.bounds
+        vc.popoverPresentationController?.delegate = orderVC
+        vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+        vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.white.hexString(true)]
+        vc.typeIndex = .orderbook
+        vc.delegate = orderVC
+        vc.coordinator = RecordChooseCoordinator(rootVC: self.rootVC)
+        orderVC.present(vc, animated: true) {
+            vc.view.superview?.cornerRadius = 2
+        }
     }
 }
 

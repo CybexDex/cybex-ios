@@ -526,3 +526,5 @@
 "deposit_enable" = "充值功能即将开放，敬请期待";
 "deposti_enable_tip" = "暂停";
 
+"trade_decimal_number" = "%d 小数";
+

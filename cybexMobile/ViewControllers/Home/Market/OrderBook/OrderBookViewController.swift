@@ -164,3 +164,24 @@ extension OrderBookViewController {
         
     }
 }
+
+extension OrderBookViewController: UIPopoverPresentationControllerDelegate {
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        guard let superVC = popoverPresentationController.presentedViewController as? RecordChooseViewController else {
+            return true
+        }
+        
+        superVC.dismiss(animated: false, completion: nil)
+        return false
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+}
+
+extension OrderBookViewController: RecordChooseViewControllerDelegate {
+    func returnSelectedRow(_ sender: RecordChooseViewController, info: String) {
+        
+    }
+}
