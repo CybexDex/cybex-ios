@@ -28,11 +28,19 @@ class OrderBookViewController: BaseViewController {
     var VCType: Int = OrderbookType.contentView.rawValue
     var pair: Pair? {
         didSet {
-            guard let pair = pair, oldValue != pair else { return }
+            guard let pair = pair, oldValue != pair else {
+                return
+            }
             if self.tradeView != nil {
-                //        self.coordinator?.resetData(pair)
                 showMarketPrice()
-                self.coordinator?.subscribe(pair, depth: 2, count: 5)
+                if oldValue == nil {
+                    self.coordinator?.subscribe(pair, depth: 2, count: 5)
+                }
+                else {
+                    guard let coor = self.coordinator else { return }
+                    coor.unSubscribe(oldValue!, depth: coor.state.depth, count: coor.state.count)
+                    coor.subscribe(pair, depth: coor.state.depth, count: coor.state.count)
+                }
             }
             else {
                 self.coordinator?.subscribe(pair, depth: 6, count: 20)
@@ -41,7 +49,6 @@ class OrderBookViewController: BaseViewController {
             if self.tradeView != nil || self.contentView != nil {
                 setTopTitle()
             }
-
         }
     }
 
@@ -103,7 +110,7 @@ class OrderBookViewController: BaseViewController {
                         parentVC.endLoading()
                     }
                 }
-                if self.VCType == 1 {
+                if self.VCType == OrderbookType.contentView.rawValue {
                     self.contentView.data = result
                     self.contentView.tableView.reloadData()
                     self.contentView.tableView.isHidden = false
@@ -186,6 +193,12 @@ extension OrderBookViewController: UIPopoverPresentationControllerDelegate {
 extension OrderBookViewController: RecordChooseViewControllerDelegate {
     func returnSelectedRow(_ sender: RecordChooseViewController, info: String) {
         self.tradeView.deciLabel.text = info
+        if let depthString = info.components(separatedBy: " ").first,
+            let depth = depthString.int,
+            let pair = self.pair ,let coor = self.coordinator {
+            coor.unSubscribe(pair, depth: coor.state.depth, count: coor.state.count)
+            coor.subscribe(pair, depth: depth, count: 5)
+        }
         self.tradeView.resetDecimalImage()
         sender.dismiss(animated: false, completion: nil)
     }

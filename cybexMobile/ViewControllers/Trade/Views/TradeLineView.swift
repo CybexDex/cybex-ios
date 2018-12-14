@@ -17,19 +17,17 @@ class TradeLineView: UIView {
     var isBuy: Bool?
     var data: Any? {
         didSet {
-            if let order = data as? (Any, percent: Decimal, pricePrecision: Int, amountPrecision: Int), let data = order.0 as? OrderBook.Order {
-                price.text  = data.price.formatCurrency(digitNum: order.pricePrecision)
-
-                amount.text = data.volume.suffixNumber(digitNum: order.amountPrecision)
-
-                backViewLeading.constant = self.width * (1 - order.percent).cgfloat()
-                backColorView.backgroundColor = self.isBuy == true ? UIColor.reddish15 : UIColor.turtleGreen15
-                price.textColor = self.isBuy == true ? UIColor.reddish : UIColor.turtleGreen
-                if UIScreen.main.bounds.width <= 320 {
-                    price.font  = UIFont.systemFont(ofSize: 11)
-                    amount.font = UIFont.systemFont(ofSize: 11)
-                }
-            }
+//            if let order = data as? (Any, Decimal), let data = order.0 as? OrderBook.Order {
+//                price.text  = data.price
+//                amount.text = data.volume
+//                backViewLeading.constant = self.width * (1 - order.1).cgfloat()
+//                backColorView.backgroundColor = self.isBuy == true ? UIColor.reddish15 : UIColor.turtleGreen15
+//                price.textColor = self.isBuy == true ? UIColor.reddish : UIColor.turtleGreen
+//                if UIScreen.main.bounds.width <= 320 {
+//                    price.font  = UIFont.systemFont(ofSize: 11)
+//                    amount.font = UIFont.systemFont(ofSize: 11)
+//                }
+//            }
         }
     }
 
@@ -83,3 +81,26 @@ class TradeLineView: UIView {
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 }
+
+extension TradeLineView {
+    func adapterModelToETOProjectView(_ model: OrderBookViewModel) {
+        model.orderbook.asObservable().subscribe(onNext: { [weak self](orderbook) in
+            guard let self = self, let data = orderbook else { return }
+            self.price.text  = data.price
+            self.amount.text = data.volume
+            self.backColorView.backgroundColor = model.isBuy == true ? UIColor.reddish15 : UIColor.turtleGreen15
+            self.price.textColor = model.isBuy == true ? UIColor.reddish : UIColor.turtleGreen
+            if UIScreen.main.bounds.width <= 320 {
+                self.price.font  = UIFont.systemFont(ofSize: 11)
+                self.amount.font = UIFont.systemFont(ofSize: 11)
+            }
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        model.percent.asObservable().subscribe(onNext: { [weak self](decimal) in
+            guard let `self` = self else { return }
+            self.backViewLeading.constant = self.width * (1 - decimal).cgfloat()
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+
+    }
+}
+

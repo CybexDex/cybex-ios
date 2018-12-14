@@ -50,21 +50,17 @@ class HomePairView: UIView {
             self.bulking.text = (ticker.incre == .greater ? "+" : "") +
                 ticker.percentChange.formatCurrency(digitNum: 2) + "%"
             self.highLowContain.backgroundColor = ticker.incre.color()
-
             let change = ticker.percentChange.decimal()
             if change > 1000 {
                 self.bulking.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
             } else {
                 self.bulking.font = UIFont.systemFont(ofSize: 16.0, weight: .medium)
             }
-
             var price: Decimal = 0
             let latest = ticker.latest.decimal()
-
             if let baseAsset = AssetConfiguration.CybexAsset(ticker.base) {
                 price = latest * AssetConfiguration.shared.rmbOf(asset: baseAsset)
             }
-
             self.rbmL.text = price == 0 ? "-" : "≈¥" + price.string(digits: 4, roundingMode: .down)
         }
     }
