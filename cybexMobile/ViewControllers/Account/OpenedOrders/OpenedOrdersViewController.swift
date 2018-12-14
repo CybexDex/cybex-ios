@@ -31,6 +31,10 @@ class OpenedOrdersViewController: BaseViewController {
             if let pairOrder = self.containerView as? MyOpenedOrdersView {
                 pairOrder.data = self.pair
             }
+
+            if oldValue != pair {
+                self.coordinator?.fetchOpenedOrder(pair!)
+            }
         }
     }
 
@@ -42,6 +46,7 @@ class OpenedOrdersViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
         _ = UserManager.shared.balance
+
     }
 
     func setupUI() {

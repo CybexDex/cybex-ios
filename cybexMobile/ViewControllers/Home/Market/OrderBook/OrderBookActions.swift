@@ -30,6 +30,14 @@ struct OrderBook: Equatable {
 
     let bids: [Order]
     let asks: [Order]
+
+    var pricePrecision: Int = 0
+    var amountPrecision: Int = 0
+
+    init(bids: [Order], asks: [Order]) {
+        self.bids = bids
+        self.asks = asks
+    }
 }
 
 struct FetchedOrderBookData: Action {

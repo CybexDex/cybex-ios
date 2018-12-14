@@ -107,6 +107,8 @@ extension OrderBookContentView: UITableViewDelegate, UITableViewDataSource {
                 let percentSell: Decimal? = indexPath.row >= data.bids.count ? nil :
                     bids[0...indexPath.row].compactMap( { $0.volumePercent } ).reduce(0, +)
 
+                cell.ownView.pricePrecision = data.pricePrecision
+                cell.ownView.amountPrecision = data.amountPrecision
                 cell.setup((bids[optional:indexPath.row], asks[optional:indexPath.row], percentSell, percentBuy), indexPath: indexPath)
             }
             return cell

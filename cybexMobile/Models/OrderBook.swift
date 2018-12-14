@@ -47,3 +47,32 @@ class LimitOrder: HandyJSON {
     }
 
 }
+
+class LimitOrderStatus: HandyJSON {
+    var orderId: String!
+    var seller: String!
+    var isSellAsset1: Bool!
+    var asset1: String!
+    var asset2: String!
+    var amountToSell: Int!
+    var amountToReceive: Int!
+    var soldAmount: Int!
+    var receivedAmount: Int!
+    var canceledAmount: Int!
+    var createTime: Date!
+
+    required init() {}
+
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< orderId <-- "order_id"
+        mapper <<< isSellAsset1 <-- "is_sell"
+        mapper <<< asset1 <-- "key.asset1"
+        mapper <<< asset2 <-- "key.asset2"
+        mapper <<< amountToSell <-- "amount_to_sell"
+        mapper <<< amountToReceive <-- "min_to_receive"
+        mapper <<< soldAmount <-- "sold"
+        mapper <<< receivedAmount <-- "received"
+        mapper <<< canceledAmount <-- "canceled"
+        mapper <<< createTime <-- ("create_time", GemmaDateFormatTransform(formatString: "YYYY-mm-ddTHH:MM:SS"))
+    }
+}

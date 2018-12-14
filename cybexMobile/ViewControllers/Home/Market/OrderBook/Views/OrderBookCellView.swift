@@ -19,13 +19,16 @@ class OrderBookCellView: UIView {
     @IBOutlet weak var leftBoxWidth: NSLayoutConstraint!
     @IBOutlet weak var rightBoxWidth: NSLayoutConstraint!
 
+    var pricePrecision: Int = 0
+    var amountPrecision: Int = 0
+
     var data: Any? {
         didSet {
             guard let showData = data as? (OrderBook.Order?, OrderBook.Order?, Decimal?, Decimal?) else { return }
 
             if let bid = showData.0 {
-                self.buyPrice.text = bid.price.formatCurrency(digitNum: 6)
-                self.buyVolume.text = bid.volume
+                self.buyPrice.text = bid.price.formatCurrency(digitNum: pricePrecision)
+                self.buyVolume.text = bid.volume.suffixNumber(digitNum: amountPrecision, padZero: true)
                 self.leftBoxWidth = self.leftBoxWidth.changeMultiplier(multiplier: showData.2!.cgfloat())
             } else {
                 self.buyPrice.text = ""
@@ -35,8 +38,8 @@ class OrderBookCellView: UIView {
 
             //      print("left:\(self.leftBoxWidth.multiplier)  ")
             if let ask = showData.1 {
-                self.sellPrice.text = ask.price.formatCurrency(digitNum: 6)
-                self.sellVolume.text = ask.volume
+                self.sellPrice.text = ask.price.formatCurrency(digitNum: pricePrecision)
+                self.sellVolume.text = ask.volume.suffixNumber(digitNum: amountPrecision, padZero: true)
                 self.rightBoxWidth = self.rightBoxWidth.changeMultiplier(multiplier: showData.3!.cgfloat())
             } else {
                 self.sellPrice.text = ""

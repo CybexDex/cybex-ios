@@ -445,6 +445,7 @@
 		7333857D21C0EC400026765F /* AddressHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333857C21C0EC400026765F /* AddressHelper.swift */; };
 		7333857F21C0EC890026765F /* CashHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333857E21C0EC890026765F /* CashHelper.swift */; };
 		7333858121C0ED2B0026765F /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333858021C0ED2B0026765F /* UIUtils.swift */; };
+		7333858321C1FA450026765F /* LimitOrderStatusApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333858221C1FA450026765F /* LimitOrderStatusApi.swift */; };
 		7336B79B214F569F0086A9DF /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7336B79A214F569E0086A9DF /* XLPagerTabStrip.framework */; };
 		7336B79F214F5ABE0086A9DF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3CF75C7E63B1305DDDE74491D7E5C9AB /* Localizable.strings */; };
 		7336B7BD214F717E0086A9DF /* ESTabBarController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7336B7BC214F717D0086A9DF /* ESTabBarController.framework */; };
@@ -1286,6 +1287,7 @@
 		7333857C21C0EC400026765F /* AddressHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressHelper.swift; sourceTree = "<group>"; };
 		7333857E21C0EC890026765F /* CashHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashHelper.swift; sourceTree = "<group>"; };
 		7333858021C0ED2B0026765F /* UIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
+		7333858221C1FA450026765F /* LimitOrderStatusApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitOrderStatusApi.swift; sourceTree = "<group>"; };
 		7336B799214F55160086A9DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7336B79A214F569E0086A9DF /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XLPagerTabStrip.framework; path = Carthage/Build/iOS/XLPagerTabStrip.framework; sourceTree = "<group>"; };
 		7336B79E214F5A310086A9DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -3083,6 +3085,7 @@
 			isa = PBXGroup;
 			children = (
 				736761EB21BE4DFD0065FD35 /* OCOWebSocketService.swift */,
+				7333858221C1FA450026765F /* LimitOrderStatusApi.swift */,
 			);
 			path = OCO;
 			sourceTree = "<group>";
@@ -4699,6 +4702,7 @@
 				73F50BA42137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift in Sources */,
 				4D3E4222415A233603135173A5D25471 /* BaseCollectionViewCell.swift in Sources */,
 				729B869B2154C71300C6E0E4 /* ComprehensiveItemsViewAdapter.swift in Sources */,
+				7333858321C1FA450026765F /* LimitOrderStatusApi.swift in Sources */,
 				F7886D0310C612E91619D84DDA4182F5 /* BaseNavigationController.swift in Sources */,
 				73587EB42137C69B006CF8A6 /* ETOCrowdView.swift in Sources */,
 				AAEB2ADE1A954767CBCDED7BE011631A /* BaseTabbarViewController.swift in Sources */,

@@ -30,6 +30,10 @@ extension AppDelegate {
                     appCoodinator.getLatestData()
                 }
             }).disposed(by: disposeBag)
+
+        appData.assetNameToIds.skip(1).asObservable().subscribe(onNext: { (_) in
+            TradeConfiguration.shared.fetchPairPrecision()
+        }).disposed(by: disposeBag)
     }
 
     func monitorNetworkOfSetting() {

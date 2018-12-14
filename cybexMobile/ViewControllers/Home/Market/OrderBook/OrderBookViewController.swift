@@ -26,6 +26,14 @@ class OrderBookViewController: BaseViewController {
     var contentView: OrderBookContentView!
     var tradeView: TradeView!
     var VCType: Int = OrderbookType.contentView.rawValue
+    lazy var pricePrecision: Int = {
+        if let pair = self.pair, let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair] {
+            return precision.price
+        }
+
+        return 0
+    }()
+
     var pair: Pair? {
         didSet {
             guard let pair = pair, oldValue != pair else { return }
@@ -94,7 +102,6 @@ class OrderBookViewController: BaseViewController {
     }
 
     override func configureObserveState() {
-        
         self.coordinator!.state.data.asObservable().skip(1).distinctUntilChanged()
             .subscribe(onNext: {[weak self] (result) in
                 guard let self = self else { return }
@@ -104,12 +111,22 @@ class OrderBookViewController: BaseViewController {
                     }
                 }
                 if self.VCType == 1 {
-                    self.contentView.data = result
-                    self.contentView.tableView.reloadData()
-                    self.contentView.tableView.isHidden = false
-                    self.coordinator?.updateMarketListHeight(500)
+                    if let pair = self.pair, let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair], var order = result {
+                        order.pricePrecision = precision.price
+                        order.amountPrecision = precision.amount
+                        self.contentView.data = order
+                        self.contentView.tableView.reloadData()
+                        self.contentView.tableView.isHidden = false
+                        self.coordinator?.updateMarketListHeight(500)
+                    }
                 } else {
-                    self.tradeView.data = result
+                    if let pair = self.pair, let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair], var order = result {
+                        order.pricePrecision = self.pricePrecision
+                        order.amountPrecision = precision.amount
+                        self.tradeView.data = order
+                    }
+
+
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
@@ -130,7 +147,7 @@ class OrderBookViewController: BaseViewController {
                 return
             }
 
-            self.tradeView.rmbPrice.text = "≈¥" + AssetHelper.singleAssetRMBPrice(pair.quote).string(digits: 4, roundingMode: .down)
+            self.tradeView.rmbPrice.text = "≈¥" + AssetHelper.singleAssetRMBPrice(pair.quote).string(digits: AppConfiguration.rmbPrecision, roundingMode: .down)
         }
     }
 }

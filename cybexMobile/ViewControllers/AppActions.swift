@@ -77,12 +77,17 @@ struct AppState: StateType {
 
 struct AppPropertyState {
     var tickerData: BehaviorRelay<[Ticker]> = BehaviorRelay(value: [])
+//    var pairTickerData: BehaviorRelay<[Pair: Ticker]> = BehaviorRelay(value: [:])
+    //base对应的ticker
+//    var marketTickerData: BehaviorRelay<[AssetConfiguration.CybexAsset: Ticker]> = BehaviorRelay(value: [:])
 
     //监听行情刷新
     var otherRequestRelyData: BehaviorRelay<Int?> = BehaviorRelay(value: nil)
 
     //assetID -> info
     var assetInfo: [String: AssetInfo] = [:]
+    //filted Jade
+    var assetNameToIds: BehaviorRelay<[String: String]> = BehaviorRelay(value: [:])
 }
 
 struct HomeBucket: Equatable, Hashable {
@@ -153,8 +158,7 @@ struct RefreshState: Action {
 }
 
 struct AssetInfoAction: Action {
-    let assetID: String
-    let info: AssetInfo
+    let info: [AssetInfo]
 }
 
 typealias MarketDataCallback = ([Bucket]) -> Void

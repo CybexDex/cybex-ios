@@ -12,7 +12,7 @@ import SwiftyJSON
 import RxCocoa
 
 class AssetConfiguration {
-    //asset name
+    //base asset name
     enum CybexAsset: String, CaseIterable {
         case CYB
         case BTC

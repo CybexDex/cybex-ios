@@ -81,7 +81,16 @@ func appPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
 
     switch action {
     case let action as AssetInfoAction:
-        state.assetInfo[action.assetID] = action.info
+        var assetinfoMap: [String: AssetInfo] = [:]
+        var nameToIds: [String: String] = [:]
+
+        for info in action.info {
+            assetinfoMap[info.id] = info
+            nameToIds[info.symbol.filterJade] = info.id
+        }
+        state.assetInfo = assetinfoMap
+        state.assetNameToIds.accept(nameToIds)
+
     case let action as TickerFetched:
         state.tickerData.accept(applyTickersToState(state, action: action))
     default:

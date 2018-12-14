@@ -16,7 +16,6 @@ extension AppDelegate {
         ZYNetworkAccessibity.setAlertEnable(true)
         ZYNetworkAccessibity.setStateDidUpdateNotifier { (state) in
             if state == ZYNetworkAccessibleState.accessible {
-                self.requestSetting()
                 NotificationCenter.default.post(name: .NetWorkChanged, object: nil)
             }
         }

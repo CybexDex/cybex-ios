@@ -71,9 +71,7 @@ extension AppCoordinator {
     func getAssetInfos(_ ids: [String]) {
         let request = GetObjectsRequest(ids: ids) { response in
             if let assetinfo = response as? [AssetInfo] {
-                for info in assetinfo {
-                    self.store.dispatch(AssetInfoAction(assetID: info.id, info: info))
-                }
+                self.store.dispatch(AssetInfoAction(info: assetinfo))
             }
         }
         CybexWebSocketService.shared.send(request: request, priority: .veryHigh)

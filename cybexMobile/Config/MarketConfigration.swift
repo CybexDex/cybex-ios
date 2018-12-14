@@ -46,7 +46,6 @@ class MarketConfiguration {
     static let shared = MarketConfiguration()
 
     var marketPairs: BehaviorRelay<[Pair]> = BehaviorRelay(value: []) //首页过滤白名单后的所有交易对
-    var tradePairPrecisions: BehaviorRelay<[Pair: PairPrecision]> = BehaviorRelay(value: [:]) //深度图精度
     var importMarketLists: BehaviorRelay<[ImportantMarketPair]> = BehaviorRelay(value: [])
 
     private init() {

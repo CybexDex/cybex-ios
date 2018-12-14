@@ -37,9 +37,9 @@ class TradeView: UIView {
                         if asks.count - 1 >= (index - 6) {
                             sell.isBuy = true
                             sell.alpha = 1
-
+                            
                             let percent: Decimal = asks[0...index - 6].compactMap( { $0.volumePercent } ).reduce(0, +)
-                            sell.data = (asks[index - 6], percent)
+                            sell.data = (asks[index - 6], percent: percent, pricePrecision: data.pricePrecision, amountPrecision: data.amountPrecision)
 
                         } else {
                             sell.alpha = 0
@@ -51,7 +51,7 @@ class TradeView: UIView {
 
                                 let percent = bids[0...index - 6].compactMap( { $0.volumePercent } ).reduce(0, +)
 
-                                buy.data     = (bids[index - 6], percent)
+                                buy.data     = (bids[index - 6], percent: percent, pricePrecision: data.pricePrecision, amountPrecision: data.amountPrecision)
                             } else {
                                 buy.alpha = 0
                             }

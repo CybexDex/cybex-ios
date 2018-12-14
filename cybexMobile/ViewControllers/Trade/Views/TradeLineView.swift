@@ -17,10 +17,12 @@ class TradeLineView: UIView {
     var isBuy: Bool?
     var data: Any? {
         didSet {
-            if let order = data as? (Any, Decimal), let data = order.0 as? OrderBook.Order {
-                price.text  = data.price
-                amount.text = data.volume
-                backViewLeading.constant = self.width * (1 - order.1).cgfloat()
+            if let order = data as? (Any, percent: Decimal, pricePrecision: Int, amountPrecision: Int), let data = order.0 as? OrderBook.Order {
+                price.text  = data.price.formatCurrency(digitNum: order.pricePrecision)
+
+                amount.text = data.volume.suffixNumber(digitNum: order.amountPrecision)
+
+                backViewLeading.constant = self.width * (1 - order.percent).cgfloat()
                 backColorView.backgroundColor = self.isBuy == true ? UIColor.reddish15 : UIColor.turtleGreen15
                 price.textColor = self.isBuy == true ? UIColor.reddish : UIColor.turtleGreen
                 if UIScreen.main.bounds.width <= 320 {
