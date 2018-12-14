@@ -521,6 +521,8 @@
 "lockup_asset_claim" = "申领";
 
 "lockup_asset_locked" = "未到期";
+"game_center_title" = "游戏中心";
+"game_center_subtitle" = "体验区块链游戏";
 
 
 "deposit_enable" = "充值功能即将开放，敬请期待";

@@ -49,8 +49,8 @@ extension ComprehensiveItemsView: GridContentViewDataSource {
         if let data = self.data as? [ComprehensiveItem] {
             let views = Array(0...data.count-1).map { (index) -> ComprehensiveItemView in
                 let item = ComprehensiveItemView()
-                item.adapterModelToComprehensiveItemView(data[index])
                 item.tapIndex = index
+                item.adapterModelToComprehensiveItemView(data[index])
                 return item
             }
             itemViews = views

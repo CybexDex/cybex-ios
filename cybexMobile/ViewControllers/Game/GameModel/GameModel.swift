@@ -50,12 +50,14 @@ class GameModel: NSObject, GameDelegate {
         var usdtAmount: Decimal = 0
         var cybAmount: Decimal = 0
         if let balance = balances.filter({ return $0.assetType == AssetConfiguration.USDT}).first,
-            let usdtInfo = appData.assetInfo[balance.assetType] {
-            usdtAmount = balance.balance.decimal() / pow(10, usdtInfo.precision)
+            let usdtInfo = appData.assetInfo[balance.assetType],
+            let usdtDecimal = balance.balance.toDecimal() {
+            usdtAmount = usdtDecimal / pow(10, usdtInfo.precision)
         }
         if let cybBalance = balances.filter({ return $0.assetType == AssetConfiguration.CYB }).first,
-            let cybInfo = appData.assetInfo[cybBalance.assetType] {
-            cybAmount = cybBalance.balance.decimal() / pow(10, cybInfo.precision)
+            let cybInfo = appData.assetInfo[cybBalance.assetType],
+            let cybDecimal = cybBalance.balance.toDecimal() {
+            cybAmount = cybDecimal / pow(10, cybInfo.precision)
         }
         let expiration = Date().timeIntervalSince1970 + 300
         let signer = BitShareCoordinator.getRecodeLoginOperation(accountName,
@@ -99,24 +101,21 @@ class GameModel: NSObject, GameDelegate {
                         if let data = response as? FullAccount, let account = data.account {
                             getChainId { (id) in
                                 let assetId = asset
-                                let feeAmount = fee.decimal()
                                 let feeAssetId = feeAsset
                                 let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
                                     if let infos = infos as? (block_id: String, block_num: String) {
-                                        let amountDecimal = amount.decimal()
                                         guard let fromAccount = UserManager.shared.account.value else { return }
-                                        let feeAmout = feeAmount
                                         let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
                                                                                           block_id: infos.block_id,
-                                                                                          expiration: Date().timeIntervalSince1970 + AppConfiguration.TransactionExpiration,
+                                                                                          expiration: Date().timeIntervalSince1970 + 10 * 3600,
                                                                                           chain_id: id,
                                                                                           from_user_id: Int32(getUserId(fromAccount.id)),
                                                                                           to_user_id: Int32(getUserId(account.id)),
                                                                                           asset_id: Int32(getUserId(assetId)),
                                                                                           receive_asset_id: Int32(getUserId(assetId)),
-                                                                                          amount: amountDecimal.int64Value,
+                                                                                          amount: Int64(amount) ?? 0,
                                                                                           fee_id: Int32(getUserId(feeAssetId)),
-                                                                                          fee_amount: feeAmout.int64Value,
+                                                                                          fee_amount: Int64(fee) ?? 0,
                                                                                           memo: "game:deposit:" + fromAccount.name,
                                                                                           from_memo_key: fromAccount.memoKey,
                                                                                           to_memo_key: account.memoKey)

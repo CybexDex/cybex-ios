@@ -548,3 +548,5 @@
 "trade_decimal_number" = "%d decimals";
 "openedorder_ensure_title" = "CONFIRMATION";
 "openedorder_ensure_message" = "Confirm order cancellation";
+"game_center_title" = "Game Center";
+"game_center_subtitle" = "Blockchain Games";

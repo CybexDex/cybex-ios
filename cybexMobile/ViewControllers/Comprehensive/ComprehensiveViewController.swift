@@ -128,6 +128,7 @@ class ComprehensiveViewController: BaseViewController {
 
         self.coordinator?.state.middleItems.asObservable().subscribe(onNext: { [weak self](middleItems) in
             guard let self = self, let items = middleItems else { return }
+
             self.contentView.middleItemsView.adapterModelToComprehensiveItemsView(items)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
