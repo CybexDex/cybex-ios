@@ -15,8 +15,9 @@ class OpenedOrdersView: UIView {
     @IBOutlet weak var quote: UILabel!
     @IBOutlet weak var base: UILabel!
     @IBOutlet weak var amount: UILabel!
-    @IBOutlet weak var price: UILabel!
-
+    @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    
     @IBOutlet weak var basePriceView: UIView!
     @IBOutlet weak var basePrice: UILabel!
 
@@ -36,10 +37,8 @@ class OpenedOrdersView: UIView {
                 if self.basePriceView.isHidden == false {
                     self.basePrice.text = "--"
                 }
-
                 if order.isBuy {
                     self.orderType.openedStatus = 0
-
                     if let quoteInfo = appData.assetInfo[order.sellPrice.quote.assetID], let baseInfo = appData.assetInfo[order.sellPrice.base.assetID] {
                         quote.text = quoteInfo.symbol.filterJade
                         base.text = "/" + baseInfo.symbol.filterJade
@@ -57,14 +56,13 @@ class OpenedOrdersView: UIView {
                         } else {
                             quoteAmount = baseAmount / basePrice
                         }
-
                         self.amount.text = quoteAmount.string(digits: quoteInfo.precision, roundingMode: .down) + " " + quoteInfo.symbol.filterJade
-                        if self.basePriceView.isHidden == false {
-                            self.price.text =  baseAmount.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-                            self.basePrice.text = basePrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-                        } else {
-                            self.price.text = basePrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-                        }
+//                        if self.basePriceView.isHidden == false {
+//                            self.price.text =  baseAmount.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
+//                            self.basePrice.text = basePrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
+//                        } else {
+//                            self.price.text = basePrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
+//                        }
                     }
                 } else {
                     self.orderType.openedStatus = 1
@@ -86,12 +84,12 @@ class OpenedOrdersView: UIView {
                         }
 
                         self.amount.text = quoteAmount.string(digits: quoteInfo.precision, roundingMode: .down) + " " +  quoteInfo.symbol.filterJade
-                        if self.basePriceView.isHidden == false {
-                            self.price.text = baseAmount.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-                            self.basePrice.text = basePrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-                        } else {
-                            self.price.text = basePrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-                        }
+//                        if self.basePriceView.isHidden == false {
+//                            self.price.text = baseAmount.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
+//                            self.basePrice.text = basePrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
+//                        } else {
+//                            self.price.text = basePrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
+//                        }
                     }
                 }
             }
