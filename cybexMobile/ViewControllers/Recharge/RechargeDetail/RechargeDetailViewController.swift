@@ -234,7 +234,6 @@ class RechargeDetailViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         setupEndEditingEvent()
-        
         self.coordinator?.state.withdrawAddress.asObservable().subscribe(onNext: { [weak self](address) in
             guard let self = self, let address = address else { return }
             self.contentView.addressView.content.text = address.address
@@ -260,6 +259,7 @@ class RechargeDetailViewController: BaseViewController {
                 self.contentView.errorView.isHidden = true
                 self.changeWithdrawState()
                 self.setFinalAmount()
+                self.changeWithdrawState()
                 if let addressText = self.contentView.addressView.content.text, addressText.count != 0, !self.isTrueAddress {
                     self.contentView.errorView.isHidden = false
                     self.contentView.errorL.locali = R.string.localizable.withdraw_address_fault.key
