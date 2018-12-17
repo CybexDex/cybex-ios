@@ -51,13 +51,12 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
 
     func fetchOpenedOrder(_ pair: Pair) {
         guard let userId = UserManager.shared.account.value?.id else { return }
-
         service.messageCanSend.delegate(on: self) { (self, _) in
             let request = GetLimitOrderStatus(response: { json in
                 if let json = json as? JSON, let object = [LimitOrderStatus].deserialize(from: json.rawString()) {
-                    print(object.compactMap({ $0 }))
+                    
+                    print("GetLimitOrderStatus \(object.compactMap({ $0 }))")
                 }
-
             }, status: LimitOrderStatusApi.getOpenedMarketLimitOrder(userId: userId, asset1Id: pair.quote, asset2Id: pair.base))
             self.service.send(request: request)
         }

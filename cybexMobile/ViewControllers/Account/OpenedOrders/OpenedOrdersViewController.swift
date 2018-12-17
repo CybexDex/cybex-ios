@@ -23,15 +23,12 @@ enum OpenedOrdersViewControllerPageType {
 class OpenedOrdersViewController: BaseViewController {
 
     var coordinator: (OpenedOrdersCoordinatorProtocol & OpenedOrdersStateManagerProtocol)?
-
     var pageType: OpenedOrdersViewControllerPageType = .account
-
     var pair: Pair? {
         didSet {
             if let pairOrder = self.containerView as? MyOpenedOrdersView {
                 pairOrder.data = self.pair
             }
-
             if oldValue != pair {
                 self.coordinator?.fetchOpenedOrder(pair!)
             }
@@ -157,13 +154,11 @@ class OpenedOrdersViewController: BaseViewController {
     override func configureObserveState() {
         UserManager.shared.limitOrder.asObservable().skip(1).subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
-
             if let accountView = self.containerView as? AccountOpenedOrdersView {
                 accountView.data = nil
             } else if let pairOrder = self.containerView as? MyOpenedOrdersView {
                 pairOrder.data = self.pair
             }
-
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }

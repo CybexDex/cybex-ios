@@ -13,7 +13,9 @@ class TradeLineView: UIView {
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var amount: UILabel!
     @IBOutlet weak var backViewLeading: NSLayoutConstraint!
-
+    
+    var pricePrecision: Int = 0
+    var amountPrecision: Int = 0
     var isBuy: Bool?
     var data: Any? {
         didSet {
@@ -83,15 +85,17 @@ class TradeLineView: UIView {
 }
 
 extension TradeLineView {
-    func adapterModelToETOProjectView(_ model: OrderBookViewModel) {
+    func adapterModelToTradeLineView(_ model: OrderBookViewModel) {
         model.orderbook.asObservable().subscribe(onNext: { [weak self](orderbook) in
             guard let self = self, let data = orderbook else { return }
-            if self.price.text != data.price {
-                self.price.text  = data.price
+            if self.price.text != data.price.formatCurrency(digitNum: self.pricePrecision) {
+                print("self.price.text: \(self.price.text)  data.price: \(data.price.formatCurrency(digitNum: self.pricePrecision))")
+                self.price.text  = data.price.formatCurrency(digitNum: self.pricePrecision)
             }
-            if self.amount.text != data.volume {
-                self.amount.text = data.volume
+            if self.amount.text != data.volume.suffixNumber(digitNum: self.amountPrecision) {
+                self.amount.text = data.volume.suffixNumber(digitNum: self.amountPrecision)
             }
+            
             self.backColorView.backgroundColor = model.isBuy == true ? UIColor.reddish15 : UIColor.turtleGreen15
             self.price.textColor = model.isBuy == true ? UIColor.reddish : UIColor.turtleGreen
             if UIScreen.main.bounds.width <= 320 {

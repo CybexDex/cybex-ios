@@ -79,9 +79,11 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
             }
             service.tickerDataDidReceived.delegate(on: self) { (self, price) in
                 print("----ticker: \(price)")
+                self.store.dispatch(FetchLastPriceAction(price: price))
             }
+            
             service.orderbookDataDidReceived.delegate(on: self) { (self, orderbook) in
-                print("----order book: \(orderbook)")
+                print("----order book: pair.base: \(pair.base) pair.quote: \(pair.quote)   \(orderbook)")
                 self.store.dispatch(FetchedOrderBookData(data: orderbook, pair: pair))
             }
             service.connect()

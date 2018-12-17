@@ -35,10 +35,11 @@ class TradeView: UIView {
             if let data = data as? OrderBook {
                 let bids = data.bids
                 let asks = data.asks
-//                data.pricePrecision
-//                data.amountPrecision
+
                 for index in 6...10 {
                     if let sell = sells.viewWithTag(index) as? TradeLineView {
+                        sell.pricePrecision = data.pricePrecision
+                        sell.amountPrecision = data.amountPrecision
                         if asks.count - 1 >= (index - 6) {
                             sell.alpha = 1
                             let percent: Decimal = asks[0...index - 6].compactMap( { $0.volumePercent } ).reduce(0, +)
@@ -50,13 +51,15 @@ class TradeView: UIView {
                             else {
                                 let model = OrderBookViewModel((asks[index - 6], percent,true))
                                 self.sellModels.insert(model, at: index - 6)
-                                sell.adapterModelToETOProjectView(model)
+                                sell.adapterModelToTradeLineView(model)
                             }
                         } else {
                             sell.alpha = 0
                         }
                     }
                     if let buy = buies.viewWithTag(index) as? TradeLineView {
+                        buy.pricePrecision = data.pricePrecision
+                        buy.amountPrecision = data.amountPrecision
                         if bids.count - 1 >= (index - 6) {
                             buy.alpha = 1
                             let percent = bids[0...index - 6].compactMap( { $0.volumePercent } ).reduce(0, +)
@@ -68,7 +71,7 @@ class TradeView: UIView {
                             else {
                                 let model = OrderBookViewModel((bids[index - 6], percent,false))
                                 self.buyModels.insert(model, at: index - 6)
-                                buy.adapterModelToETOProjectView(model)
+                                buy.adapterModelToTradeLineView(model)
                             }
                         } else {
                             buy.alpha = 0
@@ -78,6 +81,25 @@ class TradeView: UIView {
             }
         }
     }
+    
+    func setAmountAction(_ sender: Ticker) {
+        var procePresicion = 0
+        if let data = self.data as? OrderBook {
+            procePresicion = data.pricePrecision
+        }
+        let lastPrice = sender.latest.tradePriceAndAmountDecimal().price.formatCurrency(digitNum: procePresicion)
+        let priceString = sender.latest == "0" ? lastPrice + "≈¥" : lastPrice + "≈¥" + AssetHelper.singleAssetRMBPrice(sender.quote).string(digits: 4, roundingMode: .down)
+        let priceAttributeString = NSMutableAttributedString(string: priceString,
+                                                             attributes: [NSAttributedString.Key.foregroundColor : sender.incre.color()])
+        priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14,
+                                                                                            weight: UIFont.Weight.medium)],
+                                           range: NSMakeRange(0, lastPrice.count))
+        priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)],
+                                           range: NSMakeRange(lastPrice.count,
+                                                              priceString.count - lastPrice.count))
+        self.amount.attributedText = priceAttributeString
+    }
+    
     
     func resetDecimalImage() {
         deciImgView.image = R.image.ic2()

@@ -89,7 +89,6 @@ extension MyOpenedOrdersView: UITableViewDelegate, UITableViewDataSource {
                 (limitorder.sellPrice.base.assetID == pair.quote &&
                     limitorder.sellPrice.quote.assetID == pair.base)
         }) ?? []
-
         if orderes.count == 0 {
             self.showNoData(R.string.localizable.openedorder_nodata.key.localized())
         } else {
@@ -101,7 +100,6 @@ extension MyOpenedOrdersView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: OpenedOrdersCell.self), for: indexPath) as? OpenedOrdersCell {
             cell.cellType = 0
-
             guard let pair = data as? Pair else { return cell }
             let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
                 return (limitorder.sellPrice.base.assetID == pair.base &&

@@ -19,6 +19,7 @@ struct OrderBookState: BaseState {
     var data: BehaviorRelay<OrderBook?> = BehaviorRelay(value: nil)
     var pair: BehaviorRelay<Pair?> = BehaviorRelay(value: nil)
     var depth: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+    var lastPrice: BehaviorRelay<Decimal> = BehaviorRelay(value: 0)
     var count: Int = 5
 }
 
@@ -53,6 +54,10 @@ struct OrderBook: Equatable {
 struct FetchedOrderBookData: Action {
     let data: OrderBook?
     let pair: Pair
+}
+
+struct FetchLastPriceAction: Action {
+    var price: Decimal
 }
 
 
