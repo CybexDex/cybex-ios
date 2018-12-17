@@ -22,7 +22,6 @@ enum OrderbookType: Int {
 class OrderBookViewController: BaseViewController {
 
     var coordinator: (OrderBookCoordinatorProtocol & OrderBookStateManagerProtocol)?
-
     var contentView: OrderBookContentView!
     var tradeView: TradeView!
     var VCType: Int = OrderbookType.contentView.rawValue
@@ -34,18 +33,18 @@ class OrderBookViewController: BaseViewController {
             if self.tradeView != nil {
                 showMarketPrice()
                 if oldValue == nil {
-                    self.coordinator?.subscribe(pair, depth: 2, count: 5)
+                    self.adaptTradePrecision()
+                    
                 }
                 else {
                     guard let coor = self.coordinator else { return }
-                    coor.unSubscribe(oldValue!, depth: coor.state.depth, count: coor.state.count)
-                    coor.subscribe(pair, depth: coor.state.depth, count: coor.state.count)
+                    coor.unSubscribe(oldValue!, depth: coor.state.depth.value, count: coor.state.count)
+                    coor.subscribe(pair, depth: coor.state.depth.value, count: coor.state.count)
                 }
             }
             else {
                 self.coordinator?.subscribe(pair, depth: 6, count: 20)
             }
-
             if self.tradeView != nil || self.contentView != nil {
                 setTopTitle()
             }
@@ -56,7 +55,19 @@ class OrderBookViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
     }
-
+    
+    func adaptTradePrecision() {
+        guard let pair = self.pair else { return }
+        guard let tradePairPrecision = TradeConfiguration.shared.tradePairPrecisions.value[pair] else {
+            self.coordinator?.subscribe(pair, depth: 2, count: 5)
+            TradeConfiguration.shared.tradePairPrecisions.asObservable().subscribe(onNext: { [weak self](data) in
+                guard let `self` = self, let result = data[pair] else { return }
+                self.coordinator?.subscribe(pair, depth: result.price, count: 5)
+                }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            return
+        }
+        self.coordinator?.subscribe(pair, depth: tradePairPrecision.price, count: 5)
+    }
 
     func setupUI() {
         if VCType == OrderbookType.contentView.rawValue {
@@ -91,6 +102,11 @@ class OrderBookViewController: BaseViewController {
             guard let self = self else { return }
             self.setTopTitle()
         })
+        
+        self.coordinator?.state.depth.asObservable().skip(1).subscribe(onNext: { [weak self](depth) in
+            guard let self = self else { return }
+            self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(depth)
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
@@ -111,12 +127,23 @@ class OrderBookViewController: BaseViewController {
                     }
                 }
                 if self.VCType == OrderbookType.contentView.rawValue {
-                    self.contentView.data = result
-                    self.contentView.tableView.reloadData()
-                    self.contentView.tableView.isHidden = false
-                    self.coordinator?.updateMarketListHeight(500)
+                    if let pair = self.pair, let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair], var order = result {
+                        order.pricePrecision = precision.price
+                        order.amountPrecision = precision.amount
+                        self.contentView.data = order
+                        self.contentView.tableView.reloadData()
+                        self.contentView.tableView.isHidden = false
+                        self.coordinator?.updateMarketListHeight(500)
+                    }
                 } else {
-                    self.tradeView.data = result
+                    if let pair = self.pair,
+                        let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair],
+                        var order = result,
+                        let coor = self.coordinator {
+                        order.pricePrecision = coor.state.depth.value
+                        order.amountPrecision = precision.amount
+                        self.tradeView.data = order
+                    }
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
@@ -170,7 +197,12 @@ extension OrderBookViewController {
         guard let text = data["data"] as? String, text.count != 0, let senderView = data["self"] as? UIView else {
             return
         }
-        self.coordinator?.openDecimalNumberVC(senderView, maxDecimal: 4, selectedDecimal: 0, senderVC: self)
+        guard let coor = self.coordinator, let pair = self.pair else { return }
+        guard let tradePairPrecision = TradeConfiguration.shared.tradePairPrecisions.value[pair] else {
+            self.coordinator?.openDecimalNumberVC(senderView, maxDecimal: coor.state.depth.value, selectedDecimal: coor.state.depth.value, senderVC: self)
+            return
+        }
+        self.coordinator?.openDecimalNumberVC(senderView, maxDecimal: tradePairPrecision.price, selectedDecimal: coor.state.depth.value, senderVC: self)
     }
 }
 
@@ -192,11 +224,10 @@ extension OrderBookViewController: UIPopoverPresentationControllerDelegate {
 
 extension OrderBookViewController: RecordChooseViewControllerDelegate {
     func returnSelectedRow(_ sender: RecordChooseViewController, info: String) {
-        self.tradeView.deciLabel.text = info
         if let depthString = info.components(separatedBy: " ").first,
             let depth = depthString.int,
             let pair = self.pair ,let coor = self.coordinator {
-            coor.unSubscribe(pair, depth: coor.state.depth, count: coor.state.count)
+            coor.unSubscribe(pair, depth: coor.state.depth.value, count: coor.state.count)
             coor.subscribe(pair, depth: depth, count: 5)
         }
         self.tradeView.resetDecimalImage()

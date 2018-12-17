@@ -40,6 +40,7 @@ class OrderBookCoordinator: NavCoordinator {
 extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
     func openDecimalNumberVC(_ sender: UIView, maxDecimal: Int, selectedDecimal: Int, senderVC: OrderBookViewController) {        
         let count = (maxDecimal + 1) / 4 != 0 ? 4 : (maxDecimal + 1) % 4
+        
         guard let vc = R.storyboard.comprehensive.recordChooseViewController() else { return }
         vc.preferredContentSize = CGSize(width: 82, height: 35 * count)
         vc.modalPresentationStyle = .popover
@@ -53,7 +54,7 @@ extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
         vc.delegate = senderVC
         vc.maxCount = maxDecimal
         vc.count = count
-        vc.selectedIndex = selectedDecimal
+        vc.selectedIndex = selectedDecimal - (maxDecimal + 1 - count)
         vc.coordinator = RecordChooseCoordinator(rootVC: self.rootVC)
         senderVC.present(vc, animated: true) {
             vc.view.superview?.cornerRadius = 1

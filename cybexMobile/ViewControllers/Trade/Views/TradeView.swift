@@ -35,6 +35,8 @@ class TradeView: UIView {
             if let data = data as? OrderBook {
                 let bids = data.bids
                 let asks = data.asks
+//                data.pricePrecision
+//                data.amountPrecision
                 for index in 6...10 {
                     if let sell = sells.viewWithTag(index) as? TradeLineView {
                         if asks.count - 1 >= (index - 6) {

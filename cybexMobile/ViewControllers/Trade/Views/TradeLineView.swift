@@ -86,14 +86,19 @@ extension TradeLineView {
     func adapterModelToETOProjectView(_ model: OrderBookViewModel) {
         model.orderbook.asObservable().subscribe(onNext: { [weak self](orderbook) in
             guard let self = self, let data = orderbook else { return }
-            self.price.text  = data.price
-            self.amount.text = data.volume
+            if self.price.text != data.price {
+                self.price.text  = data.price
+            }
+            if self.amount.text != data.volume {
+                self.amount.text = data.volume
+            }
             self.backColorView.backgroundColor = model.isBuy == true ? UIColor.reddish15 : UIColor.turtleGreen15
             self.price.textColor = model.isBuy == true ? UIColor.reddish : UIColor.turtleGreen
             if UIScreen.main.bounds.width <= 320 {
                 self.price.font  = UIFont.systemFont(ofSize: 11)
                 self.amount.font = UIFont.systemFont(ofSize: 11)
             }
+            
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         model.percent.asObservable().subscribe(onNext: { [weak self](decimal) in

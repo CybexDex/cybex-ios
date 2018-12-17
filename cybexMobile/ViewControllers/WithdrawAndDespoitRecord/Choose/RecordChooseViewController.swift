@@ -30,7 +30,11 @@ class RecordChooseViewController: BaseViewController {
     var coordinator: (RecordChooseCoordinatorProtocol & RecordChooseStateManagerProtocol)?
     private(set) var context: RecordChooseContext?
     var typeIndex: RecordChooseType = .asset
-    var selectedIndex: Int = 0
+    var selectedIndex: Int = 0 {
+        didSet {
+            
+        }
+    }
     var count: Int = 0
     var maxCount: Int = 0
 
@@ -57,7 +61,6 @@ class RecordChooseViewController: BaseViewController {
     }
 
     func setupData() {
-
     }
 
     func setupEvent() {
