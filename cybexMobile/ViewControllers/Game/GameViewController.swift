@@ -14,11 +14,19 @@ import JavaScriptCore
 
 class GameViewController: BaseViewController {
     
+    let gameURL = "https://gamelive.cybex.io"
     let jsObjectName = "Potral"
     var coordinator: (GameCoordinatorProtocol & GameStateManagerProtocol)?
     private(set) var context: GameContext?
     var object: GameModel!
     @IBOutlet weak var webView: UIWebView!
+    
+    
+    enum GameJSEvent: String {
+        case timeout
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +48,7 @@ class GameViewController: BaseViewController {
     }
     
     func setupData() {
-        if let url = Bundle.main.url(forResource: "game", withExtension: "html") {
+        if let url = URL(string: self.gameURL) {
             self.setupLoadUrl(url)
         }
     }
@@ -124,14 +132,15 @@ extension GameViewController: UIWebViewDelegate {
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        
+        self.endLoading()
     }
     
     func webViewDidStartLoad(_ webView: UIWebView) {
-        
+        self.startLoading()
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
+        self.endLoading()
         guard let context = webView.value(forKeyPath: "documentView.webView.mainFrame.javaScriptContext") as? JSContext else {
             return
         }
@@ -140,7 +149,7 @@ extension GameViewController: UIWebViewDelegate {
         object.viewController = self
         object.context = context
         context.setObject(object, forKeyedSubscript: self.jsObjectName as NSCopying & NSObjectProtocol)
-        context.objectForKeyedSubscript("timeout")?.call(withArguments: [])
+        context.objectForKeyedSubscript(GameJSEvent.timeout.rawValue)?.call(withArguments: [])
     }
 }
 
