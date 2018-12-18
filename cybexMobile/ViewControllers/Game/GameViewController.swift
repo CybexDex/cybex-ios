@@ -45,6 +45,7 @@ class GameViewController: BaseViewController {
     
     func setupUI() {
         self.webView.scalesPageToFit = true
+        self.webView.scrollView.bounces = false
     }
     
     func setupData() {
@@ -122,6 +123,20 @@ class GameViewController: BaseViewController {
                 break
             }
         }).disposed(by: disposeBag)
+        
+        NotificationCenter.default.addObserver(forName: UIApplication.keyboardDidShowNotification, object: nil, queue: nil) { [weak self](notification) in
+            guard let self = self else {return}
+            self.webView.scrollView.isScrollEnabled = false
+        }
+        
+        NotificationCenter.default.addObserver(forName: UIApplication.keyboardDidHideNotification, object: nil, queue: nil) { [weak self](notification) in
+            guard let self = self else {return}
+            self.webView.scrollView.isScrollEnabled = true
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
