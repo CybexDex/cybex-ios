@@ -89,3 +89,17 @@ extension AssetConfiguration {
         }
     }
 }
+
+extension String {
+    var symbol: String {
+        return appData.assetInfo[self]?.symbol.filterJade ?? ""
+    }
+    
+    var precision: Int {
+        return appData.assetInfo[self]?.precision ?? 0
+    }
+    
+    var assetID: String {
+        return appData.assetNameToIds.value[self] ?? ""
+    }
+}

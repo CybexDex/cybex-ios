@@ -21,9 +21,9 @@ protocol TradePair {
 
 extension TradePair {
     func refresh() {
-
     }
 }
+
 
 class TradeViewController: BaseViewController {
     var tradeTitltView: TradeNavTitleView!
@@ -32,13 +32,15 @@ class TradeViewController: BaseViewController {
 
     var titlesView: CybexTitleView?
     var chooseTitleView: UIView?//mask
-
     var selectedIndex: Int = 0 {
         didSet {
             switch selectedIndex {
-            case 0:moveToTradeView(isBuy: true)
-            case 1:moveToTradeView(isBuy: false)
-            case 2:moveToMyOpenedOrders()
+            case 0:
+                moveToTradeView(isBuy: true)
+            case 1:
+                moveToTradeView(isBuy: false)
+            case 2:
+                moveToMyOpenedOrders()
             default:
                 break
             }
@@ -228,6 +230,7 @@ extension TradeViewController {
     @objc func sendBtnAction(_ data: [String: Any]) {
         if let seleIndex = data["selectedIndex"] as? Int {
             selectedIndex = seleIndex
+            NotificationCenter.default.post(name: NSNotification.Name.init("tradeChooseIndexAction"), object: nil, userInfo: ["selectedIndex": seleIndex])
         }
     }
 }

@@ -145,10 +145,12 @@ class OrderBookViewController: BaseViewController {
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
-        appData.tickerData.asObservable().skip(1).distinctUntilChanged().subscribe(onNext: { [weak self](tickers) in
-            guard let self = self else { return }
-            self.showMarketPrice()
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        if let _ = self.tradeView {
+            appData.tickerData.asObservable().skip(1).distinctUntilChanged().subscribe(onNext: { [weak self](tickers) in
+                guard let self = self else { return }
+                self.showMarketPrice()
+                }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        }        
     }
 
     func showMarketPrice() {

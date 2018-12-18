@@ -28,7 +28,12 @@ class AssetInfo: HandyJSON {
 class Asset: HandyJSON {
     var amount: String = ""
     var assetID: String = ""
-
+ 
+    init(amount: String, assetID: String) {
+        self.amount = amount
+        self.assetID = assetID
+    }
+    
     required init() {}
 
     func mapping(mapper: HelpingMapper) {
@@ -56,7 +61,11 @@ extension Asset: Equatable {
 class Price: HandyJSON {
     var base: Asset = Asset()
     var quote: Asset = Asset()
-
+    
+    init(base: Asset, quote: Asset) {
+        self.base = base
+        self.quote = quote
+    }
     required init() {
     }
 

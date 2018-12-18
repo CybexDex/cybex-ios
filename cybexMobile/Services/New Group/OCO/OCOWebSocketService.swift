@@ -46,6 +46,9 @@ class OCOWebSocketService: NSObject {
             socket.delegate = self
             socket.open()
         }
+        else {
+            messageCanSend.call()
+        }
     }
 
     public func disconnect() {

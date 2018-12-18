@@ -62,7 +62,6 @@ class LimitOrderStatus: HandyJSON {
     var createTime: Date!
 
     required init() {}
-
     func mapping(mapper: HelpingMapper) {
         mapper <<< orderId <-- "order_id"
         mapper <<< isSellAsset1 <-- "is_sell"
@@ -73,6 +72,42 @@ class LimitOrderStatus: HandyJSON {
         mapper <<< soldAmount <-- "sold"
         mapper <<< receivedAmount <-- "received"
         mapper <<< canceledAmount <-- "canceled"
-        mapper <<< createTime <-- ("create_time", GemmaDateFormatTransform(formatString: "YYYY-mm-ddTHH:MM:SS"))
+        mapper <<< createTime <-- ("create_time", GemmaDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss"))
+    }
+    
+    func isBuyOrder() -> Bool {
+        let pair = self.getPair()
+        if (pair.base == asset1 && self.isSellAsset1 == true) ||
+            (pair.base != asset1 && self.isSellAsset1 == false) {
+            return true
+        }
+        return false
+    }
+    
+    func getPrice() -> Price {
+        let pair = self.getPair()
+        return self.isBuyOrder() ? Price(base: Asset(amount: self.amountToSell.string, assetID: pair.base),
+                                        quote: Asset(amount: self.amountToReceive.string, assetID: pair.quote)) :
+                                   Price(base: Asset(amount: self.amountToReceive.string, assetID: pair.base),
+                                        quote: Asset(amount: self.amountToSell.string, assetID: pair.quote))
+    }
+    
+    func getPair() -> Pair {
+        let assetAInfo = appData.assetInfo[self.asset1]
+        let assetBInfo = appData.assetInfo[self.asset2]
+        let (base, quote) = MarketHelper.calculateAssetRelation(
+            assetIDAName: (assetAInfo != nil) ?
+                assetAInfo!.symbol.filterJade : "",
+            assetIDBName: (assetBInfo != nil) ?
+                assetBInfo!.symbol.filterJade : "")
+        
+        return Pair(base: base.assetID, quote: quote.assetID)
+    }
+    
+    func decimalProgress() -> Decimal {
+        if self.isBuyOrder() {
+            return Decimal(receivedAmount) / Decimal(amountToReceive) * 100
+        }
+        return Decimal(soldAmount) / Decimal(amountToSell) * 100
     }
 }
