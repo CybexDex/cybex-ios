@@ -35,7 +35,7 @@ enum LimitOrderStatusApi {
     var params: [Any] {
         switch self {
         case let .getMaxLimitOrderIdByTime(date):
-            return [date.string(withFormat: "YYYY-mm-ddTHH:MM:SS")]
+            return [date.string(withFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS")]
         case let .getLimitOrder(userId, lessThanOrderId, limit):
             return [userId, lessThanOrderId, limit]
         case let .getMarketLimitOrder(userId, asset1Id, asset2Id, lessThanOrderId, limit):

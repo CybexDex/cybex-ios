@@ -18,7 +18,18 @@ struct OrderBookState: BaseState {
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
     var data: BehaviorRelay<OrderBook?> = BehaviorRelay(value: nil)
     var pair: BehaviorRelay<Pair?> = BehaviorRelay(value: nil)
+    var depth: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+    var lastPrice: BehaviorRelay<Decimal> = BehaviorRelay(value: 0)
+    var count: Int = 5
 }
+
+
+struct ChangeDepthAndCountAction: Action {
+    var depth: Int
+    var count: Int
+}
+
+
 
 struct OrderBook: Equatable {
     struct Order: Equatable {
@@ -44,3 +55,21 @@ struct FetchedOrderBookData: Action {
     let data: OrderBook?
     let pair: Pair
 }
+
+struct FetchLastPriceAction: Action {
+    var price: Decimal
+}
+
+
+class OrderBookViewModel {
+    var orderbook: BehaviorRelay<OrderBook.Order?> = BehaviorRelay(value: nil)
+    var percent: BehaviorRelay<Decimal> = BehaviorRelay(value: 0)
+    var isBuy: Bool = false
+    init(_ params: (OrderBook.Order, Decimal, Bool)) {
+        self.orderbook.accept(params.0)
+        self.percent.accept(params.1)
+        self.isBuy = params.2
+    }
+}
+
+

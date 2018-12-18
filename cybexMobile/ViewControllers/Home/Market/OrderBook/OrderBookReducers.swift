@@ -10,13 +10,15 @@ import UIKit
 import ReSwift
 
 func orderBookReducer(action: Action, state: OrderBookState?) -> OrderBookState {
-    let state = state ?? OrderBookState()
+    var state = state ?? OrderBookState()
 
     switch action {
     case let action as FetchedOrderBookData:
         state.pair.accept(action.pair)
         state.data.accept(action.data)
-
+    case let action as ChangeDepthAndCountAction:
+        state.depth.accept(action.depth)
+        state.count = action.count
     default:
         break
     }

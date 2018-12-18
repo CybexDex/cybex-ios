@@ -94,6 +94,7 @@ extension MarketCoordinator: MarketCoordinatorProtocol {
             let selectedView = marketVC.selectedDropKindView else { return }
         vc.preferredContentSize = CGSize(width: selectedView.width, height: selectedView.dropKind == .time ? 102 : 136)
         vc.modalPresentationStyle = .popover
+        vc.popoverPresentationController?.popoverBackgroundViewClass = CybexPopoverBackgroundView.self
         vc.popoverPresentationController?.sourceView = selectedView
         vc.popoverPresentationController?.sourceRect = selectedView.bounds
         vc.popoverPresentationController?.delegate = marketVC

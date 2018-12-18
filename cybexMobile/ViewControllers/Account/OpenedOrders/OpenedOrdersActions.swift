@@ -13,7 +13,11 @@ import RxCocoa
 // MARK: - State
 struct OpenedOrdersState: BaseState {
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
-
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
-    var data: [Any] = []
+    
+    var data: BehaviorRelay<[LimitOrderStatus]?> = BehaviorRelay(value: nil)
+}
+
+struct FetchOpenedOrderAction: Action {
+    var data: [LimitOrderStatus]
 }

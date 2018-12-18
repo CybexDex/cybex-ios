@@ -23,6 +23,9 @@ protocol OpenedOrdersStateManagerProtocol {
     func cancelOrder(_ orderID: String, feeId: String, callback: @escaping (_ success: Bool) -> Void)
     func fetchOpenedOrder(_ pair: Pair)
     func fetchAllOpenedOrder()
+    
+    func checkConnectStatus() -> Bool
+    func connect()
 }
 
 class OpenedOrdersCoordinator: NavCoordinator {
@@ -48,43 +51,41 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     func connect() {
         service.connect()
     }
+    
+    func checkConnectStatus() -> Bool {
+        return service.checkNetworConnected()
+    }
 
     func fetchOpenedOrder(_ pair: Pair) {
         guard let userId = UserManager.shared.account.value?.id else { return }
-
         service.messageCanSend.delegate(on: self) { (self, _) in
             let request = GetLimitOrderStatus(response: { json in
-                if let json = json as? JSON, let object = [LimitOrderStatus].deserialize(from: json.rawString()) {
-                    print(object.compactMap({ $0 }))
+                if let json = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: json) {
+                    self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0})))
                 }
-
             }, status: LimitOrderStatusApi.getOpenedMarketLimitOrder(userId: userId, asset1Id: pair.quote, asset2Id: pair.base))
             self.service.send(request: request)
         }
-        monitorService()
-        service.connect()
+        if !service.checkNetworConnected() {
+            monitorService()
+        }
+        service.reconnect()
     }
 
     func fetchAllOpenedOrder() {
         guard let userId = UserManager.shared.account.value?.id else { return }
-
-        let limit = 100
-
         service.messageCanSend.delegate(on: self) { (self, _) in
-            let request = GetLimitOrderStatus(response: { json in
-                if let json = json as? JSON {
-                    let maxId = json["result"].stringValue
-
-                    let request = GetLimitOrderStatus(response: { json in
-                        print(json)
-                    }, status: LimitOrderStatusApi.getLimitOrder(userId: userId, lessThanOrderId: maxId, limit: limit))
-                    self.service.send(request: request)
+            let request = GetLimitOrderStatus(response: { (json) in
+                if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) {
+                    self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0})))
                 }
-            }, status: LimitOrderStatusApi.getMaxLimitOrderIdByTime(date: Date()))
+            }, status: LimitOrderStatusApi.getOpenedLimitOrder(userId: userId))
             self.service.send(request: request)
         }
-        monitorService()
-        service.connect()
+        if !service.isConnecting {
+            monitorService()
+        }
+        service.reconnect()
     }
 
     func monitorService() {
@@ -92,7 +93,6 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
             guard let reachability = note.object as? Reachability else {
                 return
             }
-
             switch reachability.connection {
             case .wifi, .cellular:
                 if self.rootVC.topViewController is OpenedOrdersViewController {
@@ -102,7 +102,6 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
                 self.service.disconnect()
                 break
             }
-
         }
 
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in

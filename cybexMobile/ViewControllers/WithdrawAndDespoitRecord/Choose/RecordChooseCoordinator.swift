@@ -20,7 +20,7 @@ protocol RecordChooseStateManagerProtocol {
     
     func switchPageState(_ state: PageState)
     
-    func fetchData(_ type: Int)
+    func fetchData(_ type: Int, maxCount: Int, count: Int)
 }
 
 class RecordChooseCoordinator: NavCoordinator {
@@ -59,7 +59,7 @@ extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
         }
     }
     
-    func fetchData(_ type: Int) {
+    func fetchData(_ type: Int, maxCount: Int, count: Int) {
         switch type {
         case RecordChooseType.asset.rawValue:
             let accountName = UserManager.shared.name.value ?? ""
@@ -98,7 +98,13 @@ extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
                                                        "MACD",
                                                        "BOLL"]))
             break
+        case RecordChooseType.orderbook.rawValue:
+            var data: [String] = []
+            for index in 0..<count {
+                data.insert(R.string.localizable.trade_decimal_number.key.localizedFormat(maxCount - index), at: 0)
+            }
             
+            self.store.dispatch(FetchDataAction(data: data))
         default: break
         }
         

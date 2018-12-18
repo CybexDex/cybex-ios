@@ -27,10 +27,10 @@ class MarketHelper {
     }
 
     class func calculateAssetRelation(assetIDAName: String, assetIDBName: String) -> (base: String, quote: String) {
-        let relation: [String] = [AssetConfiguration.CybexAsset.USDT,
-                                  AssetConfiguration.CybexAsset.ETH,
-                                  AssetConfiguration.CybexAsset.BTC,
-                                  AssetConfiguration.CybexAsset.CYB].map({ $0.id })
+        let relation: [String] = [AssetConfiguration.CybexAsset.USDT.rawValue,
+                                  AssetConfiguration.CybexAsset.ETH.rawValue,
+                                  AssetConfiguration.CybexAsset.BTC.rawValue,
+                                  AssetConfiguration.CybexAsset.CYB.rawValue]
 
         var indexA = -1
         var indexB = -1
@@ -38,7 +38,8 @@ class MarketHelper {
         if let index = relation.index(of: assetIDAName) {
             indexA = index
         }
-
+        
+     
         if let index = relation.index(of: assetIDBName) {
             indexB = index
         }
@@ -62,3 +63,5 @@ class MarketHelper {
         }
     }
 }
+
+
