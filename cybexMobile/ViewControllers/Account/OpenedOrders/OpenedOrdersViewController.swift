@@ -41,6 +41,7 @@ class OpenedOrdersViewController: BaseViewController {
         super.viewDidLoad()
         setupUI()
         _ = UserManager.shared.balance
+        self.coordinator?.connect()
        setupData()
     }
 
