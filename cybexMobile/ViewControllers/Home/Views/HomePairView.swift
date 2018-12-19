@@ -39,16 +39,18 @@ class HomePairView: UIView {
             guard let ticker = data as? Ticker,
                 let baseInfo = appData.assetInfo[ticker.base],
                 let quoteInfo = appData.assetInfo[ticker.quote] else { return }
-            self.asset2.text =  quoteInfo.symbol.filterJade
+            
+            let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(Pair(base: ticker.base, quote: ticker.quote))
+            self.asset2.text = quoteInfo.symbol.filterJade
             self.asset1.text = "/" + baseInfo.symbol.filterJade
             let url = AppConfiguration.ServerIconsBaseURLString +
                 ticker.quote.replacingOccurrences(of: ".", with: "_") +
                 "_grey.png"
             self.icon.kf.setImage(with: URL(string: url))
-            self.volume.text = ticker.baseVolume.suffixNumber(digitNum: 2)
-            self.price.text = ticker.latest.formatCurrency(digitNum: baseInfo.precision)
+            self.volume.text = ticker.baseVolume.suffixNumber(digitNum: AppConfiguration.amountPrecision)
+            self.price.text = ticker.latest.formatCurrency(digitNum: tradePrecision.price)
             self.bulking.text = (ticker.incre == .greater ? "+" : "") +
-                ticker.percentChange.formatCurrency(digitNum: 2) + "%"
+                ticker.percentChange.formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%"
             self.highLowContain.backgroundColor = ticker.incre.color()
             let change = ticker.percentChange.decimal()
             if change > 1000 {
@@ -61,7 +63,7 @@ class HomePairView: UIView {
             if let baseAsset = AssetConfiguration.CybexAsset(ticker.base) {
                 price = latest * AssetConfiguration.shared.rmbOf(asset: baseAsset)
             }
-            self.rbmL.text = price == 0 ? "-" : "≈¥" + price.string(digits: 4, roundingMode: .down)
+            self.rbmL.text = price == 0 ? "-" : "≈¥" + price.string(digits: AppConfiguration.rmbPrecision, roundingMode: .down)
         }
     }
 

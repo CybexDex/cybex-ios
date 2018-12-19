@@ -24,6 +24,8 @@ protocol OrderBookStateManagerProtocol {
     func resetData(_ pair: Pair)
 
     func updateMarketListHeight(_ height: CGFloat)
+    
+    func orderbookServerConnect()
 }
 
 class OrderBookCoordinator: NavCoordinator {
@@ -86,7 +88,7 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
                 print("----order book: pair.base: \(pair.base) pair.quote: \(pair.quote)   \(orderbook)")
                 self.store.dispatch(FetchedOrderBookData(data: orderbook, pair: pair))
             }
-            service.connect()
+            service.reconnect()
         }
         else {
             self.service.subscribeOrderBook(depth, count: count)
@@ -96,15 +98,9 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
     }
     
     func unSubscribe(_ pair: Pair ,depth: Int ,count: Int) {
-        if !service.checkNetworConnected() {
+        if service.checkNetworConnected() {
             self.service.unSubscribeOrderBook(depth, count: count)
             self.service.unSubscribeTicker()
-        }
-        else{
-            service.connect()
-            service.mdpServiceDidConnected.delegate(on: self) { (self, _) in
-                self.unSubscribe(pair, depth: depth, count: count)
-            }
         }
     }
 
@@ -147,5 +143,9 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
         if let vc = self.rootVC.viewControllers[self.rootVC.viewControllers.count - 1] as? MarketViewController {
             vc.pageContentViewHeight.constant = height + 50
         }
+    }
+    
+    func orderbookServerConnect() {
+        service.connect()
     }
 }

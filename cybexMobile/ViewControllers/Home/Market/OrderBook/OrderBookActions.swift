@@ -19,7 +19,7 @@ struct OrderBookState: BaseState {
     var data: BehaviorRelay<OrderBook?> = BehaviorRelay(value: nil)
     var pair: BehaviorRelay<Pair?> = BehaviorRelay(value: nil)
     var depth: BehaviorRelay<Int> = BehaviorRelay(value: 0)
-    var lastPrice: BehaviorRelay<Decimal> = BehaviorRelay(value: 0)
+    var lastPrice: BehaviorRelay<(Decimal, UIColor)> = BehaviorRelay(value: (0, UIColor.white))
     var count: Int = 5
 }
 

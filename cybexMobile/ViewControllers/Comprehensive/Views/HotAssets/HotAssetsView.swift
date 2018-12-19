@@ -47,7 +47,8 @@ class HotAssetsView: CybexBaseView {
     }
 
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.hotAssetsViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.hotAssetsViewDidClicked.rawValue,
+                                 userinfo: ["data": self.data ?? "", "self": self])
     }
 }
 

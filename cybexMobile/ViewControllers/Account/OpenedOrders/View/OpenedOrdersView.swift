@@ -35,12 +35,13 @@ class OpenedOrdersView: UIView {
         didSet {
             if let order = data as? LimitOrderStatus {
                 let pair = order.getPair()
+                let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(pair)
                 self.quote.text = pair.quote.symbol
                 self.base.text = "/" + pair.base.symbol
                 self.progressLabel.text = order.decimalProgress().formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%"
                 self.timeLabel.text = order.createTime.string(withFormat: "yyyy-MM-dd HH:mm:ss")
                 
-                self.basePrice.text = order.getPrice().toReal().formatCurrency(digitNum: pair.base.precision) + " " + pair.base.symbol
+                self.basePrice.text = order.getPrice().toReal().formatCurrency(digitNum: tradePrecision.price) + " " + pair.base.symbol
                 if order.isBuyOrder() {
                     self.orderType.openedStatus = 0
                     self.amount.text = AssetHelper.getRealAmount(pair.quote,
@@ -107,7 +108,6 @@ class OpenedOrdersView: UIView {
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
-
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]

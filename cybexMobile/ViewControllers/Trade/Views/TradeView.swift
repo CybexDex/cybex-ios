@@ -82,15 +82,12 @@ class TradeView: UIView {
         }
     }
     
-    func setAmountAction(_ sender: Ticker) {
-        var procePresicion = 0
-        if let data = self.data as? OrderBook {
-            procePresicion = data.pricePrecision
-        }
-        let lastPrice = sender.latest.tradePriceAndAmountDecimal().price.formatCurrency(digitNum: procePresicion)
-        let priceString = sender.latest == "0" ? lastPrice + "≈¥" : lastPrice + "≈¥" + AssetHelper.singleAssetRMBPrice(sender.quote).string(digits: 4, roundingMode: .down)
+    func setAmountAction(_ sender: (Decimal, UIColor), pair: Pair, depth: Int) {
+        let lastPrice = sender.0.formatCurrency(digitNum: depth)
+        let rmbPrice = AssetHelper.singleAssetRMBPrice(pair.quote).formatCurrency(digitNum: AppConfiguration.rmbPrecision)
+        let priceString = lastPrice == "0" ? lastPrice + "≈¥" : lastPrice + "≈¥" + rmbPrice
         let priceAttributeString = NSMutableAttributedString(string: priceString,
-                                                             attributes: [NSAttributedString.Key.foregroundColor : sender.incre.color()])
+                                                             attributes: [NSAttributedString.Key.foregroundColor : sender.1])
         priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14,
                                                                                             weight: UIFont.Weight.medium)],
                                            range: NSMakeRange(0, lastPrice.count))

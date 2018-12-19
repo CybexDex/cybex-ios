@@ -11,7 +11,6 @@ import ReSwift
 
 func orderBookReducer(action: Action, state: OrderBookState?) -> OrderBookState {
     var state = state ?? OrderBookState()
-
     switch action {
     case let action as FetchedOrderBookData:
         state.pair.accept(action.pair)
@@ -19,6 +18,18 @@ func orderBookReducer(action: Action, state: OrderBookState?) -> OrderBookState 
     case let action as ChangeDepthAndCountAction:
         state.depth.accept(action.depth)
         state.count = action.count
+    case let action as FetchLastPriceAction:
+        let oldPrice = state.lastPrice.value.0
+        let color = state.lastPrice.value.1
+        if oldPrice < action.price {
+            state.lastPrice.accept((action.price, UIColor.turtleGreen))
+        }
+        else if oldPrice > action.price {
+            state.lastPrice.accept((action.price, UIColor.reddish))
+        }
+        else {
+            state.lastPrice.accept((action.price, color))
+        }
     default:
         break
     }

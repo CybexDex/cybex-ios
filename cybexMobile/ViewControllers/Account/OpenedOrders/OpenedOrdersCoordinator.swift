@@ -50,6 +50,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
 
     func connect() {
         service.connect()
+        monitorService()
     }
     
     func checkConnectStatus() -> Bool {
@@ -57,35 +58,45 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     }
 
     func fetchOpenedOrder(_ pair: Pair) {
-        guard let userId = UserManager.shared.account.value?.id else { return }
         service.messageCanSend.delegate(on: self) { (self, _) in
-            let request = GetLimitOrderStatus(response: { json in
-                if let json = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: json) {
-                    self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0})))
-                }
-            }, status: LimitOrderStatusApi.getOpenedMarketLimitOrder(userId: userId, asset1Id: pair.quote, asset2Id: pair.base))
-            self.service.send(request: request)
+            self.fetchOpenedOrderRequest(pair)
         }
-        if !service.checkNetworConnected() {
-            monitorService()
+        if service.checkNetworConnected() {
+            self.fetchOpenedOrderRequest(pair)
+        }else {
+            service.reconnect()
         }
-        service.reconnect()
+    }
+    
+    func fetchOpenedOrderRequest(_ pair: Pair) {
+        guard let userId = UserManager.shared.account.value?.id else { return }
+        let request = GetLimitOrderStatus(response: { json in
+            if let json = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: json) {
+                self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0})))
+            }
+        }, status: LimitOrderStatusApi.getOpenedMarketLimitOrder(userId: userId, asset1Id: pair.quote, asset2Id: pair.base))
+        self.service.send(request: request)
     }
 
     func fetchAllOpenedOrder() {
-        guard let userId = UserManager.shared.account.value?.id else { return }
         service.messageCanSend.delegate(on: self) { (self, _) in
-            let request = GetLimitOrderStatus(response: { (json) in
-                if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) {
-                    self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0})))
-                }
-            }, status: LimitOrderStatusApi.getOpenedLimitOrder(userId: userId))
-            self.service.send(request: request)
+           self.fetchAllOpenedOrderRequest()
         }
-        if !service.isConnecting {
-            monitorService()
+        if service.checkNetworConnected() {
+            self.fetchAllOpenedOrderRequest()
+        }else {
+            service.reconnect()
         }
-        service.reconnect()
+    }
+    
+    func fetchAllOpenedOrderRequest() {
+        guard let userId = UserManager.shared.account.value?.id else { return }
+        let request = GetLimitOrderStatus(response: { (json) in
+            if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) {
+                self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0})))
+            }
+        }, status: LimitOrderStatusApi.getOpenedLimitOrder(userId: userId))
+        self.service.send(request: request)
     }
 
     func monitorService() {
