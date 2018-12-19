@@ -46,7 +46,7 @@ extension ExchangeCoordinator: ExchangeCoordinatorProtocol {
     if let orderbook = R.storyboard.main.orderBookViewController() {
       if let container = exchange.containerView, let rightView = container.rightView {
         orderbook.coordinator = OrderBookCoordinator(rootVC: self.rootVC)
-        orderbook.VCType = OrderbookType.tradeView.rawValue
+        orderbook.vcType = OrderbookType.tradeView.rawValue
         exchange.addChild(orderbook)
 
         rightView.addSubview(orderbook.view)

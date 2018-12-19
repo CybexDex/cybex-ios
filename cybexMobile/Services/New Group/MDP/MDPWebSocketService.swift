@@ -140,7 +140,6 @@ class MDPWebSocketService: NSObject {
         if socket.readyState == SRReadyState.OPEN {
             return true
         }
-
         return false
     }
 }

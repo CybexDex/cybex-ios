@@ -23,7 +23,7 @@ class BusinessViewController: BaseViewController {
                 refreshView()
             }
             
-            if self.pricePricision == 0 {
+            if self.pricePrecision == 0 {
                 fetchLatestPrice()
             }
         }
@@ -35,8 +35,9 @@ class BusinessViewController: BaseViewController {
     
     var coordinator: (BusinessCoordinatorProtocol & BusinessStateManagerProtocol)?
     
-    var pricePricision: Int = 0
-    var amountPricision: Int = 0
+    var pricePrecision: Int = 0
+    var amountPrecision: Int = 0
+    var totalPrecision: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,15 +46,10 @@ class BusinessViewController: BaseViewController {
     }
     
     func fetchLatestPrice() {
-        guard let pair = pair, let _ = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base) else { return }
-        if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
-            return ticker.quote == pair.quote
-        }) {
-            let markets = MarketHelper.filterQuoteAssetTicker(pair.base)
-            let data = markets[selectedIndex]
-            pricePricision = data.latest.tradePriceAndAmountDecimal().pricision
-            amountPricision = data.latest.tradePriceAndAmountDecimal().amountPricision
-        }
+        guard let pair = pair else { return }
+        let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(pair)
+        pricePrecision = tradePrecision.price
+        amountPrecision = tradePrecision.amount
     }
     
     func setupUI() {
@@ -165,9 +161,9 @@ class BusinessViewController: BaseViewController {
         ShowToastManager.shared.showAnimationInView(self.view)
         ShowToastManager.shared.delegate = self
         
-        let prirce = decimalPrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-        let amount = decimalAmount.string(digits: quoteInfo.precision, roundingMode: .down)  + " " + quoteInfo.symbol.filterJade
-        let total = (decimalPrice * decimalAmount).string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
+        let prirce = decimalPrice.formatCurrency(digitNum: self.pricePrecision) + " " + baseInfo.symbol.filterJade
+        let amount = decimalAmount.formatCurrency(digitNum: self.amountPrecision)  + " " + quoteInfo.symbol.filterJade
+        let total = (decimalPrice * decimalAmount).formatCurrency(digitNum: self.totalPrecision) + " " + baseInfo.symbol.filterJade
         openedOrderDetailView.data = UIHelper.getOpenedOrderInfo(price: prirce, amount: amount, total: total, fee: "", isBuy: self.type == .buy)
     }
     
@@ -231,15 +227,13 @@ class BusinessViewController: BaseViewController {
                 }
                 let total = price.decimal() * amount.decimal()
                 guard let text = self.containerView.priceTextfield.text, text != "", text.decimal() != 0 else {
-                    self.containerView.endMoney.text = "\(total.string(digits: self.pricePricision, roundingMode: .down)) \(baseInfo.symbol.filterJade)"
+                    self.containerView.endMoney.text = "\(total.formatCurrency(digitNum: self.pricePrecision)) \(baseInfo.symbol.filterJade)"
                     return
                 }
-                self.containerView.endMoney.text = "\(total.string(digits: self.pricePricision, roundingMode: .down)) \(baseInfo.symbol.filterJade)"
+                self.containerView.endMoney.text = "\(total.formatCurrency(digitNum: self.pricePrecision)) \(baseInfo.symbol.filterJade)"
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
-    
     func addUserManagerObserverSubscribeAction() {
-        
         UserManager.shared.balances.asObservable().subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
             guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else { return }
@@ -272,9 +266,8 @@ class BusinessViewController: BaseViewController {
                     self.containerView.value.text = "≈¥0.0000"
                     return
             }
-            self.containerView.value.text = "≈¥" + (AssetHelper.singleAssetRMBPrice(baseInfo.id) * text.decimal()).string(digits: 4, roundingMode: .down)
+            self.containerView.value.text = "≈¥" + (AssetHelper.singleAssetRMBPrice(baseInfo.id) * text.decimal()).string(digits: AppConfiguration.rmbPrecision, roundingMode: .down)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
         self.coordinator!.state.amount.subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
             
@@ -301,13 +294,13 @@ class BusinessViewController: BaseViewController {
                 }
             }
             
-            self.containerView.priceTextfield.text = self.containerView.priceTextfield.text!.formatCurrency(digitNum: self.pricePricision)
+            self.containerView.priceTextfield.text = self.containerView.priceTextfield.text!.formatCurrency(digitNum: self.pricePrecision)
             self.coordinator?.switchPrice(self.containerView.priceTextfield.text!)
             
             guard let amountText = self.containerView.amountTextfield.text, amountText != "", amountText.decimal() != 0 else {
                 return
             }
-            self.containerView.amountTextfield.text = amountText.decimal().string(digits: self.amountPricision, roundingMode: .down)
+            self.containerView.amountTextfield.text = amountText.decimal().string(digits: self.amountPrecision, roundingMode: .down)
             self.coordinator?.state.price.accept(self.containerView.priceTextfield.text!)
         }
         
@@ -326,7 +319,7 @@ class BusinessViewController: BaseViewController {
                     self.containerView.amountTextfield.text = self.containerView.amountTextfield.text! + "." + texts.last!
                 }
             }
-            self.containerView.amountTextfield.text = self.containerView.amountTextfield.text!.formatCurrency(digitNum: self.amountPricision)
+            self.containerView.amountTextfield.text = self.containerView.amountTextfield.text!.formatCurrency(digitNum: self.amountPrecision)
             
             self.coordinator?.changeAmountAction(self.containerView.amountTextfield.text!)
             guard let priceText = self.containerView.priceTextfield.text, priceText != "", priceText.decimal() != 0 else {
@@ -384,7 +377,7 @@ extension BusinessViewController {
             self.coordinator?.changePercent(percent.decimal() / 100.0,
                                             isBuy: self.type == .buy,
                                             assetID: self.type == .buy ? baseInfo.id : quoteInfo.id,
-                                            pricision: self.amountPricision)
+                                            pricision: self.amountPrecision)
         }
     }
     
@@ -411,10 +404,10 @@ extension BusinessViewController {
     }
     
     @objc func adjustPrice(_ data: [String: Bool]) {
-        if self.pricePricision == 0 {
+        if self.pricePrecision == 0 {
             return
         }
-        self.coordinator?.adjustPrice(data["plus"]!, pricePricision: self.pricePricision)
+        self.coordinator?.adjustPrice(data["plus"]!, pricePricision: self.pricePrecision)
     }
     
     func postOrder() {
@@ -458,6 +451,5 @@ extension BusinessViewController {
             self.coordinator?.parentEndLoading(self.parent)
             self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
         }
-        
     }
 }

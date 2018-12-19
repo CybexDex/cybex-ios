@@ -28,7 +28,7 @@ class OpenedOrdersViewController: BaseViewController {
     var pair: Pair? {
         didSet {
             if oldValue != pair {
-//                self.coordinator?.fetchOpenedOrder(pair!)
+                self.setupData()
             }
         }
     }
@@ -111,17 +111,22 @@ class OpenedOrdersViewController: BaseViewController {
                     let feeInfo = amount.string(digits: feeInfoValue.precision, roundingMode: .down) + " " + feeInfoValue.symbol.filterJade
                     if order.isBuyOrder() {
                         priceInfo = order.getPrice().toReal().formatCurrency(digitNum: orderPair.base.precision) + " " + orderPair.base.symbol
+                        let amount = order.amountToReceive - order.receivedAmount
                         amountInfo = AssetHelper.getRealAmount(orderPair.quote,
-                                                               amount: order.amountToReceive.string).formatCurrency(digitNum:  orderPair.quote.precision) + " " + orderPair.quote.symbol
+                                                               amount: amount.string).formatCurrency(digitNum:  orderPair.quote.precision) + " " + orderPair.quote.symbol
+                        let total = order.amountToSell - order.soldAmount
                         totalInfo = AssetHelper.getRealAmount(orderPair.base,
-                                                              amount: order.amountToSell.string).formatCurrency(digitNum: orderPair.base.precision) + " " + orderPair.base.symbol
-                     
+                                                              amount: total.string).formatCurrency(digitNum: orderPair.base.precision) + " " + orderPair.base.symbol
                     } else {
                         priceInfo = order.getPrice().toReal().formatCurrency(digitNum: orderPair.quote.precision) + " " + orderPair.base.symbol
+                        let amount = order.amountToSell - order.soldAmount
                         amountInfo = AssetHelper.getRealAmount(orderPair.quote,
-                                                               amount: order.amountToSell.string).formatCurrency(digitNum: orderPair.base.precision) + " " + orderPair.base.symbol
+                                                               amount: amount.string).formatCurrency(digitNum: orderPair.base.precision)
+                            + " " + orderPair.base.symbol
+                        let total = order.amountToReceive - order.receivedAmount
                         totalInfo = AssetHelper.getRealAmount(orderPair.base,
-                                                              amount: order.amountToReceive.string).formatCurrency(digitNum: orderPair.quote.precision) + " " + orderPair.quote.symbol
+                                                              amount: total.string).formatCurrency(digitNum:
+                                                                orderPair.quote.precision) + " " + orderPair.quote.symbol
 
                     }
                     if self.isVisible {
@@ -147,10 +152,8 @@ class OpenedOrdersViewController: BaseViewController {
         self.view.addSubview(containerView!)
         if let accountView = self.containerView as? AccountOpenedOrdersView {
             accountView.data = nil
-            self.coordinator?.fetchAllOpenedOrder()
         } else {
             setupEvent()
-           
         }
         containerView?.edgesToDevice(vc: self,
                                      insets: TinyEdgeInsets(top: 0,

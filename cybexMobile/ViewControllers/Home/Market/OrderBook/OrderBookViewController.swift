@@ -24,25 +24,20 @@ class OrderBookViewController: BaseViewController {
     var coordinator: (OrderBookCoordinatorProtocol & OrderBookStateManagerProtocol)?
     var contentView: OrderBookContentView!
     var tradeView: TradeView!
-    var VCType: Int = OrderbookType.contentView.rawValue
+    var vcType: Int = OrderbookType.contentView.rawValue
     var pair: Pair? {
         didSet {
             guard let pair = pair, oldValue != pair else {
                 return
             }
-            if self.tradeView != nil {
-                showMarketPrice()
-                if oldValue == nil {
-                    self.adaptTradePrecision()
-                }
-                else {
-                    guard let coor = self.coordinator else { return }
-                    coor.unSubscribe(oldValue!, depth: coor.state.depth.value, count: coor.state.count)
-                    coor.subscribe(pair, depth: coor.state.depth.value, count: coor.state.count)
-                }
+            if self.vcType == OrderbookType.contentView.rawValue {
+                self.fetchOrderBookData(pair, count: 20)
             }
             else {
-                self.coordinator?.subscribe(pair, depth: 6, count: 20)
+                if let oldPair = oldValue, let coor = self.coordinator {
+                    coor.unSubscribe(oldPair, depth: coor.state.depth.value, count: 5)
+                }
+                self.fetchOrderBookData(pair, count: 5)
             }
             if self.tradeView != nil || self.contentView != nil {
                 setTopTitle()
@@ -53,23 +48,22 @@ class OrderBookViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        self.coordinator?.orderbookServerConnect()
     }
     
-    func adaptTradePrecision() {
-        guard let pair = self.pair else { return }
+    func fetchOrderBookData(_ pair: Pair,count: Int) {
         guard let tradePairPrecision = TradeConfiguration.shared.tradePairPrecisions.value[pair] else {
-            self.coordinator?.subscribe(pair, depth: 2, count: 5)
             TradeConfiguration.shared.tradePairPrecisions.asObservable().subscribe(onNext: { [weak self](data) in
-                guard let `self` = self, let result = data[pair] else { return }
-                self.coordinator?.subscribe(pair, depth: result.price, count: 5)
+                guard let self = self, let selfPair = self.pair, selfPair == pair, let result = data[pair] else { return }
+                self.coordinator?.subscribe(pair, depth: result.price, count: count)
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
             return
         }
-        self.coordinator?.subscribe(pair, depth: tradePairPrecision.price, count: 5)
+        self.coordinator?.subscribe(pair, depth: tradePairPrecision.price, count: count)
     }
 
     func setupUI() {
-        if VCType == OrderbookType.contentView.rawValue {
+        if vcType == OrderbookType.contentView.rawValue {
             contentView = OrderBookContentView(frame: .zero)
             self.view.addSubview(contentView)
             contentView.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
@@ -85,7 +79,7 @@ class OrderBookViewController: BaseViewController {
 
     func setTopTitle() {
         guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else { return }
-        if VCType == OrderbookType.tradeView.rawValue {
+        if vcType == OrderbookType.tradeView.rawValue {
             self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized() + "(" + baseInfo.symbol.filterJade + ")"
             self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized() + "(" + quoteInfo.symbol.filterJade + ")"
         } else {
@@ -111,9 +105,6 @@ class OrderBookViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
 
     override func configureObserveState() {
         self.coordinator!.state.data.asObservable().skip(1).distinctUntilChanged()
@@ -124,7 +115,7 @@ class OrderBookViewController: BaseViewController {
                         parentVC.endLoading()
                     }
                 }
-                if self.VCType == OrderbookType.contentView.rawValue {
+                if self.vcType == OrderbookType.contentView.rawValue {
                     if let pair = self.pair, let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair], var order = result {
                         order.pricePrecision = precision.price
                         order.amountPrecision = precision.amount
@@ -144,23 +135,13 @@ class OrderBookViewController: BaseViewController {
                     }
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
-        if let _ = self.tradeView {
-            appData.tickerData.asObservable().skip(1).distinctUntilChanged().subscribe(onNext: { [weak self](tickers) in
-                guard let self = self else { return }
-                self.showMarketPrice()
+        if vcType == OrderbookType.tradeView.rawValue {
+            self.coordinator?.state.lastPrice.asObservable().skip(1).subscribe(onNext: { [weak self](result) in
+                guard let self = self,
+                    let pair = self.pair,
+                    let coor = self.coordinator else { return }
+                self.tradeView.setAmountAction(result, pair: pair, depth: coor.state.depth.value)
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        }        
-    }
-
-    func showMarketPrice() {
-        guard let pair = pair, let _ = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base), let coor = self.coordinator else { return }
-        if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
-            return ticker.quote == pair.quote
-        }) {
-            let tickers = MarketHelper.filterQuoteAssetTicker(pair.base)
-            let data = tickers[selectedIndex]
-            self.tradeView.setAmountAction(data)
         }
     }
 }

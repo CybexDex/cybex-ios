@@ -118,15 +118,15 @@ extension AccountOpenedOrdersView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: OpenedOrdersCell.self), for: indexPath) as? OpenedOrdersCell,
             var orders = self.data as? [LimitOrderStatus] {
-            cell.cellType = 0
-            if segment.selectedSegmentIndex == 1 {
-                orders = orders.filter({$0.isBuyOrder()})
-            } else if segment.selectedSegmentIndex == 2 {
-                orders = orders.filter({!$0.isBuyOrder()})
+                cell.cellType = 0
+                if segment.selectedSegmentIndex == 1 {
+                    orders = orders.filter({$0.isBuyOrder()})
+                } else if segment.selectedSegmentIndex == 2 {
+                    orders = orders.filter({!$0.isBuyOrder()})
+                }
+                cell.setup(orders[indexPath.row], indexPath: indexPath)
+                return cell
             }
-            cell.setup(orders[indexPath.row], indexPath: indexPath)
-            return cell
-        }
         return OpenedOrdersCell()
     }
 }

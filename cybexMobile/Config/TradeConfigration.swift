@@ -17,6 +17,16 @@ class TradeConfiguration {
     private init() {
 
     }
+    
+    func getPairPrecisionWithPair(_ pair: Pair) -> PairPrecision {
+        if let tradePairPrecision = self.tradePairPrecisions.value[Pair(base: pair.base, quote: pair.quote)] {
+            return tradePairPrecision
+        }
+        guard let baseInfo = appData.assetInfo[pair.base] else {
+            return PairPrecision(price: 6, amount: 2,total: 2)
+        }
+        return PairPrecision(price: baseInfo.precision, amount: AppConfiguration.amountPrecision, total: 2)
+    }
 }
 
 extension TradeConfiguration {

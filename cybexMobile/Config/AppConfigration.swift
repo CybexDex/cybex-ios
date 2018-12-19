@@ -31,6 +31,7 @@ class AppConfiguration {
 
     static let rmbPrecision = 4
     static let percentPrecision = 2
+    static let amountPrecision = 2
 
     private init() {
         let rootVC = BaseTabbarViewController()

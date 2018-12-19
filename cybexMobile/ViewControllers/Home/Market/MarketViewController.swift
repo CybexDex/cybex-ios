@@ -246,6 +246,7 @@ class MarketViewController: BaseViewController {
 
             endLoading()
             kLineView.isHidden = false
+            let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(self.pair)
 
             DispatchQueue.global().async {
                 var dataArray = [CBKLineModel]()
@@ -281,6 +282,8 @@ class MarketViewController: BaseViewController {
                     //                if lowPrice < 0.7 * (openPrice + closePrice) * 0.5 {
                     //                    lowPrice = min(openPrice, closePrice)
                     //                }
+                    
+                    
                     let model = CBKLineModel(date: data.open,
                                              open: openPrice,
                                              close: closePrice,
@@ -288,7 +291,7 @@ class MarketViewController: BaseViewController {
                                              low: lowPrice,
                                              towardsVolume: (isBase ? Double(data.quoteVolume)! : Double(data.baseVolume)!) / quotePrecision,
                                              volume: (isBase ? Double(data.baseVolume)! : Double(data.quoteVolume)!) / basePrecision,
-                                             precision: baseInfo.precision)
+                                             precision: tradePrecision.price)
 
                     let lastIdx = dataArray.count - 1
                     if lastIdx >= 0 {
@@ -335,8 +338,8 @@ class MarketViewController: BaseViewController {
                     if let baseInfo = appData.assetInfo[self.ticker.base], self.timeGap == .oneDay {
                         lastModel = dataArray.last!
                         DispatchQueue.main.async {
-                            self.detailView.highLabel.text = "High: " + lastModel.high.decimal.string(digits: baseInfo.precision, roundingMode: .down)
-                            self.detailView.lowLabel.text = "Low: " + lastModel.low.decimal.string(digits: baseInfo.precision, roundingMode: .down)
+                            self.detailView.highLabel.text = "High: " + lastModel.high.decimal.formatCurrency(digitNum: tradePrecision.price)
+                            self.detailView.lowLabel.text = "Low: " + lastModel.low.decimal.formatCurrency(digitNum: tradePrecision.price)
                         }
                     }
                 }
