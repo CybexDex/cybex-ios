@@ -213,7 +213,7 @@ class BlackKLineTheme: CBTheme {
 
     var tickWidth: CGFloat = 1
 
-    var tickColor: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    var tickColor: UIColor = UIColor.steel20
 
     var dashWidth: CGFloat = 1
 
