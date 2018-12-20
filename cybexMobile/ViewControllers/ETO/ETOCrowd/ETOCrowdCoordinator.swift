@@ -55,7 +55,7 @@ extension ETOCrowdCoordinator: ETOCrowdCoordinatorProtocol {
             let feeInfo = appData.assetInfo[fee.assetId]
              else { return }
 
-        let feeAmount = fee.amount.string(digits: feeInfo.precision, roundingMode: .down)
+        let feeAmount = fee.amount.formatCurrency(digitNum: feeInfo.precision)
         self.rootVC.topViewController?.showConfirm(R.string.localizable.eto_submit_confirm.key.localized(),
                                                    attributes: UIHelper.confirmSubmitCrowd(data.name, amount: "\(transferAmount) \(data.baseTokenName)",
                                                     fee: "\(feeAmount) \(feeInfo.symbol.filterJade)"), setup: { (_) in

@@ -49,8 +49,7 @@ func filterData(_ trades: [Trade]) -> [Trade] {
                 guard let info = appData.assetInfo[trade.id] else { continue }
                 if trade.id == balance.assetType {
                     trade.amount = AssetHelper.getRealAmount(balance.assetType,
-                                                 amount: balance.balance).string(digits: info.precision,
-                                                                                 roundingMode: .down)
+                                                 amount: balance.balance).formatCurrency(digitNum: info.precision)
                     tradesInfo.append(trade)
                 }
             }

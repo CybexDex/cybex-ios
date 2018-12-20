@@ -66,18 +66,8 @@ class OpenedOrdersViewController: BaseViewController {
     }
     
     func setupEvent() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification),
-                                               object: nil, queue: nil,
-                                               using: { [weak self] _ in
-            guard let self = self else { return }
-            if let accountView = self.containerView as? MyOpenedOrdersView {
-                accountView.sectionView.totalTitle.locali = R.string.localizable.my_opened_price.key
-                accountView.sectionView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key
-            }
-        })
         NotificationCenter.default.addObserver(forName: NSNotification.Name.init("tradeChooseIndexAction"), object: nil, queue: nil) { [weak self](notifi) in
-            guard let self = self,
-                let pair = self.pair,
+            guard let self = self, let pair = self.pair,
                 let userInfo = notifi.userInfo,
                 let index = userInfo["selectedIndex"] as? Int else { return }
             if index == 2 {
@@ -108,7 +98,7 @@ class OpenedOrdersViewController: BaseViewController {
                     var priceInfo = ""
                     var amountInfo = ""
                     var totalInfo = ""
-                    let feeInfo = amount.string(digits: feeInfoValue.precision, roundingMode: .down) + " " + feeInfoValue.symbol.filterJade
+                    let feeInfo = amount.formatCurrency(digitNum: feeInfoValue.precision) + " " + feeInfoValue.symbol.filterJade
                     if order.isBuyOrder() {
                         priceInfo = order.getPrice().toReal().formatCurrency(digitNum: orderPair.base.precision) + " " + orderPair.base.symbol
                         let amount = order.amountToReceive - order.receivedAmount
@@ -189,7 +179,6 @@ class OpenedOrdersViewController: BaseViewController {
     override func configureObserveState() {
         self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let self = self, let limitOrders = data, self.isVisible else { return }
-
             if let accountView = self.containerView as? AccountOpenedOrdersView {
                 accountView.data = limitOrders
             } else if let pairOrder = self.containerView as? MyOpenedOrdersView {
@@ -200,7 +189,6 @@ class OpenedOrdersViewController: BaseViewController {
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
-    
     deinit {
         self.timer?.pause()
         self.timer = nil
@@ -239,7 +227,6 @@ extension OpenedOrdersViewController {
     func postCancelOrder() {
         // order.isBuy ? pair.base : pair.quote
         if let order = self.order {
-            
             self.coordinator?.cancelOrder(order.orderId, feeId: order.isBuyOrder() ? order.getPair().base.assetID : order.getPair().quote.assetID, callback: {[weak self] (success) in
                 guard let self = self else { return }
                 self.endLoading()
@@ -248,7 +235,6 @@ extension OpenedOrdersViewController {
                                     R.string.localizable.cancel_create_success.key.localized() :
                                     R.string.localizable.cancel_create_fail.key.localized())
             })
-
         }
     }
 

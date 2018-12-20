@@ -63,7 +63,7 @@ class HomePairView: UIView {
             if let baseAsset = AssetConfiguration.CybexAsset(ticker.base) {
                 price = latest * AssetConfiguration.shared.rmbOf(asset: baseAsset)
             }
-            self.rbmL.text = price == 0 ? "-" : "≈¥" + price.string(digits: AppConfiguration.rmbPrecision, roundingMode: .down)
+            self.rbmL.text = price == 0 ? "-" : "≈¥" + price.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
         }
     }
 

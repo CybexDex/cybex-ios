@@ -45,18 +45,18 @@ class OpenedOrdersView: UIView {
                 if order.isBuyOrder() {
                     self.orderType.openedStatus = 0
                     self.amount.text = AssetHelper.getRealAmount(pair.quote,
-                                                                 amount: order.receivedAmount.string).formatCurrency(digitNum: pair.quote.precision) + "/" +
+                                                                 amount: order.receivedAmount.string).formatCurrency(digitNum: tradePrecision.amount) + "/" +
                         AssetHelper.getRealAmount(pair.quote,
-                                                  amount: order.amountToReceive.string).formatCurrency(digitNum: pair.quote.precision) + " " + pair.base.symbol
+                                                  amount: order.amountToReceive.string).formatCurrency(digitNum: tradePrecision.amount) + " " + pair.base.symbol
                     self.progressLabel.textColor = self.orderType.buyColor
                 }
                 else {
                     self.orderType.openedStatus = 1
                     self.progressLabel.textColor = self.orderType.sellColor
-                    self.amount.text = AssetHelper.getRealAmount(pair.base,
-                                                                 amount: order.soldAmount.string).formatCurrency(digitNum: pair.quote.precision) + "/" +
-                        AssetHelper.getRealAmount(pair.base,
-                                                  amount: order.amountToSell.string).formatCurrency(digitNum: pair.quote.precision) + " " + pair.quote.symbol
+                    self.amount.text = AssetHelper.getRealAmount(pair.quote,
+                                                                 amount: order.soldAmount.string).formatCurrency(digitNum: tradePrecision.amount) + "/" +
+                        AssetHelper.getRealAmount(pair.quote,
+                                                  amount: order.amountToSell.string).formatCurrency(digitNum: tradePrecision.amount) + " " + pair.quote.symbol
                 }
             }
         }

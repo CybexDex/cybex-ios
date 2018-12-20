@@ -380,7 +380,7 @@ extension CBKLineDrawView {
                     horizantalTop.constant = abs(mainView.drawMaxY - CGFloat((model.close - limitValue.minValue) / unitValue))
                 }
                 indicatorVolumeLabel.isHidden = false
-                indicatorVolumeLabel.text = model.close.string(digits: model.precision, roundingMode: .down)
+                indicatorVolumeLabel.text = model.close.formatCurrency(digitNum: model.precision)
 
                 mainView.fetchAssistString(model: model)
                 mainView.focusModel = model

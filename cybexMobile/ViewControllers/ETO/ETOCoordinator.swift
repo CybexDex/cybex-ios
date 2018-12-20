@@ -137,7 +137,7 @@ extension ETOCoordinator: ETOStateManagerProtocol {
                         if let dataJson = json.dictionaryObject, let refreshModel = ETOShortProjectStatusModel.deserialize(from: dataJson) {
                             projectModel.status = refreshModel.status
                             projectModel.finishAt = refreshModel.finishAt
-                            viewModel.currentPercent.accept((refreshModel.currentPercent * 100).string(digits: 2, roundingMode: .down) + "%")
+                            viewModel.currentPercent.accept((refreshModel.currentPercent * 100).formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
                             viewModel.progress.accept(refreshModel.currentPercent)
                             viewModel.status.accept(refreshModel.status!.description())
                             viewModel.projectState.accept(refreshModel.status)

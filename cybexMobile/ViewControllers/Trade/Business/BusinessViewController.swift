@@ -22,7 +22,6 @@ class BusinessViewController: BaseViewController {
                 fetchLatestPrice()
                 refreshView()
             }
-            
             if self.pricePrecision == 0 {
                 fetchLatestPrice()
             }
@@ -32,9 +31,7 @@ class BusinessViewController: BaseViewController {
     @IBOutlet weak var containerView: BusinessView!
     
     var type: ExchangeType = .buy
-    
     var coordinator: (BusinessCoordinatorProtocol & BusinessStateManagerProtocol)?
-    
     var pricePrecision: Int = 0
     var amountPrecision: Int = 0
     var totalPrecision: Int = 0
@@ -50,6 +47,7 @@ class BusinessViewController: BaseViewController {
         let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(pair)
         pricePrecision = tradePrecision.price
         amountPrecision = tradePrecision.amount
+        totalPrecision = tradePrecision.total
     }
     
     func setupUI() {
@@ -193,7 +191,7 @@ class BusinessViewController: BaseViewController {
             
             let info = self.type == .buy ? baseInfo : quoteInfo
             let symbol = info.symbol.filterJade
-            let realAmount = balance.string(digits: info.precision)
+            let realAmount = balance.formatCurrency(digitNum: info.precision)
             
             self.containerView.balance.text = "\(realAmount) \(symbol)"
             
@@ -207,7 +205,7 @@ class BusinessViewController: BaseViewController {
                 self.containerView.fee.text = "--"
                 return
             }
-            self.containerView.fee.text = feeAmount.string(digits: info.precision) + " \(info.symbol.filterJade)"
+            self.containerView.fee.text = feeAmount.formatCurrency(digitNum: info.precision) + " \(info.symbol.filterJade)"
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
         //total
@@ -236,7 +234,8 @@ class BusinessViewController: BaseViewController {
     func addUserManagerObserverSubscribeAction() {
         UserManager.shared.balances.asObservable().subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
-            guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else { return }
+            guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base],
+                let quoteInfo = appData.assetInfo[pair.quote] else { return }
             self.coordinator?.getBalance((self.type == .buy ? baseInfo.id : quoteInfo.id))
             self.coordinator?.getFee(self.type == .buy ? baseInfo.id : quoteInfo.id)
             
@@ -244,14 +243,11 @@ class BusinessViewController: BaseViewController {
         
         UserManager.shared.name.skip(1).asObservable().subscribe(onNext: {[weak self] (name) in
             guard let self = self else { return }
-            
             self.changeButtonState()
-            
             guard let _ = name else {
                 self.coordinator?.resetState()
                 return
             }
-            
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     
@@ -266,7 +262,7 @@ class BusinessViewController: BaseViewController {
                     self.containerView.value.text = "≈¥0.0000"
                     return
             }
-            self.containerView.value.text = "≈¥" + (AssetHelper.singleAssetRMBPrice(baseInfo.id) * text.decimal()).string(digits: AppConfiguration.rmbPrecision, roundingMode: .down)
+            self.containerView.value.text = "≈¥" + (AssetHelper.singleAssetRMBPrice(baseInfo.id) * text.decimal()).formatCurrency(digitNum: AppConfiguration.rmbPrecision)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         self.coordinator!.state.amount.subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
@@ -300,7 +296,7 @@ class BusinessViewController: BaseViewController {
             guard let amountText = self.containerView.amountTextfield.text, amountText != "", amountText.decimal() != 0 else {
                 return
             }
-            self.containerView.amountTextfield.text = amountText.decimal().string(digits: self.amountPrecision, roundingMode: .down)
+            self.containerView.amountTextfield.text = amountText.decimal().formatCurrency(digitNum: self.amountPrecision)
             self.coordinator?.state.price.accept(self.containerView.priceTextfield.text!)
         }
         
@@ -327,7 +323,6 @@ class BusinessViewController: BaseViewController {
             }
             self.coordinator?.state.amount.accept(self.containerView.amountTextfield.text!)
         }
-        
         NotificationCenter.default.addObserver(forName: UITextField.textDidBeginEditingNotification, object: self.containerView.amountTextfield, queue: nil) {[weak self](_) in
             guard let self = self else {return}
             if !UserManager.shared.isLoginIn {
@@ -336,7 +331,6 @@ class BusinessViewController: BaseViewController {
                 return
             }
         }
-        
         NotificationCenter.default.addObserver(forName: UITextField.textDidBeginEditingNotification, object: self.containerView.priceTextfield, queue: nil) {[weak self](_) in
             guard let self = self else {return}
             
@@ -347,7 +341,6 @@ class BusinessViewController: BaseViewController {
             }
         }
     }
-    
     deinit {
         NotificationCenter.default.removeObserver(self.containerView.priceTextfield)
         NotificationCenter.default.removeObserver(self.containerView.amountTextfield)
@@ -364,7 +357,6 @@ extension BusinessViewController: TradePair {
             self.pair = newValue
         }
     }
-    
     func refresh() {
         //    refreshView()
     }
@@ -394,7 +386,6 @@ extension BusinessViewController {
         }
         
         guard checkBalance() else { return }
-        
         //    if UserManager.shared.isLocked {
         //      showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
         //    }
@@ -409,25 +400,19 @@ extension BusinessViewController {
         }
         self.coordinator?.adjustPrice(data["plus"]!, pricePricision: self.pricePrecision)
     }
-    
     func postOrder() {
         guard let pair = self.pair else { return }
-        
         self.coordinator?.postLimitOrder(pair, isBuy: self.type == .buy, callback: {[weak self] (success) in
             guard let self = self else { return }
             self.coordinator?.parentEndLoading(self.parent)
-            
             if success {
                 self.coordinator?.resetState()
             }
-            
             self.showToastBox(success, message: success ? R.string.localizable.order_create_success.key.localized() : R.string.localizable.order_create_fail.key.localized())
-            
         })
     }
     
     override func returnEnsureAction() {
-        //    self.coordinator?.parentStartLoading(self.parent)
         ShowToastManager.shared.hide()
         if UserManager.shared.isLocked {
             SwifterSwift.delay(milliseconds: 100) {
@@ -444,7 +429,6 @@ extension BusinessViewController {
     }
     
     override func passwordPassed(_ passed: Bool) {
-        
         if passed {
             postOrder()
         } else {

@@ -21,7 +21,7 @@ func businessReducer(action: Action, state: BusinessState?) -> BusinessState {
 
         let price = state.price.value.decimal()
         if price != 0, price + gap > 0 {
-            state.price.accept((price + gap).string(digits: precision, roundingMode: .down))
+            state.price.accept((price + gap).formatCurrency(digitNum: precision))
         }
     case let action as FeeFetchedAction:
         state.feeAmount.accept(action.amount)
@@ -29,7 +29,7 @@ func businessReducer(action: Action, state: BusinessState?) -> BusinessState {
     case let action as BalanceFetchedAction:
         state.balance.accept(action.amount)
     case let action as SwitchPercentAction:
-        state.amount.accept(action.amount.string(digits: action.pricision, roundingMode: .down))
+        state.amount.accept(action.amount.formatCurrency(digitNum: action.pricision))
     case _ as ResetTrade:
         state.price.accept("")
         state.feeAmount.accept(0)

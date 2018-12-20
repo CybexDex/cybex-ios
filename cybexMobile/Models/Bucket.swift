@@ -169,15 +169,15 @@ struct BucketMatrix {
     self.baseVolume = baseVolume.suffixNumber(digitNum: 2)
     self.quoteVolume = quoteVolume.suffixNumber(digitNum: 2)
 
-    self.high = high.string(digits: baseInfo.precision, roundingMode: .down)
-    self.low = low.string(digits: baseInfo.precision, roundingMode: .down)
+    self.high = high.formatCurrency(digitNum: baseInfo.precision)
+    self.low = low.formatCurrency(digitNum: baseInfo.precision)
 
-    self.price = lastClosePrice.string(digits: baseInfo.precision, roundingMode: .down)
+    self.price = lastClosePrice.formatCurrency(digitNum: baseInfo.precision)
 
     let change = (lastClosePrice - firseOpenPrice) * 100 / firseOpenPrice
     let percent = change.decimal(digits: 0, roundingMode: .plain) * 100 / 100.0
 
-    self.change = percent.string(digits: 2, roundingMode: .down)
+    self.change = percent.formatCurrency(digitNum: AppConfiguration.percentPrecision)
 
     if percent == 0 {
       self.incre = .equal

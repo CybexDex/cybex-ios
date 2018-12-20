@@ -33,7 +33,6 @@ class AccountOpenedOrdersView: UIView {
 
     func updateHeaderView() {
         guard let _ = UserManager.shared.limitOrder.value else { return }
-
         if segment.selectedSegmentIndex == 0 {
             headerView.totalValueTip.localizedText = R.string.localizable.openedAllMoney.key.localizedContainer()
             headerView.data = "\(UserManager.shared.limitOrderValue)"
@@ -50,11 +49,7 @@ class AccountOpenedOrdersView: UIView {
         let cell = String.init(describing: OpenedOrdersCell.self)
         tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
         tableView.separatorColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
-
-        headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: 103))
-
-        headerView.sectionTitleView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key
-        headerView.sectionTitleView.totalTitle.locali = R.string.localizable.my_opened_price.key
+        headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: 64))
         tableView.tableHeaderView = headerView
     }
 
