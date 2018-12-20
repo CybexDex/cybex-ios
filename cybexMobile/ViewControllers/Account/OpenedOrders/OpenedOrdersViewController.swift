@@ -189,6 +189,7 @@ class OpenedOrdersViewController: BaseViewController {
     override func configureObserveState() {
         self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let self = self, let limitOrders = data, self.isVisible else { return }
+
             if let accountView = self.containerView as? AccountOpenedOrdersView {
                 accountView.data = limitOrders
             } else if let pairOrder = self.containerView as? MyOpenedOrdersView {

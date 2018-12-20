@@ -88,7 +88,6 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
         switch self.pageType {
         case SettingPage.theme:
             self.coordinator?.popViewController(false)
-            
             SwifterSwift.delay(milliseconds: 10) {
                 Defaults[.theme] = index
                 ThemeManager.setTheme(index: index)
@@ -96,15 +95,11 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
             
         case SettingPage.language:
             self.coordinator?.popViewController(false)
-            
             SwifterSwift.delay(milliseconds: 10) {
                 let language = index == 1 ? "zh-Hans" : "en"
                 Defaults[.language] = language
                 Localize.setCurrentLanguage(language)
-                NotificationCenter.default.post(name: Notification.Name(rawValue: "changeLocalizeAction"), object: nil)
             }
         }
-        
     }
-    
 }

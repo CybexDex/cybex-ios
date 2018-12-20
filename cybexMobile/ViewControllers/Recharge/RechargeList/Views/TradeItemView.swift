@@ -20,6 +20,7 @@ class TradeItemView: UIView {
                         data.id.replacingOccurrences(of: ".", with: "_") +
                         "_grey.png"))
                 name.text = info.symbol.filterJade
+                assetAllName.text = "(\(data.projectName))"
                 if data.enable == false {
                     amount.text = R.string.localizable.deposti_enable_tip.key.localized()
                 }
@@ -30,6 +31,7 @@ class TradeItemView: UIView {
         }
     }
     
+    @IBOutlet weak var assetAllName: UILabel!
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var amount: UILabel!
