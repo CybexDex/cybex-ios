@@ -8,6 +8,7 @@
 
 import Foundation
 import TinyConstraints
+import SwiftTheme
 
 class CBKLineDrawView: UIView {
 
@@ -221,9 +222,11 @@ extension CBKLineDrawView {
 
         indicatorVolumeLabel = UILabel()
         indicatorVolumeLabel.isHidden = true
+        let strokeColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.white
+        let bgColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1) : #colorLiteral(red: 0.1058823529, green: 0.1333333333, blue: 0.1882352941, alpha: 1)
 
-        indicatorVolumeLabel.backgroundColor = configuration.theme.longPressLineColor
-        indicatorVolumeLabel.textColor = configuration.theme.dashColor
+        indicatorVolumeLabel.backgroundColor = bgColor
+        indicatorVolumeLabel.textColor = strokeColor
         indicatorVolumeLabel.font = configuration.main.dateAssistTextFont
 
         addSubview(indicatorVolumeLabel)
@@ -426,6 +429,7 @@ extension CBKLineDrawView {
 
         let horLayer = CAShapeLayer()
         horLayer.fillColor = UIColor.white.cgColor
+        
         horLayer.strokeColor = configuration.theme.longPressLineColor.cgColor
         horLayer.lineWidth = configuration.theme.longPressLineWidth
         horLayer.lineDashPattern = [3, 3]

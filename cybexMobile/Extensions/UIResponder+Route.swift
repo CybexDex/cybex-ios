@@ -9,16 +9,16 @@
 import Foundation
 
 extension UIResponder {
-  func sendEventWith(_ name: String, userinfo: [String: Any]) {
-    let sel = Selector("\(name):")
-    guard responds(to: sel) else {
-      self.next?.sendEventWith(name, userinfo: userinfo)
-      return
+    func sendEventWith(_ name: String, userinfo: [String: Any]) {
+        let sel = Selector("\(name):")
+        guard responds(to: sel) else {
+            self.next?.sendEventWith(name, userinfo: userinfo)
+            return
+        }
+        
+        let setEvent = unsafeBitCast(method(for: sel), to: SetEventIMP.self)
+        setEvent(self, sel, userinfo)
     }
-
-    let setEvent = unsafeBitCast(method(for: sel), to: SetEventIMP.self)
-    setEvent(self, sel, userinfo)
-  }
-
-  fileprivate typealias SetEventIMP        = @convention(c) (NSObject, Selector, [String: Any]) -> Void
+    
+    fileprivate typealias SetEventIMP        = @convention(c) (NSObject, Selector, [String: Any]) -> Void
 }

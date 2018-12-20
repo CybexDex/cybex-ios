@@ -5262,7 +5262,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5361,7 +5361,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5525,7 +5525,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nbltrustdev.cybex.fir;
 				PRODUCT_NAME = cybexMobile;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
