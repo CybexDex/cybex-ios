@@ -92,10 +92,10 @@ class CBKLineAccessoryView: UIView {
 //    }
 //
     context.saveGState()
-
+    let strokeColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.white
     context.move(to: CGPoint(x: 15, y: 0))
     context.addLine(to: CGPoint(x: width - 15, y: 0))
-    context.setStrokeColor(configuration.theme.dashColor.cgColor)
+    context.setStrokeColor(strokeColor.cgColor)
     context.setLineWidth(configuration.theme.dashWidth)
     context.setLineDash(phase: 0, lengths: [1, 5])
     context.strokePath()

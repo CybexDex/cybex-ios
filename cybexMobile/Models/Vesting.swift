@@ -77,9 +77,10 @@ class PortfolioData {
             guard let cybInfo = appData.assetInfo[AssetConfiguration.CybexAsset.CYB.id] else { return }
             
             cybPrice = cybDecimal.formatCurrency(digitNum: cybInfo.precision) + " CYB"
-            rbmPrice    = "≈¥" + (AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) * AssetHelper.singleAssetRMBPrice(balance.assetType)).formatCurrency(digitNum: AppConfiguration.rmbPrecision)
+            rbmPrice = "≈¥" + (AssetHelper.getRealAmount(balance.assetType,
+                                                            amount: balance.balance) *
+                AssetHelper.singleAssetRMBPrice(balance.assetType)).formatCurrency(digitNum: AppConfiguration.rmbPrecision)
         }
-
     }
 }
 

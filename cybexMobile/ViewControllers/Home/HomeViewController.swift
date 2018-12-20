@@ -93,6 +93,8 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
             self.view.addSubview(businessTitleView!)
             businessTitleView?.edges(to: self.view,
                                      insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+            self.updateUI()
+
         }
     }
 
