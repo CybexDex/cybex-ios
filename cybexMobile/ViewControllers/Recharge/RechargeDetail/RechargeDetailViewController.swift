@@ -199,7 +199,7 @@ class RechargeDetailViewController: BaseViewController {
             .subscribe(onNext: { [weak self](_) in
                 guard let self = self else { return }
                 if let balance = self.balance, let precision = self.precision {
-                    self.contentView.amountView.content.text = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).string(digits: precision, roundingMode: .down)
+                    self.contentView.amountView.content.text = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).formatCurrency(digitNum: precision)
                     self.checkAmountIsAvailable(AssetHelper.getRealAmount(balance.assetType, amount: balance.balance))
                     self.setFinalAmount()
                 }
@@ -277,11 +277,10 @@ class RechargeDetailViewController: BaseViewController {
             }
             
             if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id], let precision = self.precision, let balance = self.balance {
-                self.contentView.insideFee.text = data.fee.string(digits: precision) + " " + tradeInfo.symbol.filterJade
+                self.contentView.insideFee.text = data.fee.formatCurrency(digitNum: precision) + " " + tradeInfo.symbol.filterJade
                 self.contentView.avaliableView.content.text = AssetHelper.getRealAmount(
                     balance.assetType,
-                    amount: balance.balance).string(digits:
-                        tradeInfo.precision) + " " + tradeInfo.symbol.filterJade
+                    amount: balance.balance).formatCurrency(digitNum: tradeInfo.precision) + " " + tradeInfo.symbol.filterJade
             }
             self.setFinalAmount()
             SwifterSwift.delay(milliseconds: 300) {
@@ -296,9 +295,9 @@ class RechargeDetailViewController: BaseViewController {
             if let data = result, data.success, let feeInfo = appData.assetInfo[data.0.assetId] {
                 let fee = data.0
                 if let trade = self.trade, let precision = self.precision, feeInfo.id == trade.id {
-                    self.contentView.gateAwayFee.text = fee.amount.string(digits: precision) + " " + feeInfo.symbol.filterJade
+                    self.contentView.gateAwayFee.text = fee.amount.formatCurrency(digitNum: precision) + " " + feeInfo.symbol.filterJade
                 } else {
-                    self.contentView.gateAwayFee.text = fee.amount.string(digits: feeInfo.precision) + " " + feeInfo.symbol.filterJade
+                    self.contentView.gateAwayFee.text = fee.amount.formatCurrency(digitNum: feeInfo.precision) + " " + feeInfo.symbol.filterJade
                 }
                 self.feeAssetId = AssetConfiguration.CybexAsset.CYB.id != fee.assetId ? fee.assetId : AssetConfiguration.CybexAsset.CYB.id
                 self.setFinalAmount()
@@ -324,7 +323,7 @@ class RechargeDetailViewController: BaseViewController {
             let balance = self.balance,
             let balanceInfo = appData.assetInfo[balance.assetType],
             let precision = self.precision else { return }
-        self.contentView.finalAmount.text = finalAmount.string(digits: precision) + " " + balanceInfo.symbol.filterJade
+        self.contentView.finalAmount.text = finalAmount.formatCurrency(digitNum: precision) + " " + balanceInfo.symbol.filterJade
     }
 }
 

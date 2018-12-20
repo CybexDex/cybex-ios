@@ -79,7 +79,7 @@ class RechargeView: CybexBaseView {
 
     func updateView() {
         if let balance = self.balance, let balanceInfo = appData.assetInfo[balance.assetType] {
-            avaliableView.content.text = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).string(digits: balanceInfo.precision) + " " + balanceInfo.symbol.filterJade
+            avaliableView.content.text = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).formatCurrency(digitNum: balanceInfo.precision) + " " + balanceInfo.symbol.filterJade
         } else {
             if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
                 avaliableView.content.text = "--" + tradeInfo.symbol.filterJade

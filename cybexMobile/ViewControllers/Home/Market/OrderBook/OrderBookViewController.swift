@@ -133,16 +133,12 @@ class OrderBookViewController: BaseViewController {
                     }
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        self.coordinator?.state.depth.asObservable().skip(1).subscribe(onNext: { [weak self](depth) in
-            guard let self = self else { return }
-            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
         if vcType == OrderbookType.tradeView.rawValue {
             self.coordinator?.state.lastPrice.asObservable().skip(1).subscribe(onNext: { [weak self](result) in
                 guard let self = self,
                     let pair = self.pair,
                     let coor = self.coordinator else { return }
-                self.tradeView.setAmountAction(result, pair: pair, depth: coor.state.depth.value)
+                self.tradeView.setAmountAction(result, pair: pair)
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         }
     }
@@ -189,11 +185,9 @@ extension OrderBookViewController: UIPopoverPresentationControllerDelegate {
         guard let superVC = popoverPresentationController.presentedViewController as? RecordChooseViewController else {
             return true
         }
-        
         superVC.dismiss(animated: false, completion: nil)
         return false
     }
-    
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
     }

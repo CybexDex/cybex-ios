@@ -35,8 +35,7 @@ extension HotAssetView {
             if let baseAsset = AssetConfiguration.CybexAsset(model.base) {
                 price = latest * AssetConfiguration.shared.rmbOf(asset: baseAsset)
             }
-
-            self.rmbLabel.text = price == 0 ? "-" : "≈¥" + price.string(digits: AppConfiguration.rmbPrecision, roundingMode: .down)
+            self.rmbLabel.text = price == 0 ? "-" : "≈¥" + price.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
         }
         assetName.textAlignment = .center
         amountLabel.textAlignment = .center

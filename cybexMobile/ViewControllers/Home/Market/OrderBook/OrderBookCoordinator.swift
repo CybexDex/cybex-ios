@@ -72,12 +72,11 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
     func subscribe(_ pair: Pair, depth: Int, count: Int) {
         guard let baseInfo = appData.assetInfo[pair.base],
             let quoteInfo = appData.assetInfo[pair.quote] else { return }
+        service.baseName = baseInfo.symbol
+        service.quoteName = quoteInfo.symbol
         if !service.checkNetworConnected() {
-            service.baseName = baseInfo.symbol
-            service.quoteName = quoteInfo.symbol
             service.mdpServiceDidConnected.delegate(on: self) { (self, _) in
                 self.subscribe(pair, depth: depth, count: count)
-                self.monitorService()
             }
             service.tickerDataDidReceived.delegate(on: self) { (self, price) in
                 print("----ticker: \(price)")
@@ -125,7 +124,6 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
                 self.service.reconnect()
             }
         }
-
         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
             self.service.disconnect()
         }
@@ -147,5 +145,6 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
     
     func orderbookServerConnect() {
         service.connect()
+        self.monitorService()
     }
 }

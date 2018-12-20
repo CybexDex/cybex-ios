@@ -79,7 +79,7 @@ class TransferViewController: BaseViewController {
                     self.transferView.precision = info.precision
                     let realBalance = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance)
                     let transferBalanceKey = R.string.localizable.transfer_balance.key.localized()
-                    self.transferView.balance = transferBalanceKey + realBalance.string(digits: info.precision) + " " + balanceInfo.symbol.filterJade
+                    self.transferView.balance = transferBalanceKey + realBalance.formatCurrency(digitNum: info.precision) + " " + balanceInfo.symbol.filterJade
                 }
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -89,7 +89,7 @@ class TransferViewController: BaseViewController {
             guard let self = self else { return }
             if let data = result, let feeInfo = appData.assetInfo[data.assetId] {
                 let fee = data
-                self.transferView.fee = fee.amount.string(digits: feeInfo.precision) + " " + feeInfo.symbol.filterJade
+                self.transferView.fee = fee.amount.formatCurrency(digitNum: feeInfo.precision) + " " + feeInfo.symbol.filterJade
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
@@ -140,7 +140,7 @@ class TransferViewController: BaseViewController {
             if let feeInfo = appData.assetInfo[fee.assetId] {
                 let data = UIHelper.getTransferInfo(account,
                                            quanitity: amount + " " + (appData.assetInfo[balance.assetType]?.symbol.filterJade)!,
-                                           fee: fee.amount.string(digits: feeInfo.precision) + " " + feeInfo.symbol.filterJade,
+                                           fee: fee.amount.formatCurrency(digitNum: feeInfo.precision) + " " + feeInfo.symbol.filterJade,
                                            memo: memo)
                 showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data)
             }

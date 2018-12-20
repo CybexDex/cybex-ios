@@ -440,14 +440,11 @@ extension CBKLineMainView {
             NSAttributedString.Key.foregroundColor: configuration.main.valueAssistTextColor,
             NSAttributedString.Key.font: configuration.main.valueAssistTextFont
         ]
-        
-        let mindrawAttrsString = NSMutableAttributedString(string: "←" + lowKlineModel.low.string(digits: lowKlineModel.precision, roundingMode: .down), attributes: attributes)
-        
+        let mindrawAttrsString = NSMutableAttributedString(string: "←" + lowKlineModel.low.formatCurrency(digitNum: lowKlineModel.precision), attributes: attributes)
         var minX = lowPosition.x
-        
         if (lowPosition.x + mindrawAttrsString.size().width) > bounds.width {
             minX -= mindrawAttrsString.size().width
-            mindrawAttrsString.setAttributedString(NSAttributedString(string: lowKlineModel.low.string(digits: lowKlineModel.precision, roundingMode: .down) + "→", attributes: attributes))
+            mindrawAttrsString.setAttributedString(NSAttributedString(string: lowKlineModel.low.formatCurrency(digitNum: lowKlineModel.precision) + "→", attributes: attributes))
         }
         
         let minrect = CGRect(x: minX,
@@ -456,13 +453,12 @@ extension CBKLineMainView {
                              height: configuration.main.valueAssistViewHeight)
         
         mindrawAttrsString.draw(in: minrect)
-        
-        let maxdrawAttrsString = NSMutableAttributedString(string: "←" + highKlineModel.high.string(digits: highKlineModel.precision,roundingMode: .down), attributes: attributes)
+        let maxdrawAttrsString = NSMutableAttributedString(string: "←" + highKlineModel.high.formatCurrency(digitNum: highKlineModel.precision), attributes: attributes)
         
         var maxX = highPosition.x
         if (highPosition.x + mindrawAttrsString.size().width) > bounds.width {
             maxX -= maxdrawAttrsString.size().width
-            maxdrawAttrsString.setAttributedString(NSAttributedString(string: highKlineModel.high.string(digits: highKlineModel.precision, roundingMode: .down) + "→", attributes: attributes))
+            maxdrawAttrsString.setAttributedString(NSAttributedString(string: highKlineModel.high.formatCurrency(digitNum: highKlineModel.precision) + "→", attributes: attributes))
         }
         
         let maxrect = CGRect(x: maxX,

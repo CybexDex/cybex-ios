@@ -40,8 +40,8 @@ class YourPortfolioHeadView: UIView {
             totalBalance.text = "0.00000"
             balanceRMB.text   = "≈¥0.0000"
         } else {
-            totalBalance.text = (UserManager.shared.balance / AssetConfiguration.shared.rmbOf(asset: .CYB)).string(digits: 5, roundingMode: .down)
-            balanceRMB.text   = "≈¥" + UserManager.shared.balance.string(digits: 4, roundingMode: .down)
+            totalBalance.text = (UserManager.shared.balance / AssetConfiguration.shared.rmbOf(asset: .CYB)).formatCurrency(digitNum: 5)
+            balanceRMB.text   = "≈¥" + UserManager.shared.balance.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
         }
         helpButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] _ in
             guard let self = self else {return}

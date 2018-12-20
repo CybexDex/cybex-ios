@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OpenedOrdersHeaderView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
-                <outlet property="sectionTitleView" destination="eEt-ZB-dHR" id="W5P-5Y-A6J"/>
-                <outlet property="sectionView" destination="eEt-ZB-dHR" id="myR-1l-bbs"/>
                 <outlet property="totalValueL" destination="LQ2-if-k53" id="W3C-V1-NBr"/>
                 <outlet property="totalValueTip" destination="hNf-6F-XtD" id="IVn-2j-oQ4"/>
             </connections>
@@ -45,23 +47,14 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eEt-ZB-dHR" customClass="LockupAssetsSectionView" customModule="cybexMobile" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="62.5" width="375" height="39"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="39" id="caK-qs-5d6"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="LQ2-if-k53" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="6gy-uZ-Pdv"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="LQ2-if-k53" secondAttribute="trailing" constant="13" id="7b5-So-UUL"/>
-                <constraint firstItem="eEt-ZB-dHR" firstAttribute="top" secondItem="LQ2-if-k53" secondAttribute="bottom" id="FR0-qr-fh2"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hNf-6F-XtD" secondAttribute="trailing" constant="13" id="Fzk-wr-qC1"/>
-                <constraint firstItem="eEt-ZB-dHR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Mnv-G1-1Ie"/>
                 <constraint firstItem="LQ2-if-k53" firstAttribute="top" secondItem="hNf-6F-XtD" secondAttribute="bottom" id="POy-sJ-U1T"/>
                 <constraint firstItem="hNf-6F-XtD" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="SW2-Rz-xAB"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eEt-ZB-dHR" secondAttribute="trailing" id="aaU-FO-EdY"/>
                 <constraint firstItem="hNf-6F-XtD" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="gwS-d7-sOM"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

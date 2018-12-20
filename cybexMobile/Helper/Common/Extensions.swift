@@ -271,8 +271,7 @@ extension Decimal { // 解决double 计算精度丢失
         } else {
             pricision = 4
         }
-        
-        return (self.string(digits: pricision, roundingMode: roundingMode), pricision)
+        return (self.formatCurrency(digitNum: pricision), pricision)
     }
 
     func tradePriceAndAmountDecimal(_ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> (price: String, pricision: Int, amountPricision: Int) {
@@ -288,7 +287,7 @@ extension Decimal { // 解决double 计算精度丢失
             pricision = 4
             amountPricision = 6
         }
-        return (self.string(digits: pricision,roundingMode: roundingMode), pricision, amountPricision)
+        return (self.formatCurrency(digitNum: pricision), pricision, amountPricision)
     }
 
     //小于1000的时候 digitNum 大于1000 统一2位
@@ -348,6 +347,26 @@ extension Decimal { // 解决double 计算精度丢失
 extension Double {
     var decimal: Decimal {
         return Decimal(self)
+    }
+    
+    // 对齐小数位 不足补0
+    func formatCurrency(digitNum: Int, usesGroupingSeparator: Bool = true) -> String {
+        let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
+            return formatter.maximumFractionDigits == digitNum && formatter.usesGroupingSeparator == usesGroupingSeparator
+        })
+        if let format = existFormatters.first {
+            let result = format.string(from: NSDecimalNumber(decimal: self.decimal))
+            return result!
+        } else {
+            let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .currency
+            numberFormatter.currencySymbol = ""
+            numberFormatter.usesGroupingSeparator = usesGroupingSeparator
+            numberFormatter.maximumFractionDigits = digitNum
+            numberFormatter.minimumFractionDigits = digitNum
+            String.numberFormatters.append(numberFormatter)
+            return self.formatCurrency(digitNum: digitNum)
+        }
     }
 
     func string(digits: Int = 0, roundingMode: NSDecimalNumber.RoundingMode = .plain) -> String {

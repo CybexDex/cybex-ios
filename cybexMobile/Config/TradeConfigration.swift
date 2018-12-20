@@ -54,7 +54,6 @@ extension TradeConfiguration {
         }, error: { (_) in
 
         }) { (_) in
-
         }
     }
 }

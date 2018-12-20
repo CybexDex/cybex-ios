@@ -63,7 +63,7 @@ class PortfolioData {
         icon = AppConfiguration.ServerIconsBaseURLString + balance.assetType.replacingOccurrences(of: ".", with: "_") + "_grey.png"
         // 获得自己的个数
         if let assetInfo = appData.assetInfo[balance.assetType] {
-            realAmount = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).string(digits: assetInfo.precision, roundingMode: .down)
+            realAmount = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).formatCurrency(digitNum: assetInfo.precision)
             name = assetInfo.symbol.filterJade
         }
 
@@ -74,8 +74,10 @@ class PortfolioData {
             cybPrice = "- CYB"
             rbmPrice    = "-"
         } else {
-            cybPrice = cybDecimal.string(digits: 5, roundingMode: .down) + " CYB"
-            rbmPrice    = "≈¥" + (AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) * AssetHelper.singleAssetRMBPrice(balance.assetType)).string(digits: 4, roundingMode: .down)
+            guard let cybInfo = appData.assetInfo[AssetConfiguration.CybexAsset.CYB.id] else { return }
+            
+            cybPrice = cybDecimal.formatCurrency(digitNum: cybInfo.precision) + " CYB"
+            rbmPrice    = "≈¥" + (AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) * AssetHelper.singleAssetRMBPrice(balance.assetType)).formatCurrency(digitNum: AppConfiguration.rmbPrecision)
         }
 
     }
