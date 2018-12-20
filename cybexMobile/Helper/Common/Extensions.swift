@@ -329,7 +329,6 @@ extension Decimal { // 解决double 计算精度丢失
         let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
             return formatter.maximumFractionDigits == digitNum && formatter.usesGroupingSeparator == usesGroupingSeparator
         })
-
         if let format = existFormatters.first {
             let result = format.string(from: NSDecimalNumber(decimal: self))
             return result!
@@ -344,7 +343,6 @@ extension Decimal { // 解决double 计算精度丢失
             return self.formatCurrency(digitNum: digitNum)
         }
     }
-
 }
 
 extension Double {

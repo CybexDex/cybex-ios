@@ -44,20 +44,24 @@ class OrderBookViewController: BaseViewController {
             }
         }
     }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         self.coordinator?.orderbookServerConnect()
     }
-    
     func fetchOrderBookData(_ pair: Pair,count: Int) {
         guard let tradePairPrecision = TradeConfiguration.shared.tradePairPrecisions.value[pair] else {
             TradeConfiguration.shared.tradePairPrecisions.asObservable().subscribe(onNext: { [weak self](data) in
                 guard let self = self, let selfPair = self.pair, selfPair == pair, let result = data[pair] else { return }
                 self.coordinator?.subscribe(pair, depth: result.price, count: count)
+                if self.vcType == OrderbookType.tradeView.rawValue {
+                    self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(result.price)
+                }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
             return
+        }
+        if self.vcType == OrderbookType.tradeView.rawValue {
+            self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(tradePairPrecision.price)
         }
         self.coordinator?.subscribe(pair, depth: tradePairPrecision.price, count: count)
     }
@@ -70,7 +74,6 @@ class OrderBookViewController: BaseViewController {
         } else {
             tradeView = TradeView(frame: self.view.bounds)
             self.view.addSubview(tradeView)
-
             tradeView.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
             setupEvent()
         }
@@ -78,7 +81,9 @@ class OrderBookViewController: BaseViewController {
     }
 
     func setTopTitle() {
-        guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else { return }
+        guard let pair = self.pair,
+            let baseInfo = appData.assetInfo[pair.base],
+            let quoteInfo = appData.assetInfo[pair.quote] else { return }
         if vcType == OrderbookType.tradeView.rawValue {
             self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized() + "(" + baseInfo.symbol.filterJade + ")"
             self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized() + "(" + quoteInfo.symbol.filterJade + ")"
@@ -95,17 +100,10 @@ class OrderBookViewController: BaseViewController {
             guard let self = self else { return }
             self.setTopTitle()
         })
-        
-        self.coordinator?.state.depth.asObservable().skip(1).subscribe(onNext: { [weak self](depth) in
-            guard let self = self else { return }
-            self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(depth)
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
     }
-
-
     override func configureObserveState() {
         self.coordinator!.state.data.asObservable().skip(1).distinctUntilChanged()
             .subscribe(onNext: {[weak self] (result) in
@@ -135,6 +133,10 @@ class OrderBookViewController: BaseViewController {
                     }
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        self.coordinator?.state.depth.asObservable().skip(1).subscribe(onNext: { [weak self](depth) in
+            guard let self = self else { return }
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
         if vcType == OrderbookType.tradeView.rawValue {
             self.coordinator?.state.lastPrice.asObservable().skip(1).subscribe(onNext: { [weak self](result) in
                 guard let self = self,

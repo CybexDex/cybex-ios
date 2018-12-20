@@ -35,6 +35,7 @@ class MyHistoryCellView: UIView {
         if let payInfo = appData.assetInfo[order.pays.assetID], let receiveInfo = appData.assetInfo[order.receives.assetID] {
             // 从首页筛选出交易对
             let result = MarketHelper.calculateAssetRelation(assetIDAName: payInfo.symbol.filterJade, assetIDBName: receiveInfo.symbol.filterJade)
+            let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(Pair(base: result.base.assetID, quote: result.quote.assetID))
             if result.base == payInfo.symbol.filterJade && result.quote == receiveInfo.symbol.filterJade {
                 // pay -> base   receive -> quote
                 // Buy
@@ -42,16 +43,13 @@ class MyHistoryCellView: UIView {
                 self.base.text  = "/" + result.base
                 self.kindL.text = "BUY"
                 self.typeView.backgroundColor = .turtleGreen
-
                 let realAmount = AssetHelper.getRealAmount(receiveInfo.id, amount: order.receives.amount)
                 let paysAmount = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount)
-                self.amount.text = realAmount.string(digits: receiveInfo.precision, roundingMode: .down) + " " + receiveInfo.symbol.filterJade
-                self.orderAmount.text = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount).string(digits: payInfo.precision, roundingMode: .down) +
+                self.amount.text = realAmount.formatCurrency(digitNum: tradePrecision.amount) + " " + receiveInfo.symbol.filterJade
+                self.orderAmount.text = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount).formatCurrency(digitNum: tradePrecision.price) +
                     " " + payInfo.symbol.filterJade
-
-                self.orderPrice.text = (paysAmount / realAmount).string(digits: payInfo.precision, roundingMode: .down) +
+                self.orderPrice.text = (paysAmount / realAmount).formatCurrency(digitNum: tradePrecision.price) +
                     " " +  payInfo.symbol.filterJade
-
             } else {
                 // SELL   pay -> quote receive -> base
                 self.kindL.text = "SELL"
@@ -61,10 +59,10 @@ class MyHistoryCellView: UIView {
                 let realAmount = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount)
                 let receivesAmount = AssetHelper.getRealAmount(receiveInfo.id, amount: order.receives.amount)
                 let payAmount = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount)
-                self.amount.text = realAmount.string(digits: payInfo.precision, roundingMode: .down) +
+                self.amount.text = realAmount.formatCurrency(digitNum: tradePrecision.amount) +
                     " " + payInfo.symbol.filterJade
-                self.orderAmount.text = receivesAmount.string(digits: receiveInfo.precision, roundingMode: .down) + " " +  receiveInfo.symbol.filterJade
-                self.orderPrice.text = (receivesAmount / payAmount).string(digits: receiveInfo.precision, roundingMode: .down) +
+                self.orderAmount.text = receivesAmount.formatCurrency(digitNum: tradePrecision.price) + " " +  receiveInfo.symbol.filterJade
+                self.orderPrice.text = (receivesAmount / payAmount).formatCurrency(digitNum: tradePrecision.price) +
                     " " + receiveInfo.symbol.filterJade
             }
             self.time.text = orderInfo.time
