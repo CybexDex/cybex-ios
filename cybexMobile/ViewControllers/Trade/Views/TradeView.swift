@@ -15,12 +15,10 @@ class TradeView: UIView {
         case orderbookClicked
         case chooseDecimalNumberEvent
     }
-    
     @IBOutlet weak var titlePrice: UILabel!
     @IBOutlet weak var titleAmount: UILabel!
     @IBOutlet weak var amount: UILabel!
     //    @IBOutlet weak var rmbPrice: UILabel!
-    
     @IBOutlet weak var sells: UIStackView!
     @IBOutlet weak var buies: UIStackView!
     @IBOutlet var items: [TradeLineView]!

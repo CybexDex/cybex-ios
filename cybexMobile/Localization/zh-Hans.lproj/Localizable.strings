@@ -525,6 +525,7 @@
 
 "deposit_enable" = "充值功能即将开放，敬请期待";
 "deposti_enable_tip" = "暂停";
-
 "trade_decimal_number" = "%d 位小数";
 
+"openedorder_ensure_title" = "提示";
+"openedorder_ensure_message" = "确认取消订单";

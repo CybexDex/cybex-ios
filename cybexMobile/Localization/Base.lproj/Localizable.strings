@@ -546,3 +546,5 @@
 "deposit_enable" = "Recharge function is about to open, please look forward to it";
 "deposti_enable_tip" = "Suspend";
 "trade_decimal_number" = "%d decimals";
+"openedorder_ensure_title" = "CONFIRMATION";
+"openedorder_ensure_message" = "Confirm order cancellation";

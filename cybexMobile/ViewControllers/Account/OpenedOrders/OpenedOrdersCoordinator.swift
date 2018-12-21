@@ -72,7 +72,6 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
             service.reconnect()
         }
     }
-    
     func fetchOpenedOrderRequest(_ pair: Pair) {
         guard let userId = UserManager.shared.account.value?.id else { return }
         let request = GetLimitOrderStatus(response: { json in
@@ -82,7 +81,6 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
         }, status: LimitOrderStatusApi.getOpenedMarketLimitOrder(userId: userId, asset1Id: pair.quote, asset2Id: pair.base))
         self.service.send(request: request)
     }
-
     func fetchAllOpenedOrder() {
         service.messageCanSend.delegate(on: self) { (self, _) in
            self.fetchAllOpenedOrderRequest()
@@ -111,9 +109,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
             }
             switch reachability.connection {
             case .wifi, .cellular:
-                if self.rootVC.topViewController is OpenedOrdersViewController {
-                    self.service.reconnect()
-                }
+                self.service.reconnect()
             case .none:
                 self.service.disconnect()
                 break
@@ -121,9 +117,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
         }
 
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
-            if self.rootVC.topViewController is OpenedOrdersViewController {
-                self.service.reconnect()
-            }
+            self.service.reconnect()
         }
 
         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
