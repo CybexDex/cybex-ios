@@ -335,6 +335,7 @@ extension Decimal { // 解决double 计算精度丢失
             let numberFormatter = NumberFormatter()
             numberFormatter.numberStyle = .currency
             numberFormatter.currencySymbol = ""
+            numberFormatter.roundingMode = .floor
             numberFormatter.usesGroupingSeparator = usesGroupingSeparator
             numberFormatter.maximumFractionDigits = digitNum
             numberFormatter.minimumFractionDigits = digitNum

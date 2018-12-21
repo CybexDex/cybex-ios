@@ -26,6 +26,7 @@ protocol OpenedOrdersStateManagerProtocol {
     
     func checkConnectStatus() -> Bool
     func connect()
+    func reconnect()
 }
 
 class OpenedOrdersCoordinator: NavCoordinator {
@@ -48,6 +49,10 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
         return store.state
     }
 
+    func reconnect() {
+        service.reconnect()
+    }
+    
     func connect() {
         service.connect()
         monitorService()

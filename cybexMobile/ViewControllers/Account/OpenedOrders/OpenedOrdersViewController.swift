@@ -22,7 +22,7 @@ enum OpenedOrdersViewControllerPageType {
 }
 
 class OpenedOrdersViewController: BaseViewController {
-
+    
     var coordinator: (OpenedOrdersCoordinatorProtocol & OpenedOrdersStateManagerProtocol)?
     var pageType: OpenedOrdersViewControllerPageType = .account
     var pair: Pair? {
@@ -36,20 +36,21 @@ class OpenedOrdersViewController: BaseViewController {
     var containerView: UIView?
     var order: LimitOrderStatus?
     var cancleOrderInfo: [String: Any]?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         _ = UserManager.shared.balance
         self.coordinator?.connect()
-       setupData()
+        self.startLoading()
+        setupData()
     }
-
+    
     func setupUI() {
         self.localizedText = R.string.localizable.openedTitle.key.localizedContainer()
         switchContainerView()
     }
-
+    
     func setupData() {
         if self.pageType == .account {
             self.coordinator?.fetchAllOpenedOrder()
@@ -78,7 +79,7 @@ class OpenedOrdersViewController: BaseViewController {
             }
         }
     }
-
+    
     func showOrderInfo() {
         guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0) else { return }
         guard let order = self.order else {return}
@@ -86,56 +87,55 @@ class OpenedOrdersViewController: BaseViewController {
         CybexChainHelper.calculateFee(operation,
                                       operationID: .limitOrderCancel,
                                       focusAssetId: order.isBuyOrder() ? order.getPair().base.assetID : order.getPair().quote.assetID) { [weak self](success, amount, assetId) in
-            guard let self = self else {return}
-            self.endLoading()
-            guard self.isVisible else {return}
-            if success, let order = self.order {
-                let ensureTitle = order.isBuyOrder() ?
-                    R.string.localizable.cancle_openedorder_buy.key.localized() :
-                    R.string.localizable.cancle_openedorder_sell.key.localized()
-                let orderPair = order.getPair()
-                if let feeInfoValue = appData.assetInfo[assetId] {
-                    var priceInfo = ""
-                    var amountInfo = ""
-                    var totalInfo = ""
-                    let feeInfo = amount.formatCurrency(digitNum: feeInfoValue.precision) + " " + feeInfoValue.symbol.filterJade
-                    if order.isBuyOrder() {
-                        priceInfo = order.getPrice().toReal().formatCurrency(digitNum: orderPair.base.precision) + " " + orderPair.base.symbol
-                        let amount = order.amountToReceive - order.receivedAmount
-                        amountInfo = AssetHelper.getRealAmount(orderPair.quote,
-                                                               amount: amount.string).formatCurrency(digitNum:  orderPair.quote.precision) + " " + orderPair.quote.symbol
-                        let total = order.amountToSell - order.soldAmount
-                        totalInfo = AssetHelper.getRealAmount(orderPair.base,
-                                                              amount: total.string).formatCurrency(digitNum: orderPair.base.precision) + " " + orderPair.base.symbol
-                    } else {
-                        priceInfo = order.getPrice().toReal().formatCurrency(digitNum: orderPair.quote.precision) + " " + orderPair.base.symbol
-                        let amount = order.amountToSell - order.soldAmount
-                        amountInfo = AssetHelper.getRealAmount(orderPair.quote,
-                                                               amount: amount.string).formatCurrency(digitNum: orderPair.base.precision)
-                            + " " + orderPair.base.symbol
-                        let total = order.amountToReceive - order.receivedAmount
-                        totalInfo = AssetHelper.getRealAmount(orderPair.base,
-                                                              amount: total.string).formatCurrency(digitNum:
-                                                                orderPair.quote.precision) + " " + orderPair.quote.symbol
-
-                    }
-                    if self.isVisible {
-                        self.showConfirm(ensureTitle,
-                                         attributes: UIHelper.getOpenedOrderInfo(price: priceInfo,
-                                                                        amount: amountInfo,
-                                                                        total: totalInfo,
-                                                                        fee: feeInfo,
-                                                                        isBuy: order.isBuyOrder()))
-                    }
-                }
-            } else {
-                if self.isVisible {
-                    self.showToastBox(false, message: R.string.localizable.withdraw_nomore.key.localized())
-                }
-            }
+                                        guard let self = self else {return}
+                                        self.endLoading()
+                                        guard self.isVisible else {return}
+                                        if success, let order = self.order {
+                                            let ensureTitle = order.isBuyOrder() ?
+                                                R.string.localizable.cancle_openedorder_buy.key.localized() :
+                                                R.string.localizable.cancle_openedorder_sell.key.localized()
+                                            let orderPair = order.getPair()
+                                            if let feeInfoValue = appData.assetInfo[assetId] {
+                                                var priceInfo = ""
+                                                var amountInfo = ""
+                                                var totalInfo = ""
+                                                let feeInfo = amount.formatCurrency(digitNum: feeInfoValue.precision) + " " + feeInfoValue.symbol.filterJade
+                                                if order.isBuyOrder() {
+                                                    priceInfo = order.getPrice().toReal().formatCurrency(digitNum: orderPair.base.precision) + " " + orderPair.base.symbol
+                                                    let amount = order.amountToReceive - order.receivedAmount
+                                                    amountInfo = AssetHelper.getRealAmount(orderPair.quote,
+                                                                                           amount: amount.string).formatCurrency(digitNum:  orderPair.quote.precision) + " " + orderPair.quote.symbol
+                                                    let total = order.amountToSell - order.soldAmount
+                                                    totalInfo = AssetHelper.getRealAmount(orderPair.base,
+                                                                                          amount: total.string).formatCurrency(digitNum: orderPair.base.precision) + " " + orderPair.base.symbol
+                                                } else {
+                                                    priceInfo = order.getPrice().toReal().formatCurrency(digitNum: orderPair.quote.precision) + " " + orderPair.base.symbol
+                                                    let amount = order.amountToSell - order.soldAmount
+                                                    amountInfo = AssetHelper.getRealAmount(orderPair.quote,
+                                                                                           amount: amount.string).formatCurrency(digitNum: orderPair.base.precision)
+                                                        + " " + orderPair.base.symbol
+                                                    let total = order.amountToReceive - order.receivedAmount
+                                                    totalInfo = AssetHelper.getRealAmount(orderPair.base,
+                                                                                          amount: total.string).formatCurrency(digitNum:
+                                                                                            orderPair.quote.precision) + " " + orderPair.quote.symbol
+                                                }
+                                                if self.isVisible {
+                                                    self.showConfirm(ensureTitle,
+                                                                     attributes: UIHelper.getOpenedOrderInfo(price: priceInfo,
+                                                                                                             amount: amountInfo,
+                                                                                                             total: totalInfo,
+                                                                                                             fee: feeInfo,
+                                                                                                             isBuy: order.isBuyOrder()))
+                                                }
+                                            }
+                                        } else {
+                                            if self.isVisible {
+                                                self.showToastBox(false, message: R.string.localizable.withdraw_nomore.key.localized())
+                                            }
+                                        }
         }
     }
-
+    
     func switchContainerView() {
         containerView?.removeFromSuperview()
         containerView = pageType == .account ? AccountOpenedOrdersView() : MyOpenedOrdersView()
@@ -156,6 +156,15 @@ class OpenedOrdersViewController: BaseViewController {
     }
     
     func startFetchOpenedOrders() {
+        if self.timer == nil {
+            NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (note) in
+                self.timer?.pause()
+                self.timer = nil
+            }
+            NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
+                self.startFetchOpenedOrders()
+            }
+        }
         self.timer?.pause()
         self.timer = nil
         
@@ -164,21 +173,17 @@ class OpenedOrdersViewController: BaseViewController {
             if coor.checkConnectStatus() {
                 self.setupData()
             }
+            else {
+                self.coordinator?.reconnect()
+            }
         }
         timer?.start()
-        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (note) in
-            self.timer?.pause()
-            self.timer = nil
-        }
         
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
-            self.startFetchOpenedOrders()
-        }
     }
-
     override func configureObserveState() {
         self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let self = self, let limitOrders = data, self.isVisible else { return }
+            self.endLoading()
             if let accountView = self.containerView as? AccountOpenedOrdersView {
                 accountView.data = limitOrders
             } else if let pairOrder = self.containerView as? MyOpenedOrdersView {
@@ -187,7 +192,7 @@ class OpenedOrdersViewController: BaseViewController {
             if self.timer == nil {
                 self.startFetchOpenedOrders()
             }
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     deinit {
         self.timer?.pause()
@@ -223,11 +228,11 @@ extension OpenedOrdersViewController {
             }
         }
     }
-
+    
     func postCancelOrder() {
         // order.isBuy ? pair.base : pair.quote
-        if let order = self.order {
-            self.coordinator?.cancelOrder(order.orderId, feeId: order.isBuyOrder() ? order.getPair().base.assetID : order.getPair().quote.assetID, callback: {[weak self] (success) in
+        if let order = self.order, let coor = self.coordinator {
+            coor.cancelOrder(order.orderId, feeId: order.isBuyOrder() ? order.getPair().base.assetID : order.getPair().quote.assetID, callback: {[weak self] (success) in
                 guard let self = self else { return }
                 self.endLoading()
                 self.showToastBox(success,
@@ -237,11 +242,11 @@ extension OpenedOrdersViewController {
             })
         }
     }
-
+    
     override func passwordDetecting() {
         self.startLoading()
     }
-
+    
     override func passwordPassed(_ passed: Bool) {
         self.endLoading()
         if passed {
@@ -250,7 +255,7 @@ extension OpenedOrdersViewController {
             self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
         }
     }
-
+    
     override func returnEnsureAction() {
         self.startLoading()
         ShowToastManager.shared.hide()
