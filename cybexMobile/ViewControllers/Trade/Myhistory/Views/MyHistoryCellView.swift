@@ -32,7 +32,8 @@ class MyHistoryCellView: UIView {
 
     func updateUI(_ orderInfo: (FillOrder, time: String)) {
         let order = orderInfo.0
-        if let payInfo = appData.assetInfo[order.pays.assetID], let receiveInfo = appData.assetInfo[order.receives.assetID] {
+        if let payInfo = appData.assetInfo[order.pays.assetID],
+            let receiveInfo = appData.assetInfo[order.receives.assetID] {
             // 从首页筛选出交易对
             let result = MarketHelper.calculateAssetRelation(assetIDAName: payInfo.symbol.filterJade, assetIDBName: receiveInfo.symbol.filterJade)
             let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(Pair(base: result.base.assetID, quote: result.quote.assetID))
@@ -46,9 +47,10 @@ class MyHistoryCellView: UIView {
                 let realAmount = AssetHelper.getRealAmount(receiveInfo.id, amount: order.receives.amount)
                 let paysAmount = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount)
                 self.amount.text = realAmount.formatCurrency(digitNum: tradePrecision.amount) + " " + receiveInfo.symbol.filterJade
-                self.orderAmount.text = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount).formatCurrency(digitNum: tradePrecision.price) +
+                self.orderAmount.text = AssetHelper.getRealAmount(payInfo.id,
+                                                                  amount: order.pays.amount).formatCurrency(digitNum: tradePrecision.price) +
                     " " + payInfo.symbol.filterJade
-                self.orderPrice.text = (paysAmount / realAmount).formatCurrency(digitNum: tradePrecision.price) +
+                self.orderPrice.text = (paysAmount / realAmount).formatCurrency(digitNum: tradePrecision.total) +
                     " " +  payInfo.symbol.filterJade
             } else {
                 // SELL   pay -> quote receive -> base
@@ -62,7 +64,7 @@ class MyHistoryCellView: UIView {
                 self.amount.text = realAmount.formatCurrency(digitNum: tradePrecision.amount) +
                     " " + payInfo.symbol.filterJade
                 self.orderAmount.text = receivesAmount.formatCurrency(digitNum: tradePrecision.price) + " " +  receiveInfo.symbol.filterJade
-                self.orderPrice.text = (receivesAmount / payAmount).formatCurrency(digitNum: tradePrecision.price) +
+                self.orderPrice.text = (receivesAmount / payAmount).formatCurrency(digitNum: tradePrecision.total) +
                     " " + receiveInfo.symbol.filterJade
             }
             self.time.text = orderInfo.time

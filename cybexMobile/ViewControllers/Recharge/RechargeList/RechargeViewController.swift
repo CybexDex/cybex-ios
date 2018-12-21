@@ -116,12 +116,10 @@ extension RechargeViewController: UITableViewDataSource, UITableViewDelegate {
             }
             return cell
         }
-
         return TradeCell()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         switch selectedIndex.rawValue {
         case 0:
             if let data = self.depositData {

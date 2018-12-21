@@ -110,9 +110,7 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
             }
             switch reachability.connection {
             case .wifi, .cellular:
-                if self.rootVC.topViewController is OrderBookViewController {
-                    self.service.reconnect()
-                }
+                self.service.reconnect()
             case .none:
                 self.service.disconnect()
                 break
@@ -120,9 +118,7 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
         }
 
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (note) in
-            if self.rootVC.topViewController is OrderBookViewController {
-                self.service.reconnect()
-            }
+            self.service.reconnect()
         }
         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { (note) in
             self.service.disconnect()

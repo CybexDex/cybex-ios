@@ -15,7 +15,7 @@ import Localize_Swift
 
 protocol TradePair {
     var pariInfo: Pair {get set}
-
+    
     func refresh()
 }
 
@@ -29,7 +29,7 @@ class TradeViewController: BaseViewController {
     var tradeTitltView: TradeNavTitleView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
-
+    
     var titlesView: CybexTitleView?
     var chooseTitleView: UIView?//mask
     var selectedIndex: Int = 0 {
@@ -46,9 +46,9 @@ class TradeViewController: BaseViewController {
             }
         }
     }
-
+    
     var coordinator: (TradeCoordinatorProtocol & TradeStateManagerProtocol)?
-
+    
     var pair: Pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id) {
         didSet {
             if self.chooseTitleView != nil {
@@ -58,7 +58,7 @@ class TradeViewController: BaseViewController {
             refreshView()
         }
     }
-
+    
     var info:(base: AssetInfo, quote: AssetInfo)? {
         didSet {
             if oldValue == nil && info != nil {//弱网到请求到数据刷新
@@ -66,22 +66,22 @@ class TradeViewController: BaseViewController {
             }
         }
     }
-
+    
     var isfirstRefresh: Bool = true
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.startLoading()
         setupUI()
         setupEvent()
-
+        
         self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         if appData.tickerData.value.count == 0 {
             return
         }
@@ -90,7 +90,7 @@ class TradeViewController: BaseViewController {
             self.refreshView()
         }
     }
-
+    
     func setupUI() {
         setupNavi()
         titlesView = CybexTitleView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 32))
@@ -99,7 +99,7 @@ class TradeViewController: BaseViewController {
                                  R.string.localizable.trade_sell.key,
                                  R.string.localizable.trade_open_orders.key]
     }
-
+    
     func setupEvent() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
             guard let self = self else {return}
@@ -108,20 +108,20 @@ class TradeViewController: BaseViewController {
                                      R.string.localizable.trade_open_orders.key]
         })
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
     }
-
+    
     func setupNavi() {
         configLeftNavigationButton(R.image.icCandle())
         configRightNavButton(R.image.ic_star_border_24_px())
-
+        
         tradeTitltView = TradeNavTitleView(frame: CGRect(x: 0, y: 0, width: 100, height: 64))
         tradeTitltView.delegate = self
         self.navigationItem.titleView = tradeTitltView
     }
-
+    
     func getPairInfo() {
         guard let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else {
             self.info = nil
@@ -129,11 +129,11 @@ class TradeViewController: BaseViewController {
         }
         self.info = (baseInfo, quoteInfo)
     }
-
+    
     @objc override func rightAction(_ sender: UIButton) {
         self.coordinator?.openMyHistory()
     }
-
+    
     @objc override func leftAction(_ sender: UIButton) {
         if let baseIndex = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base), let index = MarketHelper.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
             return ticker.base == pair.base && ticker.quote == pair.quote
@@ -141,30 +141,30 @@ class TradeViewController: BaseViewController {
             self.coordinator?.openMarket(index: index, currentBaseIndex: baseIndex)
         }
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.coordinator?.setupChildVC(segue)
     }
-
+    
     override func configureObserveState() {
         appData.otherRequestRelyData.asObservable()
             .subscribe(onNext: { (_) in
                 if appData.tickerData.value.count == 0 {
                     return
                 }
-
+                
                 if self.isVisible {
                     self.getPairInfo()
                     self.refreshView()
                 }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
-
+    
     func refreshView() {
         main {
             guard let info = self.info else { return }
             self.endLoading()
-
+            
             self.tradeTitltView.title.text = info.quote.symbol.filterJade + "/" + info.base.symbol.filterJade
             self.children.forEach { (viewController) in
                 if var viewController = viewController as? TradePair {
@@ -177,18 +177,18 @@ class TradeViewController: BaseViewController {
             }
         }
     }
-
+    
     func pageOffsetForChild(at index: Int) -> CGFloat {
         return CGFloat(index) * scrollView.bounds.width
     }
-
+    
     func moveToMyOpenedOrders() {
         if let viewController = children[2] as? TradePair {
             viewController.refresh()
         }
         self.scrollView.setContentOffset(CGPoint(x: pageOffsetForChild(at: 2), y: 0), animated: false)
     }
-
+    
     func moveToTradeView(isBuy: Bool) {
         let index = isBuy ? 0 : 1
         if let viewController = children[index] as? TradePair {
@@ -203,7 +203,6 @@ extension TradeViewController: TradeNavTitleViewDelegate {
         if appData.tickerData.value.count == 0 {
             return false
         }
-
         if self.chooseTitleView != nil {
             self.coordinator?.removeHomeVC {[weak self] in
                 guard let self = self else { return }
@@ -215,13 +214,10 @@ extension TradeViewController: TradeNavTitleViewDelegate {
             self.chooseTitleView = UIView()
             self.chooseTitleView?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             self.view.addSubview(self.chooseTitleView!)
-
             self.chooseTitleView?.edges(to: self.view, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true)
             self.view.layoutIfNeeded()
-
             self.coordinator?.addHomeVC()
         }
-
         return true
     }
 }
