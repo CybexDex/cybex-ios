@@ -135,11 +135,18 @@ class OrderBookViewController: BaseViewController {
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         if vcType == OrderbookType.tradeView.rawValue {
             self.coordinator?.state.lastPrice.asObservable().skip(1).subscribe(onNext: { [weak self](result) in
-                guard let self = self,
-                    let pair = self.pair,
-                    let coor = self.coordinator else { return }
+                guard let self = self, let pair = self.pair else { return }
                 self.tradeView.setAmountAction(result, pair: pair)
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            self.coordinator?.state.depth.asObservable().skip(1).subscribe(onNext: { [weak self](result) in
+                guard let self = self else { return }
+                self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(result)
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            
+            NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](notification) in
+                guard let self = self, let coor = self.coordinator else { return }
+                self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(coor.state.depth.value)
+            }
         }
     }
 }
@@ -155,13 +162,6 @@ extension OrderBookViewController: TradePair {
     }
 
     func refresh() {
-//        guard let pair = pair else { return }
-//        if self.tradeView != nil {
-//            //      self.coordinator?.resetData(pair)
-//
-//            showMarketPrice()
-//        }
-//        self.coordinator?.subscribe(pair, depth: 2, count: 5)
     }
 }
 

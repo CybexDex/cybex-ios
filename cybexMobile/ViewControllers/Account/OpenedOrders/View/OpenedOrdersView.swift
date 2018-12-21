@@ -47,7 +47,7 @@ class OpenedOrdersView: UIView {
                     self.amount.text = AssetHelper.getRealAmount(pair.quote,
                                                                  amount: order.receivedAmount.string).formatCurrency(digitNum: tradePrecision.amount) + "/" +
                         AssetHelper.getRealAmount(pair.quote,
-                                                  amount: order.amountToReceive.string).formatCurrency(digitNum: tradePrecision.amount) + " " + pair.base.symbol
+                                                  amount: order.amountToReceive.string).formatCurrency(digitNum: tradePrecision.amount) + " " + pair.quote.symbol
                     self.progressLabel.textColor = self.orderType.buyColor
                 }
                 else {

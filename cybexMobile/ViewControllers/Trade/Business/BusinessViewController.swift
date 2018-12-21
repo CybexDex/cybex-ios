@@ -224,11 +224,11 @@ class BusinessViewController: BaseViewController {
                         return
                 }
                 let total = price.decimal() * amount.decimal()
-                guard let text = self.containerView.priceTextfield.text, text != "", text.decimal() != 0 else {
-                    self.containerView.endMoney.text = "\(total.formatCurrency(digitNum: self.pricePrecision)) \(baseInfo.symbol.filterJade)"
-                    return
-                }
-                self.containerView.endMoney.text = "\(total.formatCurrency(digitNum: self.pricePrecision)) \(baseInfo.symbol.filterJade)"
+//                guard let text = self.containerView.priceTextfield.text, text != "", text.decimal() != 0 else {
+//                    self.containerView.endMoney.text = "\(total.formatCurrency(digitNum: self.totalPrecision)) \(baseInfo.symbol.filterJade)"
+//                    return
+//                }
+                self.containerView.endMoney.text = "\(total.formatCurrency(digitNum: self.totalPrecision)) \(baseInfo.symbol.filterJade)"
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     func addUserManagerObserverSubscribeAction() {
@@ -365,7 +365,9 @@ extension BusinessViewController: TradePair {
 extension BusinessViewController {
     @objc func amountPercent(_ data: [String: Any]) {
         if let percent = data["percent"] as? String {
-            guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else { return }
+            guard let pair = self.pair,
+                let baseInfo = appData.assetInfo[pair.base],
+                let quoteInfo = appData.assetInfo[pair.quote] else { return }
             self.coordinator?.changePercent(percent.decimal() / 100.0,
                                             isBuy: self.type == .buy,
                                             assetID: self.type == .buy ? baseInfo.id : quoteInfo.id,

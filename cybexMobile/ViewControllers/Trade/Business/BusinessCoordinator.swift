@@ -99,10 +99,8 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
 
         if self.state.price.value.decimal() != 0, feeAmount != 0, balance != 0 {
             var amount: Decimal = 0
-
             let priceDecimal = self.state.price.value.decimal()
             let percentDecimal = percent
-
             if isBuy {
                 if feeId == assetID {
                     amount = (balance - feeAmount) * percentDecimal / priceDecimal
@@ -116,11 +114,9 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
                     amount = balance * percentDecimal
                 }
             }
-
             if amount > 0 {
                 self.store.dispatch(SwitchPercentAction(amount: amount, pricision: pricision))
             }
-
         }
     }
 
