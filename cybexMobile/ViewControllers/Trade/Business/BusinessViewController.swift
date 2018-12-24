@@ -262,7 +262,12 @@ class BusinessViewController: BaseViewController {
                     self.containerView.value.text = "≈¥0.0000"
                     return
             }
-            self.containerView.value.text = "≈¥" + (AssetHelper.singleAssetRMBPrice(baseInfo.id) * text.decimal()).formatCurrency(digitNum: AppConfiguration.rmbPrecision)
+
+            var rmbPrice: Decimal = 0
+            if let baseAsset = AssetConfiguration.CybexAsset(baseInfo.id) {
+                rmbPrice = text.decimal() * AssetConfiguration.shared.rmbOf(asset: baseAsset)
+            }
+            self.containerView.value.text = "≈¥" + rmbPrice.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         self.coordinator!.state.amount.subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }

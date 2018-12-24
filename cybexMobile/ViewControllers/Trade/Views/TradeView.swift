@@ -89,15 +89,25 @@ class TradeView: UIView {
             rmbPrice = sender.0 * AssetConfiguration.shared.rmbOf(asset: baseAsset)
         }
 
-        let priceString = lastPrice == "0" ? lastPrice + "≈¥" : lastPrice + "≈¥" + rmbPrice.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
+        let priceString = sender.0 == 0 ? "--" : lastPrice + "≈¥" + rmbPrice.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
         let priceAttributeString = NSMutableAttributedString(string: priceString,
                                                              attributes: [NSAttributedString.Key.foregroundColor : sender.1])
-        priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14,
-                                                                                            weight: UIFont.Weight.medium)],
-                                           range: NSMakeRange(0, lastPrice.count))
-        priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)],
-                                           range: NSMakeRange(lastPrice.count,
-                                                              priceString.count - lastPrice.count))
+
+
+        if sender.0 != 0 {
+            priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14,
+                                                                                                weight: UIFont.Weight.medium)],
+                                               range: NSMakeRange(0, lastPrice.count))
+            priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)],
+                                               range: NSMakeRange(lastPrice.count,
+                                                                  priceString.count - lastPrice.count))
+        }
+        else {
+            priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14,
+                                                                                                weight: UIFont.Weight.medium)],
+                                               range: NSMakeRange(0, priceString.count))
+        }
+
         self.amount.attributedText = priceAttributeString
     }
     

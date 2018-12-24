@@ -144,10 +144,10 @@ extension MarketCoordinator: MarketStateManagerProtocol {
         }
 
         var params = queryItem
-        params.startTime = queryItem.startTime.addingTimeInterval(-24 * 3600)
+        params.startTime = queryItem.startTime.addingTimeInterval(TimeInterval(-queryItem.timeGap * 199))
         params.endTime = queryItem.startTime
 
-        let request = GetMarketHistoryRequest(queryParams: queryItem) { response in
+        let request = GetMarketHistoryRequest(queryParams: params) { response in
             if let buckets = response as? [Bucket], let bucket = buckets.last {
                 let close = bucket.openBase
                 let quoteClose = bucket.openQuote
@@ -167,7 +167,7 @@ extension MarketCoordinator: MarketStateManagerProtocol {
                 }
             }
 
-            self.store.dispatch(KLineFetched(pair: Pair(base: queryItem.firstAssetId, quote: queryItem.secondAssetId), stick: Candlesticks(rawValue: queryItem.timeGap)!, assets:data))
+            self.store.dispatch(KLineFetched(pair: Pair(base: params.firstAssetId, quote: params.secondAssetId), stick: Candlesticks(rawValue: params.timeGap)!, assets:data))
 
         }
         CybexWebSocketService.shared.send(request: request, priority: .normal)

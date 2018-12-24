@@ -150,18 +150,14 @@ class CBKLineMainView: UIView {
                 var strokeColor: UIColor = configuration.theme.increaseColor
                 let lastModel: CBKLineModel? = index >= 1 ? mainDrawKLineModels[index - 1] : nil
                 
+                if klineModel.open > klineModel.close {
+                    strokeColor = klineModel.open > klineModel.close ? configuration.theme.decreaseColor : configuration.theme.increaseColor
+                }
+
                 if klineModel.volume == 0, let _ = lastModel {
                     strokeColor = strokeColors[index - 1]
                 }
-                
-                if klineModel.open == klineModel.close, let lastmodel = lastModel {
-                    strokeColor = klineModel.close < lastmodel.close ? configuration.theme.decreaseColor : configuration.theme.increaseColor
-                }
-                
-                if klineModel.open > klineModel.close {
-                    strokeColor = configuration.theme.decreaseColor
-                }
-                
+
                 strokeColors.append(strokeColor)
                 context.setStrokeColor(strokeColor.cgColor)
                 

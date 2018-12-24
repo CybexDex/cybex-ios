@@ -21,7 +21,6 @@ func orderBookReducer(action: Action, state: OrderBookState?) -> OrderBookState 
         state.count = action.count
     case let action as FetchLastPriceAction:
         let oldPrice = state.lastPrice.value.0
-        let color = state.lastPrice.value.1
         if oldPrice < action.price {
             state.lastPrice.accept((action.price, UIColor.turtleGreen))
         }
@@ -29,8 +28,10 @@ func orderBookReducer(action: Action, state: OrderBookState?) -> OrderBookState 
             state.lastPrice.accept((action.price, UIColor.reddish))
         }
         else {
-            state.lastPrice.accept((action.price, color))
+            state.lastPrice.accept((action.price, UIColor.steel))
         }
+    case let _ as ResetTickerAction:
+        state.lastPrice.accept((0, UIColor.steel))
     default:
         break
     }

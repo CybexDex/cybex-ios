@@ -63,6 +63,7 @@ struct FetchLastPriceAction: Action {
     var price: Decimal
 }
 
+struct ResetTickerAction: Action {}
 
 class OrderBookViewModel {
     var orderbook: BehaviorRelay<OrderBook.Order?> = BehaviorRelay(value: nil)
