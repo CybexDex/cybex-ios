@@ -379,6 +379,10 @@ extension Double {
     func tradePriceAndAmountDecimal(_ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> (price: String, pricision: Int, amountPricision: Int) {
         return self.decimal.tradePriceAndAmountDecimal(roundingMode)
     }
+
+    func suffixNumber(digitNum: Int = 5, padZero: Bool = true) -> String {
+        return decimal.suffixNumber(digitNum: digitNum, padZero: padZero)
+    }
 }
 
 extension Int {
