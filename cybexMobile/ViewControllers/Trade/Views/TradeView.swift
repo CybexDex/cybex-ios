@@ -83,8 +83,13 @@ class TradeView: UIView {
     func setAmountAction(_ sender: (Decimal, UIColor), pair: Pair) {
         let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(pair)
         let lastPrice = sender.0.formatCurrency(digitNum: tradePrecision.price)
-        let rmbPrice = AssetHelper.singleAssetRMBPrice(pair.quote).formatCurrency(digitNum: AppConfiguration.rmbPrecision)
-        let priceString = lastPrice == "0" ? lastPrice + "≈¥" : lastPrice + "≈¥" + rmbPrice
+
+        var rmbPrice: Decimal = 0
+        if let baseAsset = AssetConfiguration.CybexAsset(pair.base) {
+            rmbPrice = sender.0 * AssetConfiguration.shared.rmbOf(asset: baseAsset)
+        }
+
+        let priceString = lastPrice == "0" ? lastPrice + "≈¥" : lastPrice + "≈¥" + rmbPrice.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
         let priceAttributeString = NSMutableAttributedString(string: priceString,
                                                              attributes: [NSAttributedString.Key.foregroundColor : sender.1])
         priceAttributeString.addAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14,

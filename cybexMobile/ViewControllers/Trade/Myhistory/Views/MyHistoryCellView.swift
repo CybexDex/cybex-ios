@@ -48,9 +48,9 @@ class MyHistoryCellView: UIView {
                 let paysAmount = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount)
                 self.amount.text = realAmount.formatCurrency(digitNum: tradePrecision.amount) + " " + receiveInfo.symbol.filterJade
                 self.orderAmount.text = AssetHelper.getRealAmount(payInfo.id,
-                                                                  amount: order.pays.amount).formatCurrency(digitNum: tradePrecision.price) +
+                                                                  amount: order.pays.amount).formatCurrency(digitNum: tradePrecision.total) +
                     " " + payInfo.symbol.filterJade
-                self.orderPrice.text = (paysAmount / realAmount).formatCurrency(digitNum: tradePrecision.total) +
+                self.orderPrice.text = (paysAmount / realAmount).formatCurrency(digitNum: tradePrecision.price) +
                     " " +  payInfo.symbol.filterJade
             } else {
                 // SELL   pay -> quote receive -> base
@@ -63,8 +63,8 @@ class MyHistoryCellView: UIView {
                 let payAmount = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount)
                 self.amount.text = realAmount.formatCurrency(digitNum: tradePrecision.amount) +
                     " " + payInfo.symbol.filterJade
-                self.orderAmount.text = receivesAmount.formatCurrency(digitNum: tradePrecision.price) + " " +  receiveInfo.symbol.filterJade
-                self.orderPrice.text = (receivesAmount / payAmount).formatCurrency(digitNum: tradePrecision.total) +
+                self.orderAmount.text = receivesAmount.formatCurrency(digitNum: tradePrecision.total) + " " +  receiveInfo.symbol.filterJade
+                self.orderPrice.text = (receivesAmount / payAmount).formatCurrency(digitNum: tradePrecision.price) +
                     " " + receiveInfo.symbol.filterJade
             }
             self.time.text = orderInfo.time

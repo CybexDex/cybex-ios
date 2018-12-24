@@ -23,9 +23,7 @@ class TransferTopView: UIView {
                 if let amountInfo = data.amount, let assetInfo = appData.assetInfo[amountInfo.assetId] {
                     self.amount.text = AssetHelper.getRealAmount(
                         amountInfo.assetId,
-                        amount: amountInfo.amount).string(
-                            digits: assetInfo.precision,
-                            roundingMode: .down) + " " + assetInfo.symbol.filterJade
+                        amount: amountInfo.amount).formatCurrency(digitNum: assetInfo.precision) + " " + assetInfo.symbol.filterJade
                     if data.isSend {
                         self.amount.text = "-" + self.amount.text!
                         self.amount.textColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : UIColor.darkTwo

@@ -53,6 +53,9 @@ struct OrderBook: Equatable {
 
 struct FetchedOrderBookData: Action {
     let data: OrderBook?
+}
+
+struct ChangeOrderBookOfPairAction: Action {
     let pair: Pair
 }
 

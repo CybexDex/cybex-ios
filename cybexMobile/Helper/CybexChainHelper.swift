@@ -41,7 +41,7 @@ class CybexChainHelper {
         let cybBalance = UserHelper.getBalanceFromAssetID(AssetConfiguration.CybexAsset.CYB.id)
         let focusBalance = UserHelper.getBalanceFromAssetID(focusAssetId)
 
-        if cybBalance == 0 {
+        if UserManager.shared.isLoginIn && cybBalance == 0 {
             if focusBalance == 0 {
                 completion((success: false, amount: 0, assetID: ""))
                 return

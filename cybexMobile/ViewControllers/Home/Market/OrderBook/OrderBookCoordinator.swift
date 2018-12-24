@@ -74,9 +74,14 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
             let quoteInfo = appData.assetInfo[pair.quote] else { return }
         service.baseName = baseInfo.symbol
         service.quoteName = quoteInfo.symbol
+        self.store.dispatch(ChangeOrderBookOfPairAction(pair: pair))
+        self.store.dispatch(ChangeDepthAndCountAction(depth: depth, count: count))
+
         if !service.checkNetworConnected() {
             service.mdpServiceDidConnected.delegate(on: self) { (self, _) in
-                self.subscribe(pair, depth: depth, count: count)
+                if let p = self.state.pair.value {
+                    self.subscribe(p, depth: self.state.depth.value, count: self.state.count)
+                }
             }
             service.tickerDataDidReceived.delegate(on: self) { (self, price) in
                 print("----ticker: \(price)")
@@ -84,14 +89,12 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
             }
             
             service.orderbookDataDidReceived.delegate(on: self) { (self, orderbook) in
-                print("----order book: pair.base: \(pair.base) pair.quote: \(pair.quote)   \(orderbook)")
-                self.store.dispatch(FetchedOrderBookData(data: orderbook, pair: pair))
+                self.store.dispatch(FetchedOrderBookData(data: orderbook))
             }
             service.reconnect()
         }
         else {
             self.service.subscribeOrderBook(depth, count: count)
-            self.store.dispatch(ChangeDepthAndCountAction(depth: depth, count: count))
             self.service.subscribeTicker()
         }
     }
@@ -130,7 +133,7 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
     }
 
     func resetData(_ pair: Pair) {
-        self.store.dispatch(FetchedOrderBookData(data: nil, pair: pair))
+        self.store.dispatch(FetchedOrderBookData(data: nil))
     }
 
     func updateMarketListHeight(_ height: CGFloat) {

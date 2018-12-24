@@ -62,6 +62,16 @@ class UIHelper {
         return  result
     }
 
+    class func getCancelOrderConfirmInfo() -> [NSAttributedString] {
+        let message = R.string.localizable.openedorder_ensure_message.key.localized()
+
+        let contentStyle = ThemeManager.currentThemeIndex == 0 ?  "content_dark" : "content_light"
+
+        let result = (["<\(contentStyle)>\(message)\n\n                                     </\(contentStyle)>".set(style: "alertContent")] as? [NSAttributedString])!
+
+        return result
+    }
+
     class func getTransferInfo(_ account: String, quanitity: String, fee: String, memo: String) -> [NSAttributedString] {
         let accountTitle = R.string.localizable.transfer_account_title.key.localized()
         let quantityTitle = R.string.localizable.transfer_quantity.key.localized()

@@ -94,41 +94,12 @@ class OpenedOrdersViewController: BaseViewController {
                                             let ensureTitle = order.isBuyOrder() ?
                                                 R.string.localizable.cancle_openedorder_buy.key.localized() :
                                                 R.string.localizable.cancle_openedorder_sell.key.localized()
-                                            let orderPair = order.getPair()
-                                            let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(orderPair)
-                                            if let feeInfoValue = appData.assetInfo[assetId] {
-                                                var priceInfo = ""
-                                                var amountInfo = ""
-                                                var totalInfo = ""
-                                                let feeInfo = amount.formatCurrency(digitNum: feeInfoValue.precision) + " " + feeInfoValue.symbol.filterJade
-                                                if order.isBuyOrder() {
-                                                    priceInfo = order.getPrice().toReal().formatCurrency(digitNum: tradePrecision.price) + " " + orderPair.base.symbol
-                                                    let amount = order.amountToReceive - order.receivedAmount
-                                                    amountInfo = AssetHelper.getRealAmount(orderPair.quote,
-                                                                                           amount: amount.string).formatCurrency(digitNum:  tradePrecision.amount) + " " + orderPair.quote.symbol
-                                                    let total = order.amountToSell - order.soldAmount
-                                                    totalInfo = AssetHelper.getRealAmount(orderPair.base,
-                                                                                          amount: total.string).formatCurrency(digitNum: tradePrecision.total) + " " + orderPair.base.symbol
-                                                } else {
-                                                    priceInfo = order.getPrice().toReal().formatCurrency(digitNum: tradePrecision.price) + " " + orderPair.base.symbol
-                                                    let amount = order.amountToReceive - order.receivedAmount
-                                                    amountInfo = AssetHelper.getRealAmount(orderPair.quote,
-                                                                                           amount: amount.string).formatCurrency(digitNum: tradePrecision.amount)
-                                                        + " " + orderPair.quote.symbol
-                                                    let total = order.amountToSell - order.soldAmount
-                                                    totalInfo = AssetHelper.getRealAmount(orderPair.base,
-                                                                                          amount: total.string).formatCurrency(digitNum:
-                                                                                            tradePrecision.total) + " " + orderPair.base.symbol
-                                                }
-                                                if self.isVisible {
-                                                    self.showConfirm(ensureTitle,
-                                                                     attributes: UIHelper.getOpenedOrderInfo(price: priceInfo,
-                                                                                                             amount: amountInfo,
-                                                                                                             total: totalInfo,
-                                                                                                             fee: feeInfo,
-                                                                                                             isBuy: order.isBuyOrder()))
-                                                }
+
+                                            if self.isVisible {
+                                                self.showConfirm(ensureTitle,
+                                                                 attributes: UIHelper.getCancelOrderConfirmInfo())
                                             }
+
                                         } else {
                                             if self.isVisible {
                                                 self.showToastBox(false, message: R.string.localizable.withdraw_nomore.key.localized())

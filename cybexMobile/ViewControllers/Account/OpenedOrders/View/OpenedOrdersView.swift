@@ -39,7 +39,7 @@ class OpenedOrdersView: UIView {
                 self.quote.text = pair.quote.symbol
                 self.base.text = "/" + pair.base.symbol
                 self.progressLabel.text = order.decimalProgress().formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%"
-                self.timeLabel.text = order.createTime.string(withFormat: "yyyy-MM-dd HH:mm:ss")
+                self.timeLabel.text = order.createTime.string(withFormat: "MM/dd HH:mm:ss")
                 
                 self.basePrice.text = order.getPrice().toReal().formatCurrency(digitNum: tradePrecision.price) + " " + pair.base.symbol
                 if order.isBuyOrder() {
