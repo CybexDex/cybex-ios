@@ -61,6 +61,7 @@ struct ChangeOrderBookOfPairAction: Action {
 
 struct FetchLastPriceAction: Action {
     var price: Decimal
+    var pair: Pair
 }
 
 struct ResetTickerAction: Action {}

@@ -28,7 +28,7 @@ class MDPWebSocketService: NSObject {
     lazy var socket = SRWebSocket(url: URL(string: MDPWebSocketService.host)!)
 
     public let mdpServiceDidConnected = Delegate<(), Void>()
-    public let tickerDataDidReceived = Delegate<(Decimal), Void>()
+    public let tickerDataDidReceived = Delegate<(Decimal, Pair), Void>()
     public let orderbookDataDidReceived = Delegate<(OrderBook), Void>()
 
     let lock = NSLock()
@@ -142,6 +142,15 @@ class MDPWebSocketService: NSObject {
         }
         return false
     }
+
+    fileprivate func topicToPair(_ topic: String) -> Pair {
+        let pairStr = topic.components(separatedBy: ".")[1]
+        let pair = pairStr.components(separatedBy: "_")
+        let quote = pair[pair.count - 2].filterJade.assetID
+        let base = pair[pair.count - 1].filterJade.assetID
+
+        return Pair(base: base, quote: quote)
+    }
 }
 
 
@@ -177,8 +186,10 @@ extension MDPWebSocketService: SRWebSocketDelegate {
 
             switch type {
             case .ticker:
+                let pair = topicToPair(messages["topic"].stringValue)
+
                 if let price = Decimal(string: messages["px"].stringValue) {
-                    tickerDataDidReceived.call(price)
+                    tickerDataDidReceived.call((price, pair))
                 }
             case .orderbook:
                 let bidsAmount = messages["bids"].arrayValue.compactMap({ Decimal(string: $0[1].stringValue) })

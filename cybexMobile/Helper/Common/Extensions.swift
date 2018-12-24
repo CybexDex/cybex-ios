@@ -397,7 +397,7 @@ extension String {
     
     var filterJade: String {
         // 正式
-        return self.replacingOccurrences(of: "JADE.", with: "")
+        return self.replacingOccurrences(of: "JADE.", with: "").replacingOccurrences(of: "JADE", with: "")
     }
     
     var getSuffixID: Int32 {
