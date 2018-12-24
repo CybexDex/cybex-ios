@@ -62,6 +62,8 @@ extension AppConfiguration {
         self.timer?.pause()
         self.timer = nil
 
+        self.fetchOuterPrice()
+
         self.timer = Repeater.every(.seconds(3)) {[weak self] _ in
             guard let self = self else { return }
             self.fetchOuterPrice()
