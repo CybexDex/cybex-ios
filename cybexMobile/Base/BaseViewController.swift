@@ -181,7 +181,7 @@ extension UIViewController: ShowManagerDelegate {
         }
     }
 
-    func showConfirm(_ title: String, attributes: [NSAttributedString]?, setup: (([StyleLabel]) -> Void)? = nil) {
+    func showCancelOpenOrderConfirm(_ title: String) {
         if ShowToastManager.shared.showView != nil {
             ShowToastManager.shared.hide(0)
         }
@@ -189,7 +189,21 @@ extension UIViewController: ShowManagerDelegate {
             let subView = CybexShowTitleView(frame: .zero)
             subView.title.locali = ""
             subView.contentLable.locali = "openedorder_ensure_message"
-//            setup?(subView.labels)
+
+            ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .smallBig, middleType: .normal)
+            ShowToastManager.shared.showAnimationInView(self.view)
+            ShowToastManager.shared.delegate = self
+        }
+    }
+
+    func showConfirm(_ title: String, attributes: [NSAttributedString]?, setup: (([StyleLabel]) -> Void)? = nil) {
+        if ShowToastManager.shared.showView != nil {
+            ShowToastManager.shared.hide(0)
+        }
+        SwifterSwift.delay(milliseconds: 100) {
+            let subView = StyleContentView(frame: .zero)
+            subView.data = attributes
+            setup?(subView.labels)
 
             ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .smallBig, middleType: .normal)
             ShowToastManager.shared.showAnimationInView(self.view)

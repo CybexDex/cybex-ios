@@ -96,8 +96,7 @@ class OpenedOrdersViewController: BaseViewController {
                                                 R.string.localizable.cancle_openedorder_sell.key.localized()
 
                                             if self.isVisible {
-                                                self.showConfirm(ensureTitle,
-                                                                 attributes: UIHelper.getCancelOrderConfirmInfo())
+                                                self.showCancelOpenOrderConfirm(ensureTitle)
                                             }
 
                                         } else {
