@@ -192,52 +192,53 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     }
 
     func transfer(_ callback: @escaping (Any) -> Void) {
-            guard let balance = self.state.balance.value else {
-                return
-            }
-            guard self.state.toAccount.value != nil else {
-                return
-            }
-            guard let fee = self.state.fee.value else {
-                return
-            }
-            let amount = self.state.amount.value
-            let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
-                if let infos = infos as? (block_id: String, block_num: String) {
-                    if let assetInfo = appData.assetInfo[balance.assetType], let feeInfo = appData.assetInfo[fee.assetId] {
-                        let value = pow(10, assetInfo.precision)
-                        let amount = amount.decimal() * value
+        guard let balance = self.state.balance.value else {
+            return
+        }
+        guard self.state.toAccount.value != nil else {
+            return
+        }
+        guard let fee = self.state.fee.value else {
+            return
+        }
+        let amount = self.state.amount.value
+        let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
+            if let infos = infos as? (block_id: String, block_num: String) {
+                if let assetInfo = appData.assetInfo[balance.assetType], let feeInfo = appData.assetInfo[fee.assetId] {
+                    let value = pow(10, assetInfo.precision)
+                    let amount = amount.decimal() * value
 
-                        guard let fromAccount = UserManager.shared.account.value, let toAccount = self.state.toAccount.value else {
-                            return
-                        }
-
-                        let feeAmout = fee.amount.decimal() * pow(10, feeInfo.precision)
-
-                        let jsonstr =  BitShareCoordinator.getTransaction(infos.block_num.int32,
-                                                                          block_id: infos.block_id,
-                                                                          expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
-                                                                          chain_id: CybexConfiguration.shared.chainID.value,
-                                                                          from_user_id: fromAccount.id.getSuffixID,
-                                                                          to_user_id: toAccount.id.getSuffixID,
-                                                                          asset_id: balance.assetType.getSuffixID,
-                                                                          receive_asset_id: balance.assetType.getSuffixID,
-                                                                          amount: amount.int64Value,
-                                                                          fee_id: fee.assetId.getSuffixID,
-                                                                          fee_amount: feeAmout.int64Value,
-                                                                          memo: self.state.memo.value,
-                                                                          from_memo_key: fromAccount.memoKey,
-                                                                          to_memo_key: toAccount.memoKey)
-
-                        let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-                            main {
-                                callback(data)
-                            }
-                        }, jsonstr: jsonstr!)
-                        CybexWebSocketService.shared.send(request: withdrawRequest)
+                    guard let fromAccount = UserManager.shared.account.value, let toAccount = self.state.toAccount.value else {
+                        return
                     }
+
+                    let feeAmout = fee.amount.decimal() * pow(10, feeInfo.precision)
+
+                    let jsonstr =  BitShareCoordinator.getTransaction(infos.block_num.int32,
+                                                                      block_id: infos.block_id,
+                                                                      expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
+                                                                      chain_id: CybexConfiguration.shared.chainID.value,
+                                                                      from_user_id: fromAccount.id.getSuffixID,
+                                                                      to_user_id: toAccount.id.getSuffixID,
+                                                                      asset_id: balance.assetType.getSuffixID,
+                                                                      receive_asset_id: balance.assetType.getSuffixID,
+                                                                      amount: amount.int64Value,
+                                                                      fee_id: fee.assetId.getSuffixID,
+                                                                      fee_amount: feeAmout.int64Value,
+                                                                      memo: self.state.memo.value,
+                                                                      from_memo_key: fromAccount.memoKey,
+                                                                      to_memo_key: toAccount.memoKey)
+
+                    let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
+                        main {
+                            callback(data)
+                        }
+                    }, jsonstr: jsonstr!)
+                    CybexWebSocketService.shared.send(request: withdrawRequest)
                 }
             }
+        }
+        CybexWebSocketService.shared.send(request: requeset)
     }
 
     func validAccount() {

@@ -92,7 +92,7 @@ extension AssetConfiguration {
 
 extension String {
     var symbol: String {
-        return appData.assetInfo[self]?.symbol.filterJade ?? ""
+        return appData.assetInfo[self]?.symbol.filterJade ?? self
     }
     
     var precision: Int {
@@ -100,6 +100,6 @@ extension String {
     }
     
     var assetID: String {
-        return appData.assetNameToIds.value[self] ?? ""
+        return appData.assetNameToIds.value[self] ?? self
     }
 }

@@ -86,7 +86,7 @@ class OpenedOrdersViewController: BaseViewController {
         startLoading()
         CybexChainHelper.calculateFee(operation,
                                       operationID: .limitOrderCancel,
-                                      focusAssetId: order.isBuyOrder() ? order.getPair().base.assetID : order.getPair().quote.assetID) { [weak self](success, amount, assetId) in
+                                      focusAssetId: order.isBuyOrder() ? order.getPair().base : order.getPair().quote) { [weak self](success, amount, assetId) in
                                         guard let self = self else {return}
                                         self.endLoading()
                                         guard self.isVisible else {return}
