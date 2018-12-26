@@ -363,10 +363,6 @@
 		72D5829C219C18F800BB9842 /* CBKKindView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D5829A219C18F700BB9842 /* CBKKindView.xib */; };
 		72D5829F219C196200BB9842 /* DropDownBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D5829D219C196100BB9842 /* DropDownBoxView.xib */; };
 		72D582A0219C196200BB9842 /* DropDownBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D5829E219C196200BB9842 /* DropDownBoxView.swift */; };
-		72D5C5F921C0AA8D000A2DCD /* img in Resources */ = {isa = PBXBuildFile; fileRef = 72D5C5F521C0AA8D000A2DCD /* img */; };
-		72D5C5FA21C0AA8D000A2DCD /* css in Resources */ = {isa = PBXBuildFile; fileRef = 72D5C5F621C0AA8D000A2DCD /* css */; };
-		72D5C5FB21C0AA8D000A2DCD /* game.html in Resources */ = {isa = PBXBuildFile; fileRef = 72D5C5F721C0AA8D000A2DCD /* game.html */; };
-		72D5C5FC21C0AA8D000A2DCD /* js in Resources */ = {isa = PBXBuildFile; fileRef = 72D5C5F821C0AA8D000A2DCD /* js */; };
 		72D9DD58210EB60F00963915 /* Periscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D9DD56210EB60E00963915 /* Periscope.swift */; };
 		72D9DD59210EB60F00963915 /* PeriscopeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72D9DD57210EB60E00963915 /* PeriscopeCell.xib */; };
 		72DBCA652138D94200905303 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DBCA622138D94200905303 /* ContainerView.swift */; };
@@ -1215,10 +1211,6 @@
 		72D5829A219C18F700BB9842 /* CBKKindView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBKKindView.xib; sourceTree = "<group>"; };
 		72D5829D219C196100BB9842 /* DropDownBoxView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownBoxView.xib; sourceTree = "<group>"; };
 		72D5829E219C196200BB9842 /* DropDownBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownBoxView.swift; sourceTree = "<group>"; };
-		72D5C5F521C0AA8D000A2DCD /* img */ = {isa = PBXFileReference; lastKnownFileType = folder; name = img; path = ../../../games/dapp_wrap/game/img; sourceTree = "<group>"; };
-		72D5C5F621C0AA8D000A2DCD /* css */ = {isa = PBXFileReference; lastKnownFileType = folder; name = css; path = ../../../games/dapp_wrap/game/css; sourceTree = "<group>"; };
-		72D5C5F721C0AA8D000A2DCD /* game.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = game.html; path = ../../../games/dapp_wrap/game/game.html; sourceTree = "<group>"; };
-		72D5C5F821C0AA8D000A2DCD /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; name = js; path = ../../../games/dapp_wrap/game/js; sourceTree = "<group>"; };
 		72D9DD56210EB60E00963915 /* Periscope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Periscope.swift; sourceTree = "<group>"; };
 		72D9DD57210EB60E00963915 /* PeriscopeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeriscopeCell.xib; sourceTree = "<group>"; };
 		72DBCA622138D94200905303 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
@@ -2638,17 +2630,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		72D68CAD21BE43060014138F /* Game */ = {
-			isa = PBXGroup;
-			children = (
-				72D5C5F621C0AA8D000A2DCD /* css */,
-				72D5C5F721C0AA8D000A2DCD /* game.html */,
-				72D5C5F521C0AA8D000A2DCD /* img */,
-				72D5C5F821C0AA8D000A2DCD /* js */,
-			);
-			path = Game;
-			sourceTree = "<group>";
-		};
 		72D9DD55210EB5FC00963915 /* ActionSheetViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3792,7 +3773,6 @@
 				7398BEC22181C1AE004C042E /* R.generated.swift */,
 				72C844D1214A3EFE0078448C /* cn_dark.html */,
 				72C844D9214B50920078448C /* cn_light.html */,
-				72D68CAD21BE43060014138F /* Game */,
 				E9385075C042AC240E36D35EBA28F5B7 /* cybexMobile-Bridging-Header.h */,
 				73335AC821476AA700CEF254 /* cybexMobile.entitlements */,
 				72C844D6214A3EFF0078448C /* en_dark.html */,
@@ -4327,12 +4307,10 @@
 				6C1820B3CDFFEBD3CF821B6CDB3F4691 /* OpenedOrdersHeaderView.xib in Resources */,
 				F61A4020689A1596B862EDC3AD38A3BC /* OpenedOrdersView.xib in Resources */,
 				8809F4832AD9F2B07F73CDE8C8D41240 /* OrderBookCell.xib in Resources */,
-				72D5C5FB21C0AA8D000A2DCD /* game.html in Resources */,
 				5C9247949858F09E0B4A6A2A18854787 /* OrderBookCellView.xib in Resources */,
 				72D9DD59210EB60F00963915 /* PeriscopeCell.xib in Resources */,
 				3385671DD5F1B6ED220AB916F7859ECF /* OrderBookContentView.xib in Resources */,
 				724C5D4321538ABD00FF1DE7 /* ComprehensiveView.xib in Resources */,
-				72D5C5FC21C0AA8D000A2DCD /* js in Resources */,
 				813174FFD07A88030F54BD2F9B24E36C /* PairCardCell.xib in Resources */,
 				7267DA1B21351D5A004AF9AF /* ETOProjectCell.xib in Resources */,
 				3CB09937C6D6A05CD97DF278F0EFF936 /* PairCardView.xib in Resources */,
@@ -4401,12 +4379,10 @@
 				724C5D4F2153956900FF1DE7 /* ComprehensiveItemView.xib in Resources */,
 				3B0EB662210314A600F19C31 /* Account.storyboard in Resources */,
 				3BF5B7EC2135001B00E8BFC9 /* ETODetailIntroView.xib in Resources */,
-				72D5C5FA21C0AA8D000A2DCD /* css in Resources */,
 				72199DAB2104680900575226 /* TransferContentView.xib in Resources */,
 				72C844DC214B50930078448C /* en_light.html in Resources */,
 				72E2A8F42151FB0C00FBB3CB /* Comprehensive.storyboard in Resources */,
 				72199DAF2104687D00575226 /* TransferLineView.xib in Resources */,
-				72D5C5F921C0AA8D000A2DCD /* img in Resources */,
 				73A331192194248800707D8F /* Chat.storyboard in Resources */,
 				7279867F20F49B3300FFB2DA /* schema.json in Resources */,
 				3BF5B7E62134F5A800E8BFC9 /* ETODetailHeaderView.xib in Resources */,

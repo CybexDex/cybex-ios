@@ -49,14 +49,16 @@ class GameModel: NSObject, GameDelegate {
         guard let accountName = UserManager.shared.name.value, let balances = UserManager.shared.balances.value else { return "" }
         var usdtAmount: Decimal = 0
         var cybAmount: Decimal = 0
-        if let balance = balances.filter({ return $0.assetType == AssetConfiguration.USDT}).first,
-            let usdtInfo = appData.assetInfo[balance.assetType],
-            let usdtDecimal = balance.balance.toDecimal() {
+        if let balance = balances.filter({ return $0.assetType == AssetConfiguration.CybexAsset.USDT.id}).first,
+            let usdtInfo = appData.assetInfo[balance.assetType]
+            {
+            let usdtDecimal = balance.balance.decimal()
             usdtAmount = usdtDecimal / pow(10, usdtInfo.precision)
         }
-        if let cybBalance = balances.filter({ return $0.assetType == AssetConfiguration.CYB }).first,
-            let cybInfo = appData.assetInfo[cybBalance.assetType],
-            let cybDecimal = cybBalance.balance.toDecimal() {
+        if let cybBalance = balances.filter({ return $0.assetType == AssetConfiguration.CybexAsset.CYB.id }).first,
+            let cybInfo = appData.assetInfo[cybBalance.assetType]
+             {
+            let cybDecimal = cybBalance.balance.decimal()
             cybAmount = cybDecimal / pow(10, cybInfo.precision)
         }
         let expiration = Date().timeIntervalSince1970 + 300
@@ -99,38 +101,37 @@ class GameModel: NSObject, GameDelegate {
                 if exist {
                     let requeset = GetFullAccountsRequest(name: toAccount) { (response) in
                         if let data = response as? FullAccount, let account = data.account {
-                            getChainId { (id) in
-                                let assetId = asset
-                                let feeAssetId = feeAsset
-                                let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
-                                    if let infos = infos as? (block_id: String, block_num: String) {
-                                        guard let fromAccount = UserManager.shared.account.value else { return }
-                                        let jsonstr =  BitShareCoordinator.getTransaction(Int32(infos.block_num)!,
-                                                                                          block_id: infos.block_id,
-                                                                                          expiration: Date().timeIntervalSince1970 + 10 * 3600,
-                                                                                          chain_id: id,
-                                                                                          from_user_id: Int32(getUserId(fromAccount.id)),
-                                                                                          to_user_id: Int32(getUserId(account.id)),
-                                                                                          asset_id: Int32(getUserId(assetId)),
-                                                                                          receive_asset_id: Int32(getUserId(assetId)),
-                                                                                          amount: Int64(amount) ?? 0,
-                                                                                          fee_id: Int32(getUserId(feeAssetId)),
-                                                                                          fee_amount: Int64(fee) ?? 0,
-                                                                                          memo: "game:deposit:" + fromAccount.name,
-                                                                                          from_memo_key: fromAccount.memoKey,
-                                                                                          to_memo_key: account.memoKey)
-                                        
-                                        let withdrawRequest = BroadcastTransactionRequest(response: { [weak self](data) in
-                                            guard let `self` = self, let context = self.context else { return }
-                                            main {
-                                                context.objectForKeyedSubscript(CallBackMethodName.collectCallback.rawValue)?.call(withArguments: [String(describing: data) == "<null>" ? "0" : "1"])
-                                            }
-                                            }, jsonstr: jsonstr!)
-                                        CybexWebSocketService.shared.send(request: withdrawRequest)
-                                    }
+                            let assetId = asset
+                            let feeAssetId = feeAsset
+                            let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
+                                if let infos = infos as? (block_id: String, block_num: String) {
+                                    guard let fromAccount = UserManager.shared.account.value else { return }
+                                    let jsonstr =  BitShareCoordinator.getTransaction(infos.block_num.int32,
+                                                                                      block_id: infos.block_id,
+                                                                                      expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
+                                                                                      chain_id: CybexConfiguration.shared.chainID.value,
+                                                                                      from_user_id: fromAccount.id.getSuffixID,
+                                                                                      to_user_id: account.id.getSuffixID,
+                                                                                      asset_id: assetId.getSuffixID,
+                                                                                      receive_asset_id: assetId.getSuffixID,
+                                                                                      amount: Int64(amount) ?? 0,
+                                                                                      fee_id: feeAssetId.getSuffixID,
+                                                                                      fee_amount: Int64(fee) ?? 0,
+                                                                                      memo: "game:deposit:" + fromAccount.name,
+                                                                                      from_memo_key: fromAccount.memoKey,
+                                                                                      to_memo_key: account.memoKey)
+
+                                    let withdrawRequest = BroadcastTransactionRequest(response: { [weak self](data) in
+                                        guard let `self` = self, let context = self.context else { return }
+                                        main {
+                                            context.objectForKeyedSubscript(CallBackMethodName.collectCallback.rawValue)?.call(withArguments: [String(describing: data) == "<null>" ? "0" : "1"])
+                                        }
+                                        }, jsonstr: jsonstr!)
+                                    CybexWebSocketService.shared.send(request: withdrawRequest)
                                 }
-                                CybexWebSocketService.shared.send(request: requeset)
                             }
+                            CybexWebSocketService.shared.send(request: requeset)
+
                         }
                         else {
                             self?.context?.objectForKeyedSubscript(CallBackMethodName.collectCallback.rawValue)?.call(withArguments: ["2"])
