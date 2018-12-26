@@ -30,7 +30,7 @@ class OrderBookViewController: BaseViewController {
             guard let pair = pair, oldValue != pair else {
                 return
             }
-            self.coordinator?.resetData()
+            self.coordinator?.resetData(pair)
 
             if self.vcType == OrderbookType.contentView.rawValue {
                 self.fetchOrderBookData(pair, count: 20)
@@ -125,6 +125,10 @@ class OrderBookViewController: BaseViewController {
                         self.coordinator?.updateMarketListHeight(500)
                     }
                 } else {
+                    if result == nil {
+                        self.tradeView.data = OrderBook(bids: [], asks: [])
+                        return
+                    }
                     if let pair = self.pair,
                         let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair],
                         var order = result,

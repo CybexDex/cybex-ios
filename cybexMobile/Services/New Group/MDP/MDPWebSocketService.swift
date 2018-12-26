@@ -29,7 +29,7 @@ class MDPWebSocketService: NSObject {
 
     public let mdpServiceDidConnected = Delegate<(), Void>()
     public let tickerDataDidReceived = Delegate<(Decimal, Pair), Void>()
-    public let orderbookDataDidReceived = Delegate<(OrderBook), Void>()
+    public let orderbookDataDidReceived = Delegate<(OrderBook, Pair), Void>()
 
     let lock = NSLock()
 
@@ -145,14 +145,19 @@ class MDPWebSocketService: NSObject {
 
     fileprivate func topicToPair(_ topic: String) -> Pair {
         let pairStr = topic.components(separatedBy: ".")[1]
-        let pair = pairStr.components(separatedBy: "_")
-        let quote = pair[pair.count - 2].filterJade.assetID
-        let base = pair[pair.count - 1].filterJade.assetID
+        let pair = pairStr.filterJade
 
-        return Pair(base: base, quote: quote)
+        let baseAssets = MarketConfiguration.marketBaseAssets.map({ $0.rawValue })
+        for base in baseAssets {
+            if let range = pair.range(of: base), range.lowerBound != pair.startIndex {
+                return Pair(base: base.assetID, quote: pair.replacingOccurrences(of: base, with: "").assetID)
+            }
+
+        }
+
+        return Pair(base: "", quote: "")
     }
 }
-
 
 extension MDPWebSocketService: SRWebSocketDelegate {
     public func webSocketDidOpen(_ webSocket: SRWebSocket) {
@@ -194,6 +199,7 @@ extension MDPWebSocketService: SRWebSocketDelegate {
             case .orderbook:
                 let bidsAmount = messages["bids"].arrayValue.compactMap({ Decimal(string: $0[1].stringValue) })
                 let asksAmount = messages["asks"].arrayValue.compactMap({ Decimal(string: $0[1].stringValue) })
+                let pair = topicToPair(messages["topic"].stringValue)
 
                 let bidsTotalAmount = bidsAmount.reduce(0, +)
                 let asksTotalAmount = asksAmount.reduce(0, +)
@@ -213,7 +219,7 @@ extension MDPWebSocketService: SRWebSocketDelegate {
                                            volumePercent: volumeDecimal / asksTotalAmount)
                 }
                 let orderbook = OrderBook(bids: bids, asks: asks)
-                orderbookDataDidReceived.call(orderbook)
+                orderbookDataDidReceived.call((orderbook, pair))
                 break
             }
         }

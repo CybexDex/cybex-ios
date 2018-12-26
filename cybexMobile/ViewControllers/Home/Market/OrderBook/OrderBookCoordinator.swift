@@ -21,7 +21,7 @@ protocol OrderBookStateManagerProtocol {
 
     func subscribe(_ pair: Pair, depth: Int, count: Int)
     func unSubscribe(_ pair: Pair ,depth: Int ,count: Int)
-    func resetData()
+    func resetData(_ pair: Pair)
 
     func updateMarketListHeight(_ height: CGFloat)
     
@@ -88,7 +88,7 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
             }
             
             service.orderbookDataDidReceived.delegate(on: self) { (self, orderbook) in
-                self.store.dispatch(FetchedOrderBookData(data: orderbook))
+                self.store.dispatch(FetchedOrderBookData(data: orderbook.0, pair: orderbook.1))
             }
             service.reconnect()
         }
@@ -131,8 +131,8 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
         service.disconnect()
     }
 
-    func resetData() {
-        self.store.dispatch(FetchedOrderBookData(data: nil))
+    func resetData(_ pair: Pair) {
+        self.store.dispatch(FetchedOrderBookData(data: nil, pair: pair))
         self.store.dispatch(ResetTickerAction())
     }
 

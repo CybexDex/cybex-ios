@@ -15,6 +15,10 @@ func orderBookReducer(action: Action, state: OrderBookState?) -> OrderBookState 
     case let action as ChangeOrderBookOfPairAction:
         state.pair.accept(action.pair)
     case let action as FetchedOrderBookData:
+        if state.pair.value != action.pair {
+            state.data.accept(nil)
+            break
+        }
         state.data.accept(action.data)
     case let action as ChangeDepthAndCountAction:
         state.depth.accept(action.depth)

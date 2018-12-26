@@ -12,7 +12,7 @@ import XLActionController
 
 extension UIViewController {
     @objc func refreshViewController() {//become active 后台到前台 或者double click tab
-
+        
     }
 
     func showAlert(_ message: String, buttonTitle: String) {
