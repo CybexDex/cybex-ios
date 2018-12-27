@@ -58,6 +58,11 @@
 		192C3ADF0D3E049D53C92A483D63CD03 /* BusinessTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CECD94F28EDABA6FD96C7F93ADB0C06 /* BusinessTitleCell.xib */; };
 		19864A14CDDAB9987FBB0457B007B23E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28738F6A042E14EF506F09A1B5A4B519 /* AppCoordinator.swift */; };
 		1DCCD247499C6FA4753D44CA869E6EB4 /* OpenedOrdersStatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB7B6751E737BF366347CBB56D68EEC /* OpenedOrdersStatesView.swift */; };
+		1E6EBD4E21D3851900E3EDE7 /* EvaViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6EBD4C21D3851900E3EDE7 /* EvaViewAdapter.swift */; };
+		1E6EBD4F21D3851900E3EDE7 /* EvaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6EBD4D21D3851900E3EDE7 /* EvaView.swift */; };
+		1EB781D821D338BC009BB8C1 /* Eva.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB781D721D338BC009BB8C1 /* Eva.storyboard */; };
+		1EB781DB21D37657009BB8C1 /* EvaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB781DA21D37657009BB8C1 /* EvaViewController.swift */; };
+		1EB781DE21D381F7009BB8C1 /* EvaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EB781DD21D381F7009BB8C1 /* EvaView.xib */; };
 		1EE747D219462D96F1597B374E8338E8 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5EAA8037A102C7B8CA9F8E7F12DF85 /* UserManager.swift */; };
 		1F89EA780689075E3FB3230FDB6EE703 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B6DE7540D68B490C2D5E1A65CFF1C5 /* Collection+Extensions.swift */; };
 		221C614E213535CC0021C007 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221C614B213535CC0021C007 /* ShareView.swift */; };
@@ -908,6 +913,11 @@
 		1AD6F13246E773CDB0FBCFF806F8A69B /* OpenedOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedOrdersViewController.swift; sourceTree = "<group>"; };
 		1BF8145AB9B72F9B7DDBD35D7F421C2A /* TradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeView.swift; sourceTree = "<group>"; };
 		1DA52DB9F7B13F75FCF7C39FBC99A67F /* RechargeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeCoordinator.swift; sourceTree = "<group>"; };
+		1E6EBD4C21D3851900E3EDE7 /* EvaViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaViewAdapter.swift; sourceTree = "<group>"; };
+		1E6EBD4D21D3851900E3EDE7 /* EvaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaView.swift; sourceTree = "<group>"; };
+		1EB781D721D338BC009BB8C1 /* Eva.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Eva.storyboard; sourceTree = "<group>"; };
+		1EB781DA21D37657009BB8C1 /* EvaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EvaViewController.swift; path = cybexMobile/ViewControllers/Home/Market/EvaIntroduction/EvaViewController.swift; sourceTree = SOURCE_ROOT; };
+		1EB781DD21D381F7009BB8C1 /* EvaView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EvaView.xib; sourceTree = "<group>"; };
 		1FD9516DB7B3ECF8651E0B2A8702D273 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		20F3AA0D8AC0AD8589280BEDDD5926AB /* AccountAssetOperationsItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountAssetOperationsItemView.xib; sourceTree = "<group>"; };
 		21696A68C7DB2269A52E166892D0EA60 /* WithdrawDetailReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawDetailReducers.swift; sourceTree = "<group>"; };
@@ -1891,6 +1901,25 @@
 				7C47DE7D9EA3C0F39E8C76762D2DFF7D /* PairListHorizantalView.xib */,
 				93AA08C50F42A7D121A14CF241089D7D /* PairRechargeView.swift */,
 				15763F4D0858712960CE513D0F020B2A /* PairRechargeView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1EB781D921D37628009BB8C1 /* EvaProjectIntroduction */ = {
+			isa = PBXGroup;
+			children = (
+				1EB781DC21D38177009BB8C1 /* Views */,
+				1EB781DA21D37657009BB8C1 /* EvaViewController.swift */,
+			);
+			path = EvaProjectIntroduction;
+			sourceTree = "<group>";
+		};
+		1EB781DC21D38177009BB8C1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1EB781DD21D381F7009BB8C1 /* EvaView.xib */,
+				1E6EBD4C21D3851900E3EDE7 /* EvaViewAdapter.swift */,
+				1E6EBD4D21D3851900E3EDE7 /* EvaView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3768,6 +3797,7 @@
 				0973B8B46EF51BF8FC558A1FED9DA347 /* Images.xcassets */,
 				56A43386E14D074DD3A6AA2AEC1C9808 /* Info.plist */,
 				344D3561BDA811115A7E28BC4203C711 /* InfoPlist.strings */,
+				1EB781D721D338BC009BB8C1 /* Eva.storyboard */,
 				B8BD54DF9C57915FAD96B845D9ADABBA /* Launch Screen.storyboard */,
 				101951300FAFC5192A5E883D926A0C6D /* Main.storyboard */,
 				7398BEC22181C1AE004C042E /* R.generated.swift */,
@@ -3990,6 +4020,7 @@
 		EFB6D1A6DDEFE714298F3868DB962DDE /* Market */ = {
 			isa = PBXGroup;
 			children = (
+				1EB781D921D37628009BB8C1 /* EvaProjectIntroduction */,
 				25C8236B3EC7C49381733D02AB466A5E /* Cells */,
 				A74E03742FC3B6EC7AF0B75D9A99B9DF /* OrderBook */,
 				3329A6BBB0D752B2B89DBE6623E6510E /* TradeHistory */,
@@ -4258,6 +4289,7 @@
 				49A5F40C54716A0DE78B3C2D417905C3 /* BalanceIntroduceView.xib in Resources */,
 				42575EE1042178AB8C2805F4949A3F45 /* Business.storyboard in Resources */,
 				72E3A4CD214560580083E417 /* CybexWaitingView.xib in Resources */,
+				1EB781DE21D381F7009BB8C1 /* EvaView.xib in Resources */,
 				7217B0892122BBE500608531 /* AddressItemView.xib in Resources */,
 				192C3ADF0D3E049D53C92A483D63CD03 /* BusinessTitleCell.xib in Resources */,
 				72D58294219C188700BB9842 /* ChatUpInputView.xib in Resources */,
@@ -4307,6 +4339,7 @@
 				6C1820B3CDFFEBD3CF821B6CDB3F4691 /* OpenedOrdersHeaderView.xib in Resources */,
 				F61A4020689A1596B862EDC3AD38A3BC /* OpenedOrdersView.xib in Resources */,
 				8809F4832AD9F2B07F73CDE8C8D41240 /* OrderBookCell.xib in Resources */,
+				1EB781D821D338BC009BB8C1 /* Eva.storyboard in Resources */,
 				5C9247949858F09E0B4A6A2A18854787 /* OrderBookCellView.xib in Resources */,
 				72D9DD59210EB60F00963915 /* PeriscopeCell.xib in Resources */,
 				3385671DD5F1B6ED220AB916F7859ECF /* OrderBookContentView.xib in Resources */,
@@ -4817,6 +4850,7 @@
 				461B84D25CFA564E9455211A24902BB7 /* CBKLineBrush.swift in Sources */,
 				A971765C0FF4C52CAA1C001A3ABBC1B1 /* CBKLineDrawView.swift in Sources */,
 				7333856F21BFA8210026765F /* AppHelper.swift in Sources */,
+				1E6EBD4F21D3851900E3EDE7 /* EvaView.swift in Sources */,
 				45E03EE6B4BBE7286E7287D3DFD1B9D6 /* CBKLineMainView.swift in Sources */,
 				73539C4B2179A210008395AC /* NavigatorDelegate.swift in Sources */,
 				7307A91B212518DC00BD6444 /* LGButton.swift in Sources */,
@@ -4875,6 +4909,7 @@
 				ADB937770A84BC394C0F50DF0631CDEC /* ExchangeActions.swift in Sources */,
 				72B42E8321774CFD00587403 /* DespositNameView.swift in Sources */,
 				7333857D21C0EC400026765F /* AddressHelper.swift in Sources */,
+				1EB781DB21D37657009BB8C1 /* EvaViewController.swift in Sources */,
 				FC8F317187D539852A834267F3F427FA /* ExchangeCoordinator.swift in Sources */,
 				98CCDC7B05741EEDF9AF05992AA2A8DF /* ExchangeReducers.swift in Sources */,
 				737E596921A53D69001199E4 /* ECDSA.swift in Sources */,
@@ -5116,6 +5151,7 @@
 				73539C5E2179A282008395AC /* DNSPageViewManager.swift in Sources */,
 				73587EAD2137C057006CF8A6 /* ETOCrowdReducers.swift in Sources */,
 				666C535B0D6573A3C341FC0208A91E71 /* Theme_Extensions.swift in Sources */,
+				1E6EBD4E21D3851900E3EDE7 /* EvaViewAdapter.swift in Sources */,
 				7333856621BFA4270026765F /* MarketConfigration.swift in Sources */,
 				7333858121C0ED2B0026765F /* UIUtils.swift in Sources */,
 				724C5D4821538D3C00FF1DE7 /* HotAssetView.swift in Sources */,

@@ -24,10 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupUserSetting()
         setupUI()
 
-        monitorNetwork()
-        requestSetting()
+//        monitorNetwork()
+//        requestSetting()
 
-        start()
+        //start()
+        
+        let vc = R.storyboard.eva.evaViewController()!
+        vc.view.backgroundColor = UIColor.darkTwo
+        window?.rootViewController = vc
 
         if let url = launchOptions?[.url] as? URL {
             let opened = navigator.open(url)
