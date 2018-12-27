@@ -7,17 +7,18 @@
 //
 
 import Foundation
+import TinyConstraints
 
 @IBDesignable
 class EvaView: CybexBaseView {
     @IBOutlet weak var evaIcon: UIImageView!
     enum Event:String {
-        case EvaViewDidClicked
+        case evaViewDidClicked
     }
         
     override func setup() {
         super.setup()
-        
+
         setupUI()
         setupSubViewEvent()
     }
@@ -31,6 +32,6 @@ class EvaView: CybexBaseView {
     }
     
     @objc override func didClicked() {
-        self.next?.sendEventWith(Event.EvaViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
+        self.next?.sendEventWith(Event.evaViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
 }
