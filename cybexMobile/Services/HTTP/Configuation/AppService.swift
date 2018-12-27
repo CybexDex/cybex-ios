@@ -36,6 +36,7 @@ enum AppAPI {
     case items
 
     case outerPrice
+    case evaluapeSetting
 }
 
 struct AppService {
@@ -139,6 +140,8 @@ extension AppAPI: TargetType {
             return "/json/deposit/\(assetId).json"
         case .precisionSetting:
             return "/json/pairs.json"
+        case .evaluapeSetting:
+            return "/json/evaluape.json"
         }
     }
 

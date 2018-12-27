@@ -73,5 +73,9 @@ extension AppDelegate {
         if CybexConfiguration.shared.chainID.value.isEmpty {
             CybexConfiguration.shared.getChainId()
         }
+        
+        if AssetConfiguration.shared.quoteToProjectNames.value.isEmpty {
+            AssetConfiguration.shared.fetchQuoteToProjectNames()
+        }
     }
 }

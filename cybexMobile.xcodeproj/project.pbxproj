@@ -43,6 +43,8 @@
 		0FF6C4A7AAF40F0AC67CBDAEAA2406E2 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E6F236626C719C549D1184F4BB4696 /* UITextField+Extensions.swift */; };
 		1004CC5E6B42E88C009CBF159D123279 /* TradeHistoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3146A5E2119E16E559812803A8E18B8B /* TradeHistoryCellView.swift */; };
 		105EA57407E74D316C2918BA41771E3B /* HomeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60745600FFCB2AD8D66D0763DD5AA770 /* HomeActions.swift */; };
+		106A644E21D47A6500112A4C /* EvaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106A644D21D47A6500112A4C /* EvaService.swift */; };
+		106A645021D4BFA800112A4C /* EvaProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 106A644F21D4BFA800112A4C /* EvaProject.swift */; };
 		10F005E5213C8CAD146ED273B0CDF11F /* RechargeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542C1CB40967F56FB19E7C1FEDCA9ECA /* RechargeItemView.swift */; };
 		10F92CEABF192DAC227A5005DD4F12BF /* RechargeDetailActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD2F49B999FF4B9FB8DB0B17BE5F897 /* RechargeDetailActions.swift */; };
 		119C20AD642DDDABBE26CB6AF841B609 /* CybexAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2974E4F9CAD426BA5EA87B501D850E /* CybexAlertView.xib */; };
@@ -893,6 +895,8 @@
 		0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeNavTitleView.swift; sourceTree = "<group>"; };
 		0D964BF5B38EBF2F80A562403D0FC416 /* CBKLineVolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBKLineVolumeView.swift; sourceTree = "<group>"; };
 		101951300FAFC5192A5E883D926A0C6D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		106A644D21D47A6500112A4C /* EvaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaService.swift; sourceTree = "<group>"; };
+		106A644F21D4BFA800112A4C /* EvaProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaProject.swift; sourceTree = "<group>"; };
 		1082CC6A81902CFC0405B8237A949A1B /* CybexTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CybexTextView.xib; sourceTree = "<group>"; };
 		115F2B194BC4D206A29A5A90BF6DDACE /* AccountPortfolioCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountPortfolioCellView.xib; sourceTree = "<group>"; };
 		12B914741264DAF4E07D927233D22BD2 /* LocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCache.swift; sourceTree = "<group>"; };
@@ -1833,6 +1837,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		106A644C21D47A2F00112A4C /* Eva */ = {
+			isa = PBXGroup;
+			children = (
+				106A644D21D47A6500112A4C /* EvaService.swift */,
+			);
+			path = Eva;
+			sourceTree = "<group>";
+		};
 		16801E8EE5CCC68F89C887E8BBA3C8DF /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -2328,6 +2340,7 @@
 				149A7633B62C66BF0A91E02182615CB5 /* Trade.swift */,
 				A594949DD908310B30266DF5349ACA42 /* Vesting.swift */,
 				7333854E21BF674A0026765F /* PairPrecision.swift */,
+				106A644F21D4BFA800112A4C /* EvaProject.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3108,6 +3121,7 @@
 		7391101121BA503700412CE1 /* HTTP */ = {
 			isa = PBXGroup;
 			children = (
+				106A644C21D47A2F00112A4C /* Eva */,
 				8CD40C5E84A00D4E3920E1AFF7D89F87 /* SimpleHTTPService.swift */,
 				736761E621BE4C220065FD35 /* IM */,
 				7391102721BA512A00412CE1 /* Register */,
@@ -4773,6 +4787,7 @@
 				32BED01405F6D7B22B348057E0BDE3C8 /* AccountPortfolioView.swift in Sources */,
 				739EFB622181D10E00424061 /* UIRotationGestureRecognizer+RxGesture.swift in Sources */,
 				72199DA92104680000575226 /* TransferContentView.swift in Sources */,
+				106A645021D4BFA800112A4C /* EvaProject.swift in Sources */,
 				7307A921212518DC00BD6444 /* MapIcon.swift in Sources */,
 				728C281B215B6D6E0097840A /* AnnounceViewAdapter.swift in Sources */,
 				E0AD8E2E835D84754C63BA76FBA8582E /* AccountReducers.swift in Sources */,
@@ -4958,6 +4973,7 @@
 				7333857321C0BD190026765F /* MarketHelper.swift in Sources */,
 				7333857F21C0EC890026765F /* CashHelper.swift in Sources */,
 				221EC24F2105CF310059F856 /* TransferReducers.swift in Sources */,
+				106A644E21D47A6500112A4C /* EvaService.swift in Sources */,
 				7333855721BF9ABF0026765F /* AppDelegate+Log.swift in Sources */,
 				72DBCA7721391A4300905303 /* CybexWebReducers.swift in Sources */,
 				72EC6A5620F4611500CEAFF6 /* WithdrawView.swift in Sources */,

@@ -41,6 +41,8 @@ class AssetConfiguration {
 
     static let shared = AssetConfiguration()
     var whiteListOfIds: BehaviorRelay<[String]> = BehaviorRelay(value: []) //白名单资产id
+    //quote对应全称
+    var quoteToProjectNames: BehaviorRelay<[String : String]> = BehaviorRelay(value: [:])
 
     private var baseRmbPrices: [CybexAsset: Decimal] = [:] //assetid:rmb
 
@@ -78,6 +80,17 @@ extension AssetConfiguration {
 
         }) { (_) in
 
+        }
+    }
+    
+    func fetchQuoteToProjectNames() {
+        AppService.request(target: AppAPI.evaluapeSetting, success: { (json) in
+            guard let result = json.dictionaryObject as? [String : String] else { return }
+            AssetConfiguration.shared.quoteToProjectNames.accept(result)
+        }, error: { (_) in
+            
+        }) { (_) in
+            
         }
     }
 
