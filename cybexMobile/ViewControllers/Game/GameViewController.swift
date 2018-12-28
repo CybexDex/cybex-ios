@@ -14,7 +14,7 @@ import JavaScriptCore
 
 class GameViewController: BaseViewController {
     
-    let gameURL = "https://gamelive.cybex.io"
+    var gameURL:String?
     let jsObjectName = "Potral"
     var coordinator: (GameCoordinatorProtocol & GameStateManagerProtocol)?
     private(set) var context: GameContext?
@@ -49,7 +49,7 @@ class GameViewController: BaseViewController {
     }
     
     func setupData() {
-        if let url = URL(string: self.gameURL) {
+        if let gameURL = self.gameURL, let url = URL(string: gameURL) {
             self.setupLoadUrl(url)
         }
     }

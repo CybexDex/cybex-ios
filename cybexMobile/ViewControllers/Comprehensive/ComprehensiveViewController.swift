@@ -167,9 +167,12 @@ extension ComprehensiveViewController {
             appCoodinator.showLogin()
             return
         }
-        if index == 0 {
+
+        let midlleItem = middleItems[index]
+
+        if midlleItem.link.contains(AppConfiguration.GameBaseURLString) {
             if Defaults[.hasCode] == true {
-                self.coordinator?.openGame()
+                self.coordinator?.openGame(midlleItem.link)
                 return
             }
             let titleName = R.string.localizable.eto_invite_code_title.key.localized()
@@ -177,7 +180,6 @@ extension ComprehensiveViewController {
             return
         }
         
-        let midlleItem = middleItems[index]
         openUrl(midlleItem.link)
     }
     
@@ -218,7 +220,14 @@ extension ComprehensiveViewController {
     override func codePassed(_ passed: Bool) {
         if passed {
             Defaults[.hasCode] = true
-            self.coordinator?.openGame()
+            guard let middleItems = self.coordinator?.state.middleItems.value else { return }
+            let links = middleItems.map({ $0.link }).filter { (link) -> Bool in
+                return link.contains(AppConfiguration.GameBaseURLString)
+            }
+
+            if let link = links.first {
+                self.coordinator?.openGame(link)
+            }
         }
         else {
             self.showToastBox(false, message: R.string.localizable.eto_invite_code_error.key.localized())

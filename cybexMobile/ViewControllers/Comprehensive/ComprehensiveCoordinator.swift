@@ -16,7 +16,7 @@ protocol ComprehensiveCoordinatorProtocol {
     func openWebVCUrl(_ url: String)
 
     func openMarketList(_ pair: Pair)
-    func openGame()
+    func openGame(_ url: String)
 }
 
 protocol ComprehensiveStateManagerProtocol {
@@ -96,9 +96,10 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
             self.rootVC.pushViewController(marketVC, animated: true)
         }
     }
-    func openGame() {
+    func openGame(_ url: String) {
         if let gameVC = R.storyboard.main.gameViewController() {
             gameVC.coordinator = GameCoordinator(rootVC: self.rootVC)
+            gameVC.gameURL = url
             self.rootVC.pushViewController(gameVC, animated: true)
         }
     }
