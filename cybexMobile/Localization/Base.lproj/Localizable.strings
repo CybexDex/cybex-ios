@@ -550,3 +550,14 @@
 "openedorder_ensure_message" = "Confirm order cancellation";
 "game_center_title" = "Game Center";
 "game_center_subtitle" = "Blockchain Games";
+
+"eva_hyper_score" = "Hype Score";
+"eva_risk_score" = "Risk Score";
+"eva_expection" = "Expectation";
+"eva_platform" = "Platform";
+"eva_industry" = "Industry";
+"eva_icotokensupply" = "ICotokenSupply";
+"eva_tokeprice" = "Token Price";
+"eva_country" = "Country";
+"eva_introduction" = "Introduction";
+"eva_EVALUAPE" = "The data comes from EVALUAPE";

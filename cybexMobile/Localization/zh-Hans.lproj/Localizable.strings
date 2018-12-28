@@ -531,3 +531,14 @@
 
 "openedorder_ensure_title" = "提示";
 "openedorder_ensure_message" = "确认取消订单";
+
+"eva_hyper_score" = "Hype Score";
+"eva_risk_score" = "Risk Score";
+"eva_expection" = "Expectation";
+"eva_platform" = "Platform";
+"eva_industry" = "Industry";
+"eva_icotokensupply" = "ICotokenSupply";
+"eva_tokeprice" = "Token Price";
+"eva_country" = "Country";
+"eva_introduction" = "Introduction";
+"eva_EVALUAPE" = "The data comes from EVALUAPE";
