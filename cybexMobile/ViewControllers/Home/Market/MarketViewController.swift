@@ -168,7 +168,13 @@ class MarketViewController: BaseViewController {
         style.titleFont = UIFont.systemFont(ofSize: 14)
 
         // 设置标题内容
-        let titles = [R.string.localizable.mark_order_book.key.localized(), R.string.localizable.mark_trade_history.key.localized()]
+        var titles = [
+            R.string.localizable.mark_order_book.key.localized(),
+            R.string.localizable.mark_trade_history.key.localized()
+                      ]
+        if let coor = self.coordinator, coor.isExistProjectIntroduction(pair) {
+            titles.append(R.string.localizable.eva_title_introduction.key.localized())
+        }
 
         // 设置默认的起始位置
         let startIndex = 0

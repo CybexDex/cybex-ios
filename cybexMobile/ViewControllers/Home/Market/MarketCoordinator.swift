@@ -21,6 +21,7 @@ protocol MarketCoordinatorProtocol {
 protocol MarketStateManagerProtocol {
     var state: MarketState { get }
 
+    func isExistProjectIntroduction(_ pair: Pair) -> Bool
     func requestKlineDetailData(pair: Pair, gap: Candlesticks)
     func fetchLastMessageId(_ channel: String, callback:@escaping (Int)->())
 }
@@ -47,6 +48,14 @@ extension MarketCoordinator: MarketCoordinatorProtocol {
             self.rootVC.pushViewController(chatVC, animated: true)
         }
     }
+
+    func isExistProjectIntroduction(_ pair: Pair) -> Bool {
+        if let projectName = AssetConfiguration.shared.quoteToProjectNames.value[pair.quote.symbol], !projectName.isEmpty {
+            return true
+        }
+
+        return false
+    }
     
     func setupChildViewControllers(_ pair: Pair) -> [BaseViewController] {
         let vc = R.storyboard.main.orderBookViewController()!
@@ -60,8 +69,21 @@ extension MarketCoordinator: MarketCoordinatorProtocol {
         vc2.view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
         
         refreshChildViewController([vc, vc2], pair: pair)
-        
-        return [vc, vc2]
+
+        if isExistProjectIntroduction(pair) {
+            let vc3 = R.storyboard.eva.evaViewController()!
+            vc3.tokenName = pair.quote.symbol
+
+            if let projectName = AssetConfiguration.shared.quoteToProjectNames.value[pair.quote.symbol], !projectName.isEmpty {
+                vc3.projectName = projectName
+            }
+            vc3.view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
+
+            return [vc, vc2, vc3]
+        }
+        else {
+            return [vc, vc2]
+        }
     }
     
     func refreshChildViewController(_ vcs: [BaseViewController], pair: Pair) {

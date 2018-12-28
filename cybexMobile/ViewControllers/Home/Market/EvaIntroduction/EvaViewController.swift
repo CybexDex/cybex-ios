@@ -10,17 +10,25 @@ import Foundation
 
 class EvaViewController: BaseViewController {
     @IBOutlet weak var evaView: EvaView!
-    
+    var projectName: String?
+    var tokenName: String?
+
     override func viewDidLoad() {
-        EvaService.request(target: EvaApi.projectInfo(name: "Ethereum", tokenName: "ETH"), success: { (json) in
+        fetchData()
+    }
+
+    func fetchData() {
+        guard let projectName = projectName, let tokenName = tokenName else { return }
+
+        EvaService.request(target: EvaApi.projectInfo(name: projectName, tokenName: tokenName), success: { (json) in
             guard let evaProject = EvaProject.deserialize(from: json.dictionaryObject) else {
                 return
             }
             self.evaView.adapterModelToEvaView(evaProject)
         }, error: { (error) in
-            
+
         }) { (error) in
-            
+
         }
     }
 
