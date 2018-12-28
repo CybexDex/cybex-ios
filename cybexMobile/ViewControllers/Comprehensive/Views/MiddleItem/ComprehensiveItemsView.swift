@@ -46,7 +46,7 @@ class ComprehensiveItemsView: CybexBaseView {
 
 extension ComprehensiveItemsView: GridContentViewDataSource {
     func itemsForView(_ view: GridContentView) -> [UIView] {
-        if let data = self.data as? [ComprehensiveItem] {
+        if let data = self.data as? [ComprehensiveItem], data.count != 0 {
             let views = Array(0...data.count-1).map { (index) -> ComprehensiveItemView in
                 let item = ComprehensiveItemView()
                 item.tapIndex = index

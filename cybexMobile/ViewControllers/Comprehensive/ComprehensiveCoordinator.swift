@@ -158,9 +158,7 @@ extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
     func fetchMiddleItemInfos() {
         AppService.request(target: .items, success: { (json) in
             let data = json.arrayValue.map({ ComprehensiveItem.deserialize(from: $0.dictionaryObject)})
-            if data.count != 0 {
-                self.store.dispatch(FetchMiddleItemAction(data: data.compactMap({ $0 })))
-            }
+            self.store.dispatch(FetchMiddleItemAction(data: data.compactMap({ $0 })))
         }, error: { (_) in
 
         }) { (_) in
