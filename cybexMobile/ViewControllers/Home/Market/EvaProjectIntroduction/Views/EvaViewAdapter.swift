@@ -14,6 +14,7 @@ extension EvaView {
         evaIcon.kf.setImage(with: URL(string: evaProject.logo))
         projectName.text = evaProject.name
         projectDesc.text = evaProject.description
+        scoreLabel.text = evaProject.score
         hypeScoreLabel.text = evaProject.hypeScore
         riskScoreLabel.text = evaProject.riskScore
         expectationLabel.text = evaProject.investmentRating

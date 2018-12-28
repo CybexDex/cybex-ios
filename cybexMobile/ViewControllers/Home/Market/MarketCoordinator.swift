@@ -77,7 +77,7 @@ extension MarketCoordinator: MarketCoordinatorProtocol {
             if let projectName = AssetConfiguration.shared.quoteToProjectNames.value[pair.quote.symbol], !projectName.isEmpty {
                 vc3.projectName = projectName
             }
-            vc3.view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
+            vc3.view.theme_backgroundColor = [#colorLiteral(red: 0.1058823529, green: 0.1333333333, blue: 0.1882352941, alpha: 1).hexString(true), #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).hexString(true)]
 
             return [vc, vc2, vc3]
         }

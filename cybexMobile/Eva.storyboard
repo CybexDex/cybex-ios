@@ -18,30 +18,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aOJ-F1-CKc">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="kV3-Du-HmL" customClass="EvaView" customModule="cybexMobile" customModuleProvider="target">
+                                <rect key="frame" x="16" y="20" width="343" height="587.5"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AN4-9E-zAw">
+                                <rect key="frame" x="0.0" y="607.5" width="375" height="59.5"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="kV3-Du-HmL" customClass="EvaView" customModule="cybexMobile" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="8" width="343" height="128"/>
-                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The data comes from EVALUAPE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFg-4A-X6g">
+                                        <rect key="frame" x="95" y="8" width="185" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.55300000000000005" green="0.56499999999999995" blue="0.59199999999999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="locali" value="eva_EVALUAPE"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01_evaluape_logo_white_background" translatesAutoresizingMaskIntoConstraints="NO" id="lnN-l2-fBO">
+                                        <rect key="frame" x="144.5" y="26.5" width="86" height="17"/>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="kV3-Du-HmL" secondAttribute="trailing" constant="-16" id="TWu-Jc-OZ2"/>
-                                    <constraint firstAttribute="bottom" secondItem="kV3-Du-HmL" secondAttribute="bottom" id="i6N-aM-ppt"/>
-                                    <constraint firstItem="kV3-Du-HmL" firstAttribute="top" secondItem="aOJ-F1-CKc" secondAttribute="top" constant="8" id="lky-eY-qdx"/>
-                                    <constraint firstItem="kV3-Du-HmL" firstAttribute="leading" secondItem="aOJ-F1-CKc" secondAttribute="leading" constant="16" id="qkq-HZ-bkA"/>
+                                    <constraint firstItem="wFg-4A-X6g" firstAttribute="top" secondItem="AN4-9E-zAw" secondAttribute="top" constant="8" id="9hK-v5-0CQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="lnN-l2-fBO" secondAttribute="bottom" constant="16" id="FQt-sK-IqL"/>
+                                    <constraint firstItem="wFg-4A-X6g" firstAttribute="centerX" secondItem="AN4-9E-zAw" secondAttribute="centerX" id="QSf-BW-R4s"/>
+                                    <constraint firstItem="lnN-l2-fBO" firstAttribute="centerX" secondItem="AN4-9E-zAw" secondAttribute="centerX" id="b5L-P0-DOM"/>
+                                    <constraint firstItem="lnN-l2-fBO" firstAttribute="top" secondItem="wFg-4A-X6g" secondAttribute="bottom" constant="4" id="mZH-Ml-N9B"/>
                                 </constraints>
-                            </scrollView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                        <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                        <color key="value" red="0.93700000000000006" green="0.94499999999999995" blue="0.95699999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="aOJ-F1-CKc" firstAttribute="top" secondItem="2ZD-DD-8R7" secondAttribute="top" id="36A-Xa-N3U"/>
-                            <constraint firstItem="kV3-Du-HmL" firstAttribute="width" secondItem="Wq2-LB-uMd" secondAttribute="width" constant="-32" id="K2I-aw-YPB"/>
-                            <constraint firstItem="aOJ-F1-CKc" firstAttribute="leading" secondItem="2ZD-DD-8R7" secondAttribute="leading" id="hqh-yY-xI5"/>
-                            <constraint firstItem="2ZD-DD-8R7" firstAttribute="trailing" secondItem="aOJ-F1-CKc" secondAttribute="trailing" id="i1w-sV-FOX"/>
-                            <constraint firstItem="2ZD-DD-8R7" firstAttribute="bottom" secondItem="aOJ-F1-CKc" secondAttribute="bottom" id="s6n-8B-MkB"/>
+                            <constraint firstItem="kV3-Du-HmL" firstAttribute="leading" secondItem="2ZD-DD-8R7" secondAttribute="leading" constant="16" id="6rE-nW-jN2"/>
+                            <constraint firstItem="2ZD-DD-8R7" firstAttribute="trailing" secondItem="AN4-9E-zAw" secondAttribute="trailing" id="G23-7I-z5B"/>
+                            <constraint firstItem="AN4-9E-zAw" firstAttribute="top" secondItem="kV3-Du-HmL" secondAttribute="bottom" id="Le9-Fd-eAK"/>
+                            <constraint firstItem="kV3-Du-HmL" firstAttribute="top" secondItem="2ZD-DD-8R7" secondAttribute="top" id="NpM-eR-Dy8"/>
+                            <constraint firstItem="2ZD-DD-8R7" firstAttribute="trailing" secondItem="kV3-Du-HmL" secondAttribute="trailing" constant="16" id="UWV-qn-rNt"/>
+                            <constraint firstItem="AN4-9E-zAw" firstAttribute="leading" secondItem="2ZD-DD-8R7" secondAttribute="leading" id="ZmB-lE-coP"/>
+                            <constraint firstItem="2ZD-DD-8R7" firstAttribute="bottom" secondItem="AN4-9E-zAw" secondAttribute="bottom" id="uiL-cd-RCD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2ZD-DD-8R7"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="evaView" destination="kV3-Du-HmL" id="Qsm-ks-bdh"/>
@@ -52,4 +83,7 @@
             <point key="canvasLocation" x="-246" y="24"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="01_evaluape_logo_white_background" width="86" height="17"/>
+    </resources>
 </document>
