@@ -2376,7 +2376,7 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		72199D6121044FB600575226 /* TradeRecord */ = {
+		72199D6121044FB600575226 /* Record */ = {
 			isa = PBXGroup;
 			children = (
 				72199D76210450AC00575226 /* Cells */,
@@ -2387,7 +2387,7 @@
 				72199D6421044FD100575226 /* RechargeRecodeViewController.swift */,
 				72199D732104502800575226 /* Recode.storyboard */,
 			);
-			path = TradeRecord;
+			path = Record;
 			sourceTree = "<group>";
 		};
 		72199D75210450A000575226 /* Views */ = {
@@ -2576,6 +2576,7 @@
 		72968D162158CE7B00B0AA77 /* WithdrawAndDespoitRecord */ = {
 			isa = PBXGroup;
 			children = (
+				72199D6121044FB600575226 /* Record */,
 				728C2801215A36B70097840A /* Choose */,
 				72968D252158D6E500B0AA77 /* Views */,
 				72968D1E2158CEAC00B0AA77 /* WithdrawAndDespoitRecordActions.swift */,
@@ -3685,17 +3686,16 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		BC07906A1E2E020C6177ADCA4F64EF05 /* RechargeDetail */ = {
+		BC07906A1E2E020C6177ADCA4F64EF05 /* WithDraw */ = {
 			isa = PBXGroup;
 			children = (
-				72199D6121044FB600575226 /* TradeRecord */,
 				6F80A8DB9CC8A072FDB23592D220D4A5 /* Views */,
 				8CD2F49B999FF4B9FB8DB0B17BE5F897 /* RechargeDetailActions.swift */,
 				DCDDA3A4A776E85A3F485F32310E2798 /* RechargeDetailCoordinator.swift */,
 				3026120F89EDE7AE570FE9E3D4D21AB8 /* RechargeDetailReducers.swift */,
 				E8382753BAEF516983F1C18FCE77A64A /* RechargeDetailViewController.swift */,
 			);
-			path = RechargeDetail;
+			path = WithDraw;
 			sourceTree = "<group>";
 		};
 		BF3F4A11835F406941DE98690F1996FF /* Jdenticon */ = {
@@ -3783,9 +3783,9 @@
 		C80FEB0292960827F61645F8CC19905F /* Recharge */ = {
 			isa = PBXGroup;
 			children = (
-				BC07906A1E2E020C6177ADCA4F64EF05 /* RechargeDetail */,
+				BC07906A1E2E020C6177ADCA4F64EF05 /* WithDraw */,
 				B42073C6FE651D209AE166EB8A07330E /* RechargeList */,
-				D45A98F5C4B226E86B604DDF7AEE6546 /* WithdrawDetail */,
+				D45A98F5C4B226E86B604DDF7AEE6546 /* Topup */,
 			);
 			path = Recharge;
 			sourceTree = "<group>";
@@ -3836,7 +3836,7 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		D45A98F5C4B226E86B604DDF7AEE6546 /* WithdrawDetail */ = {
+		D45A98F5C4B226E86B604DDF7AEE6546 /* Topup */ = {
 			isa = PBXGroup;
 			children = (
 				72EC6A4E20F4611500CEAFF6 /* Views */,
@@ -3845,7 +3845,7 @@
 				21696A68C7DB2269A52E166892D0EA60 /* WithdrawDetailReducers.swift */,
 				E5E1124F9287490DFCA1D7EFE4779FCB /* WithdrawDetailViewController.swift */,
 			);
-			path = WithdrawDetail;
+			path = Topup;
 			sourceTree = "<group>";
 		};
 		D6C4546E46CA46AF465428DAE720A9A9 /* Views */ = {

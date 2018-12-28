@@ -298,33 +298,33 @@ extension Decimal { // 解决double 计算精度丢失
 
         if num / 1000 < 1 {
             let str = num.string(digits: digitNum, roundingMode: .down)
-            let result = padZero ? str.formatCurrency(digitNum: digitNum, usesGroupingSeparator: true) : str
+            let result = padZero ? str.formatCurrency(digitNum: digitNum, usesGroupingSeparator: false) : str
             return "\(sign)\(result)"
         }
 
         num /= 1000
         if num / 1000 < 1  {
             let str = num.string(digits: 2, roundingMode: .down)
-            let result = padZero ? str.formatCurrency(digitNum: 2, usesGroupingSeparator: true) : str
+            let result = padZero ? str.formatCurrency(digitNum: 2, usesGroupingSeparator: false) : str
             return "\(sign)\(result)" + "k"
         }
         num /= 1000
         if num / 1000 < 1 {
             let str = num.string(digits: 2, roundingMode: .down)
-            let result = padZero ? str.formatCurrency(digitNum: 2, usesGroupingSeparator: true) : str
+            let result = padZero ? str.formatCurrency(digitNum: 2, usesGroupingSeparator: false) : str
 
             return "\(sign)\(result)" + "m"
         }
         num /= 1000
 
         let str = num.string(digits: 2, roundingMode: .down)
-        let result = padZero ? str.formatCurrency(digitNum: 2, usesGroupingSeparator: true) : str
+        let result = padZero ? str.formatCurrency(digitNum: 2, usesGroupingSeparator: false) : str
 
         return "\(sign)\(result)" + "b"
     }
 
     // 对齐小数位 不足补0
-    func formatCurrency(digitNum: Int, usesGroupingSeparator: Bool = true) -> String {
+    func formatCurrency(digitNum: Int, usesGroupingSeparator: Bool = false) -> String {
         let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
             return formatter.maximumFractionDigits == digitNum && formatter.usesGroupingSeparator == usesGroupingSeparator
         })
@@ -351,7 +351,7 @@ extension Double {
     }
     
     // 对齐小数位 不足补0
-    func formatCurrency(digitNum: Int, usesGroupingSeparator: Bool = true) -> String {
+    func formatCurrency(digitNum: Int, usesGroupingSeparator: Bool = false) -> String {
         let existFormatters = String.numberFormatters.filter({ (formatter) -> Bool in
             return formatter.maximumFractionDigits == digitNum && formatter.usesGroupingSeparator == usesGroupingSeparator
         })
@@ -443,7 +443,7 @@ extension String {
         return decimal().decimal(digits: digits, roundingMode: roundingMode).stringValue
     }
 
-    func formatCurrency(digitNum: Int, usesGroupingSeparator: Bool = true) -> String {
+    func formatCurrency(digitNum: Int, usesGroupingSeparator: Bool = false) -> String {
         return decimal().formatCurrency(digitNum: digitNum, usesGroupingSeparator: usesGroupingSeparator)
     }
     
