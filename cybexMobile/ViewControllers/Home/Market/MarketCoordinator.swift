@@ -72,6 +72,10 @@ extension MarketCoordinator: MarketCoordinatorProtocol {
 
         if isExistProjectIntroduction(pair) {
             let vc3 = R.storyboard.eva.evaViewController()!
+            if let marketVC = self.rootVC.topViewController as? MarketViewController {
+                vc3.parentVC = marketVC
+            }
+
             vc3.tokenName = pair.quote.symbol
 
             if let projectName = AssetConfiguration.shared.quoteToProjectNames.value[pair.quote.symbol], !projectName.isEmpty {

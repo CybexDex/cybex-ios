@@ -159,7 +159,7 @@ extension AppAPI: TargetType {
         case .homebanner:
             return ["lang": lang]
         case .items:
-            return ["lang": lang]
+            return ["lang": lang, "env": env]
         case let .marketlist(base):
             return ["base": base]
         default:
@@ -194,7 +194,12 @@ extension AppAPI: TargetType {
         return ["Content-type": "application/json"]
     }
 
+    //Extra
     var lang: String {
         return (Localize.currentLanguage() == "en" ? "en" : "zh")
+    }
+
+    var env: String { //是否是企业版 AppStore版本
+        return AppConfiguration.shared.isAppStoreVersion() ? "" : "pro"
     }
 }

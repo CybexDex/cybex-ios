@@ -37,6 +37,7 @@ class BaseLabel: UILabel {
     func decorate() {
         guard let text = text else { return }
 
+        let breakMode = lineBreakMode
         let style = Style {
             $0.font = self.font
             $0.color = self.textColor
@@ -47,5 +48,6 @@ class BaseLabel: UILabel {
 
         let myGroup = StyleGroup(base: style, StylesManager.shared.styles)
         self.attributedText = text.set(style: myGroup)
+        self.lineBreakMode = breakMode
     }
 }

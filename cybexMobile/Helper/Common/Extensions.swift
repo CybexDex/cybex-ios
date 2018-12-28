@@ -91,7 +91,7 @@ extension UIViewController {
 
     func requestLastestVersion(_ callback: @escaping (AppVersionResult) -> Void) {
         var target: AppAPI = AppAPI.checkAppStoreVersionUpdate
-        if let bundleID = Bundle.main.bundleIdentifier, bundleID.contains("fir") {
+        if !AppConfiguration.shared.isAppStoreVersion() {
             target = .checkVersionUpdate
         }
 

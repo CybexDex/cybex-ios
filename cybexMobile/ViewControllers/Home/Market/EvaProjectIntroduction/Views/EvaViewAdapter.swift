@@ -51,5 +51,7 @@ extension EvaView {
         
     
         projectDetails.text = evaProject.premium
+
+        updateHeight()
     }
 }

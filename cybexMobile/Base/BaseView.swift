@@ -20,6 +20,8 @@ class CybexBaseView: UIControl {
     var xibView: UIView?
     var foreView: UIView?
 
+    var bottomMargin: CGFloat = 0
+
     override open var backgroundColor: UIColor? {
         didSet {
             self.foreView?.backgroundColor = backgroundColor
@@ -136,8 +138,11 @@ class CybexBaseView: UIControl {
     }
 
     fileprivate func dynamicHeight() -> CGFloat {
-        let lastView = self.subviews.last?.subviews.last
-        return lastView?.bottom ?? 0
+        guard let lastView = self.subviews.last?.subviews.last else {
+            return 0
+        }
+
+        return lastView.bottom + bottomMargin
     }
 
     override public init(frame: CGRect) {

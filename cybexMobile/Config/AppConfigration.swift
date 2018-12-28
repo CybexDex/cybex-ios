@@ -92,5 +92,13 @@ extension AppConfiguration {
         }) { (_) in
         }
     }
+
+    func isAppStoreVersion() -> Bool {
+        if let bundleID = Bundle.main.bundleIdentifier, bundleID.contains("fir") {
+            return false
+        }
+
+        return true
+    }
 }
 

@@ -13,8 +13,15 @@ class EvaViewController: BaseViewController {
     var projectName: String?
     var tokenName: String?
 
+    weak var parentVC: MarketViewController?
+
     override func viewDidLoad() {
+        super.viewDidLoad()
         fetchData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     func fetchData() {

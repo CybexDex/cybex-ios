@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="kV3-Du-HmL" customClass="EvaView" customModule="cybexMobile" customModuleProvider="target">
-                                <rect key="frame" x="16" y="20" width="343" height="587.5"/>
+                                <rect key="frame" x="16" y="20" width="343" height="128"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AN4-9E-zAw">
-                                <rect key="frame" x="0.0" y="607.5" width="375" height="59.5"/>
+                                <rect key="frame" x="0.0" y="148" width="375" height="519"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The data comes from EVALUAPE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFg-4A-X6g">
                                         <rect key="frame" x="95" y="8" width="185" height="14.5"/>
@@ -39,7 +39,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="wFg-4A-X6g" firstAttribute="top" secondItem="AN4-9E-zAw" secondAttribute="top" constant="8" id="9hK-v5-0CQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="lnN-l2-fBO" secondAttribute="bottom" constant="16" id="FQt-sK-IqL"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lnN-l2-fBO" secondAttribute="bottom" constant="16" id="FQt-sK-IqL"/>
                                     <constraint firstItem="wFg-4A-X6g" firstAttribute="centerX" secondItem="AN4-9E-zAw" secondAttribute="centerX" id="QSf-BW-R4s"/>
                                     <constraint firstItem="lnN-l2-fBO" firstAttribute="centerX" secondItem="AN4-9E-zAw" secondAttribute="centerX" id="b5L-P0-DOM"/>
                                     <constraint firstItem="lnN-l2-fBO" firstAttribute="top" secondItem="wFg-4A-X6g" secondAttribute="bottom" constant="4" id="mZH-Ml-N9B"/>
