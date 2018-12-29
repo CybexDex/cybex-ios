@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Reachability
 
 class EvaViewController: BaseViewController {
     @IBOutlet weak var evaView: EvaView!
@@ -17,7 +18,25 @@ class EvaViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        monitorNetwork()
         fetchData()
+    }
+
+    func monitorNetwork() {
+        NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { (note) in
+            guard let reachability = note.object as? Reachability else {
+                return
+            }
+
+            switch reachability.connection {
+            case .wifi, .cellular:
+                self.fetchData()
+            case .none:
+
+                break
+            }
+
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

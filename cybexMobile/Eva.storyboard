@@ -24,6 +24,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AN4-9E-zAw">
                                 <rect key="frame" x="0.0" y="148" width="375" height="519"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKY-V2-oog">
+                                        <rect key="frame" x="16" y="0.0" width="343" height="1"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="kWK-vp-HNI"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                <color key="value" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                <color key="value" name="steel11" red="0.471" green="0.506" blue="0.604" alpha="0.110" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The data comes from EVALUAPE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFg-4A-X6g">
                                         <rect key="frame" x="95" y="8" width="185" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -39,22 +53,16 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="wFg-4A-X6g" firstAttribute="top" secondItem="AN4-9E-zAw" secondAttribute="top" constant="8" id="9hK-v5-0CQ"/>
+                                    <constraint firstItem="xKY-V2-oog" firstAttribute="top" secondItem="AN4-9E-zAw" secondAttribute="top" id="CVE-t5-B9p"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lnN-l2-fBO" secondAttribute="bottom" constant="16" id="FQt-sK-IqL"/>
                                     <constraint firstItem="wFg-4A-X6g" firstAttribute="centerX" secondItem="AN4-9E-zAw" secondAttribute="centerX" id="QSf-BW-R4s"/>
+                                    <constraint firstAttribute="trailing" secondItem="xKY-V2-oog" secondAttribute="trailing" constant="16" id="RSP-CD-562"/>
                                     <constraint firstItem="lnN-l2-fBO" firstAttribute="centerX" secondItem="AN4-9E-zAw" secondAttribute="centerX" id="b5L-P0-DOM"/>
                                     <constraint firstItem="lnN-l2-fBO" firstAttribute="top" secondItem="wFg-4A-X6g" secondAttribute="bottom" constant="4" id="mZH-Ml-N9B"/>
+                                    <constraint firstItem="xKY-V2-oog" firstAttribute="leading" secondItem="AN4-9E-zAw" secondAttribute="leading" constant="16" id="nfG-gB-UnM"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                        <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                        <color key="value" red="0.93700000000000006" green="0.94499999999999995" blue="0.95699999999999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="kV3-Du-HmL" firstAttribute="leading" secondItem="2ZD-DD-8R7" secondAttribute="leading" constant="16" id="6rE-nW-jN2"/>
                             <constraint firstItem="2ZD-DD-8R7" firstAttribute="trailing" secondItem="AN4-9E-zAw" secondAttribute="trailing" id="G23-7I-z5B"/>
@@ -65,14 +73,6 @@
                             <constraint firstItem="2ZD-DD-8R7" firstAttribute="bottom" secondItem="AN4-9E-zAw" secondAttribute="bottom" id="uiL-cd-RCD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2ZD-DD-8R7"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="evaView" destination="kV3-Du-HmL" id="Qsm-ks-bdh"/>

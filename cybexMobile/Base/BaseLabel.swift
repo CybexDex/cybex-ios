@@ -41,6 +41,7 @@ class BaseLabel: UILabel {
         let style = Style {
             $0.font = self.font
             $0.color = self.textColor
+            $0.lineBreakMode = breakMode
             if self.lineHeight != 0 {
                 $0.setupLineHeight(self.lineHeight, fontHeight: self.font.lineHeight)
             }
@@ -48,6 +49,5 @@ class BaseLabel: UILabel {
 
         let myGroup = StyleGroup(base: style, StylesManager.shared.styles)
         self.attributedText = text.set(style: myGroup)
-        self.lineBreakMode = breakMode
     }
 }
