@@ -11,6 +11,7 @@ import ReSwift
 import RxSwift
 import SwiftTheme
 import UIKit
+import Reachability
 
 extension NSNotification.Name {
     static let SpecialPairDidClicked = Notification.Name("SpecialPairDidClicked")
@@ -85,6 +86,8 @@ class MarketViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        monitorNetwork()
         self.rechargeView.showType = self.rechargeShowType
         if self.rechargeShowType == PairRechargeView.ShowType.hidden.rawValue {
             rechargeHeight.constant = 0
@@ -114,14 +117,29 @@ class MarketViewController: BaseViewController {
         fetchKlineData()
     }
 
-    
+    func monitorNetwork() {
+        NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { (note) in
+            guard let reachability = note.object as? Reachability else {
+                return
+            }
+
+            switch reachability.connection {
+            case .wifi, .cellular:
+                self.fetchNotReadMessageIdData()
+            case .none:
+
+                break
+            }
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchNotReadMessageIdData()
     }
     
     func fetchNotReadMessageIdData(){
-        var lastMessageId = 0
+        let lastMessageId = 0
         if var dic = UserDefaults.standard.value(forKey: "lastReadIds") as? [Pair: String], let cacheMessageId = dic[pair] {
             lastMessageId = Int(cacheMessageId) ?? 0
         }
