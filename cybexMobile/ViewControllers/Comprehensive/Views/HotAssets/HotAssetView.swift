@@ -28,8 +28,10 @@ class HotAssetView: CybexBaseView {
     }
 
     func setupUI() {
-        //        clearBgColor()
-
+        assetName.textAlignment = .center
+        amountLabel.textAlignment = .center
+        rmbLabel.textAlignment = .center
+        trendLabel.textAlignment = .center
     }
 
     func setupSubViewEvent() {

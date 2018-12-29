@@ -13,13 +13,16 @@ extension HotAssetView {
         self.data = model
         guard let baseInfo = appData.assetInfo[model.base],
             let quoteInfo = appData.assetInfo[model.quote] else { return }
+
         assetName.text = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade
         if model.latest == "0" {
             amountLabel.text = "-"
             rmbLabel.text = "-"
             trendLabel.text = "-"
         } else {
-            let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(Pair(base: model.base, quote: model.quote))
+            let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(
+                Pair(base: model.base, quote: model.quote)
+            )
             amountLabel.text = model.latest.formatCurrency(digitNum: tradePrecision.price)
             amountLabel.textColor = model.incre.color()
             self.trendLabel.text = (model.incre == .greater ? "+" : "") +
@@ -37,10 +40,5 @@ extension HotAssetView {
             }
             self.rmbLabel.text = price == 0 ? "-" : "≈¥" + price.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
         }
-        assetName.textAlignment = .center
-        amountLabel.textAlignment = .center
-        rmbLabel.textAlignment = .center
-        trendLabel.textAlignment = .center
-        updateHeight()
     }
 }

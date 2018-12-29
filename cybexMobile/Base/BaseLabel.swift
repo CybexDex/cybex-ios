@@ -38,10 +38,13 @@ class BaseLabel: UILabel {
         guard let text = text else { return }
 
         let breakMode = lineBreakMode
+        let align = textAlignment
+
         let style = Style {
             $0.font = self.font
             $0.color = self.textColor
             $0.lineBreakMode = breakMode
+            $0.alignment = align
             if self.lineHeight != 0 {
                 $0.setupLineHeight(self.lineHeight, fontHeight: self.font.lineHeight)
             }
