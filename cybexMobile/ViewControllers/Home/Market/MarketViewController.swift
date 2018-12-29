@@ -138,11 +138,7 @@ class MarketViewController: BaseViewController {
         fetchNotReadMessageIdData()
     }
     
-    func fetchNotReadMessageIdData(){
-        let lastMessageId = 0
-        if var dic = UserDefaults.standard.value(forKey: "lastReadIds") as? [Pair: String], let cacheMessageId = dic[pair] {
-            lastMessageId = Int(cacheMessageId) ?? 0
-        }
+    func fetchNotReadMessageIdData() {
         self.coordinator?.fetchLastMessageId(self.title!, callback: { [weak self](lastId) in
             guard let self = self else {
                 return
