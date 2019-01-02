@@ -16,22 +16,43 @@ import Localize_Swift
 protocol TradePair {
     var pariInfo: Pair {get set}
     
-    func refresh()
+    func refresh() //每隔时间段刷新
+
+    func resetView()
+
+    func appear()
+
+    func disappear()
 }
 
 extension TradePair {
     func refresh() {
     }
+
+    func resetView() {
+        
+    }
+
+    func appear() {
+
+    }
+
+    func disappear() {
+        
+    }
 }
 
-
 class TradeViewController: BaseViewController {
-    var tradeTitltView: TradeNavTitleView!
-    @IBOutlet weak var topView: UIView!
+    var tradeTitltView: TradeNavTitleView! // CYB/ETH 切换交易对
+    var chooseTitleView: UIView? //mask
+
+    @IBOutlet weak var topView: UIView! //container
+    var titlesView: CybexTitleView? //segment
+
     @IBOutlet weak var scrollView: UIScrollView!
+
+    var isShowingTitleView = false
     
-    var titlesView: CybexTitleView?
-    var chooseTitleView: UIView?//mask
     var selectedIndex: Int = 0 {
         didSet {
             switch selectedIndex {
@@ -44,50 +65,69 @@ class TradeViewController: BaseViewController {
             default:
                 break
             }
+
+            for vc in children {
+                if let vc = vc as? TradePair {
+                    vc.disappear()
+                }
+            }
+            currentTopViewController?.appear()
         }
+    }
+
+    var currentTopViewController: TradePair? {
+        for vc in children {
+            if let vc = vc as? ExchangeViewController, vc.type.rawValue == selectedIndex {
+                return vc
+            } else if let vc = vc as? OpenedOrdersViewController, selectedIndex == 2 {
+                return vc
+            }
+        }
+
+        return nil
     }
     
     var coordinator: (TradeCoordinatorProtocol & TradeStateManagerProtocol)?
     
     var pair: Pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id) {
         didSet {
-            if self.chooseTitleView != nil {
-                self.sendEventActionWith()
-            }
-            getPairInfo()
-            refreshView()
-        }
-    }
-    
-    var info:(base: AssetInfo, quote: AssetInfo)? {
-        didSet {
-            if oldValue == nil && info != nil {//弱网到请求到数据刷新
-                refreshView()
+            self.children.forEach { (viewController) in
+                if var viewController = viewController as? TradePair {
+                    viewController.resetView()
+                    viewController.pariInfo = pair
+                    viewController.appear()
+                }
             }
         }
     }
     
-    var isfirstRefresh: Bool = true
-    
+
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.startLoading()
         setupUI()
+        super.viewDidLoad()
+
+        self.startLoading()
+        setupData()
         setupEvent()
-        
-        self.pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if appData.tickerData.value.count == 0 {
-            return
-        }
-        if self.isVisible {
-            self.getPairInfo()
-            self.refreshView()
+
+        currentTopViewController?.appear()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        currentTopViewController?.disappear()
+    }
+
+    func setupData() {
+        self.children.forEach { (viewController) in
+            if var viewController = viewController as? TradePair {
+                viewController.pariInfo = pair
+            }
         }
     }
     
@@ -121,14 +161,7 @@ class TradeViewController: BaseViewController {
         tradeTitltView.delegate = self
         self.navigationItem.titleView = tradeTitltView
     }
-    
-    func getPairInfo() {
-        guard let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else {
-            self.info = nil
-            return
-        }
-        self.info = (baseInfo, quoteInfo)
-    }
+
     
     @objc override func rightAction(_ sender: UIButton) {
         self.coordinator?.openMyHistory()
@@ -153,27 +186,15 @@ class TradeViewController: BaseViewController {
                     return
                 }
                 
-                if self.isVisible {
-                    self.getPairInfo()
-                    self.refreshView()
-                }
+                self.refreshView()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     
     func refreshView() {
-        main {
-            guard let info = self.info else { return }
-            self.endLoading()
-            
-            self.tradeTitltView.title.text = info.quote.symbol.filterJade + "/" + info.base.symbol.filterJade
-            self.children.forEach { (viewController) in
-                if var viewController = viewController as? TradePair {
-                    viewController.pariInfo = self.pair
-                    if self.isfirstRefresh {
-                        viewController.refresh()
-                        self.isfirstRefresh = false
-                    }
-                }
+        self.tradeTitltView.title.text = pair.quote.symbol.filterJade + "/" + pair.base.symbol.filterJade
+        self.children.forEach { (viewController) in
+            if let viewController = viewController as? TradePair {
+                viewController.refresh()
             }
         }
     }
@@ -200,23 +221,34 @@ class TradeViewController: BaseViewController {
 
 extension TradeViewController: TradeNavTitleViewDelegate {
     @discardableResult func sendEventActionWith() -> Bool {
-        if appData.tickerData.value.count == 0 {
+        if appData.tickerData.value.count == 0, !self.isShowingTitleView {
             return false
         }
+        self.isShowingTitleView = true
+
         if self.chooseTitleView != nil {
-            self.coordinator?.removeHomeVC {[weak self] in
+            self.chooseTitleView?.removeFromSuperview()
+            self.chooseTitleView = nil
+            self.coordinator?.removeHomeVC { [weak self] in
+                self?.isShowingTitleView = false
                 guard let self = self else { return }
-                self.chooseTitleView?.removeFromSuperview()
-                self.chooseTitleView = nil
-                self.startLoading()
+                self.tradeTitltView.title.text = self.pair.quote.symbol.filterJade + "/" + self.pair.base.symbol.filterJade
             }
         } else {
             self.chooseTitleView = UIView()
             self.chooseTitleView?.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             self.view.addSubview(self.chooseTitleView!)
-            self.chooseTitleView?.edges(to: self.view, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), priority: .required, isActive: true)
+
+            var marginBottom: CGFloat = 0
+            if #available(iOS 11.0, *) {
+                marginBottom = self.view.safeAreaInsets.bottom
+            }
+
+            self.chooseTitleView?.edges(to: self.view, insets: UIEdgeInsets(top: 0, left: 0, bottom: -marginBottom, right: 0), priority: .required, isActive: true)
             self.view.layoutIfNeeded()
-            self.coordinator?.addHomeVC()
+            self.coordinator?.addHomeVC { [weak self] in
+                self?.isShowingTitleView = false
+            }
         }
         return true
     }
@@ -226,7 +258,6 @@ extension TradeViewController {
     @objc func sendBtnAction(_ data: [String: Any]) {
         if let seleIndex = data["selectedIndex"] as? Int {
             selectedIndex = seleIndex
-            NotificationCenter.default.post(name: NSNotification.Name.init("tradeChooseIndexAction"), object: nil, userInfo: ["selectedIndex": seleIndex])
         }
     }
 }

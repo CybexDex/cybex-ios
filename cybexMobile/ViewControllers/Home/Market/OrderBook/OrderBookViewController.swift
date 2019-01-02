@@ -25,32 +25,28 @@ class OrderBookViewController: BaseViewController {
     var contentView: OrderBookContentView!
     var tradeView: TradeView!
     var vcType: Int = OrderbookType.contentView.rawValue
-    var pair: Pair? {
-        didSet {
-            guard let pair = pair, oldValue != pair else {
-                return
-            }
-            self.coordinator?.resetData(pair)
+    var pair: Pair?
 
-            if self.vcType == OrderbookType.contentView.rawValue {
-                self.fetchOrderBookData(pair, count: 20)
-            }
-            else {
-                if let oldPair = oldValue, let coor = self.coordinator {
-                    coor.unSubscribe(oldPair, depth: coor.state.depth.value, count: 5)
-                }
-                self.fetchOrderBookData(pair, count: 5)
-            }
-            if self.tradeView != nil || self.contentView != nil {
-                setTopTitle()
-            }
+    override func viewDidLoad() {
+        setupUI()
+
+        super.viewDidLoad()
+    }
+
+    func fetchData() {
+        guard let pair = pair else { return }
+
+        if self.vcType == OrderbookType.contentView.rawValue {
+            self.fetchOrderBookData(pair, count: 20)
+        }
+        else {
+            self.fetchOrderBookData(pair, count: 5)
+        }
+        if self.tradeView != nil || self.contentView != nil {
+            setTopTitle()
         }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-        self.coordinator?.orderbookServerConnect()
-    }
+
     func fetchOrderBookData(_ pair: Pair,count: Int) {
         guard let tradePairPrecision = TradeConfiguration.shared.tradePairPrecisions.value[pair] else {
             TradeConfiguration.shared.tradePairPrecisions.asObservable().subscribe(onNext: { [weak self](data) in
@@ -82,6 +78,25 @@ class OrderBookViewController: BaseViewController {
         setTopTitle()
     }
 
+    func refreshData() {
+        guard var result = self.coordinator?.state.data.value, let parentVC = self.parent as? ExchangeViewController ,let grandVC = parentVC.parent as? TradeViewController else {
+            self.tradeView.data = OrderBook(bids: [], asks: [])
+            return
+        }
+
+        if grandVC.isLoading() {
+            grandVC.endLoading()
+        }
+
+        if let pair = self.pair,
+            let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair],
+            let coor = self.coordinator, parentVC.type.rawValue == grandVC.selectedIndex {
+            result.pricePrecision = coor.state.depth.value
+            result.amountPrecision = precision.amount
+            self.tradeView.data = result
+        }
+    }
+
     func setTopTitle() {
         guard let pair = self.pair,
             let baseInfo = appData.assetInfo[pair.base],
@@ -103,18 +118,16 @@ class OrderBookViewController: BaseViewController {
             self.setTopTitle()
         })
     }
+
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
     }
+
     override func configureObserveState() {
-        self.coordinator!.state.data.asObservable().skip(1).distinctUntilChanged()
+        self.coordinator?.state.data.asObservable().distinctUntilChanged()
             .subscribe(onNext: {[weak self] (result) in
                 guard let self = self else { return }
-                if let parentVC = self.parent?.parent as? TradeViewController {
-                    if parentVC.isLoading() {
-                        parentVC.endLoading()
-                    }
-                }
+
                 if self.vcType == OrderbookType.contentView.rawValue {
                     if let pair = self.pair, let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair], var order = result {
                         order.pricePrecision = precision.price
@@ -125,18 +138,7 @@ class OrderBookViewController: BaseViewController {
                         self.coordinator?.updateMarketListHeight(500)
                     }
                 } else {
-                    if result == nil {
-                        self.tradeView.data = OrderBook(bids: [], asks: [])
-                        return
-                    }
-                    if let pair = self.pair,
-                        let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair],
-                        var order = result,
-                        let coor = self.coordinator {
-                        order.pricePrecision = coor.state.depth.value
-                        order.amountPrecision = precision.amount
-                        self.tradeView.data = order
-                    }
+                    self.refreshData()
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
@@ -173,7 +175,21 @@ extension OrderBookViewController: TradePair {
         }
     }
 
-    func refresh() {
+    func resetView() {
+        guard let coor = self.coordinator ,let oldPair = self.coordinator?.state.pair.value else {
+            return
+        }
+        coor.unSubscribe(oldPair, depth: coor.state.depth.value, count: 5)
+        coor.resetData(oldPair)
+    }
+
+    func appear() {
+        refreshData()
+        fetchData()
+    }
+
+    func disappear() {
+        self.coordinator?.disconnect()
     }
 }
 

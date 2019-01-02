@@ -61,32 +61,17 @@ class OpenedOrdersViewController: BaseViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.coordinator?.disconnect()
-    }
-    
     func setupEvent() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.init("tradeChooseIndexAction"), object: nil, queue: nil) { [weak self](notifi) in
-            guard let self = self, let pair = self.pair,
-                let userInfo = notifi.userInfo,
-                let index = userInfo["selectedIndex"] as? Int else { return }
-            if index == 2 {
-                self.coordinator?.fetchOpenedOrder(pair)
-            }
-            else {
-                self.coordinator?.disconnect()
-            }
-        }
+
     }
     
     func showOrderInfo() {
         guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0) else { return }
-        guard let order = self.order else {return}
+        guard let order = self.order else { return }
         startLoading()
         CybexChainHelper.calculateFee(operation,
                                       operationID: .limitOrderCancel,
-                                      focusAssetId: order.isBuyOrder() ? order.getPair().base : order.getPair().quote) { [weak self](success, amount, assetId) in
+                                      focusAssetId: order.isBuyOrder() ? order.getPair().base : order.getPair().quote) { [weak self] (success, amount, assetId) in
                                         guard let self = self else {return}
                                         self.endLoading()
                                         guard self.isVisible else {return}
@@ -165,10 +150,7 @@ class OpenedOrdersViewController: BaseViewController {
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
-    deinit {
-        self.timer?.pause()
-        self.timer = nil
-    }
+
 }
 
 extension OpenedOrdersViewController: TradePair {
@@ -179,6 +161,25 @@ extension OpenedOrdersViewController: TradePair {
         set {
             self.pair = newValue
         }
+    }
+
+    func refresh() {
+
+    }
+
+    func resetView() {
+        
+    }
+
+    func appear() {
+        guard let pair = pair else { return }
+        self.coordinator?.fetchOpenedOrder(pair)
+    }
+
+    func disappear() {
+        self.timer?.pause()
+        self.timer = nil
+        self.coordinator?.disconnect()
     }
 }
 

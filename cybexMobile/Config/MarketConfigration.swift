@@ -11,8 +11,8 @@ import SwiftyUserDefaults
 import RxCocoa
 import SwiftyJSON
 
-enum ExchangeType {
-    case buy
+enum ExchangeType: Int {
+    case buy = 0
     case sell
 }
 

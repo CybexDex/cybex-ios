@@ -33,14 +33,9 @@ class TradeHistoryViewController: BaseViewController {
 
     var pageType: TradeHistoryPageType = .market
 
-    var pair: Pair? {
-        didSet {
-            if pair != oldValue {
-                self.coordinator?.resetData(pair!)
-            }
-            refreshView()
-        }
-    }
+    var skipFetch = true
+
+    var pair: Pair?
 
     var data: [TradeHistoryViewModel]? {
         didSet {
@@ -56,7 +51,8 @@ class TradeHistoryViewController: BaseViewController {
     }
 
     func refreshView() {
-        guard let pair = pair, let baseInfo = appData.assetInfo[(pair.base)], let quoteInfo = appData.assetInfo[(pair.quote)] else { return }
+        guard let pair = pair, let baseInfo = appData.assetInfo[(pair.base)], let quoteInfo = appData.assetInfo[(pair.quote)], !skipFetch else { return }
+
         if self.view.width == 320 {
             self.historyView.price.font  = UIFont.systemFont(ofSize: 11)
             self.historyView.amount.font  = UIFont.systemFont(ofSize: 11)
@@ -71,6 +67,22 @@ class TradeHistoryViewController: BaseViewController {
         self.coordinator?.fetchData(pair)
     }
 
+    func refreshData() {
+        guard let data = self.coordinator?.state.data.value,
+            let parentVC = self.parent as? ExchangeViewController,
+            let grandVC = parentVC.parent as? TradeViewController else {
+            return
+        }
+
+        if grandVC.isLoading() {
+            grandVC.endLoading()
+        }
+        if parentVC.type.rawValue == grandVC.selectedIndex {
+            self.data = data
+            self.coordinator?.updateMarketListHeight(500)
+        }
+    }
+
     func setupEvent() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification),
                                                object: nil,
@@ -80,6 +92,7 @@ class TradeHistoryViewController: BaseViewController {
             self.refreshView()
         })
     }
+
     deinit {
         NotificationCenter.default.removeObserver(self,
                                                   name: NSNotification.Name(rawValue: LCLLanguageChangeNotification),
@@ -95,8 +108,7 @@ class TradeHistoryViewController: BaseViewController {
             .subscribe(onNext: {[weak self] (data) in
                 guard let self = self else { return }
 
-                self.data = data
-                self.coordinator?.updateMarketListHeight(500)
+                self.refreshData()
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }
@@ -110,7 +122,24 @@ extension TradeHistoryViewController: TradePair {
             self.pair = newValue
         }
     }
+
     func refresh() {
         refreshView()
+    }
+
+    func resetView() {
+        guard let pair = pair else { return }
+
+        self.coordinator?.resetData(pair)
+    }
+
+    func appear() {
+        skipFetch = false
+        self.refreshData()
+        refreshView()
+    }
+
+    func disappear() {
+        skipFetch = true
     }
 }

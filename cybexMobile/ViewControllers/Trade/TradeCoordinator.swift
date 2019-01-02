@@ -15,7 +15,7 @@ protocol TradeCoordinatorProtocol {
     func openMarket(index: Int, currentBaseIndex: Int)
 
     func removeHomeVC(_ completion:@escaping () -> Void)
-    func addHomeVC()
+    func addHomeVC(_ completion:@escaping () -> Void)
 
     func setupChildVC(_ segue: UIStoryboardSegue)
 }
@@ -31,6 +31,9 @@ class TradeCoordinator: NavCoordinator {
         middleware: [trackingMiddleware]
     )
 
+    var orderCoodinator: OrderBookCoordinator!
+    var historyCoodinator: TradeHistoryCoordinator!
+
     override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
         let vc = R.storyboard.business.tradeViewController()!
         vc.localizedText = R.string.localizable.navTrade.key.localizedContainer()
@@ -38,6 +41,11 @@ class TradeCoordinator: NavCoordinator {
         vc.coordinator = coordinator
         coordinator.store.dispatch(RouteContextAction(context: context))
         return vc
+    }
+
+    override func register() {
+        orderCoodinator = OrderBookCoordinator(rootVC: self.rootVC)
+        historyCoodinator = TradeHistoryCoordinator(rootVC: self.rootVC)
     }
 
     var homeVCTopConstaint: NSLayoutConstraint!
@@ -64,16 +72,7 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
         self.rootVC.pushViewController(vc, animated: true)
     }
 
-    func addHomeVC() {
-        //    let width = ModalSize.full
-        //    let height = ModalSize.custom(size: 397)
-        //    let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: 397 * 0.5))
-        //    let customType = PresentationType.custom(width: width, height: height, center: center)
-        //
-        //    let presenter = Presentr(presentationType: customType)
-        //    presenter.dismissOnSwipeDirection = .top
-        //    presenter.presentationType = .popup
-
+    func addHomeVC(_ completion:@escaping () -> Void) {
         guard let tradeVC = self.rootVC.topViewController as? TradeViewController else { return }
 
         guard let vc = R.storyboard.main.homeViewController() else { return }
@@ -82,8 +81,6 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
         guard let homeView = vc.view else { return }
         let coordinator = HomeCoordinator(rootVC: self.rootVC)
         vc.coordinator  = coordinator
-
-        //    tradeVC.customPresentViewController(presenter, viewController: vc, animated: true, completion: nil)
 
         tradeVC.addChild(vc)
 
@@ -99,8 +96,12 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
 
         tradeVC.view.layoutIfNeeded()
         homeVCTopConstaint.constant = 0
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.3, animations: {
             tradeVC.view.layoutIfNeeded()
+        }) { (isFinished) in
+            if isFinished {
+                completion()
+            }
         }
     }
 
@@ -124,12 +125,17 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
 
     func setupChildVC(_ segue: UIStoryboardSegue) {
         if let segueinfo = R.segue.tradeViewController.exchangeViewControllerBuy(segue: segue) {
-            segueinfo.destination.coordinator = ExchangeCoordinator(rootVC: self.rootVC)
+            let coor = ExchangeCoordinator(rootVC: self.rootVC)
+            coor.parent = self
+            segueinfo.destination.coordinator = coor
             segueinfo.destination.type = .buy
+
         }
 
         if let segueinfo = R.segue.tradeViewController.exchangeViewControllerSell(segue: segue) {
-            segueinfo.destination.coordinator = ExchangeCoordinator(rootVC: self.rootVC)
+            let coor = ExchangeCoordinator(rootVC: self.rootVC)
+            coor.parent = self
+            segueinfo.destination.coordinator = coor
             segueinfo.destination.type = .sell
         }
 

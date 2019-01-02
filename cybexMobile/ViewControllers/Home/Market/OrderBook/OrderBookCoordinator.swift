@@ -19,13 +19,12 @@ protocol OrderBookCoordinatorProtocol {
 protocol OrderBookStateManagerProtocol {
     var state: OrderBookState { get }
 
+    func disconnect()
     func subscribe(_ pair: Pair, depth: Int, count: Int)
     func unSubscribe(_ pair: Pair ,depth: Int ,count: Int)
     func resetData(_ pair: Pair)
 
     func updateMarketListHeight(_ height: CGFloat)
-    
-    func orderbookServerConnect()
 }
 
 class OrderBookCoordinator: NavCoordinator {
@@ -37,6 +36,9 @@ class OrderBookCoordinator: NavCoordinator {
 
     let service = MDPWebSocketService("", quoteName: "")
 
+    override func register() {
+        self.monitorService()
+    }
 }
 
 extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
@@ -105,7 +107,7 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
         }
     }
 
-    func monitorService() {
+    func monitorService() { // 第一次执行也会进入callback
         NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { (note) in
             guard let reachability = note.object as? Reachability else {
                 return
@@ -141,9 +143,5 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
             vc.pageContentViewHeight.constant = height + 50
         }
     }
-    
-    func orderbookServerConnect() {
-        service.connect()
-        self.monitorService()
-    }
+
 }

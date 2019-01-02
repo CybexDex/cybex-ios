@@ -44,8 +44,8 @@ extension ExchangeCoordinator: ExchangeCoordinatorProtocol {
     }
 
     if let orderbook = R.storyboard.main.orderBookViewController() {
-      if let container = exchange.containerView, let rightView = container.rightView {
-        orderbook.coordinator = OrderBookCoordinator(rootVC: self.rootVC)
+      if let container = exchange.containerView, let rightView = container.rightView, let parentCoor = parent as? TradeCoordinator {
+        orderbook.coordinator = parentCoor.orderCoodinator
         orderbook.vcType = OrderbookType.tradeView.rawValue
         exchange.addChild(orderbook)
 
@@ -56,9 +56,9 @@ extension ExchangeCoordinator: ExchangeCoordinatorProtocol {
       }
     }
 
-    if let tradeHistory = R.storyboard.business.tradeHistoryViewController() {
+    if let tradeHistory = R.storyboard.business.tradeHistoryViewController(), let parentCoor = parent as? TradeCoordinator {
       if let container = exchange.containerView, let bottomView = container.bottomView {
-        tradeHistory.coordinator = TradeHistoryCoordinator(rootVC: self.rootVC)
+        tradeHistory.coordinator = parentCoor.historyCoodinator
         exchange.addChild(tradeHistory)
 
         tradeHistory.pageType = .trade

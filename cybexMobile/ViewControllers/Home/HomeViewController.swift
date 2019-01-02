@@ -188,7 +188,9 @@ extension HomeViewController {
         } else {
             if let value = data["info"] as? Pair {
                 if let superVC = self.parent as? TradeViewController {
+                    superVC.startLoading()
                     superVC.pair = value
+                    superVC.sendEventActionWith()
                 }
             }
         }

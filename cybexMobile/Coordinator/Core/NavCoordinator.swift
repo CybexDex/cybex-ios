@@ -26,6 +26,7 @@ protocol NavProtocol {
 
 class NavCoordinator: NavProtocol {
     weak var rootVC: BaseNavigationController!
+    var parent: NavProtocol?
 
     init(rootVC: BaseNavigationController) {
         self.rootVC = rootVC

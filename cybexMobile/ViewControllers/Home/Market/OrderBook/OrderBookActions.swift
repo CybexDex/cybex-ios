@@ -23,13 +23,10 @@ struct OrderBookState: BaseState {
     var count: Int = 5
 }
 
-
 struct ChangeDepthAndCountAction: Action {
     var depth: Int
     var count: Int
 }
-
-
 
 struct OrderBook: Equatable {
     struct Order: Equatable {
@@ -77,5 +74,4 @@ class OrderBookViewModel {
         self.isBuy = params.2
     }
 }
-
 

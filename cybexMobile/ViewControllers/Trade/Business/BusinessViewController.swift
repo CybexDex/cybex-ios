@@ -205,6 +205,7 @@ class BusinessViewController: BaseViewController {
                 self.containerView.fee.text = "--"
                 return
             }
+
             self.containerView.fee.text = feeAmount.formatCurrency(digitNum: info.precision) + " \(info.symbol.filterJade)"
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
@@ -362,8 +363,9 @@ extension BusinessViewController: TradePair {
             self.pair = newValue
         }
     }
-    func refresh() {
-        //    refreshView()
+
+    func resetView() {
+        
     }
 }
 

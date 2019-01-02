@@ -151,7 +151,7 @@ class AppCoordinator {
     }
 
     func curDisplayingCoordinator() -> NavCoordinator {
-        if self.rootVC.selectedIndex < self.container.count {
+        if self.container != nil, self.rootVC.selectedIndex < self.container.count {
             return self.container[self.rootVC.selectedIndex]
         }
 
@@ -159,6 +159,10 @@ class AppCoordinator {
     }
 
     func presentedViewController() -> BaseViewController? {
+        if curDisplayingCoordinator().rootVC == nil {
+            return nil
+        }
+        
         if let vc = curDisplayingCoordinator().rootVC.topViewController as? BaseViewController,
             let nav = vc.presentedViewController as? BaseNavigationController,
             let top = nav.topViewController as? BaseViewController {
@@ -169,6 +173,10 @@ class AppCoordinator {
     }
 
     func topViewController() -> BaseViewController? {
+        if curDisplayingCoordinator().rootVC == nil {
+            return nil
+        }
+        
         if let vc = presentedViewController() {
             return vc
         } else if let vc = curDisplayingCoordinator().rootVC.topViewController as? BaseViewController {

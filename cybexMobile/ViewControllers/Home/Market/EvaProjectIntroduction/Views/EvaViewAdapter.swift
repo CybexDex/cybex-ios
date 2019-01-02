@@ -13,7 +13,7 @@ extension EvaView {
     func adapterModelToEvaView(_ evaProject: EvaProject ) {
         evaIcon.kf.setImage(with: URL(string: evaProject.logo))
         projectName.text = evaProject.name
-        projectDesc.text = evaProject.description
+        projectDesc.text = evaProject.premium
         scoreLabel.text = evaProject.score
         hypeScoreLabel.text = evaProject.hypeScore
         riskScoreLabel.text = evaProject.riskScore
@@ -50,7 +50,7 @@ extension EvaView {
         }
         
     
-        projectDetails.text = evaProject.premium
+        projectDetails.text = evaProject.description
 
         updateHeight()
     }
