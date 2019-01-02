@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupUserSetting()
         setupUI()
 
-        monitorNetwork()
+        monitorNetwork() //网络权限
         requestSetting()
 
         start()

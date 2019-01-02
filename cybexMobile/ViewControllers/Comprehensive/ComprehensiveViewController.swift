@@ -49,7 +49,6 @@ class ComprehensiveViewController: BaseViewController {
     }
 
     func setupUI() {
-        self.startLoading()
         self.coordinator?.setupChildrenVC(self)
     }
 
@@ -71,7 +70,6 @@ class ComprehensiveViewController: BaseViewController {
 
             case .loading(let reason):
                 if reason == .initialRefresh {
-                    self.startLoading()
                 }
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))

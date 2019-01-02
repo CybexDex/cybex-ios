@@ -38,20 +38,23 @@ extension AppDelegate {
 
     func monitorNetworkOfSetting() {
         //第一次会直接走回调
-        NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { (note) in
-            guard let reachability = note.object as? Reachability else {
-                return
+        if reachability.connection == .none {
+            NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { (note) in
+                guard let reachability = note.object as? Reachability else {
+                    return
+                }
+
+                switch reachability.connection {
+                case .wifi, .cellular:
+                    self.checkSetting()
+                case .none:
+
+                    break
+                }
+
             }
-
-            switch reachability.connection {
-            case .wifi, .cellular:
-                self.checkSetting()
-            case .none:
-
-                break
-            }
-
         }
+
 
         NotificationCenter.default.addObserver(forName: .NetWorkChanged, object: nil, queue: nil) { (note) in
             self.checkSetting()

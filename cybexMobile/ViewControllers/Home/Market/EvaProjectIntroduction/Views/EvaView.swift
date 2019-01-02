@@ -40,7 +40,6 @@ class EvaView: CybexBaseView {
     
     func setupUI() {
         clearBgColor()
-        bottomMargin = 16
         
         if ThemeManager.currentThemeIndex == 0 {
             scoreBackground.image = R.image.img_score_dark()

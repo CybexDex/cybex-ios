@@ -65,13 +65,6 @@ class TradeViewController: BaseViewController {
             default:
                 break
             }
-
-            for vc in children {
-                if let vc = vc as? TradePair {
-                    vc.disappear()
-                }
-            }
-            currentTopViewController?.appear()
         }
     }
 
@@ -258,6 +251,13 @@ extension TradeViewController {
     @objc func sendBtnAction(_ data: [String: Any]) {
         if let seleIndex = data["selectedIndex"] as? Int {
             selectedIndex = seleIndex
+
+            for vc in children {
+                if let vc = vc as? TradePair {
+                    vc.disappear()
+                }
+            }
+            currentTopViewController?.appear()
         }
     }
 }

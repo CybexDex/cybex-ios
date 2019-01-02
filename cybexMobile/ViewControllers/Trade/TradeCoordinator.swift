@@ -40,12 +40,11 @@ class TradeCoordinator: NavCoordinator {
         let coordinator = TradeCoordinator(rootVC: root)
         vc.coordinator = coordinator
         coordinator.store.dispatch(RouteContextAction(context: context))
-        return vc
-    }
 
-    override func register() {
-        orderCoodinator = OrderBookCoordinator(rootVC: self.rootVC)
-        historyCoodinator = TradeHistoryCoordinator(rootVC: self.rootVC)
+        coordinator.orderCoodinator = OrderBookCoordinator(rootVC: root)
+        coordinator.historyCoodinator = TradeHistoryCoordinator(rootVC: root)
+
+        return vc
     }
 
     var homeVCTopConstaint: NSLayoutConstraint!
