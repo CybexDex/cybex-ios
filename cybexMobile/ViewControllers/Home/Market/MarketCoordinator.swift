@@ -59,11 +59,13 @@ extension MarketCoordinator: MarketCoordinatorProtocol {
     
     func setupChildViewControllers(_ pair: Pair) -> [BaseViewController] {
         let vc = R.storyboard.main.orderBookViewController()!
+        vc.pair = pair
         let coordinator = OrderBookCoordinator(rootVC: self.rootVC)
         vc.coordinator = coordinator
         vc.view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
         
         let vc2 = R.storyboard.main.tradeHistoryViewController()!
+        vc2.pair = pair
         let coordinator2 = TradeHistoryCoordinator(rootVC: self.rootVC)
         vc2.coordinator = coordinator2
         vc2.view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
@@ -92,10 +94,8 @@ extension MarketCoordinator: MarketCoordinatorProtocol {
     
     func refreshChildViewController(_ vcs: [BaseViewController], pair: Pair) {
         for vc in vcs {
-            if let vc = vc as? OrderBookViewController {
-                vc.pair = pair
-            } else if let vc = vc as? TradeHistoryViewController {
-                vc.pair = pair
+            if let vc = vc as? TradeHistoryViewController {
+                vc.refresh()
             }
         }
     }

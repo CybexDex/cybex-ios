@@ -39,7 +39,9 @@ extension TradeHistoryCoordinator: TradeHistoryStateManagerProtocol {
     }
 
     func resetData(_ pair: Pair) {
-        self.store.dispatch(FetchedFillOrderData(data: [], pair: pair))
+        Await.Queue.serialAsync.async {
+            self.store.dispatch(FetchedFillOrderData(data: [], pair: pair))
+        }
     }
 
     func fetchData(_ pair: Pair) {

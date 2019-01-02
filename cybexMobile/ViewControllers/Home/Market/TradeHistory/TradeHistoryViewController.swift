@@ -50,6 +50,23 @@ class TradeHistoryViewController: BaseViewController {
         setupEvent()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if pageType == .market {
+            skipFetch = false
+            refreshView()
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if pageType == .market {
+            skipFetch = true
+        }
+    }
+
     func refreshView() {
         guard let pair = pair, let baseInfo = appData.assetInfo[(pair.base)], let quoteInfo = appData.assetInfo[(pair.quote)], !skipFetch else { return }
 
@@ -99,16 +116,16 @@ class TradeHistoryViewController: BaseViewController {
                                                   object: nil)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
     override func configureObserveState() {
         self.coordinator!.state.data.asObservable()
             .subscribe(onNext: {[weak self] (data) in
                 guard let self = self else { return }
 
-                self.refreshData()
+                if self.pageType == .market {
+                    self.data = data
+                } else {
+                    self.refreshData()
+                }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }

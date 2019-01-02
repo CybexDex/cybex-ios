@@ -107,7 +107,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         appData.tickerData.asObservable().filter({[weak self] (result) -> Bool in
             guard let self = self else { return false}
             if self.vcType == ViewType.comprehensive.rawValue {
-                if result.count == MarketConfiguration.shared.marketPairs.value.count {
+                if result.count == MarketConfiguration.shared.marketPairs.value.count, result.count != 0 {
                     return true
                 }
             } else {

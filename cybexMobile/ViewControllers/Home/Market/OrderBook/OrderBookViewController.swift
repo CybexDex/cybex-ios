@@ -33,6 +33,22 @@ class OrderBookViewController: BaseViewController {
         super.viewDidLoad()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if vcType == OrderbookType.contentView.rawValue {
+            fetchData()
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if vcType == OrderbookType.contentView.rawValue {
+            disappear()
+        }
+    }
+
     func fetchData() {
         guard let pair = pair else { return }
 
