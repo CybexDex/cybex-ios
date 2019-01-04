@@ -40,12 +40,10 @@ class OrderBookCoordinator: NavCoordinator {
         self.service.connect()
 
         service.tickerDataDidReceived.delegate(on: self) { (self, data) in
-            print("---test order book received ticker")
             self.store.dispatch(FetchLastPriceAction(price: data.0, pair: data.1))
         }
 
         service.orderbookDataDidReceived.delegate(on: self) { (self, orderbook) in
-            print("---test order book received data")
             self.store.dispatch(FetchedOrderBookData(data: orderbook.0, pair: orderbook.1))
         }
         self.monitorService()
@@ -92,27 +90,21 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
 
         if !service.checkNetworConnected() {
             service.mdpServiceDidConnected.delegate(on: self) { (self, _) in
-                print("---test order book connected")
                 if let p = self.state.pair.value {
                     self.subscribe(p, depth: self.state.depth.value, count: self.state.count)
                 }
             }
             service.tickerDataDidReceived.delegate(on: self) { (self, data) in
-                print("---test order book received ticker")
                 self.store.dispatch(FetchLastPriceAction(price: data.0, pair: data.1))
             }
             
             service.orderbookDataDidReceived.delegate(on: self) { (self, orderbook) in
-                print("---test order book received data")
                 self.store.dispatch(FetchedOrderBookData(data: orderbook.0, pair: orderbook.1))
             }
-            print("---test order book connecting")
 
             service.reconnect()
         }
         else {
-            print("---test order book send")
-
             self.service.subscribeOrderBook(depth, count: count)
             self.service.subscribeTicker()
         }
@@ -120,7 +112,6 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
     
     func unSubscribe(_ pair: Pair ,depth: Int ,count: Int) {
         if service.checkNetworConnected() {
-            print("---test order book disconnecting")
             self.service.unSubscribeOrderBook(depth, count: count)
             self.service.unSubscribeTicker()
         }

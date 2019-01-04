@@ -510,7 +510,6 @@
 		73539C2E21799039008395AC /* SwifterSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C2421799037008395AC /* SwifterSwift.framework */; };
 		73539C2F21799039008395AC /* SwiftRichString.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C2521799037008395AC /* SwiftRichString.framework */; };
 		73539C3021799039008395AC /* ESPullToRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C2621799038008395AC /* ESPullToRefresh.framework */; };
-		73539C3121799039008395AC /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C2721799038008395AC /* SwiftyBeaver.framework */; };
 		73539C3221799039008395AC /* TinyConstraints.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C2821799039008395AC /* TinyConstraints.framework */; };
 		73539C37217992F1008395AC /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C33217992EF008395AC /* Fabric.framework */; };
 		73539C38217992F1008395AC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C34217992EF008395AC /* Crashlytics.framework */; };
@@ -1369,7 +1368,6 @@
 		73539C2421799037008395AC /* SwifterSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwifterSwift.framework; path = Carthage/Build/iOS/SwifterSwift.framework; sourceTree = "<group>"; };
 		73539C2521799037008395AC /* SwiftRichString.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftRichString.framework; path = Carthage/Build/iOS/SwiftRichString.framework; sourceTree = "<group>"; };
 		73539C2621799038008395AC /* ESPullToRefresh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ESPullToRefresh.framework; path = Carthage/Build/iOS/ESPullToRefresh.framework; sourceTree = "<group>"; };
-		73539C2721799038008395AC /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
 		73539C2821799039008395AC /* TinyConstraints.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TinyConstraints.framework; path = Carthage/Build/iOS/TinyConstraints.framework; sourceTree = "<group>"; };
 		73539C33217992EF008395AC /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Carthage/Build/iOS/Fabric.framework; sourceTree = "<group>"; };
 		73539C34217992EF008395AC /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Carthage/Build/iOS/Crashlytics.framework; sourceTree = "<group>"; };
@@ -1770,7 +1768,6 @@
 				73539C2E21799039008395AC /* SwifterSwift.framework in Frameworks */,
 				73539C2F21799039008395AC /* SwiftRichString.framework in Frameworks */,
 				73539C3021799039008395AC /* ESPullToRefresh.framework in Frameworks */,
-				73539C3121799039008395AC /* SwiftyBeaver.framework in Frameworks */,
 				73539C3221799039008395AC /* TinyConstraints.framework in Frameworks */,
 				73A3306D219420B900707D8F /* ChatRoom.framework in Frameworks */,
 				73539C1A21798D26008395AC /* EFQRCode.framework in Frameworks */,
@@ -3885,7 +3882,6 @@
 				73539C2421799037008395AC /* SwifterSwift.framework */,
 				73539C2521799037008395AC /* SwiftRichString.framework */,
 				73539C2021799035008395AC /* SwiftTheme.framework */,
-				73539C2721799038008395AC /* SwiftyBeaver.framework */,
 				73539C2821799039008395AC /* TinyConstraints.framework */,
 				73539C2121799035008395AC /* XLActionController.framework */,
 				73539C0E21798D24008395AC /* EFQRCode.framework */,

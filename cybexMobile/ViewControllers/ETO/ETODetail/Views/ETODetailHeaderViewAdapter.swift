@@ -23,7 +23,6 @@ extension ETODetailHeaderView {
 
         model.detailTime.asObservable().subscribe(onNext: { [weak self](time) in
             guard let self = self else {return}
-            log.debug("timeState :: \(model.timeState)")
             self.timeLabel.text = model.timeState + time
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 

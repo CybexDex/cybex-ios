@@ -127,7 +127,7 @@ open class DNSPageTitleView: UIView {
     /// - Parameter index: 需要点击的titleView的下标
     public func selectedTitle(inIndex index: Int) {
         if index > titles.count || index < 0 {
-            print("DNSPageTitleView -- selectedTitle: 数组越界了, index的值超出有效范围");
+            return
         }
 
         clickHandler?(self, index)

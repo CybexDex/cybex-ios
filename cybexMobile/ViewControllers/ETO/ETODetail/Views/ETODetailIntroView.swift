@@ -81,8 +81,4 @@ class ETODetailIntroView: CybexBaseView {
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.ETODetailIntroViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
     }
-
-    deinit {
-        log.debug("ETODetailIntroView delloc -- \(self)")
-    }
 }

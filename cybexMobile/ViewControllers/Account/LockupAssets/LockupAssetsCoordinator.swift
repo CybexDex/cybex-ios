@@ -73,7 +73,6 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
                                                                          claimed_own: sender.owner)
 
                         let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-                            print("BroadcastTransactionRequest 转账请求 \(data)")
                             if String(describing: data) == "<null>"{
                                 callback(true)
                             } else {

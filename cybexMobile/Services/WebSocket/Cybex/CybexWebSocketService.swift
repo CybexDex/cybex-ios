@@ -101,7 +101,7 @@ class CybexWebSocketService: NSObject {
     private func detectFastNode() {
         isDetecting = true
         self.currentNode = nil
-        log.debug("detecting node .......")
+        Log.print("detecting node .......")
 
         self.testsockets.removeAll()
 
@@ -146,7 +146,7 @@ class CybexWebSocketService: NSObject {
     }
 
     func disconnect() {
-        log.warning("websocket now disconnect by u")
+        Log.print("websocket now disconnect by u")
 
         self.isClosing = true
 
@@ -303,7 +303,7 @@ class CybexWebSocketService: NSObject {
 
     private func connectNode(node: NodeURLString) {
         if socket.readyState != .OPEN {
-            log.info("connecting node: \(node.rawValue)")
+            Log.print("connecting node: \(node.rawValue)")
 
             self.idGenerator = JsonIdGenerator()
             self.batchFactory.idGenerator = self.idGenerator
@@ -331,7 +331,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
             let data = try? writeJSON.rawData()
             try? webSocket.send(data: data)
         } else {
-            log.info(" node: \(webSocket.url!.absoluteString) --- connected")
+            Log.print(" node: \(webSocket.url!.absoluteString) --- connected")
 
             isConnecting = false
             self.register()
@@ -363,7 +363,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
 
             }
         } else {
-            log.error(error)
+            Log.print(error)
 
             disconnect()
         }

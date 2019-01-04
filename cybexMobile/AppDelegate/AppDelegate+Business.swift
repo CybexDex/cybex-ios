@@ -55,7 +55,9 @@ extension AppDelegate {
             }
         }
 
-
+        #if targetEnvironment(simulator) //模拟器第一次收不到 NetWorkChanged 通知
+            self.checkSetting()
+        #endif
         NotificationCenter.default.addObserver(forName: .NetWorkChanged, object: nil, queue: nil) { (note) in
             self.checkSetting()
         }

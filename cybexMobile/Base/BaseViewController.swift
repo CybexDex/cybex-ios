@@ -119,7 +119,7 @@ class BaseViewController: UIViewController {
     }
 
     deinit {
-        print("dealloc: \(self)")
+        Log.print("dealloc: \(self)")
     }
 }
 

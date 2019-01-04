@@ -135,7 +135,6 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
 
         CybexChainHelper.calculateFee(operation,
                                       operationID: .limitOrderCancel, focusAssetId: feeId) { (success, amount, assetID) in
-                        print("手续费是否成功: \(success)")
                         if success {
                             CybexChainHelper.blockchainParams { (blockchainParams) in
                                 guard let asset = appData.assetInfo[assetID] else {return}
@@ -149,11 +148,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
                                     fee_id: assetID.getSuffixID,
                                     fee_amount: (amount * pow(10, asset.precision)).int64Value) {
 
-                                    print("blockchainParams:\(jsonStr)")
-
                                     let request = BroadcastTransactionRequest(response: { (data) in
-                                        print("提交信息---\(data)")
-
                                         if String(describing: data) == "<null>" {
                                             callback(true)
                                         } else {

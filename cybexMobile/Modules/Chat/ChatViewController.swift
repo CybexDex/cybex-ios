@@ -432,51 +432,40 @@ extension ChatViewController: MessagesDataSource {
 extension ChatViewController: MessageCellDelegate {
     
     func didTapAvatar(in cell: MessageCollectionViewCell) {
-        print("Avatar tapped")
     }
     
     func didTapMessage(in cell: MessageCollectionViewCell) {
-        print("Message tapped")
         //        self.coordinator?.send("xxx", username: "", sign: "")
     }
     
     func didTapCellTopLabel(in cell: MessageCollectionViewCell) {
-        print("Top cell label tapped")
     }
     
     func didTapMessageTopLabel(in cell: MessageCollectionViewCell) {
-        print("Top message label tapped")
     }
     
     func didTapMessageBottomLabel(in cell: MessageCollectionViewCell) {
-        print("Bottom label tapped")
     }
     
     func didTapAccessoryView(in cell: MessageCollectionViewCell) {
-        print("Accessory view tapped")
     }
 }
 
 extension ChatViewController: MessageLabelDelegate {
     
     func didSelectAddress(_ addressComponents: [String: String]) {
-        print("Address Selected: \(addressComponents)")
     }
     
     func didSelectDate(_ date: Date) {
-        print("Date Selected: \(date)")
     }
     
     func didSelectPhoneNumber(_ phoneNumber: String) {
-        print("Phone Number Selected: \(phoneNumber)")
     }
     
     func didSelectURL(_ url: URL) {
-        print("URL Selected: \(url)")
     }
     
     func didSelectTransitInformation(_ transitInformation: [String: String]) {
-        print("TransitInformation Selected: \(transitInformation)")
     }
 }
 

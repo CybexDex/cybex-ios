@@ -7,16 +7,11 @@
 //
 
 import Foundation
-import SwiftyBeaver
 import AlamofireNetworkActivityLogger
-
-let log = SwiftyBeaver.self
 
 extension AppDelegate {
     func setupLog() {
         NetworkActivityLogger.shared.startLogging()
         NetworkActivityLogger.shared.level = .error
-        let console = ConsoleDestination()
-        log.addDestination(console)
     }
 }

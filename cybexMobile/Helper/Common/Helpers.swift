@@ -12,19 +12,25 @@ typealias CommonCallback = () -> Void
 typealias CommonAnyCallback = (Any) -> Void
 
 struct Log {
+    //debug crash only
     static func assertionFailure(_ message: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line) {
         Swift.assertionFailure("[Log] \(message())", file: file, line: line)
     }
 
+    //debug release crash
     static func fatalError(_ message: @autoclosure () -> String, file: StaticString = #file, line: UInt = #line) -> Never {
         Swift.fatalError("[Log] \(message())", file: file, line: line)
     }
 
     static func print(_ items: Any...) {
+        #if DEBUG
+
         let s = items.reduce("") { result, next in
             return result + String(describing: next)
         }
         Swift.print("[Log] \(s)")
+
+        #endif
     }
 }
 

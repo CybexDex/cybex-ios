@@ -89,7 +89,6 @@ extension TradeLineView {
         model.orderbook.asObservable().subscribe(onNext: { [weak self](orderbook) in
             guard let self = self, let data = orderbook else { return }
             if self.price.text != data.price.formatCurrency(digitNum: self.pricePrecision) {
-                print("self.price.text: \(self.price.text)  data.price: \(data.price.formatCurrency(digitNum: self.pricePrecision))")
                 self.price.text  = data.price.formatCurrency(digitNum: self.pricePrecision)
             }
             if self.amount.text != data.volume.suffixNumber(digitNum: self.amountPrecision) {
