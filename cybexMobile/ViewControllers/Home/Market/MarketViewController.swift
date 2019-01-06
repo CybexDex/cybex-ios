@@ -55,7 +55,7 @@ class MarketViewController: BaseViewController {
 
             case .macd:
                 CBConfiguration.sharedConfiguration.main.indicatorType = .MACD
-                self.pageContentViewHeight.constant = 300
+//                self.pageContentViewHeight.constant = 300
             case .boll:
                 CBConfiguration.sharedConfiguration.main.indicatorType = .BOLL(7)
             case .none:
@@ -110,7 +110,7 @@ class MarketViewController: BaseViewController {
         marketDetailView.baseName = baseName
         marketDetailView.quoteName = quoteName
 
-        setupPageView()
+//        setupPageView()
 
         startLoading()
         refreshDetailView()
@@ -229,9 +229,9 @@ class MarketViewController: BaseViewController {
             refreshDetailView()
             fetchKlineData(hiddenKLine)
         }
-        if let pageChildVCs = pageContentView.childViewControllers as? [BaseViewController] {
-            coordinator?.refreshChildViewController(pageChildVCs, pair: pair)
-        }
+//        if let pageChildVCs = pageContentView.childViewControllers as? [BaseViewController] {
+//            coordinator?.refreshChildViewController(pageChildVCs, pair: pair)
+//        }
     }
 
     func fetchKlineData(_ hiddenKLine: Bool = true) {
@@ -393,6 +393,15 @@ class MarketViewController: BaseViewController {
         if isVisible {
             updateIndex()
             refreshView(false, isRefreshSelf: !kLineSpecial)
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segueinfo = R.segue.marketViewController.marketDetailPageTabViewController(segue: segue) {
+            segueinfo.destination.pair = self.pair
+            if let rootNav = self.navigationController as? BaseNavigationController {
+                segueinfo.destination.rootNav = rootNav
+            }
         }
     }
 }

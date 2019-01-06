@@ -179,6 +179,7 @@ class CybexBaseView: UIControl {
         foreView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         foreView.theme1BgColor = UIColor.darkTwo
         foreView.theme2BgColor = UIColor.white
+
         insertSubview(foreView, at: 0)
 
         self.xibView = view

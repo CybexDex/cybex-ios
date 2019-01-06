@@ -14,6 +14,7 @@ struct ComprehensiveItem: HandyJSON {
     var desc: String = ""
     var icon: String = ""
     var link: String = ""
+    var needlogin: Bool = true
 }
 
 struct ComprehensiveAnnounce: HandyJSON {

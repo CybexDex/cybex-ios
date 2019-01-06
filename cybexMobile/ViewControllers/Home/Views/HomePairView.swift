@@ -32,6 +32,7 @@ class HomePairView: UIView {
 
     @IBOutlet weak var icon: UIImageView!
 
+    var ignoreInfoWhenZeroPercent = false
     var base: String!
     var quote: String!
     var data: Any? {
@@ -39,19 +40,23 @@ class HomePairView: UIView {
             guard let ticker = data as? Ticker,
                 let baseInfo = appData.assetInfo[ticker.base],
                 let quoteInfo = appData.assetInfo[ticker.quote] else { return }
-            
+
             let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(Pair(base: ticker.base, quote: ticker.quote))
             self.asset2.text = quoteInfo.symbol.filterJade
             self.asset1.text = "/" + baseInfo.symbol.filterJade
+
             let url = AppConfiguration.ServerIconsBaseURLString +
                 ticker.quote.replacingOccurrences(of: ".", with: "_") +
                 "_grey.png"
             self.icon.kf.setImage(with: URL(string: url))
             self.volume.text = ticker.baseVolume.suffixNumber(digitNum: AppConfiguration.amountPrecision)
+
             self.price.text = ticker.latest.formatCurrency(digitNum: tradePrecision.price)
+
             self.bulking.text = (ticker.incre == .greater ? "+" : "") +
                 ticker.percentChange.formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%"
             self.highLowContain.backgroundColor = ticker.incre.color()
+
             let change = ticker.percentChange.decimal()
             if change > 1000 {
                 self.bulking.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
@@ -64,6 +69,16 @@ class HomePairView: UIView {
                 price = latest * AssetConfiguration.shared.rmbOf(asset: baseAsset)
             }
             self.rbmL.text = price == 0 ? "-" : "≈¥" + price.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
+
+            if ignoreInfoWhenZeroPercent, ticker.incre != .greater {
+                self.asset2.text = "--"
+                self.asset1.text = "--"
+                self.price.text = "--"
+                self.rbmL.text = "--"
+                self.volume.text = "--"
+                self.bulking.text = "0.00%"
+                self.highLowContain.backgroundColor = UIColor.coolGrey
+            }
         }
     }
 

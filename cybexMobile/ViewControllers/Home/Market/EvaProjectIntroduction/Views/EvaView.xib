@@ -118,7 +118,7 @@
                                 <constraint firstAttribute="height" constant="52" id="YgJ-WC-Cmz"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SOCRE:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mDI-l1-3xW">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCORE:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mDI-l1-3xW">
                             <rect key="frame" x="21.000000000000004" y="15.999999999999998" width="60.333333333333343" height="20.333333333333329"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -179,6 +179,7 @@
                                         <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
                                             <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="eva_hyper_score"/>
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFw-Cn-KNf">
@@ -212,6 +213,7 @@
                                         <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
                                             <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="eva_risk_score"/>
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lE-ZA-b5W">
@@ -245,6 +247,7 @@
                                         <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
                                             <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="eva_expection"/>
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opF-F2-J3F">
@@ -478,7 +481,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="1000" text="Introduction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qih-Rq-VVi">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Introduction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qih-Rq-VVi">
                     <rect key="frame" x="0.0" y="440" width="78.333333333333329" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -487,7 +490,7 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="locali" value="eva_introduction"/>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="--" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhc-Ob-bNK" customClass="BaseLabel" customModule="cybexMobile" customModuleProvider="target">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhc-Ob-bNK" customClass="BaseLabel" customModule="cybexMobile" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="465" width="375" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
@@ -512,7 +515,6 @@
                 <constraint firstItem="nn3-23-IUg" firstAttribute="leading" secondItem="eAH-Iv-jiT" secondAttribute="leading" id="5bI-da-SMh"/>
                 <constraint firstItem="Qih-Rq-VVi" firstAttribute="top" secondItem="HyE-pR-lsC" secondAttribute="bottom" constant="16" id="7FJ-sZ-mtY"/>
                 <constraint firstItem="jfT-ij-s9z" firstAttribute="trailing" secondItem="34V-7p-jj8" secondAttribute="trailing" constant="21" id="9wJ-58-jcQ"/>
-                <constraint firstItem="jfT-ij-s9z" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lhc-Ob-bNK" secondAttribute="bottom" priority="999" id="CDa-Zz-uA6"/>
                 <constraint firstItem="PDR-Vn-ckL" firstAttribute="top" secondItem="nn3-23-IUg" secondAttribute="bottom" constant="16" id="Dpz-YM-qjc"/>
                 <constraint firstItem="HyE-pR-lsC" firstAttribute="leading" secondItem="eAH-Iv-jiT" secondAttribute="leading" id="HQc-g2-WzE"/>
                 <constraint firstItem="jfT-ij-s9z" firstAttribute="trailing" secondItem="PDR-Vn-ckL" secondAttribute="trailing" id="Hrf-3d-eUY"/>

@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import ReSwift
 import Localize_Swift
+import XLPagerTabStrip
 
 enum TradeHistoryPageType {
     case market
@@ -26,7 +27,6 @@ struct TradeHistoryViewModel {
 }
 
 class TradeHistoryViewController: BaseViewController {
-
     @IBOutlet weak var historyView: TradeHistoryView!
 
     var coordinator: (TradeHistoryCoordinatorProtocol & TradeHistoryStateManagerProtocol)?
@@ -56,6 +56,7 @@ class TradeHistoryViewController: BaseViewController {
         if pageType == .market {
             skipFetch = false
             refreshView()
+            self.coordinator?.updateMarketListHeight(600)
         }
     }
 
@@ -96,7 +97,6 @@ class TradeHistoryViewController: BaseViewController {
         }
         if parentVC.type.rawValue == grandVC.selectedIndex {
             self.data = data
-            self.coordinator?.updateMarketListHeight(500)
         }
     }
 
@@ -158,5 +158,11 @@ extension TradeHistoryViewController: TradePair {
 
     func disappear() {
         skipFetch = true
+    }
+}
+
+extension TradeHistoryViewController: IndicatorInfoProvider {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: R.string.localizable.mark_trade_history.key.localized())
     }
 }

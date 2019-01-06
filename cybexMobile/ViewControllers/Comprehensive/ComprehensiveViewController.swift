@@ -161,12 +161,14 @@ extension ComprehensiveViewController {
     @objc func comprehensiveItemViewDidClicked(_ data: [String: Any]) {
         guard let middleItems = self.coordinator?.state.middleItems.value,
             let index = data["index"] as? Int else { return }
-        if !UserManager.shared.isLoginIn {
+
+        let midlleItem = middleItems[index]
+
+        if midlleItem.needlogin, !UserManager.shared.isLoginIn {
             appCoodinator.showLogin()
             return
         }
 
-        let midlleItem = middleItems[index]
 
         if midlleItem.link.contains(AppConfiguration.GameBaseURLString) {
             if Defaults[.hasCode] == true {
@@ -178,7 +180,7 @@ extension ComprehensiveViewController {
             return
         }
         
-        openUrl(midlleItem.link)
+        openUrl(midlleItem.link, needLogin: midlleItem.needlogin)
     }
     
     @objc func ETOHomeBannerViewDidClicked(_ data: [String: Any]) {
@@ -200,9 +202,9 @@ extension ComprehensiveViewController {
         }
     }
 
-    func openUrl(_ url: String) {
+    func openUrl(_ url: String, needLogin: Bool = true) {
         if url.contains("cybexapp://") {
-            if !UserManager.shared.isLoginIn {
+            if needLogin, !UserManager.shared.isLoginIn {
                 appCoodinator.showLogin()
                 return
             }

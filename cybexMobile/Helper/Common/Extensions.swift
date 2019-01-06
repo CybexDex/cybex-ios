@@ -64,6 +64,20 @@ public struct Version: Equatable, Comparable {
     
 }
 
+extension UIView {
+    var heightWithSafeAreaTop: CGFloat {
+        guard let rootView = UIApplication.shared.keyWindow else { return 0 }
+
+        if #available(iOS 11.0, *) {
+            let topInset = rootView.safeAreaInsets.top
+
+            return self.height + topInset
+        } else {
+            return self.height
+        }
+    }
+}
+
 extension UIViewController {
     
     func openStoreProductWithiTunesItemIdentifier(_ identifier: String) {

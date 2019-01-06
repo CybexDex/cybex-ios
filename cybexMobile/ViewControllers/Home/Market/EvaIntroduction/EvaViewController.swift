@@ -8,13 +8,15 @@
 
 import Foundation
 import Reachability
+import XLPagerTabStrip
 
 class EvaViewController: BaseViewController {
     @IBOutlet weak var evaView: EvaView!
     var projectName: String?
     var tokenName: String?
 
-    weak var parentVC: MarketViewController?
+    var containerViewController: MarketDetailPageTabViewController?
+    var data: EvaProject?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +43,20 @@ class EvaViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        self.refreshView()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+    }
+
+    func refreshView() {
+        guard let model = data else { return }
+        self.evaView.adapterModelToEvaView(model)
+        self.evaView.updateHeight()
+        self.containerViewController?.updateMarketListHeight(self.evaView.heightWithSafeAreaTop + 76)
     }
 
     func fetchData() {
@@ -50,7 +66,10 @@ class EvaViewController: BaseViewController {
             guard let evaProject = EvaProject.deserialize(from: json.dictionaryObject) else {
                 return
             }
-            self.evaView.adapterModelToEvaView(evaProject)
+            self.data = evaProject
+            if self.isVisible {
+                self.refreshView()
+            }
         }, error: { (error) in
 
         }) { (error) in
@@ -58,4 +77,10 @@ class EvaViewController: BaseViewController {
         }
     }
 
+}
+
+extension EvaViewController: IndicatorInfoProvider {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: R.string.localizable.eva_title_introduction.key.localized())
+    }
 }

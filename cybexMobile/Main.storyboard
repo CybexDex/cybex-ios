@@ -1226,35 +1226,26 @@ Cg
                                             <constraint firstAttribute="height" constant="388" id="nAh-Cn-6Id"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sja-Ii-vIq" customClass="DNSPageTitleView" customModule="cybexMobile">
-                                        <rect key="frame" x="0.0" y="492" width="375" height="44"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <containerView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="U6p-Ds-bTu">
+                                        <rect key="frame" x="0.0" y="492" width="375" height="128"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="JdO-Ql-C2x"/>
+                                            <constraint firstAttribute="height" constant="128" id="o7E-5a-s1E"/>
                                         </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycn-3R-A7g" customClass="DNSPageContentView" customModule="cybexMobile">
-                                        <rect key="frame" x="0.0" y="544" width="375" height="540"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="540" id="Atp-l9-2xI"/>
-                                        </constraints>
-                                    </view>
+                                        <connections>
+                                            <segue destination="2Bh-py-Yd5" kind="embed" identifier="MarketDetailPageTabViewController" id="Q4I-Qe-6ep"/>
+                                        </connections>
+                                    </containerView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="7lw-Ew-2wL" firstAttribute="width" secondItem="0WE-o2-bsL" secondAttribute="width" id="0I9-Dz-Joc"/>
-                                    <constraint firstItem="ycn-3R-A7g" firstAttribute="leading" secondItem="0WE-o2-bsL" secondAttribute="leading" id="2Ka-hM-MD0"/>
                                     <constraint firstAttribute="trailing" secondItem="7lw-Ew-2wL" secondAttribute="trailing" id="3tC-I1-cIr"/>
                                     <constraint firstItem="7lw-Ew-2wL" firstAttribute="leading" secondItem="0WE-o2-bsL" secondAttribute="leading" id="4cd-SX-40f"/>
-                                    <constraint firstAttribute="trailing" secondItem="ycn-3R-A7g" secondAttribute="trailing" id="4pK-3v-I3h"/>
-                                    <constraint firstAttribute="bottom" secondItem="ycn-3R-A7g" secondAttribute="bottom" id="CNQ-ta-VjC"/>
-                                    <constraint firstAttribute="trailing" secondItem="sja-Ii-vIq" secondAttribute="trailing" id="MLx-zd-L2N"/>
+                                    <constraint firstItem="U6p-Ds-bTu" firstAttribute="top" secondItem="7lw-Ew-2wL" secondAttribute="bottom" id="8zI-c5-gdX"/>
+                                    <constraint firstItem="U6p-Ds-bTu" firstAttribute="leading" secondItem="0WE-o2-bsL" secondAttribute="leading" id="L0N-1C-avg"/>
+                                    <constraint firstAttribute="trailing" secondItem="U6p-Ds-bTu" secondAttribute="trailing" id="TFe-9q-86b"/>
                                     <constraint firstAttribute="trailing" secondItem="sGL-Rt-Thy" secondAttribute="trailing" id="Tav-TA-e1d"/>
-                                    <constraint firstItem="sja-Ii-vIq" firstAttribute="top" secondItem="7lw-Ew-2wL" secondAttribute="bottom" id="Tqi-nE-1sS"/>
                                     <constraint firstItem="sGL-Rt-Thy" firstAttribute="top" secondItem="0WE-o2-bsL" secondAttribute="top" id="cng-Ib-C4y"/>
-                                    <constraint firstItem="sja-Ii-vIq" firstAttribute="leading" secondItem="0WE-o2-bsL" secondAttribute="leading" id="p4j-x2-pTF"/>
-                                    <constraint firstItem="sja-Ii-vIq" firstAttribute="top" secondItem="7lw-Ew-2wL" secondAttribute="bottom" id="t6K-Mp-5aK"/>
-                                    <constraint firstItem="ycn-3R-A7g" firstAttribute="top" secondItem="sja-Ii-vIq" secondAttribute="bottom" constant="8" id="tVC-4B-uga"/>
+                                    <constraint firstAttribute="bottom" secondItem="U6p-Ds-bTu" secondAttribute="bottom" id="ibZ-06-aja"/>
                                     <constraint firstItem="sGL-Rt-Thy" firstAttribute="leading" secondItem="0WE-o2-bsL" secondAttribute="leading" id="zWk-kN-dRp"/>
                                     <constraint firstItem="7lw-Ew-2wL" firstAttribute="top" secondItem="sGL-Rt-Thy" secondAttribute="bottom" id="zqL-Fm-IIn"/>
                                 </constraints>
@@ -1278,7 +1269,6 @@ Cg
                         <constraints>
                             <constraint firstItem="qRg-Wa-ZSD" firstAttribute="trailing" secondItem="0WE-o2-bsL" secondAttribute="trailing" id="6Lw-gE-bfW"/>
                             <constraint firstItem="0WE-o2-bsL" firstAttribute="top" secondItem="qRg-Wa-ZSD" secondAttribute="top" id="Bcl-Hz-O1v"/>
-                            <constraint firstItem="ycn-3R-A7g" firstAttribute="width" secondItem="2aP-Hv-3dh" secondAttribute="width" id="BkV-qS-xDg"/>
                             <constraint firstItem="WzK-tX-ker" firstAttribute="leading" secondItem="qRg-Wa-ZSD" secondAttribute="leading" id="RfL-Ug-rka"/>
                             <constraint firstItem="0WE-o2-bsL" firstAttribute="leading" secondItem="qRg-Wa-ZSD" secondAttribute="leading" id="VLW-kb-pes"/>
                             <constraint firstItem="WzK-tX-ker" firstAttribute="trailing" secondItem="qRg-Wa-ZSD" secondAttribute="trailing" id="h2b-Ia-f9G"/>
@@ -1301,9 +1291,7 @@ Cg
                         <outlet property="detailView" destination="qdl-dg-mGm" id="Sfc-hA-SzB"/>
                         <outlet property="kLineView" destination="7lw-Ew-2wL" id="cRK-JE-v07"/>
                         <outlet property="marketDetailView" destination="qdl-dg-mGm" id="UAm-nc-Ni5"/>
-                        <outlet property="pageContentView" destination="ycn-3R-A7g" id="jfr-qo-nHM"/>
-                        <outlet property="pageContentViewHeight" destination="Atp-l9-2xI" id="y1s-YT-TMU"/>
-                        <outlet property="pageTitleView" destination="sja-Ii-vIq" id="ZcO-YG-BPR"/>
+                        <outlet property="pageContentViewHeight" destination="o7E-5a-s1E" id="0Q5-Ek-MmH"/>
                         <outlet property="pairListView" destination="EWv-Bu-lgd" id="alj-I2-lZV"/>
                         <outlet property="rechargeHeight" destination="XI9-ks-qLm" id="PCc-jd-1l1"/>
                         <outlet property="rechargeView" destination="WzK-tX-ker" id="55e-RF-Rcu"/>
@@ -1416,6 +1404,63 @@ Cg
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K0J-1C-klK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4092" y="2117"/>
+        </scene>
+        <!--Market Detail Page Tab View Controller-->
+        <scene sceneID="onT-Qy-jFJ">
+            <objects>
+                <viewController storyboardIdentifier="MarketDetailPageTabViewController" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="2Bh-py-Yd5" customClass="MarketDetailPageTabViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cEd-5d-oCu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wMX-6p-fzJ" customClass="ButtonBarView" customModule="XLPagerTabStrip">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Kga-Nh-Kdm"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BLS-RP-M9e">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bYu-7N-KSK">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMA-Y8-Ipm">
+                                <rect key="frame" x="0.0" y="44" width="375" height="456"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="wMX-6p-fzJ" firstAttribute="top" secondItem="cEd-5d-oCu" secondAttribute="top" id="3Dc-LD-IbF"/>
+                            <constraint firstItem="pMA-Y8-Ipm" firstAttribute="top" secondItem="wMX-6p-fzJ" secondAttribute="bottom" id="4x3-k8-yed"/>
+                            <constraint firstItem="pMA-Y8-Ipm" firstAttribute="leading" secondItem="cEd-5d-oCu" secondAttribute="leading" id="K9h-qV-Q28"/>
+                            <constraint firstAttribute="bottom" secondItem="pMA-Y8-Ipm" secondAttribute="bottom" id="PqQ-rg-AlK"/>
+                            <constraint firstAttribute="trailing" secondItem="pMA-Y8-Ipm" secondAttribute="trailing" id="jfp-WM-7W5"/>
+                            <constraint firstItem="y1B-A7-dcc" firstAttribute="trailing" secondItem="wMX-6p-fzJ" secondAttribute="trailing" id="tit-ch-7CI"/>
+                            <constraint firstItem="wMX-6p-fzJ" firstAttribute="leading" secondItem="y1B-A7-dcc" secondAttribute="leading" id="wNB-Io-j51"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="y1B-A7-dcc"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="500"/>
+                    <connections>
+                        <outlet property="buttonBarView" destination="wMX-6p-fzJ" id="Z7Q-eU-TwB"/>
+                        <outlet property="containerView" destination="pMA-Y8-Ipm" id="iNG-p9-DQi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="auy-39-UhK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1582" y="-222"/>
         </scene>
     </scenes>
     <resources>

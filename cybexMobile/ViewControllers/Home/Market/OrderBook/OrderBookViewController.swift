@@ -13,6 +13,7 @@ import ReSwift
 import TinyConstraints
 import SwiftyJSON
 import Localize_Swift
+import XLPagerTabStrip
 
 enum OrderbookType: Int {
     case contentView = 1
@@ -20,7 +21,6 @@ enum OrderbookType: Int {
 }
 
 class OrderBookViewController: BaseViewController {
-
     var coordinator: (OrderBookCoordinatorProtocol & OrderBookStateManagerProtocol)?
     var contentView: OrderBookContentView!
     var tradeView: TradeView!
@@ -31,6 +31,7 @@ class OrderBookViewController: BaseViewController {
         setupUI()
 
         super.viewDidLoad()
+        self.coordinator?.updateMarketListHeight(600)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +39,9 @@ class OrderBookViewController: BaseViewController {
 
         if vcType == OrderbookType.contentView.rawValue {
             fetchData()
+        }
+        else {
+            self.coordinator?.updateMarketListHeight(600)
         }
     }
 
@@ -151,7 +155,6 @@ class OrderBookViewController: BaseViewController {
                         self.contentView.data = order
                         self.contentView.tableView.reloadData()
                         self.contentView.tableView.isHidden = false
-                        self.coordinator?.updateMarketListHeight(500)
                     }
                 } else {
                     self.refreshData()
@@ -247,5 +250,11 @@ extension OrderBookViewController: RecordChooseViewControllerDelegate {
         }
         self.tradeView.resetDecimalImage()
         sender.dismiss(animated: false, completion: nil)
+    }
+}
+
+extension OrderBookViewController: IndicatorInfoProvider {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: R.string.localizable.mark_order_book.key.localized())
     }
 }
