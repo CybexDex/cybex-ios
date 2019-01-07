@@ -189,7 +189,7 @@ extension UIViewController: ShowManagerDelegate {
             subView.title.locali = ""
             subView.contentLable.locali = "openedorder_ensure_message"
 
-            ShowToastManager.shared.setUp(title: title, contentView: subView, animationType: .smallBig, middleType: .normal)
+            ShowToastManager.shared.setUp(title: R.string.localizable.tip_title.key.localized(), contentView: subView, animationType: .smallBig, middleType: .normal)
             ShowToastManager.shared.showAnimationInView(self.view)
             ShowToastManager.shared.delegate = self
         }
