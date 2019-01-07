@@ -21,13 +21,13 @@ class AccountOpenedOrdersView: UIView {
     var data: Any? {
         didSet {
             _ = UserManager.shared.balance
-            updateHeaderView()
+//            updateHeaderView()
             self.tableView.reloadData()
         }
     }
 
     @IBAction func segmentDidClicked(_ sender: Any) {
-        updateHeaderView()
+//        updateHeaderView()
         self.tableView.reloadData()
     }
 
@@ -49,8 +49,8 @@ class AccountOpenedOrdersView: UIView {
         let cell = String.init(describing: OpenedOrdersCell.self)
         tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
         tableView.separatorColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
-        headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: 64))
-        tableView.tableHeaderView = headerView
+//        headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: 64))
+//        tableView.tableHeaderView = headerView
     }
 
     override var intrinsicContentSize: CGSize {

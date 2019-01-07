@@ -12,8 +12,6 @@ import SwifterSwift
 
 protocol MarketCoordinatorProtocol {
     func openChatVC(_ sender: Pair)
-    func setupChildViewControllers(_ pair: Pair) -> [BaseViewController]
-    func refreshChildViewController(_ vcs: [BaseViewController], pair: Pair)
     func openTradeViewChontroller(_ isBuy: Bool, pair: Pair)
     func setDropBoxViewController()
 }
@@ -55,45 +53,6 @@ extension MarketCoordinator: MarketCoordinatorProtocol {
         }
 
         return false
-    }
-    
-    func setupChildViewControllers(_ pair: Pair) -> [BaseViewController] {
-        let vc = R.storyboard.main.orderBookViewController()!
-        vc.pair = pair
-        let coordinator = OrderBookCoordinator(rootVC: self.rootVC)
-        vc.coordinator = coordinator
-        vc.view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
-        
-        let vc2 = R.storyboard.main.tradeHistoryViewController()!
-        vc2.pair = pair
-        let coordinator2 = TradeHistoryCoordinator(rootVC: self.rootVC)
-        vc2.coordinator = coordinator2
-        vc2.view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
-        
-        refreshChildViewController([vc, vc2], pair: pair)
-
-        if isExistProjectIntroduction(pair) {
-            let vc3 = R.storyboard.eva.evaViewController()!
-            vc3.tokenName = pair.quote.symbol
-
-            if let projectName = AssetConfiguration.shared.quoteToProjectNames.value[pair.quote.symbol], !projectName.isEmpty {
-                vc3.projectName = projectName
-            }
-            vc3.view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
-
-            return [vc, vc2, vc3]
-        }
-        else {
-            return [vc, vc2]
-        }
-    }
-    
-    func refreshChildViewController(_ vcs: [BaseViewController], pair: Pair) {
-        for vc in vcs {
-            if let vc = vc as? TradeHistoryViewController {
-                vc.refresh()
-            }
-        }
     }
 
     func openTradeViewChontroller(_ isBuy: Bool, pair: Pair) {

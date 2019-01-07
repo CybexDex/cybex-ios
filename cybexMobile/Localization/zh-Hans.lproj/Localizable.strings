@@ -532,6 +532,7 @@
 "openedorder_ensure_title" = "提示";
 "openedorder_ensure_message" = "确认取消订单";
 
+"eva_score" = "综合得分";
 "eva_hyper_score" = "炒作值";
 "eva_risk_score" = "风险值";
 "eva_expection" = "期望值";

@@ -551,6 +551,7 @@
 "game_center_title" = "Game Center";
 "game_center_subtitle" = "Blockchain Games";
 
+"eva_score" = "SCORE";
 "eva_hyper_score" = "Hype Score";
 "eva_risk_score" = "Risk Score";
 "eva_expection" = "Expectation";

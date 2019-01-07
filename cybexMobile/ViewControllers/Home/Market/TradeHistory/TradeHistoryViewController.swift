@@ -117,12 +117,22 @@ class TradeHistoryViewController: BaseViewController {
     }
 
     override func configureObserveState() {
+        appData.otherRequestRelyData.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                if self.isVisible, self.pageType == .market {
+                    self.refreshView()
+                }
+                }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+
         self.coordinator!.state.data.asObservable()
             .subscribe(onNext: {[weak self] (data) in
                 guard let self = self else { return }
 
                 if self.pageType == .market {
-                    self.data = data
+                    if self.isVisible {
+                        self.data = data
+                    }
                 } else {
                     self.refreshData()
                 }
