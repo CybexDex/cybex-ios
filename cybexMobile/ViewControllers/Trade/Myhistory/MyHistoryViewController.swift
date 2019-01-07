@@ -36,6 +36,8 @@ class MyHistoryViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+
+        UserManager.shared.fetchHistoryOfFillOrdersAndTransferRecords()
     }
 
     func setupUI() {

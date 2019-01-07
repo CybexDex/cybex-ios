@@ -253,7 +253,13 @@ extension TransferViewController {
 
     @objc func memo(_ data: [String: Any]) {
         guard let content = data["content"] as? String else { return }
-        if !UserManager.shared.isWithDraw {
+
+        if !content.isEmpty, UserManager.shared.isLocked {
+            self.showPasswordBox()
+            return
+        }
+
+        if !content.isEmpty, !UserManager.shared.isWithDraw {
             showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
             return
         }

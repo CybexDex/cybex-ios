@@ -372,8 +372,8 @@ class UserManager {
             appCoodinator.repeatFetchMarket(.veryLow)
         }
     }
-    var isWithDraw: Bool = false
-    var isTrade: Bool = false
+    var isWithDraw: Bool = false // 写memo 权限
+    var isTrade: Bool = false // 交易权限
     var name: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     var keys: AccountKeys?
     var avatarString: String?
