@@ -22,10 +22,17 @@ extension AppDelegate {
             AppConfiguration.shared.startFetchOuterPrice()
         }).disposed(by: disposeBag)
 
+        CybexWebSocketService.shared.canSendMessageReactive.skip(1).asObservable().subscribe(onNext: { (_) in
+            if CybexConfiguration.shared.chainID.value.isEmpty {
+                CybexConfiguration.shared.getChainId()
+            }
+        }).disposed(by: disposeBag)
+
         Observable.combineLatest(
             MarketConfiguration.shared.marketPairs.skip(1).asObservable(),
             CybexWebSocketService.shared.canSendMessageReactive.skip(1).asObservable()
             ).subscribe(onNext: { (pairs, canSend) in
+
                 if !pairs.isEmpty, canSend {
                     appCoodinator.getLatestData()
                 }
@@ -73,10 +80,6 @@ extension AppDelegate {
 
         if MarketConfiguration.shared.importMarketLists.value.isEmpty {
             MarketConfiguration.shared.fetchTopStickMarkets()
-        }
-
-        if CybexConfiguration.shared.chainID.value.isEmpty {
-            CybexConfiguration.shared.getChainId()
         }
         
         if AssetConfiguration.shared.quoteToProjectNames.value.isEmpty {

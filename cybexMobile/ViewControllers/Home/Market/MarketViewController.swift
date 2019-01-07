@@ -20,8 +20,6 @@ extension NSNotification.Name {
 }
 
 class MarketViewController: BaseViewController {
-    @IBOutlet var pageTitleView: DNSPageTitleView!
-    @IBOutlet var pageContentView: DNSPageContentView!
     @IBOutlet var pageContentViewHeight: NSLayoutConstraint!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var pairListView: PairListHorizantalView!
@@ -49,13 +47,10 @@ class MarketViewController: BaseViewController {
             switch indicator {
             case .ma:
                 CBConfiguration.sharedConfiguration.main.indicatorType = .MA([7, 14, 21])
-
             case .ema:
                 CBConfiguration.sharedConfiguration.main.indicatorType = .EMA([7, 14])
-
             case .macd:
                 CBConfiguration.sharedConfiguration.main.indicatorType = .MACD
-//                self.pageContentViewHeight.constant = 300
             case .boll:
                 CBConfiguration.sharedConfiguration.main.indicatorType = .BOLL(7)
             case .none:
@@ -109,8 +104,6 @@ class MarketViewController: BaseViewController {
         automaticallyAdjustsScrollViewInsets = false
         marketDetailView.baseName = baseName
         marketDetailView.quoteName = quoteName
-
-//        setupPageView()
 
         startLoading()
         refreshDetailView()
@@ -170,54 +163,6 @@ class MarketViewController: BaseViewController {
         self.rechargeView.sell.button.addTarget(self, action: #selector(sell), for: .touchUpInside)
     }
 
-    func setupPageView() {
-        let style = DNSPageStyle()
-        style.titleViewBackgroundColor = UIColor.clear
-        style.isShowCoverView = false
-        style.bottomLineColor = #colorLiteral(red: 1, green: 0.6386402845, blue: 0.3285836577, alpha: 1)
-        style.bottomLineHeight = 2
-        style.isShowBottomLine = true
-        style.titleColor = #colorLiteral(red: 0.5436816812, green: 0.5804407597, blue: 0.6680644155, alpha: 1)
-        style.titleSelectedColor = ThemeManager.currentThemeIndex == 0 ? UIColor.white : #colorLiteral(red: 0.1399003565, green: 0.1798574626, blue: 0.2467218637, alpha: 1)
-        style.titleFont = UIFont.systemFont(ofSize: 14)
-
-        // 设置标题内容
-        var titles = [
-            R.string.localizable.mark_order_book.key.localized(),
-            R.string.localizable.mark_trade_history.key.localized()
-                      ]
-        if let coor = self.coordinator, coor.isExistProjectIntroduction(pair) {
-            titles.append(R.string.localizable.eva_title_introduction.key.localized())
-        }
-
-        // 设置默认的起始位置
-        let startIndex = 0
-
-        // 对titleView进行设置
-        pageTitleView.titles = titles
-        pageTitleView.style = style
-        pageTitleView.currentIndex = startIndex
-
-        // 最后要调用setupUI方法
-        pageTitleView.setupUI()
-
-        // 创建每一页对应的controller
-        let childViewControllers: [BaseViewController] = coordinator!.setupChildViewControllers(pair)
-
-        // 对contentView进行设置
-        pageContentView.childViewControllers = childViewControllers
-        pageContentView.startIndex = startIndex
-        pageContentView.style = style
-
-        // 最后要调用setupUI方法
-        pageContentView.setupUI()
-        pageContentView.collectionView.panGestureRecognizer.require(toFail: AppConfiguration.shared.appCoordinator.curDisplayingCoordinator().rootVC.interactivePopGestureRecognizer!)
-
-        // 让titleView和contentView进行联系起来
-        pageTitleView.delegate = pageContentView
-        pageContentView.delegate = pageTitleView
-    }
-
     func refreshDetailView() {
         detailView.data = ticker
 
@@ -229,9 +174,6 @@ class MarketViewController: BaseViewController {
             refreshDetailView()
             fetchKlineData(hiddenKLine)
         }
-//        if let pageChildVCs = pageContentView.childViewControllers as? [BaseViewController] {
-//            coordinator?.refreshChildViewController(pageChildVCs, pair: pair)
-//        }
     }
 
     func fetchKlineData(_ hiddenKLine: Bool = true) {
@@ -270,7 +212,7 @@ class MarketViewController: BaseViewController {
 
             DispatchQueue.global().async {
                 var dataArray = [CBKLineModel]()
-                for (_, data) in response.enumerated() {
+                for data in response {
 
                     let baseAssetId = self.pair.base
                     let quoteAssetId = self.pair.quote
@@ -355,7 +297,7 @@ class MarketViewController: BaseViewController {
                             dataArray.append(gapModel)
                         }
                     }
-                    if let baseInfo = appData.assetInfo[self.ticker.base], self.timeGap == .oneDay {
+                    if let _ = appData.assetInfo[self.ticker.base], self.timeGap == .oneDay {
                         lastModel = dataArray.last!
                         DispatchQueue.main.async {
                             self.detailView.highLabel.text = "High: " + lastModel.high.decimal.formatCurrency(digitNum: tradePrecision.price)

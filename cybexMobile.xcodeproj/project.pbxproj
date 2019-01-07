@@ -524,13 +524,6 @@
 		73539C4F2179A210008395AC /* URLPatchComponentMatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C452179A20F008395AC /* URLPatchComponentMatchResult.swift */; };
 		73539C502179A210008395AC /* URLPathComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C462179A20F008395AC /* URLPathComponent.swift */; };
 		73539C512179A210008395AC /* URLMatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C472179A20F008395AC /* URLMatchResult.swift */; };
-		73539C5A2179A282008395AC /* DNSPageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C532179A281008395AC /* DNSPageContentView.swift */; };
-		73539C5B2179A282008395AC /* DNSPageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C542179A281008395AC /* DNSPageHelper.swift */; };
-		73539C5C2179A282008395AC /* DNSPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C552179A281008395AC /* DNSPageView.swift */; };
-		73539C5D2179A282008395AC /* DNSPageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C562179A281008395AC /* DNSPageTitleView.swift */; };
-		73539C5E2179A282008395AC /* DNSPageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C572179A281008395AC /* DNSPageViewManager.swift */; };
-		73539C5F2179A282008395AC /* DNSPageCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C582179A281008395AC /* DNSPageCollectionViewFlowLayout.swift */; };
-		73539C602179A282008395AC /* DNSPageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C592179A281008395AC /* DNSPageStyle.swift */; };
 		73539C6F2179AAA8008395AC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C6E2179AAA8008395AC /* libsqlite3.tbd */; };
 		73587E9D2133EB15006CF8A6 /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */; };
 		73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9F21352AD8006CF8A6 /* ETOMGService.swift */; };
@@ -1384,13 +1377,6 @@
 		73539C452179A20F008395AC /* URLPatchComponentMatchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLPatchComponentMatchResult.swift; sourceTree = "<group>"; };
 		73539C462179A20F008395AC /* URLPathComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLPathComponent.swift; sourceTree = "<group>"; };
 		73539C472179A20F008395AC /* URLMatchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLMatchResult.swift; sourceTree = "<group>"; };
-		73539C532179A281008395AC /* DNSPageContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageContentView.swift; sourceTree = "<group>"; };
-		73539C542179A281008395AC /* DNSPageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageHelper.swift; sourceTree = "<group>"; };
-		73539C552179A281008395AC /* DNSPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageView.swift; sourceTree = "<group>"; };
-		73539C562179A281008395AC /* DNSPageTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageTitleView.swift; sourceTree = "<group>"; };
-		73539C572179A281008395AC /* DNSPageViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageViewManager.swift; sourceTree = "<group>"; };
-		73539C582179A281008395AC /* DNSPageCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
-		73539C592179A281008395AC /* DNSPageStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageStyle.swift; sourceTree = "<group>"; };
 		73539C6E2179AAA8008395AC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPCircularProgress.swift; sourceTree = "<group>"; };
 		73587E9F21352AD8006CF8A6 /* ETOMGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOMGService.swift; sourceTree = "<group>"; };
@@ -2911,20 +2897,6 @@
 			path = URLMatcher;
 			sourceTree = "<group>";
 		};
-		73539C522179A281008395AC /* DNSPageView */ = {
-			isa = PBXGroup;
-			children = (
-				73539C582179A281008395AC /* DNSPageCollectionViewFlowLayout.swift */,
-				73539C532179A281008395AC /* DNSPageContentView.swift */,
-				73539C542179A281008395AC /* DNSPageHelper.swift */,
-				73539C592179A281008395AC /* DNSPageStyle.swift */,
-				73539C562179A281008395AC /* DNSPageTitleView.swift */,
-				73539C552179A281008395AC /* DNSPageView.swift */,
-				73539C572179A281008395AC /* DNSPageViewManager.swift */,
-			);
-			path = DNSPageView;
-			sourceTree = "<group>";
-		};
 		73587EA62137C032006CF8A6 /* ETOCrowd */ = {
 			isa = PBXGroup;
 			children = (
@@ -3558,7 +3530,6 @@
 			children = (
 				7345FD8B219EBF7E0066BD0E /* FCUUID */,
 				739EFB4C2181D10E00424061 /* RxGesture */,
-				73539C522179A281008395AC /* DNSPageView */,
 				BF3F4A11835F406941DE98690F1996FF /* Jdenticon */,
 				73539C3B2179A20F008395AC /* URLNavigator */,
 				73539BC72178A7CA008395AC /* AsyncOperation.swift */,
@@ -4834,7 +4805,6 @@
 				B9DE00DA8B7EDD0F9BEA00881C4924C1 /* BusinessTitleCell.swift in Sources */,
 				3B0EB6642103150D00F19C31 /* AccountActions.swift in Sources */,
 				737E597121A5422B001199E4 /* JWT.swift in Sources */,
-				73539C5B2179A282008395AC /* DNSPageHelper.swift in Sources */,
 				73F50BAA213FB5B60071B08D /* Error.swift in Sources */,
 				66A5DD971B80802DF72977E071CAB84D /* BusinessTitleItemView.swift in Sources */,
 				7307A925212518DC00BD6444 /* SwiftIconLabel.swift in Sources */,
@@ -5014,7 +4984,6 @@
 				46CD7B2787FFCD483A5A723E52C54292 /* MarketReducers.swift in Sources */,
 				7333857721C0BD4F0026765F /* UserHelper.swift in Sources */,
 				221EC24D2105CF310059F856 /* TransferActions.swift in Sources */,
-				73539C5D2179A282008395AC /* DNSPageTitleView.swift in Sources */,
 				6B64E2B67481907BE9CFCAE4FCF346A6 /* MarketViewController.swift in Sources */,
 				7260DDBC21A2A2CC00A5E3D6 /* ChatDirectionLabelViewAdapter.swift in Sources */,
 				56C9CE8FDE2020EA4F72F21F30D27087 /* MyHistoryActions.swift in Sources */,
@@ -5085,7 +5054,6 @@
 				72D58291219C188700BB9842 /* ChatDownInputViewAdapter.swift in Sources */,
 				73539C4E2179A210008395AC /* URLMatcher.swift in Sources */,
 				72F817C321BA58F100575F56 /* GameCoordinator.swift in Sources */,
-				73539C602179A282008395AC /* DNSPageStyle.swift in Sources */,
 				CEC8E5E6CEBF33DC5FED8EBCA2AFAAE7 /* PairCardCell.swift in Sources */,
 				737E596421A53CC7001199E4 /* CryptoError.swift in Sources */,
 				7386F2D82121737600ABC924 /* AddressHomeTableViewCellViewView.swift in Sources */,
@@ -5100,7 +5068,6 @@
 				728C2815215A3A910097840A /* RecordChooseCellView.swift in Sources */,
 				7260DDBD21A2A2CC00A5E3D6 /* ChatDirectionLabelView.swift in Sources */,
 				A819B2C87ADE04838AE8D44CF16C53B4 /* PairRechargeView.swift in Sources */,
-				73539C5F2179A282008395AC /* DNSPageCollectionViewFlowLayout.swift in Sources */,
 				70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */,
 				72199D6821044FD100575226 /* RechargeRecodeViewController.swift in Sources */,
 				7391101D21BA509C00412CE1 /* DataBaseApi.swift in Sources */,
@@ -5167,7 +5134,6 @@
 				737F8C352145532A00DD522A /* String+Extensions.swift in Sources */,
 				345CA96631D318F012F0BB80ACD3BCCD /* StyleLabel.swift in Sources */,
 				733714BD2122D32500B2ED90 /* AddressCellView.swift in Sources */,
-				73539C5E2179A282008395AC /* DNSPageViewManager.swift in Sources */,
 				73587EAD2137C057006CF8A6 /* ETOCrowdReducers.swift in Sources */,
 				666C535B0D6573A3C341FC0208A91E71 /* Theme_Extensions.swift in Sources */,
 				1E6EBD4E21D3851900E3EDE7 /* EvaViewAdapter.swift in Sources */,
@@ -5206,7 +5172,6 @@
 				73731D8B21A538AF005B9B3C /* KeychainStore.swift in Sources */,
 				73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */,
 				2E3DB3499E75C0D06068C979CD788B00 /* TradeReducers.swift in Sources */,
-				73539C5A2179A282008395AC /* DNSPageContentView.swift in Sources */,
 				72D5828F219C188700BB9842 /* ChatUpInputViewAdapter.swift in Sources */,
 				72D9DD58210EB60F00963915 /* Periscope.swift in Sources */,
 				72968D212158CEAC00B0AA77 /* WithdrawAndDespoitRecordCoordinator.swift in Sources */,
@@ -5225,7 +5190,6 @@
 				7333857921C0E1AE0026765F /* TradeHelper.swift in Sources */,
 				7333857121BFC7320026765F /* TradeConfigration.swift in Sources */,
 				72199DA22104636900575226 /* TransferDetailReducers.swift in Sources */,
-				73539C5C2179A282008395AC /* DNSPageView.swift in Sources */,
 				73731D9021A53C45005B9B3C /* CryptoData.swift in Sources */,
 				221C616E2137FCCF0021C007 /* ImageShareViewController.swift in Sources */,
 				73539C4D2179A210008395AC /* URLConvertible.swift in Sources */,
