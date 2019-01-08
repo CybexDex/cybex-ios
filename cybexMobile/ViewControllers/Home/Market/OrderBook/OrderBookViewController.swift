@@ -99,7 +99,7 @@ class OrderBookViewController: BaseViewController {
     }
 
     func refreshData() {
-        guard var result = self.coordinator?.state.data.value, let parentVC = self.parent as? ExchangeViewController ,let grandVC = parentVC.parent as? TradeViewController else {
+        guard let result = self.coordinator?.state.data.value, let parentVC = self.parent as? ExchangeViewController ,let grandVC = parentVC.parent as? TradeViewController else {
             self.tradeView.data = OrderBook(bids: [], asks: [])
             return
         }
@@ -108,11 +108,7 @@ class OrderBookViewController: BaseViewController {
             grandVC.endLoading()
         }
 
-        if let pair = self.pair,
-            let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair],
-            let coor = self.coordinator, parentVC.type.rawValue == grandVC.selectedIndex {
-            result.pricePrecision = coor.state.depth.value
-            result.amountPrecision = precision.amount
+        if parentVC.type.rawValue == grandVC.selectedIndex {
             self.tradeView.data = result
         }
     }
@@ -149,10 +145,8 @@ class OrderBookViewController: BaseViewController {
                 guard let self = self else { return }
 
                 if self.vcType == OrderbookType.contentView.rawValue {
-                    if let pair = self.pair, let precision = TradeConfiguration.shared.tradePairPrecisions.value[pair], var order = result {
-                        order.pricePrecision = precision.price
-                        order.amountPrecision = precision.amount
-                        self.contentView.data = order
+                    if let result = result {
+                        self.contentView.data = result
                         self.contentView.tableView.reloadData()
                         self.contentView.tableView.isHidden = false
                     }

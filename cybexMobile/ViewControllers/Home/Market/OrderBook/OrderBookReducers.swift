@@ -19,7 +19,15 @@ func orderBookReducer(action: Action, state: OrderBookState?) -> OrderBookState 
             state.data.accept(nil)
             break
         }
-        state.data.accept(action.data)
+
+        if var order = action.data, let precision = TradeConfiguration.shared.tradePairPrecisions.value[action.pair] {
+            order.pricePrecision = state.depth.value
+            order.amountPrecision = precision.amount
+            state.data.accept(order)
+        }
+        else {
+            state.data.accept(nil)
+        }
     case let action as ChangeDepthAndCountAction:
         state.depth.accept(action.depth)
         state.count = action.count
