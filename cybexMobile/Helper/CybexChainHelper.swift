@@ -64,7 +64,7 @@ class CybexChainHelper {
                 if cybBalance >= result {
                     completion((success: true, amount: amount, assetID: AssetConfiguration.CybexAsset.CYB.id))
                 } else if focusBalance == 0 {
-                    completion((success: false, amount: amount, assetID: AssetConfiguration.CybexAsset.CYB.id))
+                    completion((success: !UserManager.shared.isLoginIn, amount: amount, assetID: AssetConfiguration.CybexAsset.CYB.id))
                 } else {
                     calculateFeeOfAsset(focusAssetId, operation: operation, operationID: operationID) { (result) in
                         let amount = AssetHelper.getRealAmount(focusAssetId, amount: result.string)

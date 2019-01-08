@@ -215,7 +215,7 @@
 
 
 "password_placeholder" = "Password";
-"tip_title"   = "Tip";
+"tip_title"   = "Confirmation";
 "tip_message" = "Please open photo album permissions in Settings";
 
 "recharge_title"  = " Withdraw";

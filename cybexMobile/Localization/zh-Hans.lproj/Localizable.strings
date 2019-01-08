@@ -200,7 +200,7 @@
 "withdraw_memo" = "备注";
 
 "password_placeholder" = "请输入密码";
-"tip_title"   = "提示";
+"tip_title"   = "确认";
 "tip_message" = "请在设置中打开相册权限";
 
 "recharge_title"  = "提现";
