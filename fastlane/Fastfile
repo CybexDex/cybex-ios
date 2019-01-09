@@ -32,6 +32,8 @@ platform :ios do
     add_to_search_list: true
   )
 
+  import_certificate(certificate_path: ".travis/AppleWWDRCA.cer")
+
   import_certificate(
     certificate_path: ".travis/nbl-dis.p12",
     certificate_password: ENV["KEY_PASSWORD"],
