@@ -170,7 +170,7 @@ extension ComprehensiveViewController {
         }
 
 
-        if midlleItem.link.contains(AppConfiguration.GameBaseURLString) {
+        if midlleItem.needtalk == .gamecenter {
             if Defaults[.hasCode] == true {
                 self.coordinator?.openGame(midlleItem.link)
                 return
@@ -221,12 +221,12 @@ extension ComprehensiveViewController {
         if passed {
             Defaults[.hasCode] = true
             guard let middleItems = self.coordinator?.state.middleItems.value else { return }
-            let links = middleItems.map({ $0.link }).filter { (link) -> Bool in
-                return link.contains(AppConfiguration.GameBaseURLString)
+            let items = middleItems.filter { (item) -> Bool in
+                return item.needtalk == .gamecenter
             }
 
-            if let link = links.first {
-                self.coordinator?.openGame(link)
+            if let item = items.first {
+                self.coordinator?.openGame(item.link)
             }
         }
         else {

@@ -190,45 +190,44 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
 
         let feeAmout = fee.amount.decimal() * pow(10, feeInfo.precision)
 
-            let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
-                if let infos = infos as? (block_id: String, block_num: String) {
-                    let accountRequeset = GetFullAccountsRequest(name: data.receiveAddress) { (response) in
-                        if let response = response as? FullAccount, let account = response.account {
-                            let jsonstr =  BitShareCoordinator.getTransaction(infos.block_num.int32,
-                                                                              block_id: infos.block_id,
-                                                                              expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
-                                                                              chain_id: CybexConfiguration.shared.chainID.value,
-                                                                              from_user_id: uid.getSuffixID,
-                                                                              to_user_id: account.id.getSuffixID,
-                                                                              asset_id: assetID.getSuffixID,
-                                                                              receive_asset_id: assetID.getSuffixID,
-                                                                              amount: amount.int64Value,
-                                                                              fee_id: fee.assetId.getSuffixID,
-                                                                              fee_amount: feeAmout.int64Value,
-                                                                              memo: "",
-                                                                              from_memo_key: "",
-                                                                              to_memo_key: "")
-                            guard let ope = jsonstr else {
-                                main {
-                                    callback("")
-                                }
-                                return
-                            }
-                            let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-                                main {
-                                    callback(data)
-                                }
-                            }, jsonstr: ope)
-                            CybexWebSocketService.shared.send(request: withdrawRequest)
-                        } else {
-                            main {
-                                callback("")
-                            }
+        CybexChainHelper.blockchainParams { (blockInfo) in
+            let accountRequeset = GetFullAccountsRequest(name: data.receiveAddress) { (response) in
+                if let response = response as? FullAccount, let account = response.account {
+                    let jsonstr =  BitShareCoordinator.getTransaction(blockInfo.block_num.int32,
+                                                                      block_id: blockInfo.block_id,
+                                                                      expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
+                                                                      chain_id: CybexConfiguration.shared.chainID.value,
+                                                                      from_user_id: uid.getSuffixID,
+                                                                      to_user_id: account.id.getSuffixID,
+                                                                      asset_id: assetID.getSuffixID,
+                                                                      receive_asset_id: assetID.getSuffixID,
+                                                                      amount: amount.int64Value,
+                                                                      fee_id: fee.assetId.getSuffixID,
+                                                                      fee_amount: feeAmout.int64Value,
+                                                                      memo: "",
+                                                                      from_memo_key: "",
+                                                                      to_memo_key: "")
+                    guard let ope = jsonstr else {
+                        main {
+                            callback("")
                         }
+                        return
                     }
-                    CybexWebSocketService.shared.send(request: accountRequeset)
+                    let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
+                        main {
+                            callback(data)
+                        }
+                    }, jsonstr: ope)
+                    CybexWebSocketService.shared.send(request: withdrawRequest)
+                } else {
+                    main {
+                        callback("")
+                    }
                 }
             }
+            CybexWebSocketService.shared.send(request: accountRequeset)
+        }
+
     }
 
     func fetchData() {

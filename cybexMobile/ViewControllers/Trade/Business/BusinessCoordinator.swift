@@ -170,7 +170,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
                                                                expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
                                                                chain_id: CybexConfiguration.shared.chainID.value,
                                                                user_id: userid.getSuffixID,
-                                                               order_expiration: Date().timeIntervalSince1970 + 3600 * 24 * 365,
+                                                               order_expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionOrderExpiration,
                                                                asset_id: assetID.getSuffixID,
                                                                amount: amount!,
                                                                receive_asset_id: receiveAssetID.getSuffixID,

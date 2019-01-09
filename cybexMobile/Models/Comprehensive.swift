@@ -9,12 +9,18 @@
 import Foundation
 import HandyJSON
 
+enum NeedTalk: Int, HandyJSONEnum {
+    case none = 0
+    case gamecenter
+}
+
 struct ComprehensiveItem: HandyJSON {
     var title: String = ""
     var desc: String = ""
     var icon: String = ""
     var link: String = ""
     var needlogin: Bool = true
+    var needtalk: NeedTalk = .none
 }
 
 struct ComprehensiveAnnounce: HandyJSON {

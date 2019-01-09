@@ -21,7 +21,9 @@ class CybexConfiguration {
     var chainID: BehaviorRelay<String> = BehaviorRelay(value: "")
 
     static var TransactionExpiration: TimeInterval = 45
-
+    static var TransactionTicketExpiration: TimeInterval = 60 * 30
+    static var TransactionOrderExpiration: TimeInterval = 3600 * 24 * 365
+    
     private init() {
 
     }

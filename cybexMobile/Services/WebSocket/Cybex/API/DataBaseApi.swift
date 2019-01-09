@@ -21,6 +21,7 @@ enum DataBaseCatogery: String {
     case getRequiredFees
     case getBlock
     case getTicker
+    case getBlockHeader
 }
 
 struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {
@@ -137,6 +138,8 @@ struct GetChainIDRequest: JSONRPCKit.Request, JSONRPCResponse {
 
 struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
     var ids: [String]
+    var refLib: Bool = false
+
     var response: RPCSResponse
 
     var method: String {
@@ -149,14 +152,21 @@ struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
 
     func transferResponse(from resultObject: Any) throws -> Any {
         if let response = resultObject as? [[String: Any]] {
-            if ids.first == "2.1.0"{
+            if ids.first == ObjectID.dynamicGlobalPropertyObject.rawValue {
                 var headBlockId = ""
                 var headBlockNumber = ""
                 for res in response.first! {
-                    if res.key == "head_block_id"{
-                        headBlockId = String(describing: res.value)
-                    } else if res.key == "head_block_number"{
-                        headBlockNumber = String(describing: res.value)
+                    if refLib {
+                        if res.key == "last_irreversible_block_num" {
+                            headBlockNumber = String(describing: res.value)
+                        }
+                    }
+                    else {
+                        if res.key == "head_block_id" {
+                            headBlockId = String(describing: res.value)
+                        } else if res.key == "head_block_number" {
+                            headBlockNumber = String(describing: res.value)
+                        }
                     }
                 }
                 return (block_id:headBlockId, block_num:headBlockNumber)
@@ -290,5 +300,25 @@ struct GetTickerRequest: JSONRPCKit.Request, JSONRPCResponse {
         }
 
         return Ticker()
+    }
+}
+
+struct GetBlockHeaderRequest: JSONRPCKit.Request, JSONRPCResponse {
+    var blockNum: String
+
+    var response: RPCSResponse
+
+    var method: String {
+        return "call"
+    }
+
+    var parameters: Any? {
+        return [ApiCategory.database, DataBaseCatogery.getBlockHeader.rawValue.snakeCased(), [blockNum]]
+    }
+
+    func transferResponse(from resultObject: Any) throws -> Any {
+        let data = JSON(resultObject)
+
+        return data["previous"].stringValue
     }
 }

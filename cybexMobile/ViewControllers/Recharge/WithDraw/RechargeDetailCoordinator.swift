@@ -185,36 +185,33 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                     memoAddress = GatewayService.withDrawMemo(name!, address: address + "[\(memo)]")
                 }
             }
-            let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
-                if let infos = infos as? (block_id: String, block_num: String) {
-                    let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
 
-                    let amount = amount.decimal() * value
-                    let feeAmout = feeAmount.decimal() * pow(10, (appData.assetInfo[feeId]?.precision)!)
-                    let jsonstr = BitShareCoordinator.getTransaction(infos.block_num.int32,
-                                                                      block_id: infos.block_id,
-                                                                      expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
-                                                                      chain_id: CybexConfiguration.shared.chainID.value,
-                                                                      from_user_id: (UserManager.shared.account.value?.id)!.getSuffixID,
-                                                                      to_user_id: (self.state.data.value?.gatewayAccount)!.getSuffixID,
-                                                                      asset_id: assetId.getSuffixID,
-                                                                      receive_asset_id: assetId.getSuffixID,
-                                                                      amount: amount.int64Value,
-                                                                      fee_id: feeId.getSuffixID,
-                                                                      fee_amount: feeAmout.int64Value,
-                                                                      memo: memoAddress,
-                                                                      from_memo_key: UserManager.shared.account.value?.memoKey,
-                                                                      to_memo_key: memoKey)
-                    let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-                        main {
-                            callback(data)
-                        }
-                    }, jsonstr: jsonstr!)
-                    CybexWebSocketService.shared.send(request: withdrawRequest)
+            CybexChainHelper.blockchainParams { (blockInfo) in
+                let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
 
-                }
+                let amount = amount.decimal() * value
+                let feeAmout = feeAmount.decimal() * pow(10, (appData.assetInfo[feeId]?.precision)!)
+                let jsonstr = BitShareCoordinator.getTransaction(blockInfo.block_num.int32,
+                                                                 block_id: blockInfo.block_id,
+                                                                 expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
+                                                                 chain_id: CybexConfiguration.shared.chainID.value,
+                                                                 from_user_id: (UserManager.shared.account.value?.id)!.getSuffixID,
+                                                                 to_user_id: (self.state.data.value?.gatewayAccount)!.getSuffixID,
+                                                                 asset_id: assetId.getSuffixID,
+                                                                 receive_asset_id: assetId.getSuffixID,
+                                                                 amount: amount.int64Value,
+                                                                 fee_id: feeId.getSuffixID,
+                                                                 fee_amount: feeAmout.int64Value,
+                                                                 memo: memoAddress,
+                                                                 from_memo_key: UserManager.shared.account.value?.memoKey,
+                                                                 to_memo_key: memoKey)
+                let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
+                    main {
+                        callback(data)
+                    }
+                }, jsonstr: jsonstr!)
+                CybexWebSocketService.shared.send(request: withdrawRequest)
             }
-            CybexWebSocketService.shared.send(request: requeset)
         }
 
     }

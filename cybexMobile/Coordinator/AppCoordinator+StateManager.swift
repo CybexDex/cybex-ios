@@ -69,7 +69,7 @@ extension AppCoordinator {
     }
 
     func getAssetInfos(_ ids: [String]) {
-        let request = GetObjectsRequest(ids: ids) { response in
+        let request = GetObjectsRequest(ids: ids, refLib: false) { response in
             if let assetinfo = response as? [AssetInfo] {
                 self.store.dispatch(AssetInfoAction(info: assetinfo))
             }

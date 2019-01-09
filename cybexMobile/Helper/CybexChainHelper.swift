@@ -18,9 +18,24 @@ typealias FeeResult = (success: Bool, amount: Decimal, assetID: String)
 
 class CybexChainHelper {
     class func blockchainParams(callback: @escaping (TransactionBaseType) -> Void) {
-        let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
+        let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()], refLib: false) { (infos) in
             if let infos = infos as? TransactionBaseType {
                 callback(infos)
+            }
+        }
+        CybexWebSocketService.shared.send(request: requeset)
+    }
+
+    class func blockchainParamsRefLib(callback: @escaping (TransactionBaseType) -> Void) {
+        let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()], refLib: true) { (infos) in
+            if var infos = infos as? TransactionBaseType {
+                let request = GetBlockHeaderRequest(blockNum: infos.block_num) { result in
+                    if let result = result as? String {
+                        infos.block_id = result
+                        callback(infos)
+                    }
+                }
+                CybexWebSocketService.shared.send(request: request)
             }
         }
         CybexWebSocketService.shared.send(request: requeset)
@@ -41,44 +56,24 @@ class CybexChainHelper {
         let cybBalance = UserHelper.getBalanceFromAssetID(AssetConfiguration.CybexAsset.CYB.id)
         let focusBalance = UserHelper.getBalanceFromAssetID(focusAssetId)
 
-        if UserManager.shared.isLoginIn && cybBalance == 0 {
-            if focusBalance == 0 {
-                completion((success: false, amount: 0, assetID: ""))
+        calculateFeeOfAsset(AssetConfiguration.CybexAsset.CYB.id, operation: operation, operationID: operationID) { (result) in
+            let amount = AssetHelper.getRealAmount(AssetConfiguration.CybexAsset.CYB.id, amount: result.string)
+
+            if !UserManager.shared.isLoginIn || cybBalance >= result {
+                completion((success: true, amount: amount, assetID: AssetConfiguration.CybexAsset.CYB.id))
                 return
             }
-            else {
-                calculateFeeOfAsset(focusAssetId, operation: operation, operationID: operationID) { (result) in
-                    let amount = AssetHelper.getRealAmount(focusAssetId, amount: result.string)
-                    if focusBalance >= result {
-                        completion((success: true, amount: amount, assetID: focusAssetId))
-                    } else {
-                        completion((success: false, amount: amount, assetID: focusAssetId))
-                    }
-                }
-            }
-        }
-        else {
-            calculateFeeOfAsset(AssetConfiguration.CybexAsset.CYB.id, operation: operation, operationID: operationID) { (result) in
-                let amount = AssetHelper.getRealAmount(AssetConfiguration.CybexAsset.CYB.id, amount: result.string)
 
-                if cybBalance >= result {
-                    completion((success: true, amount: amount, assetID: AssetConfiguration.CybexAsset.CYB.id))
-                } else if focusBalance == 0 {
-                    completion((success: !UserManager.shared.isLoginIn, amount: amount, assetID: AssetConfiguration.CybexAsset.CYB.id))
+            calculateFeeOfAsset(focusAssetId, operation: operation, operationID: operationID) { (focusResult) in
+                let focusAmount = AssetHelper.getRealAmount(focusAssetId, amount: focusResult.string)
+
+                if focusBalance >= focusResult {
+                    completion((success: true, amount: focusAmount, assetID: focusAssetId))
                 } else {
-                    calculateFeeOfAsset(focusAssetId, operation: operation, operationID: operationID) { (result) in
-                        let amount = AssetHelper.getRealAmount(focusAssetId, amount: result.string)
-
-                        if focusBalance >= result {
-                            completion((success: true, amount: amount, assetID: focusAssetId))
-                        } else {
-                            completion((success: false, amount: amount, assetID: focusAssetId))
-                        }
-                    }
+                    completion((success: true, amount: amount, assetID: AssetConfiguration.CybexAsset.CYB.id))
                 }
             }
         }
-
     }
 
     class func calculateFeeOfAsset(_ assetID: String,
