@@ -148,4 +148,8 @@ extension YourPortfolioViewController {
     @objc func transfer(_ data: [String: Any]) {
         self.coordinator?.pushToTransferVC(true)
     }
+
+    @objc func ticketChecking(_ data: [String: Any]) {
+        self.coordinator?.pushToDepolyTicketVC()
+    }
 }

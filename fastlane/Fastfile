@@ -32,7 +32,11 @@ platform :ios do
     add_to_search_list: true
   )
 
-  import_certificate(certificate_path: ".travis/AppleWWDRCA.cer")
+  import_certificate(
+  certificate_path: ".travis/AppleWWDRCA.cer"
+  keychain_name: "ios-build",
+  keychain_password: "1"
+  )
 
   import_certificate(
     certificate_path: ".travis/nbl-dis.p12",
