@@ -24,7 +24,6 @@ $(SRCROOT)/Carthage/Build/iOS/Localize_Swift.framework
 $(SRCROOT)/Carthage/Build/iOS/Macaw.framework
 $(SRCROOT)/Carthage/Build/iOS/Moya.framework
 $(SRCROOT)/Carthage/Build/iOS/Presentr.framework
-$(SRCROOT)/Carthage/Build/iOS/PromiseKit.framework
 $(SRCROOT)/Carthage/Build/iOS/Proposer.framework
 $(SRCROOT)/Carthage/Build/iOS/ReSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/Reachability.framework
@@ -44,6 +43,7 @@ $(SRCROOT)/Carthage/Build/iOS/SwiftTheme.framework
 $(SRCROOT)/Carthage/Build/iOS/SwifterSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework
 $(SRCROOT)/Carthage/Build/iOS/SwiftyUserDefaults.framework
+$(SRCROOT)/Carthage/Build/iOS/TangramKit.framework
 $(SRCROOT)/Carthage/Build/iOS/TinyConstraints.framework
 $(SRCROOT)/Carthage/Build/iOS/UICKeyChainStore.framework
 $(SRCROOT)/Carthage/Build/iOS/UIFontComplete.framework

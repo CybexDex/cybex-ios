@@ -683,6 +683,7 @@
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
 		73D9C15221DF1213005B9022 /* IntrinsicTableViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9C14F21DF1213005B9022 /* IntrinsicTableViewView.swift */; };
 		73D9C15521DF15CE005B9022 /* MarketDetailPageTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9C15421DF15CE005B9022 /* MarketDetailPageTabViewController.swift */; };
+		73D9C20D21E5CC47005B9022 /* TangramKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D9C20C21E5CC46005B9022 /* TangramKit.framework */; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
 		73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */; };
 		73F50BA32137D71F0071B08D /* ETOCrowdGridItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */; };
@@ -1542,6 +1543,7 @@
 		73D012982159D71800C95896 /* URLNavigationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLNavigationMap.swift; sourceTree = "<group>"; };
 		73D9C14F21DF1213005B9022 /* IntrinsicTableViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicTableViewView.swift; sourceTree = "<group>"; };
 		73D9C15421DF15CE005B9022 /* MarketDetailPageTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDetailPageTabViewController.swift; sourceTree = "<group>"; };
+		73D9C20C21E5CC46005B9022 /* TangramKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TangramKit.framework; path = Carthage/Build/iOS/TangramKit.framework; sourceTree = "<group>"; };
 		73F50B9D2137D0B20071B08D /* ETO.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ETO.storyboard; sourceTree = "<group>"; };
 		73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemView.swift; sourceTree = "<group>"; };
 		73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdGridItemView.xib; sourceTree = "<group>"; };
@@ -1722,6 +1724,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73D9C20D21E5CC47005B9022 /* TangramKit.framework in Frameworks */,
 				73539C6F2179AAA8008395AC /* libsqlite3.tbd in Frameworks */,
 				7231103B21805D7F0007E95D /* UMCommon.framework in Frameworks */,
 				7231103C21805D7F0007E95D /* UMAnalytics.framework in Frameworks */,
@@ -3841,6 +3844,7 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73D9C20C21E5CC46005B9022 /* TangramKit.framework */,
 				7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */,
 				7345FD7B219E7DE40066BD0E /* PromiseKit.framework */,
 				7345FD79219E7D310066BD0E /* CryptoSwift.framework */,
@@ -4623,7 +4627,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 			showEnvVarsInLog = 0;
 		};
 		EE22259AA50E1965825123B5D2382194 /* color set */ = {
