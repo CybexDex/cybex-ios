@@ -684,6 +684,7 @@
 		73D9C15221DF1213005B9022 /* IntrinsicTableViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9C14F21DF1213005B9022 /* IntrinsicTableViewView.swift */; };
 		73D9C15521DF15CE005B9022 /* MarketDetailPageTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9C15421DF15CE005B9022 /* MarketDetailPageTabViewController.swift */; };
 		73D9C20D21E5CC47005B9022 /* TangramKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D9C20C21E5CC46005B9022 /* TangramKit.framework */; };
+		73D9C21121E5D3F9005B9022 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7345FD7B219E7DE40066BD0E /* PromiseKit.framework */; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
 		73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */; };
 		73F50BA32137D71F0071B08D /* ETOCrowdGridItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */; };
@@ -1778,6 +1779,7 @@
 				738E15C7214F81F300F0BFAF /* AlamofireNetworkActivityLogger.framework in Frameworks */,
 				731C11C3214D045E00761955 /* Kingfisher.framework in Frameworks */,
 				738E15C9214F82ED00F0BFAF /* SDCAlertView.framework in Frameworks */,
+				73D9C21121E5D3F9005B9022 /* PromiseKit.framework in Frameworks */,
 				7336B79B214F569F0086A9DF /* XLPagerTabStrip.framework in Frameworks */,
 				731C11C4214D045E00761955 /* HandyJSON.framework in Frameworks */,
 				731C11C5214D045E00761955 /* ReSwift.framework in Frameworks */,
