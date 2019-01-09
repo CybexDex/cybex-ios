@@ -59,7 +59,8 @@ extension YourPortfolioCoordinator: YourPortfolioCoordinatorProtocol {
     }
 
     func pushToDepolyTicketVC() {
-
+        let vc = DepolyTicketViewController()
+        self.rootVC.pushViewController(vc)
     }
 }
 

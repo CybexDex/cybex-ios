@@ -33,9 +33,9 @@ platform :ios do
   )
 
   import_certificate(
-  certificate_path: ".travis/AppleWWDRCA.cer"
-  keychain_name: "ios-build",
-  keychain_password: "1"
+    certificate_path: ".travis/AppleWWDRCA.cer",
+    keychain_name: "ios-build",
+    keychain_password: "1"
   )
 
   import_certificate(

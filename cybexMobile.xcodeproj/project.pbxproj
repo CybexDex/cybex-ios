@@ -685,6 +685,7 @@
 		73D9C15521DF15CE005B9022 /* MarketDetailPageTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9C15421DF15CE005B9022 /* MarketDetailPageTabViewController.swift */; };
 		73D9C20D21E5CC47005B9022 /* TangramKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D9C20C21E5CC46005B9022 /* TangramKit.framework */; };
 		73D9C21121E5D3F9005B9022 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7345FD7B219E7DE40066BD0E /* PromiseKit.framework */; };
+		73D9C21421E5EBD5005B9022 /* DepolyTicketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9C21321E5EBD5005B9022 /* DepolyTicketViewController.swift */; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
 		73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */; };
 		73F50BA32137D71F0071B08D /* ETOCrowdGridItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */; };
@@ -1545,6 +1546,7 @@
 		73D9C14F21DF1213005B9022 /* IntrinsicTableViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicTableViewView.swift; sourceTree = "<group>"; };
 		73D9C15421DF15CE005B9022 /* MarketDetailPageTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDetailPageTabViewController.swift; sourceTree = "<group>"; };
 		73D9C20C21E5CC46005B9022 /* TangramKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TangramKit.framework; path = Carthage/Build/iOS/TangramKit.framework; sourceTree = "<group>"; };
+		73D9C21321E5EBD5005B9022 /* DepolyTicketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepolyTicketViewController.swift; sourceTree = "<group>"; };
 		73F50B9D2137D0B20071B08D /* ETO.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ETO.storyboard; sourceTree = "<group>"; };
 		73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemView.swift; sourceTree = "<group>"; };
 		73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdGridItemView.xib; sourceTree = "<group>"; };
@@ -1861,6 +1863,7 @@
 		1957BC4603D51BA58EA334581171C0AD /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				73D9C21221E5EBC0005B9022 /* Ticket */,
 				7386F29D212165FD00ABC924 /* Address */,
 				F787C1B74054A1821B702F93B816D56C /* Cells */,
 				6E0AA227CB72A179CFB9442DCB7D85E9 /* LockupAssets */,
@@ -3467,6 +3470,14 @@
 			path = Route;
 			sourceTree = "<group>";
 		};
+		73D9C21221E5EBC0005B9022 /* Ticket */ = {
+			isa = PBXGroup;
+			children = (
+				73D9C21321E5EBD5005B9022 /* DepolyTicketViewController.swift */,
+			);
+			path = Ticket;
+			sourceTree = "<group>";
+		};
 		7A99BB351484E3D92442AE34D9258030 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -5026,6 +5037,7 @@
 				733714B12122D25E00B2ED90 /* WithdrawAddressHomeTableViewCell.swift in Sources */,
 				6DBCCB0ED729AC68AF493B54C15A81CF /* OpenedOrdersReducers.swift in Sources */,
 				729B869C2154C71300C6E0E4 /* ComprehensiveItemsView.swift in Sources */,
+				73D9C21421E5EBD5005B9022 /* DepolyTicketViewController.swift in Sources */,
 				1DCCD247499C6FA4753D44CA869E6EB4 /* OpenedOrdersStatesView.swift in Sources */,
 				F1B88753DCA13AC5B42338848EEC8DBF /* OpenedOrdersView.swift in Sources */,
 				F5DDA9E8ED5A5AA3D7A8F0705CFBA4BD /* OpenedOrdersViewController.swift in Sources */,
