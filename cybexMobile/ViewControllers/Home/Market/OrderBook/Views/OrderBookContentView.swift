@@ -103,25 +103,12 @@ extension OrderBookContentView: UITableViewDelegate, UITableViewDataSource {
                 let asks = data.asks
                 let bids = data.bids
 
-                let maxAsks = asks.count >= 20 ? 19 : asks.count - 1
-                let maxBids = bids.count >= 20 ? 19 : bids.count - 1
+                let percentBuy: Decimal? = indexPath.row >= data.asks.count ? nil : asks[0...indexPath.row].compactMap( { $0.volumePercent } ).reduce(0, +)
+                let percentSell: Decimal? = indexPath.row >= data.bids.count ? nil :
+                    bids[0...indexPath.row].compactMap( { $0.volumePercent } ).reduce(0, +)
 
-                let maxAsksPercent  = asks[optional:maxAsks]?.volumePercent
-                let maxBidsPercent  = bids[optional:maxBids]?.volumePercent
-
-                let asksPercent = asks[optional:indexPath.row]?.volumePercent
-                let bidsPercent = bids[optional:indexPath.row]?.volumePercent
-
-                var percentBuy: Double?
-                var percentSell: Double?
-
-                if let maxAsksPercent = maxAsksPercent, let asksPercent = asksPercent {
-                    percentBuy = asksPercent / maxAsksPercent
-                }
-                if let maxBidsPercent = maxBidsPercent, let bidsPercent = bidsPercent {
-                    percentSell = bidsPercent / maxBidsPercent
-                }
-
+                cell.ownView.pricePrecision = data.pricePrecision
+                cell.ownView.amountPrecision = data.amountPrecision
                 cell.setup((bids[optional:indexPath.row], asks[optional:indexPath.row], percentSell, percentBuy), indexPath: indexPath)
             }
             return cell

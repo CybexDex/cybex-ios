@@ -19,10 +19,12 @@ class HomePairCell: BaseTableViewCell {
 
     override func setup(_ data: Any?) {
         self.pairView.store = ["index": indexPath!.row]
-        self.pairView.data = data
         if cellType == HomePairCellType.topGainers {
             self.pairView.replaceIconToLabel()
+            self.pairView.ignoreInfoWhenZeroPercent = true
         }
+
+        self.pairView.data = data
     }
 
     override func awakeFromNib() {

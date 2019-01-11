@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftTheme
 
 class CBKLineMainView: UIView {
     
@@ -109,10 +110,14 @@ class CBKLineMainView: UIView {
         for (index, klineModel) in mainDrawKLineModels.enumerated() {
             let xPosition = CGFloat(index) * (configuration.theme.klineWidth + configuration.theme.klineSpace)
             
-            let openPoint = CGPoint(x: xPosition, y: abs(drawMaxY - CGFloat((klineModel.open - limitValue.minValue) / unitValue)))
-            let closePoint = CGPoint(x: xPosition, y: abs(drawMaxY - CGFloat((klineModel.close - limitValue.minValue) / unitValue)))
-            let highPoint = CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: abs(drawMaxY - CGFloat((klineModel.high - limitValue.minValue) / unitValue)))
-            let lowPoint = CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: abs(drawMaxY - CGFloat((klineModel.low - limitValue.minValue) / unitValue)))
+            let openPoint = unitValue != 0 ? CGPoint(x: xPosition, y: abs(drawMaxY - CGFloat((klineModel.open - limitValue.minValue) / unitValue))) : CGPoint(x: xPosition, y: abs(drawMaxY))
+            let closePoint = unitValue != 0 ? CGPoint(x: xPosition, y: abs(drawMaxY - CGFloat((klineModel.close - limitValue.minValue) / unitValue))) : CGPoint(x: xPosition, y: abs(drawMaxY))
+            let highPoint = unitValue != 0 ? CGPoint(x: xPosition + configuration.theme.klineWidth / 2,
+                                                     y: abs(drawMaxY - CGFloat((klineModel.high - limitValue.minValue) / unitValue))) :
+                CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: abs(drawMaxY))
+            let lowPoint = unitValue != 0 ? CGPoint(x: xPosition + configuration.theme.klineWidth / 2,
+                                                    y: abs(drawMaxY - CGFloat((klineModel.low - limitValue.minValue) / unitValue))) :
+                CGPoint(x: xPosition + configuration.theme.klineWidth / 2, y: abs(drawMaxY))
             
             if let highY = highPointY {
                 if highPoint.y < highY {
@@ -145,18 +150,14 @@ class CBKLineMainView: UIView {
                 var strokeColor: UIColor = configuration.theme.increaseColor
                 let lastModel: CBKLineModel? = index >= 1 ? mainDrawKLineModels[index - 1] : nil
                 
+                if klineModel.open > klineModel.close {
+                    strokeColor = klineModel.open > klineModel.close ? configuration.theme.decreaseColor : configuration.theme.increaseColor
+                }
+
                 if klineModel.volume == 0, let _ = lastModel {
                     strokeColor = strokeColors[index - 1]
                 }
-                
-                if klineModel.open == klineModel.close, let lastmodel = lastModel {
-                    strokeColor = klineModel.close < lastmodel.close ? configuration.theme.decreaseColor : configuration.theme.increaseColor
-                }
-                
-                if klineModel.open > klineModel.close {
-                    strokeColor = configuration.theme.decreaseColor
-                }
-                
+
                 strokeColors.append(strokeColor)
                 context.setStrokeColor(strokeColor.cgColor)
                 
@@ -237,8 +238,10 @@ extension CBKLineMainView {
             if model.propertyDescription() != klineModel.propertyDescription() {
                 return
             } else {
-                dateAttributes![NSAttributedString.Key.backgroundColor] = configuration.theme.longPressLineColor
-                dateAttributes![NSAttributedString.Key.foregroundColor] = configuration.theme.dashColor
+                let bgColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1) : #colorLiteral(red: 0.1058823529, green: 0.1333333333, blue: 0.1882352941, alpha: 1)
+                let textColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.white
+                dateAttributes![NSAttributedString.Key.backgroundColor] = bgColor
+                dateAttributes![NSAttributedString.Key.foregroundColor] = textColor
             }
         }
         
@@ -436,14 +439,11 @@ extension CBKLineMainView {
             NSAttributedString.Key.foregroundColor: configuration.main.valueAssistTextColor,
             NSAttributedString.Key.font: configuration.main.valueAssistTextFont
         ]
-        
-        let mindrawAttrsString = NSMutableAttributedString(string: "←" + lowKlineModel.low.string(digits: lowKlineModel.precision, roundingMode: .down), attributes: attributes)
-        
+        let mindrawAttrsString = NSMutableAttributedString(string: "←" + lowKlineModel.low.formatCurrency(digitNum: lowKlineModel.precision), attributes: attributes)
         var minX = lowPosition.x
-        
         if (lowPosition.x + mindrawAttrsString.size().width) > bounds.width {
             minX -= mindrawAttrsString.size().width
-            mindrawAttrsString.setAttributedString(NSAttributedString(string: lowKlineModel.low.string(digits: lowKlineModel.precision, roundingMode: .down) + "→", attributes: attributes))
+            mindrawAttrsString.setAttributedString(NSAttributedString(string: lowKlineModel.low.formatCurrency(digitNum: lowKlineModel.precision) + "→", attributes: attributes))
         }
         
         let minrect = CGRect(x: minX,
@@ -452,13 +452,12 @@ extension CBKLineMainView {
                              height: configuration.main.valueAssistViewHeight)
         
         mindrawAttrsString.draw(in: minrect)
-        
-        let maxdrawAttrsString = NSMutableAttributedString(string: "←" + highKlineModel.high.string(digits: highKlineModel.precision,roundingMode: .down), attributes: attributes)
+        let maxdrawAttrsString = NSMutableAttributedString(string: "←" + highKlineModel.high.formatCurrency(digitNum: highKlineModel.precision), attributes: attributes)
         
         var maxX = highPosition.x
         if (highPosition.x + mindrawAttrsString.size().width) > bounds.width {
             maxX -= maxdrawAttrsString.size().width
-            maxdrawAttrsString.setAttributedString(NSAttributedString(string: highKlineModel.high.string(digits: highKlineModel.precision, roundingMode: .down) + "→", attributes: attributes))
+            maxdrawAttrsString.setAttributedString(NSAttributedString(string: highKlineModel.high.formatCurrency(digitNum: highKlineModel.precision) + "→", attributes: attributes))
         }
         
         let maxrect = CGRect(x: maxX,

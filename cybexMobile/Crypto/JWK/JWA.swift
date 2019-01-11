@@ -180,10 +180,10 @@ extension Array where Element == UInt8 {
 }
 
 extension Array where Element: Equatable {
-    /// Returns an array containing all but the first element, if `condition` meets. Otherwise, returns `self`.
+    /// Returns an array containing all but the first element, if `condition` meets. Otherwise, returns self.
     ///
     /// - Parameter condition: The condition to check when try to drop the first element.
-    /// - Returns: The array without the first element if `condition` returns `true`; `self` otherwise.
+    /// - Returns: The array without the first element if `condition` returns `true`; self otherwise.
     func dropFirst(_ condition: (Element) -> Bool) -> Array {
         if count == 0 { return self }
         if condition(self[startIndex]) {

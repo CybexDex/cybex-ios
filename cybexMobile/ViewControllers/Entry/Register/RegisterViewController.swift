@@ -73,22 +73,22 @@ class RegisterViewController: BaseViewController {
     func updateSvgView() {
         self.pinCodeActivityView.startAnimating()
 
-        async {
-            do {
-                let data = try await(SimpleHTTPService.requestPinCode())
-                main {
-                    self.pinCodeActivityView.stopAnimating()
-                    self.pinID = data.id
+        RegisterService.request(target: .getPinCode, success: { (json) in
+            let id = json["id"].stringValue
+            let data = json["data"].stringValue
 
-                    if let parser = try? SVGParser.parse(text: data.data) {
-                        self.macawView.node = parser
-                    }
-                }
-            } catch _ {
+            self.pinCodeActivityView.stopAnimating()
+            self.pinID = id
 
+            if let parser = try? SVGParser.parse(text: data) {
+                self.macawView.node = parser
             }
+        }, error: { (_) in
 
+        }) { (_) in
+            
         }
+
     }
 
     func setupUI() {
@@ -132,7 +132,7 @@ class RegisterViewController: BaseViewController {
 extension RegisterViewController {
     func setUpKeyboardEvent() {
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self](notification) in
-            guard let `self` = self, let userinfo = notification.userInfo as NSDictionary?, let nsValue = userinfo.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue else { return }
+            guard let self = self, let userinfo = notification.userInfo as NSDictionary?, let nsValue = userinfo.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue else { return }
             let keyboardRec = nsValue.cgRectValue
 
             if self.iconTopContainer.constant == 15 {
@@ -148,7 +148,7 @@ extension RegisterViewController {
 
     func setupValidCodeEvent() {
         self.macawView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.updateSvgView()
 
         }).disposed(by: disposeBag)
@@ -162,11 +162,11 @@ extension RegisterViewController {
     }
 
     func setupPasswordEvent() {
-        let passwordValid = self.passwordTextField.rx.text.orEmpty.map({ verifyPassword($0) }).share(replay: 1)
-        let confirmPasswordValid = self.confirmPasswordTextField.rx.text.orEmpty.map({ verifyPassword($0) }).share(replay: 1)
+        let passwordValid = self.passwordTextField.rx.text.orEmpty.map({ UserHelper.verifyPassword($0) }).share(replay: 1)
+        let confirmPasswordValid = self.confirmPasswordTextField.rx.text.orEmpty.map({ UserHelper.verifyPassword($0) }).share(replay: 1)
 
         passwordValid.subscribe(onNext: {[weak self] (validate) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.passwordValid = validate
             if validate {
                 self.passwordTextField.tailImage = #imageLiteral(resourceName: "check_complete")
@@ -205,7 +205,7 @@ extension RegisterViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         confirmPasswordValid.subscribe(onNext: {[weak self] (validate) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.confirmValid = validate
 
             if validate {
@@ -251,7 +251,7 @@ extension RegisterViewController {
         Observable.combineLatest(codeTextField.rx.text.orEmpty.map { $0.count == 4 },
                                  accountTextField.rx.text.orEmpty.map { $0.count > 2 },
                                  twoPasswordValid).subscribe(onNext: {[weak self] (validate) in
-                                    guard let `self` = self else { return }
+                                    guard let self = self else { return }
 
                                     if self.accountTextField.tailImage != nil && validate.0 && validate.1 && validate.2 {
                                         self.registerButton.isEnable = true
@@ -266,7 +266,7 @@ extension RegisterViewController {
         setUpKeyboardEvent()
 
         NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: accountTextField, queue: nil) {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.errorStackView.isHidden = true
             self.accountTextField.activityView?.isHidden = true
             self.accountTextField.tailImage = nil
@@ -307,13 +307,13 @@ extension RegisterViewController {
         setupPasswordEvent()
 
         self.loginTitle.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.coordinator?.switchToLogin()
         }).disposed(by: disposeBag)
 
         self.tip.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.coordinator?.pushCreateTip()
         }).disposed(by: disposeBag)
@@ -325,12 +325,12 @@ extension RegisterViewController {
 
     func setupRegisterButtonEvent() {
         self.registerButton.rx.tapGesture().when(.recognized).filter {[weak self] (_) -> Bool in
-            guard let `self` = self else { return false }
+            guard let self = self else { return false }
 
             return self.registerButton.canRepeat
 
             }.subscribe(onNext: {[weak self] (_) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
 
                 self.registerButton.canRepeat = false
 

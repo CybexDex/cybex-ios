@@ -31,11 +31,12 @@ func lockupAssteToLockUpAssetsDate(datas: [LockUpAssetsMData]) -> LockUpAssetsVM
             var price = "≈¥--"
             let name = assetsInfo.symbol
 
-            count = getRealAmountDouble(quote, amount: amount).string(digits: assetsInfo.precision, roundingMode: .down)
-            price = "≈¥" + (Decimal(getAssetRMBPrice(quote)) * getRealAmount(quote, amount: amount)).string(digits: 4, roundingMode: .down)
-            
+            count = AssetHelper.getRealAmount(quote, amount: amount).formatCurrency(digitNum: assetsInfo.precision)
+            let priceAmount = AssetHelper.singleAssetRMBPrice(quote) * AssetHelper.getRealAmount(quote, amount: amount)
+
+            price = "≈¥" + priceAmount.formatCurrency(digitNum: AppConfiguration.rmbPrecision)            
             let icon = AppConfiguration.ServerIconsBaseURLString + data.balance.assetID.replacingOccurrences(of: ".", with: "_") + "_grey.png"
-            let vestingDurationSeconds = data.vestingPolicy.vestingDurationSeconds.toDouble() ?? 0
+            let vestingDurationSeconds = data.vestingPolicy.vestingDurationSeconds.decimal().double(digits: 0, roundingMode: .down)
             if let beginTime = data.vestingPolicy.beginTimestamp.dateFromISO8601 {
                 var progress = (Date().timeIntervalSince1970 - beginTime.timeIntervalSince1970) / vestingDurationSeconds
                 if progress > 1 {

@@ -16,22 +16,22 @@ extension ETOProjectView {
     func adapterModelToETOProjectView(_ model: ETOProjectViewModel) {
 
         model.status.asObservable().subscribe(onNext: { [weak self](status) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.stateLabel.text = status
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         model.currentPercent.asObservable().subscribe(onNext: { [weak self](currentProgress) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.progressLabel.text = currentProgress
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         model.progress.asObservable().subscribe(onNext: { [weak self](progress) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.progressView.progress = progress
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         model.projectState.asObservable().subscribe(onNext: { [weak self](projectState) in
-            guard let `self` = self, let state = projectState  else { return }
+            guard let self = self, let state = projectState  else { return }
             self.timeState.text = model.timeState
             switch state {
             case .finish:
@@ -49,7 +49,7 @@ extension ETOProjectView {
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         model.time.asObservable().subscribe(onNext: { [weak self]time in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             self.timeLabel.text = time
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 

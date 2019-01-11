@@ -378,7 +378,7 @@ class ETOProjectViewModel {
     }
 }
 
-struct ETOHidden: HandyJSON {
+struct AppEnableSetting: HandyJSON {
     var isETOEnabled: Bool = false
     var isShareEnabled: Bool = false
 }

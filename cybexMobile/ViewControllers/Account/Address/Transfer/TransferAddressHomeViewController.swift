@@ -42,7 +42,7 @@ class TransferAddressHomeViewController: BaseViewController {
 
     override func configureObserveState() {
         self.coordinator?.state.data.asObservable().subscribe(onNext: {[weak self] (data) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             if data.count == 0 {
                 self.view.showNoData(R.string.localizable.account_transfer_nodata.key.localized(), icon: R.image.img_no_address.name)

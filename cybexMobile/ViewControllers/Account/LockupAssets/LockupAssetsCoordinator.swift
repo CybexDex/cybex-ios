@@ -50,46 +50,40 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
     }
     
     func applyLockupAsset(_ sender: LockupAssteData, callback: @escaping (Bool)->()) {
-        getChainId { (id) in
-            if let fromAccount = UserManager.shared.account.value{
-                let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()]) { (infos) in
-                    if let infos = infos as? (block_id: String, block_num: String) {
-                        if let balance = sender.balance, let amount = balance.amount.toDecimal() {
-                            let balanceAmount = amount
-                            guard let fromAccount = UserManager.shared.account.value else {
-                                return
-                            }
-                            
-                            let jsonstr = BitShareCoordinator.getClaimedSign(Int32(infos.block_num)!,
-                                                                             block_id: infos.block_id,
-                                                                             expiration: Date().timeIntervalSince1970 + 10 * 3600,
-                                                                             chain_id: id,
-                                                                             fee_asset_id: 0,
-                                                                             fee_amount: 0,
-                                                                             deposit_to_account_id: Int32(getUserId(fromAccount.id)),
-                                                                             claimed_id: Int32(getUserId(sender.id)),
-                                                                             claimed_asset_id: Int32(getUserId(balance.assetID)),
-                                                                             claimed_amount: Int64(balanceAmount.doubleValue),
-                                                                             claimed_own: sender.owner)
-                            
-                            let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
-                                print("BroadcastTransactionRequest 转账请求 \(data)")
-                                if String(describing: data) == "<null>"{
-                                    callback(true)
-                                } else {
-                                    callback(false)
-                                }
-                            }, jsonstr: jsonstr!)
-                            CybexWebSocketService.shared.send(request: withdrawRequest)
-                        }
+        if let fromAccount = UserManager.shared.account.value {
+            CybexChainHelper.blockchainParams { (blockInfo) in
+                if let balance = sender.balance {
+                    let amount = balance.amount.decimal()
+                    let balanceAmount = amount
+                    guard let fromAccount = UserManager.shared.account.value else {
+                        return
                     }
+
+                    let jsonstr = BitShareCoordinator.getClaimedSign(blockInfo.block_num.int32,
+                                                                     block_id: blockInfo.block_id,
+                                                                     expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
+                                                                     chain_id: CybexConfiguration.shared.chainID.value,
+                                                                     fee_asset_id: 0,
+                                                                     fee_amount: 0,
+                                                                     deposit_to_account_id: fromAccount.id.getSuffixID,
+                                                                     claimed_id: sender.id.getSuffixID,
+                                                                     claimed_asset_id: balance.assetID.getSuffixID,
+                                                                     claimed_amount: balanceAmount.int64Value,
+                                                                     claimed_own: sender.owner)
+
+                    let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
+                        if String(describing: data) == "<null>"{
+                            callback(true)
+                        } else {
+                            callback(false)
+                        }
+                    }, jsonstr: jsonstr!)
+                    
+                    CybexWebSocketService.shared.send(request: withdrawRequest)
                 }
-                CybexWebSocketService.shared.send(request: requeset)
-            }
-            else {
-                callback(false)
+
             }
         }
-        
+
     }
 }

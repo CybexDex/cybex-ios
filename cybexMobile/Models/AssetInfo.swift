@@ -28,7 +28,12 @@ class AssetInfo: HandyJSON {
 class Asset: HandyJSON {
     var amount: String = ""
     var assetID: String = ""
-
+ 
+    init(amount: String, assetID: String) {
+        self.amount = amount
+        self.assetID = assetID
+    }
+    
     required init() {}
 
     func mapping(mapper: HelpingMapper) {
@@ -36,10 +41,10 @@ class Asset: HandyJSON {
         mapper <<< assetID              <-- "asset_id"
     }
 
-    func volume() -> Double {
+    func volume() -> Decimal {
         let info = appData.assetInfo[assetID]!
 
-        return Double(amount)! / pow(10, info.precision.double)
+        return amount.decimal() / pow(10, info.precision)
     }
 
     func info() -> AssetInfo {
@@ -56,7 +61,11 @@ extension Asset: Equatable {
 class Price: HandyJSON {
     var base: Asset = Asset()
     var quote: Asset = Asset()
-
+    
+    init(base: Asset, quote: Asset) {
+        self.base = base
+        self.quote = quote
+    }
     required init() {
     }
 
@@ -65,20 +74,30 @@ class Price: HandyJSON {
         mapper <<< quote                   <-- "quote"
     }
 
-    func toReal() -> Double {
+    func toReal() -> Decimal {
         let baseInfo = base.info()
         let quoteInfo = quote.info()
+        let baseDouble = base.amount.decimal()
+        let quoteDouble = quote.amount.decimal()
 
-        let priceRatio =  Double(base.amount)! / Double(quote.amount)!
+        if quoteDouble != 0 {
+            let priceRatio =  baseDouble / quoteDouble
 
-        let baseNumber = NSDecimalNumber(floatLiteral: pow(10, baseInfo.precision.double))
-        let quoteNumber = NSDecimalNumber(floatLiteral: pow(10, quoteInfo.precision.double))
+            //            let baseNumber = NSDecimalNumber(floatLiteral: pow(10, baseInfo.precision.double))
+            //            let quoteNumber = NSDecimalNumber(floatLiteral: pow(10, quoteInfo.precision.double))
+            let baseNumber = pow(10, baseInfo.precision)
+            let quoteNumber = pow(10, quoteInfo.precision)
 
-        let precisionRatio = baseNumber.dividing(by: quoteNumber).stringValue
+            //            let precisionRatio = baseNumber.dividing(by: quoteNumber).stringValue
+            let precisionRatio = baseNumber / quoteNumber
 
-        return priceRatio / precisionRatio.toDouble()!
+
+            //            print("base.amount : \(base.amount), baseNumber: \(baseNumber), quote.amount: \(quote.amount), quoteNumber:\(quoteNumber)")
+            return priceRatio / precisionRatio
+        }
+
+        return 0
     }
-
 }
 
 extension AssetInfo: Equatable {
@@ -87,9 +106,10 @@ extension AssetInfo: Equatable {
     }
 }
 
-struct RMBPrices {
+struct RMBPrices: HandyJSON {
     var name: String      = ""
-    var rmbPrice: String = ""
+    var value: String = "0"
+    var time: Int = 0
 }
 
 struct ImportantMarketPair {

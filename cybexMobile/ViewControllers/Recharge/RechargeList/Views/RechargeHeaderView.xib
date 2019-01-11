@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RechargeHeaderView">
             <connections>
-                <outlet property="hiddenButton" destination="4tI-6Z-hFR" id="xHl-DX-AdT"/>
-                <outlet property="hiddenLabel" destination="rwY-Lg-c3t" id="GFy-Om-WvT"/>
                 <outlet property="searchTextField" destination="WcC-9v-ED0" id="Nl2-yE-pxw"/>
             </connections>
         </placeholder>
@@ -22,53 +20,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6J-rc-UWu">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tI-6Z-hFR">
-                            <rect key="frame" x="13" y="18" width="16" height="16"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="16" id="9hr-E1-qPr"/>
-                                <constraint firstAttribute="width" constant="16" id="bJ2-7z-dBj"/>
-                            </constraints>
-                            <state key="normal" image="icUnselected16Px"/>
-                            <state key="selected" image="icSelected24Px"/>
-                            <connections>
-                                <action selector="hiddenAssetAction:" destination="-1" eventType="touchUpInside" id="8Cl-qw-1Fv"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwY-Lg-c3t">
-                            <rect key="frame" x="41" y="26" width="0.0" height="0.0"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="recharge_hidden_asset"/>
-                            </userDefinedRuntimeAttributes>
-                        </label>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="52" id="2cq-sk-jAz"/>
-                        <constraint firstItem="4tI-6Z-hFR" firstAttribute="centerY" secondItem="M6J-rc-UWu" secondAttribute="centerY" id="COo-fk-zhu"/>
-                        <constraint firstItem="rwY-Lg-c3t" firstAttribute="leading" secondItem="4tI-6Z-hFR" secondAttribute="trailing" constant="12" id="EX2-kL-tBE"/>
-                        <constraint firstItem="4tI-6Z-hFR" firstAttribute="centerY" secondItem="M6J-rc-UWu" secondAttribute="centerY" id="L17-Te-2b8"/>
-                        <constraint firstItem="4tI-6Z-hFR" firstAttribute="leading" secondItem="M6J-rc-UWu" secondAttribute="leading" constant="13" id="pmW-3N-6To"/>
-                        <constraint firstItem="rwY-Lg-c3t" firstAttribute="centerY" secondItem="M6J-rc-UWu" secondAttribute="centerY" id="z8W-vl-c27"/>
-                    </constraints>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                            <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                            <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FrS-o5-GXv">
-                    <rect key="frame" x="0.0" y="52" width="375" height="48"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WcC-9v-ED0">
-                            <rect key="frame" x="13" y="12" width="349" height="36"/>
+                            <rect key="frame" x="13" y="12" width="349" height="88"/>
                             <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
@@ -100,21 +56,14 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="FrS-o5-GXv" firstAttribute="top" secondItem="M6J-rc-UWu" secondAttribute="bottom" id="4KO-mh-E51"/>
                 <constraint firstAttribute="bottom" secondItem="FrS-o5-GXv" secondAttribute="bottom" id="5MY-rU-d0R"/>
-                <constraint firstItem="Lhl-p8-24W" firstAttribute="trailing" secondItem="M6J-rc-UWu" secondAttribute="trailing" id="DkD-Lu-Uxo"/>
+                <constraint firstItem="FrS-o5-GXv" firstAttribute="top" secondItem="Lhl-p8-24W" secondAttribute="top" id="Ed0-3q-p5t"/>
                 <constraint firstItem="FrS-o5-GXv" firstAttribute="leading" secondItem="Lhl-p8-24W" secondAttribute="leading" id="NIQ-3V-nwM"/>
                 <constraint firstItem="FrS-o5-GXv" firstAttribute="trailing" secondItem="Lhl-p8-24W" secondAttribute="trailing" id="S7P-OK-dh3"/>
-                <constraint firstItem="M6J-rc-UWu" firstAttribute="leading" secondItem="Lhl-p8-24W" secondAttribute="leading" id="ok1-MH-M4T"/>
-                <constraint firstItem="M6J-rc-UWu" firstAttribute="top" secondItem="Lhl-p8-24W" secondAttribute="top" id="xhi-kq-ei6"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Lhl-p8-24W"/>
             <point key="canvasLocation" x="-1257" y="-430"/>
         </view>
     </objects>
-    <resources>
-        <image name="icSelected24Px" width="16" height="16"/>
-        <image name="icUnselected16Px" width="16" height="16"/>
-    </resources>
 </document>

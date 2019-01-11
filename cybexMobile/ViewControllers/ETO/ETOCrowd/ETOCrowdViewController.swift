@@ -41,7 +41,7 @@ class ETOCrowdViewController: BaseViewController {
     func startTimeRepeatAction() {
         self.timerRepeater = Repeater.every(.seconds(3), { [weak self](_) in
             main {
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 self.coordinator?.fetchUserRecord()
             }
         })
@@ -63,13 +63,13 @@ class ETOCrowdViewController: BaseViewController {
 
     func setupEvent() {
         NotificationCenter.default.addObserver(forName: UITextField.textDidBeginEditingNotification, object: self.contentView.titleTextView.textField, queue: nil) {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.coordinator?.unsetValidStatus()
         }
 
         NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification, object: self.contentView.titleTextView.textField, queue: nil) {[weak self] (_) in
-            guard let `self` = self, let amount = self.contentView.titleTextView.textField.text?.toDouble() else { return }
+            guard let self = self, let amount = self.contentView.titleTextView.textField.text?.decimal() else { return }
 
             self.coordinator?.checkValidStatus(amount)
         }
@@ -80,25 +80,26 @@ class ETOCrowdViewController: BaseViewController {
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         coordinator?.state.data.asObservable().subscribe(onNext: {[weak self] (model) in
-            guard let `self` = self, let model = model else { return }
+            guard let self = self, let model = model else { return }
             self.navigationItem.title = model.name + " ETO"
             self.contentView.updateUI(model, handler: ETOCrowdView.adapterModelToETOCrowdView(self.contentView))
         }).disposed(by: disposeBag)
 
         coordinator?.state.userData.asObservable().subscribe(onNext: {[weak self] (model) in
-            guard let `self` = self, let model = model, let project = self.coordinator?.state.data.value else { return }
+            guard let self = self, let model = model, let project = self.coordinator?.state.data.value else { return }
 
             self.contentView.updateUI((projectModel:project, userModel:model), handler: ETOCrowdView.adapterModelToUserCrowdView(self.contentView))
         }).disposed(by: disposeBag)
 
         coordinator?.state.fee.asObservable().subscribe(onNext: {[weak self] (model) in
-            if let `self` = self, let data = model, let feeInfo = appData.assetInfo[data.assetId], let feeAmount = data.amount.toDouble()?.string(digits: feeInfo.precision, roundingMode: .down) {
+            if let self = self, let data = model, let feeInfo = appData.assetInfo[data.assetId] {
+                let feeAmount = data.amount.decimal().formatCurrency(digitNum: feeInfo.precision)
                 self.contentView.priceLabel.text = feeAmount + " " + feeInfo.symbol.filterJade
             }
         }).disposed(by: disposeBag)
 
         coordinator?.state.validStatus.asObservable().subscribe(onNext: {[weak self] (status) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             if case .notValid = status {
                 self.contentView.actionButton.isEnabled = false
@@ -130,16 +131,16 @@ extension ETOCrowdViewController {
             return
         }
 
-        guard let price = self.contentView.titleTextView.textField.text?.toDouble() else { return }
+        guard let price = self.contentView.titleTextView.textField.text else { return }
 
-        self.coordinator?.showConfirm(price)
+        self.coordinator?.showConfirm(price.decimal())
     }
 
     override func returnEnsureAction() {
-        guard let price = self.contentView.titleTextView.textField.text?.toDouble() else { return }
+        guard let price = self.contentView.titleTextView.textField.text?.decimal() else { return }
         self.startLoading()
         self.coordinator?.joinCrowd(price, callback: { [weak self](data) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.endLoading()
             if String(describing: data) == "<null>" {
                 self.showWaiting(R.string.localizable.eto_transfer_title.key.localized(), content: R.string.localizable.eto_transfer_content.key.localized(), time: 5)
@@ -161,8 +162,8 @@ extension ETOCrowdViewController {
     override func passwordPassed(_ passed: Bool) {
         self.endLoading()
         if passed == true {
-            guard let price = self.contentView.titleTextView.textField.text?.toDouble() else { return }
-            self.coordinator?.showConfirm(price)
+            guard let price = self.contentView.titleTextView.textField.text else { return }
+            self.coordinator?.showConfirm(price.decimal())
         } else {
             self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
         }

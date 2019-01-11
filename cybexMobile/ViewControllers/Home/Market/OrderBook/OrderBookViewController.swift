@@ -13,6 +13,7 @@ import ReSwift
 import TinyConstraints
 import SwiftyJSON
 import Localize_Swift
+import XLPagerTabStrip
 
 enum OrderbookType: Int {
     case contentView = 1
@@ -20,48 +21,103 @@ enum OrderbookType: Int {
 }
 
 class OrderBookViewController: BaseViewController {
-
     var coordinator: (OrderBookCoordinatorProtocol & OrderBookStateManagerProtocol)?
-
     var contentView: OrderBookContentView!
     var tradeView: TradeView!
-    var VCType: Int = OrderbookType.contentView.rawValue
-    var pair: Pair? {
-        didSet {
-            guard let pair = pair else { return }
-            if self.tradeView != nil {
-                //        self.coordinator?.resetData(pair)
-                showMarketPrice()
-            }
-            self.coordinator?.fetchData(pair)
-            if self.tradeView != nil || self.contentView != nil {
-                setTopTitle()
-            }
+    var vcType: Int = OrderbookType.contentView.rawValue
+    var pair: Pair?
+
+    override func viewDidLoad() {
+        setupUI()
+
+        super.viewDidLoad()
+        self.coordinator?.updateMarketListHeight(600)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if vcType == OrderbookType.contentView.rawValue {
+            fetchData()
+        }
+        else {
+            self.coordinator?.updateMarketListHeight(600)
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if vcType == OrderbookType.contentView.rawValue {
+            disappear()
+        }
     }
+
+    func fetchData() {
+        guard let pair = pair else { return }
+
+        if self.vcType == OrderbookType.contentView.rawValue {
+            self.fetchOrderBookData(pair, count: 20)
+        }
+        else {
+            self.fetchOrderBookData(pair, count: 5)
+        }
+        if self.tradeView != nil || self.contentView != nil {
+            setTopTitle()
+        }
+    }
+
+    func fetchOrderBookData(_ pair: Pair,count: Int) {
+        guard let tradePairPrecision = TradeConfiguration.shared.tradePairPrecisions.value[pair] else {
+            TradeConfiguration.shared.tradePairPrecisions.asObservable().subscribe(onNext: { [weak self](data) in
+                guard let self = self, let selfPair = self.pair, selfPair == pair, let result = data[pair] else { return }
+                self.coordinator?.subscribe(pair, depth: result.price, count: count)
+                if self.vcType == OrderbookType.tradeView.rawValue {
+                    self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(result.price)
+                }
+                }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            return
+        }
+        if self.vcType == OrderbookType.tradeView.rawValue {
+            self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(tradePairPrecision.price)
+        }
+        self.coordinator?.subscribe(pair, depth: tradePairPrecision.price, count: count)
+    }
+
     func setupUI() {
-        if VCType == OrderbookType.contentView.rawValue {
+        if vcType == OrderbookType.contentView.rawValue {
             contentView = OrderBookContentView(frame: .zero)
             self.view.addSubview(contentView)
             contentView.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         } else {
             tradeView = TradeView(frame: self.view.bounds)
             self.view.addSubview(tradeView)
-
             tradeView.edges(to: self.view, insets: TinyEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
             setupEvent()
         }
         setTopTitle()
     }
 
+    func refreshData() {
+        guard let result = self.coordinator?.state.data.value, let parentVC = self.parent as? ExchangeViewController ,let grandVC = parentVC.parent as? TradeViewController else {
+            self.tradeView.data = OrderBook(bids: [], asks: [])
+            return
+        }
+
+        if grandVC.isLoading() {
+            grandVC.endLoading()
+        }
+
+        if parentVC.type.rawValue == grandVC.selectedIndex {
+            self.tradeView.data = result
+        }
+    }
+
     func setTopTitle() {
-        guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] else { return }
-        if VCType == OrderbookType.tradeView.rawValue {
+        guard let pair = self.pair,
+            let baseInfo = appData.assetInfo[pair.base],
+            let quoteInfo = appData.assetInfo[pair.quote] else { return }
+        if vcType == OrderbookType.tradeView.rawValue {
             self.tradeView.titlePrice.text = R.string.localizable.orderbook_price.key.localized() + "(" + baseInfo.symbol.filterJade + ")"
             self.tradeView.titleAmount.text = R.string.localizable.orderbook_amount.key.localized() + "(" + quoteInfo.symbol.filterJade + ")"
         } else {
@@ -74,57 +130,50 @@ class OrderBookViewController: BaseViewController {
 
     func setupEvent() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.setTopTitle()
         })
     }
+
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
     override func configureObserveState() {
-        self.coordinator!.state.data.asObservable().skip(1).distinctUntilChanged()
+        self.coordinator?.state.data.asObservable().distinctUntilChanged()
             .subscribe(onNext: {[weak self] (result) in
-                guard let `self` = self else { return }
-                if let parentVC = self.parent?.parent as? TradeViewController {
-                    if parentVC.isLoading() {
-                        parentVC.endLoading()
+                guard let self = self else { return }
+
+                if self.vcType == OrderbookType.contentView.rawValue {
+                    if let result = result {
+                        self.contentView.data = result
+                        self.contentView.tableView.reloadData()
+                        self.contentView.tableView.isHidden = false
                     }
-                }
-                if self.VCType == 1 {
-                    self.contentView.data = result
-                    self.contentView.tableView.reloadData()
-                    self.contentView.tableView.isHidden = false
-                    self.coordinator?.updateMarketListHeight(500)
                 } else {
-                    if self.coordinator?.state.pair.value == self.pair {
-                        self.tradeView.data = result
-                    }
+                    self.refreshData()
                 }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-    }
 
-    func showMarketPrice() {
-        guard let pair = pair, let _ = AssetConfiguration.marketBaseAssets.index(of: pair.base) else { return }
-        if let selectedIndex = appData.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
-            return ticker.quote == pair.quote
-        }) {
-            let tickers = appData.filterQuoteAssetTicker(pair.base)
-            let data = tickers[selectedIndex]
+        if vcType == OrderbookType.tradeView.rawValue {
+            self.coordinator?.state.lastPrice.asObservable().skip(1).subscribe(onNext: { [weak self](result) in
+                guard let self = self, let pair = self.pair else { return }
 
-            self.tradeView.amount.text = data.latest.tradePrice.price
-            self.tradeView.amount.textColor = data.incre.color()
+                self.tradeView.setAmountAction(result, pair: pair)
 
-            if data.latest == "0" {
-                self.tradeView.rmbPrice.text  = "≈¥"
-                return
+                }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+
+            self.coordinator?.state.depth.asObservable().skip(1).subscribe(onNext: { [weak self](result) in
+                guard let self = self else { return }
+
+                self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(result)
+
+                }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            
+            NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](notification) in
+                guard let self = self, let coor = self.coordinator else { return }
+                self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(coor.state.depth.value)
             }
-
-            self.tradeView.rmbPrice.text = "≈¥" + getAssetRMBPrice(pair.quote, base: pair.base).string(digits: 4, roundingMode: .down)
         }
     }
 }
@@ -139,13 +188,67 @@ extension OrderBookViewController: TradePair {
         }
     }
 
-    func refresh() {
-        guard let pair = pair else { return }
-        if self.tradeView != nil {
-            //      self.coordinator?.resetData(pair)
-
-            showMarketPrice()
+    func resetView() {
+        guard let coor = self.coordinator ,let oldPair = self.coordinator?.state.pair.value else {
+            return
         }
-        self.coordinator?.fetchData(pair)
+        coor.unSubscribe(oldPair, depth: coor.state.depth.value, count: 5)
+        coor.resetData(oldPair)
+    }
+
+    func appear() {
+        refreshData()
+        fetchData()
+    }
+
+    func disappear() {
+        self.coordinator?.disconnect()
+    }
+}
+
+extension OrderBookViewController {
+    @objc func chooseDecimalNumberEvent(_ data: [String: Any]) {
+        guard let text = data["data"] as? String, text.count != 0, let senderView = data["self"] as? UIView else {
+            return
+        }
+        guard let coor = self.coordinator, let pair = self.pair else { return }
+        guard let tradePairPrecision = TradeConfiguration.shared.tradePairPrecisions.value[pair] else {
+            self.coordinator?.openDecimalNumberVC(senderView, maxDecimal: coor.state.depth.value, selectedDecimal: coor.state.depth.value, senderVC: self)
+            return
+        }
+        self.coordinator?.openDecimalNumberVC(senderView, maxDecimal: tradePairPrecision.price, selectedDecimal: coor.state.depth.value, senderVC: self)
+    }
+}
+
+extension OrderBookViewController: UIPopoverPresentationControllerDelegate {
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        self.tradeView.resetDecimalImage()
+        guard let superVC = popoverPresentationController.presentedViewController as? RecordChooseViewController else {
+            return true
+        }
+        superVC.dismiss(animated: false, completion: nil)
+        return false
+    }
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+}
+
+extension OrderBookViewController: RecordChooseViewControllerDelegate {
+    func returnSelectedRow(_ sender: RecordChooseViewController, info: String) {
+        if let depthString = info.components(separatedBy: " ").first,
+            let depth = depthString.int,
+            let pair = self.pair ,let coor = self.coordinator {
+            coor.unSubscribe(pair, depth: coor.state.depth.value, count: coor.state.count)
+            coor.subscribe(pair, depth: depth, count: 5)
+        }
+        self.tradeView.resetDecimalImage()
+        sender.dismiss(animated: false, completion: nil)
+    }
+}
+
+extension OrderBookViewController: IndicatorInfoProvider {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: R.string.localizable.mark_order_book.key.localized())
     }
 }

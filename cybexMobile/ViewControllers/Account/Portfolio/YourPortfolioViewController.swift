@@ -86,7 +86,7 @@ class YourPortfolioViewController: BaseViewController {
     override func configureObserveState() {
 
         UserManager.shared.balances.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if let _ = UserManager.shared.balances.value {
                 self.data = UserManager.shared.getMyPortfolioDatas().filter({ (folioData) -> Bool in
                     return folioData.realAmount != "0" && folioData.limitAmount != "0"
@@ -98,7 +98,7 @@ class YourPortfolioViewController: BaseViewController {
 
         appData.otherRequestRelyData.asObservable()
             .subscribe(onNext: {[weak self] (_) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
 
                 DispatchQueue.main.async {
                     if let _ = UserManager.shared.balances.value {
@@ -147,5 +147,9 @@ extension YourPortfolioViewController {
     }
     @objc func transfer(_ data: [String: Any]) {
         self.coordinator?.pushToTransferVC(true)
+    }
+
+    @objc func ticketChecking(_ data: [String: Any]) {
+        self.coordinator?.pushToDepolyTicketVC()
     }
 }

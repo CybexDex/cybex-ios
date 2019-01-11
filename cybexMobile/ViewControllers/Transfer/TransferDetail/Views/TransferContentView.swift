@@ -39,13 +39,17 @@ class TransferContentView: UIView {
                     memoView.content.textColor = UIColor.pastelOrange
                     memoView.isUserInteractionEnabled = true
                     memoView.content.rx.tapGesture().when(.recognized).asObservable().subscribe(onNext: { [weak self](_) in
-                        guard let `self` = self else { return }
+                        guard let self = self else { return }
                         self.next?.sendEventWith(Event.transferMemo.rawValue, userinfo: ["memoView": ""])
                         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
                 }
 
                 if let feeInfo = data.fee, let assetInfo = appData.assetInfo[feeInfo.assetId] {
-                    feeView.contentLocali = getRealAmount(feeInfo.assetId, amount: feeInfo.amount).string(digits: assetInfo.precision, roundingMode: .down) + " " + assetInfo.symbol.filterJade
+                    feeView.contentLocali = AssetHelper.getRealAmount(
+                        feeInfo.assetId,
+                        amount: feeInfo.amount).string(
+                            digits: assetInfo.precision,
+                            roundingMode: .down) + " " + assetInfo.symbol.filterJade
                 }
                 updateHeight()
             }

@@ -11,6 +11,11 @@ import ReSwift
 
 func gOpenedOrdersReducer(action: Action, state: OpenedOrdersState?) -> OpenedOrdersState {
     let state = state ?? OpenedOrdersState()
-
+    switch action {
+    case let action as FetchOpenedOrderAction:
+        state.data.accept(action.data)
+    default:
+        break
+    }
     return state
 }

@@ -16,10 +16,6 @@ import Repeat
 import RxCocoa
 
 class AppCoordinator {
-    lazy var creator = AppPropertyActionCreate()
-
-    var timer: Repeater?
-
     var fetchPariTimer: Repeater?
 
     var store = Store<AppState> (
@@ -43,20 +39,22 @@ class AppCoordinator {
 
     var entryCoordinator: NavCoordinator?
 
-    var etoStatus: BehaviorRelay<ETOHidden?> = BehaviorRelay(value: nil)
-
     weak var startLoadingVC: BaseViewController?
-
+    var isFirstStart: Bool = true
     init(rootVC: BaseTabbarViewController) {
         self.rootVC = rootVC
 
         rootVC.shouldHijackHandler = {[weak self] (tab, vc, index) in
-            guard let `self` = self else { return false }
+            guard let self = self else { return false }
             if self.rootVC.selectedIndex == index, let nav = vc as? BaseNavigationController {
                 nav.topViewController?.refreshViewController()
             }
-
             return false
+        }
+
+        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (note) in
+            self.fetchPariTimer?.pause()
+            self.fetchPariTimer = nil
         }
     }
 
@@ -97,15 +95,14 @@ class AppCoordinator {
         tradeCoordinator.pushVC(TradeCoordinator.self, animated: false, context: nil)
         accountCoordinator.pushVC(AccountCoordinator.self, animated: false, context: nil)
 
-        if let status = self.etoStatus.value, status.isETOEnabled == true {
+        if let status = AppConfiguration.shared.enableSetting.value, status.isETOEnabled == true {
             etoCoordinator.pushVC(ETOCoordinator.self, animated: false, context: nil)
-            self.container = [homeCoordinator, tradeCoordinator, etoCoordinator, accountCoordinator] as [NavCoordinator]
+            self.container = [comprehensiveCoordinator, homeCoordinator, tradeCoordinator, etoCoordinator, accountCoordinator] as [NavCoordinator]
             rootVC.viewControllers = [comprehensive, home, trade, eto, account]
         } else {
             self.container = [comprehensiveCoordinator, homeCoordinator, tradeCoordinator, accountCoordinator] as [NavCoordinator]
             rootVC.viewControllers = [comprehensive, home, trade, account]
         }
-
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification),
                                                object: nil,
                                                queue: nil,
@@ -116,37 +113,30 @@ class AppCoordinator {
             CBConfiguration.sharedConfiguration.theme.tickColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.4470588235, green: 0.5843137255, blue: 0.9921568627, alpha: 0.06) : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.04)
             CBConfiguration.sharedConfiguration.theme.dashColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.white
         })
-
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification),
                                                object: nil,
                                                queue: nil,
-                                               using: {_ in
-            comprehensive.tabBarItem = ESTabBarItem.init(CBTabBarView(),
-                                                         title: R.string.localizable.navHome.key.localized(),
-                                                         image: R.image.ic_nav_home(),
-                                                         selectedImage: R.image.ic_nav_home_active())
-
-            home.tabBarItem = ESTabBarItem.init(CBTabBarView(),
-                                                title: R.string.localizable.navWatchlist.key.localized(),
-                                                image: R.image.ic_watchlist_24px(),
-                                                selectedImage: R.image.ic_watchlist_active_24px())
-            trade.tabBarItem = ESTabBarItem.init(CBTabBarView(),
-                                                 title: R.string.localizable.navTrade.key.localized(),
-                                                 image: R.image.icon_apply(),
-                                                 selectedImage: R.image.icon_apply_active())
-
-            eto.tabBarItem = ESTabBarItem.init(CBTabBarView(),
-                                               title: R.string.localizable.navEto.key.localized(),
-                                               image: R.image.ic_eto_24_px(),
-                                               selectedImage: R.image.ic_eto_active_24_px())
-            account.tabBarItem = ESTabBarItem.init(CBTabBarView(),
-                                                   title: R.string.localizable.navAccount.key.localized(),
-                                                   image: R.image.ic_account_box_24px(),
-                                                   selectedImage: R.image.ic_account_box_active_24px())
-            account.topViewController?.navigationItem.title = ""
-            self.rootVC.selectedIndex = self.rootVC.viewControllers!.count - 1
+                                               using: {[weak self]_ in
+            guard let self = self,
+                let tabbarItems = self.rootVC.tabBar.items,
+                let viewComtrollers = self.rootVC.viewControllers else { return }
+            for(index , value) in tabbarItems.enumerated() {
+                switch index {
+                case 0: value.title = R.string.localizable.navHome.key.localized()
+                    break
+                case 1: value.title = R.string.localizable.navWatchlist.key.localized()
+                    break
+                case 2: value.title = R.string.localizable.navTrade.key.localized()
+                    break
+                case 3: value.title = viewComtrollers.count == 4 ?
+                    R.string.localizable.navAccount.key.localized() : R.string.localizable.navEto.key.localized()
+                    break
+                case 4: value.title = R.string.localizable.navAccount.key.localized()
+                    break
+                default:break
+                }
+            }
         })
-
         self.rootVC.selectedIndex = 0
         aspect()
     }
@@ -155,13 +145,13 @@ class AppCoordinator {
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
                                                object: nil,
                                                queue: nil) {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.curDisplayingCoordinator().rootVC.topViewController?.refreshViewController()
         }
     }
 
     func curDisplayingCoordinator() -> NavCoordinator {
-        if self.rootVC.selectedIndex < self.container.count {
+        if self.container != nil, self.rootVC.selectedIndex < self.container.count {
             return self.container[self.rootVC.selectedIndex]
         }
 
@@ -169,6 +159,10 @@ class AppCoordinator {
     }
 
     func presentedViewController() -> BaseViewController? {
+        if curDisplayingCoordinator().rootVC == nil {
+            return nil
+        }
+        
         if let vc = curDisplayingCoordinator().rootVC.topViewController as? BaseViewController,
             let nav = vc.presentedViewController as? BaseNavigationController,
             let top = nav.topViewController as? BaseViewController {
@@ -179,6 +173,10 @@ class AppCoordinator {
     }
 
     func topViewController() -> BaseViewController? {
+        if curDisplayingCoordinator().rootVC == nil {
+            return nil
+        }
+        
         if let vc = presentedViewController() {
             return vc
         } else if let vc = curDisplayingCoordinator().rootVC.topViewController as? BaseViewController {

@@ -56,7 +56,7 @@ extension UserManager {
 
     func login(_ username: String, password: String, completion:@escaping (Bool) -> Void) {
         self.unlock(username, password: password) {[weak self] (locked, data) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if locked {
                 self.saveName(username)
                 self.avatarString = username.sha256()
@@ -70,25 +70,18 @@ extension UserManager {
     }
 
     func register(_ pinID: String, captcha: String, username: String, password: String) -> Promise<(Bool, Int)> {
-        return async {
-            let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
+        let (promise, seal) = Promise<(Bool, Int)>.pending()
 
-            if let keys = AccountKeys.deserialize(from: keysString),
-                let activeKey = keys.activeKey,
-                let ownerKey = keys.ownerKey,
-                let memoKey = keys.memoKey {
-                let params = ["cap": ["id": pinID, "captcha": captcha],
-                              "account": ["name": username,
-                                          "owner_key": ownerKey.publicKey,
-                                          "active_key": activeKey.publicKey,
-                                          "memo_key": memoKey.publicKey,
-                                          "refcode": "",
-                                          "referrer": ""]]
-                guard let data = try? await(SimpleHTTPService.requestRegister(params)) else {
-                    return (false, 0)
-                }
+        let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
+        if let keys = AccountKeys.deserialize(from: keysString),
+            let _ = keys.activeKey,
+            let _ = keys.ownerKey,
+            let _ = keys.memoKey {
 
-                if data.0 {
+            RegisterService.request(target: .register(pinID, captcha: captcha, name: username, keys: keys), success: { (json) in
+                if let code = json["code"].int { //失败
+                    seal.fulfill((false, code))
+                } else {
                     self.saveName(username)
                     self.avatarString = username.sha256()
 
@@ -96,12 +89,17 @@ extension UserManager {
 
                     self.keys = keys
                     self.fetchAccountInfo()
+                    seal.fulfill((true, 0))
                 }
-                return data
-
+            }, error: { (_) in
+                seal.fulfill((false, 0))
+            }) { (_) in
+                seal.fulfill((false, 0))
             }
-            return (false, 0)
+
         }
+
+        return promise
     }
 
     func logout() {
@@ -371,11 +369,11 @@ class UserManager {
 
     var refreshTime: TimeInterval = 6 {
         didSet {
-            appCoodinator.repeatFetchPairInfo(.veryLow)
+            appCoodinator.repeatFetchMarket(.veryLow)
         }
     }
-    var isWithDraw: Bool = false
-    var isTrade: Bool = false
+    var isWithDraw: Bool = false // 写memo 权限
+    var isTrade: Bool = false // 交易权限
     var name: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     var keys: AccountKeys?
     var avatarString: String?
@@ -388,59 +386,59 @@ class UserManager {
 
     var timer: Repeater?
 
-    var limitOrderValue: Double {
+    var limitOrderValue: Decimal {
         var decimallimitOrderValue: Decimal = 0
         if let limitOrder = limitOrder.value {
             for limitOrderValue in limitOrder {
-                let realAmount = getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
-                let priceValue = getAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
-                decimallimitOrderValue += (realAmount * Decimal(priceValue))
+                let realAmount = AssetHelper.getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
+                let priceValue = AssetHelper.singleAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
+                decimallimitOrderValue += (realAmount * priceValue)
             }
         }
-        return decimallimitOrderValue.doubleValue
+        return decimallimitOrderValue
     }
 
-    var limitOrderBuyValue: Double = 0
+    var limitOrderBuyValue: Decimal = 0
 
-    var limitOrderSellValue: Double = 0
+    var limitOrderSellValue: Decimal = 0
 
-    var balance: Double {
+    var balance: Decimal {
 
         var balanceValues: Decimal = 0
         var decimallimitOrderBuyValue: Decimal = 0
         var decimallimitOrderSellValue: Decimal = 0
         if let balances = balances.value {
             for balanceValue in balances {
-                let realAmount = getRealAmount(balanceValue.assetType, amount: balanceValue.balance)
-                let realRMBPrice = getAssetRMBPrice(balanceValue.assetType)
-                balanceValues += realAmount * Decimal(realRMBPrice)
+                let realAmount = AssetHelper.getRealAmount(balanceValue.assetType, amount: balanceValue.balance)
+                let realRMBPrice = AssetHelper.singleAssetRMBPrice(balanceValue.assetType)
+                balanceValues += realAmount * realRMBPrice
             }
         }
         if let limitOrder = limitOrder.value {
             for limitOrderValue in limitOrder {
                 let assetAInfo = appData.assetInfo[limitOrderValue.sellPrice.base.assetID]
                 let assetBInfo = appData.assetInfo[limitOrderValue.sellPrice.quote.assetID]
-                let (base, _) = calculateAssetRelation(assetIDAName: (assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "",
+                let (base, _) = MarketHelper.calculateAssetRelation(assetIDAName: (assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "",
                                                        assetIDBName: (assetBInfo != nil) ? assetBInfo!.symbol.filterJade : "")
                 let isBuy = base == ((assetAInfo != nil) ? assetAInfo!.symbol.filterJade : "")
-                let realAmount = getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
-                let priceValue = getAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
-                balanceValues += realAmount * Decimal(priceValue)
+                let realAmount = AssetHelper.getRealAmount(limitOrderValue.sellPrice.base.assetID, amount: limitOrderValue.forSale)
+                let priceValue = AssetHelper.singleAssetRMBPrice(limitOrderValue.sellPrice.base.assetID)
+                balanceValues += realAmount * priceValue
                 if isBuy {
-                    decimallimitOrderBuyValue += realAmount * Decimal(priceValue)
+                    decimallimitOrderBuyValue += realAmount * priceValue
                 } else {
-                    decimallimitOrderSellValue += realAmount * Decimal(priceValue)
+                    decimallimitOrderSellValue += realAmount * priceValue
                 }
             }
         }
-        limitOrderBuyValue = decimallimitOrderBuyValue.doubleValue
-        limitOrderSellValue = decimallimitOrderSellValue.doubleValue
-        return balanceValues.doubleValue
+        limitOrderBuyValue = decimallimitOrderBuyValue
+        limitOrderSellValue = decimallimitOrderSellValue
+        return balanceValues
     }
 
     func timingLock() {
         self.timer = Repeater.once(after: .seconds(300), {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.keys = nil
         })
         timer?.start()
@@ -452,7 +450,7 @@ class UserManager {
             .subscribe(onNext: { (_) in
                 DispatchQueue.main.async {
                     if UserManager.shared.isLoginIn &&
-                        AssetConfiguration.shared.assetIds.count > 0 &&
+                        MarketConfiguration.shared.marketPairs.value.count > 0 &&
                         !CybexWebSocketService.shared.overload() {
                         UserManager.shared.fetchAccountInfo()
                     }
@@ -460,7 +458,7 @@ class UserManager {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         account.asObservable().skip(1).subscribe(onNext: {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if CybexWebSocketService.shared.overload() || self.fillOrder.value != nil {
                 return
             }
@@ -478,7 +476,7 @@ class UserManager {
         if let balances = self.balances.value {
             for balance in balances {
                 if let foloiData = MyPortfolioData.init(balance: balance) {
-                    if (foloiData.realAmount == "" || foloiData.realAmount.toDouble() == 0) && foloiData.limitAmount.contains("--") {
+                    if (foloiData.realAmount == "" || foloiData.realAmount.decimal() == 0) && foloiData.limitAmount.contains("--") {
 
                     } else {
                         datas.append(foloiData)

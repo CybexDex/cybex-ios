@@ -12,14 +12,14 @@ import RxCocoa
 import ReSwift
 import Localize_Swift
 import SwifterSwift
+import SwiftyUserDefaults
+
 
 class ComprehensiveViewController: BaseViewController {
 
     var coordinator: (ComprehensiveCoordinatorProtocol & ComprehensiveStateManagerProtocol)?
 
     @IBOutlet weak var contentView: ComprehensiveView!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,6 @@ class ComprehensiveViewController: BaseViewController {
     }
 
     func setupUI() {
-        self.startLoading()
         self.coordinator?.setupChildrenVC(self)
     }
 
@@ -63,7 +62,7 @@ class ComprehensiveViewController: BaseViewController {
 
     override func configureObserveState() {
         self.coordinator?.state.pageState.asObservable().distinctUntilChanged().subscribe(onNext: {[weak self] (state) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             switch state {
             case .initial:
@@ -71,9 +70,7 @@ class ComprehensiveViewController: BaseViewController {
 
             case .loading(let reason):
                 if reason == .initialRefresh {
-                    self.startLoading()
                 }
-
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
 
@@ -82,23 +79,19 @@ class ComprehensiveViewController: BaseViewController {
 
             case .noMore:
                 break
-
             case .noData:
                 break
-
             case .normal:
-
                 break
-
             case .error(let error, _):
                 self.showToastBox(false, message: error.localizedDescription)
             }
         }).disposed(by: disposeBag)
 
         appData.tickerData.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
-            return tickers.count == AssetConfiguration.shared.assetIds.count
+            return tickers.count == MarketConfiguration.shared.marketPairs.value.count
             }.subscribe(onNext: { [weak self](tickers) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 if let hotPairs = self.coordinator?.state.hotPairs.value, self.isVisible {
                     var tickerModel = [Ticker]()
                     for pair in hotPairs {
@@ -115,7 +108,7 @@ class ComprehensiveViewController: BaseViewController {
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         self.coordinator?.state.announces.asObservable().subscribe(onNext: { [weak self](announces) in
-            guard let `self` = self, let announces = announces else { return }
+            guard let self = self, let announces = announces else { return }
             let titles = announces.map({ (announce) -> String in
                 return announce.title
             })
@@ -124,7 +117,7 @@ class ComprehensiveViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         self.coordinator?.state.banners.asObservable().subscribe(onNext: { [weak self](banners) in
-            guard let `self` = self, let bannerInfos = banners else { return }
+            guard let self = self, let bannerInfos = banners else { return }
             let images = bannerInfos.map({ (banner) -> String in
                 return banner.image
             })
@@ -132,12 +125,13 @@ class ComprehensiveViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         self.coordinator?.state.middleItems.asObservable().subscribe(onNext: { [weak self](middleItems) in
-            guard let `self` = self, let items = middleItems else { return }
+            guard let self = self, let items = middleItems else { return }
+
             self.contentView.middleItemsView.adapterModelToComprehensiveItemsView(items)
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.coordinator?.fetchData()
         }
 
@@ -145,15 +139,15 @@ class ComprehensiveViewController: BaseViewController {
                                  self.coordinator!.state.middleItems.asObservable(),
                                  self.coordinator!.state.banners.asObservable(),
                                  self.coordinator!.state.announces.asObservable()).subscribe(onNext: { [weak self](hotPairs, middleItems, banners, announces) in
-                                    guard let `self` = self else { return }
+                                    guard let self = self else { return }
                                     if let _ = hotPairs, let _ = middleItems, let _ = banners, let _ = announces {
                                         self.endLoading()
                                     }
 
                                     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        NotificationCenter.default.addObserver(forName: NotificationName.NetWorkChanged, object: nil, queue: nil) { [weak self](_) in
-            guard let `self` = self else { return }
+        NotificationCenter.default.addObserver(forName: .NetWorkChanged, object: nil, queue: nil) { [weak self](_) in
+            guard let self = self else { return }
             SwifterSwift.delay(milliseconds: 1000, completion: {
                 main {
                     self.coordinator?.fetchData()
@@ -165,15 +159,36 @@ class ComprehensiveViewController: BaseViewController {
 
 extension ComprehensiveViewController {
     @objc func comprehensiveItemViewDidClicked(_ data: [String: Any]) {
-        guard let middleItems = self.coordinator?.state.middleItems.value, let index = data["index"] as? Int else { return }
+        guard let middleItems = self.coordinator?.state.middleItems.value,
+            let index = data["index"] as? Int else { return }
+
         let midlleItem = middleItems[index]
-        openUrl(midlleItem.link)
+
+        if midlleItem.needlogin, !UserManager.shared.isLoginIn {
+            appCoodinator.showLogin()
+            return
+        }
+
+
+        if midlleItem.needtalk == .gamecenter {
+            if Defaults[.hasCode] == true {
+                self.coordinator?.openGame(midlleItem.link)
+                return
+            }
+            let titleName = R.string.localizable.eto_invite_code_title.key.localized()
+            self.showPasswordBox(titleName,middleType: CybexTextView.TextViewType.code)
+            return
+        }
+        
+        openUrl(midlleItem.link, needLogin: midlleItem.needlogin)
     }
+    
     @objc func ETOHomeBannerViewDidClicked(_ data: [String: Any]) {
         guard let banners = self.coordinator?.state.banners.value, let index = data["data"] as? Int  else { return }
         let banner = banners[index]
         openUrl(banner.link)
     }
+    
     @objc func announceScrollViewDidClicked(_ data: [String: Any]) {
         guard let announces = self.coordinator?.state.announces.value, let index = data["index"] as? Int, index >= 0, index < announces.count else {
             return
@@ -187,9 +202,9 @@ extension ComprehensiveViewController {
         }
     }
 
-    func openUrl(_ url: String) {
+    func openUrl(_ url: String, needLogin: Bool = true) {
         if url.contains("cybexapp://") {
-            if !UserManager.shared.isLoginIn {
+            if needLogin, !UserManager.shared.isLoginIn {
                 appCoodinator.showLogin()
                 return
             }
@@ -198,6 +213,24 @@ extension ComprehensiveViewController {
             if url.contains("http://") || url.contains("https://") {
                 self.coordinator?.openWebVCUrl(url)
             }
+        }
+    }
+    
+    
+    override func codePassed(_ passed: Bool) {
+        if passed {
+            Defaults[.hasCode] = true
+            guard let middleItems = self.coordinator?.state.middleItems.value else { return }
+            let items = middleItems.filter { (item) -> Bool in
+                return item.needtalk == .gamecenter
+            }
+
+            if let item = items.first {
+                self.coordinator?.openGame(item.link)
+            }
+        }
+        else {
+            self.showToastBox(false, message: R.string.localizable.eto_invite_code_error.key.localized())
         }
     }
 }

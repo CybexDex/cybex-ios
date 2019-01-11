@@ -41,13 +41,13 @@ class WithdrawAddressHomeViewController: BaseViewController {
     override func configureObserveState() {
 
         self.coordinator?.state.data.asObservable().subscribe(onNext: {[weak self] (data) in
-            guard let `self` = self, data.count > 0 else { return }
+            guard let self = self, data.count > 0 else { return }
 
             self.coordinator?.fetchAddressData()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         self.coordinator?.state.addressData.asObservable().subscribe(onNext: {[weak self] (_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.endLoading()
             self.tableView.reloadData()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)

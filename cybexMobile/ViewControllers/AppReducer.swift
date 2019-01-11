@@ -75,86 +75,24 @@ func appReducer(action: Action, state: AppState?) -> AppState {
     return AppState(property: appPropertyReducer(state?.property, action: action))
 }
 
-let semaphore = DispatchSemaphore(value: 1)
 
 func appPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppPropertyState {
     var state = state ?? AppPropertyState()
 
-    var ids = state.subscribeIds ?? [:]
-    var refreshTimes = state.pairsRefreshTimes ?? [:]
-    var klineDatas = state.detailData ?? [:]
-
     switch action {
-        //    case let action as MarketsFetched:
-        //        async {
-        //            if s.wait(timeout: .distantFuture) == .success {
-        //
-        //                let (matrixs, data) = applyMarketsToState(state, action: action)
-        //                main {
-        //                    state.matrixs.accept(matrixs)
-        //                    state.data.accept(data)
-        //                    refreshTimes[Pair(base:action.pair.firstAssetId, quote:action.pair.secondAssetId)] = Date().timeIntervalSince1970
-        //                    state.pairsRefreshTimes = refreshTimes
-        //                    s.signal()
-        //                }
-        //            }
-        //        }
-
-    case let action as SubscribeSuccess:
-        ids[action.pair] = action.id
-        refreshTimes[action.pair] = Date().timeIntervalSince1970
-        state.subscribeIds = ids
-        state.pairsRefreshTimes = refreshTimes
-
     case let action as AssetInfoAction:
-        state.assetInfo[action.assetID] = action.info
-    case let action as KLineFetched:
+        var assetinfoMap: [String: AssetInfo] = [:]
+        var nameToIds: [String: String] = [:]
 
-        if klineDatas.has(key: action.pair) {
-            var klineData = klineDatas[action.pair]!
-            klineData[action.stick] = action.assets
-            klineDatas[action.pair] = klineData
-        } else {
-            klineDatas[action.pair] = [action.stick: action.assets]
+        for info in action.info {
+            assetinfoMap[info.id] = info
+            nameToIds[info.symbol.filterJade] = info.id
         }
-        state.detailData = klineDatas
-    case let action as FecthEthToRmbPriceAction:
-        if action.price.count > 0 {
-            for rmbPrices in action.price {
-                if rmbPrices.name == "CYB" {
-                    if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
-                        state.cybRmbPrice = rmbPrices.rmbPrice.toDecimal()!
-                    }
-                } else if rmbPrices.name == "BTC" {
-                    if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
-                        state.btcRmbPrice = rmbPrices.rmbPrice.toDecimal()!
-                    }
-                } else if rmbPrices.name == "USDT" {
-                    if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
-                        state.usdtRmbPrice = rmbPrices.rmbPrice.toDecimal()!
-                    }
-                } else if rmbPrices.name == "ETH" {
-                    if rmbPrices.rmbPrice != "" && rmbPrices.rmbPrice != "0"{
-                        state.ethRmbPrice = rmbPrices.rmbPrice.toDecimal()!
-                    }
-                }
-            }
-        }
-        state.rmbPrices = action.price
-    case let action as FecthMarketListAction:
-        state.importMarketLists = action.data
+        state.assetInfo = assetinfoMap
+        state.assetNameToIds.accept(nameToIds)
 
     case let action as TickerFetched:
-        async {
-            if semaphore.wait(timeout: .distantFuture) == .success {
-                main {
-                    refreshTimes[Pair(base: action.asset.base, quote: action.asset.quote)] = Date().timeIntervalSince1970
-                    state.tickerData.accept(applyTickersToState(state, action: action))
-                    semaphore.signal()
-                }
-            }
-        }
-
+        state.tickerData.accept(applyTickersToState(state, action: action))
     default:
         break
     }
@@ -178,7 +116,7 @@ func applyTickersToState(_ state: AppPropertyState, action: TickerFetched) -> [T
     }
 
     if data.count > 1 {
-        let scored = data.sorted(by: {return $0.baseVolume.toDecimal()! > $1.baseVolume.toDecimal()!})
+        let scored = data.sorted(by: {return $0.baseVolume.decimal() > $1.baseVolume.decimal()})
         return scored
     } else {
         return data

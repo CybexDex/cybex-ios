@@ -16,14 +16,16 @@
 default_platform(:ios)
 
 platform :ios do
-  keychain_name = "ios-build.keychain"
-  keychain_password = ENV["KEY_PASSWORD"]
   ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "300"
   ENV["FASTLANE_XCODEBUILD_SETTINGS_RETRIES"] = "10"
   
+  delete_keychain(
+    name: "ios-build"
+  ) if File.exist? File.expand_path("~/Library/Keychains/ios-build-db")
+    
   create_keychain(
-    name: keychain_name,
-    password: keychain_password,
+    name: "ios-build",
+    password: "1",
     default_keychain: true,
     unlock: true,
     timeout: 3600,
@@ -31,10 +33,16 @@ platform :ios do
   )
 
   import_certificate(
+    certificate_path: ".travis/AppleWWDRCA.cer",
+    keychain_name: "ios-build",
+    keychain_password: "1"
+  )
+
+  import_certificate(
     certificate_path: ".travis/nbl-dis.p12",
     certificate_password: ENV["KEY_PASSWORD"],
-    keychain_name: keychain_name,
-    keychain_password: keychain_password
+    keychain_name: "ios-build",
+    keychain_password: "1"
   )
   
   lane :fir do

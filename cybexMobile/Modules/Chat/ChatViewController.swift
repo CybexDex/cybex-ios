@@ -93,7 +93,7 @@ class ChatViewController: MessagesViewController {
         self.shadowView?.theme_backgroundColor = [UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5).hexString(true) ,UIColor.steel50.hexString(true)]
         self.view.insertSubview(self.shadowView!, belowSubview: self.downInputView!)
         self.shadowView!.rx.tapGesture().asObservable().when(GestureRecognizerState.recognized).subscribe(onNext: { [weak self](tap) in
-            guard let `self` = self, let upInputView = self.upInputView  else {
+            guard let self = self, let upInputView = self.upInputView  else {
                 return
             }
             upInputView.textView.resignFirstResponder()
@@ -102,6 +102,7 @@ class ChatViewController: MessagesViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -133,7 +134,7 @@ class ChatViewController: MessagesViewController {
                 messagesCollectionView.reloadSections([messageList.count - 2])
             }
         }, completion: { [weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if self.isLastSectionVisible() == true {
                 self.messagesCollectionView.scrollToBottom(animated: true)
             }
@@ -236,7 +237,7 @@ class ChatViewController: MessagesViewController {
                 focusView.tag = 2018
                 cell.addSubview(focusView)
                 focusView.rx.tapGesture().when(GestureRecognizerState.recognized).asObservable().subscribe(onNext: { [weak self](ges) in
-                    guard let `self` = self else { return }
+                    guard let self = self else { return }
                    
                     if let icView = self.iconView, let _ = icView.superview {
                         icView.removeFromSuperview()
@@ -268,7 +269,7 @@ class ChatViewController: MessagesViewController {
     func setupEvent() {
         
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification,object: nil, queue: nil) { [weak self](notification) in
-            guard let `self` = self, let userinfo = notification.userInfo as NSDictionary?, let nsValue = userinfo.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue else { return }
+            guard let self = self, let userinfo = notification.userInfo as NSDictionary?, let nsValue = userinfo.object(forKey: UIResponder.keyboardFrameEndUserInfoKey) as? NSValue else { return }
             guard let upInputView = self.upInputView, upInputView.textView.isFirstResponder else { return }
             
             if let shadowView = self.shadowView {
@@ -292,7 +293,7 @@ class ChatViewController: MessagesViewController {
         }
         
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { [weak self](notification) in
-            guard let `self` = self, let upInputView = self.upInputView, let downInputView = self.downInputView else { return }
+            guard let self = self, let upInputView = self.upInputView, let downInputView = self.downInputView else { return }
             upInputView.isHidden = true
             self.shadowView?.isHidden = true
             var rectOfView = self.view.frame
@@ -321,16 +322,17 @@ class ChatViewController: MessagesViewController {
         }).disposed(by: disposeBag)
         
         self.coordinator?.state.numberOfMember.asObservable().skip(1).subscribe(onNext: { [weak self](numberOfMember) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             
             if let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] {
                 self.title = quoteInfo.symbol.filterJade + "/" + baseInfo.symbol.filterJade + "(\(numberOfMember))"
             }
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         
+        #if DEBUG
         self.coordinator?.state.chatState.asObservable().skip(1).subscribe(onNext: { [weak self](connectState) in
-            guard let `self` = self, let connectState = connectState else { return }
-           
+            guard let self = self, let connectState = connectState else { return }
+            
             var message = ""
             switch connectState{
             case .chatServiceDidClosed:
@@ -344,28 +346,34 @@ class ChatViewController: MessagesViewController {
             default:
                 break
             }
-//            if message != "已链接" {
-//                BeareadToast.showError(text: message, inView: self.view, hide: 1)
-//            }
-//            else {
-//                BeareadToast.showSucceed(text: message, inView: self.view, hide: 1)
-//            }
             
-        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            if message != "已链接" {
+                BeareadToast.showError(text: message, inView: self.view, hide: 1)
+            }
+            else {
+                BeareadToast.showSucceed(text: message, inView: self.view, hide: 1)
+            }
+            
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+        
+        #endif
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.init("login_success"), object: nil, queue: nil) { [weak self](notification) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if let downInputView = self.downInputView {
                 downInputView.sendBtn.setTitle(R.string.localizable.chat_input_send.key.localized(), for: UIControl.State.normal)
             }
             if let upInputView = self.upInputView {
                 upInputView.sendBtn.setTitle(R.string.localizable.chat_input_send.key.localized(), for: UIControl.State.normal)
             }
+            if self.messageList.count != 0 {
+                self.coordinator?.loginSuccessReloadData(self.messageList)
+            }
         }
         
         
         self.coordinator?.state.sendState.asObservable().subscribe(onNext: { [weak self](state) in
-            guard let `self` = self, let sendState = state else { return }
+            guard let self = self, let sendState = state else { return }
             guard let name = UserManager.shared.name.value, name.isEmpty == false else { return }
             self.downInputView?.inputTextField.text = ""
             self.downInputView?.setupBtnState()
@@ -424,51 +432,40 @@ extension ChatViewController: MessagesDataSource {
 extension ChatViewController: MessageCellDelegate {
     
     func didTapAvatar(in cell: MessageCollectionViewCell) {
-        print("Avatar tapped")
     }
     
     func didTapMessage(in cell: MessageCollectionViewCell) {
-        print("Message tapped")
         //        self.coordinator?.send("xxx", username: "", sign: "")
     }
     
     func didTapCellTopLabel(in cell: MessageCollectionViewCell) {
-        print("Top cell label tapped")
     }
     
     func didTapMessageTopLabel(in cell: MessageCollectionViewCell) {
-        print("Top message label tapped")
     }
     
     func didTapMessageBottomLabel(in cell: MessageCollectionViewCell) {
-        print("Bottom label tapped")
     }
     
     func didTapAccessoryView(in cell: MessageCollectionViewCell) {
-        print("Accessory view tapped")
     }
 }
 
 extension ChatViewController: MessageLabelDelegate {
     
     func didSelectAddress(_ addressComponents: [String: String]) {
-        print("Address Selected: \(addressComponents)")
     }
     
     func didSelectDate(_ date: Date) {
-        print("Date Selected: \(date)")
     }
     
     func didSelectPhoneNumber(_ phoneNumber: String) {
-        print("Phone Number Selected: \(phoneNumber)")
     }
     
     func didSelectURL(_ url: URL) {
-        print("URL Selected: \(url)")
     }
     
     func didSelectTransitInformation(_ transitInformation: [String: String]) {
-        print("TransitInformation Selected: \(transitInformation)")
     }
 }
 
@@ -499,7 +496,6 @@ extension ChatViewController: MessagesDisplayDelegate {
         
         view.frame = frame
         view.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]
-        
         return view
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 import ReSwift
 import HandyJSON
 import NBLCommonModule
+import SwiftyJSON
 
 struct RechargeContext: RouteContext, HandyJSON {
     init() {}
@@ -92,14 +93,24 @@ extension RechargeCoordinator: RechargeStateManagerProtocol {
     }
 
     func fetchWithdrawIdsInfo() {
-        SimpleHTTPService.fetchWithdrawIdsInfo().done { (ids) in
-            self.store.dispatch(FecthWithdrawIds(data: ids))
-            }.cauterize()
+        AppService.request(target: AppAPI.withdrawList, success: { (json) in
+            let list = JSON(json).arrayValue.compactMap({ Trade.deserialize(from: $0.dictionaryObject) })
+            self.store.dispatch(FecthWithdrawIds(data: list))
+        }, error: { (_) in
+
+        }) { (_) in
+
+        }
     }
     func fetchDepositIdsInfo() {
-        SimpleHTTPService.fetchDesipotInfo().done { (ids) in
-            self.store.dispatch(FecthDepositIds(data: ids))
-            }.cauterize()
+        AppService.request(target: AppAPI.topUpList, success: { (json) in
+            let list = JSON(json).arrayValue.compactMap({ Trade.deserialize(from: $0.dictionaryObject) })
+            self.store.dispatch(FecthDepositIds(data: list))
+        }, error: { (_) in
+
+        }) { (_) in
+
+        }
     }
     func sortedEmptyAsset(_ isEmpty: Bool) {
         self.store.dispatch(SortedByEmptyAssetAction(data: isEmpty))

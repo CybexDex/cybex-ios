@@ -22,6 +22,7 @@ class CybexTextView: UIView {
     enum TextViewType: Int {
         case normal
         case time
+        case code
     }
 
     var middleView: (UIView&Views)? {

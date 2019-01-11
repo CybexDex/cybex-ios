@@ -19,6 +19,8 @@ protocol ChatCoordinatorProtocol {
     func send(_ message: String, username: String, sign: String)
     
     func resetRefreshMessage(_ isRefresh: Bool)
+    
+    func loginSuccessReloadData(_ sender: [ChatCommonMessage])
 }
 
 protocol ChatStateManagerProtocol {
@@ -142,6 +144,26 @@ extension ChatCoordinator: ChatCoordinatorProtocol {
     
     func resetRefreshMessage(_ isRefresh: Bool) {
         self.store.dispatch(ChatRefreshAction(data: isRefresh))
+    }
+    
+    func loginSuccessReloadData(_ sender: [ChatCommonMessage]) {
+        guard let userName = UserManager.shared.name.value else { return }
+        let data = sender.map { (message) -> ChatCommonMessage in
+            if message.sender.displayName == userName {
+                if case let .attributedText(attr) = message.kind,
+                    let name = attr.string.components(separatedBy: " ").first,
+                    let substring = attr.string.substring(from: name.count + 1,
+                                                          length: attr.string.count - name.count) {
+                    let nameAttribute = nameAttributeString(name, isRealName: true)
+                    let messageAttribute = messageAttributeString(" " + substring)
+                    let attributedText = NSMutableAttributedString(attributedString: nameAttribute)
+                    attributedText.append(messageAttribute)
+                   return ChatCommonMessage(attributedText: attributedText, sender: Sender(id: "101010", displayName: userName), messageId: "\(message.messageId)", date: message.sentDate)
+                }
+            }
+            return message
+        }
+        self.store.dispatch(ChatReloadDataAction(data: data))
     }
 }
 

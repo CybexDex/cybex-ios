@@ -51,20 +51,20 @@ extension WithdrawAddressCoordinator: WithdrawAddressCoordinatorProtocol {
         actionController.tapMaskCallback = dismissCallback
 
         actionController.addAction(Action(R.string.localizable.copy.key.localized(), style: .destructive, handler: {[weak self] _ in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             self.copy()
             dismissCallback?()
         }))
 
         actionController.addAction(Action(R.string.localizable.delete.key.localized(), style: .destructive, handler: {[weak self] _ in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             self.confirmdelete()
             dismissCallback?()
         }))
 
         actionController.addSection(PeriscopeSection())
         actionController.addAction(Action(R.string.localizable.alert_cancle.key.localized(), style: .cancel, handler: {[weak self] _ in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
 
             self.select(nil)
             dismissCallback?()
@@ -104,7 +104,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
                     return AddressName(name: info.name)
                 }
 
-                let sortedNames = sortNameBasedonAddress(names)
+                let sortedNames = AddressHelper.sortNameBasedonAddress(names)
 
                 let data = list.sorted { (front, last) -> Bool in
                     return sortedNames.index(of: front.name)! <= sortedNames.index(of: last.name)!
@@ -123,7 +123,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
         var result = false
         Broadcaster.notify(WithdrawAddressHomeStateManagerProtocol.self) { (coor) in
             if let viewmodel = coor.state.selectedViewModel.value {
-                if viewmodel.viewModel.model.id == AssetConfiguration.EOS {
+                if viewmodel.viewModel.model.id == AssetConfiguration.CybexAsset.EOS.id {
                     result = true
                 }
             }
@@ -145,7 +145,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
 
     func copy() {
         if let addressData = self.state.selectedAddress.value {
-            if addressData.currency == AssetConfiguration.EOS || addressData.currency == AssetConfiguration.XRP{
+            if addressData.currency == AssetConfiguration.CybexAsset.EOS.id || addressData.currency == AssetConfiguration.CybexAsset.XRP.id {
                 if let memo = addressData.memo {
                     UIPasteboard.general.string = addressData.address + "(\(memo))"
                 } else {
@@ -162,7 +162,7 @@ extension WithdrawAddressCoordinator: WithdrawAddressStateManagerProtocol {
 
     func confirmdelete() {
         if let addressData = self.state.selectedAddress.value {
-            self.rootVC.topViewController?.showConfirm(R.string.localizable.address_delete_confirm.key.localized(), attributes: confirmDeleteWithDrawAddress(addressData), setup: { (labels) in
+            self.rootVC.topViewController?.showConfirm(R.string.localizable.address_delete_confirm.key.localized(), attributes: UIHelper.confirmDeleteWithDrawAddress(addressData), setup: { (labels) in
                 for label in labels {
                     label.content.numberOfLines = 1
                     label.content.lineBreakMode = .byTruncatingMiddle

@@ -32,7 +32,7 @@ extension CryptoData {
     /// Calculates the digest for current data under a given algorithm.
     ///
     /// - Parameter algorithm: The crypto algorithm used to calculate the data digest.
-    /// - Returns: The `Data` represents the digest of `self`.
+    /// - Returns: The `Data` represents the digest of self.
     func digest(using algorithm: CryptoAlgorithm) -> Data {
         return raw.digest(using: algorithm)
     }

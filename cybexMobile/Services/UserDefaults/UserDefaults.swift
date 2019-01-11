@@ -22,4 +22,12 @@ extension DefaultsKeys {
     static let environment = DefaultsKey<String>("environment")
     
     static let isRealName = DefaultsKey<Bool>("isRealName")
+    
+    static let hasCode = DefaultsKey<Bool>("hasCode")
+}
+
+extension UserDefaults {
+    var isTestEnv : Bool {
+        return Defaults[.environment] == "test"
+    }
 }

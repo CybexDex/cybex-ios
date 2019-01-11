@@ -19,31 +19,32 @@ class OrderBookCellView: UIView {
     @IBOutlet weak var leftBoxWidth: NSLayoutConstraint!
     @IBOutlet weak var rightBoxWidth: NSLayoutConstraint!
 
+    var pricePrecision: Int = 0
+    var amountPrecision: Int = 0
+
     var data: Any? {
         didSet {
-            guard let showData = data as? (OrderBook.Order?, OrderBook.Order?, Double?, Double?) else { return }
+            guard let showData = data as? (OrderBook.Order?, OrderBook.Order?, Decimal?, Decimal?) else { return }
 
             if let bid = showData.0 {
-                self.buyPrice.text = bid.price
-                self.buyVolume.text = bid.volume
-                self.leftBoxWidth = self.leftBoxWidth.changeMultiplier(multiplier: CGFloat(showData.2!))
+                self.buyPrice.text = bid.price.formatCurrency(digitNum: pricePrecision)
+                self.buyVolume.text = bid.volume.suffixNumber(digitNum: amountPrecision, padZero: true)
+                self.leftBoxWidth = self.leftBoxWidth.changeMultiplier(multiplier: showData.2!.cgfloat())
             } else {
                 self.buyPrice.text = ""
                 self.buyVolume.text = ""
                 self.leftBoxWidth = self.leftBoxWidth.changeMultiplier(multiplier: 0.001)
             }
 
-            //      print("left:\(self.leftBoxWidth.multiplier)  ")
             if let ask = showData.1 {
-                self.sellPrice.text = ask.price
-                self.sellVolume.text = ask.volume
-                self.rightBoxWidth = self.rightBoxWidth.changeMultiplier(multiplier: CGFloat(showData.3!))
+                self.sellPrice.text = ask.price.formatCurrency(digitNum: pricePrecision)
+                self.sellVolume.text = ask.volume.suffixNumber(digitNum: amountPrecision, padZero: true)
+                self.rightBoxWidth = self.rightBoxWidth.changeMultiplier(multiplier: showData.3!.cgfloat())
             } else {
                 self.sellPrice.text = ""
                 self.sellVolume.text = ""
                 self.rightBoxWidth = self.rightBoxWidth.changeMultiplier(multiplier: 0.001)
             }
-            //      print("right:\(self.rightBoxWidth.multiplier)  ")
 
         }
     }

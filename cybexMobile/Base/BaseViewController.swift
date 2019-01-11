@@ -50,7 +50,6 @@ class BaseViewController: UIViewController {
         self.view.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]
 
         configureObserveState()
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -120,7 +119,7 @@ class BaseViewController: UIViewController {
     }
 
     deinit {
-        print("dealloc: \(self)")
+        Log.print("dealloc: \(self)")
     }
 }
 
@@ -166,6 +165,33 @@ extension UIViewController: ShowManagerDelegate {
                                           animationType: .smallBig, showType: .alertImage)
             ShowToastManager.shared.showAnimationInView(self.view)
             ShowToastManager.shared.hide(2.0)
+        }
+    }
+    
+    func showToast(message: String, manager: ShowToastManager = ShowToastManager.shared) {
+        if manager.showView != nil {
+            ShowToastManager.shared.hide(0)
+        }
+        SwifterSwift.delay(milliseconds: 100) {
+            ShowToastManager.shared.setUp(message: message,
+                                          animationType: .smallBig, showType: .alertImage)
+            ShowToastManager.shared.showAnimationInView(self.view)
+            ShowToastManager.shared.hide(2.0)
+        }
+    }
+
+    func showCancelOpenOrderConfirm(_ title: String) {
+        if ShowToastManager.shared.showView != nil {
+            ShowToastManager.shared.hide(0)
+        }
+        SwifterSwift.delay(milliseconds: 100) {
+            let subView = CybexShowTitleView(frame: .zero)
+            subView.title.locali = ""
+            subView.contentLable.locali = "openedorder_ensure_message"
+
+            ShowToastManager.shared.setUp(title: R.string.localizable.tip_title.key.localized(), contentView: subView, animationType: .smallBig, middleType: .normal)
+            ShowToastManager.shared.showAnimationInView(self.view)
+            ShowToastManager.shared.delegate = self
         }
     }
 
@@ -222,15 +248,25 @@ extension UIViewController: ShowManagerDelegate {
     @objc func passwordPassed(_ passed: Bool) {
 
     }
-
+    
     @objc func passwordDetecting() {
 
     }
+    
+    @objc func codePassed(_ passed: Bool) {
+        
+    }
 
-    func returnUserPassword(_ sender: String) {
+    func returnUserPassword(_ sender: String, textView: CybexTextView) {
         ShowToastManager.shared.hide()
+        if textView.viewType == .code {
+            self.codePassed(GameModel.codeArray.contains(sender))
+            return
+        }
+        
+        
         passwordDetecting()
-
+        
         if let name = UserManager.shared.name.value {
             UserManager.shared.unlock(name, password: sender) {[weak self] (success, _) in
                 self?.passwordPassed(success)

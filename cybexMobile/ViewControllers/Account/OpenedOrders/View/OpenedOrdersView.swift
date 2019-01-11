@@ -15,8 +15,9 @@ class OpenedOrdersView: UIView {
     @IBOutlet weak var quote: UILabel!
     @IBOutlet weak var base: UILabel!
     @IBOutlet weak var amount: UILabel!
-    @IBOutlet weak var price: UILabel!
-
+    @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    
     @IBOutlet weak var basePriceView: UIView!
     @IBOutlet weak var basePrice: UILabel!
 
@@ -32,67 +33,30 @@ class OpenedOrdersView: UIView {
     var selectedIndex: IndexPath?
     var data: Any? {
         didSet {
-            if let order = data as? LimitOrder {
-                if self.basePriceView.isHidden == false {
-                    self.basePrice.text = "--"
-                }
-
-                if order.isBuy {
+            if let order = data as? LimitOrderStatus {
+                let pair = order.getPair()
+                let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(pair)
+                self.quote.text = pair.quote.symbol
+                self.base.text = "/" + pair.base.symbol
+                self.progressLabel.text = order.decimalProgress().formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%"
+                self.timeLabel.text = order.createTime.string(withFormat: "MM/dd HH:mm:ss")
+                
+                self.basePrice.text = order.getPrice().toReal().formatCurrency(digitNum: tradePrecision.price) + " " + pair.base.symbol
+                if order.isBuyOrder() {
                     self.orderType.openedStatus = 0
-
-                    if let quoteInfo = appData.assetInfo[order.sellPrice.quote.assetID], let baseInfo = appData.assetInfo[order.sellPrice.base.assetID] {
-                        quote.text = quoteInfo.symbol.filterJade
-                        base.text = "/" + baseInfo.symbol.filterJade
-
-                        let basePrice = getRealAmount(order.sellPrice.base.assetID,
-                                                      amount: order.sellPrice.base.amount) /
-                            getRealAmount(order.sellPrice.quote.assetID,
-                                          amount: order.sellPrice.quote.amount)
-
-                        let baseAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
-
-                        var quoteAmount: Decimal!
-                        if order.forSale == order.sellPrice.base.amount {
-                            quoteAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-                        } else {
-                            quoteAmount = baseAmount / basePrice
-                        }
-
-                        self.amount.text = quoteAmount.string(digits: quoteInfo.precision, roundingMode: .down) + " " + quoteInfo.symbol.filterJade
-                        if self.basePriceView.isHidden == false {
-                            self.price.text =  baseAmount.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-                            self.basePrice.text = basePrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-                        } else {
-                            self.price.text = basePrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-                        }
-                    }
-                } else {
+                    self.amount.text = AssetHelper.getRealAmount(pair.quote,
+                                                                 amount: order.receivedAmount.string).formatCurrency(digitNum: tradePrecision.amount) + "/" +
+                        AssetHelper.getRealAmount(pair.quote,
+                                                  amount: order.amountToReceive.string).formatCurrency(digitNum: tradePrecision.amount) + " " + pair.quote.symbol
+                    self.progressLabel.textColor = self.orderType.buyColor
+                }
+                else {
                     self.orderType.openedStatus = 1
-                    if let quoteInfo = appData.assetInfo[order.sellPrice.base.assetID], let baseInfo = appData.assetInfo[order.sellPrice.quote.assetID] {
-                        self.quote.text = quoteInfo.symbol.filterJade
-                        self.base.text = "/" + baseInfo.symbol.filterJade
-
-                        let basePrice = getRealAmount(order.sellPrice.quote.assetID,
-                                                      amount: order.sellPrice.quote.amount) /
-                            getRealAmount(order.sellPrice.base.assetID,
-                                          amount: order.sellPrice.base.amount)
-                        let quoteAmount = getRealAmount(order.sellPrice.base.assetID, amount: order.forSale)
-
-                        var baseAmount: Decimal!
-                        if order.forSale == order.sellPrice.base.amount {
-                            baseAmount = getRealAmount(order.sellPrice.quote.assetID, amount: order.sellPrice.quote.amount)
-                        } else {
-                            baseAmount = basePrice * quoteAmount
-                        }
-
-                        self.amount.text = quoteAmount.string(digits: quoteInfo.precision, roundingMode: .down) + " " +  quoteInfo.symbol.filterJade
-                        if self.basePriceView.isHidden == false {
-                            self.price.text = baseAmount.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-                            self.basePrice.text = basePrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-                        } else {
-                            self.price.text = basePrice.string(digits: baseInfo.precision, roundingMode: .down) + " " + baseInfo.symbol.filterJade
-                        }
-                    }
+                    self.progressLabel.textColor = self.orderType.sellColor
+                    self.amount.text = AssetHelper.getRealAmount(pair.quote,
+                                                                 amount: order.soldAmount.string).formatCurrency(digitNum: tradePrecision.amount) + "/" +
+                        AssetHelper.getRealAmount(pair.quote,
+                                                  amount: order.amountToSell.string).formatCurrency(digitNum: tradePrecision.amount) + " " + pair.quote.symbol
                 }
             }
         }
@@ -100,12 +64,9 @@ class OpenedOrdersView: UIView {
 
     fileprivate func setup() {
         cancleOrder.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.cancleOrder.next?.sendEventWith(CancleOrder.cancleOrderAction.rawValue, userinfo: ["selectedIndex": self.selectedIndex?.row ?? 0])
         }).disposed(by: disposeBag)
-
-        //    self.lineView.backgroundColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.paleGrey
-
     }
 
     override var intrinsicContentSize: CGSize {
@@ -147,7 +108,6 @@ class OpenedOrdersView: UIView {
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
-
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]

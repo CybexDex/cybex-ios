@@ -70,8 +70,9 @@ extension ETOHomeBannerView: FSPagerViewDataSource, FSPagerViewDelegate {
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: String(describing: FSPagerViewCell.self), at: index) as FSPagerViewCell
         if viewType == 0 {
-            cell.imageView?.contentMode = .scaleAspectFill
+            cell.imageView?.contentMode = .scaleAspectFit
         } else {
+            cell.imageView?.contentMode = .scaleAspectFit
             cell.contentView.layer.shadowColor = UIColor.clear.cgColor
             cell.contentView.layer.shadowRadius = 0
             cell.contentView.layer.shadowOpacity = 1.0

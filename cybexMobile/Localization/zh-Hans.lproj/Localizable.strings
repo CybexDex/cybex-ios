@@ -200,7 +200,7 @@
 "withdraw_memo" = "备注";
 
 "password_placeholder" = "请输入密码";
-"tip_title"   = "提示";
+"tip_title"   = "确认";
 "tip_message" = "请在设置中打开相册权限";
 
 "recharge_title"  = "提现";
@@ -518,5 +518,41 @@
 "lockup_asset_claim_fail" = "申领失败";
 "lockup_asset_claim_ensure" = "申领确认";
 
+"lockup_asset_claim" = "申领";
+
+"lockup_asset_locked" = "未到期";
+"game_center_title" = "游戏中心";
+"game_center_subtitle" = "体验区块链游戏";
 
 
+"deposit_enable" = "充值功能即将开放，敬请期待";
+"deposti_enable_tip" = "暂停";
+"trade_decimal_number" = "%d 位小数";
+
+"openedorder_ensure_title" = "提示";
+"openedorder_ensure_message" = "确认取消订单";
+
+"eva_score" = "综合得分";
+"eva_hyper_score" = "炒作值";
+"eva_risk_score" = "风险值";
+"eva_expection" = "期望值";
+"eva_platform" = "平台";
+"eva_industry" = "行业";
+"eva_icotokensupply" = "ICO发行总量";
+"eva_tokeprice" = "币价";
+"eva_country" = "发行地";
+"eva_introduction" = "介绍";
+"eva_EVALUAPE" = "The data comes from EVALUAPE";
+"eva_title_introduction" = "项目介绍";
+
+"ticket_use_title" = "使用";
+"ticket_title" = "使用我的资产";
+"ticket_check_account" = "验证账户";
+"ticket_check_account_placeholder" = "请输入验证账户或扫码获取验证账户 ";
+"ticket_deploy_asset" = "使用资产";
+"ticket_deploy_asset_placeholder" = "请输入或选择要使用的资产";
+"ticket_depoly_amount" = "使用数量";
+"ticket_depoly_amount_placeholder" = "请输入数量";
+"ticket_asset_left" = "当前持有%@个";
+"scan_qrcode_hint" = "对准二维码，即可自动扫描";
+"ticket_deploy_result_info" = "请向管理员出示二维码。\n请注意保管好您的二维码。\n二维码的有效时间为10分钟。";

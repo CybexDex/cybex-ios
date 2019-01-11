@@ -36,6 +36,8 @@ class MyHistoryViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+
+        UserManager.shared.fetchHistoryOfFillOrdersAndTransferRecords()
     }
 
     func setupUI() {
@@ -54,7 +56,7 @@ class MyHistoryViewController: BaseViewController {
             .skip(1)
             .throttle(10, latest: true, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self](_) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
 
                 if let data = UserManager.shared.fillOrder.value {
                     if data.count == 0 {

@@ -8,6 +8,7 @@
 
 import Foundation
 import TinyConstraints
+import SwiftTheme
 
 class CBKLineDrawView: UIView {
 
@@ -221,9 +222,11 @@ extension CBKLineDrawView {
 
         indicatorVolumeLabel = UILabel()
         indicatorVolumeLabel.isHidden = true
+        let strokeColor = ThemeManager.currentThemeIndex == 0 ? UIColor.dark : UIColor.white
+        let bgColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1) : #colorLiteral(red: 0.1058823529, green: 0.1333333333, blue: 0.1882352941, alpha: 1)
 
-        indicatorVolumeLabel.backgroundColor = configuration.theme.longPressLineColor
-        indicatorVolumeLabel.textColor = configuration.theme.dashColor
+        indicatorVolumeLabel.backgroundColor = bgColor
+        indicatorVolumeLabel.textColor = strokeColor
         indicatorVolumeLabel.font = configuration.main.dateAssistTextFont
 
         addSubview(indicatorVolumeLabel)
@@ -344,7 +347,6 @@ extension CBKLineDrawView {
             }
 
             var drawModel: CBKLineModel?
-
             horizantalTop.constant = location.y
             indicatorHorizontalView.layoutIfNeeded()
 
@@ -364,7 +366,6 @@ extension CBKLineDrawView {
                 indicatorVerticalView.layoutIfNeeded()
 
                 if configuration.dataSource.drawKLineModels.count > offsetCount + 1 {
-                    print("index : \(offsetCount + 1)")
                     drawModel = configuration.dataSource.drawKLineModels[offsetCount + 1]
                 } else {
                     self.removeIndicatorLine()
@@ -374,10 +375,14 @@ extension CBKLineDrawView {
 
             if let limitValue = mainView.fetchLimitValue(), let model = drawModel {
                 let unitValue = (limitValue.maxValue - limitValue.minValue) / Double(mainView.drawHeight)
-
-                horizantalTop.constant = abs(mainView.drawMaxY - CGFloat((model.close - limitValue.minValue) / unitValue))
+                if unitValue == 0 {
+                    horizantalTop.constant = abs(mainView.drawMaxY)
+                }
+                else {
+                    horizantalTop.constant = abs(mainView.drawMaxY - CGFloat((model.close - limitValue.minValue) / unitValue))
+                }
                 indicatorVolumeLabel.isHidden = false
-                indicatorVolumeLabel.text = model.close.string(digits: model.precision, roundingMode: .down)
+                indicatorVolumeLabel.text = model.close.formatCurrency(digitNum: model.precision)
 
                 mainView.fetchAssistString(model: model)
                 mainView.focusModel = model
@@ -408,6 +413,8 @@ extension CBKLineDrawView {
     }
 
     func addDashLine() {
+        CBConfiguration.sharedConfiguration.theme.longPressLineColor = ThemeManager.currentThemeIndex == 0 ? #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1) : #colorLiteral(red: 0.1058823529, green: 0.1333333333, blue: 0.1882352941, alpha: 1)
+
         let verLayer = CAShapeLayer()
         verLayer.fillColor = UIColor.white.cgColor
         verLayer.strokeColor = configuration.theme.longPressLineColor.cgColor
@@ -423,6 +430,7 @@ extension CBKLineDrawView {
 
         let horLayer = CAShapeLayer()
         horLayer.fillColor = UIColor.white.cgColor
+        
         horLayer.strokeColor = configuration.theme.longPressLineColor.cgColor
         horLayer.lineWidth = configuration.theme.longPressLineWidth
         horLayer.lineDashPattern = [3, 3]

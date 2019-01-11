@@ -16,6 +16,7 @@ protocol ComprehensiveCoordinatorProtocol {
     func openWebVCUrl(_ url: String)
 
     func openMarketList(_ pair: Pair)
+    func openGame(_ url: String)
 }
 
 protocol ComprehensiveStateManagerProtocol {
@@ -74,12 +75,12 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
     func openMarketList(_ pair: Pair) {
         if let marketVC = R.storyboard.main.marketViewController() {
             var currentBaseIndex = 0
-            for index in 0..<AssetConfiguration.marketBaseAssets.count {
-                if pair.base == AssetConfiguration.marketBaseAssets[index] {
+            for index in 0..<MarketConfiguration.marketBaseAssets.count {
+                if pair.base == MarketConfiguration.marketBaseAssets.map({ $0.id })[index] {
                     currentBaseIndex = index
                 }
             }
-            let tickers = appData.filterQuoteAssetTicker(pair.base)
+            let tickers = MarketHelper.filterQuoteAssetTicker(pair.base)
             var curIndex = 0
             for index in 0..<tickers.count {
                 let ticker = tickers[index]
@@ -93,6 +94,13 @@ extension ComprehensiveCoordinator: ComprehensiveCoordinatorProtocol {
             let coordinator = MarketCoordinator(rootVC: self.rootVC)
             marketVC.coordinator = coordinator
             self.rootVC.pushViewController(marketVC, animated: true)
+        }
+    }
+    func openGame(_ url: String) {
+        if let gameVC = R.storyboard.main.gameViewController() {
+            gameVC.coordinator = GameCoordinator(rootVC: self.rootVC)
+            gameVC.gameURL = url
+            self.rootVC.pushViewController(gameVC, animated: true)
         }
     }
 }
@@ -112,41 +120,49 @@ extension ComprehensiveCoordinator: ComprehensiveStateManagerProtocol {
     }
 
     func fetchAnnounceInfos() {
-        let url = AppConfiguration.AnnounceJson + (Localize.currentLanguage() == "en" ? "en" : "zh")
-        SimpleHTTPService.fetchAnnounceJson(url).done { (data) in
-            if let data = data {
-                self.store.dispatch(FetchAnnouncesAction(data: data))
-            }
-            }.catch { (_) in
+        AppService.request(target: .announce, success: { (json) in
+            let announces = json.arrayValue.map({ ComprehensiveAnnounce.deserialize(from: $0.dictionaryObject)!})
+            self.store.dispatch(FetchAnnouncesAction(data: announces))
+        }, error: { (_) in
+
+        }) { (_) in
+
         }
     }
 
     func fetchHomeBannerInfos() {
-        let url = AppConfiguration.HomeBannerJson + (Localize.currentLanguage() == "en" ? "en" : "zh")
-        SimpleHTTPService.fetchHomeBannerInfos(url).done { (data) in
-            if let data = data, data.count > 0 {
-                self.store.dispatch(FetchHomeBannerAction(data: data))
+        AppService.request(target: .homebanner, success: { (json) in
+            let banners = json.arrayValue.map({ ComprehensiveBanner.deserialize(from: $0.dictionaryObject)})
+            if banners.count > 0 {
+                self.store.dispatch(FetchHomeBannerAction(data: banners.compactMap({ $0 })))
             }
-            }.catch { (_) in
+        }, error: { (_) in
+
+        }) { (_) in
+
         }
     }
 
     func fetchHotAssetsInfos() {
-        SimpleHTTPService.fetchHomeHotAssetJson().done { (data) in
-            if let data = data {
-                self.store.dispatch(FetchHotAssetsAction(data: data))
-            }
-            }.catch { (_) in
+        AppService.request(target: .hotpair, success: { (json) in
+            let pairs = json.arrayValue.map({ Pair(base: $0.dictionaryValue["base"]?.stringValue ?? "", quote: $0.dictionaryValue["quote"]?.stringValue ?? "") })
+
+            self.store.dispatch(FetchHotAssetsAction(data: pairs))
+        }, error: { (_) in
+
+        }) { (_) in
+
         }
     }
 
     func fetchMiddleItemInfos() {
-        let url = AppConfiguration.HomeItemsJson + (Localize.currentLanguage() == "en" ? "en" : "zh")
-        SimpleHTTPService.fetchHomeItemInfo(url).done { (data) in
-            if let data = data, data.count != 0 {
-                self.store.dispatch(FetchMiddleItemAction(data: data))
-            }
-            }.catch { (_) in
+        AppService.request(target: .items, success: { (json) in
+            let data = json.arrayValue.map({ ComprehensiveItem.deserialize(from: $0.dictionaryObject)})
+            self.store.dispatch(FetchMiddleItemAction(data: data.compactMap({ $0 })))
+        }, error: { (_) in
+
+        }) { (_) in
+
         }
     }
 

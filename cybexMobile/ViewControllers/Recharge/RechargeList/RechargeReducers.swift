@@ -42,15 +42,14 @@ func filterData(_ trades: [Trade]) -> [Trade] {
     var tradesInfo: [Trade] = []
     if var balances = UserManager.shared.balances.value {
         balances = balances.filter { (balance) -> Bool in
-            return getRealAmount(balance.assetType, amount: balance.balance).doubleValue != 0
+            return AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) != 0
         }
         for balance in balances {
             for var trade in data {
                 guard let info = appData.assetInfo[trade.id] else { continue }
                 if trade.id == balance.assetType {
-                    trade.amount = getRealAmount(balance.assetType,
-                                                 amount: balance.balance).string(digits: info.precision,
-                                                                                 roundingMode: .down)
+                    trade.amount = AssetHelper.getRealAmount(balance.assetType,
+                                                 amount: balance.balance).formatCurrency(digitNum: info.precision)
                     tradesInfo.append(trade)
                 }
             }

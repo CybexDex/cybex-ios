@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import ReSwift
+import Localize_Swift
 
 class RechargeViewController: BaseViewController {
 
@@ -50,7 +51,7 @@ class RechargeViewController: BaseViewController {
     override func configureObserveState() {
 
         self.coordinator?.state.depositIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             self.depositData = data
             if self.selectedIndex == .RECHARGE {
                 self.endLoading()
@@ -64,7 +65,7 @@ class RechargeViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         self.coordinator?.state.withdrawIds.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.withdrawData = data
             if self.selectedIndex == .WITHDRAW {
                 self.endLoading()
@@ -115,7 +116,6 @@ extension RechargeViewController: UITableViewDataSource, UITableViewDelegate {
             }
             return cell
         }
-
         return TradeCell()
     }
 
@@ -123,10 +123,20 @@ extension RechargeViewController: UITableViewDataSource, UITableViewDelegate {
         switch selectedIndex.rawValue {
         case 0:
             if let data = self.depositData {
+                let selectedData = data[indexPath.row]
+                if selectedData.enable == false {
+                    self.showToast(message: Localize.currentLanguage() == "en" ? selectedData.enMsg : selectedData.cnMsg)
+                    return
+                }
                 self.coordinator?.openWithDrawDetail(data[indexPath.row])
             }
         case 1:
             if let data = self.withdrawData {
+                let selectedData = data[indexPath.row]
+                if selectedData.enable == false {
+                    self.showToast(message: Localize.currentLanguage() == "en" ? selectedData.enMsg : selectedData.cnMsg)
+                    return
+                }
                 self.coordinator?.openRechargeDetail(data[indexPath.row])
             }
         default:

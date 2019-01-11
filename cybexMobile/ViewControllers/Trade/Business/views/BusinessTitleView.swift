@@ -18,7 +18,7 @@ class BusinessTitleView: UIView {
     var currentBaseIndex = 0 {
         didSet {
             if let data = self.data as? [Ticker] {
-                self.reloadData = data.filter({$0.base == AssetConfiguration.marketBaseAssets[currentBaseIndex]})
+                self.reloadData = data.filter({$0.base == MarketConfiguration.marketBaseAssets.map({ $0.id })[currentBaseIndex]})
             }
         }
     }
@@ -26,7 +26,7 @@ class BusinessTitleView: UIView {
     var data: Any? {
         didSet {
             if let data = data as? [Ticker] {
-                self.reloadData = data.filter({$0.base == AssetConfiguration.marketBaseAssets[currentBaseIndex]})
+                self.reloadData = data.filter({$0.base == MarketConfiguration.marketBaseAssets.map({ $0.id })[currentBaseIndex]})
             }
         }
     }

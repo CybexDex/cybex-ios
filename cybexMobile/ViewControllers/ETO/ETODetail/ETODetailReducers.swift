@@ -36,7 +36,7 @@ func refreshProjectModel(_ sender: ETOShortProjectStatusModel, viewModel: ETOPro
     }
     projectMode.status = sender.status
     projectMode.finishAt = sender.finishAt
-    model.currentPercent.accept((sender.currentPercent * 100).string(digits: 2, roundingMode: .down) + "%")
+    model.currentPercent.accept((sender.currentPercent * 100).formatCurrency(digitNum: AppConfiguration.percentPrecision) + "%")
     model.progress.accept(sender.currentPercent)
     model.status.accept(sender.status!.description())
     model.projectState.accept(sender.status)

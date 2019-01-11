@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import ReSwift
 import Localize_Swift
+import XLPagerTabStrip
 
 enum TradeHistoryPageType {
     case market
@@ -26,21 +27,15 @@ struct TradeHistoryViewModel {
 }
 
 class TradeHistoryViewController: BaseViewController {
-
     @IBOutlet weak var historyView: TradeHistoryView!
 
     var coordinator: (TradeHistoryCoordinatorProtocol & TradeHistoryStateManagerProtocol)?
 
     var pageType: TradeHistoryPageType = .market
 
-    var pair: Pair? {
-        didSet {
-            if pair != oldValue {
-                self.coordinator?.resetData()
-            }
-            refreshView()
-        }
-    }
+    var skipFetch = true
+
+    var pair: Pair?
 
     var data: [TradeHistoryViewModel]? {
         didSet {
@@ -55,15 +50,33 @@ class TradeHistoryViewController: BaseViewController {
         setupEvent()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if pageType == .market {
+            skipFetch = false
+            refreshView()
+            self.coordinator?.updateMarketListHeight(600)
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if pageType == .market {
+            skipFetch = true
+        }
+    }
+
     func refreshView() {
-        guard let pair = pair, let baseInfo = appData.assetInfo[(pair.base)], let quoteInfo = appData.assetInfo[(pair.quote)] else { return }
+        guard let pair = pair, let baseInfo = appData.assetInfo[(pair.base)], let quoteInfo = appData.assetInfo[(pair.quote)], !skipFetch else { return }
+
         if self.view.width == 320 {
             self.historyView.price.font  = UIFont.systemFont(ofSize: 11)
             self.historyView.amount.font  = UIFont.systemFont(ofSize: 11)
             self.historyView.sellAmount.font  = UIFont.systemFont(ofSize: 11)
             self.historyView.time.font = UIFont.systemFont(ofSize: 11)
         }
-
         self.historyView.price.text  = R.string.localizable.trade_history_price.key.localized() + "(" + baseInfo.symbol.filterJade + ")"
         self.historyView.amount.text  = R.string.localizable.trade_history_amount.key.localized() + "(" + quoteInfo.symbol.filterJade + ")"
         self.historyView.sellAmount.text  = R.string.localizable.trade_history_total.key.localized() + "(" + baseInfo.symbol.filterJade + ")"
@@ -72,96 +85,61 @@ class TradeHistoryViewController: BaseViewController {
         self.coordinator?.fetchData(pair)
     }
 
+    func refreshData() {
+        guard let data = self.coordinator?.state.data.value,
+            let parentVC = self.parent as? ExchangeViewController,
+            let grandVC = parentVC.parent as? TradeViewController else {
+            return
+        }
+
+        if grandVC.isLoading() {
+            grandVC.endLoading()
+        }
+        if parentVC.type.rawValue == grandVC.selectedIndex {
+            self.data = data
+        }
+    }
+
     func setupEvent() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification),
                                                object: nil,
                                                queue: nil,
                                                using: { [weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.refreshView()
         })
     }
+
     deinit {
         NotificationCenter.default.removeObserver(self,
                                                   name: NSNotification.Name(rawValue: LCLLanguageChangeNotification),
                                                   object: nil)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
     override func configureObserveState() {
-        self.coordinator!.state.data.asObservable()
-            .subscribe(onNext: {[weak self] (_) in
-                guard let `self` = self else { return }
-
-                self.convertToData()
-                self.coordinator?.updateMarketListHeight(500)
+        appData.otherRequestRelyData.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                if self.isVisible, self.pageType == .market {
+                    self.refreshView()
+                }
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-    }
+        self.coordinator!.state.data.asObservable()
+            .subscribe(onNext: {[weak self] (data) in
+                guard let self = self else { return }
 
-    func convertToData() {
-        if let data = self.coordinator?.state.data.value {
-
-            var showData: [TradeHistoryViewModel] = []
-
-            for itemData in data {
-                let curData = itemData
-
-                let operation = curData[0]
-//                let receive = curData[1]
-                let time = curData[1].stringValue
-                let pay = operation["pays"]
-                let receive = operation["receives"]
-                let base = operation["fill_price"]["base"]
-                let quote = operation["fill_price"]["quote"]
-                let baseInfo = appData.assetInfo[pair!.base]!
-                let quoteInfo = appData.assetInfo[pair!.quote]!
-                let basePrecision = pow(10, baseInfo.precision)
-                let quotePrecision = pow(10, quoteInfo.precision)
-
-                if base["asset_id"].stringValue == pair?.base {
-
-                    let quoteVolume = Decimal(string: quote["amount"].stringValue)! / quotePrecision
-                    let baseVolume = Decimal(string: base["amount"].stringValue)! / basePrecision
-                    let payVolume = Decimal(string: receive["amount"].stringValue)! / quotePrecision
-                    let receiveVolume = Decimal(string: pay["amount"].stringValue)! / basePrecision
-
-                    let price = baseVolume / quoteVolume
-                    let tradePrice = price.tradePrice()
-                    let viewModel = TradeHistoryViewModel(
-                        pay: false,
-                        price: tradePrice.price,
-                        quoteVolume: payVolume.stringValue.suffixNumber(digitNum: 10 - tradePrice.pricision),
-                        baseVolume: receiveVolume.stringValue.suffixNumber(digitNum: tradePrice.pricision),
-                        time: time.dateFromISO8601!.string(withFormat: "HH:mm:ss"))
-                    showData.append(viewModel)
+                if self.pageType == .market {
+                    if self.isVisible {
+                        self.data = data
+                    }
                 } else {
-                    let quoteVolume = Decimal(string: base["amount"].stringValue)! / quotePrecision
-                    let baseVolume = Decimal(string: quote["amount"].stringValue)! / basePrecision
-
-                    let payVolume = Decimal(string: pay["amount"].stringValue)! / quotePrecision
-                    let receiveVolume = Decimal(string: receive["amount"].stringValue)! / basePrecision
-
-                    let price = baseVolume / quoteVolume
-
-                    let tradePrice = price.tradePrice()
-                    let viewModel = TradeHistoryViewModel(
-                        pay: true,
-                        price: tradePrice.price,
-                        quoteVolume: payVolume.stringValue.suffixNumber(digitNum: 10 - tradePrice.pricision),
-                        baseVolume: receiveVolume.stringValue.suffixNumber(digitNum: tradePrice.pricision),
-                        time: time.dateFromISO8601!.string(withFormat: "HH:mm:ss"))
-                    showData.append(viewModel)
+                    self.refreshData()
                 }
-
-            }
-            self.data = showData
-        }
+                }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }
+
 extension TradeHistoryViewController: TradePair {
     var pariInfo: Pair {
         get {
@@ -174,5 +152,27 @@ extension TradeHistoryViewController: TradePair {
 
     func refresh() {
         refreshView()
+    }
+
+    func resetView() {
+        guard let pair = pair else { return }
+
+        self.coordinator?.resetData(pair)
+    }
+
+    func appear() {
+        skipFetch = false
+        self.refreshData()
+        refreshView()
+    }
+
+    func disappear() {
+        skipFetch = true
+    }
+}
+
+extension TradeHistoryViewController: IndicatorInfoProvider {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: R.string.localizable.mark_trade_history.key.localized())
     }
 }

@@ -20,7 +20,7 @@ protocol RecordChooseStateManagerProtocol {
     
     func switchPageState(_ state: PageState)
     
-    func fetchData(_ type: Int)
+    func fetchData(_ type: Int, maxCount: Int, count: Int)
 }
 
 class RecordChooseCoordinator: NavCoordinator {
@@ -59,31 +59,27 @@ extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
         }
     }
     
-    func fetchData(_ type: Int) {
+    func fetchData(_ type: Int, maxCount: Int, count: Int) {
         switch type {
         case RecordChooseType.asset.rawValue:
             let accountName = UserManager.shared.name.value ?? ""
-            let expiration = Int(Date().timeIntervalSince1970 + 600)
-            var paragram = ["op": ["accountName": accountName, "expiration": expiration], "signer": "" ] as [String: Any]
-            let operation = BitShareCoordinator.getRecodeLoginOperation(accountName, asset: "", fundType: "", size: Int32(0), offset: Int32(0), expiration: Int32(expiration))
-            if let operation = operation {
-                let json = JSON(parseJSON: operation)
-                let signer = json["signer"].stringValue
-                paragram["signer"] = signer
-                SimpleHTTPService.recordLogin(paragram).done { (result) in
-                    if let _ = result {
-                        let url = AppConfiguration.RecodeAccountAsset + "/" + accountName
-                        SimpleHTTPService.fetchAccountAsset(url, signer: signer).done({ (accountAssets) in
-                            if let data = accountAssets {
-                                self.store.dispatch(FetchAccountAssetAction(data: data))
-                            }
-                        }).catch({ (_) in
-                        })
+
+            GatewayQueryService.request(target: .login(accountName: accountName), success: { (_) in
+                GatewayQueryService.request(target: .assetKinds(accountName: accountName), success: { (json) in
+                    if let data = AccountAssets.deserialize(from: json.dictionaryObject) {
+                        self.store.dispatch(FetchAccountAssetAction(data: data))
                     }
-                    }.catch { (_) in
+                }, error: { (_) in
+
+                }) { (_) in
+
                 }
+            }, error: { (_) in
+
+            }) { (_) in
+
             }
-            break
+
         case RecordChooseType.foudType.rawValue:
             
             self.store.dispatch(FetchDataAction(data: [R.string.localizable.openedAll.key.localized(),
@@ -102,7 +98,13 @@ extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
                                                        "MACD",
                                                        "BOLL"]))
             break
+        case RecordChooseType.orderbook.rawValue:
+            var data: [String] = []
+            for index in 0..<count {
+                data.insert(R.string.localizable.trade_decimal_number.key.localizedFormat(maxCount - index), at: 0)
+            }
             
+            self.store.dispatch(FetchDataAction(data: data))
         default: break
         }
         

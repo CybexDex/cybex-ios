@@ -32,7 +32,7 @@ class TransferListViewController: BaseViewController {
 
     override func configureObserveState() {
         UserManager.shared.transferRecords.asObservable().subscribe(onNext: { [weak self](data) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if let result = data, result.count > 0 {
                 self.view.hiddenNoData()
                 self.coordinator?.reduceTransferRecords()
@@ -43,7 +43,7 @@ class TransferListViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         self.coordinator?.state.data.asObservable().subscribe(onNext: { [weak self](data) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.endLoading()
             if self.isVisible {
                 self.data = data

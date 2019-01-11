@@ -38,7 +38,7 @@ class Base64JSONDecoder: JSONDecoder {
 }
 
 extension String {
-    // Returns the data of `self` (which is a base64 string), with URL related characters decoded.
+    // Returns the data of self (which is a base64 string), with URL related characters decoded.
     var base64URLDecoded: Data? {
         let paddingLength = 4 - count % 4
         // Filling = for %4 padding.
@@ -52,7 +52,7 @@ extension String {
 }
 
 extension Data {
-    // Encode `self` with URL escaping considered.
+    // Encode self with URL escaping considered.
     var base64URLEncoded: String {
         let base64Encoded = base64EncodedString()
         return base64Encoded

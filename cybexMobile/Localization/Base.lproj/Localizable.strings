@@ -214,7 +214,7 @@
 
 
 "password_placeholder" = "Password";
-"tip_title"   = "Tip";
+"tip_title"   = "Confirmation";
 "tip_message" = "Please open photo album permissions in Settings";
 
 "recharge_title"  = " Withdraw";
@@ -540,4 +540,38 @@
 "lockup_asset_claim_fail" = "Claim fail";
 "lockup_asset_claim_ensure" = "CONFIRMATION";
 
+"lockup_asset_claim" = "Claim";
+"lockup_asset_locked" = "Locked";
 
+"deposit_enable" = "Recharge function is about to open, please look forward to it";
+"deposti_enable_tip" = "Suspend";
+"trade_decimal_number" = "%d decimals";
+"openedorder_ensure_title" = "CONFIRMATION";
+"openedorder_ensure_message" = "Confirm order cancellation";
+"game_center_title" = "Game Center";
+"game_center_subtitle" = "Blockchain Games";
+
+"eva_score" = "SCORE";
+"eva_hyper_score" = "Hype Score";
+"eva_risk_score" = "Risk Score";
+"eva_expection" = "Expectation";
+"eva_platform" = "Platform";
+"eva_industry" = "Industry";
+"eva_icotokensupply" = "ICotokenSupply";
+"eva_tokeprice" = "Token Price";
+"eva_country" = "Country";
+"eva_introduction" = "Introduction";
+"eva_EVALUAPE" = "The data comes from EVALUAPE";
+"eva_title_introduction" = "Introduction";
+
+"ticket_use_title" = "Depoly";
+"ticket_title" = "Depoly";
+"ticket_check_account" = "Account for verification";
+"ticket_check_account_placeholder" = "Input or scan the account name";
+"ticket_deploy_asset" = "Deploy asset";
+"ticket_deploy_asset_placeholder" = "Input or choose asset";
+"ticket_depoly_amount" = "Quantity to deploy";
+"ticket_depoly_amount_placeholder" = "Input the quantity";
+"ticket_asset_left" = "%@ left";
+"scan_qrcode_hint" = "Align the QR  Code within the frame to scan";
+"ticket_deploy_result_info" = "Please show the QR Code to administrator.\nPlease keeo your QR Code carefully.\nThe effective time of the QR code is 10 minutes.";

@@ -20,6 +20,7 @@ enum RecordChooseType: Int {
     case foudType
     case time
     case kind
+    case orderbook
 }
 
 class RecordChooseViewController: BaseViewController {
@@ -29,7 +30,13 @@ class RecordChooseViewController: BaseViewController {
     var coordinator: (RecordChooseCoordinatorProtocol & RecordChooseStateManagerProtocol)?
     private(set) var context: RecordChooseContext?
     var typeIndex: RecordChooseType = .asset
-    var selectedIndex: Int = 0
+    var selectedIndex: Int = 0 {
+        didSet {
+            
+        }
+    }
+    var count: Int = 0
+    var maxCount: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +48,7 @@ class RecordChooseViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.coordinator?.fetchData(typeIndex.rawValue)
+        self.coordinator?.fetchData(typeIndex.rawValue, maxCount: maxCount, count: count)
     }
 
     override func refreshViewController() {
@@ -54,7 +61,6 @@ class RecordChooseViewController: BaseViewController {
     }
 
     func setupData() {
-
     }
 
     func setupEvent() {
@@ -63,7 +69,7 @@ class RecordChooseViewController: BaseViewController {
 
     override func configureObserveState() {
         self.coordinator?.state.context.asObservable().subscribe(onNext: { [weak self] (context) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             if let context = context as? RecordChooseContext {
                 self.context = context
@@ -72,7 +78,7 @@ class RecordChooseViewController: BaseViewController {
         }).disposed(by: disposeBag)
 
         self.coordinator?.state.pageState.asObservable().distinctUntilChanged().subscribe(onNext: {[weak self] (state) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.endLoading()
 
@@ -124,7 +130,7 @@ class RecordChooseViewController: BaseViewController {
         }).disposed(by: disposeBag)
 
         self.coordinator?.state.data.asObservable().distinctUntilChanged().subscribe(onNext: {[weak self] (data) in
-            guard let `self` = self, let _ = data else { return }
+            guard let self = self, let _ = data else { return }
             self.tableView.reloadData()
         }).disposed(by: disposeBag)
     }
@@ -143,6 +149,9 @@ extension RecordChooseViewController: UITableViewDataSource, UITableViewDelegate
         if let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.recordChooseCell.name, for: indexPath) as? RecordChooseCell {
             if let data = self.coordinator?.state.data.value {
                 cell.setup(data[indexPath.row])
+                if self.typeIndex == .orderbook, indexPath.row == selectedIndex {
+                    cell.cellView.nameLabel.textColor = UIColor.pastelOrange
+                }
             }
             return cell
         }

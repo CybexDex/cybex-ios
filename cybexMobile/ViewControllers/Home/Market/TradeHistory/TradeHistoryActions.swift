@@ -17,9 +17,10 @@ struct TradeHistoryState: BaseState {
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
 
-    var data: BehaviorRelay<[JSON]> = BehaviorRelay(value: [])
+    var data: BehaviorRelay<[TradeHistoryViewModel]> = BehaviorRelay(value: [])
 }
 
 struct FetchedFillOrderData: Action {
     let data: [JSON]
+    let pair: Pair
 }

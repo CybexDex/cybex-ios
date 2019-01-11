@@ -46,7 +46,7 @@ class HomeContentView: UIView {
         didSet {
             if self.viewType == .comprehensive {
                 self.tableView.isScrollEnabled = false
-                var buckets = appData.filterPopAssetsCurrency()
+                var buckets = MarketHelper.filterPopAssetsCurrency()
                 if buckets.count >= 6 {
                     self.reloadData = Array(buckets[0..<6])
                 } else {
@@ -79,10 +79,26 @@ class HomeContentView: UIView {
     }
 
     func dealWithReloadData(_ sender: [Ticker]) -> [Ticker] {
-        let originalData = sender.filter({$0.base == AssetConfiguration.marketBaseAssets[currentBaseIndex]})
+        let originalData = sender.filter({$0.base == MarketConfiguration.marketBaseAssets[currentBaseIndex].id})
+
         switch self.sortedAction {
-        case .none:
-            return originalData
+        case .none://热门交易对排前面
+            var hotPairsData: [Ticker] = []
+            var otherData: [Ticker] = originalData
+
+            if let hotPairs = MarketConfiguration.shared.importMarketLists.value.filter( { $0.base == MarketConfiguration.marketBaseAssets[currentBaseIndex].id}).first {
+                hotPairsData = originalData.filter { (ticker) -> Bool in
+                    if hotPairs.quotes.contains(ticker.quote) {
+                        hotPairsData.append(ticker)
+                        otherData.removeAll(ticker)
+                        return true
+                    }
+
+                    return false
+                }
+            }
+
+            return hotPairsData + otherData
         case .nameUp:
             return originalData.sorted(by: { (first, second) -> Bool in
                 guard let firstInfo = appData.assetInfo[first.quote], let secondInfo = appData.assetInfo[second.quote] else {return false}
@@ -97,37 +113,28 @@ class HomeContentView: UIView {
             })
         case .volUp:
             return originalData.sorted(by: { (first, second) -> Bool in
-                guard let firstDecimal = first.baseVolume.toDecimal(), let secondDecimal = second.baseVolume.toDecimal() else { return false}
-                return firstDecimal < secondDecimal
+                return first.baseVolume.decimal() < second.baseVolume.decimal()
             })
         case .volDown:
             return originalData.sorted(by: { (first, second) -> Bool in
-                guard let firstDecimal = first.baseVolume.toDecimal(), let secondDecimal = second.baseVolume.toDecimal() else { return false}
-                return firstDecimal > secondDecimal
+                return first.baseVolume.decimal() > second.baseVolume.decimal()
             })
         case .priceUp:
             return originalData.sorted(by: { (first, second) -> Bool in
-                guard let firstDecimal = first.latest.toDecimal(), let secondDecimal = second.latest.toDecimal() else { return false}
-                return firstDecimal < secondDecimal
+                return first.latest.decimal() < second.latest.decimal()
             })
         case .priceDown:
             return originalData.sorted(by: { (first, second) -> Bool in
-                guard let firstDecimal = first.latest.toDecimal(), let secondDecimal = second.latest.toDecimal() else { return false}
-                return firstDecimal > secondDecimal
+                return first.latest.decimal() > second.latest.decimal()
             })
         case .appliesUp:
             return originalData.sorted(by: { (first, second) -> Bool in
-                guard let firstDecimal = first.percentChange.toDouble(), let secondDecimal = second.percentChange.toDouble() else { return false}
-                return firstDecimal < secondDecimal
+                return first.percentChange.decimal() < second.percentChange.decimal()
             })
         case .appliesDown:
             return originalData.sorted(by: { (first, second) -> Bool in
-                guard let firstDecimal = first.percentChange.toDouble(), let secondDecimal = second.percentChange.toDouble() else { return false}
-                return firstDecimal > secondDecimal
+                return first.percentChange.decimal() > second.percentChange.decimal()
             })
-//        default:
-//            return []
-//            break
         }
     }
 

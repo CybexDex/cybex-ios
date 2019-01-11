@@ -9,7 +9,6 @@
 import UIKit
 
 class MyOpenedOrdersView: UIView {
-    @IBOutlet weak var sectionView: LockupAssetsSectionView!
     @IBOutlet weak var tableView: UITableView!
 
     enum Event: String {
@@ -18,8 +17,7 @@ class MyOpenedOrdersView: UIView {
 
     var data: Any? {
         didSet {
-            if let _ = data as? Pair {
-
+            if let _ = data as? [LimitOrderStatus] {
                 self.tableView.reloadData()
             }
         }
@@ -28,8 +26,6 @@ class MyOpenedOrdersView: UIView {
     fileprivate func setup() {
         let name = UINib.init(nibName: String.init(describing: OpenedOrdersCell.self), bundle: nil)
         self.tableView.register(name, forCellReuseIdentifier: String.init(describing: OpenedOrdersCell.self))
-        sectionView.totalTitle.locali = R.string.localizable.my_opened_price.key
-        sectionView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key
         self.tableView.tableFooterView = UIView()
     }
 
@@ -82,34 +78,16 @@ class MyOpenedOrdersView: UIView {
 
 extension MyOpenedOrdersView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let pair = data as? Pair else { return 0 }
-        let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
-            return (limitorder.sellPrice.base.assetID == pair.base &&
-                limitorder.sellPrice.quote.assetID == pair.quote) ||
-                (limitorder.sellPrice.base.assetID == pair.quote &&
-                    limitorder.sellPrice.quote.assetID == pair.base)
-        }) ?? []
-
-        if orderes.count == 0 {
-            self.showNoData(R.string.localizable.openedorder_nodata.key.localized())
-        } else {
-            self.hiddenNoData()
-        }
-        return orderes.count
+        guard let orders = data as? [LimitOrderStatus] else { return 0 }
+        return orders.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: OpenedOrdersCell.self), for: indexPath) as? OpenedOrdersCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: OpenedOrdersCell.self),
+                                                    for: indexPath) as? OpenedOrdersCell,
+            let orders = data as? [LimitOrderStatus] {
             cell.cellType = 0
-
-            guard let pair = data as? Pair else { return cell }
-            let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
-                return (limitorder.sellPrice.base.assetID == pair.base &&
-                    limitorder.sellPrice.quote.assetID == pair.quote) ||
-                    (limitorder.sellPrice.base.assetID == pair.quote &&
-                        limitorder.sellPrice.quote.assetID == pair.base)
-            }) ?? []
-            cell.setup(orderes[indexPath.row], indexPath: indexPath)
+            cell.setup(orders[indexPath.row], indexPath: indexPath)
             return cell
         }
         return OpenedOrdersCell()
@@ -119,14 +97,9 @@ extension MyOpenedOrdersView: UITableViewDelegate, UITableViewDataSource {
 extension MyOpenedOrdersView {
     @objc func cancleOrderAction(_ data: [String: Any]) {
         if let index = data["selectedIndex"] as? Int {
-            guard let pair = self.data as? Pair else { return  }
-            let orderes = UserManager.shared.limitOrder.value?.filter({ (limitorder) -> Bool in
-                return (limitorder.sellPrice.base.assetID == pair.base &&
-                    limitorder.sellPrice.quote.assetID == pair.quote) ||
-                    (limitorder.sellPrice.base.assetID == pair.quote &&
-                        limitorder.sellPrice.quote.assetID == pair.base)
-            }) ?? []
-            let order = orderes[index]
+            guard let orders = self.data as? [LimitOrderStatus] else { return  }
+            
+            let order = orders[index]
             self.next?.sendEventWith(Event.cancelOrder.rawValue, userinfo: ["order": order])
         }
     }

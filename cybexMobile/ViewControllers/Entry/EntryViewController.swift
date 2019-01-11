@@ -55,7 +55,7 @@ extension EntryViewController {
         Observable.combineLatest(accountValid, passwordValid) {
             return $0 && $1
             }.bind {[weak self] (valid) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
 
                 if valid {
                     self.loginButton.isEnable = true
@@ -65,13 +65,13 @@ extension EntryViewController {
             }.disposed(by: disposeBag)
 
         self.createTitle.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.coordinator?.switchToRegister()
         }).disposed(by: disposeBag)
 
         self.loginButton.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             self.startLoading()
             UserManager.shared.login(self.accountTextField.text!, password: self.passwordTextField.text!) { success in

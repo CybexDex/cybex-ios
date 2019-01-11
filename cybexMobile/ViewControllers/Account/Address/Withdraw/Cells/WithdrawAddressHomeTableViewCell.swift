@@ -17,6 +17,7 @@ class WithdrawAddressHomeTableViewCell: BaseTableViewCell {
         if let data = data as? WithdrawAddressHomeViewModel {
             foreView.icon.kf.setImage(with: URL(string: data.imageURLString))
 
+            foreView.assetAllName.isHidden = true
             foreView.name.text = data.name
             foreView.amount.text = data.count.value
         }

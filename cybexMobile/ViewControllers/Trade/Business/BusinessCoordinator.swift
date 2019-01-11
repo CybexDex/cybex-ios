@@ -24,7 +24,7 @@ protocol BusinessStateManagerProtocol {
 
     func changeAmountAction(_ amount: String)
 
-    func changePercent(_ percent: Double, isBuy: Bool, assetID: String, pricision: Int)
+    func changePercent(_ percent: Decimal, isBuy: Bool, assetID: String, pricision: Int)
     func getBalance(_ assetID: String)
 
     func getFee(_ focusAssetId: String)
@@ -86,23 +86,21 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
 
     func getFee(_ focusAssetId: String) {
         if let str = BitShareCoordinator.getLimitOrderOperation(0, expiration: 0, asset_id: 0, amount: 0, receive_asset_id: 0, receive_amount: 0, fee_id: 0, fee_amount: 0) {
-            calculateFee(str, focusAssetId: focusAssetId) { (success, amount, assetID) in
+            CybexChainHelper.calculateFee(str, focusAssetId: focusAssetId) { (success, amount, assetID) in
                 self.store.dispatch(FeeFetchedAction(success: success, amount: amount, assetID: assetID))
             }
         }
     }
 
-    func changePercent(_ percent: Double, isBuy: Bool, assetID: String, pricision: Int) {
+    func changePercent(_ percent: Decimal, isBuy: Bool, assetID: String, pricision: Int) {
         let feeAmount = self.state.feeAmount.value
         let balance = self.state.balance.value
         let feeId = self.state.feeID.value
 
-        if let price = self.state.price.value.toDouble(), price != 0, feeAmount != 0, balance != 0 {
-            var amount: Decimal = Decimal(floatLiteral: 0)
-
-            let priceDecimal = self.state.price.value.toDecimal()!
-            let percentDecimal = Decimal(floatLiteral: percent)
-
+        if self.state.price.value.decimal() != 0, feeAmount != 0, balance != 0 {
+            var amount: Decimal = 0
+            let priceDecimal = self.state.price.value.decimal()
+            let percentDecimal = percent
             if isBuy {
                 if feeId == assetID {
                     amount = (balance - feeAmount) * percentDecimal / priceDecimal
@@ -112,16 +110,13 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
             } else {
                 if feeId == assetID {
                     amount = (balance - feeAmount) * percentDecimal
-                    log.debug("amount ----- \(amount.doubleValue)")
                 } else {
                     amount = balance * percentDecimal
                 }
             }
-
-            if amount > Decimal(floatLiteral: 0) {
+            if amount > 0 {
                 self.store.dispatch(SwitchPercentAction(amount: amount, pricision: pricision))
             }
-
         }
     }
 
@@ -129,7 +124,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
         if let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
             return balance.assetType.filterJade == assetID
         }).first {
-            let amount = getRealAmount(balances.assetType, amount: balances.balance)
+            let amount = AssetHelper.getRealAmount(balances.assetType, amount: balances.balance)
             self.store.dispatch(BalanceFetchedAction(amount: amount))
         }
     }
@@ -144,11 +139,13 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
             let feeInfo = appData.assetInfo[self.state.feeID.value],
             let userid = UserManager.shared.account.value?.id,
             self.state.feeAmount.value != 0,
-            let curAmount = self.state.amount.value.toDouble(), curAmount != 0,
-            let price = self.state.price.value.toDouble(), price != 0 else { return }
-        guard  let curAmountDecimal = self.state.amount.value.toDecimal(),
-            curAmountDecimal != 0,
-            let priceDecimal = self.state.price.value.toDecimal(),
+            self.state.amount.value.decimal() != 0,
+           self.state.price.value.decimal() != 0 else { return }
+
+        let curAmountDecimal = self.state.amount.value.decimal()
+        let priceDecimal = self.state.price.value.decimal()
+        
+        guard curAmountDecimal != 0,
             priceDecimal != 0 else { return }
 
         let total = curAmountDecimal * priceDecimal
@@ -165,20 +162,20 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
             Int64((curAmountDecimal * pow(10, quoteInfo.precision)).string(digits: 0, roundingMode: .down)) :
             Int64((total * pow(10, baseInfo.precision)).string(digits: 0, roundingMode: .down))
 
-        let feeAmount = Int64(round(self.state.feeAmount.value.doubleValue * pow(10, feeInfo.precision.double)))
+        let feeAmount = (self.state.feeAmount.value * pow(10, feeInfo.precision)).int64Value
 
-        blockchainParams { (blockchainParams) in
-            if let jsonStr = BitShareCoordinator.getLimitOrder(blockchainParams.block_num,
+        CybexChainHelper.blockchainParams { (blockchainParams) in
+            if let jsonStr = BitShareCoordinator.getLimitOrder(blockchainParams.block_num.int32,
                                                                block_id: blockchainParams.block_id,
-                                                               expiration: Date().timeIntervalSince1970 + 10 * 3600,
-                                                               chain_id: blockchainParams.chain_id,
-                                                               user_id: userid.getID,
-                                                               order_expiration: Date().timeIntervalSince1970 + 3600 * 24 * 365,
-                                                               asset_id: assetID.getID,
+                                                               expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
+                                                               chain_id: CybexConfiguration.shared.chainID.value,
+                                                               user_id: userid.getSuffixID,
+                                                               order_expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionOrderExpiration,
+                                                               asset_id: assetID.getSuffixID,
                                                                amount: amount!,
-                                                               receive_asset_id: receiveAssetID.getID,
+                                                               receive_asset_id: receiveAssetID.getSuffixID,
                                                                receive_amount: receiveAmount!,
-                                                               fee_id: self.state.feeID.value.getID,
+                                                               fee_id: self.state.feeID.value.getSuffixID,
                                                                fee_amount: feeAmount) {
 
                 let request = BroadcastTransactionRequest(response: { (data) in
@@ -199,12 +196,12 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
         guard let baseInfo = appData.assetInfo[pair.base],
             let quoteInfo = appData.assetInfo[pair.quote],
             self.state.feeAmount.value != 0,
-            let curAmount = self.state.amount.value.toDouble(), curAmount != 0,
-            let price = self.state.price.value.toDouble(), price != 0 else { return nil }
+            self.state.amount.value.decimal() != 0,
+            self.state.price.value.decimal() != 0 else { return nil }
 
         var total: Decimal = Decimal(floatLiteral: 0)
-        let priceDecimal = self.state.price.value.toDecimal()!
-        let amountDecimal = self.state.amount.value.toDecimal()!
+        let priceDecimal = self.state.price.value.decimal()
+        let amountDecimal = self.state.amount.value.decimal()
 
         if isBuy {
             if self.state.feeID.value == baseInfo.id {
@@ -220,8 +217,8 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
             }
 
         }
-        let balanceDouble = self.state.balance.value.doubleValue
-        let totalDouble = total.doubleValue
+        let balanceDouble = self.state.balance.value
+        let totalDouble = total
 
         if balanceDouble >= totalDouble {
             return true

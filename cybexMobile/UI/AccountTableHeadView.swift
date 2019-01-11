@@ -36,7 +36,7 @@ class AccountTableHeadView: UIView {
 
     func setupEvent() {
         titleLabel.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _  in
-            guard let `self` = self else { return}
+            guard let self = self else { return}
             self.next?.sendEventWith(Event.login.rawValue, userinfo: [:])
         }).disposed(by: disposeBag)
     }

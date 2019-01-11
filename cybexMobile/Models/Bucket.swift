@@ -95,7 +95,7 @@ struct BucketMatrix {
 
   var asset: [Bucket]
 
-  var baseVolumeOrigin: Double = 0
+  var baseVolumeOrigin: Decimal = 0
 
   var baseVolume: String = ""
   var quoteVolume: String = ""
@@ -123,31 +123,31 @@ struct BucketMatrix {
 
     let flip = homebucket.base != last.base
 
-    let lastClosebaseAmount = flip ? Double(last.closeQuote)! : Double(last.closeBase)!
-    let lastClosequoteAmount = flip ? Double(last.closeBase)! : Double(last.closeQuote)!
+    let lastClosebaseAmount = flip ? last.closeQuote.decimal() : last.closeBase.decimal()
+    let lastClosequoteAmount = flip ? last.closeBase.decimal() : last.closeQuote.decimal()
 
-    let firstOpenbaseAmount = flip ? Double(first.openQuote)! : Double(first.openBase)!
-    let firstOpenquoteAmount = flip ? Double(first.openBase)! : Double(first.openQuote)!
+    let firstOpenbaseAmount = flip ? first.openQuote.decimal() : first.openBase.decimal()
+    let firstOpenquoteAmount = flip ? first.openBase.decimal() : first.openQuote.decimal()
 
     let baseInfo = homebucket.baseInfo
     let quoteInfo = homebucket.quoteInfo
 
-    let basePrecision = pow(10, baseInfo.precision.double)
-    let quotePrecision = pow(10, quoteInfo.precision.double)
+    let basePrecision = pow(10, baseInfo.precision)
+    let quotePrecision = pow(10, quoteInfo.precision)
 
     let lastClosePrice = (lastClosebaseAmount / basePrecision) / (lastClosequoteAmount / quotePrecision)
     let firseOpenPrice = (firstOpenbaseAmount / basePrecision) / (firstOpenquoteAmount / quotePrecision)
 
-    var highPriceCollection: [Double] = []
-    var lowPriceCollection: [Double] = []
+    var highPriceCollection: [Decimal] = []
+    var lowPriceCollection: [Decimal] = []
 
     for bucket in self.asset {
-      let highBase = flip ? (Double(bucket.lowQuote)! / basePrecision) : (Double(bucket.highBase)! / basePrecision)
-      let quoteBase = flip ? (Double(bucket.lowBase)! / quotePrecision) : (Double(bucket.highQuote)! / quotePrecision)
+      let highBase = flip ? (bucket.lowQuote.decimal() / basePrecision) : (bucket.highBase.decimal() / basePrecision)
+      let quoteBase = flip ? (bucket.lowBase.decimal() / quotePrecision) : (bucket.highQuote.decimal() / quotePrecision)
       highPriceCollection.append(highBase / quoteBase)
 
-      let lowBase = flip ? (Double(bucket.highQuote)! / basePrecision) : (Double(bucket.lowBase)! / basePrecision)
-      let lowQuote = flip ? (Double(bucket.highBase)! / quotePrecision) : (Double(bucket.lowQuote)! / quotePrecision)
+      let lowBase = flip ? (bucket.highQuote.decimal() / basePrecision) : (bucket.lowBase.decimal() / basePrecision)
+      let lowQuote = flip ? (bucket.highBase.decimal() / quotePrecision) : (bucket.lowQuote.decimal() / quotePrecision)
       lowPriceCollection.append(lowBase / lowQuote)
 
     }
@@ -157,12 +157,12 @@ struct BucketMatrix {
 
     let now = Date().addingTimeInterval(-24 * 3600).timeIntervalSince1970
 
-    let baseVolume = self.asset.filter({$0.open > now}).map {flip ? $0.quoteVolume : $0.baseVolume}.reduce(0) { (last, cur) -> Double in
-      last + Double(cur)!
+    let baseVolume = self.asset.filter({$0.open > now}).map {flip ? $0.quoteVolume : $0.baseVolume}.reduce(0) { (last, cur) -> Decimal in
+      last + cur.decimal()
     } / basePrecision
 
-    let quoteVolume = self.asset.filter({$0.open > now}).map {flip ? $0.baseVolume: $0.quoteVolume}.reduce(0) { (last, cur) -> Double in
-      last + Double(cur)!
+    let quoteVolume = self.asset.filter({$0.open > now}).map {flip ? $0.baseVolume: $0.quoteVolume}.reduce(0) { (last, cur) -> Decimal in
+      last + cur.decimal()
       } / quotePrecision
 
     self.baseVolumeOrigin = baseVolume
@@ -175,9 +175,9 @@ struct BucketMatrix {
     self.price = lastClosePrice.formatCurrency(digitNum: baseInfo.precision)
 
     let change = (lastClosePrice - firseOpenPrice) * 100 / firseOpenPrice
-    let percent = round(change * 100) / 100.0
+    let percent = change.decimal(digits: 0, roundingMode: .plain) * 100 / 100.0
 
-    self.change = percent.formatCurrency(digitNum: 2, usesGroupingSeparator: false)
+    self.change = percent.formatCurrency(digitNum: AppConfiguration.percentPrecision)
 
     if percent == 0 {
       self.incre = .equal

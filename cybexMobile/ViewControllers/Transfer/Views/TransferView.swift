@@ -360,7 +360,7 @@ extension TransferView: UITextFieldDelegate {
             if textField.text?.trimmed.count == 0 {
                 self.sendEventWith(TextChangeEvent.amount.rawValue, userinfo: ["content": ""])
             } else {
-                let validedText = textField.text?.toDouble()?.string(digits: precision)
+                let validedText = textField.text?.formatCurrency(digitNum: precision)
                 textField.text = validedText
                 self.sendEventWith(TextChangeEvent.amount.rawValue, userinfo: ["content": validedText ?? ""])
             }

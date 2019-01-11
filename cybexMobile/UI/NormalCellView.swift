@@ -37,9 +37,9 @@ class NormalCellView: UIView {
         didSet {
             switch state {
             case NormalCellViewState.normal.rawValue:
-                print("")
+                break
             case NormalCellViewState.choose.rawValue:
-                print("")
+                break
             case NormalCellViewState.transform.rawValue:
                 self.rightIcon.isHighlighted = true
             default:
@@ -229,7 +229,7 @@ extension NormalCellView {
         case NormalCellViewState.choose.rawValue :
             self.sendEventWith(EventName.clickCellView.rawValue, userinfo: ["index": index])
         case NormalCellViewState.transform.rawValue:
-            print("")
+            break
         default:break
         }
     }

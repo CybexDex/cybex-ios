@@ -47,7 +47,7 @@ class ETODetailIntroView: CybexBaseView {
                     return atts
                 }
                 label.handleCustomTap(for: customType, handler: { [weak self](str) in
-                    guard let `self` = self else { return }
+                    guard let self = self else { return }
                     self.next?.sendEventWith(Event.labelClick.rawValue, userinfo: ["clicklabel": str])
                 })
             }
@@ -68,7 +68,7 @@ class ETODetailIntroView: CybexBaseView {
 
     func setupSubViewEvent() {
         downUpButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.downUpButton.isSelected = !self.downUpButton.isSelected
             if self.downUpButton.isSelected == true {
                 self.contentLabel.numberOfLines = 0
@@ -80,9 +80,5 @@ class ETODetailIntroView: CybexBaseView {
 
     @objc override func didClicked() {
         self.next?.sendEventWith(Event.ETODetailIntroViewDidClicked.rawValue, userinfo: ["data": self.data ?? "", "self": self])
-    }
-
-    deinit {
-        log.debug("ETODetailIntroView delloc -- \(self)")
     }
 }

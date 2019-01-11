@@ -74,7 +74,7 @@ class ChatDirectionViewController: BaseViewController {
     
     override func configureObserveState() {
         self.coordinator?.state.context.asObservable().subscribe(onNext: { [weak self] (context) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             
             if let context = context as? ChatDirectionContext {
                 self.context = context
@@ -83,7 +83,7 @@ class ChatDirectionViewController: BaseViewController {
         }).disposed(by: disposeBag)
         
         self.coordinator?.state.pageState.asObservable().distinctUntilChanged().subscribe(onNext: {[weak self] (state) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             
             self.endLoading()
             

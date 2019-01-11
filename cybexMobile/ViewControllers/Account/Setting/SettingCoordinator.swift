@@ -14,6 +14,7 @@ protocol SettingCoordinatorProtocol {
     func openSettingDetail(type: SettingPage)
     func dismiss()
     func openHelpWebView()
+    
 }
 
 protocol SettingStateManagerProtocol {
@@ -65,19 +66,18 @@ extension SettingCoordinator: SettingStateManagerProtocol {
             Defaults[.environment] = "test"
             isTest = true
         }
-        changeEnvironmentAction()
-        AssetConfiguration.shared.assetIds = []
-        AssetConfiguration.shared.uniqueIds = []
-
-        appData.tickerData.accept([])
-
-        CybexWebSocketService.shared.disconnect()
-        UserManager.shared.logout()
-        callback(isTest)
-        self.rootVC.popViewController()
-        if let appdelegate =  UIApplication.shared.delegate as? AppDelegate {
-            appdelegate.fetchEtoHiddenRequest(true)
-            CybexWebSocketService.shared.connect()
-        }
+//        MarketConfiguration.shared.marketPairs = []
+//        AssetConfiguration.shared.whiteListOfIds = []
+//
+//        appData.tickerData.accept([])
+//
+//        CybexWebSocketService.shared.disconnect()
+//        UserManager.shared.logout()
+//        callback(isTest)
+//        self.rootVC.popViewController()
+//        if let appdelegate =  UIApplication.shared.delegate as? AppDelegate {
+//            appdelegate.fetchEtoHiddenRequest(true)
+//            CybexWebSocketService.shared.connect()
+//        }
     }
 }

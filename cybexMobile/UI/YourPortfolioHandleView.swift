@@ -14,32 +14,40 @@ class YourPortfolioHandleView: UIView {
     @IBOutlet weak var rechargeView: UIView!
     @IBOutlet weak var withdrawDepositView: UIView!
     @IBOutlet weak var transferView: UIView!
-
+    @IBOutlet weak var ticketUseView: UIView!
+    
     enum Event: String {
         case recharge
         case withdrawdeposit
         case transfer
+        case ticketChecking
     }
 
     func setup() {
+        ticketUseView.isHidden = true
         setUpEvent()
         updateHeight()
     }
 
     func setUpEvent() {
         rechargeView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.next?.sendEventWith(Event.recharge.rawValue, userinfo: [:])
         }).disposed(by: disposeBag)
 
         withdrawDepositView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.next?.sendEventWith(Event.withdrawdeposit.rawValue, userinfo: [:])
         }).disposed(by: disposeBag)
 
         transferView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.next?.sendEventWith(Event.transfer.rawValue, userinfo: [:])
+        }).disposed(by: disposeBag)
+
+        ticketUseView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
+            guard let self = self else { return }
+            self.next?.sendEventWith(Event.ticketChecking.rawValue, userinfo: [:])
         }).disposed(by: disposeBag)
     }
 

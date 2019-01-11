@@ -309,7 +309,7 @@ extension UIControl {
     fileprivate func _resetOperation() {
         self.changeOperations.forEach {[weak self] selector, picker in
             UIView.animate(withDuration: 0.3) {
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 if let control = self as? UIControl {
                     control.performControlOperations(sel: selector, picker: picker)
                     return

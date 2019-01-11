@@ -33,7 +33,7 @@ class CybexWebViewController: BaseWebViewController {
 
     override func viewDidLoad() {
         if vcType == .help {
-            let url = Defaults[.theme] == 0 ?AppConfiguration.HelpNightURL + Localize.currentLanguage() : AppConfiguration.HelpLightURL + Localize.currentLanguage()
+            let url = Defaults[.theme] == 0 ? AppConfiguration.HelpNightURL + Localize.currentLanguage() : AppConfiguration.HelpLightURL + Localize.currentLanguage()
             self.url = URL(string: url)
         } else if vcType == .agreement {
             self.navigationItem.title = R.string.localizable.eto_user_agreenment.key.localized()
@@ -80,12 +80,12 @@ class CybexWebViewController: BaseWebViewController {
 
     func setupEvent() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification), object: nil, queue: nil, using: { [weak self] _ in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.setURL()
         })
 
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil) { [weak self](_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.setURL()
         }
     }

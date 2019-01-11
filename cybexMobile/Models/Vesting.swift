@@ -63,23 +63,23 @@ class PortfolioData {
         icon = AppConfiguration.ServerIconsBaseURLString + balance.assetType.replacingOccurrences(of: ".", with: "_") + "_grey.png"
         // 获得自己的个数
         if let assetInfo = appData.assetInfo[balance.assetType] {
-            realAmount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: assetInfo.precision, roundingMode: .down)
+            realAmount = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).formatCurrency(digitNum: assetInfo.precision)
             name = assetInfo.symbol.filterJade
         }
 
         // 获取对应CYB的个数
-        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice.doubleValue * (realAmount.toDouble())!)
+        let cybDecimal = AssetHelper.singleAssetRMBPrice(balance.assetType) / AssetConfiguration.shared.rmbOf(asset: .CYB) * realAmount.decimal()
 
-        if amountCYB == "-"{
-            cybPrice = amountCYB + " CYB"
-        } else {
-            cybPrice = amountCYB.formatCurrency(digitNum: 5) + " CYB"
-        }
-
-        if let _ = amountCYB.toDouble() {
-            rbmPrice    = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * Decimal(getAssetRMBPrice(balance.assetType))).string(digits: 4, roundingMode: .down)
-        } else {
+        if AssetConfiguration.shared.rmbOf(asset: .CYB) == 0 {
+            cybPrice = "- CYB"
             rbmPrice    = "-"
+        } else {
+            guard let cybInfo = appData.assetInfo[AssetConfiguration.CybexAsset.CYB.id] else { return }
+            
+            cybPrice = cybDecimal.formatCurrency(digitNum: cybInfo.precision) + " CYB"
+            rbmPrice = "≈¥" + (AssetHelper.getRealAmount(balance.assetType,
+                                                            amount: balance.balance) *
+                AssetHelper.singleAssetRMBPrice(balance.assetType)).formatCurrency(digitNum: AppConfiguration.rmbPrecision)
         }
     }
 }
@@ -98,15 +98,14 @@ class MyPortfolioData {
         name = appData.assetInfo[balance.assetType]?.symbol.filterJade ?? "--"
         // 获得自己的个数
         if let assetInfo = appData.assetInfo[balance.assetType] {
-            realAmount = getRealAmount(balance.assetType, amount: balance.balance).string(digits: assetInfo.precision, roundingMode: .down)
+            realAmount = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).formatCurrency(digitNum: assetInfo.precision)
         }
-        // 获取对应CYB的个数
-        let amountCYB = appData.cybRmbPrice == 0 ? "-" :  String(getAssetRMBPrice(balance.assetType) / appData.cybRmbPrice.doubleValue * (realAmount.toDouble())!)
 
-        if let _ = amountCYB.toDouble() {
-            rbmPrice = "≈¥" + (getRealAmount(balance.assetType, amount: balance.balance) * Decimal(getAssetRMBPrice(balance.assetType))).string(digits: 4, roundingMode: .down)
-        } else {
+        if AssetConfiguration.shared.rmbOf(asset: .CYB) == 0 {
             rbmPrice = "-"
+
+        } else {
+            rbmPrice = "≈¥" + (AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) * AssetHelper.singleAssetRMBPrice(balance.assetType)).formatCurrency(digitNum: 4)
         }
 
         //获取冻结资产
@@ -115,7 +114,7 @@ class MyPortfolioData {
         if let limitArray = UserManager.shared.limitOrder.value {
             for limit in limitArray {
                 if limit.sellPrice.base.assetID == balance.assetType {
-                    let amount = getRealAmount(balance.assetType, amount: limit.forSale)
+                    let amount = AssetHelper.getRealAmount(balance.assetType, amount: limit.forSale)
                     limitDecimal += amount
                 }
             }
@@ -124,8 +123,7 @@ class MyPortfolioData {
                     limitAmount = R.string.localizable.frozen.key.localized() + "--"
                 } else {
                     limitAmount = R.string.localizable.frozen.key.localized() +
-                        limitDecimal.string(digits: assetInfo.precision,
-                                            roundingMode: .down)
+                        limitDecimal.formatCurrency(digitNum: assetInfo.precision)
                 }
             }
         }

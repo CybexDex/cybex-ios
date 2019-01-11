@@ -36,13 +36,13 @@ class AddAddressViewController: BaseViewController {
     func setupUI() {
         if addressType == .withdraw {
             self.containerView.asset.content.text = appData.assetInfo[self.asset]?.symbol.filterJade
-            if self.asset == AssetConfiguration.EOS {
+            if self.asset == AssetConfiguration.CybexAsset.EOS.id {
                 self.title = R.string.localizable.address_title_add_eos.key.localized()
                 self.containerView.address.title = R.string.localizable.eos_withdraw_account.key
             } else {
                 self.title = R.string.localizable.address_title_add.key.localized()
                 self.containerView.address.title = R.string.localizable.withdraw_address.key
-                if appData.assetInfo[self.asset]?.symbol.filterJade == "XRP" {
+                if appData.assetInfo[self.asset]?.symbol.filterJade == AssetConfiguration.CybexAsset.XRP.rawValue {
                     self.containerView.memo.isHidden = false
                     self.containerView.memo.name.text = "Tag"
                 }
@@ -59,7 +59,7 @@ class AddAddressViewController: BaseViewController {
         } else {
             self.title = R.string.localizable.account_title_add.key.localized()
             self.containerView.assetShadowView.isHidden = true
-            if self.asset != AssetConfiguration.EOS {
+            if self.asset != AssetConfiguration.CybexAsset.EOS.id {
                 self.containerView.memo.isHidden = true
             }
             if self.transferAddress != nil {
@@ -78,7 +78,7 @@ class AddAddressViewController: BaseViewController {
 
         NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification,
                                                object: self.containerView.mark.content, queue: nil) { [weak self](_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if let text = self.containerView.mark.content.text, text.trimmed.count != 0 {
                 self.coordinator?.verityNote(true)
                 if text.trimmed.count > 15 {
@@ -91,7 +91,7 @@ class AddAddressViewController: BaseViewController {
         }
 
         NotificationCenter.default.addObserver(forName: UITextView.textDidEndEditingNotification, object: self.containerView.address.content, queue: nil) { [weak self](_) in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             if let text = self.containerView.address.content.text, text.trimmed.count > 0 {
                 self.containerView.addressState = .loading
                 self.coordinator?.verityAddress(text.trimmed, type: self.addressType)
@@ -102,7 +102,7 @@ class AddAddressViewController: BaseViewController {
         }
 
         self.coordinator?.state.addressVailed.asObservable().skip(1).subscribe(onNext: { [weak self](addressSuccess) in
-            guard let `self` = self else {return}
+            guard let self = self else {return}
             if !addressSuccess {
                 if self.containerView.address.content.text.count != 0 {
                     self.containerView.addressState = .fail
@@ -118,7 +118,7 @@ class AddAddressViewController: BaseViewController {
             self.coordinator!.state.addressVailed.asObservable(),
             self.coordinator!.state.noteVailed.asObservable()
             ).subscribe(onNext: { [weak self](addressSuccess, noteSuccess) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             guard addressSuccess, noteSuccess else {
                 self.containerView.addBtn.isEnable = false
                 return
@@ -127,7 +127,7 @@ class AddAddressViewController: BaseViewController {
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         self.containerView.addBtn.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self](_) in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             self.view.endEditing(true)
 
             if self.containerView.addBtn.isEnable == false || self.containerView.addressState != .success {

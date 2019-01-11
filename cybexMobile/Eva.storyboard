@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Eva View Controller-->
+        <scene sceneID="a5c-0b-bez">
+            <objects>
+                <viewController storyboardIdentifier="EvaViewController" autoresizesArchivedViewToFullSize="NO" id="G2e-Ke-MvZ" customClass="EvaViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wq2-LB-uMd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="kV3-Du-HmL" customClass="EvaView" customModule="cybexMobile" customModuleProvider="target">
+                                <rect key="frame" x="16" y="20" width="343" height="128"/>
+                            </view>
+                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="AN4-9E-zAw">
+                                <rect key="frame" x="0.0" y="148" width="375" height="76"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKY-V2-oog">
+                                        <rect key="frame" x="16" y="16" width="343" height="1"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="kWK-vp-HNI"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
+                                                <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                                                <color key="value" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.11" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The data comes from EVALUAPE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wFg-4A-X6g">
+                                        <rect key="frame" x="95" y="25" width="185" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.55300000000000005" green="0.56499999999999995" blue="0.59199999999999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="locali" value="eva_EVALUAPE"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01_evaluape_logo_white_background" translatesAutoresizingMaskIntoConstraints="NO" id="lnN-l2-fBO">
+                                        <rect key="frame" x="144.5" y="43.5" width="86" height="17"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="76" id="4ZS-6G-vol"/>
+                                    <constraint firstItem="wFg-4A-X6g" firstAttribute="top" secondItem="xKY-V2-oog" secondAttribute="bottom" constant="8" id="9KR-gw-Re5"/>
+                                    <constraint firstItem="xKY-V2-oog" firstAttribute="top" secondItem="AN4-9E-zAw" secondAttribute="top" constant="16" id="CVE-t5-B9p"/>
+                                    <constraint firstAttribute="bottom" secondItem="lnN-l2-fBO" secondAttribute="bottom" constant="15.5" id="FQt-sK-IqL"/>
+                                    <constraint firstItem="wFg-4A-X6g" firstAttribute="centerX" secondItem="AN4-9E-zAw" secondAttribute="centerX" id="QSf-BW-R4s"/>
+                                    <constraint firstAttribute="trailing" secondItem="xKY-V2-oog" secondAttribute="trailing" constant="16" id="RSP-CD-562"/>
+                                    <constraint firstItem="lnN-l2-fBO" firstAttribute="centerX" secondItem="AN4-9E-zAw" secondAttribute="centerX" id="b5L-P0-DOM"/>
+                                    <constraint firstItem="lnN-l2-fBO" firstAttribute="top" secondItem="wFg-4A-X6g" secondAttribute="bottom" constant="4" id="mZH-Ml-N9B"/>
+                                    <constraint firstItem="xKY-V2-oog" firstAttribute="leading" secondItem="AN4-9E-zAw" secondAttribute="leading" constant="16" id="nfG-gB-UnM"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="kV3-Du-HmL" firstAttribute="leading" secondItem="2ZD-DD-8R7" secondAttribute="leading" constant="16" id="6rE-nW-jN2"/>
+                            <constraint firstItem="2ZD-DD-8R7" firstAttribute="trailing" secondItem="AN4-9E-zAw" secondAttribute="trailing" id="G23-7I-z5B"/>
+                            <constraint firstItem="AN4-9E-zAw" firstAttribute="top" secondItem="kV3-Du-HmL" secondAttribute="bottom" id="Le9-Fd-eAK"/>
+                            <constraint firstItem="kV3-Du-HmL" firstAttribute="top" secondItem="2ZD-DD-8R7" secondAttribute="top" id="NpM-eR-Dy8"/>
+                            <constraint firstItem="2ZD-DD-8R7" firstAttribute="trailing" secondItem="kV3-Du-HmL" secondAttribute="trailing" constant="16" id="UWV-qn-rNt"/>
+                            <constraint firstItem="AN4-9E-zAw" firstAttribute="leading" secondItem="2ZD-DD-8R7" secondAttribute="leading" id="ZmB-lE-coP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2ZD-DD-8R7"/>
+                    </view>
+                    <connections>
+                        <outlet property="evaView" destination="kV3-Du-HmL" id="Qsm-ks-bdh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E7a-gn-HKP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-246" y="24"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="01_evaluape_logo_white_background" width="86" height="17"/>
+    </resources>
+</document>

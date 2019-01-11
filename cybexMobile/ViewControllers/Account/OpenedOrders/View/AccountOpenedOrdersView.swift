@@ -21,19 +21,18 @@ class AccountOpenedOrdersView: UIView {
     var data: Any? {
         didSet {
             _ = UserManager.shared.balance
-            updateHeaderView()
+//            updateHeaderView()
             self.tableView.reloadData()
         }
     }
 
     @IBAction func segmentDidClicked(_ sender: Any) {
-        updateHeaderView()
+//        updateHeaderView()
         self.tableView.reloadData()
     }
 
     func updateHeaderView() {
         guard let _ = UserManager.shared.limitOrder.value else { return }
-
         if segment.selectedSegmentIndex == 0 {
             headerView.totalValueTip.localizedText = R.string.localizable.openedAllMoney.key.localizedContainer()
             headerView.data = "\(UserManager.shared.limitOrderValue)"
@@ -50,12 +49,8 @@ class AccountOpenedOrdersView: UIView {
         let cell = String.init(describing: OpenedOrdersCell.self)
         tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
         tableView.separatorColor = ThemeManager.currentThemeIndex == 0 ? .dark : .paleGrey
-
-        headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: 103))
-
-        headerView.sectionTitleView.cybPriceTitle.locali = R.string.localizable.my_opened_filled.key
-        headerView.sectionTitleView.totalTitle.locali = R.string.localizable.my_opened_price.key
-        tableView.tableHeaderView = headerView
+//        headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: 64))
+//        tableView.tableHeaderView = headerView
     }
 
     override var intrinsicContentSize: CGSize {
@@ -106,48 +101,39 @@ class AccountOpenedOrdersView: UIView {
 
 extension AccountOpenedOrdersView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var orderes = UserManager.shared.limitOrder.value ?? []
+        guard var orders = self.data as? [LimitOrderStatus] else { return 0 }
         if segment.selectedSegmentIndex == 1 {
-            orderes = orderes.filter({$0.isBuy})
+            orders = orders.filter({$0.isBuyOrder()})
         } else if segment.selectedSegmentIndex == 2 {
-            orderes = orderes.filter({!$0.isBuy})
+            orders = orders.filter({!$0.isBuyOrder()})
         }
-
-        return orderes.count
+        return orders.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: OpenedOrdersCell.self), for: indexPath) as? OpenedOrdersCell {
-            var orderes = UserManager.shared.limitOrder.value ?? []
-            cell.cellType = 0
-
-            if segment.selectedSegmentIndex == 1 {
-                orderes = orderes.filter({$0.isBuy})
-            } else if segment.selectedSegmentIndex == 2 {
-                orderes = orderes.filter({!$0.isBuy})
+        if let cell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: OpenedOrdersCell.self), for: indexPath) as? OpenedOrdersCell,
+            var orders = self.data as? [LimitOrderStatus] {
+                cell.cellType = 0
+                if segment.selectedSegmentIndex == 1 {
+                    orders = orders.filter({$0.isBuyOrder()})
+                } else if segment.selectedSegmentIndex == 2 {
+                    orders = orders.filter({!$0.isBuyOrder()})
+                }
+                cell.setup(orders[indexPath.row], indexPath: indexPath)
+                return cell
             }
-
-            cell.setup(orderes[indexPath.row], indexPath: indexPath)
-
-            return cell
-        }
         return OpenedOrdersCell()
-
     }
 }
 
 extension AccountOpenedOrdersView {
     @objc func cancleOrderAction(_ data: [String: Any]) {
-        if let index = data["selectedIndex"] as? Int {
-
-            var orderes = UserManager.shared.limitOrder.value ?? []
-
+        if let index = data["selectedIndex"] as? Int, var orderes = self.data as? [LimitOrderStatus] {
             if segment.selectedSegmentIndex == 1 {
-                orderes = orderes.filter({$0.isBuy})
+                orderes = orderes.filter({$0.isBuyOrder()})
             } else if segment.selectedSegmentIndex == 2 {
-                orderes = orderes.filter({!$0.isBuy})
+                orderes = orderes.filter({!$0.isBuyOrder()})
             }
-
             let order = orderes[index]
             self.next?.sendEventWith(Event.cancelOrder.rawValue, userinfo: ["order": order])
         }
