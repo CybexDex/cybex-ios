@@ -10,6 +10,10 @@ import Foundation
 import SwiftTheme
 
 class UIHelper {
+    enum Page: CGFloat {
+        case margin = 13
+    }
+
     class func getWithdrawDetailInfo(addressInfo: String,
                                      amountInfo: String,
                                      withdrawFeeInfo: String,

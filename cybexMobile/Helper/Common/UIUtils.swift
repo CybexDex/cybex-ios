@@ -8,6 +8,30 @@
 
 import Foundation
 
+func withSafaAreaTop(_ v: CGFloat) -> CGFloat {
+    guard let rootView = UIApplication.shared.keyWindow else { return 0 }
+
+    if #available(iOS 11.0, *) {
+        let topInset = rootView.safeAreaInsets.top
+
+        return v + topInset
+    } else {
+        return v
+    }
+}
+
+func withSafaAreaBottom(_ v: CGFloat) -> CGFloat {
+    guard let rootView = UIApplication.shared.keyWindow else { return 0 }
+
+    if #available(iOS 11.0, *) {
+        let topInset = rootView.safeAreaInsets.bottom
+
+        return v + topInset
+    } else {
+        return v
+    }
+}
+
 //转账详情 锁定期解锁时间格式
 func transferTimeType(_ time: Int, type: Bool = false) -> String {
     var result = ""

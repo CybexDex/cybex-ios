@@ -678,6 +678,12 @@
 		73A331172194244800707D8F /* ChatReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A331132194244800707D8F /* ChatReducers.swift */; };
 		73A331192194248800707D8F /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73A331182194248800707D8F /* Chat.storyboard */; };
 		73A3311C219425DA00707D8F /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A3311B219425DA00707D8F /* ChatUser.swift */; };
+		73A45F8A21E5F1A300B52A7F /* DeployTicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A45F8921E5F1A300B52A7F /* DeployTicketView.swift */; };
+		73A45F8C21E6EA0C00B52A7F /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A45F8B21E6EA0C00B52A7F /* ScanViewController.swift */; };
+		73A45F9221E6EA4500B52A7F /* ScanShadeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A45F8F21E6EA4500B52A7F /* ScanShadeView.swift */; };
+		73A45F9321E6EA4500B52A7F /* ScanPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A45F9021E6EA4500B52A7F /* ScanPreviewView.swift */; };
+		73A45F9421E6EA4500B52A7F /* ScanCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A45F9121E6EA4500B52A7F /* ScanCornerView.swift */; };
+		73A45F9621E8476E00B52A7F /* DeployTicketResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A45F9521E8476A00B52A7F /* DeployTicketResultViewController.swift */; };
 		73AA83A521A7D1F2001B24DF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AA83A421A7D1F2001B24DF /* Utils.swift */; };
 		73D012992159D71800C95896 /* URLNavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D012982159D71800C95896 /* URLNavigationMap.swift */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
@@ -1539,6 +1545,12 @@
 		73A331132194244800707D8F /* ChatReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatReducers.swift; sourceTree = "<group>"; };
 		73A331182194248800707D8F /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		73A3311B219425DA00707D8F /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
+		73A45F8921E5F1A300B52A7F /* DeployTicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeployTicketView.swift; sourceTree = "<group>"; };
+		73A45F8B21E6EA0C00B52A7F /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		73A45F8F21E6EA4500B52A7F /* ScanShadeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanShadeView.swift; sourceTree = "<group>"; };
+		73A45F9021E6EA4500B52A7F /* ScanPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanPreviewView.swift; sourceTree = "<group>"; };
+		73A45F9121E6EA4500B52A7F /* ScanCornerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanCornerView.swift; sourceTree = "<group>"; };
+		73A45F9521E8476A00B52A7F /* DeployTicketResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeployTicketResultViewController.swift; sourceTree = "<group>"; };
 		73AA83A421A7D1F2001B24DF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		73BAB6CB839C8F409C3061833343A527 /* LockupAssetsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsSectionView.xib; sourceTree = "<group>"; };
 		73C298F5E89ECC37094FCC901A6B8D49 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
@@ -3462,6 +3474,26 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		73A45F8D21E6EA1300B52A7F /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				73A45F8E21E6EA4500B52A7F /* Views */,
+				73A45F8B21E6EA0C00B52A7F /* ScanViewController.swift */,
+				73A45F9521E8476A00B52A7F /* DeployTicketResultViewController.swift */,
+			);
+			path = Scan;
+			sourceTree = "<group>";
+		};
+		73A45F8E21E6EA4500B52A7F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				73A45F8F21E6EA4500B52A7F /* ScanShadeView.swift */,
+				73A45F9021E6EA4500B52A7F /* ScanPreviewView.swift */,
+				73A45F9121E6EA4500B52A7F /* ScanCornerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		73D012972159D70500C95896 /* Route */ = {
 			isa = PBXGroup;
 			children = (
@@ -3473,7 +3505,9 @@
 		73D9C21221E5EBC0005B9022 /* Ticket */ = {
 			isa = PBXGroup;
 			children = (
+				73A45F8D21E6EA1300B52A7F /* Scan */,
 				73D9C21321E5EBD5005B9022 /* DepolyTicketViewController.swift */,
+				73A45F8921E5F1A300B52A7F /* DeployTicketView.swift */,
 			);
 			path = Ticket;
 			sourceTree = "<group>";
@@ -4877,6 +4911,8 @@
 				7391101F21BA509C00412CE1 /* NetworkBroadcastAPI.swift in Sources */,
 				221C616D2137FCCF0021C007 /* ImageShareActions.swift in Sources */,
 				E13AE68F78264232722CD68636FC433B /* CGContextExtension.swift in Sources */,
+				73A45F9621E8476E00B52A7F /* DeployTicketResultViewController.swift in Sources */,
+				73A45F9321E6EA4500B52A7F /* ScanPreviewView.swift in Sources */,
 				1F89EA780689075E3FB3230FDB6EE703 /* Collection+Extensions.swift in Sources */,
 				DFA46607407072808EE78AEA1A37D728 /* ColorTheme.swift in Sources */,
 				3B0EB6602103149100F19C31 /* AccountViewController.swift in Sources */,
@@ -4894,6 +4930,7 @@
 				72E2A8EF2151F9DB00FBB3CB /* ComprehensiveViewController.swift in Sources */,
 				7217B07E2122AAFD00608531 /* AddAddressViewController.swift in Sources */,
 				61096350D887C3728E3B617E993C2365 /* Demo.swift in Sources */,
+				73A45F8C21E6EA0C00B52A7F /* ScanViewController.swift in Sources */,
 				51FB3EBF69DA6AF015F0DF92781986BF /* DemoCache.swift in Sources */,
 				724C5D4121538ABD00FF1DE7 /* ComprehensiveViewAdapter.swift in Sources */,
 				A1EF7FAAA7F0B4F6C9FE153714C1ED47 /* ShowToastManager.swift in Sources */,
@@ -4927,6 +4964,7 @@
 				72D58292219C188700BB9842 /* ChatDownInputView.swift in Sources */,
 				72199D7C210450EA00575226 /* RecodeCellView.swift in Sources */,
 				737E596D21A541E6001199E4 /* JWK.swift in Sources */,
+				73A45F8A21E5F1A300B52A7F /* DeployTicketView.swift in Sources */,
 				7386F2C121216B9E00ABC924 /* WithdrawAddressViewController.swift in Sources */,
 				72199D8C21045D4700575226 /* TransferListCoordinator.swift in Sources */,
 				7333856821BFA4410026765F /* AppConfigration.swift in Sources */,
@@ -4946,6 +4984,7 @@
 				7307A91D212518DC00BD6444 /* FontLoader.swift in Sources */,
 				736761E821BE4C2D0065FD35 /* IMService.swift in Sources */,
 				3B0EB659210313B200F19C31 /* NormalContentCell.swift in Sources */,
+				73A45F9421E6EA4500B52A7F /* ScanCornerView.swift in Sources */,
 				7391101E21BA509C00412CE1 /* HistoryApi.swift in Sources */,
 				8C20E983876A75B5AF1B2B1CC5B7FA6C /* HomePairCell.swift in Sources */,
 				3D400D51F52AE73941E3134046491BA5 /* HomePairView.swift in Sources */,
@@ -5088,6 +5127,7 @@
 				A819B2C87ADE04838AE8D44CF16C53B4 /* PairRechargeView.swift in Sources */,
 				70AA9BF1213954A254025E8762C72D69 /* QuotesTitleView.swift in Sources */,
 				72199D6821044FD100575226 /* RechargeRecodeViewController.swift in Sources */,
+				73A45F9221E6EA4500B52A7F /* ScanShadeView.swift in Sources */,
 				7391101D21BA509C00412CE1 /* DataBaseApi.swift in Sources */,
 				7391101B21BA509C00412CE1 /* CybexWebSocketService.swift in Sources */,
 				72199D9721045DDE00575226 /* TransferListCellView.swift in Sources */,

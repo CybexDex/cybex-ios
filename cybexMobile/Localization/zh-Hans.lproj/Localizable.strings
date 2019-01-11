@@ -547,3 +547,12 @@
 
 "ticket_use_title" = "使用";
 "ticket_title" = "使用我的资产";
+"ticket_check_account" = "验证账户";
+"ticket_check_account_placeholder" = "请输入验证账户或扫码获取验证账户 ";
+"ticket_deploy_asset" = "使用资产";
+"ticket_deploy_asset_placeholder" = "请输入或选择要使用的资产";
+"ticket_depoly_amount" = "使用数量";
+"ticket_depoly_amount_placeholder" = "请输入数量";
+"ticket_asset_left" = "当前持有%@个";
+"scan_qrcode_hint" = "对准二维码，即可自动扫描";
+"ticket_deploy_result_info" = "请向管理员出示二维码。\n请注意保管好您的二维码。\n二维码的有效时间为10分钟。";

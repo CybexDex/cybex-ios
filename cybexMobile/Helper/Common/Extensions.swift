@@ -76,6 +76,24 @@ extension UIView {
             return self.height
         }
     }
+
+    var windowSafeAreaInsets: UIEdgeInsets {
+        guard let rootView = UIApplication.shared.keyWindow else { return UIEdgeInsets.zero }
+
+        if #available(iOS 11.0, *) {
+            return rootView.safeAreaInsets
+        } else {
+            return UIEdgeInsets.zero
+        }
+    }
+
+    var windowWithNavSafeAreaInsets: UIEdgeInsets {
+        return windowSafeAreaInsets.insetBy(top: 44)
+    }
+
+    var windowWithNavAndBottomSafeAreaInsets: UIEdgeInsets {
+        return windowWithNavSafeAreaInsets.insetBy(bottom: 44)
+    }
 }
 
 extension UIViewController {
