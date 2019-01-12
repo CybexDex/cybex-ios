@@ -10,12 +10,14 @@ import Foundation
 import Presentr
 import RxCocoa
 import RxSwift
+import cybex_ios_core_cpp
 
 class DepolyTicketViewController: BaseViewController {
     var containView: DeployTicketView!
 
-    var result: String?
-    var chooseAssetname: String?
+    var chooseAsset: AssetInfo?
+    var toAccount: Account?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,28 +43,110 @@ class DepolyTicketViewController: BaseViewController {
                                  containView.amountView.textField.rx.text.orEmpty).subscribe(onNext: {[weak self] (validate) in
                                     guard let self = self else { return }
 
-                                    if !validate.0.isEmpty, !validate.1.isEmpty, !validate.2.isEmpty {
+                                    if !validate.0.isEmpty, !validate.1.isEmpty, !validate.2.isEmpty,
+                                        self.chooseAsset != nil, self.toAccount != nil {
                                         self.containView.buttonIsEnable = true
                                     } else {
                                         self.containView.buttonIsEnable = false
                                     }
 
                                     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+
+        NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification , object: containView.accountView.textField, queue: nil) { (notifi) in
+            guard let name = self.containView.accountView.textField.text else { return }
+
+            self.getAccountFrom(name)
+        }
+
+        NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification , object: containView.assetView.textField, queue: nil) { (notifi) in
+            guard let asset = self.containView.assetView.textField.text else { return }
+
+            self.getAsset(asset)
+        }
     }
 }
 
 // MARK: - Logic
 extension DepolyTicketViewController {
-    func getAccountId() {
-
+    func getAccountFrom(_ accountName: String) {
+        let requeset = GetFullAccountsRequest(name: accountName) { (response) in
+            if let data = response as? FullAccount, let account = data.account {
+                self.toAccount = account
+            }
+            else {
+                self.toAccount = nil
+            }
+        }
+        CybexWebSocketService.shared.send(request: requeset)
     }
 
-    func getAssetId() {
+    func getAsset(_ assetName: String) {
+        let request = LookupAssetSymbolsRequest(names: [assetName]) { response in
+            if let assetinfo = response as? [AssetInfo], let info = assetinfo.first {
+                self.chooseAsset = info
 
+                let balanceDecimal = UserHelper.getBalanceFromAssetID(info.id)
+                if balanceDecimal > 0 {
+                    self.containView.amountView.unitLabel.text = R.string.localizable.ticket_asset_left.key.localizedFormat(balanceDecimal.string(digits: 0, roundingMode: .down))
+                }
+                else {
+                    self.containView.amountView.unitLabel.text = R.string.localizable.ticket_asset_left.key.localizedFormat("-")
+                }
+            }
+            else {
+                self.chooseAsset = nil
+            }
+        }
+        CybexWebSocketService.shared.send(request: request, priority: .veryHigh)
     }
 
-    func generateInfo() {
-        
+    func generateInfo(_ callback: @escaping (String?) -> Void) {
+        guard  let fromAccount = UserManager.shared.account.value,
+            let amount = containView.amountView.textField.text,
+            let asset = chooseAsset,
+            let toAccount = toAccount else {
+                callback(nil)
+                return
+        }
+
+        CybexChainHelper.blockchainParamsRefLib { (blockInfo) in
+            let jsonstr = BitShareCoordinator.getTransaction(blockInfo.block_num.int32,
+                                                              block_id: blockInfo.block_id,
+                                                              expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionTicketExpiration,
+                                                              chain_id: CybexConfiguration.shared.chainID.value,
+                                                              from_user_id: fromAccount.id.getSuffixID,
+                                                              to_user_id: toAccount.id.getSuffixID,
+                                                              asset_id: asset.id.getSuffixID,
+                                                              receive_asset_id: asset.id.getSuffixID,
+                                                              amount: amount.int64,
+                                                              fee_id: 0,
+                                                              fee_amount: 55,
+                                                              memo: "",
+                                                              from_memo_key: "",
+                                                              to_memo_key: "")
+            callback(jsonstr)
+
+        }
+    }
+
+    func ticketUse() {
+        guard UserManager.shared.account.value != nil, let chooseAsset = chooseAsset else { return }
+
+        startLoading()
+
+        generateInfo {[weak self] (result) in
+            guard let self = self else { return }
+            self.endLoading()
+
+            guard let result = result else {
+                return
+            }
+
+            let vc = DeployTicketResultViewController()
+            vc.qrcodeInfo = result
+            vc.assetName = chooseAsset.symbol.filterJade
+            self.navigationController?.pushViewController(vc)
+        }
     }
 }
 
@@ -85,7 +169,7 @@ extension DepolyTicketViewController {
 
         if let balances = balances {
             for balance in balances {
-                items.append(balance.assetType.symbol.filterJade)
+                items.append(balance.assetType.originSymbol)
             }
         }
 
@@ -96,9 +180,11 @@ extension DepolyTicketViewController {
         var context = PickerContext()
         context.items = items as AnyObject
         context.pickerDidSelected = {(picker: UIPickerView) -> Void in
-            let balance = balances![picker.selectedRow(inComponent: 0)]
+            if let balances = balances {
+                let balance = balances[picker.selectedRow(inComponent: 0)]
+                assetChoosed(balance.assetType.originSymbol)
+            }
 
-            assetChoosed(balance.assetType.symbol.filterJade)
         }
 
         let nav = BaseNavigationController()
@@ -121,9 +207,11 @@ extension DepolyTicketViewController {
 extension DepolyTicketViewController {
     @objc func scan(_ data: [String: Any]) {
         let vc = ScanViewController()
-        vc.scanResult.delegate(on: self) { (self, result) in
-            self.result = result
+        vc.scanResult.delegate(on: self) { (self, r) in
+            self.containView.accountView.textField.text = r
+            self.getAccountFrom(r)
         }
+
         self.navigationController?.pushViewController(vc)
     }
 
@@ -131,16 +219,32 @@ extension DepolyTicketViewController {
         presentAssetPicker {[weak self] (asset) in
             guard let self = self else { return }
 
-            self.chooseAssetname = asset
             self.containView.assetView.textField.text = asset
         }
     }
 
     @objc func deploy(_ data: [String: Any]) {
-//        guard let result = result, let chooseAssetname = chooseAssetname else { return }
-        let vc = DeployTicketResultViewController()
-        vc.qrcodeInfo = "result"
-        vc.assetName = "CYB"
-        self.navigationController?.pushViewController(vc)
+        if !UserManager.shared.isLocked {
+            self.ticketUse()
+        } else {
+            self.showPasswordBox()
+        }
+    }
+
+}
+
+extension DepolyTicketViewController {
+    override func passwordDetecting() {
+        self.startLoading()
+    }
+
+    override func passwordPassed(_ passed: Bool) {
+        self.endLoading()
+
+        if passed {
+            self.ticketUse()
+        } else {
+            self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+        }
     }
 }

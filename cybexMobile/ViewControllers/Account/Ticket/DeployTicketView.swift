@@ -51,7 +51,7 @@ class DeployTicketView: UIView {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
-        label.text = "0.0005 CYB"
+        label.text = "0.00055 CYB"
         label.sizeToFit()
         label.textAlignment = .right
 

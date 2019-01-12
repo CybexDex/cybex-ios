@@ -14,6 +14,7 @@ enum DataBaseCatogery: String {
     case getFullAccounts
     case getChainId
     case getObjects
+    case lookupAssetSymbols
     case subscribeToMarket
     case getLimitOrders
     case getBalanceObjects
@@ -173,7 +174,31 @@ struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
             }
 
             return response.map { data in
+                return AssetInfo.deserialize(from: data)
+            }
+        } else {
+            throw CastError(actualValue: resultObject, expectedType: Response.self)
+        }
 
+    }
+}
+
+struct LookupAssetSymbolsRequest: JSONRPCKit.Request, JSONRPCResponse {
+    var names: [String]
+
+    var response: RPCSResponse
+
+    var method: String {
+        return "call"
+    }
+
+    var parameters: Any? {
+        return [ApiCategory.database, DataBaseCatogery.lookupAssetSymbols.rawValue.snakeCased(), [names]]
+    }
+
+    func transferResponse(from resultObject: Any) throws -> Any {
+        if let response = resultObject as? [[String: Any]] {
+            return response.map { data in
                 return AssetInfo.deserialize(from: data)
             }
         } else {

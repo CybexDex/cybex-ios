@@ -169,14 +169,9 @@ extension ComprehensiveViewController {
             return
         }
 
-
         if midlleItem.needtalk == .gamecenter {
-            if Defaults[.hasCode] == true {
-                self.coordinator?.openGame(midlleItem.link)
-                return
-            }
-            let titleName = R.string.localizable.eto_invite_code_title.key.localized()
-            self.showPasswordBox(titleName,middleType: CybexTextView.TextViewType.code)
+            self.coordinator?.openGame(midlleItem.link)
+
             return
         }
         
@@ -213,24 +208,6 @@ extension ComprehensiveViewController {
             if url.contains("http://") || url.contains("https://") {
                 self.coordinator?.openWebVCUrl(url)
             }
-        }
-    }
-    
-    
-    override func codePassed(_ passed: Bool) {
-        if passed {
-            Defaults[.hasCode] = true
-            guard let middleItems = self.coordinator?.state.middleItems.value else { return }
-            let items = middleItems.filter { (item) -> Bool in
-                return item.needtalk == .gamecenter
-            }
-
-            if let item = items.first {
-                self.coordinator?.openGame(item.link)
-            }
-        }
-        else {
-            self.showToastBox(false, message: R.string.localizable.eto_invite_code_error.key.localized())
         }
     }
 }

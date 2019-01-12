@@ -104,6 +104,10 @@ extension AssetConfiguration {
 }
 
 extension String {
+    var originSymbol: String {
+        return appData.assetInfo[self]?.symbol ?? self
+    }
+
     var symbol: String {
         return appData.assetInfo[self]?.symbol.filterJade ?? self
     }
