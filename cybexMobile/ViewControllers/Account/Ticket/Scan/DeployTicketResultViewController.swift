@@ -78,7 +78,6 @@ class DeployTicketResultViewController: BaseViewController {
 extension DeployTicketResultViewController {
     func generateQRCode(_ content: String) -> UIImage? {
         let generator = EFQRCodeGenerator(content: content, size: EFIntSize(width: 155, height: 155))
-//        generator.setIcon(icon: UIImage(named: R.image.artboard.name)?.toCGImage(), size: EFIntSize(width: 42, height: 42))
         if let image = generator.generate() {
             return UIImage(cgImage: image)
         }

@@ -576,4 +576,4 @@
 "ticket_depoly_amount_placeholder" = "Input the quantity";
 "ticket_asset_left" = "%@ left";
 "scan_qrcode_hint" = "Align the QR  Code within the frame to scan";
-"ticket_deploy_result_info" = "Please show the QR Code to administrator.\nPlease keeo your QR Code carefully.\nThe effective time of the QR code is 10 minutes.";
+"ticket_deploy_result_info" = "Please show the QR Code to administrator.\nPlease keeo your QR Code carefully.\nThe effective time of the QR code is 30 minutes.";

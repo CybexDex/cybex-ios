@@ -33,4 +33,14 @@ class AssetHelper {
 
         return amount.decimal() / precisionNumber
     }
+
+    class func setRealAmount(_ id: String, amount: String) -> Decimal {
+        guard let asset = appData.assetInfo[id] else {
+            return 0
+        }
+
+        let value = pow(10, asset.precision)
+
+        return amount.decimal() * value
+    }
 }

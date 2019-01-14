@@ -43,23 +43,21 @@ class DepolyTicketViewController: BaseViewController {
                                  containView.amountView.textField.rx.text.orEmpty).subscribe(onNext: {[weak self] (validate) in
                                     guard let self = self else { return }
 
-                                    if !validate.0.isEmpty, !validate.1.isEmpty, !validate.2.isEmpty,
-                                        self.chooseAsset != nil, self.toAccount != nil {
-                                        self.containView.buttonIsEnable = true
-                                    } else {
-                                        self.containView.buttonIsEnable = false
-                                    }
+                                    self.validateButtonState()
 
                                     }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-        NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification , object: containView.accountView.textField, queue: nil) { (notifi) in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification , object: containView.accountView.textField, queue: nil) { (notifi) in
             guard let name = self.containView.accountView.textField.text else { return }
 
+            self.toAccount = nil
             self.getAccountFrom(name)
         }
 
-        NotificationCenter.default.addObserver(forName: UITextField.textDidEndEditingNotification , object: containView.assetView.textField, queue: nil) { (notifi) in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification , object: containView.assetView.textField, queue: nil) { (notifi) in
             guard let asset = self.containView.assetView.textField.text else { return }
+
+            self.chooseAsset = nil
 
             self.getAsset(asset)
         }
@@ -68,6 +66,16 @@ class DepolyTicketViewController: BaseViewController {
 
 // MARK: - Logic
 extension DepolyTicketViewController {
+    func validateButtonState() {
+        if containView.accountView.textField.text!.isEmpty || containView.assetView.textField.text!.isEmpty || containView.amountView.textField.text!.isEmpty ||
+            self.chooseAsset == nil || self.toAccount == nil {
+            self.containView.buttonIsEnable = false
+        }
+        else {
+            self.containView.buttonIsEnable = true
+        }
+    }
+    
     func getAccountFrom(_ accountName: String) {
         let requeset = GetFullAccountsRequest(name: accountName) { (response) in
             if let data = response as? FullAccount, let account = data.account {
@@ -76,6 +84,7 @@ extension DepolyTicketViewController {
             else {
                 self.toAccount = nil
             }
+            self.validateButtonState()
         }
         CybexWebSocketService.shared.send(request: requeset)
     }
@@ -96,6 +105,7 @@ extension DepolyTicketViewController {
             else {
                 self.chooseAsset = nil
             }
+            self.validateButtonState()
         }
         CybexWebSocketService.shared.send(request: request, priority: .veryHigh)
     }
@@ -118,9 +128,9 @@ extension DepolyTicketViewController {
                                                               to_user_id: toAccount.id.getSuffixID,
                                                               asset_id: asset.id.getSuffixID,
                                                               receive_asset_id: asset.id.getSuffixID,
-                                                              amount: amount.int64,
+                                                              amount: AssetHelper.setRealAmount(asset.id, amount: amount).int64Value,
                                                               fee_id: 0,
-                                                              fee_amount: 55,
+                                                              fee_amount: 1000,
                                                               memo: "",
                                                               from_memo_key: "",
                                                               to_memo_key: "")

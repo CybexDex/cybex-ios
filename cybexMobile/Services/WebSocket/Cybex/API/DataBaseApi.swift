@@ -158,8 +158,8 @@ struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
                 var headBlockNumber = ""
                 for res in response.first! {
                     if refLib {
-                        if res.key == "last_irreversible_block_num" {
-                            headBlockNumber = String(describing: res.value)
+                        if res.key == "last_irreversible_block_num", let value = res.value as? Int {
+                            headBlockNumber = String(describing: value)
                         }
                     }
                     else {
