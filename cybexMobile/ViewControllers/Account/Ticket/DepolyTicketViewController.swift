@@ -11,6 +11,7 @@ import Presentr
 import RxCocoa
 import RxSwift
 import cybex_ios_core_cpp
+import SwiftyJSON
 
 class DepolyTicketViewController: BaseViewController {
     var containView: DeployTicketView!
@@ -40,21 +41,25 @@ class DepolyTicketViewController: BaseViewController {
     func setupEvent() {
         Observable.combineLatest(containView.accountView.textField.rx.text.orEmpty,
                                  containView.assetView.textField.rx.text.orEmpty,
-                                 containView.amountView.textField.rx.text.orEmpty).subscribe(onNext: {[weak self] (validate) in
-                                    guard let self = self else { return }
+                                 containView.amountView.textField.rx.text.orEmpty)
+            .subscribe(onNext: {[weak self] (validate) in
+            guard let self = self else { return }
 
-                                    self.validateButtonState()
+            self.validateButtonState()
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
-                                    }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-
-        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification , object: containView.accountView.textField, queue: nil) { (notifi) in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification,
+                                               object: containView.accountView.textField,
+                                               queue: nil) { (notifi) in
             guard let name = self.containView.accountView.textField.text else { return }
 
             self.toAccount = nil
             self.getAccountFrom(name)
         }
 
-        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification , object: containView.assetView.textField, queue: nil) { (notifi) in
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification,
+                                               object: containView.assetView.textField,
+                                               queue: nil) { (notifi) in
             guard let asset = self.containView.assetView.textField.text else { return }
 
             self.chooseAsset = nil
@@ -67,11 +72,13 @@ class DepolyTicketViewController: BaseViewController {
 // MARK: - Logic
 extension DepolyTicketViewController {
     func validateButtonState() {
-        if containView.accountView.textField.text!.isEmpty || containView.assetView.textField.text!.isEmpty || containView.amountView.textField.text!.isEmpty ||
-            self.chooseAsset == nil || self.toAccount == nil {
+        if containView.accountView.textField.text!.isEmpty
+            || containView.assetView.textField.text!.isEmpty
+            || containView.amountView.textField.text!.isEmpty
+            || self.chooseAsset == nil
+            || self.toAccount == nil {
             self.containView.buttonIsEnable = false
-        }
-        else {
+        } else {
             self.containView.buttonIsEnable = true
         }
     }
@@ -80,13 +87,12 @@ extension DepolyTicketViewController {
         let requeset = GetFullAccountsRequest(name: accountName) { (response) in
             if let data = response as? FullAccount, let account = data.account {
                 self.toAccount = account
-            }
-            else {
+            } else {
                 self.toAccount = nil
             }
             self.validateButtonState()
         }
-        CybexWebSocketService.shared.send(request: requeset)
+        CybexWebSocketService.shared.send(request: requeset, priority: .veryHigh)
     }
 
     func getAsset(_ assetName: String) {
@@ -94,13 +100,26 @@ extension DepolyTicketViewController {
             if let assetinfo = response as? [AssetInfo], let info = assetinfo.first {
                 self.chooseAsset = info
 
-                let balanceDecimal = UserHelper.getBalanceFromAssetID(info.id)
-                if balanceDecimal > 0 {
-                    self.containView.amountView.unitLabel.text = R.string.localizable.ticket_asset_left.key.localizedFormat(balanceDecimal.string(digits: 0, roundingMode: .down))
+                let requeset = GetFullAccountsRequest(name: UserManager.shared.name.value!) { (response) in
+                    if let data = response as? FullAccount {
+                        if let balances = data.balances {
+                            for balance in balances {
+                                if balance.assetType == info.id {
+                                    let balanceDecimal = balance.balance.decimal()
+                                    if balanceDecimal > 0 {
+                                        self.containView.amountView.unitLabel.text = R.string.localizable.ticket_asset_left.key.localizedFormat(balanceDecimal.string(digits: 0, roundingMode: .down))
+                                    }
+                                    else {
+                                        self.containView.amountView.unitLabel.text = R.string.localizable.ticket_asset_left.key.localizedFormat("-")
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-                else {
-                    self.containView.amountView.unitLabel.text = R.string.localizable.ticket_asset_left.key.localizedFormat("-")
-                }
+                CybexWebSocketService.shared.send(request: requeset, priority: .veryHigh)
+
+
             }
             else {
                 self.chooseAsset = nil
@@ -111,7 +130,7 @@ extension DepolyTicketViewController {
     }
 
     func generateInfo(_ callback: @escaping (String?) -> Void) {
-        guard  let fromAccount = UserManager.shared.account.value,
+        guard let fromAccount = UserManager.shared.account.value,
             let amount = containView.amountView.textField.text,
             let asset = chooseAsset,
             let toAccount = toAccount else {
@@ -119,22 +138,35 @@ extension DepolyTicketViewController {
                 return
         }
 
+        let sendAmount = (amount.decimal() * pow(10, asset.precision)).int64Value
+        let timeInterval = Date().timeIntervalSince1970 + CybexConfiguration.TransactionTicketExpiration
         CybexChainHelper.blockchainParamsRefLib { (blockInfo) in
-            let jsonstr = BitShareCoordinator.getTransaction(blockInfo.block_num.int32,
+            guard let jsonstr = BitShareCoordinator.getTransaction(blockInfo.block_num.int32,
                                                               block_id: blockInfo.block_id,
-                                                              expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionTicketExpiration,
+                                                              expiration: timeInterval,
                                                               chain_id: CybexConfiguration.shared.chainID.value,
                                                               from_user_id: fromAccount.id.getSuffixID,
                                                               to_user_id: toAccount.id.getSuffixID,
                                                               asset_id: asset.id.getSuffixID,
                                                               receive_asset_id: asset.id.getSuffixID,
-                                                              amount: AssetHelper.setRealAmount(asset.id, amount: amount).int64Value,
+                                                              amount: sendAmount,
                                                               fee_id: 0,
                                                               fee_amount: 1000,
                                                               memo: "",
                                                               from_memo_key: "",
-                                                              to_memo_key: "")
-            callback(jsonstr)
+                                                              to_memo_key: "") else {
+                                                                callback(nil)
+                                                                return
+            }
+
+            let result = CryptoHelper.compressTransaction(jsonstr,
+                                                          timeInterval: timeInterval,
+                                                          from: Int(fromAccount.id.getSuffixID),
+                                                          to: Int(toAccount.id.getSuffixID),
+                                                          assetId: Int(asset.id.getSuffixID),
+                                                          amount: Int(sendAmount))
+
+            callback(result)
 
         }
     }
@@ -188,12 +220,13 @@ extension DepolyTicketViewController {
         }
 
         var context = PickerContext()
-        context.items = items as AnyObject
+        context.items = ["PRINCESS"] as AnyObject
         context.pickerDidSelected = {(picker: UIPickerView) -> Void in
-            if let balances = balances {
-                let balance = balances[picker.selectedRow(inComponent: 0)]
-                assetChoosed(balance.assetType.originSymbol)
-            }
+//            if let balances = balances {
+//                let balance = balances[picker.selectedRow(inComponent: 0)]
+//                assetChoosed(balance.assetType.originSymbol)
+//            }
+            assetChoosed("PRINCESS")
 
         }
 
@@ -219,6 +252,8 @@ extension DepolyTicketViewController {
         let vc = ScanViewController()
         vc.scanResult.delegate(on: self) { (self, r) in
             self.containView.accountView.textField.text = r
+
+            self.toAccount = nil
             self.getAccountFrom(r)
         }
 
@@ -230,6 +265,9 @@ extension DepolyTicketViewController {
             guard let self = self else { return }
 
             self.containView.assetView.textField.text = asset
+
+            self.chooseAsset = nil
+            self.getAsset(asset)
         }
     }
 

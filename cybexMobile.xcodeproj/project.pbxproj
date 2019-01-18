@@ -549,6 +549,7 @@
 		73731D8D21A538CF005B9B3C /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8C21A538CF005B9B3C /* Result.swift */; };
 		73731D9021A53C45005B9B3C /* CryptoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8F21A53C45005B9B3C /* CryptoData.swift */; };
 		73731D9221A53C60005B9B3C /* CryptoAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D9121A53C60005B9B3C /* CryptoAlgorithm.swift */; };
+		7377A42F21F179CF00EEBEF0 /* CryptoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7377A42E21F179CF00EEBEF0 /* CryptoHelper.swift */; };
 		737E596021A53C8D001199E4 /* CryptoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E595F21A53C8D001199E4 /* CryptoKey.swift */; };
 		737E596221A53CA5001199E4 /* CryptoHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E596121A53CA5001199E4 /* CryptoHelpers.swift */; };
 		737E596421A53CC7001199E4 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E596321A53CC7001199E4 /* CryptoError.swift */; };
@@ -684,6 +685,13 @@
 		73A45F9321E6EA4500B52A7F /* ScanPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A45F9021E6EA4500B52A7F /* ScanPreviewView.swift */; };
 		73A45F9421E6EA4500B52A7F /* ScanCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A45F9121E6EA4500B52A7F /* ScanCornerView.swift */; };
 		73A45F9621E8476E00B52A7F /* DeployTicketResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A45F9521E8476A00B52A7F /* DeployTicketResultViewController.swift */; };
+		73A4CBAA21EEDB6E00C93DA6 /* PINCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A4CBA721EEDB6D00C93DA6 /* PINCache.framework */; };
+		73A4CBAB21EEDB6E00C93DA6 /* PINRemoteImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A4CBA821EEDB6D00C93DA6 /* PINRemoteImage.framework */; };
+		73A4CBAC21EEDB6E00C93DA6 /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A4CBA921EEDB6D00C93DA6 /* AsyncDisplayKit.framework */; };
+		73A4CBAE21EEDE0400C93DA6 /* PINOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A4CBAD21EEDE0400C93DA6 /* PINOperation.framework */; };
+		73A4CBB021EF463600C93DA6 /* libz.1.2.11.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A4CBAF21EF463600C93DA6 /* libz.1.2.11.tbd */; };
+		73A4CBB421EF493D00C93DA6 /* DataCompression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4CBB321EF493D00C93DA6 /* DataCompression.swift */; };
+		73A4CBB821F073A100C93DA6 /* BinUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4CBB721F073A000C93DA6 /* BinUtils.swift */; };
 		73AA83A521A7D1F2001B24DF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AA83A421A7D1F2001B24DF /* Utils.swift */; };
 		73D012992159D71800C95896 /* URLNavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D012982159D71800C95896 /* URLNavigationMap.swift */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
@@ -1411,6 +1419,7 @@
 		73731D8C21A538CF005B9B3C /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		73731D8F21A53C45005B9B3C /* CryptoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoData.swift; sourceTree = "<group>"; };
 		73731D9121A53C60005B9B3C /* CryptoAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoAlgorithm.swift; sourceTree = "<group>"; };
+		7377A42E21F179CF00EEBEF0 /* CryptoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelper.swift; sourceTree = "<group>"; };
 		737E595F21A53C8D001199E4 /* CryptoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoKey.swift; sourceTree = "<group>"; };
 		737E596121A53CA5001199E4 /* CryptoHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelpers.swift; sourceTree = "<group>"; };
 		737E596321A53CC7001199E4 /* CryptoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoError.swift; sourceTree = "<group>"; };
@@ -1551,6 +1560,13 @@
 		73A45F9021E6EA4500B52A7F /* ScanPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanPreviewView.swift; sourceTree = "<group>"; };
 		73A45F9121E6EA4500B52A7F /* ScanCornerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanCornerView.swift; sourceTree = "<group>"; };
 		73A45F9521E8476A00B52A7F /* DeployTicketResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeployTicketResultViewController.swift; sourceTree = "<group>"; };
+		73A4CBA721EEDB6D00C93DA6 /* PINCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINCache.framework; path = Carthage/Build/iOS/PINCache.framework; sourceTree = "<group>"; };
+		73A4CBA821EEDB6D00C93DA6 /* PINRemoteImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINRemoteImage.framework; path = Carthage/Build/iOS/PINRemoteImage.framework; sourceTree = "<group>"; };
+		73A4CBA921EEDB6D00C93DA6 /* AsyncDisplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AsyncDisplayKit.framework; path = Carthage/Build/iOS/AsyncDisplayKit.framework; sourceTree = "<group>"; };
+		73A4CBAD21EEDE0400C93DA6 /* PINOperation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINOperation.framework; path = Carthage/Build/iOS/PINOperation.framework; sourceTree = "<group>"; };
+		73A4CBAF21EF463600C93DA6 /* libz.1.2.11.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.11.tbd; path = usr/lib/libz.1.2.11.tbd; sourceTree = SDKROOT; };
+		73A4CBB321EF493D00C93DA6 /* DataCompression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCompression.swift; sourceTree = "<group>"; };
+		73A4CBB721F073A000C93DA6 /* BinUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinUtils.swift; sourceTree = "<group>"; };
 		73AA83A421A7D1F2001B24DF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		73BAB6CB839C8F409C3061833343A527 /* LockupAssetsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsSectionView.xib; sourceTree = "<group>"; };
 		73C298F5E89ECC37094FCC901A6B8D49 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
@@ -1739,6 +1755,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73A4CBB021EF463600C93DA6 /* libz.1.2.11.tbd in Frameworks */,
+				73A4CBAA21EEDB6E00C93DA6 /* PINCache.framework in Frameworks */,
+				73A4CBAE21EEDE0400C93DA6 /* PINOperation.framework in Frameworks */,
+				73A4CBAB21EEDB6E00C93DA6 /* PINRemoteImage.framework in Frameworks */,
+				73A4CBAC21EEDB6E00C93DA6 /* AsyncDisplayKit.framework in Frameworks */,
 				73D9C20D21E5CC47005B9022 /* TangramKit.framework in Frameworks */,
 				73539C6F2179AAA8008395AC /* libsqlite3.tbd in Frameworks */,
 				7231103B21805D7F0007E95D /* UMCommon.framework in Frameworks */,
@@ -2847,7 +2868,9 @@
 				73731D8421A5382A005B9B3C /* Delegate.swift */,
 				73731D8621A53846005B9B3C /* CallbackQueue.swift */,
 				73731D8821A53894005B9B3C /* NotificationToken.swift */,
+				73A4CBB721F073A000C93DA6 /* BinUtils.swift */,
 				73731D8A21A538AF005B9B3C /* KeychainStore.swift */,
+				73A4CBB321EF493D00C93DA6 /* DataCompression.swift */,
 				73731D8C21A538CF005B9B3C /* Result.swift */,
 			);
 			path = Common;
@@ -3891,6 +3914,11 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73A4CBAF21EF463600C93DA6 /* libz.1.2.11.tbd */,
+				73A4CBAD21EEDE0400C93DA6 /* PINOperation.framework */,
+				73A4CBA921EEDB6D00C93DA6 /* AsyncDisplayKit.framework */,
+				73A4CBA721EEDB6D00C93DA6 /* PINCache.framework */,
+				73A4CBA821EEDB6D00C93DA6 /* PINRemoteImage.framework */,
 				73D9C20C21E5CC46005B9022 /* TangramKit.framework */,
 				7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */,
 				7345FD7B219E7DE40066BD0E /* PromiseKit.framework */,
@@ -3967,6 +3995,7 @@
 				7333857821C0E1AD0026765F /* TradeHelper.swift */,
 				7333857C21C0EC400026765F /* AddressHelper.swift */,
 				7333857E21C0EC890026765F /* CashHelper.swift */,
+				7377A42E21F179CF00EEBEF0 /* CryptoHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -4636,7 +4665,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\necho \"ok\"\nswiftlint\nelse\necho \"warning: SwiftLint not installed, please brew install SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\necho \"ok\"\n#swiftlint\nelse\necho \"warning: SwiftLint not installed, please brew install SwiftLint\"\nfi\n";
 		};
 		BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4941,6 +4970,7 @@
 				73A331172194244800707D8F /* ChatReducers.swift in Sources */,
 				221C615D213685C00021C007 /* GridContentView.swift in Sources */,
 				730229A1212E52B50073D5CE /* ETOManager.swift in Sources */,
+				73A4CBB421EF493D00C93DA6 /* DataCompression.swift in Sources */,
 				BD76C30DD5E6DF9195A2DF3218C62F70 /* EmptySegue.swift in Sources */,
 				054514C4C6457A51CC46615D25768574 /* EntryActions.swift in Sources */,
 				E5401ED6E9547DC2097AC58606842B84 /* EntryCoordinator.swift in Sources */,
@@ -4970,11 +5000,13 @@
 				7333856821BFA4410026765F /* AppConfigration.swift in Sources */,
 				8691BEEE7629D4BE41D13D82D9AF29A9 /* GradientLabelView.swift in Sources */,
 				FF9F0639B5927B79A3EFC30AF470DE97 /* GradientLayer.swift in Sources */,
+				7377A42F21F179CF00EEBEF0 /* CryptoHelper.swift in Sources */,
 				221C6175213926570021C007 /* ETORecordListCoordinator.swift in Sources */,
 				9FFDE7661D05B455AFBA92F553A193FC /* GraphQLAPI.swift in Sources */,
 				73731D8D21A538CF005B9B3C /* Result.swift in Sources */,
 				728C280A215A36F70097840A /* RecordChooseReducers.swift in Sources */,
 				BDFF205572EB31DAD4702C934B9A81D1 /* GatewayService.swift in Sources */,
+				73A4CBB821F073A100C93DA6 /* BinUtils.swift in Sources */,
 				105EA57407E74D316C2918BA41771E3B /* HomeActions.swift in Sources */,
 				73539C482179A210008395AC /* NavigatorType.swift in Sources */,
 				7307A923212518DC00BD6444 /* Octicon.swift in Sources */,

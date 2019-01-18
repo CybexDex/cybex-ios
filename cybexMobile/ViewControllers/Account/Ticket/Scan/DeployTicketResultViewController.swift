@@ -15,6 +15,8 @@ class DeployTicketResultViewController: BaseViewController {
     var assetName: String!
     var qrcodeInfo: String!
 
+    var qrImageView: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,12 +36,14 @@ class DeployTicketResultViewController: BaseViewController {
         imageView.tg_top ~= 23
         imageView.tg_centerX ~= 0
         layout.addSubview(imageView)
+        qrImageView = imageView
 
         let button = UIButton()
         button.backgroundColor = .clear
         button.locali = R.string.localizable.deposit_save.key
         button.setTitleColor(UIColor.pastelOrange, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(saveButtonDidClicked), for: .touchUpInside)
         button.tg_top ~= 12
         button.tg_centerX ~= 0
         button.tg_width ~= .wrap
@@ -71,6 +75,11 @@ class DeployTicketResultViewController: BaseViewController {
         view.addSubview(label)
 
         self.view.addSubview(layout)
+    }
+
+    @objc func saveButtonDidClicked() {
+        guard let image = qrImageView.image else { return }
+        saveToGallery(image)
     }
 }
 

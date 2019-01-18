@@ -23,6 +23,7 @@ enum DataBaseCatogery: String {
     case getBlock
     case getTicker
     case getBlockHeader
+    case getRecentTransactionById
 }
 
 struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {
@@ -345,5 +346,25 @@ struct GetBlockHeaderRequest: JSONRPCKit.Request, JSONRPCResponse {
         let data = JSON(resultObject)
 
         return data["previous"].stringValue
+    }
+}
+
+struct GetRecentTransactionById: JSONRPCKit.Request, JSONRPCResponse {
+    var id: String
+
+    var response: RPCSResponse
+
+    var method: String {
+        return "call"
+    }
+
+    var parameters: Any? {
+        return [ApiCategory.database, DataBaseCatogery.getRecentTransactionById.rawValue.snakeCased(), [id]]
+    }
+
+    func transferResponse(from resultObject: Any) throws -> Any {
+        let data = JSON(resultObject)
+
+        return data
     }
 }
