@@ -52,6 +52,7 @@ $(SRCROOT)/Carthage/Build/iOS/TangramKit.framework
 $(SRCROOT)/Carthage/Build/iOS/TinyConstraints.framework
 $(SRCROOT)/Carthage/Build/iOS/UICKeyChainStore.framework
 $(SRCROOT)/Carthage/Build/iOS/UIFontComplete.framework
+$(SRCROOT)/Carthage/Build/iOS/WKWebViewJavascriptBridge.framework
 $(SRCROOT)/Carthage/Build/iOS/XLActionController.framework
 $(SRCROOT)/Carthage/Build/iOS/XLPagerTabStrip.framework
 $(SRCROOT)/Carthage/Build/iOS/cybex_ios_core_cpp.framework
