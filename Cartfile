@@ -47,3 +47,4 @@ binary "https://cybexdex.github.io/cybex-ios-core-cpp/Carthage/iOS/cybex-ios-cor
 github "texturegroup/texture" "master"
 github "pinterest/PINOperation"
 github "Lision/WKWebViewJavascriptBridge"
+github "Daltron/NotificationBanner" "master"

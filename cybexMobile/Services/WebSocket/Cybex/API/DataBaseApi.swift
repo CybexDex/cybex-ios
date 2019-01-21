@@ -363,8 +363,6 @@ struct GetRecentTransactionById: JSONRPCKit.Request, JSONRPCResponse {
     }
 
     func transferResponse(from resultObject: Any) throws -> Any {
-        let data = JSON(resultObject)
-
-        return data
+        return resultObject
     }
 }

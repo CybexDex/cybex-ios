@@ -23,7 +23,9 @@ $(SRCROOT)/Carthage/Build/iOS/KMNavigationBarTransition.framework
 $(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework
 $(SRCROOT)/Carthage/Build/iOS/Localize_Swift.framework
 $(SRCROOT)/Carthage/Build/iOS/Macaw.framework
+$(SRCROOT)/Carthage/Build/iOS/MarqueeLabelSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/Moya.framework
+$(SRCROOT)/Carthage/Build/iOS/NotificationBanner.framework
 $(SRCROOT)/Carthage/Build/iOS/PINCache.framework
 $(SRCROOT)/Carthage/Build/iOS/PINOperation.framework
 $(SRCROOT)/Carthage/Build/iOS/PINRemoteImage.framework
@@ -42,6 +44,7 @@ $(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework
 $(SRCROOT)/Carthage/Build/iOS/RxMoya.framework
 $(SRCROOT)/Carthage/Build/iOS/RxSwift.framework
 $(SRCROOT)/Carthage/Build/iOS/SDCAlertView.framework
+$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework
 $(SRCROOT)/Carthage/Build/iOS/SocketRocket.framework
 $(SRCROOT)/Carthage/Build/iOS/SwiftRichString.framework
 $(SRCROOT)/Carthage/Build/iOS/SwiftTheme.framework

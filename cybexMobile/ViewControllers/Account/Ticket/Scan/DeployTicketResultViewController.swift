@@ -10,18 +10,38 @@ import Foundation
 import TangramKit
 import Proposer
 import EFQRCode
+import RxSwift
+import NotificationBanner
 
 class DeployTicketResultViewController: BaseViewController {
     var assetName: String!
     var qrcodeInfo: String!
 
     var qrImageView: UIImageView!
+    var transactionId:String!
+
+    var banner: NotificationBanner?
+
+    var bag: DisposeBag? = DisposeBag() {
+        didSet {
+            if bag == nil {
+                self.banner = UIHelper.showSuccessTop("您的票已被成功使用！")
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = R.string.localizable.ticket_use_title.key.localized() + " " + assetName
         setupUI()
+        scanTransferStatus()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.banner?.dismiss()
     }
 
     func setupUI() {
@@ -107,5 +127,19 @@ extension DeployTicketResultViewController {
 
             self.showToastBox(false, message: message)
         })
+    }
+
+    func scanTransferStatus() {
+        Observable<Int>.interval(1, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] (num) in
+            guard let self = self else { return }
+
+            let request = GetRecentTransactionById(id: self.transactionId) { [weak self] (result) in
+                guard let self = self else { return }
+                if String(describing: result) != "<null>" {
+                    self.bag = nil
+                }
+            }
+            CybexWebSocketService.shared.send(request: request)
+        }).disposed(by: self.bag!)
     }
 }

@@ -525,6 +525,9 @@
 		73539C502179A210008395AC /* URLPathComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C462179A20F008395AC /* URLPathComponent.swift */; };
 		73539C512179A210008395AC /* URLMatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C472179A20F008395AC /* URLMatchResult.swift */; };
 		73539C6F2179AAA8008395AC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C6E2179AAA8008395AC /* libsqlite3.tbd */; };
+		7354F54021F57660000AA621 /* MarqueeLabelSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7354F53F21F57660000AA621 /* MarqueeLabelSwift.framework */; };
+		7354F54221F57666000AA621 /* NotificationBanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7354F54121F57666000AA621 /* NotificationBanner.framework */; };
+		7354F54421F5766D000AA621 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7354F54321F5766D000AA621 /* SnapKit.framework */; };
 		73587E9D2133EB15006CF8A6 /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */; };
 		73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9F21352AD8006CF8A6 /* ETOMGService.swift */; };
 		73587EAB2137C057006CF8A6 /* ETOCrowdActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EA72137C057006CF8A6 /* ETOCrowdActions.swift */; };
@@ -1396,6 +1399,9 @@
 		73539C462179A20F008395AC /* URLPathComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLPathComponent.swift; sourceTree = "<group>"; };
 		73539C472179A20F008395AC /* URLMatchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLMatchResult.swift; sourceTree = "<group>"; };
 		73539C6E2179AAA8008395AC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		7354F53F21F57660000AA621 /* MarqueeLabelSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MarqueeLabelSwift.framework; path = Carthage/Build/iOS/MarqueeLabelSwift.framework; sourceTree = "<group>"; };
+		7354F54121F57666000AA621 /* NotificationBanner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationBanner.framework; path = Carthage/Build/iOS/NotificationBanner.framework; sourceTree = "<group>"; };
+		7354F54321F5766D000AA621 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPCircularProgress.swift; sourceTree = "<group>"; };
 		73587E9F21352AD8006CF8A6 /* ETOMGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOMGService.swift; sourceTree = "<group>"; };
 		73587EA72137C057006CF8A6 /* ETOCrowdActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdActions.swift; sourceTree = "<group>"; };
@@ -1758,7 +1764,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				73A4CBB021EF463600C93DA6 /* libz.1.2.11.tbd in Frameworks */,
+				7354F54221F57666000AA621 /* NotificationBanner.framework in Frameworks */,
+				7354F54421F5766D000AA621 /* SnapKit.framework in Frameworks */,
 				7395F9EE21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework in Frameworks */,
+				7354F54021F57660000AA621 /* MarqueeLabelSwift.framework in Frameworks */,
 				73A4CBAA21EEDB6E00C93DA6 /* PINCache.framework in Frameworks */,
 				73A4CBAE21EEDE0400C93DA6 /* PINOperation.framework in Frameworks */,
 				73A4CBAB21EEDB6E00C93DA6 /* PINRemoteImage.framework in Frameworks */,
@@ -3917,6 +3926,9 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7354F54321F5766D000AA621 /* SnapKit.framework */,
+				7354F54121F57666000AA621 /* NotificationBanner.framework */,
+				7354F53F21F57660000AA621 /* MarqueeLabelSwift.framework */,
 				7395F9ED21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework */,
 				73A4CBAF21EF463600C93DA6 /* libz.1.2.11.tbd */,
 				73A4CBAD21EEDE0400C93DA6 /* PINOperation.framework */,

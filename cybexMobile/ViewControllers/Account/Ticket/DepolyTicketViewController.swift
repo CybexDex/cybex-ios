@@ -18,6 +18,7 @@ class DepolyTicketViewController: BaseViewController {
 
     var chooseAsset: AssetInfo?
     var toAccount: Account?
+    var transactionId:String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,6 +160,10 @@ extension DepolyTicketViewController {
                                                                 return
             }
 
+            guard let transactionId = BitShareCoordinator.getTransactionId(blockInfo.block_num.int32, block_id: blockInfo.block_id, expiration: timeInterval, chain_id: CybexConfiguration.shared.chainID.value, from_user_id: fromAccount.id.getSuffixID, to_user_id: toAccount.id.getSuffixID, asset_id: asset.id.getSuffixID, receive_asset_id: asset.id.getSuffixID, amount: sendAmount, fee_id: 0, fee_amount: 1000, memo: "", from_memo_key: "", to_memo_key: "") else { return }
+
+            self.transactionId = transactionId
+
             let result = CryptoHelper.compressTransaction(jsonstr,
                                                           timeInterval: timeInterval,
                                                           from: Int(fromAccount.id.getSuffixID),
@@ -186,6 +191,7 @@ extension DepolyTicketViewController {
 
             let vc = DeployTicketResultViewController()
             vc.qrcodeInfo = result
+            vc.transactionId = self.transactionId
             vc.assetName = chooseAsset.symbol.filterJade
             self.navigationController?.pushViewController(vc)
         }
