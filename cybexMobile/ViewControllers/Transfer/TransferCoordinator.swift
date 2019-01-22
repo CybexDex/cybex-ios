@@ -233,7 +233,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                     main {
                         callback(data)
                     }
-                }, jsonstr: jsonstr!)
+                }, jsonstr: jsonstr)
                 CybexWebSocketService.shared.send(request: withdrawRequest)
             }
         }
@@ -300,7 +300,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
         let fromMemoKey = UserManager.shared.account.value?.memoKey ?? ""
         let toUserId = self.state.toAccount.value?.id ?? "0"
         let toMemoKey = self.state.toAccount.value?.memoKey ?? fromMemoKey
-        if let operationString = BitShareCoordinator.getTransterOperation(fromUserId.getSuffixID,
+        let operationString = BitShareCoordinator.getTransterOperation(fromUserId.getSuffixID,
                                                                           to_user_id: toUserId.getSuffixID,
                                                                           asset_id: assetId.getSuffixID,
                                                                           amount: 0,
@@ -308,25 +308,26 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                                                                           fee_amount: 0,
                                                                           memo: memo,
                                                                           from_memo_key: fromMemoKey,
-                                                                          to_memo_key: toMemoKey) {
-            CybexChainHelper.calculateFee(operationString, operationID: .transfer, focusAssetId: assetId) { (success, amount, feeId) in
-                let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
+                                                                          to_memo_key: toMemoKey)
+        
+        CybexChainHelper.calculateFee(operationString, operationID: .transfer, focusAssetId: assetId) { (success, amount, feeId) in
+            let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
 
-                self.store.dispatch(SetFeeAction(fee: Fee.deserialize(from: dictionary)!))
-                if success {
-                    var transferAmount = self.state.amount.value.decimal()
-                    let value = assetId.isEmpty ? 1 : pow(10, (appData.assetInfo[assetId]?.precision)!)
-                    transferAmount *= value
-                    self.checkAmount(transferAmount)
+            self.store.dispatch(SetFeeAction(fee: Fee.deserialize(from: dictionary)!))
+            if success {
+                var transferAmount = self.state.amount.value.decimal()
+                let value = assetId.isEmpty ? 1 : pow(10, (appData.assetInfo[assetId]?.precision)!)
+                transferAmount *= value
+                self.checkAmount(transferAmount)
 
-                } else {
-                    if self.state.amount.value.decimal() != 0 {
-                        self.store.dispatch(ValidAmountAction(isValid: false))
-                    }
-                    //            self.store.dispatch(ValidAmountAction(isValid: false))
+            } else {
+                if self.state.amount.value.decimal() != 0 {
+                    self.store.dispatch(ValidAmountAction(isValid: false))
                 }
+                //            self.store.dispatch(ValidAmountAction(isValid: false))
             }
         }
+
 
     }
 

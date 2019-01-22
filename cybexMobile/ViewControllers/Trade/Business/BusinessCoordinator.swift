@@ -85,10 +85,9 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
     }
 
     func getFee(_ focusAssetId: String) {
-        if let str = BitShareCoordinator.getLimitOrderOperation(0, expiration: 0, asset_id: 0, amount: 0, receive_asset_id: 0, receive_amount: 0, fee_id: 0, fee_amount: 0) {
-            CybexChainHelper.calculateFee(str, focusAssetId: focusAssetId) { (success, amount, assetID) in
-                self.store.dispatch(FeeFetchedAction(success: success, amount: amount, assetID: assetID))
-            }
+        let str = BitShareCoordinator.getLimitOrderOperation(0, expiration: 0, asset_id: 0, amount: 0, receive_asset_id: 0, receive_amount: 0, fee_id: 0, fee_amount: 0)
+        CybexChainHelper.calculateFee(str, focusAssetId: focusAssetId) { (success, amount, assetID) in
+            self.store.dispatch(FeeFetchedAction(success: success, amount: amount, assetID: assetID))
         }
     }
 
@@ -165,7 +164,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
         let feeAmount = (self.state.feeAmount.value * pow(10, feeInfo.precision)).int64Value
 
         CybexChainHelper.blockchainParams { (blockchainParams) in
-            if let jsonStr = BitShareCoordinator.getLimitOrder(blockchainParams.block_num.int32,
+            let jsonStr = BitShareCoordinator.getLimitOrder(blockchainParams.block_num.int32,
                                                                block_id: blockchainParams.block_id,
                                                                expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
                                                                chain_id: CybexConfiguration.shared.chainID.value,
@@ -176,18 +175,18 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
                                                                receive_asset_id: receiveAssetID.getSuffixID,
                                                                receive_amount: receiveAmount!,
                                                                fee_id: self.state.feeID.value.getSuffixID,
-                                                               fee_amount: feeAmount) {
+                                                               fee_amount: feeAmount)
 
-                let request = BroadcastTransactionRequest(response: { (data) in
-                    if String(describing: data) == "<null>" {
-                        callback(true)
-                    } else {
-                        callback(false)
-                    }
-                }, jsonstr: jsonStr)
+            let request = BroadcastTransactionRequest(response: { (data) in
+                if String(describing: data) == "<null>" {
+                    callback(true)
+                } else {
+                    callback(false)
+                }
+            }, jsonstr: jsonStr)
 
-                CybexWebSocketService.shared.send(request: request)
-            }
+            CybexWebSocketService.shared.send(request: request)
+
 
         }
     }

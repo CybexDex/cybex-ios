@@ -143,21 +143,24 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                     memoAddress = GatewayService.withDrawMemo(name!, address: address + "[\(memo)]")
                 }
             }
-            if let operationString = BitShareCoordinator.getTransterOperation((UserManager.shared.account.value?.id)!.getSuffixID,
+            guard let fromMemoKey = UserManager.shared.account.value?.memoKey else { return }
+            
+            let operationString = BitShareCoordinator.getTransterOperation((UserManager.shared.account.value?.id)!.getSuffixID,
                                                                               to_user_id: (self.state.data.value?.gatewayAccount)!.getSuffixID,
                                                                               asset_id: assetId.getSuffixID,
                                                                               amount: amount.int64Value,
                                                                               fee_id: 0,
                                                                               fee_amount: 0,
                                                                               memo: memoAddress,
-                                                                              from_memo_key: UserManager.shared.account.value?.memoKey,
-                                                                              to_memo_key: memoKey) {
-                CybexChainHelper.calculateFee(operationString, operationID: .transfer, focusAssetId: assetId) { (success, amount, feeId) in
-                    let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
-                    guard let fee = Fee.deserialize(from: dictionary) else { return }
-                    self.store.dispatch(FetchGatewayFee(data: (fee, success:success)))
-                }
+                                                                              from_memo_key: fromMemoKey,
+                                                                              to_memo_key: memoKey)
+
+            CybexChainHelper.calculateFee(operationString, operationID: .transfer, focusAssetId: assetId) { (success, amount, feeId) in
+                let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
+                guard let fee = Fee.deserialize(from: dictionary) else { return }
+                self.store.dispatch(FetchGatewayFee(data: (fee, success:success)))
             }
+
 
         }
     }
@@ -191,6 +194,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
 
                 let amount = amount.decimal() * value
                 let feeAmout = feeAmount.decimal() * pow(10, (appData.assetInfo[feeId]?.precision)!)
+                guard let fromMemoKey = UserManager.shared.account.value?.memoKey else { return }
                 let jsonstr = BitShareCoordinator.getTransaction(blockInfo.block_num.int32,
                                                                  block_id: blockInfo.block_id,
                                                                  expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
@@ -203,13 +207,13 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                                                                  fee_id: feeId.getSuffixID,
                                                                  fee_amount: feeAmout.int64Value,
                                                                  memo: memoAddress,
-                                                                 from_memo_key: UserManager.shared.account.value?.memoKey,
+                                                                 from_memo_key: fromMemoKey,
                                                                  to_memo_key: memoKey)
                 let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
                     main {
                         callback(data)
                     }
-                }, jsonstr: jsonstr!)
+                }, jsonstr: jsonstr)
                 CybexWebSocketService.shared.send(request: withdrawRequest)
             }
         }

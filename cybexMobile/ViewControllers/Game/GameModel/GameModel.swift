@@ -67,7 +67,7 @@ class GameModel: NSObject, GameDelegate {
                                                                  fundType: "",
                                                                  size: Int32(0),
                                                                  offset: Int32(0),
-                                                                 expiration: Int32(expiration))!
+                                                                 expiration: Int32(expiration))
         let result = ["op": [
             "accountName": accountName,
             "expiration": Int32(expiration)
@@ -126,7 +126,7 @@ class GameModel: NSObject, GameDelegate {
                                     main {
                                         context.objectForKeyedSubscript(CallBackMethodName.collectCallback.rawValue)?.call(withArguments: [String(describing: data) == "<null>" ? "0" : "1"])
                                     }
-                                    }, jsonstr: jsonstr!)
+                                    }, jsonstr: jsonstr)
                                 CybexWebSocketService.shared.send(request: withdrawRequest)
 
                             })

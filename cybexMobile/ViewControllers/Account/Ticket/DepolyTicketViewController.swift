@@ -142,7 +142,7 @@ extension DepolyTicketViewController {
         let sendAmount = (amount.decimal() * pow(10, asset.precision)).int64Value
         let timeInterval = Date().timeIntervalSince1970 + CybexConfiguration.TransactionTicketExpiration
         CybexChainHelper.blockchainParamsRefLib { (blockInfo) in
-            guard let jsonstr = BitShareCoordinator.getTransaction(blockInfo.block_num.int32,
+            let jsonstr = BitShareCoordinator.getTransaction(blockInfo.block_num.int32,
                                                               block_id: blockInfo.block_id,
                                                               expiration: timeInterval,
                                                               chain_id: CybexConfiguration.shared.chainID.value,
@@ -155,12 +155,9 @@ extension DepolyTicketViewController {
                                                               fee_amount: 1000,
                                                               memo: "",
                                                               from_memo_key: "",
-                                                              to_memo_key: "") else {
-                                                                callback(nil)
-                                                                return
-            }
+                                                              to_memo_key: "")
 
-            guard let transactionId = BitShareCoordinator.getTransactionId(blockInfo.block_num.int32, block_id: blockInfo.block_id, expiration: timeInterval, chain_id: CybexConfiguration.shared.chainID.value, from_user_id: fromAccount.id.getSuffixID, to_user_id: toAccount.id.getSuffixID, asset_id: asset.id.getSuffixID, receive_asset_id: asset.id.getSuffixID, amount: sendAmount, fee_id: 0, fee_amount: 1000, memo: "", from_memo_key: "", to_memo_key: "") else { return }
+            let transactionId = BitShareCoordinator.getTransactionId(blockInfo.block_num.int32, block_id: blockInfo.block_id, expiration: timeInterval, chain_id: CybexConfiguration.shared.chainID.value, from_user_id: fromAccount.id.getSuffixID, to_user_id: toAccount.id.getSuffixID, asset_id: asset.id.getSuffixID, receive_asset_id: asset.id.getSuffixID, amount: sendAmount, fee_id: 0, fee_amount: 1000, memo: "", from_memo_key: "", to_memo_key: "")
 
             self.transactionId = transactionId
 

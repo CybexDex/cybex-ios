@@ -72,7 +72,7 @@ extension UserManager {
     func register(_ pinID: String, captcha: String, username: String, password: String) -> Promise<(Bool, Int)> {
         let (promise, seal) = Promise<(Bool, Int)>.pending()
 
-        let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
+        let keysString = BitShareCoordinator.getUserKeys(username, password: password)
         if let keys = AccountKeys.deserialize(from: keysString),
             let _ = keys.activeKey,
             let _ = keys.ownerKey,
@@ -220,7 +220,7 @@ extension UserManager {
             return
         }
 
-        let keysString = BitShareCoordinator.getUserKeys(name, password: password)!
+        let keysString = BitShareCoordinator.getUserKeys(name, password: password)
         if let keys = AccountKeys.deserialize(from: keysString),
             let activeKey = keys.activeKey,
             let memoKey = keys.memoKey,

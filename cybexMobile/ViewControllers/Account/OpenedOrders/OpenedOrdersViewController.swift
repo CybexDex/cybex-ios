@@ -66,7 +66,7 @@ class OpenedOrdersViewController: BaseViewController {
     }
     
     func showOrderInfo() {
-        guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0) else { return }
+        let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0)
         guard let order = self.order else { return }
         startLoading()
         CybexChainHelper.calculateFee(operation,

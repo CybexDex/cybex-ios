@@ -77,7 +77,7 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
                         } else {
                             callback(false)
                         }
-                    }, jsonstr: jsonstr!)
+                    }, jsonstr: jsonstr)
                     
                     CybexWebSocketService.shared.send(request: withdrawRequest)
                 }

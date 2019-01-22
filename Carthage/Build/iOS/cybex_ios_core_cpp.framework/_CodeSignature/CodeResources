@@ -6,7 +6,11 @@
 	<dict>
 		<key>Headers/BitShareCoordinator.h</key>
 		<data>
-		s6cIt79ECbBtky6+afubfaIpmJE=
+		DKwHroVmzPR+YLtL9rYRR/vpW2Q=
+		</data>
+		<key>Headers/cybex_ios_core_cpp-Swift.h</key>
+		<data>
+		xqJ1p05EPhM9Bxvw1WXDe4OxvvY=
 		</data>
 		<key>Headers/cybex_ios_core_cpp.h</key>
 		<data>
@@ -14,11 +18,19 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		ZK6QTqM715RHmK8X2KVCEfBkgmU=
+		fLhY1Eq6mia21N6ztVrzs8ExM0Q=
+		</data>
+		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64.swiftdoc</key>
+		<data>
+		a1v/GW0P3tRdJxMXvVTeQUPMrg8=
+		</data>
+		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64.swiftmodule</key>
+		<data>
+		buNcOwTJHn+AJQrqe59rQExsv60=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		a2mteDnlflbMoEXiIw6GJK0TSeo=
+		hrP88fuaD1S2eVej7XZQDf0ZV1U=
 		</data>
 		<key>README.md</key>
 		<data>
@@ -423,11 +435,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			s6cIt79ECbBtky6+afubfaIpmJE=
+			DKwHroVmzPR+YLtL9rYRR/vpW2Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			5LyYDcFCTJQjRP+aqF4ha0K5/NdqySGogULEnQcQW08=
+			kiZMRN9Zdv76V1o/L3CnvgI8Ntc2zD87+1V0fAaxpnU=
+			</data>
+		</dict>
+		<key>Headers/cybex_ios_core_cpp-Swift.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xqJ1p05EPhM9Bxvw1WXDe4OxvvY=
+			</data>
+			<key>hash2</key>
+			<data>
+			/KSCIO0aOEEFrDg3qKCfjV0QfRXM9YnT94kGdEGWIAM=
 			</data>
 		</dict>
 		<key>Headers/cybex_ios_core_cpp.h</key>
@@ -441,15 +464,37 @@
 			v7L6yYndT1dhQeYxuTKK52Ol0cW1pp1UFTLO9vpxumk=
 			</data>
 		</dict>
+		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64.swiftdoc</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			a1v/GW0P3tRdJxMXvVTeQUPMrg8=
+			</data>
+			<key>hash2</key>
+			<data>
+			LWvhVmSn+fk/nZ3ous4lEfsloRKa8uf56Z4giEBv0KY=
+			</data>
+		</dict>
+		<key>Modules/cybex_ios_core_cpp.swiftmodule/x86_64.swiftmodule</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			buNcOwTJHn+AJQrqe59rQExsv60=
+			</data>
+			<key>hash2</key>
+			<data>
+			mHJ/hJbbfhux+ehCFHmLYS6s5pjySpePbyY7Q/dfajM=
+			</data>
+		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			a2mteDnlflbMoEXiIw6GJK0TSeo=
+			hrP88fuaD1S2eVej7XZQDf0ZV1U=
 			</data>
 			<key>hash2</key>
 			<data>
-			ELou0ZzQuDXWBA3R34/DHZyGsxMa4H65QBDbbWTnGRc=
+			Vzf9JqW3hwuFwkbyZ9fw0i3zxR82j6e2/bYHcr8tQFE=
 			</data>
 		</dict>
 		<key>README.md</key>
