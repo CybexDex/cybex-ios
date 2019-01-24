@@ -12,7 +12,7 @@ import SwiftyJSON
 
 enum HistoryCatogery: String {
     case getMarketHistory
-    case getFillOrderHistory
+    case getFillOrderHistory //逐笔成交单
     case getAccountHistory
 }
 

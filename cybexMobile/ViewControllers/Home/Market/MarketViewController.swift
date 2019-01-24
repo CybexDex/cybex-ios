@@ -33,6 +33,8 @@ class MarketViewController: BaseViewController {
     var currentBaseIndex: Int = 0
     var kLineSpecial = false
     var canExchange = false
+    var daySelectedIndex = 2
+    var indicatorSelectedIndex = 0
     var selectedDropKindView: DropDownBoxView?
     var timeGap: Candlesticks = .oneDay {
         didSet {
@@ -389,30 +391,23 @@ extension MarketViewController {
 }
 
 
-extension MarketViewController: UIPopoverPresentationControllerDelegate {
-    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+extension MarketViewController {
+    override func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         selectedDropKindView?.resetState()
-        guard let superVC = popoverPresentationController.presentedViewController as? RecordChooseViewController else {
-            return true
-        }
-    
-        superVC.dismiss(animated: false, completion: nil)
-        return false
-    }
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
+        return true
     }
 }
 
 extension MarketViewController: RecordChooseViewControllerDelegate {
-    func returnSelectedRow(_ sender: RecordChooseViewController, info: String) {
+    func returnSelectedRow(_ sender: RecordChooseViewController, info: String, index: Int) {
         selectedDropKindView?.nameLabel.text = info
         selectedDropKindView?.resetState()
         
         if selectedDropKindView?.dropKind == .time {
+            daySelectedIndex = index
             self.timeClicked(["candlestick": Candlesticks.all[sender.selectedIndex]])
         }else if selectedDropKindView?.dropKind == .kind {
+            indicatorSelectedIndex = index
             self.indicatorClicked(["indicator": Indicator.all[sender.selectedIndex]])
         }
         sender.dismiss(animated: false, completion: nil)

@@ -538,7 +538,6 @@
 		73587EB52137C69B006CF8A6 /* ETOCrowdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */; };
 		73587EB62137C69B006CF8A6 /* ETOCrowdViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */; };
 		735A3D022160A73200FC8922 /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735A3D012160A73000FC8922 /* NBLCommonModule.framework */; };
-		736761E321BE464A0065FD35 /* MOHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E221BE464A0065FD35 /* MOHService.swift */; };
 		736761E521BE46750065FD35 /* RegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E421BE46750065FD35 /* RegisterService.swift */; };
 		736761E821BE4C2D0065FD35 /* IMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E721BE4C2D0065FD35 /* IMService.swift */; };
 		736761EA21BE4DEF0065FD35 /* MDPWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */; };
@@ -657,6 +656,7 @@
 		7392F5EB219ABA1E007FFCD0 /* InputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392F5E0219ABA1E007FFCD0 /* InputItem.swift */; };
 		7392F5ED219AC055007FFCD0 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392F5EC219AC055007FFCD0 /* SampleData.swift */; };
 		7392F5EF219AC6A8007FFCD0 /* MessageKitAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7392F5EE219AC6A8007FFCD0 /* MessageKitAssets.bundle */; };
+		73930B3821F870E600840FAD /* AccountHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73930B3721F870E600840FAD /* AccountHistoryService.swift */; };
 		7395F9EE21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7395F9ED21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework */; };
 		7398323D2179EED400C4A594 /* cybex_ios_core_cpp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */; };
 		7398BEBF2181BFD3004C042E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398BEBE2181BFD3004C042E /* Style.swift */; };
@@ -1412,7 +1412,6 @@
 		73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdView.xib; sourceTree = "<group>"; };
 		73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdViewAdapter.swift; sourceTree = "<group>"; };
 		735A3D012160A73000FC8922 /* NBLCommonModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NBLCommonModule.framework; path = Carthage/Build/iOS/Static/NBLCommonModule.framework; sourceTree = "<group>"; };
-		736761E221BE464A0065FD35 /* MOHService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOHService.swift; sourceTree = "<group>"; };
 		736761E421BE46750065FD35 /* RegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterService.swift; sourceTree = "<group>"; };
 		736761E721BE4C2D0065FD35 /* IMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMService.swift; sourceTree = "<group>"; };
 		736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPWebSocketService.swift; sourceTree = "<group>"; };
@@ -1536,6 +1535,7 @@
 		7392F5E0219ABA1E007FFCD0 /* InputItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputItem.swift; sourceTree = "<group>"; };
 		7392F5EC219AC055007FFCD0 /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		7392F5EE219AC6A8007FFCD0 /* MessageKitAssets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MessageKitAssets.bundle; sourceTree = "<group>"; };
+		73930B3721F870E600840FAD /* AccountHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHistoryService.swift; sourceTree = "<group>"; };
 		7395F9ED21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WKWebViewJavascriptBridge.framework; path = Carthage/Build/iOS/WKWebViewJavascriptBridge.framework; sourceTree = "<group>"; };
 		7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = cybex_ios_core_cpp.framework; path = Carthage/Build/iOS/cybex_ios_core_cpp.framework; sourceTree = "<group>"; };
 		7398BEBE2181BFD3004C042E /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
@@ -3157,7 +3157,7 @@
 				7391102621BA511F00412CE1 /* ETO */,
 				7391102521BA511600412CE1 /* GatewayQuery */,
 				7391102421BA510500412CE1 /* Gateway */,
-				7391102321BA50F600412CE1 /* MOH */,
+				7391102321BA50F600412CE1 /* AccountHistory */,
 				7391102221BA50DC00412CE1 /* Configuation */,
 			);
 			path = HTTP;
@@ -3221,12 +3221,12 @@
 			path = Configuation;
 			sourceTree = "<group>";
 		};
-		7391102321BA50F600412CE1 /* MOH */ = {
+		7391102321BA50F600412CE1 /* AccountHistory */ = {
 			isa = PBXGroup;
 			children = (
-				736761E221BE464A0065FD35 /* MOHService.swift */,
+				73930B3721F870E600840FAD /* AccountHistoryService.swift */,
 			);
-			path = MOH;
+			path = AccountHistory;
 			sourceTree = "<group>";
 		};
 		7391102421BA510500412CE1 /* Gateway */ = {
@@ -5072,6 +5072,7 @@
 				85D46A1F0D3BBF12CF72903D466D9239 /* LockupAssetsSectionView.swift in Sources */,
 				72F817C421BA58F100575F56 /* GameActions.swift in Sources */,
 				B2B05000B81768D84E3FBE9B46392133 /* LockupAssetsView.swift in Sources */,
+				73930B3821F870E600840FAD /* AccountHistoryService.swift in Sources */,
 				7267DA0821350327004AF9AF /* ETOViewController.swift in Sources */,
 				221EC2352105B1930059F856 /* TitleTextView.swift in Sources */,
 				72F817C521BA58F100575F56 /* GameViewController.swift in Sources */,
@@ -5236,7 +5237,6 @@
 				F7C39F3DD49909044D9E8FF34ABF3F2D /* SimpleHTTPService.swift in Sources */,
 				7267DA2E21364BF7004AF9AF /* ETOHomeBannerView.swift in Sources */,
 				D519E052461ED8221B6CF5C9D9B7741C /* StyleContentView.swift in Sources */,
-				736761E321BE464A0065FD35 /* MOHService.swift in Sources */,
 				737F8C352145532A00DD522A /* String+Extensions.swift in Sources */,
 				345CA96631D318F012F0BB80ACD3BCCD /* StyleLabel.swift in Sources */,
 				733714BD2122D32500B2ED90 /* AddressCellView.swift in Sources */,

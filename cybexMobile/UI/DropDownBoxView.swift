@@ -22,9 +22,9 @@ class DropDownBoxView: CybexBaseView {
         case time = 0
         case kind
     }
-    
+
     var dropKind: DropDownBoxKind = .time
-    
+
     @IBInspectable
     var normalIcon: UIImage? {
         didSet{

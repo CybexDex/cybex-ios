@@ -52,6 +52,11 @@ class CybexPopoverBackgroundView: UIPopoverBackgroundView {
             }
         }
     }
+
+    override func layoutSubviews() {
+        self.shadowOpacity = 0
+        self.superview?.shadowOpacity = 0
+    }
     
     public override static func arrowBase() -> CGFloat {
         return 0
@@ -60,7 +65,7 @@ class CybexPopoverBackgroundView: UIPopoverBackgroundView {
     public override static func contentViewInsets() -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     }
-    
+
     public override static func arrowHeight() -> CGFloat {
         return 0
     }

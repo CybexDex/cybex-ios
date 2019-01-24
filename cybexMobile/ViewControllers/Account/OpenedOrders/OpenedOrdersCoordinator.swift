@@ -72,6 +72,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
             service.reconnect()
         }
     }
+
     func fetchOpenedOrderRequest(_ pair: Pair) {
         guard let userId = UserManager.shared.account.value?.id else { return }
         let request = GetLimitOrderStatus(response: { json in
@@ -81,6 +82,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
         }, status: LimitOrderStatusApi.getOpenedMarketLimitOrder(userId: userId, asset1Id: pair.quote, asset2Id: pair.base))
         self.service.send(request: request)
     }
+
     func fetchAllOpenedOrder() {
         service.messageCanSend.delegate(on: self) { (self, _) in
            self.fetchAllOpenedOrderRequest()

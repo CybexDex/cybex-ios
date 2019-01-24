@@ -67,3 +67,66 @@ extension UIViewController {
         }
     }
 }
+
+// MARK: - PopOver
+extension UIViewController {
+    func updatePopOverViewCornerIfNeeded(_ r: CGFloat = 2) -> Bool {
+        if r >= 0 && view.superview?.layer.cornerRadius != r {
+            view.superview?.layer.cornerRadius = r
+            return true
+        }
+
+        return false
+    }
+
+
+    func updateDimmingViewAlpha(_ alpha: CGFloat = 0) {
+        let allSubViews: [UIView] = (UIApplication.shared.keyWindow?.subviews.last?.subviews)!
+
+        for index in 0...allSubViews.count - 1 {
+            if NSStringFromClass(allSubViews[index].classForCoder) == "UIDimmingView" {
+                allSubViews[index].backgroundColor = UIColor.black.withAlphaComponent(alpha)
+            }
+        }
+    }
+
+    func removeDimmingViewMask() {
+        let allSubViews: [UIView] = (UIApplication.shared.keyWindow?.subviews.last?.subviews)!
+
+        for index in 0...allSubViews.count - 1 {
+            if NSStringFromClass(allSubViews[index].classForCoder) == "_UIMirrorNinePatchView" {
+                allSubViews[index].backgroundColor = UIColor.clear
+
+                let arrayofImages = allSubViews[index].subviews as! [UIImageView]
+
+                for imageIndex in 0...arrayofImages.count - 1 {
+                    arrayofImages[imageIndex].image = nil
+                }
+            }
+        }
+    }
+}
+
+
+extension BaseViewController: UIPopoverPresentationControllerDelegate {
+    func presentPopOverViewController(_ vc: UIViewController, size: CGSize, sourceView: UIView, offset: CGPoint, direction: UIPopoverArrowDirection) {
+        vc.preferredContentSize = size
+
+        vc.modalPresentationStyle = .popover
+        vc.popoverPresentationController?.popoverBackgroundViewClass = CybexPopoverBackgroundView.self
+        vc.popoverPresentationController?.sourceView = sourceView
+        vc.popoverPresentationController?.sourceRect = CGRect(x: offset.x, y: offset.y, width: sourceView.width, height: sourceView.height)
+        vc.popoverPresentationController?.delegate = self
+        vc.popoverPresentationController?.permittedArrowDirections = direction
+        vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.white.hexString(true)]
+        self.present(vc, animated: true)
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return true
+    }
+
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+}

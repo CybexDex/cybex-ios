@@ -220,22 +220,15 @@ extension OrderBookViewController {
     }
 }
 
-extension OrderBookViewController: UIPopoverPresentationControllerDelegate {
-    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+extension OrderBookViewController {
+    override func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         self.tradeView.resetDecimalImage()
-        guard let superVC = popoverPresentationController.presentedViewController as? RecordChooseViewController else {
-            return true
-        }
-        superVC.dismiss(animated: false, completion: nil)
-        return false
-    }
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
+        return true
     }
 }
 
 extension OrderBookViewController: RecordChooseViewControllerDelegate {
-    func returnSelectedRow(_ sender: RecordChooseViewController, info: String) {
+    func returnSelectedRow(_ sender: RecordChooseViewController, info: String, index: Int) {
         if let depthString = info.components(separatedBy: " ").first,
             let depth = depthString.int,
             let pair = self.pair ,let coor = self.coordinator {

@@ -92,6 +92,14 @@ class LimitOrderStatus: HandyJSON {
                                    Price(base: Asset(amount: self.amountToReceive.string, assetID: pair.base),
                                         quote: Asset(amount: self.amountToSell.string, assetID: pair.quote))
     }
+
+    func getAveragePrice() -> Price {
+        let pair = self.getPair()
+        return self.isBuyOrder() ? Price(base: Asset(amount: self.soldAmount.string, assetID: pair.base),
+                                         quote: Asset(amount: self.receivedAmount.string, assetID: pair.quote)) :
+            Price(base: Asset(amount: self.receivedAmount.string, assetID: pair.base),
+                  quote: Asset(amount: self.soldAmount.string, assetID: pair.quote))
+    }
     
     func getPair() -> Pair {
         let assetAInfo = appData.assetInfo[self.asset1]
