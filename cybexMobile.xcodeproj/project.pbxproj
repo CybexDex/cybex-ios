@@ -394,7 +394,6 @@
 		72F817C421BA58F100575F56 /* GameActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C021BA58F100575F56 /* GameActions.swift */; };
 		72F817C521BA58F100575F56 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C121BA58F100575F56 /* GameViewController.swift */; };
 		72F817C621BA58F100575F56 /* GameReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C221BA58F100575F56 /* GameReducers.swift */; };
-		72F817C921BA590800575F56 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C821BA590800575F56 /* GameModel.swift */; };
 		72F817CE21BA635600575F56 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817CD21BA635600575F56 /* GameManager.swift */; };
 		72FF06B6216F4CD2003B09A8 /* ComprehensiveCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8E92151F9DB00FBB3CB /* ComprehensiveCoordinator.swift */; };
 		730229A1212E52B50073D5CE /* ETOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730229A0212E52B50073D5CE /* ETOManager.swift */; };
@@ -1264,7 +1263,6 @@
 		72F817C021BA58F100575F56 /* GameActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameActions.swift; sourceTree = "<group>"; };
 		72F817C121BA58F100575F56 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		72F817C221BA58F100575F56 /* GameReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReducers.swift; sourceTree = "<group>"; };
-		72F817C821BA590800575F56 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		72F817CD21BA635600575F56 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		730229A0212E52B50073D5CE /* ETOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOManager.swift; sourceTree = "<group>"; };
 		7307A8FF212518DB00BD6444 /* LGButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGButton.swift; sourceTree = "<group>"; };
@@ -2777,21 +2775,12 @@
 			isa = PBXGroup;
 			children = (
 				72F817CC21BA633900575F56 /* GameManager */,
-				72F817C721BA58F900575F56 /* GameModel */,
 				72F817BF21BA58F100575F56 /* GameCoordinator.swift */,
 				72F817C021BA58F100575F56 /* GameActions.swift */,
 				72F817C121BA58F100575F56 /* GameViewController.swift */,
 				72F817C221BA58F100575F56 /* GameReducers.swift */,
 			);
 			path = Game;
-			sourceTree = "<group>";
-		};
-		72F817C721BA58F900575F56 /* GameModel */ = {
-			isa = PBXGroup;
-			children = (
-				72F817C821BA590800575F56 /* GameModel.swift */,
-			);
-			path = GameModel;
 			sourceTree = "<group>";
 		};
 		72F817CC21BA633900575F56 /* GameManager */ = {
@@ -5139,7 +5128,6 @@
 				019AC681342BD1E978777A6A503E27B6 /* OrderBookActions.swift in Sources */,
 				7307A931212518F300BD6444 /* BaseView.swift in Sources */,
 				7267DA0621350327004AF9AF /* ETOCoordinator.swift in Sources */,
-				72F817C921BA590800575F56 /* GameModel.swift in Sources */,
 				72E3A4CC214560580083E417 /* CybexWaitingView.swift in Sources */,
 				72DBCA7621391A4300905303 /* CybexWebViewController.swift in Sources */,
 				73539BC82178A7CB008395AC /* AsyncOperation.swift in Sources */,
