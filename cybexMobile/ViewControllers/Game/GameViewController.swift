@@ -68,7 +68,7 @@ class GameViewController: BaseViewController {
         //pro  http://10.18.120.241:5552
         // https://cybexluck.io/
         if let gameURL = self.gameURL,
-            let url = URL(string: "http://10.18.120.22:5552") {
+            let url = URL(string: gameURL) {
             self.setupLoadUrl(url)
         }
         self.bridgeRegisterAction()
