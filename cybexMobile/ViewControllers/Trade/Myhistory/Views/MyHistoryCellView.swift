@@ -9,66 +9,39 @@
 import UIKit
 
 class MyHistoryCellView: UIView {
-
-    @IBOutlet weak var asset: UILabel!
     @IBOutlet weak var typeView: UIView!
-    @IBOutlet weak var base: UILabel!
-
     @IBOutlet weak var kindL: UILabel!
-    @IBOutlet weak var orderAmount: UILabel!
-    @IBOutlet weak var amount: UILabel!
+    @IBOutlet weak var asset: UILabel!
+    @IBOutlet weak var base: UILabel!
     @IBOutlet weak var time: UILabel!
+
+    @IBOutlet weak var averagePrice: UILabel!
     @IBOutlet weak var orderPrice: UILabel!
 
-    @IBOutlet weak var state: UILabel!
+    @IBOutlet weak var orderAmount: UILabel!
+    @IBOutlet weak var amount: UILabel!
+
 
     var data: Any? {
         didSet {
-            if let fillOrder = data as? (FillOrder, time: String) {
-                updateUI(fillOrder)
+            if let model = data as? ViewModel {
+                updateUI(model)
             }
         }
     }
 
-    func updateUI(_ orderInfo: (FillOrder, time: String)) {
-        let order = orderInfo.0
-        if let payInfo = appData.assetInfo[order.pays.assetID],
-            let receiveInfo = appData.assetInfo[order.receives.assetID] {
-            // 从首页筛选出交易对
-            let result = MarketHelper.calculateAssetRelation(assetIDAName: payInfo.symbol.filterJade, assetIDBName: receiveInfo.symbol.filterJade)
-            let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(Pair(base: result.base.assetID, quote: result.quote.assetID))
-            if result.base == payInfo.symbol.filterJade && result.quote == receiveInfo.symbol.filterJade {
-                // pay -> base   receive -> quote
-                // Buy
-                self.asset.text = result.quote
-                self.base.text  = "/" + result.base
-                self.kindL.text = "BUY"
-                self.typeView.backgroundColor = .turtleGreen
-                let realAmount = AssetHelper.getRealAmount(receiveInfo.id, amount: order.receives.amount)
-                let paysAmount = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount)
-                self.amount.text = realAmount.formatCurrency(digitNum: tradePrecision.amount) + " " + receiveInfo.symbol.filterJade
-                self.orderAmount.text = AssetHelper.getRealAmount(payInfo.id,
-                                                                  amount: order.pays.amount).formatCurrency(digitNum: tradePrecision.total) +
-                    " " + payInfo.symbol.filterJade
-                self.orderPrice.text = (paysAmount / realAmount).formatCurrency(digitNum: tradePrecision.price) +
-                    " " +  payInfo.symbol.filterJade
-            } else {
-                // SELL   pay -> quote receive -> base
-                self.kindL.text = "SELL"
-                self.asset.text = result.quote
-                self.base.text  = "/" + result.base
-                self.typeView.backgroundColor = .reddish
-                let realAmount = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount)
-                let receivesAmount = AssetHelper.getRealAmount(receiveInfo.id, amount: order.receives.amount)
-                let payAmount = AssetHelper.getRealAmount(payInfo.id, amount: order.pays.amount)
-                self.amount.text = realAmount.formatCurrency(digitNum: tradePrecision.amount) +
-                    " " + payInfo.symbol.filterJade
-                self.orderAmount.text = receivesAmount.formatCurrency(digitNum: tradePrecision.total) + " " +  receiveInfo.symbol.filterJade
-                self.orderPrice.text = (receivesAmount / payAmount).formatCurrency(digitNum: tradePrecision.price) +
-                    " " + receiveInfo.symbol.filterJade
-            }
-            self.time.text = orderInfo.time
-        }
+    func updateUI(_ vm: ViewModel) {
+        kindL.text = vm.isBuy ? "BUY" : "SELL"
+        typeView.backgroundColor = vm.isBuy ? .turtleGreen : .reddish
+
+        self.asset.text = vm.quote
+        self.base.text = "/" + vm.base
+        self.time.text = vm.time
+
+        self.averagePrice.text = vm.middleTop
+        self.orderPrice.text = vm.middleBottom
+        self.orderAmount.text = vm.rightTop
+        self.amount.text = vm.rightBottom
     }
 
     func setup() {
@@ -119,5 +92,83 @@ class MyHistoryCellView: UIView {
         addSubview(view)
         view.frame = self.bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    }
+}
+
+extension MyHistoryCellView {
+    struct ViewModel {
+        var isBuy: Bool
+        var isCanceled: Bool
+        var quote: String
+        var base: String
+        var time: String
+
+        var middleTop: String
+        var middleBottom: String
+        var rightTop: String
+        var rightBottom: String
+
+        static func makeViewModelFrom(data: LimitOrderStatus) -> ViewModel {
+            let isBuy = data.isBuyOrder()
+            let pair = data.getPair()
+            let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(pair)
+
+            let time = data.createTime.string(withFormat: "MM/dd HH:mm:ss")
+
+            var average = data.getAveragePrice().toReal().formatCurrency(digitNum: tradePrecision.price)
+
+            let price = data.getPrice().toReal().formatCurrency(digitNum: tradePrecision.price)
+
+            var dealAmountString = ""
+
+            if let dealAmount = isBuy ? data.receivedAmount : data.soldAmount {
+                if dealAmount == 0  {
+                    dealAmountString = "--"
+                    average = "--"
+                }
+                else {
+                    dealAmountString = data.getAveragePrice().quote.volume().suffixNumber(digitNum: tradePrecision.amount, padZero: true) + " " + pair.quote.symbol
+                }
+            }
+
+
+            let amountString = data.getPrice().quote.volume().suffixNumber(digitNum: tradePrecision.amount, padZero: true) + " " + pair.quote.symbol
+
+            return ViewModel(isBuy: isBuy,
+                             isCanceled: data.canceledAmount > 0,
+                             quote: pair.quote.symbol,
+                             base: pair.base.symbol,
+                             time: time,
+                             middleTop: average,
+                             middleBottom: price,
+                             rightTop: dealAmountString,
+                             rightBottom: amountString)
+        }
+
+        static func makeViewModelFrom(data: FillOrder, orginTime: String) -> ViewModel {
+            let isBuy = data.isBuyOrder()
+            let pair = data.getPair()
+            let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(pair)
+
+
+            let time = Formatter.iso8601.date(from: orginTime)!.string(withFormat: "MM/dd HH:mm:ss")
+
+            let price = data.getPrice().toReal().formatCurrency(digitNum: tradePrecision.price)
+            let dealAmount = data.getPrice().quote.volume().suffixNumber(digitNum: tradePrecision.amount, padZero: true)
+
+            let totalAmount = data.getPrice().base.volume().suffixNumber(digitNum: tradePrecision.total, padZero: true) + " " + pair.base.symbol
+
+            let feeAmount = data.fee.volumeString()  + " " + data.fee.assetID.symbol
+
+            return ViewModel(isBuy: isBuy,
+                             isCanceled: false,
+                             quote: pair.quote.symbol,
+                             base: pair.base.symbol,
+                             time: time,
+                             middleTop: price,
+                             middleBottom: dealAmount,
+                             rightTop: totalAmount,
+                             rightBottom: feeAmount)
+        }
     }
 }

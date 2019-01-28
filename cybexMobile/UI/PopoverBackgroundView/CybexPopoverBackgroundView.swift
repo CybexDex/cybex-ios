@@ -10,12 +10,16 @@ import Foundation
 import SwiftTheme
 
 class CybexPopoverBackgroundView: UIPopoverBackgroundView {
-    
     var imageView: UIImageView!
+    static var arrowColor: UIColor = UIColor.darkFour
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear
-        imageView = UIImageView(image: ThemeManager.currentThemeIndex == 0 ? R.image.arrowUpBlack() : R.image.arrowUpWhite())
+        let image = ThemeManager.currentThemeIndex == 0 ? R.image.arrowUpBlack() : R.image.arrowUpWhite()
+        imageView = UIImageView(image: image?.withRenderingMode(.alwaysTemplate))
+        imageView.tintColor = CybexPopoverBackgroundView.arrowColor
+        
         imageView.frame = CGRect(x: frame.width * 0.5 - 12, y: 0, width: 24, height: 10)
         self.addSubview(imageView)
     }

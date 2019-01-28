@@ -28,6 +28,13 @@ class Account: HandyJSON {
         mapper <<< id <-- "id"
         mapper <<< memoKey <-- "options.memo_key"
     }
+
+    var activePubKeys: [String] {
+        guard let auths = activeAuths as? [[Any]] else { return [] }
+        guard let mapsResult = auths.map({$0[0]}) as? [String] else { return [] }
+
+        return mapsResult
+    }
 }
 
 extension Account {

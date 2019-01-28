@@ -9,7 +9,6 @@
 import Foundation
 import TangramKit
 import SwiftTheme
-import TangramKit
 
 class DeployTicketView: UIView {
     static let RowKey: [[String]] = [["account"], ["asset", "amount"]]

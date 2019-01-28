@@ -17,8 +17,8 @@ protocol MyHistoryStateManagerProtocol {
     var state: MyHistoryState { get }
 
     func disconnect()
-    func fetchMyOrderHistory(_ pair: Pair)
-    func fetchAllMyOrderHistory()
+    func fetchMyOrderHistory(_ pair: Pair, page: Int, callback: ((Bool) -> Void)?)
+    func fetchAllMyOrderHistory(_ page: Int, callback: ((Bool) -> Void)?)
 
     func checkConnectStatus() -> Bool
     func connect()
@@ -58,12 +58,12 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
         return service.checkNetworConnected()
     }
 
-    func fetchMyOrderHistory(_ pair: Pair) {
+    func fetchMyOrderHistory(_ pair: Pair, page: Int, callback: ((Bool) -> Void)?) {
         service.messageCanSend.delegate(on: self) { (self, _) in
-            self.fetchMyOrderHistoryRequest(pair)
+            self.fetchMyOrderHistoryRequest(pair, page: page, callback: callback)
         }
         if service.checkNetworConnected() {
-            self.fetchMyOrderHistoryRequest(pair)
+            self.fetchMyOrderHistoryRequest(pair, page: page, callback: callback)
         }else {
             service.reconnect()
         }
@@ -78,14 +78,15 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
         self.service.send(request: request)
     }
 
-    func fetchMyOrderHistoryRequest(_ pair: Pair) {
+    func fetchMyOrderHistoryRequest(_ pair: Pair, page: Int, callback: ((Bool) -> Void)?) {
         guard let userId = UserManager.shared.account.value?.id else { return }
 
 
         maxOrderId {[weak self] (lessThanOrderId) in
             let request = GetLimitOrderStatus(response: { json in
-                if let json = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: json) {
-
+                if let json = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: json) as? [LimitOrderStatus] {
+                    callback?(object.count != 20)
+                    self?.store.dispatch(FillOrderDataFetchedAction(data: object))
                 }
             }, status: LimitOrderStatusApi.getMarketLimitOrder(userId: userId, asset1Id: pair.quote, asset2Id: pair.base, lessThanOrderId: lessThanOrderId, limit: 20))
             self?.service.send(request: request)
@@ -93,23 +94,25 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
 
     }
 
-    func fetchAllMyOrderHistory() {
+    func fetchAllMyOrderHistory(_ page: Int, callback: ((Bool) -> Void)?) {
         service.messageCanSend.delegate(on: self) { (self, _) in
-            self.fetchAllMyOrderHistoryRequest()
+            self.fetchAllMyOrderHistoryRequest(page, callback: callback)
         }
         if service.checkNetworConnected() {
-            self.fetchAllMyOrderHistoryRequest()
+            self.fetchAllMyOrderHistoryRequest(page, callback: callback)
         }else {
             service.reconnect()
         }
     }
 
-    func fetchAllMyOrderHistoryRequest() {
+    func fetchAllMyOrderHistoryRequest(_ page: Int, callback: ((Bool) -> Void)?) {
         guard let userId = UserManager.shared.account.value?.id else { return }
 
         maxOrderId {[weak self] (lessThanOrderId) in
             let request = GetLimitOrderStatus(response: { (json) in
-                if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) {
+                if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) as? [LimitOrderStatus] {
+                    callback?(object.count != 20)
+                    self?.store.dispatch(FillOrderDataFetchedAction(data: object))
                 }
             }, status: LimitOrderStatusApi.getLimitOrder(userId: userId, lessThanOrderId: lessThanOrderId, limit: 20))
             self?.service.send(request: request)

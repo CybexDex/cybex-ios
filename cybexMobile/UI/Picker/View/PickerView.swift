@@ -105,9 +105,13 @@ extension PickerView: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         if items != nil {
             if let title = self.titleForRow(row, component: component) {
+                let style = NSMutableParagraphStyle()
+                style.lineBreakMode = NSLineBreakMode.byTruncatingMiddle
+                style.alignment = .center
                 return NSAttributedString(string: title,
                                           attributes: [NSAttributedString.Key.foregroundColor: ThemeManager.currentThemeIndex == 0 ? pickerView.theme1TintColor : pickerView.theme2TintColor,
-                                                       NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .medium)])
+                                                       NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .medium),
+                                                       NSAttributedString.Key.paragraphStyle: style])
             }
         }
         return nil

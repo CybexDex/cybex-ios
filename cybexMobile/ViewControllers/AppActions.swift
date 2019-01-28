@@ -115,6 +115,10 @@ struct HomeBucket: Equatable, Hashable {
 struct Pair: Hashable {//id
     let base: String
     let quote: String
+
+    func info(_ asset: String) -> AssetInfo {
+        return appData.assetInfo[asset] ?? AssetInfo()
+    }
 }
 
 class LoadingActionCreator {

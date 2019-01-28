@@ -148,7 +148,7 @@ class GrowContentView: UIView {
         return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
 
-    func updateContentSize() {
+    @objc func updateContentSize() {
         self.performSelector(onMainThread: #selector(self.updateHeight), with: nil, waitUntilDone: false)
         self.performSelector(onMainThread: #selector(self.updateHeight), with: nil, waitUntilDone: false)
     }

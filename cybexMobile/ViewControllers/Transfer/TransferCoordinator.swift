@@ -23,13 +23,16 @@ protocol TransferCoordinatorProtocol {
     func showPicker()
 
     func openAddTransferAddress(_ sender: TransferAddress)
-
+    func openDropBoxViewController()
+    func presentPubKeyOptions(_ pubkeys: [String], pubkeyChoosedIndex: @escaping (Int) -> Void)
+    
     func reopenAction()
 }
 
 protocol TransferStateManagerProtocol {
     var state: TransferState { get }
 
+    func clearAccountInfo()
     //获取转账收款人信息
     func getTransferAccountInfo()
 
@@ -45,8 +48,8 @@ protocol TransferStateManagerProtocol {
 
     func checkAmount(_ transferAmount: Decimal)
 
-    func transfer(_ callback: @escaping (Any) -> Void)
-
+    func transfer(_ vestingPeroid: UInt64, toPubKey: String, callback: @escaping (Any) -> Void)
+    
     func getGatewayFee(_ assetId: String, amount: String, memo: String)
 
     func chooseOrAddAddress()
@@ -78,6 +81,45 @@ class TransferCoordinator: NavCoordinator {
 }
 
 extension TransferCoordinator: TransferCoordinatorProtocol {
+    func openDropBoxViewController() {
+        guard let vc = R.storyboard.comprehensive.recordChooseViewController(),
+            let currentVC = self.rootVC.topViewController as? TransferViewController else { return }
+        vc.typeIndex = .vesting
+        vc.selectedIndex = currentVC.selectedVestingTimeIndex
+        vc.delegate = currentVC
+        vc.coordinator = RecordChooseCoordinator(rootVC: self.rootVC)
+        vc.view.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.paleGreyFour.hexString(true)]
+
+        currentVC.presentPopOverViewController(vc,
+                                              size: CGSize(width: 82, height: 138),
+                                              sourceView: currentVC.transferView.postVestingView.dropButton,
+                                              offset: CGPoint.zero,
+                                              direction: .up,
+                                              arrowColor: vc.view.themeBgColor)
+    }
+
+    func presentPubKeyOptions(_ pubkeys: [String], pubkeyChoosedIndex: @escaping (Int) -> Void) {
+        let width = ModalSize.full
+        let height = ModalSize.custom(size: 244)
+        let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: UIScreen.main.bounds.height - 244))
+        let customType = PresentationType.custom(width: width, height: height, center: center)
+
+        let presenter = Presentr(presentationType: customType)
+        presenter.dismissOnTap = true
+        presenter.keyboardTranslationType = .moveUp
+
+        var context = PickerContext()
+        context.items = pubkeys as AnyObject
+        context.pickerDidSelected = { (picker: UIPickerView) -> Void in
+            let index = picker.selectedRow(inComponent: 0)
+            pubkeyChoosedIndex(index)
+        }
+
+        presentVC(PickerCoordinator.self, animated: true, context: context, navSetup: nil) { (top, target) in
+            top.customPresentViewController(presenter, viewController: target, animated: true)
+        }
+    }
+    
     func pushToRecordVC() {
         let recordVC = R.storyboard.recode.transferListViewController()
         let coordinator = TransferListCoordinator(rootVC: self.rootVC)
@@ -191,7 +233,9 @@ extension TransferCoordinator: TransferStateManagerProtocol {
         self.store.dispatch(ValidAccountAction(status: type))
     }
 
-    func transfer(_ callback: @escaping (Any) -> Void) {
+    func transfer(_ vestingPeroid: UInt64, toPubKey: String, callback: @escaping (Any) -> Void) {
+        guard let currentVC = self.rootVC.topViewController as? TransferViewController else { return }
+
         guard let balance = self.state.balance.value else {
             return
         }
@@ -202,6 +246,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
             return
         }
         let amount = self.state.amount.value
+        let isVesting = try! currentVC.switchVestingObservable.value()
 
         CybexChainHelper.blockchainParams { (blockInfo) in
             if let assetInfo = appData.assetInfo[balance.assetType], let feeInfo = appData.assetInfo[fee.assetId] {
@@ -214,20 +259,38 @@ extension TransferCoordinator: TransferStateManagerProtocol {
 
                 let feeAmout = fee.amount.decimal() * pow(10, feeInfo.precision)
 
-                let jsonstr =  BitShareCoordinator.getTransaction(blockInfo.block_num.int32,
-                                                                  block_id: blockInfo.block_id,
-                                                                  expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
-                                                                  chain_id: CybexConfiguration.shared.chainID.value,
-                                                                  from_user_id: fromAccount.id.getSuffixID,
-                                                                  to_user_id: toAccount.id.getSuffixID,
-                                                                  asset_id: balance.assetType.getSuffixID,
-                                                                  receive_asset_id: balance.assetType.getSuffixID,
-                                                                  amount: amount.int64Value,
-                                                                  fee_id: fee.assetId.getSuffixID,
-                                                                  fee_amount: feeAmout.int64Value,
-                                                                  memo: self.state.memo.value,
-                                                                  from_memo_key: fromAccount.memoKey,
-                                                                  to_memo_key: toAccount.memoKey)
+                let jsonstr = isVesting ? BitShareCoordinator.getTransactionWithVesting(
+                    blockInfo.block_num.int32,
+                    block_id: blockInfo.block_id,
+                    expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
+                    chain_id: CybexConfiguration.shared.chainID.value,
+                    from_user_id: fromAccount.id.getSuffixID,
+                    to_user_id: toAccount.id.getSuffixID,
+                    asset_id: balance.assetType.getSuffixID,
+                    receive_asset_id: balance.assetType.getSuffixID,
+                    amount: amount.int64Value,
+                    fee_id: fee.assetId.getSuffixID,
+                    fee_amount: feeAmout.int64Value,
+                    memo: self.state.memo.value,
+                    from_memo_key: fromAccount.memoKey,
+                    to_memo_key: toAccount.memoKey,
+                    vestingPeroid: vestingPeroid,
+                    toPubKey: toPubKey) :
+                    BitShareCoordinator.getTransaction(
+                        blockInfo.block_num.int32,
+                        block_id: blockInfo.block_id,
+                        expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
+                        chain_id: CybexConfiguration.shared.chainID.value,
+                        from_user_id: fromAccount.id.getSuffixID,
+                        to_user_id: toAccount.id.getSuffixID,
+                        asset_id: balance.assetType.getSuffixID,
+                        receive_asset_id: balance.assetType.getSuffixID,
+                        amount: amount.int64Value,
+                        fee_id: fee.assetId.getSuffixID,
+                        fee_amount: feeAmout.int64Value,
+                        memo: self.state.memo.value,
+                        from_memo_key: fromAccount.memoKey,
+                        to_memo_key: toAccount.memoKey)
 
                 let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
                     main {
@@ -256,11 +319,17 @@ extension TransferCoordinator: TransferStateManagerProtocol {
         }
     }
 
+    func clearAccountInfo() {
+        self.state.toAccount.accept(nil)
+    }
+
     func setAccount(_ account: String) {
         if !self.state.account.value.isEmpty, self.state.account.value != account {
             self.store.dispatch(ValidAccountAction(status: .unValided))
         }
+
         self.state.account.accept(account)
+
         validAccount()
     }
 
@@ -295,12 +364,18 @@ extension TransferCoordinator: TransferStateManagerProtocol {
     }
 
     func getGatewayFee(_ assetId: String, amount: String, memo: String) {
-        let value = assetId.isEmpty ? 1 : pow(10, (appData.assetInfo[assetId]?.precision)!)
+        guard let currentVC = self.rootVC.topViewController as? TransferViewController else { return }
         let fromUserId = UserManager.shared.account.value?.id ?? "0"
         let fromMemoKey = UserManager.shared.account.value?.memoKey ?? ""
         let toUserId = self.state.toAccount.value?.id ?? "0"
         let toMemoKey = self.state.toAccount.value?.memoKey ?? fromMemoKey
-        let operationString = BitShareCoordinator.getTransterOperation(fromUserId.getSuffixID,
+
+        var operationString: String!
+        if try! currentVC.switchVestingObservable.value() {
+            operationString = BitShareCoordinator.getTransterWithVestingOperation(fromUserId.getSuffixID, to_user_id: toUserId.getSuffixID, asset_id: assetId.getSuffixID, amount: 0, fee_id: 0, fee_amount: 0, memo: memo, from_memo_key: "", to_memo_key: "", vestingPeroid: 0, toPubKey: "")
+        }
+        else {
+            operationString = BitShareCoordinator.getTransterOperation(fromUserId.getSuffixID,
                                                                           to_user_id: toUserId.getSuffixID,
                                                                           asset_id: assetId.getSuffixID,
                                                                           amount: 0,
@@ -309,6 +384,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                                                                           memo: memo,
                                                                           from_memo_key: fromMemoKey,
                                                                           to_memo_key: toMemoKey)
+        }
         
         CybexChainHelper.calculateFee(operationString, operationID: .transfer, focusAssetId: assetId) { (success, amount, feeId) in
             let dictionary = ["asset_id": feeId, "amount": amount.stringValue]

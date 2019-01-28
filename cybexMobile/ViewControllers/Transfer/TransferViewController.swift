@@ -16,8 +16,10 @@ class TransferViewController: BaseViewController {
 
     @IBOutlet weak var transferView: TransferView!
     var accountName: String = ""
+    var selectedVestingTimeIndex = 0
 
     var coordinator: (TransferCoordinatorProtocol & TransferStateManagerProtocol)?
+    var switchVestingObservable = BehaviorSubject(value: false)
 
     var isFetchFee: Bool = true
     override func viewDidLoad() {
@@ -31,6 +33,10 @@ class TransferViewController: BaseViewController {
         self.transferView.accountView.reloadData()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+
     override func configureObserveState() {
         self.transferView.transferButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] _ in
             guard let self = self else { return }
@@ -38,11 +44,23 @@ class TransferViewController: BaseViewController {
             self.clickTransferAction()
         }).disposed(by: disposeBag)
 
+        let vestingValid = Observable.combineLatest(switchVestingObservable.asObserver(),
+            self.transferView.postVestingView.timeTextFiled.rx.text.orEmpty,
+                                                    self.transferView.postVestingView.pubkeyTextFiled.rx.text.orEmpty).map { (status, time, pubkey) -> Bool in
+                                                        if status {
+                                                            return time.count > 0 && pubkey.count > 0
+                                                        }
+                                                        else {
+                                                            return true
+                                                        }
+        }
+
         //按钮状态监听
         Observable.combineLatest(self.coordinator!.state.accountValid.asObservable(),
-                                 self.coordinator!.state.amountValid.asObservable()).subscribe(onNext: {[weak self] (accountValid, amountValid) in
+                                 self.coordinator!.state.amountValid.asObservable(),
+                                 vestingValid).subscribe(onNext: {[weak self] (accountValid, amountValid, vestingValid) in
                                     guard let self = self else { return }
-                                    if let _ = self.coordinator?.state.balance.value, let transferAmount = self.coordinator?.state.amount.value.decimal() {
+                                    if let _ = self.coordinator?.state.balance.value, let transferAmount = self.coordinator?.state.amount.value.decimal(), vestingValid {
 
                                         self.transferView.buttonIsEnable = accountValid == .validSuccessed && amountValid && transferAmount > 0
                                     } else {
@@ -182,7 +200,11 @@ extension TransferViewController {
             }
 
             self.startLoading()
-            self.coordinator?.transfer({ [weak self](data) in
+            let timeAmount = UInt64(self.transferView.postVestingView.timeTextFiled.text ?? "0")!
+            let timeUnit: [UInt64] = [1, 60, 3600, 3600 * 24]
+
+            self.coordinator?.transfer(timeUnit[self.selectedVestingTimeIndex] * timeAmount,
+                                       toPubKey: self.transferView.postVestingView.pubkeyTextFiled.text ?? "", callback: {[weak self] (data) in
                 guard let self = self else { return }
                 self.endLoading()
                 main {
@@ -205,6 +227,7 @@ extension TransferViewController {
                     }
                 }
             })
+
         } else {
             SwifterSwift.delay(milliseconds: 300) {
                 self.showPasswordBox()
@@ -232,6 +255,7 @@ extension TransferViewController {
     @objc func account(_ data: [String: Any]) {
         if let text = data["content"] as? String {
             self.coordinator?.dispatchAccountAction(AccountValidStatus.unValided)
+            self.transferView.postVestingView.clearPubkey()
             if text.count != 0 {
                 self.coordinator?.setAccount(text)
             } else {
@@ -268,5 +292,50 @@ extension TransferViewController {
             self.isFetchFee = true
             self.showPasswordBox()
         }
+    }
+}
+
+extension TransferViewController {
+    @objc func switchStatusDidSwitched(_ data: [String: Any]) {
+        transferView.contentView.updateContentSize()
+        transferView.updateContentSize()
+        switchVestingObservable.onNext(transferView.postVestingView.switchStatus)
+    }
+
+    @objc func choosePubKeyDidClicked(_ data: [String: Any]) {
+        guard let toAccount = self.coordinator?.state.toAccount.value else {
+            return
+        }
+    
+        self.coordinator?.presentPubKeyOptions(toAccount.activePubKeys, pubkeyChoosedIndex: {[weak self] (index) in
+            guard let self = self else { return }
+
+            let pubkey = toAccount.activePubKeys[index]
+            self.transferView.postVestingView.pubkeyTextFiled.text = pubkey
+            self.transferView.postVestingView.pubkeyTextFiled.sendActions(for: .valueChanged)
+
+        })
+    }
+
+    @objc func dropDownBoxViewDidClicked(_ data: [String: Any]) {
+        self.coordinator?.openDropBoxViewController()
+    }
+}
+
+extension TransferViewController {
+    override func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        self.transferView.postVestingView.dropButton.resetState()
+
+        return true
+    }
+}
+
+extension TransferViewController: RecordChooseViewControllerDelegate {
+    func returnSelectedRow(_ sender: RecordChooseViewController, info: String, index: Int) {
+        selectedVestingTimeIndex = index
+        self.transferView.postVestingView.dropButton.nameLabel.text = info
+        self.transferView.postVestingView.dropButton.resetState()
+
+        sender.dismiss(animated: true, completion: nil)
     }
 }

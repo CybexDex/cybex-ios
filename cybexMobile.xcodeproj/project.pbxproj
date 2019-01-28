@@ -703,6 +703,9 @@
 		73D9C20D21E5CC47005B9022 /* TangramKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D9C20C21E5CC46005B9022 /* TangramKit.framework */; };
 		73D9C21121E5D3F9005B9022 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7345FD7B219E7DE40066BD0E /* PromiseKit.framework */; };
 		73D9C21421E5EBD5005B9022 /* DepolyTicketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9C21321E5EBD5005B9022 /* DepolyTicketViewController.swift */; };
+		73E61F6821F9B3AD00B54612 /* PostVestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6721F9B3AD00B54612 /* PostVestingView.swift */; };
+		73E61F6A21FABD5500B54612 /* PostVestingView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */; };
+		73E61F6D21FB105D00B54612 /* OrderPageTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
 		73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */; };
 		73F50BA32137D71F0071B08D /* ETOCrowdGridItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */; };
@@ -1581,6 +1584,9 @@
 		73D9C15421DF15CE005B9022 /* MarketDetailPageTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDetailPageTabViewController.swift; sourceTree = "<group>"; };
 		73D9C20C21E5CC46005B9022 /* TangramKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TangramKit.framework; path = Carthage/Build/iOS/TangramKit.framework; sourceTree = "<group>"; };
 		73D9C21321E5EBD5005B9022 /* DepolyTicketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepolyTicketViewController.swift; sourceTree = "<group>"; };
+		73E61F6721F9B3AD00B54612 /* PostVestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVestingView.swift; sourceTree = "<group>"; };
+		73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostVestingView+Layout.swift"; sourceTree = "<group>"; };
+		73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPageTabViewController.swift; sourceTree = "<group>"; };
 		73F50B9D2137D0B20071B08D /* ETO.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ETO.storyboard; sourceTree = "<group>"; };
 		73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemView.swift; sourceTree = "<group>"; };
 		73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdGridItemView.xib; sourceTree = "<group>"; };
@@ -2477,6 +2483,8 @@
 				72199D9821045DEA00575226 /* TransferListCellView.xib */,
 				221EC250210609A10059F856 /* TransferView.swift */,
 				221EC252210609B20059F856 /* TransferView.xib */,
+				73E61F6721F9B3AD00B54612 /* PostVestingView.swift */,
+				73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3536,6 +3544,14 @@
 			path = Ticket;
 			sourceTree = "<group>";
 		};
+		73E61F6B21FB103600B54612 /* OrderContainer */ = {
+			isa = PBXGroup;
+			children = (
+				73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */,
+			);
+			path = OrderContainer;
+			sourceTree = "<group>";
+		};
 		7A99BB351484E3D92442AE34D9258030 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -4108,6 +4124,7 @@
 		F189D4AC3A5BB2DB266277BAD8CB0EA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				73E61F6B21FB103600B54612 /* OrderContainer */,
 				72F817BE21BA58E500575F56 /* Game */,
 				1957BC4603D51BA58EA334581171C0AD /* Account */,
 				72E2A8E62151F8E900FBB3CB /* Comprehensive */,
@@ -5057,6 +5074,7 @@
 				7386F2B021216B2200ABC924 /* TransferAddressHomeReducers.swift in Sources */,
 				72AAC8B02106FC840040793F /* Record.swift in Sources */,
 				72D58298219C18B100BB9842 /* CBKMessageView.swift in Sources */,
+				73E61F6D21FB105D00B54612 /* OrderPageTabViewController.swift in Sources */,
 				80258D6F4C94ACC78C20B5ACE8BEAD2F /* LockupAssetsReducers.swift in Sources */,
 				85D46A1F0D3BBF12CF72903D466D9239 /* LockupAssetsSectionView.swift in Sources */,
 				72F817C421BA58F100575F56 /* GameActions.swift in Sources */,
@@ -5092,6 +5110,7 @@
 				724C5D4E2153956900FF1DE7 /* ComprehensiveItemView.swift in Sources */,
 				3B0EB65B210313B200F19C31 /* YourPortfolioHandleView.swift in Sources */,
 				CD017D1C374A5B06D3ECEC24936E0911 /* MyOpenedOrdersView.swift in Sources */,
+				73E61F6A21FABD5500B54612 /* PostVestingView+Layout.swift in Sources */,
 				031F69CC95D2906A4F8F4063776327F6 /* NSObject+Extensions.swift in Sources */,
 				73A331162194244800707D8F /* ChatViewController.swift in Sources */,
 				739EFB652181D10E00424061 /* UIPanGestureRecognizer+RxGesture.swift in Sources */,
@@ -5127,6 +5146,7 @@
 				7386F2A42121665100ABC924 /* AddressHomeReducers.swift in Sources */,
 				019AC681342BD1E978777A6A503E27B6 /* OrderBookActions.swift in Sources */,
 				7307A931212518F300BD6444 /* BaseView.swift in Sources */,
+				73E61F6821F9B3AD00B54612 /* PostVestingView.swift in Sources */,
 				7267DA0621350327004AF9AF /* ETOCoordinator.swift in Sources */,
 				72E3A4CC214560580083E417 /* CybexWaitingView.swift in Sources */,
 				72DBCA7621391A4300905303 /* CybexWebViewController.swift in Sources */,

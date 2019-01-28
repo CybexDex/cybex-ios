@@ -113,8 +113,6 @@ extension UserManager {
         self.account.accept(nil)
         self.balances.accept(nil)
         self.limitOrder.accept(nil)
-        self.fillOrder.accept(nil)
-        self.transferRecords.accept(nil)
     }
 
     func fetchAccountInfo() {
@@ -133,70 +131,6 @@ extension UserManager {
             }
             CybexWebSocketService.shared.send(request: request)
         }
-    }
-
-    func fetchHistoryOfFillOrdersAndTransferRecords() {
-        guard let id = self.account.value?.id else {
-            return
-        }
-
-        let request = GetAccountHistoryRequest(accountID: id) { (data) in
-            if let data = data as? (fillOrders: [FillOrder], transferRecords: [TransferRecord]) {
-                var fillorders = data.fillOrders
-                if !self.isLoginIn {
-                    return
-                }
-                if data.transferRecords.count == 0 {
-                    self.transferRecords.accept(nil)
-                }
-                if fillorders.count == 0 {
-                    self.fillOrder.accept(nil)
-                }
-                fillorders = fillorders.filter({
-                    let baseName = appData.assetInfo[$0.fillPrice.base.assetID]
-                    let quoteName = appData.assetInfo[$0.fillPrice.quote.assetID]
-                    return baseName != nil && quoteName != nil
-                })
-
-                var result = [(FillOrder, time:String)]()
-                var count = 0
-                for fillOrder in fillorders {
-                    let timeRequest = GetBlockRequest(response: { (time) in
-                        count += 1
-                        if let time = time as? String, let date = time.dateFromISO8601 {
-                            result.append((fillOrder, time:(date.string(withFormat: "MM/dd HH:mm:ss"))))
-                        }
-                        if count == fillorders.count {
-                            self.fillOrder.accept(result)
-                        }
-                    }, blockNum: fillOrder.blockNum)
-                    CybexWebSocketService.shared.send(request: timeRequest, priority: Operation.QueuePriority.high)
-                }
-
-                let transferRecordList = data.transferRecords
-                if transferRecordList.count == 0 || !self.isLoginIn {
-                    self.transferRecords.accept(nil)
-                    return
-                }
-
-                var records = [(TransferRecord, time:String)]()
-                var recordCount = 0
-                for transferRecord in transferRecordList {
-                    let timeRequest = GetBlockRequest(response: { (time) in
-                        recordCount += 1
-                        if let time = time as? String, let date = time.dateFromISO8601 {
-                            records.append((transferRecord, time:(date.string(withFormat: "MM/dd HH:mm:ss"))))
-                        }
-                        if recordCount == transferRecordList.count {
-                            self.transferRecords.accept(records)
-                        }
-                    }, blockNum: transferRecord.blockNum)
-                    CybexWebSocketService.shared.send(request: timeRequest)
-                }
-            }
-
-        }
-        CybexWebSocketService.shared.send(request: request)
     }
 
     func checkUserName(_ name: String) -> Promise<Bool> {
@@ -381,8 +315,6 @@ class UserManager {
 
     var balances: BehaviorRelay<[Balance]?> = BehaviorRelay(value: nil)
     var limitOrder: BehaviorRelay<[LimitOrder]?> = BehaviorRelay(value: nil)
-    var fillOrder: BehaviorRelay<[(FillOrder, time: String)]?> = BehaviorRelay(value: nil)
-    var transferRecords: BehaviorRelay<[(TransferRecord, time: String)]?> = BehaviorRelay(value: nil)
 
     var timer: Repeater?
 
@@ -456,15 +388,6 @@ class UserManager {
                     }
                 }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-
-        account.asObservable().skip(1).subscribe(onNext: {[weak self] (_) in
-            guard let self = self else { return }
-            if CybexWebSocketService.shared.overload() || self.fillOrder.value != nil {
-                return
-            }
-            self.fetchHistoryOfFillOrdersAndTransferRecords()
-        }).disposed(by: disposeBag)
-
     }
 
     private func saveName(_ name: String) {

@@ -14,7 +14,7 @@ import SwiftyUserDefaults
 import Localize_Swift
 
 enum AccountHistoryAPI {
-    case getMyFillOrder(userId: String, pair: Pair?, page: Int)
+    case getMyGroupFillOrder(userId: String, pair: Pair?, page: Int)
     case getTransferRecord(userId:String, page: Int)
 }
 
@@ -24,12 +24,12 @@ struct AccountHistoryService {
         static let devURL = URL(string: "http://39.105.55.115:8081")!
     }
 
-    static let provider = MoyaProvider<AppAPI>(callbackQueue: nil, manager: defaultManager(),
+    static let provider = MoyaProvider<AccountHistoryAPI>(callbackQueue: nil, manager: defaultManager(),
                                                plugins: [NetworkLoggerPlugin(verbose: true)],
                                                trackInflights: false)
 
     static func request(
-        target: AppAPI,
+        target: AccountHistoryAPI,
         success successCallback: @escaping (JSON) -> Void,
         error errorCallback: @escaping (CybexError) -> Void,
         failure failureCallback: @escaping (CybexError) -> Void
@@ -87,7 +87,7 @@ extension AccountHistoryAPI: TargetType {
         switch self {
         case .getTransferRecord(userId: _, page: _):
             return "/get_ops_by_transfer_accountspair_mongo"
-        case .getMyFillOrder(userId: _, pair: _, page: _):
+        case .getMyGroupFillOrder(userId: _, pair: _, page: _):
             return "/get_ops_fill_pair"
         }
     }
@@ -104,7 +104,7 @@ extension AccountHistoryAPI: TargetType {
 
         case let .getTransferRecord(userId: uid, page: page): //asset=null&acct_from=1.2.19803&acct_to=1.2.4733&page=0&limit=2
             return ["asset": "null", "acct_from": "or", "acct_to": uid, "page": page, "limit": 20]
-        case let .getMyFillOrder(userId: uid, pair: pair, page: page): //account=1.2.4733&start=null&end=null&base=null&quote=null&limit=10&page=0
+        case let .getMyGroupFillOrder(userId: uid, pair: pair, page: page): //account=1.2.4733&start=null&end=null&base=null&quote=null&limit=10&page=0
             if let p = pair {
                 return ["account": uid, "start": "null", "end": "null", "base": p.base, "quote": p.quote, "limit": 20, "page": page]
             }

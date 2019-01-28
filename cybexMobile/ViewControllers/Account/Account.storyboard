@@ -440,7 +440,59 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xs2-y3-eeK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1788" y="153"/>
+            <point key="canvasLocation" x="-2049" y="681"/>
+        </scene>
+        <!--Order Page Tab View Controller-->
+        <scene sceneID="ufJ-KN-meg">
+            <objects>
+                <viewController storyboardIdentifier="OrderPageTabViewController" id="thY-Tl-gkz" customClass="OrderPageTabViewController" customModule="cybexMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e06-3F-yzQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uZH-yg-ztG">
+                                <rect key="frame" x="13" y="21" width="349" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="gR1-sI-EPe"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="All"/>
+                                    <segment title="Buy"/>
+                                    <segment title="Sell"/>
+                                </segments>
+                                <color key="tintColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="locali0" value="orders_my_open_order"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="locali1" value="orders_my_filled_order"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="locali2" value="orders_my_trade_history"/>
+                                </userDefinedRuntimeAttributes>
+                            </segmentedControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZEZ-Cx-aCL">
+                                <rect key="frame" x="0.0" y="52" width="375" height="615"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uZH-yg-ztG" firstAttribute="top" secondItem="Ydc-lK-e6o" secondAttribute="top" constant="1" id="7Ln-c5-p4m"/>
+                            <constraint firstItem="ZEZ-Cx-aCL" firstAttribute="leading" secondItem="Ydc-lK-e6o" secondAttribute="leading" id="NKu-EC-e4t"/>
+                            <constraint firstItem="Ydc-lK-e6o" firstAttribute="bottom" secondItem="ZEZ-Cx-aCL" secondAttribute="bottom" id="TTK-zP-tp0"/>
+                            <constraint firstItem="uZH-yg-ztG" firstAttribute="leading" secondItem="Ydc-lK-e6o" secondAttribute="leading" constant="13" id="YnV-E4-j3C"/>
+                            <constraint firstItem="ZEZ-Cx-aCL" firstAttribute="top" secondItem="uZH-yg-ztG" secondAttribute="bottom" constant="1" id="cGG-JL-clm"/>
+                            <constraint firstItem="Ydc-lK-e6o" firstAttribute="trailing" secondItem="uZH-yg-ztG" secondAttribute="trailing" constant="13" id="man-HG-hS1"/>
+                            <constraint firstItem="Ydc-lK-e6o" firstAttribute="trailing" secondItem="ZEZ-Cx-aCL" secondAttribute="trailing" id="n4x-P2-5oe"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ydc-lK-e6o"/>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="ZEZ-Cx-aCL" id="oSo-6A-Uhc"/>
+                        <outlet property="segmentLeftMargin" destination="YnV-E4-j3C" id="LIL-cI-tBr"/>
+                        <outlet property="segmentRightMargin" destination="man-HG-hS1" id="f1s-az-rN3"/>
+                        <outlet property="segmentedControl" destination="uZH-yg-ztG" id="21l-P8-kaq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A7j-6O-D9P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1330" y="152"/>
         </scene>
         <!--Opened Orders View Controller-->
         <scene sceneID="NW5-HR-Lk5">
@@ -455,7 +507,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="phz-Eg-ITZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-751" y="154"/>
+            <point key="canvasLocation" x="-652" y="155"/>
         </scene>
         <!--Recharge Detail View Controller-->
         <scene sceneID="dYb-t7-FI8">

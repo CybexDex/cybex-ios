@@ -203,6 +203,7 @@ extension GameViewController {
         bridge.register(handlerName: "getUserName") { (paramters, callback) in
             callback?(self.getUserName())
         }
+        
         bridge.register(handlerName: "searchBalanceWithAsset") { (paramters, callback) in
             if let param = paramters,
                 let assetName = param["asset"] as? String
@@ -213,6 +214,7 @@ extension GameViewController {
                 callback?("")
             }
         }
+
         bridge.register(handlerName: "jsOpenUrl") { (paramters, callback) in
             if let param = paramters,
                 let depositUrl = param["url"] as? String {

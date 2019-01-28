@@ -9,6 +9,7 @@
 import Foundation
 import ESPullToRefresh
 import XLActionController
+import SwiftTheme
 
 extension UIViewController {
     @objc func refreshViewController() {//become active 后台到前台 或者double click tab
@@ -109,7 +110,14 @@ extension UIViewController {
 
 
 extension BaseViewController: UIPopoverPresentationControllerDelegate {
-    func presentPopOverViewController(_ vc: UIViewController, size: CGSize, sourceView: UIView, offset: CGPoint, direction: UIPopoverArrowDirection) {
+    func presentPopOverViewController(_ vc: UIViewController, size: CGSize, sourceView: UIView, offset: CGPoint, direction: UIPopoverArrowDirection, arrowColor: UIColor? = nil) {
+        if let color = arrowColor {
+            CybexPopoverBackgroundView.arrowColor = color
+        }
+        else {
+            CybexPopoverBackgroundView.arrowColor = ThemeManager.currentThemeIndex == 0 ? UIColor.darkFour : UIColor.white
+        }
+
         vc.preferredContentSize = size
 
         vc.modalPresentationStyle = .popover

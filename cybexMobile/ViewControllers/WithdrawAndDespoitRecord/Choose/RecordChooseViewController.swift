@@ -21,6 +21,7 @@ enum RecordChooseType: Int {
     case time
     case kind
     case orderbook
+    case vesting
 }
 
 class RecordChooseViewController: BaseViewController {
