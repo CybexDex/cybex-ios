@@ -14,6 +14,7 @@ enum DataBaseCatogery: String {
     case getFullAccounts
     case getChainId
     case getObjects
+    case lookupAssetSymbols
     case subscribeToMarket
     case getLimitOrders
     case getBalanceObjects
@@ -22,6 +23,7 @@ enum DataBaseCatogery: String {
     case getBlock
     case getTicker
     case getBlockHeader
+    case getRecentTransactionById
 }
 
 struct GetRequiredFees: JSONRPCKit.Request, JSONRPCResponse {
@@ -157,8 +159,8 @@ struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
                 var headBlockNumber = ""
                 for res in response.first! {
                     if refLib {
-                        if res.key == "last_irreversible_block_num" {
-                            headBlockNumber = String(describing: res.value)
+                        if res.key == "last_irreversible_block_num", let value = res.value as? Int {
+                            headBlockNumber = String(describing: value)
                         }
                     }
                     else {
@@ -173,7 +175,31 @@ struct GetObjectsRequest: JSONRPCKit.Request, JSONRPCResponse {
             }
 
             return response.map { data in
+                return AssetInfo.deserialize(from: data)
+            }
+        } else {
+            throw CastError(actualValue: resultObject, expectedType: Response.self)
+        }
 
+    }
+}
+
+struct LookupAssetSymbolsRequest: JSONRPCKit.Request, JSONRPCResponse {
+    var names: [String]
+
+    var response: RPCSResponse
+
+    var method: String {
+        return "call"
+    }
+
+    var parameters: Any? {
+        return [ApiCategory.database, DataBaseCatogery.lookupAssetSymbols.rawValue.snakeCased(), [names]]
+    }
+
+    func transferResponse(from resultObject: Any) throws -> Any {
+        if let response = resultObject as? [[String: Any]] {
+            return response.map { data in
                 return AssetInfo.deserialize(from: data)
             }
         } else {
@@ -320,5 +346,23 @@ struct GetBlockHeaderRequest: JSONRPCKit.Request, JSONRPCResponse {
         let data = JSON(resultObject)
 
         return data["previous"].stringValue
+    }
+}
+
+struct GetRecentTransactionById: JSONRPCKit.Request, JSONRPCResponse {
+    var id: String
+
+    var response: RPCSResponse
+
+    var method: String {
+        return "call"
+    }
+
+    var parameters: Any? {
+        return [ApiCategory.database, DataBaseCatogery.getRecentTransactionById.rawValue.snakeCased(), [id]]
+    }
+
+    func transferResponse(from resultObject: Any) throws -> Any {
+        return resultObject
     }
 }

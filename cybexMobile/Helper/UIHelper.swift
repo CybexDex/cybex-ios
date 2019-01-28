@@ -8,10 +8,25 @@
 
 import Foundation
 import SwiftTheme
+import NotificationBanner
 
 class UIHelper {
     enum Page: CGFloat {
         case margin = 13
+    }
+
+    class func showSuccessTop(_ str: String) -> NotificationBanner {
+        let banner = NotificationBanner(title: "", subtitle: str, style: .success)
+        banner.duration = 2
+        banner.subtitleLabel?.textAlignment = NSTextAlignment.center
+        banner.autoDismiss = false
+        banner.dismissOnSwipeUp = true
+        banner.dismissOnTap = true
+        if banner.bannerQueue.numberOfBanners == 0 {
+            banner.show()
+        }
+
+        return banner
     }
 
     class func getWithdrawDetailInfo(addressInfo: String,

@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountOpenedOrdersView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
-                <outlet property="segment" destination="ylc-ha-wFR" id="X31-UN-wPh"/>
                 <outlet property="tableView" destination="xvr-Kv-Gfr" id="dFp-rg-nzC"/>
             </connections>
         </placeholder>
@@ -21,28 +20,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ylc-ha-wFR">
-                    <rect key="frame" x="13" y="21.5" width="349" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="29" id="Jtn-R8-PZ0"/>
-                    </constraints>
-                    <segments>
-                        <segment title="All"/>
-                        <segment title="Buy"/>
-                        <segment title="Sell"/>
-                    </segments>
-                    <color key="tintColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="locali0" value="opened.all"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="locali1" value="opened.buy"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="locali2" value="opened.sell"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="segmentDidClicked:" destination="-1" eventType="valueChanged" id="tYh-0b-t1S"/>
-                    </connections>
-                </segmentedControl>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="92" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xvr-Kv-Gfr">
-                    <rect key="frame" x="0.0" y="51.5" width="375" height="615.5"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
@@ -59,12 +38,9 @@
                 </tableView>
             </subviews>
             <constraints>
-                <constraint firstItem="ocK-ow-3lP" firstAttribute="trailing" secondItem="ylc-ha-wFR" secondAttribute="trailing" constant="13" id="5fa-aV-rso"/>
-                <constraint firstItem="xvr-Kv-Gfr" firstAttribute="top" secondItem="ylc-ha-wFR" secondAttribute="bottom" constant="1" id="GTq-a8-nGZ"/>
                 <constraint firstItem="xvr-Kv-Gfr" firstAttribute="leading" secondItem="ocK-ow-3lP" secondAttribute="leading" id="ZyW-hv-tyL"/>
                 <constraint firstItem="xvr-Kv-Gfr" firstAttribute="trailing" secondItem="ocK-ow-3lP" secondAttribute="trailing" id="eP6-af-Unp"/>
-                <constraint firstItem="ylc-ha-wFR" firstAttribute="leading" secondItem="ocK-ow-3lP" secondAttribute="leading" constant="13" id="jBX-o6-B6p"/>
-                <constraint firstItem="ylc-ha-wFR" firstAttribute="top" secondItem="ocK-ow-3lP" secondAttribute="top" constant="1.5" id="wXF-MN-V6N"/>
+                <constraint firstItem="xvr-Kv-Gfr" firstAttribute="top" secondItem="ocK-ow-3lP" secondAttribute="top" id="hqZ-RZ-1hh"/>
                 <constraint firstAttribute="bottom" secondItem="xvr-Kv-Gfr" secondAttribute="bottom" id="xux-5O-UPa"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ocK-ow-3lP"/>

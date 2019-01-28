@@ -394,7 +394,6 @@
 		72F817C421BA58F100575F56 /* GameActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C021BA58F100575F56 /* GameActions.swift */; };
 		72F817C521BA58F100575F56 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C121BA58F100575F56 /* GameViewController.swift */; };
 		72F817C621BA58F100575F56 /* GameReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C221BA58F100575F56 /* GameReducers.swift */; };
-		72F817C921BA590800575F56 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817C821BA590800575F56 /* GameModel.swift */; };
 		72F817CE21BA635600575F56 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F817CD21BA635600575F56 /* GameManager.swift */; };
 		72FF06B6216F4CD2003B09A8 /* ComprehensiveCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E2A8E92151F9DB00FBB3CB /* ComprehensiveCoordinator.swift */; };
 		730229A1212E52B50073D5CE /* ETOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730229A0212E52B50073D5CE /* ETOManager.swift */; };
@@ -525,6 +524,9 @@
 		73539C502179A210008395AC /* URLPathComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C462179A20F008395AC /* URLPathComponent.swift */; };
 		73539C512179A210008395AC /* URLMatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73539C472179A20F008395AC /* URLMatchResult.swift */; };
 		73539C6F2179AAA8008395AC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 73539C6E2179AAA8008395AC /* libsqlite3.tbd */; };
+		7354F54021F57660000AA621 /* MarqueeLabelSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7354F53F21F57660000AA621 /* MarqueeLabelSwift.framework */; };
+		7354F54221F57666000AA621 /* NotificationBanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7354F54121F57666000AA621 /* NotificationBanner.framework */; };
+		7354F54421F5766D000AA621 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7354F54321F5766D000AA621 /* SnapKit.framework */; };
 		73587E9D2133EB15006CF8A6 /* RPCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */; };
 		73587EA021352AD8006CF8A6 /* ETOMGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587E9F21352AD8006CF8A6 /* ETOMGService.swift */; };
 		73587EAB2137C057006CF8A6 /* ETOCrowdActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EA72137C057006CF8A6 /* ETOCrowdActions.swift */; };
@@ -535,7 +537,6 @@
 		73587EB52137C69B006CF8A6 /* ETOCrowdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */; };
 		73587EB62137C69B006CF8A6 /* ETOCrowdViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */; };
 		735A3D022160A73200FC8922 /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735A3D012160A73000FC8922 /* NBLCommonModule.framework */; };
-		736761E321BE464A0065FD35 /* MOHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E221BE464A0065FD35 /* MOHService.swift */; };
 		736761E521BE46750065FD35 /* RegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E421BE46750065FD35 /* RegisterService.swift */; };
 		736761E821BE4C2D0065FD35 /* IMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E721BE4C2D0065FD35 /* IMService.swift */; };
 		736761EA21BE4DEF0065FD35 /* MDPWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */; };
@@ -549,6 +550,7 @@
 		73731D8D21A538CF005B9B3C /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8C21A538CF005B9B3C /* Result.swift */; };
 		73731D9021A53C45005B9B3C /* CryptoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8F21A53C45005B9B3C /* CryptoData.swift */; };
 		73731D9221A53C60005B9B3C /* CryptoAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D9121A53C60005B9B3C /* CryptoAlgorithm.swift */; };
+		7377A42F21F179CF00EEBEF0 /* CryptoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7377A42E21F179CF00EEBEF0 /* CryptoHelper.swift */; };
 		737E596021A53C8D001199E4 /* CryptoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E595F21A53C8D001199E4 /* CryptoKey.swift */; };
 		737E596221A53CA5001199E4 /* CryptoHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E596121A53CA5001199E4 /* CryptoHelpers.swift */; };
 		737E596421A53CC7001199E4 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E596321A53CC7001199E4 /* CryptoError.swift */; };
@@ -653,6 +655,8 @@
 		7392F5EB219ABA1E007FFCD0 /* InputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392F5E0219ABA1E007FFCD0 /* InputItem.swift */; };
 		7392F5ED219AC055007FFCD0 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7392F5EC219AC055007FFCD0 /* SampleData.swift */; };
 		7392F5EF219AC6A8007FFCD0 /* MessageKitAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7392F5EE219AC6A8007FFCD0 /* MessageKitAssets.bundle */; };
+		73930B3821F870E600840FAD /* AccountHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73930B3721F870E600840FAD /* AccountHistoryService.swift */; };
+		7395F9EE21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7395F9ED21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework */; };
 		7398323D2179EED400C4A594 /* cybex_ios_core_cpp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */; };
 		7398BEBF2181BFD3004C042E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398BEBE2181BFD3004C042E /* Style.swift */; };
 		7398BEC32181C1AE004C042E /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398BEC22181C1AE004C042E /* R.generated.swift */; };
@@ -684,6 +688,13 @@
 		73A45F9321E6EA4500B52A7F /* ScanPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A45F9021E6EA4500B52A7F /* ScanPreviewView.swift */; };
 		73A45F9421E6EA4500B52A7F /* ScanCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A45F9121E6EA4500B52A7F /* ScanCornerView.swift */; };
 		73A45F9621E8476E00B52A7F /* DeployTicketResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A45F9521E8476A00B52A7F /* DeployTicketResultViewController.swift */; };
+		73A4CBAA21EEDB6E00C93DA6 /* PINCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A4CBA721EEDB6D00C93DA6 /* PINCache.framework */; };
+		73A4CBAB21EEDB6E00C93DA6 /* PINRemoteImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A4CBA821EEDB6D00C93DA6 /* PINRemoteImage.framework */; };
+		73A4CBAC21EEDB6E00C93DA6 /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A4CBA921EEDB6D00C93DA6 /* AsyncDisplayKit.framework */; };
+		73A4CBAE21EEDE0400C93DA6 /* PINOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A4CBAD21EEDE0400C93DA6 /* PINOperation.framework */; };
+		73A4CBB021EF463600C93DA6 /* libz.1.2.11.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A4CBAF21EF463600C93DA6 /* libz.1.2.11.tbd */; };
+		73A4CBB421EF493D00C93DA6 /* DataCompression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4CBB321EF493D00C93DA6 /* DataCompression.swift */; };
+		73A4CBB821F073A100C93DA6 /* BinUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4CBB721F073A000C93DA6 /* BinUtils.swift */; };
 		73AA83A521A7D1F2001B24DF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AA83A421A7D1F2001B24DF /* Utils.swift */; };
 		73D012992159D71800C95896 /* URLNavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D012982159D71800C95896 /* URLNavigationMap.swift */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
@@ -692,6 +703,9 @@
 		73D9C20D21E5CC47005B9022 /* TangramKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D9C20C21E5CC46005B9022 /* TangramKit.framework */; };
 		73D9C21121E5D3F9005B9022 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7345FD7B219E7DE40066BD0E /* PromiseKit.framework */; };
 		73D9C21421E5EBD5005B9022 /* DepolyTicketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9C21321E5EBD5005B9022 /* DepolyTicketViewController.swift */; };
+		73E61F6821F9B3AD00B54612 /* PostVestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6721F9B3AD00B54612 /* PostVestingView.swift */; };
+		73E61F6A21FABD5500B54612 /* PostVestingView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */; };
+		73E61F6D21FB105D00B54612 /* OrderPageTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
 		73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */; };
 		73F50BA32137D71F0071B08D /* ETOCrowdGridItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */; };
@@ -1252,7 +1266,6 @@
 		72F817C021BA58F100575F56 /* GameActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameActions.swift; sourceTree = "<group>"; };
 		72F817C121BA58F100575F56 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		72F817C221BA58F100575F56 /* GameReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReducers.swift; sourceTree = "<group>"; };
-		72F817C821BA590800575F56 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		72F817CD21BA635600575F56 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		730229A0212E52B50073D5CE /* ETOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOManager.swift; sourceTree = "<group>"; };
 		7307A8FF212518DB00BD6444 /* LGButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGButton.swift; sourceTree = "<group>"; };
@@ -1387,6 +1400,9 @@
 		73539C462179A20F008395AC /* URLPathComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLPathComponent.swift; sourceTree = "<group>"; };
 		73539C472179A20F008395AC /* URLMatchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLMatchResult.swift; sourceTree = "<group>"; };
 		73539C6E2179AAA8008395AC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		7354F53F21F57660000AA621 /* MarqueeLabelSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MarqueeLabelSwift.framework; path = Carthage/Build/iOS/MarqueeLabelSwift.framework; sourceTree = "<group>"; };
+		7354F54121F57666000AA621 /* NotificationBanner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationBanner.framework; path = Carthage/Build/iOS/NotificationBanner.framework; sourceTree = "<group>"; };
+		7354F54321F5766D000AA621 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		73587E9C2133EB14006CF8A6 /* RPCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RPCircularProgress.swift; sourceTree = "<group>"; };
 		73587E9F21352AD8006CF8A6 /* ETOMGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOMGService.swift; sourceTree = "<group>"; };
 		73587EA72137C057006CF8A6 /* ETOCrowdActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdActions.swift; sourceTree = "<group>"; };
@@ -1397,7 +1413,6 @@
 		73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdView.xib; sourceTree = "<group>"; };
 		73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdViewAdapter.swift; sourceTree = "<group>"; };
 		735A3D012160A73000FC8922 /* NBLCommonModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NBLCommonModule.framework; path = Carthage/Build/iOS/Static/NBLCommonModule.framework; sourceTree = "<group>"; };
-		736761E221BE464A0065FD35 /* MOHService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOHService.swift; sourceTree = "<group>"; };
 		736761E421BE46750065FD35 /* RegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterService.swift; sourceTree = "<group>"; };
 		736761E721BE4C2D0065FD35 /* IMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMService.swift; sourceTree = "<group>"; };
 		736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPWebSocketService.swift; sourceTree = "<group>"; };
@@ -1411,6 +1426,7 @@
 		73731D8C21A538CF005B9B3C /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		73731D8F21A53C45005B9B3C /* CryptoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoData.swift; sourceTree = "<group>"; };
 		73731D9121A53C60005B9B3C /* CryptoAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoAlgorithm.swift; sourceTree = "<group>"; };
+		7377A42E21F179CF00EEBEF0 /* CryptoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelper.swift; sourceTree = "<group>"; };
 		737E595F21A53C8D001199E4 /* CryptoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoKey.swift; sourceTree = "<group>"; };
 		737E596121A53CA5001199E4 /* CryptoHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelpers.swift; sourceTree = "<group>"; };
 		737E596321A53CC7001199E4 /* CryptoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoError.swift; sourceTree = "<group>"; };
@@ -1520,6 +1536,8 @@
 		7392F5E0219ABA1E007FFCD0 /* InputItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputItem.swift; sourceTree = "<group>"; };
 		7392F5EC219AC055007FFCD0 /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		7392F5EE219AC6A8007FFCD0 /* MessageKitAssets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MessageKitAssets.bundle; sourceTree = "<group>"; };
+		73930B3721F870E600840FAD /* AccountHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHistoryService.swift; sourceTree = "<group>"; };
+		7395F9ED21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WKWebViewJavascriptBridge.framework; path = Carthage/Build/iOS/WKWebViewJavascriptBridge.framework; sourceTree = "<group>"; };
 		7398323C2179EED400C4A594 /* cybex_ios_core_cpp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = cybex_ios_core_cpp.framework; path = Carthage/Build/iOS/cybex_ios_core_cpp.framework; sourceTree = "<group>"; };
 		7398BEBE2181BFD3004C042E /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		7398BEC22181C1AE004C042E /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
@@ -1551,6 +1569,13 @@
 		73A45F9021E6EA4500B52A7F /* ScanPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanPreviewView.swift; sourceTree = "<group>"; };
 		73A45F9121E6EA4500B52A7F /* ScanCornerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanCornerView.swift; sourceTree = "<group>"; };
 		73A45F9521E8476A00B52A7F /* DeployTicketResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeployTicketResultViewController.swift; sourceTree = "<group>"; };
+		73A4CBA721EEDB6D00C93DA6 /* PINCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINCache.framework; path = Carthage/Build/iOS/PINCache.framework; sourceTree = "<group>"; };
+		73A4CBA821EEDB6D00C93DA6 /* PINRemoteImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINRemoteImage.framework; path = Carthage/Build/iOS/PINRemoteImage.framework; sourceTree = "<group>"; };
+		73A4CBA921EEDB6D00C93DA6 /* AsyncDisplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AsyncDisplayKit.framework; path = Carthage/Build/iOS/AsyncDisplayKit.framework; sourceTree = "<group>"; };
+		73A4CBAD21EEDE0400C93DA6 /* PINOperation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINOperation.framework; path = Carthage/Build/iOS/PINOperation.framework; sourceTree = "<group>"; };
+		73A4CBAF21EF463600C93DA6 /* libz.1.2.11.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.11.tbd; path = usr/lib/libz.1.2.11.tbd; sourceTree = SDKROOT; };
+		73A4CBB321EF493D00C93DA6 /* DataCompression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCompression.swift; sourceTree = "<group>"; };
+		73A4CBB721F073A000C93DA6 /* BinUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinUtils.swift; sourceTree = "<group>"; };
 		73AA83A421A7D1F2001B24DF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		73BAB6CB839C8F409C3061833343A527 /* LockupAssetsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsSectionView.xib; sourceTree = "<group>"; };
 		73C298F5E89ECC37094FCC901A6B8D49 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
@@ -1559,6 +1584,9 @@
 		73D9C15421DF15CE005B9022 /* MarketDetailPageTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDetailPageTabViewController.swift; sourceTree = "<group>"; };
 		73D9C20C21E5CC46005B9022 /* TangramKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TangramKit.framework; path = Carthage/Build/iOS/TangramKit.framework; sourceTree = "<group>"; };
 		73D9C21321E5EBD5005B9022 /* DepolyTicketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepolyTicketViewController.swift; sourceTree = "<group>"; };
+		73E61F6721F9B3AD00B54612 /* PostVestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVestingView.swift; sourceTree = "<group>"; };
+		73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostVestingView+Layout.swift"; sourceTree = "<group>"; };
+		73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPageTabViewController.swift; sourceTree = "<group>"; };
 		73F50B9D2137D0B20071B08D /* ETO.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ETO.storyboard; sourceTree = "<group>"; };
 		73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemView.swift; sourceTree = "<group>"; };
 		73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdGridItemView.xib; sourceTree = "<group>"; };
@@ -1739,6 +1767,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73A4CBB021EF463600C93DA6 /* libz.1.2.11.tbd in Frameworks */,
+				7354F54221F57666000AA621 /* NotificationBanner.framework in Frameworks */,
+				7354F54421F5766D000AA621 /* SnapKit.framework in Frameworks */,
+				7395F9EE21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework in Frameworks */,
+				7354F54021F57660000AA621 /* MarqueeLabelSwift.framework in Frameworks */,
+				73A4CBAA21EEDB6E00C93DA6 /* PINCache.framework in Frameworks */,
+				73A4CBAE21EEDE0400C93DA6 /* PINOperation.framework in Frameworks */,
+				73A4CBAB21EEDB6E00C93DA6 /* PINRemoteImage.framework in Frameworks */,
+				73A4CBAC21EEDB6E00C93DA6 /* AsyncDisplayKit.framework in Frameworks */,
 				73D9C20D21E5CC47005B9022 /* TangramKit.framework in Frameworks */,
 				73539C6F2179AAA8008395AC /* libsqlite3.tbd in Frameworks */,
 				7231103B21805D7F0007E95D /* UMCommon.framework in Frameworks */,
@@ -2446,6 +2483,8 @@
 				72199D9821045DEA00575226 /* TransferListCellView.xib */,
 				221EC250210609A10059F856 /* TransferView.swift */,
 				221EC252210609B20059F856 /* TransferView.xib */,
+				73E61F6721F9B3AD00B54612 /* PostVestingView.swift */,
+				73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2744,21 +2783,12 @@
 			isa = PBXGroup;
 			children = (
 				72F817CC21BA633900575F56 /* GameManager */,
-				72F817C721BA58F900575F56 /* GameModel */,
 				72F817BF21BA58F100575F56 /* GameCoordinator.swift */,
 				72F817C021BA58F100575F56 /* GameActions.swift */,
 				72F817C121BA58F100575F56 /* GameViewController.swift */,
 				72F817C221BA58F100575F56 /* GameReducers.swift */,
 			);
 			path = Game;
-			sourceTree = "<group>";
-		};
-		72F817C721BA58F900575F56 /* GameModel */ = {
-			isa = PBXGroup;
-			children = (
-				72F817C821BA590800575F56 /* GameModel.swift */,
-			);
-			path = GameModel;
 			sourceTree = "<group>";
 		};
 		72F817CC21BA633900575F56 /* GameManager */ = {
@@ -2847,7 +2877,9 @@
 				73731D8421A5382A005B9B3C /* Delegate.swift */,
 				73731D8621A53846005B9B3C /* CallbackQueue.swift */,
 				73731D8821A53894005B9B3C /* NotificationToken.swift */,
+				73A4CBB721F073A000C93DA6 /* BinUtils.swift */,
 				73731D8A21A538AF005B9B3C /* KeychainStore.swift */,
+				73A4CBB321EF493D00C93DA6 /* DataCompression.swift */,
 				73731D8C21A538CF005B9B3C /* Result.swift */,
 			);
 			path = Common;
@@ -3122,7 +3154,7 @@
 				7391102621BA511F00412CE1 /* ETO */,
 				7391102521BA511600412CE1 /* GatewayQuery */,
 				7391102421BA510500412CE1 /* Gateway */,
-				7391102321BA50F600412CE1 /* MOH */,
+				7391102321BA50F600412CE1 /* AccountHistory */,
 				7391102221BA50DC00412CE1 /* Configuation */,
 			);
 			path = HTTP;
@@ -3186,12 +3218,12 @@
 			path = Configuation;
 			sourceTree = "<group>";
 		};
-		7391102321BA50F600412CE1 /* MOH */ = {
+		7391102321BA50F600412CE1 /* AccountHistory */ = {
 			isa = PBXGroup;
 			children = (
-				736761E221BE464A0065FD35 /* MOHService.swift */,
+				73930B3721F870E600840FAD /* AccountHistoryService.swift */,
 			);
-			path = MOH;
+			path = AccountHistory;
 			sourceTree = "<group>";
 		};
 		7391102421BA510500412CE1 /* Gateway */ = {
@@ -3510,6 +3542,14 @@
 				73A45F8921E5F1A300B52A7F /* DeployTicketView.swift */,
 			);
 			path = Ticket;
+			sourceTree = "<group>";
+		};
+		73E61F6B21FB103600B54612 /* OrderContainer */ = {
+			isa = PBXGroup;
+			children = (
+				73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */,
+			);
+			path = OrderContainer;
 			sourceTree = "<group>";
 		};
 		7A99BB351484E3D92442AE34D9258030 /* Cells */ = {
@@ -3891,6 +3931,15 @@
 		D76FD4AB2B1AA61D5AEAE8D2282BF35F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7354F54321F5766D000AA621 /* SnapKit.framework */,
+				7354F54121F57666000AA621 /* NotificationBanner.framework */,
+				7354F53F21F57660000AA621 /* MarqueeLabelSwift.framework */,
+				7395F9ED21F1D749008E6BC1 /* WKWebViewJavascriptBridge.framework */,
+				73A4CBAF21EF463600C93DA6 /* libz.1.2.11.tbd */,
+				73A4CBAD21EEDE0400C93DA6 /* PINOperation.framework */,
+				73A4CBA921EEDB6D00C93DA6 /* AsyncDisplayKit.framework */,
+				73A4CBA721EEDB6D00C93DA6 /* PINCache.framework */,
+				73A4CBA821EEDB6D00C93DA6 /* PINRemoteImage.framework */,
 				73D9C20C21E5CC46005B9022 /* TangramKit.framework */,
 				7345FD92219EC0A70066BD0E /* UICKeyChainStore.framework */,
 				7345FD7B219E7DE40066BD0E /* PromiseKit.framework */,
@@ -3967,6 +4016,7 @@
 				7333857821C0E1AD0026765F /* TradeHelper.swift */,
 				7333857C21C0EC400026765F /* AddressHelper.swift */,
 				7333857E21C0EC890026765F /* CashHelper.swift */,
+				7377A42E21F179CF00EEBEF0 /* CryptoHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -4074,6 +4124,7 @@
 		F189D4AC3A5BB2DB266277BAD8CB0EA4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				73E61F6B21FB103600B54612 /* OrderContainer */,
 				72F817BE21BA58E500575F56 /* Game */,
 				1957BC4603D51BA58EA334581171C0AD /* Account */,
 				72E2A8E62151F8E900FBB3CB /* Comprehensive */,
@@ -4636,7 +4687,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\necho \"ok\"\nswiftlint\nelse\necho \"warning: SwiftLint not installed, please brew install SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\necho \"ok\"\n#swiftlint\nelse\necho \"warning: SwiftLint not installed, please brew install SwiftLint\"\nfi\n";
 		};
 		BBC1AACC7085FF4AE6503CEDB7A25978 /* build auto increment */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4941,6 +4992,7 @@
 				73A331172194244800707D8F /* ChatReducers.swift in Sources */,
 				221C615D213685C00021C007 /* GridContentView.swift in Sources */,
 				730229A1212E52B50073D5CE /* ETOManager.swift in Sources */,
+				73A4CBB421EF493D00C93DA6 /* DataCompression.swift in Sources */,
 				BD76C30DD5E6DF9195A2DF3218C62F70 /* EmptySegue.swift in Sources */,
 				054514C4C6457A51CC46615D25768574 /* EntryActions.swift in Sources */,
 				E5401ED6E9547DC2097AC58606842B84 /* EntryCoordinator.swift in Sources */,
@@ -4970,11 +5022,13 @@
 				7333856821BFA4410026765F /* AppConfigration.swift in Sources */,
 				8691BEEE7629D4BE41D13D82D9AF29A9 /* GradientLabelView.swift in Sources */,
 				FF9F0639B5927B79A3EFC30AF470DE97 /* GradientLayer.swift in Sources */,
+				7377A42F21F179CF00EEBEF0 /* CryptoHelper.swift in Sources */,
 				221C6175213926570021C007 /* ETORecordListCoordinator.swift in Sources */,
 				9FFDE7661D05B455AFBA92F553A193FC /* GraphQLAPI.swift in Sources */,
 				73731D8D21A538CF005B9B3C /* Result.swift in Sources */,
 				728C280A215A36F70097840A /* RecordChooseReducers.swift in Sources */,
 				BDFF205572EB31DAD4702C934B9A81D1 /* GatewayService.swift in Sources */,
+				73A4CBB821F073A100C93DA6 /* BinUtils.swift in Sources */,
 				105EA57407E74D316C2918BA41771E3B /* HomeActions.swift in Sources */,
 				73539C482179A210008395AC /* NavigatorType.swift in Sources */,
 				7307A923212518DC00BD6444 /* Octicon.swift in Sources */,
@@ -5020,10 +5074,12 @@
 				7386F2B021216B2200ABC924 /* TransferAddressHomeReducers.swift in Sources */,
 				72AAC8B02106FC840040793F /* Record.swift in Sources */,
 				72D58298219C18B100BB9842 /* CBKMessageView.swift in Sources */,
+				73E61F6D21FB105D00B54612 /* OrderPageTabViewController.swift in Sources */,
 				80258D6F4C94ACC78C20B5ACE8BEAD2F /* LockupAssetsReducers.swift in Sources */,
 				85D46A1F0D3BBF12CF72903D466D9239 /* LockupAssetsSectionView.swift in Sources */,
 				72F817C421BA58F100575F56 /* GameActions.swift in Sources */,
 				B2B05000B81768D84E3FBE9B46392133 /* LockupAssetsView.swift in Sources */,
+				73930B3821F870E600840FAD /* AccountHistoryService.swift in Sources */,
 				7267DA0821350327004AF9AF /* ETOViewController.swift in Sources */,
 				221EC2352105B1930059F856 /* TitleTextView.swift in Sources */,
 				72F817C521BA58F100575F56 /* GameViewController.swift in Sources */,
@@ -5054,6 +5110,7 @@
 				724C5D4E2153956900FF1DE7 /* ComprehensiveItemView.swift in Sources */,
 				3B0EB65B210313B200F19C31 /* YourPortfolioHandleView.swift in Sources */,
 				CD017D1C374A5B06D3ECEC24936E0911 /* MyOpenedOrdersView.swift in Sources */,
+				73E61F6A21FABD5500B54612 /* PostVestingView+Layout.swift in Sources */,
 				031F69CC95D2906A4F8F4063776327F6 /* NSObject+Extensions.swift in Sources */,
 				73A331162194244800707D8F /* ChatViewController.swift in Sources */,
 				739EFB652181D10E00424061 /* UIPanGestureRecognizer+RxGesture.swift in Sources */,
@@ -5089,8 +5146,8 @@
 				7386F2A42121665100ABC924 /* AddressHomeReducers.swift in Sources */,
 				019AC681342BD1E978777A6A503E27B6 /* OrderBookActions.swift in Sources */,
 				7307A931212518F300BD6444 /* BaseView.swift in Sources */,
+				73E61F6821F9B3AD00B54612 /* PostVestingView.swift in Sources */,
 				7267DA0621350327004AF9AF /* ETOCoordinator.swift in Sources */,
-				72F817C921BA590800575F56 /* GameModel.swift in Sources */,
 				72E3A4CC214560580083E417 /* CybexWaitingView.swift in Sources */,
 				72DBCA7621391A4300905303 /* CybexWebViewController.swift in Sources */,
 				73539BC82178A7CB008395AC /* AsyncOperation.swift in Sources */,
@@ -5188,7 +5245,6 @@
 				F7C39F3DD49909044D9E8FF34ABF3F2D /* SimpleHTTPService.swift in Sources */,
 				7267DA2E21364BF7004AF9AF /* ETOHomeBannerView.swift in Sources */,
 				D519E052461ED8221B6CF5C9D9B7741C /* StyleContentView.swift in Sources */,
-				736761E321BE464A0065FD35 /* MOHService.swift in Sources */,
 				737F8C352145532A00DD522A /* String+Extensions.swift in Sources */,
 				345CA96631D318F012F0BB80ACD3BCCD /* StyleLabel.swift in Sources */,
 				733714BD2122D32500B2ED90 /* AddressCellView.swift in Sources */,

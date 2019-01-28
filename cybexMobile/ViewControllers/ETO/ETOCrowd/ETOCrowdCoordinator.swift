@@ -86,17 +86,18 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
             }
         }
 
-        guard !assetID.isEmpty,
-            let operation = BitShareCoordinator.getTransterOperation(0,
-                                                                     to_user_id: 0,
-                                                                     asset_id: assetID.getSuffixID,
-                                                                     amount: 0,
-                                                                     fee_id: 0,
-                                                                     fee_amount: 0,
-                                                                     memo: "",
-                                                                     from_memo_key: "",
-                                                                     to_memo_key: "") else { return }
+        guard !assetID.isEmpty else { return }
 
+        let operation = BitShareCoordinator.getTransterOperation(0,
+                                                                 to_user_id: 0,
+                                                                 asset_id: assetID.getSuffixID,
+                                                                 amount: 0,
+                                                                 fee_id: 0,
+                                                                 fee_amount: 0,
+                                                                 memo: "",
+                                                                 from_memo_key: "",
+                                                                 to_memo_key: "")
+        
         CybexChainHelper.calculateFee(operation, operationID: .transfer, focusAssetId: assetID) { (success, amount, feeId) in
             let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
 
@@ -207,17 +208,12 @@ extension ETOCrowdCoordinator: ETOCrowdStateManagerProtocol {
                                                                       memo: "",
                                                                       from_memo_key: "",
                                                                       to_memo_key: "")
-                    guard let ope = jsonstr else {
-                        main {
-                            callback("")
-                        }
-                        return
-                    }
+
                     let withdrawRequest = BroadcastTransactionRequest(response: { (data) in
                         main {
                             callback(data)
                         }
-                    }, jsonstr: ope)
+                    }, jsonstr: jsonstr)
                     CybexWebSocketService.shared.send(request: withdrawRequest)
                 } else {
                     main {

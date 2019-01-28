@@ -1,0 +1,9 @@
+{
+  "commitish" : "1.1.1",
+  "iOS" : [
+    {
+      "name" : "PINOperation",
+      "hash" : "dca2227d290ce8823067922fea0127ddba439650499110dc6cd420aafaa1be13"
+    }
+  ]
+}

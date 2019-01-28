@@ -56,7 +56,11 @@ class EvaViewController: BaseViewController {
         guard let model = data else { return }
         self.evaView.adapterModelToEvaView(model)
         self.evaView.updateHeight()
-        self.containerViewController?.updateMarketListHeight(self.evaView.heightWithSafeAreaTop + 76)
+        performSelector(onMainThread: #selector(adjustContainerHeight), with: nil, waitUntilDone: false)
+    }
+
+    @objc func adjustContainerHeight() {
+        self.containerViewController?.updateMarketListHeight(self.evaView.height + 44 + 76)
     }
 
     func fetchData() {

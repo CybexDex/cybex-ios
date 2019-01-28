@@ -259,10 +259,10 @@ extension UIViewController: ShowManagerDelegate {
 
     func returnUserPassword(_ sender: String, textView: CybexTextView) {
         ShowToastManager.shared.hide()
-        if textView.viewType == .code {
-            self.codePassed(GameModel.codeArray.contains(sender))
-            return
-        }
+//        if textView.viewType == .code {
+//            self.codePassed(GameModel.codeArray.contains(sender))
+//            return
+//        }
         
         
         passwordDetecting()

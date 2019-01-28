@@ -14,4 +14,10 @@ import RxCocoa
 struct MyHistoryState: BaseState {
     var pageState: BehaviorRelay<PageState> = BehaviorRelay(value: .initial)
     var context: BehaviorRelay<RouteContext?> = BehaviorRelay(value: nil)
+
+    var fillOrders: BehaviorRelay<[LimitOrderStatus]> = BehaviorRelay(value: [])
+}
+
+struct FillOrderDataFetchedAction: Action {
+    var data: [LimitOrderStatus]
 }

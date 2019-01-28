@@ -155,8 +155,10 @@ class RechargeDetailViewController: BaseViewController {
                         self.contentView.addressView.addressState = .fail
                         return
                     }
-                    if let balance = self.balance, let balanceInfo = appData.assetInfo[balance.assetType] {
-                        let assetName = balanceInfo.symbol.filterJade
+
+                    if let trade = self.trade, let tradeInfo = appData.assetInfo[trade.id] {
+                        let assetName = tradeInfo.symbol.filterJade
+
                         self.contentView.addressView.addressState = .loading
                         RechargeDetailCoordinator.verifyAddress(assetName, address: address, callback: { (success) in
                             if success {

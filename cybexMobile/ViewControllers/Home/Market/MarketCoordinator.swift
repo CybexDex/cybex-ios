@@ -73,20 +73,18 @@ extension MarketCoordinator: MarketCoordinatorProtocol {
         guard let vc = R.storyboard.comprehensive.recordChooseViewController(),
             let marketVC = self.rootVC.topViewController as? MarketViewController,
             let selectedView = marketVC.selectedDropKindView else { return }
-        vc.preferredContentSize = CGSize(width: selectedView.width, height: selectedView.dropKind == .time ? 102 : 136)
-        vc.modalPresentationStyle = .popover
-        vc.popoverPresentationController?.popoverBackgroundViewClass = CybexPopoverBackgroundView.self
-        vc.popoverPresentationController?.sourceView = selectedView
-        vc.popoverPresentationController?.sourceRect = selectedView.bounds
-        vc.popoverPresentationController?.delegate = marketVC
-        vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
-        vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.white.hexString(true)]
+
         vc.typeIndex = selectedView.dropKind == .time ? .time : .kind
+        vc.selectedIndex = selectedView.dropKind == .time ? marketVC.daySelectedIndex : marketVC.indicatorSelectedIndex
         vc.delegate = marketVC
         vc.coordinator = RecordChooseCoordinator(rootVC: self.rootVC)
-        marketVC.present(vc, animated: true) {
-            vc.view.superview?.cornerRadius = 2
-        }
+
+        marketVC.presentPopOverViewController(vc,
+                                              size: CGSize(width: selectedView.width,
+                                                           height: selectedView.dropKind == .time ? 102 : 136),
+                                              sourceView: selectedView,
+                                              offset: CGPoint.zero,
+                                              direction: .up)
     }
 }
 

@@ -29,7 +29,8 @@ class CybexChainHelper {
     class func blockchainParamsRefLib(callback: @escaping (TransactionBaseType) -> Void) {
         let requeset = GetObjectsRequest(ids: [ObjectID.dynamicGlobalPropertyObject.rawValue.snakeCased()], refLib: true) { (infos) in
             if var infos = infos as? TransactionBaseType {
-                let request = GetBlockHeaderRequest(blockNum: infos.block_num) { result in
+                let nextBlockNum = infos.block_num.int! + 1
+                let request = GetBlockHeaderRequest(blockNum: nextBlockNum.string) { result in
                     if let result = result as? String {
                         infos.block_id = result
                         callback(infos)

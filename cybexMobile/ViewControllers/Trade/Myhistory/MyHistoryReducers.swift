@@ -12,5 +12,11 @@ import ReSwift
 func myHistoryReducer(action: Action, state: MyHistoryState?) -> MyHistoryState {
     let state = state ?? MyHistoryState()
 
+    switch action {
+    case let action as FillOrderDataFetchedAction:
+        state.fillOrders.accept(action.data)
+    default:
+        break
+    }
     return state
 }

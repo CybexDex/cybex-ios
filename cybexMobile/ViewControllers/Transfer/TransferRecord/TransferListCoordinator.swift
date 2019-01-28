@@ -17,7 +17,7 @@ protocol TransferListCoordinatorProtocol {
 protocol TransferListStateManagerProtocol {
     var state: TransferListState { get }
 
-    func reduceTransferRecords()
+    func fetchTransferRecords(_ page: Int, callback: ((Bool) -> Void)?)
 }
 
 class TransferListCoordinator: NavCoordinator {
@@ -43,9 +43,25 @@ extension TransferListCoordinator: TransferListStateManagerProtocol {
         return store.state
     }
 
-    func reduceTransferRecords() {
-        if let data = UserManager.shared.transferRecords.value {
-            self.store.dispatch(ReduceTansferRecordsAction(data: data))
+    func fetchTransferRecords(_ page: Int, callback: ((Bool) -> Void)?) {
+        guard let uid = UserManager.shared.account.value?.id else { return }
+        AccountHistoryService.request(target: .getTransferRecord(userId: uid, page: page), success: { (json) in
+            let times = json.arrayValue.map({ $0["timestamp"].stringValue })
+
+            if let model = [TransferRecord].deserialize(from: json.arrayValue.compactMap { $0["op"][1].dictionaryObject }) as? [TransferRecord] {
+                var vmData: [(TransferRecord, time: String)] = []
+                for (i, v) in model.enumerated() {
+                    vmData.append((v, times[i]))
+                }
+
+                self.store.dispatch(ReduceTansferRecordsAction(data: vmData))
+                callback?(model.count != 20)
+            }
+
+        }, error: { (error) in
+
+        }) { (error) in
+
         }
     }
 }

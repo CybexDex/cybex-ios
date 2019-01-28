@@ -455,6 +455,14 @@ extension String {
         
         return Int32(self)!
     }
+
+    var int64: Int64 {
+        if self == "" {
+            return 0
+        }
+
+        return Int64(self)!
+    }
     
     func tradePriceAndAmountDecimal(_ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> (price: String, pricision: Int, amountPricision: Int) {
         return self.decimal().tradePriceAndAmountDecimal(roundingMode)

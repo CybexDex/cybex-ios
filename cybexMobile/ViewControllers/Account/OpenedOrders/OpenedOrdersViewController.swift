@@ -15,14 +15,19 @@ import TinyConstraints
 import Localize_Swift
 import cybex_ios_core_cpp
 import Repeat
+import XLPagerTabStrip
 
 enum OpenedOrdersViewControllerPageType {
     case exchange
     case account
 }
 
-class OpenedOrdersViewController: BaseViewController {
-    
+class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
+
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: R.string.localizable.orders_my_open_order.key.localized())
+    }
+
     var coordinator: (OpenedOrdersCoordinatorProtocol & OpenedOrdersStateManagerProtocol)?
     var pageType: OpenedOrdersViewControllerPageType = .account
     var pair: Pair? {
@@ -40,14 +45,19 @@ class OpenedOrdersViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        _ = UserManager.shared.balance
+
         self.coordinator?.connect()
         self.startLoading()
         setupData()
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        disappear()
+    }
     
     func setupUI() {
-        self.localizedText = R.string.localizable.openedTitle.key.localizedContainer()
         switchContainerView()
     }
     
@@ -64,9 +74,9 @@ class OpenedOrdersViewController: BaseViewController {
     func setupEvent() {
 
     }
-    
+
     func showOrderInfo() {
-        guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0) else { return }
+        let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0)
         guard let order = self.order else { return }
         startLoading()
         CybexChainHelper.calculateFee(operation,

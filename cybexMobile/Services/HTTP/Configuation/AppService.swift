@@ -177,9 +177,7 @@ extension AppAPI: TargetType {
     var task: Task {
         switch self {
         default:
-            return .requestCompositeParameters(bodyParameters: parameters,
-                                               bodyEncoding: JSONEncoding.default,
-                                               urlParameters: urlParameters)
+            return .requestParameters(parameters: urlParameters, encoding: URLEncoding.default)
         }
     }
 

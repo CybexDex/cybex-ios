@@ -386,7 +386,7 @@ extension CybexWebSocketService: SRWebSocketDelegate {
 
         //    log.info("enter receieveMessage --- current operations Count: \(queue.operationCount)")
         let data = JSON(parseJSON: message)
-//            log.info("receive message: \(data.rawString()!)")
+//            Log.print("receive message: \(data.rawString()!)\n")
 
         guard let sendId = data["id"].int else {
             return

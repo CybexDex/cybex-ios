@@ -12,7 +12,7 @@ import RxCocoa
 import ReSwift
 
 protocol RecordChooseViewControllerDelegate {
-    func returnSelectedRow(_ sender: RecordChooseViewController, info: String)
+    func returnSelectedRow(_ sender: RecordChooseViewController, info: String, index: Int)
 }
 
 enum RecordChooseType: Int {
@@ -21,6 +21,7 @@ enum RecordChooseType: Int {
     case time
     case kind
     case orderbook
+    case vesting
 }
 
 class RecordChooseViewController: BaseViewController {
@@ -44,11 +45,22 @@ class RecordChooseViewController: BaseViewController {
         setupData()
         setupUI()
         setupEvent()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
+
         super.viewWillAppear(animated)
         self.coordinator?.fetchData(typeIndex.rawValue, maxCount: maxCount, count: count)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if updatePopOverViewCornerIfNeeded() {
+            removeDimmingViewMask()
+            updateDimmingViewAlpha(0)
+        }
     }
 
     override func refreshViewController() {
@@ -149,7 +161,7 @@ extension RecordChooseViewController: UITableViewDataSource, UITableViewDelegate
         if let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.recordChooseCell.name, for: indexPath) as? RecordChooseCell {
             if let data = self.coordinator?.state.data.value {
                 cell.setup(data[indexPath.row])
-                if self.typeIndex == .orderbook, indexPath.row == selectedIndex {
+                if indexPath.row == selectedIndex {
                     cell.cellView.nameLabel.textColor = UIColor.pastelOrange
                 }
             }
@@ -169,12 +181,12 @@ extension RecordChooseViewController {
             let data = self.coordinator?.state.data.value {
             
             for(index, info) in data.enumerated() {
-                if info == result {
+                if info.filterJade == result {
                     self.selectedIndex = index
                     break
                 }
             }
-            self.delegate?.returnSelectedRow(self, info: result)
+            self.delegate?.returnSelectedRow(self, info: result, index: self.selectedIndex)
         }
     }
 }
