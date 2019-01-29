@@ -564,6 +564,8 @@
 "vesting_time_unit_minute" = "分钟";
 "vesting_time_unit_hour" = "小时";
 "vesting_time_unit_day" = "天";
+"vesting_lock_time_hint_title" = "锁定时间";
+"vesting_lock_time_hint" = "您可以为转账设置一个锁定时长，从转账成功开始计算，锁定时间到期后，接收方可以领取并使用该笔资产。当收入方账户下有多个公钥时，您需要指定一个公钥作为领取人。";
 
 "orders_my_open_order" = "当前委托";
 "orders_my_filled_order" = "历史委托";

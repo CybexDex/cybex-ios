@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import GrowingTextView
 
 extension PostVestingView {
     func setupUI() {
@@ -33,6 +34,16 @@ extension PostVestingView {
         label.leftToRight(of:button, offset: 8)
         label.centerY(to: button)
 
+        helpButton = UIButton()
+        helpButton.setImage(R.image.cloud_explain(), for: .normal)
+        helpButton.setImage(R.image.cloud_explain(), for: .selected)
+        helpButton.setTitle("", for: .normal)
+        helpButton.addTarget(self, action: #selector(showHintContent), for: .touchUpInside)
+        stackview.arrangedSubviews[0].addSubview(helpButton)
+        helpButton.centerY(to: label)
+        helpButton.leftToRight(of: label, offset: 2)
+        helpButton.width(helpButton.imageView?.image?.size.width ?? 0)
+
         let textfield = UITextField()
         textfield.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         textfield.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
@@ -40,6 +51,8 @@ extension PostVestingView {
 
         stackview.arrangedSubviews[1].addSubview(textfield)
         textfield.edges(to: textfield.superview!, excluding: .right, insets: UIEdgeInsets(top: 10, left: 12, bottom: -10, right: -10))
+        textfield.keyboardType = .decimalPad
+        textfield.delegate = self
         timeTextFiled = textfield
 
         let dropMenu = DropDownBoxView()
@@ -56,36 +69,65 @@ extension PostVestingView {
         dropMenu.leftToRight(of: textfield, offset: 10)
         dropButton = dropMenu
 
-        let line = UIView()
-        line.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]
-        stackview.arrangedSubviews[1].addSubview(line)
-        line.height(1)
-        line.edges(to: line.superview!, excluding: .top, insets: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: -12))
-
-        let textfield2 = UITextField()
-        textfield2.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        textfield2.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
-        textfield2.attributedPlaceholder = NSMutableAttributedString.init(string: R.string.localizable.vesting_pubkey_hint.key.localized(), attributes: [NSAttributedString.Key.foregroundColor: UIColor.steel50, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
-        stackview.arrangedSubviews[2].addSubview(textfield2)
-        textfield2.edges(to: textfield2.superview!, excluding: .right, insets: UIEdgeInsets(top: 10, left: 12, bottom: 0, right: 0))
-        pubkeyTextFiled = textfield2
+        let textview = GrowingTextView()
+        textview.backgroundColor = .clear
+        textview.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
+        textview.font = UIFont.systemFont(ofSize: 16)
+        textview.attributedPlaceholder = NSMutableAttributedString.init(string: R.string.localizable.vesting_pubkey_hint.key.localized(), attributes: [NSAttributedString.Key.foregroundColor: UIColor.steel50, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
+        stackview.arrangedSubviews[2].addSubview(textview)
+        textview.delegate = self
+        textview.contentInset = .zero
+        textview.textContainerInset = .zero
+        textview.edges(to: textview.superview!, excluding: .right, insets: UIEdgeInsets(top: 10, left: 12, bottom: 0, right: 0))
+        pubkeyTextview = textview
 
         let button2 = UIButton()
         button2.setImage(R.image.icDown24Px(), for: .normal)
         button2.setTitle("", for: .normal)
         button2.addTarget(self, action: #selector(choosePubKey), for: .touchUpInside)
         stackview.arrangedSubviews[2].addSubview(button2)
-        button2.centerY(to: textfield2)
+        button2.centerY(to: textview)
         button2.right(to: button2.superview!, offset: -12)
         button2.width(button2.imageView?.image?.size.width ?? 0)
-        textfield2.rightToLeft(of: button2, offset: -10)
-        
+        textview.rightToLeft(of: button2, offset: -10)
+
+        let line = UIView()
+        line.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]
+        stackview.arrangedSubviews[2].addSubview(line)
+        line.height(1)
+        line.edges(to: line.superview!, excluding: .bottom, insets: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: -12))
+
         let line2 = UIView()
         line2.theme_backgroundColor = [UIColor.dark.hexString(true), UIColor.paleGrey.hexString(true)]
         stackview.arrangedSubviews[3].addSubview(line2)
         line2.height(1)
         line2.edges(to: line2.superview!, insets: UIEdgeInsets(top: 10, left: 12, bottom: 0, right: -12))
 
+        hiddenPubkey()
         switchVestingstatus(true)
+    }
+}
+
+extension PostVestingView: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == timeTextFiled {
+            let countdots = textField.text?.components(separatedBy: ".").count ?? 0
+
+            if countdots > 0 && string == "." {
+                return false
+            }
+        }
+        return true
+    }
+
+}
+
+extension PostVestingView: UITextViewDelegate {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        if textView == pubkeyTextview {
+            choosePubKey()
+            return false
+        }
+        return true
     }
 }

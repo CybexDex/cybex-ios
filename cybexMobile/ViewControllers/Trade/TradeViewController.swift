@@ -55,16 +55,7 @@ class TradeViewController: BaseViewController {
     
     var selectedIndex: Int = 0 {
         didSet {
-            switch selectedIndex {
-            case 0:
-                moveToTradeView(isBuy: true)
-            case 1:
-                moveToTradeView(isBuy: false)
-            case 2:
-                moveToMyOpenedOrders()
-            default:
-                break
-            }
+            moveToPage()
         }
     }
 
@@ -135,10 +126,12 @@ class TradeViewController: BaseViewController {
     
     func setupEvent() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
-            guard let self = self else {return}
+            guard let self = self else { return }
+
             self.titlesView!.data = [R.string.localizable.trade_buy.key,
                                      R.string.localizable.trade_sell.key,
                                      R.string.localizable.trade_open_orders.key]
+            self.titlesView!.selectedIndex = self.selectedIndex
         })
     }
     
@@ -155,6 +148,18 @@ class TradeViewController: BaseViewController {
         self.navigationItem.titleView = tradeTitltView
     }
 
+    func moveToPage() {
+        switch selectedIndex {
+        case 0:
+            moveToTradeView(isBuy: true)
+        case 1:
+            moveToTradeView(isBuy: false)
+        case 2:
+            moveToMyOpenedOrders()
+        default:
+            break
+        }
+    }
     
     @objc override func rightAction(_ sender: UIButton) {
         self.coordinator?.openMyHistory()

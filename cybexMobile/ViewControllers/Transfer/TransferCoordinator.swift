@@ -372,7 +372,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
 
         var operationString: String!
         if try! currentVC.switchVestingObservable.value() {
-            operationString = BitShareCoordinator.getTransterWithVestingOperation(fromUserId.getSuffixID, to_user_id: toUserId.getSuffixID, asset_id: assetId.getSuffixID, amount: 0, fee_id: 0, fee_amount: 0, memo: memo, from_memo_key: "", to_memo_key: "", vestingPeroid: 0, toPubKey: "")
+            operationString = BitShareCoordinator.getTransterWithVestingOperation(fromUserId.getSuffixID, to_user_id: toUserId.getSuffixID, asset_id: assetId.getSuffixID, amount: 0, fee_id: 0, fee_amount: 0, memo: memo, from_memo_key: fromMemoKey, to_memo_key: toMemoKey, vestingPeroid: 0, toPubKey: "")
         }
         else {
             operationString = BitShareCoordinator.getTransterOperation(fromUserId.getSuffixID,

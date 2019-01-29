@@ -448,6 +448,18 @@ extension String {
         return 0
     }
 
+    var getPrefixOfID: String {
+        if self == "" {
+            return ""
+        }
+
+        var ids = self.components(separatedBy: ".")
+
+        _ = ids.popLast()
+
+        return ids.joined(separator: ".")
+    }
+
     var int32: Int32 {
         if self == "" {
             return 0

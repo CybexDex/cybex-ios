@@ -107,10 +107,10 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
     func fetchData(_ page: Int, callback: ((Bool) -> Void)?) {
         if case let .fillOrder(pair: pair) = type {
             if let pair = pair {
-                self.coordinator?.fetchMyOrderHistory(pair, page: page, callback: callback)
+                self.coordinator?.fetchMyOrderHistory(pair, lessThanOrderId: self.data.last?.oid, callback: callback)
             }
             else {
-                self.coordinator?.fetchAllMyOrderHistory(page, callback: callback)
+                self.coordinator?.fetchAllMyOrderHistory(self.data.last?.oid, callback: callback)
             }
         }
         else if case let .groupFillOrder(pair: pair) = type, let uid = UserManager.shared.account.value?.id {
@@ -126,6 +126,9 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
                     }
 
                     if self.page == 0 {
+                        if vmData.count < 20 {
+                            self.tableView.es.noticeNoMoreData()
+                        }
                         self.data = vmData
                     }
                     else {
@@ -149,9 +152,14 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
             guard let self = self else { return }
             self.endLoading()
 
+            guard data.count != 0 else { return }
+            
             let newData = data.map({ MyHistoryCellView.ViewModel.makeViewModelFrom(data: $0) })
 
             if self.page == 0 {
+                if newData.count < 20 {
+                    self.tableView.es.noticeNoMoreData()
+                }
                 self.data = newData
             }
             else {
@@ -173,10 +181,6 @@ extension MyHistoryViewController: UITableViewDelegate, UITableViewDataSource {
             let model = self.data[indexPath.row]
 
             cell.setup(model, indexPath: indexPath)
-
-            let canceledSelectedColor: UIColor = ThemeManager.currentThemeIndex == 0 ? .darkFour : .steel20
-            cell.contentView.backgroundColor = model.isCanceled ? canceledSelectedColor : .clear
-            
             return cell
         }
         return MyHistoryCell()

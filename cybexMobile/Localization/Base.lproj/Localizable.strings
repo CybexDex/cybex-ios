@@ -583,6 +583,8 @@
 "vesting_time_unit_minute" = "minutes";
 "vesting_time_unit_hour" = "hours";
 "vesting_time_unit_day" = "days";
+"vesting_lock_time_hint_title" = "With vesting period";
+"vesting_lock_time_hint" = "You may set up a lock-up period for each transfer, the recipient could claim and use the locked asset only after the lock-up period expires. You need to specify one public key when there are multiple public keys under the recipient’s account.";
 
 "orders_my_open_order" = "Open Orders";
 "orders_my_filled_order" = "Order History";

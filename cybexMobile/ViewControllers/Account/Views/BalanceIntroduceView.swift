@@ -10,57 +10,62 @@ import UIKit
 
 class BalanceIntroduceView: UIView {
 
-  @IBAction func ensureAction(_ sender: UIButton) {
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var content: UILabel!
+    var foreView: UIView!
 
-    self.removeFromSuperview()
-  }
+    @IBAction func ensureAction(_ sender: UIButton) {
 
-  fileprivate func setup() {
+        self.removeFromSuperview()
+    }
 
-  }
+    fileprivate func setup() {
+        foreView.theme_backgroundColor = [UIColor.black.withAlphaComponent(0.5).hexString(true), UIColor.steel50.hexString(true)]
+    }
 
-  override var intrinsicContentSize: CGSize {
-    return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
-  }
+    override var intrinsicContentSize: CGSize {
+        return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
+    }
 
-  fileprivate func updateHeight() {
-    layoutIfNeeded()
-    self.height = dynamicHeight()
-    invalidateIntrinsicContentSize()
-  }
+    fileprivate func updateHeight() {
+        layoutIfNeeded()
+        self.height = dynamicHeight()
+        invalidateIntrinsicContentSize()
+    }
 
-  fileprivate func dynamicHeight() -> CGFloat {
-    let lastView = self.subviews.last?.subviews.last
-    return lastView!.bottom
-  }
+    fileprivate func dynamicHeight() -> CGFloat {
+        let lastView = self.subviews.last?.subviews.last
+        return lastView!.bottom
+    }
 
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    layoutIfNeeded()
-  }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layoutIfNeeded()
+    }
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    loadViewFromNib()
-    setup()
-  }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        loadViewFromNib()
+        setup()
+    }
 
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    loadViewFromNib()
-    setup()
-  }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        loadViewFromNib()
+        setup()
+    }
 
-  fileprivate func loadViewFromNib() {
-    let bundle = Bundle(for: type(of: self))
-    let nibName = String(describing: type(of: self))
-    let nib = UINib.init(nibName: nibName, bundle: bundle)
-    guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
+    fileprivate func loadViewFromNib() {
+        let bundle = Bundle(for: type(of: self))
+        let nibName = String(describing: type(of: self))
+        let nib = UINib.init(nibName: nibName, bundle: bundle)
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             return
         }
 
-    addSubview(view)
-    view.frame = self.bounds
-    view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-  }
+        addSubview(view)
+        view.frame = self.bounds
+        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        foreView = view
+    }
 }

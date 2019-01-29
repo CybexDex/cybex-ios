@@ -58,6 +58,26 @@ extension UIView {
         set { self.frame.size = newValue }
         get { return self.frame.size }
     }
+
+    func allsubviews() -> [UIView] {
+        var subviewArray = [UIView]()
+        if self.subviews.count == 0 {
+            return subviewArray
+        }
+        for subview in self.subviews {
+            subviewArray += self.getSubviewsOfView(view: subview)
+            subviewArray.append(subview)
+        }
+        return subviewArray
+    }
+
+    func getSubviewsOfView(view: UIView) -> [UIView] {
+        var subviewArray = [UIView]()
+        for subview in view.subviews {
+            subviewArray.append(subview)
+        }
+        return subviewArray
+    }
 }
 
 @IBDesignable

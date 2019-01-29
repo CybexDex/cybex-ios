@@ -150,6 +150,13 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
         self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let self = self, let limitOrders = data, self.isVisible else { return }
             self.endLoading()
+            if limitOrders.count == 0 {
+                self.view.showNoData(R.string.localizable.openedorder_nodata.key.localized(), icon: R.image.img_no_records.name)
+                return
+            }
+            else {
+                self.view.hiddenNoData()
+            }
             if let accountView = self.containerView as? AccountOpenedOrdersView {
                 accountView.data = limitOrders
             } else if let pairOrder = self.containerView as? MyOpenedOrdersView {
