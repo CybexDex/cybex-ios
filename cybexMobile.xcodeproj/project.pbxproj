@@ -541,6 +541,7 @@
 		736761E821BE4C2D0065FD35 /* IMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E721BE4C2D0065FD35 /* IMService.swift */; };
 		736761EA21BE4DEF0065FD35 /* MDPWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */; };
 		736761EC21BE4DFD0065FD35 /* OCOWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761EB21BE4DFD0065FD35 /* OCOWebSocketService.swift */; };
+		736D287122018AC2004C6F31 /* CybexDatabaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736D287022018AC2004C6F31 /* CybexDatabaseApi.swift */; };
 		73731D7D21A2CE68005B9B3C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B4214D045B00761955 /* RxSwift.framework */; };
 		73731D8321A5378E005B9B3C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8221A5378E005B9B3C /* Helpers.swift */; };
 		73731D8521A5382A005B9B3C /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8421A5382A005B9B3C /* Delegate.swift */; };
@@ -1418,6 +1419,7 @@
 		736761E721BE4C2D0065FD35 /* IMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMService.swift; sourceTree = "<group>"; };
 		736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPWebSocketService.swift; sourceTree = "<group>"; };
 		736761EB21BE4DFD0065FD35 /* OCOWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCOWebSocketService.swift; sourceTree = "<group>"; };
+		736D287022018AC2004C6F31 /* CybexDatabaseApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybexDatabaseApi.swift; sourceTree = "<group>"; };
 		737258FAB6762972136E4188BF20F602 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
 		73731D8221A5378E005B9B3C /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		73731D8421A5382A005B9B3C /* Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
@@ -3150,6 +3152,7 @@
 		7391101121BA503700412CE1 /* HTTP */ = {
 			isa = PBXGroup;
 			children = (
+				736D287022018AC2004C6F31 /* CybexDatabaseApi.swift */,
 				106A644C21D47A2F00112A4C /* Eva */,
 				8CD40C5E84A00D4E3920E1AFF7D89F87 /* SimpleHTTPService.swift */,
 				736761E621BE4C220065FD35 /* IM */,
@@ -4880,6 +4883,7 @@
 				46F85B0BF83E45545572AF39E2A2F48B /* Balance.swift in Sources */,
 				94BFDD245BD4F1E4274CC4D8C0AC3FCD /* BalanceIntroduceView.swift in Sources */,
 				73F50BA42137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift in Sources */,
+				736D287122018AC2004C6F31 /* CybexDatabaseApi.swift in Sources */,
 				4D3E4222415A233603135173A5D25471 /* BaseCollectionViewCell.swift in Sources */,
 				729B869B2154C71300C6E0E4 /* ComprehensiveItemsViewAdapter.swift in Sources */,
 				7333858321C1FA450026765F /* LimitOrderStatusApi.swift in Sources */,

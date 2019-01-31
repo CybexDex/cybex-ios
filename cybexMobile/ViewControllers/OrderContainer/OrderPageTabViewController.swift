@@ -8,10 +8,19 @@
 
 import Foundation
 import XLPagerTabStrip
+import SwiftTheme
 
 class OrderPageTabViewController: SegmentedPagerTabStripViewController {
     var fillOrderOnly: Bool = false
     var pair: Pair?
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return ThemeManager.currentThemeIndex == 0 ? .lightContent : .default
+    }
+
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
 
     @IBOutlet weak var segmentLeftMargin: NSLayoutConstraint!
     @IBOutlet weak var segmentRightMargin: NSLayoutConstraint!

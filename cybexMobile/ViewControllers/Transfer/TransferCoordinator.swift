@@ -314,6 +314,9 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                     if exist {
                         self.getTransferAccountInfo()
                     }
+                    else {
+                        self.store.dispatch(SetToAccountAction(account: nil))
+                    }
                 }
             }).cauterize()
         }

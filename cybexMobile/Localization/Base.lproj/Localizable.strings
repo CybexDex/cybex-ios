@@ -264,6 +264,7 @@
 
 "openedorder_nodata"     = "No open orders";
 "myhistory_nodata"       = "No exchange history";
+"closedorder_nodata"       = "No order history";
 
 "eos_account_title" = "EOS Deposit Account";
 "eos_copy_account" = "Copy Account Name";
@@ -344,7 +345,7 @@
 
 //zsy add
 "my_property" = "My Balance";
-"order_value" = "Opened Orders";
+"order_value" = "Orders";
 "transfer" = "Transfer";
 "account_property" = "Your Total Balance(CYB)";
 "hello" = "Hello，";
@@ -578,7 +579,7 @@
 
 "vesting_lock_time" = "Lock Time";
 "vesting_time_hint" = "Input Time";
-"vesting_pubkey_hint" = "Input Pub Key";
+"vesting_pubkey_hint" = "Choose one public key as the recipient";
 "vesting_time_unit_second" = "seconds";
 "vesting_time_unit_minute" = "minutes";
 "vesting_time_unit_hour" = "hours";

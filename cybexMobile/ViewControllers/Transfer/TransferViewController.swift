@@ -124,18 +124,39 @@ class TransferViewController: BaseViewController {
         self.coordinator?.state.toAccount.asObservable().skip(1).subscribe(onNext: { [weak self](account) in
             guard let self = self else { return }
 
-            if let toaccount = account  {
-                if toaccount.activePubKeys.count > 1 {
-                    self.transferView.postVestingView.showPubkey()
-                }
-                else {
-                    let pubkey = toaccount.activePubKeys[0]
-                    self.transferView.postVestingView.setPubkey(pubkey)
-                }
-
-            }
+            self.checkIfShowPubKey(account)
 
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+
+        self.switchVestingObservable.subscribe(onNext: {[weak self] (status) in
+            guard let self = self else { return }
+
+            if !status {
+                self.transferView.postVestingView.hiddenPubkey()
+            }
+            else {
+                self.checkIfShowPubKey(self.coordinator?.state.toAccount.value)
+            }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    }
+
+    func checkIfShowPubKey(_ account: Account?) {
+        if let toaccount = account  {
+            if toaccount.activePubKeys.count > 1 {
+                if try! self.switchVestingObservable.value() {
+                    self.transferView.postVestingView.showPubkey()
+                }
+                self.transferView.contentView.updateContentSize()
+                self.transferView.updateContentSize()
+            }
+            else {
+                let pubkey = toaccount.activePubKeys[0]
+                self.transferView.postVestingView.setPubkey(pubkey)
+                self.transferView.contentView.updateContentSize()
+                self.transferView.updateContentSize()
+            }
+
+        }
     }
 
     func setupUI() {
@@ -217,7 +238,9 @@ extension TransferViewController {
             }
 
             self.startLoading()
-            let timeAmount = UInt64(self.transferView.postVestingView.timeTextFiled.text ?? "0")!
+            let timeAmountStr = self.transferView.postVestingView.timeTextFiled.text ?? ""
+
+            let timeAmount: UInt64 = timeAmountStr.isEmpty ? 0 : UInt64(timeAmountStr) ?? 0
             let timeUnit: [UInt64] = [1, 60, 3600, 3600 * 24]
 
             self.coordinator?.transfer(timeUnit[self.selectedVestingTimeIndex] * timeAmount,
@@ -274,6 +297,8 @@ extension TransferViewController {
             self.coordinator?.dispatchAccountAction(AccountValidStatus.unValided)
             self.transferView.postVestingView.clearPubkey()
             self.transferView.postVestingView.hiddenPubkey()
+            self.transferView.contentView.updateContentSize()
+            self.transferView.updateContentSize()
             if text.count != 0 {
                 self.coordinator?.setAccount(text)
             } else {
@@ -330,6 +355,8 @@ extension TransferViewController {
 
             let pubkey = toAccount.activePubKeys[index]
             self.transferView.postVestingView.setPubkey(pubkey)
+            self.transferView.contentView.updateContentSize()
+            self.transferView.updateContentSize()
         })
     }
 

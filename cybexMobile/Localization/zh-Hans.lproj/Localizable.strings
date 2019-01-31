@@ -250,6 +250,7 @@
 
 "openedorder_nodata"     = "暂无委单";
 "myhistory_nodata"       = "暂无交易记录";
+"closedorder_nodata"       = "暂无历史委托";
 
 
 "eos_account_title" = "EOS充值帐户";
@@ -559,7 +560,7 @@
 
 "vesting_lock_time" = "锁定时间";
 "vesting_time_hint" = "请输入时间";
-"vesting_pubkey_hint" = "请选择一个公钥";
+"vesting_pubkey_hint" = "选择一个目标账户下的公钥作为领取人";
 "vesting_time_unit_second" = "秒";
 "vesting_time_unit_minute" = "分钟";
 "vesting_time_unit_hour" = "小时";

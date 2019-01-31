@@ -74,7 +74,10 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     }
 
     func fetchOpenedOrderRequest(_ pair: Pair) {
-        guard let userId = UserManager.shared.account.value?.id else { return }
+        guard let userId = UserManager.shared.account.value?.id else {
+            self.store.dispatch(FetchOpenedOrderAction(data: []))
+            return
+        }
         let request = GetLimitOrderStatus(response: { json in
             if let json = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: json) {
                 self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0})))
@@ -95,7 +98,11 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     }
     
     func fetchAllOpenedOrderRequest() {
-        guard let userId = UserManager.shared.account.value?.id else { return }
+        guard let userId = UserManager.shared.account.value?.id else {
+            self.store.dispatch(FetchOpenedOrderAction(data: []))
+
+            return
+        }
         let request = GetLimitOrderStatus(response: { (json) in
             if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) {
                 self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0})))

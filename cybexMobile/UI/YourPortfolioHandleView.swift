@@ -24,7 +24,12 @@ class YourPortfolioHandleView: UIView {
     }
 
     func setup() {
+        #if DEBUG
+        ticketUseView.isHidden = false
+        #else
         ticketUseView.isHidden = true
+        #endif
+
         setUpEvent()
         updateHeight()
     }

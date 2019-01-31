@@ -133,13 +133,17 @@ extension DeployTicketResultViewController {
         Observable<Int>.interval(1, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] (num) in
             guard let self = self else { return }
 
-            let request = GetRecentTransactionById(id: self.transactionId) { [weak self] (result) in
-                guard let self = self else { return }
-                if String(describing: result) != "<null>" {
+            CybexDatabaseApiService.request(target: DatabaseApi.getRecentTransactionBy(self.transactionId), success: { (json) in
+                if String(describing: json) != "null" {
                     self.bag = nil
                 }
-            }
-            CybexWebSocketService.shared.send(request: request)
+
+            }, error: { (error) in
+
+            }, failure: { (error) in
+
+            })
+
         }).disposed(by: self.bag!)
     }
 }

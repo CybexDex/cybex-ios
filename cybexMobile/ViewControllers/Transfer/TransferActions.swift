@@ -57,7 +57,7 @@ struct SetFeeAction: Action {
 }
 
 struct SetToAccountAction: Action {
-    let account: Account
+    let account: Account?
 }
 
 struct ResetDataAction: Action {

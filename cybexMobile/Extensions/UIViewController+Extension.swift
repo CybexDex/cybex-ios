@@ -38,6 +38,10 @@ extension UIViewController {
             headerview.loadingDescription = R.string.localizable.loading.key.localized()
             headerview.releaseToRefreshDescription = R.string.localizable.releaseToRefresh.key.localized()
             headerview.pullToRefreshDescription = R.string.localizable.pullToRefresh.key.localized()
+
+            if let indicator = headerview.subviews.last as? UIActivityIndicatorView {
+                indicator.style = ThemeManager.currentThemeIndex == 0 ? .white : .gray
+            }
         }
 
     }
@@ -57,6 +61,9 @@ extension UIViewController {
             footerView.loadingDescription = R.string.localizable.loading.key.localized()
             footerView.loadingMoreDescription = R.string.localizable.loadingMore.key.localized()
             footerView.noMoreDataDescription = R.string.localizable.noMoreData.key.localized()
+            if let indicator = footerView.subviews.last as? UIActivityIndicatorView {
+                indicator.style = ThemeManager.currentThemeIndex == 0 ? .white : .gray
+            }
         }
     }
 

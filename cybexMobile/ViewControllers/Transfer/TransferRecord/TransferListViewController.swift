@@ -32,6 +32,7 @@ class TransferListViewController: BaseViewController {
         self.title = R.string.localizable.transfer_list_title.key.localized()
         let nibString = String(describing: TransferListCell.self)
         self.tableView.register(UINib(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
+
     }
 
     func setupTableView() {
@@ -54,15 +55,16 @@ class TransferListViewController: BaseViewController {
 
             self.page += 1
             self.coordinator?.fetchTransferRecords(self.page, callback: { noMoreData in
-                completion?(noMoreData)
+//                completion?(noMoreData)
             })
         }
     }
 
     override func configureObserveState() {
-        self.coordinator?.state.data.asObservable().subscribe(onNext: { [weak self](data) in
+        self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let self = self else { return }
             self.endLoading()
+            
             if self.isVisible {
                 if self.page == 0 {
                     self.data = data
@@ -79,6 +81,7 @@ class TransferListViewController: BaseViewController {
                     self.view.hiddenNoData()
                 }
                 self.tableView.reloadData()
+                self.stopInfiniteScrolling(self.tableView, haveNoMore: (data ?? []).count != 20)
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
