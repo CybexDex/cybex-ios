@@ -72,11 +72,7 @@ extension UserManager {
     func register(_ pinID: String, captcha: String, username: String, password: String) -> Promise<(Bool, Int)> {
         let (promise, seal) = Promise<(Bool, Int)>.pending()
 
-        let keysString = BitShareCoordinator.getUserKeys(username, password: password)
-        if let keys = AccountKeys.deserialize(from: keysString),
-            let _ = keys.activeKey,
-            let _ = keys.ownerKey,
-            let _ = keys.memoKey {
+        if let keys = generateAccountKeys(username, password: password) {
 
             RegisterService.request(target: .register(pinID, captcha: captcha, name: username, keys: keys), success: { (json) in
                 if let code = json["code"].int { //失败
@@ -148,70 +144,33 @@ extension UserManager {
         return promise
     }
 
+    func generateAccountKeys(_ username: String, password: String) -> AccountKeys? {
+        let keysString = BitShareCoordinator.getUserKeys(username, password: password)
+        return AccountKeys.deserialize(from: keysString)
+    }
+
     func unlock(_ username: String?, password: String, completion:@escaping (Bool, FullAccount?) -> Void) {
         guard let name = username ?? self.name.value else {
             completion(false, nil)
             return
         }
 
-        let keysString = BitShareCoordinator.getUserKeys(name, password: password)
-        if let keys = AccountKeys.deserialize(from: keysString),
-            let activeKey = keys.activeKey,
-            let memoKey = keys.memoKey,
-            let ownKey = keys.ownerKey {
-            var canLock = false
-
+        if let keys = generateAccountKeys(name, password: password) {
             let request = GetFullAccountsRequest(name: name) { response in
                 if let data = response as? FullAccount, let account = data.account {
-                    let activeAuths = account.activeAuths
-                    let ownerAuths = account.ownerAuths
+                    let permission = account.checkPermission(keys)
+                    self.permission = permission
 
-                    for auth in activeAuths {
-                        if let auth = auth as? [Any], let key = auth[0] as? String {
-                            if [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey].contains(key) {
-                                canLock = true
-                                BitShareCoordinator.resetDefaultPublicKey(key)
-                                break
-                            }
-                        }
-                    }
-
-                    if !canLock {
-                        for auth in ownerAuths {
-                            if let auth = auth as? [Any], let key = auth[0] as? String {
-                                if [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey].contains(key) {
-                                    canLock = true
-                                    BitShareCoordinator.resetDefaultPublicKey(key)
-                                    break
-                                }
-                            }
-                        }
-                    }
-
-                    if canLock {
+                    if permission.unlock {
+                        BitShareCoordinator.resetDefaultPublicKey(permission.defaultKey)
                         self.keys = keys
-
-                        if let newAccount = data.account {
-                            if let memoKey = keys.memoKey, let ownKey = keys.ownerKey, let activeKey = keys.activeKey {
-                                if [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey].contains(newAccount.memoKey) {
-                                    self.isWithDraw = true
-                                }
-                            }
-                            if let memoKey = keys.memoKey, let ownKey = keys.ownerKey, let activeKey = keys.activeKey {
-                                if let activeKeys = newAccount.activeAuths as? [String] {
-                                    for activekey in activeKeys {
-                                        if [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey].contains(activekey) {
-                                            self.isTrade = true
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        self.timingLock()
 
                         completion(true, data)
-                        self.timingLock()
                         return
                     }
+
+
                 }
                 completion(false, nil)
             }
@@ -306,8 +265,9 @@ class UserManager {
             appCoodinator.repeatFetchMarket(.veryLow)
         }
     }
-    var isWithDraw: Bool = false // 写memo 权限
-    var isTrade: Bool = false // 交易权限
+
+    var permission = AccountPermission()
+
     var name: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     var keys: AccountKeys?
     var avatarString: String?

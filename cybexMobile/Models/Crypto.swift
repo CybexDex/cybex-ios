@@ -10,36 +10,44 @@ import Foundation
 import HandyJSON
 
 class AccountKeys: HandyJSON {
-  var activeKey: Key?
-  var ownerKey: Key?
-  var memoKey: Key?
+    var activeKey: Key?
+    var ownerKey: Key?
+    var memoKey: Key?
 
-  required init() {
+    var pubKeys: [String] {
+        guard let activeKey = activeKey, let memoKey = memoKey, let ownKey = ownerKey else {
+            return []
+        }
 
-  }
+        return [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey]
+    }
 
-  func mapping(mapper: HelpingMapper) {
-    mapper <<< activeKey <-- "active-key"
-    mapper <<< ownerKey <-- "owner-key"
-    mapper <<< memoKey <-- "memo-key"
-  }
+    required init() {
+
+    }
+
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< activeKey <-- "active-key"
+        mapper <<< ownerKey <-- "owner-key"
+        mapper <<< memoKey <-- "memo-key"
+    }
 }
 
 class Key: HandyJSON {
-  var privateKey = ""
-  var publicKey = ""
-  var address = ""
-  var compressed = ""
-  var uncompressed = ""
+    var privateKey = ""
+    var publicKey = ""
+    var address = ""
+    var compressed = ""
+    var uncompressed = ""
 
-  required init() {
-  }
+    required init() {
+    }
 
-  func mapping(mapper: HelpingMapper) {
-    mapper <<< privateKey <-- "private_key"
-    mapper <<< publicKey <-- "public_key"
-    mapper <<< address <-- "address"
-    mapper <<< compressed <-- "compressed"
-    mapper <<< uncompressed <-- "uncompressed"
-  }
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< privateKey <-- "private_key"
+        mapper <<< publicKey <-- "public_key"
+        mapper <<< address <-- "address"
+        mapper <<< compressed <-- "compressed"
+        mapper <<< uncompressed <-- "uncompressed"
+    }
 }

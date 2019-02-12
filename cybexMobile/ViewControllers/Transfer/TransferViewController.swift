@@ -232,7 +232,7 @@ extension TransferViewController {
         ShowToastManager.shared.hide()
         if !UserManager.shared.isLocked {
 
-            if !UserManager.shared.isWithDraw, self.coordinator?.state.memo.value.count != 0 {
+            if !UserManager.shared.permission.withdraw, self.coordinator?.state.memo.value.count != 0 {
                 showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
                 return
             }
@@ -326,7 +326,7 @@ extension TransferViewController {
             return
         }
 
-        if !content.isEmpty, !UserManager.shared.isWithDraw {
+        if !content.isEmpty, !UserManager.shared.permission.withdraw {
             showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
             return
         }

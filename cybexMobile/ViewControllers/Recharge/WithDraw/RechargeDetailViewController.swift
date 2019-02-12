@@ -351,7 +351,7 @@ extension RechargeDetailViewController {
             showPasswordBox(R.string.localizable.withdraw_unlock_wallet.key.localized())
             return
         }
-        if !UserManager.shared.isWithDraw {
+        if !UserManager.shared.permission.withdraw {
             showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
             return
         } else {
