@@ -63,7 +63,7 @@ extension PostVestingView {
         dropMenu.nameLabel.locali = R.string.localizable.vesting_time_unit_second.key
         dropMenu.xibView?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.paleGreyFour.hexString(true)]
         stackview.arrangedSubviews[1].addSubview(dropMenu)
-        dropMenu.size(CGSize(width: 80, height: 30))
+        dropMenu.size(CGSize(width: 90, height: 30))
         dropMenu.top(to: dropMenu.superview!, offset: 4)
         dropMenu.right(to: dropMenu.superview!, offset: -12)
         dropMenu.leftToRight(of: textfield, offset: 10)
@@ -73,7 +73,7 @@ extension PostVestingView {
         textview.backgroundColor = .clear
         textview.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
         textview.font = UIFont.systemFont(ofSize: 16)
-        textview.attributedPlaceholder = NSMutableAttributedString.init(string: R.string.localizable.vesting_pubkey_hint.key.localized(), attributes: [NSAttributedString.Key.foregroundColor: UIColor.steel50, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
+        textview.attributedPlaceholder = NSMutableAttributedString.init(string: R.string.localizable.vesting_pubkey_hint.key.localized(), attributes: [NSAttributedString.Key.foregroundColor: UIColor.steel50, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)])
         stackview.arrangedSubviews[2].addSubview(textview)
         textview.delegate = self
         textview.contentInset = .zero

@@ -184,6 +184,8 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
     }
 
     func chooseAddress() {
+        guard let currentVC = self.rootVC.topViewController as? TransferViewController else { return }
+
         let width = ModalSize.full
         let height = ModalSize.custom(size: 244)
         let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: UIScreen.main.bounds.height - 244))
@@ -201,7 +203,9 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
             let selectedIndex = picker.selectedRow(inComponent: 0)
             self.store.dispatch(CleanToAccountAction())
             self.store.dispatch(ValidAccountAction(status: .validSuccessed))
-            self.store.dispatch(ChooseAccountAction(account: items[selectedIndex]))
+            let item = items[selectedIndex]
+            self.store.dispatch(ChooseAccountAction(account: item))
+            currentVC.account(["content": item.address])
             self.getTransferAccountInfo()
         }
 
