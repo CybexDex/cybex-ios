@@ -72,7 +72,7 @@ class HomePairView: UIView {
 
             if ignoreInfoWhenZeroPercent, ticker.incre != .greater {
                 self.asset2.text = "--"
-                self.asset1.text = "--"
+                self.asset1.text = "/--"
                 self.price.text = "--"
                 self.rbmL.text = "--"
                 self.volume.text = "--"
