@@ -26,7 +26,14 @@ NS_ASSUME_NONNULL_BEGIN
                        user_id:(int)user_id order_id:(int)order_id
                         fee_id:(int)fee_id fee_amount:(int64_t)fee_amount;
 + (NSString *)cancelLimitOrderOperation:(int)order_id user_id:(int)user_id fee_id:(int)fee_id fee_amount:(int64_t)fee_amount;
-  
+
+// asset_id receive_asset_id 都为0 取消个人全部order
++ (NSString *)cancelAllLimitOrder:(int)block_num block_id:(NSString *)block_id
+                    expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id
+                       user_id:(int)user_id asset_id:(int)asset_id receive_asset_id:(int)receive_asset_id
+                        fee_id:(int)fee_id fee_amount:(int64_t)fee_amount;
++ (NSString *)cancelAllLimitOrderOperation:(int)asset_id receive_asset_id:(int)receive_asset_id user_id:(int)user_id fee_id:(int)fee_id fee_amount:(int64_t)fee_amount;
+
   // memokey 需要线上取和生成的比较看是否有权限
 + (NSString *)getTransaction:(int)block_num block_id:(NSString *)block_id
                   expiration:(NSTimeInterval)expiration chain_id:(NSString *)chain_id

@@ -60,7 +60,7 @@ class OrderBookViewController: BaseViewController {
             self.fetchOrderBookData(pair, count: 20)
         }
         else {
-            self.fetchOrderBookData(pair, count: 5)
+            self.fetchOrderBookData(pair, count: 10)
         }
         if self.tradeView != nil || self.contentView != nil {
             setTopTitle()
@@ -192,7 +192,7 @@ extension OrderBookViewController: TradePair {
         guard let coor = self.coordinator ,let oldPair = self.coordinator?.state.pair.value else {
             return
         }
-        coor.unSubscribe(oldPair, depth: coor.state.depth.value, count: 5)
+        coor.unSubscribe(oldPair, depth: coor.state.depth.value, count: 10)
         coor.resetData(oldPair)
     }
 
@@ -233,7 +233,7 @@ extension OrderBookViewController: RecordChooseViewControllerDelegate {
             let depth = depthString.int,
             let pair = self.pair ,let coor = self.coordinator {
             coor.unSubscribe(pair, depth: coor.state.depth.value, count: coor.state.count)
-            coor.subscribe(pair, depth: depth, count: 5)
+            coor.subscribe(pair, depth: depth, count: 10)
         }
         self.tradeView.resetDecimalImage()
         sender.dismiss(animated: false, completion: nil)

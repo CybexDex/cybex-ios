@@ -217,6 +217,12 @@ extension OpenedOrdersViewController {
             }
         }
     }
+
+    @objc func cancelAllOrder(_ data: [String: Any]) {
+        if self.isLoading() {
+            return
+        }
+    }
     
     func postCancelOrder() {
         // order.isBuy ? pair.base : pair.quote
@@ -229,6 +235,20 @@ extension OpenedOrdersViewController {
                                     R.string.localizable.cancel_create_success.key.localized() :
                                     R.string.localizable.cancel_create_fail.key.localized())
             })
+        }
+    }
+
+    func postCancelAllOrder() {
+        // order.isBuy ? pair.base : pair.quote
+        if let coor = self.coordinator {
+            coor.cancelAllOrder(pair) {[weak self] (success) in
+                guard let self = self else { return }
+                self.endLoading()
+                self.showToastBox(success,
+                                  message: success ?
+                                    R.string.localizable.cancel_create_success.key.localized() :
+                                    R.string.localizable.cancel_create_fail.key.localized())
+            }
         }
     }
     

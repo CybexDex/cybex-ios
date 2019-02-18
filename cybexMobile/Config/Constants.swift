@@ -64,9 +64,20 @@ enum ChainTypesOperations: Int {
     case transferFromBlind
     case assetSettleCancel
     case assetClaimFees
+    case fbaDistribute
     case initiateCrowdfund
     case participateCrowdfund
     case withdrawCrowdfund
+    case fillCrowdfund
+    case cancelVesting
+    case bidCollateral
+    case executeBid
+    case cancelAll
+    case initiateDiceBet
+    case depositDiceBet
+    case withdrawDiceBet
+    case participateDiceBet
+    case diceBetClearing
 }
 
 enum ObjectID: String {
