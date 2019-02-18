@@ -55,7 +55,7 @@
 
 "register" = "注册";
 
-"opened.title"    = "我的委单";
+"opened.title"    = "委单";
 "confirm" = "我记住了";
 "attention" = "注意事项";
 
@@ -140,7 +140,7 @@
 
 "trade_buy"             = "买入";
 "trade_sell"            = "卖出";
-"trade_open_orders"     = "我的委单";
+"trade_open_orders"     = "当前委托";
 "trade_limit"           = "限价单";
 "trade_available"       = "余额";
 "trade_fee"             = "手续费";
@@ -250,6 +250,7 @@
 
 "openedorder_nodata"     = "暂无委单";
 "myhistory_nodata"       = "暂无交易记录";
+"closedorder_nodata"       = "暂无历史委托";
 
 
 "eos_account_title" = "EOS充值帐户";
@@ -326,7 +327,7 @@
 
 //zsy add
 "my_property" = "我的资产";
-"order_value" = "我的委单";
+"order_value" = "委单";
 "transfer" = "转账";
 "account_property" = "账户资产估值(CYB)";
 "hello" = "您好，";
@@ -546,13 +547,32 @@
 "eva_title_introduction" = "项目介绍";
 
 "ticket_use_title" = "使用";
-"ticket_title" = "使用我的资产";
-"ticket_check_account" = "验证账户";
-"ticket_check_account_placeholder" = "请输入验证账户或扫码获取验证账户 ";
-"ticket_deploy_asset" = "使用资产";
-"ticket_deploy_asset_placeholder" = "请输入或选择要使用的资产";
+"ticket_title" = "使用茶恬园船票";
+"ticket_check_account" = "茶恬园账户";
+"ticket_check_account_placeholder" = "请输入茶恬园账户或扫码获取 ";
+"ticket_deploy_asset" = "使用船票";
+"ticket_deploy_asset_placeholder" = "请输入或选择要使用的船票";
 "ticket_depoly_amount" = "使用数量";
 "ticket_depoly_amount_placeholder" = "请输入数量";
-"ticket_asset_left" = "当前持有%@个";
+"ticket_asset_left" = "当前持有%@张";
 "scan_qrcode_hint" = "对准二维码，即可自动扫描";
-"ticket_deploy_result_info" = "请向管理员出示二维码。\n请注意保管好您的二维码。\n二维码的有效时间为10分钟。";
+"ticket_deploy_result_info" = "请向管理员出示二维码。\n请注意保管好您的二维码。\n二维码的有效时间为30分钟。";
+
+"vesting_lock_time" = "锁定时间";
+"vesting_time_hint" = "请输入时间";
+"vesting_pubkey_hint" = "选择一个目标账户下的公钥作为领取人";
+"vesting_time_unit_second" = "秒";
+"vesting_time_unit_minute" = "分钟";
+"vesting_time_unit_hour" = "小时";
+"vesting_time_unit_day" = "天";
+"vesting_lock_time_hint_title" = "锁定时间";
+"vesting_lock_time_hint" = "您可以为转账设置一个锁定时长，从转账成功开始计算，锁定时间到期后，接收方可以领取并使用该笔资产。当收入方账户下有多个公钥时，您需要指定一个公钥作为领取人。";
+
+"orders_my_open_order" = "当前委托";
+"orders_my_filled_order" = "历史委托";
+"orders_my_trade_history" = "历史成交";
+"orders_title_market" = "市场";
+"orders_my_filled_order_title_mid" = "均价/价格";
+"orders_my_filled_order_title_trail" = "成交数量/数量";
+"orders_my_trade_history_title_mid" = "价格/成交数量";
+"orders_my_trade_history_title_trail" = "成交额/手续费";

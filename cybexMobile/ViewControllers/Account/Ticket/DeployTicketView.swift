@@ -9,7 +9,6 @@
 import Foundation
 import TangramKit
 import SwiftTheme
-import TangramKit
 
 class DeployTicketView: UIView {
     static let RowKey: [[String]] = [["account"], ["asset", "amount"]]
@@ -51,7 +50,7 @@ class DeployTicketView: UIView {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
-        label.text = "0.0005 CYB"
+        label.text = "0.01 CYB"
         label.sizeToFit()
         label.textAlignment = .right
 

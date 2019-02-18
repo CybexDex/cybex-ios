@@ -10,16 +10,38 @@ import Foundation
 import TangramKit
 import Proposer
 import EFQRCode
+import RxSwift
+import NotificationBanner
 
 class DeployTicketResultViewController: BaseViewController {
     var assetName: String!
     var qrcodeInfo: String!
+
+    var qrImageView: UIImageView!
+    var transactionId:String!
+
+    var banner: NotificationBanner?
+
+    var bag: DisposeBag? = DisposeBag() {
+        didSet {
+            if bag == nil {
+                self.banner = UIHelper.showSuccessTop("您的票已被成功使用！")
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = R.string.localizable.ticket_use_title.key.localized() + " " + assetName
         setupUI()
+        scanTransferStatus()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.banner?.dismiss()
     }
 
     func setupUI() {
@@ -34,12 +56,14 @@ class DeployTicketResultViewController: BaseViewController {
         imageView.tg_top ~= 23
         imageView.tg_centerX ~= 0
         layout.addSubview(imageView)
+        qrImageView = imageView
 
         let button = UIButton()
         button.backgroundColor = .clear
         button.locali = R.string.localizable.deposit_save.key
         button.setTitleColor(UIColor.pastelOrange, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(saveButtonDidClicked), for: .touchUpInside)
         button.tg_top ~= 12
         button.tg_centerX ~= 0
         button.tg_width ~= .wrap
@@ -72,13 +96,17 @@ class DeployTicketResultViewController: BaseViewController {
 
         self.view.addSubview(layout)
     }
+
+    @objc func saveButtonDidClicked() {
+        guard let image = qrImageView.image else { return }
+        saveToGallery(image)
+    }
 }
 
 // MARK: - Logic
 extension DeployTicketResultViewController {
     func generateQRCode(_ content: String) -> UIImage? {
         let generator = EFQRCodeGenerator(content: content, size: EFIntSize(width: 155, height: 155))
-//        generator.setIcon(icon: UIImage(named: R.image.artboard.name)?.toCGImage(), size: EFIntSize(width: 42, height: 42))
         if let image = generator.generate() {
             return UIImage(cgImage: image)
         }
@@ -99,5 +127,23 @@ extension DeployTicketResultViewController {
 
             self.showToastBox(false, message: message)
         })
+    }
+
+    func scanTransferStatus() {
+        Observable<Int>.interval(1, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] (num) in
+            guard let self = self else { return }
+
+            CybexDatabaseApiService.request(target: DatabaseApi.getRecentTransactionBy(self.transactionId), success: { (json) in
+                if String(describing: json) != "null" {
+                    self.bag = nil
+                }
+
+            }, error: { (error) in
+
+            }, failure: { (error) in
+
+            })
+
+        }).disposed(by: self.bag!)
     }
 }

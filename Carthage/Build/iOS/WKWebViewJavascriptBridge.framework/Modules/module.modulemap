@@ -1,0 +1,11 @@
+framework module WKWebViewJavascriptBridge {
+  umbrella header "WKWebViewJavascriptBridge.h"
+
+  export *
+  module * { export * }
+}
+
+module WKWebViewJavascriptBridge.Swift {
+    header "WKWebViewJavascriptBridge-Swift.h"
+    requires objc
+}

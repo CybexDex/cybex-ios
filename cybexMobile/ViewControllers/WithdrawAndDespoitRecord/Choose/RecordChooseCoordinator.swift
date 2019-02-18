@@ -85,19 +85,15 @@ extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
             self.store.dispatch(FetchDataAction(data: [R.string.localizable.openedAll.key.localized(),
                                                        R.string.localizable.recharge_deposit.key.localized(),
                                                        R.string.localizable.recharge_withdraw.key.localized()]))
-            break
-            
         case RecordChooseType.time.rawValue:
             self.store.dispatch(FetchDataAction(data: ["5m",
                                                        "1h",
                                                        "1d"]))
-            break
         case RecordChooseType.kind.rawValue:
             self.store.dispatch(FetchDataAction(data: ["MA",
                                                        "EMA",
                                                        "MACD",
                                                        "BOLL"]))
-            break
         case RecordChooseType.orderbook.rawValue:
             var data: [String] = []
             for index in 0..<count {
@@ -105,6 +101,11 @@ extension RecordChooseCoordinator: RecordChooseStateManagerProtocol {
             }
             
             self.store.dispatch(FetchDataAction(data: data))
+        case RecordChooseType.vesting.rawValue:
+            self.store.dispatch(FetchDataAction(data: [R.string.localizable.vesting_time_unit_second.key.localized(),
+                                                       R.string.localizable.vesting_time_unit_minute.key.localized(),
+                                                       R.string.localizable.vesting_time_unit_hour.key.localized(),
+                                                       R.string.localizable.vesting_time_unit_day.key.localized()]))
         default: break
         }
         

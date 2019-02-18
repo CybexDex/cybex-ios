@@ -553,7 +553,7 @@ extension ChatViewController {
             if !UserManager.shared.isLocked {
                 self.coordinator?.send(message,
                                        username: UserManager.shared.name.value!,
-                                       sign: self.isRealName ? BitShareCoordinator.signMessage(UserManager.shared.name.value!, message: message)!.replacingOccurrences(of: "\"", with: "") : "")
+                                       sign: self.isRealName ? BitShareCoordinator.signMessage(UserManager.shared.name.value!, message: message).replacingOccurrences(of: "\"", with: "") : "")
             }
             else {
                 self.downInputView?.inputTextField.text = message
@@ -607,7 +607,7 @@ extension ChatViewController {
             }
             self.coordinator?.send(message,
                                    username: UserManager.shared.name.value!,
-                                   sign: self.isRealName ? BitShareCoordinator.signMessage(UserManager.shared.name.value!, message: message)!.replacingOccurrences(of: "\"", with: "") : "")
+                                   sign: self.isRealName ? BitShareCoordinator.signMessage(UserManager.shared.name.value!, message: message).replacingOccurrences(of: "\"", with: "") : "")
             self.downInputView?.inputTextField.text = ""
             self.downInputView?.setupBtnState()
         }

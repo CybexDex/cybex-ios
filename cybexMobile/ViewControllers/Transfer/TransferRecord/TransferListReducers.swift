@@ -41,20 +41,13 @@ func transferRecordsToViewModels(_ sender: [(TransferRecord, time: String)], cal
                     let transferViewModel = TransferRecordViewModel(isSend: source.0.from == UserManager.shared.account.value?.id,
                                                                     from: source.0.from == account.id ? account.name : requesetName,
                                                                     to: source.0.from == account.id ? requesetName : account.name,
-                                                                    time: source.time, amount: source.0.amount,
+                                                                    time: Formatter.iso8601.date(from: source.time)!.string(withFormat: "MM/dd HH:mm:ss"), amount: source.0.amount,
                                                                     memo: source.0.memo?.toJSONString() ?? "",
-                                                                    vestingPeriod: source.0.vestingPeriod,
+                                                                    vestingPeriod: source.0.vestingPeriod.string,
                                                                     fee: source.0.fee)
                     result.append(transferViewModel)
                     if result.count == sender.count {
-
-                        callback(result.filter({ (transferResult) -> Bool in
-                            if transferResult.isSend {
-                                return transferResult.to != "cybex-jadegateway"
-                            } else {
-                                return transferResult.from != "cybex-jadegateway"
-                            }
-                        }))
+                        callback(result)
                     }
                 }
             }

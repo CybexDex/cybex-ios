@@ -335,13 +335,19 @@ extension CBKLineMainView {
         
         switch configuration.main.indicatorType {
         case let .MA(days):
-            
-            for (idx, color) in [configuration.theme.MA1, configuration.theme.MA2, configuration.theme.MA3].enumerated() {
-                let maAttrs: [NSAttributedString.Key: Any]? = [
-                    NSAttributedString.Key.foregroundColor: configuration.theme.markColor,
-                    NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
-                    NSAttributedString.Key.backgroundColor: configuration.theme.markbgColor                    ]
-                
+            let maStr = "MA(" + days.map({"\($0)"}).joined(separator: ", ") + "): "
+            let maAttrs: [NSAttributedString.Key: Any]? = [
+                NSAttributedString.Key.foregroundColor: configuration.theme.markColor,
+                NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
+                NSAttributedString.Key.backgroundColor: configuration.theme.markbgColor                    ]
+
+            drawAttrsString.append(NSAttributedString(string: maStr, attributes: maAttrs))
+
+
+            let colors = [configuration.theme.MA1, configuration.theme.MA2, configuration.theme.MA3]
+            for (idx, _) in days.enumerated() {
+
+                let color = colors[idx]
                 
                 let attrs: [NSAttributedString.Key: Any]? = [
                     NSAttributedString.Key.foregroundColor: color,
@@ -352,12 +358,10 @@ extension CBKLineMainView {
                 
                 
                 if let value = drawModel.MAs![idx] {
-                    if idx != 0 {
-                        drawAttrsString.append(NSAttributedString(string: "\n"))
-                    }
-                    let maStr = String(format: "MA(\(days[idx])): ")
-                    
-                    drawAttrsString.append(NSAttributedString(string: maStr, attributes: maAttrs))
+//                    if idx != 0 {
+//                        drawAttrsString.append(NSAttributedString(string: "\n"))
+//                    }
+
                     
                     let mavalueStr = String(format: "  %.\(drawModel.precision)f   ", value)
                     drawAttrsString.append(NSAttributedString(string: mavalueStr, attributes: attrs))
@@ -365,12 +369,18 @@ extension CBKLineMainView {
             }
             
         case let .EMA(days):
-            for (idx, color) in [configuration.theme.EMA1, configuration.theme.EMA2].enumerated() {
-                let maAttrs: [NSAttributedString.Key: Any]? = [
-                    NSAttributedString.Key.foregroundColor: configuration.theme.markColor,
-                    NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
-                    NSAttributedString.Key.backgroundColor: configuration.theme.markbgColor
-                ]
+            let maAttrs: [NSAttributedString.Key: Any]? = [
+                NSAttributedString.Key.foregroundColor: configuration.theme.markColor,
+                NSAttributedString.Key.font: configuration.main.dateAssistTextFont,
+                NSAttributedString.Key.backgroundColor: configuration.theme.markbgColor
+            ]
+            let maStr = "EMA(" + days.map({"\($0)"}).joined(separator: ", ") + "): "
+            drawAttrsString.append(NSAttributedString(string: maStr, attributes: maAttrs))
+            let colors = [configuration.theme.EMA1, configuration.theme.EMA2, configuration.theme.EMA3]
+
+            for (idx, _) in days.enumerated() {
+                let color = colors[idx]
+
                 
                 let attrs: [NSAttributedString.Key: Any]? = [
                     NSAttributedString.Key.foregroundColor: color,
@@ -378,12 +388,10 @@ extension CBKLineMainView {
                 ]
                 
                 if let value = drawModel.EMAs![idx] {
-                    if idx != 0 {
-                        drawAttrsString.append(NSAttributedString(string: "\n"))
-                    }
-                    let maStr = String(format: "EMA(\(days[idx])): ")
-                    drawAttrsString.append(NSAttributedString(string: maStr, attributes: maAttrs))
-                    
+//                    if idx != 0 {
+//                        drawAttrsString.append(NSAttributedString(string: "\n"))
+//                    }
+
                     let emavalueStr = String(format: "  %.\(drawModel.precision)f   ", value)
                     drawAttrsString.append(NSAttributedString(string: emavalueStr, attributes: attrs))
                 }
@@ -485,9 +493,11 @@ extension CBKLineMainView {
         
         switch configuration.main.indicatorType {
         case .MA:
-            
-            for (idx, type) in [CBBrushType.MA, CBBrushType.MA2, CBBrushType.MA3].enumerated() {
-                let maLineBrush = CBMALineBrush(brushType: type,
+            let brushType = [CBBrushType.MA, CBBrushType.MA2, CBBrushType.MA3]
+            guard let MAs = drawModels.first?.MAs else { return }
+
+            for (idx, _) in MAs.enumerated() {
+                let maLineBrush = CBMALineBrush(brushType: brushType[idx],
                                                 context: context)
                 
                 maLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in
@@ -517,9 +527,11 @@ extension CBKLineMainView {
         
         switch configuration.main.indicatorType {
         case .EMA:
-            
-            for (idx, type) in [CBBrushType.EMA, CBBrushType.EMA2].enumerated() {
-                let emaLineBrush = CBMALineBrush(brushType: type,
+            let brushType = [CBBrushType.EMA, CBBrushType.EMA2, CBBrushType.EMA3]
+            guard let EMAs = drawModels.first?.EMAs else { return }
+
+            for (idx, _) in EMAs.enumerated() {
+                let emaLineBrush = CBMALineBrush(brushType: brushType[idx],
                                                  context: context)
                 
                 emaLineBrush.calFormula = { (index: Int, model: CBKLineModel) -> CGPoint? in

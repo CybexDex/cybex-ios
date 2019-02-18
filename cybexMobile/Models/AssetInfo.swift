@@ -47,6 +47,16 @@ class Asset: HandyJSON {
         return amount.decimal() / pow(10, info.precision)
     }
 
+    func volumeWith(_ precision: Int) -> Decimal {
+        return amount.decimal() / pow(10, precision)
+    }
+
+    func volumeString() -> String {
+        let info = appData.assetInfo[assetID]!
+
+        return (amount.decimal() / pow(10, info.precision)).suffixNumber(digitNum: info.precision, padZero: true)
+    }
+
     func info() -> AssetInfo {
         return appData.assetInfo[self.assetID] ?? AssetInfo()
     }

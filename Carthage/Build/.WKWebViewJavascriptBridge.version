@@ -1,0 +1,9 @@
+{
+  "commitish" : "1.2.0",
+  "iOS" : [
+    {
+      "name" : "WKWebViewJavascriptBridge",
+      "hash" : "76fc8d8061070937e9bcacc6f815fd488cfa7278fbf4e168a0694e640b93e3f9"
+    }
+  ]
+}

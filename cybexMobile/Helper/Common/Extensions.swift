@@ -448,12 +448,32 @@ extension String {
         return 0
     }
 
+    var getPrefixOfID: String {
+        if self == "" {
+            return ""
+        }
+
+        var ids = self.components(separatedBy: ".")
+
+        _ = ids.popLast()
+
+        return ids.joined(separator: ".")
+    }
+
     var int32: Int32 {
         if self == "" {
             return 0
         }
         
         return Int32(self)!
+    }
+
+    var int64: Int64 {
+        if self == "" {
+            return 0
+        }
+
+        return Int64(self)!
     }
     
     func tradePriceAndAmountDecimal(_ roundingMode: NSDecimalNumber.RoundingMode = .plain) -> (price: String, pricision: Int, amountPricision: Int) {

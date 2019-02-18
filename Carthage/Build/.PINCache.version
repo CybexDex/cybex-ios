@@ -1,0 +1,9 @@
+{
+  "commitish" : "3.0.1-beta.6",
+  "iOS" : [
+    {
+      "name" : "PINCache",
+      "hash" : "4eb6e0ae067bbaa6517beea5475a5bc362fb108dc9666b904c98bd4bde998477"
+    }
+  ]
+}

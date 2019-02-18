@@ -182,7 +182,7 @@ extension GatewayQueryAPI {
                                                                  fundType: "",
                                                                  size: Int32(0),
                                                                  offset: Int32(0),
-                                                                 expiration: Int32(expiration))!
+                                                                 expiration: Int32(expiration))
 
         return (Int(expiration), JSON(parseJSON: signer)["signer"].stringValue)
     }

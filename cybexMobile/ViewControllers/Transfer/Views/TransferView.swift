@@ -71,6 +71,11 @@ class TransferView: UIView {
         return quantityView
     }()
 
+    lazy var postVestingView: PostVestingView = {
+        let v = PostVestingView()
+        return v
+    }()
+
     lazy var memoView: TitleTextView = {
         let memoView = TitleTextView()
         return memoView
@@ -97,7 +102,7 @@ class TransferView: UIView {
         return CGSize.init(width: UIView.noIntrinsicMetric, height: dynamicHeight())
     }
 
-    func updateContentSize() {
+    @objc func updateContentSize() {
         self.performSelector(onMainThread: #selector(self.updateHeight), with: nil, waitUntilDone: false)
         self.performSelector(onMainThread: #selector(self.updateHeight), with: nil, waitUntilDone: false)
     }
@@ -150,8 +155,9 @@ class TransferView: UIView {
     func setupUI() {
         contentView.datasource = self
         setupTextView()
+
         contentView.updateContentSize()
-        updateContentSize()
+        self.updateContentSize()
     }
 
     func setupTextView() {
@@ -191,7 +197,7 @@ extension TransferView: GrowContentViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return 3
+            return 4
         }
     }
 
@@ -226,6 +232,8 @@ extension TransferView: GrowContentViewDataSource {
                 return (cryptoView, "crypto")
             } else if indexpath.row == 1 {
                 return (quantityView, "quantity")
+            } else if indexpath.row == 2 {
+                return (postVestingView, "vesting")
             } else {
                 return (memoView, "memo")
             }

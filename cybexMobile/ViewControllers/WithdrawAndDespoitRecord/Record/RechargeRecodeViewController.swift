@@ -40,6 +40,7 @@ class RechargeRecodeViewController: BaseViewController {
         if UserManager.shared.isLocked {
             self.showPasswordBox()
         } else {
+            self.startLoading()
             fetchDepositRecords(offset: 0) {}
         }
     }
@@ -85,7 +86,6 @@ class RechargeRecodeViewController: BaseViewController {
     }
 
     func fetchDepositRecords(offset: Int = 0, callback:@escaping () -> Void) {
-        self.startLoading()
         if let name = UserManager.shared.name.value {
             self.coordinator?.fetchRechargeRecodeList(name,
                                                       asset: self.assetInfo?.symbol ?? "",

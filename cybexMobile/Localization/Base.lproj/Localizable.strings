@@ -57,7 +57,7 @@
 
 "register" = "Sign Up";
 
-"opened.title"    = "Opened Orders";
+"opened.title"    = "Orders";
 "confirm" = "CONFIRM";
 "attention" = "ATTENTIONS";
 "pin.code"= "Pin Code";
@@ -264,6 +264,7 @@
 
 "openedorder_nodata"     = "No open orders";
 "myhistory_nodata"       = "No exchange history";
+"closedorder_nodata"       = "No order history";
 
 "eos_account_title" = "EOS Deposit Account";
 "eos_copy_account" = "Copy Account Name";
@@ -344,7 +345,7 @@
 
 //zsy add
 "my_property" = "My Balance";
-"order_value" = "Opened Orders";
+"order_value" = "Orders";
 "transfer" = "Transfer";
 "account_property" = "Your Total Balance(CYB)";
 "hello" = "Hello，";
@@ -574,4 +575,23 @@
 "ticket_depoly_amount_placeholder" = "Input the quantity";
 "ticket_asset_left" = "%@ left";
 "scan_qrcode_hint" = "Align the QR  Code within the frame to scan";
-"ticket_deploy_result_info" = "Please show the QR Code to administrator.\nPlease keeo your QR Code carefully.\nThe effective time of the QR code is 10 minutes.";
+"ticket_deploy_result_info" = "Please show the QR Code to administrator.\nPlease keeo your QR Code carefully.\nThe effective time of the QR code is 30 minutes.";
+
+"vesting_lock_time" = "Lock Time";
+"vesting_time_hint" = "Input Time";
+"vesting_pubkey_hint" = "Choose one public key as the recipient";
+"vesting_time_unit_second" = "seconds";
+"vesting_time_unit_minute" = "minutes";
+"vesting_time_unit_hour" = "hours";
+"vesting_time_unit_day" = "days";
+"vesting_lock_time_hint_title" = "With vesting period";
+"vesting_lock_time_hint" = "You may set up a lock-up period for each transfer, the recipient could claim and use the locked asset only after the lock-up period expires. You need to specify one public key when there are multiple public keys under the recipient’s account.";
+
+"orders_my_open_order" = "Open Orders";
+"orders_my_filled_order" = "Order History";
+"orders_my_trade_history" = "Trade History";
+"orders_title_market" = "Pair";
+"orders_my_filled_order_title_mid" = "Average/Price";
+"orders_my_filled_order_title_trail" = "Filled/Amount";
+"orders_my_trade_history_title_mid" = "Price/Filled";
+"orders_my_trade_history_title_trail" = "Total/Trading Fee";

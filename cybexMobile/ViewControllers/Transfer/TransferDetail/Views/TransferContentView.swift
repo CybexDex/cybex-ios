@@ -27,7 +27,7 @@ class TransferContentView: UIView {
                 addressView.contentLocali = data.isSend ? data.to : data.from
                 timeView.contentLocali = data.time
 
-                if data.vestingPeriod == "" {
+                if data.vestingPeriod == "0" {
                     vestingPeriodView.contentLocali = R.string.localizable.transfer_detail_nodata.key.localized()
                 } else {
                     vestingPeriodView.contentLocali = transferTimeType(Int(data.vestingPeriod)!)

@@ -17,43 +17,71 @@ class TransferListViewController: BaseViewController {
     var coordinator: (TransferListCoordinatorProtocol & TransferListStateManagerProtocol)?
     var data: [TransferRecordViewModel]?
 
+    var page: Int = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        UserManager.shared.fetchHistoryOfFillOrdersAndTransferRecords()
+        setupTableView()
         self.startLoading()
+
+        self.coordinator?.fetchTransferRecords(page, callback: nil)
     }
 
     func setupUI() {
         self.title = R.string.localizable.transfer_list_title.key.localized()
         let nibString = String(describing: TransferListCell.self)
         self.tableView.register(UINib(nibName: nibString, bundle: nil), forCellReuseIdentifier: nibString)
+
+    }
+
+    func setupTableView() {
+        self.addPullToRefresh(self.tableView) {[weak self] (completion) in
+            guard let self = self else { return }
+
+            self.page = 0
+            self.coordinator?.fetchTransferRecords(self.page, callback: { noMoreData in
+                completion?()
+            })
+        }
+
+        self.addInfiniteScrolling(self.tableView) {[weak self] (completion) in
+            guard let self = self else { return }
+
+            if self.view.noDataView != nil {
+                completion?(true)
+                return
+            }
+
+            self.page += 1
+            self.coordinator?.fetchTransferRecords(self.page, callback: { noMoreData in
+//                completion?(noMoreData)
+            })
+        }
     }
 
     override func configureObserveState() {
-        UserManager.shared.transferRecords.asObservable().subscribe(onNext: { [weak self](data) in
-            guard let self = self else { return }
-            if let result = data, result.count > 0 {
-                self.view.hiddenNoData()
-                self.coordinator?.reduceTransferRecords()
-            } else {
-                self.endLoading()
-                self.view.showNoData(R.string.localizable.recode_nodata.key.localized(), icon: R.image.img_no_records.name)
-            }
-            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-
-        self.coordinator?.state.data.asObservable().subscribe(onNext: { [weak self](data) in
+        self.coordinator?.state.data.asObservable().skip(1).subscribe(onNext: { [weak self](data) in
             guard let self = self else { return }
             self.endLoading()
+            
             if self.isVisible {
-                self.data = data
-                if self.data?.count == 0 {
+                if self.page == 0 {
+                    self.data = data
+                }
+                else {
+                    guard let d = data else { return }
+                    self.data?.append(contentsOf: d)
+                }
+
+                if self.data?.count == 0 && self.page == 0 {
                     self.view.showNoData(R.string.localizable.recode_nodata.key.localized(), icon: R.image.img_no_records.name)
                     return
                 } else {
                     self.view.hiddenNoData()
                 }
                 self.tableView.reloadData()
+                self.stopInfiniteScrolling(self.tableView, haveNoMore: (data ?? []).count != 20)
             }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }

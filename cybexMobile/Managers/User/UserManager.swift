@@ -72,11 +72,7 @@ extension UserManager {
     func register(_ pinID: String, captcha: String, username: String, password: String) -> Promise<(Bool, Int)> {
         let (promise, seal) = Promise<(Bool, Int)>.pending()
 
-        let keysString = BitShareCoordinator.getUserKeys(username, password: password)!
-        if let keys = AccountKeys.deserialize(from: keysString),
-            let _ = keys.activeKey,
-            let _ = keys.ownerKey,
-            let _ = keys.memoKey {
+        if let keys = generateAccountKeys(username, password: password) {
 
             RegisterService.request(target: .register(pinID, captcha: captcha, name: username, keys: keys), success: { (json) in
                 if let code = json["code"].int { //失败
@@ -113,8 +109,6 @@ extension UserManager {
         self.account.accept(nil)
         self.balances.accept(nil)
         self.limitOrder.accept(nil)
-        self.fillOrder.accept(nil)
-        self.transferRecords.accept(nil)
     }
 
     func fetchAccountInfo() {
@@ -135,70 +129,6 @@ extension UserManager {
         }
     }
 
-    func fetchHistoryOfFillOrdersAndTransferRecords() {
-        guard let id = self.account.value?.id else {
-            return
-        }
-
-        let request = GetAccountHistoryRequest(accountID: id) { (data) in
-            if let data = data as? (fillOrders: [FillOrder], transferRecords: [TransferRecord]) {
-                var fillorders = data.fillOrders
-                if !self.isLoginIn {
-                    return
-                }
-                if data.transferRecords.count == 0 {
-                    self.transferRecords.accept(nil)
-                }
-                if fillorders.count == 0 {
-                    self.fillOrder.accept(nil)
-                }
-                fillorders = fillorders.filter({
-                    let baseName = appData.assetInfo[$0.fillPrice.base.assetID]
-                    let quoteName = appData.assetInfo[$0.fillPrice.quote.assetID]
-                    return baseName != nil && quoteName != nil
-                })
-
-                var result = [(FillOrder, time:String)]()
-                var count = 0
-                for fillOrder in fillorders {
-                    let timeRequest = GetBlockRequest(response: { (time) in
-                        count += 1
-                        if let time = time as? String, let date = time.dateFromISO8601 {
-                            result.append((fillOrder, time:(date.string(withFormat: "MM/dd HH:mm:ss"))))
-                        }
-                        if count == fillorders.count {
-                            self.fillOrder.accept(result)
-                        }
-                    }, blockNum: fillOrder.blockNum)
-                    CybexWebSocketService.shared.send(request: timeRequest, priority: Operation.QueuePriority.high)
-                }
-
-                let transferRecordList = data.transferRecords
-                if transferRecordList.count == 0 || !self.isLoginIn {
-                    self.transferRecords.accept(nil)
-                    return
-                }
-
-                var records = [(TransferRecord, time:String)]()
-                var recordCount = 0
-                for transferRecord in transferRecordList {
-                    let timeRequest = GetBlockRequest(response: { (time) in
-                        recordCount += 1
-                        if let time = time as? String, let date = time.dateFromISO8601 {
-                            records.append((transferRecord, time:(date.string(withFormat: "MM/dd HH:mm:ss"))))
-                        }
-                        if recordCount == transferRecordList.count {
-                            self.transferRecords.accept(records)
-                        }
-                    }, blockNum: transferRecord.blockNum)
-                    CybexWebSocketService.shared.send(request: timeRequest)
-                }
-            }
-
-        }
-        CybexWebSocketService.shared.send(request: request)
-    }
-
     func checkUserName(_ name: String) -> Promise<Bool> {
         let (promise, seal) = Promise<Bool>.pending()
 
@@ -214,68 +144,29 @@ extension UserManager {
         return promise
     }
 
+    func generateAccountKeys(_ username: String, password: String) -> AccountKeys? {
+        let keysString = BitShareCoordinator.getUserKeys(username, password: password)
+        return AccountKeys.deserialize(from: keysString)
+    }
+
     func unlock(_ username: String?, password: String, completion:@escaping (Bool, FullAccount?) -> Void) {
         guard let name = username ?? self.name.value else {
             completion(false, nil)
             return
         }
 
-        let keysString = BitShareCoordinator.getUserKeys(name, password: password)!
-        if let keys = AccountKeys.deserialize(from: keysString),
-            let activeKey = keys.activeKey,
-            let memoKey = keys.memoKey,
-            let ownKey = keys.ownerKey {
-            var canLock = false
-
+        if let keys = generateAccountKeys(name, password: password) {
             let request = GetFullAccountsRequest(name: name) { response in
                 if let data = response as? FullAccount, let account = data.account {
-                    let activeAuths = account.activeAuths
-                    let ownerAuths = account.ownerAuths
+                    let permission = account.checkPermission(keys)
+                    self.permission = permission
 
-                    for auth in activeAuths {
-                        if let auth = auth as? [Any], let key = auth[0] as? String {
-                            if [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey].contains(key) {
-                                canLock = true
-                                BitShareCoordinator.resetDefaultPublicKey(key)
-                                break
-                            }
-                        }
-                    }
-
-                    if !canLock {
-                        for auth in ownerAuths {
-                            if let auth = auth as? [Any], let key = auth[0] as? String {
-                                if [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey].contains(key) {
-                                    canLock = true
-                                    BitShareCoordinator.resetDefaultPublicKey(key)
-                                    break
-                                }
-                            }
-                        }
-                    }
-
-                    if canLock {
+                    if permission.unlock {
+                        BitShareCoordinator.resetDefaultPublicKey(permission.defaultKey)
                         self.keys = keys
-
-                        if let newAccount = data.account {
-                            if let memoKey = keys.memoKey, let ownKey = keys.ownerKey, let activeKey = keys.activeKey {
-                                if [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey].contains(newAccount.memoKey) {
-                                    self.isWithDraw = true
-                                }
-                            }
-                            if let memoKey = keys.memoKey, let ownKey = keys.ownerKey, let activeKey = keys.activeKey {
-                                if let activeKeys = newAccount.activeAuths as? [String] {
-                                    for activekey in activeKeys {
-                                        if [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey].contains(activekey) {
-                                            self.isTrade = true
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        self.timingLock()
 
                         completion(true, data)
-                        self.timingLock()
                         return
                     }
                 }
@@ -372,8 +263,9 @@ class UserManager {
             appCoodinator.repeatFetchMarket(.veryLow)
         }
     }
-    var isWithDraw: Bool = false // 写memo 权限
-    var isTrade: Bool = false // 交易权限
+
+    var permission = AccountPermission()
+
     var name: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     var keys: AccountKeys?
     var avatarString: String?
@@ -381,8 +273,6 @@ class UserManager {
 
     var balances: BehaviorRelay<[Balance]?> = BehaviorRelay(value: nil)
     var limitOrder: BehaviorRelay<[LimitOrder]?> = BehaviorRelay(value: nil)
-    var fillOrder: BehaviorRelay<[(FillOrder, time: String)]?> = BehaviorRelay(value: nil)
-    var transferRecords: BehaviorRelay<[(TransferRecord, time: String)]?> = BehaviorRelay(value: nil)
 
     var timer: Repeater?
 
@@ -456,15 +346,6 @@ class UserManager {
                     }
                 }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-
-        account.asObservable().skip(1).subscribe(onNext: {[weak self] (_) in
-            guard let self = self else { return }
-            if CybexWebSocketService.shared.overload() || self.fillOrder.value != nil {
-                return
-            }
-            self.fetchHistoryOfFillOrdersAndTransferRecords()
-        }).disposed(by: disposeBag)
-
     }
 
     private func saveName(_ name: String) {

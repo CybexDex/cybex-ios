@@ -54,10 +54,9 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
     func openMyHistory() {
         guard let tradeVC = self.rootVC.topViewController as? TradeViewController else { return }
 
-        let vc = R.storyboard.business.myHistoryViewController()!
+        let vc = R.storyboard.account.orderPageTabViewController()!
+        vc.fillOrderOnly = true
         vc.pair = tradeVC.pair
-        let coordinator = MyHistoryCoordinator(rootVC: self.rootVC)
-        vc.coordinator = coordinator
         self.rootVC.pushViewController(vc, animated: true)
     }
 

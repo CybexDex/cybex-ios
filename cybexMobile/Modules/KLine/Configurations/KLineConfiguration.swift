@@ -134,6 +134,7 @@ protocol CBTheme {
 
     var EMA1: UIColor { get }
     var EMA2: UIColor { get }
+    var EMA3: UIColor { get }
 
     var DIFColor: UIColor { get }
     var DEAColor: UIColor { get }
@@ -168,7 +169,7 @@ public class CBMainConfiguration {
     var klineType: CBKLineType = .KLine
 
     /// 主图指标类型
-    var indicatorType: CBIndicatorType = .MA([7, 25, 99])
+    var indicatorType: CBIndicatorType = .MA([7, 25])
 
     /// 辅助视图背景色(e.g. 日期的背景色)
     var dateAssistViewBgColor = #colorLiteral(red: 0.08267984539, green: 0.1148783937, blue: 0.1728201807, alpha: 1)
@@ -231,6 +232,8 @@ class BlackKLineTheme: CBTheme {
     var EMA1: UIColor = #colorLiteral(red: 0.5436816812, green: 0.5804407597, blue: 0.6680644155, alpha: 1)
 
     var EMA2: UIColor = #colorLiteral(red: 0.5100696087, green: 0.3246001303, blue: 0.1657423973, alpha: 1)
+
+    var EMA3: UIColor = #colorLiteral(red: 0.302782774, green: 0.4453626275, blue: 0.7515279055, alpha: 1)
 
     var DIFColor: UIColor = #colorLiteral(red: 0.5436816812, green: 0.5804407597, blue: 0.6680644155, alpha: 1)
 

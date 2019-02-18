@@ -55,23 +55,15 @@ extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
         let count = (maxDecimal + 1) / 4 != 0 ? 4 : (maxDecimal + 1) % 4
         
         guard let vc = R.storyboard.comprehensive.recordChooseViewController() else { return }
-        vc.preferredContentSize = CGSize(width: 82, height: 35 * count)
-        vc.modalPresentationStyle = .popover
-        vc.popoverPresentationController?.popoverBackgroundViewClass = CybexPopoverBackgroundView.self
-        vc.popoverPresentationController?.sourceView = sender
-        vc.popoverPresentationController?.sourceRect = CGRect(x: 35, y: 0, width: sender.width, height: sender.height)
-        vc.popoverPresentationController?.delegate = senderVC
-        vc.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
-        vc.popoverPresentationController?.theme_backgroundColor = [UIColor.darkFour.hexString(true), UIColor.white.hexString(true)]
+
         vc.typeIndex = .orderbook
         vc.delegate = senderVC
         vc.maxCount = maxDecimal
         vc.count = count
         vc.selectedIndex = selectedDecimal - (maxDecimal + 1 - count)
         vc.coordinator = RecordChooseCoordinator(rootVC: self.rootVC)
-        senderVC.present(vc, animated: true) {
-            vc.view.superview?.cornerRadius = 1
-        }
+
+        senderVC.presentPopOverViewController(vc, size: CGSize(width: 82, height: 35 * count), sourceView: sender, offset: CGPoint(x: 35, y: 0), direction: .down)
     }
 }
 

@@ -23,7 +23,7 @@ class RecordChooseCellView: CybexBaseView {
     }
 
     func setupUI() {
-
+        self.clearBgColor()
     }
 
     func setupSubViewEvent() {

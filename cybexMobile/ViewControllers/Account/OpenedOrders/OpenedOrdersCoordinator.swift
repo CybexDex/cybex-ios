@@ -72,8 +72,12 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
             service.reconnect()
         }
     }
+
     func fetchOpenedOrderRequest(_ pair: Pair) {
-        guard let userId = UserManager.shared.account.value?.id else { return }
+        guard let userId = UserManager.shared.account.value?.id else {
+            self.store.dispatch(FetchOpenedOrderAction(data: []))
+            return
+        }
         let request = GetLimitOrderStatus(response: { json in
             if let json = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: json) {
                 self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0})))
@@ -81,6 +85,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
         }, status: LimitOrderStatusApi.getOpenedMarketLimitOrder(userId: userId, asset1Id: pair.quote, asset2Id: pair.base))
         self.service.send(request: request)
     }
+
     func fetchAllOpenedOrder() {
         service.messageCanSend.delegate(on: self) { (self, _) in
            self.fetchAllOpenedOrderRequest()
@@ -93,7 +98,11 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     }
     
     func fetchAllOpenedOrderRequest() {
-        guard let userId = UserManager.shared.account.value?.id else { return }
+        guard let userId = UserManager.shared.account.value?.id else {
+            self.store.dispatch(FetchOpenedOrderAction(data: []))
+
+            return
+        }
         let request = GetLimitOrderStatus(response: { (json) in
             if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) {
                 self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0})))
@@ -131,14 +140,14 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
 
     func cancelOrder(_ orderID: String, feeId: String, callback: @escaping (_ success: Bool) -> Void) {
         guard let userid = UserManager.shared.account.value?.id else { return }
-        guard let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0) else { return }
+        let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0)
 
         CybexChainHelper.calculateFee(operation,
                                       operationID: .limitOrderCancel, focusAssetId: feeId) { (success, amount, assetID) in
                         if success {
                             CybexChainHelper.blockchainParams { (blockchainParams) in
                                 guard let asset = appData.assetInfo[assetID] else {return}
-                                if let jsonStr = BitShareCoordinator.cancelLimitOrder(
+                                let jsonStr = BitShareCoordinator.cancelLimitOrder(
                                     blockchainParams.block_num.int32,
                                     block_id: blockchainParams.block_id,
                                     expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
@@ -146,17 +155,17 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
                                     user_id: userid.getSuffixID,
                                     order_id: orderID.getSuffixID,
                                     fee_id: assetID.getSuffixID,
-                                    fee_amount: (amount * pow(10, asset.precision)).int64Value) {
+                                    fee_amount: (amount * pow(10, asset.precision)).int64Value)
 
-                                    let request = BroadcastTransactionRequest(response: { (data) in
-                                        if String(describing: data) == "<null>" {
-                                            callback(true)
-                                        } else {
-                                            callback(false)
-                                        }
-                                    }, jsonstr: jsonStr)
-                                    CybexWebSocketService.shared.send(request: request)
-                                }
+                                let request = BroadcastTransactionRequest(response: { (data) in
+                                    if String(describing: data) == "<null>" {
+                                        callback(true)
+                                    } else {
+                                        callback(false)
+                                    }
+                                }, jsonstr: jsonStr)
+                                CybexWebSocketService.shared.send(request: request)
+
                             }
                         } else {
                             callback(false)
