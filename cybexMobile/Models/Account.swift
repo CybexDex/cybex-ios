@@ -57,10 +57,13 @@ class Account: HandyJSON {
     func checkPermission(_ keys: AccountKeys) -> AccountPermission {
         var permission = AccountPermission()
 
-        let canUnlock = keys.pubKeys.contains(where: { (key) -> Bool in
-            permission.defaultKey = key
-            return allPubKeys.contains(key)
-        })
+        var canUnlock = false
+        for key in keys.pubKeys {
+            if allPubKeys.contains(key) {
+                canUnlock = true
+                permission.defaultKey = key
+            }
+        }
 
         let canTrade = keys.pubKeys.contains(where: { (key) -> Bool in
             return activePubKeys.contains(key)

@@ -169,8 +169,6 @@ extension UserManager {
                         completion(true, data)
                         return
                     }
-
-
                 }
                 completion(false, nil)
             }

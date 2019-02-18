@@ -50,7 +50,7 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
     }
     
     func applyLockupAsset(_ sender: LockupAssteData, callback: @escaping (Bool)->()) {
-        if let fromAccount = UserManager.shared.account.value {
+        if UserManager.shared.account.value != nil {
             CybexChainHelper.blockchainParams { (blockInfo) in
                 if let balance = sender.balance {
                     let amount = balance.amount.decimal()
@@ -58,6 +58,11 @@ extension LockupAssetsCoordinator: LockupAssetsStateManagerProtocol {
                     guard let fromAccount = UserManager.shared.account.value else {
                         return
                     }
+
+                    guard let keys = UserManager.shared.keys, let pubkey = KeyHelper.getPubKeyFrom(sender.owner, account: keys) else {
+                        return
+                    }
+                    BitShareCoordinator.resetDefaultPublicKey(pubkey)
 
                     let jsonstr = BitShareCoordinator.getClaimedSign(blockInfo.block_num.int32,
                                                                      block_id: blockInfo.block_id,

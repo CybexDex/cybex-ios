@@ -22,6 +22,14 @@ class AccountKeys: HandyJSON {
         return [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey]
     }
 
+    var keys: [Key] {
+        guard let activeKey = activeKey, let memoKey = memoKey, let ownKey = ownerKey else {
+            return []
+        }
+
+        return [memoKey, ownKey, activeKey]
+    }
+
     required init() {
 
     }
@@ -39,6 +47,10 @@ class Key: HandyJSON {
     var address = ""
     var compressed = ""
     var uncompressed = ""
+
+    var addresses: [String] {
+        return [address, compressed, uncompressed]
+    }
 
     required init() {
     }
