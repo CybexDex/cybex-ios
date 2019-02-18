@@ -42,6 +42,24 @@ class MyHistoryCellView: UIView {
         self.orderPrice.text = vm.middleBottom
         self.orderAmount.text = vm.rightTop
         self.amount.text = vm.rightBottom
+
+
+        if vm.isCanceled {
+            self.base.theme_textColor = [UIColor.white.hexString(true), UIColor.darkTwo.hexString(true)]
+        }
+        else {
+            self.base.theme_textColor = [UIColor.steel.hexString(true), UIColor.steel.hexString(true)]
+        }
+        typeView.alpha = vm.isCanceled ? 0.5 : 1
+        kindL.alpha = vm.isCanceled ? 0.5 : 1
+        asset.alpha = vm.isCanceled ? 0.5 : 1
+        base.alpha = vm.isCanceled ? 0.5 : 1
+        averagePrice.alpha = vm.isCanceled ? 0.5 : 1
+        orderAmount.alpha = vm.isCanceled ? 0.5 : 1
+
+        time.alpha = vm.isCanceled ? 0.3 : 1
+        orderPrice.alpha = vm.isCanceled ? 0.3 : 1
+        amount.alpha = vm.isCanceled ? 0.3 : 1
     }
 
     func setup() {
@@ -97,6 +115,7 @@ class MyHistoryCellView: UIView {
 
 extension MyHistoryCellView {
     struct ViewModel {
+        var oid: String = ""
         var isBuy: Bool
         var isCanceled: Bool
         var quote: String
@@ -134,7 +153,8 @@ extension MyHistoryCellView {
 
             let amountString = data.getPrice().quote.volume().suffixNumber(digitNum: tradePrecision.amount, padZero: true) + " " + pair.quote.symbol
 
-            return ViewModel(isBuy: isBuy,
+            return ViewModel(oid: data.orderId,
+                             isBuy: isBuy,
                              isCanceled: data.canceledAmount > 0,
                              quote: pair.quote.symbol,
                              base: pair.base.symbol,
@@ -160,7 +180,8 @@ extension MyHistoryCellView {
 
             let feeAmount = data.fee.volumeString()  + " " + data.fee.assetID.symbol
 
-            return ViewModel(isBuy: isBuy,
+            return ViewModel(oid: "",
+                             isBuy: isBuy,
                              isCanceled: false,
                              quote: pair.quote.symbol,
                              base: pair.base.symbol,

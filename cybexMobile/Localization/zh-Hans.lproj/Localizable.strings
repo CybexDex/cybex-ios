@@ -250,6 +250,7 @@
 
 "openedorder_nodata"     = "暂无委单";
 "myhistory_nodata"       = "暂无交易记录";
+"closedorder_nodata"       = "暂无历史委托";
 
 
 "eos_account_title" = "EOS充值帐户";
@@ -559,11 +560,13 @@
 
 "vesting_lock_time" = "锁定时间";
 "vesting_time_hint" = "请输入时间";
-"vesting_pubkey_hint" = "请选择一个公钥";
+"vesting_pubkey_hint" = "选择一个目标账户下的公钥作为领取人";
 "vesting_time_unit_second" = "秒";
 "vesting_time_unit_minute" = "分钟";
 "vesting_time_unit_hour" = "小时";
 "vesting_time_unit_day" = "天";
+"vesting_lock_time_hint_title" = "锁定时间";
+"vesting_lock_time_hint" = "您可以为转账设置一个锁定时长，从转账成功开始计算，锁定时间到期后，接收方可以领取并使用该笔资产。当收入方账户下有多个公钥时，您需要指定一个公钥作为领取人。";
 
 "orders_my_open_order" = "当前委托";
 "orders_my_filled_order" = "历史委托";

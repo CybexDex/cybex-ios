@@ -22,6 +22,7 @@ class TransferViewController: BaseViewController {
     var switchVestingObservable = BehaviorSubject(value: false)
 
     var isFetchFee: Bool = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -46,7 +47,7 @@ class TransferViewController: BaseViewController {
 
         let vestingValid = Observable.combineLatest(switchVestingObservable.asObserver(),
             self.transferView.postVestingView.timeTextFiled.rx.text.orEmpty,
-                                                    self.transferView.postVestingView.pubkeyTextFiled.rx.text.orEmpty).map { (status, time, pubkey) -> Bool in
+                                                    self.transferView.postVestingView.pubkeyTextview.rx.text.orEmpty).map { (status, time, pubkey) -> Bool in
                                                         if status {
                                                             return time.count > 0 && pubkey.count > 0
                                                         }
@@ -119,6 +120,43 @@ class TransferViewController: BaseViewController {
             guard let self = self else { return }
             self.transferView.accountView.textField.text = account
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+
+        self.coordinator?.state.toAccount.asObservable().skip(1).subscribe(onNext: { [weak self](account) in
+            guard let self = self else { return }
+
+            self.checkIfShowPubKey(account)
+
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+
+        self.switchVestingObservable.subscribe(onNext: {[weak self] (status) in
+            guard let self = self else { return }
+
+            if !status {
+                self.transferView.postVestingView.hiddenPubkey()
+            }
+            else {
+                self.checkIfShowPubKey(self.coordinator?.state.toAccount.value)
+            }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    }
+
+    func checkIfShowPubKey(_ account: Account?) {
+        if let toaccount = account  {
+            if toaccount.activePubKeys.count > 1 {
+                if try! self.switchVestingObservable.value() {
+                    self.transferView.postVestingView.showPubkey()
+                }
+                self.transferView.contentView.updateContentSize()
+                self.transferView.updateContentSize()
+            }
+            else {
+                let pubkey = toaccount.activePubKeys[0]
+                self.transferView.postVestingView.setPubkey(pubkey)
+                self.transferView.contentView.updateContentSize()
+                self.transferView.updateContentSize()
+            }
+
+        }
     }
 
     func setupUI() {
@@ -159,7 +197,7 @@ class TransferViewController: BaseViewController {
                 let data = UIHelper.getTransferInfo(account,
                                            quanitity: amount + " " + (appData.assetInfo[balance.assetType]?.symbol.filterJade)!,
                                            fee: fee.amount.formatCurrency(digitNum: feeInfo.precision) + " " + feeInfo.symbol.filterJade,
-                                           memo: memo)
+                                           memo: memo.replacingOccurrences(of: "\n", with: "...\n"))
                 showConfirm(R.string.localizable.transfer_ensure_title.key.localized(), attributes: data)
             }
         }
@@ -194,17 +232,19 @@ extension TransferViewController {
         ShowToastManager.shared.hide()
         if !UserManager.shared.isLocked {
 
-            if !UserManager.shared.isWithDraw, self.coordinator?.state.memo.value.count != 0 {
+            if !UserManager.shared.permission.withdraw, self.coordinator?.state.memo.value.count != 0 {
                 showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
                 return
             }
 
             self.startLoading()
-            let timeAmount = UInt64(self.transferView.postVestingView.timeTextFiled.text ?? "0")!
+            let timeAmountStr = self.transferView.postVestingView.timeTextFiled.text ?? ""
+
+            let timeAmount: UInt64 = timeAmountStr.isEmpty ? 0 : UInt64(timeAmountStr) ?? 0
             let timeUnit: [UInt64] = [1, 60, 3600, 3600 * 24]
 
             self.coordinator?.transfer(timeUnit[self.selectedVestingTimeIndex] * timeAmount,
-                                       toPubKey: self.transferView.postVestingView.pubkeyTextFiled.text ?? "", callback: {[weak self] (data) in
+                                       toPubKey: self.transferView.postVestingView.pubkeyTextview.text ?? "", callback: {[weak self] (data) in
                 guard let self = self else { return }
                 self.endLoading()
                 main {
@@ -256,6 +296,9 @@ extension TransferViewController {
         if let text = data["content"] as? String {
             self.coordinator?.dispatchAccountAction(AccountValidStatus.unValided)
             self.transferView.postVestingView.clearPubkey()
+            self.transferView.postVestingView.hiddenPubkey()
+            self.transferView.contentView.updateContentSize()
+            self.transferView.updateContentSize()
             if text.count != 0 {
                 self.coordinator?.setAccount(text)
             } else {
@@ -283,7 +326,7 @@ extension TransferViewController {
             return
         }
 
-        if !content.isEmpty, !UserManager.shared.isWithDraw {
+        if !content.isEmpty, !UserManager.shared.permission.withdraw {
             showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
             return
         }
@@ -311,14 +354,22 @@ extension TransferViewController {
             guard let self = self else { return }
 
             let pubkey = toAccount.activePubKeys[index]
-            self.transferView.postVestingView.pubkeyTextFiled.text = pubkey
-            self.transferView.postVestingView.pubkeyTextFiled.sendActions(for: .valueChanged)
-
+            self.transferView.postVestingView.setPubkey(pubkey)
+            self.transferView.contentView.updateContentSize()
+            self.transferView.updateContentSize()
         })
     }
 
     @objc func dropDownBoxViewDidClicked(_ data: [String: Any]) {
         self.coordinator?.openDropBoxViewController()
+    }
+
+    @objc func showHintContent(_ data: [String: Any]) {
+        let v = BalanceIntroduceView(frame: UIScreen.main.bounds)
+        v.title.locali = R.string.localizable.vesting_lock_time_hint_title.key
+        v.content.locali = R.string.localizable.vesting_lock_time_hint.key
+
+        UIApplication.shared.keyWindow?.addSubview(v)
     }
 }
 

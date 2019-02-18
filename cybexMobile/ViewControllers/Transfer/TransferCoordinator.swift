@@ -184,6 +184,8 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
     }
 
     func chooseAddress() {
+        guard let currentVC = self.rootVC.topViewController as? TransferViewController else { return }
+
         let width = ModalSize.full
         let height = ModalSize.custom(size: 244)
         let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: UIScreen.main.bounds.height - 244))
@@ -201,7 +203,9 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
             let selectedIndex = picker.selectedRow(inComponent: 0)
             self.store.dispatch(CleanToAccountAction())
             self.store.dispatch(ValidAccountAction(status: .validSuccessed))
-            self.store.dispatch(ChooseAccountAction(account: items[selectedIndex]))
+            let item = items[selectedIndex]
+            self.store.dispatch(ChooseAccountAction(account: item))
+            currentVC.account(["content": item.address])
             self.getTransferAccountInfo()
         }
 
@@ -314,6 +318,9 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                     if exist {
                         self.getTransferAccountInfo()
                     }
+                    else {
+                        self.store.dispatch(SetToAccountAction(account: nil))
+                    }
                 }
             }).cauterize()
         }
@@ -372,7 +379,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
 
         var operationString: String!
         if try! currentVC.switchVestingObservable.value() {
-            operationString = BitShareCoordinator.getTransterWithVestingOperation(fromUserId.getSuffixID, to_user_id: toUserId.getSuffixID, asset_id: assetId.getSuffixID, amount: 0, fee_id: 0, fee_amount: 0, memo: memo, from_memo_key: "", to_memo_key: "", vestingPeroid: 0, toPubKey: "")
+            operationString = BitShareCoordinator.getTransterWithVestingOperation(fromUserId.getSuffixID, to_user_id: toUserId.getSuffixID, asset_id: assetId.getSuffixID, amount: 0, fee_id: 0, fee_amount: 0, memo: memo, from_memo_key: fromMemoKey, to_memo_key: toMemoKey, vestingPeroid: 0, toPubKey: "")
         }
         else {
             operationString = BitShareCoordinator.getTransterOperation(fromUserId.getSuffixID,

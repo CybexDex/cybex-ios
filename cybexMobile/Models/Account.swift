@@ -9,6 +9,13 @@
 import Foundation
 import HandyJSON
 
+struct AccountPermission: HandyJSON {
+    var unlock: Bool = false
+    var defaultKey: String = ""
+    var withdraw: Bool = false
+    var trade: Bool = false
+}
+
 class Account: HandyJSON {
     var membershipExpirationDate: String = ""
     var name: String = ""
@@ -34,6 +41,39 @@ class Account: HandyJSON {
         guard let mapsResult = auths.map({$0[0]}) as? [String] else { return [] }
 
         return mapsResult
+    }
+
+    var ownerPubKeys: [String] {
+        guard let auths = ownerAuths as? [[Any]] else { return [] }
+        guard let mapsResult = auths.map({$0[0]}) as? [String] else { return [] }
+
+        return mapsResult
+    }
+
+    var allPubKeys: [String] {
+        return activePubKeys + ownerPubKeys
+    }
+
+    func checkPermission(_ keys: AccountKeys) -> AccountPermission {
+        var permission = AccountPermission()
+
+        var canUnlock = false
+        for key in keys.pubKeys {
+            if allPubKeys.contains(key) {
+                canUnlock = true
+                permission.defaultKey = key
+            }
+        }
+
+        let canTrade = keys.pubKeys.contains(where: { (key) -> Bool in
+            return activePubKeys.contains(key)
+        })
+
+        permission.unlock = canUnlock
+        permission.withdraw = keys.pubKeys.contains(memoKey)
+        permission.trade = canTrade
+
+        return permission
     }
 }
 

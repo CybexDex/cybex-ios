@@ -177,6 +177,10 @@ extension HomeViewController {
                 if datas.count > index {
                     let buckets = MarketHelper.filterPopAssetsCurrency()[index]
 
+                    if buckets.incre != .greater {
+                        return
+                    }
+
                     if let baseIndex = MarketConfiguration.marketBaseAssets.map({ $0.id }).firstIndex(of: buckets.base) {
                         let markets = MarketHelper.filterQuoteAssetTicker(buckets.base)
                         if let curIndex = markets.firstIndex(of: buckets) {

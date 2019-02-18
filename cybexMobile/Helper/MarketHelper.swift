@@ -38,7 +38,6 @@ class MarketHelper {
         if let index = relation.index(of: assetIDAName) {
             indexA = index
         }
-        
      
         if let index = relation.index(of: assetIDBName) {
             indexB = index

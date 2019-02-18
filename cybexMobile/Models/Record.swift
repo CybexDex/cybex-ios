@@ -108,15 +108,29 @@ struct TransferRecord: HandyJSON {
     var amount: HandyAsset?
     var memo: Memo?
     var blockNum: Int = 0
-    var vestingPeriod: String = ""
-    var publicKey: String = ""
+
+    var extensions: [Any] = []
 
     init() {}
 
     mutating func mapping(mapper: HelpingMapper) {
         mapper <<< self.blockNum <-- "block_num"
-        mapper <<< self.vestingPeriod <-- "vesting_period"
-        mapper <<< self.publicKey <-- "public_key"
+    }
+
+    var vestingPeriod: Int {
+        if extensions.count > 0, let vestingDatas = extensions[0] as? [Any], let vestingData = vestingDatas[1] as? [String: Any], let period = vestingData["vesting_period"] as? Int {
+            return period
+        }
+
+        return 0
+    }
+
+    var publicKey: String {
+        if extensions.count > 1,let vestingDatas = extensions[0] as? [Any], let vestingData = vestingDatas[1] as? [String: Any], let pubkey = vestingData["public_key"] as? String {
+            return pubkey
+        }
+
+        return ""
     }
 }
 

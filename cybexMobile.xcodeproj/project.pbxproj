@@ -541,6 +541,7 @@
 		736761E821BE4C2D0065FD35 /* IMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E721BE4C2D0065FD35 /* IMService.swift */; };
 		736761EA21BE4DEF0065FD35 /* MDPWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */; };
 		736761EC21BE4DFD0065FD35 /* OCOWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761EB21BE4DFD0065FD35 /* OCOWebSocketService.swift */; };
+		736D287122018AC2004C6F31 /* CybexDatabaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736D287022018AC2004C6F31 /* CybexDatabaseApi.swift */; };
 		73731D7D21A2CE68005B9B3C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731C11B4214D045B00761955 /* RxSwift.framework */; };
 		73731D8321A5378E005B9B3C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8221A5378E005B9B3C /* Helpers.swift */; };
 		73731D8521A5382A005B9B3C /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8421A5382A005B9B3C /* Delegate.swift */; };
@@ -706,6 +707,8 @@
 		73E61F6821F9B3AD00B54612 /* PostVestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6721F9B3AD00B54612 /* PostVestingView.swift */; };
 		73E61F6A21FABD5500B54612 /* PostVestingView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */; };
 		73E61F6D21FB105D00B54612 /* OrderPageTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */; };
+		73E61F6F21FFFC9400B54612 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E61F6E21FFFC9400B54612 /* UILabel+Extensions.swift */; };
+		73F113EC2216A700008C2D37 /* KeyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F113EB2216A700008C2D37 /* KeyHelper.swift */; };
 		73F50B9E2137D0B20071B08D /* ETO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73F50B9D2137D0B20071B08D /* ETO.storyboard */; };
 		73F50BA22137D71F0071B08D /* ETOCrowdGridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */; };
 		73F50BA32137D71F0071B08D /* ETOCrowdGridItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */; };
@@ -1417,6 +1420,7 @@
 		736761E721BE4C2D0065FD35 /* IMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMService.swift; sourceTree = "<group>"; };
 		736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPWebSocketService.swift; sourceTree = "<group>"; };
 		736761EB21BE4DFD0065FD35 /* OCOWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCOWebSocketService.swift; sourceTree = "<group>"; };
+		736D287022018AC2004C6F31 /* CybexDatabaseApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CybexDatabaseApi.swift; sourceTree = "<group>"; };
 		737258FAB6762972136E4188BF20F602 /* BusinessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessView.xib; sourceTree = "<group>"; };
 		73731D8221A5378E005B9B3C /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		73731D8421A5382A005B9B3C /* Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
@@ -1587,6 +1591,8 @@
 		73E61F6721F9B3AD00B54612 /* PostVestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVestingView.swift; sourceTree = "<group>"; };
 		73E61F6921FABD5500B54612 /* PostVestingView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostVestingView+Layout.swift"; sourceTree = "<group>"; };
 		73E61F6C21FB105D00B54612 /* OrderPageTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPageTabViewController.swift; sourceTree = "<group>"; };
+		73E61F6E21FFFC9400B54612 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		73F113EB2216A700008C2D37 /* KeyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyHelper.swift; sourceTree = "<group>"; };
 		73F50B9D2137D0B20071B08D /* ETO.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ETO.storyboard; sourceTree = "<group>"; };
 		73F50B9F2137D71F0071B08D /* ETOCrowdGridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdGridItemView.swift; sourceTree = "<group>"; };
 		73F50BA02137D71F0071B08D /* ETOCrowdGridItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdGridItemView.xib; sourceTree = "<group>"; };
@@ -2308,6 +2314,7 @@
 				90E6F236626C719C549D1184F4BB4696 /* UITextField+Extensions.swift */,
 				50C2110BFFD03771C03869732E3464D5 /* UIView+Extensions.swift */,
 				13A7FFF7ADE1483BDF733182FE7AD25B /* UIViewController+Extension.swift */,
+				73E61F6E21FFFC9400B54612 /* UILabel+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3147,6 +3154,7 @@
 		7391101121BA503700412CE1 /* HTTP */ = {
 			isa = PBXGroup;
 			children = (
+				736D287022018AC2004C6F31 /* CybexDatabaseApi.swift */,
 				106A644C21D47A2F00112A4C /* Eva */,
 				8CD40C5E84A00D4E3920E1AFF7D89F87 /* SimpleHTTPService.swift */,
 				736761E621BE4C220065FD35 /* IM */,
@@ -4017,6 +4025,7 @@
 				7333857C21C0EC400026765F /* AddressHelper.swift */,
 				7333857E21C0EC890026765F /* CashHelper.swift */,
 				7377A42E21F179CF00EEBEF0 /* CryptoHelper.swift */,
+				73F113EB2216A700008C2D37 /* KeyHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -4877,6 +4886,7 @@
 				46F85B0BF83E45545572AF39E2A2F48B /* Balance.swift in Sources */,
 				94BFDD245BD4F1E4274CC4D8C0AC3FCD /* BalanceIntroduceView.swift in Sources */,
 				73F50BA42137D71F0071B08D /* ETOCrowdGridItemViewAdapter.swift in Sources */,
+				736D287122018AC2004C6F31 /* CybexDatabaseApi.swift in Sources */,
 				4D3E4222415A233603135173A5D25471 /* BaseCollectionViewCell.swift in Sources */,
 				729B869B2154C71300C6E0E4 /* ComprehensiveItemsViewAdapter.swift in Sources */,
 				7333858321C1FA450026765F /* LimitOrderStatusApi.swift in Sources */,
@@ -5124,6 +5134,7 @@
 				225746DB210707DD0017FA1A /* PickerCoordinator.swift in Sources */,
 				72968D302158DC4E00B0AA77 /* RecordHeaderView.swift in Sources */,
 				D1612139CDC75BB4ACC08A1D78FD0AEE /* OpenedOrdersCell.swift in Sources */,
+				73F113EC2216A700008C2D37 /* KeyHelper.swift in Sources */,
 				5F25028208C6665DE69B50E5D5ECBEF6 /* OpenedOrdersCoordinator.swift in Sources */,
 				7217B07D2122AAFD00608531 /* AddAddressActions.swift in Sources */,
 				3B0EB655210313B200F19C31 /* AccountContentView.swift in Sources */,
@@ -5252,6 +5263,7 @@
 				666C535B0D6573A3C341FC0208A91E71 /* Theme_Extensions.swift in Sources */,
 				1E6EBD4E21D3851900E3EDE7 /* EvaViewAdapter.swift in Sources */,
 				7333856621BFA4270026765F /* MarketConfigration.swift in Sources */,
+				73E61F6F21FFFC9400B54612 /* UILabel+Extensions.swift in Sources */,
 				7333858121C0ED2B0026765F /* UIUtils.swift in Sources */,
 				724C5D4821538D3C00FF1DE7 /* HotAssetView.swift in Sources */,
 				72DBCA7521391A4300905303 /* CybexWebActions.swift in Sources */,

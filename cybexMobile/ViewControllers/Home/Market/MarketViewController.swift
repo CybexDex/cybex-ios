@@ -48,13 +48,13 @@ class MarketViewController: BaseViewController {
         didSet {
             switch indicator {
             case .ma:
-                CBConfiguration.sharedConfiguration.main.indicatorType = .MA([7, 14, 21])
+                CBConfiguration.sharedConfiguration.main.indicatorType = .MA([7, 25])
             case .ema:
-                CBConfiguration.sharedConfiguration.main.indicatorType = .EMA([7, 14])
+                CBConfiguration.sharedConfiguration.main.indicatorType = .EMA([7, 25])
             case .macd:
                 CBConfiguration.sharedConfiguration.main.indicatorType = .MACD
             case .boll:
-                CBConfiguration.sharedConfiguration.main.indicatorType = .BOLL(7)
+                CBConfiguration.sharedConfiguration.main.indicatorType = .BOLL(20)
             case .none:
                 break
             }

@@ -41,8 +41,8 @@ class AppConfiguration {
     static var ServerIconsBaseURLString = "https://app.cybex.io/icons/"
     static var GameBaseURLString = "https://gamecenter.cybex.io"
 
-    static var HelpNightURL = "http://47.75.154.39:3009/cybexnight?lang="
-    static var HelpLightURL = "http://47.75.154.39:3009/cybexday?lang="
+    static var HelpNightURL = "https://survey.cybex.io/cybexnight?lang="
+    static var HelpLightURL = "https://survey.cybex.io/cybexday?lang="
 }
 
 extension AppConfiguration {

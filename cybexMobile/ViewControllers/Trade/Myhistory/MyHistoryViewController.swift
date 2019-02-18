@@ -99,18 +99,18 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
 
             self.page += 1
             self.fetchData(self.page, callback: { (noMoreData) in
-                completion?(noMoreData)
             })
         }
     }
 
     func fetchData(_ page: Int, callback: ((Bool) -> Void)?) {
         if case let .fillOrder(pair: pair) = type {
+            let oid: String? = self.page == 0 ? nil : self.data.last?.oid
             if let pair = pair {
-                self.coordinator?.fetchMyOrderHistory(pair, page: page, callback: callback)
+                self.coordinator?.fetchMyOrderHistory(pair, lessThanOrderId: oid, callback: callback)
             }
             else {
-                self.coordinator?.fetchAllMyOrderHistory(page, callback: callback)
+                self.coordinator?.fetchAllMyOrderHistory(oid, callback: callback)
             }
         }
         else if case let .groupFillOrder(pair: pair) = type, let uid = UserManager.shared.account.value?.id {
@@ -126,14 +126,29 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
                     }
 
                     if self.page == 0 {
+                        if vmData.count < 20 {
+                            self.tableView.es.noticeNoMoreData()
+                        }
+                        else {
+                            self.tableView.es.resetNoMoreData()
+                        }
                         self.data = vmData
                     }
                     else {
                         self.data.append(contentsOf: vmData)
                     }
 
-                    callback?(vmData.count != 20)
+                    if self.data.count == 0 {
+                        self.view.showNoData(R.string.localizable.myhistory_nodata.key.localized(), icon: R.image.img_no_records.name)
+                        return
+                    }
+                    else {
+                        self.view.hiddenNoData()
+                    }
+                    
                     self.tableView.reloadData()
+                    callback?(vmData.count != 20)
+                    self.stopInfiniteScrolling(self.tableView, haveNoMore: (vmData.count != 20))
                 }
 
             }, error: { (error) in
@@ -142,22 +157,55 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
                 self.endLoading()
             }
         }
+        else {
+            self.endLoading()
+
+            if self.data.count == 0 {
+                self.view.showNoData(R.string.localizable.myhistory_nodata.key.localized(), icon: R.image.img_no_records.name)
+                return
+            }
+            else {
+                self.view.hiddenNoData()
+            }
+        }
     }
 
     override func configureObserveState() {
-        self.coordinator?.state.fillOrders.asObservable().subscribe(onNext: {[weak self] (data) in
+        self.coordinator?.state.fillOrders.asObservable().skip(1).subscribe(onNext: {[weak self] (data) in
             guard let self = self else { return }
             self.endLoading()
+
+            guard data.count != 0 else {
+                if self.data.count == 0 {
+                    self.view.showNoData(R.string.localizable.closedorder_nodata.key.localized(), icon: R.image.img_no_records.name)
+                    return
+                }
+                else {
+                    self.view.hiddenNoData()
+                }
+
+                return
+            }
+            self.view.hiddenNoData()
 
             let newData = data.map({ MyHistoryCellView.ViewModel.makeViewModelFrom(data: $0) })
 
             if self.page == 0 {
+                if newData.count < 20 {
+                    self.tableView.es.noticeNoMoreData()
+                }
+                else {
+                    self.tableView.es.resetNoMoreData()
+                }
                 self.data = newData
             }
             else {
                 self.data.append(contentsOf: newData)
             }
+
             self.tableView.reloadData()
+            self.stopInfiniteScrolling(self.tableView, haveNoMore: (data.count != 20))
+
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
 }
@@ -173,10 +221,6 @@ extension MyHistoryViewController: UITableViewDelegate, UITableViewDataSource {
             let model = self.data[indexPath.row]
 
             cell.setup(model, indexPath: indexPath)
-
-            let canceledSelectedColor: UIColor = ThemeManager.currentThemeIndex == 0 ? .darkFour : .steel20
-            cell.contentView.backgroundColor = model.isCanceled ? canceledSelectedColor : .clear
-            
             return cell
         }
         return MyHistoryCell()

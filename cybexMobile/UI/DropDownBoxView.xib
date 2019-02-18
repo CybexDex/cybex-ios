@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VsX-QA-EtR">
-                    <rect key="frame" x="0.0" y="0.0" width="351" height="44"/>
+                    <rect key="frame" x="8" y="0.0" width="343" height="44"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -36,7 +36,7 @@
                 </imageView>
             </subviews>
             <constraints>
-                <constraint firstItem="VsX-QA-EtR" firstAttribute="leading" secondItem="Lhl-p8-24W" secondAttribute="leading" id="Cr9-Sl-sKU"/>
+                <constraint firstItem="VsX-QA-EtR" firstAttribute="leading" secondItem="Lhl-p8-24W" secondAttribute="leading" constant="8" id="Cr9-Sl-sKU"/>
                 <constraint firstItem="VsX-QA-EtR" firstAttribute="top" secondItem="Lhl-p8-24W" secondAttribute="top" id="GeA-Yj-xcd"/>
                 <constraint firstItem="vIe-WW-7jf" firstAttribute="centerY" secondItem="VsX-QA-EtR" secondAttribute="centerY" id="J6w-LD-fDw"/>
                 <constraint firstItem="vIe-WW-7jf" firstAttribute="leading" secondItem="VsX-QA-EtR" secondAttribute="trailing" id="NGY-Ig-3O5"/>

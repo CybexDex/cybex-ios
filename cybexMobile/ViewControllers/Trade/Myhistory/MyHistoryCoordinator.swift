@@ -17,8 +17,8 @@ protocol MyHistoryStateManagerProtocol {
     var state: MyHistoryState { get }
 
     func disconnect()
-    func fetchMyOrderHistory(_ pair: Pair, page: Int, callback: ((Bool) -> Void)?)
-    func fetchAllMyOrderHistory(_ page: Int, callback: ((Bool) -> Void)?)
+    func fetchMyOrderHistory(_ pair: Pair, lessThanOrderId: String?, callback: ((Bool) -> Void)?)
+    func fetchAllMyOrderHistory(_ lessThanOrderId: String?, callback: ((Bool) -> Void)?)
 
     func checkConnectStatus() -> Bool
     func connect()
@@ -58,12 +58,12 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
         return service.checkNetworConnected()
     }
 
-    func fetchMyOrderHistory(_ pair: Pair, page: Int, callback: ((Bool) -> Void)?) {
+    func fetchMyOrderHistory(_ pair: Pair, lessThanOrderId: String?, callback: ((Bool) -> Void)?) {
         service.messageCanSend.delegate(on: self) { (self, _) in
-            self.fetchMyOrderHistoryRequest(pair, page: page, callback: callback)
+            self.fetchMyOrderHistoryRequest(pair, lessThanOrderId: lessThanOrderId, callback: callback)
         }
         if service.checkNetworConnected() {
-            self.fetchMyOrderHistoryRequest(pair, page: page, callback: callback)
+            self.fetchMyOrderHistoryRequest(pair, lessThanOrderId: lessThanOrderId, callback: callback)
         }else {
             service.reconnect()
         }
@@ -78,45 +78,79 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
         self.service.send(request: request)
     }
 
-    func fetchMyOrderHistoryRequest(_ pair: Pair, page: Int, callback: ((Bool) -> Void)?) {
-        guard let userId = UserManager.shared.account.value?.id else { return }
+    func fetchMyOrderHistoryRequest(_ pair: Pair, lessThanOrderId: String?, callback: ((Bool) -> Void)?) {
+        guard let userId = UserManager.shared.account.value?.id else {
+            callback?(true)
 
-
-        maxOrderId {[weak self] (lessThanOrderId) in
-            let request = GetLimitOrderStatus(response: { json in
-                if let json = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: json) as? [LimitOrderStatus] {
-                    callback?(object.count != 20)
-                    self?.store.dispatch(FillOrderDataFetchedAction(data: object))
-                }
-            }, status: LimitOrderStatusApi.getMarketLimitOrder(userId: userId, asset1Id: pair.quote, asset2Id: pair.base, lessThanOrderId: lessThanOrderId, limit: 20))
-            self?.service.send(request: request)
+            self.store.dispatch(FillOrderDataFetchedAction(data: []))
+            return
         }
 
+        guard let oid = lessThanOrderId else {
+            maxOrderId {[weak self] (lessThanOrderId) in
+                let request = GetLimitOrderStatus(response: { json in
+                    if let json = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: json) as? [LimitOrderStatus] {
+                        callback?(object.count != 20)
+                        self?.store.dispatch(FillOrderDataFetchedAction(data: object))
+                    }
+                }, status: LimitOrderStatusApi.getMarketLimitOrder(userId: userId, asset1Id: pair.quote, asset2Id: pair.base, lessThanOrderId: lessThanOrderId, limit: 20))
+                self?.service.send(request: request)
+            }
+            return
+        }
+
+        let preOid = oid.getPrefixOfID + ".\(oid.getSuffixID - 1)"
+
+        let request = GetLimitOrderStatus(response: { json in
+            if let json = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: json) as? [LimitOrderStatus] {
+                callback?(object.count != 20)
+                self.store.dispatch(FillOrderDataFetchedAction(data: object))
+            }
+        }, status: LimitOrderStatusApi.getMarketLimitOrder(userId: userId, asset1Id: pair.quote, asset2Id: pair.base, lessThanOrderId: preOid, limit: 20))
+        self.service.send(request: request)
     }
 
-    func fetchAllMyOrderHistory(_ page: Int, callback: ((Bool) -> Void)?) {
+    func fetchAllMyOrderHistory(_ lessThanOrderId: String?, callback: ((Bool) -> Void)?) {
         service.messageCanSend.delegate(on: self) { (self, _) in
-            self.fetchAllMyOrderHistoryRequest(page, callback: callback)
+            self.fetchAllMyOrderHistoryRequest(lessThanOrderId, callback: callback)
         }
         if service.checkNetworConnected() {
-            self.fetchAllMyOrderHistoryRequest(page, callback: callback)
+            self.fetchAllMyOrderHistoryRequest(lessThanOrderId, callback: callback)
         }else {
             service.reconnect()
         }
     }
 
-    func fetchAllMyOrderHistoryRequest(_ page: Int, callback: ((Bool) -> Void)?) {
-        guard let userId = UserManager.shared.account.value?.id else { return }
+    func fetchAllMyOrderHistoryRequest(_ lessThanOrderId: String?, callback: ((Bool) -> Void)?) {
+        guard let userId = UserManager.shared.account.value?.id else {
+            callback?(true)
 
-        maxOrderId {[weak self] (lessThanOrderId) in
-            let request = GetLimitOrderStatus(response: { (json) in
-                if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) as? [LimitOrderStatus] {
-                    callback?(object.count != 20)
-                    self?.store.dispatch(FillOrderDataFetchedAction(data: object))
-                }
-            }, status: LimitOrderStatusApi.getLimitOrder(userId: userId, lessThanOrderId: lessThanOrderId, limit: 20))
-            self?.service.send(request: request)
+            self.store.dispatch(FillOrderDataFetchedAction(data: []))
+            return
         }
+
+        guard let oid = lessThanOrderId else {
+            maxOrderId {[weak self] (lessThanOrderId) in
+                let request = GetLimitOrderStatus(response: { (json) in
+                    if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) as? [LimitOrderStatus] {
+                        callback?(object.count != 20)
+                        self?.store.dispatch(FillOrderDataFetchedAction(data: object))
+                    }
+                }, status: LimitOrderStatusApi.getLimitOrder(userId: userId, lessThanOrderId: lessThanOrderId, limit: 20))
+                self?.service.send(request: request)
+            }
+            return
+        }
+
+        let preOid = oid.getPrefixOfID + ".\(oid.getSuffixID - 1)"
+
+        let request = GetLimitOrderStatus(response: { (json) in
+            if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) as? [LimitOrderStatus] {
+                callback?(object.count != 20)
+                self.store.dispatch(FillOrderDataFetchedAction(data: object))
+            }
+        }, status: LimitOrderStatusApi.getLimitOrder(userId: userId, lessThanOrderId: preOid, limit: 20))
+        self.service.send(request: request)
     }
 
     func monitorService() {

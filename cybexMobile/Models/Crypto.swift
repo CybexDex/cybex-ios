@@ -10,36 +10,56 @@ import Foundation
 import HandyJSON
 
 class AccountKeys: HandyJSON {
-  var activeKey: Key?
-  var ownerKey: Key?
-  var memoKey: Key?
+    var activeKey: Key?
+    var ownerKey: Key?
+    var memoKey: Key?
 
-  required init() {
+    var pubKeys: [String] {
+        guard let activeKey = activeKey, let memoKey = memoKey, let ownKey = ownerKey else {
+            return []
+        }
 
-  }
+        return [memoKey.publicKey, ownKey.publicKey, activeKey.publicKey]
+    }
 
-  func mapping(mapper: HelpingMapper) {
-    mapper <<< activeKey <-- "active-key"
-    mapper <<< ownerKey <-- "owner-key"
-    mapper <<< memoKey <-- "memo-key"
-  }
+    var keys: [Key] {
+        guard let activeKey = activeKey, let memoKey = memoKey, let ownKey = ownerKey else {
+            return []
+        }
+
+        return [memoKey, ownKey, activeKey]
+    }
+
+    required init() {
+
+    }
+
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< activeKey <-- "active-key"
+        mapper <<< ownerKey <-- "owner-key"
+        mapper <<< memoKey <-- "memo-key"
+    }
 }
 
 class Key: HandyJSON {
-  var privateKey = ""
-  var publicKey = ""
-  var address = ""
-  var compressed = ""
-  var uncompressed = ""
+    var privateKey = ""
+    var publicKey = ""
+    var address = ""
+    var compressed = ""
+    var uncompressed = ""
 
-  required init() {
-  }
+    var addresses: [String] {
+        return [address, compressed, uncompressed]
+    }
 
-  func mapping(mapper: HelpingMapper) {
-    mapper <<< privateKey <-- "private_key"
-    mapper <<< publicKey <-- "public_key"
-    mapper <<< address <-- "address"
-    mapper <<< compressed <-- "compressed"
-    mapper <<< uncompressed <-- "uncompressed"
-  }
+    required init() {
+    }
+
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< privateKey <-- "private_key"
+        mapper <<< publicKey <-- "public_key"
+        mapper <<< address <-- "address"
+        mapper <<< compressed <-- "compressed"
+        mapper <<< uncompressed <-- "uncompressed"
+    }
 }
