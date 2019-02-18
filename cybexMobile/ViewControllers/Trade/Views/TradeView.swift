@@ -39,17 +39,25 @@ class TradeView: UIView {
 
     var showType: ShowType = .normal {
         didSet {
+            sellModels.removeAll()
+            buyModels.removeAll()
+
             switch showType {
             case .buyOnly:
                 amount.superview?.isHidden = true
                 bottomAmount.superview?.isHidden = true
+                topAmount.superview?.isHidden = false
             case .sellOnly:
                 amount.superview?.isHidden = true
                 topAmount.superview?.isHidden = true
+                bottomAmount.superview?.isHidden = false
             case .normal:
                 topAmount.superview?.isHidden = true
                 bottomAmount.superview?.isHidden = true
+                amount.superview?.isHidden = false
             }
+
+            refreshView()
         }
     }
     fileprivate var sellModels: [OrderBookViewModel] = []
@@ -57,18 +65,22 @@ class TradeView: UIView {
 
     var data: Any? {
         didSet {
-            if let data = data as? OrderBook {
-                let bids = data.bids
-                let asks = data.asks
+            refreshView()
+        }
+    }
 
-                switch showType {
-                case .buyOnly:
-                    fillBuyOnlyData(data, bids: bids)
-                case .sellOnly:
-                    fillSellOnlyData(data, asks: asks)
-                case .normal:
-                    fillNormalData(data, bids: bids, asks: asks)
-                }
+    func refreshView() {
+        if let data = self.data as? OrderBook {
+            let bids = data.bids
+            let asks = data.asks
+
+            switch showType {
+            case .buyOnly:
+                fillBuyOnlyData(data, bids: bids)
+            case .sellOnly:
+                fillSellOnlyData(data, asks: asks)
+            case .normal:
+                fillNormalData(data, bids: bids, asks: asks)
             }
         }
     }
@@ -80,11 +92,15 @@ class TradeView: UIView {
                 sell.amountPrecision = orderBook.amountPrecision
                 if asks.count - 1 >= (index - 6) {
                     sell.alpha = 1
+
+                    let maxCount = min(asks.count, 5)
+
+                    let allPercent: Decimal = asks[0...maxCount - 1].compactMap( { $0.volumePercent } ).reduce(0, +)
                     let percent: Decimal = asks[0...index - 6].compactMap( { $0.volumePercent } ).reduce(0, +)
                     if index - 6 < self.sellModels.count {
                         let viewModel = self.sellModels[index - 6]
                         viewModel.orderbook.accept(asks[index - 6])
-                        viewModel.percent.accept(percent)
+                        viewModel.percent.accept(percent / allPercent)
                     }
                     else {
                         let model = OrderBookViewModel((asks[index - 6], percent,true))
@@ -101,11 +117,14 @@ class TradeView: UIView {
                 buy.amountPrecision = orderBook.amountPrecision
                 if bids.count - 1 >= (index - 6) {
                     buy.alpha = 1
-                    let percent = bids[0...index - 6].compactMap( { $0.volumePercent } ).reduce(0, +)
+
+                    let maxCount = min(bids.count, 5)
+                    let allPercent: Decimal = bids[0...maxCount - 1].compactMap( { $0.volumePercent } ).reduce(0, +)
+                    let percent: Decimal = bids[0...index - 6].compactMap( { $0.volumePercent } ).reduce(0, +)
                     if index - 6 < self.buyModels.count {
                         let viewModel = self.buyModels[index - 6]
                         viewModel.orderbook.accept(bids[index - 6])
-                        viewModel.percent.accept(percent)
+                        viewModel.percent.accept(percent / allPercent)
                     }
                     else {
                         let model = OrderBookViewModel((bids[index - 6], percent,false))
@@ -120,11 +139,117 @@ class TradeView: UIView {
     }
 
     func fillSellOnlyData(_ orderBook:OrderBook, asks: [OrderBook.Order]) {
+        for index in 6...10 {
+            if let buy = buies.viewWithTag(16 - index) as? TradeLineView {
+                buy.pricePrecision = orderBook.pricePrecision
+                buy.amountPrecision = orderBook.amountPrecision
 
+                if asks.count - 1 >= (index - 6) {
+                    buy.alpha = 1
+
+                    let maxCount = min(asks.count, 10)
+                    let allPercent: Decimal = asks[0...maxCount - 1].compactMap( { $0.volumePercent } ).reduce(0, +)
+                    let percent: Decimal = asks[0...index - 6].compactMap( { $0.volumePercent } ).reduce(0, +)
+                    if index - 6 < self.sellModels.count {
+                        let viewModel = self.sellModels[index - 6]
+                        viewModel.orderbook.accept(asks[index - 6])
+                        viewModel.percent.accept(percent / allPercent)
+                    }
+                    else {
+                        let model = OrderBookViewModel((asks[index - 6], percent / allPercent, true))
+                        self.sellModels.insert(model, at: index - 6)
+                        buy.adapterModelToTradeLineView(model)
+                    }
+                } else {
+                    buy.alpha = 0
+                }
+            }
+        }
+
+        for index in 6...10 {
+            if let sell = sells.viewWithTag(index) as? TradeLineView {
+                sell.pricePrecision = orderBook.pricePrecision
+                sell.amountPrecision = orderBook.amountPrecision
+                if asks.count - 1 >= (index - 1) {
+                    sell.alpha = 1
+
+                    let maxCount = min(asks.count, 10)
+
+                    let allPercent: Decimal = asks[0...maxCount - 1].compactMap( { $0.volumePercent } ).reduce(0, +)
+                    let percent: Decimal = asks[0...index - 1].compactMap( { $0.volumePercent } ).reduce(0, +)
+                    if index - 1 < self.sellModels.count {
+                        let viewModel = self.sellModels[index - 1]
+                        viewModel.orderbook.accept(asks[index - 1])
+                        viewModel.percent.accept(percent / allPercent)
+                    }
+                    else {
+                        let model = OrderBookViewModel((asks[index - 1], percent / allPercent, true))
+                        self.sellModels.insert(model, at: index - 1)
+                        sell.adapterModelToTradeLineView(model)
+                    }
+                } else {
+                    sell.alpha = 0
+                }
+            }
+
+
+        }
     }
 
     func fillBuyOnlyData(_ orderBook:OrderBook, bids: [OrderBook.Order]) {
+        for index in 6...10 {
+            if let sell = sells.viewWithTag(16 - index) as? TradeLineView {
+                sell.pricePrecision = orderBook.pricePrecision
+                sell.amountPrecision = orderBook.amountPrecision
+                if bids.count - 1 >= (index - 6) {
+                    sell.alpha = 1
 
+                    let maxCount = min(bids.count, 10)
+
+                    let allPercent: Decimal = bids[0...maxCount - 1].compactMap( { $0.volumePercent } ).reduce(0, +)
+                    let percent: Decimal = bids[0...index - 6].compactMap( { $0.volumePercent } ).reduce(0, +)
+                    if index - 6 < self.buyModels.count {
+                        let viewModel = self.buyModels[index - 6]
+                        viewModel.orderbook.accept(bids[index - 6])
+                        viewModel.percent.accept(percent / allPercent)
+                    }
+                    else {
+                        let model = OrderBookViewModel((bids[index - 6], percent / allPercent, false))
+                        self.buyModels.insert(model, at: index - 6)
+                        sell.adapterModelToTradeLineView(model)
+                    }
+                } else {
+                    sell.alpha = 0
+                }
+            }
+        }
+
+        for index in 6...10 {
+            if let buy = buies.viewWithTag(index) as? TradeLineView {
+                buy.pricePrecision = orderBook.pricePrecision
+                buy.amountPrecision = orderBook.amountPrecision
+
+                if bids.count - 1 >= (index - 1) {
+                    buy.alpha = 1
+
+                    let maxCount = min(bids.count, 10)
+                    let allPercent: Decimal = bids[0...maxCount - 1].compactMap( { $0.volumePercent } ).reduce(0, +)
+                    let percent: Decimal = bids[0...index - 1].compactMap( { $0.volumePercent } ).reduce(0, +)
+                    if index - 1 < self.buyModels.count {
+                        let viewModel = self.buyModels[index - 1]
+                        viewModel.orderbook.accept(bids[index - 1])
+                        viewModel.percent.accept(percent / allPercent)
+                    }
+                    else {
+                        let model = OrderBookViewModel((bids[index - 1], percent / allPercent, false))
+                        self.buyModels.insert(model, at: index - 1)
+                        buy.adapterModelToTradeLineView(model)
+                    }
+                } else {
+                    buy.alpha = 0
+                }
+            }
+        }
     }
     
     func setAmountAction(_ sender: (Decimal, UIColor), pair: Pair) {

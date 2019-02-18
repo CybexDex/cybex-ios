@@ -118,7 +118,17 @@ extension UserManager {
 
         if let username = self.name.value {
             let request = GetFullAccountsRequest(name: username) { response in
-                if let data = response as? FullAccount {
+                if let data = response as? FullAccount, let account = data.account {
+                    if let keys = self.keys {
+                        let permission = account.checkPermission(keys)
+                        self.permission = permission
+
+                        if permission.unlock {
+                            BitShareCoordinator.resetDefaultPublicKey(permission.defaultKey)
+                            self.timingLock()
+                        }
+                    }
+
                     if !self.isLoginIn {
                         return
                     }

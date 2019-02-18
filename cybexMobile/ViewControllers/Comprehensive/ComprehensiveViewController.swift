@@ -27,7 +27,6 @@ class ComprehensiveViewController: BaseViewController {
         setupData()
         setupUI()
         setupEvent()
-        handlerUpdateVersion(nil)
     }
 
     func setupNavi() {

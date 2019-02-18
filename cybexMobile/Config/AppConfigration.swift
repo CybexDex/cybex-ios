@@ -52,6 +52,8 @@ extension AppConfiguration {
             self.enableSetting.accept(model)
 
             AppConfiguration.shared.appCoordinator.start()
+
+            self.appCoordinator.topViewController()?.handlerUpdateVersion(nil)
         }, error: { (_) in
 
         }) { (_) in
