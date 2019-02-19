@@ -194,6 +194,9 @@ extension OrderBookViewController: TradePair {
         }
         coor.unSubscribe(oldPair, depth: coor.state.depth.value, count: 10)
         coor.resetData(oldPair)
+
+        tradeView.showTypeLabel.locali = R.string.localizable.orderbook_show_type_3.key
+        self.tradeView.showType = .normal
     }
 
     func appear() {
@@ -218,24 +221,41 @@ extension OrderBookViewController {
         }
         self.coordinator?.openDecimalNumberVC(senderView, maxDecimal: tradePairPrecision.price, selectedDecimal: coor.state.depth.value, senderVC: self)
     }
+
+    @objc func switchTradeViewShowType(_ data: [String: Any]) {
+        guard let text = data["data"] as? String, text.count != 0, let senderView = data["self"] as? UIView else {
+            return
+        }
+        self.coordinator?.openChooseTradeViewShowTypeVC(senderView, selectedIndex: tradeView.showType.rawValue, senderVC: self)
+    }
 }
 
 extension OrderBookViewController {
     override func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        self.tradeView.resetDecimalImage()
+        self.tradeView.resetImage()
         return true
     }
 }
 
 extension OrderBookViewController: RecordChooseViewControllerDelegate {
     func returnSelectedRow(_ sender: RecordChooseViewController, info: String, index: Int) {
-        if let depthString = info.components(separatedBy: " ").first,
-            let depth = depthString.int,
-            let pair = self.pair ,let coor = self.coordinator {
-            coor.unSubscribe(pair, depth: coor.state.depth.value, count: coor.state.count)
-            coor.subscribe(pair, depth: depth, count: 10)
+        if sender.typeIndex == .orderbook {
+            if let depthString = info.components(separatedBy: " ").first,
+                let depth = depthString.int,
+                let pair = self.pair ,let coor = self.coordinator {
+                coor.unSubscribe(pair, depth: coor.state.depth.value, count: coor.state.count)
+                coor.subscribe(pair, depth: depth, count: 10)
+            }
+
+        } else if sender.typeIndex == .tradeShowType {
+            let titles = [R.string.localizable.orderbook_show_type_1.key,
+                          R.string.localizable.orderbook_show_type_2.key,
+                          R.string.localizable.orderbook_show_type_3.key]
+            tradeView.showTypeLabel.locali = titles[index]
+            self.tradeView.showType = TradeView.ShowType(rawValue: index) ?? .normal
         }
-        self.tradeView.resetDecimalImage()
+
+        self.tradeView.resetImage()
         sender.dismiss(animated: false, completion: nil)
     }
 }

@@ -576,3 +576,12 @@
 "orders_my_filled_order_title_trail" = "成交数量/数量";
 "orders_my_trade_history_title_mid" = "价格/成交数量";
 "orders_my_trade_history_title_trail" = "成交额/手续费";
+
+"open_order_cancel_all" = "全部撤单";
+"open_order_header_title" = "交易对/价格/数量";
+"open_order_confirm_cancel_all" = "确认取消所有委单";
+
+"orderbook_show_type_1" = "展示卖单";
+"orderbook_show_type_2" = "展示买单";
+"orderbook_show_type_3" = "默认";
+

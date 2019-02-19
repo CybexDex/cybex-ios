@@ -180,14 +180,14 @@ extension UIViewController: ShowManagerDelegate {
         }
     }
 
-    func showCancelOpenOrderConfirm(_ title: String) {
+    func showCancelOpenOrderConfirm(_ title: String, content: String = "openedorder_ensure_message") {
         if ShowToastManager.shared.showView != nil {
             ShowToastManager.shared.hide(0)
         }
         SwifterSwift.delay(milliseconds: 100) {
             let subView = CybexShowTitleView(frame: .zero)
             subView.title.locali = ""
-            subView.contentLable.locali = "openedorder_ensure_message"
+            subView.contentLable.locali = content
 
             ShowToastManager.shared.setUp(title: R.string.localizable.tip_title.key.localized(), contentView: subView, animationType: .smallBig, middleType: .normal)
             ShowToastManager.shared.showAnimationInView(self.view)

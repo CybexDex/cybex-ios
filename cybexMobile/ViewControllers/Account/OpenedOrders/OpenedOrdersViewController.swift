@@ -41,6 +41,7 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
     var containerView: UIView?
     var order: LimitOrderStatus?
     var cancleOrderInfo: [String: Any]?
+    var isCancelAll = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +92,7 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
                                                 R.string.localizable.cancle_openedorder_sell.key.localized()
 
                                             if self.isVisible {
+                                                self.isCancelAll = false
                                                 self.showCancelOpenOrderConfirm(ensureTitle)
                                             }
 
@@ -222,6 +224,11 @@ extension OpenedOrdersViewController {
         if self.isLoading() {
             return
         }
+
+        if self.isVisible {
+            isCancelAll = true
+            self.showCancelOpenOrderConfirm("", content: "open_order_confirm_cancel_all")
+        }
     }
     
     func postCancelOrder() {
@@ -268,6 +275,11 @@ extension OpenedOrdersViewController {
     override func returnEnsureAction() {
         self.startLoading()
         ShowToastManager.shared.hide()
-        self.postCancelOrder()
+
+        if isCancelAll {
+            postCancelAllOrder()
+        } else {
+            self.postCancelOrder()
+        }
     }
 }

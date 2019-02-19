@@ -597,3 +597,11 @@
 "orders_my_filled_order_title_trail" = "Filled/Amount";
 "orders_my_trade_history_title_mid" = "Price/Filled";
 "orders_my_trade_history_title_trail" = "Total/Trading Fee";
+
+"open_order_cancel_all" = "Cancel All";
+"open_order_header_title" = "Pairs/Price/Amount";
+"open_order_confirm_cancel_all" = "Confirm all orders cancellation";
+
+"orderbook_show_type_1" = "Sell Orders";
+"orderbook_show_type_2" = "Buy Orders";
+"orderbook_show_type_3" = "Default";

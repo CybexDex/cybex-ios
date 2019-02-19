@@ -12,62 +12,83 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OpenedOrdersHeaderView" customModule="cybexMobile" customModuleProvider="target">
             <connections>
-                <outlet property="totalValueL" destination="LQ2-if-k53" id="W3C-V1-NBr"/>
-                <outlet property="totalValueTip" destination="hNf-6F-XtD" id="IVn-2j-oQ4"/>
+                <outlet property="headerCancelButton" destination="e5F-lt-oPg" id="ZmG-XF-0aS"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNf-6F-XtD">
-                    <rect key="frame" x="13" y="16" width="349" height="14.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuO-eT-wOI">
+                    <rect key="frame" x="13" y="14" width="11.5" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" red="0.47099999999999997" green="0.50600000000000001" blue="0.60399999999999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="opened.allMoney"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="locali" value="open_order_header_title"/>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQ2-if-k53">
-                    <rect key="frame" x="13" y="30.5" width="349" height="32"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="32" id="VCl-TG-Ygk"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <color key="textColor" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
-                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
-                            <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e5F-lt-oPg">
+                    <rect key="frame" x="305" y="0.0" width="57" height="42"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="13b-0x-z7H">
+                            <rect key="frame" x="0.0" y="0.0" width="44" height="42"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icStarBorder24Px" translatesAutoresizingMaskIntoConstraints="NO" id="WuQ-E3-LLl">
+                                    <rect key="frame" x="10" y="9" width="24" height="24"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24" id="0ok-cz-dwC"/>
+                                        <constraint firstAttribute="width" constant="24" id="oqX-Gy-aeC"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="WuQ-E3-LLl" firstAttribute="centerY" secondItem="13b-0x-z7H" secondAttribute="centerY" id="FKw-rt-S8u"/>
+                                <constraint firstAttribute="trailing" secondItem="WuQ-E3-LLl" secondAttribute="trailing" constant="10" id="MhT-t2-HVe"/>
+                                <constraint firstItem="WuQ-E3-LLl" firstAttribute="leading" secondItem="13b-0x-z7H" secondAttribute="leading" constant="10" id="mtY-cX-b1T"/>
+                                <constraint firstItem="WuQ-E3-LLl" firstAttribute="centerX" secondItem="13b-0x-z7H" secondAttribute="centerX" id="r0d-nk-cvu"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MzD-fw-6Os">
+                            <rect key="frame" x="44" y="0.0" width="13" height="42"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="theme1TitleColor">
+                                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="theme2TitleColor">
+                                    <color key="value" red="0.106" green="0.13300000000000001" blue="0.188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="string" keyPath="locali" value="open_order_cancel_all"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                </stackView>
             </subviews>
-            <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="LQ2-if-k53" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="6gy-uZ-Pdv"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="LQ2-if-k53" secondAttribute="trailing" constant="13" id="7b5-So-UUL"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hNf-6F-XtD" secondAttribute="trailing" constant="13" id="Fzk-wr-qC1"/>
-                <constraint firstItem="LQ2-if-k53" firstAttribute="top" secondItem="hNf-6F-XtD" secondAttribute="bottom" id="POy-sJ-U1T"/>
-                <constraint firstItem="hNf-6F-XtD" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="SW2-Rz-xAB"/>
-                <constraint firstItem="hNf-6F-XtD" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="gwS-d7-sOM"/>
+                <constraint firstAttribute="bottom" secondItem="e5F-lt-oPg" secondAttribute="bottom" id="8sC-qQ-WoB"/>
+                <constraint firstAttribute="trailing" secondItem="e5F-lt-oPg" secondAttribute="trailing" constant="13" id="Fmm-bD-eOK"/>
+                <constraint firstItem="e5F-lt-oPg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bfm-A3-ibz"/>
+                <constraint firstItem="fuO-eT-wOI" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="cEB-Hf-UoT"/>
+                <constraint firstItem="fuO-eT-wOI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="cW2-rZ-OCP"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                    <color key="value" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                    <color key="value" red="0.089999999999999997" green="0.114" blue="0.16500000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="value" name="dark" red="0.090" green="0.114" blue="0.165" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
+                    <color key="value" name="paleGrey" red="0.969" green="0.973" blue="0.980" alpha="1.000" colorSpace="custom" customColorSpace="sRGB"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="-438.5" y="-38"/>
+            <point key="canvasLocation" x="-231" y="63"/>
         </view>
     </objects>
+    <resources>
+        <image name="icStarBorder24Px" width="24" height="24"/>
+    </resources>
 </document>

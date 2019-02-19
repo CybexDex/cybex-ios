@@ -14,6 +14,7 @@ import Reachability
 protocol OrderBookCoordinatorProtocol {
     
     func openDecimalNumberVC(_ sender: UIView, maxDecimal: Int, selectedDecimal: Int, senderVC: OrderBookViewController)
+    func openChooseTradeViewShowTypeVC(_ sender: UIView, selectedIndex: Int, senderVC: OrderBookViewController)
 }
 
 protocol OrderBookStateManagerProtocol {
@@ -35,6 +36,7 @@ class OrderBookCoordinator: NavCoordinator {
     )
 
     let service = MDPWebSocketService("", quoteName: "")
+    var popoverVC: RecordChooseViewController?
 
     override func register() {
         self.service.connect()
@@ -63,7 +65,22 @@ extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
         vc.selectedIndex = selectedDecimal - (maxDecimal + 1 - count)
         vc.coordinator = RecordChooseCoordinator(rootVC: self.rootVC)
 
+        popoverVC?.dismiss(animated: false, completion: nil)
+        popoverVC = vc
         senderVC.presentPopOverViewController(vc, size: CGSize(width: 82, height: 35 * count), sourceView: sender, offset: CGPoint(x: 35, y: 0), direction: .down)
+    }
+
+    func openChooseTradeViewShowTypeVC(_ sender: UIView, selectedIndex: Int, senderVC: OrderBookViewController) {
+        guard let vc = R.storyboard.comprehensive.recordChooseViewController() else { return }
+
+        vc.typeIndex = .tradeShowType
+        vc.delegate = senderVC
+        vc.selectedIndex = selectedIndex
+        vc.coordinator = RecordChooseCoordinator(rootVC: self.rootVC)
+
+        popoverVC?.dismiss(animated: false, completion: nil)
+        popoverVC = vc
+        senderVC.presentPopOverViewController(vc, size: CGSize(width: 82, height: 104), sourceView: sender, offset: CGPoint(x: 35, y: 0), direction: .down)
     }
 }
 

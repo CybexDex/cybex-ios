@@ -15,11 +15,12 @@ class TradeView: UIView {
     enum Event: String {
         case orderbookClicked
         case chooseDecimalNumberEvent
+        case switchTradeViewShowType
     }
 
-    enum ShowType {
+    enum ShowType: Int {
+        case sellOnly = 0
         case buyOnly
-        case sellOnly
         case normal
     }
 
@@ -36,6 +37,10 @@ class TradeView: UIView {
     @IBOutlet weak var decimalView: UIView!
     @IBOutlet weak var deciLabel: UILabel!
     @IBOutlet weak var deciImgView: UIImageView!
+
+    @IBOutlet weak var showTypeView: UIView!
+    @IBOutlet weak var showTypeLabel: UILabel!
+    @IBOutlet weak var showTypeImgView: UIImageView!
 
     var showType: ShowType = .normal {
         didSet {
@@ -285,11 +290,11 @@ class TradeView: UIView {
         self.bottomAmount.attributedText = priceAttributeString
     }
     
-    
-    func resetDecimalImage() {
+    func resetImage() {
         deciImgView.image = R.image.ic2()
+        showTypeImgView.image = R.image.ic2()
     }
-    
+
     func setup() {
         if UIScreen.main.bounds.width == 320 {
             self.titlePrice.font = UIFont.systemFont(ofSize: 10)
@@ -310,6 +315,13 @@ class TradeView: UIView {
             self.deciImgView.image = R.image.ic2Up()
             self.next?.sendEventWith(Event.chooseDecimalNumberEvent.rawValue, userinfo: ["data": self.deciLabel.text ?? "", "self": self.decimalView])
             
+            }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+
+        showTypeView.rx.tapGesture().when(GestureRecognizerState.recognized).subscribe(onNext: { [weak self](tap) in
+            guard let `self` = self else { return }
+            self.showTypeImgView.image = R.image.ic2Up()
+            self.next?.sendEventWith(Event.switchTradeViewShowType.rawValue, userinfo: ["data": self.showTypeLabel.text ?? "", "self": self.showTypeImgView])
+
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     
