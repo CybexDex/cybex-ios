@@ -47,6 +47,8 @@ func orderBookReducer(action: Action, state: OrderBookState?) -> OrderBookState 
         }
     case let _ as ResetTickerAction:
         state.lastPrice.accept((0, UIColor.steel))
+    case let action as ChangeShowTypeIndexAction:
+        state.showTypeIndex.accept(action.index)
     default:
         break
     }

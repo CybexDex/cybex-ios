@@ -13,6 +13,7 @@ import SwiftTheme
 import RxCocoa
 import RxSwift
 import SwifterSwift
+import CoreNFC
 
 class BaseViewController: UIViewController {
     weak var toast: BeareadToast?
@@ -20,7 +21,6 @@ class BaseViewController: UIViewController {
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
     }
 
     required init?(coder aDswicoder: NSCoder) {

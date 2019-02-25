@@ -20,12 +20,17 @@ struct OrderBookState: BaseState {
     var pair: BehaviorRelay<Pair?> = BehaviorRelay(value: nil)
     var depth: BehaviorRelay<Int> = BehaviorRelay(value: 0)
     var lastPrice: BehaviorRelay<(Decimal, UIColor)> = BehaviorRelay(value: (0, UIColor.white))
-    var count: Int = 5
+    var count: Int = 10
+    var showTypeIndex: BehaviorRelay<Int> = BehaviorRelay(value: 2)
 }
 
 struct ChangeDepthAndCountAction: Action {
     var depth: Int
     var count: Int
+}
+
+struct ChangeShowTypeIndexAction: Action {
+    var index: Int
 }
 
 struct OrderBook: Equatable {

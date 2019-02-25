@@ -551,6 +551,10 @@
 		73731D8D21A538CF005B9B3C /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8C21A538CF005B9B3C /* Result.swift */; };
 		73731D9021A53C45005B9B3C /* CryptoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D8F21A53C45005B9B3C /* CryptoData.swift */; };
 		73731D9221A53C60005B9B3C /* CryptoAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73731D9121A53C60005B9B3C /* CryptoAlgorithm.swift */; };
+		73740884221FA128002CFD95 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7374087F221FA128002CFD95 /* Utils.m */; };
+		73740885221FA128002CFD95 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 73740881221FA128002CFD95 /* Card.m */; };
+		73740886221FA128002CFD95 /* TLVBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 73740882221FA128002CFD95 /* TLVBox.m */; };
+		7374088A221FA5EE002CFD95 /* NFCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73740889221FA5EE002CFD95 /* NFCManager.swift */; };
 		7377A42F21F179CF00EEBEF0 /* CryptoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7377A42E21F179CF00EEBEF0 /* CryptoHelper.swift */; };
 		737E596021A53C8D001199E4 /* CryptoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E595F21A53C8D001199E4 /* CryptoKey.swift */; };
 		737E596221A53CA5001199E4 /* CryptoHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737E596121A53CA5001199E4 /* CryptoHelpers.swift */; };
@@ -1430,6 +1434,14 @@
 		73731D8C21A538CF005B9B3C /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		73731D8F21A53C45005B9B3C /* CryptoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoData.swift; sourceTree = "<group>"; };
 		73731D9121A53C60005B9B3C /* CryptoAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoAlgorithm.swift; sourceTree = "<group>"; };
+		7374087C221FA128002CFD95 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		7374087D221FA128002CFD95 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		7374087E221FA128002CFD95 /* TLVBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLVBox.h; sourceTree = "<group>"; };
+		7374087F221FA128002CFD95 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		73740880221FA128002CFD95 /* eNotesFW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eNotesFW.h; sourceTree = "<group>"; };
+		73740881221FA128002CFD95 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		73740882221FA128002CFD95 /* TLVBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLVBox.m; sourceTree = "<group>"; };
+		73740889221FA5EE002CFD95 /* NFCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCManager.swift; sourceTree = "<group>"; };
 		7377A42E21F179CF00EEBEF0 /* CryptoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelper.swift; sourceTree = "<group>"; };
 		737E595F21A53C8D001199E4 /* CryptoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoKey.swift; sourceTree = "<group>"; };
 		737E596121A53CA5001199E4 /* CryptoHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoHelpers.swift; sourceTree = "<group>"; };
@@ -2273,6 +2285,7 @@
 		52E831991663F5942874636E6DF23660 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				73740888221FA5DB002CFD95 /* NFC */,
 				73A3310D2194232700707D8F /* Chat */,
 				6AECDF77E4F1B7CED0D80BFB268EDFC5 /* KLine */,
 				73D012972159D70500C95896 /* Route */,
@@ -3004,6 +3017,28 @@
 			path = Crypto;
 			sourceTree = "<group>";
 		};
+		7374087B221FA128002CFD95 /* eNotesFW */ = {
+			isa = PBXGroup;
+			children = (
+				73740880221FA128002CFD95 /* eNotesFW.h */,
+				7374087C221FA128002CFD95 /* Utils.h */,
+				7374087F221FA128002CFD95 /* Utils.m */,
+				7374087D221FA128002CFD95 /* Card.h */,
+				73740881221FA128002CFD95 /* Card.m */,
+				7374087E221FA128002CFD95 /* TLVBox.h */,
+				73740882221FA128002CFD95 /* TLVBox.m */,
+			);
+			path = eNotesFW;
+			sourceTree = "<group>";
+		};
+		73740888221FA5DB002CFD95 /* NFC */ = {
+			isa = PBXGroup;
+			children = (
+				73740889221FA5EE002CFD95 /* NFCManager.swift */,
+			);
+			path = NFC;
+			sourceTree = "<group>";
+		};
 		737E596721A53D56001199E4 /* Algorithm */ = {
 			isa = PBXGroup;
 			children = (
@@ -3626,6 +3661,7 @@
 		8B5274A9974EFCDE3D932E9EA52C257A /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				7374087B221FA128002CFD95 /* eNotesFW */,
 				7345FD8B219EBF7E0066BD0E /* FCUUID */,
 				739EFB4C2181D10E00424061 /* RxGesture */,
 				BF3F4A11835F406941DE98690F1996FF /* Jdenticon */,
@@ -4313,11 +4349,14 @@
 							com.apple.Keychain = {
 								enabled = 1;
 							};
-							com.apple.Push = {
+							com.apple.NearFieldCommunicationTagReading = {
 								enabled = 1;
 							};
-							com.apple.SafariKeychain = {
+							com.apple.Push = {
 								enabled = 0;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 1;
 							};
 							com.apple.iCloud = {
 								enabled = 1;
@@ -4930,6 +4969,7 @@
 				73539C492179A210008395AC /* UIViewController+TopMostViewController.swift in Sources */,
 				188394B25D1EF3596A01900469FACBFB /* BusinessTitleView.swift in Sources */,
 				7333856A21BFA54D0026765F /* CybexConfigration.swift in Sources */,
+				73740884221FA128002CFD95 /* Utils.m in Sources */,
 				73731D9221A53C60005B9B3C /* CryptoAlgorithm.swift in Sources */,
 				7386F29C212124BF00ABC924 /* AddressManager.swift in Sources */,
 				221EC2382105B1930059F856 /* GrowContentView.swift in Sources */,
@@ -5111,10 +5151,12 @@
 				56C9CE8FDE2020EA4F72F21F30D27087 /* MyHistoryActions.swift in Sources */,
 				221C615121364DFF0021C007 /* ShareData.swift in Sources */,
 				D97554A68B333ECF6F33B4558E08E005 /* MyHistoryCell.swift in Sources */,
+				73740886221FA128002CFD95 /* TLVBox.m in Sources */,
 				72D582A0219C196200BB9842 /* DropDownBoxView.swift in Sources */,
 				E432C445702EFB8154F16B502E4EE186 /* MyHistoryCellView.swift in Sources */,
 				5CB67D4A0FFFF2D433936B9A36216722 /* MyHistoryCoordinator.swift in Sources */,
 				406AB4BA0BF043D771D15D751F7AB45D /* MyHistoryReducers.swift in Sources */,
+				73740885221FA128002CFD95 /* Card.m in Sources */,
 				41143CEDF6A8910D9C2E8BCEE8C47A38 /* MyHistoryViewController.swift in Sources */,
 				7307A91E212518DC00BD6444 /* Iconic.swift in Sources */,
 				724C5D4E2153956900FF1DE7 /* ComprehensiveItemView.swift in Sources */,
@@ -5267,6 +5309,7 @@
 				7333858121C0ED2B0026765F /* UIUtils.swift in Sources */,
 				724C5D4821538D3C00FF1DE7 /* HotAssetView.swift in Sources */,
 				72DBCA7521391A4300905303 /* CybexWebActions.swift in Sources */,
+				7374088A221FA5EE002CFD95 /* NFCManager.swift in Sources */,
 				4C82733DA80E26D923B4A21677ACDE89 /* TimeGapView.swift in Sources */,
 				C6701BBC918D15D20650CF726BA483EA /* Extensions.swift in Sources */,
 				5012DA167BBBF31D3392DD2453106515 /* Trade.swift in Sources */,

@@ -24,7 +24,7 @@ protocol OrderBookStateManagerProtocol {
     func subscribe(_ pair: Pair, depth: Int, count: Int)
     func unSubscribe(_ pair: Pair ,depth: Int ,count: Int)
     func resetData(_ pair: Pair)
-
+    func switchShowType(_ index: Int)
     func updateMarketListHeight(_ height: CGFloat)
 }
 
@@ -67,7 +67,7 @@ extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
 
         popoverVC?.dismiss(animated: false, completion: nil)
         popoverVC = vc
-        senderVC.presentPopOverViewController(vc, size: CGSize(width: 82, height: 35 * count), sourceView: sender, offset: CGPoint(x: 35, y: 0), direction: .down)
+        senderVC.presentPopOverViewController(vc, size: CGSize(width: 82, height: 35 * count), sourceView: sender, offset: CGPoint(x: 0, y: 0), direction: .down)
     }
 
     func openChooseTradeViewShowTypeVC(_ sender: UIView, selectedIndex: Int, senderVC: OrderBookViewController) {
@@ -80,7 +80,7 @@ extension OrderBookCoordinator: OrderBookCoordinatorProtocol {
 
         popoverVC?.dismiss(animated: false, completion: nil)
         popoverVC = vc
-        senderVC.presentPopOverViewController(vc, size: CGSize(width: 82, height: 104), sourceView: sender, offset: CGPoint(x: 35, y: 0), direction: .down)
+        senderVC.presentPopOverViewController(vc, size: CGSize(width: 82, height: 104), sourceView: sender, offset: CGPoint(x: 0, y: 0), direction: .down)
     }
 }
 
@@ -126,6 +126,10 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
         }
     }
 
+    func switchShowType(_ index: Int) {
+        self.store.dispatch(ChangeShowTypeIndexAction(index: index))
+    }
+
     func monitorService() { // 第一次执行也会进入callback
         NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { (note) in
             guard let reachability = note.object as? Reachability else {
@@ -155,6 +159,7 @@ extension OrderBookCoordinator: OrderBookStateManagerProtocol {
     func resetData(_ pair: Pair) {
         self.store.dispatch(FetchedOrderBookData(data: nil, pair: pair))
         self.store.dispatch(ResetTickerAction())
+        self.store.dispatch(ChangeDepthAndCountAction(depth: 0, count: 10))
     }
 
     func updateMarketListHeight(_ height: CGFloat) {

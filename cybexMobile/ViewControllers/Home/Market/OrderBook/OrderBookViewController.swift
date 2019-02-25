@@ -68,20 +68,28 @@ class OrderBookViewController: BaseViewController {
     }
 
     func fetchOrderBookData(_ pair: Pair,count: Int) {
+        guard let oldDepth = self.coordinator?.state.depth.value else { return }
+
         guard let tradePairPrecision = TradeConfiguration.shared.tradePairPrecisions.value[pair] else {
             TradeConfiguration.shared.tradePairPrecisions.asObservable().subscribe(onNext: { [weak self](data) in
-                guard let self = self, let selfPair = self.pair, selfPair == pair, let result = data[pair] else { return }
-                self.coordinator?.subscribe(pair, depth: result.price, count: count)
+                guard let self = self,
+                    let selfPair = self.pair,
+                    selfPair == pair,
+                    let result = data[pair] else { return }
+
+                self.coordinator?.subscribe(pair, depth: oldDepth == 0 ? result.price : oldDepth, count: count)
+
                 if self.vcType == OrderbookType.tradeView.rawValue {
                     self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(result.price)
                 }
+
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
             return
         }
         if self.vcType == OrderbookType.tradeView.rawValue {
             self.tradeView.deciLabel.text = R.string.localizable.trade_decimal_number.key.localizedFormat(tradePairPrecision.price)
         }
-        self.coordinator?.subscribe(pair, depth: tradePairPrecision.price, count: count)
+        self.coordinator?.subscribe(pair, depth:  oldDepth == 0 ? tradePairPrecision.price : oldDepth, count: count)
     }
 
     func setupUI() {
@@ -128,6 +136,14 @@ class OrderBookViewController: BaseViewController {
         }
     }
 
+    func switchShowType(_ type: TradeView.ShowType) {
+        let titles = [R.string.localizable.orderbook_show_type_1.key,
+                      R.string.localizable.orderbook_show_type_2.key,
+                      R.string.localizable.orderbook_show_type_3.key]
+        tradeView.showTypeLabel.locali = titles[type.rawValue]
+        self.tradeView.showType = type
+    }
+
     func setupEvent() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification), object: nil, queue: nil, using: { [weak self] _ in
             guard let self = self else { return }
@@ -156,6 +172,11 @@ class OrderBookViewController: BaseViewController {
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
 
         if vcType == OrderbookType.tradeView.rawValue {
+            self.coordinator?.state.showTypeIndex.asObservable().skip(1).subscribe(onNext: {[weak self] (index) in
+                guard let self = self else { return }
+                self.switchShowType(TradeView.ShowType(rawValue: index) ?? .normal)
+            }).disposed(by: disposeBag)
+
             self.coordinator?.state.lastPrice.asObservable().skip(1).subscribe(onNext: { [weak self](result) in
                 guard let self = self, let pair = self.pair else { return }
 
@@ -195,8 +216,7 @@ extension OrderBookViewController: TradePair {
         coor.unSubscribe(oldPair, depth: coor.state.depth.value, count: 10)
         coor.resetData(oldPair)
 
-        tradeView.showTypeLabel.locali = R.string.localizable.orderbook_show_type_3.key
-        self.tradeView.showType = .normal
+        self.coordinator?.switchShowType(2)
     }
 
     func appear() {
@@ -248,11 +268,7 @@ extension OrderBookViewController: RecordChooseViewControllerDelegate {
             }
 
         } else if sender.typeIndex == .tradeShowType {
-            let titles = [R.string.localizable.orderbook_show_type_1.key,
-                          R.string.localizable.orderbook_show_type_2.key,
-                          R.string.localizable.orderbook_show_type_3.key]
-            tradeView.showTypeLabel.locali = titles[index]
-            self.tradeView.showType = TradeView.ShowType(rawValue: index) ?? .normal
+            self.coordinator?.switchShowType(index)
         }
 
         self.tradeView.resetImage()
