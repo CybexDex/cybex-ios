@@ -14,7 +14,8 @@ func myHistoryReducer(action: Action, state: MyHistoryState?) -> MyHistoryState 
 
     switch action {
     case let action as FillOrderDataFetchedAction:
-        state.fillOrders.accept(action.data)
+        let data = action.data
+        state.fillOrders.accept(data)
     default:
         break
     }

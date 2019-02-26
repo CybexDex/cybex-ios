@@ -95,7 +95,7 @@ class MyPortfolioData {
     required init?(balance: Balance) {
         icon = AppConfiguration.ServerIconsBaseURLString + balance.assetType.replacingOccurrences(of: ".", with: "_") + "_grey.png"
 
-        name = appData.assetInfo[balance.assetType]?.symbol.filterJade ?? "--"
+        name = appData.assetInfo[balance.assetType]?.symbol.filterOnlyJade ?? "--"
         // 获得自己的个数
         if let assetInfo = appData.assetInfo[balance.assetType] {
             realAmount = AssetHelper.getRealAmount(balance.assetType, amount: balance.balance).formatCurrency(digitNum: assetInfo.precision)

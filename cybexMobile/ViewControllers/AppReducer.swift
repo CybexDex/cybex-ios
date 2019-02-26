@@ -86,7 +86,7 @@ func appPropertyReducer(_ state: AppPropertyState?, action: Action) -> AppProper
 
         for info in action.info {
             assetinfoMap[info.id] = info
-            nameToIds[info.symbol.filterJade] = info.id
+            nameToIds[info.symbol.filterOnlyJade] = info.id
         }
         state.assetInfo = assetinfoMap
         state.assetNameToIds.accept(nameToIds)

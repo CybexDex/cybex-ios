@@ -20,4 +20,5 @@ struct MyHistoryState: BaseState {
 
 struct FillOrderDataFetchedAction: Action {
     var data: [LimitOrderStatus]
+    var all: Bool = false
 }

@@ -106,9 +106,9 @@ class LimitOrderStatus: HandyJSON {
         let assetBInfo = appData.assetInfo[self.asset2]
         let (base, quote) = MarketHelper.calculateAssetRelation(
             assetIDAName: (assetAInfo != nil) ?
-                assetAInfo!.symbol.filterJade : "",
+                assetAInfo!.symbol.filterOnlyJade : "",
             assetIDBName: (assetBInfo != nil) ?
-                assetBInfo!.symbol.filterJade : "")
+                assetBInfo!.symbol.filterOnlyJade : "")
         
         return Pair(base: base.assetID, quote: quote.assetID)
     }

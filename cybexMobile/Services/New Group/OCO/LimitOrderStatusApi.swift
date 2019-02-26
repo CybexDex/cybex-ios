@@ -17,6 +17,10 @@ enum LimitOrderStatusApi {
     case getOpenedLimitOrder(userId: String)
     case getOpenedMarketLimitOrder(userId: String, asset1Id: String, asset2Id: String)
 
+    case addFilteredMarket(pairs: [Pair])
+    case getFilteredLimitOrder(userId: String, lessThanOrderId: String, limit: Int)
+    case clearFilteredMarket
+
     var name: String {
         switch self {
         case .getMaxLimitOrderIdByTime:
@@ -29,6 +33,12 @@ enum LimitOrderStatusApi {
             return "get_opened_limit_order_status"
         case .getOpenedMarketLimitOrder:
             return "get_opened_market_limit_order_status"
+        case .getFilteredLimitOrder:
+            return "get_filtered_limit_order_status"
+        case .addFilteredMarket:
+            return "add_filtered_market"
+        case .clearFilteredMarket:
+            return "clear_filtered_market"
         }
     }
 
@@ -44,6 +54,12 @@ enum LimitOrderStatusApi {
             return [userId]
         case let .getOpenedMarketLimitOrder(userId, asset1Id, asset2Id):
             return [userId, asset1Id, asset2Id]
+        case let .addFilteredMarket(pairs):
+            return [pairs.map { [$0.base, $0.quote] }]
+        case let .getFilteredLimitOrder(userId, lessThanOrderId, limit):
+            return  [userId, lessThanOrderId, limit, false]
+        case .clearFilteredMarket:
+            return []
         }
     }
 }

@@ -77,12 +77,12 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
 
     func fetchOpenedOrderRequest(_ pair: Pair) {
         guard let userId = UserManager.shared.account.value?.id else {
-            self.store.dispatch(FetchOpenedOrderAction(data: []))
+            self.store.dispatch(FetchOpenedOrderAction(data: [], all: false))
             return
         }
         let request = GetLimitOrderStatus(response: { json in
             if let json = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: json) {
-                self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0})))
+                self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0}), all: false))
             }
         }, status: LimitOrderStatusApi.getOpenedMarketLimitOrder(userId: userId, asset1Id: pair.quote, asset2Id: pair.base))
         self.service.send(request: request)
@@ -101,13 +101,13 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     
     func fetchAllOpenedOrderRequest() {
         guard let userId = UserManager.shared.account.value?.id else {
-            self.store.dispatch(FetchOpenedOrderAction(data: []))
+            self.store.dispatch(FetchOpenedOrderAction(data: [], all: true))
 
             return
         }
         let request = GetLimitOrderStatus(response: { (json) in
             if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) {
-                self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0})))
+                self.store.dispatch(FetchOpenedOrderAction(data: object.compactMap({$0}), all: true))
             }
         }, status: LimitOrderStatusApi.getOpenedLimitOrder(userId: userId))
         self.service.send(request: request)

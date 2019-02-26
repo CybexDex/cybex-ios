@@ -13,6 +13,9 @@ import RxCocoa
 
 class AssetConfiguration {
     //base asset name
+    static let JadeSymbol = "JADE"
+    static let ArenaSymbol = "TEST"
+
     enum CybexAsset: String, CaseIterable {
         case CYB
         case BTC
@@ -20,6 +23,11 @@ class AssetConfiguration {
         case USDT
         case XRP
         case EOS
+
+        case ArenaETH
+        case ArenaEOS
+        case ArenaUSDT
+        case ArenaBTC
 
         var id: String {
             switch self {
@@ -35,6 +43,15 @@ class AssetConfiguration {
                 return Defaults.isTestEnv ? "1.3.999" : "1.3.999"
             case .EOS:
                 return Defaults.isTestEnv ? "1.3.57" : "1.3.4"
+            //交易大赛
+            case .ArenaEOS:
+                return Defaults.isTestEnv ? "1.3.244" : "1.3.1146"
+            case .ArenaBTC:
+                return Defaults.isTestEnv ? "1.3.242" : "1.3.1147"
+            case .ArenaETH:
+                return Defaults.isTestEnv ? "1.3.241" : "1.3.1144"
+            case .ArenaUSDT:
+                return Defaults.isTestEnv ? "1.3.243" : "1.3.1145"
             }
         }
     }
@@ -75,7 +92,14 @@ extension AssetConfiguration {
     func fetchWhiteListAssets() {
         AppService.request(target: AppAPI.assetWhiteList, success: { (json) in
             let data = JSON(json).arrayValue.compactMap({ String(describing: $0.stringValue) })
-            AssetConfiguration.shared.whiteListOfIds.accept(data)
+
+            var otherIds: [String] = []
+            if let gameEnable = AppConfiguration.shared.enableSetting.value?.isGameEnabled, gameEnable {
+                let gameIds = MarketConfiguration.shared.gameMarketPairs.map { $0.quote } + MarketConfiguration.gameMarketBaseAssets.map { $0.id }
+                otherIds.append(contentsOf: gameIds)
+            }
+
+            AssetConfiguration.shared.whiteListOfIds.accept(data + otherIds)
         }, error: { (_) in
 
         }) { (_) in
@@ -109,6 +133,10 @@ extension String {
     }
 
     var symbol: String {
+        return symbolOnlyFilterJade.filterArena
+    }
+
+    var symbolOnlyFilterJade: String {
         return appData.assetInfo[self]?.symbol.filterJade ?? self
     }
     

@@ -15,6 +15,12 @@ class QuotesTitleView: UIView {
         case tagDidSelected
     }
 
+    enum ViewType: Int {
+        case home
+        case trade
+        case game
+    }
+
     @IBOutlet weak var line: UIView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet var titleViews: [UIView]!
@@ -23,21 +29,43 @@ class QuotesTitleView: UIView {
     @IBInspectable
     var viewType: Int = 0 {
         didSet {
-            if viewType != 1 {
-                self.stackView.axis = .horizontal
-                stackViewLeft.constant = 22
-            } else {
+            switch viewType {
+            case 1:
                 self.stackView.axis = .vertical
                 self.stackView.spacing = 0
                 stackViewLeft.constant = 0
                 self.line.isHidden = true
                 for titleView in self.titleViews {
-                    titleView.viewWithTag(10)?.isHidden = true
+                    titleView.viewWithTag(10)?.isHidden = true // 选中的线
                     if let label = titleView.viewWithTag(9) as? UILabel {
                         label.textAlignment = .left
                     }
                 }
+            case 2:
+                self.stackView.axis = .vertical
+                self.stackView.spacing = 0
+                stackViewLeft.constant = 0
+                self.line.isHidden = true
+
+                for (idx, titleView) in self.titleViews.enumerated() {
+                    if idx < MarketConfiguration.gameMarketBaseAssets.count {
+                        titleView.viewWithTag(10)?.isHidden = true // 选中的线
+                        if let label = titleView.viewWithTag(9) as? UILabel {
+                            label.textAlignment = .left
+                            label.text = MarketConfiguration.gameMarketBaseAssets[idx].id.symbol
+                        }
+                    }
+                    else {
+                        titleView.isHidden = true
+
+                    }
+                }
+
+            default:
+                self.stackView.axis = .horizontal
+                stackViewLeft.constant = 22
             }
+
         }
     }
 
@@ -63,10 +91,6 @@ class QuotesTitleView: UIView {
 
     fileprivate func setup() {
         for titleView in titleViews {
-            if titleView.tag == 3 {
-                titleView.isHidden = Defaults[.environment] == "test" ? true : false
-            }
-
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clickViewAction))
             titleView.addGestureRecognizer(tapGesture)
         }
@@ -87,11 +111,7 @@ class QuotesTitleView: UIView {
                     if let titleL =  titleView.viewWithTag(9) as? UILabel {
                         titleL.theme1TitleColor = .pastelOrange
                         titleL.theme2TitleColor = .pastelOrange
-                        // 为了测试
-                        var selectedIndex = index - 1
-                        if Defaults[.environment] == "test", selectedIndex == 3 {
-                            selectedIndex = 2
-                        }
+                        let selectedIndex = index - 1
                         self.next?.sendEventWith(Event.tagDidSelected.rawValue, userinfo: ["selectedIndex": selectedIndex, "save": save])
                     }
                 } else {

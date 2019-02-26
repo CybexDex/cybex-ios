@@ -14,6 +14,7 @@
 "nav.account" = "账号";
 "nav.setting" = "设置";
 "nav.trade"   = "交易";
+"nav.contest" = "大赛";
 "nav.eto" = "ETO";
 
 "home_blockchain" = "区块信息";
@@ -584,4 +585,9 @@
 "orderbook_show_type_1" = "展示卖单";
 "orderbook_show_type_2" = "展示买单";
 "orderbook_show_type_3" = "默认";
+
+"contest_notice" = "本次比赛为期14天。大赛主办方鼓励参赛者使用API及量化模型参赛，并为量化接入提供各种协助支援。\n本次比赛采用虚拟资产ARENA.BTC，ARENA.EOS，ARENA.ETH，ARENA.USDT，比赛期间自由交易(不允许资产转账)，仅开放交易对ARENA.ETH/ARENA.USDT、ARENA.EOS/ARENA.USDT、ARENA.BTC/ARENA.USDT，通过做市商确保交易对价格严格对应主交易所。\n每位参赛选⼿手初始资资金100,000 ARENA.USDT，由官方向报名成功的用户在比赛开始前夕空投。大赛期间，组织方将对有参赛选⼿手的账户定期做快照，按照CYBEX交易所对应资产中间价折算出账户内ARENA.USDT余额。\n奖励计算均基于账户余额的变化情况，按照收益率(即账户价值与初始价值的差值)，夏普比率(收益波动性)和换手率(每自然日累计交易量超过20%)进行各个奖项的排名。赛况可在赛事官网实时查询。\n为了保证比赛环境的公平，请协助我们一起杜绝作弊行为的发生。";
+"contest_notice_title" = "游戏规则";
+"contest_notice_not_tip" = "不再提示";
+"contest_notice_close" = "取消";
 

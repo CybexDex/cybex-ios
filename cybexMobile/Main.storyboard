@@ -1178,21 +1178,6 @@ Cg
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sGL-Rt-Thy">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWv-Bu-lgd" customClass="PairListHorizantalView" customModule="cybexMobile" customModuleProvider="target">
-                                                <rect key="frame" x="15" y="0.0" width="345" height="0.0"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" id="ITl-1Q-YGT"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme1BgColor">
-                                                        <color key="value" red="0.11764705882352941" green="0.15294117647058825" blue="0.2196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="theme2BgColor">
-                                                        <color key="value" red="0.97647058823529409" green="0.97647058823529409" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdl-dg-mGm" customClass="PairDetailView" customModule="cybexMobile" customModuleProvider="target">
                                                 <rect key="frame" x="15" y="0.0" width="345" height="104"/>
                                                 <constraints>
@@ -1202,12 +1187,9 @@ Cg
                                         </subviews>
                                         <color key="backgroundColor" red="0.96899999999999997" green="0.97299999999999998" blue="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="EWv-Bu-lgd" firstAttribute="top" secondItem="sGL-Rt-Thy" secondAttribute="top" id="999-mu-xiw"/>
-                                            <constraint firstItem="EWv-Bu-lgd" firstAttribute="leading" secondItem="sGL-Rt-Thy" secondAttribute="leading" constant="15" id="C1r-kc-gp2"/>
+                                            <constraint firstItem="qdl-dg-mGm" firstAttribute="top" secondItem="sGL-Rt-Thy" secondAttribute="top" id="LyJ-Ob-B6B"/>
                                             <constraint firstAttribute="trailing" secondItem="qdl-dg-mGm" secondAttribute="trailing" constant="15" id="M5L-KQ-Ebv"/>
-                                            <constraint firstItem="qdl-dg-mGm" firstAttribute="top" secondItem="EWv-Bu-lgd" secondAttribute="bottom" id="PMc-io-Mf4"/>
                                             <constraint firstAttribute="bottom" secondItem="qdl-dg-mGm" secondAttribute="bottom" id="PR4-7E-sUq"/>
-                                            <constraint firstAttribute="trailing" secondItem="EWv-Bu-lgd" secondAttribute="trailing" constant="15" id="qmq-Rb-e2k"/>
                                             <constraint firstItem="qdl-dg-mGm" firstAttribute="leading" secondItem="sGL-Rt-Thy" secondAttribute="leading" constant="15" id="yVX-jD-hM8"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -1292,7 +1274,6 @@ Cg
                         <outlet property="kLineView" destination="7lw-Ew-2wL" id="cRK-JE-v07"/>
                         <outlet property="marketDetailView" destination="qdl-dg-mGm" id="UAm-nc-Ni5"/>
                         <outlet property="pageContentViewHeight" destination="o7E-5a-s1E" id="0Q5-Ek-MmH"/>
-                        <outlet property="pairListView" destination="EWv-Bu-lgd" id="alj-I2-lZV"/>
                         <outlet property="rechargeHeight" destination="XI9-ks-qLm" id="PCc-jd-1l1"/>
                         <outlet property="rechargeView" destination="WzK-tX-ker" id="55e-RF-Rcu"/>
                         <outlet property="scrollView" destination="0WE-o2-bsL" id="rvD-AB-uTx"/>

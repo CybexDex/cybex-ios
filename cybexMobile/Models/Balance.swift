@@ -10,7 +10,7 @@ import Foundation
 import HandyJSON
 
 class Balance: HandyJSON {
-  var assetType: String = ""
+  var assetType: String = "" //id
   var balance: String = ""
 
   required init() {

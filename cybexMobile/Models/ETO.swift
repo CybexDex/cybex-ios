@@ -381,4 +381,5 @@ class ETOProjectViewModel {
 struct AppEnableSetting: HandyJSON {
     var isETOEnabled: Bool = false
     var isShareEnabled: Bool = false
+    var isGameEnabled: Bool = true
 }

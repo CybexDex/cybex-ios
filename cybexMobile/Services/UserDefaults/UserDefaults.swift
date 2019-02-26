@@ -20,7 +20,8 @@ extension DefaultsKeys {
     static let withdrawAddressList = DefaultsKey<[WithdrawAddress]>("WithdrawAddressList")
 
     static let environment = DefaultsKey<String>("environment")
-    
+    static let showContestTip = DefaultsKey<Bool>("showContestTip")
+
     static let isRealName = DefaultsKey<Bool>("isRealName")
     
     static let hasCode = DefaultsKey<Bool>("hasCode")

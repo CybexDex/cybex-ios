@@ -122,7 +122,10 @@ class ChatViewController: MessagesViewController {
     }
     
     func loadFirstMessages() {
-        self.coordinator?.connectChat(self.title ?? "")
+        if let pair = self.pair, let baseInfo = appData.assetInfo[pair.base], let quoteInfo = appData.assetInfo[pair.quote] {
+            let channel = quoteInfo.symbol.filterOnlyJade + "/" + baseInfo.symbol.filterOnlyJade
+            self.coordinator?.connectChat(channel)
+        }
     }
     
     func insertMessage(_ message: ChatCommonMessage) {

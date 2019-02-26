@@ -12,6 +12,8 @@ import RxCocoa
 import ReSwift
 import TinyConstraints
 import Localize_Swift
+import SwiftTheme
+import SwiftyUserDefaults
 
 protocol TradePair {
     var pariInfo: Pair {get set}
@@ -46,6 +48,8 @@ class TradeViewController: BaseViewController {
     var tradeTitltView: TradeNavTitleView! // CYB/ETH 切换交易对
     var chooseTitleView: UIView? //mask
 
+    @IBOutlet weak var topBanner: UIImageView!
+    @IBOutlet weak var bannerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var topView: UIView! //container
     var titlesView: CybexTitleView? //segment
 
@@ -72,7 +76,8 @@ class TradeViewController: BaseViewController {
     }
     
     var coordinator: (TradeCoordinatorProtocol & TradeStateManagerProtocol)?
-    
+    private(set) var context: TradeContext?
+
     var pair: Pair = Pair(base: AssetConfiguration.CybexAsset.ETH.id, quote: AssetConfiguration.CybexAsset.CYB.id) {
         didSet {
             self.children.forEach { (viewController) in
@@ -99,6 +104,11 @@ class TradeViewController: BaseViewController {
         super.viewWillAppear(animated)
 
         currentTopViewController?.appear()
+
+        let noticeShow = !Defaults.hasKey(.showContestTip) || Defaults[.showContestTip]
+        if let context = self.context, context.pageType == .game, noticeShow {
+            self.coordinator?.showNoticeVC()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -166,11 +176,7 @@ class TradeViewController: BaseViewController {
     }
     
     @objc override func leftAction(_ sender: UIButton) {
-        if let baseIndex = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base), let index = MarketHelper.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
-            return ticker.base == pair.base && ticker.quote == pair.quote
-        }) {
-            self.coordinator?.openMarket(index: index, currentBaseIndex: baseIndex)
-        }
+        self.coordinator?.openMarket(pair)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -178,6 +184,37 @@ class TradeViewController: BaseViewController {
     }
     
     override func configureObserveState() {
+        self.coordinator?.state.context.asObservable().subscribe(onNext: { [weak self] (context) in
+            guard let self = self else { return }
+
+            if let context = context as? TradeContext {
+                self.context = context
+
+                if context.pageType == .normal {
+                    self.bannerHeightConstraint.constant = 0
+                } else {
+                    self.bannerHeightConstraint.constant = 40
+                    self.topBanner.image = UIImage.themeAndLocalizedImage()
+
+                    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ThemeUpdateNotification),
+                                                           object: nil,
+                                                           queue: nil,
+                                                           using: {_ in
+                                                            self.topBanner.image = UIImage.themeAndLocalizedImage()
+                    })
+                    NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: LCLLanguageChangeNotification),
+                                                           object: nil,
+                                                           queue: nil,
+                                                           using: {_ in
+                                                            self.topBanner.image = UIImage.themeAndLocalizedImage()
+                    })
+
+                }
+
+            }
+
+        }).disposed(by: disposeBag)
+
         appData.otherRequestRelyData.asObservable()
             .subscribe(onNext: { (_) in
                 if appData.tickerData.value.count == 0 {

@@ -12,6 +12,7 @@ import RxCocoa
 import ReSwift
 import XLPagerTabStrip
 import SwiftTheme
+import SwiftyJSON
 
 class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
 
@@ -114,47 +115,25 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
             }
         }
         else if case let .groupFillOrder(pair: pair) = type, let uid = UserManager.shared.account.value?.id {
-            AccountHistoryService.request(target: .getMyGroupFillOrder(userId: uid, pair: pair, page: page), success: { (json) in
-                self.endLoading()
-
-                let times = json.arrayValue.map({ $0["timestamp"].stringValue })
-
-                if let model = [FillOrder].deserialize(from: json.arrayValue.compactMap { $0["op"][1].dictionaryObject }) as? [FillOrder] {
-                    var vmData: [MyHistoryCellView.ViewModel] = []
-                    for (i, v) in model.enumerated() {
-                        vmData.append(MyHistoryCellView.ViewModel.makeViewModelFrom(data: v, orginTime: times[i]))
-                    }
-
-                    if self.page == 0 {
-                        if vmData.count < 20 {
-                            self.tableView.es.noticeNoMoreData()
-                        }
-                        else {
-                            self.tableView.es.resetNoMoreData()
-                        }
-                        self.data = vmData
-                    }
-                    else {
-                        self.data.append(contentsOf: vmData)
-                    }
-
-                    if self.data.count == 0 {
-                        self.view.showNoData(R.string.localizable.myhistory_nodata.key.localized(), icon: R.image.img_no_records.name)
-                        return
-                    }
-                    else {
-                        self.view.hiddenNoData()
-                    }
-                    
-                    self.tableView.reloadData()
-                    callback?(vmData.count != 20)
-                    self.stopInfiniteScrolling(self.tableView, haveNoMore: (vmData.count != 20))
+            if pair == nil, let gameEnable = AppConfiguration.shared.enableSetting.value?.isGameEnabled, gameEnable {
+                AccountHistoryService.request(target: .getFillByPairs(userId: uid, page: page, pairs: MarketConfiguration.shared.gameMarketPairs), success: { (json) in
+                    self.endLoading()
+                    self.handlerDataFetched(json, callback: callback)
+                }, error: { (error) in
+                    self.endLoading()
+                }) { (error) in
+                    self.endLoading()
                 }
+            } else {
+                AccountHistoryService.request(target: .getMyGroupFillOrder(userId: uid, pair: pair, page: page), success: { (json) in
+                    self.endLoading()
+                    self.handlerDataFetched(json, callback: callback)
 
-            }, error: { (error) in
-                self.endLoading()
-            }) { (error) in
-                self.endLoading()
+                }, error: { (error) in
+                    self.endLoading()
+                }) { (error) in
+                    self.endLoading()
+                }
             }
         }
         else {
@@ -167,6 +146,42 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
             else {
                 self.view.hiddenNoData()
             }
+        }
+    }
+
+    func handlerDataFetched(_ json: JSON, callback: ((Bool) -> Void)?) {
+        let times = json.arrayValue.map({ $0["timestamp"].stringValue })
+
+        if let model = [FillOrder].deserialize(from: json.arrayValue.compactMap { $0["op"][1].dictionaryObject }) as? [FillOrder] {
+            var vmData: [MyHistoryCellView.ViewModel] = []
+            for (i, v) in model.enumerated() {
+                vmData.append(MyHistoryCellView.ViewModel.makeViewModelFrom(data: v, orginTime: times[i]))
+            }
+
+            if self.page == 0 {
+                if vmData.count < 20 {
+                    self.tableView.es.noticeNoMoreData()
+                }
+                else {
+                    self.tableView.es.resetNoMoreData()
+                }
+                self.data = vmData
+            }
+            else {
+                self.data.append(contentsOf: vmData)
+            }
+
+            if self.data.count == 0 {
+                self.view.showNoData(R.string.localizable.myhistory_nodata.key.localized(), icon: R.image.img_no_records.name)
+                return
+            }
+            else {
+                self.view.hiddenNoData()
+            }
+
+            self.tableView.reloadData()
+            callback?(vmData.count != 20)
+            self.stopInfiniteScrolling(self.tableView, haveNoMore: (vmData.count != 20))
         }
     }
 

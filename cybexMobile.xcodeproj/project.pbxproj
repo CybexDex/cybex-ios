@@ -701,6 +701,8 @@
 		73A4CBB421EF493D00C93DA6 /* DataCompression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4CBB321EF493D00C93DA6 /* DataCompression.swift */; };
 		73A4CBB821F073A100C93DA6 /* BinUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4CBB721F073A000C93DA6 /* BinUtils.swift */; };
 		73AA83A521A7D1F2001B24DF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AA83A421A7D1F2001B24DF /* Utils.swift */; };
+		73C048CF2225285700F756FF /* CybexScrollNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C048CE2225285700F756FF /* CybexScrollNoticeView.swift */; };
+		73C048D12225286F00F756FF /* CybexScrollNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73C048D02225286F00F756FF /* CybexScrollNoticeView.xib */; };
 		73D012992159D71800C95896 /* URLNavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D012982159D71800C95896 /* URLNavigationMap.swift */; };
 		73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6DF2BADCBEB92C26D3AA952DE33210 /* TradeNavTitleView.swift */; };
 		73D9C15221DF1213005B9022 /* IntrinsicTableViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9C14F21DF1213005B9022 /* IntrinsicTableViewView.swift */; };
@@ -1594,6 +1596,8 @@
 		73A4CBB721F073A000C93DA6 /* BinUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinUtils.swift; sourceTree = "<group>"; };
 		73AA83A421A7D1F2001B24DF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		73BAB6CB839C8F409C3061833343A527 /* LockupAssetsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LockupAssetsSectionView.xib; sourceTree = "<group>"; };
+		73C048CE2225285700F756FF /* CybexScrollNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybexScrollNoticeView.swift; sourceTree = "<group>"; };
+		73C048D02225286F00F756FF /* CybexScrollNoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CybexScrollNoticeView.xib; sourceTree = "<group>"; };
 		73C298F5E89ECC37094FCC901A6B8D49 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		73D012982159D71800C95896 /* URLNavigationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLNavigationMap.swift; sourceTree = "<group>"; };
 		73D9C14F21DF1213005B9022 /* IntrinsicTableViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicTableViewView.swift; sourceTree = "<group>"; };
@@ -2144,6 +2148,8 @@
 				6B0874829089357398AE129E9C4B67DC /* CybexTextView.swift */,
 				1082CC6A81902CFC0405B8237A949A1B /* CybexTextView.xib */,
 				72E3A4C9214560580083E417 /* CybexWaitingView.swift */,
+				73C048CE2225285700F756FF /* CybexScrollNoticeView.swift */,
+				73C048D02225286F00F756FF /* CybexScrollNoticeView.xib */,
 				72E3A4CA214560580083E417 /* CybexWaitingView.xib */,
 				79A74117DC198D0039A47D4123BE4E06 /* ShowToastManager.swift */,
 				56299B4E9395DEA09802901B4057FB7B /* StyleContentView.swift */,
@@ -4417,6 +4423,7 @@
 				72D5829C219C18F800BB9842 /* CBKKindView.xib in Resources */,
 				733714BE2122D32500B2ED90 /* AddressCellView.xib in Resources */,
 				334F0C20FD029ABA79FC1F141026A0AB /* AccountAssetOperationsItemView.xib in Resources */,
+				73C048D12225286F00F756FF /* CybexScrollNoticeView.xib in Resources */,
 				729B869D2154C71300C6E0E4 /* ComprehensiveItemsView.xib in Resources */,
 				66D4B960BFC33039549F7EF70D2866CA /* AccountOpenedOrdersView.xib in Resources */,
 				221C617D213926A50021C007 /* ETORecordCell.xib in Resources */,
@@ -5338,6 +5345,7 @@
 				739EFB5E2181D10E00424061 /* UISwipeGestureRecognizer+RxGesture.swift in Sources */,
 				07D976BEA2F5A840607DE4D526DB1420 /* TradeLineView.swift in Sources */,
 				221EC24C2105CF310059F856 /* TransferCoordinator.swift in Sources */,
+				73C048CF2225285700F756FF /* CybexScrollNoticeView.swift in Sources */,
 				73731D8B21A538AF005B9B3C /* KeychainStore.swift in Sources */,
 				73D861D7D9EF5BD04B42D228723F657A /* TradeNavTitleView.swift in Sources */,
 				2E3DB3499E75C0D06068C979CD788B00 /* TradeReducers.swift in Sources */,

@@ -9,15 +9,17 @@
 import UIKit
 import ReSwift
 import Presentr
+import SwiftyUserDefaults
 
 protocol TradeCoordinatorProtocol {
     func openMyHistory()
-    func openMarket(index: Int, currentBaseIndex: Int)
+    func openMarket(_ pair: Pair)
 
     func removeHomeVC(_ completion:@escaping () -> Void)
     func addHomeVC(_ completion:@escaping () -> Void)
 
     func setupChildVC(_ segue: UIStoryboardSegue)
+    func showNoticeVC()
 }
 
 protocol TradeStateManagerProtocol {
@@ -31,12 +33,28 @@ class TradeCoordinator: NavCoordinator {
         middleware: [trackingMiddleware]
     )
 
+    let presenter: Presentr = {
+        let width = ModalSize.custom(size: 272)
+        let height = ModalSize.custom(size: 340)
+        let center = ModalCenterPosition.center
+        let customType = PresentationType.custom(width: width, height: height, center: center)
+
+        let customPresenter = Presentr(presentationType: customType)
+        customPresenter.roundCorners = true
+        return customPresenter
+    }()
+
     var orderCoodinator: OrderBookCoordinator!
     var historyCoodinator: TradeHistoryCoordinator!
 
     override class func start(_ root: BaseNavigationController, context: RouteContext? = nil) -> BaseViewController {
         let vc = R.storyboard.business.tradeViewController()!
-        vc.localizedText = R.string.localizable.navTrade.key.localizedContainer()
+        if let context = context as? TradeContext, context.pageType == .game {
+            vc.pair = Pair(base: AssetConfiguration.CybexAsset.ArenaUSDT.id, quote: AssetConfiguration.CybexAsset.ArenaETH.id)
+            vc.localizedText = R.string.localizable.navContest.key.localizedContainer()
+        } else {
+            vc.localizedText = R.string.localizable.navTrade.key.localizedContainer()
+        }
         let coordinator = TradeCoordinator(rootVC: root)
         vc.coordinator = coordinator
         coordinator.store.dispatch(RouteContextAction(context: context))
@@ -51,6 +69,13 @@ class TradeCoordinator: NavCoordinator {
 }
 
 extension TradeCoordinator: TradeCoordinatorProtocol {
+    func showNoticeVC() {
+        let v = CybexScrollNoticeView.show()
+        v.didConfirmNotTip.delegate(on: self) { (self, _) in
+            Defaults[.showContestTip] = false
+        }
+    }
+
     func openMyHistory() {
         guard let tradeVC = self.rootVC.topViewController as? TradeViewController else { return }
 
@@ -60,10 +85,9 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
         self.rootVC.pushViewController(vc, animated: true)
     }
 
-    func openMarket(index: Int, currentBaseIndex: Int) {
+    func openMarket(_ pair: Pair) {
         let vc = R.storyboard.main.marketViewController()!
-        vc.curIndex = index
-        vc.currentBaseIndex = currentBaseIndex
+        vc.pair = pair
         vc.rechargeShowType = PairRechargeView.ShowType.hidden.rawValue
         let coordinator = MarketCoordinator(rootVC: self.rootVC)
         vc.coordinator = coordinator
@@ -71,10 +95,10 @@ extension TradeCoordinator: TradeCoordinatorProtocol {
     }
 
     func addHomeVC(_ completion:@escaping () -> Void) {
-        guard let tradeVC = self.rootVC.topViewController as? TradeViewController else { return }
+        guard let tradeVC = self.rootVC.topViewController as? TradeViewController, let context = tradeVC.context else { return }
 
         guard let vc = R.storyboard.main.homeViewController() else { return }
-        vc.vcType = ViewType.businessTitle.rawValue
+        vc.vcType = context.pageType == .normal ? ViewType.businessTitle.rawValue : ViewType.gameTradeTitle.rawValue
 
         guard let homeView = vc.view else { return }
         let coordinator = HomeCoordinator(rootVC: self.rootVC)

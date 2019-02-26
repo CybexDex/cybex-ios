@@ -11,6 +11,17 @@ import ReSwift
 import SwiftyJSON
 import RxCocoa
 import RxSwift
+import HandyJSON
+
+struct TradeContext: RouteContext, HandyJSON {
+    enum TradeType: Int {
+        case normal
+        case game
+    }
+
+    var pageType: TradeType = .normal
+    init() {}
+}
 
 // MARK: - State
 struct TradeState: BaseState {

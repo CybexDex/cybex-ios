@@ -20,4 +20,5 @@ struct OpenedOrdersState: BaseState {
 
 struct FetchOpenedOrderAction: Action {
     var data: [LimitOrderStatus]
+    var all: Bool = false
 }

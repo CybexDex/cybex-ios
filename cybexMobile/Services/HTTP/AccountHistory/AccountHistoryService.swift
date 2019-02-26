@@ -15,6 +15,7 @@ import Localize_Swift
 
 enum AccountHistoryAPI {
     case getMyGroupFillOrder(userId: String, pair: Pair?, page: Int)
+    case getFillByPairs(userId: String, page: Int, pairs:[Pair])
     case getTransferRecord(userId:String, page: Int)
 }
 
@@ -89,6 +90,8 @@ extension AccountHistoryAPI: TargetType {
             return "/get_ops_by_transfer_accountspair_mongo"
         case .getMyGroupFillOrder(userId: _, pair: _, page: _):
             return "/get_ops_fill_pair"
+        case .getFillByPairs:
+            return "/get_fill_bypair"
         }
     }
 
@@ -111,6 +114,9 @@ extension AccountHistoryAPI: TargetType {
             else {
                 return ["account": uid, "start": "null", "end": "null", "base": "null", "quote": "null", "limit": 20, "page": page]
             }
+        case let .getFillByPairs(userId: uid, page: page, pairs: pairs):
+            let p = pairs.map { "\($0.quote)_\($0.base)" }.joined(separator: ",")
+            return ["account": uid, "start": "null", "end": "null", "filter_in": "null", "filter_out": p, "limit": 20, "page": page]
         }
     }
 

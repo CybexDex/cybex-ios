@@ -12,13 +12,18 @@ class BusinessTitleView: UIView {
 
     @IBOutlet weak var leftView: QuotesTitleView!
     @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    
     var selectedIndex: Int?
     var saveBaseIndex = 0
     var currentBaseIndex = 0 {
         didSet {
             if let data = self.data as? [Ticker] {
-                self.reloadData = data.filter({$0.base == MarketConfiguration.marketBaseAssets.map({ $0.id })[currentBaseIndex]})
+                if leftView.viewType == QuotesTitleView.ViewType.game.rawValue {
+                    self.reloadData = data.filter({$0.base == MarketConfiguration.gameMarketBaseAssets.map({ $0.id })[currentBaseIndex]})
+                } else {
+                    self.reloadData = data.filter({$0.base == MarketConfiguration.marketBaseAssets.map({ $0.id })[currentBaseIndex]})
+                }
             }
         }
     }
@@ -26,7 +31,13 @@ class BusinessTitleView: UIView {
     var data: Any? {
         didSet {
             if let data = data as? [Ticker] {
-                self.reloadData = data.filter({$0.base == MarketConfiguration.marketBaseAssets.map({ $0.id })[currentBaseIndex]})
+                if leftView.viewType == QuotesTitleView.ViewType.game.rawValue {
+                    heightConstraint.constant = CGFloat(54 * MarketConfiguration.gameMarketBaseAssets.count)
+                    self.reloadData = data.filter({$0.base == MarketConfiguration.gameMarketBaseAssets.map({ $0.id })[currentBaseIndex]})
+                } else {
+                    heightConstraint.constant = CGFloat(54 * MarketConfiguration.marketBaseAssets.count)
+                    self.reloadData = data.filter({$0.base == MarketConfiguration.marketBaseAssets.map({ $0.id })[currentBaseIndex]})
+                }
             }
         }
     }

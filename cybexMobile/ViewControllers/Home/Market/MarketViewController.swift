@@ -22,7 +22,6 @@ extension NSNotification.Name {
 class MarketViewController: BaseViewController {
     @IBOutlet var pageContentViewHeight: NSLayoutConstraint!
     @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var pairListView: PairListHorizantalView!
     @IBOutlet var detailView: PairDetailView!
     @IBOutlet var kLineView: CBKLineView!
     @IBOutlet var marketDetailView: PairDetailView!
@@ -30,7 +29,7 @@ class MarketViewController: BaseViewController {
     @IBOutlet weak var rechargeHeight: NSLayoutConstraint!
 
     var rechargeShowType = PairRechargeView.ShowType.show.rawValue
-    var currentBaseIndex: Int = 0
+
     var kLineSpecial = false
     var canExchange = false
     var daySelectedIndex = 2
@@ -61,25 +60,13 @@ class MarketViewController: BaseViewController {
         }
     }
 
-    var curIndex: Int = 0
     var coordinator: (MarketCoordinatorProtocol & MarketStateManagerProtocol)?
 
-    lazy var pair: Pair = {
-        Pair(base: self.ticker.base, quote: self.ticker.quote)
-    }()
+    var pair: Pair?
 
-    lazy var ticker: Ticker = {
-        if self.curIndex < self.tickers.count {
-            let market = self.tickers[self.curIndex]
-            return market
-        }
-        return Ticker()
-    }()
-
-    lazy var tickers: [Ticker] = {
-        let markets = MarketHelper.filterQuoteAssetTicker(MarketConfiguration.marketBaseAssets.map({ $0.id })[currentBaseIndex])
-        return markets
-    }()
+    var ticker: Ticker? {
+        return MarketHelper.getTickerByPair(pair)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,7 +83,7 @@ class MarketViewController: BaseViewController {
         var quoteName = ""
         var baseName = ""
 
-        if let quoteInfo = appData.assetInfo[ticker.quote], let baseInfo = appData.assetInfo[ticker.base] {
+        if let quoteInfo = appData.assetInfo[pair!.quote], let baseInfo = appData.assetInfo[pair!.base] {
             quoteName = quoteInfo.symbol.filterJade
             baseName = baseInfo.symbol.filterJade
         }
@@ -134,12 +121,17 @@ class MarketViewController: BaseViewController {
     }
     
     func fetchNotReadMessageIdData() {
-        self.coordinator?.fetchLastMessageId(self.title!, callback: { [weak self](lastId) in
-            guard let self = self else {
-                return
-            }
-            self.kLineView.messageCount = lastId
-        })
+        if let quoteInfo = appData.assetInfo[pair!.quote], let baseInfo = appData.assetInfo[pair!.base] {
+            let quoteName = quoteInfo.symbol.filterOnlyJade
+            let baseName = baseInfo.symbol.filterOnlyJade
+            let channel = quoteName + "/" + baseName
+            self.coordinator?.fetchLastMessageId(channel, callback: { [weak self](lastId) in
+                guard let self = self else {
+                    return
+                }
+                self.kLineView.messageCount = lastId
+            })
+        }
     }
     
     func setupNotificatin() {
@@ -167,8 +159,6 @@ class MarketViewController: BaseViewController {
 
     func refreshDetailView() {
         detailView.data = ticker
-
-        pairListView.data = [self.curIndex, self.tickers]
     }
 
     func refreshView(_ hiddenKLine: Bool = true, isRefreshSelf: Bool = true) {
@@ -183,25 +173,16 @@ class MarketViewController: BaseViewController {
 
         resetKLinePosition = hiddenKLine
 
-        self.coordinator?.requestKlineDetailData(pair: pair, gap: timeGap)
-    }
-
-    func updateIndex() {
-        let pairs = tickers.map({ Pair(base: $0.base, quote: $0.quote) })
-        if let index = pairs.index(of: pair), index < tickers.count, index < pairs.count {
-            curIndex = index
-            ticker = tickers[self.curIndex]
-            pair = pairs[self.curIndex]
-        }
+        self.coordinator?.requestKlineDetailData(pair: pair!, gap: timeGap)
     }
 
     func refreshKLine() {
-        if ticker.latest == "0" {
+        if let ticker = ticker, ticker.latest == "0" {
             endLoading()
             return
         }
 
-        if let klineDatas = self.coordinator?.state.detailData.value, let klineData = klineDatas[pair] {
+        if let klineDatas = self.coordinator?.state.detailData.value, let klineData = klineDatas[pair!] {
 
             guard let response = klineData[timeGap] else {
                 endLoading()
@@ -210,14 +191,14 @@ class MarketViewController: BaseViewController {
 
             endLoading()
             kLineView.isHidden = false
-            let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(self.pair)
+            let tradePrecision = TradeConfiguration.shared.getPairPrecisionWithPair(self.pair!)
 
             DispatchQueue.global().async {
                 var dataArray = [CBKLineModel]()
                 for data in response {
 
-                    let baseAssetId = self.pair.base
-                    let quoteAssetId = self.pair.quote
+                    let baseAssetId = self.pair!.base
+                    let quoteAssetId = self.pair!.quote
 
                     let isBase = data.base == baseAssetId
 
@@ -299,7 +280,7 @@ class MarketViewController: BaseViewController {
                             dataArray.append(gapModel)
                         }
                     }
-                    if let _ = appData.assetInfo[self.ticker.base], self.timeGap == .oneDay {
+                    if let ticker = self.ticker, let _ = appData.assetInfo[ticker.base], self.timeGap == .oneDay {
                         lastModel = dataArray.last!
                         DispatchQueue.main.async {
                             self.detailView.highLabel.text = "High: " + lastModel.high.decimal.formatCurrency(digitNum: tradePrecision.price)
@@ -335,7 +316,6 @@ class MarketViewController: BaseViewController {
 
     @objc func refreshTotalView() {
         if isVisible {
-            updateIndex()
             refreshView(false, isRefreshSelf: !kLineSpecial)
         }
     }
@@ -371,10 +351,10 @@ extension MarketViewController {
     }
 
     @objc func buy() {
-        self.coordinator?.openTradeViewChontroller(true, pair: self.pair)
+        self.coordinator?.openTradeViewChontroller(true, pair: self.pair!)
     }
     @objc func sell() {
-        self.coordinator?.openTradeViewChontroller(false, pair: self.pair)
+        self.coordinator?.openTradeViewChontroller(false, pair: self.pair!)
     }
     
     @objc func dropDownBoxViewDidClicked(_ data: [String: Any]) {
@@ -386,7 +366,7 @@ extension MarketViewController {
     }
     
     @objc func openMessageVC(_ data: [String: Any]) {
-        self.coordinator?.openChatVC(self.pair)
+        self.coordinator?.openChatVC(self.pair!)
     }
 }
 
