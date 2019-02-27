@@ -139,7 +139,7 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         presenter.keyboardTranslationType = .moveUp
 
         var items = [String]()
-        let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
+        let balances = UserManager.shared.fullAccount.value?.balances.filter({ (balance) -> Bool in
             return AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) != 0
         })
         if let balances = balances {
@@ -257,7 +257,7 @@ extension TransferCoordinator: TransferStateManagerProtocol {
                 let value = pow(10, assetInfo.precision)
                 let amount = amount.decimal() * value
 
-                guard let fromAccount = UserManager.shared.account.value, let toAccount = self.state.toAccount.value else {
+                guard let fromAccount = UserManager.shared.getCachedAccount(), let toAccount = self.state.toAccount.value else {
                     return
                 }
 
@@ -372,8 +372,8 @@ extension TransferCoordinator: TransferStateManagerProtocol {
 
     func getGatewayFee(_ assetId: String, amount: String, memo: String) {
         guard let currentVC = self.rootVC.topViewController as? TransferViewController else { return }
-        let fromUserId = UserManager.shared.account.value?.id ?? "0"
-        let fromMemoKey = UserManager.shared.account.value?.memoKey ?? ""
+        let fromUserId = UserManager.shared.getCachedAccount()?.id ?? "0"
+        let fromMemoKey = UserManager.shared.getCachedAccount()?.memoKey ?? ""
         let toUserId = self.state.toAccount.value?.id ?? "0"
         let toMemoKey = self.state.toAccount.value?.memoKey ?? fromMemoKey
 

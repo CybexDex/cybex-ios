@@ -74,14 +74,14 @@ extension EntryViewController {
             guard let self = self else { return }
 
             self.startLoading()
-            UserManager.shared.login(self.accountTextField.text!, password: self.passwordTextField.text!) { success in
+
+            UserManager.shared.login(self.accountTextField.text!, password: self.passwordTextField.text!).done {
+                NotificationCenter.default.post(name: NSNotification.Name.init("login_success"), object: nil)
+                self.coordinator?.dismiss()
+            }.ensure {
                 self.endLoading()
-                if success {
-                    NotificationCenter.default.post(name: NSNotification.Name.init("login_success"), object: nil)
-                    self.coordinator?.dismiss()
-                } else {
-                    self.showAlert(R.string.localizable.accountNonMatch.key.localized(), buttonTitle: R.string.localizable.ok.key.localized())
-                }
+            }.catch {_ in
+                self.showAlert(R.string.localizable.accountNonMatch.key.localized(), buttonTitle: R.string.localizable.ok.key.localized())
             }
         }).disposed(by: disposeBag)
     }

@@ -12,8 +12,13 @@ import SwiftyUserDefaults
 
 extension AppDelegate {
     func setupUserSetting() {
+        let name = Defaults[.username]
+        if name.count > 0 {
+            UserManager.shared.name.accept(name)
+        }
+
         if Defaults.hasKey(.frequencyType) {
-            UserManager.shared.frequencyType = UserManager.FrequencyType(rawValue: Defaults[.frequencyType])!
+            UserManager.shared.frequencyType = FrequencyType(rawValue: Defaults[.frequencyType])!
         }
 
         NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { (note) in

@@ -76,7 +76,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     }
 
     func fetchOpenedOrderRequest(_ pair: Pair) {
-        guard let userId = UserManager.shared.account.value?.id else {
+        guard let userId = UserManager.shared.getCachedAccount()?.id else {
             self.store.dispatch(FetchOpenedOrderAction(data: [], all: false))
             return
         }
@@ -100,7 +100,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     }
     
     func fetchAllOpenedOrderRequest() {
-        guard let userId = UserManager.shared.account.value?.id else {
+        guard let userId = UserManager.shared.getCachedAccount()?.id else {
             self.store.dispatch(FetchOpenedOrderAction(data: [], all: true))
 
             return
@@ -141,7 +141,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     }
 
     func cancelOrder(_ orderID: String, feeId: String, callback: @escaping (_ success: Bool) -> Void) {
-        guard let userid = UserManager.shared.account.value?.id else { return }
+        guard let userid = UserManager.shared.getCachedAccount()?.id else { return }
         let operation = BitShareCoordinator.cancelLimitOrderOperation(0, user_id: 0, fee_id: 0, fee_amount: 0)
 
         CybexChainHelper.calculateFee(operation,
@@ -176,7 +176,7 @@ extension OpenedOrdersCoordinator: OpenedOrdersStateManagerProtocol {
     }
 
     func cancelAllOrder(_ pair: Pair?, callback: @escaping (_ success: Bool) -> Void) {
-        guard let userid = UserManager.shared.account.value?.id else { return }
+        guard let userid = UserManager.shared.getCachedAccount()?.id else { return }
 
         var sellAssetId = "1.3.0"
         var receivedAssetId = "1.3.0"

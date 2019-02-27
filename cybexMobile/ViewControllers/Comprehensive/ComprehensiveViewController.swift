@@ -163,7 +163,7 @@ extension ComprehensiveViewController {
 
         let midlleItem = middleItems[index]
 
-        if midlleItem.needlogin, !UserManager.shared.isLoginIn {
+        if midlleItem.needlogin, !UserManager.shared.logined {
             appCoodinator.showLogin()
             return
         }
@@ -198,7 +198,7 @@ extension ComprehensiveViewController {
 
     func openUrl(_ url: String, needLogin: Bool = true) {
         if url.contains("cybexapp://") {
-            if needLogin, !UserManager.shared.isLoginIn {
+            if needLogin, !UserManager.shared.logined {
                 appCoodinator.showLogin()
                 return
             }

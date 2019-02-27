@@ -10,15 +10,26 @@ import Foundation
 import HandyJSON
 
 class Balance: HandyJSON {
-  var assetType: String = "" //id
-  var balance: String = ""
+    var assetType: String = "" //id
+    var balance: String = ""
 
-  required init() {
+    required init() {
 
-  }
+    }
 
-  func mapping(mapper: HelpingMapper) {
-    mapper <<< assetType <-- ("asset_type", ToStringTransform())
-    mapper <<< balance <-- ("balance", ToStringTransform())
-  }
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< assetType <-- ("asset_type", ToStringTransform())
+        mapper <<< balance <-- ("balance", ToStringTransform())
+    }
+
+    func rmbValue() -> Decimal {
+        var balanceValues: Decimal = 0
+
+        let realAmount = AssetHelper.getRealAmount(assetType, amount: balance)
+        let realRMBPrice = AssetHelper.singleAssetRMBPrice(assetType)
+
+        balanceValues = realAmount * realRMBPrice
+
+        return balanceValues
+    }
 }

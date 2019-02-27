@@ -35,7 +35,7 @@ class AccountViewController: BaseViewController {
         setupUI()
         setupEvent()
 
-        if  UserManager.shared.isLoginIn {
+        if  UserManager.shared.logined {
         }
     }
 
@@ -58,7 +58,7 @@ class AccountViewController: BaseViewController {
 
     func setupIconImg() {
 
-        if UserManager.shared.isLoginIn == false {
+        if UserManager.shared.logined == false {
             accountContentView.headerView.icon = R.image.accountAvatar()
         } else {
             if let hash = UserManager.shared.avatarString {
@@ -72,7 +72,7 @@ class AccountViewController: BaseViewController {
     }
 
     func setupTitle() {
-        if let name = UserManager.shared.account.value?.name {
+        if let name = UserManager.shared.name.value {
             accountContentView.headerView.title = R.string.localizable.hello.key.localized() + name
         } else {
             accountContentView.headerView.title = R.string.localizable.accountLogin.key.localized()
@@ -114,7 +114,7 @@ class AccountViewController: BaseViewController {
     }
 
     override func configureObserveState() {
-        UserManager.shared.account.asObservable()
+        UserManager.shared.fullAccount.asObservable()
             .skip(1)
             .throttle(10, latest: true, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self](_) in
@@ -130,7 +130,7 @@ class AccountViewController: BaseViewController {
 extension AccountViewController {
 
     @objc func login(_ data: [String: Any]) {
-        if !UserManager.shared.isLoginIn {
+        if !UserManager.shared.logined {
             appCoodinator.showLogin()
         }
     }
@@ -141,32 +141,32 @@ extension AccountViewController {
         }
         switch index {
         case 0:
-            if !UserManager.shared.isLoginIn {
+            if !UserManager.shared.logined {
                 appCoodinator.showLogin()
             } else {
 
                 self.coordinator?.openYourProtfolio()
             }
         case 1:
-            if !UserManager.shared.isLoginIn {
+            if !UserManager.shared.logined {
                 appCoodinator.showLogin()
             } else {
                 self.coordinator?.openRecharge()
             }
         case 2:
-            if !UserManager.shared.isLoginIn {
+            if !UserManager.shared.logined {
                 appCoodinator.showLogin()
             } else {
                 self.coordinator?.openAddressManager()
             }
         case 3:
-            if !UserManager.shared.isLoginIn {
+            if !UserManager.shared.logined {
                 appCoodinator.showLogin()
             } else {
                 self.coordinator?.openOpenedOrders()
             }
         default:
-            if !UserManager.shared.isLoginIn {
+            if !UserManager.shared.logined {
                 appCoodinator.showLogin()
             } else {
                 openLockupAssets([:])

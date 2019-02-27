@@ -341,28 +341,26 @@ extension RegisterViewController {
                 let password = self.passwordTextField.text ?? ""
                 async {
                     do {
-                        let success = try await(UserManager.shared.register(self.pinID, captcha: captcha, username: username, password: password))
+                        try await(UserManager.shared.register(self.pinID, captcha: captcha, username: username, password: password))
 
                         DispatchQueue.main.async {
                             self.endLoading()
 
-                            if success.0 {
-                                self.coordinator?.confirmRegister(self.passwordTextField.text!)
-                            } else {
-                                self.updateSvgView()
-
-                                var message = R.string.localizable.registerFail.key.localized()
-                                if success.1 == 403 {
-                                    message = R.string.localizable.registerFail403.key.localized()
-                                } else if success.1 == 429 {
-                                    message = R.string.localizable.registerFail429.key.localized()
-                                }
-                                self.showAlert(message, buttonTitle: R.string.localizable.ok.key.localized())
+                            self.coordinator?.confirmRegister(self.passwordTextField.text!)
+                        }
+                    } catch {
+                        DispatchQueue.main.async {
+                            self.endLoading()
+                            self.updateSvgView()
+                            if case CybexError.tipError(.registerFail) = error {
+                                self.showAlert(error.localizedDescription, buttonTitle: R.string.localizable.ok.key.localized())
                             }
+                            else {
+                                 self.showAlert(R.string.localizable.registerFail.key.localized(), buttonTitle: R.string.localizable.ok.key.localized())
+                            }
+                            self.showAlert(error.localizedDescription, buttonTitle: R.string.localizable.ok.key.localized())
                             self.registerButton.canRepeat = true
                         }
-                    } catch _ {
-
                     }
 
                 }

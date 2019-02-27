@@ -39,6 +39,19 @@ class AccountKeys: HandyJSON {
         mapper <<< ownerKey <-- "owner-key"
         mapper <<< memoKey <-- "memo-key"
     }
+
+    func removePrivateKey() {
+        activeKey?.privateKey = ""
+        ownerKey?.privateKey = ""
+        memoKey?.privateKey = ""
+    }
+
+    func addresses() -> [String] {
+        guard let activeKey = activeKey, let memoKey = memoKey, let ownKey = ownerKey else {
+            return []
+        }
+        return activeKey.addresses + memoKey.addresses + ownKey.addresses
+    }
 }
 
 class Key: HandyJSON {

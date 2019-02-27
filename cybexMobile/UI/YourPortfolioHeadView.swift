@@ -36,12 +36,13 @@ class YourPortfolioHeadView: UIView {
 
     func setup() {
         memberLevel.localizedText = R.string.localizable.account_property.key.localizedContainer()
-        if UserManager.shared.balance == 0 {
+        if let balance = UserManager.shared.fullAccount.value?.balance, balance != 0 {
+            totalBalance.text = (balance / AssetConfiguration.shared.rmbOf(asset: .CYB)).formatCurrency(digitNum: 5)
+            balanceRMB.text   = "≈¥" + balance.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
+        } else {
             totalBalance.text = "0.00000"
             balanceRMB.text   = "≈¥0.0000"
-        } else {
-            totalBalance.text = (UserManager.shared.balance / AssetConfiguration.shared.rmbOf(asset: .CYB)).formatCurrency(digitNum: 5)
-            balanceRMB.text   = "≈¥" + UserManager.shared.balance.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
+
         }
         helpButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] _ in
             guard let self = self else {return}

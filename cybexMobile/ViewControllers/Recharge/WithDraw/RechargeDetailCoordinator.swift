@@ -143,9 +143,9 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                     memoAddress = GatewayService.withDrawMemo(name!, address: address + "[\(memo)]")
                 }
             }
-            guard let fromMemoKey = UserManager.shared.account.value?.memoKey else { return }
+            guard let fromMemoKey = UserManager.shared.getCachedAccount()?.memoKey, let uid = UserManager.shared.getCachedAccount()?.id else { return }
             
-            let operationString = BitShareCoordinator.getTransterOperation((UserManager.shared.account.value?.id)!.getSuffixID,
+            let operationString = BitShareCoordinator.getTransterOperation(uid.getSuffixID,
                                                                               to_user_id: (self.state.data.value?.gatewayAccount)!.getSuffixID,
                                                                               asset_id: assetId.getSuffixID,
                                                                               amount: amount.int64Value,
@@ -194,12 +194,13 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
 
                 let amount = amount.decimal() * value
                 let feeAmout = feeAmount.decimal() * pow(10, (appData.assetInfo[feeId]?.precision)!)
-                guard let fromMemoKey = UserManager.shared.account.value?.memoKey else { return }
+                guard let fromMemoKey = UserManager.shared.getCachedAccount()?.memoKey,
+                let uid = UserManager.shared.getCachedAccount()?.id else { return }
                 let jsonstr = BitShareCoordinator.getTransaction(blockInfo.block_num.int32,
                                                                  block_id: blockInfo.block_id,
                                                                  expiration: Date().timeIntervalSince1970 + CybexConfiguration.TransactionExpiration,
                                                                  chain_id: CybexConfiguration.shared.chainID.value,
-                                                                 from_user_id: (UserManager.shared.account.value?.id)!.getSuffixID,
+                                                                 from_user_id: uid.getSuffixID,
                                                                  to_user_id: (self.state.data.value?.gatewayAccount)!.getSuffixID,
                                                                  asset_id: assetId.getSuffixID,
                                                                  receive_asset_id: assetId.getSuffixID,

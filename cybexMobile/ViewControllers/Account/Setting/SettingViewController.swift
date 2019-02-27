@@ -37,7 +37,7 @@ class SettingViewController: BaseViewController {
         setupUI()
         setupNotification()
         setupEvent()
-        if !UserManager.shared.isLoginIn {
+        if !UserManager.shared.logined {
             self.logoutView.isHidden = true
         }
         self.logoutView.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in

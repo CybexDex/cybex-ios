@@ -86,7 +86,7 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
     }
 
     func fetchMyOrderHistoryRequest(_ pair: Pair, lessThanOrderId: String?, callback: ((Bool) -> Void)?) {
-        guard let userId = UserManager.shared.account.value?.id else {
+        guard let userId = UserManager.shared.getCachedAccount()?.id else {
             callback?(true)
 
             self.store.dispatch(FillOrderDataFetchedAction(data: [], all: false))
@@ -142,7 +142,7 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
 
     func fetchAllMyOrderHistoryRequest(_ lessThanOrderId: String?, callback: ((Bool) -> Void)?) {
 
-        guard let userId = UserManager.shared.account.value?.id else {
+        guard let userId = UserManager.shared.getCachedAccount()?.id else {
             callback?(true)
 
             self.store.dispatch(FillOrderDataFetchedAction(data: [], all: true))

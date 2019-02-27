@@ -9,6 +9,20 @@
 import Foundation
 import Guitar
 
+enum FrequencyType: Int {
+    case normal = 0
+    case time
+    case wiFi
+
+    func description() -> String {
+        switch self {
+        case .normal: return R.string.localizable.frequency_normal.key
+        case .time: return R.string.localizable.frequency_time.key
+        case .wiFi: return R.string.localizable.frequency_wifi.key
+        }
+    }
+}
+
 class UserHelper {
     class func getBalanceFromAssetID(_ assetID: String) -> Decimal {
         if let balance = getBalanceWithAssetId(assetID) {
@@ -19,7 +33,7 @@ class UserHelper {
     }
    
     class func getBalanceWithAssetId(_ asset: String) -> Balance? {
-        if let balances = UserManager.shared.balances.value {
+        if let balances = UserManager.shared.fullAccount.value?.balances {
             for balance in balances {
                 if balance.assetType == asset {
                     return balance

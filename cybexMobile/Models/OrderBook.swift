@@ -47,6 +47,13 @@ class LimitOrder: HandyJSON {
         mapper <<< sellPrice            <-- "sell_price"
     }
 
+    func rmbValue() -> Decimal {
+        let realAmount = AssetHelper.getRealAmount(sellPrice.base.assetID, amount: forSale)
+        let priceValue = AssetHelper.singleAssetRMBPrice(sellPrice.base.assetID)
+        let decimallimitOrderValue: Decimal = realAmount * priceValue
+
+        return decimallimitOrderValue
+    }
 }
 
 class LimitOrderStatus: HandyJSON {

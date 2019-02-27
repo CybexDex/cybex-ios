@@ -20,8 +20,6 @@ class AccountOpenedOrdersView: UIView {
 
     var data: Any? {
         didSet {
-            _ = UserManager.shared.balance
-
             if headerView == nil, data != nil {
                 headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: 42))
                 headerView.cancelAllEvent.delegate(on: self) { (self, _) in

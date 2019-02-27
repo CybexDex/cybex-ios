@@ -125,7 +125,7 @@ class BusinessViewController: BaseViewController {
     }
     
     func changeButtonState() {
-        if UserManager.shared.isLoginIn {
+        if UserManager.shared.logined {
             guard let pair = pair, let quoteInfo = appData.assetInfo[pair.quote] else { return }
             self.containerView.button.locali = self.type == .buy ? R.string.localizable.openedBuy.key : R.string.localizable.openedSell.key
             if let title = self.containerView.button.button.titleLabel?.text {
@@ -233,7 +233,7 @@ class BusinessViewController: BaseViewController {
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     func addUserManagerObserverSubscribeAction() {
-        UserManager.shared.balances.asObservable().subscribe(onNext: {[weak self] (_) in
+        UserManager.shared.fullAccount.asObservable().subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
             guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base],
                 let quoteInfo = appData.assetInfo[pair.quote] else { return }
@@ -331,7 +331,7 @@ class BusinessViewController: BaseViewController {
         }
         NotificationCenter.default.addObserver(forName: UITextField.textDidBeginEditingNotification, object: self.containerView.amountTextfield, queue: nil) {[weak self](_) in
             guard let self = self else {return}
-            if !UserManager.shared.isLoginIn {
+            if !UserManager.shared.logined {
                 self.containerView.amountTextfield.resignFirstResponder()
                 appCoodinator.showLogin()
                 return
@@ -340,7 +340,7 @@ class BusinessViewController: BaseViewController {
         NotificationCenter.default.addObserver(forName: UITextField.textDidBeginEditingNotification, object: self.containerView.priceTextfield, queue: nil) {[weak self](_) in
             guard let self = self else {return}
             
-            if !UserManager.shared.isLoginIn {
+            if !UserManager.shared.logined {
                 self.containerView.priceTextfield.resignFirstResponder()
                 appCoodinator.showLogin()
                 return
@@ -389,7 +389,7 @@ extension BusinessViewController {
             return
         }
         
-        if !UserManager.shared.isLoginIn {
+        if !UserManager.shared.logined {
             appCoodinator.showLogin()
             return
         }

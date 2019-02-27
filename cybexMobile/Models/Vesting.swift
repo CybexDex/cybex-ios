@@ -105,26 +105,30 @@ class MyPortfolioData {
             rbmPrice = "-"
 
         } else {
-            rbmPrice = "≈¥" + (AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) * AssetHelper.singleAssetRMBPrice(balance.assetType)).formatCurrency(digitNum: 4)
+            rbmPrice = "≈¥" + balance.rmbValue().formatCurrency(digitNum: 4)
         }
 
         //获取冻结资产
         var limitDecimal: Decimal = 0
 
-        if let limitArray = UserManager.shared.limitOrder.value {
-            for limit in limitArray {
-                if limit.sellPrice.base.assetID == balance.assetType {
-                    let amount = AssetHelper.getRealAmount(balance.assetType, amount: limit.forSale)
-                    limitDecimal += amount
-                }
+        guard let orders = UserManager.shared.fullAccount.value?.limitOrders else {
+            limitAmount = R.string.localizable.frozen.key.localized() + "--"
+            return
+        }
+
+        for limitOrder in orders {
+            if limitOrder.sellPrice.base.assetID == balance.assetType {
+                let amount = AssetHelper.getRealAmount(balance.assetType, amount: limitOrder.forSale)
+                limitDecimal += amount
             }
-            if let assetInfo = appData.assetInfo[balance.assetType] {
-                if limitDecimal == 0 {
-                    limitAmount = R.string.localizable.frozen.key.localized() + "--"
-                } else {
-                    limitAmount = R.string.localizable.frozen.key.localized() +
-                        limitDecimal.formatCurrency(digitNum: assetInfo.precision)
-                }
+        }
+
+        if let assetInfo = appData.assetInfo[balance.assetType] {
+            if limitDecimal == 0 {
+                limitAmount = R.string.localizable.frozen.key.localized() + "--"
+            } else {
+                limitAmount = R.string.localizable.frozen.key.localized() +
+                    limitDecimal.formatCurrency(digitNum: assetInfo.precision)
             }
         }
     }

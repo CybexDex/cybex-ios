@@ -114,7 +114,7 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
                 self.coordinator?.fetchAllMyOrderHistory(oid, callback: callback)
             }
         }
-        else if case let .groupFillOrder(pair: pair) = type, let uid = UserManager.shared.account.value?.id {
+        else if case let .groupFillOrder(pair: pair) = type, let uid = UserManager.shared.getCachedAccount()?.id {
             if pair == nil, let gameEnable = AppConfiguration.shared.enableSetting.value?.isGameEnabled, gameEnable {
                 AccountHistoryService.request(target: .getFillByPairs(userId: uid, page: page, pairs: MarketConfiguration.shared.gameMarketPairs), success: { (json) in
                     self.endLoading()

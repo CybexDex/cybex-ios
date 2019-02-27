@@ -40,7 +40,7 @@ func rechargeReducer(action: Action, state: RechargeState?) -> RechargeState {
 func filterData(_ trades: [Trade]) -> [Trade] {
     let data = trades.filter({return appData.assetInfo[$0.id] != nil})
     var tradesInfo: [Trade] = []
-    if var balances = UserManager.shared.balances.value {
+    if var balances = UserManager.shared.fullAccount.value?.balances {
         balances = balances.filter { (balance) -> Bool in
             return AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) != 0
         }

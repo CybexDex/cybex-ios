@@ -31,14 +31,14 @@ func transferRecordsToViewModels(_ sender: [(TransferRecord, time: String)], cal
         callback([])
     }
 
-    if let account = UserManager.shared.account.value {
+    if let uid = UserManager.shared.getCachedAccount()?.id {
         var result: [TransferRecordViewModel] = [TransferRecordViewModel]()
         for source: (TransferRecord, time: String) in sender {
-            let requesetId = source.0.from == account.id ?  source.0.to : source.0.from
+            let requesetId = source.0.from == uid ?  source.0.to : source.0.from
             let request = GetFullAccountsRequest(name: requesetId) { (response) in
                 if let data = response as? FullAccount, let account = data.account {
                     let requesetName = account.name
-                    let transferViewModel = TransferRecordViewModel(isSend: source.0.from == UserManager.shared.account.value?.id,
+                    let transferViewModel = TransferRecordViewModel(isSend: source.0.from == uid,
                                                                     from: source.0.from == account.id ? account.name : requesetName,
                                                                     to: source.0.from == account.id ? requesetName : account.name,
                                                                     time: Formatter.iso8601.date(from: source.time)!.string(withFormat: "MM/dd HH:mm:ss"), amount: source.0.amount,

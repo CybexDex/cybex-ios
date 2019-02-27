@@ -30,17 +30,13 @@ class LockupAssetsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+
+        guard let keys = UserManager.shared.getCachedKeysExcludePrivate() else {
+            return
+        }
+
         self.startLoading()
-        self.coordinator?.fetchLockupAssetsData(
-            [UserManager.shared.keys!.activeKey!.address,
-             UserManager.shared.keys!.activeKey!.compressed,
-             UserManager.shared.keys!.activeKey!.uncompressed,
-             UserManager.shared.keys!.ownerKey!.address,
-             UserManager.shared.keys!.ownerKey!.compressed,
-             UserManager.shared.keys!.ownerKey!.uncompressed,
-             UserManager.shared.keys!.memoKey!.address,
-             UserManager.shared.keys!.memoKey!.compressed,
-             UserManager.shared.keys!.memoKey!.uncompressed])
+        self.coordinator?.fetchLockupAssetsData(keys.addresses())
     }
     
     func setupUI() {

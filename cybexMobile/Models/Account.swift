@@ -16,6 +16,59 @@ struct AccountPermission: HandyJSON {
     var trade: Bool = false
 }
 
+class FullAccount: HandyJSON {
+    var account: Account?
+    var balances: [Balance] = []
+    var limitOrders: [LimitOrder] = []
+
+    //rmb value
+    var limitOrderValue: Decimal = 0
+    var limitOrderBuyValue: Decimal = 0
+    var limitOrderSellValue: Decimal = 0
+    var balance: Decimal = 0
+
+    required init() {}
+
+    func mapping(mapper: HelpingMapper) {
+        mapper <<< limitOrders <-- "limit_orders"
+    }
+
+    func calculateLimitOrderValue() {
+        var decimallimitOrderValue: Decimal = 0
+        var decimalBuylimitOrderValue: Decimal = 0
+        var decimalSelllimitOrderValue: Decimal = 0
+
+        for limitOrderValue in limitOrders {
+            let value = limitOrderValue.rmbValue()
+            decimallimitOrderValue += value
+
+            if limitOrderValue.isBuy {
+                decimalBuylimitOrderValue += value
+            } else {
+                decimalSelllimitOrderValue += value
+            }
+        }
+
+        limitOrderValue = decimallimitOrderValue
+        limitOrderBuyValue = decimalBuylimitOrderValue
+        limitOrderSellValue = decimalSelllimitOrderValue
+    }
+
+
+    func calculateBalanceValue() {
+        var balanceValues: Decimal = 0
+
+        for balanceValue in balances {
+            balanceValues += balanceValue.rmbValue()
+        }
+
+        balanceValues += limitOrderValue
+
+        balance = balanceValues
+    }
+
+}
+
 class Account: HandyJSON {
     var membershipExpirationDate: String = ""
     var name: String = ""

@@ -120,7 +120,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
     }
 
     func getBalance(_ assetID: String) {
-        if let balances = UserManager.shared.balances.value?.filter({ (balance) -> Bool in
+        if let balances = UserManager.shared.fullAccount.value?.balances.filter({ (balance) -> Bool in
             return balance.assetType.filterJade == assetID
         }).first {
             let amount = AssetHelper.getRealAmount(balances.assetType, amount: balances.balance)
@@ -136,7 +136,7 @@ extension BusinessCoordinator: BusinessStateManagerProtocol {
         guard let baseInfo = appData.assetInfo[pair.base],
             let quoteInfo = appData.assetInfo[pair.quote],
             let feeInfo = appData.assetInfo[self.state.feeID.value],
-            let userid = UserManager.shared.account.value?.id,
+            let userid = UserManager.shared.getCachedAccount()?.id,
             self.state.feeAmount.value != 0,
             self.state.amount.value.decimal() != 0,
            self.state.price.value.decimal() != 0 else { return }

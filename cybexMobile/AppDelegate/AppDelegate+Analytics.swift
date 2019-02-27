@@ -15,7 +15,7 @@ private let UMAppkey = "5b6bf4a8b27b0a3429000016"
 extension AppDelegate {
     func setupAnalytics() {
         Fabric.with([Crashlytics.self, Answers.self])
-        UserManager.shared.account.asObservable().subscribe(onNext: { (account) in
+        UserManager.shared.name.asObservable().subscribe(onNext: { (account) in
             Crashlytics.sharedInstance().setUserName(UserManager.shared.name.value)
         }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         Crashlytics.sharedInstance().setUserName(UserManager.shared.name.value)

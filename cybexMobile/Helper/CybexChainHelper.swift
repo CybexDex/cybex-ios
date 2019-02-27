@@ -60,7 +60,7 @@ class CybexChainHelper {
         calculateFeeOfAsset(AssetConfiguration.CybexAsset.CYB.id, operation: operation, operationID: operationID) { (result) in
             let amount = AssetHelper.getRealAmount(AssetConfiguration.CybexAsset.CYB.id, amount: result.string)
 
-            if !UserManager.shared.isLoginIn || cybBalance >= result {
+            if !UserManager.shared.logined || cybBalance >= result {
                 completion((success: true, amount: amount, assetID: AssetConfiguration.CybexAsset.CYB.id))
                 return
             }

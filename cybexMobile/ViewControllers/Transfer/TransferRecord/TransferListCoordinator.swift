@@ -44,7 +44,7 @@ extension TransferListCoordinator: TransferListStateManagerProtocol {
     }
 
     func fetchTransferRecords(_ page: Int, callback: ((Bool) -> Void)?) {
-        guard let uid = UserManager.shared.account.value?.id else { return }
+        guard let uid = UserManager.shared.getCachedAccount()?.id else { return }
         AccountHistoryService.request(target: .getTransferRecord(userId: uid, page: page), success: { (json) in
             let times = json.arrayValue.map({ $0["timestamp"].stringValue })
 
