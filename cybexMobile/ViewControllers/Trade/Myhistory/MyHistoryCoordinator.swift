@@ -119,7 +119,7 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
 
     func fetchAllMyOrderHistory(_ lessThanOrderId: String?, callback: ((Bool) -> Void)?) {
         service.messageCanSend.delegate(on: self) { (self, _) in
-            if let gameEnable = AppConfiguration.shared.enableSetting.value?.isGameEnabled, gameEnable {
+            if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
                 self.addFilteredPairs(MarketConfiguration.shared.gameMarketPairs, callback: { [weak self] in
                     self?.fetchAllMyOrderHistoryRequest(lessThanOrderId, callback: callback)
                 })
@@ -128,7 +128,7 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
             }
         }
         if service.checkNetworConnected() {
-            if let gameEnable = AppConfiguration.shared.enableSetting.value?.isGameEnabled, gameEnable {
+            if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
                 self.addFilteredPairs(MarketConfiguration.shared.gameMarketPairs, callback: { [weak self] in
                     self?.fetchAllMyOrderHistoryRequest(lessThanOrderId, callback: callback)
                 })

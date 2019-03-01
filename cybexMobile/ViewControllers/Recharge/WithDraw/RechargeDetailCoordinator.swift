@@ -194,7 +194,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
 
                 let amount = amount.decimal() * value
                 let feeAmout = feeAmount.decimal() * pow(10, (appData.assetInfo[feeId]?.precision)!)
-                guard let fromMemoKey = UserManager.shared.getCachedAccount()?.memoKey,
+                guard let fromMemoKey = UserManager.shared.getCachedAccount()?.memoKey, !fromMemoKey.isEmpty,
                 let uid = UserManager.shared.getCachedAccount()?.id else { return }
                 let jsonstr = BitShareCoordinator.getTransaction(blockInfo.block_num.int32,
                                                                  block_id: blockInfo.block_id,

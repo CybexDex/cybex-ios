@@ -335,6 +335,7 @@ extension RechargeDetailViewController {
      3 币种可提现  解锁钱包  权限  输入额度  地址
      */
     func changeWithdrawState() {
+        print(UserManager.shared.getCachedAccount()!.memoKey)
         if self.isWithdraw == false {
             if let trade = self.trade {
                 self.showToastBox(false, message: Localize.currentLanguage() == "en" ? trade.enMsg : trade.cnMsg)

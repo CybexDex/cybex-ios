@@ -94,6 +94,13 @@ extension LockupAssetsViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Define.sectionHeaderHeight
     }
+
+    func claim() {
+        let confirmData = UIHelper.claimLockupAsset(self.selectedData)
+        if self.isVisible {
+            showConfirm(R.string.localizable.lockup_asset_claim_ensure.key.localized(), attributes: confirmData)
+        }
+    }
     
 }
 
@@ -103,10 +110,29 @@ extension LockupAssetsViewController {
             return
         }
         self.selectedData = indexPathData
-        let confirmData = UIHelper.claimLockupAsset(indexPathData)
-        if self.isVisible {
-            showConfirm(R.string.localizable.lockup_asset_claim_ensure.key.localized(), attributes: confirmData)
+
+        if !UserManager.shared.isLocked {
+            claim()
+        } else {
+            self.showPasswordBox()
         }
+    }
+
+    override func passwordPassed(_ passed: Bool) {
+        self.endLoading()
+
+        if self.isVisible {
+            if passed {
+                claim()
+            } else {
+                self.showToastBox(false, message: R.string.localizable.recharge_invalid_password.key.localized())
+            }
+        }
+
+    }
+
+    override func passwordDetecting() {
+        self.startLoading()
     }
     
     @objc override func returnEnsureAction() {

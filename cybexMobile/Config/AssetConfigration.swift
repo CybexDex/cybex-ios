@@ -94,7 +94,7 @@ extension AssetConfiguration {
             let data = JSON(json).arrayValue.compactMap({ String(describing: $0.stringValue) })
 
             var otherIds: [String] = []
-            if let gameEnable = AppConfiguration.shared.enableSetting.value?.isGameEnabled, gameEnable {
+            if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
                 let gameIds = MarketConfiguration.shared.gameMarketPairs.map { $0.quote } + MarketConfiguration.gameMarketBaseAssets.map { $0.id }
                 otherIds.append(contentsOf: gameIds)
             }

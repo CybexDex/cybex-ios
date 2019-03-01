@@ -10,7 +10,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BitShareCoordinator : NSObject
 + (NSString *)getUserKeys:(NSString *)username password:(NSString *)password;
-  
++ (NSString *)getActiveUserKeys:(NSString *)publicKey;
+
   /**
    需要先调用getuserkey
    **/

@@ -103,7 +103,7 @@ class AppCoordinator {
         self.container = [comprehensiveCoordinator, homeCoordinator, tradeCoordinator] as [NavCoordinator]
         rootVC.viewControllers = [comprehensive, home, trade]
 
-        if let status = AppConfiguration.shared.enableSetting.value, status.isGameEnabled == true {
+        if let status = AppConfiguration.shared.enableSetting.value, status.contestEnabled == true {
             var context = TradeContext()
             context.pageType = .game
             gameCoordinator.pushVC(TradeCoordinator.self, animated: false, context: context)

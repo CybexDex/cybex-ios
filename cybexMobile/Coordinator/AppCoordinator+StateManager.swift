@@ -37,7 +37,7 @@ extension AppCoordinator {
             self.fetchMarketFrom(pairs, priority: priority)
         }
 
-        if let gameEnable = AppConfiguration.shared.enableSetting.value?.isGameEnabled, gameEnable {
+        if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
             self.fetchMarketFrom(MarketConfiguration.shared.gameMarketPairs, priority: priority)
         }
 

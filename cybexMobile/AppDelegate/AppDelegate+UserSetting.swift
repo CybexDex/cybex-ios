@@ -17,6 +17,11 @@ extension AppDelegate {
             UserManager.shared.name.accept(name)
         }
 
+        let loginType = Defaults[.loginType]
+        if loginType > 0 {
+            UserManager.shared.loginType = UserManager.LoginType(rawValue: loginType)!
+        }
+
         if Defaults.hasKey(.frequencyType) {
             UserManager.shared.frequencyType = FrequencyType(rawValue: Defaults[.frequencyType])!
         }

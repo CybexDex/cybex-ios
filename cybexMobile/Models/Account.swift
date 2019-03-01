@@ -83,10 +83,10 @@ class Account: HandyJSON {
         mapper <<<
             membershipExpirationDate <-- ("membership_expiration_date", ToStringTransform())
         mapper <<< name <-- ("name", ToStringTransform())
-        mapper <<< activeAuths <-- "active.key_auths"
-        mapper <<< ownerAuths <-- "owner.key_auths"
+        mapper <<< activeAuths <-- ["active_keys_auths", "active.key_auths"]
+        mapper <<< ownerAuths <-- ["owner_keys_auths", "owner.key_auths"]
         mapper <<< id <-- "id"
-        mapper <<< memoKey <-- "options.memo_key"
+        mapper <<< memoKey <-- ["memo_key", "options.memo_key"]
     }
 
     var activePubKeys: [String] {

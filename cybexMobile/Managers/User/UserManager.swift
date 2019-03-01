@@ -58,14 +58,9 @@ extension UserManager {
     func login(_ username: String, password: String) -> Promise<Void> {
         return unlock(username, password: password).done { fullaccount in
             self.saveUserInfo(username)
+            self.loginType = .cloudWallet
             self.handlerFullAcount(fullaccount)
         }
-    }
-
-    func saveUserInfo(_ username: String) {
-        self.saveName(username)
-        self.saveKeys()
-        self.name.accept(username)
     }
 
     func register(_ pinID: String, captcha: String, username: String, password: String) -> Promise<Void> {
@@ -100,6 +95,7 @@ extension UserManager {
     func logout() {
         Defaults.remove(.keys)
         self.keys = nil
+        self.loginType = .none
 
         Defaults.remove(.username)
         Defaults.remove(.account)
@@ -181,30 +177,25 @@ extension UserManager {
 
     }
 
-    func handlerFullAcount(_ data: FullAccount) {
-        let fullaccount = data
-        saveAccount(data.account)
-
-        fullaccount.balances = data.balances.filter({ (balance) -> Bool in
-            let name = appData.assetInfo[balance.assetType]
-            return name != nil
-        })
-        
-        fullaccount.limitOrders = data.limitOrders.filter({ (limitOrder) -> Bool in
-            let baseName = appData.assetInfo[limitOrder.sellPrice.base.assetID]
-            let quoteName = appData.assetInfo[limitOrder.sellPrice.quote.assetID]
-            let baseBool = baseName != nil
-            let quoteBool = quoteName != nil
-            return baseBool && quoteBool
-        })
-
-        fullaccount.calculateLimitOrderValue()
-        fullaccount.calculateBalanceValue()
-        fullAccount.accept(fullaccount)
+    func getCachedKeysExcludePrivate() -> AccountKeys? {
+        let keys = Defaults[.keys]
+        return AccountKeys.deserialize(from: keys)
     }
+
+    func getCachedAccount() -> Account? {
+        let account = Defaults[.account]
+        return Account.deserialize(from: account)
+    }
+
 }
 
 class UserManager {
+    enum LoginType: Int {
+        case none
+        case cloudWallet
+        case nfc
+    }
+
     static let shared = UserManager()
     var disposeBag = DisposeBag()
 
@@ -222,6 +213,12 @@ class UserManager {
                     self.refreshTime = 6
                 }
             }
+        }
+    }
+
+    var loginType: LoginType = .none {
+        didSet {
+            Defaults[.frequencyType] = loginType.rawValue
         }
     }
 
@@ -261,13 +258,6 @@ class UserManager {
     
     var fullAccount: BehaviorRelay<FullAccount?> = BehaviorRelay(value: nil)
 
-    func timingLock() {
-        self.timer = Repeater.once(after: .seconds(300), {[weak self] (_) in
-            guard let self = self else { return }
-            self.keys = nil
-        })
-        timer?.start()
-    }
 
     private init() {
         appData.otherRequestRelyData.asObservable()
@@ -281,6 +271,42 @@ class UserManager {
                     }
                 }
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    }
+
+    private func handlerFullAcount(_ data: FullAccount) {
+        let fullaccount = data
+        saveAccount(data.account)
+
+        fullaccount.balances = data.balances.filter({ (balance) -> Bool in
+            let name = appData.assetInfo[balance.assetType]
+            return name != nil
+        })
+
+        fullaccount.limitOrders = data.limitOrders.filter({ (limitOrder) -> Bool in
+            let baseName = appData.assetInfo[limitOrder.sellPrice.base.assetID]
+            let quoteName = appData.assetInfo[limitOrder.sellPrice.quote.assetID]
+            let baseBool = baseName != nil
+            let quoteBool = quoteName != nil
+            return baseBool && quoteBool
+        })
+
+        fullaccount.calculateLimitOrderValue()
+        fullaccount.calculateBalanceValue()
+        fullAccount.accept(fullaccount)
+    }
+
+    private func timingLock() {
+        self.timer = Repeater.once(after: .seconds(300), {[weak self] (_) in
+            guard let self = self else { return }
+            self.keys = nil
+        })
+        timer?.start()
+    }
+
+    private func saveUserInfo(_ username: String) {
+        self.saveName(username)
+        self.saveKeys()
+        self.name.accept(username)
     }
 
     private func saveName(_ name: String) {
@@ -297,15 +323,5 @@ class UserManager {
         keys.removePrivateKey()
         
         Defaults[.keys] = keys.toJSONString() ?? ""
-    }
-
-    func getCachedKeysExcludePrivate() -> AccountKeys? {
-        let keys = Defaults[.keys]
-        return AccountKeys.deserialize(from: keys)
-    }
-
-    func getCachedAccount() -> Account? {
-        let account = Defaults[.account]
-        return Account.deserialize(from: account)
     }
 }
