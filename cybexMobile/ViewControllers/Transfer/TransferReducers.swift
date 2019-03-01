@@ -16,7 +16,9 @@ func transferReducer(action: Action, state: TransferState?) -> TransferState {
     case let action as ValidAccountAction:
         state.accountValid.accept(action.status)
     case let action as ValidAmountAction:
-        state.amountValid.accept(action.isValid)
+        main {
+            state.amountValid.accept(action.isValid)
+        }
     case let action as SetBalanceAction:
         state.balance.accept(action.balance)
     case let action as SetFeeAction:
