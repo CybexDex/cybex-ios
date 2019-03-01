@@ -23,8 +23,8 @@ protocol RechargeDetailStateManagerProtocol {
 
     func fetchWithDrawInfoData(_ assetName: String)
     static func verifyAddress(_ assetName: String, address: String, callback:@escaping (Bool) -> Void)
-    func getGatewayFee(_ assetId: String, amount: String, address: String, isEOS: Bool)
-    func getObjects(assetId: String,
+    func getFee(_ assetId: String, address: String, isEOS: Bool)
+    func withDraw(assetId: String,
                     amount: String,
                     address: String,
                     feeId: String,
@@ -130,38 +130,31 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         CybexWebSocketService.shared.send(request: requeset)
     }
 
-    func getGatewayFee(_ assetId: String, amount: String, address: String, isEOS: Bool) {
-        if let memoKey = self.state.memoKey.value {
-            let name = appData.assetInfo[assetId]?.symbol.filterJade
-            let memo = self.state.memo.value
+    func getFee(_ assetId: String, address: String, isEOS: Bool) {
+        let name = appData.assetInfo[assetId]?.symbol.filterJade
+        let memo = self.state.memo.value
 
-            let value = pow(10, (appData.assetInfo[assetId]?.precision)!)
-            let amount = amount.decimal() * value
-            var memoAddress = GatewayService.withDrawMemo(name!, address: address)
-            if isEOS {
-                if !memo.isEmpty {
-                    memoAddress = GatewayService.withDrawMemo(name!, address: address + "[\(memo)]")
-                }
+        var memoAddress = GatewayService.withDrawMemo(name!, address: address)
+        if isEOS {
+            if !memo.isEmpty {
+                memoAddress = GatewayService.withDrawMemo(name!, address: address + "[\(memo)]")
             }
-            guard let fromMemoKey = UserManager.shared.getCachedAccount()?.memoKey, let uid = UserManager.shared.getCachedAccount()?.id else { return }
-            
-            let operationString = BitShareCoordinator.getTransterOperation(uid.getSuffixID,
-                                                                              to_user_id: (self.state.data.value?.gatewayAccount)!.getSuffixID,
-                                                                              asset_id: assetId.getSuffixID,
-                                                                              amount: amount.int64Value,
-                                                                              fee_id: 0,
-                                                                              fee_amount: 0,
-                                                                              memo: memoAddress,
-                                                                              from_memo_key: fromMemoKey,
-                                                                              to_memo_key: memoKey)
+        }
 
-            CybexChainHelper.calculateFee(operationString, operationID: .transfer, focusAssetId: assetId) { (success, amount, feeId) in
-                let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
-                guard let fee = Fee.deserialize(from: dictionary) else { return }
-                self.store.dispatch(FetchGatewayFee(data: (fee, success:success)))
-            }
+        let operationString = BitShareCoordinator.getTransterOperation(0,
+                                                                          to_user_id: 0,
+                                                                          asset_id: 0,
+                                                                          amount: 0,
+                                                                          fee_id: 0,
+                                                                          fee_amount: 0,
+                                                                          memo: memoAddress,
+                                                                          from_memo_key: "",
+                                                                          to_memo_key: "")
 
-
+        CybexChainHelper.calculateFee(operationString, operationID: .transfer, focusAssetId: assetId) { (success, amount, feeId) in
+            let dictionary = ["asset_id": feeId, "amount": amount.stringValue]
+            guard let fee = Fee.deserialize(from: dictionary) else { return }
+            self.store.dispatch(FetchCybexFee(data: (fee, success:success)))
         }
     }
 
@@ -178,7 +171,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
         }
     }
 
-    func getObjects(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, isEOS: Bool, callback:@escaping (Any) -> Void) {
+    func withDraw(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, isEOS: Bool, callback: @escaping (Any) -> Void) {
         if let memoKey = self.state.memoKey.value {
             let name = appData.assetInfo[assetId]?.symbol.filterJade
             let memo = self.state.memo.value
@@ -227,7 +220,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
 
         var finalAmount: Decimal = amount
         if feeId != AssetConfiguration.CybexAsset.CYB.id {
-            if let gatewayFeeAmount = self.state.gatewayFee.value?.0, let gatewayFee = Decimal(string: gatewayFeeAmount.amount) {
+            if let gatewayFeeAmount = self.state.fee.value?.0, let gatewayFee = Decimal(string: gatewayFeeAmount.amount) {
                 if allAmount < gatewayFee + amount {
                     finalAmount -= gatewayFee
                     requestAmount = (amount - gatewayFee).stringValue

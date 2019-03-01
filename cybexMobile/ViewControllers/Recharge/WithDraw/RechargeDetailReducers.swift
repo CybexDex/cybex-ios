@@ -18,8 +18,8 @@ func rechargeDetailReducer(action: Action, state: RechargeDetailState?) -> Recha
         state.data.accept(action.data)
     case let action as FetchWithdrawMemokey:
         state.memoKey.accept(action.data)
-    case let action as FetchGatewayFee:
-        state.gatewayFee.accept(action.data)
+    case let action as FetchCybexFee:
+        state.fee.accept(action.data)
     case let action as SelectedAddressAction:
         state.withdrawAddress.accept(action.data)
     case let action as FetchWithdrawWordInfo:
