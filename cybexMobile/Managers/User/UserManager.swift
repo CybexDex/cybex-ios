@@ -277,6 +277,11 @@ class UserManager {
         let fullaccount = data
         saveAccount(data.account)
 
+        if let keys = getCachedKeysExcludePrivate(), let account = data.account {
+            let permission = account.checkPermission(keys)
+            self.permission = permission
+        }
+
         fullaccount.balances = data.balances.filter({ (balance) -> Bool in
             let name = appData.assetInfo[balance.assetType]
             return name != nil

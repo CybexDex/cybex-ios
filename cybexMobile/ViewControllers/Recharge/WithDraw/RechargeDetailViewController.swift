@@ -74,10 +74,7 @@ class RechargeDetailViewController: BaseViewController {
         setupData()
         setupEvent()
 
-        if self.isWithdraw == false, let trade = self.trade {
-            self.showToastBox(false, message: Localize.currentLanguage() == "en" ? trade.enMsg : trade.cnMsg)
-            return
-        }
+        checkPermisson()
     }
     
     func setupData() {
@@ -353,6 +350,19 @@ extension RechargeDetailViewController {
             self.contentView.withdraw.isEnable = false
         }
     }
+
+    func checkPermisson() {
+        if !UserManager.shared.permission.withdraw {
+            self.showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
+            return
+        }
+
+        if self.isWithdraw == false, let trade = self.trade {
+            self.showToastBox(false, message: Localize.currentLanguage() == "en" ? trade.enMsg : trade.cnMsg)
+            return
+        }
+
+    }
     
     func withDrawAction() {
         if withdrawing {
@@ -365,16 +375,7 @@ extension RechargeDetailViewController {
         SwifterSwift.delay(milliseconds: 300) {
             self.withdrawing = false
 
-            if !UserManager.shared.permission.withdraw {
-                self.showToastBox(false, message: R.string.localizable.withdraw_miss_authority.key.localized())
-                return
-            }
-
-            if self.isWithdraw == false, let trade = self.trade {
-                self.showToastBox(false, message: Localize.currentLanguage() == "en" ? trade.enMsg : trade.cnMsg)
-                return
-            }
-
+            self.checkPermisson()
             if self.contentView.addressView.addressState != .success {
                 return
             }
