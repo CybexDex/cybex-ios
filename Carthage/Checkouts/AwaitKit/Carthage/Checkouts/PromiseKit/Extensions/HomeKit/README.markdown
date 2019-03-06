@@ -9,7 +9,11 @@ Thus, Swift versions supported are: 3.2, 3.3, 3.4, 4.0, 4.1 & 4.2.
 
 ## CocoaPods
 
-Not currently available
+```ruby
+pod "PromiseKit/HomeKit", "~> 6.0"
+```
+
+The extensions are built into PromiseKit.framework thus nothing else is needed.
 
 ## Carthage
 

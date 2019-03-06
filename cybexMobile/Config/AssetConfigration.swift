@@ -14,7 +14,7 @@ import RxCocoa
 class AssetConfiguration {
     //base asset name
     static let JadeSymbol = "JADE"
-    static let ArenaSymbol = "TEST"
+    static let ArenaSymbol = "ARENA"
 
     enum CybexAsset: String, CaseIterable {
         case CYB
@@ -29,6 +29,7 @@ class AssetConfiguration {
         case ArenaUSDT
         case ArenaBTC
 
+        
         var id: String {
             switch self {
             case .CYB:
@@ -45,13 +46,29 @@ class AssetConfiguration {
                 return Defaults.isTestEnv ? "1.3.57" : "1.3.4"
             //交易大赛
             case .ArenaEOS:
-                return Defaults.isTestEnv ? "1.3.244" : "1.3.1146"
+                return Defaults.isTestEnv ? "1.3.1146" : "1.3.1150"
             case .ArenaBTC:
-                return Defaults.isTestEnv ? "1.3.242" : "1.3.1147"
+                return Defaults.isTestEnv ? "1.3.1147" : "1.3.1151"
             case .ArenaETH:
-                return Defaults.isTestEnv ? "1.3.241" : "1.3.1144"
+                return Defaults.isTestEnv ? "1.3.1144" : "1.3.1149"
             case .ArenaUSDT:
-                return Defaults.isTestEnv ? "1.3.243" : "1.3.1145"
+                return Defaults.isTestEnv ? "1.3.1145" : "1.3.1148"
+            }
+        }
+
+        var name: String {
+            switch self {
+            //交易大赛
+            case .ArenaEOS:
+                return AssetConfiguration.ArenaSymbol + "." + "EOS"
+            case .ArenaBTC:
+                return AssetConfiguration.ArenaSymbol + "." + "BTC"
+            case .ArenaETH:
+                return AssetConfiguration.ArenaSymbol + "." + "ETH"
+            case .ArenaUSDT:
+                return AssetConfiguration.ArenaSymbol + "." + "USDT"
+            default:
+                return self.rawValue
             }
         }
     }

@@ -8,6 +8,9 @@
 
 import Foundation
 import CoreNFC
+import web3swift
+import secp256k1
+import CryptoSwift
 
 @available(iOS 11.0, *)
 class NFCManager: NSObject {
@@ -28,7 +31,10 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
     func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
         DispatchQueue.main.async {
             // Process detected NFCNDEFMessage objects.
-            let card = Utils.parseNDEFMessage(messages)
+            let card = Utils.parseNDEFMessage(messages: messages)
+
+            let pbkey = card.blockchainPublicKey.compressedPublicKey()
+
             self.didReceivedMessage.call(card)
         }
     }
@@ -56,5 +62,15 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
 
         // A new session instance is required to read new tags.
         self.session = nil
+    }
+}
+
+
+extension String {
+    func compressedPublicKey() -> String {
+        let pbkey = Data.fromHex(self)!
+        let b = SECP256K1.combineSerializedPublicKeys(keys: [pbkey], outputCompressed: true)!
+        let encodedPbkey = b.bytes.base58CheckEncodedWithRipmendString
+        return "CYB" + encodedPbkey
     }
 }

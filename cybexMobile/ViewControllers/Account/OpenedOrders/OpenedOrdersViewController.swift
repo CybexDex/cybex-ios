@@ -137,12 +137,15 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
         self.timer = nil
         
         self.timer = Repeater.every(.seconds(3)) {[weak self] _ in
-            guard let self = self, let coor = self.coordinator else { return }
-            if coor.checkConnectStatus() {
-                self.setupData()
-            }
-            else {
-                self.coordinator?.reconnect()
+            main {
+                guard let self = self, let coor = self.coordinator else { return }
+
+                if coor.checkConnectStatus() {
+                    self.setupData()
+                }
+                else {
+                    self.coordinator?.reconnect()
+                }
             }
         }
         timer?.start()

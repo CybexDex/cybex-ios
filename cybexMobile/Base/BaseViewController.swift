@@ -93,6 +93,12 @@ class BaseViewController: UIViewController {
         toast?.hide(true)
     }
 
+    func endAllLoading(_ tableview: UITableView) {
+        self.stopPullRefresh(tableview)
+        self.stopInfiniteScrolling(tableview, haveNoMore: true)
+        endLoading()
+    }
+
     func configRightNavButton(_ image: UIImage? = nil) {
         rightNavButton = UIButton.init(type: .custom)
         rightNavButton?.frame = CGRect(x: 0, y: 0, width: 24, height: 24)

@@ -137,8 +137,13 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         presenter.keyboardTranslationType = .moveUp
 
         var items = [String]()
+        var excludeBalance: [String] = []
+        if let enable = AppConfiguration.shared.enableSetting.value?.contestEnabled, enable {
+            excludeBalance = MarketConfiguration.shared.gameMarketPairs.map { $0.quote }
+        }
+
         let balances = UserManager.shared.fullAccount.value?.balances.filter({ (balance) -> Bool in
-            return AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) != 0
+            return AssetHelper.getRealAmount(balance.assetType, amount: balance.balance) != 0 && !excludeBalance.contains(balance.assetType)
         })
         if let balances = balances {
             for balance in balances {

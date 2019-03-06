@@ -141,7 +141,6 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
     }
 
     func fetchAllMyOrderHistoryRequest(_ lessThanOrderId: String?, callback: ((Bool) -> Void)?) {
-
         guard let userId = UserManager.shared.getCachedAccount()?.id else {
             callback?(true)
 
@@ -151,25 +150,40 @@ extension MyHistoryCoordinator: MyHistoryStateManagerProtocol {
 
         guard let oid = lessThanOrderId else {
             maxOrderId {[weak self] (lessThanOrderId) in
+                var statusApi: LimitOrderStatusApi
+                if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
+                    statusApi = LimitOrderStatusApi.getFilteredLimitOrder(userId: userId, lessThanOrderId: lessThanOrderId, limit: 20)
+                }
+                else {
+                    statusApi = LimitOrderStatusApi.getLimitOrder(userId: userId, lessThanOrderId: lessThanOrderId, limit: 20)
+                }
+
                 let request = GetLimitOrderStatus(response: { (json) in
                     if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) as? [LimitOrderStatus] {
                         callback?(object.count != 20)
                         self?.store.dispatch(FillOrderDataFetchedAction(data: object, all: true))
                     }
-                }, status: LimitOrderStatusApi.getLimitOrder(userId: userId, lessThanOrderId: lessThanOrderId, limit: 20))
+                }, status: statusApi)
                 self?.service.send(request: request)
             }
             return
         }
 
         let preOid = oid.getPrefixOfID + ".\(oid.getSuffixID - 1)"
+        var statusApi: LimitOrderStatusApi
+        if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
+            statusApi = LimitOrderStatusApi.getFilteredLimitOrder(userId: userId, lessThanOrderId: preOid, limit: 20)
+        }
+        else {
+            statusApi = LimitOrderStatusApi.getLimitOrder(userId: userId, lessThanOrderId: preOid, limit: 20)
+        }
 
         let request = GetLimitOrderStatus(response: { (json) in
             if let orders = json as? [[String: Any]], let object = [LimitOrderStatus].deserialize(from: orders) as? [LimitOrderStatus] {
                 callback?(object.count != 20)
                 self.store.dispatch(FillOrderDataFetchedAction(data: object, all: true))
             }
-        }, status: LimitOrderStatusApi.getLimitOrder(userId: userId, lessThanOrderId: preOid, limit: 20))
+        }, status: statusApi)
         self.service.send(request: request)
     }
 

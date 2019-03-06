@@ -227,14 +227,9 @@ extension GameViewController {
                 let accountId = param["accountId"],
                 let assetId = param["assetId"],
                 let assetAmount = param["assetAmount"]{
-                async {
-                    let data = try? await(self.transfer(accountId, assetId, assetAmount))
-                    main {
-                        if case let data? = data {
-                            callback?(data)
-                        }
-                    }
-                }
+                self.transfer(accountId, assetId, assetAmount).done({ (data) in
+                    callback?(data)
+                })
             }
             else{
                 callback?("2")

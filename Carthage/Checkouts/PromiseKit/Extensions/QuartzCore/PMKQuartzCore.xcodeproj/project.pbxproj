@@ -11,7 +11,19 @@
 		639E8D041D5D651300D210E4 /* CALayer+AnyPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = 639E8D021D5D651300D210E4 /* CALayer+AnyPromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		639E8D051D5D651300D210E4 /* CALayer+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 639E8D031D5D651300D210E4 /* CALayer+AnyPromise.m */; };
 		63D9E6791D6013E7006B2661 /* PMKQCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D9E6781D6013E7006B2661 /* PMKQCTests.swift */; };
+		63E15130219F387C003CE725 /* CALayer+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E1512F219F387C003CE725 /* CALayer+Promise.swift */; };
+		63E15132219F457E003CE725 /* TestQuartzCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E15131219F457E003CE725 /* TestQuartzCore.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		63E15133219F45F9003CE725 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63C7FF9E1D5BEE09003BAE60 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 63C7FFA61D5BEE09003BAE60;
+			remoteInfo = PMKQuartzCore;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		637B4A731D5D5FC600E1BC6C /* PMKQuartzCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMKQuartzCore.h; path = Sources/PMKQuartzCore.h; sourceTree = SOURCE_ROOT; };
@@ -25,6 +37,8 @@
 		63D9E6761D6013E7006B2661 /* PMKQCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PMKQCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63D9E6781D6013E7006B2661 /* PMKQCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PMKQCTests.swift; sourceTree = "<group>"; };
 		63D9E67A1D6013E7006B2661 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63E1512F219F387C003CE725 /* CALayer+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Promise.swift"; sourceTree = "<group>"; };
+		63E15131219F457E003CE725 /* TestQuartzCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestQuartzCore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +87,7 @@
 				637B4A731D5D5FC600E1BC6C /* PMKQuartzCore.h */,
 				639E8D021D5D651300D210E4 /* CALayer+AnyPromise.h */,
 				639E8D031D5D651300D210E4 /* CALayer+AnyPromise.m */,
+				63E1512F219F387C003CE725 /* CALayer+Promise.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -81,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				639E8D061D5D651D00D210E4 /* TestQuartzCore.m */,
+				63E15131219F457E003CE725 /* TestQuartzCore.swift */,
 			);
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
@@ -138,6 +154,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				63E15134219F45F9003CE725 /* PBXTargetDependency */,
 			);
 			name = PMKQCTests;
 			productName = PMKQCTests;
@@ -156,7 +173,7 @@
 				TargetAttributes = {
 					63C7FFA61D5BEE09003BAE60 = {
 						CreatedOnToolsVersion = 8.0;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 					63D9E6751D6013E7006B2661 = {
@@ -217,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				639E8D051D5D651300D210E4 /* CALayer+AnyPromise.m in Sources */,
+				63E15130219F387C003CE725 /* CALayer+Promise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,10 +243,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				63D9E6791D6013E7006B2661 /* PMKQCTests.swift in Sources */,
+				63E15132219F457E003CE725 /* TestQuartzCore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		63E15134219F45F9003CE725 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 63C7FFA61D5BEE09003BAE60 /* PMKQuartzCore */;
+			targetProxy = 63E15133219F45F9003CE725 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		63C7FFAD1D5BEE09003BAE60 /* Debug */ = {

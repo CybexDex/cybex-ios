@@ -9,10 +9,10 @@ class Test_EventKit_Swift: XCTestCase {
             //FIXME can't make this succeed on Travis :(
             // needs Entitlements, but then I can't get it to sign
             // so, we'll just test linkage
-            EKEventStoreRequestAccess()
+            EKEventStore().requestAccess(to: .event)
         #else
             let ex = expectation(description: "")
-            EKEventStoreRequestAccess().ensure(ex.fulfill)
+            EKEventStore().requestAccess(to: .event).ensure(ex.fulfill)
             waitForExpectations(timeout: 30)
         #endif
     }

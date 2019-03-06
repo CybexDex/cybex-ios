@@ -1,5 +1,7 @@
 import SystemConfiguration
+#if !PMKCocoaPods
 import PromiseKit
+#endif
 
 public extension SCNetworkReachability {
 

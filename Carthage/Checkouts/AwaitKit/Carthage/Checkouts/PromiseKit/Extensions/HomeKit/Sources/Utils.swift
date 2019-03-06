@@ -1,4 +1,6 @@
+#if !PMKCocoaPods
 import PromiseKit
+#endif
 
 /**
     Commonly used functionality when promisifying a delegate pattern

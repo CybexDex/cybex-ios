@@ -66,11 +66,25 @@ extension String {
 // MARK: Data extension
 
 extension Data {
-    var bytes : [UInt8] {
-        return self.withUnsafeBytes {
-            [UInt8](UnsafeBufferPointer(start: $0, count: self.count))
+    public static func randomBytes(length: Int) -> Data? {
+        for _ in 0...1024 {
+            var data = Data(repeating: 0, count: length)
+            let result = data.withUnsafeMutableBytes {
+                (mutableBytes: UnsafeMutablePointer<UInt8>) -> Int32 in
+                SecRandomCopyBytes(kSecRandomDefault, 32, mutableBytes)
+            }
+            if result == errSecSuccess {
+                return data
+            }
         }
+        return nil
     }
+}
+
+
+func toByteArray<T>(_ value: T) -> [UInt8] {
+    var value = value
+    return withUnsafeBytes(of: &value) { Array($0) }
 }
 
 // MARK: functions

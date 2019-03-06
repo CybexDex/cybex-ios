@@ -8,7 +8,6 @@
 
 import Foundation
 import ReSwift
-import AwaitKit
 import Repeat
 import SwifterSwift
 import Reachability

@@ -12,7 +12,6 @@ import CryptoSwift
 import RxCocoa
 import RxSwift
 import PromiseKit
-import AwaitKit
 import Guitar
 import Repeat
 import SwiftyUserDefaults

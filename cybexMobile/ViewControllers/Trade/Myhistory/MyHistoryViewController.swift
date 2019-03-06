@@ -120,9 +120,9 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
                     self.endLoading()
                     self.handlerDataFetched(json, callback: callback)
                 }, error: { (error) in
-                    self.endLoading()
+                    self.endAllLoading(self.tableView)
                 }) { (error) in
-                    self.endLoading()
+                    self.endAllLoading(self.tableView)
                 }
             } else {
                 AccountHistoryService.request(target: .getMyGroupFillOrder(userId: uid, pair: pair, page: page), success: { (json) in
@@ -130,9 +130,9 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
                     self.handlerDataFetched(json, callback: callback)
 
                 }, error: { (error) in
-                    self.endLoading()
+                    self.endAllLoading(self.tableView)
                 }) { (error) in
-                    self.endLoading()
+                    self.endAllLoading(self.tableView)
                 }
             }
         }

@@ -39,9 +39,7 @@ extension TradeHistoryCoordinator: TradeHistoryStateManagerProtocol {
     }
 
     func resetData(_ pair: Pair) {
-        Await.Queue.serialAsync.async {
-            self.store.dispatch(FetchedFillOrderData(data: [], pair: pair))
-        }
+        self.store.asyncDispatch(FetchedFillOrderData(data: [], pair: pair))
     }
 
     func fetchData(_ pair: Pair) {
@@ -51,18 +49,15 @@ extension TradeHistoryCoordinator: TradeHistoryStateManagerProtocol {
         fetchFillOrders(with: pair, callback: {[weak self] (data) in
             guard let self = self else { return }
 
-            Await.Queue.serialAsync.async {
-                let result = JSON(data).arrayValue
+            let result = JSON(data).arrayValue
 
-                var convertedData: [JSON] = []
+            var convertedData: [JSON] = []
 
-                for value in result {
-                    convertedData.append([value["op"], value["time"]])
-                }
-
-                self.store.dispatch(FetchedFillOrderData(data: convertedData, pair: pair))
+            for value in result {
+                convertedData.append([value["op"], value["time"]])
             }
 
+            self.store.asyncDispatch(FetchedFillOrderData(data: convertedData, pair: pair))
         })
     }
 

@@ -42,7 +42,9 @@ class Asset: HandyJSON {
     }
 
     func volume() -> Decimal {
-        let info = appData.assetInfo[assetID]!
+        guard let info = appData.assetInfo[assetID] else {
+            return 0
+        }
 
         return amount.decimal() / pow(10, info.precision)
     }
