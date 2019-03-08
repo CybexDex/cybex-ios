@@ -37,15 +37,26 @@ class YourPorfolioView: UIView {
 
                 name.text      = portfolioData.name
                 amount.text    = portfolioData.limitAmount
-                if portfolioData.rbmPrice == "-"{
-                    rmbPrice.text = "≈¥0.0000"
-
+                if portfolioData.rbmPrice == "-" {
+                    rmbPrice.text = handlerRMBLabel("0.0000")
                 } else {
-                    rmbPrice.text  = portfolioData.rbmPrice
+                    rmbPrice.text  = handlerRMBLabel(portfolioData.rbmPrice)
                 }
                 cybAmount.text = portfolioData.realAmount
             }
         }
+    }
+
+    func handlerRMBLabel(_ str: String) -> String {
+
+        if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable, str == "0.0000" {
+            let ids = Array(Set(MarketConfiguration.shared.gameMarketPairs.flatMap { $0.assets }))
+            if ids.contains(name.text!.assetID) {
+                return ""
+            }
+        }
+        
+        return "≈¥" + str
     }
 
     fileprivate func setup() {

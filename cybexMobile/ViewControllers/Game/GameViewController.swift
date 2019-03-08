@@ -108,7 +108,7 @@ class GameViewController: BaseViewController {
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
                 
-            case .loadMore(let page):
+            case .loadMore(_):
                 self.coordinator?.switchPageState(.loading(reason: PageLoadReason.manualLoadMore))
                 
             case .noMore:
@@ -229,7 +229,7 @@ extension GameViewController {
                 let assetAmount = param["assetAmount"]{
                 self.transfer(accountId, assetId, assetAmount).done({ (data) in
                     callback?(data)
-                })
+                }).cauterize()
             }
             else{
                 callback?("2")

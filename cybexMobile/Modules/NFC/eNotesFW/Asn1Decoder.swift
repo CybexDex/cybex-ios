@@ -293,6 +293,39 @@ extension Data {
         
         return value
     }
+
+    func toInt32Value() -> UInt32? {
+
+        if self.count > 8 { // check if suitable for UInt64
+            return nil
+        }
+
+        var value: UInt32 = 0
+
+        for (i,b) in self.enumerated() {
+            let v = UInt32(b) << UInt32(8*(count-i-1))
+            value += v
+        }
+
+        return value
+    }
+
+    func toInt16Value() -> UInt16? {
+
+        if self.count > 8 { // check if suitable for UInt64
+            return nil
+        }
+
+        var value: UInt16 = 0
+
+        for (i,b) in self.enumerated() {
+            let v = UInt16(b) << UInt16(8*(count-i-1))
+            value += v
+        }
+
+        return value
+    }
+
     
     func toInt() -> Int? {
         

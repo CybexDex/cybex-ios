@@ -90,43 +90,11 @@ func toByteArray<T>(_ value: T) -> [UInt8] {
 // MARK: functions
 
 public func hexlify(_ data:Data) -> String {
-    
-    // similar to hexlify() in Python's binascii module
-    // https://docs.python.org/2/library/binascii.html
-    
-    var s = String()
-    var byte: UInt8 = 0
-    
-    for i in 0 ..< data.count {
-        NSData(data: data).getBytes(&byte, range: NSMakeRange(i, 1))
-        s = s.appendingFormat("%02x", byte)
-    }
-    
-    return s as String
+    return data.bytes.toHexString()
 }
 
 public func unhexlify(_ string:String) -> Data? {
-    
-    // similar to unhexlify() in Python's binascii module
-    // https://docs.python.org/2/library/binascii.html
-    
-    let s = string.uppercased().replacingOccurrences(of: " ", with: "")
-    
-    let nonHexCharacterSet = CharacterSet(charactersIn: "0123456789ABCDEF").inverted
-    if let range = s.rangeOfCharacter(from: nonHexCharacterSet) {
-        print("-- found non hex character at range \(range)")
-        return nil
-    }
-    
-    var data = Data(capacity: s.count / 2)
-    
-    for i in stride(from: 0, to:s.count, by:2) {
-        let byteString = s[i, i+2]
-        let byte = UInt8(byteString.withCString { strtoul($0, nil, 16) })
-        data.append([byte] as [UInt8], count: 1)
-    }
-    
-    return data
+    return Data.fromHex(string)
 }
 
 func readIntegerType<T:DataConvertible>(_ type:T.Type, bytes:[UInt8], loc:inout Int) -> T {

@@ -45,9 +45,6 @@ final internal class SampleData {
 
         static func random() -> MessageTypes {
             // Update as new enumerations are added
-            let maxValue = custom.rawValue
-
-            let rand = arc4random_uniform(maxValue+1)
             return MessageTypes(rawValue: 1)!
         }
     }

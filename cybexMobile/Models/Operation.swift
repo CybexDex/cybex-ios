@@ -65,8 +65,8 @@ class FillOrder: HandyJSON, NSCopying {
     }
 
     func getPair() -> Pair {
-        let assetAName = pays.assetID.symbol
-        let assetBName = receives.assetID.symbol
+        let assetAName = pays.assetID.symbolOnlyFilterJade
+        let assetBName = receives.assetID.symbolOnlyFilterJade
 
         let (base, quote) = MarketHelper.calculateAssetRelation(
             assetIDAName: assetAName,
@@ -82,11 +82,13 @@ class FillOrder: HandyJSON, NSCopying {
     }
 
     func getPrice() -> Price {
-        let pair = self.getPair()
-        return self.isBuyOrder() ? Price(base: Asset(amount: pays.amount, assetID: pair.base),
-                                         quote: Asset(amount: receives.amount, assetID: pair.quote)) :
-            Price(base: Asset(amount: self.receives.amount, assetID: pair.base),
-                  quote: Asset(amount: self.pays.amount, assetID: pair.quote))
+        let base = getPair().base
+        if base == fillPrice.base.assetID {
+            return fillPrice
+        }
+        else {
+            return fillPrice.reverse()
+        }
     }
 
 }

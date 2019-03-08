@@ -23,6 +23,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
+import CryptoSwift
 
 extension Data {
     
@@ -42,9 +43,9 @@ extension Data {
         return Array(self)
     }
     
-//    public func toHexString() -> String {
-//        return bytes.toHexString()
-//    }
+    public func sha256() -> Data {
+        return Data(bytes: Digest.sha256(bytes))
+    }
 }
 
 extension Data {

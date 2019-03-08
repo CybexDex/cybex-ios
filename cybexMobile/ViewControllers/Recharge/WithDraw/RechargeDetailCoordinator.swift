@@ -115,7 +115,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
                 self.getWithdrawAccountInfo(data.gatewayAccount)
                 self.store.dispatch(FetchWithdrawInfo(data: data))
             }
-        }
+        }.cauterize()
     }
 
     func getWithdrawAccountInfo(_ userID: String) {
@@ -162,7 +162,7 @@ extension RechargeDetailCoordinator: RechargeDetailStateManagerProtocol {
             } else {
                 callback(false)
             }
-        }
+        }.cauterize()
     }
 
     func withDraw(assetId: String, amount: String, address: String, feeId: String, feeAmount: String, isEOS: Bool, callback: @escaping (Any) -> Void) {

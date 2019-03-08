@@ -116,9 +116,14 @@ struct Pair: Hashable {//id
     let base: String
     let quote: String
 
+    var assets: [String] {
+        return [base, quote]
+    }
+
     func info(_ asset: String) -> AssetInfo {
         return appData.assetInfo[asset] ?? AssetInfo()
     }
+
 }
 
 class LoadingActionCreator {

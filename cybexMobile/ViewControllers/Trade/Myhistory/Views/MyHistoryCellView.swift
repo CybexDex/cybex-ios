@@ -150,7 +150,6 @@ extension MyHistoryCellView {
                 }
             }
 
-
             let amountString = data.getPrice().quote.volume().suffixNumber(digitNum: tradePrecision.amount, padZero: true) + " " + pair.quote.symbol
 
             return ViewModel(oid: data.orderId,
@@ -174,9 +173,18 @@ extension MyHistoryCellView {
             let time = Formatter.iso8601.date(from: orginTime)!.string(withFormat: "MM/dd HH:mm:ss")
 
             let price = data.getPrice().toReal().formatCurrency(digitNum: tradePrecision.price)
-            let dealAmount = data.getPrice().quote.volume().suffixNumber(digitNum: tradePrecision.amount, padZero: true)
 
-            let totalAmount = data.getPrice().base.volume().suffixNumber(digitNum: tradePrecision.total, padZero: true) + " " + pair.base.symbol
+            var dealAmount: String
+            var totalAmount: String
+
+            if pair.quote == data.pays.assetID {
+                dealAmount = data.pays.volume().suffixNumber(digitNum: tradePrecision.amount, padZero: true)
+                totalAmount = data.receives.volume().suffixNumber(digitNum: tradePrecision.total, padZero: true) + " " + pair.base.symbol
+            }
+            else {
+                dealAmount = data.receives.volume().suffixNumber(digitNum: tradePrecision.amount, padZero: true)
+                totalAmount = data.pays.volume().suffixNumber(digitNum: tradePrecision.total, padZero: true) + " " + pair.base.symbol
+            }
 
             let feeAmount = data.fee.volumeString()  + " " + data.fee.assetID.symbol
 

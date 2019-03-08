@@ -29,11 +29,11 @@ class LimitOrder: HandyJSON {
 
         let (base, _) = MarketHelper.calculateAssetRelation(
             assetIDAName: (assetAInfo != nil) ?
-                assetAInfo!.symbol.filterJade : "",
+                assetAInfo!.symbol.filterOnlyJade : "",
             assetIDBName: (assetBInfo != nil) ?
-                assetBInfo!.symbol.filterJade : "")
+                assetBInfo!.symbol.filterOnlyJade : "")
 
-        return (base == ((assetAInfo != nil) ? assetAInfo!.symbol.filterJade : ""))
+        return (base == ((assetAInfo != nil) ? assetAInfo!.symbol : ""))
     }
 
     required init() {

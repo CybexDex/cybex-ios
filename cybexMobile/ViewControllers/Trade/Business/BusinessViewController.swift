@@ -260,7 +260,7 @@ class BusinessViewController: BaseViewController {
             guard let pair = self.pair, let baseInfo = appData.assetInfo[pair.base],
                 let text = self.containerView.priceTextfield.text, text != "", text.decimal() != 0,
                 text.components(separatedBy: ".").count <= 2 && text != "." else {
-                    self.containerView.value.text = "≈¥0.0000"
+                    self.containerView.value.text = self.handlerRMBLabel("0.0000")
                     return
             }
 
@@ -268,13 +268,22 @@ class BusinessViewController: BaseViewController {
             if let baseAsset = AssetConfiguration.CybexAsset(baseInfo.id) {
                 rmbPrice = text.decimal() * AssetConfiguration.shared.rmbOf(asset: baseAsset)
             }
-            self.containerView.value.text = "≈¥" + rmbPrice.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
+            self.containerView.value.text = self.handlerRMBLabel(rmbPrice.formatCurrency(digitNum: AppConfiguration.rmbPrecision))
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         self.coordinator!.state.amount.subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
             
             self.checkBalance()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    }
+
+    func handlerRMBLabel(_ str: String) -> String {
+        if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable,
+            let parent = self.parent?.parent as? TradeViewController, let context = parent.context, context.pageType == .game {
+            return ""
+        }
+
+        return "≈¥" + str
     }
     
     func addNotificationSubscribeAction() {

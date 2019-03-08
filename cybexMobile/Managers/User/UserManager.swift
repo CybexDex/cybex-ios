@@ -58,6 +58,7 @@ extension UserManager {
         return unlock(username, password: password).done { fullaccount in
             self.saveUserInfo(username)
             self.loginType = .cloudWallet
+            self.unlockType = .cloudPassword
             self.handlerFullAcount(fullaccount)
         }
     }
@@ -95,6 +96,9 @@ extension UserManager {
         Defaults.remove(.keys)
         self.keys = nil
         self.loginType = .none
+        if #available(iOS 11.0, *) {
+            NFCManager.shared.pinCode = ""
+        } 
 
         Defaults.remove(.username)
         Defaults.remove(.account)
@@ -189,9 +193,15 @@ extension UserManager {
 }
 
 class UserManager {
-    enum LoginType: Int {
+    enum LoginType: Int { // 初始账号登录类型
         case none
         case cloudWallet
+        case nfc
+    }
+
+    enum UnlockType: Int {
+        case none
+        case cloudPassword
         case nfc
     }
 
@@ -217,7 +227,13 @@ class UserManager {
 
     var loginType: LoginType = .none {
         didSet {
-            Defaults[.frequencyType] = loginType.rawValue
+            Defaults[.loginType] = loginType.rawValue
+        }
+    }
+
+    var unlockType: UnlockType = .none {
+        didSet {
+            Defaults[.unlockType] = unlockType.rawValue
         }
     }
 

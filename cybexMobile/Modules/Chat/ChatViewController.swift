@@ -351,10 +351,10 @@ class ChatViewController: MessagesViewController {
             }
             
             if message != "已链接" {
-                BeareadToast.showError(text: message, inView: self.view, hide: 1)
+                _ = BeareadToast.showError(text: message, inView: self.view, hide: 1)
             }
             else {
-                BeareadToast.showSucceed(text: message, inView: self.view, hide: 1)
+                _ = BeareadToast.showSucceed(text: message, inView: self.view, hide: 1)
             }
             
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -376,7 +376,7 @@ class ChatViewController: MessagesViewController {
         
         
         self.coordinator?.state.sendState.asObservable().subscribe(onNext: { [weak self](state) in
-            guard let self = self, let sendState = state else { return }
+            guard let self = self, let _ = state else { return }
             guard let name = UserManager.shared.name.value, name.isEmpty == false else { return }
             self.downInputView?.inputTextField.text = ""
             self.downInputView?.setupBtnState()

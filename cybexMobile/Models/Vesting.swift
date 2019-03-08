@@ -105,7 +105,7 @@ class MyPortfolioData {
             rbmPrice = "-"
 
         } else {
-            rbmPrice = "≈¥" + balance.rmbValue().formatCurrency(digitNum: 4)
+            rbmPrice = balance.rmbValue().formatCurrency(digitNum: 4)
         }
 
         //获取冻结资产

@@ -195,7 +195,7 @@ class RechargeDetailViewController: BaseViewController {
             .asObservable()
             .subscribe(onNext: { [weak self](_) in
                 guard let self = self else { return }
-                guard let trade = self.trade, let amount = self.contentView.amountView.content.text, let address = self.contentView.addressView.content.text else { return }
+                guard let trade = self.trade, let _ = self.contentView.amountView.content.text, let address = self.contentView.addressView.content.text else { return }
                 self.coordinator?.getFee(trade.id, address: address, isEOS: self.isEOS)
                 }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }

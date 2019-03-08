@@ -177,6 +177,14 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
 extension HomeViewController {
     @objc func cellClicked(_ data: [String: Any]) {
+//        if #available(iOS 11.0, *) {
+//            if NFCManager.shared.needPinCode() {
+//                NFCManager.shared.pinCode = "123456"
+//            }
+//            NFCManager.shared.start()
+//            return
+//        }
+
         if vcType == ViewType.homeContent.rawValue {//首页
             if let selectedPair = data["pair"] as? Pair {
                 self.coordinator?.openMarket(selectedPair)

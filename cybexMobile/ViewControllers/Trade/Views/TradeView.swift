@@ -266,7 +266,7 @@ class TradeView: UIView {
             rmbPrice = sender.0 * AssetConfiguration.shared.rmbOf(asset: baseAsset)
         }
 
-        let priceString = sender.0 == 0 ? "--" : lastPrice + "≈¥" + rmbPrice.formatCurrency(digitNum: AppConfiguration.rmbPrecision)
+        let priceString = sender.0 == 0 ? "--" : lastPrice + handlerRMBLabel(rmbPrice.formatCurrency(digitNum: AppConfiguration.rmbPrecision))
         let priceAttributeString = NSMutableAttributedString(string: priceString,
                                                              attributes: [NSAttributedString.Key.foregroundColor : sender.1])
 
@@ -288,6 +288,14 @@ class TradeView: UIView {
         self.amount.attributedText = priceAttributeString
         self.topAmount.attributedText = priceAttributeString
         self.bottomAmount.attributedText = priceAttributeString
+    }
+
+    func handlerRMBLabel(_ str: String) -> String {
+        if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable, let vc = self.parentViewController?.parent?.parent as? TradeViewController, let context = vc.context, context.pageType == .game {
+            return ""
+        }
+
+        return "≈¥" + str
     }
     
     func resetImage() {

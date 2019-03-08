@@ -154,7 +154,7 @@ extension String {
     }
 
     var symbolOnlyFilterJade: String {
-        return appData.assetInfo[self]?.symbol.filterJade ?? self
+        return appData.assetInfo[self]?.symbol.filterOnlyJade ?? self
     }
     
     var precision: Int {

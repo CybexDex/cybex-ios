@@ -115,8 +115,14 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
             }
         }
         else if case let .groupFillOrder(pair: pair) = type, let uid = UserManager.shared.getCachedAccount()?.id {
-            if pair == nil, let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
-                AccountHistoryService.request(target: .getFillByPairs(userId: uid, page: page, pairs: MarketConfiguration.shared.gameMarketPairs), success: { (json) in
+            if pair == nil { // 个人页面
+                var fout: [Pair] = []
+
+                if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
+                    fout = MarketConfiguration.shared.gameMarketPairs
+                }
+
+                AccountHistoryService.request(target: AccountHistoryAPI.getFillByPairs(userId: uid, page: page, filterInPairs: nil, filterOutPairs: fout), success: { (json) in
                     self.endLoading()
                     self.handlerDataFetched(json, callback: callback)
                 }, error: { (error) in
@@ -125,7 +131,7 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
                     self.endAllLoading(self.tableView)
                 }
             } else {
-                AccountHistoryService.request(target: .getMyGroupFillOrder(userId: uid, pair: pair, page: page), success: { (json) in
+                AccountHistoryService.request(target: AccountHistoryAPI.getFillByPairs(userId: uid, page: page, filterInPairs: pair!, filterOutPairs: []), success: { (json) in
                     self.endLoading()
                     self.handlerDataFetched(json, callback: callback)
 
@@ -150,9 +156,14 @@ class MyHistoryViewController: BaseViewController, IndicatorInfoProvider {
     }
 
     func handlerDataFetched(_ json: JSON, callback: ((Bool) -> Void)?) {
-        let times = json.arrayValue.map({ $0["timestamp"].stringValue })
+        guard let ops = json.arrayValue.first?.arrayValue else {
+            callback?(true)
+            return
+        }
 
-        if let model = [FillOrder].deserialize(from: json.arrayValue.compactMap { $0["op"][1].dictionaryObject }) as? [FillOrder] {
+        let times = ops.map({ $0["timestamp"].stringValue })
+
+        if let model = [FillOrder].deserialize(from: ops.compactMap { $0["op"][1].dictionaryObject }) as? [FillOrder] {
             var vmData: [MyHistoryCellView.ViewModel] = []
             for (i, v) in model.enumerated() {
                 vmData.append(MyHistoryCellView.ViewModel.makeViewModelFrom(data: v, orginTime: times[i]))

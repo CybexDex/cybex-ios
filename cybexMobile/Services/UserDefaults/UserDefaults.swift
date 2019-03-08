@@ -15,6 +15,9 @@ extension DefaultsKeys {
     static let refreshTime = DefaultsKey<Double>("refreshTime")
     static let frequencyType = DefaultsKey<Int>("frequency_type")
     static let loginType = DefaultsKey<Int>("logintype")
+    static let unlockType = DefaultsKey<Int>("unlockType")
+    static let pinCode = DefaultsKey<String>("pincode")
+
     static let username = DefaultsKey<String>("com.nbltrust.cybex.username")
     static let keys = DefaultsKey<String>("com.nbltrust.cybex.keys")
     static let account = DefaultsKey<String>("com.nbltrust.cybex.account")

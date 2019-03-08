@@ -52,7 +52,7 @@ extension WithdrawDetailCoordinator: WithdrawDetailCoordinatorProtocol {
                 } else {
                     self.state.data.accept(nil)
                 }
-            }
+            }.cauterize()
         }
     }
 
