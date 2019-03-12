@@ -266,8 +266,6 @@ SWIFT_CLASS("_TtC22IQKeyboardManagerSwift17IQKeyboardManager")
 @property (nonatomic, readonly) BOOL keyboardShowing;
 /// moved distance to the top used to maintain distance between keyboard and textField. Most of the time this will be a positive value.
 @property (nonatomic, readonly) CGFloat movedDistance;
-/// Prevent keyboard manager to slide up the rootView to more than keyboard height. Default is YES.
-@property (nonatomic) BOOL preventShowingBottomBlankSpace SWIFT_DEPRECATED_MSG("Due to change in core-logic of handling distance between textField and keyboard distance, this tweak is no longer needed and things will just work out of the box for most of the cases.");
 /// Returns the default singleton instance.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) IQKeyboardManager * _Nonnull shared;)
 + (IQKeyboardManager * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
@@ -305,7 +303,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) IQKeyboardMa
 @property (nonatomic, copy) NSString * _Nullable toolbarNextBarButtonItemText;
 @property (nonatomic, copy) NSString * _Nullable toolbarDoneBarButtonItemText;
 /// If YES, then it add the textField’s placeholder text on IQToolbar. Default is YES.
-@property (nonatomic) BOOL shouldShowTextFieldPlaceholder SWIFT_DEPRECATED_MSG("This is renamed to `shouldShowToolbarPlaceholder` for more clear naming.");
 @property (nonatomic) BOOL shouldShowToolbarPlaceholder;
 /// Placeholder Font. Default is nil.
 @property (nonatomic, strong) UIFont * _Nullable placeholderFont;
@@ -353,20 +350,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) IQKeyboardMa
 ///
 /// \endcode
 @property (nonatomic) BOOL layoutIfNeededOnUpdate;
-/// <hr/>
-/// <h2>MARK: InteractivePopGestureRecognizer handling</h2>
-/// \code
-///  If YES, then always consider UINavigationController.view begin point as {0,0}, this is a workaround to fix a bug #464 because there are no notification mechanism exist when UINavigationController.view.frame gets changed internally.
-///
-/// \endcode
-@property (nonatomic) BOOL shouldFixInteractivePopGestureRecognizer SWIFT_DEPRECATED_MSG("Due to change in core-logic of handling distance between textField and keyboard distance, this tweak is no longer needed and things will just work out of the box for most of the cases. This property will be removed in future release.");
-/// <hr/>
-/// <h2>MARK: Safe Area</h2>
-/// \code
-///  If YES, then library will try to adjust viewController.additionalSafeAreaInsets to automatically handle layout guide. Default is NO.
-///
-/// \endcode
-@property (nonatomic) BOOL canAdjustAdditionalSafeAreaInsets SWIFT_DEPRECATED_MSG("Due to change in core-logic of handling distance between textField and keyboard distance, this safe area tweak is no longer needed and things will just work out of the box regardless of constraint pinned with safeArea/layoutGuide/superview. This property will be removed in future release.");
 /// <hr/>
 /// <h2>MARK: Class Level disabling methods</h2>
 /// \code
@@ -495,6 +478,7 @@ SWIFT_CLASS("_TtC22IQKeyboardManagerSwift18IQPreviousNextView")
 @end
 
 @class NSTextContainer;
+@class NSAttributedString;
 
 /// @abstract UITextView with placeholder support
 SWIFT_CLASS("_TtC22IQKeyboardManagerSwift10IQTextView")
@@ -508,9 +492,11 @@ SWIFT_CLASS("_TtC22IQKeyboardManagerSwift10IQTextView")
 @property (nonatomic, copy) NSString * _Nullable placeholder;
 - (void)layoutSubviews;
 @property (nonatomic, copy) NSString * _Null_unspecified text;
+@property (nonatomic, strong) NSAttributedString * _Null_unspecified attributedText;
 @property (nonatomic, strong) UIFont * _Nullable font;
 @property (nonatomic) NSTextAlignment textAlignment;
 @property (nonatomic, strong) id <UITextViewDelegate> _Nullable delegate;
+@property (nonatomic, readonly) CGSize intrinsicContentSize;
 @end
 
 
@@ -601,13 +587,10 @@ SWIFT_CLASS("_TtC22IQKeyboardManagerSwift9IQToolbar")
 ///
 /// \endcode
 @property (nonatomic) BOOL shouldHideToolbarPlaceholder;
-@property (nonatomic) BOOL shouldHidePlaceholderText SWIFT_DEPRECATED_MSG("This is renamed to `shouldHideToolbarPlaceholder` for more clear naming.");
 /// <code>toolbarPlaceholder</code> to override default <code>placeholder</code> text when drawing text on toolbar.
 @property (nonatomic, copy) NSString * _Nullable toolbarPlaceholder;
-@property (nonatomic, copy) NSString * _Nullable placeholderText SWIFT_DEPRECATED_MSG("This is renamed to `toolbarPlaceholder` for more clear naming.");
 /// <code>drawingToolbarPlaceholder</code> will be actual text used to draw on toolbar. This would either <code>placeholder</code> or <code>toolbarPlaceholder</code>.
 @property (nonatomic, readonly, copy) NSString * _Nullable drawingToolbarPlaceholder;
-@property (nonatomic, readonly, copy) NSString * _Nullable drawingPlaceholderText SWIFT_DEPRECATED_MSG("This is renamed to `drawingToolbarPlaceholder` for more clear naming.");
 /// <hr/>
 /// <h2>MARK: Common</h2>
 - (void)addKeyboardToolbarWithTargetWithTarget:(id _Nullable)target titleText:(NSString * _Nullable)titleText rightBarButtonConfiguration:(IQBarButtonItemConfiguration * _Nullable)rightBarButtonConfiguration previousBarButtonConfiguration:(IQBarButtonItemConfiguration * _Nullable)previousBarButtonConfiguration nextBarButtonConfiguration:(IQBarButtonItemConfiguration * _Nullable)nextBarButtonConfiguration;

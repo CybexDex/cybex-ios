@@ -1,9 +1,9 @@
 {
-  "commitish" : "2.0.5",
+  "commitish" : "2.1.0",
   "iOS" : [
     {
       "name" : "SwiftRichString",
-      "hash" : "2b07807a308d012341fae69ff2b01043fbac460e1219ba9e71ea8d85d06885a0"
+      "hash" : "2e6aff288559bc91216c1496c84d11d2eda4c3a546bc1788611441bd7308398e"
     }
   ]
 }

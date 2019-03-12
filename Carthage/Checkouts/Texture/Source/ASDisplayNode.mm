@@ -11,11 +11,13 @@
 
 #import <AsyncDisplayKit/ASDisplayNode+Ancestry.h>
 #import <AsyncDisplayKit/ASDisplayNode+Beta.h>
+#import <AsyncDisplayKit/ASDisplayNode+LayoutSpec.h>
 #import <AsyncDisplayKit/AsyncDisplayKit+Debug.h>
 #import <AsyncDisplayKit/ASLayoutSpec+Subclasses.h>
 #import <AsyncDisplayKit/ASCellNode+Internal.h>
 
 #import <objc/runtime.h>
+#include <string>
 
 #import <AsyncDisplayKit/_ASAsyncTransaction.h>
 #import <AsyncDisplayKit/_ASAsyncTransactionContainer+Private.h>
@@ -49,7 +51,7 @@
 
 // Conditionally time these scopes to our debug ivars (only exist in debug/profile builds)
 #if TIME_DISPLAYNODE_OPS
-  #define TIME_SCOPED(outVar) ASDN::ScopeTimer t(outVar)
+  #define TIME_SCOPED(outVar) AS::ScopeTimer t(outVar)
 #else
   #define TIME_SCOPED(outVar)
 #endif
@@ -57,6 +59,8 @@
 // Enable this will mitigate interface updating state when coalescing disabled.
 // TODO(wsdwsd0829): Rework enabling code to ensure that interface state behavior is not altered when ASCATransactionQueue is disabled.
 #define ENABLE_NEW_EXIT_HIERARCHY_BEHAVIOR 0
+
+using AS::MutexLocker;
 
 static ASDisplayNodeNonFatalErrorBlock _nonFatalErrorBlock = nil;
 
@@ -102,6 +106,10 @@ _ASPendingState *ASDisplayNodeGetPendingState(ASDisplayNode *node)
   }
   return result;
 }
+
+void StubImplementationWithNoArgs(id receiver) {}
+void StubImplementationWithSizeRange(id receiver, ASSizeRange sr) {}
+void StubImplementationWithTwoInterfaceStates(id receiver, ASInterfaceState s0, ASInterfaceState s1) {}
 
 /**
  *  Returns ASDisplayNodeFlags for the given class/instance. instance MAY BE NIL.
@@ -246,6 +254,34 @@ static ASDisplayNodeMethodOverrides GetASDisplayNodeMethodOverrides(Class c)
   });
 
   class_replaceMethod(self, @selector(_staticInitialize), staticInitialize, "v:@");
+  
+  // Add stub implementations for global methods that the client didn't
+  // implement in a category. We do this instead of hard-coding empty
+  // implementations to avoid a linker warning when it merges categories.
+  // Note: addMethod will not do anything if a method already exists.
+  if (self == ASDisplayNode.class) {
+    IMP noArgsImp = (IMP)StubImplementationWithNoArgs;
+    class_addMethod(self, @selector(baseDidInit), noArgsImp, "v@:");
+    class_addMethod(self, @selector(baseWillDealloc), noArgsImp, "v@:");
+    class_addMethod(self, @selector(didLoad), noArgsImp, "v@:");
+    class_addMethod(self, @selector(layoutDidFinish), noArgsImp, "v@:");
+    class_addMethod(self, @selector(didEnterPreloadState), noArgsImp, "v@:");
+    class_addMethod(self, @selector(didExitPreloadState), noArgsImp, "v@:");
+    class_addMethod(self, @selector(didEnterDisplayState), noArgsImp, "v@:");
+    class_addMethod(self, @selector(didExitDisplayState), noArgsImp, "v@:");
+    class_addMethod(self, @selector(didEnterVisibleState), noArgsImp, "v@:");
+    class_addMethod(self, @selector(didExitVisibleState), noArgsImp, "v@:");
+    class_addMethod(self, @selector(hierarchyDisplayDidFinish), noArgsImp, "v@:");
+    class_addMethod(self, @selector(asyncTraitCollectionDidChange), noArgsImp, "v@:");
+    class_addMethod(self, @selector(calculatedLayoutDidChange), noArgsImp, "v@:");
+    
+    auto type0 = "v@:" + std::string(@encode(ASSizeRange));
+    class_addMethod(self, @selector(willCalculateLayout:), (IMP)StubImplementationWithSizeRange, type0.c_str());
+    
+    auto interfaceStateType = std::string(@encode(ASInterfaceState));
+    auto type1 = "v@:" + interfaceStateType + interfaceStateType;
+    class_addMethod(self, @selector(interfaceStateDidChange:fromState:), (IMP)StubImplementationWithTwoInterfaceStates, type1.c_str());
+  }
 }
 
 #if !AS_INITIALIZE_FRAMEWORK_MANUALLY
@@ -308,6 +344,7 @@ static ASDisplayNodeMethodOverrides GetASDisplayNodeMethodOverrides(Class c)
   _automaticallyRelayoutOnSafeAreaChanges = NO;
   _automaticallyRelayoutOnLayoutMarginsChanges = NO;
 
+  [self baseDidInit];
   ASDisplayNodeLogEvent(self, @"init");
 }
 
@@ -415,7 +452,7 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
 
 - (void)onDidLoad:(ASDisplayNodeDidLoadBlock)body
 {
-  ASDN::UniqueLock l(__instanceLock__);
+  AS::UniqueLock l(__instanceLock__);
 
   if ([self _locked_isNodeLoaded]) {
     ASDisplayNodeAssertThreadAffinity(self);
@@ -432,6 +469,7 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
 - (void)dealloc
 {
   _flags.isDeallocating = YES;
+  [self baseWillDealloc];
 
   // Synchronous nodes may not be able to call the hierarchy notifications, so only enforce for regular nodes.
   ASDisplayNodeAssert(checkFlag(Synchronous) || !ASInterfaceStateIncludesVisible(_interfaceState), @"Node should always be marked invisible before deallocating. Node: %@", self);
@@ -561,7 +599,7 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
   [self didLoad];
   
   __instanceLock__.lock();
-  let onDidLoadBlocks = ASTransferStrong(_onDidLoadBlocks);
+  const auto onDidLoadBlocks = ASTransferStrong(_onDidLoadBlocks);
   __instanceLock__.unlock();
   
   for (ASDisplayNodeDidLoadBlock block in onDidLoadBlocks) {
@@ -572,13 +610,6 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
   }];
 }
 
-- (void)didLoad
-{
-  ASDisplayNodeAssertMainThread();
-  
-  // Subclass hook
-}
-
 - (BOOL)isNodeLoaded
 {
   if (ASDisplayNodeThreadIsMain()) {
@@ -586,7 +617,7 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
     // where the state of this property can change. As an optimization, we can avoid locking.
     return _loaded(self);
   } else {
-    ASDN::MutexLocker l(__instanceLock__);
+    MutexLocker l(__instanceLock__);
     return [self _locked_isNodeLoaded];
   }
 }
@@ -601,7 +632,7 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
 
 - (UIView *)view
 {
-  ASDN::UniqueLock l(__instanceLock__);
+  AS::UniqueLock l(__instanceLock__);
 
   ASDisplayNodeAssert(!_flags.layerBacked, @"Call to -view undefined on layer-backed nodes");
   BOOL isLayerBacked = _flags.layerBacked;
@@ -647,7 +678,7 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
 
 - (CALayer *)layer
 {
-  ASDN::UniqueLock l(__instanceLock__);
+  AS::UniqueLock l(__instanceLock__);
   if (_layer != nil) {
     return _layer;
   }
@@ -688,7 +719,7 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
 // Returns nil if the layer is not an _ASDisplayLayer; will not create the layer if nil.
 - (_ASDisplayLayer *)asyncLayer
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return [self _locked_asyncLayer];
 }
 
@@ -708,7 +739,7 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
   // Only call this if assertions are enabled – it could be expensive.
   ASDisplayNodeAssert(!isLayerBacked || self.supportsLayerBacking, @"Node %@ does not support layer backing.", self);
 
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   if (_flags.layerBacked == isLayerBacked) {
     return;
   }
@@ -723,31 +754,31 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
 
 - (BOOL)isLayerBacked
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _flags.layerBacked;
 }
 
 - (BOOL)supportsLayerBacking
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return !checkFlag(Synchronous) && !_flags.viewEverHadAGestureRecognizerAttached && _viewClass == [_ASDisplayView class] && _layerClass == [_ASDisplayLayer class];
 }
 
 - (BOOL)shouldAnimateSizeChanges
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _flags.shouldAnimateSizeChanges;
 }
 
 - (void)setShouldAnimateSizeChanges:(BOOL)shouldAnimateSizeChanges
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   _flags.shouldAnimateSizeChanges = shouldAnimateSizeChanges;
 }
 
 - (CGRect)threadSafeBounds
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return [self _locked_threadSafeBounds];
 }
 
@@ -759,19 +790,19 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
 
 - (void)setThreadSafeBounds:(CGRect)newBounds
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   _threadSafeBounds = newBounds;
 }
 
 - (void)nodeViewDidAddGestureRecognizer
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   _flags.viewEverHadAGestureRecognizerAttached = YES;
 }
 
 - (UIEdgeInsets)fallbackSafeAreaInsets
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _fallbackSafeAreaInsets;
 }
 
@@ -781,7 +812,7 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
   BOOL updatesLayoutMargins;
 
   {
-    ASDN::MutexLocker l(__instanceLock__);
+    MutexLocker l(__instanceLock__);
     ASDisplayNodeAssertThreadAffinity(self);
 
     if (UIEdgeInsetsEqualToEdgeInsets(insets, _fallbackSafeAreaInsets)) {
@@ -832,37 +863,37 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
 
 - (BOOL)isViewControllerRoot
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _isViewControllerRoot;
 }
 
 - (void)setViewControllerRoot:(BOOL)flag
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   _isViewControllerRoot = flag;
 }
 
 - (BOOL)automaticallyRelayoutOnSafeAreaChanges
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _automaticallyRelayoutOnSafeAreaChanges;
 }
 
 - (void)setAutomaticallyRelayoutOnSafeAreaChanges:(BOOL)flag
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   _automaticallyRelayoutOnSafeAreaChanges = flag;
 }
 
 - (BOOL)automaticallyRelayoutOnLayoutMarginsChanges
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _automaticallyRelayoutOnLayoutMarginsChanges;
 }
 
 - (void)setAutomaticallyRelayoutOnLayoutMarginsChanges:(BOOL)flag
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   _automaticallyRelayoutOnLayoutMarginsChanges = flag;
 }
 
@@ -973,28 +1004,19 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
 
 - (NSString *)debugName
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _debugName;
 }
 
 - (void)setDebugName:(NSString *)debugName
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   if (!ASObjectIsEqual(_debugName, debugName)) {
     _debugName = [debugName copy];
   }
 }
 
 #pragma mark - Layout
-
-// At most a layoutSpecBlock or one of the three layout methods is overridden
-#define __ASDisplayNodeCheckForLayoutMethodOverrides \
-    ASDisplayNodeAssert(_layoutSpecBlock != NULL || \
-    ((ASDisplayNodeSubclassOverridesSelector(self.class, @selector(calculateSizeThatFits:)) ? 1 : 0) \
-    + (ASDisplayNodeSubclassOverridesSelector(self.class, @selector(layoutSpecThatFits:)) ? 1 : 0) \
-    + (ASDisplayNodeSubclassOverridesSelector(self.class, @selector(calculateLayoutThatFits:)) ? 1 : 0)) <= 1, \
-    @"Subclass %@ must at least provide a layoutSpecBlock or override at most one of the three layout methods: calculateLayoutThatFits:, layoutSpecThatFits:, or calculateSizeThatFits:", NSStringFromClass(self.class))
-
 
 #pragma mark <ASLayoutElementTransition>
 
@@ -1012,7 +1034,7 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
 
 - (void)invalidateCalculatedLayout
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   
   _layoutVersion++;
   
@@ -1026,11 +1048,11 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
 - (void)__layout
 {
   ASDisplayNodeAssertThreadAffinity(self);
-  ASAssertUnlocked(__instanceLock__);
+  // ASAssertUnlocked(__instanceLock__);
   
   BOOL loaded = NO;
   {
-    ASDN::UniqueLock l(__instanceLock__);
+    AS::UniqueLock l(__instanceLock__);
     loaded = [self _locked_isNodeLoaded];
     CGRect bounds = _threadSafeBounds;
     
@@ -1066,19 +1088,19 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
     ASPerformBlockOnMainThread(^{
       [self layout];
       [self _layoutClipCornersIfNeeded];
-      [self layoutDidFinish];
+      [self _layoutDidFinish];
     });
   }
 
   [self _fallbackUpdateSafeAreaOnChildren];
 }
 
-- (void)layoutDidFinish
+- (void)_layoutDidFinish
 {
-  // Hook for subclasses
   ASDisplayNodeAssertMainThread();
-  ASAssertUnlocked(__instanceLock__);
+  // ASAssertUnlocked(__instanceLock__);
   ASDisplayNodeAssertTrue(self.isNodeLoaded);
+  [self layoutDidFinish];
 }
 
 #pragma mark Calculation
@@ -1117,115 +1139,23 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
 {
   __ASDisplayNodeCheckForLayoutMethodOverrides;
 
-  ASDN::UniqueLock l(__instanceLock__);
-
+  switch (self.layoutEngineType) {
+    case ASLayoutEngineTypeLayoutSpec:
+      return [self calculateLayoutLayoutSpec:constrainedSize];
 #if YOGA
-  // There are several cases where Yoga could arrive here:
-  // - This node is not in a Yoga tree: it has neither a yogaParent nor yogaChildren.
-  // - This node is a Yoga tree root: it has no yogaParent, but has yogaChildren.
-  // - This node is a Yoga tree node: it has both a yogaParent and yogaChildren.
-  // - This node is a Yoga tree leaf: it has a yogaParent, but no yogaChidlren.
-  YGNodeRef yogaNode = _style.yogaNode;
-  BOOL hasYogaParent = (_yogaParent != nil);
-  BOOL hasYogaChildren = (_yogaChildren.count > 0);
-  BOOL usesYoga = (yogaNode != NULL && (hasYogaParent || hasYogaChildren));
-  if (usesYoga) {
-    // This node has some connection to a Yoga tree.
-    if ([self shouldHaveYogaMeasureFunc] == NO) {
-      // If we're a yoga root, tree node, or leaf with no measure func (e.g. spacer), then
-      // initiate a new Yoga calculation pass from root.
-      
-      as_activity_create_for_scope("Yoga layout calculation");
-      if (self.yogaLayoutInProgress == NO) {
-        ASYogaLog("Calculating yoga layout from root %@, %@", self, NSStringFromASSizeRange(constrainedSize));
-        l.unlock();
-        [self calculateLayoutFromYogaRoot:constrainedSize];
-        l.lock();
-      } else {
-        ASYogaLog("Reusing existing yoga layout %@", _yogaCalculatedLayout);
-      }
-      ASDisplayNodeAssert(_yogaCalculatedLayout, @"Yoga node should have a non-nil layout at this stage: %@", self);
-      return _yogaCalculatedLayout;
-    } else {
-      // If we're a yoga leaf node with custom measurement function, proceed with normal layout so layoutSpecs can run (e.g. ASButtonNode).
-      ASYogaLog("PROCEEDING past Yoga check to calculate ASLayout for: %@", self);
-    }
-  }
-#endif /* YOGA */
-  
-  // Manual size calculation via calculateSizeThatFits:
-  if (_layoutSpecBlock == NULL && (_methodOverrides & ASDisplayNodeMethodOverrideLayoutSpecThatFits) == 0) {
-    CGSize size = [self calculateSizeThatFits:constrainedSize.max];
-    ASDisplayNodeLogEvent(self, @"calculatedSize: %@", NSStringFromCGSize(size));
-    return [ASLayout layoutWithLayoutElement:self size:ASSizeRangeClamp(constrainedSize, size) sublayouts:nil];
-  }
-  
-  // Size calcualtion with layout elements
-  BOOL measureLayoutSpec = _measurementOptions & ASDisplayNodePerformanceMeasurementOptionLayoutSpec;
-  if (measureLayoutSpec) {
-    _layoutSpecNumberOfPasses++;
-  }
-
-  // Get layout element from the node
-  id<ASLayoutElement> layoutElement = [self _locked_layoutElementThatFits:constrainedSize];
-#if ASEnableVerboseLogging
-  for (NSString *asciiLine in [[layoutElement asciiArtString] componentsSeparatedByString:@"\n"]) {
-    as_log_verbose(ASLayoutLog(), "%@", asciiLine);
-  }
+    case ASLayoutEngineTypeYoga:
+      return [self calculateLayoutYoga:constrainedSize];
 #endif
-
-
-  // Certain properties are necessary to set on an element of type ASLayoutSpec
-  if (layoutElement.layoutElementType == ASLayoutElementTypeLayoutSpec) {
-    ASLayoutSpec *layoutSpec = (ASLayoutSpec *)layoutElement;
-  
-#if AS_DEDUPE_LAYOUT_SPEC_TREE
-    NSHashTable *duplicateElements = [layoutSpec findDuplicatedElementsInSubtree];
-    if (duplicateElements.count > 0) {
-      ASDisplayNodeFailAssert(@"Node %@ returned a layout spec that contains the same elements in multiple positions. Elements: %@", self, duplicateElements);
-      // Use an empty layout spec to avoid crashes
-      layoutSpec = [[ASLayoutSpec alloc] init];
-    }
-#endif
-
-    ASDisplayNodeAssert(layoutSpec.isMutable, @"Node %@ returned layout spec %@ that has already been used. Layout specs should always be regenerated.", self, layoutSpec);
-    
-    layoutSpec.isMutable = NO;
-  }
-  
-  // Manually propagate the trait collection here so that any layoutSpec children of layoutSpec will get a traitCollection
-  {
-    ASDN::SumScopeTimer t(_layoutSpecTotalTime, measureLayoutSpec);
-    ASTraitCollectionPropagateDown(layoutElement, self.primitiveTraitCollection);
-  }
-  
-  BOOL measureLayoutComputation = _measurementOptions & ASDisplayNodePerformanceMeasurementOptionLayoutComputation;
-  if (measureLayoutComputation) {
-    _layoutComputationNumberOfPasses++;
+      // If YOGA is not defined but for some reason the layout type engine is Yoga
+      // we explicitly fallthrough here
+    default:
+      break;
   }
 
-  // Layout element layout creation
-  ASLayout *layout = ({
-    ASDN::SumScopeTimer t(_layoutComputationTotalTime, measureLayoutComputation);
-    [layoutElement layoutThatFits:constrainedSize];
-  });
-  ASDisplayNodeAssertNotNil(layout, @"[ASLayoutElement layoutThatFits:] should never return nil! %@, %@", self, layout);
-    
-  // Make sure layoutElementObject of the root layout is `self`, so that the flattened layout will be structurally correct.
-  BOOL isFinalLayoutElement = (layout.layoutElement != self);
-  if (isFinalLayoutElement) {
-    layout.position = CGPointZero;
-    layout = [ASLayout layoutWithLayoutElement:self size:layout.size sublayouts:@[layout]];
-  }
-  ASDisplayNodeLogEvent(self, @"computedLayout: %@", layout);
-
-  // PR #1157: Reduces accuracy of _unflattenedLayout for debugging/Weaver
-  if ([ASDisplayNode shouldStoreUnflattenedLayouts]) {
-      _unflattenedLayout = layout;
-  }
-  layout = [layout filteredNodeLayoutTree];
-  
-  return layout;
+  // If this case is reached a layout type engine was defined for a node that is currently
+  // not supported.
+  ASDisplayNodeAssert(NO, @"No layout type determined");
+  return nil;
 }
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize
@@ -1237,40 +1167,11 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
   return ASIsCGSizeValidForSize(constrainedSize) ? constrainedSize : CGSizeZero;
 }
 
-- (id<ASLayoutElement>)_locked_layoutElementThatFits:(ASSizeRange)constrainedSize
-{
-  ASAssertLocked(__instanceLock__);
-  __ASDisplayNodeCheckForLayoutMethodOverrides;
-  
-  BOOL measureLayoutSpec = _measurementOptions & ASDisplayNodePerformanceMeasurementOptionLayoutSpec;
-  
-  if (_layoutSpecBlock != NULL) {
-    return ({
-      ASDN::MutexLocker l(__instanceLock__);
-      ASDN::SumScopeTimer t(_layoutSpecTotalTime, measureLayoutSpec);
-      _layoutSpecBlock(self, constrainedSize);
-    });
-  } else {
-    return ({
-      ASDN::SumScopeTimer t(_layoutSpecTotalTime, measureLayoutSpec);
-      [self layoutSpecThatFits:constrainedSize];
-    });
-  }
-}
-
-- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
-{
-  __ASDisplayNodeCheckForLayoutMethodOverrides;
-  
-  ASDisplayNodeAssert(NO, @"-[ASDisplayNode layoutSpecThatFits:] should never return an empty value. One way this is caused is by calling -[super layoutSpecThatFits:] which is not currently supported.");
-  return [[ASLayoutSpec alloc] init];
-}
-
 - (void)layout
 {
   // Hook for subclasses
   ASDisplayNodeAssertMainThread();
-  ASAssertUnlocked(__instanceLock__);
+  // ASAssertUnlocked(__instanceLock__);
   ASDisplayNodeAssertTrue(self.isNodeLoaded);
   [self enumerateInterfaceStateDelegates:^(id<ASInterfaceStateDelegate> del) {
     [del nodeDidLayout];
@@ -1301,11 +1202,6 @@ ASSynthesizeLockingMethodsWithMutex(__instanceLock__);
   [self _pendingLayoutTransitionDidComplete];
 }
 
-- (void)calculatedLayoutDidChange
-{
-  // Subclass override
-}
-
 #pragma mark - Display
 
 NSString * const ASRenderingEngineDidDisplayScheduledNodesNotification = @"ASRenderingEngineDidDisplayScheduledNodes";
@@ -1313,7 +1209,7 @@ NSString * const ASRenderingEngineDidDisplayNodesScheduledBeforeTimestamp = @"AS
 
 - (BOOL)displaysAsynchronously
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return [self _locked_displaysAsynchronously];
 }
 
@@ -1330,7 +1226,7 @@ NSString * const ASRenderingEngineDidDisplayNodesScheduledBeforeTimestamp = @"AS
 {
   ASDisplayNodeAssertThreadAffinity(self);
   
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
 
   // Can't do this for synchronous nodes (using layers that are not _ASDisplayLayer and so we can't control display prevention/cancel)
   if (checkFlag(Synchronous)) {
@@ -1348,13 +1244,13 @@ NSString * const ASRenderingEngineDidDisplayNodesScheduledBeforeTimestamp = @"AS
 
 - (BOOL)rasterizesSubtree
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _flags.rasterizesSubtree;
 }
 
 - (void)enableSubtreeRasterization
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   // Already rasterized from self.
   if (_flags.rasterizesSubtree) {
     return;
@@ -1391,14 +1287,14 @@ NSString * const ASRenderingEngineDidDisplayNodesScheduledBeforeTimestamp = @"AS
 
 - (CGFloat)contentsScaleForDisplay
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
 
   return _contentsScaleForDisplay;
 }
 
 - (void)setContentsScaleForDisplay:(CGFloat)contentsScaleForDisplay
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
 
   if (_contentsScaleForDisplay == contentsScaleForDisplay) {
     return;
@@ -1427,7 +1323,7 @@ NSString * const ASRenderingEngineDidDisplayNodesScheduledBeforeTimestamp = @"AS
 {
   BOOL shouldScheduleForDisplay = NO;
   {
-    ASDN::MutexLocker l(__instanceLock__);
+    MutexLocker l(__instanceLock__);
     BOOL nowDisplay = ASInterfaceStateIncludesDisplay(_interfaceState);
     // FIXME: This should not need to recursively display, so create a non-recursive variant.
     // The semantics of setNeedsDisplay (as defined by CALayer behavior) are not recursive.
@@ -1466,7 +1362,7 @@ NSString * const ASRenderingEngineDidDisplayNodesScheduledBeforeTimestamp = @"AS
 /// Helper method to summarize whether or not the node run through the display process
 - (BOOL)_implementsDisplay
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   
   return _flags.implementsDrawRect || _flags.implementsImageDisplay || _flags.rasterizesSubtree;
 }
@@ -1523,16 +1419,11 @@ NSString * const ASRenderingEngineDidDisplayNodesScheduledBeforeTimestamp = @"AS
   }
 }
 
-- (void)hierarchyDisplayDidFinish
-{
-  // Subclass hook
-}
-
 // Helper method to determine if it's safe to call setNeedsDisplay on a layer without throwing away the content.
 // For details look at the comment on the canCallSetNeedsDisplayOfLayer flag
 - (BOOL)_canCallSetNeedsDisplayOfLayer
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _flags.canCallSetNeedsDisplayOfLayer;
 }
 
@@ -1602,20 +1493,20 @@ void recursivelyTriggerDisplayForLayer(CALayer *layer, BOOL shouldBlock)
 
 - (void)setShouldBypassEnsureDisplay:(BOOL)shouldBypassEnsureDisplay
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   _flags.shouldBypassEnsureDisplay = shouldBypassEnsureDisplay;
 }
 
 - (BOOL)shouldBypassEnsureDisplay
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _flags.shouldBypassEnsureDisplay;
 }
 
 - (void)setNeedsDisplayAtScale:(CGFloat)contentsScale
 {
   {
-    ASDN::MutexLocker l(__instanceLock__);
+    MutexLocker l(__instanceLock__);
     if (contentsScale == _contentsScaleForDisplay) {
       return;
     }
@@ -1813,7 +1704,7 @@ static void _recursivelySetDisplaySuspended(ASDisplayNode *node, CALayer *layer,
 
 - (BOOL)displaySuspended
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _flags.displaySuspended;
 }
 
@@ -1866,7 +1757,10 @@ static void _recursivelySetDisplaySuspended(ASDisplayNode *node, CALayer *layer,
   [self displayDidFinish];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)displayWillStart {}
+#pragma clang diagnostic pop
 - (void)displayWillStartAsynchronously:(BOOL)asynchronously
 {
   ASDisplayNodeAssertMainThread();
@@ -2107,7 +2001,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 // NOTE: This method must be dealloc-safe (should not retain self).
 - (ASDisplayNode *)supernode
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _supernode;
 }
 
@@ -2116,7 +2010,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   BOOL supernodeDidChange = NO;
   ASDisplayNode *oldSupernode = nil;
   {
-    ASDN::MutexLocker l(__instanceLock__);
+    MutexLocker l(__instanceLock__);
     if (_supernode != newSupernode) {
       oldSupernode = _supernode;  // Access supernode properties outside of lock to avoid remote chance of deadlock,
                                   // in case supernode implementation must access one of our properties.
@@ -2193,7 +2087,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
 - (NSArray *)subnodes
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   if (_cachedSubnodes == nil) {
     _cachedSubnodes = [_subnodes copy];
   } else {
@@ -2339,7 +2233,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   NSUInteger subnodesIndex;
   NSUInteger sublayersIndex;
   {
-    ASDN::MutexLocker l(__instanceLock__);
+    MutexLocker l(__instanceLock__);
     subnodesIndex = _subnodes.count;
     sublayersIndex = _layer.sublayers.count;
   }
@@ -2394,7 +2288,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   NSInteger subnodeIndex;
   NSInteger sublayerIndex = NSNotFound;
   {
-    ASDN::MutexLocker l(__instanceLock__);
+    MutexLocker l(__instanceLock__);
     ASDisplayNodeAssert(_subnodes, @"You should have subnodes if you have a subnode");
     
     subnodeIndex = [_subnodes indexOfObjectIdenticalTo:oldSubnode];
@@ -2441,7 +2335,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   NSInteger belowSubnodeIndex;
   NSInteger belowSublayerIndex = NSNotFound;
   {
-    ASDN::MutexLocker l(__instanceLock__);
+    MutexLocker l(__instanceLock__);
     ASDisplayNodeAssert(_subnodes, @"You should have subnodes if you have a subnode");
     
     belowSubnodeIndex = [_subnodes indexOfObjectIdenticalTo:below];
@@ -2506,7 +2400,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   NSInteger aboveSubnodeIndex;
   NSInteger aboveSublayerIndex = NSNotFound;
   {
-    ASDN::MutexLocker l(__instanceLock__);
+    MutexLocker l(__instanceLock__);
     ASDisplayNodeAssert(_subnodes, @"You should have subnodes if you have a subnode");
     
     aboveSubnodeIndex = [_subnodes indexOfObjectIdenticalTo:above];
@@ -2563,7 +2457,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
   NSInteger sublayerIndex = NSNotFound;
   {
-    ASDN::MutexLocker l(__instanceLock__);
+    MutexLocker l(__instanceLock__);
     
     if (idx > _subnodes.count || idx < 0) {
       ASDisplayNodeFailAssert(@"Cannot insert a subnode at index %ld. Count is %ld", (long)idx, (long)_subnodes.count);
@@ -2676,13 +2570,13 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 - (BOOL)__visibilityNotificationsDisabled
 {
   // Currently, this method is only used by the testing infrastructure to verify this internal feature.
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _flags.visibilityNotificationsDisabled > 0;
 }
 
 - (BOOL)__selfOrParentHasVisibilityNotificationsDisabled
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return (_hierarchyState & ASHierarchyStateTransitioningSupernodes);
 }
 
@@ -2784,7 +2678,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
 - (BOOL)isInHierarchy
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _flags.isInHierarchy;
 }
 
@@ -2792,7 +2686,6 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 {
   ASDisplayNodeAssertMainThread();
   ASDisplayNodeAssert(!_flags.isEnteringHierarchy, @"Should not cause recursive __enterHierarchy");
-  ASAssertUnlocked(__instanceLock__);
   ASDisplayNodeLogEvent(self, @"enterHierarchy");
   
   // Profiling has shown that locking this method is beneficial, so each of the property accesses don't have to lock and unlock.
@@ -2841,7 +2734,6 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 {
   ASDisplayNodeAssertMainThread();
   ASDisplayNodeAssert(!_flags.isExitingHierarchy, @"Should not cause recursive __exitHierarchy");
-  ASAssertUnlocked(__instanceLock__);
   ASDisplayNodeLogEvent(self, @"exitHierarchy");
   
   // Profiling has shown that locking this method is beneficial, so each of the property accesses don't have to lock and unlock.
@@ -2892,7 +2784,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
 - (ASHierarchyState)hierarchyState
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _hierarchyState;
 }
 
@@ -2900,7 +2792,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 {
   ASHierarchyState oldState = ASHierarchyStateNormal;
   {
-    ASDN::MutexLocker l(__instanceLock__);
+    MutexLocker l(__instanceLock__);
     if (_hierarchyState == newState) {
       return;
     }
@@ -2931,7 +2823,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
       // Entering layout pending state
     } else {
       // Leaving layout pending state, reset related properties
-      ASDN::MutexLocker l(__instanceLock__);
+      MutexLocker l(__instanceLock__);
       _pendingTransitionID = ASLayoutElementContextInvalidTransitionID;
       _pendingLayoutTransition = nil;
     }
@@ -2950,7 +2842,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   
   if (![self supportsRangeManagedInterfaceState]) {
     self.interfaceState = ASInterfaceStateInHierarchy;
-  } else if (ASCATransactionQueue.sharedQueue.isEnabled) {
+  } else if (ASCATransactionQueueGet().enabled) {
     __instanceLock__.lock();
     ASInterfaceState state = _preExitingInterfaceState;
     _preExitingInterfaceState = ASInterfaceStateNone;
@@ -3010,7 +2902,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
       }
     };
 
-    if (!ASCATransactionQueue.sharedQueue.enabled) {
+    if (!ASCATransactionQueueGet().enabled) {
       dispatch_async(dispatch_get_main_queue(), exitVisibleInterfaceState);
     } else {
       exitVisibleInterfaceState();
@@ -3026,7 +2918,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
  */
 - (BOOL)supportsRangeManagedInterfaceState
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return ASHierarchyStateIncludesRangeManaged(_hierarchyState);
 }
 
@@ -3069,26 +2961,26 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
 - (ASInterfaceState)interfaceState
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _interfaceState;
 }
 
 - (void)setInterfaceState:(ASInterfaceState)newState
 {
-  if (!ASCATransactionQueue.sharedQueue.enabled) {
+  if (!ASCATransactionQueueGet().enabled) {
     [self applyPendingInterfaceState:newState];
   } else {
-    ASDN::MutexLocker l(__instanceLock__);
+    MutexLocker l(__instanceLock__);
     if (_pendingInterfaceState != newState) {
       _pendingInterfaceState = newState;
-      [[ASCATransactionQueue sharedQueue] enqueue:self];
+      [ASCATransactionQueueGet() enqueue:self];
     }
   }
 }
 
 - (ASInterfaceState)pendingInterfaceState
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _pendingInterfaceState;
 }
 
@@ -3104,10 +2996,10 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   ASInterfaceState oldState = ASInterfaceStateNone;
   ASInterfaceState newState = ASInterfaceStateNone;
   {
-    ASDN::MutexLocker l(__instanceLock__);
+    MutexLocker l(__instanceLock__);
     // newPendingState will not be used when ASCATransactionQueue is enabled
     // and use _pendingInterfaceState instead for interfaceState update.
-    if (!ASCATransactionQueue.sharedQueue.enabled) {
+    if (!ASCATransactionQueueGet().enabled) {
       _pendingInterfaceState = newPendingState;
     }
     oldState = _interfaceState;
@@ -3136,12 +3028,12 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   
   if (nowPreload != wasPreload) {
     if (nowPreload) {
-      [self didEnterPreloadState];
+      [self _didEnterPreloadState];
     } else {
       // We don't want to call -didExitPreloadState on nodes that aren't being managed by a range controller.
       // Otherwise we get flashing behavior from normal UIKit manipulations like navigation controller push / pop.
       if ([self supportsRangeManagedInterfaceState]) {
-        [self didExitPreloadState];
+        [self _didExitPreloadState];
       }
     }
   }
@@ -3192,9 +3084,9 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
     }
     
     if (nowDisplay) {
-      [self didEnterDisplayState];
+      [self _didEnterDisplayState];
     } else {
-      [self didExitDisplayState];
+      [self _didExitDisplayState];
     }
   }
 
@@ -3205,9 +3097,9 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
   if (nowVisible != wasVisible) {
     if (nowVisible) {
-      [self didEnterVisibleState];
+      [self _didEnterVisibleState];
     } else {
-      [self didExitVisibleState];
+      [self _didExitVisibleState];
     }
   }
 
@@ -3219,7 +3111,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   }
   
   ASDisplayNodeLogEvent(self, @"interfaceStateDidChange: %@", NSStringFromASInterfaceStateChange(oldState, newState));
-  [self interfaceStateDidChange:newState fromState:oldState];
+  [self _interfaceStateDidChange:newState fromState:oldState];
 }
 
 - (void)prepareForCATransactionCommit
@@ -3228,11 +3120,11 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   [self applyPendingInterfaceState:ASInterfaceStateNone];
 }
 
-- (void)interfaceStateDidChange:(ASInterfaceState)newState fromState:(ASInterfaceState)oldState
+- (void)_interfaceStateDidChange:(ASInterfaceState)newState fromState:(ASInterfaceState)oldState
 {
-  // Subclass hook
   ASAssertUnlocked(__instanceLock__);
   ASDisplayNodeAssertMainThread();
+  [self interfaceStateDidChange:newState fromState:oldState];
   [self enumerateInterfaceStateDelegates:^(id<ASInterfaceStateDelegate> del) {
     [del interfaceStateDidChange:newState fromState:oldState];
   }];
@@ -3247,7 +3139,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
 - (void)addInterfaceStateDelegate:(id <ASInterfaceStateDelegate>)interfaceStateDelegate
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   _hasHadInterfaceStateDelegates = YES;
   for (int i = 0; i < AS_MAX_INTERFACE_STATE_DELEGATES; i++) {
     if (_interfaceStateDelegates[i] == nil) {
@@ -3260,7 +3152,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
 - (void)removeInterfaceStateDelegate:(id <ASInterfaceStateDelegate>)interfaceStateDelegate
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   for (int i = 0; i < AS_MAX_INTERFACE_STATE_DELEGATES; i++) {
     if (_interfaceStateDelegates[i] == interfaceStateDelegate) {
       _interfaceStateDelegates[i] = nil;
@@ -3271,13 +3163,12 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
 - (BOOL)isVisible
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return ASInterfaceStateIncludesVisible(_interfaceState);
 }
 
-- (void)didEnterVisibleState
+- (void)_didEnterVisibleState
 {
-  // subclass override
   ASDisplayNodeAssertMainThread();
   
 #if ASDISPLAYNODE_ASSERTIONS_ENABLED
@@ -3288,6 +3179,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 #endif
   
   ASAssertUnlocked(__instanceLock__);
+  [self didEnterVisibleState];
   [self enumerateInterfaceStateDelegates:^(id<ASInterfaceStateDelegate> del) {
     [del didEnterVisibleState];
   }];
@@ -3297,11 +3189,11 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 #endif
 }
 
-- (void)didExitVisibleState
+- (void)_didExitVisibleState
 {
-  // subclass override
   ASDisplayNodeAssertMainThread();
   ASAssertUnlocked(__instanceLock__);
+  [self didExitVisibleState];
   [self enumerateInterfaceStateDelegates:^(id<ASInterfaceStateDelegate> del) {
     [del didExitVisibleState];
   }];
@@ -3309,25 +3201,25 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
 - (BOOL)isInDisplayState
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return ASInterfaceStateIncludesDisplay(_interfaceState);
 }
 
-- (void)didEnterDisplayState
+- (void)_didEnterDisplayState
 {
-  // subclass override
   ASDisplayNodeAssertMainThread();
   ASAssertUnlocked(__instanceLock__);
+  [self didEnterDisplayState];
   [self enumerateInterfaceStateDelegates:^(id<ASInterfaceStateDelegate> del) {
     [del didEnterDisplayState];
   }];
 }
 
-- (void)didExitDisplayState
+- (void)_didExitDisplayState
 {
-  // subclass override
   ASDisplayNodeAssertMainThread();
   ASAssertUnlocked(__instanceLock__);
+  [self didExitDisplayState];
   [self enumerateInterfaceStateDelegates:^(id<ASInterfaceStateDelegate> del) {
     [del didExitDisplayState];
   }];
@@ -3335,7 +3227,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
 - (BOOL)isInPreloadState
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return ASInterfaceStateIncludesPreload(_interfaceState);
 }
 
@@ -3364,11 +3256,12 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   });
 }
 
-- (void)didEnterPreloadState
+- (void)_didEnterPreloadState
 {
   ASDisplayNodeAssertMainThread();
   ASAssertUnlocked(__instanceLock__);
-
+  [self didEnterPreloadState];
+  
   // If this node has ASM enabled and is not yet visible, force a layout pass to apply its applicable pending layout, if any,
   // so that its subnodes are inserted/deleted and start preloading right away.
   //
@@ -3386,10 +3279,11 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   }];
 }
 
-- (void)didExitPreloadState
+- (void)_didExitPreloadState
 {
   ASDisplayNodeAssertMainThread();
   ASAssertUnlocked(__instanceLock__);
+  [self didExitPreloadState];
   [self enumerateInterfaceStateDelegates:^(id<ASInterfaceStateDelegate> del) {
     [del didExitPreloadState];
   }];
@@ -3400,7 +3294,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   ASDisplayNodeAssertMainThread();
   ASAssertUnlocked(__instanceLock__);
 
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   if (_flags.canClearContentsOfLayer) {
     // No-op if these haven't been created yet, as that guarantees they don't have contents that needs to be released.
     _layer.contents = nil;
@@ -3489,13 +3383,13 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
 - (void)setHitTestSlop:(UIEdgeInsets)hitTestSlop
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   _hitTestSlop = hitTestSlop;
 }
 
 - (UIEdgeInsets)hitTestSlop
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _hitTestSlop;
 }
 
@@ -3539,7 +3433,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   ASDisplayNodeAssertMainThread();
   ASAssertUnlocked(__instanceLock__);
   
-  ASDN::UniqueLock l(__instanceLock__);
+  AS::UniqueLock l(__instanceLock__);
   // FIXME: Ideally we'd call this as soon as the node receives -setNeedsLayout
   // but automatic subnode management would require us to modify the node tree
   // in the background on a loaded node, which isn't currently supported.
@@ -3610,19 +3504,19 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
 - (void)setMeasurementOptions:(ASDisplayNodePerformanceMeasurementOptions)measurementOptions
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   _measurementOptions = measurementOptions;
 }
 
 - (ASDisplayNodePerformanceMeasurementOptions)measurementOptions
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _measurementOptions;
 }
 
 - (ASDisplayNodePerformanceMeasurements)performanceMeasurements
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   ASDisplayNodePerformanceMeasurements measurements = { .layoutSpecNumberOfPasses = -1, .layoutSpecTotalTime = NAN, .layoutComputationNumberOfPasses = -1, .layoutComputationTotalTime = NAN };
   if (_measurementOptions & ASDisplayNodePerformanceMeasurementOptionLayoutSpec) {
     measurements.layoutSpecNumberOfPasses = _layoutSpecNumberOfPasses;
@@ -3639,13 +3533,13 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
 - (void)setIsAccessibilityContainer:(BOOL)isAccessibilityContainer
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   _isAccessibilityContainer = isAccessibilityContainer;
 }
 
 - (BOOL)isAccessibilityContainer
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _isAccessibilityContainer;
 }
 
@@ -3781,7 +3675,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 - (NSString *)debugDescription
 {
   ASPushMainThreadAssertionsDisabled();
-  let result = ASObjectDescriptionMake(self, [self propertiesForDebugDescription]);
+  const auto result = ASObjectDescriptionMake(self, [self propertiesForDebugDescription]);
   ASPopMainThreadAssertionsDisabled();
   return result;
 }
@@ -3807,12 +3701,6 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   }
 }
 
-#pragma mark - Trait Collection Hooks
-
-- (void)asyncTraitCollectionDidChange
-{
-  // Subclass override
-}
 @end
 
 #pragma mark - ASDisplayNode (Debugging)
@@ -3831,7 +3719,7 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 
 - (ASLayout *)unflattenedCalculatedLayout
 {
-  ASDN::MutexLocker l(__instanceLock__);
+  MutexLocker l(__instanceLock__);
   return _unflattenedLayout;
 }
 
@@ -3840,10 +3728,13 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
   suppressesInvalidCollectionUpdateExceptions.store(suppresses);
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 + (BOOL)suppressesInvalidCollectionUpdateExceptions
 {
   return suppressesInvalidCollectionUpdateExceptions.load();
 }
+#pragma clang diagnostic pop
 
 - (NSString *)displayNodeRecursiveDescription
 {
@@ -3862,8 +3753,8 @@ ASDISPLAYNODE_INLINE BOOL subtreeIsRasterized(ASDisplayNode *node) {
 - (NSString *)detailedLayoutDescription
 {
   ASPushMainThreadAssertionsDisabled();
-  ASDN::MutexLocker l(__instanceLock__);
-  let props = [[NSMutableArray<NSDictionary *> alloc] init];
+  MutexLocker l(__instanceLock__);
+  const auto props = [[NSMutableArray<NSDictionary *> alloc] init];
 
   [props addObject:@{ @"layoutVersion": @(_layoutVersion.load()) }];
   [props addObject:@{ @"bounds": [NSValue valueWithCGRect:self.bounds] }];

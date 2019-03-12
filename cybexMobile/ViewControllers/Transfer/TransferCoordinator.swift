@@ -103,7 +103,6 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         let customType = PresentationType.custom(width: width, height: height, center: center)
 
         let presenter = Presentr(presentationType: customType)
-        presenter.dismissOnTap = true
         presenter.keyboardTranslationType = .moveUp
 
         var context = PickerContext()
@@ -133,7 +132,6 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         let customType = PresentationType.custom(width: width, height: height, center: center)
 
         let presenter = Presentr(presentationType: customType)
-        presenter.dismissOnTap = true
         presenter.keyboardTranslationType = .moveUp
 
         var items = [String]()
@@ -195,7 +193,6 @@ extension TransferCoordinator: TransferCoordinatorProtocol {
         let customType = PresentationType.custom(width: width, height: height, center: center)
 
         let presenter = Presentr(presentationType: customType)
-        presenter.dismissOnTap = true
         presenter.keyboardTranslationType = .moveUp
 
         let items = AddressManager.shared.getTransferAddressList()

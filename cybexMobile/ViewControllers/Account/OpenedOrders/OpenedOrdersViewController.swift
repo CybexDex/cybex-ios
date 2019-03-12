@@ -93,7 +93,7 @@ class OpenedOrdersViewController: BaseViewController, IndicatorInfoProvider {
 
                                             if self.isVisible {
                                                 self.isCancelAll = false
-                                                self.showCancelOpenOrderConfirm(ensureTitle)
+                                                self.showPureContentConfirm(ensureTitle)
                                             }
 
                                         } else {
@@ -230,7 +230,7 @@ extension OpenedOrdersViewController {
 
         if self.isVisible {
             isCancelAll = true
-            self.showCancelOpenOrderConfirm("", content: "open_order_confirm_cancel_all")
+            self.showPureContentConfirm(content: "open_order_confirm_cancel_all")
         }
     }
     

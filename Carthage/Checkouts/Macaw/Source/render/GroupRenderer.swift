@@ -7,13 +7,10 @@ import UIKit
 class GroupRenderer: NodeRenderer {
 
     weak var group: Group?
+    var renderers: [NodeRenderer] = []
 
-    fileprivate var renderers: [NodeRenderer] = []
-    let renderingInterval: RenderingInterval?
-
-    init(group: Group, view: MView?, animationCache: AnimationCache?, interval: RenderingInterval? = .none) {
+    init(group: Group, view: MacawView?, animationCache: AnimationCache?) {
         self.group = group
-        self.renderingInterval = interval
         super.init(node: group, view: view, animationCache: animationCache)
         updateRenderers()
     }
@@ -45,13 +42,13 @@ class GroupRenderer: NodeRenderer {
         }
     }
 
-    override func doFindNodeAt(location: CGPoint, ctx: CGContext) -> Node? {
+    override func doFindNodeAt(path: NodePath, ctx: CGContext) -> NodePath? {
         for renderer in renderers.reversed() {
-            if let node = renderer.findNodeAt(location: location, ctx: ctx) {
-                return node
+            if let result = renderer.findNodeAt(parentNodePath: path, ctx: ctx) {
+                return result
             }
         }
-        return nil
+        return .none
     }
 
     override func dispose() {
@@ -65,19 +62,25 @@ class GroupRenderer: NodeRenderer {
         renderers.removeAll()
 
         if let updatedRenderers = group?.contents.compactMap ({ child -> NodeRenderer? in
-            guard let interval = renderingInterval else {
-                return RenderUtils.createNodeRenderer(child, view: view, animationCache: animationCache)
-            }
-
-            let index = AnimationUtils.absoluteIndex(child, useCache: true)
-            if index > interval.from && index < interval.to {
-                return RenderUtils.createNodeRenderer(child, view: view, animationCache: animationCache, interval: interval)
-            }
-
-            return .none
-
+            let childRenderer = RenderUtils.createNodeRenderer(child, view: view, animationCache: animationCache)
+            childRenderer.parentRenderer = self
+            return childRenderer
         }) {
             renderers = updatedRenderers
+        }
+
+        var parent: NodeRenderer = self
+        while let parentRenderer = parent.parentRenderer {
+            parent = parentRenderer
+        }
+        parent.calculateZPositionRecursively()
+    }
+
+    override func replaceNode(with replacementNode: Node) {
+        super.replaceNode(with: replacementNode)
+
+        if let node = replacementNode as? Group {
+            group = node
         }
     }
 }

@@ -2,20 +2,20 @@
   "commitish" : "2.1.10",
   "iOS" : [
     {
-      "name" : "scrypt",
-      "hash" : "109ba93d3356c7dae2c882661ddbcfde222155b632dfcd00152a4ca386e3375b"
+      "name" : "keccak",
+      "hash" : "4c6ac5025a7cc0a44651dbacd999d9e05854e19127f1cbd66d3b01351f91bd2f"
     },
     {
-      "name" : "keccak",
-      "hash" : "cc677bfe04195a7981b896b9b495af2944fa85f474e75a3e68ac276b260a51db"
+      "name" : "scrypt",
+      "hash" : "50eedb0763fe40a7cd541da8cc1603b81482dd11e476172598ca52b2178f4a2a"
     },
     {
       "name" : "secp256k1",
-      "hash" : "eaa7e46accad056cd54ddb93cf5669494312d5c5f82b80e5fbc8b9f67642deda"
+      "hash" : "2bf836fa0192c339c8fa3d005fecb49c695095c0483fc9b28982116ab08078a0"
     },
     {
       "name" : "web3swift",
-      "hash" : "b150707dee59916bbdac70d4450300c6e25b00877cc9e2ac9f93b87dcb5416db"
+      "hash" : "5cb24d957f543050598bf2ce8f63172322baddd0383dc6cb1cc08e7facb87b8a"
     }
   ]
 }

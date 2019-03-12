@@ -14,7 +14,7 @@ import AppKit
 
 open class ContentLayout {
 
-    public static let none = ContentLayout()
+    public static let none: ContentLayout = NoneLayout()
 
     public static func of(scaling: AspectRatio = .meet, xAlign: Align = .mid, yAlign: Align = .mid) -> ContentLayout {
         return ScalingContentLayout(scaling: scaling, xAlign: xAlign, yAlign: yAlign)
@@ -59,6 +59,10 @@ open class ContentLayout {
     open func layout(rect: Rect, into sizeToFitIn: Size) -> Transform {
         return Transform.identity
     }
+
+}
+
+class NoneLayout: ContentLayout {
 
 }
 

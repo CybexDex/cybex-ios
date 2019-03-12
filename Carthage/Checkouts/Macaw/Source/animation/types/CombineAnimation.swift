@@ -3,14 +3,18 @@ import Foundation
 internal class CombineAnimation: BasicAnimation {
 
     let animations: [BasicAnimation]
+    let toNodes: [Node]
+    let duration: Double
 
-    required init(animations: [BasicAnimation], delay: Double = 0.0, node: Node? = .none) {
+    required init(animations: [BasicAnimation], during: Double = 1.0, delay: Double = 0.0, node: Node? = .none, toNodes: [Node] = []) {
         self.animations = animations
+        self.duration = during
+        self.toNodes = toNodes
 
         super.init()
 
         self.type = .combine
-        self.nodeId = nodeId ?? animations.first?.nodeId
+        self.node = node ?? animations.first?.node
         self.delay = delay
     }
 
@@ -78,12 +82,12 @@ internal class CombineAnimation: BasicAnimation {
 }
 
 public extension Sequence where Iterator.Element: Animation {
-    public func combine(delay: Double = 0.0, node: Node? = .none) -> Animation {
+    public func combine(delay: Double = 0.0, node: Node? = .none, toNodes: [Node] = []) -> Animation {
 
         var toCombine = [BasicAnimation]()
         self.forEach { animation in
             toCombine.append(animation as! BasicAnimation)
         }
-        return CombineAnimation(animations: toCombine, delay: delay, node: node)
+        return CombineAnimation(animations: toCombine, delay: delay, node: node ?? toCombine.first?.node, toNodes: toNodes)
     }
 }

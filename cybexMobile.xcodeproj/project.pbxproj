@@ -536,6 +536,8 @@
 		73587EB52137C69B006CF8A6 /* ETOCrowdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */; };
 		73587EB62137C69B006CF8A6 /* ETOCrowdViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */; };
 		735A3D022160A73200FC8922 /* NBLCommonModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 735A3D012160A73000FC8922 /* NBLCommonModule.framework */; };
+		7364D3F422363E2000021978 /* BaseViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364D3F322363E2000021978 /* BaseViewController+Alert.swift */; };
+		7364D3F62236489200021978 /* CloudPasswordSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7364D3F52236489200021978 /* CloudPasswordSettingViewController.swift */; };
 		736761E521BE46750065FD35 /* RegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E421BE46750065FD35 /* RegisterService.swift */; };
 		736761E821BE4C2D0065FD35 /* IMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E721BE4C2D0065FD35 /* IMService.swift */; };
 		736761EA21BE4DEF0065FD35 /* MDPWebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */; };
@@ -1438,6 +1440,8 @@
 		73587EB22137C69B006CF8A6 /* ETOCrowdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ETOCrowdView.xib; sourceTree = "<group>"; };
 		73587EB32137C69B006CF8A6 /* ETOCrowdViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETOCrowdViewAdapter.swift; sourceTree = "<group>"; };
 		735A3D012160A73000FC8922 /* NBLCommonModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NBLCommonModule.framework; path = Carthage/Build/iOS/Static/NBLCommonModule.framework; sourceTree = "<group>"; };
+		7364D3F322363E2000021978 /* BaseViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseViewController+Alert.swift"; sourceTree = "<group>"; };
+		7364D3F52236489200021978 /* CloudPasswordSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudPasswordSettingViewController.swift; sourceTree = "<group>"; };
 		736761E421BE46750065FD35 /* RegisterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterService.swift; sourceTree = "<group>"; };
 		736761E721BE4C2D0065FD35 /* IMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMService.swift; sourceTree = "<group>"; };
 		736761E921BE4DEF0065FD35 /* MDPWebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPWebSocketService.swift; sourceTree = "<group>"; };
@@ -2295,6 +2299,7 @@
 				2403A1EADE21140843C970C55601C02A /* BaseTableViewCell.swift */,
 				7307A930212518F300BD6444 /* BaseView.swift */,
 				A4CC22AA9CB81600F41DDDED43729F72 /* BaseViewController.swift */,
+				7364D3F322363E2000021978 /* BaseViewController+Alert.swift */,
 				01C2F31F4F1749972F35CE9EC2B2B39C /* BaseWebViewController.swift */,
 				DD606656A250A840B13C511345FAB615 /* EmptySegue.swift */,
 			);
@@ -3764,6 +3769,7 @@
 				AE429108D7D23DA4BF5306BC38743C95 /* EntryReducers.swift */,
 				5CC3BED1CD14240CD70C6D48FC9CD95B /* EntryViewController.swift */,
 				2B4B35090CD8E0EEF1082F81554FA897 /* NoticeBoardViewController.swift */,
+				7364D3F52236489200021978 /* CloudPasswordSettingViewController.swift */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -4965,6 +4971,7 @@
 				728C2808215A36F70097840A /* RecordChooseActions.swift in Sources */,
 				C37CA15215CBB1B064E0514AB9D0EFE5 /* AccountOpenedOrdersView.swift in Sources */,
 				225746DE210707DD0017FA1A /* PickerReducers.swift in Sources */,
+				7364D3F422363E2000021978 /* BaseViewController+Alert.swift in Sources */,
 				7260DDB721A2A25C00A5E3D6 /* ChatDirectionReducers.swift in Sources */,
 				7307A94521257BE900BD6444 /* AddressCellViewAdapter.swift in Sources */,
 				D3694E6115F5ED50F0FFE4108E64BAEE /* AccountPortfolioCell.swift in Sources */,
@@ -5418,6 +5425,7 @@
 				72D5828F219C188700BB9842 /* ChatUpInputViewAdapter.swift in Sources */,
 				72D9DD58210EB60F00963915 /* Periscope.swift in Sources */,
 				72968D212158CEAC00B0AA77 /* WithdrawAndDespoitRecordCoordinator.swift in Sources */,
+				7364D3F62236489200021978 /* CloudPasswordSettingViewController.swift in Sources */,
 				728C2826215B80480097840A /* AnnounceScrollViewAdapter.swift in Sources */,
 				7217B07F2122AAFD00608531 /* AddAddressReducers.swift in Sources */,
 				739EFB672181D10E00424061 /* View+RxGesture.swift in Sources */,

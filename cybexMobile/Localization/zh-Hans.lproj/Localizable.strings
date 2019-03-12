@@ -605,3 +605,7 @@
 "enotes_cloudpassword_set_hint" = "云密码能够让您没有随身携带eNotes卡时，也可以对账户进行操作。一旦设定不可更改、不可找回，请您务必牢记。我们强烈建议您使用长密码，确保资产安全。";
 "enotes_pin_validtor_title" = "验证eNotes卡密码";
 "enotes_not_match" = "请使用正确的eNotes卡";
+"enotes_login" = "eNotes登录";
+"confirm_hint_title" = "提示";
+"lock_time" = "%d分钟";
+"lock_time_title" = "解锁时间";

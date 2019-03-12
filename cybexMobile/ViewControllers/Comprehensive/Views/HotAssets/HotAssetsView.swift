@@ -26,6 +26,7 @@ class HotAssetsView: CybexBaseView {
                 }
                 for index in 0..<data.count {
                     self.itemViews[index].adapterModelToHotAssetView(data[index])
+                    self.itemViews[index].isHidden = index >= data.count
                 }
             }
         }
@@ -55,11 +56,16 @@ class HotAssetsView: CybexBaseView {
 extension HotAssetsView: GridContentViewDataSource {
     func itemsForView(_ view: GridContentView) -> [UIView] {
         if let data = self.data as? [Ticker] {
-            let views = Array(0...data.count - 1).map({ (index) -> HotAssetView in
+            let views = Array(0...2).map({ (index) -> HotAssetView in
                 let item = HotAssetView(frame: .zero)
                 item.theme1BgColor = .dark
                 item.theme2BgColor = .paleGrey
-                item.adapterModelToHotAssetView(data[index])
+                if index < data.count {
+                    item.adapterModelToHotAssetView(data[index])
+                    item.isHidden = false
+                } else {
+                    item.isHidden = true
+                }
                 return item
             })
             itemViews = views

@@ -3,11 +3,11 @@
   "iOS" : [
     {
       "name" : "MarqueeLabel",
-      "hash" : "5ba2bed723c4c645b865187b760987844e171cd6486618ef684be02bc16a48bd"
+      "hash" : "390e6d0c75473ac8dbf99ef3578f83bca3f5b0fd08455c501012fad38a42d7f7"
     },
     {
       "name" : "MarqueeLabelSwift",
-      "hash" : "2bc545c1ffabacc135e225871e433651538f1d40966cc7f9813203e466fdb0cb"
+      "hash" : "4ec5a83b91fb1281020a1d1be7956b94763fd0ff573e39bade3a8a164929d565"
     }
   ]
 }

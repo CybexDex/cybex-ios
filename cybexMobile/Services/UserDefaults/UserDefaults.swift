@@ -10,27 +10,28 @@ import Foundation
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
-    static let theme = DefaultsKey<Int>("theme")
-    static let language = DefaultsKey<String>("language")
-    static let refreshTime = DefaultsKey<Double>("refreshTime")
-    static let frequencyType = DefaultsKey<Int>("frequency_type")
-    static let loginType = DefaultsKey<Int>("logintype")
-    static let unlockType = DefaultsKey<Int>("unlockType")
-    static let pinCode = DefaultsKey<String>("pincode")
+    static let theme = DefaultsKey<Int>("theme", defaultValue: 0)
+    static let language = DefaultsKey<String>("language", defaultValue: "")
+    static let refreshTime = DefaultsKey<Double>("refreshTime", defaultValue: 0)
+    static let frequencyType = DefaultsKey<Int>("frequency_type", defaultValue: 0)
+    static let loginType = DefaultsKey<Int>("logintype", defaultValue: 0)
+    static let locktime = DefaultsKey<Int>("locktime", defaultValue: UserManager.LockTime.low.rawValue)
+    static let unlockType = DefaultsKey<Int>("unlockType", defaultValue: 0)
+    static let pinCodes = DefaultsKey<[String: Any]>("pincodes", defaultValue: [:])
 
-    static let username = DefaultsKey<String>("com.nbltrust.cybex.username")
-    static let keys = DefaultsKey<String>("com.nbltrust.cybex.keys")
-    static let account = DefaultsKey<String>("com.nbltrust.cybex.account")
+    static let username = DefaultsKey<String>("com.nbltrust.cybex.username", defaultValue: "")
+    static let keys = DefaultsKey<String>("com.nbltrust.cybex.keys", defaultValue: "")
+    static let account = DefaultsKey<String>("com.nbltrust.cybex.account", defaultValue: "")
 
-    static let transferAddressList = DefaultsKey<[TransferAddress]>("TransferAddressList")
-    static let withdrawAddressList = DefaultsKey<[WithdrawAddress]>("WithdrawAddressList")
+    static let transferAddressList = DefaultsKey<[TransferAddress]>("TransferAddressList", defaultValue: [])
+    static let withdrawAddressList = DefaultsKey<[WithdrawAddress]>("WithdrawAddressList", defaultValue: [])
 
-    static let environment = DefaultsKey<String>("environment")
-    static let showContestTip = DefaultsKey<Bool>("showContestTip")
+    static let environment = DefaultsKey<String>("environment", defaultValue: "")
+    static let showContestTip = DefaultsKey<Bool>("showContestTip", defaultValue: false)
 
-    static let isRealName = DefaultsKey<Bool>("isRealName")
+    static let isRealName = DefaultsKey<Bool>("isRealName", defaultValue: false)
     
-    static let hasCode = DefaultsKey<Bool>("hasCode")
+    static let hasCode = DefaultsKey<Bool>("hasCode", defaultValue: false)
 }
 
 extension UserDefaults {

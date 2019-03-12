@@ -1,13 +1,13 @@
 {
-  "commitish" : "v6.1.1",
+  "commitish" : "v6.2.0",
   "iOS" : [
     {
       "name" : "IQKeyboardManager",
-      "hash" : "99b08e8a7537044fd6ff13a07241b49d328d747534c74493de748c21d1508879"
+      "hash" : "84bd7eb9e34d4ac67b81ac324b4fe5ec08c89d301678a703396aba1a4078af5d"
     },
     {
       "name" : "IQKeyboardManagerSwift",
-      "hash" : "98f4126e7c27f6cf3cf4a1e4a99fc78f5a761d095038243af4705e645edb7268"
+      "hash" : "c04465a3c589ad14188f83f5dda00276324489d6d081811ba01017cb02e2f392"
     }
   ]
 }

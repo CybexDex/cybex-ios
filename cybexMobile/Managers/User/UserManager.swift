@@ -96,9 +96,7 @@ extension UserManager {
         Defaults.remove(.keys)
         self.keys = nil
         self.loginType = .none
-        if #available(iOS 11.0, *) {
-            NFCManager.shared.pinCode = ""
-        } 
+        self.unlockType = .none
 
         Defaults.remove(.username)
         Defaults.remove(.account)
@@ -192,6 +190,27 @@ extension UserManager {
 
 }
 
+//eNotes
+extension UserManager {
+    func enotesLogin(_ username: String) -> Promise<Void> {
+        return fetchAccountInfo(username).map({ (fullaccount, account) -> Void in
+            self.saveUserInfo(username)
+            self.loginType = .nfc
+            self.unlockType = .nfc
+            self.handlerFullAcount(fullaccount)
+        })
+
+    }
+
+    func checkNeedCloudPassword() -> Bool {
+        if self.loginType == .nfc, let account = self.fullAccount.value, !account.existMoreActiveKey() {
+            return true
+        }
+
+        return false
+    }
+}
+
 class UserManager {
     enum LoginType: Int { // 初始账号登录类型
         case none
@@ -203,6 +222,30 @@ class UserManager {
         case none
         case cloudPassword
         case nfc
+
+        func description() -> String {
+            switch self {
+            case .cloudPassword: return R.string.localizable.enotes_unlock_type_1.key
+            case .nfc: return R.string.localizable.enotes_unlock_type_0.key
+            case .none: return ""
+            }
+        }
+    }
+
+    enum LockTime: Int, CaseIterable {
+        case none
+        case low = 300
+        case middle = 1200
+        case high = 3600
+
+        func description() -> String {
+            switch self {
+            case .low: return R.string.localizable.lock_time.key.localizedFormat(5)
+            case .middle: return R.string.localizable.lock_time.key.localizedFormat(20)
+            case .high: return R.string.localizable.lock_time.key.localizedFormat(60)
+            case .none: return ""
+            }
+        }
     }
 
     static let shared = UserManager()
@@ -228,6 +271,13 @@ class UserManager {
     var loginType: LoginType = .none {
         didSet {
             Defaults[.loginType] = loginType.rawValue
+        }
+    }
+
+    var lockTime: LockTime = .low {
+        didSet {
+            Defaults[.locktime] = lockTime.rawValue
+            timingLock()
         }
     }
 
@@ -273,7 +323,6 @@ class UserManager {
     
     var fullAccount: BehaviorRelay<FullAccount?> = BehaviorRelay(value: nil)
 
-
     private init() {
         appData.otherRequestRelyData.asObservable()
             .subscribe(onNext: { (_) in
@@ -315,8 +364,8 @@ class UserManager {
         fullAccount.accept(fullaccount)
     }
 
-    private func timingLock() {
-        self.timer = Repeater.once(after: .seconds(300), {[weak self] (_) in
+    func timingLock() {
+        self.timer = Repeater.once(after: .seconds(self.lockTime.rawValue.double), {[weak self] (_) in
             guard let self = self else { return }
             self.keys = nil
         })

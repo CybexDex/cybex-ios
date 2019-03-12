@@ -13,7 +13,7 @@ class ImageRenderer: NodeRenderer {
 
     var renderedPaths: [CGPath] = [CGPath]()
 
-    init(image: Image, view: MView?, animationCache: AnimationCache?) {
+    init(image: Image, view: MacawView?, animationCache: AnimationCache?) {
         self.image = image
         super.init(node: image, view: view, animationCache: animationCache)
     }
@@ -63,24 +63,26 @@ class ImageRenderer: NodeRenderer {
         }
     }
 
-    override func doFindNodeAt(location: CGPoint, ctx: CGContext) -> Node? {
+    override func doFindNodeAt(path: NodePath, ctx: CGContext) -> NodePath? {
         guard let image = image else {
             return .none
         }
 
-        #if os(iOS)
-        let osImage = MImage(named: image.src)
-        #elseif os(OSX)
-        let osImage = MImage(named: image.src)
-        #endif
-
-        if let mImage = osImage,
+        if let mImage = MImage(named: image.src),
             let rect = BoundsUtils.getRect(of: image, mImage: mImage) {
 
-            if rect.contains(location) {
-                return node()
+            if rect.contains(path.location) {
+                return path
             }
         }
         return .none
+    }
+
+    override func replaceNode(with replacementNode: Node) {
+        super.replaceNode(with: replacementNode)
+
+        if let node = replacementNode as? Image {
+            image = node
+        }
     }
 }

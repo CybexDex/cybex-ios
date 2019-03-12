@@ -22,17 +22,12 @@ extension AppDelegate {
             UserManager.shared.loginType = UserManager.LoginType(rawValue: loginType)!
         }
 
-        if #available(iOS 11.0, *) {
-            let pinCode = Defaults[.pinCode]
-            if !pinCode.isEmpty {
-                NFCManager.shared.pinCode = pinCode
-            }
-        }
-
         let unlockType = Defaults[.unlockType]
         if unlockType > 0 {
             UserManager.shared.unlockType = UserManager.UnlockType(rawValue: unlockType)!
         }
+
+        UserManager.shared.lockTime = UserManager.LockTime(rawValue: Defaults[.locktime])!
 
         if Defaults.hasKey(.frequencyType) {
             UserManager.shared.frequencyType = FrequencyType(rawValue: Defaults[.frequencyType])!

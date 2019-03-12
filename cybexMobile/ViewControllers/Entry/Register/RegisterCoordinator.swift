@@ -61,6 +61,9 @@ extension RegisterCoordinator: RegisterCoordinatorProtocol {
         let vc = R.storyboard.main.noticeBoardViewController()!
         vc.password = password
         vc.coordinator = self
+        vc.didConfirm.delegate(on: self) { (self, _) in
+            self.dismiss()
+        }
         self.rootVC.topViewController?.customPresentViewController(presenter, viewController: vc, animated: true, completion: nil)
     }
 

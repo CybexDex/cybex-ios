@@ -200,7 +200,6 @@ extension DepolyTicketViewController {
         let customType = PresentationType.custom(width: width, height: height, center: center)
 
         let presenter = Presentr(presentationType: customType)
-        presenter.dismissOnTap = true
         presenter.keyboardTranslationType = .moveUp
 
         var items = [String]()

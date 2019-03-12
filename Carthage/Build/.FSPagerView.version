@@ -1,9 +1,9 @@
 {
-  "commitish" : "0.8.1",
+  "commitish" : "0.8.2",
   "iOS" : [
     {
       "name" : "FSPagerView",
-      "hash" : "fd00877dcdcda8e22e4025d2bdbc332f0b7f10fad6c2ad6cd655ab9c859b8ca9"
+      "hash" : "cc4f3ab0a12431628c3115c3aa3a1ee2b18455f520649b255b1d883525ee62ca"
     }
   ]
 }

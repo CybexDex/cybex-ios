@@ -1,9 +1,9 @@
 {
-  "commitish" : "3.0.0-beta.13",
+  "commitish" : "3.0.0-beta.14",
   "iOS" : [
     {
       "name" : "PINRemoteImage",
-      "hash" : "1d5a0251e4e82c24b0782ed1f0439375ff89b37b8affc87387f369cf2d8610e2"
+      "hash" : "4e55b704b3af9c9d8702790afcb3d1df614400263705c2e581aaab87306c148c"
     }
   ]
 }

@@ -21,12 +21,7 @@ class NFCManager: NSObject {
     var needReadRepeat = true
     var didReceivedMessage = Delegate<Card, Void>()
     var pinCodeErrorMessage = Delegate<Card, Void>()
-
-    var pinCode: String = "" {
-        didSet {
-            Defaults[.pinCode] = pinCode
-        }
-    }
+    var pinCodeNotExist = Delegate<Card, Void>()
 
     private override init() {
         super.init()
@@ -36,10 +31,6 @@ class NFCManager: NSObject {
     func initSession() {
         session = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
         session?.alertMessage = "Hold your iPhone near the item to learn more about it."
-    }
-
-    func needPinCode() -> Bool {
-        return pinCode.isEmpty
     }
 
     func start() {
@@ -68,16 +59,22 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
 
         var privateKey: String = card.oneTimePrivateKey
         var signature: String = card.oneTimeSignature
+        let pkKey = Card.compressedPublicKey(card.blockchainPublicKey)
 
         let status = card.transactionPinStatus
         if status {
-            let data = card.validatorPin(self.pinCode)
-            if data.success {
-                privateKey = data.privateKey
-                signature = data.signature
-            }
-            else {
-                pinCodeErrorMessage.call(card)
+            if let pincode = Defaults[.pinCodes][pkKey] as? String {
+                let data = card.validatorPin(pincode)
+                if data.success {
+                    privateKey = data.privateKey
+                    signature = data.signature
+                } else {
+                    pinCodeErrorMessage.call(card)
+                    self.session?.invalidate()
+                    return
+                }
+            } else {
+                pinCodeNotExist.call(card)
                 self.session?.invalidate()
                 return
             }
@@ -96,7 +93,6 @@ extension NFCManager: NFCNDEFReaderSessionDelegate {
 
         needReadRepeat = false
 //        let onePkKey = Card.compressedPublicKey(card.oneTimePublicKey)
-//        let pkKey = Card.compressedPublicKey(card.blockchainPublicKey)
 //        let pvKey = Card.compressedPrivateKey(privateKey)
         self.didReceivedMessage.call(card)
         self.session?.invalidate()

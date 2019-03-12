@@ -21,11 +21,23 @@ class EntryViewController: BaseViewController {
 
     @IBOutlet weak var createTitle: UILabel!
     @IBOutlet weak var loginButton: Button!
-
+    @IBOutlet weak var enotesLogin: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
+
+        if #available(iOS 11.0, *) {
+            if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
+                self.enotesLogin.isHidden = false
+            } else {
+                self.enotesLogin.isHidden = true
+            }
+        } else {
+            self.enotesLogin.isHidden = true
+        }
+        
         setupEvent()
     }
 
@@ -68,6 +80,12 @@ extension EntryViewController {
             guard let self = self else { return }
 
             self.coordinator?.switchToRegister()
+        }).disposed(by: disposeBag)
+
+        self.enotesLogin.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
+            guard let self = self else { return }
+
+            self.coordinator?.switchToEnotesLogin()
         }).disposed(by: disposeBag)
 
         self.loginButton.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in

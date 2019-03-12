@@ -178,9 +178,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 extension HomeViewController {
     @objc func cellClicked(_ data: [String: Any]) {
 //        if #available(iOS 11.0, *) {
-//            if NFCManager.shared.needPinCode() {
-//                NFCManager.shared.pinCode = "123456"
-//            }
+////            Defaults[.pinCodes]["xxx"] = ""
 //            NFCManager.shared.start()
 //            return
 //        }

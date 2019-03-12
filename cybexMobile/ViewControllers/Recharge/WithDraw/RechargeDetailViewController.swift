@@ -171,6 +171,8 @@ class RechargeDetailViewController: BaseViewController {
                                 self.isTrueAddress = true
                                 self.contentView.addressView.addressState = .success
                                 self.contentView.errorView.isHidden = true
+                                self.coordinator?.getFee(trade.id, address: address, isEOS: self.isEOS)
+
                                 if let amount = self.contentView.amountView.content.text?.decimal(), amount != 0 {
                                     self.checkAmountIsAvailable(amount)
                                 }

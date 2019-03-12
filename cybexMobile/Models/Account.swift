@@ -33,6 +33,11 @@ class FullAccount: HandyJSON {
         mapper <<< limitOrders <-- "limit_orders"
     }
 
+    func existMoreActiveKey() -> Bool {
+        guard let account = account else { return false }
+        return account.activePubKeys.count > 1
+    }
+
     func calculateLimitOrderValue() {
         var decimallimitOrderValue: Decimal = 0
         var decimalBuylimitOrderValue: Decimal = 0
