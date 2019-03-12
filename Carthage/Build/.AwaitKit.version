@@ -1,9 +1,9 @@
 {
-  "commitish" : "5.0.1",
+  "commitish" : "5.1.0",
   "iOS" : [
     {
       "name" : "AwaitKit",
-      "hash" : "1c7d7d846065640400f25ba97ddb54416208c0d17b4f92b8b50594dc085676f8"
+      "hash" : "83f47c646072a780ed4ea58dc978afdc5aac6b6c36bd47935abc208616a623b2"
     }
   ]
 }

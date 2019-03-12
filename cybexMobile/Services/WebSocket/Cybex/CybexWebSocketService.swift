@@ -24,8 +24,8 @@ enum NodeURLString: String {
 
     case test = "wss://hangzhou.51nebula.com/"
     static var all: [NodeURLString] {
-        //    return [.test]
-        return [.shanghai, .beijing, .hongkong, .singapore, .tokyo, .korea]
+//            return [.test]
+        return [.hongkong, .singapore, .tokyo, .korea]
     }
 }
 

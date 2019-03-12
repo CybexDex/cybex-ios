@@ -10,8 +10,10 @@ import UIKit
 import ReSwift
 
 protocol EntryCoordinatorProtocol {
-  func switchToRegister()
-  func dismiss()
+    func switchToRegister()
+    func switchToEnotesLogin()
+
+    func dismiss()
 }
 
 protocol EntryStateManagerProtocol {
@@ -35,22 +37,26 @@ class EntryCoordinator: NavCoordinator {
 }
 
 extension EntryCoordinator: EntryCoordinatorProtocol {
-  func switchToRegister() {
-    let vc = R.storyboard.main.registerViewController()!
-    let coordinator = RegisterCoordinator(rootVC: self.rootVC)
-    vc.coordinator = coordinator
+    func switchToEnotesLogin() {
 
-    UIView.beginAnimations("register", context: nil)
-    UIView.setAnimationCurve(.easeInOut)
-    UIView.setAnimationDuration(0.7)
-    UIView.setAnimationTransition(.flipFromLeft, for: self.rootVC.view, cache: false)
-    self.rootVC.pushViewController(vc, animated: false)
-    UIView.commitAnimations()
-  }
+    }
+    
+    func switchToRegister() {
+        let vc = R.storyboard.main.registerViewController()!
+        let coordinator = RegisterCoordinator(rootVC: self.rootVC)
+        vc.coordinator = coordinator
 
-  func dismiss() {
-    appCoodinator.rootVC.dismiss(animated: true, completion: nil)
-  }
+        UIView.beginAnimations("register", context: nil)
+        UIView.setAnimationCurve(.easeInOut)
+        UIView.setAnimationDuration(0.7)
+        UIView.setAnimationTransition(.flipFromLeft, for: self.rootVC.view, cache: false)
+        self.rootVC.pushViewController(vc, animated: false)
+        UIView.commitAnimations()
+    }
+
+    func dismiss() {
+        appCoodinator.rootVC.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension EntryCoordinator: EntryStateManagerProtocol {

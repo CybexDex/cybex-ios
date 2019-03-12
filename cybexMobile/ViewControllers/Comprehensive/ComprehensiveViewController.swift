@@ -27,7 +27,6 @@ class ComprehensiveViewController: BaseViewController {
         setupData()
         setupUI()
         setupEvent()
-        handlerUpdateVersion(nil)
     }
 
     func setupNavi() {
@@ -89,7 +88,7 @@ class ComprehensiveViewController: BaseViewController {
         }).disposed(by: disposeBag)
 
         appData.tickerData.asObservable().distinctUntilChanged().filter { (tickers) -> Bool in
-            return tickers.count == MarketConfiguration.shared.marketPairs.value.count
+            return tickers.count >= MarketConfiguration.shared.marketPairs.value.count
             }.subscribe(onNext: { [weak self](tickers) in
                 guard let self = self else { return }
                 if let hotPairs = self.coordinator?.state.hotPairs.value, self.isVisible {
@@ -164,7 +163,7 @@ extension ComprehensiveViewController {
 
         let midlleItem = middleItems[index]
 
-        if midlleItem.needlogin, !UserManager.shared.isLoginIn {
+        if midlleItem.needlogin, !UserManager.shared.logined {
             appCoodinator.showLogin()
             return
         }
@@ -199,7 +198,7 @@ extension ComprehensiveViewController {
 
     func openUrl(_ url: String, needLogin: Bool = true) {
         if url.contains("cybexapp://") {
-            if needLogin, !UserManager.shared.isLoginIn {
+            if needLogin, !UserManager.shared.logined {
                 appCoodinator.showLogin()
                 return
             }

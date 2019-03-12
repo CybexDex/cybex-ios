@@ -61,7 +61,7 @@ class GatewayService {
         _ = apollo.watch(query: VerifyAddressQuery(asset: assetName,
                                                    address: address),
                          cachePolicy: .fetchIgnoringCacheData,
-                         queue: Await.Queue.await) { (result, error) in
+                         queue: DispatchQueue.global()) { (result, error) in
             if error != nil {
                 seal.fulfill(nil)
                 return
@@ -83,7 +83,7 @@ class GatewayService {
         _ = apollo.watch(
             query: GetWithdrawInfoQuery(type: assetName),
             cachePolicy: .fetchIgnoringCacheData,
-            queue: Await.Queue.await) { (result, error) in
+            queue: DispatchQueue.global()) { (result, error) in
 
                 if error != nil {
                     seal.fulfill(nil)

@@ -1,9 +1,9 @@
 {
-  "commitish" : "1.3.2",
+  "commitish" : "1.9",
   "iOS" : [
     {
       "name" : "Presentr",
-      "hash" : "526474046c620c834f327d4c9c4c8ab743c7eae5bf0fbdaabb89fac827f552d5"
+      "hash" : "60d59c610603519e8bb00b76c67cce9e9b3051bd53e409107a522db394232a72"
     }
   ]
 }

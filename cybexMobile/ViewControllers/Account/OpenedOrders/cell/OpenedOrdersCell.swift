@@ -17,8 +17,7 @@ class OpenedOrdersCell: BaseTableViewCell {
         didSet {
             if cellType != 1 {
                 orderView.basePriceView.isHidden = false
-                orderView.cancleL.isHidden       = false
-                orderView.cancleImg.isHidden     = false
+                orderView.cancelButton.isHidden       = false
             }
         }
     }

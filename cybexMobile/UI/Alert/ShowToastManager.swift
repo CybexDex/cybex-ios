@@ -239,10 +239,10 @@ class ShowToastManager {
         }
     }
 
-    func setUp(title: String, contentView: (UIView&Views), animationType: ShowAnimationType, middleType: CybexTextView.TextViewType = .normal) {
+    func setUp(title: String, contentView: (UIView&Views), ensureButtonLocali: String = R.string.localizable.alert_ensure.key, animationType: ShowAnimationType, middleType: CybexTextView.TextViewType = .normal) {
         self.animationShow  = animationType
         self.showType       = ShowManagerType.alertImage
-        self.setupText(contentView, title: title, cybexTextViewType: middleType)
+        self.setupText(contentView, ensureButtonLocali: ensureButtonLocali, title: title, cybexTextViewType: middleType)
     }
 
     func setUp(titleImage: String, contentView: (UIView&Views), animationType: ShowAnimationType) {
@@ -273,12 +273,13 @@ class ShowToastManager {
         showView     = sheetView
     }
 
-    fileprivate func setupText(_ sender: (UIView&Views), title: String, cybexTextViewType: CybexTextView.TextViewType) {
+    fileprivate func setupText(_ sender: (UIView&Views), ensureButtonLocali: String = R.string.localizable.alert_ensure.key, title: String, cybexTextViewType: CybexTextView.TextViewType) {
         let textView = CybexTextView(frame: .zero)
         textView.delegate = self
         textView.middleView = sender
         textView.title.text = title
         textView.viewType = cybexTextViewType
+        textView.ensure.locali = ensureButtonLocali
         if cybexTextViewType == .time, let textMiddleView = textView.middleView as? CybexPasswordView {
             textMiddleView.textField.isSecureTextEntry = false
             textMiddleView.textField.placeholder = ""

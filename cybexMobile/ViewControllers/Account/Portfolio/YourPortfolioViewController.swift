@@ -83,15 +83,29 @@ class YourPortfolioViewController: BaseViewController {
         tableView.register(UINib.init(nibName: cell, bundle: nil), forCellReuseIdentifier: cell)
     }
 
+    func getMyPortfolioDatas() -> [MyPortfolioData] {
+        var datas = [MyPortfolioData]()
+        if let fullaccount = UserManager.shared.fullAccount.value {
+            for balance in fullaccount.balances {
+                if let foloiData = MyPortfolioData.init(balance: balance) {
+                    if (foloiData.realAmount == "" || foloiData.realAmount.decimal() == 0) && foloiData.limitAmount.contains("--") {
+
+                    } else {
+                        datas.append(foloiData)
+                    }
+                }
+            }
+        }
+        return datas
+    }
+
     override func configureObserveState() {
 
-        UserManager.shared.balances.asObservable().skip(1).subscribe(onNext: {[weak self] (balances) in
+        UserManager.shared.fullAccount.asObservable().skip(1).subscribe(onNext: {[weak self] (fullaccount) in
             guard let self = self else { return }
-            if let _ = UserManager.shared.balances.value {
-                self.data = UserManager.shared.getMyPortfolioDatas().filter({ (folioData) -> Bool in
-                    return folioData.realAmount != "0" && folioData.limitAmount != "0"
-                })
-            }
+            self.data = self.getMyPortfolioDatas().filter({ (folioData) -> Bool in
+                return folioData.realAmount != "0" && folioData.limitAmount != "0"
+            })
 
             self.tableView.reloadData()
             }, onError: nil, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -101,11 +115,9 @@ class YourPortfolioViewController: BaseViewController {
                 guard let self = self else { return }
 
                 DispatchQueue.main.async {
-                    if let _ = UserManager.shared.balances.value {
-                        self.data = UserManager.shared.getMyPortfolioDatas().filter({ (folioData) -> Bool in
-                            return folioData.realAmount != "0" && folioData.limitAmount != "0"
-                        })
-                    }
+                    self.data = self.getMyPortfolioDatas().filter({ (folioData) -> Bool in
+                        return folioData.realAmount != "0" && folioData.limitAmount != "0"
+                    })
 
                     if self.data.count == 0 {
 

@@ -14,6 +14,10 @@ extension AppDelegate {
     func requestSetting() {
         monitorNetworkOfSetting()
 
+        AppConfiguration.shared.enableSetting.asObservable().skip(1).subscribe(onNext: { (appSetting) in
+            AssetConfiguration.shared.fetchWhiteListAssets()
+        }).disposed(by: disposeBag)
+
         AssetConfiguration.shared.whiteListOfIds.asObservable().skip(1).subscribe(onNext: { (_) in
             MarketConfiguration.shared.fetchMarketPairList()
         }).disposed(by: disposeBag)
@@ -71,11 +75,13 @@ extension AppDelegate {
     }
 
     func checkSetting() {
+        if AppConfiguration.shared.enableSetting.value != nil,
+            AssetConfiguration.shared.whiteListOfIds.value.isEmpty {
+            AssetConfiguration.shared.fetchWhiteListAssets()
+        }
+
         if AppConfiguration.shared.enableSetting.value == nil {
             AppConfiguration.shared.fetchAppEnableSettingRequest()
-        }
-        if AssetConfiguration.shared.whiteListOfIds.value.isEmpty {
-            AssetConfiguration.shared.fetchWhiteListAssets()
         }
 
         if MarketConfiguration.shared.importMarketLists.value.isEmpty {

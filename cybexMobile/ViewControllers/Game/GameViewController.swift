@@ -108,7 +108,7 @@ class GameViewController: BaseViewController {
             case .refresh(let type):
                 self.coordinator?.switchPageState(.loading(reason: type.mapReason()))
                 
-            case .loadMore(let page):
+            case .loadMore(_):
                 self.coordinator?.switchPageState(.loading(reason: PageLoadReason.manualLoadMore))
                 
             case .noMore:
@@ -227,14 +227,9 @@ extension GameViewController {
                 let accountId = param["accountId"],
                 let assetId = param["assetId"],
                 let assetAmount = param["assetAmount"]{
-                async {
-                    let data = try? await(self.transfer(accountId, assetId, assetAmount))
-                    main {
-                        if case let data? = data {
-                            callback?(data)
-                        }
-                    }
-                }
+                self.transfer(accountId, assetId, assetAmount).done({ (data) in
+                    callback?(data)
+                }).cauterize()
             }
             else{
                 callback?("2")
@@ -255,7 +250,7 @@ extension GameViewController {
     }
     
     func searchBalanceWithAsset(_ asset: String) -> String {
-        guard let balances = UserManager.shared.balances.value else {
+        guard let balances = UserManager.shared.fullAccount.value?.balances else {
             return "0"
         }
         for balance in balances {
@@ -284,35 +279,28 @@ extension GameViewController {
     
     
     func getRequireFee(_ account: String, _ asset: String, _ amount: String , _ seal: Resolver<String>) {
-        let requeset = GetFullAccountsRequest(name: account) { (response) in
-            if let data = response as? FullAccount,
-                let accountInfo = data.account ,
-                let userInfo = UserManager.shared.account.value {
-                let feeJir = BitShareCoordinator.getTransterOperation(userInfo.id.getSuffixID,
-                                                                      to_user_id: accountInfo.id.getSuffixID,
-                                                                      asset_id: asset.getSuffixID,
-                                                                      amount: 0,
-                                                                      fee_id: 0,
-                                                                      fee_amount: 0,
-                                                                      memo: "",
-                                                                      from_memo_key: "",
-                                                                      to_memo_key: "")
-                
-                CybexChainHelper.calculateFee(feeJir, operationID: .transfer, focusAssetId: asset) { (success, feeAmount, feeId) in
-                    let realAmount = AssetHelper.setRealAmount(asset, amount: amount).stringValue
-                    let feeRealAmount = AssetHelper.setRealAmount(feeId, amount: feeAmount.stringValue)
-                    self.collectiton(account, feeId, asset, feeRealAmount.stringValue, realAmount,seal: seal)
-                }
-            }
+        let feeJir = BitShareCoordinator.getTransterOperation(0,
+                                                              to_user_id: 0,
+                                                              asset_id: 0,
+                                                              amount: 0,
+                                                              fee_id: 0,
+                                                              fee_amount: 0,
+                                                              memo: "",
+                                                              from_memo_key: "",
+                                                              to_memo_key: "")
+
+        CybexChainHelper.calculateFee(feeJir, operationID: .transfer, focusAssetId: asset) { (success, feeAmount, feeId) in
+            let realAmount = AssetHelper.setRealAmount(asset, amount: amount).stringValue
+            let feeRealAmount = AssetHelper.setRealAmount(feeId, amount: feeAmount.stringValue)
+            self.collectiton(account, feeId, asset, feeRealAmount.stringValue, realAmount,seal: seal)
         }
-        CybexWebSocketService.shared.send(request: requeset)
     }
     
     func collectiton(_ account: String ,_ feeAsset: String, _ asset: String, _ fee: String, _ amount: String, seal: Resolver<String>) {
         let assetId = asset
         let feeAssetId = feeAsset
         CybexChainHelper.blockchainParams(callback: { (blockInfo) in
-            guard let fromAccount = UserManager.shared.account.value else {
+            guard let fromAccount = UserManager.shared.getCachedAccount() else {
                 seal.fulfill("2")
                 return
             }

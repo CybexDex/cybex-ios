@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 import ReSwift
 import SwiftTheme
-import AwaitKit
 import Macaw
 import Repeat
 import PromiseKit
@@ -339,33 +338,24 @@ extension RegisterViewController {
                 let captcha = self.codeTextField.text ?? ""
                 let username = self.accountTextField.text ?? ""
                 let password = self.passwordTextField.text ?? ""
-                async {
-                    do {
-                        let success = try await(UserManager.shared.register(self.pinID, captcha: captcha, username: username, password: password))
 
-                        DispatchQueue.main.async {
-                            self.endLoading()
+                UserManager.shared.register(self.pinID, captcha: captcha, username: username, password: password).done({ () in
+                    self.endLoading()
 
-                            if success.0 {
-                                self.coordinator?.confirmRegister(self.passwordTextField.text!)
-                            } else {
-                                self.updateSvgView()
-
-                                var message = R.string.localizable.registerFail.key.localized()
-                                if success.1 == 403 {
-                                    message = R.string.localizable.registerFail403.key.localized()
-                                } else if success.1 == 429 {
-                                    message = R.string.localizable.registerFail429.key.localized()
-                                }
-                                self.showAlert(message, buttonTitle: R.string.localizable.ok.key.localized())
-                            }
-                            self.registerButton.canRepeat = true
-                        }
-                    } catch _ {
-
+                    self.coordinator?.confirmRegister(self.passwordTextField.text!)
+                }).catch({ (error) in
+                    self.endLoading()
+                    self.updateSvgView()
+                    if case CybexError.tipError(.registerFail) = error {
+                        self.showAlert(error.localizedDescription, buttonTitle: R.string.localizable.ok.key.localized())
                     }
+                    else {
+                        self.showAlert(R.string.localizable.registerFail.key.localized(), buttonTitle: R.string.localizable.ok.key.localized())
+                    }
+                    self.showAlert(error.localizedDescription, buttonTitle: R.string.localizable.ok.key.localized())
+                    self.registerButton.canRepeat = true
+                })
 
-                }
             }).disposed(by: disposeBag)
     }
 }

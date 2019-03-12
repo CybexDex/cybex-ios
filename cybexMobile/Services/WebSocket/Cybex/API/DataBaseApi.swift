@@ -74,8 +74,6 @@ struct GetAccountByNameRequest: JSONRPCKit.Request, JSONRPCResponse {
     }
 }
 
-typealias FullAccount = (account: Account?, balances: [Balance]?, limitOrder: [LimitOrder]?)
-
 struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
     var name: String
     var response: RPCSResponse
@@ -91,31 +89,18 @@ struct GetFullAccountsRequest: JSONRPCKit.Request, JSONRPCResponse {
     func transferResponse(from resultObject: Any) throws -> Any {
         let result = JSON(resultObject).arrayValue
 
-        let resultValue: FullAccount = (nil, nil, nil)
+        let resultValue: FullAccount? = nil
+
         if result.count == 0 {
             return resultValue
         }
 
-        guard let full = result.first?.arrayValue[1],
-            let accountDic = full["account"].dictionaryObject
-            else {
-                return resultValue
+        guard let full = result.first?.arrayValue[1] else {
+            return resultValue
         }
 
-        let account = Account.deserialize(from: accountDic)
 
-        let balancesArr = full["balances"].arrayValue
-        let limitOrderArr = full["limit_orders"].arrayValue
-
-        let balances = balancesArr.map { (obj) -> Balance in
-            return Balance.deserialize(from: obj.dictionaryObject!) ?? Balance()
-        }
-
-        let limitOrders = limitOrderArr.map { (obj) -> LimitOrder in
-            return LimitOrder.deserialize(from: obj.dictionaryObject!) ?? LimitOrder()
-        }
-
-        return (account, balances, limitOrders)
+        return FullAccount.deserialize(from: full.dictionaryObject)
     }
 }
 

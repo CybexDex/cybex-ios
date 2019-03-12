@@ -149,7 +149,7 @@ extension ETODetailCoordinator: ETODetailStateManagerProtocol {
         guard  let model = self.state.data.value?.projectModel, let projectState = model.status, let state = self.state.userState.value else { return }
         var etoState: ETOStateOption = .unset
         etoState.remove(.unset)
-        if !UserManager.shared.isLoginIn {
+        if !UserManager.shared.logined {
             etoState.insert(.notLogin)
         } else {
             etoState.insert(.login)

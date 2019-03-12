@@ -13,7 +13,10 @@ func gOpenedOrdersReducer(action: Action, state: OpenedOrdersState?) -> OpenedOr
     let state = state ?? OpenedOrdersState()
     switch action {
     case let action as FetchOpenedOrderAction:
-        state.data.accept(action.data)
+        let data = action.all ? action.data.filter { (order) -> Bool in
+            return MarketConfiguration.shared.marketPairs.value.contains(order.getPair())
+            } : action.data
+        state.data.accept(data)
     default:
         break
     }

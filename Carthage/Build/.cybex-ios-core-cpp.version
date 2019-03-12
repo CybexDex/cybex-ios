@@ -8,11 +8,11 @@
   "tvOS" : [
 
   ],
-  "commitish" : "1.1.0",
+  "commitish" : "1.3.0",
   "iOS" : [
     {
       "name" : "cybex_ios_core_cpp",
-      "hash" : "dba1528c907197559226fdf61b5b10612809338794dc81cdfca5d5f8a317822d"
+      "hash" : "cac6cc20fa57e5b3b08693bea08491bedd21c872f9824a9cb1548e522acd1fa5"
     }
   ]
 }

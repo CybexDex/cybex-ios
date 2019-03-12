@@ -21,6 +21,7 @@ enum RecordChooseType: Int {
     case time
     case kind
     case orderbook
+    case tradeShowType
     case vesting
 }
 

@@ -145,12 +145,22 @@ class MDPWebSocketService: NSObject {
 
     fileprivate func topicToPair(_ topic: String) -> Pair {
         let pairStr = topic.components(separatedBy: ".")[1]
-        let pair = pairStr.filterJade
+        let pair = pairStr.filterOnlyJade.replacingOccurrences(of: "_", with: ".")
 
-        let baseAssets = MarketConfiguration.marketBaseAssets.map({ $0.rawValue })
+        var baseAssets = MarketConfiguration.marketBaseAssets.map({ $0.name })
+        if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
+            baseAssets.append(contentsOf: MarketConfiguration.gameMarketBaseAssets.map({ $0.name }))
+        }
+        
         for base in baseAssets {
-            if let range = pair.range(of: base), range.lowerBound != pair.startIndex {
-                return Pair(base: base.assetID, quote: pair.replacingOccurrences(of: base, with: "").assetID)
+            let baseName = base
+            let quoteName = pair.replacingOccurrences(of: base, with: "")
+
+            if let range = pair.range(of: base),
+                range.lowerBound != pair.startIndex,
+                baseName.assetID != base,
+                quoteName.assetID != quoteName {
+                return Pair(base: baseName.assetID, quote: quoteName.assetID)
             }
 
         }

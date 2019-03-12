@@ -67,7 +67,7 @@ class ETOViewController: BaseViewController {
     }
 
     override func rightAction(_ sender: UIButton) {
-        if !UserManager.shared.isLoginIn {
+        if !UserManager.shared.logined {
             appCoodinator.showLogin()
             return
         }

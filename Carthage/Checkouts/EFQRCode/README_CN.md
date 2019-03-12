@@ -103,7 +103,7 @@ git clone git@github.com:EFPrefix/EFQRCode.git; cd EFQRCode; git submodule updat
 EFQRCode 可以通过 [CocoaPods](http://cocoapods.org) 进行获取。只需要在你的 Podfile 中添加如下代码就能实现引入：
 
 ```ruby
-pod 'EFQRCode', '~> 4.4.1'
+pod 'EFQRCode', '~> 4.5.0'
 ```
 
 然后，执行如下命令即可：
@@ -126,7 +126,7 @@ $ brew install carthage
 通过在你的 `Cartfile` 添加如下语句可以将 EFQRCode 引入你的项目：
 
 ```ogdl
-github "EFPrefix/EFQRCode" ~> 4.4.1
+github "EFPrefix/EFQRCode" ~> 4.5.0
 ```
 
 接下来执行 `carthage update` 命令生成 Framework 并且将生成的 `EFQRCode.framework` 拖入工程即可。
@@ -139,7 +139,7 @@ github "EFPrefix/EFQRCode" ~> 4.4.1
 
 ```swift
 dependencies: [
-    .Package(url: "https://github.com/EFPrefix/EFQRCode.git", Version(4, 4, 1))
+    .Package(url: "https://github.com/EFPrefix/EFQRCode.git", Version(4, 5, 0))
 ]
 ```
 
@@ -229,6 +229,11 @@ if let qrcodeData = EFQRCode.generateWithGIF(data: data, generator: generator) {
 
 查看 [用户手册](/USERGUIDE_CN.md) 了解更多细节。
 
+您也可以查看下列非官方的使用说明：
+
+- [不用请设计师，你也能做出个性二维码：EFQRCode](https://sspai.com/post/43211)
+- [想更优雅地分享 Wi-Fi 密码，只需一枚二维码](https://sspai.com/post/43097)
+
 ## 待办
 
 - [x] 支持 GIF 动图
@@ -252,6 +257,7 @@ if let qrcodeData = EFQRCode.generateWithGIF(data: data, generator: generator) {
 
 平台／语言|链接
 :-------------------------|:-------------------------
+Objective-C|[https://github.com/z624821876/YSQRCode](https://github.com/z624821876/YSQRCode)
 Java|[https://github.com/SumiMakito/AwesomeQRCode](https://github.com/SumiMakito/AwesomeQRCode)
 JavaScript|[https://github.com/SumiMakito/Awesome-qr.js](https://github.com/SumiMakito/Awesome-qr.js)
 Kotlin|[https://github.com/SumiMakito/AwesomeQRCode-Kotlin](https://github.com/SumiMakito/AwesomeQRCode-Kotlin)
@@ -314,8 +320,7 @@ Python|[https://github.com/sylnsfar/qrcode](https://github.com/sylnsfar/qrcode)
 
 如果你没有 `Open Collective` 帐户或者你认为它的操作太复杂，下面的付款方式也是支持的：
 
-![AliPay](https://raw.githubusercontent.com/EFPrefix/EFQRCode/assets/QRCode/AliPay.jpg?raw=true)|![WeChat](https://raw.githubusercontent.com/EFPrefix/EFQRCode/assets/QRCode/WeChat.jpg?raw=true)|![PayPal](https://raw.githubusercontent.com/EFPrefix/EFQRCode/assets/QRCode/PayPal.jpg?raw=true)  
-:---------------------:|:---------------------:|:---------------------:
+![Donations](https://raw.githubusercontent.com/EFPrefix/EFQRCode/assets/QRCode/Donations.jpg?raw=true)
 
 感谢您的支援，🙏！
 

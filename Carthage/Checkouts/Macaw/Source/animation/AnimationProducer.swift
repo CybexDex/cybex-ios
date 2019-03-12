@@ -10,7 +10,7 @@ let animationProducer = AnimationProducer()
 
 class AnimationProducer {
 
-    var storedAnimations = [Node: BasicAnimation]()
+    var storedAnimations = [Node: BasicAnimation]() // is used to make sure node is in view hierarchy before actually creating the animation
     var delayedAnimations = [BasicAnimation: Timer]()
     var displayLink: MDisplayLinkProtocol?
 
@@ -18,6 +18,7 @@ class AnimationProducer {
         let animation: ContentsAnimation
         let layer: CALayer
         weak var cache: AnimationCache?
+        let topRenderers: [NodeRenderer]
         let startDate: Date
         let finishDate: Date
         let completion: (() -> Void)?
@@ -25,13 +26,13 @@ class AnimationProducer {
 
     var contentsAnimations = [ContentAnimationDesc]()
 
-    func addAnimation(_ animation: BasicAnimation, withoutDelay: Bool = false) {
+    func play(_ animation: BasicAnimation, _ context: AnimationContext, withoutDelay: Bool = false) {
 
         // Delay - launching timer
         if animation.delay > 0.0 && !withoutDelay {
 
             let timer = Timer.schedule(delay: animation.delay) { [weak self] _ in
-                self?.addAnimation(animation, withoutDelay: true)
+                self?.play(animation, context, withoutDelay: true)
                 _ = self?.delayedAnimations.removeValue(forKey: animation)
                 animation.delayed = false
             }
@@ -55,7 +56,7 @@ class AnimationProducer {
             }
 
             let reAdd = EmptyAnimation {
-                self.addAnimation(animation)
+                self.play(animation, context)
             }
 
             if let nextAnimation = animation.next {
@@ -66,11 +67,27 @@ class AnimationProducer {
         }
 
         // General case
-        guard let nodeId = animation.nodeId, let node = Node.nodeBy(id: nodeId) else {
+        guard let node = animation.node else {
             return
         }
+        for observer in node.animationObservers {
+            observer.processAnimation(animation)
+        }
 
-        guard let macawView = nodesMap.getView(node) else {
+        switch animation.type {
+        case .unknown:
+            return
+        case .empty:
+            executeCompletion(animation)
+        case .sequence:
+            addAnimationSequence(animation, context)
+        case .combine:
+            addCombineAnimation(animation, context)
+        default:
+            break
+        }
+
+        guard let macawView = animation.nodeRenderer?.view else {
             storedAnimations[node] = animation
             return
         }
@@ -85,44 +102,38 @@ class AnimationProducer {
 
         // swiftlint:disable superfluous_disable_command switch_case_alignment
         switch animation.type {
-        case .unknown:
-            return
         case .affineTransformation:
-            addTransformAnimation(animation, sceneLayer: layer, animationCache: cache, completion: {
+            addTransformAnimation(animation, context, sceneLayer: layer, animationCache: cache, completion: {
                 if let next = animation.next {
-                    self.addAnimation(next)
+                    self.play(next, context)
                 }
             })
         case .opacity:
-            addOpacityAnimation(animation, sceneLayer: layer, animationCache: cache, completion: {
+            addOpacityAnimation(animation, context, sceneLayer: layer, animationCache: cache, completion: {
                 if let next = animation.next {
-                    self.addAnimation(next)
+                    self.play(next, context)
                 }
             })
-        case .sequence:
-            addAnimationSequence(animation)
-        case .combine:
-            addCombineAnimation(animation)
         case .contents:
-            addContentsAnimation(animation, cache: cache) {
+            addContentsAnimation(animation, context, cache: cache) {
                 if let next = animation.next {
-                    self.addAnimation(next)
+                    self.play(next, context)
                 }
             }
         case .morphing:
-            addMorphingAnimation(animation, sceneLayer: layer, animationCache: cache) {
+            addMorphingAnimation(animation, context, sceneLayer: layer, animationCache: cache) {
                 if let next = animation.next {
-                    self.addAnimation(next)
+                    self.play(next, context)
                 }
             }
         case .shape:
-            addShapeAnimation(animation, sceneLayer: layer, animationCache: cache) {
+            addShapeAnimation(animation, context, sceneLayer: layer, animationCache: cache) {
                 if let next = animation.next {
-                    self.addAnimation(next)
+                    self.play(next, context)
                 }
             }
-        case .empty:
-            executeCompletion(animation)
+        default:
+            break
         }
         // swiftlint:enable superfluous_disable_command switch_case_alignment
     }
@@ -139,7 +150,8 @@ class AnimationProducer {
     }
 
     // MARK: - Sequence animation
-    fileprivate func addAnimationSequence(_ animationSequnce: Animation) {
+    func addAnimationSequence(_ animationSequnce: Animation,
+                              _ context: AnimationContext) {
         guard let sequence = animationSequnce as? AnimationSequence else {
             return
         }
@@ -183,74 +195,7 @@ class AnimationProducer {
 
         // Launching
         if let firstAnimation = sequence.animations.first {
-            self.addAnimation(firstAnimation)
-        }
-    }
-
-    // MARK: - Combine animation
-    fileprivate func addCombineAnimation(_ combineAnimation: Animation) {
-        guard let combine = combineAnimation as? CombineAnimation else {
-            return
-        }
-
-        // Reversing
-        if combine.autoreverses {
-            combine.animations.forEach { animation in
-                animation.autoreverses = true
-            }
-        }
-
-        // repeat count
-        if combine.repeatCount > 0.00001 {
-            var sequence = [Animation]()
-
-            for _ in 0..<Int(combine.repeatCount) {
-                sequence.append(combine)
-            }
-
-            combine.repeatCount = 0.0
-            addAnimationSequence(sequence.sequence())
-            return
-        }
-
-        // Looking for longest animation
-        var longestAnimation: BasicAnimation?
-        combine.animations.forEach { animation in
-            guard let longest = longestAnimation else {
-                longestAnimation = animation
-                return
-            }
-
-            if longest.getDuration() < animation.getDuration() {
-                longestAnimation = animation
-            }
-        }
-
-        // Attaching completion empty animation and potential next animation
-        if let completion = combine.completion {
-            let completionAnimation = EmptyAnimation(completion: completion)
-            if let next = combine.next {
-                completionAnimation.next = next
-            }
-
-            longestAnimation?.next = completionAnimation
-
-        } else {
-            if let next = combine.next {
-                longestAnimation?.next = next
-            }
-
-        }
-
-        combine.removeFunc = { [weak combine] in
-            combine?.animations.forEach { animation in
-                animation.removeFunc?()
-            }
-        }
-
-        // Launching
-        combine.animations.forEach { animation in
-            self.addAnimation(animation)
+            self.play(firstAnimation, context)
         }
     }
 
@@ -260,9 +205,13 @@ class AnimationProducer {
     }
 
     // MARK: - Stored animation
-    func addStoredAnimations(_ node: Node) {
+    func addStoredAnimations(_ node: Node, _ view: MacawView) {
+        addStoredAnimations(node, AnimationContext())
+    }
+
+    func addStoredAnimations(_ node: Node, _ context: AnimationContext) {
         if let animation = storedAnimations[node] {
-            addAnimation(animation)
+            play(animation, context)
             storedAnimations.removeValue(forKey: node)
         }
 
@@ -271,24 +220,20 @@ class AnimationProducer {
         }
 
         group.contents.forEach { child in
-            addStoredAnimations(child)
+            addStoredAnimations(child, context)
         }
     }
 
     // MARK: - Contents animation
 
-    func addContentsAnimation(_ animation: BasicAnimation, cache: AnimationCache?, completion: @escaping (() -> Void)) {
+    func addContentsAnimation(_ animation: BasicAnimation, _ context: AnimationContext, cache: AnimationCache?, completion: @escaping (() -> Void)) {
         guard let contentsAnimation = animation as? ContentsAnimation else {
-            return
-        }
-
-        guard let nodeId = animation.nodeId, let node = Node.nodeBy(id: nodeId) else {
             return
         }
 
         if animation.autoreverses {
             animation.autoreverses = false
-            addAnimation([animation, animation.reverse()].sequence() as! BasicAnimation)
+            play([animation, animation.reverse()].sequence() as! BasicAnimation, context)
             return
         }
 
@@ -299,7 +244,7 @@ class AnimationProducer {
                 animSequence.append(animation)
             }
 
-            addAnimation(animSequence.sequence() as! BasicAnimation)
+            play(animSequence.sequence() as! BasicAnimation, context)
             return
         }
 
@@ -311,14 +256,34 @@ class AnimationProducer {
             unionBounds = unionBounds?.union(rect: contentsAnimation.getVFunc()(t).group().bounds!)
         }
 
-        guard let layer = cache?.layerForNode(node, animation: contentsAnimation, customBounds: unionBounds) else {
+        guard let renderer = animation.nodeRenderer, let layer = cache?.layerForNodeRenderer(renderer, context, animation: contentsAnimation, customBounds: unionBounds) else {
             return
+        }
+
+        var rootRenderer: NodeRenderer? = renderer
+        while rootRenderer?.parentRenderer != nil {
+            rootRenderer = rootRenderer?.parentRenderer
+        }
+        let allRenderers = rootRenderer?.getAllChildrenRecursive()
+
+        var animationRenderers = [NodeRenderer]()
+        if let groupRenderer = renderer as? GroupRenderer {
+            animationRenderers.append(contentsOf: groupRenderer.renderers)
+        }
+        let bottomRenderer = animationRenderers.min { $0.zPosition < $1.zPosition }
+
+        var topRenderers = [NodeRenderer]()
+        if let bottomRenderer = bottomRenderer, let allRenderers = allRenderers {
+            for renderer in allRenderers where !(renderer is GroupRenderer) && renderer.zPosition > bottomRenderer.zPosition {
+                topRenderers.append(renderer)
+            }
         }
 
         let animationDesc = ContentAnimationDesc(
             animation: contentsAnimation,
             layer: layer,
             cache: cache,
+            topRenderers: topRenderers,
             startDate: Date(),
             finishDate: Date(timeInterval: contentsAnimation.duration, since: startDate),
             completion: completion
@@ -330,13 +295,13 @@ class AnimationProducer {
             displayLink = MDisplayLink()
             displayLink?.startUpdates { [weak self] in
                 DispatchQueue.main.async {
-                    self?.updateContentAnimations()
+                    self?.updateContentAnimations(context)
                 }
             }
         }
     }
 
-    @objc func updateContentAnimations() {
+    func updateContentAnimations(_ context: AnimationContext) {
         if contentsAnimations.isEmpty {
             displayLink?.invalidate()
             displayLink = .none
@@ -348,7 +313,7 @@ class AnimationProducer {
         for (index, animationDesc) in contentsAnimations.reversed().enumerated() {
 
             let animation = animationDesc.animation
-            guard let nodeId = animation.nodeId, let group = Node.nodeBy(id: nodeId) as? Group else {
+            guard let group = animation.node as? Group, let renderer = animation.nodeRenderer else {
                 continue
             }
 
@@ -373,7 +338,7 @@ class AnimationProducer {
                 }
 
                 contentsAnimations.remove(at: count - 1 - index)
-                animationDesc.cache?.freeLayer(group)
+                animationDesc.cache?.freeLayer(renderer)
                 animationDesc.completion?()
                 continue
             }
@@ -386,7 +351,7 @@ class AnimationProducer {
             if animation.manualStop || animation.paused {
                 defer {
                     contentsAnimations.remove(at: count - 1 - index)
-                    animationDesc.cache?.freeLayer(group)
+                    animationDesc.cache?.freeLayer(renderer)
                 }
 
                 if animation.manualStop {
@@ -396,6 +361,27 @@ class AnimationProducer {
                     animation.pausedProgress = progress
                 }
             }
+
+            for renderer in animationDesc.topRenderers {
+                let layer = animationDesc.cache?.layerForNodeRenderer(renderer, context, animation: animationDesc.animation)
+                layer?.setNeedsDisplay()
+                layer?.displayIfNeeded()
+            }
         }
     }
+}
+
+class AnimationContext {
+
+    var rootTransform: Transform?
+
+    func getLayoutTransform(_ renderer: NodeRenderer?) -> Transform {
+        if rootTransform == nil {
+            if let view = renderer?.view, let node = view.renderer?.node() {
+                rootTransform = LayoutHelper.calcTransform(node, view.contentLayout, view.bounds.size.toMacaw())
+            }
+        }
+        return rootTransform ?? Transform.identity
+    }
+
 }

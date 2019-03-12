@@ -20,7 +20,10 @@ Pod::Spec.new do |s|
   s.documentation_url = 'http://promisekit.org/docs/'
   s.default_subspecs = 'CorePromise', 'UIKit', 'Foundation'
   s.requires_arc = true
-  s.swift_version = '4.0'
+  
+  # CocoaPods documentation (like usual) is unclear about the
+  # consequences of setting this; we support 3.2 THROUGH 4.2
+  # s.swift_version = '4.0'
 
   # CocoaPods requires us to specify the root deployment targets
   # even though for us it is nonsense. Our root spec has no
@@ -150,6 +153,14 @@ Pod::Spec.new do |s|
     ss.osx.deployment_target = '10.10'
     ss.watchos.deployment_target = '2.0'
     ss.tvos.deployment_target = '9.0'
+  end
+
+  s.subspec 'HealthKit' do |ss|
+    ss.source_files = Dir['Extensions/HealthKit/Sources/*']
+    ss.dependency 'PromiseKit/CorePromise'
+    ss.frameworks = 'HealthKit'
+    ss.ios.deployment_target = '9.0'
+    ss.watchos.deployment_target = '2.0'
   end
 
   s.subspec 'HomeKit' do |ss|

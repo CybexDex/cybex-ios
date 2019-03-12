@@ -12,6 +12,7 @@ import SwiftTheme
 class AccountOpenedOrdersView: UIView {
     enum Event: String {
         case cancelOrder
+        case cancelAllOrder
     }
 
     @IBOutlet weak var tableView: UITableView!
@@ -19,7 +20,13 @@ class AccountOpenedOrdersView: UIView {
 
     var data: Any? {
         didSet {
-            _ = UserManager.shared.balance
+            if headerView == nil, data != nil {
+                headerView = OpenedOrdersHeaderView(frame: CGRect(x: 0, y: 0, width: self.width, height: 42))
+                headerView.cancelAllEvent.delegate(on: self) { (self, _) in
+                    self.next?.sendEventWith(Event.cancelAllOrder.rawValue, userinfo: [:])
+                }
+                tableView.tableHeaderView = headerView
+            }
             self.tableView.reloadData()
         }
     }
@@ -78,7 +85,7 @@ class AccountOpenedOrdersView: UIView {
 
 extension AccountOpenedOrdersView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard var orders = self.data as? [LimitOrderStatus] else { return 0 }
+        guard let orders = self.data as? [LimitOrderStatus] else { return 0 }
 
         return orders.count
     }

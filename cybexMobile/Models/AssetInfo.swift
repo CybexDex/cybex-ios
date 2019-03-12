@@ -42,7 +42,9 @@ class Asset: HandyJSON {
     }
 
     func volume() -> Decimal {
-        let info = appData.assetInfo[assetID]!
+        guard let info = appData.assetInfo[assetID] else {
+            return 0
+        }
 
         return amount.decimal() / pow(10, info.precision)
     }
@@ -71,7 +73,25 @@ extension Asset: Equatable {
 class Price: HandyJSON {
     var base: Asset = Asset()
     var quote: Asset = Asset()
-    
+
+    /*
+     1 sellPrice里面的base 和quote
+     2 根据关系判断是买还是卖
+     3 买卖针对于quote的话  真正的base == sellPrice.base 是买单 ，真正的base = sellPrice.quote 是卖单
+     */
+//    var isBuy: Bool {
+//        let assetAInfo = appData.assetInfo[base.assetID]
+//        let assetBInfo = appData.assetInfo[quote.assetID]
+//
+//        let (b, _) = MarketHelper.calculateAssetRelation(
+//            assetIDAName: (assetAInfo != nil) ?
+//                assetAInfo!.symbol.filterJade : "",
+//            assetIDBName: (assetBInfo != nil) ?
+//                assetBInfo!.symbol.filterJade : "")
+//
+//        return (b == ((assetAInfo != nil) ? assetAInfo!.symbol.filterJade : ""))
+//    }
+
     init(base: Asset, quote: Asset) {
         self.base = base
         self.quote = quote
@@ -83,6 +103,22 @@ class Price: HandyJSON {
         mapper <<< base                    <-- "base"
         mapper <<< quote                   <-- "quote"
     }
+
+    func reverse() -> Price {
+        return Price(base: self.quote,
+                  quote: self.base)
+    }
+
+//    func getPair() -> Pair {
+//        let assetAName = base.assetID.symbol
+//        let assetBName = quote.assetID.symbol
+//
+//        let (b, q) = MarketHelper.calculateAssetRelation(
+//            assetIDAName: assetAName,
+//            assetIDBName: assetBName)
+//
+//        return Pair(base: b.assetID, quote: q.assetID)
+//    }
 
     func toReal() -> Decimal {
         let baseInfo = base.info()

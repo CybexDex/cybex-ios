@@ -29,11 +29,12 @@ class RecodeCellView: UIView {
 
                 var assetInfo: AssetInfo?
                 for (_, value) in appData.assetInfo {
-                    if value.symbol.filterJade == data.asset.filterJade {
+                    if value.symbol.filterOnlyJade == data.asset.filterJade {
                         assetInfo = value
                         break
                     }
                 }
+
                 if let assetInfo = assetInfo {
                     let withdrawAddress = AddressManager.shared.containAddressOfWithDraw(data.address,
                                                                                          currency: assetInfo.id)

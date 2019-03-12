@@ -14,7 +14,7 @@ import SwiftyUserDefaults
 import Localize_Swift
 
 enum AccountHistoryAPI {
-    case getMyGroupFillOrder(userId: String, pair: Pair?, page: Int)
+    case getFillByPairs(userId: String, page: Int, filterInPairs: Pair?, filterOutPairs: [Pair])
     case getTransferRecord(userId:String, page: Int)
 }
 
@@ -87,8 +87,8 @@ extension AccountHistoryAPI: TargetType {
         switch self {
         case .getTransferRecord(userId: _, page: _):
             return "/get_ops_by_transfer_accountspair_mongo"
-        case .getMyGroupFillOrder(userId: _, pair: _, page: _):
-            return "/get_ops_fill_pair"
+        case .getFillByPairs:
+            return "/get_fill_bypair"
         }
     }
 
@@ -101,16 +101,12 @@ extension AccountHistoryAPI: TargetType {
 
     var urlParameters: [String: Any] {
         switch self {
-
         case let .getTransferRecord(userId: uid, page: page): //asset=null&acct_from=1.2.19803&acct_to=1.2.4733&page=0&limit=2
             return ["asset": "null", "acct_from": "or", "acct_to": uid, "page": page, "limit": 20]
-        case let .getMyGroupFillOrder(userId: uid, pair: pair, page: page): //account=1.2.4733&start=null&end=null&base=null&quote=null&limit=10&page=0
-            if let p = pair {
-                return ["account": uid, "start": "null", "end": "null", "base": p.base, "quote": p.quote, "limit": 20, "page": page]
-            }
-            else {
-                return ["account": uid, "start": "null", "end": "null", "base": "null", "quote": "null", "limit": 20, "page": page]
-            }
+        case let .getFillByPairs(userId: uid, page: page, filterInPairs: filterInPairs, filterOutPairs: filterOutPairs):
+            var fout = filterOutPairs.count == 0 ? "null" : filterOutPairs.map { "\($0.quote)_\($0.base),\($0.base)_\($0.quote)" }.joined(separator: ",")
+            let fin = filterInPairs == nil ? "null" : "\(filterInPairs!.quote)_\(filterInPairs!.base),\(filterInPairs!.base)_\(filterInPairs!.quote)"
+            return ["account": uid, "start": "null", "end": "null", "filter_in": fin, "filter_out": fout, "limit": 20, "page": page]
         }
     }
 

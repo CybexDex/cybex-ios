@@ -22,8 +22,7 @@ class OpenedOrdersView: UIView {
     @IBOutlet weak var basePrice: UILabel!
 
     @IBOutlet weak var cancleOrder: UIView!
-    @IBOutlet weak var cancleL: UILabel!
-    @IBOutlet weak var cancleImg: UIImageView!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var lineView: UIView!
 
     enum CancleOrder: String {
@@ -63,10 +62,12 @@ class OpenedOrdersView: UIView {
     }
 
     fileprivate func setup() {
-        cancleOrder.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
+        cancelButton.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: {[weak self] (_) in
             guard let self = self else { return }
             self.cancleOrder.next?.sendEventWith(CancleOrder.cancleOrderAction.rawValue, userinfo: ["selectedIndex": self.selectedIndex?.row ?? 0])
+            
         }).disposed(by: disposeBag)
+
     }
 
     override var intrinsicContentSize: CGSize {

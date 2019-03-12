@@ -1,9 +1,9 @@
 {
-  "commitish" : "0.8.0",
+  "commitish" : "1.0.0",
   "iOS" : [
     {
       "name" : "DifferenceKit",
-      "hash" : "b8c72d4e229d53cc3cf01563feb3762cb31703648c9d2413adeef692cfb679d5"
+      "hash" : "b08f69de3a1b02470d439eb4d73028325fd08f9e71943179f72c13a4f8fd1fd1"
     }
   ]
 }

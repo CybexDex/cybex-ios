@@ -17,6 +17,7 @@ import Repeat
 enum ViewType: Int {
     case homeContent    = 1
     case businessTitle
+    case gameTradeTitle
     case comprehensive
 }
 
@@ -27,13 +28,25 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
     var pair: Pair? {
         didSet {
-            guard let pair = pair, let index = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base) else { return }
+            if vcType == ViewType.businessTitle.rawValue {
+                guard let pair = pair, let index = MarketConfiguration.marketBaseAssets.map({ $0.id }).index(of: pair.base) else { return }
 
-            if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
-                return ticker.quote == pair.quote
-            }) {
-                self.businessTitleView?.selectedIndex = selectedIndex
-                self.businessTitleView?.leftView.changeToHighStatus(1 + index, save: true)
+                if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+                    return ticker.quote == pair.quote
+                }) {
+                    self.businessTitleView?.selectedIndex = selectedIndex
+                    self.businessTitleView?.leftView.changeToHighStatus(1 + index, save: true)
+                }
+            } else if vcType == ViewType.gameTradeTitle.rawValue {
+                guard let pair = pair, let index = MarketConfiguration.gameMarketBaseAssets.map({ $0.id }).index(of: pair.base) else { return }
+
+                if let selectedIndex = MarketHelper.filterQuoteAssetTicker(pair.base).index(where: { (ticker) -> Bool in
+                    return ticker.quote == pair.quote
+                }) {
+                    self.businessTitleView?.selectedIndex = selectedIndex
+                    self.businessTitleView?.leftView.viewType = QuotesTitleView.ViewType.game.rawValue
+                    self.businessTitleView?.leftView.changeToHighStatus(1 + index, save: true)
+                }
             }
         }
     }
@@ -42,9 +55,14 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
     var businessTitleView: BusinessTitleView?
 
     var base: String {
-        if self.vcType == 1 {
+        if self.vcType == ViewType.homeContent.rawValue {
             if let titleView = self.contentView {
                 return MarketConfiguration.marketBaseAssets.map({ $0.id })[titleView.currentBaseIndex]
+            }
+            return ""
+        } else if vcType == ViewType.gameTradeTitle.rawValue {
+            if let titleView = self.businessTitleView {
+                return MarketConfiguration.gameMarketBaseAssets.map({ $0.id })[titleView.currentBaseIndex]
             }
             return ""
         } else {
@@ -107,7 +125,7 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
         appData.tickerData.asObservable().filter({[weak self] (result) -> Bool in
             guard let self = self else { return false}
             if self.vcType == ViewType.comprehensive.rawValue {
-                if result.count == MarketConfiguration.shared.marketPairs.value.count, result.count != 0 {
+                if result.count >= MarketConfiguration.shared.marketPairs.value.count, result.count != 0 {
                     return true
                 }
             } else {
@@ -159,20 +177,19 @@ class HomeViewController: BaseViewController, UINavigationControllerDelegate, UI
 
 extension HomeViewController {
     @objc func cellClicked(_ data: [String: Any]) {
+//        if #available(iOS 11.0, *) {
+////            Defaults[.pinCodes]["xxx"] = ""
+//            NFCManager.shared.start()
+//            return
+//        }
+
         if vcType == ViewType.homeContent.rawValue {//首页
             if let selectedPair = data["pair"] as? Pair {
-                let tickers = appData.tickerData.value.filter({$0.base == MarketConfiguration.marketBaseAssets.map({ $0.id })[self.contentView!.currentBaseIndex]})
-                for index in 0..<tickers.count {
-                    let item = tickers[index]
-                    if item.base == selectedPair.base && item.quote == selectedPair.quote {
-                        self.coordinator?.openMarket(index: index, currentBaseIndex: self.contentView!.currentBaseIndex)
-                        return
-                    }
-                }
+                self.coordinator?.openMarket(selectedPair)
             }
         } else if vcType == ViewType.comprehensive.rawValue {
             if let index = data["index"] as? Int,
-                appData.tickerData.value.count == MarketConfiguration.shared.marketPairs.value.count {
+                appData.tickerData.value.count >= MarketConfiguration.shared.marketPairs.value.count {
                 let datas = MarketHelper.filterPopAssetsCurrency()
                 if datas.count > index {
                     let buckets = MarketHelper.filterPopAssetsCurrency()[index]
@@ -181,12 +198,7 @@ extension HomeViewController {
                         return
                     }
 
-                    if let baseIndex = MarketConfiguration.marketBaseAssets.map({ $0.id }).firstIndex(of: buckets.base) {
-                        let markets = MarketHelper.filterQuoteAssetTicker(buckets.base)
-                        if let curIndex = markets.firstIndex(of: buckets) {
-                            self.coordinator?.openMarket(index: curIndex, currentBaseIndex: baseIndex)
-                        }
-                    }
+                    self.coordinator?.openMarket(Pair(base: buckets.base, quote:buckets.quote))
                 }
             }
         } else {

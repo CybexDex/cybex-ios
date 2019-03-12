@@ -431,9 +431,21 @@ extension String {
         return Formatter.iso8601.date(from: self) // "Mar 22, 2017, 10:22 AM"
     }
     
-    var filterJade: String {
+    var filterJade: String {//默认同时过滤Arena
         // 正式
-        return self.replacingOccurrences(of: "JADE.", with: "").replacingOccurrences(of: "JADE_", with: "").replacingOccurrences(of: "JADE", with: "")
+        let jadeFilter = self.replacingOccurrences(of: "\(AssetConfiguration.JadeSymbol).", with: "").replacingOccurrences(of: "\(AssetConfiguration.JadeSymbol)_", with: "").replacingOccurrences(of: "\(AssetConfiguration.JadeSymbol)", with: "")
+        return jadeFilter.filterArena
+    }
+
+    var filterOnlyJade: String {
+        // 正式
+        let jadeFilter = self.replacingOccurrences(of: "\(AssetConfiguration.JadeSymbol).", with: "").replacingOccurrences(of: "\(AssetConfiguration.JadeSymbol)_", with: "").replacingOccurrences(of: "\(AssetConfiguration.JadeSymbol)", with: "")
+        return jadeFilter
+    }
+
+    var filterArena: String {
+        // 正式
+        return self.replacingOccurrences(of: "\(AssetConfiguration.ArenaSymbol).", with: "").replacingOccurrences(of: "\(AssetConfiguration.ArenaSymbol)_", with: "").replacingOccurrences(of: "\(AssetConfiguration.ArenaSymbol)", with: "")
     }
     
     var getSuffixID: Int32 {

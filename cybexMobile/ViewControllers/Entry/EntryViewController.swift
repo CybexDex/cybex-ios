@@ -21,11 +21,23 @@ class EntryViewController: BaseViewController {
 
     @IBOutlet weak var createTitle: UILabel!
     @IBOutlet weak var loginButton: Button!
-
+    @IBOutlet weak var enotesLogin: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
+
+        if #available(iOS 11.0, *) {
+            if let gameEnable = AppConfiguration.shared.enableSetting.value?.contestEnabled, gameEnable {
+                self.enotesLogin.isHidden = false
+            } else {
+                self.enotesLogin.isHidden = true
+            }
+        } else {
+            self.enotesLogin.isHidden = true
+        }
+        
         setupEvent()
     }
 
@@ -70,18 +82,24 @@ extension EntryViewController {
             self.coordinator?.switchToRegister()
         }).disposed(by: disposeBag)
 
+        self.enotesLogin.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
+            guard let self = self else { return }
+
+            self.coordinator?.switchToEnotesLogin()
+        }).disposed(by: disposeBag)
+
         self.loginButton.rx.tapGesture().when(.recognized).subscribe(onNext: {[weak self] _ in
             guard let self = self else { return }
 
             self.startLoading()
-            UserManager.shared.login(self.accountTextField.text!, password: self.passwordTextField.text!) { success in
+
+            UserManager.shared.login(self.accountTextField.text!, password: self.passwordTextField.text!).done {
+                NotificationCenter.default.post(name: NSNotification.Name.init("login_success"), object: nil)
+                self.coordinator?.dismiss()
+            }.ensure {
                 self.endLoading()
-                if success {
-                    NotificationCenter.default.post(name: NSNotification.Name.init("login_success"), object: nil)
-                    self.coordinator?.dismiss()
-                } else {
-                    self.showAlert(R.string.localizable.accountNonMatch.key.localized(), buttonTitle: R.string.localizable.ok.key.localized())
-                }
+            }.catch {_ in
+                self.showAlert(R.string.localizable.accountNonMatch.key.localized(), buttonTitle: R.string.localizable.ok.key.localized())
             }
         }).disposed(by: disposeBag)
     }

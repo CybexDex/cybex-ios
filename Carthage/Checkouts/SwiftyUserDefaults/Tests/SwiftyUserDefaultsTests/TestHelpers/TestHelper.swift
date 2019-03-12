@@ -2,15 +2,15 @@ import Foundation
 import Quick
 import SwiftyUserDefaults
 
-func given(_ description: String, closure: @escaping () -> ()) {
+func given(_ description: String, closure: @escaping () -> Void) {
     describe(description, closure: closure)
 }
 
-func when(_ description: String, closure: @escaping () -> ()) {
+func when(_ description: String, closure: @escaping () -> Void) {
     context(description, closure: closure)
 }
 
-func then(_ description: String, closure: @escaping () -> ()) {
+func then(_ description: String, closure: @escaping () -> Void) {
     it(description, closure: closure)
 }
 
@@ -32,19 +32,9 @@ struct FrogCodable: Codable, Equatable, DefaultsSerializable {
     }
 }
 
-struct FrogDefaultCodable: Codable, Equatable, DefaultsDefaultValueType, DefaultsDefaultArrayValueType, DefaultsSerializable {
+final class FrogSerializable: NSObject, DefaultsSerializable, NSCoding {
 
-    static let defaultValue: FrogDefaultCodable = FrogDefaultCodable(name: "frog default")
-    static let defaultArrayValue: [FrogDefaultCodable] = []
-
-    let name: String
-
-    init(name: String = "Froggy") {
-        self.name = name
-    }
-}
-
-final class FrogSerializable: NSObject, NSCoding, DefaultsSerializable {
+    typealias T = FrogSerializable
 
     let name: String
 
@@ -69,47 +59,60 @@ final class FrogSerializable: NSObject, NSCoding, DefaultsSerializable {
     }
 }
 
-final class FrogDefaultSerializable: NSObject, NSCoding, DefaultsSerializable, DefaultsDefaultValueType, DefaultsDefaultArrayValueType {
-
-    static let defaultValue: FrogDefaultSerializable = FrogDefaultSerializable(name: "frog default")
-    static let defaultArrayValue: [FrogDefaultSerializable] = []
-
-    let name: String
-
-    init(name: String = "Froggy") {
-        self.name = name
-    }
-
-    init?(coder aDecoder: NSCoder) {
-        guard let name = aDecoder.decodeObject(forKey: "name") as? String else { return nil }
-
-        self.name = name
-    }
-
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(name, forKey: "name")
-    }
-
-    override func isEqual(_ object: Any?) -> Bool {
-        guard let rhs = object as? FrogDefaultSerializable else { return false }
-
-        return name == rhs.name
-    }
-}
-
-
 enum BestFroggiesEnum: String, DefaultsSerializable {
 
     case Andy
     case Dandy
 }
 
+final class DefaultsFrogBridge: DefaultsBridge<FrogCustomSerializable> {
+    override func get(key: String, userDefaults: UserDefaults) -> FrogCustomSerializable? {
+        let name = userDefaults.string(forKey: key)
+        return name.map(FrogCustomSerializable.init)
+    }
 
-enum BestFroggiesDefaultsEnum: String, DefaultsSerializable, DefaultsDefaultValueType, DefaultsDefaultArrayValueType {
+    override func save(key: String, value: FrogCustomSerializable?, userDefaults: UserDefaults) {
+        userDefaults.set(value?.name, forKey: key)
+    }
 
-    static let defaultValue: BestFroggiesDefaultsEnum = .Andy
-    static let defaultArrayValue: [BestFroggiesDefaultsEnum] = []
+    public override func isSerialized() -> Bool {
+        return true
+    }
 
-    case Andy
-    case Dandy
+    public override func deserialize(_ object: Any) -> FrogCustomSerializable? {
+        guard let name = object as? String else { return nil }
+
+        return FrogCustomSerializable(name: name)
+    }
+}
+
+final class DefaultsFrogArrayBridge: DefaultsBridge<[FrogCustomSerializable]> {
+    override func get(key: String, userDefaults: UserDefaults) -> [FrogCustomSerializable]? {
+        return userDefaults.array(forKey: key)?
+            .compactMap { $0 as? String }
+            .map(FrogCustomSerializable.init)
+    }
+
+    override func save(key: String, value: [FrogCustomSerializable]?, userDefaults: UserDefaults) {
+        let values = value?.map { $0.name }
+        userDefaults.set(values, forKey: key)
+    }
+
+    public override func isSerialized() -> Bool {
+        return true
+    }
+
+    public override func deserialize(_ object: Any) -> [FrogCustomSerializable]? {
+        guard let names = object as? [String] else { return nil }
+
+        return names.map(FrogCustomSerializable.init)
+    }
+}
+
+struct FrogCustomSerializable: DefaultsSerializable, Equatable {
+
+    static var _defaults: DefaultsBridge<FrogCustomSerializable> { return DefaultsFrogBridge() }
+    static var _defaultsArray: DefaultsBridge<[FrogCustomSerializable]> { return DefaultsFrogArrayBridge() }
+
+    let name: String
 }

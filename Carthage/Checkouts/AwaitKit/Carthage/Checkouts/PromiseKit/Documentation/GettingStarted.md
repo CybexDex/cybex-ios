@@ -91,7 +91,7 @@ firstly {
 > Swift emits a warning if you forget to `catch` a chain. But we'll
 > talk about that in more detail later.
 
-Each promise is an object that represents an individual, asychnronous task.
+Each promise is an object that represents an individual, asynchronous task.
 If a task fails, its promise becomes *rejected*. Chains that contain rejected
 promises skip all subsequent `then`s. Instead, the next `catch` is executed.
 (Strictly speaking, *all* subsequent `catch` handlers are executed.)
@@ -311,6 +311,11 @@ extra disambiguation for the Swift compiler. Sorry; we tried.
 typically just pass completion handler parameters to `resolve` and let Swift figure
 out which variant to apply to your particular case (as shown in the example above).
 
+> *Note* `Guarantees` (below) have a slightly different initializer (since they
+cannot error) so the parameter to the initializer closure is just a closure. Not
+a `Resolver` object. Thus do `seal(value)` rather than `seal.fulfill(value)`. This
+is because there is no variations in what guarantees can be sealed with, they can
+*only* fulfill.
 
 # `Guarantee<T>`
 
@@ -339,6 +344,27 @@ In general, you should be able to use `Guarantee`s and `Promise`s interchangeabl
 We have gone to great lengths to try and ensure this, so please open a ticket
 if you find an issue.
 
+---
+
+If you are creating your own guarantees the syntax is simpler than that of promises;
+
+```swift
+func fetch() -> Promise<String> {
+    return Guarantee { seal in
+        fetch { result in
+            seal(result)
+        }
+    }
+}
+```
+
+Which could be reduced to:
+
+```swift
+func fetch() -> Promise<String> {
+    return Guarantee(resolver: fetch)
+}
+```
 
 # `map`, `compactMap`, etc.
 
@@ -497,7 +523,13 @@ is more thorough at the source.
 In Xcode, don’t forget to option-click on PromiseKit functions to access this
 documentation while you're coding.
 
-Otherwise, return to our [contents page](/Documentation).
+Here are some recent articles that document PromiseKit 5+:
+
+* [Using Promises - Agostini.tech](https://agostini.tech/2018/10/08/using-promisekit)
+
+Careful with general online references, many of them refer to PMK < 5 which has a subtly
+different API (sorry about that, but Swift has changed a lot over the years and thus
+we had to too).
 
 
 [API Reference]: https://promisekit.org/reference/

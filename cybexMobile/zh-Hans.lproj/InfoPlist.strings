@@ -13,4 +13,5 @@ NSPhotoLibraryUsageDescription = "需要照片";
 NSContactsUsageDescription = "允许使用联系人信息";
 NSCalendarsUsageDescription = "允许使用日历";
 NSLocationAlwaysUsageDescription = "需要位置";
+NFCReaderUsageDescription = "需要使用NFC";
 CFBundleDisplayName = "CybexDex";

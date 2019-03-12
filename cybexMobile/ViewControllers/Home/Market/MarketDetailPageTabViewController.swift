@@ -60,14 +60,13 @@ class MarketDetailPageTabViewController: ButtonBarPagerTabStripViewController {
 
         refreshChildViewController([vc, vc2], pair: pair)
 
-        if isExistProjectIntroduction(pair) {
+        if isExistProjectIntroduction(pair),
+            let projectName = AssetConfiguration.shared.quoteToProjectNames.value[pair.quote.symbolOnlyFilterJade],
+            !projectName.isEmpty {
             let vc3 = R.storyboard.eva.evaViewController()!
             vc3.containerViewController = self
             vc3.tokenName = pair.quote.symbol
-
-            if let projectName = AssetConfiguration.shared.quoteToProjectNames.value[pair.quote.symbol], !projectName.isEmpty {
-                vc3.projectName = projectName
-            }
+            vc3.projectName = projectName
             vc3.view.theme_backgroundColor = [#colorLiteral(red: 0.06666666667, green: 0.0862745098, blue: 0.1294117647, alpha: 1).hexString(true), #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9568627451, alpha: 1).hexString(true)]
 
             return [vc, vc2, vc3]

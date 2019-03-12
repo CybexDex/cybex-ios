@@ -1,6 +1,23 @@
 ## master
 * Add your own contributions to the next release on the line below this with your name.
 
+## 3.0.0 Beta 14
+- [new] Allow use of NSURLCache via a custom NSURLSession [#477](https://github.com/pinterest/PINRemoteImage/pull/477) [wiseoldduck](https://github.com/wiseoldduck)
+- [new] Respect Cache-Control and Expires headers if the cache supports TTL. [#462](https://github.com/pinterest/PINRemoteImage/pull/462) [wiseoldduck](https://github.com/wiseoldduck)
+- [new] Updated to latest PINCache beta 7. [#461](https://github.com/pinterest/PINRemoteImage/pull/461) [wiseoldduck](https://github.com/wiseoldduck)
+- [iOS11] Fix warnings [#428](https://github.com/pinterest/PINRemoteImage/pull/428) [Eke](https://github.com/Eke)
+- [new / beta] Native Support for GIFs and animated WebP [#453](https://github.com/pinterest/PINRemoteImage/pull/453) [garrettmoon](https://github.com/garrettmoon)
+- [new] Add support for getting NSURLSessionMetrics back. [#456](https://github.com/pinterest/PINRemoteImage/pull/456) [garrettmoon](https://github.com/garrettmoon)
+- [removed] Removed support for FLAnimatedImage [#453](https://github.com/pinterest/PINRemoteImage/pull/453) [garrettmoon](https://github.com/garrettmoon)
+- [new] Add support for higher frame rate devices to animated images. [#417](https://github.com/pinterest/PINRemoteImage/pull/417) [garrettmoon](https://github.com/garrettmoon)
+- [fixed] Fixes non-animated GIFs being delivered as an animated image. [#434](https://github.com/pinterest/PINRemoteImage/pull/434) [garrettmoon](https://github.com/garrettmoon)
+- [fixed] Fixes a bug where using PINRemoteImageBasicCache would cause images to be decoded on the main thread. [#457](https://github.com/pinterest/PINRemoteImage/pull/457) [kgaidis](https://github.com/kgaidis)
+- [cleanup] Remove unused code that supported iOS < 7. [#435](https://github.com/pinterest/PINRemoteImage/pull/435) [Adlai-Holler](https://github.com/Adlai-Holler)
+- [cleanup] Use NS_ERROR_ENUM to improve Swift import. [#440](https://github.com/pinterest/PINRemoteImage/pull/440) [Adlai-Holler](https://github.com/Adlai-Holler)
+- [fixed] Fixes nil session manager configuration. [#460](https://github.com/pinterest/PINRemoteImage/pull/460) [garrettmoon](https://github.com/garrettmoon)
+- [fixed] Fixes deprecated -defaultImageCache not being called if overridden. [479](https://github.com/pinterest/PINRemoteImage/pull/479) [nguyenhuy](https://github.com/nguyenhuy)
+- [new] Add a new API that allows a priority to be set when a new download task is scheduled. [#490](https://github.com/pinterest/PINRemoteImage/pull/490) [nguyenhuy](https://github.com/nguyenhuy)
+
 ## 3.0.0 Beta 13
 - [new] Support for webp and improved support for GIFs. [#411](https://github.com/pinterest/PINRemoteImage/pull/411) [garrettmoon](https://github.com/garrettmoon)
 - [new] Added back tvOS support through a new target [#408](https://github.com/pinterest/PINRemoteImage/pull/408) [jverdi](https://github.com/jverdi)
